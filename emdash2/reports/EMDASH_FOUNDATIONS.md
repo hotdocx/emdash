@@ -1648,6 +1648,61 @@ that directed arrows are represented by object paths. The path category has a
 canonical witness, using a proof-time comparison between its Core inclusion
 and identity functor; that comparison is not a runtime collapse.
 
+General groupoidality is now consumed one hom-category at a time. Given
+`g : IsGroupoidalCat_EQ1(C)`, the public
+`groupoidal_core_homwise_EQ1(g,x,y)` is fixed-map EQ1 evidence for
+
+```text
+core_incl_hom_func(C,x,y) : Path_cat(x = y) -> Hom_cat(C,x,y).
+```
+
+Operationally this first implementation converts `g` to retained D0 only at
+the already-established D0b hom-action boundary, then observes the resulting
+fixed-map evidence back into EQ1. The public mathematical result is therefore
+equality-valued and iterable, but its derivation remains migration-backed. A
+later native all-EQ1 hom-action theorem may remove that internal route; no new
+decoder or univalence capability was added for this slice.
+
+The selected right inverse functor sends a directed arrow `f : x -> y` to an
+object path. Its equality-valued right cancellation law says that applying
+the Core inclusion again recovers `f`; `eq_ap` gives the corresponding
+pointwise path. The underlying bi-invertibility evidence retains a separate
+left inverse and left law, so this interface does not silently identify the
+two inverse choices or assert quasi-inverse eta. Existing `IsDiscreteCat`
+evidence and a packaged `ZeroCat` carrier provide nonliteral instances.
+
+At a literal `Path_cat(A)`, the compatibility-derived selected inverse is
+well typed but does not definitionally reduce to the input path, because its
+normal form passes through both migration bridges and D0b. This is a
+provenance boundary rather than a semantic failure: the direct
+`path_equiv_EQ1(p)` witness remains the canonical literal computation and its
+forward projection reduces to `p`.
+
+Structured groupoidal path induction continues to use the existing
+`path_ind_sec`. Its Sigma-pullback motive equation still reduces to
+`fib_cov_transf` in a context carrying groupoidality evidence, without a
+second eliminator or a raw-fibrancy capability. For a general `C`, carrying a
+groupoidality witness is still specialization by weakening—the action exists
+for every directed source—so this fact alone does not consume `g`.
+
+At a literal `Path_cat(A)` source, the missing comparison is now explicit.
+`path_cat_structured_transport_EQ1(D,u,p)` applies the displayed functor
+action along `p`, whereas `path_cat_ind_eqr_transport_EQ1(D,u,p)` uses
+primitive right `ind_eqr` with a function-valued motive. Path induction proves
+these values equal for every `p`. Evaluating the existing `path_ind_sec` at
+`(y,p)` gives a third presentation, `path_cat_path_ind_app_EQ1`; another
+path-induction theorem compares it with the structured action, and transitivity
+compares it with primitive J.
+
+Only primitive J definitionally computes to `u` at reflexivity. The displayed
+action and section application deliberately retain their directed runtime
+normal forms. Two narrowly typed proof-time comparisons reconcile the
+identity and component-projection orders in the reflexive proof: one compares
+Cat-valued functor action on `eq_refl` with identity, and the other decomposes
+the exact PathOut/Sigma-pullback component presentation into four residual
+constraints. Neither is an encoder, decoder, new eliminator, runtime
+commuting conversion, or claim that every structured component is constant.
+
 The direct-univalence boundary is now active but deliberately hybrid. For a
 syntactically abstract category `C`, a proof-time unification rule compares
 `OmegaEquiv_EQ1(C,x,y)` with `x =_{Obj C} y`; it does not make the classifiers
@@ -1660,21 +1715,76 @@ facade projection beta.
 This comparison has an important normal-form boundary. An abstract
 `lambda p, p` cast experiment typechecks while `C` remains a variable, but is
 not stable after Product or opposite equality has reduced to a different
-classifier. No general identity-body cast is exported. The transparent
-`object_path_equiv_EQ1(p)` package remains the uniform computational
-path-to-equivalence operation. For broader cast-free use after former
-reduction, the preferred design is a stable injective former path-view head
-with explicit construction/observation/elimination and a transparent decoded
-view. A primitive nonreducing cast is possible as a fallback, but would be an
-explicit additional trust surface and operationally opaque unless observer
-rules were separately justified. This choice is local to the July 17 plan,
-not a repository-wide rewrite/unification rule.
+classifier. The bare alias is not exported.
 
-EQ1 is therefore the active direct classifier at the abstract proof-time and
-rigid Cat/Grpd boundaries, but it is not yet the neutral public replacement
-for every reduced former. The retained D0/public `OmegaEquiv` surface remains
-operational during consumer migration. No runtime facade eta, proof erasure,
-or silently coerced raw-path observer has been promoted.
+The selected explicit cast instead stages the stable carrier classifier
+
+```text
+ObjectPathCastView_EQ1(C,x,y).
+```
+
+Its carrier reduces to `x =_{Obj C} y`, while one direct proof-time equation
+compares it with `OmegaEquiv_EQ1(C,x,y)`. Equality and EQ1 therefore each
+enter through exactly one conversion step. The two public casts use a typed
+`let`, beta-reduce to their input, and have definitional round trips after all
+measured specializations. This is a primitive classifier view, not an opaque
+encoder or decoder term.
+
+Product equality separately retains
+the rigid classifier
+
+```text
+ProductPathView(A,B,p,q),
+```
+
+whose carrier is definitionally the previous constant-family
+`SigmaPathView`. Its base/fibre constructor, projections, fixed-endpoint
+eliminator, and canonical reflexivity therefore reuse the established Sigma
+path data. `product_path_to_sigma_view` and its reverse are literal identity
+functions. The Product/EQ1 cast names route through the uniform view. The
+classifier heads themselves remain runtime-distinct, and generic `eq_refl` is
+not collapsed to canonical `product_path_refl`.
+
+Opposite categories preserve objects but erase the `Op_cat` head before the
+generic comparison can match. A direct opposite-specific equation failed on
+composite formers. Its successful Phase-6 local carrier intermediate has now
+been retired: the opposite cast names use the uniform stable view and pass
+Product, path-category, and nested-opposite specializations.
+
+The identity casts do not construct a facade package. Consequently their
+forward/inverse/law projections remain stuck. The transparent
+`object_path_equiv_EQ1(p)` package is still the uniform computational
+path-to-equivalence operation whenever observers are required. No primitive
+nonreducing cast term is active. This choice is local to the July 17 plan, not
+a repository-wide rewrite/unification rule.
+
+EQ1 is therefore the active direct classifier at the abstract proof-time,
+rigid Cat/Grpd, stable Product, and explicit opposite boundaries, but it is not
+claimed as an automatically inherited runtime normal form for every former;
+the explicit stable casts provide term interchange without that claim.
+The retained D0/public `OmegaEquiv` surface remains operational during
+consumer migration. No runtime facade eta, proof erasure, or silently coerced
+raw-path observer has been promoted.
+
+The first decoder-migration inventory removes only the redundant standalone
+`cat_univalence(C)` inhabitant. Generic compatibility consumers now use the
+already-derived `cat_univalence_from_decoder(C)`. The operational
+`idtoequiv_cat`/`omega_equiv_path` pair and the sole specified-inverse
+`cat_univalence_by_decoder` capability remain because they still own shaped
+computation and theorem consumers. The stable carrier view now supplies the
+general explicit EQ1-to-path and path-to-EQ1 operations. Its carrier rewrite
+and proof-time equation are explicitly trusted; its term operations are
+transparent identities and do not replace decoder beta or round-trip
+theorems. This is plan-local architecture, not a general logical-framework
+convention.
+
+For compatibility consumers that still require a D0 package, the defined
+operation `object_path_equiv_D0(p)` composes the transparent EQ1 package with
+the existing observation-complete migration constructor. It is now used by
+both recursive cells of the ordinary-isomorphism lift and by the D1
+category-path next-hom construction. In particular the latter's selected
+functor computes directly to `path_to_hom(Cat_cat,p)`. This is a migration
+adapter into the old representation, not a second foundational encoder.
 
 Explicit D0/EQ1 migration is nevertheless active in both directions. Old D0
 evidence is decoded to the new inverse fields and equality laws. In the other

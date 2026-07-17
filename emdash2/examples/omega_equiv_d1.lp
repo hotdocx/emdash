@@ -86,6 +86,11 @@ assert [C : Cat]
       = @path_to_hom C x y p);
 
 assert [A B : Cat]
+  (p : τ (@= (Obj Cat_cat) A B)) ⊢
+  @idtoequiv_cat_functor_D1 A B p
+  ≡ @path_to_hom Cat_cat A B p;
+
+assert [A B : Cat]
   (p : τ (@= (Obj Cat_cat) A B))
   (x y : τ (Obj A)) ⊢
   @omega_equiv_evidence

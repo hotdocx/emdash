@@ -38,8 +38,8 @@ The 2026-07-17 baseline is:
 make check                         pass
 make examples                      pass
 make ci                            pass
-checked files/examples            45
-diagnostic checks                1,824 (1,604 assert + 220 assertnot)
+checked files/examples            46
+diagnostic checks                1,867 (1,639 assert + 228 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -49,8 +49,11 @@ warning inventory                  1,128
 ```
 
 The adopted equality-valued omega-equivalence overlay has promoted its first
-five bounded staging slices and the safe abstract/rigid-universe portion of
-Phase 6. `OmegaEquivAlong_EQ1(f)` decodes to a native
+six bounded staging phases, the first Phase-7 migration checkpoints, and the
+first two Phase-9 groupoidality/structured-J slices, including the selected
+abstract/rigid-universe, stable Product, uniform explicit-cast, homwise
+groupoidality, and literal structured-action/J boundaries.
+`OmegaEquivAlong_EQ1(f)` decodes to a native
 one-constructor record with separate left/right inverse arrows, ordinary
 equality-valued cancellation laws in the two endomorphism hom-categories,
 four computational observers, an indexed eliminator, and reflexive evidence.
@@ -72,14 +75,28 @@ explicit D0 migration adapters described below remain a distinct
 compatibility layer.
 
 A specialization audit rejects the earlier abstract `lambda p, p` experiment
-as a general public cast. Product and opposite equality reduce past the
-generic pattern; unfolding that body is not type-stable at Product. Raw paths
-at those reduced formers remain negative controls, while
-`object_path_equiv_EQ1(p)` remains well typed and computational. Stable
-injective former path-view heads are the preferred follow-up; a primitive
-nonreducing cast is only an explicitly trusted fallback. This is a current
-architecture fact owned by the July 17 plan, not a new repository-wide SOP
-rule. Warnings remain 971/157 and the strict audit remains zero/45/27.
+as a general public cast. Product repairs the measured specialization failure
+by making `ProductPathView` its stable equality normal form while decoding its
+carrier to the previous constant-family `SigmaPathView`. It has explicit
+construction, projections, elimination, reflexivity, carrier adapters, and a
+shaped EQ1 comparison. Generic `eq_refl` remains distinct from canonical
+`product_path_refl` even though both expose the expected components.
+
+Opposite retains `Obj(Op_cat(C)) -> Obj(C)`. A direct EQ1 comparison against
+that reduced equality passed abstractly but failed at composite Product and
+literal-path specializations. The Phase-6 opposite-only intermediary proved
+that typed-let staging works, but is now retired in favor of the uniform
+`ObjectPathCastView_EQ1(C,x,y)`. Its carrier reduces to object equality and a
+single direct unification rule compares it with EQ1. The public casts in both
+directions use a typed `let`, beta-reduce to their input, and have definitional
+round trips after abstract, Product, opposite/nested, literal-path, functor,
+Cat, and Grpd specialization. Product/opposite compatibility names route
+through these general casts. Cast terms do not reify a package, so their
+facade observers remain stuck; use `object_path_equiv_EQ1(p)` when projection
+computation is required. No primitive nonreducing cast term is active. These
+are current architecture facts owned by the July 17 plan, not new repository-
+wide SOP rules. Warnings remain 971/157 and the strict audit remains
+zero/45/27.
 
 The literal-path Phase-3 slice adds two narrow proof-time comparisons without
 promoting generic direct univalence. `OmegaEquiv_EQ1(Path_cat A,x,y)` compares
@@ -120,11 +137,66 @@ constructor; it is migration surface, not a foundational encoder requirement.
 D0 still has no eta/extensionality theorem, so neither evidence round trip is
 claimed and both remain negative controls.
 
-The catalog now has 1,824 checks across 66 areas, the kernel has 20,909 lines,
-856 symbols, 595 rules, and 63 unification rules, and the synchronized 45-file
-health and reviewer sweeps pass. The diagnostic suite has 1,604 positive and
-220 negative statements. Warnings remain 971/157 and the strict audit remains
-zero/45/27. Synchronized 45-file CI passes with 212.406s of measured checking
+Phase-7 migration has retired the redundant standalone
+`cat_univalence(C) : CatUnivalence(C)` inhabitant. It had no kernel consumer;
+the two diagnostics that mentioned it now use the existing
+`cat_univalence_from_decoder(C)`. The computational `idtoequiv_cat` and
+`omega_equiv_path` operations, the specified-inverse
+`cat_univalence_by_decoder`, and their groupoid counterparts remain while
+their real rules and theorem consumers are migrated. No opaque EQ1 encoder or
+decoder term was introduced. The new carrier-view rewrite and direct
+unification equation are explicitly trusted cast infrastructure, while the
+two term operations are transparent identities. This is the current
+architecture of the July 17 plan, not a repository-wide rule that all explicit
+casts must use this representation.
+
+The transparent `object_path_equiv_D0(p)` compatibility operation is now the
+defined route from an object path into retained D0: it composes the general
+EQ1 package with the observation-complete migration constructor. Both
+ordinary-isomorphism recursive cells and the D1 category-path next-hom
+consumer use it instead of `idtoequiv_cat`. The latter's selected functor now
+computes to `path_to_hom(Cat_cat,p)`. This reduces, but does not yet eliminate,
+the legacy encoder dependency; compatibility round trips, shaped Product
+computation, OneCat theorems, and other inventoried consumers remain.
+
+The first general-groupoidality consumer slice now turns
+`g : IsGroupoidalCat_EQ1(C)` into equality-valued fixed-map evidence for each
+hom action of `Core_incl_func(C)`. The construction crosses into retained D0
+only at the existing D0b `fapp1` compatibility owner and immediately observes
+the result back as EQ1. Its selected right inverse sends a directed arrow to
+an object path, and the equality-valued right law proves propositionally that
+re-including that path recovers the arrow. Existing exact `IsDiscreteCat`
+evidence and packaged `ZeroCat` carriers provide nonliteral groupoidal
+witnesses. This is a migration-backed consumer, not yet a native all-EQ1
+hom-action theorem.
+
+The first slice also checks the existing `path_ind_sec` computation for a
+structured Sigma-pullback motive in a groupoidal context. Groupoidality is not
+used by that computation: this is the intended specialization-by-weakening
+result, showing that structured action needs no second eliminator.
+
+The next slice establishes the exact literal `Path_cat(A)` comparison.
+`path_cat_structured_transport_EQ1` is displayed functor action;
+`path_cat_ind_eqr_transport_EQ1` is primitive right J with a function-valued
+motive; and `path_cat_path_ind_app_EQ1` evaluates the existing
+`path_ind_sec`. Two `ind_eqr` proofs and transitivity compare all three. Only
+primitive J runtime-reduces to `u` at reflexivity. The two directed
+presentations retain negative conversion controls, while narrow proof-time
+joins reconcile the Path-category identity and the reflexive
+PathOut/Sigma-pullback component order. Broad runtime repairs were rejected;
+the selected rules leave warnings at 971/157 and add no decoder, encoder, or
+parallel eliminator. This is a current architecture fact for the July 17
+plan, not a new general SOP requirement for casts or transport.
+
+The compatibility-derived inverse at a literal path category is still
+intentionally not definitionally the input path; use the direct
+`path_equiv_EQ1(p)` package for that computation.
+
+The catalog now has 1,867 checks across 67 areas, the kernel has 21,249 lines,
+878 symbols, 597 rules, and 65 unification rules, and the synchronized 46-file
+health and reviewer sweeps pass. The diagnostic suite has 1,639 positive and
+228 negative statements. Warnings remain 971/157 and the strict audit remains
+zero/45/27. Synchronized 46-file CI passes with 217.327s of measured checking
 time; the active July 17 plan records the phase evidence.
 
 The largest warning families are headed by `comp_fapp0`,

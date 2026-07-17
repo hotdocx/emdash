@@ -2,8 +2,11 @@
   Reviewer example: measured direct-univalence boundary for EQ1.
 
   Cat and Grpd have rigid runtime EQ1 normal forms. An abstract category uses
-  proof-time comparison. Reduction-heavy concrete formers may require the
-  explicit object_path_equiv_EQ1 package; no opaque cast is inserted.
+  proof-time comparison. A single stable carrier view supports explicit
+  transparent identity casts after specialization. Product equality retains a
+  stable path view, while Product/opposite compatibility names route through
+  the general casts. Facade observations still require an explicit package;
+  no opaque term operation is inserted.
 */
 
 require open emdash.emdash3_2;
@@ -22,6 +25,19 @@ assert [C : Cat] (x y : τ (Obj C))
 assertnot [C : Cat] (x y : τ (Obj C)) ⊢
   @= (Obj C) x y
   ≡ @OmegaEquiv_EQ1 C x y;
+
+// Explicit casts use one stable carrier view and have definitional round trips.
+assert [C : Cat] [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y)) ⊢
+  @omega_cast_to_object_path_EQ1 C x y
+    (@object_path_cast_to_omega_EQ1 C x y p)
+  ≡ p;
+
+assert [C : Cat] [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 C x y)) ⊢
+  @object_path_cast_to_omega_EQ1 C x y
+    (@omega_cast_to_object_path_EQ1 C x y e)
+  ≡ e;
 
 // The two rigid universe owners select EQ1 at runtime.
 assert [A B : Cat] ⊢
@@ -51,12 +67,34 @@ assert [A : Grpd] ⊢
     (@omega_equiv_refl_EQ1 Grpd_cat A)
   ≡ @id Grpd_cat A;
 
-// Product equality has already decoded to a transparent Sigma path, so raw
-// silent interchange is unavailable. The explicit semantic adapter computes.
+// Product equality retains a stable classifier whose carrier is the familiar
+// constant-family Sigma path data.
+assert [A B : Cat]
+  (x y : τ (Obj (Product_cat A B))) ⊢
+  @= (Obj (Product_cat A B)) x y
+  ≡ @ProductPathView (Obj A) (Obj B) x y;
+
+assert [A B : Grpd]
+  (x y : τ (Product_grpd A B)) ⊢
+  τ (@ProductPathView A B x y)
+  ≡ τ (@SigmaPathView A (λ _ : τ A, B) x y);
+
+// The named Product casts are transparent identities with definitional round
+// trips, but they do not turn a raw path into an observable facade package.
+assert [A B : Cat]
+  (x y : τ (Obj (Product_cat A B)))
+  (p : τ (@= (Obj (Product_cat A B)) x y)) ⊢
+  @product_omega_as_path_EQ1 A B x y
+    (@product_path_as_omega_EQ1 A B x y p)
+  ≡ p;
+
 assertnot [A B : Cat]
   (x y : τ (Obj (Product_cat A B)))
   (p : τ (@= (Obj (Product_cat A B)) x y)) ⊢
-  p : τ (@OmegaEquiv_EQ1 (Product_cat A B) x y);
+  @omega_equiv_to_EQ1
+    (Product_cat A B) x y
+    (@product_path_as_omega_EQ1 A B x y p)
+  ≡ @path_to_hom (Product_cat A B) x y p;
 
 assert [A B : Cat]
   (x y : τ (Obj (Product_cat A B)))
@@ -66,11 +104,32 @@ assert [A B : Cat]
     (@object_path_equiv_EQ1 (Product_cat A B) x y p)
   ≡ @path_to_hom (Product_cat A B) x y p;
 
-// Opposite object reduction has the same explicit-adapter boundary.
+// Opposite object reduction uses the same general carrier view. A raw path is
+// not silently accepted; the named adapter supplies the explicit cast.
+assert [A : Cat]
+  (x y : τ (Obj A)) ⊢
+  τ (@ObjectPathCastView_EQ1 (Op_cat A) x y)
+  ≡ τ (@= (Obj A) x y);
+
 assertnot [A : Cat]
   (x y : τ (Obj (Op_cat A)))
   (p : τ (@= (Obj (Op_cat A)) x y)) ⊢
   p : τ (@OmegaEquiv_EQ1 (Op_cat A) x y);
+
+assert [A : Cat]
+  (x y : τ (Obj A))
+  (p : τ (@= (Obj A) x y)) ⊢
+  @op_omega_as_path_EQ1 A x y
+    (@op_path_as_omega_EQ1 A x y p)
+  ≡ p;
+
+assertnot [A : Cat]
+  (x y : τ (Obj A))
+  (p : τ (@= (Obj A) x y)) ⊢
+  @omega_equiv_to_EQ1
+    (Op_cat A) x y
+    (@op_path_as_omega_EQ1 A x y p)
+  ≡ @path_to_hom (Op_cat A) x y p;
 
 assert [A : Cat]
   (x y : τ (Obj (Op_cat A)))
@@ -79,6 +138,22 @@ assert [A : Cat]
     (Op_cat A) x y
     (@object_path_equiv_EQ1 (Op_cat A) x y p)
   ≡ @path_to_hom (Op_cat A) x y p;
+
+// The general identity casts remain stable when the underlying category is a
+// reduction-heavy Product or a literal path category.
+assert [A B : Cat]
+  (x y : τ (Obj (Product_cat A B)))
+  (p : τ (@= (Obj (Product_cat A B)) x y)) ⊢
+  @op_omega_as_path_EQ1 (Product_cat A B) x y
+    (@op_path_as_omega_EQ1 (Product_cat A B) x y p)
+  ≡ p;
+
+assert [A : Grpd]
+  (x y : τ A)
+  (p : τ (@= A x y)) ⊢
+  @op_omega_as_path_EQ1 (Path_cat A) x y
+    (@op_path_as_omega_EQ1 (Path_cat A) x y p)
+  ≡ p;
 
 // Raw generic reflexivity remains distinct from the explicit facade package.
 assertnot [A : Cat] ⊢

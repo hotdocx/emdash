@@ -2848,9 +2848,136 @@ injective symbol Product_grpd
 rule τ (Product_grpd $A $B)
   ↪ @τΣ_ $A (λ _ : τ $A, $B);
 
-// Product equality uses the corresponding Sigma path view.
+/*
+  Stable path classifier for groupoid-level products.
+
+  The classifier head remains rigid for proof-time comparison, while its
+  carrier decodes to the already-established constant-family Sigma path data.
+  The named constructor/projections/eliminator below preserve the existing
+  computational base-plus-fibre interface.
+*/
+injective symbol ProductPathView
+  [A B : Grpd]
+  (p q : τ (Product_grpd A B))
+  : Grpd;
+
+// Product path data decode to the existing constant-family Sigma path data.
+rule τ (@ProductPathView $A $B $p $q)
+  ↪ τ (@SigmaPathView $A (λ _ : τ $A, $B) $p $q);
+
+/*
+  Transparent carrier adapters between the stable Product classifier and the
+  established constant-family Sigma presentation. Their bodies are literal
+  identities because both carriers reduce to the same decoded type; the
+  classifier heads themselves intentionally remain distinct.
+*/
+symbol product_path_to_sigma_view
+  [A B : Grpd]
+  [p q : τ (Product_grpd A B)]
+  (w : τ (@ProductPathView A B p q))
+  : τ (@SigmaPathView A (λ _ : τ A, B) p q)
+≔ w;
+
+symbol sigma_view_to_product_path
+  [A B : Grpd]
+  [p q : τ (Product_grpd A B)]
+  (w : τ (@SigmaPathView A (λ _ : τ A, B) p q))
+  : τ (@ProductPathView A B p q)
+≔ w;
+
+// Stable Product-path introduction from base and constant-fibre paths.
+symbol product_path_intro
+  [A B : Grpd]
+  [p q : τ (Product_grpd A B)]
+  (base : τ (@= A (sigma_Fst p) (sigma_Fst q)))
+  (fibre : τ (@PathOver
+    A
+    (λ _ : τ A, B)
+    (sigma_Fst p)
+    (sigma_Fst q)
+    base
+    (sigma_Snd p)
+    (sigma_Snd q)))
+  : τ (@ProductPathView A B p q)
+≔ @Struct_sigma
+    (@= A (sigma_Fst p) (sigma_Fst q))
+    (λ r : τ (@= A (sigma_Fst p) (sigma_Fst q)),
+      @PathOver
+        A
+        (λ _ : τ A, B)
+        (sigma_Fst p)
+        (sigma_Fst q)
+        r
+        (sigma_Snd p)
+        (sigma_Snd q))
+    base
+    fibre;
+
+// Base component of a stable Product path.
+symbol product_path_base
+  [A B : Grpd]
+  [p q : τ (Product_grpd A B)]
+  (w : τ (@ProductPathView A B p q))
+  : τ (@= A (sigma_Fst p) (sigma_Fst q))
+≔ sigma_Fst w;
+
+// Constant-fibre component of a stable Product path.
+symbol product_path_fibre
+  [A B : Grpd]
+  [p q : τ (Product_grpd A B)]
+  (w : τ (@ProductPathView A B p q))
+  : τ (@PathOver
+      A
+      (λ _ : τ A, B)
+      (sigma_Fst p)
+      (sigma_Fst q)
+      (product_path_base w)
+      (sigma_Snd p)
+      (sigma_Snd q))
+≔ sigma_Snd w;
+
+// Fixed-endpoint eliminator for the stable Product path carrier.
+symbol product_path_ind
+  [A B : Grpd]
+  [p q : τ (Product_grpd A B)]
+  (Q : τ (@ProductPathView A B p q) → Grpd)
+  (c : Π base : τ (@= A (sigma_Fst p) (sigma_Fst q)),
+       Π fibre : τ (@PathOver
+         A
+         (λ _ : τ A, B)
+         (sigma_Fst p)
+         (sigma_Fst q)
+         base
+         (sigma_Snd p)
+         (sigma_Snd q)),
+       τ (Q (@product_path_intro A B p q base fibre)))
+  (w : τ (@ProductPathView A B p q))
+  : τ (Q w)
+≔ @sigma_ind
+    (@= A (sigma_Fst p) (sigma_Fst q))
+    (λ base : τ (@= A (sigma_Fst p) (sigma_Fst q)),
+      @PathOver
+        A
+        (λ _ : τ A, B)
+        (sigma_Fst p)
+        (sigma_Fst q)
+        base
+        (sigma_Snd p)
+        (sigma_Snd q))
+    Q
+    c
+    w;
+
+// Stable Product reflexivity uses the established Sigma reflexivity data.
+symbol product_path_refl
+  [A B : Grpd]
+  (p : τ (Product_grpd A B))
+  : τ (@ProductPathView A B p p)
+≔ @sigma_path_refl A (λ _ : τ A, B) p;
+
+// Product equality uses the stable Product path classifier.
 rule @= (Product_grpd $A $B) $p $q
-  ↪ @SigmaPathView $A (λ _ : τ $A, $B) $p $q;
+  ↪ @ProductPathView $A $B $p $q;
 
 // First component of product reflexivity.
 rule sigma_Fst (@eq_refl (Product_grpd $A _) $u)
@@ -5336,6 +5463,18 @@ symbol is_trunc_grpd_universe
 // Category of categories.
 constant symbol Cat_cat : Cat;
 
+/*
+  Proof-time identity comparison for Cat-valued action from a path category.
+
+  The runtime identity of `Path_cat(A)` exposes `eq_refl(A,x)` before the
+  generic functor-identity owner can match. This narrowly typed join restores
+  that functorial comparison without selecting a second runtime normal form.
+*/
+unif_rule
+  @fapp1_fapp0 (Path_cat $A) Cat_cat $D $x $x (@eq_refl $A $x)
+  ≡ @id Cat_cat (@fapp0 (Path_cat $A) Cat_cat $D $x)
+  ↪ [ tt ≡ tt ];
+
 // Object classifier of the category universe.
 injective symbol Cat_grpd  : Grpd ≔ Obj Cat_cat;
 
@@ -5855,6 +5994,53 @@ symbol omega_equiv_along_refl_EQ1
     (@eq_refl (Hom C x x) (@id C x));
 
 /*
+  Ordinary functor action preserves equality-valued fixed-arrow equivalence.
+
+  The inverse arrows are the images of the selected inverses. Applying the
+  functor action to the two source cancellation laws supplies the target
+  laws; the global functoriality owners then compare the mapped composites
+  and identities with their canonical target forms.
+*/
+symbol omega_equiv_along_fapp1_fapp0_EQ1
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [x y : τ (Obj A)]
+  [f : τ (Hom A x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 A x y f))
+  : τ (@OmegaEquivAlong_EQ1
+      B
+      (@fapp0 A B F x)
+      (@fapp0 A B F y)
+      (@fapp1_fapp0 A B F x y f))
+≔ @omega_equiv_along_intro_EQ1
+    B
+    (@fapp0 A B F x)
+    (@fapp0 A B F y)
+    (@fapp1_fapp0 A B F x y f)
+    (@fapp1_fapp0 A B F y x
+      (@omega_equiv_along_left_inv_EQ1 A x y f u))
+    (@fapp1_fapp0 A B F y x
+      (@omega_equiv_along_right_inv_EQ1 A x y f u))
+    (@eq_ap
+      (Hom A x x)
+      (Hom B (@fapp0 A B F x) (@fapp0 A B F x))
+      (λ h : τ (Hom A x x), @fapp1_fapp0 A B F x x h)
+      (@comp_fapp0 A x y x
+        (@omega_equiv_along_left_inv_EQ1 A x y f u)
+        f)
+      (@id A x)
+      (@omega_equiv_along_left_law_EQ1 A x y f u))
+    (@eq_ap
+      (Hom A y y)
+      (Hom B (@fapp0 A B F y) (@fapp0 A B F y))
+      (λ h : τ (Hom A y y), @fapp1_fapp0 A B F y y h)
+      (@comp_fapp0 A y x y
+        f
+        (@omega_equiv_along_right_inv_EQ1 A x y f u))
+      (@id A y)
+      (@omega_equiv_along_right_law_EQ1 A x y f u));
+
+/*
   Stable first-class facade for a selected arrow and its EQ1 evidence.
 
   This is an abstract record-like classifier rather than a transparent Sigma:
@@ -5879,6 +6065,58 @@ unif_rule
   @OmegaEquiv_EQ1 $C $x $y
   ≡ @= (Obj $C) $x $y
   ↪ [ tt ≡ tt ];
+
+/*
+  General stable carrier view for explicit equality/EQ1 casts.
+
+  Equality enters by carrier reduction and EQ1 enters through one direct
+  proof-time comparison. The typed-let adapters below therefore never rely on
+  transitivity of unification hints, even after category specialization.
+*/
+injective symbol ObjectPathCastView_EQ1
+  [C : Cat]
+  (x y : τ (Obj C))
+  : Grpd;
+
+rule τ (@ObjectPathCastView_EQ1 $C $x $y)
+  ↪ τ (@= (Obj $C) $x $y);
+
+unif_rule
+  @OmegaEquiv_EQ1 $C $x $y
+  ≡ @ObjectPathCastView_EQ1 $C $x $y
+  ↪ [ tt ≡ tt ];
+
+symbol object_path_cast_to_omega_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (@OmegaEquiv_EQ1 C x y)
+≔ let w : τ (@ObjectPathCastView_EQ1 C x y) ≔ p in w;
+
+symbol omega_cast_to_object_path_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 C x y))
+  : τ (@= (Obj C) x y)
+≔ let w : τ (@ObjectPathCastView_EQ1 C x y) ≔ e in w;
+
+/*
+  Opposite compatibility names route through the general stable carrier cast.
+  They remain transparent identities and do not reify a package.
+*/
+symbol op_path_as_omega_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (@OmegaEquiv_EQ1 (Op_cat C) x y)
+≔ @object_path_cast_to_omega_EQ1 (Op_cat C) x y p;
+
+symbol op_omega_as_path_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 (Op_cat C) x y))
+  : τ (@= (Obj C) x y)
+≔ @omega_cast_to_object_path_EQ1 (Op_cat C) x y e;
 
 // The rigid groupoid universe has a finite direct EQ1 runtime normal form.
 rule @= (Obj Grpd_cat) $A $B
@@ -7116,11 +7354,6 @@ symbol equivtoid_cat
       (U x y))
     e;
 
-// Global operational assumption: every active category is omega-univalent.
-symbol cat_univalence
-  (C : Cat)
-  : τ (CatUnivalence C);
-
 // Canonical decoder-oriented omega-categorical univalence capability.
 symbol cat_univalence_by_decoder
   (C : Cat)
@@ -7331,6 +7564,16 @@ with @omega_equiv_along_right_cell_D0 _ _ _ _
         (@id $C $y)
         (@omega_equiv_along_right_law_EQ1 $C $x $y $f $u));
 
+// Construct a legacy D0 package from an object path through the transparent
+// EQ1 adapter and the observation-complete migration constructor.
+symbol object_path_equiv_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (OmegaEquiv_D0 C x y)
+≔ @omega_equiv_EQ1_to_D0 C x y
+    (@object_path_equiv_EQ1 C x y p);
+
 /*
   Strict ordinary isomorphism evidence gives recursive omega-equivalence.
 
@@ -7377,11 +7620,12 @@ with @omega_equiv_along_right_inv_D0
       (@iso_evidence_omega_along_D0 $C $x $y $i)
   ↪ @iso_evidence_from $C $x $y $i;
 
-// Ordinary inverse equations encode as recursive omega-equivalence cells.
+// Ordinary inverse equations use the constructed object-path compatibility
+// adapter rather than the legacy categorical encoder.
 rule @omega_equiv_along_left_cell_D0
       _ _ _ _
       (@iso_evidence_omega_along_D0 $C $x $y $i)
-  ↪ @idtoequiv_cat
+  ↪ @object_path_equiv_D0
       (Hom_cat $C $x $x)
       (@comp_fapp0 $C $x $y $x
         (@iso_evidence_from $C $x $y $i)
@@ -7391,7 +7635,7 @@ rule @omega_equiv_along_left_cell_D0
 with @omega_equiv_along_right_cell_D0
       _ _ _ _
       (@iso_evidence_omega_along_D0 $C $x $y $i)
-  ↪ @idtoequiv_cat
+  ↪ @object_path_equiv_D0
       (Hom_cat $C $y $y)
       (@comp_fapp0 $C $y $x $y
         (@iso_evidence_to $C $x $y $i)
@@ -9170,9 +9414,30 @@ injective symbol Product_cat : Π (A B : Cat), Cat;
 rule Functor_cat $X (Product_cat $A $B)
   ↪ Product_cat (Functor_cat $X $A) (Functor_cat $X $B);
 
-// Product objects are encoded pairs (x,u) with x : Obj(A), u : Obj(B).
+// Product objects use the stable groupoid-level Product classifier.
 rule Obj (Product_cat $A $B)
-  ↪ @Σ_ (Obj $A) (λ _ : τ (Obj $A), Obj $B);
+  ↪ Product_grpd (Obj $A) (Obj $B);
+
+// Direct-univalence join for the stable Product-path normal form.
+unif_rule
+  @OmegaEquiv_EQ1 (Product_cat $A $B) $x $y
+  ≡ @ProductPathView (Obj $A) (Obj $B) $x $y
+  ↪ [ tt ≡ tt ];
+
+// Product compatibility names route through the general stable carrier cast.
+symbol product_path_as_omega_EQ1
+  [A B : Cat]
+  [x y : τ (Obj (Product_cat A B))]
+  (p : τ (@= (Obj (Product_cat A B)) x y))
+  : τ (@OmegaEquiv_EQ1 (Product_cat A B) x y)
+≔ @object_path_cast_to_omega_EQ1 (Product_cat A B) x y p;
+
+symbol product_omega_as_path_EQ1
+  [A B : Cat]
+  [x y : τ (Obj (Product_cat A B))]
+  (e : τ (@OmegaEquiv_EQ1 (Product_cat A B) x y))
+  : τ (@= (Obj (Product_cat A B)) x y)
+≔ @omega_cast_to_object_path_EQ1 (Product_cat A B) x y e;
 
 // Opposite distributes over binary products: (A × B)^op = A^op × B^op.
 rule Op_cat (Product_cat $A $B)
@@ -10833,7 +11098,7 @@ symbol idtoequiv_cat_functor_D1
   (p : τ (@= (Obj Cat_cat) A B))
   : τ (Functor A B)
 ≔ @omega_equiv_to
-    Cat_cat A B (@idtoequiv_cat Cat_cat A B p);
+    Cat_cat A B (@object_path_equiv_D0 Cat_cat A B p);
 
 symbol idtoequiv_cat_fapp1_along_D1
   [A B : Cat]
@@ -10851,7 +11116,7 @@ symbol idtoequiv_cat_fapp1_along_D1
     B
     (idtoequiv_cat_functor_D1 p)
     (@omega_equiv_evidence
-      Cat_cat A B (@idtoequiv_cat Cat_cat A B p))
+      Cat_cat A B (@object_path_equiv_D0 Cat_cat A B p))
     x
     y;
 
@@ -11093,6 +11358,252 @@ symbol core_incl_hom_func
     C
     (Core_incl_func C)
     x y;
+
+/*
+  General internal groupoidality acts homwise.
+
+  The selected EQ1 witness for Core(C) -> C is converted only at the existing
+  D0b compatibility boundary. D0b supplies the iterable next-hom action, and
+  the result is observed back through equality-valued evidence. No new
+  decoder, eliminator, or unification equation is introduced.
+*/
+symbol groupoidal_core_homwise_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (x y : τ (Obj C))
+  : τ (@OmegaEquivAlong_EQ1
+      Cat_cat
+      (Path_cat (@= (Obj C) x y))
+      (Hom_cat C x y)
+      (@core_incl_hom_func C x y))
+≔ @omega_equiv_along_D0_to_EQ1
+    Cat_cat
+    (Path_cat (@= (Obj C) x y))
+    (Hom_cat C x y)
+    (@core_incl_hom_func C x y)
+    (@omega_equiv_along_fapp1_D0
+      (Core_cat C)
+      C
+      (Core_incl_func C)
+      (@omega_equiv_along_EQ1_to_D0
+        Cat_cat
+        (Core_cat C)
+        C
+        (Core_incl_func C)
+        g)
+      x
+      y);
+
+// The selected right inverse reads a directed arrow as an object path.
+symbol groupoidal_arrow_to_path_func_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (x y : τ (Obj C))
+  : τ (Functor
+      (Hom_cat C x y)
+      (Path_cat (@= (Obj C) x y)))
+≔ @omega_equiv_along_right_inv_EQ1
+    Cat_cat
+    (Path_cat (@= (Obj C) x y))
+    (Hom_cat C x y)
+    (@core_incl_hom_func C x y)
+    (@groupoidal_core_homwise_EQ1 C g x y);
+
+// Apply the selected inverse functor to read one directed arrow as a path.
+symbol groupoidal_arrow_to_path_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (@= (Obj C) x y)
+≔ @fapp0
+    (Hom_cat C x y)
+    (Path_cat (@= (Obj C) x y))
+    (@groupoidal_arrow_to_path_func_EQ1 C g x y)
+    f;
+
+// Re-including the selected path is propositionally the original arrow.
+symbol groupoidal_arrow_section_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (x y : τ (Obj C))
+  : τ (@=
+      (Hom Cat_cat (Hom_cat C x y) (Hom_cat C x y))
+      (@comp_fapp0
+        Cat_cat
+        (Hom_cat C x y)
+        (Path_cat (@= (Obj C) x y))
+        (Hom_cat C x y)
+        (@core_incl_hom_func C x y)
+        (@groupoidal_arrow_to_path_func_EQ1 C g x y))
+      (@id Cat_cat (Hom_cat C x y)))
+≔ @omega_equiv_along_right_law_EQ1
+    Cat_cat
+    (Path_cat (@= (Obj C) x y))
+    (Hom_cat C x y)
+    (@core_incl_hom_func C x y)
+    (@groupoidal_core_homwise_EQ1 C g x y);
+
+// Pointwise, re-including the selected path recovers the original arrow.
+symbol groupoidal_path_to_arrow_retract_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (@=
+      (Hom C x y)
+      (@fapp0
+        (Path_cat (@= (Obj C) x y))
+        (Hom_cat C x y)
+        (@core_incl_hom_func C x y)
+        (@groupoidal_arrow_to_path_EQ1 C g x y f))
+      f)
+≔ @eq_ap
+    (Hom Cat_cat (Hom_cat C x y) (Hom_cat C x y))
+    (Hom C x y)
+    (λ F : τ (Hom Cat_cat (Hom_cat C x y) (Hom_cat C x y)),
+      @fapp0 (Hom_cat C x y) (Hom_cat C x y) F f)
+    (@comp_fapp0
+      Cat_cat
+      (Hom_cat C x y)
+      (Path_cat (@= (Obj C) x y))
+      (Hom_cat C x y)
+      (@core_incl_hom_func C x y)
+      (@groupoidal_arrow_to_path_func_EQ1 C g x y))
+    (@id Cat_cat (Hom_cat C x y))
+    (@groupoidal_arrow_section_EQ1 C g x y);
+
+// Selected inverse arrow obtained from the groupoidality-selected path.
+symbol groupoidal_arrow_inverse_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (Hom C y x)
+≔ @path_to_hom
+    C y x
+    (@path_sym
+      (Obj C)
+      x y
+      (@groupoidal_arrow_to_path_EQ1 C g x y f));
+
+// The selected inverse cancels the original arrow on the left.
+symbol groupoidal_arrow_left_law_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (@=
+      (Hom C x x)
+      (@comp_fapp0 C x y x
+        (@groupoidal_arrow_inverse_EQ1 C g x y f)
+        f)
+      (@id C x))
+≔ @eq_trans
+    (Hom C x x)
+    (@comp_fapp0 C x y x
+      (@groupoidal_arrow_inverse_EQ1 C g x y f)
+      f)
+    (@comp_fapp0 C x y x
+      (@groupoidal_arrow_inverse_EQ1 C g x y f)
+      (@path_to_hom C x y
+        (@groupoidal_arrow_to_path_EQ1 C g x y f)))
+    (@id C x)
+    (@eq_sym
+      (Hom C x x)
+      (@comp_fapp0 C x y x
+        (@groupoidal_arrow_inverse_EQ1 C g x y f)
+        (@path_to_hom C x y
+          (@groupoidal_arrow_to_path_EQ1 C g x y f)))
+      (@comp_fapp0 C x y x
+        (@groupoidal_arrow_inverse_EQ1 C g x y f)
+        f)
+      (@eq_ap
+        (Hom C x y)
+        (Hom C x x)
+        (λ h : τ (Hom C x y),
+          @comp_fapp0 C x y x
+            (@groupoidal_arrow_inverse_EQ1 C g x y f)
+            h)
+        (@path_to_hom C x y
+          (@groupoidal_arrow_to_path_EQ1 C g x y f))
+        f
+        (@groupoidal_path_to_arrow_retract_EQ1 C g x y f)))
+    (@object_path_equiv_left_law_EQ1
+      C x y
+      (@groupoidal_arrow_to_path_EQ1 C g x y f));
+
+// The selected inverse cancels the original arrow on the right.
+symbol groupoidal_arrow_right_law_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (@=
+      (Hom C y y)
+      (@comp_fapp0 C y x y
+        f
+        (@groupoidal_arrow_inverse_EQ1 C g x y f))
+      (@id C y))
+≔ @eq_trans
+    (Hom C y y)
+    (@comp_fapp0 C y x y
+      f
+      (@groupoidal_arrow_inverse_EQ1 C g x y f))
+    (@comp_fapp0 C y x y
+      (@path_to_hom C x y
+        (@groupoidal_arrow_to_path_EQ1 C g x y f))
+      (@groupoidal_arrow_inverse_EQ1 C g x y f))
+    (@id C y)
+    (@eq_sym
+      (Hom C y y)
+      (@comp_fapp0 C y x y
+        (@path_to_hom C x y
+          (@groupoidal_arrow_to_path_EQ1 C g x y f))
+        (@groupoidal_arrow_inverse_EQ1 C g x y f))
+      (@comp_fapp0 C y x y
+        f
+        (@groupoidal_arrow_inverse_EQ1 C g x y f))
+      (@eq_ap
+        (Hom C x y)
+        (Hom C y y)
+        (λ h : τ (Hom C x y),
+          @comp_fapp0 C y x y
+            h
+            (@groupoidal_arrow_inverse_EQ1 C g x y f))
+        (@path_to_hom C x y
+          (@groupoidal_arrow_to_path_EQ1 C g x y f))
+        f
+        (@groupoidal_path_to_arrow_retract_EQ1 C g x y f)))
+    (@object_path_equiv_right_law_EQ1
+      C x y
+      (@groupoidal_arrow_to_path_EQ1 C g x y f));
+
+// Every arrow in an internally groupoidal category has explicit EQ1 evidence.
+symbol groupoidal_arrow_equiv_along_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (@OmegaEquivAlong_EQ1 C x y f)
+≔ @omega_equiv_along_intro_EQ1
+    C x y f
+    (@groupoidal_arrow_inverse_EQ1 C g x y f)
+    (@groupoidal_arrow_inverse_EQ1 C g x y f)
+    (@groupoidal_arrow_left_law_EQ1 C g x y f)
+    (@groupoidal_arrow_right_law_EQ1 C g x y f);
+
+// Existing discrete-category evidence gives a nonliteral groupoidal witness.
+symbol discrete_cat_is_groupoidal_EQ1
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  : τ (@IsGroupoidalCat_EQ1 C)
+≔ @omega_equiv_along_D0_to_EQ1
+    Cat_cat
+    (Core_cat C)
+    C
+    (Core_incl_func C)
+    (@is_discrete_cat_core_equiv C d);
 
 // D0b specializes fixed-map core evidence to every hom action.
 symbol discrete_core_homwise
@@ -11674,6 +12185,14 @@ symbol ZeroCat : Grpd
 
 symbol OneCat : Grpd
 ≔ NCat (cat_succ cat_zero);
+
+// A packaged zero-category is a concrete nonliteral groupoidal category.
+symbol zero_cat_is_groupoidal_EQ1
+  (X : τ ZeroCat)
+  : τ (@IsGroupoidalCat_EQ1 (@ncat_carrier cat_zero X))
+≔ @discrete_cat_is_groupoidal_EQ1
+    (@ncat_carrier cat_zero X)
+    (@ncat_evidence cat_zero X);
 
 // Every hom-category of a packaged one-category is discrete.
 symbol one_cat_hom_discrete
@@ -14575,6 +15094,30 @@ symbol catd_transport_func [K : Cat] (E : τ (Catd K))
   (p : τ (Hom K x y))
   : τ (Functor (Fibre_cat E x) (Fibre_cat E y))
 ≔ @fapp1_fapp0 K Cat_cat E x y p;
+
+/*
+  Structured transport along a groupoidal arrow is an equivalence of fibres.
+
+  This is the existing displayed functor action equipped with the image of the
+  arrow's explicit EQ1 evidence; it adds no decoder and no transport rule.
+*/
+symbol groupoidal_fibre_transport_equiv_EQ1
+  [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (D : τ (Catd C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (@OmegaEquivAlong_EQ1
+      Cat_cat
+      (Fibre_cat D x)
+      (Fibre_cat D y)
+      (@fapp1_fapp0 C Cat_cat D x y f))
+≔ @omega_equiv_along_fapp1_fapp0_EQ1
+    C
+    Cat_cat
+    D
+    x y f
+    (@groupoidal_arrow_equiv_along_EQ1 C g x y f);
 
 // Strict object transport, oriented as cut elimination.
 //
@@ -20544,6 +21087,235 @@ rule @path_ind_sec $Z $x
       (@Sigma_proj1_pullback_catd $Z (@hom_ $Z $Z (@id Cat_cat $Z) $x) $D)
       $u
   ↪ @fib_cov_transf $Z $D $x $u;
+
+/*
+  Proof-time reflexive component join for structured path-category induction.
+
+  The section-level `path_ind_sec` fold can expose `fib_cov_transf` before the
+  component projection fires. The two rigid heads below identify the
+  reflexive terminal-source component only after the residual constraints
+  verify the exact PathOut/Sigma-pullback presentation. This is a proof-time
+  comparison, not a runtime reduction or a general constant-component law.
+*/
+unif_rule
+  @tapp0_fapp0
+      $K
+      Cat_cat
+      $F
+      $G
+      $k
+      (@fib_cov_transf (Path_cat $A) $D $x $u)
+  ≡ @Const_func
+      Terminal_cat
+      (@fapp0 (Path_cat $A) Cat_cat $D $x)
+      $u
+  ↪ [
+      $K ≡ @PathOut_cat (Path_cat $A) $x;
+      $F ≡ @Const_catd (@PathOut_cat (Path_cat $A) $x) Terminal_cat;
+      $G ≡ @Sigma_proj1_pullback_catd
+        (Path_cat $A)
+        (@Rep_catd (Path_cat $A) $x)
+        $D;
+      $k ≡ @pathout_obj (Path_cat $A) $x $x (@eq_refl $A $x)
+    ];
+
+/*
+  Literal path-category comparison between structured action and primitive J.
+
+  `path_cat_structured_transport_EQ1` is the existing directed-family action;
+  `path_cat_ind_eqr_transport_EQ1` is primitive right-J with a function-valued
+  motive. The agreement proofs use `ind_eqr`, the functor-identity comparison
+  above, and the reflexive component join. No second eliminator, opaque
+  decoder, or implicit term coercion is introduced.
+*/
+
+// Structured transport applies the displayed functor action along p.
+symbol path_cat_structured_transport_EQ1
+  [A : Grpd]
+  (D : τ (Catd (Path_cat A)))
+  [x y : τ A]
+  (u : τ (Obj (Fibre_cat D x)))
+  (p : τ (@= A x y))
+  : τ (Obj (Fibre_cat D y))
+≔ @fapp0
+    (Hom_cat (Path_cat A) x y)
+    (Fibre_cat D y)
+    (@fib_cov_tapp0_func (Path_cat A) D x y u)
+    p;
+
+// Primitive right-J transport uses a function-valued motive to move u.
+symbol path_cat_ind_eqr_transport_EQ1
+  [A : Grpd]
+  (D : τ (Catd (Path_cat A)))
+  [x y : τ A]
+  (u : τ (Obj (Fibre_cat D x)))
+  (p : τ (@= A x y))
+  : τ (Obj (Fibre_cat D y))
+≔ (@ind_eqr
+      A
+      y
+      (λ z : τ A, λ _ : τ (@= A z y),
+        @Function_grpd (Obj (Fibre_cat D z)) (Obj (Fibre_cat D y)))
+      (λ v : τ (Obj (Fibre_cat D y)), v)
+      x
+      p)
+    u;
+
+// Functorial structured transport agrees propositionally with primitive J.
+symbol path_cat_structured_transport_agrees_ind_eqr_EQ1
+  [A : Grpd]
+  (D : τ (Catd (Path_cat A)))
+  [x y : τ A]
+  (u : τ (Obj (Fibre_cat D x)))
+  (p : τ (@= A x y))
+  : τ (@=
+      (Obj (Fibre_cat D y))
+      (@path_cat_structured_transport_EQ1 A D x y u p)
+      (@path_cat_ind_eqr_transport_EQ1 A D x y u p))
+≔ (@ind_eqr
+      A
+      y
+      (λ z : τ A, λ q : τ (@= A z y),
+        @Pi_grpd
+          (Obj (Fibre_cat D z))
+          (λ v : τ (Obj (Fibre_cat D z)),
+            @=
+              (Obj (Fibre_cat D y))
+              (@path_cat_structured_transport_EQ1 A D z y v q)
+              (@path_cat_ind_eqr_transport_EQ1 A D z y v q)))
+      (λ v : τ (Obj (Fibre_cat D y)),
+        @eq_ap
+          (Hom Cat_cat (Fibre_cat D y) (Fibre_cat D y))
+          (Obj (Fibre_cat D y))
+          (λ H : τ (Hom Cat_cat (Fibre_cat D y) (Fibre_cat D y)),
+            @fapp0 (Fibre_cat D y) (Fibre_cat D y) H v)
+          (@fapp1_fapp0
+            (Path_cat A)
+            Cat_cat
+            D
+            y y
+            (@eq_refl A y))
+          (@id Cat_cat (Fibre_cat D y))
+          (@eq_refl
+            (Hom Cat_cat (Fibre_cat D y) (Fibre_cat D y))
+            (@fapp1_fapp0
+              (Path_cat A)
+              Cat_cat
+              D
+              y y
+              (@eq_refl A y))))
+      x
+      p)
+    u;
+
+// Evaluate the existing structured path-induction section at (y,p).
+symbol path_cat_path_ind_app_EQ1
+  [A : Grpd]
+  (D : τ (Catd (Path_cat A)))
+  [x y : τ A]
+  (u : τ (Obj (Fibre_cat D x)))
+  (p : τ (@= A x y))
+  : τ (Obj (Fibre_cat D y))
+≔ @piapp0
+    (@PathOut_cat (Path_cat A) x)
+    (@Sigma_proj1_pullback_catd
+      (Path_cat A)
+      (@Rep_catd (Path_cat A) x)
+      D)
+    (@path_ind_sec
+      (Path_cat A)
+      x
+      (@Sigma_proj1_pullback_catd
+        (Path_cat A)
+        (@Rep_catd (Path_cat A) x)
+        D)
+      u)
+    (@pathout_obj (Path_cat A) x y p);
+
+// Existing structured path induction agrees with the displayed action.
+symbol path_cat_path_ind_app_agrees_structured_EQ1
+  [A : Grpd]
+  (D : τ (Catd (Path_cat A)))
+  [x y : τ A]
+  (u : τ (Obj (Fibre_cat D x)))
+  (p : τ (@= A x y))
+  : τ (@=
+      (Obj (Fibre_cat D y))
+      (@path_cat_path_ind_app_EQ1 A D x y u p)
+      (@path_cat_structured_transport_EQ1 A D x y u p))
+≔ (@ind_eqr
+      A
+      y
+      (λ z : τ A, λ q : τ (@= A z y),
+        @Pi_grpd
+          (Obj (Fibre_cat D z))
+          (λ v : τ (Obj (Fibre_cat D z)),
+            @=
+              (Obj (Fibre_cat D y))
+              (@path_cat_path_ind_app_EQ1 A D z y v q)
+              (@path_cat_structured_transport_EQ1 A D z y v q)))
+      (λ v : τ (Obj (Fibre_cat D y)),
+        @eq_trans
+          (Obj (Fibre_cat D y))
+          (@path_cat_path_ind_app_EQ1 A D y y v (@eq_refl A y))
+          v
+          (@path_cat_structured_transport_EQ1 A D y y v (@eq_refl A y))
+          (@eq_ap
+            (Hom Cat_cat Terminal_cat (Fibre_cat D y))
+            (Obj (Fibre_cat D y))
+            (λ H : τ (Hom Cat_cat Terminal_cat (Fibre_cat D y)),
+              @fapp0 Terminal_cat (Fibre_cat D y) H Terminal_obj)
+            (@tapp0_fapp0
+              (@PathOut_cat (Path_cat A) y)
+              Cat_cat
+              (@Const_catd (@PathOut_cat (Path_cat A) y) Terminal_cat)
+              (@Sigma_proj1_pullback_catd
+                (Path_cat A)
+                (@Rep_catd (Path_cat A) y)
+                D)
+              (@pathout_obj (Path_cat A) y y (@eq_refl A y))
+              (@fib_cov_transf (Path_cat A) D y v))
+            (@Obj_func (Fibre_cat D y) v)
+            (@eq_refl
+              (Hom Cat_cat Terminal_cat (Fibre_cat D y))
+              (@tapp0_fapp0
+                (@PathOut_cat (Path_cat A) y)
+                Cat_cat
+                (@Const_catd (@PathOut_cat (Path_cat A) y) Terminal_cat)
+                (@Sigma_proj1_pullback_catd
+                  (Path_cat A)
+                  (@Rep_catd (Path_cat A) y)
+                  D)
+                (@pathout_obj (Path_cat A) y y (@eq_refl A y))
+                (@fib_cov_transf (Path_cat A) D y v))))
+          (@eq_sym
+            (Obj (Fibre_cat D y))
+            (@path_cat_structured_transport_EQ1 A D y y v (@eq_refl A y))
+            v
+            (@path_cat_structured_transport_agrees_ind_eqr_EQ1
+              A D y y v (@eq_refl A y))))
+      x
+      p)
+    u;
+
+// Existing structured path induction agrees with primitive right-J transport.
+symbol path_cat_path_ind_app_agrees_ind_eqr_EQ1
+  [A : Grpd]
+  (D : τ (Catd (Path_cat A)))
+  [x y : τ A]
+  (u : τ (Obj (Fibre_cat D x)))
+  (p : τ (@= A x y))
+  : τ (@=
+      (Obj (Fibre_cat D y))
+      (@path_cat_path_ind_app_EQ1 A D x y u p)
+      (@path_cat_ind_eqr_transport_EQ1 A D x y u p))
+≔ @eq_trans
+    (Obj (Fibre_cat D y))
+    (@path_cat_path_ind_app_EQ1 A D x y u p)
+    (@path_cat_structured_transport_EQ1 A D x y u p)
+    (@path_cat_ind_eqr_transport_EQ1 A D x y u p)
+    (@path_cat_path_ind_app_agrees_structured_EQ1 A D x y u p)
+    (@path_cat_structured_transport_agrees_ind_eqr_EQ1 A D x y u p);
 
 // Mathematical computation statement: fixed-x path induction on a
 // Sigma-projection pullback motive reduces to covariant fibre transport.

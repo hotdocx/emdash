@@ -45,7 +45,7 @@ assert [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
   @omega_equiv_left_cell C x y (@iso_evidence_omega_equiv C x y i)
-  ≡ @idtoequiv_cat
+  ≡ @object_path_equiv_D0
       (Hom_cat C x x)
       (@comp_fapp0 C x y x
         (@iso_evidence_from C x y i)
@@ -57,7 +57,7 @@ assert [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
   @omega_equiv_right_cell C x y (@iso_evidence_omega_equiv C x y i)
-  ≡ @idtoequiv_cat
+  ≡ @object_path_equiv_D0
       (Hom_cat C y y)
       (@comp_fapp0 C y x y
         (@iso_evidence_to C x y i)

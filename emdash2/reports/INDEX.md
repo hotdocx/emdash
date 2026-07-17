@@ -44,13 +44,49 @@ notation, implementation plans, and historical decisions.
   cells decode to equality laws, while new laws reify recursive compatibility
   cells through `object_path_equiv_EQ1` without the legacy encoder. D0 lacks
   evidence eta/extensionality, so both evidence round trips remain explicit
-  negatives. The safe Phase-6 boundary is promoted: generic proof-time
-  comparison works at the abstract owner, and rigid Cat/Grpd equality has
-  finite direct EQ1 runtime normal forms. Product specialization rejects a
-  general `lambda p, p` cast; stable former path-view heads are the active
-  design gate, with a primitive nonreducing cast only as an explicit fallback.
-  The July 13
-  plan remains the retained promoted-work ledger and active plan for
+  negatives. Phase 6 is now promoted at the selected boundary: generic
+  proof-time comparison works at the abstract owner, rigid Cat/Grpd equality
+  has finite direct EQ1 runtime normal forms, Product equality retains a stable
+  `ProductPathView` with decoded Sigma carrier, and the Phase-6
+  opposite-specific staged cast established the viable intermediary pattern.
+  The unrestricted `lambda p,p` alias and direct reduced-opposite unifier
+  remain measured-rejected. The resulting 1,848-check/45-file Phase-6 snapshot retains `971/157`
+  warnings and zero/45/27 audit results, with CI passing in 227.500s. Phase 7
+  decoder migration is now active: its first inventory slice removes the
+  unused standalone `cat_univalence` inhabitant and routes its two diagnostics
+  through `cat_univalence_from_decoder`, while retaining computational
+  encoder/decoder operations and the sole specified-inverse capability until
+  their actual consumers migrate. A transparent `object_path_equiv_D0`
+  adapter now also replaces four legacy-encoder occurrences across the two
+  ordinary-iso recursive cells and the D1 next-hom selected-functor/evidence
+  consumer; that selected functor computes to `path_to_hom`. Phase 7 also
+  promotes the uniform carrier-decoded `ObjectPathCastView_EQ1` and two
+  transparent typed-let casts, which pass abstract/Product/opposite/nested/
+  Path/Functor/Cat/Grpd specialization and supersede the opposite-only view.
+  This adds trusted view-level rewrite/unification infrastructure but no
+  opaque encoder, decoder, or cast term. The pre-uniform Phase-7 checkpoint
+  had 1,853 checks across 66 areas, 45 checked files, unchanged `971/157`
+  warnings and zero/45/27 audit results, with CI passing in 222.477s. The
+  promoted uniform-cast checkpoint has 1,857 checks (1,630 positive and 227
+  negative), a 21,115-line kernel with 871 symbols, 597 rewrite rules, and 65
+  unification rules, the same warning/audit inventory, and 45-file CI passing
+  in 269.410s. Two Phase-9 slices are also promoted: general
+  `IsGroupoidalCat_EQ1` evidence now acts homwise through the retained D0b
+  compatibility owner, exposes a selected arrow-to-path inverse and
+  propositional re-inclusion law, and is consumed by exact `IsDiscreteCat`
+  evidence and packaged `ZeroCat` carriers. Existing `path_ind_sec` remains
+  the structured-action owner without a second eliminator. At a literal
+  `Path_cat(A)` source, its application and displayed functor action are now
+  proved propositionally equal to primitive `ind_eqr`; primitive J computes
+  at reflexivity while the directed presentations preserve their runtime
+  normal forms. The two narrow proof-time joins retain `971/157` warnings and
+  zero/45/27 audit results, and add no decoder, encoder, or eliminator. The
+  pre-comparison checkpoint had
+  1,867 checks across 67 areas (1,639 positive and 228 negative), a
+  21,249-line kernel with 878 symbols and unchanged 597/65 rule counts,
+  unchanged `971/157` warnings and zero/45/27 audit results, and 46 passing
+  health/example files; synchronized 46-file CI passes in 217.327s. The July
+  13 plan remains the retained promoted-work ledger and active plan for
   unaffected tracks.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
