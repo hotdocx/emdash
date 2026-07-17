@@ -145,11 +145,13 @@ Both classifier binders are separate native-inductive parameters; grouping
 them makes Lambdapi treat the second classifier as an eliminator index and
 does not support the intended fixed-`A,B` dependent facade. This is the
 formation/introduction/elimination/beta layer only except for the separately
-bounded visible Unit/Boolean/Nat/sum classifier cases above. Empty
-observational identity, broader no-confusion, higher path action, canonicity,
-and categorical initial, coproduct, or natural-number-object properties remain
-separate tasks. The constructor conversion non-collapse diagnostics are local
-regression controls, not no-confusion or normalization theorems.
+bounded visible Unit/Boolean/Nat/sum classifier cases above. The separately
+registered componentwise action of the canonical Sum map is described below.
+Empty observational identity, broader no-confusion, higher action for the
+other elementary formers, canonicity, and categorical initial, coproduct, or
+natural-number-object properties remain separate tasks. The constructor
+conversion non-collapse diagnostics are local regression controls, not no-
+confusion or normalization theorems.
 
 The first named finite dependent record is
 
@@ -208,6 +210,79 @@ field is visible next-dimensional data. Canonical registrations use the
 generic semantic owners; the registered identity acts by `p |-> p`, and
 registered actions compose pointwise with a proved comparison to generic
 action of the composite.
+
+General binary sums now have the first registered elementary-former action.
+The canonical map is defined through the existing eliminator:
+
+```text
+sum_map(f,g)(inl(a)) = inl(f(a))
+sum_map(f,g)(inr(b)) = inr(g(b)),
+
+sum_obs_action(f,g,u,v) : ObsAction(sum_map(f,g)).
+```
+
+Here `u : ObsAction(f)` and `v : ObsAction(g)`. On an inl/inl path the
+selected operation is `obs_action_apply(u,p)`, and on an inr/inr path it is
+`obs_action_apply(v,p)`. Both mixed-tag classifiers reduce to `Empty_grpd`, so
+the selected map returns the impossible input while its coherence proof
+eliminates that input. The same-tag coherence composes the supplied summand
+agreement with `sum_map_inl_eq_ap` or `sum_map_inr_eq_ap`; these latter paths
+are derived for arbitrary component paths by ordinary component J.
+
+The reflexive base has a measured proof-time boundary. Transparent `eq_ap`
+unfolds to generic `ind_eqr`, and the guarded J owner correctly refuses to
+treat component reflexivity as outer Sum reflexivity. Each tag therefore has
+a stable action-basis value and two direct former-specific `unif_rule`s: one
+compares the basis with normalized component reflexivity, and one compares it
+with the exact outer-J normal form. These are classified as semantically
+justified structural-action laws. The theorem explicitly composes the two
+resulting paths; it does not rely on experimental unification transitivity.
+Typed `eq_refl` checks each direct comparison, while runtime conversion and
+the direct outer/component proof-time collapse remain negative. Thus the
+rules do not erase Sum proof provenance, add an arbitrary structured-J beta,
+or supply no-confusion, canonicity, or categorical coproduct structure.
+
+Recursive natural-number equality supplies a second, smaller registered
+former action. Because
+
+```text
+(succ(m) = succ(n)) = (m = n),
+```
+
+the selected operation of `nat_succ_obs_action : ObsAction(succ)` is simply
+`p |-> p`. Its semantic agreement is nevertheless not judgmental at generic
+reflexivity: `eq_refl(n)` and `eq_refl(succ(n))` intentionally retain distinct
+proof provenance. `nat_succ_ap_basis(n)` is a stable intermediary with one
+direct proof-time comparison to each form. Generic `ind_eqr` then extends the
+composite internal path to
+
+```text
+nat_succ_eq_ap(p) : p = eq_ap(succ,p).
+```
+
+Both `unif_rule`s are narrow, typed structural-action laws and are exercised
+independently by `eq_refl`; neither is a runtime reduction. Direct runtime
+conversion and proof-time transitivity remain negative. Thus the registration
+adds iterable selected action for a recursive constructor without adding a
+successor-specific J beta, proof erasure, Nat canonicity, or metatheoretic
+no-confusion.
+
+The recursive classifier also supports a sound first former-specific
+dependent-elimination facade without changing generic J. For an arbitrary
+proof-dependent motive
+
+```text
+P(m,p),  where p : succ(m) = succ(n),
+```
+
+`nat_succ_ind_eqr(P,u,p)` regards the already-exposed proof as `m = n` and
+delegates to ordinary right-based `ind_eqr`. Consequently a component proof
+`eq_refl(n)` computes to the supplied branch `u`, including after application
+of the registered successor action, and the construction iterates by
+reindexing at `succ(n)`. Outer `eq_refl(succ(n))`,
+`nat_succ_ap_basis(n)`, and an open predecessor path do not acquire a beta.
+This is a transparent former-specific facade, not a new rewrite, `unif_rule`,
+global fibrancy package, or arbitrary structured-path J principle.
 
 For the shaped record former,
 
@@ -1441,6 +1516,59 @@ reports. The direct self-universe currently terminates because
 must re-run that normalization and confluence gate. This operational result is
 not a consistency or stratification claim about `Cat_cat : Cat`.
 
+The first native certificate-bisimulation boundary is finite and one-way.
+`OmegaEquivAlongObservation_D0(C,x,y,f)` is the nested Sigma/Product record
+whose fields are the selected left inverse, selected right inverse, recursive
+left cell, and recursive right cell. For evidence `u`,
+`omega_equiv_along_observe_D0(u)` fills that record by calling the existing D0
+owners. The named
+
+```text
+OmegaEquivAlongPathView_D0(u,v)
+  := observe_D0(u) = observe_D0(v)
+```
+
+therefore inherits the established Sigma/PathOver/Product path structure.
+Canonical view reflexivity and the action of a genuine evidence path are
+active, and the D0b next-hom evidence can be observed through the same map.
+There is deliberately no reverse decoder or evidence eta. Installing the
+view as direct public evidence equality recursively reopens the same view in
+the two cell packages: the owner-position source exceeds 30 seconds and the
+canonical self-universe equality exceeds 20 seconds, while the named view
+normalizes within the bound. Thus the finite view is an observation interface,
+not yet extensionality, property-valuedness, truncation, or a replacement for
+the opaque certificate.
+
+Finite directed dimension also supports a genuinely recursive observation
+without reopening the unstratified self-universe. For
+`h : IsNCat(n,C)`, the classifier
+`OmegaEquivAlongDimObservation_D0(n,h,f)` is defined by
+
+```text
+Obs_0(f)       := Unit,
+Obs_(n+1)(f)   := Sigma l, Sigma r,
+                    (Sigma alpha, Obs_n(alpha))
+                  x (Sigma beta,  Obs_n(beta)).
+```
+
+Here `l` and `r` are the selected inverse arrows, while `alpha` and `beta` are
+the selected forward arrows of the left and right D0 cell packages. Their
+recursive observations use `h(x,x)` and `h(y,y)` in the corresponding hom-
+categories, so every call decreases the explicit `CatDim` index. The map
+`omega_equiv_along_dim_observe_D0(n,h,u)` fills this tree solely through the
+four established D0 observation owners. It computes to `tt` at zero; at a
+successor all four projections compute, and for a `OneCat` the next cell
+observations terminate at `tt`.
+
+`OmegaEquivAlongDimPathView_D0(n,h,u,v)` is equality of the resulting finite
+trees. Canonical reflexivity and `eq_ap` action of a genuine certificate path
+are active. This indexed view remains distinct from both the earlier one-layer
+view and public certificate equality. There is no reverse decoder, eta,
+proof-erasure equation, or claim that either finite view is proposition-
+valued. The construction is a recursion-safe representation interface and a
+possible input to a later extensionality design, not an inhabitant of the
+global evidence-property capability.
+
 At the ordinary categorical level:
 
 ```text
@@ -1584,20 +1712,105 @@ The reflexive case computes. The induced ordinary equivalence is decoder-
 owned and is not claimed to expose `fapp0(F)` by runtime conversion.
 
 The dimension map remains an index calculation, not evidence of the recursive
-theorem; `IsNCat(n,C)` still does not inhabit
-`IsObjTruncCat(cat_dim_trunc_level(n),C)` without truncation of the recursive
-omega-equivalence package/evidence and the needed Sigma closure argument.
+theorem. The proof architecture is now executable with its missing premise
+made explicit. The classifier
+
+```text
+OmegaEquivAlongEvidenceProp_D0
+  := Pi C x y f, IsPropGrpd(OmegaEquivAlong_D0(C,x,y,f))
+```
+
+names the global fixed-arrow evidence-property capability but has no selected
+inhabitant. Given `P` of that type,
+`ncat_obj_trunc_from_evidence_prop(P,n,C,h)` proves
+`IsObjTruncCat(cat_dim_trunc_level(n),C)`. At zero it computes to the stored
+`is_discrete_cat_obj_set(h)`. At a successor it applies the induction
+hypothesis to `Hom_cat(C,x,y)`, raises each proposition-valued certificate
+fibre to the native dimension level, uses `is_trunc_sigma` to truncate the
+public `OmegaEquiv(C,x,y)` package, and transports back along
+`cat_univalence_type_equiv(C,x,y)`. This separates the completed induction from
+the still-open construction of `P`; neither the one-layer nor the dimension-
+indexed observation view is an inhabitant, and no rewrite or proof-time
+equation erases the capability.
+
+Consequently bare `IsNCat(n,C)` still does not inhabit
+`IsObjTruncCat(cat_dim_trunc_level(n),C)` without the recursive certificate-
+property result.
 `NCat(n)` packages a carrier category and retained
 `IsNCat(n,carrier)` evidence; `ZeroCat` and `OneCat` are its zero and successor-
 zero aliases. Constructor decoding and both projections compute, while package
 eta and proof-field erasure do not. In particular, for `X : OneCat`,
 `one_cat_hom_discrete(X,x,y)` exposes discreteness of `Hom(x,y)`, and
 `one_cat_hom_core_homwise(X,x,y,f,g)` applies the promoted discrete theorem at
-the next hom level between parallel arrows. Formation and the index bridge do
-not prove
-`IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)`, and no ordinary-iso
-univalence claim is installed for `OneCat`; both require their separately
-recorded dependencies.
+the next hom level between parallel arrows. Formation and the index bridge
+alone do not prove
+`IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)`. With explicit `P`,
+the theorem gives a one-category's object classifier 1-truncation.
+
+There is now a sound one-sided bridge from ordinary isomorphism evidence to
+the recursive layer. For
+
+```text
+i : IsoEvidence(C,x,y),
+```
+
+`iso_evidence_omega_along_D0(i)` selects the ordinary inverse in both inverse
+slots and encodes `iso_evidence_left(i)` and `iso_evidence_right(i)` with
+`idtoequiv_cat` in the two endomorphism hom-categories. Packaging this evidence
+gives `iso_evidence_omega_equiv(i) : OmegaEquiv(C,x,y)`. Its forward arrow,
+both inverse arrows, and both recursive cells compute through those owners.
+The lift of explicit ordinary reflexivity compares with canonical recursive
+reflexivity only at proof time through one semantically backed `unif_rule`;
+runtime provenance remains distinct. Generic J then proves that lifting
+`idtoiso_cat(p)` agrees propositionally with `idtoequiv_cat(p)`.
+
+For `X : OneCat`, `one_cat_iso_path(X,i)` decodes that lifted omega-equivalence
+through the canonical categorical decoder, and
+`one_cat_iso_path_idtoiso(X,p)` proves decoder after encoder. An arbitrary
+omega-equivalence still stores separate left and right inverse arrows, but its
+recursive cells now supply their missing comparison constructively.
+`omega_equiv_along_left_cell_to_D0` and
+`omega_equiv_along_right_cell_from_D0` expose the selected directed cell
+arrows. Stable post- and prewhiskering, joined by the explicit propositional
+associator `omega_equiv_along_inverse_assoc_path_D0`, compose to
+`omega_equiv_along_left_to_right_D0 : left_inv -> right_inv` in the inverse
+hom-category. This explicit path/cell construction is necessary because a
+direct `Hom_func` composite leaves unit and associativity comparisons to
+non-transitive proof-time unification.
+
+For a packaged one-category, `one_cat_omega_inverse_path(X,e)` sends that cell
+through hom discreteness and obtains `left_inv = right_inv`. At canonical
+omega reflexivity the generic directed comparison reduces to the identity
+2-cell through existing generic owners; its decoded equality deliberately
+does not runtime-collapse to `eq_refl`, so decoder provenance remains visible.
+No new rewrite or `unif_rule` identifies the inverses.
+
+The path now transports the decoded right recursive law from
+`f o right_inv = id` to `f o left_inv = id` through ordinary `eq_ap` and
+`eq_trans`. Together with the decoded left law this constructs
+`one_cat_omega_iso_evidence(X,e) : IsoEvidence(C,x,y)`. Reapplying this
+construction to an ordinary lift preserves the forward arrow and inverse
+definitionally. Its two law proofs are paths between arrows in discrete
+endomorphism hom-categories, so `discrete_cat_path_proof` compares them using
+the stored set truncation. The promoted nested-Sigma path view then gives
+`one_cat_omega_iso_lift_retract`; no proof erasure or package eta is needed.
+
+Encoder agreement for the ordinary lift and the categorical decoder's second
+round trip compose with that retract to prove
+`one_cat_idtoiso_iso_path(X,i)`. Thus `one_cat_iso_path_idtoiso` and
+`one_cat_idtoiso_iso_path` are the two specified inverse laws. The former
+global `CatIsoUnivalenceByDecoder(C)` could not package them because its type
+hardcoded the legacy `iso_evidence_path` decoder. The selected owner is instead
+`OneCatIsoUnivalenceByDecoder(X)`, indexed by the evidence-retaining OneCat
+package and its `one_cat_iso_path`. It derives the contractible-fibre
+`one_cat_iso_univalence(X)` and the named
+`one_cat_iso_type_equiv(X,x,y)`. The selected inverse and right path compute;
+the contraction-derived left path has the same propositional endpoint but
+remains runtime-distinct from the directly constructed first round trip. The
+unused arbitrary-`Cat` capability inhabitants and hardcoded classifier are
+retired; the general capability type and `isotoid_cat` eliminator remain and
+are exercised by the scoped inhabitant. `iso_evidence_path` remains only as a
+legacy reflexive/Product computation owner.
 
 The distinction between `IsoEvidence` and `OmegaEquiv` is intentional.
 Ordinary isomorphism data is the 1-categorical staging layer; recursive
@@ -1861,6 +2074,40 @@ vocabulary.
 | encode/decode categorical-universe identity | `cat_path_encode p` / `cat_path_decode e` |
 | categorical identity functor/evidence | `cat_path_functor e` / `cat_path_evidence e` |
 | categorical identity next-hom action | `cat_path_fapp1 e x y` |
+| fixed-arrow evidence observation record | `OmegaEquivAlongObservation_D0 f` / `omega_equiv_along_observe_D0 u` |
+| finite fixed-arrow evidence path view | `OmegaEquivAlongPathView_D0 u v` |
+| evidence-path action on the finite view | `omega_equiv_along_path_view_encode_D0 p` |
+| dimension-indexed fixed-arrow observation | `OmegaEquivAlongDimObservation_D0 n h f` / `omega_equiv_along_dim_observe_D0 n h u` |
+| first-class dimension-indexed cell observation | `OmegaEquivDimObservation_D0 n h x y` |
+| dimension-indexed evidence path view | `OmegaEquivAlongDimPathView_D0 n h u v` |
+| evidence-path action on the indexed view | `omega_equiv_along_dim_path_view_encode_D0 n h p` |
+| canonical binary-sum map | `sum_map f g` |
+| registered componentwise binary-sum action | `sum_obs_action f g u v` |
+| selected binary-sum action map/coherence | `sum_obs_action_map f g u v` / `sum_obs_action_coherence f g u v` |
+| component/semantic Sum action comparison | `sum_map_inl_eq_ap p` / `sum_map_inr_eq_ap p` |
+| stable successor-action proof basis | `nat_succ_ap_basis n` |
+| successor component/semantic action comparison | `nat_succ_eq_ap p` |
+| registered Nat successor action | `nat_succ_obs_action` |
+| selected Nat successor map/coherence | `nat_succ_obs_action_map` / `nat_succ_obs_action_coherence` |
+| former-specific successor path induction | `nat_succ_ind_eqr P u p` |
+| global fixed-arrow evidence-property capability | `OmegaEquivAlongEvidenceProp_D0` |
+| proposition lift to a native categorical dimension | `prop_is_trunc_cat_dim n h` |
+| conditional directed object-truncation theorem | `ncat_obj_trunc_from_evidence_prop P n h` |
+| ordinary iso to fixed-arrow omega evidence | `iso_evidence_omega_along_D0 i` |
+| ordinary iso to public omega-equivalence package | `iso_evidence_omega_equiv i` |
+| path-encoder agreement for the ordinary lift | `iso_evidence_omega_equiv_idtoiso p` |
+| OneCat-scoped ordinary-iso decoder | `one_cat_iso_path X i` |
+| OneCat decoder-after-encoder round trip | `one_cat_iso_path_idtoiso X p` |
+| decoded omega inverse laws | `omega_equiv_left_law e` / `omega_equiv_right_law e` |
+| OneCat transported right law | `one_cat_omega_right_law_at_left X e` |
+| reconstruct ordinary evidence from omega evidence | `one_cat_omega_iso_evidence X e` |
+| ordinary lift reconstruction path | `one_cat_omega_iso_lift_retract X i` |
+| OneCat encoder-after-decoder round trip | `one_cat_idtoiso_iso_path X i` |
+| OneCat scoped ordinary-iso capability | `one_cat_iso_univalence X` |
+| OneCat path/isomorphism type equivalence | `one_cat_iso_type_equiv X x y` |
+| D0 selected left/right cell arrows | `omega_equiv_along_left_cell_to_D0 u` / `omega_equiv_along_right_cell_from_D0 u` |
+| D0 selected-inverse directed comparison | `omega_equiv_along_left_to_right_D0 u` |
+| OneCat selected-inverse path | `one_cat_omega_inverse_path X e` |
 | inverse type equivalence | `type_equiv_sym e` |
 | composite type equivalence `eBC ∘ eAB` | `type_equiv_comp eBC eAB` |
 | groupoid univalence capability | `GrpdUnivalence` / `grpd_univalence_by_decoder` |

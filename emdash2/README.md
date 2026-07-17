@@ -78,7 +78,28 @@ The checked kernel currently includes:
   D0b next-hom consumer reuse that package. Generic `eq_refl` remains a
   distinct proof form so literal J and path-action beta are preserved; the
   unstratified self-universe normal form terminates at opaque fixed-arrow
-  evidence. Product
+  evidence. A finite `OmegaEquivAlongPathView_D0(u,v)` now compares the nested
+  Sigma/Product records of the two selected inverse arrows and recursive cell
+  packages; genuine certificate paths act on that view, but there is no
+  decoder or eta principle. The direct recursive certificate-equality rule is
+  rejected because both owner-position checking and self-normalization exceed
+  their bounds, so property-valuedness remains separate. The directed-
+  dimension theorem is now executable conditionally: a named global
+  `OmegaEquivAlongEvidenceProp_D0` capability is retained as an explicit input,
+  while `ncat_obj_trunc_from_evidence_prop` computes from the discrete base and
+  recursively closes each public omega-equivalence Sigma package before
+  transporting through categorical univalence. No inhabitant of that
+  capability is inferred from the finite view, so bare `IsNCat` evidence still
+  does not prove object truncation. A separate dimension-indexed observation
+  now makes the recursive certificate shape executable without changing that
+  boundary: `OmegaEquivAlongDimObservation_D0(n,h,f)` is Unit at dimension zero
+  and at a successor retains both inverse arrows plus recursively observed
+  inverse cells in the smaller-dimensional hom-categories. Its observation
+  map reuses the four D0 owners, and its path view has reflexivity and one-way
+  path action. `ZeroCat` and `OneCat` controls normalize, but there is still no
+  reverse decoder, eta, evidence-property inhabitant, or public certificate-
+  equality rule.
+  Product
   isomorphism and omega-equivalence evidence retain their componentwise
   constructor provenance even when both components are reflexive; projections
   and decoders compute componentwise without collapsing to the distinct
@@ -100,13 +121,38 @@ The checked kernel currently includes:
   adequacy between parallel arrows. Fixed-map `OmegaEquivAlong(F)` now induces
   an ordinary equivalence of object classifiers and transports
   `IsObjTruncCat`; the index still does not itself prove the recursive
-  `IsNCat` object-truncation theorem, and ordinary-iso univalence also remains
-  separate;
+  `IsNCat` object-truncation theorem. Ordinary strict isomorphism evidence now
+  has a backed lift to recursive `OmegaEquiv`: both inverse arrows reuse the
+  ordinary inverse and the two inverse equations encode as next-hom cells. A
+  packaged one-category consequently has a derived `one_cat_iso_path` decoder
+  and the decoder-after-`idtoiso_cat` round trip. Recursive inverse cells now
+  also construct `omega_equiv_along_left_to_right_D0`, and OneCat hom
+  discreteness decodes it through `one_cat_omega_inverse_path` without
+  identifying the two inverse observations by rewrite or proof-time fiat.
+  The decoded right law transports along that path, reconstructing ordinary
+  `IsoEvidence` from arbitrary OneCat omega evidence. Hom discreteness makes
+  its two inverse-law proof fields proposition-valued, so the existing nested-
+  Sigma path view proves reconstruction and the second round trip. The derived
+  `one_cat_iso_univalence` and `one_cat_iso_type_equiv` are therefore fully
+  OneCat-scoped. The unused arbitrary-category capability inhabitants and
+  hardcoded classifier are retired; the distinct legacy decoder remains only
+  for its reflexive/Product compatibility computation;
 - registered `ObsAction`/`ObsDAction` packages whose selected open-map or
   dependent-section action carries next-dimensional agreement with semantic
   `eq_ap`/`eq_apd`; identity action and registered composition compute,
   PathRecord maps act on shaped paths, and the dependent witness field acts
-  through `PathOver`, without granting an arbitrary-constructor J beta;
+  through `PathOver`. The canonical binary-sum map now lifts registrations on
+  both summands to a componentwise action: equal tags delegate to their
+  supplied action, mixed tags use Empty, and agreement with generic `eq_ap`
+  remains propositional and runtime-distinct. Recursive Nat equality now also
+  has a registered successor action: the selected map retains the exposed
+  predecessor path `p`, while a stable proof-time basis and generic J prove
+  agreement with `eq_ap(succ)`. The former-specific `nat_succ_ind_eqr` facade
+  then accepts arbitrary proof-dependent successor-path motives and computes
+  only when the exposed predecessor proof is component reflexivity, by routing
+  through the existing generic J owner. Outer reflexivity and the action basis
+  remain noncomputational; this is not a global fibrancy package. Neither
+  action erases proof provenance;
 - Cat-valued profunctors, reindexing, tensor, implication, computational
   comparison, weighted-limit/colimit staging, and adjunction mates;
 - a primitive directed join slice, synthetic PathOut/path induction, and a

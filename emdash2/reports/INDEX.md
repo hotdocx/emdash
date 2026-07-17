@@ -67,9 +67,11 @@ notation, implementation plans, and historical decisions.
   object truncation and scoped ordinary-iso univalence retain their explicit
   later dependencies rather than being smuggled into formation. The current
   Phase 10 now promotes registered `ObsAction`/`ObsDAction`, sound semantic
-  agreement, identity/composite computation, PathRecord open-map action, and
-  dependent witness-field transport with synchronized 18-file CI. The current
-  bounded extension promotes the independently statused general binary-sum
+  agreement, identity/composite computation, PathRecord open-map action,
+  dependent witness-field transport, componentwise binary-sum action, and the
+  first recursive-inductive registration: Nat successor retains the exposed
+  predecessor path while agreeing propositionally with generic `eq_ap`. The
+  independently statused general binary-sum
   carrier/classifier, dependent eliminator, both betas, and non-collapse
   control, and the next bounded prerequisite adds the recursive
   `CatDim -> TruncLevel` object-level index without claiming the still-blocked
@@ -157,8 +159,8 @@ notation, implementation plans, and historical decisions.
   retaining 971/157 warnings and zero/45/27 audit. No rule or `unif_rule` is
   added. The final gate passes with 182.160s of measured checking time
   (189.18s wall time). The bounded categorical comparison has now selected
-  and promoted the canonical direct owner pending its final synchronized
-  gates: public `@=(Obj Cat_cat,A,B)` reduces to
+  and promoted the canonical direct owner with synchronized 35-file CI:
+  public `@=(Obj Cat_cat,A,B)` reduces to
   `CatPathView(A,B) := OmegaEquiv(Cat_cat,A,B)`. Decoder-owned encode/decode
   and propositional round trips, explicit package reflexivity, functor and
   evidence projections, reflexive Product action, and a D0b next-hom consumer
@@ -167,8 +169,145 @@ notation, implementation plans, and historical decisions.
   opaque fixed-arrow certificate; warnings remain 971/157 and the strict
   audit zero/45/27. Generic `eq_refl` remains distinct: collapsing it adds
   three reports and breaks the inherited object-path `eq_ap` consumer. One
-  classifier rule and no `unif_rule` are added. Catalog, health, full examples,
-  and synchronized CI remain the closeout gates.
+  classifier rule and no `unif_rule` are added. The closed snapshot has 1,539
+  checks across 53 areas, a 17,989-line/750-symbol/575-rule/51-unification-
+  rule kernel, and 1,389 positive diagnostics. CI passes with 165.477s of
+  measured checking time (171.88s wall time). The next bounded Phase-13 slice
+  selects the finite one-layer `OmegaEquivAlongPathView_D0`: its nested
+  Sigma/Product observation record reuses both inverse-arrow and recursive-
+  cell owners, canonical reflexivity and one-way evidence-path action compute,
+  and D0b next-hom evidence is observable through it. The direct recursive
+  equality candidate is rejected because its owner-position source exceeds
+  30 seconds and its append-only canonical self-universe control exceeds 20
+  seconds; the finite control passes. Thirteen positive/three negative active
+  diagnostics and a 10-positive/3-negative reviewer pass with unchanged
+  971/157 warnings and zero/45/27 audit. Five semantic symbols add no rule or
+  `unif_rule`. The closed snapshot has 1,555 checks across 54 areas, an
+  18,104-line/755-symbol/575-rule/51-unification-rule kernel, and 1,402
+  positive diagnostics across 36 measured files. The full reviewer sweep and
+  synchronized CI pass with 186.423s of measured checking time (193.35s wall
+  time). No reverse decoder, eta, property-valuedness, or truncation theorem is
+  inferred. Dependency review selects a bounded conditional
+  `IsNCat -> IsObjTruncCat` induction next: it will consume an explicit global
+  fixed-arrow evidence-property capability, completing the already-ready
+  Sigma/univalence proof architecture without pretending that the opaque
+  certificate or finite view supplies that capability. That conditional owner
+  is now promoted pending final gates: `OmegaEquivAlongEvidenceProp_D0` names
+  but does not inhabit the premise; `prop_is_trunc_cat_dim` lifts it; and
+  `ncat_obj_trunc_from_evidence_prop` computes through the discrete base and
+  homwise Sigma/univalence successor. Eleven positive/four negative diagnostics
+  and an 8-positive/4-negative reviewer pass with unchanged 971/157 warnings
+  and zero/45/27 audit. A typed `eq_refl` negative confirms that no
+  `unif_rule` erases distinct capability inputs. The closed snapshot has 1,570
+  checks across 55 areas, an 18,173-line/758-symbol/577-rule/51-unification-
+  rule kernel, and 1,413 positive diagnostics across 37 measured files. The
+  full reviewer sweep and synchronized CI pass with 198.816s of measured
+  checking time (206.34s wall time). The dependency-ready representation
+  continuation is now completed/promoted: the explicit
+  `CatDim`/`IsNCat`-indexed observation is Unit at zero and at successor stores
+  both inverse arrows and recursively observed D0 cells at the smaller
+  dimension. All four projection/recursion owners, finite path reflexivity and
+  one-way action, ZeroCat erasure, and OneCat termination pass. Seventeen
+  positive/five negative diagnostics and a 12-positive/4-negative reviewer
+  preserve 971/157 warnings and zero/45/27 audit; six symbols and two two-
+  equation rule families add no `unif_rule`. The snapshot has 1,592 checks
+  across 56 areas, an 18,452-line/764-symbol/579-rule/51-unification-rule
+  kernel, and 1,430 positive diagnostics across 38 measured files. There is no
+  reverse decoder, eta, public certificate equality, or evidence-property
+  inhabitant. The full reviewer sweep and synchronized 38-file CI pass with
+  201.708s of measured checking time (212.59s wall time). The next independent
+  elementary-action slice is now completed/promoted: eliminator-owned
+  `sum_map` lifts two registered summand
+  actions through `sum_obs_action`, using Empty for mixed tags and explicit
+  propositional agreement with generic `eq_ap`. A direct two-action
+  proof-time equation failed because transparent `eq_ap` unfolds first; one
+  stable reflexive basis per tag plus two direct former-specific `unif_rule`s
+  per basis is selected instead, and the arbitrary theorem explicitly
+  composes those paths rather than assuming unification transitivity. Twenty-
+  one positive/six negative diagnostics and a 13-positive/4-negative reviewer
+  pass with unchanged 971/157 warnings and zero/45/27 audit. Thirteen symbols
+  and four proof-time equations add no runtime rewrite; the current snapshot
+  has 1,619 checks across 57 areas, an 18,883-line/777-symbol/579-rule/55-
+  unification-rule kernel, 1,451 positive diagnostics, and 39 measured files;
+  synchronized CI passes with 129.250s of measured checking time.
+  Runtime proof provenance, arbitrary structured J/fibrancy, proof erasure,
+  no-confusion/canonicity, coproduct structure, and other former actions remain
+  separate. The bounded `OETU-ONECAT-ISO` probe has now implemented its sound
+  one-sided prerequisite. Strict `IsoEvidence` constructs recursive D0 omega
+  evidence by encoding both inverse equations as categorical paths; a single
+  semantically backed proof-time comparison handles reflexive evidence after a
+  runtime fold added four unjoinable reports. The canonical decoder gives a
+  OneCat-scoped path and the decoder-after-`idtoiso_cat` round trip without
+  using frozen global `cat_iso_univalence`. Twelve positive/six negative
+  diagnostics and a nine-positive/four-negative reviewer pass at unchanged
+  971/157 warnings and zero/45/27 audit. The snapshot has 1,637 checks across
+  58 areas, a 19,062-line/782-symbol/581-rule/56-unification-rule kernel,
+  1,463 positive diagnostics, and 40 measured files; full examples and
+  synchronized CI pass with 281.823s of measured checking time. At that
+  checkpoint the full scoped capability had an explicit next prerequisite:
+  arbitrary omega evidence has separate left/right inverse arrows, so it
+  needed a directed comparison and discrete-hom path before right-law
+  transport and the nested-Sigma reverse round trip. No rewrite or unbacked
+  `unif_rule` identifies those inverses, and the frozen arbitrary-category
+  interface remains unused by the new owners.
+  The dependency-ready inverse-comparison continuation is now implemented in
+  the active kernel. The rejected direct `Hom_func` composition exposed two
+  unit comparisons and associativity that cannot depend on unification
+  transitivity; the selected construction instead uses stable post/pre
+  whiskering plus an explicit propositional associator. It produces
+  `omega_equiv_along_left_to_right_D0` generically and
+  `one_cat_omega_inverse_path` through OneCat hom discreteness, with no new
+  rewrite or `unif_rule`. Nine positive/four negative diagnostics and six
+  positive/three negative reviewer additions bring the current snapshot to
+  1,650 checks across 59 areas and the reviewer to fifteen positive/seven
+  negative statements. Warnings remain 971/157, the audit remains zero/45/27,
+  health checks 40 files at 19,373 kernel lines/790 symbols/581 rules/56
+  unification rules and 1,472 positive diagnostics, and full examples plus
+  synchronized CI pass with 139.872s of measured checking time. Full scoped
+  univalence then waited only on right-law transport and the nested-Sigma
+  reverse evidence round trip, not on inverse comparison.
+  That continuation is now completed in the active kernel. Decoded recursive
+  laws, ordinary equality transport, and the inverse path reconstruct
+  `IsoEvidence`; OneCat hom discreteness compares both inverse-law proof
+  fields, and the promoted nested-Sigma path owner proves reconstruction after
+  the ordinary lift. The resulting second round trip derives the new
+  OneCat-indexed specified-inverse capability, contractible-fibre
+  `one_cat_iso_univalence`, and `one_cat_iso_type_equiv`. A rejected packaging
+  through the global decoder classifier is recorded at `132624`: its type
+  hardcodes the frozen `iso_evidence_path`. The selected scoped classifier
+  passes owner quiet/warning logs `133706`/`133718`, inherited-suite logs
+  `133745`/`133751`, and the 32-positive/12-negative reviewer log `134212`.
+  Ten symbols, no rewrite, and no `unif_rule` preserve 971/157 warnings and
+  zero/45/27 audit; thirteen positive/two negative diagnostics bring the
+  catalog to 1,678 checks across 61 areas with zero unclassified checks.
+  Health passes across 40 files at 19,883 kernel lines/804 symbols/581
+  rules/56 unification rules with 1,495 positive diagnostics, and full
+  examples pass. Synchronized CI passes with 109.546s measured checking time.
+  The scoped construction is closed. The inventory-backed retirement is now
+  promoted: `cat_iso_univalence`, `cat_iso_univalence_by_decoder`, and
+  `CatIsoUnivalenceByDecoder` had no kernel consumer and are removed, while
+  generic `isotoid_cat` is migrated to the scoped inhabitant and the
+  still-consumed `iso_evidence_path` Product compatibility owner remains.
+  Owner/check quiet logs end in `140150`/`140155`, warning logs in
+  `140205`/`140228`, and the 33-positive/11-negative reviewer in `140406`.
+  Warnings remain 971/157, audit remains zero/45/27, and the catalog has
+  1,675 checks/61 areas. Health passes across 40 files at 19,859 kernel
+  lines/801 symbols/581 rules/56 unification rules with 1,493 positive
+  diagnostics, and full examples plus synchronized CI pass; CI records
+  212.799s measured checking time. The retirement slice is closed.
+  The next former-action continuation is now completed/promoted. Recursive Nat
+  successor equality exposes its predecessor path, so
+  `nat_succ_obs_action` selects `p |-> p`; a stable basis has two direct,
+  narrowly typed proof-time comparisons with component and outer reflexivity,
+  and generic `ind_eqr` derives arbitrary agreement with `eq_ap(succ)` without
+  runtime collapse or unification transitivity. Fourteen positive/five negative
+  diagnostics and an 11-positive/5-negative reviewer pass. Seven symbols and
+  two `unif_rule`s add no runtime rewrite, preserve 971/157 warnings and the
+  zero/45/27 audit, and bring the snapshot to 1,694 checks/62 areas, a
+  19,988-line/808-symbol/581-rule/58-unification-rule kernel, 1,507 positive
+  diagnostics, and 41 measured files. Full examples and synchronized CI pass;
+  CI records 220.269s measured checking time. No successor-specific J beta,
+  Nat canonicity, or proof erasure is claimed.
 - `REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md`:
   active incremental `DefIso`, hom-action, and `ProfComparison` migration.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:

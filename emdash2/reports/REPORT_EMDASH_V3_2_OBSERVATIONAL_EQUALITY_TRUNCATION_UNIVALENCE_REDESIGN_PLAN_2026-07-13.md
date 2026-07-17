@@ -7,10 +7,10 @@ Depends-On: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23; REPORT_EMD
 Supersedes: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23 as the forward implementation master plan; the predecessor remains the historical decision record for its promoted kernel slices
 Side-Task-Ledger: #side-task-ledger
 Implementation-Handoff: #implementation-handoff-start-here
-Current-Implementation-Slice: OETU-UNIVERSE-EQUALITY-CAT-DIRECT / bounded Phase-13 categorical-universe comparison selected and promoted the canonical direct classifier owner on 2026-07-16, with final catalog/health/example/CI synchronization pending; public `@=(Obj Cat_cat,A,B)` reduces to `CatPathView(A,B) := OmegaEquiv(Cat_cat,A,B)`, while canonical package reflexivity, decoder-owned encode/decode and propositional round trips, functor/evidence projections, reflexive Product action, and an iterable D0b next-hom consumer reuse promoted owners; 22 positive/8 negative diagnostics, a 15-positive/6-negative reviewer, finite self-universe normalization, unchanged 971/157 warnings, and zero/45/27 audit are measured; generic `eq_refl` remains distinct because the rejected collapse adds three reports and breaks the existing object-path `eq_ap` consumer; one classifier rule and no `unif_rule` are added; excludes a stratified direct-groupoid retry, arbitrary structured action/additional J or fibrancy claims, recursive omega-equivalence certificate redesign/truncation, the `IsNCat -> IsObjTruncCat` theorem, OneCat iso-univalence, truncation reflectors/HITs, global equality reflection, metatheory, and module splitting
+Current-Implementation-Slice: OETU-OBS-NAT-SUCC-ELIM owner-position probe selected 2026-07-16 after OETU-OBS-NAT-SUCC-ACTION closed by synchronized 41-file CI in 220.269s; test a former-specific `nat_succ_ind_eqr` facade whose public proof is indexed by successor equality, whose arbitrary proof-dependent motive is eliminated by the existing generic `ind_eqr` owner on the exposed predecessor equality, and whose component-reflexivity beta computes without a new rewrite or `unif_rule`; retain outer `eq_refl(succ n)`, the stable action basis, and generic `ind_eqr` as distinct runtime forms, and claim neither a global fibrancy package nor arbitrary-constructor J
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
 Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f6396-f48c-75a0-852b-71a827ee0a7f; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f644e-f14e-70f1-9402-19d688282343; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f66fe-80db-78b3-b78a-7b13aa48adeb
-Status: active living staged redesign and implementation master plan; Candidates G/A/B/C/H, packaged truncated universes, both path-category slices, structural Sigma/PathRecord compatibility, ordinary `TypeEquiv` algebra, groupoid decoder coherence, Candidates D0/D0b/D1, Phase 8 indexed adjunction, both Phase 9 discrete/directed-formation subgates, the dimension-to-truncation index, the Phase 10 registered-action subgate, the general binary-sum extension, general `TypeEquiv` truncation invariance, its fixed-map categorical object-truncation consumer, constructive one-step truncation monotonicity, truncation-evidence property-valuedness, arbitrary-level dependent-Pi and same-level dependent-Sigma closure, truncated-universe carrier/evidence package-path control, restricted decoder-mediated package univalence, the expected `(n+1)` package-universe level theorem, Product reflexivity-provenance cleanup, the visible Boolean/Unit classifiers, the generic-J subject-reduction guard, recursive visible Nat equality, general visible-sum equality, the finite groupoid-universe identity-view fallback, and the direct categorical-universe identity classifier are promoted with owner-position and active diagnostics; synchronized 33-file Sum CI closes the conservative visible-constructor lane and synchronized 34-file CI closes the groupoid view at 1,509 checks, while direct public groupoid-universe equality is rejected at the current unstratified self-universe boundary because normalization recursively reopens itself; the categorical direct owner is active pending final synchronized gates and is finite only at the currently opaque fixed-arrow certificate boundary; `IsObjTruncCat` remains distinct from recursive `IsNCat`, whose evidence-retaining `ZeroCat`/`OneCat` packages now drive a next-hom consumer, while the implication and scoped iso-univalence wait specifically on recursive omega-equivalence certificate representation/evidence comparison; fibrancy remains prerequisite on a sound classifier/motive capability and selected arbitrary-constructor beta, the hybrid generic/shaped equality contract remains explicit, and universe metatheory remains a later boundary
+Status: active living implementation master plan; the architecture MVP, foundational implementation skeleton, and Foundational HoTT compatibility MVP are achieved, including full OneCat-scoped ordinary-iso univalence, retirement of the unused global capability inhabitants, and registered componentwise Sum plus recursive Nat successor action. The synchronized Nat-action snapshot is 1,694 checks/62 areas, 971/157 warnings, zero/45/27 audit counts, a 19,988-line/808-symbol/581-rule/58-unification-rule kernel, 1,507 positive diagnostics, and 41 files with CI in 220.269s. `OETU-OBS-NAT-SUCC-ELIM` is the active bounded probe. The full original computational-foundation endpoint remains partial: recursive certificate extensionality and unconditional `IsNCat` object truncation are representation-blocked; general fibrancy/structured J and H2/HITs lack selected capabilities or triggers; direct groupoid self-universe identity and recursive certificate equality remain normalization-rejected; and consistency, stratification, normalization, canonicity, and a semantic model remain deferred metatheory.
 
 ## Goal
 
@@ -110,8 +110,17 @@ The later adequacy matrix gives the complete per-former inventory.
 | --- | --- |
 | Architecture MVP | Every H0/H1/H2/Omega0 row has an honest owner, prerequisite, or deferral, and no selected interface blocks the wanted endpoint. |
 | Foundational implementation skeleton | H0 formation, decoding, elimination, beta, ordinary identity, and negative diagnostics are active; the exact H1/Omega0 boundary is recorded. |
-| Foundational HoTT MVP | H1 is active, including standard Pi/Sigma/record path compatibility and ordinary equivalence/univalence algebra, and one integrated fixed-map Omega0 univalence/action witness passes. |
+| Foundational HoTT compatibility MVP | H1 is active, including standard Pi/Sigma/record path compatibility and ordinary equivalence/univalence algebra, and one integrated fixed-map Omega0 univalence/action witness passes. This name does not claim metatheoretic soundness or H2/HIT completion. |
 | H2/HIT completion | Truncation reflectors and representative higher constructors have their restricted eliminators and computation; this is intentionally later. |
+
+The 2026-07-16 post-OneCat re-audit classifies the architecture MVP,
+foundational implementation skeleton, and Foundational HoTT compatibility MVP
+as achieved. H0 formation/decoding/elimination/beta/identity diagnostics are
+active; the H1 Pi/Sigma/record path and univalence compatibility surface is
+active; and the D0/D0b/D1 witness iterates through a next hom level. This is an
+executable compatibility milestone, not completion of the wanted endpoint:
+H2/HITs, broader former action/fibrancy, certificate extensionality, universe
+metatheory, and global normalization/canonicity remain explicit later tracks.
 
 Direct computational universe identity is not an extra hidden gate on the
 foundational HoTT MVP. H1 requires the standard `idtoequiv`/decoder round trips
@@ -120,26 +129,40 @@ equivalence/bisimulation data belongs to the later full-observational track.
 
 ### Current handoff status and feasibility verdict
 
-This report is now the active forward implementation master plan. Candidates
-G/A/B/C/H, the Phase-3 packaged universes, both path-category slices,
-structural paths, ordinary equivalence algebra, both decoder slices,
-D0/D0b/D1, Phase 8 indexed adjunction, one-step truncation monotonicity, and
-truncation-evidence property-valuedness, Pi/Sigma closure, package-path
-control, restricted package univalence, and the expected package-universe
-level theorem, Product reflexivity-provenance cleanup, and the visible Boolean
-and Unit equality classifiers are promoted. Recursive Nat equality and the
-generic-J subject-reduction guard discovered by its owner probe are promoted
-with synchronized 32-file CI. General visible-sum equality is active and
-its synchronized 33-file CI passes with 161.044s of measured checking time
-(167.96s wall time). The conservative visible-constructor lane is therefore
-closed, and the first bounded Phase-13 groupoid-universe identity comparison
-selects the named finite view below. Its synchronized 34-file CI passes with
-182.160s of measured checking time (189.18s wall time), so the categorical-
-universe owner comparison became the dependency-ready Phase-13 continuation.
-That comparison selects and promotes the direct canonical classifier: public
-category-universe equality now exposes the fixed-map `OmegaEquiv` package,
-with retained generic-reflexivity provenance and final synchronized gates
-pending.
+This report is now the active forward implementation master plan. The H0/H1
+compatibility surface, truncation-property/package universe layer, D0/D0b/D1
+fixed-arrow categorical-equivalence layer, indexed adjunction, directed
+dimension/packages, registered structural action, conservative visible
+constructor lane, finite groupoid/fixed-arrow identity views, direct
+categorical-universe classifier, and conditional object-truncation spine are
+promoted with synchronized evidence recorded below. The current OneCat lane
+has progressed beyond the earlier one-sided checkpoint: strict ordinary
+evidence is lifted to recursive omega evidence; arbitrary omega evidence is
+decoded back by comparing its two inverse arrows, transporting the right law,
+and reconstructing both proof fields; and both round trips now package a
+OneCat-indexed specified inverse, contractible-fibre univalence capability,
+and named `TypeEquiv`. Its synchronized CI records 109.546s measured checking
+time. A post-closeout inventory then retired the three unused global
+ordinary-iso capability declarations while retaining the separately consumed
+  legacy decoder/Product computation. The next dependency-ready continuation
+  registers successor action for recursive Nat equality: the selected map keeps
+  the exposed predecessor path, while a stable proof-time basis and generic J
+  prove agreement with semantic `eq_ap` without runtime proof collapse. The
+  resulting current snapshot has 1,694 classified checks across 62 areas,
+  971/157 warning reports, zero/45/27 strict-LHS audit counts, a
+  19,988-line/808-symbol/581-rule/58-unification-rule kernel, 1,507 positive
+  diagnostics, and 41 measured files. Focused owner/check/reviewer probes,
+  `make check`, health, all examples, warning/catalog/audit gates, and
+  synchronized CI pass; the Nat reviewer has eleven positive/five negative
+  statements and CI records 220.269s measured checking time.
+The bounded feasibility verdict is therefore positive
+and realized for the H0/H1/Omega0 compatibility MVP. The full original
+computational-foundation endpoint remains only partially feasible under the
+  current representation: bounded former-by-former action is feasible and now
+  covers componentwise Sum plus recursive Nat successor, whereas certificate
+  extensionality/unconditional `IsNCat` object truncation, fibrant structured J,
+  H2/HITs, and self-universe metatheory retain the explicit blocked/deferred
+  statuses below.
 Remaining rows retain
 the explicit status recorded below; the active code remains authority whenever
 a historical baseline description has not yet been rewritten.
@@ -147,15 +170,16 @@ a historical baseline description has not yet been rewritten.
 | Track | Status at this handoff | Next status-changing result |
 | --- | --- | --- |
 | Plan review and dependency architecture | adopted as the living forward master plan; every benchmark row is classified and the June 23 plan is retained as a promoted-history decision record | Continue accepting or revising names/boundaries only through bounded owner-position evidence and synchronized ledger updates. |
-| H0 elementary core | Candidates G/A/C and `OETU-H0-SUM` active: decoded Empty/Unit/Bool/Nat/general sum plus the named dependent `PathRecord_grpd`, their selected eliminators/projections/betas, PathRecord's shaped observational path/reflexivity/reflexive-J layer, the visible Unit/Boolean/Nat/general-sum equality classifiers with generic reflexivity provenance, the category/endpoint-guarded generic J beta, and negative constructor/record-eta/arbitrary-action controls now join the existing Pi/Sigma/equality core | The conservative visible-constructor lane is closed through synchronized Sum CI. Preserve proof provenance and keep canonicity/metatheoretic no-confusion, arbitrary action, and categorical universal properties separate. |
+| H0 elementary core | Candidates G/A/C and `OETU-H0-SUM` active: decoded Empty/Unit/Bool/Nat/general sum plus the named dependent `PathRecord_grpd`, their selected eliminators/projections/betas, PathRecord's shaped observational path/reflexivity/reflexive-J layer, the visible Unit/Boolean/Nat/general-sum equality classifiers with generic reflexivity provenance, the category/endpoint-guarded generic J beta, componentwise Sum action, registered recursive Nat successor action, and negative constructor/record-eta/action controls now join the existing Pi/Sigma/equality core | The conservative visible-constructor lane and the first recursive action are closed through synchronized CI. Preserve proof provenance and keep canonicity/metatheoretic no-confusion, other former actions, and categorical universal properties separate. |
 | Truncation properties and universes | Candidate B and Phase 3 are active together with constructive one-step monotonicity, property-valued evidence, arbitrary-level dependent-Pi closure, same-level dependent-Sigma closure, canonical general `TypeEquiv` invariance, its decoder-owned fixed-map categorical object-truncation consumer, carrier/evidence package-path control, restricted package univalence, same-level carrier-`TypeEquiv` truncation, and the expected `(n+1)` package-universe theorem; native levels, recursive `IsTruncGrpd`, low-level views, evidence packages, both directional transports, base/successor computation, path/equivalence reconstruction/round trips, and open-runtime boundaries are checked | Preserve the successor-only universe bound and explicit evidence boundary. Recursive omega-equivalence evidence still waits on certificate representation. |
 | H1 ordinary HoTT compatibility | active immediate surface; Candidate H, structural Sigma/record path compatibility, ordinary `TypeEquiv` algebra, and canonical groupoid decoder round trips/action coherence are promoted | Preserve the propositional decoder square and arbitrary-`ua_grpd` boundary; direct observational universe identity remains a later track. |
 | H2/HIT layer | deferred | Begin only after the observational equality and restricted higher-elimination owners are credible. |
 | Path algebra/opposite | E0 shared composition/collapse removal, E1 functor-owned symmetry/propositional coherence, Candidate C's shaped PathRecord reflexivity registry, and the Phase 10 registered-action owner are active | Preserve the classified runtime/propositional boundary. Fibrancy and additional structured J remain prerequisite on a sound registered classifier/motive capability and a selected concrete beta rather than following from action alone. |
 | Omega0/category analogue | D0/D0b/D1 promoted: public fixed-map Sigma package, evidence-routed observations, opposite/Product closure, canonical categorical decoder, an integrated next-hom witness, the core-inclusion specialization, and a decoder-induced ordinary object `TypeEquiv` are active | Preserve the one-sided fibre/property boundary and exact evidence ownership; consume the specialized discrete hom action through recursive dimension rather than adding another stored field. |
-| Discreteness/directed dimension | exact `IsDiscreteCat`, independent `IsObjTruncCat`, native `CatDim`, recursive `IsNCat`, evidence-retaining packages, a `OneCat` next-hom consumer, the dimension-to-truncation index, fixed-map categorical object-truncation invariance, and general Sigma closure are promoted | Preserve the still-missing recursive omega-equivalence evidence theorem/representation prerequisite for the object-truncation theorem and the separate ordinary-iso lane. |
+| Discreteness/directed dimension | exact `IsDiscreteCat`, independent `IsObjTruncCat`, native `CatDim`, recursive `IsNCat`, evidence-retaining packages, a `OneCat` next-hom consumer, the dimension-to-truncation index, fixed-map categorical object-truncation invariance, general Sigma closure, and full OneCat-scoped ordinary-iso univalence are promoted | Preserve the still-missing recursive omega-equivalence evidence theorem/representation prerequisite for the unconditional object-truncation theorem. The global ordinary-iso capability is retired; migrate the retained decoder only through concrete replacement evidence. |
+| Packaged `OneCat` ordinary-iso univalence | full scoped replacement active with synchronized 40-file CI; unused global capability inhabitants/classifier retired in the promoted follow-up | Retirement gates are closed. Keep the separately consumed `iso_evidence_path` Product compatibility owner until its own replacement exists; do not broaden the scoped theorem back to arbitrary categories. |
 | Indexed adjunction migration | Phase 8 completed/promoted: `Adjunction(F,G)`, transparent functor views, stable observations, both triangles, opposite, mates, trust negatives, and reviewer example are active at 978/157 warnings | Preserve the indexed owner and stable observation boundary; reopen only for an owner bug or a declaration-backed named-operation consumer. |
-| Direct observational universe identity | split by layer: the finite groupoid view is completed with synchronized 34-file CI and direct groupoid equality remains rejected; the categorical comparison selects and promotes direct `OmegaEquiv(Cat_cat,A,B)` identity, pending final synchronized gates | Close the categorical direct-owner gates, preserve generic reflexivity and the groupoid fallback, and reopen the categorical self-normalization audit whenever fixed-arrow certificate representation changes. |
+| Direct observational universe identity | split by layer: the finite groupoid view is completed with synchronized 34-file CI and direct groupoid equality remains rejected; direct `OmegaEquiv(Cat_cat,A,B)` identity is completed with synchronized 35-file CI; the finite fixed-arrow certificate observation/path view is completed with synchronized 36-file CI and direct recursive certificate equality is rejected | Preserve the finite view's one-way/no-eta boundary, generic reflexivity, the groupoid fallback, and the categorical opaque-certificate reopen trigger. The selected conditional `IsNCat` theorem may consume only an explicit evidence-property capability. |
 | Universe/metatheory | deliberately deferred | No concrete implementation slice should claim consistency, stratified closure, or a model merely from Lambdapi acceptance. |
 
 The present feasibility assessment is positive but bounded:
@@ -448,17 +472,76 @@ The present feasibility assessment is positive but bounded:
    `omega_equiv_along_obj_path` reflexive `eq_ap` branch from reducing.
    Twenty-two positive/eight negative diagnostics and a fifteen-positive/
    six-negative reviewer pass active checks; one classifier rule and no
-   `unif_rule` are added. Catalog, health, full examples, and synchronized CI
-   remain the proportional closeout gates. Any future fixed-arrow certificate
-   representation must reopen the self-universe normalization decision.
-31. The best/original goal therefore remains credible as a staged
+   `unif_rule` are added. The closed catalog has 1,539 checks across 53 areas;
+   health checks 35 files with a 17,989-line/750-symbol/575-rule/51-
+   unification-rule kernel and 1,389 positive diagnostics. The full reviewer
+   sweep passes, and synchronized CI passes with 165.477s of measured checking
+   time (171.88s wall time). Any future fixed-arrow certificate representation
+   must reopen the self-universe normalization decision.
+31. The fixed-arrow certificate comparison selects a finite native observation
+   view rather than direct recursive equality. The nested
+   `OmegaEquivAlongObservation_D0(f)` record contains exactly the selected
+   left/right inverse arrows and recursive left/right cell packages;
+   `OmegaEquivAlongPathView_D0(u,v)` is equality of two such records, and a
+   genuine certificate path acts on it by `eq_ap`. The owner-position finite
+   source and inherited suite pass quietly and warning-enabled, the same
+   self-universe view normalizes within 20 seconds, and D0b next-hom evidence
+   projects through the observation map. By contrast, adding the direct
+   certificate-equality rule makes the owner-position source exceed 30 seconds
+   and its append-only canonical self-universe control exceed 20 seconds.
+   Thirteen positive/three negative diagnostics and a ten-positive/three-
+   negative reviewer are active; five semantic symbols, no rule or
+   `unif_rule`, unchanged 971/157 warnings, and zero/45/27 audit are measured.
+   The catalog has 1,555 checks across 54 areas; health checks 36 files with an
+   18,104-line/755-symbol/575-rule/51-unification-rule kernel and 1,402
+   positive diagnostics. The full reviewer sweep and synchronized CI pass with
+   186.423s of measured checking time (193.35s wall time). No decoder, eta,
+   property-valuedness, or truncation theorem follows from this one-way view.
+   The dependency audit therefore splits the object-truncation theorem: its
+   `CatDim` induction, Sigma closure, and univalence transport are selected as
+   a conditional executable slice, while construction of the required global
+   fixed-arrow evidence-property capability remains representation-blocked.
+32. The conditional directed object-truncation split is mechanically viable.
+   `OmegaEquivAlongEvidenceProp_D0` is an uninhabited Pi-classifier over all
+   fixed arrows. `prop_is_trunc_cat_dim` has exact zero/successor equations,
+   and `ncat_obj_trunc_from_evidence_prop` computes from the discrete base or,
+   at successor, closes `OmegaEquiv(C,x,y)` by homwise induction and same-level
+   Sigma truncation before transporting through `cat_univalence_type_equiv`.
+   Owner-position source, inherited checks, exact signature, and an eight-
+   positive/four-negative reviewer pass. Eleven positive/four negative active
+   diagnostics include a `OneCat` consumer and typed `eq_refl` proof-time
+   negative. Two two-branch rule families add no `unif_rule`, preserve 971/157
+   warnings, and retain zero/45/27 strict audit. The catalog has 1,570 checks
+   across 55 areas; health checks 37 files with an 18,173-line/758-symbol/577-
+   rule/51-unification-rule kernel and 1,413 positive diagnostics. Full
+   examples and synchronized CI pass with 198.816s measured checking time
+   (206.34s wall time). This completes the induction only conditionally; it
+   does not construct the capability.
+33. Explicit directed dimension supplies a recursion-safe certificate
+   observation boundary. `OmegaEquivAlongDimObservation_D0(n,h,f)` is Unit at
+   zero; its successor is the nested inverse-arrow Sigma whose Product factors
+   pair each selected D0 cell arrow with an observation at `n` in the
+   corresponding hom-category. The observation map reuses the four D0 owners,
+   all inverse/cell/deeper projections compute, and ZeroCat/OneCat controls
+   establish termination. The finite path view has canonical reflexivity and
+   one-way `eq_ap` action. Owner/signature/inherited-check and reviewer probes
+   pass; 17 positive/5 negative diagnostics and a 12-positive/4-negative
+   reviewer preserve 971/157 warnings and zero/45/27 audit. Six symbols and
+   two two-equation rule families add no `unif_rule`. The catalog has 1,592
+   checks across 56 areas; health checks 38 files with an 18,452-line/764-
+   symbol/579-rule/51-unification-rule kernel and 1,430 positive diagnostics.
+   This proves finite observability, not reverse decoding, extensionality,
+   certificate property-valuedness, or the unconditional `IsNCat` theorem.
+   Full examples and synchronized 38-file CI pass with 201.708s measured
+   checking time (212.59s wall time).
+34. The best/original goal therefore remains credible as a staged
    implementation and research program. It is not yet demonstrated as one
    globally normalizing implementation. The largest concrete risks are
    the recursive fixed-map certificate representation/evidence theorem,
    arbitrary structural-action fibrancy and
    additional shaped-J computation, direct observational universe identity,
    and the unstratified global category-univalence policy.
-32. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
+35. Deferred `Cat_cat : Cat` consistency, universe stratification, and general
    semantic/metatheoretic justification do not block the concrete MVP, but
    every report and code comment must preserve that boundary.
 
@@ -516,7 +599,14 @@ not durable active diagnostics.
 | Originally `tmp/probes/oetu_obs_nat_owner_full.lp` plus `tmp/probes/oetu_obs_nat_owner_checks_full.lp`, `tmp/probes/oetu_obs_nat_j_subject_reduction.lp`, and `examples/nat_observational_equality.lp` | The first recursive elementary observational identity owner and its generic-J prerequisite. Four Nat classifier equations preserve outer proof provenance. The rejected unguarded candidate exposes a proof-dependent ill-typed J normal form; the selected rule repeats category/endpoint guards and checks foreign/predecessor reflexivity boundaries. The cumulative full-file pair was carried forward/renamed as the sum pair below; dated Nat logs remain exact evidence. | **Completed/promoted (2026-07-16).** Rejected quiet source/check logs end in `20260716-041943`/`042647`, rejected warning logs in `20260716-042708`, and the subject-reduction log in `20260716-043035`. Selected guarded quiet source/check logs end in `20260716-043247`/`043414`, warning logs in `20260716-043427`/`043428`, and the reviewer log in `20260716-043749`. Twenty-three positive/eleven negative Nat checks plus four guard negatives bring the catalog to 1,450 checks across 50 areas; the reviewer has eleven positive/eight negative statements. One four-clause classifier declaration and the guarded existing J rule add no `unif_rule`, improve warnings to 971/157, preserve zero/45/27 audit, and produce a 32-file health snapshot with a 17,753-line/731-symbol/573-rule/51-unification-rule kernel and 1,326 positive diagnostics. Synchronized 32-file CI passes in 151.336s. |
 | `tmp/probes/oetu_obs_sum_owner_full.lp` plus `tmp/probes/oetu_obs_sum_owner_checks_full.lp`, `tmp/probes/oetu_obs_sum_j_subject_reduction.lp`, and `examples/sum_observational_equality.lp` | The parameterized general-sum observational identity owner. Four tag-directed equations recurse to component equality or Empty, outer proof provenance is retained, the generic-J guard is revalidated by a component-indexed motive, and six reconstructible constructor indices are minimized. | **Completed/promoted (2026-07-16).** Initial quiet source/check logs end in `20260716-045922`/`045931`; complete diagnostics pass in `20260716-050156`; pre-minimization warning logs end in `20260716-050248`. Final minimized quiet and warning log pairs end in `20260716-050336` and `050351`; the subject-reduction and reviewer logs end in `20260716-050426` and `050744`. Twenty-four positive/eleven negative diagnostics bring the catalog to 1,485 checks across 51 areas; the reviewer has twelve positive/eight negative statements. One four-clause rule declaration and no registry or `unif_rule` preserve 971/157 warnings and zero/45/27 audit. Health checks 33 files with a 17,777-line/731-symbol/574-rule/51-unification-rule kernel and 1,350 positive diagnostics. Synchronized CI passes with 161.044s of measured checking time (167.96s wall time). |
 | `tmp/probes/oetu_universe_equality_direct_owner_full.lp` plus its full checks, direct signature/self-compute controls, `tmp/probes/oetu_universe_equality_view_owner_full.lp` plus its full checks/self-compute/reviewer probes, and `examples/groupoid_universe_identity_view.lp` | The first Phase-13 groupoid-universe owner comparison. Direct public equality is tried at the actual canonical owner; the selected fallback names the existing `TypeEquiv` view, decoder-owned maps, round trips, transport theorem, and Product/Pi/Sigma consumers without copying bodies. | **Completed/promoted (2026-07-16).** The pre-decoder placement failure ends in `20260716-053144`; direct quiet source/check logs end in `20260716-053346`/`055048`, and warning logs in `20260716-053345`/`053447`. The reducible-alias spelling has 972/157 warnings; canonical `(Obj Grpd_cat)` restores 971/157. Direct self-universe normalization times out in `20260716-053636`, while baseline/standalone controls end in `20260716-053720`. Selected view quiet source/check logs end in `20260716-053946`/`054135`, warning logs in `20260716-054151`/`054233`, finite self-view normalization in `20260716-054151`, and the active reviewer in `20260716-054558`. Seventeen positive/seven negative diagnostics bring the catalog to 1,509 checks across 52 areas; the reviewer has fourteen positive/five negative statements. Seven semantic aliases, no rule, and no `unif_rule` preserve 971/157 and zero/45/27. Health checks 34 files with a 17,838-line/738-symbol/574-rule/51-unification-rule kernel and 1,367 positive diagnostics. Synchronized CI passes with 182.160s measured checking time (189.18s wall time). |
-| `tmp/probes/oetu_universe_equality_cat_direct_owner_full.lp` plus its full checks, signature/self-compute controls, alias and shaped-reflexivity comparisons, `tmp/probes/oetu_universe_equality_cat_selected_owner_full.lp` plus its full checks/self-compute/reviewer probes, and `examples/categorical_universe_identity.lp` | The categorical Phase-13 owner comparison. It tests direct equality at the canonical post-`OmegaEquiv` owner, the reducible `Cat_grpd` spelling, global reflexivity collapse, finite self-universe normalization, decoder-owned maps/round trips, Product action, and a direct D0b next-hom consumer. | **Direct owner promoted; final gates pending (2026-07-16).** Initial direct quiet source/check logs end in `20260716-060812`/`060824`, focused signature in `060849`, self-universe normalization in `060824`, and canonical warning logs in `060935` at 971/157. The alias spelling records 972/157 in `061218`. The rejected reflexivity collapse fails the inherited object-path action check in `061303` and records 974/157 in `061331`. Selected source/check quiet logs end in `061546`/`061859`, warning logs in `061725`, finite self/Product and scratch-reviewer logs in `061859`, and the active reviewer in `062228`. Twenty-two positive/eight negative diagnostics and a fifteen-positive/six-negative reviewer are active. Twelve symbols, one classifier rule, and no `unif_rule` preserve zero/45/27 audit. Catalog, health, full examples, and synchronized CI remain. |
+| `tmp/probes/oetu_universe_equality_cat_direct_owner_full.lp` plus its full checks, signature/self-compute controls, alias and shaped-reflexivity comparisons, `tmp/probes/oetu_universe_equality_cat_selected_owner_full.lp` plus its full checks/self-compute/reviewer probes, and `examples/categorical_universe_identity.lp` | The categorical Phase-13 owner comparison. It tests direct equality at the canonical post-`OmegaEquiv` owner, the reducible `Cat_grpd` spelling, global reflexivity collapse, finite self-universe normalization, decoder-owned maps/round trips, Product action, and a direct D0b next-hom consumer. | **Completed/promoted (2026-07-16).** Initial direct quiet source/check logs end in `20260716-060812`/`060824`, focused signature in `060849`, self-universe normalization in `060824`, and canonical warning logs in `060935` at 971/157. The alias spelling records 972/157 in `061218`. The rejected reflexivity collapse fails the inherited object-path action check in `061303` and records 974/157 in `061331`. Selected source/check quiet logs end in `061546`/`061859`, warning logs in `061725`, finite self/Product and scratch-reviewer logs in `061859`, and the active reviewer in `062228`. Twenty-two positive/eight negative diagnostics and a fifteen-positive/six-negative reviewer are active. Twelve symbols, one classifier rule, and no `unif_rule` preserve zero/45/27 audit. The catalog has 1,539 checks across 53 areas; health checks 35 files with a 17,989-line/750-symbol/575-rule/51-unification-rule kernel and 1,389 positive diagnostics. Synchronized CI passes with 165.477s measured checking time (171.88s wall time). |
+| `tmp/probes/oetu_omega_equiv_evidence_view_owner_full.lp` plus its full checks, signature and finite self-compute controls, `tmp/probes/oetu_omega_equiv_evidence_direct_owner_full.lp`, its warning rerun and append-only self-compute control, `tmp/probes/oetu_omega_equiv_evidence_view_reviewer.lp`, and `examples/omega_equiv_evidence_view.lp` | The native fixed-arrow certificate-bisimulation comparison. It packages the four existing D0 observations into a nested Sigma/Product record, compares its finite path view with direct recursive certificate equality, and exercises reflexivity, one-way path action, and D0b next-hom observation. | **Completed/promoted (2026-07-16).** Finite source/signature/inherited-check logs end in `20260716-093253`/`093344`/`093545`; warning-enabled source/check logs end in `093558`/`094030` at 971/157; strict audit is zero/45/27; and finite self-view normalization ends in `093726`. The direct owner source exceeds 30 seconds in `093406`, its warning-enabled rerun exceeds 20 seconds in `093504`, and its append-only self-universe control exceeds 20 seconds in `093654`. The scratch/active reviewer logs end in `094135`/`094320`. Thirteen positive/three negative diagnostics and ten positive/three negative reviewer statements are active. Five symbols, no rule, and no `unif_rule` are added. The catalog has 1,555 checks across 54 areas; health checks 36 files with an 18,104-line/755-symbol/575-rule/51-unification-rule kernel and 1,402 positive diagnostics. Full examples pass, and synchronized CI records 186.423s measured checking time (193.35s wall time). |
+| `tmp/probes/oetu_ncat_obj_trunc_conditional_owner_full.lp`, its inherited checks and focused signature, `tmp/probes/oetu_ncat_obj_trunc_conditional_reviewer.lp`, and `examples/ncat_object_truncation_conditional.lp` | The conditional Phase-9 theorem split at the actual `IsNCat` owner. It names the missing global certificate-property premise, lifts propositions to native dimensions, and checks the zero/successor proof spine through Sigma closure and categorical univalence, including `ZeroCat`/`OneCat` consumers and typed proof-time non-erasure. | **Completed/promoted (2026-07-16).** Quiet owner/signature/check logs end in `20260716-101016`/`101323`/`101446`; warning-enabled owner/check logs end in `101349`/`101510` at 971/157; strict audit remains zero/45/27; scratch/active reviewer logs end in `101606`/`101743`. Eleven positive/four negative diagnostics and eight positive/four negative reviewer statements are active. The two two-equation recursive heads add no `unif_rule`. The catalog has 1,570 checks across 55 areas; health checks 37 files with an 18,173-line/758-symbol/577-rule/51-unification-rule kernel and 1,413 positive diagnostics. Full examples pass, and synchronized CI records 198.816s measured checking time (206.34s wall time). |
+| `tmp/probes/oetu_omega_equiv_evidence_dim_view_owner_full.lp`, its inherited checks and focused signature, `tmp/probes/oetu_omega_equiv_evidence_dim_view_reviewer.lp`, and `examples/omega_equiv_evidence_dim_view.lp` | The recursion-safe fixed-arrow certificate representation probe at the actual `IsNCat` owner. Its explicit CatDim recursion is Unit at zero and at successor stores both inverse arrows plus first-class recursive observations of both D0 cell packages in the smaller-dimensional hom-categories. It checks every projection ladder, ZeroCat/OneCat termination, finite path reflexivity/action, and runtime/proof-time separation from public evidence equality. | **Completed/promoted (2026-07-16).** Quiet owner/signature/check logs end in `20260716-104217`/`104520`/`104613`; warning-enabled source/check logs end in `104636` at 971/157; strict audit remains zero/45/27; scratch/active reviewer logs end in `104802`/`104928`. Seventeen positive/five negative diagnostics and twelve positive/four negative reviewer statements are active. Six symbols and two two-equation rule families add no `unif_rule`. The catalog has 1,592 checks across 56 areas; health checks 38 files with an 18,452-line/764-symbol/579-rule/51-unification-rule kernel and 1,430 positive diagnostics. Full examples and synchronized CI pass with 201.708s measured checking time (212.59s wall time). No reverse decoder, eta, public equality, or evidence-property inhabitant is inferred. |
+| `tmp/probes/oetu_onecat_iso_owner_full.lp`, `tmp/probes/oetu_onecat_iso_owner_checks_full.lp`, `tmp/probes/oetu_onecat_iso_signature.lp`, `tmp/probes/oetu_onecat_iso_reverse_missing.lp`, and `examples/onecat_iso_lift.lp` | The dimension-correct ordinary-iso replacement probe at the D0, categorical-decoder, and `OneCat` owners. It constructs recursive fixed-arrow evidence from both ordinary inverse laws, compares backed reflexive evidence with canonical D0 reflexivity at proof time, proves encoder agreement by generic J, and derives the scoped decoder and first round trip. The deliberate reverse probe isolates the distinct-left/right-inverse endpoint mismatch. | **One-sided prerequisite completed/promoted (2026-07-16); full capability was prerequisite-blocked at this checkpoint and is discharged by the later rows.** Quiet owner/check/signature/reviewer logs end in `20260716-120633`/`120824`/`121149`/`121326`; warning logs end in `120226`/`120834` at 971/157; the exact reverse mismatch is recorded in `120542` and the deliberate failure in `120916`. Twelve positive/six negative diagnostics and nine positive/four negative reviewer statements bring the catalog to 1,637 checks across 58 areas. Five symbols, two two-equation families, and one semantically backed `unif_rule` preserve zero/45/27 audit. Health measures 40 files with a 19,062-line/782-symbol/581-rule/56-unification-rule kernel and 1,463 positive diagnostics. Full examples and synchronized CI pass with 281.823s measured checking time. Do not identify the two inverse arrows; the reverse direction needs a constructed directed comparison, discrete-hom path, transported law, and nested-Sigma extensionality. |
+| The cumulative `tmp/probes/oetu_onecat_iso_owner_full.lp` and `tmp/probes/oetu_onecat_iso_owner_checks_full.lp` inverse-comparison continuation, plus `examples/onecat_iso_lift.lp` | The distinct-left/right-inverse prerequisite at its D0 and OneCat owners. It exposes both recursive cell arrows, compares the rejected raw `Hom_func` composite with stable post/pre whiskering, inserts an explicit propositional associator, composes the generic directed inverse comparison, and decodes it through OneCat hom discreteness. | **Completed/promoted with synchronized CI (2026-07-16).** The direct composite fails at two unit presentations and associativity in `20260716-123757`; the selected quiet owner log ends in `124247`, owner warning log in `125119`, inherited quiet/warning checks in `125136`/`125140`, and reviewer in `124544`. Nine positive/four negative diagnostics and six positive/three negative reviewer additions bring the catalog to 1,650 checks across 59 areas and the reviewer to fifteen positive/seven negative statements. Eight symbols, no rule, and no `unif_rule` preserve 971/157 warnings and zero/45/27 audit. Health measures 40 files with a 19,373-line/790-symbol/581-rule/56-unification-rule kernel and 1,472 positive diagnostics; full examples and synchronized CI pass with 139.872s measured checking time. Canonical comparison computes to the identity 2-cell, while its decoded path remains non-runtime `eq_refl`. The completed transport/round-trip row below consumes this result. |
+| The same cumulative OneCat owner/check pair after right-law transport, nested-Sigma reconstruction, and scoped-capability packaging, plus `tmp/probes/oetu_set_path_probe.lp` and the expanded `examples/onecat_iso_lift.lp` | The complete OneCat-scoped replacement. It decodes both recursive laws, transports the right law to the selected left inverse, reconstructs ordinary evidence, uses hom discreteness to compare both proof fields, proves lift/reconstruction equality through the existing nested-Sigma path owner, derives the second round trip, and packages a OneCat-indexed specified inverse, contractible-fibre capability, and named `TypeEquiv`. The rejected global-classifier attempt demonstrates that the legacy decoder cannot be reused by renaming. | **Completed/promoted with synchronized CI (2026-07-16).** The small discrete-path probe passes at `132315`; the complete definition candidate passes at `132729`; the rejected global `CatIsoUnivalenceByDecoder` package fails with its hardcoded decoder at `132624`. Final focused owner quiet/warning logs end in `133706`/`133718`, inherited-suite logs in `133745`/`133751`, and reviewer in `134212`. Ten semantic symbols, no rewrite, and no `unif_rule` preserve 971/157 warnings and zero/45/27 audit. Thirteen positive/two negative diagnostics bring the catalog to 1,678 checks across 61 areas, and the reviewer has 32 positive/12 negative statements. Health passes across 40 files with a 19,883-line/804-symbol/581-rule/56-unification-rule kernel and 1,495 positive diagnostics; full examples pass. Synchronized CI records 109.546s measured checking time. |
+| `tmp/probes/oetu_nat_succ_action_owner_full.lp`, `tmp/probes/oetu_nat_succ_action_owner_checks_full.lp`, and `examples/nat_observational_action.lp` | The first recursive-inductive registered-action owner. Nat successor equality exposes the predecessor path, while component and outer generic reflexivity remain distinct. One stable basis has a direct typed proof-time comparison with each form; generic J composes the resulting internal paths, and the selected `ObsAction(succ)` computes as `p |-> p`. | **Completed/promoted with synchronized CI (2026-07-16).** Quiet owner/check logs end in `141904`/`142047`, warning logs in `142057`/`142329`, and the active reviewer in `142721`. Fourteen positive/five negative diagnostics and eleven positive/five negative reviewer statements are active. Seven symbols and two semantically justified `unif_rule`s add no runtime rewrite, preserve 971/157 warnings and zero/45/27 audit counts, and yield 1,694 checks/62 areas. Health passes across 41 files at 19,988 kernel lines/808 symbols/581 rules/58 unification rules with 1,507 positives; full examples and synchronized CI pass in 220.269s. Runtime proof collapse, proof-time transitivity, successor-specific J, and canonicity remain excluded. |
 | `tmp/probes/oetu_discrete_cat_contract.lp` | Earlier append-only evidence for the selected Product boundary, exact `Cat_cat` indexing, core hom-action type, and `path_to_hom` object projection. | **Superseded/fulfilled by the promoted owner-position discrete pair.** The append-only file supplied no homwise inhabitant; the active implementation now constructs it from projected D0b evidence and supplies both coherent directions. |
 | `tmp/probes/oetu_indexed_structure_architecture_probe.lp` | Primary fixed-map evidence plus Sigma packaging, indexed `Adjunction(F,G)`, both exact triangle patterns, transparent versus proof-time functor views, fixed-arrow higher cells, and the mechanics of typed named-unit/counit comparison under per-instance proof-time equations. | Move candidates to owner positions, minimize/annotate its eight scratch-local replaceable-pattern-variable advisories, and migrate active opposite/mate/decoder consumers. Its independently declared `ReviewNamedAdj`, unit, and counit do not semantically justify their own `unif_rule`s; promotion must bind the names through declaration data/fields or classify the generated equations as trusted declaration postulates. |
 | `tmp/probes/oetu_adjunction_named_unit_runtime_probe.lp` | Negative control: runtime unit/counit projection betas erase the stable triangle discriminators, leaving both the projected and raw named-operation spellings stuck as expected. | Preserve stable unit/counit observations or design a different audited triangle owner; clean its two scratch-local LHS advisories before reusing a pattern. |
@@ -662,18 +752,13 @@ authorities.
    preserve unrelated user work. Do not assume the clean snapshot recorded
    here still describes the workspace.
 3. Choose exactly one side-task ID. Use the dependency-ready default named by
-   `Current-Implementation-Slice`; after `OETU-OBS-SUM` closes synchronized
-   CI, this is the separately bounded
-   `OETU-UNIVERSE-EQUALITY-GRPD-VIEW` comparison unless the user selects
-   another slice. Relocate primitive equality/reflexivity/J, `Grpd_grpd`,
-   `TypeEquiv`, `idtoequiv_grpd`, `grpd_equiv_path`, decoder round trips,
-   transport, and Product/Pi/Sigma universe consumers. Compare the direct
-   public equality rule with a named identity-view fallback at the actual
-   universe owner and promote only the smallest coherent boundary. Do not
-   bundle categorical-universe identity, arbitrary structured J/fibrancy,
-   recursive omega-equivalence certificate redesign, or metatheory.
-   Change `Current-Implementation-Slice` and that ledger row to `in progress`
-   with the date and bounded scope before broadening the work.
+   `Current-Implementation-Slice`. The current default is
+   `OETU-OBS-NAT-SUCC-ELIM`: probe a former-specific successor-path induction
+   facade at the Nat owner. Its public proof index must be successor equality,
+   but its implementation must route the already-exposed predecessor path
+   through generic `ind_eqr`, giving only component-reflexivity beta. Add no
+   rewrite or `unif_rule`, retain outer reflexivity/action-basis negatives, and
+   do not infer a general fibrancy package or arbitrary-constructor J.
 4. Relocate every relevant symbol and nearby rule with `rg`; remembered line
    numbers and archive responses are not authorities.
 5. Run the bounded baseline before editing:
@@ -1062,9 +1147,9 @@ This proposal incorporates the following project directions.
     more computational formulation instead of reproducing an external glue,
     fibrancy, or bisimulation implementation verbatim.
 24. **The new architecture is dimension-correct about ordinary isomorphism
-    from the outset.** Existing global `cat_iso_univalence` declarations are
-    frozen as legacy compatibility during migration; no new redesign owner or
-    theorem may depend on them for arbitrary `Cat`. Global new work uses
+    from the outset.** The global `cat_iso_univalence` declarations are
+    retired after the scoped replacement; no new redesign owner or theorem may
+    restore them for arbitrary `Cat`. Global new work uses
     `CatUnivalence`/`OmegaEquiv`, and ordinary `IsoEvidence` univalence is
     introduced only for `OneCat` or an explicit ordinary-dimensional
     hypothesis.
@@ -1516,7 +1601,7 @@ ledger after Candidate B is:
 | dependent-Pi preservation | **active (2026-07-16)** | `is_trunc_pi` uses active `is_contr_pi` at `-2` and transports the recursive pointwise-Pi result back through `pi_happly_type_equiv`; its stable two-equation consumer owner and open-evidence boundary pass 24-file CI. |
 | dependent-Sigma level bound | **active (2026-07-16)** | `is_trunc_sigma` uses both base and fibre hypotheses, with `is_contr_sigma` at `-2` and recursive `SigmaPathView`/`PathOver` closure at successors; its stable owner and open-evidence controls pass 25-file CI. |
 | truncation evidence is property-valued | **active (2026-07-16)** | `is_trunc_grpd_evidence_is_prop` combines dependent Sigma paths, Pi extensionality, contractible/proposition Pi closure, and a stable two-equation recursive theorem owner; open evidence remains non-convertible. |
-| recursive `OmegaEquivAlong` evidence is property-valued/truncated | representation prerequisite | `OmegaEquivAlong_D0` is an opaque constant with no general constructor/eliminator and an empty decision tree; the one-sided compatibility-fibre retraction does not compare arbitrary evidence. Redesign the certificate representation or justify a separate evidence-path capability before proving this fact. |
+| recursive `OmegaEquivAlong` evidence is property-valued/truncated | representation prerequisite; finite observation view active | `OmegaEquivAlong_D0` remains opaque. `OmegaEquivAlongPathView_D0` compares the four-observation records and accepts genuine evidence paths, but has no reverse decoder/eta; direct recursive equality fails the bounded owner/self-normalization gates. Redesign the certificate representation or justify a recursion-safe reverse evidence-path capability before proving this fact. |
 | carrier/evidence paths in `TruncGrpdU(n)` are controlled by carrier paths | **active (2026-07-16)** | `TruncGrpdPathView`, evidence-derived reconstruction, reflexive behavior, both propositional inverse laws, and `trunc_grpd_carrier_path_type_equiv` pass 26-file proportional gates without package eta or a new rule. |
 | truncated-universe univalence agrees with restricted ambient univalence | **active (2026-07-16)** | `grpd_univalence_type_equiv` composes with the carrier-path package; exact encoder/decoder projections, both propositional round trips, and the asymmetric reflexive runtime boundary pass 27-file proportional gates. |
 | `TruncGrpdU(n)` has expected level `n+1` | **active (2026-07-16)** | `is_trunc_type_equiv` uses an explicit-inverse contractible base and successor Pi/Sigma/property closure; `is_trunc_grpd_universe` transports the result backward through restricted package univalence. Seventeen positive/three negative diagnostics and an eleven-positive/three-negative reviewer example pass 28-file proportional gates without same-level universe computation or proof erasure. |
@@ -2157,14 +2242,13 @@ No runtime eta or proof-field erasure should be installed initially.
 
 ### `OneCat` and ordinary isomorphism univalence
 
-The current global symbol:
+The former global symbol:
 
 ```text
 cat_iso_univalence(C) : CatIsoUnivalence(C)
 ```
 
-is quarantined immediately for successor-architecture work and is replaced by
-the dimension-correct interface:
+was quarantined and is now retired. The dimension-correct interface is:
 
 ```text
 onecat_iso_univalence
@@ -2172,15 +2256,29 @@ onecat_iso_univalence
       CatIsoUnivalence(onecat_carrier(C)).
 ```
 
-The preferred final result is to derive this from:
+The selected result derives this from:
 
 - global `CatUnivalence` into `OmegaEquiv`;
 - the discreteness/truncation of all hom-categories of a `OneCat`;
 - a comparison between `OmegaEquiv` and `IsoEvidence` at that level.
 
-A scoped operational axiom is acceptable before the derivation. The unscoped
-active symbol may remain temporarily as a compatibility surface during the
-bounded migration, but no new general-`Cat` work may consume it.
+Implementation evidence now supplies both halves constructively. Strict
+`IsoEvidence` lifts to recursive `OmegaEquiv`, whose canonical decoder gives
+`one_cat_iso_path` and its first round trip. In the reverse direction,
+recursive cells compare the separately stored omega inverses, OneCat hom
+discreteness turns that directed cell into equality, and ordinary equality
+action transports the right law to the chosen left inverse. Hom discreteness
+also makes the two inverse-law proof fields proposition-valued, so the
+existing nested-Sigma path owner proves reconstruction of arbitrary ordinary
+evidence after the lift. That yields the second round trip and the scoped
+`one_cat_iso_univalence`/`one_cat_iso_type_equiv` capability.
+
+The former global decoder classifier could not own the result because it hardcoded
+`iso_evidence_path`; the selected `OneCatIsoUnivalenceByDecoder(X)` instead
+indexes the specified inverse by `one_cat_iso_path(X)`. The unscoped
+inhabitants/classifier are removed after the bounded migration; no scoped
+wrapper invokes them. The legacy decoder remains only for its separately
+measured reflexive/Product computation.
 
 ### Universes of `n`-categories
 
@@ -2488,20 +2586,21 @@ No report may infer a model-existence result merely because Lambdapi accepts
 the signature.
 
 The legacy ordinary-isomorphism capability is not part of this selected global
-policy. The active source still exposes `cat_iso_univalence(C)` for every
-`C : Cat` as an exploratory 1-categorical approximation. From Phase 0 onward:
+policy. The active source has retired the exploratory arbitrary-`Cat`
+`cat_iso_univalence(C)` and decoder-capability inhabitants after the scoped
+OneCat replacement passed synchronized CI. The remaining policy is:
 
 - no new redesign declaration, theorem, or computation may depend on the
   global ordinary-iso capability;
-- existing consumers and checks are labelled compatibility-only until their
-  migration is scheduled;
+- `iso_evidence_path` remains only as a legacy runtime decoder for its
+  reflexive and Product computation until a separate replacement is selected;
 - `CatUnivalence(C)` with recursive `OmegaEquiv` is the general categorical
   interface used by new work; and
 - `CatIsoUnivalence` returns only as a `OneCat`-scoped derivation or explicit
   ordinary-dimensional assumption.
 
-This is an architectural quarantine from the outset even if removal of the
-legacy active symbols is staged to preserve a bounded migration.
+This turns the original architectural quarantine into an enforced capability
+boundary while preserving the separately consumed decoder computation.
 
 ## One Operational Inverse Per Univalence Layer
 
@@ -2510,7 +2609,8 @@ owners:
 
 ```text
 grpd_equiv_path
-iso_evidence_path       // OneCat-scoped in the final design
+one_cat_iso_path        // scoped ordinary-iso decoder
+iso_evidence_path       // retained legacy Product compatibility decoder
 omega_equiv_path.
 ```
 
@@ -3073,8 +3173,8 @@ append-only import probe and does not change the row's formal status.
 | Native `nat` and generated `ind_nat` at ambient `TYPE` | active | The native inductive remains distinct from the decoded `Nat_grpd` facade; both layers now have explicit active diagnostics. |
 | `Nat_grpd` and a reviewed groupoid-level eliminator facade | active; Candidate G promoted 2026-07-15 | `τ Nat_grpd ↪ nat`; `nat_elim` retains the decoded classifier in its signature, routes through `ind_nat`, and has durable zero/successor beta checks. |
 | Empty and Bool decoded classifiers and eliminators | active; Candidate G promoted 2026-07-15 | Native `empty`/`bool`, decoded `Empty_grpd`/`Bool_grpd`, dependent eliminators, both Bool betas, formation/introduction checks, and a local conversion anti-collapse control are active. |
-| General binary sum classifier and dependent eliminator | active; `OETU-H0-SUM` promoted 2026-07-15 | Native `SumData(A,B)`, decoded `Sum_grpd(A,B)`, both constructors, dependent elimination, both betas, swap consumer, local constructor non-collapse, and 19-file CI are active. Separate native parameter binders are required to keep both classifiers fixed in the generated induction principle. Observational identity/no-confusion/higher action, canonicity, and categorical coproduct structure remain separate. |
-| Observational identity/no-confusion/higher action for elementary inductives | prerequisite | Not established by the formation/eliminator probe; select per-former identity owners and negative controls separately. |
+| General binary sum classifier and dependent eliminator | active; `OETU-H0-SUM` promoted 2026-07-15 | Native `SumData(A,B)`, decoded `Sum_grpd(A,B)`, both constructors, dependent elimination, both betas, swap consumer, local constructor non-collapse, and 19-file CI are active. Separate native parameter binders are required to keep both classifiers fixed in the generated induction principle. Observational no-confusion/canonicity, additional action, and categorical coproduct structure remain separate. |
+| Observational identity/no-confusion/higher action for elementary inductives | split: visible identity, componentwise registered Sum action, and recursive Nat successor action are active; no-confusion/canonicity and other former actions remain separate | Unit/Boolean/Nat/Sum identity owners, the generic-J guard, `OETU-OBS-SUM-ACTION`, and `OETU-OBS-NAT-SUCC-ACTION` are promoted. Sum uses registered component actions and Empty mixed cases; successor retains the exposed predecessor path. Both use audited proof-time/runtime boundaries, and synchronized 41-file CI passes. |
 | Equality, literal `eq_refl`, generic `J`, transport, `ap`, `apd`, `PathOver` | active | Present, but the equality architecture is hybrid and not the final global owner. |
 | Standard `PiHapply`/`PiFunext` compatibility | active; Candidate H promoted 2026-07-15 | Stable owners retain related-input action and pointwise beta; generic J derives eta from a semantically justified proof-time reflexive basis, with typed firing, runtime-negative, and application-first shaped-join diagnostics. |
 | `IsEquivMap(PiHapply)` and Pi `TypeEquiv` package | active; Candidate H promoted 2026-07-15 | Explicit quasi-inverse data is converted by the reviewed generic theorem capability to contractible fibres; the selected centre makes the packaged inverse/right path executable while contraction remains opaque. |
@@ -3087,14 +3187,14 @@ append-only import probe and does not change the row's formal status.
 | `TypeEquiv`/`IsEquivMap` identity, symmetry, and composition compatibility | active; `OETU-TYPE-EQUIV-ALGEBRA` promoted 2026-07-15 | Reflexivity plus transparent symmetry and categorical-order composition carry derived contractible-fibre closure. Forward/inverse/right projections and forward-map units/associativity compute; package eta and contraction-derived left projection remain non-runtime. Univalence round trips are separate. |
 | Groupoid univalence and operational reverse decoder | active; `OETU-GRPD-UNIV-DECODER` promoted 2026-07-15 | `grpd_equiv_path` is the sole operational inverse. The decoder package derives the canonical contractible-fibre capability and selected inverse; arbitrary legacy `ua_grpd` agreement is intentionally not postulated. |
 | Both groupoid-univalence round trips and selected action coherence | active; `OETU-GRPD-UNIV-DECODER` promoted 2026-07-15 | Both named decoder round trips, generic `coe_grpd_idtoequiv`, propositional `grpd_equiv_path_coe`, Product evidence, and one Pi-universe action consumer are active. The broad runtime decoder-transport fold is rejected until Product-path transport joins. |
-| Observational identity of the groupoid/category universes | split: finite groupoid identity view completed/promoted with synchronized CI; direct groupoid equality rejected at the unstratified recursion boundary; canonical direct categorical identity promoted pending final synchronized gates | `GrpdPathView(A,B)` reuses the canonical decoder without changing groupoid public equality. Category public equality now reduces directly to `CatPathView(A,B) := OmegaEquiv(Cat_cat,A,B)` while generic reflexivity remains distinct. A future direct groupoid rule needs stratification or a measured recursion guard; the categorical self-normalization audit reopens if its opaque fixed-arrow certificate representation changes. |
+| Observational identity of the groupoid/category universes | split: finite groupoid identity view, canonical direct categorical identity, and finite fixed-arrow certificate view completed/promoted with synchronized CI; direct groupoid equality and direct recursive certificate equality rejected at their unstratified recursion boundaries | `GrpdPathView(A,B)` reuses the canonical decoder without changing groupoid public equality. Category public equality reduces directly to `CatPathView(A,B) := OmegaEquiv(Cat_cat,A,B)` while generic reflexivity remains distinct. `OmegaEquivAlongPathView_D0(u,v)` compares the finite four-observation records with a one-way encoder; future direct rules need stratification or another measured recursion guard. |
 | Truncation properties and low-level aliases | active; Candidate B promoted 2026-07-15 | Native levels, recursive `IsTruncGrpd`, proposition/set/groupoid views, and definitional equality-lowering evidence application have owner-position and active diagnostics; stronger closure facts retain the separate ledger statuses. |
 | Packaged `PropU_grpd`/`SetU_grpd`/`GroupoidU_grpd` | active; Phase 3 core plus 2026-07-16 path/univalence/level extensions promoted | `TruncGrpdU(n)` decodes to a named carrier/evidence record; projections, low-level aliases, a named package-path view, evidence-derived reconstruction, both propositional path round trips, restricted decoder-mediated equivalence with carrier `TypeEquiv`, and `IsTruncGrpd(succ n,TruncGrpdU(n))` are active. Evidence is retained and no eta, proof erasure, same-level claim, or direct universe identity is installed. |
 | Truncation reflectors | deferred | Require the higher-constructor/restricted-elimination architecture. |
 | `Cat`, functors, transfors, iterated hom actions | active | Broad generic infrastructure exists and remains the owner of ordinary functoriality/naturality. |
 | `Path_cat` E0 category composition and collapse removal | active; promoted 2026-07-15 | Shared `comp_fapp0`, two minimized unit bridges, J-derived `path_comp_eq_trans`, genuine opposite presentation, typed oriented-action units plus non-conversion controls, the migrated suite/example, 1,072/159 warning inventory, zero strict-LHS candidates, and full CI pass. |
 | `Path_cat` E1 opposite/symmetry core | active; promoted 2026-07-15 | `PathSym_A` functor/action, strict reflexivity and generic anti-composition, propositional `eq_sym` agreement/involution, pointwise Core-opposite square, negative controls, and the twelve-block warning classification are active. The mapped-`DefIso` endpoint repair lowers the inventory to 974/159. Functor-level natural and fixed-map equivalence packages remain prerequisites. |
-| Global ordinary-iso univalence compatibility | active legacy, frozen for new design | Current `cat_iso_univalence(C)` checks remain during migration, but new general-category architecture uses `CatUnivalence`; the replacement is OneCat-scoped. |
+| Global ordinary-iso univalence compatibility | arbitrary-`Cat` capability inhabitants/classifier retired; full OneCat-scoped replacement active; legacy decoder/Product computation retained | General-category architecture uses `CatUnivalence`. The derived OneCat lane supplies both round trips and a scoped capability without invoking the legacy decoder. `CatIsoUnivalence` remains as the type of an explicit/scoped assumption and `isotoid_cat` is checked with `one_cat_iso_univalence`; only `iso_evidence_path` and its reflexive/Product rules remain compatibility-owned. |
 | First-class `OmegaEquiv` observations | active; Candidate D1 promoted 2026-07-15 | Public `OmegaEquiv` is the fixed-arrow Sigma package; recursive observations route through evidence and reflexive/opposite/Product generators compute. Unrestricted corecursion and package eta remain absent. |
 | Primary fixed-map `OmegaEquivAlong(F)` plus Sigma package | D0/D0b/D1 active | `OmegaEquivAlong_D0(f)` remains the neutral internal owner and public `OmegaEquivAlong(f)` its transparent name; public `OmegaEquiv` is `Sigma f, OmegaEquivAlong(f)`. Exact projections, inverse/cell observations, reflexive/opposite/Product computation, variable-evidence hom action, and the integrated next-hom witness are active with 93 diagnostics across D0/D0b/D1. The semantic fibre comparison is a one-sided retraction; property-valuedness remains separate. |
 | Categorical decoder finalization and round trips | active; `OETU-CAT-UNIV-DECODER` completed with D1 | The evidence-indexed `omega_equiv_path` is the operational inverse. Both named round trips, derived contractible-fibre capability, named `TypeEquiv`, selected inverse agreement, propositional `path_to_hom` square, and Product decoder projections are active; open round trips remain non-runtime. |
@@ -3103,7 +3203,7 @@ append-only import probe and does not change the row's formal status.
 | `IsDiscreteCat` | active; promoted 2026-07-15 | Exact set-object/fixed-core-map Product formation, D0b-derived core homwise evidence, selected inverse, both coherent directions, runtime negatives, owner-position probes, and reviewer example are active. No redundant homwise field or PathSym package is required by this consumer. |
 | Recursive `IsNCat` | active; promoted 2026-07-15 | Exact zero/successor recursion, evidence-retaining packages, `ZeroCat`/`OneCat`, independence and no-eta negatives, and a `OneCat` next-hom consumer are active with 17-file CI. The object-truncation implication remains separately dependent. |
 | `IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)` | prerequisite; index, categorical-invariance, and Sigma-closure bridges active | The target index computes with 19-file CI, fixed-map object truncation is invariant with 21-file CI, and same-level Sigma closure passes 25-file CI. The theorem still needs truncation/property-valuedness of recursive omega-equivalence evidence, whose opaque certificate representation currently lacks a general eliminator. An active negative confirms that the index map alone supplies no evidence. |
-| Packaged `OneCat` and scoped ordinary-iso univalence | split: `OneCat` package active; scoped iso univalence prerequisite | Formation now depends on and uses the real discrete base. The ordinary-iso interface still depends on evidence paths and the omega/ordinary comparison and is not inferred from package formation. |
+| Packaged `OneCat` and scoped ordinary-iso univalence | active through both round trips, specified-inverse and contractible-fibre capabilities, and named `TypeEquiv`; synchronized 40-file CI passes | Formation uses the real discrete base. Strict `IsoEvidence` derives recursive `OmegaEquiv` and the first decoder round trip. Arbitrary omega evidence compares its inverse arrows, transports the right law, and reconstructs ordinary evidence. Hom discreteness plus the nested-Sigma path owner proves the retract and second round trip. The scoped classifier selects `one_cat_iso_path`; unused global capability inhabitants are retired, while the legacy Product decoder remains distinct. |
 | One-next-hom end-to-end adequacy example | active; Candidate D1 promoted 2026-07-15 | A category path selects a functor and D0b-derived fixed-map evidence for its hom action; the public package has exact forward/evidence projections and an iterable recursive left cell, without a per-instance `unif_rule`. |
 
 ### Per-former computational checklist
@@ -3153,10 +3253,11 @@ path-owner phase.
    `CatIsoUnivalence` computation during the redesign. Focused equality rules
    explicitly belonging to the shaped fast track are allowed after their
    promotion probe; this freeze is not a veto on that track.
-4. Freeze `cat_iso_univalence` and its decoder-oriented companion as legacy
-   compatibility: retain existing source/checks until a bounded migration, but
-   add no new arbitrary-`Cat` consumer and use `CatUnivalence`/`OmegaEquiv` in
-   all successor architecture immediately.
+4. **Completed 2026-07-16:** freeze, replace, and retire
+   `cat_iso_univalence`, `cat_iso_univalence_by_decoder`, and their hardcoded
+   classifier after the OneCat-scoped capability passed synchronized CI.
+   Retain only the separately consumed `iso_evidence_path` reflexive/Product
+   computation; use `CatUnivalence`/`OmegaEquiv` for general categories.
 5. Apply the local-first reference policy: external designs define comparison
    tests or candidate ingredients, never an obligation to reproduce their
    implementation.
@@ -3754,19 +3855,55 @@ ordinary-iso lanes remain separately dependent as recorded in items 6--7.
    `OmegaEquivAlong_D0` is opaque and has no general evidence eliminator, so
    the required recursive evidence truncation/property theorem first needs a
    certificate representation or independently justified evidence-path owner.
+   **Conditional induction subgate completed/promoted (2026-07-16):**
+   the missing global evidence-property theorem is now an explicit uninhabited
+   classifier rather than an implicit gap. Given it,
+   `ncat_obj_trunc_from_evidence_prop` computes at zero to the discrete
+   object-set field and at successor through homwise induction,
+   `is_trunc_sigma`, and `cat_univalence_type_equiv`. Eleven positive/four
+   negative diagnostics and an eight-positive/four-negative reviewer pass at
+   unchanged 971/157 warnings and zero/45/27 audit. No `unif_rule` is added;
+   the typed proof-time negative preserves capability provenance. This closes
+   only the conditional theorem spine. The unconditional theorem still waits
+   on an inhabitant of `OmegaEquivAlongEvidenceProp_D0`.
+   **Dimension-indexed evidence-view follow-up completed/promoted
+   (2026-07-16):** explicit `CatDim` recursion now observes the opaque
+   certificate to a finite depth. Zero computes to Unit; successor retains
+   both inverse arrows and recursively observes both selected D0 cells in the
+   smaller-dimensional hom-categories. Exact projection, ZeroCat/OneCat,
+   reflexivity, and one-way path-action controls pass at unchanged 971/157
+   warnings and zero/45/27 audit. This representation result supplies no
+   reverse decoder or inhabitant of the property capability. Full examples
+   and synchronized 38-file CI pass with 201.708s measured checking time
+   (212.59s wall time).
 7. Introduce/derive ordinary `CatIsoUnivalence` only for `OneCat`, prove or
    defer the `OmegaEquiv`/`IsoEvidence` comparison there, migrate the remaining
-   compatibility consumers, and retire the unscoped global claim. **Staged:**
-   `OneCat` formation is active, but a wrapper around frozen global
-   `cat_iso_univalence` would not derive the dimension-correct comparison.
-   Resume `OETU-ONECAT-ISO` only with evidence-path/property results and an
-   explicit recursive-omega versus ordinary-iso comparison.
+   compatibility consumers, and retire the unscoped global claim. **Scoped
+   replacement construction and global-capability retirement
+   completed/promoted (2026-07-16); legacy decoder migration remains:**
+   strict `IsoEvidence` derives recursive `OmegaEquiv`, a OneCat-scoped
+   decoder, and the first decoder-after-encoder round trip without the frozen
+   global assumption. Recursive cells now construct the directed comparison
+   of separate omega left/right inverses, and discrete-hom adequacy converts it
+   to a path without a new rewrite or proof-time equation. The right law is
+   transported along that path; hom discreteness compares the two proof fields;
+   nested-Sigma reconstruction proves the retract and second round trip. The
+   resulting OneCat-indexed specified-inverse capability derives the scoped
+   contractible-fibre `CatIsoUnivalence` and named `TypeEquiv`. The rejected
+   global-classifier attempt proves that a wrapper around the frozen decoder is
+   not the selected architecture. Proportional closeout is recorded under the
+   three completed inverse-comparison, right-transport, and round-trip ledger
+   rows. The follow-up retirement removes the unused arbitrary-`Cat`
+   inhabitants/classifier, migrates generic `isotoid_cat` checking to the
+   scoped inhabitant, and retains only the `iso_evidence_path` reflexive/Product
+   computation whose replacement is a separate future slice.
 
 ### Phase 10: Public Equality, Structural Action, And Fibrancy Migration
 
-Status: **registered-action subgate completed/promoted (2026-07-15)** under
-`OETU-OBS-ACTION`. Fibrancy/additional structured J and broad former migration
-remain separate.
+Status: **registered-action subgate and first recursive-inductive continuation
+completed/promoted (2026-07-16)** under `OETU-OBS-ACTION` and
+`OETU-OBS-NAT-SUCC-ACTION`. Fibrancy/additional structured J and broad former
+migration remain separate.
 
 1. Migrate one type former at a time from the prototype to public equality.
 2. Replace old encode/decode implementations that became identity coercions.
@@ -3787,6 +3924,15 @@ remain separate.
    files at source/check/example timings 3.675s/5.023s/4.156s. No rule or
    `unif_rule` is added. The synchronized CI gate passes all 18 files in
    86.300s with all repository-integrity checks.
+   The 2026-07-16 recursive continuation registers `succ` after Nat equality
+   exposes predecessor paths. `nat_succ_obs_action_map` computes as `p |-> p`;
+   two direct, narrowly typed proof-time comparisons connect one stable basis
+   independently to component and outer reflexivity, and generic `ind_eqr`
+   derives arbitrary semantic agreement without assuming unification
+   transitivity. Fourteen positive/five negative diagnostics and an eleven-
+   positive/five-negative reviewer pass. Seven symbols and two `unif_rule`s add
+   no runtime rewrite, preserve 971/157 warnings and zero/45/27 audit counts,
+   and close synchronized 41-file CI at 1,694 checks/62 areas in 220.269s.
 6. Retain generic propositional `J` throughout. The action owner-position
    negatives show that no additional arbitrary-constructor beta follows from
    registration. Fibrancy therefore remains a prerequisite until a registered
@@ -3809,11 +3955,13 @@ reorganization.
 2. Make the selected H0 universe/classifier boundary, Unit, Empty, Bool/sum,
    Nat, Pi, Sigma, record, eliminators, beta laws, and ordinary identity
    operations active with diagnostics before claiming an implementation
-   skeleton. Candidate G completes the Empty/Unit/Bool/Nat subset, Candidate A
+   skeleton. The 2026-07-16 re-audit now claims this bounded skeleton.
+   Candidate G completes the Empty/Unit/Bool/Nat subset, Candidate A
    completes named finite-record formation/elimination, and `OETU-H0-SUM`
    supplies the general binary-sum extension. Elementary/record observational
-   identity, no-confusion, and higher action remain separate prerequisites, so
-   the full skeleton is not yet claimed. `OETU-OBS-BOOL` now completes the
+   identity, no-confusion, and higher action remain separate long-term tracks;
+   their absence is not hidden inside the compatibility-skeleton claim.
+   `OETU-OBS-BOOL` completes the
    first bounded elementary identity/no-confusion subgate: it covers only the
    visible Boolean constructor classifier matrix, preserves generic
    reflexivity/J/consumer ownership, and rejects proof erasure to `tt`.
@@ -3823,6 +3971,10 @@ reorganization.
    motive. `OETU-OBS-SUM` promotes the separately bounded general visible-sum
    classifier matrix while retaining outer reflexivity provenance; synchronized
    33-file CI closes this conservative elementary lane.
+   `OETU-OBS-NAT-SUCC-ACTION` then supplies the first recursive-inductive
+   registered action with explicit semantic coherence and retained runtime
+   proof provenance. No successor-specific J beta, canonicity, metatheoretic
+   no-confusion, or semantic-model claim follows.
 3. Preserve the promoted standard Pi compatibility surface, including runtime
    diagonal beta, related-input action, propositional eta, and an active
    `IsEquivMap(PiHapply)`/`TypeEquiv` package. Audit any proof-time reflexive
@@ -3901,10 +4053,18 @@ gate. Design probes may begin earlier once their immediate owners are stable.
 5. Test at least one nontrivial universe transport through the next hom level,
    warning behavior, subject reduction, and bounded full-suite performance.
    The D0b-backed `cat_path_fapp1` and reflexive Product consumer are active;
-   final synchronized performance remains the current closeout gate.
+   synchronized 35-file CI closes the gate with 165.477s of measured checking
+   time (171.88s wall time).
 6. Treat external glue/bisimulation/cubical mechanisms as comparison baselines;
    select a native Emdash mechanism from local owners and record why it is
-   sufficient.
+   sufficient. **Completed/promoted 2026-07-16:** the finite
+   one-layer `OmegaEquivAlongPathView_D0` of the four existing observations is
+   warning-neutral and bounded; direct recursive evidence equality is rejected
+   by both owner-position and self-normalization timeouts. The view has only a
+   one-way evidence-path encoder, so this is not yet extensionality,
+   property-valuedness, or a truncation theorem. Synchronized 36-file CI closes
+   the view at 1,555 checks in 186.423s of measured checking time (193.35s wall
+   time).
 
 ### Phase 14: Deferred Universe Metatheory
 
@@ -4577,8 +4737,8 @@ with 182.160s of measured checking time (189.18s wall time), closing the row.
 
 ### Selected Phase-13 follow-up: direct categorical-universe identity
 
-Status: **direct owner promoted; final synchronized gates pending
-(2026-07-16)** under `OETU-UNIVERSE-EQUALITY-CAT-DIRECT`.
+Status: **completed/promoted with synchronized CI (2026-07-16)** under
+`OETU-UNIVERSE-EQUALITY-CAT-DIRECT`.
 
 The categorical decoder, public fixed-map `OmegaEquiv` Sigma package, Product
 generator, and iterated next-hom action are already promoted, so Phase 13 item
@@ -4638,10 +4798,353 @@ reviewer in `20260716-061859`, and the active reviewer in
 `20260716-062228`. Twenty-two positive/eight negative diagnostics and a
 fifteen-positive/six-negative reviewer are active. Twelve semantic symbols,
 one classifier rule, no `unif_rule`, unchanged 971/157 warnings, and zero/
-45/27 strict audit are measured. Catalog, health, the full reviewer suite, and
-synchronized CI remain the closeout gates. Replacing the opaque fixed-arrow
-certificate is an explicit reopen trigger for self-universe normalization;
-this promotion makes no stratification or consistency claim.
+45/27 strict audit are measured. The catalog has 1,539 checks across 53 areas;
+health checks 35 files with a 17,989-line/750-symbol/575-rule/51-unification-
+rule kernel and 1,389 positive diagnostics. The full reviewer sweep passes,
+and synchronized CI passes with 165.477s of measured checking time (171.88s
+wall time), closing the row. Replacing the opaque fixed-arrow certificate is
+an explicit reopen trigger for self-universe normalization; this promotion
+makes no stratification or consistency claim.
+
+### Selected Phase-13 follow-up: fixed-arrow evidence observation/path view
+
+Status: **completed/promoted with synchronized CI (2026-07-16)** under
+`OETU-OMEGA-EQUIV-EVIDENCE-VIEW`.
+
+The categorical direct owner exposes the exact point at which normalization
+currently stops: `OmegaEquivAlong_D0(C,x,y,f)` is opaque, while four stable
+observations expose selected left/right inverse arrows and recursive
+left/right cell packages. The bounded next comparison builds a nested
+Sigma/Product observation record from exactly those owners and defines its
+one-layer path view without duplicating their semantic bodies. At the actual
+D0 owner it compares that finite view with a direct public equality classifier
+whose recursive cells can reopen fixed-arrow evidence equality. Reflexive and
+self-normalization controls, the inherited D0/D1/decoder/Product/next-hom
+suite, warnings, strict LHS audit, and bounded timing decide the boundary.
+This slice adds no property-valuedness/truncation theorem and does not change
+the certificate representation. A `unif_rule` is considered only for a real
+typed proof-time consumer with an explicit trust class.
+
+Owner decision and evidence (2026-07-16): the finite owner source passes in
+the log ending `20260716-093253`, and its focused signature/projection/
+reflexivity/encoder probe passes in `20260716-093344`. The inherited full
+check suite passes in `20260716-093545`; final finite warning-enabled source
+and check logs end in `20260716-093558`/`094030` at unchanged 971/157, and the
+strict audit remains zero/45/27. The one-layer self-universe view and
+observation normalize in `20260716-093726`.
+
+The direct recursive classifier is rejected. At the same D0 owner it makes
+the source exceed 30 seconds in `20260716-093406`; a warning-enabled 20-second
+rerun ending `20260716-093504` expands recursive D0/D1 overlap families but
+does not finish. The independent append-only canonical self-universe control
+also exceeds 20 seconds in `20260716-093654`. This is a measured recursive
+normalization/owner-interaction boundary, not a warning-count veto.
+
+The promoted interface has five semantic symbols, no rule or `unif_rule`.
+Thirteen positive/three negative diagnostics cover the observation type, four
+exact projections, path view/reflexivity/one-way encoding, reflexive inverse
+observations, a D0b next-hom projection, and the missing direct equality/eta
+boundaries. The ten-positive/three-negative scratch reviewer passes in
+`20260716-094135`, and the active reviewer passes in `20260716-094320`.
+The catalog has 1,555 checks across 54 areas; health checks 36 files with an
+18,104-line/755-symbol/575-rule/51-unification-rule kernel and 1,402 positive
+diagnostics. The full reviewer suite passes. Synchronized CI passes with
+186.423s of measured checking time (193.35s wall time), closing the row. A
+reverse decoder or recursion-safe certificate representation is still the
+prerequisite for evidence extensionality/property-valuedness.
+
+### Selected Phase-9 follow-up: conditional directed object truncation
+
+Status: **completed/promoted with synchronized CI (2026-07-16)** under
+`OETU-NCAT-OBJ-TRUNC-CONDITIONAL`.
+
+Closure of the finite evidence view sharpens, rather than removes, the
+certificate blocker. The full `IsNCat(n,C) ->
+IsObjTruncCat(cat_dim_trunc_level(n),C)` proof has two separable parts. Its
+recursive mathematical spine is now dependency-ready: the discrete base is
+`is_discrete_cat_obj_set`; the successor applies the induction hypothesis to
+`Hom_cat(C,x,y)`, raises proposition-valued fixed-arrow evidence to the native
+dimension level, closes the public `OmegaEquiv(C,x,y)` Sigma package with
+`is_trunc_sigma`, and transports the result back to object equality through
+`cat_univalence_type_equiv`. What remains unavailable is an inhabitant of the
+global capability asserting `IsPropGrpd(OmegaEquivAlong_D0(C,x,y,f))` for all
+fixed arrows.
+
+The promoted slice names that capability but does not inhabit or postulate it.
+`prop_is_trunc_cat_dim` and `ncat_obj_trunc_from_evidence_prop` are stable heads
+with two disjoint dimension equations each. The zero theorem branch ignores
+the unavailable capability and returns `is_discrete_cat_obj_set`; the successor
+retains it in every evidence fibre. Exact owner/signature/check logs end in
+`20260716-101016`/`101323`/`101446`; final warning-enabled owner/check logs end
+in `101349`/`101510` at unchanged 971/157. The strict audit remains zero/45/27,
+and the scratch reviewer passes in `101606`.
+
+Eleven positive/four negative active diagnostics exercise the capability type,
+native proposition lift, exact theorem branches, `ZeroCat` and `OneCat`
+consumers, the bare-evidence boundary, and the absence of capability erasure.
+The eight-positive/four-negative active reviewer passes in the log ending
+`20260716-101743`. Its typed `eq_refl` negative confirms that no proof-time
+equation identifies outputs with different capability inputs; no `unif_rule`
+is justified or added. The catalog has 1,570 checks across 55 areas; health
+checks 37 files with an 18,173-line/758-symbol/577-rule/51-unification-rule
+kernel and 1,413 positive diagnostics. The full reviewer sweep passes.
+Synchronized CI passes with 198.816s measured checking time (206.34s wall
+time), closing the row. The slice excludes reverse evidence decoding,
+observation eta, unconditional evidence property/truncation, and ordinary-iso
+univalence.
+
+### Selected certificate follow-up: dimension-indexed deep evidence view
+
+Status: **completed/promoted (2026-07-16)** under
+`OETU-OMEGA-EQUIV-EVIDENCE-DIM-VIEW`.
+
+The conditional object-truncation theorem isolates the missing global
+certificate-property inhabitant. The next bounded representation step can
+advance that dependency without repeating the rejected unstratified rule.
+For `h : IsNCat(n,C)`, define a deep observation classifier by structural
+recursion on `n`: the zero observation is `Unit_grpd`; at `cat_succ n` it stores
+the selected left/right inverse arrows and, for each recursive D0 cell package,
+its selected forward cell together with the `n`-level observation of that
+cell's fixed-arrow evidence in the corresponding hom-category. Every recursive
+call therefore decreases the explicit `CatDim` index.
+
+An observation map from `OmegaEquivAlong_D0(C,x,y,f)` must reuse the existing
+inverse and cell owners at every rung. A named path view may compare the two
+finite deep records, with canonical reflexivity and one-way `eq_ap` action of a
+genuine evidence path. Zero- and one-dimensional controls must normalize
+within the bound. This is a representation/view probe, not a reverse decoder,
+eta theorem, evidence-property proof, public equality migration, or replacement
+of the opaque certificate. A `unif_rule` is considered only for a concrete
+typed proof-time consumer with stable heads and an explicit trust class.
+
+Owner decision and bounded evidence (2026-07-16): the active classifier has
+exactly the zero/structurally decreasing successor equations above, and the
+active map calls the four D0 inverse/cell owners at every successor rung. The
+first-class `OmegaEquivDimObservation_D0` cell package avoids duplicating a
+cell body. All inverse, forward-cell, and recursive-evidence projections
+compute; ZeroCat maps to `tt`, and the OneCat recursive cell observation also
+maps to `tt`. The named path view, reflexivity, and genuine-path encoder pass;
+public equality, the one-layer view, arbitrary path collapse, proof erasure,
+and typed proof-time identification of distinct certificates remain negative.
+Quiet owner/signature/inherited-check logs end in `20260716-104217`/`104520`/
+`104613`; warning logs end in `104636`; scratch/active reviewer logs end in
+`104802`/`104928`. Seventeen positive/five negative diagnostics and a twelve-
+positive/four-negative reviewer add six symbols and two two-equation rule
+families, no `unif_rule`, preserve 971/157 warnings and zero/45/27 audit, and
+produce 1,592 classified checks across 56 areas plus a 38-file health snapshot
+with an 18,452-line/764-symbol/579-rule/51-unification-rule kernel and 1,430
+positive diagnostics. Full examples pass, and synchronized 38-file CI records
+201.708s measured checking time (212.59s wall time), closing the row.
+
+### Implemented elementary follow-up: componentwise binary-sum action
+
+Status: **completed/promoted (2026-07-16)** under
+`OETU-OBS-SUM-ACTION`.
+
+The elementary-inductive adequacy row now has visible constructor equality for
+Unit, Boolean, Nat, and general sums, while registered structural action has a
+single shaped PathRecord consumer. General sums are the smallest independent
+next former: the active eliminator can define `sum_map(f,g)`, and the four
+visible endpoint cases give a componentwise selected action from
+`u : ObsAction(f)` and `v : ObsAction(g)`, with mixed cases eliminated from
+`Empty_grpd`.
+
+The nontrivial gate was semantic agreement with generic `eq_ap`. Outer sum
+reflexivity deliberately remains a distinct runtime proof from component
+reflexivity, so the selected owner adds no runtime collapse. A direct
+two-`eq_ap` proof-time candidate failed because transparent `eq_ap` unfolds to
+generic `ind_eqr` before the rule can fire. The promoted architecture instead
+introduces one stable reflexive action basis per tag and two narrowly typed
+former-specific `unif_rule`s per basis: one direct comparison with normalized
+component reflexivity and one with the exact outer-`ind_eqr` normal form. Each
+direct comparison is exercised by typed `eq_refl` and classified as a
+semantically justified structural-action law. The arbitrary component theorem
+uses retained ordinary component J and explicitly composes the two direct
+paths; it does not rely on experimental unification transitivity.
+
+`sum_obs_action_map` delegates equal-tag paths to the supplied registrations,
+returns the impossible mixed-tag input, and `sum_obs_action_coherence`
+eliminates that input in mixed cases. Same-tag coherence composes the supplied
+`obs_action_agrees` proof with `sum_map_inl_eq_ap` or
+`sum_map_inr_eq_ap`. Runtime basis/action conversion, direct transitive
+proof-time collapse, open selected/semantic action equality, and package
+collapse remain negative. The owner-position feasibility, full owner, and
+inherited-check logs end in `20260716-112405`, `20260716-114250`, and
+`20260716-113027`; warning runs end in `20260716-113036` and
+`20260716-113051`, and the active reviewer log ends in
+`20260716-113631`. Twenty-one positive/six negative diagnostics and a
+thirteen-positive/four-negative reviewer pass. Thirteen symbols plus four
+proof-time equations add no runtime rewrite rule, preserve 971/157 warnings,
+and retain the zero/45/27 strict-audit result. The catalog has 1,619 checks
+across 57 areas; health measures 39 files with an 18,883-line/777-symbol/
+579-rule/55-unification-rule kernel and 1,451 positive diagnostics. Full
+examples pass. Synchronized 39-file CI passes with 129.250s of measured
+checking time, closing the promotion gate. The slice still excludes
+arbitrary-constructor J/fibrancy, proof erasure,
+no-confusion/canonicity, categorical coproduct structure, and broader former
+migration.
+
+### Implemented recursive-inductive follow-up: Nat successor action
+
+Status: **completed/promoted with synchronized 41-file CI in 220.269s
+(2026-07-16)** under `OETU-OBS-NAT-SUCC-ACTION`.
+
+The post-compatibility-MVP dependency audit selected the smallest recursive
+former action still missing from the active surface. Nat equality already
+computes
+
+```text
+@= Nat_grpd (succ m) (succ n)  -->  @= Nat_grpd m n,
+```
+
+so the selected successor action can retain the exposed predecessor proof
+`p`. Semantic agreement with generic `eq_ap(succ)` is not judgmental at the
+reflexive base: generic component `eq_refl(n)` and outer
+`eq_refl(succ n)` deliberately retain distinct proof provenance. A runtime
+collapse would violate that policy, and experimental unification transitivity
+cannot be used as an implicit proof.
+
+The accepted Nat owner introduces the stable
+`nat_succ_ap_basis(n)` and exactly two direct proof-time comparisons, one with
+each backed reflexivity presentation. Each narrowly typed `unif_rule` is
+exercised independently with typed `eq_refl` and trust-classified as a generic
+semantically justified former-action law. The internal paths
+`nat_succ_component_basis` and `nat_succ_basis_outer` are then composed in the
+reflexive branch of generic `ind_eqr`, deriving
+`nat_succ_eq_ap(p) : p = eq_ap(succ,p)` for arbitrary predecessor paths.
+`nat_succ_obs_action_map` selects `p |-> p`, its coherence is that theorem, and
+`nat_succ_obs_action` packages both through the existing `obs_action_intro`
+owner. Double successor action iterates through generic registered-action
+composition.
+
+Runtime basis/component and basis/outer conversions, direct proof-time
+component/outer transitivity, selected-map/generic-action conversion, and
+package collapse remain negative. No runtime rewrite, successor-specific J
+beta, proof erasure, Nat canonicity, or metatheoretic no-confusion claim is
+added. Owner/check quiet logs end in `141904`/`142047`; warning logs end in
+`142057`/`142329`; and the active reviewer log ends in `142721`. Fourteen
+positive/five negative diagnostics and an eleven-positive/five-negative
+reviewer pass. Seven symbols and two `unif_rule`s preserve 971/157 warnings and
+zero/45/27 audit counts. The catalog has 1,694 checks across 62 areas; health
+measures 41 files with a 19,988-line/808-symbol/581-rule/58-unification-rule
+kernel and 1,507 positive diagnostics. Full examples and synchronized CI pass
+with 220.269s measured checking time.
+
+### Directed one-category follow-up: scoped ordinary-iso univalence
+
+Status: **full scoped construction completed/promoted with synchronized
+40-file CI in 109.546s (2026-07-16)** under `OETU-ONECAT-ISO`,
+`OETU-ONECAT-ISO-INVERSE-COMPARE`, `OETU-ONECAT-ISO-RIGHT-TRANSPORT`, and
+`OETU-ONECAT-ISO-ROUNDTRIP`.
+
+The now-retired global `cat_iso_univalence(C)` and decoder-oriented companion
+were legacy arbitrary-category staging assumptions. A `OneCat` wrapper that
+simply applied either global declaration to `ncat_carrier(X)` would have
+renamed, not repaired, the architecture. The selected bounded replacement
+instead starts from the promoted `OneCat` package,
+discrete-hom evidence, D0/D0b/D1 fixed-arrow representation, and canonical
+categorical univalence. Owner-position construction shows that ordinary
+inverse equations do provide the recursive D0 cells needed for the forward
+comparison: `iso_evidence_omega_along_D0(i)` uses `iso_evidence_from(i)` for
+both inverse observations and encodes the ordinary left/right inverse
+equations through `idtoequiv_cat` for the two recursive cells. The transparent
+public package is `iso_evidence_omega_equiv(i) : OmegaEquiv(C,x,y)`.
+
+A proposed runtime fold from reflexive ordinary evidence to canonical D0
+reflexivity added four unjoinable reports and was rejected. The selected
+comparison is instead one narrowly typed `unif_rule` between the two backed
+reflexive evidence heads. A typed `eq_refl` exercises it, while runtime package
+and decoder comparisons remain negative. Generic J then proves
+`iso_evidence_omega_equiv(idtoiso_cat(p)) = idtoequiv_cat(p)` without relying
+on unification transitivity. At a `OneCat` carrier, `one_cat_iso_path(X,i)`
+uses the canonical omega decoder, and `one_cat_iso_path_idtoiso(X,p)` proves
+the first decoder-after-encoder round trip propositionally. The then-active
+global ordinary-iso assumptions are not used by any of these owners and are
+retired after the full scoped construction closes.
+
+The original requirement that this bounded slice immediately deliver a full
+`CatIsoUnivalence` capability was therefore refined. Its first focused reverse
+probe exposed a larger prerequisite rather than a missing forward constructor:
+an arbitrary omega-equivalence stores distinct `left_inv` and `right_inv`
+arrows. Its right recursive cell decodes at `f o right_inv`, whereas an
+ordinary `IsoEvidence` package choosing `left_inv` needs a right law at
+`f o left_inv`. That result selected the separately bounded
+`OETU-ONECAT-ISO-INVERSE-COMPARE` continuation.
+
+The continuation is now implemented at the intended D0 and OneCat owners. The
+first direct `Hom_func` composite failed with both unit presentations and the
+middle associativity comparison unresolved; this is the log ending `123757`
+and rules out an architecture that silently depends on proof-time unification
+transitivity. The selected construction exposes both recursive cell arrows,
+whiskers the reverse right cell by the left inverse and the forward left cell
+by the right inverse through the existing stable post/precomposition functors,
+and joins their middle endpoints by an explicit propositional associator sent
+through `path_to_hom`. Their composite is
+`omega_equiv_along_left_to_right_D0`. `one_cat_omega_inverse_path` then uses
+hom discreteness to obtain equality of the selected inverse arrows. Canonical
+reflexive comparison reduces to the identity 2-cell through generic owners;
+the decoded path remains runtime-distinct from `eq_refl`. No rewrite or
+`unif_rule` is added.
+
+Twelve positive/six negative active diagnostics and a nine-positive/four-
+negative reviewer pass. Five symbols, two two-equation rule families, and one
+proof-time comparison preserve 971/157 warnings and the zero/45/27 strict
+audit. The catalog has 1,637 checks across 58 areas; health measures 40 files
+with a 19,062-line/782-symbol/581-rule/56-unification-rule kernel and 1,463
+positive diagnostics. Final owner/signature/inherited-check logs end in
+`20260716-120633`/`121149`/`120824`; warning logs end in `120226`/`120834`,
+the intentional reverse failure ends in `120916`, and the reviewer log ends
+in `121326`. Full examples and synchronized 40-file CI pass with 281.823s of
+measured checking time. Ordinary isomorphism data and recursive
+omega-equivalence evidence remain distinct, and no unrestricted comparison,
+proof erasure, postulate, new arbitrary-`Cat` consumer, or broad decoder
+rewrite is introduced.
+
+The inverse-comparison continuation adds nine positive/four negative active
+diagnostics and six positive/three negative reviewer statements, bringing the
+reviewer to fifteen positive/seven negative statements. Eight symbols preserve
+971/157 warnings and zero/45/27 audit. Selected quiet/warning owner logs end in
+`124247`/`125119`; inherited quiet/warning checks end in `125136`/`125140`, and
+the reviewer log ends in `124544`. The catalog has 1,650 checks across
+59 areas; health measures 40 files with a 19,373-line/790-symbol/581-rule/56-
+unification-rule kernel and 1,472 positive diagnostics. Full examples and
+synchronized CI pass with 139.872s measured checking time. This result removed
+the inverse-comparison blocker and made right-law transport and reconstruction
+the dependency-ready continuation.
+
+That continuation is now active at the intended owners. The decoded left and
+right recursive cells yield ordinary laws; `one_cat_omega_inverse_path`
+retargets the right law to the selected left inverse, and
+`one_cat_omega_iso_evidence` reconstructs ordinary evidence. OneCat hom
+discreteness supplies paths between both proof fields, while the existing
+nested-Sigma structural path owner proves
+`one_cat_omega_iso_lift_retract`. Encoder agreement then combines with the
+categorical decoder round trip and this retract to prove the reverse law
+`one_cat_idtoiso_iso_path`.
+
+The first attempt to package that law as the legacy
+`CatIsoUnivalenceByDecoder` failed in the focused log ending `132624`: that
+classifier hardcodes `iso_evidence_path`, so reusing it would silently select
+the frozen arbitrary-category decoder. The accepted design introduces the
+OneCat-indexed `OneCatIsoUnivalenceByDecoder`, derives
+`one_cat_iso_univalence_by_decoder`, `one_cat_iso_univalence`, and
+`one_cat_iso_type_equiv`, and keeps the legacy capability runtime-distinct.
+The discrete path probe ends in `132315`, the complete definitions first pass
+in `132729`, final owner quiet/warning logs end in `133706`/`133718`, inherited
+suite logs end in `133745`/`133751`, and the expanded reviewer ends in
+`134212`. Ten semantic symbols add no rewrite and no `unif_rule`; warnings
+remain 971/157 and the audit remains zero/45/27. Thirteen positive/two negative
+diagnostics bring the catalog to 1,678 checks across 61 areas, while the
+reviewer has 32 positive/12 negative statements. Health passes across 40 files
+with a 19,883-line/804-symbol/581-rule/56-unification-rule kernel and 1,495
+positive diagnostics, and full examples pass. Synchronized CI records
+109.546s measured checking time. The construction is closed: the ordinary-iso
+lane's remaining work is concrete legacy-consumer migration/retirement rather
+than a missing scoped univalence theorem. The immediate inventory finds the
+global capability inhabitants and decoder classifier unused outside
+compatibility diagnostics, while `iso_evidence_path` itself still owns
+reflexive/Product computation; that evidence selects a narrower retirement
+slice rather than deleting the still-consumed decoder.
 
 ### Candidate H: standard Pi/function-extensionality compatibility
 
@@ -5202,10 +5705,13 @@ migration diamonds but do not acquire a second decoder implementation.
 - one nontrivial Pi or Sigma universe-action example;
 - `path_to_hom` agrees with `idtoiso_cat`/`idtoequiv_cat` forward arrows;
 - Product reflexive constructor/decoder diamonds;
-- `OneCat` ordinary-iso comparison is not available for arbitrary `Cat`.
-- no new diagnostic or implementation consumer uses legacy global
-  `cat_iso_univalence`; retained checks are labelled compatibility-only until
-  OneCat migration;
+- both OneCat-scoped ordinary-iso decoder round trips, reconstructed evidence,
+  specified-inverse capability, contractible-fibre capability, and named
+  `TypeEquiv` are checked; the selected classifier is deliberately unavailable
+  for arbitrary `Cat`;
+- no diagnostic or implementation consumer uses a global ordinary-iso
+  capability inhabitant; those declarations and their hardcoded classifier are
+  retired, and generic `isotoid_cat` is checked with the scoped inhabitant;
 - `omega_equiv_to((F,u)) ≡ F` and
   `omega_equiv_evidence((F,u)) ≡ u` by generic Sigma projection;
 - during compatibility staging only,
@@ -5534,13 +6040,13 @@ The policy is accepted operationally but may fail in a future model or under a
 constructor not closed by univalence. Such failures are architecture evidence,
 not reasons to add arbitrary closure axioms silently.
 
-The separate legacy global `cat_iso_univalence` assumption is additionally
-frozen. If new general-category work uses it before `OneCat`, the redesign
-would reintroduce the dimension collapse it is meant to remove. Existing
-compatibility declarations may survive the bounded migration, but they are not
-successor-architecture dependencies. Since both active capabilities compare
-their evidence type with the same object equality, treating both as permanent
-global principles would also induce an unrestricted comparison between
+The separate legacy global `cat_iso_univalence` assumption is retired. New
+general-category work cannot use it and therefore cannot silently reintroduce
+the dimension collapse it was meant to remove. `CatIsoUnivalence` remains a
+capability type for explicit/scoped inhabitants, and the legacy
+`iso_evidence_path` remains a computation owner rather than an inhabited
+global equivalence claim. Treating ordinary and omega capabilities as
+permanent global principles would induce an unrestricted comparison between
 `IsoEvidence` and recursive `OmegaEquiv`; the OneCat boundary is what makes
 that comparison dimension-correct.
 
@@ -5563,7 +6069,7 @@ that comparison dimension-correct.
 | `OETU-TRUNC-EVIDENCE-PROP` | **completed/promoted (2026-07-16)**; dependent Sigma comparison of contractibility witnesses, contractible/proposition Pi closure, stable recursive theorem owner, sixteen positive/two negative diagnostics, eight positive/two negative reviewer statements, unchanged 978/157 warnings, zero/45/27 audit, and 23-file CI in 75.41s are active | `OETU-TRUNC-LEVEL`, `OETU-PI-FUNEXT`, active Sigma/PathOver paths, general invariance, and generic path algebra | reopen only for an evidence-property owner regression | Preserve the stable two-equation classifier-consumer owner selected after transparent-recursion successor timeouts, and retain open-evidence negatives. This row alone installs neither definitional proof erasure nor the separately promoted package-universe level theorem. |
 | `OETU-TRUNC-PI-CLOSURE` | **completed/promoted (2026-07-16)**; arbitrary-level dependent-Pi preservation, stable recursive theorem owner, ten positive/one negative diagnostics, eight positive/one negative reviewer statements, unchanged 978/157 warnings, zero/45/27 audit, and 24-file CI in 131.21s are active | promoted `OETU-TRUNC-EVIDENCE-PROP`, `OETU-PI-FUNEXT`, `OETU-TRUNC-EQUIV-INVARIANCE`, and active `is_contr_pi` | reopen only for a dependent-Pi closure owner regression | Preserve the stable two-equation family/evidence-consumer owner, successor transport through `pi_happly_type_equiv`, the `is_prop_pi` specialization alias, and the open pointwise-evidence negative. Do not duplicate the semantic body or infer proof erasure. |
 | `OETU-TRUNC-SIGMA-CLOSURE` | **completed/promoted (2026-07-16)**; contractible-total base, same-level recursive Sigma theorem, ten positive/two negative diagnostics, eight positive/two negative reviewer statements, unchanged 978/157 warnings, zero/45/27 audit, and 25-file CI in 136.09s are active | promoted `OETU-TRUNC-PI-CLOSURE`, active `SigmaPathView`/`PathOver`, `OETU-TRUNC-LEVEL`, and generic path algebra | reopen only for a dependent-Sigma closure owner regression | Preserve both base/fibre hypotheses, the explicit transport in the contractible base, the stable two-equation consumer owner, and both open-evidence negatives. Add no unconditional Sigma rule or stronger bound. |
-| `OETU-OMEGA-EQUIV-EVIDENCE-TRUNC` | representation prerequisite; bounded audit on 2026-07-16 found no proof-ready arbitrary-evidence owner | promoted D0/D1 observations and `OETU-TRUNC-SIGMA-CLOSURE`; still needs an explicit recursive certificate representation or independently justified evidence-path capability | resume only after the certificate representation exposes arbitrary evidence construction/elimination | `OmegaEquivAlong_D0` is an opaque constant with an empty decision tree; the one-sided compatibility-fibre retraction is insufficient. Redesign the certificate or justify a separate path capability. Do not postulate property-valuedness from observations. |
+| `OETU-OMEGA-EQUIV-EVIDENCE-TRUNC` | representation prerequisite; both one-layer and structurally terminating dimension-indexed observation/path views are completed, but neither has a reverse decoder, direct recursive equality remains normalization-blocked, and no proof-ready arbitrary-evidence eliminator exists | promoted D0/D1 observations, completed `OETU-OMEGA-EQUIV-EVIDENCE-VIEW`, completed `OETU-OMEGA-EQUIV-EVIDENCE-DIM-VIEW`, and `OETU-TRUNC-SIGMA-CLOSURE`; still needs a reverse certificate representation or independently justified evidence-path capability | resume construction only after a representation/path result exposes arbitrary evidence construction or elimination within the bounded normalization contract | `OmegaEquivAlong_D0` remains opaque. The one-sided compatibility-fibre retraction and both one-way encoders are insufficient; owner-position and self-universe timeouts reject direct recursive equality. A named conditional capability and a finite deep view are not inhabitants. Do not postulate property-valuedness from observations. |
 | `OETU-TRUNC-UNIVERSE` | **completed/promoted core (2026-07-15)**; parametrized package/classifier, constructor, carrier/evidence projections and betas, low-level aliases, and evidence-retention/no-eta/no-same-level diagnostics active; owner-position/warning/LHS and all gates pass | promoted `OETU-RECORD-CONVENTION`, promoted `OETU-TRUNC-LEVEL` | reopen only for a package-core bug | Preserve retained evidence and the absence of runtime eta/proof erasure/same-level claims. Evidence property-valuedness, package paths, restricted univalence, and the successor universe-level theorem are owned by their promoted extension rows; reflectors remain separate. |
 | `OETU-TRUNC-UNIVERSE-PATHS` | **completed/promoted (2026-07-16)**; named carrier/evidence view, native eliminator, evidence-derived reconstruction, reflexive theorem, both propositional inverse laws, path `TypeEquiv`, fifteen positive/three negative diagnostics, eight positive/three negative reviewer statements, unchanged 978/157 warnings, zero/45/27 audit, 26-file health inventory, and 26-file CI in 188.15s are active | promoted `OETU-TRUNC-UNIVERSE`, `OETU-TRUNC-EVIDENCE-PROP`, active `PathOver`, and structural path patterns | reopen only for a package-path owner regression | Preserve retained evidence, the single carrier projection/reconstruction route, propositional inverse laws, and all open runtime controls. This row does not itself install package eta, restricted ambient univalence, or the downstream universe-level theorem. |
 | `OETU-TRUNC-UNIVERSE-UNIVALENCE` | **completed/promoted (2026-07-16)**; canonical ambient decoder package and restricted package-univalence composition, twelve positive/three negative diagnostics, eight positive/three negative reviewer statements, unchanged 978/157 warnings, zero/45/27 audit, 27-file health inventory, and 27-file CI in 282.49s are active | promoted `OETU-TRUNC-UNIVERSE-PATHS`, `OETU-GRPD-UNIV-DECODER`, and `OETU-TYPE-EQUIV-ALGEBRA` | reopen only for a restricted-univalence owner regression | Preserve the single decoder-owned inverse, exact projections, propositional round trips/inverse reflexivity, and forward-reflexive computation. This row does not infer direct observational universe identity; the downstream `(n+1)` theorem has its own promoted owner. |
@@ -5578,27 +6084,37 @@ that comparison dimension-correct.
 | `OETU-DISCRETE-CAT` | **completed/promoted (2026-07-15)**; exact two-factor Product, constructor/projections, D0b-derived core homwise evidence, selected `hom_to_path`, recursive left cell, both coherent directions, 13 positive/4 negative diagnostics, 6 positive/2 negative reviewer statements, 978/157 warnings, and zero strict-LHS candidates are active | promoted `OETU-TRUNC-LEVEL` and D1 `OETU-OMEGA-EQUIV-ALONG`; the consumer does not require a separate PathSym fixed-map package | reopen only for an owner bug or a concrete stronger homwise coherence consumer | Preserve retained factors, derived rather than stored homwise evidence, no package eta, and no broad cancellation. Consume it as the exact `IsNCat(cat_zero,C)` base. |
 | `OETU-NCAT` | **completed/promoted (2026-07-15)**; independent object truncation, native dimension codes, exact recursion, evidence-retaining packages, aliases, 18 positive/5 negative diagnostics, 7 positive/3 negative reviewer statements, a OneCat next-hom consumer, unchanged 978/157 warnings, zero strict-LHS candidates, and 17-file CI are active | promoted `OETU-DISCRETE-CAT`, `OETU-TRUNC-LEVEL`, and record convention | reopen only for a formation/package owner bug | Preserve the distinct axes, exact discrete base, retained evidence, and no eta; do not treat the object-truncation implication or iso-univalence as formation consequences. |
 | `OETU-NCAT-DIM-TRUNC-INDEX` | **completed/promoted (2026-07-15)**; exact zero/successor index equations, five positive/one negative diagnostics, eleven positive/four negative directed-dimension reviewer statements, unchanged 978/157 warnings, zero strict-LHS candidates, and 19-file CI are active | promoted `OETU-NCAT` and `OETU-TRUNC-LEVEL` | reopen only for an index-owner regression | Preserve the native recursive map and negative evidence boundary. Do not fold categorical invariance or the implication theorem into index computation. |
-| `OETU-NCAT-OBJ-TRUNC` | theorem prerequisite; index, categorical-invariance, and Sigma-closure subdependencies complete; recursive evidence representation blocker retained | promoted `OETU-NCAT`; promoted `OETU-NCAT-DIM-TRUNC-INDEX`; promoted `OETU-CAT-TRUNC-EQUIV-INVARIANCE`; promoted `OETU-TRUNC-SIGMA-CLOSURE`; `OETU-OMEGA-EQUIV-EVIDENCE-TRUNC` representation prerequisite | the recursive fixed-arrow certificate representation and evidence theorem become active | Prove `IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)`; state explicitly that the converse fails. Do not postulate it from formation, the index map, categorical invariance, or Sigma closure alone. |
-| `OETU-ONECAT-ISO` | proposed replacement; global legacy interface frozen now | `OETU-NCAT`, global omega-level Cat univalence | `OneCat` exists; meanwhile any new global-iso consumer is found | Add no new arbitrary-`Cat` use; scope/derive `CatIsoUnivalence` for `OneCat`, migrate compatibility consumers, and retire the unscoped claim. |
+| `OETU-NCAT-OBJ-TRUNC` | split theorem track: the conditional induction is completed; its evidence-property inhabitant remains representation-blocked after both finite observation views | promoted `OETU-NCAT`; promoted `OETU-NCAT-DIM-TRUNC-INDEX`; promoted `OETU-CAT-TRUNC-EQUIV-INVARIANCE`; promoted `OETU-TRUNC-SIGMA-CLOSURE`; `OETU-OMEGA-EQUIV-EVIDENCE-TRUNC` representation prerequisite | resume the unconditional theorem only when the fixed-arrow evidence-property capability is actually constructed | Keep the theorem conclusion `IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)` and state explicitly that the converse fails. Preserve the completed conditional owner and do not treat either one-way view as its premise. |
+| `OETU-NCAT-OBJ-TRUNC-CONDITIONAL` | **completed/promoted (2026-07-16)**; explicit uninhabited evidence-property capability, native proposition lift, exact zero/successor theorem computation, `ZeroCat`/`OneCat` consumers, 11 positive/4 negative diagnostics, 8 positive/4 negative reviewer statements, unchanged 971/157 warnings, zero/45/27 audit, 1,570 checks across 55 areas, 37 measured files, and synchronized CI with 198.816s measured checking time are active; typed `eq_refl` retains capability inputs and no `unif_rule` is added | promoted discrete base, native dimension index, same-level Sigma closure, `cat_univalence_type_equiv`, and proposition lifting | reopen only for an owner regression or when a real evidence-property inhabitant can discharge the explicit premise | Preserve the explicit capability boundary, exact recursive owner, bare-`IsNCat` and finite-view negatives, and absence of evidence equality computation. Closing this row does not inhabit `OmegaEquivAlongEvidenceProp_D0` or complete the unconditional theorem. |
+| `OETU-ONECAT-ISO` | **completed/promoted lift/first-roundtrip prerequisite (2026-07-16), synchronized 40-file CI passing in 281.823s; full scoped construction completed by the continuation rows below**; strict ordinary evidence derives recursive omega evidence, the scoped decoder, and its decoder-after-encoder law without the frozen global interface | promoted `OETU-NCAT`, `OETU-DISCRETE-CAT`, D0/D0b/D1 fixed-arrow evidence, and canonical categorical decoder | reopen only for a lift/first-roundtrip regression; use the completed inverse, transport, and reconstruction rows for the reverse direction | Preserve the five lift/decoder symbols, two two-equation families, and the single semantically backed reflexive `unif_rule`; keep runtime/package/legacy negatives and the distinction between `IsoEvidence` and `OmegaEquiv`. The synchronized one-sided evidence remains 12+/6- diagnostics, 9+/4- reviewer, 971/157 warnings, zero/45/27 audit, and 1,637 checks/58 areas. Add no arbitrary-`Cat` wrapper; the selected full capability is OneCat-indexed. |
+| `OETU-ONECAT-ISO-INVERSE-COMPARE` | **completed/promoted with synchronized 40-file CI in 139.872s (2026-07-16)**; generic recursive cells construct `left_inv -> right_inv`, and OneCat hom discreteness decodes it to equality | promoted `OETU-ONECAT-ISO`, D0 cell observations, stable hom post/pre action, `path_to_hom`, and `OETU-DISCRETE-CAT` | reopen only for an inverse-comparison regression; `OETU-ONECAT-ISO-RIGHT-TRANSPORT` consumes the path | Preserve the explicit theorem-level associativity bridge and generic action ownership. The rejected direct composite is recorded at `123757`; selected evidence is 9+/4- new diagnostics, 6+/3- reviewer additions (15+/7- total), 971/157 warnings, zero/45/27 audit, 1,650 checks/59 areas, and 40-file health at 19,373 lines/790 symbols/581 rules/56 unification rules with 1,472 positives. Add no inverse-identifying rewrite or `unif_rule`; the decoded path intentionally remains non-runtime `eq_refl`. |
+| `OETU-ONECAT-ISO-RIGHT-TRANSPORT` | **completed/promoted (2026-07-16)**; decoded recursive laws, ordinary equality action, and `one_cat_omega_inverse_path` transport the right law to the selected left inverse and reconstruct `IsoEvidence` from arbitrary OneCat omega evidence | completed `OETU-ONECAT-ISO-INVERSE-COMPARE`, categorical decoder, equality transport/action, and ordinary `IsoEvidence` constructor/projections | reopen only for a transported-law or reconstruction regression; `OETU-ONECAT-ISO-ROUNDTRIP` consumes the reconstructed package | Preserve explicit proof provenance and the selected left-inverse endpoint. The owner/inherited warning evidence ends in `131222`/`131311`/`131326`, ten positive/three negative diagnostics bring the catalog to 1,663 checks/60 areas, and the cumulative reviewer reaches 23+/10-. Add no global inverse equality, rewrite, or `unif_rule`; nested-Sigma reconstruction remains owned by the next row. |
+| `OETU-ONECAT-ISO-ROUNDTRIP` | **completed/promoted with synchronized 40-file CI in 109.546s (2026-07-16)**; hom discreteness compares both law-proof fields, the existing nested-Sigma path owner proves lift/reconstruction equality, the reverse decoder law follows, and a OneCat-indexed specified inverse derives contractible-fibre univalence and a named `TypeEquiv` | completed `OETU-ONECAT-ISO-RIGHT-TRANSPORT`, structural Sigma paths, categorical decoder round trips, and `is_equiv_map_by_inverse` | reopen only for a scoped decoder/capability regression; `OETU-ONECAT-ISO-LEGACY-RETIRE` owns the compatibility cleanup | Preserve the scoped classifier and rejected-global evidence at `132624`. Owner/inherited logs end in `133706`/`133718`/`133745`/`133751`, reviewer in `134212`; ten symbols, no rewrite, and no `unif_rule` preserve 971/157 and zero/45/27. Thirteen positive/two negative diagnostics yield 1,678 checks/61 areas; the reviewer is 32+/12-. Health passes across 40 files at 19,883 lines/804 symbols/581 rules/56 unification rules with 1,495 positives, and full examples pass. |
+| `OETU-ONECAT-ISO-LEGACY-RETIRE` | **completed/promoted with synchronized 40-file CI in 212.799s (2026-07-16)**; the unused arbitrary-`Cat` capability inhabitants and their hardcoded decoder classifier are removed, generic `isotoid_cat` checking uses the scoped inhabitant, and the still-consumed decoder/Product computation remains | completed `OETU-ONECAT-ISO-ROUNDTRIP`; active `rg` consumer inventory; retained `CatIsoUnivalence` type and generic `isotoid_cat` eliminator | reopen only if a retired global is referenced/restored or the retained decoder is mistaken for a capability; any decoder retirement needs its own replacement | Owner/check quiet logs end in `140150`/`140155`, warning logs in `140205`/`140228`, and the active reviewer in `140406`. Three symbols are removed with no rewrite or `unif_rule`; warnings remain 971/157 and audit zero/45/27. One scoped positive replaces three global positives and the obsolete scoped-vs-global negative, yielding 1,675 checks/61 areas and a 33+/11- reviewer. Health passes across 40 files at 19,859 lines/801 symbols/581 rules/56 unification rules with 1,493 positives, and full examples plus synchronized CI pass. Retain `iso_evidence_path` and its reflexive/Product rules. |
 | `OETU-OBS-MVP` | conservative elementary lane completed through PathRecord shaped equality, visible Boolean/Unit/Nat/general-sum classifiers, guarded generic J, and synchronized Sum CI | record convention and current equality views | reopen for a concrete elementary-former regression or a separately selected former | Preserve the promoted classifiers and generic reflexivity/J controls. Re-audit proof-dependent subject reduction whenever distinct indices share a reduced classifier. Preserve proof provenance unless a concrete consumer justifies a shaped head or proof-time comparison; do not claim arbitrary structural action or broad migration. |
 | `OETU-OBS-BOOL` | **completed/promoted (2026-07-16)**; four classifier equations, retained generic reflexivity provenance, 22 positive/11 negative diagnostics, 11 positive/6 negative reviewer statements, unchanged 972/157 warnings, zero/45/27 audit, and 30-file CI in 143.199s are active | promoted elementary Bool formation/elimination and generic equality/J/path/Core/encoder owners | reopen only for a classifier/provenance regression or a concrete typed proof-erasure consumer | Preserve the Unit/Empty matrix, open generic equality, generic literal-reflexivity computation, raw-`tt` runtime/proof-time negatives, and the rejected-collapse warning decomposition. Add no Boolean consumer registry or `unif_rule` without new semantic evidence. |
 | `OETU-OBS-UNIT` | **completed/promoted (2026-07-16)**; one classifier equation, retained generic reflexivity provenance, 10 positive/9 negative diagnostics, 7 positive/6 negative reviewer statements, unchanged 972/157 warnings, zero/45/27 audit, and 31-file CI in 153.385s are active | promoted Unit formation and `OETU-OBS-BOOL` provenance decision | reopen only for a classifier/provenance regression or concrete typed proof-erasure consumer | Preserve generic `eq_refl`, raw-`tt` runtime/proof-time negatives, open Unit equality, and the absence of Unit eta/canonicity, consumer registry, or `unif_rule`. |
 | `OETU-OBS-J-SR-GUARD` | **completed/promoted (2026-07-16)**; generic J repeats category and endpoint, four foreign-reflexivity negatives are active, the adversarial proof-dependent normal-form probe rejects the former inferred-index beta, warnings improve by one, and 32-file CI passes | visible Unit/Boolean classifiers and recursive Nat candidate exposed the shared-classifier risk | reopen for every new observational classifier or J owner migration | Preserve explicit category/endpoint discriminators as subject-reduction guards. Test proof-dependent injective motives, not quiet conversion alone. A `unif_rule` is not a repair for an ill-typed runtime beta. |
 | `OETU-OBS-NAT` | **completed/promoted (2026-07-16)**; four recursive classifier equations, retained outer reflexivity, 23 positive/11 negative diagnostics, 11 positive/8 negative reviewer statements, 971/157 warnings, zero/45/27 audit, and 32-file CI in 151.336s are active | promoted Nat formation/elimination, Unit/Boolean provenance policy, and `OETU-OBS-J-SR-GUARD` | reopen only for a recursive-classifier/provenance/guard regression | Preserve the four cases, guarded generic consumers, proof-time/runtime non-collapse, open endpoints, and the exclusions of Nat canonicity/metatheoretic no-confusion, arbitrary action/fibrancy, and general-sum identity. |
+| `OETU-OBS-NAT-SUCC-ACTION` | **completed/promoted with synchronized 41-file CI in 220.269s (2026-07-16)**; the first recursive-inductive registration selects `p |-> p`, proves arbitrary semantic agreement, and retains component/outer proof provenance | promoted `OETU-OBS-NAT`, guarded generic J, `OETU-OBS-ACTION`, `OETU-UNIF-TRUST`, and the stable-intermediary evidence from `OETU-OBS-SUM-ACTION` | reopen only for successor action/coherence/provenance regression or a separately selected fibrancy consumer | Preserve the stable Nat basis, its two direct semantically justified proof-time comparisons, explicit `ind_eqr` path composition, typed firing tests, and runtime/non-transitivity negatives. Fourteen positive/five negative diagnostics, an eleven-positive/five-negative reviewer, 1,694 checks/62 areas, 971/157 warnings, zero/45/27 audit, and a 19,988-line/808-symbol/581-rule/58-unification-rule kernel are active. Add no runtime proof collapse, successor-specific J beta, proof erasure, or canonicity claim. |
+| `OETU-OBS-NAT-SUCC-ELIM` | **owner-position probe selected (2026-07-16)**; the completed successor action supplies a concrete recursive former, while the plan still lacks a sound first arbitrary-motive elimination facade | promoted `OETU-OBS-NAT`, guarded generic J, and completed `OETU-OBS-NAT-SUCC-ACTION`; no general fibrancy package is assumed | a public successor-equality-indexed facade routes its exposed predecessor proof through generic `ind_eqr`, computes only at component reflexivity, and needs no new rewrite or `unif_rule` | Probe immediately after the Nat action theorem at the actual owner. Use an arbitrary proof-dependent motive over successor equality. Preserve runtime negatives for outer `eq_refl(succ n)` and `nat_succ_ap_basis(n)`, and retain the generic J foreign-reflexivity guard. Treat this as former-specific elimination evidence, not as general fibrancy, arbitrary structured J, proof erasure, or canonicity. |
 | `OETU-OBS-SUM` | **completed/promoted (2026-07-16)**; four tag-directed equations, retained outer reflexivity, 24 positive/11 negative diagnostics, 12 positive/8 negative reviewer statements, 971/157 warnings, zero/45/27 audit, and 33-file CI with 161.044s measured checking time are active | promoted general binary-sum formation/elimination and `OETU-OBS-J-SR-GUARD` | reopen only for a classifier/provenance/guard regression | Preserve component recursion, mixed-tag Empty cases, minimized constructor indices, guarded generic consumers, proof-time/runtime non-collapse, open endpoints, and the exclusions of sum canonicity/metatheoretic no-confusion, arbitrary action/fibrancy, and categorical coproduct structure. |
+| `OETU-OBS-SUM-ACTION` | **completed/promoted (2026-07-16)**; eliminator-owned map, registered componentwise action, Empty mixed cases, arbitrary semantic agreement, 21 positive/6 negative diagnostics, 13 positive/4 negative reviewer statements, 971/157 warnings, zero/45/27 audit, 1,619 checks across 57 areas, 39 measured files, 55 total unification rules, and synchronized CI with 129.250s measured checking time are active | promoted general Sum formation/elimination and visible equality, promoted `OETU-OBS-ACTION`, retained generic J/`eq_ap`, and `OETU-UNIF-TRUST` | reopen only for an action/coherence/provenance regression or a separately selected former | Preserve the stable reflexive basis and two direct proof-time comparisons per tag, explicit theorem-level path composition, typed firing and runtime negatives. Add no runtime equality collapse, arbitrary J/fibrancy, proof erasure, no-confusion/canonicity, coproduct structure, or broad migration. |
 | `OETU-OBS-SHAPED-REFL` | **completed/promoted (2026-07-15)**; dependent/nested PathRecord path view, stable reflexivity, projection/reflexive-J betas, closed literal-reflexivity registry, 40 diagnostics, 991/157 inventory, zero strict-LHS candidates, and all gates active | `OETU-OBS-MVP` classifier shape, consumer inventory, promoted `OETU-PATH-CAT-SYM` core | reopen only for a Candidate C owner bug or when the separate action/fibrancy work has its own proved architecture | Preserve the direct nested-Sigma view, stable-head registry, explicit PathSym category guards, ordered projection betas, and negative arbitrary-action/J/eta boundaries. Do not grow the registry without a new literal-reflexivity consumer audit. |
 | `OETU-OBS-ACTION` | **completed/promoted (2026-07-15)**; semantic-agreement packages, canonical/identity/composite action, PathRecord open-map and dependent-witness consumers, 31 positive/5 negative diagnostics, 10 positive/3 negative reviewer statements, unchanged 978/157 warnings, zero strict-LHS candidates, and 18-file CI are active | active path telescopes, `PathOver`, shaped registry, and promoted PathRecord path view | reopen only for an action-owner regression or a concrete new former registration | Preserve selected-operation plus semantic-agreement data, computing identity/composition, retained coherence, and no runtime agreement for arbitrary packages. Do not infer fibrancy or arbitrary-constructor J from action. |
 | `OETU-OBS-FIBRANCY` | prerequisite design/probe track for additional computation; action dependency complete but capability/consumer missing | promoted `OETU-OBS-ACTION`, dependent motives, registered formers; still needs a sound registered classifier/motive capability | a concrete consumer selects a runtime beta on an arbitrary structured constructor and the capability deriving it | Specify which classifiers/motives carry fibrancy and derive sound additional dependent-elimination computation. The action negative proves registration alone is insufficient; retained generic propositional J does not depend on this capability. |
 | `OETU-OBS-SHAPED-J` | split status: reflexive `ind_eqr` promoted with Candidate C; additional arbitrary-constructor computation depends on fibrancy | promoted `OETU-OBS-SHAPED-REFL`; for extra arbitrary-constructor betas `OETU-OBS-FIBRANCY` | a consumer needs computation beyond reflexivity | Retain generic J and the narrow reflexive beta; derive additional structured-constructor runtime rules only from a sound dependent-elimination architecture. |
 | `OETU-OBS-MIGRATE` | deferred high-risk public migration | successful shaped/MVP probe and consumer audit | one former has canonical joins | Migrate public equality one former at a time; do not combine with reorganization. |
-| `OETU-FOUNDATIONAL-ADEQUACY` | active tiered architecture/implementation gate | all relevant rows above | every slice refinement and milestone | Maintain H0/H1/H2/Omega0 status/owner/computation cells; require active H0 for an implementation skeleton, active H1 plus an integrated fixed-map univalence/action witness for a foundational HoTT MVP, and keep indexed adjunction as a separate migration witness. |
+| `OETU-FOUNDATIONAL-ADEQUACY` | architecture MVP, foundational implementation skeleton, and Foundational HoTT compatibility MVP achieved in the 2026-07-16 re-audit; active long-term tiered gate remains | all relevant rows above | every slice refinement and milestone; H2/HIT and metatheory keep their separate completion triggers | Maintain H0/H1/H2/Omega0 status/owner/computation cells. The achieved compatibility milestone requires active H0/H1 and the integrated fixed-map next-hom witness; it does not claim H2, certificate extensionality, consistency, normalization, canonicity, or a semantic model. Keep indexed adjunction as a separate migration witness. |
 | `OETU-GRPD-UNIV-DECODER` | **completed/promoted (2026-07-15)**; canonical decoder-selected contractible-fibre capability, both propositional round trips, generic and decoder transport squares, Product/Pi consumers, 16 diagnostics, reviewer example, 991/157 warning-neutral inventory, zero strict-LHS candidates, and all proportional gates active | current groupoid equality, promoted `TypeEquiv` algebra/projections, promoted Pi/Sigma path compatibility, and groupoid-univalence capabilities | reopen only for a decoder owner bug or after a real constructor-path transport owner can join the rejected runtime fold | Preserve `grpd_equiv_path` as the sole operational inverse, restrict new consumers to the canonical decoder capability, keep arbitrary `ua_grpd` agreement and open round trips non-runtime, and retain the propositional square until Product-path transport exists. This task does not own categorical D1. |
 | `OETU-CAT-UNIV-DECODER` | **completed/promoted jointly with D1 (2026-07-15)**; evidence-indexed decoder, both named propositional round trips, derived capability, named `TypeEquiv`, selected inverse agreement, `path_to_hom` theorem, Product cases, open-runtime negatives, and all gates active | promoted D0/D0b/D1 and `OETU-PATH-CAT-SYM` | reopen only for a decoder-owner bug or a concrete new constructor square | Preserve `omega_equiv_path` as the sole operational inverse, keep round trips and `path_to_hom` open terms propositional, and route new consumers through the named decoder capability rather than arbitrary `cat_univalence`. |
-| `OETU-UNIVERSE-EQUALITY` | eventual full-observational track; finite groupoid view subgate completed under `OETU-UNIVERSE-EQUALITY-GRPD-VIEW`, direct groupoid equality remains rejected, and direct categorical identity is promoted under `OETU-UNIVERSE-EQUALITY-CAT-DIRECT` pending final gates | `OETU-GRPD-UNIV-DECODER`, stable hybrid equality/action owners; categorical case also depends on `OETU-CAT-UNIV-DECODER` and promoted fixed-map omega-equivalence | close the categorical direct-owner gates, then reassess remaining shaped action/J and stratification prerequisites | Preserve the finite groupoid fallback and its direct-rule rejection. Keep categorical generic reflexivity distinct, reopen self-normalization when certificate representation changes, and integrate decoder-owned bodies rather than copying them. |
+| `OETU-UNIVERSE-EQUALITY` | eventual full-observational track; finite groupoid view, direct categorical identity, and finite fixed-arrow certificate view are completed; direct groupoid and direct recursive certificate equalities remain rejected | `OETU-GRPD-UNIV-DECODER`, stable hybrid equality/action owners, `OETU-CAT-UNIV-DECODER`, and promoted fixed-map omega-equivalence | a stratified/guarded evidence representation or independently justified reverse path capability becomes available | Preserve both finite fallbacks and their direct-rule rejections. Keep categorical generic reflexivity distinct, reopen self-normalization when certificate representation changes, and integrate existing observation/decoder bodies rather than copying them. |
 | `OETU-UNIVERSE-EQUALITY-GRPD-VIEW` | **completed/promoted (2026-07-16)**; finite named `TypeEquiv` view, canonical reflexivity, decoder-owned maps/round trips/transport, Product/Pi/Sigma consumers, 17 positive/7 negative diagnostics, 14 positive/5 negative reviewer statements, 971/157 warnings, zero/45/27 audit, and 34-file CI with 182.160s measured checking time are active; direct public equality is rejected by the 20-second self-universe normalization control | promoted `OETU-GRPD-UNIV-DECODER`, `OETU-TYPE-EQUIV-ALGEBRA`, stable generic/shaped equality and action owners, and completed `OETU-OBS-MVP` | reopen only for a view/decoder regression or a stratified, measured direct-rule design | Preserve opaque public equality, finite self-view normalization, single decoder ownership, propositional round trips/transport, and the canonical alias warning result. Reopen direct equality only with stratification or a measured recursion guard. Add no `unif_rule` without a concrete typed consumer and trust classification. |
-| `OETU-UNIVERSE-EQUALITY-CAT-DIRECT` | **promoted; final synchronized gates pending (2026-07-16)**; canonical direct classifier, exact `CatPathView`, retained generic reflexivity, decoder-owned maps/round trips/path-to-hom square, reflexive Product action, D0b next-hom package, 22 positive/8 negative diagnostics, 15 positive/6 negative reviewer statements, finite self-universe normalization, 971/157 warnings, and zero/45/27 audit are active; alias-headed and reflexivity-collapse alternatives are rejected | completed `OETU-CAT-UNIV-DECODER`, promoted D0/D0b/D1 fixed-map package/action, Product owner, and closed groupoid-view baseline | catalog, health, full examples, and synchronized CI close the row | Preserve the unstratified-policy warning, canonical `(Obj Cat_cat)` LHS, single decoder ownership, generic `eq_refl` provenance, and opaque-certificate reopen trigger. Do not add structured-J/runtime round-trip rules or a `unif_rule` without a real typed consumer and trust classification. |
+| `OETU-UNIVERSE-EQUALITY-CAT-DIRECT` | **completed/promoted (2026-07-16)**; canonical direct classifier, exact `CatPathView`, retained generic reflexivity, decoder-owned maps/round trips/path-to-hom square, reflexive Product action, D0b next-hom package, 22 positive/8 negative diagnostics, 15 positive/6 negative reviewer statements, finite self-universe normalization, 971/157 warnings, zero/45/27 audit, 1,539 checks across 53 areas, 35 measured files, and synchronized CI in 165.477s are active; alias-headed and reflexivity-collapse alternatives are rejected | completed `OETU-CAT-UNIV-DECODER`, promoted D0/D0b/D1 fixed-map package/action, Product owner, and closed groupoid-view baseline | reopen only for a classifier/decoder/next-hom regression or when the fixed-arrow certificate representation changes | Preserve the unstratified-policy warning, canonical `(Obj Cat_cat)` LHS, single decoder ownership, generic `eq_refl` provenance, and opaque-certificate reopen trigger. Do not add structured-J/runtime round-trip rules or a `unif_rule` without a real typed consumer and trust classification. |
+| `OETU-OMEGA-EQUIV-EVIDENCE-VIEW` | **completed/promoted (2026-07-16)**; nested four-observation record, exact projections, finite path view/reflexivity, one-way evidence-path encoder, D0b next-hom observation, 13 positive/3 negative diagnostics, 10 positive/3 negative reviewer statements, unchanged 971/157 warnings, zero/45/27 audit, 1,555 checks across 54 areas, 36 measured files, and synchronized CI with 186.423s measured checking time are active; direct recursive equality is rejected by 30-second owner-position and 20-second self-normalization controls | promoted D0/D0b/D1 observation owners, structural Sigma/Product paths, and the closed categorical direct baseline | reopen only for a view regression or a recursion-safe reverse decoder/certificate representation | Preserve the finite one-layer/no-eta boundary and exact reuse of all four D0 owners. Do not infer a reverse decoder, extensionality, property-valuedness, truncation, or add a `unif_rule` without an independently justified typed consumer. |
+| `OETU-OMEGA-EQUIV-EVIDENCE-DIM-VIEW` | **completed/promoted (2026-07-16)**; exact zero/successor deep observation, D0-owned recursive map, all four projection ladders, finite path view/reflexivity/one-way action, ZeroCat/OneCat controls, 17 positive/5 negative diagnostics, 12 positive/4 negative reviewer statements, unchanged 971/157 warnings, zero/45/27 audit, 1,592 checks across 56 areas, 38 measured files, and synchronized CI with 201.708s measured checking time are active | completed one-layer view, promoted `IsNCat`/`CatDim`, D0 recursive observations, and closed conditional theorem baseline | reopen only for a view regression or a separately selected reverse/extensional representation experiment | Preserve explicit `IsNCat` evidence, strictly decreasing recursion, exact reuse of the four D0 owners, one-way/no-eta scope, and the opaque public certificate. Do not infer a reverse decoder, evidence property, direct equality, or add an unbacked `unif_rule`. |
 | `OETU-PRODUCT-DIAMOND` | **completed/promoted (2026-07-16)**; both collapse rules removed, componentwise provenance retained, eleven scoped diagnostics plus adjacent encoder controls and a nine-positive/five-negative reviewer example active, warnings improved to 972/157, zero/45/27 audit, and 29-file CI in 189.90s | stable equality/reflexivity policy and promoted Product decoders | reopen only for a Product provenance regression or a concrete typed proof-time consumer | Preserve componentwise ordinary-iso and omega evidence at reflexivity, the projection/decoder computations, and the negative generic-head comparisons. Add no runtime collapse; add a narrowly typed `unif_rule` only with semantic justification and a real consumer, never as evidence-property erasure. |
-| `OETU-CAT-GLOBAL` | accepted omega-level operational policy; legacy ordinary-iso policy quarantined | none | any report/kernel text suggests non-univalent `Cat` semantics or new arbitrary-`Cat` iso univalence | Keep every `C : Cat` omega-univalent and label the policy axiomatic/unstratified; freeze global `cat_iso_univalence` for migration to `OneCat`. |
+| `OETU-CAT-GLOBAL` | accepted omega-level operational policy; legacy arbitrary-`Cat` ordinary-iso capability retired, decoder/Product computation retained | none | any report/kernel text suggests non-univalent `Cat` semantics, restores a global ordinary-iso inhabitant, or mistakes the legacy decoder for a capability | Keep every `C : Cat` omega-univalent and label the policy axiomatic/unstratified. General categories use `CatUnivalence`; ordinary `CatIsoUnivalence` is explicit/OneCat-scoped. |
 | `OETU-CAT-SELF` | deferred metatheory | `OETU-CAT-GLOBAL` | model or universe computation is claimed | Compare stratified, impredicative, and operational self-universe readings. |
 | `OETU-METATHEORY` | deferred research | mature observational kernel | consistency/canonicity claim is needed | Develop normalization/model evidence; Lambdapi typechecking alone is not sufficient. |
 
@@ -5677,8 +6193,8 @@ As this active master plan is refined and its remaining owners are promoted:
     `OETU-UNIVERSE-EQUALITY` track;
 15. approve the local-first comparative-reference policy and require every
     adopted external idea to name its local rewrite/unification owner;
-16. freeze global ordinary-iso univalence for new arbitrary-`Cat` work and use
-    only omega-level `CatUnivalence` until the OneCat-scoped replacement;
+16. retire global ordinary-iso univalence after the OneCat-scoped replacement
+    and use omega-level `CatUnivalence` for arbitrary-`Cat` work;
 17. add a migration statement to the June 23 plan when this proposal is
     formally adopted.
 
@@ -5984,3 +6500,16 @@ warning classification, catalog checks, health refresh, and make ci.
   files justify the direct classifier together with retained generic
   reflexivity, decoder ownership, the D0b next-hom consumer, and the explicit
   opaque-certificate reopen trigger.
+- The fixed-arrow evidence-view decision is supported by
+  `tmp/probes/oetu_omega_equiv_evidence_view_owner_full.lp`, its full checks,
+  signature and self-compute controls, the contrasting
+  `tmp/probes/oetu_omega_equiv_evidence_direct_owner_full.lp`, the append-only
+  direct self-compute control, and the scratch/active reviewers. Finite quiet
+  source/signature/check logs end in `20260716-093253`/`093344`/`093545`,
+  warning-enabled source/check logs in `093558`/`094030`, finite self-view
+  normalization in `093726`, and scratch/active reviewer logs in
+  `094135`/`094320`. The owner-position direct source timeout ends in `093406`,
+  its warning-enabled timeout in `093504`, and the append-only self-universe
+  timeout in `093654`. These files justify the finite one-layer observation
+  view, one-way encoder, and retained absence of direct evidence equality,
+  reverse decoding, eta, property-valuedness, or truncation.

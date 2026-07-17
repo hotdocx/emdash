@@ -256,6 +256,316 @@ assertnot (n : τ Nat_grpd) ⊢
   @eq_refl Nat_grpd n
   : τ Unit_grpd;
 
+// catalog-area: Nat successor registered action
+
+// The stable basis inhabits the outer successor equality classifier.
+assert (n : τ Nat_grpd) ⊢
+  @nat_succ_ap_basis n
+  : τ (@= Nat_grpd (succ n) (succ n));
+
+// Typed eq_refl exercises each direct proof-time comparison independently.
+assert (n : τ Nat_grpd) ⊢
+  @eq_refl
+    (@= Nat_grpd (succ n) (succ n))
+    (@nat_succ_ap_basis n)
+  : τ (@=
+      (@= Nat_grpd (succ n) (succ n))
+      (@nat_succ_ap_basis n)
+      (@eq_refl Nat_grpd n));
+
+assert (n : τ Nat_grpd) ⊢
+  @eq_refl
+    (@= Nat_grpd (succ n) (succ n))
+    (@nat_succ_ap_basis n)
+  : τ (@=
+      (@= Nat_grpd (succ n) (succ n))
+      (@nat_succ_ap_basis n)
+      (@eq_refl Nat_grpd (succ n)));
+
+assert (n : τ Nat_grpd) ⊢
+  @nat_succ_component_basis n
+  : τ (@=
+      (@= Nat_grpd (succ n) (succ n))
+      (@eq_refl Nat_grpd n)
+      (@nat_succ_ap_basis n));
+
+assert (n : τ Nat_grpd) ⊢
+  @nat_succ_basis_outer n
+  : τ (@=
+      (@= Nat_grpd (succ n) (succ n))
+      (@nat_succ_ap_basis n)
+      (@eq_ap
+        Nat_grpd Nat_grpd
+        (λ k : τ Nat_grpd, succ k)
+        n n
+        (@eq_refl Nat_grpd n)));
+
+assert [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  @nat_succ_eq_ap m n p
+  : τ (@=
+      (@= Nat_grpd (succ m) (succ n))
+      p
+      (@eq_ap
+        Nat_grpd Nat_grpd
+        (λ k : τ Nat_grpd, succ k)
+        m n p));
+
+assert ⊢
+  nat_succ_obs_action_map
+  : τ (@ObsActionMap
+      Nat_grpd Nat_grpd
+      (λ n : τ Nat_grpd, succ n));
+
+assert [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  (λ q : τ (@= Nat_grpd (succ m) (succ n)), q)
+    (nat_succ_obs_action_map m n p)
+  ≡
+  (λ q : τ (@= Nat_grpd (succ m) (succ n)), q) p;
+
+assert ⊢
+  nat_succ_obs_action_coherence
+  : τ (@ObsActionCoherence
+      Nat_grpd Nat_grpd
+      (λ n : τ Nat_grpd, succ n)
+      nat_succ_obs_action_map);
+
+assert ⊢
+  nat_succ_obs_action
+  : τ (@ObsAction
+      Nat_grpd Nat_grpd
+      (λ n : τ Nat_grpd, succ n));
+
+assert [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  (λ q : τ (@= Nat_grpd (succ m) (succ n)), q)
+    (@obs_action_apply
+      Nat_grpd Nat_grpd
+      (λ k : τ Nat_grpd, succ k)
+      nat_succ_obs_action
+      m n p)
+  ≡
+  (λ q : τ (@= Nat_grpd (succ m) (succ n)), q) p;
+
+assert [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  @obs_action_agrees
+    Nat_grpd Nat_grpd
+    (λ k : τ Nat_grpd, succ k)
+    nat_succ_obs_action
+    m n p
+  : τ (@=
+      (@= Nat_grpd (succ m) (succ n))
+      p
+      (@eq_ap
+        Nat_grpd Nat_grpd
+        (λ k : τ Nat_grpd, succ k)
+        m n p));
+
+assert (n : τ Nat_grpd) ⊢
+  @obs_action_agrees
+    Nat_grpd Nat_grpd
+    (λ k : τ Nat_grpd, succ k)
+    nat_succ_obs_action
+    n n
+    (@eq_refl Nat_grpd n)
+  : τ (@=
+      (@= Nat_grpd (succ n) (succ n))
+      (@eq_refl Nat_grpd n)
+      (@eq_refl Nat_grpd (succ n)));
+
+// Registered successor action composes while retaining the exposed path.
+assert [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  (λ q : τ (@= Nat_grpd (succ (succ m)) (succ (succ n))), q)
+    (@obs_action_apply
+      Nat_grpd Nat_grpd
+      (λ k : τ Nat_grpd, succ (succ k))
+      (@obs_action_comp
+        Nat_grpd Nat_grpd Nat_grpd
+        (λ k : τ Nat_grpd, succ k)
+        (λ k : τ Nat_grpd, succ k)
+        nat_succ_obs_action
+        nat_succ_obs_action)
+      m n p)
+  ≡
+  (λ q : τ (@= Nat_grpd (succ (succ m)) (succ (succ n))), q) p;
+
+// Proof-time comparisons do not select runtime proof normal forms.
+assertnot (n : τ Nat_grpd) ⊢
+  (λ q : τ (@= Nat_grpd (succ n) (succ n)), q)
+    (@nat_succ_ap_basis n)
+  ≡
+  (λ q : τ (@= Nat_grpd (succ n) (succ n)), q)
+    (@eq_refl Nat_grpd n);
+
+assertnot (n : τ Nat_grpd) ⊢
+  (λ q : τ (@= Nat_grpd (succ n) (succ n)), q)
+    (@nat_succ_ap_basis n)
+  ≡
+  (λ q : τ (@= Nat_grpd (succ n) (succ n)), q)
+    (@eq_refl Nat_grpd (succ n));
+
+// Experimental unification transitivity is not assumed.
+assertnot (n : τ Nat_grpd) ⊢
+  @eq_refl
+    (@= Nat_grpd (succ n) (succ n))
+    (@eq_refl Nat_grpd n)
+  : τ (@=
+      (@= Nat_grpd (succ n) (succ n))
+      (@eq_refl Nat_grpd n)
+      (@eq_refl Nat_grpd (succ n)));
+
+assertnot [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  nat_succ_obs_action_map m n p
+  ≡ @eq_ap
+      Nat_grpd Nat_grpd
+      (λ k : τ Nat_grpd, succ k)
+      m n p;
+
+assertnot ⊢
+  nat_succ_obs_action
+  ≡ @obs_action_from_function
+      Nat_grpd Nat_grpd
+      (λ k : τ Nat_grpd, succ k);
+
+// catalog-area: Nat successor path induction
+
+assert [n : τ Nat_grpd]
+  (P : Π m : τ Nat_grpd,
+    τ (@= Nat_grpd (succ m) (succ n)) → Grpd)
+  (u : τ (P n (@eq_refl Nat_grpd n)))
+  [m : τ Nat_grpd]
+  (p : τ (@= Nat_grpd (succ m) (succ n))) ⊢
+  @nat_succ_ind_eqr n P u m p
+  : τ (P m p);
+
+// The facade has exactly the generic predecessor-J body.
+assert [n : τ Nat_grpd]
+  (P : Π m : τ Nat_grpd,
+    τ (@= Nat_grpd (succ m) (succ n)) → Grpd)
+  (u : τ (P n (@eq_refl Nat_grpd n)))
+  [m : τ Nat_grpd]
+  (p : τ (@= Nat_grpd (succ m) (succ n))) ⊢
+  @nat_succ_ind_eqr n P u m p
+  ≡ @ind_eqr
+      Nat_grpd
+      n
+      (λ k : τ Nat_grpd, λ q : τ (@= Nat_grpd k n), P k q)
+      u
+      m
+      p;
+
+// Component reflexivity exposes the existing generic J beta.
+assert [n : τ Nat_grpd]
+  (P : Π m : τ Nat_grpd,
+    τ (@= Nat_grpd (succ m) (succ n)) → Grpd)
+  (u : τ (P n (@eq_refl Nat_grpd n))) ⊢
+  @nat_succ_ind_eqr
+    n P u n (@eq_refl Nat_grpd n)
+  ≡ u;
+
+// Arbitrary exposed successor paths are accepted without being collapsed.
+assert [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  @nat_succ_ind_eqr
+    n
+    (λ k : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd (succ k) (succ n)), Unit_grpd)
+    tt
+    m
+    p
+  : τ Unit_grpd;
+
+// The registered successor action supplies a concrete facade consumer.
+assert [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  @nat_succ_ind_eqr
+    n
+    (λ k : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd (succ k) (succ n)), Unit_grpd)
+    tt
+    m
+    (@obs_action_apply
+      Nat_grpd Nat_grpd
+      (λ k : τ Nat_grpd, succ k)
+      nat_succ_obs_action
+      m n p)
+  : τ Unit_grpd;
+
+assert (n : τ Nat_grpd) ⊢
+  @nat_succ_ind_eqr
+    n
+    (λ k : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd (succ k) (succ n)), Unit_grpd)
+    tt
+    n
+    (@obs_action_apply
+      Nat_grpd Nat_grpd
+      (λ k : τ Nat_grpd, succ k)
+      nat_succ_obs_action
+      n n (@eq_refl Nat_grpd n))
+  ≡ tt;
+
+// Reindexing the facade at `succ n` gives the next recursive beta.
+assert (n : τ Nat_grpd) ⊢
+  @nat_succ_ind_eqr
+    (succ n)
+    (λ k : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd (succ k) (succ (succ n))), Unit_grpd)
+    tt
+    (succ n)
+    (@eq_refl Nat_grpd (succ n))
+  ≡ tt;
+
+// Outer successor reflexivity does not acquire a new beta.
+assertnot (n : τ Nat_grpd) ⊢
+  @nat_succ_ind_eqr
+    n
+    (λ k : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd (succ k) (succ n)), Unit_grpd)
+    tt
+    n
+    (@eq_refl Nat_grpd (succ n))
+  ≡ tt;
+
+// The proof-time action basis is not a runtime J constructor.
+assertnot (n : τ Nat_grpd) ⊢
+  @nat_succ_ind_eqr
+    n
+    (λ k : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd (succ k) (succ n)), Unit_grpd)
+    tt
+    n
+    (@nat_succ_ap_basis n)
+  ≡ tt;
+
+// The guarded generic J owner still rejects component reflexivity at outer endpoints.
+assertnot (n : τ Nat_grpd) ⊢
+  @ind_eqr
+    Nat_grpd
+    (succ n)
+    (λ k : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd k (succ n)), Unit_grpd)
+    tt
+    (succ n)
+    (@eq_refl Nat_grpd n)
+  ≡ tt;
+
+// No proof-irrelevant open-path collapse is introduced by the facade.
+assertnot [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n)) ⊢
+  @nat_succ_ind_eqr
+    n
+    (λ k : τ Nat_grpd,
+      λ _ : τ (@= Nat_grpd (succ k) (succ n)), Unit_grpd)
+    tt
+    m
+    p
+  ≡ tt;
+
 // catalog-area: auto
 
 // catalog-area: Equality J subject-reduction guards
@@ -3050,20 +3360,6 @@ assert [C : Cat] (x : τ (Obj C)) ⊢
   @iso_evidence_to C x x (@idtoiso_cat C x x (eq_refl x))
   ≡ @id C x;
 
-assert [C : Cat]
-  [x y : τ (Obj C)]
-  (i : τ (IsoEvidence C x y)) ⊢
-  @isotoid_cat C (cat_iso_univalence C) x y i
-  : τ (x = y);
-
-assert ⊢
-  cat_iso_univalence Cat_cat
-  : τ (CatIsoUnivalence Cat_cat);
-
-assert ⊢
-  cat_iso_univalence_by_decoder Cat_cat
-  : τ (CatIsoUnivalenceByDecoder Cat_cat);
-
 // Candidate D0 fixed-arrow evidence, Sigma package, and recursive reflexivity.
 assert [C : Cat]
   [x y : τ (Obj C)]
@@ -3250,6 +3546,136 @@ assertnot [C : Cat]
     f
     (@omega_equiv_along_right_inv_D0 C x y f u)
   ≡ @id C y;
+
+// Finite one-layer observation/path view of fixed-arrow evidence.
+// catalog-area: Fixed-arrow omega-equivalence evidence view
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)] ⊢
+  @OmegaEquivAlongObservation_D0 C x y f
+  : Grpd;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_observe_D0 C x y f u
+  : τ (@OmegaEquivAlongObservation_D0 C x y f);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Fst (@omega_equiv_along_observe_D0 C x y f u)
+  ≡ @omega_equiv_along_left_inv_D0 C x y f u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Fst (sigma_Snd (@omega_equiv_along_observe_D0 C x y f u))
+  ≡ @omega_equiv_along_right_inv_D0 C x y f u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Fst
+    (sigma_Snd
+      (sigma_Snd (@omega_equiv_along_observe_D0 C x y f u)))
+  ≡ @omega_equiv_along_left_cell_D0 C x y f u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Snd
+    (sigma_Snd
+      (sigma_Snd (@omega_equiv_along_observe_D0 C x y f u)))
+  ≡ @omega_equiv_along_right_cell_D0 C x y f u;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @OmegaEquivAlongPathView_D0 C x y f u v
+  : Grpd;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_path_view_refl_D0 C x y f u
+  : τ (@OmegaEquivAlongPathView_D0 C x y f u u);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  [u v : τ (@OmegaEquivAlong_D0 C x y f)]
+  (p : τ (@= (@OmegaEquivAlong_D0 C x y f) u v)) ⊢
+  @omega_equiv_along_path_view_encode_D0 C x y f u v p
+  : τ (@OmegaEquivAlongPathView_D0 C x y f u v);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_path_view_encode_D0
+    C x y f u u (@eq_refl (@OmegaEquivAlong_D0 C x y f) u)
+  ≡ @omega_equiv_along_path_view_refl_D0 C x y f u;
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  sigma_Fst
+    (@omega_equiv_along_observe_D0
+      C x x (@id C x) (@omega_equiv_along_refl_D0 C x))
+  ≡ @id C x;
+
+assert [C : Cat]
+  (x : τ (Obj C)) ⊢
+  sigma_Fst
+    (sigma_Snd
+      (@omega_equiv_along_observe_D0
+        C x x (@id C x) (@omega_equiv_along_refl_D0 C x)))
+  ≡ @id C x;
+
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_D0 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  sigma_Fst
+    (@omega_equiv_along_observe_D0
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+      (@fapp1_func A B F x y)
+      (@omega_equiv_along_fapp1_D0 A B F u x y))
+  ≡ @omega_equiv_along_fapp1_left_inv_D0 A B F u x y;
+
+// The finite view is not installed as public certificate equality.
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @= (@OmegaEquivAlong_D0 C x y f) u v
+  ≡ @OmegaEquivAlongPathView_D0 C x y f u v;
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  (p : τ (@= (@OmegaEquivAlong_D0 C x y f) u u)) ⊢
+  @omega_equiv_along_path_view_encode_D0 C x y f u u p
+  ≡ @omega_equiv_along_path_view_refl_D0 C x y f u;
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_path_view_refl_D0 C x y f u
+  : τ (@OmegaEquivAlongPathView_D0 C x y f u v);
+
+// catalog-area: auto
 
 // Candidate D0b variable-evidence Cat hom action and endpoint repair.
 assert [A B : Cat]
@@ -4385,6 +4811,638 @@ assert (X : τ OneCat)
       f
       g;
 
+// catalog-area: One-category ordinary-iso lift
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_omega_along_D0 C x y i
+  : τ (@OmegaEquivAlong_D0 C x y (@iso_evidence_to C x y i));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_omega_equiv C x y i
+  : τ (OmegaEquiv C x y);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_to C x y (@iso_evidence_omega_equiv C x y i)
+  ≡ @iso_evidence_to C x y i;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_evidence C x y (@iso_evidence_omega_equiv C x y i)
+  ≡ @iso_evidence_omega_along_D0 C x y i;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_left_inv C x y (@iso_evidence_omega_equiv C x y i)
+  ≡ @iso_evidence_from C x y i;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_right_inv C x y (@iso_evidence_omega_equiv C x y i)
+  ≡ @iso_evidence_from C x y i;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_left_cell C x y (@iso_evidence_omega_equiv C x y i)
+  ≡ @idtoequiv_cat
+      (Hom_cat C x x)
+      (@comp_fapp0 C x y x
+        (@iso_evidence_from C x y i)
+        (@iso_evidence_to C x y i))
+      (@id C x)
+      (@iso_evidence_left C x y i);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_right_cell C x y (@iso_evidence_omega_equiv C x y i)
+  ≡ @idtoequiv_cat
+      (Hom_cat C y y)
+      (@comp_fapp0 C y x y
+        (@iso_evidence_to C x y i)
+        (@iso_evidence_from C x y i))
+      (@id C y)
+      (@iso_evidence_right C x y i);
+
+// Typed proof-time firing check for the single backed reflexive comparison.
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  eq_refl (@omega_equiv_refl C x)
+  : τ (@=
+      (OmegaEquiv C x x)
+      (@iso_evidence_omega_equiv C x x (@iso_evidence_refl C x))
+      (@omega_equiv_refl C x));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y)) ⊢
+  @iso_evidence_omega_equiv_idtoiso C x y p
+  : τ (@=
+      (OmegaEquiv C x y)
+      (@iso_evidence_omega_equiv C x y
+        (@idtoiso_cat C x y p))
+      (@idtoequiv_cat C x y p));
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y)) ⊢
+  @one_cat_iso_path X x y i
+  : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y);
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)) ⊢
+  @one_cat_iso_path_idtoiso X x y p
+  : τ (@=
+      (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+      (@one_cat_iso_path X x y
+        (@idtoiso_cat
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x
+          y
+          p))
+      p);
+
+assertnot [C : Cat] (x : τ (Obj C)) ⊢
+  @iso_evidence_omega_equiv C x x (@iso_evidence_refl C x)
+  ≡ @omega_equiv_refl C x;
+
+assertnot [C : Cat]
+  (x : τ (Obj C))
+  (i : τ (IsoEvidence C x x)) ⊢
+  @iso_evidence_omega_equiv C x x i
+  ≡ @omega_equiv_refl C x;
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  (i j : τ (IsoEvidence C x y)) ⊢
+  @iso_evidence_omega_equiv C x y i
+  ≡ @iso_evidence_omega_equiv C x y j;
+
+assertnot (X : τ OneCat)
+  (x : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))) ⊢
+  @one_cat_iso_path X x x
+    (@iso_evidence_refl
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x)
+  ≡ eq_refl x;
+
+assertnot (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y)) ⊢
+  @one_cat_iso_path X x y i
+  ≡ @iso_evidence_path
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y
+      i;
+
+assertnot (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y)) ⊢
+  @idtoiso_cat
+    (@ncat_carrier (cat_succ cat_zero) X)
+    x
+    y
+    (@one_cat_iso_path X x y i)
+  ≡ i;
+
+// catalog-area: One-category inverse comparison
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_left_cell_to_D0 C x y f u
+  : τ (Hom
+      (Hom_cat C x x)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f)
+      (@id C x));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_right_cell_from_D0 C x y f u
+  : τ (Hom
+      (Hom_cat C y y)
+      (@id C y)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u)));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_left_whisker_right_cell_from_D0 C x y f u
+  : τ (Hom
+      (Hom_cat C y x)
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      (@hom_postcomp_fapp0
+        C C (@id Cat_cat C)
+        y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u))));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_right_whisker_left_cell_to_D0 C x y f u
+  : τ (Hom
+      (Hom_cat C y x)
+      (@hom_precomp_along_fapp0
+        C C (@id Cat_cat C)
+        x y x
+        (@omega_equiv_along_right_inv_D0 C x y f u)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f))
+      (@omega_equiv_along_right_inv_D0 C x y f u));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_inverse_assoc_path_D0 C x y f u
+  : τ (@=
+      (Hom C y x)
+      (@hom_postcomp_fapp0
+        C C (@id Cat_cat C)
+        y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u)))
+      (@hom_precomp_along_fapp0
+        C C (@id Cat_cat C)
+        x y x
+        (@omega_equiv_along_right_inv_D0 C x y f u)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f)));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_inverse_assoc_D0 C x y f u
+  : τ (Hom
+      (Hom_cat C y x)
+      (@hom_postcomp_fapp0
+        C C (@id Cat_cat C)
+        y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u)))
+      (@hom_precomp_along_fapp0
+        C C (@id Cat_cat C)
+        x y x
+        (@omega_equiv_along_right_inv_D0 C x y f u)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f)));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_left_to_right_D0 C x y f u
+  : τ (Hom
+      (Hom_cat C y x)
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      (@omega_equiv_along_right_inv_D0 C x y f u));
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y)) ⊢
+  @one_cat_omega_inverse_path X x y e
+  : τ (@=
+      (Hom (@ncat_carrier (cat_succ cat_zero) X) y x)
+      (@omega_equiv_left_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e)
+      (@omega_equiv_right_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e));
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_left_inv_D0 C x y f u
+  ≡ @omega_equiv_along_right_inv_D0 C x y f u;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @omega_equiv_along_left_to_right_D0
+    C x x (@id C x) (@omega_equiv_along_refl_D0 C x)
+  ≡ @id (Hom_cat C x x) (@id C x);
+
+assertnot (X : τ OneCat)
+  (x : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))) ⊢
+  @one_cat_omega_inverse_path
+    X x x
+    (@omega_equiv_refl
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x)
+  ≡ eq_refl (@id (@ncat_carrier (cat_succ cat_zero) X) x);
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_along_left_to_right_D0
+    C x y
+    (@iso_evidence_to C x y i)
+    (@iso_evidence_omega_along_D0 C x y i)
+  ≡ @id (Hom_cat C y x) (@iso_evidence_from C x y i);
+
+assertnot (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y)) ⊢
+  @one_cat_omega_inverse_path
+    X x y
+    (@iso_evidence_omega_equiv
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y
+      i)
+  ≡ eq_refl
+      (@iso_evidence_from
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        i);
+
+// catalog-area: One-category right-law transport
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @omega_equiv_left_law C x y e
+  : τ (@=
+      (Hom C x x)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_left_inv C x y e)
+        (@omega_equiv_to C x y e))
+      (@id C x));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y)) ⊢
+  @omega_equiv_right_law C x y e
+  : τ (@=
+      (Hom C y y)
+      (@comp_fapp0 C y x y
+        (@omega_equiv_to C x y e)
+        (@omega_equiv_right_inv C x y e))
+      (@id C y));
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @one_cat_omega_right_law_at_left X x y e
+  : τ (@=
+      (Hom (@ncat_carrier (cat_succ cat_zero) X) y y)
+      (@comp_fapp0
+        (@ncat_carrier (cat_succ cat_zero) X)
+        y x y
+        (@omega_equiv_to
+          (@ncat_carrier (cat_succ cat_zero) X) x y e)
+        (@omega_equiv_left_inv
+          (@ncat_carrier (cat_succ cat_zero) X) x y e))
+      (@id (@ncat_carrier (cat_succ cat_zero) X) y));
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @one_cat_omega_iso_evidence X x y e
+  : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y);
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @iso_evidence_to
+    (@ncat_carrier (cat_succ cat_zero) X) x y
+    (@one_cat_omega_iso_evidence X x y e)
+  ≡ @omega_equiv_to
+      (@ncat_carrier (cat_succ cat_zero) X) x y e;
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @iso_evidence_from
+    (@ncat_carrier (cat_succ cat_zero) X) x y
+    (@one_cat_omega_iso_evidence X x y e)
+  ≡ @omega_equiv_left_inv
+      (@ncat_carrier (cat_succ cat_zero) X) x y e;
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @iso_evidence_left
+    (@ncat_carrier (cat_succ cat_zero) X) x y
+    (@one_cat_omega_iso_evidence X x y e)
+  ≡ @omega_equiv_left_law
+      (@ncat_carrier (cat_succ cat_zero) X) x y e;
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @iso_evidence_right
+    (@ncat_carrier (cat_succ cat_zero) X) x y
+    (@one_cat_omega_iso_evidence X x y e)
+  ≡ @one_cat_omega_right_law_at_left X x y e;
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @omega_equiv_left_law C x x (@omega_equiv_refl C x)
+  ≡ eq_refl (@id C x);
+
+assert [C : Cat] (x : τ (Obj C)) ⊢
+  @omega_equiv_right_law C x x (@omega_equiv_refl C x)
+  ≡ eq_refl (@id C x);
+
+assertnot (X : τ OneCat)
+  (x : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))) ⊢
+  @one_cat_omega_right_law_at_left
+    X x x
+    (@omega_equiv_refl
+      (@ncat_carrier (cat_succ cat_zero) X) x)
+  ≡ eq_refl (@id (@ncat_carrier (cat_succ cat_zero) X) x);
+
+assertnot (X : τ OneCat)
+  (x : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))) ⊢
+  @one_cat_omega_iso_evidence
+    X x x
+    (@omega_equiv_refl
+      (@ncat_carrier (cat_succ cat_zero) X) x)
+  ≡ @iso_evidence_refl
+      (@ncat_carrier (cat_succ cat_zero) X) x;
+
+assertnot (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @iso_evidence_omega_equiv
+    (@ncat_carrier (cat_succ cat_zero) X) x y
+    (@one_cat_omega_iso_evidence X x y e)
+  ≡ e;
+
+// catalog-area: One-category scoped iso univalence
+// A discrete-category object path has a canonical proof comparison.
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (p q : τ (@= (Obj C) x y)) ⊢
+  @discrete_cat_path_proof C d x y p q
+  : τ (@= (@= (Obj C) x y) p q);
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @one_cat_omega_iso_lift_left_path X x y i
+  : τ (@=
+      (@=
+        (Hom (@ncat_carrier (cat_succ cat_zero) X) x x)
+        (@comp_fapp0
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x y x
+          (@iso_evidence_from
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)
+          (@iso_evidence_to
+            (@ncat_carrier (cat_succ cat_zero) X) x y i))
+        (@id (@ncat_carrier (cat_succ cat_zero) X) x))
+      (@iso_evidence_left
+        (@ncat_carrier (cat_succ cat_zero) X) x y
+        (@one_cat_omega_iso_evidence
+          X x y
+          (@iso_evidence_omega_equiv
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+      (@iso_evidence_left
+        (@ncat_carrier (cat_succ cat_zero) X) x y i));
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @one_cat_omega_iso_lift_right_path X x y i
+  : τ (@=
+      (@=
+        (Hom (@ncat_carrier (cat_succ cat_zero) X) y y)
+        (@comp_fapp0
+          (@ncat_carrier (cat_succ cat_zero) X)
+          y x y
+          (@iso_evidence_to
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)
+          (@iso_evidence_from
+            (@ncat_carrier (cat_succ cat_zero) X) x y i))
+        (@id (@ncat_carrier (cat_succ cat_zero) X) y))
+      (@iso_evidence_right
+        (@ncat_carrier (cat_succ cat_zero) X) x y
+        (@one_cat_omega_iso_evidence
+          X x y
+          (@iso_evidence_omega_equiv
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+      (@iso_evidence_right
+        (@ncat_carrier (cat_succ cat_zero) X) x y i));
+
+// Reconstruction after the ordinary-to-omega lift is propositionally exact.
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @one_cat_omega_iso_lift_retract X x y i
+  : τ (@=
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@iso_evidence_omega_equiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y i))
+      i);
+
+// The reconstruction agrees with the ordinary encoder on encoded paths.
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)) ⊢
+  @one_cat_omega_iso_evidence_idtoequiv X x y p
+  : τ (@=
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@idtoequiv_cat
+          (@ncat_carrier (cat_succ cat_zero) X) x y p))
+      (@idtoiso_cat
+        (@ncat_carrier (cat_succ cat_zero) X) x y p));
+
+// The ordinary encoder after the scoped decoder is the second round trip.
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @one_cat_idtoiso_iso_path X x y i
+  : τ (@=
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@idtoiso_cat
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        (@one_cat_iso_path X x y i))
+      i);
+
+// The scoped decoder capability is indexed by the packaged OneCat.
+assert (X : τ OneCat) ⊢
+  OneCatIsoUnivalenceByDecoder X
+  : Grpd;
+
+assert (X : τ OneCat) ⊢
+  one_cat_iso_univalence_by_decoder X
+  : τ (OneCatIsoUnivalenceByDecoder X);
+
+// Contractible-fibre ordinary-iso univalence is derived from both round trips.
+assert (X : τ OneCat) ⊢
+  one_cat_iso_univalence X
+  : τ (CatIsoUnivalence
+      (@ncat_carrier (cat_succ cat_zero) X));
+
+// The generic ordinary-iso eliminator consumes the scoped inhabitant.
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @isotoid_cat
+    (@ncat_carrier (cat_succ cat_zero) X)
+    (@one_cat_iso_univalence X)
+    x
+    y
+    i
+  ≡ @one_cat_iso_path X x y i;
+
+assert (X : τ OneCat)
+  (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))) ⊢
+  @one_cat_iso_type_equiv X x y
+  : τ (TypeEquiv
+      (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y));
+
+// The named equivalence exposes the ordinary encoder and scoped decoder.
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)) ⊢
+  @type_equiv_to
+    (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+    (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+    (@one_cat_iso_type_equiv X x y)
+    p
+  ≡ @idtoiso_cat
+      (@ncat_carrier (cat_succ cat_zero) X) x y p;
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @type_equiv_from
+    (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+    (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+    (@one_cat_iso_type_equiv X x y)
+    i
+  ≡ @one_cat_iso_path X x y i;
+
+// The selected right path is exactly the constructed encoder-after-decoder law.
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
+  @type_equiv_right
+    (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+    (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+    (@one_cat_iso_type_equiv X x y)
+    i
+  ≡ @one_cat_idtoiso_iso_path X x y i;
+
+// The contraction-derived left path retains its distinct proof provenance.
+assertnot (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)) ⊢
+  @type_equiv_left
+    (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+    (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+    (@one_cat_iso_type_equiv X x y)
+    p
+  ≡ @one_cat_iso_path_idtoiso X x y p;
+
+// catalog-area: Directed categorical dimension
+
 // Object truncation is independent of directed dimension.
 assertnot [C : Cat] ⊢
   IsObjTruncCat trunc_zero C
@@ -4420,6 +5478,431 @@ assertnot (n : CatDim)
   (evidence0 evidence1 : τ (IsNCat n carrier)) ⊢
   @Struct_ncat n carrier evidence0
   ≡ @Struct_ncat n carrier evidence1;
+
+// catalog-area: Conditional directed object truncation
+assert ⊢ OmegaEquivAlongEvidenceProp_D0 : Grpd;
+
+assert (P : τ OmegaEquivAlongEvidenceProp_D0)
+  [C : Cat]
+  (x y : τ (Obj C))
+  (f : τ (Hom C x y)) ⊢
+  P C x y f
+  : τ (IsPropGrpd (@OmegaEquivAlong_D0 C x y f));
+
+assert (n : CatDim)
+  [A : Grpd]
+  (h : τ (IsPropGrpd A)) ⊢
+  @prop_is_trunc_cat_dim n A h
+  : τ (IsTruncGrpd (cat_dim_trunc_level n) A);
+
+assert [A : Grpd]
+  (h : τ (IsPropGrpd A)) ⊢
+  @prop_is_trunc_cat_dim cat_zero A h
+  ≡ @prop_is_trunc_succ trunc_minus_one A h;
+
+assert (n : CatDim)
+  [A : Grpd]
+  (h : τ (IsPropGrpd A)) ⊢
+  @prop_is_trunc_cat_dim (cat_succ n) A h
+  ≡ @prop_is_trunc_succ (cat_dim_trunc_level n) A h;
+
+assert (P : τ OmegaEquivAlongEvidenceProp_D0)
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C)) ⊢
+  @ncat_obj_trunc_from_evidence_prop P n C h
+  : τ (IsObjTruncCat (cat_dim_trunc_level n) C);
+
+assert (P : τ OmegaEquivAlongEvidenceProp_D0)
+  [C : Cat]
+  (h : τ (IsNCat cat_zero C)) ⊢
+  @ncat_obj_trunc_from_evidence_prop P cat_zero C h
+  ≡ @is_discrete_cat_obj_set C h;
+
+assert (P : τ OmegaEquivAlongEvidenceProp_D0)
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat (cat_succ n) C))
+  (x y : τ (Obj C)) ⊢
+  (@ncat_obj_trunc_from_evidence_prop P (cat_succ n) C h) x y
+  ≡ @is_trunc_grpd_equiv_from
+      (cat_dim_trunc_level n)
+      (@= (Obj C) x y)
+      (OmegaEquiv C x y)
+      (@cat_univalence_type_equiv C x y)
+      (@is_trunc_sigma
+        (cat_dim_trunc_level n)
+        (Hom C x y)
+        (λ f : τ (Hom C x y), @OmegaEquivAlong_D0 C x y f)
+        (@ncat_obj_trunc_from_evidence_prop
+          P n (Hom_cat C x y) (h x y))
+        (λ f : τ (Hom C x y),
+          @prop_is_trunc_cat_dim
+            n
+            (@OmegaEquivAlong_D0 C x y f)
+            (P C x y f)));
+
+assert (P : τ OmegaEquivAlongEvidenceProp_D0)
+  (X : τ OneCat) ⊢
+  @ncat_obj_trunc_from_evidence_prop
+    P
+    (cat_succ cat_zero)
+    (@ncat_carrier (cat_succ cat_zero) X)
+    (@ncat_evidence (cat_succ cat_zero) X)
+  : τ (IsObjTruncCat
+      trunc_one
+      (@ncat_carrier (cat_succ cat_zero) X));
+
+assert (P : τ OmegaEquivAlongEvidenceProp_D0)
+  (X : τ ZeroCat) ⊢
+  @ncat_obj_trunc_from_evidence_prop
+    P
+    cat_zero
+    (@ncat_carrier cat_zero X)
+    (@ncat_evidence cat_zero X)
+  ≡ @is_discrete_cat_obj_set
+      (@ncat_carrier cat_zero X)
+      (@ncat_evidence cat_zero X);
+
+assert (P : τ OmegaEquivAlongEvidenceProp_D0)
+  (X : τ OneCat)
+  (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))) ⊢
+  (@ncat_obj_trunc_from_evidence_prop
+    P
+    (cat_succ cat_zero)
+    (@ncat_carrier (cat_succ cat_zero) X)
+    (@ncat_evidence (cat_succ cat_zero) X)) x y
+  : τ (IsTruncGrpd
+      trunc_zero
+      (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y));
+
+assertnot (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C)) ⊢
+  h
+  : τ (IsObjTruncCat (cat_dim_trunc_level n) C);
+
+assertnot (P Q : τ OmegaEquivAlongEvidenceProp_D0)
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C)) ⊢
+  @ncat_obj_trunc_from_evidence_prop P n C h
+  ≡ @ncat_obj_trunc_from_evidence_prop Q n C h;
+
+// Typed proof-time negative: no unification rule erases the capability.
+assertnot (P Q : τ OmegaEquivAlongEvidenceProp_D0)
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C)) ⊢
+  @eq_refl
+    (IsObjTruncCat (cat_dim_trunc_level n) C)
+    (@ncat_obj_trunc_from_evidence_prop P n C h)
+  : τ (@=
+      (IsObjTruncCat (cat_dim_trunc_level n) C)
+      (@ncat_obj_trunc_from_evidence_prop P n C h)
+      (@ncat_obj_trunc_from_evidence_prop Q n C h));
+
+assertnot [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_path_view_refl_D0 C x y f u
+  : τ (IsPropGrpd (@OmegaEquivAlong_D0 C x y f));
+
+// Dimension-indexed recursive observation/path view of fixed-arrow evidence.
+// catalog-area: Dimension-indexed fixed-arrow evidence view
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @OmegaEquivAlongDimObservation_D0 n C h x y f
+  : Grpd;
+
+assert [C : Cat]
+  (h : τ (IsNCat cat_zero C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @OmegaEquivAlongDimObservation_D0 cat_zero C h x y f
+  ≡ Unit_grpd;
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  (x y : τ (Obj C)) ⊢
+  @OmegaEquivDimObservation_D0 n C h x y
+  : Grpd;
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_dim_observe_D0 n C h x y f u
+  : τ (@OmegaEquivAlongDimObservation_D0 n C h x y f);
+
+assert [C : Cat]
+  (h : τ (IsNCat cat_zero C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_dim_observe_D0 cat_zero C h x y f u
+  ≡ tt;
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat (cat_succ n) C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Fst
+    (@omega_equiv_along_dim_observe_D0
+      (cat_succ n) C h x y f u)
+  ≡ @omega_equiv_along_left_inv_D0 C x y f u;
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat (cat_succ n) C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Fst
+    (sigma_Snd
+      (@omega_equiv_along_dim_observe_D0
+        (cat_succ n) C h x y f u))
+  ≡ @omega_equiv_along_right_inv_D0 C x y f u;
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat (cat_succ n) C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Fst
+    (sigma_Fst
+      (sigma_Snd
+        (sigma_Snd
+          (@omega_equiv_along_dim_observe_D0
+            (cat_succ n) C h x y f u))))
+  ≡ @omega_equiv_to_D0
+      (Hom_cat C x x)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f)
+      (@id C x)
+      (@omega_equiv_along_left_cell_D0 C x y f u);
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat (cat_succ n) C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Snd
+    (sigma_Fst
+      (sigma_Snd
+        (sigma_Snd
+          (@omega_equiv_along_dim_observe_D0
+            (cat_succ n) C h x y f u))))
+  ≡ @omega_equiv_along_dim_observe_D0
+      n
+      (Hom_cat C x x)
+      (h x x)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f)
+      (@id C x)
+      (@omega_equiv_to_D0
+        (Hom_cat C x x)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f)
+        (@id C x)
+        (@omega_equiv_along_left_cell_D0 C x y f u))
+      (@omega_equiv_evidence_D0
+        (Hom_cat C x x)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f)
+        (@id C x)
+        (@omega_equiv_along_left_cell_D0 C x y f u));
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat (cat_succ n) C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Fst
+    (sigma_Snd
+      (sigma_Snd
+        (sigma_Snd
+          (@omega_equiv_along_dim_observe_D0
+            (cat_succ n) C h x y f u))))
+  ≡ @omega_equiv_to_D0
+      (Hom_cat C y y)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u))
+      (@id C y)
+      (@omega_equiv_along_right_cell_D0 C x y f u);
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat (cat_succ n) C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  sigma_Snd
+    (sigma_Snd
+      (sigma_Snd
+        (sigma_Snd
+          (@omega_equiv_along_dim_observe_D0
+            (cat_succ n) C h x y f u))))
+  ≡ @omega_equiv_along_dim_observe_D0
+      n
+      (Hom_cat C y y)
+      (h y y)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u))
+      (@id C y)
+      (@omega_equiv_to_D0
+        (Hom_cat C y y)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u))
+        (@id C y)
+        (@omega_equiv_along_right_cell_D0 C x y f u))
+      (@omega_equiv_evidence_D0
+        (Hom_cat C y y)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u))
+        (@id C y)
+        (@omega_equiv_along_right_cell_D0 C x y f u));
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @OmegaEquivAlongDimPathView_D0 n C h x y f u v
+  : Grpd;
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_dim_path_view_refl_D0 n C h x y f u
+  : τ (@OmegaEquivAlongDimPathView_D0 n C h x y f u u);
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  [u v : τ (@OmegaEquivAlong_D0 C x y f)]
+  (p : τ (@= (@OmegaEquivAlong_D0 C x y f) u v)) ⊢
+  @omega_equiv_along_dim_path_view_encode_D0 n C h x y f u v p
+  : τ (@OmegaEquivAlongDimPathView_D0 n C h x y f u v);
+
+assert (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_dim_path_view_encode_D0
+    n C h x y f u u (@eq_refl (@OmegaEquivAlong_D0 C x y f) u)
+  ≡ @omega_equiv_along_dim_path_view_refl_D0 n C h x y f u;
+
+assert (X : τ ZeroCat)
+  [x y : τ (Obj (@ncat_carrier cat_zero X))]
+  [f : τ (Hom (@ncat_carrier cat_zero X) x y)]
+  (u : τ (@OmegaEquivAlong_D0
+      (@ncat_carrier cat_zero X) x y f)) ⊢
+  @omega_equiv_along_dim_observe_D0
+    cat_zero
+    (@ncat_carrier cat_zero X)
+    (@ncat_evidence cat_zero X)
+    x y f u
+  ≡ tt;
+
+assert (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  [f : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)]
+  (u : τ (@OmegaEquivAlong_D0
+      (@ncat_carrier (cat_succ cat_zero) X) x y f)) ⊢
+  sigma_Snd
+    (sigma_Fst
+      (sigma_Snd
+        (sigma_Snd
+          (@omega_equiv_along_dim_observe_D0
+            (cat_succ cat_zero)
+            (@ncat_carrier (cat_succ cat_zero) X)
+            (@ncat_evidence (cat_succ cat_zero) X)
+            x y f u))))
+  ≡ tt;
+
+// The dimension-indexed facade is not installed as public evidence equality.
+assertnot (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @= (@OmegaEquivAlong_D0 C x y f) u v
+  ≡ @OmegaEquivAlongDimPathView_D0 n C h x y f u v;
+
+// The existing one-layer view and the indexed deep view remain distinct.
+assertnot (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @OmegaEquivAlongPathView_D0 C x y f u v
+  ≡ @OmegaEquivAlongDimPathView_D0 n C h x y f u v;
+
+// View reflexivity is not a proof that the opaque evidence is propositional.
+assertnot (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @omega_equiv_along_dim_path_view_refl_D0 n C h x y f u
+  : τ (IsPropGrpd (@OmegaEquivAlong_D0 C x y f));
+
+// An open dimension retains the explicit IsNCat witness in the classifier.
+assertnot (n : CatDim)
+  [C : Cat]
+  (h k : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)] ⊢
+  @OmegaEquivAlongDimObservation_D0 n C h x y f
+  ≡ @OmegaEquivAlongDimObservation_D0 n C k x y f;
+
+// Typed proof-time negative: no unification rule identifies observations of
+// different opaque certificates at an open dimension.
+assertnot (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f)) ⊢
+  @eq_refl
+    (@OmegaEquivAlongDimObservation_D0 n C h x y f)
+    (@omega_equiv_along_dim_observe_D0 n C h x y f u)
+  : τ (@=
+      (@OmegaEquivAlongDimObservation_D0 n C h x y f)
+      (@omega_equiv_along_dim_observe_D0 n C h x y f u)
+      (@omega_equiv_along_dim_observe_D0 n C h x y f v));
 
 // catalog-area: auto
 assert [C : Cat] (x : τ (Obj C)) ⊢
@@ -13835,6 +15318,399 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
         u
         y
         (@piapp0 K E s y);
+
+// catalog-area: Componentwise registered binary-sum action
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A) ⊢
+  @sum_map A B A' B' f g (@sum_inl A B a)
+  ≡ @sum_inl A' B' (f a);
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B) ⊢
+  @sum_map A B A' B' f g (@sum_inr A B b)
+  ≡ @sum_inr A' B' (g b);
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A) ⊢
+  @sum_map_inl_ap_basis A B A' B' f g a (f a)
+  : τ (@= A' (f a) (f a));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B) ⊢
+  @sum_map_inr_ap_basis A B A' B' f g b (g b)
+  : τ (@= B' (g b) (g b));
+
+// Typed eq_refl exercises each direct proof-time comparison independently.
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A) ⊢
+  @eq_refl
+    (@= A' (f a) (f a))
+    (@sum_map_inl_ap_basis A B A' B' f g a (f a))
+  : τ (@=
+      (@= A' (f a) (f a))
+      (@sum_map_inl_ap_basis A B A' B' f g a (f a))
+      (@eq_refl A' (f a)));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A) ⊢
+  @eq_refl
+    (@= A' (f a) (f a))
+    (@sum_map_inl_ap_basis A B A' B' f g a (f a))
+  : τ (@=
+      (@= A' (f a) (f a))
+      (@sum_map_inl_ap_basis A B A' B' f g a (f a))
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inl A B a)
+        (@sum_inl A B a)
+        (@eq_refl A a)));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B) ⊢
+  @eq_refl
+    (@= B' (g b) (g b))
+    (@sum_map_inr_ap_basis A B A' B' f g b (g b))
+  : τ (@=
+      (@= B' (g b) (g b))
+      (@sum_map_inr_ap_basis A B A' B' f g b (g b))
+      (@eq_refl B' (g b)));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B) ⊢
+  @eq_refl
+    (@= B' (g b) (g b))
+    (@sum_map_inr_ap_basis A B A' B' f g b (g b))
+  : τ (@=
+      (@= B' (g b) (g b))
+      (@sum_map_inr_ap_basis A B A' B' f g b (g b))
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inr A B b)
+        (@sum_inr A B b)
+        (@eq_refl B b)));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  [a0 a1 : τ A]
+  (p : τ (@= A a0 a1)) ⊢
+  @sum_map_inl_eq_ap A B A' B' f g a0 a1 p
+  : τ (@=
+      (@= A' (f a0) (f a1))
+      (@eq_ap A A' f a0 a1 p)
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inl A B a0)
+        (@sum_inl A B a1)
+        p));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  [b0 b1 : τ B]
+  (p : τ (@= B b0 b1)) ⊢
+  @sum_map_inr_eq_ap A B A' B' f g b0 b1 p
+  : τ (@=
+      (@= B' (g b0) (g b1))
+      (@eq_ap B B' g b0 b1 p)
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inr A B b0)
+        (@sum_inr A B b1)
+        p));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g)) ⊢
+  @sum_obs_action_map A B A' B' f g u v
+  : τ (@ObsActionMap
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  [a0 a1 : τ A]
+  (p : τ (@= A a0 a1)) ⊢
+  (λ q : τ (@= A' (f a0) (f a1)), q)
+    (@sum_obs_action_map A B A' B' f g u v
+      (@sum_inl A B a0) (@sum_inl A B a1) p)
+  ≡
+  (λ q : τ (@= A' (f a0) (f a1)), q)
+    (@obs_action_apply A A' f u a0 a1 p);
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  [b0 b1 : τ B]
+  (p : τ (@= B b0 b1)) ⊢
+  (λ q : τ (@= B' (g b0) (g b1)), q)
+    (@sum_obs_action_map A B A' B' f g u v
+      (@sum_inr A B b0) (@sum_inr A B b1) p)
+  ≡
+  (λ q : τ (@= B' (g b0) (g b1)), q)
+    (@obs_action_apply B B' g v b0 b1 p);
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  (a : τ A)
+  (b : τ B)
+  (p : τ Empty_grpd) ⊢
+  (λ q : τ Empty_grpd, q)
+    (@sum_obs_action_map A B A' B' f g u v
+      (@sum_inl A B a) (@sum_inr A B b) p)
+  ≡ (λ q : τ Empty_grpd, q) p;
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  (a : τ A)
+  (b : τ B)
+  (p : τ Empty_grpd) ⊢
+  (λ q : τ Empty_grpd, q)
+    (@sum_obs_action_map A B A' B' f g u v
+      (@sum_inr A B b) (@sum_inl A B a) p)
+  ≡ (λ q : τ Empty_grpd, q) p;
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g)) ⊢
+  @sum_obs_action_coherence A B A' B' f g u v
+  : τ (@ObsActionCoherence
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g)
+      (@sum_obs_action_map A B A' B' f g u v));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g)) ⊢
+  @sum_obs_action A B A' B' f g u v
+  : τ (@ObsAction
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  [a0 a1 : τ A]
+  (p : τ (@= A a0 a1)) ⊢
+  (λ q : τ (@= A' (f a0) (f a1)), q)
+    (@obs_action_apply
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g)
+      (@sum_obs_action A B A' B' f g u v)
+      (@sum_inl A B a0) (@sum_inl A B a1) p)
+  ≡
+  (λ q : τ (@= A' (f a0) (f a1)), q)
+    (@obs_action_apply A A' f u a0 a1 p);
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  [b0 b1 : τ B]
+  (p : τ (@= B b0 b1)) ⊢
+  (λ q : τ (@= B' (g b0) (g b1)), q)
+    (@obs_action_apply
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g)
+      (@sum_obs_action A B A' B' f g u v)
+      (@sum_inr A B b0) (@sum_inr A B b1) p)
+  ≡
+  (λ q : τ (@= B' (g b0) (g b1)), q)
+    (@obs_action_apply B B' g v b0 b1 p);
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  [a0 a1 : τ A]
+  (p : τ (@= A a0 a1)) ⊢
+  @obs_action_agrees
+    (Sum_grpd A B)
+    (Sum_grpd A' B')
+    (@sum_map A B A' B' f g)
+    (@sum_obs_action A B A' B' f g u v)
+    (@sum_inl A B a0) (@sum_inl A B a1) p
+  : τ (@=
+      (@= A' (f a0) (f a1))
+      (@obs_action_apply A A' f u a0 a1 p)
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inl A B a0)
+        (@sum_inl A B a1)
+        p));
+
+assert [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  [b0 b1 : τ B]
+  (p : τ (@= B b0 b1)) ⊢
+  @obs_action_agrees
+    (Sum_grpd A B)
+    (Sum_grpd A' B')
+    (@sum_map A B A' B' f g)
+    (@sum_obs_action A B A' B' f g u v)
+    (@sum_inr A B b0) (@sum_inr A B b1) p
+  : τ (@=
+      (@= B' (g b0) (g b1))
+      (@obs_action_apply B B' g v b0 b1 p)
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inr A B b0)
+        (@sum_inr A B b1)
+        p));
+
+// The four proof-time comparisons do not select runtime action normal forms.
+assertnot [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A) ⊢
+  (λ q : τ (@= A' (f a) (f a)), q)
+    (@sum_map_inl_ap_basis A B A' B' f g a (f a))
+  ≡
+  (λ q : τ (@= A' (f a) (f a)), q)
+    (@eq_refl A' (f a));
+
+assertnot [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B) ⊢
+  (λ q : τ (@= B' (g b) (g b)), q)
+    (@sum_map_inr_ap_basis A B A' B' f g b (g b))
+  ≡
+  (λ q : τ (@= B' (g b) (g b)), q)
+    (@eq_refl B' (g b));
+
+// No transitive proof-time collapse is assumed between outer and component action.
+assertnot [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A) ⊢
+  @eq_refl
+    (@= A' (f a) (f a))
+    (@eq_ap
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g)
+      (@sum_inl A B a)
+      (@sum_inl A B a)
+      (@eq_refl A a))
+  : τ (@=
+      (@= A' (f a) (f a))
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inl A B a)
+        (@sum_inl A B a)
+        (@eq_refl A a))
+      (@eq_refl A' (f a)));
+
+assertnot [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B) ⊢
+  @eq_refl
+    (@= B' (g b) (g b))
+    (@eq_ap
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g)
+      (@sum_inr A B b)
+      (@sum_inr A B b)
+      (@eq_refl B b))
+  : τ (@=
+      (@= B' (g b) (g b))
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inr A B b)
+        (@sum_inr A B b)
+        (@eq_refl B b))
+      (@eq_refl B' (g b)));
+
+assertnot [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  [x y : τ (Sum_grpd A B)]
+  (p : τ (@= (Sum_grpd A B) x y)) ⊢
+  @sum_obs_action_map A B A' B' f g u v x y p
+  ≡ @eq_ap
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g)
+      x y p;
+
+assertnot [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g)) ⊢
+  @sum_obs_action A B A' B' f g u v
+  ≡ @obs_action_from_function
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g);
+
+// catalog-area: auto
 
 assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
   (x y : τ (Obj K)) ⊢

@@ -489,6 +489,121 @@ with @= Nat_grpd zero (succ _) ↪ Empty_grpd
 with @= Nat_grpd (succ _) zero ↪ Empty_grpd
 with @= Nat_grpd (succ $n) (succ $m) ↪ @= Nat_grpd $n $m;
 
+/*
+  Proof-time basis for successor action on recursive Nat paths.
+
+  Successor equality exposes the predecessor path, but generic reflexivity at
+  `n` and at `succ n` deliberately retains different proof provenance. The
+  stable basis has one direct comparison with each form. These rules support
+  typed proof construction only; neither selects a runtime normal form.
+*/
+injective symbol nat_succ_ap_basis
+  (n : τ Nat_grpd)
+  : τ (@= Nat_grpd (succ n) (succ n));
+
+// Proof-time only: the basis compares with the exposed predecessor proof.
+unif_rule
+  @nat_succ_ap_basis $n
+  ≡ @eq_refl Nat_grpd $n
+  ↪ [ tt ≡ tt ];
+
+// Proof-time only: the basis compares with outer successor reflexivity.
+unif_rule
+  @nat_succ_ap_basis $n
+  ≡ @eq_refl Nat_grpd (succ $n)
+  ↪ [ tt ≡ tt ];
+
+// The exposed predecessor proof reaches the stable successor basis.
+symbol nat_succ_component_basis
+  (n : τ Nat_grpd)
+  : τ (@=
+      (@= Nat_grpd (succ n) (succ n))
+      (@eq_refl Nat_grpd n)
+      (@nat_succ_ap_basis n))
+≔ @eq_refl
+    (@= Nat_grpd (succ n) (succ n))
+    (@nat_succ_ap_basis n);
+
+// The stable successor basis reaches generic action on reflexivity.
+symbol nat_succ_basis_outer
+  (n : τ Nat_grpd)
+  : τ (@=
+      (@= Nat_grpd (succ n) (succ n))
+      (@nat_succ_ap_basis n)
+      (@eq_ap
+        Nat_grpd
+        Nat_grpd
+        (λ k : τ Nat_grpd, succ k)
+        n n
+        (@eq_refl Nat_grpd n)))
+≔ @eq_refl
+    (@= Nat_grpd (succ n) (succ n))
+    (@nat_succ_ap_basis n);
+
+// Exposed predecessor paths agree with generic successor action.
+symbol nat_succ_eq_ap
+  [m n : τ Nat_grpd]
+  (p : τ (@= Nat_grpd m n))
+  : τ (@=
+      (@= Nat_grpd (succ m) (succ n))
+      p
+      (@eq_ap
+        Nat_grpd
+        Nat_grpd
+        (λ k : τ Nat_grpd, succ k)
+        m n p))
+≔ @ind_eqr
+    Nat_grpd
+    n
+    (λ m : τ Nat_grpd, λ p : τ (@= Nat_grpd m n),
+      @=
+        (@= Nat_grpd (succ m) (succ n))
+        p
+        (@eq_ap
+          Nat_grpd
+          Nat_grpd
+          (λ k : τ Nat_grpd, succ k)
+          m n p))
+    (@eq_trans
+      (@= Nat_grpd (succ n) (succ n))
+      (@eq_refl Nat_grpd n)
+      (@nat_succ_ap_basis n)
+      (@eq_ap
+        Nat_grpd
+        Nat_grpd
+        (λ k : τ Nat_grpd, succ k)
+        n n
+        (@eq_refl Nat_grpd n))
+      (@nat_succ_component_basis n)
+      (@nat_succ_basis_outer n))
+    m
+    p;
+
+/*
+  Former-specific right-based induction for successor paths.
+
+  The public proof is indexed by `succ m = succ n`, while the active Nat
+  classifier exposes exactly `m = n`. Routing that exposed proof through the
+  generic `ind_eqr` owner gives a sound beta on component reflexivity without
+  adding a generic-J rule, proof-time equation, or fibrancy axiom. Outer
+  successor reflexivity and the stable action basis remain distinct forms.
+*/
+symbol nat_succ_ind_eqr
+  [n : τ Nat_grpd]
+  (P : Π m : τ Nat_grpd,
+    τ (@= Nat_grpd (succ m) (succ n)) → Grpd)
+  (u : τ (P n (@eq_refl Nat_grpd n)))
+  [m : τ Nat_grpd]
+  (p : τ (@= Nat_grpd (succ m) (succ n)))
+  : τ (P m p)
+≔ @ind_eqr
+    Nat_grpd
+    n
+    (λ m : τ Nat_grpd, λ p : τ (@= Nat_grpd m n), P m p)
+    u
+    m
+    p;
+
 // Dependent natural-number elimination, routed through the generated recursor.
 symbol nat_elim
   (P : τ Nat_grpd → Grpd)
@@ -550,6 +665,242 @@ symbol sum_elim
   (s : τ (Sum_grpd A B))
   : τ (P s)
 ≔ @ind_SumData A B P u_inl u_inr s;
+// Canonical map of a binary sum, defined through the Sum eliminator.
+symbol sum_map
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (s : τ (Sum_grpd A B))
+  : τ (Sum_grpd A' B')
+≔ @sum_elim A B
+    (λ _ : τ (Sum_grpd A B), Sum_grpd A' B')
+    (λ a : τ A, @sum_inl A' B' (f a))
+    (λ b : τ B, @sum_inr A' B' (g b))
+    s;
+
+/*
+  Reflexive proof-time basis for componentwise Sum action.
+
+  Generic eq_ap is transparent, while the generic J owner deliberately keeps
+  outer Sum reflexivity distinct from component reflexivity. Each stable basis
+  therefore has two direct, semantically justified comparisons: one with the
+  normalized component action and one with the exact normalized outer-J
+  action. The rules do not choose runtime normal forms, and downstream proofs
+  compose the two comparisons explicitly rather than relying on experimental
+  unification transitivity.
+*/
+// Stable left reflexive action basis.
+injective symbol sum_map_inl_ap_basis
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A)
+  (fa : τ A')
+  : τ (@= A' fa fa);
+
+// Stable right reflexive action basis.
+injective symbol sum_map_inr_ap_basis
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B)
+  (gb : τ B')
+  : τ (@= B' gb gb);
+
+// Proof-time only: the left basis compares with normalized component action.
+unif_rule
+  @sum_map_inl_ap_basis _ _ $A' _ _ _ _ $fa
+  ≡ @eq_refl $A' $fa
+  ↪ [ tt ≡ tt ];
+
+// Proof-time only: the left basis compares with normalized outer Sum action.
+// The stable basis restricts the transparent ind_eqr pattern to this consumer.
+unif_rule
+  @sum_map_inl_ap_basis $A $B _ _ _ _ $a _
+  ≡ @ind_eqr
+      (Sum_grpd $A $B)
+      (@sum_inl $A $B $a)
+      _
+      _
+      (@sum_inl $A $B $a)
+      (@eq_refl $A $a)
+  ↪ [ tt ≡ tt ];
+
+// Proof-time only: the right basis compares with normalized component action.
+unif_rule
+  @sum_map_inr_ap_basis _ _ _ $B' _ _ _ $gb
+  ≡ @eq_refl $B' $gb
+  ↪ [ tt ≡ tt ];
+
+// Proof-time only: the right basis compares with normalized outer Sum action.
+unif_rule
+  @sum_map_inr_ap_basis $A $B _ _ _ _ $b _
+  ≡ @ind_eqr
+      (Sum_grpd $A $B)
+      (@sum_inr $A $B $b)
+      _
+      _
+      (@sum_inr $A $B $b)
+      (@eq_refl $B $b)
+  ↪ [ tt ≡ tt ];
+
+// Component generic action reaches the stable left basis.
+symbol sum_map_inl_component_basis
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A)
+  : τ (@=
+      (@= A' (f a) (f a))
+      (@eq_ap A A' f a a (@eq_refl A a))
+      (@sum_map_inl_ap_basis A B A' B' f g a (f a)))
+≔ @eq_refl
+    (@= A' (f a) (f a))
+    (@sum_map_inl_ap_basis A B A' B' f g a (f a));
+
+// The stable left basis reaches outer Sum generic action.
+symbol sum_map_inl_basis_outer
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (a : τ A)
+  : τ (@=
+      (@= A' (f a) (f a))
+      (@sum_map_inl_ap_basis A B A' B' f g a (f a))
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inl A B a)
+        (@sum_inl A B a)
+        (@eq_refl A a)))
+≔ @eq_refl
+    (@= A' (f a) (f a))
+    (@sum_map_inl_ap_basis A B A' B' f g a (f a));
+
+// Component generic action reaches the stable right basis.
+symbol sum_map_inr_component_basis
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B)
+  : τ (@=
+      (@= B' (g b) (g b))
+      (@eq_ap B B' g b b (@eq_refl B b))
+      (@sum_map_inr_ap_basis A B A' B' f g b (g b)))
+≔ @eq_refl
+    (@= B' (g b) (g b))
+    (@sum_map_inr_ap_basis A B A' B' f g b (g b));
+
+// The stable right basis reaches outer Sum generic action.
+symbol sum_map_inr_basis_outer
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (b : τ B)
+  : τ (@=
+      (@= B' (g b) (g b))
+      (@sum_map_inr_ap_basis A B A' B' f g b (g b))
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inr A B b)
+        (@sum_inr A B b)
+        (@eq_refl B b)))
+≔ @eq_refl
+    (@= B' (g b) (g b))
+    (@sum_map_inr_ap_basis A B A' B' f g b (g b));
+
+// Left-component paths agree with generic action of the canonical Sum map.
+symbol sum_map_inl_eq_ap
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  [a0 a1 : τ A]
+  (p : τ (@= A a0 a1))
+  : τ (@=
+      (@= A' (f a0) (f a1))
+      (@eq_ap A A' f a0 a1 p)
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inl A B a0)
+        (@sum_inl A B a1)
+        p))
+≔ @ind_eqr A a1
+    (λ a0 : τ A, λ p : τ (@= A a0 a1),
+      @=
+        (@= A' (f a0) (f a1))
+        (@eq_ap A A' f a0 a1 p)
+        (@eq_ap
+          (Sum_grpd A B)
+          (Sum_grpd A' B')
+          (@sum_map A B A' B' f g)
+          (@sum_inl A B a0)
+          (@sum_inl A B a1)
+          p))
+    (@eq_trans
+      (@= A' (f a1) (f a1))
+      (@eq_ap A A' f a1 a1 (@eq_refl A a1))
+      (@sum_map_inl_ap_basis A B A' B' f g a1 (f a1))
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inl A B a1)
+        (@sum_inl A B a1)
+        (@eq_refl A a1))
+      (@sum_map_inl_component_basis A B A' B' f g a1)
+      (@sum_map_inl_basis_outer A B A' B' f g a1))
+    a0
+    p;
+
+// Right-component paths agree with generic action of the canonical Sum map.
+symbol sum_map_inr_eq_ap
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  [b0 b1 : τ B]
+  (p : τ (@= B b0 b1))
+  : τ (@=
+      (@= B' (g b0) (g b1))
+      (@eq_ap B B' g b0 b1 p)
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inr A B b0)
+        (@sum_inr A B b1)
+        p))
+≔ @ind_eqr B b1
+    (λ b0 : τ B, λ p : τ (@= B b0 b1),
+      @=
+        (@= B' (g b0) (g b1))
+        (@eq_ap B B' g b0 b1 p)
+        (@eq_ap
+          (Sum_grpd A B)
+          (Sum_grpd A' B')
+          (@sum_map A B A' B' f g)
+          (@sum_inr A B b0)
+          (@sum_inr A B b1)
+          p))
+    (@eq_trans
+      (@= B' (g b1) (g b1))
+      (@eq_ap B B' g b1 b1 (@eq_refl B b1))
+      (@sum_map_inr_ap_basis A B A' B' f g b1 (g b1))
+      (@eq_ap
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g)
+        (@sum_inr A B b1)
+        (@sum_inr A B b1)
+        (@eq_refl B b1))
+      (@sum_map_inr_component_basis A B A' B' f g b1)
+      (@sum_map_inr_basis_outer A B A' B' f g b1))
+    b0
+    p;
 
 /*
   Canonical finite dependent-record representative.
@@ -1201,6 +1552,240 @@ symbol obs_action_comp
     (λ z : τ A, g (f z))
     (@obs_action_comp_map A B C f g u v)
     (@obs_action_comp_coherence A B C f g u v);
+
+/*
+  Registered successor action on recursive Nat equality.
+
+  The selected operation reuses the exposed predecessor path. Agreement with
+  semantic `eq_ap` is the theorem above; no successor-specific J beta follows.
+*/
+symbol nat_succ_obs_action_map
+  : τ (@ObsActionMap
+      Nat_grpd
+      Nat_grpd
+      (λ n : τ Nat_grpd, succ n))
+≔ λ m : τ Nat_grpd,
+   λ n : τ Nat_grpd,
+   λ p : τ (@= Nat_grpd m n), p;
+
+symbol nat_succ_obs_action_coherence
+  : τ (@ObsActionCoherence
+      Nat_grpd
+      Nat_grpd
+      (λ n : τ Nat_grpd, succ n)
+      nat_succ_obs_action_map)
+≔ λ m : τ Nat_grpd,
+   λ n : τ Nat_grpd,
+   λ p : τ (@= Nat_grpd m n),
+    @nat_succ_eq_ap m n p;
+
+symbol nat_succ_obs_action
+  : τ (@ObsAction
+      Nat_grpd
+      Nat_grpd
+      (λ n : τ Nat_grpd, succ n))
+≔ @obs_action_intro
+    Nat_grpd
+    Nat_grpd
+    (λ n : τ Nat_grpd, succ n)
+    nat_succ_obs_action_map
+    nat_succ_obs_action_coherence;
+
+/*
+  Registered componentwise action of a binary-sum map.
+
+  Equal tags delegate to the registered action on the corresponding summand.
+  Mixed tags return or eliminate the already-impossible Empty witness.
+  Agreement with generic eq_ap is propositional and uses the Sum-owned
+  component comparison above; the selected action remains a distinct runtime
+  presentation at open endpoints.
+*/
+// Componentwise selected action map for `sum_map(f,g)`.
+symbol sum_obs_action_map
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  : τ (@ObsActionMap
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g))
+≔ λ x : τ (Sum_grpd A B),
+    λ y : τ (Sum_grpd A B),
+    λ p : τ (@= (Sum_grpd A B) x y),
+      @sum_elim A B
+        (λ x0 : τ (Sum_grpd A B),
+          @Pi_grpd (Sum_grpd A B)
+            (λ y0 : τ (Sum_grpd A B),
+              @Pi_grpd (@= (Sum_grpd A B) x0 y0)
+                (λ _ : τ (@= (Sum_grpd A B) x0 y0),
+                  @= (Sum_grpd A' B')
+                    (@sum_map A B A' B' f g x0)
+                    (@sum_map A B A' B' f g y0))))
+        (λ a0 : τ A,
+          @sum_elim A B
+            (λ y0 : τ (Sum_grpd A B),
+              @Pi_grpd
+                (@= (Sum_grpd A B) (@sum_inl A B a0) y0)
+                (λ _ : τ (@= (Sum_grpd A B) (@sum_inl A B a0) y0),
+                  @= (Sum_grpd A' B')
+                    (@sum_map A B A' B' f g (@sum_inl A B a0))
+                    (@sum_map A B A' B' f g y0)))
+            (λ a1 : τ A,
+              λ p0 : τ (@= A a0 a1),
+                @obs_action_apply A A' f u a0 a1 p0)
+            (λ b1 : τ B,
+              λ p0 : τ Empty_grpd, p0))
+        (λ b0 : τ B,
+          @sum_elim A B
+            (λ y0 : τ (Sum_grpd A B),
+              @Pi_grpd
+                (@= (Sum_grpd A B) (@sum_inr A B b0) y0)
+                (λ _ : τ (@= (Sum_grpd A B) (@sum_inr A B b0) y0),
+                  @= (Sum_grpd A' B')
+                    (@sum_map A B A' B' f g (@sum_inr A B b0))
+                    (@sum_map A B A' B' f g y0)))
+            (λ a1 : τ A,
+              λ p0 : τ Empty_grpd, p0)
+            (λ b1 : τ B,
+              λ p0 : τ (@= B b0 b1),
+                @obs_action_apply B B' g v b0 b1 p0))
+        x
+        y
+        p;
+
+// Pointwise classifier for selected-versus-semantic Sum action agreement.
+symbol SumObsActionCoherenceAt
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  (x y : τ (Sum_grpd A B))
+  (p : τ (@= (Sum_grpd A B) x y))
+  : Grpd
+≔ @=
+    (@= (Sum_grpd A' B')
+      (@sum_map A B A' B' f g x)
+      (@sum_map A B A' B' f g y))
+    (@sum_obs_action_map A B A' B' f g u v x y p)
+    (@eq_ap
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g)
+      x y p);
+
+// Componentwise selected action agrees propositionally with generic eq_ap.
+symbol sum_obs_action_coherence
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  : τ (@ObsActionCoherence
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g)
+      (@sum_obs_action_map A B A' B' f g u v))
+≔ λ x : τ (Sum_grpd A B),
+    λ y : τ (Sum_grpd A B),
+    λ p : τ (@= (Sum_grpd A B) x y),
+      @sum_elim A B
+        (λ x0 : τ (Sum_grpd A B),
+          @Pi_grpd (Sum_grpd A B)
+            (λ y0 : τ (Sum_grpd A B),
+              @Pi_grpd (@= (Sum_grpd A B) x0 y0)
+                (λ p0 : τ (@= (Sum_grpd A B) x0 y0),
+                  @SumObsActionCoherenceAt
+                    A B A' B' f g u v x0 y0 p0)))
+        (λ a0 : τ A,
+          @sum_elim A B
+            (λ y0 : τ (Sum_grpd A B),
+              @Pi_grpd
+                (@= (Sum_grpd A B) (@sum_inl A B a0) y0)
+                (λ p0 : τ (@= (Sum_grpd A B) (@sum_inl A B a0) y0),
+                  @SumObsActionCoherenceAt
+                    A B A' B' f g u v (@sum_inl A B a0) y0 p0))
+            (λ a1 : τ A,
+              λ p0 : τ (@= A a0 a1),
+                @eq_trans
+                  (@= A' (f a0) (f a1))
+                  (@obs_action_apply A A' f u a0 a1 p0)
+                  (@eq_ap A A' f a0 a1 p0)
+                  (@eq_ap
+                    (Sum_grpd A B)
+                    (Sum_grpd A' B')
+                    (@sum_map A B A' B' f g)
+                    (@sum_inl A B a0)
+                    (@sum_inl A B a1)
+                    p0)
+                  (@obs_action_agrees A A' f u a0 a1 p0)
+                  (@sum_map_inl_eq_ap A B A' B' f g a0 a1 p0))
+            (λ b1 : τ B,
+              λ p0 : τ Empty_grpd,
+                @empty_elim
+                  (λ q : τ Empty_grpd,
+                    @SumObsActionCoherenceAt
+                      A B A' B' f g u v
+                      (@sum_inl A B a0)
+                      (@sum_inr A B b1)
+                      q)
+                  p0))
+        (λ b0 : τ B,
+          @sum_elim A B
+            (λ y0 : τ (Sum_grpd A B),
+              @Pi_grpd
+                (@= (Sum_grpd A B) (@sum_inr A B b0) y0)
+                (λ p0 : τ (@= (Sum_grpd A B) (@sum_inr A B b0) y0),
+                  @SumObsActionCoherenceAt
+                    A B A' B' f g u v (@sum_inr A B b0) y0 p0))
+            (λ a1 : τ A,
+              λ p0 : τ Empty_grpd,
+                @empty_elim
+                  (λ q : τ Empty_grpd,
+                    @SumObsActionCoherenceAt
+                      A B A' B' f g u v
+                      (@sum_inr A B b0)
+                      (@sum_inl A B a1)
+                      q)
+                  p0)
+            (λ b1 : τ B,
+              λ p0 : τ (@= B b0 b1),
+                @eq_trans
+                  (@= B' (g b0) (g b1))
+                  (@obs_action_apply B B' g v b0 b1 p0)
+                  (@eq_ap B B' g b0 b1 p0)
+                  (@eq_ap
+                    (Sum_grpd A B)
+                    (Sum_grpd A' B')
+                    (@sum_map A B A' B' f g)
+                    (@sum_inr A B b0)
+                    (@sum_inr A B b1)
+                    p0)
+                  (@obs_action_agrees B B' g v b0 b1 p0)
+                  (@sum_map_inr_eq_ap A B A' B' f g b0 b1 p0)))
+        x
+        y
+        p;
+
+// Registered componentwise action for the canonical binary-sum map.
+symbol sum_obs_action
+  [A B A' B' : Grpd]
+  (f : τ A → τ A')
+  (g : τ B → τ B')
+  (u : τ (@ObsAction A A' f))
+  (v : τ (@ObsAction B B' g))
+  : τ (@ObsAction
+      (Sum_grpd A B)
+      (Sum_grpd A' B')
+      (@sum_map A B A' B' f g))
+≔ @obs_action_intro
+    (Sum_grpd A B)
+    (Sum_grpd A' B')
+    (@sum_map A B A' B' f g)
+    (@sum_obs_action_map A B A' B' f g u v)
+    (@sum_obs_action_coherence A B A' B' f g u v);
 
 // Candidate dependent action carried by a fixed open section.
 symbol ObsDActionMap
@@ -5055,7 +5640,9 @@ symbol isotoid_cat
       (U x y))
     i;
 
-// Selected global decoder from ordinary isomorphism evidence to object equality.
+// Legacy compatibility decoder from ordinary isomorphism evidence to object
+// equality. It remains a runtime owner for reflexive and Product computation;
+// no arbitrary-`Cat` univalence capability inhabits it.
 symbol iso_evidence_path
   [C : Cat]
   [x y : τ (Obj C)]
@@ -5065,32 +5652,6 @@ symbol iso_evidence_path
 // Decoder beta on reflexive ordinary isomorphism evidence.
 rule @iso_evidence_path $C $x $x (@iso_evidence_refl $C $x)
   ↪ eq_refl $x;
-
-// Specified-inverse 1-categorical univalence presentation.
-symbol CatIsoUnivalenceByDecoder
-  (C : Cat)
-  : Grpd
-≔ @Pi_grpd (Obj C)
-    (λ x : τ (Obj C),
-      @Pi_grpd (Obj C)
-        (λ y : τ (Obj C),
-          @EquivByInverse
-            (@= (Obj C) x y)
-            (IsoEvidence C x y)
-            (λ p : τ (@= (Obj C) x y), @idtoiso_cat C x y p)
-            (λ i : τ (IsoEvidence C x y), @iso_evidence_path C x y i)));
-
-// Global operational staging assumption: every active category is
-// 1-categorically univalent, i.e. ordinary isomorphism evidence determines an
-// object path. This does not replace final omega-categorical univalence.
-symbol cat_iso_univalence
-  (C : Cat)
-  : τ (CatIsoUnivalence C);
-
-// Global decoder-oriented 1-categorical univalence capability.
-symbol cat_iso_univalence_by_decoder
-  (C : Cat)
-  : τ (CatIsoUnivalenceByDecoder C);
 
 /*
   Candidate D0: omega-equivalence evidence indexed by a fixed arrow.
@@ -5175,6 +5736,59 @@ symbol omega_equiv_along_right_cell_D0
         (omega_equiv_along_right_inv_D0 u))
       (@id C y));
 
+// Forward arrow of the left recursive inverse cell.
+symbol omega_equiv_along_left_cell_to_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (Hom
+      (Hom_cat C x x)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f)
+      (@id C x))
+≔ @omega_equiv_to_D0
+    (Hom_cat C x x)
+    (@comp_fapp0 C x y x
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      f)
+    (@id C x)
+    (@omega_equiv_along_left_cell_D0 C x y f u);
+
+// Selected reverse arrow of the right recursive inverse cell.
+symbol omega_equiv_along_right_cell_from_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (Hom
+      (Hom_cat C y y)
+      (@id C y)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u)))
+≔ @omega_equiv_along_left_inv_D0
+    (Hom_cat C y y)
+    (@comp_fapp0 C y x y
+      f
+      (@omega_equiv_along_right_inv_D0 C x y f u))
+    (@id C y)
+    (@omega_equiv_to_D0
+      (Hom_cat C y y)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u))
+      (@id C y)
+      (@omega_equiv_along_right_cell_D0 C x y f u))
+    (@omega_equiv_evidence_D0
+      (Hom_cat C y y)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u))
+      (@id C y)
+      (@omega_equiv_along_right_cell_D0 C x y f u));
+
 // Reflexive certificate for the fixed identity arrow.
 injective symbol omega_equiv_along_refl_D0
   [C : Cat]
@@ -5207,6 +5821,121 @@ rule omega_equiv_along_left_cell_D0
 with omega_equiv_along_right_cell_D0
       (@omega_equiv_along_refl_D0 $C $x)
   ↪ @omega_equiv_refl_D0 (Hom_cat $C $x $x) (@id $C $x);
+
+/*
+  One-layer observation record for fixed-arrow omega-equivalence evidence.
+
+  This finite view packages exactly the four existing D0 observations. It is
+  not an eta principle or a replacement for the opaque certificate.
+*/
+symbol OmegaEquivAlongObservation_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : Grpd
+≔ `Σ_ l : τ (Hom C y x),
+    `Σ_ r : τ (Hom C y x),
+      @Product_grpd
+        (OmegaEquiv_D0
+          (Hom_cat C x x)
+          (@comp_fapp0 C x y x l f)
+          (@id C x))
+        (OmegaEquiv_D0
+          (Hom_cat C y y)
+          (@comp_fapp0 C y x y f r)
+          (@id C y));
+
+// Observe the selected inverse arrows and both recursive cell packages.
+symbol omega_equiv_along_observe_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (@OmegaEquivAlongObservation_D0 C x y f)
+≔ @Struct_sigma
+    (Hom C y x)
+    (λ l : τ (Hom C y x),
+      `Σ_ r : τ (Hom C y x),
+        @Product_grpd
+          (OmegaEquiv_D0
+            (Hom_cat C x x)
+            (@comp_fapp0 C x y x l f)
+            (@id C x))
+          (OmegaEquiv_D0
+            (Hom_cat C y y)
+            (@comp_fapp0 C y x y f r)
+            (@id C y)))
+    (@omega_equiv_along_left_inv_D0 C x y f u)
+    (@Struct_sigma
+      (Hom C y x)
+      (λ r : τ (Hom C y x),
+        @Product_grpd
+          (OmegaEquiv_D0
+            (Hom_cat C x x)
+            (@comp_fapp0 C x y x
+              (@omega_equiv_along_left_inv_D0 C x y f u)
+              f)
+            (@id C x))
+          (OmegaEquiv_D0
+            (Hom_cat C y y)
+            (@comp_fapp0 C y x y f r)
+            (@id C y)))
+      (@omega_equiv_along_right_inv_D0 C x y f u)
+      (@Product_pair_grpd
+        (OmegaEquiv_D0
+          (Hom_cat C x x)
+          (@comp_fapp0 C x y x
+            (@omega_equiv_along_left_inv_D0 C x y f u)
+            f)
+          (@id C x))
+        (OmegaEquiv_D0
+          (Hom_cat C y y)
+          (@comp_fapp0 C y x y
+            f
+            (@omega_equiv_along_right_inv_D0 C x y f u))
+          (@id C y))
+        (@omega_equiv_along_left_cell_D0 C x y f u)
+        (@omega_equiv_along_right_cell_D0 C x y f u)));
+
+// Finite one-layer path view between the observation records of two witnesses.
+symbol OmegaEquivAlongPathView_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f))
+  : Grpd
+≔ @=
+    (@OmegaEquivAlongObservation_D0 C x y f)
+    (@omega_equiv_along_observe_D0 C x y f u)
+    (@omega_equiv_along_observe_D0 C x y f v);
+
+// Canonical reflexivity in the finite observation view.
+symbol omega_equiv_along_path_view_refl_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (@OmegaEquivAlongPathView_D0 C x y f u u)
+≔ @eq_refl
+    (@OmegaEquivAlongObservation_D0 C x y f)
+    (@omega_equiv_along_observe_D0 C x y f u);
+
+// Any genuine certificate path acts on the finite observation record.
+symbol omega_equiv_along_path_view_encode_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  [u v : τ (@OmegaEquivAlong_D0 C x y f)]
+  (p : τ (@= (@OmegaEquivAlong_D0 C x y f) u v))
+  : τ (@OmegaEquivAlongPathView_D0 C x y f u v)
+≔ @eq_ap
+    (@OmegaEquivAlong_D0 C x y f)
+    (@OmegaEquivAlongObservation_D0 C x y f)
+    (λ w : τ (@OmegaEquivAlong_D0 C x y f),
+      @omega_equiv_along_observe_D0 C x y f w)
+    u
+    v
+    p;
 
 /*
   D1 public fixed-map omega-equivalence.
@@ -5667,6 +6396,137 @@ symbol idtoequiv_cat_omega_equiv_path
       @idtoequiv_cat C x y (@omega_equiv_path C x y e)
       = e)
 ≔ (sigma_Snd (cat_univalence_by_decoder C x y)) e;
+
+// Decode the recursive left inverse cell to an ordinary inverse equation.
+symbol omega_equiv_left_law
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (@=
+      (Hom C x x)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_left_inv C x y e)
+        (@omega_equiv_to C x y e))
+      (@id C x))
+≔ @omega_equiv_path
+    (Hom_cat C x x)
+    (@comp_fapp0 C x y x
+      (@omega_equiv_left_inv C x y e)
+      (@omega_equiv_to C x y e))
+    (@id C x)
+    (@omega_equiv_left_cell C x y e);
+
+// Decode the recursive right inverse cell to an ordinary inverse equation.
+symbol omega_equiv_right_law
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv C x y))
+  : τ (@=
+      (Hom C y y)
+      (@comp_fapp0 C y x y
+        (@omega_equiv_to C x y e)
+        (@omega_equiv_right_inv C x y e))
+      (@id C y))
+≔ @omega_equiv_path
+    (Hom_cat C y y)
+    (@comp_fapp0 C y x y
+      (@omega_equiv_to C x y e)
+      (@omega_equiv_right_inv C x y e))
+    (@id C y)
+    (@omega_equiv_right_cell C x y e);
+
+/*
+  Strict ordinary isomorphism evidence gives recursive omega-equivalence.
+
+  The ordinary inverse equations are genuine paths between parallel arrows.
+  Encoding those paths in the two endomorphism hom-categories supplies the
+  recursive inverse cells required by the D0 observation interface. The
+  stable evidence head is an introduction owner only for this backed source;
+  it is not an eta principle for arbitrary opaque D0 evidence.
+*/
+injective symbol iso_evidence_omega_along_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (@OmegaEquivAlong_D0 C x y (@iso_evidence_to C x y i));
+
+// Public package of the forward arrow and its recursively backed evidence.
+symbol iso_evidence_omega_equiv
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y))
+  : τ (OmegaEquiv C x y)
+≔ @omega_equiv_from_along
+    C
+    x
+    y
+    (@iso_evidence_to C x y i)
+    (@iso_evidence_omega_along_D0 C x y i);
+
+// Proof-time only: the backed lift of reflexive ordinary evidence compares
+// with the canonical recursive certificate without choosing a runtime form.
+unif_rule
+  @iso_evidence_omega_along_D0
+    $C $x $x (@iso_evidence_refl $C $x)
+  ≡ @omega_equiv_along_refl_D0 $C $x
+  ↪ [ tt ≡ tt ];
+
+// Both selected inverse arrows are the ordinary inverse arrow.
+rule @omega_equiv_along_left_inv_D0
+      _ _ _ _
+      (@iso_evidence_omega_along_D0 $C $x $y $i)
+  ↪ @iso_evidence_from $C $x $y $i
+with @omega_equiv_along_right_inv_D0
+      _ _ _ _
+      (@iso_evidence_omega_along_D0 $C $x $y $i)
+  ↪ @iso_evidence_from $C $x $y $i;
+
+// Ordinary inverse equations encode as recursive omega-equivalence cells.
+rule @omega_equiv_along_left_cell_D0
+      _ _ _ _
+      (@iso_evidence_omega_along_D0 $C $x $y $i)
+  ↪ @idtoequiv_cat
+      (Hom_cat $C $x $x)
+      (@comp_fapp0 $C $x $y $x
+        (@iso_evidence_from $C $x $y $i)
+        (@iso_evidence_to $C $x $y $i))
+      (@id $C $x)
+      (@iso_evidence_left $C $x $y $i)
+with @omega_equiv_along_right_cell_D0
+      _ _ _ _
+      (@iso_evidence_omega_along_D0 $C $x $y $i)
+  ↪ @idtoequiv_cat
+      (Hom_cat $C $y $y)
+      (@comp_fapp0 $C $y $x $y
+        (@iso_evidence_to $C $x $y $i)
+        (@iso_evidence_from $C $x $y $i))
+      (@id $C $y)
+      (@iso_evidence_right $C $x $y $i);
+
+// The backed lift agrees propositionally with the omega encoder on paths.
+// The reflexive base uses the single proof-time certificate comparison above;
+// the arbitrary theorem is retained generic J, not unification transitivity.
+symbol iso_evidence_omega_equiv_idtoiso
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (@=
+      (OmegaEquiv C x y)
+      (@iso_evidence_omega_equiv C x y
+        (@idtoiso_cat C x y p))
+      (@idtoequiv_cat C x y p))
+≔ @ind_eqr
+    (Obj C)
+    y
+    (λ x : τ (Obj C), λ p : τ (@= (Obj C) x y),
+      @=
+        (OmegaEquiv C x y)
+        (@iso_evidence_omega_equiv C x y
+          (@idtoiso_cat C x y p))
+        (@idtoequiv_cat C x y p))
+    (eq_refl (@omega_equiv_refl C y))
+    x
+    p;
 
 /*
   Composition of ordinary isomorphism evidence.
@@ -7826,6 +8686,233 @@ rule @Hom_func $A $x $x $y $y (@id $A $x) (@id $A $y)
 rule @Hom_fapp0 $A $x $x $y $y (@id $A $x) (@id $A $y) $h
   ↪ $h;
 
+
+/*
+  Every recursive omega-equivalence compares its selected inverse arrows.
+
+  Whisker `id_y => f o right_inv` on the left by `left_inv`, use the
+  propositional associator, then whisker `left_inv o f => id_x` on the right
+  by `right_inv`. The existing post/precomposition functors own the two
+  actions. Explicit theorem-level path composition avoids relying on
+  unification transitivity between their distinct stable point heads.
+*/
+symbol omega_equiv_along_left_whisker_right_cell_from_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (Hom
+      (Hom_cat C y x)
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      (@hom_postcomp_fapp0
+        C C (@id Cat_cat C)
+        y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u))))
+≔ @fapp1_fapp0
+    (Hom_cat C y y)
+    (Hom_cat C y x)
+    (@hom_postcomp_func
+      C C (@id Cat_cat C)
+      y y x
+      (@omega_equiv_along_left_inv_D0 C x y f u))
+    (@id C y)
+    (@comp_fapp0 C y x y
+      f
+      (@omega_equiv_along_right_inv_D0 C x y f u))
+    (@omega_equiv_along_right_cell_from_D0 C x y f u);
+
+symbol omega_equiv_along_right_whisker_left_cell_to_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (Hom
+      (Hom_cat C y x)
+      (@hom_precomp_along_fapp0
+        C C (@id Cat_cat C)
+        x y x
+        (@omega_equiv_along_right_inv_D0 C x y f u)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f))
+      (@omega_equiv_along_right_inv_D0 C x y f u))
+≔ @fapp1_fapp0
+    (Hom_cat C x x)
+    (Hom_cat C y x)
+    (@hom_precomp_along_func
+      C C (@id Cat_cat C)
+      x y x
+      (@omega_equiv_along_right_inv_D0 C x y f u))
+    (@comp_fapp0 C x y x
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      f)
+    (@id C x)
+    (@omega_equiv_along_left_cell_to_D0 C x y f u);
+
+// The two stable whiskering heads present the two bracketings of l o f o r.
+symbol omega_equiv_along_inverse_assoc_path_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (@=
+      (Hom C y x)
+      (@hom_postcomp_fapp0
+        C C (@id Cat_cat C)
+        y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u)))
+      (@hom_precomp_along_fapp0
+        C C (@id Cat_cat C)
+        x y x
+        (@omega_equiv_along_right_inv_D0 C x y f u)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f)))
+≔ @eq_trans
+    (Hom C y x)
+    (@hom_postcomp_fapp0
+      C C (@id Cat_cat C)
+      y y x
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u)))
+    (@comp_fapp0 C y y x
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u)))
+    (@hom_precomp_along_fapp0
+      C C (@id Cat_cat C)
+      x y x
+      (@omega_equiv_along_right_inv_D0 C x y f u)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f))
+    (eq_refl
+      (@comp_fapp0 C y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u))))
+    (@eq_trans
+      (Hom C y x)
+      (@comp_fapp0 C y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u)))
+      (@comp_fapp0 C y x x
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f)
+        (@omega_equiv_along_right_inv_D0 C x y f u))
+      (@hom_precomp_along_fapp0
+        C C (@id Cat_cat C)
+        x y x
+        (@omega_equiv_along_right_inv_D0 C x y f u)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f))
+      (@comp_assoc
+        C y x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u))
+      (eq_refl
+        (@comp_fapp0 C y x x
+          (@comp_fapp0 C x y x
+            (@omega_equiv_along_left_inv_D0 C x y f u)
+            f)
+          (@omega_equiv_along_right_inv_D0 C x y f u))));
+
+symbol omega_equiv_along_inverse_assoc_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (Hom
+      (Hom_cat C y x)
+      (@hom_postcomp_fapp0
+        C C (@id Cat_cat C)
+        y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u)))
+      (@hom_precomp_along_fapp0
+        C C (@id Cat_cat C)
+        x y x
+        (@omega_equiv_along_right_inv_D0 C x y f u)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f)))
+≔ @path_to_hom
+    (Hom_cat C y x)
+    (@hom_postcomp_fapp0
+      C C (@id Cat_cat C)
+      y y x
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_D0 C x y f u)))
+    (@hom_precomp_along_fapp0
+      C C (@id Cat_cat C)
+      x y x
+      (@omega_equiv_along_right_inv_D0 C x y f u)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f))
+    (@omega_equiv_along_inverse_assoc_path_D0 C x y f u);
+
+symbol omega_equiv_along_left_to_right_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (Hom
+      (Hom_cat C y x)
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      (@omega_equiv_along_right_inv_D0 C x y f u))
+≔ @comp_fapp0
+    (Hom_cat C y x)
+    (@omega_equiv_along_left_inv_D0 C x y f u)
+    (@hom_precomp_along_fapp0
+      C C (@id Cat_cat C)
+      x y x
+      (@omega_equiv_along_right_inv_D0 C x y f u)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        f))
+    (@omega_equiv_along_right_inv_D0 C x y f u)
+    (@omega_equiv_along_right_whisker_left_cell_to_D0 C x y f u)
+    (@comp_fapp0
+      (Hom_cat C y x)
+      (@omega_equiv_along_left_inv_D0 C x y f u)
+      (@hom_postcomp_fapp0
+        C C (@id Cat_cat C)
+        y y x
+        (@omega_equiv_along_left_inv_D0 C x y f u)
+        (@comp_fapp0 C y x y
+          f
+          (@omega_equiv_along_right_inv_D0 C x y f u)))
+      (@hom_precomp_along_fapp0
+        C C (@id Cat_cat C)
+        x y x
+        (@omega_equiv_along_right_inv_D0 C x y f u)
+        (@comp_fapp0 C x y x
+          (@omega_equiv_along_left_inv_D0 C x y f u)
+          f))
+      (@omega_equiv_along_inverse_assoc_D0 C x y f u)
+      (@omega_equiv_along_left_whisker_right_cell_from_D0 C x y f u));
+
+
 // Projection-order join: composition of two `Hom_func` values accumulates endpoints.
 rule @comp_fapp0
       Cat_cat
@@ -9076,6 +10163,17 @@ symbol is_discrete_cat_obj_set
   : τ (IsSetGrpd (Obj C))
 ≔ sigma_Fst d;
 
+// Object paths in a discrete category are proposition-valued.
+symbol discrete_cat_path_proof
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (p q : τ (@= (Obj C) x y))
+  : τ (@= (@= (Obj C) x y) p q)
+≔ @is_contr_center
+    (@= (@= (Obj C) x y) p q)
+    ((@is_discrete_cat_obj_set C d) x y p q);
+
 // Fixed-map core-inclusion evidence projection.
 symbol is_discrete_cat_core_equiv
   [C : Cat]
@@ -9288,6 +10386,354 @@ with IsNCat (cat_succ $n) $C
           (λ y : τ (Obj $C),
             IsNCat $n (Hom_cat $C x y)));
 
+/*
+  Conditional directed object truncation.
+
+  The missing fixed-arrow evidence-property theorem is named as an explicit
+  capability, not postulated. Given that capability, the native dimension
+  recursion can complete the IsNCat object-truncation proof through the
+  existing Sigma closure and categorical univalence equivalence.
+*/
+// Global capability: every fixed-arrow omega-equivalence certificate is a proposition.
+symbol OmegaEquivAlongEvidenceProp_D0
+  : Grpd
+≔ @Pi_grpd (Obj Cat_cat)
+    (λ C : τ (Obj Cat_cat),
+      @Pi_grpd (Obj C)
+        (λ x : τ (Obj C),
+          @Pi_grpd (Obj C)
+            (λ y : τ (Obj C),
+              @Pi_grpd (Hom C x y)
+                (λ f : τ (Hom C x y),
+                  IsPropGrpd (@OmegaEquivAlong_D0 C x y f)))));
+
+// Proposition-valued classifiers are truncated at every native CatDim level.
+injective symbol prop_is_trunc_cat_dim
+  (n : CatDim)
+  [A : Grpd]
+  (h : τ (IsPropGrpd A))
+  : τ (IsTruncGrpd (cat_dim_trunc_level n) A);
+
+// The zero target is set truncation; each successor follows the native index.
+rule @prop_is_trunc_cat_dim cat_zero $A $h
+  ↪ @prop_is_trunc_succ trunc_minus_one $A $h
+with @prop_is_trunc_cat_dim (cat_succ $n) $A $h
+  ↪ @prop_is_trunc_succ (cat_dim_trunc_level $n) $A $h;
+
+// Conditional recursive theorem: directed dimension bounds object truncation.
+injective symbol ncat_obj_trunc_from_evidence_prop
+  (P : τ OmegaEquivAlongEvidenceProp_D0)
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  : τ (IsObjTruncCat (cat_dim_trunc_level n) C);
+
+// Dimension zero is the stored object-set factor; successor closes the public
+// OmegaEquiv Sigma package and transports back through categorical univalence.
+rule @ncat_obj_trunc_from_evidence_prop _ cat_zero $C $h
+  ↪ @is_discrete_cat_obj_set $C $h
+with @ncat_obj_trunc_from_evidence_prop $P (cat_succ $n) $C $h
+  ↪ λ x : τ (Obj $C), λ y : τ (Obj $C),
+      @is_trunc_grpd_equiv_from
+        (cat_dim_trunc_level $n)
+        (@= (Obj $C) x y)
+        (OmegaEquiv $C x y)
+        (@cat_univalence_type_equiv $C x y)
+        (@is_trunc_sigma
+          (cat_dim_trunc_level $n)
+          (Hom $C x y)
+          (λ f : τ (Hom $C x y),
+            @OmegaEquivAlong_D0 $C x y f)
+          (@ncat_obj_trunc_from_evidence_prop
+            $P
+            $n
+            (Hom_cat $C x y)
+            ($h x y))
+          (λ f : τ (Hom $C x y),
+            @prop_is_trunc_cat_dim
+              $n
+              (@OmegaEquivAlong_D0 $C x y f)
+              ($P $C x y f)));
+
+/*
+  Dimension-indexed deep observation of fixed-arrow evidence.
+
+  Unlike the unstratified direct equality candidate, every recursive cell
+  observation decreases the explicit CatDim index. The zero view forgets the
+  opaque witness; each successor retains both inverse arrows and recursively
+  observes the selected cell packages in the corresponding hom-categories.
+*/
+// Finite observation tree for fixed-arrow evidence in an n-category.
+symbol OmegaEquivAlongDimObservation_D0
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : Grpd;
+
+// Zero-dimensional evidence has no higher observation; successor descends
+// through both selected recursive cells at the strictly smaller dimension.
+rule @OmegaEquivAlongDimObservation_D0 cat_zero _ _ _ _ _
+  ↪ Unit_grpd
+with @OmegaEquivAlongDimObservation_D0
+      (cat_succ $n) $C $h $x $y $f
+  ↪ `Σ_ l : τ (Hom $C $y $x),
+      `Σ_ r : τ (Hom $C $y $x),
+        @Product_grpd
+          (`Σ_ alpha : τ (Hom
+              (Hom_cat $C $x $x)
+              (@comp_fapp0 $C $x $y $x l $f)
+              (@id $C $x)),
+            @OmegaEquivAlongDimObservation_D0
+              $n
+              (Hom_cat $C $x $x)
+              ($h $x $x)
+              (@comp_fapp0 $C $x $y $x l $f)
+              (@id $C $x)
+              alpha)
+          (`Σ_ beta : τ (Hom
+              (Hom_cat $C $y $y)
+              (@comp_fapp0 $C $y $x $y $f r)
+              (@id $C $y)),
+            @OmegaEquivAlongDimObservation_D0
+              $n
+              (Hom_cat $C $y $y)
+              ($h $y $y)
+              (@comp_fapp0 $C $y $x $y $f r)
+              (@id $C $y)
+              beta);
+
+// First-class recursive cell observation: selected cell plus deeper evidence.
+symbol OmegaEquivDimObservation_D0
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  (x y : τ (Obj C))
+  : Grpd
+≔ `Σ_ f : τ (Hom C x y),
+    @OmegaEquivAlongDimObservation_D0 n C h x y f;
+
+// Observe opaque fixed-arrow evidence to the finite depth selected by n.
+injective symbol omega_equiv_along_dim_observe_D0
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (@OmegaEquivAlongDimObservation_D0 n C h x y f);
+
+// Zero forgets the opaque witness. Successor records both inverse arrows and
+// recursively observes the selected first-class cells at the smaller index.
+rule @omega_equiv_along_dim_observe_D0 cat_zero _ _ _ _ _ _
+  ↪ tt
+with @omega_equiv_along_dim_observe_D0
+      (cat_succ $n) $C $h $x $y $f $u
+  ↪ @Struct_sigma
+      (Hom $C $y $x)
+      (λ l : τ (Hom $C $y $x),
+        `Σ_ r : τ (Hom $C $y $x),
+          @Product_grpd
+            (@OmegaEquivDimObservation_D0
+              $n
+              (Hom_cat $C $x $x)
+              ($h $x $x)
+              (@comp_fapp0 $C $x $y $x l $f)
+              (@id $C $x))
+            (@OmegaEquivDimObservation_D0
+              $n
+              (Hom_cat $C $y $y)
+              ($h $y $y)
+              (@comp_fapp0 $C $y $x $y $f
+                r)
+              (@id $C $y)))
+      (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+      (@Struct_sigma
+        (Hom $C $y $x)
+        (λ r : τ (Hom $C $y $x),
+          @Product_grpd
+            (@OmegaEquivDimObservation_D0
+              $n
+              (Hom_cat $C $x $x)
+              ($h $x $x)
+              (@comp_fapp0 $C $x $y $x
+                (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+                $f)
+              (@id $C $x))
+            (@OmegaEquivDimObservation_D0
+              $n
+              (Hom_cat $C $y $y)
+              ($h $y $y)
+              (@comp_fapp0 $C $y $x $y $f r)
+              (@id $C $y)))
+        (@omega_equiv_along_right_inv_D0 $C $x $y $f $u)
+        (@Product_pair_grpd
+          (@OmegaEquivDimObservation_D0
+            $n
+            (Hom_cat $C $x $x)
+            ($h $x $x)
+            (@comp_fapp0 $C $x $y $x
+              (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+              $f)
+            (@id $C $x))
+          (@OmegaEquivDimObservation_D0
+            $n
+            (Hom_cat $C $y $y)
+            ($h $y $y)
+            (@comp_fapp0 $C $y $x $y
+              $f
+              (@omega_equiv_along_right_inv_D0 $C $x $y $f $u))
+            (@id $C $y))
+          (@Struct_sigma
+            (Hom
+              (Hom_cat $C $x $x)
+              (@comp_fapp0 $C $x $y $x
+                (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+                $f)
+              (@id $C $x))
+            (λ alpha : τ (Hom
+                (Hom_cat $C $x $x)
+                (@comp_fapp0 $C $x $y $x
+                  (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+                  $f)
+                (@id $C $x)),
+              @OmegaEquivAlongDimObservation_D0
+                $n
+                (Hom_cat $C $x $x)
+                ($h $x $x)
+                (@comp_fapp0 $C $x $y $x
+                  (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+                  $f)
+                (@id $C $x)
+                alpha)
+            (@omega_equiv_to_D0
+              (Hom_cat $C $x $x)
+              (@comp_fapp0 $C $x $y $x
+                (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+                $f)
+              (@id $C $x)
+              (@omega_equiv_along_left_cell_D0 $C $x $y $f $u))
+            (@omega_equiv_along_dim_observe_D0
+              $n
+              (Hom_cat $C $x $x)
+              ($h $x $x)
+              (@comp_fapp0 $C $x $y $x
+                (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+                $f)
+              (@id $C $x)
+              (@omega_equiv_to_D0
+                (Hom_cat $C $x $x)
+                (@comp_fapp0 $C $x $y $x
+                  (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+                  $f)
+                (@id $C $x)
+                (@omega_equiv_along_left_cell_D0 $C $x $y $f $u))
+              (@omega_equiv_evidence_D0
+                (Hom_cat $C $x $x)
+                (@comp_fapp0 $C $x $y $x
+                  (@omega_equiv_along_left_inv_D0 $C $x $y $f $u)
+                  $f)
+                (@id $C $x)
+                (@omega_equiv_along_left_cell_D0 $C $x $y $f $u))))
+          (@Struct_sigma
+            (Hom
+              (Hom_cat $C $y $y)
+              (@comp_fapp0 $C $y $x $y
+                $f
+                (@omega_equiv_along_right_inv_D0 $C $x $y $f $u))
+              (@id $C $y))
+            (λ beta : τ (Hom
+                (Hom_cat $C $y $y)
+                (@comp_fapp0 $C $y $x $y
+                  $f
+                  (@omega_equiv_along_right_inv_D0 $C $x $y $f $u))
+                (@id $C $y)),
+              @OmegaEquivAlongDimObservation_D0
+                $n
+                (Hom_cat $C $y $y)
+                ($h $y $y)
+                (@comp_fapp0 $C $y $x $y
+                  $f
+                  (@omega_equiv_along_right_inv_D0 $C $x $y $f $u))
+                (@id $C $y)
+                beta)
+            (@omega_equiv_to_D0
+              (Hom_cat $C $y $y)
+              (@comp_fapp0 $C $y $x $y
+                $f
+                (@omega_equiv_along_right_inv_D0 $C $x $y $f $u))
+              (@id $C $y)
+              (@omega_equiv_along_right_cell_D0 $C $x $y $f $u))
+            (@omega_equiv_along_dim_observe_D0
+              $n
+              (Hom_cat $C $y $y)
+              ($h $y $y)
+              (@comp_fapp0 $C $y $x $y
+                $f
+                (@omega_equiv_along_right_inv_D0 $C $x $y $f $u))
+              (@id $C $y)
+              (@omega_equiv_to_D0
+                (Hom_cat $C $y $y)
+                (@comp_fapp0 $C $y $x $y
+                  $f
+                  (@omega_equiv_along_right_inv_D0 $C $x $y $f $u))
+                (@id $C $y)
+                (@omega_equiv_along_right_cell_D0 $C $x $y $f $u))
+              (@omega_equiv_evidence_D0
+                (Hom_cat $C $y $y)
+                (@comp_fapp0 $C $y $x $y
+                  $f
+                  (@omega_equiv_along_right_inv_D0 $C $x $y $f $u))
+                (@id $C $y)
+                (@omega_equiv_along_right_cell_D0 $C $x $y $f $u))))));
+
+// Finite path view between two deep observation trees at a fixed dimension.
+symbol OmegaEquivAlongDimPathView_D0
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u v : τ (@OmegaEquivAlong_D0 C x y f))
+  : Grpd
+≔ @=
+    (@OmegaEquivAlongDimObservation_D0 n C h x y f)
+    (@omega_equiv_along_dim_observe_D0 n C h x y f u)
+    (@omega_equiv_along_dim_observe_D0 n C h x y f v);
+
+// Canonical reflexivity in the finite deep observation view.
+symbol omega_equiv_along_dim_path_view_refl_D0
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (@OmegaEquivAlongDimPathView_D0 n C h x y f u u)
+≔ @eq_refl
+    (@OmegaEquivAlongDimObservation_D0 n C h x y f)
+    (@omega_equiv_along_dim_observe_D0 n C h x y f u);
+
+// A genuine certificate path acts on every finite-dimensional observation.
+symbol omega_equiv_along_dim_path_view_encode_D0
+  (n : CatDim)
+  [C : Cat]
+  (h : τ (IsNCat n C))
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  [u v : τ (@OmegaEquivAlong_D0 C x y f)]
+  (p : τ (@= (@OmegaEquivAlong_D0 C x y f) u v))
+  : τ (@OmegaEquivAlongDimPathView_D0 n C h x y f u v)
+≔ @eq_ap
+    (@OmegaEquivAlong_D0 C x y f)
+    (@OmegaEquivAlongDimObservation_D0 n C h x y f)
+    (λ w : τ (@OmegaEquivAlong_D0 C x y f),
+      @omega_equiv_along_dim_observe_D0 n C h x y f w)
+    u
+    v
+    p;
+
 // Evidence-retaining package of categories of directed dimension n.
 (n : CatDim) inductive NCatData : TYPE ≔
 | Struct_ncat
@@ -9340,6 +10786,584 @@ symbol one_cat_hom_discrete
   : τ (IsDiscreteCat
       (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x y))
 ≔ @ncat_evidence (cat_succ cat_zero) X x y;
+
+// In a OneCat, the directed comparison between selected omega inverses is a path.
+symbol one_cat_omega_inverse_path
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y))
+  : τ (@=
+      (Hom (@ncat_carrier (cat_succ cat_zero) X) y x)
+      (@omega_equiv_left_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e)
+      (@omega_equiv_right_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e))
+≔ @hom_to_path
+    (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) y x)
+    (@one_cat_hom_discrete X y x)
+    (@omega_equiv_left_inv
+      (@ncat_carrier (cat_succ cat_zero) X) x y e)
+    (@omega_equiv_right_inv
+      (@ncat_carrier (cat_succ cat_zero) X) x y e)
+    (@omega_equiv_along_left_to_right_D0
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y
+      (@omega_equiv_to
+        (@ncat_carrier (cat_succ cat_zero) X) x y e)
+      (@omega_equiv_evidence
+        (@ncat_carrier (cat_succ cat_zero) X) x y e));
+
+// Transport the decoded right law to the selected left inverse.
+symbol one_cat_omega_right_law_at_left
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y))
+  : τ (@=
+      (Hom (@ncat_carrier (cat_succ cat_zero) X) y y)
+      (@comp_fapp0
+        (@ncat_carrier (cat_succ cat_zero) X)
+        y x y
+        (@omega_equiv_to
+          (@ncat_carrier (cat_succ cat_zero) X) x y e)
+        (@omega_equiv_left_inv
+          (@ncat_carrier (cat_succ cat_zero) X) x y e))
+      (@id (@ncat_carrier (cat_succ cat_zero) X) y))
+≔ @eq_trans
+    (Hom (@ncat_carrier (cat_succ cat_zero) X) y y)
+    (@comp_fapp0
+      (@ncat_carrier (cat_succ cat_zero) X)
+      y x y
+      (@omega_equiv_to
+        (@ncat_carrier (cat_succ cat_zero) X) x y e)
+      (@omega_equiv_left_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e))
+    (@comp_fapp0
+      (@ncat_carrier (cat_succ cat_zero) X)
+      y x y
+      (@omega_equiv_to
+        (@ncat_carrier (cat_succ cat_zero) X) x y e)
+      (@omega_equiv_right_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e))
+    (@id (@ncat_carrier (cat_succ cat_zero) X) y)
+    (@eq_ap
+      (Hom (@ncat_carrier (cat_succ cat_zero) X) y x)
+      (Hom (@ncat_carrier (cat_succ cat_zero) X) y y)
+      (λ q : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) y x),
+        @comp_fapp0
+          (@ncat_carrier (cat_succ cat_zero) X)
+          y x y
+          (@omega_equiv_to
+            (@ncat_carrier (cat_succ cat_zero) X) x y e)
+          q)
+      (@omega_equiv_left_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e)
+      (@omega_equiv_right_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e)
+      (@one_cat_omega_inverse_path X x y e))
+    (@omega_equiv_right_law
+      (@ncat_carrier (cat_succ cat_zero) X) x y e);
+
+// Reconstruct ordinary isomorphism evidence from OneCat omega-equivalence.
+symbol one_cat_omega_iso_evidence
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (e : τ (OmegaEquiv
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y))
+  : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y)
+≔ Struct_sigma
+    (@omega_equiv_to
+      (@ncat_carrier (cat_succ cat_zero) X) x y e)
+    (Struct_sigma
+      (@omega_equiv_left_inv
+        (@ncat_carrier (cat_succ cat_zero) X) x y e)
+      (Struct_sigma
+        (@omega_equiv_left_law
+          (@ncat_carrier (cat_succ cat_zero) X) x y e)
+        (@one_cat_omega_right_law_at_left X x y e)));
+
+
+// The reconstructed left-law proof agrees with the original ordinary proof.
+symbol one_cat_omega_iso_lift_left_path
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y))
+  : τ (@=
+      (@=
+        (Hom (@ncat_carrier (cat_succ cat_zero) X) x x)
+        (@comp_fapp0
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x y x
+          (@iso_evidence_from
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)
+          (@iso_evidence_to
+            (@ncat_carrier (cat_succ cat_zero) X) x y i))
+        (@id (@ncat_carrier (cat_succ cat_zero) X) x))
+      (@iso_evidence_left
+        (@ncat_carrier (cat_succ cat_zero) X) x y
+        (@one_cat_omega_iso_evidence
+          X x y
+          (@iso_evidence_omega_equiv
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+      (@iso_evidence_left
+        (@ncat_carrier (cat_succ cat_zero) X) x y i))
+≔ @discrete_cat_path_proof
+    (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x x)
+    (@one_cat_hom_discrete X x x)
+    (@comp_fapp0
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x y x
+      (@iso_evidence_from
+        (@ncat_carrier (cat_succ cat_zero) X) x y i)
+      (@iso_evidence_to
+        (@ncat_carrier (cat_succ cat_zero) X) x y i))
+    (@id (@ncat_carrier (cat_succ cat_zero) X) x)
+    (@iso_evidence_left
+      (@ncat_carrier (cat_succ cat_zero) X) x y
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@iso_evidence_omega_equiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+    (@iso_evidence_left
+      (@ncat_carrier (cat_succ cat_zero) X) x y i);
+
+// The transported right-law proof agrees with the original ordinary proof.
+symbol one_cat_omega_iso_lift_right_path
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y))
+  : τ (@=
+      (@=
+        (Hom (@ncat_carrier (cat_succ cat_zero) X) y y)
+        (@comp_fapp0
+          (@ncat_carrier (cat_succ cat_zero) X)
+          y x y
+          (@iso_evidence_to
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)
+          (@iso_evidence_from
+            (@ncat_carrier (cat_succ cat_zero) X) x y i))
+        (@id (@ncat_carrier (cat_succ cat_zero) X) y))
+      (@iso_evidence_right
+        (@ncat_carrier (cat_succ cat_zero) X) x y
+        (@one_cat_omega_iso_evidence
+          X x y
+          (@iso_evidence_omega_equiv
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+      (@iso_evidence_right
+        (@ncat_carrier (cat_succ cat_zero) X) x y i))
+≔ @discrete_cat_path_proof
+    (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) y y)
+    (@one_cat_hom_discrete X y y)
+    (@comp_fapp0
+      (@ncat_carrier (cat_succ cat_zero) X)
+      y x y
+      (@iso_evidence_to
+        (@ncat_carrier (cat_succ cat_zero) X) x y i)
+      (@iso_evidence_from
+        (@ncat_carrier (cat_succ cat_zero) X) x y i))
+    (@id (@ncat_carrier (cat_succ cat_zero) X) y)
+    (@iso_evidence_right
+      (@ncat_carrier (cat_succ cat_zero) X) x y
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@iso_evidence_omega_equiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+    (@iso_evidence_right
+      (@ncat_carrier (cat_succ cat_zero) X) x y i);
+
+// Reconstructing ordinary evidence after its omega lift is propositionally identity.
+symbol one_cat_omega_iso_lift_retract
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y))
+  : τ (@=
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@iso_evidence_omega_equiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y i))
+      i)
+≔ Struct_sigma
+    (eq_refl
+      (@iso_evidence_to
+        (@ncat_carrier (cat_succ cat_zero) X) x y i))
+    (Struct_sigma
+      (eq_refl
+        (@iso_evidence_from
+          (@ncat_carrier (cat_succ cat_zero) X) x y i))
+      (Struct_sigma
+        (@one_cat_omega_iso_lift_left_path X x y i)
+        (@const_pathover
+          (@=
+            (Hom (@ncat_carrier (cat_succ cat_zero) X) x x)
+            (@comp_fapp0
+              (@ncat_carrier (cat_succ cat_zero) X)
+              x y x
+              (@iso_evidence_from
+                (@ncat_carrier (cat_succ cat_zero) X) x y i)
+              (@iso_evidence_to
+                (@ncat_carrier (cat_succ cat_zero) X) x y i))
+            (@id (@ncat_carrier (cat_succ cat_zero) X) x))
+          (@=
+            (Hom (@ncat_carrier (cat_succ cat_zero) X) y y)
+            (@comp_fapp0
+              (@ncat_carrier (cat_succ cat_zero) X)
+              y x y
+              (@iso_evidence_to
+                (@ncat_carrier (cat_succ cat_zero) X) x y i)
+              (@iso_evidence_from
+                (@ncat_carrier (cat_succ cat_zero) X) x y i))
+            (@id (@ncat_carrier (cat_succ cat_zero) X) y))
+          (@iso_evidence_left
+            (@ncat_carrier (cat_succ cat_zero) X) x y
+            (@one_cat_omega_iso_evidence
+              X x y
+              (@iso_evidence_omega_equiv
+                (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+          (@iso_evidence_left
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)
+          (@iso_evidence_right
+            (@ncat_carrier (cat_succ cat_zero) X) x y
+            (@one_cat_omega_iso_evidence
+              X x y
+              (@iso_evidence_omega_equiv
+                (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+          (@iso_evidence_right
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)
+          (@one_cat_omega_iso_lift_left_path X x y i)
+          (@one_cat_omega_iso_lift_right_path X x y i))));
+
+// Reconstruction of a path-encoded omega-equivalence agrees with idtoiso.
+symbol one_cat_omega_iso_evidence_idtoequiv
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y))
+  : τ (@=
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@idtoequiv_cat
+          (@ncat_carrier (cat_succ cat_zero) X) x y p))
+      (@idtoiso_cat
+        (@ncat_carrier (cat_succ cat_zero) X) x y p))
+≔ @eq_trans
+    (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+    (@one_cat_omega_iso_evidence
+      X x y
+      (@idtoequiv_cat
+        (@ncat_carrier (cat_succ cat_zero) X) x y p))
+    (@one_cat_omega_iso_evidence
+      X x y
+      (@iso_evidence_omega_equiv
+        (@ncat_carrier (cat_succ cat_zero) X) x y
+        (@idtoiso_cat
+          (@ncat_carrier (cat_succ cat_zero) X) x y p)))
+    (@idtoiso_cat
+      (@ncat_carrier (cat_succ cat_zero) X) x y p)
+    (@eq_ap
+      (OmegaEquiv (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (λ e : τ (OmegaEquiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y),
+        @one_cat_omega_iso_evidence X x y e)
+      (@idtoequiv_cat
+        (@ncat_carrier (cat_succ cat_zero) X) x y p)
+      (@iso_evidence_omega_equiv
+        (@ncat_carrier (cat_succ cat_zero) X) x y
+        (@idtoiso_cat
+          (@ncat_carrier (cat_succ cat_zero) X) x y p))
+      (@eq_sym
+        (OmegaEquiv (@ncat_carrier (cat_succ cat_zero) X) x y)
+        (@iso_evidence_omega_equiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y
+          (@idtoiso_cat
+            (@ncat_carrier (cat_succ cat_zero) X) x y p))
+        (@idtoequiv_cat
+          (@ncat_carrier (cat_succ cat_zero) X) x y p)
+        (@iso_evidence_omega_equiv_idtoiso
+          (@ncat_carrier (cat_succ cat_zero) X) x y p)))
+    (@one_cat_omega_iso_lift_retract
+      X x y
+      (@idtoiso_cat
+        (@ncat_carrier (cat_succ cat_zero) X) x y p));
+
+// Derived OneCat-scoped ordinary-iso decoder through omega univalence.
+symbol one_cat_iso_path
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y))
+  : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+≔ @omega_equiv_path
+    (@ncat_carrier (cat_succ cat_zero) X)
+    x
+    y
+    (@iso_evidence_omega_equiv
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y
+      i);
+
+// The derived decoder is a left inverse of the ordinary path encoder.
+symbol one_cat_iso_path_idtoiso
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y))
+  : τ (@=
+      (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+      (@one_cat_iso_path X x y
+        (@idtoiso_cat
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x
+          y
+          p))
+      p)
+≔ @eq_trans
+    (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+    (@one_cat_iso_path X x y
+      (@idtoiso_cat
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        p))
+    (@omega_equiv_path
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y
+      (@idtoequiv_cat
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        p))
+    p
+    (@eq_ap
+      (OmegaEquiv (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+      (λ e : τ (OmegaEquiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y),
+        @omega_equiv_path
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x
+          y
+          e)
+      (@iso_evidence_omega_equiv
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        (@idtoiso_cat
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x
+          y
+          p))
+      (@idtoequiv_cat
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        p)
+      (@iso_evidence_omega_equiv_idtoiso
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        p))
+    (@omega_equiv_path_idtoequiv_cat
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y
+      p);
+
+// The ordinary encoder after the scoped decoder is propositionally identity.
+symbol one_cat_idtoiso_iso_path
+  (X : τ OneCat)
+  [x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X))]
+  (i : τ (IsoEvidence
+      (@ncat_carrier (cat_succ cat_zero) X) x y))
+  : τ (@=
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@idtoiso_cat
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        (@one_cat_iso_path X x y i))
+      i)
+≔ @eq_trans
+    (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+    (@idtoiso_cat
+      (@ncat_carrier (cat_succ cat_zero) X)
+      x
+      y
+      (@one_cat_iso_path X x y i))
+    (@one_cat_omega_iso_evidence
+      X x y
+      (@idtoequiv_cat
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        (@one_cat_iso_path X x y i)))
+    i
+    (@eq_sym
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@idtoequiv_cat
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x
+          y
+          (@one_cat_iso_path X x y i)))
+      (@idtoiso_cat
+        (@ncat_carrier (cat_succ cat_zero) X)
+        x
+        y
+        (@one_cat_iso_path X x y i))
+      (@one_cat_omega_iso_evidence_idtoequiv
+        X x y (@one_cat_iso_path X x y i)))
+    (@eq_trans
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@idtoequiv_cat
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x
+          y
+          (@one_cat_iso_path X x y i)))
+      (@one_cat_omega_iso_evidence
+        X x y
+        (@iso_evidence_omega_equiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y i))
+      i
+      (@eq_ap
+        (OmegaEquiv (@ncat_carrier (cat_succ cat_zero) X) x y)
+        (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+        (λ e : τ (OmegaEquiv
+            (@ncat_carrier (cat_succ cat_zero) X) x y),
+          @one_cat_omega_iso_evidence X x y e)
+        (@idtoequiv_cat
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x
+          y
+          (@one_cat_iso_path X x y i))
+        (@iso_evidence_omega_equiv
+          (@ncat_carrier (cat_succ cat_zero) X) x y i)
+        (@idtoequiv_cat_omega_equiv_path
+          (@ncat_carrier (cat_succ cat_zero) X)
+          x
+          y
+          (@iso_evidence_omega_equiv
+            (@ncat_carrier (cat_succ cat_zero) X) x y i)))
+      (@one_cat_omega_iso_lift_retract X x y i));
+
+// OneCat-indexed specified-inverse capability with the scoped decoder.
+symbol OneCatIsoUnivalenceByDecoder
+  (X : τ OneCat)
+  : Grpd
+≔ @Pi_grpd
+    (Obj (@ncat_carrier (cat_succ cat_zero) X))
+    (λ x : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)),
+      @Pi_grpd
+        (Obj (@ncat_carrier (cat_succ cat_zero) X))
+        (λ y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)),
+          @EquivByInverse
+            (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+            (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+            (λ p : τ (@= (Obj
+                (@ncat_carrier (cat_succ cat_zero) X)) x y),
+              @idtoiso_cat
+                (@ncat_carrier (cat_succ cat_zero) X) x y p)
+            (λ i : τ (IsoEvidence
+                (@ncat_carrier (cat_succ cat_zero) X) x y),
+              @one_cat_iso_path X x y i)));
+
+// Scoped specified-inverse ordinary-isomorphism univalence for OneCat.
+symbol one_cat_iso_univalence_by_decoder
+  (X : τ OneCat)
+  : τ (OneCatIsoUnivalenceByDecoder X)
+≔ λ x : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)),
+   λ y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)),
+    @Product_pair_grpd
+      (@Pi_grpd
+        (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+        (λ p : τ (@= (Obj
+            (@ncat_carrier (cat_succ cat_zero) X)) x y),
+          @=
+            (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+            (@one_cat_iso_path
+              X x y
+              (@idtoiso_cat
+                (@ncat_carrier (cat_succ cat_zero) X) x y p))
+            p))
+      (@Pi_grpd
+        (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+        (λ i : τ (IsoEvidence
+            (@ncat_carrier (cat_succ cat_zero) X) x y),
+          @=
+            (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+            (@idtoiso_cat
+              (@ncat_carrier (cat_succ cat_zero) X)
+              x
+              y
+              (@one_cat_iso_path X x y i))
+            i))
+      (λ p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y),
+        @one_cat_iso_path_idtoiso X x y p)
+      (λ i : τ (IsoEvidence
+          (@ncat_carrier (cat_succ cat_zero) X) x y),
+        @one_cat_idtoiso_iso_path X x y i);
+
+// Contractible-fibre ordinary-isomorphism univalence derived from the decoder.
+symbol one_cat_iso_univalence
+  (X : τ OneCat)
+  : τ (CatIsoUnivalence
+      (@ncat_carrier (cat_succ cat_zero) X))
+≔ λ x : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)),
+   λ y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)),
+    @is_equiv_map_by_inverse
+      (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+      (λ p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y),
+        @idtoiso_cat
+          (@ncat_carrier (cat_succ cat_zero) X) x y p)
+      (λ i : τ (IsoEvidence
+          (@ncat_carrier (cat_succ cat_zero) X) x y),
+        @one_cat_iso_path X x y i)
+      (@one_cat_iso_univalence_by_decoder X x y);
+
+// Named ordinary type equivalence between OneCat object paths and isomorphisms.
+symbol one_cat_iso_type_equiv
+  (X : τ OneCat)
+  (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)))
+  : τ (TypeEquiv
+      (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y))
+≔ @Struct_sigma
+    (Function_grpd
+      (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+      (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y))
+    (λ f : τ (Function_grpd
+        (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+        (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)),
+      @IsEquivMap
+        (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y)
+        (IsoEvidence (@ncat_carrier (cat_succ cat_zero) X) x y)
+        f)
+    (λ p : τ (@= (Obj (@ncat_carrier (cat_succ cat_zero) X)) x y),
+      @idtoiso_cat
+        (@ncat_carrier (cat_succ cat_zero) X) x y p)
+    (@one_cat_iso_univalence X x y);
 
 /*
   A concrete next-hom consumer: discreteness of each hom-category yields
