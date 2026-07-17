@@ -125,8 +125,12 @@ The checked kernel currently includes:
   dependent-section action carries next-dimensional agreement with semantic
   `eq_ap`/`eq_apd`; identity action and registered composition compute,
   PathRecord maps act on shaped paths, and the dependent witness field acts
-  through `PathOver`. The canonical binary-sum map now lifts registrations on
-  both summands to a componentwise action: equal tags delegate to their
+  through `PathOver`. These packages register computation for raw groupoid
+  functions/sections; they are not the structured groupoidal-J owner, which
+  consumes an already functorial `Catd` motive. A future path-functor
+  constructor may relate the interfaces. The canonical binary-sum map lifts
+  registrations on both summands in the downstream Sum library module to a
+  componentwise action: equal tags delegate to their
   supplied action, mixed tags use Empty, and agreement with generic `eq_ap`
   remains propositional and runtime-distinct. Recursive Nat equality now also
   has a registered successor action: the selected map retains the exposed

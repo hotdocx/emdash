@@ -1879,6 +1879,12 @@ category-path next-hom construction. In particular the latter's selected
 functor computes directly to `path_to_hom(Cat_cat,p)`. This is a migration
 adapter into the old representation, not a second foundational encoder.
 
+At the selected completion boundary, both native one-way modules and their
+public reviewer examples contain no Cat/Grpd decoder, D0/D0b, or migration-
+constructor reference. The still-used decoder symbols above are therefore
+legacy compatibility/library APIs rather than dependencies of the native
+foundation. Further deletion is consumer-led compatibility work.
+
 Explicit D0/EQ1 migration is nevertheless active in both directions. Old D0
 evidence is decoded to the new inverse fields and equality laws. In the other
 direction, a stable compatibility constructor inhabits the otherwise
@@ -2279,20 +2285,23 @@ The current foundations intentionally do not yet include:
   `PathRecord` convention; its observational path view, stable reflexivity,
   projection betas, reflexive J, and named arbitrary path round trips are
   active;
-- truncation reflectors, direct public groupoid-universe identity, and universe
-  metatheory; the finite decoder-owned `GrpdPathView` fallback and the direct
-  categorical `CatPathView` classifier are active,
+- truncation reflectors and universe metatheory; direct Cat/Grpd universe
+  identity now uses the native EQ1 facade, while decoder-owned
+  `GrpdPathView`/`CatPathView` remain compatibility interfaces,
   while restricted truncated-universe univalence, carrier/evidence package paths,
   the expected successor-level package-universe theorem, general one-step
   monotonicity, dependent-Pi/Sigma closure, `TypeEquiv` invariance, and its fixed-map
-  categorical object-truncation consumer are active, while truncation of
-  recursive omega-equivalence evidence remains open;
+  categorical object-truncation consumer are active. Native EQ1 evidence is
+  proposition-valued and finite-`NCat` object truncation is unconditional;
+  only the opaque legacy D0 evidence lacks an extensionality/property theorem;
 - additional computation of J on nonreflexive structured Pi paths; ordinary
   `PiHapply`/`PiFunext` equivalence and arbitrary Sigma/first-record
   path-characterization round trips are active;
 - a completed universe/univalence metatheory beyond the active explicit
   capabilities and constructor/reflexivity computations;
-- a complete coherence API for `OmegaEquiv` and univalent categories;
+- raw unreified-path observer computation, reverse pointwise-to-coherent-core
+  assembly, consumer-led core-universe inclusion functors, and full retirement
+  of still-used legacy decoder APIs beyond the selected native coherence API;
 - general higher-inductive pushouts and a generic directed-inductive schema;
 - dependent join elimination or a semantic collage construction;
 - a finalized surface syntax for the future proof assistant;

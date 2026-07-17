@@ -24,8 +24,8 @@ status, mathematics, notation, implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
-  independently reviewed and preliminary-probe-refined **adopted active
-  overlay** for the equality, omega-equivalence, direct univalence,
+  independently reviewed and preliminary-probe-refined **completed selected-
+  MVP overlay** for the equality, omega-equivalence, direct univalence,
   internal groupoidality, and structured-`PathOut`/`J` tracks of the July 13
   living master plan. It selects a decoded equality-valued fixed-arrow record,
   a stable primitive first-class facade with a transparent Sigma comparison,
@@ -58,7 +58,8 @@ status, mathematics, notation, implementation plans, and historical decisions.
   The unrestricted `lambda p,p` alias and direct reduced-opposite unifier
   remain measured-rejected. The resulting 1,848-check/45-file Phase-6 snapshot retains `971/157`
   warnings and zero/45/27 audit results, with CI passing in 227.500s. Phase 7
-  decoder migration is now active: its first inventory slice removes the
+  decoder migration is complete at the selected foundational boundary: its
+  first inventory slice removes the
   unused standalone `cat_univalence` inhabitant and routes its two diagnostics
   through `cat_univalence_from_decoder`, while retaining computational
   encoder/decoder operations and the sole specified-inverse capability until
@@ -117,9 +118,20 @@ status, mathematics, notation, implementation plans, and historical decisions.
   areas (1,664 positive and 232 negative), a 21,986-line/892-symbol kernel, a
   2,791-line/69-symbol derived extension, unchanged kernel rule/unifier and
   warning/audit inventories, 48 passing health/example files, and synchronized
-  CI passing in 172.350s of measured checking time. The July
-  13 plan remains the retained promoted-work ledger and active plan for
-  unaffected tracks.
+  CI passing in 172.350s of measured checking time. Phase 11 subsequently
+  extracts the Sum-specific action and its four proof-time bases to
+  `emdash3_2_sum_observational_action.lp`; generic `ObsAction` retains real
+  Nat/PathRecord raw-function consumers and remains distinct from structured
+  groupoidal J. The final selected-MVP snapshot has 1,917 checks across 70
+  areas (1,684 positive and 233 negative), zero unclassified, a
+  21,762-line/887-symbol/596-rule/63-unifier kernel, 51 passing measured files,
+  unchanged 971/157 warnings and zero/45/27 audit results, and synchronized CI
+  passing in 100.845s. Native extensions and their public examples have no
+  Cat/Grpd decoder or D0 dependency; retained decoder APIs are compatibility.
+  Consumer-free core-universe inclusion, raw-path observer computation,
+  reverse coherent-core assembly, HITs, and metatheory are explicit later
+  tracks. The July 13 plan remains the retained promoted-work ledger and
+  active plan for unaffected tracks.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:

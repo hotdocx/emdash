@@ -47,8 +47,8 @@ The 2026-07-17 baseline is:
 make check                         pass
 make examples                      pass
 make ci                            pass
-checked files/examples            48
-diagnostic checks                1,896 (1,664 assert + 232 assertnot)
+checked files/examples            51
+diagnostic checks                1,917 (1,684 assert + 233 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -57,15 +57,14 @@ warning inventory                  1,128
   replaceable pattern variables      157
 ```
 
-The adopted equality-valued omega-equivalence overlay has promoted its first
-six bounded staging phases, the first Phase-7 migration checkpoints, and the
-first four Phase-9 groupoidality/structured-J/coherence slices, including the selected
-abstract/rigid-universe, stable Product, uniform explicit-cast, homwise
-groupoidality, literal structured-action/J, and equivalence-valued displayed-
-transport boundaries plus generic equality-valued half-adjointification and
-the native all-EQ1 next-hom owner. The latter is a one-way derived extension
-with protected transparent proof helpers and one ordinary public hom-action
-constructor; it is not an opaque theorem capability.
+The adopted equality-valued omega-equivalence overlay is implemented at its
+selected operational MVP boundary. This includes the abstract/rigid-universe,
+stable Product, uniform explicit-cast, decoder-independent native theorem
+chain, homwise groupoidality, literal structured-action/J, equivalence-valued
+displayed transport, unrestricted evidence-property, and unconditional
+finite-`NCat` object-truncation results. The native next-hom owner is a one-way
+derived extension with protected transparent proof helpers and one ordinary
+public hom-action constructor; it is not an opaque theorem capability.
 `OmegaEquivAlong_EQ1(f)` decodes to a native
 one-constructor record with separate left/right inverse arrows, ordinary
 equality-valued cancellation laws in the two endomorphism hom-categories,
@@ -172,8 +171,13 @@ EQ1 package with the observation-complete migration constructor. Both
 ordinary-isomorphism recursive cells and the D1 category-path next-hom
 consumer use it instead of `idtoequiv_cat`. The latter's selected functor now
 computes to `path_to_hom(Cat_cat,p)`. This reduces, but does not yet eliminate,
-the legacy encoder dependency; compatibility round trips, shaped Product
-computation, OneCat theorems, and other inventoried consumers remain.
+the encoder dependency *inside the legacy compatibility surface*;
+compatibility round trips, shaped Product computation, OneCat theorems, and
+other inventoried consumers remain. The native hom-action and
+evidence-property modules and their public examples contain no Cat/Grpd
+decoder, D0/D0b, or D0/EQ1 migration reference. Thus decoder migration is
+complete at the selected foundational boundary even though full legacy API
+retirement is not.
 
 The general-groupoidality layer now lives with the native derived hom-action
 owner in `emdash3_2_eq1_hom_action.lp`. For
@@ -286,13 +290,17 @@ example import that one-way module. This preserves the useful library example
 while removing action-specific proof-time authority from the foundational
 kernel; focused kernel/module/check/example probes all pass.
 
-The catalog now has 1,896 checks across 69 areas. The kernel has 21,986 lines,
-892 symbols, 597 rules, and 67 unification rules; the derived extension has
-2,791 lines, 69 symbols, and no rules or unification rules. The synchronized
-48-file health and reviewer sweeps pass. The diagnostic suite has 1,664
-positive and 232 negative statements. Warnings remain 971/157 and the strict
-audit remains zero/45/27. Synchronized 48-file CI passes with 172.350s of
-measured checking time; the active July 17 plan records the phase evidence.
+The final selected-MVP catalog has 1,917 checks across 70 areas. The kernel has
+21,762 lines, 887 symbols, 596 rewrite rules, and 63 unification rules. The
+native hom-action extension has 2,791 lines/69 symbols; the evidence-property
+extension has 1,407 lines/60 symbols and adds no explicit rewrite or
+unification authority; the downstream Sum library has 430 lines/12 symbols
+and owns the four extracted proof-time comparisons. The synchronized 51-file
+health and reviewer sweeps pass. The diagnostic suite has 1,684 positive and
+233 negative statements. Warnings remain 971/157 and the strict audit remains
+zero/45/27. Synchronized 51-file CI passes with 100.845s of measured checking
+time; the active July 17 plan records the phase evidence and selected
+completion boundary.
 
 The largest warning families are headed by `comp_fapp0`,
 `hom_postcomp_fapp0`, `fapp1_fapp0`, and `tapp0_fapp0`. These reports are
@@ -1960,8 +1968,9 @@ The following remain explicit future work rather than hidden assumptions:
 - dependent elimination and semantic collage construction for primitive join;
 - specialized higher `fapp1*` projections of `Hom_tele_func` beyond current
   demand;
-- complete computational univalence/coherence APIs beyond the active staging
-  capabilities;
+- raw unreified-path observer computation, reverse pointwise-to-coherent-core
+  assembly, consumer-led core-universe inclusion functors, and full legacy
+  decoder API retirement beyond the selected native direct-univalence MVP;
 - general higher-inductive categories and pushouts;
 - a finalized parser/surface language;
 - module splitting of the single kernel file after comment/section boundaries

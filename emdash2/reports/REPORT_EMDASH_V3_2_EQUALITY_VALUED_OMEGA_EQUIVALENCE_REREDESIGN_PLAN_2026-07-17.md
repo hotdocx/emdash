@@ -8,7 +8,7 @@ Supersedes: the equality, omega-equivalence, direct-univalence, internal-groupoi
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-independent-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e16-d397-7a60-9765-1f35e36e20f7; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e5a-9a89-7d01-a92f-f4d15f14c77e; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e9e-4c44-7e61-9320-bfc602b50d64
-Status: adopted and implemented 2026-07-17 at the selected operational MVP boundary; Phases 1 through 9 and 11 are complete at their stated selected boundaries, Phase 10 is deliberately deferred until a concrete core-universe motive consumer exists, and Phase 12 consolidation is in final validation; the native EQ1 foundation, groupoidality/structured-`J` chain, unrestricted evidence-property theorem, and unconditional finite-`NCat` object-truncation theorem are decoder-free, while legacy D0/Cat/Grpd decoder APIs remain explicit compatibility/library surface rather than a second active foundation
+Status: **completed 2026-07-17 at the selected operational MVP boundary**; Phases 1 through 9, 11, and 12 are complete at their stated selected boundaries, while Phase 10 is deliberately deferred until a concrete core-universe motive consumer exists; the native EQ1 foundation, groupoidality/structured-`J` chain, unrestricted evidence-property theorem, and unconditional finite-`NCat` object-truncation theorem are decoder-free, while legacy D0/Cat/Grpd decoder APIs remain explicit compatibility/library surface rather than a second active foundation
 Review baseline: `772411011ac721c84d143a2967f4e5c31e94bc70`
 Implementation starting baseline: `4315137094d2faf4fcc6f4b026960a62bd5406e7`
 Primary predecessor: `REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`
@@ -151,9 +151,10 @@ At the review baseline this proposal was not yet implemented. The active
 source still retains the D0 certificate, public transparent Sigma package,
 and decoder capabilities for compatibility, but Phases 1 through 5 and the
 selected abstract, rigid-universe, stable-Product, and explicit-opposite parts
-of Phase 6 are now promoted alongside them. Phase 7 has since generalized the
+of Phase 6 are now promoted alongside them. Phase 7 generalized the
 successful opposite staging pattern into one uniform carrier view, retired the
-opposite-only intermediary, and begun decoder-consumer migration. Phase 9 now
+opposite-only intermediary, and closed native foundational decoder migration
+while retaining consumer-owned compatibility APIs. Phase 9 now
 consumes general internal groupoidality homwise, supplies discrete and
 packaged-zero-category nonliteral witnesses, retains the existing
 `path_ind_sec` computation as the structured-action owner, proves at a
@@ -196,7 +197,8 @@ directed assets phase by phase. The proposed core is now sufficiently coherent
 and computationally feasible to implement. The principled raw-path/package
 observer join and semantic fixed-point assurance remain explicit
 research/extension gates; unrestricted native evidence property and
-finite-dimensional object truncation are no longer open.
+finite-dimensional object truncation are no longer open. The selected
+operational MVP is implemented and validated rather than merely feasible.
 
 The review changed five material architectural decisions:
 
@@ -534,7 +536,7 @@ the then-current owner before promotion.
 | current Grpd-universe equality | direct runtime EQ1 classifier over the completed function-path hom boundary; `GrpdPathView := TypeEquiv` and its decoder round trips remain explicit compatibility/library surfaces rather than the primary normal form |
 | current `PathOut`/`path_ind_sec` | materially computational through existing `fapp*`/`tapp*` rules and shaped motive folds; at a literal `Path_cat(A)` source its application and the displayed action are now proved propositionally equal to primitive `ind_eqr`, while primitive J alone retains reflexivity reduction |
 | native EQ1 next-hom/groupoidality extension | transparent one-way derived module with one ordinary public hom-action owner, protected computational proof helpers, native core-inclusion groupoidality consumers, pointwise all-arrows evidence, and equivalence-valued displayed transport; no D0b route remains in this chain |
-| current Sum action example | mathematically meaningful for disjoint sums and computational on registered bases; valid library evidence but over-specialized as a foundational univalence prerequisite |
+| current Sum action example | mathematically meaningful for disjoint sums and computational on registered bases; now isolated in a downstream library module and no longer a foundational univalence prerequisite |
 | truncation/`NCat` spine | semantically meaningful retained work plus a transparent downstream native-EQ1 theorem `ncat_obj_trunc_EQ1`; the old D0 conditional capability remains compatibility-only |
 | HIT/reflector scope | deferred; this redesign improves the equality/transport substrate but does not by itself provide a truncation reflector, Circle, general restricted HIT eliminator, or raw-family fibrancy |
 
@@ -2295,8 +2297,9 @@ kernel consumers (`idtoequiv_cat` on 30 lines, `omega_equiv_path` on 11,
 `cat_univalence_by_decoder` on four, and the corresponding Grpd operations on
 22/20/four). In contrast, the native hom-action and evidence-property modules
 and their three public reviewer examples have **zero** references to those
-Cat/Grpd decoders, D0/D0b, or either D0/EQ1 migration constructor. D0b has no
-remaining active-kernel occurrence. The native theorem chain is therefore
+Cat/Grpd decoders, D0/D0b, or either D0/EQ1 migration constructor. The former
+`OmegaEquivAlong_D0b` classifier has no remaining active-kernel occurrence.
+The native theorem chain is therefore
 decoder-free, while the inventoried old operations remain honest
 compatibility/library APIs with shaped computation and round-trip consumers.
 Removing those APIs wholesale would be an unrelated compatibility migration,
@@ -2610,7 +2613,7 @@ its former-specific proof-time bridges are no longer foundational kernel
 authority. New former registrations remain paused unless a concrete consumer
 cannot use generic action or a separate library module.
 
-### Phase 12: Consolidation and next-scope decision — final validation in progress
+### Phase 12: Consolidation and next-scope decision — completed 2026-07-17
 
 The selected endpoint decisions are now fixed:
 
@@ -2639,11 +2642,22 @@ transport equivalence, unrestricted evidence uniqueness, structured
 private helper. Its focused probe passes in
 `groupoidal_structured_j_eq1-20260717-185558.log`.
 
-Exit criterion is satisfied architecturally: one native public
-equality/equivalence/groupoidal-J API is active and the old D0/decoder surface
-is classified only as compatibility. Phase completion awaits the final
-synchronized catalog, health, warning, audit, example, and CI gates recorded
-below.
+The final synchronized snapshot has 1,917 diagnostics across 70 areas (1,684
+positive and 233 negative), zero unclassified checks, a 21,762-line/887-symbol
+kernel with 596 rewrite rules and 63 unification rules, a
+2,791-line/69-symbol hom-action extension, a 1,407-line/60-symbol
+evidence-property extension with no explicit conversion authority, and a
+430-line/12-symbol Sum library owning the four extracted proof-time
+comparisons. All 51 measured source/example files pass. The kernel warning
+inventory remains `971/157`, and the strict LHS audit remains zero unreviewed
+clauses with 45 annotated slots across 27 intentional clauses. `make check`,
+`make examples`, catalog generation/check, health, warning summary, strict
+audit, and synchronized `make ci` all pass; CI measured 100.845s.
+
+Exit criterion met: one native public equality/equivalence/groupoidal-J API is
+active, the old D0/decoder surface is classified only as compatibility, all 25
+acceptance criteria are met at their stated boundary, and the full validation
+suite is synchronized.
 
 ## Recommended First Implementation Slice
 
@@ -2659,10 +2673,9 @@ and migrated from D0b to the native owner; the kernel does not import the
 extension.
 
 `EVOGJ-EVIDENCE-PROP`, `EVOGJ-NCAT-TRUNC`, and the selected foundational
-`EVOGJ-DECODER-MIGRATE` boundary are complete. The current continuation is
-Phase-12 synchronization and full validation. There is no remaining
-dependency-ready implementation slice required by the selected MVP after
-those gates pass. A later task may choose a concrete standard-library
+`EVOGJ-DECODER-MIGRATE` boundary and Phase-12 synchronization are complete.
+There is no remaining dependency-ready implementation slice required by the
+selected MVP. A later task may choose a concrete standard-library
 consumer, a consumer-led core-universe inclusion, legacy compatibility
 retirement, reverse coherent-core assembly, or a separately planned HIT, but
 none should be silently appended to this goal.
@@ -2968,7 +2981,7 @@ recorded in the July 13 ledger and should not be duplicated here.
 | `EVOGJ-UNIVERSE-CORE-INCL` | **deferred; not selected for this MVP** | actual package-core functor into `Cat_cat` | a concrete structured motive that needs a groupoid/truncated universe codomain | source/consumer audit found no current use; do not invent a new higher action owner before its first consumer fixes the required computation |
 | `EVOGJ-SUM-SIMPLIFY` | **completed at selected boundary 2026-07-17** | demote action-specific bases while retaining useful library action | consumer inventory | all Sum-specific bases/comparisons/action symbols mechanically extracted to `emdash3_2_sum_observational_action.lp`; only checks/example import it; focused probes pass |
 | `EVOGJ-OBSACTION-SCOPE` | **completed at selected MVP boundary; later functor-view refactor open** | decide remaining role of action registry | groupoidal J and former consumers | generic `ObsAction`/`ObsDAction` retain real Nat/PathRecord raw-function consumers; structured Cat-valued transport uses native functor action and does not manufacture that structure. Sum is downstream. A future constructor `Path_cat(A) -> Path_cat(B)` may make the registry a first-hom-action view, but is not an MVP prerequisite |
-| `EVOGJ-CONSOLIDATE` | **final validation in progress** | synchronize the selected MVP and close the living overlay | all selected phases | integrated public example passes; reports/source authority are synchronized; final catalog, health, warning, audit, example, and CI evidence remains to be recorded |
+| `EVOGJ-CONSOLIDATE` | **completed 2026-07-17** | synchronize the selected MVP and close the living overlay | all selected phases | integrated public example and all 51 measured files pass; catalog is 1,917/70 with zero unclassified, warnings 971/157, audit zero/45/27, generated health current, and synchronized CI passes in 100.845s |
 | `EVOGJ-H2-READINESS` | deferred | reassess representative HIT/truncation reflector | consolidated MVP | new bounded plan or continued deferral |
 | `EVOGJ-METATHEORY` | deferred research | consistency, normalization, stratification, semantic model | mature architecture | separate research evidence |
 
@@ -3024,8 +3037,8 @@ required deliverable.
 
 ## Future Work Handoff Requirements
 
-After final validation, this overlay has no active implementation row required
-by the selected MVP. A later handoff should name a new bounded objective rather
+With final validation complete, this overlay has no active implementation row
+required by the selected MVP. A later handoff should name a new bounded objective rather
 than instruct an agent to continue this plan indiscriminately. Candidate
 objectives are a public standard-library consumer, a consumer-led
 core-universe inclusion, legacy compatibility retirement, reverse coherent-
