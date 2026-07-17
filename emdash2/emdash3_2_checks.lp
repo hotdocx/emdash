@@ -8219,6 +8219,43 @@ assert [A B C : Grpd]
       (@= C (g (f x)) (g (f x)))
       (@eq_refl C (g (f x)));
 
+// catalog-area: Equality-valued half-adjointification
+// Separate left/right inverse homotopies admit a derived adjusted counit
+// whose triangle is computational on reflexive identity data.
+assert [A B : Grpd]
+  (f : τ A → τ B)
+  (l : τ B → τ A)
+  (eta : Π x : τ A, τ (@= A (l (f x)) x))
+  (epsilon : Π b : τ B, τ (@= B (f (l b)) b))
+  (x : τ A) ⊢
+  @half_adjoint_triangle A B f l eta epsilon x
+  : τ (@=
+      (@= B (f (l (f x))) (f x))
+      (@eq_ap A B f (l (f x)) x (eta x))
+      (@half_adjoint_counit A B f l eta epsilon (f x)));
+
+assert [A : Grpd]
+  (x : τ A) ⊢
+  @half_adjoint_counit
+    A A
+    (λ z : τ A, z)
+    (λ z : τ A, z)
+    (λ z : τ A, @eq_refl A z)
+    (λ z : τ A, @eq_refl A z)
+    x
+  ≡ @eq_refl A x;
+
+assert [A : Grpd]
+  (x : τ A) ⊢
+  @half_adjoint_triangle
+    A A
+    (λ z : τ A, z)
+    (λ z : τ A, z)
+    (λ z : τ A, @eq_refl A z)
+    (λ z : τ A, @eq_refl A z)
+    x
+  ≡ @eq_refl (@= A x x) (@eq_refl A x);
+
 assert [A B C : Grpd]
   [f : τ A → τ B]
   [g : τ B → τ C]

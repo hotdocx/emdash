@@ -5,7 +5,9 @@
   compatibility owner. Its selected inverse reads a directed arrow as an
   object path, and the equality-valued right law proves that re-inclusion
   recovers the arrow. Existing discrete and zero-dimensional categories are
-  nonliteral consumers. Structured motives continue to use `path_ind_sec`;
+  nonliteral consumers. The selected path also reconstructs explicit
+  equivalence evidence for the arrow, so existing displayed transport is an
+  equivalence of fibres. Structured motives continue to use `path_ind_sec`;
   no parallel groupoidal eliminator is introduced.
 */
 

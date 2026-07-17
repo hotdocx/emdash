@@ -1671,6 +1671,23 @@ left inverse and left law, so this interface does not silently identify the
 two inverse choices or assert quasi-inverse eta. Existing `IsDiscreteCat`
 evidence and a packaged `ZeroCat` carrier provide nonliteral instances.
 
+That pointwise path now reconstructs native equivalence evidence for the
+original arrow. Its reverse path is sent through `path_to_hom` to obtain a
+selected inverse; re-inclusion rewrites the original arrow to the image of the
+selected path, and the J-derived object-path cancellation laws prove both
+inverse equations. Thus `groupoidal_arrow_equiv_along_EQ1(g,f)` is a defined
+package, not an all-arrows axiom. More generally,
+`omega_equiv_along_fapp1_fapp0_EQ1(F,u)` maps any fixed-arrow EQ1 evidence
+through ordinary functor action. Specializing this theorem to a displayed
+family `D : C -> Cat_cat` gives
+`groupoidal_fibre_transport_equiv_EQ1(g,D,f)`: the existing directed fibre
+transport is an equivalence, and its inverse projections compute as transport
+along the selected inverse arrow. No encoder, decoder, new transport
+operation, or runtime rule is required. The arrow-to-path selection itself is
+still derived through the retained D0b next-hom compatibility owner; replacing
+that internal route with a native all-EQ1 hom-action theorem remains migration
+work.
+
 At a literal `Path_cat(A)`, the compatibility-derived selected inverse is
 well typed but does not definitionally reduce to the input path, because its
 normal form passes through both migration bridges and D0b. This is a

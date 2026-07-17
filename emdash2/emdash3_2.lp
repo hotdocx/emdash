@@ -1488,6 +1488,567 @@ symbol eq_ap_comp
     x
     p;
 
+
+// Cancel p^-1 against p on the left of an arbitrary tail path.
+symbol eq_trans_inv_left
+  [X : Grpd]
+  [x y : τ X]
+  (p : τ (@= X x y))
+  [z : τ X]
+  (r : τ (@= X y z))
+  : τ (@=
+      (@= X y z)
+      (@eq_trans
+        X y x z
+        (@eq_sym X x y p)
+        (@eq_trans X x y z p r))
+      r)
+≔ @ind_eqr
+    X
+    y
+    (λ x : τ X,
+      λ p : τ (@= X x y),
+      @Pi_grpd
+        X
+        (λ z : τ X,
+          @Pi_grpd
+            (@= X y z)
+            (λ r : τ (@= X y z),
+              @=
+                (@= X y z)
+                (@eq_trans
+                  X y x z
+                  (@eq_sym X x y p)
+                  (@eq_trans X x y z p r))
+                r)))
+    (λ z : τ X,
+      λ r : τ (@= X y z),
+      @eq_refl (@= X y z) r)
+    x
+    p
+    z
+    r;
+
+
+// Propositional right unit for J-derived path composition.
+symbol eq_trans_right_unit
+  [X : Grpd]
+  [x y : τ X]
+  (p : τ (@= X x y))
+  : τ (@=
+      (@= X x y)
+      (@eq_trans X x y y p (@eq_refl X y))
+      p)
+≔ @ind_eqr
+    X
+    y
+    (λ x : τ X,
+      λ p : τ (@= X x y),
+      @=
+        (@= X x y)
+        (@eq_trans X x y y p (@eq_refl X y))
+        p)
+    (@eq_refl (@= X y y) (@eq_refl X y))
+    x
+    p;
+
+// Right cancellation of a common path suffix, proved by J on that suffix.
+symbol eq_trans_right_cancel
+  [X : Grpd]
+  [x y : τ X]
+  (p q : τ (@= X x y))
+  [z : τ X]
+  (r : τ (@= X y z))
+  (s : τ (@=
+      (@= X x z)
+      (@eq_trans X x y z p r)
+      (@eq_trans X x y z q r)))
+  : τ (@= (@= X x y) p q)
+≔ @ind_eqr
+    X
+    z
+    (λ y : τ X,
+      λ r : τ (@= X y z),
+      @Pi_grpd
+        (@= X x y)
+        (λ p : τ (@= X x y),
+          @Pi_grpd
+            (@= X x y)
+            (λ q : τ (@= X x y),
+              @Pi_grpd
+                (@=
+                  (@= X x z)
+                  (@eq_trans X x y z p r)
+                  (@eq_trans X x y z q r))
+                (λ _ : τ (@=
+                    (@= X x z)
+                    (@eq_trans X x y z p r)
+                    (@eq_trans X x y z q r)),
+                  @= (@= X x y) p q))))
+    (λ p : τ (@= X x z),
+      λ q : τ (@= X x z),
+      λ s : τ (@=
+          (@= X x z)
+          (@eq_trans X x z z p (@eq_refl X z))
+          (@eq_trans X x z z q (@eq_refl X z))),
+      @eq_trans
+        (@= X x z)
+        p
+        (@eq_trans X x z z p (@eq_refl X z))
+        q
+        (@eq_sym
+          (@= X x z)
+          (@eq_trans X x z z p (@eq_refl X z))
+          p
+          (@eq_trans_right_unit X x z p))
+        (@eq_trans
+          (@= X x z)
+          (@eq_trans X x z z p (@eq_refl X z))
+          (@eq_trans X x z z q (@eq_refl X z))
+          q
+          s
+          (@eq_trans_right_unit X x z q)))
+    y
+    r
+    p
+    q
+    s;
+
+// Naturality of a homotopy h(z) = z, specialized to the identity target so
+// the selected right-hand action is the literal path p.
+symbol retraction_homotopy_naturality
+  [X : Grpd]
+  (h : τ X → τ X)
+  (eta : Π z : τ X, τ (@= X (h z) z))
+  [x y : τ X]
+  (p : τ (@= X x y))
+  : τ (@=
+      (@= X (h x) y)
+      (@eq_trans
+        X (h x) (h y) y
+        (@eq_ap X X h x y p)
+        (eta y))
+      (@eq_trans X (h x) x y (eta x) p))
+≔ @ind_eqr
+    X
+    y
+    (λ x : τ X,
+      λ p : τ (@= X x y),
+      @=
+        (@= X (h x) y)
+        (@eq_trans
+          X (h x) (h y) y
+          (@eq_ap X X h x y p)
+          (eta y))
+        (@eq_trans X (h x) x y (eta x) p))
+    (@eq_sym
+      (@= X (h y) y)
+      (@eq_trans X (h y) y y (eta y) (@eq_refl X y))
+      (eta y)
+      (@eq_trans_right_unit X (h y) y (eta y)))
+    x
+    p;
+
+// A retraction homotopy is natural with itself:
+// eta(h x) = ap(h,eta x).
+symbol retraction_homotopy_self_naturality
+  [X : Grpd]
+  (h : τ X → τ X)
+  (eta : Π z : τ X, τ (@= X (h z) z))
+  (x : τ X)
+  : τ (@=
+      (@= X (h (h x)) (h x))
+      (eta (h x))
+      (@eq_ap X X h (h x) x (eta x)))
+≔ @eq_sym
+    (@= X (h (h x)) (h x))
+    (@eq_ap X X h (h x) x (eta x))
+    (eta (h x))
+    (@eq_trans_right_cancel
+      X
+      (h (h x))
+      (h x)
+      (@eq_ap X X h (h x) x (eta x))
+      (eta (h x))
+      x
+      (eta x)
+      (@retraction_homotopy_naturality
+        X h eta (h x) x (eta x)));
+
+// Standard adjusted counit
+//   epsilon'(b) = epsilon(f(l b))^-1 ; ap(f,eta(l b)) ; epsilon(b).
+symbol half_adjoint_counit
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (l : τ B → τ A)
+  (eta : Π x : τ A, τ (@= A (l (f x)) x))
+  (epsilon : Π b : τ B, τ (@= B (f (l b)) b))
+  (b : τ B)
+  : τ (@= B (f (l b)) b)
+≔ @eq_trans
+    B
+    (f (l b))
+    (f (l (f (l b))))
+    b
+    (@eq_sym
+      B
+      (f (l (f (l b))))
+      (f (l b))
+      (epsilon (f (l b))))
+    (@eq_trans
+      B
+      (f (l (f (l b))))
+      (f (l b))
+      b
+      (@eq_ap
+        A B f
+        (l (f (l b)))
+        (l b)
+        (eta (l b)))
+      (epsilon b));
+
+// The adjusted middle path agrees with naturality's ap(f o l) presentation.
+symbol half_adjoint_middle
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (l : τ B → τ A)
+  (eta : Π x : τ A, τ (@= A (l (f x)) x))
+  (x : τ A)
+  : τ (@=
+      (@= B
+        (f (l (f (l (f x)))))
+        (f (l (f x))))
+      (@eq_ap
+        A B f
+        (l (f (l (f x))))
+        (l (f x))
+        (eta (l (f x))))
+      (@eq_ap
+        B B
+        (λ b : τ B, f (l b))
+        (f (l (f x)))
+        (f x)
+        (@eq_ap A B f (l (f x)) x (eta x))))
+≔ @eq_trans
+    (@= B
+      (f (l (f (l (f x)))))
+      (f (l (f x))))
+    (@eq_ap A B f
+      (l (f (l (f x))))
+      (l (f x))
+      (eta (l (f x))))
+    (@eq_ap
+      A B f
+      (l (f (l (f x))))
+      (l (f x))
+      (@eq_ap
+        A A
+        (λ z : τ A, l (f z))
+        (l (f x))
+        x
+        (eta x)))
+    (@eq_ap
+      B B
+      (λ b : τ B, f (l b))
+      (f (l (f x)))
+      (f x)
+      (@eq_ap A B f (l (f x)) x (eta x)))
+    (@eq_ap
+      (@= A (l (f (l (f x)))) (l (f x)))
+      (@= B (f (l (f (l (f x))))) (f (l (f x))))
+      (λ p : τ (@= A (l (f (l (f x)))) (l (f x))),
+        @eq_ap A B f
+          (l (f (l (f x))))
+          (l (f x))
+          p)
+      (eta (l (f x)))
+      (@eq_ap
+        A A
+        (λ z : τ A, l (f z))
+        (l (f x))
+        x
+        (eta x))
+      (@retraction_homotopy_self_naturality
+        A
+        (λ z : τ A, l (f z))
+        eta
+        x))
+    (@eq_trans
+      (@= B
+        (f (l (f (l (f x)))))
+        (f (l (f x))))
+      (@eq_ap
+        A B f
+        (l (f (l (f x))))
+        (l (f x))
+        (@eq_ap
+          A A
+          (λ z : τ A, l (f z))
+          (l (f x))
+          x
+          (eta x)))
+      (@eq_ap
+        A B
+        (λ z : τ A, f (l (f z)))
+        (l (f x))
+        x
+        (eta x))
+      (@eq_ap
+        B B
+        (λ b : τ B, f (l b))
+        (f (l (f x)))
+        (f x)
+        (@eq_ap A B f (l (f x)) x (eta x)))
+      (@eq_ap_comp
+        A A B
+        (λ z : τ A, l (f z))
+        f
+        (l (f x))
+        x
+        (eta x))
+      (@eq_sym
+        (@= B
+          (f (l (f (l (f x)))))
+          (f (l (f x))))
+        (@eq_ap
+          B B
+          (λ b : τ B, f (l b))
+          (f (l (f x)))
+          (f x)
+          (@eq_ap A B f (l (f x)) x (eta x)))
+        (@eq_ap
+          A B
+          (λ z : τ A, f (l (f z)))
+          (l (f x))
+          x
+          (eta x))
+        (@eq_ap_comp
+          A B B
+          f
+          (λ b : τ B, f (l b))
+          (l (f x))
+          x
+          (eta x))));
+
+// Standard half-adjoint triangle ap(f,eta(x)) = epsilon'(f x).
+
+// Adjusted counit after replacing its middle path by ap(f o l,ap(f,eta)).
+symbol half_adjoint_adjusted_middle
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (l : τ B → τ A)
+  (epsilon : Π b : τ B, τ (@= B (f (l b)) b))
+  (x : τ A)
+  (p : τ (@= B (f (l (f x))) (f x)))
+  : τ (@= B (f (l (f x))) (f x))
+≔ @eq_trans
+    B
+    (f (l (f x)))
+    (f (l (f (l (f x)))))
+    (f x)
+    (@eq_sym
+      B
+      (f (l (f (l (f x)))))
+      (f (l (f x)))
+      (epsilon (f (l (f x)))))
+    (@eq_trans
+      B
+      (f (l (f (l (f x)))))
+      (f (l (f x)))
+      (f x)
+      (@eq_ap
+        B B
+        (λ b : τ B, f (l b))
+        (f (l (f x)))
+        (f x)
+        p)
+      (epsilon (f x)));
+
+// Naturality exposes the cancellable epsilon^-1 ; epsilon prefix.
+symbol half_adjoint_adjusted_natural
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (l : τ B → τ A)
+  (epsilon : Π b : τ B, τ (@= B (f (l b)) b))
+  (x : τ A)
+  (p : τ (@= B (f (l (f x))) (f x)))
+  : τ (@= B (f (l (f x))) (f x))
+≔ @eq_trans
+    B
+    (f (l (f x)))
+    (f (l (f (l (f x)))))
+    (f x)
+    (@eq_sym
+      B
+      (f (l (f (l (f x)))))
+      (f (l (f x)))
+      (epsilon (f (l (f x)))))
+    (@eq_trans
+      B
+      (f (l (f (l (f x)))))
+      (f (l (f x)))
+      (f x)
+      (epsilon (f (l (f x))))
+      p);
+
+symbol half_adjoint_counit_middle
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (l : τ B → τ A)
+  (eta : Π a : τ A, τ (@= A (l (f a)) a))
+  (epsilon : Π b : τ B, τ (@= B (f (l b)) b))
+  (x : τ A)
+  : τ (@=
+      (@= B (f (l (f x))) (f x))
+      (@half_adjoint_counit
+        A B f l eta epsilon (f x))
+      (@half_adjoint_adjusted_middle
+        A B f l epsilon x
+        (@eq_ap A B f (l (f x)) x (eta x))))
+≔ @eq_ap
+    (@= B
+      (f (l (f (l (f x)))))
+      (f (l (f x))))
+    (@= B (f (l (f x))) (f x))
+    (λ m : τ (@= B
+        (f (l (f (l (f x)))))
+        (f (l (f x)))),
+      @eq_trans
+        B
+        (f (l (f x)))
+        (f (l (f (l (f x)))))
+        (f x)
+        (@eq_sym
+          B
+          (f (l (f (l (f x)))))
+          (f (l (f x)))
+          (epsilon (f (l (f x)))))
+        (@eq_trans
+          B
+          (f (l (f (l (f x)))))
+          (f (l (f x)))
+          (f x)
+          m
+          (epsilon (f x))))
+    (@eq_ap A B f
+      (l (f (l (f x))))
+      (l (f x))
+      (eta (l (f x))))
+    (@eq_ap
+      B B
+      (λ b : τ B, f (l b))
+      (f (l (f x)))
+      (f x)
+      (@eq_ap A B f (l (f x)) x (eta x)))
+    (@half_adjoint_middle A B f l eta x);
+
+symbol half_adjoint_middle_natural
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (l : τ B → τ A)
+  (eta : Π a : τ A, τ (@= A (l (f a)) a))
+  (epsilon : Π b : τ B, τ (@= B (f (l b)) b))
+  (x : τ A)
+  : τ (@=
+      (@= B (f (l (f x))) (f x))
+      (@half_adjoint_adjusted_middle
+        A B f l epsilon x
+        (@eq_ap A B f (l (f x)) x (eta x)))
+      (@half_adjoint_adjusted_natural
+        A B f l epsilon x
+        (@eq_ap A B f (l (f x)) x (eta x))))
+≔ @eq_ap
+    (@= B
+      (f (l (f (l (f x)))))
+      (f x))
+    (@= B (f (l (f x))) (f x))
+    (λ t : τ (@= B
+        (f (l (f (l (f x)))))
+        (f x)),
+      @eq_trans
+        B
+        (f (l (f x)))
+        (f (l (f (l (f x)))))
+        (f x)
+        (@eq_sym
+          B
+          (f (l (f (l (f x)))))
+          (f (l (f x)))
+          (epsilon (f (l (f x)))))
+        t)
+    (@eq_trans
+      B
+      (f (l (f (l (f x)))))
+      (f (l (f x)))
+      (f x)
+      (@eq_ap
+        B B
+        (λ b : τ B, f (l b))
+        (f (l (f x)))
+        (f x)
+        (@eq_ap A B f (l (f x)) x (eta x)))
+      (epsilon (f x)))
+    (@eq_trans
+      B
+      (f (l (f (l (f x)))))
+      (f (l (f x)))
+      (f x)
+      (epsilon (f (l (f x))))
+      (@eq_ap A B f (l (f x)) x (eta x)))
+    (@retraction_homotopy_naturality
+      B
+      (λ b : τ B, f (l b))
+      epsilon
+      (f (l (f x)))
+      (f x)
+      (@eq_ap A B f (l (f x)) x (eta x)));
+
+// Standard half-adjoint triangle ap(f,eta(x)) = epsilon'(f x), now factored.
+symbol half_adjoint_triangle
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (l : τ B → τ A)
+  (eta : Π a : τ A, τ (@= A (l (f a)) a))
+  (epsilon : Π b : τ B, τ (@= B (f (l b)) b))
+  (x : τ A)
+  : τ (@=
+      (@= B (f (l (f x))) (f x))
+      (@eq_ap A B f (l (f x)) x (eta x))
+      (@half_adjoint_counit
+        A B f l eta epsilon (f x)))
+≔ @eq_sym
+    (@= B (f (l (f x))) (f x))
+    (@half_adjoint_counit A B f l eta epsilon (f x))
+    (@eq_ap A B f (l (f x)) x (eta x))
+    (@eq_trans
+      (@= B (f (l (f x))) (f x))
+      (@half_adjoint_counit A B f l eta epsilon (f x))
+      (@half_adjoint_adjusted_middle
+        A B f l epsilon x
+        (@eq_ap A B f (l (f x)) x (eta x)))
+      (@eq_ap A B f (l (f x)) x (eta x))
+      (@half_adjoint_counit_middle
+        A B f l eta epsilon x)
+      (@eq_trans
+        (@= B (f (l (f x))) (f x))
+        (@half_adjoint_adjusted_middle
+          A B f l epsilon x
+          (@eq_ap A B f (l (f x)) x (eta x)))
+        (@half_adjoint_adjusted_natural
+          A B f l epsilon x
+          (@eq_ap A B f (l (f x)) x (eta x)))
+        (@eq_ap A B f (l (f x)) x (eta x))
+        (@half_adjoint_middle_natural
+          A B f l eta epsilon x)
+        (@eq_trans_inv_left
+          B
+          (f (l (f (l (f x)))))
+          (f (l (f x)))
+          (epsilon (f (l (f x))))
+          (f x)
+          (@eq_ap A B f (l (f x)) x (eta x)))));
+
+
 // Selected action of a composite is pointwise composition of selected actions.
 symbol obs_action_comp_map
   [A B C : Grpd]

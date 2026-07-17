@@ -39,7 +39,7 @@ make check                         pass
 make examples                      pass
 make ci                            pass
 checked files/examples            46
-diagnostic checks                1,867 (1,639 assert + 228 assertnot)
+diagnostic checks                1,886 (1,654 assert + 232 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -50,9 +50,10 @@ warning inventory                  1,128
 
 The adopted equality-valued omega-equivalence overlay has promoted its first
 six bounded staging phases, the first Phase-7 migration checkpoints, and the
-first two Phase-9 groupoidality/structured-J slices, including the selected
+first three Phase-9 groupoidality/structured-J slices, including the selected
 abstract/rigid-universe, stable Product, uniform explicit-cast, homwise
-groupoidality, and literal structured-action/J boundaries.
+groupoidality, literal structured-action/J, and equivalence-valued displayed-
+transport boundaries.
 `OmegaEquivAlong_EQ1(f)` decodes to a native
 one-constructor record with separate left/right inverse arrows, ordinary
 equality-valued cancellation laws in the two endomorphism hom-categories,
@@ -188,15 +189,29 @@ the selected rules leave warnings at 971/157 and add no decoder, encoder, or
 parallel eliminator. This is a current architecture fact for the July 17
 plan, not a new general SOP requirement for casts or transport.
 
+The third Phase-9 slice proves the promised equivalence-valued transport
+without adding another transport primitive. Ordinary functor action maps
+`OmegaEquivAlong_EQ1` by applying the functor to both inverse arrows and both
+equality laws. The groupoidality-selected object path and its reversal then
+construct explicit native equivalence evidence for every arrow, using the
+pointwise re-inclusion theorem and the existing J-derived path-cancellation
+laws. Specializing functor preservation to `D : Catd(C)` equips the existing
+`fapp1_fapp0(D,f)` fibre transport with EQ1 evidence; its inverse projections
+compute. The construction is transparent and adds no rewrite, unifier,
+encoder, decoder, or transport axiom. Selection of the arrow-to-path map still
+uses the retained D0b next-hom compatibility owner internally, so a D0b-free
+all-EQ1 derivation remains migration work. This classification is specific to
+the July 17 implementation plan and does not amend the general SOP.
+
 The compatibility-derived inverse at a literal path category is still
 intentionally not definitionally the input path; use the direct
 `path_equiv_EQ1(p)` package for that computation.
 
-The catalog now has 1,867 checks across 67 areas, the kernel has 21,249 lines,
-878 symbols, 597 rules, and 65 unification rules, and the synchronized 46-file
-health and reviewer sweeps pass. The diagnostic suite has 1,639 positive and
-228 negative statements. Warnings remain 971/157 and the strict audit remains
-zero/45/27. Synchronized 46-file CI passes with 217.327s of measured checking
+The catalog now has 1,886 checks across 67 areas, the kernel has 21,681 lines,
+890 symbols, 597 rules, and 67 unification rules, and the synchronized 46-file
+health and reviewer sweeps pass. The diagnostic suite has 1,654 positive and
+232 negative statements. Warnings remain 971/157 and the strict audit remains
+zero/45/27. Synchronized 46-file CI passes with 324.515s of measured checking
 time; the active July 17 plan records the phase evidence.
 
 The largest warning families are headed by `comp_fapp0`,

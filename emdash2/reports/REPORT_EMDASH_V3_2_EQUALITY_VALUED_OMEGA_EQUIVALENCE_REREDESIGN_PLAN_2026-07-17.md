@@ -8,7 +8,7 @@ Supersedes: the equality, omega-equivalence, direct-univalence, internal-groupoi
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-independent-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e16-d397-7a60-9765-1f35e36e20f7; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e5a-9a89-7d01-a92f-f4d15f14c77e; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e9e-4c44-7e61-9320-bfc602b50d64
-Status: adopted 2026-07-17 as the active implementation overlay for equality, omega-equivalence, direct univalence, internal groupoidality, and structured-`PathOut`/`J`; Phases 1 through 6 are promoted; Phase 7 has promoted a uniform stable explicit-cast view, retired the opposite-only intermediary and duplicate global `cat_univalence`, and migrated the first legacy-encoder consumers; Phase 9 has promoted homwise groupoidality, nonliteral consumers, the exact literal-`Path_cat` comparison between existing structured action and primitive right `J`, and native equivalence-valued displayed transport along groupoidal arrows, while the D0b-free all-EQ1 next-hom action remains open
+Status: adopted 2026-07-17 as the active implementation overlay for equality, omega-equivalence, direct univalence, internal groupoidality, and structured-`PathOut`/`J`; Phases 1 through 6 are promoted; Phase 7 has promoted a uniform stable explicit-cast view, retired the opposite-only intermediary and duplicate global `cat_univalence`, and migrated the first legacy-encoder consumers; Phase 9 has promoted homwise groupoidality, nonliteral consumers, the exact literal-`Path_cat` comparison between existing structured action and primitive right `J`, and native equivalence-valued displayed transport along groupoidal arrows; its D0b-free all-EQ1 next-hom action is now narrowed to a reusable bi-inverse adjointification/triangle-coherence prerequisite
 Review baseline: `772411011ac721c84d143a2967f4e5c31e94bc70`
 Implementation starting baseline: `4315137094d2faf4fcc6f4b026960a62bd5406e7`
 Primary predecessor: `REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`
@@ -215,6 +215,7 @@ compound slots, 45 annotated slots, and 27 intentional clauses.
 | compatibility-derived arrow-to-path selection specialized to literal `Path_cat(A)` | formation passes, but the selected inverse does not definitionally reduce to the input path | retain this as a provenance negative; `path_equiv_EQ1(p)` remains the direct literal computational owner, so the failure is not a groupoidality blocker |
 | literal `Path_cat(A)` displayed action, existing `path_ind_sec` application, and primitive `ind_eqr` | two narrow proof-time joins plus derived `ind_eqr` proofs establish both comparisons; primitive J computes at reflexivity while the structured presentations deliberately retain their directed runtime normal forms; quiet/warning probes pass at unchanged `971/157`, and the strict audit remains zero/45/27 | exact structured-J comparison is feasible and promoted without a second eliminator, decoder, encoder, or runtime commuting conversion |
 | native EQ1 evidence for groupoidal arrows and displayed transport | ordinary functor action maps separate inverses and both equality laws; the groupoidality-selected path, its reversal, re-inclusion, `eq_ap`, and J-derived path laws construct evidence for every arrow; applying the generic theorem to `D : C -> Cat_cat` makes `fapp1_fapp0(D,f)` an equivalence of fibres; explicit inverse projections compute and warnings/audit remain `971/157` and zero/45/27 | Phase-9 equivalence-valued transport is feasible and promoted as transparent definitions; no opaque encoder/decoder, transport axiom, rewrite, or unifier is needed; only the D0b-backed derivation of the selected arrow-to-path map remains to be made natively all-EQ1 |
+| D0b-free EQ1 next-hom reconstruction | all four equality-path transformations, their components, the left/right inverse comparison, both endpoint-correct inverse hom functors, and a generic J-derived conjugation law form without D0; the explicit left composite definitionally joins that conjugation law; the analogous right composite and its two endpoint triangle equations are measured negative | most of D0b is transparently reconstructible, but completing its right law requires a reusable adjointification/bi-inverse triangle-coherence theorem; do not replace that theorem by an opaque next-hom capability or a unifier (`141556`, `141855`, `141932`, failed `142013`, classified `142848`) |
 | retargeted rigid Cat-universe equality to stable facade | passes and self-normalizes finitely; no warning delta | Cat direct identity is high-confidence operationally |
 | broad runtime `Grpd_cat` identity/composition as lambdas | passes quietly but adds 36 critical-pair and 2 replaceable-pattern warnings | reject broad runtime folds |
 | `Hom_cat Grpd_cat A B -> Path_cat(Function_grpd A B)` plus stable function owners and proof-time identity/composition comparisons | passes; no warning delta | selected `Grpd_cat` completion boundary |
@@ -430,6 +431,19 @@ passes in
 strict-LHS gates remain `971/157` and zero/45/27. This was an owner-order
 repair, not a semantic failure, and it is concrete evidence for keeping
 import probes subordinate to active-owner validation.
+
+The subsequent D0b-free formation probe is
+`tmp/probes/evogj_eq1_native_hom_action_formation.lp`. Its progressive passing
+logs end in `-141556.log`, `-141855.log`, and `-141932.log`: native EQ1 laws
+reify all needed transformations and endpoint components, both inverse hom
+functors form, a generic conjugated hom action is J-equal to identity, and the
+explicit left composite definitionally joins that conjugation. The direct
+right-composite join fails in `-142013.log`; a conversion-debug rerun
+`-142545.log` times out and is not used as positive evidence. The final
+classified probe `-142848.log` keeps the right composite and both constituent
+endpoint triangle comparisons as negative controls. The missing item is a
+propositional bi-inverse adjointification/triangle-coherence theorem, not
+formation, inversion, equality reification, or another decoder capability.
 
 The corresponding negative/replacement evidence is recorded in:
 
@@ -2269,7 +2283,7 @@ is an explicit bounded blocker; no global capability is smuggled in.
 7. add a nonliteral groupoidal category consumer;
 8. do not introduce a second eliminator if an alias of `path_ind_sec` suffices.
 
-Two Phase-9 slices are promoted. For
+Three Phase-9 slices are promoted. For
 `g : IsGroupoidalCat_EQ1(C)`, `groupoidal_core_homwise_EQ1(g,x,y)` converts
 the EQ1 fixed-map witness only at the retained D0b compatibility boundary,
 uses D0b's existing iterable `fapp1` owner, and observes the result back as
@@ -2321,6 +2335,47 @@ selected two `unif_rule`s leave runtime negatives, warnings at `971/157`, and
 the strict audit at zero/45/27. No decoder, encoder, opaque transport theorem,
 or parallel eliminator was added.
 
+The third slice closes the equivalence-valued-transport item natively in EQ1.
+`omega_equiv_along_fapp1_fapp0_EQ1(F,u)` proves that ordinary functor action
+preserves fixed-arrow EQ1 evidence: it maps the separate left and right
+inverse arrows, applies the functor action to each equality law with `eq_ap`,
+and relies on the existing global functor identity/composition owners for the
+target endpoints. Both selected inverse projections therefore compute on the
+explicit result package.
+
+For `g : IsGroupoidalCat_EQ1(C)` and `f : Hom_C(x,y)`, the already-selected
+path `groupoidal_arrow_to_path_EQ1(g,f)` and its reverse define
+`groupoidal_arrow_inverse_EQ1(g,f)`. The pointwise re-inclusion theorem rewrites
+the original arrow to `path_to_hom` of that path, while the existing J-derived
+object-path laws provide cancellation. Consequently
+`groupoidal_arrow_equiv_along_EQ1(g,f)` is a transparent explicit
+`OmegaEquivAlong_EQ1(C,f)` package, not a capability declaration. Applying
+the generic preservation theorem to `D : Catd(C)` yields
+`groupoidal_fibre_transport_equiv_EQ1(g,D,f)`: the existing displayed action
+`fapp1_fapp0(D,f)` is an equivalence between its two fibres, and its inverse
+projection computes to action along the selected inverse arrow. This slice
+adds no rule, unifier, primitive decoder/encoder, or transport axiom.
+
+A bounded follow-up locates the remaining native-next-hom gap. Replacing the
+D0 observations by `path_to_hom` of the two EQ1 functor laws is sufficient to
+define all forward/reverse transformations and components, compare the two
+chosen inverse functors, and construct both endpoint-correct inverse hom
+functors. A generic J theorem also proves that the hom action of any
+`H = id_A`, conjugated by the path components, equals the identity. The
+candidate left inverse composed with `F_1` definitionally normalizes to that
+generic conjugation, so the left EQ1 law is available without D0b.
+
+The right composite does not normalize to conjugation by `F o R = id_B`.
+Decomposition shows two nondefinitional endpoint equations: applying `F` to
+the constructed source/target repairs must agree with the corresponding
+components of the right functor law. These are precisely the triangle laws
+obtained when arbitrary separate left/right bi-inverse data are
+adjointified/coherently compared. They should be proved propositionally from
+naturality and the two equality laws, then reused by the next-hom theorem;
+adding a raw unifier or another opaque cell capability would merely recreate
+D0b's unresolved trust boundary. The formation/J probe is retained as
+evidence, not promoted as a partial public API.
+
 The literal specialization of the compatibility-derived selected inverse is
 well typed but does not definitionally return the input path. That negative is
 permanent: the general route passes through EQ1-to-D0, D0b, and D0-to-EQ1,
@@ -2331,15 +2386,24 @@ reduce to `p`. Quiet and warning-enabled owner-position probes are
 `univalence_sigma_ind_query-20260717-112006.log`. The exact-J follow-up is
 measured by quiet `-125121.log` and warning-enabled `-125131.log`; the rejected
 orientations and their counts are recorded in the probe ledger above. The
-first slice's ten permanent diagnostics and the follow-up comparisons share
-the same catalog area. The earlier synchronized 46-file CI passed in
-217.327s; the current post-follow-up metrics and CI result are recorded after
-the proportional gates below are rerun.
+focused native-transport probe is
+`evogj_groupoidal_transport_equiv-20260717-133457.log`; active-owner promotion
+also caught and repaired an initial declaration-order placement before
+`Fibre_cat`. The expanded reviewer example passes in
+`groupoidal_structured_j_eq1-20260717-134053.log`. All three slices share the
+same catalog area. The synchronized checkpoint has 1,886 diagnostics across
+67 areas (1,654 positive and 232 negative), a 21,681-line kernel with 890
+symbols, 597 rewrite rules, and 67 unification rules, 46 passing health/example
+files, unchanged `971/157` warnings and zero/45/27 audit results, and CI
+passing in 324.515s.
 
 Phase 9 therefore remains active rather than complete. The native all-EQ1
-hom-action theorem, the comparison with the pointwise all-arrows formulation,
-and the explicit theorem that structured transport is equivalence-valued are
-still open. The literal `path_ind_sec`/`ind_eqr` comparison is complete at the
+hom-action theorem and the reverse direction from pointwise all-arrows
+evidence back to core-inclusion equivalence are still open. The former is now
+blocked specifically on a reusable bi-inverse adjointification/triangle-
+coherence theorem, rather than on a decoder or inverse-hom construction. The forward
+pointwise theorem and explicit equivalence-valued structured transport are
+now complete, as is the literal `path_ind_sec`/`ind_eqr` comparison at the
 selected pre-arranged Cat-valued motive boundary.
 
 Exit criterion: the documented groupoidal `J` story is executable and uses
@@ -2485,7 +2549,9 @@ The equality-valued omega-equivalence/groupoidal-J MVP is complete only when:
    term-observer computation, with raw-coerced behavior honestly classified;
 9. `IsGroupoidalCat(Path_cat A)` is constructible;
 10. at least one nonliteral internally groupoidal category is consumed;
-11. structured groupoidal `J` is expressed through existing `PathOut` action;
+11. structured groupoidal `J` is expressed through existing `PathOut` action,
+    and displayed transport along a groupoidal arrow has explicit native EQ1
+    equivalence evidence;
 12. primitive `ind_eqr` remains available for unstructured motives;
 13. rigid Cat-universe direct equality remains finite under the new payload;
 14. the `Grpd_cat` function-path hom boundary and proof-time pointwise
@@ -2682,8 +2748,9 @@ recorded in the July 13 ledger and should not be duplicated here.
 | `EVOGJ-DECODER-MIGRATE` | **active; stable explicit casts, first duplicate, and three consumer roles migrated 2026-07-17** | remove foundational decoder dependency | direct universe owners plus uniform cast view | standalone `cat_univalence` is removed; transparent `object_path_equiv_D0` serves both ordinary-iso recursive cells plus the D1 selected-functor/evidence consumer, reducing active-kernel `idtoequiv_cat` occurrences from 34 to 30; general reverse typing uses the transparent cast, while computational decoder consumers remain role-by-role work |
 | `EVOGJ-EVIDENCE-PROP` | dependency-ready at groupoid/finite scope; unrestricted omega scope may still need extensionality | prove fixed-map evidence property | equality-law evidence | scoped theorem or exact extensionality blocker |
 | `EVOGJ-NCAT-TRUNC` | blocked on property | discharge conditional object truncation | evidence property | unconditional theorem at justified scope |
-| `EVOGJ-GROUPOIDAL-CAT` | **active; first consumer slice promoted 2026-07-17** | general internal groupoidality | path-category introduction | homwise EQ1 evidence, selected arrow-to-path inverse, re-inclusion law, and discrete/`ZeroCat` nonliteral consumers are promoted through the retained D0b boundary; native all-EQ1 action and pointwise comparison remain |
-| `EVOGJ-GROUP-J` | **active; literal structured-action/J comparison promoted 2026-07-17** | structured groupoidal `J` comparison | groupoidal category and PathOut | existing `path_ind_sec`, displayed functor action, and primitive `ind_eqr` are propositionally compared at a literal `Path_cat` source through two warning-neutral proof-time joins; primitive J computes at reflexivity, directed presentations retain runtime negatives, and the equivalence-valued transport theorem remains |
+| `EVOGJ-GROUPOIDAL-CAT` | **active; forward pointwise consumer promoted, native-next-hom prerequisite classified 2026-07-17** | general internal groupoidality | path-category introduction | homwise EQ1 evidence, selected arrow-to-path inverse, re-inclusion law, explicit equivalence evidence for every arrow, and discrete/`ZeroCat` nonliteral consumers are promoted; a D0b-free probe reconstructs both inverse hom functors and the full left law, while the right law is blocked on two reusable bi-inverse triangle-coherence equations; reverse pointwise-to-core remains open |
+| `EVOGJ-BIINV-ADJOINTIFY` | **dependency-ready prerequisite; formation and left-law probe pass** | derive coherent triangle laws from separate equality-valued left/right inverse data | native EQ1 evidence, functor/transfor naturality, path algebra | prove the two endpoint equations measured negative in `evogj_eq1_native_hom_action_formation.lp`, then complete the right next-hom law without a unifier or opaque cell capability |
+| `EVOGJ-GROUP-J` | **completed at selected MVP boundary; promoted 2026-07-17** | structured groupoidal `J` comparison | groupoidal category and PathOut | existing `path_ind_sec`, displayed functor action, and primitive `ind_eqr` are propositionally compared at a literal `Path_cat` source through two warning-neutral proof-time joins; primitive J computes at reflexivity and directed presentations retain runtime negatives; generic functor preservation plus explicit groupoidal-arrow evidence proves displayed transport equivalence-valued without a decoder or transport axiom |
 | `EVOGJ-UNIVERSE-CORE-INCL` | dependency-ready; not started | actual package-core functor into `Cat_cat` | selected concrete motive | one used inclusion functor |
 | `EVOGJ-SUM-SIMPLIFY` | blocked on direct/structured architecture | replace action-specific bases with general reflexivity joins/library action | consumer inventory | synchronized migration |
 | `EVOGJ-OBSACTION-SCOPE` | blocked on structured motive evidence | decide remaining role of action registry | groupoidal J and former consumers | retain/demote decision |

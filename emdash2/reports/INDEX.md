@@ -70,7 +70,7 @@ notation, implementation plans, and historical decisions.
   promoted uniform-cast checkpoint has 1,857 checks (1,630 positive and 227
   negative), a 21,115-line kernel with 871 symbols, 597 rewrite rules, and 65
   unification rules, the same warning/audit inventory, and 45-file CI passing
-  in 269.410s. Two Phase-9 slices are also promoted: general
+  in 269.410s. Three Phase-9 slices are also promoted: general
   `IsGroupoidalCat_EQ1` evidence now acts homwise through the retained D0b
   compatibility owner, exposes a selected arrow-to-path inverse and
   propositional re-inclusion law, and is consumed by exact `IsDiscreteCat`
@@ -79,13 +79,22 @@ notation, implementation plans, and historical decisions.
   `Path_cat(A)` source, its application and displayed functor action are now
   proved propositionally equal to primitive `ind_eqr`; primitive J computes
   at reflexivity while the directed presentations preserve their runtime
-  normal forms. The two narrow proof-time joins retain `971/157` warnings and
-  zero/45/27 audit results, and add no decoder, encoder, or eliminator. The
+  normal forms. Native functor preservation now maps fixed-arrow EQ1 evidence;
+  the selected groupoidal path and its reversal therefore give every arrow
+  explicit equivalence evidence, and displayed fibre transport along it is an
+  equivalence with computational inverse projections. The two narrow
+  proof-time joins retain `971/157` warnings and zero/45/27 audit results; the
+  transport slice adds no rule, unifier, decoder, encoder, eliminator, or
+  transport axiom. The
   pre-comparison checkpoint had
   1,867 checks across 67 areas (1,639 positive and 228 negative), a
   21,249-line kernel with 878 symbols and unchanged 597/65 rule counts,
   unchanged `971/157` warnings and zero/45/27 audit results, and 46 passing
-  health/example files; synchronized 46-file CI passes in 217.327s. The July
+  health/example files; synchronized 46-file CI passed in 217.327s. The
+  current three-slice checkpoint has 1,886 checks (1,654 positive and 232
+  negative), a 21,681-line kernel with 890 symbols and 597/67 rule counts,
+  unchanged warning/audit inventories, 46 passing health/example files, and
+  synchronized CI passing in 324.515s. The July
   13 plan remains the retained promoted-work ledger and active plan for
   unaffected tracks.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
