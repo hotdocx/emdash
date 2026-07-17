@@ -526,6 +526,32 @@ The contraction path and the separately derived eta proof are not identified
 by runtime computation. Arbitrary structured-Pi J computation, Sigma/record
 structural action, and computational fibrancy remain separate work.
 
+At the groupoid-classifier category, the whole hom-category is now explicit:
+
+```text
+Hom_Grpd(A,B) = Path(Function(A,B)).
+```
+
+The stable `grpd_id_function(A)` and `grpd_comp_function(g,f)` heads compute
+pointwise. Generic categorical `id` and `comp_fapp0` compare with them at proof
+time, rather than runtime-reducing to lambdas. This preserves the global
+category owners while giving `PiFunext` and `PiHapply` rigid endpoints for
+function-path laws.
+
+There are explicit defined adapters in both directions between
+contractible-fibre `TypeEquiv(A,B)` and equality-valued
+`OmegaEquiv_EQ1(Grpd_cat,A,B)`. From `TypeEquiv`, its selected inverse and two
+round-trip paths directly form the omega package. Conversely, if `f` has
+separate left and right inverse functions, the right law shows that those
+functions agree pointwise; the left inverse therefore also has a right law
+and yields `EquivByInverse`. This construction then invokes
+`is_equiv_map_by_inverse`. Forward maps, selected inverse points, and the
+derived right law compute, but package eta is not definitional. No universe
+decoder or opaque bridge is used. The final fibre contraction is nevertheless
+only as proof-closed as the pre-existing bodyless
+`is_equiv_map_by_inverse` theorem capability; that remaining proof obligation
+must not be confused with computational reification or univalence decoding.
+
 From any groupoid/type `A`, there is a path category:
 
 ```text
@@ -1578,6 +1604,91 @@ IsoEvidence_C(x,y)
 contains an arrow, an inverse arrow, and propositional left/right inverse
 paths. The 1-categorical univalence capability compares object equality with
 this ordinary isomorphism evidence.
+
+The July 17 equality-valued overlay now has two promoted parallel staging
+layers. For a fixed arrow `f : Hom_C(x,y)`,
+`OmegaEquivAlong_EQ1(f)` is decoded native data consisting of separate left
+and right inverse arrows and cancellation witnesses expressed directly as
+equalities in `Hom_C(x,x)` and `Hom_C(y,y)`. Its four fields and native indexed
+eliminator compute on introduced data. This realizes the intended recursive
+mathematical reading—higher equivalence information is carried by equality in
+the next hom-category—without an opaque encoder or decoder.
+
+The parallel `OmegaEquiv_EQ1(C,x,y)` facade packages a selected arrow and this
+fixed-arrow evidence behind a stable primitive record-like classifier. Its
+constructor, forward/evidence projections, and dependent eliminator have
+explicit beta rules; eta is propositional. A transparent Sigma view has maps
+in both directions and propositional round trips. For
+`p : x =_{Obj C} y`, the transparent `object_path_equiv_EQ1(p)` package uses
+`path_to_hom(p)`, `path_to_hom(path_sym(p))`, and two J-derived cancellation
+laws, so all documented observations compute without a bodyless reification
+capability. The stable facade is primitive but not observationally opaque; the
+derived path adapter is not primitive.
+
+For a literal path category there is now a narrower computational interface.
+`OmegaEquiv_EQ1(Path_cat(A),x,y)` compares at proof time with `x =_A y`, and
+`path_equiv_EQ1(p)` packages `p` itself with two `path_sym(p)` inverse choices
+and J-derived laws. The comparison lets a raw path be *typed* as facade data,
+but does not reify it: facade projections on that raw path remain stuck. A
+measured direct raw-path projection rule conflicts with ordinary package beta,
+so observable computation must go through `path_equiv_EQ1(p)`.
+
+The staged internal groupoidality predicate is
+
+```text
+IsGroupoidalCat_EQ1(C)
+  := OmegaEquivAlong_EQ1(Core_incl_func(C)).
+```
+
+Thus it says that `Core_cat(C) -> C` is an omega-equivalence. In a setting
+where the categories are internally univalent/complete, this is the intended
+version of “all arrows are invertible.” Without that surrounding intent it is
+strictly stronger than ordinary external groupoidality, because it also says
+that directed arrows are represented by object paths. The path category has a
+canonical witness, using a proof-time comparison between its Core inclusion
+and identity functor; that comparison is not a runtime collapse.
+
+The direct-univalence boundary is now active but deliberately hybrid. For a
+syntactically abstract category `C`, a proof-time unification rule compares
+`OmegaEquiv_EQ1(C,x,y)` with `x =_{Obj C} y`; it does not make the classifiers
+runtime-convertible and does not insert a package. The rigid Cat and Grpd
+universe equalities runtime-reduce directly to their EQ1 classifiers, with a
+finite Cat self case. Explicit EQ1 reflexivity packages have computational
+observers, while raw `eq_refl` retains its generic-J provenance and has no
+facade projection beta.
+
+This comparison has an important normal-form boundary. An abstract
+`lambda p, p` cast experiment typechecks while `C` remains a variable, but is
+not stable after Product or opposite equality has reduced to a different
+classifier. No general identity-body cast is exported. The transparent
+`object_path_equiv_EQ1(p)` package remains the uniform computational
+path-to-equivalence operation. For broader cast-free use after former
+reduction, the preferred design is a stable injective former path-view head
+with explicit construction/observation/elimination and a transparent decoded
+view. A primitive nonreducing cast is possible as a fallback, but would be an
+explicit additional trust surface and operationally opaque unless observer
+rules were separately justified. This choice is local to the July 17 plan,
+not a repository-wide rewrite/unification rule.
+
+EQ1 is therefore the active direct classifier at the abstract proof-time and
+rigid Cat/Grpd boundaries, but it is not yet the neutral public replacement
+for every reduced former. The retained D0/public `OmegaEquiv` surface remains
+operational during consumer migration. No runtime facade eta, proof erasure,
+or silently coerced raw-path observer has been promoted.
+
+Explicit D0/EQ1 migration is nevertheless active in both directions. Old D0
+evidence is decoded to the new inverse fields and equality laws. In the other
+direction, a stable compatibility constructor inhabits the otherwise
+constructorless D0 classifier; its inverse observations project the new
+fields, while its recursive-cell observations use
+`object_path_equiv_EQ1(law)` and recur. This constructor cannot currently be
+the literal identity function: D0 and EQ1 are not transparently the same data
+representation, and D0 observers need a stable head on which to compute. It is
+not an opaque univalence decoder theorem, however—all four public D0
+observations are specified, including recursive computation. D0 still lacks
+an eliminator or eta/extensionality theorem, so neither evidence round trip is
+claimed. This is a migration fact local to the July 17 redesign, not a general
+rewrite/unification policy.
 
 The fixed-arrow redesign is now the public omega-equivalence normal form:
 

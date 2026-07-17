@@ -3677,6 +3677,44 @@ injective symbol Grpd_grpd : Grpd ≔ Obj Grpd_cat;
 rule τ (Obj Grpd_cat) ↪ Grpd;
 
 /*
+  Function-path hom boundary for the groupoid universe.
+
+  The whole hom-category is the path category of ordinary functions. Stable
+  semantic heads expose pointwise identity/composition computation; the
+  category-level owners compare with them only at proof time.
+*/
+rule Hom_cat Grpd_cat $A $B
+  ↪ Path_cat (@Function_grpd $A $B);
+
+// Pointwise identity function as the stable comparison target.
+injective symbol grpd_id_function
+  (A : Grpd)
+  : τ (@Function_grpd A A);
+
+rule @grpd_id_function _ $a ↪ $a;
+
+// Pointwise composition as the stable comparison target.
+injective symbol grpd_comp_function
+  [A B C : Grpd]
+  (g : τ (@Function_grpd B C))
+  (f : τ (@Function_grpd A B))
+  : τ (@Function_grpd A C);
+
+rule @grpd_comp_function _ _ _ $g $f $a ↪ $g ($f $a);
+
+// Proof-time comparisons; neither side is selected as the other's runtime
+// normal form.
+unif_rule
+  @id Grpd_cat $A
+  ≡ @grpd_id_function $A
+  ↪ [ tt ≡ tt ];
+
+unif_rule
+  @comp_fapp0 Grpd_cat $A $B $C $g $f
+  ≡ @grpd_comp_function $A $B $C $g $f
+  ↪ [ tt ≡ tt ];
+
+/*
   Named groupoid-universe identity view.
 
   This is the finite fallback boundary for Phase 13: public universe equality
@@ -5671,6 +5709,759 @@ constant symbol OmegaEquivAlong_D0
   (f : τ (Hom C x y))
   : Grpd;
 
+/*
+  Equality-valued fixed-arrow omega-equivalence staging record.
+
+  For `f : Hom_C(x,y)`, separate left and right inverse arrows carry ordinary
+  equality witnesses in the two endomorphism hom-categories. The arrow remains
+  an index, so the public eliminator ranges over both `f` and its evidence.
+  This Phase-1 owner has no comparison with D0 or the public interface.
+*/
+(C : Cat)
+(x y : τ (Obj C))
+(f : τ (Hom C x y))
+inductive OmegaEquivAlongEqData_EQ1 : TYPE ≔
+| Struct_omega_equiv_along_eq_EQ1
+    (left_inv right_inv : τ (Hom C y x))
+    (left_law : τ (@=
+      (Hom C x x)
+      (@comp_fapp0 C x y x left_inv f)
+      (@id C x)))
+    (right_law : τ (@=
+      (Hom C y y)
+      (@comp_fapp0 C y x y f right_inv)
+      (@id C y)))
+    : OmegaEquivAlongEqData_EQ1 C x y f;
+
+// Stable groupoid classifier decoded by the native record above.
+constant symbol OmegaEquivAlong_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : Grpd;
+
+rule τ (@OmegaEquivAlong_EQ1 $C $x $y $f)
+  ↪ @OmegaEquivAlongEqData_EQ1 $C $x $y $f;
+
+// Readable introduction alias routed through the native constructor.
+symbol omega_equiv_along_intro_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (left_inv right_inv : τ (Hom C y x))
+  (left_law : τ (@=
+    (Hom C x x)
+    (@comp_fapp0 C x y x left_inv f)
+    (@id C x)))
+  (right_law : τ (@=
+    (Hom C y y)
+    (@comp_fapp0 C y x y f right_inv)
+    (@id C y)))
+  : τ (@OmegaEquivAlong_EQ1 C x y f)
+≔ @Struct_omega_equiv_along_eq_EQ1
+    C x y f left_inv right_inv left_law right_law;
+
+// Selected left-inverse arrow.
+symbol omega_equiv_along_left_inv_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f))
+  : τ (Hom C y x);
+
+rule @omega_equiv_along_left_inv_EQ1 _ _ _ _
+      (@Struct_omega_equiv_along_eq_EQ1 _ _ _ _ $l _ _ _)
+  ↪ $l;
+
+// Selected right-inverse arrow.
+symbol omega_equiv_along_right_inv_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f))
+  : τ (Hom C y x);
+
+rule @omega_equiv_along_right_inv_EQ1 _ _ _ _
+      (@Struct_omega_equiv_along_eq_EQ1 _ _ _ _ _ $r _ _)
+  ↪ $r;
+
+// Equality-valued left cancellation in `Hom_C(x,x)`.
+symbol omega_equiv_along_left_law_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f))
+  : τ (@=
+      (Hom C x x)
+      (@comp_fapp0 C x y x
+        (@omega_equiv_along_left_inv_EQ1 C x y f u)
+        f)
+      (@id C x));
+
+rule @omega_equiv_along_left_law_EQ1 _ _ _ _
+      (@Struct_omega_equiv_along_eq_EQ1 _ _ _ _ _ _ $alpha _)
+  ↪ $alpha;
+
+// Equality-valued right cancellation in `Hom_C(y,y)`.
+symbol omega_equiv_along_right_law_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f))
+  : τ (@=
+      (Hom C y y)
+      (@comp_fapp0 C y x y
+        f
+        (@omega_equiv_along_right_inv_EQ1 C x y f u))
+      (@id C y));
+
+rule @omega_equiv_along_right_law_EQ1 _ _ _ _
+      (@Struct_omega_equiv_along_eq_EQ1 _ _ _ _ _ _ _ $beta)
+  ↪ $beta;
+
+// Public indexed eliminator: the motive ranges over the arrow index and data.
+symbol omega_equiv_along_ind_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (Q : Π f : τ (Hom C x y),
+       τ (@OmegaEquivAlong_EQ1 C x y f) → Grpd)
+  (c : Π f : τ (Hom C x y),
+       Π (l r : τ (Hom C y x)),
+       Π alpha : τ (@=
+         (Hom C x x)
+         (@comp_fapp0 C x y x l f)
+         (@id C x)),
+       Π beta : τ (@=
+         (Hom C y y)
+         (@comp_fapp0 C y x y f r)
+         (@id C y)),
+       τ (Q f (@Struct_omega_equiv_along_eq_EQ1
+         C x y f l r alpha beta)))
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f))
+  : τ (Q f u)
+≔ @ind_OmegaEquivAlongEqData_EQ1 C x y Q c f u;
+
+// Reflexive evidence for the already-selected identity arrow.
+symbol omega_equiv_along_refl_EQ1
+  [C : Cat]
+  (x : τ (Obj C))
+  : τ (@OmegaEquivAlong_EQ1 C x x (@id C x))
+≔ @omega_equiv_along_intro_EQ1
+    C x x (@id C x)
+    (@id C x)
+    (@id C x)
+    (@eq_refl (Hom C x x) (@id C x))
+    (@eq_refl (Hom C x x) (@id C x));
+
+/*
+  Stable first-class facade for a selected arrow and its EQ1 evidence.
+
+  This is an abstract record-like classifier rather than a transparent Sigma:
+  its constructor, observers, and trusted dependent eliminator own the
+  computational interface. The later abstract proof-time and rigid-universe
+  direct owners below target this stable facade.
+*/
+constant symbol OmegaEquiv_EQ1
+  (C : Cat)
+  (x y : τ (Obj C))
+  : Grpd;
+
+/*
+  Abstract direct-univalence comparison.
+
+  This proof-time owner applies while the category remains syntactically
+  abstract. Constructors whose object equality has already reduced to a
+  different classifier may require an explicit adapter or a stable shaped
+  join; no literal-identity cast is exported by this slice.
+*/
+unif_rule
+  @OmegaEquiv_EQ1 $C $x $y
+  ≡ @= (Obj $C) $x $y
+  ↪ [ tt ≡ tt ];
+
+// The rigid groupoid universe has a finite direct EQ1 runtime normal form.
+rule @= (Obj Grpd_cat) $A $B
+  ↪ @OmegaEquiv_EQ1 Grpd_cat $A $B;
+
+// Literal path-category equivalence and ambient path equality are the same
+// classifier at proof time. This narrow join handles the shaped case after
+// Path-category reduction; it is separate from the abstract owner above.
+unif_rule
+  @OmegaEquiv_EQ1 (Path_cat $A) $x $y
+  ≡ @= $A $x $y
+  ↪ [ tt ≡ tt ];
+
+// Constructor for the stable dependent-pair facade.
+injective symbol omega_equiv_pack_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f))
+  : τ (@OmegaEquiv_EQ1 C x y);
+
+// Selected forward arrow.
+symbol omega_equiv_to_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 C x y))
+  : τ (Hom C x y);
+
+rule @omega_equiv_to_EQ1 _ _ _
+      (@omega_equiv_pack_EQ1 _ _ _ $f _)
+  ↪ $f;
+
+// Fixed-arrow evidence over the selected forward arrow.
+symbol omega_equiv_evidence_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 C x y))
+  : τ (@OmegaEquivAlong_EQ1 C x y
+      (@omega_equiv_to_EQ1 C x y e));
+
+rule @omega_equiv_evidence_EQ1 _ _ _
+      (@omega_equiv_pack_EQ1 _ _ _ _ $u)
+  ↪ $u;
+
+// Trusted record-like dependent eliminator for the stable facade.
+symbol omega_equiv_ind_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (Q : τ (@OmegaEquiv_EQ1 C x y) → Grpd)
+  (c : Π f : τ (Hom C x y),
+       Π u : τ (@OmegaEquivAlong_EQ1 C x y f),
+       τ (Q (@omega_equiv_pack_EQ1 C x y f u)))
+  (e : τ (@OmegaEquiv_EQ1 C x y))
+  : τ (Q e);
+
+rule @omega_equiv_ind_EQ1 _ _ _ _ $c
+      (@omega_equiv_pack_EQ1 _ _ _ $f $u)
+  ↪ $c $f $u;
+
+// Canonical first-class reflexive package.
+symbol omega_equiv_refl_EQ1
+  [C : Cat]
+  (x : τ (Obj C))
+  : τ (@OmegaEquiv_EQ1 C x x)
+≔ @omega_equiv_pack_EQ1
+    C x x (@id C x)
+    (@omega_equiv_along_refl_EQ1 C x);
+
+// Propositional facade eta derived through the primitive eliminator.
+symbol omega_equiv_eta_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 C x y))
+  : τ (@=
+      (@OmegaEquiv_EQ1 C x y)
+      (@omega_equiv_pack_EQ1
+        C x y
+        (@omega_equiv_to_EQ1 C x y e)
+        (@omega_equiv_evidence_EQ1 C x y e))
+      e)
+≔ @omega_equiv_ind_EQ1
+    C x y
+    (λ e : τ (@OmegaEquiv_EQ1 C x y),
+      @=
+        (@OmegaEquiv_EQ1 C x y)
+        (@omega_equiv_pack_EQ1
+          C x y
+          (@omega_equiv_to_EQ1 C x y e)
+          (@omega_equiv_evidence_EQ1 C x y e))
+        e)
+    (λ f : τ (Hom C x y),
+      λ u : τ (@OmegaEquivAlong_EQ1 C x y f),
+        @eq_refl
+          (@OmegaEquiv_EQ1 C x y)
+          (@omega_equiv_pack_EQ1 C x y f u))
+    e;
+
+// Transparent Sigma presentation retained as a comparison/library view.
+symbol OmegaEquivSigma_EQ1
+  (C : Cat)
+  (x y : τ (Obj C))
+  : Grpd
+≔ `Σ_ f : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y f;
+
+symbol omega_facade_to_sigma_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 C x y))
+  : τ (@OmegaEquivSigma_EQ1 C x y)
+≔ @Struct_sigma
+    (Hom C x y)
+    (λ f : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y f)
+    (@omega_equiv_to_EQ1 C x y e)
+    (@omega_equiv_evidence_EQ1 C x y e);
+
+symbol omega_sigma_to_facade_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (s : τ (@OmegaEquivSigma_EQ1 C x y))
+  : τ (@OmegaEquiv_EQ1 C x y)
+≔ @omega_equiv_pack_EQ1
+    C x y
+    (@sigma_Fst
+      (Hom C x y)
+      (λ f : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y f)
+      s)
+    (@sigma_Snd
+      (Hom C x y)
+      (λ f : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y f)
+      s);
+
+// Sigma-to-facade-to-Sigma is propositionally the identity.
+symbol omega_sigma_roundtrip_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (s : τ (@OmegaEquivSigma_EQ1 C x y))
+  : τ (@=
+      (@OmegaEquivSigma_EQ1 C x y)
+      (@omega_facade_to_sigma_EQ1 C x y
+        (@omega_sigma_to_facade_EQ1 C x y s))
+      s)
+≔ @sigma_ind
+    (Hom C x y)
+    (λ f : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y f)
+    (λ s : τ (@OmegaEquivSigma_EQ1 C x y),
+      @=
+        (@OmegaEquivSigma_EQ1 C x y)
+        (@omega_facade_to_sigma_EQ1 C x y
+          (@omega_sigma_to_facade_EQ1 C x y s))
+        s)
+    (λ f : τ (Hom C x y),
+      λ u : τ (@OmegaEquivAlong_EQ1 C x y f),
+        @eq_refl
+          (@OmegaEquivSigma_EQ1 C x y)
+          (@Struct_sigma
+            (Hom C x y)
+            (λ g : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y g)
+            f u))
+    s;
+
+// Facade-to-Sigma-to-facade is the previously derived facade eta.
+symbol omega_facade_roundtrip_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 C x y))
+  : τ (@=
+      (@OmegaEquiv_EQ1 C x y)
+      (@omega_sigma_to_facade_EQ1 C x y
+        (@omega_facade_to_sigma_EQ1 C x y e))
+      e)
+≔ @omega_equiv_eta_EQ1 C x y e;
+
+/*
+  Explicit general object-path adapter.
+
+  Unlike a literal identity typing view, this constructs a facade package.
+  Its arrow is `path_to_hom`; both inverse arrows use the reversed path; the
+  cancellation laws are defined by primitive path induction.
+*/
+symbol object_path_equiv_left_law_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (@=
+      (Hom C x x)
+      (@comp_fapp0 C x y x
+        (@path_to_hom C y x (@path_sym (Obj C) x y p))
+        (@path_to_hom C x y p))
+      (@id C x))
+≔ @ind_eqr
+    (Obj C)
+    y
+    (λ x : τ (Obj C), λ p : τ (@= (Obj C) x y),
+      @=
+        (Hom C x x)
+        (@comp_fapp0 C x y x
+          (@path_to_hom C y x (@path_sym (Obj C) x y p))
+          (@path_to_hom C x y p))
+        (@id C x))
+    (@eq_refl (Hom C y y) (@id C y))
+    x
+    p;
+
+symbol object_path_equiv_right_law_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (@=
+      (Hom C y y)
+      (@comp_fapp0 C y x y
+        (@path_to_hom C x y p)
+        (@path_to_hom C y x (@path_sym (Obj C) x y p)))
+      (@id C y))
+≔ @ind_eqr
+    (Obj C)
+    y
+    (λ x : τ (Obj C), λ p : τ (@= (Obj C) x y),
+      @=
+        (Hom C y y)
+        (@comp_fapp0 C y x y
+          (@path_to_hom C x y p)
+          (@path_to_hom C y x (@path_sym (Obj C) x y p)))
+        (@id C y))
+    (@eq_refl (Hom C y y) (@id C y))
+    x
+    p;
+
+symbol object_path_equiv_along_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (@OmegaEquivAlong_EQ1 C x y (@path_to_hom C x y p))
+≔ @omega_equiv_along_intro_EQ1
+    C
+    x
+    y
+    (@path_to_hom C x y p)
+    (@path_to_hom C y x (@path_sym (Obj C) x y p))
+    (@path_to_hom C y x (@path_sym (Obj C) x y p))
+    (@object_path_equiv_left_law_EQ1 C x y p)
+    (@object_path_equiv_right_law_EQ1 C x y p);
+
+symbol object_path_equiv_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (@OmegaEquiv_EQ1 C x y)
+≔ @omega_equiv_pack_EQ1
+    C
+    x
+    y
+    (@path_to_hom C x y p)
+    (@object_path_equiv_along_EQ1 C x y p);
+
+/*
+  Literal path-category specialization.
+
+  The general object-path adapter exposes `path_to_hom(p)`. For a literal
+  `Path_cat(A)` this stronger package instead retains `p` itself as the
+  selected arrow, with `path_sym(p)` as both inverse choices.
+*/
+symbol path_equiv_left_law_EQ1
+  [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@=
+      (Hom (Path_cat A) x x)
+      (@comp_fapp0
+        (Path_cat A) x y x
+        (@path_sym A x y p)
+        p)
+      (@id (Path_cat A) x))
+≔ @ind_eqr
+    A
+    y
+    (λ x : τ A, λ p : τ (@= A x y),
+      @=
+        (Hom (Path_cat A) x x)
+        (@comp_fapp0
+          (Path_cat A) x y x
+          (@path_sym A x y p)
+          p)
+        (@id (Path_cat A) x))
+    (@eq_refl
+      (Hom (Path_cat A) y y)
+      (@id (Path_cat A) y))
+    x
+    p;
+
+symbol path_equiv_right_law_EQ1
+  [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@=
+      (Hom (Path_cat A) y y)
+      (@comp_fapp0
+        (Path_cat A) y x y
+        p
+        (@path_sym A x y p))
+      (@id (Path_cat A) y))
+≔ @ind_eqr
+    A
+    y
+    (λ x : τ A, λ p : τ (@= A x y),
+      @=
+        (Hom (Path_cat A) y y)
+        (@comp_fapp0
+          (Path_cat A) y x y
+          p
+          (@path_sym A x y p))
+        (@id (Path_cat A) y))
+    (@eq_refl
+      (Hom (Path_cat A) y y)
+      (@id (Path_cat A) y))
+    x
+    p;
+
+symbol path_equiv_along_EQ1
+  [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@OmegaEquivAlong_EQ1 (Path_cat A) x y p)
+≔ @omega_equiv_along_intro_EQ1
+    (Path_cat A)
+    x
+    y
+    p
+    (@path_sym A x y p)
+    (@path_sym A x y p)
+    (@path_equiv_left_law_EQ1 A x y p)
+    (@path_equiv_right_law_EQ1 A x y p);
+
+symbol path_equiv_EQ1
+  [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@OmegaEquiv_EQ1 (Path_cat A) x y)
+≔ @omega_equiv_pack_EQ1
+    (Path_cat A)
+    x
+    y
+    p
+    (@path_equiv_along_EQ1 A x y p);
+
+/*
+  Internal groupoidality in the intended univalent-category setting.
+
+  Equivalence of `Core_cat(C) -> C` says that every directed arrow is
+  represented by an object path. Without the surrounding univalence intent
+  this is stronger than ordinary external groupoidality.
+*/
+// This comparison cannot live beside `Core_incl_func`, which precedes the
+// declaration of `Cat_cat`. The groupoidality owner is the first boundary at
+// which both rigid heads exist. Neither side becomes a runtime normal form.
+unif_rule
+  @Core_incl_func (Path_cat $A)
+  ≡ @id Cat_cat (Path_cat $A)
+  ↪ [ tt ≡ tt ];
+
+symbol IsGroupoidalCat_EQ1
+  (C : Cat)
+  : Grpd
+≔ @OmegaEquivAlong_EQ1
+    Cat_cat
+    (Core_cat C)
+    C
+    (Core_incl_func C);
+
+// The literal path category is canonically internally groupoidal.
+symbol path_cat_is_groupoidal_EQ1
+  (A : Grpd)
+  : τ (@IsGroupoidalCat_EQ1 (Path_cat A))
+≔ @omega_equiv_along_refl_EQ1 Cat_cat (Path_cat A);
+
+/*
+  Explicit comparison with contractible-fibre equivalence over `Grpd_cat`.
+
+  These are derived adapters, not universe decoders. The forward direction
+  uses the selected inverse of `TypeEquiv`; the reverse direction converts
+  equality-valued bi-inverse data through the existing
+  `is_equiv_map_by_inverse` theorem capability.
+*/
+
+// Pointwise TypeEquiv left inverse assembled into a Grpd_cat hom path.
+symbol type_equiv_omega_left_law_EQ1
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  : τ (@=
+      (Hom Grpd_cat A A)
+      (@comp_fapp0 Grpd_cat A B A
+        (λ b : τ B, @type_equiv_from A B e b)
+        (@type_equiv_to A B e))
+      (@id Grpd_cat A))
+≔ @PiFunext
+    A
+    (λ _ : τ A, A)
+    (@grpd_comp_function A B A
+      (λ b : τ B, @type_equiv_from A B e b)
+      (@type_equiv_to A B e))
+    (@grpd_id_function A)
+    (λ a : τ A, @type_equiv_left A B e a);
+
+// Pointwise TypeEquiv right inverse assembled into a Grpd_cat hom path.
+symbol type_equiv_omega_right_law_EQ1
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  : τ (@=
+      (Hom Grpd_cat B B)
+      (@comp_fapp0 Grpd_cat B A B
+        (@type_equiv_to A B e)
+        (λ b : τ B, @type_equiv_from A B e b))
+      (@id Grpd_cat B))
+≔ @PiFunext
+    B
+    (λ _ : τ B, B)
+    (@grpd_comp_function B A B
+      (@type_equiv_to A B e)
+      (λ b : τ B, @type_equiv_from A B e b))
+    (@grpd_id_function B)
+    (λ b : τ B, @type_equiv_right A B e b);
+
+// Contractible-fibre equivalence embeds into equality-valued omega-equivalence.
+symbol type_equiv_to_omega_EQ1
+  [A B : Grpd]
+  (e : τ (TypeEquiv A B))
+  : τ (@OmegaEquiv_EQ1 Grpd_cat A B)
+≔ @omega_equiv_pack_EQ1
+    Grpd_cat A B
+    (@type_equiv_to A B e)
+    (@omega_equiv_along_intro_EQ1
+      Grpd_cat A B
+      (@type_equiv_to A B e)
+      (λ b : τ B, @type_equiv_from A B e b)
+      (λ b : τ B, @type_equiv_from A B e b)
+      (@type_equiv_omega_left_law_EQ1 A B e)
+      (@type_equiv_omega_right_law_EQ1 A B e));
+
+// Pointwise form of the equality-valued left inverse law in Grpd_cat.
+symbol omega_grpd_left_point_EQ1
+  [A B : Grpd]
+  [f : τ (@Function_grpd A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (a : τ A)
+  : τ (@= A
+      ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) (f a))
+      a)
+≔ @PiHapply
+    A
+    (λ _ : τ A, A)
+    (@grpd_comp_function A B A
+      (@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u)
+      f)
+    (@grpd_id_function A)
+    (@omega_equiv_along_left_law_EQ1 Grpd_cat A B f u)
+    a;
+
+// Pointwise form of the equality-valued right inverse law in Grpd_cat.
+symbol omega_grpd_right_point_EQ1
+  [A B : Grpd]
+  [f : τ (@Function_grpd A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (b : τ B)
+  : τ (@= B
+      (f ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b))
+      b)
+≔ @PiHapply
+    B
+    (λ _ : τ B, B)
+    (@grpd_comp_function B A B
+      f
+      (@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u))
+    (@grpd_id_function B)
+    (@omega_equiv_along_right_law_EQ1 Grpd_cat A B f u)
+    b;
+
+// The separately selected left and right inverses agree pointwise.
+symbol omega_grpd_left_to_right_point_EQ1
+  [A B : Grpd]
+  [f : τ (@Function_grpd A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (b : τ B)
+  : τ (@= A
+      ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) b)
+      ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b))
+≔ @eq_trans
+    A
+    ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) b)
+    ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u)
+      (f ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b)))
+    ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b)
+    (@eq_ap
+      B
+      A
+      (@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u)
+      b
+      (f ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b))
+      (@eq_sym
+        B
+        (f ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b))
+        b
+        (@omega_grpd_right_point_EQ1 A B f u b)))
+    (@omega_grpd_left_point_EQ1
+      A B f u
+      ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b));
+
+// The selected left inverse therefore also satisfies the right inverse law.
+symbol omega_grpd_left_right_point_EQ1
+  [A B : Grpd]
+  [f : τ (@Function_grpd A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (b : τ B)
+  : τ (@= B
+      (f ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) b))
+      b)
+≔ @eq_trans
+    B
+    (f ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) b))
+    (f ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b))
+    b
+    (@eq_ap
+      A
+      B
+      f
+      ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) b)
+      ((@omega_equiv_along_right_inv_EQ1 Grpd_cat A B f u) b)
+      (@omega_grpd_left_to_right_point_EQ1 A B f u b))
+    (@omega_grpd_right_point_EQ1 A B f u b);
+
+// Equality-valued bi-inverse data supplies one specified quasi-inverse.
+symbol omega_grpd_by_inverse_EQ1
+  [A B : Grpd]
+  [f : τ (@Function_grpd A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  : τ (@EquivByInverse
+      A B f
+      (@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u))
+≔ @Product_pair_grpd
+    (@Pi_grpd A
+      (λ a : τ A,
+        @= A
+          ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) (f a))
+          a))
+    (@Pi_grpd B
+      (λ b : τ B,
+        @= B
+          (f ((@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) b))
+          b))
+    (λ a : τ A, @omega_grpd_left_point_EQ1 A B f u a)
+    (λ b : τ B, @omega_grpd_left_right_point_EQ1 A B f u b);
+
+// The forward function has contractible fibres by the existing theorem.
+symbol omega_grpd_is_equiv_EQ1
+  [A B : Grpd]
+  [f : τ (@Function_grpd A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  : τ (@IsEquivMap A B f)
+≔ @is_equiv_map_by_inverse
+    A B f
+    (@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u)
+    (@omega_grpd_by_inverse_EQ1 A B f u);
+
+// Fixed-arrow omega-equivalence over Grpd_cat yields TypeEquiv.
+symbol omega_along_to_type_equiv_EQ1
+  [A B : Grpd]
+  [f : τ (@Function_grpd A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  : τ (TypeEquiv A B)
+≔ @Struct_sigma
+    (@Function_grpd A B)
+    (λ g : τ (@Function_grpd A B), @IsEquivMap A B g)
+    f
+    (@omega_grpd_is_equiv_EQ1 A B f u);
+
+// First-class omega-equivalence over Grpd_cat yields TypeEquiv by observers.
+symbol omega_to_type_equiv_EQ1
+  [A B : Grpd]
+  (e : τ (@OmegaEquiv_EQ1 Grpd_cat A B))
+  : τ (TypeEquiv A B)
+≔ @omega_along_to_type_equiv_EQ1
+    A B
+    (@omega_equiv_to_EQ1 Grpd_cat A B e)
+    (@omega_equiv_evidence_EQ1 Grpd_cat A B e);
+
 // First-class omega-equivalence package: `Sigma f, OmegaEquivAlong_D0(f)`.
 symbol OmegaEquiv_D0
   (C : Cat)
@@ -5964,7 +6755,7 @@ symbol OmegaEquiv
 
 // Phase-13 direct owner: category-universe equality exposes omega-equivalence.
 rule @= (Obj Cat_cat) $A $B
-  ↪ OmegaEquiv Cat_cat $A $B;
+  ↪ @OmegaEquiv_EQ1 Cat_cat $A $B;
 
 // Readable direct identity view; public category-universe equality reduces here.
 symbol CatPathView
@@ -6434,6 +7225,111 @@ symbol omega_equiv_right_law
       (@omega_equiv_right_inv C x y e))
     (@id C y)
     (@omega_equiv_right_cell C x y e);
+
+/*
+  Compatibility bridge between D0 certificates and equality-law evidence.
+
+  Old D0 evidence decodes its recursive cells to ordinary equality laws. In
+  the reverse direction a stable compatibility constructor specifies all D0
+  observations: inverse arrows are inherited directly, while recursive cells
+  are built by the defined object-path adapter and this same constructor. The
+  constructor is migration surface for the otherwise opaque D0 target, not a
+  new foundational encoder or an eta principle for D0 evidence.
+*/
+
+// Observe an old D0 certificate as finite equality-law evidence.
+symbol omega_equiv_along_D0_to_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_D0 C x y f))
+  : τ (@OmegaEquivAlong_EQ1 C x y f)
+≔ @omega_equiv_along_intro_EQ1
+    C x y f
+    (@omega_equiv_along_left_inv_D0 C x y f u)
+    (@omega_equiv_along_right_inv_D0 C x y f u)
+    (@omega_equiv_left_law C x y
+      (@omega_equiv_from_along C x y f u))
+    (@omega_equiv_right_law C x y
+      (@omega_equiv_from_along C x y f u));
+
+// Observe a first-class D0 package through the stable EQ1 facade.
+symbol omega_equiv_D0_to_EQ1
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (OmegaEquiv_D0 C x y))
+  : τ (@OmegaEquiv_EQ1 C x y)
+≔ @omega_equiv_pack_EQ1
+    C x y
+    (@omega_equiv_to_D0 C x y e)
+    (@omega_equiv_along_D0_to_EQ1
+      C x y
+      (@omega_equiv_to_D0 C x y e)
+      (@omega_equiv_evidence_D0 C x y e));
+
+// Compatibility constructor whose D0 observations are fully specified below.
+injective symbol omega_equiv_along_EQ1_to_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f))
+  : τ (@OmegaEquivAlong_D0 C x y f);
+
+// Package the selected forward arrow with compatibility evidence.
+symbol omega_equiv_EQ1_to_D0
+  [C : Cat]
+  [x y : τ (Obj C)]
+  (e : τ (@OmegaEquiv_EQ1 C x y))
+  : τ (OmegaEquiv_D0 C x y)
+≔ @Struct_sigma
+    (Hom C x y)
+    (λ f : τ (Hom C x y), @OmegaEquivAlong_D0 C x y f)
+    (@omega_equiv_to_EQ1 C x y e)
+    (@omega_equiv_along_EQ1_to_D0
+      C x y
+      (@omega_equiv_to_EQ1 C x y e)
+      (@omega_equiv_evidence_EQ1 C x y e));
+
+// Inverse-arrow observations are inherited verbatim from EQ1.
+rule @omega_equiv_along_left_inv_D0 _ _ _ _
+      (@omega_equiv_along_EQ1_to_D0 $C $x $y $f $u)
+  ↪ @omega_equiv_along_left_inv_EQ1 $C $x $y $f $u
+with @omega_equiv_along_right_inv_D0 _ _ _ _
+      (@omega_equiv_along_EQ1_to_D0 $C $x $y $f $u)
+  ↪ @omega_equiv_along_right_inv_EQ1 $C $x $y $f $u;
+
+// Recursive cells are reified from equality laws by the defined object-path
+// adapter and this same compatibility constructor, not by `idtoequiv_cat`.
+rule @omega_equiv_along_left_cell_D0 _ _ _ _
+      (@omega_equiv_along_EQ1_to_D0 $C $x $y $f $u)
+  ↪ @omega_equiv_EQ1_to_D0
+      (Hom_cat $C $x $x)
+      (@comp_fapp0 $C $x $y $x
+        (@omega_equiv_along_left_inv_EQ1 $C $x $y $f $u)
+        $f)
+      (@id $C $x)
+      (@object_path_equiv_EQ1
+        (Hom_cat $C $x $x)
+        (@comp_fapp0 $C $x $y $x
+          (@omega_equiv_along_left_inv_EQ1 $C $x $y $f $u)
+          $f)
+        (@id $C $x)
+        (@omega_equiv_along_left_law_EQ1 $C $x $y $f $u))
+with @omega_equiv_along_right_cell_D0 _ _ _ _
+      (@omega_equiv_along_EQ1_to_D0 $C $x $y $f $u)
+  ↪ @omega_equiv_EQ1_to_D0
+      (Hom_cat $C $y $y)
+      (@comp_fapp0 $C $y $x $y
+        $f
+        (@omega_equiv_along_right_inv_EQ1 $C $x $y $f $u))
+      (@id $C $y)
+      (@object_path_equiv_EQ1
+        (Hom_cat $C $y $y)
+        (@comp_fapp0 $C $y $x $y
+          $f
+          (@omega_equiv_along_right_inv_EQ1 $C $x $y $f $u))
+        (@id $C $y)
+        (@omega_equiv_along_right_law_EQ1 $C $x $y $f $u));
 
 /*
   Strict ordinary isomorphism evidence gives recursive omega-equivalence.

@@ -19,17 +19,39 @@ notation, implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
-  independently reviewed and preliminary-probe-refined proposed
-  successor/overlay for the equality, omega-equivalence, direct univalence,
+  independently reviewed and preliminary-probe-refined **adopted active
+  overlay** for the equality, omega-equivalence, direct univalence,
   internal groupoidality, and structured-`PathOut`/`J` tracks of the July 13
   living master plan. It selects a decoded equality-valued fixed-arrow record,
   a stable primitive first-class facade with a transparent Sigma comparison,
   direct proof-time equality/equivalence with shaped `Path_cat` computation,
   a completed `Grpd_cat` function-path boundary and derived `TypeEquiv`
   bridges, `IsGroupoidalCat` through core inclusion, structured motives as the
-  MVP transport boundary, and staged decoder retirement. Its status remains
-  proposed/not yet adopted; the July 13 plan remains the active master plan
-  until an explicit adoption decision.
+  MVP transport boundary, and staged decoder retirement. It was explicitly
+  adopted on 2026-07-17 at implementation baseline `4315137...`. Phase 1
+  `EVOGJ-ALONG-EQ-LAWS` is promoted with a native equality-law record; Phase 2
+  adds the stable facade/eliminator, transparent Sigma comparison, and derived
+  general object-path package without promoting the generic classifier
+  unifier. Their 37 permanent diagnostics and reviewer example pass with no
+  warning/audit delta. Phase 3 adds the narrow `Path_cat` classifier join,
+  explicit computational path packages, and canonical internal groupoidality;
+  raw-path projection remains measured-rejected. Phase 4 now promotes the
+  `Grpd_cat` function-path hom boundary, stable pointwise identity/composition
+  comparisons, and both explicit `TypeEquiv <-> OmegaEquiv_EQ1(Grpd_cat)`
+  adapters without a new decoder capability; the pre-existing
+  `is_equiv_map_by_inverse` contraction proof remains an explicit theorem
+  trust boundary. Phase 5 now promotes explicit D0/EQ1 bridges: old recursive
+  cells decode to equality laws, while new laws reify recursive compatibility
+  cells through `object_path_equiv_EQ1` without the legacy encoder. D0 lacks
+  evidence eta/extensionality, so both evidence round trips remain explicit
+  negatives. The safe Phase-6 boundary is promoted: generic proof-time
+  comparison works at the abstract owner, and rigid Cat/Grpd equality has
+  finite direct EQ1 runtime normal forms. Product specialization rejects a
+  general `lambda p, p` cast; stable former path-view heads are the active
+  design gate, with a primitive nonreducing cast only as an explicit fallback.
+  The July 13
+  plan remains the retained promoted-work ledger and active plan for
+  unaffected tracks.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
@@ -39,7 +61,7 @@ notation, implementation plans, and historical decisions.
   active representability/computational-comparison redesign and deferred
   internalization ledger.
 - `REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`:
-  active living forward implementation master plan integrating full
+  retained living predecessor/master ledger integrating full
   observational equality, HoTT truncation and `Prop`/`Set`/`n`-groupoid
   universes, directed `n`-categories and `OneCat`, finite dependent-record
   encoding, and coherent global computational univalence; Candidate G's

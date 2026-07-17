@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-16
+Last consolidated: 2026-07-17
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -32,14 +32,14 @@ needed.
 
 ## Validated Current Baseline
 
-The 2026-07-16 baseline is:
+The 2026-07-17 baseline is:
 
 ```text
 make check                         pass
 make examples                      pass
 make ci                            pass
-checked files/examples            41
-diagnostic checks                1,694 (1,507 assert + 187 assertnot)
+checked files/examples            45
+diagnostic checks                1,824 (1,604 assert + 220 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -47,6 +47,85 @@ warning inventory                  1,128
   unjoinable critical pairs          971
   replaceable pattern variables      157
 ```
+
+The adopted equality-valued omega-equivalence overlay has promoted its first
+five bounded staging slices and the safe abstract/rigid-universe portion of
+Phase 6. `OmegaEquivAlong_EQ1(f)` decodes to a native
+one-constructor record with separate left/right inverse arrows, ordinary
+equality-valued cancellation laws in the two endomorphism hom-categories,
+four computational observers, an indexed eliminator, and reflexive evidence.
+`OmegaEquiv_EQ1(x,y)` is now a stable abstract record-like facade with an
+injective package constructor, forward/evidence observations, a primitive
+dependent eliminator with constructor beta, propositional eta, and a
+transparent Sigma comparison with two propositional round trips. The general
+`object_path_equiv_EQ1(p)` computational adapter is defined from
+`path_to_hom`, `path_sym`, and J-derived laws; it is not an opaque encoder.
+
+The facade and eliminator are primitive kernel interface, but they are not
+observationally opaque: their documented constructor/projection/eliminator
+betas expose the data. The generic proof-time comparison between
+`OmegaEquiv_EQ1(C,x,y)` and object equality is now active while `C` remains
+syntactically abstract; it does not make the classifiers runtime-convertible
+or add raw-path observer beta. The rigid Cat and Grpd universe equalities now
+runtime-reduce to EQ1, and explicit EQ1 reflexivity packages compute. The
+explicit D0 migration adapters described below remain a distinct
+compatibility layer.
+
+A specialization audit rejects the earlier abstract `lambda p, p` experiment
+as a general public cast. Product and opposite equality reduce past the
+generic pattern; unfolding that body is not type-stable at Product. Raw paths
+at those reduced formers remain negative controls, while
+`object_path_equiv_EQ1(p)` remains well typed and computational. Stable
+injective former path-view heads are the preferred follow-up; a primitive
+nonreducing cast is only an explicitly trusted fallback. This is a current
+architecture fact owned by the July 17 plan, not a new repository-wide SOP
+rule. Warnings remain 971/157 and the strict audit remains zero/45/27.
+
+The literal-path Phase-3 slice adds two narrow proof-time comparisons without
+promoting generic direct univalence. `OmegaEquiv_EQ1(Path_cat A,x,y)` compares
+with `x =_A y`, while `Core_incl_func(Path_cat A)` compares with the identity
+functor. `path_equiv_EQ1(p)` is the explicit computational package with
+forward arrow `p`, two `path_sym(p)` inverse choices, J-derived laws, facade
+elimination, and a next-hom reification consumer. `IsGroupoidalCat_EQ1(C)` is
+equivalence evidence for `Core_cat(C) -> C`; this is the internally univalent/
+complete groupoidality notion, not merely the external statement that arrows
+have inverses. `Path_cat(A)` has canonical evidence. A bare path is accepted
+at the facade type, but its observers deliberately remain stuck. Adding a raw
+projection rule reproduces the package/path critical pair at 972/160 and
+breaks a consumer, so the explicit package remains required.
+
+The Phase-4 groupoid-universe boundary now makes
+`Hom_cat(Grpd_cat,A,B)` the path category of ordinary functions. Stable
+`grpd_id_function` and `grpd_comp_function` heads compute pointwise and compare
+with the generic category identity/composition owners only at proof time.
+Explicit defined adapters connect `TypeEquiv(A,B)` and
+`OmegaEquiv_EQ1(Grpd_cat,A,B)`: the forward adapter uses the selected
+contractible-fibre inverse, while the reverse proves the two omega inverse
+choices agree and then supplies `EquivByInverse`. Selected maps, inverse
+fields, cancellation laws, and the forward-map round trip compute. This adds
+no decoder or bridge axiom. The reverse direction still invokes the existing
+bodyless `is_equiv_map_by_inverse` theorem capability; its fibre centre
+computes and its contraction field remains deliberately negative. This is an
+explicit proof-trust boundary, not an opaque encoder/decoder.
+
+The Phase-5 migration bridge makes the retained D0/new-EQ1 relationship
+executable in both directions. Old D0 evidence is observed as EQ1 inverse
+fields plus decoder-derived ordinary laws. New EQ1 evidence enters legacy D0
+through a stable compatibility constructor whose four D0 observations are
+specified: inverse fields project directly, and recursive cells apply the
+defined `object_path_equiv_EQ1` adapter to the equality laws before recurring.
+Thus two levels of recursive observation compute without `idtoequiv_cat`.
+The primitive compatibility head is required only because D0 itself has no
+constructor; it is migration surface, not a foundational encoder requirement.
+D0 still has no eta/extensionality theorem, so neither evidence round trip is
+claimed and both remain negative controls.
+
+The catalog now has 1,824 checks across 66 areas, the kernel has 20,909 lines,
+856 symbols, 595 rules, and 63 unification rules, and the synchronized 45-file
+health and reviewer sweeps pass. The diagnostic suite has 1,604 positive and
+220 negative statements. Warnings remain 971/157 and the strict audit remains
+zero/45/27. Synchronized 45-file CI passes with 212.406s of measured checking
+time; the active July 17 plan records the phase evidence.
 
 The largest warning families are headed by `comp_fapp0`,
 `hom_postcomp_fapp0`, `fapp1_fapp0`, and `tapp0_fapp0`. These reports are
