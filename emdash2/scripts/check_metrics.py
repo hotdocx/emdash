@@ -15,7 +15,11 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CORE_CHECK_FILES = [Path("emdash3_2.lp"), Path("emdash3_2_checks.lp")]
+CORE_CHECK_FILES = [
+    Path("emdash3_2.lp"),
+    Path("emdash3_2_eq1_hom_action.lp"),
+    Path("emdash3_2_checks.lp"),
+]
 EXAMPLES_DIR = ROOT / "examples"
 
 
@@ -93,7 +97,7 @@ def count_lines(path: Path) -> dict[str, int | dict[str, int]]:
     }
 
     symbol_re = re.compile(
-        r"^\s*(?:(?:injective|constant|sequential|opaque)\s+)*symbol\b"
+        r"^\s*(?:(?:injective|constant|sequential|opaque|private|protected)\s+)*symbol\b"
     )
     rule_re = re.compile(r"^\s*rule\b")
     unif_rule_re = re.compile(r"^\s*unif_rule\b")

@@ -3,8 +3,9 @@
 Date: 2026-07-17
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
-the active code authority; reports explain current status, mathematics,
-notation, implementation plans, and historical decisions.
+the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
+derived native-EQ1 hom-action/groupoidality extension. Reports explain current
+status, mathematics, notation, implementation plans, and historical decisions.
 
 ## Current Orientation
 
@@ -70,31 +71,42 @@ notation, implementation plans, and historical decisions.
   promoted uniform-cast checkpoint has 1,857 checks (1,630 positive and 227
   negative), a 21,115-line kernel with 871 symbols, 597 rewrite rules, and 65
   unification rules, the same warning/audit inventory, and 45-file CI passing
-  in 269.410s. Three Phase-9 slices are also promoted: general
-  `IsGroupoidalCat_EQ1` evidence now acts homwise through the retained D0b
-  compatibility owner, exposes a selected arrow-to-path inverse and
-  propositional re-inclusion law, and is consumed by exact `IsDiscreteCat`
-  evidence and packaged `ZeroCat` carriers. Existing `path_ind_sec` remains
-  the structured-action owner without a second eliminator. At a literal
-  `Path_cat(A)` source, its application and displayed functor action are now
-  proved propositionally equal to primitive `ind_eqr`; primitive J computes
-  at reflexivity while the directed presentations preserve their runtime
-  normal forms. Native functor preservation now maps fixed-arrow EQ1 evidence;
-  the selected groupoidal path and its reversal therefore give every arrow
-  explicit equivalence evidence, and displayed fibre transport along it is an
-  equivalence with computational inverse projections. The two narrow
-  proof-time joins retain `971/157` warnings and zero/45/27 audit results; the
-  transport slice adds no rule, unifier, decoder, encoder, eliminator, or
-  transport axiom. The
+  in 269.410s. Phase 9 is promoted at its selected forward MVP boundary.
+  The one-way `emdash3_2_eq1_hom_action.lp` extension transparently proves
+  native EQ1 preservation by every category hom action, using protected proof
+  helpers and one ordinary public hom-action owner; package projections compute and
+  reflexive input normalizes to `id_func`. General
+  `IsGroupoidalCat_EQ1` consumers and displayed transport were relocated to
+  that extension and migrated off the former D0b route without public-name
+  changes. They expose a selected arrow-to-path inverse, propositional
+  re-inclusion, explicit evidence for every arrow, the pointwise
+  `AllArrowsEquiv_EQ1` view, and equivalence-valued fibre transport. Existing
+  `path_ind_sec` remains the structured-action owner; at a literal
+  `Path_cat(A)` its application and displayed action are propositionally equal
+  to primitive `ind_eqr`, whose reflexive beta remains the runtime owner. No
+  rule, unifier, decoder, encoder, eliminator, opaque theorem, or transport
+  axiom was added. The converse from arbitrary pointwise evidence to coherent
+  core groupoidality remains a structured omega-functor assembly/extensionality
+  extension gate. The
   pre-comparison checkpoint had
   1,867 checks across 67 areas (1,639 positive and 228 negative), a
   21,249-line kernel with 878 symbols and unchanged 597/65 rule counts,
   unchanged `971/157` warnings and zero/45/27 audit results, and 46 passing
   health/example files; synchronized 46-file CI passed in 217.327s. The
-  current three-slice checkpoint has 1,886 checks (1,654 positive and 232
-  negative), a 21,681-line kernel with 890 symbols and 597/67 rule counts,
-  unchanged warning/audit inventories, 46 passing health/example files, and
-  synchronized CI passing in 324.515s. The July
+  next synchronized Phase-9 checkpoint has 1,889 checks across 68 areas
+  (1,657 positive and 232 negative), a 22,242-line kernel with 902 symbols and
+  unchanged 597/67 rule counts, unchanged warning/audit inventories, 46
+  passing health/example files, and CI passing in 339.780s. This checkpoint
+  transparently derives generic half-adjointification from the existing
+  equality/J algebra; its arbitrary formation and reflexive counit/triangle
+  computations pass permanent diagnostics without adding a rule, unifier,
+  primitive, or opaque theorem. The complete D0b-free next-hom EQ1 package is
+  now the active derived-module owner, and its former D0b-backed groupoidality
+  consumer has been migrated. The current snapshot has 1,896 checks across 69
+  areas (1,664 positive and 232 negative), a 21,986-line/892-symbol kernel, a
+  2,791-line/69-symbol derived extension, unchanged kernel rule/unifier and
+  warning/audit inventories, 48 passing health/example files, and synchronized
+  CI passing in 172.350s of measured checking time. The July
   13 plan remains the retained promoted-work ledger and active plan for
   unaffected tracks.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:

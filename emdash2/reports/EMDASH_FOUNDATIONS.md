@@ -1,9 +1,10 @@
 # emdash Foundations
 
 Draft status: this document is a mathematician-facing reading guide for the
-current `emdash3_2.lp` theory. It presents the intended mathematics in ordinary
-category/type-theory notation and deliberately suppresses most Lambdapi rewrite
-engineering details.
+current `emdash3_2.lp` theory and its one-way derived native-EQ1 hom-action
+extension `emdash3_2_eq1_hom_action.lp`. It presents the intended mathematics
+in ordinary category/type-theory notation and deliberately suppresses most
+Lambdapi rewrite engineering details.
 
 The implementation is still evolving. This note describes the current directed
 categorical foundation and the first checked equivalence, profunctor,
@@ -50,7 +51,8 @@ mathematics, then use
 `REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md` for the rewrite
 hygiene and stable-head ownership rules. Do not infer from the surface formula
 alone that a new primitive head is needed; first locate the current semantic
-owner in `emdash3_2.lp`.
+owner in `emdash3_2.lp` or, for native equality-valued next-hom preservation
+and its groupoidality consumers, `emdash3_2_eq1_hom_action.lp`.
 
 ## 2. Categories And Hom-Categories
 
@@ -1656,12 +1658,13 @@ General groupoidality is now consumed one hom-category at a time. Given
 core_incl_hom_func(C,x,y) : Path_cat(x = y) -> Hom_cat(C,x,y).
 ```
 
-Operationally this first implementation converts `g` to retained D0 only at
-the already-established D0b hom-action boundary, then observes the resulting
-fixed-map evidence back into EQ1. The public mathematical result is therefore
-equality-valued and iterable, but its derivation remains migration-backed. A
-later native all-EQ1 hom-action theorem may remove that internal route; no new
-decoder or univalence capability was added for this slice.
+Operationally the one-way derived module
+`emdash3_2_eq1_hom_action.lp` applies the native
+`omega_equiv_along_fapp1_EQ1` theorem directly to `g`. The public mathematical
+result is equality-valued and iterable, and this consumer chain no longer
+crosses EQ1-to-D0, D0b, or D0-to-EQ1. The theorem and its proof helpers are
+transparent; helpers are protected at the module boundary and no new decoder,
+univalence capability, rewrite, or unification rule was added.
 
 The selected right inverse functor sends a directed arrow `f : x -> y` to an
 object path. Its equality-valued right cancellation law says that applying
@@ -1683,14 +1686,46 @@ family `D : C -> Cat_cat` gives
 `groupoidal_fibre_transport_equiv_EQ1(g,D,f)`: the existing directed fibre
 transport is an equivalence, and its inverse projections compute as transport
 along the selected inverse arrow. No encoder, decoder, new transport
-operation, or runtime rule is required. The arrow-to-path selection itself is
-still derived through the retained D0b next-hom compatibility owner; replacing
-that internal route with a native all-EQ1 hom-action theorem remains migration
-work.
+operation, or runtime rule is required. The arrow-to-path selection now comes
+from the native next-hom theorem rather than the retained D0b compatibility
+owner.
 
-At a literal `Path_cat(A)`, the compatibility-derived selected inverse is
-well typed but does not definitionally reduce to the input path, because its
-normal form passes through both migration bridges and D0b. This is a
+The transparent classifier
+`AllArrowsEquiv_EQ1(C) = Pi x y, Pi f : Hom_C(x,y),
+OmegaEquivAlong_EQ1(C,f)` records the pointwise consequence, and
+`groupoidal_all_arrows_equiv_EQ1` computes from coherent core groupoidality to
+that classifier. The converse is not automatic: arbitrary pointwise inverse
+choices do not yet assemble the coherent inverse omega-functor
+`C -> Core_cat(C)`. That direction is a structured-functor
+assembly/extensionality question, not an equality decoder question.
+
+The needed coherence is not a new axiom. From maps `f : A -> B` and
+`l : B -> A` with equality-valued homotopies `l(f x) = x` and
+`f(l b) = b`, the transparent `half_adjoint_counit` makes the standard
+adjustment
+
+```text
+epsilon'(b) = epsilon(f(l b))^-1 ; ap(f, eta(l b)) ; epsilon(b),
+```
+
+and `half_adjoint_triangle` proves `ap(f,eta(x)) = epsilon'(f x)` by ordinary
+path induction and path algebra. Both specialize computationally to
+reflexivity. This closes the mathematical endpoint-coherence gap in the active
+D0b-free next-hom theorem. Its one-way module exposes one ordinary public
+owner and retains 56 protected transparent implementation lemmas; projection
+diagnostics and reflexive normalization to `id_func` confirm that the module
+boundary does not introduce opacity.
+
+The uniform equality/EQ1 cast does not make that proof disappear. It preserves
+the term while changing the accepted classifier, so a raw category path does
+not acquire an equivalence package head and its forward projection remains
+stuck. The explicit transparent `object_path_equiv_EQ1` construction performs
+the required reification. This is why classifier-level interchange can be
+identity syntax while computational package observation still uses a named
+constructor; neither operation requires an opaque decoder.
+
+At a literal `Path_cat(A)`, the generic half-adjoint selected inverse is well
+typed but does not definitionally reduce to the input path. This is a
 provenance boundary rather than a semantic failure: the direct
 `path_equiv_EQ1(p)` witness remains the canonical literal computation and its
 forward projection reduces to `p`.

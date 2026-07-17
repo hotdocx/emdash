@@ -17,6 +17,7 @@ flag "print_domains" on;
 flag "print_meta_args" on;
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_eq1_hom_action;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;
@@ -5569,8 +5570,8 @@ assert [A B : Cat]
 
 // catalog-area: auto
 
-// General internal groupoidality is consumed through the existing D0b
-// next-hom action, then observed back as equality-valued evidence.
+// General internal groupoidality is consumed through the native EQ1 next-hom
+// action, without conversion through D0 or D0b.
 // catalog-area: Internal groupoidality and structured J
 assert [C : Cat]
   (g : τ (@IsGroupoidalCat_EQ1 C))
@@ -5678,6 +5679,18 @@ assert [C : Cat]
   : τ (@OmegaEquivAlong_EQ1 C x y f);
 
 assert [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C)) ⊢
+  @groupoidal_all_arrows_equiv_EQ1 C g
+  : τ (@AllArrowsEquiv_EQ1 C);
+
+assert [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @groupoidal_all_arrows_equiv_EQ1 C g x y f
+  ≡ @groupoidal_arrow_equiv_along_EQ1 C g x y f;
+
+assert [C : Cat]
   (g : τ (@IsGroupoidalCat_EQ1 C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
@@ -5749,7 +5762,7 @@ assert (X : τ ZeroCat) ⊢
   : τ (@IsGroupoidalCat_EQ1 (@ncat_carrier cat_zero X));
 
 // The generic homwise consumer specializes to a literal path category, but
-// its D0b compatibility route is not the direct path-package computation.
+// its general half-adjoint inverse is not the direct path-package computation.
 assert [A : Grpd]
   [x y : τ A] ⊢
   @groupoidal_core_homwise_EQ1
@@ -8255,6 +8268,107 @@ assert [A : Grpd]
     (λ z : τ A, @eq_refl A z)
     x
   ≡ @eq_refl (@= A x x) (@eq_refl A x);
+
+// catalog-area: Native EQ1 next-hom action
+// A category-level equality-valued omega-equivalence acts by a transparent
+// equality-valued omega-equivalence on every next hom category.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  omega_equiv_along_fapp1_EQ1 u x y
+  : τ (@OmegaEquivAlong_EQ1
+      Cat_cat
+      (Hom_cat A x y)
+      (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+      (@fapp1_func A B F x y));
+
+// Both inverse projections compute to the same half-adjointified inverse.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_along_left_inv_EQ1
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+    (@fapp1_func A B F x y)
+    (omega_equiv_along_fapp1_EQ1 u x y)
+  ≡ @omega_equiv_along_right_inv_EQ1
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+    (@fapp1_func A B F x y)
+    (omega_equiv_along_fapp1_EQ1 u x y);
+
+// The left cancellation projection has its native equality-valued type.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_along_left_law_EQ1
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+    (@fapp1_func A B F x y)
+    (omega_equiv_along_fapp1_EQ1 u x y)
+  : τ (@=
+      (Hom Cat_cat (Hom_cat A x y) (Hom_cat A x y))
+      (@comp_fapp0
+        Cat_cat
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        (Hom_cat A x y)
+        (@omega_equiv_along_left_inv_EQ1
+          Cat_cat
+          (Hom_cat A x y)
+          (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+          (@fapp1_func A B F x y)
+          (omega_equiv_along_fapp1_EQ1 u x y))
+        (@fapp1_func A B F x y))
+      (@id Cat_cat (Hom_cat A x y)));
+
+// The right cancellation projection has its native equality-valued type.
+assert [A B : Cat]
+  [F : τ (Functor A B)]
+  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (x y : τ (Obj A)) ⊢
+  @omega_equiv_along_right_law_EQ1
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+    (@fapp1_func A B F x y)
+    (omega_equiv_along_fapp1_EQ1 u x y)
+  : τ (@=
+      (Hom Cat_cat
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y)))
+      (@comp_fapp0
+        Cat_cat
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        (Hom_cat A x y)
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+        (@fapp1_func A B F x y)
+        (@omega_equiv_along_right_inv_EQ1
+          Cat_cat
+          (Hom_cat A x y)
+          (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
+          (@fapp1_func A B F x y)
+          (omega_equiv_along_fapp1_EQ1 u x y)))
+      (@id Cat_cat
+        (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))));
+
+// Reflexive input computes through the protected proof chain to identity.
+assert [A : Cat] (x y : τ (Obj A)) ⊢
+  @omega_equiv_along_left_inv_EQ1
+    Cat_cat
+    (Hom_cat A x y)
+    (Hom_cat A x y)
+    (@fapp1_func A A (@id_func A) x y)
+    (omega_equiv_along_fapp1_EQ1
+      (@omega_equiv_along_refl_EQ1 Cat_cat A)
+      x y)
+  ≡ @id_func (Hom_cat A x y);
 
 assert [A B C : Grpd]
   [f : τ A → τ B]

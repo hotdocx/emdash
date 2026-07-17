@@ -1,17 +1,18 @@
 /*
   Reviewer example: internal groupoidality and structured J.
 
-  An EQ1 witness for Core(C) -> C acts on every hom through the existing D0b
-  compatibility owner. Its selected inverse reads a directed arrow as an
-  object path, and the equality-valued right law proves that re-inclusion
-  recovers the arrow. Existing discrete and zero-dimensional categories are
-  nonliteral consumers. The selected path also reconstructs explicit
-  equivalence evidence for the arrow, so existing displayed transport is an
-  equivalence of fibres. Structured motives continue to use `path_ind_sec`;
-  no parallel groupoidal eliminator is introduced.
+  An EQ1 witness for Core(C) -> C acts on every hom through the native EQ1
+  next-hom owner. Its selected inverse reads a directed arrow as an object
+  path, and the equality-valued right law proves that re-inclusion recovers
+  the arrow. Existing discrete and zero-dimensional categories are nonliteral
+  consumers. The selected path also reconstructs explicit equivalence
+  evidence for the arrow, so existing displayed transport is an equivalence
+  of fibres. Structured motives continue to use `path_ind_sec`; no parallel
+  groupoidal eliminator is introduced.
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_eq1_hom_action;
 
 // Internal groupoidality is iterable at the next hom dimension.
 assert [C : Cat]
@@ -55,6 +56,12 @@ assert [C : Cat]
   (f : τ (Hom C x y)) ⊢
   @groupoidal_arrow_equiv_along_EQ1 C g x y f
   : τ (@OmegaEquivAlong_EQ1 C x y f);
+
+// The coherent core witness therefore exposes the expected pointwise view.
+assert [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C)) ⊢
+  @groupoidal_all_arrows_equiv_EQ1 C g
+  : τ (@AllArrowsEquiv_EQ1 C);
 
 assert [C : Cat]
   (g : τ (@IsGroupoidalCat_EQ1 C))
@@ -121,8 +128,8 @@ assert [A : Grpd]
         x
         y));
 
-// Compatibility-derived inverse selection is not advertised as literal-path
-// computation; the direct explicit package remains the computational owner.
+// The generic half-adjoint inverse selection is not advertised as literal-
+// path computation; the direct explicit package remains that runtime owner.
 assertnot [A : Grpd]
   [x y : τ A]
   (p : τ (@= A x y)) ⊢

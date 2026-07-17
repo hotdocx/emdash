@@ -6,21 +6,24 @@ proof assistant for strict/lax omega-categories, omega-functors,
 omega-transformations (“transfors”), directed families, and related dependent
 categorical structures.
 
-The active implementation is `emdash3_2.lp`; executable diagnostics live in
-`emdash3_2_checks.lp`.
+The active kernel is `emdash3_2.lp`. The one-way derived native-EQ1
+hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
+executable diagnostics live in `emdash3_2_checks.lp`.
 
 ## Authorities
 
 Use the following order:
 
 1. `emdash3_2.lp` for active kernel definitions and computation;
-2. `emdash3_2_checks.lp` for executable regression statements;
-3. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+2. `emdash3_2_eq1_hom_action.lp` for the transparent derived native-EQ1
+   next-hom and groupoidality layer;
+3. `emdash3_2_checks.lp` for executable regression statements;
+4. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-4. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-5. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+5. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+6. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-6. `reports/INDEX.md` for task-specific plans and decision records.
+7. `reports/INDEX.md` for task-specific plans and decision records.
 
 The obsolete v2/v3.1 material under ignored `.scratchpad/` directories is not
 part of normal development. Do not read, summarize, or reference it unless the

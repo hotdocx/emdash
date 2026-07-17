@@ -164,6 +164,8 @@ or a completed foundational theory.
 ## Authorities And Layout
 
 - `emdash3_2.lp`: active v3.2 kernel implementation.
+- `emdash3_2_eq1_hom_action.lp`: one-way transparent derived native-EQ1
+  hom-action, groupoidality, and structured-transport extension.
 - `emdash3_2_checks.lp`: executable diagnostic/regression suite.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
   current architecture and development SOP.

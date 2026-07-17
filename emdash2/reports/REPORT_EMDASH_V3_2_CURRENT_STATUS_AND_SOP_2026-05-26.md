@@ -13,6 +13,9 @@ detailed probe evidence.
 ## Sources Of Truth
 
 - `emdash3_2.lp`: active kernel definitions and runtime/proof-time behavior.
+- `emdash3_2_eq1_hom_action.lp`: one-way derived native-EQ1 hom-action,
+  groupoidality, and structured-transport layer; it imports the kernel and is
+  imported by diagnostics/examples, never by the kernel.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -38,8 +41,8 @@ The 2026-07-17 baseline is:
 make check                         pass
 make examples                      pass
 make ci                            pass
-checked files/examples            46
-diagnostic checks                1,886 (1,654 assert + 232 assertnot)
+checked files/examples            48
+diagnostic checks                1,896 (1,664 assert + 232 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -50,10 +53,13 @@ warning inventory                  1,128
 
 The adopted equality-valued omega-equivalence overlay has promoted its first
 six bounded staging phases, the first Phase-7 migration checkpoints, and the
-first three Phase-9 groupoidality/structured-J slices, including the selected
+first four Phase-9 groupoidality/structured-J/coherence slices, including the selected
 abstract/rigid-universe, stable Product, uniform explicit-cast, homwise
 groupoidality, literal structured-action/J, and equivalence-valued displayed-
-transport boundaries.
+transport boundaries plus generic equality-valued half-adjointification and
+the native all-EQ1 next-hom owner. The latter is a one-way derived extension
+with protected transparent proof helpers and one ordinary public hom-action
+constructor; it is not an opaque theorem capability.
 `OmegaEquivAlong_EQ1(f)` decodes to a native
 one-constructor record with separate left/right inverse arrows, ordinary
 equality-valued cancellation laws in the two endomorphism hom-categories,
@@ -160,16 +166,16 @@ computes to `path_to_hom(Cat_cat,p)`. This reduces, but does not yet eliminate,
 the legacy encoder dependency; compatibility round trips, shaped Product
 computation, OneCat theorems, and other inventoried consumers remain.
 
-The first general-groupoidality consumer slice now turns
-`g : IsGroupoidalCat_EQ1(C)` into equality-valued fixed-map evidence for each
-hom action of `Core_incl_func(C)`. The construction crosses into retained D0
-only at the existing D0b `fapp1` compatibility owner and immediately observes
-the result back as EQ1. Its selected right inverse sends a directed arrow to
-an object path, and the equality-valued right law proves propositionally that
-re-including that path recovers the arrow. Existing exact `IsDiscreteCat`
-evidence and packaged `ZeroCat` carriers provide nonliteral groupoidal
-witnesses. This is a migration-backed consumer, not yet a native all-EQ1
-hom-action theorem.
+The general-groupoidality layer now lives with the native derived hom-action
+owner in `emdash3_2_eq1_hom_action.lp`. For
+`g : IsGroupoidalCat_EQ1(C)`, `groupoidal_core_homwise_EQ1` applies
+`omega_equiv_along_fapp1_EQ1` directly to `Core_incl_func(C)`, with no
+EQ1-to-D0, D0b, or D0-to-EQ1 step. Its selected right inverse sends a directed
+arrow to an object path, and the equality-valued right law proves
+propositionally that re-including that path recovers the arrow. Existing exact
+`IsDiscreteCat` evidence and packaged `ZeroCat` carriers provide nonliteral
+groupoidal witnesses. The public groupoidality names were relocated from the
+kernel to the one-way extension without changing their types.
 
 The first slice also checks the existing `path_ind_sec` computation for a
 structured Sigma-pullback motive in a groupoidal context. Groupoidality is not
@@ -198,21 +204,51 @@ pointwise re-inclusion theorem and the existing J-derived path-cancellation
 laws. Specializing functor preservation to `D : Catd(C)` equips the existing
 `fapp1_fapp0(D,f)` fibre transport with EQ1 evidence; its inverse projections
 compute. The construction is transparent and adds no rewrite, unifier,
-encoder, decoder, or transport axiom. Selection of the arrow-to-path map still
-uses the retained D0b next-hom compatibility owner internally, so a D0b-free
-all-EQ1 derivation remains migration work. This classification is specific to
-the July 17 implementation plan and does not amend the general SOP.
+encoder, decoder, or transport axiom. Selection of the arrow-to-path map now
+uses the native EQ1 hom-action owner; no D0b compatibility step remains in
+this consumer chain. This classification is specific to the July 17
+implementation plan and does not amend the general SOP.
 
-The compatibility-derived inverse at a literal path category is still
+The reusable coherence prerequisite for that migration is now active.
+`half_adjoint_counit` adjusts separate equality-valued left/right inverse
+homotopies, and `half_adjoint_triangle` derives the standard triangle from
+primitive `ind_eqr`, `eq_ap`, homotopy naturality, and path cancellation.
+Both are transparent theorems: the adjusted counit and triangle proof compute
+on reflexive identity data. No rewrite, unification rule, primitive symbol, or
+opaque theorem capability was added. The complete theorem is promoted as
+`omega_equiv_along_fapp1_EQ1` in the one-way extension. Its 56 implementation
+lemmas are protected and transparent, its public package projections compute,
+and reflexive input normalizes to the identity hom functor. A public
+transparent definition could not retain `private` helpers under Lambdapi's
+module exposition rules; `protected` helpers passed both the minimal probe and
+the full external consumer, so this is not an opacity boundary.
+
+`AllArrowsEquiv_EQ1(C)` records the pointwise statement that every directed
+arrow has native EQ1 evidence, and `groupoidal_all_arrows_equiv_EQ1` computes
+from coherent core groupoidality to that view. The converse is not active:
+arbitrary pointwise choices do not yet assemble the coherent omega-functor
+`C -> Core_cat(C)` required by `IsGroupoidalCat_EQ1`. This is a structured
+functor assembly/extensionality gate, not a decoder gap.
+
+A direct one-`J` shortcut through the uniform identity cast was measured and
+rejected as a computational replacement. The cast gives a raw path the facade
+type, but does not reify a package head, so `omega_equiv_to_EQ1` remains stuck
+even on primitive reflexivity. Explicit `object_path_equiv_EQ1` reification
+does compute to `path_to_hom`. This is a July 17 plan-local implementation
+fact, not a general requirement that other subsystems introduce encoders or
+decoders.
+
+The generic half-adjoint inverse at a literal path category is still
 intentionally not definitionally the input path; use the direct
 `path_equiv_EQ1(p)` package for that computation.
 
-The catalog now has 1,886 checks across 67 areas, the kernel has 21,681 lines,
-890 symbols, 597 rules, and 67 unification rules, and the synchronized 46-file
-health and reviewer sweeps pass. The diagnostic suite has 1,654 positive and
-232 negative statements. Warnings remain 971/157 and the strict audit remains
-zero/45/27. Synchronized 46-file CI passes with 324.515s of measured checking
-time; the active July 17 plan records the phase evidence.
+The catalog now has 1,896 checks across 69 areas. The kernel has 21,986 lines,
+892 symbols, 597 rules, and 67 unification rules; the derived extension has
+2,791 lines, 69 symbols, and no rules or unification rules. The synchronized
+48-file health and reviewer sweeps pass. The diagnostic suite has 1,664
+positive and 232 negative statements. Warnings remain 971/157 and the strict
+audit remains zero/45/27. Synchronized 48-file CI passes with 172.350s of
+measured checking time; the active July 17 plan records the phase evidence.
 
 The largest warning families are headed by `comp_fapp0`,
 `hom_postcomp_fapp0`, `fapp1_fapp0`, and `tapp0_fapp0`. These reports are
