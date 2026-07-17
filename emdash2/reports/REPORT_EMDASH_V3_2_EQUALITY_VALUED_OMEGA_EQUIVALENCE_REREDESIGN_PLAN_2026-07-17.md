@@ -79,7 +79,7 @@ independently stored data. This should remove the central duplication between
 equality, omega-equivalence certificates, encoders, decoders, and recursive
 cell observers.
 
-The reviewed MVP has eight principal parts:
+The reviewed MVP has nine principal parts:
 
 1. implement `OmegaEquivAlong(C,f)` as a decoded native one-constructor record
    with a real indexed eliminator;
@@ -91,16 +91,19 @@ The reviewed MVP has eight principal parts:
 4. identify `x =_{Obj C} y` directly with `OmegaEquiv(C,x,y)` through a
    carefully classified rewrite/unification architecture rather than a
    decoder tower;
-5. add the shaped `Path_cat` join and a computational explicit path-equivalence
+5. distinguish the literal identity type view supplied by classifier
+   unification from an explicit, decoder-free object-path adapter whose
+   forward/inverse/law observers compute;
+6. add the shaped `Path_cat` join and a computational explicit path-equivalence
    constructor, while deferring raw-coerced-path projection computation until
    its package/extensionality critical pair has a sound solution;
-6. define general internal groupoidality by equivalence of `Core_cat(C)` with
+7. define general internal groupoidality by equivalence of `Core_cat(C)` with
    `C`, and use the existing `PathOut`/directed-family action as the structured
    groupoidal form of `J`;
-7. complete the missing `Grpd_cat` hom/function boundary and derive both
+8. complete the missing `Grpd_cat` hom/function boundary and derive both
    directions between `TypeEquiv` and omega-equivalence rather than assuming
    them;
-8. demote unrelated former-specific action experiments, especially the
+9. demote unrelated former-specific action experiments, especially the
    current Sum action bases, from the foundational univalence MVP.
 
 This is not a proposal to copy Book HoTT, cubical type theory, observational
@@ -135,7 +138,7 @@ and computationally feasible to implement, while the raw-path join,
 unrestricted evidence property, and semantic fixed-point assurance remain
 explicit research/extension gates.
 
-The review changed four material architectural decisions:
+The review changed five material architectural decisions:
 
 1. the fixed-arrow evidence must be a decoded native record, not a bodyless
    constant with unexplained observers;
@@ -146,7 +149,11 @@ The review changed four material architectural decisions:
    projection rules safely;
 4. direct groupoid-universe work depends on completing the computational
    `Grpd_cat` hom boundary, after which the comparison with `TypeEquiv` is
-   derivable in both directions.
+   derivable in both directions;
+5. a proof-time identity view `as_omega_equiv(p) := p` is valid but supplies no
+   new term computation; observer computation belongs to a separate explicit
+   object-path package built from `path_to_hom`, inverse paths, and J-derived
+   laws.
 
 ### Measured owner-position results
 
@@ -165,6 +172,7 @@ compound slots, 45 annotated slots, and 27 intentional clauses.
 | transparent outer Sigma plus generic equality/equivalence `unif_rule` | term typing fails after eager `tau(Sigma)` decoding | reject Sigma as the direct-univalence normal form |
 | stable outer facade, pack/projections/eliminator, generic proof-time comparison, reflexivity observers | passes; no warning delta | select stable primitive dependent-pair facade |
 | facade eta and two-way transparent-Sigma comparison | passes; constructor round trips compute, both general round trips are propositional | end-user elimination/comparison is feasible; primitive eliminator remains trusted surface |
+| identity type view `as_omega_equiv(p) := p` plus explicit general object-path package | passes; identity view stays literally `p`; package forward/inverse/law projections compute through `path_to_hom` and J; no warning delta | classifier interchangeability and computational reification are distinct public interfaces |
 | shaped `Path_cat` classifier join | passes; no warning delta | an explicit shaped join is required in addition to the generic comparison |
 | explicit `path_equiv(p)` with `path_sym(p)` inverses and J-derived laws | passes; all named observers compute; no warning delta | computational path constructor is feasible |
 | raw path projection rule `omega_equiv_to(p) -> p` | adds an unjoinable package/path critical pair | do not claim raw coerced-path projection computation yet |
@@ -210,7 +218,7 @@ univalence, or the structured groupoidal-J track.
 
 #### Consequences for the pre-probe proposal
 
-The preliminary probes changed the original unmeasured proposal in four
+The preliminary probes changed the original unmeasured proposal in five
 specific ways:
 
 1. its transparent-Sigma default is not computationally viable as the direct
@@ -222,7 +230,11 @@ specific ways:
    owner while a general join is a later extension gate;
 4. direct runtime lambda folds are not an acceptable `Grpd_cat` identity and
    composition policy; stable semantic heads plus proof-time comparison are
-   the measured replacement.
+   the measured replacement;
+5. identity classifier views can remain literal `lambda p, p`, but any claim
+   of recursive observer computation must use the separately constructed
+   object-path package; this adapter passed without adding opaque authority or
+   warning deltas.
 
 None of these is a blocker to the selected core. The genuinely unresolved
 work is narrower: unrestricted evidence property/extensionality, a principled
@@ -269,7 +281,14 @@ reproducible/prunable rather than durable authorities) are:
 - `logs/probes/evogj_grpd_cat_core_completion_full-20260717-033625.log`;
 - `logs/probes/evogj_type_equiv_to_omega_bridge_full-20260717-033909.log`;
 - `logs/probes/evogj_omega_type_equiv_bidirectional_bridge_full-20260717-034247.log`;
-- `logs/probes/evogj_outer_facade_sigma_comparison_full-20260717-034636.log`.
+- `logs/probes/evogj_outer_facade_sigma_comparison_full-20260717-034636.log`;
+- `logs/probes/evogj_eq1_general_object_path_adapter_full-20260717-045205.log`;
+- `logs/probes/evogj_eq1_general_object_path_adapter_full-20260717-045217.log`.
+
+The corresponding latest candidate source is
+`tmp/probes/evogj_eq1_general_object_path_adapter_full.lp`. It is ignored
+review evidence and must be reproduced at the then-current owner before
+promotion.
 
 The corresponding negative/replacement evidence is recorded in:
 
@@ -303,7 +322,7 @@ the then-current owner before promotion.
 | Global coherence | high for the proposed MVP architecture; markedly more natural than the current parallel equality/certificate/decoder ownership |
 | Mathematical correctness | high for the fixed-arrow and groupoid/`TypeEquiv` fragment; conditional at unrestricted omega level on the intended coinductive/greatest-fixed-point semantics |
 | Syntactic correctness | high for the probed core; exact promoted names, locations, and implicit slots remain implementation work |
-| Computational feasibility | high for construction, projection, reflexivity, explicit path witnesses, Cat self-identity, and both groupoid-equivalence bridges; medium for raw silently coerced path observers |
+| Computational feasibility | high for construction, projection, reflexivity, the general object-path adapter, explicit literal-path witnesses, Cat self-identity, and both groupoid-equivalence bridges; medium-low only for observers applied directly to an unreified raw identity view |
 | Completeness for a minimal MVP | credible but incomplete until direct owners replace decoders, a nonliteral groupoidal consumer exists, and public examples use only the new interface |
 | Reusability | promising: native fixed-arrow elimination plus stable first-class elimination and Sigma comparison support library construction; not yet demonstrated in active public code |
 | Expressiveness versus ordinary HoTT | intended to cover equality, equivalence, univalence, and structured transport with stronger directed/omega-categorical primitives; still lacks ordinary broad HIT/reflector coverage and does not automatically structure arbitrary raw motives |
@@ -628,11 +647,26 @@ omega_equiv_along_right_cell_EQ1(u)
       id_y).
 ```
 
-If equality and omega-equivalence are directly comparable, each body is an
-identity/coercion view of `left_law(u)` or `right_law(u)`. Until the direct
-equation is promoted, these compatibility views may temporarily use the
-existing encoders. That temporary dependency must be removed before decoder
-retirement is declared complete.
+If equality and omega-equivalence are directly comparable, the cheapest
+typing-only body is the literal identity view of `left_law(u)` or
+`right_law(u)`. That view does not change the term head and therefore does not
+make omega-equivalence projections compute. A compatibility view intended to
+support recursive observation must instead use the explicit general
+object-path package described below:
+
+```text
+omega_equiv_along_left_cell_EQ1(u)
+  := object_path_equiv_EQ1(Hom_cat C x x,left_law(u))
+
+omega_equiv_along_right_cell_EQ1(u)
+  := object_path_equiv_EQ1(Hom_cat C y y,right_law(u)).
+```
+
+This is a transparent construction from `path_to_hom`, inverse-path action,
+and J-derived cancellation laws, not a replacement opaque encoder. Until that
+adapter is promoted, these computational compatibility views may temporarily
+use the existing encoders. That temporary dependency must be removed before
+decoder retirement is declared complete.
 
 The reverse direction already exists conceptually in the current source:
 current recursive D0 cells are decoded into `omega_equiv_left_law` and
@@ -757,6 +791,53 @@ not become runtime-convertible, and a negative primitive-`J` control remains
 stuck on canonical facade reflexivity because that term is deliberately not
 generic `eq_refl`. This is operational evidence, not a semantic proof.
 
+#### Classifier identity views versus computational adapters
+
+The generic unification equation allows a named typing view with a literal
+identity body:
+
+```text
+as_omega_equiv_EQ1(p : x =_{Obj C} y)
+  : OmegaEquiv_EQ1(C,x,y)
+  := p.
+```
+
+This is a zero-cost proof-time view, not a computational cast. Lambdapi does
+not insert a package, change the head of `p`, synthesize fixed-map evidence, or
+add beta rules for `omega_equiv_to`, inverse projections, laws, or the facade
+eliminator. The inverse typing view can likewise be literal identity.
+
+When those observations are required, use a separately named, defined
+adapter:
+
+```text
+object_path_equiv_EQ1(p)
+  := omega_equiv_pack_EQ1(
+       path_to_hom(C,p),
+       object_path_equiv_along_EQ1(p)),
+```
+
+where the selected left and right inverse arrows are
+`path_to_hom(C,path_sym(p))` and the cancellation laws are derived by
+`ind_eqr`. This adapter is constructed from existing semantic owners; it is
+neither a new opaque encoder nor a bodyless univalence capability.
+
+The owner-position probe establishes the intended separation:
+
+- `as_omega_equiv_EQ1(p) -> p` definitionally;
+- `omega_equiv_to_EQ1(object_path_equiv_EQ1(p)) -> path_to_hom(C,p)`;
+- both inverse projections expose `path_to_hom(C,path_sym(p))`;
+- both law projections expose their named J-derived witnesses;
+- `omega_equiv_to_EQ1(as_omega_equiv_EQ1(p))` deliberately remains stuck for
+  a variable `p`;
+- quiet and warning-enabled checks pass at the unchanged `971/157` inventory.
+
+Thus “decoder-free” means that no opaque equivalence/round-trip capability is
+needed. It does not mean that proof-time classifier equality automatically
+reifies a raw term into an observable record. Public APIs and examples must
+say whether they need only the identity type view or the computational
+adapter.
+
 The target runtime policy is hybrid:
 
 - preserve or restate direct runtime equality for rigid universe owners where
@@ -807,24 +888,29 @@ observers. The MVP observer matrix is:
 | same explicit package | left/right inverse observers expose `path_sym(p)` |
 | same explicit package | cancellation laws expose the selected J-derived inverse/unit theorems |
 | raw `p : x =_A y` merely accepted as `OmegaEquiv(Path_cat A,x,y)` | classifier use is allowed; projections are not promised to compute in the initial MVP |
+| general object path `p : x =_{Obj C} y` through `as_omega_equiv(p) := p` | identity type view only; no new observer computation |
+| same path through `object_path_equiv(p)` | `to` exposes `path_to_hom(C,p)`; inverses and laws expose the defined path/J data |
 | Product-category identity | compare with component identities proof-time; do not globally reduce generic `id` to a pair |
-| equality law used as next-hom equivalence | no decoder; it is accepted directly by the classifier equation |
+| equality law used as next-hom equivalence | identity view suffices for typing; use `object_path_equiv(law)` when recursive observers must compute; no opaque decoder |
 | non-reflexive arbitrary equivalence used by primitive `J` | typechecks as equality, but `J` need not runtime-reduce |
 
 Every promoted classifier equation must name the observers that make its
 consumer behavior meaningful. A bare unification rule with no operational
 consumer is not completion.
 
-There are two deliberately different interfaces here. Direct classifier
+There are three deliberately different interfaces here. Direct classifier
 unification permits equality and equivalence terms to be supplied to APIs
-without a decoder. Computational observation of an arbitrary path uses the
-canonical explicit constructor `path_equiv(p)`. A preliminary direct rule
+without a decoder, and a named `as_omega_equiv(p) := p` may expose that literal
+identity view. General computational observation uses the constructed
+`object_path_equiv(p)` package. Literal path categories additionally use the
+specialized `path_equiv(p)` package when the forward arrow should compute all
+the way to `p`, rather than only to `path_to_hom(Path_cat A,p)`. A preliminary direct rule
 `omega_equiv_to(p) -> p` overlapped with the ordinary package projection; a
 package-to-path collapse then produced additional divergent pairs with the
 evidence projection and eliminator. Raw-coerced projection computation is
 therefore deferred until a property/quotient/eta account supplies a joining
 principle. The plan must not conceal this boundary by calling the explicit
-constructor a definitionally silent coercion.
+constructors definitionally silent coercions.
 
 ### F. Exact `Path_cat` join
 
@@ -863,7 +949,12 @@ x =_{Obj(Path_cat A)} y:
   object univalence         gives OmegaEquiv(Path_cat A,x,y).
 ```
 
-Term computation requires a canonical path-equivalence witness:
+The general `object_path_equiv` adapter specializes here with forward arrow
+`path_to_hom(Path_cat A,p)`. That is a valid reusable equivalence package, but
+the selected proof-time comparison
+`Core_incl_func(Path_cat A) == id` does not make this forward arrow
+runtime-reduce to the raw variable `p`. Literal path categories therefore have
+a stronger canonical path-equivalence witness:
 
 ```text
 path_equiv_along_EQ1(p)
@@ -878,9 +969,9 @@ reflexive. The explicit-field/J-law construction passed the full probe.
 Required observers on this explicit constructor include:
 
 ```text
-omega_equiv_to_EQ1(p)        -> p
-omega_equiv_left_inv_EQ1(p)  -> path_sym(p)
-omega_equiv_right_inv_EQ1(p) -> path_sym(p).
+omega_equiv_to_EQ1(path_equiv_EQ1(p))        -> p
+omega_equiv_left_inv_EQ1(path_equiv_EQ1(p))  -> path_sym(p)
+omega_equiv_right_inv_EQ1(path_equiv_EQ1(p)) -> path_sym(p).
 ```
 
 These equations are for `path_equiv(p)`, not for an arbitrary raw `p` silently
@@ -1231,26 +1322,37 @@ resolved.
 
 ### O. Encoder/decoder retirement
 
-Direct equality/equivalence comparison should make most foundational
-encoders and decoders identity facades:
+Direct equality/equivalence comparison supports literal identity **type
+views**:
 
 ```text
-idtoequiv_cat(p) := p
-equivtoid_cat(e) := e.
+as_omega_equiv(p) := p
+as_equality(e)    := e.
 ```
 
-The same applies at the groupoid universe once its direct comparison is
-selected. This does not mean every current symbol should be deleted at once.
-The migration should classify current APIs into four groups:
+These bodies are valid because of proof-time classifier comparison. They do
+not reify a path into the facade constructor and do not supply observer beta.
+Consequently, a current encoder such as `idtoequiv_cat` must not be replaced
+blindly by the identity view if a consumer expects its forward arrow, inverse,
+law, or eliminator behavior. Its computational role should instead be
+redefined through the transparent `object_path_equiv` package, possibly under
+a clearer public name; only its opaque univalence-capability role is retired.
+
+The same distinction applies at the groupoid universe once its direct
+comparison is selected. This does not mean every current symbol should be
+deleted at once. The migration should classify current APIs into five groups:
 
 1. **retained semantic owners**: fixed-arrow equivalence, projections,
-   path/core action, `PathOut`, truncation and dimension data;
-2. **temporary compatibility wrappers**: current encoders/decoders used while
+   `path_to_hom`, the defined object-path adapter, path/core action, `PathOut`,
+   truncation and dimension data;
+2. **identity type views**: literal `lambda x, x` facades whose only promise is
+   classifier-level use;
+3. **temporary compatibility wrappers**: current encoders/decoders used while
    old and new evidence coexist;
-3. **derived library theorems**: contractible-fibre `TypeEquiv`, explicit
+4. **derived library theorems**: contractible-fibre `TypeEquiv`, explicit
    round trips, transport squares, and comparison theorems useful to external
    HoTT-style consumers;
-4. **retirable duplicate capabilities**: global assumptions and decoder
+5. **retirable duplicate capabilities**: global assumptions and decoder
    packages whose only role is to mediate classifiers now identified directly.
 
 `TypeEquiv` should not necessarily disappear from the library. Contractible
@@ -1269,7 +1371,9 @@ No decoder is retired until:
 
 - every active consumer is relocated;
 - the direct classifier equation is active at the required layer;
-- reflexivity and path observers compute/compare as intended;
+- identity views and computational adapters are named separately;
+- reflexivity, general object-path, and literal path-category observers
+  compute/compare at their documented boundaries;
 - old-to-new and new-to-old migration examples pass;
 - negative controls ensure no accidental runtime proof erasure;
 - reports and examples no longer describe the decoder as foundational.
@@ -1283,6 +1387,8 @@ No decoder is retired until:
 | `Eq(Obj Grpd_cat,A,B)` versus groupoid equivalence | proof-time first; runtime candidate second | old timeout used a different transparent payload |
 | `OmegaEquiv(Path_cat A,x,y) == Eq(A,x,y)` | proof-time shaped join first | resolves exact type-level diamond without forcing a runtime facade |
 | same `Path_cat` join under selected facade | deferred runtime candidate | classifier orientation alone is plausible, but package/projection joins have not passed |
+| `as_omega_equiv(p) := p` | transparent identity type view | exposes exactly what proof-time classifier comparison provides; promises no observer computation |
+| general `object_path_equiv(p)` | transparent explicit package from `path_to_hom`, inverse path, and J laws | gives reusable observer computation without an opaque encoder |
 | explicit `path_equiv(p)` observations | runtime constructor/projection beta | gives the intended path computation without collapsing every raw path into a package |
 | raw path silently accepted as equivalence | type comparison only in initial MVP | direct projection rules currently create a critical pair |
 | `eq_refl` versus canonical equivalence package | observer projection rules and/or narrow proof-time comparison | preserve generic proof provenance |
@@ -1291,7 +1397,7 @@ No decoder is retired until:
 | `Core_incl_func(Path_cat A)` versus identity functor | narrow proof-time candidate; runtime only after projection audit | canonical groupoidality introduction |
 | Product identities versus component pair | proof-time comparison | preserve current identity normal-form policy |
 | Sum outer/component reflexivity | two general proof-time comparisons | replace action-specific bridge proliferation |
-| equality law used as recursive equivalence | silent type comparison; no decoder | central ownership reversal |
+| equality law used as recursive equivalence | identity view for typing; explicit object-path package for computation | central ownership reversal without pretending unification inserts a record |
 
 Every unification rule is trusted proof-time authority. Lambdapi performs no
 sanity check on user unification rules. Every candidate therefore needs:
@@ -1310,13 +1416,14 @@ sanity check on user unification rules. Every candidate therefore needs:
 | `OmegaEquivAlong_D0(C,f)` | replace as primary representation with equality-law fixed-map evidence; retain during migration |
 | public `OmegaEquivAlong` alias | preserve public role; retarget after evidence migration |
 | `omega_equiv_along_left/right_inv_D0` | preserve semantics and names without staging suffix after migration |
-| `omega_equiv_along_left/right_cell_D0` | become derived compatibility views of equality laws |
+| `omega_equiv_along_left/right_cell_D0` | become derived compatibility views that apply the transparent general object-path adapter to equality laws when recursive observers are required |
 | `omega_equiv_left/right_law` | move from decoder-derived theorem to primary evidence projection |
 | public `OmegaEquiv := Sigma f, Along(f)` | migrate to selected stable dependent-pair facade; retain transparent Sigma as a propositionally equivalent library view |
 | `omega_equiv_to`/`omega_equiv_evidence` transparent aliases | replace with stable facade observers and constructor/reflexivity betas |
 | `CatUnivalence`/`CatUnivalenceByDecoder` | temporary compatibility types; expected foundational retirement |
 | `cat_univalence`/`cat_univalence_by_decoder` | expected retirement after direct comparison and consumer migration |
-| `idtoequiv_cat`/`omega_equiv_path` | identity/coercion compatibility wrappers, then retire or retain as library aliases |
+| `idtoequiv_cat` | split its roles: retain/redefine the computational operation through transparent `object_path_equiv`; replace classifier-only uses by literal identity view; retire opaque capability dependencies |
+| `omega_equiv_path` | identity type view where only reverse typing is required; retain a named theorem/library interface only for consumers needing explicit provenance or round trips |
 | `GrpdPathView := TypeEquiv` | replace as primary universe identity with direct omega-equivalence; retain theorem-level comparison |
 | incomplete `Grpd_cat` hom/identity/composition surface | add function-path hom runtime owner and stable pointwise identity/composition proof-time views before direct Grpd migration |
 | groupoid `idtoequiv`/decoder capabilities | migrate like categorical decoders after direct Grpd comparison |
@@ -1324,7 +1431,7 @@ sanity check on user unification rules. Every candidate therefore needs:
 | `OmegaEquivAlongObservation_D0` and dimension views | retain as migration/debug evidence until new extensionality/property theorem; then reassess |
 | `IsDiscreteCat` | conceptually factor as object-set evidence plus `IsGroupoidalCat`; preserve active compatibility |
 | `Core_cat`/`Core_incl_func` | retain; add canonical `Path_cat` identity comparison |
-| `path_to_hom` | retain or redefine as the forward-arrow observer of a path used directly as equivalence |
+| `path_to_hom` | retain as the forward arrow of the defined general object-path adapter; do not expect the identity type view alone to expose it |
 | `path_ind_sec`/`PathInd_*` | retain as primary structured directed/groupoidal induction owner |
 | general fibrancy/structured-J prerequisite track | narrow to construction of structured motives and concrete shaped projection joins |
 | `ObsAction`/`ObsDAction` | preserve existing evidence; demote from direct-univalence MVP pending consumer inventory |
@@ -1340,10 +1447,14 @@ decoded equality-valued OmegaEquivAlong record
         |          +--> pack/projections/dependent eliminator
         |          +--> propositional eta/Sigma comparison
         |          +--> generic proof-time object-univalence candidate
+        |          +--> general object-path computational adapter
         |
         +--> old/new evidence bridges
         |
-        +--> explicit Path_cat witness + shaped classifier join
+        +--> general object-path adapter from Core_incl/J
+        |          +--> computational recursive-cell compatibility views
+        |
+        +--> specialized Path_cat witness + shaped classifier join
         |          +--> Core_incl(Path_cat) == id
         |                     +--> IsGroupoidalCat(Path_cat)
         |
@@ -1435,18 +1546,25 @@ Using the Phase-1 candidate:
 5. define the transparent Sigma comparison view and prove both round trips;
 6. add reflexive package evidence and narrow reflexivity observers, using `_`
    for the inferred equality classifier on rule LHSs;
-7. test a local generic proof-time classifier comparison, typed use in both
-   directions, runtime non-conversion, and primitive-J negative control;
-8. compare declaration count, warning inventory, eliminability, public
+7. construct the general `object_path_equiv_EQ1(p)` package from
+   `path_to_hom`, inverse paths, and J-derived cancellation laws, and test all
+   forward/inverse/law projections;
+8. under a local generic proof-time classifier comparison, test literal
+   `as_omega_equiv_EQ1(p) := p` typing in both directions, runtime
+   non-conversion, stuck raw observers, and the primitive-J negative control;
+9. compare declaration count, warning inventory, eliminability, public
    construction, and performance with the reproduced probe baseline.
 
 Exit criterion: the selected facade and Sigma comparison are promoted with
-measured evidence and the new eliminator is explicitly documented as trusted
-record-like kernel surface.
+measured evidence, the general object-path adapter is defined rather than
+assumed, identity views are not confused with computational reification, and
+the new eliminator is explicitly documented as trusted record-like kernel
+surface.
 
 ### Phase 3: `Path_cat` join and canonical groupoidality
 
-1. define `path_equiv_along_EQ1(p)`;
+1. retain the general object-path adapter and define the stronger literal
+   `path_equiv_along_EQ1(p)` specialization;
 2. use explicit `path_sym(p)` inverse fields and J-derived cancellation laws;
 3. establish arbitrary-path and reflexive projection computation;
 4. add the proof-time classifier join
@@ -1501,12 +1619,14 @@ Before migration:
    `omega_equiv_left/right_law`;
 2. define equality-law to old-D0 using temporary current encoders at the two
    hom-law fields;
-3. compare both representations on reflexivity, Product, opposite, and one
+3. replace those temporary encoders with the defined general object-path
+   adapter and verify recursive-cell observers at the next hom;
+4. compare both representations on reflexivity, Product, opposite, and one
    D0b hom-action consumer;
-4. state round trips propositionally where current evidence extensionality
+5. state round trips propositionally where current evidence extensionality
    permits;
-5. do not assume a round trip that is blocked by current opaque evidence;
-6. identify every current consumer that genuinely needs recursive cells
+6. do not assume a round trip that is blocked by current opaque evidence;
+7. identify every current consumer that genuinely needs recursive cells
    rather than equality laws.
 
 Exit criterion: a migration table backed by executable examples and an honest
@@ -1516,19 +1636,22 @@ list of any unproved evidence-equality direction.
 
 1. probe the generic variable-`C` proof-time equation at owner position;
 2. test typed firing, non-firing, and runtime non-conversion;
-3. enumerate overlaps with `Path_cat`, Product, Sigma, Functor, and universe
+3. expose the optional literal identity views in both directions and retain a
+   negative showing that they do not acquire package observers;
+4. enumerate overlaps with `Path_cat`, Product, Sigma, Functor, and universe
    object computation;
-4. preserve the shaped `Path_cat` join;
-5. re-target the existing rigid Cat-universe runtime rule to the new
+5. preserve the shaped `Path_cat` join;
+6. re-target the existing rigid Cat-universe runtime rule to the new
    representation and test self-normalization;
-6. promote Grpd-universe proof-time direct identity only over the completed
+7. promote Grpd-universe proof-time direct identity only over the completed
    Phase-4 hom boundary and bidirectional `TypeEquiv` comparison;
-7. probe Grpd-universe runtime identity only after the proof-time candidate,
+8. probe Grpd-universe runtime identity only after the proof-time candidate,
    self case, and bridge projections are understood;
-8. add the selected observer matrix for packages, reflexivity, and explicit
-   path-equivalence constructors, retaining the raw-path negative boundary;
-9. record the semantic/trust classification in Foundations and the plan;
-10. state at least the finite-`NCat`/stratified approximant interpretation of
+9. add the selected observer matrix for packages, reflexivity, the general
+   object-path adapter, and explicit literal-path constructors, retaining the
+   raw identity-view negative boundary;
+10. record the semantic/trust classification in Foundations and the plan;
+11. state at least the finite-`NCat`/stratified approximant interpretation of
     the generic equation before describing it as foundationally correct.
 
 Exit criterion: one selected generic comparison, selected rigid universe
@@ -1538,17 +1661,22 @@ owners, and no unexplained classifier equation lacking term consumers.
 
 1. change new consumers to use equality directly as `OmegaEquiv` and vice
    versa;
-2. reduce `idtoequiv_cat` and `omega_equiv_path` to compatibility aliases or
-   remove their foundational use;
-3. migrate groupoid universe consumers away from contractible-fibre identity;
-4. retain explicit `TypeEquiv` comparison theorems in the library;
-5. retire duplicate global decoder capability inhabitants only after consumer
+2. migrate classifier-only consumers to literal identity views, while
+   migrating observer consumers to the transparent general object-path
+   adapter;
+3. redefine or rename `idtoequiv_cat` as that constructed adapter rather than
+   replacing its computational consumers by a stuck identity view;
+4. reduce `omega_equiv_path` to an identity compatibility view where its
+   explicit theorem-level provenance is not needed;
+5. migrate groupoid universe consumers away from contractible-fibre identity;
+6. retain explicit `TypeEquiv` comparison theorems in the library;
+7. retire duplicate global decoder capability inhabitants only after consumer
    inventory reaches zero;
-6. keep round-trip theorem names only where external compatibility warrants
+8. keep round-trip theorem names only where external compatibility warrants
    them;
-7. update examples to demonstrate direct classifier use, reflexivity
-   projections, and explicit path-equivalence projections without claiming
-   the unresolved raw-path projection equation.
+9. update examples to demonstrate identity type views, general object-path
+   reification, reflexivity projections, and specialized literal-path
+   projections without claiming the unresolved raw-path projection equation.
 
 Exit criterion: direct equality/equivalence is the primary public interface;
 no foundational theorem requires an arbitrary decoder capability.
@@ -1690,7 +1818,9 @@ Every architectural candidate should be evaluated against this matrix.
 | Elimination | native fixed-arrow and primitive first-class eliminators have constructor beta; facade eta/Sigma comparison are propositional |
 | Fixed-map use | evidence can be attached to an already-named arrow without repackaging ambiguity |
 | First-class use | package forward/evidence observers compute |
-| Higher iteration | a law is usable at the next hom level without a duplicated recursive body |
+| Identity type view | `as_omega_equiv(p)` is literally `p`, typechecks only through the unifier, and acquires no unclaimed observer computation |
+| General object-path adapter | forward/inverse/law observers compute through `path_to_hom`, inverse paths, and J-derived witnesses without an opaque encoder |
+| Higher iteration | a law is usable at the next hom level by identity view for typing and by explicit object-path adapter for recursive observation, without a duplicated stored recursive body |
 | Path-category join | classifier and explicit `path_equiv` observers agree with ordinary paths; raw-coerced projection remains a negative control |
 | Facade critical pairs | package, `eq_refl`, explicit path, raw path, evidence projection, and eliminator reduction orders are tested separately |
 | Generic univalence | typed direct use works while runtime non-conversion remains classified |
@@ -1717,37 +1847,43 @@ The equality-valued omega-equivalence/groupoidal-J MVP is complete only when:
    Sigma comparison;
 4. equality of category objects is directly comparable with first-class
    omega-equivalence at the selected runtime/proof-time boundary;
-5. equality laws are usable directly as next-hom equivalences without a
-   decoder capability;
-6. `Path_cat` has a coherent classifier join and explicit `path_equiv`
+5. literal identity views across that boundary are distinguished from
+   computational adapters and are not advertised as inserting casts or
+   observer beta;
+6. a transparent general object-path adapter is defined from `path_to_hom`,
+   inverse paths, and J-derived laws, with computational forward/inverse/law
+   observations and no opaque encoder capability;
+7. equality laws are usable as next-hom equivalences by identity view for
+   typing and explicit reification for recursive observation;
+8. `Path_cat` has a coherent classifier join and explicit `path_equiv`
    term-observer computation, with raw-coerced behavior honestly classified;
-7. `IsGroupoidalCat(Path_cat A)` is constructible;
-8. at least one nonliteral internally groupoidal category is consumed;
-9. structured groupoidal `J` is expressed through existing `PathOut` action;
-10. primitive `ind_eqr` remains available for unstructured motives;
-11. rigid Cat-universe direct equality remains finite under the new payload;
-12. the `Grpd_cat` function-path hom boundary and proof-time pointwise
+9. `IsGroupoidalCat(Path_cat A)` is constructible;
+10. at least one nonliteral internally groupoidal category is consumed;
+11. structured groupoidal `J` is expressed through existing `PathOut` action;
+12. primitive `ind_eqr` remains available for unstructured motives;
+13. rigid Cat-universe direct equality remains finite under the new payload;
+14. the `Grpd_cat` function-path hom boundary and proof-time pointwise
     identity/composition comparisons are active;
-13. both `TypeEquiv` comparison directions are derived without a new opaque
+15. both `TypeEquiv` comparison directions are derived without a new opaque
     bridge capability, and the existing `is_equiv_map_by_inverse` theorem is
     proved or explicitly retained in the trust ledger;
-14. Grpd-universe direct identity has a selected, explicitly trusted owner;
-15. foundational encoder/decoder capability duplication has been migrated or
+16. Grpd-universe direct identity has a selected, explicitly trusted owner;
+17. foundational encoder/decoder capability duplication has been migrated or
     retired;
-16. `TypeEquiv` remains available as a theorem/library formulation rather than
+18. `TypeEquiv` remains available as a theorem/library formulation rather than
     the primary universe identity normal form;
-17. evidence property is proved at every scope claimed by truncation results;
-18. old conditional `IsNCat` truncation is discharged only where the property
+19. evidence property is proved at every scope claimed by truncation results;
+20. old conditional `IsNCat` truncation is discharged only where the property
     theorem supports it;
-19. former-specific action bases are either justified by concrete consumers
+21. former-specific action bases are either justified by concrete consumers
     or demoted;
-20. all changed diagnostics, examples, comments, reports, catalog, health,
+22. all changed diagnostics, examples, comments, reports, catalog, health,
     warning, audit, and CI evidence are synchronized;
-21. no claim of consistency, stratification, normalization, or canonicity is
+23. no claim of consistency, stratification, normalization, or canonicity is
     inferred from Lambdapi acceptance alone;
-22. a finite-dimensional/stratified semantic sanity statement explains the
+24. a finite-dimensional/stratified semantic sanity statement explains the
     intended approximants of the generic univalence equation;
-23. an end-user example builds a small library construction using only public
+25. an end-user example builds a small library construction using only public
     equality, equivalence, groupoidality, and structured-motive APIs.
 
 ## Feasibility Assessment
@@ -1758,6 +1894,8 @@ The equality-valued omega-equivalence/groupoidal-J MVP is complete only when:
 | transparent outer Sigma as direct normal form | high mathematically | fails the generic term-decoding consumer | rejected operationally |
 | stable primitive dependent-pair facade | high as a Sigma presentation | demonstrated with elimination, eta, and Sigma comparison | high, with explicit trusted-eliminator cost |
 | package/reflexivity observers | high | demonstrated without warning delta | high |
+| literal identity type view across generic unification | high as classifier equality | demonstrated as `lambda p, p`; observers intentionally remain stuck | high for typing, none claimed for computation |
+| transparent general object-path adapter | high by path/core functoriality and J | demonstrated with forward/inverse/law computation at unchanged `971/157` warnings | high |
 | explicit `path_equiv` observers | high | demonstrated without warning delta | high |
 | raw silently coerced path observers | high extensionally | current direct rules do not join | medium-low until extensionality design |
 | `Path_cat` classifier join | high | demonstrated as proof-time equation | high |
@@ -1844,9 +1982,11 @@ delete compatibility code before beginning unrelated new former/HIT work.
 ### Risk 11: raw paths and explicit packages are collapsed unsafely
 
 Mitigation: keep the shaped classifier join proof-time, compute observers on
-`path_equiv(p)`, retain a negative raw-path control, and reject the measured
-package-collapse/runtime-projection rules until a genuine joining theorem and
-all eliminator critical pairs pass.
+the transparent general `object_path_equiv(p)` package and the stronger
+literal `path_equiv(p)` specialization, retain a negative showing that the
+identity view `as_omega_equiv(p) := p` acquires no observer beta, and reject
+the measured package-collapse/runtime-projection rules until a genuine joining
+theorem and all eliminator critical pairs pass.
 
 ### Risk 12: operational acceptance is mistaken for semantic univalence
 
@@ -1867,6 +2007,7 @@ the following mathematical and migration questions explicitly scoped:
 | `IsGroupoidalCat(C) := EquivAlong(Core_incl_func C)` | accepted as leading reusable definition; pointwise all-arrows form should be a comparison theorem |
 | Transparent Sigma versus stable facade | resolved in favor of the stable facade by the term-decoding probe; Sigma retained as comparison view |
 | Generic object univalence owner | proof-time generic rule selected provisionally, with rigid runtime universe owners and shaped proof-time joins |
+| Type view versus computational adaptation | literal identity view selected for classifier-only use; transparent `object_path_equiv` package selected for general observations; no opaque encoder required |
 | Direct Grpd-universe representation | complete `Grpd_cat` and use omega-equivalence; proof-time owner first; rigid runtime orientation remains open |
 | Minimal path observer interface | explicit `path_equiv(p)` computes; raw silently coerced projections are deferred |
 | `Core_incl_func(Path_cat A)` orientation | proof-time comparison selected; runtime fold unnecessary for the MVP |
@@ -1893,6 +2034,7 @@ and should not be duplicated here.
 | `EVOGJ-ALONG-EQ-LAWS` | proposed first implementation slice; preliminary probe passed | decoded equality-valued fixed-arrow representation | adoption | reproduce, promote, and pass permanent proportional gates |
 | `EVOGJ-PACKAGING-FORK` | decision selected; promotion blocked on first slice | promote stable facade and Sigma comparison | equality-law candidate | preliminary facade/elimination/round-trip probe passed |
 | `EVOGJ-STABLE-OBSERVERS` | partially probed; blocked on packaging promotion | package/reflexivity/explicit-path observations | packaging candidate | package/reflexivity passed; raw coerced path remains deferred |
+| `EVOGJ-OBJECT-PATH-ADAPTER` | preliminary probe passed; blocked on packaging promotion | separate literal identity type view from transparent computational reification through `path_to_hom` and J | stable facade and equality-law evidence | reproduce general adapter, forward plus four evidence observations, identity-view negative, and warning-neutral result |
 | `EVOGJ-PATH-CAT-JOIN` | preliminary proof-time probe passed; blocked on owners | identify path-category equivalence with path equality | equality-law package | reproduce typed join and explicit constructor computation |
 | `EVOGJ-PATH-CAT-GROUPOIDAL` | preliminary probe passed; blocked on join promotion | prove `IsGroupoidalCat(Path_cat A)` | path join/core identity | canonical witness passed; nonliteral consumer remains |
 | `EVOGJ-OLD-NEW-BRIDGE` | blocked on equality-law candidate | migrate current D0 evidence | candidate plus current decoder | executable bridges and honest round-trip status |
@@ -1926,6 +2068,9 @@ Implementation must follow `AGENTS.md` and the current SOP. In particular:
 - classify `unif_rule` as proof-time authority, never runtime computation;
 - validate unification-rule firing with typed equality and retain conversion
   negatives;
+- for every classifier boundary, test identity-view typing separately from
+  explicit adapter/constructor observations; never infer term reification or
+  observer beta from successful unification;
 - test both reduction orders for every shaped join;
 - compare warning inventories rather than using raw counts as a semantic veto;
 - add focused positive and negative checks for every promoted owner;
