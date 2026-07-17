@@ -6,9 +6,10 @@ Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
 derived native-EQ1 hom-action/groupoidality extension, and
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
-evidence-property and finite-`NCat` object-truncation extension. Reports
-explain current status, mathematics, notation, implementation plans, and
-historical decisions.
+evidence-property and finite-`NCat` object-truncation extension.
+`emdash3_2_sum_observational_action.lp` retains the former-specific Sum action
+as a library module rather than kernel infrastructure. Reports explain current
+status, mathematics, notation, implementation plans, and historical decisions.
 
 ## Current Orientation
 

@@ -19,6 +19,9 @@ detailed probe evidence.
 - `emdash3_2_eq1_evidence_property.lp`: one-way transparent native-EQ1
   evidence-property, retract-truncation, and finite-`NCat` object-truncation
   layer; it imports the kernel and hom-action extension, never conversely.
+- `emdash3_2_sum_observational_action.lp`: one-way library module retaining
+  the componentwise Sum `ObsAction`, its equality comparison, and four
+  proof-time bases; no kernel or univalence consumer imports it.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -273,6 +276,15 @@ The older `OmegaEquivAlongEvidenceProp_D0` and
 `ncat_obj_trunc_from_evidence_prop` remain public compatibility experiments
 for the opaque D0 certificate, but they are no longer the active native-EQ1
 proof boundary and no inhabitant of the D0 capability is claimed.
+
+The former-specific componentwise Sum action has been demoted without a
+semantic rewrite. `sum_map` remains the ordinary eliminator-owned kernel map;
+the two action bases, four proof-time comparisons, componentwise `eq_ap`
+theorems, and registered `sum_obs_action` were mechanically relocated to
+`emdash3_2_sum_observational_action.lp`. Only its diagnostics and reviewer
+example import that one-way module. This preserves the useful library example
+while removing action-specific proof-time authority from the foundational
+kernel; focused kernel/module/check/example probes all pass.
 
 The catalog now has 1,896 checks across 69 areas. The kernel has 21,986 lines,
 892 symbols, 597 rules, and 67 unification rules; the derived extension has
@@ -1071,17 +1083,26 @@ Active equality/equivalence staging includes:
   the same reduced classifier cannot trigger reflexive computation. Remaining
   elementary observational identity, broader no-confusion, higher action for
   other formers, canonicity, and categorical universal properties remain
-  separate. The canonical `sum_map` has a componentwise registered
-  `sum_obs_action`: equal tags use the supplied summand registrations, mixed
-  tags use Empty, and agreement with generic `eq_ap` is propositional across a
-  narrowly classified proof-time reflexive basis while runtime provenance is
-  retained. `nat_succ_obs_action` is the first recursive-inductive
+  separate. The kernel retains the eliminator-owned canonical `sum_map`; its
+  componentwise `sum_obs_action`, equality comparisons, and four proof-time
+  bases are checked in `emdash3_2_sum_observational_action.lp` as library
+  surface, with no kernel or univalence consumer. `nat_succ_obs_action` is the
+  first recursive-inductive
   registration: its selected action keeps the exposed predecessor path, while
   a stable basis and generic J prove agreement with successor `eq_ap` without
   runtime proof collapse or unification-transitivity. The transparent
   `nat_succ_ind_eqr` facade separately routes successor-indexed motives through
   predecessor J and computes only at component reflexivity; outer reflexivity,
   the action basis, and generic J keep their existing runtime boundaries;
+- generic `ObsAction`/`ObsDAction` register selected computation for a raw
+  groupoid function or dependent section and prove agreement with
+  `eq_ap`/`eq_apd`. They are not the structured groupoidal-J transport owner:
+  `PathOut` consumes an already functorial `Catd` motive. Replacing the
+  registry would first require a consumer-driven constructor from raw
+  function-plus-path-action data to an iterable
+  `Path_cat(A) -> Path_cat(B)` functor. Nat and PathRecord remain real
+  consumers; the registry is retained library-facing computation, not a
+  second univalence or fibrancy foundation;
 - the named dependent `PathRecord_grpd(A)` representative, implemented by a
   parametrized one-constructor native carrier with direct source, target, and
   dependent witness projections plus a generated-induction facade; its active

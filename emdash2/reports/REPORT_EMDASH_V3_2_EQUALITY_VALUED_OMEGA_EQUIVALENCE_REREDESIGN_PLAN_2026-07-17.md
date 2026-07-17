@@ -3,12 +3,12 @@
 Date: 2026-07-17
 Last reviewed: 2026-07-17
 Plan-ID: EMDASH-V3-2-EQUALITY-VALUED-OMEGA-EQUIVALENCE-REREDESIGN-2026-07-17
-Depends-On: REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
+Depends-On: REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_sum_observational_action.lp; emdash3_2_checks.lp
 Supersedes: the equality, omega-equivalence, direct-univalence, internal-groupoidality, and structured-PathOut/J tracks of REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; no unaffected H0, truncation, dimension, directed, or former-action work
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-independent-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e16-d397-7a60-9765-1f35e36e20f7; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e5a-9a89-7d01-a92f-f4d15f14c77e; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e9e-4c44-7e61-9320-bfc602b50d64
-Status: adopted 2026-07-17 as the active implementation overlay for equality, omega-equivalence, direct univalence, internal groupoidality, and structured-`PathOut`/`J`; Phases 1 through 5, the selected Phase-6 boundary, and the selected Phase-9 forward boundary are promoted; Phase 7 decoder migration remains active; Phase 8 is complete with a transparent dimension-free native-EQ1 evidence-property theorem and unconditional finite-`NCat` object truncation in `emdash3_2_eq1_evidence_property.lp`; coherent groupoidality implies the promoted pointwise all-arrows-equivalent view, while its converse remains a separate omega-functor assembly/extensionality gate
+Status: adopted and implemented 2026-07-17 at the selected operational MVP boundary; Phases 1 through 9 and 11 are complete at their stated selected boundaries, Phase 10 is deliberately deferred until a concrete core-universe motive consumer exists, and Phase 12 consolidation is in final validation; the native EQ1 foundation, groupoidality/structured-`J` chain, unrestricted evidence-property theorem, and unconditional finite-`NCat` object-truncation theorem are decoder-free, while legacy D0/Cat/Grpd decoder APIs remain explicit compatibility/library surface rather than a second active foundation
 Review baseline: `772411011ac721c84d143a2967f4e5c31e94bc70`
 Implementation starting baseline: `4315137094d2faf4fcc6f4b026960a62bd5406e7`
 Primary predecessor: `REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`
@@ -41,11 +41,13 @@ The explicit user handoff on 2026-07-17 adopts this overlay. Authority is now:
 3. `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
    authority for native-EQ1 evidence property, truncation under retractions,
    and unconditional finite-`NCat` object truncation;
-4. `emdash3_2_checks.lp` remains the executable diagnostic authority;
-5. the current SOP and Foundations report retain their ordinary authority;
-6. this report is the living implementation plan and decision ledger for its
+4. `emdash3_2_sum_observational_action.lp` is the downstream library authority
+   for the optional former-specific Sum observational action;
+5. `emdash3_2_checks.lp` remains the executable diagnostic authority;
+6. the current SOP and Foundations report retain their ordinary authority;
+7. this report is the living implementation plan and decision ledger for its
    named equality/equivalence/groupoidality tracks;
-7. the July 13 plan remains the retained promoted-work ledger and the active
+8. the July 13 plan remains the retained promoted-work ledger and the active
    plan for unaffected H0, truncation, dimension, directed, and former-action
    tracks.
 
@@ -512,10 +514,10 @@ the then-current owner before promotion.
 | --- | --- |
 | Global coherence | high for the proposed MVP architecture; markedly more natural than the current parallel equality/certificate/decoder ownership |
 | Mathematical correctness | high for the fixed-arrow and groupoid/`TypeEquiv` fragment; conditional at unrestricted omega level on the intended coinductive/greatest-fixed-point semantics |
-| Syntactic correctness | high for the promoted Phase-1-through-7 and selected Phase-9 boundary: abstract/Cat/Grpd owners, stable Product equality, uniform carrier-view casts, and the protected transparent derived module all pass specialization and bounded checks; only the un-staged unrestricted identity body remains correctly rejected |
+| Syntactic correctness | high for the promoted Phase-1-through-9 and selected Phase-11 boundaries: abstract/Cat/Grpd owners, stable Product equality, uniform carrier-view casts, both transparent one-way derived modules, and the extracted Sum library all pass specialization and bounded checks; only the un-staged unrestricted identity body remains correctly rejected |
 | Computational feasibility | high for construction, projection, reflexivity packages, the object-path adapter, explicit transparent casts, literal-path witnesses, direct Cat/Grpd identity, Product paths, both groupoid-equivalence bridges, native next-hom action, literal structured action/J, unrestricted native evidence property, and finite-`NCat` truncation; medium-low only for observers on unreified cast terms and reverse pointwise-to-coherent-functor assembly |
-| Completeness for a minimal MVP | the equality/univalence/groupoidality/structured-J/evidence-property/finite-truncation forward boundary is executable; remaining completion work is selected decoder migration, consolidation, and explicitly optional reverse pointwise/core assembly, not a missing native next-hom or evidence theorem |
-| Reusability | demonstrated by active reviewer examples and the one-way extension: native fixed-arrow/first-class elimination, Sigma comparison, literal paths, explicit `TypeEquiv` bridges, direct univalence, native homwise preservation, pointwise groupoidality, and displayed transport support library construction; broader decoder retirement and finite-library consumers remain migration work |
+| Completeness for a minimal MVP | the equality/univalence/groupoidality/structured-J/evidence-property/finite-truncation forward boundary is executable; the native foundation no longer depends on a legacy decoder, while full compatibility retirement, reverse pointwise/core assembly, and core-universe functors without a consumer are explicitly later work |
+| Reusability | demonstrated by active reviewer examples and the one-way extensions: native fixed-arrow/first-class elimination, Sigma comparison, literal paths, explicit `TypeEquiv` bridges, direct univalence, native homwise preservation, pointwise groupoidality, displayed transport, evidence uniqueness, and finite object truncation support library construction; broader standard-library consumers remain later work |
 | Expressiveness versus ordinary HoTT | intended to cover equality, equivalence, univalence, and structured transport with stronger directed/omega-categorical primitives; still lacks ordinary broad HIT/reflector coverage and does not automatically structure arbitrary raw motives |
 | Foundational assurance | operational evidence only; the generic unification equation remains trusted logical authority and requires finite/stratified semantic sanity evidence |
 
@@ -536,13 +538,13 @@ the then-current owner before promotion.
 | truncation/`NCat` spine | semantically meaningful retained work plus a transparent downstream native-EQ1 theorem `ncat_obj_trunc_EQ1`; the old D0 conditional capability remains compatibility-only |
 | HIT/reflector scope | deferred; this redesign improves the equality/transport substrate but does not by itself provide a truncation reflector, Circle, general restricted HIT eliminator, or raw-family fibrancy |
 
-Thus the active implementation is neither a sham nor the wanted completed
-foundation. It contains a substantial natural categorical kernel and several
-genuine computations; the selected EQ1/groupoidality chain is now native, but
-other compatibility layers still expose too many opaque capability and decoder
-boundaries. The redesign is a feasible
-migration from real assets, not a greenfield replacement and not a license to
-describe the current decoder-based layer as already complete.
+Thus the selected operational MVP is now a genuine native extension of the
+existing categorical kernel rather than a facade over the old decoder tower.
+The compatibility layer still exposes opaque D0 and decoder capabilities and
+must not be described as a second completed foundation, but none of the native
+hom-action, groupoidality, evidence-property, or finite-truncation chain
+depends on it. The remaining foundational assurance questions are semantic
+metatheory, not missing operational constructors or proofs.
 
 ### Expressiveness comparison with ordinary HoTT
 
@@ -1479,9 +1481,11 @@ This policy is the structured replacement for the current broad
 
 ### M. Core-universe inclusion functors
 
-The MVP needs actual functors, not merely carrier functions, when a universe
-is used as the codomain of a structured motive. The first missing inclusion
-is the plain groupoid core, not a truncated package:
+When a universe is actually used as the codomain of a structured motive, its
+interface needs an actual functor rather than merely a carrier function. No
+current MVP consumer does so, so this section specifies the consumer-led next
+construction rather than an unconditional implementation requirement. The
+first candidate inclusion is the plain groupoid core, not a truncated package:
 
 ```text
 GrpdCore_cat := Path_cat(Grpd_grpd)
@@ -2192,7 +2196,7 @@ primitive cast fallback remains unselected. The opposite-only view is retained
 here as Phase-6 evidence but is no longer active after the Phase-7 uniform
 view promotion.
 
-### Phase 7: Decoder migration and direct use
+### Phase 7: Decoder migration and direct use — completed at the selected foundational boundary 2026-07-17
 
 1. use equality directly as `OmegaEquiv` only at measured abstract, shaped, or
    rigid owners; otherwise use the promoted uniform explicit casts;
@@ -2285,8 +2289,23 @@ specified. A primitive nonreducing cast term remains unselected. These are
 explicit plan-local trust decisions, not a general SOP principle or a new
 univalence theorem capability.
 
-Exit criterion: direct equality/equivalence is the primary public interface;
-no foundational theorem requires an arbitrary decoder capability.
+The final selected-boundary audit distinguishes foundation from compatibility
+instead of deleting by spelling. Exact-token inventory still finds real legacy
+kernel consumers (`idtoequiv_cat` on 30 lines, `omega_equiv_path` on 11,
+`cat_univalence_by_decoder` on four, and the corresponding Grpd operations on
+22/20/four). In contrast, the native hom-action and evidence-property modules
+and their three public reviewer examples have **zero** references to those
+Cat/Grpd decoders, D0/D0b, or either D0/EQ1 migration constructor. D0b has no
+remaining active-kernel occurrence. The native theorem chain is therefore
+decoder-free, while the inventoried old operations remain honest
+compatibility/library APIs with shaped computation and round-trip consumers.
+Removing those APIs wholesale would be an unrelated compatibility migration,
+not closure of a foundational prerequisite.
+
+Exit criterion met at the selected MVP boundary: direct equality/equivalence
+is the primary native interface and no native foundational theorem requires an
+arbitrary decoder capability. Role-by-role retirement of still-used legacy
+APIs remains optional compatibility work and must be separately consumer-led.
 
 ### Phase 8: Evidence property and finite dimension — completed 2026-07-17
 
@@ -2520,51 +2539,111 @@ structured-groupoidality MVP.
 Exit criterion: the documented groupoidal `J` story is executable and uses
 existing directed action rather than a parallel transport calculus.
 
-### Phase 10: Core-universe inclusion functors
+### Phase 10: Core-universe inclusion functors — deferred until a concrete consumer
 
-1. begin with `GrpdCore_cat := Path_cat(Grpd_grpd)` and its actual inclusion
-   functor to `Cat_cat` unless a still smaller concrete consumer is found;
-2. define `GrpdCore_incl_func : GrpdCore_cat -> Cat_cat`, with object action
-   `A |-> Path_cat(A)`;
-3. make its object action compute to the carrier category;
-4. derive arrow action from package equality/direct univalence;
-5. demonstrate a structured motive factoring through it;
-6. add other truncated/`NCat` core inclusions only when independently used;
-7. defer full subcategories and all-functor homs.
+The original goal requires an actual inclusion functor only when a structured
+motive uses a groupoid/truncated universe as its codomain. A final source and
+consumer audit found no `GrpdCore_cat`, `GrpdCore_incl_func`, or existing
+structured motive that needs such an inclusion. Current motives already enter
+the MVP as `D : Catd(C)`, and all promoted groupoidal-J/transport consumers use
+that public boundary directly.
 
-Exit criterion: at least one groupoid-valued or finite-dimensional structured
-motive uses an actual universe inclusion functor.
+Speculatively defining
+`Path_cat(Grpd_grpd) -> Cat_cat`, with object action `A |-> Path_cat(A)`, would
+not be a mere carrier projection. Its arrow action must turn a direct-univalent
+facade path into a coherent category functor and its higher action must remain
+iterable. That is feasible, but it introduces a new action owner whose laws
+should be selected by its first real motive consumer. Adding it now would
+violate the plan's own consumer-led rule.
 
-### Phase 11: Former-action simplification
+Decision: Phase 10 is not selected for this MVP and is not a blocker. Reopen it
+when a concrete groupoid-valued or finite-dimensional structured motive is
+ready; then begin with `GrpdCore_cat := Path_cat(Grpd_grpd)`, implement one
+actual inclusion functor, and prove that motive uses it. Additional truncated
+or `NCat` inclusions and full subcategories remain later work.
 
-1. inventory `ObsAction`, `ObsDAction`, Sum action, and Nat successor action
-   consumers;
-2. add the two general Sum reflexivity comparisons in a probe;
-3. show, using the promoted `Grpd_cat`/`GrpdCore_cat` boundary and an actual
-   structured map, that functor action covers the claimed foundational
-   transport use case;
-4. preserve useful `sum_map`/`eq_ap` statements as library examples;
-5. retire or demote action-specific bases only after all diagnostics migrate;
-6. pause new former registrations until a concrete structured-motive consumer
-   cannot use generic action.
+### Phase 11: Former-action simplification — completed at the selected boundary 2026-07-17
 
-Exit criterion: the foundational kernel no longer carries action-specific
-bridges merely to demonstrate a general observational-action framework.
+The consumer inventory found that the Sum-specific bases, componentwise
+`eq_ap` comparisons, and registered `sum_obs_action` were used only by their
+own diagnostics and reviewer example. `sum_map` itself is an ordinary useful
+eliminator-owned map and remains in the kernel. The former-specific block was
+therefore mechanically extracted, without changing a definition, rule, or
+theorem body, into the one-way library module
+`emdash3_2_sum_observational_action.lp`:
 
-### Phase 12: Consolidation and next-scope decision
+1. the two stable basis heads and their four proof-time comparisons moved out
+   of the kernel;
+2. the component/basis/outer comparison paths and arbitrary inl/inr `eq_ap`
+   theorems moved with them;
+3. the registered componentwise Sum `ObsAction` map, coherence, and package
+   moved into the same module;
+4. diagnostics and `examples/sum_observational_action.lp` explicitly import
+   the library module;
+5. generic `ObsAction`/`ObsDAction`, semantic `eq_ap`/`eq_apd`, Nat successor
+   action, decoded Sum, `sum_elim`, and `sum_map` remain kernel assets;
+6. no native EQ1, univalence, groupoidality, structured-J, or truncation
+   consumer imports the Sum module.
 
-1. remove staging suffixes only after old/new migration is closed;
-2. synchronize kernel comments, checks, examples, Foundations, SOP, report
-   index, health report, and catalog;
-3. record final runtime/proof-time owners and trust classes;
-4. re-evaluate H2/HIT readiness without assuming this redesign solves raw
-   higher-inductive fibrancy;
-5. decide whether the next work is evidence metatheory, standard-library
-   construction, finite universes, or a representative HIT;
-6. retain explicit consistency/normalization/universe-size deferrals.
+This extraction does **not** claim that groupoidal `PathOut`/J definitionally
+replaces `ObsAction`. `ObsAction(f)` registers a chosen computational action
+for a raw groupoid function and proves that it agrees with `eq_ap`;
+`ObsDAction` does the same for a raw dependent section and `eq_apd`.
+Structured J instead consumes an already functorial `Catd` motive. Turning a
+raw `f : A -> B` and selected path action into an iterable functor
+`Path_cat(A) -> Path_cat(B)` would be a useful later library constructor, and
+its first hom action might then subsume or present `ObsAction`. No such
+constructor is currently required by a native EQ1 consumer, while Nat and
+dependent-PathRecord registrations remain real retained consumers. Therefore
+generic `ObsAction`/`ObsDAction` and those registrations stay in the kernel at
+this compatibility boundary; they are not a second univalence, transport, or
+fibrancy foundation.
 
-Exit criterion: one coherent public equality/equivalence/groupoidal-J API and
-no active duplicate foundation.
+Focused probes pass for the reduced kernel, extracted module, full checks, and
+reviewer example in `emdash3_2-20260717-185130.log`,
+`emdash3_2_sum_observational_action-20260717-185132.log`,
+`emdash3_2_checks-20260717-185134.log`, and
+`sum_observational_action-20260717-185137.log`.
+
+Exit criterion met: the useful Sum action remains checked library surface, but
+its former-specific proof-time bridges are no longer foundational kernel
+authority. New former registrations remain paused unless a concrete consumer
+cannot use generic action or a separate library module.
+
+### Phase 12: Consolidation and next-scope decision — final validation in progress
+
+The selected endpoint decisions are now fixed:
+
+1. `_EQ1` names remain the explicit native namespace while legacy names are
+   still public compatibility APIs; removing suffixes now would combine an API
+   rename with compatibility retirement and is not an MVP requirement;
+2. the native fixed-arrow/facade, hom-action, groupoidality, structured-`J`,
+   evidence-property, and finite-truncation chain is decoder-free and forms one
+   coherent public API across the kernel and two one-way transparent modules;
+3. the Sum-specific action is a downstream library module, not kernel
+   univalence authority;
+4. raw unreified-path projection computation, pointwise-to-coherent-core
+   assembly, full legacy decoder retirement, and a first core-universe
+   inclusion without a consumer are extension gates, not hidden MVP gaps;
+5. HITs and truncation reflectors still need their own bounded architecture
+   plan because structured `Catd` motives do not automatically make arbitrary
+   raw higher-inductive motives fibrant;
+6. the preferred next engineering work is a small standard-library consumer
+   of the public native API. Semantic consistency, normalization,
+   stratification, and universe-size work remains a separate research track.
+
+The integrated public example `examples/groupoidal_structured_j_eq1.lp` now
+uses equality-valued equivalence, coherent groupoidality, explicit displayed
+transport equivalence, unrestricted evidence uniqueness, structured
+`PathOut`/J comparison, and finite object truncation without a decoder or
+private helper. Its focused probe passes in
+`groupoidal_structured_j_eq1-20260717-185558.log`.
+
+Exit criterion is satisfied architecturally: one native public
+equality/equivalence/groupoidal-J API is active and the old D0/decoder surface
+is classified only as compatibility. Phase completion awaits the final
+synchronized catalog, health, warning, audit, example, and CI gates recorded
+below.
 
 ## Recommended First Implementation Slice
 
@@ -2579,16 +2658,14 @@ general groupoidality/structured-transport definitions were relocated there
 and migrated from D0b to the native owner; the kernel does not import the
 extension.
 
-`EVOGJ-EVIDENCE-PROP` and `EVOGJ-NCAT-TRUNC` are now complete. The current
-recommended continuation returns to `EVOGJ-DECODER-MIGRATE`: refresh the
-remaining `idtoequiv_cat`, `omega_equiv_path`, D0/D0b, and decoder-capability
-consumer inventory; select one dependency-ready semantic role; and migrate it
-to native EQ1 construction, the explicit object-path package, or a transparent
-cast according to whether observer computation is needed. Preserve useful
-theorem-level `TypeEquiv`/round-trip APIs and the legacy D0 compatibility
-surface until their actual consumers have migrated. Do not convert a raw cast
-into an observable package, delete compatibility wholesale, or mix decoder
-migration with Sum/ObsAction cleanup.
+`EVOGJ-EVIDENCE-PROP`, `EVOGJ-NCAT-TRUNC`, and the selected foundational
+`EVOGJ-DECODER-MIGRATE` boundary are complete. The current continuation is
+Phase-12 synchronization and full validation. There is no remaining
+dependency-ready implementation slice required by the selected MVP after
+those gates pass. A later task may choose a concrete standard-library
+consumer, a consumer-led core-universe inclusion, legacy compatibility
+retirement, reverse coherent-core assembly, or a separately planned HIT, but
+none should be silently appended to this goal.
 
 At adoption, the first implementation task was
 `EVOGJ-ALONG-EQ-LAWS`, not decoder deletion, generic univalence, or Sum
@@ -2693,8 +2770,10 @@ The equality-valued omega-equivalence/groupoidal-J MVP is complete only when:
     bridge capability, and the existing `is_equiv_map_by_inverse` theorem is
     proved or explicitly retained in the trust ledger;
 16. Grpd-universe direct identity has a selected, explicitly trusted owner;
-17. foundational encoder/decoder capability duplication has been migrated or
-    retired;
+17. the native foundational theorem chain no longer depends on an arbitrary
+    encoder/decoder capability; still-used legacy decoder APIs are explicitly
+    classified as compatibility/library surface rather than a duplicate
+    foundation;
 18. `TypeEquiv` remains available as a theorem/library formulation rather than
     the primary universe identity normal form;
 19. evidence property is proved at every scope claimed by truncation results;
@@ -2740,9 +2819,10 @@ The equality-valued omega-equivalence/groupoidal-J MVP is complete only when:
 | evidence property for groupoids/finite levels | high | transparently active | high |
 | evidence property for unrestricted native EQ1 | high for separate bi-inverse evidence | transparently active through composition-map equivalences and record eta | high |
 | unconditional finite-`NCat` object truncation | high | transparently active with base/successor computation | high |
-| core-universe inclusion functors | high | medium-high | high |
+| core-universe inclusion functors | high | medium-high once a concrete action consumer fixes the owner | deferred by the consumer-led MVP boundary |
 | full subcategories of `Cat_cat` | high but unnecessary for MVP | medium/large scope | deferred |
-| decoder retirement | high after migration | medium due consumer breadth | medium-high |
+| native decoder independence | high | demonstrated across both native extensions and public examples | high; complete |
+| full legacy decoder retirement | high after consumer migration | medium due compatibility breadth | optional/deferred |
 | Sum/action simplification | high | high after inventory | high |
 | normalization/model/self-universe metatheory | research | outside bounded MVP | deferred |
 
@@ -2836,7 +2916,7 @@ the following mathematical and migration questions explicitly scoped:
 | Question | Review status |
 | --- | --- |
 | Equality-valued bi-invertibility as primary fixed-arrow structure | accepted for the MVP; unrestricted omega semantics still needs the stated greatest-fixed-point/approximant account |
-| Property-valuedness of separate-left/right evidence | standard and derivable for groupoid functions; finite and unrestricted omega proofs remain implementation/metatheory tasks |
+| Property-valuedness of separate-left/right evidence | transparently proved at unrestricted native-EQ1 scope; finite object truncation is consequently unconditional, while semantic model questions remain metatheory |
 | `IsGroupoidalCat(C) := EquivAlong(Core_incl_func C)` | accepted as leading coherent definition; its pointwise all-arrows comparison is promoted in the forward direction, while the converse needs coherent inverse-functor assembly |
 | Transparent Sigma versus stable facade | resolved in favor of the stable facade by the term-decoding probe; Sigma retained as comparison view |
 | Generic object univalence owner | proof-time generic rule promoted for the abstract owner, with rigid runtime universe owners, the shaped `Path_cat` join, stable Product equality, and uniform explicit casts after specialization |
@@ -2845,8 +2925,8 @@ the following mathematical and migration questions explicitly scoped:
 | Minimal path observer interface | explicit `path_equiv(p)` computes; raw silently coerced projections are deferred |
 | `Core_incl_func(Path_cat A)` orientation | proof-time comparison selected; runtime fold unnecessary for the MVP |
 | `PathOut` sufficiency | selected MVP boundary closed: literal `Path_cat` comparison, nonliteral groupoidal consumers, and equivalence-valued displayed transport are executable; arbitrary unstructured motives remain outside the claim |
-| Decoder APIs worth retaining | `TypeEquiv` and theorem-level round trips are clearly useful; exact current symbol inventory remains migration work |
-| Remaining `ObsAction` scope | unresolved pending promoted structured `Grpd` motive consumer; not a blocker to direct univalence |
+| Decoder APIs worth retaining | resolved for the MVP: native theorem modules are decoder-free; `TypeEquiv`, shaped computation, and theorem-level round trips remain explicit compatibility/library APIs until consumer-led retirement |
+| Remaining `ObsAction` scope | resolved only for this MVP: generic registries retain real Nat/PathRecord consumers, Sum registration is downstream, and structured Cat-valued transport uses ordinary functor action; a future `Path_cat`-functor constructor may recast the registry as its first hom-action view |
 | Semantic sanity vehicle | finite `NCat`/dimension-indexed approximants are the preferred local explanation; external systems remain inspiration, not implementation templates |
 
 Additional external mathematical review is most valuable for two points: the
@@ -2879,15 +2959,16 @@ recorded in the July 13 ledger and should not be duplicated here.
 | `EVOGJ-STABLE-FORMER-PATH-VIEW` | **completed for Product; opposite intermediate superseded 2026-07-17** | make measured reduced-former equality comparable with EQ1 through stable heads | promoted abstract/rigid direct owners and measured Product failures | `ProductPathView` preserves the decoded Sigma carrier with construction/elimination and shaped comparison; the Phase-6 `OpObjectPathView_EQ1` intermediate passed but is removed after the uniform cast view generalized its role |
 | `EVOGJ-STABLE-GENERAL-CAST-VIEW` | **completed; promoted 2026-07-17** | provide explicit equality/EQ1 casts without an opaque term operation | failed unrestricted alias plus successful former-local staging | carrier-decoded `ObjectPathCastView_EQ1` and two transparent typed-let casts pass abstract/Product/Op/nested/Path/Functor/Cat/Grpd round trips and observer negatives at unchanged `971/157` and zero/45/27; Product/opposite aliases route through it |
 | `EVOGJ-PRIMITIVE-CAST-FALLBACK` | deferred fallback, not selected | provide a cast if the uniform stable view fails a future representation | failed unrestricted alias and completed general stable view | no primitive nonreducing cast term is needed; any future symbol must be narrowly typed, explicitly trusted, initially nonreducing, and justified by a real consumer |
-| `EVOGJ-DECODER-MIGRATE` | **active; stable explicit casts, first duplicate, and three consumer roles migrated 2026-07-17** | remove foundational decoder dependency | direct universe owners plus uniform cast view | standalone `cat_univalence` is removed; transparent `object_path_equiv_D0` serves both ordinary-iso recursive cells plus the D1 selected-functor/evidence consumer, reducing active-kernel `idtoequiv_cat` occurrences from 34 to 30; general reverse typing uses the transparent cast, while computational decoder consumers remain role-by-role work |
+| `EVOGJ-DECODER-MIGRATE` | **completed at the selected foundational boundary 2026-07-17** | remove native foundational decoder dependency without deleting useful compatibility APIs | direct universe owners plus uniform cast view | standalone `cat_univalence` is removed and three real consumers use `object_path_equiv_D0`; exact-token inventory retains genuine legacy decoder consumers, but both native extension modules and all three native public reviewer examples contain zero Cat/Grpd decoder, D0/D0b, or D0/EQ1 migration references. Further role-by-role deletion is optional compatibility work |
 | `EVOGJ-EVIDENCE-PROP` | **completed; promoted 2026-07-17** | prove fixed-map evidence property | equality-law evidence plus transparent quasi-inverse theorem | composition-map equivalences contract both inverse-law fibres and native record eta contracts the evidence; unrestricted native-EQ1 property theorem, path/local-set sanity proofs, diagnostics, and reviewer example pass without new conversion authority |
 | `EVOGJ-NCAT-TRUNC` | **completed; promoted 2026-07-17** | discharge conditional object truncation | native evidence property and retract closure | transparent arbitrary-level retract closure and `CatDim` recursion prove unconditional `ncat_obj_trunc_EQ1`; base/successor equations pass; legacy D0 conditional theorem is compatibility-only |
 | `EVOGJ-GROUPOIDAL-CAT` | **completed at selected forward MVP boundary; promoted 2026-07-17** | general internal groupoidality | path-category introduction | transparent native next-hom owner promoted in the one-way derived extension; protected proof helpers preserve public projection computation; groupoidality and displayed transport were relocated and migrated off D0b without public-name changes; coherent groupoidality computes to `AllArrowsEquiv_EQ1`; the converse remains an explicitly separate coherent omega-functor assembly/extensionality gate |
 | `EVOGJ-BIINV-ADJOINTIFY` | **completed; promoted 2026-07-17** | derive coherent triangle laws from separate equality-valued left/right inverse data | native EQ1 evidence, functor/transfor naturality, path algebra | generic adjusted counit and triangle are transparent derived theorems; arbitrary formation and reflexive computation pass permanent diagnostics, with no rule, unifier, primitive, or opaque capability; they close the two endpoint equations in the complete native-next-hom probe |
 | `EVOGJ-GROUP-J` | **completed at selected MVP boundary; promoted 2026-07-17** | structured groupoidal `J` comparison | groupoidal category and PathOut | existing `path_ind_sec`, displayed functor action, and primitive `ind_eqr` are propositionally compared at a literal `Path_cat` source through two warning-neutral proof-time joins; primitive J computes at reflexivity and directed presentations retain runtime negatives; generic functor preservation plus explicit groupoidal-arrow evidence proves displayed transport equivalence-valued without a decoder or transport axiom |
-| `EVOGJ-UNIVERSE-CORE-INCL` | dependency-ready; not started | actual package-core functor into `Cat_cat` | selected concrete motive | one used inclusion functor |
-| `EVOGJ-SUM-SIMPLIFY` | blocked on direct/structured architecture | replace action-specific bases with general reflexivity joins/library action | consumer inventory | synchronized migration |
-| `EVOGJ-OBSACTION-SCOPE` | blocked on structured motive evidence | decide remaining role of action registry | groupoidal J and former consumers | retain/demote decision |
+| `EVOGJ-UNIVERSE-CORE-INCL` | **deferred; not selected for this MVP** | actual package-core functor into `Cat_cat` | a concrete structured motive that needs a groupoid/truncated universe codomain | source/consumer audit found no current use; do not invent a new higher action owner before its first consumer fixes the required computation |
+| `EVOGJ-SUM-SIMPLIFY` | **completed at selected boundary 2026-07-17** | demote action-specific bases while retaining useful library action | consumer inventory | all Sum-specific bases/comparisons/action symbols mechanically extracted to `emdash3_2_sum_observational_action.lp`; only checks/example import it; focused probes pass |
+| `EVOGJ-OBSACTION-SCOPE` | **completed at selected MVP boundary; later functor-view refactor open** | decide remaining role of action registry | groupoidal J and former consumers | generic `ObsAction`/`ObsDAction` retain real Nat/PathRecord raw-function consumers; structured Cat-valued transport uses native functor action and does not manufacture that structure. Sum is downstream. A future constructor `Path_cat(A) -> Path_cat(B)` may make the registry a first-hom-action view, but is not an MVP prerequisite |
+| `EVOGJ-CONSOLIDATE` | **final validation in progress** | synchronize the selected MVP and close the living overlay | all selected phases | integrated public example passes; reports/source authority are synchronized; final catalog, health, warning, audit, example, and CI evidence remains to be recorded |
 | `EVOGJ-H2-READINESS` | deferred | reassess representative HIT/truncation reflector | consolidated MVP | new bounded plan or continued deferral |
 | `EVOGJ-METATHEORY` | deferred research | consistency, normalization, stratification, semantic model | mature architecture | separate research evidence |
 
@@ -2941,26 +3022,18 @@ Deferred metatheory is not a blocker to the bounded operational MVP unless a
 claim of consistency, normalization, stratification, or canonicity becomes a
 required deliverable.
 
-## Future Implementation Handoff Requirements
+## Future Work Handoff Requirements
 
-After the next review/refinement turn, the implementation handoff prompt
-should instruct a new coding agent to:
+After final validation, this overlay has no active implementation row required
+by the selected MVP. A later handoff should name a new bounded objective rather
+than instruct an agent to continue this plan indiscriminately. Candidate
+objectives are a public standard-library consumer, a consumer-led
+core-universe inclusion, legacy compatibility retirement, reverse coherent-
+core assembly, or a separately reviewed representative HIT.
 
-- read this proposal together with the July 13 master plan and active
-  authorities;
-- treat the new report as the selected re-redesign overlay only if its status
-  has been changed to adopted;
-- implement rather than merely review;
-- begin with the dependency-ready active ledger row, currently
-  `EVOGJ-GRPD-CAT-BOUNDARY`;
-- preserve all committed work and use commit `7724110...` only as review
-  provenance;
-- keep source, checks, examples, reports, catalog, health, warnings, audit, and
-  CI evidence synchronized;
-- revise the plan when owner-position evidence invalidates a decision;
-- continue safe plan-scoped work until completion or a documented hard
-  blocker, without using that persistence instruction to broaden scope.
-
-The exact `/goal` handoff text should be generated only after the next review
-has resolved the plan's initial adoption status and any externally identified
-corrections.
+Any such handoff must still read this report with the July 13 retained-work
+ledger and active authorities, preserve current worktree state, reproduce
+relevant owner-position evidence, and synchronize source, diagnostics,
+examples, reports, catalog, health, warnings, audit, and CI. Commit
+`4315137...` remains implementation provenance only; it never authorizes a
+reset or rollback.

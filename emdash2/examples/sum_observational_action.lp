@@ -9,6 +9,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_sum_observational_action;
 
 assert [A B A' B' : Grpd]
   (f : τ A → τ A')

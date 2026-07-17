@@ -6,6 +6,9 @@ extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property
 and finite-dimension extension `emdash3_2_eq1_evidence_property.lp`. It
 presents the intended mathematics in ordinary category/type-theory notation
 and deliberately suppresses most Lambdapi rewrite engineering details.
+The retained componentwise Sum observational action lives in the separate
+library module `emdash3_2_sum_observational_action.lp`; it is not a
+foundational univalence dependency.
 
 The implementation is still evolving. This note describes the current directed
 categorical foundation and the first checked equivalence, profunctor,
@@ -216,7 +219,19 @@ generic semantic owners; the registered identity acts by `p |-> p`, and
 registered actions compose pointwise with a proved comparison to generic
 action of the composite.
 
-General binary sums now have the first registered elementary-former action.
+This registry is not the structured groupoidal-J mechanism. `ObsAction`
+starts from a raw function between groupoid classifiers and records one chosen
+path action; `PathOut`/J starts from a functorial `Catd` motive whose directed
+action already exists. A future constructor from raw function-plus-action data
+to an iterable functor `Path_cat(A) -> Path_cat(B)` could make `ObsAction` a
+view of that functor's first hom action. The current kernel does not contain
+that constructor, and groupoidal J cannot replace the registry without it.
+Accordingly the Nat and PathRecord registrations are retained library-facing
+computation, while they are not part of the native univalence or fibrancy
+foundation.
+
+The library-level Sum action module retains the first registered
+elementary-former action without placing its bases in the kernel.
 The canonical map is defined through the existing eliminator:
 
 ```text
@@ -2374,6 +2389,18 @@ vocabulary.
 | encode/decode categorical-universe identity | `cat_path_encode p` / `cat_path_decode e` |
 | categorical identity functor/evidence | `cat_path_functor e` / `cat_path_evidence e` |
 | categorical identity next-hom action | `cat_path_fapp1 e x y` |
+| native equality-valued fixed-arrow equivalence | `OmegaEquivAlong_EQ1 C x y f` |
+| native first-class omega-equivalence facade | `OmegaEquiv_EQ1 C x y` |
+| explicit object-path equivalence package | `object_path_equiv_EQ1 p` |
+| literal path-category equivalence package | `path_equiv_EQ1 p` |
+| explicit equality/EQ1 identity casts | `object_path_to_equiv_cast_EQ1` / `omega_equiv_to_object_path_cast_EQ1` |
+| native next-hom preservation of equivalence | `omega_equiv_along_fapp1_EQ1 F u` |
+| coherent internal groupoidality | `IsGroupoidalCat_EQ1 C` |
+| groupoidal arrow/path selection and re-inclusion | `groupoidal_arrow_to_path_EQ1 g f` / `groupoidal_path_to_arrow_retract_EQ1 g f` |
+| equivalence-valued displayed transport | `groupoidal_fibre_transport_equiv_EQ1 g D f` |
+| unrestricted uniqueness of native fixed-arrow evidence | `omega_equiv_along_evidence_is_prop_EQ1 C x y f` |
+| truncation closure under an explicit retraction | `is_trunc_retract_EQ1 n r h` |
+| finite-dimensional object truncation | `ncat_obj_trunc_EQ1 n C h` |
 | fixed-arrow evidence observation record | `OmegaEquivAlongObservation_D0 f` / `omega_equiv_along_observe_D0 u` |
 | finite fixed-arrow evidence path view | `OmegaEquivAlongPathView_D0 u v` |
 | evidence-path action on the finite view | `omega_equiv_along_path_view_encode_D0 p` |
@@ -2382,7 +2409,7 @@ vocabulary.
 | dimension-indexed evidence path view | `OmegaEquivAlongDimPathView_D0 n h u v` |
 | evidence-path action on the indexed view | `omega_equiv_along_dim_path_view_encode_D0 n h p` |
 | canonical binary-sum map | `sum_map f g` |
-| registered componentwise binary-sum action | `sum_obs_action f g u v` |
+| registered componentwise binary-sum action (library module) | `sum_obs_action f g u v` in `emdash3_2_sum_observational_action.lp` |
 | selected binary-sum action map/coherence | `sum_obs_action_map f g u v` / `sum_obs_action_coherence f g u v` |
 | component/semantic Sum action comparison | `sum_map_inl_eq_ap p` / `sum_map_inr_eq_ap p` |
 | stable successor-action proof basis | `nat_succ_ap_basis n` |
@@ -2390,9 +2417,9 @@ vocabulary.
 | registered Nat successor action | `nat_succ_obs_action` |
 | selected Nat successor map/coherence | `nat_succ_obs_action_map` / `nat_succ_obs_action_coherence` |
 | former-specific successor path induction | `nat_succ_ind_eqr P u p` |
-| global fixed-arrow evidence-property capability | `OmegaEquivAlongEvidenceProp_D0` |
+| legacy D0 fixed-arrow evidence-property capability | `OmegaEquivAlongEvidenceProp_D0` (compatibility only; no inhabitant claimed) |
 | proposition lift to a native categorical dimension | `prop_is_trunc_cat_dim n h` |
-| conditional directed object-truncation theorem | `ncat_obj_trunc_from_evidence_prop P n h` |
+| legacy conditional directed object-truncation theorem | `ncat_obj_trunc_from_evidence_prop P n h` (compatibility only) |
 | ordinary iso to fixed-arrow omega evidence | `iso_evidence_omega_along_D0 i` |
 | ordinary iso to public omega-equivalence package | `iso_evidence_omega_equiv i` |
 | path-encoder agreement for the ordinary lift | `iso_evidence_omega_equiv_idtoiso p` |

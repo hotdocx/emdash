@@ -19,6 +19,7 @@ flag "print_meta_args" on;
 require open emdash.emdash3_2;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
+require open emdash.emdash3_2_sum_observational_action;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
 assert ⊢ τ Empty_grpd ≡ empty;

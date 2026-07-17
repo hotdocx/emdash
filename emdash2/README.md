@@ -153,6 +153,8 @@ or a completed foundational theory.
 - `emdash3_2_eq1_evidence_property.lp`: downstream transparent native-EQ1
   evidence-property, retract-truncation, and finite-`NCat` object-truncation
   extension.
+- `emdash3_2_sum_observational_action.lp`: library-level componentwise Sum
+  observational action and proof-time comparison bases.
 - `emdash3_2_checks.lp`: executable diagnostic/regression suite.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
   current architecture and development SOP.

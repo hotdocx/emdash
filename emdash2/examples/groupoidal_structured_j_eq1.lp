@@ -13,6 +13,7 @@
 
 require open emdash.emdash3_2;
 require open emdash.emdash3_2_eq1_hom_action;
+require open emdash.emdash3_2_eq1_evidence_property;
 
 // Internal groupoidality is iterable at the next hom dimension.
 assert [C : Cat]
@@ -56,6 +57,15 @@ assert [C : Cat]
   (f : τ (Hom C x y)) ⊢
   @groupoidal_arrow_equiv_along_EQ1 C g x y f
   : τ (@OmegaEquivAlong_EQ1 C x y f);
+
+// The evidence attached to that library construction is proposition-valued;
+// callers do not acquire a second coherence choice.
+assert [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @omega_equiv_along_evidence_is_prop_EQ1 C x y f
+  : τ (IsPropGrpd (@OmegaEquivAlong_EQ1 C x y f));
 
 // The coherent core witness therefore exposes the expected pointwise view.
 assert [C : Cat]
@@ -108,6 +118,13 @@ assert [C : Cat]
 assert (X : τ ZeroCat) ⊢
   @zero_cat_is_groupoidal_EQ1 X
   : τ (@IsGroupoidalCat_EQ1 (@ncat_carrier cat_zero X));
+
+// Finite directed dimension supplies the predicted object truncation through
+// the same public native-EQ1 interface.
+assert (n : CatDim) [C : Cat]
+  (h : τ (IsNCat n C)) ⊢
+  @ncat_obj_trunc_EQ1 n C h
+  : τ (IsObjTruncCat (cat_dim_trunc_level n) C);
 
 // The generic construction remains well typed at a literal path category.
 assert [A : Grpd]
