@@ -1,10 +1,11 @@
 # emdash Foundations
 
 Draft status: this document is a mathematician-facing reading guide for the
-current `emdash3_2.lp` theory and its one-way derived native-EQ1 hom-action
-extension `emdash3_2_eq1_hom_action.lp`. It presents the intended mathematics
-in ordinary category/type-theory notation and deliberately suppresses most
-Lambdapi rewrite engineering details.
+current `emdash3_2.lp` theory, its one-way derived native-EQ1 hom-action
+extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property
+and finite-dimension extension `emdash3_2_eq1_evidence_property.lp`. It
+presents the intended mathematics in ordinary category/type-theory notation
+and deliberately suppresses most Lambdapi rewrite engineering details.
 
 The implementation is still evolving. This note describes the current directed
 categorical foundation and the first checked equivalence, profunctor,
@@ -52,7 +53,9 @@ mathematics, then use
 hygiene and stable-head ownership rules. Do not infer from the surface formula
 alone that a new primitive head is needed; first locate the current semantic
 owner in `emdash3_2.lp` or, for native equality-valued next-hom preservation
-and its groupoidality consumers, `emdash3_2_eq1_hom_action.lp`.
+and its groupoidality consumers, `emdash3_2_eq1_hom_action.lp`. Native EQ1
+evidence-property and finite-`NCat` object-truncation theorems live in
+`emdash3_2_eq1_evidence_property.lp`.
 
 ## 2. Categories And Hom-Categories
 
@@ -518,14 +521,14 @@ semantic justification; typed `eq_refl` only tests that the selected
 `unif_rule` fires. The stable terms remain non-convertible at runtime, and
 applying them first joins the existing shaped Pi-reflexivity computation.
 
-The reviewed theorem capability `is_equiv_map_by_inverse` converts explicit
-left and right inverse paths to the active contractible-fibre `IsEquivMap`
-notion. Its proof remains opaque, like the existing constructor-specific
-equivalence capabilities, but the selected fibre centre computes to the
+The transparent theorem `is_equiv_map_by_inverse` converts explicit left and
+right inverse paths to the active contractible-fibre `IsEquivMap` notion.
+Left-oriented path induction reduces a general fibre path to the generic
+half-adjoint triangle; the resulting contraction is then re-centred at the
 specified inverse and right-inverse path. Consequently
 `pi_happly_type_equiv` has executable forward map, inverse, and right path.
-The contraction path and the separately derived eta proof are not identified
-by runtime computation. Arbitrary structured-Pi J computation, Sigma/record
+The contraction path remains propositional data rather than a proof-erasure
+runtime equation. Arbitrary structured-Pi J computation, Sigma/record
 structural action, and computational fibrancy remain separate work.
 
 At the groupoid-classifier category, the whole hom-category is now explicit:
@@ -549,10 +552,7 @@ functions agree pointwise; the left inverse therefore also has a right law
 and yields `EquivByInverse`. This construction then invokes
 `is_equiv_map_by_inverse`. Forward maps, selected inverse points, and the
 derived right law compute, but package eta is not definitional. No universe
-decoder or opaque bridge is used. The final fibre contraction is nevertheless
-only as proof-closed as the pre-existing bodyless
-`is_equiv_map_by_inverse` theorem capability; that remaining proof obligation
-must not be confused with computational reification or univalence decoding.
+decoder, opaque bridge, or bodyless fibre theorem is used.
 
 From any groupoid/type `A`, there is a path category:
 
@@ -1716,6 +1716,32 @@ owner and retains 56 protected transparent implementation lemmas; projection
 diagnostics and reflexive normalization to `id_func` confirm that the module
 boundary does not introduce opacity.
 
+The equality-valued evidence itself is proposition-valued at every category,
+not only at a finite or locally set-valued boundary. For fixed
+`f : Hom_C(x,y)`, write
+
+```text
+L_f(k) = k o f : Hom_C(x,x),
+R_f(k) = f o k : Hom_C(y,y).
+```
+
+Given one bi-inverse witness for `f`, ordinary associativity and unit laws
+show that `L_f` and `R_f` have explicit quasi-inverses. The transparent
+quasi-inverse theorem therefore contracts the homotopy fibres
+
+```text
+Sigma l, L_f(l) = id_x,
+Sigma r, R_f(r) = id_y.
+```
+
+Their product is the transparent view of `OmegaEquivAlong_EQ1(f)`, and native
+record eta transfers contractibility back to the record. Hence
+`omega_equiv_along_evidence_is_prop_EQ1(C,x,y,f)` is derived with no
+truncation hypothesis, extensionality axiom, decoder, or proof erasure. The
+literal-path, discrete, and locally-set constructions remain independently
+checked specializations. These theorems live downstream in
+`emdash3_2_eq1_evidence_property.lp`; they add no rewrite or unification rule.
+
 The uniform equality/EQ1 cast does not make that proof disappear. It preserves
 the term while changing the accepted classifier, so a raw category path does
 not acquire an equivalence package head and its forward projection remains
@@ -1984,41 +2010,42 @@ with the ordinary theorem above gives
 The reflexive case computes. The induced ordinary equivalence is decoder-
 owned and is not claimed to expose `fapp0(F)` by runtime conversion.
 
-The dimension map remains an index calculation, not evidence of the recursive
-theorem. The proof architecture is now executable with its missing premise
-made explicit. The classifier
+The dimension map remains an index calculation, but native equality-valued
+evidence now supplies the recursive theorem. Truncation is first proved closed
+under an explicit retraction at every `TruncLevel`: the contractible base is
+direct, while the successor observes equality in the retract as a retract of
+equality between selected representatives. At a successor `CatDim`, the hom
+induction hypothesis truncates the arrow base, the general evidence-property
+theorem truncates every fixed-arrow fibre, and `is_trunc_sigma` truncates the
+transparent first-class Sigma. Two explicit retractions then transfer this
+bound first to the stable facade and then to object equality. Thus
 
 ```text
-OmegaEquivAlongEvidenceProp_D0
-  := Pi C x y f, IsPropGrpd(OmegaEquivAlong_D0(C,x,y,f))
+ncat_obj_trunc_EQ1(n,C,h)
+  : IsObjTruncCat(cat_dim_trunc_level(n),C)
 ```
 
-names the global fixed-arrow evidence-property capability but has no selected
-inhabitant. Given `P` of that type,
-`ncat_obj_trunc_from_evidence_prop(P,n,C,h)` proves
-`IsObjTruncCat(cat_dim_trunc_level(n),C)`. At zero it computes to the stored
-`is_discrete_cat_obj_set(h)`. At a successor it applies the induction
-hypothesis to `Hom_cat(C,x,y)`, raises each proposition-valued certificate
-fibre to the native dimension level, uses `is_trunc_sigma` to truncate the
-public `OmegaEquiv(C,x,y)` package, and transports back along
-`cat_univalence_type_equiv(C,x,y)`. This separates the completed induction from
-the still-open construction of `P`; neither the one-layer nor the dimension-
-indexed observation view is an inhabitant, and no rewrite or proof-time
-equation erases the capability.
+is defined for every `h : IsNCat(n,C)`. The zero case computes to the stored
+`is_discrete_cat_obj_set(h)`; the successor computes to the described hom
+recursion, Sigma closure, and casts. This proof uses native EQ1 only and
+introduces no global capability, decoder, or new conversion rule.
 
-Consequently bare `IsNCat(n,C)` still does not inhabit
-`IsObjTruncCat(cat_dim_trunc_level(n),C)` without the recursive certificate-
-property result.
+The earlier D0 experiment remains public for compatibility:
+`OmegaEquivAlongEvidenceProp_D0` names proposition-valuedness of the opaque D0
+certificate and `ncat_obj_trunc_from_evidence_prop(P,...)` computes only when
+given such a `P`. No inhabitant of that legacy capability is claimed, and the
+finite D0 observation trees still do not provide one. This no longer blocks
+the native theorem above.
+
 `NCat(n)` packages a carrier category and retained
 `IsNCat(n,carrier)` evidence; `ZeroCat` and `OneCat` are its zero and successor-
 zero aliases. Constructor decoding and both projections compute, while package
 eta and proof-field erasure do not. In particular, for `X : OneCat`,
 `one_cat_hom_discrete(X,x,y)` exposes discreteness of `Hom(x,y)`, and
 `one_cat_hom_core_homwise(X,x,y,f,g)` applies the promoted discrete theorem at
-the next hom level between parallel arrows. Formation and the index bridge
-alone do not prove
-`IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)`. With explicit `P`,
-the theorem gives a one-category's object classifier 1-truncation.
+the next hom level between parallel arrows. Applying `ncat_obj_trunc_EQ1` to
+the package evidence gives its carrier the predicted object truncation; the
+readable `one_cat_obj_trunc_EQ1` name is the successor-zero specialization.
 
 There is now a sound one-sided bridge from ordinary isomorphism evidence to
 the recursive layer. For

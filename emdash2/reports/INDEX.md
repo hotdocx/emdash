@@ -4,8 +4,11 @@ Date: 2026-07-17
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
-derived native-EQ1 hom-action/groupoidality extension. Reports explain current
-status, mathematics, notation, implementation plans, and historical decisions.
+derived native-EQ1 hom-action/groupoidality extension, and
+`emdash3_2_eq1_evidence_property.lp` is the downstream transparent
+evidence-property and finite-`NCat` object-truncation extension. Reports
+explain current status, mathematics, notation, implementation plans, and
+historical decisions.
 
 ## Current Orientation
 
@@ -39,9 +42,10 @@ status, mathematics, notation, implementation plans, and historical decisions.
   raw-path projection remains measured-rejected. Phase 4 now promotes the
   `Grpd_cat` function-path hom boundary, stable pointwise identity/composition
   comparisons, and both explicit `TypeEquiv <-> OmegaEquiv_EQ1(Grpd_cat)`
-  adapters without a new decoder capability; the pre-existing
-  `is_equiv_map_by_inverse` contraction proof remains an explicit theorem
-  trust boundary. Phase 5 now promotes explicit D0/EQ1 bridges: old recursive
+  adapters without a new decoder capability; the formerly bodyless
+  `is_equiv_map_by_inverse` contraction theorem is now transparently proved
+  from left-oriented J and generic half-adjoint coherence. Phase 5 now
+  promotes explicit D0/EQ1 bridges: old recursive
   cells decode to equality laws, while new laws reify recursive compatibility
   cells through `object_path_equiv_EQ1` without the legacy encoder. D0 lacks
   evidence eta/extensionality, so both evidence round trips remain explicit
@@ -102,7 +106,13 @@ status, mathematics, notation, implementation plans, and historical decisions.
   computations pass permanent diagnostics without adding a rule, unifier,
   primitive, or opaque theorem. The complete D0b-free next-hom EQ1 package is
   now the active derived-module owner, and its former D0b-backed groupoidality
-  consumer has been migrated. The current snapshot has 1,896 checks across 69
+  consumer has been migrated. Phase 8 is now complete in the downstream
+  transparent `emdash3_2_eq1_evidence_property.lp` module: composition-map
+  equivalences prove unrestricted native fixed-arrow evidence property,
+  arbitrary-level retraction closure is transparent, and native `CatDim`
+  recursion proves unconditional finite-`NCat` object truncation with base and
+  successor computation. The old D0 global capability and conditional theorem
+  remain compatibility-only. The preceding synchronized snapshot had 1,896 checks across 69
   areas (1,664 positive and 232 negative), a 21,986-line/892-symbol kernel, a
   2,791-line/69-symbol derived extension, unchanged kernel rule/unifier and
   warning/audit inventories, 48 passing health/example files, and synchronized

@@ -16,6 +16,9 @@ detailed probe evidence.
 - `emdash3_2_eq1_hom_action.lp`: one-way derived native-EQ1 hom-action,
   groupoidality, and structured-transport layer; it imports the kernel and is
   imported by diagnostics/examples, never by the kernel.
+- `emdash3_2_eq1_evidence_property.lp`: one-way transparent native-EQ1
+  evidence-property, retract-truncation, and finite-`NCat` object-truncation
+  layer; it imports the kernel and hom-action extension, never conversely.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -127,10 +130,13 @@ Explicit defined adapters connect `TypeEquiv(A,B)` and
 contractible-fibre inverse, while the reverse proves the two omega inverse
 choices agree and then supplies `EquivByInverse`. Selected maps, inverse
 fields, cancellation laws, and the forward-map round trip compute. This adds
-no decoder or bridge axiom. The reverse direction still invokes the existing
-bodyless `is_equiv_map_by_inverse` theorem capability; its fibre centre
-computes and its contraction field remains deliberately negative. This is an
-explicit proof-trust boundary, not an opaque encoder/decoder.
+no decoder or bridge axiom. `is_equiv_map_by_inverse` is now a fully
+transparent theorem: left-oriented path induction and the generic
+half-adjoint triangle contract every homotopy fibre, after which the result is
+re-centred at the historically selected inverse/right-law witness. The old
+selected-centre computation is preserved without its former rewrite rule, and
+the contraction proof is real propositional structure rather than an opaque
+capability or proof-erasure equation.
 
 The Phase-5 migration bridge makes the retained D0/new-EQ1 relationship
 executable in both directions. Old D0 evidence is observed as EQ1 inverse
@@ -241,6 +247,32 @@ decoders.
 The generic half-adjoint inverse at a literal path category is still
 intentionally not definitionally the input path; use the direct
 `path_equiv_EQ1(p)` package for that computation.
+
+The downstream transparent module `emdash3_2_eq1_evidence_property.lp` now
+closes the native fixed-arrow evidence-property and finite-dimension
+truncation obligations. It first exposes the native record as independent
+left- and right-inverse homotopy fibres and proves record eta through the
+indexed eliminator. Given any native witness, composition with its forward
+arrow is an ordinary equivalence on each inverse-candidate hom classifier;
+the transparent `is_equiv_map_by_inverse` theorem therefore contracts both
+fibres and then the record. Consequently
+`omega_equiv_along_evidence_is_prop_EQ1(C,x,y,f)` holds for every category and
+fixed arrow, with no truncation assumption, axiom, decoder, rewrite, unifier,
+or proof erasure. Literal path, discrete, and locally-set proofs remain useful
+independent specializations.
+
+The same module proves arbitrary truncation closure under explicit
+retractions and uses it twice—Sigma facade to stable facade, then stable
+facade to object equality. Transparent `CatDim` recursion combines the hom
+induction hypothesis, same-level Sigma truncation, and the general evidence
+property to define
+`ncat_obj_trunc_EQ1(n,C,h) : IsObjTruncCat(cat_dim_trunc_level(n),C)` for every
+finite native dimension. Its zero equation reduces to
+`is_discrete_cat_obj_set`; its successor exposes the expected hom recursion.
+The older `OmegaEquivAlongEvidenceProp_D0` and
+`ncat_obj_trunc_from_evidence_prop` remain public compatibility experiments
+for the opaque D0 certificate, but they are no longer the active native-EQ1
+proof boundary and no inhabitant of the D0 capability is claimed.
 
 The catalog now has 1,896 checks across 69 areas. The kernel has 21,986 lines,
 892 symbols, 597 rules, and 67 unification rules; the derived extension has
@@ -1135,8 +1167,12 @@ Active equality/equivalence staging includes:
 - independent object truncation, native directed-dimension codes, recursive
   `IsNCat`, evidence-retaining `NCat`/`ZeroCat`/`OneCat` packages, and a
   `OneCat` next-hom core-adequacy consumer; the conditional object-truncation
-  induction is active with an explicit, still-uninhabited global fixed-arrow
-  evidence-property capability. The ordinary-iso lift and first scoped
+  D0 compatibility induction remains active with an explicit,
+  still-uninhabited global fixed-arrow evidence-property capability. The
+  downstream native-EQ1 module independently proves unrestricted fixed-arrow
+  evidence property, arbitrary truncation under retractions, and unconditional
+  finite-`NCat` object truncation with computing base/successor equations. The
+  ordinary-iso lift and first scoped
   decoder round trip, left/right inverse comparison, transported right law,
   nested-Sigma evidence reconstruction, reverse round trip, scoped
   `CatIsoUnivalence`, and named `TypeEquiv` are active. The arbitrary-category
@@ -1230,13 +1266,13 @@ check and an arbitrary structured-Pi J negative check whenever this owner is
 changed.
 
 `pi_happly_by_inverse` supplies both propositional round trips explicitly.
-The reviewed generic theorem capability `is_equiv_map_by_inverse` converts
-such data into the active contractible-fibre `IsEquivMap`; it is logical proof
-authority, not a new evaluator. Its only runtime projection selects the fibre
-centre `(g(b),right(b))`. This makes `type_equiv_from` and
-`type_equiv_right` compute for `pi_happly_type_equiv`, while the opaque
-contraction path does not duplicate `pi_funext_eta`. Do not infer a generic
-runtime eta, arbitrary structured J, or fibrancy from this package.
+The transparent theorem `is_equiv_map_by_inverse` converts such data into the
+active contractible-fibre `IsEquivMap`. It constructs the contraction through
+left-oriented J and half-adjoint coherence, then re-centres it at
+`(g(b),right(b))`. This makes `type_equiv_from` and `type_equiv_right` compute
+for `pi_happly_type_equiv`, while the contraction path remains propositional
+and does not duplicate `pi_funext_eta`. Do not infer a generic runtime eta,
+arbitrary structured J, or fibrancy from this package.
 
 ### Ordinary TypeEquiv algebra
 
@@ -1249,11 +1285,11 @@ their contractible-fibre evidence through `is_equiv_map_by_inverse`.
 
 Keep these public packages transparent. Their forward maps and the generic
 theorem's selected fibre centre make the inverse and right-path projections
-compute without extra rules. The contraction proof is intentionally opaque,
-so the derived left projection is only typed, not identified by conversion
-with the separately constructed inverse law. Unit and associativity compute
-on forward maps; do not promote package eta, double-symmetry cancellation, or
-univalence-decoder coherence into this owner.
+compute without extra rules. The contraction proof is transparent but remains
+propositional structure, so the derived left projection is only typed, not
+identified by conversion with the separately constructed inverse law. Unit
+and associativity compute on forward maps; do not promote package eta,
+double-symmetry cancellation, or univalence-decoder coherence into this owner.
 
 ### Groupoid decoder coherence
 

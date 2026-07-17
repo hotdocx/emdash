@@ -17,6 +17,7 @@ flag "print_domains" on;
 flag "print_meta_args" on;
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
 
 // Elementary decoded H0 classifiers, constructors, and dependent eliminators.
@@ -8268,6 +8269,189 @@ assert [A : Grpd]
     (λ z : τ A, @eq_refl A z)
     x
   ≡ @eq_refl (@= A x x) (@eq_refl A x);
+
+// catalog-area: Native EQ1 evidence property
+// The native record has a transparent two-fibre view. Literal path-category
+// evidence is contractible, while its contraction path remains propositional
+// rather than a global runtime proof-erasure rule.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
+  @omega_equiv_along_from_view_view_EQ1 C x y f u
+  : τ (@=
+      (@OmegaEquivAlong_EQ1 C x y f)
+      (@omega_equiv_along_from_view_EQ1 C x y f
+        (@omega_equiv_along_view_EQ1 C x y f u))
+      u);
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (hleft : τ (IsContr (@OmegaEquivLeftView_EQ1 C x y f)))
+  (hright : τ (IsContr (@OmegaEquivRightView_EQ1 C x y f))) ⊢
+  @omega_equiv_along_evidence_is_contr_from_view_EQ1
+    C x y f
+    (@omega_equiv_along_view_is_contr_EQ1
+      C x y f hleft hright)
+  : τ (IsContr (@OmegaEquivAlong_EQ1 C x y f));
+
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @path_equiv_evidence_is_contr_EQ1 A y x p
+  : τ (IsContr (@OmegaEquivAlong_EQ1 (Path_cat A) x y p));
+
+assert [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y)) ⊢
+  @path_equiv_evidence_is_prop_EQ1 A x y p
+  : τ (IsPropGrpd (@OmegaEquivAlong_EQ1 (Path_cat A) x y p));
+
+assert [A : Grpd]
+  (x : τ A) ⊢
+  is_contr_center (@path_refl_equiv_evidence_is_contr_EQ1 A x)
+  ≡ @path_equiv_along_EQ1 A x x (@eq_refl A x);
+
+assertnot [A : Grpd]
+  (x : τ A) ⊢
+  is_contr_path
+    (@path_refl_equiv_evidence_is_contr_EQ1 A x)
+    (@path_equiv_along_EQ1 A x x (@eq_refl A x))
+  ≡ @eq_refl
+      (@OmegaEquivAlong_EQ1 (Path_cat A) x x (@eq_refl A x))
+      (@path_equiv_along_EQ1 A x x (@eq_refl A x));
+
+// A groupoidal category with set-valued objects has proposition-valued homs
+// by a fully transparent retract argument.
+assert [C : Cat]
+  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (obj_set : τ (IsSetGrpd (Obj C)))
+  (x y : τ (Obj C)) ⊢
+  @groupoidal_hom_is_prop_EQ1 C g obj_set x y
+  : τ (IsPropGrpd (Hom C x y));
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  (x y : τ (Obj C)) ⊢
+  @discrete_hom_is_prop_EQ1 C d x y
+  : τ (IsPropGrpd (Hom C x y));
+
+// Ordinary cross-inverse uniqueness is explicit categorical path algebra.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (l r : τ (Hom C y x))
+  (alpha : τ (@=
+    (Hom C x x)
+    (@comp_fapp0 C x y x l f)
+    (@id C x)))
+  (beta : τ (@=
+    (Hom C y y)
+    (@comp_fapp0 C y x y f r)
+    (@id C y))) ⊢
+  @omega_equiv_candidate_left_to_right_EQ1
+    C x y f l r alpha beta
+  : τ (@= (Hom C y x) l r);
+
+// The composition-map argument contracts native fixed-arrow evidence in an
+// arbitrary category. No local truncation premise is needed.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  [f : τ (Hom C x y)]
+  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
+  @omega_equiv_along_evidence_is_contr_EQ1 C x y f u
+  : τ (IsContr (@OmegaEquivAlong_EQ1 C x y f));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @omega_equiv_along_evidence_is_prop_EQ1 C x y f
+  : τ (IsPropGrpd (@OmegaEquivAlong_EQ1 C x y f));
+
+// The earlier local-set proof remains a useful independent specialization.
+assert [C : Cat]
+  (h : τ (@IsLocallySetCat_EQ1 C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
+  @locally_set_equiv_evidence_is_prop_EQ1 C h x y f
+  : τ (IsPropGrpd (@OmegaEquivAlong_EQ1 C x y f));
+
+assert [C : Cat]
+  (h : τ (IsNCat (cat_succ cat_zero) C)) ⊢
+  @one_cat_is_locally_set_EQ1 C h
+  : τ (@IsLocallySetCat_EQ1 C);
+
+// The transparent Sigma and stable facade transfer set truncation by
+// explicit retractions; no contractible-fibre theorem is invoked.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (h : τ (IsSetGrpd (@OmegaEquivSigma_EQ1 C x y))) ⊢
+  @omega_equiv_facade_is_set_EQ1 C x y h
+  : τ (IsSetGrpd (@OmegaEquiv_EQ1 C x y));
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y)) ⊢
+  @object_path_cast_roundtrip_EQ1 C x y p
+  ≡ @eq_refl (@= (Obj C) x y) p;
+
+// Dimension one is now unconditional: discrete hom categories supply the
+// local-set hypothesis and the direct EQ1 Sigma supplies object-path sets.
+assert [C : Cat]
+  (h : τ (IsNCat (cat_succ cat_zero) C)) ⊢
+  @one_cat_omega_sigma_is_set_EQ1 C h
+  : Π x : τ (Obj C), Π y : τ (Obj C),
+      τ (IsSetGrpd (@OmegaEquivSigma_EQ1 C x y));
+
+assert [C : Cat]
+  (h : τ (IsNCat (cat_succ cat_zero) C)) ⊢
+  @one_cat_obj_trunc_EQ1 C h
+  : τ (IsObjTruncCat
+      (cat_dim_trunc_level (cat_succ cat_zero)) C);
+
+// Explicit retractions preserve every truncation level by transparent
+// TruncLevel induction.
+assert (n : TruncLevel) (X Y : Grpd)
+  (r : τ X → τ Y)
+  (s : τ Y → τ X)
+  (epsilon : Π y : τ Y, τ (@= Y (r (s y)) y))
+  (hX : τ (IsTruncGrpd n X)) ⊢
+  @is_trunc_retract_EQ1 n X Y r s epsilon hX
+  : τ (IsTruncGrpd n Y);
+
+// Finite directed dimension now bounds object truncation unconditionally.
+assert (n : CatDim) (C : Cat)
+  (h : τ (IsNCat n C)) ⊢
+  @ncat_obj_trunc_EQ1 n C h
+  : τ (IsObjTruncCat (cat_dim_trunc_level n) C);
+
+assert (C : Cat) (h : τ (IsNCat cat_zero C)) ⊢
+  @ncat_obj_trunc_EQ1 cat_zero C h
+  ≡ @is_discrete_cat_obj_set C h;
+
+// The successor equation exposes exactly the hom induction, Sigma closure,
+// evidence-property weakening, and the two explicit retractions.
+assert (n : CatDim) (C : Cat)
+  (h : τ (IsNCat (cat_succ n) C))
+  (x y : τ (Obj C)) ⊢
+  (@ncat_obj_trunc_EQ1 (cat_succ n) C h) x y
+  ≡ @object_path_is_trunc_from_omega_EQ1
+      (cat_dim_trunc_level n)
+      C x y
+      (@omega_equiv_facade_is_trunc_EQ1
+        (cat_dim_trunc_level n)
+        C x y
+        (@is_trunc_sigma
+          (cat_dim_trunc_level n)
+          (Hom C x y)
+          (λ f : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y f)
+          (@ncat_obj_trunc_EQ1 n (Hom_cat C x y) (h x y))
+          (λ f : τ (Hom C x y),
+            @prop_is_trunc_cat_dim
+              n
+              (@OmegaEquivAlong_EQ1 C x y f)
+              (@omega_equiv_along_evidence_is_prop_EQ1 C x y f))));
 
 // catalog-area: Native EQ1 next-hom action
 // A category-level equality-valued omega-equivalence acts by a transparent

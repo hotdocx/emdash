@@ -63,42 +63,26 @@ The checked kernel currently includes:
   involution, type equivalence, ordinary and omega-categorical equivalence
   staging, and groupoid decoder univalence with both propositional round trips,
   a derived canonical contractible-fibre capability, a propositional transport
-  square, and a Pi-universe action consumer. The named
-  `GrpdPathView(A,B) = TypeEquiv(A,B)` now provides a finite groupoid-universe
-  identity view with decoder-owned encode/decode, propositional inverse laws,
-  and transport agreement while public universe equality remains opaque; a
-  direct equality rule was rejected because it recursively expands the
-  unstratified self-universe normal form. The public fixed-arrow
-  `OmegaEquivAlong(f)` evidence interface and Sigma-packaged `OmegaEquiv`, whose
-  exact projections, recursive observations, reflexive/opposite/Product
-  generators, and evidence-indexed decoder compute through one owner. At the
-  categorical universe, public equality now reduces directly to
-  `CatPathView(A,B) = OmegaEquiv(Cat_cat,A,B)`: named reflexivity, decoder-owned
-  encode/decode and propositional round trips, reflexive Product action, and a
-  D0b next-hom consumer reuse that package. Generic `eq_refl` remains a
-  distinct proof form so literal J and path-action beta are preserved; the
-  unstratified self-universe normal form terminates at opaque fixed-arrow
-  evidence. A finite `OmegaEquivAlongPathView_D0(u,v)` now compares the nested
-  Sigma/Product records of the two selected inverse arrows and recursive cell
-  packages; genuine certificate paths act on that view, but there is no
-  decoder or eta principle. The direct recursive certificate-equality rule is
-  rejected because both owner-position checking and self-normalization exceed
-  their bounds, so property-valuedness remains separate. The directed-
-  dimension theorem is now executable conditionally: a named global
-  `OmegaEquivAlongEvidenceProp_D0` capability is retained as an explicit input,
-  while `ncat_obj_trunc_from_evidence_prop` computes from the discrete base and
-  recursively closes each public omega-equivalence Sigma package before
-  transporting through categorical univalence. No inhabitant of that
-  capability is inferred from the finite view, so bare `IsNCat` evidence still
-  does not prove object truncation. A separate dimension-indexed observation
-  now makes the recursive certificate shape executable without changing that
-  boundary: `OmegaEquivAlongDimObservation_D0(n,h,f)` is Unit at dimension zero
-  and at a successor retains both inverse arrows plus recursively observed
-  inverse cells in the smaller-dimensional hom-categories. Its observation
-  map reuses the four D0 owners, and its path view has reflexivity and one-way
-  path action. `ZeroCat` and `OneCat` controls normalize, but there is still no
-  reverse decoder, eta, evidence-property inhabitant, or public certificate-
-  equality rule.
+  square, and a Pi-universe action consumer. The equality-valued overlay adds
+  a decoded native `OmegaEquivAlong_EQ1(f)` record with separate inverse arrows
+  and ordinary equality-valued cancellation laws, plus a stable first-class
+  `OmegaEquiv_EQ1` facade with construction, projections, dependent
+  elimination, propositional eta, and a transparent Sigma comparison. Generic
+  object equality compares with that facade at proof time; rigid Cat and Grpd
+  universe equality reduce to it at runtime, while explicit path packages own
+  observer computation. `GrpdPathView = TypeEquiv` remains a compatibility
+  view, and explicit adapters in both directions use a now-transparent
+  quasi-inverse-to-contractible-fibre theorem. The older recursive D0/D0b
+  certificate, observation trees, and decoder round trips remain compatibility
+  surfaces rather than the primary foundation.
+
+  The downstream transparent evidence module proves fixed-arrow native-EQ1
+  evidence proposition-valued for every category by contracting two
+  composition-map homotopy fibres. It also proves truncation closure under
+  explicit retractions and the unconditional finite-dimensional theorem
+  `IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)`, with computing base
+  and successor equations. The old D0 global evidence-property capability and
+  conditional theorem remain explicitly uninhabited compatibility experiments.
   Product
   isomorphism and omega-equivalence evidence retain their componentwise
   constructor provenance even when both components are reflexive; projections
@@ -111,7 +95,7 @@ The checked kernel currently includes:
 - covariant/contravariant hom actions and the rigid simultaneous `Hom_*`
   action used by the unit hom profunctor;
 - the exact two-field `IsDiscreteCat(C)` contract, with set-truncated objects,
-  fixed core-inclusion evidence, D0b-derived homwise omega-equivalence,
+  fixed core-inclusion evidence, native-EQ1 derived homwise omega-equivalence,
   selected `hom_to_path`, both coherent round trips, and an iterable recursive
   cell without broad runtime cancellation;
 - independent `IsObjTruncCat`, native `CatDim`, its recursive
@@ -120,8 +104,8 @@ The checked kernel currently includes:
   one-category exposes discrete hom-categories and iterates core-inclusion
   adequacy between parallel arrows. Fixed-map `OmegaEquivAlong(F)` now induces
   an ordinary equivalence of object classifiers and transports
-  `IsObjTruncCat`; the index still does not itself prove the recursive
-  `IsNCat` object-truncation theorem. Ordinary strict isomorphism evidence now
+  `IsObjTruncCat`; native EQ1 evidence now proves the recursive `IsNCat`
+  object-truncation theorem unconditionally. Ordinary strict isomorphism evidence now
   has a backed lift to recursive `OmegaEquiv`: both inverse arrows reuse the
   ordinary inverse and the two inverse equations encode as next-hom cells. A
   packaged one-category consequently has a derived `one_cat_iso_path` decoder
@@ -166,6 +150,9 @@ or a completed foundational theory.
 - `emdash3_2.lp`: active v3.2 kernel implementation.
 - `emdash3_2_eq1_hom_action.lp`: one-way transparent derived native-EQ1
   hom-action, groupoidality, and structured-transport extension.
+- `emdash3_2_eq1_evidence_property.lp`: downstream transparent native-EQ1
+  evidence-property, retract-truncation, and finite-`NCat` object-truncation
+  extension.
 - `emdash3_2_checks.lp`: executable diagnostic/regression suite.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
   current architecture and development SOP.

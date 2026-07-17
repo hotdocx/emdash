@@ -679,230 +679,6 @@ symbol sum_map
     s;
 
 /*
-  Reflexive proof-time basis for componentwise Sum action.
-
-  Generic eq_ap is transparent, while the generic J owner deliberately keeps
-  outer Sum reflexivity distinct from component reflexivity. Each stable basis
-  therefore has two direct, semantically justified comparisons: one with the
-  normalized component action and one with the exact normalized outer-J
-  action. The rules do not choose runtime normal forms, and downstream proofs
-  compose the two comparisons explicitly rather than relying on experimental
-  unification transitivity.
-*/
-// Stable left reflexive action basis.
-injective symbol sum_map_inl_ap_basis
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (a : τ A)
-  (fa : τ A')
-  : τ (@= A' fa fa);
-
-// Stable right reflexive action basis.
-injective symbol sum_map_inr_ap_basis
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (b : τ B)
-  (gb : τ B')
-  : τ (@= B' gb gb);
-
-// Proof-time only: the left basis compares with normalized component action.
-unif_rule
-  @sum_map_inl_ap_basis _ _ $A' _ _ _ _ $fa
-  ≡ @eq_refl $A' $fa
-  ↪ [ tt ≡ tt ];
-
-// Proof-time only: the left basis compares with normalized outer Sum action.
-// The stable basis restricts the transparent ind_eqr pattern to this consumer.
-unif_rule
-  @sum_map_inl_ap_basis $A $B _ _ _ _ $a _
-  ≡ @ind_eqr
-      (Sum_grpd $A $B)
-      (@sum_inl $A $B $a)
-      _
-      _
-      (@sum_inl $A $B $a)
-      (@eq_refl $A $a)
-  ↪ [ tt ≡ tt ];
-
-// Proof-time only: the right basis compares with normalized component action.
-unif_rule
-  @sum_map_inr_ap_basis _ _ _ $B' _ _ _ $gb
-  ≡ @eq_refl $B' $gb
-  ↪ [ tt ≡ tt ];
-
-// Proof-time only: the right basis compares with normalized outer Sum action.
-unif_rule
-  @sum_map_inr_ap_basis $A $B _ _ _ _ $b _
-  ≡ @ind_eqr
-      (Sum_grpd $A $B)
-      (@sum_inr $A $B $b)
-      _
-      _
-      (@sum_inr $A $B $b)
-      (@eq_refl $B $b)
-  ↪ [ tt ≡ tt ];
-
-// Component generic action reaches the stable left basis.
-symbol sum_map_inl_component_basis
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (a : τ A)
-  : τ (@=
-      (@= A' (f a) (f a))
-      (@eq_ap A A' f a a (@eq_refl A a))
-      (@sum_map_inl_ap_basis A B A' B' f g a (f a)))
-≔ @eq_refl
-    (@= A' (f a) (f a))
-    (@sum_map_inl_ap_basis A B A' B' f g a (f a));
-
-// The stable left basis reaches outer Sum generic action.
-symbol sum_map_inl_basis_outer
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (a : τ A)
-  : τ (@=
-      (@= A' (f a) (f a))
-      (@sum_map_inl_ap_basis A B A' B' f g a (f a))
-      (@eq_ap
-        (Sum_grpd A B)
-        (Sum_grpd A' B')
-        (@sum_map A B A' B' f g)
-        (@sum_inl A B a)
-        (@sum_inl A B a)
-        (@eq_refl A a)))
-≔ @eq_refl
-    (@= A' (f a) (f a))
-    (@sum_map_inl_ap_basis A B A' B' f g a (f a));
-
-// Component generic action reaches the stable right basis.
-symbol sum_map_inr_component_basis
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (b : τ B)
-  : τ (@=
-      (@= B' (g b) (g b))
-      (@eq_ap B B' g b b (@eq_refl B b))
-      (@sum_map_inr_ap_basis A B A' B' f g b (g b)))
-≔ @eq_refl
-    (@= B' (g b) (g b))
-    (@sum_map_inr_ap_basis A B A' B' f g b (g b));
-
-// The stable right basis reaches outer Sum generic action.
-symbol sum_map_inr_basis_outer
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (b : τ B)
-  : τ (@=
-      (@= B' (g b) (g b))
-      (@sum_map_inr_ap_basis A B A' B' f g b (g b))
-      (@eq_ap
-        (Sum_grpd A B)
-        (Sum_grpd A' B')
-        (@sum_map A B A' B' f g)
-        (@sum_inr A B b)
-        (@sum_inr A B b)
-        (@eq_refl B b)))
-≔ @eq_refl
-    (@= B' (g b) (g b))
-    (@sum_map_inr_ap_basis A B A' B' f g b (g b));
-
-// Left-component paths agree with generic action of the canonical Sum map.
-symbol sum_map_inl_eq_ap
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  [a0 a1 : τ A]
-  (p : τ (@= A a0 a1))
-  : τ (@=
-      (@= A' (f a0) (f a1))
-      (@eq_ap A A' f a0 a1 p)
-      (@eq_ap
-        (Sum_grpd A B)
-        (Sum_grpd A' B')
-        (@sum_map A B A' B' f g)
-        (@sum_inl A B a0)
-        (@sum_inl A B a1)
-        p))
-≔ @ind_eqr A a1
-    (λ a0 : τ A, λ p : τ (@= A a0 a1),
-      @=
-        (@= A' (f a0) (f a1))
-        (@eq_ap A A' f a0 a1 p)
-        (@eq_ap
-          (Sum_grpd A B)
-          (Sum_grpd A' B')
-          (@sum_map A B A' B' f g)
-          (@sum_inl A B a0)
-          (@sum_inl A B a1)
-          p))
-    (@eq_trans
-      (@= A' (f a1) (f a1))
-      (@eq_ap A A' f a1 a1 (@eq_refl A a1))
-      (@sum_map_inl_ap_basis A B A' B' f g a1 (f a1))
-      (@eq_ap
-        (Sum_grpd A B)
-        (Sum_grpd A' B')
-        (@sum_map A B A' B' f g)
-        (@sum_inl A B a1)
-        (@sum_inl A B a1)
-        (@eq_refl A a1))
-      (@sum_map_inl_component_basis A B A' B' f g a1)
-      (@sum_map_inl_basis_outer A B A' B' f g a1))
-    a0
-    p;
-
-// Right-component paths agree with generic action of the canonical Sum map.
-symbol sum_map_inr_eq_ap
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  [b0 b1 : τ B]
-  (p : τ (@= B b0 b1))
-  : τ (@=
-      (@= B' (g b0) (g b1))
-      (@eq_ap B B' g b0 b1 p)
-      (@eq_ap
-        (Sum_grpd A B)
-        (Sum_grpd A' B')
-        (@sum_map A B A' B' f g)
-        (@sum_inr A B b0)
-        (@sum_inr A B b1)
-        p))
-≔ @ind_eqr B b1
-    (λ b0 : τ B, λ p : τ (@= B b0 b1),
-      @=
-        (@= B' (g b0) (g b1))
-        (@eq_ap B B' g b0 b1 p)
-        (@eq_ap
-          (Sum_grpd A B)
-          (Sum_grpd A' B')
-          (@sum_map A B A' B' f g)
-          (@sum_inr A B b0)
-          (@sum_inr A B b1)
-          p))
-    (@eq_trans
-      (@= B' (g b1) (g b1))
-      (@eq_ap B B' g b1 b1 (@eq_refl B b1))
-      (@sum_map_inr_ap_basis A B A' B' f g b1 (g b1))
-      (@eq_ap
-        (Sum_grpd A B)
-        (Sum_grpd A' B')
-        (@sum_map A B A' B' f g)
-        (@sum_inr A B b1)
-        (@sum_inr A B b1)
-        (@eq_refl B b1))
-      (@sum_map_inr_component_basis A B A' B' f g b1)
-      (@sum_map_inr_basis_outer A B A' B' f g b1))
-    b0
-    p;
-
-/*
   Canonical finite dependent-record representative.
 
   `PathRecord_grpd(A)` packages `src,dst : A` and a dependent field
@@ -2151,202 +1927,6 @@ symbol nat_succ_obs_action
     (λ n : τ Nat_grpd, succ n)
     nat_succ_obs_action_map
     nat_succ_obs_action_coherence;
-
-/*
-  Registered componentwise action of a binary-sum map.
-
-  Equal tags delegate to the registered action on the corresponding summand.
-  Mixed tags return or eliminate the already-impossible Empty witness.
-  Agreement with generic eq_ap is propositional and uses the Sum-owned
-  component comparison above; the selected action remains a distinct runtime
-  presentation at open endpoints.
-*/
-// Componentwise selected action map for `sum_map(f,g)`.
-symbol sum_obs_action_map
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
-  : τ (@ObsActionMap
-      (Sum_grpd A B)
-      (Sum_grpd A' B')
-      (@sum_map A B A' B' f g))
-≔ λ x : τ (Sum_grpd A B),
-    λ y : τ (Sum_grpd A B),
-    λ p : τ (@= (Sum_grpd A B) x y),
-      @sum_elim A B
-        (λ x0 : τ (Sum_grpd A B),
-          @Pi_grpd (Sum_grpd A B)
-            (λ y0 : τ (Sum_grpd A B),
-              @Pi_grpd (@= (Sum_grpd A B) x0 y0)
-                (λ _ : τ (@= (Sum_grpd A B) x0 y0),
-                  @= (Sum_grpd A' B')
-                    (@sum_map A B A' B' f g x0)
-                    (@sum_map A B A' B' f g y0))))
-        (λ a0 : τ A,
-          @sum_elim A B
-            (λ y0 : τ (Sum_grpd A B),
-              @Pi_grpd
-                (@= (Sum_grpd A B) (@sum_inl A B a0) y0)
-                (λ _ : τ (@= (Sum_grpd A B) (@sum_inl A B a0) y0),
-                  @= (Sum_grpd A' B')
-                    (@sum_map A B A' B' f g (@sum_inl A B a0))
-                    (@sum_map A B A' B' f g y0)))
-            (λ a1 : τ A,
-              λ p0 : τ (@= A a0 a1),
-                @obs_action_apply A A' f u a0 a1 p0)
-            (λ b1 : τ B,
-              λ p0 : τ Empty_grpd, p0))
-        (λ b0 : τ B,
-          @sum_elim A B
-            (λ y0 : τ (Sum_grpd A B),
-              @Pi_grpd
-                (@= (Sum_grpd A B) (@sum_inr A B b0) y0)
-                (λ _ : τ (@= (Sum_grpd A B) (@sum_inr A B b0) y0),
-                  @= (Sum_grpd A' B')
-                    (@sum_map A B A' B' f g (@sum_inr A B b0))
-                    (@sum_map A B A' B' f g y0)))
-            (λ a1 : τ A,
-              λ p0 : τ Empty_grpd, p0)
-            (λ b1 : τ B,
-              λ p0 : τ (@= B b0 b1),
-                @obs_action_apply B B' g v b0 b1 p0))
-        x
-        y
-        p;
-
-// Pointwise classifier for selected-versus-semantic Sum action agreement.
-symbol SumObsActionCoherenceAt
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
-  (x y : τ (Sum_grpd A B))
-  (p : τ (@= (Sum_grpd A B) x y))
-  : Grpd
-≔ @=
-    (@= (Sum_grpd A' B')
-      (@sum_map A B A' B' f g x)
-      (@sum_map A B A' B' f g y))
-    (@sum_obs_action_map A B A' B' f g u v x y p)
-    (@eq_ap
-      (Sum_grpd A B)
-      (Sum_grpd A' B')
-      (@sum_map A B A' B' f g)
-      x y p);
-
-// Componentwise selected action agrees propositionally with generic eq_ap.
-symbol sum_obs_action_coherence
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
-  : τ (@ObsActionCoherence
-      (Sum_grpd A B)
-      (Sum_grpd A' B')
-      (@sum_map A B A' B' f g)
-      (@sum_obs_action_map A B A' B' f g u v))
-≔ λ x : τ (Sum_grpd A B),
-    λ y : τ (Sum_grpd A B),
-    λ p : τ (@= (Sum_grpd A B) x y),
-      @sum_elim A B
-        (λ x0 : τ (Sum_grpd A B),
-          @Pi_grpd (Sum_grpd A B)
-            (λ y0 : τ (Sum_grpd A B),
-              @Pi_grpd (@= (Sum_grpd A B) x0 y0)
-                (λ p0 : τ (@= (Sum_grpd A B) x0 y0),
-                  @SumObsActionCoherenceAt
-                    A B A' B' f g u v x0 y0 p0)))
-        (λ a0 : τ A,
-          @sum_elim A B
-            (λ y0 : τ (Sum_grpd A B),
-              @Pi_grpd
-                (@= (Sum_grpd A B) (@sum_inl A B a0) y0)
-                (λ p0 : τ (@= (Sum_grpd A B) (@sum_inl A B a0) y0),
-                  @SumObsActionCoherenceAt
-                    A B A' B' f g u v (@sum_inl A B a0) y0 p0))
-            (λ a1 : τ A,
-              λ p0 : τ (@= A a0 a1),
-                @eq_trans
-                  (@= A' (f a0) (f a1))
-                  (@obs_action_apply A A' f u a0 a1 p0)
-                  (@eq_ap A A' f a0 a1 p0)
-                  (@eq_ap
-                    (Sum_grpd A B)
-                    (Sum_grpd A' B')
-                    (@sum_map A B A' B' f g)
-                    (@sum_inl A B a0)
-                    (@sum_inl A B a1)
-                    p0)
-                  (@obs_action_agrees A A' f u a0 a1 p0)
-                  (@sum_map_inl_eq_ap A B A' B' f g a0 a1 p0))
-            (λ b1 : τ B,
-              λ p0 : τ Empty_grpd,
-                @empty_elim
-                  (λ q : τ Empty_grpd,
-                    @SumObsActionCoherenceAt
-                      A B A' B' f g u v
-                      (@sum_inl A B a0)
-                      (@sum_inr A B b1)
-                      q)
-                  p0))
-        (λ b0 : τ B,
-          @sum_elim A B
-            (λ y0 : τ (Sum_grpd A B),
-              @Pi_grpd
-                (@= (Sum_grpd A B) (@sum_inr A B b0) y0)
-                (λ p0 : τ (@= (Sum_grpd A B) (@sum_inr A B b0) y0),
-                  @SumObsActionCoherenceAt
-                    A B A' B' f g u v (@sum_inr A B b0) y0 p0))
-            (λ a1 : τ A,
-              λ p0 : τ Empty_grpd,
-                @empty_elim
-                  (λ q : τ Empty_grpd,
-                    @SumObsActionCoherenceAt
-                      A B A' B' f g u v
-                      (@sum_inr A B b0)
-                      (@sum_inl A B a1)
-                      q)
-                  p0)
-            (λ b1 : τ B,
-              λ p0 : τ (@= B b0 b1),
-                @eq_trans
-                  (@= B' (g b0) (g b1))
-                  (@obs_action_apply B B' g v b0 b1 p0)
-                  (@eq_ap B B' g b0 b1 p0)
-                  (@eq_ap
-                    (Sum_grpd A B)
-                    (Sum_grpd A' B')
-                    (@sum_map A B A' B' f g)
-                    (@sum_inr A B b0)
-                    (@sum_inr A B b1)
-                    p0)
-                  (@obs_action_agrees B B' g v b0 b1 p0)
-                  (@sum_map_inr_eq_ap A B A' B' f g b0 b1 p0)))
-        x
-        y
-        p;
-
-// Registered componentwise action for the canonical binary-sum map.
-symbol sum_obs_action
-  [A B A' B' : Grpd]
-  (f : τ A → τ A')
-  (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
-  : τ (@ObsAction
-      (Sum_grpd A B)
-      (Sum_grpd A' B')
-      (@sum_map A B A' B' f g))
-≔ @obs_action_intro
-    (Sum_grpd A B)
-    (Sum_grpd A' B')
-    (@sum_map A B A' B' f g)
-    (@sum_obs_action_map A B A' B' f g u v)
-    (@sum_obs_action_coherence A B A' B' f g u v);
 
 // Candidate dependent action carried by a fixed open section.
 symbol ObsDActionMap
@@ -3657,30 +3237,226 @@ symbol EquivByInverse
     (@Pi_grpd B (λ b : τ B, @= B (f (g b)) b));
 
 /*
-  Standard quasi-inverse-to-contractible-fibre theorem capability.
+  Transparent quasi-inverse-to-contractible-fibre theorem.
 
-  This declaration is logical/proof authority, not a runtime normal-form
-  owner: a map with specified left and right inverse paths has contractible
-  homotopy fibres. The active specification keeps the proof opaque, as it does
-  for the existing constructor-specific *_is_equiv capabilities; consumers
-  must still construct both round-trip fields explicitly.
+  Left-based J reduces an arbitrary fibre path to the half-adjoint
+  triangle. The resulting adjusted contraction is re-centred at the
+  originally supplied right-inverse witness, preserving the historical
+  selected-centre normal form without a rewrite rule or theorem axiom.
 */
+// Double symmetry is propositionally identity.
+symbol eq_sym_sym
+  [A : Grpd]
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@=
+      (@= A x y)
+      (@eq_sym A y x (@eq_sym A x y p))
+      p)
+≔ @ind_eqr
+    A y
+    (λ x : τ A,
+      λ p : τ (@= A x y),
+        @=
+          (@= A x y)
+          (@eq_sym A y x (@eq_sym A x y p))
+          p)
+    (@eq_refl (@= A y y) (@eq_refl A y))
+    x
+    p;
+
+// Left-based path induction derived from the primitive right-based owner.
+symbol ind_eql
+  [A : Grpd]
+  [x : τ A]
+  (P : Π y : τ A, τ (@= A x y) → Grpd)
+  (u : τ (P x (@eq_refl A x)))
+  [y : τ A]
+  (p : τ (@= A x y))
+  : τ (P y p)
+≔ @ind_eq
+    (@= A x y)
+    p
+    (@eq_sym A y x (@eq_sym A x y p))
+    (@eq_sym
+      (@= A x y)
+      (@eq_sym A y x (@eq_sym A x y p))
+      p
+      (@eq_sym_sym A x y p))
+    (λ q : τ (@= A x y), P y q)
+    (@ind_eqr
+      A x
+      (λ y : τ A,
+        λ q : τ (@= A y x),
+          P y (@eq_sym A y x q))
+      u
+      y
+      (@eq_sym A x y p));
+
+// Base point in the fibre contraction selected by a quasi-inverse.
+symbol qinv_fibre_base_path
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (g : τ B → τ A)
+  (eta : Π a : τ A, τ (@= A (g (f a)) a))
+  [a : τ A]
+  [b : τ B]
+  (p : τ (@= B (f a) b))
+  : τ (@= A (g b) a)
+≔ @eq_trans
+    A
+    (g b)
+    (g (f a))
+    a
+    (@eq_ap B A g b (f a) (@eq_sym B (f a) b p))
+    (eta a);
+
+// The half-adjoint triangle is exactly the dependent fibre-path base case.
+symbol qinv_fibre_pathover
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (g : τ B → τ A)
+  (eta : Π a : τ A, τ (@= A (g (f a)) a))
+  (epsilon : Π b : τ B, τ (@= B (f (g b)) b))
+  [a : τ A]
+  [b : τ B]
+  (p : τ (@= B (f a) b))
+  : τ (@PathOver
+      A
+      (λ z : τ A, @= B (f z) b)
+      (g b)
+      a
+      (@qinv_fibre_base_path A B f g eta a b p)
+      (@half_adjoint_counit A B f g eta epsilon b)
+      p)
+≔ @ind_eql
+    B
+    (f a)
+    (λ b : τ B,
+      λ p : τ (@= B (f a) b),
+        @PathOver
+          A
+          (λ z : τ A, @= B (f z) b)
+          (g b)
+          a
+          (@qinv_fibre_base_path A B f g eta a b p)
+          (@half_adjoint_counit A B f g eta epsilon b)
+          p)
+    (@eq_sym
+      (@= B (f (g (f a))) (f a))
+      (@eq_ap A B f (g (f a)) a (eta a))
+      (@half_adjoint_counit A B f g eta epsilon (f a))
+      (@half_adjoint_triangle A B f g eta epsilon a))
+    b
+    p;
+
+// Every fibre point equals the adjusted half-adjoint centre.
+symbol qinv_fibre_contr_path
+  [A B : Grpd]
+  (f : τ A → τ B)
+  (g : τ B → τ A)
+  (eta : Π a : τ A, τ (@= A (g (f a)) a))
+  (epsilon : Π b : τ B, τ (@= B (f (g b)) b))
+  [b : τ B]
+  (h : τ (@HFiber A B f b))
+  : τ (@=
+      (@HFiber A B f b)
+      (@Struct_sigma
+        A
+        (λ a : τ A, @= B (f a) b)
+        (g b)
+        (@half_adjoint_counit A B f g eta epsilon b))
+      h)
+≔ @sigma_ind
+    A
+    (λ a : τ A, @= B (f a) b)
+    (λ h : τ (@HFiber A B f b),
+      @=
+        (@HFiber A B f b)
+        (@Struct_sigma
+          A
+          (λ a : τ A, @= B (f a) b)
+          (g b)
+          (@half_adjoint_counit A B f g eta epsilon b))
+        h)
+    (λ a : τ A,
+      λ p : τ (@= B (f a) b),
+        @Struct_sigma
+          (@= A (g b) a)
+          (λ q : τ (@= A (g b) a),
+            @PathOver
+              A
+              (λ z : τ A, @= B (f z) b)
+              (g b)
+              a q
+              (@half_adjoint_counit A B f g eta epsilon b)
+              p)
+          (@qinv_fibre_base_path A B f g eta a b p)
+          (@qinv_fibre_pathover A B f g eta epsilon a b p))
+    h;
+
+// Fully transparent quasi-inverse-to-contractible-fibre theorem.
+symbol is_equiv_map_by_inverse_adjusted
+  [A B : Grpd]
+  [f : τ A → τ B]
+  [g : τ B → τ A]
+  (q : τ (@EquivByInverse A B f g))
+  : τ (@IsEquivMap A B f)
+≔ λ b : τ B,
+    @Struct_sigma
+      (@HFiber A B f b)
+      (λ centre : τ (@HFiber A B f b),
+        @Pi_grpd
+          (@HFiber A B f b)
+          (λ h : τ (@HFiber A B f b),
+            @= (@HFiber A B f b) centre h))
+      (@Struct_sigma
+        A
+        (λ a : τ A, @= B (f a) b)
+        (g b)
+        (@half_adjoint_counit
+          A B f g (sigma_Fst q) (sigma_Snd q) b))
+      (λ h : τ (@HFiber A B f b),
+        @qinv_fibre_contr_path
+          A B f g (sigma_Fst q) (sigma_Snd q) b h);
+
+// Re-centre a contractible classifier at any specified point.
+symbol is_contr_recenter
+  [X : Grpd]
+  (c : τ (IsContr X))
+  (x : τ X)
+  : τ (IsContr X)
+≔ @Struct_sigma
+    X
+    (λ centre : τ X,
+      @Pi_grpd X (λ y : τ X, @= X centre y))
+    x
+    (λ y : τ X,
+      @eq_trans
+        X
+        x
+        (is_contr_center c)
+        y
+        (@eq_sym X (is_contr_center c) x (is_contr_path c x))
+        (is_contr_path c y));
+
+// Transparent theorem with the legacy selected centre preserved exactly.
 symbol is_equiv_map_by_inverse
   [A B : Grpd]
   [f : τ A → τ B]
   [g : τ B → τ A]
   (q : τ (@EquivByInverse A B f g))
-  : τ (@IsEquivMap A B f);
+  : τ (@IsEquivMap A B f)
+≔ λ b : τ B,
+    @is_contr_recenter
+      (@HFiber A B f b)
+      (@is_equiv_map_by_inverse_adjusted A B f g q b)
+      (@Struct_sigma
+        A
+        (λ a : τ A, @= B (f a) b)
+        (g b)
+        ((sigma_Snd q) b));
 
-// The selected centre of each fibre is the specified inverse and its right
-// inverse path. The contraction proof remains opaque theorem data.
-rule sigma_Fst
-      (@is_equiv_map_by_inverse $A $B $f $g $q $b)
-  ↪ @Struct_sigma
-      $A
-      (λ a : τ $A, @= $B ($f a) $b)
-      ($g $b)
-      ((sigma_Snd $q) $b);
 
 /*
   Ordinary algebra of type equivalences.

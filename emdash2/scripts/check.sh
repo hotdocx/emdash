@@ -38,7 +38,7 @@ check_file() {
 
 files=("$@")
 if [[ ${#files[@]} -eq 0 ]]; then
-  files=(emdash3_2.lp emdash3_2_eq1_hom_action.lp emdash3_2_checks.lp)
+  files=(emdash3_2.lp emdash3_2_eq1_hom_action.lp emdash3_2_eq1_evidence_property.lp emdash3_2_checks.lp)
 fi
 
 for file in "${files[@]}"; do

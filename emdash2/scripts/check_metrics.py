@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CORE_CHECK_FILES = [
     Path("emdash3_2.lp"),
     Path("emdash3_2_eq1_hom_action.lp"),
+    Path("emdash3_2_eq1_evidence_property.lp"),
     Path("emdash3_2_checks.lp"),
 ]
 EXAMPLES_DIR = ROOT / "examples"
