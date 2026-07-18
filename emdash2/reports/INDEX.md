@@ -31,16 +31,17 @@ implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
-  reopened corrective plan. The committed generated-word Hom presentation is
-  rejected as the intended HIT. Focused probes validate an opaque
-  `WalkingEnd`, judgmental point/loop beta, whole-HIT Nat Code/encode, Nat
-  powers, and both transparent inverse proofs using a minimal opaque 1-cell
-  HIT eliminator. The review rejects the earlier bodyless `PathOut` motive:
-  enriched-slice transport is not directed-arrow `J`. Before active migration,
-  the plan must select the 1-cell eliminator as a primitive component of this
-  concrete categorical HIT or derive it from stronger reusable
-  displayed-category/free-category infrastructure. Full functor-category
-  initiality remains outside this practical computation milestone.
+  goal-ready reopened migration plan. The committed generated-word Hom
+  presentation is rejected as the intended HIT. Focused and full owner probes
+  validate opaque constructors, a parameterized contextual `Functord`
+  eliminator, judgmental base/loop beta, the terminal-owner migration, and the
+  decoder-shaped arbitrary-arrow application without a special Hom/1-cell
+  eliminator. The plan explicitly distinguishes those demonstrated interfaces
+  from the still-unimplemented concrete path/core action, `Code`, based-Hom
+  core `H`, power functor, spiral, and both selected round trips. It gives the
+  complete kernel/walking/check/example/documentation migration and validation
+  phases. Full functor-category initiality remains outside this practical
+  computation milestone.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
