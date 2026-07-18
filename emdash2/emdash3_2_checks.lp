@@ -19154,8 +19154,8 @@ assert [A B E I : Cat]
       a b
       cross;
 
-// catalog-area: Walking endomorphism Nat prerequisites
-// The retained slice is independent of the blocked HIT/BNat composition rules.
+// catalog-area: Walking endomorphism directed HIT and Nat normal form
+// Arithmetic prerequisites remain transparent and reusable.
 assert (m n : τ Nat_grpd) ⊢
   @nat_add m n
   : τ Nat_grpd;
@@ -19217,6 +19217,225 @@ assert ⊢
 assert (m n : τ Nat_grpd) ⊢
   nat_is_set m n
   : τ (IsPropGrpd (@= Nat_grpd m n));
+
+// WalkingWord is native free-arrow syntax, not an early Hom-to-Nat rewrite.
+assert ⊢ τ WalkingWord_grpd ≡ walking_word;
+
+assert ⊢
+  @= WalkingWord_grpd walking_word_zero walking_word_zero
+  ≡ Unit_grpd;
+
+assert (w : τ WalkingWord_grpd) ⊢
+  @= WalkingWord_grpd walking_word_zero (walking_word_succ w)
+  ≡ Empty_grpd;
+
+assert ⊢ Obj WalkingEnd_cat ≡ Unit_grpd;
+
+assert ⊢
+  Hom_cat WalkingEnd_cat walking_base walking_base
+  ≡ Path_cat WalkingWord_grpd;
+
+assertnot ⊢
+  Hom_cat WalkingEnd_cat walking_base walking_base
+  ≡ Path_cat Nat_grpd;
+
+assert ⊢ @id WalkingEnd_cat walking_base ≡ walking_word_zero;
+
+assert ⊢ walking_loop ≡ walking_word_succ walking_word_zero;
+
+// The free composition consumes the visible outer word constructor.
+assert (f : τ WalkingWord_grpd) ⊢
+  @comp_fapp0 WalkingEnd_cat tt tt tt walking_word_zero f
+  ≡ f;
+
+assert (g f : τ WalkingWord_grpd) ⊢
+  @comp_fapp0 WalkingEnd_cat tt tt tt (walking_word_succ g) f
+  ≡ walking_word_succ
+      (@comp_fapp0 WalkingEnd_cat tt tt tt g f);
+
+// Generic functor-on-identity remains runtime-owned by the generic calculus;
+// the normalized WalkingWord identity is recovered by a typed proof-time view.
+assert [C : Cat]
+  (F : τ (Functor WalkingEnd_cat C)) ⊢
+  @walking_functor_zero_view C F
+  : τ (@=
+      (Hom C
+        (@fapp0 WalkingEnd_cat C F tt)
+        (@fapp0 WalkingEnd_cat C F tt))
+      (@fapp1_fapp0 WalkingEnd_cat C F tt tt walking_word_zero)
+      (@id C (@fapp0 WalkingEnd_cat C F tt)));
+
+// The dependent HIT has judgmental point beta and propositional loop beta.
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @fapp0 WalkingEnd_cat C (@walking_end_rec_func C x f) walking_base
+  ≡ x;
+
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @walking_end_rec_beta_loop C x f
+  : τ (@=
+      (Hom C x x)
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base walking_loop)
+      f);
+
+// No second runtime loop-action owner competes with strict functoriality.
+assertnot [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @fapp1_fapp0
+    WalkingEnd_cat C (@walking_end_rec_func C x f)
+    walking_base walking_base walking_loop
+  ≡ f;
+
+// The former loop-square critical pair is a derived equality theorem.
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @walking_end_rec_loop_square C x f
+  : τ (@=
+      (Hom C x x)
+      (@comp_fapp0 C x x x f f)
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base
+        (@comp_fapp0
+          WalkingEnd_cat
+          walking_base walking_base walking_base
+          walking_loop walking_loop)));
+
+// BNat is a separate model whose arrows are Nat normal forms.
+assert ⊢ Obj BNat_cat ≡ Unit_grpd;
+
+assert ⊢
+  Hom_cat BNat_cat bnat_obj bnat_obj
+  ≡ Path_cat Nat_grpd;
+
+assert ⊢ @id BNat_cat bnat_obj ≡ zero;
+
+assert ⊢ bnat_generator ≡ succ zero;
+
+assert (g f : τ Nat_grpd) ⊢
+  @comp_fapp0 BNat_cat tt tt tt (succ g) f
+  ≡ succ (@comp_fapp0 BNat_cat tt tt tt g f);
+
+// Encoding is genuinely recursor-derived; generator action is related by beta
+// evidence and arbitrary action is identified by free-arrow induction.
+assert ⊢
+  walking_encode_func
+  ≡ @walking_end_ind_sec
+      (@Const_catd WalkingEnd_cat BNat_cat)
+      bnat_obj bnat_generator;
+
+assert ⊢
+  @walking_end_rec_beta_loop BNat_cat bnat_obj bnat_generator
+  : τ (@= Nat_grpd
+      (@walking_encode_action walking_loop)
+      bnat_generator);
+
+assert (w : τ WalkingWord_grpd) ⊢
+  @walking_encode_succ_view w
+  : τ (@= Nat_grpd
+      (@walking_encode_action (walking_word_succ w))
+      (succ (@walking_encode_action w)));
+
+assert (w : τ WalkingWord_grpd) ⊢
+  @walking_encode_agreement w
+  : τ (@= Nat_grpd
+      (@walking_encode_action w)
+      (@walking_word_to_nat w));
+
+assert (g f : τ WalkingWord_grpd) ⊢
+  @walking_word_to_nat_comp g f
+  : τ (@= Nat_grpd
+      (@walking_word_to_nat
+        (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
+      (@nat_add (@walking_word_to_nat g) (@walking_word_to_nat f)));
+
+// The structured decoder has a propositional generator beta and a complete
+// Nat-inductive comparison with the transparent inverse function.
+assert ⊢ walking_decode_beta_generator
+  : τ (@= WalkingWord_grpd
+      (@walking_decode_action bnat_generator)
+      walking_loop);
+
+assert (n : τ Nat_grpd) ⊢
+  @walking_decode_agreement n
+  : τ (@= WalkingWord_grpd
+      (@walking_decode_action n)
+      (@nat_to_walking_word n));
+
+// Both arbitrary round trips have transparent induction bodies.
+assert (w : τ WalkingWord_grpd) ⊢
+  @nat_word_roundtrip w
+  : τ (@= WalkingWord_grpd
+      (@nat_to_walking_word (@walking_word_to_nat w))
+      w);
+
+assert (n : τ Nat_grpd) ⊢
+  @word_nat_roundtrip n
+  : τ (@= Nat_grpd
+      (@walking_word_to_nat (@nat_to_walking_word n))
+      n);
+
+assertnot (w : τ WalkingWord_grpd) ⊢
+  @nat_to_walking_word (@walking_word_to_nat w)
+  ≡ w;
+
+// The hom comparison is packaged through the retained standard interfaces.
+assert ⊢ walking_hom_nat_type_equiv
+  : τ (TypeEquiv
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd);
+
+assert ⊢
+  sigma_Fst walking_hom_nat_type_equiv
+  ≡ walking_word_to_nat;
+
+assert ⊢ walking_hom_nat_omega_equiv_EQ1
+  : τ (@OmegaEquiv_EQ1
+      Grpd_cat
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd);
+
+assert ⊢
+  @omega_equiv_to_EQ1
+    Grpd_cat
+    (Hom WalkingEnd_cat walking_base walking_base)
+    Nat_grpd
+    walking_hom_nat_omega_equiv_EQ1
+  ≡ walking_word_to_nat;
+
+// Local discreteness yields honest one-category evidence for both models.
+assert ⊢ walking_end_is_one_cat
+  : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat);
+
+assert ⊢ bnat_is_one_cat
+  : τ (IsNCat (cat_succ cat_zero) BNat_cat);
+
+// The directed generator is nonidentity, noninvertible, and therefore
+// contradicts any alleged internal groupoidality witness.
+assert ⊢ walking_loop_not_identity
+  : τ (@Function_grpd
+      (@= WalkingWord_grpd walking_loop walking_word_zero)
+      Empty_grpd);
+
+assert ⊢ walking_loop_not_omega_equiv_EQ1
+  : τ (@Function_grpd
+      (@OmegaEquivAlong_EQ1
+        WalkingEnd_cat walking_base walking_base walking_loop)
+      Empty_grpd);
+
+assert
+  (g : τ (@IsGroupoidalCat_EQ1 WalkingEnd_cat)) ⊢
+  @walking_loop_not_omega_equiv_EQ1
+    (@groupoidal_arrow_equiv_along_EQ1
+      WalkingEnd_cat g walking_base walking_base walking_loop)
+  : τ Empty_grpd;
 
 // catalog-area: auto
 assert
