@@ -23,6 +23,16 @@ status, mathematics, notation, implementation plans, and historical decisions.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
+  proposed bounded `EVOGJ-H2-READINESS` sub-plan for a genuine walking-
+  endomorphism directed HIT. It separates the constructor/eliminator
+  presentation from a transparent one-object Nat model, requires a structured
+  `Catd` dependent eliminator with base/loop computation, and makes derived
+  encode/decode round trips and native hom equivalence the acceptance gate.
+  A reusable `Path_cat` map functor is an explicit comparison-phase
+  architecture fork rather than an assumed wrapper around one-level
+  `ObsAction`; loop nonidentity, noninvertibility, nongroupoidality, and
+  OneCat evidence are auxiliary consumers.
 - `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
   independently reviewed and preliminary-probe-refined **completed selected-
   MVP overlay** for the equality, omega-equivalence, direct univalence,
