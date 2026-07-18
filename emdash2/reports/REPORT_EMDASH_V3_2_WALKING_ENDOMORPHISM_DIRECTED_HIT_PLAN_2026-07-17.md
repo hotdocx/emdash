@@ -8,10 +8,11 @@ Supersedes: none
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **selected practical HIT-elimination/BNat computation implemented, synchronized, and validated; full initiality remains explicitly unnecessary for this milestone**
+Status: **REOPENED — the committed word-carrier presentation is rejected as the intended HIT; corrected opaque-HIT formation, judgmental constructor beta, whole-HIT Code/encode, Nat powers, and both inverse proofs are probe-validated using a minimal opaque 1-cell eliminator; active implementation is pending, and promotion must first decide whether that eliminator is accepted as a primitive component of the categorical HIT or derived from stronger reusable displayed-category/initiality infrastructure**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 HIT-computation correction baseline: `b5037078dfaafc665adb2d996bec38596e6914c9`
+Corrective-review baseline: `9858a420fd6f94e920415a8728ffd9d6bf8d18a5`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
 Current implementation owners: reusable Nat prerequisites in
 `emdash3_2_nat_arithmetic.lp`; walking HIT/model/comparison in
@@ -19,10 +20,11 @@ Current implementation owners: reusable Nat prerequisites in
 
 ## Status And Authority
 
-This report is the adopted bounded sub-plan of the completed selected-MVP
-equality-valued omega-equivalence overlay. It activates a concrete review of
-that plan's deferred representative-HIT question without reopening or
-superseding the completed equality, univalence, groupoidality, structured-J,
+This report is the reopened bounded sub-plan of the completed selected-MVP
+equality-valued omega-equivalence overlay. The 2026-07-18 corrective review
+invalidates the earlier claim that the committed `walking_end_hom` word
+carrier is the intended HIT's “intrinsic Hom.” It does not reopen or
+supersede the completed equality, univalence, groupoidality, structured-J,
 evidence-property, or finite-truncation work.
 
 The authority order remains the repository order in `AGENTS.md`. In
@@ -37,12 +39,529 @@ particular:
    overlay and the July 13 report remains the retained ledger for unaffected
    H0, truncation, dimension, directed, former-action, and long-term H2 work.
 
-The review and implementation baselines were clean and
+The original review and implementation baselines were clean and
 `EMDASH_TYPECHECK_TIMEOUT=60s make check` passed on 2026-07-17 before semantic
-probes. The commits are historical provenance only and never authorize a
-reset or rollback. The measured implementation result is recorded below.
+probes. The corrective baseline `9858a42...` was also clean and
+`EMDASH_TYPECHECK_TIMEOUT=60s make check` passed on 2026-07-18. The commits are
+historical provenance only and never authorize a reset or rollback. The
+authoritative correction plan is recorded next; the former completion record
+is retained afterward only as rejected-decision evidence.
 
-## Current Implementation Checkpoint
+## Reopened Corrective Decision — Current Authority
+
+### Review verdict
+
+The active `emdash3_2_walking_end_hit.lp` does not presently implement the HIT
+meant by this plan. It declares an inductive word carrier and then installs:
+
+```text
+Obj(WalkingEnd)       ↪ Unit
+Hom(WalkingEnd,_,_)   ↪ Path(WalkingEndHom)
+id                    ↪ word-id
+composition           ↪ word recursion.
+```
+
+Consequently `walking_end_hom_ind` is induction on a datatype that has
+already been made definitionally equal to the Hom classifier. Renaming that
+datatype “intrinsic” does not change the architecture. It makes the desired
+free-word result true by the selected representation and is not elimination
+from an opaque HIT generated only by `base` and `loop`.
+
+The corrected presentation must instead begin with exactly the opaque
+formation and introductions:
+
+```text
+WalkingEnd : Cat
+base       : Obj(WalkingEnd)
+loop       : Hom(WalkingEnd,base,base).
+```
+
+There must be no rewrite for `Obj(WalkingEnd)`, no rewrite for
+`Hom(WalkingEnd,_,_)`, and no WalkingEnd-specific identity or composition
+normalizer. In particular there is no `WalkingWord`, `walking_end_hom`, or
+other generated-arrow datatype in the public or definitional presentation of
+the HIT. A separate concrete model such as `BNat` may expose Nat-valued Hom;
+the HIT itself may not.
+
+### Correct eliminator and constructor computation
+
+For a structured motive `D : Catd(WalkingEnd)`, base datum
+
+```text
+u : Obj(D[base])
+```
+
+and displayed loop datum
+
+```text
+ℓᴰ : Hom(D[base], D[loop](u), u),
+```
+
+the primitive eliminator is:
+
+```text
+ind(D,u,ℓᴰ) : Obj(Π D).
+```
+
+Both constructor computations are selected as judgmental computation:
+
+```text
+ind(D,u,ℓᴰ)[base] ↪ u
+ind(D,u,ℓᴰ)[loop] ↪ ℓᴰ.
+```
+
+In the current projection tower the stable owners are terminal component
+evaluation for the point rule and `fdapp1_int_cell` for the loop rule. The
+loop equation is therefore a rewrite, not a bodyless equality constant and
+not merely a proposition whose proof is postulated. A readable theorem may be
+exported, but its body must be `eq_refl` after the rewrite.
+
+The focused probe confirms that both rewrites typecheck while the category,
+object, and arrow constructors remain opaque. The constant-family section
+action should be observed through `piapp1_fapp0`; this route sees the same
+dependent loop beta without installing a second ordinary-`fapp1_fapp0`
+constructor rule.
+
+### Why the former loop-square objection does not justify weakening beta
+
+The raw term
+
+```text
+ind(Const(C),x,f)[loop] ∘ ind(Const(C),x,f)[loop]
+```
+
+still has two runtime reduction orders: loop beta exposes `f ∘ f`, while the
+ambient strict-functor cut first exposes action on `loop ∘ loop`. The focused
+probe retains this as a negative conversion control. That is a real
+normal-form boundary, but it is not a blocker to judgmental constructor beta
+or to practical proofs.
+
+The coherent solution is to state the ambient strict-functor law once at a
+generic constant-section variable, where its proof is reflexivity, and only
+then specialize it to the HIT recursor. The specialized proof retains the
+functoriality provenance even after loop beta computes. Combining that generic
+law with the constructor rewrite derives the loop-prefix and loop-square
+equations propositionally, without a word datatype, a recursive action
+normalizer, or a family of composite-specific rules.
+
+Thus the selected boundary is now:
+
+```text
+point constructor beta     runtime rewrite
+loop constructor beta      runtime rewrite
+generic composition law    one ambient strict owner
+specialized composite law  transparent theorem from the two items above
+```
+
+An attempted bare-term `unif_rule` from the loop action to an arbitrary
+supplied `ℓᴰ` was also rejected in the corrective probes: the variable-headed
+side is too broad for reliable elaboration. A rigid intermediary did not make
+the actual supplied datum judgmentally visible. The direct stable-owner
+rewrite is both simpler and stronger.
+
+### Circle inspiration and the exact directed boundary
+
+The HoTT/Coq and Cubical Agda Circle encode–decode constructions determine
+the correct abstraction boundary and the Code half of the proof. They do not,
+however, supply a directed `J` for a noninvertible category arrow.
+
+| Circle construction | Directed walking construction and status |
+| --- | --- |
+| `Circle`, `base`, `loop` | opaque `WalkingEnd`, `base`, directed `loop` |
+| `helix` / `Circle_code` over the whole Circle | `Code : WalkingEnd ⊢ Cat` from the whole-HIT recursor |
+| code at the base is `ℤ` | `Code(base) ≡ Path(ℕ)` |
+| loop transports by integer successor equivalence | `Code(loop) ≡ succ`, a noninvertible directed successor functor |
+| `encode(p)` transports zero along `p` | `encode(p) ≔ Code[p](0)` |
+| `intLoop` / loop exponentiation | `power(0) ≔ id`; `power(n+1) ≔ loop ∘ power(n)` |
+| `decodeSquare` / spiral | useful guidance for a structured decoder, but not by itself equality of directed arrows |
+| ordinary `J` on `p : base = x` | unavailable for `p : Hom(WalkingEnd,base,x)`; the practical replacement is the HIT's 1-cell elimination component |
+
+The Code family is formed by eliminating the whole HIT into `Cat`:
+
+```text
+Code        ≔ rec(Cat, Path(ℕ), succ)
+encodeₓ(p) ≔ Code[p](0).
+```
+
+This is the important typing point: there is no eliminator
+`Hom(WalkingEnd,base,base) → ℕ`. The map on endomorphisms is the action of the
+whole-HIT-defined Code family. A one-object `BNat` functor is an optional
+packaging of the same observation, not its foundation.
+
+The reverse map on the based endomorphism fibre is ordinary Nat recursion:
+
+```text
+power : ℕ → Hom(WalkingEnd,base,base)
+power(0)     ↪ id
+power(n + 1) ↪ loop ∘ power(n).
+```
+
+The easy inverse is then:
+
+```text
+encode(power(n)) = n,
+```
+
+proved by Nat induction. Its successor step uses the generic
+constant-section composition theorem and judgmental loop beta. The focused
+probe contains this transparent proof for the actual Code action.
+
+### Why `PathOut` does not supply the Circle's final `J`
+
+The earlier corrective draft overstated the `PathOut` route. An arrow in the
+enriched outgoing-path category from `(y,p)` to `(z,q)` consists of a base
+arrow and a directed 2-cell, schematically:
+
+```text
+(f,α) : (y,p) → (z,q),       α : f ∘ p → q.
+```
+
+To make
+
+```text
+Roundtrip(y,p) ≔ Path(power(encode(p)),p)
+```
+
+a `Catd(PathOut(WalkingEnd,base))`, its action would have to turn equality at
+`p` into equality at `q`. The directed cell `α` is not an equality and need
+not be invertible. Therefore that action does not follow from Code, a decoder,
+or the existing `path_ind_sec`. Declaring a bodyless `Roundtrip` family makes
+the final theorem typecheck, but simply assumes the missing freeness result.
+
+This is exactly where the Circle analogy stops: the Circle's `p` is itself an
+identity path, so ordinary equality `J` applies. A walking endomorphism's `p`
+is deliberately a noninvertible directed arrow. The existing `path_ind_sec`
+is generic enriched-slice transport for every category; it is not induction
+on the arrows generated by this particular HIT.
+
+The old probe's `opaque_roundtrip_motive` was only such a bodyless type-shape
+sentinel. It has now been removed. It was never evidence that the hard inverse
+had been constructed.
+
+### Minimal directed solution: the HIT's 1-cell elimination component
+
+A categorical HIT is multi-sorted: it generates objects, 1-cells, and their
+higher categorical structure. Keeping its Hom classifier opaque does not mean
+omitting the elimination principle for generated 1-cells. The minimal
+practical interface extends the section eliminator with the following
+based-endomorphism component of the *same* HIT:
+
+```text
+cell_ind
+  (P : Hom(WalkingEnd,base,base) → Grpd)
+  (z : P(id))
+  (s : Π p, P(p) → P(loop ∘ p))
+  (p : Hom(WalkingEnd,base,base))
+  : P(p).
+```
+
+This declaration quantifies over opaque Hom. It does not define Hom as a word
+or Nat datatype, does not introduce arrow normal forms, and adds no
+WalkingEnd-specific identity or composition rule. Its computations are:
+
+```text
+cell_ind(P,z,s,id)             ↪ z
+cell_ind(P,z,s,loop ∘ p)       ≡ s(p,cell_ind(P,z,s,p)).
+```
+
+The probe selects runtime rewrites for identity and generator prefix. The
+literal-loop specialization joins the global right-unit reduction at
+`loop ∘ id`. One probe-local warning remains where the prefix rule meets the
+generic precomposition normalizer. This does not affect the typed hard proof,
+but it is a real owner/coherence gate: promotion must either construct the
+missing join, select a sound proof-time presentation that passes a typed
+`eq_refl` test, or explicitly accept the measured interaction after the full
+owner-position audit. An earlier rigid-intermediary unifier passed only while
+unused and failed once typed reflexivity actually exercised it; it is rejected.
+
+The hard inverse is then elementary and transparent. Instantiate:
+
+```text
+P(p) ≔ Path(power(encode(p)),p).
+```
+
+The identity case is reflexivity. For the generator-prefix step, whole-HIT
+Code functoriality and loop beta give:
+
+```text
+encode(loop ∘ p) = succ(encode(p)).
+```
+
+Nat computation and congruence then give:
+
+```text
+power(encode(loop ∘ p))
+  = power(succ(encode(p)))
+  = loop ∘ power(encode(p))
+  = loop ∘ p.
+```
+
+Applying `cell_ind` yields:
+
+```text
+power(encode(p)) = p
+```
+
+for arbitrary opaque `p`. Thus the forward classifier still comes from
+whole-HIT Code elimination, the easy inverse still uses Nat induction, and
+the hard inverse now uses the 1-cell component of the opaque HIT eliminator.
+No concrete Hom carrier, decoder axiom, round-trip axiom, or full
+functor-category initiality metatheorem is used.
+
+There is one explicit architecture decision before promotion. Either:
+
+1. accept `cell_ind` as the primitive 1-cell component of this first concrete
+   categorical HIT; or
+2. first implement a reusable general displayed-category/free-category
+   eliminator from which this exact `cell_ind` is transparently derived.
+
+If “elimination only on the whole `WalkingEnd`” is interpreted as forbidding
+even this opaque 1-cell component, branch 2 is required. Coq/Agda Circle code
+does not remove that prerequisite, because its final `J` relies on the
+invertibility and identity-type status of the Circle loop. A decoder spiral
+may still be valuable later for a directed 2-cell/naturality comparison, but
+without prior local discreteness it does not prove equality of arbitrary
+walking arrows and is no longer the selected hard-roundtrip route.
+
+### Focused probe evidence
+
+The current decisive probe is:
+
+```text
+tmp/probes/wehit_opaque_rewrite_loop_beta.lp
+```
+
+It checks all of the following without any `Obj`/`Hom` rule for the probe HIT:
+
+1. opaque formation of the category, point, and directed loop;
+2. runtime point and loop beta at the stable section owners;
+3. whole-HIT `Code` with Nat successor action;
+4. `encode(p) ≔ Code[p](0)`;
+5. Nat-recursive `power`;
+6. the transparent Nat-inductive proof `encode(power(n)) = n`;
+7. the negative raw loop-square conversion control;
+8. the opaque 1-cell eliminator with runtime identity and generator-prefix
+   computation;
+9. the transparent generator-prefix closure proof; and
+10. the transparent hard inverse `power(encode(p)) = p` for arbitrary opaque
+    `p`.
+
+The final quiet and warning-enabled logs are:
+
+```text
+logs/probes/wehit_opaque_rewrite_loop_beta-20260718-150610.log
+logs/probes/wehit_opaque_rewrite_loop_beta-20260718-150731.log
+```
+
+The warning run reports one probe-local unjoinable interaction between cell
+prefix beta and generic precomposition after the literal-loop/right-unit join
+is installed. This is bounded operational feasibility evidence and an open
+promotion gate, not a semantic model, normalization proof, or derivation of
+`cell_ind` from more general infrastructure.
+
+Two rejected unification experiments are retained only as negative evidence:
+
+```text
+tmp/probes/wehit_opaque_unif_loop_beta.lp
+tmp/probes/wehit_opaque_rigid_unif_loop_beta.lp.
+```
+
+### Status of the committed implementation
+
+Until the correction phases below pass, the committed walking module has this
+status:
+
+| Component | Corrective status |
+| --- | --- |
+| reusable Nat addition, associativity, Unit/Empty proposition evidence, Nat sethood | retain |
+| separate `BNat` model | potentially retain after dependency and warning recheck |
+| `walking_end_hom` / `WalkingEndHom_grpd` | reject and remove from the HIT presentation |
+| WalkingEnd `Obj`, `Hom`, identity, and constructor-composition rewrites | reject and remove |
+| current `walking_end_hom_ind` round trip | invalid as evidence for the requested HIT freeness |
+| opaque-Hom `walking_end_ind_cell` | missing from active code; final probe validates the minimal interface and hard proof |
+| current point beta | reusable shape, re-probe after opaque migration |
+| current propositional loop-beta constant | replace with judgmental stable-owner rewrite |
+| current recursor-derived encoder idea | retain, but rebuild through opaque Code/section action |
+| current primitive structured decoder | not accepted as the foundation of either inverse; retain only if later justified as useful packaging |
+| current Hom–Nat equivalence packages | rederive only after both corrected round trips |
+| current sethood, OneCat, nonidentity, noninvertibility, nongroupoidality | mathematically plausible but must be rederived; their present proofs depend on the rejected Hom representation |
+
+The primitive `Join_cat` remains a useful comparison: its category is opaque
+and its recursor computes on inclusions and the natural cross cell, so it does
+not commit the same Hom-rewrite error. It is nevertheless only a primitive
+nondependent directed-inductive staging point; it lacks a dependent
+eliminator and uniqueness theorem and therefore should not be advertised as a
+complete general HIT implementation.
+
+### Reopened correction phases
+
+#### Phase R0 — authority and negative controls — completed in this review
+
+1. Reopen this report and invalidate the word-carrier completion claim.
+2. Record the exact opaque formation and judgmental beta requirements.
+3. Retain negative controls against `Hom(WalkingEnd,base,base) ≡ Nat`, loop
+   identity, and hidden object/Hom computation.
+4. Preserve unrelated committed work and make no active implementation change
+   during the review.
+
+Exit result: this report and the ignored focused probe state the corrected
+acceptance boundary.
+
+#### Phase R1 — reusable Nat successor functor
+
+1. Construct an iterable functor `Path(ℕ) ⊢ Path(ℕ)` with object action
+   `succ`.
+2. Route its first path action through the existing `nat_succ_obs_action` and
+   `nat_succ_eq_ap` evidence; do not add an unrelated opaque higher action.
+3. Use `nat_is_set` to close higher discreteness where appropriate.
+4. Check identity/composition in both reduction orders and validate any
+   proof-time comparison with typed `eq_refl`.
+
+Exit criterion: Code's loop image is a reusable structured successor functor,
+not the probe's interface-only primitive.
+
+#### Phase R2 — opaque HIT owner and judgmental beta
+
+1. Build an intended-owner-position copy of the walking module with only
+   opaque `WalkingEnd`, `base`, and `loop` introductions.
+2. Remove the word carrier and every WalkingEnd `Obj`/`Hom`/identity/
+   composition rewrite.
+3. Install point and loop beta at the two stable section owners.
+4. Add the generic constant-section composition theorem before specializing
+   it to the recursor.
+5. Check the dependent section observer, constant-motive facade, direct loop
+   computation, and the negative raw composite conversion boundary.
+
+Exit criterion: constructor beta computes, arbitrary Hom remains opaque, and
+composite theorems use the generic owner without a recursive word/action head.
+
+#### Phase R3 — Code, encode, powers, and the easy inverse
+
+1. Define `Code` by whole-HIT elimination into `Cat`.
+2. Define `encodeₓ(p) ≔ Code[p](0)` and expose the based endomorphism map.
+3. Define `power` by Nat recursion into opaque Hom.
+4. Prove identity, loop, loop-prefix, and composition observations from beta
+   plus generic functoriality.
+5. Prove `encode(power(n)) = n` by Nat induction.
+6. Only then decide whether `BNat` packaging adds useful iterability without
+   becoming a second foundation.
+
+Exit criterion: the passing probe's transparent Code/easy-roundtrip result is
+reproduced at the real owner with no Hom representation or datatype induction.
+
+#### Phase R4 — directed 1-cell elimination and the hard inverse
+
+1. Record the architecture decision explicitly: accept
+   `walking_end_ind_cell` as the primitive 1-cell component of this concrete
+   categorical HIT, or first derive it from a reusable general
+   displayed-category/free-category eliminator. Do not misdescribe
+   `path_ind_sec` as supplying this principle.
+2. Give `walking_end_ind_cell` exactly the opaque-Hom identity/generator-prefix
+   interface probed above. It must not mention `walking_end_hom`, Nat, `BNat`,
+   a word constructor, or a hidden decoder.
+3. Keep identity beta as a runtime rule. Re-probe the runtime
+   generator-prefix/literal-loop pair at the intended owner, resolve its one
+   measured precomposition interaction if possible, and reject any proof-time
+   alternative that does not pass a typed `eq_refl` exercise.
+4. Instantiate the motive with
+   `P(p) ≔ Path(power(encode(p)),p)`.
+5. Prove the prefix case transparently from whole-HIT Code functoriality,
+   judgmental loop beta, Nat successor beta, and congruence.
+6. Apply `walking_end_ind_cell` to prove `power(encode(p)) = p` for arbitrary
+   opaque `p`.
+7. Inspect the theorem body and normalized projections to verify material use
+   of Code's whole-HIT recursor and the 1-cell HIT eliminator.
+8. Retain the rejected PathOut sentinel as historical negative evidence only;
+   no bodyless motive, decoder, or round-trip declaration may survive.
+
+Exit criterion: the hard inverse is transparent through the accepted 1-cell
+HIT elimination principle; no Hom datatype, Hom rewrite, bodyless motive,
+bodyless decoder, or round-trip axiom is present. If derivation rather than a
+primitive 1-cell component is required, the reusable general eliminator is an
+explicit prerequisite and R4 remains open until that derivation checks.
+
+#### Phase R5 — comparison packages and directed consequences
+
+1. Package `encode` and `power` as `EquivByInverse`, `TypeEquiv`, and native
+   EQ1 only after both inverse proofs pass.
+2. Rebuild any useful `BNat` functors from the same maps and prove their laws.
+3. Derive Hom sethood/local discreteness through the corrected equivalence.
+4. Rederive loop nonidentity, noninvertibility, nongroupoidality, and OneCat
+   evidence without referring to word constructors.
+5. Retain full functor-category initiality as an optional later theorem; it is
+   not required for this practical computation milestone.
+
+#### Phase R6 — migration, examples, and gates
+
+1. Replace the active walking owner only after the intended-owner probe passes.
+2. Rewrite permanent diagnostics and the reviewer example to remove every
+   word-constructor assertion.
+3. Synchronize Foundations, current status, report index, parent H2 row,
+   catalog, and health report.
+4. Run bounded quiet/warning probes, strict LHS audit, `make check`,
+   `make examples`, catalog/TOC/reference checks, health, and `make ci`.
+
+### Feasibility after the corrective probes
+
+| Deliverable | Evidence | Feasibility status |
+| --- | --- | --- |
+| opaque HIT formation | passing focused probe; no object/Hom rules | demonstrated |
+| judgmental point and loop beta | both stable-owner runtime assertions pass | demonstrated |
+| generic composite theorem with raw beta | generic constant-section reflexivity theorem specializes successfully | demonstrated |
+| whole-HIT Code and `encode(p) = Code[p](0)` | passing focused probe | demonstrated |
+| Nat powers and easy inverse | transparent Nat-recursive/inductive proof passes | demonstrated |
+| iterable Nat successor functor | object computation probed; existing first-path action available | high feasibility; full higher-action packaging remains |
+| `PathOut` equality-motive route | enriched-slice action requires equality from an arbitrary directed 2-cell | rejected as circular without prior local discreteness |
+| opaque 1-cell elimination interface | runtime identity/prefix betas and the hard theorem pass with no Hom representation; one precomposition warning remains | operationally demonstrated, with ownership and one rewrite-coherence gate open |
+| hard inverse | transparent `cell_ind` proof over actual Code and power passes | demonstrated for the primitive-interface branch |
+| Hom–Nat equivalence | both inverse terms pass in the focused opaque probe | high feasibility after owner migration; not active or accepted yet |
+| full initiality | not needed | explicitly outside this correction |
+
+The honest status is therefore neither “completed” nor “blocked.” The wrong
+representation has been identified; the corrected formation, beta,
+Code/encode, powers, and both inverse proof terms are executable in the
+focused opaque probe. The remaining design choice is foundational ownership:
+whether the based 1-cell eliminator is accepted as a primitive computation
+component of this concrete categorical HIT or must first be obtained from a
+more general displayed-category/free-category eliminator. The former is a
+small, measured implementation; the latter is broader reusable
+infrastructure. Neither choice licenses the old word carrier or the rejected
+bodyless PathOut motive.
+
+### Corrected acceptance criteria
+
+The reopened plan is complete only when all of the following hold:
+
+1. `WalkingEnd`, `base`, and `loop` are opaque constructors and no rule exposes
+   the HIT's object or Hom classifier.
+2. Both point and loop constructor betas compute by rewrite; the loop theorem
+   is reflexivity after computation.
+3. No word/Nat datatype is definitionally identified with Hom, and no
+   datatype induction supplies the hard inverse.
+4. Code and encode are obtained from whole-HIT elimination.
+5. The primitive-versus-derived ownership of the opaque 1-cell eliminator is
+   explicitly selected and justified; its identity and generator-prefix betas
+   are computational rewrite/unification facts.
+6. `encode(power(n)) = n` is a transparent Nat-induction proof.
+7. `power(encode(p)) = p` is a transparent application of that accepted
+   1-cell HIT eliminator, with a prefix case built from Code beta,
+   functoriality, Nat beta, and congruence.
+8. No bodyless decoder, PathOut motive, inverse theorem, or hidden Hom
+   classifier occurs in either proof.
+9. Hom–Nat packages and all negative/dimension consequences are downstream of
+   those two proofs.
+10. Permanent negative controls show no direct Hom-to-Nat conversion and no
+   accidental loop identity/inverse.
+11. All proportional warning, audit, example, catalog, health, and CI gates
+    pass.
+
+## Superseded Implementation Checkpoint (Historical Evidence Only)
+
+Everything from this heading onward records the former word-carrier/
+propositional-loop-beta decision and its validation history. It remains useful
+for locating rejected probes and retained Nat/BNat work, but every statement
+that calls that architecture the completed or selected HIT is superseded by
+the reopened corrective decision above.
 
 The earlier composition-owner blocker remains resolved without adding a family
 of constructor-specific runtime bridges. A later independent peer review found

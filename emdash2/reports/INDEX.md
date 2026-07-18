@@ -11,12 +11,12 @@ evidence-property and finite-`NCat` object-truncation extension.
 sethood independently of the walking construction.
 `emdash3_2_sum_observational_action.lp` retains the former-specific Sum action
 as a library module rather than kernel infrastructure.
-`emdash3_2_walking_end_hit.lp` imports that Nat module and owns the selected
-concrete walking-endomorphism directed-HIT/`BNat` MVP, including its structured
-eliminator, theorem-first generator beta, encode/decode comparison, Hom-to-Nat
-equivalence, and OneCat/noninvertibility consumers. Reports explain current
-status, mathematics, notation, implementation plans, and historical
-decisions.
+`emdash3_2_walking_end_hit.lp` imports that Nat module and currently contains
+the previously promoted generated-word walking/`BNat` implementation. The
+reopened walking plan rejects that word-carrier presentation as the intended
+HIT; it remains active code only until the opaque replacement and corrected
+proofs are promoted. Reports explain current status, mathematics, notation,
+implementation plans, and historical decisions.
 
 ## Current Orientation
 
@@ -30,6 +30,17 @@ decisions.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
+  reopened corrective plan. The committed generated-word Hom presentation is
+  rejected as the intended HIT. Focused probes validate an opaque
+  `WalkingEnd`, judgmental point/loop beta, whole-HIT Nat Code/encode, Nat
+  powers, and both transparent inverse proofs using a minimal opaque 1-cell
+  HIT eliminator. The review rejects the earlier bodyless `PathOut` motive:
+  enriched-slice transport is not directed-arrow `J`. Before active migration,
+  the plan must select the 1-cell eliminator as a primitive component of this
+  concrete categorical HIT or derive it from stronger reusable
+  displayed-category/free-category infrastructure. Full functor-category
+  initiality remains outside this practical computation milestone.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
@@ -347,22 +358,6 @@ but their promoted phases are not open implementation plans.
   Native theorem modules are decoder/D0-free; raw unreified-path observers,
   reverse coherent-core assembly, consumer-led core-universe functors, full
   compatibility retirement, and metatheory remain separate bounded work.
-- `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
-  completed theorem-first `EVOGJ-H2-READINESS` child plan. Native
-  `WalkingEndHom_grpd` intrinsic hom syntax/induction, a structured dependent
-  eliminator with judgmental point/propositional generator beta, a separate
-  constructor-directed `BNat_cat`, recursor-derived encode, structured decode,
-  semantic-action round trips, native EQ1/`TypeEquiv` Hom comparison, OneCat
-  evidence, and directed negative results are active. The decisive
-  decode-after-encode proof uses hom-level HIT induction and the HIT-derived
-  encoder successor law; `walking_end_rec_step_view` supplies that step law
-  generically for every recursor target. No parallel word/Nat helper
-  equivalence remains. The corrected implementation closes with 1,980
-  catalogued checks across 72 areas, a 22-statement reviewer example, all 55
-  targets, unchanged warning inventories, and passing audits/health/CI.
-  Generic HIT abstraction, reusable `PathMap`, Join elimination,
-  `BInt`/Circle completion, reflectors, and optional full initiality remain
-  future objectives.
 - `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`:
   promoted historical implementation ledger for the first groupoid,
   type-equivalence, computational-univalence, omega-equivalence, and generic
