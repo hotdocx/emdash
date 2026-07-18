@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1977
-- Mapped areas: 71
+- Total checks: 1978
+- Mapped areas: 72
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -89,7 +89,8 @@ stable mathematical-area scopes rather than source locations.
 | Indexed adjunction triangles, opposite, and operation trust | 15 |
 | Componentwise registered binary-sum action | 27 |
 | Categorical-universe direct EQ1 and legacy compatibility | 35 |
-| Walking endomorphism directed HIT and Nat normal form | 60 |
+| Nat arithmetic and sethood prerequisites | 14 |
+| Walking endomorphism directed HIT and Nat normal form | 47 |
 
 ## Section Details
 
@@ -721,9 +722,9 @@ stable mathematical-area scopes rather than source locations.
 | 1229 | 10790 | `assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢ @iso_evidence_to C x y (@defiso_iso_evidence C x y i) ≡ ...` |
 | 1230 | 10794 | `assert [C : Cat] [x y : τ (Obj C)] (i : τ (@DefIso C x y)) ⊢ @iso_evidence_from C x y (@defiso_iso_evidence C x y i) ...` |
 | 1792 | 18368 | `assert [B J : Cat] (P : τ (Prof B J)) (L : τ (Functor J B)) ⊢ @IsRepresentedBy_iso B J P L ≡ IsoEvidence (Prof_cat B ...` |
-| 1937 | 19979 | `assert [B J J' : Cat] (F : τ (Functor J B)) (W : τ (Prof J' J)) (L : τ (Functor J' B)) ⊢ @IsWeightedLimit_cov_iso B ...` |
-| 1938 | 19992 | `assert [B J J' : Cat] (W : τ (Prof J' J)) [O O' : τ (Prof B J)] (i : τ (@IsoEvidence (@Prof_cat B J) O O')) ⊢ @iso_e ...` |
-| 1939 | 20007 | `assert [A B : Cat] [P Q : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) ⊢ @prof_comparison_evidence A B P Q i : τ ...` |
+| 1938 | 19984 | `assert [B J J' : Cat] (F : τ (Functor J B)) (W : τ (Prof J' J)) (L : τ (Functor J' B)) ⊢ @IsWeightedLimit_cov_iso B ...` |
+| 1939 | 19997 | `assert [B J J' : Cat] (W : τ (Prof J' J)) [O O' : τ (Prof B J)] (i : τ (@IsoEvidence (@Prof_cat B J) O O')) ⊢ @iso_e ...` |
+| 1940 | 20012 | `assert [A B : Cat] [P Q : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) ⊢ @prof_comparison_evidence A B P Q i : τ ...` |
 
 ### Hom-category endpoint action
 
@@ -857,9 +858,9 @@ stable mathematical-area scopes rather than source locations.
 | # | Check line | Statement |
 | ---: | ---: | --- |
 | 1837 | 18909 | `assert [A J J' B : Cat] [Ladj : τ (Functor A B)] [Radj : τ (Functor B A)] [F : τ (Functor J A)] [W : τ (Prof J J')] ...` |
-| 1949 | 20116 | `assert [B J J' A : Cat] [Ladj : τ (Functor A B)] [Radj : τ (Functor B A)] [W : τ (Prof J' J)] [F : τ (Functor J B)] ...` |
-| 1950 | 20138 | `assert [A B I K : Cat] [Ladj : τ (Functor A B)] [Radj : τ (Functor B A)] (adj : τ (@Adjunction A B Ladj Radj)) (M : ...` |
-| 1951 | 20179 | `assert [A B I K : Cat] [Ladj : τ (Functor A B)] [Radj : τ (Functor B A)] (adj : τ (@Adjunction A B Ladj Radj)) (M : ...` |
+| 1950 | 20121 | `assert [B J J' A : Cat] [Ladj : τ (Functor A B)] [Radj : τ (Functor B A)] [W : τ (Prof J' J)] [F : τ (Functor J B)] ...` |
+| 1951 | 20143 | `assert [A B I K : Cat] [Ladj : τ (Functor A B)] [Radj : τ (Functor B A)] (adj : τ (@Adjunction A B Ladj Radj)) (M : ...` |
+| 1952 | 20184 | `assert [A B I K : Cat] [Ladj : τ (Functor A B)] [Radj : τ (Functor B A)] (adj : τ (@Adjunction A B Ladj Radj)) (M : ...` |
 
 ### Directed inductive join category
 
@@ -879,10 +880,10 @@ stable mathematical-area scopes rather than source locations.
 | 1850 | 19100 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
 | 1851 | 19119 | `assert [A B E : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E B ...` |
 | 1852 | 19132 | `assert [A B E I : Cat] (first : τ (Functor A E)) (second : τ (Functor B E)) (cross : τ (Obj (@Prof_transf_cat E A E ...` |
-| 1914 | 19551 | `assert [I A B : Cat] [P : τ (Prof A B)] [F : τ (Functor I A)] [M : τ (Functor I B)] (p : τ (@Prof_hom I A B F P M)) ...` |
-| 1915 | 19584 | `assert [I A B : Cat] [P P' : τ (Prof A B)] [F : τ (Functor I A)] [M : τ (Functor I B)] (pp : τ (@ProfMap A B P P')) ...` |
-| 1916 | 19626 | `assert [I A B : Cat] [P : τ (Prof A B)] [F : τ (Functor I A)] [G : τ (Functor I B)] (p : τ (@Prof_hom I A B F P G)) ...` |
-| 1917 | 19660 | `assert [I A B : Cat] [P P' : τ (Prof A B)] [F : τ (Functor I A)] [G : τ (Functor I B)] (pp : τ (@ProfMap A B P P')) ...` |
+| 1915 | 19556 | `assert [I A B : Cat] [P : τ (Prof A B)] [F : τ (Functor I A)] [M : τ (Functor I B)] (p : τ (@Prof_hom I A B F P M)) ...` |
+| 1916 | 19589 | `assert [I A B : Cat] [P P' : τ (Prof A B)] [F : τ (Functor I A)] [M : τ (Functor I B)] (pp : τ (@ProfMap A B P P')) ...` |
+| 1917 | 19631 | `assert [I A B : Cat] [P : τ (Prof A B)] [F : τ (Functor I A)] [G : τ (Functor I B)] (p : τ (@Prof_hom I A B F P G)) ...` |
+| 1918 | 19665 | `assert [I A B : Cat] [P P' : τ (Prof A B)] [F : τ (Functor I A)] [G : τ (Functor I B)] (pp : τ (@ProfMap A B P P')) ...` |
 
 ### Cat-valued profunctor facade
 
@@ -955,35 +956,35 @@ stable mathematical-area scopes rather than source locations.
 | 1835 | 18885 | `assert [A B : Cat] (R : τ (Prof A B)) ⊢ @Op_prof_map A B R R (@id (@Prof_cat A B) R) ≡ @id (@Prof_cat (Op_cat B) (Op ...` |
 | 1836 | 18894 | `assert [B J J' : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_co ...` |
 | 1841 | 18958 | `assert [A : Cat] ⊢ @Prof_id_hom A ≡ @id_funcd (Product_cat (Op_cat A) A) (@Unit_prof A);` |
-| 1913 | 19532 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (s : τ (ProfMap Q R)) (r : τ (ProfMap P Q)) ⊢ @comp_fapp0 (@Prof_cat (Op_c ...` |
-| 1918 | 19704 | `assert [A A' B B' X : Cat] (O : τ (Prof A X)) (Q : τ (Prof B X)) (F : τ (Functor A' A)) (M : τ (Functor B' B)) ⊢ @Pr ...` |
-| 1919 | 19719 | `assert [A B X : Cat] (O : τ (Prof A X)) (Q : τ (Prof B X)) ⊢ @Prof_reindex A A B B (@Prof_imply_cov A B X O Q) (@id_ ...` |
-| 1920 | 19729 | `assert [A B X : Cat] (Q : τ (Prof B X)) (O : τ (Prof A X)) ⊢ fapp0 (@Prof_imply_cov_func A B X Q) O ≡ @Prof_imply_co ...` |
-| 1921 | 19735 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' : τ (Prof A X)] ⊢ fapp1_func (@Prof_imply_cov_func A B X Q) [O] [O'] : ...` |
-| 1922 | 19748 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' : τ (Prof A X)] (o : τ (Functord O O')) ⊢ fapp1_fapp0 (@Prof_imply_cov ...` |
-| 1923 | 19759 | `assert [A B X : Cat] (Q : τ (Prof B X)) (O : τ (Prof A X)) ⊢ @fapp1_fapp0 (@Prof_cat A X) (@Prof_cat A B) (@Prof_imp ...` |
-| 1924 | 19770 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' O'' : τ (Prof A X)] (o : τ (ProfMap O O')) (o' : τ (ProfMap O' O'')) ⊢ ...` |
-| 1925 | 19793 | `assert [A B X : Cat] (oq : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))) ⊢ @fapp0 (Product_cat (Prof ...` |
-| 1926 | 19810 | `assert [A B X : Cat] [oq oq' : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] ⊢ @fapp1_func (Product_ ...` |
-| 1927 | 19833 | `assert [A B X : Cat] [oq oq' : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] (r : τ (Hom (Product_ca ...` |
-| 1928 | 19855 | `assert [A B X : Cat] (oq : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))) ⊢ @fapp1_fapp0 (Product_cat ...` |
-| 1929 | 19879 | `assert [A B X : Cat] [oq0 oq1 oq2 : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] (r01 : τ (Hom (Pro ...` |
-| 1930 | 19909 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap P (@Prof_imply_cov A B ...` |
-| 1931 | 19918 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap (@Prof_tensor A B X P ...` |
-| 1932 | 19927 | `assert [A B B' X X' : Cat] (P : τ (Prof A B)) (O : τ (Prof A X)) (M : τ (Functor B' B)) (G : τ (Functor X' X)) ⊢ @Pr ...` |
-| 1933 | 19942 | `assert [A B X : Cat] (P : τ (Prof A B)) (O : τ (Prof A X)) ⊢ @Prof_reindex B B X X (@Prof_imply_con A B X P O) (@id_ ...` |
-| 1934 | 19952 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap Q (@Prof_imply_con A B ...` |
-| 1935 | 19961 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap (@Prof_tensor A B X P ...` |
-| 1936 | 19970 | `assert [B J J' : Cat] (F : τ (Functor J B)) (W : τ (Prof J' J)) ⊢ @WeightedCone_prof B J J' F W ≡ @Prof_imply_cov B ...` |
-| 1940 | 20013 | `assert [A B : Cat] [P Q : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) ⊢ @comp_fapp0 (@Prof_cat A B) P Q P (@prof ...` |
-| 1941 | 20023 | `assert [A B : Cat] [P Q R S : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (r : τ (@ProfMap A B R P)) (h : τ (@Pr ...` |
-| 1942 | 20038 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (r : τ (@ProfMap A B R P)) ⊢ @prof_compa ...` |
-| 1943 | 20046 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (s : τ (@ProfMap A B R Q)) ⊢ @prof_compa ...` |
-| 1944 | 20054 | `assert [A B : Cat] [P R : τ (Prof A B)] (r : τ (@ProfMap A B R P)) ⊢ @prof_comparison_push A B P P (@prof_comparison ...` |
-| 1945 | 20063 | `assert [A B : Cat] [P Q S R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (j : τ (@ProfComparison A B Q S)) (r : ...` |
-| 1946 | 20075 | `assert [B J J' : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_co ...` |
-| 1947 | 20087 | `assert [B J J' I : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
-| 1948 | 20104 | `assert [B J J' I : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
+| 1914 | 19537 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (s : τ (ProfMap Q R)) (r : τ (ProfMap P Q)) ⊢ @comp_fapp0 (@Prof_cat (Op_c ...` |
+| 1919 | 19709 | `assert [A A' B B' X : Cat] (O : τ (Prof A X)) (Q : τ (Prof B X)) (F : τ (Functor A' A)) (M : τ (Functor B' B)) ⊢ @Pr ...` |
+| 1920 | 19724 | `assert [A B X : Cat] (O : τ (Prof A X)) (Q : τ (Prof B X)) ⊢ @Prof_reindex A A B B (@Prof_imply_cov A B X O Q) (@id_ ...` |
+| 1921 | 19734 | `assert [A B X : Cat] (Q : τ (Prof B X)) (O : τ (Prof A X)) ⊢ fapp0 (@Prof_imply_cov_func A B X Q) O ≡ @Prof_imply_co ...` |
+| 1922 | 19740 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' : τ (Prof A X)] ⊢ fapp1_func (@Prof_imply_cov_func A B X Q) [O] [O'] : ...` |
+| 1923 | 19753 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' : τ (Prof A X)] (o : τ (Functord O O')) ⊢ fapp1_fapp0 (@Prof_imply_cov ...` |
+| 1924 | 19764 | `assert [A B X : Cat] (Q : τ (Prof B X)) (O : τ (Prof A X)) ⊢ @fapp1_fapp0 (@Prof_cat A X) (@Prof_cat A B) (@Prof_imp ...` |
+| 1925 | 19775 | `assert [A B X : Cat] (Q : τ (Prof B X)) [O O' O'' : τ (Prof A X)] (o : τ (ProfMap O O')) (o' : τ (ProfMap O' O'')) ⊢ ...` |
+| 1926 | 19798 | `assert [A B X : Cat] (oq : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))) ⊢ @fapp0 (Product_cat (Prof ...` |
+| 1927 | 19815 | `assert [A B X : Cat] [oq oq' : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] ⊢ @fapp1_func (Product_ ...` |
+| 1928 | 19838 | `assert [A B X : Cat] [oq oq' : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] (r : τ (Hom (Product_ca ...` |
+| 1929 | 19860 | `assert [A B X : Cat] (oq : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))) ⊢ @fapp1_fapp0 (Product_cat ...` |
+| 1930 | 19884 | `assert [A B X : Cat] [oq0 oq1 oq2 : τ (Obj (Product_cat (Prof_cat A X) (Op_cat (Prof_cat B X))))] (r01 : τ (Hom (Pro ...` |
+| 1931 | 19914 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap P (@Prof_imply_cov A B ...` |
+| 1932 | 19923 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap (@Prof_tensor A B X P ...` |
+| 1933 | 19932 | `assert [A B B' X X' : Cat] (P : τ (Prof A B)) (O : τ (Prof A X)) (M : τ (Functor B' B)) (G : τ (Functor X' X)) ⊢ @Pr ...` |
+| 1934 | 19947 | `assert [A B X : Cat] (P : τ (Prof A B)) (O : τ (Prof A X)) ⊢ @Prof_reindex B B X X (@Prof_imply_con A B X P O) (@id_ ...` |
+| 1935 | 19957 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap Q (@Prof_imply_con A B ...` |
+| 1936 | 19966 | `assert [A B X : Cat] [P : τ (Prof A B)] [Q : τ (Prof B X)] [O : τ (Prof A X)] (t : τ (ProfMap (@Prof_tensor A B X P ...` |
+| 1937 | 19975 | `assert [B J J' : Cat] (F : τ (Functor J B)) (W : τ (Prof J' J)) ⊢ @WeightedCone_prof B J J' F W ≡ @Prof_imply_cov B ...` |
+| 1941 | 20018 | `assert [A B : Cat] [P Q : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) ⊢ @comp_fapp0 (@Prof_cat A B) P Q P (@prof ...` |
+| 1942 | 20028 | `assert [A B : Cat] [P Q R S : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (r : τ (@ProfMap A B R P)) (h : τ (@Pr ...` |
+| 1943 | 20043 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (r : τ (@ProfMap A B R P)) ⊢ @prof_compa ...` |
+| 1944 | 20051 | `assert [A B : Cat] [P Q R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (s : τ (@ProfMap A B R Q)) ⊢ @prof_compa ...` |
+| 1945 | 20059 | `assert [A B : Cat] [P R : τ (Prof A B)] (r : τ (@ProfMap A B R P)) ⊢ @prof_comparison_push A B P P (@prof_comparison ...` |
+| 1946 | 20068 | `assert [A B : Cat] [P Q S R : τ (Prof A B)] (i : τ (@ProfComparison A B P Q)) (j : τ (@ProfComparison A B Q S)) (r : ...` |
+| 1947 | 20080 | `assert [B J J' : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_co ...` |
+| 1948 | 20092 | `assert [B J J' I : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
+| 1949 | 20109 | `assert [B J J' I : Cat] [F : τ (Functor J B)] [W : τ (Prof J' J)] [L : τ (Functor J' B)] (isl : τ (@IsWeightedLimit_ ...` |
 
 ### Products, evaluation, curry/uncurry
 
@@ -1159,26 +1160,26 @@ stable mathematical-area scopes rather than source locations.
 | 1711 | 17547 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ fapp0 (@piapp0 (Op_cat K) (@Homd_targ ...` |
 | 1747 | 17777 | `assert [K : Cat] (x y : τ (Obj K)) ⊢ fapp0 (@homd_tgt_func K (@Const_catd K Terminal_cat) (@Const_catd K Terminal_ca ...` |
 | 1758 | 17920 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ @homd_ K (@Const_catd K Terminal_cat) ...` |
-| 1952 | 20220 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
-| 1953 | 20231 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
-| 1954 | 20253 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
-| 1958 | 20336 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢ @fib_cov_tapp0_func K (@ ...` |
-| 1959 | 20342 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (f : τ (Hom K x y)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢ fapp ...` |
-| 1961 | 20361 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_src_obj K ...` |
-| 1962 | 20368 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ fapp0 (homd_ (@id ...` |
-| 1963 | 20382 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @fapp0 (Op_cat (H ...` |
-| 1964 | 20401 | `assert [K : Cat] (A : Cat) (s : τ (Obj (Pi_cat (Const_catd K A)))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_s ...` |
-| 1967 | 20455 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_fapp0 K E ...` |
-| 1968 | 20464 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f g : τ (Obj (Op_cat (Hom_cat K x y))) ...` |
-| 1969 | 20494 | `assert [K : Cat] (A : Cat) (s : τ (Obj (Pi_cat (Const_catd K A)))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_f ...` |
-| 1970 | 20501 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) ⊢ Ho ...` |
-| 1971 | 20511 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢ @fapp0 (@ ...` |
-| 1972 | 20524 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (O ...` |
-| 1973 | 20547 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (O ...` |
-| 1974 | 20595 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre_ ...` |
-| 1975 | 20618 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢ @comp_cat_fapp0 (@Sigma_cat K E) (@Sigma_cat K D) K (@S ...` |
-| 1976 | 20624 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x : τ (Obj K)) ⊢ @fapp0 (Fibre_cat (@Op_catd K (@Const_c ...` |
-| 1977 | 20651 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ fapp0 (@piapp0 (Op_cat K) (@Homd_targ ...` |
+| 1953 | 20225 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
+| 1954 | 20236 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
+| 1955 | 20258 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) (v : τ (Obj (Fibre_cat (Co ...` |
+| 1959 | 20341 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢ @fib_cov_tapp0_func K (@ ...` |
+| 1960 | 20347 | `assert [K : Cat] (A : Cat) (x y : τ (Obj K)) (f : τ (Hom K x y)) (u : τ (Obj (Fibre_cat (Const_catd K A) x))) ⊢ fapp ...` |
+| 1962 | 20366 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_src_obj K ...` |
+| 1963 | 20373 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ fapp0 (homd_ (@id ...` |
+| 1964 | 20387 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @fapp0 (Op_cat (H ...` |
+| 1965 | 20406 | `assert [K : Cat] (A : Cat) (s : τ (Obj (Pi_cat (Const_catd K A)))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_s ...` |
+| 1968 | 20460 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_fapp0 K E ...` |
+| 1969 | 20469 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) (f g : τ (Obj (Op_cat (Hom_cat K x y))) ...` |
+| 1970 | 20499 | `assert [K : Cat] (A : Cat) (s : τ (Obj (Pi_cat (Const_catd K A)))) (x y : τ (Obj K)) (f : τ (Hom K x y)) ⊢ @piapp1_f ...` |
+| 1971 | 20506 | `assert [Z : Cat] (E : τ (Catd Z)) (x y : τ (Obj Z)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) ⊢ Ho ...` |
+| 1972 | 20516 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (k : τ (Obj K)) (u : τ (Obj (Fibre_cat E k))) ⊢ @fapp0 (@ ...` |
+| 1973 | 20529 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (O ...` |
+| 1974 | 20552 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (O ...` |
+| 1975 | 20600 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre_ ...` |
+| 1976 | 20623 | `assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢ @comp_cat_fapp0 (@Sigma_cat K E) (@Sigma_cat K D) K (@S ...` |
+| 1977 | 20629 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x : τ (Obj K)) ⊢ @fapp0 (Fibre_cat (@Op_catd K (@Const_c ...` |
+| 1978 | 20656 | `assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E))) (x y : τ (Obj K)) ⊢ fapp0 (@piapp0 (Op_cat K) (@Homd_targ ...` |
 
 ### Dependent homs and covariant fibre transport
 
@@ -1215,12 +1216,12 @@ stable mathematical-area scopes rather than source locations.
 | 1754 | 17865 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) ⊢ @Fibre_t ...` |
 | 1756 | 17893 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ ( ...` |
 | 1757 | 17906 | `assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D)) (x y : τ (Obj K)) (p : τ (Hom K x y)) (u : τ (Obj (Fibre ...` |
-| 1955 | 20278 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
-| 1956 | 20289 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
-| 1957 | 20311 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
-| 1960 | 20349 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f : ...` |
-| 1965 | 20408 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f g ...` |
-| 1966 | 20430 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f g ...` |
+| 1956 | 20283 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
+| 1957 | 20294 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
+| 1958 | 20316 | `assert [K : Cat] (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat (Terminal_catd K) x))) (v : τ (Obj (Fibre_cat (Terminal_ca ...` |
+| 1961 | 20354 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f : ...` |
+| 1966 | 20413 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f g ...` |
+| 1967 | 20435 | `assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) (u : τ (Obj (Fibre_cat E x))) (v : τ (Obj (Fibre_cat E y))) (f g ...` |
 
 ### Displayed hom-action and laxity extraction
 
@@ -2360,7 +2361,7 @@ stable mathematical-area scopes rather than source locations.
 | 1745 | 17760 | `assertnot [A : Cat] ⊢ @ind_eqr (Obj Cat_cat) A (λ X : Cat, λ _ : τ (@= (Obj Cat_cat) X A), Unit_grpd) tt A (@omega_e ...` |
 | 1746 | 17770 | `assertnot [A : Cat] (x y : τ (Obj A)) ⊢ @cat_path_fapp1 A A (@cat_path_refl A) x y ≡ @omega_equiv_refl Cat_cat (Hom_ ...` |
 
-### Walking endomorphism directed HIT and Nat normal form
+### Nat arithmetic and sethood prerequisites
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
@@ -2378,49 +2379,55 @@ stable mathematical-area scopes rather than source locations.
 | 1864 | 19208 | `assert ⊢ empty_is_prop : τ (IsPropGrpd Empty_grpd);` |
 | 1865 | 19213 | `assert ⊢ nat_is_set : τ (IsSetGrpd Nat_grpd);` |
 | 1866 | 19217 | `assert (m n : τ Nat_grpd) ⊢ nat_is_set m n : τ (IsPropGrpd (@= Nat_grpd m n));` |
-| 1867 | 19222 | `assert ⊢ τ WalkingWord_grpd ≡ walking_word;` |
-| 1868 | 19224 | `assert ⊢ @= WalkingWord_grpd walking_word_zero walking_word_zero ≡ Unit_grpd;` |
-| 1869 | 19228 | `assert (w : τ WalkingWord_grpd) ⊢ @= WalkingWord_grpd walking_word_zero (walking_word_succ w) ≡ Empty_grpd;` |
-| 1870 | 19232 | `assert ⊢ Obj WalkingEnd_cat ≡ Unit_grpd;` |
-| 1871 | 19234 | `assert ⊢ Hom_cat WalkingEnd_cat walking_base walking_base ≡ Path_cat WalkingWord_grpd;` |
-| 1872 | 19238 | `assertnot ⊢ Hom_cat WalkingEnd_cat walking_base walking_base ≡ Path_cat Nat_grpd;` |
-| 1873 | 19242 | `assert ⊢ @id WalkingEnd_cat walking_base ≡ walking_word_zero;` |
-| 1874 | 19244 | `assert ⊢ walking_loop ≡ walking_word_succ walking_word_zero;` |
-| 1875 | 19247 | `assert (f : τ WalkingWord_grpd) ⊢ @comp_fapp0 WalkingEnd_cat tt tt tt walking_word_zero f ≡ f;` |
-| 1876 | 19251 | `assert (g f : τ WalkingWord_grpd) ⊢ @comp_fapp0 WalkingEnd_cat tt tt tt (walking_word_succ g) f ≡ walking_word_succ ...` |
-| 1877 | 19258 | `assert (k p g : τ WalkingWord_grpd) ⊢ @hom_precomp_along_postcomp_assoc WalkingEnd_cat WalkingEnd_cat (@id Cat_cat W ...` |
-| 1878 | 19286 | `assert [C : Cat] (F : τ (Functor WalkingEnd_cat C)) ⊢ @walking_functor_zero_view C F : τ (@= (Hom C (@fapp0 WalkingE ...` |
-| 1879 | 19297 | `assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x)) ⊢ @fapp0 WalkingEnd_cat C (@walking_end_rec_func C x f) walking ...` |
-| 1880 | 19303 | `assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x)) ⊢ @walking_end_rec_beta_loop C x f : τ (@= (Hom C x x) (@fapp1_ ...` |
-| 1881 | 19315 | `assertnot [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x)) ⊢ @fapp1_fapp0 WalkingEnd_cat C (@walking_end_rec_func C x f ...` |
-| 1882 | 19324 | `assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x)) ⊢ @walking_end_rec_loop_square C x f : τ (@= (Hom C x x) (@comp ...` |
-| 1883 | 19340 | `assert ⊢ Obj BNat_cat ≡ Unit_grpd;` |
-| 1884 | 19342 | `assert ⊢ Hom_cat BNat_cat bnat_obj bnat_obj ≡ Path_cat Nat_grpd;` |
-| 1885 | 19346 | `assert ⊢ @id BNat_cat bnat_obj ≡ zero;` |
-| 1886 | 19348 | `assert ⊢ bnat_generator ≡ succ zero;` |
-| 1887 | 19350 | `assert [C : Cat] (F : τ (Functor BNat_cat C)) ⊢ @bnat_functor_zero_view C F : τ (@= (Hom C (@fapp0 BNat_cat C F tt) ...` |
-| 1888 | 19360 | `assert (g f : τ Nat_grpd) ⊢ @comp_fapp0 BNat_cat tt tt tt (succ g) f ≡ succ (@comp_fapp0 BNat_cat tt tt tt g f);` |
-| 1889 | 19364 | `assert (g f : τ Nat_grpd) ⊢ @bnat_comp_nat_add g f : τ (@= Nat_grpd (@comp_fapp0 BNat_cat tt tt tt g f) (@nat_add g f));` |
-| 1890 | 19370 | `assertnot (g f : τ Nat_grpd) ⊢ @comp_fapp0 BNat_cat tt tt tt g f ≡ @nat_add g f;` |
-| 1891 | 19374 | `assert (k p g : τ Nat_grpd) ⊢ @hom_precomp_along_postcomp_assoc BNat_cat BNat_cat (@id Cat_cat BNat_cat) bnat_obj bn ...` |
-| 1892 | 19402 | `assert ⊢ walking_encode_func ≡ @walking_end_ind_sec (@Const_catd WalkingEnd_cat BNat_cat) bnat_obj bnat_generator;` |
-| 1893 | 19408 | `assert ⊢ @walking_end_rec_beta_loop BNat_cat bnat_obj bnat_generator : τ (@= Nat_grpd (@walking_encode_action walkin ...` |
-| 1894 | 19414 | `assert (w : τ WalkingWord_grpd) ⊢ @walking_encode_succ_view w : τ (@= Nat_grpd (@walking_encode_action (walking_word ...` |
-| 1895 | 19420 | `assert (w : τ WalkingWord_grpd) ⊢ @walking_encode_agreement w : τ (@= Nat_grpd (@walking_encode_action w) (@walking_ ...` |
-| 1896 | 19426 | `assert (g f : τ WalkingWord_grpd) ⊢ @walking_encode_comp_view g f : τ (@= Nat_grpd (@walking_encode_action (@comp_fa ...` |
-| 1897 | 19435 | `assert (g f : τ WalkingWord_grpd) ⊢ @walking_word_to_nat_comp g f : τ (@= Nat_grpd (@walking_word_to_nat (@comp_fapp ...` |
-| 1898 | 19444 | `assert ⊢ walking_decode_beta_generator : τ (@= WalkingWord_grpd (@walking_decode_action bnat_generator) walking_loop);` |
-| 1899 | 19449 | `assert (n : τ Nat_grpd) ⊢ @walking_decode_agreement n : τ (@= WalkingWord_grpd (@walking_decode_action n) (@nat_to_w ...` |
-| 1900 | 19455 | `assert (g f : τ Nat_grpd) ⊢ @walking_decode_comp_view g f : τ (@= WalkingWord_grpd (@walking_decode_action (@nat_add ...` |
-| 1901 | 19464 | `assert (w : τ WalkingWord_grpd) ⊢ @nat_word_roundtrip w : τ (@= WalkingWord_grpd (@nat_to_walking_word (@walking_wor ...` |
-| 1902 | 19470 | `assert (n : τ Nat_grpd) ⊢ @word_nat_roundtrip n : τ (@= Nat_grpd (@walking_word_to_nat (@nat_to_walking_word n)) n);` |
-| 1903 | 19476 | `assertnot (w : τ WalkingWord_grpd) ⊢ @nat_to_walking_word (@walking_word_to_nat w) ≡ w;` |
-| 1904 | 19481 | `assert ⊢ walking_hom_nat_type_equiv : τ (TypeEquiv (Hom WalkingEnd_cat walking_base walking_base) Nat_grpd);` |
-| 1905 | 19486 | `assert ⊢ sigma_Fst walking_hom_nat_type_equiv ≡ walking_word_to_nat;` |
-| 1906 | 19490 | `assert ⊢ walking_hom_nat_omega_equiv_EQ1 : τ (@OmegaEquiv_EQ1 Grpd_cat (Hom WalkingEnd_cat walking_base walking_base ...` |
-| 1907 | 19496 | `assert ⊢ @omega_equiv_to_EQ1 Grpd_cat (Hom WalkingEnd_cat walking_base walking_base) Nat_grpd walking_hom_nat_omega_ ...` |
-| 1908 | 19505 | `assert ⊢ walking_end_is_one_cat : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat);` |
-| 1909 | 19508 | `assert ⊢ bnat_is_one_cat : τ (IsNCat (cat_succ cat_zero) BNat_cat);` |
-| 1910 | 19513 | `assert ⊢ walking_loop_not_identity : τ (@Function_grpd (@= WalkingWord_grpd walking_loop walking_word_zero) Empty_grpd);` |
-| 1911 | 19518 | `assert ⊢ walking_loop_not_omega_equiv_EQ1 : τ (@Function_grpd (@OmegaEquivAlong_EQ1 WalkingEnd_cat walking_base walk ...` |
-| 1912 | 19524 | `assert (g : τ (@IsGroupoidalCat_EQ1 WalkingEnd_cat)) ⊢ @walking_loop_not_omega_equiv_EQ1 (@groupoidal_arrow_equiv_al ...` |
+
+### Walking endomorphism directed HIT and Nat normal form
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1867 | 19223 | `assert ⊢ τ WalkingWord_grpd ≡ walking_word;` |
+| 1868 | 19225 | `assert ⊢ @= WalkingWord_grpd walking_word_zero walking_word_zero ≡ Unit_grpd;` |
+| 1869 | 19229 | `assert (w : τ WalkingWord_grpd) ⊢ @= WalkingWord_grpd walking_word_zero (walking_word_succ w) ≡ Empty_grpd;` |
+| 1870 | 19233 | `assert ⊢ Obj WalkingEnd_cat ≡ Unit_grpd;` |
+| 1871 | 19235 | `assert ⊢ Hom_cat WalkingEnd_cat walking_base walking_base ≡ Path_cat WalkingWord_grpd;` |
+| 1872 | 19239 | `assertnot ⊢ Hom_cat WalkingEnd_cat walking_base walking_base ≡ Path_cat Nat_grpd;` |
+| 1873 | 19243 | `assert ⊢ @id WalkingEnd_cat walking_base ≡ walking_word_zero;` |
+| 1874 | 19245 | `assert ⊢ walking_loop ≡ walking_word_succ walking_word_zero;` |
+| 1875 | 19248 | `assert (f : τ WalkingWord_grpd) ⊢ @comp_fapp0 WalkingEnd_cat tt tt tt walking_word_zero f ≡ f;` |
+| 1876 | 19252 | `assert (g f : τ WalkingWord_grpd) ⊢ @comp_fapp0 WalkingEnd_cat tt tt tt (walking_word_succ g) f ≡ walking_word_succ ...` |
+| 1877 | 19259 | `assert (k p g : τ WalkingWord_grpd) ⊢ @hom_precomp_along_postcomp_assoc WalkingEnd_cat WalkingEnd_cat (@id Cat_cat W ...` |
+| 1878 | 19287 | `assert [C : Cat] (F : τ (Functor WalkingEnd_cat C)) ⊢ @walking_functor_zero_view C F : τ (@= (Hom C (@fapp0 WalkingE ...` |
+| 1879 | 19298 | `assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x)) ⊢ @fapp0 WalkingEnd_cat C (@walking_end_rec_func C x f) walking ...` |
+| 1880 | 19304 | `assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x)) ⊢ @walking_end_rec_beta_loop C x f : τ (@= (Hom C x x) (@fapp1_ ...` |
+| 1881 | 19316 | `assertnot [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x)) ⊢ @fapp1_fapp0 WalkingEnd_cat C (@walking_end_rec_func C x f ...` |
+| 1882 | 19325 | `assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x)) ⊢ @walking_end_rec_loop_square C x f : τ (@= (Hom C x x) (@comp ...` |
+| 1883 | 19341 | `assert ⊢ Obj BNat_cat ≡ Unit_grpd;` |
+| 1884 | 19343 | `assert ⊢ Hom_cat BNat_cat bnat_obj bnat_obj ≡ Path_cat Nat_grpd;` |
+| 1885 | 19347 | `assert ⊢ @id BNat_cat bnat_obj ≡ zero;` |
+| 1886 | 19349 | `assert ⊢ bnat_generator ≡ succ zero;` |
+| 1887 | 19351 | `assert [C : Cat] (F : τ (Functor BNat_cat C)) ⊢ @bnat_functor_zero_view C F : τ (@= (Hom C (@fapp0 BNat_cat C F tt) ...` |
+| 1888 | 19361 | `assert (g f : τ Nat_grpd) ⊢ @comp_fapp0 BNat_cat tt tt tt (succ g) f ≡ succ (@comp_fapp0 BNat_cat tt tt tt g f);` |
+| 1889 | 19365 | `assert (g f : τ Nat_grpd) ⊢ @bnat_comp_nat_add g f : τ (@= Nat_grpd (@comp_fapp0 BNat_cat tt tt tt g f) (@nat_add g f));` |
+| 1890 | 19371 | `assertnot (g f : τ Nat_grpd) ⊢ @comp_fapp0 BNat_cat tt tt tt g f ≡ @nat_add g f;` |
+| 1891 | 19375 | `assert (k p g : τ Nat_grpd) ⊢ @hom_precomp_along_postcomp_assoc BNat_cat BNat_cat (@id Cat_cat BNat_cat) bnat_obj bn ...` |
+| 1892 | 19403 | `assert ⊢ walking_encode_func ≡ @walking_end_ind_sec (@Const_catd WalkingEnd_cat BNat_cat) bnat_obj bnat_generator;` |
+| 1893 | 19409 | `assert ⊢ @walking_end_rec_beta_loop BNat_cat bnat_obj bnat_generator : τ (@= Nat_grpd (@walking_encode_action walkin ...` |
+| 1894 | 19415 | `assert (w : τ WalkingWord_grpd) ⊢ @walking_encode_succ_view w : τ (@= Nat_grpd (@walking_encode_action (walking_word ...` |
+| 1895 | 19421 | `assert (w : τ WalkingWord_grpd) ⊢ @walking_encode_agreement w : τ (@= Nat_grpd (@walking_encode_action w) (@walking_ ...` |
+| 1896 | 19427 | `assert (g f : τ WalkingWord_grpd) ⊢ @walking_encode_comp_view g f : τ (@= Nat_grpd (@walking_encode_action (@comp_fa ...` |
+| 1897 | 19436 | `assert (g f : τ WalkingWord_grpd) ⊢ @walking_word_to_nat_comp g f : τ (@= Nat_grpd (@walking_word_to_nat (@comp_fapp ...` |
+| 1898 | 19445 | `assert ⊢ walking_decode_beta_generator : τ (@= WalkingWord_grpd (@walking_decode_action bnat_generator) walking_loop);` |
+| 1899 | 19450 | `assert (n : τ Nat_grpd) ⊢ @walking_decode_agreement n : τ (@= WalkingWord_grpd (@walking_decode_action n) (@nat_to_w ...` |
+| 1900 | 19456 | `assert (g f : τ Nat_grpd) ⊢ @walking_decode_comp_view g f : τ (@= WalkingWord_grpd (@walking_decode_action (@nat_add ...` |
+| 1901 | 19465 | `assert (w : τ WalkingWord_grpd) ⊢ @nat_word_roundtrip w : τ (@= WalkingWord_grpd (@nat_to_walking_word (@walking_wor ...` |
+| 1902 | 19471 | `assert (n : τ Nat_grpd) ⊢ @word_nat_roundtrip n : τ (@= Nat_grpd (@walking_word_to_nat (@nat_to_walking_word n)) n);` |
+| 1903 | 19477 | `assertnot (w : τ WalkingWord_grpd) ⊢ @nat_to_walking_word (@walking_word_to_nat w) ≡ w;` |
+| 1904 | 19481 | `assertnot (n : τ Nat_grpd) ⊢ @walking_word_to_nat (@nat_to_walking_word n) ≡ n;` |
+| 1905 | 19486 | `assert ⊢ walking_hom_nat_type_equiv : τ (TypeEquiv (Hom WalkingEnd_cat walking_base walking_base) Nat_grpd);` |
+| 1906 | 19491 | `assert ⊢ sigma_Fst walking_hom_nat_type_equiv ≡ walking_word_to_nat;` |
+| 1907 | 19495 | `assert ⊢ walking_hom_nat_omega_equiv_EQ1 : τ (@OmegaEquiv_EQ1 Grpd_cat (Hom WalkingEnd_cat walking_base walking_base ...` |
+| 1908 | 19501 | `assert ⊢ @omega_equiv_to_EQ1 Grpd_cat (Hom WalkingEnd_cat walking_base walking_base) Nat_grpd walking_hom_nat_omega_ ...` |
+| 1909 | 19510 | `assert ⊢ walking_end_is_one_cat : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat);` |
+| 1910 | 19513 | `assert ⊢ bnat_is_one_cat : τ (IsNCat (cat_succ cat_zero) BNat_cat);` |
+| 1911 | 19518 | `assert ⊢ walking_loop_not_identity : τ (@Function_grpd (@= WalkingWord_grpd walking_loop walking_word_zero) Empty_grpd);` |
+| 1912 | 19523 | `assert ⊢ walking_loop_not_omega_equiv_EQ1 : τ (@Function_grpd (@OmegaEquivAlong_EQ1 WalkingEnd_cat walking_base walk ...` |
+| 1913 | 19529 | `assert (g : τ (@IsGroupoidalCat_EQ1 WalkingEnd_cat)) ⊢ @walking_loop_not_omega_equiv_EQ1 (@groupoidal_arrow_equiv_al ...` |

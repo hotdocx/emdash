@@ -3,7 +3,7 @@
 Date: 2026-07-17
 Last reviewed: 2026-07-18
 Plan-ID: EMDASH-V3-2-WALKING-ENDOMORPHISM-DIRECTED-HIT-2026-07-17
-Depends-On: REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17; REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
+Depends-On: REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17; REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_nat_arithmetic.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
 Supersedes: none
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
@@ -12,7 +12,9 @@ Status: **selected theorem-first directed-HIT/BNat MVP implemented, synchronized
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
-Current implementation owner: `emdash3_2_walking_end_hit.lp`
+Current implementation owners: reusable Nat prerequisites in
+`emdash3_2_nat_arithmetic.lp`; walking HIT/model/comparison in
+`emdash3_2_walking_end_hit.lp`
 
 ## Status And Authority
 
@@ -116,7 +118,7 @@ transitivity. All six WalkingEnd/BNat consumers pass in
 `logs/probes/walking_comp_hom_action_consumers-20260718-013636.log`. No
 category-specific action theorem or rewrite was needed.
 
-Final consolidation on 2026-07-18 passes the complete reviewer-example suite,
+Selected-MVP consolidation on 2026-07-18 passes the complete reviewer-example suite,
 strict LHS audits for both the base kernel and the WalkingEnd owner, catalog,
 TOC/reference/header/diff checks, refreshed health, and `make ci`. The catalog
 contains 1,977 classified diagnostics (1,739 positive and 238 negative) with
@@ -136,6 +138,17 @@ The active diagnostics deliberately contain both sides of the boundary:
 - arbitrary transparent word/Nat round-trip proofs, together with negative
   conversion checks showing that open round trips are propositional rather
   than proof-erased runtime equations.
+
+The 2026-07-18 post-completion consolidation is also closed. The reusable Nat
+slice is a 116-line/6-symbol/1-rule module; the walking owner is now
+803 lines/48 symbols/13 rules/2 unifiers and contains no inline assertions.
+The permanent suite has 1,978 classified diagnostics across 72 areas (1,739
+positive and 239 negative), including both open round-trip conversion
+controls. All 55 modules/examples pass. Warning inventories remain `971/157`
+for the kernel and Nat module and `977/157` for the walking owner; strict LHS
+audits have zero unreviewed clauses. The refreshed health report is current,
+and synchronized local CI passes with 128.448 seconds of measured checking
+time.
 
 Both one-object sources expose the same reusable proof-time identity pattern:
 `walking_functor_zero_view` and `bnat_functor_zero_view` compare action on the
@@ -200,8 +213,10 @@ the selected computational observations without declaring Hom to be Nat.
 
 ## Historical Blocked Checkpoint (Superseded Decision Evidence)
 
-At the earlier 2026-07-17 checkpoint, only one independent prerequisite slice was
-promoted in `emdash3_2_walking_end_hit.lp`:
+At the earlier 2026-07-17 checkpoint, only one independent prerequisite slice
+was promoted in `emdash3_2_walking_end_hit.lp` (and was later relocated
+verbatim to `emdash3_2_nat_arithmetic.lp` during post-completion
+consolidation):
 
 - `nat_add` with zero, successor, and open right-unit computation;
 - transparent `nat_add_assoc` by native Nat induction;
@@ -964,6 +979,15 @@ Keep the HIT presentation, Nat model, and comparison in one module during the
 architecture phase; split them only after the dependency boundary is stable.
 Do not combine a file split with a rewrite-normal-form migration.
 
+Post-completion consolidation applies that boundary literally: reusable Nat
+addition, associativity, Unit/Empty proposition evidence, and Nat sethood now
+live in `emdash3_2_nat_arithmetic.lp`. The walking module imports them while
+retaining `WalkingWord`, both one-object categories, the eliminator,
+encode/decode, equivalence packages, and directed negative results. The usual
+unqualified arithmetic spellings remain transitively available to clients of
+the walking module; their module-qualified owner intentionally moves. No
+rule, unifier, theorem body, or runtime normal form changed in the split.
+
 The selected public surface is:
 
 ```text
@@ -1311,6 +1335,7 @@ semantic-model proof. Those remain the parent's deferred metatheory track.
 | `WEHIT-JOIN-FOLLOWUP` | deferred separate plan | use dependent-HIT pattern to reassess Join elimination | completed walking HIT | new bounded plan; no implementation in this task |
 | `WEHIT-GROUPOID-COMPLETION` | deferred separate plan | compare `BNat` with free invertible loop/`BInt` | completed walking HIT | separately reviewed architecture |
 | `WEHIT-CONSOLIDATE` | **completed 2026-07-18** | synchronize code, examples, reports, and gates | implemented selected MVP | 1,977-check catalog, 54-target health, warnings/audits, all examples, and full local CI pass |
+| `WEHIT-POST-CONSOLIDATE` | **completed 2026-07-18** | stabilize the post-MVP module and report boundary | completed selected MVP | reusable Nat prerequisites extracted; inline assertions centralized with the missing second round-trip negative; 1,978 checks/72 areas and all 55 targets pass; warnings remain kernel/Nat `971/157` and walking `977/157`; audits, health, examples, and 128.448s CI pass |
 
 ## Validation And Synchronization Protocol
 

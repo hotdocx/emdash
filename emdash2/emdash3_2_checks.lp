@@ -1,10 +1,10 @@
 /*
   m- / emdash3.2 diagnostic/assertion checks.
 
-  The implementation lives in emdash3_2.lp; this module owns executable
-  diagnostic and regression `assert` commands. Assertions remain grouped by
-  the architecture they exercise, while the generated reviewer-facing area
-  map lives in reports/REPORT_EMDASH_CHECK_CATALOG.md.
+  The implementation lives in the active v3.2 source modules; this module
+  owns executable diagnostic and regression `assert` commands. Assertions
+  remain grouped by the architecture they exercise, while the generated
+  reviewer-facing area map lives in reports/REPORT_EMDASH_CHECK_CATALOG.md.
 
   Do not use source line numbers as durable identifiers. Prefer a mathematical
   area comment, the checked head, and normalized/type-aware search.
@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -19154,7 +19154,7 @@ assert [A B E I : Cat]
       a b
       cross;
 
-// catalog-area: Walking endomorphism directed HIT and Nat normal form
+// catalog-area: Nat arithmetic and sethood prerequisites
 // Arithmetic prerequisites remain transparent and reusable.
 assert (m n : τ Nat_grpd) ⊢
   @nat_add m n
@@ -19218,6 +19218,7 @@ assert (m n : τ Nat_grpd) ⊢
   nat_is_set m n
   : τ (IsPropGrpd (@= Nat_grpd m n));
 
+// catalog-area: Walking endomorphism directed HIT and Nat normal form
 // WalkingWord is native free-arrow syntax, not an early Hom-to-Nat rewrite.
 assert ⊢ τ WalkingWord_grpd ≡ walking_word;
 
@@ -19476,6 +19477,10 @@ assert (n : τ Nat_grpd) ⊢
 assertnot (w : τ WalkingWord_grpd) ⊢
   @nat_to_walking_word (@walking_word_to_nat w)
   ≡ w;
+
+assertnot (n : τ Nat_grpd) ⊢
+  @walking_word_to_nat (@nat_to_walking_word n)
+  ≡ n;
 
 // The hom comparison is packaged through the retained standard interfaces.
 assert ⊢ walking_hom_nat_type_equiv

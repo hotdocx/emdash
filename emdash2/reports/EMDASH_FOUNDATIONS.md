@@ -6,6 +6,10 @@ extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property
 and finite-dimension extension `emdash3_2_eq1_evidence_property.lp`. It
 presents the intended mathematics in ordinary category/type-theory notation
 and deliberately suppresses most Lambdapi rewrite engineering details.
+Reusable Nat addition and sethood live in the one-way
+`emdash3_2_nat_arithmetic.lp` module. The concrete walking-endomorphism
+directed-HIT/`BNat` presentation lives downstream in
+`emdash3_2_walking_end_hit.lp`.
 The retained componentwise Sum observational action lives in the separate
 library module `emdash3_2_sum_observational_action.lp`; it is not a
 foundational univalence dependency.
@@ -58,7 +62,9 @@ alone that a new primitive head is needed; first locate the current semantic
 owner in `emdash3_2.lp` or, for native equality-valued next-hom preservation
 and its groupoidality consumers, `emdash3_2_eq1_hom_action.lp`. Native EQ1
 evidence-property and finite-`NCat` object-truncation theorems live in
-`emdash3_2_eq1_evidence_property.lp`.
+`emdash3_2_eq1_evidence_property.lp`. Nat arithmetic/sethood and the concrete
+walking-endomorphism construction are owned by their two one-way modules,
+rather than by the kernel.
 
 ## 2. Categories And Hom-Categories
 
@@ -161,8 +167,7 @@ natural-number-object properties remain separate tasks. The constructor
 conversion non-collapse diagnostics are local regression controls, not no-
 confusion or normalization theorems.
 
-The one-way walking-endomorphism extension now adds the reusable arithmetic
-prerequisites
+The one-way Nat arithmetic extension provides the reusable prerequisites
 
 ```text
 nat_add(0,n)       = n
@@ -178,9 +183,10 @@ terms. This is genuine truncation evidence, not a conclusion inferred only
 from the no-confusion rewrite table. Open addition is not normalized by
 commutativity.
 
-The same extension now presents the walking endomorphism as a concrete
-directed HIT. `WalkingWord_grpd` is native free-arrow syntax, deliberately
-distinct from Nat, and
+The downstream walking-endomorphism extension imports those prerequisites and
+presents the walking endomorphism as a concrete directed HIT.
+`WalkingWord_grpd` is native free-arrow syntax, deliberately distinct from
+Nat, and
 
 ```text
 Obj(WalkingEnd_cat)        = Unit_grpd

@@ -10,6 +10,10 @@ The active kernel is `emdash3_2.lp`. The one-way derived native-EQ1
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
 the transparent native-EQ1 evidence-property and finite-dimension truncation
 extension is `emdash3_2_eq1_evidence_property.lp`;
+the reusable Nat arithmetic/sethood extension is
+`emdash3_2_nat_arithmetic.lp`;
+the selected walking-endomorphism directed-HIT/`BNat` extension is
+`emdash3_2_walking_end_hit.lp`;
 the library-level Sum observational-action extension is
 `emdash3_2_sum_observational_action.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
@@ -24,15 +28,20 @@ Use the following order:
 3. `emdash3_2_eq1_evidence_property.lp` for transparent native-EQ1
    evidence-property, retract-truncation, and finite-`NCat` object-truncation
    theorems;
-4. `emdash3_2_sum_observational_action.lp` for the retained library-level
+4. `emdash3_2_nat_arithmetic.lp` for reusable Nat addition, associativity,
+   Unit/Empty proposition evidence, and Nat sethood;
+5. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+   endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
+   directed negative results;
+6. `emdash3_2_sum_observational_action.lp` for the retained library-level
    componentwise Sum action and its proof-time bases;
-5. `emdash3_2_checks.lp` for executable regression statements;
-6. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+7. `emdash3_2_checks.lp` for executable regression statements;
+8. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-7. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-8. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+9. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+10. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-9. `reports/INDEX.md` for task-specific plans and decision records.
+11. `reports/INDEX.md` for task-specific plans and decision records.
 
 The obsolete v2/v3.1 material under ignored `.scratchpad/` directories is not
 part of normal development. Do not read, summarize, or reference it unless the

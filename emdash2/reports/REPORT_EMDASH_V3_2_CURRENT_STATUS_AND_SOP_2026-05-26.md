@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-17
+Last consolidated: 2026-07-18
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -19,14 +19,19 @@ detailed probe evidence.
 - `emdash3_2_eq1_evidence_property.lp`: one-way transparent native-EQ1
   evidence-property, retract-truncation, and finite-`NCat` object-truncation
   layer; it imports the kernel and hom-action extension, never conversely.
+- `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/sethood
+  module. It owns `nat_add`, its associativity theorem, the Unit/Empty
+  proposition witnesses, and `nat_is_set` without importing the walking-HIT
+  surface.
+- `emdash3_2_walking_end_hit.lp`: one-way walking-endomorphism directed-HIT
+  module. It imports the Nat module and owns native `WalkingWord` free-arrow
+  syntax, `WalkingEnd_cat`, the structured dependent eliminator, the separate
+  `BNat_cat` model, encode/decode and transparent inverse proofs, the Hom-to-
+  Nat equivalence, local discreteness/OneCat evidence, and directed-loop
+  negative results.
 - `emdash3_2_sum_observational_action.lp`: one-way library module retaining
   the componentwise Sum `ObsAction`, its equality comparison, and four
   proof-time bases; no kernel or univalence consumer imports it.
-- `emdash3_2_walking_end_hit.lp`: one-way walking-endomorphism directed-HIT
-  module. It owns native `WalkingWord` free-arrow syntax, `WalkingEnd_cat`,
-  the structured dependent eliminator, the separate `BNat_cat` model,
-  encode/decode and transparent inverse proofs, the Hom-to-Nat equivalence,
-  local discreteness/OneCat evidence, and directed-loop negative results.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -52,8 +57,8 @@ The 2026-07-18 baseline is:
 make check                         pass
 make examples                      pass
 make ci                            pass
-checked files/examples            54
-diagnostic checks                1,977 (1,739 assert + 238 assertnot)
+checked files/examples            55
+diagnostic checks                1,978 (1,739 assert + 239 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -83,6 +88,14 @@ propositional theorem `hom_precomp_along_postcomp_assoc`; runtime owners remain
 distinct.
 Rejected raw-loop-action, recursive-action, broad precomposition, and direct
 open-addition candidates remain recorded in the July 17 living plan.
+Post-completion consolidation moved the reusable Nat arithmetic/sethood slice
+to `emdash3_2_nat_arithmetic.lp` and moved all permanent walking assertions to
+the catalogued diagnostic suite. The usual unqualified spellings remain
+available through transitive `open`; the module-qualified owner of the Nat
+slice intentionally changes. No theorem body, rewrite, unifier, or runtime
+normal form changes. The resulting catalog has 1,978 checks across 72 areas,
+all 55 health targets pass, and synchronized local CI records 128.448 seconds
+of measured checking time.
 
 The adopted equality-valued omega-equivalence overlay is implemented at its
 selected operational MVP boundary. This includes the abstract/rigid-universe,
@@ -317,7 +330,8 @@ example import that one-way module. This preserves the useful library example
 while removing action-specific proof-time authority from the foundational
 kernel; focused kernel/module/check/example probes all pass.
 
-The final selected-MVP catalog has 1,917 checks across 70 areas. The kernel has
+The equality-overlay selected-MVP checkpoint had 1,917 checks across 70 areas.
+The kernel has
 21,762 lines, 887 symbols, 596 rewrite rules, and 63 unification rules. The
 native hom-action extension has 2,791 lines/69 symbols; the evidence-property
 extension has 1,407 lines/60 symbols and adds no explicit rewrite or
@@ -1998,7 +2012,10 @@ The following remain explicit future work rather than hidden assumptions:
 - raw unreified-path observer computation, reverse pointwise-to-coherent-core
   assembly, consumer-led core-universe inclusion functors, and full legacy
   decoder API retirement beyond the selected native direct-univalence MVP;
-- general higher-inductive categories and pushouts;
+- generic abstraction of the completed walking-endomorphism presentation,
+  full functor-category initiality, a reusable raw-function `PathMap`,
+  groupoid completion toward `BInt`/Circle, and general higher-inductive
+  categories or pushouts;
 - a finalized parser/surface language;
 - module splitting of the single kernel file after comment/section boundaries
   stabilize.

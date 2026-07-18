@@ -3,13 +3,13 @@
   endomorphism plan.
 
   Addition computes in the selected categorical order, its associativity is
-  proved by Nat induction, and Nat carries an internal sethood witness.  The
-  This file intentionally isolates the reusable arithmetic slice. The full
+  proved by Nat induction, and Nat carries an internal sethood witness. This
+  file intentionally isolates the reusable arithmetic slice. The full
   directed-HIT/BNat milestone is exercised in
   examples/walking_endomorphism_hit.lp.
 */
 
-require open emdash.emdash3_2_walking_end_hit;
+require open emdash.emdash3_2_nat_arithmetic;
 
 // Addition computes at both constructors and both open unit boundaries.
 assert (n : τ Nat_grpd) ⊢

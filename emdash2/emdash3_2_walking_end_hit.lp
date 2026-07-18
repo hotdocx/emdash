@@ -13,114 +13,7 @@
   proved nonidentity and noninvertible rather than declared groupoidal.
 */
 
-require open emdash.emdash3_2;
-
-/*
-  Natural-number addition.
-
-  The primary recursion is on the left argument.  The open right-unit fold is
-  an intentional second equation: it joins the two ordinary category-unit
-  orders in future one-object monoid presentations.  The two reduction paths
-  at `nat_add (succ m) zero` meet at `succ m`.
-*/
-injective symbol nat_add
-  (m n : τ Nat_grpd)
-  : τ Nat_grpd;
-
-rule @nat_add zero $n ↪ $n
-with @nat_add (succ $m) $n ↪ succ (@nat_add $m $n)
-with @nat_add $m zero ↪ $m;
-
-// Associativity of the selected addition orientation, by Nat induction.
-symbol nat_add_assoc
-  (m n k : τ Nat_grpd)
-  : τ (@= Nat_grpd
-      (@nat_add (@nat_add m n) k)
-      (@nat_add m (@nat_add n k)))
-≔ @nat_elim
-    (λ m : τ Nat_grpd,
-      @= Nat_grpd
-        (@nat_add (@nat_add m n) k)
-        (@nat_add m (@nat_add n k)))
-    (@eq_refl Nat_grpd (@nat_add n k))
-    (λ m0 : τ Nat_grpd,
-      λ ih : τ (@= Nat_grpd
-        (@nat_add (@nat_add m0 n) k)
-        (@nat_add m0 (@nat_add n k))),
-      ih)
-    m;
-
-// Unit is contractible, using its generated dependent eliminator.
-symbol unit_is_contr
-  : τ (IsContr Unit_grpd)
-≔ @Struct_sigma
-    Unit_grpd
-    (λ centre : τ Unit_grpd,
-      @Pi_grpd Unit_grpd
-        (λ x : τ Unit_grpd, @= Unit_grpd centre x))
-    tt
-    (λ x : τ Unit_grpd,
-      @ind_unit
-        (λ x : τ Unit_grpd, @= Unit_grpd tt x)
-        (@eq_refl Unit_grpd tt)
-        x);
-
-// Unit is proposition-valued by general contractibility monotonicity.
-symbol unit_is_prop
-  : τ (IsPropGrpd Unit_grpd)
-≔ @is_contr_is_prop Unit_grpd unit_is_contr;
-
-// Empty is proposition-valued by elimination at its first endpoint.
-symbol empty_is_prop
-  : τ (IsPropGrpd Empty_grpd)
-≔ λ x : τ Empty_grpd,
-    @empty_elim
-      (λ _ : τ Empty_grpd,
-        @Pi_grpd Empty_grpd
-          (λ y : τ Empty_grpd,
-            IsContr (@= Empty_grpd x y)))
-      x;
-
-/*
-  Nat is set-valued.
-
-  Nested Nat induction reduces every visible equality classifier to Unit or
-  Empty and reuses the proposition-valuedness proofs above.  This is an
-  internal inhabitant of `IsSetGrpd Nat_grpd`, not a conclusion inferred only
-  from constructor no-confusion rewrites.
-*/
-symbol nat_is_set
-  : τ (IsSetGrpd Nat_grpd)
-≔ λ m : τ Nat_grpd,
-    @nat_elim
-      (λ m : τ Nat_grpd,
-        @Pi_grpd Nat_grpd
-          (λ n : τ Nat_grpd,
-            IsPropGrpd (@= Nat_grpd m n)))
-      (λ n : τ Nat_grpd,
-        @nat_elim
-          (λ n : τ Nat_grpd,
-            IsPropGrpd (@= Nat_grpd zero n))
-          unit_is_prop
-          (λ n0 : τ Nat_grpd,
-            λ _ : τ (IsPropGrpd (@= Nat_grpd zero n0)),
-            empty_is_prop)
-          n)
-      (λ m0 : τ Nat_grpd,
-        λ ih : τ (@Pi_grpd Nat_grpd
-          (λ n : τ Nat_grpd,
-            IsPropGrpd (@= Nat_grpd m0 n))),
-        λ n : τ Nat_grpd,
-          @nat_elim
-            (λ n : τ Nat_grpd,
-              IsPropGrpd (@= Nat_grpd (succ m0) n))
-            empty_is_prop
-            (λ n0 : τ Nat_grpd,
-              λ _ : τ (IsPropGrpd
-                (@= Nat_grpd (succ m0) n0)),
-              ih n0)
-            n)
-      m;
+require open emdash.emdash3_2_nat_arithmetic;
 
 // Native free-arrow syntax, intentionally distinct from Nat.
 inductive walking_word : TYPE ≔
@@ -267,19 +160,6 @@ symbol walking_end_rec_beta_loop
     (@Const_catd WalkingEnd_cat C)
     x f;
 
-// Point beta remains judgmental; loop beta is an inhabitable equality.
-assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x))
-  ⊢ @fapp0 WalkingEnd_cat C (@walking_end_rec_func C x f) walking_base ≡ x;
-
-assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x))
-  ⊢ @walking_end_rec_beta_loop C x f
-    : τ (@=
-        (Hom C x x)
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base walking_loop)
-        f);
-
 /*
   The former runtime critical pair is now a derived equality.  The final
   reflexivity witness uses only the global Kosta-Došen strict cut:
@@ -379,19 +259,6 @@ symbol walking_end_rec_loop_square
             WalkingEnd_cat
             walking_base walking_base walking_base
             walking_loop walking_loop))));
-
-assert [C : Cat] (x : τ (Obj C)) (f : τ (Hom C x x))
-  ⊢ @walking_end_rec_loop_square C x f
-    : τ (@=
-        (Hom C x x)
-        (@comp_fapp0 C x x x f f)
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base
-          (@comp_fapp0
-            WalkingEnd_cat
-            walking_base walking_base walking_base
-            walking_loop walking_loop)));
 
 // Separate one-object Nat monoid model.
 injective symbol BNat_cat : Cat;
@@ -934,42 +801,3 @@ symbol walking_hom_nat_omega_equiv_EQ1
     (Hom WalkingEnd_cat walking_base walking_base)
     Nat_grpd
     walking_hom_nat_type_equiv;
-
-assert (w : τ WalkingWord_grpd)
-  ⊢ @walking_encode_agreement w
-    : τ (@= Nat_grpd (@walking_encode_action w) (@walking_word_to_nat w));
-
-assert (w : τ WalkingWord_grpd)
-  ⊢ @nat_word_roundtrip w
-    : τ (@= WalkingWord_grpd
-        (@nat_to_walking_word (@walking_word_to_nat w))
-        w);
-
-assert (n : τ Nat_grpd)
-  ⊢ @word_nat_roundtrip n
-    : τ (@= Nat_grpd
-        (@walking_word_to_nat (@nat_to_walking_word n))
-        n);
-
-assert (n : τ Nat_grpd)
-  ⊢ @walking_decode_agreement n
-    : τ (@= WalkingWord_grpd
-        (@walking_decode_action n)
-        (@nat_to_walking_word n));
-
-assert
-  ⊢ sigma_Fst walking_hom_nat_type_equiv ≡ walking_word_to_nat;
-
-assert
-  ⊢ @omega_equiv_to_EQ1
-      Grpd_cat
-      (Hom WalkingEnd_cat walking_base walking_base)
-      Nat_grpd
-      walking_hom_nat_omega_equiv_EQ1
-    ≡ walking_word_to_nat;
-
-assertnot (w : τ WalkingWord_grpd)
-  ⊢ @nat_to_walking_word (@walking_word_to_nat w) ≡ w;
-
-assertnot (n : τ Nat_grpd)
-  ⊢ @walking_word_to_nat (@nat_to_walking_word n) ≡ n;

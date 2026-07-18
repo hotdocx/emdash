@@ -1,16 +1,18 @@
 # EMDASH Reports Index
 
-Date: 2026-07-17
+Date: 2026-07-18
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
 derived native-EQ1 hom-action/groupoidality extension, and
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
 evidence-property and finite-`NCat` object-truncation extension.
+`emdash3_2_nat_arithmetic.lp` owns reusable Nat addition, associativity, and
+sethood independently of the walking construction.
 `emdash3_2_sum_observational_action.lp` retains the former-specific Sum action
 as a library module rather than kernel infrastructure.
-`emdash3_2_walking_end_hit.lp` owns the selected concrete
-walking-endomorphism directed-HIT/`BNat` MVP, including its structured
+`emdash3_2_walking_end_hit.lp` imports that Nat module and owns the selected
+concrete walking-endomorphism directed-HIT/`BNat` MVP, including its structured
 eliminator, theorem-first generator beta, encode/decode comparison, Hom-to-Nat
 equivalence, and OneCat/noninvertibility consumers. Reports explain current
 status, mathematics, notation, implementation plans, and historical
@@ -28,133 +30,6 @@ decisions.
 
 ## Current Plans
 
-- `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
-  adopted bounded `EVOGJ-H2-READINESS` sub-plan for a genuine walking-
-  endomorphism directed HIT. It separates the constructor/eliminator
-  presentation from a transparent one-object Nat model, requires a structured
-  `Catd` dependent eliminator with judgmental point and propositional loop
-  computation, and makes derived
-  encode/decode round trips and native hom equivalence the acceptance gate.
-  A reusable `Path_cat` map functor is an explicit comparison-phase
-  architecture fork rather than an assumed wrapper around one-level
-  `ObsAction`; loop nonidentity, noninvertibility, nongroupoidality, and
-  OneCat evidence are auxiliary consumers. The selected MVP is implemented:
-  explicit non-Nat `WalkingWord` induction supplies directed freeness,
-  generator beta is equality evidence, generic strict functoriality solely
-  owns composite runtime action, and both categories use constructor-directed
-  composition. The recursor-derived encoder, structured decoder, both
-  transparent round trips, native EQ1/`TypeEquiv` Hom comparison, and directed
-  negative results are active. The earlier raw-loop-beta/direct-open-addition
-  blocker is retained as rejected probe evidence, not current architecture.
-- `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
-  independently reviewed and preliminary-probe-refined **completed selected-
-  MVP overlay** for the equality, omega-equivalence, direct univalence,
-  internal groupoidality, and structured-`PathOut`/`J` tracks of the July 13
-  living master plan. It selects a decoded equality-valued fixed-arrow record,
-  a stable primitive first-class facade with a transparent Sigma comparison,
-  direct proof-time equality/equivalence with shaped `Path_cat` computation,
-  a completed `Grpd_cat` function-path boundary and derived `TypeEquiv`
-  bridges, `IsGroupoidalCat` through core inclusion, structured motives as the
-  MVP transport boundary, and staged decoder retirement. It was explicitly
-  adopted on 2026-07-17 at implementation baseline `4315137...`. Phase 1
-  `EVOGJ-ALONG-EQ-LAWS` is promoted with a native equality-law record; Phase 2
-  adds the stable facade/eliminator, transparent Sigma comparison, and derived
-  general object-path package without promoting the generic classifier
-  unifier. Their 37 permanent diagnostics and reviewer example pass with no
-  warning/audit delta. Phase 3 adds the narrow `Path_cat` classifier join,
-  explicit computational path packages, and canonical internal groupoidality;
-  raw-path projection remains measured-rejected. Phase 4 now promotes the
-  `Grpd_cat` function-path hom boundary, stable pointwise identity/composition
-  comparisons, and both explicit `TypeEquiv <-> OmegaEquiv_EQ1(Grpd_cat)`
-  adapters without a new decoder capability; the formerly bodyless
-  `is_equiv_map_by_inverse` contraction theorem is now transparently proved
-  from left-oriented J and generic half-adjoint coherence. Phase 5 now
-  promotes explicit D0/EQ1 bridges: old recursive
-  cells decode to equality laws, while new laws reify recursive compatibility
-  cells through `object_path_equiv_EQ1` without the legacy encoder. D0 lacks
-  evidence eta/extensionality, so both evidence round trips remain explicit
-  negatives. Phase 6 is now promoted at the selected boundary: generic
-  proof-time comparison works at the abstract owner, rigid Cat/Grpd equality
-  has finite direct EQ1 runtime normal forms, Product equality retains a stable
-  `ProductPathView` with decoded Sigma carrier, and the Phase-6
-  opposite-specific staged cast established the viable intermediary pattern.
-  The unrestricted `lambda p,p` alias and direct reduced-opposite unifier
-  remain measured-rejected. The resulting 1,848-check/45-file Phase-6 snapshot retains `971/157`
-  warnings and zero/45/27 audit results, with CI passing in 227.500s. Phase 7
-  decoder migration is complete at the selected foundational boundary: its
-  first inventory slice removes the
-  unused standalone `cat_univalence` inhabitant and routes its two diagnostics
-  through `cat_univalence_from_decoder`, while retaining computational
-  encoder/decoder operations and the sole specified-inverse capability until
-  their actual consumers migrate. A transparent `object_path_equiv_D0`
-  adapter now also replaces four legacy-encoder occurrences across the two
-  ordinary-iso recursive cells and the D1 next-hom selected-functor/evidence
-  consumer; that selected functor computes to `path_to_hom`. Phase 7 also
-  promotes the uniform carrier-decoded `ObjectPathCastView_EQ1` and two
-  transparent typed-let casts, which pass abstract/Product/opposite/nested/
-  Path/Functor/Cat/Grpd specialization and supersede the opposite-only view.
-  This adds trusted view-level rewrite/unification infrastructure but no
-  opaque encoder, decoder, or cast term. The pre-uniform Phase-7 checkpoint
-  had 1,853 checks across 66 areas, 45 checked files, unchanged `971/157`
-  warnings and zero/45/27 audit results, with CI passing in 222.477s. The
-  promoted uniform-cast checkpoint has 1,857 checks (1,630 positive and 227
-  negative), a 21,115-line kernel with 871 symbols, 597 rewrite rules, and 65
-  unification rules, the same warning/audit inventory, and 45-file CI passing
-  in 269.410s. Phase 9 is promoted at its selected forward MVP boundary.
-  The one-way `emdash3_2_eq1_hom_action.lp` extension transparently proves
-  native EQ1 preservation by every category hom action, using protected proof
-  helpers and one ordinary public hom-action owner; package projections compute and
-  reflexive input normalizes to `id_func`. General
-  `IsGroupoidalCat_EQ1` consumers and displayed transport were relocated to
-  that extension and migrated off the former D0b route without public-name
-  changes. They expose a selected arrow-to-path inverse, propositional
-  re-inclusion, explicit evidence for every arrow, the pointwise
-  `AllArrowsEquiv_EQ1` view, and equivalence-valued fibre transport. Existing
-  `path_ind_sec` remains the structured-action owner; at a literal
-  `Path_cat(A)` its application and displayed action are propositionally equal
-  to primitive `ind_eqr`, whose reflexive beta remains the runtime owner. No
-  rule, unifier, decoder, encoder, eliminator, opaque theorem, or transport
-  axiom was added. The converse from arbitrary pointwise evidence to coherent
-  core groupoidality remains a structured omega-functor assembly/extensionality
-  extension gate. The
-  pre-comparison checkpoint had
-  1,867 checks across 67 areas (1,639 positive and 228 negative), a
-  21,249-line kernel with 878 symbols and unchanged 597/65 rule counts,
-  unchanged `971/157` warnings and zero/45/27 audit results, and 46 passing
-  health/example files; synchronized 46-file CI passed in 217.327s. The
-  next synchronized Phase-9 checkpoint has 1,889 checks across 68 areas
-  (1,657 positive and 232 negative), a 22,242-line kernel with 902 symbols and
-  unchanged 597/67 rule counts, unchanged warning/audit inventories, 46
-  passing health/example files, and CI passing in 339.780s. This checkpoint
-  transparently derives generic half-adjointification from the existing
-  equality/J algebra; its arbitrary formation and reflexive counit/triangle
-  computations pass permanent diagnostics without adding a rule, unifier,
-  primitive, or opaque theorem. The complete D0b-free next-hom EQ1 package is
-  now the active derived-module owner, and its former D0b-backed groupoidality
-  consumer has been migrated. Phase 8 is now complete in the downstream
-  transparent `emdash3_2_eq1_evidence_property.lp` module: composition-map
-  equivalences prove unrestricted native fixed-arrow evidence property,
-  arbitrary-level retraction closure is transparent, and native `CatDim`
-  recursion proves unconditional finite-`NCat` object truncation with base and
-  successor computation. The old D0 global capability and conditional theorem
-  remain compatibility-only. The preceding synchronized snapshot had 1,896 checks across 69
-  areas (1,664 positive and 232 negative), a 21,986-line/892-symbol kernel, a
-  2,791-line/69-symbol derived extension, unchanged kernel rule/unifier and
-  warning/audit inventories, 48 passing health/example files, and synchronized
-  CI passing in 172.350s of measured checking time. Phase 11 subsequently
-  extracts the Sum-specific action and its four proof-time bases to
-  `emdash3_2_sum_observational_action.lp`; generic `ObsAction` retains real
-  Nat/PathRecord raw-function consumers and remains distinct from structured
-  groupoidal J. The final selected-MVP snapshot has 1,917 checks across 70
-  areas (1,684 positive and 233 negative), zero unclassified, a
-  21,762-line/887-symbol/596-rule/63-unifier kernel, 51 passing measured files,
-  unchanged 971/157 warnings and zero/45/27 audit results, and synchronized CI
-  passing in 100.845s. Native extensions and their public examples have no
-  Cat/Grpd decoder or D0 dependency; retained decoder APIs are compatibility.
-  Consumer-free core-universe inclusion, raw-path observer computation,
-  reverse coherent-core assembly, HITs, and metatheory are explicit later
-  tracks. The July 13 plan remains the retained promoted-work ledger and
-  active plan for unaffected tracks.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
@@ -463,6 +338,26 @@ decisions.
 These reports remain active references for exact decisions and probe evidence,
 but their promoted phases are not open implementation plans.
 
+- `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
+  completed selected-MVP overlay for native equality-valued fixed-arrow
+  evidence, the stable first-class facade and explicit path adapters, direct
+  Cat/Grpd univalence boundaries, native next-hom action, internal
+  groupoidality, structured `PathOut`/`J`, unrestricted evidence uniqueness,
+  unconditional finite-`NCat` object truncation, and Sum-action demotion.
+  Native theorem modules are decoder/D0-free; raw unreified-path observers,
+  reverse coherent-core assembly, consumer-led core-universe functors, full
+  compatibility retirement, and metatheory remain separate bounded work.
+- `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
+  completed theorem-first `EVOGJ-H2-READINESS` child plan. Native
+  `WalkingWord` syntax, a structured dependent eliminator with judgmental
+  point/propositional generator beta, a separate constructor-directed
+  `BNat_cat`, recursor-derived encode, structured decode, transparent round
+  trips, native EQ1/`TypeEquiv` Hom comparison, OneCat evidence, and directed
+  negative results are active. Post-completion consolidation separates its
+  reusable Nat arithmetic/sethood dependency and closes with 1,978 catalogued
+  checks across 72 areas and 55 passing targets. Generic HIT abstraction,
+  full initiality, reusable `PathMap`, Join elimination, `BInt`/Circle
+  completion, and reflectors remain future objectives.
 - `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`:
   promoted historical implementation ledger for the first groupoid,
   type-equivalence, computational-univalence, omega-equivalence, and generic

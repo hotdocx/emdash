@@ -1,7 +1,7 @@
 # EMDASH v3.2 Equality-Valued Omega-Equivalence And Groupoidal-J Re-Redesign Proposal
 
 Date: 2026-07-17
-Last reviewed: 2026-07-17
+Last reviewed: 2026-07-18
 Plan-ID: EMDASH-V3-2-EQUALITY-VALUED-OMEGA-EQUIVALENCE-REREDESIGN-2026-07-17
 Depends-On: REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_sum_observational_action.lp; emdash3_2_checks.lp
 Supersedes: the equality, omega-equivalence, direct-univalence, internal-groupoidality, and structured-PathOut/J tracks of REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; no unaffected H0, truncation, dimension, directed, or former-action work
@@ -520,7 +520,7 @@ the then-current owner before promotion.
 | Computational feasibility | high for construction, projection, reflexivity packages, the object-path adapter, explicit transparent casts, literal-path witnesses, direct Cat/Grpd identity, Product paths, both groupoid-equivalence bridges, native next-hom action, literal structured action/J, unrestricted native evidence property, and finite-`NCat` truncation; medium-low only for observers on unreified cast terms and reverse pointwise-to-coherent-functor assembly |
 | Completeness for a minimal MVP | the equality/univalence/groupoidality/structured-J/evidence-property/finite-truncation forward boundary is executable; the native foundation no longer depends on a legacy decoder, while full compatibility retirement, reverse pointwise/core assembly, and core-universe functors without a consumer are explicitly later work |
 | Reusability | demonstrated by active reviewer examples and the one-way extensions: native fixed-arrow/first-class elimination, Sigma comparison, literal paths, explicit `TypeEquiv` bridges, direct univalence, native homwise preservation, pointwise groupoidality, displayed transport, evidence uniqueness, and finite object truncation support library construction; broader standard-library consumers remain later work |
-| Expressiveness versus ordinary HoTT | intended to cover equality, equivalence, univalence, and structured transport with stronger directed/omega-categorical primitives; still lacks ordinary broad HIT/reflector coverage and does not automatically structure arbitrary raw motives |
+| Expressiveness versus ordinary HoTT | covers the selected equality, equivalence, univalence, and structured-transport boundary with stronger directed/omega-categorical primitives; the completed child plan adds one concrete walking-endomorphism directed HIT, while broad HIT/reflector coverage and automatic structuring of arbitrary raw motives remain absent |
 | Foundational assurance | operational evidence only; the generic unification equation remains trusted logical authority and requires finite/stratified semantic sanity evidence |
 
 ### Status of the active implementation against this proposal
@@ -538,7 +538,7 @@ the then-current owner before promotion.
 | native EQ1 next-hom/groupoidality extension | transparent one-way derived module with one ordinary public hom-action owner, protected computational proof helpers, native core-inclusion groupoidality consumers, pointwise all-arrows evidence, and equivalence-valued displayed transport; no D0b route remains in this chain |
 | current Sum action example | mathematically meaningful for disjoint sums and computational on registered bases; now isolated in a downstream library module and no longer a foundational univalence prerequisite |
 | truncation/`NCat` spine | semantically meaningful retained work plus a transparent downstream native-EQ1 theorem `ncat_obj_trunc_EQ1`; the old D0 conditional capability remains compatibility-only |
-| HIT/reflector scope | deferred; this redesign improves the equality/transport substrate but does not by itself provide a truncation reflector, Circle, general restricted HIT eliminator, or raw-family fibrancy |
+| HIT/reflector scope | the completed bounded child now provides a theorem-first walking-endomorphism directed HIT with a structured dependent eliminator; truncation reflectors, Circle/groupoid completion, generic HIT abstraction, dependent Join elimination, and raw-family fibrancy remain deferred |
 
 Thus the selected operational MVP is now a genuine native extension of the
 existing categorical kernel rather than a facade over the old decoder tower.
@@ -558,7 +558,7 @@ metatheory, not missing operational constructors or proofs.
 | Function/Sigma/record paths | already has meaningful observational interfaces and selected computation; coverage is uneven and not a general normalization/canonicity theorem |
 | Directed higher structure | substantially more expressive natively: categories, omega-homs, functors, transfors, and directed families are kernel-level concepts rather than encodings in undirected types |
 | Motives/transport | arbitrary `Grpd` families retain primitive J; richer Cat-valued transport computes when the motive is supplied as a functor/directed family, so raw higher-family structuring is less automatic than in mature type theories |
-| HITs and reflectors | materially behind mature HoTT/cubical libraries: no truncation reflector, Circle, representative HIT, or general HIT eliminator is currently active |
+| HITs and reflectors | still materially behind mature HoTT/cubical libraries: one representative walking-endomorphism directed HIT is active, but there is no truncation reflector, Circle/groupoid completion, or general HIT schema |
 | Metatheory and libraries | far less mature: there is no comparable normalization/model result or broad standard library yet; the redesign is an MVP foundation plan, not feature parity |
 
 The target is therefore not simply weaker or stronger than HoTT. It is
@@ -2884,7 +2884,8 @@ additional set-object specialization; add non-discrete groupoidal examples.
 ### Risk 7: structured motives are claimed to solve arbitrary fibrancy
 
 Mitigation: state the restriction explicitly. `Catd` solves transport and
-coherence only for motives supplied as functors. Raw families and HITs remain
+coherence only for motives supplied as functors. The walking child consumes
+that structured interface, but raw families and generic HIT formation remain
 separate.
 
 ### Risk 8: decoder retirement breaks useful theorem-level APIs
@@ -2983,6 +2984,7 @@ recorded in the July 13 ledger and should not be duplicated here.
 | `EVOGJ-OBSACTION-SCOPE` | **completed at selected MVP boundary; later functor-view refactor open** | decide remaining role of action registry | groupoidal J and former consumers | generic `ObsAction`/`ObsDAction` retain real Nat/PathRecord raw-function consumers; structured Cat-valued transport uses native functor action and does not manufacture that structure. Sum is downstream. A future constructor `Path_cat(A) -> Path_cat(B)` may make the registry a first-hom-action view, but is not an MVP prerequisite |
 | `EVOGJ-CONSOLIDATE` | **completed 2026-07-17** | synchronize the selected MVP and close the living overlay | all selected phases | integrated public example and all 51 measured files pass; catalog is 1,917/70 with zero unclassified, warnings 971/157, audit zero/45/27, generated health current, and synchronized CI passes in 100.845s |
 | `EVOGJ-H2-READINESS` | **representative walking-endomorphism directed-HIT selected MVP implemented 2026-07-18** | reassess representative HIT/truncation reflector | consolidated MVP | the bounded child plan now promotes explicit non-Nat free-arrow syntax, a structured dependent eliminator with judgmental point/propositional generator beta, a separate constructor-directed `BNat_cat`, recursor-derived encode, structured decode, transparent inverse proofs, native EQ1/`TypeEquiv` Hom comparison, OneCat evidence, and loop noninvertibility/nongroupoidality diagnostics. The former raw-loop-beta/direct-open-addition blocker was resolved by preserving generic strict functoriality as the sole composite runtime owner. Generic directed-HIT abstraction, full initiality, Circle/groupoid completion, and truncation reflectors remain deferred |
+| `EVOGJ-POST-CONSOLIDATE` | **completed 2026-07-18** | reconcile the completed overlay and child-plan authority/dependency boundaries | completed overlay and walking MVP | reusable Nat prerequisites extracted; permanent diagnostics centralized; parent/predecessor/index authority and active/deferred claims reconciled; 1,978 checks/72 areas, 55 targets, unchanged warning/audit inventories, refreshed health, all examples, and 128.448s CI pass without a semantic normal-form migration |
 | `EVOGJ-METATHEORY` | deferred research | consistency, normalization, stratification, semantic model | mature architecture | separate research evidence |
 
 ## Validation And Synchronization Protocol
@@ -3042,7 +3044,9 @@ required by the selected MVP. A later handoff should name a new bounded objectiv
 than instruct an agent to continue this plan indiscriminately. Candidate
 objectives are a public standard-library consumer, a consumer-led
 core-universe inclusion, legacy compatibility retirement, reverse coherent-
-core assembly, or a separately reviewed representative HIT.
+core assembly, or one explicit walking-HIT strengthening such as generic
+abstraction, full initiality, dependent Join elimination, reusable `PathMap`,
+or groupoid completion toward `BInt`/Circle.
 
 Any such handoff must still read this report with the July 13 retained-work
 ledger and active authorities, preserve current worktree state, reproduce
