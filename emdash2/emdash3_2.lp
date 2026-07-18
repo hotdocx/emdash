@@ -9387,6 +9387,91 @@ unif_rule @hom_precomp_along_fapp0 $A $A (@id Cat_cat $A) $Z $W $X $h $g
       $h
   ↪ [ tt ≡ tt ];
 
+/*
+  Propositional join for postcomposition outside stable precomposition:
+
+    k o (g o F[h]) = (k o g) o F[h].
+
+  Runtime keeps the stable precomposition and raw-composition owners distinct.
+  This theorem stages their proof-time comparison explicitly around the
+  ordinary associator instead of relying on transitivity of `unif_rule`.
+*/
+symbol hom_precomp_along_postcomp_assoc
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [W X : τ (Obj A)]
+  (h : τ (Hom A W X))
+  [Z U : τ (Obj B)]
+  (k : τ (Hom B Z U))
+  (g : τ (Hom B (@fapp0 A B F X) Z))
+  : τ (@=
+      (Hom B (@fapp0 A B F W) U)
+      (@comp_fapp0
+        B (@fapp0 A B F W) Z U
+        k
+        (@hom_precomp_along_fapp0 A B F Z W X h g))
+      (@hom_precomp_along_fapp0
+        A B F U W X h
+        (@comp_fapp0 B (@fapp0 A B F X) Z U k g)))
+≔ @eq_trans
+    (Hom B (@fapp0 A B F W) U)
+    (@comp_fapp0
+      B (@fapp0 A B F W) Z U
+      k
+      (@hom_precomp_along_fapp0 A B F Z W X h g))
+    (@comp_fapp0
+      B (@fapp0 A B F W) Z U
+      k
+      (@comp_fapp0
+        B (@fapp0 A B F W) (@fapp0 A B F X) Z
+        g
+        (@fapp1_fapp0 A B F W X h)))
+    (@hom_precomp_along_fapp0
+      A B F U W X h
+      (@comp_fapp0 B (@fapp0 A B F X) Z U k g))
+    (@eq_ap
+      (Hom B (@fapp0 A B F W) Z)
+      (Hom B (@fapp0 A B F W) U)
+      (λ q : τ (Hom B (@fapp0 A B F W) Z),
+        @comp_fapp0 B (@fapp0 A B F W) Z U k q)
+      (@hom_precomp_along_fapp0 A B F Z W X h g)
+      (@comp_fapp0
+        B (@fapp0 A B F W) (@fapp0 A B F X) Z
+        g
+        (@fapp1_fapp0 A B F W X h))
+      (@eq_refl
+        (Hom B (@fapp0 A B F W) Z)
+        (@hom_precomp_along_fapp0 A B F Z W X h g)))
+    (@eq_trans
+      (Hom B (@fapp0 A B F W) U)
+      (@comp_fapp0
+        B (@fapp0 A B F W) Z U
+        k
+        (@comp_fapp0
+          B (@fapp0 A B F W) (@fapp0 A B F X) Z
+          g
+          (@fapp1_fapp0 A B F W X h)))
+      (@comp_fapp0
+        B (@fapp0 A B F W) (@fapp0 A B F X) U
+        (@comp_fapp0 B (@fapp0 A B F X) Z U k g)
+        (@fapp1_fapp0 A B F W X h))
+      (@hom_precomp_along_fapp0
+        A B F U W X h
+        (@comp_fapp0 B (@fapp0 A B F X) Z U k g))
+      (@comp_assoc
+        B
+        (@fapp0 A B F W)
+        (@fapp0 A B F X)
+        Z U
+        k g
+        (@fapp1_fapp0 A B F W X h))
+      (@eq_refl
+        (Hom B (@fapp0 A B F W) U)
+        (@comp_fapp0
+          B (@fapp0 A B F W) (@fapp0 A B F X) U
+          (@comp_fapp0 B (@fapp0 A B F X) Z U k g)
+          (@fapp1_fapp0 A B F W X h))));
+
 // Proof-time endpoint bridge for the component of a general postcomposition
 // action. Runtime keeps the precomposition and postcomposition owners
 // distinct; this direct comparison avoids relying on transitive unification

@@ -19253,6 +19253,34 @@ assert (g f : τ WalkingWord_grpd) ⊢
   ≡ walking_word_succ
       (@comp_fapp0 WalkingEnd_cat tt tt tt g f);
 
+// The constructor/precomposition warning diamond is ordinary associativity.
+// Its reusable propositional join does not add a runtime bridge.
+assert (k p g : τ WalkingWord_grpd) ⊢
+  @hom_precomp_along_postcomp_assoc
+    WalkingEnd_cat WalkingEnd_cat
+    (@id Cat_cat WalkingEnd_cat)
+    walking_base walking_base p
+    walking_base walking_base
+    (walking_word_succ k) g
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        (walking_word_succ k)
+        (@hom_precomp_along_fapp0
+          WalkingEnd_cat WalkingEnd_cat
+          (@id Cat_cat WalkingEnd_cat)
+          walking_base walking_base walking_base
+          p g))
+      (@hom_precomp_along_fapp0
+        WalkingEnd_cat WalkingEnd_cat
+        (@id Cat_cat WalkingEnd_cat)
+        walking_base walking_base walking_base
+        p
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          (walking_word_succ k) g)));
+
 // Generic functor-on-identity remains runtime-owned by the generic calculus;
 // the normalized WalkingWord identity is recovered by a typed proof-time view.
 assert [C : Cat]
@@ -19319,9 +19347,55 @@ assert ⊢ @id BNat_cat bnat_obj ≡ zero;
 
 assert ⊢ bnat_generator ≡ succ zero;
 
+assert [C : Cat]
+  (F : τ (Functor BNat_cat C)) ⊢
+  @bnat_functor_zero_view C F
+  : τ (@=
+      (Hom C
+        (@fapp0 BNat_cat C F tt)
+        (@fapp0 BNat_cat C F tt))
+      (@fapp1_fapp0 BNat_cat C F tt tt zero)
+      (@id C (@fapp0 BNat_cat C F tt)));
+
 assert (g f : τ Nat_grpd) ⊢
   @comp_fapp0 BNat_cat tt tt tt (succ g) f
   ≡ succ (@comp_fapp0 BNat_cat tt tt tt g f);
+
+assert (g f : τ Nat_grpd) ⊢
+  @bnat_comp_nat_add g f
+  : τ (@= Nat_grpd
+      (@comp_fapp0 BNat_cat tt tt tt g f)
+      (@nat_add g f));
+
+assertnot (g f : τ Nat_grpd) ⊢
+  @comp_fapp0 BNat_cat tt tt tt g f
+  ≡ @nat_add g f;
+
+assert (k p g : τ Nat_grpd) ⊢
+  @hom_precomp_along_postcomp_assoc
+    BNat_cat BNat_cat
+    (@id Cat_cat BNat_cat)
+    bnat_obj bnat_obj p
+    bnat_obj bnat_obj
+    (succ k) g
+  : τ (@=
+      (Hom BNat_cat bnat_obj bnat_obj)
+      (@comp_fapp0
+        BNat_cat bnat_obj bnat_obj bnat_obj
+        (succ k)
+        (@hom_precomp_along_fapp0
+          BNat_cat BNat_cat
+          (@id Cat_cat BNat_cat)
+          bnat_obj bnat_obj bnat_obj
+          p g))
+      (@hom_precomp_along_fapp0
+        BNat_cat BNat_cat
+        (@id Cat_cat BNat_cat)
+        bnat_obj bnat_obj bnat_obj
+        p
+        (@comp_fapp0
+          BNat_cat bnat_obj bnat_obj bnat_obj
+          (succ k) g)));
 
 // Encoding is genuinely recursor-derived; generator action is related by beta
 // evidence and arbitrary action is identified by free-arrow induction.
@@ -19350,6 +19424,15 @@ assert (w : τ WalkingWord_grpd) ⊢
       (@walking_word_to_nat w));
 
 assert (g f : τ WalkingWord_grpd) ⊢
+  @walking_encode_comp_view g f
+  : τ (@= Nat_grpd
+      (@walking_encode_action
+        (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
+      (@nat_add
+        (@walking_encode_action g)
+        (@walking_encode_action f)));
+
+assert (g f : τ WalkingWord_grpd) ⊢
   @walking_word_to_nat_comp g f
   : τ (@= Nat_grpd
       (@walking_word_to_nat
@@ -19368,6 +19451,14 @@ assert (n : τ Nat_grpd) ⊢
   : τ (@= WalkingWord_grpd
       (@walking_decode_action n)
       (@nat_to_walking_word n));
+
+assert (g f : τ Nat_grpd) ⊢
+  @walking_decode_comp_view g f
+  : τ (@= WalkingWord_grpd
+      (@walking_decode_action (@nat_add g f))
+      (@comp_fapp0 WalkingEnd_cat tt tt tt
+        (@walking_decode_action g)
+        (@walking_decode_action f)));
 
 // Both arbitrary round trips have transparent induction bodies.
 assert (w : τ WalkingWord_grpd) ⊢

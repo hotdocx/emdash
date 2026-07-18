@@ -4,8 +4,9 @@
 
   Addition computes in the selected categorical order, its associativity is
   proved by Nat induction, and Nat carries an internal sethood witness.  The
-  WalkingEnd eliminator and BNat category are intentionally absent here: the
-  living plan records their measured composition-owner blockers.
+  This file intentionally isolates the reusable arithmetic slice. The full
+  directed-HIT/BNat milestone is exercised in
+  examples/walking_endomorphism_hit.lp.
 */
 
 require open emdash.emdash3_2_walking_end_hit;

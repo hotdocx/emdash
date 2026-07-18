@@ -24,6 +24,18 @@ assertnot ⊢
 
 assert ⊢ walking_loop ≡ walking_word_succ walking_word_zero;
 
+// The separate model relates open semantic composition to addition by proof,
+// while retaining the composition head as its runtime normal form.
+assert (g f : τ Nat_grpd) ⊢
+  @bnat_comp_nat_add g f
+  : τ (@= Nat_grpd
+      (@comp_fapp0 BNat_cat tt tt tt g f)
+      (@nat_add g f));
+
+assertnot (g f : τ Nat_grpd) ⊢
+  @comp_fapp0 BNat_cat tt tt tt g f
+  ≡ @nat_add g f;
+
 // The primitive dependent eliminator has the expected structured interface.
 assert
   (D : τ (Catd WalkingEnd_cat))
@@ -94,12 +106,27 @@ assert (w : τ WalkingWord_grpd) ⊢
       (@walking_encode_action w)
       (@walking_word_to_nat w));
 
+assert (g f : τ WalkingWord_grpd) ⊢
+  @walking_encode_comp_view g f
+  : τ (@= Nat_grpd
+      (@walking_encode_action
+        (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
+      (@nat_add (@walking_encode_action g) (@walking_encode_action f)));
+
 // The reverse structured functor agrees with transparent Nat recursion.
 assert (n : τ Nat_grpd) ⊢
   @walking_decode_agreement n
   : τ (@= WalkingWord_grpd
       (@walking_decode_action n)
       (@nat_to_walking_word n));
+
+assert (g f : τ Nat_grpd) ⊢
+  @walking_decode_comp_view g f
+  : τ (@= WalkingWord_grpd
+      (@walking_decode_action (@nat_add g f))
+      (@comp_fapp0 WalkingEnd_cat tt tt tt
+        (@walking_decode_action g)
+        (@walking_decode_action f)));
 
 // Both arbitrary inverse laws have transparent induction proofs.
 assert (w : τ WalkingWord_grpd) ⊢

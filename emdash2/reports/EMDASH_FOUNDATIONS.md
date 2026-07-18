@@ -178,15 +178,50 @@ terms. This is genuine truncation evidence, not a conclusion inferred only
 from the no-confusion rewrite table. Open addition is not normalized by
 commutativity.
 
-The intended walking-endomorphism HIT and its separate one-object Nat category
-are not active. Individual base/loop eliminator betas typecheck in probes, but
-generator beta does not join with generic strict functoriality on the square
-of the loop. Independently, reducing a new category's general composition to
-`nat_add` erases existing functor/transfor/hom-action composition owners and
-creates 18 new unjoinable critical pairs. The active extension therefore
-retains only the arithmetic/sethood slice while the living plan requires a
-reusable free-arrow or category-specific composition-registration interface.
-No Hom-to-Nat rule or round-trip capability has been added.
+The same extension now presents the walking endomorphism as a concrete
+directed HIT. `WalkingWord_grpd` is native free-arrow syntax, deliberately
+distinct from Nat, and
+
+```text
+Obj(WalkingEnd_cat)        = Unit_grpd
+Hom(WalkingEnd_cat,*,*)    = Path_cat(WalkingWord_grpd)
+id                        = empty word
+loop                      = one-letter word.
+```
+
+Composition recurses on the visible outer word. The primitive dependent
+eliminator accepts a structured `D : Catd(WalkingEnd_cat)`, a base-fibre
+object, and a displayed lift of the generating loop, and returns a section of
+`Pi_cat(D)`. Point beta is judgmental. Generator beta is an inhabitant of the
+exact displayed equality classifier, not a raw action rewrite. Consequently
+the global strict functor rule remains the sole runtime composite-action
+owner; the loop-square action law is derived by equality composition rather
+than installed as another rewrite family.
+
+Constructor composition still meets the kernel's stable pre/postcomposition
+heads in warning diamonds. Unit cases have direct typed joins. The nontrivial
+successor/precomposition diamond is precisely categorical associativity; the
+general theorem `hom_precomp_along_postcomp_assoc` supplies its propositional
+join by exposing the stable raw-composition view, applying `comp_assoc`, and
+returning to the stable head. This is proof structure, not a category-specific
+runtime bridge.
+
+`BNat_cat` is a separate one-object model with Nat-valued hom and
+constructor-directed composition. The open comparison between composition
+and `nat_add` is the transparent theorem `bnat_comp_nat_add`, not a runtime
+collapse of the semantic composition head. The encoder is derived from the
+HIT recursor. The reverse comparison is an ordinary semantic functor with
+explicit generator beta, and Nat induction proves its arbitrary action agrees
+with transparent word construction. Word and Nat induction prove both inverse
+laws before the Hom comparison is packaged as `TypeEquiv` and native EQ1.
+Thus no earlier Hom-to-Nat rewrite or bodyless round-trip capability makes the
+result tautological.
+
+Native sethood proofs make the two hom path categories discrete and both
+one-object categories satisfy the internal OneCat predicate. The generating
+loop is nevertheless nonidentity and has no equality-valued omega-equivalence
+evidence; alleged internal groupoidality therefore yields `Empty_grpd`. This
+is the intended directed/groupoidal separation.
 
 The first named finite dependent record is
 
@@ -2330,9 +2365,10 @@ The current foundations intentionally do not yet include:
   assembly, consumer-led core-universe inclusion functors, and full retirement
   of still-used legacy decoder APIs beyond the selected native coherence API;
 - general higher-inductive pushouts and a generic directed-inductive schema;
-- the walking-endomorphism HIT/`BNat` comparison beyond its promoted Nat
-  prerequisites, pending a composition owner that joins constructor beta with
-  generic functor/transfor/hom action;
+- generic abstraction of the completed walking-endomorphism presentation into
+  a reusable directed-HIT/free-category schema, full functor-category
+  initiality, a raw-function `PathMap` constructor, and groupoid completion
+  toward the invertible Circle/`BInt` comparison;
 - dependent join elimination or a semantic collage construction;
 - a finalized surface syntax for the future proof assistant;
 - full coherence APIs for every Sigma/Pi helper;

@@ -404,9 +404,52 @@ with @comp_fapp0 BNat_cat _ _ _ $g zero ↪ $g
 with @comp_fapp0 BNat_cat _ _ _ (succ $g) $f
   ↪ succ (@comp_fapp0 BNat_cat tt tt tt $g $f);
 
+/*
+  Proof-time recovery of generic functor-on-identity after the BNat identity
+  has normalized to zero. Runtime remains owned by the literal-identity rule.
+*/
+unif_rule
+  @fapp1_fapp0 BNat_cat $C $F tt tt zero
+  ≡ @id $C (@fapp0 BNat_cat $C $F tt)
+  ↪ [ tt ≡ tt ];
+
+symbol bnat_functor_zero_view
+  [C : Cat]
+  (F : τ (Functor BNat_cat C))
+  : τ (@=
+      (Hom C
+        (@fapp0 BNat_cat C F tt)
+        (@fapp0 BNat_cat C F tt))
+      (@fapp1_fapp0 BNat_cat C F tt tt zero)
+      (@id C (@fapp0 BNat_cat C F tt)))
+≔ @eq_refl
+    (Hom C
+      (@fapp0 BNat_cat C F tt)
+      (@fapp0 BNat_cat C F tt))
+    (@id C (@fapp0 BNat_cat C F tt));
+
 symbol bnat_obj : τ (Obj BNat_cat) ≔ tt;
 symbol bnat_generator : τ (Hom BNat_cat bnat_obj bnat_obj)
 ≔ succ zero;
+
+// Open BNat composition agrees propositionally with selected Nat addition.
+symbol bnat_comp_nat_add
+  (g f : τ Nat_grpd)
+  : τ (@= Nat_grpd
+      (@comp_fapp0 BNat_cat tt tt tt g f)
+      (@nat_add g f))
+≔ @nat_elim
+    (λ g : τ Nat_grpd,
+      @= Nat_grpd
+        (@comp_fapp0 BNat_cat tt tt tt g f)
+        (@nat_add g f))
+    (@eq_refl Nat_grpd f)
+    (λ g0 : τ Nat_grpd,
+      λ ih : τ (@= Nat_grpd
+        (@comp_fapp0 BNat_cat tt tt tt g0 f)
+        (@nat_add g0 f)),
+      ih)
+    g;
 
 // The HIT recursor supplies the structured encoding functor.
 symbol walking_encode_func : τ (Functor WalkingEnd_cat BNat_cat)
@@ -420,25 +463,9 @@ symbol walking_encode_action
     WalkingEnd_cat BNat_cat walking_encode_func
     walking_base walking_base w;
 
-/*
-  Direct proof-time identity view for the concrete encoder.  Both category
-  identities have already normalized to native zero constructors, so this
-  rigid endpoint bridge avoids relying on transitive unification through the
-  generic identity presentation above.
-*/
-unif_rule
-  @fapp1_fapp0
-    WalkingEnd_cat BNat_cat
-    (@walking_end_ind_sec
-      (@Const_catd WalkingEnd_cat BNat_cat)
-      tt (succ zero))
-    tt tt walking_word_zero
-  ≡ zero
-  ↪ [ tt ≡ tt ];
-
 symbol walking_encode_zero_view
   : τ (@= Nat_grpd (@walking_encode_action walking_word_zero) zero)
-≔ @eq_refl Nat_grpd zero;
+≔ @walking_functor_zero_view BNat_cat walking_encode_func;
 
 // Transparent free-word length and its inverse word constructor.
 symbol walking_word_to_nat
@@ -515,6 +542,34 @@ symbol walking_encode_succ_view
       bnat_generator
       (@walking_end_rec_beta_loop
         BNat_cat bnat_obj bnat_generator));
+
+// Strict encoding sends word composition to selected Nat addition.
+symbol walking_encode_comp_view
+  (g f : τ WalkingWord_grpd)
+  : τ (@= Nat_grpd
+      (@walking_encode_action
+        (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
+      (@nat_add
+        (@walking_encode_action g)
+        (@walking_encode_action f)))
+≔ @eq_trans
+    Nat_grpd
+    (@walking_encode_action
+      (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
+    (@comp_fapp0
+      BNat_cat tt tt tt
+      (@walking_encode_action g)
+      (@walking_encode_action f))
+    (@nat_add
+      (@walking_encode_action g)
+      (@walking_encode_action f))
+    (@eq_refl
+      Nat_grpd
+      (@walking_encode_action
+        (@comp_fapp0 WalkingEnd_cat tt tt tt g f)))
+    (@bnat_comp_nat_add
+      (@walking_encode_action g)
+      (@walking_encode_action f));
 
 // All recursor actions agree propositionally with transparent word length.
 symbol walking_encode_agreement
@@ -740,17 +795,9 @@ symbol walking_decode_action
     BNat_cat WalkingEnd_cat walking_decode_func
     bnat_obj bnat_obj n;
 
-// Direct normalized-identity view for the concrete decoder.
-unif_rule
-  @fapp1_fapp0
-    BNat_cat WalkingEnd_cat walking_decode_func
-    tt tt zero
-  ≡ walking_word_zero
-  ↪ [ tt ≡ tt ];
-
 symbol walking_decode_zero_view
   : τ (@= WalkingWord_grpd (@walking_decode_action zero) walking_word_zero)
-≔ @eq_refl WalkingWord_grpd walking_word_zero;
+≔ @bnat_functor_zero_view WalkingEnd_cat walking_decode_func;
 
 // Strictness plus the generator beta derives the successor action law.
 symbol walking_decode_succ_view
@@ -806,6 +853,39 @@ symbol walking_decode_agreement
           (@nat_to_walking_word n0)
           ih))
     n;
+
+// Strict decoding sends selected Nat addition to word composition.
+symbol walking_decode_comp_view
+  (g f : τ Nat_grpd)
+  : τ (@= WalkingWord_grpd
+      (@walking_decode_action (@nat_add g f))
+      (@comp_fapp0
+        WalkingEnd_cat tt tt tt
+        (@walking_decode_action g)
+        (@walking_decode_action f)))
+≔ @eq_trans
+    WalkingWord_grpd
+    (@walking_decode_action (@nat_add g f))
+    (@walking_decode_action
+      (@comp_fapp0 BNat_cat tt tt tt g f))
+    (@comp_fapp0
+      WalkingEnd_cat tt tt tt
+      (@walking_decode_action g)
+      (@walking_decode_action f))
+    (@eq_ap
+      Nat_grpd WalkingWord_grpd
+      walking_decode_action
+      (@nat_add g f)
+      (@comp_fapp0 BNat_cat tt tt tt g f)
+      (@eq_sym
+        Nat_grpd
+        (@comp_fapp0 BNat_cat tt tt tt g f)
+        (@nat_add g f)
+        (@bnat_comp_nat_add g f)))
+    (@eq_refl
+      WalkingWord_grpd
+      (@walking_decode_action
+        (@comp_fapp0 BNat_cat tt tt tt g f)));
 
 // Package the transparent hom equivalence through the active interfaces.
 symbol walking_word_nat_by_inverse

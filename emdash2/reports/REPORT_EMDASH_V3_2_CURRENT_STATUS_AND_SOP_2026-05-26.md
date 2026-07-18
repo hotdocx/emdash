@@ -22,11 +22,11 @@ detailed probe evidence.
 - `emdash3_2_sum_observational_action.lp`: one-way library module retaining
   the componentwise Sum `ObsAction`, its equality comparison, and four
   proof-time bases; no kernel or univalence consumer imports it.
-- `emdash3_2_walking_end_hit.lp`: one-way retained prerequisite module for the
-  walking-endomorphism plan. It currently contains warning-neutral Nat
-  addition/associativity and an internal Nat-sethood proof only. The HIT and
-  `BNat_cat` candidates remain unpromoted at the plan's documented
-  composition-owner blocker.
+- `emdash3_2_walking_end_hit.lp`: one-way walking-endomorphism directed-HIT
+  module. It owns native `WalkingWord` free-arrow syntax, `WalkingEnd_cat`,
+  the structured dependent eliminator, the separate `BNat_cat` model,
+  encode/decode and transparent inverse proofs, the Hom-to-Nat equivalence,
+  local discreteness/OneCat evidence, and directed-loop negative results.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -46,14 +46,14 @@ needed.
 
 ## Validated Current Baseline
 
-The 2026-07-17 baseline is:
+The 2026-07-18 baseline is:
 
 ```text
 make check                         pass
 make examples                      pass
 make ci                            pass
-checked files/examples            53
-diagnostic checks                1,931 (1,697 assert + 234 assertnot)
+checked files/examples            54
+diagnostic checks                1,977 (1,739 assert + 238 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -63,17 +63,26 @@ warning inventory                  1,128
 ```
 
 The walking-endomorphism sub-plan was adopted at implementation baseline
-`8fd9bdf...`. Its retained active slice adds `nat_add`, transparent
-associativity, and `nat_is_set : IsSetGrpd Nat_grpd` with no warning or strict-
-LHS-audit delta. The full HIT milestone is blocked earlier than the intended
-Nat round trip: an individual loop beta and generic strict-functor
-composition leave distinct normal forms on the loop square. A direct
-`BNat_cat` composition-to-addition rule independently adds 18 unjoinable
-overlaps with existing generic action owners. The exact probes, rejected
-recursive-action candidate, and free-arrow/composition-registration
-prerequisite are recorded in the July 17 walking-endomorphism living plan. No
-WalkingEnd/BNat semantic rule, Hom-to-Nat classifier, or bodyless round-trip
-theorem is active.
+`8fd9bdf...`. Its selected concrete MVP is now active. The earlier loop-square
+blocker was resolved by adopting the standard intensional-HIT boundary:
+point beta is judgmental, generator beta is equality evidence, and generic
+strict functoriality remains the sole runtime owner of composite action.
+`WalkingWord` supplies induction over arbitrary directed arrows. The separate
+`BNat_cat` uses constructor-directed composition rather than an open collapse
+to addition; `bnat_comp_nat_add` states the open comparison propositionally.
+The recursor-derived encoder and structured decoder have explicit generator
+betas and arbitrary-action agreement proofs, both inverse laws are
+transparent, and the Hom comparison is packaged as both `TypeEquiv` and native
+EQ1. The loop is proved nonidentity/noninvertible and both categories have
+internal OneCat evidence. The owner warning probe records six additional
+constructor-composition critical pairs (`977/157` versus kernel `971/157`),
+with no eliminator/action overlap family and zero unreviewed LHS clauses. All
+six exact typed consumers pass. The nontrivial successor/precomposition
+diamond is ordinary associativity and is discharged by the reusable
+propositional theorem `hom_precomp_along_postcomp_assoc`; runtime owners remain
+distinct.
+Rejected raw-loop-action, recursive-action, broad precomposition, and direct
+open-addition candidates remain recorded in the July 17 living plan.
 
 The adopted equality-valued omega-equivalence overlay is implemented at its
 selected operational MVP boundary. This includes the abstract/rigid-universe,
