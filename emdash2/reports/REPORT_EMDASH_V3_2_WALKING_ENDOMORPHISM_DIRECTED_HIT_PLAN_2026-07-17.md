@@ -1,14 +1,14 @@
 # EMDASH v3.2 Walking Endomorphism Directed-HIT And Nat Normal-Form Plan
 
 Date: 2026-07-17
-Last reviewed: 2026-07-17
+Last reviewed: 2026-07-18
 Plan-ID: EMDASH-V3-2-WALKING-ENDOMORPHISM-DIRECTED-HIT-2026-07-17
 Depends-On: REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17; REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
 Supersedes: none
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **adopted; selected theorem-first directed-HIT/BNat MVP implemented; authority synchronization and final gates in progress**
+Status: **selected theorem-first directed-HIT/BNat MVP implemented, synchronized, and validated; broader initiality and generic directed-HIT work deferred**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
@@ -115,6 +115,17 @@ head comparison around `comp_assoc`, avoiding reliance on unification-rule
 transitivity. All six WalkingEnd/BNat consumers pass in
 `logs/probes/walking_comp_hom_action_consumers-20260718-013636.log`. No
 category-specific action theorem or rewrite was needed.
+
+Final consolidation on 2026-07-18 passes the complete reviewer-example suite,
+strict LHS audits for both the base kernel and the WalkingEnd owner, catalog,
+TOC/reference/header/diff checks, refreshed health, and `make ci`. The catalog
+contains 1,977 classified diagnostics (1,739 positive and 238 negative) with
+zero unclassified entries. Health passes 54 tracked modules/examples; the
+WalkingEnd reviewer example contains 20 executable statements. The final CI
+metrics phase passes all 54 targets in 140.465 seconds. The warning inventory
+remains `971/157` for the base kernel and the measured `977/157` for the
+WalkingEnd owner; the six additional pairs are exactly the typed-consumer-
+checked constructor-composition pairs described above.
 
 The active diagnostics deliberately contain both sides of the boundary:
 
@@ -1119,7 +1130,7 @@ Exit result: the example consumes native EQ1 packaging, proves the loop
 nonidentity/noninvertibility/nongroupoidality tests, and derives OneCat
 evidence without collapsing directed arrows into paths.
 
-### Phase 8: consolidation and next-scope decision — in progress
+### Phase 8: consolidation and next-scope decision — completed
 
 1. Synchronize active code, checks, reviewer example, Foundations, current
    status, this ledger, report index, catalog, and health report.
@@ -1299,7 +1310,7 @@ semantic-model proof. Those remain the parent's deferred metatheory track.
 | `WEHIT-ONECAT` | **completed/promoted 2026-07-18** | derive ordinary one-category dimension | Nat/WalkingWord sethood | both path homs have `IsDiscreteCat`; both one-object categories have `IsNCat(cat_one,...)` |
 | `WEHIT-JOIN-FOLLOWUP` | deferred separate plan | use dependent-HIT pattern to reassess Join elimination | completed walking HIT | new bounded plan; no implementation in this task |
 | `WEHIT-GROUPOID-COMPLETION` | deferred separate plan | compare `BNat` with free invertible loop/`BInt` | completed walking HIT | separately reviewed architecture |
-| `WEHIT-CONSOLIDATE` | **in progress 2026-07-18** | synchronize code, examples, reports, and gates | implemented selected MVP | permanent checks and reviewer example pass; final catalog/health/CI refresh pending |
+| `WEHIT-CONSOLIDATE` | **completed 2026-07-18** | synchronize code, examples, reports, and gates | implemented selected MVP | 1,977-check catalog, 54-target health, warnings/audits, all examples, and full local CI pass |
 
 ## Validation And Synchronization Protocol
 
@@ -1327,9 +1338,10 @@ Implementation follows `AGENTS.md` and the current SOP. In particular:
 
 ## Completion And Blocker Policy
 
-This report is complete as a first proposed design document when its target,
-architecture fork, phases, acceptance criteria, and trust boundaries are
-reviewable. That does not make the implementation complete.
+This report began as a proposed design document. The selected concrete MVP is
+now implemented and meets the completion conditions below; that completion
+does not include the explicitly deferred generic schema, categorical
+initiality, Join follow-up, or groupoid completion.
 
 The directed-HIT implementation is complete only when:
 
@@ -1343,6 +1355,12 @@ The directed-HIT implementation is complete only when:
 7. required positive/negative examples and all proportional gates pass;
 8. claims about nonidentity, noninvertibility, nongroupoidality, dimension, or
    full initiality are made only when their corresponding rows are discharged.
+
+All eight conditions pass at the selected theorem-first boundary. The plan is
+therefore complete for the concrete walking-endomorphism/BNat MVP. Further
+work must begin from one of the deferred rows as a new bounded objective
+rather than silently strengthening the generator beta or composition normal
+forms in this completed slice.
 
 A hard blocker must record:
 
