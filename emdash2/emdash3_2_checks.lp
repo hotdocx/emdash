@@ -15,8 +15,8 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
 require open emdash.emdash3_2_sum_observational_action;
@@ -19154,6 +19154,71 @@ assert [A B E I : Cat]
       a b
       cross;
 
+// catalog-area: Walking endomorphism Nat prerequisites
+// The retained slice is independent of the blocked HIT/BNat composition rules.
+assert (m n : τ Nat_grpd) ⊢
+  @nat_add m n
+  : τ Nat_grpd;
+
+// Constructor computation and both open unit orientations.
+assert (n : τ Nat_grpd) ⊢
+  @nat_add zero n
+  ≡ n;
+
+assert (m n : τ Nat_grpd) ⊢
+  @nat_add (succ m) n
+  ≡ succ (@nat_add m n);
+
+assert (m : τ Nat_grpd) ⊢
+  @nat_add m zero
+  ≡ m;
+
+// The successor/right-unit critical pair joins at the same numeral.
+assert (m : τ Nat_grpd) ⊢
+  @nat_add (succ m) zero
+  ≡ succ m;
+
+assert ⊢
+  @nat_add (succ (succ zero)) (succ zero)
+  ≡ succ (succ (succ zero));
+
+// Open addition is not proof-erased to a commutative runtime normal form.
+assertnot (m n : τ Nat_grpd) ⊢
+  @nat_add m n
+  ≡ @nat_add n m;
+
+assert (m n k : τ Nat_grpd) ⊢
+  @nat_add_assoc m n k
+  : τ (@= Nat_grpd
+      (@nat_add (@nat_add m n) k)
+      (@nat_add m (@nat_add n k)));
+
+assert ⊢
+  unit_is_contr
+  : τ (IsContr Unit_grpd);
+
+assert ⊢
+  is_contr_center unit_is_contr
+  ≡ tt;
+
+assert ⊢
+  unit_is_prop
+  : τ (IsPropGrpd Unit_grpd);
+
+assert ⊢
+  empty_is_prop
+  : τ (IsPropGrpd Empty_grpd);
+
+// This is the internal sethood witness required by the future Nat model.
+assert ⊢
+  nat_is_set
+  : τ (IsSetGrpd Nat_grpd);
+
+assert (m n : τ Nat_grpd) ⊢
+  nat_is_set m n
+  : τ (IsPropGrpd (@= Nat_grpd m n));
+
+// catalog-area: auto
 assert
   [A B : Cat]
   [P Q R : τ (Prof A B)]

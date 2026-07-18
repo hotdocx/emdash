@@ -8,14 +8,15 @@ Supersedes: none
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **proposed bounded H2/directed-HIT sub-plan; independent architecture review complete, implementation not started**
+Status: **adopted; warning-neutral Nat prerequisite slice implemented; selected directed-HIT/BNat MVP blocked on composition-owner coherence**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
+Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
-Proposed implementation entry point: [Recommended First Implementation Slice](#recommended-first-implementation-slice)
+Current implementation owner: `emdash3_2_walking_end_hit.lp`
 
 ## Status And Authority
 
-This report is a proposed bounded sub-plan of the completed selected-MVP
+This report is the adopted bounded sub-plan of the completed selected-MVP
 equality-valued omega-equivalence overlay. It activates a concrete review of
 that plan's deferred representative-HIT question without reopening or
 superseding the completed equality, univalence, groupoidality, structured-J,
@@ -33,11 +34,129 @@ particular:
    overlay and the July 13 report remains the retained ledger for unaffected
    H0, truncation, dimension, directed, former-action, and long-term H2 work.
 
-The review baseline was clean and `EMDASH_TYPECHECK_TIMEOUT=60s make check`
-passed on 2026-07-17 before this report was created. The commit is historical
-provenance only and never authorizes a reset or rollback. At implementation
-adoption, remeasure the current baseline rather than assuming that the counts
-recorded by the parent plan are unchanged.
+The review and implementation baselines were clean and
+`EMDASH_TYPECHECK_TIMEOUT=60s make check` passed on 2026-07-17 before semantic
+probes. The commits are historical provenance only and never authorize a
+reset or rollback. The measured implementation result is recorded below.
+
+## Implementation Checkpoint And Hard Blocker
+
+The plan was adopted on 2026-07-17. One independent prerequisite slice is
+promoted in `emdash3_2_walking_end_hit.lp`:
+
+- `nat_add` with zero, successor, and open right-unit computation;
+- transparent `nat_add_assoc` by native Nat induction;
+- internal `unit_is_contr`, `unit_is_prop`, and `empty_is_prop` terms;
+- `nat_is_set : IsSetGrpd Nat_grpd` by nested Nat induction over the active
+  observational equality classifiers.
+
+The retained slice has permanent diagnostics and the reviewer example
+`examples/walking_endomorphism_nat_prerequisites.lp`. Its full owner-position
+warning probe retains the baseline `971` unjoinable critical pairs and `157`
+replaceable pattern variables, and the strict LHS audit retains zero
+unreviewed clauses. The decisive log is
+`logs/probes/wehit_nat_owner_full-20260717-214902.log`.
+
+The synchronized blocked checkpoint passes `make check`, all reviewer
+examples, catalog/TOC/reference/header checks, health generation, and full
+local CI. The generated catalog contains 1,931 classified diagnostics (1,697
+positive and 234 negative), health covers 53 files/examples, and the final CI
+typecheck phase reports 368.847 seconds total. These gates validate the
+retained slice and the consistency of the documentation; they do not convert
+the downstream hard blocker into an implemented HIT.
+
+The selected directed-HIT MVP is **not** complete. Two early computational
+gates independently expose the same missing composition-owner architecture.
+
+### Blocker A: constructor beta versus generic strict functoriality
+
+The exact dependent eliminator shape typechecks. Because `piapp0` and
+`piapp1_fapp0` are transparent definitions, the stable constructor owners are
+terminal component evaluation and `fdapp1_int_cell`, respectively. Both
+individual runtime betas pass and are warning-neutral in the full owner copy;
+see `logs/probes/wehit_ind_shape_owner_full-20260717-211309.log` and the
+warning run
+`logs/probes/wehit_ind_shape_owner_full-20260717-211320.log`.
+
+That local success is insufficient. In a constant motive, the expression
+
+```text
+comp(section[loop], section[loop])
+```
+
+has two operational paths. Constructor beta first leaves `comp(f,f)`, while
+the generic strict-functor cut first leaves `section[loop o loop]`. The latter
+has no arrow-induction computation, so the two terms have no common runtime
+normal form. The smallest failing assertion is retained in
+`logs/probes/wehit_dependent_composition_boundary-20260717-213738.log`; the
+two distinct normal forms are printed in
+`logs/probes/wehit_dependent_composition_compute-20260717-213839.log`.
+
+The same failure appears through the ordinary constant-motive recursor. A
+narrow base/loop observer adapter computes at each constructor, but its
+generator-square composition assertion fails. A stable recursive action head
+made that one assertion pass in
+`logs/probes/wehit_ind_shape_owner_full-20260717-212712.log`, but its general
+composition rule overlaps the existing semantic composition owners and raises
+the warning inventory from `971/157` to `999/158`; see
+`logs/probes/wehit_ind_shape_owner_full-20260717-212723.log`. Adding the
+resulting family of constructor-specific bridges would be exactly the ad hoc
+design this plan is intended to avoid. A narrowly typed proof-time composition
+equation also failed to discharge the closed generator square after
+constructor reduction; the final attempt is
+`logs/probes/wehit_rec_unif_owner_full-20260717-214215.log`.
+
+This is a normalization/representation blocker, not a mathematical
+inconsistency and not a failure to type the eliminator. It invalidates the
+earlier computational assumption that the returned section's ambient
+functoriality alone supplies generated-composite computation once a generator
+beta is installed.
+
+### Blocker B: a transparent `BNat_cat` composition owner
+
+The proposed object, hom, identity, and direct composition-to-addition rules
+all typecheck and the Nat/unit/associativity assertions pass in
+`logs/probes/wehit_nat_bnat_owner_full-20260717-214725.log`. With warnings
+enabled, however, the general rule
+
+```text
+comp_fapp0(BNat_cat,g,f) -> nat_add(f,g)
+```
+
+creates 18 new unjoinable critical pairs, raising `971/157` to `989/157`; see
+`logs/probes/wehit_nat_bnat_owner_full-20260717-214757.log`. The first is the
+generic strict-functor cut into `BNat_cat`; the remainder include existing
+postcomposition, precomposition, transfor, displayed, and definitional-
+isomorphism composition owners. Reducing the target composition to addition
+erases the generic semantic head before those paths can join. A stable
+`bnat_comp` followed by an unconditional fold to addition has the same final
+problem; leaving it opaque would not meet the computational model criterion.
+
+### Required prerequisite and retained alternatives
+
+The smallest credible prerequisite is a reusable free-arrow/composition
+interface that does all of the following:
+
+1. gives generated arrows an inductive or otherwise canonical presentation;
+2. defines dependent and nondependent action on that presentation;
+3. rejoins generator beta with identity, composition, and the existing
+   higher hom-action owners at one semantic owner;
+4. supplies an eta/arrow-induction principle for arbitrary generated arrows;
+5. does not identify the HIT hom with Nat before the comparison proof.
+
+An explicit internal `WalkingWord` syntax distinct from `Nat_grpd` is one
+candidate, but it is not yet selected: its dependent action and higher path
+functor must be probed before it can be called the HIT rather than another
+model. The other candidate is a broader kernel-level registration/refactor of
+category-specific composition computation so generic functor/transfor/hom
+owners remain authoritative. A proof-time-only `BNat` comparison or explicit
+evaluation operation is useful as a weaker interface, but does not satisfy
+this plan's runtime normal-form claim.
+
+Until one of these prerequisites is implemented, `WalkingEnd_cat`, its beta
+rules, `BNat_cat`, encode/decode, and the round trips remain unpromoted. The
+ignored full-file probes and logs are evidence only. No Hom-to-Nat rewrite,
+bodyless round trip, or 18-rule patch family has been installed.
 
 ## Executive Decision
 
@@ -134,9 +253,10 @@ The active implementation already supplies most of the ambient language:
 - `PathOut` and its structured path-induction section;
 - the primitive directed Join and its nondependent recursor.
 
-The active kernel does **not** currently provide:
+The active kernel does **not** currently provide the following. The first
+implementation checkpoint now supplies Nat addition and Nat sethood in the
+one-way walking-plan extension rather than moving them into the kernel:
 
-- Nat addition or a promoted proof that `Nat_grpd` is set-truncated;
 - a general functor constructor
   `Path_cat(A) -> Path_cat(B)` from a raw function and its higher action;
 - a dependent eliminator or semantic initiality theorem for `Join_cat`;
@@ -215,10 +335,13 @@ diagnose a projection-order join, but a final implementation that only states
 both betas propositionally must not claim the selected computational HIT
 milestone without an explicit revised acceptance decision.
 
-No extra coherence input is expected: there is no relation on the generator,
-and the returned section's ordinary functoriality supplies its action on
-identities and composites. Owner-position probes must nevertheless verify
-that this expectation matches the actual iterated-hom representation.
+Mathematically there is no extra relation on the generator, so no independent
+algebra law should be requested from the user. Computationally, the first
+owner-position probes showed that a section declaration plus one generator
+beta is not enough: the implementation still needs an internal arrow-
+induction/composition owner making the generated identity/composite actions
+join with generic strict functoriality. That missing computation is an
+implementation prerequisite, not additional mathematical constructor data.
 
 ### 3. Derived nondependent recursor
 
@@ -710,7 +833,7 @@ examples/walking_endomorphism_hit.lp
 
 ## Phased Implementation Plan
 
-### Phase 0: adoption and exact interface probes
+### Phase 0: adoption and exact interface probes — completed
 
 1. Explicitly adopt or revise this proposal before editing active semantic
    owners.
@@ -728,7 +851,7 @@ Exit criterion: the dependent eliminator signature typechecks in isolation,
 both proposed projection owners are identified, and no opaque theorem has
 been added to simulate a failed beta.
 
-### Phase 1: Nat monoid and discreteness prerequisites
+### Phase 1: Nat monoid and discreteness prerequisites — completed
 
 1. Define selected Nat addition transparently.
 2. Add computation diagnostics for both constructors and open terms.
@@ -740,7 +863,7 @@ been added to simulate a failed beta.
 Exit criterion: Nat addition computes, its laws are derived without global
 proof erasure, and Nat sethood is an internal term.
 
-### Phase 2: transparent `BNat_cat` model
+### Phase 2: transparent `BNat_cat` model — blocked on composition registration
 
 1. Add the one-object category and object/hom projections.
 2. Select direct-addition or stable-composition ownership from focused probes.
@@ -755,7 +878,7 @@ Nat arrow normal forms, an explicitly recorded generic higher-composition
 owner, and no category-specific duplication of generic hom actions. Full
 comparison with selected Nat path action remains Phase 4 work.
 
-### Phase 3: HIT constructors and dependent eliminator
+### Phase 3: HIT constructors and dependent eliminator — blocked after local beta
 
 1. Add `WalkingEnd_cat`, `walking_base`, and `walking_loop` without a Hom-to-
    Nat rule.
@@ -770,7 +893,7 @@ Exit criterion: the actual HIT constructors, dependent elimination, both
 runtime constructor betas, and derived recursor are executable. A primitive
 nondependent recursor alone does not meet this phase.
 
-### Phase 4: path-map/higher-action fork
+### Phase 4: path-map/higher-action fork — downstream blocked
 
 1. Probe the generic `Path_cat` functor constructor and its first two hom
    actions.
@@ -785,7 +908,7 @@ Exit criterion: a reusable generic path-map functor or a documented
 specialized alternative supplies the full iterable action needed by the
 comparison, with no opaque higher-action capability.
 
-### Phase 5: encode, powers, and decode
+### Phase 5: encode, powers, and decode — downstream blocked
 
 1. Derive `walking_encode_func` from the HIT recursor.
 2. Define `walking_power` by Nat recursion.
@@ -798,7 +921,7 @@ Exit criterion: both comparison directions are iterable functors or otherwise
 have an explicitly equivalent structured presentation; capped functions alone
 are not the final boundary.
 
-### Phase 6: round trips and hom equivalence
+### Phase 6: round trips and hom equivalence — downstream blocked
 
 1. Prove encode-after-power by Nat induction.
 2. Derive power-after-encode for arbitrary HIT arrows from dependent
@@ -816,7 +939,7 @@ Exit criterion: both arbitrary round trips have transparent bodies, the hom
 equivalence is active, and no prior Hom-to-Nat rewrite made either theorem
 tautological.
 
-### Phase 7: initiality, univalence, and dimension consumers
+### Phase 7: initiality, univalence, and dimension consumers — downstream blocked
 
 1. State the strongest derived functor uniqueness/eta theorem supported by
    Phase 6.
@@ -831,7 +954,7 @@ tautological.
 Exit criterion: the example is a meaningful consumer of the equality-valued
 omega-equivalence design and does not collapse directed arrows into paths.
 
-### Phase 8: consolidation and next-scope decision
+### Phase 8: consolidation and next-scope decision — blocked checkpoint complete
 
 1. Synchronize active code, checks, reviewer example, Foundations, current
    status, this ledger, report index, catalog, and health report.
@@ -845,6 +968,11 @@ Exit criterion: all promoted claims have executable evidence and every
 remaining gap has an exact owner/prerequisite.
 
 ## Recommended First Implementation Slice
+
+Checkpoint result: steps 1--5 pass in isolation, but step 6 exposes the
+composition blocker described above. The candidate HIT rules were therefore
+not promoted. Independent Nat prerequisites were promoted while the required
+composition owner remains open.
 
 The first implementation slice should be deliberately smaller than the full
 model:
@@ -889,13 +1017,13 @@ boundary.
 
 | Deliverable | Mathematical feasibility | Current computational feasibility | Assessment |
 | --- | --- | --- | --- |
-| Nat addition and powers | standard | native Nat eliminator available | high |
-| `Nat_grpd` sethood | standard | needs explicit induction through observational equality | high/medium-high |
-| transparent `BNat_cat` | standard one-object monoid category | composition/unit/associativity joins must be measured | high/medium-high |
-| dependent eliminator formation | standard induction principle for the free category | `Catd`, `Pi_cat`, and section action already match the required shape | high for formation |
-| base constructor beta | standard | direct stable projection owner exists | high |
-| loop constructor beta | standard | nested section-action projection may expose critical pairs | medium-high pending probe |
-| derived constant recursor | standard | direct `Pi_cat(Const)` comparison exists | high/medium-high |
+| Nat addition and powers | standard | `nat_add` and associativity promoted; powers remain downstream | high; addition complete |
+| `Nat_grpd` sethood | standard | nested native Nat induction now supplies an internal term | complete |
+| transparent `BNat_cat` | standard one-object monoid category | direct composition exposure creates 18 new unjoinable generic-owner pairs | blocked pending reusable composition registration |
+| dependent eliminator formation | standard induction principle for the free category | exact `Catd`/`Pi_cat` signature passes | formation high; not promoted alone |
+| base constructor beta | standard | stable terminal-component owner passes locally | locally high; global HIT slice blocked |
+| loop constructor beta | standard | individual stable owner passes, but its composite action does not join | blocked pending arrow-induction/composition owner |
+| derived constant recursor | standard | type comparison and constructor observers pass separately; generator square does not | blocked with dependent owner |
 | generic `PathMap` | standard functorial action of functions on paths | recursive higher action and generic composition diamonds are unresolved | medium |
 | specialized power functor | standard monoid functor | can use Nat discreteness if generic PathMap is deferred | medium-high |
 | encode-after-decode | Nat induction | ordinary eliminator computation | high |
@@ -906,11 +1034,15 @@ boundary.
 | full functor-category initiality | classical | requires an endomorphism-algebra category and coherent extensionality | medium/low; strengthening |
 | generic directed-HIT schema | mathematically plausible | beyond one constructor and current Join staging | deferred research/architecture |
 
-Overall, the design is mathematically sound and operationally plausible. The
-two honest uncertainties are the loop beta through the complete section
-projection ladder and the reverse arbitrary-arrow round trip. Neither is
-currently a documented blocker because the smallest owner-position probes
-have not yet been run. The plan deliberately makes them early gates.
+Overall, the mathematical target remains sound, but the initially proposed
+"small natural extension" is not computationally feasible in the current
+rewrite orientation without one additional reusable architecture component.
+The blocker occurs earlier than the anticipated reverse arbitrary-arrow round
+trip: constructor beta already fails to join at the square of the generator,
+and the independent Nat model loses generic higher-action owners when its
+composition reduces directly to addition. Nat arithmetic and sethood are
+complete; all claims beyond them remain conditional on the explicit
+free-arrow/composition prerequisite recorded above.
 
 ## Risks And Mitigations
 
@@ -976,20 +1108,21 @@ semantic-model proof. Those remain the parent's deferred metatheory track.
 | Task ID | Initial status | Purpose | Dependency | Status-changing result |
 | --- | --- | --- | --- | --- |
 | `WEHIT-ARCH-REVIEW` | **completed 2026-07-17** | select representative HIT and honest acceptance boundary | completed parent MVP | walking endomorphism selected; explicit Nat model separated from HIT; dependent elimination and derived round trips required |
-| `WEHIT-ADOPT` | proposed | explicitly adopt/revise this plan for implementation | architecture review | user handoff names implementation baseline and bounded objective |
-| `WEHIT-IND-SHAPE` | proposed first slice | type exact `Catd` motive, loop lift, section result, and projection betas | adoption | owner-position probe passes or records exact missing projection |
-| `WEHIT-NAT-ADD` | proposed | transparent Nat monoid operations and laws | adoption | constructor/open computations and law checks pass |
-| `WEHIT-NAT-SET` | proposed | internal `IsSetGrpd Nat_grpd` proof | Nat equality/truncation kernel | transparent induction proof and diagnostics pass |
-| `WEHIT-BNAT-MODEL` | proposed | separate transparent one-object Nat category | Nat addition/sethood | unit/assoc/opposite/functor/hom-action probes select coherent normal form |
-| `WEHIT-HIT-INTRO` | proposed | add opaque HIT category, base, and directed loop | induction-shape probe | formation passes with no Hom-to-Nat rule |
-| `WEHIT-HIT-IND` | proposed | dependent eliminator and base/loop runtime beta | HIT introductions | both projection computations pass at owner position |
-| `WEHIT-REC` | proposed | derive nondependent recursor from constant motive | dependent eliminator | functor formation plus base/loop computation pass |
-| `WEHIT-PATH-MAP` | architecture fork | reusable path-category map or honest specialized substitute | Nat model and comparison consumer | two-level iterability and identity/composition joins select implementation |
-| `WEHIT-ENCODE` | proposed | recursor-derived functor from HIT to Nat model | recursor and `BNat_cat` | base/loop/comp computations pass |
-| `WEHIT-DECODE` | proposed | Nat-power functor from model to HIT | Nat recursion and path-map fork | zero/successor/higher action pass |
-| `WEHIT-ROUNDTRIP-NAT` | proposed | encode after power | encode/decode | transparent Nat-induction proof |
-| `WEHIT-ROUNDTRIP-HIT` | central gate | power after encode for arbitrary HIT arrow | dependent elimination/eta | derived proof passes or exact extensionality prerequisite recorded |
-| `WEHIT-HOM-EQUIV` | proposed | native EQ1 hom equivalence and TypeEquiv view | both round trips | package observers and maps compute |
+| `WEHIT-ADOPT` | **completed 2026-07-17** | explicitly adopt/revise this plan for implementation | architecture review | user handoff fixed baseline `8fd9bdf...`; active state and all proportional baselines remeasured |
+| `WEHIT-IND-SHAPE` | **blocked after local pass 2026-07-17** | type exact `Catd` motive, loop lift, section result, and projection betas | adoption | exact signature and individual stable betas pass warning-neutral; constant-family generator-square composition fails to join (`...-213738.log`) |
+| `WEHIT-NAT-ADD` | **completed/promoted 2026-07-17** | transparent Nat monoid operations and laws | adoption | constructor/open unit computation and transparent associativity active with no warning/audit delta |
+| `WEHIT-NAT-SET` | **completed/promoted 2026-07-17** | internal `IsSetGrpd Nat_grpd` proof | Nat equality/truncation kernel | nested Nat-induction proof, permanent diagnostics, and reviewer example pass |
+| `WEHIT-COMP-OWNER` | **hard prerequisite; open** | reusable free-arrow/category-specific composition registration that preserves all generic action owners | measured HIT and BNat failures | either an explicit non-Nat `WalkingWord` induction/eta interface or a generic kernel registration passes owner-position action/comp tests without bridge proliferation |
+| `WEHIT-BNAT-MODEL` | **blocked 2026-07-17** | separate transparent one-object Nat category | Nat addition/sethood and `WEHIT-COMP-OWNER` | direct composition-to-addition typechecks but adds 18 unjoinable critical pairs (`...-214757.log`); candidate not promoted |
+| `WEHIT-HIT-INTRO` | **not promoted; blocked** | add opaque HIT category, base, and directed loop | induction-shape probe and `WEHIT-COMP-OWNER` | declarations alone would not justify the computational HIT claim |
+| `WEHIT-HIT-IND` | **blocked 2026-07-17** | dependent eliminator and base/loop runtime beta | HIT introductions and `WEHIT-COMP-OWNER` | local betas pass, but composed loop action has distinct normal forms; no active rule retained |
+| `WEHIT-REC` | **blocked 2026-07-17** | derive nondependent recursor from constant motive | dependent eliminator and `WEHIT-COMP-OWNER` | type and isolated observers pass; narrow adapter fails composition; recursive action creates `999/158` warning inventory |
+| `WEHIT-PATH-MAP` | downstream blocked architecture fork | reusable path-category map or honest specialized substitute | Nat model, comparison consumer, and `WEHIT-COMP-OWNER` | two-level iterability and identity/composition joins select implementation |
+| `WEHIT-ENCODE` | downstream blocked | recursor-derived functor from HIT to Nat model | recursor and `BNat_cat` | base/loop/comp computations pass |
+| `WEHIT-DECODE` | downstream blocked | Nat-power functor from model to HIT | Nat recursion and path-map fork | zero/successor/higher action pass |
+| `WEHIT-ROUNDTRIP-NAT` | downstream blocked | encode after power | encode/decode | transparent Nat-induction proof |
+| `WEHIT-ROUNDTRIP-HIT` | downstream central gate | power after encode for arbitrary HIT arrow | dependent elimination/eta | derived proof passes or exact extensionality prerequisite recorded |
+| `WEHIT-HOM-EQUIV` | downstream blocked | native EQ1 hom equivalence and TypeEquiv view | both round trips | package observers and maps compute |
 | `WEHIT-INITIALITY` | strengthening | functor uniqueness/category-of-algebras comparison | HIT round trip and transfor extensionality | strongest coherent theorem supported by active kernel |
 | `WEHIT-NONIDENTITY` | auxiliary | prove loop differs from identity | hom equivalence | alleged equality maps to Empty |
 | `WEHIT-NONINVERTIBLE` | auxiliary | prove loop has no equivalence evidence | encode and Nat laws | alleged inverse law maps to successor/zero contradiction |
@@ -997,7 +1130,7 @@ semantic-model proof. Those remain the parent's deferred metatheory track.
 | `WEHIT-ONECAT` | auxiliary | derive ordinary one-category dimension | Nat sethood/hom equivalence | active closure/invariance theorem suffices or reusable gap recorded |
 | `WEHIT-JOIN-FOLLOWUP` | deferred separate plan | use dependent-HIT pattern to reassess Join elimination | completed walking HIT | new bounded plan; no implementation in this task |
 | `WEHIT-GROUPOID-COMPLETION` | deferred separate plan | compare `BNat` with free invertible loop/`BInt` | completed walking HIT | separately reviewed architecture |
-| `WEHIT-CONSOLIDATE` | proposed | synchronize code, examples, reports, and gates | selected MVP rows | all claims executable; next scope explicitly selected or deferred |
+| `WEHIT-CONSOLIDATE` | **completed at blocked checkpoint 2026-07-17** | synchronize code, examples, reports, and gates | retained Nat slice and blocker evidence | only warning-neutral retained work promoted; 53-file health, 1,931-check catalog, examples, and full CI pass; blocker remains explicit |
 
 ## Validation And Synchronization Protocol
 
@@ -1051,6 +1184,14 @@ A hard blocker must record:
 - the precise prerequisite expected to change the result;
 - independent dependency-ready work that remains.
 
+The 2026-07-17 checkpoint meets this policy for `WEHIT-COMP-OWNER`: it records
+the exact constant-family generator-square and `BNat_cat` rules, the smallest
+failing owner-position logs, the normalization/overlap classification, the
+free-arrow or generic composition-registration prerequisite, and the
+independent Nat work that was completed and promoted. Consequently the task
+is at a documented hard-blocker terminal condition, not at the plan's full
+directed-HIT completion condition.
+
 Failure of the generic `PathMap` candidate is not automatically a blocker:
 the specialized Nat-discrete alternative must also be assessed. Failure of
 the reverse HIT round trip after the intended dependent eliminator is more
@@ -1062,8 +1203,10 @@ is established.
 
 An implementation handoff should name this report as the living bounded plan
 and the completed July 17 equality-valued overlay as its parent authority. It
-should begin with `WEHIT-IND-SHAPE`, not by declaring the Nat hom model or
-starting the Circle. The plan remains revisable: owner-position evidence may
-change rule orientation, module placement, or the selected path-map fork, but
-must not weaken the actual dependent-elimination and derived-correspondence
-goal without an explicit recorded decision.
+should resume at `WEHIT-COMP-OWNER`, using the retained eliminator-shape and
+`BNat_cat` probes as acceptance tests; it should not redeclare the Nat hom
+model, directly promote the locally passing loop beta, or start the Circle.
+The plan remains revisable: owner-position evidence may change rule
+orientation, module placement, or the selected path-map fork, but must not
+weaken the actual dependent-elimination and derived-correspondence goal
+without an explicit recorded decision.

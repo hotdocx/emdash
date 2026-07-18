@@ -8,8 +8,12 @@ derived native-EQ1 hom-action/groupoidality extension, and
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
 evidence-property and finite-`NCat` object-truncation extension.
 `emdash3_2_sum_observational_action.lp` retains the former-specific Sum action
-as a library module rather than kernel infrastructure. Reports explain current
-status, mathematics, notation, implementation plans, and historical decisions.
+as a library module rather than kernel infrastructure.
+`emdash3_2_walking_end_hit.lp` currently retains only the warning-neutral Nat
+addition/associativity/sethood prerequisites from the walking-endomorphism
+plan; the HIT and `BNat_cat` rules remain unpromoted at a documented
+composition-owner blocker. Reports explain current status, mathematics,
+notation, implementation plans, and historical decisions.
 
 ## Current Orientation
 
@@ -24,7 +28,7 @@ status, mathematics, notation, implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
-  proposed bounded `EVOGJ-H2-READINESS` sub-plan for a genuine walking-
+  adopted bounded `EVOGJ-H2-READINESS` sub-plan for a genuine walking-
   endomorphism directed HIT. It separates the constructor/eliminator
   presentation from a transparent one-object Nat model, requires a structured
   `Catd` dependent eliminator with base/loop computation, and makes derived
@@ -32,7 +36,14 @@ status, mathematics, notation, implementation plans, and historical decisions.
   A reusable `Path_cat` map functor is an explicit comparison-phase
   architecture fork rather than an assumed wrapper around one-level
   `ObsAction`; loop nonidentity, noninvertibility, nongroupoidality, and
-  OneCat evidence are auxiliary consumers.
+  OneCat evidence are auxiliary consumers. Its first implementation checkpoint
+  promotes transparent `nat_add`, associativity, and an internal
+  `nat_is_set` proof with no warning/audit delta. The abstract loop beta and a
+  direct `BNat_cat` composition rule each fail composition-owner coherence:
+  the former has distinct generator-square normal forms, while the latter adds
+  18 unjoinable generic-owner pairs. The selected MVP is therefore at a
+  documented `WEHIT-COMP-OWNER` hard blocker; no HIT, Hom-to-Nat, bodyless
+  round trip, or bridge family is active.
 - `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`:
   independently reviewed and preliminary-probe-refined **completed selected-
   MVP overlay** for the equality, omega-equivalence, direct univalence,

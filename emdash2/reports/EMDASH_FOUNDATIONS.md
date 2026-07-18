@@ -161,6 +161,33 @@ natural-number-object properties remain separate tasks. The constructor
 conversion non-collapse diagnostics are local regression controls, not no-
 confusion or normalization theorems.
 
+The one-way walking-endomorphism extension now adds the reusable arithmetic
+prerequisites
+
+```text
+nat_add(0,n)       = n
+nat_add(succ(m),n) = succ(nat_add(m,n))
+nat_add(m,0)       = m
+```
+
+and proves associativity by native Nat induction. It also constructs
+`nat_is_set : IsSetGrpd(Nat_grpd)` internally: nested Nat induction reduces
+each visible path classifier to `Unit_grpd` or `Empty_grpd`, whose
+proposition-valuedness is supplied by explicit contractibility/elimination
+terms. This is genuine truncation evidence, not a conclusion inferred only
+from the no-confusion rewrite table. Open addition is not normalized by
+commutativity.
+
+The intended walking-endomorphism HIT and its separate one-object Nat category
+are not active. Individual base/loop eliminator betas typecheck in probes, but
+generator beta does not join with generic strict functoriality on the square
+of the loop. Independently, reducing a new category's general composition to
+`nat_add` erases existing functor/transfor/hom-action composition owners and
+creates 18 new unjoinable critical pairs. The active extension therefore
+retains only the arithmetic/sethood slice while the living plan requires a
+reusable free-arrow or category-specific composition-registration interface.
+No Hom-to-Nat rule or round-trip capability has been added.
+
 The first named finite dependent record is
 
 ```text
@@ -2303,6 +2330,9 @@ The current foundations intentionally do not yet include:
   assembly, consumer-led core-universe inclusion functors, and full retirement
   of still-used legacy decoder APIs beyond the selected native coherence API;
 - general higher-inductive pushouts and a generic directed-inductive schema;
+- the walking-endomorphism HIT/`BNat` comparison beyond its promoted Nat
+  prerequisites, pending a composition owner that joins constructor beta with
+  generic functor/transfor/hom action;
 - dependent join elimination or a semantic collage construction;
 - a finalized surface syntax for the future proof assistant;
 - full coherence APIs for every Sigma/Pi helper;

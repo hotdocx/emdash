@@ -22,6 +22,11 @@ detailed probe evidence.
 - `emdash3_2_sum_observational_action.lp`: one-way library module retaining
   the componentwise Sum `ObsAction`, its equality comparison, and four
   proof-time bases; no kernel or univalence consumer imports it.
+- `emdash3_2_walking_end_hit.lp`: one-way retained prerequisite module for the
+  walking-endomorphism plan. It currently contains warning-neutral Nat
+  addition/associativity and an internal Nat-sethood proof only. The HIT and
+  `BNat_cat` candidates remain unpromoted at the plan's documented
+  composition-owner blocker.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
@@ -47,8 +52,8 @@ The 2026-07-17 baseline is:
 make check                         pass
 make examples                      pass
 make ci                            pass
-checked files/examples            51
-diagnostic checks                1,917 (1,684 assert + 233 assertnot)
+checked files/examples            53
+diagnostic checks                1,931 (1,697 assert + 234 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -56,6 +61,19 @@ warning inventory                  1,128
   unjoinable critical pairs          971
   replaceable pattern variables      157
 ```
+
+The walking-endomorphism sub-plan was adopted at implementation baseline
+`8fd9bdf...`. Its retained active slice adds `nat_add`, transparent
+associativity, and `nat_is_set : IsSetGrpd Nat_grpd` with no warning or strict-
+LHS-audit delta. The full HIT milestone is blocked earlier than the intended
+Nat round trip: an individual loop beta and generic strict-functor
+composition leave distinct normal forms on the loop square. A direct
+`BNat_cat` composition-to-addition rule independently adds 18 unjoinable
+overlaps with existing generic action owners. The exact probes, rejected
+recursive-action candidate, and free-arrow/composition-registration
+prerequisite are recorded in the July 17 walking-endomorphism living plan. No
+WalkingEnd/BNat semantic rule, Hom-to-Nat classifier, or bodyless round-trip
+theorem is active.
 
 The adopted equality-valued omega-equivalence overlay is implemented at its
 selected operational MVP boundary. This includes the abstract/rigid-universe,
