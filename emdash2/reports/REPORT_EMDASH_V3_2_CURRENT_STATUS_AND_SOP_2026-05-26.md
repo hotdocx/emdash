@@ -24,11 +24,12 @@ detailed probe evidence.
   proposition witnesses, and `nat_is_set` without importing the walking-HIT
   surface.
 - `emdash3_2_walking_end_hit.lp`: one-way walking-endomorphism directed-HIT
-  module. It imports the Nat module and owns native `WalkingWord` free-arrow
-  syntax, `WalkingEnd_cat`, the structured dependent eliminator, the separate
-  `BNat_cat` model, encode/decode and transparent inverse proofs, the Hom-to-
-  Nat equivalence, local discreteness/OneCat evidence, and directed-loop
-  negative results.
+  module. It imports the Nat module and owns the intrinsic
+  `WalkingEndHom_grpd` generated-arrow carrier and hom induction,
+  `WalkingEnd_cat`, the structured dependent eliminator, the separate
+  `BNat_cat` model, semantic encode/decode inverse proofs, the Hom-to-Nat
+  equivalence, local discreteness/OneCat evidence, and directed-loop negative
+  results.
 - `emdash3_2_sum_observational_action.lp`: one-way library module retaining
   the componentwise Sum `ObsAction`, its equality comparison, and four
   proof-time bases; no kernel or univalence consumer imports it.
@@ -58,7 +59,7 @@ make check                         pass
 make examples                      pass
 make ci                            pass
 checked files/examples            55
-diagnostic checks                1,978 (1,739 assert + 239 assertnot)
+diagnostic checks                1,980 (1,741 assert + 239 assertnot)
 unclassified checks                0
 strict LHS audit                   0 unreviewed candidates
 intentional LHS annotations        45 slots across 27 clauses
@@ -72,14 +73,23 @@ The walking-endomorphism sub-plan was adopted at implementation baseline
 blocker was resolved by adopting the standard intensional-HIT boundary:
 point beta is judgmental, generator beta is equality evidence, and generic
 strict functoriality remains the sole runtime owner of composite action.
-`WalkingWord` supplies induction over arbitrary directed arrows. The separate
-`BNat_cat` uses constructor-directed composition rather than an open collapse
-to addition; `bnat_comp_nat_add` states the open comparison propositionally.
-The recursor-derived encoder and structured decoder have explicit generator
-betas and arbitrary-action agreement proofs, both inverse laws are
-transparent, and the Hom comparison is packaged as both `TypeEquiv` and native
-EQ1. The loop is proved nonidentity/noninvertible and both categories have
-internal OneCat evidence. The owner warning probe records six additional
+The native `walking_end_hom` datatype is the carrier of
+`Hom(WalkingEnd,base,base)`, not a second comparison model, and
+`walking_end_hom_ind` is the arbitrary-arrow component of the HIT elimination
+interface. The separate `BNat_cat` uses constructor-directed composition
+rather than an open collapse to addition; `bnat_comp_nat_add` states the open
+comparison propositionally. The recursor-derived encoder and structured
+decoder have explicit generator betas. The reusable
+`walking_end_rec_step_view` computes action on every generated step for an
+arbitrary recursor target from generic strict functoriality and the HIT loop
+beta; the encoder successor theorem is its BNat specialization. Their complete
+semantic actions, not
+parallel raw carrier functions, are inverse by `walking_end_hom_ind` and Nat
+induction, and the Hom comparison packages those actions as both `TypeEquiv`
+and native EQ1. This is the selected practical computation/freeness theorem;
+it does not assert full functor-category initiality. The loop is proved
+nonidentity/noninvertible and both categories have internal OneCat evidence.
+The owner warning probe records six additional
 constructor-composition critical pairs (`977/157` versus kernel `971/157`),
 with no eliminator/action overlap family and zero unreviewed LHS clauses. All
 six exact typed consumers pass. The nontrivial successor/precomposition
@@ -92,10 +102,13 @@ Post-completion consolidation moved the reusable Nat arithmetic/sethood slice
 to `emdash3_2_nat_arithmetic.lp` and moved all permanent walking assertions to
 the catalogued diagnostic suite. The usual unqualified spellings remain
 available through transitive `open`; the module-qualified owner of the Nat
-slice intentionally changes. No theorem body, rewrite, unifier, or runtime
-normal form changes. The resulting catalog has 1,978 checks across 72 areas,
-all 55 health targets pass, and synchronized local CI records 128.448 seconds
-of measured checking time.
+slice intentionally changes. The later HIT-elimination correction changes
+theorem bodies and public hom-carrier names but adds no rewrite or unifier and
+changes no selected runtime normal form. The resulting walking owner has 818
+lines, 44 symbols, 13 rules, and 2 unifiers. The catalog has 1,980 checks
+across 72 areas, the walking reviewer example has 22 statements, all 55 health
+targets pass, checked health takes 121.390 seconds, and synchronized local CI
+passes in 171.313 seconds.
 
 The adopted equality-valued omega-equivalence overlay is implemented at its
 selected operational MVP boundary. This includes the abstract/rigid-universe,

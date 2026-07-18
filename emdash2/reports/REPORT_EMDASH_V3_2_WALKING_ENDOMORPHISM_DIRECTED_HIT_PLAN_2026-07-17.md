@@ -8,9 +8,10 @@ Supersedes: none
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **selected theorem-first directed-HIT/BNat MVP implemented, synchronized, and validated; broader initiality and generic directed-HIT work deferred**
+Status: **selected practical HIT-elimination/BNat computation implemented, synchronized, and validated; full initiality remains explicitly unnecessary for this milestone**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
+HIT-computation correction baseline: `b5037078dfaafc665adb2d996bec38596e6914c9`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
 Current implementation owners: reusable Nat prerequisites in
 `emdash3_2_nat_arithmetic.lp`; walking HIT/model/comparison in
@@ -43,29 +44,44 @@ reset or rollback. The measured implementation result is recorded below.
 
 ## Current Implementation Checkpoint
 
-The earlier composition-owner blocker has been resolved by correcting the
-acceptance boundary, not by adding a family of constructor-specific runtime
-bridges.  The active `emdash3_2_walking_end_hit.lp` now implements the selected
-MVP:
+The earlier composition-owner blocker remains resolved without adding a family
+of constructor-specific runtime bridges. A later independent peer review found
+one material completeness defect in the first packaging: the exported Hom-Nat
+equivalence used parallel carrier functions even though the encoder itself was
+HIT-recursive. The corrected active `emdash3_2_walking_end_hit.lp` now
+implements:
 
-- a native inductive `WalkingWord_grpd`, intentionally distinct from Nat;
-- `WalkingEnd_cat`, with one object, word-valued hom, identity, and
-  constructor-directed composition;
+- the native inductive `walking_end_hom` carrier exposed as
+  `WalkingEndHom_grpd`, explicitly owned as the intrinsic hom component of the
+  walking HIT rather than as a second model;
+- `walking_end_hom_ind`, the hom-level HIT eliminator with judgmental identity
+  and step beta laws;
+- `WalkingEnd_cat`, with one object, intrinsic generated-arrow hom, identity,
+  and constructor-directed composition;
 - a primitive directed-HIT eliminator
   `walking_end_ind_sec(D,u,ell) : Obj(Pi_cat D)`;
 - judgmental point beta and a primitive **propositional** generator beta;
 - the nondependent recursor as the constant-`Catd` specialization of that
   eliminator;
+- `walking_end_rec_step_view`, a target-generic theorem computing recursor
+  action on every generated step from strict functoriality and the HIT loop
+  beta;
 - a derived loop-square equality using the loop beta twice and the global
   Kosta-Došen strict cut, with no second composite-action runtime owner;
 - the separate one-object Nat model `BNat_cat`;
 - a transparent open theorem `bnat_comp_nat_add`, while runtime composition
   retains its semantic head on an open left operand;
-- a recursor-derived structured encoder and a structured decoder, each
-  compared transparently with the corresponding word/Nat function;
-- both arbitrary inverse laws by free-word and Nat induction;
+- a recursor-derived structured encoder and a structured decoder whose
+  zero/successor laws derive from their generator betas and generic strict
+  functoriality;
+- `walking_decode_encode_roundtrip`, proved for the actual semantic actions by
+  `walking_end_hom_ind`, with every step consuming the HIT-derived encoder
+  successor law and the decoder successor law;
+- `walking_encode_decode_roundtrip`, proved for the actual semantic actions by
+  Nat induction;
 - `TypeEquiv` and native `OmegaEquiv_EQ1` packages for
-  `Hom(WalkingEnd,base,base) ~= Nat`;
+  `Hom(WalkingEnd,base,base) ~= Nat`, whose forward projection is
+  `walking_encode_action` rather than a helper length function;
 - internal local-discreteness/`OneCat` evidence; and
 - derived loop nonidentity and noninvertibility, with downstream diagnostics
   showing that alleged internal groupoidality yields `Empty_grpd`.
@@ -76,8 +92,17 @@ The crucial revised decision is:
 point beta       runtime/judgmental
 generator beta   equality evidence
 composite action global strict functoriality only
-arbitrary arrow  WalkingWord induction
+arbitrary arrow  intrinsic walking_end_hom_ind
+hom equivalence  actual encoder/decoder actions
 ```
+
+This is the requested practical computation/freeness result. It does not
+require or claim an initiality theorem for the entire functor category.
+Generic `path_ind_sec` is also not part of this proof: it consumes an already
+functorial `Catd` motive on `PathOut` and cannot by itself manufacture the raw
+arrow-indexed round-trip motive or its higher action. A future generic
+PathOut/transfor presentation remains possible after such a motive constructor
+exists; it is not a prerequisite for the concrete theorem.
 
 This is the directed analogue of the ordinary intensional Circle boundary.
 The [HoTT/Coq Circle implementation](https://github.com/HoTT/HoTT/blob/master/theories/Spaces/Circle.v)
@@ -99,6 +124,25 @@ variables: exactly six more critical pairs than the kernel baseline, three
 from the constructor-directed `WalkingEnd` composition and the same three
 from `BNat`.  There is no eliminator/action critical-pair family.  Strict LHS
 audit of the promoted module has zero unreviewed clauses.
+
+For the later HIT-elimination correction, the standalone semantic proof is
+`tmp/probes/wehit_semantic_roundtrip.lp` (quiet log
+`logs/probes/wehit_semantic_roundtrip-20260718-121324.log`). The intended-owner
+copy is `tmp/probes/wehit_intrinsic_hom_owner.lp` (quiet/warning logs
+`logs/probes/wehit_intrinsic_hom_owner-20260718-121613.log` and
+`logs/probes/wehit_intrinsic_hom_owner-20260718-121624.log`). It passes with
+the same `977/157` warning inventory and zero unreviewed LHS clauses. The
+promoted owner then passes in
+`logs/probes/emdash3_2_walking_end_hit-20260718-122532.log`. The correction
+adds no rewrite or unification rule.
+
+The target-generic recursor-step theorem was isolated in
+`tmp/probes/wehit_generic_rec_step.lp`; its final focused log is
+`logs/probes/wehit_generic_rec_step-20260718-123719.log`. The final promoted
+owner quiet/warning logs are
+`logs/probes/emdash3_2_walking_end_hit-20260718-123823.log` and
+`logs/probes/emdash3_2_walking_end_hit-20260718-123953.log`; the latter remains
+exactly `977/157`.
 
 Despite its chronological proximity to older `wehit_mvp_owner` experiments,
 `wehit_circle_style_owner.lp` is the **post-Coq/Agda theorem-first** probe: its
@@ -135,9 +179,12 @@ The active diagnostics deliberately contain both sides of the boundary:
 - a typed derived loop-square equality;
 - a negative conversion check showing that raw generator action does not
   reduce to the supplied arrow; and
-- arbitrary transparent word/Nat round-trip proofs, together with negative
-  conversion checks showing that open round trips are propositional rather
-  than proof-erased runtime equations.
+- both hom-induction constructor beta checks;
+- arbitrary transparent semantic-action round-trip proofs, together with
+  negative conversion checks showing that open round trips are propositional
+  rather than proof-erased runtime equations; and
+- a check that the `TypeEquiv` forward projection is the recursor-derived
+  `walking_encode_action`.
 
 The 2026-07-18 post-completion consolidation is also closed. The reusable Nat
 slice is a 116-line/6-symbol/1-rule module; the walking owner is now
@@ -150,11 +197,21 @@ audits have zero unreviewed clauses. The refreshed health report is current,
 and synchronized local CI passes with 128.448 seconds of measured checking
 time.
 
+The subsequent HIT-elimination correction is now also closed. The walking
+owner is 818 lines/44 symbols/13 rules/2 unifiers; the removal of parallel
+helper functions more than offsets the generic recursor-step and semantic
+round-trip theorems. The permanent suite has 1,980 classified diagnostics
+across 72 areas (1,741 positive and 239 negative), the focused reviewer example
+has 22 statements, and all 55 targets pass. Warning inventories remain kernel
+`971/157` and walking `977/157`; both strict audits have zero unreviewed
+clauses. Checked health passes in 121.390 seconds and synchronized local CI
+passes in 171.313 seconds.
+
 Both one-object sources expose the same reusable proof-time identity pattern:
-`walking_functor_zero_view` and `bnat_functor_zero_view` compare action on the
-normalized zero word with target identity. The concrete encoder and decoder
-zero proofs route through those generic source views; no encoder-specific or
-decoder-specific unification rule remains.
+`walking_functor_id_view` and `bnat_functor_zero_view` compare action on the
+respective normalized source identity with target identity. The concrete
+encoder and decoder identity/zero proofs route through those generic source
+views; no encoder-specific or decoder-specific unification rule remains.
 
 ### Why the formerly blocked runtime requirement was rejected
 
@@ -171,13 +228,13 @@ this gave the loop square two normal-form paths: generator beta first exposed
 ordinary intensional Circle interface and created a second authority for
 composite action.
 
-An explicit `WalkingWord` "spiral" plus the narrow proof-time comparison
+An explicit generated-hom "spiral" plus the narrow proof-time comparison
 `D[zero](u) == u` repaired closed base/loop/loop-square examples; see
 `logs/probes/wehit_mvp_owner-20260718-003850.log`.  It still could not make the
 open provenance equation `F[g] o f == F[g o loop]` judgmental after generator
 beta erased the fact that `f` came from `F[loop]`.  This was useful evidence:
 the missing endpoint variable was not the fundamental issue once arbitrary
-directed arrows had their own word induction.
+directed arrows had their own generated-hom induction.
 
 A stable precomposition/action head also made selected equations pass, but it
 overlapped every target-specialized generic action owner and added 88
@@ -189,21 +246,24 @@ below, but neither is part of the selected architecture.
 
 ### Trust and completeness boundary
 
-`walking_end_ind_sec` and its generator beta are primitive HIT interface, in
-the same sense that an inductive or higher-inductive eliminator and its beta
-law belong to a foundational presentation.  They are not standalone
-round-trip or Hom-classification axioms.  The eliminator returns a structured
-section for every `Catd` motive, the ordinary recursor is definitionally
-routed through it, and the encoder materially uses that recursor.  The arrow
-syntax and its eliminator separately provide the directed freeness principle
-needed for arbitrary composite arrows; unlike groupoidal J, directed arrow
-induction cannot reduce every arrow to identity.
+`walking_end_ind_sec` and its generator beta are the primitive structured HIT
+interface, in the same sense that a higher-inductive eliminator and its beta
+law belong to a foundational presentation. `walking_end_hom_ind` is the
+transparent eliminator generated by the HIT's native inductive hom carrier.
+They are not standalone round-trip or Hom-classification axioms. The section
+eliminator returns a structured section for every `Catd` motive, the ordinary
+recursor is definitionally routed through it, and the encoder materially uses
+that recursor. Hom induction provides the directed freeness principle needed
+for arbitrary composite arrows; unlike groupoidal J, directed arrow induction
+cannot reduce every arrow to identity.
 
 The decoder is a primitive structured functor head because Emdash functors
 are semantic objects rather than record literals.  Its only special law is
-propositional generator beta.  The full capped action is not assumed: it is
-proved by Nat induction to agree with `nat_to_walking_word`.  Likewise, the
-hom equivalence is packaged only after both transparent inverse proofs.
+propositional generator beta. Its zero and successor action theorems are
+derived, not assumed. The complete decoder-after-encoder law is proved by HIT
+hom induction, and the reverse is proved by Nat induction. The hom equivalence
+is packaged from those actual semantic actions only after both transparent
+inverse proofs.
 
 This operational MVP does **not** prove an external model, global confluence,
 normalization, canonicity, a general directed-HIT schema, or categorical
@@ -319,14 +379,13 @@ interface that does all of the following:
 4. supplies an eta/arrow-induction principle for arbitrary generated arrows;
 5. does not identify the HIT hom with Nat before the comparison proof.
 
-An explicit internal `WalkingWord` syntax distinct from `Nat_grpd` is one
-candidate, but it is not yet selected: its dependent action and higher path
-functor must be probed before it can be called the HIT rather than another
-model. The other candidate is a broader kernel-level registration/refactor of
-category-specific composition computation so generic functor/transfor/hom
-owners remain authoritative. A proof-time-only `BNat` comparison or explicit
-evaluation operation is useful as a weaker interface, but does not satisfy
-this plan's runtime normal-form claim.
+At that checkpoint an explicit internal generated-hom syntax distinct from
+`Nat_grpd` was only a candidate. It was subsequently selected after the owner
+probes, but the later review corrected its ownership: `walking_end_hom` is the
+carrier of the HIT's own Hom classifier and `walking_end_hom_ind` is its
+hom-level eliminator, not an additional model beside `WalkingEnd_cat`.
+`BNat_cat` alone is the external normal-form model. The broader kernel-level
+composition-registration alternative remains rejected.
 
 That checkpoint's conclusion is retained as rejected-decision evidence.  The
 selected theorem-first architecture above implements `WalkingEnd_cat`,
@@ -379,8 +438,9 @@ is instead:
 7. computational observations sending identity to zero, the generating loop
    to one, and composition to addition.
 
-This makes the example a real test of elimination and initiality rather than
-an abbreviation for a preselected hom-category.
+This makes the example a real test of elimination and practical
+arbitrary-arrow computation rather than an abbreviation for a preselected
+hom-category. Full functor-category initiality is a separate optional theorem.
 
 ## Why This Is The Right First Representative HIT
 
@@ -514,7 +574,8 @@ MVP: raw generator action must remain stuck so that generic strict
 functoriality is the sole runtime composite-action owner.
 
 Mathematically there is no extra relation on the generator, so no independent
-algebra law is requested from the user. Computationally, `WalkingWord`
+algebra law is requested from the user. Computationally,
+`walking_end_hom_ind` is the intrinsic hom component of this HIT interface and
 supplies induction over arbitrary generated directed arrows. Composite action
 is then proved from generator beta plus strict functoriality; it is not
 installed as another normalization family.
@@ -570,15 +631,18 @@ classifier `Sigma x, Hom_C(x,x)`.
 
 The initial operational milestone does not construct that entire category
 equivalence.  The selected concrete free presentation instead exposes
-`walking_word_elim`, the induction principle for every generated directed
-arrow.  It proves the reverse Nat round trip transparently.  Full uniqueness
-of functors at all transfor levels remains a separate strengthening.
+`walking_end_hom_ind`, the induction principle for every generated directed
+arrow. It proves `decode_action(encode_action(w)) = w` transparently for the
+actual functor actions. Full uniqueness of functors at all transfor levels
+remains a separate and currently unnecessary strengthening.
 
-This is not a standalone round-trip capability: the proof body is native word
-induction and the encoder itself is produced by the dependent eliminator's
-constant-motive specialization.  A future abstract HIT interface lacking an
-explicit free-arrow presentation would still need a corresponding arrow-eta
-or extensionality principle.
+This is not a standalone round-trip capability: the proof body is intrinsic
+hom induction; its successor case consumes the encoder theorem derived from
+the structured HIT loop beta and the structured decoder theorem derived from
+its generator beta. The encoder itself is produced by the dependent
+eliminator's constant-motive specialization. A future abstract HIT interface
+lacking an explicit generated-hom presentation would still need a
+corresponding arrow-eta or extensionality principle.
 
 Three more abstract proof presentations remain candidates for that future
 strengthening:
@@ -592,8 +656,10 @@ strengthening:
    are arbitrary outgoing arrows and whose target property is the desired
    arrow round trip.
 
-These are alternative presentations of the same freeness argument. They were
-not required for this explicit one-generator free-word MVP.
+These are potential generic presentations of the same practical result, but
+none is currently available for free: in particular `path_ind_sec` requires
+the `PathOut` motive and its action to have already been constructed. They are
+not required for this explicit one-generator intrinsic-hom MVP.
 
 ## The Separate Nat Normal-Form Model
 
@@ -695,45 +761,40 @@ walking_encode(loop)        =  succ(zero)
 walking_encode(g o f)       =  nat_add(walking_encode(g),walking_encode(f))
 ```
 
-`walking_functor_zero_view`, `walking_end_rec_beta_loop`, and
+`walking_functor_id_view`, `walking_end_rec_beta_loop`, and
 `walking_encode_comp_view` derive these equations from generic strict
 functoriality plus the selected `BNat_cat` normal form. There is no duplicated
 encode-specific preservation rewrite.
 
 ### 2. Decoding Nat normal forms
 
-Define powers transparently by Nat recursion, publicly named
-`nat_to_walking_word`:
+The reverse direction is the semantic functor
+`walking_decode_func : Functor(BNat_cat,WalkingEnd_cat)`, and its named capped
+action is `walking_decode_action`. Its derived observations are:
 
 ```text
-nat_to_walking_word(zero)   := id
-nat_to_walking_word(succ n) := loop o nat_to_walking_word(n)
+walking_decode_action(zero)   = id
+walking_decode_action(succ n) = loop o walking_decode_action(n)
 ```
 
-with the exact composition orientation synchronized with `nat_add`.
-
-The comparison ideally packages this as:
-
-```text
-walking_decode_func : Functor(BNat_cat,WalkingEnd_cat),
-```
-
-whose arrow action is propositionally identified with
-`nat_to_walking_word`. A capped raw function is insufficient for the final
-result because the functor must remain iterable at higher homs.
+The zero theorem uses the reusable functor-on-source-identity view; the
+successor theorem uses the decoder generator beta and generic strict
+functoriality. No parallel Nat-recursive raw function is retained. A capped raw
+function would be insufficient because the decoder must remain iterable at
+higher homs.
 
 ### 3. Round trips
 
 The easy round trip should be derived by Nat induction:
 
 ```text
-walking_word_to_nat(nat_to_walking_word(n)) = n.
+walking_encode_action(walking_decode_action(n)) = n.
 ```
 
 The decisive HIT round trip is:
 
 ```text
-nat_to_walking_word(walking_word_to_nat(p)) = p
+walking_decode_action(walking_encode_action(p)) = p
 ```
 
 for arbitrary
@@ -742,16 +803,18 @@ for arbitrary
 p : Hom(WalkingEnd_cat,base,base).
 ```
 
-This proof materially uses `walking_word_elim`, the structured induction
-theorem for arbitrary generated arrows.  Together with the recursor-derived
-encoder, this satisfies the concrete freeness gate. A direct global axiom, an
-opaque round-trip theorem with no body, or a hom-to-Nat rewrite inserted
-before the proof would not satisfy the plan.
+This proof materially uses `walking_end_hom_ind`, the intrinsic hom component
+of the HIT elimination interface. Its step explicitly uses both semantic
+successor theorems, including the encoder theorem derived from
+`walking_end_ind_beta_loop`. Together with the recursor-derived encoder, this
+satisfies the concrete practical freeness gate. A direct global axiom, an
+opaque round-trip theorem with no body, a helper-syntax equivalence, or a
+hom-to-Nat rewrite inserted before the proof would not satisfy the plan.
 
-After both round trips, package the result first through the active native
-groupoid-equivalence interface, for example an
-`OmegaEquiv_EQ1(Grpd_cat,Hom(...),Nat_grpd)`, and derive a `TypeEquiv`
-comparison only as useful library surface. Do not introduce a new decoder.
+After both round trips, package the actual `walking_encode_action` and
+`walking_decode_action` through `EquivByInverse` and `TypeEquiv`, then derive
+the native `OmegaEquiv_EQ1` comparison. Do not introduce another decoder or a
+parallel carrier-level forward map.
 
 ### 4. Stronger comparison
 
@@ -815,7 +878,7 @@ The implementation assessed the intended fork:
 3. the MVP selected a semantic structured functor
    `walking_decode_func : Functor(BNat_cat,WalkingEnd_cat)` with object beta,
    propositional generator beta, and a Nat-inductive theorem identifying its
-   complete capped action with `nat_to_walking_word`.
+   complete capped action with `walking_decode_action`.
 
 Selection criteria are:
 
@@ -891,11 +954,12 @@ comp(BNat,g,zero)    -> g
 comp(BNat,succ(g),f) -> succ(comp(BNat,g,f)).
 ```
 
-`WalkingEnd` uses the same constructor-directed shape on `WalkingWord`.
+`WalkingEnd` uses the same constructor-directed shape on its intrinsic
+`WalkingEndHom_grpd` carrier.
 `nat_add` recurses on its left input in the same orientation, and
-`walking_word_to_nat_comp` proves that word composition maps to
-`nat_add(length(g),length(f))`. Open composition retains `comp_fapp0`; it is
-not silently normalized to an arithmetic head.
+`walking_encode_comp_view` proves that intrinsic-hom composition maps to
+`nat_add(encode_action(g),encode_action(f))`. Open composition retains
+`comp_fapp0`; it is not silently normalized to an arithmetic head.
 
 The owner probe tested both reduction orders for:
 
@@ -982,17 +1046,22 @@ Do not combine a file split with a rewrite-normal-form migration.
 Post-completion consolidation applies that boundary literally: reusable Nat
 addition, associativity, Unit/Empty proposition evidence, and Nat sethood now
 live in `emdash3_2_nat_arithmetic.lp`. The walking module imports them while
-retaining `WalkingWord`, both one-object categories, the eliminator,
+retaining the intrinsic `WalkingEndHom_grpd` carrier, both one-object
+categories, the eliminators,
 encode/decode, equivalence packages, and directed negative results. The usual
 unqualified arithmetic spellings remain transitively available to clients of
 the walking module; their module-qualified owner intentionally moves. No
-rule, unifier, theorem body, or runtime normal form changed in the split.
+rule, unifier, theorem body, or runtime normal form changed in that split. The
+later HIT-elimination correction removed the parallel carrier functions and
+changed the equivalence theorem bodies, while still adding no rule or unifier.
 
 The selected public surface is:
 
 ```text
-WalkingWord_grpd
-walking_word_elim
+WalkingEndHom_grpd
+walking_end_hom_id
+walking_end_hom_step
+walking_end_hom_ind
 WalkingEnd_cat
 walking_base
 walking_loop
@@ -1000,18 +1069,24 @@ walking_end_ind_sec
 walking_end_ind_beta_loop
 walking_end_rec_func
 walking_end_rec_beta_loop
+walking_end_rec_step_view
 
 BNat_cat
 bnat_obj
 bnat_generator
 nat_add
 bnat_comp_nat_add
-walking_word_to_nat
-nat_to_walking_word
+walking_encode_action
 walking_encode_func
+walking_encode_succ_view
 walking_encode_comp_view
 walking_decode_func
+walking_decode_action
+walking_decode_succ_view
 walking_decode_comp_view
+walking_decode_encode_roundtrip
+walking_encode_decode_roundtrip
+walking_hom_nat_by_inverse
 walking_hom_nat_type_equiv
 walking_hom_nat_omega_equiv_EQ1.
 ```
@@ -1125,9 +1200,11 @@ are not the final boundary.
 
 1. Prove encode-after-power by Nat induction.
 2. Derive power-after-encode for arbitrary generated arrows from native
-   `WalkingWord` induction.
+   `walking_end_hom_ind`, using the successor laws of the actual semantic
+   encoder and decoder actions.
 3. Retain displayed-logical-relation, endofunctor-transfor, and structured
-   `PathOut` presentations as future abstract-initiality strengthenings.
+   `PathOut` presentations as future generic strengthenings that first require
+   a reusable structured motive/transfor constructor.
 4. Keep full functor/transfor extensionality outside the concrete Hom
    equivalence boundary.
 5. Package the hom equivalence in native EQ1 form and derive the optional
@@ -1140,8 +1217,9 @@ tautological.
 
 ### Phase 7: selected univalence and dimension consumers — completed; full initiality deferred
 
-1. Record full functor/transfor uniqueness as a strengthening beyond the
-   explicit free-word Hom result.
+1. Record full functor/transfor uniqueness as an optional strengthening beyond
+   the practical intrinsic-hom computation result, not as this milestone's
+   acceptance condition.
 2. Defer category-level equivalence with `BNat_cat` and the category of
    endomorphism algebras.
 3. Prove loop nonidentity, loop noninvertibility, and category
@@ -1170,15 +1248,18 @@ remaining gap has an exact owner/prerequisite.
 ## Implemented First Slice And Revised Decision
 
 The original slice exposed the raw loop-beta/composite-action conflict. A
-later explicit-word probe showed that arbitrary directed arrows have the
+later generated-hom probe showed that arbitrary directed arrows have the
 required induction structure, while comparison with standard Circle
 interfaces showed that raw loop beta was an unnecessarily strong acceptance
-condition. The theorem-first revision is now promoted.
+condition. The theorem-first revision was promoted, and the later peer-review
+correction rerouted the exported equivalence through the actual semantic
+actions.
 
 The realized first slice is:
 
 1. owner-position probe of the exact dependent eliminator type;
-2. native non-Nat `WalkingWord` syntax and `WalkingEnd_cat` composition;
+2. native non-Nat intrinsic `WalkingEndHom_grpd` carrier,
+   `walking_end_hom_ind`, and `WalkingEnd_cat` composition;
 3. `walking_end_ind_sec` returning `Pi_cat D`;
 4. base projection beta through `piapp0`;
 5. a propositional loop beta at `piapp1_fapp0`;
@@ -1186,31 +1267,35 @@ The realized first slice is:
    loop-square theorem;
 7. negative assertions that the hom does not reduce to Nat and the loop does
    not reduce to identity;
-8. warning/LHS comparison, BNat comparison, both round trips, and bounded
-   active checks.
+8. semantic encode/decode round trips whose decisive source proof is headed by
+   `walking_end_hom_ind` and consumes the HIT-derived successor law;
+9. warning/LHS comparison, BNat comparison, and bounded active checks.
 
 This slice answers the central feasibility question positively: the current
 `Catd`/section/action kernel can host a structured dependent eliminator for a
 genuine directed arrow constructor when the generator beta is propositional
-and composite runtime action remains globally owned. Generic `PathMap` was
-not used to conceal or implement that boundary.
+and composite runtime action remains globally owned. Its intrinsic hom
+eliminator can then prove practical arbitrary-arrow computation for the
+recursor's actual action. Generic `PathMap` or `PathOut` was not used to
+conceal or implement that boundary.
 
 ## Probe And Diagnostic Matrix
 
 | Area | Positive requirement | Negative/control requirement |
 | --- | --- | --- |
 | HIT formation | base and loop typecheck | no Hom-to-Nat conversion |
+| HIT hom induction | identity/step beta compute and motives range over the intrinsic Hom carrier | no second external word model or opaque arrow-induction axiom |
 | dependent motive | loop lift has exact `D[loop](u) -> u` endpoint | raw family is not silently accepted as `Catd` |
 | base beta | `piapp0(ind,base)` computes to `u` | unrelated section projection does not fold |
 | loop beta | `walking_end_ind_beta_loop` inhabits the exact displayed equality | raw generator/arbitrary action does not fold to the lift |
-| recursor | constant motive yields `Functor(W,C)` | no independent primitive recursor body |
+| recursor | constant motive yields `Functor(W,C)` and target-generic generated-step computation | no independent primitive recursor body or target-specific action rule |
 | Nat model | id/loop/comp expose 0/1/addition | open terms do not collapse by commutativity |
 | category units | both generic/category-specific orders join | no duplicate global unit rule |
 | associativity | typed generic associativity survives Nat exposure | no claim that proof-time firing is runtime normalization |
 | path map | specialized decoder remains an iterable Functor | capped `eq_ap` alone is not called a functor package |
 | encode | point computes; loop/comp laws are derived | no encode-specific duplicate functor laws |
 | decode | zero/successor action laws are derived | no claim that a raw function generated the semantic functor |
-| round trips | both arbitrary directions have bodies | no prior Hom rewrite or bodyless theorem |
+| round trips | actual semantic actions are inverse; source proof uses hom induction and HIT-derived successor beta | no helper-syntax equivalence, prior Hom rewrite, or bodyless theorem |
 | nonidentity | encoded loop/identity equality reaches Empty | loop is not declared unequal axiomatically |
 | nongroupoidality | alleged evidence yields Empty | absence of constructor alone is not a proof |
 | Join relation | dependency remains one-way/conceptual | no claim `Join(Unit,Unit)=WalkingEnd` |
@@ -1219,29 +1304,30 @@ not used to conceal or implement that boundary.
 
 | Deliverable | Mathematical feasibility | Current computational feasibility | Assessment |
 | --- | --- | --- | --- |
-| Nat addition and powers | standard | `nat_add`, associativity, and transparent word powers promoted | complete |
+| Nat addition and powers | standard | `nat_add`, associativity, and semantic decoder successor theorem promoted | complete |
 | `Nat_grpd` sethood | standard | nested native Nat induction now supplies an internal term | complete |
 | transparent `BNat_cat` | standard one-object monoid category | constructor-directed composition preserves the generic head on open arrows | complete; three measured owner overlaps |
 | dependent eliminator formation | standard induction principle for the free category | exact `Catd`/`Pi_cat` signature active | complete at MVP interface |
 | base constructor beta | standard | stable terminal-component runtime owner | complete |
 | loop constructor beta | standard intensional HIT equality | primitive exact equality evidence; no raw action rewrite | complete at selected boundary |
-| derived constant recursor | standard | definitionally routes through the dependent eliminator; loop square derived | complete |
+| derived constant recursor | standard | definitionally routes through the dependent eliminator; target-generic step theorem and loop square derived | complete |
 | generic `PathMap` | standard functorial action of functions on paths | recursive higher action and generic composition diamonds remain unresolved | deferred; not an MVP blocker |
-| specialized power functor | standard monoid functor | semantic Functor head plus Nat-inductive action agreement | complete at specialized boundary |
-| encode-after-decode | Nat induction | transparent Nat proof | complete |
-| decode-after-encode | free-arrow induction | transparent WalkingWord proof | complete |
-| native hom equivalence | follows from round trips | `TypeEquiv` and native EQ1 packages compute on forward map | complete |
-| loop noninvertibility | elementary free-word argument | native inverse-law projections reach Empty | complete |
+| specialized power functor | standard monoid functor | semantic Functor head plus derived zero/successor action laws | complete at specialized boundary |
+| encode-after-decode | Nat induction | transparent proof over actual semantic actions | complete |
+| decode-after-encode | intrinsic HIT hom induction | transparent proof over actual semantic actions; step consumes recursor loop beta | complete |
+| native hom equivalence | follows from semantic round trips | `TypeEquiv` and native EQ1 packages expose `walking_encode_action` as forward map | complete |
+| loop noninvertibility | elementary intrinsic-hom argument | native inverse-law projections reach Empty | complete |
 | nongroupoidality | follows immediately | active `IsGroupoidalCat_EQ1` consumer exposes loop evidence | complete in diagnostics |
-| full functor-category initiality | classical | requires an endomorphism-algebra category and coherent extensionality | medium/low; strengthening |
+| full functor-category initiality | classical | requires an endomorphism-algebra category and coherent extensionality | feasible later but unnecessary strengthening |
 | generic directed-HIT schema | mathematically plausible | beyond one constructor and current Join staging | deferred research/architecture |
 
 Overall, the mathematical target is sound and the selected small extension is
 computationally feasible. What was infeasible was the stronger demand for a
 raw generator-action rewrite alongside the existing strict-functor cut, and
 the direct open collapse of semantic BNat composition to addition. Explicit
-free-arrow syntax, propositional generator beta, constructor-directed
-composition, and theorem-level comparisons form a coherent alternative.
+an intrinsic generated-hom carrier/eliminator, propositional generator beta,
+constructor-directed composition, and semantic-action theorems form a
+coherent alternative.
 Remaining work concerns generic abstraction and external metatheory, not the
 selected concrete Hom-to-Nat MVP.
 
@@ -1267,16 +1353,17 @@ the theorem into a computation claim.
 
 ### Risk 4: functor uniqueness is assumed
 
-Mitigation: make the reverse Nat round trip an acceptance gate. The concrete
-MVP discharges it by native free-arrow induction. Full functor/transfor
-uniqueness remains explicitly deferred rather than inferred from the Hom
-round trip.
+Mitigation: make the semantic decoder-after-encoder round trip an acceptance
+gate. The concrete MVP discharges it by native HIT hom induction, whose step
+uses the recursor's loop beta. Full functor/transfor uniqueness is not needed
+for practical computation and remains explicitly separate rather than inferred
+from the Hom round trip.
 
 ### Risk 5: one `ObsAction` is mistaken for an omega-functor
 
 Mitigation: retain `ObsAction` unchanged. The specialized decoder is declared
-as an ordinary semantic functor and its complete first action is compared by
-Nat induction; no raw-function-to-functor constructor is claimed.
+as an ordinary semantic functor and its zero/successor action laws and inverse
+theorems are derived; no raw-function-to-functor constructor is claimed.
 
 ### Risk 6: category-specific composition duplicates hom-action owners
 
@@ -1316,22 +1403,23 @@ semantic-model proof. Those remain the parent's deferred metatheory track.
 | `WEHIT-IND-SHAPE` | **completed/revised 2026-07-18** | type exact `Catd` motive, loop lift, section result, and beta interface | adoption | exact signature and point beta active; loop beta selected as equality evidence after Circle-interface comparison; loop square derived |
 | `WEHIT-NAT-ADD` | **completed/promoted 2026-07-17** | transparent Nat monoid operations and laws | adoption | constructor/open unit computation and transparent associativity active with no warning/audit delta |
 | `WEHIT-NAT-SET` | **completed/promoted 2026-07-17** | internal `IsSetGrpd Nat_grpd` proof | Nat equality/truncation kernel | nested Nat-induction proof, permanent diagnostics, and reviewer example pass |
-| `WEHIT-COMP-OWNER` | **resolved by revised boundary 2026-07-18** | preserve the single generic composite-action owner | measured HIT and BNat failures | explicit `WalkingWord` induction selected; raw loop beta/direct open addition rejected; constructor composition adds only six measured owner pairs |
+| `WEHIT-COMP-OWNER` | **resolved by revised boundary 2026-07-18** | preserve the single generic composite-action owner | measured HIT and BNat failures | intrinsic `walking_end_hom_ind` selected; raw loop beta/direct open addition rejected; constructor composition adds only six measured owner pairs |
 | `WEHIT-BNAT-MODEL` | **completed/promoted 2026-07-18** | separate transparent one-object Nat category | Nat addition/sethood and revised composition owner | constructor-directed identity/composition, generator, local discreteness, and OneCat evidence active |
-| `WEHIT-HIT-INTRO` | **completed/promoted 2026-07-18** | add HIT category, base, and directed loop without Hom-to-Nat conversion | explicit WalkingWord syntax | native word hom and nonidentity directed generator active |
+| `WEHIT-HIT-INTRO` | **completed/promoted 2026-07-18** | add HIT category, base, and directed loop without Hom-to-Nat conversion | intrinsic generated-hom syntax | native Hom carrier and nonidentity directed generator active |
 | `WEHIT-HIT-IND` | **completed at propositional-loop-beta boundary 2026-07-18** | dependent eliminator, runtime point beta, equality generator beta | HIT introductions | structured `Catd` section interface active; raw loop action retained as negative conversion control |
 | `WEHIT-REC` | **completed/promoted 2026-07-18** | derive nondependent recursor from constant motive | dependent eliminator | body routes through `walking_end_ind_sec`; loop beta and loop-square equality have explicit terms |
-| `WEHIT-PATH-MAP` | **completed at specialized boundary; generic constructor deferred 2026-07-18** | honest structured reverse comparison | Nat model and comparison consumer | `walking_decode_func` is iterable; generator beta plus Nat-inductive action agreement active; `ObsAction` unchanged |
-| `WEHIT-ENCODE` | **completed/promoted 2026-07-18** | recursor-derived functor from HIT to Nat model | recursor and `BNat_cat` | point computation, generator beta, successor and arbitrary word-length agreement active |
-| `WEHIT-DECODE` | **completed/promoted 2026-07-18** | Nat-power functor from model to HIT | Nat recursion and specialized path-map fork | object beta, generator beta, zero/successor and arbitrary Nat agreement active |
-| `WEHIT-ROUNDTRIP-NAT` | **completed/promoted 2026-07-18** | encode after power | transparent functions | native Nat-induction proof |
-| `WEHIT-ROUNDTRIP-HIT` | **completed/promoted 2026-07-18** | power after encode for arbitrary generated arrow | WalkingWord induction | native free-arrow induction proof; open conversion remains negative |
-| `WEHIT-HOM-EQUIV` | **completed/promoted 2026-07-18** | native EQ1 hom equivalence and TypeEquiv view | both round trips | transparent inverse package and computational forward observers active |
+| `WEHIT-PATH-MAP` | **completed at specialized boundary; generic constructor deferred 2026-07-18** | honest structured reverse comparison | Nat model and comparison consumer | `walking_decode_func` is iterable; generator beta and derived zero/successor laws active; `ObsAction` unchanged |
+| `WEHIT-ENCODE` | **completed/promoted 2026-07-18** | recursor-derived functor from HIT to Nat model | recursor and `BNat_cat` | point computation, generator beta, and successor/composition theorems active |
+| `WEHIT-DECODE` | **completed/promoted 2026-07-18** | Nat-power functor from model to HIT | Nat model and specialized path-map fork | object beta, generator beta, and zero/successor/composition theorems active |
+| `WEHIT-ROUNDTRIP-NAT` | **completed/corrected 2026-07-18** | encode after decode | semantic encoder/decoder actions | native Nat-induction proof over actual actions |
+| `WEHIT-ROUNDTRIP-HIT` | **completed/corrected 2026-07-18** | decode after encode for arbitrary generated arrow | intrinsic hom induction and HIT loop beta | `walking_end_hom_ind` proof over actual actions; each step uses both derived successor laws; open conversion remains negative |
+| `WEHIT-HOM-EQUIV` | **completed/corrected 2026-07-18** | native EQ1 hom equivalence and TypeEquiv view | semantic round trips | transparent inverse package exposes `walking_encode_action`/`walking_decode_action`, not helper carrier functions |
+| `WEHIT-HIT-COMPUTE-CORRECTION` | **completed/promoted/validated 2026-07-18** | ensure practical freeness materially uses HIT elimination | independent peer-review defect | parallel word-datatype framing and helper-map equivalence removed; intrinsic hom ownership and target-generic recursor step made explicit; semantic-action round trips active; 1,980 checks/72 areas, 22-statement example, 55 targets, warning inventories `971/157` and `977/157`, zero audit findings, 121.390s health, and 171.313s CI pass |
 | `WEHIT-INITIALITY` | **deferred strengthening** | functor uniqueness/category-of-algebras comparison | Hom round trip and transfor extensionality | concrete free-arrow result does not overclaim full higher functor-category initiality |
-| `WEHIT-NONIDENTITY` | **completed/promoted 2026-07-18** | prove loop differs from identity | WalkingWord no-confusion | alleged equality is an Empty inhabitant |
+| `WEHIT-NONIDENTITY` | **completed/promoted 2026-07-18** | prove loop differs from identity | intrinsic hom no-confusion | alleged equality is an Empty inhabitant |
 | `WEHIT-NONINVERTIBLE` | **completed/promoted 2026-07-18** | prove loop has no equivalence evidence | constructor composition and EQ1 projections | alleged left inverse law reaches Empty |
 | `WEHIT-NONGROUPOIDAL` | **completed diagnostic 2026-07-18** | prove category is not groupoidal | noninvertibility and active groupoidality API | alleged global evidence yields loop evidence then Empty |
-| `WEHIT-ONECAT` | **completed/promoted 2026-07-18** | derive ordinary one-category dimension | Nat/WalkingWord sethood | both path homs have `IsDiscreteCat`; both one-object categories have `IsNCat(cat_one,...)` |
+| `WEHIT-ONECAT` | **completed/promoted 2026-07-18** | derive ordinary one-category dimension | Nat/intrinsic-hom sethood | both path homs have `IsDiscreteCat`; both one-object categories have `IsNCat(cat_one,...)` |
 | `WEHIT-JOIN-FOLLOWUP` | deferred separate plan | use dependent-HIT pattern to reassess Join elimination | completed walking HIT | new bounded plan; no implementation in this task |
 | `WEHIT-GROUPOID-COMPLETION` | deferred separate plan | compare `BNat` with free invertible loop/`BInt` | completed walking HIT | separately reviewed architecture |
 | `WEHIT-CONSOLIDATE` | **completed 2026-07-18** | synchronize code, examples, reports, and gates | implemented selected MVP | 1,977-check catalog, 54-target health, warnings/audits, all examples, and full local CI pass |
@@ -1370,16 +1458,22 @@ initiality, Join follow-up, or groupoid completion.
 
 The directed-HIT implementation is complete only when:
 
-1. the HIT and Nat model remain independently presented;
+1. the intrinsic HIT hom carrier and external Nat model remain independently
+   presented, without misdescribing the former as a second model;
 2. the dependent eliminator, judgmental point beta, and propositional
    generator beta are active;
 3. the nondependent recursor is derived from that eliminator;
 4. encode and decode retain iterable higher structure;
-5. both arbitrary round trips are proved without an earlier Hom-to-Nat rule;
-6. the native hom equivalence is packaged;
+5. both arbitrary round trips concern the actual semantic encoder/decoder
+   actions, and the source-side proof uses intrinsic hom induction plus the
+   HIT-derived successor theorem, without an earlier Hom-to-Nat rule;
+6. the native hom equivalence is packaged with `walking_encode_action` as its
+   forward projection;
 7. required positive/negative examples and all proportional gates pass;
-8. claims about nonidentity, noninvertibility, nongroupoidality, dimension, or
-   full initiality are made only when their corresponding rows are discharged.
+8. claims about nonidentity, noninvertibility, nongroupoidality, or dimension
+   are made only when their corresponding rows are discharged; full
+   functor-category initiality is explicitly not required for practical
+   computation.
 
 All eight conditions pass at the selected theorem-first boundary. The plan is
 therefore complete for the concrete walking-endomorphism/BNat MVP. Further
@@ -1399,14 +1493,17 @@ A hard blocker must record:
 
 The 2026-07-17 checkpoint met this policy for the then-apparent
 `WEHIT-COMP-OWNER` blocker. Subsequent probes resolved it by revising the raw
-beta requirement and selecting explicit free-arrow induction. The rejected
+beta requirement and selecting explicit generated-hom induction. The rejected
 logs remain decision evidence; they are no longer a terminal blocker.
 
 The generic `PathMap` candidate is not a blocker because the specialized
-structured decoder and its Nat-inductive action agreement pass. The reverse
-HIT round trip is discharged by explicit free-arrow induction. A future
-abstract HIT without native arrow syntax would again need a reusable
-extensionality/arrow-induction theorem.
+structured decoder has derived zero/successor/composition laws and the actual
+semantic actions satisfy both inverse laws. The decisive HIT round trip is
+discharged by intrinsic `walking_end_hom_ind`, using the HIT-derived encoder
+successor law. Generic `path_ind_sec` does not replace this proof because it
+requires an already structured motive. A future abstract HIT without native
+generated-hom syntax would again need a reusable motive,
+extensionality/arrow-induction, or transfor theorem.
 
 ## Future Handoff Requirement
 
@@ -1414,5 +1511,7 @@ After consolidation, a future handoff should treat this selected concrete MVP
 as retained work, not resume the superseded `WEHIT-COMP-OWNER` blocker. A new
 bounded plan may select dependent Join elimination, generic directed-HIT
 abstraction, generic `PathMap`, categorical initiality, or groupoid completion
-toward `BInt`. It must preserve the theorem-first beta boundary and must not
-replace the derived Hom comparison by a direct Hom-to-Nat rewrite.
+toward `BInt`. Categorical initiality is optional future scope, not missing
+from the practical computation milestone. Any follow-up must preserve the
+theorem-first beta boundary and must not replace the semantic-action Hom
+comparison by a direct Hom-to-Nat rewrite or parallel carrier equivalence.

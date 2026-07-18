@@ -349,15 +349,20 @@ but their promoted phases are not open implementation plans.
   compatibility retirement, and metatheory remain separate bounded work.
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
   completed theorem-first `EVOGJ-H2-READINESS` child plan. Native
-  `WalkingWord` syntax, a structured dependent eliminator with judgmental
-  point/propositional generator beta, a separate constructor-directed
-  `BNat_cat`, recursor-derived encode, structured decode, transparent round
-  trips, native EQ1/`TypeEquiv` Hom comparison, OneCat evidence, and directed
-  negative results are active. Post-completion consolidation separates its
-  reusable Nat arithmetic/sethood dependency and closes with 1,978 catalogued
-  checks across 72 areas and 55 passing targets. Generic HIT abstraction,
-  full initiality, reusable `PathMap`, Join elimination, `BInt`/Circle
-  completion, and reflectors remain future objectives.
+  `WalkingEndHom_grpd` intrinsic hom syntax/induction, a structured dependent
+  eliminator with judgmental point/propositional generator beta, a separate
+  constructor-directed `BNat_cat`, recursor-derived encode, structured decode,
+  semantic-action round trips, native EQ1/`TypeEquiv` Hom comparison, OneCat
+  evidence, and directed negative results are active. The decisive
+  decode-after-encode proof uses hom-level HIT induction and the HIT-derived
+  encoder successor law; `walking_end_rec_step_view` supplies that step law
+  generically for every recursor target. No parallel word/Nat helper
+  equivalence remains. The corrected implementation closes with 1,980
+  catalogued checks across 72 areas, a 22-statement reviewer example, all 55
+  targets, unchanged warning inventories, and passing audits/health/CI.
+  Generic HIT abstraction, reusable `PathMap`, Join elimination,
+  `BInt`/Circle completion, reflectors, and optional full initiality remain
+  future objectives.
 - `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`:
   promoted historical implementation ledger for the first groupoid,
   type-equivalence, computational-univalence, omega-equivalence, and generic

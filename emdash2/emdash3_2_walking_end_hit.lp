@@ -5,67 +5,70 @@
   functoriality therefore remains the sole runtime owner of composite action;
   the displayed loop constructor has a primitive equality beta, following
   the ordinary intensional Circle interface, rather than a competing raw
-  action rewrite.  Free-arrow and Nat induction derive the complete capped
-  encode/decode actions and both round trips.
+  action rewrite.  Generated-hom and Nat induction derive both semantic
+  encode/decode round trips.
 
-  WalkingWord is intentionally distinct from Nat.  The Hom-to-Nat result is
-  packaged only after transparent inverse proofs, and the directed loop is
-  proved nonidentity and noninvertible rather than declared groupoidal.
+  `walking_end_hom` is not a second model beside the HIT: it is the native
+  carrier of `Hom(WalkingEnd,base,base)`, and `walking_end_hom_ind` is the hom
+  component of the directed-HIT elimination interface.  `BNat_cat` is the
+  separate Nat normal-form model.  The Hom-to-Nat result is packaged from the
+  actual semantic functor actions only after their transparent inverse proofs.
 */
 
 require open emdash.emdash3_2_nat_arithmetic;
 
-// Native free-arrow syntax, intentionally distinct from Nat.
-inductive walking_word : TYPE ≔
-| walking_word_zero : walking_word
-| walking_word_succ : walking_word → walking_word;
+// Intrinsic generated-hom carrier of the walking directed HIT.
+inductive walking_end_hom : TYPE ≔
+| walking_end_hom_id : walking_end_hom
+| walking_end_hom_step : walking_end_hom → walking_end_hom;
 
-constant symbol WalkingWord_grpd : Grpd;
-rule τ WalkingWord_grpd ↪ walking_word;
-rule @= WalkingWord_grpd walking_word_zero walking_word_zero ↪ Unit_grpd
-with @= WalkingWord_grpd walking_word_zero (walking_word_succ _) ↪ Empty_grpd
-with @= WalkingWord_grpd (walking_word_succ _) walking_word_zero ↪ Empty_grpd
-with @= WalkingWord_grpd (walking_word_succ $m) (walking_word_succ $n)
-  ↪ @= WalkingWord_grpd $m $n;
+constant symbol WalkingEndHom_grpd : Grpd;
+rule τ WalkingEndHom_grpd ↪ walking_end_hom;
+rule @= WalkingEndHom_grpd walking_end_hom_id walking_end_hom_id ↪ Unit_grpd
+with @= WalkingEndHom_grpd walking_end_hom_id (walking_end_hom_step _) ↪ Empty_grpd
+with @= WalkingEndHom_grpd (walking_end_hom_step _) walking_end_hom_id ↪ Empty_grpd
+with @= WalkingEndHom_grpd (walking_end_hom_step $m) (walking_end_hom_step $n)
+  ↪ @= WalkingEndHom_grpd $m $n;
 
-symbol walking_word_elim
-  (P : τ WalkingWord_grpd → Grpd)
-  (z : τ (P walking_word_zero))
-  (s : Π w : τ WalkingWord_grpd, τ (P w) → τ (P (walking_word_succ w)))
-  (w : τ WalkingWord_grpd)
+// Hom-level HIT induction over every generated directed arrow.
+symbol walking_end_hom_ind
+  (P : τ WalkingEndHom_grpd → Grpd)
+  (z : τ (P walking_end_hom_id))
+  (s : Π w : τ WalkingEndHom_grpd, τ (P w) → τ (P (walking_end_hom_step w)))
+  (w : τ WalkingEndHom_grpd)
   : τ (P w)
-≔ ind_walking_word P z s w;
+≔ ind_walking_end_hom P z s w;
 
 // Free strict one-object category on one directed generator.
 injective symbol WalkingEnd_cat : Cat;
 rule Obj WalkingEnd_cat ↪ Unit_grpd;
-rule Hom_cat WalkingEnd_cat _ _ ↪ Path_cat WalkingWord_grpd;
-rule @id WalkingEnd_cat _ ↪ walking_word_zero;
+rule Hom_cat WalkingEnd_cat _ _ ↪ Path_cat WalkingEndHom_grpd;
+rule @id WalkingEnd_cat _ ↪ walking_end_hom_id;
 
-// Composition consumes the visible outer/left word.
-rule @comp_fapp0 WalkingEnd_cat _ _ _ walking_word_zero $f ↪ $f
-with @comp_fapp0 WalkingEnd_cat _ _ _ $g walking_word_zero ↪ $g
-with @comp_fapp0 WalkingEnd_cat _ _ _ (walking_word_succ $g) $f
-  ↪ walking_word_succ (@comp_fapp0 WalkingEnd_cat tt tt tt $g $f);
+// Composition consumes the visible outer/left generated arrow.
+rule @comp_fapp0 WalkingEnd_cat _ _ _ walking_end_hom_id $f ↪ $f
+with @comp_fapp0 WalkingEnd_cat _ _ _ $g walking_end_hom_id ↪ $g
+with @comp_fapp0 WalkingEnd_cat _ _ _ (walking_end_hom_step $g) $f
+  ↪ walking_end_hom_step (@comp_fapp0 WalkingEnd_cat tt tt tt $g $f);
 
 /*
   Proof-time recovery of generic functor-on-identity after the source identity
-  has normalized to the native zero constructor.  Runtime still has one
-  owner: the global literal-identity functor rule.
+  has normalized to the intrinsic hom-identity constructor. Runtime still has
+  one owner: the global literal-identity functor rule.
 */
 unif_rule
-  @fapp1_fapp0 WalkingEnd_cat $C $F tt tt walking_word_zero
+  @fapp1_fapp0 WalkingEnd_cat $C $F tt tt walking_end_hom_id
   ≡ @id $C (@fapp0 WalkingEnd_cat $C $F tt)
   ↪ [ tt ≡ tt ];
 
-symbol walking_functor_zero_view
+symbol walking_functor_id_view
   [C : Cat]
   (F : τ (Functor WalkingEnd_cat C))
   : τ (@=
       (Hom C
         (@fapp0 WalkingEnd_cat C F tt)
         (@fapp0 WalkingEnd_cat C F tt))
-      (@fapp1_fapp0 WalkingEnd_cat C F tt tt walking_word_zero)
+      (@fapp1_fapp0 WalkingEnd_cat C F tt tt walking_end_hom_id)
       (@id C (@fapp0 WalkingEnd_cat C F tt)))
 ≔ @eq_refl
     (Hom C
@@ -75,7 +78,7 @@ symbol walking_functor_zero_view
 
 symbol walking_base : τ (Obj WalkingEnd_cat) ≔ tt;
 symbol walking_loop : τ (Hom WalkingEnd_cat walking_base walking_base)
-≔ walking_word_succ walking_word_zero;
+≔ walking_end_hom_step walking_end_hom_id;
 
 // Displayed generator algebra D[loop](u) -> u.
 symbol walking_end_loop_lift_grpd
@@ -159,6 +162,66 @@ symbol walking_end_rec_beta_loop
 ≔ @walking_end_ind_beta_loop
     (@Const_catd WalkingEnd_cat C)
     x f;
+
+/*
+  Generic generated-arrow step computation for every recursor target.
+
+  Strict functoriality first identifies action on `step(w) = loop o w` with
+  `F[loop] o F[w]`; whiskering the HIT loop beta then replaces `F[loop]` by
+  the supplied generator image.  No target-specific action rule is needed.
+*/
+symbol walking_end_rec_step_view
+  (C : Cat)
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+  (w : τ WalkingEndHom_grpd)
+  : τ (@=
+      (Hom C x x)
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base (walking_end_hom_step w))
+      (@comp_fapp0
+        C x x x f
+        (@fapp1_fapp0
+          WalkingEnd_cat C (@walking_end_rec_func C x f)
+          walking_base walking_base w)))
+≔ @eq_trans
+    (Hom C x x)
+    (@fapp1_fapp0
+      WalkingEnd_cat C (@walking_end_rec_func C x f)
+      walking_base walking_base (walking_end_hom_step w))
+    (@comp_fapp0
+      C x x x
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base walking_loop)
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base w))
+    (@comp_fapp0
+      C x x x f
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base w))
+    (@eq_refl
+      (Hom C x x)
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base (walking_end_hom_step w)))
+    (@eq_ap
+      (Hom C x x)
+      (Hom C x x)
+      (λ h : τ (Hom C x x),
+        @comp_fapp0
+          C x x x h
+          (@fapp1_fapp0
+            WalkingEnd_cat C (@walking_end_rec_func C x f)
+            walking_base walking_base w))
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base walking_loop)
+      f
+      (@walking_end_rec_beta_loop C x f));
 
 /*
   The former runtime critical pair is now a derived equality.  The final
@@ -324,95 +387,28 @@ symbol walking_encode_func : τ (Functor WalkingEnd_cat BNat_cat)
 
 // Its capped hom action remains a named semantic projection.
 symbol walking_encode_action
-  (w : τ WalkingWord_grpd)
+  (w : τ WalkingEndHom_grpd)
   : τ Nat_grpd
 ≔ @fapp1_fapp0
     WalkingEnd_cat BNat_cat walking_encode_func
     walking_base walking_base w;
 
-symbol walking_encode_zero_view
-  : τ (@= Nat_grpd (@walking_encode_action walking_word_zero) zero)
-≔ @walking_functor_zero_view BNat_cat walking_encode_func;
+symbol walking_encode_id_view
+  : τ (@= Nat_grpd (@walking_encode_action walking_end_hom_id) zero)
+≔ @walking_functor_id_view BNat_cat walking_encode_func;
 
-// Transparent free-word length and its inverse word constructor.
-symbol walking_word_to_nat
-  (w : τ WalkingWord_grpd)
-  : τ Nat_grpd
-≔ @walking_word_elim
-    (λ _ : τ WalkingWord_grpd, Nat_grpd)
-    zero
-    (λ _ : τ WalkingWord_grpd,
-      λ n : τ Nat_grpd, succ n)
-    w;
-
-symbol nat_to_walking_word
-  (n : τ Nat_grpd)
-  : τ WalkingWord_grpd
-≔ @nat_elim
-    (λ _ : τ Nat_grpd, WalkingWord_grpd)
-    walking_word_zero
-    (λ _ : τ Nat_grpd,
-      λ w : τ WalkingWord_grpd, walking_word_succ w)
-    n;
-
-// Word length preserves the selected composition/addition orientation.
-symbol walking_word_to_nat_comp
-  (g f : τ WalkingWord_grpd)
-  : τ (@= Nat_grpd
-      (@walking_word_to_nat
-        (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
-      (@nat_add (@walking_word_to_nat g) (@walking_word_to_nat f)))
-≔ @walking_word_elim
-    (λ g : τ WalkingWord_grpd,
-      @= Nat_grpd
-        (@walking_word_to_nat
-          (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
-        (@nat_add (@walking_word_to_nat g) (@walking_word_to_nat f)))
-    (@eq_refl Nat_grpd (@walking_word_to_nat f))
-    (λ g0 : τ WalkingWord_grpd,
-      λ ih : τ (@= Nat_grpd
-        (@walking_word_to_nat
-          (@comp_fapp0 WalkingEnd_cat tt tt tt g0 f))
-        (@nat_add (@walking_word_to_nat g0) (@walking_word_to_nat f))),
-      ih)
-    g;
-
-/*
-  Derived successor law for the encoding functor.
-
-  The first equality is reflexivity after the global strict cut
-    encode[loop] o encode[w] -> encode[loop o w].
-  The second whisks the primitive loop-beta equality; BNat composition then
-  computes `one o n` to `succ n`.
-*/
+// The encoder successor law is the generic recursor step theorem at BNat.
 symbol walking_encode_succ_view
-  (w : τ WalkingWord_grpd)
+  (w : τ WalkingEndHom_grpd)
   : τ (@= Nat_grpd
-      (@walking_encode_action (walking_word_succ w))
+      (@walking_encode_action (walking_end_hom_step w))
       (succ (@walking_encode_action w)))
-≔ @eq_trans
-    Nat_grpd
-    (@walking_encode_action (walking_word_succ w))
-    (@comp_fapp0
-      BNat_cat tt tt tt
-      (@walking_encode_action walking_loop)
-      (@walking_encode_action w))
-    (succ (@walking_encode_action w))
-    (@eq_refl Nat_grpd (@walking_encode_action (walking_word_succ w)))
-    (@eq_ap
-      (Hom BNat_cat bnat_obj bnat_obj)
-      (Hom BNat_cat bnat_obj bnat_obj)
-      (λ h : τ (Hom BNat_cat bnat_obj bnat_obj),
-        @comp_fapp0
-          BNat_cat tt tt tt h (@walking_encode_action w))
-      (@walking_encode_action walking_loop)
-      bnat_generator
-      (@walking_end_rec_beta_loop
-        BNat_cat bnat_obj bnat_generator));
+≔ @walking_end_rec_step_view
+    BNat_cat bnat_obj bnat_generator w;
 
-// Strict encoding sends word composition to selected Nat addition.
+// Strict encoding sends generated-arrow composition to selected Nat addition.
 symbol walking_encode_comp_view
-  (g f : τ WalkingWord_grpd)
+  (g f : τ WalkingEndHom_grpd)
   : τ (@= Nat_grpd
       (@walking_encode_action
         (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
@@ -438,119 +434,52 @@ symbol walking_encode_comp_view
       (@walking_encode_action g)
       (@walking_encode_action f));
 
-// All recursor actions agree propositionally with transparent word length.
-symbol walking_encode_agreement
-  (w : τ WalkingWord_grpd)
-  : τ (@= Nat_grpd
-      (@walking_encode_action w)
-      (@walking_word_to_nat w))
-≔ @walking_word_elim
-    (λ w : τ WalkingWord_grpd,
-      @= Nat_grpd
-        (@walking_encode_action w)
-        (@walking_word_to_nat w))
-    walking_encode_zero_view
-    (λ w0 : τ WalkingWord_grpd,
-      λ ih : τ (@= Nat_grpd
-        (@walking_encode_action w0)
-        (@walking_word_to_nat w0)),
-      @eq_trans
-        Nat_grpd
-        (@walking_encode_action (walking_word_succ w0))
-        (succ (@walking_encode_action w0))
-        (succ (@walking_word_to_nat w0))
-        (@walking_encode_succ_view w0)
-        (@eq_ap
-          Nat_grpd Nat_grpd
-          (λ n : τ Nat_grpd, succ n)
-          (@walking_encode_action w0)
-          (@walking_word_to_nat w0)
-          ih))
-    w;
-
-// Transparent inverse round trips use the directed free-arrow induction.
-symbol nat_word_roundtrip
-  (w : τ WalkingWord_grpd)
-  : τ (@= WalkingWord_grpd
-      (@nat_to_walking_word (@walking_word_to_nat w))
-      w)
-≔ @walking_word_elim
-    (λ w : τ WalkingWord_grpd,
-      @= WalkingWord_grpd
-        (@nat_to_walking_word (@walking_word_to_nat w))
-        w)
-    (@eq_refl WalkingWord_grpd walking_word_zero)
-    (λ w0 : τ WalkingWord_grpd,
-      λ ih : τ (@= WalkingWord_grpd
-        (@nat_to_walking_word (@walking_word_to_nat w0))
-        w0),
-      ih)
-    w;
-
-symbol word_nat_roundtrip
-  (n : τ Nat_grpd)
-  : τ (@= Nat_grpd
-      (@walking_word_to_nat (@nat_to_walking_word n))
-      n)
-≔ @nat_elim
-    (λ n : τ Nat_grpd,
-      @= Nat_grpd
-        (@walking_word_to_nat (@nat_to_walking_word n))
-        n)
-    (@eq_refl Nat_grpd zero)
-    (λ n0 : τ Nat_grpd,
-      λ ih : τ (@= Nat_grpd
-        (@walking_word_to_nat (@nat_to_walking_word n0))
-        n0),
-      ih)
-    n;
-
-// The free-word classifier is set-valued by nested constructor induction.
-symbol walking_word_is_set
-  : τ (IsSetGrpd WalkingWord_grpd)
-≔ λ m : τ WalkingWord_grpd,
-    @walking_word_elim
-      (λ m : τ WalkingWord_grpd,
-        @Pi_grpd WalkingWord_grpd
-          (λ n : τ WalkingWord_grpd,
-            IsPropGrpd (@= WalkingWord_grpd m n)))
-      (λ n : τ WalkingWord_grpd,
-        @walking_word_elim
-          (λ n : τ WalkingWord_grpd,
-            IsPropGrpd (@= WalkingWord_grpd walking_word_zero n))
+// The intrinsic hom classifier is set-valued by nested hom induction.
+symbol walking_end_hom_is_set
+  : τ (IsSetGrpd WalkingEndHom_grpd)
+≔ λ m : τ WalkingEndHom_grpd,
+    @walking_end_hom_ind
+      (λ m : τ WalkingEndHom_grpd,
+        @Pi_grpd WalkingEndHom_grpd
+          (λ n : τ WalkingEndHom_grpd,
+            IsPropGrpd (@= WalkingEndHom_grpd m n)))
+      (λ n : τ WalkingEndHom_grpd,
+        @walking_end_hom_ind
+          (λ n : τ WalkingEndHom_grpd,
+            IsPropGrpd (@= WalkingEndHom_grpd walking_end_hom_id n))
           unit_is_prop
-          (λ n0 : τ WalkingWord_grpd,
-            λ _ : τ (IsPropGrpd (@= WalkingWord_grpd walking_word_zero n0)),
+          (λ n0 : τ WalkingEndHom_grpd,
+            λ _ : τ (IsPropGrpd (@= WalkingEndHom_grpd walking_end_hom_id n0)),
             empty_is_prop)
           n)
-      (λ m0 : τ WalkingWord_grpd,
-        λ ih : τ (@Pi_grpd WalkingWord_grpd
-          (λ n : τ WalkingWord_grpd,
-            IsPropGrpd (@= WalkingWord_grpd m0 n))),
-        λ n : τ WalkingWord_grpd,
-          @walking_word_elim
-            (λ n : τ WalkingWord_grpd,
-              IsPropGrpd (@= WalkingWord_grpd (walking_word_succ m0) n))
+      (λ m0 : τ WalkingEndHom_grpd,
+        λ ih : τ (@Pi_grpd WalkingEndHom_grpd
+          (λ n : τ WalkingEndHom_grpd,
+            IsPropGrpd (@= WalkingEndHom_grpd m0 n))),
+        λ n : τ WalkingEndHom_grpd,
+          @walking_end_hom_ind
+            (λ n : τ WalkingEndHom_grpd,
+              IsPropGrpd (@= WalkingEndHom_grpd (walking_end_hom_step m0) n))
             empty_is_prop
-            (λ n0 : τ WalkingWord_grpd,
+            (λ n0 : τ WalkingEndHom_grpd,
               λ _ : τ (IsPropGrpd
-                (@= WalkingWord_grpd (walking_word_succ m0) n0)),
+                (@= WalkingEndHom_grpd (walking_end_hom_step m0) n0)),
               ih n0)
             n)
       m;
 
 // Literal path categories over sets satisfy the active discrete contract.
-symbol walking_word_path_discrete
-  : τ (IsDiscreteCat (Path_cat WalkingWord_grpd))
+symbol walking_end_hom_path_discrete
+  : τ (IsDiscreteCat (Path_cat WalkingEndHom_grpd))
 ≔ @discrete_cat_intro
-    (Path_cat WalkingWord_grpd)
-    walking_word_is_set
+    (Path_cat WalkingEndHom_grpd)
+    walking_end_hom_is_set
     (@omega_equiv_along_EQ1_to_D0
       Cat_cat
-      (Core_cat (Path_cat WalkingWord_grpd))
-      (Path_cat WalkingWord_grpd)
-      (Core_incl_func (Path_cat WalkingWord_grpd))
-      (@path_cat_is_groupoidal_EQ1 WalkingWord_grpd));
+      (Core_cat (Path_cat WalkingEndHom_grpd))
+      (Path_cat WalkingEndHom_grpd)
+      (Core_incl_func (Path_cat WalkingEndHom_grpd))
+      (@path_cat_is_groupoidal_EQ1 WalkingEndHom_grpd));
 
 symbol nat_path_discrete
   : τ (IsDiscreteCat (Path_cat Nat_grpd))
@@ -569,7 +498,7 @@ symbol walking_end_is_one_cat
   : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat)
 ≔ λ _ : τ Unit_grpd,
     λ _ : τ Unit_grpd,
-      walking_word_path_discrete;
+      walking_end_hom_path_discrete;
 
 symbol bnat_is_one_cat
   : τ (IsNCat (cat_succ cat_zero) BNat_cat)
@@ -593,30 +522,30 @@ symbol bnat_one_cat
 
 // The generator is not the identity, and no left inverse can exist.
 symbol walking_loop_not_identity
-  (p : τ (@= WalkingWord_grpd walking_loop walking_word_zero))
+  (p : τ (@= WalkingEndHom_grpd walking_loop walking_end_hom_id))
   : τ Empty_grpd
 ≔ p;
 
 symbol walking_loop_no_left_inverse
-  (w : τ WalkingWord_grpd)
+  (w : τ WalkingEndHom_grpd)
   : τ (@Function_grpd
-      (@= WalkingWord_grpd
+      (@= WalkingEndHom_grpd
         (@comp_fapp0 WalkingEnd_cat tt tt tt w walking_loop)
-        walking_word_zero)
+        walking_end_hom_id)
       Empty_grpd)
-≔ @walking_word_elim
-    (λ w : τ WalkingWord_grpd,
+≔ @walking_end_hom_ind
+    (λ w : τ WalkingEndHom_grpd,
       @Function_grpd
-        (@= WalkingWord_grpd
+        (@= WalkingEndHom_grpd
           (@comp_fapp0 WalkingEnd_cat tt tt tt w walking_loop)
-          walking_word_zero)
+          walking_end_hom_id)
         Empty_grpd)
     (λ p : τ Empty_grpd, p)
-    (λ w0 : τ WalkingWord_grpd,
+    (λ w0 : τ WalkingEndHom_grpd,
       λ _ : τ (@Function_grpd
-        (@= WalkingWord_grpd
+        (@= WalkingEndHom_grpd
           (@comp_fapp0 WalkingEnd_cat tt tt tt w0 walking_loop)
-          walking_word_zero)
+          walking_end_hom_id)
         Empty_grpd),
       λ p : τ Empty_grpd, p)
     w;
@@ -657,30 +586,30 @@ injective symbol walking_decode_beta_generator
 
 symbol walking_decode_action
   (n : τ Nat_grpd)
-  : τ WalkingWord_grpd
+  : τ WalkingEndHom_grpd
 ≔ @fapp1_fapp0
     BNat_cat WalkingEnd_cat walking_decode_func
     bnat_obj bnat_obj n;
 
 symbol walking_decode_zero_view
-  : τ (@= WalkingWord_grpd (@walking_decode_action zero) walking_word_zero)
+  : τ (@= WalkingEndHom_grpd (@walking_decode_action zero) walking_end_hom_id)
 ≔ @bnat_functor_zero_view WalkingEnd_cat walking_decode_func;
 
 // Strictness plus the generator beta derives the successor action law.
 symbol walking_decode_succ_view
   (n : τ Nat_grpd)
-  : τ (@= WalkingWord_grpd
+  : τ (@= WalkingEndHom_grpd
       (@walking_decode_action (succ n))
-      (walking_word_succ (@walking_decode_action n)))
+      (walking_end_hom_step (@walking_decode_action n)))
 ≔ @eq_trans
-    WalkingWord_grpd
+    WalkingEndHom_grpd
     (@walking_decode_action (succ n))
     (@comp_fapp0
       WalkingEnd_cat tt tt tt
       (@walking_decode_action bnat_generator)
       (@walking_decode_action n))
-    (walking_word_succ (@walking_decode_action n))
-    (@eq_refl WalkingWord_grpd (@walking_decode_action (succ n)))
+    (walking_end_hom_step (@walking_decode_action n))
+    (@eq_refl WalkingEndHom_grpd (@walking_decode_action (succ n)))
     (@eq_ap
       (Hom WalkingEnd_cat walking_base walking_base)
       (Hom WalkingEnd_cat walking_base walking_base)
@@ -691,47 +620,17 @@ symbol walking_decode_succ_view
       walking_loop
       walking_decode_beta_generator);
 
-// The structured decoder agrees with transparent Nat recursion at every n.
-symbol walking_decode_agreement
-  (n : τ Nat_grpd)
-  : τ (@= WalkingWord_grpd
-      (@walking_decode_action n)
-      (@nat_to_walking_word n))
-≔ @nat_elim
-    (λ n : τ Nat_grpd,
-      @= WalkingWord_grpd
-        (@walking_decode_action n)
-        (@nat_to_walking_word n))
-    walking_decode_zero_view
-    (λ n0 : τ Nat_grpd,
-      λ ih : τ (@= WalkingWord_grpd
-        (@walking_decode_action n0)
-        (@nat_to_walking_word n0)),
-      @eq_trans
-        WalkingWord_grpd
-        (@walking_decode_action (succ n0))
-        (walking_word_succ (@walking_decode_action n0))
-        (walking_word_succ (@nat_to_walking_word n0))
-        (@walking_decode_succ_view n0)
-        (@eq_ap
-          WalkingWord_grpd WalkingWord_grpd
-          (λ w : τ WalkingWord_grpd, walking_word_succ w)
-          (@walking_decode_action n0)
-          (@nat_to_walking_word n0)
-          ih))
-    n;
-
-// Strict decoding sends selected Nat addition to word composition.
+// Strict decoding sends selected Nat addition to generated-arrow composition.
 symbol walking_decode_comp_view
   (g f : τ Nat_grpd)
-  : τ (@= WalkingWord_grpd
+  : τ (@= WalkingEndHom_grpd
       (@walking_decode_action (@nat_add g f))
       (@comp_fapp0
         WalkingEnd_cat tt tt tt
         (@walking_decode_action g)
         (@walking_decode_action f)))
 ≔ @eq_trans
-    WalkingWord_grpd
+    WalkingEndHom_grpd
     (@walking_decode_action (@nat_add g f))
     (@walking_decode_action
       (@comp_fapp0 BNat_cat tt tt tt g f))
@@ -740,7 +639,7 @@ symbol walking_decode_comp_view
       (@walking_decode_action g)
       (@walking_decode_action f))
     (@eq_ap
-      Nat_grpd WalkingWord_grpd
+      Nat_grpd WalkingEndHom_grpd
       walking_decode_action
       (@nat_add g f)
       (@comp_fapp0 BNat_cat tt tt tt g f)
@@ -750,47 +649,163 @@ symbol walking_decode_comp_view
         (@nat_add g f)
         (@bnat_comp_nat_add g f)))
     (@eq_refl
-      WalkingWord_grpd
+      WalkingEndHom_grpd
       (@walking_decode_action
         (@comp_fapp0 BNat_cat tt tt tt g f)));
 
-// Package the transparent hom equivalence through the active interfaces.
-symbol walking_word_nat_by_inverse
+/*
+  Practical HIT computation on arbitrary arrows.
+
+  The forward map is the actual action of the recursor-derived encoder; its
+  successor law uses the primitive HIT loop beta.  The inverse is the actual
+  action of the structured decoder; its successor law uses the decoder's
+  generator beta.  Hom-level HIT induction and Nat induction extend those
+  constructor laws to the two open semantic round trips.
+*/
+symbol walking_decode_encode_roundtrip
+  (w : τ WalkingEndHom_grpd)
+  : τ (@= WalkingEndHom_grpd
+      (@walking_decode_action (@walking_encode_action w))
+      w)
+≔ @walking_end_hom_ind
+    (λ w : τ WalkingEndHom_grpd,
+      @= WalkingEndHom_grpd
+        (@walking_decode_action (@walking_encode_action w))
+        w)
+    (@eq_trans
+      WalkingEndHom_grpd
+      (@walking_decode_action (@walking_encode_action walking_end_hom_id))
+      (@walking_decode_action zero)
+      walking_end_hom_id
+      (@eq_ap
+        Nat_grpd WalkingEndHom_grpd
+        walking_decode_action
+        (@walking_encode_action walking_end_hom_id)
+        zero
+        walking_encode_id_view)
+      walking_decode_zero_view)
+    (λ w0 : τ WalkingEndHom_grpd,
+      λ ih : τ (@= WalkingEndHom_grpd
+        (@walking_decode_action (@walking_encode_action w0))
+        w0),
+      @eq_trans
+        WalkingEndHom_grpd
+        (@walking_decode_action
+          (@walking_encode_action (walking_end_hom_step w0)))
+        (walking_end_hom_step
+          (@walking_decode_action (@walking_encode_action w0)))
+        (walking_end_hom_step w0)
+        (@eq_trans
+          WalkingEndHom_grpd
+          (@walking_decode_action
+            (@walking_encode_action (walking_end_hom_step w0)))
+          (@walking_decode_action (succ (@walking_encode_action w0)))
+          (walking_end_hom_step
+            (@walking_decode_action (@walking_encode_action w0)))
+          (@eq_ap
+            Nat_grpd WalkingEndHom_grpd
+            walking_decode_action
+            (@walking_encode_action (walking_end_hom_step w0))
+            (succ (@walking_encode_action w0))
+            (@walking_encode_succ_view w0))
+          (@walking_decode_succ_view (@walking_encode_action w0)))
+        (@eq_ap
+          WalkingEndHom_grpd WalkingEndHom_grpd
+          (λ w1 : τ WalkingEndHom_grpd, walking_end_hom_step w1)
+          (@walking_decode_action (@walking_encode_action w0))
+          w0
+          ih))
+    w;
+
+symbol walking_encode_decode_roundtrip
+  (n : τ Nat_grpd)
+  : τ (@= Nat_grpd
+      (@walking_encode_action (@walking_decode_action n))
+      n)
+≔ @nat_elim
+    (λ n : τ Nat_grpd,
+      @= Nat_grpd
+        (@walking_encode_action (@walking_decode_action n))
+        n)
+    (@eq_trans
+      Nat_grpd
+      (@walking_encode_action (@walking_decode_action zero))
+      (@walking_encode_action walking_end_hom_id)
+      zero
+      (@eq_ap
+        WalkingEndHom_grpd Nat_grpd
+        walking_encode_action
+        (@walking_decode_action zero)
+        walking_end_hom_id
+        walking_decode_zero_view)
+      walking_encode_id_view)
+    (λ n0 : τ Nat_grpd,
+      λ ih : τ (@= Nat_grpd
+        (@walking_encode_action (@walking_decode_action n0))
+        n0),
+      @eq_trans
+        Nat_grpd
+        (@walking_encode_action (@walking_decode_action (succ n0)))
+        (succ (@walking_encode_action (@walking_decode_action n0)))
+        (succ n0)
+        (@eq_trans
+          Nat_grpd
+          (@walking_encode_action (@walking_decode_action (succ n0)))
+          (@walking_encode_action
+            (walking_end_hom_step (@walking_decode_action n0)))
+          (succ (@walking_encode_action (@walking_decode_action n0)))
+          (@eq_ap
+            WalkingEndHom_grpd Nat_grpd
+            walking_encode_action
+            (@walking_decode_action (succ n0))
+            (walking_end_hom_step (@walking_decode_action n0))
+            (@walking_decode_succ_view n0))
+          (@walking_encode_succ_view (@walking_decode_action n0)))
+        (@eq_ap
+          Nat_grpd Nat_grpd
+          (λ n1 : τ Nat_grpd, succ n1)
+          (@walking_encode_action (@walking_decode_action n0))
+          n0
+          ih))
+    n;
+
+// Package the semantic hom equivalence through the active interfaces.
+symbol walking_hom_nat_by_inverse
   : τ (@EquivByInverse
-      WalkingWord_grpd Nat_grpd
-      walking_word_to_nat nat_to_walking_word)
+      WalkingEndHom_grpd Nat_grpd
+      walking_encode_action walking_decode_action)
 ≔ @Struct_sigma
-    (@Pi_grpd WalkingWord_grpd
-      (λ w : τ WalkingWord_grpd,
-        @= WalkingWord_grpd
-          (@nat_to_walking_word (@walking_word_to_nat w))
+    (@Pi_grpd WalkingEndHom_grpd
+      (λ w : τ WalkingEndHom_grpd,
+        @= WalkingEndHom_grpd
+          (@walking_decode_action (@walking_encode_action w))
           w))
-    (λ _ : τ (@Pi_grpd WalkingWord_grpd
-      (λ w : τ WalkingWord_grpd,
-        @= WalkingWord_grpd
-          (@nat_to_walking_word (@walking_word_to_nat w))
+    (λ _ : τ (@Pi_grpd WalkingEndHom_grpd
+      (λ w : τ WalkingEndHom_grpd,
+        @= WalkingEndHom_grpd
+          (@walking_decode_action (@walking_encode_action w))
           w)),
       @Pi_grpd Nat_grpd
         (λ n : τ Nat_grpd,
           @= Nat_grpd
-            (@walking_word_to_nat (@nat_to_walking_word n))
+            (@walking_encode_action (@walking_decode_action n))
             n))
-    nat_word_roundtrip
-    word_nat_roundtrip;
+    walking_decode_encode_roundtrip
+    walking_encode_decode_roundtrip;
 
 symbol walking_hom_nat_type_equiv
   : τ (TypeEquiv
       (Hom WalkingEnd_cat walking_base walking_base)
       Nat_grpd)
 ≔ @Struct_sigma
-    (@Function_grpd WalkingWord_grpd Nat_grpd)
-    (λ map : τ (@Function_grpd WalkingWord_grpd Nat_grpd),
-      @IsEquivMap WalkingWord_grpd Nat_grpd map)
-    walking_word_to_nat
+    (@Function_grpd WalkingEndHom_grpd Nat_grpd)
+    (λ map : τ (@Function_grpd WalkingEndHom_grpd Nat_grpd),
+      @IsEquivMap WalkingEndHom_grpd Nat_grpd map)
+    walking_encode_action
     (@is_equiv_map_by_inverse
-      WalkingWord_grpd Nat_grpd
-      walking_word_to_nat nat_to_walking_word
-      walking_word_nat_by_inverse);
+      WalkingEndHom_grpd Nat_grpd
+      walking_encode_action walking_decode_action
+      walking_hom_nat_by_inverse);
 
 symbol walking_hom_nat_omega_equiv_EQ1
   : τ (@OmegaEquiv_EQ1

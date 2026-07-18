@@ -185,24 +185,42 @@ commutativity.
 
 The downstream walking-endomorphism extension imports those prerequisites and
 presents the walking endomorphism as a concrete directed HIT.
-`WalkingWord_grpd` is native free-arrow syntax, deliberately distinct from
-Nat, and
+The native inductive `walking_end_hom` is not a second object beside the HIT:
+it is exactly the carrier exposed by `WalkingEndHom_grpd`, which in turn is
+the hom classifier of `WalkingEnd_cat`. Its identity and step constructors
+are the canonical normal forms required to implement the free strict
+one-object category without identifying its hom with the external Nat model:
 
 ```text
 Obj(WalkingEnd_cat)        = Unit_grpd
-Hom(WalkingEnd_cat,*,*)    = Path_cat(WalkingWord_grpd)
-id                        = empty word
-loop                      = one-letter word.
+Hom(WalkingEnd_cat,*,*)    = Path_cat(WalkingEndHom_grpd)
+id                        = walking_end_hom_id
+loop                      = walking_end_hom_step(id).
 ```
 
-Composition recurses on the visible outer word. The primitive dependent
-eliminator accepts a structured `D : Catd(WalkingEnd_cat)`, a base-fibre
-object, and a displayed lift of the generating loop, and returns a section of
-`Pi_cat(D)`. Point beta is judgmental. Generator beta is an inhabitant of the
-exact displayed equality classifier, not a raw action rewrite. Consequently
-the global strict functor rule remains the sole runtime composite-action
-owner; the loop-square action law is derived by equality composition rather
-than installed as another rewrite family.
+Composition recurses on the visible outer generated arrow. The concrete HIT
+elimination interface has two relevant components. `walking_end_ind_sec`
+accepts a structured `D : Catd(WalkingEnd_cat)`, a base-fibre object, and a
+displayed lift of the generating loop, and returns a section of `Pi_cat(D)`.
+`walking_end_hom_ind` eliminates a motive over every generated arrow and
+computes at `walking_end_hom_id` and `walking_end_hom_step`. The first is the
+object/section component; the second is the arbitrary-arrow component. Point
+beta is judgmental. Generator beta is an inhabitant of the exact displayed
+equality classifier, not a raw action rewrite. Consequently the global strict
+functor rule remains the sole runtime composite-action owner; the loop-square
+action law is derived by equality composition rather than installed as
+another rewrite family.
+
+For any target `C`, object `x`, generator image `f`, and intrinsic arrow `w`,
+the reusable theorem `walking_end_rec_step_view` states
+
+```text
+rec(C,x,f)[walking_end_hom_step(w)] = f o rec(C,x,f)[w].
+```
+
+Its proof first uses generic strict functoriality and then whisks the HIT loop
+beta. Thus practical step computation is generic in the recursor target; the
+Nat encoder successor theorem is only its `BNat_cat` specialization.
 
 Constructor composition still meets the kernel's stable pre/postcomposition
 heads in warning diamonds. Unit cases have direct typed joins. The nontrivial
@@ -217,11 +235,28 @@ constructor-directed composition. The open comparison between composition
 and `nat_add` is the transparent theorem `bnat_comp_nat_add`, not a runtime
 collapse of the semantic composition head. The encoder is derived from the
 HIT recursor. The reverse comparison is an ordinary semantic functor with
-explicit generator beta, and Nat induction proves its arbitrary action agrees
-with transparent word construction. Word and Nat induction prove both inverse
-laws before the Hom comparison is packaged as `TypeEquiv` and native EQ1.
-Thus no earlier Hom-to-Nat rewrite or bodyless round-trip capability makes the
-result tautological.
+explicit generator beta. `walking_end_hom_ind` proves
+
+```text
+decode_action(encode_action(w)) = w
+```
+
+for every intrinsic walking arrow: its step case uses the encoder successor
+law derived from the HIT loop beta and the decoder successor law derived from
+the decoder generator beta. Nat induction proves the reverse semantic-action
+round trip. Those actual functor actions are then packaged as `TypeEquiv` and
+native EQ1; the forward projection is `walking_encode_action`. There is no
+parallel word-length/Nat-constructor equivalence route and no earlier
+Hom-to-Nat rewrite or bodyless round-trip capability making the result
+tautological.
+
+The generic `path_ind_sec` is not used in this proof. It transports a base
+element through an already functorial `Catd` motive on `PathOut`; it does not
+construct the required raw-arrow equality motive or its higher action. For
+this concrete generated category, intrinsic hom induction is therefore the
+foundational practical computation principle. A later generic `PathOut`
+presentation would require a reusable structured motive or functor/transfor
+constructor. No full functor-category initiality metatheorem is claimed here.
 
 Native sethood proofs make the two hom path categories discrete and both
 one-object categories satisfy the internal OneCat predicate. The generating
