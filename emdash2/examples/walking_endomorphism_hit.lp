@@ -287,3 +287,63 @@ assertnot (n : τ Nat_grpd) ⊢
       (@comp_fapp0
         WalkingEnd_cat walking_base walking_base walking_base
         walking_loop (walking_power n));
+
+// The contextual decoder is constructed from Code, the directed
+// representable, power, and the spiral—there is no eliminator on an exposed
+// Hom carrier.
+assert ⊢ walking_directed_decode_funcd
+  : τ (Functord walking_Code_catd walking_based_rep_catd);
+
+assert ⊢
+  @walking_directed_decode_func walking_base
+  ≡ walking_power_func;
+
+// At an arbitrary opaque p, the displayed action at zero is already the
+// directed normalization cell p -> decode_x(encode_x(p)).
+assert
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x)) ⊢
+  @walking_directed_normalization_cell x p
+  : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base x)
+      p
+      (@walking_directed_decode x (@walking_encode x p)));
+
+assert
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x)) ⊢
+  @walking_directed_normalization_cell x p
+  ≡ @fdapp1_int_cell
+      WalkingEnd_cat
+      walking_Code_catd
+      walking_based_rep_catd
+      walking_directed_decode_funcd
+      walking_base x p zero;
+
+// One-dimensionality upgrades that directed cell to equality; at the base it
+// gives the hard inverse.
+assert
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @walking_power_encode_roundtrip p
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (walking_power (@walking_encode walking_base p))
+      p);
+
+// The composite Code action is a named proof-time equation, not a third HIT
+// runtime rule. Native Nat induction then supplies the easy inverse.
+assert (n : τ Nat_grpd) ⊢
+  @walking_encode_power_succ_path n
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base (walking_power (succ n)))
+      (succ (@walking_encode walking_base (walking_power n))));
+
+assertnot (n : τ Nat_grpd) ⊢
+  @walking_encode walking_base (walking_power (succ n))
+  ≡ succ (@walking_encode walking_base (walking_power n));
+
+assert (n : τ Nat_grpd) ⊢
+  @walking_encode_power_roundtrip n
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base (walking_power n))
+      n);

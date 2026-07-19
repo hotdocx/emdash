@@ -93,12 +93,12 @@ assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
       (@type_equiv_to_omega_EQ1 A B e))
   ≡ @type_equiv_to A B e;
 
-// Generic category owners do not runtime-collapse to pointwise lambdas.
+// Identity retains its generic owner; capped composition is eta-observable.
 assertnot [A : Grpd] ⊢
   @id Grpd_cat A
   ≡ λ a : τ A, a;
 
-assertnot [A B C : Grpd]
+assert [A B C : Grpd]
   (f : τ A → τ B)
   (g : τ B → τ C) ⊢
   @comp_fapp0 Grpd_cat A B C g f

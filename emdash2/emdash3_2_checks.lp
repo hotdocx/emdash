@@ -20221,6 +20221,130 @@ assertnot ⊢
   Hom_cat WalkingEnd_cat walking_base walking_base
   ≡ Path_cat Nat_grpd;
 
+// catalog-area: Walking directed decoder and inverse paths
+// The open composite comparison is proof-time; only literal constructor
+// observations are runtime HIT betas.
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @walking_end_rec_loop_prefix_eq C x f p
+  : τ (@=
+      (Hom C x x)
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          walking_loop p))
+      (@comp_fapp0
+        C x x x f
+        (@fapp1_fapp0
+          WalkingEnd_cat C (@walking_end_rec_func C x f)
+          walking_base walking_base p)));
+
+assert ⊢ walking_directed_decode_funcd
+  : τ (Functord walking_Code_catd walking_based_rep_catd);
+
+assert ⊢
+  @walking_directed_decode_func walking_base
+  ≡ walking_power_func;
+
+assert ⊢ walking_directed_decode_beta_base
+  : τ (@=
+      (Functor
+        (Fibre_cat walking_Code_catd walking_base)
+        (Fibre_cat walking_based_rep_catd walking_base))
+      (@walking_directed_decode_func walking_base)
+      walking_power_func);
+
+assert
+  (x : τ (Obj WalkingEnd_cat))
+  (n : τ (Obj (Fibre_cat walking_Code_catd x))) ⊢
+  @walking_directed_decode x n
+  : τ (Obj (Fibre_cat walking_based_rep_catd x));
+
+// This public milestone remains a directed cell and materially contains the
+// generic displayed action at zero.
+assert
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x)) ⊢
+  @walking_directed_normalization_cell x p
+  : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base x)
+      p
+      (@walking_directed_decode x (@walking_encode x p)));
+
+assert
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x)) ⊢
+  @walking_directed_normalization_cell x p
+  ≡ @fdapp1_int_cell
+      WalkingEnd_cat
+      walking_Code_catd
+      walking_based_rep_catd
+      walking_directed_decode_funcd
+      walking_base x p zero;
+
+assert
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x)) ⊢
+  @walking_directed_normalization_path x p
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base x)
+      p
+      (@walking_directed_decode x (@walking_encode x p)));
+
+assert
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @walking_power_encode_roundtrip p
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (walking_power (@walking_encode walking_base p))
+      p);
+
+assert
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @walking_Code_loop_prefix_action_path p
+  : τ (@=
+      (Hom Cat_cat (Path_cat Nat_grpd) (Path_cat Nat_grpd))
+      (@catd_transport_func
+        WalkingEnd_cat walking_Code_catd
+        walking_base walking_base
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          walking_loop p))
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        NatSucc_func
+        (@catd_transport_func
+          WalkingEnd_cat walking_Code_catd
+          walking_base walking_base p)));
+
+assert ⊢
+  @walking_encode walking_base (walking_power zero)
+  ≡ zero;
+
+assert (n : τ Nat_grpd) ⊢
+  @walking_encode_power_succ_path n
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base (walking_power (succ n)))
+      (succ (@walking_encode walking_base (walking_power n))));
+
+// Open successor action uses the named equation; it is not another runtime
+// generator-prefix rewrite.
+assertnot (n : τ Nat_grpd) ⊢
+  @walking_encode walking_base (walking_power (succ n))
+  ≡ succ (@walking_encode walking_base (walking_power n));
+
+assert (n : τ Nat_grpd) ⊢
+  @walking_encode_power_roundtrip n
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base (walking_power n))
+      n);
+
 // catalog-area: auto
 assert
   [A B : Cat]

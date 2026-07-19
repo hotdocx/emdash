@@ -3897,6 +3897,29 @@ rule @comp_fapp0
       $Z
       (@comp_fapp0 $A $X $Y $Z $g $f);
 
+// Typed equality view of the generic strict composition cut.
+symbol fapp1_comp_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  [X Y Z : τ (Obj A)]
+  (g : τ (Hom A Y Z))
+  (f : τ (Hom A X Y))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+      (@fapp1_fapp0 A B F X Z
+        (@comp_fapp0 A X Y Z g f))
+      (@comp_fapp0
+        B
+        (@fapp0 A B F X)
+        (@fapp0 A B F Y)
+        (@fapp0 A B F Z)
+        (@fapp1_fapp0 A B F Y Z g)
+        (@fapp1_fapp0 A B F X Y f)))
+≔ @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F Z))
+    (@fapp1_fapp0 A B F X Z
+      (@comp_fapp0 A X Y Z g f));
+
 /*
   Path-symmetry functor owner.
 

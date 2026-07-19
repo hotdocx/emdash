@@ -488,6 +488,31 @@ symbol walking_end_rec_beta_loop_ordinary
       f)
 ≔ @eq_refl (Hom C x x) f;
 
+// Typed equality specialization of generic strict functoriality and loop beta.
+symbol walking_end_rec_loop_prefix_eq
+  (C : Cat)
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base))
+  : τ (@=
+      (Hom C x x)
+      (@fapp1_fapp0
+        WalkingEnd_cat C (@walking_end_rec_func C x f)
+        walking_base walking_base
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          walking_loop p))
+      (@comp_fapp0
+        C x x x f
+        (@fapp1_fapp0
+          WalkingEnd_cat C (@walking_end_rec_func C x f)
+          walking_base walking_base p)))
+≔ @fapp1_comp_path
+    WalkingEnd_cat C
+    (@walking_end_rec_func C x f)
+    walking_base walking_base walking_base
+    walking_loop p;
+
 // --------------------------------------------------------------------------
 // Separate Nat free-monoid model: consistency evidence, not definitional Hom.
 // --------------------------------------------------------------------------
@@ -959,3 +984,189 @@ symbol walking_power_spiral_cell
         n)
       (@walking_power_spiral_component n)
       (@walking_power_spiral_source_adjust n));
+
+// --------------------------------------------------------------------------
+// Contextual decoder, directed normalization, and the two inverse paths.
+// --------------------------------------------------------------------------
+
+// decode^d = ind^d(Code,Rep(base),power,spiral).
+symbol walking_directed_decode_funcd
+  : τ (Functord walking_Code_catd walking_based_rep_catd)
+≔ @walking_end_ind_funcd
+    walking_Code_catd
+    walking_based_rep_catd
+    walking_power_func
+    walking_power_spiral;
+
+// Fibrewise decoder functor decode^d[x].
+symbol walking_directed_decode_func
+  (x : τ (Obj WalkingEnd_cat))
+  : τ (Functor
+      (Fibre_cat walking_Code_catd x)
+      (Fibre_cat walking_based_rep_catd x))
+≔ @Fibre_func
+    WalkingEnd_cat
+    walking_Code_catd
+    walking_based_rep_catd
+    walking_directed_decode_funcd
+    x;
+
+// The base decoder computes to power_func through contextual base beta.
+symbol walking_directed_decode_beta_base
+  : τ (@=
+      (Functor
+        (Fibre_cat walking_Code_catd walking_base)
+        (Fibre_cat walking_based_rep_catd walking_base))
+      (@walking_directed_decode_func walking_base)
+      walking_power_func)
+≔ @eq_refl
+    (Functor
+      (Fibre_cat walking_Code_catd walking_base)
+      (Fibre_cat walking_based_rep_catd walking_base))
+    walking_power_func;
+
+// Fibrewise decoded object.
+symbol walking_directed_decode
+  [x : τ (Obj WalkingEnd_cat)]
+  (n : τ (Obj (Fibre_cat walking_Code_catd x)))
+  : τ (Obj (Fibre_cat walking_based_rep_catd x))
+≔ @fapp0
+    (Fibre_cat walking_Code_catd x)
+    (Fibre_cat walking_based_rep_catd x)
+    (@walking_directed_decode_func x)
+    n;
+
+/*
+  Directed normalization at an arbitrary opaque arrow p. The body materially
+  is fdapp1_int_cell(decode^d,p,zero). Representable postcomposition, power(0),
+  and the categorical right unit reduce its source from p o id to p.
+*/
+symbol walking_directed_normalization_cell
+  [x : τ (Obj WalkingEnd_cat)]
+  (p : τ (Hom WalkingEnd_cat walking_base x))
+  : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base x)
+      p
+      (@walking_directed_decode x (@walking_encode x p)))
+≔ @fdapp1_int_cell
+    WalkingEnd_cat
+    walking_Code_catd
+    walking_based_rep_catd
+    walking_directed_decode_funcd
+    walking_base x p zero;
+
+// Equality is extracted only after the directed normalization cell exists.
+symbol walking_directed_normalization_path
+  [x : τ (Obj WalkingEnd_cat)]
+  (p : τ (Hom WalkingEnd_cat walking_base x))
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base x)
+      p
+      (@walking_directed_decode x (@walking_encode x p)))
+≔ @walking_end_based_cell_to_path
+    x
+    p
+    (@walking_directed_decode x (@walking_encode x p))
+    (@walking_directed_normalization_cell x p);
+
+// Hard based-endomorphism inverse: power(encode(p)) = p.
+symbol walking_power_encode_roundtrip
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base))
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (walking_power (@walking_encode walking_base p))
+      p)
+≔ @eq_sym
+    (Hom WalkingEnd_cat walking_base walking_base)
+    p
+    (walking_power (@walking_encode walking_base p))
+    (@walking_directed_normalization_path walking_base p);
+
+/*
+  Propositional Code action on a generator-prefixed arrow. This specializes
+  the generic functor-composition theorem; it adds no computation or
+  unification rule.
+*/
+symbol walking_Code_loop_prefix_action_path
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base))
+  : τ (@=
+      (Hom Cat_cat (Path_cat Nat_grpd) (Path_cat Nat_grpd))
+      (@catd_transport_func
+        WalkingEnd_cat walking_Code_catd
+        walking_base walking_base
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          walking_loop p))
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        NatSucc_func
+        (@catd_transport_func
+          WalkingEnd_cat walking_Code_catd
+          walking_base walking_base p)))
+≔ @walking_end_rec_loop_prefix_eq
+    Cat_cat
+    (Path_cat Nat_grpd)
+    NatSucc_func
+    p;
+
+// Evaluate the preceding functor path at zero for the Nat successor step.
+symbol walking_encode_power_succ_path
+  (n : τ Nat_grpd)
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base (walking_power (succ n)))
+      (succ (@walking_encode walking_base (walking_power n))))
+≔ @eq_ap
+    (Hom Cat_cat (Path_cat Nat_grpd) (Path_cat Nat_grpd))
+    Nat_grpd
+    (λ F : τ (Functor (Path_cat Nat_grpd) (Path_cat Nat_grpd)),
+      @fapp0
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        F zero)
+    (@catd_transport_func
+      WalkingEnd_cat walking_Code_catd
+      walking_base walking_base
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n)))
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd)
+      (Path_cat Nat_grpd)
+      (Path_cat Nat_grpd)
+      NatSucc_func
+      (@catd_transport_func
+        WalkingEnd_cat walking_Code_catd
+        walking_base walking_base (walking_power n)))
+    (@walking_Code_loop_prefix_action_path (walking_power n));
+
+// Easy inverse: encode(power(n)) = n by native Nat induction.
+symbol walking_encode_power_roundtrip
+  (n : τ Nat_grpd)
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base (walking_power n))
+      n)
+≔ @nat_elim
+    (λ n0 : τ Nat_grpd,
+      @= Nat_grpd
+        (@walking_encode walking_base (walking_power n0))
+        n0)
+    (@eq_refl Nat_grpd zero)
+    (λ n0 : τ Nat_grpd,
+      λ ih : τ (@= Nat_grpd
+        (@walking_encode walking_base (walking_power n0))
+        n0),
+      @eq_trans
+        Nat_grpd
+        (@walking_encode walking_base (walking_power (succ n0)))
+        (succ (@walking_encode walking_base (walking_power n0)))
+        (succ n0)
+        (@walking_encode_power_succ_path n0)
+        (@eq_ap
+          Nat_grpd Nat_grpd
+          (λ k : τ Nat_grpd, succ k)
+          (@walking_encode walking_base (walking_power n0))
+          n0
+          ih))
+    n;
