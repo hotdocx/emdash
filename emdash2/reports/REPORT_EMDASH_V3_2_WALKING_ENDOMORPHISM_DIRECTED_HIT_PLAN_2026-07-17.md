@@ -7,8 +7,8 @@ Depends-On: REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN
 Supersedes: none
 Side-Task-Ledger: #current-implementation-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
-Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **COMPLETE THROUGH G8 AT THE SELECTED PRACTICAL BOUNDARY — `WalkingEnd_cat`, `walking_base`, and `walking_loop` are opaque; both contextual constructor betas and the ordinary recursor's literal base/loop observations compute by runtime rewrite; no WalkingEnd-specific identity, composition, composite-prefix, or unification rule is present; transparent `Code`, powers, the exact directed spiral, the contextual representable decoder, both Hom--Nat equality round trips, structured/carrier packages, two sethood derivations, and directed negative consequences are active; an open loop-prefix composite is intentionally an ordinary `=` theorem derived from generic functoriality rather than a new computation rule; the kernel remains `984/159`, the walking owner measures `995/159`, the catalog contains 2,050 checks across 76 areas, health is synchronized, and full local CI passes across 55 files in 320.238s**
+Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb; infinity-codex:019f7b55-6238-7ea2-8f20-9897ab35d3fe:019f7c17-f9de-7bc1-967e-453a87cd4097
+Status: **COMPLETE THROUGH G8 AT THE SELECTED PRACTICAL BOUNDARY, WITH THE POST-MVP RESTRICTED `CoreInclTransf` REDESIGN PROMOTED — the opaque WalkingEnd constructors, judgmental contextual and ordinary base/loop betas, Code/powers, contextual decoder, Hom--Nat round trips, packaging, sethood, and directed negative results remain unchanged; recursive `Sk⁼`, simultaneous action/inclusion, `Cat₁⁼`, `Core₁`, primitive computational `CoreInclTransf`, separate derived κ, stable-owner `κₗ`/`κᵣ`, and the non-strict three-cell spiral are active; the walking specialization converts to the retained strict spiral; no new `unif_rule` or global associativity fold is present; the kernel measures `1028/159`, the walking owner `1039/159`, and the catalog contains 2,080 checks across 77 areas with zero unclassified checks**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 HIT-computation correction baseline: `b5037078dfaafc665adb2d996bec38596e6914c9`
@@ -657,9 +657,9 @@ necessary or optimal forever:
    Core-inclusion fusion computation making the two endpoint functors share a
    canonical normal form, so that the corresponding structured cell is the
    ordinary identity transfor; then
-2. retain a bodyful `κ_F`, preferably as the `tapp₁` projection of the
-   restricted `CoreInclTransf` package described below, as an explicitly
-   deferred possible redesign rather than a prerequisite for this MVP.
+2. retain a bodyful `κ_F` derived from the projection ladder of the restricted
+   `CoreInclTransf` package described below. It was deferred at this checkpoint
+   rather than made an MVP prerequisite and is now implemented post-MVP.
 
 Do not introduce a bodyless `κ_F` constant. The smaller strict owner is
 
@@ -791,6 +791,15 @@ audit with zero unreviewed clauses. Its warning inventory is `1028/159`, while
 the walking owner measures `1039/159`; the former `984/159` and `995/159`
 figures remain the strict pre-redesign baselines. The 44 new kernel critical
 pairs are classified as follows:
+
+The final minimal-LHS owner copy passes quietly at
+`logs/probes/wehit_coreincl_lhs_minimal_full-20260719-173947.log` and with
+warnings at
+`logs/probes/wehit_coreincl_lhs_minimal_full-20260719-173959.log`. The promoted
+walking owner passes with warnings at
+`logs/probes/emdash3_2_walking_end_hit-20260719-174138.log`; the permanent
+diagnostic suite passes at
+`logs/probes/emdash3_2_checks-20260719-174905.log`.
 
 | Runtime owner | New reports | Decision |
 | --- | ---: | --- |

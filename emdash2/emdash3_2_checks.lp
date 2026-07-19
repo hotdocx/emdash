@@ -19514,16 +19514,35 @@ assert
 
 // Inherited successor composition is deliberately runtime computation even
 // though its generic-owner overlaps remain visible in the warning inventory.
+symbol eq_skeleton_comp_path_check
+  (n : CatDim)
+  (A : Cat)
+  (w x y : τ (Obj A))
+  (f : τ (Hom A w x))
+  (g : τ (Hom A x y))
+  : τ (@=
+      (Hom A w y)
+      (@comp_fapp0
+        (EqSkeleton_cat (cat_succ n) A)
+        w x y g f)
+      (@comp_fapp0 A w x y g f))
+≔ @eq_refl
+    (Hom A w y)
+    (@comp_fapp0 A w x y g f);
+
 assert
   (n : CatDim)
   (A : Cat)
   (w x y : τ (Obj A))
   (f : τ (Hom A w x))
   (g : τ (Hom A x y)) ⊢
-  @comp_fapp0
-    (EqSkeleton_cat (cat_succ n) A)
-    w x y g f
-  ≡ @comp_fapp0 A w x y g f;
+  @eq_skeleton_comp_path_check n A w x y f g
+  : τ (@=
+      (Hom A w y)
+      (@comp_fapp0
+        (EqSkeleton_cat (cat_succ n) A)
+        w x y g f)
+      (@comp_fapp0 A w x y g f));
 
 // The simultaneous zero action is exactly PathMap of the object function.
 assert (A B : Cat) (F : τ (Functor A B)) ⊢

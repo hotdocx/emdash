@@ -14,10 +14,12 @@ as a library module rather than kernel infrastructure.
 `emdash3_2_walking_end_hit.lp` imports that Nat module and now contains the
 opaque one-dimensional walking HIT, contextual eliminator, derived
 section/recursor views, transparent Code/power/contextual decoder, Hom--Nat
-packages, sethood and directed negative consequences, and a separate `BNat`
-consistency model. The rejected generated-word Hom and every WalkingEnd
-identity/composition rule have been removed. Reports explain current status,
-mathematics, notation, implementation plans, and historical decisions.
+packages, sethood and directed negative consequences, the restricted-CoreIncl
+three-cell spiral specialization, and a separate `BNat` consistency model. The
+kernel owns the reusable equality-local skeleton and restricted Core inclusion.
+The rejected generated-word Hom and every WalkingEnd identity/composition rule
+have been removed. Reports explain current status, mathematics, notation,
+implementation plans, and historical decisions.
 
 ## Current Orientation
 

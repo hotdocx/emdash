@@ -12,7 +12,9 @@ detailed probe evidence.
 
 ## Sources Of Truth
 
-- `emdash3_2.lp`: active kernel definitions and runtime/proof-time behavior.
+- `emdash3_2.lp`: active kernel definitions and runtime/proof-time behavior,
+  including the reusable equality-local skeleton, restricted `Core₁`, and
+  computational `CoreInclTransf` infrastructure.
 - `emdash3_2_eq1_hom_action.lp`: one-way derived native-EQ1 hom-action,
   groupoidality, and structured-transport layer; it imports the kernel and is
   imported by diagnostics/examples, never by the kernel.
