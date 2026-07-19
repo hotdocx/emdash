@@ -13,10 +13,11 @@ sethood independently of the walking construction.
 as a library module rather than kernel infrastructure.
 `emdash3_2_walking_end_hit.lp` imports that Nat module and now contains the
 opaque one-dimensional walking HIT, contextual eliminator, derived
-section/recursor views, and separate `BNat` consistency model. The rejected
-generated-word Hom and every WalkingEnd category-operation rule have been
-removed. Reports explain current status, mathematics, notation, implementation
-plans, and historical decisions.
+section/recursor views, transparent Code/power/contextual decoder, Hom--Nat
+packages, sethood and directed negative consequences, and a separate `BNat`
+consistency model. The rejected generated-word Hom and every WalkingEnd
+identity/composition rule have been removed. Reports explain current status,
+mathematics, notation, implementation plans, and historical decisions.
 
 ## Current Orientation
 
@@ -32,25 +33,22 @@ plans, and historical decisions.
 
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
   active reopened migration plan for an opaque one-dimensional directed HIT.
-  G3 is promoted: opaque constructors, explicit homwise dimension evidence,
-  the parameterized contextual `Functord` eliminator, derived section and
-  recursor views, four opacity controls, and a separate `BNat` model are
-  active. The primary decoder now targets the
-  existing directed representable `Rep_catd(base)`, first producing the honest
-  normalization cell `p ⇒ power(encode(p))`. The selected HIT signature
-  explicitly carries `IsNCat(cat_succ cat_zero,WalkingEnd)`; its homwise
-  `IsDiscreteCat` projection converts that cell to the later equality round
-  trip through `hom_to_path`. This avoids the blocked generic fibrewise-Core
-  construction while clearly separating directed computation, truncation,
-  and equality. The minimal terminal change keeps runtime `tapp0_fapp0`,
-  demotes only generic terminal `fdapp1_int_cell` to proof time, and adds no
-  HIT-specific join. The terminal demotion and generic Path/Core/NatSucc
-  prerequisite slice remain at a measured `984/159` kernel inventory; the
-  rebuilt walking module measures `989/159` with no unreviewed LHS clauses.
-  Concrete G4 `Code`, directed representable decoding data, powers, and spiral
-  are now active work. Full functor-category initiality and derivation of the
-  truncation witness from a stronger general HIT principle remain outside the
-  practical MVP.
+  G1–G6 are implemented: opaque constructors, explicit homwise dimension
+  evidence, contextual elimination, literal runtime base/loop computation at
+  both contextual and ordinary recursor observers, transparent Code/powers,
+  exact directed spiral, contextual representable decoder, both Hom--Nat
+  round trips, structured/carrier packages, sethood, and directed negative
+  consequences. The normalization cell
+  `p ⇒ power(encode(p))` is constructed before hom-discreteness converts it
+  to equality. Open generator-prefix compatibility is an ordinary theorem
+  from generic functoriality, not a custom rewrite or `unif_rule`. The kernel
+  measures `984/159`, the walking owner `995/159`, and the catalog has 2,050
+  checks across 76 areas with no unclassified checks. G7 report/health
+  synchronization and G8 gates are complete; full local CI passes across 55
+  files in 320.238s. A reverse BNat functor, full hom-category equivalence,
+  full functor-category initiality, and derivation of the truncation witness
+  from a stronger general HIT principle remain outside the selected practical
+  boundary.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:

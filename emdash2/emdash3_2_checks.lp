@@ -20345,6 +20345,113 @@ assert (n : τ Nat_grpd) ⊢
       (@walking_encode walking_base (walking_power n))
       n);
 
+// catalog-area: Walking Hom-Nat packaging and directed consequences
+// The generator-prefix fact is an ordinary equality theorem. Literal loop
+// elimination remains runtime; no composite rewrite or unification rule is
+// needed by the packaging below.
+assert
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @walking_encode_loop_prefix_path p
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          walking_loop p))
+      (succ (@walking_encode walking_base p)));
+
+assert ⊢ walking_encode_function
+  : τ (@Function_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd);
+
+assert ⊢ walking_encode_func
+  : τ (Functor
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (Path_cat Nat_grpd));
+
+assert
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @fapp0
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (Path_cat Nat_grpd)
+    walking_encode_func p
+  ≡ @walking_encode walking_base p;
+
+assert ⊢ walking_hom_nat_by_inverse
+  : τ (@EquivByInverse
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd
+      walking_encode_function
+      walking_power_function);
+
+assert ⊢ walking_hom_nat_type_equiv
+  : τ (TypeEquiv
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd);
+
+assert ⊢
+  @type_equiv_to
+    (Hom WalkingEnd_cat walking_base walking_base)
+    Nat_grpd
+    walking_hom_nat_type_equiv
+  ≡ walking_encode_function;
+
+assert ⊢
+  @type_equiv_from
+    (Hom WalkingEnd_cat walking_base walking_base)
+    Nat_grpd
+    walking_hom_nat_type_equiv
+  ≡ walking_power_function;
+
+assert ⊢ walking_hom_nat_omega_equiv_EQ1
+  : τ (@OmegaEquiv_EQ1
+      Grpd_cat
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd);
+
+// Dimension evidence and carrier equivalence provide distinct sethood proofs.
+assert ⊢ walking_end_hom_is_set_from_dimension
+  : τ (IsSetGrpd
+      (Hom WalkingEnd_cat walking_base walking_base));
+
+assert ⊢ walking_end_hom_is_set_from_equiv
+  : τ (IsSetGrpd
+      (Hom WalkingEnd_cat walking_base walking_base));
+
+assert
+  (q : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      walking_loop
+      (@id WalkingEnd_cat walking_base))) ⊢
+  @walking_loop_not_identity q
+  : τ Empty_grpd;
+
+assert
+  (r : τ (Hom WalkingEnd_cat walking_base walking_base))
+  (q : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop r)
+      (@id WalkingEnd_cat walking_base))) ⊢
+  @walking_loop_no_right_inverse r q
+  : τ Empty_grpd;
+
+assert
+  (u : τ (@OmegaEquivAlong_EQ1
+      WalkingEnd_cat walking_base walking_base walking_loop)) ⊢
+  @walking_loop_not_omega_equiv_EQ1 u
+  : τ Empty_grpd;
+
+// The derived hom-action layer turns alleged internal groupoidality into the
+// impossible loop equivalence evidence above.
+assert
+  (g : τ (@IsGroupoidalCat_EQ1 WalkingEnd_cat)) ⊢
+  @walking_loop_not_omega_equiv_EQ1
+    (@groupoidal_arrow_equiv_along_EQ1
+      WalkingEnd_cat g walking_base walking_base walking_loop)
+  : τ Empty_grpd;
+
 // catalog-area: auto
 assert
   [A B : Cat]

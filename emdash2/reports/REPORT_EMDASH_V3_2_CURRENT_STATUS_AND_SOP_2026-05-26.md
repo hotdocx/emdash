@@ -26,8 +26,10 @@ detailed probe evidence.
 - `emdash3_2_walking_end_hit.lp`: one-way opaque one-dimensional walking-
   endomorphism directed-HIT module. It owns the opaque category/base/loop,
   explicit dimension evidence, contextual `Functord` eliminator, derived
-  section/recursor views, and separate `BNat` consistency model. It contains
-  no generated-word Hom or WalkingEnd-specific category-operation rule.
+  section/recursor views, transparent Code/power/decoder construction,
+  Hom--Nat carrier packages, sethood, directed negative consequences, and a
+  separate `BNat` consistency model. It contains no generated-word Hom or
+  WalkingEnd-specific identity/composition rule.
 - `emdash3_2_sum_observational_action.lp`: one-way library module retaining
   the componentwise Sum `ObsAction`, its equality comparison, and four
   proof-time bases; no kernel or univalence consumer imports it.
@@ -66,25 +68,31 @@ warning inventory                  1,128
   replaceable pattern variables      157
 ```
 
-The current 2026-07-19 in-progress slice has passed bounded kernel, Nat,
-walking-module, complete diagnostic, and focused reviewer checks. Its measured
-kernel inventory is `984/159`; the rebuilt walking module is `989/159`; both
-strict audits have zero unreviewed clauses. The refreshed catalog has 1,996
-checks across 73 areas with zero unclassified checks. Full examples pass;
-health and CI remain pending until the current G4 bounded slice is complete.
+The current 2026-07-19 walking-HIT slice is implemented through G6 and has
+passed bounded kernel, Nat, walking-module, complete diagnostic, and full
+reviewer checks. Its measured kernel inventory is `984/159`; the walking owner
+is `995/159`; both strict audits have zero unreviewed clauses with 45 annotated
+slots across 27 clauses. The refreshed catalog has 2,050 checks
+(1,804 `assert` plus 246 `assertnot`) across 76 areas with zero unclassified
+checks. Generated health is synchronized; warning checking confirms the
+kernel `984/159` inventory; and full local CI passes across 55 files in
+320.238s. The walking plan is complete through G8 at its selected practical
+boundary.
 
-The walking-endomorphism plan is reopened at implementation-goal baseline
-`82d0e27...`. Its G3 replacement is active: `WalkingEnd_cat`, `walking_base`,
-and `walking_loop` are opaque constants; explicit
+The walking-endomorphism plan resumed at implementation-goal baseline
+`82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,
+`walking_base`, and `walking_loop` are opaque constants; explicit
 `IsNCat(cat_succ cat_zero,WalkingEnd_cat)` evidence supplies only homwise
 discreteness; and the contextual `Functord` eliminator computes at the generic
 fibre-functor and displayed-cell owners. The generated-word Hom datatype and
 all WalkingEnd `Obj`, `Hom`, identity, and composition rules are removed.
-Derived sections compute at `piapp0`/`piapp1`. The ordinary recursor base is a
-transparent equality theorem joining the retained terminal-component critical
-pair rather than a specialized runtime rule, and its ordinary loop action is
-proof-time compared with the canonical section observer. `BNat` remains a
-separate consistency model, never the definitional Hom.
+Derived sections compute at `piapp0`/`piapp1`; the ordinary recursor's literal
+base and literal loop also compute by two narrow projection-order rewrites.
+These four observer clauses implement the same two semantic constructor betas.
+An open `loop ∘ p` compatibility statement is instead an ordinary equality
+derived from generic strict functoriality, with no composite-prefix rewrite or
+WalkingEnd-specific `unif_rule`. `BNat` remains a separate consistency model,
+never the definitional Hom.
 
 The generic G2 prerequisites are active in the kernel: `Path_cat_func`,
 `path_map_func`, `path_map_transf`, their complete `fapp*`/`tapp*` ladder,
@@ -97,7 +105,16 @@ composition evaluates pointwise; because `eta_equality` is enabled, conversion
 also observes the corresponding whole lambda even though no whole-term fold to
 `grpd_comp_function` exists. The living walking plan records exact owner logs,
 warning deltas, rejected alternatives, the completed G2 formation/audit gate,
-the promoted G3 opaque owner, and the now-active G4 construction.
+the promoted opaque owner, and the completed G4–G6 construction. The active
+walking module now supplies transparent Code and powers, the exact directed
+spiral, a contextual representable decoder, both Hom--Nat equality inverses,
+a structured forward encoder, carrier/native equivalence packages, two
+sethood proofs, and directed loop negative results. The canonical spiral point
+equation reduces to reflexivity; only its final endpoint-adjusted public
+presentation retains the generic stable-postcomposition normal form instead
+of collapsing to a raw identity. A reverse functor from the separate `BNat`
+model and a full hom-category equivalence remain deferred until reusable
+monoid-action-to-functor and functor-extensionality infrastructure exists.
 
 The adopted equality-valued omega-equivalence overlay is implemented at its
 selected operational MVP boundary. This includes the abstract/rigid-universe,

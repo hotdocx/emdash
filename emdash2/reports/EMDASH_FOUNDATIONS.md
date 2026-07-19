@@ -227,8 +227,8 @@ is composition of the first Path action with postcomposition by
 constructs the exact Nat iteration spiral with identity point components and
 retains the full higher action.
 
-The walking-endomorphism extension is implemented on this infrastructure at
-its G3 boundary. The former generated-word `walking_end_hom` presentation has
+The walking-endomorphism extension is implemented on this infrastructure
+through its selected G6 boundary. The former generated-word `walking_end_hom` presentation has
 been removed and is not a mathematical foundation for new work. The active
 signature is opaque and one-dimensional:
 
@@ -251,16 +251,26 @@ structured loop cell
 D(loop) o u => u o R(loop),
 ```
 
-it constructs `ind^d(R,D,u,sigma) : Functord(R,D)`, with generic base and
+it constructs `ind^d(R,D,u,sigma) : Functord(R,D)`, with judgmental base and
 loop computation. This single whole-HIT eliminator supplies action at every
 opaque arrow; there is no separate Hom datatype or special arrow eliminator.
 The derived section computes at its canonical `piapp0` and `piapp1`
-observers. For the constant recursor, the retained terminal-component rule
-makes the ordinary base observer propositional rather than a second runtime
-beta; typed branch theorems join that bounded critical pair, and the ordinary
-loop observer is exposed through the generic proof-time comparison.
+observers, and the ordinary constant recursor also computes at its literal
+base and loop observers through narrow projection-order clauses. These are two
+semantic constructor betas exposed at four necessary observers, not new
+identity or composition owners. For an open composite `loop o p`, generic
+strict functoriality and the literal loop beta instead yield an ordinary
+equality theorem; no custom runtime bridge or unification rule is used.
 
-The primary decoder target is the existing directed representable family
+The transparent family `walking_Code_catd` sends the opaque base to
+`Path_cat(Nat)` and the literal loop to `NatSucc_func`. Together with the
+based representable and the power functor it constructs the exact directed
+spiral. Its canonical point equation reduces to reflexivity. The final
+endpoint-adjusted representable presentation intentionally remains under the
+generic stable-postcomposition owner instead of reducing to a raw identity;
+that is a normal-form boundary, not a missing HIT beta.
+
+The decoder target is the existing directed representable family
 
 ```text
 Rep_catd(base)[x] = Hom_cat(WalkingEnd_cat,base,x).
@@ -272,12 +282,19 @@ After specializing the contextual eliminator, the generic
 cell `p -> power(encode(p))`. Only afterward does
 `walking_end_is_one_cat(base,x)` convert that directed cell to equality via
 `hom_to_path`. This directed-first order prevents the Hom--Nat result or a
-word carrier from being smuggled into the HIT signature. A separate concrete
-`BNat` category already interprets the opaque constructors and satisfies the
-one-dimensionality contract as consistency evidence; it is not the
-definitional Hom. Concrete Code, decoder, round trips, Hom–Nat packaging, and
-directed negative consequences remain migration work governed by the July 17
-living plan; no full functor-category initiality metatheorem is claimed.
+word carrier from being smuggled into the HIT signature. The directed cell and
+explicit discreteness prove `power(encode(p)) = p`; Nat induction proves
+`encode(power(n)) = n`. These support the structured forward encoder, an
+explicit inverse package, the Hom--Nat carrier and native-EQ1 equivalences,
+two independent sethood proofs, and the results that `walking_loop` is not an
+identity, has no right inverse, and is not an omega-equivalence.
+
+A separate concrete `BNat` category interprets the opaque constructors and
+satisfies the one-dimensionality contract as consistency evidence; it is not
+the definitional Hom. A reverse functor from that model and a full
+hom-category equivalence need reusable monoid-action and functor-extensionality
+infrastructure and remain deferred. No full functor-category initiality
+metatheorem is claimed.
 
 The first named finite dependent record is
 

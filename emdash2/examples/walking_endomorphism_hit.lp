@@ -347,3 +347,57 @@ assert (n : τ Nat_grpd) ⊢
   : τ (@= Nat_grpd
       (@walking_encode walking_base (walking_power n))
       n);
+
+// The two semantic inverses now package the actual opaque Hom carrier as Nat;
+// BNat remains a separate model rather than a definitional presentation.
+assert ⊢ walking_encode_func
+  : τ (Functor
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (Path_cat Nat_grpd));
+
+assert ⊢ walking_hom_nat_type_equiv
+  : τ (TypeEquiv
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd);
+
+assert ⊢
+  @type_equiv_to
+    (Hom WalkingEnd_cat walking_base walking_base)
+    Nat_grpd
+    walking_hom_nat_type_equiv
+  ≡ walking_encode_function;
+
+assert ⊢
+  @type_equiv_from
+    (Hom WalkingEnd_cat walking_base walking_base)
+    Nat_grpd
+    walking_hom_nat_type_equiv
+  ≡ walking_power_function;
+
+// One-dimensional signature data and the carrier equivalence independently
+// establish Hom sethood; neither is confused with the other.
+assert ⊢ walking_end_hom_is_set_from_dimension
+  : τ (IsSetGrpd
+      (Hom WalkingEnd_cat walking_base walking_base));
+
+assert ⊢ walking_end_hom_is_set_from_equiv
+  : τ (IsSetGrpd
+      (Hom WalkingEnd_cat walking_base walking_base));
+
+// Encoding sends loop prefixes to successors, so the directed loop is neither
+// identity nor invertible.
+assert
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @walking_encode_loop_prefix_path p
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          walking_loop p))
+      (succ (@walking_encode walking_base p)));
+
+assert
+  (u : τ (@OmegaEquivAlong_EQ1
+      WalkingEnd_cat walking_base walking_base walking_loop)) ⊢
+  @walking_loop_not_omega_equiv_EQ1 u
+  : τ Empty_grpd;

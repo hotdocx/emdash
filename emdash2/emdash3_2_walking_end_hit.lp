@@ -1111,12 +1111,15 @@ symbol walking_Code_loop_prefix_action_path
     NatSucc_func
     p;
 
-// Evaluate the preceding functor path at zero for the Nat successor step.
-symbol walking_encode_power_succ_path
-  (n : τ Nat_grpd)
+// Evaluate the functor equality at zero for any generator-prefixed arrow.
+symbol walking_encode_loop_prefix_path
+  (p : τ (Hom WalkingEnd_cat walking_base walking_base))
   : τ (@= Nat_grpd
-      (@walking_encode walking_base (walking_power (succ n)))
-      (succ (@walking_encode walking_base (walking_power n))))
+      (@walking_encode walking_base
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          walking_loop p))
+      (succ (@walking_encode walking_base p)))
 ≔ @eq_ap
     (Hom Cat_cat (Path_cat Nat_grpd) (Path_cat Nat_grpd))
     Nat_grpd
@@ -1130,7 +1133,7 @@ symbol walking_encode_power_succ_path
       walking_base walking_base
       (@comp_fapp0
         WalkingEnd_cat walking_base walking_base walking_base
-        walking_loop (walking_power n)))
+        walking_loop p))
     (@comp_cat_fapp0
       (Path_cat Nat_grpd)
       (Path_cat Nat_grpd)
@@ -1138,8 +1141,16 @@ symbol walking_encode_power_succ_path
       NatSucc_func
       (@catd_transport_func
         WalkingEnd_cat walking_Code_catd
-        walking_base walking_base (walking_power n)))
-    (@walking_Code_loop_prefix_action_path (walking_power n));
+        walking_base walking_base p))
+    (@walking_Code_loop_prefix_action_path p);
+
+// Power recursion specializes the generator-prefix equality.
+symbol walking_encode_power_succ_path
+  (n : τ Nat_grpd)
+  : τ (@= Nat_grpd
+      (@walking_encode walking_base (walking_power (succ n)))
+      (succ (@walking_encode walking_base (walking_power n))))
+≔ @walking_encode_loop_prefix_path (walking_power n);
 
 // Easy inverse: encode(power(n)) = n by native Nat induction.
 symbol walking_encode_power_roundtrip
@@ -1170,3 +1181,172 @@ symbol walking_encode_power_roundtrip
           n0
           ih))
     n;
+
+// --------------------------------------------------------------------------
+// Carrier packaging, sethood, and directed negative consequences.
+// --------------------------------------------------------------------------
+
+// Forward carrier map selected by Code evaluation at zero.
+symbol walking_encode_function
+  : τ (@Function_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd)
+≔ λ p : τ (Hom WalkingEnd_cat walking_base walking_base),
+    @walking_encode walking_base p;
+
+// Structured encoder: the Code hom action evaluated at zero.
+symbol walking_encode_func
+  : τ (Functor
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (Path_cat Nat_grpd))
+≔ @comp_cat_fapp0
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (Functor_cat (Path_cat Nat_grpd) (Path_cat Nat_grpd))
+    (Path_cat Nat_grpd)
+    (@fapp0_func (Path_cat Nat_grpd) (Path_cat Nat_grpd) zero)
+    (@fapp1_func
+      WalkingEnd_cat Cat_cat walking_Code_catd
+      walking_base walking_base);
+
+// The two semantic round trips form an explicit quasi-inverse package.
+symbol walking_hom_nat_by_inverse
+  : τ (@EquivByInverse
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd
+      walking_encode_function
+      walking_power_function)
+≔ @Struct_sigma
+    (@Pi_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (λ p : τ (Hom WalkingEnd_cat walking_base walking_base),
+        @= (Hom WalkingEnd_cat walking_base walking_base)
+          (walking_power (@walking_encode walking_base p))
+          p))
+    (λ _ : τ (@Pi_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (λ p : τ (Hom WalkingEnd_cat walking_base walking_base),
+        @= (Hom WalkingEnd_cat walking_base walking_base)
+          (walking_power (@walking_encode walking_base p))
+          p)),
+      @Pi_grpd Nat_grpd
+        (λ n : τ Nat_grpd,
+          @= Nat_grpd
+            (@walking_encode walking_base (walking_power n))
+            n))
+    walking_power_encode_roundtrip
+    walking_encode_power_roundtrip;
+
+// Carrier equivalence; the selected forward map is walking_encode_function.
+symbol walking_hom_nat_type_equiv
+  : τ (TypeEquiv
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd)
+≔ @Struct_sigma
+    (@Function_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd)
+    (λ map : τ (@Function_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd),
+      @IsEquivMap
+        (Hom WalkingEnd_cat walking_base walking_base)
+        Nat_grpd map)
+    walking_encode_function
+    (@is_equiv_map_by_inverse
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd
+      walking_encode_function
+      walking_power_function
+      walking_hom_nat_by_inverse);
+
+// Native equality-valued equivalence facade for the carrier comparison.
+symbol walking_hom_nat_omega_equiv_EQ1
+  : τ (@OmegaEquiv_EQ1
+      Grpd_cat
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd)
+≔ @type_equiv_to_omega_EQ1
+    (Hom WalkingEnd_cat walking_base walking_base)
+    Nat_grpd
+    walking_hom_nat_type_equiv;
+
+// Set-valuedness directly projected from the HIT's dimension signature.
+symbol walking_end_hom_is_set_from_dimension
+  : τ (IsSetGrpd
+      (Hom WalkingEnd_cat walking_base walking_base))
+≔ @is_discrete_cat_obj_set
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (@walking_end_hom_discrete walking_base walking_base);
+
+// The carrier equivalence independently transports Nat sethood backward.
+symbol walking_end_hom_is_set_from_equiv
+  : τ (IsSetGrpd
+      (Hom WalkingEnd_cat walking_base walking_base))
+≔ @is_trunc_grpd_equiv_from
+    trunc_zero
+    (Hom WalkingEnd_cat walking_base walking_base)
+    Nat_grpd
+    walking_hom_nat_type_equiv
+    nat_is_set;
+
+// Encoding distinguishes the directed generator from the identity.
+symbol walking_loop_not_identity
+  (q : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      walking_loop
+      (@id WalkingEnd_cat walking_base)))
+  : τ Empty_grpd
+≔ @eq_ap
+    (Hom WalkingEnd_cat walking_base walking_base)
+    Nat_grpd
+    walking_encode_function
+    walking_loop
+    (@id WalkingEnd_cat walking_base)
+    q;
+
+// A right inverse would encode to a successor equal to zero.
+symbol walking_loop_no_right_inverse
+  (r : τ (Hom WalkingEnd_cat walking_base walking_base))
+  (q : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop r)
+      (@id WalkingEnd_cat walking_base)))
+  : τ Empty_grpd
+≔ @eq_trans
+    Nat_grpd
+    (succ (@walking_encode walking_base r))
+    (@walking_encode walking_base
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop r))
+    (@walking_encode walking_base (@id WalkingEnd_cat walking_base))
+    (@eq_sym
+      Nat_grpd
+      (@walking_encode walking_base
+        (@comp_fapp0
+          WalkingEnd_cat walking_base walking_base walking_base
+          walking_loop r))
+      (succ (@walking_encode walking_base r))
+      (@walking_encode_loop_prefix_path r))
+    (@eq_ap
+      (Hom WalkingEnd_cat walking_base walking_base)
+      Nat_grpd
+      walking_encode_function
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop r)
+      (@id WalkingEnd_cat walking_base)
+      q);
+
+// Hence the loop carries no native omega-equivalence evidence.
+symbol walking_loop_not_omega_equiv_EQ1
+  (u : τ (@OmegaEquivAlong_EQ1
+      WalkingEnd_cat walking_base walking_base walking_loop))
+  : τ Empty_grpd
+≔ @walking_loop_no_right_inverse
+    (@omega_equiv_along_right_inv_EQ1
+      WalkingEnd_cat walking_base walking_base walking_loop u)
+    (@omega_equiv_along_right_law_EQ1
+      WalkingEnd_cat walking_base walking_base walking_loop u);

@@ -8,13 +8,14 @@ Supersedes: none
 Side-Task-Ledger: #current-implementation-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **REOPENED / G3 OPAQUE OWNER COMPLETE AND G4 ACTIVE — `WalkingEnd_cat`, `walking_base`, and `walking_loop` are opaque constants; the generated-word Hom datatype and every WalkingEnd-specific object/Hom/identity/composition rule are removed; explicit one-dimensional evidence, its homwise specializations, and the contextual `Functord` eliminator are active; the contextual base/loop betas are the only HIT-specific runtime rules; derived sections compute at `piapp0`/`piapp1`, while the ordinary recursor base is propositionally joined across the retained terminal-component critical pair and its ordinary loop observer remains proof-time compared with the canonical section observer; the separate `BNat` category is consistency evidence rather than definitional Hom; the active kernel remains `984/159`, the rebuilt walking module measures `989/159`, both strict LHS audits are zero, and bounded kernel/diagnostic/reviewer checks pass; G4 concrete `Code`, representable decoder data, powers, and directed spiral are next**
+Status: **COMPLETE THROUGH G8 AT THE SELECTED PRACTICAL BOUNDARY — `WalkingEnd_cat`, `walking_base`, and `walking_loop` are opaque; both contextual constructor betas and the ordinary recursor's literal base/loop observations compute by runtime rewrite; no WalkingEnd-specific identity, composition, composite-prefix, or unification rule is present; transparent `Code`, powers, the exact directed spiral, the contextual representable decoder, both Hom--Nat equality round trips, structured/carrier packages, two sethood derivations, and directed negative consequences are active; an open loop-prefix composite is intentionally an ordinary `=` theorem derived from generic functoriality rather than a new computation rule; the kernel remains `984/159`, the walking owner measures `995/159`, the catalog contains 2,050 checks across 76 areas, health is synchronized, and full local CI passes across 55 files in 320.238s**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 HIT-computation correction baseline: `b5037078dfaafc665adb2d996bec38596e6914c9`
 Corrective-review baseline: `9858a420fd6f94e920415a8728ffd9d6bf8d18a5`
 Implementation-goal starting baseline: `92daacc5a90ec9b7b457cfa310c0bb51e1531237`
 Current implementation-goal baseline and review provenance: `82d0e27fd75573309a9c7e26e621706c66d24e64`
+Completion working-tree base: `957cf736a501f7f6a27d8c709005dbbbfc520aea`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
 Current implementation owners: reusable Nat prerequisites in
 `emdash3_2_nat_arithmetic.lp`; walking HIT/model/comparison in
@@ -22,7 +23,7 @@ Current implementation owners: reusable Nat prerequisites in
 
 ## Status And Authority
 
-This report is the reopened bounded sub-plan of the completed selected-MVP
+This report is the completed bounded sub-plan of the selected-MVP
 equality-valued omega-equivalence overlay. The 2026-07-18 corrective review
 invalidates the earlier claim that the committed `walking_end_hom` word
 carrier is the intended HIT's “intrinsic Hom.” It does not reopen or
@@ -49,7 +50,7 @@ historical provenance only and never authorize a reset or rollback. The
 authoritative correction plan is recorded next; the former completion record
 is retained afterward only as rejected-decision evidence.
 
-## 2026-07-19 Active G1–G3 Promotion Record — Current Override
+## 2026-07-19 Active G1–G6 Promotion Record — Current Override
 
 This section is the current implementation ledger for the first promoted
 slice. It supersedes later checkpoint sentences saying that the active kernel
@@ -219,21 +220,27 @@ Fibre_func(walking_end_ind_funcd(...),base)          ↪ u
 fdapp1_int_cell(walking_end_ind_funcd(...),loop,r)  ↪ sigma[r].
 ```
 
-These are the only two HIT-specific runtime rules. The terminal section
-specialization and constant recursor are transparent definitions. Section
-base and loop observations compute at `piapp0` and `piapp1`. At the ordinary
-constant-recursion object observer, the retained generic terminal-component
-rule produces the bounded nonconfluent branch forecast by G1, so
-`fapp0(rec,base)` is deliberately **not** a new runtime beta. Two typed branch
-theorems separately exercise the contextual and generic projections;
-`walking_end_rec_beta_base` composes them propositionally after terminal
-evaluation. The canonical recursor loop theorem stays at the section observer,
-and `walking_end_rec_loop_ordinary_comparison` exposes the existing proof-time
-`piapp1`/`fapp1` comparison. No specialized recursor rule or new unification
-rule was added. The inferred declaration type of the transparent
-`walking_end_rec_beta_loop` alias preserves the canonical section classifier
-across this measured terminal boundary; its exact readable formula is checked
-in the reviewer surface.
+The two contextual rules are the primary constructor betas. The transparent
+terminal specialization also exposes the same two semantic betas at the
+ordinary recursor observers through two narrow projection-order clauses:
+
+```text
+fapp0(rec(C,x,f),base)   ↪ x
+fapp1(rec(C,x,f),loop)   ↪ f.
+```
+
+Thus the usual eliminator contract is judgmental at both the literal base and
+literal loop, exactly as required. Counting syntactic observers gives four
+WalkingEnd rules, but they implement only the two constructor betas; none owns
+identity, composition, or generic functoriality. The retained typed projection
+theorems document the terminal/component branch and the section-to-ordinary
+comparison, while `walking_end_rec_beta_base` and
+`walking_end_rec_beta_loop_ordinary` are reflexive views of the selected
+runtime normal forms. An open composite such as `loop ∘ p` is deliberately
+outside the constructor-beta boundary: `walking_end_rec_loop_prefix_eq` is an
+ordinary equality obtained from generic strict functoriality plus the literal
+loop beta. No composite-prefix rewrite and no WalkingEnd-specific
+`unif_rule` is present.
 
 The retained `BNat_cat` is now explicitly a separate semantic consistency
 model. Its Nat-monoid operations and one-dimensionality evidence remain
@@ -254,6 +261,75 @@ Bounded `make check`, complete diagnostics, the rewritten
 refreshed catalog has 1,996 checks across 73 areas with zero unclassified
 checks. Health and CI are deferred to the next synchronized gate after the
 current G4 inner slice.
+
+## 2026-07-19 G4–G6 Promotion Record — Current Override
+
+This section records the implementation after that G3 checkpoint and
+supersedes its forward-looking G4 sentence.
+
+### G4 concrete Code, power, and spiral complete
+
+`walking_Code_catd` is the transparent constant-`Path_cat(Nat)` family whose
+literal base and loop observations compute to `Path_cat(Nat)` and
+`NatSucc_func`. The representable family, `walking_power_func`, pointwise
+powers, and the full directed spiral are active. The spiral's canonical point
+equation computes to reflexivity. Its final public representable presentation
+includes explicit endpoint adjustments, so the generic stable
+postcomposition owner intentionally prevents that adjusted cell from
+collapsing judgmentally to a raw identity. That is a desired normal-form
+boundary, not a failure of either HIT constructor beta; the exact directed
+type and canonical pre-adjustment identity computation both remain visible.
+
+### G5 directed decoder and equality round trips complete
+
+`walking_directed_decode_funcd` specializes the contextual eliminator to
+`Code`, the based representable, powers, and the spiral. At every opaque arrow
+`p`, its displayed action at zero constructs
+`walking_directed_normalization_cell : p ⇒ power(encode(p))`. The apparent
+source `p ∘ id` closes judgmentally through `power(0)`, representable
+postcomposition, and the categorical right unit. Only then does explicit
+hom-discreteness convert this directed cell to
+`walking_directed_normalization_path`. This proves the hard
+`power(encode(p)) = p` inverse; Nat induction proves the easy
+`encode(power(n)) = n` inverse.
+
+The generator-prefix compatibility required by that induction is an ordinary
+equality theorem. `fapp1_comp_path` exposes existing generic strict
+functoriality propositionally, and `walking_end_rec_loop_prefix_eq` specializes
+it after the literal loop beta. A candidate WalkingEnd-specific runtime bridge
+was rejected because it raised the owner inventory from `995/159` to
+`1002/159`. No replacement `unif_rule` was selected: changing the acceptance
+target to `=` made any such proof-time global authority unnecessary.
+
+### G6 packaging and directed consequences complete
+
+The active module now contains the structured forward encoder
+`walking_encode_func`, an explicit inverse package, the carrier equivalence
+`walking_hom_nat_type_equiv`, its native-EQ1 facade, independent Hom-sethood
+proofs from dimension and from the Nat equivalence, and proofs that
+`walking_loop` is not identity, has no right inverse, and carries no
+`OmegaEquivAlong_EQ1` evidence. Permanent checks also derive the corresponding
+downstream nongroupoidality consequence.
+
+The selected practical G6 boundary does not manufacture a reverse
+`BNat_cat -> WalkingEnd_cat` functor or a full category equivalence
+`Hom_cat(WalkingEnd,base,base) ≃ Path_cat(Nat)`. Those stronger packages need
+generic monoid-action-to-functor construction plus suitable functor/equivalence
+extensionality that the current library does not yet provide. The carrier
+equivalence, structured forward action, sethood, and directed negative results
+are complete without making that separate infrastructure a blocker.
+
+The complete owner-position probe passes quietly at
+`logs/probes/wehit_g3_opaque_module-20260719-154358.log` and warning-enabled at
+`logs/probes/wehit_g3_opaque_module-20260719-154407.log`, measuring `995/159`.
+The kernel remains `984/159`; the strict audit remains zero unreviewed clauses
+with 45 annotated slots across 27 clauses. Bounded full checks and examples
+pass, and the regenerated catalog contains 2,050 checks across 76 areas with
+zero unclassified checks. G7 synchronized the implementation, checks,
+reviewer surface, current authorities, generated catalog, and generated health
+report. G8 then passed warning checking, warning summary, strict LHS audit,
+TOC/reference/header lint, catalog freshness, script/unit tests, and full local
+CI across 55 files in 320.238s.
 
 ## 2026-07-18 Contextual `Functord` And Directed-First Decision — Current Override
 
@@ -1512,12 +1588,12 @@ repeated-blocker policy is met.
 | `WEHIT-G2-GROUPOID-INTERNALIZATION-AUDIT` | complete: all requested surfaces classified level by level; capped composition eta consequence recorded; fixed-functor Core action retained; no global directed Core/Core_catd or directed-cell reflection added | retain these boundaries during G3–G7 |
 | `WEHIT-FUTURE-COREINCL-TRANSF` | explicitly deferred possible redesign; mathematically natural and potentially architecturally preferable | after the strict MVP is complete, optionally probe recursive `Sk⁼(n,A)` with `Core_cat` at zero, simultaneous `Sk⁼` functor action and recursive inclusion, `Cat₁⁼ ≔ Sk⁼(cat_succ(cat_zero),Cat_cat)`, `Core₁`, primitive computational `CoreInclTransf`, genuine `κₗ`, and the non-strict spiral `κᵣ ∘ᵥ PathLift(h) ∘ᵥ κₗ`; do not conflate it with an unavailable universal `IsNCat(1)` truncation or make it a current-goal prerequisite |
 | `WEHIT-G2-DIMENSION-DERIVABILITY` | nonblocking future audit | determine whether stronger general HIT induction derives OneCat evidence and can retire the explicit truncation constructor; never claim this during the MVP without a proof |
-| `WEHIT-G3-OPAQUE-OWNER` | complete: generated-word Hom and all WalkingEnd category-operation rules removed; opaque constructors, explicit dimension evidence, contextual eliminator, derived section/recursor views, four opacity controls, and separate BNat model active; module `989/159`, zero unreviewed LHS clauses | preserve the two-rule HIT runtime boundary during G4–G7 |
-| `WEHIT-G4-CODE-REP-POWER` | active: generic exact spiral mechanism and directed representable formation already demonstrated without endpoint shortcuts; opaque WalkingEnd integration now unblocked | concrete transparent Code, generic directed representable, power functor, and exact directed spiral through the selected G2 internal owners |
-| `WEHIT-G5-DIRECTED-AND-EQUALITY-ROUNDTRIPS` | open in selected design | directed normalization from decoder `fdapp1`; hard equality via explicit hom discreteness; easy inverse from Nat induction |
-| `WEHIT-G6-PACKAGING` | old implementation rejected | rebuild BNat, carrier/structured Hom comparisons, sethood, OneCat package, and negative consequences at their distinct strengths |
-| `WEHIT-G7-MIGRATION` | open | checks, examples, docs, catalog, health contain no rejected architecture |
-| `WEHIT-G8-GATES` | open | proportional probes, warnings/audits, and full local CI pass |
+| `WEHIT-G3-OPAQUE-OWNER` | **complete with corrected beta boundary**: generated-word Hom and all WalkingEnd category-operation rules removed; opaque constructors, explicit dimension evidence, contextual eliminator, derived section/recursor views, opacity controls, and separate BNat model active; literal contextual and ordinary base/loop observations compute | preserve the two semantic constructor betas at four necessary observers; add no identity, composition, composite-prefix, or unification owner |
+| `WEHIT-G4-CODE-REP-POWER` | **complete**: transparent Code, directed representable, power functor, exact spiral, reflexive canonical point equation, and stable endpoint-adjusted presentation active | retain the generic stable-postcomposition boundary rather than forcing the final adjusted cell to raw identity |
+| `WEHIT-G5-DIRECTED-AND-EQUALITY-ROUNDTRIPS` | **complete**: contextual decoder, arbitrary-arrow directed normalization, hom-discreteness conversion, hard inverse, and Nat-inductive easy inverse active | retain generator-prefix compatibility as an ordinary theorem from generic functoriality; no custom rewrite or `unif_rule` |
+| `WEHIT-G6-PACKAGING` | **complete at selected practical boundary**: structured forward encoder, inverse and carrier/native packages, two sethood proofs, and directed negative consequences active | reverse BNat functor and full hom-category equivalence remain explicitly deferred pending generic monoid-action and functor-extensionality infrastructure |
+| `WEHIT-G7-MIGRATION` | **complete**: production module, diagnostics, reviewer example, current authorities, parent/child ledgers, generated catalog, and generated health are synchronized | preserve the selected architecture and keep rejected alternatives historical |
+| `WEHIT-G8-GATES` | **complete**: focused owner probes, warning inventory, strict audit, catalog, TOC/reference/header lint, script/unit tests, health, and full local CI pass; CI checked 55 files in 320.238s | reopen only for a new scoped consumer or generic-infrastructure milestone |
 
 ## Superseded Corrective Decisions And Former Implementation — Historical Evidence
 
