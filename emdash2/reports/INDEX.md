@@ -51,8 +51,9 @@ implementation plans, and historical decisions.
   retained strict spiral. The kernel measures `1028/159`, the walking owner
   `1039/159`, and the catalog has 2,080 checks across 77 areas with no
   unclassified checks; all 44 new kernel critical-pair reports are classified
-  as accepted runtime-owner diagnostics and no `unif_rule` is added. A reverse
-  BNat functor, full hom-category equivalence,
+  as accepted runtime-owner diagnostics and no `unif_rule` is added. Generated
+  health is synchronized and full local CI passes 55 files in 308.952s. A
+  reverse BNat functor, full hom-category equivalence,
   full functor-category initiality, and derivation of the truncation witness
   from a stronger general HIT principle remain outside the selected practical
   boundary.

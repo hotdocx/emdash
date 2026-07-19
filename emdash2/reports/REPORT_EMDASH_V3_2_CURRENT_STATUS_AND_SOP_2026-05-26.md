@@ -109,6 +109,8 @@ actions. Warnings are diagnostic rather than a veto: the intended rules remain
 runtime, while six redundant compound category slots were minimized to `_`
 even though doing so exposed 14 of those reports. Replaceable-variable warnings
 do not increase, and no unification rule is added.
+Generated health is synchronized with all 55 measured files/examples passing,
+and the full local CI gate passes the same 55 files in 308.952s.
 
 The walking-endomorphism plan resumed at implementation-goal baseline
 `82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,
