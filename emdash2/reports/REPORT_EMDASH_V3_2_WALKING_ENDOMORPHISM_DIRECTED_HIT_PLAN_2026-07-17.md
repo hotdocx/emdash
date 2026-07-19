@@ -1,14 +1,14 @@
 # EMDASH v3.2 Walking Endomorphism Directed-HIT And Nat Normal-Form Plan
 
 Date: 2026-07-17
-Last reviewed: 2026-07-18
+Last reviewed: 2026-07-19
 Plan-ID: EMDASH-V3-2-WALKING-ENDOMORPHISM-DIRECTED-HIT-2026-07-17
 Depends-On: REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17; REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_nat_arithmetic.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
 Supersedes: none
 Side-Task-Ledger: #current-implementation-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **REOPENED / IMPLEMENTATION-GOAL READY — the committed word-carrier presentation is rejected as the intended HIT; a parameterized contextual `Functord` eliminator supplies the selected whole-HIT/arrow-naturality interface without a separate Hom datatype or special 1-cell eliminator; the primary decoder target is now the existing directed representable `Rep_catd(base)`, giving an honest directed normalization cell before equality is requested; the selected HIT signature explicitly retains one-dimensionality evidence `IsNCat(cat_succ cat_zero,WalkingEnd)`, from which the hard equality is obtained afterward through `hom_to_path`; the selected minimal terminal ownership retains runtime `tapp0_fapp0`, demotes only terminal-source `fdapp1_int_cell` to proof-time comparison, keeps contextual base/loop beta as runtime computation, and adds no HIT-specific join**
+Status: **REOPENED / IMPLEMENTATION-GOAL READY WITH AN EARLY G2 OWNER GATE — the committed word-carrier presentation is rejected as the intended HIT; a parameterized contextual `Functord` eliminator supplies the selected whole-HIT/arrow-naturality interface without a separate Hom datatype or special 1-cell eliminator; the primary decoder target is now the existing directed representable `Rep_catd(base)`, giving an honest directed normalization cell before equality is requested; the selected HIT signature explicitly retains one-dimensionality evidence `IsNCat(cat_succ cat_zero,WalkingEnd)`, from which the hard equality is obtained afterward through `hom_to_path`; the selected minimal terminal ownership retains runtime `tapp0_fapp0`, demotes only terminal-source `fdapp1_int_cell` to proof-time comparison, keeps contextual base/loop beta as runtime computation, and adds no HIT-specific join; the internal `PathInt`/spiral mechanism is computationally demonstrated, but its exact endpoints must still be repackaged without the five probe-local unification shortcuts before promotion**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 HIT-computation correction baseline: `b5037078dfaafc665adb2d996bec38596e6914c9`
@@ -226,6 +226,257 @@ experiments establish computational feasibility of the contextual interface;
 they do not claim that the active kernel or walking implementation has already
 migrated.
 
+## 2026-07-19 Internal Path Action And Spiral Checkpoint — Current Override
+
+This checkpoint refines G2 and G4. It supersedes any earlier wording that
+treated a bodyless spiral as the remaining option, that called the current
+`PathLift` probe promotion-ready, or that selected a primitive `PathLift`
+before inspecting the normal form of its semantic body.
+
+The internal computational core is now demonstrated. The focused probe
+`tmp/probes/wehit_path_int_internal_action.lp`, copied verbatim at the
+verified checkpoint to
+`tmp/wehit_path_int_internal_action_success_2026-07-18-4.lp`, constructs:
+
+```text
+PathInt    : Functor(Grpd_cat,Cat_cat)
+PathMap(f) : Functor(Path_cat(A),Path_cat(B))
+PathLift(h): Transf(PathLift(f),PathLift(g)).
+```
+
+Its permanent checks show that:
+
+```text
+tapp₁(PathLift(h),x,y)
+  ↪ CoreIncl₁ ∘ PathMap(cell_h)
+
+tapp₁(PathLift(h),p)
+  ↪ path_to_hom(cell_h(p)),
+```
+
+and the exact Nat spiral component reduces to the identity in that
+experimental environment. The complete off-diagonal action remains a functor
+and is iterable; no opaque spiral, external component family, handwritten
+naturality square, or WalkingEnd-specific Hom eliminator supplies that data.
+
+This is not yet a promotable solution. The checkpoint probe contains five
+direct `unif_rule` endpoint shortcuts. Two contain a reducible
+`comp_fapp0(Grpd_cat,...)`; the others directly register composite
+`PathInt`, `CoreIncl`, and `PathLift` presentation chains because
+unification rules do not compose transitively. They do not construct the
+spiral, but they are currently what lets Lambdapi regard the internally
+constructed transformation as having the exact contextual-eliminator
+endpoints. The strict inferred-slot audit being clean does not validate their
+semantic ownership or reducibility. None of these five rules is selected for
+promotion.
+
+The full owner-position experiment is
+`tmp/probes/wehit_path_int_internal_action_owner_full.lp`. It passes quietly
+at
+`logs/probes/wehit_path_int_internal_action_owner_full-20260719-003917.log`;
+its warning-enabled run
+`logs/probes/wehit_path_int_internal_action_owner_full-20260719-003933.log`
+has 993 unjoinable critical pairs against the fresh active-kernel baseline
+971. Isolating the candidates gives:
+
+```text
+runtime comp_Grpd ↪ grpd_comp_function       +20
+generic Cat-valued postcomposition projection +2
+PathInt/PathLift/spiral rules themselves       +0.
+```
+
+Warnings are not an automatic veto, but the broad `Grpd` migration is not
+selected merely because this feasibility probe passes. It overlaps arbitrary
+Grpd-valued identities, functoriality, transfors, represented actions, and
+definitional isomorphisms. The two postcomposition warnings are exactly the
+existing Sigma first/second projection commuting cuts.
+
+Normal-form probes now localize the smaller issue:
+
+- `tmp/probes/wehit_pathlift_semantic_compute.lp`, with log
+  `logs/probes/wehit_pathlift_semantic_compute-20260719-011539.log`;
+- `tmp/probes/wehit_pathlift_semantic_compute_no_grpd_runtime.lp`, with log
+  `logs/probes/wehit_pathlift_semantic_compute_no_grpd_runtime-20260719-011652.log`.
+
+For the transparent semantic construction
+
+```text
+PathLift_sem(f) ≔ hom_postcomp(CoreIncl_C,PathMap(f)),
+```
+
+they establish:
+
+```text
+PathLift_sem(f) ∘ PathMap(g)
+  ↪ hom_postcomp(CoreIncl_C,PathMap(comp_Grpd(f,g)))
+  ≡ PathLift_sem(comp_Grpd(f,g)),
+```
+
+without the experimental `Grpd` runtime fold. Thus precomposition already
+accumulates through the semantic body. In contrast:
+
+```text
+F ∘ PathLift_sem(f)
+  ↪ F ∘ hom_postcomp(CoreIncl_C,PathMap(f))
+```
+
+stops at the existing stable `hom_postcomp_fapp0` head, while the intended
+normal form is:
+
+```text
+hom_postcomp(
+  CoreIncl_D,
+  PathMap(F₀) ∘ PathMap(f)).
+```
+
+This normal form identifies the missing mathematical comparison, but it does
+not by itself justify making the two functors judgmentally equal by a runtime
+rewrite. The first owner to probe is the structured fixed-functor comparison
+
+```text
+κ_F :
+  F ∘ CoreIncl_C
+    ⇒
+  CoreIncl_D ∘ PathMap(F₀),
+```
+
+for each `F : Functor(C,D)`. Its component at `x` is `id_(F(x))`; its action
+on `p : x = y` is the equality-induction comparison between
+`F(path_to_hom(p))` and `path_to_hom(eq_ap(F₀,p))`. It must be packaged as
+one ordinary transfor with its full `tapp*` ladder, not as an external family
+of naturality equations. Whiskering it by `G : Functor(A,Core_cat(C))` gives
+the exact reusable endpoint cell
+
+```text
+κ_F ⋆ G :
+  F ∘ hom_postcomp(CoreIncl_C,G)
+    ⇒
+  hom_postcomp(CoreIncl_D,PathMap(F₀) ∘ G).
+```
+
+This is already the form needed in the spiral: the contextual eliminator asks
+for a structured cell, not for an unrecorded claim that its endpoint functors
+are definitionally identical.
+
+The mathematical cell is canonical, but its kernel construction is not yet
+demonstrated. The active kernel has no general transparent constructor that
+turns pointwise components plus a naturality proof into an arbitrary
+`Transf`. The next focused probe must therefore compare two representations
+of this same generic Core-inclusion owner:
+
+1. derive `κ_F` with a body from the existing equality/PathOut induction and
+   ordinary transfor projection machinery; or
+2. if that machinery cannot package the object, select a strict
+   Core-inclusion fusion computation making the two endpoint functors share a
+   canonical normal form, so that the corresponding structured cell is the
+   ordinary identity transfor.
+
+Do not introduce a bodyless `κ_F` constant. The strict candidate is
+
+```text
+F ∘ hom_postcomp(CoreIncl_C,G)
+  ↪ hom_postcomp(CoreIncl_D,PathMap(F₀) ∘ G).
+```
+
+It must first be factored through and tested at the smaller semantic square
+`F ∘ CoreIncl_C`; the stable `hom_postcomp` form is a consumer projection,
+not an independent HIT rule. Neither representation is selected by the
+present evidence. Give `PathInt`, `PathMap`, `κ_F` (if explicit), and their
+transformation/higher-action projections a proper named `fapp*`/`tapp*`
+ladder so rules match stable intermediate heads rather than nested reducible
+presentations.
+
+In the active calculus the transparent lift remains
+
+```text
+PathLift_sem
+  ≔ comp_cat_cov_func(CoreIncl_C) ∘ PathInt₁(A,Obj(C)).
+```
+
+It would be literally a `tapp1_func(CoreIncl_)` projection only after a full
+`CoreIncl_ : Core ⇒ Id_Cat` had been constructed. The fixed-functor
+`κ_F`/strict-fusion owner supplies exactly the postcomposition naturality
+needed by `PathLift_sem` without assuming that unavailable stronger package.
+
+There is a promising more-internal reading: `κ_F` is the functor-indexed
+naturality structure one expects from the components
+`CoreIncl_C : Core_cat(C) → C`. It must, however, be formulated at the
+strongest level actually available. The current declaration
+
+```text
+Core_cat(C) ≔ Path_cat(Obj(C)) : Cat
+```
+
+is deliberately a transparent object-level assignment. Whether it is a
+defined alias or a primitive stable head is not what determines higher
+functoriality: neither form supplies action on functors, transformations, and
+all iterated cells. A full transformation
+
+```text
+CoreIncl_ : Core ⇒ Id_Cat
+```
+
+would first require a genuine endofunctor `Core : Cat_cat → Cat_cat`.
+Although its action on a functor `F : C → D` can be defined as
+`PathMap(F₀)`, its action on an arbitrary directed transformation
+`η : F ⇒ G` would require object equalities `F(x)=G(x)`; the components
+`ηₓ : F(x)→G(x)` do not supply those equalities in a general directed
+category. Thus `Core_cat` is functorial on the ordinary one-dimensional
+category of categories and functors, but not automatically an omega-functor
+on the full directed `Cat_cat`. This is the same directed obstruction that
+rejected a generic `Core_catd`. Do not postulate that missing higher action.
+
+The intended arrow-to-path collapse is already represented at its proper
+strength by groupoidality evidence: the Foundations define
+`IsGroupoidalCat(C)` through `Core_incl_func(C)` being an omega-equivalence,
+whose selected inverse sends directed arrows back to paths. Such a collapse
+can be internalized over a structured/restricted universe carrying that
+evidence. It is not valid uniformly over unrestricted `Cat_cat`, and it is
+not wanted for `WalkingEnd` itself: the selected HIT is locally discrete
+above dimension one but its generating 1-arrow remains noninvertible.
+
+G2 must instead audit, in order:
+
+1. a fully internal `PathInt : Grpd_cat → Cat_cat`, which is feasible because
+   higher arrows in `Grpd_cat` are equalities;
+2. a fixed-functor structured naturality owner
+   `core_incl_naturality(F)` on the path-category source, whose pointwise law
+   is J-derived but whose whole-transfor body or strict identity presentation
+   must be demonstrated, and its whiskered postcomposition form;
+3. whether that structured cell and the existing stable
+   `hom_postcomp_fapp0` ladder give the exact spiral endpoints without any
+   new endpoint unification or runtime fusion rule;
+4. only if a concrete consumer remains stuck, whether the generic
+   Core-inclusion/postcomposition accumulation is a justified runtime owner;
+5. only if that stable body still loses a required discriminator, a primitive
+   `PathLift` owner with projectionwise agreement to the semantic
+   construction, never a broad runtime fold of the semantic body into the
+   primitive; and
+6. restricted alternatives such as naturality over
+   `Core_cat(Cat_cat)` or over explicitly locally discrete categories,
+   labelled at their true weaker strength rather than presented as a global
+   directed `Core` functor.
+
+The broader groupoidal internalization audit must classify each proposed
+owner by level rather than by suggestive name:
+
+| Surface | Expected status | Required interpretation |
+| --- | --- | --- |
+| `PathInt : Grpd_cat → Cat_cat` | positive | full internal functor; source higher cells are equality |
+| `PathMap(f)` and equality action | positive | projections of `PathInt`, with a named iterable ladder |
+| `Core_cat(C)` | retain | transparent object-level assignment |
+| `CoreOnFunctor(F) ≔ PathMap(F₀)` | positive | action on a fixed ordinary functor, not evidence of a full `Cat_cat` endofunctor |
+| `core_incl_naturality(F)` | positive, probe required | fixed-`F` structured transfor with identity components and J/PathOut-generated higher action |
+| `Core : Functor(Cat_cat,Cat_cat)` | negative in general | would require arbitrary directed transformation components to yield paths |
+| arrow-to-path collapse | restricted positive | selected inverse supplied by explicit `IsGroupoidalCat`/local-discreteness evidence |
+| `Path_sym_func` natural package | plausible | internalize over equality-valued `Grpd_cat`, not by assuming directed `Core` action |
+| `Function_grpd` composition/evaluation packages | plausible | promote only with complete identity, composition, and higher equality action |
+
+The G2 exit gate is an exact structured spiral with component and iterable
+higher-action computation, zero new probe-specific unification rules, no
+bodyless naturality or spiral constant, and an explicit negative check that no
+unsupported global directed `Core : Cat_cat → Cat_cat` has been introduced.
+
 ## Implementation Goal — Authoritative Work Plan
 
 The report status, the contextual-`Functord` decision above, and this section
@@ -262,16 +513,19 @@ functor-category initiality.
 
 ### Explanatory design inputs
 
-Read `tmp/tmp-hit-solution.md`, `tmp/tmp-hit-solution-2.md`, and
-`tmp/tmp-hit-solution-2-1.md` before beginning G1–G5. They are tracked
+Read `tmp/tmp-hit-solution.md`, `tmp/tmp-hit-solution-2.md`,
+`tmp/tmp-hit-solution-2-1.md`, `tmp/tmp-hit-solution-2-1-1.md`, and
+`tmp/tmp-hit-solution-2-1-1-1.md` before beginning G1–G5. They are tracked
 explanatory notes, not implementation authorities. The first records the
 Circle-style Code, encode/power, spiral, and decoder idea. The second selects
 the parameterized contextual `Functord(R,D)` interface. The third makes the
 decisive directed-first correction: use `Rep_catd(base)` for the primary
 decoder and postpone equality until the explicit one-dimensionality evidence
-is applied. Where any note conflicts with the active kernel or this current
-override, this report and the active kernel win. Preserve all three files
-unless the user explicitly requests their removal.
+is applied. The fourth records the pre-spiral feasibility review; the fifth
+records the 2026-07-19 semantic normal-form computation and the remaining
+Core-inclusion accumulation problem. Where any note conflicts with the active
+kernel or this current override, this report and the active kernel win.
+Preserve all five files unless the user explicitly requests their removal.
 
 ### Evidence boundary at goal start
 
@@ -289,6 +543,13 @@ Already demonstrated:
 - the native finite-dimension predicate
   `IsNCat(cat_succ cat_zero,W)`, its reduction to homwise `IsDiscreteCat`, and
   the existing `hom_to_path` consumer needed for the equality upgrade;
+- an internally generated `PathInt`/function-equality action whose
+  transformation components and full higher action compute, plus a concrete
+  Nat spiral in the experimental endpoint-comparison environment;
+- semantic normal-form evidence that
+  `PathLift_sem(f) ∘ PathMap(g)` already accumulates through the existing
+  owners and that only the outer `F ∘ CoreIncl`/postcomposition cut remains
+  stuck;
 - viability of demoting the generic terminal `fdapp1_int_cell` owner and of
   retaining generic contextual runtime beta, in the earlier demote-both owner
   experiment;
@@ -299,8 +560,12 @@ Already demonstrated:
 Not yet demonstrated by the selected contextual probe:
 
 - a concrete, non-bodyless `Code` family and successor functor;
-- a concrete `power_func` into the ordinary directed based-hom category and a
-  concrete directed spiral;
+- a promotion-quality `PathInt` projection ladder and exact directed spiral
+  with zero probe-local unification shortcuts;
+- a selected generic owner for fixed-functor Core-inclusion naturality, or a
+  proof that a smaller existing projection ladder already supplies it;
+- a concrete `power_func` integrated into the ordinary directed based-hom
+  category and the clean exact spiral;
 - a signature-level `walking_end_is_one_cat` witness for the new opaque HIT
   and its transparent based-hom specialization;
 - a fresh exact owner-position run of the selected retain-`tapp0`/
@@ -322,8 +587,8 @@ already finished.
 1. Follow `AGENTS.md` recovery and starting-task procedure; read this current
    authority before the historical remainder.
 2. Inspect staged and unstaged changes independently. Read and preserve the
-   three `tmp/tmp-hit-solution*.md` explanatory files unless the user has
-   changed their status.
+   five listed `tmp/tmp-hit-solution*.md` explanatory files unless the user
+   has changed their status.
 3. Relocate all owners and consumers with `rg`; do not use the line numbers in
    this report as edit coordinates.
 4. Run bounded `make check`, `make examples`, kernel and walking warning
@@ -379,10 +644,25 @@ NatSucc_func(n) ↪ succ(n).
 ```
 
 Require object action, equality action via `eq_ap`, identity, composition, and
-iterable next-hom behavior. A reusable `Path_cat_func` may act on an ordinary
-function or functor's object map. Do not declare a generic directed
-`Core_catd`, because an arbitrary directed transfor does not supply equality
-between its component objects.
+iterable next-hom behavior. Build a named intermediate `fapp*`/`tapp*`
+projection ladder for `PathInt`, `PathMap`, function-equality action,
+components, and full off-diagonal action; do not retain the nested
+probe-local patterns as the permanent interface. A reusable
+`Path_cat_func` may act on an ordinary function or functor's object map.
+
+Audit the broader groupoidal constructor surface level by level:
+`Path_cat`, `Core_cat`, `Core_incl_func`, `Path_sym_func`,
+`Function_grpd`, and their existing object/arrow/higher projections. Add an
+internalized version only when all required higher actions are supplied.
+`PathInt : Grpd_cat → Cat_cat` is the positive reference case. Do not declare
+a generic directed `Core : Cat_cat → Cat_cat` or `Core_catd`, because an
+arbitrary directed transfor does not supply equality between its component
+objects. Retain `Core_cat(C)` as the valid object-level alias and distinguish
+the fixed ordinary-functor action `PathMap(F₀)` from a nonexistent full
+higher action. Treat arrow-to-path collapse as inverse data carried by an
+explicit groupoidality/local-discreteness structure. Probe a fixed-functor
+`core_incl_naturality(F)` and its whiskering before either a runtime fusion
+rule or a primitive `PathLift`.
 
 Select the ordinary directed representable as the decoder target:
 
@@ -447,11 +727,15 @@ absence of higher generators, at which point the primitive signature evidence
 can be retired. Do not delay the practical MVP for that metatheorem, and do
 not claim in the meantime that one-dimensionality was derived.
 
-Exit criterion: `Path_map` and `NatSucc_func` are concrete; the open directed
-representable target and its higher action typecheck without sentinels; the
-one-dimensional signature contract and `hom_to_path` specialization pass a
-focused probe; and negative controls confirm that neither
-`IsDiscreteCat(WalkingEnd)` nor a generic directed `Core_catd` has been added.
+Exit criterion: `Path_map` and `NatSucc_func` are concrete through a named
+projection ladder; fixed-functor Core-inclusion naturality, its whiskering, and
+the exact spiral compute without new probe-local `unif_rule` declarations or
+an unneeded runtime fusion rule; the
+open directed representable target and its higher action typecheck without
+sentinels; the one-dimensional signature contract and `hom_to_path`
+specialization pass a focused probe; and negative controls confirm that
+neither `IsDiscreteCat(WalkingEnd)` nor an unsupported generic directed
+`Core`/`Core_catd` has been added.
 
 ### Phase G3 — Opaque walking HIT and eliminator family
 
@@ -737,10 +1021,11 @@ repeated-blocker policy is met.
 | Task | Status at goal start | Required result |
 | --- | --- | --- |
 | `WEHIT-G1-TERMINAL-OWNER` | exact hybrid not yet measured | retain runtime `tapp0`; demote only generic terminal `fdapp1`; add contextual beta and no HIT-specific bridge |
-| `WEHIT-G2-PATH-DIMENSION` | primitives exist; selected combination unprobed | reusable `Path_map`/Nat successor, directed `Rep_catd(base)` endpoint probe, explicit OneCat signature contract, and `hom_to_path` specialization |
+| `WEHIT-G2-PATH-DIMENSION` | internal action and semantic normal forms probed; exact endpoints still use rejected shortcuts | named `PathInt` ladder, fixed-functor Core-inclusion transfor and whiskering, zero-new-`unif_rule` exact spiral, directed `Rep_catd(base)` endpoint probe, explicit OneCat signature contract, and `hom_to_path` specialization |
+| `WEHIT-G2-GROUPOID-INTERNALIZATION-AUDIT` | partial external/stable owners exist | classify `Path_cat`, object-level `Core_cat`, fixed-functor `CoreOnFunctor`, `Core_incl_func`, `Path_sym_func`, and function composition at every higher projection; internalize only complete actions, route arrow-to-path collapse through explicit groupoidality evidence, and retain negative controls against a global directed `Core` without transformation action |
 | `WEHIT-G2-DIMENSION-DERIVABILITY` | nonblocking future audit | determine whether stronger general HIT induction derives OneCat evidence and can retire the explicit truncation constructor; never claim this during the MVP without a proof |
 | `WEHIT-G3-OPAQUE-OWNER` | contextual interface demonstrated | remove word Hom; promote opaque constructors, one-dimensional evidence, and contextual eliminator |
-| `WEHIT-G4-CODE-REP-POWER` | type shapes only | concrete transparent Code, generic directed representable, power functor, and directed spiral |
+| `WEHIT-G4-CODE-REP-POWER` | structured spiral mechanism demonstrated only with nonpromotable endpoint shortcuts | concrete transparent Code, generic directed representable, power functor, and exact directed spiral through the selected G2 internal owners |
 | `WEHIT-G5-DIRECTED-AND-EQUALITY-ROUNDTRIPS` | open in selected design | directed normalization from decoder `fdapp1`; hard equality via explicit hom discreteness; easy inverse from Nat induction |
 | `WEHIT-G6-PACKAGING` | old implementation rejected | rebuild BNat, carrier/structured Hom comparisons, sethood, OneCat package, and negative consequences at their distinct strengths |
 | `WEHIT-G7-MIGRATION` | open | checks, examples, docs, catalog, health contain no rejected architecture |
