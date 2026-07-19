@@ -112,13 +112,14 @@
       19e. Path-induction target transport aliases
       19f. Nested telescope stress examples
       19g. Eckmann-Hilton first computation slice
+    20. Equality-local category skeleton and restricted Core inclusion
 
   Grouped architecture map:
     - Kernel foundations: 0-3.
     - Ordinary category calculus: 4-7.
     - Directed-family and displayed calculus: 8-17.
     - Profunctor, equipment, and DefIso migration machinery: 18.
-    - Applications: 19.
+    - Applications: 19-20.
 
   The generated reviewer-facing diagnostic map is
   reports/REPORT_EMDASH_CHECK_CATALOG.md; executable checks remain in
@@ -22206,3 +22207,439 @@ symbol EH_comm
     (@EH_vcomp B x alpha beta)
     (@EH_vcomp_to_shared_middle B x alpha beta)
     (eq_sym (@EH_swapped_vcomp_to_shared_middle B x alpha beta));
+
+// -------------------------------------------------------------------------------------------------
+// 20. Equality-local category skeleton and restricted Core inclusion
+// -------------------------------------------------------------------------------------------------
+
+/*
+  Recursive equality-local skeleton.
+
+  Sk⁼(0,A) is the path core of A.  Each successor retains the objects and
+  current directed hom dimension of A, then recursively replaces all higher
+  cells by equality action.  This is not a universal IsNCat truncation: no
+  sethood of the retained hom objects is asserted.
+*/
+
+// Sk⁼(n,A): retain n directed dimensions and replace higher cells by paths.
+injective symbol EqSkeleton_cat
+  (n : CatDim)
+  (A : Cat)
+  : Cat;
+
+// The zero skeleton is the existing path core.
+rule EqSkeleton_cat cat_zero $A
+  ↪ Core_cat $A;
+
+// Every skeleton retains the objects of its source category.
+rule Obj (EqSkeleton_cat _ $A)
+  ↪ Obj $A;
+
+// A successor skeleton recurses through the source hom-category.
+rule Hom_cat (EqSkeleton_cat (cat_succ $n) $A) $x $y
+  ↪ EqSkeleton_cat $n (Hom_cat $A $x $y);
+
+// Successor identities are inherited from the source category.
+rule @id (EqSkeleton_cat (cat_succ _) $A) $x
+  ↪ @id $A $x;
+
+/*
+  Successor composition is genuinely inherited computation.  This rule
+  intentionally retains that runtime contract even though the open category
+  projection overlaps generic composition/naturality families; those warning
+  locations are diagnostic evidence, not a reason to weaken the operation to
+  proof-time equality.
+*/
+rule
+  @comp_fapp0
+    (EqSkeleton_cat (cat_succ _) $A)
+    $w $x $y $g $f
+  ↪ @comp_fapp0 $A $w $x $y $g $f;
+
+// Simultaneous action of Sk⁼ on a fixed ordinary functor.
+injective symbol eq_skeleton_map_func
+  (n : CatDim)
+  [A B : Cat]
+  (F : τ (Functor A B))
+  : τ (Functor
+      (EqSkeleton_cat n A)
+      (EqSkeleton_cat n B));
+
+// At zero this is the existing internal path-map action.
+rule @eq_skeleton_map_func cat_zero $A $B $F
+  ↪ @path_map_func
+      (Obj $A)
+      (Obj $B)
+      (@functor_object_function $A $B $F);
+
+// Object action agrees with the underlying functor at every dimension.
+rule @fapp0
+      _ _
+      (@eq_skeleton_map_func _ $A $B $F)
+      $x
+  ↪ @fapp0 $A $B $F $x;
+
+// Successor hom action is the recursively skeletonized hom functor.
+rule @fapp1_func
+      _ _
+      (@eq_skeleton_map_func (cat_succ $n) $A $B $F)
+      $x $y
+  ↪ @eq_skeleton_map_func
+      $n
+      (Hom_cat $A $x $y)
+      (Hom_cat $B
+        (@fapp0 $A $B $F $x)
+        (@fapp0 $A $B $F $y))
+      (@fapp1_func $A $B $F $x $y);
+
+// Capped successor action evaluates the recursively skeletonized hom action.
+rule
+  @fapp1_fapp0
+    (EqSkeleton_cat (cat_succ $n) $A)
+    (EqSkeleton_cat (cat_succ $n) $B)
+    (@eq_skeleton_map_func (cat_succ $n) $A $B $F)
+    $x $y $f
+  ↪ @fapp0
+      (EqSkeleton_cat $n (Hom_cat $A $x $y))
+      (EqSkeleton_cat $n
+        (Hom_cat $B
+          (@fapp0 $A $B $F $x)
+          (@fapp0 $A $B $F $y)))
+      (@eq_skeleton_map_func
+        $n
+        (Hom_cat $A $x $y)
+        (Hom_cat $B
+          (@fapp0 $A $B $F $x)
+          (@fapp0 $A $B $F $y))
+        (@fapp1_func $A $B $F $x $y))
+      $f;
+
+// The simultaneous action preserves identity at the whole-functor level.
+rule @eq_skeleton_map_func $n $A $A (@id Cat_cat $A)
+  ↪ @id Cat_cat (EqSkeleton_cat $n $A);
+
+// The simultaneous action preserves composition at the whole-functor level.
+rule @comp_fapp0
+      Cat_cat
+      (EqSkeleton_cat $n $A)
+      (EqSkeleton_cat $n $B)
+      (EqSkeleton_cat $n $C)
+      (@eq_skeleton_map_func $n $B $C $G)
+      (@eq_skeleton_map_func $n $A $B $F)
+  ↪ @eq_skeleton_map_func
+      $n $A $C
+      (@comp_fapp0 Cat_cat $A $B $C $G $F);
+
+// Recursive canonical inclusion Sk⁼(n,A) -> A.
+injective symbol eq_skeleton_incl_func
+  (n : CatDim)
+  (A : Cat)
+  : τ (Functor (EqSkeleton_cat n A) A);
+
+// At zero this is the existing Core inclusion.
+rule eq_skeleton_incl_func cat_zero $A
+  ↪ Core_incl_func $A;
+
+// Every inclusion fixes objects.
+rule @fapp0
+      _ _
+      (eq_skeleton_incl_func _ _)
+      $x
+  ↪ $x;
+
+// Successor hom action is the recursive inclusion.
+rule @fapp1_func
+      _ _
+      (eq_skeleton_incl_func (cat_succ $n) $A)
+      $x $y
+  ↪ eq_skeleton_incl_func $n (Hom_cat $A $x $y);
+
+// Capped successor inclusion evaluates the recursive hom inclusion.
+rule
+  @fapp1_fapp0
+    (EqSkeleton_cat (cat_succ $n) $A)
+    $A
+    (eq_skeleton_incl_func (cat_succ $n) $A)
+    $x $y $f
+  ↪ @fapp0
+      (EqSkeleton_cat $n (Hom_cat $A $x $y))
+      (Hom_cat $A $x $y)
+      (eq_skeleton_incl_func $n (Hom_cat $A $x $y))
+      $f;
+
+/*
+  Equality-local category of categories.
+
+  Cat₁⁼ retains categories and ordinary functors, while its higher cells
+  are paths between functors.  It is deliberately weaker than a universal
+  one-category truncation.
+*/
+symbol Cat1Eq_cat : Cat
+≔ EqSkeleton_cat (cat_succ cat_zero) Cat_cat;
+
+// Evaluate a functor at objects, packaged as a function between classifiers.
+symbol functor_object_map_function
+  [C D : Cat]
+  : τ (@Function_grpd
+      (Functor C D)
+      (@Function_grpd (Obj C) (Obj D)))
+≔ λ F : τ (Functor C D),
+    @functor_object_function C D F;
+
+/*
+  Hom action of Core₁.  Equality of functors first maps to equality of their
+  object functions; the existing iterable Path_cat_func action then supplies
+  every remaining equality and higher-equality action.
+*/
+symbol core1_hom_func
+  [C D : Cat]
+  : τ (Functor
+      (Path_cat (Functor C D))
+      (Functor_cat (Core_cat C) (Core_cat D)))
+≔ @comp_cat_fapp0
+    (Path_cat (Functor C D))
+    (Path_cat (@Function_grpd (Obj C) (Obj D)))
+    (Functor_cat (Core_cat C) (Core_cat D))
+    (@fapp1_func
+      Grpd_cat Cat_cat Path_cat_func
+      (Obj C) (Obj D))
+    (@path_map_func
+      (Functor C D)
+      (@Function_grpd (Obj C) (Obj D))
+      (@functor_object_map_function C D));
+
+// Core₁ : Cat₁⁼ -> Cat, with complete full and capped first-hom projections.
+injective symbol Core1_func
+  : τ (Functor Cat1Eq_cat Cat_cat);
+
+rule @fapp0 _ _ Core1_func $C
+  ↪ Core_cat $C;
+
+rule @fapp1_func _ _ Core1_func $C $D
+  ↪ @core1_hom_func $C $D;
+
+/*
+  This capped beta is intended runtime computation.  It may erase an outer
+  generic identity/composition pattern before that pattern fires; warning
+  reports for those competing paths are retained and classified rather than
+  weakening this required projection to proof-time equality.
+*/
+rule @fapp1_fapp0
+      _ _ Core1_func $C $D $F
+  ↪ @fapp0
+      (Path_cat (Functor $C $D))
+      (Functor_cat (Core_cat $C) (Core_cat $D))
+      (@core1_hom_func $C $D)
+      $F;
+
+// J is the recursive canonical inclusion Cat₁⁼ -> Cat.
+symbol Cat1Eq_incl_func
+  : τ (Functor Cat1Eq_cat Cat_cat)
+≔ eq_skeleton_incl_func (cat_succ cat_zero) Cat_cat;
+
+/*
+  The first off-diagonal projection of CoreInclTransf is the common diagonal
+  functor Core(C) -> D.  It is Core₁'s hom action followed by CoreIncl(D).
+*/
+symbol core_incl_diagonal_func
+  [C D : Cat]
+  : τ (Functor
+      (Path_cat (Functor C D))
+      (Functor_cat (Core_cat C) D))
+≔ @comp_cat_fapp0
+    (Path_cat (Functor C D))
+    (Functor_cat (Core_cat C) (Core_cat D))
+    (Functor_cat (Core_cat C) D)
+    (@comp_cat_cov_func
+      (Core_cat C) (Core_cat D) D
+      (Core_incl_func D))
+    (@core1_hom_func C D);
+
+// Restricted Core inclusion, internalized over equality-local Cat₁⁼.
+injective symbol CoreInclTransf
+  : τ (Transf Core1_func Cat1Eq_incl_func);
+
+// Object component: CoreInclTransf[C] = CoreIncl(C).
+rule @tapp0_fapp0
+      _ _ _ _ $C CoreInclTransf
+  ↪ Core_incl_func $C;
+
+// Complete first-hom action: equality paths of functors act on the diagonal.
+rule @tapp1_func
+      _ _ _ _ $C $D CoreInclTransf
+  ↪ @core_incl_diagonal_func $C $D;
+
+// Capped first-hom projection at an ordinary functor F.
+rule @tapp1_fapp0
+      _ _ _ _ $C $D CoreInclTransf $F
+  ↪ @fapp0
+      (Path_cat (Functor $C $D))
+      (Functor_cat (Core_cat $C) $D)
+      (@core_incl_diagonal_func $C $D)
+      $F;
+
+/*
+  Naturality square associated to CoreInclTransf at F.  The capped tapp₁
+  projection above is its common diagonal functor; this derived next cell is
+  the comparison between the two boundary composites.  In the active strict
+  owner those composites normalize to the same functor, so the cell is the
+  existing bodyful identity transfor.
+*/
+symbol core_incl_transf_kappa
+  [C D : Cat]
+  (F : τ (Functor C D))
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Core_cat C) C D
+        (@fapp1_fapp0
+          Cat1Eq_cat Cat_cat Cat1Eq_incl_func C D F)
+        (@tapp0_fapp0
+          Cat1Eq_cat Cat_cat
+          Core1_func Cat1Eq_incl_func
+          C CoreInclTransf))
+      (@comp_cat_fapp0
+        (Core_cat C) (Core_cat D) D
+        (@tapp0_fapp0
+          Cat1Eq_cat Cat_cat
+          Core1_func Cat1Eq_incl_func
+          D CoreInclTransf)
+        (@fapp1_fapp0
+          Cat1Eq_cat Cat_cat Core1_func C D F)))
+≔ @core_incl_naturality C D F;
+
+// Readable semantic PathLift object selected by its internal functor.
+symbol path_lift_fapp0
+  [A : Grpd]
+  [C : Cat]
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (Functor (Path_cat A) C)
+≔ @fapp0
+    (Path_cat (@Function_grpd A (Obj C)))
+    (Functor_cat (Path_cat A) C)
+    (@path_lift_func A C)
+    p;
+
+/*
+  Genuine left endpoint comparison obtained from CoreInclTransf at F and
+  whiskered by PathMap(p).  The stable postcomposition owner absorbs the
+  associativity of the raw composite: no new global associativity rewrite,
+  unification rule, or endpoint transport is required.
+*/
+symbol core_incl_transf_kappa_left
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat A) C D
+        F (@path_lift_fapp0 A C p))
+      (@path_lift_fapp0
+        A D
+        (@comp_fapp0
+          Grpd_cat
+          A (Obj C) (Obj D)
+          (@functor_object_function C D F)
+          p)))
+≔ @id
+    (Functor_cat (Path_cat A) D)
+    (@hom_postcomp_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Path_cat A) (Core_cat D) D
+      (@tapp0_fapp0
+        Cat1Eq_cat Cat_cat
+        Core1_func Cat1Eq_incl_func
+        D CoreInclTransf)
+      (@comp_fapp0
+        Cat_cat
+        (Path_cat A) (Core_cat C) (Core_cat D)
+        (@fapp1_fapp0
+          Cat1Eq_cat Cat_cat Core1_func C D F)
+        (@path_map_func A (Obj C) p)));
+
+// Right PathLift comparison; current PathInt functoriality makes it identity.
+symbol path_lift_kappa_right
+  [A B : Grpd]
+  [C : Cat]
+  (p : τ (@Function_grpd B (Obj C)))
+  (s : τ (@Function_grpd A B))
+  : τ (Transf
+      (@path_lift_fapp0
+        A C
+        (@comp_fapp0 Grpd_cat A B (Obj C) p s))
+      (@comp_cat_fapp0
+        (Path_cat A) (Path_cat B) C
+        (@path_lift_fapp0 B C p)
+        (@path_map_func A B s)))
+≔ @id
+    (Functor_cat (Path_cat A) C)
+    (@path_lift_fapp0
+      A C
+      (@comp_fapp0 Grpd_cat A B (Obj C) p s));
+
+/*
+  Non-strict structured spiral
+    kappa_right o PathLift(h) o kappa_left.
+*/
+symbol path_lift_non_strict_spiral
+  [A : Grpd]
+  [C : Cat]
+  (S : τ (Functor C C))
+  (p : τ (@Function_grpd A (Obj C)))
+  (s : τ (@Function_grpd A A))
+  (h : τ (@=
+      (@Function_grpd A (Obj C))
+      (@comp_fapp0
+        Grpd_cat
+        A (Obj C) (Obj C)
+        (@functor_object_function C C S)
+        p)
+      (@comp_fapp0 Grpd_cat A A (Obj C) p s)))
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat A) C C
+        S (@path_lift_fapp0 A C p))
+      (@comp_cat_fapp0
+        (Path_cat A) (Path_cat A) C
+        (@path_lift_fapp0 A C p)
+        (@path_map_func A A s)))
+≔ @comp_fapp0
+    (Functor_cat (Path_cat A) C)
+    (@comp_cat_fapp0
+      (Path_cat A) C C
+      S (@path_lift_fapp0 A C p))
+    (@path_lift_fapp0
+      A C
+      (@comp_fapp0 Grpd_cat A A (Obj C) p s))
+    (@comp_cat_fapp0
+      (Path_cat A) (Path_cat A) C
+      (@path_lift_fapp0 A C p)
+      (@path_map_func A A s))
+    (@path_lift_kappa_right A A C p s)
+    (@comp_fapp0
+      (Functor_cat (Path_cat A) C)
+      (@comp_cat_fapp0
+        (Path_cat A) C C
+        S (@path_lift_fapp0 A C p))
+      (@path_lift_fapp0
+        A C
+        (@comp_fapp0
+          Grpd_cat
+          A (Obj C) (Obj C)
+          (@functor_object_function C C S)
+          p))
+      (@path_lift_fapp0
+        A C
+        (@comp_fapp0 Grpd_cat A A (Obj C) p s))
+      (@fapp1_fapp0
+        (Path_cat (@Function_grpd A (Obj C)))
+        (Functor_cat (Path_cat A) C)
+        (@path_lift_func A C)
+        (@comp_fapp0
+          Grpd_cat
+          A (Obj C) (Obj C)
+          (@functor_object_function C C S)
+          p)
+        (@comp_fapp0 Grpd_cat A A (Obj C) p s)
+        h)
+      (@core_incl_transf_kappa_left A C C S p));

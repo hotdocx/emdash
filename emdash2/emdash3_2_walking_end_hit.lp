@@ -815,6 +815,36 @@ symbol walking_power_spiral_natsucc
     walking_power_right_function
     walking_power_step_path;
 
+/*
+  The restricted CoreInclTransf presentation retains both endpoint
+  comparisons explicitly:
+    kappa_right o PathLift(step) o kappa_left.
+  In the selected strict representation both kappas compute to identities,
+  so this three-cell spiral converts to walking_power_spiral_natsucc while
+  preserving the more informative internal construction.
+*/
+symbol walking_power_spiral_coreincl
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        walking_loop_postcomp_func
+        walking_power_func)
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        walking_power_func
+        NatSucc_func))
+≔ @path_lift_non_strict_spiral
+    Nat_grpd
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    walking_loop_postcomp_func
+    walking_power_function
+    nat_succ_function
+    walking_power_step_path;
+
 // Code[loop] computes to NatSucc, so the canonical spiral already has the
 // literal contextual endpoint; no propositional endpoint whisker is needed.
 symbol walking_power_spiral
