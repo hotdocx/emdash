@@ -5,14 +5,15 @@ Last reviewed: 2026-07-18
 Plan-ID: EMDASH-V3-2-WALKING-ENDOMORPHISM-DIRECTED-HIT-2026-07-17
 Depends-On: REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17; REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_nat_arithmetic.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
 Supersedes: none
-Side-Task-Ledger: #side-task-ledger
+Side-Task-Ledger: #current-implementation-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **REOPENED / IMPLEMENTATION-GOAL READY — the committed word-carrier presentation is rejected as the intended HIT; a parameterized contextual `Functord` eliminator supplies the selected whole-HIT/arrow-naturality interface without a separate Hom datatype or special 1-cell eliminator; opaque formation, judgmental base/loop beta, decoder-shaped arbitrary-arrow action, terminal consumer/eta ownership, and full owner-position warning behavior are demonstrated; the authoritative G0–G8 work plan now distinguishes that evidence from the still-pending concrete path/core action, Code/H/power/spiral, inverse proofs, complete consumer migration, and CI**
+Status: **REOPENED / IMPLEMENTATION-GOAL READY WITH A MANDATORY MOTIVE-FEASIBILITY GATE — the committed word-carrier presentation is rejected as the intended HIT; a parameterized contextual `Functord` eliminator supplies the selected whole-HIT/arrow-naturality interface without a separate Hom datatype or special 1-cell eliminator; the selected minimal terminal ownership retains the established `tapp0_fapp0` runtime projection, demotes only the terminal-source `fdapp1_int_cell` projection to proof-time comparison, keeps contextual base/loop beta as runtime computation, and adds no HIT-specific join; G2 must still construct the equality-valued decoder motive with noncircular higher action before the Hom–Nat equality proof can be called feasible or complete**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 HIT-computation correction baseline: `b5037078dfaafc665adb2d996bec38596e6914c9`
 Corrective-review baseline: `9858a420fd6f94e920415a8728ffd9d6bf8d18a5`
+Implementation-goal starting baseline: `92daacc5a90ec9b7b457cfa310c0bb51e1531237`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
 Current implementation owners: reusable Nat prerequisites in
 `emdash3_2_nat_arithmetic.lp`; walking HIT/model/comparison in
@@ -92,12 +93,13 @@ fdapp1_int_cell(decode,p,0) :
   H[p](decode[base](0)) → decode[x](Code[p](0)).
 ```
 
-With `H(x)` chosen as the equality/core presentation of
-`Hom(WalkingEnd,base,x)`, the endpoints read as `p` and
-`power(encode(p))`. Thus the hard comparison is supplied by the naturality
-cell of the whole-HIT-defined `Functord`; no `WalkingWord`, Hom induction,
-special ad hoc 1-cell eliminator, or functor-category initiality metatheorem
-is required for this practical computation milestone.
+If G2 constructs `H(x)` as the equality-valued presentation of
+`Hom(WalkingEnd,base,x)` with valid noncircular higher action, the endpoints
+read as `p` and `power(encode(p))`. The hard comparison would then be supplied
+by the naturality cell of the whole-HIT-defined `Functord`; no `WalkingWord`,
+Hom induction, special ad hoc 1-cell eliminator, or functor-category initiality
+metatheorem is selected. The minimal probe establishes this type shape, not
+the still-open formation of that concrete equality-valued `H`.
 
 The initial focused feasibility probe is
 `tmp/probes/wehit_opaque_functord_ind_minimal.lp`. It checks the generic
@@ -106,66 +108,85 @@ formation/base/loop rules and the decoder-shaped inner application
 pre-existing broad terminal-source rules. Those interactions were warning
 diagnostics, not a typechecking timeout: the quiet probe passed.
 
-The intended-owner migration is now checked in the full kernel copy
-`tmp/probes/wehit_functord_terminal_owner_full.lp`. It makes the following
-owner decisions:
-
-1. replace the broad full-functor terminal component rewrite by the actual
-   `fapp0(...,Terminal_obj)`/`Pi_cat` consumer computation;
-2. retain the full terminal-functor eta comparison at proof time for arbitrary
-   `F`; its readable right side is `Obj_func(A,F(k))`, while the actual rule
-   uses the stable normal form `Const_func(Terminal,A,F(k))`;
-3. also retain the direct `Const_func` specialization needed by
-   `Const_transfd`, because Lambdapi unification rules are not reliably
-   transitive and the general eta rule alone does not discharge subject
-   reduction;
-4. demote terminal-source `fdapp1_int_cell = fapp1_fapp0` to a typed
-   proof-time comparison;
-5. retain the contextual HIT base and loop betas as runtime rewrites;
-6. add only the narrow terminal/constant `fapp0` join needed when outer
-   section evaluation and inner HIT base beta can fire in either order; and
-7. relate the two surviving base-beta/vertical-composition heads by direct
-   typed proof-time rules rather than installing competing runtime
-   naturality rules.
-
-The final quiet and warning-enabled logs are:
+The selected owner design is the following hybrid. Preserve the established
+full terminal-component runtime rule exactly at its current owner:
 
 ```text
-logs/probes/wehit_functord_terminal_owner_full-20260718-185544.log
-logs/probes/wehit_functord_terminal_owner_full-20260718-185555.log
+rule tapp0_fapp0(K,Cat,Const(Terminal),Const(A),k,F)
+  ↪ Obj_func(A,F[k]).
 ```
 
-The general eta experiment has two important negative controls. Writing its
-right side literally with the transparent `Obj_func` alias did not pass the
-typed arbitrary-`F` `eq_refl` exercise after that alias normalized to
-`Const_func`. Using the canonical `Const_func` right side makes the general
-typed exercise pass, but removing the direct constant specialization still
-causes `Const_transfd` subject-reduction failure. The selected pair of
-unification rules is therefore measured kernel behavior, not redundant
-notation. The rejected logs are
-`wehit_functord_terminal_owner_full-20260718-185426.log` and
-`wehit_functord_terminal_owner_full-20260718-185523.log`.
+Do **not** add a symmetric general `tapp0_fapp0 ≡ Const_func(1,A,F[k])`
+unification rule. Its right side contains the open reducible component
+`F[k]`, it is unnecessary while the runtime owner remains, and it broadens
+proof search without resolving the underlying runtime diamond. Contextual
+base beta remains a runtime rule. At the terminal/constant specialization the
+two runtime rules have the measured nonconfluent boundary
 
-The active kernel baseline is `971` unjoinable critical pairs and `157`
-replaceable pattern variables. The full owner probe has `964/157`: the former
-broad terminal component participates in seven active critical pairs and the
-broad terminal `fdapp1` rule in two; the new contextual base beta contributes
-two generic vertical-composition pairs, while the loop beta contributes none.
-Both surviving comparisons pass explicit typed `eq_refl` consumers through
-the new proof-time bridges. A runtime orientation for those joins was tested
-and rejected because it expanded the generic functoriality/naturality overlap
-surface. Strict LHS audit of the final probe reports zero unreviewed clauses.
+```text
+Fibre_func(indᵈ(Const(1),Const(A),u,σ),base)
+  ↪ u
 
-These two remaining critical-pair warnings are real runtime nonconfluence
-diagnostics, not mere replaceable-variable lint, but warnings are not an
-automatic veto under the repository policy. They are bounded to the generic
-vertical-composition boundary, the practical constructor and decoder
-computations typecheck, their proof-time comparison is exercised, and the
-total warning inventory improves. Promotion still requires applying the
-migration to the real owners, rebuilding the current walking module without
-its word/Hom rewrites, and running the downstream examples and full CI gates;
-the result here establishes feasibility and removes the former terminal-rule
-blocker rather than claiming that migration is already complete.
+Fibre_func(indᵈ(Const(1),Const(A),u,σ),base)
+  ↪ Obj_func(A,indᵈ(...)[base]).
+```
+
+This is not a blocker for the hard decoder, whose motive is `R ≔ Code` and
+`D ≔ H`. It is nevertheless a real runtime nonconfluence diagnostic, not
+cosmetic warning lint. The selected MVP accepts and records that bounded
+terminal-motive debt rather than replacing a long-established kernel normal
+form during the HIT migration. Do not add a WalkingEnd-specific point-consumer
+join merely to erase the warning; derived constant-family observations must be
+staged transparently through the generic projection and contextual beta.
+
+Demote only the broad terminal-source arrow rule
+
+```text
+fdapp1_int_cell(s,p,*) ↪ fapp1_fapp0(s,p)
+```
+
+to the corresponding typed proof-time comparison between the same two rigid
+heads. Contextual loop beta remains the runtime owner:
+
+```text
+fdapp1_int_cell(indᵈ(R,D,u,σ),loop,r) ↪ σ[r].
+```
+
+Do not add a WalkingEnd- or HIT-specific bridge from ordinary
+`fapp1_fapp0(indᵈ(...),loop)` directly to `σ[*]`. The canonical derived-section
+observer is `piapp1_fapp0`; after demoting the broad terminal arrow rewrite,
+its projection path remains at `fdapp1_int_cell` and the generic contextual
+loop beta owns the runtime computation. When an ordinary-functor view is
+needed, expose a transparent theorem assembled from the generic terminal
+`fdapp1_int_cell ≡ fapp1_fapp0` comparison and the generic contextual beta;
+do not install a constructor-specific unification rule merely to make that
+composed theorem reflexivity in one step.
+
+The owner migration must add no other HIT-specific rewrite or unification
+bridge. In particular, do not preselect terminal point-consumer joins or
+base-beta/vertical-composition unification rules. Exercise the surviving
+runtime critical-pair boundaries with typed transparent theorems built from
+the generic category/functor laws. A further kernel rule requires a new,
+specific failing consumer and a revised recorded decision; it is not part of
+this selected design.
+
+The pre-stale demote-both owner experiment passes quietly and at `964/157` in
+`logs/probes/wehit_functord_terminal_owner_full-20260718-185544.log` and
+`logs/probes/wehit_functord_terminal_owner_full-20260718-185555.log`. It
+establishes that the terminal `fdapp1_int_cell` demotion and generic contextual
+betas are viable, but it is not the exact selected hybrid because it also
+demoted `tapp0_fapp0`. Later edits to the ignored owner probe by another agent
+are stale and non-authoritative; neither that file's current contents nor its
+later logs may select architecture or be promoted verbatim.
+
+G1 must reconstruct the selected retain-`tapp0`/demote-`fdapp1` hybrid from the
+rules enumerated here at the actual current owner positions. Exact owner
+accounting forecasts approximately `972/157` against the active `971/157`,
+but that number is not validation evidence. Record fresh quiet, warning,
+typed-consumer, and strict-audit results before promotion. The existing
+experiments establish computational feasibility of the contextual interface;
+they do not claim that the active kernel or walking implementation has already
+migrated.
 
 ## Implementation Goal — Authoritative Work Plan
 
@@ -197,6 +218,17 @@ module, permanent checks, reviewer examples, current documentation, catalog,
 health report, and all proportional CI gates. It does not require full
 functor-category initiality.
 
+### Explanatory design inputs
+
+Read `tmp/tmp-hit-solution.md` and `tmp/tmp-hit-solution-2.md` before beginning
+G1–G5. They are tracked explanatory notes at the goal-start baseline, not
+implementation authorities. The first records the Circle-style Code,
+encode/power, spiral, and decoder idea. The second corrects its overly naive
+category-over presentation and selects the parameterized contextual
+`Functord(R,D)` interface. Where either note conflicts with the active kernel
+or this current override, this report and the active kernel win. Preserve both
+files unless the user explicitly requests their removal.
+
 ### Evidence boundary at goal start
 
 Already demonstrated:
@@ -207,10 +239,11 @@ Already demonstrated:
   `fdapp1_int_cell`;
 - internal expression of `Code[p](0)` and the exact type of the arbitrary-arrow
   decoder cell;
-- the terminal-owner migration, general eta comparison, required direct
-  constant specialization, nested terminal consumer join, and typed
-  vertical-composition proof-time joins;
-- owner-probe warning inventory `964/157` against active `971/157`; and
+- viability of demoting the generic terminal `fdapp1_int_cell` owner and of
+  retaining generic contextual runtime beta, in the earlier demote-both owner
+  experiment;
+- the demote-both experiment's `964/157` inventory against active `971/157`,
+  as bracketing evidence rather than the selected hybrid's inventory; and
 - zero strict-LHS findings.
 
 Not yet demonstrated by the selected contextual probe:
@@ -218,6 +251,10 @@ Not yet demonstrated by the selected contextual probe:
 - a concrete, non-bodyless `Code` family and successor functor;
 - a concrete equality/core-valued based-Hom family `H` with action by
   postcomposition;
+- the higher action required to make that equality/core-valued `H` a genuine
+  `Catd(WalkingEnd)` without assuming local discreteness;
+- a fresh exact owner-position run of the selected retain-`tapp0`/
+  demote-`fdapp1` hybrid;
 - a functorial `power`, a transparent spiral, or either inverse theorem in the
   contextual design;
 - integration with the active walking module, checks, examples, or downstream
@@ -232,9 +269,9 @@ probe as evidence that the concrete hard inverse is already finished.
 
 1. Follow `AGENTS.md` recovery and starting-task procedure; read this current
    authority before the historical remainder.
-2. Inspect staged and unstaged changes independently and preserve the two
-   user-staged `tmp/tmp-hit-solution*.md` files unless the user has changed
-   their status.
+2. Inspect staged and unstaged changes independently. Read and preserve the
+   two tracked, clean-at-baseline `tmp/tmp-hit-solution*.md` explanatory files
+   unless the user has changed their status.
 3. Relocate all owners and consumers with `rg`; do not use the line numbers in
    this report as edit coordinates.
 4. Run bounded `make check`, `make examples`, kernel and walking warning
@@ -247,81 +284,97 @@ walking/BNat symbol, diagnostic, and example.
 
 ### Phase G1 — Terminal and contextual-beta owner migration
 
-Promote the final design from
-`tmp/probes/wehit_functord_terminal_owner_full.lp` at the real owning
-positions. The selected terminal component has three distinct layers:
+Reconstruct the selected design at the real owning positions; do not copy the
+current ignored `tmp/probes/wehit_functord_terminal_owner_full.lp`, whose later
+contents are stale. The complete terminal-owner change is:
 
 ```text
-runtime consumer:
-  fapp0(Fibre_func(F,k),*) ↪ F(k)
+retain runtime unchanged:
+  tapp0_fapp0(F,k) ↪ Obj_func(F[k])
 
-general proof-time eta, readable form:
-  Fibre_func(F,k) ≡ Obj_func(F(k))
+demote runtime to proof time:
+  fdapp1_int_cell(s,p,*) ≡ fapp1_fapp0(s,p)
 
-general proof-time eta, canonical rule RHS:
-  Fibre_func(F,k) ≡ Const_func(1,A,F(k)).
+add contextual HIT computation:
+  Fibre_func(indᵈ(R,D,u,σ),base) ↪ u
+  fdapp1_int_cell(indᵈ(R,D,u,σ),loop,r) ↪ σ[r].
 ```
 
-Keep the direct `Const_func` specialization as a second proof-time rule because
-the general eta equation does not transitively discharge `Const_transfd`
-subject reduction. Exercise both rules with separate typed `eq_refl` terms.
-Keep the negative conversion control showing that an arbitrary full functor
-`1 → A` is not runtime eta-normalized.
-
-Demote the broad terminal-source
-`fdapp1_int_cell(s,p,*) ↪ fapp1_fapp0(s,p)` rewrite to a direct typed
-proof-time comparison. Retain the contextual HIT base/loop rewrites, the
-narrow terminal/constant point-consumer join, and the two generalized typed
-vertical-composition comparisons from the owner probe. Do not promote the
-rejected runtime vertical-composition bridges.
+Do not add either proposed `tapp0_fapp0` eta unification rule, a direct
+`Const_func` specialization, a WalkingEnd-specific terminal point join, a
+WalkingEnd-specific ordinary-loop bridge, or preselected vertical-composition
+bridges. Validate the one generic terminal arrow comparison with typed
+`eq_refl`, and validate the generic contextual base and loop betas by direct
+runtime assertions. State derived section/ordinary-functor views as
+transparent theorems composed from those generic owners when they do not
+reduce in one step.
 
 Exit criterion: full owner copy and active owners pass quiet checking,
-warning comparison, typed consumers, strict LHS audit, and the exact runtime
-negative controls with no unexplained warning family.
+warning comparison, the typed generic terminal-arrow consumer, direct generic
+HIT-beta assertions, strict LHS audit, and runtime negative controls. Record
+the retained terminal base-beta and generic vertical-composition warnings as
+measured boundaries; do not misdescribe proof-time theorems as runtime joins.
 
-### Phase G2 — Reusable path/core action prerequisite
+### Phase G2 — Path action and noncircular decoder-motive gate
 
-The decoder needs equality-valued fibres, not merely directed Hom fibres:
+Split the reusable path-map work from the harder family formation.
 
-```text
-H(x) ≔ Core_cat(Hom_cat(WalkingEnd,base,x))
-     ≔ Path_cat(Hom(WalkingEnd,base,x)).
-```
-
-The minimal contextual probe leaves `H` opaque. The active kernel has
-`Core_cat`, `Core_incl_func`, `Grpd_cat`, representables, and postcomposition,
-but no established generic functor that maps an arbitrary object function to
-a functor between path categories, nor a fibrewise `Core_catd` owner. Probe
-the smallest reusable construction first. The preferred factorization is:
+First construct and validate the ordinary equality action that is genuinely
+available from a function:
 
 ```text
 Path_map(f) : Functor(Path_cat(A),Path_cat(B))
-Core_map(F) : Functor(Core_cat(C),Core_cat(D))
-Core_catd(E) : Catd(K),       Core_catd(E)[k] ↪ Core_cat(E[k]).
-```
-
-Investigate whether `Path_map` can be exposed as the hom action of a reusable
-`Path_cat_func : Functor(Grpd_cat,Cat_cat)`, and whether `Core_map`/`Core_catd`
-can then be semantic compositions rather than independent primitives. Require
-object action, equality action, identity, composition, and iterable next-hom
-behavior. Use `eq_ap`, existing function equality, and generic `fapp*`
-functoriality; do not postulate an opaque action law merely to make the walking
-example typecheck.
-
-This phase also supplies the successor functor:
-
-```text
-NatSucc_func : Functor(Path_cat(Nat),Path_cat(Nat)),
+NatSucc_func : Functor(Path_cat(Nat),Path_cat(Nat))
 NatSucc_func(n) ↪ succ(n).
 ```
 
-If the reusable construction cannot be promoted without a new broad rewrite
-family, stop at a documented prerequisite with the smallest failing probe;
-do not replace `H` by directed `Rep_catd`, since that yields a directed 2-cell
-rather than the equality needed for the inverse.
+Require object action, equality action via `eq_ap`, identity, composition, and
+iterable next-hom behavior. Investigate a reusable `Path_cat_func` only over a
+domain whose arrows really supply equality/function action; do not assume that
+`Core_cat` is a functor on all directed categories and transfors.
 
-Exit criterion: concrete reusable path/core action and Nat successor functors
-pass focused and full owner-position tests without hidden proof constants.
+The decoder then wants the objectwise formula
+
+```text
+H₀(x) ≔ Core_cat(Hom_cat(WalkingEnd,base,x))
+      ≔ Path_cat(Hom(WalkingEnd,base,x)).
+```
+
+Objectwise formulas are not enough to form `H : Catd(WalkingEnd)`. For
+`p : x → y`, postcomposition gives the desired object action. But for a base
+2-cell `α : p ⇒ q`, a directed whiskered 2-cell does not by itself give the
+equality-valued naturality required between the two path-category functors.
+Consequently the tempting declaration
+
+```text
+Core_catd(Rep_catd(WalkingEnd,base)) : Catd(WalkingEnd)
+```
+
+is not an accepted generic construction: it may assume exactly the local
+discreteness that the Hom–Nat result is meant eventually to support.
+
+Before G4/G5, run a mandatory open dimension-2 formation probe for the actual
+decoder motive. It must exhibit the action over arbitrary `p` and arbitrary
+`α : p ⇒ q`, with no bodyless `H`, opaque higher-action constant, hidden
+local-discreteness witness, or use of the rejected word representation. If
+ordinary `Catd` cannot express that motive noncircularly, record the smallest
+failure and revise the route explicitly. Principled alternatives are:
+
+1. formulate the genuine displayed/category-over decoder motive whose first
+   displayed-arrow layer carries the equality witness and whose higher tail is
+   defined explicitly;
+2. derive the needed truncation/local-discreteness structure from an
+   independent foundational principle, with a circularity audit; or
+3. weaken to directed `Rep_catd`, yielding only a directed 2-cell.
+
+Alternative 3 is useful partial progress but is **not** the wanted equality
+round trip and cannot establish the Hom–Nat type equivalence. Do not add a
+WalkingEnd-specific Hom/1-cell eliminator as a shortcut.
+
+Exit criterion: `Path_map` and `NatSucc_func` are concrete, and either a
+nonbodyless equality-valued decoder motive with valid open higher action
+passes at its owner position or the plan records a genuine prerequisite and
+does not claim the hard inverse complete.
 
 ### Phase G3 — Opaque walking HIT and eliminator family
 
@@ -358,8 +411,11 @@ fdapp1_int_cell(walking_end_ind_funcd(R,D,u,σ),loop,r) ↪ σ[r].
 Derive, rather than duplicate, the ordinary section eliminator by setting
 `R ≔ Const_catd(WalkingEnd,Terminal_cat)`, and derive the nondependent
 recursor by also taking a constant target family. Their readable base/loop
-theorems must route through `walking_end_ind_funcd` and be reflexivity after
-the selected rules/comparisons.
+theorems must route transparently through `walking_end_ind_funcd`, the generic
+terminal projection comparison, and the contextual betas. Do not add
+specialized recursor beta rules merely to force one-step reflexivity. Label
+which observations are runtime reductions and which are transparent equality
+theorems assembled from generic comparisons.
 
 Exit criterion: the opaque HIT, contextual eliminator, terminal section
 specialization, and constant recursor all compute at base/loop while arbitrary
@@ -367,14 +423,18 @@ Hom remains opaque.
 
 ### Phase G4 — Concrete `Code`, based-Hom core, powers, and spiral
 
-Construct all four previously opaque sentinels transparently:
+After the G2 motive gate passes, construct all four previously opaque
+sentinels transparently:
 
 1. `Code : Catd(WalkingEnd)` by the derived recursor into `Cat_cat`, with
-   `Code(base) ↪ Path_cat(Nat)` and `Code[loop] ↪ NatSucc_func`;
+   a runtime/transparent base observation and a transparent loop-action
+   theorem comparing `Code[loop]` with `NatSucc_func`; claim a raw
+   `Code[loop] ↪ NatSucc_func` reduction only if a direct runtime assertion
+   demonstrates it without a specialized bridge;
 2. `encodeₓ(p) ≔ Code[p](zero)` using ordinary `catd_transport_func` and
    `fapp0`;
-3. `H ≔ Core_catd(Rep_catd(WalkingEnd,base))`, so `H[p]` is the core/path
-   action of postcomposition by `p`;
+3. the concrete equality-valued decoder motive `H` accepted by G2, so `H[p]`
+   has postcomposition-by-`p` object action and a noncircular higher action;
 4. the Nat-recursive object function
    `power(0) ↪ id` and `power(succ n) ↪ loop ∘ power(n)`, lifted through
    the reusable path-action owner to
@@ -387,9 +447,10 @@ Construct all four previously opaque sentinels transparently:
 Check composition orientation on open variables. The one-generator example
 must not use commutativity of Nat addition to conceal a variance error.
 
-Exit criterion: concrete formation and base/loop computations for `Code`,
-`encode`, `H`, `power_func`, and the spiral, including typed higher action and
-negative controls against direct Hom–Nat conversion.
+Exit criterion: concrete formation and accurately classified base/loop
+computations for `Code`, `encode`, `H`, `power_func`, and the spiral, including
+the open typed higher action required by G2 and negative controls against
+direct Hom–Nat conversion.
 
 ### Phase G5 — Decoder and both inverse proofs
 
@@ -403,7 +464,13 @@ walking_decode_funcd ≔
 
 For arbitrary `p : Hom(WalkingEnd,base,x)`, evaluate its generic displayed
 action at zero. After base beta, `power(0)`, postcomposition, and right-unit
-comparison, extract the equality with the intended orientation:
+comparison, the natural cell is expected first in the orientation
+
+```text
+p = decode[x](encodeₓ(p)).
+```
+
+Use explicit equality symmetry to export the intended orientation:
 
 ```text
 decode[x](encodeₓ(p)) = p.
@@ -428,9 +495,10 @@ theorem bodies and normalized projections: neither inverse may be bodyless or
 route through word induction, a hidden decoder axiom, or a pre-existing
 Hom–Nat equivalence.
 
-Exit criterion: both transparent arbitrary inverse proofs pass, and the hard
-one materially contains the generic `fdapp1_int_cell` of
-`walking_decode_funcd`.
+Exit criterion: both transparent arbitrary inverse proofs pass; the hard one
+materially contains the generic `fdapp1_int_cell` of
+`walking_decode_funcd`, the required right-unit comparison, and the explicit
+orientation-changing `eq_sym` rather than hiding any of them in a constant.
 
 ### Phase G6 — Nat/`BNat` packaging and directed consequences
 
@@ -443,18 +511,28 @@ and `power` after both inverse proofs pass.
 Then rebuild:
 
 - `EquivByInverse`, `TypeEquiv`, and native EQ1 Hom–Nat packages;
-- Hom sethood/local discreteness and `OneCat` evidence transported through
-  the corrected equivalence;
+- sethood of the **object carrier** `Hom(WalkingEnd,base,base)` transported
+  through the corrected carrier equivalence;
 - loop nonidentity, noninvertibility, and nongroupoidality from encoding and
   Nat no-confusion, never word constructors; and
 - any useful composition-to-addition theorem with the existing generic
   composition owner and measured warning policy.
 
+Do not infer local discreteness of the opaque Hom category or
+`IsNCat(cat_one,WalkingEnd)` from the carrier-level Hom–Nat equivalence. The
+round trips classify 1-arrow objects; they do not classify arbitrary 2-cells.
+Those stronger conclusions require a structured Hom-category/higher-cell
+equivalence or an independent truncation theorem and remain deferred unless
+such a theorem is actually constructed. `BNat_cat` may retain its own
+separately proved `OneCat` evidence.
+
 If a former theorem cannot be derived without the rejected representation,
 mark it honestly deferred rather than replacing it by a constant.
 
 Exit criterion: every retained public mathematical consequence depends on
-the corrected semantic maps/inverses and contains no rejected symbol.
+the corrected semantic maps/inverses and contains no rejected symbol; carrier
+sethood is not mislabeled Hom-category discreteness, and any `WalkingEnd`
+`OneCat` claim has separate higher-cell evidence.
 
 ### Phase G7 — Complete consumer and documentation migration
 
@@ -465,11 +543,16 @@ word step, or transparent WalkingEnd Hom. Add permanent checks for:
 - opaque `Obj`/`Hom` and no WalkingEnd-specific identity/composition fold;
 - contextual formation and both runtime constructor betas;
 - terminal-section and constant-recursion specializations;
-- terminal eta proof-time rules with typed arbitrary and constant consumers;
+- the retained runtime terminal `tapp0_fapp0`, the proof-time generic terminal
+  `fdapp1_int_cell ≡ fapp1_fapp0` comparison, contextual runtime betas, and
+  explicit positive/negative checks at the accepted terminal base-beta
+  warning boundary;
 - `Code`, `H`, power, spiral, decoder, arbitrary-arrow hard inverse, and Nat
   easy inverse;
 - both positive equivalence projections and negative open conversion controls;
-- downstream `BNat`, dimension, and directed negative results that survive.
+- downstream `BNat`, carrier-sethood, and directed negative results that
+  survive, while any unproved WalkingEnd local-discreteness/dimension result is
+  explicitly absent or deferred.
 
 Rewrite `examples/walking_endomorphism_hit.lp` as the reviewer-facing story of
 the opaque constructors, contextual elimination, Code/encode, power/spiral,
@@ -509,21 +592,24 @@ every new unjoinable pair; do not call a runtime pair solved merely because a
 proof-time comparison exists.
 
 The goal is complete only when all rejected word/Hom symbols and consumers are
-gone, all concrete contextual constructions and both inverses are transparent,
-all retained consequences have been rederived, current documentation is
-synchronized, and full CI passes. A difficult prerequisite or warning is not
+gone, the equality-valued decoder motive has concrete noncircular higher
+action, all contextual constructions and both genuine equality inverses are
+transparent, all retained consequences have been rederived without the
+local-discreteness overclaim, current documentation is synchronized, and full
+CI passes. A directed decoder cell without the equality-valued motive is
+partial progress, not completion. A difficult prerequisite or warning is not
 a blocker until the `AGENTS.md` repeated-blocker policy is met.
 
 ### Current implementation ledger
 
 | Task | Status at goal start | Required result |
 | --- | --- | --- |
-| `WEHIT-G1-TERMINAL-ETA` | owner-probe demonstrated | promote runtime consumer, general eta, direct constant bridge, terminal arrow comparison |
-| `WEHIT-G2-PATH-CORE-ACTION` | open prerequisite | reusable iterable path/core action, Nat successor, and fibrewise core |
+| `WEHIT-G1-TERMINAL-OWNER` | exact hybrid not yet measured | retain runtime `tapp0`; demote only generic terminal `fdapp1`; add contextual beta and no HIT-specific bridge |
+| `WEHIT-G2-PATH-H-MOTIVE` | path action open; higher `H` action is a feasibility gate | reusable `Path_map`/Nat successor plus concrete noncircular equality-valued decoder motive |
 | `WEHIT-G3-OPAQUE-OWNER` | interface demonstrated | remove word Hom; promote opaque constructors and contextual eliminator |
 | `WEHIT-G4-CODE-H-POWER` | type shapes only | concrete transparent Code, H, power functor, and spiral |
 | `WEHIT-G5-ROUNDTRIPS` | open in selected design | hard inverse from decoder `fdapp1`; easy inverse from Nat induction |
-| `WEHIT-G6-PACKAGING` | old implementation rejected | rebuild BNat/equivalence/dimension/negative consequences downstream |
+| `WEHIT-G6-PACKAGING` | old implementation rejected | rebuild BNat/carrier equivalence/sethood/negative consequences; defer unproved Hom discreteness/WalkingEnd OneCat |
 | `WEHIT-G7-MIGRATION` | open | checks, examples, docs, catalog, health contain no rejected architecture |
 | `WEHIT-G8-GATES` | open | proportional probes, warnings/audits, and full local CI pass |
 
