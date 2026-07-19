@@ -48,9 +48,9 @@ def main() -> int:
         return 1
 
     top_level = [int(identifier) for identifier in identifiers if identifier.isdigit()]
-    if top_level != list(range(20)):
+    if top_level != list(range(21)):
         print(
-            f"{SOURCE.relative_to(REPO_ROOT)}: top-level sections are {top_level}, expected 0..19",
+            f"{SOURCE.relative_to(REPO_ROOT)}: top-level sections are {top_level}, expected 0..20",
             file=sys.stderr,
         )
         return 1
@@ -70,7 +70,7 @@ def main() -> int:
             print(line, file=sys.stderr)
         return 1
 
-    print(f"source TOC check passed: {len(source)} heading(s), sections 0-19")
+    print(f"source TOC check passed: {len(source)} heading(s), sections 0-20")
     return 0
 
 

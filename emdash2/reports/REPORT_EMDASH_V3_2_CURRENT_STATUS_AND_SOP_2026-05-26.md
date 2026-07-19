@@ -26,10 +26,11 @@ detailed probe evidence.
 - `emdash3_2_walking_end_hit.lp`: one-way opaque one-dimensional walking-
   endomorphism directed-HIT module. It owns the opaque category/base/loop,
   explicit dimension evidence, contextual `Functord` eliminator, derived
-  section/recursor views, transparent Code/power/decoder construction,
-  Hom--Nat carrier packages, sethood, directed negative consequences, and a
-  separate `BNat` consistency model. It contains no generated-word Hom or
-  WalkingEnd-specific identity/composition rule.
+  section/recursor views, transparent Code/power/decoder construction, the
+  restricted-CoreIncl three-cell spiral specialization, Hom--Nat carrier
+  packages, sethood, directed negative consequences, and a separate `BNat`
+  consistency model. It contains no generated-word Hom or WalkingEnd-specific
+  identity/composition rule.
 - `emdash3_2_sum_observational_action.lp`: one-way library module retaining
   the componentwise Sum `ObsAction`, its equality comparison, and four
   proof-time bases; no kernel or univalence consumer imports it.
@@ -68,7 +69,7 @@ warning inventory                  1,128
   replaceable pattern variables      157
 ```
 
-The current 2026-07-19 walking-HIT slice is implemented through G6 and has
+The strict 2026-07-19 walking-HIT slice is implemented through G6 and has
 passed bounded kernel, Nat, walking-module, complete diagnostic, and full
 reviewer checks. Its measured kernel inventory is `984/159`; the walking owner
 is `995/159`; both strict audits have zero unreviewed clauses with 45 annotated
@@ -77,7 +78,35 @@ slots across 27 clauses. The refreshed catalog has 2,050 checks
 checks. Generated health is synchronized; warning checking confirms the
 kernel `984/159` inventory; and full local CI passes across 55 files in
 320.238s. The walking plan is complete through G8 at its selected practical
-boundary.
+boundary. These figures are the pre-redesign fallback baseline.
+
+The post-G8 restricted-CoreIncl redesign resumed from
+`851e85b1249aaa120df8492de7ad9506b871ccdc`. Kernel section 20 now supplies the
+recursive equality-local skeleton `EqSkeleton_cat`, simultaneous functor
+action, recursive inclusion, `Cat1Eq_cat`, `Core1_func`, and primitive
+computational `CoreInclTransf`. The transformation computes at its object,
+full first-hom, and capped first-hom projections. Its capped value at a functor
+is the common diagonal `Core(C) → D`; the comparison between the two boundary
+composites is the separate derived `core_incl_transf_kappa` cell. Stable
+postcomposition owns the associativity required by
+`core_incl_transf_kappa_left`, so no raw reassociation rule, endpoint transport,
+or `unif_rule` is added. `path_lift_non_strict_spiral` retains
+`κᵣ ∘ PathLift(h) ∘ κₗ`; the walking specialization converts to the original
+strict spiral and leaves it available as fallback.
+
+The promoted redesign passes `make check`, `make examples`, source-TOC
+validation, and the strict LHS audit with zero unreviewed clauses and the same
+45 annotated slots across 27 clauses. The catalog has 2,080 checks
+(1,834 `assert` plus 246 `assertnot`) across 77 areas with zero unclassified
+checks. The kernel warning inventory is `1028/159`, and the walking owner is
+`1039/159`. The 44 new kernel critical-pair reports are accepted and classified
+at their intended runtime owners: 16 inherited successor-composition, one
+object action, four capped recursive actions, one whole identity action, ten
+capped inclusions, one full `Core₁` projection, and eleven capped `Core₁`
+actions. Warnings are diagnostic rather than a veto: the intended rules remain
+runtime, while six redundant compound category slots were minimized to `_`
+even though doing so exposed 14 of those reports. Replaceable-variable warnings
+do not increase, and no unification rule is added.
 
 The walking-endomorphism plan resumed at implementation-goal baseline
 `82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,

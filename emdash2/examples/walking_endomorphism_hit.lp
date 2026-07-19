@@ -253,6 +253,18 @@ assert ⊢ walking_power_spiral
       walking_based_rep_catd
       walking_power_func);
 
+// The equality-local CoreInclTransf redesign constructs the same contextual
+// algebra as an explicit kappa-right o PathLift(step) o kappa-left composite.
+assert ⊢ walking_power_spiral_coreincl
+  : τ (@walking_end_loop_coherence
+      walking_Code_catd
+      walking_based_rep_catd
+      walking_power_func);
+
+assert ⊢
+  walking_power_spiral_coreincl
+  ≡ walking_power_spiral_natsucc;
+
 assert (n : τ Nat_grpd) ⊢
   @walking_power_spiral_cell n
   : τ (Hom

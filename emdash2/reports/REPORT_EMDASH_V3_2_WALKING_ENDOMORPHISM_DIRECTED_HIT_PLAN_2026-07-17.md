@@ -16,10 +16,12 @@ Corrective-review baseline: `9858a420fd6f94e920415a8728ffd9d6bf8d18a5`
 Implementation-goal starting baseline: `92daacc5a90ec9b7b457cfa310c0bb51e1531237`
 Current implementation-goal baseline and review provenance: `82d0e27fd75573309a9c7e26e621706c66d24e64`
 Completion working-tree base: `957cf736a501f7f6a27d8c709005dbbbfc520aea`
+Restricted-CoreIncl redesign baseline: `851e85b1249aaa120df8492de7ad9506b871ccdc`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
 Current implementation owners: reusable Nat prerequisites in
-`emdash3_2_nat_arithmetic.lp`; walking HIT/model/comparison in
-`emdash3_2_walking_end_hit.lp`
+`emdash3_2_nat_arithmetic.lp`; equality-local skeleton/Core-inclusion
+infrastructure in `emdash3_2.lp`; walking HIT/model/comparison and the
+restricted spiral specialization in `emdash3_2_walking_end_hit.lp`
 
 ## Status And Authority
 
@@ -770,7 +772,43 @@ category of categories and functors, but not automatically an omega-functor
 on the full directed `Cat_cat`. This is the same directed obstruction that
 rejected a generic `Core_catd`. Do not postulate that missing higher action.
 
-### Deferred Possible Redesign — Restricted `CoreInclTransf`
+### Implemented Post-MVP Redesign — Restricted `CoreInclTransf`
+
+The strict G1–G8 implementation remains the validated fallback, but this
+formerly deferred redesign was reopened as a bounded post-MVP goal from
+baseline `851e85b1249aaa120df8492de7ad9506b871ccdc` and is now promoted. The
+active kernel contains `EqSkeleton_cat`, its simultaneous functor action and
+recursive inclusion, `Cat1Eq_cat`, `Core1_func`, the primitive computational
+`CoreInclTransf`, both endpoint comparisons, and the structured non-strict
+spiral. The walking module exposes `walking_power_spiral_coreincl`; it converts
+to the retained `walking_power_spiral_natsucc`, so the original strict owner is
+still available and no decoder migration is forced merely to validate the new
+architecture.
+
+Owner-position probes passed quietly and with warnings before promotion. The
+promoted kernel passes `make check`, the reviewer suite, and the strict LHS
+audit with zero unreviewed clauses. Its warning inventory is `1028/159`, while
+the walking owner measures `1039/159`; the former `984/159` and `995/159`
+figures remain the strict pre-redesign baselines. The 44 new kernel critical
+pairs are classified as follows:
+
+| Runtime owner | New reports | Decision |
+| --- | ---: | --- |
+| inherited successor `Sk⁼` composition | 16 | retain: this is the intended computation of the retained dimension |
+| all-dimension `Sk⁼` object action | 1 | retain: required functor object beta |
+| capped recursive `Sk⁼` hom action | 4 | retain with inferred category slots; the minimal LHS passed subject reduction and strict audit |
+| whole `Sk⁼` identity action | 1 | retain: selected whole-functor runtime law |
+| capped recursive `Sk⁼` inclusion | 10 | retain with inferred source; required recursive projection beta |
+| full `Core₁` hom projection | 1 | retain: required iterable first-hom projection |
+| capped `Core₁` action | 11 | retain: required action at an ordinary functor |
+
+These warnings are diagnostics, not vetoes. In particular, the successor
+composition and capped `Core₁` action were not weakened to propositions, and
+the category slots of the two recursive capped rules were not kept as
+redundant compound patterns merely to reduce the count. No `unif_rule` is
+added. Temporary `core1_hom_func` join rules were rejected because they
+duplicated generic functoriality and introduced additional nonjoining paths,
+not because of their warning count.
 
 A restricted equality-local or path 1-skeleton does solve the semantic
 obstruction in the naive global `Core : Cat_cat → Cat_cat`. The clearer
@@ -884,14 +922,14 @@ It therefore sends `F` to `PathMap(F₀)` and sends `h : F = G` to
 `PathTransf(eq_ap(ObjMap_C,D,h))`, with the remaining higher action supplied
 by the same iterable `PathInt` ladder.
 
-At the current kernel boundary, `Sk⁼` would be a named primitive recursive
-category family with the displayed projection rules, because `Cat` is not a
-record assembled transparently from object, hom, identity, and composition
-fields. Formation of `Sk⁼` and its recursive inclusion is high-feasibility;
-the simultaneous functor action is high-feasibility after `PathInt` is
-promoted; the complete primitive `CoreInclTransf` ladder is the medium-sized
-part because every `tapp*` observation must be supplied and checked. No
-mathematical obstruction is known for any of these equality-local pieces.
+At the current kernel boundary, `Sk⁼` is a named primitive recursive category
+family with the displayed projection rules, because `Cat` is not a record
+assembled transparently from object, hom, identity, and composition fields.
+Its recursive inclusion and simultaneous functor action are active. The
+medium-sized primitive `CoreInclTransf` layer supplies its object, full first-
+hom, and capped first-hom observations; the generic iterable functor/transfor
+calculus supplies subsequent action. No mathematical obstruction remains for
+this equality-local slice.
 
 Here `J` is the canonical inclusion, equivalently the restriction of
 `Id_Cat` to `Cat₁⁼`; writing `CoreIncl_ : Core ⇒ Id_Cat` is harmless shorthand
@@ -899,7 +937,7 @@ when that domain restriction is implicit. This sequence genuinely removes
 the obstruction to the naive full-`Cat_cat` declaration and internalizes the
 family `Core_incl_func(C)` as the object components of one transformation.
 
-For this deferred redesign, `CoreInclTransf` is selected as a primitive
+For this redesign, `CoreInclTransf` is selected as a primitive
 stable transfor head: it is the more-internalized natural family whose object
 components are the existing primitive `Core_incl_func(C)`. Do not make a
 generic pointwise-transfor assembler a prerequisite merely to avoid this
@@ -910,34 +948,32 @@ remain opaque. Its initial computations are
 ```text
 tapp₀(CoreInclTransf,C) ↪ Core_incl_func(C)
 
-tapp₁(CoreInclTransf,F) ↪ κ_F,
+tapp₁_func(CoreInclTransf,C,D) ↪ CoreInclDiagonal(C,D)
+
+tapp₁_fapp₀(CoreInclTransf,F)
+  ↪ CoreIncl_D ∘ PathMap(F₀)
+  ≡ F ∘ CoreIncl_C.
 ```
 
-followed by component, capped-arrow, full-hom, and iterated equality-action
-computations for `κ_F`. In particular its first transfor projection at
-`F : C → D` has type
+Here the full projection is a functor from equality paths of functors to
+functors `Core(C) → D`, and its capped value at `F : C → D` is the common
+diagonal functor. It is not itself the naturality square. The square is the
+separate derived next cell
 
 ```text
-tapp₁(CoreInclTransf,F) = κ_F : F ∘ CoreIncl_C ⇒ CoreIncl_D ∘ PathMap(F₀).
+core_incl_transf_kappa(F) = κ_F
+  : F ∘ CoreIncl_C ⇒ CoreIncl_D ∘ PathMap(F₀).
 ```
 
-This `κ_F` is not a second semantic obstruction: it is simply the ordinary
-`tapp₁` computation that must accompany the definition of
-`CoreInclTransf`. The strict Core-inclusion rule demonstrated above makes its
-source and target definitionally identical, so this projection is the
-identity transfor; equality induction/`PathInt` supplies its action on the
-remaining equality-valued higher cells. Thus the proposed one-skeleton
-package is mathematically coherent and computationally feasible in the
-current architecture. Building the complete `Sk⁼` category/functor/inclusion
-recursion, the specialized `Cat₁⁼`, and the transformation projection ladder
-has not itself been probed and remains optional library
-packaging rather than a prerequisite for the WalkingEnd MVP. This design is
-fully natural and may ultimately be architecturally preferable because the
-Core-inclusion naturality cell is owned by one internal transformation and is
-consumed explicitly by the spiral. It is intentionally deferred until after
-the already-probed strict WalkingEnd design has been implemented and
-validated; do not expand the current MVP by constructing `Cat₁⁼`, `Core₁`, or
-`CoreInclTransf`.
+This `κ_F` is not a second semantic obstruction. The strict Core-inclusion
+owner makes its source and target definitionally identical, so its active body
+is the existing identity transfor `core_incl_naturality(F)`. Equality action
+in the diagonal remains iterable through `PathInt`. Thus the one-skeleton
+package is not merely feasible: the category/functor/inclusion recursion, the
+specialized `Cat₁⁼`, and the transformation projection ladder are active and
+permanently checked. It remains a restricted equality-local construction, not
+a universal `IsNCat(1)` truncation and not a global directed
+`Core : Cat_cat → Cat_cat`.
 
 Strictness is not required to construct the spiral. Let
 
@@ -952,7 +988,7 @@ Using the endpoint-comparison names fixed earlier, define
 
 ```text
 κₗ(S,p) : S ∘ PathLift(p) ⇒ PathLift(S₀ ∘ p)
-κₗ(S,p) ≔ tapp₁(CoreInclTransf,S) ⋆ PathMap(p)
+κₗ(S,p) ≔ core_incl_transf_kappa(S) ⋆ PathMap(p)
 
 κᵣ(p,s) : PathLift(p ∘ s) ⇒ PathLift(p) ∘ PathMap(s).
 ```
@@ -960,22 +996,24 @@ Using the endpoint-comparison names fixed earlier, define
 The right comparison `κᵣ` is already the identity after conversion because
 ordinary `PathInt` functoriality computes
 `PathLift(p) ∘ PathMap(s)` to `PathLift(p ∘ s)`. The left comparison `κₗ` is
-the whiskered Core-inclusion naturality cell; it need not be an identity.
-Consequently the non-strict structured spiral is
+the whiskered Core-inclusion naturality cell. Its promoted implementation is
+written at the stable `hom_postcomp_fapp0` owner, which absorbs the required
+associativity without a raw `comp_fapp0` reassociation rule, a `unif_rule`, or
+an explicit endpoint transport. Consequently the non-strict structured spiral
+is
 
 ```text
 spiral ≔ κᵣ(p,s) ∘ᵥ PathLift(h) ∘ᵥ κₗ(S,p)
   : S ∘ P ⇒ P ∘ PathMap(s).
 ```
 
-Under the active strict representation already probed, `κₗ` also becomes the
-identity and the same composite reduces to `PathLift(h)` up to endpoint
-conversion. Under the restricted-transformation representation, the genuine
-`κₗ` is retained in the spiral. Both are mathematically correct and preserve
-the structured higher action. The current G2 implements and audits the strict
-version first. A future redesign may compare the non-strict package on
-genericity, compositionality, computation, and warning evidence; it must not
-silently replace the selected MVP during the present implementation goal.
+Under the active strict representation, `κₗ` also computes to identity and the
+three-cell composite reduces to `PathLift(h)` by endpoint conversion. The
+definition nevertheless retains the genuine named left and right comparison
+owners rather than erasing them from the construction. The walking
+specialization converts exactly to the selected strict spiral and has the same
+point component. This validates the redesign while preserving the original
+strict implementation as a fallback.
 
 The intended arrow-to-path collapse is already represented at its proper
 strength by groupoidality evidence: the Foundations define
@@ -986,14 +1024,13 @@ evidence. It is not valid uniformly over unrestricted `Cat_cat`, and it is
 not wanted for `WalkingEnd` itself: the selected HIT is locally discrete
 above dimension one but its generating 1-arrow remains noninvertible.
 
-G2 must instead audit, in order:
+The completed G2 and post-MVP redesign audits establish, in order:
 
 1. a fully internal `PathInt : Grpd_cat → Cat_cat`, which is feasible because
    higher arrows in `Grpd_cat` are equalities;
-2. reproduce, promote, or revise the now-feasible strict fixed-functor
-   Core-inclusion owner and its whiskered stable-postcomposition projection
-   after the required projection, owner-position, and warning audits; the
-   bodyful restricted-one-skeleton alternative is deferred;
+2. the strict fixed-functor Core-inclusion owner and its whiskered stable-
+   postcomposition projection are promoted, and the formerly deferred
+   restricted one-skeleton alternative is now active alongside them;
 3. preserve the demonstrated exact spiral endpoints without any endpoint
    unification shortcut or broad whole-term `Grpd` runtime fold;
 4. only if a concrete consumer remains stuck, whether the generic
@@ -1016,8 +1053,8 @@ owner by level rather than by suggestive name:
 | `PathMap(f)` and equality action | positive | projections of `PathInt`, with a named iterable ladder |
 | `Core_cat(C)` | retain | transparent object-level assignment |
 | `CoreOnFunctor(F) ≔ PathMap(F₀)` | positive | action on a fixed ordinary functor, not evidence of a full `Cat_cat` endofunctor |
-| `core_incl_naturality(F)` | active strict feasibility demonstrated | implement first as identity after strict endpoint normalization; retain the non-strict `tapp₁(CoreInclTransf,F)` interpretation only in the deferred redesign |
-| recursive equality-skeleton `Sk⁼`, `Cat₁⁼`, `Core₁`, and primitive `CoreInclTransf` | semantically positive, potentially preferable, explicitly deferred | use `Core_cat` as the zero skeleton, recurse through homs and functor action, and give the primitive transformation a complete `tapp*` ladder; this removes the arbitrary-directed-`η` obstruction and packages genuine `κₗ`, but is not a general `IsNCat(1)` truncation and must not be constructed during the selected strict MVP |
+| `core_incl_naturality(F)` / `core_incl_transf_kappa(F)` | active | both are identity transfors after strict endpoint normalization; the latter is the derived next cell owned by the restricted transformation, not the capped `tapp₁` diagonal functor |
+| recursive equality-skeleton `Sk⁼`, `Cat₁⁼`, `Core₁`, and primitive `CoreInclTransf` | **active post-MVP redesign** | `Core_cat` is the zero skeleton, homs and functor action recurse, and the primitive transformation has object/full/capped projections; this removes the arbitrary-directed-`η` obstruction and packages genuine `κₗ`, but is not a general `IsNCat(1)` truncation |
 | `Core : Functor(Cat_cat,Cat_cat)` | negative in general | would require arbitrary directed transformation components to yield paths |
 | arrow-to-path collapse | restricted positive | selected inverse supplied by explicit `IsGroupoidalCat`/local-discreteness evidence |
 | `Path_sym_func` natural package | plausible | internalize over equality-valued `Grpd_cat`, not by assuming directed `Core` action |
@@ -1586,7 +1623,7 @@ repeated-blocker policy is met.
 | `WEHIT-G1-TERMINAL-OWNER` | terminal `fdapp1` demotion and typed derived views active at the generic owner; exact hybrid full-copy probe passes; contextual betas held for atomic G3 because the reducible legacy loop causes subject-reduction failure | land the already-probed contextual base/loop betas with opaque WalkingEnd and retain no HIT-specific bridge |
 | `WEHIT-G2-PATH-DIMENSION` | complete: named Path/Core/NatSucc/spiral owners active at `984/159`; warning-neutral formation probe validates the exact directed `Rep_catd(base)` cell, global OneCat signature shape, `hom_to_path` specialization, and non-discreteness control | land the already-validated opaque signature declarations atomically in G3 |
 | `WEHIT-G2-GROUPOID-INTERNALIZATION-AUDIT` | complete: all requested surfaces classified level by level; capped composition eta consequence recorded; fixed-functor Core action retained; no global directed Core/Core_catd or directed-cell reflection added | retain these boundaries during G3–G7 |
-| `WEHIT-FUTURE-COREINCL-TRANSF` | explicitly deferred possible redesign; mathematically natural and potentially architecturally preferable | after the strict MVP is complete, optionally probe recursive `Sk⁼(n,A)` with `Core_cat` at zero, simultaneous `Sk⁼` functor action and recursive inclusion, `Cat₁⁼ ≔ Sk⁼(cat_succ(cat_zero),Cat_cat)`, `Core₁`, primitive computational `CoreInclTransf`, genuine `κₗ`, and the non-strict spiral `κᵣ ∘ᵥ PathLift(h) ∘ᵥ κₗ`; do not conflate it with an unavailable universal `IsNCat(1)` truncation or make it a current-goal prerequisite |
+| `WEHIT-FUTURE-COREINCL-TRANSF` | **complete as a post-MVP redesign**: recursive `Sk⁼(n,A)`, simultaneous functor action, recursive inclusion, `Cat₁⁼`, `Core₁`, primitive computational `CoreInclTransf`, derived κ, stable-owner genuine `κₗ`, `κᵣ`, and the three-cell spiral are promoted; the walking specialization converts to the retained strict spiral; kernel/walking warnings are `1028/159` and `1039/159`, with every delta family classified and no `unif_rule` | retain the strict implementation as fallback; do not conflate the equality-local skeleton with a universal `IsNCat(1)` truncation or claim a global directed `Core : Cat_cat → Cat_cat` |
 | `WEHIT-G2-DIMENSION-DERIVABILITY` | nonblocking future audit | determine whether stronger general HIT induction derives OneCat evidence and can retire the explicit truncation constructor; never claim this during the MVP without a proof |
 | `WEHIT-G3-OPAQUE-OWNER` | **complete with corrected beta boundary**: generated-word Hom and all WalkingEnd category-operation rules removed; opaque constructors, explicit dimension evidence, contextual eliminator, derived section/recursor views, opacity controls, and separate BNat model active; literal contextual and ordinary base/loop observations compute | preserve the two semantic constructor betas at four necessary observers; add no identity, composition, composite-prefix, or unification owner |
 | `WEHIT-G4-CODE-REP-POWER` | **complete**: transparent Code, directed representable, power functor, exact spiral, reflexive canonical point equation, and stable endpoint-adjusted presentation active | retain the generic stable-postcomposition boundary rather than forcing the final adjusted cell to raw identity |

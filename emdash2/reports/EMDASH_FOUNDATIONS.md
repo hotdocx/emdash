@@ -8,8 +8,8 @@ presents the intended mathematics in ordinary category/type-theory notation
 and deliberately suppresses most Lambdapi rewrite engineering details.
 Reusable Nat addition, successor path action, and sethood live in the one-way
 `emdash3_2_nat_arithmetic.lp` module. The walking-endomorphism directed-HIT/
-`BNat` presentation is being rebuilt downstream in
-`emdash3_2_walking_end_hit.lp` under the July 17 living plan.
+`BNat` presentation and its restricted-CoreIncl spiral specialization live
+downstream in `emdash3_2_walking_end_hit.lp` under the July 17 living plan.
 The retained componentwise Sum observational action lives in the separate
 library module `emdash3_2_sum_observational_action.lp`; it is not a
 foundational univalence dependency.
@@ -227,6 +227,46 @@ is composition of the first Path action with postcomposition by
 constructs the exact Nat iteration spiral with identity point components and
 retains the full higher action.
 
+There is now also a restricted equality-local internalization of Core
+inclusion. For every category `A`, define recursively
+
+```text
+Sk⁼(0,A)       = Core_cat(A)
+Obj(Sk⁼(n+1,A)) = Obj(A)
+Hom_{Sk⁼(n+1,A)}(x,y) = Sk⁼(n,Hom_A(x,y)).
+```
+
+Identities and composition at each retained successor dimension compute as in
+`A`; all later dimensions recurse into equality action. The construction acts
+simultaneously on ordinary functors and has a recursive inclusion
+`Sk⁼(n,A) → A`. In particular,
+
+```text
+Cat₁⁼ = Sk⁼(1,Cat_cat)
+Hom_{Cat₁⁼}(C,D) = Path_cat(Functor(C,D)).
+```
+
+Thus `Cat₁⁼` retains categories and ordinary functors but replaces arbitrary
+directed transformations between functors by equality paths. It is not a
+universal 1-truncation and does not assert that the functor classifiers are
+sets.
+
+On this restricted source, `Core₁(C)=Core_cat(C)` and
+`Core₁(F)=PathMap(F₀)` form a genuine functor, and the canonical inclusions are
+the object components of
+
+```text
+CoreInclTransf : Core₁ => Cat₁⁼Incl.
+```
+
+The capped first-hom projection at `F` is the common diagonal functor
+`Core(C) → D`, not the naturality 2-cell itself. The separate derived cell
+`core_incl_transf_kappa(F)` compares
+`F o CoreIncl_C` with `CoreIncl_D o PathMap(F₀)`. Whiskering this comparison is
+written at the stable represented-postcomposition owner; that presentation
+controls associativity without a global reassociation rewrite or proof-time
+unification rule.
+
 The walking-endomorphism extension is implemented on this infrastructure
 through its selected G6 boundary. The former generated-word `walking_end_hom` presentation has
 been removed and is not a mathematical foundation for new work. The active
@@ -269,6 +309,18 @@ spiral. Its canonical point equation reduces to reflexivity. The final
 endpoint-adjusted representable presentation intentionally remains under the
 generic stable-postcomposition owner instead of reducing to a raw identity;
 that is a normal-form boundary, not a missing HIT beta.
+
+The restricted construction also supplies the explicit three-cell form
+
+```text
+κᵣ o PathLift(step) o κₗ.
+```
+
+Both endpoint comparisons compute to identities in the selected strict
+representation, so `walking_power_spiral_coreincl` converts to the retained
+`walking_power_spiral_natsucc` and has the same directed component. This is a
+validated alternative construction, while the original strict spiral remains
+available as fallback.
 
 The decoder target is the existing directed representable family
 
@@ -2483,6 +2535,13 @@ vocabulary.
 | `Hom_A(g,f)[h] = f o h o g` | `Hom_func g f` / `Hom_fapp0 g f h` |
 | `Transf(F,G)` | `Transf_cat F G` / `Transf F G` |
 | `ϵ[x]` | `tapp0_fapp0 x ϵ` |
+| path category `Path(A)` | `Path_cat A` |
+| equality-local skeleton `Sk⁼(n,A)` | `EqSkeleton_cat n A` |
+| equality-local category of categories `Cat₁⁼` | `Cat1Eq_cat` |
+| restricted Core functor `Core₁` | `Core1_func` |
+| restricted Core-inclusion transformation | `CoreInclTransf` |
+| restricted Core-inclusion κ square | `core_incl_transf_kappa F` |
+| `κᵣ o PathLift(h) o κₗ` | `path_lift_non_strict_spiral S p s h` |
 | `Catd(K)` | `Catd_cat K` / `Catd K` |
 | `E[k]` | `Fibre_cat E k` |
 | `F^*E` | `Pullback_catd E F` |

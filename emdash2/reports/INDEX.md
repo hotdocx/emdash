@@ -32,7 +32,8 @@ mathematics, notation, implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
-  active reopened migration plan for an opaque one-dimensional directed HIT.
+  completed migration plan plus implemented post-MVP restricted-CoreIncl
+  redesign for an opaque one-dimensional directed HIT.
   G1–G6 are implemented: opaque constructors, explicit homwise dimension
   evidence, contextual elimination, literal runtime base/loop computation at
   both contextual and ordinary recursor observers, transparent Code/powers,
@@ -41,11 +42,15 @@ mathematics, notation, implementation plans, and historical decisions.
   consequences. The normalization cell
   `p ⇒ power(encode(p))` is constructed before hom-discreteness converts it
   to equality. Open generator-prefix compatibility is an ordinary theorem
-  from generic functoriality, not a custom rewrite or `unif_rule`. The kernel
-  measures `984/159`, the walking owner `995/159`, and the catalog has 2,050
-  checks across 76 areas with no unclassified checks. G7 report/health
-  synchronization and G8 gates are complete; full local CI passes across 55
-  files in 320.238s. A reverse BNat functor, full hom-category equivalence,
+  from generic functoriality, not a custom rewrite or `unif_rule`. The later
+  restricted redesign adds recursive `Sk⁼`, `Cat₁⁼`, `Core₁`, primitive
+  computational `CoreInclTransf`, separate derived κ, and the genuine
+  three-cell non-strict spiral. Its WalkingEnd specialization converts to the
+  retained strict spiral. The kernel measures `1028/159`, the walking owner
+  `1039/159`, and the catalog has 2,080 checks across 77 areas with no
+  unclassified checks; all 44 new kernel critical-pair reports are classified
+  as accepted runtime-owner diagnostics and no `unif_rule` is added. A reverse
+  BNat functor, full hom-category equivalence,
   full functor-category initiality, and derivation of the truncation witness
   from a stronger general HIT principle remain outside the selected practical
   boundary.

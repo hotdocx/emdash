@@ -22295,8 +22295,7 @@ rule @fapp1_func
 // Capped successor action evaluates the recursively skeletonized hom action.
 rule
   @fapp1_fapp0
-    (EqSkeleton_cat (cat_succ $n) $A)
-    (EqSkeleton_cat (cat_succ $n) $B)
+    _ _
     (@eq_skeleton_map_func (cat_succ $n) $A $B $F)
     $x $y $f
   ↪ @fapp0
@@ -22321,9 +22320,7 @@ rule @eq_skeleton_map_func $n $A $A (@id Cat_cat $A)
 // The simultaneous action preserves composition at the whole-functor level.
 rule @comp_fapp0
       Cat_cat
-      (EqSkeleton_cat $n $A)
-      (EqSkeleton_cat $n $B)
-      (EqSkeleton_cat $n $C)
+      _ _ _
       (@eq_skeleton_map_func $n $B $C $G)
       (@eq_skeleton_map_func $n $A $B $F)
   ↪ @eq_skeleton_map_func
@@ -22357,8 +22354,7 @@ rule @fapp1_func
 // Capped successor inclusion evaluates the recursive hom inclusion.
 rule
   @fapp1_fapp0
-    (EqSkeleton_cat (cat_succ $n) $A)
-    $A
+    _ $A
     (eq_skeleton_incl_func (cat_succ $n) $A)
     $x $y $f
   ↪ @fapp0

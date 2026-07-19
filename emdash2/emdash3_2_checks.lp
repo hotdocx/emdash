@@ -19474,6 +19474,297 @@ assert [C : Cat]
         (@fapp0 C C S (@path_action_iter_power_check C S c n))
         (@path_action_iter_power_check C S c (succ m))));
 
+// catalog-area: Equality-local skeleton and restricted Core inclusion
+// Sk⁼ formation retains the selected directed dimensions and replaces the
+// remaining higher action by the existing Path/Core owners.
+assert (A : Cat) ⊢
+  EqSkeleton_cat cat_zero A
+  ≡ Core_cat A;
+
+assert (n : CatDim) (A : Cat) ⊢
+  Obj (EqSkeleton_cat n A)
+  ≡ Obj A;
+
+assert
+  (n : CatDim)
+  (A : Cat)
+  (x y : τ (Obj A)) ⊢
+  Hom_cat (EqSkeleton_cat (cat_succ n) A) x y
+  ≡ EqSkeleton_cat n (Hom_cat A x y);
+
+symbol eq_skeleton_id_path_check
+  (n : CatDim)
+  (A : Cat)
+  (x : τ (Obj A))
+  : τ (@=
+      (Hom A x x)
+      (@id (EqSkeleton_cat (cat_succ n) A) x)
+      (@id A x))
+≔ @eq_refl (Hom A x x) (@id A x);
+
+assert
+  (n : CatDim)
+  (A : Cat)
+  (x : τ (Obj A)) ⊢
+  @eq_skeleton_id_path_check n A x
+  : τ (@=
+      (Hom A x x)
+      (@id (EqSkeleton_cat (cat_succ n) A) x)
+      (@id A x));
+
+// Inherited successor composition is deliberately runtime computation even
+// though its generic-owner overlaps remain visible in the warning inventory.
+assert
+  (n : CatDim)
+  (A : Cat)
+  (w x y : τ (Obj A))
+  (f : τ (Hom A w x))
+  (g : τ (Hom A x y)) ⊢
+  @comp_fapp0
+    (EqSkeleton_cat (cat_succ n) A)
+    w x y g f
+  ≡ @comp_fapp0 A w x y g f;
+
+// The simultaneous zero action is exactly PathMap of the object function.
+assert (A B : Cat) (F : τ (Functor A B)) ⊢
+  @eq_skeleton_map_func cat_zero A B F
+  ≡ @path_map_func
+      (Obj A) (Obj B)
+      (@functor_object_function A B F);
+
+assert
+  (n : CatDim)
+  (A B : Cat)
+  (F : τ (Functor A B))
+  (x : τ (Obj A)) ⊢
+  @fapp0
+    (EqSkeleton_cat n A)
+    (EqSkeleton_cat n B)
+    (@eq_skeleton_map_func n A B F)
+    x
+  ≡ @fapp0 A B F x;
+
+assert
+  (n : CatDim)
+  (A B : Cat)
+  (F : τ (Functor A B))
+  (x y : τ (Obj A)) ⊢
+  @fapp1_func
+    (EqSkeleton_cat (cat_succ n) A)
+    (EqSkeleton_cat (cat_succ n) B)
+    (@eq_skeleton_map_func (cat_succ n) A B F)
+    x y
+  ≡ @eq_skeleton_map_func
+      n
+      (Hom_cat A x y)
+      (Hom_cat B
+        (@fapp0 A B F x)
+        (@fapp0 A B F y))
+      (@fapp1_func A B F x y);
+
+assert
+  (n : CatDim)
+  (A B : Cat)
+  (F : τ (Functor A B))
+  (x y : τ (Obj A))
+  (f : τ (Hom A x y)) ⊢
+  @fapp1_fapp0
+    (EqSkeleton_cat (cat_succ n) A)
+    (EqSkeleton_cat (cat_succ n) B)
+    (@eq_skeleton_map_func (cat_succ n) A B F)
+    x y f
+  ≡ @fapp0
+      (EqSkeleton_cat n (Hom_cat A x y))
+      (EqSkeleton_cat n
+        (Hom_cat B
+          (@fapp0 A B F x)
+          (@fapp0 A B F y)))
+      (@eq_skeleton_map_func
+        n
+        (Hom_cat A x y)
+        (Hom_cat B
+          (@fapp0 A B F x)
+          (@fapp0 A B F y))
+        (@fapp1_func A B F x y))
+      f;
+
+// Whole-functor identity and composition are part of the selected runtime
+// action contract, not proof-time substitutes for it.
+assert (n : CatDim) (A : Cat) ⊢
+  @eq_skeleton_map_func n A A (@id Cat_cat A)
+  ≡ @id Cat_cat (EqSkeleton_cat n A);
+
+assert
+  (n : CatDim)
+  (A B C : Cat)
+  (F : τ (Functor A B))
+  (G : τ (Functor B C)) ⊢
+  @comp_fapp0
+    Cat_cat
+    (EqSkeleton_cat n A)
+    (EqSkeleton_cat n B)
+    (EqSkeleton_cat n C)
+    (@eq_skeleton_map_func n B C G)
+    (@eq_skeleton_map_func n A B F)
+  ≡ @eq_skeleton_map_func
+      n A C
+      (@comp_fapp0 Cat_cat A B C G F);
+
+// The recursive inclusion has a complete object/full-hom/capped ladder.
+assert (A : Cat) ⊢
+  eq_skeleton_incl_func cat_zero A
+  ≡ Core_incl_func A;
+
+assert
+  (n : CatDim)
+  (A : Cat)
+  (x : τ (Obj A)) ⊢
+  @fapp0
+    (EqSkeleton_cat n A) A
+    (eq_skeleton_incl_func n A)
+    x
+  ≡ x;
+
+assert
+  (n : CatDim)
+  (A : Cat)
+  (x y : τ (Obj A)) ⊢
+  @fapp1_func
+    (EqSkeleton_cat (cat_succ n) A) A
+    (eq_skeleton_incl_func (cat_succ n) A)
+    x y
+  ≡ eq_skeleton_incl_func n (Hom_cat A x y);
+
+assert
+  (n : CatDim)
+  (A : Cat)
+  (x y : τ (Obj A))
+  (f : τ (Hom A x y)) ⊢
+  @fapp1_fapp0
+    (EqSkeleton_cat (cat_succ n) A) A
+    (eq_skeleton_incl_func (cat_succ n) A)
+    x y f
+  ≡ @fapp0
+      (EqSkeleton_cat n (Hom_cat A x y))
+      (Hom_cat A x y)
+      (eq_skeleton_incl_func n (Hom_cat A x y))
+      f;
+
+// Cat₁⁼ retains ordinary functors and equality-valued higher cells.
+assert (C D : Cat) ⊢
+  Hom_cat Cat1Eq_cat C D
+  ≡ Path_cat (Functor C D);
+
+assert (C D : Cat) ⊢
+  @fapp1_func Cat1Eq_cat Cat_cat Cat1Eq_incl_func C D
+  ≡ Core_incl_func (Functor_cat C D);
+
+// Core₁ maps categories to their cores and functors to PathMap of object maps.
+assert (C : Cat) ⊢
+  @fapp0 Cat1Eq_cat Cat_cat Core1_func C
+  ≡ Core_cat C;
+
+assert (C D : Cat) ⊢
+  @fapp1_func Cat1Eq_cat Cat_cat Core1_func C D
+  ≡ @core1_hom_func C D;
+
+assert (C D : Cat) (F : τ (Functor C D)) ⊢
+  @fapp1_fapp0 Cat1Eq_cat Cat_cat Core1_func C D F
+  ≡ @path_map_func
+      (Obj C) (Obj D)
+      (@functor_object_function C D F);
+
+// The capped Core₁ beta above remains runtime despite its expected outer
+// identity/composition projection overlaps.
+assert (C : Cat) ⊢
+  @tapp0_fapp0
+    Cat1Eq_cat Cat_cat
+    Core1_func Cat1Eq_incl_func
+    C CoreInclTransf
+  ≡ Core_incl_func C;
+
+assert (C D : Cat) ⊢
+  @tapp1_func
+    Cat1Eq_cat Cat_cat
+    Core1_func Cat1Eq_incl_func
+    C D CoreInclTransf
+  ≡ @core_incl_diagonal_func C D;
+
+// tapp₁(CoreInclTransf,F) is the common diagonal functor.  The kappa square
+// comparing its boundary composites is the separate derived next cell below.
+assert (C D : Cat) (F : τ (Functor C D)) ⊢
+  @tapp1_fapp0
+    Cat1Eq_cat Cat_cat
+    Core1_func Cat1Eq_incl_func
+    C D CoreInclTransf F
+  ≡ @hom_postcomp_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Core_cat C) (Core_cat D) D
+      (Core_incl_func D)
+      (@path_map_func
+        (Obj C) (Obj D)
+        (@functor_object_function C D F));
+
+assert (C D : Cat) (F : τ (Functor C D)) ⊢
+  @core_incl_transf_kappa C D F
+  ≡ @core_incl_naturality C D F;
+
+// Stable postcomposition owns the associativity needed by genuine kappa-left.
+assert [A : Grpd] (C D : Cat)
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C))) ⊢
+  @core_incl_transf_kappa_left A C D F p
+  ≡ @id
+      (Functor_cat (Path_cat A) D)
+      (@hom_postcomp_fapp0
+        Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+        (Path_cat A) (Core_cat D) D
+        (Core_incl_func D)
+        (@comp_fapp0
+          Cat_cat
+          (Path_cat A) (Core_cat C) (Core_cat D)
+          (@path_map_func
+            (Obj C) (Obj D)
+            (@functor_object_function C D F))
+          (@path_map_func A (Obj C) p)));
+
+assert [A B : Grpd] (C : Cat)
+  (p : τ (@Function_grpd B (Obj C)))
+  (s : τ (@Function_grpd A B)) ⊢
+  @path_lift_kappa_right A B C p s
+  ≡ @id
+      (Functor_cat (Path_cat A) C)
+      (@path_lift_fapp0
+        A C
+        (@comp_fapp0 Grpd_cat A B (Obj C) p s));
+
+// In the current strict representation the three-cell non-strict spiral
+// computes to its middle PathLift(h), while retaining both endpoint owners.
+assert [A : Grpd] (C : Cat)
+  (S : τ (Functor C C))
+  (p : τ (@Function_grpd A (Obj C)))
+  (s : τ (@Function_grpd A A))
+  (h : τ (@=
+      (@Function_grpd A (Obj C))
+      (@comp_fapp0
+        Grpd_cat
+        A (Obj C) (Obj C)
+        (@functor_object_function C C S)
+        p)
+      (@comp_fapp0 Grpd_cat A A (Obj C) p s))) ⊢
+  @path_lift_non_strict_spiral A C S p s h
+  ≡ @fapp1_fapp0
+      (Path_cat (@Function_grpd A (Obj C)))
+      (Functor_cat (Path_cat A) C)
+      (@path_lift_func A C)
+      (@comp_fapp0
+        Grpd_cat
+        A (Obj C) (Obj C)
+        (@functor_object_function C C S)
+        p)
+      (@comp_fapp0 Grpd_cat A A (Obj C) p s)
+      h;
+
 // catalog-area: Nat arithmetic and sethood prerequisites
 // Successor is available as a concrete iterable equality action.
 assert (n : τ Nat_grpd) ⊢
@@ -20021,6 +20312,30 @@ assert ⊢ walking_power_spiral
       walking_Code_catd
       walking_based_rep_catd
       walking_power_func);
+
+// The restricted CoreInclTransf construction supplies the genuine three-cell
+// spiral and converts to the retained strict presentation in this model.
+assert ⊢ walking_power_spiral_coreincl
+  : τ (@walking_end_loop_coherence
+      walking_Code_catd
+      walking_based_rep_catd
+      walking_power_func);
+
+assert ⊢
+  walking_power_spiral_coreincl
+  ≡ walking_power_spiral_natsucc;
+
+assert (n : τ Nat_grpd) ⊢
+  @tapp0_fapp0
+    (Path_cat Nat_grpd)
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (@walking_end_loop_lhs_func
+      walking_Code_catd walking_based_rep_catd walking_power_func)
+    (@walking_end_loop_rhs_func
+      walking_Code_catd walking_based_rep_catd walking_power_func)
+    n
+    walking_power_spiral_coreincl
+  ≡ @walking_power_spiral_component n;
 
 assert (n : τ Nat_grpd) ⊢
   @walking_power_spiral_cell n
