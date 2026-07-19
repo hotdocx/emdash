@@ -31,19 +31,22 @@ implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
-  goal-ready reopened migration plan with a mandatory decoder-motive
-  feasibility gate. The committed generated-word Hom presentation is rejected
-  as the intended HIT. Focused probes validate opaque constructors, a
-  parameterized contextual `Functord` eliminator, generic judgmental base/loop
-  beta, and the decoder-shaped arbitrary-arrow application without a special
-  Hom/1-cell eliminator. The selected minimal terminal change keeps the active
-  runtime `tapp0_fapp0`, demotes only generic terminal `fdapp1_int_cell` to a
-  proof-time comparison, and adds no HIT-specific join; its exact hybrid owner
-  run remains an early gate. The plan also makes explicit that an objectwise
-  core formula is not yet a noncircular `Catd`: concrete higher action for the
-  equality-valued decoder motive must pass before `Code`/`H`/power/spiral and
-  the two equality round trips can count as complete. Full functor-category
-  initiality remains outside this practical computation milestone.
+  goal-ready reopened migration plan for an opaque one-dimensional directed
+  HIT. The committed generated-word Hom presentation is rejected. Focused
+  probes validate opaque constructors, a parameterized contextual `Functord`
+  eliminator, generic judgmental base/loop beta, and arbitrary-arrow action
+  without a special Hom/1-cell eliminator. The primary decoder now targets the
+  existing directed representable `Rep_catd(base)`, first producing the honest
+  normalization cell `p ⇒ power(encode(p))`. The selected HIT signature
+  explicitly carries `IsNCat(cat_succ cat_zero,WalkingEnd)`; its homwise
+  `IsDiscreteCat` projection converts that cell to the later equality round
+  trip through `hom_to_path`. This avoids the blocked generic fibrewise-Core
+  construction while clearly separating directed computation, truncation,
+  and equality. The minimal terminal change keeps runtime `tapp0_fapp0`,
+  demotes only generic terminal `fdapp1_int_cell` to proof time, and adds no
+  HIT-specific join. Full functor-category initiality and derivation of the
+  truncation witness from a stronger general HIT principle remain outside the
+  practical MVP.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:

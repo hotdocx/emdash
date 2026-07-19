@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: #current-implementation-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **REOPENED / IMPLEMENTATION-GOAL READY WITH A MANDATORY MOTIVE-FEASIBILITY GATE — the committed word-carrier presentation is rejected as the intended HIT; a parameterized contextual `Functord` eliminator supplies the selected whole-HIT/arrow-naturality interface without a separate Hom datatype or special 1-cell eliminator; the selected minimal terminal ownership retains the established `tapp0_fapp0` runtime projection, demotes only the terminal-source `fdapp1_int_cell` projection to proof-time comparison, keeps contextual base/loop beta as runtime computation, and adds no HIT-specific join; G2 must still construct the equality-valued decoder motive with noncircular higher action before the Hom–Nat equality proof can be called feasible or complete**
+Status: **REOPENED / IMPLEMENTATION-GOAL READY — the committed word-carrier presentation is rejected as the intended HIT; a parameterized contextual `Functord` eliminator supplies the selected whole-HIT/arrow-naturality interface without a separate Hom datatype or special 1-cell eliminator; the primary decoder target is now the existing directed representable `Rep_catd(base)`, giving an honest directed normalization cell before equality is requested; the selected HIT signature explicitly retains one-dimensionality evidence `IsNCat(cat_succ cat_zero,WalkingEnd)`, from which the hard equality is obtained afterward through `hom_to_path`; the selected minimal terminal ownership retains runtime `tapp0_fapp0`, demotes only terminal-source `fdapp1_int_cell` to proof-time comparison, keeps contextual base/loop beta as runtime computation, and adds no HIT-specific join**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 HIT-computation correction baseline: `b5037078dfaafc665adb2d996bec38596e6914c9`
@@ -48,7 +48,7 @@ historical provenance only and never authorize a reset or rollback. The
 authoritative correction plan is recorded next; the former completion record
 is retained afterward only as rejected-decision evidence.
 
-## 2026-07-18 Contextual `Functord` Owner Decision — Current Override
+## 2026-07-18 Contextual `Functord` And Directed-First Decision — Current Override
 
 This section supersedes the later passages that select a special
 `walking_end_ind_cell`/`cell_ind` primitive or leave a primitive-versus-derived
@@ -75,31 +75,69 @@ fdapp1_int_cell(indᵈ(R,D,u,σ),loop,r)  ↪ σ[r].
 This is not elimination on a separately exposed Hom carrier. It returns one
 structured functor between arbitrary directed families over the opaque HIT;
 therefore its ordinary `fdapp1` action is available at every opaque arrow
-`p : Hom(WalkingEnd,base,x)`. The intended hard-round-trip specialization is:
+`p : Hom(WalkingEnd,base,x)`. The selected directed specialization is:
 
 ```text
 R ≔ Code
-D ≔ H
+D ≔ Rep_catd(base)
 u ≔ power
 σ ≔ spiral
-decode ≔ indᵈ(Code,H,power,spiral).
+decodeᵈ ≔ indᵈ(Code,Rep_catd(base),power,spiral).
 ```
 
 Evaluating the generic displayed arrow action at the inner datum `0` gives
-the required arbitrary-arrow comparison:
+the required arbitrary-arrow directed normalization cell:
 
 ```text
-fdapp1_int_cell(decode,p,0) :
-  H[p](decode[base](0)) → decode[x](Code[p](0)).
+fdapp1_int_cell(decodeᵈ,p,0) :
+  p ∘ decodeᵈ[base](0) ⇒ decodeᵈ[x](Code[p](0)).
 ```
 
-If G2 constructs `H(x)` as the equality-valued presentation of
-`Hom(WalkingEnd,base,x)` with valid noncircular higher action, the endpoints
-read as `p` and `power(encode(p))`. The hard comparison would then be supplied
-by the naturality cell of the whole-HIT-defined `Functord`; no `WalkingWord`,
-Hom induction, special ad hoc 1-cell eliminator, or functor-category initiality
-metatheorem is selected. The minimal probe establishes this type shape, not
-the still-open formation of that concrete equality-valued `H`.
+After base beta, `power(0)`, and the right-unit law, this yields
+
+```text
+νₚ : p ⇒ power(encodeₓ(p)).
+```
+
+This is the primary directed/categorical computation. It is fully functorial
+because `Rep_catd(base)` already owns postcomposition on 1-arrows and
+whiskering on higher directed cells. No fibrewise `Core_cat`, generic
+`Core_catd`, or equality-reflecting higher action is needed to construct it.
+
+The selected walking HIT is explicitly one-dimensional in the kernel's
+native directed-dimension sense:
+
+```text
+constant symbol walking_end_is_one_cat
+  : τ (IsNCat (cat_succ cat_zero) WalkingEnd);
+```
+
+This computes to `Π x y, IsDiscreteCat(Hom_cat(WalkingEnd,x,y))`; it does
+**not** assert `IsDiscreteCat(WalkingEnd)` and does not make `loop` invertible.
+Its base-hom specialization converts the directed normalization cell only
+after that cell has been constructed:
+
+```text
+walking_end_hom_discrete(x)
+  ≔ walking_end_is_one_cat(base,x)
+
+hom_to_path(walking_end_hom_discrete(x),νₚ)
+  : p = power(encodeₓ(p)).
+```
+
+Thus the implementation order is directed decoder first, explicit
+one-dimensional truncation second, equality round trip third. The
+one-dimensionality witness is part of the selected truncated-HIT signature,
+not a theorem secretly inferred from the Hom–Nat carrier comparison. A later
+derivability audit may replace it by a theorem if a stronger general HIT
+induction/initiality interface proves the same fact without circularity; that
+audit is not a prerequisite for this practical MVP.
+
+No `WalkingWord`, Hom induction, special ad hoc 1-cell eliminator,
+equality-valued decoder motive, or functor-category initiality metatheorem is
+selected. The minimal probe establishes the contextual `Functord` type shape;
+it does not yet implement the concrete `Code`, directed decoder, truncation
+specialization, or round trips.
 
 The initial focused feasibility probe is
 `tmp/probes/wehit_opaque_functord_ind_minimal.lp`. It checks the generic
@@ -206,12 +244,16 @@ practical Hom–Nat correspondence is derived from:
    `walking_end_ind_funcd(R,D,u,spiral) : Functord(R,D)`;
 2. whole-HIT-defined `Code` and its ordinary action on arbitrary walking
    arrows;
-3. Nat-recursive powers packaged as a functor into the equality/core category
-   of based walking arrows;
-4. the decoder `Functord(Code,H)` and its generic `fdapp1_int_cell` at zero;
-5. Nat induction for the other inverse; and
-6. only afterward, optional `BNat`, equivalence, sethood, dimension, and
-   negative directed consequences.
+3. Nat-recursive powers packaged as a functor into the ordinary directed
+   representable hom-category;
+4. the directed decoder `Functord(Code,Rep_catd(base))` and its generic
+   `fdapp1_int_cell` at zero, producing `p ⇒ power(encode(p))`;
+5. an explicit one-dimensionality/truncation witness
+   `IsNCat(cat_succ cat_zero,WalkingEnd)` in the selected HIT signature,
+   used afterward to turn that directed cell into equality;
+6. Nat induction for the other inverse; and
+7. only afterward, `BNat`, carrier and hom-category equivalence packaging,
+   sethood, and negative directed consequences.
 
 The migration includes the kernel terminal-owner correction, the walking
 module, permanent checks, reviewer examples, current documentation, catalog,
@@ -220,14 +262,16 @@ functor-category initiality.
 
 ### Explanatory design inputs
 
-Read `tmp/tmp-hit-solution.md` and `tmp/tmp-hit-solution-2.md` before beginning
-G1–G5. They are tracked explanatory notes at the goal-start baseline, not
-implementation authorities. The first records the Circle-style Code,
-encode/power, spiral, and decoder idea. The second corrects its overly naive
-category-over presentation and selects the parameterized contextual
-`Functord(R,D)` interface. Where either note conflicts with the active kernel
-or this current override, this report and the active kernel win. Preserve both
-files unless the user explicitly requests their removal.
+Read `tmp/tmp-hit-solution.md`, `tmp/tmp-hit-solution-2.md`, and
+`tmp/tmp-hit-solution-2-1.md` before beginning G1–G5. They are tracked
+explanatory notes, not implementation authorities. The first records the
+Circle-style Code, encode/power, spiral, and decoder idea. The second selects
+the parameterized contextual `Functord(R,D)` interface. The third makes the
+decisive directed-first correction: use `Rep_catd(base)` for the primary
+decoder and postpone equality until the explicit one-dimensionality evidence
+is applied. Where any note conflicts with the active kernel or this current
+override, this report and the active kernel win. Preserve all three files
+unless the user explicitly requests their removal.
 
 ### Evidence boundary at goal start
 
@@ -239,6 +283,12 @@ Already demonstrated:
   `fdapp1_int_cell`;
 - internal expression of `Code[p](0)` and the exact type of the arbitrary-arrow
   decoder cell;
+- an existing transparent directed representable family
+  `Rep_catd(base) : Catd(WalkingEnd)` with the required postcomposition and
+  higher directed action;
+- the native finite-dimension predicate
+  `IsNCat(cat_succ cat_zero,W)`, its reduction to homwise `IsDiscreteCat`, and
+  the existing `hom_to_path` consumer needed for the equality upgrade;
 - viability of demoting the generic terminal `fdapp1_int_cell` owner and of
   retaining generic contextual runtime beta, in the earlier demote-both owner
   experiment;
@@ -249,29 +299,31 @@ Already demonstrated:
 Not yet demonstrated by the selected contextual probe:
 
 - a concrete, non-bodyless `Code` family and successor functor;
-- a concrete equality/core-valued based-Hom family `H` with action by
-  postcomposition;
-- the higher action required to make that equality/core-valued `H` a genuine
-  `Catd(WalkingEnd)` without assuming local discreteness;
+- a concrete `power_func` into the ordinary directed based-hom category and a
+  concrete directed spiral;
+- a signature-level `walking_end_is_one_cat` witness for the new opaque HIT
+  and its transparent based-hom specialization;
 - a fresh exact owner-position run of the selected retain-`tapp0`/
   demote-`fdapp1` hybrid;
-- a functorial `power`, a transparent spiral, or either inverse theorem in the
-  contextual design;
+- the directed decoder, its arbitrary-arrow normalization cell, or either
+  equality inverse theorem in the contextual design;
 - integration with the active walking module, checks, examples, or downstream
   consequence packages.
 
 The constants named `Code`, `H`, `power`, and `spiral` in
 `wehit_opaque_functord_ind_minimal.lp` are type-shape sentinels. They are not
-implementations of those objects. The implementation agent must not cite that
-probe as evidence that the concrete hard inverse is already finished.
+implementations of those objects, and its opaque equality-valued `H` is no
+longer the selected decoder target. The implementation agent must not cite
+that probe as evidence that the concrete directed decoder or hard equality is
+already finished.
 
 ### Phase G0 — Recovery, inventory, and baselines
 
 1. Follow `AGENTS.md` recovery and starting-task procedure; read this current
    authority before the historical remainder.
 2. Inspect staged and unstaged changes independently. Read and preserve the
-   two tracked, clean-at-baseline `tmp/tmp-hit-solution*.md` explanatory files
-   unless the user has changed their status.
+   three `tmp/tmp-hit-solution*.md` explanatory files unless the user has
+   changed their status.
 3. Relocate all owners and consumers with `rg`; do not use the line numbers in
    this report as edit coordinates.
 4. Run bounded `make check`, `make examples`, kernel and walking warning
@@ -315,12 +367,10 @@ HIT-beta assertions, strict LHS audit, and runtime negative controls. Record
 the retained terminal base-beta and generic vertical-composition warnings as
 measured boundaries; do not misdescribe proof-time theorems as runtime joins.
 
-### Phase G2 — Path action and noncircular decoder-motive gate
+### Phase G2 — Path action and the one-dimensional truncated-HIT contract
 
-Split the reusable path-map work from the harder family formation.
-
-First construct and validate the ordinary equality action that is genuinely
-available from a function:
+Construct and validate the ordinary equality action genuinely available from
+a function:
 
 ```text
 Path_map(f) : Functor(Path_cat(A),Path_cat(B))
@@ -329,52 +379,79 @@ NatSucc_func(n) ↪ succ(n).
 ```
 
 Require object action, equality action via `eq_ap`, identity, composition, and
-iterable next-hom behavior. Investigate a reusable `Path_cat_func` only over a
-domain whose arrows really supply equality/function action; do not assume that
-`Core_cat` is a functor on all directed categories and transfors.
+iterable next-hom behavior. A reusable `Path_cat_func` may act on an ordinary
+function or functor's object map. Do not declare a generic directed
+`Core_catd`, because an arbitrary directed transfor does not supply equality
+between its component objects.
 
-The decoder then wants the objectwise formula
-
-```text
-H₀(x) ≔ Core_cat(Hom_cat(WalkingEnd,base,x))
-      ≔ Path_cat(Hom(WalkingEnd,base,x)).
-```
-
-Objectwise formulas are not enough to form `H : Catd(WalkingEnd)`. For
-`p : x → y`, postcomposition gives the desired object action. But for a base
-2-cell `α : p ⇒ q`, a directed whiskered 2-cell does not by itself give the
-equality-valued naturality required between the two path-category functors.
-Consequently the tempting declaration
+Select the ordinary directed representable as the decoder target:
 
 ```text
-Core_catd(Rep_catd(WalkingEnd,base)) : Catd(WalkingEnd)
+Hᵈⁱʳ ≔ Rep_catd(base) : Catd(WalkingEnd)
+Hᵈⁱʳ(x) ≔ Hom_cat(WalkingEnd,base,x).
 ```
 
-is not an accepted generic construction: it may assume exactly the local
-discreteness that the Hom–Nat result is meant eventually to support.
+Its complete higher action already exists internally:
 
-Before G4/G5, run a mandatory open dimension-2 formation probe for the actual
-decoder motive. It must exhibit the action over arbitrary `p` and arbitrary
-`α : p ⇒ q`, with no bodyless `H`, opaque higher-action constant, hidden
-local-discreteness witness, or use of the rejected word representation. If
-ordinary `Catd` cannot express that motive noncircularly, record the smallest
-failure and revise the route explicitly. Principled alternatives are:
+```text
+Hᵈⁱʳ[p](r) ≔ p ∘ r
+Hᵈⁱʳ[α]ᵣ ≔ α ▷ r.
+```
 
-1. formulate the genuine displayed/category-over decoder motive whose first
-   displayed-arrow layer carries the equality witness and whose higher tail is
-   defined explicitly;
-2. derive the needed truncation/local-discreteness structure from an
-   independent foundational principle, with a circularity audit; or
-3. weaken to directed `Rep_catd`, yielding only a directed 2-cell.
+Probe the exact open `fdapp1_int_cell` endpoints for
+`Functord(Code,Hᵈⁱʳ)` at arbitrary `p` and `n`; no bodyless target family
+or equality-reflecting action is permitted. This directed construction is the
+selected primary milestone, not a fallback.
 
-Alternative 3 is useful partial progress but is **not** the wanted equality
-round trip and cannot establish the Hom–Nat type equivalence. Do not add a
-WalkingEnd-specific Hom/1-cell eliminator as a shortcut.
+The selected WalkingEnd is a **one-dimensional directed HIT**. Record that
+dimension explicitly in its signature:
 
-Exit criterion: `Path_map` and `NatSucc_func` are concrete, and either a
-nonbodyless equality-valued decoder motive with valid open higher action
-passes at its owner position or the plan records a genuine prerequisite and
-does not claim the hard inverse complete.
+```text
+constant symbol walking_end_is_one_cat
+  : τ (IsNCat (cat_succ cat_zero) WalkingEnd);
+```
+
+By the active kernel definition, this is exactly:
+
+```text
+Π x y : Obj(WalkingEnd),
+  IsDiscreteCat(Hom_cat(WalkingEnd,x,y)).
+```
+
+It is not `IsDiscreteCat(WalkingEnd)`: the generator remains a directed,
+potentially noninvertible 1-cell. The signature-level evidence states only
+that no independent higher directed cells occur above the freely generated
+1-category. Prefer this global, reusable dimension contract over an ad hoc
+constant mentioning only `Hom_cat(WalkingEnd,base,base)`.
+
+Define transparent specializations rather than duplicate assumptions:
+
+```text
+walking_end_hom_discrete(x,y)
+  ≔ walking_end_is_one_cat(x,y)
+
+walking_end_based_hom_discrete(x)
+  ≔ walking_end_is_one_cat(base,x).
+```
+
+Run a focused formation probe in which an arbitrary directed cell in a based
+hom-category is converted by the latter witness through the existing
+`hom_to_path`. The witness itself has no Hom–Nat, word-carrier, decoder, or
+normal-form field, so applying it after the directed decoder is not circular.
+Document it honestly as a truncation constructor/evidence of the selected HIT,
+not as a theorem derived by the current eliminator.
+
+Also record a nonblocking derivability audit: a future stronger general HIT
+induction/initiality interface may prove the same `IsNCat` witness from the
+absence of higher generators, at which point the primitive signature evidence
+can be retired. Do not delay the practical MVP for that metatheorem, and do
+not claim in the meantime that one-dimensionality was derived.
+
+Exit criterion: `Path_map` and `NatSucc_func` are concrete; the open directed
+representable target and its higher action typecheck without sentinels; the
+one-dimensional signature contract and `hom_to_path` specialization pass a
+focused probe; and negative controls confirm that neither
+`IsDiscreteCat(WalkingEnd)` nor a generic directed `Core_catd` has been added.
 
 ### Phase G3 — Opaque walking HIT and eliminator family
 
@@ -383,12 +460,18 @@ Rebuild `emdash3_2_walking_end_hit.lp` around only:
 ```text
 WalkingEnd_cat : Cat
 walking_base   : Obj(WalkingEnd_cat)
-walking_loop   : Hom(WalkingEnd_cat,walking_base,walking_base).
+walking_loop   : Hom(WalkingEnd_cat,walking_base,walking_base)
+
+constant symbol walking_end_is_one_cat
+  : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat);
 ```
 
 Delete the `walking_end_hom` datatype, `WalkingEndHom_grpd`, its induction,
 and every WalkingEnd-specific `Obj`, `Hom`, identity, or composition rewrite.
-Retain opacity checks for all four forbidden reductions.
+Retain opacity checks for all four forbidden reductions. The last declaration
+is the standard one-dimensional truncation evidence of this selected HIT, not
+a carrier presentation or computation rule. It must not add a rewrite for
+WalkingEnd `Obj`, `Hom`, identity, or composition.
 
 Install the contextual eliminator and data classifiers:
 
@@ -417,14 +500,21 @@ specialized recursor beta rules merely to force one-step reflexivity. Label
 which observations are runtime reductions and which are transparent equality
 theorems assembled from generic comparisons.
 
-Exit criterion: the opaque HIT, contextual eliminator, terminal section
-specialization, and constant recursor all compute at base/loop while arbitrary
-Hom remains opaque.
+Derive the based-hom discreteness witnesses transparently by applying
+`walking_end_is_one_cat`; do not postulate a second base-specific `d`. Check
+that a `BNat`/free-monoid model satisfies the constructors, contextual
+eliminator equations, and one-dimensionality contract as semantic consistency
+evidence, without using that model as the definitional Hom of `WalkingEnd`.
 
-### Phase G4 — Concrete `Code`, based-Hom core, powers, and spiral
+Exit criterion: the opaque one-dimensional HIT, contextual eliminator,
+terminal section specialization, and constant recursor all compute at
+base/loop while arbitrary Hom remains opaque; homwise discreteness is exposed
+only through the explicit dimension witness.
 
-After the G2 motive gate passes, construct all four previously opaque
-sentinels transparently:
+### Phase G4 — Concrete `Code`, directed representable, powers, and spiral
+
+After G2 passes, construct the previously opaque sentinels transparently,
+replacing the sentinel `H` by the existing representable:
 
 1. `Code : Catd(WalkingEnd)` by the derived recursor into `Cat_cat`, with
    a runtime/transparent base observation and a transparent loop-action
@@ -433,51 +523,76 @@ sentinels transparently:
    demonstrates it without a specialized bridge;
 2. `encodeₓ(p) ≔ Code[p](zero)` using ordinary `catd_transport_func` and
    `fapp0`;
-3. the concrete equality-valued decoder motive `H` accepted by G2, so `H[p]`
-   has postcomposition-by-`p` object action and a noncircular higher action;
+3. a readable transparent alias, if useful, for
+   `Hᵈⁱʳ ≔ Rep_catd(base)`, retaining the generic representable as the
+   semantic owner; verify its open postcomposition and whiskering actions
+   rather than duplicating them in WalkingEnd-specific rules;
 4. the Nat-recursive object function
    `power(0) ↪ id` and `power(succ n) ↪ loop ∘ power(n)`, lifted through
-   the reusable path-action owner to
-   `power_func : Functor(Path_cat(Nat),H(base))`; and
-5. a transparent spiral transfor
-   `H[loop] ∘ power_func ⇒ power_func ∘ Code[loop]`, obtained from the
-   pointwise recursion equation and function/path extensionality rather than a
-   bodyless declaration.
+   the reusable path action and core inclusion to
+   `power_func : Functor(Path_cat(Nat),Hom_cat(WalkingEnd,base,base))`; and
+5. a transparent **directed** spiral transfor
+   `Hᵈⁱʳ[loop] ∘ power_func ⇒ power_func ∘ Code[loop]`, whose
+   component has type
+   `loop ∘ power(n) ⇒ power(succ n)` and reduces to the appropriate
+   identity 2-cell after the power equation. Do not declare a bodyless
+   equality-valued spiral.
 
 Check composition orientation on open variables. The one-generator example
 must not use commutativity of Nat addition to conceal a variance error.
 
 Exit criterion: concrete formation and accurately classified base/loop
-computations for `Code`, `encode`, `H`, `power_func`, and the spiral, including
-the open typed higher action required by G2 and negative controls against
-direct Hom–Nat conversion.
+computations for `Code`, `encode`, the generic directed representable,
+`power_func`, and the directed spiral, including open higher-action checks and
+negative controls against direct Hom–Nat conversion or a generic `Core_catd`.
 
 ### Phase G5 — Decoder and both inverse proofs
 
 Define only through the contextual eliminator:
 
 ```text
-walking_decode_funcd ≔
-  walking_end_ind_funcd(Code,H,power_func,spiral)
-  : Functord(Code,H).
+walking_directed_decode_funcd ≔
+  walking_end_ind_funcd(Code,Rep_catd(base),power_func,spiral)
+  : Functord(Code,Rep_catd(base)).
 ```
 
 For arbitrary `p : Hom(WalkingEnd,base,x)`, evaluate its generic displayed
-action at zero. After base beta, `power(0)`, postcomposition, and right-unit
-comparison, the natural cell is expected first in the orientation
+action at zero. After base beta, `power(0)`, generic representable
+postcomposition, and the right-unit comparison, first retain the result in
+its native directed form:
 
 ```text
-p = decode[x](encodeₓ(p)).
+νₚ : p ⇒ decodeᵈ[x](encodeₓ(p)).
+```
+
+This directed normalization theorem is an independently named public
+milestone. Its proof must materially contain the generic `fdapp1_int_cell` of
+`walking_directed_decode_funcd`; do not immediately hide it inside an equality
+wrapper.
+
+Next specialize the signature's one-dimensionality evidence:
+
+```text
+dₓ : IsDiscreteCat(Hom_cat(WalkingEnd,base,x))
+dₓ ≔ walking_end_is_one_cat(base,x).
+```
+
+Convert the already-constructed directed cell through the existing selected
+core inverse:
+
+```text
+hom_to_path(dₓ,νₚ)
+  : p = decodeᵈ[x](encodeₓ(p)).
 ```
 
 Use explicit equality symmetry to export the intended orientation:
 
 ```text
-decode[x](encodeₓ(p)) = p.
+decodeᵈ[x](encodeₓ(p)) = p.
 ```
 
-At `x ≔ base`, base beta identifies `decode[base]` with `power_func`, giving
-the hard endomorphism inverse:
+At `x ≔ base`, contextual base beta identifies `decodeᵈ[base]` with
+`power_func`, giving the hard endomorphism inverse:
 
 ```text
 power(encode(p)) = p.
@@ -492,13 +607,15 @@ encode(power(n)) = n.
 Its successor case must visibly use generic Code functoriality, Code's loop
 beta, the power recursion equation, and the induction hypothesis. Inspect
 theorem bodies and normalized projections: neither inverse may be bodyless or
-route through word induction, a hidden decoder axiom, or a pre-existing
-Hom–Nat equivalence.
+route through word induction, an equality-valued decoder sentinel, a hidden
+normal-form axiom, or a pre-existing Hom–Nat equivalence.
 
-Exit criterion: both transparent arbitrary inverse proofs pass; the hard one
-materially contains the generic `fdapp1_int_cell` of
-`walking_decode_funcd`, the required right-unit comparison, and the explicit
-orientation-changing `eq_sym` rather than hiding any of them in a constant.
+Exit criterion: the directed arbitrary-arrow normalization cell and both
+transparent equality inverse proofs pass. The hard equality visibly factors
+as contextual `fdapp1_int_cell` → right-unit endpoint comparison →
+`hom_to_path` using the explicit one-dimensional signature evidence →
+orientation-changing `eq_sym`; none of those stages is hidden in a bodyless
+constant.
 
 ### Phase G6 — Nat/`BNat` packaging and directed consequences
 
@@ -511,28 +628,35 @@ and `power` after both inverse proofs pass.
 Then rebuild:
 
 - `EquivByInverse`, `TypeEquiv`, and native EQ1 Hom–Nat packages;
-- sethood of the **object carrier** `Hom(WalkingEnd,base,base)` transported
-  through the corrected carrier equivalence;
+- the packaged `walking_end_one_cat : OneCat` directly from the explicit
+  signature evidence, and its transparent homwise-discreteness projections;
+- sethood of the **object carrier** `Hom(WalkingEnd,base,base)`, with the
+  signature evidence and corrected carrier equivalence recorded as distinct
+  available proofs rather than conflated;
+- where supported by the existing EQ1 layer, the structured comparison of
+  `Hom_cat(WalkingEnd,base,base)` with `Path_cat(Nat)` using its core
+  equivalence and the corrected carrier maps;
 - loop nonidentity, noninvertibility, and nongroupoidality from encoding and
   Nat no-confusion, never word constructors; and
 - any useful composition-to-addition theorem with the existing generic
   composition owner and measured warning policy.
 
-Do not infer local discreteness of the opaque Hom category or
-`IsNCat(cat_one,WalkingEnd)` from the carrier-level Hom–Nat equivalence. The
-round trips classify 1-arrow objects; they do not classify arbitrary 2-cells.
-Those stronger conclusions require a structured Hom-category/higher-cell
-equivalence or an independent truncation theorem and remain deferred unless
-such a theorem is actually constructed. `BNat_cat` may retain its own
-separately proved `OneCat` evidence.
+Do not infer local discreteness or `IsNCat(cat_succ cat_zero,WalkingEnd)` from
+the carrier-level Hom–Nat equivalence. They are available because
+one-dimensionality is explicit data in the selected HIT signature. Conversely,
+do not describe that truncation witness alone as a proof that the 1-arrow
+carrier is Nat; the directed decoder and both inverse proofs still do the
+normal-form work. `BNat_cat` retains its own separately proved `OneCat`
+evidence.
 
 If a former theorem cannot be derived without the rejected representation,
 mark it honestly deferred rather than replacing it by a constant.
 
 Exit criterion: every retained public mathematical consequence depends on
 the corrected semantic maps/inverses and contains no rejected symbol; carrier
-sethood is not mislabeled Hom-category discreteness, and any `WalkingEnd`
-`OneCat` claim has separate higher-cell evidence.
+sethood, Hom-category discreteness, carrier equivalence, and structured
+Hom-category equivalence are stated at their actual distinct strengths; the
+`WalkingEnd` `OneCat` claim points to the explicit HIT truncation evidence.
 
 ### Phase G7 — Complete consumer and documentation migration
 
@@ -541,22 +665,27 @@ assertion mentioning `walking_end_hom`, `WalkingEndHom_grpd`, word identity,
 word step, or transparent WalkingEnd Hom. Add permanent checks for:
 
 - opaque `Obj`/`Hom` and no WalkingEnd-specific identity/composition fold;
+- explicit `IsNCat(cat_succ cat_zero,WalkingEnd)` signature evidence,
+  transparent homwise-discreteness specialization, and negative control
+  against `IsDiscreteCat(WalkingEnd)`;
 - contextual formation and both runtime constructor betas;
 - terminal-section and constant-recursion specializations;
 - the retained runtime terminal `tapp0_fapp0`, the proof-time generic terminal
   `fdapp1_int_cell ≡ fapp1_fapp0` comparison, contextual runtime betas, and
   explicit positive/negative checks at the accepted terminal base-beta
   warning boundary;
-- `Code`, `H`, power, spiral, decoder, arbitrary-arrow hard inverse, and Nat
-  easy inverse;
+- `Code`, the generic directed representable, power, directed spiral,
+  directed decoder, arbitrary-arrow directed normalization, its explicit
+  `hom_to_path` equality upgrade, the hard inverse, and the Nat easy inverse;
 - both positive equivalence projections and negative open conversion controls;
-- downstream `BNat`, carrier-sethood, and directed negative results that
-  survive, while any unproved WalkingEnd local-discreteness/dimension result is
-  explicitly absent or deferred.
+- downstream `BNat`, carrier-sethood, signature-owned WalkingEnd
+  one-dimensionality, and directed negative results that survive.
 
 Rewrite `examples/walking_endomorphism_hit.lp` as the reviewer-facing story of
-the opaque constructors, contextual elimination, Code/encode, power/spiral,
-both inverse proofs, and downstream consequences. Retain
+the opaque constructors, explicit one-dimensional truncation evidence,
+contextual elimination, Code/encode, directed representable power/spiral, the
+directed normalization cell, its equality upgrade, both inverse proofs, and
+downstream consequences. Retain
 `examples/walking_endomorphism_nat_prerequisites.lp` only for genuinely
 walking-independent Nat infrastructure.
 
@@ -592,24 +721,28 @@ every new unjoinable pair; do not call a runtime pair solved merely because a
 proof-time comparison exists.
 
 The goal is complete only when all rejected word/Hom symbols and consumers are
-gone, the equality-valued decoder motive has concrete noncircular higher
-action, all contextual constructions and both genuine equality inverses are
-transparent, all retained consequences have been rederived without the
-local-discreteness overclaim, current documentation is synchronized, and full
-CI passes. A directed decoder cell without the equality-valued motive is
-partial progress, not completion. A difficult prerequisite or warning is not
-a blocker until the `AGENTS.md` repeated-blocker policy is met.
+gone; the opaque HIT, contextual eliminator, and explicit one-dimensional
+signature evidence are active; the concrete `Code`, directed representable
+decoder, and arbitrary-arrow normalization cell are transparent; both genuine
+equality inverses visibly use the selected truncation evidence where required;
+all retained consequences state carrier equality, directed cells, and
+hom-category discreteness at their actual strengths; current documentation is
+synchronized; and full CI passes. A directed decoder cell is a valid completed
+intermediate milestone but not by itself the final Hom–Nat equality result. A
+difficult prerequisite or warning is not a blocker until the `AGENTS.md`
+repeated-blocker policy is met.
 
 ### Current implementation ledger
 
 | Task | Status at goal start | Required result |
 | --- | --- | --- |
 | `WEHIT-G1-TERMINAL-OWNER` | exact hybrid not yet measured | retain runtime `tapp0`; demote only generic terminal `fdapp1`; add contextual beta and no HIT-specific bridge |
-| `WEHIT-G2-PATH-H-MOTIVE` | path action open; higher `H` action is a feasibility gate | reusable `Path_map`/Nat successor plus concrete noncircular equality-valued decoder motive |
-| `WEHIT-G3-OPAQUE-OWNER` | interface demonstrated | remove word Hom; promote opaque constructors and contextual eliminator |
-| `WEHIT-G4-CODE-H-POWER` | type shapes only | concrete transparent Code, H, power functor, and spiral |
-| `WEHIT-G5-ROUNDTRIPS` | open in selected design | hard inverse from decoder `fdapp1`; easy inverse from Nat induction |
-| `WEHIT-G6-PACKAGING` | old implementation rejected | rebuild BNat/carrier equivalence/sethood/negative consequences; defer unproved Hom discreteness/WalkingEnd OneCat |
+| `WEHIT-G2-PATH-DIMENSION` | primitives exist; selected combination unprobed | reusable `Path_map`/Nat successor, directed `Rep_catd(base)` endpoint probe, explicit OneCat signature contract, and `hom_to_path` specialization |
+| `WEHIT-G2-DIMENSION-DERIVABILITY` | nonblocking future audit | determine whether stronger general HIT induction derives OneCat evidence and can retire the explicit truncation constructor; never claim this during the MVP without a proof |
+| `WEHIT-G3-OPAQUE-OWNER` | contextual interface demonstrated | remove word Hom; promote opaque constructors, one-dimensional evidence, and contextual eliminator |
+| `WEHIT-G4-CODE-REP-POWER` | type shapes only | concrete transparent Code, generic directed representable, power functor, and directed spiral |
+| `WEHIT-G5-DIRECTED-AND-EQUALITY-ROUNDTRIPS` | open in selected design | directed normalization from decoder `fdapp1`; hard equality via explicit hom discreteness; easy inverse from Nat induction |
+| `WEHIT-G6-PACKAGING` | old implementation rejected | rebuild BNat, carrier/structured Hom comparisons, sethood, OneCat package, and negative consequences at their distinct strengths |
 | `WEHIT-G7-MIGRATION` | open | checks, examples, docs, catalog, health contain no rejected architecture |
 | `WEHIT-G8-GATES` | open | proportional probes, warnings/audits, and full local CI pass |
 
