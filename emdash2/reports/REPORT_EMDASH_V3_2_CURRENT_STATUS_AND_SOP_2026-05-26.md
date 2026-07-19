@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-18
+Last consolidated: 2026-07-19
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -19,17 +19,15 @@ detailed probe evidence.
 - `emdash3_2_eq1_evidence_property.lp`: one-way transparent native-EQ1
   evidence-property, retract-truncation, and finite-`NCat` object-truncation
   layer; it imports the kernel and hom-action extension, never conversely.
-- `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/sethood
-  module. It owns `nat_add`, its associativity theorem, the Unit/Empty
-  proposition witnesses, and `nat_is_set` without importing the walking-HIT
-  surface.
-- `emdash3_2_walking_end_hit.lp`: one-way walking-endomorphism directed-HIT
-  module. It imports the Nat module and owns the intrinsic
-  `WalkingEndHom_grpd` generated-arrow carrier and hom induction,
-  `WalkingEnd_cat`, the structured dependent eliminator, the separate
-  `BNat_cat` model, semantic encode/decode inverse proofs, the Hom-to-Nat
-  equivalence, local discreteness/OneCat evidence, and directed-loop negative
-  results.
+- `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/path-action/
+  sethood module. It owns `nat_add`, `NatSucc_func`, the associativity theorem,
+  the Unit/Empty proposition witnesses, and `nat_is_set` without importing the
+  walking-HIT surface.
+- `emdash3_2_walking_end_hit.lp`: one-way opaque one-dimensional walking-
+  endomorphism directed-HIT module. It owns the opaque category/base/loop,
+  explicit dimension evidence, contextual `Functord` eliminator, derived
+  section/recursor views, and separate `BNat` consistency model. It contains
+  no generated-word Hom or WalkingEnd-specific category-operation rule.
 - `emdash3_2_sum_observational_action.lp`: one-way library module retaining
   the componentwise Sum `ObsAction`, its equality comparison, and four
   proof-time bases; no kernel or univalence consumer imports it.
@@ -52,7 +50,7 @@ needed.
 
 ## Validated Current Baseline
 
-The 2026-07-18 baseline is:
+The last fully synchronized 2026-07-18 baseline is:
 
 ```text
 make check                         pass
@@ -68,47 +66,38 @@ warning inventory                  1,128
   replaceable pattern variables      157
 ```
 
-The walking-endomorphism sub-plan was adopted at implementation baseline
-`8fd9bdf...`. Its selected concrete MVP is now active. The earlier loop-square
-blocker was resolved by adopting the standard intensional-HIT boundary:
-point beta is judgmental, generator beta is equality evidence, and generic
-strict functoriality remains the sole runtime owner of composite action.
-The native `walking_end_hom` datatype is the carrier of
-`Hom(WalkingEnd,base,base)`, not a second comparison model, and
-`walking_end_hom_ind` is the arbitrary-arrow component of the HIT elimination
-interface. The separate `BNat_cat` uses constructor-directed composition
-rather than an open collapse to addition; `bnat_comp_nat_add` states the open
-comparison propositionally. The recursor-derived encoder and structured
-decoder have explicit generator betas. The reusable
-`walking_end_rec_step_view` computes action on every generated step for an
-arbitrary recursor target from generic strict functoriality and the HIT loop
-beta; the encoder successor theorem is its BNat specialization. Their complete
-semantic actions, not
-parallel raw carrier functions, are inverse by `walking_end_hom_ind` and Nat
-induction, and the Hom comparison packages those actions as both `TypeEquiv`
-and native EQ1. This is the selected practical computation/freeness theorem;
-it does not assert full functor-category initiality. The loop is proved
-nonidentity/noninvertible and both categories have internal OneCat evidence.
-The owner warning probe records six additional
-constructor-composition critical pairs (`977/157` versus kernel `971/157`),
-with no eliminator/action overlap family and zero unreviewed LHS clauses. All
-six exact typed consumers pass. The nontrivial successor/precomposition
-diamond is ordinary associativity and is discharged by the reusable
-propositional theorem `hom_precomp_along_postcomp_assoc`; runtime owners remain
-distinct.
-Rejected raw-loop-action, recursive-action, broad precomposition, and direct
-open-addition candidates remain recorded in the July 17 living plan.
-Post-completion consolidation moved the reusable Nat arithmetic/sethood slice
-to `emdash3_2_nat_arithmetic.lp` and moved all permanent walking assertions to
-the catalogued diagnostic suite. The usual unqualified spellings remain
-available through transitive `open`; the module-qualified owner of the Nat
-slice intentionally changes. The later HIT-elimination correction changes
-theorem bodies and public hom-carrier names but adds no rewrite or unifier and
-changes no selected runtime normal form. The resulting walking owner has 818
-lines, 44 symbols, 13 rules, and 2 unifiers. The catalog has 1,980 checks
-across 72 areas, the walking reviewer example has 22 statements, all 55 health
-targets pass, checked health takes 121.390 seconds, and synchronized local CI
-passes in 171.313 seconds.
+The current 2026-07-19 in-progress slice has passed bounded kernel, Nat,
+walking-module, complete diagnostic, and focused reviewer checks. Its measured
+kernel inventory is `984/159`; the rebuilt walking module is `989/159`; both
+strict audits have zero unreviewed clauses. The refreshed catalog has 1,996
+checks across 73 areas with zero unclassified checks. Full examples pass;
+health and CI remain pending until the current G4 bounded slice is complete.
+
+The walking-endomorphism plan is reopened at implementation-goal baseline
+`82d0e27...`. Its G3 replacement is active: `WalkingEnd_cat`, `walking_base`,
+and `walking_loop` are opaque constants; explicit
+`IsNCat(cat_succ cat_zero,WalkingEnd_cat)` evidence supplies only homwise
+discreteness; and the contextual `Functord` eliminator computes at the generic
+fibre-functor and displayed-cell owners. The generated-word Hom datatype and
+all WalkingEnd `Obj`, `Hom`, identity, and composition rules are removed.
+Derived sections compute at `piapp0`/`piapp1`. The ordinary recursor base is a
+transparent equality theorem joining the retained terminal-component critical
+pair rather than a specialized runtime rule, and its ordinary loop action is
+proof-time compared with the canonical section observer. `BNat` remains a
+separate consistency model, never the definitional Hom.
+
+The generic G2 prerequisites are active in the kernel: `Path_cat_func`,
+`path_map_func`, `path_map_transf`, their complete `fapp*`/`tapp*` ladder,
+fixed-functor strict Core-inclusion naturality and stable whiskering,
+transparent semantic `path_lift_func`, and the reusable `NatSucc_func` in the
+Nat extension. Permanent diagnostics build the exact Nat spiral with identity
+components and iterable higher action. No primitive PathLift, generic directed
+Core functor, or new unification rule was added. Capped groupoid-function
+composition evaluates pointwise; because `eta_equality` is enabled, conversion
+also observes the corresponding whole lambda even though no whole-term fold to
+`grpd_comp_function` exists. The living walking plan records exact owner logs,
+warning deltas, rejected alternatives, the completed G2 formation/audit gate,
+the promoted G3 opaque owner, and the now-active G4 construction.
 
 The adopted equality-valued omega-equivalence overlay is implemented at its
 selected operational MVP boundary. This includes the abstract/rigid-universe,
@@ -178,8 +167,12 @@ breaks a consumer, so the explicit package remains required.
 
 The Phase-4 groupoid-universe boundary now makes
 `Hom_cat(Grpd_cat,A,B)` the path category of ordinary functions. Stable
-`grpd_id_function` and `grpd_comp_function` heads compute pointwise and compare
-with the generic category identity/composition owners only at proof time.
+`grpd_id_function` and `grpd_comp_function` heads compute pointwise. Generic
+identity remains proof-time-comparable. Generic categorical composition keeps
+its own whole-term head and proof-time comparison, but its capped application
+now computes pointwise; with `eta_equality`, whole-function conversion can
+therefore observe the corresponding lambda even though no whole-term rewrite
+to `grpd_comp_function` is installed.
 Explicit defined adapters connect `TypeEquiv(A,B)` and
 `OmegaEquiv_EQ1(Grpd_cat,A,B)`: the forward adapter uses the selected
 contractible-fibre inverse, while the reverse proves the two omega inverse

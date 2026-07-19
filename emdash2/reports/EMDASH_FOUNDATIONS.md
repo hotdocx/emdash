@@ -6,10 +6,10 @@ extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property
 and finite-dimension extension `emdash3_2_eq1_evidence_property.lp`. It
 presents the intended mathematics in ordinary category/type-theory notation
 and deliberately suppresses most Lambdapi rewrite engineering details.
-Reusable Nat addition and sethood live in the one-way
-`emdash3_2_nat_arithmetic.lp` module. The concrete walking-endomorphism
-directed-HIT/`BNat` presentation lives downstream in
-`emdash3_2_walking_end_hit.lp`.
+Reusable Nat addition, successor path action, and sethood live in the one-way
+`emdash3_2_nat_arithmetic.lp` module. The walking-endomorphism directed-HIT/
+`BNat` presentation is being rebuilt downstream in
+`emdash3_2_walking_end_hit.lp` under the July 17 living plan.
 The retained componentwise Sum observational action lives in the separate
 library module `emdash3_2_sum_observational_action.lp`; it is not a
 foundational univalence dependency.
@@ -183,86 +183,101 @@ terms. This is genuine truncation evidence, not a conclusion inferred only
 from the no-confusion rewrite table. Open addition is not normalized by
 commutativity.
 
-The downstream walking-endomorphism extension imports those prerequisites and
-presents the walking endomorphism as a concrete directed HIT.
-The native inductive `walking_end_hom` is not a second object beside the HIT:
-it is exactly the carrier exposed by `WalkingEndHom_grpd`, which in turn is
-the hom classifier of `WalkingEnd_cat`. Its identity and step constructors
-are the canonical normal forms required to implement the free strict
-one-object category without identifying its hom with the external Nat model:
+The Nat extension also exposes successor as an iterable equality action:
 
 ```text
-Obj(WalkingEnd_cat)        = Unit_grpd
-Hom(WalkingEnd_cat,*,*)    = Path_cat(WalkingEndHom_grpd)
-id                        = walking_end_hom_id
-loop                      = walking_end_hom_step(id).
+NatSucc_func : Path_cat(Nat) -> Path_cat(Nat)
+NatSucc_func[n] = succ(n).
 ```
 
-Composition recurses on the visible outer generated arrow. The concrete HIT
-elimination interface has two relevant components. `walking_end_ind_sec`
-accepts a structured `D : Catd(WalkingEnd_cat)`, a base-fibre object, and a
-displayed lift of the generating loop, and returns a section of `Pi_cat(D)`.
-`walking_end_hom_ind` eliminates a motive over every generated arrow and
-computes at `walking_end_hom_id` and `walking_end_hom_step`. The first is the
-object/section component; the second is the arbitrary-arrow component. Point
-beta is judgmental. Generator beta is an inhabitant of the exact displayed
-equality classifier, not a raw action rewrite. Consequently the global strict
-functor rule remains the sole runtime composite-action owner; the loop-square
-action law is derived by equality composition rather than installed as
-another rewrite family.
-
-For any target `C`, object `x`, generator image `f`, and intrinsic arrow `w`,
-the reusable theorem `walking_end_rec_step_view` states
+This is a specialization of the kernel's internal path-category functor
 
 ```text
-rec(C,x,f)[walking_end_hom_step(w)] = f o rec(C,x,f)[w].
+Path_cat_func : Grpd_cat -> Cat_cat.
 ```
 
-Its proof first uses generic strict functoriality and then whisks the HIT loop
-beta. Thus practical step computation is generic in the recursor target; the
-Nat encoder successor theorem is only its `BNat_cat` specialization.
+For an ordinary function `f : A -> B`, its first action is
+`path_map_func(f) : Path_cat(A) -> Path_cat(B)`. It maps objects by `f`, maps
+an equality `p` by `eq_ap(f,p)`, and retains the complete next-hom functor.
+For a function equality `h : f = g`, the second action
+`path_map_transf(h)` has point component `PiHapply(h,x)` and an iterable
+off-diagonal equality action. Thus ordinary equality action is internalized
+without reflecting an arbitrary directed cell back into equality.
 
-Constructor composition still meets the kernel's stable pre/postcomposition
-heads in warning diamonds. Unit cases have direct typed joins. The nontrivial
-successor/precomposition diamond is precisely categorical associativity; the
-general theorem `hom_precomp_along_postcomp_assoc` supplies its propositional
-join by exposing the stable raw-composition view, applying `comp_assoc`, and
-returning to the stable head. This is proof structure, not a category-specific
-runtime bridge.
-
-`BNat_cat` is a separate one-object model with Nat-valued hom and
-constructor-directed composition. The open comparison between composition
-and `nat_add` is the transparent theorem `bnat_comp_nat_add`, not a runtime
-collapse of the semantic composition head. The encoder is derived from the
-HIT recursor. The reverse comparison is an ordinary semantic functor with
-explicit generator beta. `walking_end_hom_ind` proves
+For every fixed ordinary functor `F : C -> D`, Core inclusion has the strict
+fixed-functor naturality presentation
 
 ```text
-decode_action(encode_action(w)) = w
+F o CoreIncl_C = CoreIncl_D o path_map_func(F_0),
 ```
 
-for every intrinsic walking arrow: its step case uses the encoder successor
-law derived from the HIT loop beta and the decoder successor law derived from
-the decoder generator beta. Nat induction proves the reverse semantic-action
-round trip. Those actual functor actions are then packaged as `TypeEquiv` and
-native EQ1; the forward projection is `walking_encode_action`. There is no
-parallel word-length/Nat-constructor equivalence route and no earlier
-Hom-to-Nat rewrite or bodyless round-trip capability making the result
-tautological.
+where `F_0(x) = F[x]`. Its named naturality transfor and whiskering are
+ordinary identity transfors at the selected common normal form. This does not
+define a global directed `Core : Cat_cat -> Cat_cat`: an arbitrary directed
+transfor does not provide equality between its component objects. The semantic
+lift
 
-The generic `path_ind_sec` is not used in this proof. It transports a base
-element through an already functorial `Catd` motive on `PathOut`; it does not
-construct the required raw-arrow equality motive or its higher action. For
-this concrete generated category, intrinsic hom induction is therefore the
-foundational practical computation principle. A later generic `PathOut`
-presentation would require a reusable structured motive or functor/transfor
-constructor. No full functor-category initiality metatheorem is claimed here.
+```text
+path_lift_func
+  : Path(Function(A,Obj(C))) -> Functor(Path_cat(A),C)
+```
 
-Native sethood proofs make the two hom path categories discrete and both
-one-object categories satisfy the internal OneCat predicate. The generating
-loop is nevertheless nonidentity and has no equality-valued omega-equivalence
-evidence; alleged internal groupoidality therefore yields `Empty_grpd`. This
-is the intended directed/groupoidal separation.
+is composition of the first Path action with postcomposition by
+`CoreIncl_C`, not a primitive second implementation. Its equality action
+constructs the exact Nat iteration spiral with identity point components and
+retains the full higher action.
+
+The walking-endomorphism extension is implemented on this infrastructure at
+its G3 boundary. The former generated-word `walking_end_hom` presentation has
+been removed and is not a mathematical foundation for new work. The active
+signature is opaque and one-dimensional:
+
+```text
+WalkingEnd_cat : Cat
+walking_base   : Obj(WalkingEnd_cat)
+walking_loop   : Hom(WalkingEnd_cat,walking_base,walking_base)
+
+walking_end_is_one_cat
+  : IsNCat(1,WalkingEnd_cat).
+```
+
+The last field means that each hom-category is discrete; it does not make
+`WalkingEnd_cat` itself discrete and does not make the generating loop
+invertible. The elimination interface is contextual. Given directed families
+`R,D : WalkingEnd_cat -> Cat`, a base functor `u : R(base) -> D(base)`, and a
+structured loop cell
+
+```text
+D(loop) o u => u o R(loop),
+```
+
+it constructs `ind^d(R,D,u,sigma) : Functord(R,D)`, with generic base and
+loop computation. This single whole-HIT eliminator supplies action at every
+opaque arrow; there is no separate Hom datatype or special arrow eliminator.
+The derived section computes at its canonical `piapp0` and `piapp1`
+observers. For the constant recursor, the retained terminal-component rule
+makes the ordinary base observer propositional rather than a second runtime
+beta; typed branch theorems join that bounded critical pair, and the ordinary
+loop observer is exposed through the generic proof-time comparison.
+
+The primary decoder target is the existing directed representable family
+
+```text
+Rep_catd(base)[x] = Hom_cat(WalkingEnd_cat,base,x).
+```
+
+Its displayed action is postcomposition and its higher action is whiskering.
+After specializing the contextual eliminator, the generic
+`fdapp1_int_cell` at an arbitrary arrow `p` produces a directed normalization
+cell `p -> power(encode(p))`. Only afterward does
+`walking_end_is_one_cat(base,x)` convert that directed cell to equality via
+`hom_to_path`. This directed-first order prevents the Hom--Nat result or a
+word carrier from being smuggled into the HIT signature. A separate concrete
+`BNat` category already interprets the opaque constructors and satisfies the
+one-dimensionality contract as consistency evidence; it is not the
+definitional Hom. Concrete Code, decoder, round trips, Hom–Nat packaging, and
+directed negative consequences remain migration work governed by the July 17
+living plan; no full functor-category initiality metatheorem is claimed.
 
 The first named finite dependent record is
 
@@ -656,10 +671,13 @@ Hom_Grpd(A,B) = Path(Function(A,B)).
 ```
 
 The stable `grpd_id_function(A)` and `grpd_comp_function(g,f)` heads compute
-pointwise. Generic categorical `id` and `comp_fapp0` compare with them at proof
-time, rather than runtime-reducing to lambdas. This preserves the global
-category owners while giving `PiFunext` and `PiHapply` rigid endpoints for
-function-path laws.
+pointwise. Generic categorical identity compares at proof time. Generic
+composition retains its categorical whole-term head and proof-time comparison,
+while capped application computes pointwise. With eta equality enabled this is
+observationally convertible to the corresponding lambda, although there is no
+whole-term rewrite to `grpd_comp_function`. This retains the global category
+owner while giving `PiFunext` and `PiHapply` rigid endpoints for function-path
+laws.
 
 There are explicit defined adapters in both directions between
 contractible-fibre `TypeEquiv(A,B)` and equality-valued

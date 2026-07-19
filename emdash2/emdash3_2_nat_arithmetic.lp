@@ -1,5 +1,5 @@
 /*
-  Reusable natural-number arithmetic and sethood prerequisites.
+  Reusable natural-number arithmetic, path action, and sethood prerequisites.
 
   This one-way library module is independent of the walking-endomorphism
   presentation.  The directed-HIT/BNat module imports it, so users of Nat
@@ -7,6 +7,20 @@
 */
 
 require open emdash.emdash3_2;
+
+/*
+  Successor as an internal equality action.
+
+  The raw object function is separate from its iterable Path-category action.
+  All equality and higher-equality behavior is inherited from Path_cat_func.
+*/
+symbol nat_succ_function
+  : τ (@Function_grpd Nat_grpd Nat_grpd)
+≔ λ n : τ Nat_grpd, succ n;
+
+symbol NatSucc_func
+  : τ (Functor (Path_cat Nat_grpd) (Path_cat Nat_grpd))
+≔ @path_map_func Nat_grpd Nat_grpd nat_succ_function;
 
 /*
   Natural-number addition.

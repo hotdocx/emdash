@@ -1,86 +1,235 @@
 /*
-  Walking endomorphism directed-HIT and Nat normal-form model.
+  Opaque one-dimensional walking-endomorphism directed HIT and separate Nat
+  free-monoid consistency model.
 
-  The HIT section is an ambient strict functor.  Generic strict
-  functoriality therefore remains the sole runtime owner of composite action;
-  the displayed loop constructor has a primitive equality beta, following
-  the ordinary intensional Circle interface, rather than a competing raw
-  action rewrite.  Generated-hom and Nat induction derive both semantic
-  encode/decode round trips.
+  WalkingEnd exposes only its category, base, directed loop, explicit
+  one-dimensional evidence, and the contextual Functord eliminator.  Its
+  object classifier, hom-categories, identities, and composition stay opaque.
+  In particular, BNat is semantic consistency evidence and never the
+  definitional Hom of WalkingEnd.
 
-  `walking_end_hom` is not a second model beside the HIT: it is the native
-  carrier of `Hom(WalkingEnd,base,base)`, and `walking_end_hom_ind` is the hom
-  component of the directed-HIT elimination interface.  `BNat_cat` is the
-  separate Nat normal-form model.  The Hom-to-Nat result is packaged from the
-  actual semantic functor actions only after their transparent inverse proofs.
+  The contextual base and loop betas are the constructor-specific runtime
+  owners. Narrow terminal/constant projection-order joins expose those same
+  base and loop betas at the ordinary recursor observers required by concrete
+  Code. All other section and recursion observations are transparent theorems
+  over those owners and the generic projection calculus.
 */
 
 require open emdash.emdash3_2_nat_arithmetic;
 
-// Intrinsic generated-hom carrier of the walking directed HIT.
-inductive walking_end_hom : TYPE ≔
-| walking_end_hom_id : walking_end_hom
-| walking_end_hom_step : walking_end_hom → walking_end_hom;
+// Opaque HIT formation and introductions.
+constant symbol WalkingEnd_cat : Cat;
 
-constant symbol WalkingEndHom_grpd : Grpd;
-rule τ WalkingEndHom_grpd ↪ walking_end_hom;
-rule @= WalkingEndHom_grpd walking_end_hom_id walking_end_hom_id ↪ Unit_grpd
-with @= WalkingEndHom_grpd walking_end_hom_id (walking_end_hom_step _) ↪ Empty_grpd
-with @= WalkingEndHom_grpd (walking_end_hom_step _) walking_end_hom_id ↪ Empty_grpd
-with @= WalkingEndHom_grpd (walking_end_hom_step $m) (walking_end_hom_step $n)
-  ↪ @= WalkingEndHom_grpd $m $n;
+constant symbol walking_base
+  : τ (Obj WalkingEnd_cat);
 
-// Hom-level HIT induction over every generated directed arrow.
-symbol walking_end_hom_ind
-  (P : τ WalkingEndHom_grpd → Grpd)
-  (z : τ (P walking_end_hom_id))
-  (s : Π w : τ WalkingEndHom_grpd, τ (P w) → τ (P (walking_end_hom_step w)))
-  (w : τ WalkingEndHom_grpd)
-  : τ (P w)
-≔ ind_walking_end_hom P z s w;
+constant symbol walking_loop
+  : τ (Hom WalkingEnd_cat walking_base walking_base);
 
-// Free strict one-object category on one directed generator.
-injective symbol WalkingEnd_cat : Cat;
-rule Obj WalkingEnd_cat ↪ Unit_grpd;
-rule Hom_cat WalkingEnd_cat _ _ ↪ Path_cat WalkingEndHom_grpd;
-rule @id WalkingEnd_cat _ ↪ walking_end_hom_id;
+// Selected one-dimensional truncation evidence; this is signature data.
+constant symbol walking_end_is_one_cat
+  : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat);
 
-// Composition consumes the visible outer/left generated arrow.
-rule @comp_fapp0 WalkingEnd_cat _ _ _ walking_end_hom_id $f ↪ $f
-with @comp_fapp0 WalkingEnd_cat _ _ _ $g walking_end_hom_id ↪ $g
-with @comp_fapp0 WalkingEnd_cat _ _ _ (walking_end_hom_step $g) $f
-  ↪ walking_end_hom_step (@comp_fapp0 WalkingEnd_cat tt tt tt $g $f);
+// Transparent homwise specializations of the global dimension witness.
+symbol walking_end_hom_discrete
+  (x y : τ (Obj WalkingEnd_cat))
+  : τ (IsDiscreteCat (Hom_cat WalkingEnd_cat x y))
+≔ walking_end_is_one_cat x y;
+
+symbol walking_end_based_hom_discrete
+  (x : τ (Obj WalkingEnd_cat))
+  : τ (IsDiscreteCat
+      (Hom_cat WalkingEnd_cat walking_base x))
+≔ walking_end_hom_discrete walking_base x;
+
+// A based directed 2-cell becomes equality only through dimension evidence.
+symbol walking_end_based_cell_to_path
+  (x : τ (Obj WalkingEnd_cat))
+  [p q : τ (Hom WalkingEnd_cat walking_base x)]
+  (alpha : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base x)
+      p q))
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base x)
+      p q)
+≔ @hom_to_path
+    (Hom_cat WalkingEnd_cat walking_base x)
+    (walking_end_based_hom_discrete x)
+    p q alpha;
+
+// The opaque category and its explicit dimension evidence as an NCat object.
+symbol walking_end_one_cat
+  : τ OneCat
+≔ @Struct_ncat
+    (cat_succ cat_zero)
+    WalkingEnd_cat
+    walking_end_is_one_cat;
+
+// D[loop] o u.
+symbol walking_end_loop_lhs_func
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base))
+≔ @comp_cat_fapp0
+    (Fibre_cat R walking_base)
+    (Fibre_cat D walking_base)
+    (Fibre_cat D walking_base)
+    (@catd_transport_func
+      WalkingEnd_cat D walking_base walking_base walking_loop)
+    u;
+
+// u o R[loop].
+symbol walking_end_loop_rhs_func
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base))
+≔ @comp_cat_fapp0
+    (Fibre_cat R walking_base)
+    (Fibre_cat R walking_base)
+    (Fibre_cat D walking_base)
+    u
+    (@catd_transport_func
+      WalkingEnd_cat R walking_base walking_base walking_loop);
+
+// Contextual loop coherence D[loop] o u => u o R[loop].
+symbol walking_end_loop_coherence
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  : Grpd
+≔ @Transf
+    (Fibre_cat R walking_base)
+    (Fibre_cat D walking_base)
+    (@walking_end_loop_lhs_func R D u)
+    (@walking_end_loop_rhs_func R D u);
+
+// Contextual whole-HIT eliminator indᵈ(R,D,u,sigma) : Functord(R,D).
+injective symbol walking_end_ind_funcd
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  (sigma : τ (@walking_end_loop_coherence R D u))
+  : τ (Functord R D);
+
+// Runtime base-constructor beta at the generic fibre-functor projection.
+rule @tapp0_fapp0
+      WalkingEnd_cat Cat_cat
+      $R $D walking_base
+      (@walking_end_ind_funcd $R $D $u _)
+  ↪ $u;
 
 /*
-  Proof-time recovery of generic functor-on-identity after the source identity
-  has normalized to the intrinsic hom-identity constructor. Runtime still has
-  one owner: the global literal-identity functor rule.
+  Narrow terminal/constant projection-order join. The generic terminal
+  component projects the contextual base functor to Obj_func(rec[base]); this
+  concrete Code consumer restores the same constructor beta at the ordinary
+  fapp0 observer. It is not a second semantic recursor or functoriality owner.
 */
-unif_rule
-  @fapp1_fapp0 WalkingEnd_cat $C $F tt tt walking_end_hom_id
-  ≡ @id $C (@fapp0 WalkingEnd_cat $C $F tt)
-  ↪ [ tt ≡ tt ];
+rule @fapp0
+      WalkingEnd_cat $C
+      (@walking_end_ind_funcd
+        (@Const_catd WalkingEnd_cat Terminal_cat)
+        (@Const_catd WalkingEnd_cat $C)
+        (@Const_func Terminal_cat $C $x)
+        _)
+      walking_base
+  ↪ $x;
 
-symbol walking_functor_id_view
-  [C : Cat]
-  (F : τ (Functor WalkingEnd_cat C))
+// Runtime loop-constructor beta at the generic displayed laxity component.
+rule @fdapp1_int_cell
+      WalkingEnd_cat
+      $R $D
+      (@walking_end_ind_funcd $R $D $u $sigma)
+      walking_base walking_base walking_loop $r
+  ↪ @tapp0_fapp0
+      (Fibre_cat $R walking_base)
+      (Fibre_cat $D walking_base)
+      (@walking_end_loop_lhs_func $R $D $u)
+      (@walking_end_loop_rhs_func $R $D $u)
+      $r $sigma;
+
+// Transparent typed views of the two generic runtime constructor betas.
+symbol walking_end_ind_funcd_beta_base
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  (sigma : τ (@walking_end_loop_coherence R D u))
   : τ (@=
-      (Hom C
-        (@fapp0 WalkingEnd_cat C F tt)
-        (@fapp0 WalkingEnd_cat C F tt))
-      (@fapp1_fapp0 WalkingEnd_cat C F tt tt walking_end_hom_id)
-      (@id C (@fapp0 WalkingEnd_cat C F tt)))
+      (Functor
+        (Fibre_cat R walking_base)
+        (Fibre_cat D walking_base))
+      (@Fibre_func
+        WalkingEnd_cat R D
+        (@walking_end_ind_funcd R D u sigma)
+        walking_base)
+      u)
 ≔ @eq_refl
-    (Hom C
-      (@fapp0 WalkingEnd_cat C F tt)
-      (@fapp0 WalkingEnd_cat C F tt))
-    (@id C (@fapp0 WalkingEnd_cat C F tt));
+    (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base))
+    u;
 
-symbol walking_base : τ (Obj WalkingEnd_cat) ≔ tt;
-symbol walking_loop : τ (Hom WalkingEnd_cat walking_base walking_base)
-≔ walking_end_hom_step walking_end_hom_id;
+symbol walking_end_ind_funcd_beta_loop
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  (sigma : τ (@walking_end_loop_coherence R D u))
+  (r : τ (Obj (Fibre_cat R walking_base)))
+  : τ (@=
+      (Hom
+        (Fibre_cat D walking_base)
+        (@fapp0
+          (Fibre_cat R walking_base)
+          (Fibre_cat D walking_base)
+          (@walking_end_loop_lhs_func R D u)
+          r)
+        (@fapp0
+          (Fibre_cat R walking_base)
+          (Fibre_cat D walking_base)
+          (@walking_end_loop_rhs_func R D u)
+          r))
+      (@fdapp1_int_cell
+        WalkingEnd_cat R D
+        (@walking_end_ind_funcd R D u sigma)
+        walking_base walking_base walking_loop r)
+      (@tapp0_fapp0
+        (Fibre_cat R walking_base)
+        (Fibre_cat D walking_base)
+        (@walking_end_loop_lhs_func R D u)
+        (@walking_end_loop_rhs_func R D u)
+        r sigma))
+≔ @eq_refl
+    (Hom
+      (Fibre_cat D walking_base)
+      (@fapp0
+        (Fibre_cat R walking_base)
+        (Fibre_cat D walking_base)
+        (@walking_end_loop_lhs_func R D u)
+        r)
+      (@fapp0
+        (Fibre_cat R walking_base)
+        (Fibre_cat D walking_base)
+        (@walking_end_loop_rhs_func R D u)
+        r))
+    (@tapp0_fapp0
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)
+      (@walking_end_loop_lhs_func R D u)
+      (@walking_end_loop_rhs_func R D u)
+      r sigma);
 
-// Displayed generator algebra D[loop](u) -> u.
+// Section-algebra classifier D[loop](u) -> u.
 symbol walking_end_loop_lift_grpd
   (D : τ (Catd WalkingEnd_cat))
   (u : τ (Obj (Fibre_cat D walking_base)))
@@ -95,31 +244,69 @@ symbol walking_end_loop_lift_grpd
       u)
     u;
 
-// Primitive directed-HIT eliminator into a structured Catd motive.
-injective symbol walking_end_ind_sec
+// The section algebra arrow as the unique constant transfor on Terminal.
+symbol walking_end_loop_lift_transf
   (D : τ (Catd WalkingEnd_cat))
   (u : τ (Obj (Fibre_cat D walking_base)))
   (ell : τ (@walking_end_loop_lift_grpd D u))
-  : τ (Obj (Pi_cat D));
-
-// Runtime point-constructor beta at terminal section evaluation.
-rule @fapp0
-      _ _
-      (@tapp0_fapp0
-        _ Cat_cat
-        (@Const_catd WalkingEnd_cat Terminal_cat)
-        _
-        tt
-        (@walking_end_ind_sec _ $u _))
-      Terminal_obj
-  ↪ $u;
+  : τ (@walking_end_loop_coherence
+      (@Const_catd WalkingEnd_cat Terminal_cat)
+      D
+      (@Obj_func (Fibre_cat D walking_base) u))
+≔ @Const_transf
+    Terminal_cat
+    (Fibre_cat D walking_base)
+    (@fapp0
+      (Fibre_cat D walking_base)
+      (Fibre_cat D walking_base)
+      (@catd_transport_func
+        WalkingEnd_cat D walking_base walking_base walking_loop)
+      u)
+    u
+    ell;
 
 /*
-  Generator beta as primitive equality evidence.  It is deliberately not a
-  rewrite of the raw section action: generic strict-functor composition keeps
-  sole ownership of composite-action runtime normalization.
+  Ordinary loop projection of the constant-motive specialization. This is the
+  loop-constructor beta exposed at the ordinary fapp1 observer; it does not
+  restate generic functoriality away from the literal HIT constructor.
 */
-injective symbol walking_end_ind_beta_loop
+rule @fapp1_fapp0
+      WalkingEnd_cat $C
+      (@walking_end_ind_funcd
+        (@Const_catd WalkingEnd_cat Terminal_cat)
+        (@Const_catd WalkingEnd_cat $C)
+        (@Const_func Terminal_cat $C $x)
+        (@Const_transf Terminal_cat $C $x $x $f))
+      walking_base walking_base walking_loop
+  ↪ $f;
+
+// Derived ordinary section eliminator (R = const(Terminal)).
+symbol walking_end_ind_sec
+  (D : τ (Catd WalkingEnd_cat))
+  (u : τ (Obj (Fibre_cat D walking_base)))
+  (ell : τ (@walking_end_loop_lift_grpd D u))
+  : τ (Obj (Pi_cat D))
+≔ @walking_end_ind_funcd
+    (@Const_catd WalkingEnd_cat Terminal_cat)
+    D
+    (@Obj_func (Fibre_cat D walking_base) u)
+    (@walking_end_loop_lift_transf D u ell);
+
+// Transparent theorem for the derived section's runtime base observation.
+symbol walking_end_ind_sec_beta_base
+  (D : τ (Catd WalkingEnd_cat))
+  (u : τ (Obj (Fibre_cat D walking_base)))
+  (ell : τ (@walking_end_loop_lift_grpd D u))
+  : τ (@=
+      (Obj (Fibre_cat D walking_base))
+      (@piapp0 WalkingEnd_cat D
+        (@walking_end_ind_sec D u ell)
+        walking_base)
+      u)
+≔ @eq_refl (Obj (Fibre_cat D walking_base)) u;
+
+// Transparent theorem for the derived section's runtime loop observation.
+symbol walking_end_ind_sec_beta_loop
   (D : τ (Catd WalkingEnd_cat))
   (u : τ (Obj (Fibre_cat D walking_base)))
   (ell : τ (@walking_end_loop_lift_grpd D u))
@@ -128,202 +315,183 @@ injective symbol walking_end_ind_beta_loop
       (@piapp1_fapp0
         WalkingEnd_cat D (@walking_end_ind_sec D u ell)
         walking_base walking_base walking_loop)
-      ell);
+      ell)
+≔ @eq_refl (@walking_end_loop_lift_grpd D u) ell;
 
-// Nondependent recursor is the constant-motive specialization.
+// Derived nondependent recursor (also D = const(C)).
 symbol walking_end_rec_func
   (C : Cat)
   (x : τ (Obj C))
   (f : τ (Hom C x x))
   : τ (Functor WalkingEnd_cat C)
-≔ @walking_end_ind_sec (@Const_catd WalkingEnd_cat C) x f;
-
-// Readable object projection routes through the dependent eliminator.
-// lhs-audit: keep 1,2 -- source/target select the Pi/Functor comparison.
-rule @fapp0
-      WalkingEnd_cat $C
-      (@walking_end_ind_sec
-        (@Const_catd WalkingEnd_cat $C)
-        $x _)
-      _
-  ↪ $x;
-
-// The ordinary recursor's loop beta is the dependent beta specialization.
-symbol walking_end_rec_beta_loop
-  (C : Cat)
-  (x : τ (Obj C))
-  (f : τ (Hom C x x))
-  : τ (@=
-      (Hom C x x)
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base walking_loop)
-      f)
-≔ @walking_end_ind_beta_loop
+≔ @walking_end_ind_sec
     (@Const_catd WalkingEnd_cat C)
     x f;
 
 /*
-  Generic generated-arrow step computation for every recursor target.
-
-  Strict functoriality first identifies action on `step(w) = loop o w` with
-  `F[loop] o F[w]`; whiskering the HIT loop beta then replaces `F[loop]` by
-  the supplied generator image.  No target-specific action rule is needed.
+  The terminal/constant specialization has two documented fibre-functor
+  reducts. These typed reflexivity theorems retain both generic projection
+  views; the narrow ordinary-observer join above selects their common base
+  value for the concrete recursor consumer.
 */
-symbol walking_end_rec_step_view
-  (C : Cat)
-  (x : τ (Obj C))
-  (f : τ (Hom C x x))
-  (w : τ WalkingEndHom_grpd)
-  : τ (@=
-      (Hom C x x)
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base (walking_end_hom_step w))
-      (@comp_fapp0
-        C x x x f
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base w)))
-≔ @eq_trans
-    (Hom C x x)
-    (@fapp1_fapp0
-      WalkingEnd_cat C (@walking_end_rec_func C x f)
-      walking_base walking_base (walking_end_hom_step w))
-    (@comp_fapp0
-      C x x x
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base walking_loop)
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base w))
-    (@comp_fapp0
-      C x x x f
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base w))
-    (@eq_refl
-      (Hom C x x)
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base (walking_end_hom_step w)))
-    (@eq_ap
-      (Hom C x x)
-      (Hom C x x)
-      (λ h : τ (Hom C x x),
-        @comp_fapp0
-          C x x x h
-          (@fapp1_fapp0
-            WalkingEnd_cat C (@walking_end_rec_func C x f)
-            walking_base walking_base w))
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base walking_loop)
-      f
-      (@walking_end_rec_beta_loop C x f));
-
-/*
-  The former runtime critical pair is now a derived equality.  The final
-  reflexivity witness uses only the global Kosta-Došen strict cut:
-    F[loop] o F[loop] -> F[loop o loop].
-*/
-symbol walking_end_rec_loop_square
+symbol walking_end_rec_base_contextual_func_eq
   (C : Cat)
   (x : τ (Obj C))
   (f : τ (Hom C x x))
   : τ (@=
-      (Hom C x x)
-      (@comp_fapp0 C x x x f f)
+      (Functor Terminal_cat C)
+      (@Fibre_func
+        WalkingEnd_cat
+        (@Const_catd WalkingEnd_cat Terminal_cat)
+        (@Const_catd WalkingEnd_cat C)
+        (@walking_end_rec_func C x f)
+        walking_base)
+      (@Obj_func C x))
+≔ @walking_end_ind_funcd_beta_base
+    (@Const_catd WalkingEnd_cat Terminal_cat)
+    (@Const_catd WalkingEnd_cat C)
+    (@Obj_func C x)
+    (@walking_end_loop_lift_transf
+      (@Const_catd WalkingEnd_cat C)
+      x f);
+
+symbol walking_end_rec_base_projection_func_eq
+  (C : Cat)
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+  : τ (@=
+      (Functor Terminal_cat C)
+      (@Fibre_func
+        WalkingEnd_cat
+        (@Const_catd WalkingEnd_cat Terminal_cat)
+        (@Const_catd WalkingEnd_cat C)
+        (@walking_end_rec_func C x f)
+        walking_base)
+      (@Obj_func C
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base)))
+≔ @eq_refl
+    (Functor Terminal_cat C)
+    (@Obj_func C
+      (@fapp0 WalkingEnd_cat C
+        (@walking_end_rec_func C x f)
+        walking_base));
+
+symbol walking_end_rec_base_func_eq
+  (C : Cat)
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+  : τ (@=
+      (Functor Terminal_cat C)
+      (@Obj_func C
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base))
+      (@Obj_func C x))
+≔ @eq_trans
+    (Functor Terminal_cat C)
+    (@Obj_func C
+      (@fapp0 WalkingEnd_cat C
+        (@walking_end_rec_func C x f)
+        walking_base))
+    (@Fibre_func
+      WalkingEnd_cat
+      (@Const_catd WalkingEnd_cat Terminal_cat)
+      (@Const_catd WalkingEnd_cat C)
+      (@walking_end_rec_func C x f)
+      walking_base)
+    (@Obj_func C x)
+    (@eq_sym
+      (Functor Terminal_cat C)
+      (@Fibre_func
+        WalkingEnd_cat
+        (@Const_catd WalkingEnd_cat Terminal_cat)
+        (@Const_catd WalkingEnd_cat C)
+        (@walking_end_rec_func C x f)
+        walking_base)
+      (@Obj_func C
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base))
+      (@walking_end_rec_base_projection_func_eq C x f))
+    (@walking_end_rec_base_contextual_func_eq C x f);
+
+// Transparent recursor base theorem derived by evaluating that functor path.
+symbol walking_end_rec_beta_base
+  (C : Cat)
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+  : τ (@=
+      (Obj C)
+      (@fapp0 WalkingEnd_cat C
+        (@walking_end_rec_func C x f)
+        walking_base)
+      x)
+≔ @eq_ap
+      (Functor Terminal_cat C)
+      (Obj C)
+      (λ F : τ (Functor Terminal_cat C),
+        @fapp0 Terminal_cat C F Terminal_obj)
+      (@Obj_func C
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base))
+      (@Obj_func C x)
+      (@walking_end_rec_base_func_eq C x f);
+
+// Runtime loop theorem at the canonical derived-section observer.
+symbol walking_end_rec_beta_loop
+  (C : Cat)
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+≔ @walking_end_ind_sec_beta_loop
+    (@Const_catd WalkingEnd_cat C)
+    x f;
+
+// Proof-time comparison from the section observer to ordinary functor action.
+symbol walking_end_rec_loop_ordinary_comparison
+  (C : Cat)
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+  : τ (@=
+      (Hom C
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base)
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base))
+      (@piapp1_fapp0
+        WalkingEnd_cat
+        (@Const_catd WalkingEnd_cat C)
+        (@walking_end_rec_func C x f)
+        walking_base walking_base walking_loop)
       (@fapp1_fapp0
         WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base
-        (@comp_fapp0
-          WalkingEnd_cat
-          walking_base walking_base walking_base
-          walking_loop walking_loop)))
-≔ @eq_trans
-    (Hom C x x)
-    (@comp_fapp0 C x x x f f)
-    (@comp_fapp0 C x x x
+        walking_base walking_base walking_loop))
+≔ @piapp1_const_fapp0_eq
+    WalkingEnd_cat C
+    (@walking_end_rec_func C x f)
+    walking_base walking_base walking_loop;
+
+// Typed view of the ordinary runtime loop-constructor beta.
+symbol walking_end_rec_beta_loop_ordinary
+  (C : Cat)
+  (x : τ (Obj C))
+  (f : τ (Hom C x x))
+  : τ (@=
+      (Hom C x x)
       (@fapp1_fapp0
         WalkingEnd_cat C (@walking_end_rec_func C x f)
         walking_base walking_base walking_loop)
       f)
-    (@fapp1_fapp0
-      WalkingEnd_cat C (@walking_end_rec_func C x f)
-      walking_base walking_base
-      (@comp_fapp0
-        WalkingEnd_cat
-        walking_base walking_base walking_base
-        walking_loop walking_loop))
-    (@eq_ap
-      (Hom C x x)
-      (Hom C x x)
-      (λ h : τ (Hom C x x), @comp_fapp0 C x x x h f)
-      f
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base walking_loop)
-      (@eq_sym
-        (Hom C x x)
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base walking_loop)
-        f
-        (@walking_end_rec_beta_loop C x f)))
-    (@eq_trans
-      (Hom C x x)
-      (@comp_fapp0 C x x x
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base walking_loop)
-        f)
-      (@comp_fapp0 C x x x
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base walking_loop)
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base walking_loop))
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base
-        (@comp_fapp0
-          WalkingEnd_cat
-          walking_base walking_base walking_base
-          walking_loop walking_loop))
-      (@eq_ap
-        (Hom C x x)
-        (Hom C x x)
-        (λ h : τ (Hom C x x),
-          @comp_fapp0 C x x x
-            (@fapp1_fapp0
-              WalkingEnd_cat C (@walking_end_rec_func C x f)
-              walking_base walking_base walking_loop)
-            h)
-        f
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base walking_loop)
-        (@eq_sym
-          (Hom C x x)
-          (@fapp1_fapp0
-            WalkingEnd_cat C (@walking_end_rec_func C x f)
-            walking_base walking_base walking_loop)
-          f
-          (@walking_end_rec_beta_loop C x f)))
-      (@eq_refl
-        (Hom C x x)
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base
-          (@comp_fapp0
-            WalkingEnd_cat
-            walking_base walking_base walking_base
-            walking_loop walking_loop))));
+≔ @eq_refl (Hom C x x) f;
 
-// Separate one-object Nat monoid model.
+// --------------------------------------------------------------------------
+// Separate Nat free-monoid model: consistency evidence, not definitional Hom.
+// --------------------------------------------------------------------------
+
 injective symbol BNat_cat : Cat;
 rule Obj BNat_cat ↪ Unit_grpd;
 rule Hom_cat BNat_cat _ _ ↪ Path_cat Nat_grpd;
@@ -334,35 +502,18 @@ with @comp_fapp0 BNat_cat _ _ _ $g zero ↪ $g
 with @comp_fapp0 BNat_cat _ _ _ (succ $g) $f
   ↪ succ (@comp_fapp0 BNat_cat tt tt tt $g $f);
 
-/*
-  Proof-time recovery of generic functor-on-identity after the BNat identity
-  has normalized to zero. Runtime remains owned by the literal-identity rule.
-*/
+// Proof-time recovery of generic functor-on-identity after id normalizes.
 unif_rule
   @fapp1_fapp0 BNat_cat $C $F tt tt zero
   ≡ @id $C (@fapp0 BNat_cat $C $F tt)
   ↪ [ tt ≡ tt ];
 
-symbol bnat_functor_zero_view
-  [C : Cat]
-  (F : τ (Functor BNat_cat C))
-  : τ (@=
-      (Hom C
-        (@fapp0 BNat_cat C F tt)
-        (@fapp0 BNat_cat C F tt))
-      (@fapp1_fapp0 BNat_cat C F tt tt zero)
-      (@id C (@fapp0 BNat_cat C F tt)))
-≔ @eq_refl
-    (Hom C
-      (@fapp0 BNat_cat C F tt)
-      (@fapp0 BNat_cat C F tt))
-    (@id C (@fapp0 BNat_cat C F tt));
-
 symbol bnat_obj : τ (Obj BNat_cat) ≔ tt;
+
 symbol bnat_generator : τ (Hom BNat_cat bnat_obj bnat_obj)
 ≔ succ zero;
 
-// Open BNat composition agrees propositionally with selected Nat addition.
+// Open BNat composition agrees propositionally with Nat addition.
 symbol bnat_comp_nat_add
   (g f : τ Nat_grpd)
   : τ (@= Nat_grpd
@@ -381,106 +532,7 @@ symbol bnat_comp_nat_add
       ih)
     g;
 
-// The HIT recursor supplies the structured encoding functor.
-symbol walking_encode_func : τ (Functor WalkingEnd_cat BNat_cat)
-≔ @walking_end_rec_func BNat_cat bnat_obj bnat_generator;
-
-// Its capped hom action remains a named semantic projection.
-symbol walking_encode_action
-  (w : τ WalkingEndHom_grpd)
-  : τ Nat_grpd
-≔ @fapp1_fapp0
-    WalkingEnd_cat BNat_cat walking_encode_func
-    walking_base walking_base w;
-
-symbol walking_encode_id_view
-  : τ (@= Nat_grpd (@walking_encode_action walking_end_hom_id) zero)
-≔ @walking_functor_id_view BNat_cat walking_encode_func;
-
-// The encoder successor law is the generic recursor step theorem at BNat.
-symbol walking_encode_succ_view
-  (w : τ WalkingEndHom_grpd)
-  : τ (@= Nat_grpd
-      (@walking_encode_action (walking_end_hom_step w))
-      (succ (@walking_encode_action w)))
-≔ @walking_end_rec_step_view
-    BNat_cat bnat_obj bnat_generator w;
-
-// Strict encoding sends generated-arrow composition to selected Nat addition.
-symbol walking_encode_comp_view
-  (g f : τ WalkingEndHom_grpd)
-  : τ (@= Nat_grpd
-      (@walking_encode_action
-        (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
-      (@nat_add
-        (@walking_encode_action g)
-        (@walking_encode_action f)))
-≔ @eq_trans
-    Nat_grpd
-    (@walking_encode_action
-      (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
-    (@comp_fapp0
-      BNat_cat tt tt tt
-      (@walking_encode_action g)
-      (@walking_encode_action f))
-    (@nat_add
-      (@walking_encode_action g)
-      (@walking_encode_action f))
-    (@eq_refl
-      Nat_grpd
-      (@walking_encode_action
-        (@comp_fapp0 WalkingEnd_cat tt tt tt g f)))
-    (@bnat_comp_nat_add
-      (@walking_encode_action g)
-      (@walking_encode_action f));
-
-// The intrinsic hom classifier is set-valued by nested hom induction.
-symbol walking_end_hom_is_set
-  : τ (IsSetGrpd WalkingEndHom_grpd)
-≔ λ m : τ WalkingEndHom_grpd,
-    @walking_end_hom_ind
-      (λ m : τ WalkingEndHom_grpd,
-        @Pi_grpd WalkingEndHom_grpd
-          (λ n : τ WalkingEndHom_grpd,
-            IsPropGrpd (@= WalkingEndHom_grpd m n)))
-      (λ n : τ WalkingEndHom_grpd,
-        @walking_end_hom_ind
-          (λ n : τ WalkingEndHom_grpd,
-            IsPropGrpd (@= WalkingEndHom_grpd walking_end_hom_id n))
-          unit_is_prop
-          (λ n0 : τ WalkingEndHom_grpd,
-            λ _ : τ (IsPropGrpd (@= WalkingEndHom_grpd walking_end_hom_id n0)),
-            empty_is_prop)
-          n)
-      (λ m0 : τ WalkingEndHom_grpd,
-        λ ih : τ (@Pi_grpd WalkingEndHom_grpd
-          (λ n : τ WalkingEndHom_grpd,
-            IsPropGrpd (@= WalkingEndHom_grpd m0 n))),
-        λ n : τ WalkingEndHom_grpd,
-          @walking_end_hom_ind
-            (λ n : τ WalkingEndHom_grpd,
-              IsPropGrpd (@= WalkingEndHom_grpd (walking_end_hom_step m0) n))
-            empty_is_prop
-            (λ n0 : τ WalkingEndHom_grpd,
-              λ _ : τ (IsPropGrpd
-                (@= WalkingEndHom_grpd (walking_end_hom_step m0) n0)),
-              ih n0)
-            n)
-      m;
-
-// Literal path categories over sets satisfy the active discrete contract.
-symbol walking_end_hom_path_discrete
-  : τ (IsDiscreteCat (Path_cat WalkingEndHom_grpd))
-≔ @discrete_cat_intro
-    (Path_cat WalkingEndHom_grpd)
-    walking_end_hom_is_set
-    (@omega_equiv_along_EQ1_to_D0
-      Cat_cat
-      (Core_cat (Path_cat WalkingEndHom_grpd))
-      (Path_cat WalkingEndHom_grpd)
-      (Core_incl_func (Path_cat WalkingEndHom_grpd))
-      (@path_cat_is_groupoidal_EQ1 WalkingEndHom_grpd));
-
+// Path(Nat) is discrete because Nat is a set.
 symbol nat_path_discrete
   : τ (IsDiscreteCat (Path_cat Nat_grpd))
 ≔ @discrete_cat_intro
@@ -493,25 +545,12 @@ symbol nat_path_discrete
       (Core_incl_func (Path_cat Nat_grpd))
       (@path_cat_is_groupoidal_EQ1 Nat_grpd));
 
-// Both one-object categories are internally one-dimensional.
-symbol walking_end_is_one_cat
-  : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat)
-≔ λ _ : τ Unit_grpd,
-    λ _ : τ Unit_grpd,
-      walking_end_hom_path_discrete;
-
+// The separate free-monoid model satisfies the same dimension contract.
 symbol bnat_is_one_cat
   : τ (IsNCat (cat_succ cat_zero) BNat_cat)
 ≔ λ _ : τ Unit_grpd,
     λ _ : τ Unit_grpd,
       nat_path_discrete;
-
-symbol walking_end_one_cat
-  : τ OneCat
-≔ @Struct_ncat
-    (cat_succ cat_zero)
-    WalkingEnd_cat
-    walking_end_is_one_cat;
 
 symbol bnat_one_cat
   : τ OneCat
@@ -520,299 +559,403 @@ symbol bnat_one_cat
     BNat_cat
     bnat_is_one_cat;
 
-// The generator is not the identity, and no left inverse can exist.
-symbol walking_loop_not_identity
-  (p : τ (@= WalkingEndHom_grpd walking_loop walking_end_hom_id))
-  : τ Empty_grpd
-≔ p;
+// Recursor interpretation of the opaque constructors in the separate model.
+symbol walking_bnat_model_func
+  : τ (Functor WalkingEnd_cat BNat_cat)
+≔ @walking_end_rec_func BNat_cat bnat_obj bnat_generator;
 
-symbol walking_loop_no_left_inverse
-  (w : τ WalkingEndHom_grpd)
-  : τ (@Function_grpd
-      (@= WalkingEndHom_grpd
-        (@comp_fapp0 WalkingEnd_cat tt tt tt w walking_loop)
-        walking_end_hom_id)
-      Empty_grpd)
-≔ @walking_end_hom_ind
-    (λ w : τ WalkingEndHom_grpd,
-      @Function_grpd
-        (@= WalkingEndHom_grpd
-          (@comp_fapp0 WalkingEnd_cat tt tt tt w walking_loop)
-          walking_end_hom_id)
-        Empty_grpd)
-    (λ p : τ Empty_grpd, p)
-    (λ w0 : τ WalkingEndHom_grpd,
-      λ _ : τ (@Function_grpd
-        (@= WalkingEndHom_grpd
-          (@comp_fapp0 WalkingEnd_cat tt tt tt w0 walking_loop)
-          walking_end_hom_id)
-        Empty_grpd),
-      λ p : τ Empty_grpd, p)
-    w;
-
-// In particular, the directed loop cannot carry omega-equivalence evidence.
-symbol walking_loop_not_omega_equiv_EQ1
-  (u : τ (@OmegaEquivAlong_EQ1
-      WalkingEnd_cat walking_base walking_base walking_loop))
-  : τ Empty_grpd
-≔ (@walking_loop_no_left_inverse
-      (@omega_equiv_along_left_inv_EQ1
-        WalkingEnd_cat walking_base walking_base walking_loop u))
-    (@omega_equiv_along_left_law_EQ1
-      WalkingEnd_cat walking_base walking_base walking_loop u);
-
-/*
-  Structured reverse comparison.
-
-  Emdash functors are semantic objects rather than records assembled from raw
-  carrier functions.  This stable functor head is therefore the selected
-  BNat-to-WalkingEnd map; its generator beta is equality evidence, and the
-  complete capped action is derived below by Nat induction.
-*/
-injective symbol walking_decode_func
-  : τ (Functor BNat_cat WalkingEnd_cat);
-
-rule @fapp0
-      BNat_cat WalkingEnd_cat walking_decode_func _
-  ↪ walking_base;
-
-injective symbol walking_decode_beta_generator
+symbol walking_bnat_model_beta_base
   : τ (@=
-      (Hom WalkingEnd_cat walking_base walking_base)
-      (@fapp1_fapp0
-        BNat_cat WalkingEnd_cat walking_decode_func
-        bnat_obj bnat_obj bnat_generator)
-      walking_loop);
+      (Obj BNat_cat)
+      (@fapp0
+        WalkingEnd_cat BNat_cat walking_bnat_model_func walking_base)
+      bnat_obj)
+≔ @walking_end_rec_beta_base
+    BNat_cat bnat_obj bnat_generator;
 
-symbol walking_decode_action
-  (n : τ Nat_grpd)
-  : τ WalkingEndHom_grpd
-≔ @fapp1_fapp0
-    BNat_cat WalkingEnd_cat walking_decode_func
-    bnat_obj bnat_obj n;
+// Inferred result preserves the canonical section-observer loop classifier.
+symbol walking_bnat_model_beta_loop
+≔ @walking_end_rec_beta_loop
+    BNat_cat bnat_obj bnat_generator;
 
-symbol walking_decode_zero_view
-  : τ (@= WalkingEndHom_grpd (@walking_decode_action zero) walking_end_hom_id)
-≔ @bnat_functor_zero_view WalkingEnd_cat walking_decode_func;
+// --------------------------------------------------------------------------
+// Concrete Code, directed representable, powers, and the contextual spiral.
+// --------------------------------------------------------------------------
 
-// Strictness plus the generator beta derives the successor action law.
-symbol walking_decode_succ_view
-  (n : τ Nat_grpd)
-  : τ (@= WalkingEndHom_grpd
-      (@walking_decode_action (succ n))
-      (walking_end_hom_step (@walking_decode_action n)))
-≔ @eq_trans
-    WalkingEndHom_grpd
-    (@walking_decode_action (succ n))
-    (@comp_fapp0
-      WalkingEnd_cat tt tt tt
-      (@walking_decode_action bnat_generator)
-      (@walking_decode_action n))
-    (walking_end_hom_step (@walking_decode_action n))
-    (@eq_refl WalkingEndHom_grpd (@walking_decode_action (succ n)))
-    (@eq_ap
-      (Hom WalkingEnd_cat walking_base walking_base)
-      (Hom WalkingEnd_cat walking_base walking_base)
-      (λ h : τ (Hom WalkingEnd_cat walking_base walking_base),
-        @comp_fapp0
-          WalkingEnd_cat tt tt tt h (@walking_decode_action n))
-      (@walking_decode_action bnat_generator)
-      walking_loop
-      walking_decode_beta_generator);
+// Code : WalkingEnd -> Cat, with base Path(Nat) and loop NatSucc.
+symbol walking_Code_catd
+  : τ (Catd WalkingEnd_cat)
+≔ @walking_end_rec_func
+    Cat_cat
+    (Path_cat Nat_grpd)
+    NatSucc_func;
 
-// Strict decoding sends selected Nat addition to generated-arrow composition.
-symbol walking_decode_comp_view
-  (g f : τ Nat_grpd)
-  : τ (@= WalkingEndHom_grpd
-      (@walking_decode_action (@nat_add g f))
+// The narrow recursor projection join makes the Code base runtime-visible.
+symbol walking_Code_beta_base
+  : τ (@=
+      (Obj Cat_cat)
+      (Fibre_cat walking_Code_catd walking_base)
+      (Path_cat Nat_grpd))
+≔ @walking_end_rec_beta_base
+    Cat_cat
+    (Path_cat Nat_grpd)
+    NatSucc_func;
+
+// Typed view of the runtime Code-loop beta.
+symbol walking_Code_beta_loop
+  : τ (@=
+      (Hom Cat_cat (Path_cat Nat_grpd) (Path_cat Nat_grpd))
+      (@catd_transport_func
+        WalkingEnd_cat walking_Code_catd
+        walking_base walking_base walking_loop)
+      NatSucc_func)
+≔ @walking_end_rec_beta_loop_ordinary
+    Cat_cat
+    (Path_cat Nat_grpd)
+    NatSucc_func;
+
+// encode_x(p) = Code[p](zero).
+symbol walking_encode
+  [x : τ (Obj WalkingEnd_cat)]
+  (p : τ (Hom WalkingEnd_cat walking_base x))
+  : τ (Obj (Fibre_cat walking_Code_catd x))
+≔ @fapp0
+    (Fibre_cat walking_Code_catd walking_base)
+    (Fibre_cat walking_Code_catd x)
+    (@catd_transport_func
+      WalkingEnd_cat walking_Code_catd
+      walking_base x p)
+    zero;
+
+// Transparent alias for the generic directed based representable.
+symbol walking_based_rep_catd
+  : τ (Catd WalkingEnd_cat)
+≔ @Rep_catd WalkingEnd_cat walking_base;
+
+// Open representable transport is postcomposition in the selected variance.
+symbol walking_based_rep_postcomp_eq
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x))
+  (q : τ (Hom WalkingEnd_cat walking_base walking_base))
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base x)
+      (@fapp0
+        (Fibre_cat walking_based_rep_catd walking_base)
+        (Fibre_cat walking_based_rep_catd x)
+        (@catd_transport_func
+          WalkingEnd_cat walking_based_rep_catd
+          walking_base x p)
+        q)
       (@comp_fapp0
-        WalkingEnd_cat tt tt tt
-        (@walking_decode_action g)
-        (@walking_decode_action f)))
-≔ @eq_trans
-    WalkingEndHom_grpd
-    (@walking_decode_action (@nat_add g f))
-    (@walking_decode_action
-      (@comp_fapp0 BNat_cat tt tt tt g f))
+        WalkingEnd_cat walking_base walking_base x p q))
+≔ @eq_refl
+    (Hom WalkingEnd_cat walking_base x)
     (@comp_fapp0
-      WalkingEnd_cat tt tt tt
-      (@walking_decode_action g)
-      (@walking_decode_action f))
-    (@eq_ap
-      Nat_grpd WalkingEndHom_grpd
-      walking_decode_action
-      (@nat_add g f)
-      (@comp_fapp0 BNat_cat tt tt tt g f)
-      (@eq_sym
-        Nat_grpd
-        (@comp_fapp0 BNat_cat tt tt tt g f)
-        (@nat_add g f)
-        (@bnat_comp_nat_add g f)))
-    (@eq_refl
-      WalkingEndHom_grpd
-      (@walking_decode_action
-        (@comp_fapp0 BNat_cat tt tt tt g f)));
+      WalkingEnd_cat walking_base walking_base x p q);
 
-/*
-  Practical HIT computation on arbitrary arrows.
+// Postcomposition by loop, inherited from representable transport.
+symbol walking_loop_postcomp_func
+  : τ (Functor
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (Hom_cat WalkingEnd_cat walking_base walking_base))
+≔ @catd_transport_func
+    WalkingEnd_cat walking_based_rep_catd
+    walking_base walking_base walking_loop;
 
-  The forward map is the actual action of the recursor-derived encoder; its
-  successor law uses the primitive HIT loop beta.  The inverse is the actual
-  action of the structured decoder; its successor law uses the decoder's
-  generator beta.  Hom-level HIT induction and Nat induction extend those
-  constructor laws to the two open semantic round trips.
-*/
-symbol walking_decode_encode_roundtrip
-  (w : τ WalkingEndHom_grpd)
-  : τ (@= WalkingEndHom_grpd
-      (@walking_decode_action (@walking_encode_action w))
-      w)
-≔ @walking_end_hom_ind
-    (λ w : τ WalkingEndHom_grpd,
-      @= WalkingEndHom_grpd
-        (@walking_decode_action (@walking_encode_action w))
-        w)
-    (@eq_trans
-      WalkingEndHom_grpd
-      (@walking_decode_action (@walking_encode_action walking_end_hom_id))
-      (@walking_decode_action zero)
-      walking_end_hom_id
-      (@eq_ap
-        Nat_grpd WalkingEndHom_grpd
-        walking_decode_action
-        (@walking_encode_action walking_end_hom_id)
-        zero
-        walking_encode_id_view)
-      walking_decode_zero_view)
-    (λ w0 : τ WalkingEndHom_grpd,
-      λ ih : τ (@= WalkingEndHom_grpd
-        (@walking_decode_action (@walking_encode_action w0))
-        w0),
-      @eq_trans
-        WalkingEndHom_grpd
-        (@walking_decode_action
-          (@walking_encode_action (walking_end_hom_step w0)))
-        (walking_end_hom_step
-          (@walking_decode_action (@walking_encode_action w0)))
-        (walking_end_hom_step w0)
-        (@eq_trans
-          WalkingEndHom_grpd
-          (@walking_decode_action
-            (@walking_encode_action (walking_end_hom_step w0)))
-          (@walking_decode_action (succ (@walking_encode_action w0)))
-          (walking_end_hom_step
-            (@walking_decode_action (@walking_encode_action w0)))
-          (@eq_ap
-            Nat_grpd WalkingEndHom_grpd
-            walking_decode_action
-            (@walking_encode_action (walking_end_hom_step w0))
-            (succ (@walking_encode_action w0))
-            (@walking_encode_succ_view w0))
-          (@walking_decode_succ_view (@walking_encode_action w0)))
-        (@eq_ap
-          WalkingEndHom_grpd WalkingEndHom_grpd
-          (λ w1 : τ WalkingEndHom_grpd, walking_end_hom_step w1)
-          (@walking_decode_action (@walking_encode_action w0))
-          w0
-          ih))
-    w;
-
-symbol walking_encode_decode_roundtrip
+// power(0)=id and power(succ n)=loop o power(n).
+symbol walking_power
   (n : τ Nat_grpd)
-  : τ (@= Nat_grpd
-      (@walking_encode_action (@walking_decode_action n))
-      n)
+  : τ (Hom WalkingEnd_cat walking_base walking_base)
 ≔ @nat_elim
-    (λ n : τ Nat_grpd,
-      @= Nat_grpd
-        (@walking_encode_action (@walking_decode_action n))
-        n)
-    (@eq_trans
-      Nat_grpd
-      (@walking_encode_action (@walking_decode_action zero))
-      (@walking_encode_action walking_end_hom_id)
-      zero
-      (@eq_ap
-        WalkingEndHom_grpd Nat_grpd
-        walking_encode_action
-        (@walking_decode_action zero)
-        walking_end_hom_id
-        walking_decode_zero_view)
-      walking_encode_id_view)
-    (λ n0 : τ Nat_grpd,
-      λ ih : τ (@= Nat_grpd
-        (@walking_encode_action (@walking_decode_action n0))
-        n0),
-      @eq_trans
-        Nat_grpd
-        (@walking_encode_action (@walking_decode_action (succ n0)))
-        (succ (@walking_encode_action (@walking_decode_action n0)))
-        (succ n0)
-        (@eq_trans
-          Nat_grpd
-          (@walking_encode_action (@walking_decode_action (succ n0)))
-          (@walking_encode_action
-            (walking_end_hom_step (@walking_decode_action n0)))
-          (succ (@walking_encode_action (@walking_decode_action n0)))
-          (@eq_ap
-            WalkingEndHom_grpd Nat_grpd
-            walking_encode_action
-            (@walking_decode_action (succ n0))
-            (walking_end_hom_step (@walking_decode_action n0))
-            (@walking_decode_succ_view n0))
-          (@walking_encode_succ_view (@walking_decode_action n0)))
-        (@eq_ap
-          Nat_grpd Nat_grpd
-          (λ n1 : τ Nat_grpd, succ n1)
-          (@walking_encode_action (@walking_decode_action n0))
-          n0
-          ih))
+    (λ _ : τ Nat_grpd,
+      Obj (Hom_cat WalkingEnd_cat walking_base walking_base))
+    (@id WalkingEnd_cat walking_base)
+    (λ _ : τ Nat_grpd,
+      λ h : τ (Hom WalkingEnd_cat walking_base walking_base),
+      @comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop h)
     n;
 
-// Package the semantic hom equivalence through the active interfaces.
-symbol walking_hom_nat_by_inverse
-  : τ (@EquivByInverse
-      WalkingEndHom_grpd Nat_grpd
-      walking_encode_action walking_decode_action)
-≔ @Struct_sigma
-    (@Pi_grpd WalkingEndHom_grpd
-      (λ w : τ WalkingEndHom_grpd,
-        @= WalkingEndHom_grpd
-          (@walking_decode_action (@walking_encode_action w))
-          w))
-    (λ _ : τ (@Pi_grpd WalkingEndHom_grpd
-      (λ w : τ WalkingEndHom_grpd,
-        @= WalkingEndHom_grpd
-          (@walking_decode_action (@walking_encode_action w))
-          w)),
-      @Pi_grpd Nat_grpd
-        (λ n : τ Nat_grpd,
-          @= Nat_grpd
-            (@walking_encode_action (@walking_decode_action n))
-            n))
-    walking_decode_encode_roundtrip
-    walking_encode_decode_roundtrip;
+symbol walking_power_function
+  : τ (@Function_grpd
+      Nat_grpd
+      (Hom WalkingEnd_cat walking_base walking_base))
+≔ λ n : τ Nat_grpd, walking_power n;
 
-symbol walking_hom_nat_type_equiv
-  : τ (TypeEquiv
-      (Hom WalkingEnd_cat walking_base walking_base)
-      Nat_grpd)
-≔ @Struct_sigma
-    (@Function_grpd WalkingEndHom_grpd Nat_grpd)
-    (λ map : τ (@Function_grpd WalkingEndHom_grpd Nat_grpd),
-      @IsEquivMap WalkingEndHom_grpd Nat_grpd map)
-    walking_encode_action
-    (@is_equiv_map_by_inverse
-      WalkingEndHom_grpd Nat_grpd
-      walking_encode_action walking_decode_action
-      walking_hom_nat_by_inverse);
-
-symbol walking_hom_nat_omega_equiv_EQ1
-  : τ (@OmegaEquiv_EQ1
-      Grpd_cat
-      (Hom WalkingEnd_cat walking_base walking_base)
-      Nat_grpd)
-≔ @type_equiv_to_omega_EQ1
-    (Hom WalkingEnd_cat walking_base walking_base)
+// Postcomposition-by-loop after power.
+symbol walking_power_left_function
+  : τ (@Function_grpd
+      Nat_grpd
+      (Hom WalkingEnd_cat walking_base walking_base))
+≔ @comp_fapp0
+    Grpd_cat
     Nat_grpd
-    walking_hom_nat_type_equiv;
+    (Hom WalkingEnd_cat walking_base walking_base)
+    (Hom WalkingEnd_cat walking_base walking_base)
+    (@functor_object_function
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      walking_loop_postcomp_func)
+    walking_power_function;
+
+// Power after Nat successor.
+symbol walking_power_right_function
+  : τ (@Function_grpd
+      Nat_grpd
+      (Hom WalkingEnd_cat walking_base walking_base))
+≔ @comp_fapp0
+    Grpd_cat
+    Nat_grpd Nat_grpd
+    (Hom WalkingEnd_cat walking_base walking_base)
+    walking_power_function
+    nat_succ_function;
+
+// The pointwise power equation is reflexivity at the raw-composition form.
+symbol walking_power_step_point_path
+  (n : τ Nat_grpd)
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (@fapp0
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        walking_loop_postcomp_func
+        (walking_power n))
+      (walking_power (succ n)))
+≔ @eq_refl
+    (Hom WalkingEnd_cat walking_base walking_base)
+    (@comp_fapp0
+      WalkingEnd_cat walking_base walking_base walking_base
+      walking_loop (walking_power n));
+
+// Pointwise recursion gives equality of the two step functions.
+symbol walking_power_step_path
+  : τ (@=
+      (@Function_grpd
+        Nat_grpd
+        (Hom WalkingEnd_cat walking_base walking_base))
+      walking_power_left_function
+      walking_power_right_function)
+≔ @PiFunext
+    Nat_grpd
+    (λ _ : τ Nat_grpd,
+      Hom WalkingEnd_cat walking_base walking_base)
+    walking_power_left_function
+    walking_power_right_function
+    (λ n : τ Nat_grpd, @walking_power_step_point_path n);
+
+// Equality action plus Core inclusion lifts power to the directed hom-category.
+symbol walking_power_func
+  : τ (Functor
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base))
+≔ @fapp0
+    (Path_cat (@Function_grpd
+      Nat_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)))
+    (Functor_cat
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base))
+    (@path_lift_func
+      Nat_grpd
+      (Hom_cat WalkingEnd_cat walking_base walking_base))
+    walking_power_function;
+
+// Canonical directed spiral against the literal Nat successor functor.
+symbol walking_power_spiral_natsucc
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        walking_loop_postcomp_func
+        walking_power_func)
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        walking_power_func
+        NatSucc_func))
+≔ @fapp1_fapp0
+    (Path_cat (@Function_grpd
+      Nat_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)))
+    (Functor_cat
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base))
+    (@path_lift_func
+      Nat_grpd
+      (Hom_cat WalkingEnd_cat walking_base walking_base))
+    walking_power_left_function
+    walking_power_right_function
+    walking_power_step_path;
+
+// Code[loop] computes to NatSucc, so the canonical spiral already has the
+// literal contextual endpoint; no propositional endpoint whisker is needed.
+symbol walking_power_spiral
+  : τ (@walking_end_loop_coherence
+      walking_Code_catd
+      walking_based_rep_catd
+      walking_power_func)
+≔ walking_power_spiral_natsucc;
+
+// Canonical component before public endpoint adjustments.
+symbol walking_power_spiral_component
+  (n : τ Nat_grpd)
+≔ @tapp0_fapp0
+    (Path_cat Nat_grpd)
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (@walking_end_loop_lhs_func
+      walking_Code_catd walking_based_rep_catd walking_power_func)
+    (@walking_end_loop_rhs_func
+      walking_Code_catd walking_based_rep_catd walking_power_func)
+    n
+    walking_power_spiral;
+
+// Proof-time stable-postcomposition comparison at the spiral source.
+symbol walking_power_spiral_source_path
+  (n : τ Nat_grpd)
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@walking_end_loop_lhs_func
+          walking_Code_catd walking_based_rep_catd walking_power_func)
+        n)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n)))
+≔ @eq_refl
+    (Hom WalkingEnd_cat walking_base walking_base)
+    (@comp_fapp0
+      WalkingEnd_cat walking_base walking_base walking_base
+      walking_loop (walking_power n));
+
+// The runtime Code-loop beta evaluated at n as a typed equality witness.
+symbol walking_Code_loop_point_path
+  (n : τ Nat_grpd)
+  : τ (@= Nat_grpd
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        (@catd_transport_func
+          WalkingEnd_cat walking_Code_catd
+          walking_base walking_base walking_loop)
+        n)
+      (succ n))
+≔ @eq_ap
+    (Hom Cat_cat (Path_cat Nat_grpd) (Path_cat Nat_grpd))
+    Nat_grpd
+    (λ F : τ (Functor (Path_cat Nat_grpd) (Path_cat Nat_grpd)),
+      @fapp0 (Path_cat Nat_grpd) (Path_cat Nat_grpd) F n)
+    (@catd_transport_func
+      WalkingEnd_cat walking_Code_catd
+      walking_base walking_base walking_loop)
+    NatSucc_func
+    walking_Code_beta_loop;
+
+// Directed endpoint adjustments for the readable raw-composition component.
+symbol walking_power_spiral_source_adjust
+  (n : τ Nat_grpd)
+  : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n))
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@walking_end_loop_lhs_func
+          walking_Code_catd walking_based_rep_catd walking_power_func)
+        n))
+≔ @path_to_hom
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (@comp_fapp0
+      WalkingEnd_cat walking_base walking_base walking_base
+      walking_loop (walking_power n))
+    (@fapp0
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@walking_end_loop_lhs_func
+        walking_Code_catd walking_based_rep_catd walking_power_func)
+      n)
+    (@eq_sym
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@walking_end_loop_lhs_func
+          walking_Code_catd walking_based_rep_catd walking_power_func)
+        n)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n))
+      (@walking_power_spiral_source_path n));
+
+symbol walking_power_spiral_target_adjust
+  (n : τ Nat_grpd)
+  : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@walking_end_loop_rhs_func
+          walking_Code_catd walking_based_rep_catd walking_power_func)
+        n)
+      (walking_power (succ n)))
+≔ @fapp1_fapp0
+    (Path_cat Nat_grpd)
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    walking_power_func
+    (@fapp0
+      (Path_cat Nat_grpd)
+      (Path_cat Nat_grpd)
+      (@catd_transport_func
+        WalkingEnd_cat walking_Code_catd
+        walking_base walking_base walking_loop)
+      n)
+    (succ n)
+    (@walking_Code_loop_point_path n);
+
+// Readable directed component: loop o power(n) -> power(succ n).
+symbol walking_power_spiral_cell
+  (n : τ Nat_grpd)
+  : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n))
+      (walking_power (succ n)))
+≔ @comp_fapp0
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (@comp_fapp0
+      WalkingEnd_cat walking_base walking_base walking_base
+      walking_loop (walking_power n))
+    (@fapp0
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@walking_end_loop_rhs_func
+        walking_Code_catd walking_based_rep_catd walking_power_func)
+      n)
+    (walking_power (succ n))
+    (@walking_power_spiral_target_adjust n)
+    (@comp_fapp0
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n))
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@walking_end_loop_lhs_func
+          walking_Code_catd walking_based_rep_catd walking_power_func)
+        n)
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@walking_end_loop_rhs_func
+          walking_Code_catd walking_based_rep_catd walking_power_func)
+        n)
+      (@walking_power_spiral_component n)
+      (@walking_power_spiral_source_adjust n));

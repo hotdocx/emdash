@@ -8,12 +8,13 @@ Supersedes: none
 Side-Task-Ledger: #current-implementation-ledger
 Infinity-Codex-Origin: current-session-walking-endomorphism-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:e08b19e4-e4ef-41f3-bee3-87086450d411; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f7269-46dc-7942-8438-6110fb05cfdb
-Status: **REOPENED / IMPLEMENTATION-GOAL READY WITH EARLY G1/G2 OWNER GATES — the committed word-carrier presentation is rejected as the intended HIT; a parameterized contextual `Functord` eliminator supplies the selected whole-HIT/arrow-naturality interface without a separate Hom datatype or special 1-cell eliminator; the primary decoder target is now the existing directed representable `Rep_catd(base)`, giving an honest directed normalization cell before equality is requested; the selected HIT signature explicitly retains one-dimensionality evidence `IsNCat(cat_succ cat_zero,WalkingEnd)`, from which the hard equality is obtained afterward through `hom_to_path`; the selected minimal terminal ownership retains runtime `tapp0_fapp0`, demotes only terminal-source `fdapp1_int_cell` to proof-time comparison, keeps contextual base/loop beta as runtime computation, and adds no HIT-specific join; an append-only strict-Core-inclusion probe now constructs the exact internal `PathInt`/Nat spiral, its identity components, and its iterable higher action with zero probe-local unification rules; actual owner-position migration, warning accounting, and promotion remain G2 implementation work**
+Status: **REOPENED / G3 OPAQUE OWNER COMPLETE AND G4 ACTIVE — `WalkingEnd_cat`, `walking_base`, and `walking_loop` are opaque constants; the generated-word Hom datatype and every WalkingEnd-specific object/Hom/identity/composition rule are removed; explicit one-dimensional evidence, its homwise specializations, and the contextual `Functord` eliminator are active; the contextual base/loop betas are the only HIT-specific runtime rules; derived sections compute at `piapp0`/`piapp1`, while the ordinary recursor base is propositionally joined across the retained terminal-component critical pair and its ordinary loop observer remains proof-time compared with the canonical section observer; the separate `BNat` category is consistency evidence rather than definitional Hom; the active kernel remains `984/159`, the rebuilt walking module measures `989/159`, both strict LHS audits are zero, and bounded kernel/diagnostic/reviewer checks pass; G4 concrete `Code`, representable decoder data, powers, and directed spiral are next**
 Review baseline: `394cf3bc369ddcdb4da74aaf5fdc0557de515532`
 Implementation baseline: `8fd9bdfac53b018b77f20ecec24f85efe44febc9`
 HIT-computation correction baseline: `b5037078dfaafc665adb2d996bec38596e6914c9`
 Corrective-review baseline: `9858a420fd6f94e920415a8728ffd9d6bf8d18a5`
 Implementation-goal starting baseline: `92daacc5a90ec9b7b457cfa310c0bb51e1531237`
+Current implementation-goal baseline and review provenance: `82d0e27fd75573309a9c7e26e621706c66d24e64`
 Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md`, especially deferred task `EVOGJ-H2-READINESS`
 Current implementation owners: reusable Nat prerequisites in
 `emdash3_2_nat_arithmetic.lp`; walking HIT/model/comparison in
@@ -47,6 +48,212 @@ probes. The corrective baseline `9858a42...` was also clean and
 historical provenance only and never authorize a reset or rollback. The
 authoritative correction plan is recorded next; the former completion record
 is retained afterward only as rejected-decision evidence.
+
+## 2026-07-19 Active G1–G3 Promotion Record — Current Override
+
+This section is the current implementation ledger for the first promoted
+slice. It supersedes later checkpoint sentences saying that the active kernel
+is unchanged or that owner-position/warning work remains wholly deferred.
+
+The goal resumed from clean commit
+`82d0e27fd75573309a9c7e26e621706c66d24e64`. Bounded `make check` and
+`make examples` passed before edits. The initial kernel warning inventory was
+`971/157`; the legacy walking module was `977/157`; the strict LHS audit had
+zero unreviewed clauses with 45 annotated slots across 27 clauses.
+
+### G1 promoted and atomic remainder
+
+The generic terminal-source runtime rule is now the proof-time equation
+
+```text
+fdapp1_int_cell(s,p,*) ≡ fapp1_fapp0(s,p).
+```
+
+`terminal_fdapp1_int_cell_eq` exercises that equation by typed reflexivity,
+and `piapp1_const_fapp0_eq` supplies the derived constant-section ordinary
+view. Permanent diagnostics retain negative conversion controls: neither
+comparison is described as runtime beta. With only this demotion active, the
+kernel inventory was `969/157` and the legacy walking module was `975/157`.
+
+The exact selected hybrid, including generic contextual base and loop betas,
+passed a fresh full owner-position copy quietly at
+`logs/probes/wehit_g1_selected_hybrid_owner_full-20260719-131300.log` and with
+warnings at
+`logs/probes/wehit_g1_selected_hybrid_owner_full-20260719-131320.log`; that
+complete probe measured `972/157` and the strict audit remained zero. The
+contextual betas are not yet active. Promoting them beside the legacy walking
+module fails subject reduction because its current `walking_loop` unfolds to
+the generated-word constructor. They must therefore land atomically with the
+opaque `WalkingEnd_cat`/`walking_loop` owner migration in G3. This is a
+dependency ordering result, not a rejection of the contextual interface and
+not permission to add a word-specific bridge.
+
+### G2 generic Path/Core slice promoted
+
+The following permanent owners are active:
+
+```text
+Path_cat_func                 : Grpd_cat -> Cat_cat
+path_map_func(f)              : Path_cat(A) -> Path_cat(B)
+path_map_transf(h)            : path_map_func(f) => path_map_func(g)
+core_incl_naturality(F)       : F o CoreIncl_C => CoreIncl_D o PathMap(F_0)
+core_incl_naturality_whiskered(F,G)
+path_lift_func                : Path(Function(A,Obj(C))) -> (Path(A) -> C)
+NatSucc_func                  : Path_cat(Nat) -> Path_cat(Nat).
+```
+
+The named projection ladder supplies object action, equality action through
+`eq_ap`, point components through `PiHapply`, capped off-diagonal cells, and
+the full iterable next-hom action. `path_lift_func` remains the transparent
+semantic composite of the first Path action with postcomposition by
+`Core_incl_func`; no primitive PathLift head was introduced. Permanent
+check-local power/spiral definitions exercise exact endpoints, identity
+components, and the next iterable `tapp1_func` rung without adding a public
+parallel recursion interface.
+
+The final full owner-position probe passes quietly at
+`logs/probes/wehit_g2_path_internal_owner_full-20260719-133310.log` and with
+warnings at
+`logs/probes/wehit_g2_path_internal_owner_full-20260719-133312.log`. The
+active kernel reproduces its `984/159` inventory and has no new unification
+rule. Relative to the post-G1 `969/157` kernel, the selected runtime owners add
+15 unjoinable reports: one from capped application of groupoid-function
+composition, two from the generic Cat-valued postcomposition object
+projection, and twelve from the stable strict Core-inclusion consumer. The
+rigid `Path_cat` object-action endpoints exchange two avoidable Sigma
+projection critical pairs for two measured replaceable-variable advisories;
+they are annotated as actual overlap guards. The strict audit remains at zero
+unreviewed clauses.
+
+The legacy walking module currently measures `992/159`: its six old
+constructor-composition reports remain, and the strict Core consumer adds one
+temporary overlap at each legacy `Obj(WalkingEnd_cat)` and `Obj(BNat_cat)`
+reduction. Those two cross-module reports are tied to the rejected concrete
+object presentations and must be remeasured after G3/G6 migration; they do not
+justify a walking-specific join.
+
+Two alternatives were rejected by owner evidence. Removing the stable Core
+consumer and expressing whiskering through generic precomposition reaches two
+separate stable post/precomposition endpoint comparisons that the existing
+unification rules do not compose; the failure is recorded at
+`logs/probes/wehit_g2_path_internal_no_stable-20260719-133934.log`. Making the
+outer path-category source a rigid LHS guard changes neither warning family
+nor count, so that slot remains inferred. A primitive PathLift or a new local
+unifier is therefore not selected.
+
+The capped rule `comp_Grpd(g,f)[x] -> g(f(x))` does not install the rejected
+broad whole-term fold to `grpd_comp_function`. With the repository's
+`eta_equality` flag, however, conversion can observe the same lambda at the
+whole-function type. The pre-existing negative conversion assertion exposed
+this consequence during active integration and has been changed to a positive
+eta-observation diagnostic. Any statement that the whole categorical
+composition is conversion-distinct from its lambda is superseded; the
+syntactic runtime owner remains categorical composition.
+
+The remaining G2 formation probe is
+`tmp/probes/wehit_g2_rep_dimension_formation.lp`. It passes quietly at
+`logs/probes/wehit_g2_rep_dimension_formation-20260719-140025.log` and is
+warning-neutral at the active `984/159` inventory in
+`logs/probes/wehit_g2_rep_dimension_formation-20260719-140034.log`. With only
+opaque stand-in constructors, it verifies all of the following exact shapes:
+
+```text
+Rep_catd(base)[x] = Hom_cat(WalkingEnd,base,x)
+
+fdapp1_int_cell(decode,p,n) :
+  p o decode[base](n) -> decode[x](Code[p](n))
+
+walking_end_is_one_cat(x,y)
+  : IsDiscreteCat(Hom_cat(WalkingEnd,x,y))
+
+hom_to_path(walking_end_is_one_cat(base,x),alpha) : p = q.
+```
+
+The negative formation control confirms that the same evidence does not
+inhabit `IsDiscreteCat(WalkingEnd)`. The probe declares no object, hom,
+identity, composition, word-carrier, or decoder computation and therefore
+does not pre-implement G3/G4.
+
+The completed level-by-level internalization audit is:
+
+| Surface | Active strength | Deliberate boundary |
+| --- | --- | --- |
+| `Function_grpd(A,B)` | transparent constant-family `Pi_grpd`; Pi path infrastructure supplies equality | not a directed transformation classifier |
+| `Path_cat(A)` | injective category former; object, hom, and identity compute; generic composition remains owner and hom iteration is recursive | no separate path-composition calculus |
+| `Path_sym_func(A)` | fixed-`A` functor with object/reflexivity projections; generic functoriality supplies reversal composition and all typed higher actions | no collapse of `Path_cat(A)^op` with `Path_cat(A)` |
+| `Core_cat(C)` | valid transparent object-level alias `Path_cat(Obj(C))` | no `Core : Cat_cat -> Cat_cat` and no `Core_catd` |
+| `Core_incl_func(C)` | fixed-category functor with object, reflexivity, shaped-reflexivity, generic composition, and exposed hom action | arrow-to-path inverse requires explicit `IsDiscreteCat(C)` evidence |
+| `Path_cat_func` | complete positive internal functor through object, function, function-equality point/capped/full action, and iterable next hom | does not reflect directed cells into equality |
+| fixed functor `F : C -> D` | object function `F_0`, `path_map_func(F_0)`, strict Core-inclusion naturality, and stable whiskering | no action on an arbitrary directed transfor between `F` and `G` as object equality |
+
+This completed the G2 exit gate and licensed the atomic G3 opaque-owner and
+contextual-beta migration recorded next. No further generic Core
+internalization was a prerequisite.
+
+### G3 opaque owner and contextual eliminator promoted
+
+`emdash3_2_walking_end_hit.lp` has been atomically rebuilt around opaque
+constants for `WalkingEnd_cat`, `walking_base`, and `walking_loop`, together
+with the explicit signature datum
+
+```text
+walking_end_is_one_cat : IsNCat(1,WalkingEnd_cat).
+```
+
+The generated `walking_end_hom` datatype, `WalkingEndHom_grpd`, Hom induction,
+and all WalkingEnd-specific `Obj`, `Hom`, identity, and composition rules are
+gone. Permanent diagnostics separately reject the former object and Hom
+normal forms and reject identity/loop and loop-composition collapses. The
+transparent `walking_end_hom_discrete`,
+`walking_end_based_hom_discrete`, and
+`walking_end_based_cell_to_path` interfaces expose truncation only through the
+explicit dimension witness; a negative control still rejects
+`IsDiscreteCat(WalkingEnd_cat)`.
+
+The selected contextual interface is now active:
+
+```text
+walking_end_ind_funcd(R,D,u,sigma) : Functord(R,D)
+
+Fibre_func(walking_end_ind_funcd(...),base)          ↪ u
+fdapp1_int_cell(walking_end_ind_funcd(...),loop,r)  ↪ sigma[r].
+```
+
+These are the only two HIT-specific runtime rules. The terminal section
+specialization and constant recursor are transparent definitions. Section
+base and loop observations compute at `piapp0` and `piapp1`. At the ordinary
+constant-recursion object observer, the retained generic terminal-component
+rule produces the bounded nonconfluent branch forecast by G1, so
+`fapp0(rec,base)` is deliberately **not** a new runtime beta. Two typed branch
+theorems separately exercise the contextual and generic projections;
+`walking_end_rec_beta_base` composes them propositionally after terminal
+evaluation. The canonical recursor loop theorem stays at the section observer,
+and `walking_end_rec_loop_ordinary_comparison` exposes the existing proof-time
+`piapp1`/`fapp1` comparison. No specialized recursor rule or new unification
+rule was added. The inferred declaration type of the transparent
+`walking_end_rec_beta_loop` alias preserves the canonical section classifier
+across this measured terminal boundary; its exact readable formula is checked
+in the reviewer surface.
+
+The retained `BNat_cat` is now explicitly a separate semantic consistency
+model. Its Nat-monoid operations and one-dimensionality evidence remain
+concrete, while `walking_bnat_model_func` interprets the opaque base and loop
+through the derived recursor. No `BNat` carrier is used to define
+`Hom(WalkingEnd_cat,base,base)`.
+
+The full G3 prototype passes quietly at
+`logs/probes/wehit_g3_opaque_module-20260719-141741.log`. The promoted walking
+module passes warning-enabled checking at
+`logs/probes/emdash3_2_walking_end_hit-20260719-142226.log` with `989/159`:
+one expected terminal/contextual base overlap, one retained `BNat`/strict-Core
+object overlap, and the three retained `BNat` composition/action overlaps.
+This is three fewer critical pairs than the rejected `992/159` legacy module.
+The module and kernel strict LHS audits both report zero unreviewed clauses.
+Bounded `make check`, complete diagnostics, the rewritten
+`examples/walking_endomorphism_hit.lp`, and full `make examples` pass. The
+refreshed catalog has 1,996 checks across 73 areas with zero unclassified
+checks. Health and CI are deferred to the next synchronized gate after the
+current G4 inner slice.
 
 ## 2026-07-18 Contextual `Functord` And Directed-First Decision — Current Override
 
@@ -1300,13 +1507,13 @@ repeated-blocker policy is met.
 
 | Task | Status at goal start | Required result |
 | --- | --- | --- |
-| `WEHIT-G1-TERMINAL-OWNER` | exact hybrid not yet measured | retain runtime `tapp0`; demote only generic terminal `fdapp1`; add contextual beta and no HIT-specific bridge |
-| `WEHIT-G2-PATH-DIMENSION` | append-only strict Core-inclusion probe passes with exact endpoints, identity components, iterable higher action, and zero local unifiers; owner-position/warning promotion deferred | named `PathInt` ladder, promoted or revised strict fixed-functor Core-inclusion owner and stable whiskering with identity-transfor reading, directed `Rep_catd(base)` endpoint probe, explicit OneCat signature contract, and `hom_to_path` specialization |
-| `WEHIT-G2-GROUPOID-INTERNALIZATION-AUDIT` | partial external/stable owners exist | classify `Path_cat`, object-level `Core_cat`, fixed-functor `CoreOnFunctor`, `Core_incl_func`, `Path_sym_func`, and function composition at every higher projection; internalize only complete actions, route arrow-to-path collapse through explicit groupoidality evidence, and retain negative controls against a global directed `Core` without transformation action |
+| `WEHIT-G1-TERMINAL-OWNER` | terminal `fdapp1` demotion and typed derived views active at the generic owner; exact hybrid full-copy probe passes; contextual betas held for atomic G3 because the reducible legacy loop causes subject-reduction failure | land the already-probed contextual base/loop betas with opaque WalkingEnd and retain no HIT-specific bridge |
+| `WEHIT-G2-PATH-DIMENSION` | complete: named Path/Core/NatSucc/spiral owners active at `984/159`; warning-neutral formation probe validates the exact directed `Rep_catd(base)` cell, global OneCat signature shape, `hom_to_path` specialization, and non-discreteness control | land the already-validated opaque signature declarations atomically in G3 |
+| `WEHIT-G2-GROUPOID-INTERNALIZATION-AUDIT` | complete: all requested surfaces classified level by level; capped composition eta consequence recorded; fixed-functor Core action retained; no global directed Core/Core_catd or directed-cell reflection added | retain these boundaries during G3–G7 |
 | `WEHIT-FUTURE-COREINCL-TRANSF` | explicitly deferred possible redesign; mathematically natural and potentially architecturally preferable | after the strict MVP is complete, optionally probe recursive `Sk⁼(n,A)` with `Core_cat` at zero, simultaneous `Sk⁼` functor action and recursive inclusion, `Cat₁⁼ ≔ Sk⁼(cat_succ(cat_zero),Cat_cat)`, `Core₁`, primitive computational `CoreInclTransf`, genuine `κₗ`, and the non-strict spiral `κᵣ ∘ᵥ PathLift(h) ∘ᵥ κₗ`; do not conflate it with an unavailable universal `IsNCat(1)` truncation or make it a current-goal prerequisite |
 | `WEHIT-G2-DIMENSION-DERIVABILITY` | nonblocking future audit | determine whether stronger general HIT induction derives OneCat evidence and can retire the explicit truncation constructor; never claim this during the MVP without a proof |
-| `WEHIT-G3-OPAQUE-OWNER` | contextual interface demonstrated | remove word Hom; promote opaque constructors, one-dimensional evidence, and contextual eliminator |
-| `WEHIT-G4-CODE-REP-POWER` | generic exact spiral mechanism demonstrated append-only without endpoint shortcuts; WalkingEnd integration remains open | concrete transparent Code, generic directed representable, power functor, and exact directed spiral through the selected G2 internal owners |
+| `WEHIT-G3-OPAQUE-OWNER` | complete: generated-word Hom and all WalkingEnd category-operation rules removed; opaque constructors, explicit dimension evidence, contextual eliminator, derived section/recursor views, four opacity controls, and separate BNat model active; module `989/159`, zero unreviewed LHS clauses | preserve the two-rule HIT runtime boundary during G4–G7 |
+| `WEHIT-G4-CODE-REP-POWER` | active: generic exact spiral mechanism and directed representable formation already demonstrated without endpoint shortcuts; opaque WalkingEnd integration now unblocked | concrete transparent Code, generic directed representable, power functor, and exact directed spiral through the selected G2 internal owners |
 | `WEHIT-G5-DIRECTED-AND-EQUALITY-ROUNDTRIPS` | open in selected design | directed normalization from decoder `fdapp1`; hard equality via explicit hom discreteness; easy inverse from Nat induction |
 | `WEHIT-G6-PACKAGING` | old implementation rejected | rebuild BNat, carrier/structured Hom comparisons, sethood, OneCat package, and negative consequences at their distinct strengths |
 | `WEHIT-G7-MIGRATION` | open | checks, examples, docs, catalog, health contain no rejected architecture |

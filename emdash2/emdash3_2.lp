@@ -4178,6 +4178,12 @@ unif_rule
   ≡ @grpd_comp_function $A $B $C $g $f
   ↪ [ tt ≡ tt ];
 
+// Capped evaluation of categorical function composition. No whole-term fold
+// to grpd_comp_function is installed; application computes pointwise. Under
+// eta_equality, conversion can consequently observe the same lambda function.
+rule @comp_fapp0 Grpd_cat _ _ _ $g $f $x
+  ↪ $g ($f $x);
+
 /*
   Named groupoid-universe identity view.
 
@@ -5820,6 +5826,106 @@ rule τ (Obj Cat_cat)  ↪ Cat;
 
 // Directed-universe beta: a hom in `Cat_cat` is an ordinary functor category.
 rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y;
+
+/*
+  Internal path-category action.
+
+  Path_cat_func[A] = Path_cat(A), and its iterated ordinary functor action
+  supplies functions, equalities between functions, and every higher equality
+  action without reflecting a directed cell into equality.
+*/
+injective symbol Path_cat_func
+  : τ (Functor Grpd_cat Cat_cat);
+
+// Object projection: Path_cat_func[A] ↪ Path_cat(A).
+rule @fapp0 Grpd_cat Cat_cat Path_cat_func $A
+  ↪ Path_cat $A;
+
+// Readable first action: a function acts by equality congruence.
+symbol path_map_func
+  [A B : Grpd]
+  (f : τ (@Function_grpd A B))
+  : τ (Functor (Path_cat A) (Path_cat B))
+≔ @fapp1_fapp0
+    Grpd_cat Cat_cat Path_cat_func
+    A B f;
+
+// Object action of Path_map(f).
+// lhs-audit: keep 1,2 -- the rigid Path_cat endpoints exclude product
+// projection overlaps while retaining the intended internal-action owner.
+rule @fapp0
+      (Path_cat $A) (Path_cat $B)
+      (@fapp1_fapp0
+        Grpd_cat Cat_cat Path_cat_func
+        _ _ $f)
+      $x
+  ↪ $f $x;
+
+// Full next-hom action of Path_map(f), retaining an iterable path functor.
+rule @fapp1_func
+      _ _
+      (@fapp1_fapp0
+        Grpd_cat Cat_cat Path_cat_func
+        $A $B $f)
+      $x $y
+  ↪ @fapp1_fapp0
+      Grpd_cat Cat_cat Path_cat_func
+      (@= $A $x $y)
+      (@= $B ($f $x) ($f $y))
+      (λ p : τ (@= $A $x $y),
+        @eq_ap $A $B $f $x $y p);
+
+// Capped equality action of Path_map(f).
+// lhs-audit: keep 1,2 -- Path_cat guards the generic identity-action overlap.
+rule @fapp1_fapp0
+      (Path_cat $A) (Path_cat $B)
+      (@fapp1_fapp0
+        Grpd_cat Cat_cat Path_cat_func
+        _ _ $f)
+      $x $y $p
+  ↪ @eq_ap $A $B $f $x $y $p;
+
+// Canonical off-diagonal equality action for h : f = g.
+symbol path_map_transf_cell
+  [A B : Grpd]
+  [f g : τ (@Function_grpd A B)]
+  (h : τ (@= (@Function_grpd A B) f g))
+  [x y : τ A]
+  (p : τ (@= A x y))
+  : τ (@= B (f x) (g y))
+≔ @comp_fapp0
+    (Path_cat B)
+    (f x) (g x) (g y)
+    (@eq_ap A B g x y p)
+    (@PiHapply A (λ _ : τ A, B) f g h x);
+
+// Object map of a fixed ordinary functor, exposed as a groupoid function.
+symbol functor_object_function
+  [C D : Cat]
+  (F : τ (Functor C D))
+  : τ (@Function_grpd (Obj C) (Obj D))
+≔ λ x : τ (Obj C), @fapp0 C D F x;
+
+/*
+  Strict Core-inclusion naturality along a fixed ordinary functor:
+
+    F o CoreIncl(C) ↪ CoreIncl(D) o Path_map(F_0).
+
+  This is a generic Core-inclusion owner, not a global directed Core functor.
+*/
+rule @comp_fapp0
+    Cat_cat
+    _ $C $D
+    $F
+    (Core_incl_func $C)
+  ↪ @comp_fapp0
+    Cat_cat
+    (Path_cat (Obj $C)) (Path_cat (Obj $D)) $D
+    (Core_incl_func $D)
+    (@fapp1_fapp0
+      Grpd_cat Cat_cat Path_cat_func
+      (Obj $C) (Obj $D)
+      (@functor_object_function $C $D $F));
 
 /*
   Universe-category object and hom computations.
@@ -8662,6 +8768,45 @@ rule @fapp1_fapp0 $B Cat_cat (@hom_ $A $B $F $W) $X $Y $f
 rule fapp0 (@hom_postcomp_func $A $B $F $W $X $Y $f) $g
   ↪ @hom_postcomp_fapp0 $A $B $F $W $X $Y $f $g;
 
+// Generic object projection for Cat-valued postcomposition:
+// hom_postcomp_E(p,G)[w] ↪ E[p](G[w]).
+rule @fapp0
+      _ _
+      (@hom_postcomp_fapp0
+        Cat_cat $B $E $W $X $Y $p $G)
+      $w
+  ↪ @fapp0
+      (@fapp0 $B Cat_cat $E $X)
+      (@fapp0 $B Cat_cat $E $Y)
+      (@fapp1_fapp0 $B Cat_cat $E $X $Y $p)
+      (@fapp0 $W (@fapp0 $B Cat_cat $E $X) $G $w);
+
+/*
+  Stable consumer of strict Core-inclusion naturality. The inner functor stays
+  under the established Cat-valued postcomposition owner, while generic
+  Path_cat_func functoriality accumulates the two Path maps.
+*/
+rule @comp_fapp0
+      Cat_cat
+      _ $C $D
+      $F
+      (@hom_postcomp_fapp0
+        Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+        (Path_cat $A) (Path_cat (Obj $C)) $C
+        (Core_incl_func $C)
+        $G)
+  ↪ @hom_postcomp_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Path_cat $A) (Path_cat (Obj $D)) $D
+      (Core_incl_func $D)
+      (@comp_fapp0
+        Cat_cat
+        (Path_cat $A) (Path_cat (Obj $C)) (Path_cat (Obj $D))
+        (@path_map_func
+          (Obj $C) (Obj $D)
+          (@functor_object_function $C $D $F))
+        $G);
+
 // Hom-action functoriality for postcomposition. These joins prevent the
 // stable postcomposition owner from hiding the functoriality already present
 // in `hom_(F,W)`.
@@ -10825,6 +10970,48 @@ rule @Transf_cat $X (Product_cat $A $B) $F $G
   ↪ Product_cat
       (@Transf_cat $X $A (sigma_Fst $F) (sigma_Fst $G))
       (@Transf_cat $X $B (sigma_Snd $F) (sigma_Snd $G));
+
+// Readable second Path action: a function equality induces a path-valued
+// transfor through the next ordinary action of Path_cat_func.
+symbol path_map_transf
+  [A B : Grpd]
+  [f g : τ (@Function_grpd A B)]
+  (h : τ (@= (@Function_grpd A B) f g))
+  : τ (Transf
+      (@path_map_func A B f)
+      (@path_map_func A B g))
+≔ @fapp1_fapp0
+    (Path_cat (@Function_grpd A B))
+    (Functor_cat (Path_cat A) (Path_cat B))
+    (@fapp1_func
+      Grpd_cat Cat_cat Path_cat_func A B)
+    f g h;
+
+// Structured reading of strict Core-inclusion naturality. Its source reduces
+// to its target, so the comparison is the ordinary identity transfor.
+symbol core_incl_naturality
+  [C D : Cat]
+  (F : τ (Functor C D))
+  : τ (@Transf
+      (Core_cat C)
+      D
+      (@comp_cat_fapp0
+        (Core_cat C) C D
+        F (Core_incl_func C))
+      (@comp_cat_fapp0
+        (Core_cat C) (Core_cat D) D
+        (Core_incl_func D)
+        (@path_map_func
+          (Obj C) (Obj D)
+          (@functor_object_function C D F))))
+≔ @id
+    (Functor_cat (Core_cat C) D)
+    (@comp_cat_fapp0
+      (Core_cat C) (Core_cat D) D
+      (Core_incl_func D)
+      (@path_map_func
+        (Obj C) (Obj D)
+        (@functor_object_function C D F)));
 
 /*
   Cat-valued transfors and displayed functors are proof-time-comparable
@@ -13141,6 +13328,50 @@ symbol tapp1_func : Π [A B : Cat], Π [F G : τ (Functor A B)],
 rule fapp0 (@tapp1_func $A $B $F $G $X $Y $ϵ) $f
   ↪ @tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f;
 
+// Point component of Path_cat_func's second action.
+rule @tapp0_fapp0
+      _ _ _ _
+      $x
+      (@fapp1_fapp0
+        _ (Functor_cat (Path_cat $A) (Path_cat $B))
+        (@fapp1_func
+          Grpd_cat Cat_cat Path_cat_func $A $B)
+        $f $g $h)
+  ↪ @PiHapply
+      $A (λ _ : τ $A, $B) $f $g $h $x;
+
+// Full off-diagonal action of the induced Path transfor remains iterable.
+rule @tapp1_func
+      _ _ _ _
+      $x $y
+      (@fapp1_fapp0
+        (Path_cat (@Pi_grpd $A (λ _ : τ $A, $B)))
+        (Functor_cat (Path_cat $A) (Path_cat $B))
+        (@fapp1_func
+          Grpd_cat Cat_cat Path_cat_func $A $B)
+        $f $g $h)
+  ↪ @fapp1_fapp0
+      Grpd_cat Cat_cat Path_cat_func
+      (@= $A $x $y)
+      (@= $B ($f $x) ($g $y))
+      (λ p : τ (@= $A $x $y),
+        @path_map_transf_cell
+          $A $B $f $g $h $x $y p);
+
+// Capped off-diagonal action of the induced Path transfor.
+rule @tapp1_fapp0
+      _ _ _ _
+      $x $y
+      (@fapp1_fapp0
+        (Path_cat (@Pi_grpd $A (λ _ : τ $A, $B)))
+        (Functor_cat (Path_cat $A) (Path_cat $B))
+        (@fapp1_func
+          Grpd_cat Cat_cat Path_cat_func $A $B)
+        $f $g $h)
+      $p
+  ↪ @path_map_transf_cell
+      $A $B $f $g $h $x $y $p;
+
 // The higher action of internalized precomposition is the two-endpoint Hom
 // action on the fixed represented arrow and the varying arrow of F.
 // lhs-audit: keep 3,4 -- required subject-reduction endpoints of the Catd-valued hom component.
@@ -13431,6 +13662,28 @@ symbol comp_cat_cov_func [X Y Z : Cat]
     Z
     G;
 
+/*
+  Internal lift of an object function A -> Obj(C) to a functor
+  Path_cat(A) -> C. This is semantic postcomposition of Path_cat_func's first
+  action by Core_incl_func(C); no primitive PathLift head is introduced.
+*/
+symbol path_lift_func
+  [A : Grpd]
+  [C : Cat]
+  : τ (Functor
+      (Path_cat (@Function_grpd A (Obj C)))
+      (Functor_cat (Path_cat A) C))
+≔ @comp_cat_fapp0
+    (Path_cat (@Function_grpd A (Obj C)))
+    (Functor_cat (Path_cat A) (Core_cat C))
+    (Functor_cat (Path_cat A) C)
+    (@comp_cat_cov_func
+      (Path_cat A) (Core_cat C) C
+      (Core_incl_func C))
+    (@fapp1_func
+      Grpd_cat Cat_cat Path_cat_func
+      A (Obj C));
+
 // Postcomposition packaged as a functor in the postcomposing functor.
 //
 // Surface/formula:
@@ -13464,6 +13717,46 @@ symbol comp_cat_con_func [X Y Z : Cat]
     X
     Y
     F;
+
+// Whiskered strict Core-inclusion naturality at the stable postcomposition
+// owner. Its endpoints normalize to the same functor, hence identity.
+symbol core_incl_naturality_whiskered
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (G : τ (Functor (Path_cat A) (Core_cat C)))
+  : τ (@Transf
+      (Path_cat A)
+      D
+      (@comp_cat_fapp0
+        (Path_cat A) C D
+        F
+        (@hom_postcomp_fapp0
+          Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+          (Path_cat A) (Path_cat (Obj C)) C
+          (Core_incl_func C) G))
+      (@hom_postcomp_fapp0
+        Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+        (Path_cat A) (Path_cat (Obj D)) D
+        (Core_incl_func D)
+        (@comp_cat_fapp0
+          (Path_cat A) (Path_cat (Obj C)) (Path_cat (Obj D))
+          (@path_map_func
+            (Obj C) (Obj D)
+            (@functor_object_function C D F))
+          G)))
+≔ @id
+    (Functor_cat (Path_cat A) D)
+    (@hom_postcomp_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Path_cat A) (Path_cat (Obj D)) D
+      (Core_incl_func D)
+      (@comp_cat_fapp0
+        (Path_cat A) (Path_cat (Obj C)) (Path_cat (Obj D))
+        (@path_map_func
+          (Obj C) (Obj D)
+          (@functor_object_function C D F))
+        G));
 
 // Precomposition packaged as a functor in the precomposing functor.
 //
@@ -17877,13 +18170,58 @@ with @tdapp1_int_cell
 
 // 16e. Strict/cartesian and terminal-source specializations
 
-// Terminal-source displayed laxity is ordinary functor arrow action.
+// Proof-time comparison only: terminal-source displayed laxity agrees with
+// ordinary functor arrow action. Neither side is selected as a runtime fold.
 //
 // Surface/formula:
-//   fdapp1_int_cell(s,p,*) = s[p].
-rule @fdapp1_int_cell
-      $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A) $s $x $y $p Terminal_obj
-  ↪ @fapp1_fapp0 $K $A $s $x $y $p;
+//   fdapp1_int_cell(s,p,*) ≡ s[p].
+unif_rule
+  @fdapp1_int_cell
+    $K (@Const_catd $K Terminal_cat) (@Const_catd $K $A)
+    $s $x $y $p Terminal_obj
+  ≡ @fapp1_fapp0 $K $A $s $x $y $p
+  ↪ [ tt ≡ tt ];
+
+// Transparent theorem exposing the terminal-source proof-time comparison.
+// Its reflexive body exercises the unification rule; this is not runtime beta.
+symbol terminal_fdapp1_int_cell_eq
+  [K A : Cat]
+  (s : τ (Functord
+      (@Const_catd K Terminal_cat)
+      (@Const_catd K A)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (@=
+      (Hom A
+        (@fapp0 K A s x)
+        (@fapp0 K A s y))
+      (@fdapp1_int_cell
+        K
+        (@Const_catd K Terminal_cat)
+        (@Const_catd K A)
+        s x y p Terminal_obj)
+      (@fapp1_fapp0 K A s x y p))
+≔ @eq_refl
+    (Hom A
+      (@fapp0 K A s x)
+      (@fapp0 K A s y))
+    (@fapp1_fapp0 K A s x y p);
+
+// Constant-section arrow action agrees propositionally with ordinary functor
+// action. The section projection computes to `fdapp1_int_cell`; the preceding
+// proof-time comparison supplies the final ordinary view.
+symbol piapp1_const_fapp0_eq
+  [K A : Cat]
+  (s : τ (Obj (Pi_cat (@Const_catd K A))))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  : τ (@=
+      (Hom A
+        (@fapp0 K A s x)
+        (@fapp0 K A s y))
+      (@piapp1_fapp0 K (@Const_catd K A) s x y p)
+      (@fapp1_fapp0 K A s x y p))
+≔ @terminal_fdapp1_int_cell_eq K A s x y p;
 
 // Representable precomposition is strict/cartesian: its displayed laxity
 // component is the identity at the composite arrow. The rule keys on the

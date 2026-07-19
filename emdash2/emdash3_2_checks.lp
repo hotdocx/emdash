@@ -3855,7 +3855,10 @@ assert [A : Grpd] ⊢
       (@id Grpd_cat A)
       (@grpd_id_function A));
 
-assertnot [A B C : Grpd]
+// G2 adds only capped application, not a whole-term composition rewrite.
+// With eta_equality enabled, that pointwise computation is nevertheless
+// observable as conversion with the corresponding lambda.
+assert [A B C : Grpd]
   (f : τ A → τ B)
   (g : τ B → τ C) ⊢
   @comp_fapp0 Grpd_cat A B C g f
@@ -17862,6 +17865,40 @@ assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
       (fapp0 (@fapp1_fapp0 K Cat_cat E x y p) u))
     ≡ @fdapp1_int_cell K E D FF x y p u;
 
+// Terminal-source displayed laxity now compares with ordinary action only at
+// proof time; the transparent theorem exercises the typed unification rule.
+assert [K A : Cat]
+  (s : τ (Functord
+      (@Const_catd K Terminal_cat)
+      (@Const_catd K A)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @terminal_fdapp1_int_cell_eq K A s x y p
+  : τ (@=
+      (Hom A
+        (@fapp0 K A s x)
+        (@fapp0 K A s y))
+      (@fdapp1_int_cell
+        K
+        (@Const_catd K Terminal_cat)
+        (@Const_catd K A)
+        s x y p Terminal_obj)
+      (@fapp1_fapp0 K A s x y p));
+
+// The comparison deliberately does not select a runtime normal form.
+assertnot [K A : Cat]
+  (s : τ (Functord
+      (@Const_catd K Terminal_cat)
+      (@Const_catd K A)))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @fdapp1_int_cell
+      K
+      (@Const_catd K Terminal_cat)
+      (@Const_catd K A)
+      s x y p Terminal_obj
+  ≡ @fapp1_fapp0 K A s x y p;
+
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))
   (x : τ (Obj K))
   (u : τ (Obj (Fibre_cat E x))) ⊢
@@ -19154,7 +19191,312 @@ assert [A B E I : Cat]
       a b
       cross;
 
+// catalog-area: Internal Path action and strict Core-inclusion naturality
+// Path_cat_func inherits the generic identity and composition owners.
+assert [A : Grpd] ⊢
+  @path_map_func A A (@id Grpd_cat A)
+  ≡ @id Cat_cat (Path_cat A);
+
+assert [A B C : Grpd]
+  (g : τ (@Function_grpd B C))
+  (f : τ (@Function_grpd A B)) ⊢
+  @comp_cat_fapp0
+    (Path_cat A) (Path_cat B) (Path_cat C)
+    (@path_map_func B C g)
+    (@path_map_func A B f)
+  ≡ @path_map_func
+      A C (@comp_fapp0 Grpd_cat A B C g f);
+
+// Object and equality action retain an iterable Path-category functor.
+assert [A B : Grpd]
+  (f : τ (@Function_grpd A B))
+  (x : τ A) ⊢
+  @fapp0 (Path_cat A) (Path_cat B)
+    (@path_map_func A B f) x
+  ≡ f x;
+
+assert [A B : Grpd]
+  (f : τ (@Function_grpd A B))
+  (x y : τ A)
+  (p : τ (@= A x y)) ⊢
+  @fapp1_fapp0 (Path_cat A) (Path_cat B)
+    (@path_map_func A B f) x y p
+  ≡ @eq_ap A B f x y p;
+
+assert [A B : Grpd]
+  (f : τ (@Function_grpd A B))
+  (x y : τ A) ⊢
+  @fapp1_func (Path_cat A) (Path_cat B)
+    (@path_map_func A B f) x y
+  : τ (Functor
+      (Path_cat (@= A x y))
+      (Path_cat (@= B (f x) (f y))));
+
+// Function equality supplies point, off-diagonal, and full higher actions.
+assert [A B : Grpd]
+  (f g : τ (@Function_grpd A B))
+  (h : τ (@= (@Function_grpd A B) f g))
+  (x : τ A) ⊢
+  @tapp0_fapp0
+    (Path_cat A) (Path_cat B)
+    (@path_map_func A B f)
+    (@path_map_func A B g)
+    x (@path_map_transf A B f g h)
+  ≡ @PiHapply A (λ _ : τ A, B) f g h x;
+
+assert [A B : Grpd]
+  (f g : τ (@Function_grpd A B))
+  (h : τ (@= (@Function_grpd A B) f g))
+  (x y : τ A)
+  (p : τ (@= A x y)) ⊢
+  @tapp1_fapp0
+    (Path_cat A) (Path_cat B)
+    (@path_map_func A B f)
+    (@path_map_func A B g)
+    x y (@path_map_transf A B f g h) p
+  ≡ @path_map_transf_cell A B f g h x y p;
+
+assert [A B : Grpd]
+  (f g : τ (@Function_grpd A B))
+  (h : τ (@= (@Function_grpd A B) f g))
+  (x y : τ A) ⊢
+  @tapp1_func
+    (Path_cat A) (Path_cat B)
+    (@path_map_func A B f)
+    (@path_map_func A B g)
+    x y (@path_map_transf A B f g h)
+  : τ (Functor
+      (Path_cat (@= A x y))
+      (Path_cat (@= B (f x) (g y))));
+
+// Fixed-functor Core inclusion is strictly natural, without a global
+// directed Core functor or a transformation-to-equality reflection rule.
+assert [C D : Cat]
+  (F : τ (Functor C D)) ⊢
+  @comp_cat_fapp0
+    (Core_cat C) C D F (Core_incl_func C)
+  ≡ @comp_cat_fapp0
+      (Core_cat C) (Core_cat D) D
+      (Core_incl_func D)
+      (@path_map_func
+        (Obj C) (Obj D)
+        (@functor_object_function C D F));
+
+assert [C D : Cat]
+  (F : τ (Functor C D)) ⊢
+  @core_incl_naturality C D F
+  ≡ @id
+      (Functor_cat (Core_cat C) D)
+      (@comp_cat_fapp0
+        (Core_cat C) (Core_cat D) D
+        (Core_incl_func D)
+        (@path_map_func
+          (Obj C) (Obj D)
+          (@functor_object_function C D F)));
+
+assert [A : Grpd] [C D : Cat]
+  (F : τ (Functor C D))
+  (G : τ (Functor (Path_cat A) (Core_cat C))) ⊢
+  @core_incl_naturality_whiskered A C D F G
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat A) C D F
+        (@hom_postcomp_fapp0
+          Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+          (Path_cat A) (Path_cat (Obj C)) C
+          (Core_incl_func C) G))
+      (@hom_postcomp_fapp0
+        Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+        (Path_cat A) (Path_cat (Obj D)) D
+        (Core_incl_func D)
+        (@comp_cat_fapp0
+          (Path_cat A) (Path_cat (Obj C)) (Path_cat (Obj D))
+          (@path_map_func
+            (Obj C) (Obj D)
+            (@functor_object_function C D F))
+          G)));
+
+/*
+  Exact generic spiral diagnostic.
+
+  These check-local names exercise the permanent PathLift/Core-inclusion
+  owners before the walking-HIT module specializes them. They do not install a
+  second public recursion or action interface.
+*/
+symbol path_action_iter_power_check
+  [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  (n : τ Nat_grpd)
+  : τ (Obj C)
+≔ @nat_elim
+    (λ _ : τ Nat_grpd, Obj C)
+    c
+    (λ _ : τ Nat_grpd,
+      λ x : τ (Obj C), @fapp0 C C S x)
+    n;
+
+symbol path_action_iter_power_function_check
+  [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  : τ (@Function_grpd Nat_grpd (Obj C))
+≔ λ n : τ Nat_grpd, @path_action_iter_power_check C S c n;
+
+symbol path_action_iter_left_function_check
+  [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  : τ (@Function_grpd Nat_grpd (Obj C))
+≔ @comp_fapp0
+    Grpd_cat Nat_grpd (Obj C) (Obj C)
+    (@functor_object_function C C S)
+    (@path_action_iter_power_function_check C S c);
+
+symbol path_action_iter_right_function_check
+  [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  : τ (@Function_grpd Nat_grpd (Obj C))
+≔ @comp_fapp0
+    Grpd_cat Nat_grpd Nat_grpd (Obj C)
+    (@path_action_iter_power_function_check C S c)
+    nat_succ_function;
+
+symbol path_action_iter_step_path_check
+  [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  : τ (@=
+      (@Function_grpd Nat_grpd (Obj C))
+      (@path_action_iter_left_function_check C S c)
+      (@path_action_iter_right_function_check C S c))
+≔ @PiFunext
+    Nat_grpd
+    (λ _ : τ Nat_grpd, Obj C)
+    (@path_action_iter_left_function_check C S c)
+    (@path_action_iter_right_function_check C S c)
+    (λ n : τ Nat_grpd,
+      @eq_refl
+        (Obj C)
+        (@fapp0 C C S (@path_action_iter_power_check C S c n)));
+
+symbol path_action_iter_power_func_check
+  [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  : τ (Functor (Path_cat Nat_grpd) C)
+≔ @fapp0
+    (Path_cat (@Function_grpd Nat_grpd (Obj C)))
+    (Functor_cat (Path_cat Nat_grpd) C)
+    (@path_lift_func Nat_grpd C)
+    (@path_action_iter_power_function_check C S c);
+
+symbol path_action_iter_exact_spiral_check
+  [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd) C C
+        S
+        (@path_action_iter_power_func_check C S c))
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd) (Path_cat Nat_grpd) C
+        (@path_action_iter_power_func_check C S c)
+        NatSucc_func))
+≔ @fapp1_fapp0
+    (Path_cat (@Function_grpd Nat_grpd (Obj C)))
+    (Functor_cat (Path_cat Nat_grpd) C)
+    (@path_lift_func Nat_grpd C)
+    (@path_action_iter_left_function_check C S c)
+    (@path_action_iter_right_function_check C S c)
+    (@path_action_iter_step_path_check C S c);
+
+assert [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  (n : τ Nat_grpd) ⊢
+  @fapp0
+    (Path_cat Nat_grpd) C
+    (@path_action_iter_power_func_check C S c) n
+  ≡ @path_action_iter_power_check C S c n;
+
+assert [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C)) ⊢
+  @path_action_iter_exact_spiral_check C S c
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd) C C
+        S (@path_action_iter_power_func_check C S c))
+      (@comp_cat_fapp0
+        (Path_cat Nat_grpd) (Path_cat Nat_grpd) C
+        (@path_action_iter_power_func_check C S c)
+        NatSucc_func));
+
+assert [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  (n : τ Nat_grpd) ⊢
+  @tapp0_fapp0
+    (Path_cat Nat_grpd) C
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd) C C
+      S (@path_action_iter_power_func_check C S c))
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd) (Path_cat Nat_grpd) C
+      (@path_action_iter_power_func_check C S c)
+      NatSucc_func)
+    n
+    (@path_action_iter_exact_spiral_check C S c)
+  ≡ @id C
+      (@fapp0 C C S (@path_action_iter_power_check C S c n));
+
+assert [C : Cat]
+  (S : τ (Functor C C))
+  (c : τ (Obj C))
+  (n m : τ Nat_grpd) ⊢
+  @tapp1_func
+    (Path_cat Nat_grpd) C
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd) C C
+      S (@path_action_iter_power_func_check C S c))
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd) (Path_cat Nat_grpd) C
+      (@path_action_iter_power_func_check C S c)
+      NatSucc_func)
+    n m
+    (@path_action_iter_exact_spiral_check C S c)
+  : τ (Functor
+      (Path_cat (@= Nat_grpd n m))
+      (Hom_cat C
+        (@fapp0 C C S (@path_action_iter_power_check C S c n))
+        (@path_action_iter_power_check C S c (succ m))));
+
 // catalog-area: Nat arithmetic and sethood prerequisites
+// Successor is available as a concrete iterable equality action.
+assert (n : τ Nat_grpd) ⊢
+  @fapp0
+    (Path_cat Nat_grpd) (Path_cat Nat_grpd)
+    NatSucc_func n
+  ≡ succ n;
+
+assert (n m : τ Nat_grpd)
+  (p : τ (@= Nat_grpd n m)) ⊢
+  @fapp1_fapp0
+    (Path_cat Nat_grpd) (Path_cat Nat_grpd)
+    NatSucc_func n m p
+  ≡ @eq_ap Nat_grpd Nat_grpd nat_succ_function n m p;
+
+assert (n m : τ Nat_grpd) ⊢
+  @fapp1_func
+    (Path_cat Nat_grpd) (Path_cat Nat_grpd)
+    NatSucc_func n m
+  : τ (Functor
+      (Path_cat (@= Nat_grpd n m))
+      (Path_cat (@= Nat_grpd (succ n) (succ m))));
+
 // Arithmetic prerequisites remain transparent and reusable.
 assert (m n : τ Nat_grpd) ⊢
   @nat_add m n
@@ -19218,102 +19560,221 @@ assert (m n : τ Nat_grpd) ⊢
   nat_is_set m n
   : τ (IsPropGrpd (@= Nat_grpd m n));
 
-// catalog-area: Walking endomorphism directed HIT and Nat normal form
-// This native datatype is the intrinsic Hom carrier of the walking HIT, not a
-// second comparison model; BNat below is the separate Nat model.
-assert ⊢ τ WalkingEndHom_grpd ≡ walking_end_hom;
+// catalog-area: Opaque walking endomorphism HIT and contextual elimination
+// WalkingEnd has only opaque constructors, explicit one-dimensional evidence,
+// and contextual Functord computation. BNat is a separate consistency model.
+assert ⊢ walking_base
+  : τ (Obj WalkingEnd_cat);
 
-assert ⊢
-  @= WalkingEndHom_grpd walking_end_hom_id walking_end_hom_id
-  ≡ Unit_grpd;
+assert ⊢ walking_loop
+  : τ (Hom WalkingEnd_cat walking_base walking_base);
 
-assert (w : τ WalkingEndHom_grpd) ⊢
-  @= WalkingEndHom_grpd walking_end_hom_id (walking_end_hom_step w)
-  ≡ Empty_grpd;
+assert ⊢ walking_end_is_one_cat
+  : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat);
 
-// Hom-level HIT induction computes on both generated-arrow constructors.
-assert
-  (P : τ WalkingEndHom_grpd → Grpd)
-  (z : τ (P walking_end_hom_id))
-  (s : Π w : τ WalkingEndHom_grpd,
-    τ (P w) → τ (P (walking_end_hom_step w))) ⊢
-  @walking_end_hom_ind P z s walking_end_hom_id
-  ≡ z;
+assert ⊢ walking_end_one_cat
+  : τ OneCat;
 
 assert
-  (P : τ WalkingEndHom_grpd → Grpd)
-  (z : τ (P walking_end_hom_id))
-  (s : Π w : τ WalkingEndHom_grpd,
-    τ (P w) → τ (P (walking_end_hom_step w)))
-  (w : τ WalkingEndHom_grpd) ⊢
-  @walking_end_hom_ind P z s (walking_end_hom_step w)
-  ≡ s w (@walking_end_hom_ind P z s w);
+  (x y : τ (Obj WalkingEnd_cat)) ⊢
+  @walking_end_hom_discrete x y
+  : τ (IsDiscreteCat (Hom_cat WalkingEnd_cat x y));
 
-assert ⊢ Obj WalkingEnd_cat ≡ Unit_grpd;
+assert
+  (x : τ (Obj WalkingEnd_cat)) ⊢
+  @walking_end_based_hom_discrete x
+  : τ (IsDiscreteCat
+      (Hom_cat WalkingEnd_cat walking_base x));
 
-assert ⊢
-  Hom_cat WalkingEnd_cat walking_base walking_base
-  ≡ Path_cat WalkingEndHom_grpd;
+assert
+  (x : τ (Obj WalkingEnd_cat))
+  [p q : τ (Hom WalkingEnd_cat walking_base x)]
+  (alpha : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base x)
+      p q)) ⊢
+  @walking_end_based_cell_to_path x p q alpha
+  : τ (@= (Hom WalkingEnd_cat walking_base x) p q);
+
+// One-dimensionality is homwise and does not make WalkingEnd discrete.
+assertnot ⊢
+  walking_end_is_one_cat
+  : τ (IsDiscreteCat WalkingEnd_cat);
+
+// The four category operations remain opaque.
+assertnot ⊢ Obj WalkingEnd_cat ≡ Unit_grpd;
 
 assertnot ⊢
   Hom_cat WalkingEnd_cat walking_base walking_base
   ≡ Path_cat Nat_grpd;
 
-assert ⊢ @id WalkingEnd_cat walking_base ≡ walking_end_hom_id;
+assertnot ⊢
+  @id WalkingEnd_cat walking_base
+  ≡ walking_loop;
 
-assert ⊢ walking_loop ≡ walking_end_hom_step walking_end_hom_id;
+assertnot ⊢
+  @comp_fapp0
+    WalkingEnd_cat walking_base walking_base walking_base
+    walking_loop walking_loop
+  ≡ walking_loop;
 
-// Free composition consumes the visible outer intrinsic-hom constructor.
-assert (f : τ WalkingEndHom_grpd) ⊢
-  @comp_fapp0 WalkingEnd_cat tt tt tt walking_end_hom_id f
-  ≡ f;
+// Contextual algebra data has the selected orientation D[loop] o u => u o R[loop].
+assert
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base))) ⊢
+  @walking_end_loop_lhs_func R D u
+  : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base));
 
-assert (g f : τ WalkingEndHom_grpd) ⊢
-  @comp_fapp0 WalkingEnd_cat tt tt tt (walking_end_hom_step g) f
-  ≡ walking_end_hom_step
-      (@comp_fapp0 WalkingEnd_cat tt tt tt g f);
+assert
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base))) ⊢
+  @walking_end_loop_rhs_func R D u
+  : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base));
 
-// The constructor/precomposition warning diamond is ordinary associativity.
-// Its reusable propositional join does not add a runtime bridge.
-assert (k p g : τ WalkingEndHom_grpd) ⊢
-  @hom_precomp_along_postcomp_assoc
-    WalkingEnd_cat WalkingEnd_cat
-    (@id Cat_cat WalkingEnd_cat)
-    walking_base walking_base p
-    walking_base walking_base
-    (walking_end_hom_step k) g
+assert
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base))) ⊢
+  @walking_end_loop_coherence R D u
+  ≡ @Transf
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)
+      (@walking_end_loop_lhs_func R D u)
+      (@walking_end_loop_rhs_func R D u);
+
+assert
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  (sigma : τ (@walking_end_loop_coherence R D u)) ⊢
+  @walking_end_ind_funcd R D u sigma
+  : τ (Functord R D);
+
+// These are the contextual HIT constructor betas. The derived ordinary
+// recursor exposes the same base/loop computations at fapp0/fapp1 below.
+assert
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  (sigma : τ (@walking_end_loop_coherence R D u)) ⊢
+  @Fibre_func
+      WalkingEnd_cat R D
+      (@walking_end_ind_funcd R D u sigma)
+      walking_base
+  ≡ u;
+
+assert
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  (sigma : τ (@walking_end_loop_coherence R D u))
+  (r : τ (Obj (Fibre_cat R walking_base))) ⊢
+  @fdapp1_int_cell
+      WalkingEnd_cat R D
+      (@walking_end_ind_funcd R D u sigma)
+      walking_base walking_base walking_loop r
+  ≡ @tapp0_fapp0
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)
+      (@walking_end_loop_lhs_func R D u)
+      (@walking_end_loop_rhs_func R D u)
+      r sigma;
+
+assert
+  (R D : τ (Catd WalkingEnd_cat))
+  (u : τ (Functor
+      (Fibre_cat R walking_base)
+      (Fibre_cat D walking_base)))
+  (sigma : τ (@walking_end_loop_coherence R D u)) ⊢
+  @walking_end_ind_funcd_beta_base R D u sigma
   : τ (@=
-      (Hom WalkingEnd_cat walking_base walking_base)
-      (@comp_fapp0
-        WalkingEnd_cat walking_base walking_base walking_base
-        (walking_end_hom_step k)
-        (@hom_precomp_along_fapp0
-          WalkingEnd_cat WalkingEnd_cat
-          (@id Cat_cat WalkingEnd_cat)
-          walking_base walking_base walking_base
-          p g))
-      (@hom_precomp_along_fapp0
-        WalkingEnd_cat WalkingEnd_cat
-        (@id Cat_cat WalkingEnd_cat)
-        walking_base walking_base walking_base
-        p
-        (@comp_fapp0
-          WalkingEnd_cat walking_base walking_base walking_base
-          (walking_end_hom_step k) g)));
+      (Functor
+        (Fibre_cat R walking_base)
+        (Fibre_cat D walking_base))
+      (@Fibre_func
+        WalkingEnd_cat R D
+        (@walking_end_ind_funcd R D u sigma)
+        walking_base)
+      u);
 
-// Generic functor-on-identity remains runtime-owned by the generic calculus;
-// the normalized intrinsic-hom identity is recovered by a typed proof-time view.
+// The ordinary section specialization is transparent and computes through
+// the contextual owner at its canonical piapp0/piapp1 observers.
+assert
+  (D : τ (Catd WalkingEnd_cat))
+  (u : τ (Obj (Fibre_cat D walking_base)))
+  (ell : τ (@walking_end_loop_lift_grpd D u)) ⊢
+  @walking_end_loop_lift_transf D u ell
+  : τ (@walking_end_loop_coherence
+      (@Const_catd WalkingEnd_cat Terminal_cat)
+      D
+      (@Obj_func (Fibre_cat D walking_base) u));
+
+assert
+  (D : τ (Catd WalkingEnd_cat))
+  (u : τ (Obj (Fibre_cat D walking_base)))
+  (ell : τ (@walking_end_loop_lift_grpd D u)) ⊢
+  @walking_end_ind_sec D u ell
+  : τ (Obj (Pi_cat D));
+
+assert
+  (D : τ (Catd WalkingEnd_cat))
+  (u : τ (Obj (Fibre_cat D walking_base)))
+  (ell : τ (@walking_end_loop_lift_grpd D u)) ⊢
+  @piapp0 WalkingEnd_cat D (@walking_end_ind_sec D u ell) walking_base
+  ≡ u;
+
+assert
+  (D : τ (Catd WalkingEnd_cat))
+  (u : τ (Obj (Fibre_cat D walking_base)))
+  (ell : τ (@walking_end_loop_lift_grpd D u)) ⊢
+  @piapp1_fapp0
+    WalkingEnd_cat D (@walking_end_ind_sec D u ell)
+    walking_base walking_base walking_loop
+  ≡ ell;
+
+assert
+  (D : τ (Catd WalkingEnd_cat))
+  (u : τ (Obj (Fibre_cat D walking_base)))
+  (ell : τ (@walking_end_loop_lift_grpd D u)) ⊢
+  @walking_end_ind_sec_beta_base D u ell
+  : τ (@=
+      (Obj (Fibre_cat D walking_base))
+      (@piapp0 WalkingEnd_cat D
+        (@walking_end_ind_sec D u ell)
+        walking_base)
+      u);
+
+assert
+  (D : τ (Catd WalkingEnd_cat))
+  (u : τ (Obj (Fibre_cat D walking_base)))
+  (ell : τ (@walking_end_loop_lift_grpd D u)) ⊢
+  @walking_end_ind_sec_beta_loop D u ell
+  : τ (@=
+      (@walking_end_loop_lift_grpd D u)
+      (@piapp1_fapp0
+        WalkingEnd_cat D (@walking_end_ind_sec D u ell)
+        walking_base walking_base walking_loop)
+      ell);
+
+// The constant recursor is derived. Narrow terminal/constant projection joins
+// expose the usual runtime constructor equations at its ordinary observers.
 assert [C : Cat]
-  (F : τ (Functor WalkingEnd_cat C)) ⊢
-  @walking_functor_id_view C F
-  : τ (@=
-      (Hom C
-        (@fapp0 WalkingEnd_cat C F tt)
-        (@fapp0 WalkingEnd_cat C F tt))
-      (@fapp1_fapp0 WalkingEnd_cat C F tt tt walking_end_hom_id)
-      (@id C (@fapp0 WalkingEnd_cat C F tt)));
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @walking_end_rec_func C x f
+  : τ (Functor WalkingEnd_cat C);
 
-// The dependent HIT has judgmental point beta and propositional loop beta.
 assert [C : Cat]
   (x : τ (Obj C))
   (f : τ (Hom C x x)) ⊢
@@ -19323,7 +19784,65 @@ assert [C : Cat]
 assert [C : Cat]
   (x : τ (Obj C))
   (f : τ (Hom C x x)) ⊢
+  @fapp1_fapp0
+    WalkingEnd_cat C (@walking_end_rec_func C x f)
+    walking_base walking_base walking_loop
+  ≡ f;
+
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @walking_end_rec_base_contextual_func_eq C x f
+  : τ (@=
+      (Functor Terminal_cat C)
+      (@Fibre_func
+        WalkingEnd_cat
+        (@Const_catd WalkingEnd_cat Terminal_cat)
+        (@Const_catd WalkingEnd_cat C)
+        (@walking_end_rec_func C x f)
+        walking_base)
+      (@Obj_func C x));
+
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @walking_end_rec_base_projection_func_eq C x f
+  : τ (@=
+      (Functor Terminal_cat C)
+      (@Fibre_func
+        WalkingEnd_cat
+        (@Const_catd WalkingEnd_cat Terminal_cat)
+        (@Const_catd WalkingEnd_cat C)
+        (@walking_end_rec_func C x f)
+        walking_base)
+      (@Obj_func C
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base)));
+
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @walking_end_rec_beta_base C x f
+  : τ (@=
+      (Obj C)
+      (@fapp0 WalkingEnd_cat C
+        (@walking_end_rec_func C x f)
+        walking_base)
+      x);
+
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
   @walking_end_rec_beta_loop C x f
+  ≡ @walking_end_ind_sec_beta_loop
+      (@Const_catd WalkingEnd_cat C)
+      x f;
+
+assert [C : Cat]
+  (x : τ (Obj C))
+  (f : τ (Hom C x x)) ⊢
+  @walking_end_rec_beta_loop_ordinary C x f
   : τ (@=
       (Hom C x x)
       (@fapp1_fapp0
@@ -19331,50 +19850,30 @@ assert [C : Cat]
         walking_base walking_base walking_loop)
       f);
 
-// Every recursor target inherits generic computation on a generated step;
-// this theorem routes through strict functoriality and the HIT loop beta.
-assert [C : Cat]
-  (x : τ (Obj C))
-  (f : τ (Hom C x x))
-  (w : τ WalkingEndHom_grpd) ⊢
-  @walking_end_rec_step_view C x f w
-  : τ (@=
-      (Hom C x x)
-      (@fapp1_fapp0
-        WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base (walking_end_hom_step w))
-      (@comp_fapp0
-        C x x x f
-        (@fapp1_fapp0
-          WalkingEnd_cat C (@walking_end_rec_func C x f)
-          walking_base walking_base w)));
-
-// No second runtime loop-action owner competes with strict functoriality.
-assertnot [C : Cat]
-  (x : τ (Obj C))
-  (f : τ (Hom C x x)) ⊢
-  @fapp1_fapp0
-    WalkingEnd_cat C (@walking_end_rec_func C x f)
-    walking_base walking_base walking_loop
-  ≡ f;
-
-// The former loop-square critical pair is a derived equality theorem.
+// The generic piapp1/fapp1 comparison remains available independently of the
+// now-runtime ordinary constructor equation.
 assert [C : Cat]
   (x : τ (Obj C))
   (f : τ (Hom C x x)) ⊢
-  @walking_end_rec_loop_square C x f
+  @walking_end_rec_loop_ordinary_comparison C x f
   : τ (@=
-      (Hom C x x)
-      (@comp_fapp0 C x x x f f)
+      (Hom C
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base)
+        (@fapp0 WalkingEnd_cat C
+          (@walking_end_rec_func C x f)
+          walking_base))
+      (@piapp1_fapp0
+        WalkingEnd_cat
+        (@Const_catd WalkingEnd_cat C)
+        (@walking_end_rec_func C x f)
+        walking_base walking_base walking_loop)
       (@fapp1_fapp0
         WalkingEnd_cat C (@walking_end_rec_func C x f)
-        walking_base walking_base
-        (@comp_fapp0
-          WalkingEnd_cat
-          walking_base walking_base walking_base
-          walking_loop walking_loop)));
+        walking_base walking_base walking_loop));
 
-// BNat is a separate model whose arrows are Nat normal forms.
+// BNat remains a separate one-object Nat monoid consistency model.
 assert ⊢ Obj BNat_cat ≡ Unit_grpd;
 
 assert ⊢
@@ -19382,18 +19881,7 @@ assert ⊢
   ≡ Path_cat Nat_grpd;
 
 assert ⊢ @id BNat_cat bnat_obj ≡ zero;
-
 assert ⊢ bnat_generator ≡ succ zero;
-
-assert [C : Cat]
-  (F : τ (Functor BNat_cat C)) ⊢
-  @bnat_functor_zero_view C F
-  : τ (@=
-      (Hom C
-        (@fapp0 BNat_cat C F tt)
-        (@fapp0 BNat_cat C F tt))
-      (@fapp1_fapp0 BNat_cat C F tt tt zero)
-      (@id C (@fapp0 BNat_cat C F tt)));
 
 assert (g f : τ Nat_grpd) ⊢
   @comp_fapp0 BNat_cat tt tt tt (succ g) f
@@ -19409,161 +19897,329 @@ assertnot (g f : τ Nat_grpd) ⊢
   @comp_fapp0 BNat_cat tt tt tt g f
   ≡ @nat_add g f;
 
-assert (k p g : τ Nat_grpd) ⊢
-  @hom_precomp_along_postcomp_assoc
-    BNat_cat BNat_cat
-    (@id Cat_cat BNat_cat)
-    bnat_obj bnat_obj p
-    bnat_obj bnat_obj
-    (succ k) g
-  : τ (@=
-      (Hom BNat_cat bnat_obj bnat_obj)
-      (@comp_fapp0
-        BNat_cat bnat_obj bnat_obj bnat_obj
-        (succ k)
-        (@hom_precomp_along_fapp0
-          BNat_cat BNat_cat
-          (@id Cat_cat BNat_cat)
-          bnat_obj bnat_obj bnat_obj
-          p g))
-      (@hom_precomp_along_fapp0
-        BNat_cat BNat_cat
-        (@id Cat_cat BNat_cat)
-        bnat_obj bnat_obj bnat_obj
-        p
-        (@comp_fapp0
-          BNat_cat bnat_obj bnat_obj bnat_obj
-          (succ k) g)));
-
-// Encoding is genuinely recursor-derived; its successor law materially uses
-// the HIT loop beta while generic strict functoriality owns composition.
-assert ⊢
-  walking_encode_func
-  ≡ @walking_end_ind_sec
-      (@Const_catd WalkingEnd_cat BNat_cat)
-      bnat_obj bnat_generator;
-
-assert ⊢
-  @walking_end_rec_beta_loop BNat_cat bnat_obj bnat_generator
-  : τ (@= Nat_grpd
-      (@walking_encode_action walking_loop)
-      bnat_generator);
-
-assert (w : τ WalkingEndHom_grpd) ⊢
-  @walking_encode_succ_view w
-  : τ (@= Nat_grpd
-      (@walking_encode_action (walking_end_hom_step w))
-      (succ (@walking_encode_action w)));
-
-assert (g f : τ WalkingEndHom_grpd) ⊢
-  @walking_encode_comp_view g f
-  : τ (@= Nat_grpd
-      (@walking_encode_action
-        (@comp_fapp0 WalkingEnd_cat tt tt tt g f))
-      (@nat_add
-        (@walking_encode_action g)
-        (@walking_encode_action f)));
-
-// The structured decoder has a propositional generator beta; its successor
-// law follows from that beta and generic strict functoriality.
-assert ⊢ walking_decode_beta_generator
-  : τ (@= WalkingEndHom_grpd
-      (@walking_decode_action bnat_generator)
-      walking_loop);
-
-assert (n : τ Nat_grpd) ⊢
-  @walking_decode_succ_view n
-  : τ (@= WalkingEndHom_grpd
-      (@walking_decode_action (succ n))
-      (walking_end_hom_step (@walking_decode_action n)));
-
-assert (g f : τ Nat_grpd) ⊢
-  @walking_decode_comp_view g f
-  : τ (@= WalkingEndHom_grpd
-      (@walking_decode_action (@nat_add g f))
-      (@comp_fapp0 WalkingEnd_cat tt tt tt
-        (@walking_decode_action g)
-        (@walking_decode_action f)));
-
-// The decisive arbitrary-arrow theorem uses the HIT hom eliminator and the
-// recursor-derived encoder action; the reverse uses Nat induction.  These are
-// semantic functor-action round trips, not a helper syntax equivalence.
-assert (w : τ WalkingEndHom_grpd) ⊢
-  @walking_decode_encode_roundtrip w
-  : τ (@= WalkingEndHom_grpd
-      (@walking_decode_action (@walking_encode_action w))
-      w);
-
-assert (n : τ Nat_grpd) ⊢
-  @walking_encode_decode_roundtrip n
-  : τ (@= Nat_grpd
-      (@walking_encode_action (@walking_decode_action n))
-      n);
-
-assertnot (w : τ WalkingEndHom_grpd) ⊢
-  @walking_decode_action (@walking_encode_action w)
-  ≡ w;
-
-assertnot (n : τ Nat_grpd) ⊢
-  @walking_encode_action (@walking_decode_action n)
-  ≡ n;
-
-assert ⊢ walking_hom_nat_by_inverse
-  : τ (@EquivByInverse
-      WalkingEndHom_grpd Nat_grpd
-      walking_encode_action walking_decode_action);
-
-// The hom comparison is packaged from those semantic actions through the
-// retained standard interfaces.
-assert ⊢ walking_hom_nat_type_equiv
-  : τ (TypeEquiv
-      (Hom WalkingEnd_cat walking_base walking_base)
-      Nat_grpd);
-
-assert ⊢
-  sigma_Fst walking_hom_nat_type_equiv
-  ≡ walking_encode_action;
-
-assert ⊢ walking_hom_nat_omega_equiv_EQ1
-  : τ (@OmegaEquiv_EQ1
-      Grpd_cat
-      (Hom WalkingEnd_cat walking_base walking_base)
-      Nat_grpd);
-
-assert ⊢
-  @omega_equiv_to_EQ1
-    Grpd_cat
-    (Hom WalkingEnd_cat walking_base walking_base)
-    Nat_grpd
-    walking_hom_nat_omega_equiv_EQ1
-  ≡ walking_encode_action;
-
-// Local discreteness yields honest one-category evidence for both models.
-assert ⊢ walking_end_is_one_cat
-  : τ (IsNCat (cat_succ cat_zero) WalkingEnd_cat);
-
 assert ⊢ bnat_is_one_cat
   : τ (IsNCat (cat_succ cat_zero) BNat_cat);
 
-// The directed generator is nonidentity, noninvertible, and therefore
-// contradicts any alleged internal groupoidality witness.
-assert ⊢ walking_loop_not_identity
-  : τ (@Function_grpd
-      (@= WalkingEndHom_grpd walking_loop walking_end_hom_id)
-      Empty_grpd);
+assert ⊢ bnat_one_cat
+  : τ OneCat;
 
-assert ⊢ walking_loop_not_omega_equiv_EQ1
-  : τ (@Function_grpd
-      (@OmegaEquivAlong_EQ1
-        WalkingEnd_cat walking_base walking_base walking_loop)
-      Empty_grpd);
+assert ⊢ walking_bnat_model_func
+  : τ (Functor WalkingEnd_cat BNat_cat);
+
+assert ⊢ walking_bnat_model_beta_base
+  : τ (@=
+      (Obj BNat_cat)
+      (@fapp0
+        WalkingEnd_cat BNat_cat walking_bnat_model_func walking_base)
+      bnat_obj);
+
+assert ⊢ walking_bnat_model_beta_loop
+  ≡ @walking_end_rec_beta_loop
+      BNat_cat bnat_obj bnat_generator;
+
+// catalog-area: Walking Code, powers, and directed spiral
+// Code uses the ordinary runtime HIT equations; the representable and all
+// higher action remain owned by the generic Catd/fapp/tapp calculus.
+assert ⊢
+  Fibre_cat walking_Code_catd walking_base
+  ≡ Path_cat Nat_grpd;
+
+assert ⊢
+  @catd_transport_func
+    WalkingEnd_cat walking_Code_catd
+    walking_base walking_base walking_loop
+  ≡ NatSucc_func;
+
+assert ⊢ walking_Code_beta_base
+  : τ (@=
+      (Obj Cat_cat)
+      (Fibre_cat walking_Code_catd walking_base)
+      (Path_cat Nat_grpd));
+
+assert ⊢ walking_Code_beta_loop
+  : τ (@=
+      (Hom Cat_cat (Path_cat Nat_grpd) (Path_cat Nat_grpd))
+      (@catd_transport_func
+        WalkingEnd_cat walking_Code_catd
+        walking_base walking_base walking_loop)
+      NatSucc_func);
 
 assert
-  (g : τ (@IsGroupoidalCat_EQ1 WalkingEnd_cat)) ⊢
-  @walking_loop_not_omega_equiv_EQ1
-    (@groupoidal_arrow_equiv_along_EQ1
-      WalkingEnd_cat g walking_base walking_base walking_loop)
-  : τ Empty_grpd;
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x)) ⊢
+  @walking_encode x p
+  : τ (Obj (Fibre_cat walking_Code_catd x));
+
+assert ⊢
+  walking_based_rep_catd
+  : τ (Catd WalkingEnd_cat);
+
+assert
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x))
+  (q : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @walking_based_rep_postcomp_eq x p q
+  : τ (@=
+      (Hom WalkingEnd_cat walking_base x)
+      (@fapp0
+        (Fibre_cat walking_based_rep_catd walking_base)
+        (Fibre_cat walking_based_rep_catd x)
+        (@catd_transport_func
+          WalkingEnd_cat walking_based_rep_catd
+          walking_base x p)
+        q)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base x p q));
+
+// The generic representable keeps stable hom_postcomp_fapp0 as its runtime
+// owner; its raw-composition view above is deliberately proof-time.
+assertnot
+  (x : τ (Obj WalkingEnd_cat))
+  (p : τ (Hom WalkingEnd_cat walking_base x))
+  (q : τ (Hom WalkingEnd_cat walking_base walking_base)) ⊢
+  @fapp0
+    (Fibre_cat walking_based_rep_catd walking_base)
+    (Fibre_cat walking_based_rep_catd x)
+    (@catd_transport_func
+      WalkingEnd_cat walking_based_rep_catd
+      walking_base x p)
+    q
+  ≡ @comp_fapp0
+      WalkingEnd_cat walking_base walking_base x p q;
+
+assert ⊢
+  walking_power zero
+  ≡ @id WalkingEnd_cat walking_base;
+
+assert (n : τ Nat_grpd) ⊢
+  walking_power (succ n)
+  ≡ @comp_fapp0
+      WalkingEnd_cat walking_base walking_base walking_base
+      walking_loop (walking_power n);
+
+assert (n : τ Nat_grpd) ⊢
+  @fapp0
+    (Path_cat Nat_grpd)
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    walking_power_func n
+  ≡ walking_power n;
+
+assert (n m : τ Nat_grpd) ⊢
+  @fapp1_func
+    (Path_cat Nat_grpd)
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    walking_power_func n m
+  : τ (Functor
+      (Path_cat (@= Nat_grpd n m))
+      (Hom_cat
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (walking_power n)
+        (walking_power m)));
+
+assert ⊢ walking_power_spiral
+  : τ (@walking_end_loop_coherence
+      walking_Code_catd
+      walking_based_rep_catd
+      walking_power_func);
+
+assert (n : τ Nat_grpd) ⊢
+  @walking_power_spiral_cell n
+  : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n))
+      (walking_power (succ n)));
+
+// The point equality driving the generic Path action is judgmental
+// reflexivity at the raw power equation.
+assert (n : τ Nat_grpd) ⊢
+  @PiHapply
+    Nat_grpd
+    (λ _ : τ Nat_grpd,
+      Hom WalkingEnd_cat walking_base walking_base)
+    walking_power_left_function
+    walking_power_right_function
+    walking_power_step_path
+    n
+  ≡ @eq_refl
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n));
+
+assert (n : τ Nat_grpd) ⊢
+  @tapp0_fapp0
+    (Path_cat Nat_grpd)
+    (Path_cat (Hom WalkingEnd_cat walking_base walking_base))
+    (@path_map_func
+      Nat_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      walking_power_left_function)
+    (@path_map_func
+      Nat_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      walking_power_right_function)
+    n
+    (@path_map_transf
+      Nat_grpd
+      (Hom WalkingEnd_cat walking_base walking_base)
+      walking_power_left_function
+      walking_power_right_function
+      walking_power_step_path)
+  ≡ @eq_refl
+      (Hom WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n));
+
+// Core inclusion exposes the canonical semantic component as path_to_hom of
+// that reflexivity. Stable postcomposition endpoints intentionally prevent a
+// false direct conversion to the raw categorical identity.
+assert (n : τ Nat_grpd) ⊢
+  @tapp0_fapp0
+    (Path_cat Nat_grpd)
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      walking_loop_postcomp_func
+      walking_power_func)
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd)
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      walking_power_func
+      NatSucc_func)
+    n
+    walking_power_spiral_natsucc
+  ≡ @path_to_hom
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@comp_cat_fapp0
+          (Path_cat Nat_grpd)
+          (Hom_cat WalkingEnd_cat walking_base walking_base)
+          (Hom_cat WalkingEnd_cat walking_base walking_base)
+          walking_loop_postcomp_func
+          walking_power_func)
+        n)
+      (@fapp0
+        (Path_cat Nat_grpd)
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@comp_cat_fapp0
+          (Path_cat Nat_grpd)
+          (Path_cat Nat_grpd)
+          (Hom_cat WalkingEnd_cat walking_base walking_base)
+          walking_power_func
+          NatSucc_func)
+        n)
+      (@PiHapply
+        Nat_grpd
+        (λ _ : τ Nat_grpd,
+          Hom WalkingEnd_cat walking_base walking_base)
+        walking_power_left_function
+        walking_power_right_function
+        walking_power_step_path
+        n);
+
+assertnot (n : τ Nat_grpd) ⊢
+  @tapp0_fapp0
+    (Path_cat Nat_grpd)
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      walking_loop_postcomp_func
+      walking_power_func)
+    (@comp_cat_fapp0
+      (Path_cat Nat_grpd)
+      (Path_cat Nat_grpd)
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      walking_power_func
+      NatSucc_func)
+    n
+    walking_power_spiral_natsucc
+  ≡ @id
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n));
+
+assertnot (n : τ Nat_grpd) ⊢
+  @walking_power_spiral_cell n
+  ≡ @id
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      (@comp_fapp0
+        WalkingEnd_cat walking_base walking_base walking_base
+        walking_loop (walking_power n));
+
+// Open ordinary and higher representable/spiral action is inherited.
+assert
+  (x y : τ (Obj WalkingEnd_cat)) ⊢
+  @fapp1_func
+    WalkingEnd_cat Cat_cat walking_Code_catd x y
+  : τ (Functor
+      (Hom_cat WalkingEnd_cat x y)
+      (Functor_cat
+        (Fibre_cat walking_Code_catd x)
+        (Fibre_cat walking_Code_catd y)));
+
+assert
+  (p q : τ (Hom WalkingEnd_cat walking_base walking_base))
+  (alpha : τ (Hom
+      (Hom_cat WalkingEnd_cat walking_base walking_base)
+      p q)) ⊢
+  @fapp1_fapp0
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (Functor_cat
+      (Fibre_cat walking_based_rep_catd walking_base)
+      (Fibre_cat walking_based_rep_catd walking_base))
+    (@fapp1_func
+      WalkingEnd_cat Cat_cat walking_based_rep_catd
+      walking_base walking_base)
+    p q alpha
+  : τ (Transf
+      (@catd_transport_func
+        WalkingEnd_cat walking_based_rep_catd
+        walking_base walking_base p)
+      (@catd_transport_func
+        WalkingEnd_cat walking_based_rep_catd
+        walking_base walking_base q));
+
+assert (n m : τ Nat_grpd) ⊢
+  @tapp1_func
+    (Path_cat Nat_grpd)
+    (Hom_cat WalkingEnd_cat walking_base walking_base)
+    (@walking_end_loop_lhs_func
+      walking_Code_catd walking_based_rep_catd walking_power_func)
+    (@walking_end_loop_rhs_func
+      walking_Code_catd walking_based_rep_catd walking_power_func)
+    n m walking_power_spiral
+  : τ (Functor
+      (Path_cat (@= Nat_grpd n m))
+      (Hom_cat
+        (Hom_cat WalkingEnd_cat walking_base walking_base)
+        (@fapp0
+          (Path_cat Nat_grpd)
+          (Hom_cat WalkingEnd_cat walking_base walking_base)
+          (@walking_end_loop_lhs_func
+            walking_Code_catd walking_based_rep_catd walking_power_func)
+          n)
+        (@fapp0
+          (Path_cat Nat_grpd)
+          (Hom_cat WalkingEnd_cat walking_base walking_base)
+          (@walking_end_loop_rhs_func
+            walking_Code_catd walking_based_rep_catd walking_power_func)
+          m)));
+
+// WalkingEnd's Hom remains opaque despite the concrete encode/power data.
+assertnot ⊢
+  Hom_cat WalkingEnd_cat walking_base walking_base
+  ≡ Path_cat Nat_grpd;
 
 // catalog-area: auto
 assert
@@ -20529,6 +21185,18 @@ assert [K : Cat] (E : τ (Catd K))
       Terminal_obj;
 
 assert [K : Cat] (A : Cat)
+  (s : τ (Obj (Pi_cat (Const_catd K A))))
+  (x y : τ (Obj K))
+  (f : τ (Hom K x y)) ⊢
+  @piapp1_const_fapp0_eq K A s x y f
+  : τ (@=
+      (Hom A
+        (@fapp0 K A s x)
+        (@fapp0 K A s y))
+      (@piapp1_fapp0 K (@Const_catd K A) s x y f)
+      (@fapp1_fapp0 K A s x y f));
+
+assertnot [K : Cat] (A : Cat)
   (s : τ (Obj (Pi_cat (Const_catd K A))))
   (x y : τ (Obj K))
   (f : τ (Hom K x y)) ⊢
