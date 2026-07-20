@@ -62,9 +62,8 @@ preceding dimension. See [Chapter 7](#chapter-7).
 
 <a id="glossary-native-category"></a>
 
-**Category, native.** An object of the emdash classifier `Cat`, with
-category-valued homs that may be iterated to higher dimensions. It is not
-definitionally an ordinary HoTT precategory. See
+**Category, native.** An object of `Cat`, with iterable category-valued homs.
+It is not definitionally an ordinary HoTT precategory. See
 [Chapters 2](#chapter-2) and [10](#chapter-10).
 
 <a id="glossary-code"></a>
@@ -202,9 +201,9 @@ the two notions are related but not definitionally identical. See
 
 <a id="glossary-off-diagonal-action"></a>
 
-**Off-diagonal transfor action.** For $\eta:F\Rightarrow G$ and
-$f:x\to y$, the arrow $\eta[f]:F(x)\to G(y)$. Adjacent functor
-actions accumulate into this term by strict naturality. See
+**Off-diagonal transfor action.** If $\eta:F\Rightarrow G$ and $f:x\to y$,
+then $\eta[f]:F(x)\to G(y)$. Adjacent functor actions accumulate into this
+term by strict naturality. See
 [Chapter 9](#chapter-9).
 
 <a id="glossary-omega-equivalence"></a>

@@ -8,7 +8,7 @@ Supersedes: no whole report; refines the post-B6 recommended next action in EMDA
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-book-category-theory-formal-presentation-review-2026-07-20
 Infinity-Codex-Decision-Responses: none
-Status: **ACTIVE - C0 through C6 complete; C7 is the current phase**
+Status: **COMPLETE - C0 through C7 implemented and release-audited**
 
 ## Executive Decision
 
@@ -1210,7 +1210,7 @@ Checkpoint:
 
 ### Phase C7 - Global editorial integration and expanded-edition release
 
-State: **CURRENT.**
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -1232,6 +1232,40 @@ Gate:
   two clean release builds pass;
 - page-level visual QA samples every new chapter and every page affected by
   pagination changes.
+
+Checkpoint:
+
+- the preface, prologue, and reading guide now describe both mathematical
+  spirals and give explicit type-theory, category-theory, and implementation
+  paths. The contents, chapter transitions, title-cased headings, notation
+  appendix, glossary/concept index, status matrix, bibliography, credits, and
+  license were edited as one navigation and terminology system;
+- every numbered chapter has a formal-status note and a cited central theorem.
+  The source checker validates the retained Chapter 1-8 spine as well as the
+  Chapter 9-17 expansion against `book/expansion.json`, while all 107 checked
+  claims resolve through the evidence register. All HoTT adaptations retain
+  exact labels and the pinned revision
+  `578b85cc8d586b1677ec4335148adeb443057d24`; Došen remains a cited,
+  reference-only conceptual source;
+- all 32 sources, 1,274 strict-KaTeX spans, manifest/schema checks, provenance
+  checks, source links, bounded page rendering, browser console/request
+  checks, and extracted-PDF sentinels pass. A fresh
+  `npm --prefix print ci --offline` installed the locked dependency graph with
+  zero reported vulnerabilities;
+- visual QA reviewed all 192 pages by contact sheet, every new chapter and
+  appendix opening at readable resolution, and every locally repaginated
+  front-matter/glossary page. The pass repaired a dropped preface fragment and
+  two stranded run-in/punctuation cases before the sources were frozen;
+- full repository CI passed all 39 measured Lambdapi files and examples in
+  267.587 seconds, all 21 infrastructure tests, the 86-heading source TOC,
+  active-reference and report-header lints, the zero-unreviewed strict-LHS
+  audit with 45 annotated slots across 27 clauses, and the fresh strict check
+  catalog;
+- two independent frozen-source release builds produced the same tagged
+  192-page US-Letter PDF with 16 embedded fonts and SHA-256
+  `fbaeb7ea8438a4842c2ea15e7a3671473f6485a1c4b663c2b3b55964c189ef47`.
+  C7 changed no Lambdapi semantics, and the parent TypeScript prototype
+  remains unchanged, non-authoritative, and outside the build graph.
 
 ## Phase Ordering And Change Discipline
 
@@ -1370,9 +1404,9 @@ regression evidence, and mathematical metatheorems.
 
 ## Recommended Next Action
 
-Proceed with Phase C7. Audit dependencies, forward references, central theorem
-and status notes across all seventeen chapters; complete the reading paths,
-glossary, concept index, status matrix, bibliography, credits, and generated
-back matter; remove stale phase language and repetition; then perform
-page-level visual QA, full repository CI, and two independent release builds
-with an identical recorded checksum.
+Treat the completed `0.2.0-dev` artifact as the expanded development-edition
+baseline and seek mathematical and editorial review of the whole book. Any
+promotion of the deferred Yoneda, coend, dependent-adjunction, native
+SIP/Rezk, dagger, or join-as-collage boundaries should begin as a separately
+authorized formal task with a concrete consumer; it should not reopen C0-C7
+or make the historical parent elaborator an implicit dependency.

@@ -37,6 +37,8 @@ $W$, $*$, $\ell$, $\mathsf{Code}$, $\mathsf{encode}$, and
 $\mathsf{power}$ are mathematical abbreviations; the notation appendix maps
 them to active Lambdapi names.
 
+## Evidence Status
+
 Every theorem-like assertion has one of four evidence statuses:
 
 - **Checked.** An active declaration and a regression or reviewer example

@@ -60,8 +60,10 @@ The exposition follows a spiral. The [prologue](#prologue) states the central
 theorem with minimal prerequisites. Chapters 1–7 then develop the judgments,
 categories, families, logic, equivalence, induction, directed higher
 induction, and categorical height needed to understand the proof.
-[Chapter 8](#chapter-8) returns to the calculation in full. The later chapters
-move outward from that proof in a second spiral. [Chapter 9](#chapter-9)
+[Chapter 8](#chapter-8) returns to the calculation in full.
+
+The later chapters move outward from that proof in a second spiral.
+[Chapter 9](#chapter-9)
 organizes functorial computation as a calculus of cuts. Chapters
 [10](#chapter-10)–[15](#chapter-15) develop categories, functors, adjunctions,
 Yoneda, duality, structure identity, and saturation. Chapters
