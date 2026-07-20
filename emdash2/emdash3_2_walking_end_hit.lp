@@ -564,7 +564,7 @@ symbol nat_path_discrete
 ≔ @discrete_cat_intro
     (Path_cat Nat_grpd)
     nat_is_set
-    (@path_cat_is_groupoidal_EQ1 Nat_grpd);
+    (@path_cat_is_groupoidal Nat_grpd);
 
 // The separate free-monoid model satisfies the same dimension contract.
 symbol bnat_is_one_cat
@@ -1254,12 +1254,12 @@ symbol walking_hom_nat_type_equiv
       walking_hom_nat_by_inverse);
 
 // Native equality-valued equivalence facade for the carrier comparison.
-symbol walking_hom_nat_omega_equiv_EQ1
-  : τ (@OmegaEquiv_EQ1
+symbol walking_hom_nat_omega_equiv
+  : τ (@OmegaEquiv
       Grpd_cat
       (Hom WalkingEnd_cat walking_base walking_base)
       Nat_grpd)
-≔ @type_equiv_to_omega_EQ1
+≔ @type_equiv_to_omega
     (Hom WalkingEnd_cat walking_base walking_base)
     Nat_grpd
     walking_hom_nat_type_equiv;
@@ -1335,12 +1335,12 @@ symbol walking_loop_no_right_inverse
       q);
 
 // Hence the loop carries no native omega-equivalence evidence.
-symbol walking_loop_not_omega_equiv_EQ1
-  (u : τ (@OmegaEquivAlong_EQ1
+symbol walking_loop_not_omega_equiv
+  (u : τ (@OmegaEquivAlong
       WalkingEnd_cat walking_base walking_base walking_loop))
   : τ Empty_grpd
 ≔ @walking_loop_no_right_inverse
-    (@omega_equiv_along_right_inv_EQ1
+    (@omega_equiv_along_right_inv
       WalkingEnd_cat walking_base walking_base walking_loop u)
-    (@omega_equiv_along_right_law_EQ1
+    (@omega_equiv_along_right_law
       WalkingEnd_cat walking_base walking_base walking_loop u);

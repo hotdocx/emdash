@@ -10,7 +10,7 @@ require open emdash.emdash3_2_eq1_hom_action;
 
 assert [C : Cat]
   (obj_set : τ (IsSetGrpd (Obj C)))
-  (core_equiv : τ (@IsGroupoidalCat_EQ1 C)) ⊢
+  (core_equiv : τ (@IsGroupoidalCat C)) ⊢
   @is_discrete_cat_core_equiv C
     (@discrete_cat_intro C obj_set core_equiv)
   ≡ core_equiv;
@@ -29,7 +29,7 @@ assert [C : Cat]
   (d : τ (IsDiscreteCat C))
   (x y : τ (Obj C)) ⊢
   @discrete_core_homwise C d x y
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Path_cat (@= (Obj C) x y))
       (Hom_cat C x y)

@@ -22,8 +22,8 @@ Current implementation owners: reusable Nat prerequisites in
 `emdash3_2_nat_arithmetic.lp`; equality-local skeleton/Core-inclusion
 infrastructure in `emdash3_2.lp`; walking HIT/model/comparison and the
 restricted spiral specialization in `emdash3_2_walking_end_hit.lp`. The later
-compatibility-retirement plan mechanically extracted D0/D1 into frozen
-`emdash3_2_legacy_compat.lp`; none of these WalkingEnd owners imports it
+compatibility-retirement plan first extracted and then deleted D0/D1
+compatibility; no WalkingEnd owner ever imported it
 
 Path-action correction (2026-07-20): P9 of
 `REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md`
@@ -35,6 +35,14 @@ canonical iterable `NatSucc_func`. Its path action is therefore the ordinary
 all WalkingEnd HIT, decoder, spiral, sethood, and directed-negative results are
 unchanged. Later refinement/basis references in this report are dated design
 evidence, not active dependencies.
+
+Compatibility/namespace correction (2026-07-20): P10 of the same active plan
+deletes the compatibility module, its seven clients, and its unused legacy
+OneCat theorem. P11 then makes the native equality-valued API unsuffixed after
+an exact zero-collision audit. This is a spelling-only migration for
+WalkingEnd: its `OneCat`, Hom--Nat equivalence, sethood, `BNat` model, and
+directed negative results still pass through the same owners. Any `_EQ1`, D0,
+or D1 spelling later in this report is historical evidence.
 
 ## Status And Authority
 
@@ -49,7 +57,7 @@ The authority order remains the repository order in `AGENTS.md`. In
 particular:
 
 1. `emdash3_2.lp` remains the active computational kernel;
-2. the native EQ1 extension modules retain their current one-way dependency
+2. the native equality-valued extension modules retain their current one-way dependency
    direction;
 3. this report is only the living design and decision ledger for the walking
    endomorphism experiment;

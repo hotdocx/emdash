@@ -410,7 +410,7 @@ assert
       (succ (@walking_encode walking_base p)));
 
 assert
-  (u : τ (@OmegaEquivAlong_EQ1
+  (u : τ (@OmegaEquivAlong
       WalkingEnd_cat walking_base walking_base walking_loop)) ⊢
-  @walking_loop_not_omega_equiv_EQ1 u
+  @walking_loop_not_omega_equiv u
   : τ Empty_grpd;

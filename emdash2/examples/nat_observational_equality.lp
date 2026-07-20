@@ -52,10 +52,10 @@ assert ⊢
   ≡ @id (Path_cat Nat_grpd) zero;
 
 assert (n : τ Nat_grpd) ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Nat_grpd)
     (succ n) (succ n) (@eq_refl Nat_grpd (succ n))
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Nat_grpd) (succ n);
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) (succ n);
 
 // Local runtime, proof-time, and open-endpoint controls only.
 assertnot ⊢ @eq_refl Nat_grpd zero ≡ tt;
@@ -93,9 +93,9 @@ assertnot (n : τ Nat_grpd) ⊢
     (@eq_refl Nat_grpd n);
 
 assertnot (n : τ Nat_grpd) ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Nat_grpd) (succ n) (succ n) (@eq_refl Nat_grpd n)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Nat_grpd) (succ n);
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) (succ n);
 
 assertnot (n : τ Nat_grpd) ⊢
   @= Nat_grpd n n

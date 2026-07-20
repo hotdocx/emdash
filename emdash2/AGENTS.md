@@ -6,27 +6,25 @@ proof assistant for strict/lax omega-categories, omega-functors,
 omega-transformations (“transfors”), directed families, and related dependent
 categorical structures.
 
-The active kernel is `emdash3_2.lp`. The one-way derived native-EQ1
+The active kernel is `emdash3_2.lp`. The one-way derived native equality-valued
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
-the transparent native-EQ1 evidence-property and finite-dimension truncation
+the transparent native equality-valued evidence-property and finite-dimension truncation
 extension is `emdash3_2_eq1_evidence_property.lp`;
 the reusable Nat arithmetic/sethood extension is
 `emdash3_2_nat_arithmetic.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
-The frozen opt-in D0/D1 and decoder compatibility surface is isolated in
-`emdash3_2_legacy_compat.lp`; it is not an active authority or part of the
-normal dependency closure.
 
 ## Authorities
 
 Use the following order:
 
 1. `emdash3_2.lp` for active kernel definitions and computation;
-2. `emdash3_2_eq1_hom_action.lp` for the transparent derived native-EQ1
+2. `emdash3_2_eq1_hom_action.lp` for the transparent derived native
+   equality-valued
    next-hom and groupoidality layer;
-3. `emdash3_2_eq1_evidence_property.lp` for transparent native-EQ1
+3. `emdash3_2_eq1_evidence_property.lp` for transparent native equality-valued
    evidence-property, retract-truncation, and finite-`NCat` object-truncation
    theorems;
 4. `emdash3_2_nat_arithmetic.lp` for reusable Nat addition, associativity,
@@ -42,13 +40,13 @@ Use the following order:
    for comment/example notation;
 10. `reports/INDEX.md` for task-specific plans and decision records.
 
-`emdash3_2_legacy_compat.lp` is deliberately outside this authority order. It
-imports the active kernel one-way, is consumed only by explicitly legacy
-reviewer examples, and is frozen against new consumers or features. Its
-temporary retention preserves the complete two-sided OneCat
-`one_cat_iso_type_equiv` contract until a separately reviewed native
-facade-package/raw-path coherence migration is available or backward
-compatibility is deliberately dropped.
+The former D0/D1/decoder compatibility module and its self-only reviewer
+examples are retired. The selected API is the unsuffixed native
+equality-valued representation; do not recreate compatibility aliases. Native
+`OneCat` structure, hom action, truncation, the one-way ordinary-isomorphism
+lift, and WalkingEnd/Nat results remain active. A full native
+object-equality/ordinary-isomorphism equivalence is optional future work, not a
+compatibility prerequisite.
 
 The obsolete v2/v3.1 material under ignored `.scratchpad/` directories is not
 part of normal development. Do not read, summarize, or reference it unless the

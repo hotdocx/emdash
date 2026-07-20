@@ -63,7 +63,7 @@ assert (X : τ OneCat)
   (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)))
   (f g : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
   @one_cat_hom_core_homwise X x y f g
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Path_cat (@=
         (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)

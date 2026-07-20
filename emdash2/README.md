@@ -64,23 +64,22 @@ The checked kernel currently includes:
   staging, and groupoid decoder univalence with both propositional round trips,
   a derived canonical contractible-fibre capability, a propositional transport
   square, and a Pi-universe action consumer. The equality-valued overlay adds
-  a decoded native `OmegaEquivAlong_EQ1(f)` record with separate inverse arrows
+  a decoded native `OmegaEquivAlong(f)` record with separate inverse arrows
   and ordinary equality-valued cancellation laws, plus a stable first-class
-  `OmegaEquiv_EQ1` facade with construction, projections, dependent
+  `OmegaEquiv` facade with construction, projections, dependent
   elimination, propositional eta, and a transparent Sigma comparison. Generic
   object equality compares with that facade at proof time; rigid Cat and Grpd
   universe equality reduce to it at runtime, while explicit path packages own
   observer computation. The D0-free library view
   `GrpdPathView = TypeEquiv` and its explicit adapters remain in the kernel and
   use a transparent quasi-inverse-to-contractible-fibre theorem. The older
-  recursive D0/D0b/D1 certificates, unsuffixed omega-equivalence facade, Cat
-  decoder, and their round trips have been mechanically extracted into the
-  frozen opt-in `emdash3_2_legacy_compat.lp` module. They are absent from the
-  active kernel/native/check dependency closure and are not a second
-  equivalence foundation. The self-only one-layer and dimension-indexed D0
-  observation trees were deleted rather than extracted.
+  recursive D0/D0b/D1 certificates, decoder facade, compatibility module, and
+  their self-only reviewer examples are retired. The unsuffixed names now
+  denote only this native equality-valued API; there is no second equivalence
+  foundation or compatibility alias.
 
-  The downstream transparent evidence module proves fixed-arrow native-EQ1
+  The downstream transparent evidence module proves fixed-arrow native
+  equality-valued
   evidence proposition-valued for every category by contracting two
   composition-map homotopy fibres. It also proves truncation closure under
   explicit retractions and the unconditional finite-dimensional theorem
@@ -89,13 +88,12 @@ The checked kernel currently includes:
   property capability and its conditional theorem are retired; the generic
   `prop_is_trunc_cat_dim` lemma remains because the native theorem uses it.
   Ordinary Product isomorphism evidence retains its componentwise constructor
-  provenance even when both components are reflexive. The extracted legacy
-  module separately preserves its historical Product omega-equivalence and
-  decoder computation only for seven explicitly legacy reviewer examples;
+  provenance even when both components are reflexive. The old compatibility-
+  only Product omega-equivalence and decoder examples are retired;
 - covariant/contravariant hom actions and the rigid simultaneous `Hom_*`
   action used by the unit hom profunctor;
 - the exact two-field `IsDiscreteCat(C)` contract, with set-truncated objects
-  and native `IsGroupoidalCat_EQ1(C)` evidence. The one-way native hom-action
+  and native `IsGroupoidalCat(C)` evidence. The one-way native hom-action
   extension derives the iterable core-inclusion hom equivalence, selected
   `hom_to_path`, equality-valued re-inclusion, and the retained directed-cell
   round-trip surface without broad runtime cancellation;
@@ -104,18 +102,17 @@ The checked kernel currently includes:
   evidence-retaining `NCat(n)` packages with `ZeroCat`/`OneCat`; a packaged
   one-category exposes discrete hom-categories and iterates native
   core-inclusion adequacy between parallel arrows. Native fixed-map
-  `OmegaEquivAlong_EQ1(F)` induces an ordinary equivalence of object
-  classifiers and transports `IsObjTruncCat`; native EQ1 evidence proves the
-  recursive `IsNCat` object-truncation theorem unconditionally. Ordinary
+  `OmegaEquivAlong(F)` induces an ordinary equivalence of object
+  classifiers and transports `IsObjTruncCat`; native equality-valued evidence
+  proves the recursive `IsNCat` object-truncation theorem unconditionally. Ordinary
   strict isomorphism evidence has a direct one-way native lift through
-  `iso_evidence_omega_along_EQ1`/`iso_evidence_omega_equiv_EQ1`: both native
+  `iso_evidence_omega_along`/`iso_evidence_omega_equiv`: both native
   inverse slots reuse the ordinary inverse and both equations already have the
-  required equality-valued types. The complete two-sided OneCat
-  `one_cat_iso_type_equiv` contract remains in the frozen compatibility module:
-  a focused native replacement stops at the intentional stable-cast/facade-
-  package-to-raw-path reification boundary even at reflexivity. The theorem is
-  retained intact rather than weakened or supported by a new proof-time
-  identification, and no new compatibility consumer is permitted;
+  required equality-valued types. The old D0-based two-sided OneCat
+  `one_cat_iso_type_equiv` contract is retired with compatibility. Native
+  `OneCat`, hom discreteness/action, finite-dimensional truncation, and the
+  one-way ordinary-isomorphism lift remain; a fully native two-sided theorem
+  is optional future work rather than a prerequisite;
 - canonical iterable `Path_cat_func`/`path_map_func` action for every raw
   groupoid function. Its capped `fapp1_fapp0` action computes directly to
   `eq_ap`, its full next-hom action remains iterable through `fapp1_func`, and
@@ -141,9 +138,11 @@ or a completed foundational theory.
 ## Authorities And Layout
 
 - `emdash3_2.lp`: active v3.2 kernel implementation.
-- `emdash3_2_eq1_hom_action.lp`: one-way transparent derived native-EQ1
+- `emdash3_2_eq1_hom_action.lp`: one-way transparent derived native
+  equality-valued
   hom-action, groupoidality, and structured-transport extension.
-- `emdash3_2_eq1_evidence_property.lp`: downstream transparent native-EQ1
+- `emdash3_2_eq1_evidence_property.lp`: downstream transparent native
+  equality-valued
   evidence-property, retract-truncation, and finite-`NCat` object-truncation
   extension.
 - `emdash3_2_nat_arithmetic.lp`: reusable Nat arithmetic, canonical
@@ -151,10 +150,6 @@ or a completed foundational theory.
 - `emdash3_2_walking_end_hit.lp`: selected walking-endomorphism directed-HIT,
   eliminator/comparison, and separate `BNat` consistency model.
 - `emdash3_2_checks.lp`: executable diagnostic/regression suite.
-- `emdash3_2_legacy_compat.lp`: frozen opt-in D0/D1 and decoder compatibility
-  module. It imports the kernel one-way, is non-authoritative, and may be used
-  only by the seven explicitly legacy examples; no new consumer or feature is
-  accepted.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
   current architecture and development SOP.
 - `reports/EMDASH_FOUNDATIONS.md`: mathematical reading guide.

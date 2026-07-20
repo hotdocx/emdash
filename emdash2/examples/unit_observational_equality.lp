@@ -32,9 +32,9 @@ assert ⊢
   ≡ @id (Path_cat Unit_grpd) tt;
 
 assert ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Unit_grpd) tt tt (@eq_refl Unit_grpd tt)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Unit_grpd) tt;
+  ≡ @omega_equiv_refl (Path_cat Unit_grpd) tt;
 
 // Local runtime, proof-time, and open-variable controls only.
 assertnot ⊢ @eq_refl Unit_grpd tt ≡ tt;

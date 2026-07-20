@@ -4,8 +4,8 @@ require open emdash.emdash3_2;
   Equality-valued omega-equivalence: native action on next homs.
 
   This is a one-way derived extension of emdash3_2.lp. It proves that the hom
-  action F_1(x,y) of a category-level OmegaEquivAlong_EQ1 witness is itself
-  an OmegaEquivAlong_EQ1 witness. The construction is transparent: it adds no
+  action F_1(x,y) of a category-level OmegaEquivAlong witness is itself
+  an OmegaEquivAlong witness. The construction is transparent: it adds no
   primitive, opaque theorem, rewrite rule, unification rule, decoder, or
   D0/D0b compatibility dependency.
 
@@ -15,7 +15,7 @@ require open emdash.emdash3_2;
   half-adjoint triangle to prove the two hom-functor cancellation laws.
 
   Proof-engineering lemmas are protected module implementation details. The
-  hom-action proof core exposes omega_equiv_along_fapp1_EQ1 as its sole
+  hom-action proof core exposes omega_equiv_along_fapp1 as its sole
   ordinary public owner; its projections and the complete protected proof
   chain remain computational. Public groupoidality consumers follow below.
 */
@@ -27,23 +27,23 @@ require open emdash.emdash3_2;
 protected symbol eq1_left_functor
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (Functor B A)
-≔ @omega_equiv_along_left_inv_EQ1 Cat_cat A B F u;
+≔ @omega_equiv_along_left_inv Cat_cat A B F u;
 
 // R : B -> A is the independently supplied right inverse of F.
 protected symbol eq1_right_functor
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (Functor B A)
-≔ @omega_equiv_along_right_inv_EQ1 Cat_cat A B F u;
+≔ @omega_equiv_along_right_inv Cat_cat A B F u;
 
 // The left cancellation path L F = id_A, viewed as a transformation.
 protected symbol eq1_left_to_transf
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (@Transf
       A A
       (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
@@ -52,13 +52,13 @@ protected symbol eq1_left_to_transf
     (Functor_cat A A)
     (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
     (@id_func A)
-    (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u);
+    (@omega_equiv_along_left_law Cat_cat A B F u);
 
 // The reverse transformation id_A => L F.
 protected symbol eq1_left_from_transf
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (@Transf
       A A
       (@id_func A)
@@ -71,13 +71,13 @@ protected symbol eq1_left_from_transf
       (Obj (Functor_cat A A))
       (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
       (@id_func A)
-      (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u));
+      (@omega_equiv_along_left_law Cat_cat A B F u));
 
 // Pointwise component L(F x) -> x of the left cancellation.
 protected symbol eq1_left_to_component
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (Hom A
       (@fapp0 B A (eq1_left_functor u) (@fapp0 A B F x))
@@ -93,7 +93,7 @@ protected symbol eq1_left_to_component
 protected symbol eq1_left_from_component
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (Hom A
       x
@@ -109,7 +109,7 @@ protected symbol eq1_left_from_component
 protected symbol eq1_fapp1_left_inv
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (Functor
       (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
@@ -138,7 +138,7 @@ protected symbol eq1_fapp1_left_inv
 protected symbol eq1_left_right_functor_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (@=
       (Obj (Functor_cat B A))
       (eq1_left_functor u)
@@ -168,7 +168,7 @@ protected symbol eq1_left_right_functor_path
         (Obj (Functor_cat B B))
         (@comp_cat_fapp0 B A B F (eq1_right_functor u))
         (@id_func B)
-        (@omega_equiv_along_right_law_EQ1 Cat_cat A B F u)))
+        (@omega_equiv_along_right_law Cat_cat A B F u)))
     (@eq_ap
       (Obj (Functor_cat A A))
       (Obj (Functor_cat B A))
@@ -176,13 +176,13 @@ protected symbol eq1_left_right_functor_path
         @comp_cat_fapp0 B A A H (eq1_right_functor u))
       (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
       (@id_func A)
-      (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u));
+      (@omega_equiv_along_left_law Cat_cat A B F u));
 
 // The generic half-adjoint counit equips L with an adjusted F L = id_B law.
 protected symbol eq1_left_functor_right_law
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (@=
       (Obj (Functor_cat B B))
       (@comp_cat_fapp0 B A B F (eq1_left_functor u))
@@ -199,7 +199,7 @@ protected symbol eq1_left_functor_right_law
       (eq1_left_functor u)
       (eq1_right_functor u)
       (eq1_left_right_functor_path u))
-    (@omega_equiv_along_right_law_EQ1 Cat_cat A B F u);
+    (@omega_equiv_along_right_law Cat_cat A B F u);
 
 // -----------------------------------------------------------------------------------------------
 // Equality evaluation and the half-adjoint component equation
@@ -295,21 +295,21 @@ protected symbol eq1_eq_ap_sym
 protected symbol eq1_left_path_component
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (Obj A)
       (@fapp0 B A (eq1_left_functor u) (@fapp0 A B F x))
       x)
 ≔ eq1_functor_path_component
-    (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u)
+    (@omega_equiv_along_left_law Cat_cat A B F u)
     x;
 
 // Pointwise comparison between the selected left and right inverse functors.
 protected symbol eq1_left_right_path_component
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (Obj B)
@@ -323,7 +323,7 @@ protected symbol eq1_left_right_path_component
 protected symbol eq1_adjusted_right_component_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (Obj B)
@@ -372,7 +372,7 @@ protected symbol eq1_adjusted_right_component_path
 protected symbol eq1_triangle_forward_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (Obj B)
@@ -390,7 +390,7 @@ protected symbol eq1_triangle_forward_path
 protected symbol eq1_half_adjoint_triangle_point
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (@= (Obj B)
@@ -413,7 +413,7 @@ protected symbol eq1_half_adjoint_triangle_point
 protected symbol eq1_adjusted_right_stage1_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (@=
       (Obj (Functor_cat B B))
       (@comp_cat_fapp0 B A B F (eq1_left_functor u))
@@ -440,7 +440,7 @@ protected symbol eq1_adjusted_right_stage1_path
 protected symbol eq1_adjusted_right_stage2_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (@=
       (Obj (Functor_cat B B))
       (@comp_cat_fapp0
@@ -457,13 +457,13 @@ protected symbol eq1_adjusted_right_stage2_path
         (@comp_cat_fapp0 B A A H (eq1_left_functor u)))
     (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
     (@id_func A)
-    (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u);
+    (@omega_equiv_along_left_law Cat_cat A B F u);
 
 // The adjusted counit factored into the two stages and the original law.
 protected symbol eq1_adjusted_right_law_factored
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   : τ (@=
       (Obj (Functor_cat B B))
       (@comp_cat_fapp0 B A B F (eq1_left_functor u))
@@ -492,7 +492,7 @@ protected symbol eq1_adjusted_right_law_factored
 protected symbol eq1_adjusted_stage1_component
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (Obj B)
@@ -515,7 +515,7 @@ protected symbol eq1_adjusted_stage1_component
 protected symbol eq1_adjusted_stage2_component
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (Obj B)
@@ -538,7 +538,7 @@ protected symbol eq1_adjusted_stage2_component
 protected symbol eq1_adjusted_stage1_component_agrees
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (@= (Obj B)
@@ -615,7 +615,7 @@ protected symbol eq1_adjusted_stage1_component_agrees
 protected symbol eq1_adjusted_stage2_component_agrees
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (@= (Obj B)
@@ -647,7 +647,7 @@ protected symbol eq1_adjusted_stage2_component_agrees
         @fapp0 A B F (@fapp0 A A H (@fapp0 B A (eq1_left_functor u) b)))
       (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
       (@id_func A)
-      (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u))
+      (@omega_equiv_along_left_law Cat_cat A B F u))
     (@eq_ap
       (Obj A) (Obj B)
       (λ z : τ (Obj A), @fapp0 A B F z)
@@ -668,7 +668,7 @@ protected symbol eq1_adjusted_stage2_component_agrees
       (λ K : τ (Functor B B), @fapp0 B B K b)
       (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
       (@id_func A)
-      (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u))
+      (@omega_equiv_along_left_law Cat_cat A B F u))
     (@eq_sym
       (@= (Obj B)
         (@fapp0 A B F
@@ -691,7 +691,7 @@ protected symbol eq1_adjusted_stage2_component_agrees
           @fapp0 A B F (@fapp0 A A H (@fapp0 B A (eq1_left_functor u) b)))
         (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
         (@id_func A)
-        (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u))
+        (@omega_equiv_along_left_law Cat_cat A B F u))
       (@eq_ap_comp
         (Obj (Functor_cat A A))
         (Obj A)
@@ -701,13 +701,13 @@ protected symbol eq1_adjusted_stage2_component_agrees
         (λ z : τ (Obj A), @fapp0 A B F z)
         (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
         (@id_func A)
-        (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u)));
+        (@omega_equiv_along_left_law Cat_cat A B F u)));
 
 // Direct evaluation of the factored adjusted counit.
 protected symbol eq1_adjusted_component_raw
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (Obj B)
@@ -756,7 +756,7 @@ protected symbol eq1_functor_path_component_trans
 protected symbol eq1_adjusted_component_agrees
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (@= (Obj B)
@@ -996,7 +996,7 @@ protected symbol eq1_path_to_hom_fapp1_agrees
 protected symbol eq1_triangle_forward_hom_agrees
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (Hom B
@@ -1062,7 +1062,7 @@ protected symbol eq1_triangle_forward_hom_agrees
         x
         (eq1_left_path_component u x))
       (eq1_path_to_component_agrees
-        (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u)
+        (@omega_equiv_along_left_law Cat_cat A B F u)
         x))
     (@eq1_path_to_hom_fapp1_agrees
       A B F
@@ -1074,7 +1074,7 @@ protected symbol eq1_triangle_forward_hom_agrees
 protected symbol eq1_adjusted_to_hom_agrees
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (b : τ (Obj B))
   : τ (@=
       (Hom B
@@ -1128,7 +1128,7 @@ protected symbol eq1_adjusted_to_hom_agrees
 protected symbol eq1_half_adjoint_triangle_hom
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (Hom B
@@ -1175,7 +1175,7 @@ protected symbol eq1_half_adjoint_triangle_hom
 protected symbol eq1_half_adjoint_triangle_to_component
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (Hom B
@@ -1253,7 +1253,7 @@ protected symbol eq1_half_adjoint_triangle_to_component
 protected symbol eq1_half_adjoint_triangle_raw
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (@= (Obj B)
@@ -1284,7 +1284,7 @@ protected symbol eq1_half_adjoint_triangle_raw
 protected symbol eq1_half_adjoint_triangle_reverse_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (@= (Obj B)
@@ -1330,7 +1330,7 @@ protected symbol eq1_half_adjoint_triangle_reverse_path
 protected symbol eq1_triangle_reverse_hom_agrees
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (Hom B
@@ -1414,7 +1414,7 @@ protected symbol eq1_triangle_reverse_hom_agrees
           x
           (eq1_left_path_component u x)))
       (eq1_path_from_component_eq_sym_agrees
-        (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u)
+        (@omega_equiv_along_left_law Cat_cat A B F u)
         x))
     (@eq_trans
       (Hom B
@@ -1515,7 +1515,7 @@ protected symbol eq1_triangle_reverse_hom_agrees
 protected symbol eq1_half_adjoint_triangle_from_component
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A))
   : τ (@=
       (Hom B
@@ -1702,7 +1702,7 @@ protected symbol eq1_path_conjugate_hom_law
 protected symbol eq1_fapp1_left_right_conjugate_raw
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (Functor
       (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
@@ -1871,7 +1871,7 @@ protected symbol eq1_functor_path_Hom_fapp1_naturality
 protected symbol eq1_fapp1_left_right_naturality_middle
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (Functor
       (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
@@ -1907,7 +1907,7 @@ protected symbol eq1_fapp1_left_right_naturality_middle
 protected symbol eq1_fapp1_left_right_conjugate_middle
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (Functor
       (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
@@ -1960,7 +1960,7 @@ protected symbol eq1_fapp1_left_right_conjugate_middle
 protected symbol eq1_fapp1_left_right_assoc_step
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (@=
       (Obj (Functor_cat
@@ -2000,7 +2000,7 @@ protected symbol eq1_fapp1_left_right_assoc_step
 protected symbol eq1_fapp1_left_right_naturality_step
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (@=
       (Obj (Functor_cat
@@ -2084,14 +2084,14 @@ protected symbol eq1_fapp1_left_right_naturality_step
     (@eq1_functor_path_Hom_fapp1_naturality
       A B F
       (@comp_cat_fapp0 A B A (eq1_left_functor u) F)
-      (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u)
+      (@omega_equiv_along_left_law Cat_cat A B F u)
       x y);
 
 // Final associativity comparison to raw endpoint conjugation.
 protected symbol eq1_fapp1_left_right_raw_assoc_step
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (@=
       (Obj (Functor_cat
@@ -2143,7 +2143,7 @@ protected symbol eq1_fapp1_left_right_raw_assoc_step
 protected symbol eq1_fapp1_left_right_raw_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (@=
       (Obj (Functor_cat
@@ -2192,7 +2192,7 @@ protected symbol eq1_fapp1_left_right_raw_path
 protected symbol eq1_adjusted_Hom_func_actual
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (Functor
       (Hom_cat B
@@ -2224,7 +2224,7 @@ protected symbol eq1_adjusted_Hom_func_actual
 protected symbol eq1_adjusted_Hom_func_source_replaced
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (Functor
       (Hom_cat B
@@ -2254,7 +2254,7 @@ protected symbol eq1_adjusted_Hom_func_source_replaced
 protected symbol eq1_adjusted_Hom_func_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (@=
       (Obj (Functor_cat
@@ -2384,7 +2384,7 @@ protected symbol eq1_adjusted_Hom_func_path
 protected symbol eq1_fapp1_left_right_raw_adjusted_path
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (@=
       (Obj (Functor_cat
@@ -2448,7 +2448,7 @@ protected symbol eq1_fapp1_left_right_raw_adjusted_path
 protected symbol eq1_fapp1_left_right_law
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (@=
       (Obj (Functor_cat
@@ -2476,7 +2476,7 @@ end;
 protected symbol eq1_fapp1_left_left_law
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
   : τ (@=
       (Obj (Functor_cat (Hom_cat A x y) (Hom_cat A x y)))
@@ -2488,24 +2488,24 @@ protected symbol eq1_fapp1_left_left_law
         (@fapp1_func A B F x y))
       (@id_func (Hom_cat A x y)))
 ≔ eq1_path_conjugate_hom_law
-    (@omega_equiv_along_left_law_EQ1 Cat_cat A B F u)
+    (@omega_equiv_along_left_law Cat_cat A B F u)
     x y;
 
 // -----------------------------------------------------------------------------------------------
 // Public owner
 
 // An equality-valued omega-equivalence acts by equivalences on every next hom.
-symbol omega_equiv_along_fapp1_EQ1
+symbol omega_equiv_along_fapp1
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A))
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Hom_cat A x y)
       (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
       (@fapp1_func A B F x y))
-≔ @omega_equiv_along_intro_EQ1
+≔ @omega_equiv_along_intro
     Cat_cat
     (Hom_cat A x y)
     (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
@@ -2518,20 +2518,20 @@ symbol omega_equiv_along_fapp1_EQ1
 /*
   General internal groupoidality acts homwise.
 
-  The selected EQ1 witness for Core(C) -> C acts directly through the native
+  The selected equality-valued witness for Core(C) -> C acts directly through the native
   equality-valued next-hom owner. No D0/D0b conversion, decoder, eliminator,
   rewrite rule, or unification equation is introduced.
 */
-symbol groupoidal_core_homwise_EQ1
+symbol groupoidal_core_homwise
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (x y : τ (Obj C))
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Path_cat (@= (Obj C) x y))
       (Hom_cat C x y)
       (@core_incl_hom_func C x y))
-≔ @omega_equiv_along_fapp1_EQ1
+≔ @omega_equiv_along_fapp1
     (Core_cat C)
     C
     (Core_incl_func C)
@@ -2540,37 +2540,37 @@ symbol groupoidal_core_homwise_EQ1
     y;
 
 // The selected right inverse reads a directed arrow as an object path.
-symbol groupoidal_arrow_to_path_func_EQ1
+symbol groupoidal_arrow_to_path_func
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (x y : τ (Obj C))
   : τ (Functor
       (Hom_cat C x y)
       (Path_cat (@= (Obj C) x y)))
-≔ @omega_equiv_along_right_inv_EQ1
+≔ @omega_equiv_along_right_inv
     Cat_cat
     (Path_cat (@= (Obj C) x y))
     (Hom_cat C x y)
     (@core_incl_hom_func C x y)
-    (@groupoidal_core_homwise_EQ1 C g x y);
+    (@groupoidal_core_homwise C g x y);
 
 // Apply the selected inverse functor to read one directed arrow as a path.
-symbol groupoidal_arrow_to_path_EQ1
+symbol groupoidal_arrow_to_path
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
   : τ (@= (Obj C) x y)
 ≔ @fapp0
     (Hom_cat C x y)
     (Path_cat (@= (Obj C) x y))
-    (@groupoidal_arrow_to_path_func_EQ1 C g x y)
+    (@groupoidal_arrow_to_path_func C g x y)
     f;
 
 // Re-including the selected path is propositionally the original arrow.
-symbol groupoidal_arrow_section_EQ1
+symbol groupoidal_arrow_section
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (x y : τ (Obj C))
   : τ (@=
       (Hom Cat_cat (Hom_cat C x y) (Hom_cat C x y))
@@ -2580,19 +2580,19 @@ symbol groupoidal_arrow_section_EQ1
         (Path_cat (@= (Obj C) x y))
         (Hom_cat C x y)
         (@core_incl_hom_func C x y)
-        (@groupoidal_arrow_to_path_func_EQ1 C g x y))
+        (@groupoidal_arrow_to_path_func C g x y))
       (@id Cat_cat (Hom_cat C x y)))
-≔ @omega_equiv_along_right_law_EQ1
+≔ @omega_equiv_along_right_law
     Cat_cat
     (Path_cat (@= (Obj C) x y))
     (Hom_cat C x y)
     (@core_incl_hom_func C x y)
-    (@groupoidal_core_homwise_EQ1 C g x y);
+    (@groupoidal_core_homwise C g x y);
 
 // Pointwise, re-including the selected path recovers the original arrow.
-symbol groupoidal_path_to_arrow_retract_EQ1
+symbol groupoidal_path_to_arrow_retract
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
   : τ (@=
@@ -2601,7 +2601,7 @@ symbol groupoidal_path_to_arrow_retract_EQ1
         (Path_cat (@= (Obj C) x y))
         (Hom_cat C x y)
         (@core_incl_hom_func C x y)
-        (@groupoidal_arrow_to_path_EQ1 C g x y f))
+        (@groupoidal_arrow_to_path C g x y f))
       f)
 ≔ @eq_ap
     (Hom Cat_cat (Hom_cat C x y) (Hom_cat C x y))
@@ -2614,9 +2614,9 @@ symbol groupoidal_path_to_arrow_retract_EQ1
       (Path_cat (@= (Obj C) x y))
       (Hom_cat C x y)
       (@core_incl_hom_func C x y)
-      (@groupoidal_arrow_to_path_func_EQ1 C g x y))
+      (@groupoidal_arrow_to_path_func C g x y))
     (@id Cat_cat (Hom_cat C x y))
-    (@groupoidal_arrow_section_EQ1 C g x y);
+    (@groupoidal_arrow_section C g x y);
 
 /*
   Discrete-category homwise path selection.
@@ -2629,12 +2629,12 @@ symbol discrete_core_homwise
   [C : Cat]
   (d : τ (IsDiscreteCat C))
   (x y : τ (Obj C))
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Path_cat (@= (Obj C) x y))
       (Hom_cat C x y)
       (@core_incl_hom_func C x y))
-≔ @groupoidal_core_homwise_EQ1
+≔ @groupoidal_core_homwise
     C
     (@is_discrete_cat_core_equiv C d)
     x
@@ -2648,7 +2648,7 @@ symbol discrete_core_hom_inv_func
   : τ (Functor
       (Hom_cat C x y)
       (Path_cat (@= (Obj C) x y)))
-≔ @groupoidal_arrow_to_path_func_EQ1
+≔ @groupoidal_arrow_to_path_func
     C
     (@is_discrete_cat_core_equiv C d)
     x
@@ -2661,7 +2661,7 @@ symbol hom_to_path
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
   : τ (@= (Obj C) x y)
-≔ @groupoidal_arrow_to_path_EQ1
+≔ @groupoidal_arrow_to_path
     C
     (@is_discrete_cat_core_equiv C d)
     x
@@ -2684,7 +2684,7 @@ symbol discrete_core_hom_left_law
         (@discrete_core_hom_inv_func C d x y)
         (@core_incl_hom_func C x y))
       (@id Cat_cat (Path_cat (@= (Obj C) x y))))
-≔ @omega_equiv_along_left_law_EQ1
+≔ @omega_equiv_along_left_law
     Cat_cat
     (Path_cat (@= (Obj C) x y))
     (Hom_cat C x y)
@@ -2716,7 +2716,7 @@ symbol path_to_hom_hom_to_path_path
       (Hom C x y)
       (@path_to_hom C x y (@hom_to_path C d x y f))
       f)
-≔ @groupoidal_path_to_arrow_retract_EQ1
+≔ @groupoidal_path_to_arrow_retract
     C
     (@is_discrete_cat_core_equiv C d)
     x
@@ -2744,7 +2744,7 @@ symbol one_cat_hom_core_homwise
   (X : τ OneCat)
   (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)))
   (f g : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) x y))
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Path_cat (@=
         (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)
@@ -2765,9 +2765,9 @@ symbol one_cat_hom_core_homwise
     g;
 
 // Selected inverse arrow obtained from the groupoidality-selected path.
-symbol groupoidal_arrow_inverse_EQ1
+symbol groupoidal_arrow_inverse
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
   : τ (Hom C y x)
@@ -2776,118 +2776,118 @@ symbol groupoidal_arrow_inverse_EQ1
     (@path_sym
       (Obj C)
       x y
-      (@groupoidal_arrow_to_path_EQ1 C g x y f));
+      (@groupoidal_arrow_to_path C g x y f));
 
 // The selected inverse cancels the original arrow on the left.
-symbol groupoidal_arrow_left_law_EQ1
+symbol groupoidal_arrow_left_law
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
   : τ (@=
       (Hom C x x)
       (@comp_fapp0 C x y x
-        (@groupoidal_arrow_inverse_EQ1 C g x y f)
+        (@groupoidal_arrow_inverse C g x y f)
         f)
       (@id C x))
 ≔ @eq_trans
     (Hom C x x)
     (@comp_fapp0 C x y x
-      (@groupoidal_arrow_inverse_EQ1 C g x y f)
+      (@groupoidal_arrow_inverse C g x y f)
       f)
     (@comp_fapp0 C x y x
-      (@groupoidal_arrow_inverse_EQ1 C g x y f)
+      (@groupoidal_arrow_inverse C g x y f)
       (@path_to_hom C x y
-        (@groupoidal_arrow_to_path_EQ1 C g x y f)))
+        (@groupoidal_arrow_to_path C g x y f)))
     (@id C x)
     (@eq_sym
       (Hom C x x)
       (@comp_fapp0 C x y x
-        (@groupoidal_arrow_inverse_EQ1 C g x y f)
+        (@groupoidal_arrow_inverse C g x y f)
         (@path_to_hom C x y
-          (@groupoidal_arrow_to_path_EQ1 C g x y f)))
+          (@groupoidal_arrow_to_path C g x y f)))
       (@comp_fapp0 C x y x
-        (@groupoidal_arrow_inverse_EQ1 C g x y f)
+        (@groupoidal_arrow_inverse C g x y f)
         f)
       (@eq_ap
         (Hom C x y)
         (Hom C x x)
         (λ h : τ (Hom C x y),
           @comp_fapp0 C x y x
-            (@groupoidal_arrow_inverse_EQ1 C g x y f)
+            (@groupoidal_arrow_inverse C g x y f)
             h)
         (@path_to_hom C x y
-          (@groupoidal_arrow_to_path_EQ1 C g x y f))
+          (@groupoidal_arrow_to_path C g x y f))
         f
-        (@groupoidal_path_to_arrow_retract_EQ1 C g x y f)))
-    (@object_path_equiv_left_law_EQ1
+        (@groupoidal_path_to_arrow_retract C g x y f)))
+    (@object_path_equiv_left_law
       C x y
-      (@groupoidal_arrow_to_path_EQ1 C g x y f));
+      (@groupoidal_arrow_to_path C g x y f));
 
 // The selected inverse cancels the original arrow on the right.
-symbol groupoidal_arrow_right_law_EQ1
+symbol groupoidal_arrow_right_law
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
   : τ (@=
       (Hom C y y)
       (@comp_fapp0 C y x y
         f
-        (@groupoidal_arrow_inverse_EQ1 C g x y f))
+        (@groupoidal_arrow_inverse C g x y f))
       (@id C y))
 ≔ @eq_trans
     (Hom C y y)
     (@comp_fapp0 C y x y
       f
-      (@groupoidal_arrow_inverse_EQ1 C g x y f))
+      (@groupoidal_arrow_inverse C g x y f))
     (@comp_fapp0 C y x y
       (@path_to_hom C x y
-        (@groupoidal_arrow_to_path_EQ1 C g x y f))
-      (@groupoidal_arrow_inverse_EQ1 C g x y f))
+        (@groupoidal_arrow_to_path C g x y f))
+      (@groupoidal_arrow_inverse C g x y f))
     (@id C y)
     (@eq_sym
       (Hom C y y)
       (@comp_fapp0 C y x y
         (@path_to_hom C x y
-          (@groupoidal_arrow_to_path_EQ1 C g x y f))
-        (@groupoidal_arrow_inverse_EQ1 C g x y f))
+          (@groupoidal_arrow_to_path C g x y f))
+        (@groupoidal_arrow_inverse C g x y f))
       (@comp_fapp0 C y x y
         f
-        (@groupoidal_arrow_inverse_EQ1 C g x y f))
+        (@groupoidal_arrow_inverse C g x y f))
       (@eq_ap
         (Hom C x y)
         (Hom C y y)
         (λ h : τ (Hom C x y),
           @comp_fapp0 C y x y
             h
-            (@groupoidal_arrow_inverse_EQ1 C g x y f))
+            (@groupoidal_arrow_inverse C g x y f))
         (@path_to_hom C x y
-          (@groupoidal_arrow_to_path_EQ1 C g x y f))
+          (@groupoidal_arrow_to_path C g x y f))
         f
-        (@groupoidal_path_to_arrow_retract_EQ1 C g x y f)))
-    (@object_path_equiv_right_law_EQ1
+        (@groupoidal_path_to_arrow_retract C g x y f)))
+    (@object_path_equiv_right_law
       C x y
-      (@groupoidal_arrow_to_path_EQ1 C g x y f));
+      (@groupoidal_arrow_to_path C g x y f));
 
-// Every arrow in an internally groupoidal category has explicit EQ1 evidence.
-symbol groupoidal_arrow_equiv_along_EQ1
+// Every arrow in an internally groupoidal category has explicit equality-valued evidence.
+symbol groupoidal_arrow_equiv_along
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
-  : τ (@OmegaEquivAlong_EQ1 C x y f)
-≔ @omega_equiv_along_intro_EQ1
+  : τ (@OmegaEquivAlong C x y f)
+≔ @omega_equiv_along_intro
     C x y f
-    (@groupoidal_arrow_inverse_EQ1 C g x y f)
-    (@groupoidal_arrow_inverse_EQ1 C g x y f)
-    (@groupoidal_arrow_left_law_EQ1 C g x y f)
-    (@groupoidal_arrow_right_law_EQ1 C g x y f);
+    (@groupoidal_arrow_inverse C g x y f)
+    (@groupoidal_arrow_inverse C g x y f)
+    (@groupoidal_arrow_left_law C g x y f)
+    (@groupoidal_arrow_right_law C g x y f);
 
-// Pointwise classifier saying that every directed arrow carries native EQ1
+// Pointwise classifier saying that every directed arrow carries native equality-valued
 // equivalence evidence. This does not itself package the coherent inverse
-// omega-functor C -> Core(C) required by IsGroupoidalCat_EQ1.
-symbol AllArrowsEquiv_EQ1
+// omega-functor C -> Core(C) required by IsGroupoidalCat.
+symbol AllArrowsEquiv
   (C : Cat)
   : Grpd
 ≔ @Pi_grpd
@@ -2899,39 +2899,39 @@ symbol AllArrowsEquiv_EQ1
           @Pi_grpd
             (Hom C x y)
             (λ f : τ (Hom C x y),
-              @OmegaEquivAlong_EQ1 C x y f)));
+              @OmegaEquivAlong C x y f)));
 
 // Internal groupoidality supplies pointwise equivalence evidence for all
 // arrows through the selected native homwise inverse.
-symbol groupoidal_all_arrows_equiv_EQ1
+symbol groupoidal_all_arrows_equiv
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
-  : τ (@AllArrowsEquiv_EQ1 C)
+  (g : τ (@IsGroupoidalCat C))
+  : τ (@AllArrowsEquiv C)
 ≔ λ x : τ (Obj C),
     λ y : τ (Obj C),
       λ f : τ (Hom C x y),
-        @groupoidal_arrow_equiv_along_EQ1 C g x y f;
+        @groupoidal_arrow_equiv_along C g x y f;
 
 /*
   Structured transport along a groupoidal arrow is an equivalence of fibres.
 
   This is the existing displayed functor action equipped with the image of the
-  arrow's explicit EQ1 evidence; it adds no decoder and no transport rule.
+  arrow's explicit equality-valued evidence; it adds no decoder and no transport rule.
 */
-symbol groupoidal_fibre_transport_equiv_EQ1
+symbol groupoidal_fibre_transport_equiv
   [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (D : τ (Catd C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y))
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Fibre_cat D x)
       (Fibre_cat D y)
       (@fapp1_fapp0 C Cat_cat D x y f))
-≔ @omega_equiv_along_fapp1_fapp0_EQ1
+≔ @omega_equiv_along_fapp1_fapp0
     C
     Cat_cat
     D
     x y f
-    (@groupoidal_arrow_equiv_along_EQ1 C g x y f);
+    (@groupoidal_arrow_equiv_along C g x y f);

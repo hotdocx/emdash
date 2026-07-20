@@ -36,10 +36,10 @@ The explicit user handoff on 2026-07-17 adopts this overlay. Authority is now:
 
 1. `emdash3_2.lp` remains the active kernel authority;
 2. `emdash3_2_eq1_hom_action.lp` is the one-way derived authority for native
-   EQ1 next-hom preservation and its groupoidality/structured-transport
+   equality-valued next-hom preservation and its groupoidality/structured-transport
    consumers; it imports the kernel, never conversely;
 3. `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
-   authority for native-EQ1 evidence property, truncation under retractions,
+   authority for native equality-valued evidence property, truncation under retractions,
    and unconditional finite-`NCat` object truncation;
 4. `emdash3_2_checks.lp` remains the executable diagnostic authority;
 5. the current SOP and Foundations report retain their ordinary authority;
@@ -65,6 +65,20 @@ package and its comparison-only support, keeps dependent transport as direct
 `eq_apd`, and retires the isolated Sum feature for later redesign. All later
 occurrences in this report are chronological evidence unless explicitly
 restated as current; none reauthorizes the deleted APIs.
+
+### 2026-07-20 compatibility deletion and namespace supersession
+
+P10–P11 of the active path-action/compatibility plan supersede this report's
+later P6/P7 retention boundary. Backward compatibility is not a selected
+repository objective: `emdash3_2_legacy_compat.lp`, its seven explicit
+clients, and its D0-based `one_cat_iso_type_equiv` are deleted without making
+a fully native two-sided OneCat theorem a cleanup prerequisite. Native
+`OneCat`, hom discreteness/action, finite-dimensional truncation, the one-way
+ordinary-isomorphism lift, WalkingEnd/`BNat`, and Nat remain. After the legacy
+exports were removed, an exact zero-collision migration renamed every retained
+`NAME_EQ1` identifier to unsuffixed `NAME`; no aliases, semantic rule change,
+or module-file rename was introduced. All D0/D1 and suffixed native spellings
+later in this report are dated promotion evidence, not current API names.
 
 This overlay supersedes the July 13 plan only for the specific architecture
 tracks named below. The July 13 plan remains a

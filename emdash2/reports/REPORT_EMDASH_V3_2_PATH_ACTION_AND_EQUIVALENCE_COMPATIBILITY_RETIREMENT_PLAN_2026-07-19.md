@@ -8,7 +8,7 @@ Supersedes: no whole report; reopens the deferred `EVOGJ-OBSACTION-SCOPE` functo
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-user-requested-path-action-and-compatibility-review-2026-07-19
 Infinity-Codex-Decision-Responses: current-session-review-response-2026-07-19; current-session-canonical-action-correction-2026-07-20; no archived logical ID is required to interpret this plan
-Status: **ACTIVE 2026-07-20 — P0–P9 remain completed historical phases; P10 reopens and supersedes P6's bounded compatibility retention, P11 reopens and supersedes P7's `_EQ1` retention, and P12 owns synchronization and final gates**
+Status: **COMPLETE 2026-07-20 — P0–P9 remain completed historical phases; P10 supersedes P6 and deletes the legacy compatibility closure and clients, P11 supersedes P7 and makes the collision-free native API unsuffixed, and P12 synchronizes authorities and passes the complete proportional gate**
 Implementation starting baseline and review provenance: `2444c9d406fc3d201602ace7af5105c20c241680`
 Initial worktree state: clean, with staged and unstaged diffs both empty
 Initial bounded baseline: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
@@ -1493,10 +1493,41 @@ semantic delta must be investigated and recorded before completion.
   files, 1,570 occurrences, and 143 distinct suffixed identifiers. It finds
   139 implementation declarations, the one local reviewer helper, and zero
   stripped-name collision. P10 and P11 are therefore dependency-ready.
-
-The adoption record is preliminary evidence, not completion evidence. Append
-the promoted deletion, rename manifest, final inventories, metric deltas, and
-gate results here before changing this plan back to complete.
+- P10 deletes the exact eight-file closure. Post-deletion search is empty for
+  the compatibility import/module name, every exact D0/D1 identifier, and
+  `one_cat_iso_type_equiv`; the immediate bounded active check passes. No
+  symbol, theorem replacement, rule, `unif_rule`, or alias is added.
+- P11 applies the frozen identifier-boundary mapping to the 18 retained files.
+  Post-migration active `.lp` search is empty for exact `_EQ1`, `_D0`, and
+  `_D1` identifiers, and `make check` passes. The two lowercase `eq1` module
+  filenames and three reviewer filenames remain architecture/history labels;
+  public declarations and references are wholly unsuffixed.
+- The catalog generator drops dead Sum/D0 migration classifiers and recognizes
+  the unsuffixed native owners. The regenerated strict catalog remains 1,671
+  checks—1,496 positive and 175 negative—across 61 areas, with zero legacy
+  tags and zero unclassified checks.
+- All 33 retained reviewer examples pass. This includes the current native
+  categorical-universe, ordinary Product-isomorphism, OneCat/dimension,
+  WalkingEnd/`BNat`, Hom--Nat, Nat, evidence-property, and path-action owners;
+  no statement had to be copied out of either deleted mixed legacy example.
+- Warning inventory is unchanged at 1,010 unjoinable critical pairs and 159
+  replaceable pattern variables. Strict LHS audit remains zero unreviewed
+  clauses with 45 annotated slots across 27 intentional clauses. The source
+  TOC remains 86 headings across sections 0–20.
+- Generated health passes all 39 retained targets—six active source/diagnostic
+  modules and 33 reviewer examples—in 120.169 seconds aggregate. The kernel
+  has 19,201 lines, 758 symbols, 602 rewrite rules, and 61 unification rules;
+  the one-line delta from P9 is comment-only. Main diagnostics retain 1,496
+  assertions.
+- `AGENTS.md`, README, INDEX, current SOP, Foundations, the three affected
+  historical ledgers, catalog, and health report are synchronized. Historical
+  D0/D1/`_EQ1` spellings remain only with explicit supersession context; the
+  current glossary, authorities, and operational classifier use unsuffixed
+  native names.
+- Full local CI passes all 39 targets in 133.036 seconds aggregate, all 16
+  Infinity-Codex recovery tests, Python/shell/JSON validation, diff/TOC/
+  active-reference/report-header integrity, strict LHS audit, and strict
+  catalog freshness. `git diff --check` passes. P10–P12 are complete.
 
 ## Acceptance Criteria
 
@@ -1631,9 +1662,9 @@ the corresponding controls.
 | `PAECR-P7-NAMESPACE` | **completed with `_EQ1` retained 2026-07-19** | remove `_EQ1` after collisions are freed, or record reason to retain | P6 | 139 native declarations inventoried; 11 hard unsuffixed legacy collisions; partial rename and reverse aliases rejected; canonical suffix frozen until compatibility deletion/namespacing |
 | `PAECR-P8-CONSOLIDATE` | **completed 2026-07-19** | final reports/catalog/health/warnings/audit/CI | all selected phases | 1,791/66 strict catalog; 52-target health and CI; 1,010/159 warnings; zero/45/27 audit; 86-heading TOC; reference/header/diff integrity and 16 recovery tests pass |
 | `PAECR-P9-CANONICAL-ACTION-SUM-RETIRE` | **completed 2026-07-20** | supersede P2's unconsumed refinement abstraction, use canonical path action directly, and retire isolated Sum pending redesign | completed P2 inventory plus canonical G2 owner | owner-position quiet/warning deletion probes pass at unchanged 1,010/159; promotion and exact-zero active inventory pass; check/examples, 1,671/61 strict catalog, 46-target health, 86-heading TOC, and zero/45/27 audit pass; full CI passes all 46 targets in 253.673s plus every repository-integrity gate |
-| `PAECR-P10-COMPAT-DELETE` | **in progress 2026-07-20** | supersede P6's backward-compatibility assumption; delete the frozen D0/D1/decoder module, seven clients, and exact legacy OneCat theorem | completed P5 extraction plus explicit user selection | preliminary eight-file closure, consumer classification, retained-result duplicate inventory, zero WalkingEnd/BNat/Nat dependency, clean descendant baseline, and passing bounded check recorded; promotion and post-deletion gates pending |
-| `PAECR-P11-NATIVE-UNSUFFIX` | **pending** | supersede P7 after P10; map every retained exact `NAME_EQ1` identifier to collision-free `NAME` without aliases or semantic edits | P10 deletion | preliminary 18-file/1,570-occurrence/143-token inventory, 139 implementation declarations plus one example helper, and zero stripped-name collision recorded; post-deletion manifest, promotion, and checks pending |
-| `PAECR-P12-CONSOLIDATE` | **pending** | synchronize current authorities and supersession records, regenerate reports, and pass proportional final gates | P10 and P11 | current authority updates, exact inventories, catalog/TOC/health/warnings/audit/examples/CI and integrity evidence pending |
+| `PAECR-P10-COMPAT-DELETE` | **completed 2026-07-20** | supersede P6's backward-compatibility assumption; delete the frozen D0/D1/decoder module, seven clients, and exact legacy OneCat theorem | completed P5 extraction plus explicit user selection | exact eight-file deletion promoted; zero active compatibility/D0/D1/legacy-OneCat inventory; immediate check and all retained OneCat/WalkingEnd/Nat/Product/universe examples pass; no replacement theorem/rule/alias |
+| `PAECR-P11-NATIVE-UNSUFFIX` | **completed 2026-07-20** | supersede P7 after P10; map every retained exact `NAME_EQ1` identifier to collision-free `NAME` without aliases or semantic edits | P10 deletion | exact 18-file/1,570-occurrence/143-token migration with 139 implementation declarations plus one example helper; zero stripped collision and zero active suffix inventory; bounded/full checks pass; module filenames unchanged |
+| `PAECR-P12-CONSOLIDATE` | **completed 2026-07-20** | synchronize current authorities and supersession records, regenerate reports, and pass proportional final gates | P10 and P11 | current authorities and three dated ledgers synchronized; 1,671/61 strict catalog, 39-target health/CI, 1,010/159 warnings, zero/45/27 audit, 86-heading TOC, 16 recovery tests, and every integrity gate pass |
 | `PAECR-DISPLAYED-PATH-SECTION` | deferred research | design honest dependent path-family displayed functor/section | concrete consumer | separately adopted plan and owner probes |
 | `PAECR-NATIVE-ONECAT-ISO-EQUIV` | deferred optional research | if a future consumer warrants it, state and prove a fully native object-equality/ordinary-isomorphism equivalence without restoring D0 compatibility | concrete native consumer and separate adoption | native theorem and coherence probes; not a P10/P11 completion prerequisite |
 | `PAECR-TYPEEQUIV-LIBRARY` | retained boundary | preserve useful contractible-fibre equivalence theorems independently of primary universe identity | consumer review | explicit library classification |
@@ -1687,7 +1718,7 @@ plan remained open at the P9 checkpoint; future Sum or displayed-dependent
 action work still requires a new consumer-led adoption rather than implicit
 reopening.
 
-Active corrective slice (2026-07-20): P10–P12 now supersede that last sentence
+Completed corrective slice (2026-07-20): P10–P12 supersede that last sentence
 at the exact compatibility boundary. The dependency-ready implementation is:
 
 1. delete the isolated compatibility module and its seven importers, including
@@ -1700,9 +1731,12 @@ at the exact compatibility boundary. The dependency-ready implementation is:
    authorities and annotate historical ledgers with P10/P11 supersession;
 5. regenerate catalog/health data and run the complete proportional gate.
 
-P10 is the now-active row. P11 is mechanically dependency-ready after P10,
-and P12 follows both. No native theorem construction, new rewrite, alias,
-module rename, or compatibility facade is part of this slice.
+P10 deletes the exact closure, P11 promotes the collision-free unsuffixed
+namespace, and P12 passes the complete gate recorded above. No native theorem
+construction, new rewrite, alias, module rename, or compatibility facade was
+part of the slice. No plan row remains open; any fully native two-sided OneCat
+equivalence or future Sum/displayed-action work requires a new consumer-led
+adoption.
 
 ## Completion And Blocker Policy
 

@@ -1,7 +1,7 @@
 # emdash Foundations
 
 Draft status: this document is a mathematician-facing reading guide for the
-current `emdash3_2.lp` theory, its one-way derived native-EQ1 hom-action
+current `emdash3_2.lp` theory, its one-way derived native equality-valued hom-action
 extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property
 and finite-dimension extension `emdash3_2_eq1_evidence_property.lp`. It
 presents the intended mathematics in ordinary category/type-theory notation
@@ -59,16 +59,16 @@ mathematics, then use
 hygiene and stable-head ownership rules. Do not infer from the surface formula
 alone that a new primitive head is needed; first locate the current semantic
 owner in `emdash3_2.lp` or, for native equality-valued next-hom preservation
-and its groupoidality consumers, `emdash3_2_eq1_hom_action.lp`. Native EQ1
-evidence-property and finite-`NCat` object-truncation theorems live in
+and its groupoidality consumers, `emdash3_2_eq1_hom_action.lp`. Native
+equality-valued evidence-property and finite-`NCat` object-truncation theorems live in
 `emdash3_2_eq1_evidence_property.lp`. Nat arithmetic/sethood and the concrete
 walking-endomorphism construction are owned by their two one-way modules,
 rather than by the kernel.
-The D0/D1 and categorical-decoder material is isolated in the frozen opt-in
-`emdash3_2_legacy_compat.lp` module. It is not a mathematical or implementation
-authority, is absent from the normal dependency closure, and is retained only
-for seven explicitly legacy examples and the complete two-sided OneCat theorem
-described below.
+The former D0/D1 and categorical-decoder compatibility material, its seven
+self-only examples, and its two-sided legacy OneCat theorem are retired. The
+unsuffixed names in this guide denote the native equality-valued API. Native
+OneCat structure and the one-way ordinary-isomorphism lift remain; any fully
+native two-sided object-equality/isomorphism theorem is optional future work.
 
 ## 2. Categories And Hom-Categories
 
@@ -324,7 +324,7 @@ cell `p -> power(encode(p))`. Only afterward does
 word carrier from being smuggled into the HIT signature. The directed cell and
 explicit discreteness prove `power(encode(p)) = p`; Nat induction proves
 `encode(power(n)) = n`. These support the structured forward encoder, an
-explicit inverse package, the Hom--Nat carrier and native-EQ1 equivalences,
+explicit inverse package, the Hom--Nat carrier and native equality-valued equivalences,
 two independent sethood proofs, and the results that `walking_loop` is not an
 identity, has no right inverse, and is not an omega-equivalence.
 
@@ -470,7 +470,7 @@ fibrancy/dependent-elimination boundary.
 The isolated binary-Sum experiment—including its decoded former, eliminator,
 map, selected branchwise action, proof-time bases, extension module,
 diagnostics, and reviewer examples—was retired on 2026-07-20. It had no Nat,
-WalkingEnd, native-EQ1, evidence-property, or compatibility consumer. A future
+WalkingEnd, native equality-valued, evidence-property, or compatibility consumer. A future
 Sum may be redesigned from its actual universal-property or computation
 requirements; the retired experiment is not an inactive compatibility API.
 
@@ -715,7 +715,7 @@ laws.
 
 There are explicit defined adapters in both directions between
 contractible-fibre `TypeEquiv(A,B)` and equality-valued
-`OmegaEquiv_EQ1(Grpd_cat,A,B)`. From `TypeEquiv`, its selected inverse and two
+`OmegaEquiv(Grpd_cat,A,B)`. From `TypeEquiv`, its selected inverse and two
 round-trip paths directly form the omega package. Conversely, if `f` has
 separate left and right inverse functions, the right law shows that those
 functions agree pointwise; the left inverse therefore also has a right law
@@ -1689,11 +1689,11 @@ The active categorical universe has a different measured boundary. Its rigid
 owner rule is native equality-valued equivalence:
 
 ```text
-A =_{Obj(Cat_cat)} B  -->  OmegaEquiv_EQ1(Cat_cat,A,B).
+A =_{Obj(Cat_cat)} B  -->  OmegaEquiv(Cat_cat,A,B).
 ```
 
 It has a finite self-universe normal form and is warning-neutral. Explicit
-`omega_equiv_refl_EQ1` and `object_path_equiv_EQ1` packages own observer
+`omega_equiv_refl` and `object_path_equiv` packages own observer
 computation; generic `eq_refl` retains guarded J/`eq_ap` provenance and is not
 rewritten to the explicit package. The rejected reflexivity-collapse probe
 still records why those presentations remain distinct. This operational result
@@ -1701,10 +1701,9 @@ is not a consistency or stratification claim about `Cat_cat : Cat`.
 
 The former D0-backed `CatPathView`, `cat_path_*`, `idtoequiv_cat` decoder
 round trips, Product action, and D0b next-hom witness no longer define public
-kernel equality. They were moved mechanically into the frozen
-`emdash3_2_legacy_compat.lp` module for explicitly legacy examples. Their
-historical computation remains useful compatibility evidence but is not an
-alternative active universe foundation.
+kernel equality. Their temporary extracted compatibility module and explicit
+legacy clients are now deleted. Dated plans retain the old computation as
+historical evidence, but there is no alternative active universe foundation.
 
 Two earlier D0 observation experiments are no longer part of the current
 surface. The one-layer nested observation record/path view and the
@@ -1728,37 +1727,37 @@ this ordinary isomorphism evidence.
 
 The July 17 equality-valued overlay now has two promoted parallel staging
 layers. For a fixed arrow `f : Hom_C(x,y)`,
-`OmegaEquivAlong_EQ1(f)` is decoded native data consisting of separate left
+`OmegaEquivAlong(f)` is decoded native data consisting of separate left
 and right inverse arrows and cancellation witnesses expressed directly as
 equalities in `Hom_C(x,x)` and `Hom_C(y,y)`. Its four fields and native indexed
 eliminator compute on introduced data. This realizes the intended recursive
 mathematical reading—higher equivalence information is carried by equality in
 the next hom-category—without an opaque encoder or decoder.
 
-The parallel `OmegaEquiv_EQ1(C,x,y)` facade packages a selected arrow and this
+The parallel `OmegaEquiv(C,x,y)` facade packages a selected arrow and this
 fixed-arrow evidence behind a stable primitive record-like classifier. Its
 constructor, forward/evidence projections, and dependent eliminator have
 explicit beta rules; eta is propositional. A transparent Sigma view has maps
 in both directions and propositional round trips. For
-`p : x =_{Obj C} y`, the transparent `object_path_equiv_EQ1(p)` package uses
+`p : x =_{Obj C} y`, the transparent `object_path_equiv(p)` package uses
 `path_to_hom(p)`, `path_to_hom(path_sym(p))`, and two J-derived cancellation
 laws, so all documented observations compute without a bodyless reification
 capability. The stable facade is primitive but not observationally opaque; the
 derived path adapter is not primitive.
 
 For a literal path category there is now a narrower computational interface.
-`OmegaEquiv_EQ1(Path_cat(A),x,y)` compares at proof time with `x =_A y`, and
-`path_equiv_EQ1(p)` packages `p` itself with two `path_sym(p)` inverse choices
+`OmegaEquiv(Path_cat(A),x,y)` compares at proof time with `x =_A y`, and
+`path_equiv(p)` packages `p` itself with two `path_sym(p)` inverse choices
 and J-derived laws. The comparison lets a raw path be *typed* as facade data,
 but does not reify it: facade projections on that raw path remain stuck. A
 measured direct raw-path projection rule conflicts with ordinary package beta,
-so observable computation must go through `path_equiv_EQ1(p)`.
+so observable computation must go through `path_equiv(p)`.
 
 The staged internal groupoidality predicate is
 
 ```text
-IsGroupoidalCat_EQ1(C)
-  := OmegaEquivAlong_EQ1(Core_incl_func(C)).
+IsGroupoidalCat(C)
+  := OmegaEquivAlong(Core_incl_func(C)).
 ```
 
 Thus it says that `Core_cat(C) -> C` is an omega-equivalence. In a setting
@@ -1770,8 +1769,8 @@ canonical witness, using a proof-time comparison between its Core inclusion
 and identity functor; that comparison is not a runtime collapse.
 
 General groupoidality is now consumed one hom-category at a time. Given
-`g : IsGroupoidalCat_EQ1(C)`, the public
-`groupoidal_core_homwise_EQ1(g,x,y)` is fixed-map EQ1 evidence for
+`g : IsGroupoidalCat(C)`, the public
+`groupoidal_core_homwise(g,x,y)` is fixed-map equality-valued evidence for
 
 ```text
 core_incl_hom_func(C,x,y) : Path_cat(x = y) -> Hom_cat(C,x,y).
@@ -1779,9 +1778,9 @@ core_incl_hom_func(C,x,y) : Path_cat(x = y) -> Hom_cat(C,x,y).
 
 Operationally the one-way derived module
 `emdash3_2_eq1_hom_action.lp` applies the native
-`omega_equiv_along_fapp1_EQ1` theorem directly to `g`. The public mathematical
+`omega_equiv_along_fapp1` theorem directly to `g`. The public mathematical
 result is equality-valued and iterable, and this consumer chain no longer
-crosses EQ1-to-D0, D0b, or D0-to-EQ1. The theorem and its proof helpers are
+crosses any D0 compatibility conversion. The theorem and its proof helpers are
 transparent; helpers are protected at the module boundary and no new decoder,
 univalence capability, rewrite, or unification rule was added.
 
@@ -1797,12 +1796,12 @@ That pointwise path now reconstructs native equivalence evidence for the
 original arrow. Its reverse path is sent through `path_to_hom` to obtain a
 selected inverse; re-inclusion rewrites the original arrow to the image of the
 selected path, and the J-derived object-path cancellation laws prove both
-inverse equations. Thus `groupoidal_arrow_equiv_along_EQ1(g,f)` is a defined
+inverse equations. Thus `groupoidal_arrow_equiv_along(g,f)` is a defined
 package, not an all-arrows axiom. More generally,
-`omega_equiv_along_fapp1_fapp0_EQ1(F,u)` maps any fixed-arrow EQ1 evidence
+`omega_equiv_along_fapp1_fapp0(F,u)` maps any fixed-arrow equality-valued evidence
 through ordinary functor action. Specializing this theorem to a displayed
 family `D : C -> Cat_cat` gives
-`groupoidal_fibre_transport_equiv_EQ1(g,D,f)`: the existing directed fibre
+`groupoidal_fibre_transport_equiv(g,D,f)`: the existing directed fibre
 transport is an equivalence, and its inverse projections compute as transport
 along the selected inverse arrow. No encoder, decoder, new transport
 operation, or runtime rule is required. The arrow-to-path selection now comes
@@ -1810,9 +1809,9 @@ from the native next-hom theorem rather than the retained D0b compatibility
 owner.
 
 The transparent classifier
-`AllArrowsEquiv_EQ1(C) = Pi x y, Pi f : Hom_C(x,y),
-OmegaEquivAlong_EQ1(C,f)` records the pointwise consequence, and
-`groupoidal_all_arrows_equiv_EQ1` computes from coherent core groupoidality to
+`AllArrowsEquiv(C) = Pi x y, Pi f : Hom_C(x,y),
+OmegaEquivAlong(C,f)` records the pointwise consequence, and
+`groupoidal_all_arrows_equiv` computes from coherent core groupoidality to
 that classifier. The converse is not automatic: arbitrary pointwise inverse
 choices do not yet assemble the coherent inverse omega-functor
 `C -> Core_cat(C)`. That direction is a structured-functor
@@ -1853,18 +1852,18 @@ Sigma l, L_f(l) = id_x,
 Sigma r, R_f(r) = id_y.
 ```
 
-Their product is the transparent view of `OmegaEquivAlong_EQ1(f)`, and native
+Their product is the transparent view of `OmegaEquivAlong(f)`, and native
 record eta transfers contractibility back to the record. Hence
-`omega_equiv_along_evidence_is_prop_EQ1(C,x,y,f)` is derived with no
+`omega_equiv_along_evidence_is_prop(C,x,y,f)` is derived with no
 truncation hypothesis, extensionality axiom, decoder, or proof erasure. The
 literal-path, discrete, and locally-set constructions remain independently
 checked specializations. These theorems live downstream in
 `emdash3_2_eq1_evidence_property.lp`; they add no rewrite or unification rule.
 
-The uniform equality/EQ1 cast does not make that proof disappear. It preserves
+The uniform equality/equivalence cast does not make that proof disappear. It preserves
 the term while changing the accepted classifier, so a raw category path does
 not acquire an equivalence package head and its forward projection remains
-stuck. The explicit transparent `object_path_equiv_EQ1` construction performs
+stuck. The explicit transparent `object_path_equiv` construction performs
 the required reification. This is why classifier-level interchange can be
 identity syntax while computational package observation still uses a named
 constructor; neither operation requires an opaque decoder.
@@ -1872,7 +1871,7 @@ constructor; neither operation requires an opaque decoder.
 At a literal `Path_cat(A)`, the generic half-adjoint selected inverse is well
 typed but does not definitionally reduce to the input path. This is a
 provenance boundary rather than a semantic failure: the direct
-`path_equiv_EQ1(p)` witness remains the canonical literal computation and its
+`path_equiv(p)` witness remains the canonical literal computation and its
 forward projection reduces to `p`.
 
 Structured groupoidal path induction continues to use the existing
@@ -1883,11 +1882,11 @@ groupoidality witness is still specialization by weakening—the action exists
 for every directed source—so this fact alone does not consume `g`.
 
 At a literal `Path_cat(A)` source, the missing comparison is now explicit.
-`path_cat_structured_transport_EQ1(D,u,p)` applies the displayed functor
-action along `p`, whereas `path_cat_ind_eqr_transport_EQ1(D,u,p)` uses
+`path_cat_structured_transport(D,u,p)` applies the displayed functor
+action along `p`, whereas `path_cat_ind_eqr_transport(D,u,p)` uses
 primitive right `ind_eqr` with a function-valued motive. Path induction proves
 these values equal for every `p`. Evaluating the existing `path_ind_sec` at
-`(y,p)` gives a third presentation, `path_cat_path_ind_app_EQ1`; another
+`(y,p)` gives a third presentation, `path_cat_path_ind_app`; another
 path-induction theorem compares it with the structured action, and transitivity
 compares it with primitive J.
 
@@ -1902,10 +1901,10 @@ commuting conversion, or claim that every structured component is constant.
 
 The direct-univalence boundary is now active but deliberately hybrid. For a
 syntactically abstract category `C`, a proof-time unification rule compares
-`OmegaEquiv_EQ1(C,x,y)` with `x =_{Obj C} y`; it does not make the classifiers
+`OmegaEquiv(C,x,y)` with `x =_{Obj C} y`; it does not make the classifiers
 runtime-convertible and does not insert a package. The rigid Cat and Grpd
-universe equalities runtime-reduce directly to their EQ1 classifiers, with a
-finite Cat self case. Explicit EQ1 reflexivity packages have computational
+universe equalities runtime-reduce directly to their equality-valued
+classifiers, with a finite Cat self case. Explicit native reflexivity packages have computational
 observers, while raw `eq_refl` retains its generic-J provenance and has no
 facade projection beta.
 
@@ -1917,12 +1916,12 @@ classifier. The bare alias is not exported.
 The selected explicit cast instead stages the stable carrier classifier
 
 ```text
-ObjectPathCastView_EQ1(C,x,y).
+ObjectPathCastView(C,x,y).
 ```
 
 Its carrier reduces to `x =_{Obj C} y`, while one direct proof-time equation
-compares it with `OmegaEquiv_EQ1(C,x,y)`. Equality and EQ1 therefore each
-enter through exactly one conversion step. The two public casts use a typed
+compares it with `OmegaEquiv(C,x,y)`. Equality and the stable equivalence
+facade therefore each enter through exactly one conversion step. The two public casts use a typed
 `let`, beta-reduce to their input, and have definitional round trips after all
 measured specializations. This is a primitive classifier view, not an opaque
 encoder or decoder term.
@@ -1938,7 +1937,7 @@ whose carrier is definitionally the previous constant-family
 `SigmaPathView`. Its base/fibre constructor, projections, fixed-endpoint
 eliminator, and canonical reflexivity therefore reuse the established Sigma
 path data. `product_path_to_sigma_view` and its reverse are literal identity
-functions. The Product/EQ1 cast names route through the uniform view. The
+functions. The Product/equivalence cast names route through the uniform view. The
 classifier heads themselves remain runtime-distinct, and generic `eq_refl` is
 not collapsed to canonical `product_path_refl`.
 
@@ -1950,52 +1949,58 @@ Product, path-category, and nested-opposite specializations.
 
 The identity casts do not construct a facade package. Consequently their
 forward/inverse/law projections remain stuck. The transparent
-`object_path_equiv_EQ1(p)` package is still the uniform computational
+`object_path_equiv(p)` package is still the uniform computational
 path-to-equivalence operation whenever observers are required. No primitive
 nonreducing cast term is active. This choice is local to the July 17 plan, not
 a repository-wide rewrite/unification rule.
 
-EQ1 is therefore the active direct classifier at the abstract proof-time,
+The native equality-valued facade is therefore the active direct classifier at the abstract proof-time,
 rigid Cat/Grpd, stable Product, and explicit opposite boundaries, but it is not
 claimed as an automatically inherited runtime normal form for every former;
 the explicit stable casts provide term interchange without that claim.
-The D0/public `OmegaEquiv` surface is no longer in the active import: it is
-frozen in `emdash3_2_legacy_compat.lp`. No runtime facade eta, proof erasure, or
-silently coerced raw-path observer has been promoted.
+The former D0/public `OmegaEquiv` surface and its compatibility module are
+deleted. No runtime facade eta, proof erasure, compatibility alias, or silently
+coerced raw-path observer has been promoted.
 
 The completed decoder migration removed the redundant standalone
 `cat_univalence(C)` inhabitant, migrated native-worthy consumers, and then
 extracted the operational `idtoequiv_cat`/`omega_equiv_path` pair and the
 specified-inverse `cat_univalence_by_decoder` library with their shaped
-computation. The stable carrier view supplies the active explicit EQ1-to-path
-and path-to-EQ1 operations. Its carrier rewrite and proof-time equation are
+computation before that compatibility closure was retired. The stable carrier
+view supplies the active explicit equivalence-to-path and path-to-equivalence
+operations. Its carrier rewrite and proof-time equation are
 explicitly trusted; its term operations are transparent identities. This is
 plan-local architecture, not a general logical-framework convention.
 
-### Frozen legacy D0/D1 decoder library
+### Retired D0/D1 decoder history
 
-Inside the frozen compatibility module, the defined
-operation `object_path_equiv_D0(p)` composes the transparent EQ1 package with
-the existing observation-complete migration constructor. It is now used by
+This subsection records the representation and computation that justified the
+earlier extraction boundary. The described module, declarations, and examples
+are now deleted; it is historical rationale, not an active API or an
+invitation to restore compatibility.
+
+Inside the former frozen compatibility module, the defined
+operation `object_path_equiv_D0(p)` composed the transparent native package with
+the observation-complete migration constructor. It was used by
 both recursive cells of the ordinary-isomorphism lift and by the D1
 category-path next-hom construction. In particular the latter's selected
 functor computes directly to `path_to_hom(Cat_cat,p)`. This is a migration
 adapter into the old representation, not a second foundational encoder.
 
-At the selected completion boundary, the kernel, both native one-way modules,
+At that historical completion boundary, the kernel, both native one-way modules,
 Nat, WalkingEnd, main diagnostics, and their native reviewer examples contain
 no Cat/Grpd decoder, D0/D0b/D1, or migration-constructor reference. The later
 retirement of the isolated Sum experiment does not alter that compatibility
-boundary.
-Exactly seven legacy examples import the frozen module explicitly.
+boundary. Exactly seven legacy examples imported the frozen module explicitly;
+P10 later deleted that eight-file closure.
 
-Within that module, explicit D0/EQ1 migration is retained in both directions.
+Within that module, explicit D0/native migration was retained in both directions.
 Old D0
 evidence is decoded to the new inverse fields and equality laws. In the other
 direction, a stable compatibility constructor inhabits the otherwise
 constructorless D0 classifier; its inverse observations project the new
 fields, while its recursive-cell observations use
-`object_path_equiv_EQ1(law)` and recur. This constructor cannot currently be
+`object_path_equiv(law)` and recur. This constructor cannot currently be
 the literal identity function: D0 and EQ1 are not transparently the same data
 representation, and D0 observers need a stable head on which to compute. It is
 not an opaque univalence decoder theorem, however—all four public D0
@@ -2035,7 +2040,7 @@ intentionally absent, so this comparison does not claim that evidence is
 property-valued. `IsOmegaEquivArrow` remains reserved until such a theorem is
 proved.
 
-The frozen module also retains the variable-evidence hom-action. For
+The frozen module also retained the variable-evidence hom-action. For
 `u : OmegaEquivAlong_D0_{Cat_cat}(F)` it constructs
 
 ```text
@@ -2080,10 +2085,10 @@ projection is exact, and its recursive left cell is iterable. This is the
 retained integrated next-hom univalence/action witness; it uses no per-instance
 unification equation or unrestricted corecursor.
 
-This module is frozen against new consumers and features. Its sole selected
-retention reason is the complete OneCat two-sided theorem below; deletion
-awaits native facade-package/raw-path reification coherence or an explicit
-decision to drop backward compatibility.
+This historical module was frozen against new consumers and features. Its sole
+selected retention reason was the complete OneCat two-sided theorem below.
+P10 subsequently dropped backward compatibility and deleted both without
+requiring a native re-proof.
 
 ### Native discrete and finite-dimensional spine
 
@@ -2093,10 +2098,10 @@ is exactly the two-field product
 ```text
 IsDiscreteCat(C)
   := IsSetGrpd(Obj(C))
-     × IsGroupoidalCat_EQ1(C),
+     × IsGroupoidalCat(C),
 
-IsGroupoidalCat_EQ1(C)
-  := OmegaEquivAlong_EQ1_{Cat_cat}(Core_incl_func(C)).
+IsGroupoidalCat(C)
+  := OmegaEquivAlong_{Cat_cat}(Core_incl_func(C)).
 ```
 
 The second field is native equality-valued groupoidality and is not duplicated
@@ -2104,7 +2109,7 @@ homwise. The one-way native hom-action extension gives
 
 ```text
 discrete_core_homwise(d,x,y)
-  : OmegaEquivAlong_EQ1_{Cat_cat}(core_incl_hom_func(C,x,y)),
+  : OmegaEquivAlong_{Cat_cat}(core_incl_hom_func(C,x,y)),
 
 core_incl_hom_func(C,x,y)
   : Path_cat(x = y) -> Hom_cat(C,x,y).
@@ -2116,8 +2121,8 @@ action is `hom_to_path(d,f)`. The native right law supplies the equality
 its image under `path_to_hom` in the next hom-category. Object sethood supplies
 `hom_to_path(path_to_hom(p)) = p`. Both are named propositional witnesses, not
 runtime cancellation rules. This chain uses
-`groupoidal_core_homwise_EQ1`, `groupoidal_arrow_to_path_EQ1`, and
-`groupoidal_path_to_arrow_retract_EQ1` directly, with no D0/D1 conversion.
+`groupoidal_core_homwise`, `groupoidal_arrow_to_path`, and
+`groupoidal_path_to_arrow_retract` directly, with no D0/D1 conversion.
 Set truncation alone does not inhabit `IsDiscreteCat`, and the two-field
 package has no runtime eta or evidence erasure.
 
@@ -2141,12 +2146,12 @@ have set-valued objects, and each hom-recursive successor raises the predicted
 level once.
 
 For native fixed-map evidence
-`u : OmegaEquivAlong_EQ1(F)` with `F : A -> B`, package `F` and `u` in the
+`u : OmegaEquivAlong(F)` with `F : A -> B`, package `F` and `u` in the
 stable facade, cast it to `A = B`, map `Obj` over that path, and apply
 `idtoequiv_grpd`. This gives
-`omega_equiv_along_obj_type_equiv_EQ1(u) : TypeEquiv(Obj(A),Obj(B))`;
+`omega_equiv_along_obj_type_equiv(u) : TypeEquiv(Obj(A),Obj(B))`;
 composing it with ordinary truncation invariance gives
-`is_obj_trunc_cat_equiv_type_equiv_EQ1(u)` and its forward/backward evidence
+`is_obj_trunc_cat_equiv_type_equiv(u)` and its forward/backward evidence
 maps. No categorical decoder or D0 bridge is used. Explicit native
 reflexivity deliberately retains its facade/package provenance and does not
 collapse to a raw object path or reflexive `TypeEquiv`.
@@ -2162,13 +2167,13 @@ transparent first-class Sigma. Two explicit retractions then transfer this
 bound first to the stable facade and then to object equality. Thus
 
 ```text
-ncat_obj_trunc_EQ1(n,C,h)
+ncat_obj_trunc(n,C,h)
   : IsObjTruncCat(cat_dim_trunc_level(n),C)
 ```
 
 is defined for every `h : IsNCat(n,C)`. The zero case computes to the stored
 `is_discrete_cat_obj_set(h)`; the successor computes to the described hom
-recursion, Sigma closure, and casts. This proof uses native EQ1 only and
+recursion, Sigma closure, and casts. This proof uses native equality-valued evidence only and
 introduces no global capability, decoder, or new conversion rule.
 
 The earlier uninhabited D0 evidence-property capability and its conditional
@@ -2184,31 +2189,37 @@ eta and proof-field erasure do not. In particular, for `X : OneCat`,
 `one_cat_hom_discrete(X,x,y)` exposes discreteness of `Hom(x,y)`, and
 the native-extension owner `one_cat_hom_core_homwise(X,x,y,f,g)` applies the
 promoted equality-valued discrete theorem at the next hom level between
-parallel arrows. Applying `ncat_obj_trunc_EQ1` to
+parallel arrows. Applying `ncat_obj_trunc` to
 the package evidence gives its carrier the predicted object truncation; the
-readable `one_cat_obj_trunc_EQ1` name is the successor-zero specialization.
+readable `one_cat_obj_trunc` name is the successor-zero specialization.
 
-The older OneCat ordinary-isomorphism decoder is a frozen compatibility island
-in `emdash3_2_legacy_compat.lp`, not the kernel. It is not used by
-`IsDiscreteCat`/`IsNCat` formation, the native hom-action/evidence-property
-modules, WalkingEnd, or the main diagnostics. Only its explicitly legacy
-reviewer example imports it.
+The older D0 OneCat ordinary-isomorphism decoder, its two-sided
+`one_cat_iso_type_equiv`, and its reviewer example are retired. They were not
+used by `IsDiscreteCat`/`IsNCat` formation, the native hom-action/evidence-
+property modules, WalkingEnd, Nat, or the main diagnostics.
 
 There is a direct one-way native bridge from ordinary isomorphism evidence:
-`iso_evidence_omega_along_EQ1(i)` uses the ordinary inverse in both native
+`iso_evidence_omega_along(i)` uses the ordinary inverse in both native
 inverse slots and the two ordinary equations as its equality-valued laws, and
-`iso_evidence_omega_equiv_EQ1(i)` packages the result. The native forward,
+`iso_evidence_omega_equiv(i)` packages the result. The native forward,
 inverse, and law projections compute. This does not by itself replace the
 two-sided OneCat theorem. The stable native cast returns an object path but
 intentionally does not reify an explicit native package as that raw path; even
 the reflexive package is not judgmentally `eq_refl`. A focused owner probe
 therefore leaves the first decoder base case unresolved at precisely that
 package/path comparison. No coherence theorem or proof-time identification is
-invented, and the existing OneCat `TypeEquiv` remains an opt-in compatibility
-result pending such separately justified structure.
+invented. The old theorem was deleted rather than made a cleanup prerequisite;
+a fully native OneCat object-equality/ordinary-isomorphism `TypeEquiv` is
+optional future work if a concrete consumer appears.
 
-The frozen module retains the sound one-sided bridge from ordinary isomorphism
-evidence to the recursive layer. For
+#### Retired OneCat compatibility proof history
+
+The following paragraphs record how the deleted compatibility module had
+constructed its stronger two-sided OneCat result. The declarations do not
+exist in the active API.
+
+The frozen module retained a separate recursive bridge from ordinary
+isomorphism evidence. For
 
 ```text
 i : IsoEvidence(C,x,y),
@@ -2425,26 +2436,24 @@ The current foundations intentionally do not yet include:
   projection betas, reflexive J, and named arbitrary path round trips are
   active;
 - truncation reflectors and universe metatheory; direct Cat/Grpd universe
-  identity now uses the native EQ1 facade, while the D0-free
-  `GrpdPathView` remains a kernel library interface and decoder-owned
-  `CatPathView` is frozen legacy compatibility,
+  identity now uses the native equality-valued facade, while the D0-free
+  `GrpdPathView` remains a kernel library interface and the former decoder-
+  owned `CatPathView` is retired,
   while restricted truncated-universe univalence, carrier/evidence package paths,
   the expected successor-level package-universe theorem, general one-step
   monotonicity, dependent-Pi/Sigma closure, `TypeEquiv` invariance, and its fixed-map
-  categorical object-truncation consumer are active. Native EQ1 evidence is
-  proposition-valued and finite-`NCat` object truncation is unconditional;
-  only the opaque legacy-module D0 evidence lacks an extensionality/property
-  theorem;
+  categorical object-truncation consumer are active. Native equality-valued
+  evidence is proposition-valued and finite-`NCat` object truncation is
+  unconditional;
 - additional computation of J on nonreflexive structured Pi paths; ordinary
   `PiHapply`/`PiFunext` equivalence and arbitrary Sigma/first-record
   path-characterization round trips are active;
 - a completed universe/univalence metatheory beyond the active explicit
   capabilities and constructor/reflexivity computations;
 - raw unreified-path observer computation, reverse pointwise-to-coherent-core
-  assembly, consumer-led core-universe inclusion functors, and deletion of the
-  frozen legacy decoder module. Its retained two-sided OneCat theorem requires
-  native facade-package/raw-path reification coherence unless backward
-  compatibility is deliberately dropped first;
+  assembly, and consumer-led core-universe inclusion functors. A full native
+  two-sided OneCat object-equality/ordinary-isomorphism equivalence remains
+  optional future work; the old compatibility theorem and module are deleted;
 - general higher-inductive pushouts and a generic directed-inductive schema;
 - generic abstraction of the completed walking-endomorphism presentation into
   a reusable directed-HIT/free-category schema, full functor-category
@@ -2550,48 +2559,28 @@ vocabulary.
 | type equivalence `A ≃ B` | `TypeEquiv A B` |
 | groupoid-universe identity view | `GrpdPathView A B` |
 | encode/decode the groupoid-universe identity view | `grpd_path_encode p` / `grpd_path_decode e` |
-| direct categorical-universe identity classifier | `OmegaEquiv_EQ1 Cat_cat A B` |
-| frozen legacy categorical identity view | `CatPathView A B` in `emdash3_2_legacy_compat.lp` |
-| frozen legacy categorical encode/decode | `cat_path_encode p` / `cat_path_decode e` |
-| frozen legacy identity functor/evidence | `cat_path_functor e` / `cat_path_evidence e` |
-| frozen legacy identity next-hom action | `cat_path_fapp1 e x y` |
-| native equality-valued fixed-arrow equivalence | `OmegaEquivAlong_EQ1 C x y f` |
-| native first-class omega-equivalence facade | `OmegaEquiv_EQ1 C x y` |
-| explicit object-path equivalence package | `object_path_equiv_EQ1 p` |
-| literal path-category equivalence package | `path_equiv_EQ1 p` |
-| explicit equality/EQ1 identity casts | `object_path_to_equiv_cast_EQ1` / `omega_equiv_to_object_path_cast_EQ1` |
-| native next-hom preservation of equivalence | `omega_equiv_along_fapp1_EQ1 F u` |
-| coherent internal groupoidality | `IsGroupoidalCat_EQ1 C` |
-| groupoidal arrow/path selection and re-inclusion | `groupoidal_arrow_to_path_EQ1 g f` / `groupoidal_path_to_arrow_retract_EQ1 g f` |
-| equivalence-valued displayed transport | `groupoidal_fibre_transport_equiv_EQ1 g D f` |
-| unrestricted uniqueness of native fixed-arrow evidence | `omega_equiv_along_evidence_is_prop_EQ1 C x y f` |
-| truncation closure under an explicit retraction | `is_trunc_retract_EQ1 n r h` |
-| finite-dimensional object truncation | `ncat_obj_trunc_EQ1 n C h` |
-| ordinary iso to native fixed-arrow evidence | `iso_evidence_omega_along_EQ1 i` |
-| ordinary iso to native omega-equivalence facade | `iso_evidence_omega_equiv_EQ1 i` |
+| direct categorical-universe identity classifier | `OmegaEquiv Cat_cat A B` |
+| native equality-valued fixed-arrow equivalence | `OmegaEquivAlong C x y f` |
+| native first-class omega-equivalence facade | `OmegaEquiv C x y` |
+| explicit object-path equivalence package | `object_path_equiv p` |
+| literal path-category equivalence package | `path_equiv p` |
+| explicit equality/equivalence identity casts | `object_path_to_equiv_cast` / `omega_equiv_to_object_path_cast` |
+| native next-hom preservation of equivalence | `omega_equiv_along_fapp1 F u` |
+| coherent internal groupoidality | `IsGroupoidalCat C` |
+| groupoidal arrow/path selection and re-inclusion | `groupoidal_arrow_to_path g f` / `groupoidal_path_to_arrow_retract g f` |
+| equivalence-valued displayed transport | `groupoidal_fibre_transport_equiv g D f` |
+| unrestricted uniqueness of native fixed-arrow evidence | `omega_equiv_along_evidence_is_prop C x y f` |
+| truncation closure under an explicit retraction | `is_trunc_retract n r h` |
+| finite-dimensional object truncation | `ncat_obj_trunc n C h` |
+| ordinary iso to native fixed-arrow evidence | `iso_evidence_omega_along i` |
+| ordinary iso to native omega-equivalence facade | `iso_evidence_omega_equiv i` |
 | former-specific successor path induction | `nat_succ_ind_eqr P u p` |
 | proposition lift to a native categorical dimension | `prop_is_trunc_cat_dim n h` |
-| frozen legacy ordinary iso to D0 evidence | `iso_evidence_omega_along_D0 i` |
-| frozen legacy ordinary iso package | `iso_evidence_omega_equiv i` |
-| frozen legacy path-encoder agreement | `iso_evidence_omega_equiv_idtoiso p` |
-| frozen legacy OneCat ordinary-iso decoder | `one_cat_iso_path X i` |
-| frozen legacy decoder-after-encoder round trip | `one_cat_iso_path_idtoiso X p` |
-| frozen legacy decoded omega inverse laws | `omega_equiv_left_law e` / `omega_equiv_right_law e` |
-| frozen legacy OneCat transported right law | `one_cat_omega_right_law_at_left X e` |
-| frozen legacy ordinary-evidence reconstruction | `one_cat_omega_iso_evidence X e` |
-| frozen legacy lift reconstruction path | `one_cat_omega_iso_lift_retract X i` |
-| frozen legacy encoder-after-decoder round trip | `one_cat_idtoiso_iso_path X i` |
-| frozen legacy OneCat scoped capability | `one_cat_iso_univalence X` |
-| frozen legacy OneCat path/isomorphism equivalence | `one_cat_iso_type_equiv X x y` |
-| frozen legacy D0 selected cell arrows | `omega_equiv_along_left_cell_to_D0 u` / `omega_equiv_along_right_cell_from_D0 u` |
-| frozen legacy D0 inverse comparison | `omega_equiv_along_left_to_right_D0 u` |
-| frozen legacy OneCat selected-inverse path | `one_cat_omega_inverse_path X e` |
 | inverse type equivalence | `type_equiv_sym e` |
 | composite type equivalence `eBC ∘ eAB` | `type_equiv_comp eBC eAB` |
 | groupoid univalence capability | `GrpdUnivalence` / `grpd_univalence_by_decoder` |
 | ordinary categorical isomorphism evidence | `IsoEvidence C x y` |
-| frozen legacy omega-equivalence | `OmegaEquiv C x y` in `emdash3_2_legacy_compat.lp` |
-| categorical univalence capability type / frozen decoder inhabitant | `CatUnivalence C` / `cat_univalence_by_decoder C` |
+| categorical univalence capability type | `CatUnivalence C` |
 | computational isomorphism | `DefIso C x y` |
 | profunctors `A -/-> B` | `Prof_cat A B` / `Prof A B` |
 | vertical profunctor maps | `ProfMap P Q` |

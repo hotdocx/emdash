@@ -229,24 +229,24 @@ assert (n : τ Nat_grpd) ⊢
   ≡ @iso_evidence_refl (Path_cat Nat_grpd) (succ n);
 
 assert ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Nat_grpd) zero zero (@eq_refl Nat_grpd zero)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Nat_grpd) zero;
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) zero;
 
 assert (n : τ Nat_grpd) ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Nat_grpd)
     (succ n) (succ n) (@eq_refl Nat_grpd (succ n))
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Nat_grpd) (succ n);
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) (succ n);
 
 assertnot ⊢
-  @object_path_equiv_EQ1 (Path_cat Nat_grpd) zero zero tt
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Nat_grpd) zero;
+  @object_path_equiv (Path_cat Nat_grpd) zero zero tt
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) zero;
 
 assertnot (n : τ Nat_grpd) ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Nat_grpd) (succ n) (succ n) (@eq_refl Nat_grpd n)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Nat_grpd) (succ n);
+  ≡ @omega_equiv_refl (Path_cat Nat_grpd) (succ n);
 
 // Open Nat endpoints retain primitive equality/reflexivity. These controls do
 // not establish Nat canonicity, normalization, or metatheoretic no-confusion.
@@ -456,17 +456,17 @@ assert ⊢
   ≡ @iso_evidence_refl (Path_cat Unit_grpd) tt;
 
 assert ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Unit_grpd) tt tt (@eq_refl Unit_grpd tt)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Unit_grpd) tt;
+  ≡ @omega_equiv_refl (Path_cat Unit_grpd) tt;
 
 assertnot ⊢
   @idtoiso_cat (Path_cat Unit_grpd) tt tt tt
   ≡ @iso_evidence_refl (Path_cat Unit_grpd) tt;
 
 assertnot ⊢
-  @object_path_equiv_EQ1 (Path_cat Unit_grpd) tt tt tt
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Unit_grpd) tt;
+  @object_path_equiv (Path_cat Unit_grpd) tt tt tt
+  ≡ @omega_equiv_refl (Path_cat Unit_grpd) tt;
 
 // Open Unit values retain primitive equality and reflexivity typing. These
 // are local conversion controls, not Unit canonicity or non-derivability.
@@ -604,7 +604,7 @@ assert (b : τ Bool_grpd)
     (Path_cat Bool_grpd) b true true (@eq_refl Bool_grpd true) p
   ≡ p;
 
-// The ordinary-isomorphism and native EQ1 encoders retain reflexivity beta.
+// The ordinary-isomorphism and native equality-valued encoders retain reflexivity beta.
 assert ⊢
   @idtoiso_cat
     (Path_cat Bool_grpd) false false (@eq_refl Bool_grpd false)
@@ -616,22 +616,22 @@ assert ⊢
   ≡ @iso_evidence_refl (Path_cat Bool_grpd) true;
 
 assert ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Bool_grpd) false false (@eq_refl Bool_grpd false)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Bool_grpd) false;
+  ≡ @omega_equiv_refl (Path_cat Bool_grpd) false;
 
 assert ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat Bool_grpd) true true (@eq_refl Bool_grpd true)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Bool_grpd) true;
+  ≡ @omega_equiv_refl (Path_cat Bool_grpd) true;
 
 assertnot ⊢
   @idtoiso_cat (Path_cat Bool_grpd) false false tt
   ≡ @iso_evidence_refl (Path_cat Bool_grpd) false;
 
 assertnot ⊢
-  @object_path_equiv_EQ1 (Path_cat Bool_grpd) false false tt
-  ≡ @omega_equiv_refl_EQ1 (Path_cat Bool_grpd) false;
+  @object_path_equiv (Path_cat Bool_grpd) false false tt
+  ≡ @omega_equiv_refl (Path_cat Bool_grpd) false;
 
 // Open Boolean values retain the generic classifier and reflexivity typing.
 assertnot (b : τ Bool_grpd) ⊢
@@ -826,7 +826,7 @@ assert [A : Grpd]
     (@PathRecordPathRefl A r)
   ≡ @PathRecordPathRefl A r;
 
-// The ordinary-isomorphism and native EQ1 encoders register the shaped head.
+// The ordinary-isomorphism and native equality-valued encoders register the shaped head.
 assert [A : Grpd]
   (r : τ (PathRecord_grpd A)) ⊢
   @idtoiso_cat
@@ -845,19 +845,19 @@ assert [A : Grpd]
 
 assert [A : Grpd]
   (r : τ (PathRecord_grpd A)) ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat (PathRecord_grpd A))
     r r
     (@eq_refl (PathRecord_grpd A) r)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat (PathRecord_grpd A)) r;
+  ≡ @omega_equiv_refl (Path_cat (PathRecord_grpd A)) r;
 
 assert [A : Grpd]
   (r : τ (PathRecord_grpd A)) ⊢
-  @object_path_equiv_EQ1
+  @object_path_equiv
     (Path_cat (PathRecord_grpd A))
     r r
     (@PathRecordPathRefl A r)
-  ≡ @omega_equiv_refl_EQ1 (Path_cat (PathRecord_grpd A)) r;
+  ≡ @omega_equiv_refl (Path_cat (PathRecord_grpd A)) r;
 
 /*
   Candidate C warning classification: post/precomposition unit diamonds.
@@ -2758,8 +2758,8 @@ assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
     (@comp_fapp0 C x y x l f) (@id C x)))
   (beta : τ (@= (Hom C y y)
     (@comp_fapp0 C y x y f r) (@id C y))) ⊢
-  @omega_equiv_along_left_inv_EQ1 C x y f
-    (@omega_equiv_along_intro_EQ1 C x y f l r alpha beta)
+  @omega_equiv_along_left_inv C x y f
+    (@omega_equiv_along_intro C x y f l r alpha beta)
   ≡ l;
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
@@ -2768,8 +2768,8 @@ assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
     (@comp_fapp0 C x y x l f) (@id C x)))
   (beta : τ (@= (Hom C y y)
     (@comp_fapp0 C y x y f r) (@id C y))) ⊢
-  @omega_equiv_along_right_inv_EQ1 C x y f
-    (@omega_equiv_along_intro_EQ1 C x y f l r alpha beta)
+  @omega_equiv_along_right_inv C x y f
+    (@omega_equiv_along_intro C x y f l r alpha beta)
   ≡ r;
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
@@ -2778,8 +2778,8 @@ assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
     (@comp_fapp0 C x y x l f) (@id C x)))
   (beta : τ (@= (Hom C y y)
     (@comp_fapp0 C y x y f r) (@id C y))) ⊢
-  @omega_equiv_along_left_law_EQ1 C x y f
-    (@omega_equiv_along_intro_EQ1 C x y f l r alpha beta)
+  @omega_equiv_along_left_law C x y f
+    (@omega_equiv_along_intro C x y f l r alpha beta)
   ≡ alpha;
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
@@ -2788,29 +2788,29 @@ assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
     (@comp_fapp0 C x y x l f) (@id C x)))
   (beta : τ (@= (Hom C y y)
     (@comp_fapp0 C y x y f r) (@id C y))) ⊢
-  @omega_equiv_along_right_law_EQ1 C x y f
-    (@omega_equiv_along_intro_EQ1 C x y f l r alpha beta)
+  @omega_equiv_along_right_law C x y f
+    (@omega_equiv_along_intro C x y f l r alpha beta)
   ≡ beta;
 
 // Reflexive evidence exposes both identity inverses and both reflexive laws.
 assert [C : Cat] (x : τ (Obj C)) ⊢
-  @omega_equiv_along_left_inv_EQ1 C x x (@id C x)
-    (@omega_equiv_along_refl_EQ1 C x)
+  @omega_equiv_along_left_inv C x x (@id C x)
+    (@omega_equiv_along_refl C x)
   ≡ @id C x;
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
-  @omega_equiv_along_right_inv_EQ1 C x x (@id C x)
-    (@omega_equiv_along_refl_EQ1 C x)
+  @omega_equiv_along_right_inv C x x (@id C x)
+    (@omega_equiv_along_refl C x)
   ≡ @id C x;
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
-  @omega_equiv_along_left_law_EQ1 C x x (@id C x)
-    (@omega_equiv_along_refl_EQ1 C x)
+  @omega_equiv_along_left_law C x x (@id C x)
+    (@omega_equiv_along_refl C x)
   ≡ @eq_refl (Hom C x x) (@id C x);
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
-  @omega_equiv_along_right_law_EQ1 C x x (@id C x)
-    (@omega_equiv_along_refl_EQ1 C x)
+  @omega_equiv_along_right_law C x x (@id C x)
+    (@omega_equiv_along_refl C x)
   ≡ @eq_refl (Hom C x x) (@id C x);
 
 // The public indexed eliminator computes on introduced evidence.
@@ -2820,9 +2820,9 @@ assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
     (@comp_fapp0 C x y x l f) (@id C x)))
   (beta : τ (@= (Hom C y y)
     (@comp_fapp0 C y x y f r) (@id C y))) ⊢
-  @omega_equiv_along_ind_EQ1 C x y
+  @omega_equiv_along_ind C x y
     (λ g : τ (Hom C x y),
-     λ _ : τ (@OmegaEquivAlong_EQ1 C x y g), Unit_grpd)
+     λ _ : τ (@OmegaEquivAlong C x y g), Unit_grpd)
     (λ g : τ (Hom C x y),
      λ l' : τ (Hom C y x),
      λ r' : τ (Hom C y x),
@@ -2832,13 +2832,13 @@ assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
        (@comp_fapp0 C y x y g r') (@id C y)),
      tt)
     f
-    (@omega_equiv_along_intro_EQ1 C x y f l r alpha beta)
+    (@omega_equiv_along_intro C x y f l r alpha beta)
   ≡ tt;
 
 // A named Cat arrow carries evidence without a first-class repackaging step.
 assert [A B : Cat] (F : τ (Functor A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F)) ⊢
-  @omega_equiv_along_left_inv_EQ1 Cat_cat A B F u
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @omega_equiv_along_left_inv Cat_cat A B F u
   : τ (Functor B A);
 
 // Separate inverse choices remain observably separate.
@@ -2848,294 +2848,294 @@ assertnot [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
     (@comp_fapp0 C x y x l f) (@id C x)))
   (beta : τ (@= (Hom C y y)
     (@comp_fapp0 C y x y f r) (@id C y))) ⊢
-  @omega_equiv_along_left_inv_EQ1 C x y f
-    (@omega_equiv_along_intro_EQ1 C x y f l r alpha beta)
-  ≡ @omega_equiv_along_right_inv_EQ1 C x y f
-    (@omega_equiv_along_intro_EQ1 C x y f l r alpha beta);
+  @omega_equiv_along_left_inv C x y f
+    (@omega_equiv_along_intro C x y f l r alpha beta)
+  ≡ @omega_equiv_along_right_inv C x y f
+    (@omega_equiv_along_intro C x y f l r alpha beta);
 
 // No runtime evidence eta is selected.
 assertnot [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_equiv_along_intro_EQ1 C x y f
-    (@omega_equiv_along_left_inv_EQ1 C x y f u)
-    (@omega_equiv_along_right_inv_EQ1 C x y f u)
-    (@omega_equiv_along_left_law_EQ1 C x y f u)
-    (@omega_equiv_along_right_law_EQ1 C x y f u)
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_along_intro C x y f
+    (@omega_equiv_along_left_inv C x y f u)
+    (@omega_equiv_along_right_inv C x y f u)
+    (@omega_equiv_along_left_law C x y f u)
+    (@omega_equiv_along_right_law C x y f u)
   ≡ u;
 
 // Supplied equality evidence remains observable and is not proof-erased.
 assertnot [C : Cat] (x : τ (Obj C))
   (alpha beta : τ (@= (Hom C x x) (@id C x) (@id C x))) ⊢
-  @omega_equiv_along_left_law_EQ1 C x x (@id C x)
-    (@omega_equiv_along_intro_EQ1 C x x (@id C x)
+  @omega_equiv_along_left_law C x x (@id C x)
+    (@omega_equiv_along_intro C x x (@id C x)
       (@id C x) (@id C x) alpha beta)
   ≡ @eq_refl (Hom C x x) (@id C x);
 
 
 // EVOGJ Phase-2 facade, comparison-view, and adapter diagnostics.
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_equiv_to_EQ1 C x y
-    (@omega_equiv_pack_EQ1 C x y f u)
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_to C x y
+    (@omega_equiv_pack C x y f u)
   ≡ f;
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_equiv_evidence_EQ1 C x y
-    (@omega_equiv_pack_EQ1 C x y f u)
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_evidence C x y
+    (@omega_equiv_pack C x y f u)
   ≡ u;
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_equiv_ind_EQ1 C x y
-    (λ _ : τ (@OmegaEquiv_EQ1 C x y), Unit_grpd)
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_ind C x y
+    (λ _ : τ (@OmegaEquiv C x y), Unit_grpd)
     (λ g : τ (Hom C x y),
-     λ _ : τ (@OmegaEquivAlong_EQ1 C x y g), tt)
-    (@omega_equiv_pack_EQ1 C x y f u)
+     λ _ : τ (@OmegaEquivAlong C x y g), tt)
+    (@omega_equiv_pack C x y f u)
   ≡ tt;
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
-  @omega_equiv_to_EQ1 C x x (@omega_equiv_refl_EQ1 C x)
+  @omega_equiv_to C x x (@omega_equiv_refl C x)
   ≡ @id C x;
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
-  @omega_equiv_evidence_EQ1 C x x (@omega_equiv_refl_EQ1 C x)
-  ≡ @omega_equiv_along_refl_EQ1 C x;
+  @omega_equiv_evidence C x x (@omega_equiv_refl C x)
+  ≡ @omega_equiv_along_refl C x;
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_equiv_eta_EQ1 C x y
-    (@omega_equiv_pack_EQ1 C x y f u)
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_eta C x y
+    (@omega_equiv_pack C x y f u)
   ≡ @eq_refl
-      (@OmegaEquiv_EQ1 C x y)
-      (@omega_equiv_pack_EQ1 C x y f u);
+      (@OmegaEquiv C x y)
+      (@omega_equiv_pack C x y f u);
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_sigma_to_facade_EQ1 C x y
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_sigma_to_facade C x y
     (@Struct_sigma
       (Hom C x y)
-      (λ g : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y g)
+      (λ g : τ (Hom C x y), @OmegaEquivAlong C x y g)
       f u)
-  ≡ @omega_equiv_pack_EQ1 C x y f u;
+  ≡ @omega_equiv_pack C x y f u;
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_facade_to_sigma_EQ1 C x y
-    (@omega_equiv_pack_EQ1 C x y f u)
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_facade_to_sigma C x y
+    (@omega_equiv_pack C x y f u)
   ≡ @Struct_sigma
       (Hom C x y)
-      (λ g : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y g)
+      (λ g : τ (Hom C x y), @OmegaEquivAlong C x y g)
       f u;
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_sigma_roundtrip_EQ1 C x y
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_sigma_roundtrip C x y
     (@Struct_sigma
       (Hom C x y)
-      (λ g : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y g)
+      (λ g : τ (Hom C x y), @OmegaEquivAlong C x y g)
       f u)
   ≡ @eq_refl
-      (@OmegaEquivSigma_EQ1 C x y)
+      (@OmegaEquivSigma C x y)
       (@Struct_sigma
         (Hom C x y)
-        (λ g : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y g)
+        (λ g : τ (Hom C x y), @OmegaEquivAlong C x y g)
         f u);
 
 assert [C : Cat] (x y : τ (Obj C)) (f : τ (Hom C x y))
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_facade_roundtrip_EQ1 C x y
-    (@omega_equiv_pack_EQ1 C x y f u)
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_facade_roundtrip C x y
+    (@omega_equiv_pack C x y f u)
   ≡ @eq_refl
-      (@OmegaEquiv_EQ1 C x y)
-      (@omega_equiv_pack_EQ1 C x y f u);
+      (@OmegaEquiv C x y)
+      (@omega_equiv_pack C x y f u);
 
 assert [C : Cat] (x y : τ (Obj C))
   (p : τ (@= (Obj C) x y)) ⊢
-  @omega_equiv_to_EQ1 C x y
-    (@object_path_equiv_EQ1 C x y p)
+  @omega_equiv_to C x y
+    (@object_path_equiv C x y p)
   ≡ @path_to_hom C x y p;
 
 assert [C : Cat] (x y : τ (Obj C))
   (p : τ (@= (Obj C) x y)) ⊢
-  @omega_equiv_evidence_EQ1 C x y
-    (@object_path_equiv_EQ1 C x y p)
-  ≡ @object_path_equiv_along_EQ1 C x y p;
+  @omega_equiv_evidence C x y
+    (@object_path_equiv C x y p)
+  ≡ @object_path_equiv_along C x y p;
 
 assert [C : Cat] (x y : τ (Obj C))
   (p : τ (@= (Obj C) x y)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     C x y
     (@path_to_hom C x y p)
-    (@object_path_equiv_along_EQ1 C x y p)
+    (@object_path_equiv_along C x y p)
   ≡ @path_to_hom C y x (@path_sym (Obj C) x y p);
 
 assert [C : Cat] (x y : τ (Obj C))
   (p : τ (@= (Obj C) x y)) ⊢
-  @omega_equiv_along_right_inv_EQ1
+  @omega_equiv_along_right_inv
     C x y
     (@path_to_hom C x y p)
-    (@object_path_equiv_along_EQ1 C x y p)
+    (@object_path_equiv_along C x y p)
   ≡ @path_to_hom C y x (@path_sym (Obj C) x y p);
 
 assert [C : Cat] (x y : τ (Obj C))
   (p : τ (@= (Obj C) x y)) ⊢
-  @omega_equiv_along_left_law_EQ1
+  @omega_equiv_along_left_law
     C x y
     (@path_to_hom C x y p)
-    (@object_path_equiv_along_EQ1 C x y p)
-  ≡ @object_path_equiv_left_law_EQ1 C x y p;
+    (@object_path_equiv_along C x y p)
+  ≡ @object_path_equiv_left_law C x y p;
 
 assert [C : Cat] (x y : τ (Obj C))
   (p : τ (@= (Obj C) x y)) ⊢
-  @omega_equiv_along_right_law_EQ1
+  @omega_equiv_along_right_law
     C x y
     (@path_to_hom C x y p)
-    (@object_path_equiv_along_EQ1 C x y p)
-  ≡ @object_path_equiv_right_law_EQ1 C x y p;
+    (@object_path_equiv_along C x y p)
+  ≡ @object_path_equiv_right_law C x y p;
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
-  @object_path_equiv_left_law_EQ1 C x x (@eq_refl (Obj C) x)
+  @object_path_equiv_left_law C x x (@eq_refl (Obj C) x)
   ≡ @eq_refl (Hom C x x) (@id C x);
 
 assert [C : Cat] (x : τ (Obj C)) ⊢
-  @object_path_equiv_right_law_EQ1 C x x (@eq_refl (Obj C) x)
+  @object_path_equiv_right_law C x x (@eq_refl (Obj C) x)
   ≡ @eq_refl (Hom C x x) (@id C x);
 
-// Ordinary isomorphism evidence has a direct one-way native EQ1 lift.
+// Ordinary isomorphism evidence has a direct one-way native equality-valued lift.
 assert [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
-  @iso_evidence_omega_equiv_EQ1 C x y i
-  : τ (@OmegaEquiv_EQ1 C x y);
+  @iso_evidence_omega_equiv C x y i
+  : τ (@OmegaEquiv C x y);
 
 assert [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
-  @omega_equiv_to_EQ1 C x y
-    (@iso_evidence_omega_equiv_EQ1 C x y i)
+  @omega_equiv_to C x y
+    (@iso_evidence_omega_equiv C x y i)
   ≡ @iso_evidence_to C x y i;
 
 assert [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     C x y
     (@iso_evidence_to C x y i)
-    (@omega_equiv_evidence_EQ1 C x y
-      (@iso_evidence_omega_equiv_EQ1 C x y i))
+    (@omega_equiv_evidence C x y
+      (@iso_evidence_omega_equiv C x y i))
   ≡ @iso_evidence_from C x y i;
 
 assert [C : Cat]
   [x y : τ (Obj C)]
   (i : τ (IsoEvidence C x y)) ⊢
-  @omega_equiv_along_right_law_EQ1
+  @omega_equiv_along_right_law
     C x y
     (@iso_evidence_to C x y i)
-    (@omega_equiv_evidence_EQ1 C x y
-      (@iso_evidence_omega_equiv_EQ1 C x y i))
+    (@omega_equiv_evidence C x y
+      (@iso_evidence_omega_equiv C x y i))
   ≡ @iso_evidence_right C x y i;
 
 // The stable cast is not a package decoder: explicit native reflexivity keeps
 // provenance distinct from the raw equality constructor.
 assertnot [C : Cat]
   (x : τ (Obj C)) ⊢
-  @omega_cast_to_object_path_EQ1 C x x
-    (@iso_evidence_omega_equiv_EQ1 C x x
+  @omega_cast_to_object_path C x x
+    (@iso_evidence_omega_equiv C x x
       (@iso_evidence_refl C x))
   ≡ @eq_refl (Obj C) x;
 
 // The stable facade is intentionally not runtime-transparent Sigma data.
 assertnot [C : Cat] (x y : τ (Obj C)) ⊢
-  @OmegaEquiv_EQ1 C x y
-  ≡ @OmegaEquivSigma_EQ1 C x y;
+  @OmegaEquiv C x y
+  ≡ @OmegaEquivSigma C x y;
 
 // Eta is propositional, not a runtime package collapse.
 assertnot [C : Cat] (x y : τ (Obj C))
-  (e : τ (@OmegaEquiv_EQ1 C x y)) ⊢
-  @omega_equiv_pack_EQ1
+  (e : τ (@OmegaEquiv C x y)) ⊢
+  @omega_equiv_pack
     C x y
-    (@omega_equiv_to_EQ1 C x y e)
-    (@omega_equiv_evidence_EQ1 C x y e)
+    (@omega_equiv_to C x y e)
+    (@omega_equiv_evidence C x y e)
   ≡ e;
 
 // No generic equality/equivalence classifier comparison is promoted here.
 assertnot [C : Cat] (x y : τ (Obj C)) ⊢
   @= (Obj C) x y
-  ≡ @OmegaEquiv_EQ1 C x y;
+  ≡ @OmegaEquiv C x y;
 
 // Elimination computes only when the facade constructor is exposed.
 assertnot [C : Cat] (x y : τ (Obj C))
-  (e : τ (@OmegaEquiv_EQ1 C x y)) ⊢
-  @omega_equiv_ind_EQ1 C x y
-    (λ _ : τ (@OmegaEquiv_EQ1 C x y), Unit_grpd)
+  (e : τ (@OmegaEquiv C x y)) ⊢
+  @omega_equiv_ind C x y
+    (λ _ : τ (@OmegaEquiv C x y), Unit_grpd)
     (λ g : τ (Hom C x y),
-     λ _ : τ (@OmegaEquivAlong_EQ1 C x y g), tt)
+     λ _ : τ (@OmegaEquivAlong C x y g), tt)
     e
   ≡ tt;
 
 // EVOGJ Phase-3 literal-path and canonical-groupoidality diagnostics.
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  p : τ (@OmegaEquiv_EQ1 (Path_cat A) x y);
+  p : τ (@OmegaEquiv (Path_cat A) x y);
 
 assert [A : Grpd] (x y : τ A)
-  (e : τ (@OmegaEquiv_EQ1 (Path_cat A) x y)) ⊢
+  (e : τ (@OmegaEquiv (Path_cat A) x y)) ⊢
   e : τ (@= A x y);
 
 // The shaped join is proof-time only.
 assertnot [A : Grpd] (x y : τ A) ⊢
-  @OmegaEquiv_EQ1 (Path_cat A) x y
+  @OmegaEquiv (Path_cat A) x y
   ≡ @= A x y;
 
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_to_EQ1 (Path_cat A) x y
-    (@path_equiv_EQ1 A x y p)
+  @omega_equiv_to (Path_cat A) x y
+    (@path_equiv A x y p)
   ≡ p;
 
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_evidence_EQ1 (Path_cat A) x y
-    (@path_equiv_EQ1 A x y p)
-  ≡ @path_equiv_along_EQ1 A x y p;
+  @omega_equiv_evidence (Path_cat A) x y
+    (@path_equiv A x y p)
+  ≡ @path_equiv_along A x y p;
 
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     (Path_cat A) x y p
-    (@path_equiv_along_EQ1 A x y p)
+    (@path_equiv_along A x y p)
   ≡ @path_sym A x y p;
 
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_along_right_inv_EQ1
+  @omega_equiv_along_right_inv
     (Path_cat A) x y p
-    (@path_equiv_along_EQ1 A x y p)
+    (@path_equiv_along A x y p)
   ≡ @path_sym A x y p;
 
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_along_left_law_EQ1
+  @omega_equiv_along_left_law
     (Path_cat A) x y p
-    (@path_equiv_along_EQ1 A x y p)
-  ≡ @path_equiv_left_law_EQ1 A x y p;
+    (@path_equiv_along A x y p)
+  ≡ @path_equiv_left_law A x y p;
 
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_along_right_law_EQ1
+  @omega_equiv_along_right_law
     (Path_cat A) x y p
-    (@path_equiv_along_EQ1 A x y p)
-  ≡ @path_equiv_right_law_EQ1 A x y p;
+    (@path_equiv_along A x y p)
+  ≡ @path_equiv_right_law A x y p;
 
 assert [A : Grpd] (x : τ A) ⊢
-  @path_equiv_left_law_EQ1 A x x (@eq_refl A x)
+  @path_equiv_left_law A x x (@eq_refl A x)
   ≡ @eq_refl
       (Hom (Path_cat A) x x)
       (@id (Path_cat A) x);
 
 assert [A : Grpd] (x : τ A) ⊢
-  @path_equiv_right_law_EQ1 A x x (@eq_refl A x)
+  @path_equiv_right_law A x x (@eq_refl A x)
   ≡ @eq_refl
       (Hom (Path_cat A) x x)
       (@id (Path_cat A) x);
@@ -3144,33 +3144,33 @@ assert [A : Grpd] (x : τ A) ⊢
 // selected literal path.
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_ind_EQ1
+  @omega_equiv_ind
     (Path_cat A) x y
-    (λ _ : τ (@OmegaEquiv_EQ1 (Path_cat A) x y), @= A x y)
+    (λ _ : τ (@OmegaEquiv (Path_cat A) x y), @= A x y)
     (λ f : τ (Hom (Path_cat A) x y),
-     λ _ : τ (@OmegaEquivAlong_EQ1 (Path_cat A) x y f), f)
-    (@path_equiv_EQ1 A x y p)
+     λ _ : τ (@OmegaEquivAlong (Path_cat A) x y f), f)
+    (@path_equiv A x y p)
   ≡ p;
 
 // The left cancellation path can itself be reified and observed one hom
 // dimension higher through the general object-path adapter.
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_to_EQ1
+  @omega_equiv_to
     (Hom_cat (Path_cat A) x x)
     (@comp_fapp0
       (Path_cat A) x y x
       (@path_sym A x y p)
       p)
     (@id (Path_cat A) x)
-    (@object_path_equiv_EQ1
+    (@object_path_equiv
       (Hom_cat (Path_cat A) x x)
       (@comp_fapp0
         (Path_cat A) x y x
         (@path_sym A x y p)
         p)
       (@id (Path_cat A) x)
-      (@path_equiv_left_law_EQ1 A x y p))
+      (@path_equiv_left_law A x y p))
   ≡ @path_to_hom
       (Hom_cat (Path_cat A) x x)
       (@comp_fapp0
@@ -3178,7 +3178,7 @@ assert [A : Grpd] (x y : τ A)
         (@path_sym A x y p)
         p)
       (@id (Path_cat A) x)
-      (@path_equiv_left_law_EQ1 A x y p);
+      (@path_equiv_left_law A x y p);
 
 // Typed reflexivity exercises the Core-inclusion proof-time comparison.
 assert [A : Grpd] ⊢
@@ -3191,34 +3191,34 @@ assert [A : Grpd] ⊢
       (@id Cat_cat (Path_cat A)));
 
 assert [A : Grpd] ⊢
-  @path_cat_is_groupoidal_EQ1 A
-  : τ (@IsGroupoidalCat_EQ1 (Path_cat A));
+  @path_cat_is_groupoidal A
+  : τ (@IsGroupoidalCat (Path_cat A));
 
 assert [A : Grpd] ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     Cat_cat
     (Core_cat (Path_cat A))
     (Path_cat A)
     (Core_incl_func (Path_cat A))
-    (@path_cat_is_groupoidal_EQ1 A)
+    (@path_cat_is_groupoidal A)
   ≡ @id Cat_cat (Path_cat A);
 
 assert [A : Grpd] ⊢
-  @omega_equiv_along_right_inv_EQ1
+  @omega_equiv_along_right_inv
     Cat_cat
     (Core_cat (Path_cat A))
     (Path_cat A)
     (Core_incl_func (Path_cat A))
-    (@path_cat_is_groupoidal_EQ1 A)
+    (@path_cat_is_groupoidal A)
   ≡ @id Cat_cat (Path_cat A);
 
 assert [A : Grpd] ⊢
-  @omega_equiv_along_left_law_EQ1
+  @omega_equiv_along_left_law
     Cat_cat
     (Core_cat (Path_cat A))
     (Path_cat A)
     (Core_incl_func (Path_cat A))
-    (@path_cat_is_groupoidal_EQ1 A)
+    (@path_cat_is_groupoidal A)
   ≡ @eq_refl
       (Hom Cat_cat (Path_cat A) (Path_cat A))
       (@id Cat_cat (Path_cat A));
@@ -3226,12 +3226,12 @@ assert [A : Grpd] ⊢
 // No raw-path observer or package erasure is selected.
 assertnot [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @omega_equiv_to_EQ1 (Path_cat A) x y p
+  @omega_equiv_to (Path_cat A) x y p
   ≡ p;
 
 assertnot [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
-  @path_equiv_EQ1 A x y p
+  @path_equiv A x y p
   ≡ p;
 
 // Core inclusion and identity compare only at proof time.
@@ -3242,7 +3242,7 @@ assertnot [A : Grpd] ⊢
 // The literal path join does not promote generic all-category univalence.
 assertnot [C : Cat] (x y : τ (Obj C)) ⊢
   @= (Obj C) x y
-  ≡ @OmegaEquiv_EQ1 C x y;
+  ≡ @OmegaEquiv C x y;
 
 // A facade reflexivity package accepted as a literal path is not primitive
 // equality reflexivity, so raw J does not acquire a new beta rule.
@@ -3253,7 +3253,7 @@ assertnot [A : Grpd] (x : τ A) ⊢
     (λ z : τ A, λ _ : τ (@= A z x), Unit_grpd)
     tt
     x
-    (@omega_equiv_refl_EQ1 (Path_cat A) x)
+    (@omega_equiv_refl (Path_cat A) x)
   ≡ tt;
 
 // EVOGJ Phase-4 Grpd_cat function-path boundary and explicit bridges.
@@ -3302,99 +3302,99 @@ assert [A B C : Grpd]
       (@grpd_comp_function A B C g f));
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_to_EQ1 Grpd_cat A B
-    (@type_equiv_to_omega_EQ1 A B e)
+  @omega_equiv_to Grpd_cat A B
+    (@type_equiv_to_omega A B e)
   ≡ @type_equiv_to A B e;
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_evidence_EQ1 Grpd_cat A B
-    (@type_equiv_to_omega_EQ1 A B e)
-  ≡ @omega_equiv_along_intro_EQ1
+  @omega_equiv_evidence Grpd_cat A B
+    (@type_equiv_to_omega A B e)
+  ≡ @omega_equiv_along_intro
       Grpd_cat A B
       (@type_equiv_to A B e)
       (λ b : τ B, @type_equiv_from A B e b)
       (λ b : τ B, @type_equiv_from A B e b)
-      (@type_equiv_omega_left_law_EQ1 A B e)
-      (@type_equiv_omega_right_law_EQ1 A B e);
+      (@type_equiv_omega_left_law A B e)
+      (@type_equiv_omega_right_law A B e);
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     Grpd_cat A B (@type_equiv_to A B e)
-    (@omega_equiv_evidence_EQ1 Grpd_cat A B
-      (@type_equiv_to_omega_EQ1 A B e))
+    (@omega_equiv_evidence Grpd_cat A B
+      (@type_equiv_to_omega A B e))
   ≡ λ b : τ B, @type_equiv_from A B e b;
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_along_right_inv_EQ1
+  @omega_equiv_along_right_inv
     Grpd_cat A B (@type_equiv_to A B e)
-    (@omega_equiv_evidence_EQ1 Grpd_cat A B
-      (@type_equiv_to_omega_EQ1 A B e))
+    (@omega_equiv_evidence Grpd_cat A B
+      (@type_equiv_to_omega A B e))
   ≡ λ b : τ B, @type_equiv_from A B e b;
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_along_left_law_EQ1
+  @omega_equiv_along_left_law
     Grpd_cat A B (@type_equiv_to A B e)
-    (@omega_equiv_evidence_EQ1 Grpd_cat A B
-      (@type_equiv_to_omega_EQ1 A B e))
-  ≡ @type_equiv_omega_left_law_EQ1 A B e;
+    (@omega_equiv_evidence Grpd_cat A B
+      (@type_equiv_to_omega A B e))
+  ≡ @type_equiv_omega_left_law A B e;
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_along_right_law_EQ1
+  @omega_equiv_along_right_law
     Grpd_cat A B (@type_equiv_to A B e)
-    (@omega_equiv_evidence_EQ1 Grpd_cat A B
-      (@type_equiv_to_omega_EQ1 A B e))
-  ≡ @type_equiv_omega_right_law_EQ1 A B e;
+    (@omega_equiv_evidence Grpd_cat A B
+      (@type_equiv_to_omega A B e))
+  ≡ @type_equiv_omega_right_law A B e;
 
 assert [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f)) ⊢
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f)) ⊢
   @type_equiv_to A B
-    (@omega_along_to_type_equiv_EQ1 A B f u)
+    (@omega_along_to_type_equiv A B f u)
   ≡ f;
 
 assert [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f)) ⊢
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f)) ⊢
   @type_equiv_is_equiv A B
-    (@omega_along_to_type_equiv_EQ1 A B f u)
-  ≡ @omega_grpd_is_equiv_EQ1 A B f u;
+    (@omega_along_to_type_equiv A B f u)
+  ≡ @omega_grpd_is_equiv A B f u;
 
 assert [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f))
   (b : τ B) ⊢
   @type_equiv_from A B
-    (@omega_along_to_type_equiv_EQ1 A B f u)
+    (@omega_along_to_type_equiv A B f u)
     b
-  ≡ (@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) b;
+  ≡ (@omega_equiv_along_left_inv Grpd_cat A B f u) b;
 
 assert [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f))
   (b : τ B) ⊢
   @type_equiv_right A B
-    (@omega_along_to_type_equiv_EQ1 A B f u)
+    (@omega_along_to_type_equiv A B f u)
     b
-  ≡ @omega_grpd_left_right_point_EQ1 A B f u b;
+  ≡ @omega_grpd_left_right_point A B f u b;
 
 assert [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f)) ⊢
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f)) ⊢
   @type_equiv_to A B
-    (@omega_to_type_equiv_EQ1 A B
-      (@omega_equiv_pack_EQ1 Grpd_cat A B f u))
+    (@omega_to_type_equiv A B
+      (@omega_equiv_pack Grpd_cat A B f u))
   ≡ f;
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
   @type_equiv_to A B
-    (@omega_to_type_equiv_EQ1 A B
-      (@type_equiv_to_omega_EQ1 A B e))
+    (@omega_to_type_equiv A B
+      (@type_equiv_to_omega A B e))
   ≡ @type_equiv_to A B e;
 
-// Phase 6 retargets rigid groupoid-universe equality to the EQ1 facade.
+// Phase 6 retargets rigid groupoid-universe equality to the equality-valued facade.
 assert [A B : Grpd] ⊢
   @= Grpd_grpd A B
-  ≡ @OmegaEquiv_EQ1 Grpd_cat A B;
+  ≡ @OmegaEquiv Grpd_cat A B;
 
 assertnot [A B : Grpd] ⊢
   @= Grpd_grpd A B
@@ -3402,27 +3402,27 @@ assertnot [A B : Grpd] ⊢
 
 // Neither bridge currently supplies definitional package eta.
 assertnot [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_to_type_equiv_EQ1 A B
-    (@type_equiv_to_omega_EQ1 A B e)
+  @omega_to_type_equiv A B
+    (@type_equiv_to_omega A B e)
   ≡ e;
 
 assertnot [A B : Grpd]
-  (e : τ (@OmegaEquiv_EQ1 Grpd_cat A B)) ⊢
-  @type_equiv_to_omega_EQ1 A B
-    (@omega_to_type_equiv_EQ1 A B e)
+  (e : τ (@OmegaEquiv Grpd_cat A B)) ⊢
+  @type_equiv_to_omega A B
+    (@omega_to_type_equiv A B e)
   ≡ e;
 
 // The selected fibre centre computes, but its contraction field remains the
 // pre-existing opaque `is_equiv_map_by_inverse` theorem data.
 assertnot [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f))
   (b : τ B) ⊢
-  (sigma_Snd (@omega_grpd_is_equiv_EQ1 A B f u b))
-    (sigma_Fst (@omega_grpd_is_equiv_EQ1 A B f u b))
+  (sigma_Snd (@omega_grpd_is_equiv A B f u b))
+    (sigma_Fst (@omega_grpd_is_equiv A B f u b))
   ≡ @eq_refl
       (@HFiber A B f b)
-      (sigma_Fst (@omega_grpd_is_equiv_EQ1 A B f u b));
+      (sigma_Fst (@omega_grpd_is_equiv A B f u b));
 
 // catalog-area: Abstract direct univalence and reduced-former boundary
 
@@ -3430,69 +3430,69 @@ assertnot [A B : Grpd]
 // directions; the classifiers remain runtime-distinct for a variable C.
 assert [C : Cat] (x y : τ (Obj C))
   (p : τ (@= (Obj C) x y)) ⊢
-  @eq_refl (@OmegaEquiv_EQ1 C x y) p
-  : τ (@= (@OmegaEquiv_EQ1 C x y) p p);
+  @eq_refl (@OmegaEquiv C x y) p
+  : τ (@= (@OmegaEquiv C x y) p p);
 
 assert [C : Cat] (x y : τ (Obj C))
-  (e : τ (@OmegaEquiv_EQ1 C x y)) ⊢
+  (e : τ (@OmegaEquiv C x y)) ⊢
   @eq_refl (@= (Obj C) x y) e
   : τ (@= (@= (Obj C) x y) e e);
 
 assertnot [C : Cat] (x y : τ (Obj C)) ⊢
   @= (Obj C) x y
-  ≡ @OmegaEquiv_EQ1 C x y;
+  ≡ @OmegaEquiv C x y;
 
 // Some constructors retain the abstract owner until elaboration.
 assert [K : Cat] (E : τ (Catd K))
   (x y : τ (Obj (@Sigma_cat K E)))
   (p : τ (@= (Obj (@Sigma_cat K E)) x y)) ⊢
-  @eq_refl (@OmegaEquiv_EQ1 (@Sigma_cat K E) x y) p
-  : τ (@= (@OmegaEquiv_EQ1 (@Sigma_cat K E) x y) p p);
+  @eq_refl (@OmegaEquiv (@Sigma_cat K E) x y) p
+  : τ (@= (@OmegaEquiv (@Sigma_cat K E) x y) p p);
 
 assert [A B : Cat]
   (F G : τ (Obj (Functor_cat A B)))
   (p : τ (@= (Obj (Functor_cat A B)) F G)) ⊢
-  @eq_refl (@OmegaEquiv_EQ1 (Functor_cat A B) F G) p
-  : τ (@= (@OmegaEquiv_EQ1 (Functor_cat A B) F G) p p);
+  @eq_refl (@OmegaEquiv (Functor_cat A B) F G) p
+  : τ (@= (@OmegaEquiv (Functor_cat A B) F G) p p);
 
 // The general stable carrier view supports explicit transparent casts in both
 // directions without relying on transitivity of unification hints.
 assert [C : Cat] (x y : τ (Obj C)) ⊢
-  τ (@ObjectPathCastView_EQ1 C x y)
+  τ (@ObjectPathCastView C x y)
   ≡ τ (@= (Obj C) x y);
 
 assertnot [C : Cat] (x y : τ (Obj C)) ⊢
-  @ObjectPathCastView_EQ1 C x y
+  @ObjectPathCastView C x y
   ≡ @= (Obj C) x y;
 
 assertnot [C : Cat] (x y : τ (Obj C)) ⊢
-  @ObjectPathCastView_EQ1 C x y
-  ≡ @OmegaEquiv_EQ1 C x y;
+  @ObjectPathCastView C x y
+  ≡ @OmegaEquiv C x y;
 
 assert [C : Cat]
   [x y : τ (Obj C)]
   (p : τ (@= (Obj C) x y)) ⊢
-  @omega_cast_to_object_path_EQ1 C x y
-    (@object_path_cast_to_omega_EQ1 C x y p)
+  @omega_cast_to_object_path C x y
+    (@object_path_cast_to_omega C x y p)
   ≡ p;
 
 assert [C : Cat]
   [x y : τ (Obj C)]
-  (e : τ (@OmegaEquiv_EQ1 C x y)) ⊢
-  @object_path_cast_to_omega_EQ1 C x y
-    (@omega_cast_to_object_path_EQ1 C x y e)
+  (e : τ (@OmegaEquiv C x y)) ⊢
+  @object_path_cast_to_omega C x y
+    (@omega_cast_to_object_path C x y e)
   ≡ e;
 
 assert [A B : Grpd]
   (p : τ (@= (Obj Grpd_cat) A B)) ⊢
-  @omega_cast_to_object_path_EQ1 Grpd_cat A B
-    (@object_path_cast_to_omega_EQ1 Grpd_cat A B p)
+  @omega_cast_to_object_path Grpd_cat A B
+    (@object_path_cast_to_omega Grpd_cat A B p)
   ≡ p;
 
 assert [A B : Cat]
   (p : τ (@= (Obj Cat_cat) A B)) ⊢
-  @omega_cast_to_object_path_EQ1 Cat_cat A B
-    (@object_path_cast_to_omega_EQ1 Cat_cat A B p)
+  @omega_cast_to_object_path Cat_cat A B
+    (@object_path_cast_to_omega Cat_cat A B p)
   ≡ p;
 
 // Product object equality now retains a stable path classifier. Proof-time
@@ -3510,41 +3510,41 @@ assert [A B : Cat]
 assert [A B : Cat]
   (x y : τ (Obj (Product_cat A B)))
   (p : τ (@= (Obj (Product_cat A B)) x y)) ⊢
-  p : τ (@OmegaEquiv_EQ1 (Product_cat A B) x y);
+  p : τ (@OmegaEquiv (Product_cat A B) x y);
 
 assert [A B : Cat]
   [x y : τ (Obj (Product_cat A B))]
   (p : τ (@= (Obj (Product_cat A B)) x y)) ⊢
-  @product_omega_as_path_EQ1 A B x y
-    (@product_path_as_omega_EQ1 A B x y p)
+  @product_omega_as_path A B x y
+    (@product_path_as_omega A B x y p)
   ≡ p;
 
 assert [A B : Cat]
   [x y : τ (Obj (Product_cat A B))]
-  (e : τ (@OmegaEquiv_EQ1 (Product_cat A B) x y)) ⊢
-  @product_path_as_omega_EQ1 A B x y
-    (@product_omega_as_path_EQ1 A B x y e)
+  (e : τ (@OmegaEquiv (Product_cat A B) x y)) ⊢
+  @product_path_as_omega A B x y
+    (@product_omega_as_path A B x y e)
   ≡ e;
 
 assertnot [A B : Cat]
   (x y : τ (Obj (Product_cat A B))) ⊢
   @= (Obj (Product_cat A B)) x y
-  ≡ @OmegaEquiv_EQ1 (Product_cat A B) x y;
+  ≡ @OmegaEquiv (Product_cat A B) x y;
 
 assertnot [A B : Cat]
   [x y : τ (Obj (Product_cat A B))]
   (p : τ (@= (Obj (Product_cat A B)) x y)) ⊢
-  @omega_equiv_to_EQ1
+  @omega_equiv_to
     (Product_cat A B) x y
-    (@product_path_as_omega_EQ1 A B x y p)
+    (@product_path_as_omega A B x y p)
   ≡ @path_to_hom (Product_cat A B) x y p;
 
 assert [A B : Cat]
   (x y : τ (Obj (Product_cat A B)))
   (p : τ (@= (Obj (Product_cat A B)) x y)) ⊢
-  @omega_equiv_to_EQ1
+  @omega_equiv_to
     (Product_cat A B) x y
-    (@object_path_equiv_EQ1 (Product_cat A B) x y p)
+    (@object_path_equiv (Product_cat A B) x y p)
   ≡ @path_to_hom (Product_cat A B) x y p;
 
 // Opposite object equality still erases its category head. Its compatibility
@@ -3552,88 +3552,88 @@ assert [A B : Cat]
 assertnot [A : Cat]
   (x y : τ (Obj (Op_cat A)))
   (p : τ (@= (Obj (Op_cat A)) x y)) ⊢
-  p : τ (@OmegaEquiv_EQ1 (Op_cat A) x y);
+  p : τ (@OmegaEquiv (Op_cat A) x y);
 
 assert [A : Cat]
   [x y : τ (Obj A)]
   (p : τ (@= (Obj A) x y)) ⊢
-  @op_omega_as_path_EQ1 A x y
-    (@op_path_as_omega_EQ1 A x y p)
+  @op_omega_as_path A x y
+    (@op_path_as_omega A x y p)
   ≡ p;
 
 assert [A : Cat]
   [x y : τ (Obj A)]
-  (e : τ (@OmegaEquiv_EQ1 (Op_cat A) x y)) ⊢
-  @op_path_as_omega_EQ1 A x y
-    (@op_omega_as_path_EQ1 A x y e)
+  (e : τ (@OmegaEquiv (Op_cat A) x y)) ⊢
+  @op_path_as_omega A x y
+    (@op_omega_as_path A x y e)
   ≡ e;
 
 assert [A B : Cat]
   [x y : τ (Obj (Product_cat A B))]
   (p : τ (@= (Obj (Product_cat A B)) x y)) ⊢
-  @op_omega_as_path_EQ1 (Product_cat A B) x y
-    (@op_path_as_omega_EQ1 (Product_cat A B) x y p)
+  @op_omega_as_path (Product_cat A B) x y
+    (@op_path_as_omega (Product_cat A B) x y p)
   ≡ p;
 
 assert [A : Grpd]
   [x y : τ A]
   (p : τ (@= A x y)) ⊢
-  @op_omega_as_path_EQ1 (Path_cat A) x y
-    (@op_path_as_omega_EQ1 (Path_cat A) x y p)
+  @op_omega_as_path (Path_cat A) x y
+    (@op_path_as_omega (Path_cat A) x y p)
   ≡ p;
 
 assertnot [A : Cat]
   [x y : τ (Obj A)]
   (p : τ (@= (Obj A) x y)) ⊢
-  @omega_equiv_to_EQ1
+  @omega_equiv_to
     (Op_cat A) x y
-    (@op_path_as_omega_EQ1 A x y p)
+    (@op_path_as_omega A x y p)
   ≡ @path_to_hom (Op_cat A) x y p;
 
 assert [A : Cat]
   (x y : τ (Obj (Op_cat A)))
   (p : τ (@= (Obj (Op_cat A)) x y)) ⊢
-  @omega_equiv_to_EQ1
+  @omega_equiv_to
     (Op_cat A) x y
-    (@object_path_equiv_EQ1 (Op_cat A) x y p)
+    (@object_path_equiv (Op_cat A) x y p)
   ≡ @path_to_hom (Op_cat A) x y p;
 
 // Proof-time interchange does not add observers to a raw abstract path.
 assertnot [C : Cat] (x y : τ (Obj C))
   (p : τ (@= (Obj C) x y)) ⊢
-  @omega_equiv_to_EQ1 C x y p
+  @omega_equiv_to C x y p
   ≡ @path_to_hom C x y p;
 
 // catalog-area: Internal groupoidality and structured J
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (x y : τ (Obj C)) ⊢
-  @groupoidal_core_homwise_EQ1 C g x y
-  : τ (@OmegaEquivAlong_EQ1
+  @groupoidal_core_homwise C g x y
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Path_cat (@= (Obj C) x y))
       (Hom_cat C x y)
       (@core_incl_hom_func C x y));
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (x y : τ (Obj C)) ⊢
-  @groupoidal_arrow_to_path_func_EQ1 C g x y
+  @groupoidal_arrow_to_path_func C g x y
   : τ (Functor
       (Hom_cat C x y)
       (Path_cat (@= (Obj C) x y)));
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @groupoidal_arrow_to_path_EQ1 C g x y f
+  @groupoidal_arrow_to_path C g x y f
   : τ (@= (Obj C) x y);
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (x y : τ (Obj C)) ⊢
-  @groupoidal_arrow_section_EQ1 C g x y
+  @groupoidal_arrow_section C g x y
   : τ (@=
       (Hom Cat_cat (Hom_cat C x y) (Hom_cat C x y))
       (@comp_fapp0
@@ -3642,32 +3642,32 @@ assert [C : Cat]
         (Path_cat (@= (Obj C) x y))
         (Hom_cat C x y)
         (@core_incl_hom_func C x y)
-        (@groupoidal_arrow_to_path_func_EQ1 C g x y))
+        (@groupoidal_arrow_to_path_func C g x y))
       (@id Cat_cat (Hom_cat C x y)));
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @groupoidal_path_to_arrow_retract_EQ1 C g x y f
+  @groupoidal_path_to_arrow_retract C g x y f
   : τ (@=
       (Hom C x y)
       (@fapp0
         (Path_cat (@= (Obj C) x y))
         (Hom_cat C x y)
         (@core_incl_hom_func C x y)
-        (@groupoidal_arrow_to_path_EQ1 C g x y f))
+        (@groupoidal_arrow_to_path C g x y f))
       f);
 
-// Ordinary functor action preserves native fixed-arrow EQ1 evidence, with
+// Ordinary functor action preserves native fixed-arrow equality-valued evidence, with
 // computational inverse projections inherited from the explicit package.
 assert [A B : Cat]
   (F : τ (Functor A B))
   [x y : τ (Obj A)]
   [f : τ (Hom A x y)]
-  (u : τ (@OmegaEquivAlong_EQ1 A x y f)) ⊢
-  @omega_equiv_along_fapp1_fapp0_EQ1 A B F x y f u
-  : τ (@OmegaEquivAlong_EQ1
+  (u : τ (@OmegaEquivAlong A x y f)) ⊢
+  @omega_equiv_along_fapp1_fapp0 A B F x y f u
+  : τ (@OmegaEquivAlong
       B
       (@fapp0 A B F x)
       (@fapp0 A B F y)
@@ -3677,132 +3677,132 @@ assert [A B : Cat]
   (F : τ (Functor A B))
   [x y : τ (Obj A)]
   [f : τ (Hom A x y)]
-  (u : τ (@OmegaEquivAlong_EQ1 A x y f)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  (u : τ (@OmegaEquivAlong A x y f)) ⊢
+  @omega_equiv_along_left_inv
     B
     (@fapp0 A B F x)
     (@fapp0 A B F y)
     (@fapp1_fapp0 A B F x y f)
-    (@omega_equiv_along_fapp1_fapp0_EQ1 A B F x y f u)
+    (@omega_equiv_along_fapp1_fapp0 A B F x y f u)
   ≡ @fapp1_fapp0 A B F y x
-      (@omega_equiv_along_left_inv_EQ1 A x y f u);
+      (@omega_equiv_along_left_inv A x y f u);
 
 assert [A B : Cat]
   (F : τ (Functor A B))
   [x y : τ (Obj A)]
   [f : τ (Hom A x y)]
-  (u : τ (@OmegaEquivAlong_EQ1 A x y f)) ⊢
-  @omega_equiv_along_right_inv_EQ1
+  (u : τ (@OmegaEquivAlong A x y f)) ⊢
+  @omega_equiv_along_right_inv
     B
     (@fapp0 A B F x)
     (@fapp0 A B F y)
     (@fapp1_fapp0 A B F x y f)
-    (@omega_equiv_along_fapp1_fapp0_EQ1 A B F x y f u)
+    (@omega_equiv_along_fapp1_fapp0 A B F x y f u)
   ≡ @fapp1_fapp0 A B F y x
-      (@omega_equiv_along_right_inv_EQ1 A x y f u);
+      (@omega_equiv_along_right_inv A x y f u);
 
 // Internal groupoidality reconstructs explicit native equivalence evidence
 // for every directed arrow, rather than assuming an opaque decoder.
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @groupoidal_arrow_equiv_along_EQ1 C g x y f
-  : τ (@OmegaEquivAlong_EQ1 C x y f);
+  @groupoidal_arrow_equiv_along C g x y f
+  : τ (@OmegaEquivAlong C x y f);
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C)) ⊢
-  @groupoidal_all_arrows_equiv_EQ1 C g
-  : τ (@AllArrowsEquiv_EQ1 C);
+  (g : τ (@IsGroupoidalCat C)) ⊢
+  @groupoidal_all_arrows_equiv C g
+  : τ (@AllArrowsEquiv C);
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @groupoidal_all_arrows_equiv_EQ1 C g x y f
-  ≡ @groupoidal_arrow_equiv_along_EQ1 C g x y f;
+  @groupoidal_all_arrows_equiv C g x y f
+  ≡ @groupoidal_arrow_equiv_along C g x y f;
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @omega_equiv_along_left_inv_EQ1 C x y f
-    (@groupoidal_arrow_equiv_along_EQ1 C g x y f)
-  ≡ @groupoidal_arrow_inverse_EQ1 C g x y f;
+  @omega_equiv_along_left_inv C x y f
+    (@groupoidal_arrow_equiv_along C g x y f)
+  ≡ @groupoidal_arrow_inverse C g x y f;
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @groupoidal_arrow_left_law_EQ1 C g x y f
+  @groupoidal_arrow_left_law C g x y f
   : τ (@=
       (Hom C x x)
       (@comp_fapp0 C x y x
-        (@groupoidal_arrow_inverse_EQ1 C g x y f)
+        (@groupoidal_arrow_inverse C g x y f)
         f)
       (@id C x));
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @groupoidal_arrow_right_law_EQ1 C g x y f
+  @groupoidal_arrow_right_law C g x y f
   : τ (@=
       (Hom C y y)
       (@comp_fapp0 C y x y
         f
-        (@groupoidal_arrow_inverse_EQ1 C g x y f))
+        (@groupoidal_arrow_inverse C g x y f))
       (@id C y));
 
 // The existing displayed action along a groupoidal arrow is therefore an
 // equivalence of fibres, with its inverse given by action on the chosen arrow.
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (D : τ (Catd C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @groupoidal_fibre_transport_equiv_EQ1 C g D x y f
-  : τ (@OmegaEquivAlong_EQ1
+  @groupoidal_fibre_transport_equiv C g D x y f
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Fibre_cat D x)
       (Fibre_cat D y)
       (@fapp1_fapp0 C Cat_cat D x y f));
 
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (D : τ (Catd C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     Cat_cat
     (Fibre_cat D x)
     (Fibre_cat D y)
     (@fapp1_fapp0 C Cat_cat D x y f)
-    (@groupoidal_fibre_transport_equiv_EQ1 C g D x y f)
+    (@groupoidal_fibre_transport_equiv C g D x y f)
   ≡ @fapp1_fapp0 C Cat_cat D y x
-      (@groupoidal_arrow_inverse_EQ1 C g x y f);
+      (@groupoidal_arrow_inverse C g x y f);
 
 // Existing discrete evidence, and therefore every packaged zero-category,
 // gives a nonliteral internally groupoidal consumer.
 assert [C : Cat]
   (d : τ (IsDiscreteCat C)) ⊢
-  @discrete_cat_is_groupoidal_EQ1 C d
-  : τ (@IsGroupoidalCat_EQ1 C);
+  @discrete_cat_is_groupoidal C d
+  : τ (@IsGroupoidalCat C);
 
 assert (X : τ ZeroCat) ⊢
-  @zero_cat_is_groupoidal_EQ1 X
-  : τ (@IsGroupoidalCat_EQ1 (@ncat_carrier cat_zero X));
+  @zero_cat_is_groupoidal X
+  : τ (@IsGroupoidalCat (@ncat_carrier cat_zero X));
 
 // The generic homwise consumer specializes to a literal path category, but
 // its general half-adjoint inverse is not the direct path-package computation.
 assert [A : Grpd]
   [x y : τ A] ⊢
-  @groupoidal_core_homwise_EQ1
+  @groupoidal_core_homwise
     (Path_cat A)
-    (@path_cat_is_groupoidal_EQ1 A)
+    (@path_cat_is_groupoidal A)
     x
     y
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Hom_cat (Core_cat (Path_cat A)) x y)
       (Hom_cat (Path_cat A) x y)
@@ -3816,9 +3816,9 @@ assert [A : Grpd]
 assertnot [A : Grpd]
   [x y : τ A]
   (p : τ (@= A x y)) ⊢
-  @groupoidal_arrow_to_path_EQ1
+  @groupoidal_arrow_to_path
     (Path_cat A)
-    (@path_cat_is_groupoidal_EQ1 A)
+    (@path_cat_is_groupoidal A)
     x
     y
     p
@@ -3827,7 +3827,7 @@ assertnot [A : Grpd]
 // A structured motive uses the existing directed `path_ind_sec`; no second
 // groupoidal eliminator or raw-fibrancy capability is introduced.
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (D : τ (Catd C))
   (x : τ (Obj C))
   (u : τ (Obj (Fibre_cat D x))) ⊢
@@ -3845,33 +3845,33 @@ assert [A : Grpd]
   [x y : τ A]
   (u : τ (Obj (Fibre_cat D x)))
   (p : τ (@= A x y)) ⊢
-  @path_cat_structured_transport_agrees_ind_eqr_EQ1 A D x y u p
+  @path_cat_structured_transport_agrees_ind_eqr A D x y u p
   : τ (@=
       (Obj (Fibre_cat D y))
-      (@path_cat_structured_transport_EQ1 A D x y u p)
-      (@path_cat_ind_eqr_transport_EQ1 A D x y u p));
+      (@path_cat_structured_transport A D x y u p)
+      (@path_cat_ind_eqr_transport A D x y u p));
 
 assert [A : Grpd]
   (D : τ (Catd (Path_cat A)))
   [x y : τ A]
   (u : τ (Obj (Fibre_cat D x)))
   (p : τ (@= A x y)) ⊢
-  @path_cat_path_ind_app_agrees_structured_EQ1 A D x y u p
+  @path_cat_path_ind_app_agrees_structured A D x y u p
   : τ (@=
       (Obj (Fibre_cat D y))
-      (@path_cat_path_ind_app_EQ1 A D x y u p)
-      (@path_cat_structured_transport_EQ1 A D x y u p));
+      (@path_cat_path_ind_app A D x y u p)
+      (@path_cat_structured_transport A D x y u p));
 
 assert [A : Grpd]
   (D : τ (Catd (Path_cat A)))
   [x y : τ A]
   (u : τ (Obj (Fibre_cat D x)))
   (p : τ (@= A x y)) ⊢
-  @path_cat_path_ind_app_agrees_ind_eqr_EQ1 A D x y u p
+  @path_cat_path_ind_app_agrees_ind_eqr A D x y u p
   : τ (@=
       (Obj (Fibre_cat D y))
-      (@path_cat_path_ind_app_EQ1 A D x y u p)
-      (@path_cat_ind_eqr_transport_EQ1 A D x y u p));
+      (@path_cat_path_ind_app A D x y u p)
+      (@path_cat_ind_eqr_transport A D x y u p));
 
 // Primitive J computes at reflexivity. The structured presentation and the
 // existing section application remain propositionally, not definitionally,
@@ -3880,21 +3880,21 @@ assert [A : Grpd]
   (D : τ (Catd (Path_cat A)))
   (x : τ A)
   (u : τ (Obj (Fibre_cat D x))) ⊢
-  @path_cat_ind_eqr_transport_EQ1 A D x x u (@eq_refl A x)
+  @path_cat_ind_eqr_transport A D x x u (@eq_refl A x)
   ≡ u;
 
 assertnot [A : Grpd]
   (D : τ (Catd (Path_cat A)))
   (x : τ A)
   (u : τ (Obj (Fibre_cat D x))) ⊢
-  @path_cat_structured_transport_EQ1 A D x x u (@eq_refl A x)
+  @path_cat_structured_transport A D x x u (@eq_refl A x)
   ≡ u;
 
 assertnot [A : Grpd]
   (D : τ (Catd (Path_cat A)))
   (x : τ A)
   (u : τ (Obj (Fibre_cat D x))) ⊢
-  @path_cat_path_ind_app_EQ1 A D x x u (@eq_refl A x)
+  @path_cat_path_ind_app A D x x u (@eq_refl A x)
   ≡ u;
 
 // The path-category identity join is proof-time only.
@@ -3971,24 +3971,24 @@ assert [C : Cat] ⊢
   IsDiscreteCat C
   ≡ @Product_grpd
       (IsSetGrpd (Obj C))
-      (@IsGroupoidalCat_EQ1 C);
+      (@IsGroupoidalCat C);
 
 assert [C : Cat]
   (obj_set : τ (IsSetGrpd (Obj C)))
-  (core_equiv : τ (@IsGroupoidalCat_EQ1 C)) ⊢
+  (core_equiv : τ (@IsGroupoidalCat C)) ⊢
   @discrete_cat_intro C obj_set core_equiv
   : τ (IsDiscreteCat C);
 
 assert [C : Cat]
   (obj_set : τ (IsSetGrpd (Obj C)))
-  (core_equiv : τ (@IsGroupoidalCat_EQ1 C)) ⊢
+  (core_equiv : τ (@IsGroupoidalCat C)) ⊢
   @is_discrete_cat_obj_set C
     (@discrete_cat_intro C obj_set core_equiv)
   ≡ obj_set;
 
 assert [C : Cat]
   (obj_set : τ (IsSetGrpd (Obj C)))
-  (core_equiv : τ (@IsGroupoidalCat_EQ1 C)) ⊢
+  (core_equiv : τ (@IsGroupoidalCat C)) ⊢
   @is_discrete_cat_core_equiv C
     (@discrete_cat_intro C obj_set core_equiv)
   ≡ core_equiv;
@@ -4014,7 +4014,7 @@ assert [C : Cat]
   (d : τ (IsDiscreteCat C))
   (x y : τ (Obj C)) ⊢
   @discrete_core_homwise C d x y
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Path_cat (@= (Obj C) x y))
       (Hom_cat C x y)
@@ -4024,7 +4024,7 @@ assert [C : Cat]
   (d : τ (IsDiscreteCat C))
   (x y : τ (Obj C)) ⊢
   @discrete_core_homwise C d x y
-  ≡ @groupoidal_core_homwise_EQ1
+  ≡ @groupoidal_core_homwise
       C (is_discrete_cat_core_equiv d) x y;
 
 assert [C : Cat]
@@ -4073,7 +4073,7 @@ assert [C : Cat]
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
   @path_to_hom_hom_to_path_path C d x y f
-  ≡ @groupoidal_path_to_arrow_retract_EQ1
+  ≡ @groupoidal_path_to_arrow_retract
       C (is_discrete_cat_core_equiv d) x y f;
 
 assert [C : Cat]
@@ -4217,7 +4217,7 @@ assert (X : τ OneCat)
   (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)))
   (f g : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
   @one_cat_hom_core_homwise X x y f g
-  : τ (@OmegaEquivAlong_EQ1
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Path_cat (@=
         (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)
@@ -4753,71 +4753,71 @@ assert [A : Grpd]
     x
   ≡ @eq_refl (@= A x x) (@eq_refl A x);
 
-// catalog-area: Native EQ1 evidence property
+// catalog-area: Native equality-valued evidence property
 // The native record has a transparent two-fibre view. Literal path-category
 // evidence is contractible, while its contraction path remains propositional
 // rather than a global runtime proof-erasure rule.
 assert [C : Cat]
   [x y : τ (Obj C)]
   [f : τ (Hom C x y)]
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_equiv_along_from_view_view_EQ1 C x y f u
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_along_from_view_view C x y f u
   : τ (@=
-      (@OmegaEquivAlong_EQ1 C x y f)
-      (@omega_equiv_along_from_view_EQ1 C x y f
-        (@omega_equiv_along_view_EQ1 C x y f u))
+      (@OmegaEquivAlong C x y f)
+      (@omega_equiv_along_from_view C x y f
+        (@omega_equiv_along_view C x y f u))
       u);
 
 assert [C : Cat]
   [x y : τ (Obj C)]
   [f : τ (Hom C x y)]
-  (hleft : τ (IsContr (@OmegaEquivLeftView_EQ1 C x y f)))
-  (hright : τ (IsContr (@OmegaEquivRightView_EQ1 C x y f))) ⊢
-  @omega_equiv_along_evidence_is_contr_from_view_EQ1
+  (hleft : τ (IsContr (@OmegaEquivLeftView C x y f)))
+  (hright : τ (IsContr (@OmegaEquivRightView C x y f))) ⊢
+  @omega_equiv_along_evidence_is_contr_from_view
     C x y f
-    (@omega_equiv_along_view_is_contr_EQ1
+    (@omega_equiv_along_view_is_contr
       C x y f hleft hright)
-  : τ (IsContr (@OmegaEquivAlong_EQ1 C x y f));
+  : τ (IsContr (@OmegaEquivAlong C x y f));
 
 assert [A : Grpd]
   [x y : τ A]
   (p : τ (@= A x y)) ⊢
-  @path_equiv_evidence_is_contr_EQ1 A y x p
-  : τ (IsContr (@OmegaEquivAlong_EQ1 (Path_cat A) x y p));
+  @path_equiv_evidence_is_contr A y x p
+  : τ (IsContr (@OmegaEquivAlong (Path_cat A) x y p));
 
 assert [A : Grpd]
   [x y : τ A]
   (p : τ (@= A x y)) ⊢
-  @path_equiv_evidence_is_prop_EQ1 A x y p
-  : τ (IsPropGrpd (@OmegaEquivAlong_EQ1 (Path_cat A) x y p));
+  @path_equiv_evidence_is_prop A x y p
+  : τ (IsPropGrpd (@OmegaEquivAlong (Path_cat A) x y p));
 
 assert [A : Grpd]
   (x : τ A) ⊢
-  is_contr_center (@path_refl_equiv_evidence_is_contr_EQ1 A x)
-  ≡ @path_equiv_along_EQ1 A x x (@eq_refl A x);
+  is_contr_center (@path_refl_equiv_evidence_is_contr A x)
+  ≡ @path_equiv_along A x x (@eq_refl A x);
 
 assertnot [A : Grpd]
   (x : τ A) ⊢
   is_contr_path
-    (@path_refl_equiv_evidence_is_contr_EQ1 A x)
-    (@path_equiv_along_EQ1 A x x (@eq_refl A x))
+    (@path_refl_equiv_evidence_is_contr A x)
+    (@path_equiv_along A x x (@eq_refl A x))
   ≡ @eq_refl
-      (@OmegaEquivAlong_EQ1 (Path_cat A) x x (@eq_refl A x))
-      (@path_equiv_along_EQ1 A x x (@eq_refl A x));
+      (@OmegaEquivAlong (Path_cat A) x x (@eq_refl A x))
+      (@path_equiv_along A x x (@eq_refl A x));
 
 // A groupoidal category with set-valued objects has proposition-valued homs
 // by a fully transparent retract argument.
 assert [C : Cat]
-  (g : τ (@IsGroupoidalCat_EQ1 C))
+  (g : τ (@IsGroupoidalCat C))
   (obj_set : τ (IsSetGrpd (Obj C)))
   (x y : τ (Obj C)) ⊢
-  @groupoidal_hom_is_prop_EQ1 C g obj_set x y
+  @groupoidal_hom_is_prop C g obj_set x y
   : τ (IsPropGrpd (Hom C x y));
 
 assert [C : Cat]
   (d : τ (IsDiscreteCat C))
   (x y : τ (Obj C)) ⊢
-  @discrete_hom_is_prop_EQ1 C d x y
+  @discrete_hom_is_prop C d x y
   : τ (IsPropGrpd (Hom C x y));
 
 // Ordinary cross-inverse uniqueness is explicit categorical path algebra.
@@ -4833,7 +4833,7 @@ assert [C : Cat]
     (Hom C y y)
     (@comp_fapp0 C y x y f r)
     (@id C y))) ⊢
-  @omega_equiv_candidate_left_to_right_EQ1
+  @omega_equiv_candidate_left_to_right
     C x y f l r alpha beta
   : τ (@= (Hom C y x) l r);
 
@@ -4842,54 +4842,54 @@ assert [C : Cat]
 assert [C : Cat]
   [x y : τ (Obj C)]
   [f : τ (Hom C x y)]
-  (u : τ (@OmegaEquivAlong_EQ1 C x y f)) ⊢
-  @omega_equiv_along_evidence_is_contr_EQ1 C x y f u
-  : τ (IsContr (@OmegaEquivAlong_EQ1 C x y f));
+  (u : τ (@OmegaEquivAlong C x y f)) ⊢
+  @omega_equiv_along_evidence_is_contr C x y f u
+  : τ (IsContr (@OmegaEquivAlong C x y f));
 
 assert [C : Cat]
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @omega_equiv_along_evidence_is_prop_EQ1 C x y f
-  : τ (IsPropGrpd (@OmegaEquivAlong_EQ1 C x y f));
+  @omega_equiv_along_evidence_is_prop C x y f
+  : τ (IsPropGrpd (@OmegaEquivAlong C x y f));
 
 // The earlier local-set proof remains a useful independent specialization.
 assert [C : Cat]
-  (h : τ (@IsLocallySetCat_EQ1 C))
+  (h : τ (@IsLocallySetCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
-  @locally_set_equiv_evidence_is_prop_EQ1 C h x y f
-  : τ (IsPropGrpd (@OmegaEquivAlong_EQ1 C x y f));
+  @locally_set_equiv_evidence_is_prop C h x y f
+  : τ (IsPropGrpd (@OmegaEquivAlong C x y f));
 
 assert [C : Cat]
   (h : τ (IsNCat (cat_succ cat_zero) C)) ⊢
-  @one_cat_is_locally_set_EQ1 C h
-  : τ (@IsLocallySetCat_EQ1 C);
+  @one_cat_is_locally_set C h
+  : τ (@IsLocallySetCat C);
 
 // The transparent Sigma and stable facade transfer set truncation by
 // explicit retractions; no contractible-fibre theorem is invoked.
 assert [C : Cat]
   [x y : τ (Obj C)]
-  (h : τ (IsSetGrpd (@OmegaEquivSigma_EQ1 C x y))) ⊢
-  @omega_equiv_facade_is_set_EQ1 C x y h
-  : τ (IsSetGrpd (@OmegaEquiv_EQ1 C x y));
+  (h : τ (IsSetGrpd (@OmegaEquivSigma C x y))) ⊢
+  @omega_equiv_facade_is_set C x y h
+  : τ (IsSetGrpd (@OmegaEquiv C x y));
 
 assert [C : Cat]
   [x y : τ (Obj C)]
   (p : τ (@= (Obj C) x y)) ⊢
-  @object_path_cast_roundtrip_EQ1 C x y p
+  @object_path_cast_roundtrip C x y p
   ≡ @eq_refl (@= (Obj C) x y) p;
 
 // Dimension one is now unconditional: discrete hom categories supply the
-// local-set hypothesis and the direct EQ1 Sigma supplies object-path sets.
+// local-set hypothesis and the direct equality-valued Sigma supplies object-path sets.
 assert [C : Cat]
   (h : τ (IsNCat (cat_succ cat_zero) C)) ⊢
-  @one_cat_omega_sigma_is_set_EQ1 C h
+  @one_cat_omega_sigma_is_set C h
   : Π x : τ (Obj C), Π y : τ (Obj C),
-      τ (IsSetGrpd (@OmegaEquivSigma_EQ1 C x y));
+      τ (IsSetGrpd (@OmegaEquivSigma C x y));
 
 assert [C : Cat]
   (h : τ (IsNCat (cat_succ cat_zero) C)) ⊢
-  @one_cat_obj_trunc_EQ1 C h
+  @one_cat_obj_trunc C h
   : τ (IsObjTruncCat
       (cat_dim_trunc_level (cat_succ cat_zero)) C);
 
@@ -4900,17 +4900,17 @@ assert (n : TruncLevel) (X Y : Grpd)
   (s : τ Y → τ X)
   (epsilon : Π y : τ Y, τ (@= Y (r (s y)) y))
   (hX : τ (IsTruncGrpd n X)) ⊢
-  @is_trunc_retract_EQ1 n X Y r s epsilon hX
+  @is_trunc_retract n X Y r s epsilon hX
   : τ (IsTruncGrpd n Y);
 
 // Finite directed dimension now bounds object truncation unconditionally.
 assert (n : CatDim) (C : Cat)
   (h : τ (IsNCat n C)) ⊢
-  @ncat_obj_trunc_EQ1 n C h
+  @ncat_obj_trunc n C h
   : τ (IsObjTruncCat (cat_dim_trunc_level n) C);
 
 assert (C : Cat) (h : τ (IsNCat cat_zero C)) ⊢
-  @ncat_obj_trunc_EQ1 cat_zero C h
+  @ncat_obj_trunc cat_zero C h
   ≡ @is_discrete_cat_obj_set C h;
 
 // The successor equation exposes exactly the hom induction, Sigma closure,
@@ -4918,33 +4918,33 @@ assert (C : Cat) (h : τ (IsNCat cat_zero C)) ⊢
 assert (n : CatDim) (C : Cat)
   (h : τ (IsNCat (cat_succ n) C))
   (x y : τ (Obj C)) ⊢
-  (@ncat_obj_trunc_EQ1 (cat_succ n) C h) x y
-  ≡ @object_path_is_trunc_from_omega_EQ1
+  (@ncat_obj_trunc (cat_succ n) C h) x y
+  ≡ @object_path_is_trunc_from_omega
       (cat_dim_trunc_level n)
       C x y
-      (@omega_equiv_facade_is_trunc_EQ1
+      (@omega_equiv_facade_is_trunc
         (cat_dim_trunc_level n)
         C x y
         (@is_trunc_sigma
           (cat_dim_trunc_level n)
           (Hom C x y)
-          (λ f : τ (Hom C x y), @OmegaEquivAlong_EQ1 C x y f)
-          (@ncat_obj_trunc_EQ1 n (Hom_cat C x y) (h x y))
+          (λ f : τ (Hom C x y), @OmegaEquivAlong C x y f)
+          (@ncat_obj_trunc n (Hom_cat C x y) (h x y))
           (λ f : τ (Hom C x y),
             @prop_is_trunc_cat_dim
               n
-              (@OmegaEquivAlong_EQ1 C x y f)
-              (@omega_equiv_along_evidence_is_prop_EQ1 C x y f))));
+              (@OmegaEquivAlong C x y f)
+              (@omega_equiv_along_evidence_is_prop C x y f))));
 
-// catalog-area: Native EQ1 next-hom action
+// catalog-area: Native equality-valued next-hom action
 // A category-level equality-valued omega-equivalence acts by a transparent
 // equality-valued omega-equivalence on every next hom category.
 assert [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A)) ⊢
-  omega_equiv_along_fapp1_EQ1 u x y
-  : τ (@OmegaEquivAlong_EQ1
+  omega_equiv_along_fapp1 u x y
+  : τ (@OmegaEquivAlong
       Cat_cat
       (Hom_cat A x y)
       (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
@@ -4953,32 +4953,32 @@ assert [A B : Cat]
 // Both inverse projections compute to the same half-adjointified inverse.
 assert [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     Cat_cat
     (Hom_cat A x y)
     (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
     (@fapp1_func A B F x y)
-    (omega_equiv_along_fapp1_EQ1 u x y)
-  ≡ @omega_equiv_along_right_inv_EQ1
+    (omega_equiv_along_fapp1 u x y)
+  ≡ @omega_equiv_along_right_inv
     Cat_cat
     (Hom_cat A x y)
     (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
     (@fapp1_func A B F x y)
-    (omega_equiv_along_fapp1_EQ1 u x y);
+    (omega_equiv_along_fapp1 u x y);
 
 // The left cancellation projection has its native equality-valued type.
 assert [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A)) ⊢
-  @omega_equiv_along_left_law_EQ1
+  @omega_equiv_along_left_law
     Cat_cat
     (Hom_cat A x y)
     (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
     (@fapp1_func A B F x y)
-    (omega_equiv_along_fapp1_EQ1 u x y)
+    (omega_equiv_along_fapp1 u x y)
   : τ (@=
       (Hom Cat_cat (Hom_cat A x y) (Hom_cat A x y))
       (@comp_fapp0
@@ -4986,26 +4986,26 @@ assert [A B : Cat]
         (Hom_cat A x y)
         (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
         (Hom_cat A x y)
-        (@omega_equiv_along_left_inv_EQ1
+        (@omega_equiv_along_left_inv
           Cat_cat
           (Hom_cat A x y)
           (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
           (@fapp1_func A B F x y)
-          (omega_equiv_along_fapp1_EQ1 u x y))
+          (omega_equiv_along_fapp1 u x y))
         (@fapp1_func A B F x y))
       (@id Cat_cat (Hom_cat A x y)));
 
 // The right cancellation projection has its native equality-valued type.
 assert [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x y : τ (Obj A)) ⊢
-  @omega_equiv_along_right_law_EQ1
+  @omega_equiv_along_right_law
     Cat_cat
     (Hom_cat A x y)
     (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
     (@fapp1_func A B F x y)
-    (omega_equiv_along_fapp1_EQ1 u x y)
+    (omega_equiv_along_fapp1 u x y)
   : τ (@=
       (Hom Cat_cat
         (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
@@ -5016,24 +5016,24 @@ assert [A B : Cat]
         (Hom_cat A x y)
         (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
         (@fapp1_func A B F x y)
-        (@omega_equiv_along_right_inv_EQ1
+        (@omega_equiv_along_right_inv
           Cat_cat
           (Hom_cat A x y)
           (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))
           (@fapp1_func A B F x y)
-          (omega_equiv_along_fapp1_EQ1 u x y)))
+          (omega_equiv_along_fapp1 u x y)))
       (@id Cat_cat
         (Hom_cat B (@fapp0 A B F x) (@fapp0 A B F y))));
 
 // Reflexive input computes through the protected proof chain to identity.
 assert [A : Cat] (x y : τ (Obj A)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     Cat_cat
     (Hom_cat A x y)
     (Hom_cat A x y)
     (@fapp1_func A A (@id_func A) x y)
-    (omega_equiv_along_fapp1_EQ1
-      (@omega_equiv_along_refl_EQ1 Cat_cat A)
+    (omega_equiv_along_fapp1
+      (@omega_equiv_along_refl Cat_cat A)
       x y)
   ≡ @id_func (Hom_cat A x y);
 // catalog-area: auto
@@ -6169,116 +6169,116 @@ assertnot (n : TruncLevel)
 // catalog-area: Categorical object-truncation invariance
 assert [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F)) ⊢
-  @omega_equiv_along_obj_path_EQ1 A B F u
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @omega_equiv_along_obj_path A B F u
   : τ (@= Grpd_grpd (Obj A) (Obj B));
 
 assert [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F)) ⊢
-  @omega_equiv_along_obj_type_equiv_EQ1 A B F u
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @omega_equiv_along_obj_type_equiv A B F u
   : τ (TypeEquiv (Obj A) (Obj B));
 
 assert (n : TruncLevel)
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F)) ⊢
-  @is_obj_trunc_cat_equiv_type_equiv_EQ1 n A B F u
+  (u : τ (@OmegaEquivAlong Cat_cat A B F)) ⊢
+  @is_obj_trunc_cat_equiv_type_equiv n A B F u
   : τ (TypeEquiv (IsObjTruncCat n A) (IsObjTruncCat n B));
 
 assert (n : TruncLevel)
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (h : τ (IsObjTruncCat n A)) ⊢
-  @is_obj_trunc_cat_equiv_to_EQ1 n A B F u h
+  @is_obj_trunc_cat_equiv_to n A B F u h
   : τ (IsObjTruncCat n B);
 
 assert (n : TruncLevel)
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (h : τ (IsObjTruncCat n B)) ⊢
-  @is_obj_trunc_cat_equiv_from_EQ1 n A B F u h
+  @is_obj_trunc_cat_equiv_from n A B F u h
   : τ (IsObjTruncCat n A);
 
 // Stable facade casting is theorem-level and does not decode an explicit
 // reflexive native package to raw eq_refl at runtime.
 assertnot [A : Cat] ⊢
-  @omega_equiv_along_obj_path_EQ1
-    A A (@id_func A) (@omega_equiv_along_refl_EQ1 Cat_cat A)
+  @omega_equiv_along_obj_path
+    A A (@id_func A) (@omega_equiv_along_refl Cat_cat A)
   ≡ @eq_refl Grpd_grpd (Obj A);
 
 assertnot [A : Cat] ⊢
-  @omega_equiv_along_obj_type_equiv_EQ1
-    A A (@id_func A) (@omega_equiv_along_refl_EQ1 Cat_cat A)
+  @omega_equiv_along_obj_type_equiv
+    A A (@id_func A) (@omega_equiv_along_refl Cat_cat A)
   ≡ @type_equiv_refl (Obj A);
 
 assertnot (n : TruncLevel)
   [A : Cat] ⊢
-  @is_obj_trunc_cat_equiv_type_equiv_EQ1
-    n A A (@id_func A) (@omega_equiv_along_refl_EQ1 Cat_cat A)
+  @is_obj_trunc_cat_equiv_type_equiv
+    n A A (@id_func A) (@omega_equiv_along_refl Cat_cat A)
   ≡ @type_equiv_refl (IsObjTruncCat n A);
 
 assertnot (n : TruncLevel)
   [A : Cat]
   (h : τ (IsObjTruncCat n A)) ⊢
-  @is_obj_trunc_cat_equiv_to_EQ1
-    n A A (@id_func A) (@omega_equiv_along_refl_EQ1 Cat_cat A) h
+  @is_obj_trunc_cat_equiv_to
+    n A A (@id_func A) (@omega_equiv_along_refl Cat_cat A) h
   ≡ h;
 
 assertnot (n : TruncLevel)
   [A : Cat]
   (h : τ (IsObjTruncCat n A)) ⊢
-  @is_obj_trunc_cat_equiv_from_EQ1
-    n A A (@id_func A) (@omega_equiv_along_refl_EQ1 Cat_cat A) h
+  @is_obj_trunc_cat_equiv_from
+    n A A (@id_func A) (@omega_equiv_along_refl Cat_cat A) h
   ≡ h;
 
 assert (n : TruncLevel)
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (h : τ (IsObjTruncCat n B)) ⊢
   type_equiv_right
-    (@is_obj_trunc_cat_equiv_type_equiv_EQ1 n A B F u) h
+    (@is_obj_trunc_cat_equiv_type_equiv n A B F u) h
   : τ (
-      @is_obj_trunc_cat_equiv_to_EQ1 n A B F u
-        (@is_obj_trunc_cat_equiv_from_EQ1 n A B F u h)
+      @is_obj_trunc_cat_equiv_to n A B F u
+        (@is_obj_trunc_cat_equiv_from n A B F u h)
       = h);
 
 assert (n : TruncLevel)
   [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (h : τ (IsObjTruncCat n A)) ⊢
   type_equiv_left
-    (@is_obj_trunc_cat_equiv_type_equiv_EQ1 n A B F u) h
+    (@is_obj_trunc_cat_equiv_type_equiv n A B F u) h
   : τ (
-      @is_obj_trunc_cat_equiv_from_EQ1 n A B F u
-        (@is_obj_trunc_cat_equiv_to_EQ1 n A B F u h)
+      @is_obj_trunc_cat_equiv_from n A B F u
+        (@is_obj_trunc_cat_equiv_to n A B F u h)
       = h);
 
 // Cast-induced object equivalence does not runtime expose the functor map.
 assertnot [A B : Cat]
   [F : τ (Functor A B)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A B F))
+  (u : τ (@OmegaEquivAlong Cat_cat A B F))
   (x : τ (Obj A)) ⊢
-  type_equiv_to (@omega_equiv_along_obj_type_equiv_EQ1 A B F u) x
+  type_equiv_to (@omega_equiv_along_obj_type_equiv A B F u) x
   ≡ @fapp0 A B F x;
 
 // Arbitrary fixed-map evidence is not silently treated as reflexivity.
 assertnot [A : Cat]
   [F : τ (Functor A A)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A A F)) ⊢
-  @omega_equiv_along_obj_type_equiv_EQ1 A A F u
+  (u : τ (@OmegaEquivAlong Cat_cat A A F)) ⊢
+  @omega_equiv_along_obj_type_equiv A A F u
   ≡ @type_equiv_refl (Obj A);
 
 assertnot (n : TruncLevel)
   [A : Cat]
   [F : τ (Functor A A)]
-  (u : τ (@OmegaEquivAlong_EQ1 Cat_cat A A F))
+  (u : τ (@OmegaEquivAlong Cat_cat A A F))
   (h : τ (IsObjTruncCat n A)) ⊢
-  @is_obj_trunc_cat_equiv_to_EQ1 n A A F u h
+  @is_obj_trunc_cat_equiv_to n A A F u h
   ≡ h;
 
 // catalog-area: auto
@@ -13427,45 +13427,45 @@ assert [K : Cat] (E : τ (Catd K)) (s : τ (Obj (Pi_cat E)))
         y
         (@piapp0 K E s y);
 
-// catalog-area: Categorical-universe direct EQ1
+// catalog-area: Categorical-universe direct equality-valued
 
-// Public category-universe equality now has the stable EQ1 facade normal form.
+// Public category-universe equality now has the stable equality-valued facade normal form.
 assert [A B : Cat] ⊢
   @= (Obj Cat_cat) A B
-  ≡ @OmegaEquiv_EQ1 Cat_cat A B;
+  ≡ @OmegaEquiv Cat_cat A B;
 
 assert [A B : Cat]
   (p : τ (@= (Obj Cat_cat) A B)) ⊢
-  p : τ (@OmegaEquiv_EQ1 Cat_cat A B);
+  p : τ (@OmegaEquiv Cat_cat A B);
 
 assert [A B : Cat]
-  (e : τ (@OmegaEquiv_EQ1 Cat_cat A B)) ⊢
+  (e : τ (@OmegaEquiv Cat_cat A B)) ⊢
   e : τ (@= (Obj Cat_cat) A B);
 
-// Explicit EQ1 reflexivity is computational; raw equality reflexivity keeps
+// Explicit equality-valued reflexivity is computational; raw equality reflexivity keeps
 // its separate generic-J normal form.
 assert [A : Cat] ⊢
-  @omega_equiv_refl_EQ1 Cat_cat A
+  @omega_equiv_refl Cat_cat A
   : τ (@= (Obj Cat_cat) A A);
 
 assert [A : Cat] ⊢
   @eq_refl (Obj Cat_cat) A
-  : τ (@OmegaEquiv_EQ1 Cat_cat A A);
+  : τ (@OmegaEquiv Cat_cat A A);
 
 assert [A : Cat] ⊢
-  @omega_equiv_to_EQ1 Cat_cat A A
-    (@omega_equiv_refl_EQ1 Cat_cat A)
+  @omega_equiv_to Cat_cat A A
+    (@omega_equiv_refl Cat_cat A)
   ≡ @id_func A;
 
 assert [A : Cat] ⊢
-  @omega_equiv_evidence_EQ1 Cat_cat A A
-    (@omega_equiv_refl_EQ1 Cat_cat A)
-  ≡ @omega_equiv_along_refl_EQ1 Cat_cat A;
+  @omega_equiv_evidence Cat_cat A A
+    (@omega_equiv_refl Cat_cat A)
+  ≡ @omega_equiv_along_refl Cat_cat A;
 
 // The native self-universe facade remains finite.
 assert ⊢
   @= (Obj Cat_cat) Cat_cat Cat_cat
-  ≡ @OmegaEquiv_EQ1 Cat_cat Cat_cat Cat_cat;
+  ≡ @OmegaEquiv Cat_cat Cat_cat Cat_cat;
 
 assert [A : Cat] ⊢
   @ind_eqr
@@ -13480,10 +13480,10 @@ assert [A : Cat] ⊢
 // Native provenance boundaries remain explicit.
 assertnot [A : Cat] ⊢
   @eq_refl (Obj Cat_cat) A
-  ≡ @omega_equiv_refl_EQ1 Cat_cat A;
+  ≡ @omega_equiv_refl Cat_cat A;
 
 assertnot [A : Cat] ⊢
-  @omega_equiv_to_EQ1
+  @omega_equiv_to
     Cat_cat A A (@eq_refl (Obj Cat_cat) A)
   ≡ @id_func A;
 
@@ -13494,7 +13494,7 @@ assertnot [A : Cat] ⊢
     (λ X : Cat, λ _ : τ (@= (Obj Cat_cat) X A), Unit_grpd)
     tt
     A
-    (@omega_equiv_refl_EQ1 Cat_cat A)
+    (@omega_equiv_refl Cat_cat A)
   ≡ tt;
 
 // catalog-area: auto
@@ -16542,8 +16542,8 @@ assert ⊢
     walking_hom_nat_type_equiv
   ≡ walking_power_function;
 
-assert ⊢ walking_hom_nat_omega_equiv_EQ1
-  : τ (@OmegaEquiv_EQ1
+assert ⊢ walking_hom_nat_omega_equiv
+  : τ (@OmegaEquiv
       Grpd_cat
       (Hom WalkingEnd_cat walking_base walking_base)
       Nat_grpd);
@@ -16577,17 +16577,17 @@ assert
   : τ Empty_grpd;
 
 assert
-  (u : τ (@OmegaEquivAlong_EQ1
+  (u : τ (@OmegaEquivAlong
       WalkingEnd_cat walking_base walking_base walking_loop)) ⊢
-  @walking_loop_not_omega_equiv_EQ1 u
+  @walking_loop_not_omega_equiv u
   : τ Empty_grpd;
 
 // The derived hom-action layer turns alleged internal groupoidality into the
 // impossible loop equivalence evidence above.
 assert
-  (g : τ (@IsGroupoidalCat_EQ1 WalkingEnd_cat)) ⊢
-  @walking_loop_not_omega_equiv_EQ1
-    (@groupoidal_arrow_equiv_along_EQ1
+  (g : τ (@IsGroupoidalCat WalkingEnd_cat)) ⊢
+  @walking_loop_not_omega_equiv
+    (@groupoidal_arrow_equiv_along
       WalkingEnd_cat g walking_base walking_base walking_loop)
   : τ Empty_grpd;
 

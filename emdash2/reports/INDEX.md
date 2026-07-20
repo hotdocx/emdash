@@ -4,7 +4,7 @@ Date: 2026-07-20
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
-derived native-EQ1 hom-action/groupoidality extension, and
+derived native equality-valued hom-action/groupoidality extension, and
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
 evidence-property and finite-`NCat` object-truncation extension.
 `emdash3_2_nat_arithmetic.lp` owns reusable Nat addition, associativity, and
@@ -12,9 +12,9 @@ sethood, together with the canonical `NatSucc_func`, independently of the
 walking construction. The isolated Sum former/action experiment was retired
 on 2026-07-20 pending a future consumer-led redesign; there is no active Sum
 module or compatibility facade.
-`emdash3_2_legacy_compat.lp` is a frozen, opt-in, non-authoritative D0/D1 and
-decoder module outside the normal dependency closure; only seven explicitly
-legacy reviewer examples import it, and no new consumer or feature is allowed.
+The former D0/D1/decoder compatibility module and its seven self-only reviewer
+examples are retired. Unsuffixed omega-equivalence names now denote only the
+native equality-valued API; no compatibility aliases remain.
 `emdash3_2_walking_end_hit.lp` imports that Nat module and now contains the
 opaque one-dimensional walking HIT, contextual eliminator, derived
 section/recursor views, transparent Code/power/contextual decoder, Hom--Nat
@@ -41,7 +41,9 @@ implementation plans, and historical decisions.
   completed living plan and decision ledger. P0–P8 completed the native
   equality-valued migration, extracted the remaining D0/D1/decoder closure
   into the frozen opt-in compatibility module, and retained the coherent
-  `_EQ1` namespace after measuring hard legacy collisions. P9 is the completed
+  `_EQ1` namespace after measuring hard legacy collisions; those P6/P7
+  decisions are retained as dated evidence and superseded below. P9 is the
+  completed
   2026-07-20 corrective phase: it supersedes P2's unconsumed
   `PathActionRefinement` abstraction and makes the already-canonical
   `path_map_func(f) : Path_cat(A) -> Path_cat(B)` the sole nondependent action
@@ -51,18 +53,20 @@ implementation plans, and historical decisions.
   and PathRecord wrappers, comparison-only Nat proof basis, and their
   checks/examples are removed rather than renamed. The isolated Sum
   former/action experiment is also retired for later redesign because
-  no Nat, WalkingEnd, native-EQ1, evidence-property, or compatibility theorem
+  no Nat, WalkingEnd, native equality-valued, evidence-property, or
+  compatibility theorem
   consumes it. The implementation baseline and review provenance is
   `2444c9d406fc3d201602ace7af5105c20c241680`.
 
-  The compatibility conclusions are unchanged. P5 mechanically moved the
-  remaining 2,751-line/126-declaration closure out of the kernel. The active
+  P5 mechanically moved the remaining 2,751-line/126-declaration closure out
+  of the kernel. The active
   kernel, native modules, Nat, WalkingEnd, and main diagnostics contain no
-  D0/D1 reference or compatibility import; exactly seven legacy examples opt
-  in explicitly. The pre-P9 active warning inventory is 1,010/159, while
+  D0/D1 reference or compatibility import. At that checkpoint exactly seven
+  legacy examples opted in explicitly. The pre-P9 active warning inventory is
+  1,010/159, while
   checking the legacy module restores the former combined 1,016/159 closure;
   strict audit is zero/45/27.
-  P6 retains that module under a closed contract solely to preserve the
+  P6 retained that module under a closed contract solely to preserve the
   complete two-sided `one_cat_iso_type_equiv` result pending native facade-
   package/raw-path reification coherence or deliberate compatibility deletion.
   P7 inventories 139 native `_EQ1` declarations and 11 hard unsuffixed legacy
@@ -77,7 +81,23 @@ implementation plans, and historical decisions.
   inventory, 1,671-check/61-area strict catalog, 46-target health report,
   unchanged 1,010/159 warnings, zero/45/27 audit, and 86-heading TOC pass.
   Full CI passes all 46 targets in 253.673 seconds, all 16 recovery tests, and
-  every repository-integrity gate. No plan row remains open. The plan records
+  every repository-integrity gate.
+
+  P10–P12 are the completed 2026-07-20 corrective phases. The user explicitly
+  dropped backward compatibility as an objective, so P10 supersedes P6 and
+  deletes the 2,751-line module, all seven importers, and the exact legacy
+  `one_cat_iso_type_equiv` rather than blocking cleanup on a native re-proof.
+  Native `OneCat`, hom discreteness/action, finite-dimension, the one-way
+  ordinary-isomorphism lift, WalkingEnd/`BNat`, and Nat remain. P11 supersedes
+  P7 after reproducing a zero-collision manifest and mechanically maps 1,570
+  occurrences of 143 exact `NAME_EQ1` tokens across 18 retained `.lp` files
+  to unsuffixed `NAME`, with no aliases, semantic rule change, or module-file
+  rename. Bounded `make check` passes after deletion and after rename. P12
+  synchronizes current authorities and passes the 1,671-check/61-area strict
+  catalog, 39-target health and CI, unchanged 1,010/159 warnings, zero/45/27
+  audit, 86-heading TOC, 16 recovery tests, and every integrity gate. Dated
+  plan entries below retain old D0/D1/`_EQ1` spellings only as historical
+  evidence. The plan records
   every probe, extraction manifest, retention condition, namespace collision,
   supersession decision, and validation result.
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
@@ -107,7 +127,9 @@ implementation plans, and historical decisions.
   reverse BNat functor, full hom-category equivalence,
   full functor-category initiality, and derivation of the truncation witness
   from a stronger general HIT principle remain outside the selected practical
-  boundary.
+  boundary. The later P10 compatibility deletion and P11 native-symbol
+  unsuffixing do not change any WalkingEnd/`BNat` construction or result; old
+  suffixed spellings in its ledger are historical.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
   active MathOps/DevOps/SOP improvement plan and utility roadmap.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
@@ -123,8 +145,11 @@ implementation plans, and historical decisions.
   encoding, and coherent global computational univalence. Its long entry below
   is chronological checkpoint evidence: every statement locating D0/D1,
   unsuffixed omega-equivalence, Cat decoder, or the OneCat two-sided theorem in
-  the active kernel is superseded by the P5 extraction into frozen
-  `emdash3_2_legacy_compat.lp`. Candidate G's
+  the active kernel was first superseded by P5 extraction and is now
+  superseded finally by P10 deletion of the compatibility module and all seven
+  clients. Every suffixed native declaration below is a dated spelling; P11
+  makes that same native equality-valued API unsuffixed without restoring a
+  legacy facade. Candidate G's
   decoded Empty/Bool/Nat slice and Candidate A's named dependent-record
   convention, Candidate B's recursive truncation-property kernel, and the
   Phase-3 packaged truncated universes plus both Phase 4 path-category slices
@@ -454,11 +479,14 @@ but their promoted phases are not open implementation plans.
   unconditional finite-`NCat` object truncation, and its dated Sum-action
   demotion experiment. The 2026-07-20 P9 correction in the active path-action
   plan subsequently retires that isolated Sum feature and the unconsumed
-  `PathActionRefinement` layer without changing any native-EQ1 result.
+  `PathActionRefinement` layer without changing any native equality-valued result.
   Native theorem modules are decoder/D0-free; raw unreified-path observers,
-  reverse coherent-core assembly, consumer-led core-universe functors, full
-  deletion of the now-frozen compatibility module, and metatheory remain
-  separate bounded work.
+  reverse coherent-core assembly, consumer-led core-universe functors, and
+  metatheory remain separate bounded work. P10 later deletes the frozen
+  compatibility module, its seven clients, and the unused legacy OneCat
+  theorem; P11 then removes `_EQ1` from native public identifiers after a
+  zero-collision audit. Those phases supersede the report's compatibility and
+  spelling boundary without changing its selected native semantics.
 - `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`:
   promoted historical implementation ledger for the first groupoid,
   type-equivalence, computational-univalence, omega-equivalence, and generic

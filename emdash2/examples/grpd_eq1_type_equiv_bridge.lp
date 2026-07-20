@@ -43,54 +43,54 @@ assert [A B C : Grpd]
       (@grpd_comp_function A B C g f));
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_to_EQ1 Grpd_cat A B
-    (@type_equiv_to_omega_EQ1 A B e)
+  @omega_equiv_to Grpd_cat A B
+    (@type_equiv_to_omega A B e)
   ≡ @type_equiv_to A B e;
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_along_left_inv_EQ1
+  @omega_equiv_along_left_inv
     Grpd_cat A B (@type_equiv_to A B e)
-    (@omega_equiv_evidence_EQ1 Grpd_cat A B
-      (@type_equiv_to_omega_EQ1 A B e))
+    (@omega_equiv_evidence Grpd_cat A B
+      (@type_equiv_to_omega A B e))
   ≡ λ b : τ B, @type_equiv_from A B e b;
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_equiv_along_left_law_EQ1
+  @omega_equiv_along_left_law
     Grpd_cat A B (@type_equiv_to A B e)
-    (@omega_equiv_evidence_EQ1 Grpd_cat A B
-      (@type_equiv_to_omega_EQ1 A B e))
-  ≡ @type_equiv_omega_left_law_EQ1 A B e;
+    (@omega_equiv_evidence Grpd_cat A B
+      (@type_equiv_to_omega A B e))
+  ≡ @type_equiv_omega_left_law A B e;
 
 assert [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f)) ⊢
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f)) ⊢
   @type_equiv_to A B
-    (@omega_along_to_type_equiv_EQ1 A B f u)
+    (@omega_along_to_type_equiv A B f u)
   ≡ f;
 
 // The reverse adapter selects the explicit left inverse as its fibre centre.
 assert [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f))
   (b : τ B) ⊢
   @type_equiv_from A B
-    (@omega_along_to_type_equiv_EQ1 A B f u)
+    (@omega_along_to_type_equiv A B f u)
     b
-  ≡ (@omega_equiv_along_left_inv_EQ1 Grpd_cat A B f u) b;
+  ≡ (@omega_equiv_along_left_inv Grpd_cat A B f u) b;
 
 assert [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f))
   (b : τ B) ⊢
   @type_equiv_right A B
-    (@omega_along_to_type_equiv_EQ1 A B f u)
+    (@omega_along_to_type_equiv A B f u)
     b
-  ≡ @omega_grpd_left_right_point_EQ1 A B f u b;
+  ≡ @omega_grpd_left_right_point A B f u b;
 
 assert [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
   @type_equiv_to A B
-    (@omega_to_type_equiv_EQ1 A B
-      (@type_equiv_to_omega_EQ1 A B e))
+    (@omega_to_type_equiv A B
+      (@type_equiv_to_omega A B e))
   ≡ @type_equiv_to A B e;
 
 // Identity retains its generic owner; capped composition is eta-observable.
@@ -104,24 +104,24 @@ assert [A B C : Grpd]
   @comp_fapp0 Grpd_cat A B C g f
   ≡ λ a : τ A, g (f a);
 
-// Direct groupoid-universe equality now has the stable EQ1 runtime form.
+// Direct groupoid-universe equality now has the stable equality-valued runtime form.
 assert [A B : Grpd] ⊢
   @= Grpd_grpd A B
-  ≡ @OmegaEquiv_EQ1 Grpd_cat A B;
+  ≡ @OmegaEquiv Grpd_cat A B;
 
 // The adapters expose computational fields, not definitional package eta.
 assertnot [A B : Grpd] (e : τ (TypeEquiv A B)) ⊢
-  @omega_to_type_equiv_EQ1 A B
-    (@type_equiv_to_omega_EQ1 A B e)
+  @omega_to_type_equiv A B
+    (@type_equiv_to_omega A B e)
   ≡ e;
 
 // The fibre contraction still comes from the pre-existing theorem capability.
 assertnot [A B : Grpd]
   (f : τ (@Function_grpd A B))
-  (u : τ (@OmegaEquivAlong_EQ1 Grpd_cat A B f))
+  (u : τ (@OmegaEquivAlong Grpd_cat A B f))
   (b : τ B) ⊢
-  (sigma_Snd (@omega_grpd_is_equiv_EQ1 A B f u b))
-    (sigma_Fst (@omega_grpd_is_equiv_EQ1 A B f u b))
+  (sigma_Snd (@omega_grpd_is_equiv A B f u b))
+    (sigma_Fst (@omega_grpd_is_equiv A B f u b))
   ≡ @eq_refl
       (@HFiber A B f b)
-      (sigma_Fst (@omega_grpd_is_equiv_EQ1 A B f u b));
+      (sigma_Fst (@omega_grpd_is_equiv A B f u b));
