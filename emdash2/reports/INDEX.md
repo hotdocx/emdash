@@ -9,8 +9,11 @@ derived native-EQ1 hom-action/groupoidality extension, and
 evidence-property and finite-`NCat` object-truncation extension.
 `emdash3_2_nat_arithmetic.lp` owns reusable Nat addition, associativity, and
 sethood independently of the walking construction.
-`emdash3_2_sum_observational_action.lp` retains the former-specific Sum action
-as a library module rather than kernel infrastructure.
+`emdash3_2_sum_observational_action.lp` retains the former-specific Sum
+path-action refinement as a library module rather than kernel infrastructure.
+`emdash3_2_legacy_compat.lp` is a frozen, opt-in, non-authoritative D0/D1 and
+decoder module outside the normal dependency closure; only seven explicitly
+legacy reviewer examples import it, and no new consumer or feature is allowed.
 `emdash3_2_walking_end_hit.lp` imports that Nat module and now contains the
 opaque one-dimensional walking HIT, contextual eliminator, derived
 section/recursor views, transparent Code/power/contextual decoder, Hom--Nat
@@ -33,6 +36,36 @@ implementation plans, and historical decisions.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md`:
+  active living plan for recasting selected nondependent path action as an
+  optional computational refinement of the canonical iterable
+  `Path_cat_func`/`path_map_func` action, retiring the unused dependent
+  registry first, and separately migrating the D0/D1 compatibility
+  representation before deciding whether to remove the historical `_EQ1`
+  suffix. The implementation baseline and review provenance is
+  `2444c9d406fc3d201602ace7af5105c20c241680`. P0–P4 completed the authority
+  repair, dependent-registry deletion, `PathActionRefinement` migration,
+  native discrete/dimension/WalkingEnd spine, consumer-led native theorem
+  migration, and deletion of self-only D0 experiments. P5 then mechanically
+  moved the remaining 2,751-line/126-declaration compatibility closure out of
+  the kernel. The active kernel, native modules, Nat, WalkingEnd, Sum module,
+  and main diagnostics contain no D0/D1 reference or compatibility import;
+  exactly seven legacy examples opt in explicitly. The active warning
+  inventory is now 1,010/159, while checking the legacy module restores the
+  former combined 1,016/159 closure; strict audit remains zero/45/27.
+  P6 retains that module under a closed contract solely to preserve the
+  complete two-sided `one_cat_iso_type_equiv` result pending native facade-
+  package/raw-path reification coherence or deliberate compatibility deletion.
+  P7 inventories 139 native `_EQ1` declarations and 11 hard unsuffixed legacy
+  collisions. It therefore retains the coherent native suffix rather than
+  creating a partial rename, reverse aliases, or same-client collisions. P8
+  has synchronized current authorities and generated reports. The final
+  catalog has 1,791 classified checks across 66 areas, active warnings are
+  1,010/159, strict audit is zero/45/27, TOC has 86 headings, all 52 health
+  targets pass, and full CI passes the same targets in 241.282 seconds along
+  with all repository-integrity gates. The completed plan records every probe,
+  extraction manifest, retention condition, namespace collision, and
+  validation result.
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
   completed migration plan plus implemented post-MVP restricted-CoreIncl
   redesign for an opaque one-dimensional directed HIT.
@@ -73,7 +106,11 @@ implementation plans, and historical decisions.
   retained living predecessor/master ledger integrating full
   observational equality, HoTT truncation and `Prop`/`Set`/`n`-groupoid
   universes, directed `n`-categories and `OneCat`, finite dependent-record
-  encoding, and coherent global computational univalence; Candidate G's
+  encoding, and coherent global computational univalence. Its long entry below
+  is chronological checkpoint evidence: every statement locating D0/D1,
+  unsuffixed omega-equivalence, Cat decoder, or the OneCat two-sided theorem in
+  the active kernel is superseded by the P5 extraction into frozen
+  `emdash3_2_legacy_compat.lp`. Candidate G's
   decoded Empty/Bool/Nat slice and Candidate A's named dependent-record
   convention, Candidate B's recursive truncation-property kernel, and the
   Phase-3 packaged truncated universes plus both Phase 4 path-category slices
@@ -101,19 +138,27 @@ implementation plans, and historical decisions.
   Phase 8 now promotes the independent indexed `Adjunction(F,G)` owner,
   transparent functor views, stable unit/counit observations, triangles,
   opposite and mate consumers, with no unbacked named-operation equation. The
-  Phase 9 now promotes the exact two-field `IsDiscreteCat` boundary,
+  The original Phase 9 promoted the exact two-field `IsDiscreteCat` boundary,
   D0b-derived core homwise evidence, `hom_to_path`, both coherent round trips,
   and a recursive-cell reviewer example without adding a homwise field or
-  runtime cancellation. The same phase now also promotes independent
+  runtime cancellation. The July 19 living plan now supersedes that
+  representation with a native `IsGroupoidalCat_EQ1` second field and
+  equality-valued homwise owner while preserving the public mathematical
+  behavior. The same phase also promoted independent
   `IsObjTruncCat`, native `CatDim`, recursive `IsNCat`, evidence-retaining
   `NCat`/`ZeroCat`/`OneCat`, and a next-hom OneCat consumer. The implication to
   object truncation and scoped ordinary-iso univalence retain their explicit
-  later dependencies rather than being smuggled into formation. The current
-  Phase 10 now promotes registered `ObsAction`/`ObsDAction`, sound semantic
-  agreement, identity/composite computation, PathRecord open-map action,
-  dependent witness-field transport, componentwise binary-sum action, and the
-  first recursive-inductive registration: Nat successor retains the exposed
-  predecessor path while agreeing propositionally with generic `eq_ap`. The
+  later dependencies rather than being smuggled into formation. The historical
+  Phase 10 promotion introduced registered `ObsAction`/`ObsDAction`, sound
+  semantic agreement, identity/composite computation, PathRecord open-map
+  action, dependent witness-field transport, componentwise binary-sum action,
+  and the first recursive-inductive registration. The 2026-07-19 cleanup
+  retired the unused dependent package, routes `path_record_witness_action`
+  directly through `eq_apd`, and recasts every retained nondependent selection
+  as `PathActionRefinement` of canonical `path_map_func` action. Nat successor
+  retains the exposed predecessor path while agreeing propositionally with
+  `NatSucc_func`. The historical package names remain only in dated promotion
+  records. The
   independently statused general binary-sum
   carrier/classifier, dependent eliminator, both betas, and non-collapse
   control, and the next bounded prerequisite adds the recursive
@@ -215,8 +260,12 @@ implementation plans, and historical decisions.
   classifier rule and no `unif_rule` are added. The closed snapshot has 1,539
   checks across 53 areas, a 17,989-line/750-symbol/575-rule/51-unification-
   rule kernel, and 1,389 positive diagnostics. CI passes with 165.477s of
-  measured checking time (171.88s wall time). The next bounded Phase-13 slice
-  selects the finite one-layer `OmegaEquivAlongPathView_D0`: its nested
+  measured checking time (171.88s wall time). The following one-layer,
+  conditional, and dimension-indexed D0 entries are historical July 16
+  checkpoints: P4 retired all three experiment families and their self-only
+  examples on 2026-07-19 while preserving these measurements as provenance.
+  At the historical checkpoint, the next bounded Phase-13 slice selected the
+  finite one-layer `OmegaEquivAlongPathView_D0`: its nested
   Sigma/Product observation record reuses both inverse-arrow and recursive-
   cell owners, canonical reflexivity and one-way evidence-path action compute,
   and D0b next-hom evidence is observable through it. The direct recursive
@@ -259,10 +308,11 @@ implementation plans, and historical decisions.
   reverse decoder, eta, public certificate equality, or evidence-property
   inhabitant. The full reviewer sweep and synchronized 38-file CI pass with
   201.708s of measured checking time (212.59s wall time). The next independent
-  elementary-action slice is now completed/promoted: eliminator-owned
-  `sum_map` lifts two registered summand
-  actions through `sum_obs_action`, using Empty for mixed tags and explicit
-  propositional agreement with generic `eq_ap`. A direct two-action
+  elementary-action slice is now completed/promoted: at that dated snapshot,
+  eliminator-owned `sum_map` lifted two registered summand actions through
+  `sum_obs_action`; P2 now spells the package
+  `sum_path_action_refinement`, using Empty for mixed tags and explicit
+  propositional agreement with canonical path-map action. A direct two-action
   proof-time equation failed because transparent `eq_ap` unfolds first; one
   stable reflexive basis per tag plus two direct former-specific `unif_rule`s
   per basis is selected instead, and the arbitrary theorem explicitly
@@ -293,8 +343,9 @@ implementation plans, and historical decisions.
   transport and the nested-Sigma reverse round trip. No rewrite or unbacked
   `unif_rule` identifies those inverses, and the frozen arbitrary-category
   interface remains unused by the new owners.
-  The dependency-ready inverse-comparison continuation is now implemented in
-  the active kernel. The rejected direct `Hom_func` composition exposed two
+  At that historical checkpoint, the dependency-ready inverse-comparison
+  continuation was implemented in the kernel. The rejected direct `Hom_func`
+  composition exposed two
   unit comparisons and associativity that cannot depend on unification
   transitivity; the selected construction instead uses stable post/pre
   whiskering plus an explicit propositional associator. It produces
@@ -309,7 +360,8 @@ implementation plans, and historical decisions.
   synchronized CI pass with 139.872s of measured checking time. Full scoped
   univalence then waited only on right-law transport and the nested-Sigma
   reverse evidence round trip, not on inverse comparison.
-  That continuation is now completed in the active kernel. Decoded recursive
+  At that historical checkpoint the continuation was completed in the kernel.
+  Decoded recursive
   laws, ordinary equality transport, and the inverse path reconstruct
   `IsoEvidence`; OneCat hom discreteness compares both inverse-law proof
   fields, and the promoted nested-Sigma path owner proves reconstruction after
@@ -338,9 +390,10 @@ implementation plans, and historical decisions.
   lines/801 symbols/581 rules/56 unification rules with 1,493 positive
   diagnostics, and full examples plus synchronized CI pass; CI records
   212.799s measured checking time. The retirement slice is closed.
-  The next former-action continuation is now completed/promoted. Recursive Nat
-  successor equality exposes its predecessor path, so
-  `nat_succ_obs_action` selects `p |-> p`; a stable basis has two direct,
+  The next former-action continuation is now completed/promoted. At that dated
+  snapshot `nat_succ_obs_action` selected `p |-> p`; P2 now spells the package
+  `nat_succ_path_action_refinement`. Recursive Nat successor equality exposes
+  its predecessor path, and a stable basis has two direct,
   narrowly typed proof-time comparisons with component and outer reflexivity,
   and generic `ind_eqr` derives arbitrary agreement with `eq_ap(succ)` without
   runtime collapse or unification transitivity. Fourteen positive/five negative
@@ -377,7 +430,8 @@ but their promoted phases are not open implementation plans.
   unconditional finite-`NCat` object truncation, and Sum-action demotion.
   Native theorem modules are decoder/D0-free; raw unreified-path observers,
   reverse coherent-core assembly, consumer-led core-universe functors, full
-  compatibility retirement, and metatheory remain separate bounded work.
+  deletion of the now-frozen compatibility module, and metatheory remain
+  separate bounded work.
 - `REPORT_EMDASH_V3_2_GROUPOID_COMPUTATIONAL_UNIVALENCE_IMPLEMENTATION_PLAN_2026-06-23.md`:
   promoted historical implementation ledger for the first groupoid,
   type-equivalence, computational-univalence, omega-equivalence, and generic

@@ -2618,6 +2618,152 @@ symbol groupoidal_path_to_arrow_retract_EQ1
     (@id Cat_cat (Hom_cat C x y))
     (@groupoidal_arrow_section_EQ1 C g x y);
 
+/*
+  Discrete-category homwise path selection.
+
+  The kernel stores only object sethood and native groupoidality. This
+  one-way extension derives the homwise equivalence and selected path reader
+  from the general groupoidality action; no D0/D1 conversion is involved.
+*/
+symbol discrete_core_homwise
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  (x y : τ (Obj C))
+  : τ (@OmegaEquivAlong_EQ1
+      Cat_cat
+      (Path_cat (@= (Obj C) x y))
+      (Hom_cat C x y)
+      (@core_incl_hom_func C x y))
+≔ @groupoidal_core_homwise_EQ1
+    C
+    (@is_discrete_cat_core_equiv C d)
+    x
+    y;
+
+// Selected native inverse functor on a core-inclusion hom action.
+symbol discrete_core_hom_inv_func
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  (x y : τ (Obj C))
+  : τ (Functor
+      (Hom_cat C x y)
+      (Path_cat (@= (Obj C) x y)))
+≔ @groupoidal_arrow_to_path_func_EQ1
+    C
+    (@is_discrete_cat_core_equiv C d)
+    x
+    y;
+
+// Read a directed arrow as its selected object path.
+symbol hom_to_path
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (@= (Obj C) x y)
+≔ @groupoidal_arrow_to_path_EQ1
+    C
+    (@is_discrete_cat_core_equiv C d)
+    x
+    y
+    f;
+
+// The selected inverse followed by the core action is propositionally idle.
+symbol discrete_core_hom_left_law
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  (x y : τ (Obj C))
+  : τ (@=
+      (Hom Cat_cat
+        (Path_cat (@= (Obj C) x y))
+        (Path_cat (@= (Obj C) x y)))
+      (@comp_cat_fapp0
+        (Path_cat (@= (Obj C) x y))
+        (Hom_cat C x y)
+        (Path_cat (@= (Obj C) x y))
+        (@discrete_core_hom_inv_func C d x y)
+        (@core_incl_hom_func C x y))
+      (@id Cat_cat (Path_cat (@= (Obj C) x y))))
+≔ @omega_equiv_along_left_law_EQ1
+    Cat_cat
+    (Path_cat (@= (Obj C) x y))
+    (Hom_cat C x y)
+    (@core_incl_hom_func C x y)
+    (@discrete_core_homwise C d x y);
+
+// Reading an included object path recovers that path.
+symbol hom_to_path_path_to_hom
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (p : τ (@= (Obj C) x y))
+  : τ (@=
+      (@= (Obj C) x y)
+      (@hom_to_path C d x y (@path_to_hom C x y p))
+      p)
+≔ @discrete_cat_path_proof
+    C d x y
+    (@hom_to_path C d x y (@path_to_hom C x y p))
+    p;
+
+// Re-including the selected path recovers the original arrow as equality.
+symbol path_to_hom_hom_to_path_path
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (@=
+      (Hom C x y)
+      (@path_to_hom C x y (@hom_to_path C d x y f))
+      f)
+≔ @groupoidal_path_to_arrow_retract_EQ1
+    C
+    (@is_discrete_cat_core_equiv C d)
+    x
+    y
+    f;
+
+// The former directed round-trip surface is the image of the native path.
+symbol path_to_hom_hom_to_path
+  [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y))
+  : τ (Hom
+      (Hom_cat C x y)
+      (@path_to_hom C x y (@hom_to_path C d x y f))
+      f)
+≔ @path_to_hom
+    (Hom_cat C x y)
+    (@path_to_hom C x y (@hom_to_path C d x y f))
+    f
+    (@path_to_hom_hom_to_path_path C d x y f);
+
+// A OneCat iterates the native discrete core action one hom level further.
+symbol one_cat_hom_core_homwise
+  (X : τ OneCat)
+  (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)))
+  (f g : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) x y))
+  : τ (@OmegaEquivAlong_EQ1
+      Cat_cat
+      (Path_cat (@=
+        (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)
+        f
+        g))
+      (Hom_cat
+        (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x y)
+        f
+        g)
+      (@core_incl_hom_func
+        (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x y)
+        f
+        g))
+≔ @discrete_core_homwise
+    (Hom_cat (@ncat_carrier (cat_succ cat_zero) X) x y)
+    (@one_cat_hom_discrete X x y)
+    f
+    g;
+
 // Selected inverse arrow obtained from the groupoidality-selected path.
 symbol groupoidal_arrow_inverse_EQ1
   [C : Cat]

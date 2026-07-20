@@ -34,9 +34,14 @@ detailed probe evidence.
   consistency model. It contains no generated-word Hom or WalkingEnd-specific
   identity/composition rule.
 - `emdash3_2_sum_observational_action.lp`: one-way library module retaining
-  the componentwise Sum `ObsAction`, its equality comparison, and four
-  proof-time bases; no kernel or univalence consumer imports it.
+  the componentwise Sum `PathActionRefinement`, its equality comparison, and
+  four proof-time bases; no kernel or univalence consumer imports it.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
+- `emdash3_2_legacy_compat.lp`: frozen opt-in D0/D1 and decoder compatibility
+  module. It imports the kernel one-way but is not an active source of truth,
+  is absent from the normal dependency closure and main diagnostics, and may
+  be imported only by the seven explicitly legacy reviewer examples. No new
+  consumer or feature is permitted.
 - `EMDASH_FOUNDATIONS.md`: mathematical reading guide.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
   authority for comments, examples, and future parser work.
@@ -55,7 +60,42 @@ needed.
 
 ## Validated Current Baseline
 
-The last fully synchronized 2026-07-18 baseline is:
+The current post-P8 architecture checkpoint is the completed 2026-07-19
+path-action and compatibility-retirement plan. `emdash3_2.lp` is 19,632 lines
+and contains no
+D0/D1 declaration or reference. The native extensions, Nat, WalkingEnd, Sum
+library, and `emdash3_2_checks.lp` likewise contain no compatibility import.
+The complete old closure now lives in the frozen one-way
+`emdash3_2_legacy_compat.lp` module (2,751 lines, 126 declarations), imported
+only by seven explicitly legacy reviewer examples. The bounded active check
+passes; active-kernel warnings are 1,010 unjoinable/159 replaceable, while an
+explicit legacy-module check restores the former combined 1,016/159 closure.
+Strict LHS audit remains zero unreviewed candidates with 45 annotated slots
+across 27 clauses. The final catalog has 1,791 classified checks (1,587
+positive and 204 negative) across 66 areas, with zero legacy tags and zero
+unclassified statements. The source TOC passes with 86 headings across
+sections 0–20. Health passes all 52 measured active-source/example targets in
+258.540 seconds aggregate; full CI passes the same targets in 241.282 seconds,
+all 16 Infinity-Codex tests, and every diff/TOC/reference/header/audit/catalog
+integrity gate.
+
+The module is retained solely for the complete two-sided
+`one_cat_iso_type_equiv` contract. The native replacement is blocked at the
+intentional stable-cast/facade-package-to-raw-path reification boundary, so no
+law is weakened and no package/path unifier is invented. This is a frozen
+compatibility contract, not a second foundation. Exact namespace audit finds
+139 active native `_EQ1` declarations and 11 unsuffixed collisions exported by
+the frozen module. `_EQ1` therefore remains the coherent canonical native
+suffix until that module is deleted or separately namespaced; no partial
+rename or reverse alias layer is selected.
+
+Detailed Phase-5/D0/D1 passages later in this report record pre-extraction
+implementation checkpoints. Wherever they say those owners remain in the
+kernel or that extraction has not begun, this post-P7 checkpoint supersedes
+the source-location/status claim while preserving the dated computational
+evidence.
+
+An earlier fully synchronized 2026-07-18 baseline was:
 
 ```text
 make check                         pass
@@ -286,10 +326,13 @@ owner in `emdash3_2_eq1_hom_action.lp`. For
 `omega_equiv_along_fapp1_EQ1` directly to `Core_incl_func(C)`, with no
 EQ1-to-D0, D0b, or D0-to-EQ1 step. Its selected right inverse sends a directed
 arrow to an object path, and the equality-valued right law proves
-propositionally that re-including that path recovers the arrow. Existing exact
-`IsDiscreteCat` evidence and packaged `ZeroCat` carriers provide nonliteral
-groupoidal witnesses. The public groupoidality names were relocated from the
-kernel to the one-way extension without changing their types.
+propositionally that re-including that path recovers the arrow.
+`IsDiscreteCat(C)` now stores this native `IsGroupoidalCat_EQ1(C)` witness as
+its second factor, alongside object sethood; packaged `ZeroCat` carriers
+therefore provide nonliteral groupoidal witnesses without a D0 migration.
+The public homwise path-selection names live in the one-way extension, while
+formation and projections remain in the kernel, so no kernel-to-extension
+cycle is introduced.
 
 The first slice also checks the existing `path_ind_sec` computation for a
 structured Sigma-pullback motive in a groupoidal context. Groupoidality is not
@@ -377,19 +420,22 @@ property to define
 `ncat_obj_trunc_EQ1(n,C,h) : IsObjTruncCat(cat_dim_trunc_level(n),C)` for every
 finite native dimension. Its zero equation reduces to
 `is_discrete_cat_obj_set`; its successor exposes the expected hom recursion.
-The older `OmegaEquivAlongEvidenceProp_D0` and
-`ncat_obj_trunc_from_evidence_prop` remain public compatibility experiments
-for the opaque D0 certificate, but they are no longer the active native-EQ1
-proof boundary and no inhabitant of the D0 capability is claimed.
+The old uninhabited `OmegaEquivAlongEvidenceProp_D0` capability and
+`ncat_obj_trunc_from_evidence_prop` conditional theorem were retired by the
+2026-07-19 P4 consumer audit. They had no nonself consumer and are superseded
+by the unconditional native-EQ1 proof. The representation-independent
+`prop_is_trunc_cat_dim` helper remains in use by that native proof.
 
 The former-specific componentwise Sum action has been demoted without a
 semantic rewrite. `sum_map` remains the ordinary eliminator-owned kernel map;
 the two action bases, four proof-time comparisons, componentwise `eq_ap`
-theorems, and registered `sum_obs_action` were mechanically relocated to
+theorems, and `sum_path_action_refinement` live in
 `emdash3_2_sum_observational_action.lp`. Only its diagnostics and reviewer
-example import that one-way module. This preserves the useful library example
-while removing action-specific proof-time authority from the foundational
-kernel; focused kernel/module/check/example probes all pass.
+example import that one-way module. The public refinement coherence targets
+the exact capped `path_map_func(sum_map(...))` action while reusing the
+componentwise `eq_ap` theorems internally. This preserves the useful library
+example while removing action-specific proof-time authority from the
+foundational kernel; focused kernel/module/check/example probes all pass.
 
 The equality-overlay selected-MVP checkpoint had 1,917 checks across 70 areas.
 The kernel has
@@ -529,7 +575,14 @@ reviewer sweep passes, and synchronized CI passes with 165.477s of measured
 checking time (171.88s wall time). Any future representation of the currently
 opaque fixed-arrow certificate must reopen the self-universe normalization
 gate.
-The next Phase-13 boundary now exposes a finite one-layer observation record
+Historical checkpoint note (superseded 2026-07-19): the next three paragraphs
+record the July 16 one-layer observation, conditional truncation, and
+dimension-indexed observation promotions at their original checkpoints. P4
+has now retired all three D0 experiment families, their self-only diagnostics,
+and their reviewer examples. The measured normalization/failure results below
+remain useful provenance, but the named operations are no longer active.
+
+At that checkpoint, the next Phase-13 boundary exposed a finite one-layer observation record
 for that certificate. `OmegaEquivAlongObservation_D0(f)` is the nested
 Sigma/Product of the selected left/right inverse arrows and recursive
 left/right cell packages; `omega_equiv_along_observe_D0(u)` fills it through
@@ -551,7 +604,7 @@ the now-ready `IsNCat` induction/Sigma/univalence transport from its still-
 missing certificate-property inhabitant: the former must take the latter as
 an explicit capability rather than postulate it or infer it from the finite
 view.
-That conditional theorem spine is now active. The uninhabited classifier
+At the following historical checkpoint, that conditional theorem spine was active. The uninhabited classifier
 `OmegaEquivAlongEvidenceProp_D0` states the exact global fixed-arrow
 property-valuedness premise. `prop_is_trunc_cat_dim` lifts such a proposition
 to every native dimension level, and
@@ -567,7 +620,7 @@ kernel and 1,413 positive diagnostics. The full reviewer sweep passes, and
 synchronized CI passes with 198.816s of measured checking time (206.34s wall
 time). Bare `IsNCat` evidence still does not inhabit the theorem, and the
 finite observation view still does not construct the capability.
-The recursion-safe representation continuation is now completed/promoted.
+At the final historical checkpoint in this retired experiment family, the recursion-safe representation continuation was completed/promoted.
 `OmegaEquivAlongDimObservation_D0(n,h,f)` computes
 to Unit at zero and at a successor stores both selected inverse arrows plus
 the forward arrow and smaller-dimensional observation of each D0 inverse-cell
@@ -585,7 +638,8 @@ scratch/active reviewer logs end in `104802`/`104928`. The indexed view remains
 one-way and does not inhabit `OmegaEquivAlongEvidenceProp_D0`. The full
 reviewer sweep passes, and synchronized 38-file CI passes with 201.708s of
 measured checking time (212.59s wall time).
-The first registered elementary-former action is now completed/promoted.
+At its dated 2026-07-16 checkpoint, the first registered elementary-former
+action was completed/promoted.
 `sum_map(f,g)` is the eliminator-owned canonical
 binary-sum map. `sum_obs_action(f,g,u,v)` delegates equal-tag paths to the two
 supplied `ObsAction` registrations, returns the impossible input in mixed
@@ -730,8 +784,8 @@ positive diagnostics, and full examples pass. Synchronized CI passes with
 212.799s measured checking time. The global
 ordinary-iso capability retirement is closed.
 
-The next dependency-ready former-action continuation is also completed and
-promoted. Recursive Nat equality exposes
+At its dated 2026-07-16 checkpoint, the next former-action continuation was
+also completed and promoted. Recursive Nat equality exposes
 `(succ m = succ n)` as `(m = n)`, so `nat_succ_obs_action` selects `p |-> p`.
 Generic `eq_refl(n)` and outer `eq_refl(succ n)` retain distinct runtime
 provenance. The accepted owner therefore introduces
@@ -814,19 +868,19 @@ triangles, opposite involution, mate cancellation, and the trust negative.
 Minimizing the inferred opposite-functor LHS slots removes the superseded
 left/right projection overlaps and improves warnings from 990/157 to 978/157;
 the `comp_fapp0` family remains 400 and the strict audit remains unchanged.
-The first Phase 9 slice makes `IsDiscreteCat(C)` exactly the Product of
-`IsSetGrpd(Obj(C))` and fixed-map omega-equivalence evidence for
-`Core_incl_func(C)`. Its Product constructor/projections compute and no package
-eta or evidence erasure is selected. `core_incl_hom_func(C,x,y)` is the
-generic hom action and its object action is exactly `path_to_hom`. Applying
-the promoted D0b generator to the projected core evidence yields
-`discrete_core_homwise`; the selected left inverse defines `hom_to_path`.
-One recursive public cell, the left component, and a general composite through
-the selected left/right comparison supply the two coherent round trips. They
-remain non-runtime, and set truncation alone is an explicit negative. Thirteen
-positive/four negative diagnostics and a six-positive/two-negative reviewer
-example add no rule or unification equation, leave warnings at 978/157, and
-leave the strict audit at zero with 45 intentional slots across 27 clauses.
+The current Phase-P3 boundary supersedes the original Phase-9 D0-backed
+implementation of discreteness. `IsDiscreteCat(C)` is exactly the Product of
+`IsSetGrpd(Obj(C))` and native `IsGroupoidalCat_EQ1(C)`. Its Product
+constructor/projections compute and no package eta or evidence erasure is
+selected. `core_incl_hom_func(C,x,y)` remains the generic hom action and its
+object action is exactly `path_to_hom`. The one-way native hom-action module
+derives `discrete_core_homwise`, its selected inverse functor, and
+`hom_to_path` directly from `groupoidal_core_homwise_EQ1` and
+`groupoidal_arrow_to_path_EQ1`. Re-inclusion is first exposed as the native
+equality `path_to_hom_hom_to_path_path`; the earlier directed-cell API is
+retained by applying `path_to_hom` to that equality. The opposite round trip
+uses stored object sethood. Both remain non-runtime, and set truncation alone
+is an explicit negative. No rewrite or unification equation was added.
 The next Phase 9 slice keeps groupoidal truncation and directed dimension
 separate. `IsObjTruncCat(n,C)` is exactly `IsTruncGrpd(n,Obj(C))`; native
 `CatDim` starts at zero, `IsNCat(cat_zero,C)` computes to the active exact
@@ -834,16 +888,37 @@ separate. `IsObjTruncCat(n,C)` is exactly `IsTruncGrpd(n,Obj(C))`; native
 `NCat(n)` retains a carrier and its evidence, with computing constructor /
 projection boundaries and transparent `ZeroCat`/`OneCat` aliases but no
 package eta or proof erasure. `one_cat_hom_discrete` projects the successor
-evidence, and `one_cat_hom_core_homwise` is the required next-hom consumer of
-the promoted discrete theorem. Eighteen positive/five negative diagnostics
-and a seven-positive/three-negative reviewer example add four rule
-declarations (five equations) and no `unif_rule`; warnings remain 978/157 and
-the strict audit remains zero with 45 intentional slots across 27 clauses. The implication from directed
-dimension to object truncation and OneCat-scoped ordinary-iso univalence are
-not formation rules and remain separately dependent. The synchronized CI gate
-passes all 17 files in 78.267s with source TOC, active-reference/header,
-strict-LHS, and fresh-catalog checks.
-The bounded object-truncation prerequisite now adds
+evidence, and the one-way native extension owns
+`one_cat_hom_core_homwise` as the required equality-valued next-hom consumer.
+The original D0 OneCat ordinary-isomorphism decoder is now isolated in the
+frozen `emdash3_2_legacy_compat.lp` module; it is not imported by the kernel,
+native hom-action/evidence-property modules, main diagnostics, or WalkingEnd
+spine. P4 promoted the direct one-way native
+`iso_evidence_omega_along_EQ1`/`iso_evidence_omega_equiv_EQ1` construction. A
+focused native replacement of the two-sided OneCat theorem stops at the
+intentional stable-cast/facade-package-to-raw-path reification boundary even
+for reflexivity, so `one_cat_iso_type_equiv` is retained intact under the
+closed opt-in contract rather than weakened or backed by a new unifier. P4
+also retired the self-only one-layer/dimension-indexed D0 observations, the
+uninhabited D0 evidence-property capability and conditional theorem, and their
+three reviewer examples. P5 mechanically extracted every remaining
+decoder/D0b/D1 owner; P6 froze the seven-consumer boundary.
+
+The synchronized first P4 tranche preserves the kernel warning inventory at
+1,016/159 and the strict audit at zero/45/27. The regenerated catalog has
+2,034 classified checks across 74 areas with zero unclassified entries;
+health passes all 52 surviving source/example targets and the source TOC
+remains 87 headings across sections 0–20. Full CI passes those 52 targets with
+136.435s aggregate typechecking, all 16 Infinity-Codex tests, and every
+repository-integrity gate.
+
+The completed P3 validation had 2,079 classified checks across 77 areas,
+passes every reviewer example and all 55 health targets, leaves warnings at
+1,016/159 and the strict audit at zero/45/27, and passes full CI with 140.508s
+aggregate typechecking. Directed-dimension object truncation is now the
+unconditional native `ncat_obj_trunc_EQ1` theorem; the OneCat-scoped ordinary-
+iso decoder remains compatibility work rather than a formation dependency.
+The historical bounded object-truncation prerequisite added
 `cat_dim_trunc_level : CatDim -> TruncLevel`. It computes from `cat_zero` to
 `trunc_zero` and commutes with successor, so one- and two-dimensional codes
 normalize to `trunc_one` and its successor. Five positive/one negative active
@@ -855,7 +930,8 @@ intentional slots across 27 clauses. Categorical equivalence invariance and
 recursive equivalence-evidence truncation still block the implication theorem.
 The synchronized index-bridge CI gate passes all 19 files in 87.056s with
 every repository-integrity check.
-The first Phase 10 structural-action slice introduces explicit
+At its dated 2026-07-15 checkpoint, the first Phase 10 structural-action slice
+introduced explicit
 `ObsAction(f)` and `ObsDAction(s)` packages. Each stores a selected action and
 pointwise next-dimensional agreement with the existing semantic `eq_ap` or
 `eq_apd` owner, so specialized computation cannot silently assert an unrelated
@@ -873,6 +949,17 @@ arbitrary selected loop still gives no dependent-J beta; fibrancy remains a
 separate owner. The synchronized CI gate passes all 18 files in 86.300s with
 source TOC, active-reference/header, strict-LHS, fresh-catalog, example, and
 repository-integrity checks.
+This paragraph records the dated Phase 10 promotion. The 2026-07-19 P1
+cleanup subsequently retired the unused dependent package and routed
+`path_record_witness_action` directly through `eq_apd`. P2 then replaced the
+nondependent registry with `PathActionRefinement` over the exact capped
+`path_map_func` action, moved the successor refinement into the Nat extension,
+and migrated the downstream Sum surface without retaining old aliases. The
+two cleanup phases add no rule or `unif_rule`; warnings remain 1,016/159 and
+the LHS audit remains zero/45/27. The synchronized P2 catalog has 2,077 checks
+across 77 areas, all 55 health targets and reviewer examples pass, and full CI
+passes with 133.929s aggregate typechecking. The original Phase 10 names and
+counts above remain dated validation evidence, not the active API.
 The general binary-sum foundation extension adds a native two-parameter
 `SumData(A,B)` carrier, decoded `Sum_grpd(A,B)` classifier, both constructors,
 and dependent `sum_elim` through the generated induction principle. Both
@@ -1194,24 +1281,30 @@ Active equality/equivalence staging includes:
   elementary observational identity, broader no-confusion, higher action for
   other formers, canonicity, and categorical universal properties remain
   separate. The kernel retains the eliminator-owned canonical `sum_map`; its
-  componentwise `sum_obs_action`, equality comparisons, and four proof-time
-  bases are checked in `emdash3_2_sum_observational_action.lp` as library
-  surface, with no kernel or univalence consumer. `nat_succ_obs_action` is the
-  first recursive-inductive
-  registration: its selected action keeps the exposed predecessor path, while
-  a stable basis and generic J prove agreement with successor `eq_ap` without
-  runtime proof collapse or unification-transitivity. The transparent
+  componentwise `sum_path_action_refinement`, equality comparisons, and four
+  proof-time bases are checked in `emdash3_2_sum_observational_action.lp` as
+  library surface, with no kernel or univalence consumer.
+  `nat_succ_path_action_refinement` is the first recursive-inductive selected
+  refinement: its action keeps the exposed predecessor path, while a stable
+  basis and generic J prove agreement with the capped action of
+  `NatSucc_func` without runtime proof collapse or unification-transitivity.
+  The transparent
   `nat_succ_ind_eqr` facade separately routes successor-indexed motives through
   predecessor J and computes only at component reflexivity; outer reflexivity,
   the action basis, and generic J keep their existing runtime boundaries;
-- generic `ObsAction`/`ObsDAction` register selected computation for a raw
-  groupoid function or dependent section and prove agreement with
-  `eq_ap`/`eq_apd`. They are not the structured groupoidal-J transport owner:
-  `PathOut` consumes an already functorial `Catd` motive. Replacing the
-  registry would first require a consumer-driven constructor from raw
-  function-plus-path-action data to an iterable
-  `Path_cat(A) -> Path_cat(B)` functor. Nat and PathRecord remain real
-  consumers; the registry is retained library-facing computation, not a
+- `Path_cat_func`/`path_map_func` own the canonical iterable action of every
+  raw groupoid function: the capped action computes to `eq_ap`, while the
+  generic `fapp*` calculus retains every higher action.
+  `PathActionRefinement(f)` stores optional selected first-path computation
+  plus pointwise agreement with that exact capped action; it constructs no
+  second functor and supplies no competing runtime owner. Identity selection
+  computes, refinement composition computes pointwise, and canonical nested
+  versus composite action remains related propositionally by `eq_ap_comp`.
+  It is not the structured groupoidal-J transport owner: `PathOut` consumes an
+  already functorial `Catd` motive. The unused dependent registry has been
+  retired, and `path_record_witness_action` uses direct `eq_apd`; any genuine
+  higher dependent replacement is a displayed-functor/section problem. Nat,
+  PathRecord, and Sum refinements remain library-facing computation, not a
   second univalence or fibrancy foundation;
 - the named dependent `PathRecord_grpd(A)` representative, implemented by a
   parametrized one-constructor native carrier with direct source, target, and
@@ -1248,10 +1341,11 @@ Active equality/equivalence staging includes:
   reflexivity, decoder-owned encode/decode, propositional inverse laws and
   transport agreement, Product/Pi/Sigma consumers, and no direct public
   universe-equality rule or duplicated univalence body;
-- direct categorical-universe identity
-  `@=(Obj Cat_cat,A,B) -> CatPathView(A,B) = OmegaEquiv(Cat_cat,A,B)`, with
-  retained generic reflexivity provenance, decoder-owned round trips,
-  reflexive Product action, and an iterable D0b next-hom package;
+- direct rigid Cat/Grpd universe identity to the native
+  `OmegaEquiv_EQ1` facade, with retained generic-reflexivity provenance and
+  explicit packages for observer computation. The D0-backed `CatPathView`,
+  decoder round trips, Product action, and D0b next-hom package are frozen
+  legacy-module interfaces rather than kernel normal forms;
 - path views for encoded Sigma and Pi types;
 - arbitrary propositional Sigma path encode/decode round trips and transparent
   named PathRecord round trips, with constructor-reflexive computation and no
@@ -1277,42 +1371,39 @@ Active equality/equivalence staging includes:
   a Pi-universe action consumer; arbitrary legacy `ua_grpd` agreement and
   direct universe identity remain absent;
 - `IsoEvidence` for ordinary categorical isomorphism data;
-- the general `CatIsoUnivalence` capability type with no global inhabitant,
-  plus
-  the derived ordinary-iso-to-omega lift, generic selected-inverse directed
-  comparison, transported inverse law, nested-Sigma reconstruction, both
-  OneCat-scoped decoder round trips, the derived scoped capability, and its
-  path/isomorphism `TypeEquiv`;
-- independent Candidate-D0 fixed-arrow `OmegaEquivAlong_D0(f)` evidence and
-  its transparent recursive `OmegaEquiv_D0` staging package, plus the
-  endpoint-correct variable-evidence Cat hom-action generator and the finite
-  one-layer observation/path view with a one-way evidence-path encoder;
-- public `OmegaEquivAlong(f)` and Sigma-packaged `OmegaEquiv`, with exact
-  evidence-routed observations and reflexive/opposite/Product closure;
-- `CatUnivalence` and decoder-based omega-categorical univalence capabilities,
-  both named round trips, the named path/equivalence `TypeEquiv`, the
-  propositional `path_to_hom` square, one integrated next-hom witness, and the
-  induced ordinary `TypeEquiv` of object classifiers for fixed-map evidence.
-- exact `IsDiscreteCat` Product data, D0b-derived core homwise evidence,
-  `hom_to_path`, both coherent round trips, and a recursive cell consumer.
+- the general `CatIsoUnivalence` capability type with no global kernel
+  inhabitant, ordinary `idtoiso_cat`, and the direct native ordinary-iso lift
+  `iso_evidence_omega_along_EQ1`/`iso_evidence_omega_equiv_EQ1`;
+- native fixed-map categorical object-path/object-`TypeEquiv` construction and
+  object-truncation invariance through
+  `omega_equiv_along_obj_path_EQ1` and
+  `is_obj_trunc_cat_equiv_type_equiv_EQ1`. Explicit native reflexivity retains
+  its stable facade/package provenance rather than collapsing to a raw path;
+- one frozen non-authoritative `emdash3_2_legacy_compat.lp` module containing
+  all Candidate-D0/D0b/D1, unsuffixed omega-equivalence, categorical decoder,
+  Product/opposite/next-hom compatibility, and two-sided OneCat material. It
+  has a seven-example consumer ceiling and is not in the active dependency
+  closure. Its OneCat `TypeEquiv` is the sole retention reason pending native
+  package/raw-path coherence or deliberate compatibility deletion;
+- exact `IsDiscreteCat` Product data with native groupoidality, plus native-
+  extension-owned core homwise evidence, `hom_to_path`, both coherent round
+  trips, and a recursive cell consumer.
 - independent object truncation, native directed-dimension codes, recursive
   `IsNCat`, evidence-retaining `NCat`/`ZeroCat`/`OneCat` packages, and a
-  `OneCat` next-hom core-adequacy consumer; the conditional object-truncation
-  D0 compatibility induction remains active with an explicit,
-  still-uninhabited global fixed-arrow evidence-property capability. The
-  downstream native-EQ1 module independently proves unrestricted fixed-arrow
+  `OneCat` next-hom core-adequacy consumer. The obsolete conditional D0
+  evidence-property/object-truncation experiment is retired. The downstream
+  native-EQ1 module proves unrestricted fixed-arrow
   evidence property, arbitrary truncation under retractions, and unconditional
   finite-`NCat` object truncation with computing base/successor equations. The
-  ordinary-iso lift and first scoped
-  decoder round trip, left/right inverse comparison, transported right law,
-  nested-Sigma evidence reconstruction, reverse round trip, scoped
-  `CatIsoUnivalence`, and named `TypeEquiv` are active. The arbitrary-category
-  capability inhabitants/classifier are retired; the legacy
-  `iso_evidence_path` Product computation remains separately compatibility-
-  owned.
-- registered nondependent/dependent observational path actions with semantic
-  agreement, computing identity/composition, shaped PathRecord action, and
-  dependent witness-field transport; no additional arbitrary-constructor J.
+  one-way native ordinary-iso lift is active. The scoped decoder round trips,
+  selected-inverse comparison, transported law, reconstruction, scoped
+  capability, named OneCat `TypeEquiv`, and legacy `iso_evidence_path` Product
+  computation are frozen together in the opt-in compatibility module; the
+  arbitrary-category capability inhabitants/classifier are retired.
+- optional nondependent `PathActionRefinement` data over canonical
+  `path_map_func`, with computing identity/composition and shaped PathRecord
+  action; dependent witness-field transport uses direct `eq_apd`, and the
+  unused dependent registry is retired; no additional arbitrary-constructor J.
 
 These are explicit kernel interfaces and checked computation skeletons. They
 do not claim that every future univalence/coherence theorem is already
@@ -2071,12 +2162,17 @@ The following remain explicit future work rather than hidden assumptions:
 - specialized higher `fapp1*` projections of `Hom_tele_func` beyond current
   demand;
 - raw unreified-path observer computation, reverse pointwise-to-coherent-core
-  assembly, consumer-led core-universe inclusion functors, and full legacy
-  decoder API retirement beyond the selected native direct-univalence MVP;
+  assembly, consumer-led core-universe inclusion functors, and eventual
+  deletion of the frozen legacy decoder module. The exact deletion
+  prerequisite for its retained two-sided OneCat theorem is native facade-
+  package/raw-path reification coherence, unless backward compatibility is
+  deliberately dropped first;
 - generic abstraction of the completed walking-endomorphism presentation,
-  full functor-category initiality, a reusable raw-function `PathMap`,
-  groupoid completion toward `BInt`/Circle, and general higher-inductive
-  categories or pushouts;
+  full functor-category initiality, a displayed dependent path-action/section
+  construction, groupoid completion toward `BInt`/Circle, and general
+  higher-inductive categories or pushouts; the ordinary raw-function
+  `path_map_func` is active, while its optional selected-computation
+  refinement is owned by the cleanup plan in `INDEX.md`;
 - a finalized parser/surface language;
 - module splitting of the single kernel file after comment/section boundaries
   stabilize.

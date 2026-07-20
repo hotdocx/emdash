@@ -48,10 +48,8 @@ assert [A B : Grpd] ⊢
   @= (Obj Grpd_cat) A B
   ≡ @OmegaEquiv_EQ1 Grpd_cat A B;
 
-assertnot [A B : Cat] ⊢
-  @= (Obj Cat_cat) A B
-  ≡ @CatPathView A B;
-
+// The retained theorem-level groupoid TypeEquiv view remains separate from
+// the rigid native universe equality normal form.
 assertnot [A B : Grpd] ⊢
   @= (Obj Grpd_cat) A B
   ≡ @GrpdPathView A B;

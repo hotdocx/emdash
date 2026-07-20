@@ -17,6 +17,9 @@ the selected walking-endomorphism directed-HIT/`BNat` extension is
 the library-level Sum observational-action extension is
 `emdash3_2_sum_observational_action.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
+The frozen opt-in D0/D1 and decoder compatibility surface is isolated in
+`emdash3_2_legacy_compat.lp`; it is not an active authority or part of the
+normal dependency closure.
 
 ## Authorities
 
@@ -42,6 +45,14 @@ Use the following order:
 10. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
 11. `reports/INDEX.md` for task-specific plans and decision records.
+
+`emdash3_2_legacy_compat.lp` is deliberately outside this authority order. It
+imports the active kernel one-way, is consumed only by explicitly legacy
+reviewer examples, and is frozen against new consumers or features. Its
+temporary retention preserves the complete two-sided OneCat
+`one_cat_iso_type_equiv` contract until a separately reviewed native
+facade-package/raw-path coherence migration is available or backward
+compatibility is deliberately dropped.
 
 The obsolete v2/v3.1 material under ignored `.scratchpad/` directories is not
 part of normal development. Do not read, summarize, or reference it unless the

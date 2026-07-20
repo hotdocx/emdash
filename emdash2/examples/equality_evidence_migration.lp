@@ -1,15 +1,17 @@
 /*
-  Reviewer milestone: migration between D0 and equality-valued evidence.
+  Reviewer milestone: frozen migration between D0 and equality-valued
+  evidence. This is one of seven permitted compatibility consumers.
 
   Old recursive D0 certificates can be observed as finite equality-law data.
-  In the reverse direction, a temporary compatibility constructor targets the
+  In the reverse direction, the frozen compatibility constructor targets the
   otherwise opaque D0 representation, but all of its public D0 observations
   are specified. Recursive cells are built from `object_path_equiv_EQ1`, not
   from the legacy `idtoequiv_cat` encoder. This constructor exists only to
-  migrate old consumers; the new equality-valued foundation does not need D0.
+  preserve old consumers; the new equality-valued foundation does not need D0.
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_legacy_compat;
 
 assert [C : Cat] [x y : τ (Obj C)] [f : τ (Hom C x y)]
   (u : τ (@OmegaEquivAlong_D0 C x y f)) ⊢

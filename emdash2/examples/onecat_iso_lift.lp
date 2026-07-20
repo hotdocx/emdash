@@ -1,5 +1,6 @@
 /*
-  One-category ordinary-isomorphism lift.
+  Frozen one-category ordinary-isomorphism compatibility lift. This is one of
+  seven permitted compatibility consumers.
 
   Strict ordinary inverse equations encode as recursive omega-equivalence
   cells. A packaged OneCat can therefore decode ordinary isomorphism evidence
@@ -13,9 +14,17 @@
   reconstruction and the reverse round trip. Both round trips now derive the
   OneCat-scoped CatIsoUnivalence capability and its named path/isomorphism
   TypeEquiv without using the frozen arbitrary-category decoder.
+
+  This is now an explicit compatibility reviewer. Ordinary evidence also has
+  a direct one-way native EQ1 lift, but the stable native cast does not provide
+  the package/raw-path coherence needed for these two specified inverse laws.
+  The theorem is therefore retained intact in the extracted module pending
+  native facade-package/raw-path coherence or deliberate compatibility
+  deletion.
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_legacy_compat;
 
 assert [C : Cat]
   [x y : τ (Obj C)]

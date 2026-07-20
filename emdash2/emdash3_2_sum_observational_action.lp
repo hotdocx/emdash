@@ -1,10 +1,11 @@
 /*
-  Library-level observational action for general binary sums.
+  Library-level path-action refinement for general binary sums.
 
-  The active kernel owns decoded sums, sum_map, and the generic ObsAction
-  interface. This one-way module retains the former-specific proof-time bases,
-  componentwise eq_ap comparison, and registered Sum action for library and
-  regression use. No kernel or foundational univalence consumer imports it.
+  The active kernel owns decoded sums, sum_map, and the generic
+  PathActionRefinement interface. This one-way module retains the
+  former-specific proof-time bases, componentwise eq_ap comparison, and
+  selected Sum refinement for library and regression use. No kernel or
+  foundational univalence consumer imports it.
 */
 
 require open emdash.emdash3_2;
@@ -233,22 +234,23 @@ symbol sum_map_inr_eq_ap
     b0
     p;
 /*
-  Registered componentwise action of a binary-sum map.
+  Componentwise selected refinement of a binary-sum map.
 
-  Equal tags delegate to the registered action on the corresponding summand.
-  Mixed tags return or eliminate the already-impossible Empty witness.
-  Agreement with generic eq_ap is propositional and uses the Sum-owned
-  component comparison above; the selected action remains a distinct runtime
-  presentation at open endpoints.
+  Equal tags delegate to the selected action on the corresponding summand.
+  Mixed tags return or eliminate the already-impossible Empty witness. The
+  refinement targets the capped canonical path-map action; its proof uses the
+  Sum-owned eq_ap comparisons above because that canonical action reduces to
+  eq_ap. The selection remains a distinct runtime presentation at open
+  endpoints.
 */
 // Componentwise selected action map for `sum_map(f,g)`.
-symbol sum_obs_action_map
+symbol sum_path_action_map
   [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
-  : τ (@ObsActionMap
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
+  : τ (@PathActionRefinementMap
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g))
@@ -275,7 +277,7 @@ symbol sum_obs_action_map
                     (@sum_map A B A' B' f g y0)))
             (λ a1 : τ A,
               λ p0 : τ (@= A a0 a1),
-                @obs_action_apply A A' f u a0 a1 p0)
+                @path_action_refinement_apply A A' f u a0 a1 p0)
             (λ b1 : τ B,
               λ p0 : τ Empty_grpd, p0))
         (λ b0 : τ B,
@@ -291,18 +293,18 @@ symbol sum_obs_action_map
               λ p0 : τ Empty_grpd, p0)
             (λ b1 : τ B,
               λ p0 : τ (@= B b0 b1),
-                @obs_action_apply B B' g v b0 b1 p0))
+                @path_action_refinement_apply B B' g v b0 b1 p0))
         x
         y
         p;
 
-// Pointwise classifier for selected-versus-semantic Sum action agreement.
-symbol SumObsActionCoherenceAt
+// Pointwise classifier for selected-versus-canonical Sum action agreement.
+symbol SumPathActionRefinementCoherenceAt
   [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
   (x y : τ (Sum_grpd A B))
   (p : τ (@= (Sum_grpd A B) x y))
   : Grpd
@@ -310,25 +312,28 @@ symbol SumObsActionCoherenceAt
     (@= (Sum_grpd A' B')
       (@sum_map A B A' B' f g x)
       (@sum_map A B A' B' f g y))
-    (@sum_obs_action_map A B A' B' f g u v x y p)
-    (@eq_ap
-      (Sum_grpd A B)
-      (Sum_grpd A' B')
-      (@sum_map A B A' B' f g)
+    (@sum_path_action_map A B A' B' f g u v x y p)
+    (@fapp1_fapp0
+      (Path_cat (Sum_grpd A B))
+      (Path_cat (Sum_grpd A' B'))
+      (@path_map_func
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g))
       x y p);
 
-// Componentwise selected action agrees propositionally with generic eq_ap.
-symbol sum_obs_action_coherence
+// Componentwise selection agrees with canonical path-map action.
+symbol sum_path_action_coherence
   [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
-  : τ (@ObsActionCoherence
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
+  : τ (@PathActionRefinementCoherence
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g)
-      (@sum_obs_action_map A B A' B' f g u v))
+      (@sum_path_action_map A B A' B' f g u v))
 ≔ λ x : τ (Sum_grpd A B),
     λ y : τ (Sum_grpd A B),
     λ p : τ (@= (Sum_grpd A B) x y),
@@ -338,7 +343,7 @@ symbol sum_obs_action_coherence
             (λ y0 : τ (Sum_grpd A B),
               @Pi_grpd (@= (Sum_grpd A B) x0 y0)
                 (λ p0 : τ (@= (Sum_grpd A B) x0 y0),
-                  @SumObsActionCoherenceAt
+                  @SumPathActionRefinementCoherenceAt
                     A B A' B' f g u v x0 y0 p0)))
         (λ a0 : τ A,
           @sum_elim A B
@@ -346,13 +351,13 @@ symbol sum_obs_action_coherence
               @Pi_grpd
                 (@= (Sum_grpd A B) (@sum_inl A B a0) y0)
                 (λ p0 : τ (@= (Sum_grpd A B) (@sum_inl A B a0) y0),
-                  @SumObsActionCoherenceAt
+                  @SumPathActionRefinementCoherenceAt
                     A B A' B' f g u v (@sum_inl A B a0) y0 p0))
             (λ a1 : τ A,
               λ p0 : τ (@= A a0 a1),
                 @eq_trans
                   (@= A' (f a0) (f a1))
-                  (@obs_action_apply A A' f u a0 a1 p0)
+                  (@path_action_refinement_apply A A' f u a0 a1 p0)
                   (@eq_ap A A' f a0 a1 p0)
                   (@eq_ap
                     (Sum_grpd A B)
@@ -361,13 +366,13 @@ symbol sum_obs_action_coherence
                     (@sum_inl A B a0)
                     (@sum_inl A B a1)
                     p0)
-                  (@obs_action_agrees A A' f u a0 a1 p0)
+                  (@path_action_refinement_agrees A A' f u a0 a1 p0)
                   (@sum_map_inl_eq_ap A B A' B' f g a0 a1 p0))
             (λ b1 : τ B,
               λ p0 : τ Empty_grpd,
                 @empty_elim
                   (λ q : τ Empty_grpd,
-                    @SumObsActionCoherenceAt
+                    @SumPathActionRefinementCoherenceAt
                       A B A' B' f g u v
                       (@sum_inl A B a0)
                       (@sum_inr A B b1)
@@ -379,13 +384,13 @@ symbol sum_obs_action_coherence
               @Pi_grpd
                 (@= (Sum_grpd A B) (@sum_inr A B b0) y0)
                 (λ p0 : τ (@= (Sum_grpd A B) (@sum_inr A B b0) y0),
-                  @SumObsActionCoherenceAt
+                  @SumPathActionRefinementCoherenceAt
                     A B A' B' f g u v (@sum_inr A B b0) y0 p0))
             (λ a1 : τ A,
               λ p0 : τ Empty_grpd,
                 @empty_elim
                   (λ q : τ Empty_grpd,
-                    @SumObsActionCoherenceAt
+                    @SumPathActionRefinementCoherenceAt
                       A B A' B' f g u v
                       (@sum_inr A B b0)
                       (@sum_inl A B a1)
@@ -395,7 +400,7 @@ symbol sum_obs_action_coherence
               λ p0 : τ (@= B b0 b1),
                 @eq_trans
                   (@= B' (g b0) (g b1))
-                  (@obs_action_apply B B' g v b0 b1 p0)
+                  (@path_action_refinement_apply B B' g v b0 b1 p0)
                   (@eq_ap B B' g b0 b1 p0)
                   (@eq_ap
                     (Sum_grpd A B)
@@ -404,27 +409,26 @@ symbol sum_obs_action_coherence
                     (@sum_inr A B b0)
                     (@sum_inr A B b1)
                     p0)
-                  (@obs_action_agrees B B' g v b0 b1 p0)
+                  (@path_action_refinement_agrees B B' g v b0 b1 p0)
                   (@sum_map_inr_eq_ap A B A' B' f g b0 b1 p0)))
         x
         y
         p;
 
-// Registered componentwise action for the canonical binary-sum map.
-symbol sum_obs_action
+// Optional componentwise refinement for the canonical binary-sum map.
+symbol sum_path_action_refinement
   [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
-  : τ (@ObsAction
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
+  : τ (@PathActionRefinement
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g))
-≔ @obs_action_intro
+≔ @path_action_refinement_intro
     (Sum_grpd A B)
     (Sum_grpd A' B')
     (@sum_map A B A' B' f g)
-    (@sum_obs_action_map A B A' B' f g u v)
-    (@sum_obs_action_coherence A B A' B' f g u v);
-
+    (@sum_path_action_map A B A' B' f g u v)
+    (@sum_path_action_coherence A B A' B' f g u v);

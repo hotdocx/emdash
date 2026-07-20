@@ -1,5 +1,6 @@
 /*
-  Reviewer milestone: D1 public fixed-map omega-equivalence and decoder.
+  Reviewer milestone: frozen D1 fixed-map omega-equivalence and decoder. This
+  is one of seven permitted compatibility consumers.
 
   A public omega-equivalence is a selected arrow paired with fixed-arrow
   evidence. Opposite and Product closure are evidence-owned, the canonical
@@ -9,6 +10,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_legacy_compat;
 
 assert [C : Cat]
   [x y : τ (Obj C)] ⊢

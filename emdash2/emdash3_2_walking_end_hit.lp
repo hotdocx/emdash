@@ -16,6 +16,7 @@
 */
 
 require open emdash.emdash3_2_nat_arithmetic;
+require open emdash.emdash3_2_eq1_hom_action;
 
 // Opaque HIT formation and introductions.
 constant symbol WalkingEnd_cat : Cat;
@@ -563,12 +564,7 @@ symbol nat_path_discrete
 ≔ @discrete_cat_intro
     (Path_cat Nat_grpd)
     nat_is_set
-    (@omega_equiv_along_EQ1_to_D0
-      Cat_cat
-      (Core_cat (Path_cat Nat_grpd))
-      (Path_cat Nat_grpd)
-      (Core_incl_func (Path_cat Nat_grpd))
-      (@path_cat_is_groupoidal_EQ1 Nat_grpd));
+    (@path_cat_is_groupoidal_EQ1 Nat_grpd);
 
 // The separate free-monoid model satisfies the same dimension contract.
 symbol bnat_is_one_cat

@@ -1,14 +1,14 @@
 # EMDASH v3.2 Equality-Valued Omega-Equivalence And Groupoidal-J Re-Redesign Proposal
 
 Date: 2026-07-17
-Last reviewed: 2026-07-18
+Last reviewed: 2026-07-19
 Plan-ID: EMDASH-V3-2-EQUALITY-VALUED-OMEGA-EQUIVALENCE-REREDESIGN-2026-07-17
 Depends-On: REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_sum_observational_action.lp; emdash3_2_checks.lp
 Supersedes: the equality, omega-equivalence, direct-univalence, internal-groupoidality, and structured-PathOut/J tracks of REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; no unaffected H0, truncation, dimension, directed, or former-action work
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-independent-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e16-d397-7a60-9765-1f35e36e20f7; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e5a-9a89-7d01-a92f-f4d15f14c77e; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e9e-4c44-7e61-9320-bfc602b50d64
-Status: **completed 2026-07-17 at the selected operational MVP boundary**; Phases 1 through 9, 11, and 12 are complete at their stated selected boundaries, while Phase 10 is deliberately deferred until a concrete core-universe motive consumer exists; the native EQ1 foundation, groupoidality/structured-`J` chain, unrestricted evidence-property theorem, and unconditional finite-`NCat` object-truncation theorem are decoder-free, while legacy D0/Cat/Grpd decoder APIs remain explicit compatibility/library surface rather than a second active foundation
+Status: **completed 2026-07-17 at the selected operational MVP boundary**; Phases 1 through 9, 11, and 12 are complete at their stated selected boundaries, while Phase 10 is deliberately deferred until a concrete core-universe motive consumer exists; the native EQ1 foundation, groupoidality/structured-`J` chain, unrestricted evidence-property theorem, and unconditional finite-`NCat` object-truncation theorem are decoder-free. The 2026-07-19 path-action/compatibility plan now owns legacy retirement: P4 removed self-only D0 experiments and promoted native ordinary-iso/object-truncation bridges; P5 mechanically extracted every remaining D0/D1/unsuffixed decoder owner into frozen `emdash3_2_legacy_compat.lp`; P6 permits only seven explicit legacy examples and retains the complete two-sided OneCat theorem because native stable casts do not provide facade-package/raw-path reification coherence; P7 retains the canonical `_EQ1` suffix after finding 11 hard unsuffixed collisions, rather than creating a partial rename or reverse aliases
 Review baseline: `772411011ac721c84d143a2967f4e5c31e94bc70`
 Implementation starting baseline: `4315137094d2faf4fcc6f4b026960a62bd5406e7`
 Primary predecessor: `REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`
@@ -1734,14 +1734,14 @@ sanity check on user unification rules. Every candidate therefore needs:
 | incomplete `Grpd_cat` hom/identity/composition surface | add function-path hom runtime owner and stable pointwise identity/composition proof-time views before direct Grpd migration |
 | groupoid `idtoequiv`/decoder capabilities | migrate like categorical decoders after direct Grpd comparison |
 | `TypeEquiv`/`IsEquivMap` | retain as library concepts; promote derived bidirectional comparison; remove from primary universe normal form |
-| `OmegaEquivAlongObservation_D0` and dimension views | retain as migration/debug evidence until new extensionality/property theorem; then reassess |
+| `OmegaEquivAlongObservation_D0` and dimension views | retired by the 2026-07-19 P4 consumer audit after unrestricted native evidence property and finite-`NCat` truncation were promoted; dated probe evidence remains historical |
 | `IsDiscreteCat` | conceptually factor as object-set evidence plus `IsGroupoidalCat`; preserve active compatibility |
 | `Core_cat`/`Core_incl_func` | retain; add canonical `Path_cat` identity comparison |
 | `path_to_hom` | retain as the forward arrow of the defined general object-path adapter; do not expect the identity type view alone to expose it |
 | `path_ind_sec`/`PathInd_*` | retain as primary structured directed/groupoidal induction owner |
 | general fibrancy/structured-J prerequisite track | narrow to construction of structured motives and concrete shaped projection joins |
-| `ObsAction`/`ObsDAction` | preserve existing evidence; demote from direct-univalence MVP pending consumer inventory |
-| Sum/Nat action bases | preserve until migration; no further foundational expansion before redesign decision |
+| `ObsAction`/`ObsDAction` | historical MVP boundary: the 2026-07-19 cleanup retired the unused dependent package and replaced nondependent selection with `PathActionRefinement` over canonical `path_map_func`; old names remain only in dated evidence |
+| Sum/Nat action bases | retained as proof-time/library support for the migrated Sum and Nat refinements; no further foundational expansion before a new consumer |
 | truncation universes, `CatDim`, `IsNCat`, `NCat` | retain; add core inclusion functors as concrete consumers require |
 
 ## Dependency Structure
@@ -2305,6 +2305,15 @@ compatibility/library APIs with shaped computation and round-trip consumers.
 Removing those APIs wholesale would be an unrelated compatibility migration,
 not closure of a foundational prerequisite.
 
+Current migration note (2026-07-19): the adopted compatibility-retirement
+plan has now made the second `IsDiscreteCat` factor native
+`IsGroupoidalCat_EQ1`, moved canonical `discrete_core_homwise`,
+`hom_to_path`, both round trips, and the OneCat next-hom iterator into the
+one-way native hom-action module, and migrated WalkingEnd/BNat. The only
+remaining discrete-adjacent D0 use is an explicitly named compatibility island
+supporting the old OneCat ordinary-isomorphism decoder, which is classified
+for the next consumer-led phase.
+
 Exit criterion met at the selected MVP boundary: direct equality/equivalence
 is the primary native interface and no native foundational theorem requires an
 arbitrary decoder capability. Role-by-role retirement of still-used legacy
@@ -2601,6 +2610,14 @@ dependent-PathRecord registrations remain real retained consumers. Therefore
 generic `ObsAction`/`ObsDAction` and those registrations stay in the kernel at
 this compatibility boundary; they are not a second univalence, transport, or
 fibrancy foundation.
+
+This is the dated extraction boundary. Subsequent G2 work promoted canonical
+iterable `Path_cat_func`/`path_map_func`; P1 of the adopted 2026-07-19 cleanup
+plan retired `ObsDAction` and made `path_record_witness_action` a direct
+`eq_apd` definition; and P2 replaced the nondependent registry with
+`PathActionRefinement`. The Sum and Nat selections now refine the exact capped
+canonical action in their existing one-way modules. The old names above are
+retained only to identify the dated extraction evidence.
 
 Focused probes pass for the reduced kernel, extracted module, full checks, and
 reviewer example in `emdash3_2-20260717-185130.log`,
@@ -2940,7 +2957,7 @@ the following mathematical and migration questions explicitly scoped:
 | `Core_incl_func(Path_cat A)` orientation | proof-time comparison selected; runtime fold unnecessary for the MVP |
 | `PathOut` sufficiency | selected MVP boundary closed: literal `Path_cat` comparison, nonliteral groupoidal consumers, and equivalence-valued displayed transport are executable; arbitrary unstructured motives remain outside the claim |
 | Decoder APIs worth retaining | resolved for the MVP: native theorem modules are decoder-free; `TypeEquiv`, shaped computation, and theorem-level round trips remain explicit compatibility/library APIs until consumer-led retirement |
-| Remaining `ObsAction` scope | resolved only for this MVP: generic registries retain real Nat/PathRecord consumers, Sum registration is downstream, and structured Cat-valued transport uses ordinary functor action; a future `Path_cat`-functor constructor may recast the registry as its first hom-action view |
+| Remaining selected-action scope | resolved by cleanup P2: `Path_cat_func`/`path_map_func` own the full iterable action; `PathActionRefinement` stores only optional first-path computation and exact capped-action agreement; Nat, PathRecord, and downstream Sum consumers are migrated, and no old registry alias remains |
 | Semantic sanity vehicle | finite `NCat`/dimension-indexed approximants are the preferred local explanation; external systems remain inspiration, not implementation templates |
 
 Additional external mathematical review is most valuable for two points: the
@@ -2975,13 +2992,13 @@ recorded in the July 13 ledger and should not be duplicated here.
 | `EVOGJ-PRIMITIVE-CAST-FALLBACK` | deferred fallback, not selected | provide a cast if the uniform stable view fails a future representation | failed unrestricted alias and completed general stable view | no primitive nonreducing cast term is needed; any future symbol must be narrowly typed, explicitly trusted, initially nonreducing, and justified by a real consumer |
 | `EVOGJ-DECODER-MIGRATE` | **completed at the selected foundational boundary 2026-07-17** | remove native foundational decoder dependency without deleting useful compatibility APIs | direct universe owners plus uniform cast view | standalone `cat_univalence` is removed and three real consumers use `object_path_equiv_D0`; exact-token inventory retains genuine legacy decoder consumers, but both native extension modules and all three native public reviewer examples contain zero Cat/Grpd decoder, D0/D0b, or D0/EQ1 migration references. Further role-by-role deletion is optional compatibility work |
 | `EVOGJ-EVIDENCE-PROP` | **completed; promoted 2026-07-17** | prove fixed-map evidence property | equality-law evidence plus transparent quasi-inverse theorem | composition-map equivalences contract both inverse-law fibres and native record eta contracts the evidence; unrestricted native-EQ1 property theorem, path/local-set sanity proofs, diagnostics, and reviewer example pass without new conversion authority |
-| `EVOGJ-NCAT-TRUNC` | **completed; promoted 2026-07-17** | discharge conditional object truncation | native evidence property and retract closure | transparent arbitrary-level retract closure and `CatDim` recursion prove unconditional `ncat_obj_trunc_EQ1`; base/successor equations pass; legacy D0 conditional theorem is compatibility-only |
+| `EVOGJ-NCAT-TRUNC` | **completed; promoted 2026-07-17; legacy conditional retired 2026-07-19** | discharge conditional object truncation | native evidence property and retract closure | transparent arbitrary-level retract closure and `CatDim` recursion prove unconditional `ncat_obj_trunc_EQ1`; base/successor equations pass; the uninhabited D0 capability and conditional theorem were later deleted as self-only compatibility experiments, while `prop_is_trunc_cat_dim` remains a native proof helper |
 | `EVOGJ-GROUPOIDAL-CAT` | **completed at selected forward MVP boundary; promoted 2026-07-17** | general internal groupoidality | path-category introduction | transparent native next-hom owner promoted in the one-way derived extension; protected proof helpers preserve public projection computation; groupoidality and displayed transport were relocated and migrated off D0b without public-name changes; coherent groupoidality computes to `AllArrowsEquiv_EQ1`; the converse remains an explicitly separate coherent omega-functor assembly/extensionality gate |
 | `EVOGJ-BIINV-ADJOINTIFY` | **completed; promoted 2026-07-17** | derive coherent triangle laws from separate equality-valued left/right inverse data | native EQ1 evidence, functor/transfor naturality, path algebra | generic adjusted counit and triangle are transparent derived theorems; arbitrary formation and reflexive computation pass permanent diagnostics, with no rule, unifier, primitive, or opaque capability; they close the two endpoint equations in the complete native-next-hom probe |
 | `EVOGJ-GROUP-J` | **completed at selected MVP boundary; promoted 2026-07-17** | structured groupoidal `J` comparison | groupoidal category and PathOut | existing `path_ind_sec`, displayed functor action, and primitive `ind_eqr` are propositionally compared at a literal `Path_cat` source through two warning-neutral proof-time joins; primitive J computes at reflexivity and directed presentations retain runtime negatives; generic functor preservation plus explicit groupoidal-arrow evidence proves displayed transport equivalence-valued without a decoder or transport axiom |
 | `EVOGJ-UNIVERSE-CORE-INCL` | **deferred; not selected for this MVP** | actual package-core functor into `Cat_cat` | a concrete structured motive that needs a groupoid/truncated universe codomain | source/consumer audit found no current use; do not invent a new higher action owner before its first consumer fixes the required computation |
 | `EVOGJ-SUM-SIMPLIFY` | **completed at selected boundary 2026-07-17** | demote action-specific bases while retaining useful library action | consumer inventory | all Sum-specific bases/comparisons/action symbols mechanically extracted to `emdash3_2_sum_observational_action.lp`; only checks/example import it; focused probes pass |
-| `EVOGJ-OBSACTION-SCOPE` | **completed at selected MVP boundary; later functor-view refactor open** | decide remaining role of action registry | groupoidal J and former consumers | generic `ObsAction`/`ObsDAction` retain real Nat/PathRecord raw-function consumers; structured Cat-valued transport uses native functor action and does not manufacture that structure. Sum is downstream. A future constructor `Path_cat(A) -> Path_cat(B)` may make the registry a first-hom-action view, but is not an MVP prerequisite |
+| `EVOGJ-OBSACTION-SCOPE` | **completed at selected MVP boundary; functor-view refactor transferred 2026-07-19** | decide remaining role of action registry | groupoidal J and former consumers | the selected registry boundary was valid for this MVP, and Sum remains downstream. Subsequent G2 promoted canonical iterable `Path_cat_func`/`path_map_func`; P1 of the active path-action cleanup plan has retired the unused dependent registry in favor of direct `eq_apd`, and P2 owns recasting nondependent selection as a refinement of the capped canonical action |
 | `EVOGJ-CONSOLIDATE` | **completed 2026-07-17** | synchronize the selected MVP and close the living overlay | all selected phases | integrated public example and all 51 measured files pass; catalog is 1,917/70 with zero unclassified, warnings 971/157, audit zero/45/27, generated health current, and synchronized CI passes in 100.845s |
 | `EVOGJ-H2-READINESS` | **corrected implementation complete through child G8; promoted 2026-07-19** | reassess representative HIT/truncation reflector | consolidated MVP | the child now has opaque `WalkingEnd`, `base`, and `loop`, no `Obj`/`Hom` exposure, and judgmental point/loop beta through the contextual `Functord` eliminator and its ordinary recursor projections. Transparent Code, powers, directed representable decoding, both Hom--Nat inverses, structured/carrier packages, sethood, and directed negative consequences are active without a word carrier or primitive `cell_ind`. Open loop-prefix compatibility is an ordinary equality from generic functoriality, with no custom rewrite or `unif_rule`. Reports, generated health/catalog, warning inventory, audits, and full 55-file CI are synchronized. A reverse BNat functor, full hom-category equivalence, and full functor-category initiality remain outside the selected practical milestone pending reusable generic infrastructure. |
 | `EVOGJ-POST-CONSOLIDATE` | **historical task completed 2026-07-18; walking conclusion superseded by reopened H2 review** | reconcile the completed overlay and then-selected child-plan authority/dependency boundaries | completed overlay and former walking MVP | reusable Nat prerequisites were extracted and the then-current diagnostics/reports passed their recorded gates; that validation remains implementation provenance, while its claim that the word-carrier walking MVP satisfied the intended HIT is superseded by `EVOGJ-H2-READINESS` and the reopened child plan |
@@ -3045,8 +3062,12 @@ than instruct an agent to continue this plan indiscriminately. Candidate
 objectives are a public standard-library consumer, a consumer-led
 core-universe inclusion, legacy compatibility retirement, reverse coherent-
 core assembly, or one explicit walking-HIT strengthening such as generic
-abstraction, full initiality, dependent Join elimination, reusable `PathMap`,
-or groupoid completion toward `BInt`/Circle.
+abstraction, full initiality, dependent Join elimination, or groupoid
+completion toward `BInt`/Circle. The canonical reusable
+`Path_cat_func`/`path_map_func` action was subsequently promoted; the active
+path-action and compatibility-retirement plan in `INDEX.md` now owns its
+selected-computation refinement and the legacy compatibility migration, and
+records the completed P1 `ObsDAction` retirement.
 
 Any such handoff must still read this report with the July 13 retained-work
 ledger and active authorities, preserve current worktree state, reproduce

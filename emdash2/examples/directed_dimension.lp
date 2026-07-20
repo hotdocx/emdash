@@ -7,7 +7,7 @@
   level further, without adding ordinary-iso univalence or runtime eta.
 */
 
-require open emdash.emdash3_2;
+require open emdash.emdash3_2_eq1_hom_action;
 
 assert (n : TruncLevel) [C : Cat] ⊢
   IsObjTruncCat n C
@@ -63,7 +63,7 @@ assert (X : τ OneCat)
   (x y : τ (Obj (@ncat_carrier (cat_succ cat_zero) X)))
   (f g : τ (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)) ⊢
   @one_cat_hom_core_homwise X x y f g
-  : τ (@OmegaEquivAlong
+  : τ (@OmegaEquivAlong_EQ1
       Cat_cat
       (Path_cat (@=
         (Hom (@ncat_carrier (cat_succ cat_zero) X) x y)

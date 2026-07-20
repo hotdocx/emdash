@@ -1,5 +1,6 @@
 /*
-  Reviewer milestone: Candidate D0b variable-evidence hom action.
+  Reviewer milestone: frozen Candidate-D0b variable-evidence hom action. This
+  is one of seven permitted compatibility consumers.
 
   A fixed-arrow equivalence certificate for F : A -> B induces one for every
   full hom action F_1[x,y]. The selected inverse hom functors are not raw hom
@@ -9,6 +10,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_legacy_compat;
 
 assert [A B : Cat]
   [F : τ (Functor A B)]

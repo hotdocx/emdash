@@ -21,7 +21,9 @@ Parent plan: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PL
 Current implementation owners: reusable Nat prerequisites in
 `emdash3_2_nat_arithmetic.lp`; equality-local skeleton/Core-inclusion
 infrastructure in `emdash3_2.lp`; walking HIT/model/comparison and the
-restricted spiral specialization in `emdash3_2_walking_end_hit.lp`
+restricted spiral specialization in `emdash3_2_walking_end_hit.lp`. The later
+compatibility-retirement plan mechanically extracted D0/D1 into frozen
+`emdash3_2_legacy_compat.lp`; none of these WalkingEnd owners imports it
 
 ## Status And Authority
 
@@ -1374,6 +1376,14 @@ walking_end_hom_discrete(x,y)
 walking_end_based_hom_discrete(x)
   ≔ walking_end_is_one_cat(base,x).
 ```
+
+Current ownership update (2026-07-19): `IsDiscreteCat` now stores native
+`IsGroupoidalCat_EQ1` evidence, and `hom_to_path` is derived in
+`emdash3_2_eq1_hom_action.lp`. The WalkingEnd module imports that one-way
+native extension explicitly. Its based-cell conversion and the `BNat`
+`Path_cat(Nat)` discreteness witness therefore contain no D0/D1 or migration-
+constructor dependency; the original signature and normalization argument are
+otherwise unchanged.
 
 Run a focused formation probe in which an arbitrary directed cell in a based
 hom-category is converted by the latter witness through the existing
@@ -2994,7 +3004,17 @@ derived from the same functors rather than asserted independently.
 
 ## `PathMap`, `ObsAction`, And Higher Functoriality
 
-### Current distinction
+> **Historical checkpoint, superseded for current `PathMap` status
+> (2026-07-19).** This subsection records the pre-G2 fork that selected the
+> specialized WalkingEnd decoder. The later G2 implementation promoted
+> `Path_cat_func`, `path_map_func`, `path_map_transf`, and their iterable
+> projection ladder. The active path-action and compatibility-retirement plan
+> in `INDEX.md` records both the completed dependent-registry retirement and
+> the P2 migration of nondependent selection to `PathActionRefinement` over
+> canonical `path_map_func`. The probe constraints and old API names below
+> remain historical evidence.
+
+### Distinction at the pre-G2 checkpoint
 
 `ObsAction(f)` starts from a raw function `f : τ A -> τ B` and stores one
 selected action on paths plus a pointwise comparison with `eq_ap(f)`.
@@ -3007,9 +3027,12 @@ A reusable constructor of the schematic form
 path_map_func(f) : Functor(Path_cat(A),Path_cat(B))
 ```
 
-would be useful for the transparent `walking_decode_func`, for other
+was proposed for the transparent `walking_decode_func`, for other
 path-category-valued models, and eventually for presenting raw-function
-action through ordinary functor machinery. It is not currently active.
+action through ordinary functor machinery. It was not active at this
+checkpoint. The subsequent G2 implementation supplies this canonical
+semantic action through `Path_cat_func`; it does not manufacture a functor
+from an arbitrary selected `ObsAction` implementation.
 
 ### Why it is not a trivial wrapper
 
@@ -3058,11 +3081,14 @@ Selection criteria are:
 - no forced replacement of the real Nat/PathRecord `ObsAction` consumers;
 - a public API reusable by later standard-library constructions.
 
-The selected term remains iterable because its public type is an ordinary
-Emdash functor; generic `fapp1_func` supplies its higher semantic action. The
-plan does not claim that a raw function automatically generates that functor,
-or that `ObsAction` is subsumed. A reusable `path_map_func` remains deferred
-standard-library/kernel research, not an MVP prerequisite.
+At this checkpoint the selected term remained iterable because its public
+type was an ordinary Emdash functor; generic `fapp1_func` supplied its higher
+semantic action. G2 subsequently resolved the canonical raw-function case:
+the active `path_map_func(f)` is the first action of `Path_cat_func`, and its
+capped action computes to `eq_ap(f)`. What remains separate is an optional
+selected-computation refinement of that canonical action, plus any honest
+dependent displayed-functor/section analogue; neither is a WalkingEnd MVP
+prerequisite.
 
 ### Relationship to Join
 
@@ -3349,8 +3375,11 @@ negative conversion control.
 
 Exit result: the documented specialized `walking_decode_func` is an iterable
 semantic functor. Its generator beta is explicit and its arbitrary capped
-action is proved by Nat induction. Generic `PathMap` and `ObsAction`
-subsumption remain explicitly deferred.
+action is proved by Nat induction. At this checkpoint generic `PathMap` and
+`ObsAction` subsumption remained explicitly deferred; G2 later promoted the
+canonical `Path_cat_func`/`path_map_func` owner, and cleanup-plan P2 subsequently
+recast selected action as `PathActionRefinement` without changing the WalkingEnd
+decoder.
 
 ### Phase 5: encode, powers, and decode — completed
 
@@ -3480,7 +3509,7 @@ conceal or implement that boundary.
 | base constructor beta | standard | stable terminal-component runtime owner | complete |
 | loop constructor beta | standard intensional HIT equality | primitive exact equality evidence; no raw action rewrite | complete at selected boundary |
 | derived constant recursor | standard | definitionally routes through the dependent eliminator; target-generic step theorem and loop square derived | complete |
-| generic `PathMap` | standard functorial action of functions on paths | recursive higher action and generic composition diamonds remain unresolved | deferred; not an MVP blocker |
+| canonical generic `PathMap` | standard functorial action of functions on paths | active `Path_cat_func` projection ladder preserves generic identity/composition owners and iterable higher action | completed in subsequent G2; selected-action refinement remains separate |
 | specialized power functor | standard monoid functor | semantic Functor head plus derived zero/successor action laws | complete at specialized boundary |
 | encode-after-decode | Nat induction | transparent proof over actual semantic actions | complete |
 | decode-after-encode | intrinsic HIT hom induction | transparent proof over actual semantic actions; step consumes recursor loop beta | complete |
@@ -3528,11 +3557,13 @@ uses the recursor's loop beta. Full functor/transfor uniqueness is not needed
 for practical computation and remains explicitly separate rather than inferred
 from the Hom round trip.
 
-### Risk 5: one `ObsAction` is mistaken for an omega-functor
+### Risk 5: one selected path action is mistaken for an omega-functor
 
-Mitigation: retain `ObsAction` unchanged. The specialized decoder is declared
+Mitigation: `path_map_func` is the sole canonical ordinary functor, while
+`PathActionRefinement` stores only optional first-path computation and its
+agreement with that functor. The specialized decoder is independently declared
 as an ordinary semantic functor and its zero/successor action laws and inverse
-theorems are derived; no raw-function-to-functor constructor is claimed.
+theorems are derived.
 
 ### Risk 6: category-specific composition duplicates hom-action owners
 
@@ -3577,7 +3608,7 @@ semantic-model proof. Those remain the parent's deferred metatheory track.
 | `WEHIT-HIT-INTRO` | **completed/promoted 2026-07-18** | add HIT category, base, and directed loop without Hom-to-Nat conversion | intrinsic generated-hom syntax | native Hom carrier and nonidentity directed generator active |
 | `WEHIT-HIT-IND` | **completed at propositional-loop-beta boundary 2026-07-18** | dependent eliminator, runtime point beta, equality generator beta | HIT introductions | structured `Catd` section interface active; raw loop action retained as negative conversion control |
 | `WEHIT-REC` | **completed/promoted 2026-07-18** | derive nondependent recursor from constant motive | dependent eliminator | body routes through `walking_end_ind_sec`; loop beta and loop-square equality have explicit terms |
-| `WEHIT-PATH-MAP` | **completed at specialized boundary; generic constructor deferred 2026-07-18** | honest structured reverse comparison | Nat model and comparison consumer | `walking_decode_func` is iterable; generator beta and derived zero/successor laws active; `ObsAction` unchanged |
+| `WEHIT-PATH-MAP` | **completed at specialized boundary 2026-07-18; canonical generic owner subsequently promoted in G2 and refinement cleanup completed in P2 2026-07-19** | honest structured reverse comparison | Nat model and comparison consumer | `walking_decode_func` is iterable; generator beta and derived zero/successor laws are active; `Path_cat_func`/`path_map_func` own canonical generic action, and optional selection is now `PathActionRefinement` under the active cleanup plan |
 | `WEHIT-ENCODE` | **completed/promoted 2026-07-18** | recursor-derived functor from HIT to Nat model | recursor and `BNat_cat` | point computation, generator beta, and successor/composition theorems active |
 | `WEHIT-DECODE` | **completed/promoted 2026-07-18** | Nat-power functor from model to HIT | Nat model and specialized path-map fork | object beta, generator beta, and zero/successor/composition theorems active |
 | `WEHIT-ROUNDTRIP-NAT` | **completed/corrected 2026-07-18** | encode after decode | semantic encoder/decoder actions | native Nat-induction proof over actual actions |
@@ -3665,22 +3696,26 @@ The 2026-07-17 checkpoint met this policy for the then-apparent
 beta requirement and selecting explicit generated-hom induction. The rejected
 logs remain decision evidence; they are no longer a terminal blocker.
 
-The generic `PathMap` candidate is not a blocker because the specialized
-structured decoder has derived zero/successor/composition laws and the actual
-semantic actions satisfy both inverse laws. The decisive HIT round trip is
-discharged by intrinsic `walking_end_hom_ind`, using the HIT-derived encoder
-successor law. Generic `path_ind_sec` does not replace this proof because it
-requires an already structured motive. A future abstract HIT without native
-generated-hom syntax would again need a reusable motive,
-extensionality/arrow-induction, or transfor theorem.
+At the specialized checkpoint, generic `PathMap` was not a blocker because
+the structured decoder already had derived zero/successor/composition laws
+and the actual semantic actions satisfied both inverse laws. G2 has since
+promoted the canonical `Path_cat_func`/`path_map_func` owner, so generic
+semantic path action is no longer deferred. This does not alter the decisive
+HIT round trip: intrinsic `walking_end_hom_ind` discharges it using the
+HIT-derived encoder successor law. Generic `path_ind_sec` does not replace
+this proof because it requires an already structured motive. A future
+abstract HIT without native generated-hom syntax would again need a reusable
+motive, extensionality/arrow-induction, or transfor theorem.
 
 ## Future Handoff Requirement
 
 After consolidation, a future handoff should treat this selected concrete MVP
 as retained work, not resume the superseded `WEHIT-COMP-OWNER` blocker. A new
 bounded plan may select dependent Join elimination, generic directed-HIT
-abstraction, generic `PathMap`, categorical initiality, or groupoid completion
-toward `BInt`. Categorical initiality is optional future scope, not missing
-from the practical computation milestone. Any follow-up must preserve the
-theorem-first beta boundary and must not replace the semantic-action Hom
+abstraction, categorical initiality, or groupoid completion toward `BInt`.
+The already-adopted path-action cleanup plan separately owns optional selected
+action refinement and any dependent displayed analogue. Categorical
+initiality is optional future scope, not missing from the practical
+computation milestone. Any follow-up must preserve the theorem-first beta
+boundary and must not replace the semantic-action Hom
 comparison by a direct Hom-to-Nat rewrite or parallel carrier equivalence.

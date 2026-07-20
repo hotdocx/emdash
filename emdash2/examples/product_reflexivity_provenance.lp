@@ -1,5 +1,6 @@
 /*
-  Reviewer milestone: Product reflexivity provenance.
+  Reviewer milestone: Product reflexivity provenance, including frozen legacy
+  omega-equivalence. This is one of seven permitted compatibility consumers.
 
   Product isomorphism and omega-equivalence constructors retain their
   componentwise evidence heads when both components are reflexive. Their
@@ -8,6 +9,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_legacy_compat;
 
 assert [A B : Cat]
   (x : τ (Obj A))

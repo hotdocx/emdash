@@ -1,11 +1,11 @@
 /*
-  Reviewer milestone: componentwise observational action for binary sums.
+  Reviewer milestone: componentwise path-action refinement for binary sums.
 
-  A canonical map acts through registered actions on the two summands. Equal
+  A canonical map combines selected refinements on the two summands. Equal
   tags compute componentwise, mixed tags retain the impossible Empty witness,
-  and the resulting ObsAction agrees propositionally with generic eq_ap.
-  The reflexive bridge is proof-time only: runtime proof provenance remains
-  visible, and no transitive unification collapse is assumed.
+  and the result agrees propositionally with canonical `path_map_func` action.
+  The reflexive eq_ap bridge is proof-time only: runtime proof provenance
+  remains visible, and no transitive unification collapse is assumed.
 */
 
 require open emdash.emdash3_2;
@@ -62,10 +62,10 @@ assert [A B A' B' : Grpd]
 assert [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g)) ⊢
-  @sum_obs_action A B A' B' f g u v
-  : τ (@ObsAction
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g)) ⊢
+  @sum_path_action_refinement A B A' B' f g u v
+  : τ (@PathActionRefinement
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g));
@@ -73,93 +73,96 @@ assert [A B A' B' : Grpd]
 assert [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
   [a0 a1 : τ A]
   (p : τ (@= A a0 a1)) ⊢
   (λ q : τ (@= A' (f a0) (f a1)), q)
-    (@obs_action_apply
+    (@path_action_refinement_apply
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g)
-      (@sum_obs_action A B A' B' f g u v)
+      (@sum_path_action_refinement A B A' B' f g u v)
       (@sum_inl A B a0) (@sum_inl A B a1) p)
   ≡
   (λ q : τ (@= A' (f a0) (f a1)), q)
-    (@obs_action_apply A A' f u a0 a1 p);
+    (@path_action_refinement_apply A A' f u a0 a1 p);
 
 assert [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
   [b0 b1 : τ B]
   (p : τ (@= B b0 b1)) ⊢
   (λ q : τ (@= B' (g b0) (g b1)), q)
-    (@obs_action_apply
+    (@path_action_refinement_apply
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g)
-      (@sum_obs_action A B A' B' f g u v)
+      (@sum_path_action_refinement A B A' B' f g u v)
       (@sum_inr A B b0) (@sum_inr A B b1) p)
   ≡
   (λ q : τ (@= B' (g b0) (g b1)), q)
-    (@obs_action_apply B B' g v b0 b1 p);
+    (@path_action_refinement_apply B B' g v b0 b1 p);
 
 assert [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
   (a : τ A)
   (b : τ B)
   (p : τ Empty_grpd) ⊢
   (λ q : τ Empty_grpd, q)
-    (@obs_action_apply
+    (@path_action_refinement_apply
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g)
-      (@sum_obs_action A B A' B' f g u v)
+      (@sum_path_action_refinement A B A' B' f g u v)
       (@sum_inl A B a) (@sum_inr A B b) p)
   ≡ (λ q : τ Empty_grpd, q) p;
 
 assert [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
   (a : τ A)
   (b : τ B)
   (p : τ Empty_grpd) ⊢
   (λ q : τ Empty_grpd, q)
-    (@obs_action_apply
+    (@path_action_refinement_apply
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g)
-      (@sum_obs_action A B A' B' f g u v)
+      (@sum_path_action_refinement A B A' B' f g u v)
       (@sum_inr A B b) (@sum_inl A B a) p)
   ≡ (λ q : τ Empty_grpd, q) p;
 
 assert [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
   [a0 a1 : τ A]
   (p : τ (@= A a0 a1)) ⊢
-  @obs_action_agrees
+  @path_action_refinement_agrees
     (Sum_grpd A B)
     (Sum_grpd A' B')
     (@sum_map A B A' B' f g)
-    (@sum_obs_action A B A' B' f g u v)
+    (@sum_path_action_refinement A B A' B' f g u v)
     (@sum_inl A B a0) (@sum_inl A B a1) p
   : τ (@=
       (@= A' (f a0) (f a1))
-      (@obs_action_apply A A' f u a0 a1 p)
-      (@eq_ap
-        (Sum_grpd A B)
-        (Sum_grpd A' B')
-        (@sum_map A B A' B' f g)
+      (@path_action_refinement_apply A A' f u a0 a1 p)
+      (@fapp1_fapp0
+        (Path_cat (Sum_grpd A B))
+        (Path_cat (Sum_grpd A' B'))
+        (@path_map_func
+          (Sum_grpd A B)
+          (Sum_grpd A' B')
+          (@sum_map A B A' B' f g))
         (@sum_inl A B a0)
         (@sum_inl A B a1)
         p));
@@ -167,23 +170,26 @@ assert [A B A' B' : Grpd]
 assert [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
   [b0 b1 : τ B]
   (p : τ (@= B b0 b1)) ⊢
-  @obs_action_agrees
+  @path_action_refinement_agrees
     (Sum_grpd A B)
     (Sum_grpd A' B')
     (@sum_map A B A' B' f g)
-    (@sum_obs_action A B A' B' f g u v)
+    (@sum_path_action_refinement A B A' B' f g u v)
     (@sum_inr A B b0) (@sum_inr A B b1) p
   : τ (@=
       (@= B' (g b0) (g b1))
-      (@obs_action_apply B B' g v b0 b1 p)
-      (@eq_ap
-        (Sum_grpd A B)
-        (Sum_grpd A' B')
-        (@sum_map A B A' B' f g)
+      (@path_action_refinement_apply B B' g v b0 b1 p)
+      (@fapp1_fapp0
+        (Path_cat (Sum_grpd A B))
+        (Path_cat (Sum_grpd A' B'))
+        (@path_map_func
+          (Sum_grpd A B)
+          (Sum_grpd A' B')
+          (@sum_map A B A' B' f g))
         (@sum_inr A B b0)
         (@sum_inr A B b1)
         p));
@@ -256,24 +262,27 @@ assertnot [A B A' B' : Grpd]
 assertnot [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g))
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g))
   [x y : τ (Sum_grpd A B)]
   (p : τ (@= (Sum_grpd A B) x y)) ⊢
-  @sum_obs_action_map A B A' B' f g u v x y p
-  ≡ @eq_ap
-      (Sum_grpd A B)
-      (Sum_grpd A' B')
-      (@sum_map A B A' B' f g)
+  @sum_path_action_map A B A' B' f g u v x y p
+  ≡ @fapp1_fapp0
+      (Path_cat (Sum_grpd A B))
+      (Path_cat (Sum_grpd A' B'))
+      (@path_map_func
+        (Sum_grpd A B)
+        (Sum_grpd A' B')
+        (@sum_map A B A' B' f g))
       x y p;
 
 assertnot [A B A' B' : Grpd]
   (f : τ A → τ A')
   (g : τ B → τ B')
-  (u : τ (@ObsAction A A' f))
-  (v : τ (@ObsAction B B' g)) ⊢
-  @sum_obs_action A B A' B' f g u v
-  ≡ @obs_action_from_function
+  (u : τ (@PathActionRefinement A A' f))
+  (v : τ (@PathActionRefinement B B' g)) ⊢
+  @sum_path_action_refinement A B A' B' f g u v
+  ≡ @path_action_refinement_canonical
       (Sum_grpd A B)
       (Sum_grpd A' B')
       (@sum_map A B A' B' f g);

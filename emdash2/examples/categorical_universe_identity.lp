@@ -1,12 +1,15 @@
 /*
-  Reviewer example: direct categorical-universe identity.
+  Reviewer example: direct categorical-universe identity plus frozen legacy
+  comparison. This is one of seven permitted compatibility consumers.
 
   Category-universe equality now exposes the stable equality-valued EQ1
-  facade. The former D0 `CatPathView` remains an explicit compatibility view;
+  facade. The former D0 `CatPathView` is isolated in the frozen compatibility
+  module;
   generic eq_refl is retained for literal J and eq_ap computation.
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_legacy_compat;
 
 assert [A B : Cat] ⊢
   @= (Obj Cat_cat) A B

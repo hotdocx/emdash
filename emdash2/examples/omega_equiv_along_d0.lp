@@ -1,5 +1,6 @@
 /*
-  Reviewer milestone: Candidate D0 fixed-arrow omega-equivalence evidence.
+  Reviewer milestone: frozen Candidate-D0 fixed-arrow omega-equivalence
+  evidence. This is one of seven permitted compatibility consumers.
 
   The primary certificate is indexed by an already-selected arrow. Its
   first-class form is a transparent Sigma package, while inverse cells return
@@ -9,6 +10,7 @@
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_legacy_compat;
 
 assert [C : Cat]
   [x y : τ (Obj C)]

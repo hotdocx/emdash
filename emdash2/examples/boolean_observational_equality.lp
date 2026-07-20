@@ -48,9 +48,9 @@ assert ⊢
   ≡ @id (Path_cat Bool_grpd) true;
 
 assert ⊢
-  @idtoequiv_cat
+  @object_path_equiv_EQ1
     (Path_cat Bool_grpd) false false (@eq_refl Bool_grpd false)
-  ≡ @omega_equiv_refl (Path_cat Bool_grpd) false;
+  ≡ @omega_equiv_refl_EQ1 (Path_cat Bool_grpd) false;
 
 // Local conversion and typing controls only; these are not canonicity or
 // non-derivability theorems.

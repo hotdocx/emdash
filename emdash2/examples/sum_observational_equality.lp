@@ -99,12 +99,12 @@ assert [A B : Grpd]
 
 assert [A B : Grpd]
   (b : τ B) ⊢
-  @idtoequiv_cat
+  @object_path_equiv_EQ1
     (Path_cat (Sum_grpd A B))
     (@sum_inr A B b)
     (@sum_inr A B b)
     (@eq_refl (Sum_grpd A B) (@sum_inr A B b))
-  ≡ @omega_equiv_refl
+  ≡ @omega_equiv_refl_EQ1
       (Path_cat (Sum_grpd A B)) (@sum_inr A B b);
 
 // Local runtime, proof-time, guard, and open-endpoint controls only.
@@ -174,12 +174,12 @@ assertnot [A B : Grpd]
 
 assertnot [A B : Grpd]
   (b : τ B) ⊢
-  @idtoequiv_cat
+  @object_path_equiv_EQ1
     (Path_cat (Sum_grpd A B))
     (@sum_inr A B b)
     (@sum_inr A B b)
     (@eq_refl B b)
-  ≡ @omega_equiv_refl
+  ≡ @omega_equiv_refl_EQ1
       (Path_cat (Sum_grpd A B)) (@sum_inr A B b);
 
 assertnot [A B : Grpd]

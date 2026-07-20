@@ -95,6 +95,24 @@ assert [C : Cat] (x : τ (Obj C)) ⊢
     (@object_path_equiv_EQ1 C x x (@eq_refl (Obj C) x))
   ≡ @id C x;
 
+// Ordinary categorical isomorphism data embeds directly in native EQ1.
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_to_EQ1 C x y
+    (@iso_evidence_omega_equiv_EQ1 C x y i)
+  ≡ @iso_evidence_to C x y i;
+
+assert [C : Cat]
+  [x y : τ (Obj C)]
+  (i : τ (IsoEvidence C x y)) ⊢
+  @omega_equiv_along_right_law_EQ1
+    C x y
+    (@iso_evidence_to C x y i)
+    (@omega_equiv_evidence_EQ1 C x y
+      (@iso_evidence_omega_equiv_EQ1 C x y i))
+  ≡ @iso_evidence_right C x y i;
+
 // A literal path is accepted at the facade type by the narrow shaped join.
 assert [A : Grpd] (x y : τ A)
   (p : τ (@= A x y)) ⊢
@@ -180,8 +198,3 @@ assertnot [C : Cat] (x y : τ (Obj C))
 assertnot [C : Cat] (x y : τ (Obj C)) ⊢
   @= (Obj C) x y
   ≡ @OmegaEquiv_EQ1 C x y;
-
-// The new facade remains separate from D0 until the explicit bridge phase.
-assertnot [C : Cat] (x y : τ (Obj C)) ⊢
-  @OmegaEquiv_EQ1 C x y
-  ≡ @OmegaEquiv_D0 C x y;

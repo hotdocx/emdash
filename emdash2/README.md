@@ -70,72 +70,71 @@ The checked kernel currently includes:
   elimination, propositional eta, and a transparent Sigma comparison. Generic
   object equality compares with that facade at proof time; rigid Cat and Grpd
   universe equality reduce to it at runtime, while explicit path packages own
-  observer computation. `GrpdPathView = TypeEquiv` remains a compatibility
-  view, and explicit adapters in both directions use a now-transparent
-  quasi-inverse-to-contractible-fibre theorem. The older recursive D0/D0b
-  certificate, observation trees, and decoder round trips remain compatibility
-  surfaces rather than the primary foundation.
+  observer computation. The D0-free library view
+  `GrpdPathView = TypeEquiv` and its explicit adapters remain in the kernel and
+  use a transparent quasi-inverse-to-contractible-fibre theorem. The older
+  recursive D0/D0b/D1 certificates, unsuffixed omega-equivalence facade, Cat
+  decoder, and their round trips have been mechanically extracted into the
+  frozen opt-in `emdash3_2_legacy_compat.lp` module. They are absent from the
+  active kernel/native/check dependency closure and are not a second
+  equivalence foundation. The self-only one-layer and dimension-indexed D0
+  observation trees were deleted rather than extracted.
 
   The downstream transparent evidence module proves fixed-arrow native-EQ1
   evidence proposition-valued for every category by contracting two
   composition-map homotopy fibres. It also proves truncation closure under
   explicit retractions and the unconditional finite-dimensional theorem
   `IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)`, with computing base
-  and successor equations. The old D0 global evidence-property capability and
-  conditional theorem remain explicitly uninhabited compatibility experiments.
-  Product
-  isomorphism and omega-equivalence evidence retain their componentwise
-  constructor provenance even when both components are reflexive; projections
-  and decoders compute componentwise without collapsing to the distinct
-  generic reflexive evidence heads. The
-  categorical decoder supplies a named equivalence, both propositional round
-  trips, and a propositional `path_to_hom` square. Its variable-evidence Cat
-  hom-action repairs raw inverse-action endpoints by recursive-cell components
-  and yields the first iterable next-hom univalence/action witness;
+  and successor equations. The obsolete uninhabited D0 global evidence-
+  property capability and its conditional theorem are retired; the generic
+  `prop_is_trunc_cat_dim` lemma remains because the native theorem uses it.
+  Ordinary Product isomorphism evidence retains its componentwise constructor
+  provenance even when both components are reflexive. The extracted legacy
+  module separately preserves its historical Product omega-equivalence and
+  decoder computation only for seven explicitly legacy reviewer examples;
 - covariant/contravariant hom actions and the rigid simultaneous `Hom_*`
   action used by the unit hom profunctor;
-- the exact two-field `IsDiscreteCat(C)` contract, with set-truncated objects,
-  fixed core-inclusion evidence, native-EQ1 derived homwise omega-equivalence,
-  selected `hom_to_path`, both coherent round trips, and an iterable recursive
-  cell without broad runtime cancellation;
+- the exact two-field `IsDiscreteCat(C)` contract, with set-truncated objects
+  and native `IsGroupoidalCat_EQ1(C)` evidence. The one-way native hom-action
+  extension derives the iterable core-inclusion hom equivalence, selected
+  `hom_to_path`, equality-valued re-inclusion, and the retained directed-cell
+  round-trip surface without broad runtime cancellation;
 - independent `IsObjTruncCat`, native `CatDim`, its recursive
   `cat_dim_trunc_level` object-level index, recursive `IsNCat`, and
   evidence-retaining `NCat(n)` packages with `ZeroCat`/`OneCat`; a packaged
-  one-category exposes discrete hom-categories and iterates core-inclusion
-  adequacy between parallel arrows. Fixed-map `OmegaEquivAlong(F)` now induces
-  an ordinary equivalence of object classifiers and transports
-  `IsObjTruncCat`; native EQ1 evidence now proves the recursive `IsNCat`
-  object-truncation theorem unconditionally. Ordinary strict isomorphism evidence now
-  has a backed lift to recursive `OmegaEquiv`: both inverse arrows reuse the
-  ordinary inverse and the two inverse equations encode as next-hom cells. A
-  packaged one-category consequently has a derived `one_cat_iso_path` decoder
-  and the decoder-after-`idtoiso_cat` round trip. Recursive inverse cells now
-  also construct `omega_equiv_along_left_to_right_D0`, and OneCat hom
-  discreteness decodes it through `one_cat_omega_inverse_path` without
-  identifying the two inverse observations by rewrite or proof-time fiat.
-  The decoded right law transports along that path, reconstructing ordinary
-  `IsoEvidence` from arbitrary OneCat omega evidence. Hom discreteness makes
-  its two inverse-law proof fields proposition-valued, so the existing nested-
-  Sigma path view proves reconstruction and the second round trip. The derived
-  `one_cat_iso_univalence` and `one_cat_iso_type_equiv` are therefore fully
-  OneCat-scoped. The unused arbitrary-category capability inhabitants and
-  hardcoded classifier are retired; the distinct legacy decoder remains only
-  for its reflexive/Product compatibility computation;
-- registered `ObsAction`/`ObsDAction` packages whose selected open-map or
-  dependent-section action carries next-dimensional agreement with semantic
-  `eq_ap`/`eq_apd`; identity action and registered composition compute,
-  PathRecord maps act on shaped paths, and the dependent witness field acts
-  through `PathOver`. These packages register computation for raw groupoid
-  functions/sections; they are not the structured groupoidal-J owner, which
-  consumes an already functorial `Catd` motive. A future path-functor
-  constructor may relate the interfaces. The canonical binary-sum map lifts
-  registrations on both summands in the downstream Sum library module to a
-  componentwise action: equal tags delegate to their
-  supplied action, mixed tags use Empty, and agreement with generic `eq_ap`
-  remains propositional and runtime-distinct. Recursive Nat equality now also
-  has a registered successor action: the selected map retains the exposed
-  predecessor path `p`, while a stable proof-time basis and generic J prove
-  agreement with `eq_ap(succ)`. The former-specific `nat_succ_ind_eqr` facade
+  one-category exposes discrete hom-categories and iterates native
+  core-inclusion adequacy between parallel arrows. Native fixed-map
+  `OmegaEquivAlong_EQ1(F)` induces an ordinary equivalence of object
+  classifiers and transports `IsObjTruncCat`; native EQ1 evidence proves the
+  recursive `IsNCat` object-truncation theorem unconditionally. Ordinary
+  strict isomorphism evidence has a direct one-way native lift through
+  `iso_evidence_omega_along_EQ1`/`iso_evidence_omega_equiv_EQ1`: both native
+  inverse slots reuse the ordinary inverse and both equations already have the
+  required equality-valued types. The complete two-sided OneCat
+  `one_cat_iso_type_equiv` contract remains in the frozen compatibility module:
+  a focused native replacement stops at the intentional stable-cast/facade-
+  package-to-raw-path reification boundary even at reflexivity. The theorem is
+  retained intact rather than weakened or supported by a new proof-time
+  identification, and no new compatibility consumer is permitted;
+- canonical iterable `Path_cat_func`/`path_map_func` action for every raw
+  groupoid function, plus optional `PathActionRefinement` data whose selected
+  nondependent action carries next-dimensional agreement with the exact
+  capped `path_map_func` action. Identity selection and refinement composition
+  compute, while composite canonical action remains related to nested action
+  propositionally through `eq_ap_comp`; no second functor or runtime action
+  owner is introduced. PathRecord maps consume refinements on shaped paths.
+  The unused dependent registry is retired, so the dependent witness field
+  acts through direct `eq_apd` and `PathOver`; any stronger dependent analogue
+  would be displayed functor/section structure. A refinement is not the
+  structured groupoidal-J owner, which consumes an already functorial `Catd`
+  motive. The canonical binary-sum map combines summand refinements in the
+  downstream Sum library module: equal tags delegate to their supplied
+  selections, mixed tags use Empty, and agreement with canonical
+  `path_map_func` action remains propositional and runtime-distinct. Recursive
+  Nat equality has an optional successor refinement: its selected map retains
+  the exposed predecessor path `p`, while a stable proof-time basis and
+  generic J prove agreement with the capped action of `NatSucc_func`. The
+  former-specific `nat_succ_ind_eqr` facade
   then accepts arbitrary proof-dependent successor-path motives and computes
   only when the exposed predecessor proof is component reflexivity, by routing
   through the existing generic J owner. Outer reflexivity and the action basis
@@ -157,9 +156,17 @@ or a completed foundational theory.
 - `emdash3_2_eq1_evidence_property.lp`: downstream transparent native-EQ1
   evidence-property, retract-truncation, and finite-`NCat` object-truncation
   extension.
+- `emdash3_2_nat_arithmetic.lp`: reusable Nat arithmetic, successor
+  path-action refinement, proposition witnesses, and Nat sethood.
+- `emdash3_2_walking_end_hit.lp`: selected walking-endomorphism directed-HIT,
+  eliminator/comparison, and separate `BNat` consistency model.
 - `emdash3_2_sum_observational_action.lp`: library-level componentwise Sum
   observational action and proof-time comparison bases.
 - `emdash3_2_checks.lp`: executable diagnostic/regression suite.
+- `emdash3_2_legacy_compat.lp`: frozen opt-in D0/D1 and decoder compatibility
+  module. It imports the kernel one-way, is non-authoritative, and may be used
+  only by the seven explicitly legacy examples; no new consumer or feature is
+  accepted.
 - `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
   current architecture and development SOP.
 - `reports/EMDASH_FOUNDATIONS.md`: mathematical reading guide.

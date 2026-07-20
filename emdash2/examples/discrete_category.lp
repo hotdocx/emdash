@@ -1,17 +1,16 @@
 /*
   Reviewer milestone: discrete categories derive homwise path adequacy.
 
-  The package stores set-truncated objects and fixed-map evidence for the core
-  inclusion. D0b derives the hom equivalence; its selected inverse is
-  `hom_to_path`, with both round trips carried by recursive cells.
+  The package stores set-truncated objects and native equality-valued
+  groupoidality for the core inclusion. The one-way native hom-action
+  extension derives `hom_to_path`; both round trips remain propositional.
 */
 
-require open emdash.emdash3_2;
+require open emdash.emdash3_2_eq1_hom_action;
 
 assert [C : Cat]
   (obj_set : τ (IsSetGrpd (Obj C)))
-  (core_equiv : τ (@OmegaEquivAlong
-      Cat_cat (Core_cat C) C (Core_incl_func C))) ⊢
+  (core_equiv : τ (@IsGroupoidalCat_EQ1 C)) ⊢
   @is_discrete_cat_core_equiv C
     (@discrete_cat_intro C obj_set core_equiv)
   ≡ core_equiv;
@@ -30,7 +29,7 @@ assert [C : Cat]
   (d : τ (IsDiscreteCat C))
   (x y : τ (Obj C)) ⊢
   @discrete_core_homwise C d x y
-  : τ (@OmegaEquivAlong
+  : τ (@OmegaEquivAlong_EQ1
       Cat_cat
       (Path_cat (@= (Obj C) x y))
       (Hom_cat C x y)
@@ -57,6 +56,16 @@ assert [C : Cat]
   (d : τ (IsDiscreteCat C))
   [x y : τ (Obj C)]
   (f : τ (Hom C x y)) ⊢
+  @path_to_hom_hom_to_path_path C d x y f
+  : τ (@=
+      (Hom C x y)
+      (@path_to_hom C x y (@hom_to_path C d x y f))
+      f);
+
+assert [C : Cat]
+  (d : τ (IsDiscreteCat C))
+  [x y : τ (Obj C)]
+  (f : τ (Hom C x y)) ⊢
   @path_to_hom_hom_to_path C d x y f
   : τ (Hom
       (Hom_cat C x y)
@@ -77,4 +86,3 @@ assertnot [C : Cat]
   (f : τ (Hom C x y)) ⊢
   @path_to_hom C x y (@hom_to_path C d x y f)
   ≡ f;
-

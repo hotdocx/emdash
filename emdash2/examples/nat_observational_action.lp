@@ -1,14 +1,16 @@
 /*
-  Reviewer milestone: registered successor action for recursive Nat equality.
+  Reviewer milestone: optional successor path-action refinement.
 
-  Successor equality exposes the predecessor path, so the selected action can
-  compute as p |-> p. A stable proof-time basis compares independently with
-  component and outer reflexivity, allowing generic J to prove agreement with
-  semantic eq_ap without selecting a runtime proof normal form. No unification
-  transitivity, successor-specific J beta, or Nat canonicity is assumed.
+  Successor equality exposes the predecessor path, so the selection computes
+  as p |-> p. A stable proof-time basis compares independently with component
+  and outer reflexivity, allowing generic J to prove agreement with the capped
+  action of canonical `NatSucc_func`. That action reduces to semantic eq_ap;
+  no runtime proof normal form, unification transitivity, successor-specific J
+  beta, or Nat canonicity is assumed.
 */
 
 require open emdash.emdash3_2;
+require open emdash.emdash3_2_nat_arithmetic;
 
 assert [m n : τ Nat_grpd] ⊢
   @= Nat_grpd (succ m) (succ n)
@@ -49,49 +51,50 @@ assert [m n : τ Nat_grpd]
         m n p));
 
 assert ⊢
-  nat_succ_obs_action
-  : τ (@ObsAction
+  nat_succ_path_action_refinement
+  : τ (@PathActionRefinement
       Nat_grpd Nat_grpd
-      (λ n : τ Nat_grpd, succ n));
+      nat_succ_function);
 
 assert [m n : τ Nat_grpd]
   (p : τ (@= Nat_grpd m n)) ⊢
   (λ q : τ (@= Nat_grpd (succ m) (succ n)), q)
-    (nat_succ_obs_action_map m n p)
+    (nat_succ_path_action_map m n p)
   ≡
   (λ q : τ (@= Nat_grpd (succ m) (succ n)), q) p;
 
 assert [m n : τ Nat_grpd]
   (p : τ (@= Nat_grpd m n)) ⊢
   (λ q : τ (@= Nat_grpd (succ m) (succ n)), q)
-    (@obs_action_apply
+    (@path_action_refinement_apply
       Nat_grpd Nat_grpd
-      (λ k : τ Nat_grpd, succ k)
-      nat_succ_obs_action
+      nat_succ_function
+      nat_succ_path_action_refinement
       m n p)
   ≡
   (λ q : τ (@= Nat_grpd (succ m) (succ n)), q) p;
 
 assert [m n : τ Nat_grpd]
   (p : τ (@= Nat_grpd m n)) ⊢
-  @obs_action_agrees
+  @path_action_refinement_agrees
     Nat_grpd Nat_grpd
-    (λ k : τ Nat_grpd, succ k)
-    nat_succ_obs_action
+    nat_succ_function
+    nat_succ_path_action_refinement
     m n p
   : τ (@=
       (@= Nat_grpd (succ m) (succ n))
       p
-      (@eq_ap
-        Nat_grpd Nat_grpd
-        (λ k : τ Nat_grpd, succ k)
+      (@fapp1_fapp0
+        (Path_cat Nat_grpd)
+        (Path_cat Nat_grpd)
+        NatSucc_func
         m n p));
 
 assert (n : τ Nat_grpd) ⊢
-  @obs_action_agrees
+  @path_action_refinement_agrees
     Nat_grpd Nat_grpd
-    (λ k : τ Nat_grpd, succ k)
-    nat_succ_obs_action
+    nat_succ_function
+    nat_succ_path_action_refinement
     n n
     (@eq_refl Nat_grpd n)
   : τ (@=
@@ -102,15 +105,15 @@ assert (n : τ Nat_grpd) ⊢
 assert [m n : τ Nat_grpd]
   (p : τ (@= Nat_grpd m n)) ⊢
   (λ q : τ (@= Nat_grpd (succ (succ m)) (succ (succ n))), q)
-    (@obs_action_apply
+    (@path_action_refinement_apply
       Nat_grpd Nat_grpd
       (λ k : τ Nat_grpd, succ (succ k))
-      (@obs_action_comp
+      (@path_action_refinement_comp
         Nat_grpd Nat_grpd Nat_grpd
         (λ k : τ Nat_grpd, succ k)
         (λ k : τ Nat_grpd, succ k)
-        nat_succ_obs_action
-        nat_succ_obs_action)
+        nat_succ_path_action_refinement
+        nat_succ_path_action_refinement)
       m n p)
   ≡
   (λ q : τ (@= Nat_grpd (succ (succ m)) (succ (succ n))), q) p;
@@ -142,17 +145,18 @@ assertnot (n : τ Nat_grpd) ⊢
 
 assertnot [m n : τ Nat_grpd]
   (p : τ (@= Nat_grpd m n)) ⊢
-  nat_succ_obs_action_map m n p
-  ≡ @eq_ap
-      Nat_grpd Nat_grpd
-      (λ k : τ Nat_grpd, succ k)
+  nat_succ_path_action_map m n p
+  ≡ @fapp1_fapp0
+      (Path_cat Nat_grpd)
+      (Path_cat Nat_grpd)
+      NatSucc_func
       m n p;
 
 assertnot ⊢
-  nat_succ_obs_action
-  ≡ @obs_action_from_function
+  nat_succ_path_action_refinement
+  ≡ @path_action_refinement_canonical
       Nat_grpd Nat_grpd
-      (λ k : τ Nat_grpd, succ k);
+      nat_succ_function;
 
 // The former-specific induction facade accepts arbitrary successor-path motives.
 assert [n : τ Nat_grpd]
@@ -187,7 +191,7 @@ assert [n : τ Nat_grpd]
     n P u n (@eq_refl Nat_grpd n)
   ≡ u;
 
-// Registered action is a concrete input to the facade.
+// The selected refinement is a concrete input to the facade.
 assert [m n : τ Nat_grpd]
   (p : τ (@= Nat_grpd m n)) ⊢
   @nat_succ_ind_eqr
@@ -196,10 +200,10 @@ assert [m n : τ Nat_grpd]
       λ _ : τ (@= Nat_grpd (succ k) (succ n)), Unit_grpd)
     tt
     m
-    (@obs_action_apply
+    (@path_action_refinement_apply
       Nat_grpd Nat_grpd
-      (λ k : τ Nat_grpd, succ k)
-      nat_succ_obs_action
+      nat_succ_function
+      nat_succ_path_action_refinement
       m n p)
   : τ Unit_grpd;
 
@@ -210,10 +214,10 @@ assert (n : τ Nat_grpd) ⊢
       λ _ : τ (@= Nat_grpd (succ k) (succ n)), Unit_grpd)
     tt
     n
-    (@obs_action_apply
+    (@path_action_refinement_apply
       Nat_grpd Nat_grpd
-      (λ k : τ Nat_grpd, succ k)
-      nat_succ_obs_action
+      nat_succ_function
+      nat_succ_path_action_refinement
       n n (@eq_refl Nat_grpd n))
   ≡ tt;
 
