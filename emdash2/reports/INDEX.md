@@ -37,6 +37,18 @@ implementation plans, and historical decisions.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`:
+  proposed C0-C7 follow-on to the completed initial-book plan. It expands the
+  book through a globally coherent adaptation of all HoTT Chapter 9 topics
+  and Appendix A's formal-presentation discipline; makes represented hom
+  action, `tapp1` naturality, and Došen cut elimination the bridge to
+  adjunctions, Yoneda, weighted limits/colimits, duality, and join; treats the
+  categorical calculus as the computational kernel with conventional syntax
+  deferred to an elaboration layer; keeps the outdated parent TypeScript
+  prototype read-only and non-authoritative; and places repair of malformed
+  TeX/code-span notation plus a semantic typography gate before further prose
+  expansion. It preserves checked/formal-consequence/mathematical-development/
+  research-boundary status discipline and does not reopen completed B0-B6.
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
   active long-running architecture and implementation plan for the new book
   *Functorial Type Theory: Univalent Foundations for Mathematics*. It selects
