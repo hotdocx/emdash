@@ -8,7 +8,7 @@ Supersedes: none
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-functorial-type-theory-book-review-2026-07-20
 Infinity-Codex-Decision-Responses: none
-Status: **PROPOSED — review and architecture are complete; no book source, renderer migration, documentation consolidation, or Lambdapi module split has yet been implemented**
+Status: **COMPLETE — Phases B0–B6 completed on 2026-07-20; optional Phase B7 was not triggered and remains deferred**
 
 ## Executive Decision
 
@@ -933,6 +933,8 @@ candidate audit units, not pre-approved filenames.
 
 ### Phase B0 — Ratify the book contract
 
+State: **COMPLETE (2026-07-20).**
+
 Deliverables:
 
 - approve the displayed title and provisional scope;
@@ -947,6 +949,8 @@ Gate:
   `book/CREDITS.md` and `book/LICENSE.md` exist.
 
 ### Phase B1 — Establish traceability and repair current orientation
+
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -966,6 +970,8 @@ Gate:
 
 ### Phase B2 — Build the book source/render seam
 
+State: **COMPLETE (2026-07-20).**
+
 Deliverables:
 
 - manifest-driven deterministic assembler;
@@ -983,7 +989,44 @@ Gate:
 - local-link mode produces the same checked output;
 - the existing three papers remain renderable.
 
+#### B0–B2 implementation checkpoint
+
+The completed bounded infrastructure milestone contains:
+
+- `book/book.json`, the chapter-sized source tree, CC BY-SA 3.0 book
+  license, HoTT credits, pinned revision/source map, style/status contract,
+  and the Chapter 1–8 skeleton;
+- nineteen Chapter 8 checked claims in `book/evidence.json`, all cited
+  by book sources and verified for owning declarations plus reviewer/check
+  evidence by `scripts/check_book_evidence.py`;
+- a deterministic assembler with source-boundary comments and stale-output
+  mode, plus source/provenance/anchor/link/critical-proof-order checks;
+- one explicit `print/documents.json` registry shared by the browser,
+  diagram validator, and bounded browser renderer;
+- package-owned Arrowgram schema validation, exact published
+  `@hotdocx/arrowgram@1.0.0` default, locally bundled KaTeX CSS/fonts,
+  and an opt-in `npm link --no-save` workflow documented in
+  `print/README.md`;
+- per-document render budgets and process-group cleanup on ordinary exit,
+  errors, timeouts, `SIGINT`, and `SIGTERM`;
+- consolidated root/print orientation, corrected living deferred boundaries,
+  and settled WalkingEnd/Code/normalization notation.
+
+The clean published-package workflow passes `book:check` and renders
+the skeleton to five pages. The local-link workflow produces the identical
+assembled SHA-256
+`17010237e7baa8f3d4039b0099dccc90645f93dbaf8c3a20b603c4fbeead5656`,
+after which `npm ci` restores the published package. The all-document
+render check passes with 27, 19, 32, and 5 pages respectively for
+`index.md`, `index_0.md`, `index_3_2.md`, and
+`emdash-book.md`. A forced SIGTERM cleanup probe leaves no preview
+process. Full `make ci` passes all 39 retained source/example targets
+in 88.040 seconds, including the new evidence, assembly, source-integrity,
+report-header, active-reference, strict-rule-audit, and catalog gates.
+
 ### Phase B3 — Write the vertical slice first
+
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -1013,7 +1056,27 @@ Gate:
 - no prose identifies WalkingEnd definitionally with BNat or claims a
   monoid/category equivalence.
 
+#### B3 implementation checkpoint
+
+The vertical slice now contains complete front matter and prologue, a newly
+written §8.1.1–§8.1.5 proof, the neighboring Eckmann–Hilton section, and a
+revision-pinned HoTT comparison appendix. The proof keeps `BNat` as a
+separate concrete model, constructs the directed normalization cell before
+extracting equality, states only the checked carrier equivalence, and marks
+composition/addition compatibility and group completion at their actual
+formal boundaries.
+
+`book/evidence.json` contains 24 claims spanning checked interfaces, a formal
+consequence, and research boundaries. All are cited. Appendix B is assembled
+deterministically from that register, and the provenance checker now validates
+every HoTT adaptation target, source path, source label, type, and description.
+The book source/link/math check passes for all 18 assembled sources, and the
+bounded browser render passes at 27 pages with no console, page, request, or
+render errors.
+
 ### Phase B4 — Adapt the prerequisite spine
+
+State: **COMPLETE (2026-07-20).**
 
 Write Chapters 1--7 in dependency order, but revise the chapter order if the
 vertical slice exposes a better pedagogical dependency.
@@ -1033,7 +1096,29 @@ Gate:
 - the prose remains mathematical rather than a line-by-line kernel tour;
 - all copied/adapted material passes the licensing/provenance review.
 
+#### B4 implementation checkpoint
+
+Chapters 1–7 now form a complete prerequisite spine rather than scope
+markers. They introduce the equality-local foundation, iterated homs,
+functors and transfors, directed families, propositions and recursive
+truncation evidence, carrier equivalence and the exact native-univalence
+boundary, fixed- and varying-source `PathOut` induction, the selected
+WalkingEnd contextual eliminator, and finite categorical height. Chapter 7
+isolates the precise logical step used by Chapter 8: contextual action first
+constructs a directed normalization cell, and discreteness of the based
+hom-category only afterward converts it to equality.
+
+The evidence register now contains 57 claims, all cited and resolved to their
+declared checked, formal-consequence, mathematical-development, or
+research-boundary status. The adaptation ledger records the HoTT source
+labels used by each prerequisite chapter. Deterministic assembly and all
+source, evidence, provenance, link, anchor, and math checks pass across the 18
+sources. The bounded production-browser render passes at 63 pages with no
+console, page, request, or render errors.
+
 ### Phase B5 — Add the first broader functorial chapters
+
+State: **COMPLETE (2026-07-20).**
 
 Prioritize:
 
@@ -1052,7 +1137,27 @@ Gate:
 - free-form developments name their plausible emdash prerequisites and
   intended owners.
 
+#### B5 implementation checkpoint
+
+The first two prioritized topics were already delivered theorem-first:
+Chapter 5 develops `PathOut` induction through the composition benchmark,
+and §8.2 derives the Eckmann–Hilton commutativity slice. Chapters 9 and 10 now
+complete the phase. Chapter 9 organizes ordinary transfors around the
+off-diagonal naturality/cut computation, then distinguishes it from the
+component-level directed laxity cell of a natural family morphism. Chapter 10
+organizes representability and profunctors around the shaped-element
+co-Yoneda beta and its naturality fusion.
+
+The chapters explicitly defer a duplicated whole-laxity facade, a fully
+faithful Cat-valued Yoneda package, a general coend/coinserter realization of
+tensor, and full profunctor-bicategory coherence. The evidence register now
+contains 72 fully cited claims. Deterministic 20-source assembly, source and
+evidence checks, and the bounded production-browser render pass at 77 pages
+with no console, page, request, or render errors.
+
 ### Phase B6 — Book-quality production
+
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -1072,10 +1177,71 @@ Gate:
   missing glyphs, or network requests;
 - source and generated outputs are demonstrably in sync.
 
+#### B6 implementation checkpoint
+
+The initial development edition now has 24 ordered sources: front matter,
+prologue, Chapters 1–10, Appendices A–F, bibliography, credits, and license.
+`book/book.json` owns version `0.1.0-dev`, publication date, source order,
+contents groups, and the ignored release-artifact path. Stable explicit
+anchors plus manifest-generated contents are the selected cross-reference
+system. Appendix D is a curated glossary/concept index, and the eight-entry
+bibliography uses stable reference anchors and primary source links. This
+settles `BOOK-S11` without adding an external bibliography engine to the
+initial edition.
+
+`BOOK-S12` selects a local, reproducible release pipeline:
+
+1. Paged.js paginates the assembled Markdown in headless Chromium after an
+   explicit application-level completion handshake;
+2. every manifest source carries a direct Paged.js page-boundary contract,
+   and the browser gate verifies all source starts after pagination;
+3. `pdf-lib@1.17.1` installs fixed manifest metadata and canonicalizes
+   Chromium's process-local tagged-table structure IDs while preserving their
+   references;
+4. `qpdf` supplies deterministic document IDs and recompression;
+5. `qpdf` and Poppler check structure, tagging, metadata, page geometry,
+   extracted text, blank pages, embedded fonts, and prohibited features.
+
+The PDF remains an ignored generated artifact under `output/pdf/`; a release
+may attach it together with the reported checksum. The release checklist is
+`book/RELEASE.md`. Browser validation additionally rejects external requests,
+broken internal links, raw Markdown tables, rendered error boxes, horizontal
+overflow, inaccessible diagrams/images, low text contrast, color-only links,
+missing source page breaks, and incomplete pagination.
+
+A clean `npm --prefix print ci --offline` installs the locked 260-package
+dependency graph with zero reported vulnerabilities. `book:release` passes
+for all 24 sources and all 72 cited evidence claims. The checked artifact is a
+103-page, US-Letter, tagged PDF with 14 embedded font subsets, no JavaScript,
+and SHA-256
+`c564173cb478e1ca66b90e6c4fa1e78cc7b9a1e684fac78b342e7e3f1792d54f`.
+Two independent clean build/export cycles produce that exact checksum. The
+all-document matrix passes for the three retained articles and the book at
+27, 19, 32, and 103 pages, respectively.
+
+Every PDF page was rendered and inspected in contact sheets, with
+high-resolution review of title, contents, the Chapter 8 theorem and directed
+normalization argument, notation/evidence/status tables, circle comparison,
+glossary, bibliography, credits, and license. The final review found no blank
+pages, clipping, overlap, missing glyphs, or unresolved editorial artifacts.
+No Lambdapi declaration, rule, normal form, or module boundary changed during
+book production. The closing `make ci` passes all 39 retained
+source/example targets in 89.516 seconds, all 16 recovery tests, and every
+TOC, active-reference, report-header, evidence, assembly, source-integrity,
+strict-rule-audit, catalog, and repository-integrity gate.
+
 ### Phase B7 — Optional module split
+
+State: **DEFERRED / NOT TRIGGERED (2026-07-20).**
 
 Start only if book evidence mapping or active implementation work demonstrates
 a concrete maintenance benefit. Follow the separate split protocol above.
+
+The 72-claim register resolves cleanly against the existing kernel and four
+one-way extensions, and book production exposed no declaration-ownership or
+import-visibility problem. A physical split would therefore add migration
+risk without a demonstrated consumer benefit and is not part of this
+completed edition.
 
 Gate:
 
@@ -1083,6 +1249,9 @@ Gate:
 - all repository CI and evidence links pass after every promoted boundary.
 
 ## Acceptance Criteria For The Initial Book Skeleton
+
+State: **SATISFIED AND SUPERSEDED BY THE B3–B6 SUBSTANTIVE EDITION
+CHECKPOINTS (2026-07-20).**
 
 The initial skeleton is complete when:
 
@@ -1190,42 +1359,40 @@ appendix, and one mathematical example per major construction.
     historical evidence.
 11. **Kernel organization:** a physical module split is not a book
     prerequisite and requires a separate migration.
+12. **Cross-references and bibliography:** use manifest-generated contents,
+    stable hand-authored anchors, a curated glossary/concept index, and a
+    compact primary-source bibliography for the initial edition.
+13. **PDF policy:** generate the ignored release artifact through
+    Chromium/Paged.js, fixed `pdf-lib` metadata and structure IDs, and
+    deterministic `qpdf` normalization; attach the artifact and checksum at
+    release time rather than treating it as source.
+14. **Optional split:** the B7 promotion trigger was not met; preserve the
+    current Lambdapi module boundaries.
 
 ## Side Task Ledger
 
 | ID | Task | State | Blocking condition or promotion trigger |
 | --- | --- | --- | --- |
-| BOOK-S1 | Verify and adopt a CC BY-SA-compatible license and attribution text | pending, blocks prose import | must complete before copied/adapted HoTT prose |
-| BOOK-S2 | Design `book.json` and evidence-register schemas | pending | promote in Phase B0 |
-| BOOK-S3 | Centralize print document discovery | pending | promote in Phase B2 |
-| BOOK-S4 | Replace duplicated Arrowgram validation schema | pending | promote in Phase B2 |
+| BOOK-S1 | Verify and adopt a CC BY-SA-compatible license and attribution text | complete (B0, 2026-07-20) | gate remains mandatory for every adapted passage |
+| BOOK-S2 | Design `book.json` and evidence-register schemas | complete (B0/B1, 2026-07-20) | evolve compatibly with checked consumers |
+| BOOK-S3 | Centralize print document discovery | complete (B2, 2026-07-20) | `print/documents.json` is the selected registry |
+| BOOK-S4 | Replace duplicated Arrowgram validation schema | complete (B2, 2026-07-20) | validator imports the package-owned schema |
 | BOOK-S5 | Compare emdash print behavior with `arrowgram-web/preview` | deferred | before renderer replacement |
-| BOOK-S6 | Add reliable subprocess cleanup and per-document render budgets | pending | promote in Phase B2 |
+| BOOK-S6 | Add reliable subprocess cleanup and per-document render budgets | complete (B2, 2026-07-20) | success and forced-SIGTERM cleanup verified |
 | BOOK-S7 | Package composition/addition compatibility as a monoid isomorphism | deferred mathematical/formal extension | after §8.1 carrier proof prose is stable |
 | BOOK-S8 | Construct reverse `BNat` functor/full categorical comparison | deferred research task | requires a separately scoped implementation plan |
 | BOOK-S9 | Develop group completion and the precise circle comparison | deferred research task | after directed theorem and monoid structure |
 | BOOK-S10 | Generate a declaration dependency graph for module splitting | deferred | only when a concrete split benefit appears |
-| BOOK-S11 | Decide bibliography/cross-reference engine | pending but nonblocking for skeleton | before Phase B6 |
-| BOOK-S12 | Decide deterministic PDF implementation and release artifact policy | pending but nonblocking for skeleton | before Phase B6 |
+| BOOK-S11 | Decide bibliography/cross-reference engine | complete (B6, 2026-07-20): stable anchors, generated contents, curated glossary/index and bibliography | reconsider only if a later edition needs automatic citation/page-index generation |
+| BOOK-S12 | Decide deterministic PDF implementation and release artifact policy | complete (B6, 2026-07-20): tagged Chromium/Paged.js export, fixed pdf-lib metadata/structure IDs, qpdf normalization, ignored artifact plus release checksum | rerun the release checklist for every versioned edition |
 
 ## Recommended Next Action
 
-Implement Phases B0--B2 as one bounded infrastructure/documentation
-milestone, without moving Lambdapi declarations. Then write the Chapter 8
-vertical slice before expanding Chapters 1--7. This order tests the whole
-architecture against the theorem that motivated the book and prevents months
-of foundation prose from accumulating before the distinctive directed proof
-is readable.
-
-The first implementation plan should name these exact deliverables:
-
-1. `book/` manifest, license, credits, style guide, evidence seed,
-   and chapter placeholders;
-2. deterministic assembler and shared print document registry;
-3. reproducible package boundary and local-link instructions;
-4. prologue plus the five §8.1 headings;
-5. a checked evidence appendix generated from the current WalkingEnd symbols;
-6. bounded `book:check` validation.
-
-Only after that milestone should prose be imported or closely adapted from
-the HoTT source.
+Phases B0–B6 are complete without moving Lambdapi declarations, and the B7
+trigger was not met. The next step is editorial review of the initial
+development edition, followed by a versioned release using
+`book/RELEASE.md`. Formal extensions such as a monoid isomorphism, reverse
+`BNat` functor, full categorical comparison, group completion, or stronger
+profunctor packaging remain separately scoped research work. Reconsider B7
+only when one of those implementations demonstrates a concrete ownership or
+import-visibility benefit.

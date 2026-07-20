@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "documents": [
+    {
+      "id": "index",
+      "slug": "index",
+      "file": "index.md",
+      "title": "Emdash research paper",
+      "kind": "article",
+      "default": true,
+      "generated": false,
+      "aliases": [
+        "",
+        "index.md"
+      ],
+      "groups": [
+        "all",
+        "articles"
+      ],
+      "layout": "single-column",
+      "checks": {
+        "validate": true,
+        "render": true
+      },
+      "timeoutMs": 60000
+    },
+    {
+      "id": "index-0",
+      "slug": "index_0",
+      "file": "index_0.md",
+      "title": "Emdash short paper",
+      "kind": "article",
+      "default": false,
+      "generated": false,
+      "aliases": [
+        "0",
+        "index_0.md"
+      ],
+      "groups": [
+        "all",
+        "articles"
+      ],
+      "layout": "single-column",
+      "checks": {
+        "validate": true,
+        "render": true
+      },
+      "timeoutMs": 60000
+    },
+    {
+      "id": "index-3-2",
+      "slug": "index_3_2",
+      "file": "index_3_2.md",
+      "title": "Emdash v3.2 research article",
+      "kind": "article",
+      "default": false,
+      "generated": false,
+      "aliases": [
+        "index_3_2.md"
+      ],
+      "groups": [
+        "all",
+        "articles"
+      ],
+      "layout": "single-column",
+      "checks": {
+        "validate": true,
+        "render": true
+      },
+      "timeoutMs": 60000
+    },
+    {
+      "id": "emdash-book",
+      "slug": "emdash-book",
+      "file": "emdash-book.md",
+      "title": "Functorial Type Theory: Univalent Foundations for Mathematics",
+      "kind": "book",
+      "default": false,
+      "generated": true,
+      "aliases": [
+        "book",
+        "emdash-book.md"
+      ],
+      "groups": [
+        "all",
+        "book"
+      ],
+      "layout": "single-column",
+      "checks": {
+        "validate": true,
+        "render": true
+      },
+      "timeoutMs": 60000
+    }
+  ]
+}

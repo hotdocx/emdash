@@ -40,6 +40,11 @@ detailed probe evidence.
   authority for comments, examples, and future parser work.
 - `INDEX.md`: active plans, completed decision records, audits, and generated
   reports.
+- `../book/book.json` and `../book/evidence.json`: book source
+  ordering/metadata and prose-to-check traceability. They govern the book
+  artifact but never override active Lambdapi declarations.
+- `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
+  current book implementation plan and milestone ledger.
 - `REPORT_EMDASH_CHECK_CATALOG.md`: generated map of the diagnostic suite.
 - `REPORT_EMDASH_HEALTH.md`: generated source metrics and bounded timings.
 
@@ -2161,6 +2166,32 @@ scripts/lambdapi_search.sh 'type >= Prof_imply_cov'
 
 for normalization/type-aware search.
 
+## Book And Renderer Workflow
+
+The book is a first-class exposition artifact under `book/`. Its
+chapter files are authoring sources; the ignored
+`print/public/emdash-book.md` file is deterministic generated input for
+the renderer. Book theorem-like claims use the four statuses defined in
+`book/STYLE.md` and checked claims cite `book/evidence.json`.
+
+```bash
+npm run book:assemble
+npm run book:check
+npm run book:render
+```
+
+`book:check` verifies source order, attribution/provenance, anchors and
+links, evidence declarations/reviewers, generated freshness, and embedded
+diagram schemas. `book:render` adds a local-asset, bounded browser
+pagination check. Renderer implementation and optional local upstream-package
+instructions live in `print/README.md`; prose style and licensing live
+in `book/STYLE.md`, `book/CREDITS.md`, and
+`book/LICENSE.md`.
+
+The book must describe `BNat` as a separate model and present the
+directed normalization cell before the hom-discreteness equality. A physical
+split of `emdash3_2.lp` is not a prerequisite for book development.
+
 ## Current Deferred Boundaries
 
 The following remain explicit future work rather than hidden assumptions:
@@ -2179,11 +2210,10 @@ The following remain explicit future work rather than hidden assumptions:
 - specialized higher `fapp1*` projections of `Hom_tele_func` beyond current
   demand;
 - raw unreified-path observer computation, reverse pointwise-to-coherent-core
-  assembly, consumer-led core-universe inclusion functors, and eventual
-  deletion of the frozen legacy decoder module. The exact deletion
-  prerequisite for its retained two-sided OneCat theorem is native facade-
-  package/raw-path reification coherence, unless backward compatibility is
-  deliberately dropped first;
+  assembly, and consumer-led core-universe inclusion functors. A fully native
+  two-sided OneCat object-equality/ordinary-isomorphism equivalence remains
+  optional future work; the former compatibility decoder, its theorem, and
+  its reviewer clients are already deleted and are not prerequisites;
 - generic abstraction of the completed walking-endomorphism presentation,
   full functor-category initiality, a displayed dependent path-action/section
   construction, groupoid completion toward `BInt`/Circle, and general

@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "hott-book",
+      "title": "Homotopy Type Theory: Univalent Foundations of Mathematics",
+      "authors": "The Univalent Foundations Program",
+      "repository": "https://github.com/HoTT/book",
+      "revision": "578b85cc8d586b1677ec4335148adeb443057d24",
+      "revisionDate": "2026-05-12",
+      "license": {
+        "spdx": "CC-BY-SA-3.0",
+        "name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      "sourceMap": [
+        {
+          "path": "introduction.tex",
+          "use": "orientation and reader-path reference"
+        },
+        {
+          "path": "preliminaries.tex",
+          "labels": [
+            "sec:types-vs-sets",
+            "sec:function-types",
+            "sec:universes",
+            "sec:pi-types",
+            "sec:sigma-types",
+            "sec:inductive-types",
+            "sec:pat",
+            "sec:identity-types",
+            "rmk:propeq-vs-jdeq"
+          ],
+          "use": "prerequisite-spine reference"
+        },
+        {
+          "path": "basics.tex",
+          "labels": [
+            "sec:equality",
+            "sec:functors",
+            "sec:fibrations",
+            "thm:transport-compose",
+            "sec:basics-equivalences",
+            "sec:compute-sigma",
+            "sec:compute-pi",
+            "sec:compute-universe",
+            "sec:compute-coprod",
+            "sec:compute-nat",
+            "sec:universal-properties"
+          ],
+          "use": "transport and encode-decode reference"
+        },
+        {
+          "path": "equivalences.tex",
+          "labels": [
+            "sec:quasi-inverses",
+            "sec:contrf",
+            "defn:equivalence",
+            "sec:equiv-closures",
+            "thm:total-fiber-equiv"
+          ],
+          "use": "classical comparison reference"
+        },
+        {
+          "path": "logic.tex",
+          "labels": [
+            "sec:basics-sets",
+            "defn:set",
+            "subsec:hprops",
+            "defn:isprop",
+            "sec:intuitionism",
+            "sec:contractibility",
+            "defn:contractible",
+            "thm:contr-paths"
+          ],
+          "use": "path-fibration contractibility reference"
+        },
+        {
+          "path": "hits.tex",
+          "labels": [
+            "sec:intro-hits",
+            "sec:dependent-paths",
+            "sec:circle",
+            "thm:S1rec",
+            "thm:S1ump",
+            "defn-Z",
+            "thm:sign-induction",
+            "thm:looptothe",
+            "sec:naturality"
+          ],
+          "use": "higher-constructor and loop-power reference"
+        },
+        {
+          "path": "hlevels.tex",
+          "labels": [
+            "sec:n-types",
+            "def:hlevel",
+            "thm:h-level-retracts",
+            "thm:isaprop-isofhlevel",
+            "thm:hleveln-of-hlevelSn",
+            "sec:truncations"
+          ],
+          "use": "truncation and sethood reference"
+        },
+        {
+          "path": "homotopy.tex",
+          "labels": [
+            "sec:pi1-s1-intro",
+            "sec:pi1s1-initial-thoughts",
+            "sec:pi1s1-classical-proof",
+            "sec:pi1s1-universal-cover",
+            "subsec:pi1s1-encode-decode"
+          ],
+          "use": "Chapter 8 rhetorical-spine reference"
+        }
+      ],
+      "adaptations": [
+        {
+          "id": "HOTT-CH1-TYPE-THEORY-SPINE",
+          "target": "book/chapters/01-judgments-and-computation.md",
+          "sourcePath": "preliminaries.tex",
+          "sourceLabels": [
+            "sec:types-vs-sets",
+            "sec:function-types",
+            "sec:universes",
+            "sec:pi-types",
+            "sec:sigma-types",
+            "sec:inductive-types",
+            "sec:pat",
+            "sec:identity-types",
+            "rmk:propeq-vs-jdeq"
+          ],
+          "adaptationType": "structural",
+          "description": "Retains the judgments/functions/families/inductive types/identity sequence while separating Lambdapi conversion, proof-time comparison, and internal equality evidence."
+        },
+        {
+          "id": "HOTT-CH2-FUNCTORS-AND-FAMILIES",
+          "target": "book/chapters/02-categories-functors-and-families.md",
+          "sourcePath": "basics.tex",
+          "sourceLabels": [
+            "sec:equality",
+            "sec:functors",
+            "sec:fibrations",
+            "thm:transport-compose",
+            "sec:compute-sigma",
+            "sec:compute-pi"
+          ],
+          "adaptationType": "conceptual",
+          "description": "Reworks the higher-groupoid, functions-as-functors, and families-as-fibrations themes into explicit iterated hom-categories, directed functors, Cat-valued families, total categories, and section categories."
+        },
+        {
+          "id": "HOTT-CH3-LOGIC-AND-SETHOOD",
+          "target": "book/chapters/03-logic-propositions-and-sets.md",
+          "sourcePath": "logic.tex",
+          "sourceLabels": [
+            "sec:basics-sets",
+            "defn:set",
+            "subsec:hprops",
+            "defn:isprop",
+            "sec:intuitionism",
+            "sec:contractibility",
+            "defn:contractible"
+          ],
+          "adaptationType": "structural",
+          "description": "Retains the propositions-as-types, mere propositions, sets, constructive logic, and contractibility progression while tying each implemented claim to emdash evidence and deferring truncation recursion to Chapter 7."
+        },
+        {
+          "id": "HOTT-CH4-EQUIVALENCE-INTERFACES",
+          "target": "book/chapters/04-equivalence-and-univalence.md",
+          "sourcePath": "equivalences.tex",
+          "sourceLabels": [
+            "sec:quasi-inverses",
+            "sec:contrf",
+            "defn:equivalence",
+            "sec:equiv-closures"
+          ],
+          "adaptationType": "structural",
+          "description": "Uses the inverse-data-to-contractible-fibres progression, then separates type equivalence, ordinary categorical isomorphism, and recursive equality-valued omega-equivalence."
+        },
+        {
+          "id": "HOTT-CH4-UNIVALENCE-BOUNDARY",
+          "target": "book/chapters/04-equivalence-and-univalence.md",
+          "sourcePath": "basics.tex",
+          "sourceLabels": [
+            "sec:compute-universe"
+          ],
+          "adaptationType": "comparative",
+          "description": "Compares the HoTT identity-to-equivalence and univalence interface with emdash groupoid, truncated-universe, and directed categorical equality boundaries without claiming one global univalence axiom."
+        },
+        {
+          "id": "HOTT-CH5-IDENTITY-INDUCTION",
+          "target": "book/chapters/05-induction-and-universal-properties.md",
+          "sourcePath": "preliminaries.tex",
+          "sourceLabels": [
+            "sec:identity-types",
+            "rmk:propeq-vs-jdeq"
+          ],
+          "adaptationType": "conceptual",
+          "description": "Uses based identity induction as the groupoidal reference point for the explicit fixed-source outgoing-arrow induction construction."
+        },
+        {
+          "id": "HOTT-CH5-UNIVERSAL-PROPERTIES",
+          "target": "book/chapters/05-induction-and-universal-properties.md",
+          "sourcePath": "basics.tex",
+          "sourceLabels": [
+            "sec:universal-properties"
+          ],
+          "adaptationType": "conceptual",
+          "description": "Adapts the universal-property viewpoint to contextual categorical elimination while distinguishing the checked arrow-induction interface from unimplemented general homotopy-initiality packages."
+        },
+        {
+          "id": "HOTT-CH6-HIT-ELIMINATION",
+          "target": "book/chapters/06-directed-hits.md",
+          "sourcePath": "hits.tex",
+          "sourceLabels": [
+            "sec:intro-hits",
+            "sec:dependent-paths",
+            "sec:circle",
+            "thm:S1rec",
+            "thm:S1ump",
+            "sec:naturality"
+          ],
+          "adaptationType": "structural",
+          "description": "Retains the constructors/recursion/dependent elimination/computation organization for one selected directed HIT, replacing loop paths by a directed generator and dependent paths by contextual coherence."
+        },
+        {
+          "id": "HOTT-CH7-TRUNCATION-HEIGHT",
+          "target": "book/chapters/07-truncation-and-categorical-height.md",
+          "sourcePath": "hlevels.tex",
+          "sourceLabels": [
+            "sec:n-types",
+            "def:hlevel",
+            "thm:h-level-retracts",
+            "thm:isaprop-isofhlevel",
+            "thm:hleveln-of-hlevelSn",
+            "sec:truncations"
+          ],
+          "adaptationType": "structural",
+          "description": "Retains recursive h-levels and closure ideas while distinguishing emdash truncation evidence and finite categorical height from an unimplemented truncation reflector or general truncation HIT."
+        },
+        {
+          "id": "HOTT-PROLOGUE-LOOP-COMPUTATION",
+          "target": "book/chapters/00-prologue.md",
+          "sourcePath": "homotopy.tex",
+          "sourceLabels": [
+            "sec:pi1-s1-intro",
+            "sec:pi1s1-initial-thoughts"
+          ],
+          "adaptationType": "structural",
+          "description": "Uses the question-first loop-space calculation as a rhetorical point of departure; all prose is newly written for the noninvertible WalkingEnd/Nat setting."
+        },
+        {
+          "id": "HOTT-CH8-ENCODE-DECODE-SPINE",
+          "target": "book/chapters/08-walking-endomorphism.md",
+          "sourcePath": "homotopy.tex",
+          "sourceLabels": [
+            "sec:pi1s1-initial-thoughts",
+            "sec:pi1s1-classical-proof",
+            "sec:pi1s1-universal-cover",
+            "subsec:pi1s1-encode-decode"
+          ],
+          "adaptationType": "structural",
+          "description": "Retains the getting-started/model/cover/encode-decode progression while replacing paths and integers by directed arrows, natural powers, a contextual decoder, and directed normalization."
+        },
+        {
+          "id": "HOTT-CH8-HIT-AND-POWER-COMPARISON",
+          "target": "book/chapters/08-walking-endomorphism.md",
+          "sourcePath": "hits.tex",
+          "sourceLabels": [
+            "sec:dependent-paths",
+            "sec:circle",
+            "defn-Z",
+            "thm:sign-induction",
+            "thm:looptothe"
+          ],
+          "adaptationType": "conceptual",
+          "description": "Compares constructor computation and loop powers with the selected directed HIT, explicitly removing inverse powers and predecessor cases."
+        },
+        {
+          "id": "HOTT-CH8-NAT-ENCODE-DECODE-PATTERN",
+          "target": "book/chapters/08-walking-endomorphism.md",
+          "sourcePath": "basics.tex",
+          "sourceLabels": [
+            "thm:transport-compose",
+            "sec:compute-coprod",
+            "sec:compute-nat"
+          ],
+          "adaptationType": "conceptual",
+          "description": "Uses the generalize-the-endpoint and calculate-two-inverses proof pattern, with directed functor action replacing path transport."
+        },
+        {
+          "id": "HOTT-APPENDIX-C-COMPARISON",
+          "target": "book/appendices/c-hott-correspondence.md",
+          "sourcePath": "homotopy.tex",
+          "sourceLabels": [
+            "sec:pi1-s1-intro",
+            "subsec:pi1s1-encode-decode"
+          ],
+          "adaptationType": "comparative",
+          "description": "Records the precise analogy and the points where invertibility, predecessor, univalence, and group cancellation do not transfer."
+        }
+      ]
+    }
+  ]
+}

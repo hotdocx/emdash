@@ -1,0 +1,1496 @@
+{
+  "version": 1,
+  "statuses": [
+    "checked",
+    "formal-consequence",
+    "mathematical-development",
+    "research-boundary"
+  ],
+  "claims": {
+    "TT-EQUALITY-INDUCTION": {
+      "status": "checked",
+      "statement": "The equality-local foundation has reflexivity, right-based dependent equality induction, nondependent path action, and dependent path action.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "eq_refl"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "ind_eqr"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "eq_ap"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "eq_apd"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/path_category.lp",
+          "symbol": "eq_apd"
+        }
+      ]
+    },
+    "TT-ELEMENTARY-INDUCTION": {
+      "status": "checked",
+      "statement": "Empty, Unit, Bool, and Nat have decoded classifiers, and the nontrivial elementary inductive carriers have dependent eliminators with constructor computation.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Empty_grpd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Unit_grpd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Bool_grpd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Nat_grpd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "empty_elim"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "bool_elim"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "nat_elim"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "nat_elim"
+        }
+      ]
+    },
+    "TT-SIGMA-PI-PATHS": {
+      "status": "checked",
+      "statement": "The groupoid layer has dependent-pair and dependent-function classifiers, observational Sigma paths, and a checked happly/funext equivalence for Pi paths.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "sigma_Fst"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "sigma_Snd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "PiHapply"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "PiFunext"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "pi_happly_type_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/pi_funext.lp",
+          "symbol": "PiFunext"
+        }
+      ]
+    },
+    "CAT-ITERATED-HOMS": {
+      "status": "checked",
+      "statement": "A category has an object classifier and category-valued homs, so higher cells are represented by iterating Hom.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Obj"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Hom"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Hom"
+        }
+      ]
+    },
+    "CAT-PATH-CATEGORY": {
+      "status": "checked",
+      "statement": "Path(A) internalizes equality as a groupoidal category, and an ordinary function induces an iterable functor between path categories.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Path_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Path_cat_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "path_map_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/path_category.lp",
+          "symbol": "path_map_func"
+        }
+      ]
+    },
+    "CAT-FUNCTOR-CALCULUS": {
+      "status": "checked",
+      "statement": "Ordinary functors expose object and iterated-hom action, with generic identity and composition computation rather than constructor-specific functor laws.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Functor"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "fapp0"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "fapp1_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "fapp1_fapp0"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "id_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "comp_cat_fapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "fapp1_fapp0"
+        }
+      ]
+    },
+    "CAT-TRANSFOR-CALCULUS": {
+      "status": "checked",
+      "statement": "Transformations form the next hom between functors and expose point components together with higher naturality action.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "tapp0_fapp0"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "tapp1_fapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "tapp1_fapp0"
+        }
+      ]
+    },
+    "CAT-DIRECTED-FAMILIES": {
+      "status": "checked",
+      "statement": "A Cat-valued directed family has fibres and functorial reindexing, while a family morphism has fibre functors and directed comparison cells.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Catd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Fibre_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "catd_transport_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Functord"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "fdapp1_int_cell"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/dependent_hom_laxity.lp",
+          "symbol": "fdapp1_int_cell"
+        }
+      ]
+    },
+    "CAT-SIGMA-PI": {
+      "status": "checked",
+      "statement": "Directed families have a Sigma total category, canonical transport arrows, and a Pi section category with coherent evaluation.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Sigma_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "sigma_transport_arrow"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Pi_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "piapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "sigma_transport_arrow"
+        }
+      ]
+    },
+    "CAT-REPRESENTABLE": {
+      "status": "checked",
+      "statement": "The fixed-source representable family has fibre Hom(x,y), and its source action is precomposition.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Rep_catd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Rep_transport_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/path_induction_transitivity.lp",
+          "symbol": "Rep_catd"
+        }
+      ]
+    },
+    "LOGIC-TRUNCATION-PREDICATE": {
+      "status": "checked",
+      "statement": "Contractibility and recursive truncation evidence define the proposition, set, and groupoid levels as properties of existing classifiers.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsContr"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsTruncGrpd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsPropGrpd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsSetGrpd"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/truncation_monotonicity.lp",
+          "symbol": "IsTruncGrpd"
+        }
+      ]
+    },
+    "LOGIC-NAT-SETHOOD": {
+      "status": "checked",
+      "statement": "Unit and Empty are proposition-valued and Nat is set-valued by explicit internal evidence.",
+      "owners": [
+        {
+          "file": "emdash3_2_nat_arithmetic.lp",
+          "symbol": "unit_is_prop"
+        },
+        {
+          "file": "emdash3_2_nat_arithmetic.lp",
+          "symbol": "empty_is_prop"
+        },
+        {
+          "file": "emdash3_2_nat_arithmetic.lp",
+          "symbol": "nat_is_set"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_nat_prerequisites.lp",
+          "symbol": "nat_is_set"
+        }
+      ]
+    },
+    "LOGIC-TRUNCATION-EVIDENCE-PROP": {
+      "status": "checked",
+      "statement": "For every truncation level and classifier, the classifier of truncation evidence is proposition-valued.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "is_trunc_grpd_evidence_is_prop"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/truncation_evidence_property.lp",
+          "symbol": "is_trunc_grpd_evidence_is_prop"
+        }
+      ]
+    },
+    "EQUIV-TYPE": {
+      "status": "checked",
+      "statement": "TypeEquiv packages a forward map with contractible homotopy fibres and exposes a selected inverse with both inverse paths.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "HFiber"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsEquivMap"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "TypeEquiv"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "type_equiv_from"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "type_equiv_left"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "type_equiv_right"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/type_equiv_algebra.lp",
+          "symbol": "TypeEquiv"
+        }
+      ]
+    },
+    "EQUIV-TYPE-ALGEBRA": {
+      "status": "checked",
+      "statement": "Type equivalences have reflexivity, symmetry, and categorical-order composition with checked forward-map computation.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "type_equiv_refl"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "type_equiv_sym"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "type_equiv_comp"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/type_equiv_algebra.lp",
+          "symbol": "type_equiv_comp"
+        }
+      ]
+    },
+    "UNIV-GROUPOID": {
+      "status": "checked",
+      "statement": "The groupoid universe has a decoder-oriented univalence equivalence between universe paths and TypeEquiv, with named round trips and transport agreement.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "grpd_univalence_type_equiv"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "grpd_equiv_path"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "grpd_equiv_path_idtoequiv"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "idtoequiv_grpd_equiv_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/grpd_univalence_decoder.lp",
+          "symbol": "grpd_univalence_from_decoder"
+        }
+      ]
+    },
+    "UNIV-TRUNCATED": {
+      "status": "checked",
+      "statement": "For packaged n-truncated classifiers, package equality is equivalent to TypeEquiv of the retained carriers, with named encode/decode round trips.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "trunc_grpd_univalence_type_equiv"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "trunc_grpd_idtoequiv"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "trunc_grpd_equiv_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/truncation_universe_univalence.lp",
+          "symbol": "trunc_grpd_univalence_type_equiv"
+        }
+      ]
+    },
+    "EQUIV-OMEGA": {
+      "status": "checked",
+      "statement": "OmegaEquivAlong carries equality-valued inverse-arrow data, OmegaEquiv packages a selected arrow, and an object path has a transparent computational equivalence package.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "OmegaEquivAlong"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "OmegaEquiv"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "object_path_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/equality_valued_omega_equivalence.lp",
+          "symbol": "object_path_equiv"
+        }
+      ]
+    },
+    "EQUIV-EVIDENCE-PROP": {
+      "status": "checked",
+      "statement": "For every fixed arrow, its equality-valued OmegaEquivAlong evidence is proposition-valued without a finite-dimensional hypothesis.",
+      "owners": [
+        {
+          "file": "emdash3_2_eq1_evidence_property.lp",
+          "symbol": "omega_equiv_along_evidence_is_prop"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/equality_valued_omega_equivalence_evidence_property.lp",
+          "symbol": "omega_equiv_along_evidence_is_prop"
+        }
+      ]
+    },
+    "EQUIV-HOM-ACTION": {
+      "status": "checked",
+      "statement": "Equality-valued equivalence evidence has a one-way next-hom action, and coherent groupoidality makes directed fibre transport an equivalence.",
+      "owners": [
+        {
+          "file": "emdash3_2_eq1_hom_action.lp",
+          "symbol": "omega_equiv_along_fapp1"
+        },
+        {
+          "file": "emdash3_2_eq1_hom_action.lp",
+          "symbol": "groupoidal_fibre_transport_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/equality_valued_omega_equivalence_hom_action.lp",
+          "symbol": "omega_equiv_along_fapp1"
+        }
+      ]
+    },
+    "EQUIV-ORDINARY-ISO-LIFT": {
+      "status": "checked",
+      "statement": "Ordinary categorical isomorphism evidence has a one-way lift to the native equality-valued OmegaEquiv package.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsoEvidence"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "iso_evidence_omega_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "iso_evidence_omega_equiv"
+        }
+      ]
+    },
+    "UNIV-FULL-OBJECT-ISO": {
+      "status": "research-boundary",
+      "statement": "A full native equivalence between arbitrary categorical object equality and ordinary isomorphism evidence is not part of the selected API.",
+      "owners": [],
+      "reviewers": []
+    },
+    "IND-PATHOUT": {
+      "status": "checked",
+      "statement": "PathOut_Z(x) is the Sigma total of the fixed-source representable, with a reflexive object and a canonical rho arrow to every outgoing arrow.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "PathOut_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "pathout_refl_obj"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "pathout_refl_arrow"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "pathout_refl_arrow"
+        }
+      ]
+    },
+    "IND-ARROW": {
+      "status": "checked",
+      "statement": "Fixed-source arrow induction extends data at the reflexive outgoing arrow to a section, and the theorem is internalized functorially as fixed-source and varying-source interfaces.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "path_ind_sec"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "PathInd_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "PathInd_transfd"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/path_induction_transitivity.lp",
+          "symbol": "path_ind_sec"
+        }
+      ]
+    },
+    "IND-COMPOSITION": {
+      "status": "checked",
+      "statement": "Applying arrow induction to the represented composition motive yields a functor whose object action computes to categorical composition.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "CompMotive_catd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "path_comp_sec"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "path_comp_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/path_induction_transitivity.lp",
+          "symbol": "path_comp_func"
+        }
+      ]
+    },
+    "IND-PATH-COMPARISON": {
+      "status": "checked",
+      "statement": "For a literal path-category base, structured directed transport agrees propositionally with primitive right-based equality induction.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "path_cat_structured_transport_agrees_ind_eqr"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/groupoidal_structured_j_eq1.lp",
+          "symbol": "path_cat_structured_transport_agrees_ind_eqr"
+        }
+      ]
+    },
+    "IND-GENERAL-INITIALITY": {
+      "status": "research-boundary",
+      "statement": "A general theorem identifying all selected categorical induction interfaces with homotopy-initial algebras has not been packaged.",
+      "owners": [],
+      "reviewers": []
+    },
+    "DHIT-DERIVED-ELIMINATORS": {
+      "status": "checked",
+      "statement": "The contextual WalkingEnd eliminator specializes to a dependent section and an ordinary recursor with base and generator observations.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_ind_sec"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_rec_func"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_rec_beta_base"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_rec_beta_loop_ordinary"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_end_rec_func"
+        }
+      ]
+    },
+    "DHIT-GENERAL-SCHEMA": {
+      "status": "research-boundary",
+      "statement": "The selected WalkingEnd interface does not yet constitute a reusable schema for arbitrary directed higher-inductive categories, pushouts, or cell complexes.",
+      "owners": [],
+      "reviewers": []
+    },
+    "TRUNC-CLOSURE": {
+      "status": "checked",
+      "statement": "Recursive truncation evidence is monotone and has checked dependent Pi and same-level dependent Sigma closure operations.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "is_trunc_grpd_succ"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "is_trunc_pi"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "is_trunc_sigma"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/truncation_pi_closure.lp",
+          "symbol": "is_trunc_pi"
+        },
+        {
+          "file": "examples/truncation_sigma_closure.lp",
+          "symbol": "is_trunc_sigma"
+        }
+      ]
+    },
+    "TRUNC-RETRACT": {
+      "status": "checked",
+      "statement": "Every recursive truncation level is closed under explicit retractions.",
+      "owners": [
+        {
+          "file": "emdash3_2_eq1_evidence_property.lp",
+          "symbol": "is_trunc_retract"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "is_trunc_retract"
+        }
+      ]
+    },
+    "CAT-DIMENSION": {
+      "status": "checked",
+      "statement": "IsNCat defines finite directed height by hom recursion, and every such category has the recursively predicted object-truncation evidence.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsNCat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "cat_dim_trunc_level"
+        },
+        {
+          "file": "emdash3_2_eq1_evidence_property.lp",
+          "symbol": "ncat_obj_trunc"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/directed_dimension.lp",
+          "symbol": "IsNCat"
+        },
+        {
+          "file": "examples/equality_valued_omega_equivalence_evidence_property.lp",
+          "symbol": "ncat_obj_trunc"
+        }
+      ]
+    },
+    "TRUNC-REFLECTOR": {
+      "status": "research-boundary",
+      "statement": "The active truncation layer supplies properties and packaged truncated universes, not a general truncation reflector or arbitrary truncation HIT.",
+      "owners": [],
+      "reviewers": []
+    },
+    "WE-SIGNATURE": {
+      "status": "checked",
+      "statement": "WalkingEnd has an opaque category, base, directed loop, and explicit one-dimensional evidence.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "WalkingEnd_cat"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_base"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_loop"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_is_one_cat"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_end_is_one_cat"
+        }
+      ]
+    },
+    "WE-ONE-DIMENSIONAL": {
+      "status": "checked",
+      "statement": "Every WalkingEnd hom-category is discrete, without WalkingEnd itself becoming discrete.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_hom_discrete"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "walking_end_hom_discrete"
+        }
+      ]
+    },
+    "WE-CONTEXTUAL-ELIMINATOR": {
+      "status": "checked",
+      "statement": "The contextual WalkingEnd eliminator has base and loop computation at the selected displayed observers.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_ind_funcd"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_ind_funcd_beta_base"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_ind_funcd_beta_loop"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_end_ind_funcd"
+        }
+      ]
+    },
+    "WE-BNAT-MODEL": {
+      "status": "checked",
+      "statement": "BNat is a separate one-object Nat-monoid model and receives a functor from WalkingEnd.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "BNat_cat"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "bnat_comp_nat_add"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_bnat_model_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_bnat_model_func"
+        }
+      ]
+    },
+    "WE-CODE": {
+      "status": "checked",
+      "statement": "Code sends the walking base to Path(Nat) and the walking loop to the Nat successor functor.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_Code_catd"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_Code_beta_base"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_Code_beta_loop"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_Code_catd"
+        }
+      ]
+    },
+    "WE-ENCODE": {
+      "status": "checked",
+      "statement": "Encode acts with Code on a based arrow and evaluates at zero.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_encode"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_encode"
+        }
+      ]
+    },
+    "WE-POWER": {
+      "status": "checked",
+      "statement": "Natural powers map zero to identity and successor to generator-prefix composition.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_power"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_power_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_power"
+        }
+      ]
+    },
+    "WE-SPIRAL": {
+      "status": "checked",
+      "statement": "The selected explicit-kappa directed spiral supplies the loop coherence for powers.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_power_spiral"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_power_spiral_cell"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_power_spiral_cell"
+        }
+      ]
+    },
+    "WE-CONTEXTUAL-DECODER": {
+      "status": "checked",
+      "statement": "The contextual decoder maps Code to the based representable and computes to powers at the base.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_directed_decode_funcd"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_directed_decode_beta_base"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_directed_decode_funcd"
+        }
+      ]
+    },
+    "WE-NORMALIZATION-CELL": {
+      "status": "checked",
+      "statement": "Every based arrow has a directed normalization cell toward decode(encode(p)).",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_directed_normalization_cell"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_directed_normalization_cell"
+        }
+      ]
+    },
+    "WE-NORMALIZATION-PATH": {
+      "status": "checked",
+      "statement": "Hom-discreteness converts the directed normalization cell into equality.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_directed_normalization_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "walking_directed_normalization_path"
+        }
+      ]
+    },
+    "WE-POWER-ENCODE": {
+      "status": "checked",
+      "statement": "For a based endomorphism p, power(encode(p)) equals p.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_power_encode_roundtrip"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_power_encode_roundtrip"
+        }
+      ]
+    },
+    "WE-ENCODE-POWER": {
+      "status": "checked",
+      "statement": "For every natural n, encode(power(n)) equals n.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_encode_power_roundtrip"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_encode_power_roundtrip"
+        }
+      ]
+    },
+    "WE-HOM-NAT-CARRIER": {
+      "status": "checked",
+      "statement": "The underlying based-endomorphism carrier is equivalent to Nat.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_hom_nat_type_equiv"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_hom_nat_omega_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_hom_nat_type_equiv"
+        }
+      ]
+    },
+    "WE-HOM-SETHOOD": {
+      "status": "checked",
+      "statement": "The based-endomorphism carrier is a set both from dimension and from the Nat equivalence.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_hom_is_set_from_dimension"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_end_hom_is_set_from_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_end_hom_is_set_from_dimension"
+        }
+      ]
+    },
+    "WE-LOOP-NOT-IDENTITY": {
+      "status": "checked",
+      "statement": "The walking generator is not equal to the identity.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_loop_not_identity"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "walking_loop_not_identity"
+        }
+      ]
+    },
+    "WE-LOOP-NO-RIGHT-INVERSE": {
+      "status": "checked",
+      "statement": "The walking generator has no right inverse.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_loop_no_right_inverse"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "walking_loop_no_right_inverse"
+        }
+      ]
+    },
+    "WE-LOOP-NONINVERTIBLE": {
+      "status": "checked",
+      "statement": "The walking generator carries no native omega-equivalence evidence.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_loop_not_omega_equiv"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_loop_not_omega_equiv"
+        }
+      ]
+    },
+    "WE-ENCODE-PREFIX": {
+      "status": "checked",
+      "statement": "Encoding a generator-prefixed based endomorphism produces the successor of its code.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_encode_loop_prefix_path"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_encode_loop_prefix_path"
+        }
+      ]
+    },
+    "WE-STRUCTURED-ENCODER": {
+      "status": "checked",
+      "statement": "The based encoder is also packaged as a functor from the based hom-category to Path(Nat).",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_encode_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/walking_endomorphism_hit.lp",
+          "symbol": "walking_encode_func"
+        }
+      ]
+    },
+    "WE-COMPOSITION-ADDITION": {
+      "status": "formal-consequence",
+      "statement": "Compatibility of based composition with Nat addition follows from the checked power recursion, inverse laws, and ordinary category/Nat induction, but is not packaged as a monoid equivalence.",
+      "owners": [
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_encode_loop_prefix_path"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_power_encode_roundtrip"
+        },
+        {
+          "file": "emdash3_2_walking_end_hit.lp",
+          "symbol": "walking_encode_power_roundtrip"
+        }
+      ],
+      "reviewers": []
+    },
+    "WE-FULL-CATEGORICAL-COMPARISON": {
+      "status": "research-boundary",
+      "statement": "A reverse BNat functor, full hom-category equivalence, and functor-category initiality require additional reusable infrastructure.",
+      "owners": [],
+      "reviewers": []
+    },
+    "WE-GROUP-COMPLETION": {
+      "status": "research-boundary",
+      "statement": "Group completion toward BInt or the circle comparison has not been implemented.",
+      "owners": [],
+      "reviewers": []
+    },
+    "TRANSF-POINT-OFFDIAGONAL": {
+      "status": "checked",
+      "statement": "An ordinary transfor has point components and an iterable off-diagonal hom action from F(x) to G(y) along every source arrow x to y.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Transf_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "tapp0_fapp0"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "tapp1_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "tapp1_fapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "tapp1_at_transf"
+        }
+      ]
+    },
+    "TRANSF-STRICT-NATURALITY": {
+      "status": "checked",
+      "statement": "Postcomposition and precomposition adjacent to an ordinary transfor's off-diagonal action reduce to the action on the corresponding composite source arrow.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "contains": "Full strict naturality for ordinary transfors"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Full strict naturality: post/left accumulation before capping"
+        }
+      ]
+    },
+    "TRANSFD-FIBRE-COMPONENTS": {
+      "status": "checked",
+      "statement": "A natural family transformation between displayed functors has a transformation in every fibre and a point component at every fibre object, with identity and vertical composition inherited from the generic transfor calculus.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Transfd_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Fibre_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Fibre_transf_app"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Fibre_transf_app"
+        }
+      ]
+    },
+    "FUNCTORD-DISPLAYED-LAXITY": {
+      "status": "checked",
+      "statement": "For a natural family morphism and a base arrow, the internal displayed hom action supplies a directed component from target transport after the source fibre functor to the target fibre functor after source transport.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "functord_transport_lhs_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "functord_transport_rhs_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "fdapp1_int_cell"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/dependent_hom_laxity.lp",
+          "symbol": "fdapp1_int_cell"
+        }
+      ]
+    },
+    "FUNCTORD-SIGMA-ACTION": {
+      "status": "checked",
+      "statement": "The Sigma-total map induced by a natural family morphism sends a total arrow to the same base arrow paired with the capped internal displayed hom action in the fibre.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "sigma_map_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "fdapp1_int_hom_fapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/sigma_total.lp",
+          "symbol": "sigma_map_transf"
+        }
+      ]
+    },
+    "FUNCTORD-WHOLE-LAXITY": {
+      "status": "research-boundary",
+      "statement": "A standalone whole-transfor laxity facade between the two transport composites is intentionally deferred; the active owner is the internal displayed hom action and its component projections.",
+      "owners": [],
+      "reviewers": []
+    },
+    "PROF-CATEGORY": {
+      "status": "checked",
+      "statement": "A Cat-valued profunctor from A to B is a directed family on A opposite times B, and vertical profunctor maps are natural family morphisms with the existing identity and composition calculus.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_base"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "ProfMap"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Cat-valued profunctor facade and representable hom action"
+        }
+      ]
+    },
+    "PROF-REPRESENTABLE": {
+      "status": "checked",
+      "statement": "The unit profunctor evaluates to the ambient hom, and reindexing it along endpoint functors gives the binary representable with action by precomposition and postcomposition.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Unit_prof"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Hom_prof_along"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Hom_fapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Hom_prof_along"
+        }
+      ]
+    },
+    "PROF-REINDEXING": {
+      "status": "checked",
+      "statement": "Profunctors reindex functorially in both endpoints by pullback along an opposite-times-covariant product map, including identity, nesting, and representable accumulation laws.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_reindex"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_reindex_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Stable profunctor reindexing and its representable fold"
+        }
+      ]
+    },
+    "PROF-REPRESENTATION-PACKAGE": {
+      "status": "checked",
+      "statement": "Representability of a profunctor is expressible as ordinary isomorphism to a conjoint, and a representation package retains a chosen representing functor with that evidence.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Conjoint_prof"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsRepresentedBy_iso"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Representation_iso"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Representation_iso"
+        }
+      ]
+    },
+    "PROF-SHAPED-CELLS": {
+      "status": "checked",
+      "statement": "A profunctor cell over endpoint functors is a natural family morphism into a reindexed target; unit-source specialization and narrow cell application provide shaped elements and their action.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_transf_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_hom"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_cell_apply"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Shaped profunctor cells and elements"
+        }
+      ]
+    },
+    "PROF-TENSOR": {
+      "status": "checked",
+      "statement": "The selected profunctor tensor is an opaque fixed-middle composite with exposed-endpoint reindexing and a fixed-endpoint bifunctorial map action.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_tensor"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_tensor_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_tensor_hom_hom"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Primitive profunctor tensor and exposed-endpoint reindexing"
+        }
+      ]
+    },
+    "PROF-COYONEDA": {
+      "status": "checked",
+      "statement": "Tensoring on either side with the unit profunctor has a natural co-Yoneda map to the original profunctor, with fixed shaped-element beta and naturality-fusion computations.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_coyoneda_cov_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_coyoneda_con_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_coyoneda_cov_map"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_coyoneda_con_map"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Prof_coyoneda_cov_transf"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Prof_coyoneda_con_transf"
+        }
+      ]
+    },
+    "PROF-GENERAL-COEND": {
+      "status": "research-boundary",
+      "statement": "The selected opaque tensor and co-Yoneda computations do not yet provide a general coend or coinserter construction, tensor associativity package, or a bicategory of profunctors.",
+      "owners": [],
+      "reviewers": []
+    },
+    "YONEDA-FULLY-FAITHFUL": {
+      "status": "research-boundary",
+      "statement": "The active representable and co-Yoneda interfaces do not yet package a general fully faithful Yoneda embedding or the full Yoneda equivalence for arbitrary Cat-valued presheaves.",
+      "owners": [],
+      "reviewers": []
+    },
+    "EH-COMMUTATIVITY": {
+      "status": "checked",
+      "statement": "Two 2-endomorphisms of an identity 1-cell commute in the selected Eckmann-Hilton slice.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "EH_comm"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Eckmann-Hilton specialization"
+        }
+      ]
+    }
+  }
+}

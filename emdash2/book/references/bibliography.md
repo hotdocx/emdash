@@ -1,0 +1,48 @@
+<a id="bibliography"></a>
+
+# Bibliography
+
+1. <a id="ref-hott-book"></a>The Univalent Foundations Program.
+   *Homotopy Type Theory: Univalent Foundations of Mathematics*. Institute for
+   Advanced Study, 2013. [Source repository](https://github.com/HoTT/book),
+   reviewed at revision
+   `578b85cc8d586b1677ec4335148adeb443057d24`.
+
+2. <a id="ref-mac-lane"></a>Saunders Mac Lane. *Categories for the Working
+   Mathematician*, second edition. Graduate Texts in Mathematics 5. Springer,
+   1998; [DOI 10.1007/978-1-4757-4721-8](https://doi.org/10.1007/978-1-4757-4721-8).
+
+3. <a id="ref-kelly"></a>G. M. Kelly. *Basic Concepts of Enriched Category
+   Theory*. London Mathematical Society Lecture Note Series 64. Cambridge
+   University Press, 1982; reprinted in *Theory and Applications of
+   Categories*, Reprints 10, 2005.
+   [TAC reprint](https://www.tac.mta.ca/tac/reprints/articles/10/tr10.pdf).
+
+4. <a id="ref-benabou"></a>Jean Bénabou. “Introduction to Bicategories.” In
+   *Reports of the Midwest Category Seminar*, Lecture Notes in Mathematics 47,
+   pages 1–77. Springer, 1967.
+   [DOI 10.1007/BFb0074299](https://doi.org/10.1007/BFb0074299).
+
+5. <a id="ref-riehl-shulman"></a>Emily Riehl and Michael Shulman. “A Type
+   Theory for Synthetic $\infty$-Categories.” *Higher Structures* 1(1),
+   147–224, 2017.
+   [DOI 10.21136/HS.2017.06](https://doi.org/10.21136/HS.2017.06).
+
+6. <a id="ref-north"></a>Paige Randall North. “Towards a Directed Homotopy
+   Type Theory.” 2018.
+   [arXiv:1807.10566](https://doi.org/10.48550/arXiv.1807.10566).
+
+7. <a id="ref-lambdapi"></a>The Lambdapi contributors. *Lambdapi User
+   Manual*. [Current online manual](https://lambdapi.readthedocs.io/). The
+   repository copies under `docs/` are the operational references used while
+   maintaining the accompanying formal development.
+
+8. <a id="ref-emdash-artifact"></a>The emdash contributors. *emdash v3.2
+   Lambdapi Sources*. Accompanying computational artifact for this development
+   edition: `emdash3_2.lp` and its one-way extension modules.
+
+Items 1–6 situate the mathematical development; items 7–8 identify the proof
+infrastructure and checked artifact. Citation does not by itself confer the
+book's formal-status label. The exact HoTT source revision, section labels,
+adaptation targets, and license metadata are recorded in
+`book/references/third-party-sources.json`.

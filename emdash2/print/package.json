@@ -4,15 +4,27 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "predev": "npm run book:assemble",
     "dev": "vite",
+    "prebuild": "npm run book:assemble",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "book:assemble": "node scripts/assemble_book.mjs",
+    "book:assemble:check": "node scripts/assemble_book.mjs --check",
+    "book:evidence": "python3 ../scripts/check_book_evidence.py",
+    "book:source": "node scripts/check_book.mjs",
+    "book:check": "npm run book:assemble && npm run book:assemble:check && npm run book:evidence && npm run book:source && node scripts/validate_paper.mjs --group=book",
+    "book:render": "npm run book:check && npm run build && node scripts/check_console.mjs --group=book",
+    "book:pdf": "npm run book:check && npm run build && node scripts/export_book_pdf.mjs",
+    "book:pdf:check": "node scripts/check_book_pdf.mjs",
+    "book:release": "npm run book:check && npm run build && node scripts/check_console.mjs --group=book && node scripts/export_book_pdf.mjs && npm run book:pdf:check",
+    "prevalidate:paper": "npm run book:assemble",
     "validate:paper": "node scripts/validate_paper.mjs",
     "check:console": "node scripts/check_console.mjs",
     "check:render": "npm run validate:paper && npm run build && npm run check:console"
   },
   "dependencies": {
-    "@hotdocx/arrowgram": "file:~/arrowgram/packages/arrowgram",
+    "@hotdocx/arrowgram": "1.0.0",
     "dompurify": "^3.4.3",
     "katex": "^0.16.9",
     "lucide-react": "^0.475.0",
@@ -30,9 +42,9 @@
     "@types/react-dom": "^19.0.0",
     "@types/showdown": "^2.0.6",
     "@vitejs/plugin-react": "^4.2.1",
+    "pdf-lib": "1.17.1",
     "playwright": "^1.55.0",
     "typescript": "^5.3.3",
-    "vite": "^5.1.4",
-    "zod": "^4.3.5"
+    "vite": "^5.1.4"
   }
 }

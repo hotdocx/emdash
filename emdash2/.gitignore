@@ -17,3 +17,6 @@ __pycache__/
 node_modules
 print/node_modules
 print/dist
+print/public/emdash-book.md
+output/pdf/*.pdf
+tmp/pdfs/

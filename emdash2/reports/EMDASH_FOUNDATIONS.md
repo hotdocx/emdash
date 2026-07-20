@@ -20,6 +20,10 @@ proof-assistant surface language, and a named capability interface should not
 be read as a completed metatheory.
 For parser/comment notation, use
 `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md` as the authority.
+The chapter-sized sources under `../book/` develop this mathematics
+as exposition, beginning with the WalkingEnd/Nat computation. The book's
+evidence register points back to active declarations and checks; the book is
+not an additional implementation authority.
 
 ## 1. Reading Guide
 
@@ -2459,8 +2463,9 @@ The current foundations intentionally do not yet include:
   a reusable directed-HIT/free-category schema, full functor-category
   initiality, a displayed dependent path-action/section construction, and
   groupoid completion toward the invertible Circle/`BInt` comparison; the
-  ordinary raw-function `path_map_func` is already active, while its optional
-  selected-computation refinement is owned by the cleanup plan in `INDEX.md`;
+  ordinary raw-function `path_map_func` is already the complete selected
+  nondependent action, and no generic selected-action registry is planned
+  without a concrete new consumer;
 - dependent join elimination or a semantic collage construction;
 - a finalized surface syntax for the future proof assistant;
 - full coherence APIs for every Sigma/Pi helper;

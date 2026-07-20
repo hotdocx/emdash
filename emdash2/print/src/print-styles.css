@@ -146,6 +146,38 @@ body {
   margin: 1in;
 }
 
+@page book {
+  size: 8.5in 11in;
+  margin: 0.78in 0.82in 0.78in;
+
+  @top-left {
+    content: "Functorial Type Theory";
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+    color: #444;
+  }
+
+  @top-right {
+    content: string(book-section);
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+    color: #444;
+  }
+
+  @bottom-center {
+    content: counter(page);
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+    color: #444;
+  }
+}
+
+@page book:first {
+  @top-left { content: none; }
+  @top-right { content: none; }
+  @bottom-center { content: none; }
+}
+
 /* Base typography for the paged output */
 .pagedjs_page_content {
   font-family: 'Times New Roman', Times, serif;
@@ -315,6 +347,12 @@ body {
   margin-bottom: 0.75em;
 }
 
+.edition {
+  color: #555;
+  font-family: Arial, sans-serif;
+  font-size: 9.5pt;
+}
+
 .paper-body p,
 .paper-body li {
   text-align: justify;
@@ -379,6 +417,112 @@ body {
   margin: 1em 0;
 }
 
+.paper-body a {
+  color: #174a7e;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.12em;
+}
+
+.document-book {
+  page: book;
+}
+
+.document-book .title-block {
+  display: flex;
+  min-height: 9.35in;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0 0.18in;
+  break-inside: avoid-page;
+  break-after: page;
+  page-break-after: always;
+}
+
+.document-book .title {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 25pt;
+  line-height: 1.18;
+  margin-bottom: 0.55in;
+}
+
+.document-book .authors {
+  margin-bottom: 0.22in;
+}
+
+.document-book .paper-body {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 10.5pt;
+  line-height: 1.36;
+  hyphens: auto;
+}
+
+.document-book > .book-source-section {
+  break-before: page !important;
+  page-break-before: always !important;
+}
+
+.document-book .paper-body h1 {
+  display: block;
+  break-before: page !important;
+  page-break-before: always !important;
+  string-set: book-section content(text);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20pt;
+  line-height: 1.18;
+  margin-top: 0;
+}
+
+.document-book .paper-body h2 {
+  font-size: 15pt;
+  line-height: 1.22;
+  break-after: avoid-page;
+}
+
+.document-book .paper-body h3 {
+  font-size: 12.5pt;
+  line-height: 1.24;
+  break-after: avoid-page;
+}
+
+.document-book .paper-body p,
+.document-book .paper-body li {
+  orphans: 3;
+  widows: 3;
+}
+
+.document-book .paper-body blockquote,
+.document-book .paper-body pre,
+.document-book .paper-body .katex-display,
+.document-book .paper-body .mermaid-container,
+.document-book .paper-body .vega-container,
+.document-book .paper-body .arrowgram-container {
+  break-inside: avoid-page;
+}
+
+.document-book .paper-body table {
+  font-size: 8.4pt;
+  line-height: 1.2;
+}
+
+.document-book .paper-body thead {
+  display: table-header-group;
+}
+
+.document-book .paper-body a[href^="#"] {
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 .paper-body pre {
   background: #f5f5f5;
   padding: 1em;
@@ -427,6 +571,10 @@ body {
   .pagedjs_page:last-of-type {
     break-after: auto !important;
     page-break-after: auto !important;
+  }
+
+  .document-book .paper-body a {
+    color: #111;
   }
 }
 

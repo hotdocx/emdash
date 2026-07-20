@@ -39,6 +39,9 @@ Use the following order:
 9. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
 10. `reports/INDEX.md` for task-specific plans and decision records.
+11. `book/book.json` and `book/evidence.json` for book source
+   order and prose-to-check traceability; book prose never outranks active
+   Lambdapi sources.
 
 The former D0/D1/decoder compatibility module and its self-only reviewer
 examples are retired. The selected API is the unsuffixed native
@@ -89,6 +92,8 @@ the iterated-hom architecture to the omega setting.
 - Decision tree: `scripts/decision_tree.sh SYMBOL`
 - Type-aware search: `scripts/lambdapi_search.sh QUERY`
 - Print preview/check: `npm run dev` / `npm run check:render`
+- Book assembly/check/render/release: `npm run book:assemble` /
+  `npm run book:check` / `npm run book:render` / `npm run book:release`
 - Remove compilation artifacts: `make clean`
 - Manually prune old logs: `make prune-logs`
 

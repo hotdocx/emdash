@@ -38,7 +38,7 @@ implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
-  proposed architecture and implementation plan for the new book
+  active long-running architecture and implementation plan for the new book
   *Functorial Type Theory: Univalent Foundations for Mathematics*. It selects
   the WalkingEnd/Nat carrier equivalence and directed normalization cell as
   the opening and Chapter 8 computation; maps the HoTT Book spine through its
@@ -48,7 +48,28 @@ implementation plans, and historical decisions.
   input; records HoTT attribution/ShareAlike requirements; and sequences print
   reproducibility, documentation consolidation, prose development, and an
   optional later Lambdapi module split without making that split a writing
-  prerequisite.
+  prerequisite. Phases B0–B2 completed on 2026-07-20: the licensed/provenanced
+  chapter source tree, evidence register/checker, consolidated orientation,
+  deterministic assembler, shared print registry, published-package default,
+  local assets, and cleanup-safe bounded rendering are active. Phase B3 adds
+  the full Chapter 8 WalkingEnd/Nat prose vertical slice, prologue, comparison
+  appendix, generated evidence appendix, and strict adaptation ledger. Phase
+  B4 replaces all Chapters 1–7 scope markers with the prerequisite spine and
+  expands the register to 57 fully cited claims. Phase B5 adds theorem-led
+  chapters on strict/lax transfors and on representability/profunctors, with
+  the co-Yoneda shaped-element beta as its central later computation. The
+  register now has 72 fully cited claims. Phase B6 completes the 24-source
+  production edition with generated contents, glossary/index, computation and
+  status appendices, an eight-entry bibliography, release checklist, source
+  and rendered accessibility/overflow/link/page-boundary gates, and a
+  deterministic tagged PDF pipeline. A clean offline install, the four-
+  document render matrix, two independent clean build/export checksum probes,
+  PDF structural/text/font checks, and page-level visual QA pass. The final
+  103-page artifact has SHA-256
+  `c564173cb478e1ca66b90e6c4fa1e78cc7b9a1e684fac78b342e7e3f1792d54f`.
+  Optional Phase B7 was not triggered: the evidence map resolves against the
+  current modules without an ownership or visibility problem, so the physical
+  Lambdapi split remains deferred.
 - `REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md`:
   completed living plan and decision ledger. P0–P8 completed the native
   equality-valued migration, extracted the remaining D0/D1/decoder closure

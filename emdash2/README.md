@@ -1,289 +1,113 @@
 # m— / emdash
 
-`emdash` is a Lambdapi specification for functorial programming and a future
-programming language/proof assistant for strict and lax omega-categories,
+`emdash` is an experimental Lambdapi specification for functorial type
+theory and a future proof assistant for strict/lax omega-categories,
 omega-functors, omega-transformations (“transfors”), directed families, and
-dependent categorical constructions.
+dependent categorical structure.
 
-The computational style is inspired by Kosta Došen’s cut elimination in
-categories: rewrite rules select useful runtime normal forms, while narrowly
-typed unification rules relate alternative proof-time presentations when no
-runtime orientation is intended.
+Its computational style treats coherence as typed computation: rewrite rules
+select runtime normal forms, while narrowly scoped unification rules compare
+proof-time presentations when neither direction should become computation.
 
-The active development is v3.2 and remains experimental.
+## Headline result
 
-## Current Scope
+The current development contains an opaque one-dimensional
+walking-endomorphism directed HIT with a base `*` and a genuinely directed
+loop `ell : * -> *`. A Cat-valued code, a contextual decoder, and a
+directed normalization cell establish the checked carrier equivalence
 
-The checked kernel currently includes:
-
-- iterated hom-categories, ordinary functors, transfors, products, evaluation,
-  curry/uncurry infrastructure, and the indexed `Adjunction(F,G)` relation
-  with transparent functor views, stable unit/counit observations, both
-  triangles, opposite adjunctions, and computational mate consumers;
-- directed Cat-valued families, natural/displayed functors and transfors,
-  Sigma total categories, section/Pi categories, dependent homs, and fibre
-  transport;
-- decoded Empty/Unit/Bool/Nat formers plus a named finite dependent-record
-  convention, with dependent elimination, constructor beta, and visible
-  Unit/Boolean/Nat constructor equality whose closed cases compute to Unit,
-  Empty, or predecessor equality while generic `eq_refl` retains proof
-  provenance; the generic J
-  beta guards both its category and repeated endpoint so a foreign or
-  predecessor reflexivity proof cannot fire merely through a shared reduced
-  classifier; plus a nested-Sigma
-  observational path view, stable shaped reflexivity, projection betas, and
-  reflexive J, propositional arbitrary Sigma path round trips, transparent
-  named PathRecord path round trips that preserve shaped reflexivity, recursive
-  homotopy-truncation properties from contractible
-  through proposition/set/groupoid levels, a level-recursive one-step
-  monotonicity theorem, arbitrary-level dependent-Pi and same-level
-  dependent-Sigma truncation closure, proposition-valued truncation evidence
-  at every native level, canonical invariance under ordinary `TypeEquiv`, and
-  packaged proposition/set/ordinary-groupoid universes whose carrier and
-  retained truncation evidence project computationally. Package equality is
-  equivalent to equality of the retained carriers: proposition-valued
-  evidence reconstructs the dependent field path, and both inverse laws are
-  propositional. Composing that path equivalence with the canonical ambient
-  decoder now gives restricted univalence between package equality and
-  ordinary `TypeEquiv` data for the carriers, again without runtime package
-  eta or inverse cancellation. An explicit-inverse contractible base together
-  with successor Pi/Sigma/property closure proves `TypeEquiv(A,B)` is
-  `n`-truncated for `n`-truncated endpoints; transporting this through the
-  restricted package equivalence gives the expected
-  `IsTruncGrpd(trunc_succ n, TruncGrpdU n)` theorem without a same-level
-  universe claim or proof erasure.
-  The ordinary dependent-Pi happly/funext layer has
-  related-input action, pointwise runtime beta, generic-J propositional eta,
-  and a contractible-fibre `TypeEquiv` package, ordinary identity, symmetry,
-  and categorical-order composition of type equivalences with executable map
-  projections, plus equality/path categories
-  whose composition retains the shared categorical owner with propositional
-  J-derived transitivity agreement, a genuine opposite presentation, and
-  functor-owned path symmetry with propositional J-derived agreement and
-  involution, type equivalence, ordinary and omega-categorical equivalence
-  staging, and groupoid decoder univalence with both propositional round trips,
-  a derived canonical contractible-fibre capability, a propositional transport
-  square, and a Pi-universe action consumer. The equality-valued overlay adds
-  a decoded native `OmegaEquivAlong(f)` record with separate inverse arrows
-  and ordinary equality-valued cancellation laws, plus a stable first-class
-  `OmegaEquiv` facade with construction, projections, dependent
-  elimination, propositional eta, and a transparent Sigma comparison. Generic
-  object equality compares with that facade at proof time; rigid Cat and Grpd
-  universe equality reduce to it at runtime, while explicit path packages own
-  observer computation. The D0-free library view
-  `GrpdPathView = TypeEquiv` and its explicit adapters remain in the kernel and
-  use a transparent quasi-inverse-to-contractible-fibre theorem. The older
-  recursive D0/D0b/D1 certificates, decoder facade, compatibility module, and
-  their self-only reviewer examples are retired. The unsuffixed names now
-  denote only this native equality-valued API; there is no second equivalence
-  foundation or compatibility alias.
-
-  The downstream transparent evidence module proves fixed-arrow native
-  equality-valued
-  evidence proposition-valued for every category by contracting two
-  composition-map homotopy fibres. It also proves truncation closure under
-  explicit retractions and the unconditional finite-dimensional theorem
-  `IsNCat(n,C) -> IsObjTruncCat(cat_dim_trunc_level(n),C)`, with computing base
-  and successor equations. The obsolete uninhabited D0 global evidence-
-  property capability and its conditional theorem are retired; the generic
-  `prop_is_trunc_cat_dim` lemma remains because the native theorem uses it.
-  Ordinary Product isomorphism evidence retains its componentwise constructor
-  provenance even when both components are reflexive. The old compatibility-
-  only Product omega-equivalence and decoder examples are retired;
-- covariant/contravariant hom actions and the rigid simultaneous `Hom_*`
-  action used by the unit hom profunctor;
-- the exact two-field `IsDiscreteCat(C)` contract, with set-truncated objects
-  and native `IsGroupoidalCat(C)` evidence. The one-way native hom-action
-  extension derives the iterable core-inclusion hom equivalence, selected
-  `hom_to_path`, equality-valued re-inclusion, and the retained directed-cell
-  round-trip surface without broad runtime cancellation;
-- independent `IsObjTruncCat`, native `CatDim`, its recursive
-  `cat_dim_trunc_level` object-level index, recursive `IsNCat`, and
-  evidence-retaining `NCat(n)` packages with `ZeroCat`/`OneCat`; a packaged
-  one-category exposes discrete hom-categories and iterates native
-  core-inclusion adequacy between parallel arrows. Native fixed-map
-  `OmegaEquivAlong(F)` induces an ordinary equivalence of object
-  classifiers and transports `IsObjTruncCat`; native equality-valued evidence
-  proves the recursive `IsNCat` object-truncation theorem unconditionally. Ordinary
-  strict isomorphism evidence has a direct one-way native lift through
-  `iso_evidence_omega_along`/`iso_evidence_omega_equiv`: both native
-  inverse slots reuse the ordinary inverse and both equations already have the
-  required equality-valued types. The old D0-based two-sided OneCat
-  `one_cat_iso_type_equiv` contract is retired with compatibility. Native
-  `OneCat`, hom discreteness/action, finite-dimensional truncation, and the
-  one-way ordinary-isomorphism lift remain; a fully native two-sided theorem
-  is optional future work rather than a prerequisite;
-- canonical iterable `Path_cat_func`/`path_map_func` action for every raw
-  groupoid function. Its capped `fapp1_fapp0` action computes directly to
-  `eq_ap`, its full next-hom action remains iterable through `fapp1_func`, and
-  identity/composition are inherited from the generic functor calculus. No
-  parallel selected-action registry or second runtime owner remains. The
-  unused dependent registry is retired, so the PathRecord witness field acts
-  through direct `eq_apd` and `PathOver`; any stronger dependent analogue
-  would be displayed functor/section structure. Recursive Nat equality keeps
-  the former-specific `nat_succ_ind_eqr` facade, which
-  then accepts arbitrary proof-dependent successor-path motives and computes
-  only when the exposed predecessor proof is component reflexivity, by routing
-  through the existing generic J owner. Outer reflexivity remains
-  noncomputational; this is not a global fibrancy package. The isolated Sum
-  experiment was retired on 2026-07-20 for later consumer-led redesign;
-- Cat-valued profunctors, reindexing, tensor, implication, computational
-  comparison, weighted-limit/colimit staging, and adjunction mates;
-- a primitive directed join slice, synthetic PathOut/path induction, and a
-  reviewer-facing Eckmann–Hilton computation.
-
-These are kernel and architecture milestones, not a finalized surface parser
-or a completed foundational theory.
-
-## Authorities And Layout
-
-- `emdash3_2.lp`: active v3.2 kernel implementation.
-- `emdash3_2_eq1_hom_action.lp`: one-way transparent derived native
-  equality-valued
-  hom-action, groupoidality, and structured-transport extension.
-- `emdash3_2_eq1_evidence_property.lp`: downstream transparent native
-  equality-valued
-  evidence-property, retract-truncation, and finite-`NCat` object-truncation
-  extension.
-- `emdash3_2_nat_arithmetic.lp`: reusable Nat arithmetic, canonical
-  `NatSucc_func`, proposition witnesses, and Nat sethood.
-- `emdash3_2_walking_end_hit.lp`: selected walking-endomorphism directed-HIT,
-  eliminator/comparison, and separate `BNat` consistency model.
-- `emdash3_2_checks.lp`: executable diagnostic/regression suite.
-- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`:
-  current architecture and development SOP.
-- `reports/EMDASH_FOUNDATIONS.md`: mathematical reading guide.
-- `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`:
-  notation authority for comments, examples, and future parser work.
-- `reports/INDEX.md`: report lifecycle and task-specific plan map.
-- `reports/REPORT_EMDASH_CHECK_CATALOG.md`: generated reviewer map of checks.
-- `reports/REPORT_EMDASH_HEALTH.md`: generated validation/source metrics.
-- `examples/`: small reviewer-facing milestones.
-- `docs/`: local Lambdapi syntax, command, query, pattern, and tactic notes.
-- `lambdapi-examples/`: upstream-style syntax and proof examples.
-- `scripts/`: checking, probing, warning, decision-tree, catalog, search, and
-  maintenance utilities.
-- `print/`: paper/Markdown renderer and Arrowgram validation support.
-
-Obsolete v2/v3.1 material is retired under ignored `.scratchpad/` directories
-and is not part of normal development. Use the active reports rather than
-historical files unless explicitly doing archaeology.
-
-## Quick Start
-
-Prerequisite: `lambdapi` on `PATH`. The current environment is tested with
-development build `3.0.0-90-gdb4f780`; this is an environment record, not a
-hard CI version gate.
-
-```bash
-make check                 # active kernel and diagnostics
-make examples              # reviewer milestones
-make ci                    # local handoff gate
-make check-warnings        # warning-enabled kernel check
-make warning-summary       # compact warning inventory + raw log
-make audit-rules           # strict inferred-LHS-slot audit
-make catalog               # regenerate the check catalog
-make toc                   # verify header/source heading equality
-make health                # refresh generated health metrics
+```text
+Hom_WalkingEnd(*,*) ≃ Nat.
 ```
 
-During rewrite/unification development, keep checks bounded:
+The concrete one-object category `BNat` is a separate model, not the
+definition of `WalkingEnd`. The loop is not the identity, has no right
+inverse, and carries no native omega-equivalence evidence. The detailed
+mathematical reading is in
+`reports/EMDASH_FOUNDATIONS.md`.
+
+## Where to start
+
+- `emdash3_2.lp` is the active kernel and computation authority.
+- `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
+  encode/decode, Nat comparison, and directed negative results.
+- `emdash3_2_checks.lp` and `examples/` contain executable
+  regressions and reviewer-facing examples.
+- `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+  explains the current architecture and safe implementation workflow.
+- `reports/EMDASH_FOUNDATIONS.md` is the mathematician-facing guide.
+- `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+  owns comment, example, and future parser notation.
+- `reports/INDEX.md` indexes current plans and dated decision records.
+- `AGENTS.md` contains mandatory repository-working rules.
+
+The active one-way library extensions are:
+
+- `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
+  action and groupoidality;
+- `emdash3_2_eq1_evidence_property.lp` — evidence-property,
+  retract-truncation, and finite-category object truncation;
+- `emdash3_2_nat_arithmetic.lp` — reusable Nat arithmetic and sethood;
+- `emdash3_2_walking_end_hit.lp` — the selected WalkingEnd
+  development.
+
+The retired D0/D1 compatibility layer and obsolete v2/v3.1 scratch material
+are not active interfaces.
+
+## Quick start
+
+Prerequisite: `lambdapi` on `PATH`.
 
 ```bash
 EMDASH_TYPECHECK_TIMEOUT=60s make check
-timeout 20s lambdapi check emdash3_2.lp
+make examples
+make ci
 ```
 
-If a quiet run does not localize an interaction:
-
-```bash
-EMDASH_LAMBDAPI_WARNINGS=1 EMDASH_TYPECHECK_TIMEOUT=20s make check
-EMDASH_LAMBDAPI_FLAGS='--debug=u' scripts/probe.sh tmp/probes/name.lp
-```
-
-## Development Loop
-
-For a nontrivial rule or unification change:
-
-1. locate the semantic owner and nearby projection ladder with `rg`;
-2. place the candidate in a temporary full-file copy at its intended owning
-   position;
-3. add a focused assertion exercising the intended runtime conversion or typed
-   proof-time comparison;
-4. run `scripts/probe.sh tmp/probes/name.lp` with a short timeout;
-5. compare warning-enabled behavior when the change can affect overlaps;
-6. promote the smallest semantically correct rule/projection and run
-   `make check`;
-7. update diagnostics/catalog and run `make ci` before handoff.
-
-The detailed policies for inferred LHS slots, outer-eliminator/inner-cut
-patterns, runtime versus proof-time ownership, generic `fapp*`/`tapp*`
-ownership, stable projection heads, and identity normal forms live in the
-current SOP report. `AGENTS.md` contains the mandatory condensed workflow.
-
-## Useful MathOps Commands
+Useful focused commands:
 
 ```bash
 scripts/probe.sh tmp/probes/name.lp
-scripts/explain_failure.py logs/typecheck.log
-scripts/decision_tree.sh fapp1_func
-scripts/decision_tree.sh --png /tmp/fapp1.png fapp1_func
-scripts/lambdapi_search.sh 'type >= Prof_imply_cov'
-python3 scripts/audit_rule_lhs.py --show-kept
-python3 scripts/arxiv_search.py --query 'cat:math.CT AND abs:"omega category"'
+make check-warnings
+make warning-summary
+make audit-rules
+make catalog
+make toc
+make health
 ```
 
-Watch mode:
+Keep exploratory typechecks bounded. The current SOP explains rewrite,
+unification, inferred-slot, and owner-position probing policy.
 
-```bash
-make watch
-tail -f logs/typecheck.log
-```
+## Functorial Type Theory book
 
-Logs are retained for diagnosis and are pruned only on explicit request:
-
-```bash
-make prune-logs
-EMDASH_LOG_KEEP_DAYS=7 make prune-logs
-```
-
-## Check And Documentation Maintenance
-
-- Executable assertions belong in `emdash3_2_checks.lp`; keep the generated
-  catalog fresh with `make catalog`.
-- Add mathematical formulas and ownership notes adjacent to semantic symbols
-  and nontrivial rule families in `emdash3_2.lp`.
-- Use the canonical syntax report for comment/example notation.
-- Add new reports to `reports/INDEX.md` and include the required plan metadata.
-- Refresh `make health` after meaningful architecture or check changes.
-- Do not treat warning counts as an automatic veto; use warning locations and
-  term heads to classify concrete overlap families.
-
-## Infinity Codex Recovery
-
-Trusted project hooks archive completed main-agent final responses under
-ignored `tmp/ai-responses/`. The archive contains recovery evidence, not
-current instructions. Current code/SOP and the active task plan always take
-precedence.
-
-```bash
-python3 scripts/infinity_codex.py list --limit 5
-python3 scripts/infinity_codex.py latest-path
-python3 scripts/infinity_codex.py show LOGICAL_ID
-python3 scripts/infinity_codex.py verify
-```
-
-The hook does not archive user prompts, commentary, tool calls, or subagent
-output. See the indexed Infinity Codex implementation report for the complete
-recovery and retention policy.
-
-## Print Pipeline
-
-Run from this directory:
+The new book, *Functorial Type Theory: Univalent Foundations for Mathematics*,
+is authored in `book/` as chapter-sized Markdown sources. It leads with
+the WalkingEnd/Nat theorem and then adapts the prerequisite spine of the HoTT
+Book to the directed setting.
 
 ```bash
 npm run install:print
-npm run dev
-npm run validate:paper
-npm run check:render
+npm run book:assemble
+npm run book:check
+npm run book:render
+npm run book:release
 ```
+
+`book/book.json` owns source order and metadata;
+`book/evidence.json` maps checked prose claims to active declarations
+and reviewer evidence. The generated
+`print/public/emdash-book.md` is ignored and must not be edited by hand.
+The release command produces and checks the ignored, versioned PDF declared by
+the manifest; see `book/RELEASE.md` for its checksum and visual-QA policy.
+See `book/README.md` and `print/README.md` for authoring and
+renderer workflows.
+
+## Status
+
+Emdash v3.2 remains a research implementation. It does not yet claim a
+finished surface parser, a complete weak omega-category metatheory, a full
+computational univalence principle for every intended structure, or the full
+initiality of the walking endomorphism. The living reports state these
+boundaries precisely; dated reports preserve why earlier designs were chosen
+or retired.

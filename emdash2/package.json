@@ -6,9 +6,17 @@
   "scripts": {
     "dev": "npm --prefix print run dev",
     "build": "npm --prefix print run build",
+    "book:assemble": "npm --prefix print run book:assemble",
+    "book:assemble:check": "npm --prefix print run book:assemble:check",
+    "book:evidence": "npm --prefix print run book:evidence",
+    "book:check": "npm --prefix print run book:check",
+    "book:render": "npm --prefix print run book:render",
+    "book:pdf": "npm --prefix print run book:pdf",
+    "book:pdf:check": "npm --prefix print run book:pdf:check",
+    "book:release": "npm --prefix print run book:release",
     "validate:paper": "npm --prefix print run validate:paper",
     "check:console": "npm --prefix print run check:console",
     "check:render": "npm --prefix print run check:render",
-    "install:print": "npm --prefix print install"
+    "install:print": "npm --prefix print ci"
   }
 }

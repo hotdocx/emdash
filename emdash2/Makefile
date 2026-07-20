@@ -1,5 +1,5 @@
 .RECIPEPREFIX := >
-.PHONY: check check-warnings warning-summary audit-rules examples catalog toc ci ci-render health watch infinity-codex-test prune-logs clean
+.PHONY: check check-warnings warning-summary audit-rules examples catalog toc ci ci-render book-evidence book-check book-pdf book-release health watch infinity-codex-test prune-logs clean
 
 check:
 # scripts/check.sh checks the active v3.2 development and v3.2 diagnostics.
@@ -26,6 +26,10 @@ ci:
 > python3 scripts/check_source_toc.py
 > ./scripts/lint_active_refs.sh
 > python3 scripts/lint_report_headers.py
+> python3 scripts/check_book_evidence.py
+> node print/scripts/assemble_book.mjs
+> node print/scripts/assemble_book.mjs --check
+> node print/scripts/check_book.mjs
 > python3 scripts/audit_rule_lhs.py --strict
 > python3 scripts/generate_check_catalog.py --check --strict
 
@@ -40,6 +44,19 @@ toc:
 
 ci-render:
 > npm run check:render
+
+book-evidence:
+> python3 scripts/check_book_evidence.py
+
+book-check:
+> npm run book:check
+
+book-pdf:
+> npm run book:pdf
+> npm run book:pdf:check
+
+book-release:
+> npm run book:release
 
 health:
 > python3 scripts/check_metrics.py --update-log --write-report

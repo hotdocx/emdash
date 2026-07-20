@@ -25,6 +25,45 @@ type VegaRuntime = { vega: any; vegaLite: any };
 let vegaRuntimePromise: Promise<VegaRuntime | null> | null = null;
 let mermaidRuntimePromise: Promise<any | null> | null = null;
 
+function parseFrontmatter(markdown: string) {
+  const normalized = markdown.replace(/\r\n/g, "\n");
+  if (!normalized.startsWith("---\n")) {
+    return { body: markdown, metadata: {} as Record<string, string> };
+  }
+  const closingIndex = normalized.indexOf("\n---\n", 4);
+  if (closingIndex < 0) {
+    return { body: markdown, metadata: {} as Record<string, string> };
+  }
+
+  const metadata: Record<string, string> = {};
+  const header = normalized.slice(4, closingIndex);
+  for (const [index, line] of header.split("\n").entries()) {
+    if (line.trim() === "" || line.trimStart().startsWith("#")) continue;
+    const match = line.match(/^([A-Za-z][A-Za-z0-9_-]*):\s*(.*)$/);
+    if (!match) {
+      throw new Error(`Invalid frontmatter line ${index + 2}: ${line}`);
+    }
+    const [, key, rawValue] = match;
+    let value = rawValue.trim();
+    if (value.startsWith('"')) {
+      try {
+        const parsed = JSON.parse(value);
+        if (typeof parsed !== "string") {
+          throw new Error("expected a JSON string");
+        }
+        value = parsed;
+      } catch (error: any) {
+        throw new Error(`Invalid quoted frontmatter value for ${key}: ${error.message}`);
+      }
+    }
+    metadata[key] = value;
+  }
+  return {
+    body: normalized.slice(closingIndex + "\n---\n".length),
+    metadata,
+  };
+}
+
 async function loadVegaRuntime(): Promise<VegaRuntime | null> {
   if (import.meta.env.SSR) return null;
   if (!vegaRuntimePromise) {
@@ -125,7 +164,8 @@ export async function renderMarkdownToHtml(
   markdown: string,
   opts: MarkdownPipelineOptions = {}
 ): Promise<MarkdownRenderModel> {
-  let processedText = markdown ?? "";
+  const frontmatter = parseFrontmatter(markdown ?? "");
+  let processedText = frontmatter.body;
   const staticArrowgramHtmlById = new Map<string, string>();
   const staticMermaidHtmlById = new Map<string, string>();
 
@@ -207,13 +247,12 @@ export async function renderMarkdownToHtml(
 
   const protectedMath = protectMathBlocks(processedText);
   const converter = new showdown.Converter({
-    metadata: true,
     noHeaderId: true,
     literalMidWordUnderscores: true,
     tables: true,
   });
   let html = converter.makeHtml(protectedMath.text);
-  const metadata = (converter.getMetadata() as any) ?? {};
+  const metadata = frontmatter.metadata;
 
   html = restoreProtectedBlocks(html, protectedMath.protectedMathBlocks);
 

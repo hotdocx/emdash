@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-07-10
+Last reviewed: 2026-07-20
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -480,6 +480,68 @@ and the full category is:
 ```text
 Functord_cat C (Hom_catd (Const_catd K (Catd_cat Z)) Ebar Dbar)
 ```
+
+## Walking-Endomorphism And Book Notation
+
+For the selected walking-endomorphism development, introduce the mathematical
+abbreviations once and then keep them distinct from kernel identifiers:
+
+```text
+W                  = WalkingEnd
+*                  = walking base
+ell : * ->^W *     = walking generator
+BNat               = separate concrete one-object Nat-monoid model
+```
+
+`W` is opaque. Never write `W = BNat` or replace
+`Hom_W(*,*)` definitionally by `Nat`. The checked result is
+an equivalence of underlying carriers:
+
+```text
+Hom_W(*,*) ≃_Type Nat.
+```
+
+This notation corresponds to `walking_hom_nat_type_equiv`. Do not
+omit the `Type` qualifier when the surrounding prose might suggest a
+packaged monoid or hom-category equivalence.
+
+The directed code and its two maps are written:
+
+```text
+Code : W ⊢ Cat
+encode_x : Hom_W(*,x) -> Obj(Code[x])
+power(0)       = id_*
+power(succ n)  = ell o power(n)
+decode_x : Obj(Code[x]) -> Hom_W(*,x).
+```
+
+Their active owners are `walking_Code_catd`,
+`walking_encode`, `walking_power`, and the fibrewise
+observation of `walking_directed_decode_funcd`. Ordinary functor
+application notation remains appropriate for Code action:
+
+```text
+encode_x(p) = Code[p](0).
+```
+
+The normalization proof must retain its directed stage:
+
+```text
+norm_p : p ->^(Hom_W(*,x)) decode_x(encode_x(p))
+path(norm_p) : p = decode_x(encode_x(p)).
+```
+
+The first line names the cell
+`walking_directed_normalization_cell`. The second is equality
+extracted by hom-discreteness and names
+`walking_directed_normalization_path`. Comments and book prose must
+present them in that order; `path(norm_p)` is mathematical notation,
+not implemented parser syntax.
+
+Use `Checked`, `Formal consequence`,
+`Mathematical development`, and `Research boundary` for
+book theorem status. These labels report evidence strength and do not alter
+the formula notation above.
 
 ## Future Substitution Syntax
 

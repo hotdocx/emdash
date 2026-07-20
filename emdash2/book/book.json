@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "id": "functorial-type-theory",
+  "title": "Functorial Type Theory",
+  "subtitle": "Univalent Foundations for Mathematics",
+  "displayTitle": "Functorial Type Theory: Univalent Foundations for Mathematics",
+  "edition": "initial development edition",
+  "editionVersion": "0.1.0-dev",
+  "publicationDate": "2026-07-20",
+  "status": "draft",
+  "authors": [
+    "The emdash contributors"
+  ],
+  "license": {
+    "spdx": "CC-BY-SA-3.0",
+    "name": "Creative Commons Attribution-ShareAlike 3.0 Unported",
+    "file": "book/LICENSE.md",
+    "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "provenance": {
+    "credits": "book/CREDITS.md",
+    "thirdPartySources": "book/references/third-party-sources.json",
+    "sourceRevisions": {
+      "hott-book": "578b85cc8d586b1677ec4335148adeb443057d24"
+    }
+  },
+  "evidence": "book/evidence.json",
+  "renderer": {
+    "documentSlug": "emdash-book",
+    "output": "print/public/emdash-book.md",
+    "layout": "single-column"
+  },
+  "artifacts": {
+    "pdf": "output/pdf/functorial-type-theory-0.1.0-dev.pdf"
+  },
+  "sources": [
+    {
+      "id": "edition-notice",
+      "kind": "frontmatter",
+      "path": "book/frontmatter/00-title.md"
+    },
+    {
+      "id": "preface",
+      "kind": "frontmatter",
+      "path": "book/frontmatter/01-preface.md"
+    },
+    {
+      "id": "how-to-read",
+      "kind": "frontmatter",
+      "path": "book/frontmatter/02-how-to-read.md"
+    },
+    {
+      "id": "contents",
+      "kind": "frontmatter",
+      "path": "book/frontmatter/03-contents.md"
+    },
+    {
+      "id": "prologue",
+      "kind": "chapter",
+      "path": "book/chapters/00-prologue.md"
+    },
+    {
+      "id": "chapter-1",
+      "kind": "chapter",
+      "path": "book/chapters/01-judgments-and-computation.md"
+    },
+    {
+      "id": "chapter-2",
+      "kind": "chapter",
+      "path": "book/chapters/02-categories-functors-and-families.md"
+    },
+    {
+      "id": "chapter-3",
+      "kind": "chapter",
+      "path": "book/chapters/03-logic-propositions-and-sets.md"
+    },
+    {
+      "id": "chapter-4",
+      "kind": "chapter",
+      "path": "book/chapters/04-equivalence-and-univalence.md"
+    },
+    {
+      "id": "chapter-5",
+      "kind": "chapter",
+      "path": "book/chapters/05-induction-and-universal-properties.md"
+    },
+    {
+      "id": "chapter-6",
+      "kind": "chapter",
+      "path": "book/chapters/06-directed-hits.md"
+    },
+    {
+      "id": "chapter-7",
+      "kind": "chapter",
+      "path": "book/chapters/07-truncation-and-categorical-height.md"
+    },
+    {
+      "id": "chapter-8",
+      "kind": "chapter",
+      "path": "book/chapters/08-walking-endomorphism.md"
+    },
+    {
+      "id": "chapter-9",
+      "kind": "chapter",
+      "path": "book/chapters/09-transfors-strictness-and-laxity.md"
+    },
+    {
+      "id": "chapter-10",
+      "kind": "chapter",
+      "path": "book/chapters/10-representability-and-profunctors.md"
+    },
+    {
+      "id": "appendix-notation",
+      "kind": "appendix",
+      "path": "book/appendices/a-notation.md"
+    },
+    {
+      "id": "appendix-evidence",
+      "kind": "appendix",
+      "path": "book/appendices/b-emdash-evidence.md"
+    },
+    {
+      "id": "appendix-hott",
+      "kind": "appendix",
+      "path": "book/appendices/c-hott-correspondence.md"
+    },
+    {
+      "id": "appendix-glossary",
+      "kind": "appendix",
+      "path": "book/appendices/d-glossary-and-index.md"
+    },
+    {
+      "id": "appendix-computation",
+      "kind": "appendix",
+      "path": "book/appendices/e-computation-and-normalization.md"
+    },
+    {
+      "id": "appendix-status",
+      "kind": "appendix",
+      "path": "book/appendices/f-status-and-research.md"
+    },
+    {
+      "id": "bibliography",
+      "kind": "backmatter",
+      "path": "book/references/bibliography.md"
+    },
+    {
+      "id": "book-credits",
+      "kind": "backmatter",
+      "path": "book/CREDITS.md"
+    },
+    {
+      "id": "book-license",
+      "kind": "backmatter",
+      "path": "book/LICENSE.md"
+    }
+  ]
+}
