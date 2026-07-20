@@ -15,7 +15,7 @@ as a library module rather than kernel infrastructure.
 opaque one-dimensional walking HIT, contextual eliminator, derived
 section/recursor views, transparent Code/power/contextual decoder, Hom--Nat
 packages, sethood and directed negative consequences, the restricted-CoreIncl
-three-cell spiral specialization, and a separate `BNat` consistency model. The
+explicit-κ two-factor spiral specialization, and a separate `BNat` consistency model. The
 kernel owns the reusable equality-local skeleton and restricted Core inclusion.
 The rejected generated-word Hom and every WalkingEnd identity/composition rule
 have been removed. Reports explain current status, mathematics, notation,
@@ -45,14 +45,18 @@ implementation plans, and historical decisions.
   `p ⇒ power(encode(p))` is constructed before hom-discreteness converts it
   to equality. Open generator-prefix compatibility is an ordinary theorem
   from generic functoriality, not a custom rewrite or `unif_rule`. The later
-  restricted redesign adds recursive `Sk⁼`, `Cat₁⁼`, `Core₁`, primitive
-  computational `CoreInclTransf`, separate derived κ, and the genuine
-  three-cell non-strict spiral. Its WalkingEnd specialization converts to the
-  retained strict spiral. The kernel measures `1028/159`, the walking owner
-  `1039/159`, and the catalog has 2,080 checks across 77 areas with no
-  unclassified checks; all 44 new kernel critical-pair reports are classified
-  as accepted runtime-owner diagnostics and no `unif_rule` is added. Generated
-  health is synchronized and full local CI passes 55 files in 308.952s. A
+  restricted redesign adds recursive `Sk⁼`, `Cat₁⁼`, `Core₁`, computational
+  `CoreInclTransf`, and an explicit κ with point/full/capped projections. Generic
+  precomposition plus narrow equality-induced endpoint adjustments construct
+  κ-left; κ-right is judgmentally identity, so the selected spiral is the
+  two-factor `PathLift(h) ∘ κₗ`. WalkingEnd and its decoder use this spiral.
+  The two strict Core rewrites/helpers and the old strict WalkingEnd spiral are
+  deleted. The kernel measures `1016/159`, the walking owner `1026/159`, and
+  the catalog has 2,082 checks across 77 areas with no unclassified checks.
+  Warning counts are diagnostic rather than vetoes, and no redesign-specific
+  `unif_rule` or global associativity rewrite is added. Generated health is
+  synchronized across 55 passing files/examples, and full local CI passes
+  those 55 targets in 306.294s. A
   reverse BNat functor, full hom-category equivalence,
   full functor-category initiality, and derivation of the truncation witness
   from a stronger general HIT principle remain outside the selected practical

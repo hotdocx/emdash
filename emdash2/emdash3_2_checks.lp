@@ -19191,7 +19191,7 @@ assert [A B E I : Cat]
       a b
       cross;
 
-// catalog-area: Internal Path action and strict Core-inclusion naturality
+// catalog-area: Internal Path action and explicit Core-inclusion kappa
 // Path_cat_func inherits the generic identity and composition owners.
 assert [A : Grpd] ⊢
   @path_map_func A A (@id Grpd_cat A)
@@ -19269,9 +19269,9 @@ assert [A B : Grpd]
       (Path_cat (@= A x y))
       (Path_cat (@= B (f x) (g y))));
 
-// Fixed-functor Core inclusion is strictly natural, without a global
-// directed Core functor or a transformation-to-equality reflection rule.
-assert [C D : Cat]
+// The former Core-specific strict naturality boundary is deliberately absent.
+// Naturality is now represented by the explicit CoreInclTransf kappa below.
+assertnot [C D : Cat]
   (F : τ (Functor C D)) ⊢
   @comp_cat_fapp0
     (Core_cat C) C D F (Core_incl_func C)
@@ -19282,39 +19282,26 @@ assert [C D : Cat]
         (Obj C) (Obj D)
         (@functor_object_function C D F));
 
-assert [C D : Cat]
-  (F : τ (Functor C D)) ⊢
-  @core_incl_naturality C D F
-  ≡ @id
-      (Functor_cat (Core_cat C) D)
-      (@comp_cat_fapp0
-        (Core_cat C) (Core_cat D) D
-        (Core_incl_func D)
-        (@path_map_func
-          (Obj C) (Obj D)
-          (@functor_object_function C D F)));
-
-assert [A : Grpd] [C D : Cat]
+// The stable whiskered form is likewise no longer a runtime fold.
+assertnot [A : Grpd] [C D : Cat]
   (F : τ (Functor C D))
   (G : τ (Functor (Path_cat A) (Core_cat C))) ⊢
-  @core_incl_naturality_whiskered A C D F G
-  : τ (Transf
+  @comp_cat_fapp0
+    (Path_cat A) C D F
+    (@hom_postcomp_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Path_cat A) (Path_cat (Obj C)) C
+      (Core_incl_func C) G)
+  ≡ @hom_postcomp_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Path_cat A) (Path_cat (Obj D)) D
+      (Core_incl_func D)
       (@comp_cat_fapp0
-        (Path_cat A) C D F
-        (@hom_postcomp_fapp0
-          Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-          (Path_cat A) (Path_cat (Obj C)) C
-          (Core_incl_func C) G))
-      (@hom_postcomp_fapp0
-        Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-        (Path_cat A) (Path_cat (Obj D)) D
-        (Core_incl_func D)
-        (@comp_cat_fapp0
-          (Path_cat A) (Path_cat (Obj C)) (Path_cat (Obj D))
-          (@path_map_func
-            (Obj C) (Obj D)
-            (@functor_object_function C D F))
-          G)));
+        (Path_cat A) (Path_cat (Obj C)) (Path_cat (Obj D))
+        (@path_map_func
+          (Obj C) (Obj D)
+          (@functor_object_function C D F))
+        G);
 
 /*
   Exact generic spiral diagnostic.
@@ -19405,12 +19392,11 @@ symbol path_action_iter_exact_spiral_check
         (Path_cat Nat_grpd) (Path_cat Nat_grpd) C
         (@path_action_iter_power_func_check C S c)
         NatSucc_func))
-≔ @fapp1_fapp0
-    (Path_cat (@Function_grpd Nat_grpd (Obj C)))
-    (Functor_cat (Path_cat Nat_grpd) C)
-    (@path_lift_func Nat_grpd C)
-    (@path_action_iter_left_function_check C S c)
-    (@path_action_iter_right_function_check C S c)
+≔ @path_lift_non_strict_spiral
+    Nat_grpd C
+    S
+    (@path_action_iter_power_function_check C S c)
+    nat_succ_function
     (@path_action_iter_step_path_check C S c);
 
 assert [C : Cat]
@@ -19435,7 +19421,9 @@ assert [C : Cat]
         (@path_action_iter_power_func_check C S c)
         NatSucc_func));
 
-assert [C : Cat]
+// The readable endpoint-adjusted point component is directed transport around
+// the explicit kappa-left square; it is not the raw identity presentation.
+assertnot [C : Cat]
   (S : τ (Functor C C))
   (c : τ (Obj C))
   (n : τ Nat_grpd) ⊢
@@ -19724,28 +19712,106 @@ assert (C D : Cat) (F : τ (Functor C D)) ⊢
         (Obj C) (Obj D)
         (@functor_object_function C D F));
 
+// The explicit kappa has the two deliberately non-convertible boundary
+// functors; its projection ladder is routed through the common diagonal.
 assert (C D : Cat) (F : τ (Functor C D)) ⊢
   @core_incl_transf_kappa C D F
-  ≡ @core_incl_naturality C D F;
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Core_cat C) C D
+        F (Core_incl_func C))
+      (@comp_cat_fapp0
+        (Core_cat C) (Core_cat D) D
+        (Core_incl_func D)
+        (@path_map_func
+          (Obj C) (Obj D)
+          (@functor_object_function C D F))));
 
-// Stable postcomposition owns the associativity needed by genuine kappa-left.
+assert (C D : Cat) (F : τ (Functor C D))
+  (x : τ (Obj C)) ⊢
+  @tapp0_fapp0
+    (Core_cat C) D
+    (@comp_cat_fapp0
+      (Core_cat C) C D
+      (@fapp1_fapp0
+        Cat1Eq_cat Cat_cat Cat1Eq_incl_func C D F)
+      (@tapp0_fapp0
+        Cat1Eq_cat Cat_cat
+        Core1_func Cat1Eq_incl_func
+        C CoreInclTransf))
+    (@comp_cat_fapp0
+      (Core_cat C) (Core_cat D) D
+      (@tapp0_fapp0
+        Cat1Eq_cat Cat_cat
+        Core1_func Cat1Eq_incl_func
+        D CoreInclTransf)
+      (@fapp1_fapp0
+        Cat1Eq_cat Cat_cat Core1_func C D F))
+    x (@core_incl_transf_kappa C D F)
+  ≡ @id
+      D
+      (@fapp0
+        (Core_cat C) D
+        (@core_incl_transf_diagonal_fapp0 C D F)
+        x);
+
+assert (C D : Cat) (F : τ (Functor C D))
+  (x y : τ (Obj C)) ⊢
+  @tapp1_func
+    (Core_cat C) D
+    (@comp_cat_fapp0
+      (Core_cat C) C D F (Core_incl_func C))
+    (@comp_cat_fapp0
+      (Core_cat C) (Core_cat D) D
+      (Core_incl_func D)
+      (@path_map_func
+        (Obj C) (Obj D)
+        (@functor_object_function C D F)))
+    x y (@core_incl_transf_kappa C D F)
+  : τ (Functor
+      (Hom_cat (Core_cat C) x y)
+      (Hom_cat
+        D
+        (@fapp0
+          (Core_cat C) D
+          (@comp_cat_fapp0
+            (Core_cat C) C D F (Core_incl_func C))
+          x)
+        (@fapp0
+          (Core_cat C) D
+          (@comp_cat_fapp0
+            (Core_cat C) (Core_cat D) D
+            (Core_incl_func D)
+            (@path_map_func
+              (Obj C) (Obj D)
+              (@functor_object_function C D F)))
+          y)));
+
+// Generic precomposition owns whiskering; explicit paths/adjustments align
+// only the associativity and readable PathLift presentations.
+assert [A : Grpd] (C D : Cat)
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C))) ⊢
+  @core_incl_transf_kappa_left_raw A C D F p
+  : τ (Transf
+      (@core_incl_transf_kappa_left_raw_source A C D F p)
+      (@core_incl_transf_kappa_left_raw_target A C D F p));
+
 assert [A : Grpd] (C D : Cat)
   (F : τ (Functor C D))
   (p : τ (@Function_grpd A (Obj C))) ⊢
   @core_incl_transf_kappa_left A C D F p
-  ≡ @id
-      (Functor_cat (Path_cat A) D)
-      (@hom_postcomp_fapp0
-        Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-        (Path_cat A) (Core_cat D) D
-        (Core_incl_func D)
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat A) C D
+        F (@path_lift_fapp0 A C p))
+      (@path_lift_fapp0
+        A D
         (@comp_fapp0
-          Cat_cat
-          (Path_cat A) (Core_cat C) (Core_cat D)
-          (@path_map_func
-            (Obj C) (Obj D)
-            (@functor_object_function C D F))
-          (@path_map_func A (Obj C) p)));
+          Grpd_cat
+          A (Obj C) (Obj D)
+          (@functor_object_function C D F)
+          p)));
 
 assert [A B : Grpd] (C : Cat)
   (p : τ (@Function_grpd B (Obj C)))
@@ -19757,8 +19823,7 @@ assert [A B : Grpd] (C : Cat)
         A C
         (@comp_fapp0 Grpd_cat A B (Obj C) p s));
 
-// In the current strict representation the three-cell non-strict spiral
-// computes to its middle PathLift(h), while retaining both endpoint owners.
+// Kappa-right remains the definitional PathInt-functoriality comparison.
 assert [A : Grpd] (C : Cat)
   (S : τ (Functor C C))
   (p : τ (@Function_grpd A (Obj C)))
@@ -19772,17 +19837,34 @@ assert [A : Grpd] (C : Cat)
         p)
       (@comp_fapp0 Grpd_cat A A (Obj C) p s))) ⊢
   @path_lift_non_strict_spiral A C S p s h
-  ≡ @fapp1_fapp0
-      (Path_cat (@Function_grpd A (Obj C)))
+  ≡ @comp_fapp0
       (Functor_cat (Path_cat A) C)
-      (@path_lift_func A C)
-      (@comp_fapp0
-        Grpd_cat
-        A (Obj C) (Obj C)
-        (@functor_object_function C C S)
-        p)
-      (@comp_fapp0 Grpd_cat A A (Obj C) p s)
-      h;
+      (@comp_cat_fapp0
+        (Path_cat A) C C
+        S (@path_lift_fapp0 A C p))
+      (@path_lift_fapp0
+        A C
+        (@comp_fapp0
+          Grpd_cat
+          A (Obj C) (Obj C)
+          (@functor_object_function C C S)
+          p))
+      (@comp_cat_fapp0
+        (Path_cat A) (Path_cat A) C
+        (@path_lift_fapp0 A C p)
+        (@path_map_func A A s))
+      (@fapp1_fapp0
+        (Path_cat (@Function_grpd A (Obj C)))
+        (Functor_cat (Path_cat A) C)
+        (@path_lift_func A C)
+        (@comp_fapp0
+          Grpd_cat
+          A (Obj C) (Obj C)
+          (@functor_object_function C C S)
+          p)
+        (@comp_fapp0 Grpd_cat A A (Obj C) p s)
+        h)
+      (@core_incl_transf_kappa_left A C C S p);
 
 // catalog-area: Nat arithmetic and sethood prerequisites
 // Successor is available as a concrete iterable equality action.
@@ -20332,8 +20414,9 @@ assert ⊢ walking_power_spiral
       walking_based_rep_catd
       walking_power_func);
 
-// The restricted CoreInclTransf construction supplies the genuine three-cell
-// spiral and converts to the retained strict presentation in this model.
+// The restricted CoreInclTransf construction supplies the selected two-factor
+// spiral: explicit kappa-left followed by PathLift(step). Kappa-right is
+// judgmentally identity and therefore is not inserted as a third factor.
 assert ⊢ walking_power_spiral_coreincl
   : τ (@walking_end_loop_coherence
       walking_Code_catd
@@ -20342,7 +20425,7 @@ assert ⊢ walking_power_spiral_coreincl
 
 assert ⊢
   walking_power_spiral_coreincl
-  ≡ walking_power_spiral_natsucc;
+  ≡ walking_power_spiral;
 
 assert (n : τ Nat_grpd) ⊢
   @tapp0_fapp0
@@ -20407,10 +20490,10 @@ assert (n : τ Nat_grpd) ⊢
         WalkingEnd_cat walking_base walking_base walking_base
         walking_loop (walking_power n));
 
-// Core inclusion exposes the canonical semantic component as path_to_hom of
-// that reflexivity. Stable postcomposition endpoints intentionally prevent a
-// false direct conversion to the raw categorical identity.
-assert (n : τ Nat_grpd) ⊢
+// PathLift(step) still has the canonical path_to_hom component below, but the
+// selected spiral first traverses explicit kappa-left. Consequently the whole
+// endpoint-adjusted component does not collapse to that second factor alone.
+assertnot (n : τ Nat_grpd) ⊢
   @tapp0_fapp0
     (Path_cat Nat_grpd)
     (Hom_cat WalkingEnd_cat walking_base walking_base)
@@ -20427,7 +20510,7 @@ assert (n : τ Nat_grpd) ⊢
       walking_power_func
       NatSucc_func)
     n
-    walking_power_spiral_natsucc
+    walking_power_spiral
   ≡ @path_to_hom
       (Hom_cat WalkingEnd_cat walking_base walking_base)
       (@fapp0
@@ -20476,7 +20559,7 @@ assertnot (n : τ Nat_grpd) ⊢
       walking_power_func
       NatSucc_func)
     n
-    walking_power_spiral_natsucc
+    walking_power_spiral
   ≡ @id
       (Hom_cat WalkingEnd_cat walking_base walking_base)
       (@comp_fapp0

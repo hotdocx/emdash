@@ -29,7 +29,7 @@ detailed probe evidence.
   endomorphism directed-HIT module. It owns the opaque category/base/loop,
   explicit dimension evidence, contextual `Functord` eliminator, derived
   section/recursor views, transparent Code/power/decoder construction, the
-  restricted-CoreIncl three-cell spiral specialization, Hom--Nat carrier
+  explicit-κ restricted-CoreIncl two-factor spiral specialization, Hom--Nat carrier
   packages, sethood, directed negative consequences, and a separate `BNat`
   consistency model. It contains no generated-word Hom or WalkingEnd-specific
   identity/composition rule.
@@ -83,34 +83,37 @@ kernel `984/159` inventory; and full local CI passes across 55 files in
 boundary. These figures are the pre-redesign fallback baseline.
 
 The post-G8 restricted-CoreIncl redesign resumed from
-`851e85b1249aaa120df8492de7ad9506b871ccdc`. Kernel section 20 now supplies the
-recursive equality-local skeleton `EqSkeleton_cat`, simultaneous functor
-action, recursive inclusion, `Cat1Eq_cat`, `Core1_func`, and primitive
-computational `CoreInclTransf`. The transformation computes at its object,
-full first-hom, and capped first-hom projections. Its capped value at a functor
-is the common diagonal `Core(C) → D`; the comparison between the two boundary
-composites is the separate derived `core_incl_transf_kappa` cell. Stable
-postcomposition owns the associativity required by
-`core_incl_transf_kappa_left`, so no raw reassociation rule, endpoint transport,
-or `unif_rule` is added. `path_lift_non_strict_spiral` retains
-`κᵣ ∘ PathLift(h) ∘ κₗ`; the walking specialization converts to the original
-strict spiral and leaves it available as fallback.
+`851e85b1249aaa120df8492de7ad9506b871ccdc` and now replaces, rather than sits
+beside, the former strict Core-inclusion implementation. Kernel section 20
+supplies recursive `EqSkeleton_cat`, simultaneous functor action, recursive
+inclusion, `Cat1Eq_cat`, `Core1_func`, and computational `CoreInclTransf`.
+`CoreInclTransf` computes at its object, full first-hom, and capped first-hom
+projections. Its capped value at a functor is the common diagonal
+`Core(C) → D`; the separate explicit `core_incl_transf_kappa` square has
+non-convertible boundary functors and computes through point, full
+off-diagonal, and capped off-diagonal projections inherited from that diagonal.
 
-The promoted redesign passes `make check`, `make examples`, source-TOC
-validation, and the strict LHS audit with zero unreviewed clauses and the same
-45 annotated slots across 27 clauses. The catalog has 2,080 checks
-(1,834 `assert` plus 246 `assertnot`) across 77 areas with zero unclassified
-checks. The kernel warning inventory is `1028/159`, and the walking owner is
-`1039/159`. The 44 new kernel critical-pair reports are accepted and classified
-at their intended runtime owners: 16 inherited successor-composition, one
-object action, four capped recursive actions, one whole identity action, ten
-capped inclusions, one full `Core₁` projection, and eleven capped `Core₁`
-actions. Warnings are diagnostic rather than a veto: the intended rules remain
-runtime, while six redundant compound category slots were minimized to `_`
-even though doing so exposed 14 of those reports. Replaceable-variable warnings
-do not increase, and no unification rule is added.
+`core_incl_transf_kappa_left` is actual generic functor precomposition of κ,
+followed by narrow equality-induced source/target adjustments for associativity
+and the readable semantic `PathLift` presentation. No Core-specific fusion
+rewrite, redesign-specific `unif_rule`, or global associativity rule is used.
+The right comparison is judgmentally identity and remains checked separately;
+`path_lift_non_strict_spiral` therefore uses the minimal
+`PathLift(h) ∘ κₗ` composite. The WalkingEnd specialization and contextual
+decoder consume this selected spiral. The two old strict Core rewrites, their
+two identity-transfor helpers, and `walking_power_spiral_natsucc` are deleted;
+they are retained only in git history and the dated plan's historical record.
+
+The replacement passes bounded kernel, walking-module, complete diagnostic,
+reviewer-example, warning, and strict-LHS checks. The strict audit has zero
+unreviewed clauses and 45 annotated slots across 27 clauses. The catalog has
+2,082 checks (1,832 `assert` plus 250 `assertnot`) across 77 areas with zero
+unclassified checks. The kernel warning inventory is `1016/159`, and the
+walking owner is `1026/159`, down from the additive redesign's `1028/159` and
+`1039/159`. No warning is attributed to the explicit κ projection rules.
+Warnings remain diagnostics rather than a veto on intended computation.
 Generated health is synchronized with all 55 measured files/examples passing,
-and the full local CI gate passes the same 55 files in 308.952s.
+and full local CI passes those 55 targets in 306.294s.
 
 The walking-endomorphism plan resumed at implementation-goal baseline
 `82d0e27...`. Its G1–G6 implementation is active: `WalkingEnd_cat`,
@@ -129,11 +132,12 @@ never the definitional Hom.
 
 The generic G2 prerequisites are active in the kernel: `Path_cat_func`,
 `path_map_func`, `path_map_transf`, their complete `fapp*`/`tapp*` ladder,
-fixed-functor strict Core-inclusion naturality and stable whiskering,
-transparent semantic `path_lift_func`, and the reusable `NatSucc_func` in the
-Nat extension. Permanent diagnostics build the exact Nat spiral with identity
-components and iterable higher action. No primitive PathLift, generic directed
-Core functor, or new unification rule was added. Capped groupoid-function
+the restricted `CoreInclTransf` and explicit κ ladder, transparent semantic
+`path_lift_func`, and the reusable `NatSucc_func` in the Nat extension.
+Permanent diagnostics build the exact two-factor Nat spiral, retain the
+iterable higher action, and negatively guard the retired strict endpoint
+conversions. No primitive PathLift, generic directed Core functor, or new
+unification rule was added. Capped groupoid-function
 composition evaluates pointwise; because `eta_equality` is enabled, conversion
 also observes the corresponding whole lambda even though no whole-term fold to
 `grpd_comp_function` exists. The living walking plan records exact owner logs,
@@ -143,9 +147,10 @@ walking module now supplies transparent Code and powers, the exact directed
 spiral, a contextual representable decoder, both Hom--Nat equality inverses,
 a structured forward encoder, carrier/native equivalence packages, two
 sethood proofs, and directed loop negative results. The canonical spiral point
-equation reduces to reflexivity; only its final endpoint-adjusted public
-presentation retains the generic stable-postcomposition normal form instead
-of collapsing to a raw identity. A reverse functor from the separate `BNat`
+equation reduces to reflexivity; the whole selected spiral first traverses
+explicit κ-left, and its final endpoint-adjusted public presentation therefore
+does not collapse to the raw `PathLift` component or an identity. A reverse
+functor from the separate `BNat`
 model and a full hom-category equivalence remain deferred until reusable
 monoid-action-to-functor and functor-extensionality infrastructure exists.
 

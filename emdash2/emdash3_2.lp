@@ -5931,27 +5931,6 @@ symbol functor_object_function
 ≔ λ x : τ (Obj C), @fapp0 C D F x;
 
 /*
-  Strict Core-inclusion naturality along a fixed ordinary functor:
-
-    F o CoreIncl(C) ↪ CoreIncl(D) o Path_map(F_0).
-
-  This is a generic Core-inclusion owner, not a global directed Core functor.
-*/
-rule @comp_fapp0
-    Cat_cat
-    _ $C $D
-    $F
-    (Core_incl_func $C)
-  ↪ @comp_fapp0
-    Cat_cat
-    (Path_cat (Obj $C)) (Path_cat (Obj $D)) $D
-    (Core_incl_func $D)
-    (@fapp1_fapp0
-      Grpd_cat Cat_cat Path_cat_func
-      (Obj $C) (Obj $D)
-      (@functor_object_function $C $D $F));
-
-/*
   Universe-category object and hom computations.
 
   Surface/formula:
@@ -8805,32 +8784,6 @@ rule @fapp0
       (@fapp1_fapp0 $B Cat_cat $E $X $Y $p)
       (@fapp0 $W (@fapp0 $B Cat_cat $E $X) $G $w);
 
-/*
-  Stable consumer of strict Core-inclusion naturality. The inner functor stays
-  under the established Cat-valued postcomposition owner, while generic
-  Path_cat_func functoriality accumulates the two Path maps.
-*/
-rule @comp_fapp0
-      Cat_cat
-      _ $C $D
-      $F
-      (@hom_postcomp_fapp0
-        Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-        (Path_cat $A) (Path_cat (Obj $C)) $C
-        (Core_incl_func $C)
-        $G)
-  ↪ @hom_postcomp_fapp0
-      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-      (Path_cat $A) (Path_cat (Obj $D)) $D
-      (Core_incl_func $D)
-      (@comp_fapp0
-        Cat_cat
-        (Path_cat $A) (Path_cat (Obj $C)) (Path_cat (Obj $D))
-        (@path_map_func
-          (Obj $C) (Obj $D)
-          (@functor_object_function $C $D $F))
-        $G);
-
 // Hom-action functoriality for postcomposition. These joins prevent the
 // stable postcomposition owner from hiding the functoriality already present
 // in `hom_(F,W)`.
@@ -11010,32 +10963,6 @@ symbol path_map_transf
     (@fapp1_func
       Grpd_cat Cat_cat Path_cat_func A B)
     f g h;
-
-// Structured reading of strict Core-inclusion naturality. Its source reduces
-// to its target, so the comparison is the ordinary identity transfor.
-symbol core_incl_naturality
-  [C D : Cat]
-  (F : τ (Functor C D))
-  : τ (@Transf
-      (Core_cat C)
-      D
-      (@comp_cat_fapp0
-        (Core_cat C) C D
-        F (Core_incl_func C))
-      (@comp_cat_fapp0
-        (Core_cat C) (Core_cat D) D
-        (Core_incl_func D)
-        (@path_map_func
-          (Obj C) (Obj D)
-          (@functor_object_function C D F))))
-≔ @id
-    (Functor_cat (Core_cat C) D)
-    (@comp_cat_fapp0
-      (Core_cat C) (Core_cat D) D
-      (Core_incl_func D)
-      (@path_map_func
-        (Obj C) (Obj D)
-        (@functor_object_function C D F)));
 
 /*
   Cat-valued transfors and displayed functors are proof-time-comparable
@@ -13741,46 +13668,6 @@ symbol comp_cat_con_func [X Y Z : Cat]
     X
     Y
     F;
-
-// Whiskered strict Core-inclusion naturality at the stable postcomposition
-// owner. Its endpoints normalize to the same functor, hence identity.
-symbol core_incl_naturality_whiskered
-  [A : Grpd]
-  [C D : Cat]
-  (F : τ (Functor C D))
-  (G : τ (Functor (Path_cat A) (Core_cat C)))
-  : τ (@Transf
-      (Path_cat A)
-      D
-      (@comp_cat_fapp0
-        (Path_cat A) C D
-        F
-        (@hom_postcomp_fapp0
-          Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-          (Path_cat A) (Path_cat (Obj C)) C
-          (Core_incl_func C) G))
-      (@hom_postcomp_fapp0
-        Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-        (Path_cat A) (Path_cat (Obj D)) D
-        (Core_incl_func D)
-        (@comp_cat_fapp0
-          (Path_cat A) (Path_cat (Obj C)) (Path_cat (Obj D))
-          (@path_map_func
-            (Obj C) (Obj D)
-            (@functor_object_function C D F))
-          G)))
-≔ @id
-    (Functor_cat (Path_cat A) D)
-    (@hom_postcomp_fapp0
-      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-      (Path_cat A) (Path_cat (Obj D)) D
-      (Core_incl_func D)
-      (@comp_cat_fapp0
-        (Path_cat A) (Path_cat (Obj C)) (Path_cat (Obj D))
-        (@path_map_func
-          (Obj C) (Obj D)
-          (@functor_object_function C D F))
-        G));
 
 // Precomposition packaged as a functor in the precomposing functor.
 //
@@ -22474,14 +22361,22 @@ rule @tapp1_fapp0
       (@core_incl_diagonal_func $C $D)
       $F;
 
+// Capped diagonal selected by CoreInclTransf at the ordinary functor F.
+symbol core_incl_transf_diagonal_fapp0
+  [C D : Cat]
+  (F : τ (Functor C D))
+  : τ (Functor (Core_cat C) D)
+≔ @tapp1_fapp0
+    Cat1Eq_cat Cat_cat
+    Core1_func Cat1Eq_incl_func
+    C D CoreInclTransf F;
+
 /*
-  Naturality square associated to CoreInclTransf at F.  The capped tapp₁
-  projection above is its common diagonal functor; this derived next cell is
-  the comparison between the two boundary composites.  In the active strict
-  owner those composites normalize to the same functor, so the cell is the
-  existing bodyful identity transfor.
+  Explicit naturality square associated to CoreInclTransf at F.  Its
+  projections are inherited from the common diagonal; the two boundary
+  functors deliberately remain distinct runtime presentations.
 */
-symbol core_incl_transf_kappa
+injective symbol core_incl_transf_kappa
   [C D : Cat]
   (F : τ (Functor C D))
   : τ (Transf
@@ -22500,8 +22395,37 @@ symbol core_incl_transf_kappa
           Core1_func Cat1Eq_incl_func
           D CoreInclTransf)
         (@fapp1_fapp0
-          Cat1Eq_cat Cat_cat Core1_func C D F)))
-≔ @core_incl_naturality C D F;
+          Cat1Eq_cat Cat_cat Core1_func C D F)));
+
+// Point component of the explicit square is identity on the common diagonal.
+rule @tapp0_fapp0
+      _ $D _ _ $x
+      (@core_incl_transf_kappa $C $D $F)
+  ↪ @id
+      $D
+      (@fapp0
+        (Core_cat $C) $D
+        (@core_incl_transf_diagonal_fapp0 $C $D $F)
+        $x);
+
+// Full off-diagonal action is inherited from the common diagonal functor.
+rule @tapp1_func
+      _ $D _ _ $x $y
+      (@core_incl_transf_kappa $C $D $F)
+  ↪ @fapp1_func
+      (Core_cat $C) $D
+      (@core_incl_transf_diagonal_fapp0 $C $D $F)
+      $x $y;
+
+// Capped off-diagonal action is the common diagonal's arrow action.
+rule @tapp1_fapp0
+      _ $D _ _ $x $y
+      (@core_incl_transf_kappa $C $D $F)
+      $p
+  ↪ @fapp1_fapp0
+      (Core_cat $C) $D
+      (@core_incl_transf_diagonal_fapp0 $C $D $F)
+      $x $y $p;
 
 // Readable semantic PathLift object selected by its internal functor.
 symbol path_lift_fapp0
@@ -22515,11 +22439,283 @@ symbol path_lift_fapp0
     (@path_lift_func A C)
     p;
 
+// Precomposition by PathMap(p), used to whisker the explicit kappa square.
+symbol core_incl_transf_kappa_whisker_func
+  [A : Grpd]
+  [C D : Cat]
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (Functor
+      (Functor_cat (Core_cat C) D)
+      (Functor_cat (Path_cat A) D))
+≔ @comp_cat_con_func
+    (Path_cat A) (Core_cat C) D
+    (@path_map_func A (Obj C) p);
+
+// Raw source obtained by generic precomposition of kappa's source.
+symbol core_incl_transf_kappa_left_raw_source
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (Functor (Path_cat A) D)
+≔ @fapp0
+    (Functor_cat (Core_cat C) D)
+    (Functor_cat (Path_cat A) D)
+    (@core_incl_transf_kappa_whisker_func A C D p)
+    (@comp_cat_fapp0
+      (Core_cat C) C D
+      (@fapp1_fapp0
+        Cat1Eq_cat Cat_cat Cat1Eq_incl_func C D F)
+      (@tapp0_fapp0
+        Cat1Eq_cat Cat_cat
+        Core1_func Cat1Eq_incl_func
+        C CoreInclTransf));
+
+// Raw target obtained by generic precomposition of kappa's target.
+symbol core_incl_transf_kappa_left_raw_target
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (Functor (Path_cat A) D)
+≔ @fapp0
+    (Functor_cat (Core_cat C) D)
+    (Functor_cat (Path_cat A) D)
+    (@core_incl_transf_kappa_whisker_func A C D p)
+    (@comp_cat_fapp0
+      (Core_cat C) (Core_cat D) D
+      (@tapp0_fapp0
+        Cat1Eq_cat Cat_cat
+        Core1_func Cat1Eq_incl_func
+        D CoreInclTransf)
+      (@fapp1_fapp0
+        Cat1Eq_cat Cat_cat Core1_func C D F));
+
+// Generic functor hom-action performs the actual whiskering of kappa.
+symbol core_incl_transf_kappa_left_raw
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (Transf
+      (@core_incl_transf_kappa_left_raw_source A C D F p)
+      (@core_incl_transf_kappa_left_raw_target A C D F p))
+≔ @fapp1_fapp0
+    (Functor_cat (Core_cat C) D)
+    (Functor_cat (Path_cat A) D)
+    (@core_incl_transf_kappa_whisker_func A C D p)
+    (@comp_cat_fapp0
+      (Core_cat C) C D
+      (@fapp1_fapp0
+        Cat1Eq_cat Cat_cat Cat1Eq_incl_func C D F)
+      (@tapp0_fapp0
+        Cat1Eq_cat Cat_cat
+        Core1_func Cat1Eq_incl_func
+        C CoreInclTransf))
+    (@comp_cat_fapp0
+      (Core_cat C) (Core_cat D) D
+      (@tapp0_fapp0
+        Cat1Eq_cat Cat_cat
+        Core1_func Cat1Eq_incl_func
+        D CoreInclTransf)
+      (@fapp1_fapp0
+        Cat1Eq_cat Cat_cat Core1_func C D F))
+    (@core_incl_transf_kappa C D F);
+
+// Proof-time raw-composition reading of the semantic PathLift object.
+symbol path_lift_fapp0_raw_path
+  [A : Grpd]
+  [C : Cat]
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (@=
+      (Functor (Path_cat A) C)
+      (@comp_cat_fapp0
+        (Path_cat A) (Path_cat (Obj C)) C
+        (Core_incl_func C)
+        (@path_map_func A (Obj C) p))
+      (@path_lift_fapp0 A C p))
+≔ @eq_refl
+    (Functor (Path_cat A) C)
+    (@comp_cat_fapp0
+      (Path_cat A) (Path_cat (Obj C)) C
+      (Core_incl_func C)
+      (@path_map_func A (Obj C) p));
+
+// Associativity aligns the raw source with F ∘ PathLift(p).
+symbol core_incl_transf_kappa_left_source_path
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (@=
+      (Functor (Path_cat A) D)
+      (@core_incl_transf_kappa_left_raw_source A C D F p)
+      (@comp_cat_fapp0
+        (Path_cat A) C D
+        F (@path_lift_fapp0 A C p)))
+≔ @eq_trans
+    (Functor (Path_cat A) D)
+    (@core_incl_transf_kappa_left_raw_source A C D F p)
+    (@comp_cat_fapp0
+      (Path_cat A) C D F
+      (@comp_cat_fapp0
+        (Path_cat A) (Path_cat (Obj C)) C
+        (Core_incl_func C)
+        (@path_map_func A (Obj C) p)))
+    (@comp_cat_fapp0
+      (Path_cat A) C D
+      F (@path_lift_fapp0 A C p))
+    (@eq_sym
+      (Functor (Path_cat A) D)
+      (@comp_cat_fapp0
+        (Path_cat A) C D F
+        (@comp_cat_fapp0
+          (Path_cat A) (Path_cat (Obj C)) C
+          (Core_incl_func C)
+          (@path_map_func A (Obj C) p)))
+      (@core_incl_transf_kappa_left_raw_source A C D F p)
+      (@comp_assoc
+        Cat_cat
+        (Path_cat A) (Path_cat (Obj C)) C D
+        F
+        (Core_incl_func C)
+        (@path_map_func A (Obj C) p)))
+    (@eq_ap
+      (Functor (Path_cat A) C)
+      (Functor (Path_cat A) D)
+      (λ G : τ (Functor (Path_cat A) C),
+        @comp_cat_fapp0 (Path_cat A) C D F G)
+      (@comp_cat_fapp0
+        (Path_cat A) (Path_cat (Obj C)) C
+        (Core_incl_func C)
+        (@path_map_func A (Obj C) p))
+      (@path_lift_fapp0 A C p)
+      (@path_lift_fapp0_raw_path A C p));
+
+// Associativity plus PathMap functoriality aligns the raw target.
+symbol core_incl_transf_kappa_left_target_path
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (@=
+      (Functor (Path_cat A) D)
+      (@core_incl_transf_kappa_left_raw_target A C D F p)
+      (@path_lift_fapp0
+        A D
+        (@comp_fapp0
+          Grpd_cat
+          A (Obj C) (Obj D)
+          (@functor_object_function C D F)
+          p)))
+≔ @eq_trans
+    (Functor (Path_cat A) D)
+    (@core_incl_transf_kappa_left_raw_target A C D F p)
+    (@comp_cat_fapp0
+      (Path_cat A) (Core_cat D) D
+      (Core_incl_func D)
+      (@comp_cat_fapp0
+        (Path_cat A) (Core_cat C) (Core_cat D)
+        (@path_map_func
+          (Obj C) (Obj D)
+          (@functor_object_function C D F))
+        (@path_map_func A (Obj C) p)))
+    (@path_lift_fapp0
+      A D
+      (@comp_fapp0
+        Grpd_cat
+        A (Obj C) (Obj D)
+        (@functor_object_function C D F)
+        p))
+    (@eq_sym
+      (Functor (Path_cat A) D)
+      (@comp_cat_fapp0
+        (Path_cat A) (Core_cat D) D
+        (Core_incl_func D)
+        (@comp_cat_fapp0
+          (Path_cat A) (Core_cat C) (Core_cat D)
+          (@path_map_func
+            (Obj C) (Obj D)
+            (@functor_object_function C D F))
+          (@path_map_func A (Obj C) p)))
+      (@core_incl_transf_kappa_left_raw_target A C D F p)
+      (@comp_assoc
+        Cat_cat
+        (Path_cat A) (Core_cat C) (Core_cat D) D
+        (Core_incl_func D)
+        (@path_map_func
+          (Obj C) (Obj D)
+          (@functor_object_function C D F))
+        (@path_map_func A (Obj C) p)))
+    (@eq_refl
+      (Functor (Path_cat A) D)
+      (@comp_cat_fapp0
+        (Path_cat A) (Core_cat D) D
+        (Core_incl_func D)
+        (@comp_cat_fapp0
+          (Path_cat A) (Core_cat C) (Core_cat D)
+          (@path_map_func
+            (Obj C) (Obj D)
+            (@functor_object_function C D F))
+          (@path_map_func A (Obj C) p))));
+
+// Directed source adjustment from the readable endpoint to the raw whisker.
+symbol core_incl_transf_kappa_left_source_adjust
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (Transf
+      (@comp_cat_fapp0
+        (Path_cat A) C D
+        F (@path_lift_fapp0 A C p))
+      (@core_incl_transf_kappa_left_raw_source A C D F p))
+≔ @path_to_hom
+    (Functor_cat (Path_cat A) D)
+    (@comp_cat_fapp0
+      (Path_cat A) C D
+      F (@path_lift_fapp0 A C p))
+    (@core_incl_transf_kappa_left_raw_source A C D F p)
+    (@eq_sym
+      (Functor (Path_cat A) D)
+      (@core_incl_transf_kappa_left_raw_source A C D F p)
+      (@comp_cat_fapp0
+        (Path_cat A) C D
+        F (@path_lift_fapp0 A C p))
+      (@core_incl_transf_kappa_left_source_path A C D F p));
+
+// Directed target adjustment from the raw whisker to the readable endpoint.
+symbol core_incl_transf_kappa_left_target_adjust
+  [A : Grpd]
+  [C D : Cat]
+  (F : τ (Functor C D))
+  (p : τ (@Function_grpd A (Obj C)))
+  : τ (Transf
+      (@core_incl_transf_kappa_left_raw_target A C D F p)
+      (@path_lift_fapp0
+        A D
+        (@comp_fapp0
+          Grpd_cat
+          A (Obj C) (Obj D)
+          (@functor_object_function C D F)
+          p)))
+≔ @path_to_hom
+    (Functor_cat (Path_cat A) D)
+    (@core_incl_transf_kappa_left_raw_target A C D F p)
+    (@path_lift_fapp0
+      A D
+      (@comp_fapp0
+        Grpd_cat
+        A (Obj C) (Obj D)
+        (@functor_object_function C D F)
+        p))
+    (@core_incl_transf_kappa_left_target_path A C D F p);
+
 /*
-  Genuine left endpoint comparison obtained from CoreInclTransf at F and
-  whiskered by PathMap(p).  The stable postcomposition owner absorbs the
-  associativity of the raw composite: no new global associativity rewrite,
-  unification rule, or endpoint transport is required.
+  Genuine left endpoint comparison obtained by generic precomposition of the
+  explicit CoreInclTransf kappa.  Associativity and readable PathLift endpoint
+  changes are represented by narrow equality-induced directed adjustments;
+  no Core-specific whole-functor rewrite or new unification rule is used.
 */
 symbol core_incl_transf_kappa_left
   [A : Grpd]
@@ -22537,21 +22733,29 @@ symbol core_incl_transf_kappa_left
           A (Obj C) (Obj D)
           (@functor_object_function C D F)
           p)))
-≔ @id
+≔ @comp_fapp0
     (Functor_cat (Path_cat A) D)
-    (@hom_postcomp_fapp0
-      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
-      (Path_cat A) (Core_cat D) D
-      (@tapp0_fapp0
-        Cat1Eq_cat Cat_cat
-        Core1_func Cat1Eq_incl_func
-        D CoreInclTransf)
+    (@comp_cat_fapp0
+      (Path_cat A) C D
+      F (@path_lift_fapp0 A C p))
+    (@core_incl_transf_kappa_left_raw_target A C D F p)
+    (@path_lift_fapp0
+      A D
       (@comp_fapp0
-        Cat_cat
-        (Path_cat A) (Core_cat C) (Core_cat D)
-        (@fapp1_fapp0
-          Cat1Eq_cat Cat_cat Core1_func C D F)
-        (@path_map_func A (Obj C) p)));
+        Grpd_cat
+        A (Obj C) (Obj D)
+        (@functor_object_function C D F)
+        p))
+    (@core_incl_transf_kappa_left_target_adjust A C D F p)
+    (@comp_fapp0
+      (Functor_cat (Path_cat A) D)
+      (@comp_cat_fapp0
+        (Path_cat A) C D
+        F (@path_lift_fapp0 A C p))
+      (@core_incl_transf_kappa_left_raw_source A C D F p)
+      (@core_incl_transf_kappa_left_raw_target A C D F p)
+      (@core_incl_transf_kappa_left_raw A C D F p)
+      (@core_incl_transf_kappa_left_source_adjust A C D F p));
 
 // Right PathLift comparison; current PathInt functoriality makes it identity.
 symbol path_lift_kappa_right
@@ -22574,8 +22778,8 @@ symbol path_lift_kappa_right
       (@comp_fapp0 Grpd_cat A B (Obj C) p s));
 
 /*
-  Non-strict structured spiral
-    kappa_right o PathLift(h) o kappa_left.
+  Non-strict structured spiral.  The right comparison is definitionally the
+  identity, so the selected term is the minimal PathLift(h) o kappa_left.
 */
 symbol path_lift_non_strict_spiral
   [A : Grpd]
@@ -22606,36 +22810,24 @@ symbol path_lift_non_strict_spiral
       S (@path_lift_fapp0 A C p))
     (@path_lift_fapp0
       A C
-      (@comp_fapp0 Grpd_cat A A (Obj C) p s))
+      (@comp_fapp0
+        Grpd_cat
+        A (Obj C) (Obj C)
+        (@functor_object_function C C S)
+        p))
     (@comp_cat_fapp0
       (Path_cat A) (Path_cat A) C
       (@path_lift_fapp0 A C p)
       (@path_map_func A A s))
-    (@path_lift_kappa_right A A C p s)
-    (@comp_fapp0
+    (@fapp1_fapp0
+      (Path_cat (@Function_grpd A (Obj C)))
       (Functor_cat (Path_cat A) C)
-      (@comp_cat_fapp0
-        (Path_cat A) C C
-        S (@path_lift_fapp0 A C p))
-      (@path_lift_fapp0
-        A C
-        (@comp_fapp0
-          Grpd_cat
-          A (Obj C) (Obj C)
-          (@functor_object_function C C S)
-          p))
-      (@path_lift_fapp0
-        A C
-        (@comp_fapp0 Grpd_cat A A (Obj C) p s))
-      (@fapp1_fapp0
-        (Path_cat (@Function_grpd A (Obj C)))
-        (Functor_cat (Path_cat A) C)
-        (@path_lift_func A C)
-        (@comp_fapp0
-          Grpd_cat
-          A (Obj C) (Obj C)
-          (@functor_object_function C C S)
-          p)
-        (@comp_fapp0 Grpd_cat A A (Obj C) p s)
-        h)
-      (@core_incl_transf_kappa_left A C C S p));
+      (@path_lift_func A C)
+      (@comp_fapp0
+        Grpd_cat
+        A (Obj C) (Obj C)
+        (@functor_object_function C C S)
+        p)
+      (@comp_fapp0 Grpd_cat A A (Obj C) p s)
+      h)
+    (@core_incl_transf_kappa_left A C C S p);

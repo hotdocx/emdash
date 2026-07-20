@@ -786,42 +786,11 @@ symbol walking_power_func
       (Hom_cat WalkingEnd_cat walking_base walking_base))
     walking_power_function;
 
-// Canonical directed spiral against the literal Nat successor functor.
-symbol walking_power_spiral_natsucc
-  : τ (Transf
-      (@comp_cat_fapp0
-        (Path_cat Nat_grpd)
-        (Hom_cat WalkingEnd_cat walking_base walking_base)
-        (Hom_cat WalkingEnd_cat walking_base walking_base)
-        walking_loop_postcomp_func
-        walking_power_func)
-      (@comp_cat_fapp0
-        (Path_cat Nat_grpd)
-        (Path_cat Nat_grpd)
-        (Hom_cat WalkingEnd_cat walking_base walking_base)
-        walking_power_func
-        NatSucc_func))
-≔ @fapp1_fapp0
-    (Path_cat (@Function_grpd
-      Nat_grpd
-      (Hom WalkingEnd_cat walking_base walking_base)))
-    (Functor_cat
-      (Path_cat Nat_grpd)
-      (Hom_cat WalkingEnd_cat walking_base walking_base))
-    (@path_lift_func
-      Nat_grpd
-      (Hom_cat WalkingEnd_cat walking_base walking_base))
-    walking_power_left_function
-    walking_power_right_function
-    walking_power_step_path;
-
 /*
-  The restricted CoreInclTransf presentation retains both endpoint
-  comparisons explicitly:
-    kappa_right o PathLift(step) o kappa_left.
-  In the selected strict representation both kappas compute to identities,
-  so this three-cell spiral converts to walking_power_spiral_natsucc while
-  preserving the more informative internal construction.
+  The restricted CoreInclTransf presentation supplies the required explicit
+  left comparison before PathLift(step).  The right comparison is ordinary
+  PathInt functoriality and converts to identity, so the selected spiral is
+  the minimal PathLift(step) o kappa_left composite.
 */
 symbol walking_power_spiral_coreincl
   : τ (Transf
@@ -845,14 +814,13 @@ symbol walking_power_spiral_coreincl
     nat_succ_function
     walking_power_step_path;
 
-// Code[loop] computes to NatSucc, so the canonical spiral already has the
-// literal contextual endpoint; no propositional endpoint whisker is needed.
+// Selected contextual algebra: the explicit-kappa CoreInclTransf spiral.
 symbol walking_power_spiral
   : τ (@walking_end_loop_coherence
       walking_Code_catd
       walking_based_rep_catd
       walking_power_func)
-≔ walking_power_spiral_natsucc;
+≔ walking_power_spiral_coreincl;
 
 // Canonical component before public endpoint adjustments.
 symbol walking_power_spiral_component

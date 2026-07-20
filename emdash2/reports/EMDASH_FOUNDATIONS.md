@@ -204,15 +204,17 @@ For a function equality `h : f = g`, the second action
 off-diagonal equality action. Thus ordinary equality action is internalized
 without reflecting an arbitrary directed cell back into equality.
 
-For every fixed ordinary functor `F : C -> D`, Core inclusion has the strict
-fixed-functor naturality presentation
+For every fixed ordinary functor `F : C -> D`, restricted Core inclusion has
+an explicit directed naturality square
 
 ```text
-F o CoreIncl_C = CoreIncl_D o path_map_func(F_0),
+κ_F : F o CoreIncl_C => CoreIncl_D o path_map_func(F_0),
 ```
 
-where `F_0(x) = F[x]`. Its named naturality transfor and whiskering are
-ordinary identity transfors at the selected common normal form. This does not
+where `F_0(x) = F[x]`. The two boundary functors deliberately do not convert.
+The point components of κ are identities on their common diagonal functor,
+while the full and capped off-diagonal projections are that diagonal's
+iterable action. Thus κ is not globally an identity transfor. This does not
 define a global directed `Core : Cat_cat -> Cat_cat`: an arbitrary directed
 transfor does not provide equality between its component objects. The semantic
 lift
@@ -223,9 +225,9 @@ path_lift_func
 ```
 
 is composition of the first Path action with postcomposition by
-`CoreIncl_C`, not a primitive second implementation. Its equality action
-constructs the exact Nat iteration spiral with identity point components and
-retains the full higher action.
+`CoreIncl_C`, not a primitive second implementation. Its equality action and
+the explicit κ square construct the exact Nat iteration spiral and retain the
+full higher action.
 
 There is now also a restricted equality-local internalization of Core
 inclusion. For every category `A`, define recursively
@@ -260,12 +262,13 @@ CoreInclTransf : Core₁ => Cat₁⁼Incl.
 ```
 
 The capped first-hom projection at `F` is the common diagonal functor
-`Core(C) → D`, not the naturality 2-cell itself. The separate derived cell
+`Core(C) → D`, not the naturality 2-cell itself. The separate explicit cell
 `core_incl_transf_kappa(F)` compares
-`F o CoreIncl_C` with `CoreIncl_D o PathMap(F₀)`. Whiskering this comparison is
-written at the stable represented-postcomposition owner; that presentation
-controls associativity without a global reassociation rewrite or proof-time
-unification rule.
+`F o CoreIncl_C` with `CoreIncl_D o PathMap(F₀)`. Whiskering this comparison
+uses generic functor precomposition. Explicit equality proofs and
+equality-induced directed adjustments align associativity and the readable
+semantic `PathLift` endpoints without a global reassociation rewrite or a new
+proof-time unification rule.
 
 The walking-endomorphism extension is implemented on this infrastructure
 through its selected G6 boundary. The former generated-word `walking_end_hom` presentation has
@@ -310,17 +313,18 @@ endpoint-adjusted representable presentation intentionally remains under the
 generic stable-postcomposition owner instead of reducing to a raw identity;
 that is a normal-form boundary, not a missing HIT beta.
 
-The restricted construction also supplies the explicit three-cell form
+The restricted construction supplies the selected explicit-κ form
 
 ```text
-κᵣ o PathLift(step) o κₗ.
+PathLift(step) o κₗ.
 ```
 
-Both endpoint comparisons compute to identities in the selected strict
-representation, so `walking_power_spiral_coreincl` converts to the retained
-`walking_power_spiral_natsucc` and has the same directed component. This is a
-validated alternative construction, while the original strict spiral remains
-available as fallback.
+Here κ-left is genuine generic whiskering of the explicit square, including
+its directed endpoint adjustments. The right comparison is judgmentally the
+identity by ordinary Path functoriality, so it remains separately checked but
+is not inserted as a redundant third factor. `walking_power_spiral_coreincl`
+is the selected `walking_power_spiral`, and the contextual decoder consumes
+it. The former strict spiral is deleted rather than retained as a fallback.
 
 The decoder target is the existing directed representable family
 
@@ -2541,7 +2545,7 @@ vocabulary.
 | restricted Core functor `Core₁` | `Core1_func` |
 | restricted Core-inclusion transformation | `CoreInclTransf` |
 | restricted Core-inclusion κ square | `core_incl_transf_kappa F` |
-| `κᵣ o PathLift(h) o κₗ` | `path_lift_non_strict_spiral S p s h` |
+| `PathLift(h) o κₗ` (with judgmental-identity `κᵣ` omitted) | `path_lift_non_strict_spiral S p s h` |
 | `Catd(K)` | `Catd_cat K` / `Catd K` |
 | `E[k]` | `Fibre_cat E k` |
 | `F^*E` | `Pullback_catd E F` |
