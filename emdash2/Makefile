@@ -1,5 +1,5 @@
 .RECIPEPREFIX := >
-.PHONY: check check-warnings warning-summary audit-rules examples catalog toc ci ci-render book-evidence book-check book-pdf book-release health watch infinity-codex-test prune-logs clean
+.PHONY: check check-warnings warning-summary audit-rules examples catalog toc ci ci-render book-evidence book-typography book-check book-pdf book-release health watch infinity-codex-test prune-logs clean
 
 check:
 # scripts/check.sh checks the active v3.2 development and v3.2 diagnostics.
@@ -20,13 +20,15 @@ ci:
 > python3 scripts/check_metrics.py --update-log --brief
 > python3 -m py_compile scripts/*.py
 > python3 -m json.tool .codex/hooks.json >/dev/null
-> python3 -m unittest tests.test_infinity_codex
+> python3 -m unittest tests.test_infinity_codex tests.test_book_typography
 > bash -n scripts/*.sh
 > git diff --check
 > python3 scripts/check_source_toc.py
 > ./scripts/lint_active_refs.sh
 > python3 scripts/lint_report_headers.py
 > python3 scripts/check_book_evidence.py
+> python3 scripts/check_book_typography.py
+> node print/scripts/check_book_katex.mjs
 > node print/scripts/assemble_book.mjs
 > node print/scripts/assemble_book.mjs --check
 > node print/scripts/check_book.mjs
@@ -47,6 +49,9 @@ ci-render:
 
 book-evidence:
 > python3 scripts/check_book_evidence.py
+
+book-typography:
+> npm run book:typography
 
 book-check:
 > npm run book:check

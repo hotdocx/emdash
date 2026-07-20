@@ -8,10 +8,10 @@ expressions inhabit which classifiers, and which calculations count without
 further proof. The elementary judgments have the familiar shape
 
 $$
-A;mathsf{classifier},qquad a:A,qquad a\equiv b:A.
+A\;\mathsf{classifier},\qquad a:A,\qquad a\equiv b:A.
 $$
 
-The last display uses `equiv` only as the glyph for *judgmental* or
+The last display uses $\equiv$ only as the glyph for *judgmental* or
 definitional equality. It is not an inhabitant of an identity type. This
 distinction will matter throughout the book: computation may make two
 expressions the same input to every later rule, while a path is mathematical
@@ -31,7 +31,7 @@ reason in ordinary type-theoretic notation.
 A judgment rarely stands alone. It is made in a context:
 
 $$
-x:A,quad y:B(x),quad z:C(x,y)\;\vdash\;t:D(x,y,z).
+x:A,\quad y:B(x),\quad z:C(x,y)\;\vdash\;t:D(x,y,z).
 $$
 
 Each declaration may depend on those before it. Substitution replaces a
@@ -118,7 +118,7 @@ the discipline of putting a law at the right one of these layers.
 As a small example, Nat addition is defined by recursion in its left input:
 
 $$
-0+n\equiv n,qquad
+0+n\equiv n,\qquad
 \mathsf{succ}(m)+n\equiv\mathsf{succ}(m+n).
 $$
 

@@ -18,6 +18,12 @@ const EXPECTED_STATUSES = new Set([
   'mathematical development',
   'research boundary',
 ]);
+const EXPANSION_STATUSES = new Set([
+  'checked',
+  'formal-consequence',
+  'mathematical-development',
+  'research-boundary',
+]);
 const SAFE_PROVENANCE_ID = /^[A-Z][A-Z0-9-]*$/;
 const SAFE_REMOTE_PATH = /^(?!\/)(?!.*(?:^|\/)\.\.(?:\/|$))[A-Za-z0-9_.\/-]+$/;
 const MARKDOWN_IMAGE_RE = /!\[([^\]]*)\]\(([^)\r\n]+)\)/g;
@@ -276,6 +282,208 @@ function checkProvenance(manifest, issues) {
   }
 }
 
+function checkExpansionContract(manifest, issues) {
+  const contractPath = resolveRepoPath(
+    manifest.architecture,
+    'book/book.json:architecture'
+  );
+  const contract = readJsonFile(contractPath, manifest.architecture);
+  const evidencePath = resolveRepoPath(manifest.evidence, 'book/book.json:evidence');
+  const evidence = readJsonFile(evidencePath, manifest.evidence);
+  const thirdPartyPath = resolveRepoPath(
+    manifest.provenance.thirdPartySources,
+    'book/book.json:provenance.thirdPartySources'
+  );
+  const thirdParty = readJsonFile(
+    thirdPartyPath,
+    manifest.provenance.thirdPartySources
+  );
+  const nonempty = (value) => typeof value === 'string' && value.trim() !== '';
+
+  if (!contract || contract.version !== 1) {
+    issue(issues, manifest.architecture + ': expected expansion contract version 1');
+    return;
+  }
+  if (!nonempty(contract.planId)) {
+    issue(issues, manifest.architecture + ': planId must be non-empty');
+  }
+  if (!Array.isArray(contract.retainedChapterRange) ||
+      contract.retainedChapterRange.length !== 2 ||
+      contract.retainedChapterRange[0] !== 1 ||
+      contract.retainedChapterRange[1] !== 8) {
+    issue(issues, manifest.architecture + ': retainedChapterRange must be [1, 8]');
+  }
+
+  const numberedSources = manifest.sources.filter((source) => /^chapter-\d+$/.test(source.id));
+  const expectedIds = Array.from({ length: 17 }, (_, index) => 'chapter-' + (index + 1));
+  const actualIds = numberedSources.map((source) => source.id);
+  if (actualIds.join('\n') !== expectedIds.join('\n')) {
+    issue(issues, 'book manifest numbered chapters must be contiguous chapter-1 through chapter-17');
+  }
+  const manifestById = new Map(manifest.sources.map((source) => [source.id, source]));
+  const manifestByPath = new Map(manifest.sources.map((source) => [source.path, source]));
+  const claims = evidence.claims && typeof evidence.claims === 'object'
+    ? evidence.claims
+    : {};
+
+  if (!Array.isArray(contract.chapters) || contract.chapters.length !== 9) {
+    issue(issues, manifest.architecture + ': chapters must contain exactly Chapters 9-17');
+  } else {
+    const owners = new Set();
+    for (const [index, chapter] of contract.chapters.entries()) {
+      const number = index + 9;
+      const context = manifest.architecture + ':chapters[' + index + ']';
+      if (!chapter || typeof chapter !== 'object') {
+        issue(issues, context + ': expected an object');
+        continue;
+      }
+      if (chapter.id !== 'chapter-' + number || chapter.number !== number) {
+        issue(issues, context + ': id and number must identify Chapter ' + number);
+      }
+      const source = manifestById.get(chapter.id);
+      if (!source || source.path !== chapter.path) {
+        issue(issues, context + ': path must match the assembled manifest source');
+      } else if (nonempty(chapter.title)) {
+        const text = fs.readFileSync(source.absolutePath, 'utf8');
+        if (!text.includes('# ' + number + '. ' + chapter.title)) {
+          issue(issues, context + ': title does not match the chapter H1');
+        }
+      } else {
+        issue(issues, context + ': title must be non-empty');
+      }
+      if (!nonempty(chapter.conceptualOwner)) {
+        issue(issues, context + ': conceptualOwner must be non-empty');
+      } else if (owners.has(chapter.conceptualOwner)) {
+        issue(issues, context + ': conceptualOwner duplicates another chapter');
+      } else {
+        owners.add(chapter.conceptualOwner);
+      }
+      if (!Array.isArray(chapter.spiralFrom) || chapter.spiralFrom.length === 0) {
+        issue(issues, context + ': spiralFrom must name prior chapters');
+      } else {
+        for (const prior of chapter.spiralFrom) {
+          const priorNumber = Number(String(prior).match(/^chapter-(\d+)$/)?.[1]);
+          if (!manifestById.has(prior) || !Number.isInteger(priorNumber) ||
+              priorNumber >= number) {
+            issue(issues, context + ': invalid prior spiral chapter ' + prior);
+          }
+        }
+      }
+      const theorem = chapter.centralTheorem;
+      if (!theorem || typeof theorem !== 'object' ||
+          !EXPANSION_STATUSES.has(theorem.status)) {
+        issue(issues, context + ': centralTheorem has an invalid status');
+      } else if (['checked', 'formal-consequence'].includes(theorem.status)) {
+        const claim = claims[theorem.evidence];
+        if (!nonempty(theorem.evidence) || !claim || claim.status !== theorem.status) {
+          issue(issues, context + ': central theorem evidence is missing or status-mismatched');
+        }
+      } else if (!nonempty(theorem.missingInfrastructure)) {
+        issue(issues, context + ': non-checked central theorem must name missing infrastructure');
+      }
+      for (const evidenceId of chapter.secondaryEvidence ?? []) {
+        if (!claims[evidenceId] || claims[evidenceId].status !== 'checked') {
+          issue(issues, context + ': unknown checked secondary evidence ' + evidenceId);
+        }
+      }
+      if (!nonempty(chapter.boundary)) {
+        issue(issues, context + ': boundary must be non-empty');
+      }
+    }
+  }
+
+  const appendix = contract.appendix;
+  const appendixSource = appendix && manifestById.get(appendix.id);
+  if (!appendix || appendix.letter !== 'G' || !appendixSource ||
+      appendixSource.path !== appendix.path || !nonempty(appendix.title) ||
+      !Array.isArray(appendix.sections) || appendix.sections.length !== 7) {
+    issue(issues, manifest.architecture + ': Appendix G contract is incomplete or off-manifest');
+  }
+
+  const requiredCategoryTerms = new Set([
+    'native Cat',
+    'equality-local category',
+    'finite NCat or OneCat evidence',
+    'HoTT precategory',
+    'HoTT category',
+    'HoTT strict category',
+  ]);
+  const categoryTerms = new Set();
+  for (const entry of contract.categoryTranslation ?? []) {
+    if (!entry || !nonempty(entry.term) || !nonempty(entry.meaning) ||
+        !EXPANSION_STATUSES.has(entry.status) || !nonempty(entry.boundary)) {
+      issue(issues, manifest.architecture + ': invalid categoryTranslation entry');
+      continue;
+    }
+    categoryTerms.add(entry.term);
+  }
+  for (const term of requiredCategoryTerms) {
+    if (!categoryTerms.has(term)) {
+      issue(issues, manifest.architecture + ': missing category translation for ' + term);
+    }
+  }
+
+  const requiredTerminology = new Set([
+    'strict category', 'strict transfor', 'lax', 'equivalence', 'isomorphism',
+    'univalence', 'saturation', 'dagger', 'opposite', 'duality',
+  ]);
+  const terminology = new Set();
+  for (const entry of contract.terminology ?? []) {
+    if (!entry || !nonempty(entry.term) || !nonempty(entry.meaning) ||
+        !Array.isArray(entry.notEquivalentTo) || entry.notEquivalentTo.length === 0 ||
+        !entry.notEquivalentTo.every(nonempty)) {
+      issue(issues, manifest.architecture + ': invalid terminology entry');
+      continue;
+    }
+    terminology.add(entry.term);
+  }
+  for (const term of requiredTerminology) {
+    if (!terminology.has(term)) {
+      issue(issues, manifest.architecture + ': missing terminology decision for ' + term);
+    }
+  }
+
+  const expectedLayers = [
+    'computational categorical kernel',
+    'canonical mathematical surface',
+    'optional future elaborator',
+    'external semantic models',
+  ];
+  if (!Array.isArray(contract.formalLayers) ||
+      contract.formalLayers.join('\n') !== expectedLayers.join('\n')) {
+    issue(issues, manifest.architecture + ': formalLayers must retain the selected four-layer order');
+  }
+
+  const adaptations = thirdParty.sources?.find((source) => source.id === 'hott-book')
+    ?.adaptations ?? [];
+  const adaptationIds = new Set(adaptations.map((adaptation) => adaptation.id));
+  if (!Array.isArray(contract.requiredProvenanceAdaptations) ||
+      contract.requiredProvenanceAdaptations.length !== 13 ||
+      new Set(contract.requiredProvenanceAdaptations).size !== 13) {
+    issue(issues, manifest.architecture + ': requiredProvenanceAdaptations must contain 13 unique entries');
+  } else {
+    for (const adaptationId of contract.requiredProvenanceAdaptations) {
+      if (!adaptationIds.has(adaptationId)) {
+        issue(issues, manifest.architecture + ': missing provenance adaptation ' + adaptationId);
+      }
+    }
+  }
+
+  if (!Array.isArray(contract.migration) || contract.migration.length !== 2) {
+    issue(issues, manifest.architecture + ': migration must record the two existing chapter moves');
+  } else {
+    for (const [index, move] of contract.migration.entries()) {
+      const context = manifest.architecture + ':migration[' + index + ']';
+      if (!move || !nonempty(move.from) || !nonempty(move.to) ||
+          manifestByPath.has(move.from) || !manifestByPath.has(move.to) ||
+          !nonempty(move.oldAnchor) || !nonempty(move.newAnchor) ||
+          !nonempty(move.disposition)) {
+        issue(issues, context + ': invalid or incomplete migration record');
+      }
+    }
+  }
+}
+
 function checkRegistry(manifest, issues) {
   const registry = loadDocumentRegistry();
   const document = registry.documents.find(
@@ -355,6 +563,7 @@ function main() {
   const { manifest, outputPath } = loadBookManifest();
   checkSources(manifest, issues);
   checkProvenance(manifest, issues);
+  checkExpansionContract(manifest, issues);
   checkRegistry(manifest, issues);
   checkOutput(manifest, outputPath, issues);
   checkCriticalOrder(manifest, issues);

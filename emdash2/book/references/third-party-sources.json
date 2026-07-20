@@ -112,6 +112,65 @@
             "subsec:pi1s1-encode-decode"
           ],
           "use": "Chapter 8 rhetorical-spine reference"
+        },
+        {
+          "path": "categories.tex",
+          "labels": [
+            "cha:category-theory",
+            "sec:cats",
+            "ct:precategory",
+            "ct:isomorphism",
+            "ct:idtoiso",
+            "ct:category",
+            "sec:transfors",
+            "ct:functor",
+            "ct:nattrans",
+            "ct:functor-cat",
+            "ct:interchange",
+            "sec:adjunctions",
+            "ct:adjoints",
+            "sec:equivalences",
+            "ct:equiv",
+            "ct:full-faithful",
+            "ct:essentially-surjective",
+            "sec:yoneda",
+            "ct:yoneda",
+            "ct:yoneda-embedding",
+            "ct:representable",
+            "ct:adj-repr",
+            "sec:strict-categories",
+            "ct:strict-category",
+            "sec:dagger-categories",
+            "ct:dagger-precategory",
+            "ct:unitary",
+            "ct:dagger-category",
+            "sec:sip",
+            "thm:sip",
+            "defn:fo-notion-of-structure",
+            "sec:rezk",
+            "thm:rezk-completion"
+          ],
+          "use": "expanded category-theory spiral for HoTT Chapter 9 sections 9.1-9.9"
+        },
+        {
+          "path": "formal.tex",
+          "labels": [
+            "cha:rules",
+            "sec:formal-prelim",
+            "sec:syntax-informally",
+            "sec:syntax-more-formally",
+            "subsec:contexts",
+            "sec:more-formal-pi",
+            "sec:more-formal-sigma",
+            "sec:more-formal-unit",
+            "sec:more-formal-identity",
+            "sec:hott-features",
+            "thm:conversion-preserves-typing",
+            "thm:strong-normalization",
+            "lem:normal-forms",
+            "subsec:general-remarks"
+          ],
+          "use": "categorical-kernel-first adaptation of HoTT Appendix A sections A.1-A.4"
         }
       ],
       "adaptations": [
@@ -298,8 +357,185 @@
           ],
           "adaptationType": "comparative",
           "description": "Records the precise analogy and the points where invertibility, predecessor, univalence, and group cancellation do not transfer."
+        },
+        {
+          "id": "HOTT-CAT-9-1",
+          "target": "book/chapters/10-categories-precategories-and-categorical-identity.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:cats",
+            "ct:precategory",
+            "ct:isomorphism",
+            "ct:idtoiso",
+            "ct:category"
+          ],
+          "adaptationType": "comparative",
+          "description": "Adapts categories and precategories as a univalent 1-categorical specialization, with an explicit translation to native iterated Cat, equality-local structure, and finite categorical height."
+        },
+        {
+          "id": "HOTT-CAT-9-2",
+          "target": "book/chapters/11-functors-transfors-and-functor-categories.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:transfors",
+            "ct:functor",
+            "ct:nattrans",
+            "ct:functor-cat",
+            "ct:interchange"
+          ],
+          "adaptationType": "structural",
+          "description": "Replaces pointwise-only naturality by off-diagonal tapp1 action, generic higher iteration, and a separate cut-calculus spiral in Chapter 9."
+        },
+        {
+          "id": "HOTT-CAT-9-3",
+          "target": "book/chapters/12-adjunctions-and-equivalences.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:adjunctions",
+            "ct:adjoints"
+          ],
+          "adaptationType": "computational",
+          "description": "Leads with the checked unit/counit triangle cuts and then develops hom and profunctor representability as the mathematical reading of adjunction."
+        },
+        {
+          "id": "HOTT-CAT-9-4",
+          "target": "book/chapters/12-adjunctions-and-equivalences.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:equivalences",
+            "ct:equiv",
+            "ct:full-faithful",
+            "ct:essentially-surjective"
+          ],
+          "adaptationType": "comparative",
+          "description": "Separates ordinary categorical equivalence, fully-faithful/essentially-surjective data, strict category isomorphism, carrier equivalence, and native omega-equivalence evidence."
+        },
+        {
+          "id": "HOTT-CAT-9-5",
+          "target": "book/chapters/13-yoneda-representability-and-profunctors.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:yoneda",
+            "ct:yoneda",
+            "ct:yoneda-embedding",
+            "ct:representable",
+            "ct:adj-repr"
+          ],
+          "adaptationType": "conceptual",
+          "description": "Connects the Yoneda lemma and representability to native representables, the unit profunctor, and the checked shaped co-Yoneda beta while retaining the full Cat-valued theorem boundary."
+        },
+        {
+          "id": "HOTT-CAT-9-6",
+          "target": "book/chapters/14-strictness-dagger-and-duality.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:strict-categories",
+            "ct:strict-category"
+          ],
+          "adaptationType": "terminological",
+          "description": "Preserves HoTT object-set strictness while separating it from strict transfor naturality and runtime rewrite strictness."
+        },
+        {
+          "id": "HOTT-CAT-9-7",
+          "target": "book/chapters/14-strictness-dagger-and-duality.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:dagger-categories",
+            "ct:dagger-precategory",
+            "ct:unitary",
+            "ct:dagger-category"
+          ],
+          "adaptationType": "conceptual",
+          "description": "Develops dagger and unitary structure as additional free-form data and compares it carefully with, but does not identify it with, active opposite duality."
+        },
+        {
+          "id": "HOTT-CAT-9-8",
+          "target": "book/chapters/15-structure-identity-and-saturation.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:sip",
+            "thm:sip",
+            "defn:fo-notion-of-structure"
+          ],
+          "adaptationType": "architectural",
+          "description": "Presents a structure-over-carrier identity schema and identifies current evidence-property results as footholds rather than an implemented general structure identity principle."
+        },
+        {
+          "id": "HOTT-CAT-9-9",
+          "target": "book/chapters/15-structure-identity-and-saturation.md",
+          "sourcePath": "categories.tex",
+          "sourceLabels": [
+            "sec:rezk",
+            "thm:rezk-completion"
+          ],
+          "adaptationType": "comparative",
+          "description": "Introduces Rezk completion by its universal property and compares the Yoneda-image and HIT/encode-decode routes without claiming an active native saturation construction."
+        },
+        {
+          "id": "HOTT-FORMAL-A-1",
+          "target": "book/appendices/g-formal-presentation.md",
+          "sourcePath": "formal.tex",
+          "sourceLabels": [
+            "sec:formal-prelim",
+            "sec:syntax-informally"
+          ],
+          "adaptationType": "architectural",
+          "description": "Replaces a raw type-term first presentation by a readable categorical signature while keeping it distinct from a future end-user parser."
+        },
+        {
+          "id": "HOTT-FORMAL-A-2",
+          "target": "book/appendices/g-formal-presentation.md",
+          "sourcePath": "formal.tex",
+          "sourceLabels": [
+            "sec:syntax-more-formally",
+            "subsec:contexts",
+            "sec:more-formal-pi",
+            "sec:more-formal-sigma",
+            "sec:more-formal-identity"
+          ],
+          "adaptationType": "structural",
+          "description": "Adapts explicit judgments, contexts, and formation/introduction/elimination/computation rules to the actual Lambdapi categorical encoding."
+        },
+        {
+          "id": "HOTT-FORMAL-A-3",
+          "target": "book/appendices/g-formal-presentation.md",
+          "sourcePath": "formal.tex",
+          "sourceLabels": [
+            "sec:hott-features"
+          ],
+          "adaptationType": "comparative",
+          "description": "Replaces the circle-extension story by the book's qualified equality/univalence layers and selected directed WalkingEnd signature."
+        },
+        {
+          "id": "HOTT-FORMAL-A-4",
+          "target": "book/appendices/g-formal-presentation.md",
+          "sourcePath": "formal.tex",
+          "sourceLabels": [
+            "thm:conversion-preserves-typing",
+            "thm:strong-normalization",
+            "lem:normal-forms",
+            "subsec:general-remarks"
+          ],
+          "adaptationType": "boundary",
+          "description": "Retains the metatheory taxonomy while explicitly declining to transfer HoTT's conversion, normalization, canonicity, decidability, or consistency results to the emdash rewrite system without proof."
         }
       ]
+    },
+    {
+      "id": "dosen-cut-elimination",
+      "title": "Cut Elimination in Categories",
+      "authors": "Kosta Došen",
+      "series": "Trends in Logic 6",
+      "publisher": "Kluwer Academic Publishers, Dordrecht",
+      "year": 1999,
+      "doi": "10.1007/978-94-017-1207-1",
+      "canonicalUrl": "https://link.springer.com/book/10.1007/978-94-017-1207-1",
+      "license": {
+        "spdx": "LicenseRef-All-Rights-Reserved",
+        "name": "All rights reserved"
+      },
+      "use": "Bibliographic and conceptual reference only; no copied or closely adapted prose.",
+      "adaptations": []
     }
   ]
 }

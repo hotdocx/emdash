@@ -22,6 +22,9 @@ syntax.
 | `decode_x(c)` | the object action of the contextual decoder | `walking_directed_decode_funcd` |
 | `nu_p` | the directed normalization cell `p -> decode_x(encode_x(p))` | `walking_directed_normalization_cell` |
 | `simeq` | an explicitly stated equivalence interface | in Theorem 8.1, `walking_hom_nat_type_equiv` |
+| `F[f]` | functor action on an arrow | `fapp1_fapp0` and its iterable `fapp1_func` owner |
+| `u_*(g)` | postcomposition by `u`, namely `u o g` | `hom_postcomp_fapp0` |
+| `u^*(h)` | precomposition by `u`, namely `h o u` | `hom_precomp_along_fapp0` |
 | `eta[f]` | off-diagonal action of a transfor on `f:x->y` | `tapp1_fapp0` |
 | `chi^Phi_(p,u)` | displayed transport-comparison component | `fdapp1_int_cell` |
 | `P:A rightsquigarrow B` | a Cat-valued profunctor on `A^op times B` | `Prof A B` |
@@ -32,6 +35,18 @@ Composition is written in diagrammatic reading order as `g o f`: first
 `f`, then `g`. For the concrete model `BNat`, this agrees with the
 implemented convention `g o f = g + f`, where Nat addition recurses in its
 left argument.
+
+The two star actions are deliberately variance-separated. If $g:w\to x$ and
+$u:x\to y$, then $u_*(g):w\to y$. If $u:x\to y$ and $h:y\to z$, then
+$u^*(h):x\to z$. Thus the formula $f^*(g)=g\circ f$ names
+**precomposition** and belongs to `hom_precomp_along_*`; it is not the
+postcomposition owner with a typographic variation.
+
+These formulas are categorical, not specifically functor-categorical. Their
+general reading takes $w,x,y,z$ to be objects and the displayed arrows to be
+arrows of an arbitrary ambient category $K$. The specialization
+$K=\mathsf{Cat}$ makes those objects categories and those arrows functors;
+that is the currently checked product/projection instance used in Chapter 9.
 
 `Path(A)` denotes the equality-path category on a carrier `A`. It
 must not be confused with a directed hom-category. In particular, the objects

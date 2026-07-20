@@ -8,8 +8,8 @@ we may calculate a hom whose arrows are not assumed invertible. The first
 example is the walking endomorphism.
 
 Write `W` for `WalkingEnd`, `*` for its base, and
-`ell:* \to *` for its generating arrow. Composition is in
-categorical order, so `g\circ f` means first `f` and then
+$\ell:*\to *$ for its generating arrow. Composition is in
+categorical order, so $g\circ f$ means first `f` and then
 `g`. For any object `x` of `W`, abbreviate the
 based hom-category by
 
@@ -17,7 +17,7 @@ $$
 H_x \;:=\; \operatorname{Hom}_W(*,x).
 $$
 
-An object of `H_x` is a directed arrow `* \to x`. An arrow
+An object of `H_x` is a directed arrow $*\to x$. An arrow
 of `H_x` is a directed 2-cell between two such arrows. The signature
 states that `W` is one-dimensional, which means precisely that every
 `H_x` is discrete. We will exploit this discreteness only after a
@@ -27,7 +27,7 @@ The proof uses six interfaces:
 
 - `Path(A)`, the equality-local path category of a type `A`;
 - functor action `F[f]` on arrows and its higher action on cells;
-- a directed Cat-valued family `E:K\to\mathsf{Cat}` and its fibre
+- a directed Cat-valued family $E:K\to\mathsf{Cat}$ and its fibre
   `E[k]`;
 - a displayed functor between two such families;
 - natural-number induction;
@@ -74,7 +74,7 @@ $$
 $$
 
 The recursion prefixes one copy of `ell` at each successor. Thus
-`ell^2` is `ell\circ ell` and no inverse power is present.
+$\ell^2$ is $\ell\circ\ell$ and no inverse power is present.
 The definition is an ordinary Nat eliminator whose motive is the object
 carrier of `H_*`.
 
@@ -82,7 +82,7 @@ carrier of `H_*`.
 
 > **Formal status — checked.** Evidence `WE-POWER`. The object map is
 > `walking_power`, and
-> `walking_power_func:Path(Nat)\to H_*` supplies its equality-local
+> `walking_power_func` $:\mathsf{Path}(\mathbb{N})\to H_*$ supplies its equality-local
 > higher action.
 
 To prove that these powers exhaust the endomorphisms, we seek a measurement
@@ -100,7 +100,7 @@ $$
 $$
 
 The first equation is approachable by Nat induction. The second quantifies
-over an arbitrary opaque arrow `p:* \to *`. We cannot inspect
+over an arbitrary opaque arrow $p:*\to *$. We cannot inspect
 `p` as a word because no word datatype is installed as the hom of
 `W`.
 
@@ -236,7 +236,7 @@ must come from the eliminator and dimension evidence of `W` itself.
 
 > **Formal status — research boundary.** Evidence
 > `WE-FULL-CATEGORICAL-COMPARISON` records what is absent: a reverse
-> `BNat\to W` functor, a packaged categorical equivalence, and full
+> $\mathsf{BNat}\to W$ functor, a packaged categorical equivalence, and full
 > functor-category initiality require reusable monoid-action-to-functor and
 > functor-extensionality infrastructure.
 
@@ -287,7 +287,7 @@ level. There is a boundary at zero and no downward motion. The picture is a
 guide to the action of the family; it is not a claim that a topological
 covering space or a contractible total category has been constructed.
 
-For any based arrow `p:* \to x`, functor action gives
+For any based arrow $p:*\to x$, functor action gives
 
 $$
 \mathsf{Code}[p]:
@@ -315,7 +315,7 @@ $$
 \mathsf{Rep}_*[x]=H_x.
 $$
 
-For `f:x\to y`, its action is postcomposition:
+For $f:x\to y$, its action is postcomposition:
 
 $$
 \mathsf{Rep}_*[f](q)=f\circ q.
@@ -372,7 +372,7 @@ hom. This is the **spiral**.
 > component has the direction shown above.
 
 The contextual elimination principle for `W` may be read as follows.
-Given directed families `R,D:W\to Cat`, a base functor
+Given directed families $R,D:W\to\mathsf{Cat}$, a base functor
 
 $$
 u:R[*]\longrightarrow D[*],
@@ -384,7 +384,7 @@ $$
 D[\ell]\circ u\Longrightarrow u\circ R[\ell],
 $$
 
-it produces a displayed functor `R\Rightarrow D`. Substituting
+it produces a displayed functor $R\Rightarrow D$. Substituting
 `R=Code`, `D=Rep_*`, `u=power`, and
 `sigma` equal to the spiral yields the desired contextual decoder.
 
@@ -474,7 +474,7 @@ $$
 
 #### Step 4: the directed normalization cell
 
-Let `p:* \to x` be arbitrary. A displayed functor does more than
+Let $p:*\to x$ be arbitrary. A displayed functor does more than
 provide fibrewise maps: it compares transport in its source and target
 families along every base arrow. Apply this comparison to `p` and to
 zero in `Code[*]`.
@@ -682,7 +682,7 @@ equality would yield `1=0`, whose Nat equality classifier is empty.
 
 #### The generator has no right inverse
 
-Suppose `r:* \to *` and
+Suppose $r:*\to *$ and
 
 $$
 \ell\circ r=\mathrm{id}_*.

@@ -127,7 +127,7 @@ $$
 Y\xrightarrow{s}X\xrightarrow{r}Y
 $$
 
-with `r circ s` equal to the identity on `Y`. Any truncation
+with $r\circ s$ equal to the identity on `Y`. Any truncation
 bound on `X` descends to `Y`.
 
 <!-- evidence:TRUNC-RETRACT -->
@@ -215,7 +215,7 @@ There is a corresponding object-truncation level:
 $$
 \begin{aligned}
 \mathsf{catLevel}(0)&=0,\\
-\mathsf{catLevel}(n+1)&=mathsf{catLevel}(n)+1.
+\mathsf{catLevel}(n+1)&=\mathsf{catLevel}(n)+1.
 \end{aligned}
 $$
 
@@ -257,7 +257,7 @@ $$
 H_x:=\operatorname{Hom}_W(*,x)
 $$
 
-is discrete. Given two based arrows `p,q:*\to x`, a directed
+is discrete. Given two based arrows $p,q:*\to x$, a directed
 2-cell
 
 $$
@@ -275,14 +275,14 @@ hom-category.
 > `walking_end_based_cell_to_path` converts a based 2-cell to equality.
 
 This operation is local to the next hom. It does **not** produce an arrow
-`q\to p`, an inverse for `p`, or an inverse for `ell` in
+$q\to p$, an inverse for `p`, or an inverse for `ell` in
 `W`. Equality between the *objects of a discrete hom-category* and
 invertibility of those objects as *arrows of the ambient category* are
 different statements.
 
 ## 7.7 The Exact Height Step In Encode–Decode
 
-Chapter 8 constructs, for every based arrow `p:*\to x`, a directed
+Chapter 8 constructs, for every based arrow $p:*\to x$, a directed
 normalization cell
 
 $$

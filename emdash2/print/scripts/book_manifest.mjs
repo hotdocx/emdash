@@ -79,6 +79,7 @@ export function loadBookManifest() {
       typeof manifest.provenance.sourceRevisions !== 'object') {
     throw new Error('book/book.json: provenance.sourceRevisions must be an object');
   }
+  resolveRepoPath(manifest.architecture, 'book/book.json:architecture');
   resolveRepoPath(manifest.evidence, 'book/book.json:evidence');
 
   if (!manifest.renderer || typeof manifest.renderer !== 'object') {

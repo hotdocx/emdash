@@ -9,6 +9,7 @@
     "book:assemble": "npm --prefix print run book:assemble",
     "book:assemble:check": "npm --prefix print run book:assemble:check",
     "book:evidence": "npm --prefix print run book:evidence",
+    "book:typography": "npm --prefix print run book:typography",
     "book:check": "npm --prefix print run book:check",
     "book:render": "npm --prefix print run book:render",
     "book:pdf": "npm --prefix print run book:pdf",

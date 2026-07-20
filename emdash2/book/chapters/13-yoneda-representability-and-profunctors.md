@@ -1,6 +1,6 @@
-<a id="chapter-10"></a>
+<a id="chapter-13"></a>
 
-# 10. Representability, Profunctors, And Co-Yoneda
+# 13. Yoneda, Representability, And Profunctors
 
 Representable families turn arrows into data that can be transported,
 composed, and recognized by universal properties. Profunctors extend this
@@ -21,7 +21,7 @@ reference for bicategorical organization. This chapter uses those ideas as
 mathematical orientation and states separately what the active emdash artifact
 actually checks.
 
-## 10.1 Cat-Valued Profunctors
+## 13.1 Cat-Valued Profunctors
 
 For categories `A` and `B`, a Cat-valued profunctor from `A`
 to `B` is a functorial family
@@ -33,8 +33,8 @@ $$
 We write `P:A prof B` informally and write its fibre at `(a,b)`
 as `P(a,b)`. The opposite on `A` records the variance:
 
-- an arrow `p:a'\to a` acts contravariantly in the first endpoint;
-- an arrow `q:b\to b'` acts covariantly in the second endpoint.
+- an arrow $p:a'\to a$ acts contravariantly in the first endpoint;
+- an arrow $q:b\to b'$ acts covariantly in the second endpoint.
 
 Profunctors with fixed endpoints form a category. A vertical map
 
@@ -56,7 +56,7 @@ This definition introduces no new primitive notion of naturality. A
 profunctor is a familiar Cat-valued functor on a product base, viewed through
 notation that makes its two variances visible.
 
-## 10.2 The Unit Hom Profunctor
+## 13.2 The Unit Hom Profunctor
 
 Every category `X` has a canonical profunctor
 
@@ -118,14 +118,14 @@ $$
 > action.
 
 Two specializations are useful. The **companion** of
-`F:A\to B` is represented covariantly by `F`; the **conjoint** is
+$F:A\to B$ is represented covariantly by `F`; the **conjoint** is
 represented contravariantly by `F`. These are not assumed to be inverse
 profunctors. They are the two variance choices obtained from the same ambient
 hom.
 
-## 10.3 Reindexing Endpoints
+## 13.3 Reindexing Endpoints
 
-Let `P:A prof B`, `F:A'\to A`, and `G:B'\to B`.
+Let `P:A prof B`, $F:A'\to A$, and $G:B'\to B$.
 Endpoint reindexing is
 
 $$
@@ -164,10 +164,10 @@ separation between WalkingEnd and `BNat`. A readable model or pullback
 presentation does not become a definitional replacement for the object it
 explains.
 
-## 10.4 Representability As A Chosen Comparison
+## 13.4 Representability As A Chosen Comparison
 
 A profunctor `P:B prof J` is right-represented by a functor
-`L:J\to B` when it is isomorphic, in the fixed-endpoint profunctor
+$L:J\to B$ when it is isomorphic, in the fixed-endpoint profunctor
 category, to the conjoint of `L`:
 
 $$
@@ -196,7 +196,7 @@ presented as a chosen representation of a cone profunctor. The computational
 strength of that use depends on how much of the comparison is exposed by the
 consumer.
 
-## 10.5 Cells With Moving Endpoints
+## 13.5 Cells With Moving Endpoints
 
 Vertical maps keep endpoints fixed. Equipment-style cells allow endpoint
 functors to move as well. Given
@@ -218,7 +218,7 @@ c:R'\Longrightarrow(F,G)^*R.
 $$
 
 If the source profunctor is the unit `U_I`, such a cell is a shaped
-element of `R` with endpoint functors `I\to A` and `I\to B`.
+element of `R` with endpoint functors $I\to A$ and $I\to B$.
 The narrow application operation sends a shaped element of `R'` through
 `c` to the corresponding shaped element of `R`.
 
@@ -234,7 +234,7 @@ composition of equipment cells. It supplies the consumer needed by the
 co-Yoneda calculation without pretending that all bicategorical coherence is
 already present.
 
-## 10.6 Tensor As A Selected Composite
+## 13.6 Tensor As A Selected Composite
 
 For
 
@@ -280,7 +280,7 @@ rules. The selected tensor can support tested cut-elimination interfaces
 without serving as evidence that this general construction has already been
 built.
 
-## 10.7 The Co-Yoneda Cut
+## 13.7 The Co-Yoneda Cut
 
 The unit profunctor should behave as a unit for tensor. The active interface
 supplies natural maps in both orientations:
@@ -296,7 +296,7 @@ They are components of transformations natural in `P`, rather than a
 collection of unrelated vertical maps.
 
 Now let `p` be a shaped element of `P` with middle shape
-`M:I\to B`. The unit profunctor has a canonical shaped element given by
+$M:I\to B$. The unit profunctor has a canonical shaped element given by
 the identity transformation on `M`. Tensor the two elements and apply the
 right co-Yoneda map. The cut eliminates:
 
@@ -326,8 +326,8 @@ evaluation as computation: insert an identity-shaped hom, form the composite,
 and the co-Yoneda counit removes the cut.
 
 The transformations also fuse with an arbitrary vertical map
-`r:P\to P'`. Applying the naturality component of co-Yoneda to
-`p tensor id` reduces to applying `r` directly to `p`:
+$r:P\to P'$. Applying the naturality component of co-Yoneda to
+$p\otimes\mathrm{id}$ reduces to applying `r` directly to `p`:
 
 $$
 \varepsilon_{P'}
@@ -339,7 +339,7 @@ with the analogous left-unit equation. This is not a separate law attached to
 every `r`; it is the off-diagonal action of the co-Yoneda transfor from
 Chapter 9.
 
-## 10.8 What This Says About Yoneda
+## 13.8 What This Says About Yoneda
 
 The computations capture an essential Yoneda idea: represented hom data can
 be inserted as an identity-shaped cut and then eliminated. The existing
@@ -363,7 +363,7 @@ cell level. Those data have not been gathered into one active theorem.
 The checked beta equations remain valuable without that package. They are
 local computational theorems, not merely motivational analogies.
 
-## 10.9 The Coend And Bicategorical Boundary
+## 13.9 The Coend And Bicategorical Boundary
 
 To promote the tensor to a general profunctor composition, one would need:
 

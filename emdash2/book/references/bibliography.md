@@ -41,8 +41,13 @@
    Lambdapi Sources*. Accompanying computational artifact for this development
    edition: `emdash3_2.lp` and its one-way extension modules.
 
-Items 1–6 situate the mathematical development; items 7–8 identify the proof
-infrastructure and checked artifact. Citation does not by itself confer the
-book's formal-status label. The exact HoTT source revision, section labels,
-adaptation targets, and license metadata are recorded in
+9. <a id="ref-dosen-cut-elimination"></a>Kosta Došen. *Cut Elimination in
+   Categories*. Trends in Logic 6. Kluwer Academic Publishers, Dordrecht,
+   1999; [DOI 10.1007/978-94-017-1207-1](https://doi.org/10.1007/978-94-017-1207-1).
+
+Items 1–6 and 9 situate the mathematical development; items 7–8 identify the
+proof infrastructure and checked artifact. Citation does not by itself confer
+the book's formal-status label. The exact HoTT source revision, section
+labels, adaptation targets, and license metadata, together with the
+reference-only policy for Došen's book, are recorded in
 `book/references/third-party-sources.json`.

@@ -2,7 +2,7 @@
 
 # Appendix D. Glossary And Concept Index
 
-This appendix fixes the vocabulary used by the initial development edition.
+This appendix fixes the vocabulary used by the expanded development edition.
 Each entry points to the place where the idea is constructed or used, rather
 than to a page number that would change with paper size and typography.
 
@@ -103,7 +103,26 @@ toward integers or a circle comparison. See [§8.1.5](#chapter-8-1-5).
 **Hom action.** The functorial action induced on a hom-category. Emdash keeps
 covariant postcomposition, contravariant precomposition, and simultaneous
 two-endpoint action as distinct computational owners. See
-[Chapters 2](#chapter-2) and [10](#chapter-10).
+[Chapters 2](#chapter-2), [9](#chapter-9), and [13](#chapter-13).
+
+<a id="glossary-lower-star"></a>
+
+**Lower-star action.** Postcomposition: if `g:w→x` and `u:x→y`, then
+`u_*(g)=u∘g:w→y`. Its active owners are `hom_postcomp_func` and
+`hom_postcomp_fapp0`. See [§9.2](#chapter-9).
+
+<a id="glossary-upper-star"></a>
+
+**Upper-star action.** Precomposition: if `u:x→y` and `h:y→z`, then
+`u^*(h)=h∘u:x→z`. Its active owners are
+`hom_precomp_along_func` and `hom_precomp_along_fapp0`. The action is
+contravariant in `u`. See [§9.2](#chapter-9).
+
+<a id="glossary-cut-elimination"></a>
+
+**Cut elimination.** Controlled normalization at the semantic owner of an
+arrow, family, structural, or universal cut. It does not mean installing
+unrestricted associativity as a global rewrite. See [Chapter 9](#chapter-9).
 
 <a id="glossary-off-diagonal-action"></a>
 
@@ -137,14 +156,14 @@ from `(x,id_x)` to `(y,p)` drives arrow induction. See
 
 **Profunctor.** A Cat-valued functor `A^op times B -> Cat`, contravariant
 in its first endpoint and covariant in its second. See
-[Chapter 10](#chapter-10).
+[Chapter 13](#chapter-13).
 
 <a id="glossary-representable"></a>
 
 **Representable.** A family or profunctor obtained from an ambient hom. Its
 action is composition, which makes it the computational bridge between
 universal properties and cut elimination. See
-[Chapters 5](#chapter-5) and [10](#chapter-10).
+[Chapters 5](#chapter-5) and [13](#chapter-13).
 
 <a id="glossary-rewrite"></a>
 

@@ -38,7 +38,7 @@ implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`:
-  proposed C0-C7 follow-on to the completed initial-book plan. It expands the
+  active C0-C7 follow-on to the completed initial-book plan. It expands the
   book through a globally coherent adaptation of all HoTT Chapter 9 topics
   and Appendix A's formal-presentation discipline; makes represented hom
   action, `tapp1` naturality, and Došen cut elimination the bridge to
@@ -49,6 +49,19 @@ implementation plans, and historical decisions.
   TeX/code-span notation plus a semantic typography gate before further prose
   expansion. It preserves checked/formal-consequence/mathematical-development/
   research-boundary status discipline and does not reopen completed B0-B6.
+  C0 completed the 52-line semantic-typography repair, source/strict-KaTeX/PDF
+  gates, and deterministic `0.1.1-dev` baseline (103 pages; SHA-256
+  `e581f84e140db1d0972ed95a5b1a1761ac5f9b6fb94f14c76bcaa95a58fd09af`).
+  C1 completed the contiguous Chapter 1-17/Appendix G manifest, the checked
+  `book/expansion.json` migration/terminology/translation/theorem contract,
+  13 pinned HoTT Chapter 9/Appendix A adaptation entries, and five new checked
+  evidence routes. C2 completed the four-level Došen cut calculus, all ten
+  typed examples, the general-`K` versus Cat-specialized product distinction,
+  reference-only Došen provenance, and the owner-aligned product probe without
+  adding a broad product rule. The register now has 81 fully cited claims and
+  full CI passes. The 32-source `0.2.0-dev` PDF is 122 pages (SHA-256
+  `ec3764236a3c39f70d7895962e8dff5248f8fbbf59d3b4ebc35af9bafa44247b`);
+  C3, the coherent HoTT 9.1-9.5 adaptation through Yoneda, is current.
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
   active long-running architecture and implementation plan for the new book
   *Functorial Type Theory: Univalent Foundations for Mathematics*. It selects

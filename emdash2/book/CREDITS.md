@@ -32,4 +32,18 @@ The exact source map and adaptation ledger live in
 no HoTT prose had been copied into the chapter sources. The Chapter 8
 vertical slice records structural and conceptual adaptations from the pinned
 source, but its prose is newly written for emdash; it contains no
-near-verbatim HoTT passage.
+near-verbatim HoTT passage. The C1 expansion contract additionally maps all
+nine sections of `categories.tex` and all four parts of `formal.tex` to the
+new category-theory chapters and Appendix G before any close adaptation is
+written. Those entries authorize adaptation under this attribution and
+ShareAlike notice; they do not assert that the later prose is already
+complete.
+
+## Došen's cut-elimination perspective
+
+The four-level cut calculus in Chapter 9 takes conceptual inspiration from
+Kosta Došen's *Cut Elimination in Categories* (Kluwer, 1999). The cited work
+is not licensed for textual adaptation here. It is used only as a
+bibliographic and conceptual reference: the exposition, notation, examples,
+and emdash correspondence in this book are newly written, and no passage from
+Došen's text is copied or closely paraphrased.

@@ -157,6 +157,18 @@ async function main() {
   ]) {
     if (normalized.includes(forbidden)) fail('PDF contains render failure text: ' + forbidden);
   }
+  const literalTex = extracted.match(
+    /\\(?:to|circ|mathsf|operatorname|mathrm|qquad|quad|longrightarrow)\b/
+  );
+  if (literalTex) {
+    fail('PDF text contains a literal TeX command: ' + JSON.stringify(literalTex[0]));
+  }
+  const bareTexWord = extracted.match(
+    /\b(?:qquad|longrightarrow|mathsfclassifier|mathsfcatLevel)\b/
+  );
+  if (bareTexWord) {
+    fail('PDF text contains an unrendered TeX control word: ' + JSON.stringify(bareTexWord[0]));
+  }
 
   const textPages = extracted.split('\f');
   if (textPages.at(-1)?.trim() === '') textPages.pop();

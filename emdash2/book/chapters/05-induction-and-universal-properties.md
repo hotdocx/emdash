@@ -104,14 +104,14 @@ $$
   :=\sum_{y:\,Z}\operatorname{Hom}_Z(x,y).
 $$
 
-Its objects are pairs `(y,p)` with `p:x\to y`. It has a
+Its objects are pairs `(y,p)` with $p:x\to y$. It has a
 distinguished reflexive object
 
 $$
 \mathsf{reflout}_x:=(x,\mathrm{id}_x).
 $$
 
-For every outgoing arrow `p:x\to y`, functorial action of the
+For every outgoing arrow $p:x\to y$, functorial action of the
 representable family supplies a canonical total arrow
 
 $$
@@ -121,7 +121,7 @@ $$
 $$
 
 Its base component is `p`; its fibre endpoint reduces by the unit law
-`p\circ id_x=p`. The direction of `rho` is significant. It
+$p\circ\mathrm{id}_x=p$. The direction of `rho` is significant. It
 starts at the reflexive arrow and reaches `p`. Nothing in the
 construction produces a reverse arrow, and no invertibility premise is used.
 
@@ -139,7 +139,7 @@ For a general `Z`, they are directed arrows. The same categorical shape
 therefore hosts both ordinary path induction and a genuinely directed
 extension principle.
 
-The source object also varies contravariantly. An arrow `r:x\to y`
+The source object also varies contravariantly. An arrow $r:x\to y$
 induces a functor
 
 $$
@@ -218,8 +218,8 @@ E(y,p):=
 $$
 
 At the reflexive arrow, the identity transformation supplies the base datum.
-Arrow induction then extends it to every `p:x\to y`. Evaluating the
-result at `q:y\to z` gives
+Arrow induction then extends it to every $p:x\to y$. Evaluating the
+result at $q:y\to z$ gives
 
 $$
 q\circ p:x\longrightarrow z.
@@ -278,14 +278,15 @@ therefore recovered without making all directed arrows groupoidal.
 
 Fixed-source arrow induction varies a motive over outgoing arrows. A
 contextual eliminator goes one step further: it compares two families over an
-inductively presented base. Schematically, suppose `R,D:K\to Cat`.
+inductively presented base. Schematically, suppose
+$R,D:K\to\mathsf{Cat}$.
 At each base object it should provide a functor
 
 $$
 T_k:R[k]\longrightarrow D[k],
 $$
 
-and for each base arrow `f:k\to k'` a directed comparison
+and for each base arrow $f:k\to k'$ a directed comparison
 
 $$
 D[f]\circ T_k

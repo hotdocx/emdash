@@ -191,6 +191,94 @@
         }
       ]
     },
+    "CAT-PRODUCT-CALCULUS": {
+      "status": "checked",
+      "statement": "Binary product categories have projection functors and a stable two-sided product-map constructor whose object, arrow, and projection observations compute componentwise.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Product_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Product_projL_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Product_map_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "product/projection cut used by the book"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "General two-sided product maps used by profunctor reindexing"
+        }
+      ]
+    },
+    "CUT-PRODUCT-PROJECTION": {
+      "status": "formal-consequence",
+      "statement": "In the Cat-specialized case, for h:A0→A1, k:B0→B1, and g:A1→C, the readable equation pi1^*(g) composed with h×k equals pi1'^*(g composed with h); its owner-aligned projection and nested-precomposition forms are checked, while the literal raw projection-composite equality is not packaged.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "hom_precomp_along_fapp0"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Product_projL_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Product_map_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "comp_assoc"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "product/projection cut used by the book"
+        }
+      ]
+    },
+    "CAT-HOM-CUTS": {
+      "status": "checked",
+      "statement": "Represented-hom postcomposition and precomposition have distinct stable full and capped owners with identity, consecutive-action, adjacent-cut, and proof-time ordinary-composition comparisons.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "hom_postcomp_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "hom_postcomp_fapp0"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "hom_precomp_along_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "hom_precomp_along_fapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Hom-action functoriality joins for postcomposition"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Hom-action functoriality joins for precomposition"
+        }
+      ]
+    },
     "CAT-TRANSFOR-CALCULUS": {
       "status": "checked",
       "statement": "Transformations form the next hom between functors and expose point components together with higher naturality action.",
@@ -1384,6 +1472,34 @@
         }
       ]
     },
+    "PROF-COMPARISON-BETA-ETA": {
+      "status": "checked",
+      "statement": "A computational profunctor comparison exposes mutually inverse push and pull operations on every incoming profunctor map, with runtime beta and eta reductions and functorial reindexing and composition.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "ProfComparison"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "prof_comparison_push"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "prof_comparison_pull"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Computational profunctor comparisons and weighted representability"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "prof_comparison_pull"
+        }
+      ]
+    },
     "PROF-SHAPED-CELLS": {
       "status": "checked",
       "statement": "A profunctor cell over endpoint functors is a natural family morphism into a reindexed target; unit-source specialization and narrow cell application provide shaped elements and their action.",
@@ -1475,6 +1591,130 @@
       "statement": "The active representable and co-Yoneda interfaces do not yet package a general fully faithful Yoneda embedding or the full Yoneda equivalence for arbitrary Cat-valued presheaves.",
       "owners": [],
       "reviewers": []
+    },
+    "ADJ-TRIANGLE-CUTS": {
+      "status": "checked",
+      "statement": "An indexed adjunction exposes stable unit and counit observations whose two component-level triangle cuts reduce to the corresponding functorial composites.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Adjunction"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "unit_adj_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "counit_adj_transf"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "examples/adjunction_triangles.lp",
+          "symbol": "unit_adj_transf"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Indexed adjunction triangles, opposite, and operation-trust boundary"
+        }
+      ]
+    },
+    "OP-DUALITY": {
+      "status": "checked",
+      "statement": "Opposite category, functor, transfor, and adjunction operations expose the selected involutive and variance-reversing computations used by the duality arguments.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Op_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Op_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Op_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Op_adjunction"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Op_adjunction"
+        }
+      ]
+    },
+    "WEIGHTED-LIMIT-PRESERVATION": {
+      "status": "checked",
+      "statement": "The selected profunctor comparison certifying a weighted limit is transported by an indexed right adjoint to a weighted-limit comparison for the composed diagram and cone point.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsWeightedLimit_cov_comp"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "right_adjoint_preserves_weighted_limit_cov_comp"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "right_adjoint_preserves_weighted_limit_cov_comp"
+        }
+      ]
+    },
+    "WEIGHTED-COLIMIT-PRESERVATION": {
+      "status": "checked",
+      "statement": "Weighted colimits are presented through opposite weighted limits, and the selected left-adjoint preservation certificate is derived by applying right-adjoint preservation to the opposite adjunction.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "WeightedColimit_con"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "left_adjoint_preserves_weighted_colimit_con"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "left_adjoint_preserves_weighted_colimit_con"
+        }
+      ]
+    },
+    "JOIN-RECURSOR": {
+      "status": "checked",
+      "statement": "The primitive directed join has two inclusion functors, an internally natural cross cell, and a nondependent recursor with beta computation on both inclusions and the cross-cell datum.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Join_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "join_cross_transf"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "join_elim_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "join_elim_cross_transf"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "join_elim_cross_transf"
+        }
+      ]
     },
     "EH-COMMUTATIVITY": {
       "status": "checked",

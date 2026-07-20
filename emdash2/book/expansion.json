@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "planId": "EMDASH-V3-2-FTT-BOOK-CATEGORY-THEORY-FORMAL-PRESENTATION-EXPANSION-2026-07-20",
+  "retainedChapterRange": [1, 8],
+  "migration": [
+    {
+      "from": "book/chapters/09-transfors-strictness-and-laxity.md",
+      "to": "book/chapters/09-transfors-and-the-calculus-of-cuts.md",
+      "oldAnchor": "chapter-9",
+      "newAnchor": "chapter-9",
+      "disposition": "renamed around the cut-elimination owner before the C2 rewrite"
+    },
+    {
+      "from": "book/chapters/10-representability-and-profunctors.md",
+      "to": "book/chapters/13-yoneda-representability-and-profunctors.md",
+      "oldAnchor": "chapter-10",
+      "newAnchor": "chapter-13",
+      "disposition": "moved intact into the Yoneda spiral; conceptual links migrate from chapter 10 to chapter 13"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "chapter-9",
+      "number": 9,
+      "path": "book/chapters/09-transfors-and-the-calculus-of-cuts.md",
+      "title": "Transfors And The Calculus Of Cuts",
+      "conceptualOwner": "single-arrow, family, structural, and universal cut elimination",
+      "spiralFrom": ["chapter-2", "chapter-8"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "TRANSF-STRICT-NATURALITY"
+      },
+      "boundary": "the fully typed product/projection benchmark remains formal consequence until its focused probe is complete"
+    },
+    {
+      "id": "chapter-10",
+      "number": 10,
+      "path": "book/chapters/10-categories-precategories-and-categorical-identity.md",
+      "title": "Categories, Precategories, And Categorical Identity",
+      "conceptualOwner": "translation between native iterated categories and univalent 1-categories",
+      "spiralFrom": ["chapter-2", "chapter-4", "chapter-7"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "EQUIV-ORDINARY-ISO-LIFT"
+      },
+      "boundary": "a general native object-equality/ordinary-isomorphism equivalence needs a category-univalence owner coherent with next-hom action"
+    },
+    {
+      "id": "chapter-11",
+      "number": 11,
+      "path": "book/chapters/11-functors-transfors-and-functor-categories.md",
+      "title": "Functors, Transfors, And Functor Categories",
+      "conceptualOwner": "functor-category packaging and higher transfor iteration",
+      "spiralFrom": ["chapter-2", "chapter-9"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "TRANSF-STRICT-NATURALITY"
+      },
+      "boundary": "native functor-category univalence needs category univalence plus coherent off-diagonal and higher transfor action"
+    },
+    {
+      "id": "chapter-12",
+      "number": 12,
+      "path": "book/chapters/12-adjunctions-and-equivalences.md",
+      "title": "Adjunctions And Equivalences",
+      "conceptualOwner": "unit/counit triangle cuts and the separation of equivalence notions",
+      "spiralFrom": ["chapter-4", "chapter-9", "chapter-11"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "ADJ-TRIANGLE-CUTS"
+      },
+      "boundary": "the fully-faithful and essentially-surjective characterization needs native packages and coherent higher action"
+    },
+    {
+      "id": "chapter-13",
+      "number": 13,
+      "path": "book/chapters/13-yoneda-representability-and-profunctors.md",
+      "title": "Yoneda, Representability, And Profunctors",
+      "conceptualOwner": "representability and the shaped co-Yoneda cut",
+      "spiralFrom": ["chapter-5", "chapter-10", "chapter-12"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "PROF-COYONEDA"
+      },
+      "boundary": "full Cat-valued Yoneda, semantic coends, and a profunctor bicategory require additional owners and coherence"
+    },
+    {
+      "id": "chapter-14",
+      "number": 14,
+      "path": "book/chapters/14-strictness-dagger-and-duality.md",
+      "title": "Strictness, Dagger Structure, And Duality",
+      "conceptualOwner": "qualified strictness vocabulary and opposite duality",
+      "spiralFrom": ["chapter-7", "chapter-9", "chapter-12"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "OP-DUALITY"
+      },
+      "boundary": "dagger and unitary structure need a selected involutive contravariant functor and coherent higher action"
+    },
+    {
+      "id": "chapter-15",
+      "number": 15,
+      "path": "book/chapters/15-structure-identity-and-saturation.md",
+      "title": "Structure Identity And Saturation",
+      "conceptualOwner": "structure identity and Rezk-style saturation",
+      "spiralFrom": ["chapter-8", "chapter-10", "chapter-13"],
+      "centralTheorem": {
+        "status": "research-boundary",
+        "missingInfrastructure": "a generic structure-over-carrier identity theorem and a native Rezk completion with its higher universal property"
+      },
+      "boundary": "finite evidence-property and truncation theorems are footholds, not a general SIP or Rezk completion"
+    },
+    {
+      "id": "chapter-16",
+      "number": 16,
+      "path": "book/chapters/16-weighted-universal-constructions.md",
+      "title": "Weighted Universal Constructions",
+      "conceptualOwner": "weighted limits as representability and right-adjoint preservation",
+      "spiralFrom": ["chapter-12", "chapter-13"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "WEIGHTED-LIMIT-PRESERVATION"
+      },
+      "boundary": "general ends, coends, Kan extensions, and dependent adjunctions require variance-correct higher owners"
+    },
+    {
+      "id": "chapter-17",
+      "number": 17,
+      "path": "book/chapters/17-weighted-colimits-duality-and-join.md",
+      "title": "Weighted Colimits, Duality, And Join",
+      "conceptualOwner": "opposite-dual colimit preservation and the directed join recursor",
+      "spiralFrom": ["chapter-6", "chapter-14", "chapter-16"],
+      "centralTheorem": {
+        "status": "checked",
+        "evidence": "WEIGHTED-COLIMIT-PRESERVATION"
+      },
+      "secondaryEvidence": ["JOIN-RECURSOR"],
+      "boundary": "join-as-collage semantics, hom decomposition, and dependent elimination remain research infrastructure"
+    }
+  ],
+  "appendix": {
+    "id": "appendix-formal-presentation",
+    "letter": "G",
+    "path": "book/appendices/g-formal-presentation.md",
+    "title": "Formal Presentation Of Functorial Type Theory",
+    "sections": [
+      "Judgments, contexts, and classifiers",
+      "The mathematical categorical presentation",
+      "The checked Lambdapi presentation",
+      "Formation, introduction, elimination, and computation",
+      "Elaboration and canonical surface syntax",
+      "Directed higher-inductive signatures",
+      "Basic metatheory and its boundary"
+    ]
+  },
+  "categoryTranslation": [
+    {
+      "term": "native Cat",
+      "meaning": "objects with iterated category-valued homs",
+      "status": "checked",
+      "boundary": "not definitionally a HoTT precategory"
+    },
+    {
+      "term": "equality-local category",
+      "meaning": "Path(A), whose arrows are identity evidence",
+      "status": "checked",
+      "boundary": "a groupoidal specialization rather than all directed homs"
+    },
+    {
+      "term": "finite NCat or OneCat evidence",
+      "meaning": "recursive hom-height evidence on a native category",
+      "status": "checked",
+      "boundary": "height evidence does not itself prove object identity agrees with isomorphism"
+    },
+    {
+      "term": "HoTT precategory",
+      "meaning": "an object type with set-valued homs and ordinary category laws",
+      "status": "mathematical-development",
+      "boundary": "used as a 1-categorical specialization"
+    },
+    {
+      "term": "HoTT category",
+      "meaning": "a precategory whose identity-to-isomorphism map is an equivalence",
+      "status": "mathematical-development",
+      "boundary": "no general native comparison is currently checked"
+    },
+    {
+      "term": "HoTT strict category",
+      "meaning": "a HoTT category whose object type is a set",
+      "status": "mathematical-development",
+      "boundary": "unrelated to strict transfors or runtime reduction"
+    }
+  ],
+  "terminology": [
+    {
+      "term": "strict category",
+      "meaning": "HoTT object-set strictness",
+      "notEquivalentTo": ["strict transfor", "runtime computation"]
+    },
+    {
+      "term": "strict transfor",
+      "meaning": "selected two-sided naturality cuts compute",
+      "notEquivalentTo": ["strict category", "all coherence is judgmental"]
+    },
+    {
+      "term": "lax",
+      "meaning": "a directed comparison cell is retained instead of forced to equality",
+      "notEquivalentTo": ["incorrect", "invertible"]
+    },
+    {
+      "term": "equivalence",
+      "meaning": "always qualified by carrier, categorical, or native omega level",
+      "notEquivalentTo": ["ordinary isomorphism without hypotheses"]
+    },
+    {
+      "term": "isomorphism",
+      "meaning": "selected forward and inverse arrows with equality-valued inverse laws",
+      "notEquivalentTo": ["object identity", "native omega-equivalence by definition"]
+    },
+    {
+      "term": "univalence",
+      "meaning": "a qualified identity-to-equivalence interface",
+      "notEquivalentTo": ["one universal directed axiom"]
+    },
+    {
+      "term": "saturation",
+      "meaning": "the property or completion making the selected identity-to-equivalence comparison invertible",
+      "notEquivalentTo": ["finite truncation evidence"]
+    },
+    {
+      "term": "dagger",
+      "meaning": "a chosen contravariant involution on one category with unitary structure",
+      "notEquivalentTo": ["taking an arbitrary opposite category"]
+    },
+    {
+      "term": "opposite",
+      "meaning": "the active arrow-reversing Op construction",
+      "notEquivalentTo": ["a chosen dagger"]
+    },
+    {
+      "term": "duality",
+      "meaning": "a proof method or structured comparison with an opposite construction",
+      "notEquivalentTo": ["silent variance reversal"]
+    }
+  ],
+  "formalLayers": [
+    "computational categorical kernel",
+    "canonical mathematical surface",
+    "optional future elaborator",
+    "external semantic models"
+  ],
+  "requiredProvenanceAdaptations": [
+    "HOTT-CAT-9-1",
+    "HOTT-CAT-9-2",
+    "HOTT-CAT-9-3",
+    "HOTT-CAT-9-4",
+    "HOTT-CAT-9-5",
+    "HOTT-CAT-9-6",
+    "HOTT-CAT-9-7",
+    "HOTT-CAT-9-8",
+    "HOTT-CAT-9-9",
+    "HOTT-FORMAL-A-1",
+    "HOTT-FORMAL-A-2",
+    "HOTT-FORMAL-A-3",
+    "HOTT-FORMAL-A-4"
+  ]
+}

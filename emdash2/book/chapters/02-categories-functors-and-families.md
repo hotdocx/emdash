@@ -125,7 +125,7 @@ $$
 and, for every pair `x,y`, a hom functor
 
 $$
-F_1[x,y]:\operatorname{Hom}_A(x,y)longrightarrow
+F_1[x,y]:\operatorname{Hom}_A(x,y)\longrightarrow
 \operatorname{Hom}_B(F[x],F[y]).
 $$
 

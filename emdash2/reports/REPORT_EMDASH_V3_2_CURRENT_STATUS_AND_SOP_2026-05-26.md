@@ -2176,13 +2176,17 @@ the renderer. Book theorem-like claims use the four statuses defined in
 
 ```bash
 npm run book:assemble
+npm run book:typography
 npm run book:check
 npm run book:render
 ```
 
-`book:check` verifies source order, attribution/provenance, anchors and
-links, evidence declarations/reviewers, generated freshness, and embedded
-diagram schemas. `book:render` adds a local-asset, bounded browser
+`book:typography` rejects TeX commands hidden in Markdown code spans,
+suspicious bare TeX control words in math, raw TeX in prose, and strict KaTeX
+parse failures. `book:check` verifies that typography gate together with
+source order, attribution/provenance, anchors and links, evidence
+declarations/reviewers, generated freshness, and embedded diagram schemas.
+`book:render` adds a local-asset, bounded browser
 pagination check. Renderer implementation and optional local upstream-package
 instructions live in `print/README.md`; prose style and licensing live
 in `book/STYLE.md`, `book/CREDITS.md`, and

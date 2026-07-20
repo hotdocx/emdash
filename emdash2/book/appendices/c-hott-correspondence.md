@@ -45,7 +45,7 @@ The table is a dependency map, not a dictionary identifying the objects.
 
 ## C.2 Where univalence moves
 
-In the circle proof, a family `Code:S¹\to Type` must map the loop of
+In the circle proof, a family $\mathsf{Code}:S^1\to\mathsf{Type}$ must map the loop of
 `S¹` to a loop in the universe. Successor on the integers is an
 equivalence, and univalence converts that equivalence into the needed universe
 identity. Its inverse supplies predecessor action.
@@ -78,7 +78,7 @@ when a statement about a fixed loop cannot be inducted on, vary its endpoint.
 
 For the circle, one considers all `x:S¹` and paths
 `base=x`. For `W`, one considers all objects `x`
-and based arrows `* \to x`. The target family is the representable
+and based arrows $*\to x$. The target family is the representable
 
 $$
 x\longmapsto\operatorname{Hom}_W(*,x).

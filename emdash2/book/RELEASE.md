@@ -32,6 +32,8 @@ Before publishing an edition:
   metadata dates, page count, embedded fonts, no replacement characters, and
   no external network requests;
 - run the link, math, raw-table, overflow, page-break, and accessibility gates;
+- run the semantic typography and strict KaTeX gates, and confirm extracted
+  PDF text contains no literal or bare TeX control words;
 - generate the PDF twice and confirm identical SHA-256 checksums;
 - run full repository CI without changing Lambdapi semantics for production
   convenience;

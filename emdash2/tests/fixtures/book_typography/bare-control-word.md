@@ -1,0 +1,3 @@
+$$
+F:A longrightarrow B.
+$$

@@ -13884,6 +13884,38 @@ assert [A B X : Cat]
       (Struct_sigma a b);
 
 // General two-sided product maps used by profunctor reindexing.
+// The product/projection cut used by the book keeps the selected Sigma
+// projection normal form.  The literal raw composite with `pi1` remains a
+// separately documented formal consequence, not a new broad product-eta rule.
+assert [A0 A1 B0 B1 : Cat]
+  (F : τ (Functor A0 A1))
+  (G : τ (Functor B0 B1)) ⊢
+  sigma_Fst (@Product_map_func A0 A1 B0 B1 F G)
+  ≡ @comp_cat_fapp0
+      (Product_cat A0 B0) A0 A1
+      F
+      (@Product_projL_func A0 B0);
+
+assert [A0 A1 B0 B1 C : Cat]
+  (F : τ (Functor A0 A1))
+  (G : τ (Functor B0 B1))
+  (H : τ (Functor A1 C)) ⊢
+  @hom_precomp_along_fapp0
+    Cat_cat Cat_cat (@id_func Cat_cat)
+    C
+    (Product_cat A0 B0) A0
+    (@Product_projL_func A0 B0)
+    (@hom_precomp_along_fapp0
+      Cat_cat Cat_cat (@id_func Cat_cat)
+      C A0 A1 F H)
+  ≡
+  @hom_precomp_along_fapp0
+    Cat_cat Cat_cat (@id_func Cat_cat)
+    C
+    (Product_cat A0 B0) A1
+    (sigma_Fst (@Product_map_func A0 A1 B0 B1 F G))
+    H;
+
 assert [A A' B B' : Cat]
   (F : τ (Functor A A'))
   (G : τ (Functor B B'))

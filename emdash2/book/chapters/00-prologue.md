@@ -78,7 +78,7 @@ $$
 
 whose fibre at `*` is the path category of natural numbers. The
 generator acts by the successor functor. For any endpoint `x` and any
-based arrow `p:* \to x`, define
+based arrow $p:* \to x$, define
 
 $$
 \mathsf{encode}_x(p)\;=\;\mathsf{Code}[p](0).
@@ -122,7 +122,7 @@ This family of higher arrows is the **directed spiral**.
 ## Normalize before comparing
 
 Applying the displayed decoder’s arrow action to
-`p:* \to x` at zero produces
+$p:* \to x$ at zero produces
 
 $$
 \nu_p:
@@ -182,7 +182,7 @@ detects that absence.
 
 Encoding sends `ell` to one and the identity to zero. Consequently
 the generator is not the identity. If an arrow `r` were a right
-inverse, then encoding `ell\circ r=\mathrm{id}` would force a
+inverse, then encoding $\ell\circ r=\mathrm{id}$ would force a
 successor to equal zero. Hence no right inverse exists, and in particular
 `ell` carries no native omega-equivalence evidence.
 

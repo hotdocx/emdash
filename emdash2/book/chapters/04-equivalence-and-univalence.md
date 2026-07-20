@@ -174,9 +174,9 @@ An ordinary isomorphism between objects `x,y:C` consists of a forward
 arrow, one inverse arrow, and equality-valued left and right inverse laws:
 
 $$
-f:x\to y,qquad
-g:y\to x,qquad
-g\circ f=\mathrm{id}_x,qquad
+f:x\to y,\qquad
+g:y\to x,\qquad
+g\circ f=\mathrm{id}_x,\qquad
 f\circ g=\mathrm{id}_y.
 $$
 

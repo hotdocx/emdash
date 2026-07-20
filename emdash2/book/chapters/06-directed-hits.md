@@ -20,7 +20,7 @@ general theorem about all cell presentations.
 At a schematic level, a directed higher-inductive category may have:
 
 - **object constructors**, such as `b:Obj(W)`;
-- **arrow constructors**, such as `l:b\to b`;
+- **arrow constructors**, such as $\ell:b\to b$;
 - **cell constructors**, identifying or comparing composites of arrows;
 - **dimension conditions**, controlling which higher cells remain
   nontrivial.
@@ -42,7 +42,7 @@ $$
 $$
 
 then it generates forward composites
-`id_b, ell, ell circ ell, ...`; no negative power has been
+$\mathrm{id}_b,\ell,\ell\circ\ell,\ldots$; no negative power has been
 introduced. This is the fundamental distinction between the walking
 endomorphism and the circle.
 
@@ -144,7 +144,7 @@ family to another.
 ## 6.4 Sections And Recursors Are Special Cases
 
 Take `R` to be the constant terminal family. A functor
-`R[*]\to D[*]` is determined by an object `d` of the base
+$R[*]\to D[*]$ is determined by an object `d` of the base
 fibre. The generator coherence reduces to an arrow
 
 $$
@@ -160,7 +160,7 @@ $$
 
 Take `D` constant as well, at a category `C`. Its transport is the
 identity, so the data become an object `c:Obj(C)` and an endomorphism
-`f:c\to c`. The resulting section is an ordinary functor
+$f:c\to c$. The resulting section is an ordinary functor
 
 $$
 \mathsf{rec}(C,c,f):W\longrightarrow C
@@ -243,8 +243,8 @@ $$
 \mathsf{power}\circ\mathsf{Code}[\ell].
 $$
 
-Pointwise, the endpoints are `ell circ ell^n` and
-`ell^(n+1)`. Nat recursion makes them propositionally equal, but a
+Pointwise, the endpoints are $\ell\circ\ell^n$ and
+$\ell^{n+1}$. Nat recursion makes them propositionally equal, but a
 family of equalities is not by itself the required transformation into a
 directed hom-category. The higher action and endpoint comparisons must be
 assembled coherently.

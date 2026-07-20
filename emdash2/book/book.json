@@ -4,8 +4,8 @@
   "title": "Functorial Type Theory",
   "subtitle": "Univalent Foundations for Mathematics",
   "displayTitle": "Functorial Type Theory: Univalent Foundations for Mathematics",
-  "edition": "initial development edition",
-  "editionVersion": "0.1.0-dev",
+  "edition": "expanded development edition",
+  "editionVersion": "0.2.0-dev",
   "publicationDate": "2026-07-20",
   "status": "draft",
   "authors": [
@@ -24,6 +24,7 @@
       "hott-book": "578b85cc8d586b1677ec4335148adeb443057d24"
     }
   },
+  "architecture": "book/expansion.json",
   "evidence": "book/evidence.json",
   "renderer": {
     "documentSlug": "emdash-book",
@@ -31,7 +32,7 @@
     "layout": "single-column"
   },
   "artifacts": {
-    "pdf": "output/pdf/functorial-type-theory-0.1.0-dev.pdf"
+    "pdf": "output/pdf/functorial-type-theory-0.2.0-dev.pdf"
   },
   "sources": [
     {
@@ -102,12 +103,47 @@
     {
       "id": "chapter-9",
       "kind": "chapter",
-      "path": "book/chapters/09-transfors-strictness-and-laxity.md"
+      "path": "book/chapters/09-transfors-and-the-calculus-of-cuts.md"
     },
     {
       "id": "chapter-10",
       "kind": "chapter",
-      "path": "book/chapters/10-representability-and-profunctors.md"
+      "path": "book/chapters/10-categories-precategories-and-categorical-identity.md"
+    },
+    {
+      "id": "chapter-11",
+      "kind": "chapter",
+      "path": "book/chapters/11-functors-transfors-and-functor-categories.md"
+    },
+    {
+      "id": "chapter-12",
+      "kind": "chapter",
+      "path": "book/chapters/12-adjunctions-and-equivalences.md"
+    },
+    {
+      "id": "chapter-13",
+      "kind": "chapter",
+      "path": "book/chapters/13-yoneda-representability-and-profunctors.md"
+    },
+    {
+      "id": "chapter-14",
+      "kind": "chapter",
+      "path": "book/chapters/14-strictness-dagger-and-duality.md"
+    },
+    {
+      "id": "chapter-15",
+      "kind": "chapter",
+      "path": "book/chapters/15-structure-identity-and-saturation.md"
+    },
+    {
+      "id": "chapter-16",
+      "kind": "chapter",
+      "path": "book/chapters/16-weighted-universal-constructions.md"
+    },
+    {
+      "id": "chapter-17",
+      "kind": "chapter",
+      "path": "book/chapters/17-weighted-colimits-duality-and-join.md"
     },
     {
       "id": "appendix-notation",
@@ -138,6 +174,11 @@
       "id": "appendix-status",
       "kind": "appendix",
       "path": "book/appendices/f-status-and-research.md"
+    },
+    {
+      "id": "appendix-formal-presentation",
+      "kind": "appendix",
+      "path": "book/appendices/g-formal-presentation.md"
     },
     {
       "id": "bibliography",

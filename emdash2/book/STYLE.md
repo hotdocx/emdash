@@ -86,6 +86,19 @@ E : K ⊢ Cat              directed Cat-valued family
 Book-only abbreviations must be declared in the notation appendix and must not
 be described as implemented parser syntax.
 
+Every mathematical expression chooses one source mode:
+
+- use a Markdown code span only for a kernel identifier or a faithful literal
+  source fragment;
+- use Unicode notation such as `→`, `×`, `∘`, `⇒`, and `≃` for simple
+  mathematics in prose when it remains clear;
+- use `$...$` or `$$...$$` for structured mathematics.
+
+TeX commands inside Markdown code spans are always literal and are rejected by
+the typography checker. A missing backslash before a TeX control word can
+produce syntactically valid but mathematically wrong output, so suspicious
+bare words in math are rejected as well.
+
 ## Source mechanics
 
 - Each source file begins with one stable explicit HTML anchor.
@@ -93,3 +106,4 @@ be described as implemented parser syntax.
 - Link to stable anchors, never generated line numbers.
 - Do not edit `print/public/emdash-book.md`.
 - Avoid timestamps, absolute host paths, and generated build data in prose.
+- Run `npm run book:typography` after changing mathematical notation.

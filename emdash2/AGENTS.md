@@ -94,6 +94,7 @@ the iterated-hom architecture to the omega setting.
 - Print preview/check: `npm run dev` / `npm run check:render`
 - Book assembly/check/render/release: `npm run book:assemble` /
   `npm run book:check` / `npm run book:render` / `npm run book:release`
+- Book semantic typography: `npm run book:typography`
 - Remove compilation artifacts: `make clean`
 - Manually prune old logs: `make prune-logs`
 

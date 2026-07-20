@@ -1,12 +1,13 @@
 <a id="edition-notice"></a>
 
-## Initial development edition
+## Expanded development edition
 
 This is a working edition of *Functorial Type Theory: Univalent Foundations
-for Mathematics*. Chapter order, notation, and cross-references may still
-change. The mathematical centre of the edition—the WalkingEnd/Nat
-encode-decode argument—is tied to checked Lambdapi evidence; the active
-implementation remains authoritative whenever prose and code disagree.
+for Mathematics*. The WalkingEnd/Nat encode-decode argument remains its
+mathematical centre; the expanded category-theory and formal-presentation
+spine is being written around that checked calculation. Chapter details,
+notation, and cross-references may still change. The active implementation
+remains authoritative whenever prose and code disagree.
 
 Copyright © 2026 the emdash contributors. Except where separately identified,
 the book text is licensed under CC BY-SA 3.0. See

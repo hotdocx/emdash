@@ -2,7 +2,7 @@
 
 # Appendix F. Implementation Status And Research Directions
 
-This appendix summarizes the boundary of the initial development edition.
+This appendix summarizes the boundary of the expanded development edition.
 The generated [evidence register](#appendix-evidence) remains the detailed
 claim-by-claim authority.
 
@@ -67,9 +67,12 @@ The representable/profunctor layer suggests three staged projects:
 3. assemble associators, unitors, and horizontal cell composition into a
    coherent profunctor bicategory or suitable omega-categorical analogue.
 
-Weighted limits, colimits, adjunctions, duality, and joins already have active
-interfaces in the codebase, but they should enter later editions through
-central theorems rather than a feature catalogue.
+Weighted limits, colimits, adjunctions, duality, and joins now enter the
+expanded chapter sequence through the triangle reductions, right-adjoint
+weighted-limit preservation, its opposite-dual colimit theorem, and the join
+recursor. The checked interfaces are the theorem spine; neighboring Kan,
+end/coend, dagger, collage, and dependent-elimination theory remains
+explicitly status-labeled rather than presented as a feature catalogue.
 
 ## F.5 Semantics and proof-assistant engineering
 

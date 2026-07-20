@@ -8,7 +8,7 @@ Supersedes: no whole report; refines the post-B6 recommended next action in EMDA
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-book-category-theory-formal-presentation-review-2026-07-20
 Infinity-Codex-Decision-Responses: none
-Status: **PROPOSED - follow-on expansion plan; no C phase has started**
+Status: **ACTIVE - C0, C1, and C2 complete; C3 is the current phase**
 
 ## Executive Decision
 
@@ -824,7 +824,7 @@ typographic acceptance baseline for the expanded edition.
 
 ### Phase C0 - Repair notation and add semantic typography gates
 
-State: **PROPOSED.**
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -844,9 +844,28 @@ Gate:
 - no content expansion is mixed into the typography patch except corrections
   necessary to make a malformed sentence mathematically meaningful.
 
+Checkpoint:
+
+- the audited 24-source edition had 52 TeX-bearing inline-code lines across
+  eleven sources plus malformed display tokens in Chapters 1, 2, 4, 7, and 9;
+  each expression was reviewed and moved to genuine math rather than repaired
+  by blind substitution;
+- `scripts/check_book_typography.py`, five regression tests/fixtures, and
+  `print/scripts/check_book_katex.mjs` now distinguish fences, inline code,
+  prose, and math, reject both observed defect families, and strict-parse all
+  296 math spans in the repaired source;
+- extracted-PDF sentinels, style/release/SOP guidance, root/print scripts, and
+  CI wiring are active;
+- development version `0.1.1-dev` rendered as a 103-page tagged US-Letter PDF
+  with 14 embedded fonts; affected-page review and six all-page contact sheets
+  passed, and two independent offline clean-install release cycles produced
+  identical SHA-256
+  `e581f84e140db1d0972ed95a5b1a1761ac5f9b6fb94f14c76bcaa95a58fd09af`;
+- no Lambdapi definition, rule, check, or module boundary changed.
+
 ### Phase C1 - Ratify the global outline and translation contracts
 
-State: **PROPOSED.**
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -868,9 +887,32 @@ Gate:
 - current Chapter 9/10 links can be migrated deterministically if those files
   are renumbered or split.
 
+Checkpoint:
+
+- `book/book.json` now assembles the contiguous Chapter 1-17 sequence and
+  Appendix G. The former Chapter 9 source was renamed around the cut calculus;
+  the former Chapter 10 was moved, renumbered, and re-anchored as Chapter 13,
+  with affected glossary links migrated explicitly;
+- `book/expansion.json` is the machine-readable C1 contract for conceptual
+  ownership, spiral dependencies, central theorem/status targets, research
+  boundaries, the native/HoTT category translation, the ten required
+  terminology decisions, four formal-presentation layers, and the two source
+  migrations. `check_book.mjs` validates the contract against the manifest,
+  evidence register, chapter headings, and provenance ledger;
+- Chapters 10-12 and 14-17 plus Appendix G have bounded theorem-led skeletons.
+  The existing profunctor prose is now Chapter 13. Five newly cited checked
+  routes cover adjunction triangles, opposite duality, weighted-limit and
+  weighted-colimit preservation, and the join recursor; the evidence register
+  contains 77 cited claims;
+- `categories.tex` and `formal.tex` are pinned in the source map. Thirteen new
+  adaptation records cover HoTT 9.1-9.9 and A.1-A.4 by exact upstream labels;
+- the expanded source line is version `0.2.0-dev`. Its 32-source assembly,
+  310-span typography/KaTeX gates, evidence/provenance/architecture checks,
+  schema validation, and bounded browser render all pass.
+
 ### Phase C2 - Write the Došen vertical slice
 
-State: **PROPOSED.**
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -890,6 +932,44 @@ Gate:
 - no specialized rule is attributed to the kernel when computation is owned
   by generic `fapp*`/`tapp*` machinery;
 - the chapter reads as a mathematical calculus, not a rule inventory.
+
+Checkpoint:
+
+- Chapter 9 is now a theorem-led calculus of arrow, family, structural, and
+  universal cuts. It fully develops the first six examples and supplies the
+  required source/target, normal form, owner, equality mode, and surviving
+  higher action for all ten examples through co-Yoneda, weighted-limit
+  beta/eta, right-adjoint preservation, and its colimit dual;
+- the lower-star postcomposition, upper-star precomposition, and off-diagonal
+  `tapp1` conventions are ratified in Appendix A and the glossary. The chapter
+  explains why stable semantic owners and controlled accumulation replace a
+  broad runtime associativity rewrite;
+- the product/projection benchmark is stated at its intended generality: in a
+  category `K` with chosen binary products, `A`, `B`, and their variants are
+  objects of `K`, while `g`, `h`, and `k` are arrows. This general theorem is
+  mathematical development pending an iterable internal chosen-product
+  interface. The active formal probe is explicitly only the specialization
+  `K = Cat_cat`, where category objects and functor arrows use `Product_cat`;
+- focused probe `tmp/probes/book_product_projection_cut.lp` established that
+  the Cat-specialized sides are well typed and that the owner-aligned Sigma
+  projection plus nested upper-star cut reduce. Two permanent diagnostics in
+  `emdash3_2_checks.lp` retain those facts. The literal raw composite
+  `pi1 ∘ (h × k)` does not convert or unify directly with the selected
+  `sigma_Fst(h × k)` observation, so `CUT-PRODUCT-PROJECTION` is correctly
+  a formal consequence and no broad product eta or new kernel rule was added;
+- checked evidence `CAT-HOM-CUTS`, `CAT-PRODUCT-CALCULUS`, and
+  `PROF-COMPARISON-BETA-ETA`, plus the formal-consequence product claim, bring
+  the register to 81 fully cited claims. The executable catalog includes the
+  new owner-aligned product/projection diagnostics;
+- Došen's 1999 *Cut Elimination in Categories* is recorded by DOI and as an
+  all-rights-reserved, reference-only conceptual source. The locally supplied
+  278-page PDF was consulted only to confirm its general cartesian-category
+  setting and terminology; Chapter 9 is freshly written and copies no prose;
+- the 32-source source/evidence/architecture/typography gates pass with 451
+  strict-KaTeX math spans. Full `make ci` passes. The `0.2.0-dev` release is a
+  122-page PDF with 14 embedded fonts and SHA-256
+  `ec3764236a3c39f70d7895962e8dff5248f8fbbf59d3b4ebc35af9bafa44247b`;
+  Chapter 9 pages 63-73 passed contact-sheet and focused page visual review.
 
 ### Phase C3 - Adapt categories through Yoneda
 
@@ -1133,31 +1213,28 @@ regression evidence, and mathematical metatheorems.
 
 | ID | Task | State | Blocking condition or promotion trigger |
 | --- | --- | --- | --- |
-| `FTTX-S1` | Implement semantic book-typography lint and PDF sentinels | proposed, C0 | blocks repaired-edition release |
-| `FTTX-S2` | Complete the HoTT Chapter 9 adaptation/concordance ledger | proposed, C1 | before long Chapter 10-15 prose imports |
-| `FTTX-S3` | Complete the HoTT Appendix A adaptation/concordance ledger | proposed, C1/C6 | before Appendix G is considered adapted prose |
-| `FTTX-S4` | Probe and package the fully typed product/projection Došen benchmark | proposed formal side task | before labeling the example checked |
-| `FTTX-S5` | Ratify native `Cat` versus precategory/category/strict-category translation | proposed design task | blocks Chapters 10, 14, and 15 |
+| `FTTX-S1` | Implement semantic book-typography lint and PDF sentinels | complete, C0 | repaired `0.1.1-dev` release baseline recorded above |
+| `FTTX-S2` | Complete the HoTT Chapter 9 adaptation/concordance ledger | complete, C1 | all nine sections have pinned labels and manifest targets |
+| `FTTX-S3` | Complete the HoTT Appendix A adaptation/concordance ledger | ledger complete, C1; prose remains C6 | all four sections are mapped to Appendix G before adaptation |
+| `FTTX-S4` | Probe and package the fully typed product/projection Došen benchmark | complete, C2; general `K` mathematical development, Cat-specialized formal consequence | owner-aligned legs are permanent diagnostics; literal raw projection bridge remains unpromoted |
+| `FTTX-S5` | Ratify native `Cat` versus precategory/category/strict-category translation | complete, C1 | enforced in `book/expansion.json` and stated in Chapter 10 |
 | `FTTX-S6` | Package a full Cat-valued Yoneda/full-faithfulness theorem | deferred formal extension | promote only when Chapter 13 needs a checked theorem stronger than shaped co-Yoneda |
 | `FTTX-S7` | Develop semantic coend/end and tensor coherence | deferred research task | promote for a general rather than shaped co-Yoneda theorem |
 | `FTTX-S8` | Develop general dependent adjunctions `Sigma_F -| F^* -| Pi_F` | deferred research task | promote for dependent Kan/limit chapters |
 | `FTTX-S9` | Design generic structure identity and Rezk completion interfaces | deferred research task | after Chapters 10 and 15 expose exact desired statements |
 | `FTTX-S10` | Write a future surface-to-Lambdapi elaborator RFC | deferred; parent repository out of scope | only after the canonical surface and kernel mapping stabilize |
-| `FTTX-S11` | Verify Došen bibliography, quotation limits, and adaptation/license provenance | proposed bibliography task | before copying or closely adapting Došen prose |
+| `FTTX-S11` | Verify Došen bibliography, quotation limits, and adaptation/license provenance | complete, C2; reference-only use | DOI and all-rights-reserved no-copy policy recorded in bibliography, credits, and provenance |
 | `FTTX-S12` | Design a native dagger/unitary category interface | deferred research task | only if Chapter 14 needs checked content beyond free-form theory |
 | `FTTX-S13` | Develop join-as-collage semantics and dependent elimination | deferred research task | promote after the primitive join chapter fixes the target universal property |
 | `FTTX-S14` | Audit ordinary limits and Kan extensions as special cases of the selected weighted interface | proposed mathematical task | during C5 outline, before asserting special-case theorems |
 
 ## Recommended Next Action
 
-Start with Phase C0 and the design half of Phase C1:
-
-1. repair the existing source-mode/TeX defects and add the typography gate;
-2. ratify the chapter-number migration, category translation matrix, and
-   exact lower-star/upper-star notation;
-3. write the Chapter 9 Došen vertical slice before importing the broader HoTT
-   category-theory prose.
-
-This order yields a clean rendering baseline, settles the most consequential
-terminology issue, and tests the new global thesis on a small theorem-led
-chapter before the much larger category-theory expansion begins.
+Proceed with Phase C3. Expand Chapters 10-13 through the pinned HoTT 9.1-9.5
+concordance while preserving the native-`Cat` versus univalent
+1-category translation: categories and precategories, functors and transfors,
+adjunctions and equivalences, then Yoneda and representability. Reuse the C2
+cut audit in every central theorem, retain Chapter 13's checked shaped
+co-Yoneda theorem as the computational culmination, and leave the full
+Cat-valued Yoneda/full-faithfulness package under deferred side task
+`FTTX-S6` unless the prose exposes a concrete stronger consumer.
