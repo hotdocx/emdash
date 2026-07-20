@@ -8,7 +8,7 @@ Supersedes: no whole report; reopens the deferred `EVOGJ-OBSACTION-SCOPE` functo
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-user-requested-path-action-and-compatibility-review-2026-07-19
 Infinity-Codex-Decision-Responses: current-session-review-response-2026-07-19; current-session-canonical-action-correction-2026-07-20; no archived logical ID is required to interpret this plan
-Status: **COMPLETE 2026-07-20 — P0–P8 remain completed; P9 supersedes the P2 `PathActionRefinement` selection, adopts canonical `path_map_func` action as the sole nondependent interface, retires the isolated Sum feature for later redesign, and passes its complete implementation and CI gate**
+Status: **ACTIVE 2026-07-20 — P0–P9 remain completed historical phases; P10 reopens and supersedes P6's bounded compatibility retention, P11 reopens and supersedes P7's `_EQ1` retention, and P12 owns synchronization and final gates**
 Implementation starting baseline and review provenance: `2444c9d406fc3d201602ace7af5105c20c241680`
 Initial worktree state: clean, with staged and unstaged diffs both empty
 Initial bounded baseline: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
@@ -34,11 +34,16 @@ does not override a contradictory active owner or authorize a rewrite merely
 because the mathematical comparison is plausible.
 
 The two tracks must not be implemented as one undifferentiated cleanup. The
-D0/D1 extraction and `_EQ1` decision completed in P3–P8 remain final. The
-2026-07-20 P9 correction is a separate removal of the now-disproven selected-
-action abstraction and the isolated Sum experiment. It must not reopen the
-native discrete/dimension/WalkingEnd migration, the frozen compatibility
-contract, or the namespace decision.
+native discrete/dimension/WalkingEnd migration completed in P3–P5 remains
+final, and the 2026-07-20 P9 correction remains a separate completed removal
+of the disproven selected-action abstraction and isolated Sum experiment.
+The later user decision recorded in P10 deliberately reopens only P6's
+bounded-retention branch: repository backward compatibility is no longer a
+goal, so the frozen compatibility contract, its self-only clients, and its
+legacy OneCat theorem are deletion material. That deletion removes the only
+measured P7 collision source, so P11 deliberately reopens only the namespace
+decision. Neither correction reopens the native representation, WalkingEnd,
+Nat, PathRecord, finite-dimension, or canonical path-action designs.
 
 ## Goal
 
@@ -88,7 +93,48 @@ P3–P8 result. The corrected verdict is:
    the explicitly selected user boundary, and redesign it later only if a
    concrete consumer appears.
 5. Retain direct dependent `eq_apd`, canonical `Path_cat_func`/
-   `path_map_func`, `NatSucc_func`, and every completed compatibility result.
+   `path_map_func`, `NatSucc_func`, and every completed native practical
+   result. Do not retain a legacy theorem or example merely to preserve the
+   compatibility representation through which it was once stated.
+
+### Corrected compatibility and namespace verdict — 2026-07-20
+
+The initial P6/P7 conclusion assumed that backward compatibility, including
+the complete D0-based OneCat equivalence, was itself a repository objective.
+That assumption was incorrect. The selected objective is the latest native
+equality-valued design and its practical consequences, not continued support
+for the old D0/D1/decoder presentation.
+
+The corrected verdict is therefore:
+
+1. Delete `emdash3_2_legacy_compat.lp`. It is a quarantined historical
+   representation with no active implementation consumer and no authority
+   role; extraction was a safe staging step, not a permanent library boundary.
+2. Delete all seven clients that explicitly import it. Five are purely legacy
+   demonstrations. The two mixed examples do not contain unique selected
+   native behavior: their useful native categorical-universe and ordinary
+   Product-isomorphism assertions are already owned by the main diagnostics
+   and retained native reviewer examples.
+3. Delete the exact legacy `one_cat_iso_type_equiv` theorem and its old
+   two-sided decoder laws. It is mathematically sensible, but it is neither a
+   prerequisite nor a consumer of the selected WalkingEnd/`BNat`, Nat,
+   finite-dimension, or native equality-valued results. The repository is not
+   required to re-prove that theorem before deleting its old representation.
+4. Retain `OneCat`, native hom discreteness, native OneCat hom action and
+   groupoidality, finite-`NCat` truncation, the one-way ordinary
+   `IsoEvidence -> OmegaEquiv` lift, and all WalkingEnd/Nat results. These are
+   the current design's meaningful OneCat content. A future full native
+   equivalence between object equality and ordinary isomorphism evidence may
+   be proposed independently if a concrete consumer warrants it; it is not a
+   cleanup blocker and no compatibility-shaped alias is retained for it.
+5. Once deletion removes the legacy exports, strip `_EQ1` from the native
+   public identifiers by one exact token mapping. Do not create reverse
+   aliases, partial mixed naming, or a second compatibility namespace.
+6. Keep `emdash3_2_eq1_hom_action.lp` and
+   `emdash3_2_eq1_evidence_property.lp` as module filenames in this phase.
+   Their filenames remain useful architectural labels; renaming files while
+   renaming symbols would unnecessarily mix a module-layout migration with a
+   collision-free public-identifier cleanup.
 
 ## Validated Current State
 
@@ -1245,6 +1291,213 @@ and Sum are absent pending a future consumer-led redesign; full CI passes.
   diff/TOC/reference/report-header integrity, the strict LHS audit, and strict
   catalog freshness. P9 is complete.
 
+### Phase P10 — Delete the obsolete compatibility closure and its clients
+
+P10 reopens the exact alternative left by P6. The extraction evidence remains
+valid: the module is downstream-only, non-authoritative, and absent from every
+active dependency path. What changes is the retention objective. The user has
+explicitly selected the current native design and practical end results rather
+than backward compatibility, so the P6 retention condition is now false.
+
+The deletion closure is exactly:
+
+```text
+emdash3_2_legacy_compat.lp
+examples/equality_evidence_migration.lp
+examples/omega_equiv_along_d0.lp
+examples/omega_equiv_along_d0b.lp
+examples/omega_equiv_d1.lp
+examples/onecat_iso_lift.lp
+examples/categorical_universe_identity.lp
+examples/product_reflexivity_provenance.lp
+```
+
+The reviewer-example disposition is deliberate rather than a filename-based
+purge:
+
+1. `equality_evidence_migration.lp` exists to compare D0 and native evidence;
+   after D0 deletion it has no independent statement.
+2. `omega_equiv_along_d0.lp`, `omega_equiv_along_d0b.lp`, and
+   `omega_equiv_d1.lp` expose the old fixed-arrow, hom-action, and decoder
+   presentations and are wholly legacy.
+3. `onecat_iso_lift.lp` is the reviewer client for D0 package/path coherence
+   and the complete legacy `one_cat_iso_type_equiv`; deleting that theorem
+   deletes the example's selected purpose.
+4. `categorical_universe_identity.lp` mixes native checks with legacy decoder
+   comparisons, but its useful native content is already represented in
+   `emdash3_2_checks.lp` and
+   `examples/direct_univalence_eq1_boundary.lp`. It has no unique practical
+   theorem to migrate.
+5. `product_reflexivity_provenance.lp` mixes ordinary Product-isomorphism
+   checks with D1 Product evidence, but its retained ordinary-isomorphism
+   content is already owned by the main Product diagnostic area. It likewise
+   has no unique practical theorem to migrate.
+
+No file in this deletion closure mentions WalkingEnd, `BNat`, Nat, or the Nat
+extension. The active kernel, native extensions, Nat, WalkingEnd, and main
+diagnostics neither import nor reference the compatibility module. Deletion
+therefore cannot remove the selected walking-endomorphism/Nat correspondence;
+that claim remains subject to the full checks and examples rather than lexical
+evidence alone.
+
+#### OneCat boundary selected by P10
+
+The phrase “delete the legacy OneCat theorem” does not mean deleting OneCat.
+The following current structures and results remain selected:
+
+- `OneCat` and its evidence-retaining finite-dimensional packaging;
+- `one_cat_hom_discrete` and the native iterated hom action;
+- native equality-valued groupoidality and the finite-`NCat`
+  object-truncation/evidence-property results;
+- the native one-way ordinary-isomorphism lift currently spelled
+  `iso_evidence_omega_along_EQ1` and
+  `iso_evidence_omega_equiv_EQ1` before P11;
+- WalkingEnd/`BNat`, their Hom--Nat comparison, sethood, and directed negative
+  results.
+
+What is deleted is the exact D0-based equivalence
+`one_cat_iso_type_equiv` and its compatibility-specific two-sided decoder
+laws. The prior native feasibility probe established a valid one-way native
+lift but not the stronger stable-facade-package/raw-path reification equality.
+P10 neither weakens that theorem nor invents a proof-time identification to
+keep its old name. It simply removes an unused legacy theorem. A future
+fully-native object-equality/ordinary-isomorphism equivalence is optional
+research, to be introduced under its own consumer-led plan if it becomes
+useful.
+
+P10 implementation sequence:
+
+1. preserve the P5 extraction manifest and P6 decision as dated evidence;
+2. delete the compatibility module and all seven explicit importers in one
+   bounded slice so no broken compatibility client is left behind;
+3. remove the module and examples from current authority, architecture,
+   source-health, and reviewer-surface claims;
+4. verify exact zero active occurrences of `legacy_compat`, `_D0`, `_D1`, and
+   `one_cat_iso_type_equiv` before starting the namespace edit;
+5. run `make check` immediately, then let P12 exercise the full retained
+   reviewer and CI surface.
+
+P10 introduces no symbol, rewrite rule, unification rule, alias, or replacement
+theorem. Its exit gate is a closed native dependency graph with no legacy
+module/client and with the retained OneCat and WalkingEnd/Nat checks passing.
+
+### Phase P11 — Make the native equality-valued API unsuffixed
+
+P11 reopens the exact P7 namespace boundary after P10 removes its only
+collision source. At the adoption baseline, excluding the compatibility
+module and its seven clients, the active `.lp` surface contains:
+
+```text
+18 files
+1,570 occurrences of exact *_EQ1 identifiers
+143 distinct exact *_EQ1 identifiers
+139 explicitly declared implementation owners
+1 explicitly declared reviewer-local helper
+0 declaration collisions after stripping the suffix
+```
+
+The remaining distinct tokens include generated/referenced eliminator and
+projection names rather than additional public declarations. The one
+reviewer-local declaration is
+`consume_omega_equiv_along_fapp1_EQ1`. The old set of 11 hard collisions was
+exported entirely by `emdash3_2_legacy_compat.lp`; after excluding P10's
+deletion closure, an exact comparison of every stripped native declaration
+with every existing unsuffixed declaration is empty.
+
+The frozen mechanical mapping is:
+
+```text
+for each exact Lambdapi identifier NAME_EQ1 in the retained active .lp set:
+  NAME_EQ1  ->  NAME
+```
+
+The edit must use identifier boundaries, not unrestricted substring
+replacement. It applies synchronously to declarations, generated-name
+references, rules, assertions, and retained reviewer examples. It does not:
+
+- add old-to-new or new-to-old aliases;
+- retain selected `_EQ1` names as a partial namespace;
+- change term bodies, argument order, rewrite orientation, ownership, or
+  module dependencies;
+- rename conceptual prose merely because it uses “EQ1” to describe the
+  equality-valued representation;
+- rename the two `emdash3_2_eq1_*.lp` module files in this phase; or
+- blindly rewrite dated reports whose suffixed spellings are part of true
+  historical promotion evidence.
+
+P11 implementation sequence:
+
+1. re-run the collision manifest after P10 and stop if it is nonempty;
+2. record the exact retained file list and counts;
+3. apply the exact automated mapping to all retained `.lp` owners and clients
+   as one mechanical namespace edit;
+4. verify zero `_EQ1` identifier occurrences in active `.lp` files and zero
+   references to deleted compatibility names;
+5. run `make check` before editing current prose, so any missed generated name
+   or hidden collision is isolated to the namespace slice;
+6. update current authorities and examples to the new unsuffixed spellings,
+   while adding explicit P10/P11 supersession notes to dated ledgers instead
+   of falsifying their recorded historical names.
+
+The renamed unsuffixed API is the same native equality-valued representation,
+not a return to the old unsuffixed decoder design. For example,
+`OmegaEquivAlong` after P11 denotes the current equality-valued Sigma evidence
+that was previously named `OmegaEquivAlong_EQ1`; there is no surviving D0
+alias with that spelling.
+
+P11 introduces no semantic rule change. Its exit gate is an exact-zero active
+`_EQ1` identifier inventory, a passing active check, and a single unsuffixed
+native public surface.
+
+### Phase P12 — Synchronize authorities and complete the final gate
+
+P12 makes the semantic distinction visible everywhere current architecture is
+described:
+
+1. remove the deleted module and seven examples from `AGENTS.md`, `README.md`,
+   `reports/INDEX.md`, Foundations, the current SOP, source-health data, and
+   current command/architecture inventories;
+2. update current symbol references to the P11 unsuffixed names;
+3. state that native OneCat infrastructure and the one-way ordinary-iso lift
+   remain, while the old complete `one_cat_iso_type_equiv` theorem is absent
+   and any fully-native replacement is optional future work;
+4. annotate the equality-valued redesign, observational-equality redesign,
+   and WalkingEnd ledgers where necessary so their dated `_EQ1`, P6, or P7
+   claims are explicitly superseded without rewriting historical evidence;
+5. regenerate the strict catalog and health report; and
+6. run the bounded active check, all retained examples, warning summary,
+   strict rule-LHS audit, catalog, TOC, health, full CI, reference/header
+   integrity, and `git diff --check`.
+
+Expected structural deltas are deletion-only or spelling-only: seven fewer
+reviewer examples and one fewer non-authoritative source file, unchanged active
+kernel diagnostics, unchanged warning/audit behavior except for any reporting
+text keyed by renamed symbols, and no new computation owner. Any different
+semantic delta must be investigated and recorded before completion.
+
+#### P10–P12 adoption record — 2026-07-20
+
+- Implementation starts from clean `HEAD`
+  `34708ca2547a6d54af2e9b67f9f605a2bcb9a4a9`, a descendant of the original
+  `2444c9d406fc3d201602ace7af5105c20c241680` implementation/review baseline.
+  Staged and unstaged diffs were both empty before this ledger update.
+- `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes at that baseline.
+- The compatibility dependency inventory is unchanged from P5: exactly seven
+  reviewer examples import the module, and no active authority imports it.
+- Exact search finds no WalkingEnd, `BNat`, Nat, or Nat-extension identifier in
+  the compatibility module or its seven clients.
+- The P10 consumer classification above finds no unique selected native result
+  in the two mixed examples; the corresponding native categorical-universe and
+  ordinary Product-isomorphism diagnostics already have retained owners.
+- The reproduced post-deletion collision simulation covers 18 retained `.lp`
+  files, 1,570 occurrences, and 143 distinct suffixed identifiers. It finds
+  139 implementation declarations, the one local reviewer helper, and zero
+  stripped-name collision. P10 and P11 are therefore dependency-ready.
+
+The adoption record is preliminary evidence, not completion evidence. Append
+the promoted deletion, rename manifest, final inventories, metric deltas, and
+gate results here before changing this plan back to complete.
+
 ## Acceptance Criteria
 
 The plan is complete only when all selected criteria hold:
@@ -1265,19 +1518,29 @@ The plan is complete only when all selected criteria hold:
    groupoidality, not D0 compatibility.
 7. Active kernel and native modules do not import an extracted compatibility
    layer.
-8. Every old Cat/Grpd decoder is migrated, retained as a clearly classified
-   library interface, or deleted by consumer evidence.
-9. Useful `TypeEquiv` and contractible-fibre theorems are not discarded merely
-   because primary universe identity is native.
-10. `_D0` and `_D1` do not remain as an ambiguous second foundation.
-11. `_EQ1` is removed only after collision-free compatibility retirement, or
-    a final recorded decision justifies retaining it.
-12. No semantic migration is combined with an unvalidated file split.
-13. No promoted code uses `--no-sr-check`, an untyped proof-time comparison,
+8. `emdash3_2_legacy_compat.lp` and its seven explicit clients are absent;
+   every old Cat/Grpd decoder in that closure is deleted rather than retained
+   as a second library interface.
+9. Native `TypeEquiv`, contractible-fibre, categorical-universe, Product-iso,
+   and ordinary-isomorphism-lift results with current consumers remain even
+   though their redundant legacy comparisons are deleted.
+10. The exact D0-based `one_cat_iso_type_equiv` and compatibility-specific
+    inverse laws are absent, while native `OneCat`, hom discreteness/action,
+    finite-dimension, and WalkingEnd/Nat behavior remain checked.
+11. `_D0` and `_D1` do not remain as an ambiguous second foundation in active
+    `.lp` files or current authority claims.
+12. `_EQ1` is removed by one collision-free exact identifier migration, with
+    no partial namespace or compatibility aliases.
+13. Equality-valued module filenames may retain `eq1` as architecture labels;
+    no file split/rename is mixed into the public-symbol migration.
+14. No semantic migration is combined with an unvalidated file split.
+15. No promoted code uses `--no-sr-check`, an untyped proof-time comparison,
     or an unmeasured broad rewrite.
-14. Every new rule or `unif_rule`, if unavoidable, has focused positive,
+16. Every new rule or `unif_rule`, if unavoidable, has focused positive,
     negative, runtime/proof-time, warning, and subject-reduction evidence.
-15. `make check`, affected examples, catalog, health, warning summary, strict
+17. Current authorities use the unsuffixed native spelling; dated plans retain
+    historical spellings only with explicit P10/P11 supersession context.
+18. `make check`, affected examples, catalog, health, warning summary, strict
     audit, and `make ci` pass at final handoff.
 
 ## Probe And Validation Matrix
@@ -1290,6 +1553,7 @@ The plan is complete only when all selected criteria hold:
 | native discrete spine | native `IsDiscreteCat` formation/projections; homwise path/retract consumers; import-cycle control | kernel/native/walking checks; directed/discrete/groupoidal/walking examples |
 | D0/D1 consumer migration | one probe per semantic owner; decoder and provenance controls | affected examples; warning summary; strict audit; catalog |
 | compatibility extraction | dependency/import inventory; no-duplicate-owner check | `make check`; `make examples`; warning/audit comparison |
+| compatibility deletion | exact eight-file closure; retained-result duplicate/consumer inventory; zero legacy-token search | immediate `make check`; retained OneCat/WalkingEnd/Nat examples; full reviewer sweep |
 | namespace migration | exact collision inventory; mechanical-definition equality | full examples, catalog, TOC, health, CI |
 | final consolidation | all permanent diagnostics and negative controls | full `make ci` |
 
@@ -1331,8 +1595,10 @@ import over copying the 2,400-line native hom-action proof into the kernel.
 ### Risk 6: compatibility deletion removes useful theorem-level APIs
 
 Mitigation: classify representations, computational adapters, decoders,
-round trips, and standard equivalence theorems separately. Retain useful
-library mathematics under native statements.
+round trips, and practical consumers separately. Retain selected native
+library mathematics under native statements. Do not manufacture a native
+replacement for the unused legacy `one_cat_iso_type_equiv` merely to make
+deletion look like migration; record a future full native theorem as optional.
 
 ### Risk 7: `_EQ1` rename obscures semantic regressions
 
@@ -1365,7 +1631,11 @@ the corresponding controls.
 | `PAECR-P7-NAMESPACE` | **completed with `_EQ1` retained 2026-07-19** | remove `_EQ1` after collisions are freed, or record reason to retain | P6 | 139 native declarations inventoried; 11 hard unsuffixed legacy collisions; partial rename and reverse aliases rejected; canonical suffix frozen until compatibility deletion/namespacing |
 | `PAECR-P8-CONSOLIDATE` | **completed 2026-07-19** | final reports/catalog/health/warnings/audit/CI | all selected phases | 1,791/66 strict catalog; 52-target health and CI; 1,010/159 warnings; zero/45/27 audit; 86-heading TOC; reference/header/diff integrity and 16 recovery tests pass |
 | `PAECR-P9-CANONICAL-ACTION-SUM-RETIRE` | **completed 2026-07-20** | supersede P2's unconsumed refinement abstraction, use canonical path action directly, and retire isolated Sum pending redesign | completed P2 inventory plus canonical G2 owner | owner-position quiet/warning deletion probes pass at unchanged 1,010/159; promotion and exact-zero active inventory pass; check/examples, 1,671/61 strict catalog, 46-target health, 86-heading TOC, and zero/45/27 audit pass; full CI passes all 46 targets in 253.673s plus every repository-integrity gate |
+| `PAECR-P10-COMPAT-DELETE` | **in progress 2026-07-20** | supersede P6's backward-compatibility assumption; delete the frozen D0/D1/decoder module, seven clients, and exact legacy OneCat theorem | completed P5 extraction plus explicit user selection | preliminary eight-file closure, consumer classification, retained-result duplicate inventory, zero WalkingEnd/BNat/Nat dependency, clean descendant baseline, and passing bounded check recorded; promotion and post-deletion gates pending |
+| `PAECR-P11-NATIVE-UNSUFFIX` | **pending** | supersede P7 after P10; map every retained exact `NAME_EQ1` identifier to collision-free `NAME` without aliases or semantic edits | P10 deletion | preliminary 18-file/1,570-occurrence/143-token inventory, 139 implementation declarations plus one example helper, and zero stripped-name collision recorded; post-deletion manifest, promotion, and checks pending |
+| `PAECR-P12-CONSOLIDATE` | **pending** | synchronize current authorities and supersession records, regenerate reports, and pass proportional final gates | P10 and P11 | current authority updates, exact inventories, catalog/TOC/health/warnings/audit/examples/CI and integrity evidence pending |
 | `PAECR-DISPLAYED-PATH-SECTION` | deferred research | design honest dependent path-family displayed functor/section | concrete consumer | separately adopted plan and owner probes |
+| `PAECR-NATIVE-ONECAT-ISO-EQUIV` | deferred optional research | if a future consumer warrants it, state and prove a fully native object-equality/ordinary-isomorphism equivalence without restoring D0 compatibility | concrete native consumer and separate adoption | native theorem and coherence probes; not a P10/P11 completion prerequisite |
 | `PAECR-TYPEEQUIV-LIBRARY` | retained boundary | preserve useful contractible-fibre equivalence theorems independently of primary universe identity | consumer review | explicit library classification |
 
 Only update a row to complete after its exit evidence is promoted and
@@ -1413,8 +1683,26 @@ implemented bounded slice was:
 The P2 record is retained as dated implementation evidence but its
 `PathActionRefinement` conclusion is superseded. No continuation should
 preserve that package merely because P2 once passed its gate. No row in this
-plan remains open; future Sum or displayed-dependent action work requires a
-new consumer-led adoption rather than implicit reopening.
+plan remained open at the P9 checkpoint; future Sum or displayed-dependent
+action work still requires a new consumer-led adoption rather than implicit
+reopening.
+
+Active corrective slice (2026-07-20): P10–P12 now supersede that last sentence
+at the exact compatibility boundary. The dependency-ready implementation is:
+
+1. delete the isolated compatibility module and its seven importers, including
+   the old complete OneCat theorem rather than blocking on a native re-proof;
+2. verify the retained native OneCat, WalkingEnd/BNat, Nat, finite-dimension,
+   categorical-universe, and Product results by their current owners;
+3. re-run the collision manifest and mechanically map every exact retained
+   `NAME_EQ1` identifier to `NAME` in one synchronized `.lp` edit;
+4. restore `make check` before changing prose, then synchronize current
+   authorities and annotate historical ledgers with P10/P11 supersession;
+5. regenerate catalog/health data and run the complete proportional gate.
+
+P10 is the now-active row. P11 is mechanically dependency-ready after P10,
+and P12 follows both. No native theorem construction, new rewrite, alias,
+module rename, or compatibility facade is part of this slice.
 
 ## Completion And Blocker Policy
 
