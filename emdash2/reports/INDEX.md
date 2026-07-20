@@ -37,6 +37,18 @@ implementation plans, and historical decisions.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
+  proposed architecture and implementation plan for the new book
+  *Functorial Type Theory: Univalent Foundations for Mathematics*. It selects
+  the WalkingEnd/Nat carrier equivalence and directed normalization cell as
+  the opening and Chapter 8 computation; maps the HoTT Book spine through its
+  encode-decode proof to the noninvertible directed setting; separates
+  checked, derived, free-form, and research-boundary claims; proposes
+  chapter-sized sources plus a generated `emdash-book.md` render
+  input; records HoTT attribution/ShareAlike requirements; and sequences print
+  reproducibility, documentation consolidation, prose development, and an
+  optional later Lambdapi module split without making that split a writing
+  prerequisite.
 - `REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md`:
   completed living plan and decision ledger. P0–P8 completed the native
   equality-valued migration, extracted the remaining D0/D1/decoder closure
