@@ -2,26 +2,257 @@
 
 # 13. Yoneda, Representability, And Profunctors
 
-Representable families turn arrows into data that can be transported,
-composed, and recognized by universal properties. Profunctors extend this
-idea to two endpoints. They behave like generalized homs: contravariant in a
-source category, covariant in a target category, and composable by a
-coend-like tensor.
+Representability turns the arrows out of, or into, one object into a universal
+coordinate system. Yoneda says that a natural map out of such a coordinate
+system is determined by its value at an identity. Adjunction says that one
+hom coordinate system is represented by another object. Weighted limits will
+repeat the same argument for a more elaborate functor.
 
-The central computation of this chapter is a co-Yoneda cut elimination. A
-profunctor element tensored with the appropriate identity element returns to
-itself when the co-Yoneda map is applied. The active calculus checks this
-equation at shaped elements and checks its fusion with arbitrary vertical
-maps. It deliberately stops short of claiming a general coend construction or
-a fully developed bicategory of profunctors.
+The ordinary Yoneda lemma is therefore the conceptual center of this part of
+the book. We first develop its univalent 1-categorical form, then identify the
+native representable families already used by arrow induction, and finally
+pass to Cat-valued profunctors. The chapter's central *checked* computation is
+a shaped co-Yoneda cut: tensor an element with the appropriate identity-shaped
+hom, apply the co-Yoneda map, and recover the original element.
 
-[Kelly](#ref-kelly) provides the enriched categorical background for many of
-these representability patterns, while [Bénabou](#ref-benabou) is a classical
-reference for bicategorical organization. This chapter uses those ideas as
-mathematical orientation and states separately what the active emdash artifact
-actually checks.
+The full ordinary Yoneda lemma below is mathematical development adapted from
+the [HoTT Book](#ref-hott-book). The active artifact checks native
+representables and the shaped Cat-valued co-Yoneda beta/fusion equations. It
+does not yet package a general Cat-valued Yoneda equivalence or a semantic
+coend. [Kelly](#ref-kelly) supplies enriched background for these patterns,
+while [Bénabou](#ref-benabou) is a classical reference for their bicategorical
+organization.
 
-## 13.1 Cat-Valued Profunctors
+## 13.1 Representables And Variance
+
+Let $\mathcal A$ be an ordinary precategory. A presheaf is a functor
+
+$$
+P:\mathcal A^{\mathrm{op}}\longrightarrow\mathsf{Set}.
+$$
+
+For $a:\mathcal A$, the contravariant representable presheaf is
+
+$$
+y(a):=\operatorname{Hom}_{\mathcal A}(-,a).
+$$
+
+An arrow $u:a\to b$ induces a natural transformation
+$y(u):y(a)\Rightarrow y(b)$ by postcomposition:
+
+$$
+y(u)_x(f)=u\circ f=u_*(f).
+$$
+
+This defines the Yoneda embedding
+
+$$
+y:\mathcal A\longrightarrow
+[\mathcal A^{\mathrm{op}},\mathsf{Set}].
+$$
+
+There is a covariant mirror
+
+$$
+y^{a}:=\operatorname{Hom}_{\mathcal A}(a,-):
+\mathcal A\longrightarrow\mathsf{Set}.
+$$
+
+It is contravariant in the represented object $a$: an arrow $u:a\to b$
+induces precomposition
+
+$$
+u^*:\operatorname{Hom}_{\mathcal A}(b,-)
+\Longrightarrow
+\operatorname{Hom}_{\mathcal A}(a,-).
+$$
+
+The lower-star and upper-star actions from Chapter 9 are therefore the two
+variance legs of representability.
+
+## 13.2 The Ordinary Yoneda Equivalence
+
+For a presheaf $P:\mathcal A^{\mathrm{op}}\to\mathsf{Set}$, the Yoneda
+equivalence is
+
+$$
+\operatorname{Nat}(y(a),P)\simeq P(a).
+$$
+
+Its forward map evaluates a natural transformation at the identity:
+
+$$
+\operatorname{encode}(\alpha)
+:=\alpha_a(\mathrm{id}_a).
+$$
+
+For $p:P(a)$, the reverse map defines a natural transformation by
+
+$$
+\operatorname{decode}(p)_x(f)
+:=P[f](p),
+\qquad
+f:x\to a.
+$$
+
+The first composite is immediate from preservation of identity:
+
+$$
+\operatorname{encode}(\operatorname{decode}(p))
+=P[\mathrm{id}_a](p)
+=p.
+$$
+
+For the other composite, naturality of $\alpha$ at $f:x\to a$ gives
+
+$$
+P[f]\bigl(\alpha_a(\mathrm{id}_a)\bigr)
+=\alpha_x(f).
+$$
+
+Thus
+$\operatorname{decode}(\operatorname{encode}(\alpha))=\alpha$ by
+extensionality. The proof has the same shape as Chapter 8: choose a code by
+evaluation, decode it by functorial transport, and calculate both composites.
+Here the distinguished constructor is the identity arrow of a representable.
+
+The covariant form is equally important. For
+$Q:\mathcal A\to\mathsf{Set}$,
+
+$$
+\operatorname{Nat}
+  \bigl(\operatorname{Hom}_{\mathcal A}(a,-),Q\bigr)
+\simeq Q(a),
+$$
+
+and the inverse sends $q:Q(a)$ to the family
+$f:a\to x\mapsto Q[f](q)$.
+
+<!-- evidence:UCAT-YONEDA -->
+
+> **Formal status — mathematical development.** Evidence
+> `UCAT-YONEDA`. These are the ordinary set-valued Yoneda equivalences.
+> They are stated under the HoTT precategory assumptions and are not labeled
+> as the active full Cat-valued theorem.
+
+## 13.3 Full Faithfulness And Uniqueness Of Representation
+
+Apply Yoneda with $P=y(b)$. One obtains
+
+$$
+\operatorname{Nat}(y(a),y(b))
+\simeq
+\operatorname{Hom}_{\mathcal A}(a,b).
+$$
+
+Under this equivalence, an arrow $u:a\to b$ corresponds to
+postcomposition by $u$. Hence the Yoneda embedding is fully faithful: it
+recovers every hom from the natural maps between representables.
+
+More generally, a representation of $P$ consists of an object $a$ and a
+natural isomorphism $y(a)\cong P$. If $a$ and $b$ both represent $P$, full
+faithfulness produces a canonical isomorphism $a\cong b$. When
+$\mathcal A$ is a univalent category, this isomorphism corresponds to object
+identity, and representability becomes a property rather than an uncontrolled
+choice of presentation.
+
+> **Formal status — mathematical development.** This full-faithfulness and
+> uniqueness result is part of evidence `UCAT-YONEDA`. The conclusion uses
+> ordinary category univalence exactly where an isomorphism of representing
+> objects is turned into identity.
+
+## 13.4 Native Representable Families
+
+For a native category $Z$ and an object $x$, emdash has the Cat-valued
+fixed-source representable
+
+$$
+\operatorname{Rep}_Z(x)[y]
+:=\operatorname{Hom}_Z(x,y).
+$$
+
+Its target action is postcomposition. Its dependence on the represented
+source is contravariant: for $p:x\to y$, the transport
+
+$$
+\operatorname{Rep}_Z(y)\longrightarrow\operatorname{Rep}_Z(x)
+$$
+
+acts by
+
+$$
+q\longmapsto q\circ p=p^*(q).
+$$
+
+The full operation is a functor between directed families, so it retains
+action on cells between possible $q$'s.
+
+<!-- evidence:CAT-REPRESENTABLE -->
+
+> **Formal status — checked.** Evidence `CAT-REPRESENTABLE`.
+> `Rep_catd` owns the fixed-source family and
+> `Rep_transport_func` owns its upper-star source action.
+
+The outgoing-arrow category from Chapter 5 is the total category
+
+$$
+\operatorname{PathOut}_Z(x)
+=\sum_{y:Z}\operatorname{Hom}_Z(x,y).
+$$
+
+Its distinguished object $(x,\mathrm{id}_x)$ and its canonical arrow to every
+$(y,p)$ are built from the representable family. Arrow induction extends data
+from that reflexive outgoing arrow.
+
+This is Yoneda-shaped, but it is not literally the ordinary Yoneda lemma.
+Yoneda classifies natural transformations from a representable; the selected
+arrow-induction theorem eliminates a dependent motive over the total category
+of outgoing arrows. Both begin at an identity arrow because identities are
+the universal points of representables.
+
+## 13.5 From One Endpoint To Two
+
+Opposites and products make the two variances explicit. In the ordinary
+1-categorical setting, currying and uncurrying compare functors
+
+$$
+\mathcal A\times\mathcal B\longrightarrow\mathcal C
+$$
+
+with functors
+
+$$
+\mathcal A\longrightarrow[\mathcal B,\mathcal C].
+$$
+
+Applying this organization to composition shows that hom is functorial in
+both endpoints, contravariantly in its source and covariantly in its target.
+
+The two representable variances combine in the hom bifunctor
+
+$$
+\operatorname{Hom}_{X}(-,-):
+X^{\mathrm{op}}\times X\longrightarrow\mathsf{Cat}.
+$$
+
+Reindexing its two endpoints along functors $F:A\to X$ and $G:B\to X$
+gives
+
+$$
+\operatorname{Hom}_{X}(F{-},G{-}):
+A^{\mathrm{op}}\times B\longrightarrow\mathsf{Cat}.
+$$
+
+This two-variable view is the bridge from Yoneda to profunctors. It makes
+contravariance and covariance simultaneous, lets endpoint functors vary, and
+turns hom transposition for an adjunction into a comparison of profunctors.
+
+The price of the richer codomain is that ordinary elementwise proofs no longer
+automatically supply all higher naturality. The active development therefore
+selects shaped elements and explicit comparison maps before claiming a
+general coend-based composition.
+
+## 13.6 Cat-Valued Profunctors
 
 For categories `A` and `B`, a Cat-valued profunctor from `A`
 to `B` is a functorial family
@@ -56,7 +287,7 @@ This definition introduces no new primitive notion of naturality. A
 profunctor is a familiar Cat-valued functor on a product base, viewed through
 notation that makes its two variances visible.
 
-## 13.2 The Unit Hom Profunctor
+## 13.7 The Unit Hom Profunctor
 
 Every category `X` has a canonical profunctor
 
@@ -123,7 +354,7 @@ represented contravariantly by `F`. These are not assumed to be inverse
 profunctors. They are the two variance choices obtained from the same ambient
 hom.
 
-## 13.3 Reindexing Endpoints
+## 13.8 Reindexing Endpoints
 
 Let `P:A prof B`, $F:A'\to A$, and $G:B'\to B$.
 Endpoint reindexing is
@@ -164,7 +395,7 @@ separation between WalkingEnd and `BNat`. A readable model or pullback
 presentation does not become a definitional replacement for the object it
 explains.
 
-## 13.4 Representability As A Chosen Comparison
+## 13.9 Representability As A Chosen Comparison
 
 A profunctor `P:B prof J` is right-represented by a functor
 $L:J\to B$ when it is isomorphic, in the fixed-endpoint profunctor
@@ -196,7 +427,7 @@ presented as a chosen representation of a cone profunctor. The computational
 strength of that use depends on how much of the comparison is exposed by the
 consumer.
 
-## 13.5 Cells With Moving Endpoints
+## 13.10 Cells With Moving Endpoints
 
 Vertical maps keep endpoints fixed. Equipment-style cells allow endpoint
 functors to move as well. Given
@@ -234,7 +465,7 @@ composition of equipment cells. It supplies the consumer needed by the
 co-Yoneda calculation without pretending that all bicategorical coherence is
 already present.
 
-## 13.6 Tensor As A Selected Composite
+## 13.11 Tensor As A Selected Composite
 
 For
 
@@ -280,7 +511,7 @@ rules. The selected tensor can support tested cut-elimination interfaces
 without serving as evidence that this general construction has already been
 built.
 
-## 13.7 The Co-Yoneda Cut
+## 13.12 The Shaped Co-Yoneda Cut
 
 The unit profunctor should behave as a unit for tensor. The active interface
 supplies natural maps in both orientations:
@@ -339,7 +570,56 @@ with the analogous left-unit equation. This is not a separate law attached to
 every `r`; it is the off-diagonal action of the co-Yoneda transfor from
 Chapter 9.
 
-## 13.8 What This Says About Yoneda
+## 13.13 Adjunctions As Representable Hom Comparisons
+
+Chapter 12 characterized a right adjoint $G:B\to A$ to $F:A\to B$ by
+representations
+
+$$
+\operatorname{Hom}_B(F{-},b)
+\simeq
+\operatorname{Hom}_A({-},Gb).
+$$
+
+Yoneda explains both the representing object and its uniqueness. The
+profunctor formulation adds simultaneous naturality in the source probe and
+in $b$. For arbitrary $M:I\to A$ and $H:K\to B$, the active comparison is
+
+$$
+\operatorname{Hom}_B(FM,H)
+\simeq
+\operatorname{Hom}_A(M,GH).
+$$
+
+<!-- evidence:ADJ-HOM-PROF-COMPARISON -->
+
+> **Formal status — checked.** Evidence
+> `ADJ-HOM-PROF-COMPARISON`. The adjunction supplies this reindexable
+> `ProfComparison`; its push and pull operations have the generic
+> comparison beta/eta laws.
+
+Conversely, an ordinary pointwise family of such representations reconstructs
+a right adjoint only after the representing objects and comparisons have been
+made coherent in $b$. The active representation package records a chosen
+representing functor and ordinary isomorphism evidence in the profunctor
+category, but no general reverse constructor from that package to
+`Adjunction` is asserted.
+
+<!-- evidence:UCAT-ADJOINT-REPRESENTABILITY -->
+
+> **Formal status — mathematical development.** The ordinary reverse
+> representability theorem is part of
+> `UCAT-ADJOINT-REPRESENTABILITY`. Evidence
+> `PROF-REPRESENTATION-PACKAGE`, checked in Section 13.9, supplies the
+> native chosen representation interface on which a future reverse
+> construction could be based.
+
+This is the bridge to weighted universals. A weighted cone construction will
+produce another profunctor; a weighted limit is the functor that represents
+it. The same comparison beta/eta laws will eliminate the corresponding
+universal cuts.
+
+## 13.14 The Full Cat-Valued Yoneda Boundary
 
 The computations capture an essential Yoneda idea: represented hom data can
 be inserted as an identity-shaped cut and then eliminated. The existing
@@ -363,7 +643,7 @@ cell level. Those data have not been gathered into one active theorem.
 The checked beta equations remain valuable without that package. They are
 local computational theorems, not merely motivational analogies.
 
-## 13.9 The Coend And Bicategorical Boundary
+## 13.15 The Coend And Bicategorical Boundary
 
 To promote the tensor to a general profunctor composition, one would need:
 

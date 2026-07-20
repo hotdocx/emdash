@@ -68,7 +68,10 @@ versioned PDF under `../output/pdf/` and visual-review images under
 
 `documents.json` is shared by the browser loader, schema validator, and
 browser renderer. Each entry defines its safe filename and selectors, layout,
-check groups, generated status, and render budget.
+check groups, generated status, and render budget. Its `timeoutMs` is the
+authoritative page, navigation, and completed-pagination budget for both the
+console and PDF gates; increase that document-specific value only when a
+measured longer artifact requires it.
 
 To add a document:
 

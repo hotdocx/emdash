@@ -13,7 +13,7 @@ The source reference is revision
 repository. The detailed, machine-readable adaptation ledger is
 `book/references/third-party-sources.json`.
 
-## C.1 The rhetorical spine
+## C.1 The Rhetorical Spine
 
 The HoTT calculation proceeds through four questions:
 
@@ -43,7 +43,7 @@ point where the circle proof uses reversibility.
 
 The table is a dependency map, not a dictionary identifying the objects.
 
-## C.2 Where univalence moves
+## C.2 Where Univalence Moves
 
 In the circle proof, a family $\mathsf{Code}:S^1\to\mathsf{Type}$ must map the loop of
 `S¹` to a loop in the universe. Successor on the integers is an
@@ -71,7 +71,7 @@ The title of this book refers to a foundation containing both layers.
 > Chapter 8 are checked; a general metatheorem comparing all directed families
 > with HoTT fibrations is not claimed.
 
-## C.3 The generalized endpoint
+## C.3 The Generalized Endpoint
 
 Both proofs teach the same strategic lesson in different formal languages:
 when a statement about a fixed loop cannot be inducted on, vary its endpoint.
@@ -98,7 +98,7 @@ Only the separate one-dimensionality premise converts that cell into
 equality. Thus the directed proof factors the groupoidal conclusion into two
 conceptually independent steps: normalization and dimension.
 
-## C.4 What was not transferred
+## C.4 What Was Not Transferred
 
 The adaptation removes, rather than renames, the following ingredients:
 
@@ -123,7 +123,7 @@ It also adds ingredients absent from the circle proof in this form:
 These changes explain why a textual search-and-replace from
 `S¹/Int` to `W/Nat` would be mathematically misleading.
 
-## C.5 Stronger comparisons
+## C.5 Stronger Comparisons
 
 The carrier equivalence suggests two future constructions.
 
@@ -141,7 +141,7 @@ whether it concerns carriers, monoids, categories, or a universal property.
 > full categorical initiality, group completion, and the precise
 > `BInt`/circle bridge remain future work.
 
-## C.6 Attribution method
+## C.6 Attribution Method
 
 The subsection order and proof strategy are structural adaptations from the
 pinned HoTT sources. The prose in this edition is newly written. Each target,

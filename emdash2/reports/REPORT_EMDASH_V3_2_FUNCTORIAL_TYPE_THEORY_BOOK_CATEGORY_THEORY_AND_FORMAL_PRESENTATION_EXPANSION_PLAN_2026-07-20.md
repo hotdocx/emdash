@@ -8,7 +8,7 @@ Supersedes: no whole report; refines the post-B6 recommended next action in EMDA
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-book-category-theory-formal-presentation-review-2026-07-20
 Infinity-Codex-Decision-Responses: none
-Status: **ACTIVE - C0, C1, and C2 complete; C3 is the current phase**
+Status: **ACTIVE - C0 through C6 complete; C7 is the current phase**
 
 ## Executive Decision
 
@@ -973,7 +973,7 @@ Checkpoint:
 
 ### Phase C3 - Adapt categories through Yoneda
 
-State: **PROPOSED.**
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -994,9 +994,42 @@ Gate:
   status-labeled;
 - copied/adapted material passes the existing license/provenance gate.
 
+Checkpoint:
+
+- Chapters 10-13 now form the coherent HoTT 9.1-9.5 adaptation. Chapter 10
+  distinguishes native iterable `Cat` from ordinary precategories, univalent
+  categories, and strict categories, and separates object paths,
+  path-generated arrows, ordinary isomorphisms, carrier equivalences, and
+  omega-equivalence evidence. Chapter 11 develops ordinary natural
+  transformations beside native off-diagonal transfors and their higher
+  action. Chapter 12 organizes adjunctions, hom transposition,
+  representability, and the full ladder of equivalence notions. Chapter 13
+  proves ordinary Yoneda by encode-decode and then passes to the native
+  representable/profunctor interfaces and shaped co-Yoneda computation;
+- central checked routes are `EQUIV-ORDINARY-ISO-LIFT`,
+  `TRANSF-STRICT-NATURALITY`, `TRANSF-HORIZONTAL-CALCULUS`,
+  `ADJ-TRIANGLE-CUTS`, `ADJ-HOM-PROF-COMPARISON`, and `PROF-COYONEDA`.
+  Ordinary univalent category and Yoneda theorems are explicitly
+  **mathematical development**. Full Cat-valued Yoneda/full faithfulness
+  remains the `YONEDA-FULLY-FAITHFUL` research boundary under `FTTX-S6`; the
+  chapter does not promote the shaped theorem into a general coend result;
+- nine additional evidence entries bring the register to 90 fully cited
+  claims. All 32 sources, 681 strict-KaTeX math spans, pinned HoTT provenance,
+  the expansion contract, evidence coverage, and the complete local CI gate
+  pass; CI checked 39 Lambdapi files/examples and all 21 infrastructure tests;
+- the `0.2.0-dev` release is now a 140-page PDF with 15 embedded fonts and
+  SHA-256
+  `f505c67069c0720795b0f29e9eac21dd1bcee88f68546aa5dfb8c41ad25fb7e0`.
+  Every page of Chapters 10-13 (pages 74-100) passed contact-sheet review,
+  with focused inspection of tables and displayed calculations. The review
+  found and repaired one Chapter 11 orphan and one Chapter 12 status-note page
+  split before the final release;
+- no Lambdapi definition, rewrite, unification rule, check, or module boundary
+  changed during C3.
+
 ### Phase C4 - Adapt strictness, dagger structure, SIP, and Rezk completion
 
-State: **PROPOSED.**
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -1019,9 +1052,46 @@ Gate:
 - any implementation prerequisites are entered in the side-task ledger rather
   than improvised in book code.
 
+Checkpoint:
+
+- Chapter 10 and `book/expansion.json` now state the exact HoTT definition:
+  a strict category is a precategory whose object type is a set and need not
+  be univalent. Chapter 14 separates that object-set condition from native
+  `IsNCat` height, strict `tapp1` naturality cuts, and runtime reduction;
+  develops ordinary strict/gaunt and dagger/unitary categories; and uses the
+  checked `Op_cat`, `Op_func`, `Op_transf`, and `Op_adjunction`
+  calculus as its central duality theorem;
+- Chapter 15 gives the ordinary structure-over-carrier schema and proof of the
+  structure identity principle, identifies the checked evidence-property,
+  truncated-universe, ordinary-isomorphism-lift, and finite-height footholds,
+  and specifies the additional directed structure/equivalence action a native
+  theorem would require. It presents Rezk completion by its functor-category
+  mapping property, develops both the Yoneda-image and 1-truncated HIT
+  constructions, and records the converse characterization of saturated
+  categories by inversion of weak equivalences;
+- the HIT discussion compares proof architectures without conflating
+  constructions: Rezk adds invertible object paths for old isomorphisms,
+  whereas WalkingEnd has a checked noninvertible directed generator and
+  computes its based hom as Nat. The native SIP, dagger, and Rezk interfaces
+  are explicit research specifications under `FTTX-S9` and `FTTX-S12`,
+  not invented checked owners;
+- seven new mathematical-development/research-boundary entries bring the
+  evidence register to 97 fully cited claims. All 32 sources, 818
+  strict-KaTeX spans, pinned HoTT provenance, expansion contracts, and full CI
+  pass. CI checked 39 Lambdapi files/examples in 202.814 seconds and all 21
+  infrastructure tests;
+- the `0.2.0-dev` release is a 152-page tagged PDF with 15 embedded fonts
+  and SHA-256
+  `efdc7ca43aa9578e3121561092532dfac0ce07e4cd05158b4068a75f3ad5faee`.
+  Every page of Chapters 14-15 (pages 101-113) passed contact-sheet review
+  and focused inspection. The review found and repaired one orphaned
+  Yoneda-image heading before the final release;
+- no Lambdapi definition, rewrite, unification rule, check, or module boundary
+  changed during C4.
+
 ### Phase C5 - Write weighted universals, duality, and join
 
-State: **PROPOSED.**
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -1045,9 +1115,48 @@ Gate:
   falsely claimed to be an implemented collage;
 - every checked central theorem cites its active owner and diagnostic.
 
+Checkpoint:
+
+- Chapter 16 now develops parameterized weights, the cone profunctor, the
+  selected tensor and its two residuals, computational representability,
+  universal push/pull beta and eta, conical limits, conjoint-weighted right
+  Kan extensions, adjunction mates, and the complete three-comparison proof
+  that right adjoints preserve selected weighted limits. Chapter 17 derives
+  the opposite-dual cocone and colimit theory, companion-weighted left Kan
+  extensions, and left-adjoint preservation before developing join through
+  its internally natural cross cell and nondependent recursor;
+- side task `FTTX-S14` is complete. Four permanent diagnostics establish the
+  exact variance-correct classifier instances: terminal weights
+  `1 prof J` and `J prof 1` for conical limits and colimits, the conjoint
+  `J' prof J` for right Kan, and the companion `J prof J'` for left Kan.
+  The book separates those formal-consequence substitutions from the standard
+  cone/cocone and pointwise Kan formulas, which remain mathematical
+  development until semantic end/coend owners exist;
+- the join recursor is connected globally to the universal-construction
+  spine: `1 star J` supplies cone-shaped cross data and `J star 1` supplies
+  cocone-shaped cross data, while the general collage mapping property is
+  specified as the `FTTX-S13` research boundary. The chapter does not claim
+  an object/hom decomposition, mapping-category equivalence, opposite
+  comparison, or dependent eliminator for the primitive join;
+- seven new checked/formal-consequence/mathematical-development/research-
+  boundary entries bring the evidence register to 104 fully cited claims.
+  The permanent specialization assertions regenerate the reviewer catalog;
+  no Lambdapi definition, rewrite, unification rule, or module boundary
+  changed;
+- growth to 170 pages exposed a fixed 30-second PDF-pagination cap. The
+  console and export gates now honor each document's existing registry-owned
+  `timeoutMs`, documented in `print/README.md`, and the release completes
+  without weakening its bounded execution or browser gates;
+- all 32 sources, 1,038 strict-KaTeX spans, pinned provenance, expansion
+  contracts, and full CI pass. CI checked 39 Lambdapi files/examples in
+  216.771 seconds and all 21 infrastructure tests. The tagged `0.2.0-dev`
+  PDF has 170 US-Letter pages, 15 embedded fonts, and SHA-256
+  `ec6e4a5379bf00fe32e309273d1256e7c4199c0bac936e583b66f66eb54d2e7d`;
+  every page of Chapters 16-17 (pages 114-131) passed visual inspection.
+
 ### Phase C6 - Add the formal-presentation appendix and elaboration boundary
 
-State: **PROPOSED.**
+State: **COMPLETE (2026-07-20).**
 
 Deliverables:
 
@@ -1068,9 +1177,40 @@ Gate:
   distinct;
 - the parent TypeScript repository remains unchanged.
 
+Checkpoint:
+
+- Appendix G now supplies the complete seven-part formal presentation. It
+  orders the computational categorical kernel before the canonical
+  mathematical surface and optional future elaborator, while keeping external
+  semantic models as a distinct fourth layer. It adapts all four pinned HoTT
+  Appendix A units without treating native `Cat` as a post-hoc semantics for
+  an unspecified traditional syntax;
+- the appendix separates external judgments from decoded classifiers and
+  distinguishes definitional reduction, proof-time unification, internal
+  equality, directed cells, carrier equivalence, and categorical equivalence.
+  Its rule ledger applies formation/introduction/elimination/computation/
+  uniqueness/action to equality, categories, transfors, Sigma/Pi,
+  WalkingEnd, adjunctions, and weighted representability;
+- concise schema links in Chapters 1, 5, 6, 8, 9, and 16 connect the formal
+  presentation to the prose without turning those chapters into a source-code
+  catalogue. The Došen product/projection sentence is explicitly stated in an
+  arbitrary category with chosen products; the Cat specialization remains
+  implementation evidence only;
+- three new evidence records bring the register to 107 fully cited claims.
+  All 32 sources and 1,177 strict-KaTeX spans pass the source, typography,
+  provenance, architecture, and evidence gates. The `0.2.0-dev` C6 snapshot
+  is a tagged 188-page US-Letter PDF with 16 embedded fonts and SHA-256
+  `759095f474819a063741a4be6424b873ad6cff867001e496224acc476f4d46d5`;
+  every Appendix G page and all six affected chapter pages passed visual
+  review;
+- the parent TypeScript parser/elaboration prototype remains unchanged,
+  read-only, non-authoritative, and absent from the build graph. No Lambdapi
+  definition, rewrite, unification rule, check, or module boundary changed in
+  C6.
+
 ### Phase C7 - Global editorial integration and expanded-edition release
 
-State: **PROPOSED.**
+State: **CURRENT.**
 
 Deliverables:
 
@@ -1215,26 +1355,24 @@ regression evidence, and mathematical metatheorems.
 | --- | --- | --- | --- |
 | `FTTX-S1` | Implement semantic book-typography lint and PDF sentinels | complete, C0 | repaired `0.1.1-dev` release baseline recorded above |
 | `FTTX-S2` | Complete the HoTT Chapter 9 adaptation/concordance ledger | complete, C1 | all nine sections have pinned labels and manifest targets |
-| `FTTX-S3` | Complete the HoTT Appendix A adaptation/concordance ledger | ledger complete, C1; prose remains C6 | all four sections are mapped to Appendix G before adaptation |
+| `FTTX-S3` | Complete the HoTT Appendix A adaptation/concordance ledger | complete, C6 | all four pinned sections are adapted in Appendix G with exact provenance |
 | `FTTX-S4` | Probe and package the fully typed product/projection Došen benchmark | complete, C2; general `K` mathematical development, Cat-specialized formal consequence | owner-aligned legs are permanent diagnostics; literal raw projection bridge remains unpromoted |
 | `FTTX-S5` | Ratify native `Cat` versus precategory/category/strict-category translation | complete, C1 | enforced in `book/expansion.json` and stated in Chapter 10 |
-| `FTTX-S6` | Package a full Cat-valued Yoneda/full-faithfulness theorem | deferred formal extension | promote only when Chapter 13 needs a checked theorem stronger than shaped co-Yoneda |
-| `FTTX-S7` | Develop semantic coend/end and tensor coherence | deferred research task | promote for a general rather than shaped co-Yoneda theorem |
-| `FTTX-S8` | Develop general dependent adjunctions `Sigma_F -| F^* -| Pi_F` | deferred research task | promote for dependent Kan/limit chapters |
-| `FTTX-S9` | Design generic structure identity and Rezk completion interfaces | deferred research task | after Chapters 10 and 15 expose exact desired statements |
-| `FTTX-S10` | Write a future surface-to-Lambdapi elaborator RFC | deferred; parent repository out of scope | only after the canonical surface and kernel mapping stabilize |
+| `FTTX-S6` | Package a full Cat-valued Yoneda/full-faithfulness theorem | deferred formal extension; not required by C3 | shaped co-Yoneda is sufficient for the current chapter; promote only for a concrete stronger checked consumer |
+| `FTTX-S7` | Develop semantic coend/end and tensor coherence | deferred research task; C5 semantic specification complete | promote for a general rather than shaped co-Yoneda theorem |
+| `FTTX-S8` | Develop general dependent adjunctions `Sigma_F -| F^* -| Pi_F` | deferred research task; C5 book boundary complete | promote for a checked dependent Kan/limit consumer |
+| `FTTX-S9` | Design generic structure identity and Rezk completion interfaces | deferred research task; C4 book specification complete | Chapter 15 states the prospective signature, equivalence choice, saturation predicate, unit, local action, and higher mapping property; implementation requires a separately authorized formal task |
+| `FTTX-S10` | Write a future surface-to-Lambdapi elaborator RFC | deferred; C6 boundary complete and parent repository out of scope | only after the canonical surface and kernel mapping stabilize |
 | `FTTX-S11` | Verify Došen bibliography, quotation limits, and adaptation/license provenance | complete, C2; reference-only use | DOI and all-rights-reserved no-copy policy recorded in bibliography, credits, and provenance |
-| `FTTX-S12` | Design a native dagger/unitary category interface | deferred research task | only if Chapter 14 needs checked content beyond free-form theory |
-| `FTTX-S13` | Develop join-as-collage semantics and dependent elimination | deferred research task | promote after the primitive join chapter fixes the target universal property |
-| `FTTX-S14` | Audit ordinary limits and Kan extensions as special cases of the selected weighted interface | proposed mathematical task | during C5 outline, before asserting special-case theorems |
+| `FTTX-S12` | Design a native dagger/unitary category interface | deferred research task; C4 book specification complete | Chapter 14 states the functor, object, involution, higher-action, unitary, and univalence requirements; checked promotion requires a concrete consumer and separately authorized formal task |
+| `FTTX-S13` | Develop join-as-collage semantics and dependent elimination | deferred research task; C5 target universal property specified | promote under separate authorization for hom decomposition, mapping equivalence, and dependent elimination |
+| `FTTX-S14` | Audit ordinary limits and Kan extensions as special cases of the selected weighted interface | complete, C5; interface substitutions formal consequence, semantic formulas mathematical development | four permanent variance diagnostics cover terminal, conjoint, and companion weights without claiming missing end/coend semantics |
 
 ## Recommended Next Action
 
-Proceed with Phase C3. Expand Chapters 10-13 through the pinned HoTT 9.1-9.5
-concordance while preserving the native-`Cat` versus univalent
-1-category translation: categories and precategories, functors and transfors,
-adjunctions and equivalences, then Yoneda and representability. Reuse the C2
-cut audit in every central theorem, retain Chapter 13's checked shaped
-co-Yoneda theorem as the computational culmination, and leave the full
-Cat-valued Yoneda/full-faithfulness package under deferred side task
-`FTTX-S6` unless the prose exposes a concrete stronger consumer.
+Proceed with Phase C7. Audit dependencies, forward references, central theorem
+and status notes across all seventeen chapters; complete the reading paths,
+glossary, concept index, status matrix, bibliography, credits, and generated
+back matter; remove stale phase language and repetition; then perform
+page-level visual QA, full repository CI, and two independent release builds
+with an identical recorded checksum.

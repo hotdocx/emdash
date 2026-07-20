@@ -68,7 +68,7 @@ different route.
 > equality-valued facade. A monoid or hom-category equivalence is not being
 > asserted here.
 
-## Measuring an abstract arrow
+## Measuring An Abstract Arrow
 
 How can an opaque arrow be assigned a number? We construct a Cat-valued family
 
@@ -119,7 +119,7 @@ $$
 
 This family of higher arrows is the **directed spiral**.
 
-## Normalize before comparing
+## Normalize Before Comparing
 
 Applying the displayed decoder’s arrow action to
 $p:* \to x$ at zero produces
@@ -173,7 +173,7 @@ These two equations package the carrier equivalence.
 > `WE-ENCODE-POWER`. Direction is retained until the first of these
 > equalities is extracted.
 
-## Why the answer is not the integers
+## Why The Answer Is Not The Integers
 
 For the circle, a loop is an equality path and therefore has an inverse. Its
 powers are indexed by integers. Here `ell` is a directed arrow.
@@ -198,7 +198,7 @@ successor to equal zero. Hence no right inverse exists, and in particular
 The missing negative integers are therefore not an incomplete case of the
 proof. They are the numerical trace of directionality.
 
-## The road to the proof
+## The Road To The Proof
 
 The next seven chapters unpack the interfaces used above.
 
@@ -217,6 +217,14 @@ The next seven chapters unpack the interfaces used above.
   in a discrete hom-category yields equality.
 - [Chapter 8](#chapter-8) returns to every step of the construction, including
   the spiral, the two inverse laws, and the noninvertibility consequences.
+
+The second spiral asks what the same computational discipline contributes to
+category theory. [Chapter 9](#chapter-9) isolates its cut calculus; Chapters
+[10](#chapter-10)–[15](#chapter-15) develop categorical identity, functor
+categories, adjunctions, Yoneda, duality, and saturation; and Chapters
+[16](#chapter-16)–[17](#chapter-17) organize limits, colimits, and join by
+representability and opposite duality. [Appendix G](#appendix-formal-presentation)
+collects the formal rule schemas and states the metatheoretic boundary.
 
 The larger aim is not merely to calculate one hom. It is to show how a type
 theory can let groupoidal equality and noninvertible arrows coexist, interact,

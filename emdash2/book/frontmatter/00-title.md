@@ -4,8 +4,9 @@
 
 This is a working edition of *Functorial Type Theory: Univalent Foundations
 for Mathematics*. The WalkingEnd/Nat encode-decode argument remains its
-mathematical centre; the expanded category-theory and formal-presentation
-spine is being written around that checked calculation. Chapter details,
+mathematical centre. Around it, the edition develops a second spiral through
+cut elimination, category theory, weighted universal constructions, directed
+duality, and a categorical-kernel-first formal presentation. Chapter details,
 notation, and cross-references may still change. The active implementation
 remains authoritative whenever prose and code disagree.
 

@@ -277,7 +277,7 @@ async function runDocument(
   await page.goto(url, { waitUntil: 'domcontentloaded' });
   const pageCount = await waitForCompletedPagination(
     page,
-    Math.min(document.timeoutMs, 30000)
+    document.timeoutMs
   );
 
   const rawMarkdownTables = await findRenderedRawMarkdownTables(page);
@@ -363,8 +363,8 @@ async function main() {
 
     for (const document of documents) {
       const page = await browser.newPage();
-      page.setDefaultTimeout(Math.min(document.timeoutMs, 30000));
-      page.setDefaultNavigationTimeout(Math.min(document.timeoutMs, 30000));
+      page.setDefaultTimeout(document.timeoutMs);
+      page.setDefaultNavigationTimeout(document.timeoutMs);
       try {
         await withTimeout(
           runDocument(

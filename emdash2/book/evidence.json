@@ -1306,6 +1306,22 @@
         }
       ]
     },
+    "TRANSF-HORIZONTAL-CALCULUS": {
+      "status": "checked",
+      "statement": "The product-composition action supplies an iterable horizontal composite of a pair of ordinary transfors, with checked point, full off-diagonal, and capped off-diagonal projections.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "comp_prod_fapp1_fapp0"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "comp_prod_fapp1_fapp0"
+        }
+      ]
+    },
     "TRANSFD-FIBRE-COMPONENTS": {
       "status": "checked",
       "statement": "A natural family transformation between displayed functors has a transformation in every fibre and a point component at every fibre object, with identity and vertical composition inherited from the generic transfor calculus.",
@@ -1548,6 +1564,46 @@
         }
       ]
     },
+    "PROF-CLOSED-CALCULUS": {
+      "status": "checked",
+      "statement": "The two selected profunctor residuals expose fixed-endpoint evaluation and lambda operations inverse by runtime beta and eta, without asserting semantic end formulas for their opaque objects.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_imply_cov"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_eval_cov_map"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_lambda_cov_map"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_imply_con"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_eval_con_map"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Prof_lambda_con_map"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Prof_lambda_cov_map"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Prof_lambda_con_map"
+        }
+      ]
+    },
     "PROF-COYONEDA": {
       "status": "checked",
       "statement": "Tensoring on either side with the unit profunctor has a natural co-Yoneda map to the original profunctor, with fixed shaped-element beta and naturality-fusion computations.",
@@ -1592,6 +1648,90 @@
       "owners": [],
       "reviewers": []
     },
+    "UCAT-IDENTITY-ISOMORPHISM": {
+      "status": "mathematical-development",
+      "statement": "In the ordinary set-valued-hom specialization, a category is a precategory whose identity-to-isomorphism map is an equivalence; its object type is consequently a 1-type.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-FUNCTOR-CATEGORY": {
+      "status": "mathematical-development",
+      "statement": "An ordinary natural transformation is invertible exactly when its components are, and for a precategory A and univalent category B the functor precategory from A to B is univalent, with functor identity corresponding to natural isomorphism.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-ADJOINT-REPRESENTABILITY": {
+      "status": "mathematical-development",
+      "statement": "In ordinary univalent 1-category theory, right adjoints are equivalently coherent representations of the contravariant hom functors obtained by fixing the target of the left adjoint.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-ADJOINT-UNIQUENESS": {
+      "status": "mathematical-development",
+      "statement": "For an ordinary functor whose source is a univalent category, right-adjoint structures are unique in the appropriate identity sense and existence of a right adjoint is a mere proposition.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-EQUIVALENCE-CRITERIA": {
+      "status": "mathematical-development",
+      "statement": "Ordinary adjoint equivalences correspond to fully faithful and split essentially surjective functors, and between univalent categories mere essential surjectivity suffices.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-CATEGORY-IDENTITY": {
+      "status": "mathematical-development",
+      "statement": "Identity of ordinary precategories corresponds to isomorphism of precategories, and for univalent categories this agrees with categorical equivalence; the resulting type of categories is a 2-type.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-YONEDA": {
+      "status": "mathematical-development",
+      "statement": "The ordinary set-valued Yoneda evaluation map is an equivalence, making the Yoneda embedding fully faithful and representing objects unique up to isomorphism, hence up to identity in a univalent category.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-STRICT-CATEGORY": {
+      "status": "mathematical-development",
+      "statement": "An ordinary HoTT strict category is a precategory whose object type is a set; it need not be univalent, and an ordinary univalent category is strict exactly when it is gaunt.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-DAGGER-CATEGORY": {
+      "status": "mathematical-development",
+      "statement": "An ordinary dagger precategory has a chosen identity-on-objects contravariant involution; unitary arrows use the dagger as inverse, and dagger univalence identifies object identity with unitary isomorphism.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-STRUCTURE-IDENTITY": {
+      "status": "mathematical-development",
+      "statement": "For a standard proposition-valued notion of structure over an ordinary univalent category, the precategory of structured objects and structure-preserving arrows is itself univalent.",
+      "owners": [],
+      "reviewers": []
+    },
+    "UCAT-REZK-COMPLETION": {
+      "status": "mathematical-development",
+      "statement": "Every ordinary precategory admits a fully faithful and essentially surjective map into a univalent category, constructible by a Yoneda image or a 1-truncated HIT; univalent categories are exactly the targets that invert all such weak equivalences by precomposition.",
+      "owners": [],
+      "reviewers": []
+    },
+    "NATIVE-DAGGER-INTERFACE": {
+      "status": "research-boundary",
+      "statement": "The active opposite operation does not provide a chosen identity-on-objects involutive self-duality, coherent higher dagger action, a unitary classifier, or native dagger univalence.",
+      "owners": [],
+      "reviewers": []
+    },
+    "NATIVE-STRUCTURE-IDENTITY": {
+      "status": "research-boundary",
+      "statement": "A generic native structure identity theorem requires a directed structure signature, a higher structure-preserving equivalence classifier, qualified base univalence, and coherent off-diagonal and next-hom action.",
+      "owners": [],
+      "reviewers": []
+    },
+    "NATIVE-REZK-COMPLETION": {
+      "status": "research-boundary",
+      "statement": "No selected native saturation predicate, Rezk completion object, unit weak equivalence, or iterable higher mapping property is currently implemented.",
+      "owners": [],
+      "reviewers": []
+    },
     "ADJ-TRIANGLE-CUTS": {
       "status": "checked",
       "statement": "An indexed adjunction exposes stable unit and counit observations whose two component-level triangle cuts reduce to the corresponding functorial composites.",
@@ -1619,6 +1759,102 @@
           "contains": "Indexed adjunction triangles, opposite, and operation-trust boundary"
         }
       ]
+    },
+    "ADJ-HOM-PROF-COMPARISON": {
+      "status": "checked",
+      "statement": "An indexed adjunction supplies a reindexable profunctor comparison between Hom_B(LM,F) and Hom_A(M,RF), whose push and pull inherit the generic comparison beta and eta laws.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Adjunction_hom_prof_comparison"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Adjunction_hom_prof_comparison_along"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Adjunction_hom_prof_comparison_along"
+        }
+      ]
+    },
+    "WEIGHTED-LIMIT-REPRESENTABILITY": {
+      "status": "checked",
+      "statement": "A parameterized weighted-cone profunctor is formed by the selected covariant residual, and its computational representation by a functor exposes inverse push and pull operations on every reindexed incoming profunctor map.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "WeightedCone_prof"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsWeightedLimit_cov_iso"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsWeightedLimit_cov_comp"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "weighted_limit_cov_push"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "weighted_limit_cov_pull"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Computational profunctor comparisons and weighted representability"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "weighted_limit_cov_pull"
+        }
+      ]
+    },
+    "WEIGHTED-LIMIT-SPECIALIZATIONS": {
+      "status": "formal-consequence",
+      "statement": "Terminal weights and conjoint weights inhabit the selected weighted-limit classifier, so the general right-adjoint preservation construction specializes to the corresponding conical-limit and right-Kan interfaces; this does not assert their missing semantic end identifications.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Terminal_prof"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Conjoint_prof"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "IsWeightedLimit_cov_comp"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "right_adjoint_preserves_weighted_limit_cov_comp"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Weighted limit and colimit specialization typing"
+        }
+      ]
+    },
+    "WEIGHTED-END-KAN-SEMANTICS": {
+      "status": "mathematical-development",
+      "statement": "With semantic ends and coends, terminal weights recover ordinary cone and cocone categories while conjoint and companion weights recover the standard pointwise right and left Kan extension formulas.",
+      "owners": [],
+      "reviewers": []
+    },
+    "DEPENDENT-ADJUNCTIONS": {
+      "status": "research-boundary",
+      "statement": "A general dependent Sigma-change-of-base-Pi adjunction chain requires base-arrow action, off-diagonal and next-hom coherence, and Beck-Chevalley comparisons beyond the current Sigma and Pi family interfaces.",
+      "owners": [],
+      "reviewers": []
     },
     "OP-DUALITY": {
       "status": "checked",
@@ -1688,6 +1924,34 @@
         }
       ]
     },
+    "WEIGHTED-COLIMIT-SPECIALIZATIONS": {
+      "status": "formal-consequence",
+      "statement": "Terminal weights and companion weights inhabit the selected opposite-defined weighted-colimit classifier, so left-adjoint preservation specializes to the corresponding conical-colimit and left-Kan interfaces without supplying semantic coend identifications.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Terminal_prof"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Companion_prof"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "WeightedColimit_con"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "left_adjoint_preserves_weighted_colimit_con"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Weighted limit and colimit specialization typing"
+        }
+      ]
+    },
     "JOIN-RECURSOR": {
       "status": "checked",
       "statement": "The primitive directed join has two inclusion functors, an internally natural cross cell, and a nondependent recursor with beta computation on both inclusions and the cross-cell datum.",
@@ -1715,6 +1979,60 @@
           "symbol": "join_elim_cross_transf"
         }
       ]
+    },
+    "JOIN-COLLAGE-BOUNDARY": {
+      "status": "research-boundary",
+      "statement": "The join recursor has the input shape of the collage of the terminal profunctor, but no object or hom decomposition, mapping-category equivalence, opposite comparison, or dependent collage eliminator is active.",
+      "owners": [],
+      "reviewers": []
+    },
+    "FORMAL-KERNEL-PRESENTATION": {
+      "status": "checked",
+      "statement": "The active v3.2 modules expose categories, iterated homs, functors, transfors, and directed families through explicit classifiers and full or capped application owners, with executable assertions checking representative typing and computation.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Hom_cat"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "fapp1_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "tapp1_func"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Catd"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "fapp1_fapp0"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "tapp1_fapp0"
+        }
+      ]
+    },
+    "FORMAL-ELABORATION-BOUNDARY": {
+      "status": "research-boundary",
+      "statement": "The canonical mathematical surface has no current production parser and end-to-end compiler to the active Lambdapi owners; the parent TypeScript prototype is read-only feasibility evidence and is absent from the book build graph.",
+      "owners": [],
+      "reviewers": []
+    },
+    "FORMAL-METATHEORY-BOUNDARY": {
+      "status": "research-boundary",
+      "statement": "Local source acceptance, diagnostics, warning inventories, and model examples do not establish global confluence, strong normalization, canonicity, decidability, consistency, or semantic soundness for the whole emdash rewrite and unification theory.",
+      "owners": [],
+      "reviewers": []
     },
     "EH-COMMUTATIVITY": {
       "status": "checked",

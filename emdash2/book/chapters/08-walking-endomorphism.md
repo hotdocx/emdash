@@ -38,6 +38,14 @@ Chapters 1–7 develop these notions. This chapter uses them as a compact
 working language and returns to implementation names only in formal-status
 notes.
 
+The proof also follows the formal rule ledger of
+[Appendix G.4](#appendix-formal-presentation-g4). The WalkingEnd constructors
+and contextual eliminator supply formation, introduction, elimination, and
+beta computation; the code family and spiral supply the missing action and
+coherence; one-dimensionality is used only afterward. Full initiality is the
+uniqueness clause and remains separate from the checked encode–decode
+calculation.
+
 ## 8.1 The Based Endomorphisms Of The Walking Endomorphism
 
 <!-- evidence:WE-HOM-NAT-CARRIER -->

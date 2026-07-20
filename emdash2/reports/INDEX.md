@@ -58,10 +58,42 @@ implementation plans, and historical decisions.
   evidence routes. C2 completed the four-level Došen cut calculus, all ten
   typed examples, the general-`K` versus Cat-specialized product distinction,
   reference-only Došen provenance, and the owner-aligned product probe without
-  adding a broad product rule. The register now has 81 fully cited claims and
-  full CI passes. The 32-source `0.2.0-dev` PDF is 122 pages (SHA-256
-  `ec3764236a3c39f70d7895962e8dff5248f8fbbf59d3b4ebc35af9bafa44247b`);
-  C3, the coherent HoTT 9.1-9.5 adaptation through Yoneda, is current.
+  adding a broad product rule. C3 completes the coherent HoTT 9.1-9.5
+  adaptation: native and ordinary category notions, functors and transfors,
+  adjunctions and the equivalence ladder, ordinary Yoneda, native
+  representability, profunctors, and shaped co-Yoneda. The register has 90
+  fully cited claims; all 681 strict-KaTeX spans and full CI pass. The
+  32-source `0.2.0-dev` PDF is 140 pages with SHA-256
+  `f505c67069c0720795b0f29e9eac21dd1bcee88f68546aa5dfb8c41ad25fb7e0`.
+  C4 completes the HoTT 9.6-9.9 adaptation: the corrected ordinary strict
+  category definition, three-way native strictness separation, dagger and
+  unitary categories, checked opposite duality, the ordinary structure
+  identity proof, checked native footholds, both Rezk-completion
+  constructions, and exact native SIP/dagger/Rezk research specifications.
+  The register has 97 fully cited claims; all 818 strict-KaTeX spans and full
+  CI pass. The current 152-page PDF has SHA-256
+  `efdc7ca43aa9578e3121561092532dfac0ce07e4cd05158b4068a75f3ad5faee`.
+  C5 completes weighted universals, opposite-dual colimits, and directed
+  join. Chapters 16-17 derive cone/cocone classifiers from the selected
+  residuals, prove preservation through adjunction mates and opposite
+  duality, audit terminal/conjoint/companion specializations, and relate the
+  join recursor to the terminal-collage input shape without claiming collage
+  semantics. Four permanent variance diagnostics and 104 fully cited claims
+  pass full CI; all 1,038 strict-KaTeX spans render. The current tagged
+  170-page PDF has SHA-256
+  `ec6e4a5379bf00fe32e309273d1256e7c4199c0bac936e583b66f66eb54d2e7d`.
+  C6 completes the categorical-kernel-first formal presentation and
+  elaboration boundary. Appendix G now adapts all four pinned HoTT Appendix A
+  units, separates six equality/comparison modes, and gives rule schemas for
+  equality, iterated categories, transfors, dependent totals/sections,
+  WalkingEnd, adjunctions, and weighted representability. Six chapter
+  cross-references and three new evidence records bring the register to 107
+  fully cited claims; all 1,177 strict-KaTeX spans render. The parent
+  TypeScript prototype remains unchanged and outside the build. The C6
+  188-page PDF has 16 embedded fonts and SHA-256
+  `759095f474819a063741a4be6424b873ad6cff867001e496224acc476f4d46d5`.
+  C7 global editorial integration and deterministic expanded-edition release
+  is current.
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
   active long-running architecture and implementation plan for the new book
   *Functorial Type Theory: Univalent Foundations for Mathematics*. It selects

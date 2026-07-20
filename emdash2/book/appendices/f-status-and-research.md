@@ -6,23 +6,32 @@ This appendix summarizes the boundary of the expanded development edition.
 The generated [evidence register](#appendix-evidence) remains the detailed
 claim-by-claim authority.
 
-## F.1 Status matrix
+## F.1 Status Matrix
 
 | Area | Checked nucleus used by the book | Explicit boundary |
 | --- | --- | --- |
 | Equality-local type theory | Equality induction, path action, Sigma/Pi path interfaces, elementary inductives | No claim of a complete standalone HoTT implementation |
 | Directed categories | Iterated homs, identities, composition, functors, transfors, opposites, products | No complete weak omega-category metatheory or model theorem |
 | Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action | Whole-square laxity facade remains deferred where it would duplicate the internal owner |
+| Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts | No unrestricted runtime associativity rewrite or claim that all higher coherence is judgmental |
 | Equivalence and univalence | `TypeEquiv`, groupoid univalence, truncated-universe univalence, native recursive omega-equivalence facade and one-way hom action | No full general object-equality/ordinary-isomorphism equivalence for arbitrary categories |
 | Induction | Nat and equality induction, fixed/varying-source `PathOut` induction, composition benchmark | No general equivalence with homotopy-initial categorical algebras |
 | Directed HITs | One opaque WalkingEnd signature, contextual eliminator, section and recursor specializations | No general directed-HIT signature compiler or arbitrary cell-complex schema |
 | Truncation and height | Recursive truncation properties and closure, evidence-property, finite `IsNCat` object truncation | No general truncation reflector or arbitrary truncation HIT |
 | WalkingEnd calculation | Code, encode, power, spiral, contextual decoder, normalization cell/path, two inverse laws, carrier equivalence and noninvertibility results | No packaged monoid isomorphism, reverse `BNat` functor, full hom-category equivalence, or initiality theorem |
 | Higher groupoidal shadow | Selected Eckmann–Hilton commutativity slice | No claim that all directed structure is groupoidal |
-| Profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Yoneda equivalence, or profunctor bicategory |
-| Production artifact | Manifest assembly, provenance/evidence checks, local assets, bounded browser validation, deterministic PDF command | Publication editing and external peer review remain future release work |
+| Ordinary categorical specialization | Precategories, univalent categories, strict categories, functors, natural transformations, and ordinary Yoneda developed over the native vocabulary | These readable one-categorical theorems are mathematical development, not definitions of native `Cat` |
+| Adjunctions and equivalences | Triangle cuts and hom-profunctor comparison; one-way lift from ordinary isomorphism to native evidence | No checked native fully-faithful/essentially-surjective characterization or general adjointification package |
+| Yoneda and profunctors | Cat-valued profunctors, endpoint reindexing, representables, shaped cells, fixed-middle tensor, co-Yoneda beta/fusion | No general coend semantics, tensor associativity package, full Cat-valued Yoneda equivalence, or profunctor bicategory |
+| Opposite, duality, and dagger | Opposite category action and selected opposite-duality comparisons | Dagger, unitary structure, and dagger univalence are mathematical development pending a native involutive interface |
+| Structure identity and saturation | Truncation/evidence-property footholds and ordinary-isomorphism lift | Generic native structure identity and Rezk completion, including their higher universal properties, are research boundaries |
+| Weighted limits and Kan interfaces | Weighted representability, beta/eta comparison, right-adjoint preservation, terminal/conjoint specializations | Standard end formulas, pointwise Kan semantics, existence, and general dependent adjunctions are not globally packaged |
+| Weighted colimits and join | Opposite-dual colimit preservation, terminal/companion specializations, primitive join recursor and three beta observations | General coend semantics and join-as-collage mapping, hom-decomposition, opposite, and dependent-elimination theorems remain open |
+| Formal presentation | Checked categorical owners and representative rule families; explicit mathematical-to-Lambdapi correspondence | No complete surface parser/compiler and no claim that readable notation is a second kernel |
+| Metatheory and models | Bounded typechecking, subject-reduction checks performed by Lambdapi, focused diagnostics, and the concrete BNat model | No global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness theorem for the full combined calculus |
+| Production artifact | Manifest assembly, provenance/evidence checks, local assets, bounded browser validation, and deterministic PDF export | External mathematical peer review and a non-draft public edition remain future release work |
 
-## F.2 Near-term formal strengthening
+## F.2 Near-Term Formal Strengthening
 
 The most direct strengthening of Theorem 8.1 is to package composition and
 addition compatibility. Its proof can use the checked power recursion, Nat
@@ -38,7 +47,7 @@ Full initiality is a further layer. It asks for a category of endomorphism
 algebras, structured maps, and coherent higher transfors, followed by an
 appropriate contractibility or equivalence theorem.
 
-## F.3 Foundational extensions
+## F.3 Foundational Extensions
 
 A reusable directed-HIT schema should generate contextual elimination and
 constructor computation from typed object, arrow, and higher-cell boundaries.
@@ -56,9 +65,9 @@ equivalence. A full theorem relating object equality and ordinary isomorphism
 must be proved at the intended categorical level rather than recovered through
 retired compatibility aliases.
 
-## F.4 Categorical extensions
+## F.4 Categorical Extensions
 
-The representable/profunctor layer suggests three staged projects:
+The representable/profunctor and identity layers suggest four staged projects:
 
 1. package a fully faithful Yoneda embedding with mapping-category
    equivalences and higher naturality;
@@ -66,6 +75,8 @@ The representable/profunctor layer suggests three staged projects:
    tensor to their universal property;
 3. assemble associators, unitors, and horizontal cell composition into a
    coherent profunctor bicategory or suitable omega-categorical analogue.
+4. design generic structure identity and Rezk completion interfaces only after
+   the intended native equivalence and higher mapping properties are fixed.
 
 Weighted limits, colimits, adjunctions, duality, and joins now enter the
 expanded chapter sequence through the triangle reductions, right-adjoint
@@ -74,7 +85,7 @@ recursor. The checked interfaces are the theorem spine; neighboring Kan,
 end/coend, dagger, collage, and dependent-elimination theory remains
 explicitly status-labeled rather than presented as a feature catalogue.
 
-## F.5 Semantics and proof-assistant engineering
+## F.5 Semantics And Proof-Assistant Engineering
 
 The largest research objective is a semantics and metatheory for a precisely
 stated fragment: typing, substitution, subject reduction, normalization or a
@@ -82,12 +93,18 @@ weaker operational theorem, and interpretation in a suitable strict/lax
 omega-categorical model. The current executable artifact is evidence for
 specific interfaces, not a substitute for that theorem.
 
+The canonical mathematical surface should eventually elaborate to those
+interfaces, but that is a separate engineering project. The historical parent
+TypeScript parser remains read-only feasibility evidence and is neither an
+authority nor a dependency of this book. A renewed elaborator needs its own
+RFC against the current surface contract and stable kernel owners.
+
 On the engineering side, a physical split of `emdash3_2.lp` remains
 optional. It should begin only when a measured dependency or evidence-ownership
 problem justifies the migration, and it must preserve declaration/rule order
 and all current checks one boundary at a time.
 
-## F.6 Reading claims across editions
+## F.6 Reading Claims Across Editions
 
 The edition version in `book/book.json` identifies the source snapshot
 policy for generated artifacts. A later edition may promote a research

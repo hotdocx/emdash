@@ -46,6 +46,14 @@ $\mathrm{id}_b,\ell,\ell\circ\ell,\ldots$; no negative power has been
 introduced. This is the fundamental distinction between the walking
 endomorphism and the circle.
 
+The formal ledger for such a signature is therefore longer than a constructor
+list. It records formation, introductions and their boundaries, the chosen
+eliminator, constructor beta rules, higher action and coherence, dimension
+data, and the current uniqueness status. The general template and the exact
+WalkingEnd instance are collected in
+[Appendix G.6](#appendix-formal-presentation-g6); this chapter develops the
+same clauses in mathematical order.
+
 ## 6.2 The Selected Walking Signature
 
 Write `W` for the category `WalkingEnd`, with constructors

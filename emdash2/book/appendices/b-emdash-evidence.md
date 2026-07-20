@@ -15,7 +15,8 @@ also say that the displayed theorem has not yet been packaged. “Research
 boundary” rows deliberately have no purported proof owner.
 
 > **Formal status — checked.** This appendix describes traceability; the
-> Lambdapi sources remain the proof authority. The evidence checker validates
-> every row before this generated view is assembled.
+> [accompanying emdash artifact](#ref-emdash-artifact) remains the proof
+> authority. The evidence checker validates every row before this generated
+> view is assembled.
 
 <!-- generated:book-evidence-table -->

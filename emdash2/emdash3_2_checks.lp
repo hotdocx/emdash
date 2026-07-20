@@ -17071,6 +17071,53 @@ assert [B J J' : Cat]
       (@Hom_prof J B F)
       W;
 
+// Weighted limit and colimit specialization typing.
+//
+// These assertions audit variance and classifier formation only.  They do
+// not assert the missing semantic end/coend identifications with ordinary
+// cone, cocone, or pointwise Kan-extension categories.
+assert [B J : Cat]
+  (F : τ (Functor J B))
+  (L : τ (Functor Terminal_cat B)) ⊢
+  @IsWeightedLimit_cov_comp
+    B J Terminal_cat
+    F
+    (@Terminal_prof Terminal_cat J)
+    L
+  : Grpd;
+
+assert [B J J' : Cat]
+  (K : τ (Functor J J'))
+  (F : τ (Functor J B))
+  (Ran : τ (Functor J' B)) ⊢
+  @IsWeightedLimit_cov_comp
+    B J J'
+    F
+    (@Conjoint_prof J J' K)
+    Ran
+  : Grpd;
+
+assert [B J : Cat]
+  (F : τ (Functor J B))
+  (L : τ (Functor Terminal_cat B)) ⊢
+  @WeightedColimit_con
+    B J Terminal_cat
+    F
+    (@Terminal_prof J Terminal_cat)
+    L
+  : Grpd;
+
+assert [B J J' : Cat]
+  (K : τ (Functor J J'))
+  (F : τ (Functor J B))
+  (Lan : τ (Functor J' B)) ⊢
+  @WeightedColimit_con
+    B J J'
+    F
+    (@Companion_prof J J' K)
+    Lan
+  : Grpd;
+
 assert [B J J' : Cat]
   (F : τ (Functor J B))
   (W : τ (Prof J' J))

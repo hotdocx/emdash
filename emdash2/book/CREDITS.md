@@ -8,7 +8,7 @@ public edition is released.
 
 ## Homotopy Type Theory book
 
-The organization and future adapted passages of this book are inspired by:
+The organization and adapted passages of this book are inspired by:
 
 > The Univalent Foundations Program, *Homotopy Type Theory: Univalent
 > Foundations of Mathematics*, Institute for Advanced Study, 2013.
@@ -28,16 +28,13 @@ the hard inverse by a directed normalization cell followed by
 one-dimensionality.
 
 The exact source map and adaptation ledger live in
-`references/third-party-sources.json`. At the B0 scaffold milestone,
-no HoTT prose had been copied into the chapter sources. The Chapter 8
-vertical slice records structural and conceptual adaptations from the pinned
-source, but its prose is newly written for emdash; it contains no
-near-verbatim HoTT passage. The C1 expansion contract additionally maps all
-nine sections of `categories.tex` and all four parts of `formal.tex` to the
-new category-theory chapters and Appendix G before any close adaptation is
-written. Those entries authorize adaptation under this attribution and
-ShareAlike notice; they do not assert that the later prose is already
-complete.
+`references/third-party-sources.json`. They were established before the
+corresponding prose was drafted. The Chapter 8 vertical slice records
+structural and conceptual adaptations from the pinned source, while Chapters
+10–15 adapt all nine sections of `categories.tex` and Appendix G adapts all
+four parts of `formal.tex`. The resulting prose is newly written for the
+directed categorical setting; the ledger records the source labels,
+adaptation kind, and target under this attribution and ShareAlike notice.
 
 ## Došen's cut-elimination perspective
 

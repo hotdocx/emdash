@@ -102,6 +102,7 @@ bare words in math are rejected as well.
 ## Source mechanics
 
 - Each source file begins with one stable explicit HTML anchor.
+- Use title case consistently for chapter and numbered section headings.
 - Source files do not contain YAML frontmatter; the assembler owns it.
 - Link to stable anchors, never generated line numbers.
 - Do not edit `print/public/emdash-book.md`.

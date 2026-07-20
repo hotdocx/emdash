@@ -60,10 +60,15 @@ The exposition follows a spiral. The [prologue](#prologue) states the central
 theorem with minimal prerequisites. Chapters 1–7 then develop the judgments,
 categories, families, logic, equivalence, induction, directed higher
 induction, and categorical height needed to understand the proof.
-[Chapter 8](#chapter-8) returns to the calculation in full. Later parts will
-move outward to arrow induction, representability, strict and lax transfors,
-profunctors, higher hom-action, and the broader semantics of functorial
-foundations.
+[Chapter 8](#chapter-8) returns to the calculation in full. The later chapters
+move outward from that proof in a second spiral. [Chapter 9](#chapter-9)
+organizes functorial computation as a calculus of cuts. Chapters
+[10](#chapter-10)–[15](#chapter-15) develop categories, functors, adjunctions,
+Yoneda, duality, structure identity, and saturation. Chapters
+[16](#chapter-16)–[17](#chapter-17) treat weighted limits and colimits before
+returning to directed geometry through join. [Appendix G](#appendix-formal-presentation)
+then states how the mathematical surface, checked categorical kernel, optional
+future elaborator, and external models fit together.
 
 The book is evidence-aware without being a source-code catalogue. Checked
 claims name their evidence in compact notes. Free mathematical development is

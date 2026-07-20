@@ -130,10 +130,18 @@ function checkSources(manifest, issues) {
       if (prior) issue(issues, relative + ': duplicate anchor #' + anchor + ' also occurs in ' + prior);
       globalAnchors.set(anchor, relative);
     }
-    for (const match of text.matchAll(STATUS_RE)) {
+    const statusMatches = [...text.matchAll(STATUS_RE)];
+    for (const match of statusMatches) {
       if (!EXPECTED_STATUSES.has(match[1].toLowerCase())) {
         issue(issues, relative + ': unknown formal status ' + match[1]);
       }
+    }
+    if (/^chapter-(?:\d+)$/.test(source.id) && statusMatches.length === 0) {
+      issue(issues, relative + ': every numbered chapter needs a formal-status note');
+    }
+    if (/^chapter-(?:\d+)$/.test(source.id) &&
+        !/<!--\s*evidence:[A-Z][A-Z0-9-]*\s*-->/.test(text)) {
+      issue(issues, relative + ': every numbered chapter needs an evidence marker');
     }
     checkSourceAccessibility(text, relative, issues);
     checkHeadingStructure(source, text, relative, issues);
@@ -326,6 +334,29 @@ function checkExpansionContract(manifest, issues) {
     ? evidence.claims
     : {};
 
+  const retainedTheorems = contract.retainedChapterCentralTheorems;
+  if (!Array.isArray(retainedTheorems) || retainedTheorems.length !== 8) {
+    issue(issues, manifest.architecture + ': retainedChapterCentralTheorems must cover Chapters 1-8');
+  } else {
+    for (const [index, theorem] of retainedTheorems.entries()) {
+      const number = index + 1;
+      const context = manifest.architecture + ':retainedChapterCentralTheorems[' + index + ']';
+      const source = manifestById.get('chapter-' + number);
+      const claim = theorem && claims[theorem.evidence];
+      if (!theorem || theorem.id !== 'chapter-' + number || theorem.number !== number ||
+          !nonempty(theorem.claim) || theorem.status !== 'checked' ||
+          !nonempty(theorem.evidence) || !claim || claim.status !== theorem.status ||
+          !source) {
+        issue(issues, context + ': invalid retained-chapter central theorem');
+        continue;
+      }
+      const text = fs.readFileSync(source.absolutePath, 'utf8');
+      if (!text.includes('<!-- evidence:' + theorem.evidence + ' -->')) {
+        issue(issues, context + ': central theorem evidence is not cited in its chapter');
+      }
+    }
+  }
+
   if (!Array.isArray(contract.chapters) || contract.chapters.length !== 9) {
     issue(issues, manifest.architecture + ': chapters must contain exactly Chapters 9-17');
   } else {
@@ -380,6 +411,17 @@ function checkExpansionContract(manifest, issues) {
         }
       } else if (!nonempty(theorem.missingInfrastructure)) {
         issue(issues, context + ': non-checked central theorem must name missing infrastructure');
+      }
+      if (theorem && nonempty(theorem.evidence)) {
+        const claim = claims[theorem.evidence];
+        if (!claim || claim.status !== theorem.status) {
+          issue(issues, context + ': central theorem evidence is unknown or status-mismatched');
+        } else if (source) {
+          const text = fs.readFileSync(source.absolutePath, 'utf8');
+          if (!text.includes('<!-- evidence:' + theorem.evidence + ' -->')) {
+            issue(issues, context + ': central theorem evidence is not cited in its chapter');
+          }
+        }
       }
       for (const evidenceId of chapter.secondaryEvidence ?? []) {
         if (!claims[evidenceId] || claims[evidenceId].status !== 'checked') {

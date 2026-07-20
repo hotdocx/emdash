@@ -59,6 +59,15 @@ Both matter. Existence without computation cannot drive a normalization
 proof; computation without a coherent extension does not define an action on
 the whole object.
 
+In the rule schema of
+[Appendix G.4](#appendix-formal-presentation-g4), generator data are the
+introduction clauses, the induced section or functor is elimination, and the
+constructor observations are computation. Uniqueness or initiality is a
+separate universal clause, while coherent action on arrows and higher cells is
+the specifically functorial clause. We will report all five independently
+rather than treating the word “induction” as evidence for whichever clauses
+have not yet been supplied.
+
 ## 5.2 Equality Induction As The Local Case
 
 For a type `A`, right-based equality induction says that, with the right

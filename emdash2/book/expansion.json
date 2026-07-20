@@ -2,6 +2,64 @@
   "version": 1,
   "planId": "EMDASH-V3-2-FTT-BOOK-CATEGORY-THEORY-FORMAL-PRESENTATION-EXPANSION-2026-07-20",
   "retainedChapterRange": [1, 8],
+  "retainedChapterCentralTheorems": [
+    {
+      "id": "chapter-1",
+      "number": 1,
+      "claim": "equality induction and its computation rule",
+      "status": "checked",
+      "evidence": "TT-EQUALITY-INDUCTION"
+    },
+    {
+      "id": "chapter-2",
+      "number": 2,
+      "claim": "iterated hom categories and their retained higher action",
+      "status": "checked",
+      "evidence": "CAT-ITERATED-HOMS"
+    },
+    {
+      "id": "chapter-3",
+      "number": 3,
+      "claim": "natural numbers are set-valued",
+      "status": "checked",
+      "evidence": "LOGIC-NAT-SETHOOD"
+    },
+    {
+      "id": "chapter-4",
+      "number": 4,
+      "claim": "the selected groupoid universe carries a univalence interface",
+      "status": "checked",
+      "evidence": "UNIV-GROUPOID"
+    },
+    {
+      "id": "chapter-5",
+      "number": 5,
+      "claim": "fixed- and varying-source arrow induction",
+      "status": "checked",
+      "evidence": "IND-ARROW"
+    },
+    {
+      "id": "chapter-6",
+      "number": 6,
+      "claim": "the selected WalkingEnd contextual eliminator",
+      "status": "checked",
+      "evidence": "WE-CONTEXTUAL-ELIMINATOR"
+    },
+    {
+      "id": "chapter-7",
+      "number": 7,
+      "claim": "the walking endomorphism is one-dimensional",
+      "status": "checked",
+      "evidence": "WE-ONE-DIMENSIONAL"
+    },
+    {
+      "id": "chapter-8",
+      "number": 8,
+      "claim": "the based endomorphism carrier of WalkingEnd is equivalent to natural numbers",
+      "status": "checked",
+      "evidence": "WE-HOM-NAT-CARRIER"
+    }
+  ],
   "migration": [
     {
       "from": "book/chapters/09-transfors-strictness-and-laxity.md",
@@ -30,7 +88,7 @@
         "status": "checked",
         "evidence": "TRANSF-STRICT-NATURALITY"
       },
-      "boundary": "the fully typed product/projection benchmark remains formal consequence until its focused probe is complete"
+      "boundary": "the product/projection theorem remains mathematical development for a general category with chosen products; the active Cat-specialized owner-aligned legs are checked and the displayed comparison is a formal consequence, without a new global rewrite"
     },
     {
       "id": "chapter-10",
@@ -106,6 +164,7 @@
       "spiralFrom": ["chapter-8", "chapter-10", "chapter-13"],
       "centralTheorem": {
         "status": "research-boundary",
+        "evidence": "NATIVE-REZK-COMPLETION",
         "missingInfrastructure": "a generic structure-over-carrier identity theorem and a native Rezk completion with its higher universal property"
       },
       "boundary": "finite evidence-property and truncation theorems are footholds, not a general SIP or Rezk completion"
@@ -121,7 +180,8 @@
         "status": "checked",
         "evidence": "WEIGHTED-LIMIT-PRESERVATION"
       },
-      "boundary": "general ends, coends, Kan extensions, and dependent adjunctions require variance-correct higher owners"
+      "secondaryEvidence": ["PROF-CLOSED-CALCULUS", "WEIGHTED-LIMIT-REPRESENTABILITY"],
+      "boundary": "terminal and conjoint weights are active interface specializations, while their standard cone, end, and pointwise Kan semantics and general dependent adjunctions require variance-correct higher owners"
     },
     {
       "id": "chapter-17",
@@ -134,8 +194,8 @@
         "status": "checked",
         "evidence": "WEIGHTED-COLIMIT-PRESERVATION"
       },
-      "secondaryEvidence": ["JOIN-RECURSOR"],
-      "boundary": "join-as-collage semantics, hom decomposition, and dependent elimination remain research infrastructure"
+      "secondaryEvidence": ["OP-DUALITY", "JOIN-RECURSOR"],
+      "boundary": "terminal and companion weights are active interface specializations; join-as-collage semantics, hom decomposition, opposite comparison, and dependent elimination remain research infrastructure"
     }
   ],
   "appendix": {
@@ -144,14 +204,20 @@
     "path": "book/appendices/g-formal-presentation.md",
     "title": "Formal Presentation Of Functorial Type Theory",
     "sections": [
-      "Judgments, contexts, and classifiers",
-      "The mathematical categorical presentation",
-      "The checked Lambdapi presentation",
-      "Formation, introduction, elimination, and computation",
-      "Elaboration and canonical surface syntax",
-      "Directed higher-inductive signatures",
-      "Basic metatheory and its boundary"
-    ]
+      "Judgments, Contexts, And Classifiers",
+      "The Mathematical Categorical Presentation",
+      "The Checked Lambdapi Presentation",
+      "Formation, Introduction, Elimination, And Computation",
+      "Elaboration And Canonical Surface Syntax",
+      "Directed Higher-Inductive Signatures",
+      "Basic Metatheory And Its Boundary"
+    ],
+    "primaryEvidence": "FORMAL-KERNEL-PRESENTATION",
+    "secondaryEvidence": [
+      "FORMAL-ELABORATION-BOUNDARY",
+      "FORMAL-METATHEORY-BOUNDARY"
+    ],
+    "boundary": "the categorical kernel and representative rule families are checked; a complete surface-to-Lambdapi elaborator and global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness metatheorems are not claimed"
   },
   "categoryTranslation": [
     {
@@ -186,7 +252,7 @@
     },
     {
       "term": "HoTT strict category",
-      "meaning": "a HoTT category whose object type is a set",
+      "meaning": "a HoTT precategory whose object type is a set, without an assumed identity-to-isomorphism equivalence",
       "status": "mathematical-development",
       "boundary": "unrelated to strict transfors or runtime reduction"
     }

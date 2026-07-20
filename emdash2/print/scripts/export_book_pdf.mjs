@@ -229,8 +229,8 @@ async function main() {
       timezoneId: 'UTC',
     });
     const page = await context.newPage();
-    page.setDefaultTimeout(Math.min(document.timeoutMs, 30000));
-    page.setDefaultNavigationTimeout(Math.min(document.timeoutMs, 30000));
+    page.setDefaultTimeout(document.timeoutMs);
+    page.setDefaultNavigationTimeout(document.timeoutMs);
 
     const failures = [];
     const localOrigin = new URL(preview.baseUrl).origin;
@@ -260,7 +260,7 @@ async function main() {
       waitUntil: 'domcontentloaded',
     });
     const pageCount = await withTimeout(
-      waitForCompletedPagination(page, Math.min(document.timeoutMs, 30000)),
+      waitForCompletedPagination(page, document.timeoutMs),
       document.timeoutMs,
       document.file + ' PDF pagination'
     );

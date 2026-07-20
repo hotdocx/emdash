@@ -11,7 +11,7 @@ map through the object it represents. Each operation controls its own
 reassociation.
 
 This point of view is inspired by the categorical proof theory of
-[Došen's *Cut Elimination in Categories*](../references/bibliography.md#ref-dosen-cut-elimination).
+[Došen's *Cut Elimination in Categories*](#ref-dosen-cut-elimination).
 We use that work only as a conceptual reference. The presentation below is
 newly written for emdash, whose iterated homs and directed families require a
 different formal architecture.
@@ -53,6 +53,15 @@ states the intended theorem while naming the interface still needed to check
 it. The symbol $\rightsquigarrow$ below is reserved for an actual selected
 runtime reduction; an ordinary equality sign does not silently make that
 claim.
+
+In the terminology of
+[Appendix G.4](#appendix-formal-presentation-g4), each named cut is an
+elimination followed by a computation rule. Its formation and introduction
+data determine which composite is well typed; its full functor or transfor
+owner supplies higher action; and any eta or uniqueness principle is stated
+separately. This is why a pointwise naturality equation cannot replace
+`tapp1_func`, and why a universal comparison needs both beta and eta rather
+than one attractive factorization formula.
 
 ## 9.2 Arrow Cuts
 

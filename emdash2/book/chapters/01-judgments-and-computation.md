@@ -24,6 +24,14 @@ kernel by `a:tau(A)`. This two-level presentation is an implementation
 device. Unless a decoding boundary is at issue, we suppress `tau` and
 reason in ordinary type-theoretic notation.
 
+[Appendix G](#appendix-formal-presentation) gives the full formal reading of
+this convention. It separates external contexts and typing judgments from
+internal classifiers, then asks of each major construction for its formation,
+introduction, elimination, computation, uniqueness, and functorial action.
+The last two clauses will often be independent: a beta rule can be checked
+even when a general uniqueness theorem remains open, and a pointwise
+construction is incomplete until its arrow and higher-cell action is known.
+
 <a id="chapter-1-1"></a>
 
 ## 1.1 Contexts And Families

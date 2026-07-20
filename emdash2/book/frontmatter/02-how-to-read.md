@@ -2,25 +2,27 @@
 
 # How To Read This Book
 
-The shortest route is the [prologue](#prologue), followed by the prerequisite
-glossary at the beginning of [Chapter 8](#chapter-8). The fuller route reads
-Chapters 1–7 in order and then returns to the same proof with every interface
-available. Chapters 9–10 then continue from the proof into transfors,
-displayed laxity, representability, and profunctor cut elimination. The
-[contents](#contents) and [glossary/index](#appendix-glossary) provide stable
-anchor-based navigation.
+The shortest route is the [prologue](#prologue), followed by the compact
+prerequisite review and proof in [Chapter 8](#chapter-8). The foundational
+route reads Chapters [1](#chapter-1)–[7](#chapter-7) first and then returns to
+the same calculation with every interface available. The second spiral begins
+with the cut calculus in [Chapter 9](#chapter-9), develops ordinary and native
+category theory through [Chapter 15](#chapter-15), and culminates in weighted
+universals, duality, and join in Chapters [16](#chapter-16)–[17](#chapter-17).
+The [contents](#contents) and [glossary/index](#appendix-glossary) provide
+stable anchor-based navigation.
 
-Different readers may use the book differently:
+Three reading paths make the dependencies explicit:
 
-- A type theorist can follow equality, induction, equivalence, and truncation,
-  watching for the places where directed functor action replaces transport
-  along an identity.
-- A category theorist can begin with categories, functors, transfors, and
-  Cat-valued families, treating the familiar type formers as dependent
-  categorical constructions.
-- An implementer can read the mathematical line first and consult the evidence
-  notes, notation appendix, and source map only when a computational boundary
-  matters.
+| Reader | Main path | Consult when needed |
+| --- | --- | --- |
+| type theorist | Prologue; Chapters 1, 3–8, 10, and 15 | Chapters 2 and 9 for directed action; Appendix G for the formal presentation |
+| category theorist | Prologue; Chapters 2, 5, and 8–17 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
+| implementer | Chapters 1, 2, 6, 8, and 9; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
+
+These are paths through one dependency graph, not separate foundations. In
+particular, the category-theory route still uses equality-local reasoning, and
+the type-theory route still needs directed functor action.
 
 Composition is written in categorical order:
 
@@ -28,13 +30,12 @@ $$
 g\circ f : x\longrightarrow z
 $$
 
-means “first `f`, then `g`.” Functor action is written
-`F[x]` on objects and `F[f]` on arrows. The path category
-`Path(A)` retains equality-local, hence groupoidal, structure inside
-the directed calculus. Symbols such as `W`, `*`,
-`ell`, `Code`, `encode`, and `power` are
-mathematical abbreviations; the notation appendix maps them to active
-Lambdapi names.
+means “first $f$, then $g$.” Functor action is written $F[x]$ on objects and
+$F[f]$ on arrows. The path category $\mathsf{Path}(A)$ retains equality-local,
+hence groupoidal, structure inside the directed calculus. Symbols such as
+$W$, $*$, $\ell$, $\mathsf{Code}$, $\mathsf{encode}$, and
+$\mathsf{power}$ are mathematical abbreviations; the notation appendix maps
+them to active Lambdapi names.
 
 Every theorem-like assertion has one of four evidence statuses:
 
