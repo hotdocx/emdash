@@ -23,45 +23,6 @@ symbol NatSucc_func
 ≔ @path_map_func Nat_grpd Nat_grpd nat_succ_function;
 
 /*
-  Optional successor-action refinement.
-
-  The selected operation reuses the exposed predecessor path. Its coherence
-  targets the capped action of the canonical iterable `NatSucc_func`; no
-  successor-specific path-functor owner or J beta is introduced.
-*/
-symbol nat_succ_path_action_map
-  : τ (@PathActionRefinementMap
-      Nat_grpd
-      Nat_grpd
-      nat_succ_function)
-≔ λ m : τ Nat_grpd,
-   λ n : τ Nat_grpd,
-   λ p : τ (@= Nat_grpd m n), p;
-
-symbol nat_succ_path_action_coherence
-  : τ (@PathActionRefinementCoherence
-      Nat_grpd
-      Nat_grpd
-      nat_succ_function
-      nat_succ_path_action_map)
-≔ λ m : τ Nat_grpd,
-   λ n : τ Nat_grpd,
-   λ p : τ (@= Nat_grpd m n),
-    @nat_succ_eq_ap m n p;
-
-symbol nat_succ_path_action_refinement
-  : τ (@PathActionRefinement
-      Nat_grpd
-      Nat_grpd
-      nat_succ_function)
-≔ @path_action_refinement_intro
-    Nat_grpd
-    Nat_grpd
-    nat_succ_function
-    nat_succ_path_action_map
-    nat_succ_path_action_coherence;
-
-/*
   Natural-number addition.
 
   The primary recursion is on the left argument.  The open right-unit fold is

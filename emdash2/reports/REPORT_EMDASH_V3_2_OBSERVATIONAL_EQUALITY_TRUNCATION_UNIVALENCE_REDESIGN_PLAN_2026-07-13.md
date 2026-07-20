@@ -1,7 +1,7 @@
 # EMDASH v3.2 Observational Equality, Truncation, And Univalence Redesign Plan
 
 Date: 2026-07-13
-Last reviewed: 2026-07-19
+Last reviewed: 2026-07-20
 Plan-ID: EMDASH-V3-2-OBSERVATIONAL-EQUALITY-TRUNCATION-UNIVALENCE-REDESIGN-2026-07-13
 Depends-On: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26
 Supersedes: EMDASH-V3-2-GROUPOID-COMPUTATIONAL-UNIVALENCE-2026-06-23 as the forward implementation master plan; the predecessor remains the historical decision record for its promoted kernel slices
@@ -9,10 +9,29 @@ Side-Task-Ledger: #side-task-ledger
 Implementation-Handoff: #implementation-handoff-start-here
 Current-Implementation-Slice: none selected by this predecessor after completion of the equality-valued overlay and its walking-endomorphism child plan; future work must select an explicit unaffected ledger row or a new bounded plan rather than resume the superseded 2026-07-16 Nat-successor-J handoff
 Adopted-Overlay: `REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17.md` is completed at its selected native-EQ1/direct-univalence/groupoidality/structured-J/evidence-property/finite-truncation boundary; its bounded `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md` child is also completed at the theorem-first walking-HIT/`BNat` boundary; retained D0/decoder APIs are compatibility surface, and no primitive nonreducing cast term is selected
-Current-Compatibility-Retirement: `REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md` owns forward path-action and legacy-retirement work. Its P4 consumer audit retired the one-layer and dimension-indexed D0 observation families, the uninhabited D0 evidence-property capability and conditional theorem, and their self-only examples. P5 mechanically extracted every remaining D0/D1/unsuffixed decoder owner into frozen `emdash3_2_legacy_compat.lp`; P6 caps it at seven explicit legacy examples and retains the complete two-sided OneCat theorem only because native stable casts lack facade-package/raw-path reification coherence. P7 retains `_EQ1` after finding 11 hard legacy collisions. Historical rows below remain probe provenance, not claims that those symbols are active. The generic `prop_is_trunc_cat_dim` helper remains native proof support
+Current-Compatibility-Retirement: `REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md` owns forward path-action and legacy-retirement work. Its P4 consumer audit retired the one-layer and dimension-indexed D0 observation families, the uninhabited D0 evidence-property capability and conditional theorem, and their self-only examples. P5 mechanically extracted every remaining D0/D1/unsuffixed decoder owner into frozen `emdash3_2_legacy_compat.lp`; P6 caps it at seven explicit legacy examples and retains the complete two-sided OneCat theorem only because native stable casts lack facade-package/raw-path reification coherence. P7 retains `_EQ1` after finding 11 hard legacy collisions. P9 supersedes the interim `PathActionRefinement` selection: canonical `path_map_func` action is used directly, comparison-only Nat support is removed, dependent witness action remains direct `eq_apd`, and the isolated Sum experiment is retired pending redesign. Historical rows below remain probe provenance, not claims that those symbols are active. The generic `prop_is_trunc_cat_dim` helper remains native proof support
 Infinity-Codex-Origin: current-session-analysis-2026-07-13
 Infinity-Codex-Decision-Responses: current-session-user-direction-2026-07-13-and-2026-07-14; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f5d7c-3fd0-7932-a38e-48985ba4bda0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f618e-041a-77d2-ad93-31d04d584fa2; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f61d1-7ce1-7272-8082-bf22c8ba6047; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f625c-22a9-7350-8aea-3f06d4784bec; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6282-d8ef-79f3-8735-aad1435e0b05; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f6293-83c1-70a0-817b-9128a37151c0; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62b3-d3c8-7b12-9b33-a10d1d0950fe; infinity-codex:019f5d75-e60e-7e50-8ebc-b3586081b672:019f62e3-db49-7653-8b49-ca98cd9015a7; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f6396-f48c-75a0-852b-71a827ee0a7f; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f644e-f14e-70f1-9402-19d688282343; infinity-codex:019f6392-0363-7e80-8a61-c05a8a667912:019f66fe-80db-78b3-b78a-7b13aa48adeb
-Status: retained living predecessor and promoted-work ledger, still active only for unaffected H0, truncation, dimension, directed, and former-action tracks. The completed 2026-07-17 equality-valued overlay supersedes this report for equality/equivalence/direct-univalence/groupoidality/structured-J work, its completed walking-endomorphism child discharges the bounded representative-HIT readiness experiment, and the 2026-07-19 path-action/compatibility plan supersedes its forward registry and D0-retirement conclusions. The historical 1,694-check Nat-action snapshot and the retired D0 experiment rows remain provenance, not the current baseline. The full original computational-foundation endpoint remains partial because broader observational action/J coverage, generic directed-HIT and reflector infrastructure, eventual deletion of the frozen compatibility module, and consistency/stratification/normalization/canonicity/semantic-model metatheory remain open; unrestricted native-EQ1 evidence property, unconditional finite-`NCat` object truncation, direct Cat/Grpd EQ1 identity, and one representative directed HIT are no longer blockers.
+Status: retained living predecessor and promoted-work ledger, still active only for unaffected H0, truncation, dimension, and directed tracks. The completed 2026-07-17 equality-valued overlay supersedes this report for equality/equivalence/direct-univalence/groupoidality/structured-J work, its completed walking-endomorphism child discharges the bounded representative-HIT readiness experiment, and the 2026-07-19 path-action/compatibility plan supersedes its forward registry and D0-retirement conclusions. P9 of that plan also supersedes the dated former-action retention rows: the historical 1,694-check Nat-action snapshot, Sum promotions, and retired D0 experiments remain provenance, not the current baseline. The full original computational-foundation endpoint remains partial because future consumer-led former designs, generic directed-HIT and reflector infrastructure, eventual deletion of the frozen compatibility module, and consistency/stratification/normalization/canonicity/semantic-model metatheory remain open; unrestricted native-EQ1 evidence property, unconditional finite-`NCat` object truncation, direct Cat/Grpd EQ1 identity, and one representative directed HIT are no longer blockers.
+
+### 2026-07-20 canonical-action correction
+
+All later `ObsAction`, `ObsDAction`, `PathActionRefinement`, Nat action-basis,
+and Sum-action entries in this report are chronological promotion evidence.
+They are not active API commitments. The final consumer audit established that
+ordinary nondependent action already has the complete canonical owner
+
+```text
+fapp1_fapp0(Path_cat(A), Path_cat(B), path_map_func(f), x, y, p)
+  = eq_ap(f,p),
+```
+
+with the full next-hom functor still available through `fapp1_func`.
+Accordingly P9 removes the redundant first-path registry and its Nat/
+PathRecord wrappers instead of requiring an `act` argument. Dependent witness
+transport stays direct `eq_apd`; an eventual dependent iterable action would
+be a displayed functor/section. The isolated Sum former and action surface are
+retired together and may be redesigned only from a later concrete consumer.
 
 ## Goal
 

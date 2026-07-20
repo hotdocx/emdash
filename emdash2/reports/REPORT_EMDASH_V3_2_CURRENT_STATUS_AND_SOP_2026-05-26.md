@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-19
+Last consolidated: 2026-07-20
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -21,10 +21,10 @@ detailed probe evidence.
 - `emdash3_2_eq1_evidence_property.lp`: one-way transparent native-EQ1
   evidence-property, retract-truncation, and finite-`NCat` object-truncation
   layer; it imports the kernel and hom-action extension, never conversely.
-- `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/path-action/
-  sethood module. It owns `nat_add`, `NatSucc_func`, the associativity theorem,
-  the Unit/Empty proposition witnesses, and `nat_is_set` without importing the
-  walking-HIT surface.
+- `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/sethood
+  module. It owns `nat_add`, the canonical `NatSucc_func`, the associativity
+  theorem, the Unit/Empty proposition witnesses, and `nat_is_set` without
+  importing the walking-HIT surface.
 - `emdash3_2_walking_end_hit.lp`: one-way opaque one-dimensional walking-
   endomorphism directed-HIT module. It owns the opaque category/base/loop,
   explicit dimension evidence, contextual `Functord` eliminator, derived
@@ -33,9 +33,6 @@ detailed probe evidence.
   packages, sethood, directed negative consequences, and a separate `BNat`
   consistency model. It contains no generated-word Hom or WalkingEnd-specific
   identity/composition rule.
-- `emdash3_2_sum_observational_action.lp`: one-way library module retaining
-  the componentwise Sum `PathActionRefinement`, its equality comparison, and
-  four proof-time bases; no kernel or univalence consumer imports it.
 - `emdash3_2_checks.lp`: executable diagnostics and regressions.
 - `emdash3_2_legacy_compat.lp`: frozen opt-in D0/D1 and decoder compatibility
   module. It imports the kernel one-way but is not an active source of truth,
@@ -60,24 +57,35 @@ needed.
 
 ## Validated Current Baseline
 
-The current post-P8 architecture checkpoint is the completed 2026-07-19
-path-action and compatibility-retirement plan. `emdash3_2.lp` is 19,632 lines
-and contains no
-D0/D1 declaration or reference. The native extensions, Nat, WalkingEnd, Sum
-library, and `emdash3_2_checks.lp` likewise contain no compatibility import.
-The complete old closure now lives in the frozen one-way
+The current architecture is the 2026-07-20 P9 corrective phase of the active
+path-action and compatibility-retirement plan. P0–P8's compatibility results
+remain complete: `emdash3_2.lp` and the native extensions, Nat, WalkingEnd,
+and `emdash3_2_checks.lp` contain no D0/D1 declaration, reference, or
+compatibility import. The complete old closure remains in the frozen one-way
 `emdash3_2_legacy_compat.lp` module (2,751 lines, 126 declarations), imported
-only by seven explicitly legacy reviewer examples. The bounded active check
-passes; active-kernel warnings are 1,010 unjoinable/159 replaceable, while an
-explicit legacy-module check restores the former combined 1,016/159 closure.
-Strict LHS audit remains zero unreviewed candidates with 45 annotated slots
-across 27 clauses. The final catalog has 1,791 classified checks (1,587
-positive and 204 negative) across 66 areas, with zero legacy tags and zero
-unclassified statements. The source TOC passes with 86 headings across
-sections 0–20. Health passes all 52 measured active-source/example targets in
-258.540 seconds aggregate; full CI passes the same targets in 241.282 seconds,
-all 16 Infinity-Codex tests, and every diff/TOC/reference/header/audit/catalog
-integrity gate.
+only by seven explicitly legacy reviewer examples.
+
+P9's owner-position deletion probe, promoted bounded active check, and focused
+canonical path-category example pass. The generic `PathActionRefinement`
+surface, its Nat and PathRecord wrappers, the comparison-only Nat basis, and
+the isolated Sum former/action experiment are absent from active `.lp`
+sources. Canonical nondependent action is
+`fapp1_fapp0(path_map_func(f),p)`, which reduces to `eq_ap(f,p)`; the uncapped
+next-hom functor remains available through `fapp1_func`, and dependent witness
+transport remains direct `eq_apd`. The dated P8 warning baseline was 1,010
+unjoinable/159 replaceable, while an explicit legacy-module check restored the
+former combined 1,016/159 closure; strict LHS audit was zero unreviewed
+candidates with 45 annotated slots across 27 clauses. P9's synchronized
+warning inventory remains 1,010/159 and its strict audit remains zero/45/27.
+The regenerated catalog has 1,671 classified checks (1,496 positive and 175
+negative) across 61 areas, with zero legacy tags or unclassified checks. The
+TOC remains 86 headings across sections 0–20. Health passes all 46 retained
+source/example targets in 198.158 seconds aggregate. The kernel is 19,202
+lines with 758 symbols, 602 rewrite rules, and 61 unification rules; the main
+diagnostic module contains 1,496 assertions. Full CI passes all 46 retained
+targets in 253.673 seconds, all 16 Infinity-Codex recovery tests, and every
+Python/shell/JSON, diff/TOC/reference/report-header, strict-LHS, and strict
+catalog-freshness gate. P9 is closed.
 
 The module is retained solely for the complete two-sided
 `one_cat_iso_type_equiv` contract. The native replacement is blocked at the
@@ -426,18 +434,30 @@ The old uninhabited `OmegaEquivAlongEvidenceProp_D0` capability and
 by the unconditional native-EQ1 proof. The representation-independent
 `prop_is_trunc_cat_dim` helper remains in use by that native proof.
 
-The former-specific componentwise Sum action has been demoted without a
-semantic rewrite. `sum_map` remains the ordinary eliminator-owned kernel map;
-the two action bases, four proof-time comparisons, componentwise `eq_ap`
-theorems, and `sum_path_action_refinement` live in
-`emdash3_2_sum_observational_action.lp`. Only its diagnostics and reviewer
-example import that one-way module. The public refinement coherence targets
-the exact capped `path_map_func(sum_map(...))` action while reusing the
-componentwise `eq_ap` theorems internally. This preserves the useful library
-example while removing action-specific proof-time authority from the
-foundational kernel; focused kernel/module/check/example probes all pass.
+The canonical path action needs no selected-computation facade. For every
+ordinary `f : A -> B`, `path_map_func(f)` is the functor
+`Path_cat(A) -> Path_cat(B)`; its object action is `f`, its exact capped action
+is definitionally `eq_ap(f,p)`, and its full next-hom action remains available
+through the generic functor calculus. `PathActionRefinement` stored only an
+alternative first-path term and a pointwise comparison with that already
+canonical term. It constructed no functor, supplied no higher action, and had
+no retained consumer requiring an alternative open-path normal form. P9
+therefore removes the package rather than recasting ordinary clients through
+an `act` argument. Exceptional future computations may use local comparison
+theorems; they do not pre-authorize a generic registry.
 
-The equality-overlay selected-MVP checkpoint had 1,917 checks across 70 areas.
+The same audit removes the comparison-only Nat successor proof basis and its
+two proof-time rules while retaining recursive Nat equality, `NatSucc_func`,
+`nat_succ_ind_eqr`, arithmetic/sethood, and WalkingEnd. Dependent PathRecord
+witness action remains direct `eq_apd`; any iterable dependent successor would
+need an honest displayed functor/section construction. At the user's selected
+feature boundary, P9 also retires the isolated Sum carrier, eliminator, map,
+action extension, diagnostics, and examples. No native-EQ1, Nat, WalkingEnd,
+evidence-property, or frozen-compatibility theorem consumed them. Sum may be
+redesigned later from a concrete universal-property or computation demand.
+
+For historical comparison, the equality-overlay selected-MVP checkpoint had
+1,917 checks across 70 areas.
 The kernel has
 21,762 lines, 887 symbols, 596 rewrite rules, and 63 unification rules. The
 native hom-action extension has 2,791 lines/69 symbols; the evidence-property
@@ -807,7 +827,10 @@ Fourteen positive/five negative diagnostics bring the catalog to 1,694 checks
 across 62 areas with zero unclassified checks. Health passes across 41 files
 at a 19,988-line/808-symbol/581-rule/58-unification-rule kernel with 1,507
 positive diagnostics. Full examples and synchronized CI pass; CI records
-220.269s measured checking time.
+220.269s measured checking time. This is dated validation evidence, not the
+active Nat API. P9 removes the basis, comparison theorem, two proof-time
+rules, and selected-action wrapper because no later arithmetic or WalkingEnd
+construction consumes them; `NatSucc_func` and `nat_succ_ind_eqr` remain.
 
 Candidate D0 introduces the neutral general-category
 `OmegaEquivAlong_D0(f)` certificate independently of the old public
@@ -959,7 +982,10 @@ two cleanup phases add no rule or `unif_rule`; warnings remain 1,016/159 and
 the LHS audit remains zero/45/27. The synchronized P2 catalog has 2,077 checks
 across 77 areas, all 55 health targets and reviewer examples pass, and full CI
 passes with 133.929s aggregate typechecking. The original Phase 10 names and
-counts above remain dated validation evidence, not the active API.
+counts above remain dated validation evidence, not the active API. The
+2026-07-20 P9 correction further supersedes P2's nondependent selection:
+`PathActionRefinement`, its Nat and PathRecord clients, and its comparison-only
+support are removed in favor of direct canonical `path_map_func` action.
 The general binary-sum foundation extension adds a native two-parameter
 `SumData(A,B)` carrier, decoded `Sum_grpd(A,B)` classifier, both constructors,
 and dependent `sum_elim` through the generated induction principle. Both
@@ -976,7 +1002,9 @@ higher action were separate; the visible identity and registered componentwise
 action are now promoted in later bounded slices, while no-confusion,
 canonicity, and categorical coproduct structure remain separate.
 The synchronized binary-sum CI gate passes all 19 files in 88.539s with every
-repository-integrity check.
+repository-integrity check. This entire Sum paragraph is dated promotion
+evidence: P9 retires the isolated former and action experiment on 2026-07-20
+pending a future consumer-led redesign.
 General truncation invariance now maps the operational
 `grpd_equiv_path(e)` through `X |-> IsTruncGrpd(n,X)`, decodes the resulting
 path with `idtoequiv_grpd`, and exposes a canonical `TypeEquiv` of truncation-
@@ -1270,42 +1298,33 @@ encoded Sigma/Pi/product object layers, and the core category interface.
 Active equality/equivalence staging includes:
 
 - decoded elementary H0 classifiers `Empty_grpd`, `Unit_grpd`, `Bool_grpd`,
-  `Nat_grpd`, and `Sum_grpd(A,B)`, with native Empty/Unit/Bool/Nat/sum carriers,
-  dependent eliminator facades, constructor beta, and a Bool conversion-level
-  anti-collapse diagnostic; visible Unit, Boolean, Nat, and general-sum
-  constructor equality additionally compute to Unit, Empty, predecessor, or
-  component equality while generic `eq_refl` retains runtime provenance and
-  open endpoints retain primitive equality. Generic J repeats its category
-  and endpoint as subject-reduction guards, so a foreign/component proof with
-  the same reduced classifier cannot trigger reflexive computation. Remaining
-  elementary observational identity, broader no-confusion, higher action for
-  other formers, canonicity, and categorical universal properties remain
-  separate. The kernel retains the eliminator-owned canonical `sum_map`; its
-  componentwise `sum_path_action_refinement`, equality comparisons, and four
-  proof-time bases are checked in `emdash3_2_sum_observational_action.lp` as
-  library surface, with no kernel or univalence consumer.
-  `nat_succ_path_action_refinement` is the first recursive-inductive selected
-  refinement: its action keeps the exposed predecessor path, while a stable
-  basis and generic J prove agreement with the capped action of
-  `NatSucc_func` without runtime proof collapse or unification-transitivity.
-  The transparent
-  `nat_succ_ind_eqr` facade separately routes successor-indexed motives through
-  predecessor J and computes only at component reflexivity; outer reflexivity,
-  the action basis, and generic J keep their existing runtime boundaries;
+  and `Nat_grpd`, with native Empty/Unit/Bool/Nat carriers, dependent
+  eliminator facades, constructor beta, and a Bool conversion-level
+  anti-collapse diagnostic; visible Unit, Boolean, and Nat constructor
+  equality additionally compute to Unit, Empty, or predecessor equality while
+  generic `eq_refl` retains runtime provenance and open endpoints retain
+  primitive equality. Generic J repeats its category and endpoint as
+  subject-reduction guards, so a foreign/component proof with the same reduced
+  classifier cannot trigger reflexive computation. Remaining elementary
+  observational identity, broader no-confusion, higher action for other
+  formers, canonicity, and categorical universal properties remain separate.
+  The transparent `nat_succ_ind_eqr` facade routes successor-indexed motives
+  through predecessor J and computes only at component reflexivity; outer
+  reflexivity and open predecessor paths keep their existing runtime
+  boundaries. `NatSucc_func` is the ordinary canonical successor functor. The
+  comparison-only selected-action basis and its two proof-time rules are
+  retired. The isolated Sum former/action experiment is absent pending a
+  future consumer-led redesign;
 - `Path_cat_func`/`path_map_func` own the canonical iterable action of every
   raw groupoid function: the capped action computes to `eq_ap`, while the
-  generic `fapp*` calculus retains every higher action.
-  `PathActionRefinement(f)` stores optional selected first-path computation
-  plus pointwise agreement with that exact capped action; it constructs no
-  second functor and supplies no competing runtime owner. Identity selection
-  computes, refinement composition computes pointwise, and canonical nested
-  versus composite action remains related propositionally by `eq_ap_comp`.
-  It is not the structured groupoidal-J transport owner: `PathOut` consumes an
-  already functorial `Catd` motive. The unused dependent registry has been
-  retired, and `path_record_witness_action` uses direct `eq_apd`; any genuine
-  higher dependent replacement is a displayed-functor/section problem. Nat,
-  PathRecord, and Sum refinements remain library-facing computation, not a
-  second univalence or fibrancy foundation;
+  generic `fapp*` calculus retains every higher action. This is the sole
+  nondependent action interface; there is no selected-action registry or
+  parallel first-path channel. Canonical nested versus composite action
+  remains related propositionally by `eq_ap_comp` where it is not
+  judgmentally identical. `PathOut` is a distinct structured groupoidal-J
+  owner consuming an already functorial `Catd` motive.
+  `path_record_witness_action` uses direct `eq_apd`; any genuine iterable
+  dependent replacement is a displayed-functor/section problem;
 - the named dependent `PathRecord_grpd(A)` representative, implemented by a
   parametrized one-constructor native carrier with direct source, target, and
   dependent witness projections plus a generated-induction facade; its active
@@ -1400,10 +1419,9 @@ Active equality/equivalence staging includes:
   capability, named OneCat `TypeEquiv`, and legacy `iso_evidence_path` Product
   computation are frozen together in the opt-in compatibility module; the
   arbitrary-category capability inhabitants/classifier are retired.
-- optional nondependent `PathActionRefinement` data over canonical
-  `path_map_func`, with computing identity/composition and shaped PathRecord
-  action; dependent witness-field transport uses direct `eq_apd`, and the
-  unused dependent registry is retired; no additional arbitrary-constructor J.
+- direct canonical nondependent action through `path_map_func`, with dependent
+  witness-field transport through `eq_apd` and no additional
+  arbitrary-constructor J.
 
 These are explicit kernel interfaces and checked computation skeletons. They
 do not claim that every future univalence/coherence theorem is already
@@ -2170,9 +2188,11 @@ The following remain explicit future work rather than hidden assumptions:
 - generic abstraction of the completed walking-endomorphism presentation,
   full functor-category initiality, a displayed dependent path-action/section
   construction, groupoid completion toward `BInt`/Circle, and general
-  higher-inductive categories or pushouts; the ordinary raw-function
-  `path_map_func` is active, while its optional selected-computation
-  refinement is owned by the cleanup plan in `INDEX.md`;
+  higher-inductive categories or pushouts; ordinary raw-function
+  `path_map_func` is already the complete canonical nondependent action. A
+  future exceptional former may add a local comparison theorem, and a future
+  dependent consumer may motivate the displayed construction, but neither
+  reinstates a generic selected-action registry by default;
 - a finalized parser/surface language;
 - module splitting of the single kernel file after comment/section boundaries
   stabilize.

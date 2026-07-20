@@ -1,14 +1,14 @@
 # EMDASH v3.2 Path Action And Equivalence Compatibility Retirement Plan
 
 Date: 2026-07-19
-Last reviewed: 2026-07-19
+Last reviewed: 2026-07-20
 Plan-ID: EMDASH-V3-2-PATH-ACTION-AND-EQUIVALENCE-COMPATIBILITY-RETIREMENT-2026-07-19
-Depends-On: REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17; REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17; REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_nat_arithmetic.lp; emdash3_2_walking_end_hit.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_sum_observational_action.lp; emdash3_2_checks.lp
+Depends-On: REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17; REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17; REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_nat_arithmetic.lp; emdash3_2_walking_end_hit.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
 Supersedes: no whole report; reopens the deferred `EVOGJ-OBSACTION-SCOPE` functor-view refactor and the optional legacy-compatibility retirement boundary, while preserving the completed native-EQ1 and WalkingEnd results
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-user-requested-path-action-and-compatibility-review-2026-07-19
-Infinity-Codex-Decision-Responses: current-session-review-response-2026-07-19; no archived logical ID is required to interpret this plan
-Status: **COMPLETED 2026-07-19 — P0–P8 are promoted; native path action/refinement ownership is synchronized, D0/D1 compatibility is mechanically extracted and frozen under a closed seven-example contract, `_EQ1` is retained for the recorded 11-collision reason, and the full final gate passes**
+Infinity-Codex-Decision-Responses: current-session-review-response-2026-07-19; current-session-canonical-action-correction-2026-07-20; no archived logical ID is required to interpret this plan
+Status: **COMPLETE 2026-07-20 — P0–P8 remain completed; P9 supersedes the P2 `PathActionRefinement` selection, adopts canonical `path_map_func` action as the sole nondependent interface, retires the isolated Sum feature for later redesign, and passes its complete implementation and CI gate**
 Implementation starting baseline and review provenance: `2444c9d406fc3d201602ace7af5105c20c241680`
 Initial worktree state: clean, with staged and unstaged diffs both empty
 Initial bounded baseline: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
@@ -18,10 +18,10 @@ Initial bounded baseline: `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes
 This is the living implementation and decision ledger for two related but
 deliberately separate cleanup tracks:
 
-1. recasting registered observational action as an optional computational
-   refinement of the canonical internal `Path_cat_func`/`path_map_func`
-   action, with the dependent registry retired or replaced by honest
-   displayed structure; and
+1. retiring registered observational action in favor of the canonical
+   internal `Path_cat_func`/`path_map_func` action, with no parallel selected-
+   action registry and with dependent transport owned directly by `eq_apd`
+   unless a future honest displayed construction is adopted; and
 2. migrating genuine kernel consumers off the opaque D0/D1 compatibility
    representation, extracting or deleting that compatibility layer, and only
    then deciding the final unsuffixed names of the native EQ1 API.
@@ -33,26 +33,29 @@ probe results, migrations, rejected alternatives, and completion evidence. It
 does not override a contradictory active owner or authorize a rewrite merely
 because the mathematical comparison is plausible.
 
-The two tracks must not be implemented as one undifferentiated cleanup.
-Path-action refinement is a small, now-ready API/ownership migration. D0
-retirement changes the representation used by the discrete/dimension spine
-and has module-boundary consequences. Removing `_EQ1` is a final naming
-migration. Each needs its own bounded probes and exit gate.
+The two tracks must not be implemented as one undifferentiated cleanup. The
+D0/D1 extraction and `_EQ1` decision completed in P3–P8 remain final. The
+2026-07-20 P9 correction is a separate removal of the now-disproven selected-
+action abstraction and the isolated Sum experiment. It must not reopen the
+native discrete/dimension/WalkingEnd migration, the frozen compatibility
+contract, or the namespace decision.
 
 ## Goal
 
-Replace the unusual `ObsAction` presentation with a principled optional
-computational-refinement view of the canonical iterable functor
+Replace the unusual `ObsAction` presentation with direct use of the canonical
+iterable functor
 
 ```text
 path_map_func(f) : Functor(Path_cat(A),Path_cat(B)),
 ```
 
 retire `ObsDAction` unless a real displayed-functor/section consumer justifies
-it, migrate noncompatibility users from opaque D0/D1 omega-equivalence to the
-native equality-valued representation, isolate or delete the remaining
-compatibility surface, and finally make an evidence-backed decision about
-dropping the historical `_EQ1` suffix.
+it, remove the later `PathActionRefinement` recasting after confirming that no
+active semantic consumer needs an alternative definitional normal form,
+retire the isolated Sum feature for later redesign, migrate noncompatibility
+users from opaque D0/D1 omega-equivalence to the native equality-valued
+representation, isolate or delete the remaining compatibility surface, and
+make an evidence-backed decision about dropping the historical `_EQ1` suffix.
 
 The implementation must preserve the generic `fapp*`/`tapp*` owners, proof
 provenance, current WalkingEnd semantics, finite-dimension results, and the
@@ -60,15 +63,32 @@ one-way dependency direction of the native theorem modules.
 
 ## Review Verdict
 
-Yes—this work is worth reopening, but as two separate projects:
+The initial 2026-07-19 review selected two separate projects:
 
 1. Recast `ObsAction` as an optional computational refinement of the
    now-canonical `path_map_func`, retiring `ObsDAction` first.
 2. Migrate genuine kernel consumers off D0, then extract/delete the
    compatibility layer, and only afterward remove `_EQ1`.
 
-The first is now quite feasible. The second is feasible but is architectural
-work, not suffix cleanup.
+P0–P8 implemented that selection and completed the compatibility work. A
+follow-up consumer audit on 2026-07-20 invalidated the first project's chosen
+abstraction, without invalidating its canonical `path_map_func` owner or any
+P3–P8 result. The corrected verdict is:
+
+1. `path_map_func(f)` and the generic `fapp*` calculus are already the complete
+   principled nondependent action interface.
+2. `PathActionRefinement` is type-correct but architecturally unnecessary in
+   the active library: it is a parallel first-path-only channel, constructs no
+   functor, supplies no higher action, and has no independent semantic
+   consumer.
+3. Remove the generic refinement package, its Nat and PathRecord wrappers,
+   its proof-time support that exists only to compare a selected presentation,
+   and its checks/examples. Do not retain aliases.
+4. Retire the isolated Sum feature—including its ordinary decoded former—at
+   the explicitly selected user boundary, and redesign it later only if a
+   concrete consumer appears.
+5. Retain direct dependent `eq_apd`, canonical `Path_cat_func`/
+   `path_map_func`, `NatSucc_func`, and every completed compatibility result.
 
 ## Validated Current State
 
@@ -124,72 +144,115 @@ distinguish the now-active canonical `path_map_func` from any still-deferred
 constructor that would build a new functor from an independently selected
 action tower.
 
-### Selected principled formulation
+### Corrected canonical formulation — supersedes the P2 selection
 
-The canonical functor already exists. The appropriate replacement is not a
-constructor that tries to manufacture a functor from one chosen path
-operation. It is a refinement record over the canonical functor action:
+For `f : tau(A) -> tau(B)`, `x,y : tau(A)`, and `p : x = y`, the ordinary
+path action is exactly
 
-```text
-PathActionRefinement(f)
-  := Sigma act,
-       Pi x y p,
-         act(x,y,p)
-           = fapp1_fapp0(path_map_func(f),x,y,p).
+```lambdapi
+@fapp1_fapp0
+  (Path_cat A)
+  (Path_cat B)
+  (@path_map_func A B f)
+  x y p
 ```
 
-The exact kernel spelling must use the explicit ambient categories and
-arguments required by the current surface. The right-hand side already
-reduces to `eq_ap(f,p)`, so this is structurally the present `ObsAction` data
-re-anchored to its canonical semantic owner.
+The kernel's capped `Path_cat_func` rule reduces this term to `eq_ap(f,p)`.
+The same functor retains its iterable next-hom action through `fapp1_func`,
+action on equality of functions through `path_map_transf`, and ordinary
+identity/composition behavior through the global `fapp*` calculus. No extra
+record is required to define, recover, or compose path action.
 
-`PathActionRefinement` is preferred over `PathMapAction`: the latter could be
-misread as a full functor or a second action owner. The refinement stores a
-computationally preferable presentation and a pointwise path to the canonical
-action. It does not itself supply higher functoriality.
+P2 introduced the approximately typed package
 
-The ownership boundary is:
+```text
+Sigma act : (Pi x y, x = y -> f(x) = f(y)),
+  Pi x y p, act(x,y,p) = canonical_action(f,p).
+```
 
-- `path_map_func(f)` solely owns semantic path action and all higher action;
-- a refinement may select a more useful term presentation, such as Nat
-  successor's `p |-> p`;
-- its coherence is visible next-dimensional data;
-- no rewrite or unification rule may make the canonical functor use the
-  selected presentation globally;
-- no claim is made that one selected first action provides the recursive
-  higher-action tower required to construct an ordinary functor.
+That package is mathematically coherent, but it does not construct a functor,
+does not strengthen `path_map_func`, does not make `path_map_func` use `act`,
+and exposes only a capped first action. When `act` is canonical, the package
+is a Sigma wrapper around the term above with reflexive coherence. Its only
+possible role is to retain a different definitional presentation, such as
+Nat successor's exposed predecessor path `p` instead of `eq_ap(succ,p)`, or a
+branchwise Sum term instead of `eq_ap(sum_map(f,g),p)`.
 
-Installing the selected action as a competing `fapp1_fapp0` runtime owner
-would reopen exactly the identity, composition, higher-action, and projection
-diamonds which `Path_cat_func` now solves. That design is not selected.
+The reproduced current-owner inventory finds no measured consumer that needs
+either alternative normal form:
 
-### Consumer migration
+- Nat arithmetic and WalkingEnd use `nat_succ_function` and the canonical
+  iterable `NatSucc_func`; no later arithmetic or WalkingEnd construction
+  consumes `nat_succ_path_action_refinement`.
+- the Sum selected-action surface is self-contained in its one-way module,
+  diagnostics, and reviewer example;
+- `path_record_action` merely projects the selected operation, and with the
+  canonical package reduces back to direct `fapp1_fapp0(path_map_func(f),p)`;
+- refinement identity and composition only demonstrate closure of the
+  optional presentation; canonical functoriality already has a generic owner.
 
-The current `ObsAction` concept has genuine but isolated uses:
+The corrected ownership boundary is therefore:
 
-- Nat successor selects `p |-> p` and proves agreement with `eq_ap(succ,p)`;
-- the downstream Sum module combines two selected component refinements;
-- the PathRecord API allows an open map to expose a selected structural path
-  presentation;
-- identity and composition operations demonstrate closure of refinements;
-- canonical `obs_action_from_function` merely selects the semantic action.
+- `path_map_func(f)` solely owns nondependent semantic path action and every
+  higher action;
+- ordinary consumers use the exact `fapp1_fapp0` term above;
+- consumers needing the iterable object retain the functor and use
+  `fapp1_func`, rather than accepting a naked first-action map;
+- no generic `PathActionRefinement` Sigma, selected-action parameter,
+  compatibility alias, or parallel computation channel remains;
+- a future exceptional operation may be introduced locally only after a
+  measured consumer demonstrates a required definitional normal form, with a
+  local comparison theorem if needed;
+- a future dependent higher analogue remains a displayed functor/path-family
+  action or section problem, not an ordinary `Path_cat(A) -> Path_cat(B)`.
 
-The migration should therefore be consumer-led:
+### Corrective consumer retirement
 
-1. introduce `PathActionRefinement` and its introduction, selected-action,
-   application, coherence, canonical, identity, and composition operations;
-2. initially make `ObsAction` and its generic projections transparent
-   compatibility aliases if this makes the focused migration smaller;
-3. move the Nat successor refinement to the reusable Nat module when the
-   dependency and reviewer-example audit permits it;
-4. migrate the PathRecord-facing action names;
-5. migrate the Sum library and its reviewer example;
-6. delete the `ObsAction` aliases only after exact-token inventory reaches
-   zero outside an explicitly retained compatibility example.
+The P9 migration is deletion-led rather than an API rename:
 
-Canonical consumers should use `path_map_func` directly when they do not need
-an alternative term presentation. Do not retain a refinement package merely
-to restate `eq_ap`.
+1. delete `PathActionRefinementMap`, `PathActionRefinementCoherence`,
+   `PathActionRefinement`, and every generic introduction/projection,
+   canonical, identity, composition, application, and agreement operation;
+2. delete `path_record_action` and `path_record_action_agrees`, while retaining
+   the independent PathRecord structure and direct `path_record_witness_action`
+   through `eq_apd`;
+3. delete `nat_succ_path_action_map`, its coherence, and its package, while
+   retaining `nat_succ_function` and `NatSucc_func` because WalkingEnd uses
+   the canonical functor;
+4. delete the now-dead Nat comparison support—`nat_succ_ap_basis`, its two
+   proof-time `unif_rule`s, `nat_succ_component_basis`,
+   `nat_succ_basis_outer`, and `nat_succ_eq_ap`—because their only role is to
+   relate the abandoned `p |-> p` presentation to canonical `eq_ap`;
+5. remove refinement-specific diagnostics and reviewer examples, while
+   preserving a focused canonical `path_map_func` regression at the ordinary
+   Path-category owner;
+6. remove active documentation of the abandoned interface without erasing
+   dated P2 probe and promotion evidence; mark that evidence superseded.
+
+### Selected Sum retirement boundary
+
+The Sum inventory distinguishes two layers:
+
+1. the selected-action extension `emdash3_2_sum_observational_action.lp` with
+   its two stable bases, four proof-time comparisons, componentwise `eq_ap`
+   theorems, and selected refinement; and
+2. the independent kernel `SumData`/`Sum_grpd` former, visible-constructor
+   equality rules, `sum_elim`, and `sum_map`.
+
+Removing only the extension would be sufficient to correct path-action
+ownership. The explicitly selected 2026-07-20 boundary is broader: retire the
+entire currently isolated Sum feature and redesign it later if a concrete
+consumer requires it. Exact `.lp` inventory finds Sum only in the kernel, the
+main diagnostics, its one-way extension, and three reviewer examples
+(`binary_sum`, `sum_observational_equality`, and
+`sum_observational_action`). No Nat, WalkingEnd, native-EQ1, evidence-property,
+or frozen-compatibility theorem consumes it.
+
+P9 therefore deletes both layers, all three reviewer examples, their
+diagnostics, and active build/health/authority wiring. This is a deliberate
+feature withdrawal, not a logical consequence of canonical path action. Dated
+Sum promotion evidence remains historical and receives a supersession note;
+no inactive compatibility module or alias preserves the removed experiment.
 
 ## `ObsDAction`
 
@@ -1081,6 +1144,107 @@ future deletion of the frozen module or removal of `_EQ1` requires a new
 adopted migration at the exact P6/P7 boundary rather than reopening this plan
 implicitly.
 
+### Phase P9 — Correct canonical action and retire isolated Sum
+
+P9 is a post-completion corrective phase. It supersedes the architectural
+selection of P2 while preserving P2's dated probe evidence and every P3–P8
+result.
+
+1. Reproduce the exact current-owner consumer inventory and record the clean
+   descendant baseline, bounded check, warning inventory, and strict audit.
+2. In an owner-position full-kernel probe, remove the generic
+   `PathActionRefinement` block, the PathRecord selected-action wrappers, the
+   Nat selected-action proof-time basis/comparison family, and the complete
+   isolated Sum former/action surface.
+3. Verify that the kernel and all non-Sum active extensions still check and
+   that WalkingEnd continues to consume `nat_succ_function`/`NatSucc_func`
+   through canonical `path_map_func` action.
+4. Promote the kernel deletion without replacement rewrites, unification
+   rules, selected-action aliases, or local copies of canonical `eq_ap`.
+5. Remove the three Nat refinement declarations from the Nat extension and
+   delete the one-way Sum action module.
+6. Delete refinement/Sum diagnostic areas and the obsolete
+   `nat_observational_action`, `observational_action`, `binary_sum`,
+   `sum_observational_equality`, and `sum_observational_action` reviewer
+   examples. Move or add only the smallest canonical `path_map_func` checks
+   needed at `examples/path_category.lp` or another existing canonical owner.
+7. Remove the Sum module from active check/metrics wiring and remove Sum and
+   refinement entries from `AGENTS.md`, current SOP, Foundations, and INDEX.
+   Preserve dated history with explicit P9 supersession notes rather than
+   rewriting old results as if they never existed.
+8. Regenerate the strict check catalog and health report, then run the complete
+   warning, audit, TOC, examples, and CI gate.
+
+P9 invariants:
+
+- direct `fapp1_fapp0(Path_cat(A),Path_cat(B),path_map_func(f),x,y,p)` remains
+  checked and reduces to `eq_ap(f,p)`;
+- full next-hom action remains available from the same functor through
+  `fapp1_func`;
+- `path_record_witness_action` remains direct `eq_apd`;
+- `nat_succ_function` and `NatSucc_func` remain stable WalkingEnd inputs;
+- no active `.lp` occurrence of `PathActionRefinement`,
+  `path_action_refinement_*`, `path_record_action`, `nat_succ_path_action_*`,
+  `nat_succ_ap_basis`, or a Sum declaration/reference remains;
+- no active source, diagnostic, or reviewer example imports the deleted Sum
+  module;
+- P3–P8 native/compatibility namespace and module boundaries do not change.
+
+Exit gate: exact-token inventories satisfy the invariants; the warning and
+strict-audit deltas are explained by removed owners only; all retained
+canonical-action, Nat, WalkingEnd, PathRecord-dependent, native-EQ1, and
+legacy-contract checks pass; current authorities agree that selected action
+and Sum are absent pending a future consumer-led redesign; full CI passes.
+
+#### P9 adoption record — 2026-07-20
+
+- The implementation starts from clean `HEAD`
+  `20e286be55badc06da90d22bd7065dc5da2f2e63`, a descendant of the original
+  `2444c9d406fc3d201602ace7af5105c20c241680` provenance. Staged and unstaged
+  diffs were empty before this plan update.
+- `EMDASH_TYPECHECK_TIMEOUT=60s make check` passes at that baseline.
+- Exact inventory confirms that no arithmetic, WalkingEnd, native-EQ1,
+  evidence-property, or frozen compatibility theorem consumes the selected
+  Nat action or Sum. WalkingEnd uses only `nat_succ_function` and
+  `NatSucc_func` from the relevant Nat slice.
+- The entire Sum inventory is confined to `emdash3_2.lp`,
+  `emdash3_2_checks.lp`, `emdash3_2_sum_observational_action.lp`, and the three
+  Sum reviewer examples. The broader feature retirement is therefore
+  dependency-ready.
+- The ignored owner-position full-kernel deletion probe
+  `tmp/probes/paecr_p9_canonical_action_sum_retire_owner_full.lp` passes both
+  quiet and warning-enabled checks. Its logs end in `012142` and `012151`;
+  warnings remain exactly 1,010 unjoinable/159 replaceable, so deletion adds no
+  overlap family.
+- The probed deletion was promoted without a replacement rule, `unif_rule`,
+  alias, or local copy of `eq_ap`. The kernel removes the generic refinement
+  block, PathRecord nondependent wrappers, comparison-only Nat basis and its
+  two proof-time rules, and the complete Sum former. The Nat extension removes
+  its three refinement declarations. The Sum extension and six examples whose
+  only purpose was selected action or Sum are deleted.
+- `emdash3_2_checks.lp` removes the matching diagnostic areas while retaining
+  canonical path-map, direct dependent witness-action, native-EQ1, Nat,
+  WalkingEnd, and compatibility-contract regressions. The updated
+  `examples/path_category.lp` checks the object component, exact capped
+  `eq_ap`, full `fapp1_func` next-hom action, function-equality action, and
+  direct `eq_apd` witness transport.
+- Exact active `.lp` search is empty for every retired refinement, Nat-basis,
+  and Sum declaration/reference. `make check`, the focused warning-enabled
+  path-category example, and the full `make examples` sweep pass.
+- The regenerated strict catalog has 1,671 classified checks—1,496 positive
+  and 175 negative—across 61 areas, with zero legacy tags and zero
+  unclassified checks. The source TOC remains 86 headings across sections
+  0–20; strict LHS audit remains zero unreviewed clauses/45 annotated slots/27
+  intentional clauses.
+- Generated health passes all 46 retained source/example targets in 198.158
+  seconds aggregate. The kernel is 19,202 lines with 758 symbols, 602 rewrite
+  rules, and 61 unification rules; the diagnostic suite has 1,496 assertions.
+- Current authorities and dated decision ledgers are synchronized with the P9
+  supersession. Full local CI passes all 46 retained targets in 253.673
+  seconds, all 16 Infinity-Codex recovery tests, Python/shell/JSON validation,
+  diff/TOC/reference/report-header integrity, the strict LHS audit, and strict
+  catalog freshness. P9 is complete.
+
 ## Acceptance Criteria
 
 The plan is complete only when all selected criteria hold:
@@ -1089,11 +1253,14 @@ The plan is complete only when all selected criteria hold:
    canonical iterable raw-function path action.
 2. `ObsDAction` is absent unless a concrete displayed-structure consumer and
    separately adopted design justify it.
-3. Every retained nondependent selected action is presented as optional
-   refinement data over `path_map_func`.
-4. No selected refinement competes with generic `fapp*`/`tapp*` functoriality.
-5. Nat, PathRecord, and Sum consumers retain their intended computation and
-   explicit semantic agreement.
+3. No generic nondependent selected-action/refinement registry remains;
+   ordinary action uses `fapp1_fapp0(path_map_func(f),p)` directly.
+4. No alternate selected presentation competes with or wraps generic
+   `fapp*`/`tapp*` functoriality without a separately adopted measured
+   consumer.
+5. Nat and WalkingEnd retain canonical `NatSucc_func` behavior, PathRecord
+   dependent witness transport remains direct `eq_apd`, and the isolated Sum
+   feature is absent pending later redesign.
 6. The active discrete/dimension/WalkingEnd spine uses native equality-valued
    groupoidality, not D0 compatibility.
 7. Active kernel and native modules do not import an extracted compatibility
@@ -1119,7 +1286,7 @@ The plan is complete only when all selected criteria hold:
 | --- | --- | --- |
 | documentation/adoption | exact-token and authority comparison | bounded `make check` |
 | `ObsDAction` retirement | direct `eq_apd` owner-position full-file probe; PathOver formation and computation | `make check`; observational-action reviewer example |
-| path-action refinement | classifier/introduction/projection probes; identity/composition two-order checks; Nat/PathRecord/Sum consumers | `make check`; affected examples; warning comparison; strict audit if rules change |
+| canonical-action correction | owner-position deletion probe; direct capped/full path action; Nat/WalkingEnd and direct-`eq_apd` PathRecord consumers; zero retired-token inventory | `make check`; affected examples; warning comparison; strict audit; catalog/health |
 | native discrete spine | native `IsDiscreteCat` formation/projections; homwise path/retract consumers; import-cycle control | kernel/native/walking checks; directed/discrete/groupoidal/walking examples |
 | D0/D1 consumer migration | one probe per semantic owner; decoder and provenance controls | affected examples; warning summary; strict audit; catalog |
 | compatibility extraction | dependency/import inventory; no-duplicate-owner check | `make check`; `make examples`; warning/audit comparison |
@@ -1132,17 +1299,17 @@ rerun with relevant warnings/debug flags before a candidate is rejected.
 
 ## Risks And Mitigations
 
-### Risk 1: a refinement is mistaken for a functor constructor
+### Risk 1: an optional first-action presentation is retained as infrastructure
 
-Mitigation: keep `path_map_func` as the only functor; name the new data
-`PathActionRefinement`; state explicitly that it provides one selected
-presentation and coherence, not a higher-action tower.
+Mitigation: keep `path_map_func` as the only functor and remove the generic
+selected-action package. Reintroduce any exceptional presentation only at a
+measured local consumer, with no claim that it supplies a higher-action tower.
 
 ### Risk 2: selected computation is installed as competing runtime action
 
-Mitigation: expose selected action only through its own projection. Compare
-it propositionally with the canonical `fapp1_fapp0` value. Do not add a
-generic rewrite from PathMap action to a selected registry field.
+Mitigation: expose no selected-action projection in the active API. Use the
+canonical `fapp1_fapp0` value directly and do not add a generic rewrite from
+PathMap action to an alternate term.
 
 ### Risk 3: `ObsDAction` deletion is overstated as displayed functoriality
 
@@ -1197,6 +1364,7 @@ the corresponding controls.
 | `PAECR-P6-COMPAT-DECIDE` | **completed with bounded retention 2026-07-19** | delete compatibility or record bounded opt-in retention | P5 | frozen non-authoritative module, seven-consumer ceiling, no new features; retained only for complete OneCat two-sided theorem pending native package/raw-path coherence or deliberate compatibility deletion |
 | `PAECR-P7-NAMESPACE` | **completed with `_EQ1` retained 2026-07-19** | remove `_EQ1` after collisions are freed, or record reason to retain | P6 | 139 native declarations inventoried; 11 hard unsuffixed legacy collisions; partial rename and reverse aliases rejected; canonical suffix frozen until compatibility deletion/namespacing |
 | `PAECR-P8-CONSOLIDATE` | **completed 2026-07-19** | final reports/catalog/health/warnings/audit/CI | all selected phases | 1,791/66 strict catalog; 52-target health and CI; 1,010/159 warnings; zero/45/27 audit; 86-heading TOC; reference/header/diff integrity and 16 recovery tests pass |
+| `PAECR-P9-CANONICAL-ACTION-SUM-RETIRE` | **completed 2026-07-20** | supersede P2's unconsumed refinement abstraction, use canonical path action directly, and retire isolated Sum pending redesign | completed P2 inventory plus canonical G2 owner | owner-position quiet/warning deletion probes pass at unchanged 1,010/159; promotion and exact-zero active inventory pass; check/examples, 1,671/61 strict catalog, 46-target health, 86-heading TOC, and zero/45/27 audit pass; full CI passes all 46 targets in 253.673s plus every repository-integrity gate |
 | `PAECR-DISPLAYED-PATH-SECTION` | deferred research | design honest dependent path-family displayed functor/section | concrete consumer | separately adopted plan and owner probes |
 | `PAECR-TYPEEQUIV-LIBRARY` | retained boundary | preserve useful contractible-fibre equivalence theorems independently of primary universe identity | consumer review | explicit library classification |
 
@@ -1228,7 +1396,25 @@ Current supersession (2026-07-19): P3–P8 are also promoted. Compatibility is
 mechanically extracted and frozen under the exact P6 contract, and `_EQ1` is
 retained for the evidenced P7 collision reason. P8 synchronized every active
 authority and generated report and passed the full final gate. No plan row
-remains open.
+remained open at that checkpoint.
+
+Completed corrective slice (2026-07-20): P9 closed the only reopened row. Its
+implemented bounded slice was:
+
+1. reproduce the canonical-action, selected-action, Nat, PathRecord, and Sum
+   inventories at their current owners;
+2. validate the complete deletion in an owner-position kernel probe;
+3. promote the kernel/Nat/module deletion and immediately restore
+   `make check`;
+4. migrate diagnostics, examples, wiring, and current authorities without a
+   compatibility alias;
+5. run the proportional final gate and append the exact evidence to P9.
+
+The P2 record is retained as dated implementation evidence but its
+`PathActionRefinement` conclusion is superseded. No continuation should
+preserve that package merely because P2 once passed its gate. No row in this
+plan remains open; future Sum or displayed-dependent action work requires a
+new consumer-led adoption rather than implicit reopening.
 
 ## Completion And Blocker Policy
 

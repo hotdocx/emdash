@@ -14,8 +14,6 @@ the reusable Nat arithmetic/sethood extension is
 `emdash3_2_nat_arithmetic.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
-the library-level Sum observational-action extension is
-`emdash3_2_sum_observational_action.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
 The frozen opt-in D0/D1 and decoder compatibility surface is isolated in
 `emdash3_2_legacy_compat.lp`; it is not an active authority or part of the
@@ -36,15 +34,13 @@ Use the following order:
 5. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
    directed negative results;
-6. `emdash3_2_sum_observational_action.lp` for the retained library-level
-   componentwise Sum action and its proof-time bases;
-7. `emdash3_2_checks.lp` for executable regression statements;
-8. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+6. `emdash3_2_checks.lp` for executable regression statements;
+7. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-9. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-10. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+8. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+9. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-11. `reports/INDEX.md` for task-specific plans and decision records.
+10. `reports/INDEX.md` for task-specific plans and decision records.
 
 `emdash3_2_legacy_compat.lp` is deliberately outside this authority order. It
 imports the active kernel one-way, is consumed only by explicitly legacy

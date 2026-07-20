@@ -1,14 +1,14 @@
 # EMDASH v3.2 Equality-Valued Omega-Equivalence And Groupoidal-J Re-Redesign Proposal
 
 Date: 2026-07-17
-Last reviewed: 2026-07-19
+Last reviewed: 2026-07-20
 Plan-ID: EMDASH-V3-2-EQUALITY-VALUED-OMEGA-EQUIVALENCE-REREDESIGN-2026-07-17
-Depends-On: REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_sum_observational_action.lp; emdash3_2_checks.lp
+Depends-On: REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
 Supersedes: the equality, omega-equivalence, direct-univalence, internal-groupoidality, and structured-PathOut/J tracks of REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; no unaffected H0, truncation, dimension, directed, or former-action work
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-independent-review-and-user-clarification-2026-07-17
 Infinity-Codex-Decision-Responses: infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e16-d397-7a60-9765-1f35e36e20f7; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e5a-9a89-7d01-a92f-f4d15f14c77e; infinity-codex:019f6bd3-8405-7d31-8ced-8a6b127c1499:019f6e9e-4c44-7e61-9320-bfc602b50d64
-Status: **completed 2026-07-17 at the selected operational MVP boundary**; Phases 1 through 9, 11, and 12 are complete at their stated selected boundaries, while Phase 10 is deliberately deferred until a concrete core-universe motive consumer exists; the native EQ1 foundation, groupoidality/structured-`J` chain, unrestricted evidence-property theorem, and unconditional finite-`NCat` object-truncation theorem are decoder-free. The 2026-07-19 path-action/compatibility plan now owns legacy retirement: P4 removed self-only D0 experiments and promoted native ordinary-iso/object-truncation bridges; P5 mechanically extracted every remaining D0/D1/unsuffixed decoder owner into frozen `emdash3_2_legacy_compat.lp`; P6 permits only seven explicit legacy examples and retains the complete two-sided OneCat theorem because native stable casts do not provide facade-package/raw-path reification coherence; P7 retains the canonical `_EQ1` suffix after finding 11 hard unsuffixed collisions, rather than creating a partial rename or reverse aliases
+Status: **completed 2026-07-17 at the selected operational MVP boundary**; Phases 1 through 9, 11, and 12 are complete at their stated selected boundaries, while Phase 10 is deliberately deferred until a concrete core-universe motive consumer exists; the native EQ1 foundation, groupoidality/structured-`J` chain, unrestricted evidence-property theorem, and unconditional finite-`NCat` object-truncation theorem are decoder-free. The 2026-07-19 path-action/compatibility plan now owns legacy retirement: P4 removed self-only D0 experiments and promoted native ordinary-iso/object-truncation bridges; P5 mechanically extracted every remaining D0/D1/unsuffixed decoder owner into frozen `emdash3_2_legacy_compat.lp`; P6 permits only seven explicit legacy examples and retains the complete two-sided OneCat theorem because native stable casts do not provide facade-package/raw-path reification coherence; P7 retains the canonical `_EQ1` suffix after finding 11 hard unsuffixed collisions, rather than creating a partial rename or reverse aliases. Its 2026-07-20 P9 corrective phase supersedes this report's selected-action and Sum-retention conclusions: direct `path_map_func` action is the sole nondependent interface, and the isolated Sum experiment is retired; no native-EQ1 result is changed
 Review baseline: `772411011ac721c84d143a2967f4e5c31e94bc70`
 Implementation starting baseline: `4315137094d2faf4fcc6f4b026960a62bd5406e7`
 Primary predecessor: `REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13.md`
@@ -41,15 +41,30 @@ The explicit user handoff on 2026-07-17 adopts this overlay. Authority is now:
 3. `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
    authority for native-EQ1 evidence property, truncation under retractions,
    and unconditional finite-`NCat` object truncation;
-4. `emdash3_2_sum_observational_action.lp` is the downstream library authority
-   for the optional former-specific Sum observational action;
-5. `emdash3_2_checks.lp` remains the executable diagnostic authority;
-6. the current SOP and Foundations report retain their ordinary authority;
-7. this report is the living implementation plan and decision ledger for its
+4. `emdash3_2_checks.lp` remains the executable diagnostic authority;
+5. the current SOP and Foundations report retain their ordinary authority;
+6. this report is the living implementation plan and decision ledger for its
    named equality/equivalence/groupoidality tracks;
-8. the July 13 plan remains the retained promoted-work ledger and the active
+7. the July 13 plan remains the retained promoted-work ledger and the active
    plan for unaffected H0, truncation, dimension, directed, and former-action
    tracks.
+
+### 2026-07-20 path-action and Sum supersession
+
+The active P9 decision in
+`REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md`
+overrides this report wherever the dated ledger says that
+`PathActionRefinement` is the retained replacement for `ObsAction`, that Nat
+successor needs its comparison basis for that package, or that the downstream
+Sum action/module remains active. Those were coherent intermediate promotions,
+but the final consumer audit found no independent user of the alternate
+first-path normal form. The canonical term
+`fapp1_fapp0(path_map_func(f),p)` already reduces to `eq_ap(f,p)` and retains
+the full higher action through `fapp1_func`. P9 therefore deletes the parallel
+package and its comparison-only support, keeps dependent transport as direct
+`eq_apd`, and retires the isolated Sum feature for later redesign. All later
+occurrences in this report are chronological evidence unless explicitly
+restated as current; none reauthorizes the deleted APIs.
 
 This overlay supersedes the July 13 plan only for the specific architecture
 tracks named below. The July 13 plan remains a

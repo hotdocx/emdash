@@ -1,7 +1,7 @@
 # EMDASH v3.2 Walking Endomorphism Directed-HIT And Nat Normal-Form Plan
 
 Date: 2026-07-17
-Last reviewed: 2026-07-19
+Last reviewed: 2026-07-20
 Plan-ID: EMDASH-V3-2-WALKING-ENDOMORPHISM-DIRECTED-HIT-2026-07-17
 Depends-On: REPORT_EMDASH_V3_2_EQUALITY_VALUED_OMEGA_EQUIVALENCE_REREDESIGN_PLAN_2026-07-17; REPORT_EMDASH_V3_2_OBSERVATIONAL_EQUALITY_TRUNCATION_UNIVALENCE_REDESIGN_PLAN_2026-07-13; REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26; EMDASH_FOUNDATIONS; emdash3_2.lp; emdash3_2_nat_arithmetic.lp; emdash3_2_eq1_hom_action.lp; emdash3_2_eq1_evidence_property.lp; emdash3_2_checks.lp
 Supersedes: none
@@ -24,6 +24,17 @@ infrastructure in `emdash3_2.lp`; walking HIT/model/comparison and the
 restricted spiral specialization in `emdash3_2_walking_end_hit.lp`. The later
 compatibility-retirement plan mechanically extracted D0/D1 into frozen
 `emdash3_2_legacy_compat.lp`; none of these WalkingEnd owners imports it
+
+Path-action correction (2026-07-20): P9 of
+`REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md`
+removes `PathActionRefinement`, the unused successor comparison basis and
+`nat_succ_eq_ap`, and the isolated Sum experiment. WalkingEnd never consumed
+those selected-action declarations: it uses `nat_succ_function` and the
+canonical iterable `NatSucc_func`. Its path action is therefore the ordinary
+`fapp1_fapp0(path_map_func(nat_succ_function),p)`, definitionally `eq_ap`, and
+all WalkingEnd HIT, decoder, spiral, sethood, and directed-negative results are
+unchanged. Later refinement/basis references in this report are dated design
+evidence, not active dependencies.
 
 ## Status And Authority
 

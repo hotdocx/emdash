@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-19
+Date: 2026-07-20
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
@@ -8,9 +8,10 @@ derived native-EQ1 hom-action/groupoidality extension, and
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
 evidence-property and finite-`NCat` object-truncation extension.
 `emdash3_2_nat_arithmetic.lp` owns reusable Nat addition, associativity, and
-sethood independently of the walking construction.
-`emdash3_2_sum_observational_action.lp` retains the former-specific Sum
-path-action refinement as a library module rather than kernel infrastructure.
+sethood, together with the canonical `NatSucc_func`, independently of the
+walking construction. The isolated Sum former/action experiment was retired
+on 2026-07-20 pending a future consumer-led redesign; there is no active Sum
+module or compatibility facade.
 `emdash3_2_legacy_compat.lp` is a frozen, opt-in, non-authoritative D0/D1 and
 decoder module outside the normal dependency closure; only seven explicitly
 legacy reviewer examples import it, and no new consumer or feature is allowed.
@@ -37,35 +38,48 @@ implementation plans, and historical decisions.
 ## Current Plans
 
 - `REPORT_EMDASH_V3_2_PATH_ACTION_AND_EQUIVALENCE_COMPATIBILITY_RETIREMENT_PLAN_2026-07-19.md`:
-  active living plan for recasting selected nondependent path action as an
-  optional computational refinement of the canonical iterable
-  `Path_cat_func`/`path_map_func` action, retiring the unused dependent
-  registry first, and separately migrating the D0/D1 compatibility
-  representation before deciding whether to remove the historical `_EQ1`
-  suffix. The implementation baseline and review provenance is
-  `2444c9d406fc3d201602ace7af5105c20c241680`. P0–P4 completed the authority
-  repair, dependent-registry deletion, `PathActionRefinement` migration,
-  native discrete/dimension/WalkingEnd spine, consumer-led native theorem
-  migration, and deletion of self-only D0 experiments. P5 then mechanically
-  moved the remaining 2,751-line/126-declaration compatibility closure out of
-  the kernel. The active kernel, native modules, Nat, WalkingEnd, Sum module,
-  and main diagnostics contain no D0/D1 reference or compatibility import;
-  exactly seven legacy examples opt in explicitly. The active warning
-  inventory is now 1,010/159, while checking the legacy module restores the
-  former combined 1,016/159 closure; strict audit remains zero/45/27.
+  completed living plan and decision ledger. P0–P8 completed the native
+  equality-valued migration, extracted the remaining D0/D1/decoder closure
+  into the frozen opt-in compatibility module, and retained the coherent
+  `_EQ1` namespace after measuring hard legacy collisions. P9 is the completed
+  2026-07-20 corrective phase: it supersedes P2's unconsumed
+  `PathActionRefinement` abstraction and makes the already-canonical
+  `path_map_func(f) : Path_cat(A) -> Path_cat(B)` the sole nondependent action
+  interface. Its capped generic action reduces definitionally to `eq_ap(f,p)`,
+  its uncapped next-hom action remains iterable, and dependent witness
+  transport remains direct `eq_apd`. The generic refinement package, its Nat
+  and PathRecord wrappers, comparison-only Nat proof basis, and their
+  checks/examples are removed rather than renamed. The isolated Sum
+  former/action experiment is also retired for later redesign because
+  no Nat, WalkingEnd, native-EQ1, evidence-property, or compatibility theorem
+  consumes it. The implementation baseline and review provenance is
+  `2444c9d406fc3d201602ace7af5105c20c241680`.
+
+  The compatibility conclusions are unchanged. P5 mechanically moved the
+  remaining 2,751-line/126-declaration closure out of the kernel. The active
+  kernel, native modules, Nat, WalkingEnd, and main diagnostics contain no
+  D0/D1 reference or compatibility import; exactly seven legacy examples opt
+  in explicitly. The pre-P9 active warning inventory is 1,010/159, while
+  checking the legacy module restores the former combined 1,016/159 closure;
+  strict audit is zero/45/27.
   P6 retains that module under a closed contract solely to preserve the
   complete two-sided `one_cat_iso_type_equiv` result pending native facade-
   package/raw-path reification coherence or deliberate compatibility deletion.
   P7 inventories 139 native `_EQ1` declarations and 11 hard unsuffixed legacy
   collisions. It therefore retains the coherent native suffix rather than
   creating a partial rename, reverse aliases, or same-client collisions. P8
-  has synchronized current authorities and generated reports. The final
+  synchronized current authorities and generated reports. Its final
   catalog has 1,791 classified checks across 66 areas, active warnings are
   1,010/159, strict audit is zero/45/27, TOC has 86 headings, all 52 health
   targets pass, and full CI passes the same targets in 241.282 seconds along
-  with all repository-integrity gates. The completed plan records every probe,
-  extraction manifest, retention condition, namespace collision, and
-  validation result.
+  with all repository-integrity gates. P9's owner-position quiet/warning
+  removal probe, promoted checks, full reviewer sweep, exact-zero retired-token
+  inventory, 1,671-check/61-area strict catalog, 46-target health report,
+  unchanged 1,010/159 warnings, zero/45/27 audit, and 86-heading TOC pass.
+  Full CI passes all 46 targets in 253.673 seconds, all 16 recovery tests, and
+  every repository-integrity gate. No plan row remains open. The plan records
+  every probe, extraction manifest, retention condition, namespace collision,
+  supersession decision, and validation result.
 - `REPORT_EMDASH_V3_2_WALKING_ENDOMORPHISM_DIRECTED_HIT_PLAN_2026-07-17.md`:
   completed migration plan plus implemented post-MVP restricted-CoreIncl
   redesign for an opaque one-dimensional directed HIT.
@@ -157,11 +171,16 @@ implementation plans, and historical decisions.
   directly through `eq_apd`, and recasts every retained nondependent selection
   as `PathActionRefinement` of canonical `path_map_func` action. Nat successor
   retains the exposed predecessor path while agreeing propositionally with
-  `NatSucc_func`. The historical package names remain only in dated promotion
-  records. The
-  independently statused general binary-sum
-  carrier/classifier, dependent eliminator, both betas, and non-collapse
-  control, and the next bounded prerequisite adds the recursive
+  `NatSucc_func`. Those sentences are dated P2 evidence, not the active
+  architecture: the 2026-07-20 P9 correction found no consumer for the
+  parallel first-path interface and removes `PathActionRefinement`, its Nat
+  proof basis/wrapper, and the nondependent PathRecord wrapper. Canonical
+  action is used directly through `fapp1_fapp0(path_map_func(f),p)`, which
+  reduces to `eq_ap(f,p)`; dependent witness transport remains direct
+  `eq_apd`. The isolated general Sum former and action module are retired
+  together for later consumer-led redesign. Historical package and Sum names
+  remain only in dated promotion records. The next bounded prerequisite adds
+  the recursive
   `CatDim -> TruncLevel` object-level index without claiming the still-blocked
   object-truncation theorem. That index now passes synchronized CI. General
   `TypeEquiv` invariance of `IsTruncGrpd` and its decoder-owned fixed-map
@@ -403,7 +422,12 @@ implementation plans, and historical decisions.
   19,988-line/808-symbol/581-rule/58-unification-rule kernel, 1,507 positive
   diagnostics, and 41 measured files. Full examples and synchronized CI pass;
   CI records 220.269s measured checking time. No successor-specific J beta,
-  Nat canonicity, or proof erasure is claimed.
+  Nat canonicity, or proof erasure is claimed. This is preserved as dated
+  validation evidence only. P9 of the active path-action cleanup plan removes
+  the basis, its two proof-time rules, the arbitrary comparison, and the
+  refinement wrapper because they had no consumer beyond that selected-action
+  presentation. `NatSucc_func`, recursive Nat equality, `nat_succ_ind_eqr`,
+  Nat arithmetic/sethood, and WalkingEnd remain active.
 - `REPORT_EMDASH_V3_2_DEFISO_HOM_ACTION_PROFCOMPARISON_MIGRATION_PLAN_2026-06-28.md`:
   active incremental `DefIso`, hom-action, and `ProfComparison` migration.
 - `REPORT_EMDASH_V3_2_EQUIPMENT_SHADOW_TENSOR_JOIN_REDESIGN_PLAN_2026-06-28.md`:
@@ -427,7 +451,10 @@ but their promoted phases are not open implementation plans.
   evidence, the stable first-class facade and explicit path adapters, direct
   Cat/Grpd univalence boundaries, native next-hom action, internal
   groupoidality, structured `PathOut`/`J`, unrestricted evidence uniqueness,
-  unconditional finite-`NCat` object truncation, and Sum-action demotion.
+  unconditional finite-`NCat` object truncation, and its dated Sum-action
+  demotion experiment. The 2026-07-20 P9 correction in the active path-action
+  plan subsequently retires that isolated Sum feature and the unconsumed
+  `PathActionRefinement` layer without changing any native-EQ1 result.
   Native theorem modules are decoder/D0-free; raw unreified-path observers,
   reverse coherent-core assembly, consumer-led core-universe functors, full
   deletion of the now-frozen compatibility module, and metatheory remain

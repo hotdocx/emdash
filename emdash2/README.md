@@ -23,11 +23,11 @@ The checked kernel currently includes:
 - directed Cat-valued families, natural/displayed functors and transfors,
   Sigma total categories, section/Pi categories, dependent homs, and fibre
   transport;
-- decoded Empty/Unit/Bool/Nat and general binary-sum formers, plus a named
-  finite dependent-record convention, with dependent elimination, constructor
-  beta, and visible Unit/Boolean/Nat/general-sum constructor equality whose
-  closed cases compute to Unit, Empty, predecessor equality, or component
-  equality while generic `eq_refl` retains proof provenance; the generic J
+- decoded Empty/Unit/Bool/Nat formers plus a named finite dependent-record
+  convention, with dependent elimination, constructor beta, and visible
+  Unit/Boolean/Nat constructor equality whose closed cases compute to Unit,
+  Empty, or predecessor equality while generic `eq_refl` retains proof
+  provenance; the generic J
   beta guards both its category and repeated endpoint so a foreign or
   predecessor reflexivity proof cannot fire merely through a shared reduced
   classifier; plus a nested-Sigma
@@ -117,29 +117,19 @@ The checked kernel currently includes:
   retained intact rather than weakened or supported by a new proof-time
   identification, and no new compatibility consumer is permitted;
 - canonical iterable `Path_cat_func`/`path_map_func` action for every raw
-  groupoid function, plus optional `PathActionRefinement` data whose selected
-  nondependent action carries next-dimensional agreement with the exact
-  capped `path_map_func` action. Identity selection and refinement composition
-  compute, while composite canonical action remains related to nested action
-  propositionally through `eq_ap_comp`; no second functor or runtime action
-  owner is introduced. PathRecord maps consume refinements on shaped paths.
-  The unused dependent registry is retired, so the dependent witness field
-  acts through direct `eq_apd` and `PathOver`; any stronger dependent analogue
-  would be displayed functor/section structure. A refinement is not the
-  structured groupoidal-J owner, which consumes an already functorial `Catd`
-  motive. The canonical binary-sum map combines summand refinements in the
-  downstream Sum library module: equal tags delegate to their supplied
-  selections, mixed tags use Empty, and agreement with canonical
-  `path_map_func` action remains propositional and runtime-distinct. Recursive
-  Nat equality has an optional successor refinement: its selected map retains
-  the exposed predecessor path `p`, while a stable proof-time basis and
-  generic J prove agreement with the capped action of `NatSucc_func`. The
-  former-specific `nat_succ_ind_eqr` facade
+  groupoid function. Its capped `fapp1_fapp0` action computes directly to
+  `eq_ap`, its full next-hom action remains iterable through `fapp1_func`, and
+  identity/composition are inherited from the generic functor calculus. No
+  parallel selected-action registry or second runtime owner remains. The
+  unused dependent registry is retired, so the PathRecord witness field acts
+  through direct `eq_apd` and `PathOver`; any stronger dependent analogue
+  would be displayed functor/section structure. Recursive Nat equality keeps
+  the former-specific `nat_succ_ind_eqr` facade, which
   then accepts arbitrary proof-dependent successor-path motives and computes
   only when the exposed predecessor proof is component reflexivity, by routing
-  through the existing generic J owner. Outer reflexivity and the action basis
-  remain noncomputational; this is not a global fibrancy package. Neither
-  action erases proof provenance;
+  through the existing generic J owner. Outer reflexivity remains
+  noncomputational; this is not a global fibrancy package. The isolated Sum
+  experiment was retired on 2026-07-20 for later consumer-led redesign;
 - Cat-valued profunctors, reindexing, tensor, implication, computational
   comparison, weighted-limit/colimit staging, and adjunction mates;
 - a primitive directed join slice, synthetic PathOut/path induction, and a
@@ -156,12 +146,10 @@ or a completed foundational theory.
 - `emdash3_2_eq1_evidence_property.lp`: downstream transparent native-EQ1
   evidence-property, retract-truncation, and finite-`NCat` object-truncation
   extension.
-- `emdash3_2_nat_arithmetic.lp`: reusable Nat arithmetic, successor
-  path-action refinement, proposition witnesses, and Nat sethood.
+- `emdash3_2_nat_arithmetic.lp`: reusable Nat arithmetic, canonical
+  `NatSucc_func`, proposition witnesses, and Nat sethood.
 - `emdash3_2_walking_end_hit.lp`: selected walking-endomorphism directed-HIT,
   eliminator/comparison, and separate `BNat` consistency model.
-- `emdash3_2_sum_observational_action.lp`: library-level componentwise Sum
-  observational action and proof-time comparison bases.
 - `emdash3_2_checks.lp`: executable diagnostic/regression suite.
 - `emdash3_2_legacy_compat.lp`: frozen opt-in D0/D1 and decoder compatibility
   module. It imports the kernel one-way, is non-authoritative, and may be used

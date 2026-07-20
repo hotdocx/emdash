@@ -6,9 +6,12 @@
   and shared categorical composition agrees propositionally with J-derived
   path transitivity. Path reversal is the arrow action of a functor from the
   genuine opposite path category; generic functoriality owns reversal of
-  composition, while agreement with J-derived symmetry is propositional. The
-  canonical dependent PathRecord additionally exposes a nested-Sigma path
-  view with stable shaped reflexivity and a reflexive specialized J beta.
+  composition, while agreement with J-derived symmetry is propositional.
+  Path_cat_func gives every raw groupoid function its canonical iterable
+  action, whose capped path action is eq_ap. The canonical dependent
+  PathRecord additionally exposes a nested-Sigma path view with stable shaped
+  reflexivity, a reflexive specialized J beta, and direct eq_apd witness
+  transport.
 */
 
 require open emdash.emdash3_2;
@@ -20,6 +23,29 @@ assert [A : Grpd] (x y : τ A) ⊢
 
 assert [A : Grpd] (x : τ A) ⊢
   @id (Path_cat A) x ≡ eq_refl x;
+
+assert [A B : Grpd]
+  (f : τ A → τ B)
+  (x y : τ A)
+  (p : τ (@= A x y)) ⊢
+  @fapp1_fapp0
+    (Path_cat A)
+    (Path_cat B)
+    (@path_map_func A B f)
+    x y p
+  ≡ @eq_ap A B f x y p;
+
+assert [A B : Grpd]
+  (f : τ A → τ B)
+  (x y : τ A) ⊢
+  @fapp1_func
+    (Path_cat A)
+    (Path_cat B)
+    (@path_map_func A B f)
+    x y
+  : τ (Functor
+      (Path_cat (@= A x y))
+      (Path_cat (@= B (f x) (f y))));
 
 assert [A : Grpd]
   [x y : τ A]
@@ -106,3 +132,14 @@ assert [A : Grpd]
     r r
     (@PathRecordPathRefl A r)
   ≡ @PathRecordPathRefl A r;
+
+assert [A : Grpd]
+  [r s : τ (PathRecord_grpd A)]
+  (p : τ (@PathRecordPathView A r s)) ⊢
+  @path_record_witness_action A r s p
+  ≡ @eq_apd
+      (PathRecord_grpd A)
+      (λ t : τ (PathRecord_grpd A),
+        @= A (path_record_src t) (path_record_dst t))
+      (λ t : τ (PathRecord_grpd A), path_record_witness t)
+      r s p;

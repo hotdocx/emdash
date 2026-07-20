@@ -6,13 +6,12 @@ extension `emdash3_2_eq1_hom_action.lp`, and the transparent evidence-property
 and finite-dimension extension `emdash3_2_eq1_evidence_property.lp`. It
 presents the intended mathematics in ordinary category/type-theory notation
 and deliberately suppresses most Lambdapi rewrite engineering details.
-Reusable Nat addition, successor path action, and sethood live in the one-way
+Reusable Nat addition, canonical successor path functor, and sethood live in the one-way
 `emdash3_2_nat_arithmetic.lp` module. The walking-endomorphism directed-HIT/
 `BNat` presentation and its restricted-CoreIncl spiral specialization live
 downstream in `emdash3_2_walking_end_hit.lp` under the July 17 living plan.
-The retained componentwise Sum observational action lives in the separate
-library module `emdash3_2_sum_observational_action.lp`; it is not a
-foundational univalence dependency.
+The isolated binary-Sum experiment was retired on 2026-07-20 for later
+consumer-led redesign; it is not part of the active foundation.
 
 The implementation is still evolving. This note describes the current directed
 categorical foundation and the first checked equivalence, profunctor,
@@ -107,37 +106,31 @@ refl_x        : x = x
 J             equality induction
 ```
 
-The decoded elementary object layer now also contains Empty, Unit, Bool,
-natural numbers, and general binary sums. Their public classifiers and decoded
-carriers are:
+The decoded elementary object layer now also contains Empty, Unit, Bool, and
+natural numbers. Their public classifiers and decoded carriers are:
 
 ```text
 τ(Empty_grpd) = empty       τ(Unit_grpd) = unit
-τ(Bool_grpd)  = bool        τ(Nat_grpd)  = nat
-τ(Sum_grpd(A,B)) = SumData(A,B).
+τ(Bool_grpd)  = bool        τ(Nat_grpd)  = nat.
 ```
 
-Visible Unit, Boolean, natural-number, and general-sum constructor equality
-now have the bounded observational cases
+Visible Unit, Boolean, and natural-number constructor equality now have the
+bounded observational cases
 
 ```text
 tt = tt       = Unit_grpd
 false = false = Unit_grpd       false = true  = Empty_grpd
 true  = false = Empty_grpd      true  = true  = Unit_grpd
 zero = zero = Unit_grpd         zero = succ(m) = Empty_grpd
-succ(n) = zero = Empty_grpd     succ(n) = succ(m) = (n = m)
-inl(a) = inl(a') = (a =_A a')  inl(a) = inr(b) = Empty_grpd
-inr(b) = inl(a) = Empty_grpd   inr(b) = inr(b') = (b =_B b').
+succ(n) = zero = Empty_grpd     succ(n) = succ(m) = (n = m).
 ```
 
 These computations select only the classifier. Closed generic reflexivity
 remains `eq_refl Unit_grpd tt`, `eq_refl Bool_grpd false`, or
 `eq_refl Bool_grpd true`; Nat reflexivity remains `eq_refl Nat_grpd zero` or
-`eq_refl Nat_grpd (succ n)`; sum reflexivity remains the outer
-`eq_refl (Sum_grpd A B) (sum_inl a)` or corresponding `sum_inr` term. These
-terms are merely typed by the reduced Unit, predecessor-equality, or component-
-equality classifier and are not erased to `tt`, `eq_refl Nat_grpd n`, or
-component reflexivity. The generic J beta repeats its category and endpoint on
+`eq_refl Nat_grpd (succ n)`. These terms are merely typed by the reduced Unit
+or predecessor-equality classifier and are not erased to `tt` or
+`eq_refl Nat_grpd n`. The generic J beta repeats its category and endpoint on
 the rule LHS. This is a subject-reduction guard: distinct elementary paths can
 share a reduced classifier, but a foreign, predecessor, or component
 reflexivity proof must not trigger a branch indexed by the outer proof. Normal
@@ -145,32 +138,17 @@ outer reflexivity still computes through generic J, path symmetry, Core
 inclusion, path-category units, and the ordinary/omega categorical encoders
 without an elementary-former registry. The alternative proofs receive no
 extra endpoint-guarded beta, and no proof-time `unif_rule` identifies the proof
-presentations. Open Unit, Boolean, Nat, and sum endpoints retain primitive
+presentations. Open Unit, Boolean, and Nat endpoints retain primitive
 equality. These are runtime boundaries, not eta, canonicity, equality-
 reflection, or non-derivability theorems.
 
-The Empty, Bool, Nat, and general binary-sum eliminator facades are dependent
-and compute on their constructors through Lambdapi's generated induction
-principles. For the sum, the two native constructors have the decoded reading
-
-```text
-sum_inl(a) : Sum_grpd(A,B)       sum_inr(b) : Sum_grpd(A,B),
-
-sum_elim(P,u_inl,u_inr,sum_inl(a)) = u_inl(a)
-sum_elim(P,u_inl,u_inr,sum_inr(b)) = u_inr(b).
-```
-
-Both classifier binders are separate native-inductive parameters; grouping
-them makes Lambdapi treat the second classifier as an eliminator index and
-does not support the intended fixed-`A,B` dependent facade. This is the
-formation/introduction/elimination/beta layer only except for the separately
-bounded visible Unit/Boolean/Nat/sum classifier cases above. The separately
-registered componentwise action of the canonical Sum map is described below.
-Empty observational identity, broader no-confusion, higher action for the
-other elementary formers, canonicity, and categorical initial, coproduct, or
-natural-number-object properties remain separate tasks. The constructor
-conversion non-collapse diagnostics are local regression controls, not no-
-confusion or normalization theorems.
+The Empty, Bool, and Nat eliminator facades are dependent and compute on their
+constructors through Lambdapi's generated induction principles. Empty
+observational identity, broader no-confusion, higher action for the other
+elementary formers, canonicity, and categorical initial or natural-number-
+object properties remain separate tasks. The retired Sum former and its
+observational/action experiments remain dated plan history rather than an
+inactive compatibility API.
 
 The one-way Nat arithmetic extension provides the reusable prerequisites
 
@@ -404,104 +382,61 @@ dependent-tail observer, and iterate through a nested `PathRecord`. They do
 not introduce a second normalization through the Sigma maps or imply
 fibrancy.
 
-Optional nondependent computational refinement is an explicit data boundary.
-For an open map `f : A -> B`, `PathActionRefinement(f)` stores a selected
-operation on arbitrary paths and a pointwise path showing that operation
-agrees with the exact capped action of
+Every ordinary function has one canonical, iterable path action. For
+`f : A -> B`, the kernel constructs
 
 ```text
 path_map_func(f) : Functor(Path_cat(A),Path_cat(B)).
 ```
 
-Thus a specialized implementation may compute without silently asserting an
-unrelated path action, and its agreement field is visible next-dimensional
-data. The canonical refinement selects that capped action itself; the identity
-refinement selects `p |-> p`; and refinements compose pointwise. The semantic
-comparison between nested canonical action and canonical action of a composite
-is the propositional theorem `eq_ap_comp`, not a new runtime composition fold.
-
-The canonical iterable action remains independently authoritative:
-`path_map_func(f) : Functor(Path_cat(A),Path_cat(B))` is the first action of
-`Path_cat_func`, its capped path action computes to `eq_ap(f)`, and its next
-hom action remains available through the generic functor calculus.
-`PathActionRefinement` neither constructs a second functor nor supplies the
-higher-action tower: it is only optional selected computation plus agreement
-with this canonical owner.
-
-This selected-computation registry is also not the structured groupoidal-J
-mechanism. `PathOut`/J starts from a functorial `Catd` motive whose directed
-action already exists. The former dependent `ObsDAction` package had no
-ordinary `Path_cat(A) -> Path_cat(B)` analogue and no selected-action consumer;
-it has therefore been retired. `path_record_witness_action` now uses direct
-`eq_apd`. An honest higher dependent replacement would be a displayed
-functor/section construction over the varying family and remains deferred
-until a concrete consumer requires it. P2 of the active cleanup plan in
-`INDEX.md` completed the nondependent migration; retained Nat, PathRecord, and
-Sum refinements remain library-facing computation rather than a second
-univalence or fibrancy foundation.
-
-The library-level Sum action module retains the first componentwise
-elementary-former refinement without placing its bases in the kernel.
-The canonical map is defined through the existing eliminator:
+Its object component is `f`, and its capped first-path component is exactly
 
 ```text
-sum_map(f,g)(inl(a)) = inl(f(a))
-sum_map(f,g)(inr(b)) = inr(g(b)),
-
-sum_path_action_refinement(f,g,u,v)
-  : PathActionRefinement(sum_map(f,g)).
+fapp1_fapp0(Path_cat(A), Path_cat(B), path_map_func(f), x, y, p)
+  = eq_ap(f,p).
 ```
 
-Here `u : PathActionRefinement(f)` and
-`v : PathActionRefinement(g)`. On an inl/inl path the selected operation is
-`path_action_refinement_apply(u,p)`, and on an inr/inr path it is
-`path_action_refinement_apply(v,p)`. Both mixed-tag classifiers reduce to
-`Empty_grpd`, so the selected map returns the impossible input while its
-coherence proof eliminates that input. The same-tag coherence composes the
-supplied summand agreement with `sum_map_inl_eq_ap` or
-`sum_map_inr_eq_ap`; these latter paths are derived for arbitrary component
-paths by ordinary component J. The public coherence target is the exact
-capped `path_map_func(sum_map(f,g))` action, which reduces to the `eq_ap` term
-used internally by that proof.
+This is a definitional computation, not merely a comparison theorem. The
+uncapped `fapp1_func` projection retains the whole next-hom functor, so the
+same owner remains iterable at higher cells. Equality between functions acts
+through `path_map_transf`, while identity, composition, and ordinary
+naturality remain the generic `fapp*`/`tapp*` calculus's responsibility.
+Where nested `eq_ap` and action by a composite are not judgmentally identical,
+`eq_ap_comp` supplies the ordinary propositional comparison; no parallel
+runtime channel is needed.
 
-The reflexive base has a measured proof-time boundary. Transparent `eq_ap`
-unfolds to generic `ind_eqr`, and the guarded J owner correctly refuses to
-treat component reflexivity as outer Sum reflexivity. Each tag therefore has
-a stable action-basis value and two direct former-specific `unif_rule`s: one
-compares the basis with normalized component reflexivity, and one compares it
-with the exact outer-J normal form. These are classified as semantically
-justified structural-action laws. The theorem explicitly composes the two
-resulting paths; it does not rely on experimental unification transitivity.
-Typed `eq_refl` checks each direct comparison, while runtime conversion and
-the direct outer/component proof-time collapse remain negative. Thus the
-rules do not erase Sum proof provenance, add an arbitrary structured-J beta,
-or supply no-confusion, canonicity, or categorical coproduct structure.
+The 2026-07-20 corrective audit therefore removed the short-lived
+`PathActionRefinement` Sigma interface. Although that package was type-correct,
+it stored only a selected first-path operation and its agreement with the term
+above: it constructed no functor, supplied no higher action, and had no
+semantic consumer requiring a different definitional normal form. Keeping it
+would have made the canonical action look optional and forced clients to carry
+a redundant `act` argument. A client that simply needs the action of `f` on
+`p` should use the displayed `fapp1_fapp0(path_map_func(f),p)` term directly.
+A genuinely exceptional future former may prove a local comparison theorem,
+but that alone does not justify restoring a generic selected-action registry.
 
-Recursive natural-number equality supplies a second, smaller optional
-refinement. Because
+Dependent transport is similarly direct. `path_record_witness_action` is
+`eq_apd` for the witness family. There is no active `ObsDAction` or dependent
+refinement registry. If a later consumer needs an iterable dependent action,
+the principled object is a displayed functor or section over the base path
+functor, not an ordinary `Path_cat(A) -> Path_cat(B)` functor and not a Sigma
+of pointwise operations. `PathOut`/J is distinct again: it starts from a
+functorial `Catd` motive whose directed action is already part of its input.
+
+Recursive natural-number equality still exposes
 
 ```text
 (succ(m) = succ(n)) = (m = n),
 ```
 
-the selected operation of
-`nat_succ_path_action_refinement : PathActionRefinement(nat_succ_function)`
-is simply `p |-> p`. Its canonical-action agreement is nevertheless not
-judgmental at generic reflexivity: `eq_refl(n)` and `eq_refl(succ(n))`
-intentionally retain distinct proof provenance. `nat_succ_ap_basis(n)` is a
-stable intermediary with one direct proof-time comparison to each form.
-Generic `ind_eqr` then extends the composite internal path to
-
-```text
-nat_succ_eq_ap(p) : p = eq_ap(succ,p).
-```
-
-Both `unif_rule`s are narrow, typed structural-action laws and are exercised
-independently by `eq_refl`; neither is a runtime reduction. Direct runtime
-conversion and proof-time transitivity remain negative. Thus the refinement
-exposes selected computation for a recursive constructor without adding a
-second iterable functor, successor-specific J beta, proof erasure, Nat
-canonicity, or metatheoretic no-confusion.
+and `NatSucc_func` is the canonical functor induced by the successor function.
+The retired selected-action layer had introduced a proof basis solely to
+compare the exposed predecessor path with `eq_ap(succ,p)`; no downstream
+arithmetic or WalkingEnd theorem consumed that comparison. The basis,
+comparison theorem, two proof-time rules, and refinement wrapper are therefore
+absent. This removes an ad hoc proof-provenance bridge without changing Nat
+equality, `NatSucc_func`, or the WalkingEnd construction.
 
 The recursive classifier also supports a sound first former-specific
 dependent-elimination facade without changing generic J. For an arbitrary
@@ -513,30 +448,31 @@ P(m,p),  where p : succ(m) = succ(n),
 
 `nat_succ_ind_eqr(P,u,p)` regards the already-exposed proof as `m = n` and
 delegates to ordinary right-based `ind_eqr`. Consequently a component proof
-`eq_refl(n)` computes to the supplied branch `u`, including after application
-of the selected successor refinement, and the construction iterates by
-reindexing at `succ(n)`. Outer `eq_refl(succ(n))`,
-`nat_succ_ap_basis(n)`, and an open predecessor path do not acquire a beta.
-This is a transparent former-specific facade, not a new rewrite, `unif_rule`,
-global fibrancy package, or arbitrary structured-path J principle.
+`eq_refl(n)` computes to the supplied branch `u`, and the construction
+iterates by reindexing at `succ(n)`. Outer `eq_refl(succ(n))` and an open
+predecessor path do not acquire a beta. This is a transparent former-specific
+facade, not a new rewrite, `unif_rule`, global fibrancy package, or arbitrary
+structured-path J principle.
 
-For the shaped record former,
+For an ordinary map between shaped records, clients use
+`path_map_func` exactly as for any other function. The dependent witness field
+uses
 
 ```text
-path_record_action(u,p)
-  : PathRecordPathView(f(r),f(s)),
-
 path_record_witness_action(p)
-  : PathOver(witness-family,p,witness(r),witness(s)).
+  : PathOver(witness-family,p,witness(r),witness(s)),
 ```
 
-Identity action computes on an arbitrary, not merely reflexive, structured
-record path, while canonical action sends `PathRecordPathRefl(r)` to
-`PathRecordPathRefl(f(r))`. Agreement for an arbitrary refinement is
-propositional rather than runtime equality, packages retain coherence
-evidence, and action alone deliberately does not make J compute on an
-arbitrary selected loop. That stronger claim remains the separate
+which reduces to direct `eq_apd`. Neither operation makes J compute on an
+arbitrary structured loop; that stronger claim remains the separate
 fibrancy/dependent-elimination boundary.
+
+The isolated binary-Sum experiment—including its decoded former, eliminator,
+map, selected branchwise action, proof-time bases, extension module,
+diagnostics, and reviewer examples—was retired on 2026-07-20. It had no Nat,
+WalkingEnd, native-EQ1, evidence-property, or compatibility consumer. A future
+Sum may be redesigned from its actual universal-property or computation
+requirements; the retired experiment is not an inactive compatibility API.
 
 Homotopy truncation properties use explicit levels beginning at `-2`:
 
@@ -2047,8 +1983,10 @@ functor computes directly to `path_to_hom(Cat_cat,p)`. This is a migration
 adapter into the old representation, not a second foundational encoder.
 
 At the selected completion boundary, the kernel, both native one-way modules,
-Nat, WalkingEnd, Sum, main diagnostics, and their native reviewer examples
-contain no Cat/Grpd decoder, D0/D0b/D1, or migration-constructor reference.
+Nat, WalkingEnd, main diagnostics, and their native reviewer examples contain
+no Cat/Grpd decoder, D0/D0b/D1, or migration-constructor reference. The later
+retirement of the isolated Sum experiment does not alter that compatibility
+boundary.
 Exactly seven legacy examples import the frozen module explicitly.
 
 Within that module, explicit D0/EQ1 migration is retained in both directions.
@@ -2631,14 +2569,6 @@ vocabulary.
 | finite-dimensional object truncation | `ncat_obj_trunc_EQ1 n C h` |
 | ordinary iso to native fixed-arrow evidence | `iso_evidence_omega_along_EQ1 i` |
 | ordinary iso to native omega-equivalence facade | `iso_evidence_omega_equiv_EQ1 i` |
-| canonical binary-sum map | `sum_map f g` |
-| componentwise binary-sum refinement (library module) | `sum_path_action_refinement f g u v` in `emdash3_2_sum_observational_action.lp` |
-| selected binary-sum action map/coherence | `sum_path_action_map f g u v` / `sum_path_action_coherence f g u v` |
-| component/semantic Sum action comparison | `sum_map_inl_eq_ap p` / `sum_map_inr_eq_ap p` |
-| stable successor-action proof basis | `nat_succ_ap_basis n` |
-| successor component/semantic action comparison | `nat_succ_eq_ap p` |
-| optional Nat successor refinement | `nat_succ_path_action_refinement` |
-| selected Nat successor map/coherence | `nat_succ_path_action_map` / `nat_succ_path_action_coherence` |
 | former-specific successor path induction | `nat_succ_ind_eqr P u p` |
 | proposition lift to a native categorical dimension | `prop_is_trunc_cat_dim n h` |
 | frozen legacy ordinary iso to D0 evidence | `iso_evidence_omega_along_D0 i` |
