@@ -4,15 +4,57 @@
 
 The current v3.2 draft of **emdash** is a Lambdapi formalization and prototype
 proof assistant aimed at functorial programming with strict/lax higher
-ω-categorical structure, fully internalized and computational in the style of
-Kosta Došen's cut-elimination techniques. It points to a research programme at
-the intersection of dependent type theory and category theory, potentially on a
-scale comparable to homotopy type theory.
+ω-categorical structure. Its computational core internalizes categorical
+action in the style of Kosta Došen's cut-elimination techniques. The main
+exposition is now the expanded development edition of *Functorial Type Theory:
+Univalent Foundations for Mathematics*, which combines checked Lambdapi
+evidence with clearly marked formal consequences, mathematical development,
+and research boundaries.
 
 Primary artifacts:
 
-- PDF report: [`./docs/emdash3_2.pdf`](./docs/emdash3_2.pdf)
-- Lambdapi source: [`./emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp)
+- Book PDF: [`./docs/emdash-book.pdf`](./docs/emdash-book.pdf)
+- Book Markdown snapshot: [`./docs/emdash3_2.md`](./docs/emdash3_2.md)
+- Compatibility PDF filename: [`./docs/emdash3_2.pdf`](./docs/emdash3_2.pdf)
+- Active Lambdapi kernel: [`./emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp)
+- Book sources and evidence map: [`./emdash2/book/`](./emdash2/book/)
+
+The book leads with the walking-endomorphism directed higher-inductive
+category `WalkingEnd`: an opaque base object and one directed generating
+endomorphism, equipped with a contextual eliminator rather than a
+definitionally Nat-valued hom. Its encode-decode calculation constructs a
+directed normalization cell before one-dimensionality extracts equality and
+establishes the carrier correspondence
+
+```text
+Hom_W(*,*) ≃ Nat.
+```
+
+The separate one-object category `BNat` is retained as a concrete consistency
+model, not as the definition of `WalkingEnd`. From this opening computation,
+the book develops a second spiral through represented hom action, strict/lax
+transfors and controlled naturality cuts, ordinary and native category theory,
+adjunctions, Yoneda and profunctors, duality, structure identity and
+saturation, weighted limits and colimits, and directed join. Appendix G gives
+the formal architecture: the explicit categorical calculus is the
+computational kernel; readable mathematical notation is its surface; a future
+end-user elaborator may compile into that kernel; and external semantic models
+remain a separate layer.
+
+The current v3.2 implementation is organized around these active modules:
+
+- kernel and generic `fapp*`/`tapp*` computation:
+  [`emdash3_2.lp`](./emdash2/emdash3_2.lp);
+- equality-valued hom action and groupoidality:
+  [`emdash3_2_eq1_hom_action.lp`](./emdash2/emdash3_2_eq1_hom_action.lp);
+- evidence-property and finite-dimension truncation:
+  [`emdash3_2_eq1_evidence_property.lp`](./emdash2/emdash3_2_eq1_evidence_property.lp);
+- reusable Nat arithmetic and sethood:
+  [`emdash3_2_nat_arithmetic.lp`](./emdash2/emdash3_2_nat_arithmetic.lp);
+- WalkingEnd, `BNat`, code, decoder, and carrier comparison:
+  [`emdash3_2_walking_end_hit.lp`](./emdash2/emdash3_2_walking_end_hit.lp);
+- executable regression evidence:
+  [`emdash3_2_checks.lp`](./emdash2/emdash3_2_checks.lp).
 
 The basic construction underneath the draft is the directed dependent hom. For
 a category-valued family
@@ -123,9 +165,11 @@ categorical logic, HoTT, or higher category theory.
 
 ## Start here
 
+- Book PDF: [`./docs/emdash-book.pdf`](./docs/emdash-book.pdf)
+- Book Markdown snapshot: [`./docs/emdash3_2.md`](./docs/emdash3_2.md)
+- Compatibility PDF copy: [`./docs/emdash3_2.pdf`](./docs/emdash3_2.pdf)
 - Lambdapi specification [`./emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp)
-- Markdown report (copy of `./emdash2/print/public/index_3_2.md`): [`./docs/emdash3_2.md`](./docs/emdash3_2.md)
-- PDF report (rendered from the markdown): [`./docs/emdash3_2.pdf`](./docs/emdash3_2.pdf)
+- Active book source tree: [`./emdash2/book/`](./emdash2/book/)
 - Original source: [https://github.com/1337777/cartier/blob/master/cartierSolution19.lp](https://github.com/1337777/cartier/blob/master/cartierSolution19.lp)
 - Published report, editable: [https://hotdocx.github.io/r/26043CPAL64001](https://hotdocx.github.io/r/26043CPAL64001)
 - arrowgram commutative diagrams/books/slides editor: [https://github.com/hotdocx/arrowgram/](https://github.com/hotdocx/arrowgram/)
