@@ -1247,7 +1247,7 @@ Checkpoint:
   exact labels and the pinned revision
   `578b85cc8d586b1677ec4335148adeb443057d24`; Došen remains a cited,
   reference-only conceptual source;
-- all 32 sources, 1,274 strict-KaTeX spans, manifest/schema checks, provenance
+- all 32 sources, 1,273 strict-KaTeX spans, manifest/schema checks, provenance
   checks, source links, bounded page rendering, browser console/request
   checks, and extracted-PDF sentinels pass. A fresh
   `npm --prefix print ci --offline` installed the locked dependency graph with
@@ -1256,6 +1256,11 @@ Checkpoint:
   appendix opening at readable resolution, and every locally repaginated
   front-matter/glossary page. The pass repaired a dropped preface fragment and
   two stranded run-in/punctuation cases before the sources were frozen;
+- a subsequent user-directed bibliography consolidation replaces two named
+  context entries with the single generic entry `GPT 5.6 Codex.` and updates
+  the sole prose citation, numbering, and bibliography classification. Neither
+  the sources nor the rendered PDF retain the removed names, identifiers, or
+  links; pages 18 and 190 passed focused visual review;
 - full repository CI passed all 39 measured Lambdapi files and examples in
   267.587 seconds, all 21 infrastructure tests, the 86-heading source TOC,
   active-reference and report-header lints, the zero-unreviewed strict-LHS
@@ -1263,7 +1268,7 @@ Checkpoint:
   catalog;
 - two independent frozen-source release builds produced the same tagged
   192-page US-Letter PDF with 16 embedded fonts and SHA-256
-  `fbaeb7ea8438a4842c2ea15e7a3671473f6485a1c4b663c2b3b55964c189ef47`.
+  `185d25a1ea0bc68ffbd8841fa38d974e6e831941bc29fe3a86edf008a0641640`.
   C7 changed no Lambdapi semantics, and the parent TypeScript prototype
   remains unchanged, non-authoritative, and outside the build graph.
 

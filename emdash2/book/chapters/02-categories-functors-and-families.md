@@ -16,10 +16,9 @@ decoder is not merely a family of functions. It must compare these two
 actions coherently.
 
 For classical category-theoretic background, see
-[Mac Lane](#ref-mac-lane). The directed type-theoretic neighborhood includes
-the approaches of [Riehl–Shulman](#ref-riehl-shulman) and
-[North](#ref-north); the present calculus makes its own computational and
-formal choices, so these are context rather than interchangeable semantics.
+[Mac Lane](#ref-mac-lane). For broader context on directed type theory, see
+[GPT 5.6 Codex](#ref-gpt-codex). The present calculus makes its own
+computational and formal choices.
 
 <a id="chapter-2-1"></a>
 

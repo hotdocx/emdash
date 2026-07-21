@@ -95,13 +95,16 @@ implementation plans, and historical decisions.
   C7 completes the global dependency, navigation, terminology, glossary,
   status, bibliography, and prose integration. Every numbered chapter now
   has a checked central-theorem/status contract; all 32 sources, 107 evidence
-  claims, and 1,274 strict-KaTeX spans pass. Page-level QA reviewed every page
+  claims, and 1,273 strict-KaTeX spans pass. Page-level QA reviewed every page
   by contact sheet plus every new chapter/appendix opening and all locally
-  repaginated pages. A fresh offline install, full CI across 39 Lambdapi
+  repaginated pages. A subsequent user-directed edit consolidates two named
+  context references into the generic `GPT 5.6 Codex.` bibliography item;
+  focused QA covers its Chapter 2 and bibliography pages. A fresh offline
+  install, full CI across 39 Lambdapi
   files/examples in 267.587 seconds, all 21 infrastructure tests, and two
   independent release builds pass. The final 192-page US-Letter PDF has 16
   embedded fonts and deterministic SHA-256
-  `fbaeb7ea8438a4842c2ea15e7a3671473f6485a1c4b663c2b3b55964c189ef47`.
+  `185d25a1ea0bc68ffbd8841fa38d974e6e831941bc29fe3a86edf008a0641640`.
   The parent TypeScript prototype remains unchanged and outside the build.
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
   active long-running architecture and implementation plan for the new book

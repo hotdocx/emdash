@@ -23,29 +23,22 @@
    pages 1–77. Springer, 1967.
    [DOI 10.1007/BFb0074299](https://doi.org/10.1007/BFb0074299).
 
-5. <a id="ref-riehl-shulman"></a>Emily Riehl and Michael Shulman. “A Type
-   Theory for Synthetic $\infty$-Categories.” *Higher Structures* 1(1),
-   147–224, 2017.
-   [DOI 10.21136/HS.2017.06](https://doi.org/10.21136/HS.2017.06).
+5. <a id="ref-gpt-codex"></a>GPT 5.6 Codex.
 
-6. <a id="ref-north"></a>Paige Randall North. “Towards a Directed Homotopy
-   Type Theory.” 2018.
-   [arXiv:1807.10566](https://doi.org/10.48550/arXiv.1807.10566).
-
-7. <a id="ref-lambdapi"></a>The Lambdapi contributors. *Lambdapi User
+6. <a id="ref-lambdapi"></a>The Lambdapi contributors. *Lambdapi User
    Manual*. [Current online manual](https://lambdapi.readthedocs.io/). The
    repository copies under `docs/` are the operational references used while
    maintaining the accompanying formal development.
 
-8. <a id="ref-emdash-artifact"></a>The emdash contributors. *emdash v3.2
+7. <a id="ref-emdash-artifact"></a>The emdash contributors. *emdash v3.2
    Lambdapi Sources*. Accompanying computational artifact for this development
    edition: `emdash3_2.lp` and its one-way extension modules.
 
-9. <a id="ref-dosen-cut-elimination"></a>Kosta Došen. *Cut Elimination in
+8. <a id="ref-dosen-cut-elimination"></a>Kosta Došen. *Cut Elimination in
    Categories*. Trends in Logic 6. Kluwer Academic Publishers, Dordrecht,
    1999; [DOI 10.1007/978-94-017-1207-1](https://doi.org/10.1007/978-94-017-1207-1).
 
-Items 1–6 and 9 situate the mathematical development; items 7–8 identify the
+Items 1–5 and 8 situate the mathematical development; items 6–7 identify the
 proof infrastructure and checked artifact. Citation does not by itself confer
 the book's formal-status label. The exact HoTT source revision, section
 labels, adaptation targets, and license metadata, together with the
