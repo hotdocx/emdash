@@ -1,6 +1,7 @@
 # EMDASH MathOps / DevOps Implementation Plan
 
 Date: 2026-06-16
+Last reviewed: 2026-07-22
 
 Plan-ID: EMDASH-MATHOPS-DEVOPS-2026-06-16
 Depends-On: none
@@ -9,8 +10,9 @@ Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
 Infinity-Codex-Decision-Responses: none
 
-Status: proposed implementation plan for improving the project SOP, validation
-loop, literature discovery, and reviewer-facing evidence.
+Status: **COMPLETE 2026-07-22 — every ordered primary milestone is active;
+the optional advisory nested-cut lint is transferred to the autonomous
+maintenance plan and requires an observed defect before implementation**
 
 ## Assessment
 

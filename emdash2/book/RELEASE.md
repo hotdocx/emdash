@@ -37,8 +37,8 @@ Before publishing an edition:
 - generate the PDF twice and confirm identical SHA-256 checksums;
 - run full repository CI without changing Lambdapi semantics for production
   convenience;
-- record the checksum and validation results in the active book plan before
-  tagging or attaching the artifact.
+- record the checksum and validation results in the current book-maintenance
+  plan or release ledger before tagging or attaching the artifact.
 
 If a release gate fails, fix the authoritative chapter, manifest, renderer,
 or evidence source and regenerate. Never patch the assembled Markdown or PDF

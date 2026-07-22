@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-20
+Date: 2026-07-22
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
@@ -35,7 +35,7 @@ implementation plans, and historical decisions.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
   authority for comments, examples, and future parser work.
 
-## Current Plans
+## Recently Completed Plan Ledgers
 
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`:
   completed C0-C7 follow-on to the initial-book plan. It expands the
@@ -107,7 +107,7 @@ implementation plans, and historical decisions.
   `185d25a1ea0bc68ffbd8841fa38d974e6e831941bc29fe3a86edf008a0641640`.
   The parent TypeScript prototype remains unchanged and outside the build.
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
-  active long-running architecture and implementation plan for the new book
+  completed architecture and implementation ledger for the new book
   *Functorial Type Theory: Univalent Foundations for Mathematics*. It selects
   the WalkingEnd/Nat carrier equivalence and directed normalization cell as
   the opening and Chapter 8 computation; maps the HoTT Book spine through its
@@ -233,7 +233,17 @@ implementation plans, and historical decisions.
   unsuffixing do not change any WalkingEnd/`BNat` construction or result; old
   suffixed spellings in its ledger are historical.
 - `REPORT_EMDASH_MATHOPS_DEVOPS_IMPLEMENTATION_PLAN_2026-06-16.md`:
-  active MathOps/DevOps/SOP improvement plan and utility roadmap.
+  completed initial MathOps/DevOps/SOP improvement plan and utility roadmap;
+  new cross-project maintenance is owned by the autonomous maintenance plan.
+
+## Current Plans
+
+- `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
+  active living cross-project maintenance plan. Its initial AME-0 through
+  AME-9 autonomous cycle is complete; it reopens only for new evidence-backed
+  work across the kernel and one-way libraries, diagnostics, book and research
+  papers, and DevOps/MathOps, while speculative or decision-dependent work
+  remains in an explicit human/research boundary.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
   proposed dependent products along functors and comma-category
   infrastructure.
@@ -645,7 +655,10 @@ but their promoted phases are not open implementation plans.
 - `REPORT_EMDASH_V3_2_INDEX_3_2_READABILITY_IMPLEMENTATION_PLAN_2026-06-06.md`:
   print/index readability work.
 - `REPORT_EMDASH_V3_2_RESEARCH_ARTICLE_ARCHITECTURE_2026-06-05.md`:
-  research-article and paper narrative architecture.
+  completed long-article architecture and retained publication-decision
+  ledger. The v3.2 workbench is implemented; promotion, short-paper
+  derivation, and external release remain human editorial decisions, while
+  mechanical lifecycle/source maintenance is owned by the autonomous plan.
 
 ## Audits And Retirements
 
@@ -667,7 +680,8 @@ explicitly requested.
 
 - Add every new active report to this index.
 - List only genuinely open plans under `Current Plans`; move completed promoted
-  plans to decision records without deleting their history.
+  plans to a completed ledger/decision-record section without deleting their
+  history.
 - Current plans require `Plan-ID`, dependency, supersession, side-task-ledger,
   Infinity Codex provenance, and status fields. `make ci` enforces them.
 - Mark reports as current orientation, current plan, completed decision record,

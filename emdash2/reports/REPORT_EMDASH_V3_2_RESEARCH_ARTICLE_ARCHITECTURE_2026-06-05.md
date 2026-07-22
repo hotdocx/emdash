@@ -1,7 +1,7 @@
 # EMDASH v3.2 Research Article Architecture
 
 Date: 2026-06-05
-Last updated: 2026-07-01
+Last updated: 2026-07-22
 
 Plan-ID: EMDASH-V3-2-RESEARCH-ARTICLE-2026-06-05
 Depends-On: EMDASH-V3-2-INDEX-READABILITY-2026-06-06, EMDASH-V3-2-NOTATION-REORG-2026-06-05
@@ -10,12 +10,54 @@ Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
 Infinity-Codex-Decision-Responses: none
 
-Status: active article architecture for the long v3.2 paper workbench. The
-original 2026-06-05 design centered the article on synthetic arrow induction
-and computational composition. The 2026-07-01 update keeps that as the opening
-reader-facing theorem, then extends the article to cover the now-active
-profunctor, tensor/internal-hom, weighted-limit, duality, join-category,
-DefIso/comparison, and MathOps/Infinity-Codex developments.
+Status: completed article architecture and retained publication-decision
+ledger. The long v3.2 workbench implements the selected two-arc architecture;
+promotion to the default route, derivation of a new short paper, external
+submission, and release remain explicit human editorial decisions. Ongoing
+mechanical paper maintenance is owned by AME-5 of the autonomous maintenance
+plan.
+
+The original 2026-06-05 design centered the article on synthetic arrow
+induction and computational composition. The 2026-07-01 update keeps that as
+the opening reader-facing theorem, then extends the article to cover the
+now-active profunctor, tensor/internal-hom, weighted-limit, duality,
+join-category, DefIso/comparison, and MathOps/Infinity-Codex developments.
+
+## 2026-07-22 Source, Lifecycle, And Maintenance Boundary
+
+`print/documents.json` is the executable paper-artifact registry. Its selected
+boundary is now explicit:
+
+- `print/public/index.md` and `print/public/index_0.md` are authored archival
+  v2 snapshots. They remain renderable as historical research artifacts, but
+  their present-tense claims are not active implementation claims.
+- `print/public/index_3_2.md` is the authored active v3.2 workbench. It is a
+  draft, not a released or submitted edition.
+- `print/public/emdash-book.md` is generated output owned by
+  `book/book.json`; it is never an authoring source.
+
+The registry records source mode, exact authority, and lifecycle for every
+document. Validation rejects an authored document whose authority is not its
+exact Markdown file, a generated document that claims its output as authority,
+a missing authority, or a registry with no active article workbench. Visible
+archive/workpaper notices repeat the boundary inside the rendered artifacts.
+
+The feasible maintenance backlog completed by AME-5 is lifecycle and ownership
+clarification plus registry regression coverage. The following remain outside
+autonomous promotion:
+
+- replacing the default archival route with the v3.2 workbench;
+- promoting or renaming the workbench as `index.md`;
+- deriving a new short/conference article from the long workbench;
+- choosing which post-2026-07-01 WalkingEnd, native equality/univalence, and
+  book developments belong in the article's publication thesis;
+- selecting a venue, audience, submission scope, authorship statement, or
+  release date.
+
+Those are editorial/publication choices, not source-correctness repairs. A
+future human-selected article revision should begin by restating its thesis and
+evidence scope, then audit new claims against the active modules and diagnostic
+catalog rather than copying book prose wholesale.
 
 ## Goal
 
@@ -268,8 +310,9 @@ and update the front-matter contents and road map.
 
 The current print pipeline is documented in `print/AGENTS.md`.
 
-- Full paper source: `print/public/index.md`.
-- Short/conference variant: `print/public/index_0.md`.
+- Archival full v2 source: `print/public/index.md`.
+- Archival short v2 source: `print/public/index_0.md`.
+- Active v3.2 workbench source: `print/public/index_3_2.md`.
 - Renderer: `print/src/App.tsx`.
 - Supported embedded artifacts: KaTeX, Mermaid, Vega-Lite, Arrowgram.
 - Validation:
@@ -279,10 +322,17 @@ npm run validate:paper
 npm run check:render
 ```
 
-The validator auto-discovers `print/public/index*.md`, so a temporary
-development variant such as `index_3_2.md` will be validated automatically.
+The validator and renderer select only entries explicitly allowlisted by
+`print/documents.json`; there is no filename-glob discovery. Every new paper
+variant therefore needs a registry entry with explicit authority and lifecycle
+metadata before it can participate in validation or rendering.
 
-## Recommended File Strategy
+## Historical Recommended File Strategy
+
+The staged migration below records the original 2026-06-05 proposal. It is not
+the current file-lifecycle instruction: the 2026-07-22 boundary above retains
+the two v2 papers as explicitly archival registered artifacts and leaves
+promotion of the v3.2 workbench to a human editorial decision.
 
 Use a staged paper migration rather than editing the old v2 text in place.
 
@@ -752,7 +802,10 @@ expanded(PathInd_funcd, CompMotive, p, q) = q o p
 - Avoid presenting `PathInd_funcd` as primitive. The primitive theorem is
   `PathInd_transfd`; the Sigma-total form is derived.
 
-## Recommended Next Step
+## Historical Initial Next Step
+
+The skeleton-building step below was completed by the 2026-07-01 article
+expansion. It remains as design provenance, not as current work.
 
 Create a new long-form workbench article:
 

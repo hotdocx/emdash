@@ -2,8 +2,10 @@
   Reviewer milestone: homotopy-truncation evidence is invariant under an
   ordinary TypeEquiv through the canonical groupoid-univalence decoder.
 
-  This does not yet claim categorical/OmegaEquiv invariance, monotonicity,
-  Pi/Sigma closure, or the recursive IsNCat object-truncation theorem.
+  This file isolates the ordinary TypeEquiv route. Categorical/OmegaEquiv
+  object-truncation invariance, monotonicity, Pi/Sigma closure, and recursive
+  IsNCat object truncation are active but reviewed separately in the focused
+  categorical/truncation and equality-valued evidence-property examples.
 */
 
 require open emdash.emdash3_2;

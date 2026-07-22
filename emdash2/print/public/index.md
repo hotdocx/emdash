@@ -1,7 +1,15 @@
 ---
 title: emdash — Functorial programming for strict/lax ω-categories in Lambdapi
 authors: https://github.com/hotdocx/emdash
+edition: archival v2 snapshot
+status: archival
 ---
+
+> **Archive notice (2026-07-22).** This paper preserves a v2-era research
+> snapshot. Its present-tense implementation claims and kernel identifiers do
+> not describe the active v3.2 sources. The current long-form workbench is
+> `index_3_2.md`; active Lambdapi sources and current reports remain the
+> implementation authorities.
 
 # Abstract
 

@@ -1,6 +1,8 @@
 import registryJson from '../documents.json';
 
 export type DocumentLayout = 'single-column' | 'two-column';
+export type DocumentLifecycle = 'archival' | 'active-workbench';
+export type DocumentSourceMode = 'authored' | 'generated';
 
 export interface PrintDocument {
     id: string;
@@ -9,7 +11,11 @@ export interface PrintDocument {
     title: string;
     kind: 'article' | 'book';
     default: boolean;
-    generated: boolean;
+    source: {
+        mode: DocumentSourceMode;
+        authority: string;
+    };
+    lifecycle: DocumentLifecycle;
     aliases: string[];
     groups: string[];
     layout: DocumentLayout;

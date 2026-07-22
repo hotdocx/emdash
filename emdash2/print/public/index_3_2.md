@@ -1,7 +1,14 @@
 ---
 title: emdash — Functorial programming for ω-categories in Lambdapi (v3.2 arrow induction, profunctors, and weighted limits)
 authors: https://github.com/hotdocx/emdash
+edition: active v3.2 research workbench
+status: draft
 ---
+
+> **Workpaper status (2026-07-22).** This is the active v3.2 research-article
+> workbench, not a released or submitted edition. Active Lambdapi sources,
+> executable checks, and the current project reports outrank this prose when
+> implementation details change.
 
 # Abstract
 

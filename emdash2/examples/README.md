@@ -20,3 +20,7 @@ Current milestone files:
 - `path_induction_transitivity.lp`: path induction producing composition /
   transitivity.
 - `adjunction_triangles.lp`: ordinary adjunction triangle cut-elimination.
+- `profunctor_weighted_limits.lp`: profunctor tensor/closed computation,
+  weighted representability, and right-adjoint preservation.
+- `directed_join.lp`: directed join inclusions, cross cell, recursor betas, and
+  the non-product boundary.

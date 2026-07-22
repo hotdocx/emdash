@@ -1,8 +1,8 @@
 # Emdash print and book renderer
 
-The `print/` workspace renders the three historical article variants
-and the generated *Functorial Type Theory* book with the same
-Markdown/KaTeX/diagram/Paged.js pipeline.
+The `print/` workspace renders two archival v2 article variants, the active
+v3.2 article workbench, and the generated *Functorial Type Theory* book with
+the same Markdown/KaTeX/diagram/Paged.js pipeline.
 
 ## Reproducible setup
 
@@ -19,9 +19,9 @@ depend on a host-specific checkout.
 
 The browser accepts these registered selectors:
 
-- `/` or `?paper=index` — full archival article;
-- `?paper=index_0` or `?paper=0` — short article;
-- `?paper=index_3_2` — v3.2 article;
+- `/` or `?paper=index` — full archival v2 article;
+- `?paper=index_0` or `?paper=0` — short archival v2 article;
+- `?paper=index_3_2` — active v3.2 article workbench;
 - `?paper=emdash-book` or `?paper=book` — generated book.
 
 Absolute HTTP(S) URLs and `?paper=ls:key` remain explicit
@@ -68,7 +68,10 @@ versioned PDF under `../output/pdf/` and visual-review images under
 
 `documents.json` is shared by the browser loader, schema validator, and
 browser renderer. Each entry defines its safe filename and selectors, layout,
-check groups, generated status, and render budget. Its `timeoutMs` is the
+check groups, lifecycle, source mode and authority, and render budget. An
+authored article owns its own `print/public/*.md` file; the generated book is
+owned by `book/book.json` and must never claim its assembled Markdown as an
+authority. Its `timeoutMs` is the
 authoritative page, navigation, and completed-pagination budget for both the
 console and PDF gates; increase that document-specific value only when a
 measured longer artifact requires it.

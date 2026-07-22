@@ -1,14 +1,18 @@
 {
-  "version": 1,
+  "version": 2,
   "documents": [
     {
       "id": "index",
       "slug": "index",
       "file": "index.md",
-      "title": "Emdash research paper",
+      "title": "Emdash archival v2 paper",
       "kind": "article",
       "default": true,
-      "generated": false,
+      "source": {
+        "mode": "authored",
+        "authority": "print/public/index.md"
+      },
+      "lifecycle": "archival",
       "aliases": [
         "",
         "index.md"
@@ -28,10 +32,14 @@
       "id": "index-0",
       "slug": "index_0",
       "file": "index_0.md",
-      "title": "Emdash short paper",
+      "title": "Emdash archival short v2 paper",
       "kind": "article",
       "default": false,
-      "generated": false,
+      "source": {
+        "mode": "authored",
+        "authority": "print/public/index_0.md"
+      },
+      "lifecycle": "archival",
       "aliases": [
         "0",
         "index_0.md"
@@ -54,7 +62,11 @@
       "title": "Emdash v3.2 research article",
       "kind": "article",
       "default": false,
-      "generated": false,
+      "source": {
+        "mode": "authored",
+        "authority": "print/public/index_3_2.md"
+      },
+      "lifecycle": "active-workbench",
       "aliases": [
         "index_3_2.md"
       ],
@@ -76,7 +88,11 @@
       "title": "Functorial Type Theory: Univalent Foundations for Mathematics",
       "kind": "book",
       "default": false,
-      "generated": true,
+      "source": {
+        "mode": "generated",
+        "authority": "book/book.json"
+      },
+      "lifecycle": "active-workbench",
       "aliases": [
         "book",
         "emdash-book.md"

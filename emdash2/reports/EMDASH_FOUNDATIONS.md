@@ -2431,9 +2431,10 @@ The current foundations intentionally do not yet include:
 
 - observational identity for Empty, broader elementary
   no-confusion, higher action for the elementary classifiers, or their
-  categorical universal properties; the visible Unit/Boolean/Nat/general-sum
+  categorical universal properties; the visible Unit/Boolean/Nat
   constructor equality cases, generic-reflexivity provenance boundary, and
-  guarded generic J beta are active;
+  guarded generic J beta are active, while the isolated Sum experiment is
+  retired;
 - arbitrary structural action/substitution, additional nonreflexive
   structured-J computation, and runtime eta for the named dependent
   `PathRecord` convention; its observational path view, stable reflexivity,

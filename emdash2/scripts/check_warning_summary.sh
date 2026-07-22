@@ -21,6 +21,6 @@ fi
 rc=$?
 set -e
 
-python3 scripts/warning_summary.py "$EMDASH_WARNING_LOG"
+python3 scripts/warning_summary.py --strict-parse "$EMDASH_WARNING_LOG"
 printf '\nraw warning log: %s\n' "$EMDASH_WARNING_LOG"
 exit "$rc"

@@ -21,6 +21,13 @@ ALLOWED_STATUSES = {
     "mathematical-development",
     "research-boundary",
 }
+ACTIVE_OWNER_FILES = {
+    "emdash3_2.lp",
+    "emdash3_2_eq1_hom_action.lp",
+    "emdash3_2_eq1_evidence_property.lp",
+    "emdash3_2_nat_arithmetic.lp",
+    "emdash3_2_walking_end_hit.lp",
+}
 
 
 def load_json(path: Path) -> Any:
@@ -50,7 +57,22 @@ def resolve_repo_file(raw: Any, context: str) -> Path:
     return resolved
 
 
-def validate_reference(ref: Any, context: str, *, owner: bool) -> None:
+def reference_role_issue(relative: str, *, owner: bool) -> str | None:
+    if owner:
+        if relative not in ACTIVE_OWNER_FILES:
+            return f"owner must be an active Lambdapi module, got {relative}"
+        return None
+    if relative == "emdash3_2_checks.lp":
+        return None
+    if relative.startswith("examples/") and relative.endswith(".lp"):
+        return None
+    return (
+        "reviewer must be emdash3_2_checks.lp or a reviewer example, "
+        f"got {relative}"
+    )
+
+
+def validate_reference(ref: Any, context: str, *, owner: bool) -> str:
     if not isinstance(ref, dict):
         raise ValueError(f"{context}: reference must be an object")
     unknown = set(ref) - {"file", "symbol", "contains"}
@@ -58,6 +80,10 @@ def validate_reference(ref: Any, context: str, *, owner: bool) -> None:
         raise ValueError(f"{context}: unknown reference fields: {sorted(unknown)}")
 
     path = resolve_repo_file(ref.get("file"), context)
+    relative = path.relative_to(REPO_ROOT).as_posix()
+    role_issue = reference_role_issue(relative, owner=owner)
+    if role_issue is not None:
+        raise ValueError(f"{context}: {role_issue}")
     text = path.read_text(encoding="utf-8")
     symbol = ref.get("symbol")
     contains = ref.get("contains")
@@ -69,7 +95,8 @@ def validate_reference(ref: Any, context: str, *, owner: bool) -> None:
             raise ValueError(f"{context}: invalid symbol name {symbol!r}")
         if owner:
             declaration = re.compile(
-                rf"^\s*(?:(?:constant|injective)\s+)?symbol\s+{re.escape(symbol)}\b",
+                rf"^\s*(?:(?:constant|injective|sequential|opaque|private|protected)\s+)*"
+                rf"symbol\s+{re.escape(symbol)}\b",
                 re.MULTILINE,
             )
             if declaration.search(text) is None:
@@ -89,6 +116,7 @@ def validate_reference(ref: Any, context: str, *, owner: bool) -> None:
             f"{context}: reviewer text {contains!r} not found in "
             f"{path.relative_to(REPO_ROOT)}"
         )
+    return relative
 
 
 def manifest_source_markers(manifest: Any) -> set[str]:
@@ -159,20 +187,41 @@ def main() -> int:
             if not isinstance(owners, list):
                 issues.append(f"{context}: owners must be a list")
             else:
+                owner_files: set[str] = set()
                 for index, ref in enumerate(owners):
                     try:
-                        validate_reference(ref, f"{context}.owners[{index}]", owner=True)
+                        owner_files.add(
+                            validate_reference(
+                                ref, f"{context}.owners[{index}]", owner=True
+                            )
+                        )
                     except ValueError as exc:
                         issues.append(str(exc))
 
             if not isinstance(reviewers, list):
                 issues.append(f"{context}: reviewers must be a list")
             else:
+                reviewer_files: set[str] = set()
                 for index, ref in enumerate(reviewers):
                     try:
-                        validate_reference(ref, f"{context}.reviewers[{index}]", owner=False)
+                        reviewer_files.add(
+                            validate_reference(
+                                ref, f"{context}.reviewers[{index}]", owner=False
+                            )
+                        )
                     except ValueError as exc:
                         issues.append(str(exc))
+
+            if (
+                status == "checked"
+                and isinstance(owners, list)
+                and isinstance(reviewers, list)
+                and owner_files & reviewer_files
+            ):
+                issues.append(
+                    f"{context}: checked claim reviewer must be independent of "
+                    f"owner file(s): {sorted(owner_files & reviewer_files)}"
+                )
 
         unknown_markers = markers - set(claims)
         unused_checked = {

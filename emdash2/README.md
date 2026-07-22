@@ -17,7 +17,7 @@ loop `ell : * -> *`. A Cat-valued code, a contextual decoder, and a
 directed normalization cell establish the checked carrier equivalence
 
 ```text
-Hom_WalkingEnd(*,*) ≃ Nat.
+Hom_WalkingEnd(*,*) ≃_Type Nat.
 ```
 
 The concrete one-object category `BNat` is a separate model, not the
@@ -77,7 +77,9 @@ make health
 ```
 
 Keep exploratory typechecks bounded. The current SOP explains rewrite,
-unification, inferred-slot, and owner-position probing policy.
+unification, inferred-slot, and owner-position probing policy. CI checks the
+stable source-metrics snapshot in the generated health report; run
+`make health` after a change that alters those metrics.
 
 ## Functorial Type Theory book
 

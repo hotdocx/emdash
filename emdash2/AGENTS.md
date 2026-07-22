@@ -85,7 +85,7 @@ the iterated-hom architecture to the omega setting.
 - Compact warning inventory: `make warning-summary`
 - Strict inferred-slot audit: `make audit-rules`
 - Regenerate/check catalog: `make catalog`
-- Check header/source TOC equality: `make toc`
+- Check source TOC structure/header equality: `make toc`
 - Refresh health report: `make health`
 - Watch and recheck: `make watch` (log: `logs/typecheck.log`)
 - Focused temporary probe: `scripts/probe.sh tmp/probes/name.lp`
@@ -213,7 +213,9 @@ with warnings enabled before rejecting the proposed rule.
 - Run `make examples` when reviewer milestones are affected.
 - Run `make catalog` after adding/reorganizing assertions; `make ci` requires
   zero unclassified checks and a fresh catalog.
-- Run `make health` after meaningful architecture/check changes.
+- Run `make health` after meaningful architecture/check changes. CI checks
+  the stable source-metrics snapshot and rejects a stale health report while
+  ignoring volatile timing differences.
 - Run `make ci` before handing off substantial edits.
 - `scripts/probe.sh` writes logs under `logs/probes/` and summarizes failures.
 - `make warning-summary` preserves the raw warning stream under

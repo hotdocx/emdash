@@ -171,7 +171,7 @@ async function main() {
   const document = registry.documents.find(
     (candidate) => candidate.slug === manifest.renderer.documentSlug
   );
-  if (!document || document.kind !== 'book' || !document.generated) {
+  if (!document || document.kind !== 'book' || document.source.mode !== 'generated') {
     throw new Error('The manifest book is not a generated book in print/documents.json');
   }
 

@@ -535,8 +535,8 @@ function checkRegistry(manifest, issues) {
     issue(issues, 'print document registry has no entry for ' + manifest.renderer.documentSlug);
     return;
   }
-  if (!document.generated || document.kind !== 'book') {
-    issue(issues, 'registered book document must be generated and kind=book');
+  if (document.source.mode !== 'generated' || document.kind !== 'book') {
+    issue(issues, 'registered book document must have generated source mode and kind=book');
   }
   if (document.file !== path.basename(manifest.renderer.output)) {
     issue(issues, 'book output filename differs between manifest and document registry');

@@ -49,7 +49,7 @@
       5c. Product and uncurried composition action
       5d. Rigid two-endpoint Hom action
       5e. Product closure for ordinary isomorphism evidence
-      5g. Product-pair telescope declaration
+      5f. Product-pair telescope declaration
     6. Ordinary transformations and functor composition actions
       6a. Transformation classifier, components, and generic projection calculus
       6b. Internalized hom endpoint actions and rigid two-sided projections
@@ -8980,7 +8980,7 @@ rule @idtoiso_cat
           $pA
           $pB));
 
-// 5g. Product-pair telescope declaration
+// 5f. Product-pair telescope declaration
 
 // Pairing telescope for products. Its computation rules are installed later,
 // after the constant-section machinery they project to is available.

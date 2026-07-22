@@ -3,9 +3,12 @@ import fs from 'node:fs';
 const REGISTRY_URL = new URL('../documents.json', import.meta.url);
 const SAFE_NAME = /^[A-Za-z0-9][A-Za-z0-9_.-]*$/;
 const SAFE_FILE = /^[A-Za-z0-9][A-Za-z0-9_.-]*\.md$/;
+const SAFE_REPO_PATH = /^[A-Za-z0-9][A-Za-z0-9_./-]*$/;
 const ALLOWED_LAYOUTS = new Set(['single-column', 'two-column']);
 const ALLOWED_KINDS = new Set(['article', 'book']);
 const ALLOWED_CHECKS = new Set(['validate', 'render']);
+const ALLOWED_SOURCE_MODES = new Set(['authored', 'generated']);
+const ALLOWED_LIFECYCLES = new Set(['archival', 'active-workbench']);
 
 function fail(context, message) {
   throw new Error(context + ': ' + message);
@@ -19,10 +22,16 @@ function loadRegistryJson() {
   }
 }
 
-export function loadDocumentRegistry() {
-  const registry = loadRegistryJson();
-  if (!registry || registry.version !== 1 || !Array.isArray(registry.documents)) {
-    fail('print/documents.json', 'expected version 1 and a documents array');
+function repositoryAuthorityExists(authority) {
+  return fs.existsSync(new URL('../../' + authority, import.meta.url));
+}
+
+export function validateDocumentRegistry(
+  registry,
+  { authorityExists = repositoryAuthorityExists } = {}
+) {
+  if (!registry || registry.version !== 2 || !Array.isArray(registry.documents)) {
+    fail('print/documents.json', 'expected version 2 and a documents array');
   }
   if (registry.documents.length === 0) {
     fail('print/documents.json', 'documents must not be empty');
@@ -31,6 +40,7 @@ export function loadDocumentRegistry() {
   const ids = new Set();
   const selectors = new Map();
   let defaultCount = 0;
+  let activeArticleCount = 0;
 
   for (const [index, document] of registry.documents.entries()) {
     const context = 'print/documents.json:documents[' + index + ']';
@@ -53,10 +63,47 @@ export function loadDocumentRegistry() {
     if (!ALLOWED_KINDS.has(document.kind)) {
       fail(context, 'kind must be article or book');
     }
-    if (typeof document.default !== 'boolean' || typeof document.generated !== 'boolean') {
-      fail(context, 'default and generated must be booleans');
+    if (typeof document.default !== 'boolean') {
+      fail(context, 'default must be a boolean');
     }
     if (document.default) defaultCount += 1;
+    if (!document.source || typeof document.source !== 'object' || Array.isArray(document.source)) {
+      fail(context, 'source must be an object');
+    }
+    if (!ALLOWED_SOURCE_MODES.has(document.source.mode)) {
+      fail(context, 'source.mode must be authored or generated');
+    }
+    const authority = document.source.authority;
+    if (
+      typeof authority !== 'string' ||
+      !SAFE_REPO_PATH.test(authority) ||
+      authority.startsWith('/') ||
+      authority.split('/').includes('..')
+    ) {
+      fail(context, 'source.authority must be a safe repository-relative path');
+    }
+    if (!authorityExists(authority)) {
+      fail(context, 'source.authority does not exist: ' + authority);
+    }
+    const authoredAuthority = 'print/public/' + document.file;
+    if (document.source.mode === 'authored' && authority !== authoredAuthority) {
+      fail(context, 'authored document authority must be ' + authoredAuthority);
+    }
+    if (document.source.mode === 'generated' && authority === authoredAuthority) {
+      fail(context, 'generated document authority must be outside its generated output');
+    }
+    if (document.kind === 'article' && document.source.mode !== 'authored') {
+      fail(context, 'article source.mode must be authored');
+    }
+    if (document.kind === 'book' && document.source.mode !== 'generated') {
+      fail(context, 'book source.mode must be generated');
+    }
+    if (!ALLOWED_LIFECYCLES.has(document.lifecycle)) {
+      fail(context, 'lifecycle must be archival or active-workbench');
+    }
+    if (document.kind === 'article' && document.lifecycle === 'active-workbench') {
+      activeArticleCount += 1;
+    }
     if (!Array.isArray(document.aliases) || !document.aliases.every((value) => typeof value === 'string')) {
       fail(context, 'aliases must be an array of strings');
     }
@@ -101,7 +148,14 @@ export function loadDocumentRegistry() {
   if (defaultCount !== 1) {
     fail('print/documents.json', 'exactly one document must be the default');
   }
+  if (activeArticleCount === 0) {
+    fail('print/documents.json', 'at least one article must be an active workbench');
+  }
   return registry;
+}
+
+export function loadDocumentRegistry() {
+  return validateDocumentRegistry(loadRegistryJson());
 }
 
 export function parseDocumentSelection(argv) {

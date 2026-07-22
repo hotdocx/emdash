@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -24,6 +25,10 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_checks.lp"),
 ]
 EXAMPLES_DIR = ROOT / "examples"
+HEALTH_REPORT = ROOT / "reports" / "REPORT_EMDASH_HEALTH.md"
+SOURCE_METRICS_SNAPSHOT_RE = re.compile(
+    r"^- Source-metrics snapshot: `sha256:(?P<digest>[0-9a-f]{64})`$", re.MULTILINE
+)
 
 
 @dataclass
@@ -133,6 +138,34 @@ def count_lines(path: Path) -> dict[str, int | dict[str, int]]:
     return counts
 
 
+def source_metrics_snapshot(files: dict[str, dict]) -> str:
+    """Hash only the stable source-metric payload, excluding timings/date."""
+    canonical = json.dumps(
+        files,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
+
+
+def report_source_metrics_snapshot(report: str) -> str | None:
+    match = SOURCE_METRICS_SNAPSHOT_RE.search(report)
+    return None if match is None else match.group("digest")
+
+
+def report_snapshot_issue(expected: str, report: str) -> str | None:
+    actual = report_source_metrics_snapshot(report)
+    if actual is None:
+        return "health report has no source-metrics snapshot"
+    if actual != expected:
+        return (
+            "health report source metrics are stale: "
+            f"recorded sha256:{actual}, current sha256:{expected}"
+        )
+    return None
+
+
 def run_checks(files: list[Path], timeout_value: str) -> tuple[list[CheckResult], int]:
     results: list[CheckResult] = []
     overall = 0
@@ -172,6 +205,7 @@ def build_payload(args: argparse.Namespace) -> tuple[dict, int]:
         "example_files": [str(path) for path in files_to_check if str(path).startswith("examples/")],
         "checks": [result.__dict__ for result in checks],
         "files": files,
+        "source_metrics_snapshot": source_metrics_snapshot(files),
     }
     return payload, rc
 
@@ -197,6 +231,7 @@ def format_report(payload: dict) -> str:
         f"- Timeout: `{payload['timeout']}`",
         f"- Warnings enabled: `{payload['warnings_enabled']}`",
         f"- Extra Lambdapi flags: `{payload['extra_lambdapi_flags']}`",
+        f"- Source-metrics snapshot: `sha256:{payload['source_metrics_snapshot']}`",
         "",
         "## Typecheck Timings",
         "",
@@ -310,6 +345,11 @@ def main() -> int:
         help="Write reports/REPORT_EMDASH_HEALTH.md.",
     )
     parser.add_argument(
+        "--check-report",
+        action="store_true",
+        help="Fail if the health report's stable source metrics are stale.",
+    )
+    parser.add_argument(
         "--json",
         action="store_true",
         help="Print JSON instead of the markdown summary.",
@@ -323,10 +363,35 @@ def main() -> int:
 
     payload, rc = build_payload(args)
 
+    report_rc = 0
+    if args.check_report:
+        if not HEALTH_REPORT.exists():
+            print(
+                f"{HEALTH_REPORT.relative_to(ROOT)}: health report is missing",
+                file=sys.stderr,
+            )
+            report_rc = 1
+        else:
+            issue = report_snapshot_issue(
+                payload["source_metrics_snapshot"],
+                HEALTH_REPORT.read_text(encoding="utf-8"),
+            )
+            if issue is None:
+                print(
+                    "health source-metrics snapshot check passed: "
+                    f"sha256:{payload['source_metrics_snapshot']}"
+                )
+            else:
+                print(
+                    f"{HEALTH_REPORT.relative_to(ROOT)}: {issue}; run `make health`",
+                    file=sys.stderr,
+                )
+                report_rc = 1
+
     if args.update_log:
         write_log(payload, ROOT / "logs" / "check-metrics.jsonl")
     if args.write_report:
-        (ROOT / "reports" / "REPORT_EMDASH_HEALTH.md").write_text(
+        HEALTH_REPORT.write_text(
             format_report(payload),
             encoding="utf-8",
         )
@@ -337,7 +402,7 @@ def main() -> int:
         print(format_brief(payload, rc))
     else:
         print(format_report(payload))
-    return rc
+    return rc or report_rc
 
 
 if __name__ == "__main__":

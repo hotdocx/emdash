@@ -10,17 +10,19 @@ check-warnings:
 > EMDASH_LAMBDAPI_WARNINGS=1 ./scripts/check.sh emdash3_2.lp
 
 warning-summary:
-# Opt-in warning inventory; writes the raw output to logs/warnings/latest.log.
+# Opt-in term-head/rule-family inventory; retains the raw warning stream.
 > ./scripts/check_warning_summary.sh
 
 audit-rules:
 > python3 scripts/audit_rule_lhs.py --strict
 
 ci:
+> python3 scripts/check_metrics.py --no-check --check-report --brief
 > python3 scripts/check_metrics.py --update-log --brief
 > python3 -m py_compile scripts/*.py
 > python3 -m json.tool .codex/hooks.json >/dev/null
-> python3 -m unittest tests.test_infinity_codex tests.test_book_typography
+> python3 -m unittest tests.test_infinity_codex tests.test_book_typography tests.test_book_evidence tests.test_source_toc tests.test_check_metrics tests.test_warning_summary
+> node --test print/scripts/document_registry.test.mjs
 > bash -n scripts/*.sh
 > git diff --check
 > python3 scripts/check_source_toc.py

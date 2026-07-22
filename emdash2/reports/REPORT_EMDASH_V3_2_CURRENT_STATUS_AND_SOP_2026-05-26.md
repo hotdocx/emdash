@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-20
+Last consolidated: 2026-07-22
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -44,7 +44,9 @@ detailed probe evidence.
   ordering/metadata and prose-to-check traceability. They govern the book
   artifact but never override active Lambdapi declarations.
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`:
-  current book implementation plan and milestone ledger.
+  completed book architecture and implementation ledger.
+- `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
+  current cross-project maintenance, triage, and evolution ledger.
 - `REPORT_EMDASH_CHECK_CATALOG.md`: generated map of the diagnostic suite.
 - `REPORT_EMDASH_HEALTH.md`: generated source metrics and bounded timings.
 
@@ -58,11 +60,12 @@ needed.
 
 ## Validated Current Baseline
 
-The current architecture is the 2026-07-20 P10/P11 corrective phase of the
-active path-action and compatibility-retirement plan. The former 2,751-line
+The current architecture is the native-only baseline closed by P10–P12 of the
+completed path-action and compatibility-retirement plan. The former 2,751-line
 D0/D1/decoder compatibility module and its seven explicit reviewer clients
-are deleted. Active `.lp` sources contain no D0/D1 identifier or compatibility
-import, and the exact legacy `one_cat_iso_type_equiv` is absent. Native
+are deleted. Active `.lp` sources contain no D0/D1 declaration, reference, or
+compatibility import (retirement comments may name them), and the exact legacy
+`one_cat_iso_type_equiv` is absent. Native
 `OneCat`, hom discreteness/action, finite-dimensional truncation, the one-way
 ordinary-isomorphism lift, WalkingEnd/`BNat`, and Nat remain selected.
 
@@ -85,29 +88,48 @@ reverse alias, partial suffixed namespace, semantic rule change, or module
 rename was introduced. Bounded `make check` passes after both deletion and
 rename.
 
-The synchronized warning inventory remains 1,010 unjoinable/159 replaceable,
-and strict audit remains zero/45/27. The regenerated catalog has 1,671
-classified checks (1,496 positive and 175 negative) across 61 areas, with zero
-legacy tags or unclassified checks. The TOC remains 86 headings across
-sections 0–20. Health passes all 39 retained source/example targets in 120.169
-seconds aggregate. The kernel is 19,201 lines with 758 symbols, 602 rewrite
-rules, and 61 unification rules; the one-line P9 delta is comment-only. The
-main diagnostic module contains 1,496 assertions. Full CI passes all 39
-targets in 133.036 seconds, all 16 Infinity-Codex recovery tests, and every
-Python/shell/JSON, diff/TOC/active-reference/report-header, strict-LHS, and
-strict catalog-freshness gate. P10–P12 are closed.
+The 2026-07-22 synchronized baseline is:
+
+```text
+make check                         pass
+make health                        pass (41 measured targets)
+diagnostic checks                1,677 (1,502 assert + 175 assertnot)
+catalog areas                       61
+legacy/unclassified checks          0 / 0
+strict LHS audit                    0 unreviewed candidates
+intentional LHS annotations        45 slots across 27 clauses
+warning inventory               1,169
+  unjoinable critical pairs       1,010
+  replaceable pattern variables     159
+source TOC                          86 parent-correct/sequential headings
+```
+
+The kernel is 19,201 lines with 758 symbols, 602 rewrite rules, and 61
+unification rules. The source/example portion of the generated health report
+is fresh at
+`sha256:1883910f565c1bef715f7c5e723de14ac336e8c10bd1a7af6071b64533f6791e`;
+the fingerprint intentionally excludes volatile timings. P10–P12 are closed,
+and current maintenance is owned by the July 22 autonomous plan.
 
 The old two-sided OneCat theorem was meaningful but had no selected practical
 consumer and depended on the retired representation. It was deleted rather
 than weakened or re-proved as a cleanup prerequisite. A fully native
 object-equality/ordinary-isomorphism equivalence remains optional future work.
 
-Detailed Phase-5/D0/D1 passages later in this report are retained only as
+Detailed Phase-5/D0/D1 passages in the historical appendix are retained only as
 pre-retirement implementation history. Wherever they describe a D0/D1 owner,
 compatibility module, suffixed native spelling, or legacy OneCat theorem as
 current, this P10/P11 checkpoint supersedes the source-location/status claim.
 They are not implementation authorities and must not be used to restore a
 retired symbol.
+
+## Historical Checkpoint Appendix
+
+The material from here to `Current Architecture` records dated measurements,
+failed candidates, and superseded promotion states. It is provenance only;
+the baseline above and the later current-architecture/SOP sections are the
+forward authority. New chronological checkpoints belong in their task plan,
+not in this appendix.
 
 An earlier fully synchronized 2026-07-18 baseline was:
 
@@ -2134,6 +2156,13 @@ scripts/explain_failure.py --warning logs/warnings/latest.log
 scripts/decision_tree.sh SYMBOL
 scripts/decision_tree.sh --png /tmp/tree.png SYMBOL
 ```
+
+The compact warning summary reports both overlap-term heads and unordered
+pairs of the two participating rewrite-rule heads. Its strict structural
+parser rejects a critical-pair block that lacks one term head or exactly two
+participants, preventing a changed Lambdapi warning format from silently
+dropping families. This is a completeness check on the inventory, not a
+semantic classification of joinability; the raw stream remains authoritative.
 
 Use the smallest Lambdapi debug flag set: `u` unification, `c` conversion, `q`
 rewriting, `w` weak-head normalization, `s` subject reduction, `k` local

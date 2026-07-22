@@ -1561,6 +1561,10 @@
         {
           "file": "emdash3_2_checks.lp",
           "contains": "Primitive profunctor tensor and exposed-endpoint reindexing"
+        },
+        {
+          "file": "examples/profunctor_weighted_limits.lp",
+          "symbol": "Prof_tensor"
         }
       ]
     },
@@ -1601,6 +1605,10 @@
         {
           "file": "emdash3_2_checks.lp",
           "symbol": "Prof_lambda_con_map"
+        },
+        {
+          "file": "examples/profunctor_weighted_limits.lp",
+          "symbol": "Prof_lambda_cov_map"
         }
       ]
     },
@@ -1813,6 +1821,10 @@
         {
           "file": "emdash3_2_checks.lp",
           "symbol": "weighted_limit_cov_pull"
+        },
+        {
+          "file": "examples/profunctor_weighted_limits.lp",
+          "symbol": "weighted_limit_cov_pull"
         }
       ]
     },
@@ -1901,6 +1913,10 @@
         {
           "file": "emdash3_2_checks.lp",
           "symbol": "right_adjoint_preserves_weighted_limit_cov_comp"
+        },
+        {
+          "file": "examples/profunctor_weighted_limits.lp",
+          "symbol": "right_adjoint_preserves_weighted_limit_cov_comp"
         }
       ]
     },
@@ -1976,6 +1992,10 @@
       "reviewers": [
         {
           "file": "emdash3_2_checks.lp",
+          "symbol": "join_elim_cross_transf"
+        },
+        {
+          "file": "examples/directed_join.lp",
           "symbol": "join_elim_cross_transf"
         }
       ]
