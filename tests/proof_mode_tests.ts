@@ -20,7 +20,7 @@ import { assert } from './utils';
 import { describe, it, beforeEach } from 'node:test';
 import { areEqual } from '../src/equality';
 import { normalize, whnf } from '../src/reduction';
-import { findHoles, intro, exact, apply, reportProofState } from '../src/proof';
+import { findHoles, getHoleGoal, intro, exact, apply, reportProofState } from '../src/proof';
 
 describe("Interactive Proof Mode Tests", () => {
 
@@ -123,4 +123,29 @@ describe("Interactive Proof Mode Tests", () => {
         const expectedTerm2: Term = App(Var("s"), Var("z"), Icit.Expl);
         assert(areEqual(finalResult2.term, expectedTerm2, emptyCtx), `Final term should be the expected 's(z)'.`);
     });
-}); 
+
+    it("should find goals inside displayed functor and transfor applications", () => {
+        const fdHole = Hole("fd_goal");
+        fdHole.elaboratedType = Type();
+        const fdTerm: Term = {
+            tag: 'FDApp1Term',
+            displayedFunctor: Var("FF"),
+            morphism_sigma: fdHole,
+        };
+
+        const fdGoal = getHoleGoal(fdTerm, fdHole.id);
+        assert(fdGoal?.hole === fdHole, "Expected to find the FDApp1Term goal.");
+
+        const tdHole = Hole("td_goal");
+        tdHole.elaboratedType = Type();
+        const tdTerm: Term = {
+            tag: 'TDApp1Term',
+            transformation: Var("eps"),
+            morphism_sigma: Var("sigma"),
+            functorGG_IMPLICIT: tdHole,
+        };
+
+        const tdGoal = getHoleGoal(tdTerm, tdHole.id);
+        assert(tdGoal?.hole === tdHole, "Expected to find the TDApp1Term goal.");
+    });
+});

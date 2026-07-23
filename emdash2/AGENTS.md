@@ -91,10 +91,12 @@ the iterated-hom architecture to the omega setting.
 - Focused temporary probe: `scripts/probe.sh tmp/probes/name.lp`
 - Decision tree: `scripts/decision_tree.sh SYMBOL`
 - Type-aware search: `scripts/lambdapi_search.sh QUERY`
-- Print preview/check: `npm run dev` / `npm run check:render`
-- Book assembly/check/render/release: `npm run book:assemble` /
-  `npm run book:check` / `npm run book:render` / `npm run book:release`
-- Book semantic typography: `npm run book:typography`
+- Print preview/check from the Git root: `./scripts/pnpmw run print:dev` /
+  `./scripts/pnpmw run print:check`
+- Book assembly/check/render/release from the Git root:
+  `./scripts/pnpmw run book:assemble` / `./scripts/pnpmw run book:check` /
+  `./scripts/pnpmw run book:render` / `./scripts/pnpmw run book:release`
+- Book semantic typography: `../scripts/pnpmw --dir emdash2/print run book:typography`
 - Remove compilation artifacts: `make clean`
 - Manually prune old logs: `make prune-logs`
 

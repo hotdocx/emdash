@@ -8,7 +8,7 @@ Supersedes: no mathematical plan; closes the residual cross-project maintenance 
 Side-Task-Ledger: #side-task-ledger
 Infinity-Codex-Origin: current-session-autonomous-maintenance-goal-2026-07-22
 Infinity-Codex-Decision-Responses: none
-Status: **ACTIVE LIVING LEDGER — initial AME-0 through AME-9 autonomous cycle complete; reopen only on new evidence**
+Status: **ACTIVE LIVING LEDGER — AME-0 through AME-10 complete; reopen only on new evidence**
 
 ## Objective
 
@@ -132,6 +132,7 @@ ledger. New rows require a concrete finding, consumer, or invariant.
 | AME-7 | rewrite MathOps | Refresh warning-family and inferred-slot inventories, classify high-frequency overlaps, and improve advisory tooling only where it catches an observed defect | complete | no warning-driven semantic rewrite; strict audit passes; tooling has fixtures/tests and a documented false-positive boundary |
 | AME-8 | kernel / libraries | Discover small consumer-backed completeness or consolidation candidates in the active modules and implement only bounded, owner-aligned slices | complete | each promoted semantic change has an owner-position probe, focused positive/negative diagnostics, bounded full check, and recorded warning comparison |
 | AME-9 | future architecture | Synthesize evidence from completed tranches into a ranked prerequisite map for module boundaries, generic directed HITs, dependent adjunctions, profunctor semantics, and native OneCat comparison | complete | proposals distinguish reusable prerequisites from speculative endpoints and identify which decisions need human mathematical judgment |
+| AME-10 | repository / DevOps | Make the root TypeScript, Lambdapi, and print projects worktree-friendly through one pinned package-manager workspace, canonical root Codex guidance, reproducible bootstrap/check commands, and an explicit v3.2 elaborator handoff | complete | a fresh worktree can reuse a shared package store through one frozen workspace lock; commands work from the repository root and `emdash2`; root and print checks pass; the legacy TypeScript category layer is clearly non-authoritative and no semantic redesign is smuggled into setup |
 
 ## Lane-Specific Validation
 
@@ -547,6 +548,83 @@ promotion by this plan:
   a recorded human mathematical/product decision. The persistent goal can
   close while this report remains an active living ledger for future findings.
 
+### 2026-07-22 — AME-10 worktree/package-management intake
+
+- reopened the living ledger for a user-requested prerequisite to renewed
+  TypeScript elaborator work from either the Git root or `emdash2`;
+- confirmed that this is one Git repository rooted at `emdash1`, with
+  `emdash2` as a tracked subtree. The existing npm configuration recognizes
+  only `emdash2` as a workspace, while the 281 MiB print dependency tree has a
+  separate lock/install and root documentation incorrectly advertises
+  `npm -w print`; the root dependency tree is another 54 MiB and includes a
+  self-link caused by the redundant `"emdash": "file:"` dependency;
+- found three npm lockfiles. The root and print locks describe contributor
+  packages that should share one workspace lock; `emdash-template` is instead
+  a standalone distributable fixture and should retain its independent npm
+  manifest/lock rather than silently join contributor builds;
+- the hidden root `.AGENTS.md` is not one of Codex's default instruction names.
+  Current Codex guidance discovers `AGENTS.md` from the Git root down to the
+  working directory, so a future session started at the root currently misses
+  the root routing guide unless a personal fallback filename is configured;
+- selected pnpm 11 for the contributor workspace. Its official documentation
+  specifies a shared content-addressable store with hard links across projects,
+  a root `pnpm-workspace.yaml`, and a shared workspace lock by default. This
+  avoids repeated package downloads/content copies across worktrees while
+  retaining a separate dependency-link graph in each branch; sharing one
+  mutable `node_modules` directory across worktrees is intentionally rejected;
+- bounded pre-edit baselines pass for all 137 root runtime tests, scoped ESLint,
+  and the complete Lambdapi `make check`. Root `tsc --noEmit` exposes two
+  pre-existing integration defects to resolve in this tranche: its broad
+  include reaches into the independent print project, and one proof traversal
+  omits the already-declared `FDApp1Term`/`TDApp1Term` cases.
+
+### 2026-07-22 — AME-10 worktree/package-management completion
+
+- replaced the two contributor npm locks and incomplete npm workspace with one
+  pinned `pnpm@11.16.0` workspace and frozen root lock covering the root,
+  `emdash2`, and `emdash2/print`; retained `emdash-template/package-lock.json`
+  as the deliberately standalone distributable fixture and removed the root
+  package's self-dependency/link. Existing manifest ranges were retained, so
+  the new lock deliberately refreshes compatible releases (including
+  TypeScript 5.9.3 and Playwright 1.61.1) rather than claiming byte-for-byte
+  preservation of the retired npm locks;
+- added a Git-root-resolving pnpm/Corepack wrapper, frozen worktree bootstrap,
+  npm-install guard, and executable workspace-contract check. The workspace
+  explicitly fixes the per-worktree virtual-store layout across interactive
+  and CI environments, rejects stale dependency state before scripts rather
+  than auto-installing, and reviews the exact dependency build-script allowlist;
+- performed a clean dependency-graph rebuild with 374 packages reused and zero
+  downloaded from the machine-wide content-addressable store. A subsequent
+  offline frozen install and bootstrap invoked from `emdash2` both pass; the
+  active store is `/home/user1/.local/share/pnpm/store/v11`. Each worktree still
+  owns an isolated disposable link graph;
+- migrated the hidden root `.AGENTS.md` to canonical `AGENTS.md`, routed nested
+  tasks through the v3.2 and print SOPs, and added a root handoff that defines
+  the Lambdapi trust boundary, separates surface/core/kernel ASTs, records
+  human design decisions, and recommends a first checked
+  `fapp0`/`fapp1_fapp0`/`tapp1_fapp0` vertical slice;
+- narrowed root TypeScript compilation to the root workbench, wired five
+  previously orphaned suites into the default runner, and completed proof-hole
+  traversal for the already-existing `FDApp1Term` and `TDApp1Term` nodes with a
+  focused regression. Typecheck and scoped ESLint pass, and the default runner
+  now executes all 152 tests across 43 suites successfully;
+- consolidated active book/renderer commands on the root wrapper. Book
+  assembly, 107-claim evidence, typography, 1,273 KaTeX spans, source checks,
+  production build, and the four-document browser gate pass; measured output is
+  27, 20, 32, and 192 pages with no console, page, request, or render errors.
+  The pinned Playwright Chromium cache is user-level and reusable by sibling
+  worktrees;
+- bounded `make check` passes. The composed repository gate passes all 41
+  measured Lambdapi targets in 173.945 seconds, 39 Python tests, five document
+  registry tests, source TOC, active-reference and report-header lints, book
+  gates, strict LHS audit, catalog freshness, and `git diff --check`; the health
+  source fingerprint remains
+  `sha256:1883910f565c1bef715f7c5e723de14ac336e8c10bd1a7af6071b64533f6791e`;
+- this tranche performs prerequisite setup and repairs only. It neither treats
+  the stale TypeScript category layer as a v3.2 authority nor chooses the
+  pending elaborator package boundary, normalization policy, diagnostic source
+  map, surface primitives, parser grammar, or any new mathematical rule.
+
 ## Completion Condition
 
 The persistent objective may be marked complete only when every backlog row is
@@ -555,7 +633,9 @@ prerequisite; all required generated artifacts are fresh; proportional CI is
 green; and the final report clearly separates implemented improvements from
 future research and human decisions.
 
-The initial 2026-07-22 autonomous cycle satisfies this condition. A later
-audit should append a new evidence-backed row or bounded child plan; it should
-not reopen completed rows merely to pursue novelty or reduce an advisory
-metric.
+The initial 2026-07-22 autonomous cycle satisfied this condition at its close.
+AME-10 subsequently reopened the living ledger with new user evidence; it does
+not reopen the completed AME-0 through AME-9 rows merely to pursue novelty or
+reduce an advisory metric.
+AME-10 now also satisfies the completion condition; the ledger remains living
+and should reopen only for a concrete new finding, consumer, or user decision.

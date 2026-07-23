@@ -29,24 +29,24 @@ edited by hand.
 Run from the repository root:
 
 ```bash
-npm run book:assemble
-npm run book:typography
-npm run book:check
-npm run book:render
-npm run book:pdf
-npm run book:pdf:check
-npm run book:release
+./scripts/pnpmw run book:assemble
+./scripts/pnpmw run book:typography
+./scripts/pnpmw run book:check
+./scripts/pnpmw run book:render
+./scripts/pnpmw run book:pdf
+./scripts/pnpmw run book:pdf:check
+./scripts/pnpmw run book:release
 ```
 
-Run from `print/` when working directly on the renderer:
+From `emdash2/`, use the same root-owned commands through the wrapper:
 
 ```bash
-npm run book:assemble
-npm run book:typography
-npm run book:check
-npm run book:render
-npm run book:pdf
-npm run book:pdf:check
+../scripts/pnpmw run book:assemble
+../scripts/pnpmw run book:typography
+../scripts/pnpmw run book:check
+../scripts/pnpmw run book:render
+../scripts/pnpmw run book:pdf
+../scripts/pnpmw run book:pdf:check
 ```
 
 The development edition is theorem-led. Chapters 1--7 are driven by the

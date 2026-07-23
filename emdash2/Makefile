@@ -47,23 +47,23 @@ toc:
 > python3 scripts/check_source_toc.py
 
 ci-render:
-> npm run check:render
+> ../scripts/pnpmw --dir emdash2/print run check:render
 
 book-evidence:
 > python3 scripts/check_book_evidence.py
 
 book-typography:
-> npm run book:typography
+> ../scripts/pnpmw --dir emdash2/print run book:typography
 
 book-check:
-> npm run book:check
+> ../scripts/pnpmw --dir emdash2/print run book:check
 
 book-pdf:
-> npm run book:pdf
-> npm run book:pdf:check
+> ../scripts/pnpmw --dir emdash2/print run book:pdf
+> ../scripts/pnpmw --dir emdash2/print run book:pdf:check
 
 book-release:
-> npm run book:release
+> ../scripts/pnpmw --dir emdash2/print run book:release
 
 health:
 > python3 scripts/check_metrics.py --update-log --write-report

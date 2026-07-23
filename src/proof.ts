@@ -336,6 +336,28 @@ export function getHoleGoal(rootTerm: Term, holeId: string): GoalInfo | null {
                        (term.functorG_IMPLICIT ? find(term.functorG_IMPLICIT, ctx) : null) ||
                        (term.objX_A_IMPLICIT ? find(term.objX_A_IMPLICIT, ctx) : null) ||
                        (term.objY_A_IMPLICIT ? find(term.objY_A_IMPLICIT, ctx) : null);
+            case 'FDApp1Term':
+                return find(term.displayedFunctor, ctx) || find(term.morphism_sigma, ctx) ||
+                       (term.catZ_IMPLICIT ? find(term.catZ_IMPLICIT, ctx) : null) ||
+                       (term.catdE_IMPLICIT ? find(term.catdE_IMPLICIT, ctx) : null) ||
+                       (term.catdD_IMPLICIT ? find(term.catdD_IMPLICIT, ctx) : null) ||
+                       (term.objZ_IMPLICIT ? find(term.objZ_IMPLICIT, ctx) : null) ||
+                       (term.objE_IMPLICIT ? find(term.objE_IMPLICIT, ctx) : null) ||
+                       (term.objZPrime_IMPLICIT ? find(term.objZPrime_IMPLICIT, ctx) : null) ||
+                       (term.homF_IMPLICIT ? find(term.homF_IMPLICIT, ctx) : null) ||
+                       (term.objEPrime_IMPLICIT ? find(term.objEPrime_IMPLICIT, ctx) : null);
+            case 'TDApp1Term':
+                return find(term.transformation, ctx) || find(term.morphism_sigma, ctx) ||
+                       (term.catZ_IMPLICIT ? find(term.catZ_IMPLICIT, ctx) : null) ||
+                       (term.catdE_IMPLICIT ? find(term.catdE_IMPLICIT, ctx) : null) ||
+                       (term.catdD_IMPLICIT ? find(term.catdD_IMPLICIT, ctx) : null) ||
+                       (term.functorFF_IMPLICIT ? find(term.functorFF_IMPLICIT, ctx) : null) ||
+                       (term.functorGG_IMPLICIT ? find(term.functorGG_IMPLICIT, ctx) : null) ||
+                       (term.objZ_IMPLICIT ? find(term.objZ_IMPLICIT, ctx) : null) ||
+                       (term.objE_IMPLICIT ? find(term.objE_IMPLICIT, ctx) : null) ||
+                       (term.objZPrime_IMPLICIT ? find(term.objZPrime_IMPLICIT, ctx) : null) ||
+                       (term.homF_IMPLICIT ? find(term.homF_IMPLICIT, ctx) : null) ||
+                       (term.objEPrime_IMPLICIT ? find(term.objEPrime_IMPLICIT, ctx) : null);
             case 'HomCovFunctorIdentity':
                 return find(term.domainCat, ctx) || find(term.objW_InDomainCat, ctx);
             case 'MkFunctorTerm':

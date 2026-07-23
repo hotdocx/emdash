@@ -56,7 +56,12 @@ are not active interfaces.
 
 ## Quick start
 
-Prerequisite: `lambdapi` on `PATH`.
+Prerequisites: `lambdapi` on `PATH` and Node 22.13 or newer. From a
+fresh worktree, initialize the shared pnpm workspace once:
+
+```bash
+../scripts/bootstrap-worktree.sh
+```
 
 ```bash
 EMDASH_TYPECHECK_TIMEOUT=60s make check
@@ -89,11 +94,10 @@ the WalkingEnd/Nat theorem and then adapts the prerequisite spine of the HoTT
 Book to the directed setting.
 
 ```bash
-npm run install:print
-npm run book:assemble
-npm run book:check
-npm run book:render
-npm run book:release
+../scripts/pnpmw run book:assemble
+../scripts/pnpmw run book:check
+../scripts/pnpmw run book:render
+../scripts/pnpmw run book:release
 ```
 
 `book/book.json` owns source order and metadata;

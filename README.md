@@ -18,6 +18,66 @@ Primary artifacts:
 - Compatibility PDF filename: [`./docs/emdash3_2.pdf`](./docs/emdash3_2.pdf)
 - Active Lambdapi kernel: [`./emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp)
 - Book sources and evidence map: [`./emdash2/book/`](./emdash2/book/)
+- TypeScript v3.2 elaborator handoff:
+  [`./docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md)
+
+## Development workspace and Git worktrees
+
+The repository uses one pnpm 11 workspace and one `pnpm-lock.yaml` for the
+root TypeScript workbench, `emdash2`, and `emdash2/print`. The
+`emdash-template` directory remains a standalone distributable npm fixture.
+Node 22.13 or newer is required; Lambdapi is additionally required for the
+formal kernel checks.
+
+Bootstrap a fresh checkout or Git worktree from the repository root:
+
+```bash
+./scripts/bootstrap-worktree.sh
+```
+
+No global pnpm install is required when Corepack is available. The wrapper
+uses the `packageManager` version pinned in `package.json`, and package content
+is reused through pnpm's shared content-addressable store. Check its location
+with:
+
+```bash
+./scripts/pnpmw store path
+```
+
+Browser binaries are also cached outside individual worktrees. On a new
+machine, install the renderer's pinned Chromium once before browser-based
+print checks:
+
+```bash
+./scripts/pnpmw run print:browser:install
+```
+
+For parallel work, give each branch its own worktree and dependency-link graph:
+
+```bash
+git worktree add ../emdash1-elaborator -b work/elaborator-v3.2
+cd ../emdash1-elaborator
+./scripts/bootstrap-worktree.sh
+```
+
+Do not share or symlink a mutable `node_modules` directory between worktrees;
+pnpm already shares the immutable package content while keeping branch-specific
+dependency graphs isolated. Do not run `npm install` in the contributor
+workspace or recreate the retired root/print npm lockfiles.
+
+Common root commands are:
+
+```bash
+./scripts/pnpmw run check:ts
+./scripts/pnpmw run kernel:check
+./scripts/pnpmw run print:check
+./scripts/pnpmw run book:check
+./scripts/pnpmw run check:all
+```
+
+When starting Codex from either the root or `emdash2`, the canonical root
+`AGENTS.md` routes the task and the closer `emdash2/AGENTS.md` supplies the
+formal-kernel SOP.
 
 The book leads with the walking-endomorphism directed higher-inductive
 category `WalkingEnd`: an opaque base object and one directed generating
@@ -221,7 +281,14 @@ Build and publish your professional AI agents that co-work for you 24/7, save yo
 
 ---
 
-## Overview
+## Historical TypeScript Prototype Overview
+
+The remainder of this section describes the earlier executable TypeScript
+prototype. Its generic elaboration, unification, reduction, and proof-state
+machinery is implementation evidence, but its built-in category layer predates
+and does not define the active v3.2 Lambdapi kernel. Renewed implementation
+work starts from the v3.2 elaborator handoff linked above.
+
 `emdash` is a TypeScript-based core for a dependently typed language, built with a strong emphasis on integrating concepts from category theory as first-class citizens. It provides a robust and extensible type theory kernel, featuring dependent types, a sophisticated elaboration engine, a powerful unification algorithm, and a reduction system that supports equational reasoning. The system aims to provide a flexible foundation for computational type theory and functorial programming, drawing inspiration from systems like Agda and Lambdapi.
 
 ### Quick links

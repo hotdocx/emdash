@@ -107,4 +107,5 @@ bare words in math are rejected as well.
 - Link to stable anchors, never generated line numbers.
 - Do not edit `print/public/emdash-book.md`.
 - Avoid timestamps, absolute host paths, and generated build data in prose.
-- Run `npm run book:typography` after changing mathematical notation.
+- From the Git root, run `./scripts/pnpmw run book:typography` after changing
+  mathematical notation.

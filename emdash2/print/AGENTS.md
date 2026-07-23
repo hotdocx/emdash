@@ -18,12 +18,12 @@ authoring, document-selection, and local-upstream instructions live in
 ## Required behavior
 
 - Never hand-edit `public/emdash-book.md`; run
-  `npm run book:assemble`.
+  `./scripts/pnpmw run book:assemble` from the Git root.
 - Register every local Markdown document explicitly. Do not restore filename
   glob discovery or arbitrary local path loading.
-- Keep the committed dependency and lockfile reproducible. A local Arrowgram
-  link is opt-in, uses `--no-save`, and must not alter committed
-  manifests or lockfiles.
+- Keep the committed dependency and root workspace lockfile reproducible. A
+  local Arrowgram link is opt-in, uses `pnpm link` with an explicit path, and
+  must not alter committed manifests or the lockfile.
 - Keep KaTeX fonts and CSS local. Checked rendering must not require a CDN or
   other network request.
 - Preserve Showdown table parsing, math/code protection, sanitization, and
@@ -45,21 +45,22 @@ authoring, document-selection, and local-upstream instructions live in
 For book-only changes:
 
 ```bash
-npm run book:check
-npm run book:render
+./scripts/pnpmw run book:check
+./scripts/pnpmw run book:render
 ```
 
 For a production or metadata change, also run the deterministic artifact gate:
 
 ```bash
-npm run book:release
+./scripts/pnpmw run book:release
 ```
 
 For renderer or shared-pipeline changes:
 
 ```bash
-npm run validate:paper
-npm run check:render
+./scripts/pnpmw --dir emdash2/print run validate:paper
+./scripts/pnpmw --dir emdash2/print run check:render
 ```
 
-Run from `print/`, or use the corresponding root package aliases.
+Run these commands from the Git root. The wrapper preserves the pinned pnpm
+version even when the task itself was started under `print/`.

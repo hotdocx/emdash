@@ -1,0 +1,137 @@
+# Repository Guidance
+
+## Scope And Authority
+
+This is one Git repository rooted at `emdash1`. Its contributor workspace has
+three packages: the root TypeScript workbench, `emdash2`, and
+`emdash2/print`. The `emdash-template` directory is a standalone distributable
+fixture, not a contributor workspace package.
+
+The active mathematical authority is the Lambdapi v3.2 development under
+`emdash2/`, in the order specified by `emdash2/AGENTS.md`. The root `src/` and
+`tests/` tree is an older executable feasibility prototype. Its generic AST,
+bidirectional elaboration, holes, unification, rewriting, and proof-state code
+may be useful implementation evidence, but its built-in category theory is not
+an authority for v3.2 and should not be extended as though it were current.
+
+For renewed TypeScript elaborator work, read
+`docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`, then the active kernel, current
+SOP, Foundations, and canonical-syntax report named there. Treat the intended
+elaborator as a compilation layer into explicit v3.2 kernel owners. A surface
+AST may be constructed directly with TypeScript expressions; string parsing is
+optional and is not the architectural starting point.
+
+Codex discovers this root `AGENTS.md` and then applies closer nested files.
+For anything under `emdash2/`, `emdash2/AGENTS.md` adds the mandatory Lambdapi
+workflow. For renderer work, also follow `emdash2/print/AGENTS.md`.
+
+## Package And Worktree Setup
+
+Use the pinned pnpm version and the shared root `pnpm-lock.yaml`. Do not run
+`npm install` or create contributor `package-lock.json` files. The one retained
+npm lock at `emdash-template/package-lock.json` belongs to the standalone
+template fixture.
+
+From the Git root, bootstrap any fresh checkout or worktree with:
+
+```bash
+./scripts/bootstrap-worktree.sh
+```
+
+The wrapper uses Corepack when available and otherwise an installed pnpm:
+
+```bash
+./scripts/pnpmw install --frozen-lockfile
+./scripts/pnpmw store path
+```
+
+pnpm keeps package content in a store shared across worktrees. Each worktree
+must still have its own generated `node_modules` link graph; never symlink or
+copy one worktree's mutable `node_modules` directory into another worktree.
+
+Typical parallel setup:
+
+```bash
+git worktree add ../emdash1-elaborator -b work/elaborator-v3.2
+cd ../emdash1-elaborator
+./scripts/bootstrap-worktree.sh
+```
+
+Node 22.13 or newer is required by the pinned pnpm 11 release. Lambdapi must be
+available on `PATH` for the formal-specification checks. Node 24 includes
+Corepack in the current development environment; Node 25+ may require the
+userland Corepack package or a standalone pnpm installation.
+
+## Starting A Root TypeScript Task
+
+Before nontrivial edits:
+
+1. read this file, the elaborator handoff, and the relevant active v3.2
+   authorities;
+2. run `git status --short`, inspect staged and unstaged diffs separately, and
+   preserve unrelated work;
+3. locate definitions and consumers with `rg` rather than remembered lines;
+4. run `./scripts/pnpmw run check:ts` as the bounded root baseline;
+5. run `EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check` when the proposed
+   elaborator target depends on current kernel names or computation.
+
+Do not begin the redesign by deleting all old category nodes. First inventory
+which generic mechanisms and tests are reusable, define a v3.2 target IR and
+trusted boundary, and select one vertical compilation slice. Deletions or
+renames should follow that recorded design and keep the baseline reviewable.
+Do not recreate the retired D0/D1 compatibility API in TypeScript.
+
+## Commands
+
+Root TypeScript workbench:
+
+```bash
+./scripts/pnpmw test
+./scripts/pnpmw run typecheck
+./scripts/pnpmw run lint
+./scripts/pnpmw run check:ts
+```
+
+Active Lambdapi workspace, from the Git root:
+
+```bash
+./scripts/pnpmw run kernel:check
+./scripts/pnpmw run kernel:examples
+./scripts/pnpmw run kernel:ci
+```
+
+Or, from `emdash2`:
+
+```bash
+make check
+make examples
+make ci
+```
+
+Print and book workspace, from the root:
+
+```bash
+./scripts/pnpmw run print:dev
+./scripts/pnpmw run print:check
+./scripts/pnpmw run book:check
+./scripts/pnpmw run book:render
+```
+
+The repository-wide gate is `./scripts/pnpmw run check:all`. Keep exploratory
+Lambdapi checks bounded to at most 60 seconds as required by the nested SOP.
+
+## Change And Validation Rules
+
+- Behavioral changes under `src/` require focused tests under `tests/`, wired
+  into `tests/main_tests.ts` when the runner does not discover them itself.
+- TypeScript package/setup changes require `workspace:check`, root typecheck,
+  root tests, and the affected print checks.
+- Lambdapi changes follow `emdash2/AGENTS.md`, including owner-position probes,
+  warning comparisons, catalog/health refreshes, and full CI where required.
+- Print changes follow `emdash2/print/AGENTS.md` and its bounded render policy.
+- Preserve generated/source ownership: never hand-edit assembled book Markdown,
+  PDFs, dependency trees, or lockfiles except through their owning tools.
+- Preserve staged versus unstaged user work. Do not commit, publish, release,
+  create a PR, or remove worktrees unless the user requests it.
+- The obsolete ignored `emdash2/.scratchpad/` material is outside normal work;
+  do not inspect it unless the user explicitly requests historical recovery.

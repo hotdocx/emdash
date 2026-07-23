@@ -5,8 +5,11 @@ dist-deploy/
 .env.local
 .convex/
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.tsbuildinfo
+.pnpm-store/
 /.idea/
 /out/
 emdash-template/dist/

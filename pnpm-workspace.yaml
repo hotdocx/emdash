@@ -1,0 +1,28 @@
+packages:
+  - emdash2
+  - emdash2/print
+
+# Keep one reproducible contributor lock while preserving strict package
+# dependency boundaries. emdash-template is intentionally standalone.
+sharedWorkspaceLockfile: true
+disallowWorkspaceCycles: true
+failIfNoMatch: true
+engineStrict: true
+
+# Keep interactive worktrees and CI on the same local virtual-store layout.
+# Package contents still come from pnpm's machine-wide content-addressable
+# store, while the per-worktree link graph remains disposable and isolated.
+enableGlobalVirtualStore: false
+
+# Bootstrap is explicit and frozen. Never let `pnpm run` silently mutate the
+# dependency graph; report a stale install with the prescribed recovery step.
+verifyDepsBeforeRun: error
+
+# pnpm 11 rejects unreviewed dependency lifecycle scripts. These exact
+# versions are the scripts present in the migrated npm locks: esbuild and
+# macOS fsevents need their installers; the two legacy notices do not.
+allowBuilds:
+  'core-js@2.6.12': false
+  'es5-ext@0.10.64': false
+  'esbuild@0.21.5': true
+  'fsevents@2.3.2 || 2.3.3': true

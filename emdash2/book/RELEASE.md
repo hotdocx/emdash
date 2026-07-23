@@ -14,9 +14,9 @@ fresh build/export cycles when changing the pipeline.
 From the repository root:
 
 ```bash
-npm --prefix print ci --offline
-npm run book:release
-make ci
+./scripts/pnpmw install --offline --frozen-lockfile
+./scripts/pnpmw run book:release
+make -C emdash2 ci
 ```
 
 Before publishing an edition:

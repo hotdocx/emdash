@@ -2204,11 +2204,14 @@ the renderer. Book theorem-like claims use the four statuses defined in
 `book/STYLE.md` and checked claims cite `book/evidence.json`.
 
 ```bash
-npm run book:assemble
-npm run book:typography
-npm run book:check
-npm run book:render
+./scripts/pnpmw run book:assemble
+./scripts/pnpmw run book:typography
+./scripts/pnpmw run book:check
+./scripts/pnpmw run book:render
 ```
+
+Run these commands from the Git root. A fresh checkout or worktree is prepared
+with `./scripts/bootstrap-worktree.sh`.
 
 `book:typography` rejects TeX commands hidden in Markdown code spans,
 suspicious bare TeX control words in math, raw TeX in prose, and strict KaTeX

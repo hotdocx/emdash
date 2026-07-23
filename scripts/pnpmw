@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(git -C "$(dirname "${BASH_SOURCE[0]}")/.." rev-parse --show-toplevel)"
+cd "$repo_root"
+
+if command -v corepack >/dev/null 2>&1; then
+  exec corepack pnpm "$@"
+fi
+
+if command -v pnpm >/dev/null 2>&1; then
+  exec pnpm "$@"
+fi
+
+cat >&2 <<'EOF'
+pnpm is unavailable. Install Corepack or pnpm, then rerun this command.
+Node 24 includes Corepack; Node 25+ requires the userland Corepack package or
+a standalone pnpm installation. The repository pins the pnpm version in
+package.json.
+EOF
+exit 1

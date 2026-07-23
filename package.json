@@ -1,18 +1,41 @@
 {
   "name": "emdash",
   "version": "1.0.0",
+  "private": true,
+  "description": "TypeScript elaborator workbench and emdash v3.2 repository workspace",
+  "packageManager": "pnpm@11.16.0",
+  "engines": {
+    "node": ">=22.13"
+  },
   "main": "tests/main_tests.ts",
-  "workspaces": [
-    "emdash2"
-  ],
   "scripts": {
-    "start": "node --require ts-node/register --test tests/main_tests.ts",
-    "test": "node --require ts-node/register --test tests/main_tests.ts"
+    "preinstall": "node scripts/require-pnpm.mjs",
+    "start": "./scripts/pnpmw test",
+    "test": "node --require ts-node/register --test tests/main_tests.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint src tests",
+    "workspace:check": "node scripts/check-workspace.mjs",
+    "check:ts": "./scripts/pnpmw run workspace:check && ./scripts/pnpmw run typecheck && ./scripts/pnpmw run lint && ./scripts/pnpmw test",
+    "check": "./scripts/pnpmw run check:ts",
+    "check:all": "./scripts/pnpmw run check:ts && make -C emdash2 ci",
+    "kernel:check": "make -C emdash2 check",
+    "kernel:examples": "make -C emdash2 examples",
+    "kernel:ci": "make -C emdash2 ci",
+    "print:dev": "./scripts/pnpmw --dir emdash2/print dev",
+    "print:browser:install": "./scripts/pnpmw --dir emdash2/print run browser:install",
+    "print:build": "./scripts/pnpmw --dir emdash2/print build",
+    "print:check": "./scripts/pnpmw --dir emdash2/print check:render",
+    "book:assemble": "./scripts/pnpmw --dir emdash2/print book:assemble",
+    "book:typography": "./scripts/pnpmw --dir emdash2/print book:typography",
+    "book:check": "./scripts/pnpmw --dir emdash2/print book:check",
+    "book:render": "./scripts/pnpmw --dir emdash2/print book:render",
+    "book:pdf": "./scripts/pnpmw --dir emdash2/print book:pdf",
+    "book:pdf:check": "./scripts/pnpmw --dir emdash2/print book:pdf:check",
+    "book:release": "./scripts/pnpmw --dir emdash2/print book:release"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@eslint/js": "^9.26.0",
     "@types/node": "^22.15.17",
@@ -25,7 +48,6 @@
     "typescript-eslint": "^8.32.0"
   },
   "dependencies": {
-    "emdash": "file:",
     "parsimmon": "^1.18.1"
   }
 }

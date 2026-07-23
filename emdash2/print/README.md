@@ -9,13 +9,20 @@ the same Markdown/KaTeX/diagram/Paged.js pipeline.
 From the repository root:
 
 ```bash
-npm run install:print
-npm run dev
+./scripts/bootstrap-worktree.sh
+./scripts/pnpmw run print:browser:install
+./scripts/pnpmw run print:dev
 ```
 
-`install:print` runs a clean lockfile install. The committed default is
-the exact published package `@hotdocx/arrowgram@1.0.0`; it does not
-depend on a host-specific checkout.
+The bootstrap performs a frozen install from the root `pnpm-lock.yaml` and
+reuses pnpm's content-addressable store across Git worktrees. The committed
+default is the exact published package `@hotdocx/arrowgram@1.0.0`; it does not
+depend on a host-specific checkout. Each worktree retains its own generated
+dependency-link graph.
+
+The Playwright command installs the renderer's pinned Chromium into its
+user-level cache, which is likewise reused by sibling worktrees. It is needed
+for browser render checks, but not for the root TypeScript or Lambdapi checks.
 
 The browser accepts these registered selectors:
 
@@ -32,12 +39,12 @@ development inputs. Other local filenames are rejected.
 Book sources live outside this workspace under `../book/`.
 
 ```bash
-npm run book:assemble
-npm run book:check
-npm run book:render
-npm run book:pdf
-npm run book:pdf:check
-npm run book:release
+./scripts/pnpmw run book:assemble
+./scripts/pnpmw run book:check
+./scripts/pnpmw run book:render
+./scripts/pnpmw --dir emdash2/print run book:pdf
+./scripts/pnpmw --dir emdash2/print run book:pdf:check
+./scripts/pnpmw run book:release
 ```
 
 - `book:assemble` deterministically joins the ordered manifest sources
@@ -80,16 +87,16 @@ To add a document:
 
 1. add its Markdown file or generator;
 2. add one registry entry with unique selectors;
-3. run `npm run validate:paper`;
+3. run `./scripts/pnpmw --dir emdash2/print run validate:paper`;
 4. run the appropriate bounded render group.
 
 Useful commands:
 
 ```bash
-npm run validate:paper
-node scripts/validate_paper.mjs --group=articles
-node scripts/check_console.mjs --group=book
-npm run check:render
+./scripts/pnpmw --dir emdash2/print run validate:paper
+./scripts/pnpmw --dir emdash2/print exec node scripts/validate_paper.mjs --group=articles
+./scripts/pnpmw --dir emdash2/print exec node scripts/check_console.mjs --group=book
+./scripts/pnpmw run print:check
 ```
 
 `check:render` validates and paginates every registered document.
@@ -102,18 +109,17 @@ To test an unpublished local core without changing committed dependency
 metadata:
 
 ```bash
-cd print
-npm ci
-npm link --no-save /home/user1/arrowgram/packages/arrowgram
-npm run book:check
-npm run build
-npm ci
+./scripts/pnpmw install --frozen-lockfile
+./scripts/pnpmw --dir emdash2/print link /home/user1/arrowgram/packages/arrowgram
+./scripts/pnpmw run book:check
+./scripts/pnpmw run print:build
+./scripts/pnpmw install --force --frozen-lockfile
 ```
 
-The final `npm ci` restores the published package. Before committing,
-verify that `package.json` and `package-lock.json` contain no
-`file:` dependency, absolute host path, or link entry. The assembled
-book must have the same hash in published and local-link modes.
+The final frozen install restores the published package. Before committing,
+verify that `package.json` and the root `pnpm-lock.yaml` contain no `file:`
+dependency, absolute host path, or link entry. The assembled book must have the
+same hash in published and local-link modes.
 
 ## Pipeline map
 

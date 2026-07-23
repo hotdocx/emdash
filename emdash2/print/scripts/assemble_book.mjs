@@ -164,11 +164,17 @@ export function runAssembler(argv) {
 
   if (checkOnly) {
     if (!fs.existsSync(outputPath)) {
-      throw new Error(relativeOutput + ' is missing; run npm run book:assemble');
+      throw new Error(
+        relativeOutput +
+          ' is missing; run ./scripts/pnpmw run book:assemble from the Git root',
+      );
     }
     const current = fs.readFileSync(outputPath, 'utf8');
     if (current !== assembled) {
-      throw new Error(relativeOutput + ' is stale; run npm run book:assemble');
+      throw new Error(
+        relativeOutput +
+          ' is stale; run ./scripts/pnpmw run book:assemble from the Git root',
+      );
     }
     console.log('book assembly check passed: ' + relativeOutput);
     return;

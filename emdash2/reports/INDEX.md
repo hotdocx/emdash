@@ -240,10 +240,11 @@ implementation plans, and historical decisions.
 
 - `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
   active living cross-project maintenance plan. Its initial AME-0 through
-  AME-9 autonomous cycle is complete; it reopens only for new evidence-backed
-  work across the kernel and one-way libraries, diagnostics, book and research
-  papers, and DevOps/MathOps, while speculative or decision-dependent work
-  remains in an explicit human/research boundary.
+  AME-9 autonomous cycle and the evidence-backed AME-10 Git-worktree, root
+  pnpm-workspace, Codex-routing, and renewed TypeScript elaborator pre-setup
+  tranche are complete. The plan reopens only on concrete new evidence;
+  speculative or decision-dependent work remains in an explicit human/research
+  boundary.
 - `REPORT_EMDASH_V3_2_PI_ALONG_FUNCTOR_IMPLEMENTATION_PLAN_2026-06-11.md`:
   proposed dependent products along functors and comma-category
   infrastructure.
