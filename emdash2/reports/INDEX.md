@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-22
+Date: 2026-07-23
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
@@ -238,6 +238,15 @@ implementation plans, and historical decisions.
 
 ## Current Plans
 
+- `../../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`:
+  active living cross-layer plan for replacing the stale root TypeScript
+  category layer with a backend-neutral explicit emdash Core, schema-driven
+  elaborator, candidate TypeScript product kernel, and optional Lambdapi
+  conformance backend. ELAB-0 is complete as a wiring spike; ELAB-1A is the
+  next dependency-ready implementation slice. Any Lambdapi change scheduled
+  there remains subordinate to the active authorities and full kernel SOP.
+  Its persistent-goal branch/checkpoint protocol is
+  `../../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
 - `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
   active living cross-project maintenance plan. Its initial AME-0 through
   AME-9 autonomous cycle and the evidence-backed AME-10 Git-worktree, root

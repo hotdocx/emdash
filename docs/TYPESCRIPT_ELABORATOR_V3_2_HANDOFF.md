@@ -1,7 +1,8 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
 Date: 2026-07-23
-Status: ELAB-0 implemented; this remains the authority and growth handoff
+Status: ELAB-0 implemented; the living master plan owns forward architecture,
+status, and execution
 
 ## Purpose
 
@@ -14,11 +15,15 @@ The first checked vertical slice now lives under `../src/v3_2/`, with its
 evidence, architecture reassessment, validation record, and human review
 points in
 [`TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md).
+Forward implementation is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md).
+Long-running goal branches and checkpoints follow
+[`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
 
 The intended word *syntax* is broad. Users may construct a typed surface AST
 with ordinary TypeScript expressions; a string parser can be added later. The
 first architectural problem is elaboration and compilation into explicit
-kernel applications, not tokenization.
+emdash Core applications, not tokenization.
 
 ## Authority Boundary
 
@@ -31,7 +36,9 @@ Read these in order before selecting a semantic target:
 4. `../emdash2/reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`;
 5. `../emdash2/reports/EMDASH_FOUNDATIONS.md`;
 6. `../emdash2/reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`;
-7. the active task plan selected through `../emdash2/reports/INDEX.md`.
+7. the active task plan selected through `../emdash2/reports/INDEX.md`;
+8. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the cross-layer
+   implementation ledger, subordinate to the mathematical sources above.
 
 The root `src/` implementation predates the current kernel. Its generic
 elaboration machinery is feasibility evidence, but names such as
@@ -41,30 +48,36 @@ backward into those nodes piecemeal or recreate retired compatibility names.
 
 ## Intended Trust And Compilation Boundary
 
-The preferred initial architecture is:
+The selected implementation direction is:
 
 ```text
 TypeScript surface AST (string parsing optional)
-        ↓ scope, binder-mode, and implicit-argument elaboration
-typed surface/core IR with source locations and metavariables
-        ↓ owner-directed lowering
-explicit v3.2 kernel application IR
-        ↓ deterministic Lambdapi serialization
-temporary/reviewer .lp consumer
-        ↓ lambdapi check
-authoritative typing, conversion, and computation result
+        ↓ scope, constraints, binder roles, and implicit recovery
+backend-neutral explicit emdash Core IR
+        ├──→ small TypeScript checker/evaluator
+        │       ↓
+        │    candidate deployed MVP kernel
+        │
+        └──→ deterministic Lambdapi conformance emitter
+                ↓
+             bounded differential probes and CI
 ```
 
-Lambdapi remains the trusted checker. The TypeScript layer may recover omitted
-categories, endpoints, variances, binder modes, and implicit arguments, and it
-should produce useful constraints and diagnostics. It must not silently invent
-functorial action, naturality, a missing higher cell, or a mathematical
-equivalence that the active kernel does not provide.
+Lambdapi remains the active mathematical specification and current executable
+acceptance oracle for the shared fragment. It need not be a production runtime
+dependency. The intended TypeScript product kernel becomes authoritative only
+after the master plan's explicit parity/trust graduation gate.
 
-The kernel-target IR should initially be small and mechanical: variables,
-binders, applications of named active symbols, explicit implicit arguments,
-and source/provenance metadata. Avoid defining a second independent evaluator
-for the full categorical calculus before an end-to-end consumer requires it.
+The TypeScript layer may recover omitted categories, endpoints, variances,
+binder modes, and implicit arguments, and should produce useful constraints
+and diagnostics. It must not silently invent functorial action, naturality, a
+missing higher cell, or a displayed-to-ordinary equivalence that the active
+design does not provide.
+
+The Core IR should remain small and mechanical: variables, binders,
+applications/classifiers described by audited owner schemas, explicit
+semantically relevant arguments, and source/provenance metadata. Surface
+macros and customized TypeScript automation live outside its trusted checker.
 
 ## What May Be Reused
 
@@ -78,7 +91,7 @@ Audit before retaining or deleting anything. Likely reusable mechanisms are:
 - source-independent proof-state traversal;
 - test harness organization and direct TypeScript AST construction.
 
-Likely redesign boundaries are:
+Required redesign/replacement boundaries are:
 
 - all hard-coded one-category constructors and their implicit-slot tables;
 - the old `MkFunctorTerm` proof/coherence contract;
@@ -86,12 +99,14 @@ Likely redesign boundaries are:
 - any claim that the TypeScript normalizer is the authority for v3.2;
 - the parser grammar, until the typed AST and lowering contract stabilize.
 
-The old code should be removed only after an inventory maps each retained test
-to a reusable generic invariant or a current v3.2 consumer. A wholesale first
-deletion would erase useful executable evidence and make regressions difficult
-to classify.
+The old category-specific code is intended for deletion, not compatibility
+maintenance. Remove it after an inventory maps each retained test to a
+reusable generic invariant or a current v3.2 consumer and replacement checks
+exist. A wholesale first deletion would erase useful executable evidence and
+make regressions difficult to classify; this sequencing does not grant the
+old API a permanent place.
 
-## Implemented First Tranche
+## Implemented Wiring Tranche
 
 The ELAB-0 RFC and isolated `src/v3_2/` implementation now cover this first
 vertical slice:
@@ -107,29 +122,44 @@ vertical slice:
    owner and is accepted or rejected by Lambdapi as expected;
 5. include one positive omission-recovery case and one wrong-endpoint or
    wrong-binder-mode negative case;
-6. keep the existing 152-test prototype baseline passing until the RFC selects
+6. keep the existing prototype baseline passing until the master plan reaches
    an explicit migration or replacement boundary.
 
 This slice is deliberately end to end. A larger AST taxonomy without a checked
 Lambdapi consumer would not yet demonstrate an elaborator.
 
-## Decisions That Need Explicit Review
+It is nevertheless only a wiring spike. It omits the diagonal transfor
+component `tapp0_fapp0`, all full/uncapped owners (`fapp1_func`,
+`tapp0_func`, and `tapp1_func`), recursive higher-cell action, `hom_int`,
+displayed/dependent contexts, metavariables, and conversion. Do not extend its
+three-case switch as the architecture; implement the schema-driven next slice
+recorded in the master plan.
 
-Record, rather than silently assume, the following choices:
+## Forward Stress Tests And Review Boundaries
 
-- whether the first implementation lives beside the prototype under a new
-  `src/v3_2/` boundary or begins a package split;
-- whether successful elaboration returns only kernel AST, serialized Lambdapi,
-  or both;
-- how Lambdapi diagnostics are mapped back to TypeScript source locations;
-- whether TypeScript performs any normalization beyond surface substitution
-  and metavariable solving, and how that remains subordinate to Lambdapi;
-- which canonical surface constructs are user-facing primitives versus
-  derived notation;
-- when a string parser becomes valuable enough to stabilize a grammar.
+The plan now requires these early stress tests:
 
-Do not mix these decisions with a physical monorepo split, kernel rewrite
-migration, or restoration of the retired D0/D1 compatibility layer.
+- the complete full/capped projection ladder, including the previously omitted
+  `tapp0_fapp0`;
+- recursive `fapp1_func` action at the next hom level, rather than a special
+  one-category or `fapp2` case;
+- partial application/internalization through `hom_int` and `hom_con_int`;
+- a dependent-first context experiment using `Catd`, `Pullback_catd`,
+  `Const_catd`, and `Pi_cat`;
+- weakening, dependency-permitted exchange, and contraction with explicit
+  distinction between telescope operations, ordinary structural functors,
+  displayed owners, and shape reindexing;
+- positive and non-collapse comparisons between effectively nondependent
+  displayed routes and optimized ordinary routes.
+
+General displayed weakening/exchange/contraction is not presumed to exist.
+Record a concrete elaboration consumer and failed owner-position probe before
+proposing a kernel addition, then follow the complete nested SOP. The precise
+dependent encoding, displayed structural owners, TypeScript MVP fragment, and
+kernel-graduation claim remain human review gates in the master plan.
+
+Do not mix these decisions with a physical monorepo split or restoration of
+the retired D0/D1 compatibility layer.
 
 ## Worktree And Validation Workflow
 
@@ -151,17 +181,16 @@ then broaden to `make -C emdash2 check`. Run
 `./scripts/pnpmw run check:all` before handing off a substantial cross-layer
 change.
 
-## Suggested Fresh-Conversation Prompt
+For a persistent goal, use a dedicated branch/worktree and the checkpoint
+authorization and recovery rules in
+`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. Persistence alone does not authorize
+any Git mutation.
 
-```text
-Work from the Git root ~/emdash1 on the TypeScript elaborator for the active
-emdash v3.2 kernel. Read AGENTS.md and
-docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md, then recover the active Lambdapi
-authorities and inspect the clean/dirty Git state. Treat the existing root
-category layer as stale feasibility evidence: inventory reusable generic
-elaboration machinery, but do not extend or delete it wholesale. Start an
-evidence-backed ELAB-0 RFC and implement the smallest end-to-end TypeScript
-surface-AST → explicit-v3.2-kernel-AST → checked-Lambdapi probe slice, with
-focused positive and negative tests. Keep package/worktree and kernel checks
-green and record any mathematical design choice that needs human review.
-```
+## Start The Long-Running Implementation
+
+Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
+`TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`. It names baseline
+`a06433e57cba95e7d35f8577b7c71912862c3d25`, selects the first
+dependency-ready implementation slice, authorizes one dedicated local goal
+branch/worktree and validated checkpoint commits there, and records all
+excluded Git operations.

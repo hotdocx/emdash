@@ -244,6 +244,28 @@ with warnings enabled before rejecting the proposed rule.
 - Record changed architectural conclusions in the current report or active
   task plan, not only in conversation.
 
+## Long-Running Cross-Layer Experiments
+
+The active cross-layer TypeScript elaborator/kernel plan is
+`../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`. Its Git workflow is
+`../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. These root documents may
+schedule or record a Lambdapi experiment, but they do not outrank the active
+kernel authorities or relax this file's owner-position, warning,
+subject-reduction, audit, catalog, health, example, and CI requirements.
+
+A missing TypeScript elaboration route is a consumer signal, not automatic
+authority for a new kernel rewrite. First determine whether the gap belongs in
+surface elaboration, explicit Core, an existing comparison, or a genuinely
+missing owner. Probe the latter at its owning source position and record both
+the positive consumer and the relevant negative/non-collapse case before
+promotion.
+
+A persistent `/goal` does not itself authorize Git mutations. If its explicit
+launch prompt authorizes local checkpoint commits, checkpoint a Lambdapi
+change only after its proportional SOP gates and affected plan/report ledgers
+are synchronized. That authorization does not include push, merge, rebase,
+amend, reset, publication, branch deletion, or worktree removal.
+
 ## Local Lambdapi References
 
 Use the repository copies instead of embedding them here:

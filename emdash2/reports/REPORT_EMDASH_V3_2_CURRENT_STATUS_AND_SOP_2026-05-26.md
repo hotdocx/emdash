@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-22
+Last consolidated: 2026-07-23
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -40,6 +40,13 @@ detailed probe evidence.
   authority for comments, examples, and future parser work.
 - `INDEX.md`: active plans, completed decision records, audits, and generated
   reports.
+- `../../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`: active cross-layer
+  implementation ledger for the TypeScript elaborator/candidate product
+  kernel. It is subordinate to these mathematical sources for every active
+  owner and rule.
+- `../../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`: repository-wide
+  checkpoint and recovery workflow for explicitly authorized long-running
+  implementation goals. It does not relax this SOP.
 - `../book/book.json` and `../book/evidence.json`: book source
   ordering/metadata and prose-to-check traceability. They govern the book
   artifact but never override active Lambdapi declarations.
@@ -2126,6 +2133,28 @@ Do not duplicate a semantic body in a readability helper. Route aliases
 through the named semantic constructor.
 
 ## Development And Validation Workflow
+
+### Persistent goals and Git checkpoints
+
+A long-running Codex `/goal` must recover the current authority, active plan,
+owner positions, worktree list, staged and unstaged diffs, and bounded baseline
+on every continuation. A baseline commit is comparison evidence; do not reset
+a descendant implementation to it.
+
+Persistence alone does not authorize Git mutations. When the user or the
+task's launch prompt explicitly authorizes local checkpoint commits, use the
+repository workflow in
+`../../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. A kernel checkpoint is
+eligible only after the smallest owner-position experiment has a typed
+positive consumer and relevant negative/non-collapse evidence, proportional
+warning and rule audits are complete, affected diagnostics/catalog/health and
+plan ledgers are synchronized, and the staged diff contains no unrelated work.
+
+Checkpoint authorization never weakens the semantic promotion procedure and,
+unless separately requested, never includes push, merge, rebase, amend, reset,
+publication, branch deletion, or worktree removal. Correct failed experiments
+with new reviewable evidence/commits or compare explicit experiment branches;
+do not erase the decision trail.
 
 ### Bounded checks
 

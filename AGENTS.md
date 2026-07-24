@@ -16,9 +16,13 @@ an authority for v3.2 and should not be extended as though it were current.
 
 For renewed TypeScript elaborator work, read
 `docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`, then the active kernel, current
-SOP, Foundations, and canonical-syntax report named there. Treat the intended
-elaborator as a compilation layer into explicit v3.2 kernel owners. A surface
-AST may be constructed directly with TypeScript expressions; string parsing is
+SOP, Foundations, canonical-syntax report, and living master plan named there.
+Treat the intended elaborator as a compilation layer into a backend-neutral
+explicit emdash Core aligned with active v3.2 owners. The intended product path
+is a small TypeScript checker/evaluator; deterministic Lambdapi emission is an
+optional runtime backend and a required conformance oracle until the
+TypeScript kernel reaches its recorded graduation boundary. A surface AST may
+be constructed directly with TypeScript expressions; string parsing is
 optional and is not the architectural starting point.
 
 Codex discovers this root `AGENTS.md` and then applies closer nested files.
@@ -79,7 +83,38 @@ Do not begin the redesign by deleting all old category nodes. First inventory
 which generic mechanisms and tests are reusable, define a v3.2 target IR and
 trusted boundary, and select one vertical compilation slice. Deletions or
 renames should follow that recorded design and keep the baseline reviewable.
-Do not recreate the retired D0/D1 compatibility API in TypeScript.
+This is a sequencing rule, not a compatibility requirement: the intended end
+state deletes and replaces the stale category-specific TypeScript layer while
+porting or cleanly reimplementing only independently useful generic
+mechanisms. Do not recreate the retired D0/D1 compatibility API in TypeScript.
+
+## Persistent Goals And Git Experimentation
+
+Long-running or mostly unsupervised `/goal` work must use an active living plan
+and the workflow in
+`docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. The TypeScript elaborator's
+current ledger and ready-to-use launch prompt are in
+`docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`.
+
+A persistent goal does not itself authorize commits, branches, worktrees,
+pushes, merges, history rewriting, publication, or cleanup. Those mutations
+need explicit user or launch-prompt authorization. When a prompt specifically
+authorizes local checkpoints, use a dedicated goal branch/worktree and commit
+only after a bounded tranche is green, its plan/decision ledger is
+synchronized, and the exact staged diff excludes unrelated work.
+
+Treat a named baseline commit as comparison and backtracking evidence, not as
+permission to reset a descendant worktree. On every continuation, inspect all
+worktrees, staged and unstaged changes, the baseline ancestry relation, current
+authorities, and the active plan. Prefer new correcting commits or explicit
+experiment branches over amending, rebasing, resetting away, or otherwise
+rewriting checkpoints.
+
+Unless separately requested, checkpoint authorization never includes pushing,
+merging to `main`, publishing, releasing, creating a PR, deleting branches, or
+removing worktrees. Git isolation also never relaxes the nested Lambdapi SOP,
+warning comparisons, audits, catalog/health synchronization, or validation
+gates.
 
 ## Commands
 

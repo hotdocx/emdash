@@ -20,8 +20,12 @@ Primary artifacts:
 - Book sources and evidence map: [`./emdash2/book/`](./emdash2/book/)
 - TypeScript v3.2 elaborator handoff:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md)
+- Active TypeScript elaborator/kernel living master plan and `/goal` prompt:
+  [`./docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md)
 - Implemented ELAB-0 RFC and TypeScript-kernel reassessment:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md)
+- Persistent-goal Git experimentation and checkpoint workflow:
+  [`./docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md)
 
 ## Development workspace and Git worktrees
 
@@ -66,6 +70,13 @@ Do not share or symlink a mutable `node_modules` directory between worktrees;
 pnpm already shares the immutable package content while keeping branch-specific
 dependency graphs isolated. Do not run `npm install` in the contributor
 workspace or recreate the retired root/print npm lockfiles.
+
+For a long-running Codex `/goal`, use the living task plan and
+[`./docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
+Persistence alone does not authorize Git mutations. A task prompt may
+explicitly authorize local validated checkpoint commits on a dedicated goal
+branch, but that does not authorize push, merge, history rewriting,
+publication, branch deletion, or worktree removal.
 
 Common root commands are:
 
