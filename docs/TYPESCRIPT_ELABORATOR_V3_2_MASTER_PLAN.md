@@ -10,8 +10,8 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Status: active living master plan; ELAB-0 is complete and the first
-post-ELAB-0 implementation slice is dependency-ready
+Status: active living master plan; ELAB-1A is complete and ELAB-1B is the
+next dependency-ready implementation slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -162,6 +162,7 @@ cleanly.
 | D-010 | accepted | Kernel additions are consumer-led. Missing displayed operations are first recorded as failed owner-position probes; only the smallest coherent owner package may be promoted. | Required by the active v3.2 SOP and warning/subject-reduction discipline. |
 | D-011 | accepted | Direct TypeScript AST construction remains the first surface; a string parser is optional and deferred. | Parsing does not test the elaboration or trusted-core boundary. |
 | D-012 | accepted | Persistent implementation uses bounded experiments and, only when the launch prompt authorizes them, a dedicated local goal branch/worktree and validated checkpoint commits. | See the Git protocol linked above. |
+| D-013 | accepted | Core owner identifiers and slot telescopes are backend-neutral; active Lambdapi names, modules, and source provenance live only in the conformance-backend catalog. Surface projection constructors lower through generic operation records rather than owner-named union branches. | ELAB-1A preserves all three ELAB-0 targets, adds `tapp0_fapp0`, and passes positive/negative Lambdapi probes through this split. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -300,7 +301,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-01 | `fapp0` implicit category recovery | complete in ELAB-0 | Exact explicit target and wrong functor/object category |
 | C-02 | `fapp1_fapp0` capped arrow action | complete in ELAB-0 | Exact target and wrong source category |
 | C-03 | `tapp1_fapp0` capped off-diagonal action | complete in ELAB-0 | Exact target and Lambdapi acceptance |
-| C-04 | `tapp0_fapp0` diagonal component | missing | Exact owner slots and wrong component object |
+| C-04 | `tapp0_fapp0` diagonal component | complete in ELAB-1A | Exact owner slots, result classifier, wrong component object, and corrupted-target rejection |
 | C-05 | `fapp1_func` full hom functor | missing | Returned functor usable at the next hom dimension |
 | C-06 | `tapp0_func` full component functor | missing | Projection to `tapp0_fapp0` |
 | C-07 | `tapp1_func` full off-diagonal functor | missing | Projection to `tapp1_fapp0` |
@@ -330,8 +331,8 @@ must identify their common baseline.
 | --- | --- | --- | --- |
 | PLAN-0 | complete | — | This living plan, Git protocol, synchronized handoff/SOP/index, and a green preparation validation. |
 | ELAB-0 | complete wiring spike | — | Three capped/object owners lower to explicit target terms; TypeScript and opt-in Lambdapi positive/negative probes pass. |
-| ELAB-1A | next / dependency-ready | ELAB-0 | Introduce backend-neutral owner/classifier schema interfaces and a catalog; migrate the three ELAB-0 forms without changing behavior; add `tapp0_fapp0`; focused exact-target and negative tests pass. This slice must change implementation, not only produce another inventory report. |
-| ELAB-1B | pending | ELAB-1A | Add generic full/capped projection elaboration for `fapp1_func`, `tapp0_func`, and `tapp1_func`; pass the recursive 2-cell stress case and a wrong-inner-hom negative. |
+| ELAB-1A | complete | ELAB-0 | Backend-neutral classifier/projection owner schemas and generic surface-operation lowering preserve the three ELAB-0 targets; a separate provenance-bearing Lambdapi catalog emits them plus `tapp0_fapp0`; focused exact-target, wrong-object, and positive/negative conformance probes pass. |
+| ELAB-1B | next / dependency-ready | ELAB-1A | Generalize operation operand telescopes and add paired full/capped projection schemas for `fapp1_func`, `tapp0_func`, and `tapp1_func`; pass the recursive 2-cell stress case and a wrong-inner-hom negative. |
 | ELAB-1C | pending | ELAB-1B | Add partial internalization cases for `hom_int` and `hom_con_int`; prove the grammar can retain an unapplied Hom-valued functor and later project it with correct variance. |
 | ELAB-2A | pending | ELAB-1A, Core binder decision | Reimplement session-owned scopes, binders, metavariables, constraints, substitution, occurs checking, and bidirectional checking over Core. |
 | ELAB-2B | pending | ELAB-2A | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
@@ -350,28 +351,99 @@ If a slice grows beyond one reviewable semantic claim, split it in this table
 before continuing. Do not mark a row complete merely because its code compiles:
 its tests, evidence, ledger entry, and proportional gates must all be current.
 
-## Immediate Slice: ELAB-1A
+## Completed Slice: ELAB-1A
 
-The next run should begin with implementation of ELAB-1A:
+ELAB-1A introduced:
 
-1. inventory the current `src/v3_2` switches and active signatures at their
-   current locations;
-2. define the smallest backend-neutral schema interface needed to express the
-   existing three operations and `tapp0_fapp0`;
-3. keep active owner names/provenance in a catalog/backend layer rather than
-   in a growing surface-term union;
-4. migrate existing elaboration through that schema without changing the
-   deterministic ELAB-0 output;
-5. add a direct TypeScript surface constructor or generic application form for
-   a transfor component;
-6. add an exact explicit-target positive and a wrong-object/endpoint negative;
-7. run the focused TypeScript test, the opt-in positive/negative Lambdapi
-   probes, `check:ts`, and the bounded kernel check;
-8. update this ledger with the actual result and refine ELAB-1B if the schema
-   evidence changes its shape.
+- `src/v3_2/schema.ts`, whose semantic owner catalog records classifier and
+  capped-projection families, slot roles, plicity, operation constraints,
+  result classifiers, and declarative lowering templates;
+- `src/v3_2/lambdapi.ts`, the only layer that records active Lambdapi symbol
+  spellings, module ownership, and relocatable source-section provenance;
+- one generic surface-operation node and one schema interpreter, replacing
+  the three owner-specific elaborator branches while preserving their exact
+  serialized targets;
+- the missing diagonal `tapp0_fapp0` component with its exact result
+  classifier, source-located wrong-category rejection, positive Lambdapi
+  consumer, and corrupted-target negative.
 
-It must not add a broad parser, migrate the legacy union, or promote a
-displayed kernel rule.
+The schema evidence refines ELAB-1B: the current two-operand records are enough
+for capped application, but full projections have variable telescopes.
+`fapp1_func` needs a functor plus two endpoints, `tapp1_func` needs a transfor
+plus two endpoints, and `tapp0_func` is parameterized by two functors and one
+object rather than by a particular transfor. ELAB-1B must generalize operand
+names/cardinality declaratively before adding those owners; it must not
+reintroduce per-owner switch branches.
+
+### Experiment ELAB-1A-SCHEMA
+
+```text
+Experiment ID: ELAB-1A-SCHEMA
+Date and checkpoint: 2026-07-23 at 30394f9, before the ELAB-1A goal checkpoint
+Question/hypothesis: the four capped ordinary projection forms can share one
+  declarative backend-neutral operation schema, with Lambdapi owner spellings
+  and active-source provenance confined to a conformance-backend catalog.
+Authority and owner position inspected: emdash3_2.lp sections 3a and 6a at
+  fapp0/fapp1_func/fapp1_fapp0 and tapp0_func/tapp0_fapp0/tapp1_func/
+  tapp1_fapp0; matching diagnostics and the current SOP/Foundations/canonical
+  syntax reports.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on goal/typescript-elaborator-v3.2;
+  30394f9 descends from baseline a06433e.
+Minimal positive consumer: exact Core and generated Lambdapi target for the
+  diagonal component of eta : F => G at x, alongside unchanged ELAB-0 output.
+Relevant negative/non-collapse consumer: reject a component object from a
+  category different from the transfor source, at that object's source span;
+  a deliberately corrupted explicit target remains rejected by Lambdapi.
+Probe command and bounded result:
+  ./scripts/pnpmw exec node --require ts-node/register --test
+    tests/v3_2_elab0_tests.ts
+    passed 9, skipped 3 opt-in probes.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 with the same command
+    passed 12/12; the combined four-owner consumer was accepted and both
+    deliberately corrupted explicit targets were rejected.
+  ./scripts/pnpmw run check:ts
+    passed 164 tests / 44 suites: 161 passed, 3 opt-in probes skipped.
+  EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+    passed the active kernel, four one-way extensions, and diagnostics.
+  EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+    passed the root gate; all 41 active Lambdapi kernel/example targets;
+    39 formal infrastructure tests; 5 print registry tests; active-reference,
+    report-header, book/evidence/typography/KaTeX checks; strict rule-LHS
+    audit; and generated catalog freshness.
+Warning/audit/catalog/health effects, if any: no Lambdapi declaration or rule
+  changed; kernel warning/catalog/health inventories are unchanged.
+Decision: accept. All four forms use the same generic operation interpreter;
+  no owner-specific elaborator branch was required. Refine only the operand
+  telescope cardinality in ELAB-1B.
+Plan rows changed: D-013 and C-04 accepted/complete; ELAB-1A complete;
+  ELAB-1B dependency-ready.
+Remaining prerequisite or human review: none for this bounded slice.
+```
+
+## Immediate Slice: ELAB-1B
+
+The next run should begin with implementation of ELAB-1B:
+
+1. generalize operation operand names and cardinality without changing any
+   ELAB-1A output or diagnostic span;
+2. relocate and add backend-neutral/full-owner schemas plus Lambdapi bindings
+   for `fapp1_func`, `tapp0_func`, and `tapp1_func`;
+3. record each full/capped pairing explicitly in the projection catalog;
+4. add generic direct-TypeScript constructors for full hom action, full
+   component evaluation, and full off-diagonal transfor action;
+5. make the returned full owners ordinary functor values that can be consumed
+   recursively by the same schemas;
+6. pass the two-level 2-cell action
+   `fapp1_func (fapp1_func F x y) f g` followed by application to `alpha`;
+7. reject a mismatched inner endpoint/hom at its originating source span;
+8. run focused tests, positive and relevant negative Lambdapi probes,
+   `check:ts`, the bounded kernel check, and the proportional repository gate;
+9. record whether the resulting schema is stable enough for ELAB-1C and
+   ELAB-2A.
+
+It must not invent `fapp2`, add a broad parser, migrate the legacy union, or
+change an active Lambdapi declaration/rule.
 
 ## Human Review Gates
 

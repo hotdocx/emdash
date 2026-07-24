@@ -1,5 +1,5 @@
 /**
- * Direct TypeScript surface AST and rigid ELAB-0 context types.
+ * Direct TypeScript surface AST and rigid v3.2 context types.
  *
  * The context is intentionally small: it knows enough about categories,
  * objects, functors, arrows, and ordinary transfors to recover the implicit
@@ -16,9 +16,9 @@ import {
     kernelApplication,
     kernelExpressionEquals,
     kernelLocal,
-    kernelSymbol,
     provenance
 } from './kernel';
+import { SurfaceOperationId } from './schema';
 
 export type SurfaceBindingType =
     | { tag: 'category' }
@@ -150,31 +150,35 @@ export function coreTypeToKernelType(
 
     switch (type.tag) {
         case 'category':
-            return kernelSymbol('Cat', nodeProvenance);
+            return kernelApplication(
+                'category-universe',
+                [],
+                nodeProvenance
+            );
         case 'object':
-            return kernelApplication('tau', [{
-                value: kernelApplication('Obj', [{
+            return kernelApplication('decode', [{
+                value: kernelApplication('object-classifier', [{
                     value: type.category
                 }], nodeProvenance)
             }], nodeProvenance);
         case 'functor':
-            return kernelApplication('tau', [{
-                value: kernelApplication('Functor', [
+            return kernelApplication('decode', [{
+                value: kernelApplication('functor-classifier', [
                     { value: type.sourceCategory },
                     { value: type.targetCategory }
                 ], nodeProvenance)
             }], nodeProvenance);
         case 'hom':
-            return kernelApplication('tau', [{
-                value: kernelApplication('Hom', [
+            return kernelApplication('decode', [{
+                value: kernelApplication('hom-classifier', [
                     { value: type.category },
                     { value: type.sourceObject },
                     { value: type.targetObject }
                 ], nodeProvenance)
             }], nodeProvenance);
         case 'transfor':
-            return kernelApplication('tau', [{
-                value: kernelApplication('Transf', [
+            return kernelApplication('decode', [{
+                value: kernelApplication('transfor-classifier', [
                     { value: type.sourceCategory },
                     { value: type.targetCategory },
                     { value: type.sourceFunctor },
@@ -463,21 +467,9 @@ export type SurfaceTerm =
         span: SourceSpan;
     }
     | {
-        tag: 'fapp0';
-        functor: SurfaceTerm;
-        object: SurfaceTerm;
-        span: SourceSpan;
-    }
-    | {
-        tag: 'fapp1_fapp0';
-        functor: SurfaceTerm;
-        arrow: SurfaceTerm;
-        span: SourceSpan;
-    }
-    | {
-        tag: 'tapp1_fapp0';
-        transformation: SurfaceTerm;
-        arrow: SurfaceTerm;
+        tag: 'operation';
+        operation: SurfaceOperationId;
+        operands: readonly SurfaceTerm[];
         span: SourceSpan;
     };
 
@@ -490,35 +482,53 @@ export const surfaceReference = (
     span
 });
 
+export const surfaceOperation = (
+    operation: SurfaceOperationId,
+    operands: readonly SurfaceTerm[],
+    span: SourceSpan
+): SurfaceTerm => ({
+    tag: 'operation',
+    operation,
+    operands,
+    span
+});
+
 export const surfaceFapp0 = (
     functor: SurfaceTerm,
     object: SurfaceTerm,
     span: SourceSpan
-): SurfaceTerm => ({
-    tag: 'fapp0',
-    functor,
-    object,
+): SurfaceTerm => surfaceOperation(
+    'functor.object',
+    [functor, object],
     span
-});
+);
 
 export const surfaceFapp1 = (
     functor: SurfaceTerm,
     arrow: SurfaceTerm,
     span: SourceSpan
-): SurfaceTerm => ({
-    tag: 'fapp1_fapp0',
-    functor,
-    arrow,
+): SurfaceTerm => surfaceOperation(
+    'functor.hom.capped',
+    [functor, arrow],
     span
-});
+);
+
+export const surfaceTapp0 = (
+    transformation: SurfaceTerm,
+    object: SurfaceTerm,
+    span: SourceSpan
+): SurfaceTerm => surfaceOperation(
+    'transfor.component.capped',
+    [transformation, object],
+    span
+);
 
 export const surfaceTapp1 = (
     transformation: SurfaceTerm,
     arrow: SurfaceTerm,
     span: SourceSpan
-): SurfaceTerm => ({
-    tag: 'tapp1_fapp0',
-    transformation,
-    arrow,
+): SurfaceTerm => surfaceOperation(
+    'transfor.hom.capped',
+    [transformation, arrow],
     span
-});
+);

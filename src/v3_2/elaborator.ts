@@ -1,21 +1,33 @@
 /**
- * Schema-directed ELAB-0 elaboration for the ordinary v3.2 application family.
+ * Declarative schema-directed elaboration for the ordinary v3.2 projection
+ * family.
  *
- * This is intentionally not a second evaluator. It recovers rigid implicit
- * arguments from a checked surface context and lowers to explicit owner apps.
+ * This is intentionally not a second evaluator. It interprets backend-neutral
+ * operation schemas, recovers rigid slots from a checked surface context, and
+ * lowers to explicit emdash Core owner applications.
  */
 
 import {
-    KernelApplication,
     KernelExpression,
     SourceSpan,
     formatSourceSpan,
     kernelApplication,
     kernelExpressionEquals,
     kernelLocal,
-    provenance,
-    serializeKernelExpression
+    provenance
 } from './kernel';
+import { serializeKernelExpression } from './lambdapi';
+import {
+    CORE_OWNER_SCHEMAS,
+    CoreOwnerId,
+    CoreTypeField,
+    CoreTypeTemplate,
+    OperationOperandName,
+    SURFACE_OPERATION_SCHEMAS,
+    SchemaValue,
+    SurfaceOperationId,
+    SurfaceOperationSchema
+} from './schema';
 import {
     CoreType,
     SurfaceContext,
@@ -24,6 +36,7 @@ import {
 
 export type ElaborationErrorCode =
     | 'UNBOUND_NAME'
+    | 'OPERATION_ARITY_MISMATCH'
     | 'EXPECTED_FUNCTOR'
     | 'EXPECTED_OBJECT'
     | 'EXPECTED_HOM'
@@ -42,7 +55,8 @@ export class V32ElaborationError extends Error {
 }
 
 export interface RecoveredSlot {
-    owner: 'fapp0' | 'fapp1_fapp0' | 'tapp1_fapp0';
+    operation: SurfaceOperationId;
+    owner: CoreOwnerId;
     slot: string;
     value: KernelExpression;
     span: SourceSpan;
@@ -55,13 +69,18 @@ export interface ElaboratedSurfaceTerm {
     recovered: readonly RecoveredSlot[];
 }
 
+type ElaboratedOperands = Record<
+    OperationOperandName,
+    ElaboratedSurfaceTerm
+>;
+
 const recoveredProvenance = (
-    owner: RecoveredSlot['owner'],
+    owner: CoreOwnerId,
     slot: string,
     span: SourceSpan
 ) => provenance(
     'recovered',
-    `${owner} implicit slot ${slot} recovered from operand types`,
+    `${owner} slot ${slot} recovered from operand types`,
     span
 );
 
@@ -76,50 +95,292 @@ const renderExpression = (expression: KernelExpression): string =>
 
 function categoryMismatch(
     span: SourceSpan,
-    owner: string,
+    operationName: string,
     expected: KernelExpression,
     actual: KernelExpression
 ): never {
     throw new V32ElaborationError(
         'CATEGORY_MISMATCH',
         span,
-        `${owner} expected source category ${renderExpression(expected)}, ` +
-        `but received ${renderExpression(actual)}`
+        `${operationName} expected source category ` +
+        `${renderExpression(expected)}, but received ` +
+        renderExpression(actual)
     );
 }
 
 function recoveredSlot(
-    owner: RecoveredSlot['owner'],
+    operation: SurfaceOperationId,
+    owner: CoreOwnerId,
     slot: string,
     value: KernelExpression,
     span: SourceSpan
 ): RecoveredSlot {
-    return { owner, slot, value, span };
+    return { operation, owner, slot, value, span };
 }
 
-function derivedFapp0(
-    sourceCategory: KernelExpression,
-    targetCategory: KernelExpression,
-    functor: KernelExpression,
-    object: KernelExpression,
-    span: SourceSpan
-): KernelApplication {
-    const nodeProvenance = derivedProvenance(
-        'result endpoint produced by fapp0',
-        span
+function coreTypeField(
+    type: CoreType,
+    field: CoreTypeField
+): KernelExpression {
+    switch (field) {
+        case 'category':
+            if (type.tag === 'object' || type.tag === 'hom') {
+                return type.category;
+            }
+            break;
+        case 'sourceCategory':
+            if (type.tag === 'functor' || type.tag === 'transfor') {
+                return type.sourceCategory;
+            }
+            break;
+        case 'targetCategory':
+            if (type.tag === 'functor' || type.tag === 'transfor') {
+                return type.targetCategory;
+            }
+            break;
+        case 'sourceObject':
+            if (type.tag === 'hom') return type.sourceObject;
+            break;
+        case 'targetObject':
+            if (type.tag === 'hom') return type.targetObject;
+            break;
+        case 'sourceFunctor':
+            if (type.tag === 'transfor') return type.sourceFunctor;
+            break;
+        case 'targetFunctor':
+            if (type.tag === 'transfor') return type.targetFunctor;
+            break;
+        default: {
+            const exhaustive: never = field;
+            return exhaustive;
+        }
+    }
+
+    throw new Error(
+        `Invalid operation schema: Core type ${type.tag} has no field ${field}`
     );
-    return kernelApplication('fapp0', [
-        {
-            value: sourceCategory,
-            provenance: recoveredProvenance('fapp0', 'A', span)
-        },
-        {
-            value: targetCategory,
-            provenance: recoveredProvenance('fapp0', 'B', span)
-        },
-        { value: functor, provenance: functor.provenance },
-        { value: object, provenance: object.provenance }
-    ], nodeProvenance);
+}
+
+function evaluateSchemaValue(
+    schemaValue: SchemaValue,
+    operands: ElaboratedOperands,
+    span: SourceSpan
+): KernelExpression {
+    switch (schemaValue.kind) {
+        case 'operand-term':
+            return operands[schemaValue.operand].term;
+        case 'operand-type-field':
+            return coreTypeField(
+                operands[schemaValue.operand].type,
+                schemaValue.field
+            );
+        case 'owner-application': {
+            const ownerSchema = CORE_OWNER_SCHEMAS[schemaValue.owner];
+            if (ownerSchema.slots.length !== schemaValue.arguments.length) {
+                throw new Error(
+                    `Invalid operation schema: nested owner ` +
+                    `${schemaValue.owner} expects ${ownerSchema.slots.length} ` +
+                    `arguments, received ${schemaValue.arguments.length}`
+                );
+            }
+            return kernelApplication(
+                schemaValue.owner,
+                schemaValue.arguments.map(argument => ({
+                    value: evaluateSchemaValue(argument, operands, span)
+                })),
+                derivedProvenance(
+                    `result classifier application of ${schemaValue.owner}`,
+                    span
+                )
+            );
+        }
+        default: {
+            const exhaustive: never = schemaValue;
+            return exhaustive;
+        }
+    }
+}
+
+function instantiateCoreType(
+    template: CoreTypeTemplate,
+    operands: ElaboratedOperands,
+    span: SourceSpan
+): CoreType {
+    switch (template.tag) {
+        case 'category':
+            return { tag: 'category' };
+        case 'object':
+            return {
+                tag: 'object',
+                category: evaluateSchemaValue(
+                    template.category,
+                    operands,
+                    span
+                )
+            };
+        case 'functor':
+            return {
+                tag: 'functor',
+                sourceCategory: evaluateSchemaValue(
+                    template.sourceCategory,
+                    operands,
+                    span
+                ),
+                targetCategory: evaluateSchemaValue(
+                    template.targetCategory,
+                    operands,
+                    span
+                )
+            };
+        case 'hom':
+            return {
+                tag: 'hom',
+                category: evaluateSchemaValue(
+                    template.category,
+                    operands,
+                    span
+                ),
+                sourceObject: evaluateSchemaValue(
+                    template.sourceObject,
+                    operands,
+                    span
+                ),
+                targetObject: evaluateSchemaValue(
+                    template.targetObject,
+                    operands,
+                    span
+                )
+            };
+        case 'transfor':
+            return {
+                tag: 'transfor',
+                sourceCategory: evaluateSchemaValue(
+                    template.sourceCategory,
+                    operands,
+                    span
+                ),
+                targetCategory: evaluateSchemaValue(
+                    template.targetCategory,
+                    operands,
+                    span
+                ),
+                sourceFunctor: evaluateSchemaValue(
+                    template.sourceFunctor,
+                    operands,
+                    span
+                ),
+                targetFunctor: evaluateSchemaValue(
+                    template.targetFunctor,
+                    operands,
+                    span
+                )
+            };
+        default: {
+            const exhaustive: never = template;
+            return exhaustive;
+        }
+    }
+}
+
+function elaborateOperation(
+    context: SurfaceContext,
+    surface: Extract<SurfaceTerm, { tag: 'operation' }>
+): ElaboratedSurfaceTerm {
+    const schema: SurfaceOperationSchema =
+        SURFACE_OPERATION_SCHEMAS[surface.operation];
+    if (surface.operands.length !== schema.operands.length) {
+        throw new V32ElaborationError(
+            'OPERATION_ARITY_MISMATCH',
+            surface.span,
+            `${schema.diagnosticLabel} expects ${schema.operands.length} ` +
+            `surface operands, received ${surface.operands.length}`
+        );
+    }
+
+    const partialOperands: Partial<ElaboratedOperands> = {};
+    schema.operands.forEach((operandSchema, index) => {
+        const operandSurface = surface.operands[index];
+        const operand = elaborateSurfaceTerm(context, operandSurface);
+        if (operand.type.tag !== operandSchema.expectedType) {
+            throw new V32ElaborationError(
+                operandSchema.errorCode,
+                operandSurface.span,
+                `${schema.diagnosticLabel} expects ` +
+                operandSchema.expectation
+            );
+        }
+        partialOperands[operandSchema.name] = operand;
+    });
+    const operands = partialOperands as ElaboratedOperands;
+
+    for (const constraint of schema.constraints) {
+        const left = evaluateSchemaValue(constraint.left, operands, surface.span);
+        const right = evaluateSchemaValue(
+            constraint.right,
+            operands,
+            surface.span
+        );
+        if (!kernelExpressionEquals(left, right)) {
+            categoryMismatch(
+                operands[constraint.blame].sourceSpan,
+                schema.diagnosticLabel,
+                left,
+                right
+            );
+        }
+    }
+
+    const nodeProvenance = surfaceProvenance(
+        `surface operation ${surface.operation}`,
+        surface.span
+    );
+    const term = kernelApplication(
+        schema.owner,
+        schema.ownerArguments.map(argument => {
+            const value = evaluateSchemaValue(
+                argument.value,
+                operands,
+                surface.span
+            );
+            return {
+                value,
+                provenance: argument.origin === 'recovered'
+                    ? recoveredProvenance(
+                        schema.owner,
+                        argument.slot,
+                        surface.span
+                    )
+                    : value.provenance
+            };
+        }),
+        nodeProvenance
+    );
+
+    const childRecovered = schema.operands.flatMap(
+        operandSchema => operands[operandSchema.name].recovered
+    );
+    const ownRecovered = schema.ownerArguments.flatMap(argument => {
+        if (argument.origin !== 'recovered') return [];
+        const value = evaluateSchemaValue(
+            argument.value,
+            operands,
+            surface.span
+        );
+        return [recoveredSlot(
+            surface.operation,
+            schema.owner,
+            argument.slot,
+            value,
+            surface.span
+        )];
+    });
+
+    return {
+        term,
+        type: instantiateCoreType(schema.result, operands, surface.span),
+        sourceSpan: surface.span,
+        recovered: [...childRecovered, ...ownRecovered]
+    };
 }
 
 export function elaborateSurfaceTerm(
@@ -149,370 +410,8 @@ export function elaborateSurfaceTerm(
                 recovered: []
             };
         }
-        case 'fapp0': {
-            const functor = elaborateSurfaceTerm(context, surface.functor);
-            const object = elaborateSurfaceTerm(context, surface.object);
-
-            if (functor.type.tag !== 'functor') {
-                throw new V32ElaborationError(
-                    'EXPECTED_FUNCTOR',
-                    surface.functor.span,
-                    'fapp0 expects its first operand to be an ordinary functor'
-                );
-            }
-            if (object.type.tag !== 'object') {
-                throw new V32ElaborationError(
-                    'EXPECTED_OBJECT',
-                    surface.object.span,
-                    'fapp0 expects its second operand to be an object'
-                );
-            }
-            if (!kernelExpressionEquals(
-                functor.type.sourceCategory,
-                object.type.category
-            )) {
-                categoryMismatch(
-                    surface.object.span,
-                    'fapp0',
-                    functor.type.sourceCategory,
-                    object.type.category
-                );
-            }
-
-            const nodeProvenance = surfaceProvenance(
-                'surface fapp0 application',
-                surface.span
-            );
-            const term = kernelApplication('fapp0', [
-                {
-                    value: functor.type.sourceCategory,
-                    provenance: recoveredProvenance(
-                        'fapp0',
-                        'A',
-                        surface.span
-                    )
-                },
-                {
-                    value: functor.type.targetCategory,
-                    provenance: recoveredProvenance(
-                        'fapp0',
-                        'B',
-                        surface.span
-                    )
-                },
-                { value: functor.term, provenance: functor.term.provenance },
-                { value: object.term, provenance: object.term.provenance }
-            ], nodeProvenance);
-
-            return {
-                term,
-                type: {
-                    tag: 'object',
-                    category: functor.type.targetCategory
-                },
-                sourceSpan: surface.span,
-                recovered: [
-                    ...functor.recovered,
-                    ...object.recovered,
-                    recoveredSlot(
-                        'fapp0',
-                        'A',
-                        functor.type.sourceCategory,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'fapp0',
-                        'B',
-                        functor.type.targetCategory,
-                        surface.span
-                    )
-                ]
-            };
-        }
-        case 'fapp1_fapp0': {
-            const functor = elaborateSurfaceTerm(context, surface.functor);
-            const arrow = elaborateSurfaceTerm(context, surface.arrow);
-
-            if (functor.type.tag !== 'functor') {
-                throw new V32ElaborationError(
-                    'EXPECTED_FUNCTOR',
-                    surface.functor.span,
-                    'fapp1_fapp0 expects an ordinary functor'
-                );
-            }
-            if (arrow.type.tag !== 'hom') {
-                throw new V32ElaborationError(
-                    'EXPECTED_HOM',
-                    surface.arrow.span,
-                    'fapp1_fapp0 expects an ordinary source arrow'
-                );
-            }
-            if (!kernelExpressionEquals(
-                functor.type.sourceCategory,
-                arrow.type.category
-            )) {
-                categoryMismatch(
-                    surface.arrow.span,
-                    'fapp1_fapp0',
-                    functor.type.sourceCategory,
-                    arrow.type.category
-                );
-            }
-
-            const nodeProvenance = surfaceProvenance(
-                'surface fapp1_fapp0 application',
-                surface.span
-            );
-            const term = kernelApplication('fapp1_fapp0', [
-                {
-                    value: functor.type.sourceCategory,
-                    provenance: recoveredProvenance(
-                        'fapp1_fapp0',
-                        'A',
-                        surface.span
-                    )
-                },
-                {
-                    value: functor.type.targetCategory,
-                    provenance: recoveredProvenance(
-                        'fapp1_fapp0',
-                        'B',
-                        surface.span
-                    )
-                },
-                { value: functor.term, provenance: functor.term.provenance },
-                {
-                    value: arrow.type.sourceObject,
-                    provenance: recoveredProvenance(
-                        'fapp1_fapp0',
-                        'X',
-                        surface.span
-                    )
-                },
-                {
-                    value: arrow.type.targetObject,
-                    provenance: recoveredProvenance(
-                        'fapp1_fapp0',
-                        'Y',
-                        surface.span
-                    )
-                },
-                { value: arrow.term, provenance: arrow.term.provenance }
-            ], nodeProvenance);
-
-            const source = derivedFapp0(
-                functor.type.sourceCategory,
-                functor.type.targetCategory,
-                functor.term,
-                arrow.type.sourceObject,
-                surface.span
-            );
-            const target = derivedFapp0(
-                functor.type.sourceCategory,
-                functor.type.targetCategory,
-                functor.term,
-                arrow.type.targetObject,
-                surface.span
-            );
-
-            return {
-                term,
-                type: {
-                    tag: 'hom',
-                    category: functor.type.targetCategory,
-                    sourceObject: source,
-                    targetObject: target
-                },
-                sourceSpan: surface.span,
-                recovered: [
-                    ...functor.recovered,
-                    ...arrow.recovered,
-                    recoveredSlot(
-                        'fapp1_fapp0',
-                        'A',
-                        functor.type.sourceCategory,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'fapp1_fapp0',
-                        'B',
-                        functor.type.targetCategory,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'fapp1_fapp0',
-                        'X',
-                        arrow.type.sourceObject,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'fapp1_fapp0',
-                        'Y',
-                        arrow.type.targetObject,
-                        surface.span
-                    )
-                ]
-            };
-        }
-        case 'tapp1_fapp0': {
-            const transformation = elaborateSurfaceTerm(
-                context,
-                surface.transformation
-            );
-            const arrow = elaborateSurfaceTerm(context, surface.arrow);
-
-            if (transformation.type.tag !== 'transfor') {
-                throw new V32ElaborationError(
-                    'EXPECTED_TRANSFOR',
-                    surface.transformation.span,
-                    'tapp1_fapp0 expects an ordinary transfor'
-                );
-            }
-            if (arrow.type.tag !== 'hom') {
-                throw new V32ElaborationError(
-                    'EXPECTED_HOM',
-                    surface.arrow.span,
-                    'tapp1_fapp0 expects an ordinary source arrow'
-                );
-            }
-            if (!kernelExpressionEquals(
-                transformation.type.sourceCategory,
-                arrow.type.category
-            )) {
-                categoryMismatch(
-                    surface.arrow.span,
-                    'tapp1_fapp0',
-                    transformation.type.sourceCategory,
-                    arrow.type.category
-                );
-            }
-
-            const nodeProvenance = surfaceProvenance(
-                'surface tapp1_fapp0 application',
-                surface.span
-            );
-            const term = kernelApplication('tapp1_fapp0', [
-                {
-                    value: transformation.type.sourceCategory,
-                    provenance: recoveredProvenance(
-                        'tapp1_fapp0',
-                        'A',
-                        surface.span
-                    )
-                },
-                {
-                    value: transformation.type.targetCategory,
-                    provenance: recoveredProvenance(
-                        'tapp1_fapp0',
-                        'B',
-                        surface.span
-                    )
-                },
-                {
-                    value: transformation.type.sourceFunctor,
-                    provenance: recoveredProvenance(
-                        'tapp1_fapp0',
-                        'F',
-                        surface.span
-                    )
-                },
-                {
-                    value: transformation.type.targetFunctor,
-                    provenance: recoveredProvenance(
-                        'tapp1_fapp0',
-                        'G',
-                        surface.span
-                    )
-                },
-                {
-                    value: arrow.type.sourceObject,
-                    provenance: recoveredProvenance(
-                        'tapp1_fapp0',
-                        'X',
-                        surface.span
-                    )
-                },
-                {
-                    value: arrow.type.targetObject,
-                    provenance: recoveredProvenance(
-                        'tapp1_fapp0',
-                        'Y',
-                        surface.span
-                    )
-                },
-                {
-                    value: transformation.term,
-                    provenance: transformation.term.provenance
-                },
-                { value: arrow.term, provenance: arrow.term.provenance }
-            ], nodeProvenance);
-
-            const source = derivedFapp0(
-                transformation.type.sourceCategory,
-                transformation.type.targetCategory,
-                transformation.type.sourceFunctor,
-                arrow.type.sourceObject,
-                surface.span
-            );
-            const target = derivedFapp0(
-                transformation.type.sourceCategory,
-                transformation.type.targetCategory,
-                transformation.type.targetFunctor,
-                arrow.type.targetObject,
-                surface.span
-            );
-
-            return {
-                term,
-                type: {
-                    tag: 'hom',
-                    category: transformation.type.targetCategory,
-                    sourceObject: source,
-                    targetObject: target
-                },
-                sourceSpan: surface.span,
-                recovered: [
-                    ...transformation.recovered,
-                    ...arrow.recovered,
-                    recoveredSlot(
-                        'tapp1_fapp0',
-                        'A',
-                        transformation.type.sourceCategory,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'tapp1_fapp0',
-                        'B',
-                        transformation.type.targetCategory,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'tapp1_fapp0',
-                        'F',
-                        transformation.type.sourceFunctor,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'tapp1_fapp0',
-                        'G',
-                        transformation.type.targetFunctor,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'tapp1_fapp0',
-                        'X',
-                        arrow.type.sourceObject,
-                        surface.span
-                    ),
-                    recoveredSlot(
-                        'tapp1_fapp0',
-                        'Y',
-                        arrow.type.targetObject,
-                        surface.span
-                    )
-                ]
-            };
-        }
+        case 'operation':
+            return elaborateOperation(context, surface);
         default: {
             const exhaustive: never = surface;
             return exhaustive;

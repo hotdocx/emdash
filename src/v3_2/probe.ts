@@ -14,9 +14,12 @@ import { join, relative, resolve } from 'node:path';
 import {
     KernelExpression,
     SourceSpan,
-    formatSourceSpan,
-    serializeKernelExpression
+    formatSourceSpan
 } from './kernel';
+import {
+    LAMBDAPI_V32_MODULE,
+    serializeKernelExpression
+} from './lambdapi';
 import {
     ElaboratedSurfaceTerm,
     elaborateSurfaceTerm
@@ -41,7 +44,7 @@ export interface KernelProbeAssertion {
 }
 
 export interface KernelProbe {
-    requiredModule: 'emdash.emdash3_2';
+    requiredModule: typeof LAMBDAPI_V32_MODULE;
     declarations: readonly KernelProbeDeclaration[];
     assertions: readonly KernelProbeAssertion[];
 }
@@ -95,7 +98,7 @@ export function compileSurfaceProbe(
         elaborated: elaborateSurfaceTerm(context, testCase.term)
     }));
     const probe: KernelProbe = {
-        requiredModule: 'emdash.emdash3_2',
+        requiredModule: LAMBDAPI_V32_MODULE,
         declarations: declarationsFromSurfaceContext(context),
         assertions: compiledCases.map(testCase => ({
             label: testCase.label,

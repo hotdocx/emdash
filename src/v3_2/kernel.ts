@@ -1,12 +1,20 @@
 /**
- * Minimal explicit target IR for the active emdash v3.2 Lambdapi owners.
+ * Minimal backend-neutral explicit emdash Core IR.
  *
- * This module deliberately does not import the legacy root `Term` union. The
- * target records every argument (including arguments implicit in Lambdapi)
- * and keeps source provenance without claiming to typecheck the kernel.
+ * This module deliberately does not import the legacy root `Term` union or a
+ * backend symbol catalog. Applications reference semantic owner schemas and
+ * record every slot plus source provenance without claiming to typecheck the
+ * full active kernel.
  */
 
-export type Plicity = 'explicit' | 'implicit';
+import {
+    CORE_OWNER_SCHEMAS,
+    CoreOwnerId,
+    Plicity
+} from './schema';
+
+export { CoreOwnerId, Plicity } from './schema';
+
 export type VariationMode = 'functorial' | 'natural' | 'object-only';
 
 export interface BinderMode {
@@ -56,71 +64,9 @@ export const provenance = (
     span?: SourceSpan
 ): Provenance => ({ origin, detail, span });
 
-interface KernelSymbolSignature {
-    serializedName: string;
-    arguments: readonly Plicity[];
-}
-
-/**
- * ELAB-0's checked signature manifest, copied from the active declarations in
- * emdash2/emdash3_2.lp. Extending this table requires a fresh owner audit.
- */
-export const KERNEL_SYMBOL_SIGNATURES = {
-    tau: {
-        serializedName: 'τ',
-        arguments: ['explicit']
-    },
-    Obj: {
-        serializedName: 'Obj',
-        arguments: ['explicit']
-    },
-    Functor: {
-        serializedName: 'Functor',
-        arguments: ['explicit', 'explicit']
-    },
-    Hom: {
-        serializedName: 'Hom',
-        arguments: ['explicit', 'explicit', 'explicit']
-    },
-    Transf: {
-        serializedName: 'Transf',
-        arguments: ['implicit', 'implicit', 'explicit', 'explicit']
-    },
-    fapp0: {
-        serializedName: 'fapp0',
-        arguments: ['implicit', 'implicit', 'explicit', 'explicit']
-    },
-    fapp1_fapp0: {
-        serializedName: 'fapp1_fapp0',
-        arguments: [
-            'implicit',
-            'implicit',
-            'explicit',
-            'implicit',
-            'implicit',
-            'explicit'
-        ]
-    },
-    tapp1_fapp0: {
-        serializedName: 'tapp1_fapp0',
-        arguments: [
-            'implicit',
-            'implicit',
-            'implicit',
-            'implicit',
-            'implicit',
-            'implicit',
-            'explicit',
-            'explicit'
-        ]
-    }
-} as const satisfies Record<string, KernelSymbolSignature>;
-
-export type KernelSymbolName = keyof typeof KERNEL_SYMBOL_SIGNATURES;
-
 export interface KernelReference {
     tag: 'reference';
-    namespace: 'local' | 'symbol';
+    namespace: 'local';
     name: string;
     provenance: Provenance;
 }
@@ -133,7 +79,7 @@ export interface KernelArgument {
 
 export interface KernelApplication {
     tag: 'application';
-    symbol: KernelSymbolName;
+    owner: CoreOwnerId;
     arguments: readonly KernelArgument[];
     provenance: Provenance;
 }
@@ -170,7 +116,7 @@ const SAFE_IDENTIFIER = /^[A-Za-z][A-Za-z0-9_]*$/;
 export function assertSafeIdentifier(name: string, role: string): void {
     if (!SAFE_IDENTIFIER.test(name)) {
         throw new Error(
-            `${role} '${name}' is not an ELAB-0-safe Lambdapi identifier`
+            `${role} '${name}' is not a portable emdash Core identifier`
         );
     }
 }
@@ -188,43 +134,29 @@ export const kernelLocal = (
     };
 };
 
-export const kernelSymbol = (
-    name: string,
-    nodeProvenance: Provenance
-): KernelReference => {
-    assertSafeIdentifier(name, 'Kernel symbol');
-    return {
-        tag: 'reference',
-        namespace: 'symbol',
-        name,
-        provenance: nodeProvenance
-    };
-};
-
 export interface KernelArgumentInput {
     value: KernelExpression;
     provenance?: Provenance;
 }
 
 export function kernelApplication(
-    symbol: KernelSymbolName,
+    owner: CoreOwnerId,
     inputs: readonly KernelArgumentInput[],
     nodeProvenance: Provenance
 ): KernelApplication {
-    const signature = KERNEL_SYMBOL_SIGNATURES[symbol];
-    const argumentPlicities: readonly Plicity[] = signature.arguments;
-    if (inputs.length !== argumentPlicities.length) {
+    const schema = CORE_OWNER_SCHEMAS[owner];
+    if (inputs.length !== schema.slots.length) {
         throw new Error(
-            `Kernel symbol ${signature.serializedName} expects ` +
-            `${argumentPlicities.length} arguments, received ${inputs.length}`
+            `Core owner ${owner} expects ${schema.slots.length} arguments, ` +
+            `received ${inputs.length}`
         );
     }
 
     return {
         tag: 'application',
-        symbol,
+        owner,
         arguments: inputs.map((input, index) => ({
-            plicity: argumentPlicities[index],
+            plicity: schema.slots[index].plicity,
             value: input.value,
             provenance: input.provenance ?? input.value.provenance
         })),
@@ -267,7 +199,7 @@ export function kernelExpressionEquals(
         }
         case 'application': {
             const other = right as KernelApplication;
-            return left.symbol === other.symbol &&
+            return left.owner === other.owner &&
                 left.arguments.length === other.arguments.length &&
                 left.arguments.every((argument, index) =>
                     argument.plicity === other.arguments[index].plicity &&
@@ -288,51 +220,6 @@ export function kernelExpressionEquals(
         }
         default: {
             const exhaustive: never = left;
-            return exhaustive;
-        }
-    }
-}
-
-const parenthesize = (expression: KernelExpression): string =>
-    expression.tag === 'reference'
-        ? serializeKernelExpression(expression)
-        : `(${serializeKernelExpression(expression)})`;
-
-const serializeBinder = (binder: KernelBinder): string => {
-    const typed = `${binder.name} : ${serializeKernelExpression(binder.type)}`;
-    return binder.mode.plicity === 'implicit' ? `[${typed}]` : `(${typed})`;
-};
-
-export function serializeKernelExpression(
-    expression: KernelExpression
-): string {
-    switch (expression.tag) {
-        case 'reference':
-            return expression.name;
-        case 'application': {
-            const signature = KERNEL_SYMBOL_SIGNATURES[expression.symbol];
-            const argumentPlicities: readonly Plicity[] = signature.arguments;
-            const hasImplicitArguments = argumentPlicities.some(
-                argument => argument === 'implicit'
-            );
-            const head = hasImplicitArguments
-                ? `@${signature.serializedName}`
-                : signature.serializedName;
-            return [
-                head,
-                ...expression.arguments.map(argument =>
-                    parenthesize(argument.value)
-                )
-            ].join(' ');
-        }
-        case 'pi':
-            return `Π ${serializeBinder(expression.binder)}, ` +
-                serializeKernelExpression(expression.body);
-        case 'lambda':
-            return `λ ${serializeBinder(expression.binder)}, ` +
-                serializeKernelExpression(expression.body);
-        default: {
-            const exhaustive: never = expression;
             return exhaustive;
         }
     }
