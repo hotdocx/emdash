@@ -10,7 +10,7 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Status: active living master plan; ELAB-2A2 is complete and ELAB-2A3 is the
+Status: active living master plan; ELAB-2A3A is complete and ELAB-2A3B is the
 next dependency-ready implementation slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
@@ -168,6 +168,7 @@ cleanly.
 | D-016 | accepted | Use a locally nameless Core: named references denote free declarations, De Bruijn indices denote bound occurrences, and binder names are nonsemantic display hints. Structural equality is alpha-invariant; shift/substitution is index-based and capture-safe; the Lambdapi backend generates canonical noncapturing names. | ELAB-2A0 distinguishes same-spelled free/bound terms, handles shadowing and dependent binder types, rejects dangling/downward-escaping indices, composes ordered instantiation, and emits an alpha-canonical identity accepted by Lambdapi. Plicity and variation remain distinct Core metadata; only plicity has direct Lambdapi binder syntax. |
 | D-017 | accepted | Split Core scope into an immutable ordered free-declaration environment and a persistent outermost-to-innermost local telescope. Store each local type at its owning depth; lookup selects the nearest local occurrence and lifts that type by its De Bruijn index plus one. Explicit declaration lookup remains available beneath local shadowing. | ELAB-2A1 validates closed declaration types and local types at their owning depths, permits only earlier free dependencies, preserves modes/provenance, keeps independent environments isolated, and abstracts a dependent telescope to a Lambdapi-accepted closed identity. |
 | D-018 | accepted | Represent an elaboration metavariable by an opaque per-session identity, deterministic session-local ordinal, and explicit contextual De Bruijn substitution spine. Keep its type and single-assignment solution only in the owning session; solve only canonical identity occurrences in this bounded tranche, reject raw metas at the backend, and leave distinct flex-flex constraints explicitly stuck. | ELAB-2A2 reindexes contextual occurrences through shift/substitution and beneath internal binders, zonks transitively, rejects direct/transitive occurs cycles, scope escape, foreign identities, and noncanonical solving, revisits ordered constraints after progress, and emits a solved result accepted by Lambdapi without importing legacy mutable holes or globals. |
+| D-019 | accepted | Give explicit Core a distinct meta-level universe and a generic plicity-bearing call form. Describe every current semantic owner type with one declarative dependent signature language limited to `TYPE`, earlier telescope slots, and owner applications; validate it against the separate arity catalog and let the checker consume it uniformly. | ELAB-2A3A materializes scoped Pi signatures for all 21 owners, passes a saturated application for every signature through Lambdapi, and verifies generic calls through scope/substitution/session/backend paths. `Cat : TYPE` and category-polymorphic application are accepted; arbitrary Type-in-Type polymorphism is outside the supported fragment because Lambdapi correctly exposes the `TYPE`/`KIND` boundary. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -313,7 +314,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-08 | Recursive action on a 2-cell | complete in ELAB-1B | Two hom levels use the same full schema; wrong inner endpoint is rejected at its span |
 | C-09 | Partially applied `hom_int` | complete in ELAB-1C | Retained `B → Cat_cat` family, later object action, exact source-varying conversion, and wrong-base rejection |
 | C-10 | Partially applied `hom_con_int` | complete in ELAB-1C | Retained `Op_cat(B) → Cat_cat` family, exact target-varying conversion, and reversal rejection |
-| C-11 | Metavariable/implicit solving over Core | partial: session-local contextual metas and bounded constraints complete in ELAB-2A2; checker-driven implicit insertion remains ELAB-2A3 | Occurs, scope, cross-session, deterministic-order, and ambiguity negatives are green; implicit recovery still needs bidirectional consumers |
+| C-11 | Metavariable/implicit solving over Core | partial: session-local contextual metas and bounded constraints complete in ELAB-2A2; complete owner signatures and generic calls complete in ELAB-2A3A; checker-driven implicit insertion remains ELAB-2A3B | Occurs, scope, cross-session, deterministic-order, ambiguity, and signature-catalog negatives are green; implicit recovery still needs bidirectional consumers |
 | C-12 | Context extension and displayed type | partial: Core telescope foundation complete in ELAB-2A1; displayed interpretation remains ELAB-2B | Dependent lookup/lifting and abstraction are green; displayed substitution still requires the ELAB-2B owner experiment |
 | C-13 | Constant displayed family comparison | missing | Both routes plus a deliberate non-collapse |
 | C-14 | Dependent weakening | missing/inventory required | Concrete elaboration consumer |
@@ -339,12 +340,14 @@ must identify their common baseline.
 | ELAB-1A | complete | ELAB-0 | Backend-neutral classifier/projection owner schemas and generic surface-operation lowering preserve the three ELAB-0 targets; a separate provenance-bearing Lambdapi catalog emits them plus `tapp0_fapp0`; focused exact-target, wrong-object, and positive/negative conformance probes pass. |
 | ELAB-1B | complete | ELAB-1A | Variable operation telescopes, explicit full/capped/evaluator pairs, recursive object-category recovery, all three full owners, the recursive 2-cell stress case, wrong-inner-hom rejection, and bounded evaluator-conversion probes are green. |
 | ELAB-1C | complete | ELAB-1B | Backend-neutral `hom_int`/`hom_con_int` constructors, category-former object decoding, two retained Hom-valued functors, exact variance conversions, wrong-base rejection, and a reversed-variance Lambdapi negative are green. |
-| ELAB-2A | split | ELAB-1 schema stability | The former all-in-one scope/meta/checker tranche is split into ELAB-2A0 through ELAB-2A3 so each checkpoint owns one reviewable semantic claim. |
+| ELAB-2A | split | ELAB-1 schema stability | The former all-in-one scope/meta/checker tranche is split into ELAB-2A0 through ELAB-2A3B so each checkpoint owns one reviewable semantic claim. |
 | ELAB-2A0 | complete | ELAB-1C | Locally nameless free/bound variables, alpha-invariant equality, capture-safe shift/substitution/instantiation, scope validation, canonical backend naming, and a Lambdapi-accepted dependent binder probe are green. |
 | ELAB-2A1 | complete | ELAB-2A0 | Immutable ordered declarations and a persistent dependent local telescope validate at their owning depths; deterministic nearest lookup, type lifting, shadowing, abstraction, and source-located duplicate/unbound/scope negatives are green. |
 | ELAB-2A2 | complete | ELAB-2A1 | Per-session contextual metavariables and ordered constraints have deterministic isolated identities, capture-safe spines, zonking, scope/occurs rejection, single assignment, explicit stuck/rejected outcomes, and backend-boundary evidence. |
-| ELAB-2A3 | next / dependency-ready | ELAB-2A2 | Add the bounded bidirectional Pi/lambda/application checker and schema-driven implicit insertion over Core, including source-located mismatch negatives. |
-| ELAB-2B | pending | ELAB-2A3 | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
+| ELAB-2A3 | split | ELAB-2A2 | The checker tranche is split because Core first needs independently reviewable universe/generic-call syntax and dependent owner type signatures. |
+| ELAB-2A3A | complete | ELAB-2A2 | Backend-neutral `TYPE`, generic plicity-bearing calls, a groupoid-universe owner, and a complete declarative dependent type-signature catalog for all 21 current owners pass every scope/session/backend traversal, catalog negative, and bounded Lambdapi consumer. |
+| ELAB-2A3B | next / dependency-ready | ELAB-2A3A | Add the bounded bidirectional Pi/lambda/application checker and schema-driven implicit insertion over Core, including source-located mismatch negatives. |
+| ELAB-2B | pending | ELAB-2A3B | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
 | ELAB-2C | pending | ELAB-2B | Exercise weakening, permitted/forbidden exchange, and contraction. Record missing displayed owners with consumer probes; do not yet assume kernel promotion. |
 | KERNEL-DISPLAYED-1 | conditional | ELAB-2C failure evidence | If a concrete uniform elaboration consumer cannot be expressed, design and probe the smallest displayed structural owner package under the v3.2 SOP, including degeneration/comparison and non-collapse cases. Human review is required before promotion. |
 | KERNEL-DISPLAYED-2 | conditional | reviewed KERNEL-DISPLAYED-1 | Promote only reviewed kernel changes with diagnostics, warning comparison, audits, catalogs, health, examples, and CI synchronized. |
@@ -826,36 +829,116 @@ Plan rows changed: D-018 accepted; C-11 records the completed meta/constraint
 Remaining prerequisite or human review: none for this bounded slice.
 ```
 
-## Immediate Slice: ELAB-2A3
+## Completed Slice: ELAB-2A3A
 
-The next slice adds only the bounded bidirectional checker and schema-driven
-implicit insertion over the now-stable Core scope/session foundation:
+ELAB-2A3A introduced:
 
-1. inventory the legacy `infer`/`check`, application, expected-type, and
-   implicit-insertion organization as implementation evidence without
-   importing the old term union, global declarations, or category-specific
-   cases;
-2. identify the smallest explicit Core application/signature additions needed
-   for Pi elimination and type the already cataloged owner applications
-   declaratively; split the slice in the ledger first if this becomes more
-   than one reviewable checker claim;
-3. infer free/local references and explicit applications, check lambdas
-   against expected Pi types, validate Pi/lambda binder scopes and modes, and
-   instantiate dependent codomains with the existing capture-safe operations;
-4. drive omitted implicit binders from expected Pi plicity by allocating
-   session-local metas and constraints; do not add positional or owner-named
-   implicit special cases;
-5. report source-located head, plicity, argument, expected-type, and unsolved
-   constraint failures while preserving genuinely ambiguous metas as explicit
-   incomplete elaboration rather than arbitrary solutions;
-6. pass dependent identity/application, implicit recovery, wrong argument,
-   wrong plicity, non-function application, occurs/scope, and unresolved-meta
-   cases, plus focused Lambdapi conformance, `check:ts`, the bounded kernel
-   check, and the proportional repository gate.
+- a backend-neutral `universe` term and generic `call` term whose arguments
+  retain plicity, with uniform structural equality, scope, shift,
+  substitution, contextual-spine instantiation, free-reference traversal,
+  meta ownership/zonking, and deterministic Lambdapi serialization;
+- a semantic `groupoid-universe` owner, with the active `Grpd` spelling and
+  authority section confined to the Lambdapi backend catalog;
+- a small declarative signature language containing only the universe,
+  references to earlier owner slots, and semantic owner applications;
+- complete dependent slot and result signatures for all 21 current owners,
+  including both internal-Hom constructors and every full/capped/evaluator
+  projection;
+- import-time and callable validation of exact owner coverage, slot count,
+  name/plicity agreement, dependency order, and nested owner arity;
+- uniform materialization of owner Pi telescopes and instantiation of any
+  owner slot/result type, ready for checker-driven application without an
+  owner-named type switch.
 
-Do not add higher-order pattern unification, runtime rewriting/conversion
-rules, displayed-category owners, a textual parser, or legacy category
-compatibility in ELAB-2A3.
+The Lambdapi oracle accepts a saturated application of every owner against its
+generated dependent signature. It also accepts `Cat : TYPE` and a generic
+category-polymorphic identity call. An exploratory arbitrary
+`T : TYPE`-polymorphic identity crossed Lambdapi's `TYPE`/`KIND` boundary and
+was rejected, so this slice deliberately represents the active universe sorts
+without claiming Type-in-Type.
+
+### Experiment ELAB-2A3A-CORE-SIGNATURES
+
+```text
+Experiment ID: ELAB-2A3A-CORE-SIGNATURES
+Date and checkpoint: 2026-07-23 at ELAB-2A2 checkpoint 29f0395
+Question/hypothesis: a minimal Core universe/call extension plus one
+  declarative dependent signature catalog can type every current semantic
+  owner uniformly and preserve enough plicity information for later implicit
+  insertion, without moving Lambdapi names into the Core schema.
+Authority and owner position inspected: active declarations for TYPE, Grpd,
+  Cat, τ, Obj, Functor, Hom, Transf, Cat_cat, Op_cat, Hom_cat, Transf_cat,
+  Catd_cat, hom_int, hom_con_int, and every fapp/tapp full or capped owner;
+  the ELAB-2A0/1/2 Core/context/session boundaries; no Lambdapi declaration or
+  rule changed.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on goal/typescript-elaborator-v3.2 at
+  29f0395; descendant of baseline a06433e.
+Minimal positive consumer: generate a declaration for every dependent slot,
+  then check one saturated application of each of the 21 owners against its
+  generated result type; separately apply a category-polymorphic identity
+  through the generic call form. Lambdapi accepts both consumers.
+Relevant negative/non-collapse consumer: reject missing/extra owners, plicity
+  drift, a self/forward slot dependency, malformed nested owner arity, and
+  wrong slot/result instantiation arity. Preserve the TYPE/KIND distinction:
+  the accepted category-polymorphic consumer replaces, rather than weakens,
+  the rejected arbitrary Type-in-Type exploratory consumer.
+Probe command and bounded result:
+  node --require ts-node/register --test tests/v3_2_core_signature_tests.ts
+    passed 7, skipped 2 opt-in Lambdapi probes.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 with the same command
+    passed 9/9; all 21 owner applications and the generic call were accepted.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 over all six v3_2 focused files
+    passed 70/70, including every earlier owner/conversion/negative probe.
+  ./scripts/pnpmw run check:ts
+    passed 222 tests / 49 suites: 210 passed, 12 opt-in probes skipped.
+  EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+    passed the active kernel, four one-way extensions, and diagnostics.
+  EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+    passed the root gate; all 41 active Lambdapi kernel/example targets;
+    39 formal infrastructure tests; 5 print registry tests; active-reference,
+    report-header, book/evidence/typography/KaTeX checks; strict rule-LHS
+    audit; and generated catalog freshness.
+Warning/audit/catalog/health effects, if any: no Lambdapi declaration, rule,
+  diagnostic, generated catalog, or health authority changed.
+Decision: accept. Core stores universe and generic elimination separately
+  from semantic-owner applications; the signature DSL is expressive enough
+  for the entire current owner catalog and remains independently validated
+  against its arity/plicity schema. Keep arbitrary TYPE polymorphism, type
+  conversion, rule computation, and checker-driven meta solving outside this
+  representation tranche.
+Plan rows changed: D-019 accepted; C-11 records the complete signature/call
+  foundation but remains partial until implicit recovery; ELAB-2A3A complete
+  and ELAB-2A3B dependency-ready.
+Remaining prerequisite or human review: none for this bounded slice.
+```
+
+## Immediate Slice: ELAB-2A3B
+
+Use the ELAB-2A3A catalog as the only owner-typing authority for a bounded
+bidirectional checker:
+
+1. infer types for universes, free and bound variables, metas, Pi types,
+   semantic-owner applications, and generic calls; check lambdas against an
+   expected Pi and check inferable terms against an expected type;
+2. interpret dependent Pi domains/codomains in the current persistent context,
+   preserving binder plicity and variation, and return an explicit checked
+   Core term plus its zonked type;
+3. consume owner slot/result signatures uniformly, insert omitted implicit
+   arguments as session-owned contextual metas, and retain every inserted
+   argument explicitly in the checked owner application or generic call;
+4. decompose structurally matching types into ordered constraints and delegate
+   only canonical meta assignment to the ELAB-2A2 session; reject unresolved,
+   ambiguous, wrong-plicity, non-function, and rigid mismatch outcomes at the
+   originating provenance;
+5. pass dependent identity/application, owner-application checking, implicit
+   category recovery, scope/occurs/ambiguity negatives, a bounded Lambdapi
+   checked-output probe, all earlier focused probes, `check:ts`, the bounded
+   kernel check, and the proportional repository gate.
+
+Do not add weak-head evaluation, rewrite/conversion rules, higher-order
+pattern inversion, displayed-category owners, a parser, or legacy
+compatibility in ELAB-2A3B. Those remain TSK-2, ELAB-2B, or later work.
 
 ## Human Review Gates
 

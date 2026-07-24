@@ -238,6 +238,7 @@ export class CoreElaborationSession {
         visit: (meta: KernelMetaVariable) => void
     ): void {
         switch (expression.tag) {
+            case 'universe':
             case 'reference':
             case 'bound':
                 return;
@@ -248,6 +249,12 @@ export class CoreElaborationSession {
                 );
                 return;
             case 'application':
+                expression.arguments.forEach(argument =>
+                    this.visitMetas(argument.value, visit)
+                );
+                return;
+            case 'call':
+                this.visitMetas(expression.callee, visit);
                 expression.arguments.forEach(argument =>
                     this.visitMetas(argument.value, visit)
                 );
@@ -346,6 +353,7 @@ export class CoreElaborationSession {
         followedSolutions = new Set<number>()
     ): boolean {
         switch (expression.tag) {
+            case 'universe':
             case 'reference':
             case 'bound':
                 return false;
@@ -384,6 +392,18 @@ export class CoreElaborationSession {
                         followedSolutions
                     )
                 );
+            case 'call':
+                return this.containsMeta(
+                    expression.callee,
+                    targetIndex,
+                    followedSolutions
+                ) || expression.arguments.some(argument =>
+                    this.containsMeta(
+                        argument.value,
+                        targetIndex,
+                        followedSolutions
+                    )
+                );
             case 'pi':
             case 'lambda':
                 return this.containsMeta(
@@ -407,6 +427,7 @@ export class CoreElaborationSession {
         resolving: Set<number>
     ): KernelExpression {
         switch (expression.tag) {
+            case 'universe':
             case 'reference':
             case 'bound':
                 return expression;
@@ -442,6 +463,15 @@ export class CoreElaborationSession {
             case 'application':
                 return {
                     ...expression,
+                    arguments: expression.arguments.map(argument => ({
+                        ...argument,
+                        value: this.zonkAt(argument.value, resolving)
+                    }))
+                };
+            case 'call':
+                return {
+                    ...expression,
+                    callee: this.zonkAt(expression.callee, resolving),
                     arguments: expression.arguments.map(argument => ({
                         ...argument,
                         value: this.zonkAt(argument.value, resolving)

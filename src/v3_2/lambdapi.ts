@@ -54,12 +54,17 @@ const binding = (
 });
 
 /**
- * Lambdapi names for every owner in the ELAB-1C Core catalog.
+ * Lambdapi names for every owner in the current Core catalog.
  *
  * Sections are stable source anchors; callers must relocate declarations by
  * name instead of treating a remembered line number as authority.
  */
 export const LAMBDAPI_V32_OWNER_BINDINGS = {
+    'groupoid-universe': binding(
+        'Grpd',
+        '0. Groupoid universe and equality',
+        'constant symbol Grpd'
+    ),
     'category-universe': binding(
         'Cat',
         '2. Core categories',
@@ -172,6 +177,8 @@ function collectFreeReferenceNames(
     names: Set<string>
 ): void {
     switch (expression.tag) {
+        case 'universe':
+            return;
         case 'reference':
             names.add(expression.name);
             return;
@@ -183,6 +190,12 @@ function collectFreeReferenceNames(
             );
             return;
         case 'application':
+            expression.arguments.forEach(argument =>
+                collectFreeReferenceNames(argument.value, names)
+            );
+            return;
+        case 'call':
+            collectFreeReferenceNames(expression.callee, names);
             expression.arguments.forEach(argument =>
                 collectFreeReferenceNames(argument.value, names)
             );
@@ -214,11 +227,15 @@ function serializeExpression(
     boundNames: readonly string[]
 ): string {
     const parenthesize = (child: KernelExpression): string =>
-        child.tag === 'reference' || child.tag === 'bound'
+        child.tag === 'universe' ||
+            child.tag === 'reference' ||
+            child.tag === 'bound'
             ? serializeExpression(child, state, boundNames)
             : `(${serializeExpression(child, state, boundNames)})`;
 
     switch (expression.tag) {
+        case 'universe':
+            return 'TYPE';
         case 'reference':
             return expression.name;
         case 'bound': {
@@ -244,6 +261,32 @@ function serializeExpression(
             return [
                 head,
                 ...expression.arguments.map(argument =>
+                    parenthesize(argument.value)
+                )
+            ].join(' ');
+        }
+        case 'call': {
+            let callee = expression.callee;
+            const callArguments = [...expression.arguments];
+            while (callee.tag === 'call') {
+                callArguments.unshift(...callee.arguments);
+                callee = callee.callee;
+            }
+            const serializedCallee = serializeExpression(
+                callee,
+                state,
+                boundNames
+            );
+            const head =
+                callee.tag === 'reference' || callee.tag === 'bound'
+                    ? serializedCallee
+                    : `(${serializedCallee})`;
+            const revealImplicits = callArguments.some(
+                argument => argument.plicity === 'implicit'
+            );
+            return [
+                `${revealImplicits ? '@' : ''}${head}`,
+                ...callArguments.map(argument =>
                     parenthesize(argument.value)
                 )
             ].join(' ');

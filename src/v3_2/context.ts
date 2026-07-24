@@ -77,6 +77,8 @@ function visitFreeReferences(
     visit: (reference: KernelReference) => void
 ): void {
     switch (expression.tag) {
+        case 'universe':
+            return;
         case 'reference':
             visit(expression);
             return;
@@ -88,6 +90,12 @@ function visitFreeReferences(
             );
             return;
         case 'application':
+            expression.arguments.forEach(argument =>
+                visitFreeReferences(argument.value, visit)
+            );
+            return;
+        case 'call':
+            visitFreeReferences(expression.callee, visit);
             expression.arguments.forEach(argument =>
                 visitFreeReferences(argument.value, visit)
             );

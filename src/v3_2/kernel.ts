@@ -71,6 +71,15 @@ export interface KernelReference {
     provenance: Provenance;
 }
 
+/**
+ * The backend-neutral meta-level universe. The current Lambdapi conformance
+ * backend renders this as `TYPE`.
+ */
+export interface KernelUniverse {
+    tag: 'universe';
+    provenance: Provenance;
+}
+
 export interface KernelBoundVariable {
     tag: 'bound';
     /**
@@ -117,6 +126,21 @@ export interface KernelApplication {
     provenance: Provenance;
 }
 
+/**
+ * Generic dependent function application.
+ *
+ * Semantic-owner applications remain separate `application` nodes so their
+ * owner identity and fixed telescope stay explicit. A `call` applies an
+ * arbitrary Core expression and is the Pi-elimination form used by the
+ * checker.
+ */
+export interface KernelCall {
+    tag: 'call';
+    callee: KernelExpression;
+    arguments: readonly KernelArgument[];
+    provenance: Provenance;
+}
+
 export interface KernelBinder {
     /**
      * A diagnostic/display hint only. Bound occurrences use De Bruijn indices.
@@ -142,10 +166,12 @@ export interface KernelLambda {
 }
 
 export type KernelExpression =
+    | KernelUniverse
     | KernelReference
     | KernelBoundVariable
     | KernelMetaVariable
     | KernelApplication
+    | KernelCall
     | KernelPi
     | KernelLambda;
 
@@ -171,6 +197,13 @@ export const kernelFree = (
         provenance: nodeProvenance
     };
 };
+
+export const kernelUniverse = (
+    nodeProvenance: Provenance
+): KernelUniverse => ({
+    tag: 'universe',
+    provenance: nodeProvenance
+});
 
 export type KernelScopeErrorCode =
     | 'INVALID_BOUND_INDEX'
@@ -249,6 +282,10 @@ export interface KernelArgumentInput {
     provenance?: Provenance;
 }
 
+export interface KernelCallArgumentInput extends KernelArgumentInput {
+    plicity: Plicity;
+}
+
 export function kernelApplication(
     owner: CoreOwnerId,
     inputs: readonly KernelArgumentInput[],
@@ -270,6 +307,26 @@ export function kernelApplication(
             value: input.value,
             provenance: input.provenance ?? input.value.provenance
         })),
+        provenance: nodeProvenance
+    };
+}
+
+export function kernelCall(
+    callee: KernelExpression,
+    inputs: readonly KernelCallArgumentInput[],
+    nodeProvenance: Provenance
+): KernelCall {
+    if (inputs.length === 0) {
+        throw new Error('Core generic call requires at least one argument');
+    }
+    return {
+        tag: 'call',
+        callee,
+        arguments: Object.freeze(inputs.map(input => Object.freeze({
+            plicity: input.plicity,
+            value: input.value,
+            provenance: input.provenance ?? input.value.provenance
+        }))),
         provenance: nodeProvenance
     };
 }
@@ -302,6 +359,7 @@ function shiftAt(
     cutoff: number
 ): KernelExpression {
     switch (expression.tag) {
+        case 'universe':
         case 'reference':
             return expression;
         case 'bound': {
@@ -337,6 +395,15 @@ function shiftAt(
         case 'application':
             return {
                 ...expression,
+                arguments: expression.arguments.map(argument => ({
+                    ...argument,
+                    value: shiftAt(argument.value, amount, cutoff)
+                }))
+            };
+        case 'call':
+            return {
+                ...expression,
+                callee: shiftAt(expression.callee, amount, cutoff),
                 arguments: expression.arguments.map(argument => ({
                     ...argument,
                     value: shiftAt(argument.value, amount, cutoff)
@@ -388,6 +455,7 @@ function substituteAt(
     depth: number
 ): KernelExpression {
     switch (expression.tag) {
+        case 'universe':
         case 'reference':
             return expression;
         case 'bound':
@@ -409,6 +477,25 @@ function substituteAt(
         case 'application':
             return {
                 ...expression,
+                arguments: expression.arguments.map(argument => ({
+                    ...argument,
+                    value: substituteAt(
+                        argument.value,
+                        targetIndex,
+                        replacement,
+                        depth
+                    )
+                }))
+            };
+        case 'call':
+            return {
+                ...expression,
+                callee: substituteAt(
+                    expression.callee,
+                    targetIndex,
+                    replacement,
+                    depth
+                ),
                 arguments: expression.arguments.map(argument => ({
                     ...argument,
                     value: substituteAt(
@@ -483,6 +570,7 @@ function instantiateSpineAt(
     depth: number
 ): KernelExpression {
     switch (expression.tag) {
+        case 'universe':
         case 'reference':
             return expression;
         case 'bound': {
@@ -510,6 +598,23 @@ function instantiateSpineAt(
         case 'application':
             return {
                 ...expression,
+                arguments: expression.arguments.map(argument => ({
+                    ...argument,
+                    value: instantiateSpineAt(
+                        argument.value,
+                        spine,
+                        depth
+                    )
+                }))
+            };
+        case 'call':
+            return {
+                ...expression,
+                callee: instantiateSpineAt(
+                    expression.callee,
+                    spine,
+                    depth
+                ),
                 arguments: expression.arguments.map(argument => ({
                     ...argument,
                     value: instantiateSpineAt(
@@ -578,6 +683,7 @@ export function kernelAssertScoped(
 
     const visit = (current: KernelExpression, depth: number): void => {
         switch (current.tag) {
+            case 'universe':
             case 'reference':
                 return;
             case 'bound':
@@ -594,6 +700,12 @@ export function kernelAssertScoped(
                 current.spine.forEach(item => visit(item, depth));
                 return;
             case 'application':
+                current.arguments.forEach(argument =>
+                    visit(argument.value, depth)
+                );
+                return;
+            case 'call':
+                visit(current.callee, depth);
                 current.arguments.forEach(argument =>
                     visit(argument.value, depth)
                 );
@@ -620,6 +732,8 @@ export function kernelExpressionEquals(
     if (left.tag !== right.tag) return false;
 
     switch (left.tag) {
+        case 'universe':
+            return true;
         case 'reference': {
             const other = right as KernelReference;
             return left.namespace === other.namespace && left.name === other.name;
@@ -640,6 +754,18 @@ export function kernelExpressionEquals(
         case 'application': {
             const other = right as KernelApplication;
             return left.owner === other.owner &&
+                left.arguments.length === other.arguments.length &&
+                left.arguments.every((argument, index) =>
+                    argument.plicity === other.arguments[index].plicity &&
+                    kernelExpressionEquals(
+                        argument.value,
+                        other.arguments[index].value
+                    )
+                );
+        }
+        case 'call': {
+            const other = right as KernelCall;
+            return kernelExpressionEquals(left.callee, other.callee) &&
                 left.arguments.length === other.arguments.length &&
                 left.arguments.every((argument, index) =>
                     argument.plicity === other.arguments[index].plicity &&

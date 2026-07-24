@@ -1,5 +1,6 @@
 export * from './schema';
 export * from './kernel';
+export * from './signature';
 export * from './context';
 export * from './session';
 export * from './lambdapi';

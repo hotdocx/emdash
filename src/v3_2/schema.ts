@@ -44,6 +44,7 @@ export interface CoreOwnerSlotSchema {
 export interface ClassifierOwnerSchema {
     kind: 'classifier';
     classifier:
+        | 'groupoid-universe'
         | 'category-universe'
         | 'decode'
         | 'object'
@@ -86,12 +87,17 @@ export type CoreOwnerSchema =
     | ProjectionOwnerSchema;
 
 /**
- * The small Core owner catalog needed through ELAB-1C.
+ * The current backend-neutral Core owner catalog.
  *
  * No entry contains a backend symbol or module name. Slot order and plicity
  * are semantic declaration data shared by checking and all backends.
  */
 export const CORE_OWNER_SCHEMAS = {
+    'groupoid-universe': {
+        kind: 'classifier',
+        classifier: 'groupoid-universe',
+        slots: []
+    },
     'category-universe': {
         kind: 'classifier',
         classifier: 'category-universe',
