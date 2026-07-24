@@ -543,7 +543,7 @@ describe('TypeScript v3.2 ELAB-2A2 Core sessions', () => {
         );
     });
 
-    it('keeps noncanonical and rigid constraints stuck for later solvers', () => {
+    it('solves a weakened pattern while leaving rigid conversion stuck', () => {
         const environment = categoryEnvironment();
         const session = new CoreElaborationSession(environment);
         const creationContext = session.rootContext.extend(binding(
@@ -580,11 +580,17 @@ describe('TypeScript v3.2 ELAB-2A2 Core sessions', () => {
         assert.deepEqual(
             report.constraints.map(constraint => constraint.reason),
             [
-                'NONCANONICAL_META_OCCURRENCE',
+                'ASSIGNED_LEFT_PATTERN_META',
                 'REQUIRES_DECOMPOSITION_OR_CONVERSION'
             ]
         );
-        assert.equal(session.metavariable(meta).solution, undefined);
+        const solution = session.metavariable(meta).solution;
+        assert.ok(solution);
+        expectBoundIndex(solution, 0);
+        assert.equal(
+            kernelExpressionEquals(session.zonk(weakened), bound(1, 115)),
+            true
+        );
     });
 
     it(

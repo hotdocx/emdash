@@ -12,6 +12,7 @@ export * from './evaluator';
 export * from './conversion';
 export * from './metatheory';
 export * from './migration';
+export * from './pattern';
 export * from './lambdapi';
 export * from './surface';
 export * from './elaborator';

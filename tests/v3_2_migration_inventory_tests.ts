@@ -1,5 +1,5 @@
 /**
- * Focused MIGRATE-1A closed-world source and test disposition checks.
+ * Focused MIGRATE-1 closed-world source and test disposition checks.
  */
 
 import assert from 'node:assert';
@@ -58,7 +58,7 @@ const legacySourceFiles = (): string[] =>
         .map(entry => `src/${entry.name}`)
         .sort();
 
-describe('TypeScript v3.2 MIGRATE-1A legacy inventory', () => {
+describe('TypeScript v3.2 MIGRATE-1 legacy inventory', () => {
     it('classifies all ten generic mechanisms with exact next boundaries', () => {
         assert.deepEqual(
             LEGACY_MIGRATION_INVENTORY.mechanisms.map(entry => entry.id),
@@ -79,7 +79,7 @@ describe('TypeScript v3.2 MIGRATE-1A legacy inventory', () => {
             LEGACY_MIGRATION_INVENTORY.mechanisms.find(
                 entry => entry.id === 'higher-order-pattern-unification'
             )?.state,
-            'dependency-ready'
+            'covered'
         );
         assert.equal(
             LEGACY_MIGRATION_INVENTORY.mechanisms.find(
@@ -87,7 +87,8 @@ describe('TypeScript v3.2 MIGRATE-1A legacy inventory', () => {
             )?.state,
             'partial'
         );
-        assert.equal(LEGACY_MIGRATION_INVENTORY.nextSlice, 'MIGRATE-1B');
+        assert.equal(LEGACY_MIGRATION_INVENTORY.revision, 'MIGRATE-1B');
+        assert.equal(LEGACY_MIGRATION_INVENTORY.nextSlice, 'MIGRATE-1C');
     });
 
     it('accounts for every root legacy source file exactly once', () => {
@@ -145,7 +146,7 @@ describe('TypeScript v3.2 MIGRATE-1A legacy inventory', () => {
             () => validateLegacyMigrationInventory(
                 changedState as unknown as LegacyMigrationInventory
             ),
-            /differs from the canonical MIGRATE-1A disposition ledger/
+            /differs from the canonical MIGRATE-1B disposition ledger/
         );
 
         const missingTest = cloneInventory() as unknown as {
@@ -156,7 +157,7 @@ describe('TypeScript v3.2 MIGRATE-1A legacy inventory', () => {
             () => validateLegacyMigrationInventory(
                 missingTest as unknown as LegacyMigrationInventory
             ),
-            /differs from the canonical MIGRATE-1A disposition ledger/
+            /differs from the canonical MIGRATE-1B disposition ledger/
         );
     });
 });

@@ -64,12 +64,12 @@ export interface LegacyTestDispositionEntry {
 }
 
 export interface LegacyMigrationInventory {
-    readonly revision: 'MIGRATE-1A';
+    readonly revision: 'MIGRATE-1B';
     readonly status: 'in-progress';
     readonly mechanisms: readonly LegacyMechanismDispositionEntry[];
     readonly sourceFiles: readonly LegacySourceDispositionEntry[];
     readonly testFiles: readonly LegacyTestDispositionEntry[];
-    readonly nextSlice: 'MIGRATE-1B';
+    readonly nextSlice: 'MIGRATE-1C';
 }
 
 const deepFreeze = <T>(value: T): T => {
@@ -87,7 +87,7 @@ const deepFreeze = <T>(value: T): T => {
 };
 
 const canonicalInventory: LegacyMigrationInventory = {
-    revision: 'MIGRATE-1A',
+    revision: 'MIGRATE-1B',
     status: 'in-progress',
     mechanisms: [
         {
@@ -116,13 +116,14 @@ const canonicalInventory: LegacyMigrationInventory = {
         {
             id: 'higher-order-pattern-unification',
             disposition: 'port',
-            state: 'dependency-ready',
+            state: 'covered',
             evidence: [
-                'tests/higher_order_unification_tests.ts'
+                'tests/higher_order_unification_tests.ts',
+                'tests/v3_2_pattern_unification_tests.ts'
             ],
             nextBoundary:
-                'MIGRATE-1B ports the positive pattern fragment and records ' +
-                'the non-pattern boundary over locally nameless Core.'
+                'Retain the contextual Miller-pattern solver and delete the ' +
+                'name-based legacy unifier in MIGRATE-2.'
         },
         {
             id: 'rule-authority-separation',
@@ -409,9 +410,11 @@ const canonicalInventory: LegacyMigrationInventory = {
             retainedInvariant:
                 'Flex-rigid solutions over distinct local-variable spines, ' +
                 'with occurs, scope, and non-pattern negatives.',
-            replacementTests: [],
+            replacementTests: [
+                'tests/v3_2_pattern_unification_tests.ts'
+            ],
             remainingBoundary:
-                'MIGRATE-1B adds the Core replacement corpus.'
+                'Delete the legacy corpus with the old unifier in MIGRATE-2.'
         },
         {
             file: 'tests/higher_order_pattern_matching_tests.ts',
@@ -420,11 +423,12 @@ const canonicalInventory: LegacyMigrationInventory = {
                 'Evidence for the higher-order pattern boundary only; ' +
                 'ambient user rewrite matching is not retained.',
             replacementTests: [
-                'tests/v3_2_runtime_rewrite_tests.ts'
+                'tests/v3_2_runtime_rewrite_tests.ts',
+                'tests/v3_2_pattern_unification_tests.ts'
             ],
             remainingBoundary:
-                'MIGRATE-1B records relevant meta-pattern negatives; delete ' +
-                'the legacy matcher in MIGRATE-2.'
+                'The meta-pattern boundary is recorded; delete ambient ' +
+                'legacy user-rule matching in MIGRATE-2.'
         },
         {
             file: 'tests/implicit_args_tests.ts',
@@ -569,7 +573,7 @@ const canonicalInventory: LegacyMigrationInventory = {
                 'Delete in MIGRATE-2; a replacement parser requires H-06.'
         }
     ],
-    nextSlice: 'MIGRATE-1B'
+    nextSlice: 'MIGRATE-1C'
 };
 
 export const LEGACY_MIGRATION_INVENTORY = deepFreeze(canonicalInventory);
@@ -580,7 +584,7 @@ const sameInventory = (
 ): boolean => JSON.stringify(left) === JSON.stringify(right);
 
 /**
- * Reject any drift from the reviewed MIGRATE-1A inventory.
+ * Reject any drift from the reviewed MIGRATE-1B inventory.
  *
  * The migration ledger is deliberately closed-world: adding a legacy root
  * source or test requires an explicit disposition before deletion can
@@ -592,7 +596,7 @@ export function validateLegacyMigrationInventory(
     if (!sameInventory(inventory, canonicalInventory)) {
         throw new Error(
             'Legacy migration inventory differs from the canonical ' +
-            'MIGRATE-1A disposition ledger'
+            'MIGRATE-1B disposition ledger'
         );
     }
 }

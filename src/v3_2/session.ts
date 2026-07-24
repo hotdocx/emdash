@@ -2,9 +2,10 @@
  * Session-local metavariables and ordered constraints for emdash Core.
  *
  * This is elaboration state, not the trusted checker. It deliberately solves
- * only direct canonical flex-rigid equations. The bounded Core checker owns
- * structural decomposition and implicit insertion; conversion and
- * higher-order pattern solving remain later work.
+ * direct canonical flex-rigid equations and the Miller-pattern fragment over
+ * distinct contextual variables. The bounded Core checker owns structural
+ * decomposition and implicit insertion; conversion and non-pattern
+ * higher-order solving remain outside this session.
  */
 
 import {
@@ -24,6 +25,10 @@ import {
     kernelMeta,
     provenance
 } from './kernel';
+import {
+    CorePatternStuckReason,
+    invertCoreMetaPattern
+} from './pattern';
 
 export type CoreSessionErrorCode =
     | 'FOREIGN_CONTEXT'
@@ -33,6 +38,7 @@ export type CoreSessionErrorCode =
     | 'INVALID_META_TYPE_SCOPE'
     | 'NONCANONICAL_META_OCCURRENCE'
     | 'META_OCCURS_CHECK'
+    | 'PATTERN_SCOPE_ESCAPE'
     | 'INVALID_META_SOLUTION_SCOPE'
     | 'METAVARIABLE_ALREADY_SOLVED'
     | 'CYCLIC_META_SOLUTION'
@@ -83,10 +89,28 @@ export type CoreConstraintReason =
     | 'STRUCTURAL_EQUALITY'
     | 'ASSIGNED_LEFT_META'
     | 'ASSIGNED_RIGHT_META'
+    | 'ASSIGNED_LEFT_PATTERN_META'
+    | 'ASSIGNED_RIGHT_PATTERN_META'
     | 'AMBIGUOUS_FLEX_FLEX'
     | 'NONCANONICAL_META_OCCURRENCE'
     | 'REQUIRES_DECOMPOSITION_OR_CONVERSION'
+    | CorePatternStuckReason
     | CoreSessionErrorCode;
+
+interface CorePatternAssignment {
+    readonly outcome: 'assigned';
+}
+
+interface CorePatternAssignmentStuck {
+    readonly outcome: 'stuck';
+    readonly reason:
+        | CorePatternStuckReason
+        | 'NONCANONICAL_META_OCCURRENCE';
+}
+
+type CorePatternAssignmentResult =
+    | CorePatternAssignment
+    | CorePatternAssignmentStuck;
 
 interface MutableConstraintEntry {
     readonly id: number;
@@ -345,6 +369,63 @@ export class CoreElaborationSession {
             meta.spine.every((item, index) =>
                 item.tag === 'bound' && item.index === index
             );
+    }
+
+    private contextExtends(
+        context: CoreContext,
+        ancestor: CoreContext
+    ): boolean {
+        return context.environment === ancestor.environment &&
+            context.depth >= ancestor.depth &&
+            ancestor.telescope.every(
+                (binding, index) => context.telescope[index] === binding
+            );
+    }
+
+    private solvePatternOccurrence(
+        context: CoreContext,
+        meta: KernelMetaVariable,
+        rigid: KernelExpression
+    ): CorePatternAssignmentResult {
+        const entry = this.entryForMeta(meta);
+        if (!this.contextExtends(context, entry.context)) {
+            return Object.freeze({
+                outcome: 'stuck',
+                reason: 'NONCANONICAL_META_OCCURRENCE'
+            });
+        }
+
+        const inversion = invertCoreMetaPattern(
+            meta,
+            entry.creationDepth,
+            context.depth,
+            rigid
+        );
+        if (inversion.outcome === 'stuck') {
+            return Object.freeze({
+                outcome: 'stuck',
+                reason: inversion.reason
+            });
+        }
+        if (inversion.outcome === 'scope-escape') {
+            throw new CoreSessionError(
+                'PATTERN_SCOPE_ESCAPE',
+                inversion.error.provenance,
+                `Rigid side of pattern ?m${meta.identity.index} depends on ` +
+                'a local variable absent from its distinct-variable spine'
+            );
+        }
+
+        const canonical = kernelMeta(
+            entry.identity,
+            Array.from(
+                { length: entry.creationDepth },
+                (_, index) => kernelBound(index, meta.provenance)
+            ),
+            meta.provenance
+        );
+        this.solve(canonical, inversion.solution);
+        return Object.freeze({ outcome: 'assigned' });
     }
 
     private containsMeta(
@@ -680,31 +761,41 @@ export class CoreElaborationSession {
             if (left.tag === 'meta') {
                 const metaEntry = this.entryForMeta(left);
                 if (
-                    entry.context !== metaEntry.context ||
-                    !this.isCanonicalOccurrence(left, metaEntry)
+                    entry.context === metaEntry.context &&
+                    this.isCanonicalOccurrence(left, metaEntry)
                 ) {
-                    return this.stuck(
-                        entry,
-                        'NONCANONICAL_META_OCCURRENCE'
-                    );
+                    this.solve(left, right);
+                    return this.solved(entry, 'ASSIGNED_LEFT_META');
                 }
-                this.solve(left, right);
-                return this.solved(entry, 'ASSIGNED_LEFT_META');
+
+                const assignment = this.solvePatternOccurrence(
+                    entry.context,
+                    left,
+                    right
+                );
+                return assignment.outcome === 'stuck'
+                    ? this.stuck(entry, assignment.reason)
+                    : this.solved(entry, 'ASSIGNED_LEFT_PATTERN_META');
             }
 
             if (right.tag === 'meta') {
                 const metaEntry = this.entryForMeta(right);
                 if (
-                    entry.context !== metaEntry.context ||
-                    !this.isCanonicalOccurrence(right, metaEntry)
+                    entry.context === metaEntry.context &&
+                    this.isCanonicalOccurrence(right, metaEntry)
                 ) {
-                    return this.stuck(
-                        entry,
-                        'NONCANONICAL_META_OCCURRENCE'
-                    );
+                    this.solve(right, left);
+                    return this.solved(entry, 'ASSIGNED_RIGHT_META');
                 }
-                this.solve(right, left);
-                return this.solved(entry, 'ASSIGNED_RIGHT_META');
+
+                const assignment = this.solvePatternOccurrence(
+                    entry.context,
+                    right,
+                    left
+                );
+                return assignment.outcome === 'stuck'
+                    ? this.stuck(entry, assignment.reason)
+                    : this.solved(entry, 'ASSIGNED_RIGHT_PATTERN_META');
             }
 
             return this.stuck(
