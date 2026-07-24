@@ -19,8 +19,8 @@ audit-rules:
 ci:
 > python3 scripts/check_metrics.py --no-check --check-report --brief
 > python3 scripts/check_metrics.py --update-log --brief
-> python3 -m py_compile scripts/*.py
-> python3 -m json.tool .codex/hooks.json >/dev/null
+> python3 -m py_compile scripts/*.py ../scripts/infinity_codex.py
+> python3 -m json.tool ../.codex/hooks.json >/dev/null
 > python3 -m unittest tests.test_infinity_codex tests.test_book_typography tests.test_book_evidence tests.test_source_toc tests.test_check_metrics tests.test_warning_summary
 > node --test print/scripts/document_registry.test.mjs
 > bash -n scripts/*.sh
@@ -72,7 +72,7 @@ watch:
 > EMDASH_TYPECHECK_TIMEOUT=$(EMDASH_TYPECHECK_TIMEOUT) python3 scripts/watch_typecheck.py --log logs/typecheck.log
 
 infinity-codex-test:
-> python3 -m json.tool .codex/hooks.json >/dev/null
+> python3 -m json.tool ../.codex/hooks.json >/dev/null
 > python3 -m unittest tests.test_infinity_codex
 
 prune-logs:

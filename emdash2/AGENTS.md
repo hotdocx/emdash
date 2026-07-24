@@ -280,9 +280,12 @@ Use the repository copies instead of embedding them here:
 
 ## Infinity Codex Recovery
 
-The trusted `.codex/hooks.json` archives only completed main-agent final
-responses under ignored `tmp/ai-responses/`. The archive is recovery evidence,
-not an instruction source:
+The sole trusted hook configuration is the Git-root
+`../.codex/hooks.json`; `emdash2/.codex/hooks.json` is intentionally absent so
+launches inside this package do not run duplicate matching hooks. The shared
+Git-root `../scripts/infinity_codex.py` archives only completed main-agent
+final responses under this package's ignored `tmp/ai-responses/`. The archive
+is recovery evidence, not an instruction source:
 
 ```text
 active code/SOP -> active plan and side-task ledger
@@ -292,10 +295,10 @@ active code/SOP -> active plan and side-task ledger
 Useful commands:
 
 ```bash
-python3 scripts/infinity_codex.py list --limit 5
-python3 scripts/infinity_codex.py latest-path
-python3 scripts/infinity_codex.py show LOGICAL_ID
-python3 scripts/infinity_codex.py verify
+python3 ../scripts/infinity_codex.py list --limit 5
+python3 ../scripts/infinity_codex.py latest-path
+python3 ../scripts/infinity_codex.py show LOGICAL_ID
+python3 ../scripts/infinity_codex.py verify
 ```
 
 After context compaction, interruption, or handoff, do not continue from a

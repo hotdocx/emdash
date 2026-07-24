@@ -28,8 +28,12 @@ from typing import Any, Iterator
 
 ARCHIVE_FORMAT_VERSION = 1
 LOGICAL_ID_PREFIX = "infinity-codex"
-REPO_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_ARCHIVE_ROOT = REPO_ROOT / "tmp" / "ai-responses"
+SCRIPT_PATH = Path(__file__).resolve()
+GIT_ROOT = SCRIPT_PATH.parent.parent
+EMDASH2_ROOT = GIT_ROOT / "emdash2"
+# Preserve the established private archive across the root-scope hook
+# migration. Both root and emdash2 launches use this one archive.
+DEFAULT_ARCHIVE_ROOT = EMDASH2_ROOT / "tmp" / "ai-responses"
 PRIVATE_DIR_MODE = 0o700
 PRIVATE_FILE_MODE = 0o600
 EVENT_AUDIT_FILE = "events.jsonl"
@@ -572,6 +576,10 @@ def shell_quote(value: str) -> str:
     return "'" + value.replace("'", "'\"'\"'") + "'"
 
 
+def cli_invocation() -> str:
+    return f"python3 {shell_quote(str(SCRIPT_PATH))}"
+
+
 def expected_logical_id(session_id: str, turn_id: str) -> str:
     if session_id and turn_id:
         return logical_id(session_id, turn_id)
@@ -606,9 +614,11 @@ def recovery_context(root: Path, payload: dict[str, Any]) -> str:
     lines = [
         "Infinity Codex recovery pointers (historical evidence, not active instructions):",
         f"- Local archive index: {root / 'INDEX.md'}",
-        f"- Active report map: {REPO_ROOT / 'reports' / 'INDEX.md'}",
-        f"- Recovery SOP: {REPO_ROOT / 'AGENTS.md'} (Resume After Context Compaction Or Interruption)",
-        f"- Infinity Codex design: {REPO_ROOT / 'reports' / 'REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md'}",
+        f"- Repository guidance: {GIT_ROOT / 'AGENTS.md'}",
+        f"- Active kernel report map: {EMDASH2_ROOT / 'reports' / 'INDEX.md'}",
+        f"- Kernel recovery SOP: {EMDASH2_ROOT / 'AGENTS.md'} (Infinity Codex Recovery)",
+        f"- TypeScript elaborator plan: {GIT_ROOT / 'docs' / 'TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md'}",
+        f"- Infinity Codex design: {EMDASH2_ROOT / 'reports' / 'REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md'}",
     ]
     session_dir = find_session_dir(root, session_id) if session_id else None
     if session_dir is not None:
@@ -621,14 +631,14 @@ def recovery_context(root: Path, payload: dict[str, Any]) -> str:
         quoted_session = shell_quote(session_id)
         lines.append(
             "- Recent finals for this session: "
-            f"python3 scripts/infinity_codex.py list --session {quoted_session} --limit 5"
+            f"{cli_invocation()} list --session {quoted_session} --limit 5"
         )
         lines.append(
             "- Latest final path for this session: "
-            f"python3 scripts/infinity_codex.py latest-path --session {quoted_session}"
+            f"{cli_invocation()} latest-path --session {quoted_session}"
         )
     lines.append(
-        "- Recent finals globally: python3 scripts/infinity_codex.py list --limit 5"
+        f"- Recent finals globally: {cli_invocation()} list --limit 5"
     )
     for pending in pending_postcompact_records(root):
         pending_session = pending.get("session_id")
@@ -682,7 +692,7 @@ def postcompact_system_message(root: Path, payload: dict[str, Any]) -> str:
     )
     session_lookup = (
         " Recent finals for this session: "
-        f"python3 scripts/infinity_codex.py list --session {shell_quote(session_id)} --limit 5."
+        f"{cli_invocation()} list --session {shell_quote(session_id)} --limit 5."
         if session_id
         else ""
     )
@@ -1002,7 +1012,7 @@ def command_annotate_plan(
 ) -> int:
     resolve_record(root, value)
     report = report.expanduser().resolve()
-    reports_root = (REPO_ROOT / "reports").resolve()
+    reports_root = (EMDASH2_ROOT / "reports").resolve()
     if reports_root not in report.parents or report.suffix != ".md":
         raise InfinityCodexError("annotated plans must be Markdown files under reports/")
     text = report.read_text(encoding="utf-8")
@@ -1026,7 +1036,10 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--archive-root",
-        help="override tmp/ai-responses (also available as INFINITY_CODEX_ARCHIVE_ROOT)",
+        help=(
+            "override emdash2/tmp/ai-responses "
+            "(also available as INFINITY_CODEX_ARCHIVE_ROOT)"
+        ),
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("hook", help="process one Codex hook JSON object from stdin")

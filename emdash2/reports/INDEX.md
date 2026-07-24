@@ -638,7 +638,10 @@ but their promoted phases are not open implementation plans.
   documentation across executable sections 0–19, and diagnostic-navigation
   cleanup; broad naming and module-split work remains explicitly deferred.
 - `REPORT_EMDASH_INFINITY_CODEX_IMPLEMENTATION_PLAN_2026-06-23.md`:
-  completed local final-response archive and compaction/resume recovery flow.
+  completed local final-response archive and compaction/resume recovery flow;
+  its 2026-07-23 consolidation moves the sole hook configuration and shared
+  Python core to the Git root so launches from either the root or `emdash2`
+  use one archive without duplicate matching hooks.
 - `REPORT_EMDASH_V3_2_NOTATION_MIGRATION_AND_REORG_IMPLEMENTATION_PLAN_2026-06-05.md`:
   completed notation/check-file split history with remaining work transferred
   to current maintenance/reorganization plans.

@@ -9,10 +9,10 @@ Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
 Infinity-Codex-Decision-Responses: none
 
-Status: implementation complete with 2026-06-28 compaction-recovery hardening.
-The initial live Stop-hook test exposed and corrected nested-project path
-resolution: this Codex project is `emdash2`, while the enclosing Git root is
-`emdash1`.
+Status: implementation complete with 2026-06-28 compaction-recovery hardening
+and 2026-07-23 Git-root scope consolidation. The initial live Stop-hook test
+exposed and corrected the then-nested project path; the later contributor
+workspace consolidation makes `emdash1` the sole Codex project root.
 
 ## Summary
 
@@ -235,3 +235,67 @@ python3 scripts/infinity_codex.py latest-path [--session SESSION_ID]
   agents resuming after compaction to inspect the archive directly when
   injected pointers are absent, stale, or known to predate the final response
   for the just-compacted turn.
+
+## Git-Root Scope Consolidation
+
+Updated on 2026-07-23 after the root TypeScript elaborator workflow made
+`emdash1` the normal Codex launch directory.
+
+Codex discovers project hook layers from the Git root down to the launch
+directory; it does not descend into child packages. Therefore the former
+`emdash2/.codex/hooks.json` was invisible to a root launch. Keeping both root
+and nested copies would be incorrect because matching hooks from all active
+layers run, producing duplicate lifecycle invocations for an `emdash2`
+launch.
+
+The consolidated ownership is:
+
+```text
+emdash1/.codex/hooks.json          sole project hook configuration
+emdash1/scripts/infinity_codex.py  sole shared implementation
+emdash1/emdash2/tmp/ai-responses/  existing ignored private archive
+```
+
+The core was moved rather than copied. The archive stays in its established
+location so previous final responses and metadata remain available to both
+root and `emdash2` sessions. Recovery context now points to root `AGENTS.md`,
+the TypeScript elaborator master plan, the kernel report index/SOP, and this
+design record.
+
+The hook command now uses `git rev-parse --show-toplevel` to locate the current
+checkout or worktree and invokes its root `scripts/infinity_codex.py`. This
+reverses the 2026-06-23 nested-project workaround for a documented reason: the
+script is now actually owned at the Git root. The command contains no
+machine-specific absolute repository path.
+
+Focused tests validate the sole root config, absence of the legacy nested
+config, and synthetic Stop-hook execution from the Git root, `emdash2`, and
+`emdash2/tests`, all against one temporary archive. `make ci` validates the
+root JSON config and continues to own the Python test suite.
+
+Validation on 2026-07-23:
+
+```text
+codex --version
+  codex-cli 0.145.0
+
+codex features list
+  hooks: stable, enabled
+
+make -C emdash2 infinity-codex-test
+  16 tests passed
+
+python3 scripts/infinity_codex.py verify
+  457 archived responses verified
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  159 TypeScript tests / 44 suites: 157 passed, 2 opt-in probes skipped
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/rule-audit/catalog gates passed
+```
+
+Changing and relocating the hook changes its trust identity. Activation still
+requires a new Codex session followed by `/hooks` review and trust. The thread
+performing this migration cannot prove that live lifecycle boundary because
+its hooks were loaded at session start.

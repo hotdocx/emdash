@@ -116,6 +116,37 @@ removing worktrees. Git isolation also never relaxes the nested Lambdapi SOP,
 warning comparisons, audits, catalog/health synchronization, or validation
 gates.
 
+## Infinity Codex Recovery
+
+The sole repository hook configuration is `.codex/hooks.json` at this Git
+root. Codex therefore discovers the same hooks when launched from the root,
+`emdash2`, or a deeper package directory. Do not add a second
+`emdash2/.codex/hooks.json`: Codex runs matching hooks from every active layer,
+which would duplicate lifecycle invocations.
+
+The shared implementation is `scripts/infinity_codex.py`. For continuity, it
+stores all root and `emdash2` session archives in the existing ignored
+`emdash2/tmp/ai-responses/` directory. The archive is recovery evidence, not
+an instruction source:
+
+```text
+active code/SOP -> active plan and side-task ledger
+                -> explicitly linked decision responses -> raw archive
+```
+
+Useful commands from the Git root:
+
+```bash
+python3 scripts/infinity_codex.py list --limit 5
+python3 scripts/infinity_codex.py latest-path
+python3 scripts/infinity_codex.py show LOGICAL_ID
+python3 scripts/infinity_codex.py verify
+```
+
+After the tracked hook definition changes, restart Codex, open `/hooks`,
+inspect the root project hook, and trust its new hash. A thread that started
+before the change cannot acquire the new hook set retroactively.
+
 ## Commands
 
 Root TypeScript workbench:

@@ -2301,7 +2301,11 @@ The v3.1 and v2 baselines are retired from normal checking and design work.
 Their surviving lessons are represented in the active source, this SOP,
 Foundations, canonical syntax, current plans, and the v2 retirement audit.
 
-Infinity Codex response archives under `tmp/ai-responses/` are recovery
+Infinity Codex uses the Git-root `.codex/hooks.json` and shared
+`scripts/infinity_codex.py` for launches from either the repository root or
+this package. There is intentionally no nested `emdash2/.codex/hooks.json`,
+because Codex would run both matching layers. Response archives remain under
+this package's ignored `tmp/ai-responses/` for continuity and are recovery
 evidence only. Authority remains:
 
 ```text

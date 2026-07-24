@@ -1,0 +1,53 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "repo_root=\"$(git rev-parse --show-toplevel 2>/dev/null)\" || { echo \"Infinity Codex hook: cannot locate the Git root from $PWD\" >&2; exit 1; }; script=\"$repo_root/scripts/infinity_codex.py\"; if [ ! -f \"$script\" ]; then echo \"Infinity Codex hook: cannot locate $script\" >&2; exit 1; fi; exec /usr/bin/python3 \"$script\" hook",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "repo_root=\"$(git rev-parse --show-toplevel 2>/dev/null)\" || { echo \"Infinity Codex hook: cannot locate the Git root from $PWD\" >&2; exit 1; }; script=\"$repo_root/scripts/infinity_codex.py\"; if [ ! -f \"$script\" ]; then echo \"Infinity Codex hook: cannot locate $script\" >&2; exit 1; fi; exec /usr/bin/python3 \"$script\" hook",
+            "timeout": 30,
+            "statusMessage": "Loading Infinity Codex recovery pointers"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "repo_root=\"$(git rev-parse --show-toplevel 2>/dev/null)\" || { echo \"Infinity Codex hook: cannot locate the Git root from $PWD\" >&2; exit 1; }; script=\"$repo_root/scripts/infinity_codex.py\"; if [ ! -f \"$script\" ]; then echo \"Infinity Codex hook: cannot locate $script\" >&2; exit 1; fi; exec /usr/bin/python3 \"$script\" hook",
+            "timeout": 30,
+            "statusMessage": "Recording Infinity Codex compaction marker"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "repo_root=\"$(git rev-parse --show-toplevel 2>/dev/null)\" || { echo \"Infinity Codex hook: cannot locate the Git root from $PWD\" >&2; exit 1; }; script=\"$repo_root/scripts/infinity_codex.py\"; if [ ! -f \"$script\" ]; then echo \"Infinity Codex hook: cannot locate $script\" >&2; exit 1; fi; exec /usr/bin/python3 \"$script\" hook",
+            "timeout": 30,
+            "statusMessage": "Loading Infinity Codex recovery pointers"
+          }
+        ]
+      }
+    ]
+  }
+}

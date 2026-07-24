@@ -11,9 +11,11 @@ import unittest
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-SCRIPT = REPO_ROOT / "scripts" / "infinity_codex.py"
-HOOKS = REPO_ROOT / ".codex" / "hooks.json"
+EMDASH2_ROOT = Path(__file__).resolve().parent.parent
+GIT_ROOT = EMDASH2_ROOT.parent
+SCRIPT = GIT_ROOT / "scripts" / "infinity_codex.py"
+HOOKS = GIT_ROOT / ".codex" / "hooks.json"
+LEGACY_HOOKS = EMDASH2_ROOT / ".codex" / "hooks.json"
 
 
 class InfinityCodexTests(unittest.TestCase):
@@ -41,7 +43,7 @@ class InfinityCodexTests(unittest.TestCase):
                 str(self.archive),
                 *arguments,
             ],
-            cwd=REPO_ROOT,
+            cwd=EMDASH2_ROOT,
             env=environment,
             input=stdin,
             stdout=subprocess.PIPE,
@@ -65,7 +67,7 @@ class InfinityCodexTests(unittest.TestCase):
             "session_id": session_id,
             "turn_id": turn_id,
             "transcript_path": "/unstable/transcript.jsonl",
-            "cwd": str(REPO_ROOT),
+            "cwd": str(EMDASH2_ROOT),
             "hook_event_name": "Stop",
             "model": "gpt-test",
             "permission_mode": "default",
@@ -187,7 +189,7 @@ class InfinityCodexTests(unittest.TestCase):
         start_payload = {
             "session_id": payload["session_id"],
             "transcript_path": "/unstable/transcript.jsonl",
-            "cwd": str(REPO_ROOT),
+            "cwd": str(EMDASH2_ROOT),
             "hook_event_name": "SessionStart",
             "model": "gpt-test",
             "permission_mode": "default",
@@ -196,11 +198,22 @@ class InfinityCodexTests(unittest.TestCase):
         result = self.run_hook(start_payload)
         context = result["hookSpecificOutput"]["additionalContext"]
         self.assertIn("Local archive index:", context)
+        self.assertIn(f"Repository guidance: {GIT_ROOT / 'AGENTS.md'}", context)
+        self.assertIn(
+            f"Active kernel report map: {EMDASH2_ROOT / 'reports' / 'INDEX.md'}",
+            context,
+        )
+        self.assertIn(
+            f"TypeScript elaborator plan: "
+            f"{GIT_ROOT / 'docs' / 'TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md'}",
+            context,
+        )
         self.assertIn("Latest archived final for this session:", context)
         self.assertIn("Latest archived final globally:", context)
         self.assertIn("Recent finals for this session:", context)
         self.assertIn("latest-path --session", context)
         self.assertIn("Recent finals globally:", context)
+        self.assertIn(str(SCRIPT), context)
         self.assertIn("Authority order:", context)
         self.assertNotIn(marker, context)
 
@@ -213,7 +226,7 @@ class InfinityCodexTests(unittest.TestCase):
             "session_id": payload["session_id"],
             "turn_id": "compact-turn",
             "transcript_path": "/unstable/transcript.jsonl",
-            "cwd": str(REPO_ROOT),
+            "cwd": str(EMDASH2_ROOT),
             "hook_event_name": "PostCompact",
             "model": "gpt-test",
             "trigger": "manual",
@@ -234,7 +247,7 @@ class InfinityCodexTests(unittest.TestCase):
             "session_id": payload["session_id"],
             "turn_id": "prompt-turn",
             "transcript_path": "/unstable/transcript.jsonl",
-            "cwd": str(REPO_ROOT),
+            "cwd": str(EMDASH2_ROOT),
             "hook_event_name": "UserPromptSubmit",
             "model": "gpt-test",
             "permission_mode": "default",
@@ -272,7 +285,7 @@ class InfinityCodexTests(unittest.TestCase):
                 "session_id": session_a,
                 "turn_id": "compact-turn-a",
                 "transcript_path": "/unstable/transcript.jsonl",
-                "cwd": str(REPO_ROOT),
+                "cwd": str(EMDASH2_ROOT),
                 "hook_event_name": "PostCompact",
                 "model": "gpt-test",
                 "trigger": "auto",
@@ -286,7 +299,7 @@ class InfinityCodexTests(unittest.TestCase):
             {
                 "session_id": session_b,
                 "transcript_path": "/unstable/transcript.jsonl",
-                "cwd": str(REPO_ROOT),
+                "cwd": str(EMDASH2_ROOT),
                 "hook_event_name": "SessionStart",
                 "model": "gpt-test",
                 "permission_mode": "default",
@@ -307,7 +320,7 @@ class InfinityCodexTests(unittest.TestCase):
                 "session_id": payload["session_id"],
                 "turn_id": "compact-turn",
                 "transcript_path": "/unstable/transcript.jsonl",
-                "cwd": str(REPO_ROOT),
+                "cwd": str(EMDASH2_ROOT),
                 "hook_event_name": "PostCompact",
                 "model": "gpt-test",
                 "trigger": "auto",
@@ -317,7 +330,7 @@ class InfinityCodexTests(unittest.TestCase):
         start_payload = {
             "session_id": payload["session_id"],
             "transcript_path": "/unstable/transcript.jsonl",
-            "cwd": str(REPO_ROOT),
+            "cwd": str(EMDASH2_ROOT),
             "hook_event_name": "SessionStart",
             "model": "gpt-test",
             "permission_mode": "default",
@@ -329,7 +342,7 @@ class InfinityCodexTests(unittest.TestCase):
             "session_id": payload["session_id"],
             "turn_id": "prompt-turn",
             "transcript_path": "/unstable/transcript.jsonl",
-            "cwd": str(REPO_ROOT),
+            "cwd": str(EMDASH2_ROOT),
             "hook_event_name": "UserPromptSubmit",
             "model": "gpt-test",
             "permission_mode": "default",
@@ -371,7 +384,7 @@ class InfinityCodexTests(unittest.TestCase):
         fd, name = tempfile.mkstemp(
             prefix="TMP_INFINITY_CODEX_PLAN_",
             suffix=".md",
-            dir=REPO_ROOT / "reports",
+            dir=EMDASH2_ROOT / "reports",
         )
         report = Path(name)
         try:
@@ -393,6 +406,8 @@ class InfinityCodexTests(unittest.TestCase):
             report.unlink(missing_ok=True)
 
     def test_hook_configuration_has_expected_events(self) -> None:
+        self.assertTrue(HOOKS.exists())
+        self.assertFalse(LEGACY_HOOKS.exists())
         configuration = json.loads(HOOKS.read_text(encoding="utf-8"))
         hooks = configuration["hooks"]
         self.assertEqual(
@@ -405,28 +420,42 @@ class InfinityCodexTests(unittest.TestCase):
             self.assertIn("scripts/infinity_codex.py", command)
             self.assertTrue(command.endswith(" hook"))
             self.assertIn("$PWD", command)
-            self.assertIn(".codex/hooks.json", command)
-            self.assertNotIn("git rev-parse --show-toplevel", command)
+            self.assertIn("git rev-parse --show-toplevel", command)
+            self.assertIn("$repo_root/scripts/infinity_codex.py", command)
+            self.assertNotIn("emdash2/scripts/infinity_codex.py", command)
+            self.assertNotIn(str(GIT_ROOT), command)
 
-    def test_configured_stop_command_resolves_nested_project_root(self) -> None:
+    def test_configured_stop_command_resolves_root_and_package_launches(self) -> None:
         configuration = json.loads(HOOKS.read_text(encoding="utf-8"))
         command = configuration["hooks"]["Stop"][0]["hooks"][0]["command"]
         environment = os.environ.copy()
         environment["INFINITY_CODEX_ARCHIVE_ROOT"] = str(self.archive)
         environment["INFINITY_CODEX_NOW"] = "2026-06-23T12:34:56Z"
-        result = subprocess.run(
-            command,
-            shell=True,
-            cwd=REPO_ROOT / "tests",
-            env=environment,
-            input=json.dumps(self.stop_payload("nested project")).encode("utf-8"),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            check=False,
+        launches = [GIT_ROOT, EMDASH2_ROOT, EMDASH2_ROOT / "tests"]
+        for index, launch in enumerate(launches, start=1):
+            payload = self.stop_payload(
+                f"launch {index}",
+                turn_id=f"turn-launch-{index}",
+            )
+            payload["cwd"] = str(launch)
+            result = subprocess.run(
+                command,
+                shell=True,
+                cwd=launch,
+                env=environment,
+                input=json.dumps(payload).encode("utf-8"),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr.decode())
+            self.assertEqual(json.loads(result.stdout), {"continue": True})
+
+        responses = sorted(self.archive.glob("sessions/*/responses/*.md"))
+        self.assertEqual(
+            [response.read_text(encoding="utf-8") for response in responses],
+            ["launch 1", "launch 2", "launch 3"],
         )
-        self.assertEqual(result.returncode, 0, result.stderr.decode())
-        self.assertEqual(json.loads(result.stdout), {"continue": True})
-        self.assertEqual(self.one_response().read_text(encoding="utf-8"), "nested project")
 
 
 if __name__ == "__main__":

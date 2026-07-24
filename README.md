@@ -92,6 +92,14 @@ When starting Codex from either the root or `emdash2`, the canonical root
 `AGENTS.md` routes the task and the closer `emdash2/AGENTS.md` supplies the
 formal-kernel SOP.
 
+Infinity Codex is also repository-wide. The sole project hook configuration
+is [`.codex/hooks.json`](./.codex/hooks.json), and both root and nested
+launches call the same
+[`scripts/infinity_codex.py`](./scripts/infinity_codex.py) implementation.
+The existing private archive remains under ignored
+`emdash2/tmp/ai-responses/`. After installing or changing the hook, restart
+Codex and use `/hooks` to inspect and trust its current hash.
+
 The book leads with the walking-endomorphism directed higher-inductive
 category `WalkingEnd`: an opaque base object and one directed generating
 endomorphism, equipped with a contextual eliminator rather than a

@@ -17,6 +17,22 @@ The TypeScript elaborator master plan includes a prompt that authorizes a
 narrow class: one dedicated local goal branch/worktree and local validated
 checkpoint commits there.
 
+## Infinity Codex Prerequisite
+
+The Git-root `.codex/hooks.json` and shared `scripts/infinity_codex.py` provide
+one recovery archive for sessions launched from either the root or
+`emdash2`. Before beginning a persistent goal after a hook installation or
+change:
+
+1. start a new Codex session from this trusted repository;
+2. open `/hooks`, inspect the root project hook, and trust its current hash;
+3. run `python3 scripts/infinity_codex.py verify`;
+4. complete a disposable turn and confirm that `list --limit 1` finds it.
+
+A session that predates a hook change cannot acquire the new lifecycle hooks
+retroactively. The archive remains recovery evidence and never overrides
+current code, authorities, or the living plan.
+
 ## Preferred Topology
 
 Use one dedicated branch and worktree for a long-running implementation. This

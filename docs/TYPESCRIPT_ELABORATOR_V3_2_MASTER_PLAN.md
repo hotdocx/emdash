@@ -468,6 +468,10 @@ reusing one dedicated local goal branch/worktree and making local validated
 checkpoint commits there; it does not authorize pushing, merging, publishing,
 rewriting history, or deleting worktrees.
 
+Before pasting it, start a new Codex session from the Git root, review and
+trust the root project hook through `/hooks`, and verify the shared archive as
+described in `PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
+
 ```text
 Kick off or continue implementing
 docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md.
