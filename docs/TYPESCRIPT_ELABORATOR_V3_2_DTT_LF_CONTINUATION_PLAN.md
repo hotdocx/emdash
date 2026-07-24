@@ -36,7 +36,7 @@ complete and awaits its fresh H-DTTLF-02 decision
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`3ee13cf792dfbebe249a95183726e64a318d6e68`
+`1c586a0633433126c8d67f8eca67a42f27ce638e`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -1664,10 +1664,9 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest local implementation checkpoint is
-3ee13cf792dfbebe249a95183726e64a318d6e68. It records the exact
-H-DTTLF-02/DIRECTED-FOUNDATION-2 approval and runtime plus the completed
-DIRECTED-1B five-owner/three-owned-rule integration. DIRECTED-1C's read-only
-inventory and one-owner/zero-rule proposal are now complete. Stop at
+1c586a0633433126c8d67f8eca67a42f27ce638e. It records DIRECTED-1C's
+read-only inventory and exact one-owner/zero-rule proposal on top of the
+completed DIRECTED-1B integration. Stop at
 H-DTTLF-02/DIRECTED-1C; do not integrate its owner or begin product graduation
 before that decision.
 
@@ -1902,3 +1901,10 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   groupoidal closures remain deferred. Quiet and warning-enabled probes, nine
   focused tests, the 380-test TypeScript gate, bounded kernel check, and full
   cross-layer gate pass. No DIRECTED-1C semantic owner has been integrated.
+- **2026-07-24 — DIRECTED-1C proposal checkpointed.** Recorded local
+  checkpoint `1c586a0633433126c8d67f8eca67a42f27ce638e` after the exact
+  staged diff, nine focused tests, complete TypeScript gate, bounded kernel
+  check, full cross-layer gate, header lint, and whitespace audit passed. The
+  checkpoint contains only the non-executable one-owner/zero-rule proposal,
+  tests and exports, and synchronized plan. It is review/backtracking evidence
+  and grants no semantic integration or broader Git authority.
