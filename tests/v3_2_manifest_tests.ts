@@ -1,5 +1,5 @@
 /**
- * Focused TSK-1A tests for the pre-H-03 Core manifest proposal.
+ * Focused TSK-1A/1B tests for the proposal and reviewed Core MVP manifest.
  */
 
 import assert from 'node:assert';
@@ -7,18 +7,25 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, it } from 'node:test';
 import {
+    CORE_MVP_MANIFEST,
     CORE_MVP_MANIFEST_PROPOSAL,
+    CORE_OWNER_TYPE_SCHEMAS,
     CoreManifestProposalInput,
     CoreManifestValidationCode,
     CoreManifestValidationError,
+    CoreMvpManifestInput,
     LAMBDAPI_V32_RULE_EVIDENCE_BINDINGS,
     LambdapiRuleEvidenceCatalogInput,
+    validateCoreMvpManifest,
     validateCoreManifestProposal,
     validateLambdapiRuleEvidenceBindings
 } from '../src/v3_2';
 
 const cloneProposal = (): CoreManifestProposalInput =>
     JSON.parse(JSON.stringify(CORE_MVP_MANIFEST_PROPOSAL));
+
+const cloneMvpManifest = (): CoreMvpManifestInput =>
+    JSON.parse(JSON.stringify(CORE_MVP_MANIFEST));
 
 const expectManifestError = (
     mutate: (proposal: any) => void,
@@ -28,6 +35,22 @@ const expectManifestError = (
     mutate(proposal);
     try {
         validateCoreManifestProposal(proposal);
+    } catch (error: unknown) {
+        assert.ok(error instanceof CoreManifestValidationError);
+        assert.equal(error.code, code);
+        return error;
+    }
+    assert.fail(`Expected CoreManifestValidationError ${code}`);
+};
+
+const expectMvpManifestError = (
+    mutate: (manifest: any) => void,
+    code: CoreManifestValidationCode
+): CoreManifestValidationError => {
+    const manifest = cloneMvpManifest() as any;
+    mutate(manifest);
+    try {
+        validateCoreMvpManifest(manifest);
     } catch (error: unknown) {
         assert.ok(error instanceof CoreManifestValidationError);
         assert.equal(error.code, code);
@@ -550,6 +573,227 @@ describe('TypeScript v3.2 TSK-1A manifest proposal', () => {
                 crossClass as LambdapiRuleEvidenceCatalogInput
             ),
             /expected proof-time-comparison/
+        );
+    });
+});
+
+describe('TypeScript v3.2 TSK-1B reviewed MVP manifest', () => {
+    it('records the exact H-03 approval as a separate frozen revision', () => {
+        assert.equal(CORE_MVP_MANIFEST.status, 'frozen-reviewed');
+        assert.equal(CORE_MVP_MANIFEST.revision, 'emdash-v3.2-mvp-1');
+        assert.equal(CORE_MVP_MANIFEST.ruleSelection, 'closed-world');
+        assert.equal(
+            CORE_MVP_MANIFEST.contentHash,
+            'sha256:' +
+                '28834e9c0361b98e9f14f66f02aac8f59900a98b9c8c1ce1c62ae0e5396f8ff0'
+        );
+        assert.deepEqual(CORE_MVP_MANIFEST.approval, {
+            gate: 'H-03',
+            decision: 'approved-as-proposed',
+            decisionId: 'D-023',
+            reviewedOn: '2026-07-24'
+        });
+        assert.notEqual(
+            CORE_MVP_MANIFEST,
+            CORE_MVP_MANIFEST_PROPOSAL
+        );
+        assert.equal(
+            CORE_MVP_MANIFEST_PROPOSAL.status,
+            'proposal-awaiting-h03'
+        );
+        assert.doesNotThrow(() =>
+            validateCoreMvpManifest(CORE_MVP_MANIFEST)
+        );
+    });
+
+    it('snapshots exactly the reviewed 16 signatures', () => {
+        assert.deepEqual(
+            CORE_MVP_MANIFEST.owners.map(entry => entry.owner),
+            CORE_MVP_MANIFEST_PROPOSAL.recommendation.ownerIds
+        );
+        assert.equal(CORE_MVP_MANIFEST.owners.length, 16);
+
+        for (const entry of CORE_MVP_MANIFEST.owners) {
+            const owner = entry.owner as
+                keyof typeof CORE_OWNER_TYPE_SCHEMAS;
+            assert.deepEqual(
+                entry.signature,
+                CORE_OWNER_TYPE_SCHEMAS[owner]
+            );
+            assert.notEqual(
+                entry.signature,
+                CORE_OWNER_TYPE_SCHEMAS[owner]
+            );
+        }
+    });
+
+    it('freezes exactly three runtime rules and no proof-time rule', () => {
+        assert.deepEqual(
+            CORE_MVP_MANIFEST.rules.map(rule => [
+                rule.id,
+                rule.authority,
+                rule.disposition
+            ]),
+            [
+                [
+                    'projection.functor-hom.evaluate',
+                    'runtime-reduction',
+                    'mvp-candidate'
+                ],
+                [
+                    'projection.transfor-component.evaluate',
+                    'runtime-reduction',
+                    'mvp-candidate'
+                ],
+                [
+                    'projection.transfor-hom.evaluate',
+                    'runtime-reduction',
+                    'mvp-candidate'
+                ]
+            ]
+        );
+        assert.equal(
+            CORE_MVP_MANIFEST.rules.some(
+                rule => rule.authority === 'proof-time-comparison'
+            ),
+            false
+        );
+        assert.equal(
+            CORE_MVP_MANIFEST.rules.some(
+                rule => rule.disposition === 'conformance-evidence'
+            ),
+            false
+        );
+    });
+
+    it('makes the current and deferred trusted-core boundary explicit', () => {
+        assert.deepEqual(
+            CORE_MVP_MANIFEST.trustBoundary
+                .implementedKernelMechanisms,
+            [
+                'core-scope-and-substitution',
+                'structural-signature-checking',
+                'closed-world-manifest-structure-validation'
+            ]
+        );
+        assert.deepEqual(
+            CORE_MVP_MANIFEST.trustBoundary
+                .frozenButDeferredMechanisms,
+            [
+                'runtime-pattern-compilation',
+                'executable-rule-validation',
+                'weak-head-evaluation',
+                'definitional-comparison',
+                'proof-time-comparison'
+            ]
+        );
+        assert.deepEqual(
+            CORE_MVP_MANIFEST.trustBoundary.conformanceOnlyOwnerIds,
+            [
+                'category-of-categories',
+                'opposite-category',
+                'displayed-category-category',
+                'internal-hom-source',
+                'internal-hom-target',
+                'displayed-pullback',
+                'constant-displayed-family',
+                'section-category'
+            ]
+        );
+        assert.deepEqual(
+            CORE_MVP_MANIFEST.trustBoundary.conformanceEvidenceIds,
+            [
+                'comparison.constant-section',
+                'nonconversion.constant-section.runtime'
+            ]
+        );
+    });
+
+    it('remains deeply frozen and backend-neutral', () => {
+        assertDeepFrozen(CORE_MVP_MANIFEST);
+        assert.doesNotMatch(
+            JSON.stringify(CORE_MVP_MANIFEST),
+            /emdash3_2\.lp|fapp0|fapp1_func|tapp0_func|tapp1_func|Pi_cat/
+        );
+    });
+
+    it('rejects status or review-decision drift', () => {
+        assert.match(
+            expectMvpManifestError(
+                manifest => {
+                    manifest.status = 'proposal-awaiting-h03';
+                },
+                'INVALID_FROZEN_STATUS'
+            ).message,
+            /reviewed MVP revision/
+        );
+        assert.match(
+            expectMvpManifestError(
+                manifest => {
+                    manifest.approval.decision = 'revised';
+                },
+                'INVALID_REVIEW_APPROVAL'
+            ).message,
+            /exact H-03 approval/
+        );
+    });
+
+    it('rejects owner-order and signature drift', () => {
+        assert.match(
+            expectMvpManifestError(
+                manifest => {
+                    manifest.owners[0].owner = 'category-universe';
+                },
+                'FROZEN_OWNER_MISMATCH'
+            ).message,
+            /expected order 0/
+        );
+        assert.match(
+            expectMvpManifestError(
+                manifest => {
+                    manifest.owners[1].signature.result = {
+                        tag: 'slot',
+                        name: 'missing'
+                    };
+                },
+                'FROZEN_SIGNATURE_MISMATCH'
+            ).message,
+            /differs/
+        );
+    });
+
+    it('rejects rule or trusted-boundary drift', () => {
+        assert.match(
+            expectMvpManifestError(
+                manifest => {
+                    manifest.rules[0].id =
+                        'comparison.constant-section';
+                },
+                'FROZEN_RULE_MISMATCH'
+            ).message,
+            /differs/
+        );
+        assert.match(
+            expectMvpManifestError(
+                manifest => {
+                    manifest.trustBoundary
+                        .frozenButDeferredMechanisms.pop();
+                },
+                'TRUST_BOUNDARY_MISMATCH'
+            ).message,
+            /differs/
+        );
+    });
+
+    it('rejects an unreviewed content-hash revision', () => {
+        assert.match(
+            expectMvpManifestError(
+                manifest => {
+                    manifest.contentHash = 'sha256:' + '0'.repeat(64);
+                },
+                'FROZEN_CONTENT_HASH_MISMATCH'
+            ).message,
+            /differs from reviewed revision/
         );
     });
 });

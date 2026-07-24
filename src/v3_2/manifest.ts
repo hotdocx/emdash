@@ -1,11 +1,13 @@
 /**
  * Reviewable, backend-neutral signature and rule-manifest vocabulary.
  *
- * TSK-1A records data and validates its shape only. Nothing in this module
- * matches a rule, evaluates a term, or grants proof-time comparison powers to
- * the structural checker.
+ * TSK-1A records the pre-review proposal. TSK-1B preserves that proposal as
+ * audit evidence and exposes a separate reviewed, frozen product profile.
+ * Nothing in this module matches a rule, evaluates a term, or grants
+ * proof-time comparison powers to the structural checker.
  */
 
+import { createHash } from 'node:crypto';
 import {
     CORE_OWNER_SCHEMAS,
     CoreOwnerId
@@ -156,8 +158,47 @@ export interface CoreManifestProposalInput {
     readonly recommendation: CoreManifestRecommendationInput;
 }
 
+export interface CoreManifestApprovalInput {
+    readonly gate: string;
+    readonly decision: string;
+    readonly decisionId: string;
+    readonly reviewedOn: string;
+}
+
+export interface CoreMvpOwnerSignatureInput {
+    readonly order: number;
+    readonly owner: string;
+    readonly signature: CoreOwnerTypeSchema;
+}
+
+/**
+ * Machine-readable boundary between the reviewed product profile, mechanisms
+ * that exist but are not yet implemented for that profile, and surrounding
+ * elaboration/conformance infrastructure.
+ */
+export interface CoreMvpTrustBoundaryInput {
+    readonly implementedKernelMechanisms: readonly string[];
+    readonly frozenButDeferredMechanisms: readonly string[];
+    readonly outsideTrustedKernel: readonly string[];
+    readonly conformanceOnlyOwnerIds: readonly string[];
+    readonly conformanceEvidenceIds: readonly string[];
+}
+
+export interface CoreMvpManifestInput {
+    readonly status: string;
+    readonly revision: string;
+    readonly ruleSelection: string;
+    readonly approval: CoreManifestApprovalInput;
+    readonly owners: readonly CoreMvpOwnerSignatureInput[];
+    readonly rules: readonly CoreManifestRuleInput[];
+    readonly trustBoundary: CoreMvpTrustBoundaryInput;
+    readonly contentHash: string;
+}
+
 export type CoreManifestValidationCode =
     | 'INVALID_PROPOSAL_STATUS'
+    | 'INVALID_FROZEN_STATUS'
+    | 'INVALID_REVIEW_APPROVAL'
     | 'UNKNOWN_CONSUMER'
     | 'EMPTY_CONSUMER_COVERAGE'
     | 'UNKNOWN_OWNER'
@@ -182,7 +223,12 @@ export type CoreManifestValidationCode =
     | 'DUPLICATE_RULE_EVIDENCE'
     | 'INCOMPLETE_RULE_PROVENANCE'
     | 'RULE_FAMILY_ORDER_MISMATCH'
-    | 'RECOMMENDATION_MISMATCH';
+    | 'RECOMMENDATION_MISMATCH'
+    | 'FROZEN_OWNER_MISMATCH'
+    | 'FROZEN_SIGNATURE_MISMATCH'
+    | 'FROZEN_RULE_MISMATCH'
+    | 'TRUST_BOUNDARY_MISMATCH'
+    | 'FROZEN_CONTENT_HASH_MISMATCH';
 
 export class CoreManifestValidationError extends Error {
     constructor(
@@ -1403,7 +1449,261 @@ const deepFreeze = <T>(value: T): T => {
 validateCoreManifestProposal(rawProposal);
 
 /**
- * The exact TSK-1A recommendation. This remains a proposal until H-03; the
- * object is deeply frozen so later phases cannot acquire rules by mutation.
+ * The exact TSK-1A review input. It remains an immutable proposal as audit
+ * evidence even after H-03; product-kernel consumers must use the separately
+ * reviewed `CORE_MVP_MANIFEST`.
  */
 export const CORE_MVP_MANIFEST_PROPOSAL = deepFreeze(rawProposal);
+
+const mvpRevision = 'emdash-v3.2-mvp-1';
+
+const expectedApproval: CoreManifestApprovalInput = {
+    gate: 'H-03',
+    decision: 'approved-as-proposed',
+    decisionId: 'D-023',
+    reviewedOn: '2026-07-24'
+};
+
+const implementedKernelMechanisms = [
+    'core-scope-and-substitution',
+    'structural-signature-checking',
+    'closed-world-manifest-structure-validation'
+] as const;
+
+const frozenButDeferredMechanisms = [
+    'runtime-pattern-compilation',
+    'executable-rule-validation',
+    'weak-head-evaluation',
+    'definitional-comparison',
+    'proof-time-comparison'
+] as const;
+
+const outsideTrustedKernel = [
+    'surface-and-macro-elaboration',
+    'elaboration-metavariables-and-constraints',
+    'conformance-only-owner-signatures',
+    'conformance-evidence-rules',
+    'lambdapi-backend'
+] as const;
+
+const cloneManifestData = <T>(value: T): T =>
+    JSON.parse(JSON.stringify(value)) as T;
+
+const sameManifestData = (left: unknown, right: unknown): boolean =>
+    JSON.stringify(left) === JSON.stringify(right);
+
+const frozenCandidateOwnerIds = CORE_MVP_MANIFEST_PROPOSAL
+    .recommendation.ownerIds;
+
+const frozenCandidateRules = CORE_MVP_MANIFEST_PROPOSAL.rules.filter(
+    rule => rule.disposition === 'mvp-candidate'
+);
+
+const conformanceOnlyOwnerIds = CORE_MVP_MANIFEST_PROPOSAL.owners
+    .filter(owner => owner.membership === 'conformance-only')
+    .map(owner => owner.owner);
+
+const conformanceEvidenceIds = CORE_MVP_MANIFEST_PROPOSAL.rules
+    .filter(rule => rule.disposition === 'conformance-evidence')
+    .map(rule => rule.id);
+
+const rawMvpManifestContent: Omit<
+    CoreMvpManifestInput,
+    'contentHash'
+> = {
+    status: 'frozen-reviewed',
+    revision: mvpRevision,
+    ruleSelection: 'closed-world',
+    approval: expectedApproval,
+    owners: frozenCandidateOwnerIds.map((owner, order) => ({
+        order,
+        owner,
+        signature: cloneManifestData(
+            CORE_OWNER_TYPE_SCHEMAS[owner as CoreOwnerId]
+        )
+    })),
+    rules: cloneManifestData(frozenCandidateRules),
+    trustBoundary: {
+        implementedKernelMechanisms,
+        frozenButDeferredMechanisms,
+        outsideTrustedKernel,
+        conformanceOnlyOwnerIds,
+        conformanceEvidenceIds
+    }
+};
+
+const reviewedMvpContentHash =
+    'sha256:28834e9c0361b98e9f14f66f02aac8f59900a98b9c8c1ce1c62ae0e5396f8ff0';
+
+const rawMvpManifest: CoreMvpManifestInput = {
+    ...rawMvpManifestContent,
+    contentHash: reviewedMvpContentHash
+};
+
+const coreMvpContentHash = (
+    manifest: CoreMvpManifestInput
+): string => {
+    const { contentHash: _contentHash, ...content } = manifest;
+    return 'sha256:' + createHash('sha256')
+        .update(JSON.stringify(content))
+        .digest('hex');
+};
+
+const validateFrozenOwners = (
+    owners: readonly CoreMvpOwnerSignatureInput[]
+): void => {
+    if (owners.length !== frozenCandidateOwnerIds.length) {
+        throw new CoreManifestValidationError(
+            'FROZEN_OWNER_MISMATCH',
+            `Frozen MVP manifest has ${owners.length} owners, expected ` +
+            frozenCandidateOwnerIds.length
+        );
+    }
+
+    owners.forEach((entry, order) => {
+        const expectedOwner = frozenCandidateOwnerIds[order];
+        if (
+            entry.order !== order ||
+            entry.owner !== expectedOwner
+        ) {
+            throw new CoreManifestValidationError(
+                'FROZEN_OWNER_MISMATCH',
+                `Frozen MVP owner ${order} is order ${entry.order} ` +
+                `'${entry.owner}', expected order ${order} ` +
+                `'${expectedOwner}'`
+            );
+        }
+        if (
+            !isOwnerId(entry.owner) ||
+            !sameManifestData(
+                entry.signature,
+                CORE_OWNER_TYPE_SCHEMAS[entry.owner]
+            )
+        ) {
+            throw new CoreManifestValidationError(
+                'FROZEN_SIGNATURE_MISMATCH',
+                `Frozen MVP signature for '${entry.owner}' differs from the ` +
+                'reviewed Core owner signature'
+            );
+        }
+    });
+};
+
+const validateFrozenRules = (
+    rules_: readonly CoreManifestRuleInput[]
+): void => {
+    if (rules_.length !== frozenCandidateRules.length) {
+        throw new CoreManifestValidationError(
+            'FROZEN_RULE_MISMATCH',
+            `Frozen MVP manifest has ${rules_.length} rules, expected ` +
+            frozenCandidateRules.length
+        );
+    }
+
+    rules_.forEach((rule, order) => {
+        const expectedRule = frozenCandidateRules[order];
+        if (!sameManifestData(rule, expectedRule)) {
+            throw new CoreManifestValidationError(
+                'FROZEN_RULE_MISMATCH',
+                `Frozen MVP rule ${order} '${rule.id}' differs from reviewed ` +
+                `rule '${expectedRule.id}'`
+            );
+        }
+        if (
+            rule.disposition !== 'mvp-candidate' ||
+            rule.authority !== 'runtime-reduction'
+        ) {
+            throw new CoreManifestValidationError(
+                'FROZEN_RULE_MISMATCH',
+                `Frozen MVP rule '${rule.id}' must be an approved runtime ` +
+                'candidate'
+            );
+        }
+    });
+};
+
+const validateTrustBoundary = (
+    boundary: CoreMvpTrustBoundaryInput
+): void => {
+    const expected: CoreMvpTrustBoundaryInput =
+        rawMvpManifestContent.trustBoundary;
+    if (
+        !sameStrings(
+            boundary.implementedKernelMechanisms,
+            expected.implementedKernelMechanisms
+        ) ||
+        !sameStrings(
+            boundary.frozenButDeferredMechanisms,
+            expected.frozenButDeferredMechanisms
+        ) ||
+        !sameStrings(
+            boundary.outsideTrustedKernel,
+            expected.outsideTrustedKernel
+        ) ||
+        !sameStrings(
+            boundary.conformanceOnlyOwnerIds,
+            expected.conformanceOnlyOwnerIds
+        ) ||
+        !sameStrings(
+            boundary.conformanceEvidenceIds,
+            expected.conformanceEvidenceIds
+        )
+    ) {
+        throw new CoreManifestValidationError(
+            'TRUST_BOUNDARY_MISMATCH',
+            'Frozen MVP trusted-core boundary differs from reviewed D-023'
+        );
+    }
+};
+
+/**
+ * Validate the exact H-03-reviewed product profile without compiling,
+ * matching, or evaluating any rule.
+ */
+export function validateCoreMvpManifest(
+    manifest: CoreMvpManifestInput
+): void {
+    validateCoreManifestProposal(CORE_MVP_MANIFEST_PROPOSAL);
+    if (
+        manifest.status !== 'frozen-reviewed' ||
+        manifest.revision !== mvpRevision ||
+        manifest.ruleSelection !== 'closed-world'
+    ) {
+        throw new CoreManifestValidationError(
+            'INVALID_FROZEN_STATUS',
+            'TSK-1B manifest must be the closed-world reviewed MVP revision'
+        );
+    }
+    if (!sameManifestData(manifest.approval, expectedApproval)) {
+        throw new CoreManifestValidationError(
+            'INVALID_REVIEW_APPROVAL',
+            'TSK-1B manifest requires the exact H-03 approval of D-023'
+        );
+    }
+    validateFrozenOwners(manifest.owners);
+    validateFrozenRules(manifest.rules);
+    validateTrustBoundary(manifest.trustBoundary);
+    if (
+        manifest.contentHash !== reviewedMvpContentHash ||
+        coreMvpContentHash(manifest) !== reviewedMvpContentHash
+    ) {
+        throw new CoreManifestValidationError(
+            'FROZEN_CONTENT_HASH_MISMATCH',
+            'Frozen MVP content differs from reviewed revision ' +
+            `${mvpRevision}`
+        );
+    }
+}
+
+validateCoreMvpManifest(rawMvpManifest);
+
+/**
+ * The H-03-reviewed product profile. Its signature snapshots and three
+ * runtime rule declarations are immutable. Runtime pattern compilation,
+ * executable-rule validation, evaluation, and comparison remain TSK-2 work.
+ *
+ * The general structural checker and the Lambdapi backend remain conformance
+ * supersets; inclusion there does not grant an owner or rule membership in
+ * this closed-world product profile.
+ */
+export const CORE_MVP_MANIFEST = deepFreeze(rawMvpManifest);
