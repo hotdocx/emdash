@@ -13,7 +13,7 @@ import {
     formatSourceSpan,
     kernelApplication,
     kernelExpressionEquals,
-    kernelLocal,
+    kernelFree,
     provenance
 } from './kernel';
 import { serializeKernelExpression } from './lambdapi';
@@ -430,7 +430,7 @@ export function elaborateSurfaceTerm(
                 );
             }
             return {
-                term: kernelLocal(
+                term: kernelFree(
                     binding.name,
                     surfaceProvenance(
                         `surface reference ${binding.name}`,

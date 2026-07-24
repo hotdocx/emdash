@@ -10,7 +10,7 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Status: active living master plan; ELAB-1C is complete and ELAB-2A0 is the
+Status: active living master plan; ELAB-2A0 is complete and ELAB-2A1 is the
 next dependency-ready implementation slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
@@ -165,6 +165,7 @@ cleanly.
 | D-013 | accepted | Core owner identifiers and slot telescopes are backend-neutral; active Lambdapi names, modules, and source provenance live only in the conformance-backend catalog. Surface projection constructors lower through generic operation records rather than owner-named union branches. | ELAB-1A preserves all three ELAB-0 targets, adds `tapp0_fapp0`, and passes positive/negative Lambdapi probes through this split. |
 | D-014 | accepted | Treat a rigid object, hom arrow, or ordinary transfor uniformly through its recursively recovered object-category. Record full, capped, and evaluator owners separately; higher-cell action is recursive reuse of the ordinary full hom schema. | ELAB-1B represents `Hom_cat` and `Transf_cat` as semantic category formers, passes the two-level 2-cell consumer without `fapp2`, rejects the wrong inner hom at its source span, and verifies all three active evaluator conversions in Lambdapi. |
 | D-015 | accepted | Decode an object produced by generic `fapp0` from its target category former into the richest rigid Core view currently known. In particular, an object of `Catd_cat(K)` remains an ordinary `K → Cat_cat` functor, while opposite-category membership uses only the active `Obj(Op_cat A) ↪ Obj A` classifier equation and does not identify `A` with `Op_cat A`. | ELAB-1C retains both internal-Hom families after their first object projection, reuses ordinary `fapp0` for the later projection, verifies the distinct `Hom_A(W,Fb)` and `Hom_A(Fb,W)` normal forms in Lambdapi, and rejects both a wrong base object and a variance-reversed conversion. |
+| D-016 | accepted | Use a locally nameless Core: named references denote free declarations, De Bruijn indices denote bound occurrences, and binder names are nonsemantic display hints. Structural equality is alpha-invariant; shift/substitution is index-based and capture-safe; the Lambdapi backend generates canonical noncapturing names. | ELAB-2A0 distinguishes same-spelled free/bound terms, handles shadowing and dependent binder types, rejects dangling/downward-escaping indices, composes ordered instantiation, and emits an alpha-canonical identity accepted by Lambdapi. Plicity and variation remain distinct Core metadata; only plicity has direct Lambdapi binder syntax. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -282,7 +283,7 @@ oracle**, or **delete**.
 | Holes/metavariables and occurs check | reimplement behind per-session state | Scope escape, occurs, solution determinism, and error-location tests |
 | Higher-order pattern unification | port only after Core binder representation stabilizes | Positive pattern cases and negative non-pattern boundary |
 | Rewrite versus unification-rule separation | reimplement as explicit rule classes | Rule validation plus runtime/proof-time differential cases |
-| Capture-avoiding substitution and shifting | audit, then port or replace | Binder, shadowing, and substitution composition tests |
+| Capture-avoiding substitution and shifting | reimplemented in ELAB-2A0 | Locally nameless binder, shadowing, dependent-type, escape, and ordered-composition tests are green |
 | Proof-state traversal | retain as evidence, then reimplement generically | No dependency on old category node tags |
 | Direct TypeScript constructors | port | Source-location and macro-expansion tests |
 | Existing category constructors/rules | delete after replacement coverage is recorded | No compatibility requirement; retain only independently generic tests |
@@ -337,10 +338,11 @@ must identify their common baseline.
 | ELAB-1B | complete | ELAB-1A | Variable operation telescopes, explicit full/capped/evaluator pairs, recursive object-category recovery, all three full owners, the recursive 2-cell stress case, wrong-inner-hom rejection, and bounded evaluator-conversion probes are green. |
 | ELAB-1C | complete | ELAB-1B | Backend-neutral `hom_int`/`hom_con_int` constructors, category-former object decoding, two retained Hom-valued functors, exact variance conversions, wrong-base rejection, and a reversed-variance Lambdapi negative are green. |
 | ELAB-2A | split | ELAB-1 schema stability | The former all-in-one scope/meta/checker tranche is split into ELAB-2A0 through ELAB-2A2 so each checkpoint owns one reviewable semantic claim. |
-| ELAB-2A0 | next / dependency-ready | ELAB-1C | Stabilize bound-variable identity in Core and implement alpha-invariant comparison plus capture-safe shift/substitution, with binder-mode, shadowing, free-variable, and composition negatives. |
-| ELAB-2A1 | pending | ELAB-2A0 | Add a per-session scope, metavariable, and constraint store with deterministic fresh identities, scope-escape rejection, occurs checking, and solution-isolation tests. |
-| ELAB-2A2 | pending | ELAB-2A1 | Add the bounded bidirectional Pi/lambda/application checker and schema-driven implicit insertion over Core, including ambiguity and source-located mismatch negatives. |
-| ELAB-2B | pending | ELAB-2A2 | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
+| ELAB-2A0 | complete | ELAB-1C | Locally nameless free/bound variables, alpha-invariant equality, capture-safe shift/substitution/instantiation, scope validation, canonical backend naming, and a Lambdapi-accepted dependent binder probe are green. |
+| ELAB-2A1 | next / dependency-ready | ELAB-2A0 | Add an immutable session-owned declaration context and dependent local telescope over Core, with deterministic lookup, extension, shadowing, lifting, and source-located duplicate/unbound/scope negatives. |
+| ELAB-2A2 | pending | ELAB-2A1 | Add per-session metavariable and constraint stores with deterministic identities, scope-escape rejection, occurs checking, solution isolation, and ambiguity evidence. |
+| ELAB-2A3 | pending | ELAB-2A2 | Add the bounded bidirectional Pi/lambda/application checker and schema-driven implicit insertion over Core, including source-located mismatch negatives. |
+| ELAB-2B | pending | ELAB-2A3 | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
 | ELAB-2C | pending | ELAB-2B | Exercise weakening, permitted/forbidden exchange, and contraction. Record missing displayed owners with consumer probes; do not yet assume kernel promotion. |
 | KERNEL-DISPLAYED-1 | conditional | ELAB-2C failure evidence | If a concrete uniform elaboration consumer cannot be expressed, design and probe the smallest displayed structural owner package under the v3.2 SOP, including degeneration/comparison and non-collapse cases. Human review is required before promotion. |
 | KERNEL-DISPLAYED-2 | conditional | reviewed KERNEL-DISPLAYED-1 | Promote only reviewed kernel changes with diagnostics, warning comparison, audits, catalogs, health, examples, and CI synchronized. |
@@ -576,30 +578,107 @@ Plan rows changed: D-015 accepted; C-09 and C-10 complete; ELAB-1C complete;
 Remaining prerequisite or human review: none for this bounded slice.
 ```
 
-## Immediate Slice: ELAB-2A0
+## Completed Slice: ELAB-2A0
 
-The next slice makes the Core binder decision that previously blocked
-ELAB-2A. It is deliberately limited to binding structure and structural term
-operations:
+ELAB-2A0 introduced:
 
-1. inventory the current v3.2 named-reference/binder representation and the
-   reusable alpha/substitution evidence in the legacy prototype without
-   importing its stale term union or global state;
-2. choose and record a stable distinction between free declaration references
-   and bound variables; binder display names and provenance must not determine
-   identity;
-3. implement alpha-invariant structural comparison and capture-safe
-   shifting/substitution over owner applications, Pi types, and lambdas;
-4. preserve plicity and variation metadata and deterministic Lambdapi
-   serialization, using generated display names only at the backend boundary;
-5. add positive alpha/shadowing/substitution-composition cases and negatives
-   for free-variable confusion, escaping indices, and binder-mode mismatch;
+- a locally nameless Core boundary: named `reference` nodes are free
+  declarations and a distinct `bound` node carries a nonnegative De Bruijn
+  index;
+- nonsemantic binder display hints, with plicity and variation retained as
+  independent metadata;
+- alpha-invariant structural equality and uniform capture-safe shift,
+  substitution, nearest-binder instantiation, and scope validation across
+  owner applications, Pi types, and lambdas;
+- deterministic Lambdapi serialization that rejects dangling variables and
+  generates canonical binder names reserved away from every free declaration
+  and backend owner name;
+- durable cases for shadowing, dependent binder types, ordered telescope
+  instantiation, same-spelled free/bound separation, mode mismatch, invalid
+  indices, downward escape, and safe-integer overflow.
+
+The legacy HOAS bodies, name-opening equality, mutable holes, and global fresh
+counter remain isolated in the old prototype. No old term node or global state
+was imported into the v3.2 Core.
+
+### Experiment ELAB-2A0-LOCALLY-NAMELESS
+
+```text
+Experiment ID: ELAB-2A0-LOCALLY-NAMELESS
+Date and checkpoint: 2026-07-23 at ELAB-1C checkpoint 60e5274
+Question/hypothesis: separating named free declarations from De Bruijn-indexed
+  bound occurrences makes alpha-equivalence structural and supports
+  capture-safe shift/substitution without global fresh-name state, while the
+  Lambdapi backend can generate deterministic readable binder names.
+Authority and owner position inspected: the current v3_2 KernelExpression,
+  binder modes, and Lambdapi serializer; active Lambdapi Pi/lambda syntax and
+  ordered dependent telescopes; canonical-syntax telescope order; the legacy
+  HOAS/name-opening equality, name-based substitution, global fresh counter,
+  and their alpha/capture tests as non-authoritative implementation evidence.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on goal/typescript-elaborator-v3.2 at
+  60e5274; descendant of baseline a06433e.
+Minimal positive consumer: alpha-renamed nested Pi/lambda terms compare
+  structurally, serialize identically with generated binder names, and a
+  closed ordinary and dependent identity lambda are accepted by Lambdapi.
+Relevant negative/non-collapse consumer: distinguish a same-spelled free
+  declaration from bound index zero; reject a dangling or downward-escaping
+  bound index; keep plicity/variation mismatch structurally unequal.
+Probe command and bounded result:
+  node --require ts-node/register --test tests/v3_2_core_binder_tests.ts
+    passed 9, skipped 1 opt-in probe.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 with the same command
+    passed 10/10; alpha-canonical ordinary and dependent identity binders were
+    accepted by Lambdapi.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 over all three v3_2 focused files
+    passed 36/36, including every earlier owner/conversion/negative probe.
+  ./scripts/pnpmw run check:ts
+    passed 188 tests / 46 suites: 180 passed, 8 opt-in probes skipped.
+  EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+    passed the active kernel, four one-way extensions, and diagnostics.
+  EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+    passed the root gate; all 41 active Lambdapi kernel/example targets;
+    39 formal infrastructure tests; 5 print registry tests; active-reference,
+    report-header, book/evidence/typography/KaTeX checks; strict rule-LHS
+    audit; and generated catalog freshness.
+Warning/audit/catalog/health effects, if any: no Lambdapi declaration or rule
+  changed; this is a backend-neutral Core representation decision.
+Decision: accept. Owner applications and dependent binder types traverse
+  uniformly, names are unnecessary for bound identity, and canonical backend
+  naming preserves closed terms. Plicity remains backend-visible; variation
+  remains Core/elaboration metadata because active Lambdapi has no
+  corresponding binder annotation.
+Plan rows changed: D-016 accepted; capture-safe substitution inventory
+  complete; ELAB-2A0 complete. ELAB-2A1 was narrowed to the immutable context
+  claim, metavariables moved to ELAB-2A2, bidirectional checking moved to
+  ELAB-2A3, and ELAB-2A1 is dependency-ready.
+Remaining prerequisite or human review: none for this bounded slice.
+```
+
+## Immediate Slice: ELAB-2A1
+
+The next slice builds the immutable context layer on the locally nameless
+foundation:
+
+1. inventory the current `SurfaceContext` and legacy `Context` lookup,
+   extension, shadowing, and global-state behavior as implementation evidence;
+2. add a session-owned Core declaration environment and dependent local
+   telescope without importing the legacy `Term`, globals, or mutable rule
+   registries;
+3. validate every declaration type and local binder type at its owning depth,
+   and define deterministic lookup results containing the correct bound index
+   and lifted dependent type;
+4. keep free declaration identity distinct from local shadowing, preserve
+   binder modes and provenance, and make extension persistent rather than
+   mutating earlier contexts;
+5. pass lookup/extension/shadowing/dependency consumers plus duplicate free
+   declaration, unbound name, and escaping local-type negatives at their
+   originating spans;
 6. run focused tests, `check:ts`, the bounded kernel check, and the
    proportional repository gate before synchronizing the experiment record.
 
-Do not add metavariable mutation, constraint solving, bidirectional checking,
-displayed-context owners, or legacy category compatibility in ELAB-2A0.
-Those belong to the dependency-ordered follow-up slices.
+Do not add metavariables, constraint solving, bidirectional checking,
+displayed-category owners, or legacy category compatibility in ELAB-2A1.
 
 ## Human Review Gates
 

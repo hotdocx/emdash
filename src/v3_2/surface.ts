@@ -16,7 +16,7 @@ import {
     formatSourceSpan,
     kernelApplication,
     kernelExpressionEquals,
-    kernelLocal,
+    kernelFree,
     provenance
 } from './kernel';
 import { SurfaceOperationId } from './schema';
@@ -432,7 +432,7 @@ export class SurfaceContext {
                 );
             }
 
-            const reference = kernelLocal(
+            const reference = kernelFree(
                 binding.name,
                 provenance(
                     'surface',

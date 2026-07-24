@@ -7,8 +7,8 @@
  */
 
 import {
-    KernelBinder,
-    KernelExpression
+    KernelExpression,
+    kernelAssertScoped
 } from './kernel';
 import {
     CoreOwnerId
@@ -151,22 +151,70 @@ export const LAMBDAPI_V32_OWNER_BINDINGS = {
     )
 } as const satisfies Record<CoreOwnerId, LambdapiOwnerBinding>;
 
-const parenthesize = (expression: KernelExpression): string =>
-    expression.tag === 'reference'
-        ? serializeKernelExpression(expression)
-        : `(${serializeKernelExpression(expression)})`;
+interface SerializationState {
+    nextBoundName: number;
+    reservedNames: Set<string>;
+}
 
-const serializeBinder = (binder: KernelBinder): string => {
-    const typed = `${binder.name} : ${serializeKernelExpression(binder.type)}`;
-    return binder.mode.plicity === 'implicit' ? `[${typed}]` : `(${typed})`;
-};
+function collectFreeReferenceNames(
+    expression: KernelExpression,
+    names: Set<string>
+): void {
+    switch (expression.tag) {
+        case 'reference':
+            names.add(expression.name);
+            return;
+        case 'bound':
+            return;
+        case 'application':
+            expression.arguments.forEach(argument =>
+                collectFreeReferenceNames(argument.value, names)
+            );
+            return;
+        case 'pi':
+        case 'lambda':
+            collectFreeReferenceNames(expression.binder.type, names);
+            collectFreeReferenceNames(expression.body, names);
+            return;
+        default: {
+            const exhaustive: never = expression;
+            return exhaustive;
+        }
+    }
+}
 
-export function serializeKernelExpression(
-    expression: KernelExpression
+function freshBoundName(state: SerializationState): string {
+    while (true) {
+        const candidate = `v${state.nextBoundName++}`;
+        if (state.reservedNames.has(candidate)) continue;
+        state.reservedNames.add(candidate);
+        return candidate;
+    }
+}
+
+function serializeExpression(
+    expression: KernelExpression,
+    state: SerializationState,
+    boundNames: readonly string[]
 ): string {
+    const parenthesize = (child: KernelExpression): string =>
+        child.tag === 'reference' || child.tag === 'bound'
+            ? serializeExpression(child, state, boundNames)
+            : `(${serializeExpression(child, state, boundNames)})`;
+
     switch (expression.tag) {
         case 'reference':
             return expression.name;
+        case 'bound': {
+            const name = boundNames[expression.index];
+            if (name === undefined) {
+                throw new Error(
+                    `Internal serializer scope mismatch for bound index ` +
+                    expression.index
+                );
+            }
+            return name;
+        }
         case 'application': {
             const backend = LAMBDAPI_V32_OWNER_BINDINGS[expression.owner];
             const hasImplicitArguments = expression.arguments.some(
@@ -183,14 +231,46 @@ export function serializeKernelExpression(
             ].join(' ');
         }
         case 'pi':
-            return `Π ${serializeBinder(expression.binder)}, ` +
-                serializeKernelExpression(expression.body);
-        case 'lambda':
-            return `λ ${serializeBinder(expression.binder)}, ` +
-                serializeKernelExpression(expression.body);
+        case 'lambda': {
+            const boundName = freshBoundName(state);
+            const typed =
+                `${boundName} : ` +
+                serializeExpression(
+                    expression.binder.type,
+                    state,
+                    boundNames
+                );
+            const binder = expression.binder.mode.plicity === 'implicit'
+                ? `[${typed}]`
+                : `(${typed})`;
+            const body = serializeExpression(
+                expression.body,
+                state,
+                [boundName, ...boundNames]
+            );
+            const head = expression.tag === 'pi' ? 'Π' : 'λ';
+            return `${head} ${binder}, ${body}`;
+        }
         default: {
             const exhaustive: never = expression;
             return exhaustive;
         }
     }
+}
+
+export function serializeKernelExpression(
+    expression: KernelExpression
+): string {
+    kernelAssertScoped(expression);
+    const reservedNames = new Set(
+        Object.values(LAMBDAPI_V32_OWNER_BINDINGS).map(
+            owner => owner.serializedName
+        )
+    );
+    collectFreeReferenceNames(expression, reservedNames);
+    return serializeExpression(
+        expression,
+        { nextBoundName: 0, reservedNames },
+        []
+    );
 }
