@@ -42,6 +42,7 @@ import './v3_2_runtime_rewrite_tests';
 import './v3_2_conversion_tests';
 import './v3_2_metatheory_review_tests';
 import './v3_2_differential_owner_tests';
+import './v3_2_differential_rule_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,
