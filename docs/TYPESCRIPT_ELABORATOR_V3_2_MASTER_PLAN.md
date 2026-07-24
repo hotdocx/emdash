@@ -1,6 +1,6 @@
 # TypeScript Elaborator/Kernel For emdash v3.2 — Living Master Plan
 
-Date: 2026-07-23
+Date: 2026-07-24
 Plan-ID: TS-ELAB-V3.2
 Depends-On: active emdash v3.2 authorities and the completed ELAB-0 wiring
 slice
@@ -10,8 +10,9 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Status: active living master plan; ELAB-2A3B is complete and ELAB-2B is the
-next dependency-ready implementation slice
+Status: active living master plan; ELAB-2B is complete, its H-01
+recommendation awaits human review, and independent TSK-1A is the next
+dependency-ready implementation slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -156,7 +157,7 @@ cleanly.
 | D-004 | accepted | Make the TypeScript checker/evaluator the intended product path; keep Lambdapi optional at runtime and mandatory as a conformance oracle until graduation. | ELAB-0 proves integration, not TypeScript parity. |
 | D-005 | accepted | Describe families of owners with recursive classifier/projection schemas rather than adding one surface tag per Lambdapi symbol. | Full/capped projections and higher cells repeat the same owner pattern recursively. |
 | D-006 | accepted | There is no special `fapp2`: a 2-cell is acted on by applying the ordinary `fapp1_func` schema to the hom functor obtained from the preceding `fapp1_func`. | This preserves the active iterated-hom architecture. |
-| D-007 | experimental | Start the context/type/term design from displayed/dependent structure, then recover ordinary structure as a constant-family specialization where justified. | TypeScript elaboration is intrinsically contextual, but the exact uniform representation and reductions require probes. |
+| D-007 | recommended; H-01 pending | Start the context/type/term design from displayed/dependent structure, then recover ordinary structure only through an authority-classified constant-family specialization. | ELAB-2B represents context, displayed type, substitution, and section uniformly through three new semantic owners and the existing checker. General families have no ordinary route; constant sections are only proof-time comparable with ordinary functors, so dependent-first avoids both eager nondependence detection and a false runtime collapse. Human H-01 review is still required before ELAB-2C. |
 | D-008 | accepted | Separate four notions of structural action: meta-level telescope operations, internal ordinary structural functors, displayed structural owners, and shape reindexing. | Naive exchange or contraction is not generally valid in a dependent telescope. |
 | D-009 | accepted | Every displayed-to-ordinary comparison must be classified as runtime reduction, proof-time unification, explicit theorem/path, or intentional non-collapse. | Existing bridges do not justify blanket definitional equality. |
 | D-010 | accepted | Kernel additions are consumer-led. Missing displayed operations are first recorded as failed owner-position probes; only the smallest coherent owner package may be promoted. | Required by the active v3.2 SOP and warning/subject-reduction discipline. |
@@ -170,6 +171,7 @@ cleanly.
 | D-018 | accepted | Represent an elaboration metavariable by an opaque per-session identity, deterministic session-local ordinal, and explicit contextual De Bruijn substitution spine. Keep its type and single-assignment solution only in the owning session; solve only canonical identity occurrences in this bounded tranche, reject raw metas at the backend, and leave distinct flex-flex constraints explicitly stuck. | ELAB-2A2 reindexes contextual occurrences through shift/substitution and beneath internal binders, zonks transitively, rejects direct/transitive occurs cycles, scope escape, foreign identities, and noncanonical solving, revisits ordered constraints after progress, and emits a solved result accepted by Lambdapi without importing legacy mutable holes or globals. |
 | D-019 | accepted | Give explicit Core a distinct meta-level universe and a generic plicity-bearing call form. Describe every current semantic owner type with one declarative dependent signature language limited to `TYPE`, earlier telescope slots, and owner applications; validate it against the separate arity catalog and let the checker consume it uniformly. | ELAB-2A3A materializes scoped Pi signatures for all 21 owners, passes a saturated application for every signature through Lambdapi, and verifies generic calls through scope/substitution/session/backend paths. `Cat : TYPE` and category-polymorphic application are accepted; arbitrary Type-in-Type polymorphism is outside the supported fragment because Lambdapi correctly exposes the `TYPE`/`KIND` boundary. |
 | D-020 | accepted | Keep `KIND` as a checker-only classification rather than an ordinary or serializable Core term. The bounded checker is structural: it validates TYPE/KIND-level declarations and Pi formation, checks lambdas bidirectionally, decomposes rigid type structure, and delegates only canonical meta leaves to the session. Generic implicits are inserted when a supplied explicit argument crosses an implicit Pi binder, so a partial inner call retains later binders; fixed owner applications are saturated from the declarative signature catalog. | ELAB-2A3B checks every owner signature and saturated application through one uniform path, recovers both generic and owner implicits, preserves a nested partial-call consumer, rejects Type-in-Type, rigid/mode/plicity/non-function/missing/ambiguous/occurs/scope boundaries at source provenance, and emits checked generic/fapp0 terms accepted by Lambdapi. Evaluation, conversion, higher-order inversion, and rule validation remain outside this structural claim. |
+| D-021 | accepted | Represent `Catd(K)` in Core through the decoded object classifier of `Catd_cat(K)`, as required by D-015, and add only semantic owners for displayed pullback, constant displayed families, and section categories. Store bridge authority classes separately and do not grant the structural checker runtime or proof-time conversion powers. | ELAB-2B checks all three new signatures through the uniform 24-owner catalog, recovers implicit bases, distinguishes meta-level telescope substitution from internal `Pullback_catd`, and uses Lambdapi `eq_refl`/`assertnot` evidence to preserve the runtime versus proof-time boundary. `Sigma_cat`, `Functord_cat`, and new kernel owners were not needed for the bounded consumer. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -267,9 +269,18 @@ proof-time comparable, available by an explicit theorem/path, or unavailable.
 
 Maintain a matrix with at least these columns for every proposed bridge:
 
+Owner sequences below use active Lambdapi spellings so the authority can be
+relocated exactly. The machine-readable Core matrix uses semantic identifiers
+and outermost-to-innermost owner paths.
+
 | Consumer | Uniform displayed route | Optimized ordinary route | Authority class | Positive evidence | Required non-collapse |
 | --- | --- | --- | --- | --- | --- |
-| To be filled by the first dependent slice | owner sequence | owner sequence | runtime / unification / theorem / distinct | probe/test | negative probe/test |
+| Classify a displayed family over `Γ` | `τ(Obj(Catd_cat Γ))`, definitionally `τ(Catd Γ)` | `τ(Functor Γ Cat_cat)`, definitionally `τ(Obj(Functor_cat Γ Cat_cat))` | runtime reduction at the classifier | `Catd Γ ≔ Obj(Catd_cat Γ)` and `Obj(Catd_cat Γ) ↪ Obj(Functor_cat Γ Cat_cat)`; Core declaration/checker and oracle acceptance | The category head `Catd_cat Γ` remains stable; only its object classifier reduces. |
+| Reindex an arbitrary family `E` along `σ : Δ → Γ` | `@Pullback_catd Δ Γ E σ` | `@comp_fapp0 Cat_cat Δ Γ Cat_cat E σ` | proof-time unification | warning-enabled `eq_refl` owner probe through the active `comp_fapp0 ≡ Pullback_catd` unification rule | The paired `assertnot` succeeds: arbitrary semantic composition does not runtime-fold to the stable pullback head. |
+| Reindex a constant family | `@Pullback_catd Δ Γ (@Const_catd Γ B) σ` | `@Const_catd Δ B` | runtime reduction | generated conversion assertion accepted through the owning `Pullback_catd(Const_catd …)` rule | Only the constant specialization collapses; no rule identifies an arbitrary pulled-back family with a constant family. |
+| Present a general section category | `@Pi_cat Γ E` | `@Functord_cat Γ (@Const_catd Γ Terminal_cat) E` | proof-time unification | warning-enabled category-level `eq_refl` owner probe | The paired `assertnot` succeeds; `Pi_cat` remains the stable section facade and does not runtime-fold to `Functord_cat`. |
+| View constant-family sections as ordinary functors | `@Pi_cat Γ (@Const_catd Γ B)`; terms have `τ(Obj(…))` | `Functor_cat Γ B`; terms have `τ(Functor Γ B)` | proof-time unification | generated `eq_refl` comparison and a constant section checked at the ordinary functor type by Lambdapi | Generated `assertnot` succeeds, and the structural TypeScript checker rejects treating the two Core types as structurally equal before TSK-2. |
+| Keep an arbitrary dependent section genuinely displayed | `τ(Obj(@Pi_cat Γ E))` | none unless `E` is authority-equated with a constant family | intentional distinction | the displayed section checks through persistent Core contexts | A generated attempt to type the arbitrary section as `τ(Functor Γ B)` is rejected. |
 
 Do not optimize a constant family to an ordinary term until both routes have
 a recorded comparison. “TypeScript can detect nondependence” is not itself a
@@ -316,12 +327,12 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-09 | Partially applied `hom_int` | complete in ELAB-1C | Retained `B → Cat_cat` family, later object action, exact source-varying conversion, and wrong-base rejection |
 | C-10 | Partially applied `hom_con_int` | complete in ELAB-1C | Retained `Op_cat(B) → Cat_cat` family, exact target-varying conversion, and reversal rejection |
 | C-11 | Metavariable/implicit solving over Core | complete for the bounded structural fragment in ELAB-2A3B | Session isolation, contextual scope, occurs, deterministic-order, ambiguity, generic/owner implicit recovery, nested partial calls, and unresolved-meta rejection are green; conversion and higher-order inversion remain explicitly later capabilities |
-| C-12 | Context extension and displayed type | partial: Core telescope foundation complete in ELAB-2A1; displayed interpretation remains ELAB-2B | Dependent lookup/lifting and abstraction are green; displayed substitution still requires the ELAB-2B owner experiment |
-| C-13 | Constant displayed family comparison | missing | Both routes plus a deliberate non-collapse |
+| C-12 | Context extension and displayed type | complete for the bounded ELAB-2B interpretation | A context category, displayed-family declaration, local dependent section, and substitution pullback survive persistent Core contexts and the checker; reversed substitution is rejected; meta-level telescope substitution remains distinct from internal displayed reindexing. Structural weakening/exchange/contraction remain C-14 through C-16. |
+| C-13 | Constant displayed family comparison | complete | Constant pullback reduces at runtime; constant sections check through the ordinary route only by active proof-time unification; the TypeScript structural checker and Lambdapi `assertnot` both preserve the required runtime non-collapse. |
 | C-14 | Dependent weakening | missing/inventory required | Concrete elaboration consumer |
 | C-15 | Dependency-respecting exchange | missing/inventory required | Permitted and forbidden telescope swaps |
 | C-16 | Dependent contraction/diagonal | missing/inventory required | Reindexing data and invalid contraction negative |
-| C-17 | TypeScript rule manifest/checker | partial: bounded structural Core checker complete in ELAB-2A3B; frozen rule manifest and evaluator missing | All owner signatures/applications, Pi/lambda checking, and structural negatives are green; valid/malformed rules and differential normal forms remain TSK-1/2/3 |
+| C-17 | TypeScript rule manifest/checker | partial: bounded structural Core checker complete in ELAB-2A3B; frozen rule manifest and evaluator missing | All owner signatures/applications, Pi/lambda checking, and structural negatives are green; manifest proposal/freeze, valid/malformed rules, and differential normal forms remain TSK-1A/1B/2/3 |
 | C-18 | Source-mapped backend diagnostics | partial | Generated map exists; diagnostic remapping missing |
 | C-19 | Legacy category-layer removal | blocked by replacement | Generic inventory and replacement gates green |
 
@@ -348,12 +359,14 @@ must identify their common baseline.
 | ELAB-2A3 | split | ELAB-2A2 | The checker tranche is split because Core first needs independently reviewable universe/generic-call syntax and dependent owner type signatures. |
 | ELAB-2A3A | complete | ELAB-2A2 | Backend-neutral `TYPE`, generic plicity-bearing calls, a groupoid-universe owner, and a complete declarative dependent type-signature catalog for all 21 current owners pass every scope/session/backend traversal, catalog negative, and bounded Lambdapi consumer. |
 | ELAB-2A3B | complete | ELAB-2A3A | A session-bound structural checker validates TYPE/KIND declaration levels, Pi/lambda/application judgments, all owner signatures and applications, dependent generic calls, catalog-driven implicit insertion, explicit ambiguity, and source-located negative boundaries; checked outputs pass Lambdapi. |
-| ELAB-2B | next / dependency-ready | ELAB-2A3B | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
-| ELAB-2C | pending | ELAB-2B | Exercise weakening, permitted/forbidden exchange, and contraction. Record missing displayed owners with consumer probes; do not yet assume kernel promotion. |
+| ELAB-2B | complete | ELAB-2A3B | The 24-owner catalog includes the minimal displayed pullback, constant-family, and section-category owners; persistent context/checker consumers, authority-classified bridges, warning-enabled positive/non-collapse probes, and the H-01 recommendation are recorded and green. |
+| ELAB-2C | human-gated / pending H-01 | ELAB-2B, reviewed D-007 | Exercise weakening, permitted/forbidden exchange, and contraction. Record missing displayed owners with consumer probes; do not yet assume kernel promotion. |
 | KERNEL-DISPLAYED-1 | conditional | ELAB-2C failure evidence | If a concrete uniform elaboration consumer cannot be expressed, design and probe the smallest displayed structural owner package under the v3.2 SOP, including degeneration/comparison and non-collapse cases. Human review is required before promotion. |
 | KERNEL-DISPLAYED-2 | conditional | reviewed KERNEL-DISPLAYED-1 | Promote only reviewed kernel changes with diagnostics, warning comparison, audits, catalogs, health, examples, and CI synchronized. |
-| TSK-1 | pending | ELAB-1 schema stability, ELAB-2A | Define a frozen TypeScript MVP signature/rule manifest and small trusted-core boundary. |
-| TSK-2 | pending | TSK-1 | Implement rule validation, weak-head evaluation, rewriting, proof-time unification/comparison classes, and deterministic diagnostics for the frozen fragment. |
+| TSK-1 | split | ELAB-1 schema stability, ELAB-2A | The manifest tranche is split at H-03 so an implementation proposal cannot silently become the frozen trusted fragment. |
+| TSK-1A | next / dependency-ready | ELAB-1 schema stability, ELAB-2A | Define immutable backend-neutral manifest vocabulary, inventory the smallest consumer-backed owner/rule candidates, reject malformed proposals, and record an exact H-03 recommendation without implementing evaluation. |
+| TSK-1B | human-gated / pending H-03 | TSK-1A, reviewed fragment | Freeze the reviewed MVP signature/rule manifest and document the exact trusted-core boundary. |
+| TSK-2 | pending | TSK-1B | Implement rule validation, weak-head evaluation, rewriting, proof-time unification/comparison classes, and deterministic diagnostics for the frozen fragment. |
 | TSK-3 | pending | TSK-2 | Build positive, negative, conversion, malformed-rule, and higher-cell differential tests against Lambdapi for every common owner/rule. |
 | MIGRATE-1 | pending | replacement inventory, TSK-2 | Port/reimplement still-useful generic proof/unification facilities and classify every legacy test. |
 | MIGRATE-2 | pending | MIGRATE-1, replacement tests | Delete the old category-specific nodes, standard library, reductions, and obsolete category tests; retain no D0/D1 or legacy category compatibility API. |
@@ -1003,32 +1016,133 @@ Plan rows changed: D-020 accepted; C-11 complete for the bounded structural
 Remaining prerequisite or human review: none for ELAB-2A3B.
 ```
 
-## Immediate Slice: ELAB-2B
+## Completed Slice: ELAB-2B
 
-Run the bounded dependent-first context experiment before selecting D-007:
+ELAB-2B introduced:
 
-1. relocate and inspect the active declarations and owning computations for
-   `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; use warning-enabled,
-   owner-position Lambdapi probes for the exact consumer routes and do not add
-   a displayed structural owner merely because a desired route is absent;
-2. extend the backend-neutral owner/signature catalogs only with the smallest
-   existing active owner set needed to represent one context category, one
-   displayed type over it, pullback along one substitution, a section/term,
-   and one constant-family specialization;
-3. express the same bounded consumer through persistent Core contexts and the
-   ELAB-2A3B checker, recording where meta-level telescope substitution and
-   internal displayed reindexing are distinct operations;
-4. populate the ordinary/displayed bridge matrix with exact owner sequences
-   and classify each comparison as runtime reduction, proof-time unification,
-   explicit theorem/path, or intentional distinction; include at least one
-   positive constant-family route and one required non-collapse;
-5. record an evidence-backed H-01 recommendation, update D-007 and C-12/C-13,
-   and pass focused positive/negative probes, all earlier v3.2 suites,
-   `check:ts`, the bounded kernel check, and the proportional repository gate.
+- three and only three new semantic Core owners:
+  `displayed-pullback`, `constant-displayed-family`, and `section-category`,
+  with exact active plicities and dependent signatures; `Catd(K)` continues
+  to use the D-015 object-classifier route through `Catd_cat(K)`;
+- direct Core helpers for the type of a displayed family, internal displayed
+  reindexing, constant families, section categories/types, and the ordinary
+  functor type used only as a classified comparison route;
+- a machine-readable bridge catalog whose owner paths and authority classes
+  do not grant conversion powers to the structural checker;
+- persistent-context consumers for a context category, displayed family,
+  substitution, general section, constant section, and local dependent
+  section, all checked through the same catalog-driven ELAB-2A3B path;
+- an explicit test that meta-level De Bruijn telescope substitution does not
+  construct or stand in for internal `Pullback_catd` reindexing;
+- backend probe support for proof-time equality evidence, negative runtime
+  conversion assertions, and warning-enabled runs with a bounded diagnostic
+  buffer.
 
-Do not begin weakening/exchange/contraction (ELAB-2C), promote new Lambdapi
-owners (KERNEL-DISPLAYED-1/2), add evaluator rules (TSK-2), or collapse a
-constant displayed family without an authority-classified comparison.
+No `Sigma_cat`, `Functord_cat`, displayed structural owner, Lambdapi rule, or
+TypeScript evaluator rule was added. The bounded context/type/term consumer
+does not require those additions.
+
+The H-01 recommendation is to select dependent-first as the canonical
+elaboration representation for genuinely context-indexed types and terms,
+while retaining ordinary types as an explicit route and optimizing a constant
+family only through a recorded bridge. This is simpler for the observed
+consumer because the checker uses one owner/signature path for general and
+constant families; an ordinary-first representation would need a branch for
+the general family and would still need displayed pullback. The recommendation
+does not claim that constant sections runtime-collapse: the active comparison
+is proof-time only, and both Core structural inequality and Lambdapi
+`assertnot` preserve that boundary. D-007 therefore remains pending human
+H-01 review, and ELAB-2C does not start meanwhile.
+
+### Experiment ELAB-2B-DEPENDENT-FIRST-CONTEXT
+
+```text
+Experiment ID: ELAB-2B-DEPENDENT-FIRST-CONTEXT
+Date and checkpoint: 2026-07-24 at ELAB-2A3B checkpoint 3cf4ac7
+Question/hypothesis: the existing locally nameless Core, persistent contexts,
+  structural checker, and the smallest active displayed owner set can express
+  one dependent-first context/type/substitution/term route uniformly, while
+  retaining the exact runtime/proof-time distinctions needed for an honest
+  constant-family specialization.
+Authority and owner position inspected: active Catd/Catd_cat declarations and
+  classifier rules; Pullback_catd declaration, fibre/constant/identity/
+  accumulation rules and semantic-composition unification bridge; Const_catd
+  declaration and fibre/pullback rules; Pi_cat declaration, object/hom
+  projections, terminal-source and constant-family unification bridges;
+  current SOP, Foundations, canonical-syntax report, and active checks. No
+  Lambdapi declaration or rule changed.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on goal/typescript-elaborator-v3.2 at
+  3cf4ac7; descendant of baseline a06433e.
+Minimal positive consumer: declare Γ and Δ as context categories, E as a
+  displayed family over Γ, σ : Δ → Γ, and a section of E; infer
+  Pullback_catd(E,σ) and Pi_cat(E) with both base categories recovered through
+  the generic checker. Extend a persistent local telescope by a family and a
+  section depending on its nearest De Bruijn occurrence. Also check a
+  constant-family section at its ordinary functor type through the Lambdapi
+  proof-time bridge.
+Relevant negative/non-collapse consumer: reject σ with reversed source/target
+  at its source span; keep meta-level Core substitution syntactically distinct
+  from internal displayed reindexing; reject an arbitrary dependent section
+  at an ordinary functor type; and accept assertnot for both general
+  Pi/Functord and constant Pi/Functor runtime comparisons.
+Probe command and bounded result:
+  two temporary warning-enabled owner probes under emdash2/tmp/probes
+    succeeded within 60s: one covered Catd, Pullback, Const, general Pi, and
+    constant Pi routes; one covered semantic composition versus stable
+    Pullback with paired eq_refl/assertnot evidence.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 focused ELAB-2B
+    passed 10/10, including the warning-enabled positive bridge and the
+    arbitrary-family rejection.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 over all eight v3_2 focused files
+    passed 93/93.
+  ./scripts/pnpmw run check:ts
+    passed 245 tests / 51 suites: 231 passed, 14 opt-in probes skipped.
+  EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+    passed the active kernel, four one-way extensions, and diagnostics.
+  EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+    passed the root gate; all 41 active Lambdapi kernel/example targets;
+    39 formal infrastructure tests; 5 print registry tests; active-reference,
+    report-header, book/evidence/typography/KaTeX checks; strict rule-LHS
+    audit; and generated catalog freshness.
+Warning/audit/catalog/health effects, if any: warning-enabled probes reproduced
+  the existing imported-kernel warning stream and introduced no tracked
+  warning baseline, Lambdapi rule, audit, generated catalog, or health change.
+Decision: accept the bounded implementation and recommend dependent-first for
+  H-01. Keep D-007 awaiting human review, keep the TypeScript checker
+  structural until TSK-2, and leave ELAB-2C gated.
+Plan rows changed: D-007 recommended/H-01 pending; D-021 accepted; C-12 and
+  C-13 complete for their bounded evidence; ELAB-2B complete; ELAB-2C gated;
+  TSK-1 split at H-03 and independent TSK-1A dependency-ready.
+Remaining prerequisite or human review: H-01 must review D-007 before
+  ELAB-2C. It does not block TSK-1A.
+```
+
+## Immediate Slice: TSK-1A
+
+Build a reviewable manifest proposal before asking H-03 to freeze it:
+
+1. recover the active declarations and owning runtime/unification rules for
+   the smallest consumer-backed candidate fragment already exercised by
+   ELAB-0 through ELAB-2B; do not infer rule authority from TypeScript tests;
+2. define immutable backend-neutral manifest records for signature membership,
+   runtime reduction, proof-time comparison, provenance, and consumer
+   coverage, without implementing matching or evaluation;
+3. require complete owner references, unique rule identities, explicit
+   authority classes, left/right scope validity, and deterministic manifest
+   ordering; reject malformed, duplicate, unknown-owner, and cross-class
+   proposals with focused diagnostics;
+4. distinguish the proposed product fragment from the larger 24-owner
+   conformance catalog and record every exclusion, especially rules or owners
+   whose termination, confluence, subject reduction, or consumer need is not
+   yet bounded;
+5. exercise one representative runtime rule, one proof-time comparison, and
+   one intentional non-collapse as data, then record the exact H-03
+   recommendation and pass all earlier gates.
+
+Do not call the proposal frozen before H-03, implement evaluator behavior
+(TSK-2), import active Lambdapi spellings into backend-neutral Core, promote
+kernel owners, or begin ELAB-2C while H-01 is pending.
 
 ## Human Review Gates
 
@@ -1038,7 +1152,7 @@ Record a concrete recommendation and evidence before requesting review:
 | --- | --- | --- |
 | H-01 | ELAB-2B | Does the dependent-first encoding produce a simpler uniform elaborator than an ordinary-first Core with displayed forms only where needed? |
 | H-02 | KERNEL-DISPLAYED-1 probe complete | What are the mathematically correct displayed weakening, exchange, and contraction owners, and which degenerations should compute, unify, or remain theorem-level? |
-| H-03 | TSK-1 | What exact owner/rule fragment is frozen as the MVP TypeScript kernel? |
+| H-03 | TSK-1A proposal complete | What exact owner/rule fragment is frozen as the MVP TypeScript kernel? |
 | H-04 | TSK-2 | What termination, confluence, subject-reduction, and trusted-rule assumptions may the MVP claim? |
 | H-05 | GRADUATE-1 | Is Lambdapi retained only as CI/reviewer oracle, or as an ongoing acceptance authority for selected declarations? |
 | H-06 | after measured need | Is a textual grammar stable and valuable enough to support? |
@@ -1046,6 +1160,11 @@ Record a concrete recommendation and evidence before requesting review:
 A human gate blocks only the dependent slice. Record the prerequisite and
 continue any independent dependency-ready work instead of guessing the
 decision.
+
+Current gate state: ELAB-2B has recorded a positive dependent-first H-01
+recommendation, but H-01 remains awaiting human review and blocks ELAB-2C.
+Independent TSK-1A is active; it must produce, not assume, the H-03 fragment
+recommendation.
 
 ## Experiment Record Template
 

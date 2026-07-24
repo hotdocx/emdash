@@ -18,6 +18,8 @@ import {
 } from './kernel';
 import {
     LAMBDAPI_V32_MODULE,
+    LAMBDAPI_V32_OWNER_BINDINGS,
+    LAMBDAPI_V32_PROOF_PROBE_BINDINGS,
     serializeKernelExpression
 } from './lambdapi';
 import {
@@ -50,16 +52,38 @@ export interface KernelProbeConversionAssertion {
     span: SourceSpan;
 }
 
+export interface KernelProbeProofTimeComparison {
+    label: string;
+    classifier: KernelExpression;
+    left: KernelExpression;
+    right: KernelExpression;
+    span: SourceSpan;
+}
+
+export interface KernelProbeNonConversionAssertion {
+    label: string;
+    left: KernelExpression;
+    right: KernelExpression;
+    span: SourceSpan;
+}
+
 export interface KernelProbe {
     requiredModule: typeof LAMBDAPI_V32_MODULE;
     declarations: readonly KernelProbeDeclaration[];
     assertions: readonly KernelProbeAssertion[];
     conversions?: readonly KernelProbeConversionAssertion[];
+    proofTimeComparisons?: readonly KernelProbeProofTimeComparison[];
+    nonConversions?: readonly KernelProbeNonConversionAssertion[];
 }
 
 export interface ProbeSourceMapEntry {
     generatedLine: number;
-    kind: 'declaration' | 'assertion' | 'conversion';
+    kind:
+        | 'declaration'
+        | 'assertion'
+        | 'conversion'
+        | 'proof-time-comparison'
+        | 'non-conversion';
     label: string;
     sourceSpan: SourceSpan;
 }
@@ -130,6 +154,8 @@ export function serializeKernelProbe(probe: KernelProbe): SerializedProbe {
     const lines: string[] = [];
     const sourceMap: ProbeSourceMapEntry[] = [];
     const conversions = probe.conversions ?? [];
+    const proofTimeComparisons = probe.proofTimeComparisons ?? [];
+    const nonConversions = probe.nonConversions ?? [];
 
     const push = (line: string): number => {
         lines.push(line);
@@ -156,7 +182,12 @@ export function serializeKernelProbe(probe: KernelProbe): SerializedProbe {
 
     if (
         probe.declarations.length > 0 &&
-        (probe.assertions.length > 0 || conversions.length > 0)
+        (
+            probe.assertions.length > 0 ||
+            conversions.length > 0 ||
+            proofTimeComparisons.length > 0 ||
+            nonConversions.length > 0
+        )
     ) {
         push('');
     }
@@ -178,7 +209,14 @@ export function serializeKernelProbe(probe: KernelProbe): SerializedProbe {
         });
     }
 
-    if (probe.assertions.length > 0 && conversions.length > 0) {
+    if (
+        probe.assertions.length > 0 &&
+        (
+            conversions.length > 0 ||
+            proofTimeComparisons.length > 0 ||
+            nonConversions.length > 0
+        )
+    ) {
         push('');
     }
 
@@ -199,6 +237,66 @@ export function serializeKernelProbe(probe: KernelProbe): SerializedProbe {
         });
     }
 
+    if (
+        conversions.length > 0 &&
+        (proofTimeComparisons.length > 0 || nonConversions.length > 0)
+    ) {
+        push('');
+    }
+
+    for (const comparison of proofTimeComparisons) {
+        push(
+            `// ${safeCommentText(comparison.label)}; source ` +
+            formatSourceSpan(comparison.span)
+        );
+        const classifier = serializeKernelExpression(
+            comparison.classifier
+        );
+        const left = serializeKernelExpression(comparison.left);
+        const right = serializeKernelExpression(comparison.right);
+        const decode = LAMBDAPI_V32_OWNER_BINDINGS.decode.serializedName;
+        const equality =
+            LAMBDAPI_V32_PROOF_PROBE_BINDINGS.equality.serializedName;
+        const reflexivity =
+            LAMBDAPI_V32_PROOF_PROBE_BINDINGS.reflexivity.serializedName;
+        const generatedLine = push(
+            `assert ⊢ @${reflexivity} (${classifier}) (${left}) : ` +
+            `${decode} (@${equality} (${classifier}) ` +
+            `(${left}) (${right}));`
+        );
+        sourceMap.push({
+            generatedLine,
+            kind: 'proof-time-comparison',
+            label: comparison.label,
+            sourceSpan: comparison.span
+        });
+    }
+
+    if (
+        proofTimeComparisons.length > 0 &&
+        nonConversions.length > 0
+    ) {
+        push('');
+    }
+
+    for (const nonConversion of nonConversions) {
+        push(
+            `// ${safeCommentText(nonConversion.label)}; source ` +
+            formatSourceSpan(nonConversion.span)
+        );
+        const generatedLine = push(
+            `assertnot ⊢ ` +
+            `${serializeKernelExpression(nonConversion.left)} ≡ ` +
+            `${serializeKernelExpression(nonConversion.right)};`
+        );
+        sourceMap.push({
+            generatedLine,
+            kind: 'non-conversion',
+            label: nonConversion.label,
+            sourceSpan: nonConversion.span
+        });
+    }
+
     return {
         source: `${lines.join('\n')}\n`,
         sourceMap
@@ -214,6 +312,11 @@ export interface LambdapiProbeOptions {
      * Hard upper bound. Repository policy forbids exploratory checks over 60s.
      */
     timeoutMs?: number;
+    /**
+     * Keep Lambdapi diagnostics enabled for owner-position warning probes.
+     * Existing conformance probes default to warning suppression.
+     */
+    warningsEnabled?: boolean;
 }
 
 export interface LambdapiProbeResult {
@@ -254,12 +357,21 @@ export function checkLambdapiProbe(
         writeFileSync(probePath, serialized.source, 'utf8');
         const result = spawnSync(
             'lambdapi',
-            ['check', '-w', relative(packageRoot, probePath)],
+            [
+                'check',
+                ...(options.warningsEnabled ? [] : ['-w']),
+                relative(packageRoot, probePath)
+            ],
             {
                 cwd: packageRoot,
                 encoding: 'utf8',
                 timeout: timeoutMs,
-                killSignal: 'SIGINT'
+                killSignal: 'SIGINT',
+                // Warning-enabled imports of the active kernel intentionally
+                // produce a large known diagnostic stream.
+                maxBuffer: options.warningsEnabled
+                    ? 64 * 1024 * 1024
+                    : 4 * 1024 * 1024
             }
         );
         const stdout = result.stdout ?? '';

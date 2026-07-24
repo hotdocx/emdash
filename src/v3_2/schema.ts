@@ -32,6 +32,8 @@ export type CoreSlotRole =
     | 'source-functor'
     | 'target-functor'
     | 'transfor'
+    | 'displayed-family'
+    | 'substitution'
     | 'object'
     | 'arrow';
 
@@ -61,13 +63,18 @@ export interface CategoryFormerOwnerSchema {
         | 'opposite'
         | 'hom'
         | 'transfor'
-        | 'displayed-family';
+        | 'displayed-family'
+        | 'section';
     slots: readonly CoreOwnerSlotSchema[];
 }
 
 export interface FunctorConstructorOwnerSchema {
     kind: 'functor-constructor';
-    constructor: 'internal-hom-source' | 'internal-hom-target';
+    constructor:
+        | 'internal-hom-source'
+        | 'internal-hom-target'
+        | 'displayed-pullback'
+        | 'constant-displayed-family';
     slots: readonly CoreOwnerSlotSchema[];
 }
 
@@ -198,6 +205,32 @@ export const CORE_OWNER_SCHEMAS = {
             { name: 'A', plicity: 'implicit', role: 'target-category' },
             { name: 'B', plicity: 'implicit', role: 'source-category' },
             { name: 'F', plicity: 'explicit', role: 'functor' }
+        ]
+    },
+    'displayed-pullback': {
+        kind: 'functor-constructor',
+        constructor: 'displayed-pullback',
+        slots: [
+            { name: 'A', plicity: 'implicit', role: 'source-category' },
+            { name: 'B', plicity: 'implicit', role: 'target-category' },
+            { name: 'E', plicity: 'explicit', role: 'displayed-family' },
+            { name: 'F', plicity: 'explicit', role: 'substitution' }
+        ]
+    },
+    'constant-displayed-family': {
+        kind: 'functor-constructor',
+        constructor: 'constant-displayed-family',
+        slots: [
+            { name: 'K', plicity: 'explicit', role: 'base-category' },
+            { name: 'A', plicity: 'explicit', role: 'category' }
+        ]
+    },
+    'section-category': {
+        kind: 'category-former',
+        former: 'section',
+        slots: [
+            { name: 'K', plicity: 'implicit', role: 'base-category' },
+            { name: 'E', plicity: 'explicit', role: 'displayed-family' }
         ]
     },
     'functor-object': {

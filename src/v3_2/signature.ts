@@ -181,6 +181,12 @@ const displayedCategoryCategory = (
     base
 );
 
+const displayedFamilyType = (
+    base: CoreSignatureExpression
+): CoreSignatureExpression => decoded(
+    objectClassifier(displayedCategoryCategory(base))
+);
+
 const functorObject = (
     sourceCategory: CoreSignatureExpression,
     targetCategory: CoreSignatureExpression,
@@ -349,6 +355,29 @@ export const CORE_OWNER_TYPE_SCHEMAS = {
             A,
             displayedCategoryCategory(oppositeCategory(B))
         )
+    },
+    'displayed-pullback': {
+        slots: [
+            implicit('A', categoryUniverse),
+            implicit('B', categoryUniverse),
+            explicit('E', displayedFamilyType(B)),
+            functorSlot('F', 'explicit', A, B)
+        ],
+        result: displayedFamilyType(A)
+    },
+    'constant-displayed-family': {
+        slots: [
+            explicit('K', categoryUniverse),
+            explicit('A', categoryUniverse)
+        ],
+        result: displayedFamilyType(slotReference('K'))
+    },
+    'section-category': {
+        slots: [
+            implicit('K', categoryUniverse),
+            explicit('E', displayedFamilyType(slotReference('K')))
+        ],
+        result: categoryUniverse
     },
     'functor-object': {
         slots: [

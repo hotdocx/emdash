@@ -130,6 +130,21 @@ export const LAMBDAPI_V32_OWNER_BINDINGS = {
         '4d. Internalized source/target endpoints and variance comparison',
         'injective symbol hom_con_int'
     ),
+    'displayed-pullback': binding(
+        'Pullback_catd',
+        '8a. Fibre notation, pullback, and base-arrow transport',
+        'injective symbol Pullback_catd'
+    ),
+    'constant-displayed-family': binding(
+        'Const_catd',
+        '8b. Constant, terminal, opposite, and displayed composition',
+        'injective symbol Const_catd'
+    ),
+    'section-category': binding(
+        'Pi_cat',
+        '8c. Section categories and Pi action',
+        'injective symbol Pi_cat'
+    ),
     'functor-object': binding(
         'fapp0',
         '3a. Ordinary functor classifier and action',
@@ -166,6 +181,25 @@ export const LAMBDAPI_V32_OWNER_BINDINGS = {
         'symbol tapp1_fapp0'
     )
 } as const satisfies Record<CoreOwnerId, LambdapiOwnerBinding>;
+
+/**
+ * Backend-only proof constructors used by conformance probes.
+ *
+ * They are intentionally not Core owners: ELAB-2B needs oracle evidence for
+ * a proof-time comparison, not equality syntax in the product fragment.
+ */
+export const LAMBDAPI_V32_PROOF_PROBE_BINDINGS = {
+    equality: binding(
+        '=',
+        '0. Groupoid universe and equality',
+        'injective symbol ='
+    ),
+    reflexivity: binding(
+        'eq_refl',
+        '0. Groupoid universe and equality',
+        'injective symbol eq_refl'
+    )
+} as const;
 
 interface SerializationState {
     nextBoundName: number;
