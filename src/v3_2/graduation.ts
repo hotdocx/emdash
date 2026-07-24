@@ -102,9 +102,52 @@ export interface CoreMvpGraduationRecommendationInput {
     readonly authorityAuthorized: false;
 }
 
+export interface CoreMvpGraduationReviewApprovalInput {
+    readonly gate: 'H-05';
+    readonly decision: 'approved-as-proposed';
+    readonly decisionId: 'D-039';
+    readonly reviewedOn: '2026-07-24';
+}
+
+export interface CoreMvpGraduationReviewInput {
+    readonly revision: 'GRADUATE-1B';
+    readonly status: 'reviewed-approved';
+    /**
+     * Immutable snapshot of the exact pre-review proposal. Its
+     * `authorityAuthorized: false` field remains historical evidence.
+     */
+    readonly recommendation: CoreMvpGraduationRecommendationInput;
+    readonly approval: CoreMvpGraduationReviewApprovalInput;
+    readonly authorization: {
+        readonly typescriptDeployedRuntimeAuthority:
+            'authorized-exact-frozen-profile';
+        readonly lambdapiProductionRuntimeDependency: 'forbidden';
+        readonly lambdapiMathematicalSpecification: 'retained';
+        readonly frozenCorpusCiOracle: 'required';
+        readonly subjectReductionOracle: 'required';
+        readonly selectedChangeAcceptanceAuthority: 'retained';
+        readonly perTermProductionCheck: 'not-required';
+    };
+    readonly manifestRevision: string;
+    readonly manifestContentHash: string;
+    readonly ownerIds: readonly string[];
+    readonly runtimeRuleIds: readonly string[];
+    readonly acceptanceTriggers: readonly string[];
+    readonly changesNotRequiringNewAuthorityReview: readonly string[];
+    readonly generalConfluence: 'withheld';
+    readonly typescriptSubjectReduction: 'withheld';
+    readonly additionalOwnersOrRulesAuthorized: false;
+    readonly performanceSlaAuthorized: false;
+    readonly releaseReady: false;
+    readonly nextSlice: 'RELEASE-READY';
+}
+
 export type CoreMvpGraduationErrorCode =
     | 'GRADUATION_EVIDENCE_MISMATCH'
-    | 'GRADUATION_RECOMMENDATION_MISMATCH';
+    | 'GRADUATION_RECOMMENDATION_MISMATCH'
+    | 'GRADUATION_REVIEW_APPROVAL_MISMATCH'
+    | 'GRADUATION_REVIEW_RECOMMENDATION_MISMATCH'
+    | 'GRADUATION_REVIEW_BOUNDARY_MISMATCH';
 
 export class CoreMvpGraduationError extends Error {
     constructor(
@@ -132,6 +175,9 @@ const deepFreeze = <T>(value: T): T => {
 
 const sameData = (left: unknown, right: unknown): boolean =>
     JSON.stringify(left) === JSON.stringify(right);
+
+const cloneData = <T>(value: T): T =>
+    JSON.parse(JSON.stringify(value)) as T;
 
 const expectedManifestIdentity = {
     revision: 'emdash-v3.2-mvp-1',
@@ -366,3 +412,111 @@ export const CORE_MVP_GRADUATION_RECOMMENDATION = deepFreeze(
 validateCoreMvpGraduationRecommendation(
     CORE_MVP_GRADUATION_RECOMMENDATION
 );
+
+const expectedReviewApproval: CoreMvpGraduationReviewApprovalInput = {
+    gate: 'H-05',
+    decision: 'approved-as-proposed',
+    decisionId: 'D-039',
+    reviewedOn: '2026-07-24'
+};
+
+const expectedReviewAuthorization:
+    CoreMvpGraduationReviewInput['authorization'] = {
+        typescriptDeployedRuntimeAuthority:
+            'authorized-exact-frozen-profile',
+        lambdapiProductionRuntimeDependency: 'forbidden',
+        lambdapiMathematicalSpecification: 'retained',
+        frozenCorpusCiOracle: 'required',
+        subjectReductionOracle: 'required',
+        selectedChangeAcceptanceAuthority: 'retained',
+        perTermProductionCheck: 'not-required'
+    };
+
+const expectedReview: CoreMvpGraduationReviewInput = {
+    revision: 'GRADUATE-1B',
+    status: 'reviewed-approved',
+    recommendation: cloneData(
+        CORE_MVP_GRADUATION_RECOMMENDATION
+    ),
+    approval: expectedReviewApproval,
+    authorization: expectedReviewAuthorization,
+    manifestRevision:
+        CORE_MVP_GRADUATION_RECOMMENDATION
+            .productAuthority.manifestRevision,
+    manifestContentHash:
+        CORE_MVP_GRADUATION_RECOMMENDATION
+            .productAuthority.manifestContentHash,
+    ownerIds: [
+        ...CORE_MVP_GRADUATION_RECOMMENDATION
+            .productAuthority.ownerIds
+    ],
+    runtimeRuleIds: [
+        ...CORE_MVP_GRADUATION_RECOMMENDATION
+            .productAuthority.runtimeRuleIds
+    ],
+    acceptanceTriggers: [
+        ...CORE_MVP_GRADUATION_RECOMMENDATION
+            .lambdapiPolicy.acceptanceTriggers
+    ],
+    changesNotRequiringNewAuthorityReview: [
+        ...CORE_MVP_GRADUATION_RECOMMENDATION
+            .lambdapiPolicy.changesNotRequiringNewAuthorityReview
+    ],
+    generalConfluence: 'withheld',
+    typescriptSubjectReduction: 'withheld',
+    additionalOwnersOrRulesAuthorized: false,
+    performanceSlaAuthorized: false,
+    releaseReady: false,
+    nextSlice: 'RELEASE-READY'
+};
+
+/**
+ * Validate the exact H-05 approval without mutating the pre-review proposal
+ * or widening any H-03/H-04 boundary.
+ */
+export function validateCoreMvpGraduationReview(
+    review: CoreMvpGraduationReviewInput
+): void {
+    if (
+        review.revision !== 'GRADUATE-1B' ||
+        review.status !== 'reviewed-approved' ||
+        !sameData(review.approval, expectedReviewApproval)
+    ) {
+        throw new CoreMvpGraduationError(
+            'GRADUATION_REVIEW_APPROVAL_MISMATCH',
+            'MVP graduation review does not record the exact H-05 ' +
+            'approval of D-039'
+        );
+    }
+    if (!sameData(
+        review.recommendation,
+        CORE_MVP_GRADUATION_RECOMMENDATION
+    )) {
+        throw new CoreMvpGraduationError(
+            'GRADUATION_REVIEW_RECOMMENDATION_MISMATCH',
+            'MVP graduation review differs from the approved D-039 ' +
+            'recommendation'
+        );
+    }
+    validateCoreMvpGraduationRecommendation(review.recommendation);
+
+    if (!sameData(review, expectedReview)) {
+        throw new CoreMvpGraduationError(
+            'GRADUATION_REVIEW_BOUNDARY_MISMATCH',
+            'MVP graduation review exceeds or weakens the exact D-039 ' +
+            'authorization boundary'
+        );
+    }
+}
+
+/**
+ * The distinct H-05-reviewed product-authority boundary.
+ *
+ * TypeScript now owns deployed checking only for the exact frozen profile.
+ * Lambdapi retains the approved mathematical, oracle, and selected-change
+ * acceptance roles without becoming a production runtime dependency.
+ * RELEASE-READY remains a separate tranche.
+ */
+export const CORE_MVP_GRADUATION_REVIEW = deepFreeze(expectedReview);
+
+validateCoreMvpGraduationReview(CORE_MVP_GRADUATION_REVIEW);
