@@ -7,6 +7,7 @@ export * from './session';
 export * from './checker';
 export * from './dependent';
 export * from './manifest';
+export * from './runtime';
 export * from './lambdapi';
 export * from './surface';
 export * from './elaborator';

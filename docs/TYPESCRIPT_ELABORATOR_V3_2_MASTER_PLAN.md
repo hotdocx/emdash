@@ -13,8 +13,8 @@ Infinity-Codex-Decision-Responses: none; decisions are recorded inline
 Human-Decision-Record: on 2026-07-24 the user approved H-01 dependent-first
 and H-03/D-023 exactly as proposed
 Status: active living master plan; H-01 and H-03 are resolved, TSK-1B is
-complete, ELAB-2C is complete without triggering H-02, and TSK-2 is the next
-selected slice
+complete, ELAB-2C is complete without triggering H-02, TSK-2 is split, and
+TSK-2A is complete with TSK-2B next
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -178,6 +178,8 @@ cleanly.
 | D-023 | accepted; H-03 approved 2026-07-24 | Freeze the dependency-closed 16-owner ordinary classifier/projection signature and exactly three generic full-to-capped runtime projection betas. Freeze no proof-time comparison rule yet. Keep the other eight current owners, the constant-section proof-time bridge, and its required runtime non-collapse as conformance evidence until their larger rule neighborhoods are bounded. | The user approved H-03/D-023 exactly as proposed. The ordinary subset covers ELAB-0/1B including recursive 2-cell action. Every excluded owner and rule family retains concrete consumer and open-risk evidence. The three active runtime rules, constant-section unification chain, and negative runtime probe have exact backend provenance. |
 | D-024 | accepted | Preserve the immutable TSK-1A proposal as its pre-review audit record and publish a separate, content-hashed `emdash-v3.2-mvp-1` manifest for the reviewed product profile. Snapshot all 16 selected dependent signatures and three selected runtime rules; record implemented, frozen-but-deferred, and outside-kernel mechanisms explicitly. | TSK-1B rejects status, approval, owner order, signature, rule, trust-boundary, and content-hash drift. The general checker and Lambdapi backend remain conformance supersets; no evaluator, matcher, proof-time rule, or excluded owner gains product authority merely by being implemented or serializable. |
 | D-025 | accepted | Represent meta-level dependent weakening, permitted adjacent exchange, and adjacent contraction as explicit source-to-target ambient De Bruijn index maps over persistent telescopes. Exchange may drop the older variable from the moved type only when unused; contraction requires the newer binder to have the structurally identical weakened type and matching mode. Transport every dependent suffix through the same map. | ELAB-2C maps preserve occurrence provenance beneath internal binders, exercise position-zero and nonzero dependent prefixes/suffixes, reject a forbidden swap at the exact dependency occurrence, reject type/mode-invalid diagonals, and emit three Lambdapi-accepted dependent consumers. They introduce no ordinary or displayed structural owner. |
+| D-026 | accepted | Split TSK-2 into runtime compilation/validation (TSK-2A), deterministic matching and weak-head rewriting (TSK-2B), then definitional comparison, authority separation, and H-04 evidence (TSK-2C). Keep the H-03-reviewed `CORE_MVP_MANIFEST` byte-for-byte frozen while these mechanisms are candidate implementations; consume it as input and defer any revised implementation-status manifest to explicit review. | Pattern compilation, reduction, and comparison have distinct failure modes and trust claims. The existing content pin deliberately rejects changing the `mvp-1` trust boundary under the same revision. A compiled candidate can retain source-manifest identity and record termination/confluence/subject-reduction evidence without silently authorizing those claims. |
+| D-027 | accepted | Compile reviewed rule variables to deterministic numeric slots and selected semantic owners to rigid backend-neutral heads. Accept a runtime rule only when it eliminates exactly one matching full projection through its evaluator, introduces the corresponding capped projection, does not duplicate any matched variable, and has a rigid discriminator from every other reviewed left pattern. Publish the immutable result as an H-04-pending candidate with evidence, not authorized metatheoretic claims. | TSK-2A compiles exactly three rules from `CORE_MVP_MANIFEST`, indexes all three beneath `functor-object`, rejects non-runtime authority, duplicate/unknown variables, excluded/arity-invalid owners, variable duplication, invalid projection decrease, and manifest drift, and records non-left-linearity plus the still-oracle-only subject-reduction boundary. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -338,7 +340,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-14 | Dependent weakening | complete for meta-level telescopes in ELAB-2C | An unused dependent-context extension maps prior terms/types into the deeper scope; the checked section consumer and generated Lambdapi abstraction pass without an internal structural owner. |
 | C-15 | Dependency-respecting exchange | complete for meta-level telescopes in ELAB-2C | Adjacent swaps at zero and nonzero positions transport dependent suffixes; a newer type that uses the older binder is rejected at that occurrence. |
 | C-16 | Dependent contraction/diagonal | complete for structurally equal telescope binders in ELAB-2C | The explicit non-injective index map transports a dependent suffix and identifies both duplicate occurrences; unequal types, unequal modes, and invalid positions are rejected. Definitional type comparison remains TSK-2 work. |
-| C-17 | TypeScript rule manifest/checker | partial: structural checker, validated proposal, and reviewed content-hashed freeze complete; evaluator missing | The 24-owner catalog is partitioned into an exact 16-owner product profile and eight explicit conformance-only owners. Three runtime rules are frozen, no proof-time rule is selected, proposal/evidence data remain separate, and malformed review/profile drift is rejected. Evaluation and differential normal forms remain TSK-2/3. |
+| C-17 | TypeScript rule manifest/checker | partial: structural checker, reviewed freeze, and immutable runtime compilation complete; matcher/evaluator missing | The 24-owner catalog is partitioned into an exact 16-owner product profile and eight explicit conformance-only owners. Exactly three runtime rules compile to numeric variable slots with selected-owner/arity, projection-decrease, nonduplication, and rigid-discriminator checks. No proof-time rule is executable, H-04 claims remain unauthorized, and matching/evaluation/differential normal forms remain TSK-2B/2C/3. |
 | C-18 | Source-mapped backend diagnostics | partial | Generated map exists; diagnostic remapping missing |
 | C-19 | Legacy category-layer removal | blocked by replacement | Generic inventory and replacement gates green |
 
@@ -372,7 +374,10 @@ must identify their common baseline.
 | TSK-1 | split | ELAB-1 schema stability, ELAB-2A | The manifest tranche is split at H-03 so an implementation proposal cannot silently become the frozen trusted fragment. |
 | TSK-1A | complete | ELAB-1 schema stability, ELAB-2A | Immutable backend-neutral manifest vocabulary, exact 16/8 owner partition, three runtime candidates, proof-time/non-collapse evidence, focused malformed rejection, complete backend provenance, and an exact H-03 recommendation are green; no evaluator or freeze was implemented. |
 | TSK-1B | complete; H-03 approved | TSK-1A, reviewed fragment | The separate `emdash-v3.2-mvp-1` product manifest snapshots the reviewed 16 signatures and three runtime rules, pins their full boundary by content hash, rejects review/profile drift, and records implemented, deferred, and outside-kernel mechanisms without evaluating a rule. |
-| TSK-2 | dependency-ready / next | TSK-1B | Implement rule validation, weak-head evaluation, rewriting, proof-time unification/comparison classes, and deterministic diagnostics for the frozen fragment. |
+| TSK-2 | split | TSK-1B | The evaluator tranche is split at compilation, reduction, and comparison/H-04 boundaries so the H-03 manifest remains immutable and each trusted mechanism receives independent malformed and determinism evidence. |
+| TSK-2A | complete | TSK-1B | Exactly the three reviewed runtime rules compile into an immutable, backend-neutral, manifest-identity-bearing candidate program. Numeric slots, selected owners/arity, projection decrease, variable nonduplication, pairwise rigid discrimination, malformed rejection, deterministic rebuilding, and an explicit H-04-pending evidence boundary are green. |
+| TSK-2B | dependency-ready / next | TSK-2A | Implement deterministic first-order matching, one-step rewriting, bounded weak-head evaluation, and exact positive/negative/differential consumers for the three compiled runtime rules. |
+| TSK-2C | pending; H-04 at exit | TSK-2B | Implement definitional comparison over the frozen runtime fragment, keep proof-time/conformance authority non-executable, integrate the reviewed conversion boundary, and prepare the exact termination/confluence/subject-reduction recommendation for H-04. |
 | TSK-3 | pending | TSK-2 | Build positive, negative, conversion, malformed-rule, and higher-cell differential tests against Lambdapi for every common owner/rule. |
 | MIGRATE-1 | pending | replacement inventory, TSK-2 | Port/reimplement still-useful generic proof/unification facilities and classify every legacy test. |
 | MIGRATE-2 | pending | MIGRATE-1, replacement tests | Delete the old category-specific nodes, standard library, reductions, and obsolete category tests; retain no D0/D1 or legacy category compatibility API. |
@@ -1579,6 +1584,130 @@ git diff --check
   passed
 ```
 
+## Completed Slice: TSK-2A
+
+TSK-2A compiles the exact H-03-reviewed runtime fragment without yet matching
+or rewriting a Core term:
+
+- `compileCoreMvpRuntime` first revalidates the complete content-hashed
+  `CORE_MVP_MANIFEST`; a changed status, approval, signature, rule, trust
+  boundary, or hash is rejected before executable compilation;
+- each textual rule variable becomes a deterministic numeric slot, and each
+  owner application becomes a rigid semantic `CoreOwnerId` node. Compilation
+  rechecks selected-owner membership and arity rather than relying only on the
+  earlier manifest pass;
+- every compiled rule carries a local safety certificate identifying its
+  projection pair, evaluator owner, eliminated full owner, introduced capped
+  owner, exact one-owner decrease, and left/right variable multiplicities;
+- right-side multiplicities may not exceed left-side multiplicities, so a
+  rewrite cannot duplicate a matched subterm;
+- a conservative pairwise comparison requires a rigid disagreement between
+  every pair of reviewed left patterns. All three rules remain indexed, in
+  manifest order, beneath their common `functor-object` root;
+- `compileCoreRuntimeRuleCandidate` exposes the same shape checks for
+  diagnostics and future review without granting a candidate rule product
+  membership. Only the full manifest compiler creates a runtime program;
+- the deeply immutable program retains the exact manifest revision and
+  content hash and is explicitly marked `candidate-awaiting-h04`.
+
+The compiled evidence records that all three rules remove one explicit full
+projection without variable duplication and have pairwise rigid root-pattern
+discriminators. It also records that the rules are not left-linear, and that
+subject reduction is currently supported only by the reviewed Lambdapi
+provenance. `claimsAuthorized` remains false. These are inputs to H-04, not
+premature termination, confluence, or subject-reduction claims.
+
+The approved `emdash-v3.2-mvp-1` manifest remains byte-for-byte unchanged and
+continues to describe runtime pattern compilation as deferred at the H-03
+checkpoint. TSK-2A is a candidate implementation consuming that artifact; a
+new implementation-status manifest revision requires separate review. No
+matcher, rewrite step, evaluator, definitional comparison, proof-time engine,
+checker conversion, Lambdapi declaration/rule, or backend spelling was added.
+
+### Experiment TSK-2A-REVIEWED-RUNTIME-COMPILATION
+
+```text
+Experiment ID: TSK-2A-REVIEWED-RUNTIME-COMPILATION
+Date and checkpoint: 2026-07-24 at ELAB-2C checkpoint 53d39a5
+Question/hypothesis: the three H-03-reviewed projection betas can compile into
+  a deterministic executable-shape program while the mvp-1 manifest and H-04
+  trust claims remain unchanged.
+Authority and owner position inspected: CORE_MVP_MANIFEST and its exact three
+  runtime patterns; PROJECTION_PAIR_SCHEMAS; the active fapp0/full-to-capped
+  Lambdapi owner rules and their already reviewed evidence bindings; TSK-1A,
+  TSK-1B, D-022 through D-024, and the D-026 split. No Lambdapi source changed.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on
+  goal/typescript-elaborator-v3.2 at 53d39a5 before the experiment;
+  descendant of baseline a06433e.
+Minimal positive consumer: compile all 16 selected owners and exactly three
+  runtime rules into one immutable candidate carrying manifest identity,
+  numeric slots, root buckets, projection-pair certificates, and pending H-04
+  evidence.
+Relevant negative/non-collapse consumer: reject manifest status/rule drift,
+  non-runtime authority, duplicate or unknown variables, conformance-only or
+  arity-invalid owners, right-side variable duplication, and a rule that does
+  not eliminate exactly one matching full projection. Compile no proof-time
+  or intentional non-conversion evidence.
+Observed result: all three runtime rules compile under functor-object in
+  manifest order. Each removes its matching full owner, introduces its capped
+  owner, and reduces every variable multiplicity. Pairwise left comparisons
+  find rigid discriminators.
+Unexpected result or failure: the rules are intentionally non-left-linear
+  because category, endpoint, functor, and transfor variables recur to enforce
+  exact owner relationships. Root-pattern discrimination alone is therefore
+  not a confluence proof; the candidate records this explicitly for H-04.
+TypeScript consequence: accept D-027 and use the immutable compiled program
+  as TSK-2B input. Keep the standalone candidate compiler non-authorizing.
+Lambdapi consequence: retain the existing evidence bindings as the only
+  subject-reduction evidence at this checkpoint; make no source or rule
+  change.
+Warning/audit/catalog/health effects, if any: no Lambdapi source or generated
+  authority changed, so no warning baseline, rule audit, catalog, or health
+  artifact changed.
+Decision: accept D-027, complete TSK-2A, and make TSK-2B dependency-ready.
+Plan rows changed: D-026 and D-027 accepted; C-17 records runtime compilation;
+  TSK-2 is split; TSK-2A complete; TSK-2B selected next; H-04 remains at the
+  TSK-2C exit.
+Remaining prerequisite or human review: none for TSK-2B. H-04 is not yet
+  triggered.
+```
+
+### TSK-2A validation
+
+Validated on the exact TSK-2A worktree diff:
+
+```text
+node --require ts-node/register --test tests/v3_2_runtime_tests.ts
+  passed 8 tests / 1 suite with no skips
+
+EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test
+  tests/v3_2_core_binder_tests.ts tests/v3_2_core_checker_tests.ts
+  tests/v3_2_core_context_tests.ts tests/v3_2_core_session_tests.ts
+  tests/v3_2_core_signature_tests.ts tests/v3_2_dependent_context_tests.ts
+  tests/v3_2_elab0_tests.ts tests/v3_2_elab1c_tests.ts
+  tests/v3_2_manifest_tests.ts tests/v3_2_runtime_tests.ts
+  tests/v3_2_telescope_structural_tests.ts
+  passed 137 tests / 12 suites with no skips
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  289 tests / 55 suites: 274 passed, 15 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 289-test result
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
 The user resolved both blocking reviews on 2026-07-24, and both dependent
@@ -1589,8 +1718,9 @@ slices are now complete:
   owner gap or triggering H-02;
 - H-03 approved D-023 exactly as proposed, making TSK-1B dependency-ready;
 - TSK-1B is complete and TSK-2 is dependency-ready;
-- TSK-2 is the next selected slice and must consume the reviewed
-  `CORE_MVP_MANIFEST`, not the historical TSK-1A proposal.
+- TSK-2 is split according to D-026; TSK-2A is complete and TSK-2B is next.
+  Both consume the reviewed `CORE_MVP_MANIFEST`, not the historical TSK-1A
+  proposal.
 
 Neither approval changes the recorded authority classes. Do not guess a
 displayed-to-ordinary runtime equality, promote the conformance-only owners,
@@ -1605,7 +1735,7 @@ Record a concrete recommendation and evidence before requesting review:
 | H-01 | ELAB-2B | Does the dependent-first encoding produce a simpler uniform elaborator than an ordinary-first Core with displayed forms only where needed? |
 | H-02 | KERNEL-DISPLAYED-1 probe complete | What are the mathematically correct displayed weakening, exchange, and contraction owners, and which degenerations should compute, unify, or remain theorem-level? |
 | H-03 | TSK-1A proposal complete | What exact owner/rule fragment is frozen as the MVP TypeScript kernel? |
-| H-04 | TSK-2 | What termination, confluence, subject-reduction, and trusted-rule assumptions may the MVP claim? |
+| H-04 | TSK-2C | What termination, confluence, subject-reduction, and trusted-rule assumptions may the MVP claim? |
 | H-05 | GRADUATE-1 | Is Lambdapi retained only as CI/reviewer oracle, or as an ongoing acceptance authority for selected declarations? |
 | H-06 | after measured need | Is a textual grammar stable and valuable enough to support? |
 
@@ -1614,8 +1744,9 @@ continue any independent dependency-ready work instead of guessing the
 decision.
 
 Current gate state: H-01 and H-03 were approved by the user on 2026-07-24.
-ELAB-2C completed without triggering H-02, and TSK-2 is selected next. H-02
-and H-04 through H-06 remain future gates at their recorded triggers.
+ELAB-2C completed without triggering H-02, TSK-2A is complete, and TSK-2B is
+selected next under the D-026 split. H-02 and H-04 through H-06 remain future
+gates at their recorded triggers.
 
 ## Experiment Record Template
 
