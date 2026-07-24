@@ -1,11 +1,11 @@
 /**
  * Bounded bidirectional checking and implicit insertion for explicit Core.
  *
- * This checker is intentionally structural. It knows Pi formation and
- * elimination, lambdas, declarations, contextual metas, and the declarative
- * owner-signature catalog. It does not evaluate rewrite rules or claim
- * definitional conversion beyond structural decomposition and canonical
- * session-owned meta assignment.
+ * This checker knows Pi formation and elimination, lambdas, declarations,
+ * contextual metas, and the declarative owner-signature catalog. TSK-2C adds
+ * candidate definitional comparison for exactly the H-03-reviewed runtime
+ * program. It still executes no proof-time/conformance rule and makes no
+ * H-04 termination, confluence, or subject-reduction claim.
  */
 
 import {
@@ -44,6 +44,9 @@ import {
     CoreElaborationSession,
     CoreSessionError
 } from './session';
+import {
+    coreRuntimeDefinitionalCompare
+} from './conversion';
 
 /**
  * `KIND` is the checker-only classification of `TYPE` and kind-level Pi
@@ -83,7 +86,8 @@ export type CoreCheckerErrorCode =
     | 'CONSTRAINT_REJECTED'
     | 'UNRESOLVED_CONSTRAINTS'
     | 'UNRESOLVED_METAVARIABLE'
-    | 'INVALID_DECLARATION_TYPE';
+    | 'INVALID_DECLARATION_TYPE'
+    | 'CONVERSION_STEP_LIMIT';
 
 export class CoreCheckerError extends Error {
     constructor(
@@ -123,6 +127,8 @@ const derived = (
 const sameMode = (left: BinderMode, right: BinderMode): boolean =>
     left.plicity === right.plicity &&
     left.variation === right.variation;
+
+export const CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT = 256;
 
 const expressionHead = (expression: KernelExpression): string => {
     switch (expression.tag) {
@@ -276,6 +282,23 @@ export class CoreChecker {
         const left = this.session.zonk(leftInput);
         const right = this.session.zonk(rightInput);
         if (kernelExpressionEquals(left, right)) return;
+
+        const comparison = coreRuntimeDefinitionalCompare(
+            left,
+            right,
+            CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT
+        );
+        if (comparison.status === 'equal') return;
+        if (comparison.status === 'step-limit-exceeded') {
+            this.fail(
+                'CONVERSION_STEP_LIMIT',
+                nodeProvenance,
+                `Core runtime conversion exceeded ` +
+                `${CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT} steps at ` +
+                `${comparison.path.join(' / ')} before rule ` +
+                `'${comparison.nextRuleId}'`
+            );
+        }
 
         if (left.tag === 'meta' || right.tag === 'meta') {
             this.addMetaConstraint(

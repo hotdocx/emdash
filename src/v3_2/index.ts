@@ -9,6 +9,8 @@ export * from './dependent';
 export * from './manifest';
 export * from './runtime';
 export * from './evaluator';
+export * from './conversion';
+export * from './metatheory';
 export * from './lambdapi';
 export * from './surface';
 export * from './elaborator';
