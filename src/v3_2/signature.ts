@@ -97,7 +97,6 @@ const Y = slotReference('Y');
 const coreUniverse = universe();
 const groupoidUniverse = ownerApplication('groupoid-universe');
 const categoryUniverse = ownerApplication('category-universe');
-const categoryOfCategories = ownerApplication('category-of-categories');
 
 const decoded = (
     classifier: CoreSignatureExpression

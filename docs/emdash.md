@@ -3,6 +3,12 @@ title: Emdash — A Dependently Typed Logical Framework for Computational Synthe
 authors: by Author
 ---
 
+> **Historical pre-v3.2 report.** This document describes the retired root
+> TypeScript prototype and its legacy category API. Those files were removed
+> by the v3.2 MIGRATE-2 tranche. The active mathematical authority is
+> `emdash2/emdash3_2.lp`; the current TypeScript architecture and status are
+> recorded in `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`.
+
 **Abstract.** We present Emdash, a novel dependently typed logical framework designed to support computational synthetic category theory, drawing inspiration from Kosta Dosen's functorial programming paradigm. Emdash integrates categorical primitives—such as categories, objects, morphisms, and functors—directly into its λΠ-calculus core, facilitating reasoning and computation in a style closer to mathematical practice. The path towards ω-categories is paved by internalizing the (dependent) comma category construction of a (dependent) category, similarly as for the "bridge" construction in the technique of logical relations/parametricity. The system features a bidirectional type checker with unification-based hole solving for interactive proof, definitional equality via βδι-reduction (including user-supplied rewrite rules and unfolding of injective constants), and Higher-Order Abstract Syntax (HOAS) for binders. A key contribution of Emdash is the concept of *functorial elaboration*, where kernel-level constructors for structures like functors not only receive their components (e.g., object and arrow mappings) but also definitionally verify their coherence laws (e.g., functoriality) during the elaboration process itself, throwing a `CoherenceError` upon failure. Implemented in TypeScript and formally specified in a Lambdapi dialect, Emdash demonstrates a practical pathway from specification to a working kernel. This paper details the Emdash framework, its core algorithms, its interactive proof mode, its alignment with its formal specification, and its role as the formal engine for hotdocX, a web-based platform for AI-assisted formalization of mathematical documents. We report on the successful implementation and validation of the system's core features through a comprehensive test suite.
 
 **Keywords:** Dependent Type Theory, Logical Frameworks, Category Theory, Functorial Programming, Synthetic Mathematics, Interactive Theorem Proving, AI-Assisted Formalization, Lambdapi, TypeScript.

@@ -308,7 +308,10 @@ The remainder of this section describes the earlier executable TypeScript
 prototype. Its generic elaboration, unification, reduction, and proof-state
 machinery is implementation evidence, but its built-in category layer predates
 and does not define the active v3.2 Lambdapi kernel. Renewed implementation
-work starts from the v3.2 elaborator handoff linked above.
+work starts from the v3.2 elaborator handoff linked above. The legacy files
+named below were physically removed after their independently useful
+mechanisms were replaced and audited in MIGRATE-1/MIGRATE-2; this section is
+retained only as historical design evidence.
 
 `emdash` is a TypeScript-based core for a dependently typed language, built with a strong emphasis on integrating concepts from category theory as first-class citizens. It provides a robust and extensible type theory kernel, featuring dependent types, a sophisticated elaboration engine, a powerful unification algorithm, and a reduction system that supports equational reasoning. The system aims to provide a flexible foundation for computational type theory and functorial programming, drawing inspiration from systems like Agda and Lambdapi.
 

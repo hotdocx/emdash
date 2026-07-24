@@ -7,7 +7,6 @@
  * proof-time comparison powers to the structural checker.
  */
 
-import { createHash } from 'node:crypto';
 import {
     CORE_OWNER_SCHEMAS,
     CoreOwnerId
@@ -1540,13 +1539,11 @@ const rawMvpManifest: CoreMvpManifestInput = {
     contentHash: reviewedMvpContentHash
 };
 
-const coreMvpContentHash = (
+const hasReviewedMvpContent = (
     manifest: CoreMvpManifestInput
-): string => {
+): boolean => {
     const { contentHash: _contentHash, ...content } = manifest;
-    return 'sha256:' + createHash('sha256')
-        .update(JSON.stringify(content))
-        .digest('hex');
+    return sameManifestData(content, rawMvpManifestContent);
 };
 
 const validateFrozenOwners = (
@@ -1685,7 +1682,7 @@ export function validateCoreMvpManifest(
     validateTrustBoundary(manifest.trustBoundary);
     if (
         manifest.contentHash !== reviewedMvpContentHash ||
-        coreMvpContentHash(manifest) !== reviewedMvpContentHash
+        !hasReviewedMvpContent(manifest)
     ) {
         throw new CoreManifestValidationError(
             'FROZEN_CONTENT_HASH_MISMATCH',

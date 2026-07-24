@@ -13,7 +13,7 @@ import {
     Plicity
 } from './schema';
 
-export { CoreOwnerId, Plicity } from './schema';
+export type { CoreOwnerId, Plicity } from './schema';
 
 export type VariationMode = 'functorial' | 'natural' | 'object-only';
 

@@ -745,3 +745,57 @@ export function validateLegacyMigrationReadiness(
         );
     }
 }
+
+export interface LegacyMigrationCompletion {
+    readonly revision: 'MIGRATE-2';
+    readonly status: 'complete';
+    readonly readinessRevision: 'MIGRATE-1D';
+    readonly deletedFiles: readonly string[];
+    readonly completedEdits: readonly string[];
+    readonly removedRuntimeDependencies: readonly ['parsimmon'];
+    readonly browserEntryPoint: 'src/v3_2/browser.ts';
+    readonly compatibilityApiRetained: false;
+    readonly parserReplacement: 'not-implemented-h06-required';
+    readonly nextSlice: 'GRADUATE-1';
+}
+
+const canonicalCompletion: LegacyMigrationCompletion = {
+    revision: 'MIGRATE-2',
+    status: 'complete',
+    readinessRevision: canonicalReadiness.revision,
+    deletedFiles: [
+        ...canonicalReadiness.deletionBoundary.sourceFiles,
+        ...canonicalReadiness.deletionBoundary.testFiles,
+        ...canonicalReadiness.deletionBoundary.auxiliaryFiles
+    ],
+    completedEdits:
+        canonicalReadiness.deletionBoundary.requiredEdits.map(
+            edit => edit.file
+        ),
+    removedRuntimeDependencies: ['parsimmon'],
+    browserEntryPoint: 'src/v3_2/browser.ts',
+    compatibilityApiRetained: false,
+    parserReplacement: 'not-implemented-h06-required',
+    nextSlice: 'GRADUATE-1'
+};
+
+export const LEGACY_MIGRATION_COMPLETION = deepFreeze(canonicalCompletion);
+
+const sameCompletion = (
+    left: LegacyMigrationCompletion,
+    right: LegacyMigrationCompletion
+): boolean => JSON.stringify(left) === JSON.stringify(right);
+
+/**
+ * Reject drift from the reviewed MIGRATE-2 physical-deletion result.
+ */
+export function validateLegacyMigrationCompletion(
+    completion: LegacyMigrationCompletion = LEGACY_MIGRATION_COMPLETION
+): void {
+    if (!sameCompletion(completion, canonicalCompletion)) {
+        throw new Error(
+            'Legacy migration completion differs from the canonical ' +
+            'MIGRATE-2 deletion result'
+        );
+    }
+}

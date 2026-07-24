@@ -1,5 +1,5 @@
 /**
- * MIGRATE-1D replacement-readiness and physical-deletion boundary audit.
+ * MIGRATE-2 post-deletion import, consumer, and package audit.
  */
 
 import assert from 'node:assert';
@@ -17,7 +17,7 @@ import {
 } from 'node:path';
 import { describe, it } from 'node:test';
 import {
-    LEGACY_MIGRATION_INVENTORY,
+    LEGACY_MIGRATION_COMPLETION,
     LEGACY_MIGRATION_READINESS,
     LegacyMigrationReadiness,
     validateLegacyMigrationReadiness
@@ -25,9 +25,10 @@ import {
 
 const repositoryRoot = resolve(dirname(__filename), '..');
 
-interface ImportEdge {
+interface ModuleImport {
     readonly importer: string;
-    readonly target: string;
+    readonly specifier: string;
+    readonly target?: string;
 }
 
 const repositoryPath = (absolutePath: string): string =>
@@ -68,11 +69,11 @@ const moduleSpecifiers = (file: string): string[] => {
     ])];
 };
 
-const resolveRelativeModule = (
+const relativeModuleCandidates = (
     importer: string,
     specifier: string
-): string | undefined => {
-    if (!specifier.startsWith('.')) return undefined;
+): string[] => {
+    if (!specifier.startsWith('.')) return [];
 
     const rawTarget = resolve(
         dirname(resolve(repositoryRoot, importer)),
@@ -92,9 +93,14 @@ const resolveRelativeModule = (
                 resolve(rawTarget, 'index.ts'),
                 resolve(rawTarget, 'index.tsx')
             ];
-    const target = candidates.find(candidate => existsSync(candidate));
-    return target === undefined ? undefined : repositoryPath(target);
+    return candidates.map(repositoryPath);
 };
+
+const resolveRelativeModule = (
+    importer: string,
+    specifier: string
+): string | undefined => relativeModuleCandidates(importer, specifier)
+    .find(candidate => existsSync(resolve(repositoryRoot, candidate)));
 
 const codeFiles = [
     ...sourceFilesUnder('src'),
@@ -102,30 +108,15 @@ const codeFiles = [
     ...sourceFilesUnder('emdash-template/src')
 ];
 
-const importEdges: readonly ImportEdge[] = codeFiles.flatMap(importer =>
-    moduleSpecifiers(importer).flatMap(specifier => {
-        const target = resolveRelativeModule(importer, specifier);
-        return target === undefined ? [] : [{ importer, target }];
-    })
+const moduleImports: readonly ModuleImport[] = codeFiles.flatMap(importer =>
+    moduleSpecifiers(importer).map(specifier => ({
+        importer,
+        specifier,
+        target: resolveRelativeModule(importer, specifier)
+    }))
 );
 
-const sourceDeletionSet = new Set(
-    LEGACY_MIGRATION_READINESS.deletionBoundary.sourceFiles
-);
-const testDeletionSet = new Set(
-    LEGACY_MIGRATION_READINESS.deletionBoundary.testFiles
-);
-const auxiliaryDeletionSet = new Set(
-    LEGACY_MIGRATION_READINESS.deletionBoundary.auxiliaryFiles
-);
-const completeDeletionSet = new Set([
-    ...sourceDeletionSet,
-    ...testDeletionSet,
-    ...auxiliaryDeletionSet
-]);
-
-const uniqueSorted = (values: readonly string[]): string[] =>
-    [...new Set(values)].sort();
+const deletionSet = new Set(LEGACY_MIGRATION_COMPLETION.deletedFiles);
 
 const assertDeepFrozen = (
     value: unknown,
@@ -148,199 +139,188 @@ const assertDeepFrozen = (
 const cloneReadiness = (): LegacyMigrationReadiness =>
     JSON.parse(JSON.stringify(LEGACY_MIGRATION_READINESS));
 
-describe('TypeScript v3.2 MIGRATE-1D deletion readiness', () => {
-    it('freezes the exact inventory-derived deletion boundary', () => {
-        assert.equal(LEGACY_MIGRATION_READINESS.revision, 'MIGRATE-1D');
-        assert.equal(
-            LEGACY_MIGRATION_READINESS.inventoryRevision,
-            LEGACY_MIGRATION_INVENTORY.revision
-        );
-        assert.equal(
-            LEGACY_MIGRATION_READINESS.status,
-            'ready-for-physical-deletion'
-        );
-        assert.equal(LEGACY_MIGRATION_READINESS.nextSlice, 'MIGRATE-2');
-        assert.deepEqual(
-            LEGACY_MIGRATION_READINESS.deletionBoundary.sourceFiles,
-            LEGACY_MIGRATION_INVENTORY.sourceFiles.map(entry => entry.file)
-        );
-        assert.deepEqual(
-            LEGACY_MIGRATION_READINESS.deletionBoundary.testFiles,
-            LEGACY_MIGRATION_INVENTORY.testFiles.map(entry => entry.file)
-        );
-        assert.deepEqual(
-            LEGACY_MIGRATION_READINESS.deletionBoundary.auxiliaryFiles,
-            ['tests/utils.ts']
-        );
-        assert.equal(completeDeletionSet.size, 36);
-    });
+const reachableBrowserModules = (): {
+    readonly files: ReadonlySet<string>;
+    readonly nodeImports: readonly ModuleImport[];
+} => {
+    const files = new Set<string>();
+    const nodeImports: ModuleImport[] = [];
+    const pending: string[] = [
+        LEGACY_MIGRATION_COMPLETION.browserEntryPoint
+    ];
 
-    it('retains only surviving evidence for every mechanism decision', () => {
-        for (const mechanism of LEGACY_MIGRATION_INVENTORY.mechanisms) {
-            assert.equal(
-                mechanism.disposition === 'delete'
-                    ? mechanism.state === 'ready-to-delete'
-                    : mechanism.state === 'covered',
-                true,
-                `${mechanism.id} has an unfinished disposition`
-            );
-            assert.ok(mechanism.evidence.length > 0);
-            for (const evidence of mechanism.evidence) {
-                assert.equal(
-                    completeDeletionSet.has(evidence),
-                    false,
-                    `${mechanism.id} relies on deletion target ${evidence}`
-                );
-                assert.equal(
-                    existsSync(resolve(repositoryRoot, evidence)),
-                    true,
-                    `${mechanism.id} evidence ${evidence} is absent`
-                );
+    while (pending.length > 0) {
+        const file = pending.pop() as string;
+        if (files.has(file)) continue;
+        files.add(file);
+
+        for (
+            const moduleImport of
+            moduleImports.filter(entry => entry.importer === file)
+        ) {
+            if (moduleImport.specifier.startsWith('node:')) {
+                nodeImports.push(moduleImport);
+            }
+            if (
+                moduleImport.target?.startsWith('src/v3_2/') &&
+                !files.has(moduleImport.target)
+            ) {
+                pending.push(moduleImport.target);
             }
         }
-    });
+    }
 
-    it('proves the legacy source and test graphs close over the deletion set', () => {
-        const sourceEdges = importEdges.filter(edge =>
-            sourceDeletionSet.has(edge.importer)
-        );
+    return { files, nodeImports };
+};
+
+describe('TypeScript v3.2 MIGRATE-2 physical deletion audit', () => {
+    it('leaves no source/test/helper deletion target or forbidden import', () => {
+        for (const file of deletionSet) {
+            assert.equal(
+                existsSync(resolve(repositoryRoot, file)),
+                false,
+                `Deleted legacy path ${file} reappeared`
+            );
+        }
+
+        for (const moduleImport of moduleImports) {
+            const forbiddenTargets = relativeModuleCandidates(
+                moduleImport.importer,
+                moduleImport.specifier
+            ).filter(candidate => deletionSet.has(candidate));
+            assert.deepEqual(
+                forbiddenTargets,
+                [],
+                `${moduleImport.importer} imports deleted legacy module ` +
+                    moduleImport.specifier
+            );
+        }
+
         assert.equal(
-            sourceEdges.every(edge => sourceDeletionSet.has(edge.target)),
+            sourceFilesUnder('src').every(file =>
+                file.startsWith('src/v3_2/')
+            ),
             true
         );
-
-        const testEdges = importEdges.filter(edge =>
-            testDeletionSet.has(edge.importer)
-        );
         assert.equal(
-            testEdges.every(edge => completeDeletionSet.has(edge.target)),
-            true
-        );
-
-        const externalSourceImporters = uniqueSorted(
-            importEdges
-                .filter(edge =>
-                    sourceDeletionSet.has(edge.target) &&
-                    !sourceDeletionSet.has(edge.importer) &&
-                    !testDeletionSet.has(edge.importer)
-                )
-                .map(edge => edge.importer)
-        );
-        assert.deepEqual(externalSourceImporters, [
-            'emdash-template/src/emdash_api.ts',
-            'tests/main_tests.ts'
-        ]);
-
-        const externalTestImporters = uniqueSorted(
-            importEdges
-                .filter(edge =>
-                    testDeletionSet.has(edge.target) &&
-                    !testDeletionSet.has(edge.importer)
-                )
-                .map(edge => edge.importer)
-        );
-        assert.deepEqual(externalTestImporters, ['tests/main_tests.ts']);
-
-        const auxiliaryImporters = uniqueSorted(
-            importEdges
-                .filter(edge => auxiliaryDeletionSet.has(edge.target))
-                .map(edge => edge.importer)
-        );
-        assert.ok(auxiliaryImporters.length > 0);
-        assert.equal(
-            auxiliaryImporters.every(importer =>
-                testDeletionSet.has(importer)
+            sourceFilesUnder('tests').every(file =>
+                file === 'tests/main_tests.ts' ||
+                file.startsWith('tests/v3_2_')
             ),
             true
         );
     });
 
-    it('keeps v3.2 implementation and tests isolated from legacy modules', () => {
-        const v3SourceFiles = codeFiles.filter(file =>
-            file.startsWith('src/v3_2/')
-        );
-        const v3SourceEdges = importEdges.filter(edge =>
-            v3SourceFiles.includes(edge.importer)
-        );
+    it('keeps the browser product entry point transitively Node-free', () => {
+        const reachable = reachableBrowserModules();
+        assert.ok(reachable.files.size > 1);
+        assert.deepEqual(reachable.nodeImports, []);
         assert.equal(
-            v3SourceEdges.every(edge => edge.target.startsWith('src/v3_2/')),
+            reachable.files.has('src/v3_2/checker.ts'),
             true
         );
-
-        const v3TestEdges = importEdges.filter(edge =>
-            edge.importer.startsWith('tests/v3_2_')
+        assert.equal(
+            reachable.files.has('src/v3_2/session.ts'),
+            true
         );
         assert.equal(
-            v3TestEdges.some(edge => completeDeletionSet.has(edge.target)),
+            reachable.files.has('src/v3_2/manifest.ts'),
+            true
+        );
+        assert.equal(
+            [...reachable.files].some(file =>
+                /(?:probe|differential|migration)\.ts$/.test(file)
+            ),
             false
         );
     });
 
-    it('records every direct and transitive consumer edit before deletion', () => {
-        assert.deepEqual(
-            LEGACY_MIGRATION_READINESS.deletionBoundary.requiredEdits.map(
-                entry => entry.file
-            ),
-            [
-                'tests/main_tests.ts',
-                'tests/v3_2_migration_inventory_tests.ts',
-                'tests/v3_2_migration_readiness_tests.ts',
-                'emdash-template/src/emdash_api.ts',
-                'emdash-template/src/App.tsx',
-                'emdash-template/README.md',
-                'package.json',
-                'pnpm-lock.yaml'
-            ]
+    it('rewrites the standalone fixture without a compatibility API', () => {
+        const apiImports = moduleImports.filter(
+            entry => entry.importer ===
+                'emdash-template/src/emdash_api.ts'
         );
-        for (
-            const edit of
-            LEGACY_MIGRATION_READINESS.deletionBoundary.requiredEdits
-        ) {
+        assert.deepEqual(
+            apiImports.map(entry => entry.target),
+            ['src/v3_2/browser.ts']
+        );
+
+        const app = readFileSync(
+            resolve(repositoryRoot, 'emdash-template/src/App.tsx'),
+            'utf8'
+        );
+        assert.match(app, /new emdash\.CoreElaborationSession\(\)/);
+        assert.match(app, /new emdash\.CoreChecker\(session\)/);
+        assert.doesNotMatch(
+            app,
+            /\b(?:D0|D1|MkCat|ComposeMorph|MkFunctorTerm|defineGlobal|globalDefs|resetMyLambdaPi|elaborate)\b/
+        );
+
+        const api = readFileSync(
+            resolve(repositoryRoot, 'emdash-template/src/emdash_api.ts'),
+            'utf8'
+        );
+        assert.doesNotMatch(
+            api,
+            /\b(?:D0|D1|types|state|stdlib|parser|globals)\b/
+        );
+    });
+
+    it('updates fixture packaging and removes the parser dependency', () => {
+        const fixtureReadme = readFileSync(
+            resolve(repositoryRoot, 'emdash-template/README.md'),
+            'utf8'
+        );
+        assert.match(fixtureReadme, /src\/v3_2\/browser\.ts/);
+        assert.doesNotMatch(fixtureReadme, /\.\.\/src\/types\.ts/);
+        assert.doesNotMatch(fixtureReadme, /\.\.\/\.\.\/src\/(?!v3_2)/);
+
+        const packageManifest = JSON.parse(readFileSync(
+            resolve(repositoryRoot, 'package.json'),
+            'utf8'
+        )) as {
+            dependencies?: Record<string, string>;
+        };
+        assert.equal(packageManifest.dependencies?.parsimmon, undefined);
+        assert.doesNotMatch(
+            readFileSync(resolve(repositoryRoot, 'pnpm-lock.yaml'), 'utf8'),
+            /\bparsimmon\b/
+        );
+    });
+
+    it('fulfills every frozen consumer edit and retains no global runner setup', () => {
+        assert.deepEqual(
+            LEGACY_MIGRATION_COMPLETION.completedEdits,
+            LEGACY_MIGRATION_READINESS.deletionBoundary.requiredEdits.map(
+                edit => edit.file
+            )
+        );
+        for (const file of LEGACY_MIGRATION_COMPLETION.completedEdits) {
             assert.equal(
-                existsSync(resolve(repositoryRoot, edit.file)),
+                existsSync(resolve(repositoryRoot, file)),
                 true,
-                `Required edit ${edit.file} is absent`
+                `Completed edit ${file} is absent`
             );
         }
 
-        assert.deepEqual(
-            uniqueSorted(
-                importEdges
-                    .filter(edge =>
-                        edge.importer ===
-                            'emdash-template/src/emdash_api.ts' &&
-                        sourceDeletionSet.has(edge.target)
-                    )
-                    .map(edge => edge.target)
-            ),
-            [...sourceDeletionSet].sort()
+        const runner = readFileSync(
+            resolve(repositoryRoot, 'tests/main_tests.ts'),
+            'utf8'
         );
-        assert.ok(
-            moduleSpecifiers('emdash-template/src/App.tsx').includes(
-                './emdash_api'
-            )
-        );
-        assert.match(
-            readFileSync(
-                resolve(repositoryRoot, 'emdash-template/README.md'),
-                'utf8'
-            ),
-            /\.\.\/src\/types\.ts/
+        assert.doesNotMatch(
+            runner,
+            /getDebugVerbose|setDebugVerbose|\.\.\/src\/state/
         );
         assert.equal(
-            readFileSync(resolve(repositoryRoot, 'package.json'), 'utf8')
-                .includes('"parsimmon"'),
+            [...runner.matchAll(/^import ['"]\.\/([^'"]+)['"];/gm)]
+                .every(match => match[1].startsWith('v3_2_')),
             true
         );
     });
 
-    it('is deeply frozen and rejects readiness-boundary drift', () => {
+    it('preserves the frozen readiness record and rejects its drift', () => {
         assertDeepFrozen(LEGACY_MIGRATION_READINESS);
         assert.doesNotThrow(() => validateLegacyMigrationReadiness());
-        assert.equal(
-            LEGACY_MIGRATION_READINESS.checkpointGates.length,
-            6
-        );
 
         const changed = cloneReadiness() as unknown as {
             deletionBoundary: {

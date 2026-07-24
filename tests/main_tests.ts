@@ -2,31 +2,7 @@
  * @file tests/main_tests.ts
  * @description Main entry point for running all test suites via node:test.
  */
-import { getDebugVerbose, setDebugVerbose } from '../src/state';
-
 // Import test files. The `node:test` runner will discover `describe` and `it` blocks in these files.
-import './equality_tests';
-import './dependent_types_tests';
-import './error_reporting_tests';
-import './rewrite_rules_tests';
-import './rewrite_rules_tests2';
-import './inductive_types';
-import './equality_inductive_type_family';
-import './elaboration_options_tests';
-import './higher_order_unification_tests';
-import './higher_order_pattern_matching_tests';
-import './implicit_args_tests';
-import './church_encoding_tests';
-import './church_encoding_implicit_tests';
-import './let_binding_tests';
-import './phase1_tests';
-import './kernel_implicits_tests';
-import './functorial_elaboration';
-import './proof_mode_tests';
-import './emdash2_functor_transfor_tests';
-import './emdash2_homd_curry_alias_tests';
-import './emdash2_internalized_category_layer_tests';
-import './parser_tests';
 import './v3_2_elab0_tests';
 import './v3_2_elab1c_tests';
 import './v3_2_core_binder_tests';
@@ -49,24 +25,19 @@ import './v3_2_migration_readiness_tests';
 import './v3_2_proof_state_tests';
 import './v3_2_pattern_unification_tests';
 import './v3_2_proof_refinement_tests';
+import './v3_2_browser_api_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,
 // or by scripts if tests are run as separate processes.
 
-// The main function is now significantly simpler or can be removed if 
+// The main function is now significantly simpler or can be removed if
 // `package.json` scripts directly invoke `node --test` on specific files or patterns.
-// For now, we can keep a simple main to control global settings like debug verbosity.
+// For now, keep a small message identifying the explicit v3.2 suite.
 
 function main() {
-    const originalDebugVerbose = getDebugVerbose();
-    // Set to true to see verbose logs from the core, false for cleaner test output.
-    // This will apply to all tests imported and run by node:test in this process.
-    setDebugVerbose(false);
-
-    console.log("\nStarting test execution with node:test runner...");
-    console.log("Test discovery and execution will be handled by node:test.");
-    console.log("Ensure tests are run using a command like: node --test tests/main_tests.ts");
+    console.log('\nStarting the emdash v3.2 TypeScript test suite...');
+    console.log('Test discovery and execution are handled by node:test.');
 
     // No explicit test running loop here. `node:test` handles it.
 
@@ -78,7 +49,4 @@ function main() {
 
 if (require.main === module) {
     main();
-    // Note: `node:test` runs tests defined in imported modules automatically.
-    // The `main()` function here is mostly for global setup like `setDebugVerbose`.
-    // The actual test execution is kicked off by the `node --test` command itself.
 }

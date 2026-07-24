@@ -1,6 +1,9 @@
-# emdash Sandpack Playground
+# emdash v3.2 Sandpack Playground
 
-This directory contains a standalone React/Vite application that serves as an interactive playground for the `emdash` type theory kernel.
+This directory contains a standalone React/Vite playground for the
+browser-safe emdash v3.2 TypeScript Core API. It uses session-local contexts,
+metavariables, checking, and the reviewed runtime fragment; it does not expose
+the deleted global-state prototype or a legacy compatibility API.
 
 It can be run in two ways:
 1.  Locally for development and testing using Vite.
@@ -11,7 +14,8 @@ It can be run in two ways:
 This is the recommended way to work on the playground UI itself. The local Vite server uses Hot Module Replacement (HMR) for a fast development experience.
 
 **Prerequisites:**
-*   Node.js and npm (or pnpm/yarn) installed.
+
+* Node.js and npm (or pnpm/yarn) installed.
 
 **Steps:**
 
@@ -27,30 +31,43 @@ This is the recommended way to work on the playground UI itself. The local Vite 
     ```bash
     npx vite
     ```
-Vite will start a local server, and you can access the playground in your browser at the URL it provides (usually `http://localhost:5173`). The application works locally because Vite can resolve the `emdash` kernel files from the parent `src` directory.
+Vite starts a local server at the URL it reports (usually
+`http://localhost:5173`). The local application resolves
+`../src/v3_2/browser.ts` through `src/emdash_api.ts`.
 
 ## Using as a Sandpack Template
 
-This template is designed to be used with [Sandpack](https://sandpack.codesandbox.io/), allowing `emdash` to be run interactively in a browser-based environment. To do this, you need to construct a file map for Sandpack by combining the files from this template with the core `emdash` kernel files.
+This template can also run inside
+[Sandpack](https://sandpack.codesandbox.io/). Construct its virtual file map
+from the template and the browser-safe v3.2 dependency tree.
 
-The key challenge is that Sandpack operates on a flat virtual file system and cannot resolve modules outside its root (i.e., paths like `../../src/...` won't work). Therefore, a script is needed to prepare the files for the Sandpack provider.
+Sandpack cannot resolve files outside its virtual root, so the host
+application must copy the v3.2 modules and adjust the one bridge path.
 
 **Procedure:**
 
-1.  **Collect Template Files:** Programmatically read the contents of all files within the `emdash-template` directory (excluding `node_modules`, `dist`, etc.). These will form the base of your Sandpack file map. Map their paths relative to the `emdash-template` directory to paths relative to the Sandpack root.
-    *   `emdash-template/index.html` -> `/index.html`
-    *   `emdash-template/package.json` -> `/package.json`
-    *   `emdash-template/src/App.tsx` -> `/src/App.tsx`
-    *   ...and so on.
+1. **Collect template files.** Map the files under `emdash-template` into the
+   Sandpack root, excluding generated directories such as `node_modules` and
+   `dist`.
 
-2.  **Collect `emdash` Kernel Files:** Read the contents of all `.ts` files from the main `../src/` directory of the `emdash` project. Add them to the Sandpack file map under the `/src/` path.
-    *   `../src/types.ts` -> `/src/types.ts`
-    *   `../src/state.ts` -> `/src/state.ts`
-    *   ...and so on.
+   * `emdash-template/index.html` → `/index.html`
+   * `emdash-template/package.json` → `/package.json`
+   * `emdash-template/src/App.tsx` → `/src/App.tsx`
 
-3.  **Modify and Add the API Barrel File:** The file `emdash-template/src/emdash_api.ts` acts as a bridge. Its import paths must be adjusted for the Sandpack environment.
-    *   Read the content of `emdash-template/src/emdash_api.ts`.
-    *   For each line, replace the relative path `../../src/` with a path relative to the Sandpack `/src` directory, which is `./`. For example, `export * from '../../src/types.js';` becomes `export * from './types.js';`.
-    *   Add this modified content to the Sandpack file map as `/src/emdash_api.ts`.
+2. **Collect the v3.2 browser dependency tree.** Copy the TypeScript modules
+   reachable from `src/v3_2/browser.ts`, preserving their directory:
 
-This process creates a self-contained project within Sandpack where the React UI can import and interact with the full `emdash` kernel. 
+   * `src/v3_2/browser.ts` → `/src/v3_2/browser.ts`
+   * its relative v3.2 imports → the corresponding `/src/v3_2/*.ts` paths
+
+   Do not package `probe.ts`, the differential harnesses, or other
+   process/filesystem-backed conformance tooling. The browser barrel is the
+   reviewed boundary.
+
+3. **Adjust the API bridge.** In
+   `emdash-template/src/emdash_api.ts`, replace
+   `../../src/v3_2/browser.js` with `./v3_2/browser.js`, then install that
+   content as `/src/emdash_api.ts`.
+
+This produces a self-contained browser project with no ambient global reset,
+legacy parser, D0/D1 category API, or Node-only Lambdapi process dependency.

@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import * as emdash from './emdash_api';
 import './styles.css';
 
 const exampleScript = `// Welcome to the emdash playground!
-// You can use the emdash API here.
-console.log("Defining Identity function type...");
+// Build and check a category-polymorphic identity in explicit v3.2 Core.
+const source = emdash.provenance("surface", "playground identity");
+const implicit = emdash.binderMode("implicit", "functorial");
+const explicit = emdash.binderMode("explicit", "functorial");
+const bound = index => emdash.kernelBound(index, source);
+const categoryUniverse = () =>
+  emdash.kernelApplication("category-universe", [], source);
+const objectType = category =>
+  emdash.kernelApplication("decode", [{
+    value: emdash.kernelApplication(
+      "object-classifier",
+      [{ value: category }],
+      source
+    )
+  }], source);
 
-const id_Type = emdash.Pi("A", emdash.Icit.Impl, emdash.Type(), A => 
-  emdash.Pi("_", emdash.Icit.Expl, A, _ => A)
+const expected = emdash.kernelPi(
+  emdash.kernelBinder("Category", categoryUniverse(), implicit, source),
+  emdash.kernelPi(
+    emdash.kernelBinder("value", objectType(bound(0)), explicit, source),
+    objectType(bound(1)),
+    source
+  ),
+  source
 );
-emdash.defineGlobal("id_Type", emdash.Type(), id_Type);
-
-console.log("Elaborating the identity function...");
-
-const id_term = emdash.Lam("A", emdash.Icit.Impl, emdash.Type(), A => 
-  emdash.Lam("x", emdash.Icit.Expl, A, x => x)
+const term = emdash.kernelLambda(
+  emdash.kernelBinder("Category", categoryUniverse(), implicit, source),
+  emdash.kernelLambda(
+    emdash.kernelBinder("value", objectType(bound(0)), explicit, source),
+    bound(0),
+    source
+  ),
+  source
 );
 
-try {
-  const result = emdash.elaborate(id_term, emdash.Var("id_Type"));
-  console.log("Elaborated term:", emdash.printTerm(result.term));
-  console.log("Inferred type:", emdash.printTerm(result.type));
-} catch(e) {
-  console.error(e.message);
-}
-
-
+const session = new emdash.CoreElaborationSession();
+const checker = new emdash.CoreChecker(session);
+const checked = checker.check(checker.rootContext, term, expected);
+console.log("Checked term:", emdash.serializeKernelExpression(checked.term));
+console.log("Checked type:", emdash.serializeKernelExpression(checked.type));
 `;
 
 function App() {
@@ -35,15 +52,12 @@ function App() {
 
   const runCode = () => {
     setIsRunning(true);
-    let logs: string[] = [];
+    const logs: string[] = [];
     const oldLog = console.log;
     const oldErr = console.error;
     
     console.log = (...args) => logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(' '));
     console.error = (...args) => logs.push(`ERROR: ${args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(' ')}`);
-
-    // Reset emdash state for each run
-    emdash.resetMyLambdaPi_Emdash();
 
     setTimeout(() => {
         try {
@@ -64,7 +78,7 @@ function App() {
   return (
     <div className="container">
       <h1>emdash Playground</h1>
-      <p>Write your emdash script below and click "Run". Use the <code>emdash</code> object to access the API.</p>
+      <p>Write a v3.2 Core script below and click "Run". Use the <code>emdash</code> object to access the browser-safe API.</p>
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -80,4 +94,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

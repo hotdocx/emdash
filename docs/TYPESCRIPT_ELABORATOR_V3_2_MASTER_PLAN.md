@@ -14,7 +14,7 @@ Human-Decision-Record: on 2026-07-24 the user approved H-01 dependent-first,
 H-03/D-023, and H-04/D-030 exactly as proposed
 Status: active living master plan; H-01, H-03, and H-04 are resolved, ELAB-2C
 is complete without triggering H-02, TSK-2 and TSK-3 are complete, and
-MIGRATE-1 is complete with physical deletion MIGRATE-2 dependency-ready next
+MIGRATE-1/MIGRATE-2 are complete with GRADUATE-1/H-05 next
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -190,6 +190,7 @@ cleanly.
 | D-035 | accepted | Solve only contextual Miller flex-rigid equations whose meta spine has its creation arity and consists of pairwise-distinct in-scope bound variables in a descendant context. Invert that spine by capture-safe ambient De Bruijn remapping, require a structural substitution round trip, and assign only through the existing canonical session solve. Keep non-variable and repeated spines plus unrelated context lineages stuck; reject omitted-local scope escape and occurs cycles; keep flex-flex ambiguous and the public direct-solve API canonical-only. | `invertCoreMetaPattern` is pure and has no assignment, checker, evaluator, or backend dependency. Session constraints solve weakened, exchanged, partially used, constant, nested-binder, and either-orientation occurrences; focused negatives distinguish stuck from rejected outcomes at source provenance. No generic beta/eta, ambient user-rule matching, runtime conversion, trusted rule, or H-04 claim is added. |
 | D-036 | accepted | Represent an interactive proof by an immutable Core root plus reachable session-owned goal identities and their persistent creation contexts. `exact` uses the closed checker boundary and introduces no metas. `intro` preserves the syntactic Pi binder's full mode and creates one checked body goal. `apply` requires an inferable complete callee, exhausts its syntactic Pi telescope into ordered argument metas, then lets dependent result checking solve any determined arguments. Permit open results only through a dedicated checker refinement boundary, and make every tactic failure-atomic by restoring solutions, constraints, allocations, and ordinals. | `CoreProofRefiner` can solve exact goals, build and close an identity by intro/exact, expose explicit and implicit premises in order, and close a dependent application by unification. It rejects ill-typed exact terms, unresolved exact terms, non-Pi intro, non-function apply, unreachable goals, and a partially solved mismatching apply without changing the proof state. There is no mutable hole, global definition lookup, category-tag traversal, generic beta/eta, proof-time comparison rule, or Lambdapi backend dependency. |
 | D-037 | accepted | Treat MIGRATE-1D as a frozen pre-deletion contract rather than physical deletion itself. Require every port/reimplementation mechanism to be covered by surviving v3.2 evidence, every delete mechanism to be explicitly ready, the thirteen-source/twenty-two-test/one-helper deletion graph to be closed, all direct and transitive consumers to be named, and every replacement-focused checkpoint gate to pass. MIGRATE-2 must rewrite consumers and remove the parser-only dependency without introducing a D0/D1 or legacy category compatibility barrel. | `LEGACY_MIGRATION_READINESS` pins all 36 deletion targets, the root runner and audit transitions, the standalone template API/example/documentation, `package.json`, the shared lockfile, the exact validation commands, and the retained Lambdapi authority boundary. Executable import-graph tests prove that `src/v3_2` and all v3.2 tests are legacy-independent; the only external direct importers are the root runner and template barrel, while the template app is the recorded transitive consumer. The audit discovered the previously implicit template rewrite and `parsimmon` cleanup before deletion rather than after breakage. |
+| D-038 | accepted | Execute MIGRATE-2 as the exact D-037 cut: remove all 36 frozen targets, retain the MIGRATE-1D inventory/readiness records as historical audit inputs, and publish a distinct frozen completion result. Give browser consumers a narrow v3.2 product entry point containing the session/checker/Core path but excluding process-backed probes, differential harnesses, and migration APIs. Preserve the reviewed manifest hash while validating its canonical content directly, so the product checker has no Node-only crypto dependency. Rewrite—not emulate—the standalone example, remove `parsimmon` through pnpm, and retain no legacy compatibility API. | Every target is absent and every surviving import is audited against the deletion set. `src/v3_2/browser.ts` reaches the checker, session, runtime, and manifest with no `node:` import and cannot reach probe/differential/migration modules. Its focused consumer checks a category-polymorphic identity and session isolation; the standalone fixture passes strict TypeScript and a Vite production build. Manifest drift tests remain green with the same reviewed SHA-256 pin, the root runner loads only v3.2 suites, active/historical docs are labeled correctly, and `LEGACY_MIGRATION_COMPLETION` rejects deletion/edit/dependency/browser-boundary drift. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -343,6 +344,12 @@ runner, standalone-template, audit-lifecycle, package-manifest, and lockfile
 edit. The old parser is ready to delete without replacement; H-06 applies
 only if measured need later justifies a new v3.2 grammar.
 
+MIGRATE-2 retains those pre-deletion records and adds
+`LEGACY_MIGRATION_COMPLETION`. The completion record derives all 36 removed
+paths and all required edits from the frozen readiness artifact, records the
+removed parser dependency and browser entry point, states that no
+compatibility API survives, and makes GRADUATE-1 the next boundary.
+
 | Legacy test file | Disposition | Retained invariant or boundary |
 | --- | --- | --- |
 | `equality_tests.ts` | split then delete | Structural alpha equality is replaced; generic beta/eta stay outside H-04. |
@@ -393,7 +400,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-16 | Dependent contraction/diagonal | complete for structurally equal telescope binders in ELAB-2C | The explicit non-injective index map transports a dependent suffix and identifies both duplicate occurrences; unequal types, unequal modes, and invalid positions are rejected. Definitional type comparison remains TSK-2 work. |
 | C-17 | TypeScript rule manifest/checker | complete for the reviewed MVP fragment | The exact 16-owner/three-rule product profile compiles and executes through deterministic numeric-slot matching, manifest-ordered root buckets, explicit step limits, structural congruence, and checker conversion. H-04 authorizes termination, bounded evaluation/comparison, and exactly those three runtime rules. Proof-time/non-conversion evidence, excluded owners, unfolding, and generic beta remain non-executable; general confluence and standalone TypeScript subject reduction remain withheld. |
 | C-18 | Source-mapped backend diagnostics | partial | Generated map exists; diagnostic remapping missing |
-| C-19 | Legacy category-layer removal | replacement-ready through MIGRATE-1D | The closed-world inventory, generic proof inspection, contextual Miller-pattern solver, failure-atomic checked proof refinement, surviving-evidence audit, closed deletion graph, isolated v3.2 graph, and exact consumer/package rewrite boundary are green. Only physical MIGRATE-2 deletion remains. |
+| C-19 | Legacy category-layer removal | complete | The exact thirteen legacy sources, twenty-two obsolete tests, and one helper are deleted. The root runner, standalone browser fixture, package manifest/lockfile, and audit lifecycle are migrated; every forbidden import and absent target is checked; no D0/D1, mutable-global reset, legacy parser, or category compatibility barrel remains. |
 | C-20 | Frozen-fragment differential parity | complete | The manifest-derived 16-owner corpus, all three runtime rows, and both higher-cell packages have shared TypeScript/Lambdapi positive, negative, and conversion outcomes. The drift-checked completion record retains Lambdapi as required oracle until graduation and does not promote conformance-only C-09/C-10 owners. |
 
 The first higher-dimensional corpus must exercise C-05 through C-10 before
@@ -441,8 +448,8 @@ must identify their common baseline.
 | MIGRATE-1B | complete | MIGRATE-1A, stable Core binders | Pure capture-safe inversion and session assignment cover the contextual Miller flex-rigid fragment in both orientations. Weakening, exchange, partial use, constants, and nested binders pass; non-variable, repeated, escaping, occurs, flex-flex, unrelated-lineage, and direct-solve boundaries are explicit without runtime conversion. |
 | MIGRATE-1C | complete | MIGRATE-1B, proof-state inspection | Reachable session goals retain their creation contexts; exact, intro, and exhaustive-Pi apply are checker-validated and failure-atomic. Complete, dependent, plicity, source-error, unreachable, and rollback consumers are green without mutable holes or global lookup. |
 | MIGRATE-1D | complete | MIGRATE-1B, MIGRATE-1C | The completed mechanism/test dispositions, 36-target deletion graph, surviving replacement evidence, isolated v3.2 graph, direct/transitive consumers, package cleanup, audit transitions, full gate list, and retained Lambdapi boundary are deep-frozen and drift-checked. |
-| MIGRATE-2 | dependency-ready / next | MIGRATE-1, replacement tests | Delete the old category-specific nodes, standard library, reductions, and obsolete category tests; rewrite every recorded consumer and package edge; retain no D0/D1 or legacy category compatibility API. |
-| GRADUATE-1 | human gate | TSK-3, MIGRATE-2 | Review parity evidence, trust assumptions, subject reduction, termination/confluence scope, performance, and maintenance cost. Decide whether TypeScript is the authoritative deployed MVP kernel. |
+| MIGRATE-2 | complete | MIGRATE-1, replacement tests | All 36 frozen legacy targets are absent; every recorded runner/template/audit/package edge is migrated; the narrow browser product path is Node-free and build-validated; no D0/D1 or legacy category compatibility API remains. |
+| GRADUATE-1 | human gate / next | TSK-3, MIGRATE-2 | Review parity evidence, trust assumptions, subject reduction, termination/confluence scope, performance, and maintenance cost. Decide whether TypeScript is the authoritative deployed MVP kernel and resolve H-05's ongoing Lambdapi acceptance role. |
 | RELEASE-READY | pending | GRADUATE-1 | Documentation, manifests, examples, diagnostics, full repository checks, and explicit residual Lambdapi-conformance policy are synchronized. |
 
 If a slice grows beyond one reviewable semantic claim, split it in this table
@@ -2842,6 +2849,139 @@ git diff --check
   passed
 ```
 
+## Completed Slice: MIGRATE-2
+
+MIGRATE-2 performs the reviewed physical cut without preserving the retired
+API:
+
+- all thirteen root legacy source modules, all twenty-two inventoried legacy
+  tests, and the legacy-only test helper are deleted. The root runner now
+  imports only v3.2 suites and has no global debug/reset setup;
+- the frozen MIGRATE-1D inventory and readiness records remain as historical
+  audit inputs. The distinct `LEGACY_MIGRATION_COMPLETION` record derives the
+  36 deleted paths and eight completed edit paths from them, records
+  `parsimmon` removal, rejects compatibility retention, and points to
+  GRADUATE-1;
+- `src/v3_2/browser.ts` is the narrow browser product entry point. Its
+  transitive graph includes Core construction, session-local metas, checking,
+  and reviewed runtime comparison but excludes migration ledgers,
+  differential harnesses, and process/filesystem-backed probes;
+- the reviewed manifest keeps the exact H-03 SHA-256 pin and now compares the
+  complete canonical content directly instead of importing `node:crypto`.
+  Existing status, approval, owner, signature, rule, trust-boundary, and hash
+  drift tests remain green, while the checker/runtime dependency graph becomes
+  browser-safe;
+- the standalone template exports only that browser entry point. Its default
+  program constructs and checks a category-polymorphic identity using a fresh
+  `CoreElaborationSession`; no global definition, reset, parser, or legacy
+  elaboration call remains. Strict template TypeScript and a Vite production
+  build pass;
+- `parsimmon` is removed from `package.json` and the shared lockfile through
+  the pinned pnpm wrapper. The template packaging instructions now copy only
+  the browser dependency tree, while the old README/report material is
+  explicitly labeled historical;
+- post-deletion tests reject any reappearing target, unresolved import to the
+  deletion set, non-v3.2 root test, Node import reachable from the browser
+  entry point, unrecorded fixture/package state, or D0/D1/legacy API surface.
+
+### Experiment MIGRATE-2-PHYSICAL-CUT
+
+```text
+Experiment ID: MIGRATE-2-PHYSICAL-CUT
+Date and checkpoint: 2026-07-24 at MIGRATE-1D checkpoint b7b6995
+Question/hypothesis: the exact frozen 36-file legacy graph can be deleted,
+  every recorded consumer/package edge can be rewritten to the v3.2 product
+  path, and the resulting browser consumer can remain session-local and
+  Node-free without weakening the reviewed manifest boundary.
+Authority and owner position inspected: D-001/D-002/D-004/D-011/D-023/
+  D-024/D-030/D-033/D-034/D-037 and C-17/C-19/C-20 in this plan; the complete
+  MIGRATE-1 inventory/readiness records; root runner/package/lockfile; the
+  standalone template; and the manifest/checker/runtime import graph. No
+  Lambdapi declaration or rule changed.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on
+  goal/typescript-elaborator-v3.2 at b7b6995 before the experiment;
+  descendant of baseline a06433e.
+Minimal positive consumer: import only src/v3_2/browser.ts, construct and
+  checker-validate a category-polymorphic identity, serialize its exact term
+  and type, create two isolated sessions, then strict-typecheck and
+  production-build the same API through emdash-template.
+Relevant negative/non-collapse consumer: assert all 36 targets absent; reject
+  any import resolving to them, non-v3.2 root runner import, browser-reachable
+  node: module, process-backed harness, old template symbol, compatibility
+  barrel, parser dependency, changed completion record, or changed reviewed
+  manifest content/hash.
+Probe command and bounded result: the migration/browser/manifest/pattern/
+  proof-state/proof-refinement suites pass 69 tests / 8 suites with no skips;
+  all v3.2 suites pass 224 tests / 24 suites, with 205 passed and 19 opt-in
+  probes skipped. The standalone template passes strict TypeScript and Vite
+  transforms 48 modules into a production bundle.
+Observed result: the deletion graph is gone, all surviving source resides
+  under src/v3_2, the root runner loads only retained v3.2 tests, the browser
+  graph reaches checker/session/runtime/manifest with no Node built-in, and
+  the package/lockfile contain no parsimmon.
+Unexpected result or failure: CoreChecker's reviewed runtime path reached the
+  manifest's synchronous node:crypto hash recomputation, so the first strict
+  browser check exposed a Node-only product dependency. Exact comparison with
+  the already pinned canonical manifest content provides the same closed-world
+  drift rejection without recomputing SHA-256 at runtime. isolatedModules also
+  exposed one type-only re-export and one unused signature helper; both were
+  corrected without changing Core behavior.
+TypeScript consequence: accept D-038; complete C-19 and MIGRATE-2; publish the
+  browser-safe product entry point and frozen migration-completion record.
+Lambdapi consequence: none. Keep active authority, warnings, rules, audits,
+  catalogs, health, and the required conformance-oracle policy unchanged
+  through H-05.
+Decision: accept.
+Plan rows changed: D-038 accepted; C-19 complete; MIGRATE-2 complete;
+  GRADUATE-1/H-05 next.
+Remaining prerequisite or human review: GRADUATE-1 must publish and present
+  the concrete H-05 recommendation before the user decides the deployed
+  authority/oracle policy. H-06 remains conditional on measured parser need.
+```
+
+### MIGRATE-2 validation
+
+Validated on the exact MIGRATE-2 worktree diff:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_migration_inventory_tests.ts
+  tests/v3_2_migration_readiness_tests.ts
+  tests/v3_2_browser_api_tests.ts
+  tests/v3_2_manifest_tests.ts
+  tests/v3_2_pattern_unification_tests.ts
+  tests/v3_2_proof_state_tests.ts
+  tests/v3_2_proof_refinement_tests.ts
+  passed 69 tests / 8 suites with no skips
+
+node --require ts-node/register --test tests/v3_2_*_tests.ts
+  passed 224 tests / 24 suites: 205 passed, 19 opt-in probes skipped
+
+./scripts/pnpmw --dir emdash-template --ignore-workspace exec
+  tsc --noEmit -p tsconfig.json
+./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite build
+  strict TypeScript passed; Vite transformed 48 modules and built the
+  production fixture
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  224 tests / 24 suites: 205 passed, 19 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 224-test result
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
 The user resolved H-01, H-03, and H-04 on 2026-07-24, and their dependent
@@ -2861,8 +3001,9 @@ slices are complete:
   tranche; MIGRATE-1B closes the contextual Miller-pattern replacement
   tranche; MIGRATE-1C closes the checked, failure-atomic refinement tranche.
   MIGRATE-1D closes the replacement/readiness audit, including the template
-  and parser-package edges. Physical deletion MIGRATE-2 is dependency-ready
-  next, while H-05 remains at GRADUATE-1 after migration.
+  and parser-package edges. MIGRATE-2 deletes the exact frozen graph and
+  migrates every consumer/package edge without a compatibility API.
+  GRADUATE-1/H-05 is next.
 
 Neither approval changes the recorded authority classes. Do not guess a
 displayed-to-ordinary runtime equality, promote the conformance-only owners,
@@ -2887,8 +3028,10 @@ decision.
 
 Current gate state: H-01, H-03, and H-04 were approved by the user on
 2026-07-24. ELAB-2C completed without triggering H-02, and TSK-2 is complete
-without broadening either withheld H-04 claim. H-02, H-05, and H-06 remain
-future gates at their recorded triggers.
+without broadening either withheld H-04 claim. MIGRATE-2 has reached the H-05
+trigger; GRADUATE-1 must now freeze and present a concrete recommendation
+before requesting the user's decision. H-02 and H-06 remain untriggered future
+gates.
 
 ## Experiment Record Template
 
