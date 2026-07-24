@@ -38,6 +38,7 @@ import './v3_2_dependent_context_tests';
 import './v3_2_telescope_structural_tests';
 import './v3_2_manifest_tests';
 import './v3_2_runtime_tests';
+import './v3_2_runtime_rewrite_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,

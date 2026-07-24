@@ -331,6 +331,14 @@ const compileRuntimeRule = (
     const rightVariableOccurrences = rule.variables.map(() => 0);
     countVariableOccurrences(left, leftVariableOccurrences);
     countVariableOccurrences(right, rightVariableOccurrences);
+    const unboundSlot = leftVariableOccurrences.findIndex(count => count === 0);
+    if (unboundSlot !== -1) {
+        throw new CoreRuntimeCompilationError(
+            'INVALID_COMPILED_VARIABLES',
+            `Runtime rule '${rule.id}' does not bind declared variable ` +
+            `'${rule.variables[unboundSlot]}' on its left side`
+        );
+    }
     if (rightVariableOccurrences.some(
         (count, slot) => count > leftVariableOccurrences[slot]
     )) {

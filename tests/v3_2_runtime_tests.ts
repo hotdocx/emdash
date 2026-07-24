@@ -276,6 +276,15 @@ describe('TypeScript v3.2 TSK-2A runtime compilation', () => {
         assert.match(
             expectRuntimeCompilationError(
                 rule => {
+                    rule.variables.push('unused');
+                },
+                'INVALID_COMPILED_VARIABLES'
+            ).message,
+            /does not bind declared variable 'unused'/
+        );
+        assert.match(
+            expectRuntimeCompilationError(
+                rule => {
                     rule.left.owner = 'displayed-pullback';
                 },
                 'UNKNOWN_COMPILED_OWNER'
