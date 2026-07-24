@@ -43,7 +43,7 @@ const binding = (
 });
 
 /**
- * Lambdapi names for every owner in the ELAB-1B Core catalog.
+ * Lambdapi names for every owner in the ELAB-1C Core catalog.
  *
  * Sections are stable source anchors; callers must relocate declarations by
  * name instead of treating a remembered line number as authority.
@@ -79,6 +79,16 @@ export const LAMBDAPI_V32_OWNER_BINDINGS = {
         '6a. Transformation classifier, components, and generic projection calculus',
         'injective symbol Transf'
     ),
+    'category-of-categories': binding(
+        'Cat_cat',
+        '3c. Universe categories',
+        'constant symbol Cat_cat'
+    ),
+    'opposite-category': binding(
+        'Op_cat',
+        '2. Core categories',
+        'injective symbol Op_cat'
+    ),
     'hom-category': binding(
         'Hom_cat',
         '2. Core categories',
@@ -88,6 +98,21 @@ export const LAMBDAPI_V32_OWNER_BINDINGS = {
         'Transf_cat',
         '6a. Transformation classifier, components, and generic projection calculus',
         'injective symbol Transf_cat'
+    ),
+    'displayed-category-category': binding(
+        'Catd_cat',
+        '3d. Directed-family and displayed-arrow classifiers',
+        'injective symbol Catd_cat'
+    ),
+    'internal-hom-source': binding(
+        'hom_int',
+        '4d. Internalized source/target endpoints and variance comparison',
+        'injective symbol hom_int'
+    ),
+    'internal-hom-target': binding(
+        'hom_con_int',
+        '4d. Internalized source/target endpoints and variance comparison',
+        'injective symbol hom_con_int'
     ),
     'functor-object': binding(
         'fapp0',

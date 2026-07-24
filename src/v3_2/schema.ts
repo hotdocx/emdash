@@ -14,12 +14,17 @@ export type CoreTypeTag =
     | 'hom'
     | 'transfor';
 
-export type CoreOwnerKind = 'classifier' | 'category-former' | 'projection';
+export type CoreOwnerKind =
+    | 'classifier'
+    | 'category-former'
+    | 'functor-constructor'
+    | 'projection';
 
 export type CoreSlotRole =
     | 'classifier'
     | 'source-category'
     | 'target-category'
+    | 'base-category'
     | 'category'
     | 'source-endpoint'
     | 'target-endpoint'
@@ -50,7 +55,18 @@ export interface ClassifierOwnerSchema {
 
 export interface CategoryFormerOwnerSchema {
     kind: 'category-former';
-    former: 'hom' | 'transfor';
+    former:
+        | 'category-of-categories'
+        | 'opposite'
+        | 'hom'
+        | 'transfor'
+        | 'displayed-family';
+    slots: readonly CoreOwnerSlotSchema[];
+}
+
+export interface FunctorConstructorOwnerSchema {
+    kind: 'functor-constructor';
+    constructor: 'internal-hom-source' | 'internal-hom-target';
     slots: readonly CoreOwnerSlotSchema[];
 }
 
@@ -66,10 +82,11 @@ export interface ProjectionOwnerSchema {
 export type CoreOwnerSchema =
     | ClassifierOwnerSchema
     | CategoryFormerOwnerSchema
+    | FunctorConstructorOwnerSchema
     | ProjectionOwnerSchema;
 
 /**
- * The small Core owner catalog needed through ELAB-1B.
+ * The small Core owner catalog needed through ELAB-1C.
  *
  * No entry contains a backend symbol or module name. Slot order and plicity
  * are semantic declaration data shared by checking and all backends.
@@ -121,6 +138,18 @@ export const CORE_OWNER_SCHEMAS = {
             { name: 'G', plicity: 'explicit', role: 'target-functor' }
         ]
     },
+    'category-of-categories': {
+        kind: 'category-former',
+        former: 'category-of-categories',
+        slots: []
+    },
+    'opposite-category': {
+        kind: 'category-former',
+        former: 'opposite',
+        slots: [
+            { name: 'A', plicity: 'explicit', role: 'category' }
+        ]
+    },
     'hom-category': {
         kind: 'category-former',
         former: 'hom',
@@ -138,6 +167,31 @@ export const CORE_OWNER_SCHEMAS = {
             { name: 'B', plicity: 'implicit', role: 'target-category' },
             { name: 'F', plicity: 'explicit', role: 'source-functor' },
             { name: 'G', plicity: 'explicit', role: 'target-functor' }
+        ]
+    },
+    'displayed-category-category': {
+        kind: 'category-former',
+        former: 'displayed-family',
+        slots: [
+            { name: 'K', plicity: 'explicit', role: 'base-category' }
+        ]
+    },
+    'internal-hom-source': {
+        kind: 'functor-constructor',
+        constructor: 'internal-hom-source',
+        slots: [
+            { name: 'A', plicity: 'implicit', role: 'target-category' },
+            { name: 'B', plicity: 'implicit', role: 'source-category' },
+            { name: 'F', plicity: 'explicit', role: 'functor' }
+        ]
+    },
+    'internal-hom-target': {
+        kind: 'functor-constructor',
+        constructor: 'internal-hom-target',
+        slots: [
+            { name: 'A', plicity: 'implicit', role: 'target-category' },
+            { name: 'B', plicity: 'implicit', role: 'source-category' },
+            { name: 'F', plicity: 'explicit', role: 'functor' }
         ]
     },
     'functor-object': {
@@ -290,6 +344,8 @@ export const PROJECTION_PAIR_SCHEMAS = {
 } as const satisfies Record<string, ProjectionPairSchema>;
 
 export type SurfaceOperationId =
+    | 'internal-hom.source'
+    | 'internal-hom.target'
     | 'functor.object'
     | 'functor.hom.full'
     | 'functor.hom.capped'
@@ -339,6 +395,7 @@ export interface OperationOperandSchema {
 
 export interface OperationConstraintSchema {
     kind: 'equal';
+    comparison: 'category' | 'object-category';
     left: SchemaValue;
     right: SchemaValue;
     blame: OperationOperandName;
@@ -354,6 +411,7 @@ export interface OperationOwnerArgumentSchema {
 export type CoreTypeTemplate =
     | { tag: 'category' }
     | { tag: 'object'; category: SchemaValue }
+    | { tag: 'object-of-category'; category: SchemaValue }
     | {
         tag: 'functor';
         sourceCategory: SchemaValue;
@@ -440,9 +498,11 @@ const targetFunctorTarget = operandTypeField(
 const equal = (
     left: SchemaValue,
     right: SchemaValue,
-    blame: OperationOperandName
+    blame: OperationOperandName,
+    comparison: OperationConstraintSchema['comparison'] = 'category'
 ): OperationConstraintSchema => ({
     kind: 'equal',
+    comparison,
     left,
     right,
     blame,
@@ -469,6 +529,12 @@ const homCategoryAt = (
     target: SchemaValue
 ) => ownerApplication('hom-category', category, source, target);
 
+const oppositeCategoryAt = (category: SchemaValue) =>
+    ownerApplication('opposite-category', category);
+
+const displayedCategoryAt = (baseCategory: SchemaValue) =>
+    ownerApplication('displayed-category-category', baseCategory);
+
 const transforCategoryAt = (
     sourceCategory: SchemaValue,
     targetCategory: SchemaValue,
@@ -489,6 +555,54 @@ const transforCategoryAt = (
  * not require another operation-specific switch branch.
  */
 export const SURFACE_OPERATION_SCHEMAS = {
+    'internal-hom.source': {
+        owner: 'internal-hom-source',
+        diagnosticLabel: 'source-internalized hom',
+        operands: [
+            {
+                name: 'subject',
+                expectedKind: 'functor',
+                errorCode: 'EXPECTED_FUNCTOR',
+                expectation: 'an ordinary endpoint functor'
+            }
+        ],
+        constraints: [],
+        ownerArguments: [
+            { slot: 'A', value: subjectTarget, origin: 'recovered' },
+            { slot: 'B', value: subjectSource, origin: 'recovered' },
+            { slot: 'F', value: subjectTerm, origin: 'surface' }
+        ],
+        result: {
+            tag: 'functor',
+            sourceCategory: oppositeCategoryAt(subjectTarget),
+            targetCategory: displayedCategoryAt(subjectSource)
+        }
+    },
+    'internal-hom.target': {
+        owner: 'internal-hom-target',
+        diagnosticLabel: 'target-internalized hom',
+        operands: [
+            {
+                name: 'subject',
+                expectedKind: 'functor',
+                errorCode: 'EXPECTED_FUNCTOR',
+                expectation: 'an ordinary endpoint functor'
+            }
+        ],
+        constraints: [],
+        ownerArguments: [
+            { slot: 'A', value: subjectTarget, origin: 'recovered' },
+            { slot: 'B', value: subjectSource, origin: 'recovered' },
+            { slot: 'F', value: subjectTerm, origin: 'surface' }
+        ],
+        result: {
+            tag: 'functor',
+            sourceCategory: subjectTarget,
+            targetCategory: displayedCategoryAt(
+                oppositeCategoryAt(subjectSource)
+            )
+        }
+    },
     'functor.object': {
         owner: 'functor-object',
         diagnosticLabel: 'functor object action',
@@ -507,7 +621,12 @@ export const SURFACE_OPERATION_SCHEMAS = {
             }
         ],
         constraints: [
-            equal(subjectSource, argumentObjectCategory, 'argument')
+            equal(
+                subjectSource,
+                argumentObjectCategory,
+                'argument',
+                'object-category'
+            )
         ],
         ownerArguments: [
             { slot: 'A', value: subjectSource, origin: 'recovered' },
@@ -516,7 +635,7 @@ export const SURFACE_OPERATION_SCHEMAS = {
             { slot: 'X', value: argumentTerm, origin: 'surface' }
         ],
         result: {
-            tag: 'object',
+            tag: 'object-of-category',
             category: subjectTarget
         }
     },
@@ -544,8 +663,18 @@ export const SURFACE_OPERATION_SCHEMAS = {
             }
         ],
         constraints: [
-            equal(subjectSource, sourceEndpointCategory, 'sourceEndpoint'),
-            equal(subjectSource, targetEndpointCategory, 'targetEndpoint')
+            equal(
+                subjectSource,
+                sourceEndpointCategory,
+                'sourceEndpoint',
+                'object-category'
+            ),
+            equal(
+                subjectSource,
+                targetEndpointCategory,
+                'targetEndpoint',
+                'object-category'
+            )
         ],
         ownerArguments: [
             { slot: 'A', value: subjectSource, origin: 'recovered' },
@@ -649,7 +778,12 @@ export const SURFACE_OPERATION_SCHEMAS = {
         constraints: [
             equal(sourceFunctorSource, targetFunctorSource, 'targetFunctor'),
             equal(sourceFunctorTarget, targetFunctorTarget, 'targetFunctor'),
-            equal(sourceFunctorSource, argumentObjectCategory, 'argument')
+            equal(
+                sourceFunctorSource,
+                argumentObjectCategory,
+                'argument',
+                'object-category'
+            )
         ],
         ownerArguments: [
             { slot: 'A', value: sourceFunctorSource, origin: 'recovered' },
@@ -701,7 +835,12 @@ export const SURFACE_OPERATION_SCHEMAS = {
             }
         ],
         constraints: [
-            equal(subjectSource, argumentObjectCategory, 'argument')
+            equal(
+                subjectSource,
+                argumentObjectCategory,
+                'argument',
+                'object-category'
+            )
         ],
         ownerArguments: [
             { slot: 'A', value: subjectSource, origin: 'recovered' },
@@ -752,8 +891,18 @@ export const SURFACE_OPERATION_SCHEMAS = {
             }
         ],
         constraints: [
-            equal(subjectSource, sourceEndpointCategory, 'sourceEndpoint'),
-            equal(subjectSource, targetEndpointCategory, 'targetEndpoint')
+            equal(
+                subjectSource,
+                sourceEndpointCategory,
+                'sourceEndpoint',
+                'object-category'
+            ),
+            equal(
+                subjectSource,
+                targetEndpointCategory,
+                'targetEndpoint',
+                'object-category'
+            )
         ],
         ownerArguments: [
             { slot: 'A', value: subjectSource, origin: 'recovered' },

@@ -10,7 +10,7 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Status: active living master plan; ELAB-1B is complete and ELAB-1C is the
+Status: active living master plan; ELAB-1C is complete and ELAB-2A0 is the
 next dependency-ready implementation slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
@@ -164,6 +164,7 @@ cleanly.
 | D-012 | accepted | Persistent implementation uses bounded experiments and, only when the launch prompt authorizes them, a dedicated local goal branch/worktree and validated checkpoint commits. | See the Git protocol linked above. |
 | D-013 | accepted | Core owner identifiers and slot telescopes are backend-neutral; active Lambdapi names, modules, and source provenance live only in the conformance-backend catalog. Surface projection constructors lower through generic operation records rather than owner-named union branches. | ELAB-1A preserves all three ELAB-0 targets, adds `tapp0_fapp0`, and passes positive/negative Lambdapi probes through this split. |
 | D-014 | accepted | Treat a rigid object, hom arrow, or ordinary transfor uniformly through its recursively recovered object-category. Record full, capped, and evaluator owners separately; higher-cell action is recursive reuse of the ordinary full hom schema. | ELAB-1B represents `Hom_cat` and `Transf_cat` as semantic category formers, passes the two-level 2-cell consumer without `fapp2`, rejects the wrong inner hom at its source span, and verifies all three active evaluator conversions in Lambdapi. |
+| D-015 | accepted | Decode an object produced by generic `fapp0` from its target category former into the richest rigid Core view currently known. In particular, an object of `Catd_cat(K)` remains an ordinary `K → Cat_cat` functor, while opposite-category membership uses only the active `Obj(Op_cat A) ↪ Obj A` classifier equation and does not identify `A` with `Op_cat A`. | ELAB-1C retains both internal-Hom families after their first object projection, reuses ordinary `fapp0` for the later projection, verifies the distinct `Hom_A(W,Fb)` and `Hom_A(Fb,W)` normal forms in Lambdapi, and rejects both a wrong base object and a variance-reversed conversion. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -307,8 +308,8 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-06 | `tapp0_func` full component functor | complete in ELAB-1B | Exact first-class functor target and conversion to `tapp0_fapp0` |
 | C-07 | `tapp1_func` full off-diagonal functor | complete in ELAB-1B | Exact first-class functor target and conversion to `tapp1_fapp0` |
 | C-08 | Recursive action on a 2-cell | complete in ELAB-1B | Two hom levels use the same full schema; wrong inner endpoint is rejected at its span |
-| C-09 | Partially applied `hom_int` | missing | Object projection followed by later action |
-| C-10 | Partially applied `hom_con_int` | missing | Variance-correct target action and reversal negative |
+| C-09 | Partially applied `hom_int` | complete in ELAB-1C | Retained `B → Cat_cat` family, later object action, exact source-varying conversion, and wrong-base rejection |
+| C-10 | Partially applied `hom_con_int` | complete in ELAB-1C | Retained `Op_cat(B) → Cat_cat` family, exact target-varying conversion, and reversal rejection |
 | C-11 | Metavariable/implicit solving over Core | missing | Occurs/scope/ambiguity negatives |
 | C-12 | Context extension and displayed type | missing | Dependent lookup and substitution |
 | C-13 | Constant displayed family comparison | missing | Both routes plus a deliberate non-collapse |
@@ -334,9 +335,12 @@ must identify their common baseline.
 | ELAB-0 | complete wiring spike | — | Three capped/object owners lower to explicit target terms; TypeScript and opt-in Lambdapi positive/negative probes pass. |
 | ELAB-1A | complete | ELAB-0 | Backend-neutral classifier/projection owner schemas and generic surface-operation lowering preserve the three ELAB-0 targets; a separate provenance-bearing Lambdapi catalog emits them plus `tapp0_fapp0`; focused exact-target, wrong-object, and positive/negative conformance probes pass. |
 | ELAB-1B | complete | ELAB-1A | Variable operation telescopes, explicit full/capped/evaluator pairs, recursive object-category recovery, all three full owners, the recursive 2-cell stress case, wrong-inner-hom rejection, and bounded evaluator-conversion probes are green. |
-| ELAB-1C | next / dependency-ready | ELAB-1B | Add partial internalization cases for `hom_int` and `hom_con_int`; prove the grammar can retain an unapplied Hom-valued functor and later project it with correct variance. |
-| ELAB-2A | pending | ELAB-1A, Core binder decision | Reimplement session-owned scopes, binders, metavariables, constraints, substitution, occurs checking, and bidirectional checking over Core. |
-| ELAB-2B | pending | ELAB-2A | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
+| ELAB-1C | complete | ELAB-1B | Backend-neutral `hom_int`/`hom_con_int` constructors, category-former object decoding, two retained Hom-valued functors, exact variance conversions, wrong-base rejection, and a reversed-variance Lambdapi negative are green. |
+| ELAB-2A | split | ELAB-1 schema stability | The former all-in-one scope/meta/checker tranche is split into ELAB-2A0 through ELAB-2A2 so each checkpoint owns one reviewable semantic claim. |
+| ELAB-2A0 | next / dependency-ready | ELAB-1C | Stabilize bound-variable identity in Core and implement alpha-invariant comparison plus capture-safe shift/substitution, with binder-mode, shadowing, free-variable, and composition negatives. |
+| ELAB-2A1 | pending | ELAB-2A0 | Add a per-session scope, metavariable, and constraint store with deterministic fresh identities, scope-escape rejection, occurs checking, and solution-isolation tests. |
+| ELAB-2A2 | pending | ELAB-2A1 | Add the bounded bidirectional Pi/lambda/application checker and schema-driven implicit insertion over Core, including ambiguity and source-located mismatch negatives. |
+| ELAB-2B | pending | ELAB-2A2 | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
 | ELAB-2C | pending | ELAB-2B | Exercise weakening, permitted/forbidden exchange, and contraction. Record missing displayed owners with consumer probes; do not yet assume kernel promotion. |
 | KERNEL-DISPLAYED-1 | conditional | ELAB-2C failure evidence | If a concrete uniform elaboration consumer cannot be expressed, design and probe the smallest displayed structural owner package under the v3.2 SOP, including degeneration/comparison and non-collapse cases. Human review is required before promotion. |
 | KERNEL-DISPLAYED-2 | conditional | reviewed KERNEL-DISPLAYED-1 | Promote only reviewed kernel changes with diagnostics, warning comparison, audits, catalogs, health, examples, and CI synchronized. |
@@ -496,30 +500,106 @@ Plan rows changed: D-014 accepted; C-05 through C-08 complete; ELAB-1B
 Remaining prerequisite or human review: none for this bounded slice.
 ```
 
-## Immediate Slice: ELAB-1C
+## Completed Slice: ELAB-1C
 
-The next run should begin with an owner-position probe for `hom_int` and
-`hom_con_int`, then implement the smallest evidence-backed partial
-internalization slice:
+ELAB-1C introduced:
 
-1. relocate their active declarations, result classifiers, variance, plicity,
-   projection/evaluator rules, diagnostics, and current deferred boundaries;
-2. add backend-neutral owner schemas and Lambdapi bindings without encoding a
-   backend spelling in Core or adding owner-specific elaborator branches;
-3. represent each unapplied internal-Hom result as a first-class functor that
-   can be retained and later projected through the existing common ladder;
-4. pass one source-varying `hom_int` consumer and one target-varying
-   `hom_con_int` consumer with exact Core/Lambdapi targets;
-5. reject a variance-reversed or category-mismatched consumer at its
-   originating span, and retain an explicit non-collapse case if the two routes
-   are not definitionally equal;
-6. run focused pure and opt-in Lambdapi probes, `check:ts`, the bounded kernel
-   check, and the proportional repository gate before synchronizing the ledger.
+- backend-neutral semantic owners and separate Lambdapi bindings for
+  `Cat_cat`, `Op_cat`, `Catd_cat`, `hom_int`, and `hom_con_int`;
+- generic surface operations for the two internal-Hom constructors, still
+  lowered by the operation-schema interpreter without a constructor-specific
+  elaborator branch;
+- a category-former object decoder: generic `fapp0` now retains the strongest
+  rigid Core type known for an object of `Cat_cat`, `Hom_cat`,
+  `Transf_cat`, or `Catd_cat`;
+- a deliberately narrow object-category comparison implementing
+  `Obj(Op_cat A) ↪ Obj A` without treating opposite categories, Hom
+  classifiers, or functor sources as globally equal;
+- durable source- and target-varying consumers that retain `hom_int(F)[W]` as
+  `B → Cat_cat` and `hom_con_int(F)[W]` as `Op_cat(B) → Cat_cat`, then use a
+  second ordinary `fapp0`.
 
-Do not assume a variance, argument order, degeneration, or conversion that the
-active owner declarations and rules do not establish. This slice must not add a
-broad parser, begin legacy migration, or change an active Lambdapi declaration
-without separate SOP evidence.
+The generated probe checks the exact, distinct conversions
+`hom_int(F)[W][b] ≡ Hom_A(W,Fb)` and
+`hom_con_int(F)[W][b] ≡ Hom_A(Fb,W)`. A `C`-object supplied to the retained
+`B → Cat_cat` family is rejected at that object's source span, and Lambdapi
+independently rejects conversion of the target-varying route to the reversed
+source-varying Hom category.
+
+### Experiment ELAB-1C-PARTIAL-INTERNAL-HOM
+
+```text
+Experiment ID: ELAB-1C-PARTIAL-INTERNAL-HOM
+Date and checkpoint: 2026-07-23 at ELAB-1B checkpoint 4e58e8e
+Question/hypothesis: a generic object-of-category decoder for active category
+  formers can retain an object of Catd_cat(K) as an ordinary K-to-Cat functor,
+  allowing hom_int(F)[W][y] and hom_con_int(F)[W][b] to use two ordinary fapp0
+  applications without a constructor-specific application branch.
+Authority and owner position inspected: active declarations and rules for
+  Op_cat/Obj(Op_cat), Cat_cat, Catd_cat/Obj(Catd_cat), hom_, hom_con, hom_int,
+  hom_con_int, their full/capped represented-endpoint actions, matching checks,
+  current SOP ownership invariants, Foundations, and canonical syntax.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on goal/typescript-elaborator-v3.2 at
+  4e58e8e; descendant of baseline a06433e.
+Minimal positive consumer: retain hom_int(F)[W] as B ⊢ Cat and
+  hom_con_int(F)[W] as B^op ⊢ Cat, then project each at an object and confirm
+  the exact Hom_A(W,F[y]) / Hom_A(F[b],W) normal form.
+Relevant negative/non-collapse consumer: reject a later object from the wrong
+  base at its source span and reject conversion of the hom_con_int projection
+  to the source/target-reversed Hom category.
+Probe command and bounded result:
+  node --require ts-node/register --test tests/v3_2_elab1c_tests.ts
+    passed 5, skipped 2 opt-in probes.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 with the same command
+    passed 7/7; both retained families and exact variance conversions were
+    accepted, while the source/target-reversed target conversion was rejected.
+  ./scripts/pnpmw run check:ts
+    passed 178 tests / 45 suites: 171 passed, 7 opt-in probes skipped.
+  EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+    passed the active kernel, four one-way extensions, and diagnostics.
+  EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+    passed the root gate; all 41 active Lambdapi kernel/example targets;
+    39 formal infrastructure tests; 5 print registry tests; active-reference,
+    report-header, book/evidence/typography/KaTeX checks; strict rule-LHS
+    audit; and generated catalog freshness.
+Warning/audit/catalog/health effects, if any: no Lambdapi source change is
+  present; existing object-projection and variance-separated owners remain the
+  runtime authorities.
+Decision: accept. Objects of Catd_cat stay first-class ordinary functors in
+  Core, opposite object membership is handled by an audited classifier-level
+  comparison rather than an owner-specific operation exception, and both
+  variance normal forms pass bounded Lambdapi evidence without collapsing.
+Plan rows changed: D-015 accepted; C-09 and C-10 complete; ELAB-1C complete;
+  the oversized ELAB-2A tranche split into ELAB-2A0 through ELAB-2A2, with
+  ELAB-2A0 dependency-ready.
+Remaining prerequisite or human review: none for this bounded slice.
+```
+
+## Immediate Slice: ELAB-2A0
+
+The next slice makes the Core binder decision that previously blocked
+ELAB-2A. It is deliberately limited to binding structure and structural term
+operations:
+
+1. inventory the current v3.2 named-reference/binder representation and the
+   reusable alpha/substitution evidence in the legacy prototype without
+   importing its stale term union or global state;
+2. choose and record a stable distinction between free declaration references
+   and bound variables; binder display names and provenance must not determine
+   identity;
+3. implement alpha-invariant structural comparison and capture-safe
+   shifting/substitution over owner applications, Pi types, and lambdas;
+4. preserve plicity and variation metadata and deterministic Lambdapi
+   serialization, using generated display names only at the backend boundary;
+5. add positive alpha/shadowing/substitution-composition cases and negatives
+   for free-variable confusion, escaping indices, and binder-mode mismatch;
+6. run focused tests, `check:ts`, the bounded kernel check, and the
+   proportional repository gate before synchronizing the experiment record.
+
+Do not add metavariable mutation, constraint solving, bidirectional checking,
+displayed-context owners, or legacy category compatibility in ELAB-2A0.
+Those belong to the dependency-ordered follow-up slices.
 
 ## Human Review Gates
 

@@ -32,6 +32,8 @@ import {
     CoreType,
     SurfaceContext,
     SurfaceTerm,
+    coreObjectCategoryEquals,
+    coreTypeForCategoryObject,
     coreTypeObjectCategory,
     isObjectLikeCoreType
 } from './surface';
@@ -231,6 +233,16 @@ function instantiateCoreType(
                     span
                 )
             };
+        case 'object-of-category':
+            return coreTypeForCategoryObject(
+                evaluateSchemaValue(
+                    template.category,
+                    operands,
+                    span
+                ),
+                span,
+                'schema-directed object category view'
+            );
         case 'functor':
             return {
                 tag: 'functor',
@@ -337,7 +349,10 @@ function elaborateOperation(
             operands,
             surface.span
         );
-        if (!kernelExpressionEquals(left, right)) {
+        const equalCategories = constraint.comparison === 'object-category'
+            ? coreObjectCategoryEquals(left, right)
+            : kernelExpressionEquals(left, right);
+        if (!equalCategories) {
             categoryMismatch(
                 operands[constraint.blame].sourceSpan,
                 schema.diagnosticLabel,

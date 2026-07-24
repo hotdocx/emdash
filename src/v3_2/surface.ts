@@ -3,8 +3,8 @@
  *
  * The context is intentionally small: it knows enough about categories,
  * objects, functors, iterated arrows, and ordinary transfors to recover the
- * implicit slots of the first owner family. It performs no categorical
- * conversion.
+ * implicit slots of the current owner families. Its only categorical
+ * conversion is an explicitly audited object-classifier equation.
  */
 
 import {
@@ -21,7 +21,15 @@ import {
 } from './kernel';
 import { SurfaceOperationId } from './schema';
 
-export type SurfaceCategoryInput = string | SurfaceHomCategory;
+export type SurfaceCategoryInput =
+    | string
+    | SurfaceOppositeCategory
+    | SurfaceHomCategory;
+
+export interface SurfaceOppositeCategory {
+    tag: 'opposite-category';
+    category: SurfaceCategoryInput;
+}
 
 export interface SurfaceHomCategory {
     tag: 'hom-category';
@@ -29,6 +37,13 @@ export interface SurfaceHomCategory {
     sourceObject: string;
     targetObject: string;
 }
+
+export const oppositeCategory = (
+    category: SurfaceCategoryInput
+): SurfaceOppositeCategory => ({
+    tag: 'opposite-category',
+    category
+});
 
 export const homCategory = (
     category: SurfaceCategoryInput,
@@ -221,6 +236,80 @@ export function coreTypeObjectCategory(
     }
 }
 
+const objectClassifierCategory = (
+    category: KernelExpression
+): KernelExpression => {
+    let current = category;
+    while (
+        current.tag === 'application' &&
+        current.owner === 'opposite-category'
+    ) {
+        current = current.arguments[0].value;
+    }
+    return current;
+};
+
+/**
+ * Compare categories only through the active object-classifier equations.
+ *
+ * In particular, `Obj(Op_cat A) ↪ Obj A`; this does not identify `A` and
+ * `Op_cat A` as categories or erase variance from a Hom classifier.
+ */
+export function coreObjectCategoryEquals(
+    left: KernelExpression,
+    right: KernelExpression
+): boolean {
+    return kernelExpressionEquals(
+        objectClassifierCategory(left),
+        objectClassifierCategory(right)
+    );
+}
+
+/**
+ * Retain the richest rigid Core view known for an object of a category former.
+ */
+export function coreTypeForCategoryObject(
+    category: KernelExpression,
+    span: SourceSpan,
+    detail: string
+): CoreType {
+    if (category.tag !== 'application') {
+        return { tag: 'object', category };
+    }
+
+    switch (category.owner) {
+        case 'category-of-categories':
+            return { tag: 'category' };
+        case 'hom-category':
+            return {
+                tag: 'hom',
+                category: category.arguments[0].value,
+                sourceObject: category.arguments[1].value,
+                targetObject: category.arguments[2].value
+            };
+        case 'transfor-category':
+            return {
+                tag: 'transfor',
+                sourceCategory: category.arguments[0].value,
+                targetCategory: category.arguments[1].value,
+                sourceFunctor: category.arguments[2].value,
+                targetFunctor: category.arguments[3].value
+            };
+        case 'displayed-category-category':
+            return {
+                tag: 'functor',
+                sourceCategory: category.arguments[0].value,
+                targetCategory: kernelApplication(
+                    'category-of-categories',
+                    [],
+                    derived(detail, span)
+                )
+            };
+        default:
+            return { tag: 'object', category };
+    }
+}
+
 export function coreTypeToKernelType(
     type: CoreType,
     span: SourceSpan,
@@ -407,25 +496,40 @@ export class SurfaceContext {
             return this.expectCategory(category, owner).reference;
         }
 
-        const base = this.resolveCategory(category.category, owner);
-        const source = this.expectObject(
-            category.sourceObject,
-            base,
-            owner
-        );
-        const target = this.expectObject(
-            category.targetObject,
-            base,
-            owner
-        );
-        return kernelApplication('hom-category', [
-            { value: base },
-            { value: source.reference },
-            { value: target.reference }
-        ], derived(
-            `surface hom category for binding ${owner.name}`,
-            owner.span
-        ));
+        switch (category.tag) {
+            case 'opposite-category':
+                return kernelApplication('opposite-category', [{
+                    value: this.resolveCategory(category.category, owner)
+                }], derived(
+                    `surface opposite category for binding ${owner.name}`,
+                    owner.span
+                ));
+            case 'hom-category': {
+                const base = this.resolveCategory(category.category, owner);
+                const source = this.expectObject(
+                    category.sourceObject,
+                    base,
+                    owner
+                );
+                const target = this.expectObject(
+                    category.targetObject,
+                    base,
+                    owner
+                );
+                return kernelApplication('hom-category', [
+                    { value: base },
+                    { value: source.reference },
+                    { value: target.reference }
+                ], derived(
+                    `surface hom category for binding ${owner.name}`,
+                    owner.span
+                ));
+            }
+            default: {
+                const exhaustive: never = category;
+                return exhaustive;
+            }
+        }
     }
 
     private expectObject(
@@ -447,7 +551,7 @@ export class SurfaceContext {
                 'of a category'
             );
         }
-        if (!kernelExpressionEquals(objectCategory, category)) {
+        if (!coreObjectCategoryEquals(objectCategory, category)) {
             throw new SurfaceContextError(
                 'ENDPOINT_CATEGORY_MISMATCH',
                 owner.span,
@@ -607,6 +711,24 @@ export const surfaceOperation = (
     operands,
     span
 });
+
+export const surfaceHomInt = (
+    functor: SurfaceTerm,
+    span: SourceSpan
+): SurfaceTerm => surfaceOperation(
+    'internal-hom.source',
+    [functor],
+    span
+);
+
+export const surfaceHomConInt = (
+    functor: SurfaceTerm,
+    span: SourceSpan
+): SurfaceTerm => surfaceOperation(
+    'internal-hom.target',
+    [functor],
+    span
+);
 
 export const surfaceFapp0 = (
     functor: SurfaceTerm,
