@@ -13,8 +13,8 @@ Infinity-Codex-Decision-Responses: none; decisions are recorded inline
 Human-Decision-Record: on 2026-07-24 the user approved H-01 dependent-first,
 H-03/D-023, and H-04/D-030 exactly as proposed
 Status: active living master plan; H-01, H-03, and H-04 are resolved, ELAB-2C
-is complete without triggering H-02, TSK-2 and TSK-3A/B are complete, and
-TSK-3C is the next dependency-ready slice
+is complete without triggering H-02, TSK-2 and TSK-3 are complete, and
+MIGRATE-1 is the next dependency-ready slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -185,6 +185,7 @@ cleanly.
 | D-030 | accepted; H-04 approved 2026-07-24 | Authorize a termination claim only for the exact three H-03 runtime rules on finite Core syntax: the global number of full projection owners strictly decreases because every rule removes one explicit full owner and duplicates no matched subtree. Authorize deterministic bounded evaluation/comparison and exactly those trusted rules. Withhold a general confluence claim: pairwise root discrimination is not a nested-critical-pair proof for non-left-linear patterns. Withhold a standalone TypeScript subject-reduction theorem: exact elaborated classifiers and bounded Lambdapi differential probes are evidence, but full-redex checking still needs active classifier computation outside the frozen runtime rules. Keep Lambdapi as the subject-reduction oracle. | The user approved H-04/D-030 exactly as proposed. TSK-2C2 records that decision in the distinct deep-frozen `CORE_RUNTIME_H04_REVIEW`: termination, bounded evaluation/comparison, and exactly three rules are authorized; confluence and TypeScript subject reduction remain withheld; Lambdapi remains the oracle. The H-03 manifest, candidate program, pre-review recommendation, and their `claimsAuthorized: false` history remain unchanged. |
 | D-031 | accepted | Interpret TSK-3's common frozen fragment as exactly the 16 H-03-reviewed owners and three runtime rules, not the 24-owner conformance superset. Pin one immutable exit matrix. Give every common owner a positive judgment and a well-scoped negative result-type judgment over the same Core term in both engines; give every rule a positive conversion, well-typed near-miss non-conversion, and malformed candidate rejection; close with recursive functor-hom and native transfor-level higher-cell packages. Batch cases into bounded probes. | TSK-3A derives the exact owner/rule matrix from the reviewed manifest, rejects scope drift, and builds one deterministic owner corpus. The TypeScript checker and one Lambdapi `assert`/`assertnot` probe agree on all 16 positive and 16 negative owner judgments. Existing tests over all 24 owners remain useful conformance evidence but do not redefine product parity. |
 | D-032 | accepted | For each TSK-3B row, use the exact reviewed redex/reduct as the positive pair. Form the negative pair by replacing only the redex's full-projection functor with a fresh rigid declaration of the identical classifier, and pair it with a malformed candidate whose left pattern erases that required full projection. Establish TypeScript well-typedness by the surface-elaborated redex plus checked same-classifier substitution; do not add the active classifier equations needed for standalone full-redex checker replay. Require zero-step TypeScript non-conversion and a Lambdapi `assertnot` over the same negative pair. | All three positive pairs convert in one TypeScript runtime step and in Lambdapi. All three substituted terms are irreducible and differ from their reducts at zero steps; Lambdapi accepts the corresponding non-conversions. The runtime compiler rejects the broadened candidates: two fail the mandatory full-projection decrease and the transfor-hom candidate first exposes its now-unbound `eta`. Direct Core-checker replay still encounters the H-04-recorded object-classifier equation boundary, so TSK-3B records the narrower substitution evidence and does not broaden trusted conversion or claim standalone subject reduction. |
+| D-033 | accepted | Close the frozen TSK-3 matrix with exactly two higher-cell packages. Reuse the ordinary full/capped functor-hom schema recursively for the 2-cell package, and use the native transfor component/hom owners for the second package. Share nine positive typings, three exact wrong-endpoint negative typings, and three reviewed conversions between TypeScript surface elaboration/runtime comparison and one bounded Lambdapi probe. Publish a deep-frozen completion record tied to every scope row, while retaining the oracle until graduation. | The actual terms and types exercise every owner named by both package rows. The recursive conversion uses `projection.functor-hom.evaluate` at the next hom level without a new `fapp2`; the component and hom conversions use the other two reviewed rules. TypeScript rejects all three wrong operands at their source spans, and Lambdapi accepts the same corrupt Core terms as negative typing judgments. The completion status is only for the 16-owner H-03 frozen fragment: C-09/C-10 remain conformance evidence outside that denominator, no broader grammar-representativeness claim is made, and H-04 remains unchanged. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -348,7 +349,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-17 | TypeScript rule manifest/checker | complete for the reviewed MVP fragment | The exact 16-owner/three-rule product profile compiles and executes through deterministic numeric-slot matching, manifest-ordered root buckets, explicit step limits, structural congruence, and checker conversion. H-04 authorizes termination, bounded evaluation/comparison, and exactly those three runtime rules. Proof-time/non-conversion evidence, excluded owners, unfolding, and generic beta remain non-executable; general confluence and standalone TypeScript subject reduction remain withheld. |
 | C-18 | Source-mapped backend diagnostics | partial | Generated map exists; diagnostic remapping missing |
 | C-19 | Legacy category-layer removal | blocked by replacement | Generic inventory and replacement gates green |
-| C-20 | Frozen-fragment differential parity | partial; owner and rule matrices complete in TSK-3A/B | The exact manifest-derived 16-owner corpus has shared positive and negative TypeScript/Lambdapi outcomes. All three runtime rows share positive conversion, well-typed near-miss non-conversion, and paired malformed-candidate evidence. The two higher-cell packages remain TSK-3C. |
+| C-20 | Frozen-fragment differential parity | complete | The manifest-derived 16-owner corpus, all three runtime rows, and both higher-cell packages have shared TypeScript/Lambdapi positive, negative, and conversion outcomes. The drift-checked completion record retains Lambdapi as required oracle until graduation and does not promote conformance-only C-09/C-10 owners. |
 
 The first higher-dimensional corpus must exercise C-05 through C-10 before
 declaring the grammar representative of v3.2.
@@ -386,11 +387,11 @@ must identify their common baseline.
 | TSK-2C | complete; split at H-04 | TSK-2B | Candidate comparison and the reviewed metatheory boundary remain separate so implementation evidence cannot silently authorize its own trust claims. |
 | TSK-2C1 | complete | TSK-2B | Structural-plus-runtime congruence with global fuel, deterministic diagnostics, checker integration, strict termination measure, explicit authority negatives, and the immutable D-030 recommendation are green. |
 | TSK-2C2 | complete; H-04 approved | TSK-2C1, reviewed D-030 | The distinct drift-checked H-04 review artifact authorizes only the approved termination/mechanism/rule boundary, preserves both withheld claims and the Lambdapi oracle, and leaves the H-03 manifest and candidate history unchanged. |
-| TSK-3 | split | TSK-2 | Differential parity is split into exact owner judgments, rule boundaries, and higher-cell closure so every claim uses one shared TypeScript/Lambdapi corpus and a bounded oracle probe. |
+| TSK-3 | complete | TSK-2 | Differential parity is split into exact owner judgments, rule boundaries, and higher-cell closure so every claim uses one shared TypeScript/Lambdapi corpus and a bounded oracle probe. |
 | TSK-3A | complete | TSK-2 | The immutable manifest-derived exit matrix covers exactly 16 owners, three rules, and two higher-cell packages. One shared owner corpus passes 16 positive and 16 negative result-type judgments in both TypeScript and Lambdapi; matrix drift is rejected. |
 | TSK-3B | complete | TSK-3A | Each reviewed rule now has one shared redex/reduct conversion, a rigid same-classifier near-miss rejected by both conversion engines, and a broadened malformed candidate paired directly with that oracle-side absence witness. The known standalone classifier-computation gap remains explicit rather than becoming an unreviewed checker rule. |
-| TSK-3C | dependency-ready / next | TSK-3B | Close the recursive functor-hom 2-cell and native transfor component/hom packages with positive, wrong-endpoint, and conversion parity; publish a drift-checked completion matrix without broadening H-04 claims. |
-| MIGRATE-1 | pending | replacement inventory, TSK-2 | Port/reimplement still-useful generic proof/unification facilities and classify every legacy test. |
+| TSK-3C | complete | TSK-3B | The two exact packages share nine positive typings, three wrong-endpoint negatives, and three higher-level conversions between TypeScript and Lambdapi. Actual owner occurrence, recursive ordinary-schema reuse, completion drift, and the retained oracle policy are checked without broadening H-04. |
+| MIGRATE-1 | dependency-ready / next | replacement inventory, TSK-2 | Port/reimplement still-useful generic proof/unification facilities and classify every legacy test. |
 | MIGRATE-2 | pending | MIGRATE-1, replacement tests | Delete the old category-specific nodes, standard library, reductions, and obsolete category tests; retain no D0/D1 or legacy category compatibility API. |
 | GRADUATE-1 | human gate | TSK-3, MIGRATE-2 | Review parity evidence, trust assumptions, subject reduction, termination/confluence scope, performance, and maintenance cost. Decide whether TypeScript is the authoritative deployed MVP kernel. |
 | RELEASE-READY | pending | GRADUATE-1 | Documentation, manifests, examples, diagnostics, full repository checks, and explicit residual Lambdapi-conformance policy are synchronized. |
@@ -2255,6 +2256,109 @@ git diff --check
   passed
 ```
 
+## Completed Slice: TSK-3C
+
+TSK-3C closes the last rows of the exact H-03 differential matrix:
+
+- `buildCoreMvpHigherCellDifferentialCorpus` publishes the two required
+  packages in frozen scope order. Their actual Core terms and types contain
+  every owner named by the corresponding matrix row;
+- the recursive package builds the second hom action by applying
+  `functor-hom-full` to an already full hom-action functor, then evaluates it
+  on a 2-cell. TypeScript and Lambdapi both use
+  `projection.functor-hom.evaluate` at this next hom level; no `fapp2` or
+  dimension-specific Core node exists;
+- the native transfor package covers both the full/capped component level and
+  the full/capped hom level. Its two evaluator pairs use exactly the other
+  reviewed runtime rules;
+- nine surface-elaborated positive typings, three source-located
+  wrong-endpoint negatives, and three one-step conversions are shared with
+  one bounded Lambdapi probe. The negative Core terms differ from their valid
+  full projections at exactly the rejected endpoint slot;
+- `CORE_MVP_DIFFERENTIAL_COMPLETION` is a deep-frozen, drift-checked record of
+  every owner, rule, and higher-cell requirement and its TSK-3 evidence. Its
+  oracle policy remains `required-until-graduation`;
+- completion is deliberately scoped to the 16-owner H-03 product fragment.
+  The internal-Hom C-09/C-10 consumers remain green conformance evidence, but
+  their excluded owners are not promoted and this slice does not declare the
+  broader surface grammar representative.
+
+### Experiment TSK-3C-HIGHER-CELL-CLOSURE
+
+```text
+Experiment ID: TSK-3C-HIGHER-CELL-CLOSURE
+Date and checkpoint: 2026-07-24 at TSK-3B checkpoint 69a16dd
+Question/hypothesis: the frozen fragment's higher-cell rows can close by
+  recursively reusing the reviewed ordinary projection schemas, with shared
+  TypeScript/Lambdapi positive, endpoint-negative, and conversion judgments,
+  without adding a dimension-specific owner or broadening H-04.
+Authority and owner position inspected: CORE_MVP_DIFFERENTIAL_SCOPE,
+  CORE_MVP_MANIFEST and runtime program; the active recursive
+  `fapp1_func` consumer; native `tapp0_func`/`tapp1_func` consumers; surface
+  object-category recovery; and the three active Lambdapi projection rules.
+  No Lambdapi declaration or rule changed.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on
+  goal/typescript-elaborator-v3.2 at 69a16dd before the experiment;
+  descendant of baseline a06433e.
+Minimal positive consumer: type the recursive full hom-action functor, its
+  evaluation on alpha, the corresponding capped action, and all full/redex/
+  capped component and hom terms for an ordinary transfor.
+Relevant negative/non-collapse consumer: substitute a C-hom as the recursive
+  inner target, a C-object as the component index, and a C-object as the
+  transfor-hom target. TypeScript must reject each surface operand at its
+  source span; Lambdapi must accept `assertnot` for the corresponding corrupt
+  Core typing judgment.
+Probe command and bounded result: one probe with nine positive typings, three
+  negative typings, and three conversions completes in about two seconds.
+Observed result: both engines accept every positive and conversion and reject
+  every wrong endpoint. The recursive conversion is an ordinary rule-0 step
+  at a nested hom category, and the corpus contains no `fapp2`.
+Unexpected result or failure: none. The standalone classifier-computation
+  limitation recorded by H-04 remains outside this surface-elaboration
+  evidence and was not converted into a new runtime rule.
+TypeScript consequence: accept D-033; add the shared higher-cell corpus and
+  the frozen completion record; complete C-20 and TSK-3.
+Lambdapi consequence: retain the active kernel as oracle until H-05; make no
+  declaration, rule, warning, audit, catalog, or health change.
+Decision: accept.
+Plan rows changed: D-033 accepted; C-20 complete; TSK-3/3C complete;
+  MIGRATE-1 dependency-ready.
+Remaining prerequisite or human review: none for MIGRATE-1. H-05 remains at
+  GRADUATE-1 after migration.
+```
+
+### TSK-3C validation
+
+Validated on the exact TSK-3C worktree diff:
+
+```text
+EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test
+  tests/v3_2_differential_higher_cell_tests.ts
+  passed 7 tests / 1 suite with no skips
+
+EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test
+  tests/v3_2_*_tests.ts
+  passed 181 tests / 18 suites with no skips
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  333 tests / 61 suites: 314 passed, 19 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 333-test result
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
 The user resolved H-01, H-03, and H-04 on 2026-07-24, and their dependent
@@ -2268,9 +2372,9 @@ slices are complete:
   boundary while leaving the pre-review artifacts unchanged;
 - TSK-2 is complete. All TSK-2 mechanisms consume the reviewed
   `CORE_MVP_MANIFEST`, not the historical TSK-1A proposal;
-- TSK-3A/B close the exact owner and rule matrices; TSK-3C is the next
-  dependency-ready higher-cell slice. H-05 remains at GRADUATE-1 after
-  differential parity and migration evidence, not during TSK-3.
+- TSK-3 is complete for the exact frozen fragment; its completion record keeps
+  Lambdapi required through H-05. MIGRATE-1 is the next dependency-ready
+  replacement slice, while H-05 remains at GRADUATE-1 after migration.
 
 Neither approval changes the recorded authority classes. Do not guess a
 displayed-to-ordinary runtime equality, promote the conformance-only owners,

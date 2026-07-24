@@ -17,3 +17,4 @@ export * from './elaborator';
 export * from './probe';
 export * from './differential';
 export * from './differential_rule';
+export * from './differential_higher_cell';
