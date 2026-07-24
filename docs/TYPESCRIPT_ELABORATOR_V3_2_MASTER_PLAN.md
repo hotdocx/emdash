@@ -10,11 +10,11 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Human-Decision-Record: on 2026-07-24 the user approved H-01 dependent-first
-and H-03/D-023 exactly as proposed
-Status: active living master plan; H-01 and H-03 are resolved, TSK-1B is
-complete, ELAB-2C is complete without triggering H-02, TSK-2 is split, and
-TSK-2A/2B and pre-review TSK-2C1 are complete; H-04/D-030 is pending
+Human-Decision-Record: on 2026-07-24 the user approved H-01 dependent-first,
+H-03/D-023, and H-04/D-030 exactly as proposed
+Status: active living master plan; H-01, H-03, and H-04 are resolved, ELAB-2C
+is complete without triggering H-02, TSK-2 is complete, and TSK-3 is the next
+dependency-ready slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -182,7 +182,7 @@ cleanly.
 | D-027 | accepted | Compile reviewed rule variables to deterministic numeric slots and selected semantic owners to rigid backend-neutral heads. Accept a runtime rule only when it eliminates exactly one matching full projection through its evaluator, introduces the corresponding capped projection, does not duplicate any matched variable, and has a rigid discriminator from every other reviewed left pattern. Publish the immutable result as an H-04-pending candidate with evidence, not authorized metatheoretic claims. | TSK-2A compiles exactly three rules from `CORE_MVP_MANIFEST`, indexes all three beneath `functor-object`, rejects non-runtime authority, duplicate/unknown variables, excluded/arity-invalid owners, variable duplication, invalid projection decrease, and manifest drift, and records non-left-linearity plus the still-oracle-only subject-reduction boundary. |
 | D-028 | accepted | Match compiled variables by numeric slot and repeated occurrences by provenance-insensitive structural Core equality; match rigid owners and schema plicity exactly. Permit executable rewriting only through the content-hashed `CORE_MVP_RUNTIME_PROGRAM`, in root-bucket and manifest order. Rebuild right patterns with schema plicity, preserve captured subtrees, derive introduced-node provenance from the redex span, and expose a head-only evaluator with a caller-supplied nonnegative safe-integer step bound. | All three reviewed heads rewrite deterministically to their exact capped forms. Repeated-variable, plicity, wrong-root, capped-form, and malformed-limit boundaries remain explicit. Zero fuel distinguishes a reducible head from an already normal one, and nested redexes are deliberately untouched. The existing structural checker cannot yet infer every full evaluator redex without the classifier conversion deferred to TSK-2C, so TSK-2B records exact elaborated result classifiers and bounded Lambdapi agreement without silently integrating conversion or claiming subject reduction. |
 | D-029 | accepted | Define candidate equality as alpha-invariant structural Core equality closed under congruence and exactly the reviewed runtime head evaluator. Share one explicit reduction budget across both sides and every recursively compared child, preserve the first deterministic mismatch/exhaustion path, and let `CoreChecker` discharge a constraint only when that comparison returns equal. Use a fixed exported 256-step checker bound. Execute no proof-time comparison, intentional non-conversion evidence, excluded-owner rule, declaration unfolding, or generic-call beta. | TSK-2C1 compares all three rules symmetrically, shares fuel across nested redexes, reports rigid mismatch and limit paths, and makes the checker accept a reviewed conversion while continuing to reject the constant-section runtime non-conversion. Existing checker/meta tests remain green. The restricted comparison is a candidate implementation over the H-03 fragment, not a claim of complete dependent-type conversion. |
-| D-030 | proposed; H-04 pending | Authorize a termination claim only for the exact three H-03 runtime rules on finite Core syntax: the global number of full projection owners strictly decreases because every rule removes one explicit full owner and duplicates no matched subtree. Authorize deterministic bounded evaluation/comparison and exactly those trusted rules. Withhold a general confluence claim: pairwise root discrimination is not a nested-critical-pair proof for non-left-linear patterns. Withhold a standalone TypeScript subject-reduction theorem: exact elaborated classifiers and bounded Lambdapi differential probes are evidence, but full-redex checking still needs active classifier computation outside the frozen runtime rules. Keep Lambdapi as the subject-reduction oracle. | TSK-2C1 publishes a deep-frozen, drift-checked `proposed-awaiting-h04` recommendation tied to the H-03 revision/hash and exact three rule IDs. Executable measure tests include both single-use and repeated captured subterms. The checker/runtime tests reject proof-time, intentional non-conversion, and generic beta execution. Approval must create a distinct reviewed artifact; the existing manifest and `claimsAuthorized: false` remain unchanged. |
+| D-030 | accepted; H-04 approved 2026-07-24 | Authorize a termination claim only for the exact three H-03 runtime rules on finite Core syntax: the global number of full projection owners strictly decreases because every rule removes one explicit full owner and duplicates no matched subtree. Authorize deterministic bounded evaluation/comparison and exactly those trusted rules. Withhold a general confluence claim: pairwise root discrimination is not a nested-critical-pair proof for non-left-linear patterns. Withhold a standalone TypeScript subject-reduction theorem: exact elaborated classifiers and bounded Lambdapi differential probes are evidence, but full-redex checking still needs active classifier computation outside the frozen runtime rules. Keep Lambdapi as the subject-reduction oracle. | The user approved H-04/D-030 exactly as proposed. TSK-2C2 records that decision in the distinct deep-frozen `CORE_RUNTIME_H04_REVIEW`: termination, bounded evaluation/comparison, and exactly three rules are authorized; confluence and TypeScript subject reduction remain withheld; Lambdapi remains the oracle. The H-03 manifest, candidate program, pre-review recommendation, and their `claimsAuthorized: false` history remain unchanged. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -343,7 +343,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-14 | Dependent weakening | complete for meta-level telescopes in ELAB-2C | An unused dependent-context extension maps prior terms/types into the deeper scope; the checked section consumer and generated Lambdapi abstraction pass without an internal structural owner. |
 | C-15 | Dependency-respecting exchange | complete for meta-level telescopes in ELAB-2C | Adjacent swaps at zero and nonzero positions transport dependent suffixes; a newer type that uses the older binder is rejected at that occurrence. |
 | C-16 | Dependent contraction/diagonal | complete for structurally equal telescope binders in ELAB-2C | The explicit non-injective index map transports a dependent suffix and identifies both duplicate occurrences; unequal types, unequal modes, and invalid positions are rejected. Definitional type comparison remains TSK-2 work. |
-| C-17 | TypeScript rule manifest/checker | candidate-complete through comparison; H-04 review pending | The exact 16-owner/three-rule product profile compiles and executes through deterministic numeric-slot matching, manifest-ordered root buckets, explicit step limits, structural congruence, and checker conversion. Proof-time/non-conversion evidence, excluded owners, unfolding, and generic beta remain non-executable. Termination has a strict global measure; confluence and standalone TypeScript subject reduction remain withheld in D-030. H-04 must review the claim boundary before TSK-2 is complete. |
+| C-17 | TypeScript rule manifest/checker | complete for the reviewed MVP fragment | The exact 16-owner/three-rule product profile compiles and executes through deterministic numeric-slot matching, manifest-ordered root buckets, explicit step limits, structural congruence, and checker conversion. H-04 authorizes termination, bounded evaluation/comparison, and exactly those three runtime rules. Proof-time/non-conversion evidence, excluded owners, unfolding, and generic beta remain non-executable; general confluence and standalone TypeScript subject reduction remain withheld. |
 | C-18 | Source-mapped backend diagnostics | partial | Generated map exists; diagnostic remapping missing |
 | C-19 | Legacy category-layer removal | blocked by replacement | Generic inventory and replacement gates green |
 
@@ -377,13 +377,13 @@ must identify their common baseline.
 | TSK-1 | split | ELAB-1 schema stability, ELAB-2A | The manifest tranche is split at H-03 so an implementation proposal cannot silently become the frozen trusted fragment. |
 | TSK-1A | complete | ELAB-1 schema stability, ELAB-2A | Immutable backend-neutral manifest vocabulary, exact 16/8 owner partition, three runtime candidates, proof-time/non-collapse evidence, focused malformed rejection, complete backend provenance, and an exact H-03 recommendation are green; no evaluator or freeze was implemented. |
 | TSK-1B | complete; H-03 approved | TSK-1A, reviewed fragment | The separate `emdash-v3.2-mvp-1` product manifest snapshots the reviewed 16 signatures and three runtime rules, pins their full boundary by content hash, rejects review/profile drift, and records implemented, deferred, and outside-kernel mechanisms without evaluating a rule. |
-| TSK-2 | split | TSK-1B | The evaluator tranche is split at compilation, reduction, and comparison/H-04 boundaries so the H-03 manifest remains immutable and each trusted mechanism receives independent malformed and determinism evidence. |
+| TSK-2 | complete | TSK-1B | The evaluator tranche is split at compilation, reduction, comparison, and H-04 review boundaries so the H-03 manifest remains immutable and each trusted mechanism and claim receives independent malformed, determinism, and drift evidence. |
 | TSK-2A | complete | TSK-1B | Exactly the three reviewed runtime rules compile into an immutable, backend-neutral, manifest-identity-bearing candidate program. Numeric slots, selected owners/arity, projection decrease, variable nonduplication, pairwise rigid discrimination, malformed rejection, deterministic rebuilding, and an explicit H-04-pending evidence boundary are green. |
 | TSK-2B | complete | TSK-2A | Deterministic first-order matching, one-step product-program rewriting, and explicitly bounded head evaluation are green for all three reviewed rules. Repeated-variable, plicity, wrong-root, capped-form, nested-redex, invalid-bound, zero-fuel, exact-classifier, and Lambdapi differential consumers preserve the conversion/authority boundary. |
-| TSK-2C | split at H-04 | TSK-2B | Candidate comparison and the reviewed metatheory boundary are separated so implementation evidence cannot silently authorize its own trust claims. |
-| TSK-2C1 | complete; H-04 triggered | TSK-2B | Structural-plus-runtime congruence with global fuel, deterministic diagnostics, checker integration, strict termination measure, explicit authority negatives, and the immutable D-030 recommendation are green. |
-| TSK-2C2 | blocked by H-04 | TSK-2C1, reviewed D-030 | Record the human decision in a distinct reviewed claim artifact, preserve any withheld claims exactly, and complete TSK-2 without mutating the H-03 manifest identity. |
-| TSK-3 | pending | TSK-2 | Build positive, negative, conversion, malformed-rule, and higher-cell differential tests against Lambdapi for every common owner/rule. |
+| TSK-2C | complete; split at H-04 | TSK-2B | Candidate comparison and the reviewed metatheory boundary remain separate so implementation evidence cannot silently authorize its own trust claims. |
+| TSK-2C1 | complete | TSK-2B | Structural-plus-runtime congruence with global fuel, deterministic diagnostics, checker integration, strict termination measure, explicit authority negatives, and the immutable D-030 recommendation are green. |
+| TSK-2C2 | complete; H-04 approved | TSK-2C1, reviewed D-030 | The distinct drift-checked H-04 review artifact authorizes only the approved termination/mechanism/rule boundary, preserves both withheld claims and the Lambdapi oracle, and leaves the H-03 manifest and candidate history unchanged. |
+| TSK-3 | dependency-ready / next | TSK-2 | Build positive, negative, conversion, malformed-rule, and higher-cell differential tests against Lambdapi for every common owner/rule. |
 | MIGRATE-1 | pending | replacement inventory, TSK-2 | Port/reimplement still-useful generic proof/unification facilities and classify every legacy test. |
 | MIGRATE-2 | pending | MIGRATE-1, replacement tests | Delete the old category-specific nodes, standard library, reductions, and obsolete category tests; retain no D0/D1 or legacy category compatibility API. |
 | GRADUATE-1 | human gate | TSK-3, MIGRATE-2 | Review parity evidence, trust assumptions, subject reduction, termination/confluence scope, performance, and maintenance cost. Decide whether TypeScript is the authoritative deployed MVP kernel. |
@@ -1987,21 +1987,79 @@ git diff --check
   passed
 ```
 
+## Completed Review Slice: TSK-2C2
+
+The user approved H-04/D-030 exactly as proposed on 2026-07-24. TSK-2C2
+records that decision without rewriting any pre-review or H-03 artifact:
+
+- `CORE_RUNTIME_H04_REVIEW` is a distinct deep-frozen
+  `reviewed-approved` artifact with the exact H-04 gate, D-030 decision,
+  approval wording, and review date;
+- it snapshots the immutable `CORE_RUNTIME_H04_RECOMMENDATION` rather than
+  mutating it. The snapshot and original both retain
+  `claimsAuthorized: false` as historical pre-review evidence;
+- it authorizes termination only for the exact three-rule fragment,
+  deterministic bounded evaluation/comparison, and the exact H-03 runtime
+  rule IDs;
+- it preserves general confluence and standalone TypeScript subject reduction
+  as withheld, and records Lambdapi as the subject-reduction oracle;
+- proof-time comparison, the intentional runtime non-conversion, excluded
+  owner rules, declaration unfolding, generic-call beta, and every additional
+  runtime rule remain outside the authorization;
+- validation rejects approval, recommendation, rule-set, excluded-mechanism,
+  oracle, or claim-boundary drift. The H-03 manifest content hash and the
+  candidate runtime program remain byte-for-byte unchanged.
+
+This completes TSK-2. It does not graduate the TypeScript kernel, broaden the
+MVP fragment, or trigger H-05; TSK-3 differential parity is now the next
+dependency-ready slice.
+
+### TSK-2C2 validation
+
+Validated on the exact TSK-2C2 worktree diff:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_metatheory_review_tests.ts
+  passed 6 tests / 1 suite with no skips
+
+EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test
+  tests/v3_2_*_tests.ts
+  passed 162 tests / 15 suites with no skips
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  314 tests / 58 suites: 298 passed, 16 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 314-test result
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
-The user resolved both blocking reviews on 2026-07-24, and both dependent
-slices are now complete:
+The user resolved H-01, H-03, and H-04 on 2026-07-24, and their dependent
+slices are complete:
 
 - H-01 approved the recorded dependent-first D-007 recommendation, making
   ELAB-2C dependency-ready; ELAB-2C then completed without finding a displayed
   owner gap or triggering H-02;
 - H-03 approved D-023 exactly as proposed, making TSK-1B dependency-ready;
-- TSK-1B is complete and TSK-2 is dependency-ready;
-- TSK-2 is split according to D-026 and D-029; TSK-2A, TSK-2B, and the
-  pre-review TSK-2C1 implementation are complete;
-- H-04/D-030 now blocks only TSK-2C2. All TSK-2 mechanisms consume the
-  reviewed `CORE_MVP_MANIFEST`, not the historical TSK-1A proposal, and
-  `claimsAuthorized` remains false pending review.
+- H-04 approved D-030 exactly as proposed; TSK-2C2 records the narrow reviewed
+  boundary while leaving the pre-review artifacts unchanged;
+- TSK-2 is complete. All TSK-2 mechanisms consume the reviewed
+  `CORE_MVP_MANIFEST`, not the historical TSK-1A proposal;
+- TSK-3 is the next dependency-ready slice. H-05 remains at GRADUATE-1 after
+  differential parity and migration evidence, not at the start of TSK-3.
 
 Neither approval changes the recorded authority classes. Do not guess a
 displayed-to-ordinary runtime equality, promote the conformance-only owners,
@@ -2024,10 +2082,10 @@ A human gate blocks only the dependent slice. Record the prerequisite and
 continue any independent dependency-ready work instead of guessing the
 decision.
 
-Current gate state: H-01 and H-03 were approved by the user on 2026-07-24.
-ELAB-2C completed without triggering H-02, and TSK-2A/2B plus pre-review
-TSK-2C1 are complete. H-04 is now triggered with D-030 pending and blocks only
-TSK-2C2. H-02, H-05, and H-06 remain future gates at their recorded triggers.
+Current gate state: H-01, H-03, and H-04 were approved by the user on
+2026-07-24. ELAB-2C completed without triggering H-02, and TSK-2 is complete
+without broadening either withheld H-04 claim. H-02, H-05, and H-06 remain
+future gates at their recorded triggers.
 
 ## Experiment Record Template
 

@@ -334,7 +334,7 @@ describe('TypeScript v3.2 TSK-2A runtime compilation', () => {
         );
     });
 
-    it('keeps the H-03 manifest frozen while H-04 claims remain pending', () => {
+    it('keeps the H-03 manifest frozen and candidate claims unauthorized', () => {
         assert.ok(
             CORE_MVP_MANIFEST.trustBoundary
                 .frozenButDeferredMechanisms
