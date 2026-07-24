@@ -17,7 +17,8 @@ export type LegacyMechanismState =
     | 'partial'
     | 'dependency-ready'
     | 'blocked-by-replacement'
-    | 'deferred';
+    | 'deferred'
+    | 'ready-to-delete';
 
 export interface LegacyMechanismDispositionEntry {
     readonly id:
@@ -64,12 +65,12 @@ export interface LegacyTestDispositionEntry {
 }
 
 export interface LegacyMigrationInventory {
-    readonly revision: 'MIGRATE-1C';
-    readonly status: 'in-progress';
+    readonly revision: 'MIGRATE-1D';
+    readonly status: 'ready-for-physical-deletion';
     readonly mechanisms: readonly LegacyMechanismDispositionEntry[];
     readonly sourceFiles: readonly LegacySourceDispositionEntry[];
     readonly testFiles: readonly LegacyTestDispositionEntry[];
-    readonly nextSlice: 'MIGRATE-1D';
+    readonly nextSlice: 'MIGRATE-2';
 }
 
 const deepFreeze = <T>(value: T): T => {
@@ -87,8 +88,8 @@ const deepFreeze = <T>(value: T): T => {
 };
 
 const canonicalInventory: LegacyMigrationInventory = {
-    revision: 'MIGRATE-1C',
-    status: 'in-progress',
+    revision: 'MIGRATE-1D',
+    status: 'ready-for-physical-deletion',
     mechanisms: [
         {
             id: 'bidirectional-infer-check',
@@ -118,7 +119,6 @@ const canonicalInventory: LegacyMigrationInventory = {
             disposition: 'port',
             state: 'covered',
             evidence: [
-                'tests/higher_order_unification_tests.ts',
                 'tests/v3_2_pattern_unification_tests.ts'
             ],
             nextBoundary:
@@ -156,8 +156,7 @@ const canonicalInventory: LegacyMigrationInventory = {
             state: 'covered',
             evidence: [
                 'tests/v3_2_proof_state_tests.ts',
-                'tests/v3_2_proof_refinement_tests.ts',
-                'tests/proof_mode_tests.ts'
+                'tests/v3_2_proof_refinement_tests.ts'
             ],
             nextBoundary:
                 'Retain Core inspection/refinement and delete mutable legacy ' +
@@ -178,7 +177,7 @@ const canonicalInventory: LegacyMigrationInventory = {
         {
             id: 'legacy-category-constructors',
             disposition: 'delete',
-            state: 'blocked-by-replacement',
+            state: 'ready-to-delete',
             evidence: [
                 'tests/v3_2_differential_owner_tests.ts',
                 'tests/v3_2_differential_rule_tests.ts',
@@ -191,7 +190,7 @@ const canonicalInventory: LegacyMigrationInventory = {
         {
             id: 'global-mutable-setup',
             disposition: 'delete',
-            state: 'blocked-by-replacement',
+            state: 'ready-to-delete',
             evidence: [
                 'tests/v3_2_core_context_tests.ts',
                 'tests/v3_2_core_session_tests.ts',
@@ -204,9 +203,9 @@ const canonicalInventory: LegacyMigrationInventory = {
         {
             id: 'legacy-parser',
             disposition: 'delete',
-            state: 'deferred',
+            state: 'ready-to-delete',
             evidence: [
-                'tests/parser_tests.ts'
+                'docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md'
             ],
             nextBoundary:
                 'Delete the legacy grammar in MIGRATE-2. Any new grammar ' +
@@ -575,7 +574,7 @@ const canonicalInventory: LegacyMigrationInventory = {
                 'Delete in MIGRATE-2; a replacement parser requires H-06.'
         }
     ],
-    nextSlice: 'MIGRATE-1D'
+    nextSlice: 'MIGRATE-2'
 };
 
 export const LEGACY_MIGRATION_INVENTORY = deepFreeze(canonicalInventory);
@@ -586,7 +585,7 @@ const sameInventory = (
 ): boolean => JSON.stringify(left) === JSON.stringify(right);
 
 /**
- * Reject any drift from the reviewed MIGRATE-1C inventory.
+ * Reject any drift from the reviewed MIGRATE-1D inventory.
  *
  * The migration ledger is deliberately closed-world: adding a legacy root
  * source or test requires an explicit disposition before deletion can
@@ -598,7 +597,151 @@ export function validateLegacyMigrationInventory(
     if (!sameInventory(inventory, canonicalInventory)) {
         throw new Error(
             'Legacy migration inventory differs from the canonical ' +
-            'MIGRATE-1C disposition ledger'
+            'MIGRATE-1D disposition ledger'
+        );
+    }
+}
+
+export type LegacyMigrationRequiredEditKind =
+    | 'runner'
+    | 'audit-transition'
+    | 'fixture-api'
+    | 'fixture-consumer'
+    | 'fixture-documentation'
+    | 'package-manifest'
+    | 'package-lock';
+
+export interface LegacyMigrationRequiredEdit {
+    readonly file: string;
+    readonly kind: LegacyMigrationRequiredEditKind;
+    readonly completionCriterion: string;
+}
+
+export interface LegacyMigrationDeletionBoundary {
+    readonly sourceFiles: readonly string[];
+    readonly testFiles: readonly string[];
+    readonly auxiliaryFiles: readonly string[];
+    readonly requiredEdits: readonly LegacyMigrationRequiredEdit[];
+}
+
+export interface LegacyMigrationReadiness {
+    readonly revision: 'MIGRATE-1D';
+    readonly status: 'ready-for-physical-deletion';
+    readonly inventoryRevision: 'MIGRATE-1D';
+    readonly nextSlice: 'MIGRATE-2';
+    readonly deletionBoundary: LegacyMigrationDeletionBoundary;
+    readonly checkpointGates: readonly string[];
+    readonly retainedAuthorityBoundary: string;
+}
+
+const canonicalReadiness: LegacyMigrationReadiness = {
+    revision: 'MIGRATE-1D',
+    status: 'ready-for-physical-deletion',
+    inventoryRevision: canonicalInventory.revision,
+    nextSlice: 'MIGRATE-2',
+    deletionBoundary: {
+        sourceFiles: canonicalInventory.sourceFiles.map(entry => entry.file),
+        testFiles: canonicalInventory.testFiles.map(entry => entry.file),
+        auxiliaryFiles: [
+            'tests/utils.ts'
+        ],
+        requiredEdits: [
+            {
+                file: 'tests/main_tests.ts',
+                kind: 'runner',
+                completionCriterion:
+                    'Remove the legacy state import, debug setup, and every ' +
+                    'legacy test side-effect import while retaining the ' +
+                    'v3.2 runner.'
+            },
+            {
+                file: 'tests/v3_2_migration_inventory_tests.ts',
+                kind: 'audit-transition',
+                completionCriterion:
+                    'Replace the pre-deletion presence audit with an exact ' +
+                    'post-deletion absence and retained-suite audit.'
+            },
+            {
+                file: 'tests/v3_2_migration_readiness_tests.ts',
+                kind: 'audit-transition',
+                completionCriterion:
+                    'Replace the readiness import graph with a post-deletion ' +
+                    'forbidden-import and consumer-completion audit.'
+            },
+            {
+                file: 'emdash-template/src/emdash_api.ts',
+                kind: 'fixture-api',
+                completionCriterion:
+                    'Export only the v3.2 API required by the fixture; add ' +
+                    'no legacy compatibility barrel.'
+            },
+            {
+                file: 'emdash-template/src/App.tsx',
+                kind: 'fixture-consumer',
+                completionCriterion:
+                    'Replace the legacy global-reset/elaborate example with ' +
+                    'a session-local v3.2 constructor/checker example.'
+            },
+            {
+                file: 'emdash-template/README.md',
+                kind: 'fixture-documentation',
+                completionCriterion:
+                    'Describe packaging src/v3_2 and the v3.2 barrel rather ' +
+                    'than copying the deleted root engine.'
+            },
+            {
+                file: 'package.json',
+                kind: 'package-manifest',
+                completionCriterion:
+                    'Remove the parser-only parsimmon runtime dependency.'
+            },
+            {
+                file: 'pnpm-lock.yaml',
+                kind: 'package-lock',
+                completionCriterion:
+                    'Regenerate the shared lockfile with the owning pnpm ' +
+                    'wrapper after removing parsimmon.'
+            }
+        ]
+    },
+    checkpointGates: [
+        'node --require ts-node/register --test ' +
+            'tests/v3_2_migration_inventory_tests.ts ' +
+            'tests/v3_2_migration_readiness_tests.ts ' +
+            'tests/v3_2_pattern_unification_tests.ts ' +
+            'tests/v3_2_proof_state_tests.ts ' +
+            'tests/v3_2_proof_refinement_tests.ts',
+        'node --require ts-node/register --test tests/v3_2_*_tests.ts',
+        './scripts/pnpmw run check:ts',
+        'EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check',
+        'EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all',
+        'git diff --check'
+    ],
+    retainedAuthorityBoundary:
+        'Lambdapi remains the executable specification and required ' +
+        'conformance oracle through GRADUATE-1/H-05. MIGRATE-2 deletes no ' +
+        'active emdash2 authority and introduces no D0/D1 or legacy category ' +
+        'compatibility API.'
+};
+
+export const LEGACY_MIGRATION_READINESS = deepFreeze(canonicalReadiness);
+
+const sameReadiness = (
+    left: LegacyMigrationReadiness,
+    right: LegacyMigrationReadiness
+): boolean => JSON.stringify(left) === JSON.stringify(right);
+
+/**
+ * Reject drift from the exact physical-deletion boundary reviewed by
+ * MIGRATE-1D.
+ */
+export function validateLegacyMigrationReadiness(
+    readiness: LegacyMigrationReadiness = LEGACY_MIGRATION_READINESS
+): void {
+    if (!sameReadiness(readiness, canonicalReadiness)) {
+        throw new Error(
+            'Legacy migration readiness differs from the canonical ' +
+            'MIGRATE-1D physical-deletion boundary'
         );
     }
 }

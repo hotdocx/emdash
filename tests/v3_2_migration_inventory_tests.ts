@@ -87,8 +87,20 @@ describe('TypeScript v3.2 MIGRATE-1 legacy inventory', () => {
             )?.state,
             'covered'
         );
-        assert.equal(LEGACY_MIGRATION_INVENTORY.revision, 'MIGRATE-1C');
-        assert.equal(LEGACY_MIGRATION_INVENTORY.nextSlice, 'MIGRATE-1D');
+        assert.equal(LEGACY_MIGRATION_INVENTORY.revision, 'MIGRATE-1D');
+        assert.equal(
+            LEGACY_MIGRATION_INVENTORY.status,
+            'ready-for-physical-deletion'
+        );
+        assert.equal(LEGACY_MIGRATION_INVENTORY.nextSlice, 'MIGRATE-2');
+        assert.equal(
+            LEGACY_MIGRATION_INVENTORY.mechanisms.every(entry =>
+                entry.disposition === 'delete'
+                    ? entry.state === 'ready-to-delete'
+                    : entry.state === 'covered'
+            ),
+            true
+        );
     });
 
     it('accounts for every root legacy source file exactly once', () => {
@@ -146,7 +158,7 @@ describe('TypeScript v3.2 MIGRATE-1 legacy inventory', () => {
             () => validateLegacyMigrationInventory(
                 changedState as unknown as LegacyMigrationInventory
             ),
-            /differs from the canonical MIGRATE-1C disposition ledger/
+            /differs from the canonical MIGRATE-1D disposition ledger/
         );
 
         const missingTest = cloneInventory() as unknown as {
@@ -157,7 +169,7 @@ describe('TypeScript v3.2 MIGRATE-1 legacy inventory', () => {
             () => validateLegacyMigrationInventory(
                 missingTest as unknown as LegacyMigrationInventory
             ),
-            /differs from the canonical MIGRATE-1C disposition ledger/
+            /differs from the canonical MIGRATE-1D disposition ledger/
         );
     });
 });

@@ -45,6 +45,7 @@ import './v3_2_differential_owner_tests';
 import './v3_2_differential_rule_tests';
 import './v3_2_differential_higher_cell_tests';
 import './v3_2_migration_inventory_tests';
+import './v3_2_migration_readiness_tests';
 import './v3_2_proof_state_tests';
 import './v3_2_pattern_unification_tests';
 import './v3_2_proof_refinement_tests';
