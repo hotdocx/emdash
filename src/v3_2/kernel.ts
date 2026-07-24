@@ -208,8 +208,10 @@ export const kernelUniverse = (
 export type KernelScopeErrorCode =
     | 'INVALID_BOUND_INDEX'
     | 'INVALID_SHIFT'
+    | 'INVALID_AMBIENT_INDEX_MAP'
     | 'BOUND_INDEX_ESCAPE'
-    | 'DANGLING_BOUND_VARIABLE';
+    | 'DANGLING_BOUND_VARIABLE'
+    | 'DROPPED_BOUND_VARIABLE';
 
 export class KernelScopeError extends Error {
     constructor(
@@ -446,6 +448,163 @@ export function kernelShift(
         );
     }
     return shiftAt(expression, amount, cutoff);
+}
+
+export type KernelAmbientIndexImage = number | null;
+
+function remapAmbientIndicesAt(
+    expression: KernelExpression,
+    indexMap: readonly KernelAmbientIndexImage[],
+    internalDepth: number
+): KernelExpression {
+    switch (expression.tag) {
+        case 'universe':
+        case 'reference':
+            return expression;
+        case 'bound': {
+            if (expression.index < internalDepth) return expression;
+
+            const sourceIndex = expression.index - internalDepth;
+            const targetIndex = indexMap[sourceIndex];
+            if (targetIndex === null) {
+                throw new KernelScopeError(
+                    'DROPPED_BOUND_VARIABLE',
+                    expression.provenance,
+                    `Core ambient bound-variable index ${sourceIndex} is ` +
+                    'used but its index map marks it as unavailable'
+                );
+            }
+            if (targetIndex === undefined) {
+                throw new KernelScopeError(
+                    'INVALID_AMBIENT_INDEX_MAP',
+                    expression.provenance,
+                    `Core ambient bound-variable index ${sourceIndex} has ` +
+                    `no image in an index map of length ${indexMap.length}`
+                );
+            }
+
+            const mappedIndex = targetIndex + internalDepth;
+            if (!Number.isSafeInteger(mappedIndex)) {
+                throw new KernelScopeError(
+                    'INVALID_AMBIENT_INDEX_MAP',
+                    expression.provenance,
+                    `Mapping Core ambient bound-variable index ` +
+                    `${sourceIndex} beneath ${internalDepth} internal ` +
+                    'binders exceeds the safe integer range'
+                );
+            }
+            return mappedIndex === expression.index
+                ? expression
+                : { ...expression, index: mappedIndex };
+        }
+        case 'meta':
+            return {
+                ...expression,
+                spine: expression.spine.map(item =>
+                    remapAmbientIndicesAt(item, indexMap, internalDepth)
+                )
+            };
+        case 'application':
+            return {
+                ...expression,
+                arguments: expression.arguments.map(argument => ({
+                    ...argument,
+                    value: remapAmbientIndicesAt(
+                        argument.value,
+                        indexMap,
+                        internalDepth
+                    )
+                }))
+            };
+        case 'call':
+            return {
+                ...expression,
+                callee: remapAmbientIndicesAt(
+                    expression.callee,
+                    indexMap,
+                    internalDepth
+                ),
+                arguments: expression.arguments.map(argument => ({
+                    ...argument,
+                    value: remapAmbientIndicesAt(
+                        argument.value,
+                        indexMap,
+                        internalDepth
+                    )
+                }))
+            };
+        case 'pi':
+        case 'lambda':
+            return {
+                ...expression,
+                binder: {
+                    ...expression.binder,
+                    type: remapAmbientIndicesAt(
+                        expression.binder.type,
+                        indexMap,
+                        internalDepth
+                    )
+                },
+                body: remapAmbientIndicesAt(
+                    expression.body,
+                    indexMap,
+                    internalDepth + 1
+                )
+            };
+        default: {
+            const exhaustive: never = expression;
+            return exhaustive;
+        }
+    }
+}
+
+/**
+ * Apply a scope-level map to an expression's ambient De Bruijn indices.
+ *
+ * `indexMap[i]` is the target-scope image of source ambient index `i`.
+ * Repeated images express contraction; permutations express exchange; and a
+ * larger target depth expresses weakening. A `null` image is allowed only
+ * when that source variable is unused. Unlike term substitution, this
+ * operation preserves each occurrence's provenance.
+ *
+ * This is a meta-level Core operation. It does not construct an internal
+ * categorical reindexing owner such as a displayed pullback.
+ */
+export function kernelRemapAmbientIndices(
+    expression: KernelExpression,
+    targetDepth: number,
+    indexMap: readonly KernelAmbientIndexImage[]
+): KernelExpression {
+    if (!isNonnegativeInteger(targetDepth)) {
+        throw new KernelScopeError(
+            'INVALID_AMBIENT_INDEX_MAP',
+            expression.provenance,
+            `Core ambient index map requires a nonnegative target depth; ` +
+            `received ${targetDepth}`
+        );
+    }
+
+    for (let sourceIndex = 0; sourceIndex < indexMap.length; sourceIndex++) {
+        const targetIndex = indexMap[sourceIndex];
+        if (targetIndex === null) continue;
+        if (
+            !isNonnegativeInteger(targetIndex) ||
+            targetIndex >= targetDepth
+        ) {
+            throw new KernelScopeError(
+                'INVALID_AMBIENT_INDEX_MAP',
+                expression.provenance,
+                `Core ambient index map image for source index ` +
+                `${sourceIndex} must be null or an index below target ` +
+                `depth ${targetDepth}; received ${String(targetIndex)}`
+            );
+        }
+    }
+
+    kernelAssertScoped(expression, indexMap.length);
+    const result = remapAmbientIndicesAt(expression, indexMap, 0);
+    kernelAssertScoped(result, targetDepth);
+    return result;
 }
 
 function substituteAt(

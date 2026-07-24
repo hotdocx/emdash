@@ -13,8 +13,8 @@ Infinity-Codex-Decision-Responses: none; decisions are recorded inline
 Human-Decision-Record: on 2026-07-24 the user approved H-01 dependent-first
 and H-03/D-023 exactly as proposed
 Status: active living master plan; H-01 and H-03 are resolved, TSK-1B is
-complete, ELAB-2C is the next selected slice, and TSK-2 is independently
-dependency-ready
+complete, ELAB-2C is complete without triggering H-02, and TSK-2 is the next
+selected slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -177,6 +177,7 @@ cleanly.
 | D-022 | accepted | Make a product rule proposal closed-world, deeply immutable, and backend-neutral. A semantic rule record carries an explicit authority class, scoped owner pattern, consumer coverage, and opaque evidence key; exact active names and source locations live in a separately complete conformance-backend binding. Do not port the legacy global rule registries or their RHS-only unification-variable behavior. | TSK-1A validates complete ordered owner coverage, dependency closure, unique rule/evidence identities, owner arity, variable scope, authority-specific shapes, and exact backend evidence coverage without matching or evaluation. It rejects malformed, duplicate, unknown-owner, scope-escaping, cross-class, and recommendation-drift proposals deterministically. |
 | D-023 | accepted; H-03 approved 2026-07-24 | Freeze the dependency-closed 16-owner ordinary classifier/projection signature and exactly three generic full-to-capped runtime projection betas. Freeze no proof-time comparison rule yet. Keep the other eight current owners, the constant-section proof-time bridge, and its required runtime non-collapse as conformance evidence until their larger rule neighborhoods are bounded. | The user approved H-03/D-023 exactly as proposed. The ordinary subset covers ELAB-0/1B including recursive 2-cell action. Every excluded owner and rule family retains concrete consumer and open-risk evidence. The three active runtime rules, constant-section unification chain, and negative runtime probe have exact backend provenance. |
 | D-024 | accepted | Preserve the immutable TSK-1A proposal as its pre-review audit record and publish a separate, content-hashed `emdash-v3.2-mvp-1` manifest for the reviewed product profile. Snapshot all 16 selected dependent signatures and three selected runtime rules; record implemented, frozen-but-deferred, and outside-kernel mechanisms explicitly. | TSK-1B rejects status, approval, owner order, signature, rule, trust-boundary, and content-hash drift. The general checker and Lambdapi backend remain conformance supersets; no evaluator, matcher, proof-time rule, or excluded owner gains product authority merely by being implemented or serializable. |
+| D-025 | accepted | Represent meta-level dependent weakening, permitted adjacent exchange, and adjacent contraction as explicit source-to-target ambient De Bruijn index maps over persistent telescopes. Exchange may drop the older variable from the moved type only when unused; contraction requires the newer binder to have the structurally identical weakened type and matching mode. Transport every dependent suffix through the same map. | ELAB-2C maps preserve occurrence provenance beneath internal binders, exercise position-zero and nonzero dependent prefixes/suffixes, reject a forbidden swap at the exact dependency occurrence, reject type/mode-invalid diagonals, and emit three Lambdapi-accepted dependent consumers. They introduce no ordinary or displayed structural owner. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -334,9 +335,9 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-11 | Metavariable/implicit solving over Core | complete for the bounded structural fragment in ELAB-2A3B | Session isolation, contextual scope, occurs, deterministic-order, ambiguity, generic/owner implicit recovery, nested partial calls, and unresolved-meta rejection are green; conversion and higher-order inversion remain explicitly later capabilities |
 | C-12 | Context extension and displayed type | complete for the bounded ELAB-2B interpretation | A context category, displayed-family declaration, local dependent section, and substitution pullback survive persistent Core contexts and the checker; reversed substitution is rejected; meta-level telescope substitution remains distinct from internal displayed reindexing. Structural weakening/exchange/contraction remain C-14 through C-16. |
 | C-13 | Constant displayed family comparison | complete | Constant pullback reduces at runtime; constant sections check through the ordinary route only by active proof-time unification; the TypeScript structural checker and Lambdapi `assertnot` both preserve the required runtime non-collapse. |
-| C-14 | Dependent weakening | missing/inventory required | Concrete elaboration consumer |
-| C-15 | Dependency-respecting exchange | missing/inventory required | Permitted and forbidden telescope swaps |
-| C-16 | Dependent contraction/diagonal | missing/inventory required | Reindexing data and invalid contraction negative |
+| C-14 | Dependent weakening | complete for meta-level telescopes in ELAB-2C | An unused dependent-context extension maps prior terms/types into the deeper scope; the checked section consumer and generated Lambdapi abstraction pass without an internal structural owner. |
+| C-15 | Dependency-respecting exchange | complete for meta-level telescopes in ELAB-2C | Adjacent swaps at zero and nonzero positions transport dependent suffixes; a newer type that uses the older binder is rejected at that occurrence. |
+| C-16 | Dependent contraction/diagonal | complete for structurally equal telescope binders in ELAB-2C | The explicit non-injective index map transports a dependent suffix and identifies both duplicate occurrences; unequal types, unequal modes, and invalid positions are rejected. Definitional type comparison remains TSK-2 work. |
 | C-17 | TypeScript rule manifest/checker | partial: structural checker, validated proposal, and reviewed content-hashed freeze complete; evaluator missing | The 24-owner catalog is partitioned into an exact 16-owner product profile and eight explicit conformance-only owners. Three runtime rules are frozen, no proof-time rule is selected, proposal/evidence data remain separate, and malformed review/profile drift is rejected. Evaluation and differential normal forms remain TSK-2/3. |
 | C-18 | Source-mapped backend diagnostics | partial | Generated map exists; diagnostic remapping missing |
 | C-19 | Legacy category-layer removal | blocked by replacement | Generic inventory and replacement gates green |
@@ -365,13 +366,13 @@ must identify their common baseline.
 | ELAB-2A3A | complete | ELAB-2A2 | Backend-neutral `TYPE`, generic plicity-bearing calls, a groupoid-universe owner, and a complete declarative dependent type-signature catalog for all 21 current owners pass every scope/session/backend traversal, catalog negative, and bounded Lambdapi consumer. |
 | ELAB-2A3B | complete | ELAB-2A3A | A session-bound structural checker validates TYPE/KIND declaration levels, Pi/lambda/application judgments, all owner signatures and applications, dependent generic calls, catalog-driven implicit insertion, explicit ambiguity, and source-located negative boundaries; checked outputs pass Lambdapi. |
 | ELAB-2B | complete | ELAB-2A3B | The 24-owner catalog includes the minimal displayed pullback, constant-family, and section-category owners; persistent context/checker consumers, authority-classified bridges, warning-enabled positive/non-collapse probes, and the H-01 recommendation are recorded and green. |
-| ELAB-2C | dependency-ready / next; H-01 approved | ELAB-2B, reviewed D-007 | Exercise weakening, permitted/forbidden exchange, and contraction. Record missing displayed owners with consumer probes; do not yet assume kernel promotion. |
+| ELAB-2C | complete; H-01 approved | ELAB-2B, reviewed D-007 | Capture-safe ambient index maps implement weakening, dependency-permitted exchange, and structurally justified contraction over persistent dependent telescopes. Positive, negative, nonzero-position, checker, and Lambdapi consumers are green; no displayed-owner failure or H-02 trigger was found. |
 | KERNEL-DISPLAYED-1 | conditional | ELAB-2C failure evidence | If a concrete uniform elaboration consumer cannot be expressed, design and probe the smallest displayed structural owner package under the v3.2 SOP, including degeneration/comparison and non-collapse cases. Human review is required before promotion. |
 | KERNEL-DISPLAYED-2 | conditional | reviewed KERNEL-DISPLAYED-1 | Promote only reviewed kernel changes with diagnostics, warning comparison, audits, catalogs, health, examples, and CI synchronized. |
 | TSK-1 | split | ELAB-1 schema stability, ELAB-2A | The manifest tranche is split at H-03 so an implementation proposal cannot silently become the frozen trusted fragment. |
 | TSK-1A | complete | ELAB-1 schema stability, ELAB-2A | Immutable backend-neutral manifest vocabulary, exact 16/8 owner partition, three runtime candidates, proof-time/non-collapse evidence, focused malformed rejection, complete backend provenance, and an exact H-03 recommendation are green; no evaluator or freeze was implemented. |
 | TSK-1B | complete; H-03 approved | TSK-1A, reviewed fragment | The separate `emdash-v3.2-mvp-1` product manifest snapshots the reviewed 16 signatures and three runtime rules, pins their full boundary by content hash, rejects review/profile drift, and records implemented, deferred, and outside-kernel mechanisms without evaluating a rule. |
-| TSK-2 | dependency-ready | TSK-1B | Implement rule validation, weak-head evaluation, rewriting, proof-time unification/comparison classes, and deterministic diagnostics for the frozen fragment. |
+| TSK-2 | dependency-ready / next | TSK-1B | Implement rule validation, weak-head evaluation, rewriting, proof-time unification/comparison classes, and deterministic diagnostics for the frozen fragment. |
 | TSK-3 | pending | TSK-2 | Build positive, negative, conversion, malformed-rule, and higher-cell differential tests against Lambdapi for every common owner/rule. |
 | MIGRATE-1 | pending | replacement inventory, TSK-2 | Port/reimplement still-useful generic proof/unification facilities and classify every legacy test. |
 | MIGRATE-2 | pending | MIGRATE-1, replacement tests | Delete the old category-specific nodes, standard library, reductions, and obsolete category tests; retain no D0/D1 or legacy category compatibility API. |
@@ -1438,17 +1439,157 @@ git diff --check
   passed
 ```
 
+## Completed Slice: ELAB-2C
+
+ELAB-2C resolves the bounded structural part of the dependent-first context
+experiment at the meta-level telescope layer selected by D-008:
+
+- `kernelRemapAmbientIndices` maps a source ambient De Bruijn scope into a
+  target scope while preserving occurrence provenance beneath internal
+  binders. Permutations express exchange, repeated images express contraction,
+  and a deeper target expresses weakening. A `null` image is a checked claim
+  that the corresponding source variable is unused; encountering it reports
+  the exact dropped occurrence instead of capturing it;
+- `CoreTelescopeStructuralMap` records the immutable source context, rebuilt
+  target context, exact nearest-first ambient index map, operation kind, and
+  checked expression transport;
+- weakening extends a persistent telescope by one unused nearest binder and
+  shifts every prior ambient image into the target;
+- adjacent exchange first removes the older variable from the newer binder's
+  type. It succeeds only when that variable is absent, then permutes every
+  later dependent binding type through the same map;
+- adjacent contraction requires matching binder modes and requires the newer
+  type to be structurally identical to the older type weakened into the newer
+  owning scope. It then transports every later dependent binding type through
+  an explicit non-injective diagonal map;
+- invalid positions, dependency-forbidden exchange, unequal contraction
+  types, and unequal contraction modes have distinct source-located context
+  diagnostics.
+
+The focused corpus exercises zero and nonzero structural positions, dependent
+prefixes and suffixes, mapping beneath an internal lambda, checker inference
+after each transport, persistence of the source context, and exact negative
+provenance. A generated probe abstracts the weakened, exchanged, and
+contracted dependent section consumers and all three are accepted by
+Lambdapi with warnings enabled.
+
+The active ordinary structural owners remain the stable
+`Const_func_func`, `sym_func_func`, and `diag_func_func` declarations in
+section 17c of `emdash2/emdash3_2.lp`. ELAB-2C does not use them: they are
+internal ordinary categorical functors, not meta-level context operations.
+The serialized ELAB-2C consumers contain none of those heads and introduce no
+`Pullback_catd`. No concrete consumer failed, so there is no missing displayed
+owner to record, no owner-position failure probe to promote, and H-02 is not
+triggered. Displayed structural logic remains at the active SOP's deferred
+boundary.
+
+No Lambdapi declaration/rule, Core owner schema/signature/manifest, evaluator,
+proof-time comparison, warning baseline, generated catalog, package setup, or
+legacy category layer changed in ELAB-2C.
+
+### Experiment ELAB-2C-DEPENDENT-TELESCOPE-STRUCTURE
+
+```text
+Experiment ID: ELAB-2C-DEPENDENT-TELESCOPE-STRUCTURE
+Date and checkpoint: 2026-07-24 at TSK-1B checkpoint 3879c66
+Question/hypothesis: dependent weakening, dependency-permitted exchange, and
+  structurally justified contraction can be implemented uniformly as
+  meta-level telescope maps, without confusing them with ordinary structural
+  functors or inventing displayed kernel owners.
+Authority and owner position inspected: active kernel and checks; section 17c
+  ordinary owners Const_func_func, sym_func_func, and diag_func_func; the
+  active SOP deferred displayed-structural boundary; Foundations' separation
+  of ordinary weakening from const_section_func; D-007 through D-010 and
+  C-14 through C-16 in this plan. No Lambdapi owner or rule changed.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on
+  goal/typescript-elaborator-v3.2 at 3879c66 before the experiment;
+  descendant of baseline a06433e.
+Minimal positive consumer: transport a genuinely displayed section through
+  an unused extension, an allowed adjacent swap with a dependent suffix, and
+  a diagonal identifying two equal displayed-family binders; recheck each
+  transported term and abstract all three into Lambdapi assertions.
+Relevant negative/non-collapse consumer: reject an adjacent swap at the bound
+  occurrence proving that the newer type depends on the older binder; reject
+  contraction with unequal type or binder mode; reject invalid positions;
+  verify that generated consumers contain no ordinary structural owner and
+  no displayed pullback.
+Observed result: nearest-first maps [1,2], [0,2,1], and [0,1,1] implement the
+  primary weakening, exchange, and contraction consumers. Nonzero-position
+  variants preserve dependent prefixes and suffixes. All checker and
+  warning-enabled Lambdapi consumers pass.
+Unexpected result or failure: none. The concrete consumers required no
+  displayed structural owner, so an owner-position failure probe would invent
+  rather than diagnose a kernel need.
+TypeScript consequence: accept D-025 and expose a generic provenance-
+  preserving ambient index-map primitive plus three persistent telescope
+  operations. Keep contraction equality structural until TSK-2 supplies the
+  reviewed conversion boundary.
+Lambdapi consequence: retain the ordinary structural owners as separate
+  internal operations and leave displayed structural logic deferred.
+Warning/audit/catalog/health effects, if any: the generated ELAB-2C consumer
+  passed with warnings enabled. No Lambdapi source or generated authority
+  changed, so no warning baseline, rule audit, catalog, or health artifact
+  changed.
+Decision: accept D-025 and complete ELAB-2C without triggering
+  KERNEL-DISPLAYED-1 or H-02.
+Plan rows changed: D-025 accepted; C-14 through C-16 complete for the bounded
+  meta-level telescope capability; ELAB-2C complete; TSK-2 selected next.
+Remaining prerequisite or human review: none for TSK-2. H-02 remains
+  conditional on a future concrete displayed-owner failure; H-04 remains the
+  review gate reached by TSK-2.
+```
+
+### ELAB-2C validation
+
+Validated on the exact ELAB-2C worktree diff:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_telescope_structural_tests.ts
+  passed 10 tests / 1 suite: 9 passed, 1 opt-in probe skipped
+
+EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test
+  tests/v3_2_telescope_structural_tests.ts
+  passed 10 tests / 1 suite with no skips
+
+EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test
+  tests/v3_2_core_binder_tests.ts tests/v3_2_core_checker_tests.ts
+  tests/v3_2_core_context_tests.ts tests/v3_2_core_session_tests.ts
+  tests/v3_2_core_signature_tests.ts tests/v3_2_dependent_context_tests.ts
+  tests/v3_2_elab0_tests.ts tests/v3_2_elab1c_tests.ts
+  tests/v3_2_manifest_tests.ts tests/v3_2_telescope_structural_tests.ts
+  passed 129 tests / 11 suites with no skips
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  281 tests / 54 suites: 266 passed, 15 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 281-test result
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
-The user resolved both blocking reviews on 2026-07-24:
+The user resolved both blocking reviews on 2026-07-24, and both dependent
+slices are now complete:
 
 - H-01 approved the recorded dependent-first D-007 recommendation, making
-  ELAB-2C dependency-ready;
+  ELAB-2C dependency-ready; ELAB-2C then completed without finding a displayed
+  owner gap or triggering H-02;
 - H-03 approved D-023 exactly as proposed, making TSK-1B dependency-ready;
 - TSK-1B is complete and TSK-2 is dependency-ready;
-- ELAB-2C is selected as the next bounded slice because it is the earliest
-  now-reviewed row in the implementation ledger;
-- TSK-2 remains independently dependency-ready and must consume the reviewed
+- TSK-2 is the next selected slice and must consume the reviewed
   `CORE_MVP_MANIFEST`, not the historical TSK-1A proposal.
 
 Neither approval changes the recorded authority classes. Do not guess a
@@ -1473,8 +1614,8 @@ continue any independent dependency-ready work instead of guessing the
 decision.
 
 Current gate state: H-01 and H-03 were approved by the user on 2026-07-24.
-ELAB-2C is selected next and TSK-2 is independently dependency-ready. H-02 and
-H-04 through H-06 remain future gates at their recorded triggers.
+ELAB-2C completed without triggering H-02, and TSK-2 is selected next. H-02
+and H-04 through H-06 remain future gates at their recorded triggers.
 
 ## Experiment Record Template
 

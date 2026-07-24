@@ -2,6 +2,7 @@ export * from './schema';
 export * from './kernel';
 export * from './signature';
 export * from './context';
+export * from './structural';
 export * from './session';
 export * from './checker';
 export * from './dependent';

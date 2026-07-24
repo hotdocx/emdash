@@ -50,7 +50,10 @@ export type CoreContextErrorCode =
     | 'UNBOUND_FREE_REFERENCE'
     | 'ILL_SCOPED_DECLARATION_TYPE'
     | 'ILL_SCOPED_LOCAL_TYPE'
-    | 'ILL_SCOPED_EXPRESSION';
+    | 'ILL_SCOPED_EXPRESSION'
+    | 'INVALID_STRUCTURAL_POSITION'
+    | 'DEPENDENT_EXCHANGE'
+    | 'INVALID_CONTRACTION';
 
 export class CoreContextError extends Error {
     constructor(
