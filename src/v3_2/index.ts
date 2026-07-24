@@ -29,6 +29,7 @@ export * from './directed_foundation_2_proposal';
 export * from './directed_foundation_2_review';
 export * from './directed_foundation_2';
 export * from './directed_1b';
+export * from './directed_1c_proposal';
 export * from './metatheory';
 export * from './migration';
 export * from './pattern';
