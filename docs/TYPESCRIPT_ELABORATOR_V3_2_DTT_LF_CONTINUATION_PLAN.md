@@ -32,7 +32,7 @@ H-DTTLF-02 instance is pending before DIRECTED-1B integration can continue
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`94b09ebb64ff3cfca7897c078532bdfeebc5df68`
+`33001f980fcca49928fd28d8bff8f1e45b1c0809`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -1313,7 +1313,7 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest local implementation checkpoint is
-94b09ebb64ff3cfca7897c078532bdfeebc5df68. If
+33001f980fcca49928fd28d8bff8f1e45b1c0809. If
 H-DTTLF-02/DIRECTED-FOUNDATION-1 is still pending, preserve the approved
 DIRECTED-1B proposal and its draft integration mechanics but do not execute
 the three prerequisite facade rules or claim the catalog complete.
@@ -1475,3 +1475,8 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   all five proposal tests pass. Paused semantic integration at
   H-DTTLF-02/DIRECTED-FOUNDATION-1 rather than hiding the rules as checker
   coercions.
+- **2026-07-24 — DIRECTED-FOUNDATION-1 proposal checkpointed.** Recorded
+  local checkpoint `33001f980fcca49928fd28d8bff8f1e45b1c0809` with only the
+  synchronized living plan, exact prerequisite proposal/bindings, its five
+  tests, and test/index wiring staged. The unapproved runtime seam and
+  DIRECTED-1B integration draft remained unstaged experiment evidence.
