@@ -36,6 +36,15 @@ export interface CoreLfKernelProbe {
     readonly externalFreeReferences?: KernelSerializationOptions[
         'externalFreeReferences'
     ];
+    /**
+     * Reviewed transparent mirrors of definitions already owned by the
+     * active Lambdapi module. Their TypeScript bodies remain checked and
+     * delta-reducible, but emission maps them to the active owner instead of
+     * introducing a shadow declaration.
+     */
+    readonly externalTransparentDefinitions?: KernelSerializationOptions[
+        'externalFreeReferences'
+    ];
 }
 
 const safeCommentText = (value: string): string =>
@@ -47,15 +56,51 @@ export function serializeCoreLfKernelProbe(
     const lines: string[] = [];
     const sourceMap: ProbeSourceMapEntry[] = [];
     const conversions = probe.conversions ?? [];
-    const externalFreeReferences = probe.externalFreeReferences ?? {};
-    const externalNames = new Set(
-        Object.entries(externalFreeReferences)
-            .filter((entry): entry is [string, string] =>
-                entry[1] !== undefined
-            )
-            .map(([name]) => name)
+    const opaqueExternalReferences =
+        probe.externalFreeReferences ?? {};
+    const transparentExternalDefinitions =
+        probe.externalTransparentDefinitions ?? {};
+    const externalEntries = (
+        value: KernelSerializationOptions['externalFreeReferences']
+    ): readonly [string, string][] => Object.entries(value ?? {}).filter(
+        (entry): entry is [string, string] => entry[1] !== undefined
     );
-    for (const name of externalNames) {
+    const opaqueEntries = externalEntries(opaqueExternalReferences);
+    const transparentEntries =
+        externalEntries(transparentExternalDefinitions);
+    const opaqueNames = new Set(opaqueEntries.map(([name]) => name));
+    const transparentNames = new Set(
+        transparentEntries.map(([name]) => name)
+    );
+    for (const name of opaqueNames) {
+        if (transparentNames.has(name)) {
+            throw new Error(
+                `External Core LF reference '${name}' cannot be both an ` +
+                'opaque import and a transparent mirror'
+            );
+        }
+    }
+    const externalFreeReferences: Record<string, string> = {};
+    const backendOwners = new Map<string, string>();
+    for (const [name, backendName] of [
+        ...opaqueEntries,
+        ...transparentEntries
+    ]) {
+        const existing = backendOwners.get(backendName);
+        if (existing !== undefined) {
+            throw new Error(
+                `External Core LF references '${existing}' and '${name}' ` +
+                `both map to active owner '${backendName}'`
+            );
+        }
+        backendOwners.set(backendName, name);
+        externalFreeReferences[name] = backendName;
+    }
+    const externalNames = new Set([
+        ...opaqueNames,
+        ...transparentNames
+    ]);
+    for (const name of opaqueNames) {
         const declaration = probe.environment.lookup(name);
         if (!declaration) {
             throw new Error(
@@ -70,6 +115,24 @@ export function serializeCoreLfKernelProbe(
             throw new Error(
                 `External Core LF reference '${name}' must be an opaque ` +
                 'body-free declaration'
+            );
+        }
+    }
+    for (const name of transparentNames) {
+        const declaration = probe.environment.lookup(name);
+        if (!declaration) {
+            throw new Error(
+                `External transparent Core LF definition '${name}' has no ` +
+                'checked declaration'
+            );
+        }
+        if (
+            declaration.body === undefined ||
+            declaration.transparency !== 'transparent'
+        ) {
+            throw new Error(
+                `External transparent Core LF definition '${name}' must ` +
+                'have a checked transparent body'
             );
         }
     }

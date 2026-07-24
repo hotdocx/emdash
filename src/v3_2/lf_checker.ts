@@ -22,6 +22,7 @@ import {
     CoreLfDeclarationEnvironment
 } from './lf_declarations';
 import {
+    CoreLfCatalogRuntime,
     CoreLfCombinedNextStep,
     CoreLfComparisonResult,
     coreLfDefinitionalCompare
@@ -77,7 +78,8 @@ export class CoreLfElaborationSession extends CoreElaborationSession {
     constructor(
         public readonly lfEnvironment: CoreLfDeclarationEnvironment,
         public readonly comparisonStepLimit =
-            CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT
+            CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT,
+        public readonly catalogRuntime?: CoreLfCatalogRuntime
     ) {
         assertStepLimit(lfEnvironment, comparisonStepLimit);
         super(lfEnvironment.coreEnvironment);
@@ -98,7 +100,9 @@ export class CoreLfElaborationSession extends CoreElaborationSession {
             this.lfEnvironment,
             left,
             right,
-            this.comparisonStepLimit
+            this.comparisonStepLimit,
+            undefined,
+            this.catalogRuntime
         );
         this.constraintComparisonRecords_.push(result);
         return { status: result.status };
@@ -139,7 +143,8 @@ export class CoreLfChecker extends CoreChecker {
             left,
             right,
             stepLimit,
-            this.lfSession
+            this.lfSession,
+            this.lfSession.catalogRuntime
         );
         this.checkerComparisonRecords_.push(result);
 
@@ -156,12 +161,14 @@ export class CoreLfChecker extends CoreChecker {
 
 export function createCoreLfChecker(
     environment: CoreLfDeclarationEnvironment,
-    comparisonStepLimit = CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT
+    comparisonStepLimit = CORE_LF_CANDIDATE_COMPARISON_STEP_LIMIT,
+    catalogRuntime?: CoreLfCatalogRuntime
 ): CoreLfChecker {
     return new CoreLfChecker(
         new CoreLfElaborationSession(
             environment,
-            comparisonStepLimit
+            comparisonStepLimit,
+            catalogRuntime
         )
     );
 }

@@ -55,6 +55,21 @@ export interface CoreLfDeclaration extends CoreBindingInput {
     readonly bodyDependencies: readonly string[];
 }
 
+/**
+ * Candidate declaration validation may opt into a reviewed checker while the
+ * default remains the frozen Core checker. The factory is supplied an exact
+ * persistent declaration environment for each validation phase.
+ */
+export type CoreLfDeclarationCheckerFactory = (
+    environment: CoreDeclarationEnvironment
+) => CoreChecker;
+
+const defaultCoreLfDeclarationCheckerFactory:
+CoreLfDeclarationCheckerFactory =
+    environment => new CoreChecker(
+        new CoreElaborationSession(environment)
+    );
+
 export type CoreLfDeclarationErrorCode =
     | 'INVALID_DECLARATION'
     | 'DUPLICATE_DECLARATION'
@@ -136,7 +151,9 @@ export class CoreLfDeclarationEnvironment {
 
     private constructor(
         public readonly coreEnvironment: CoreDeclarationEnvironment,
-        public readonly declarations: readonly CoreLfDeclaration[]
+        public readonly declarations: readonly CoreLfDeclaration[],
+        private readonly checkerFactory:
+            CoreLfDeclarationCheckerFactory
     ) {
         this.declarations = Object.freeze([...declarations]);
         this.declarationMap = new Map(
@@ -151,7 +168,8 @@ export class CoreLfDeclarationEnvironment {
     static empty(): CoreLfDeclarationEnvironment {
         return new CoreLfDeclarationEnvironment(
             CoreDeclarationEnvironment.empty(),
-            []
+            [],
+            defaultCoreLfDeclarationCheckerFactory
         );
     }
 
@@ -160,7 +178,9 @@ export class CoreLfDeclarationEnvironment {
     }
 
     extend(
-        input: CoreLfDeclarationInput
+        input: CoreLfDeclarationInput,
+        checkerFactory: CoreLfDeclarationCheckerFactory =
+            this.checkerFactory
     ): CoreLfDeclarationEnvironment {
         const transparency = input.transparency ?? 'opaque';
         if (
@@ -198,9 +218,19 @@ export class CoreLfDeclarationEnvironment {
                 mode: input.mode,
                 provenance: input.provenance
             });
-            const typeChecker = new CoreChecker(
-                new CoreElaborationSession(nextCoreEnvironment)
-            );
+            const typeChecker = checkerFactory(nextCoreEnvironment);
+            if (
+                typeChecker.rootContext.environment !==
+                nextCoreEnvironment
+            ) {
+                throw new CoreLfDeclarationError(
+                    'INVALID_DECLARATION_TYPE',
+                    input.provenance,
+                    `Checker factory for Core LF declaration ` +
+                    `'${input.name}' returned a checker for a foreign ` +
+                    'declaration environment'
+                );
+            }
             typeChecker.validateEnvironment();
         } catch (error: unknown) {
             const underlying = error instanceof Error ? error : undefined;
@@ -244,9 +274,21 @@ export class CoreLfDeclarationEnvironment {
             );
 
             try {
-                const bodyChecker = new CoreChecker(
-                    new CoreElaborationSession(this.coreEnvironment)
+                const bodyChecker = checkerFactory(
+                    this.coreEnvironment
                 );
+                if (
+                    bodyChecker.rootContext.environment !==
+                    this.coreEnvironment
+                ) {
+                    throw new CoreLfDeclarationError(
+                        'INVALID_DEFINITION_BODY',
+                        input.body.provenance,
+                        `Checker factory for Core LF definition ` +
+                        `'${input.name}' returned a checker for a foreign ` +
+                        'declaration environment'
+                    );
+                }
                 checkedBody = bodyChecker.check(
                     bodyChecker.rootContext,
                     input.body,
@@ -287,7 +329,8 @@ export class CoreLfDeclarationEnvironment {
         });
         return new CoreLfDeclarationEnvironment(
             nextCoreEnvironment,
-            [...this.declarations, declaration]
+            [...this.declarations, declaration],
+            checkerFactory
         );
     }
 }
