@@ -37,7 +37,7 @@ can complete
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`741668201b8af1a4c3eae9a104fa952b7f2ff9e7`
+`5081afe6759f53cb4e51a5995d2e91276bf6442e`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -1458,7 +1458,7 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest local implementation checkpoint is
-741668201b8af1a4c3eae9a104fa952b7f2ff9e7. DIRECTED-FOUNDATION-1 is
+5081afe6759f53cb4e51a5995d2e91276bf6442e. DIRECTED-FOUNDATION-1 is
 implemented exactly as approved. The next dependent action is gated by
 H-DTTLF-02/DIRECTED-FOUNDATION-2: preserve the DIRECTED-1B integration draft
 but do not execute the decoded Cat-hom rule or claim the catalog complete
@@ -1650,3 +1650,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   frozen MVP, browser, deferrals, and withheld metatheory claims remain
   unchanged. Quiet and warning-enabled bounded Lambdapi probes and five
   proposal tests pass. DIRECTED-1B integration is paused at this fresh gate.
+- **2026-07-24 — Foundation implementation/proposal tranche checkpointed.**
+  Recorded local checkpoint
+  `5081afe6759f53cb4e51a5995d2e91276bf6442e` after the full repository gate
+  passed. The exact staged diff contained only the reviewed
+  DIRECTED-FOUNDATION-1 decision/runtime, its closed opt-in LF catalog seam,
+  the non-executable DIRECTED-FOUNDATION-2 proposal, focused tests, and this
+  synchronized ledger. The paused DIRECTED-1B declaration/runtime integration
+  experiment remained unstaged.
