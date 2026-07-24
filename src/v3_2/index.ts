@@ -15,3 +15,4 @@ export * from './lambdapi';
 export * from './surface';
 export * from './elaborator';
 export * from './probe';
+export * from './differential';

@@ -45,6 +45,13 @@ export interface KernelProbeAssertion {
     span: SourceSpan;
 }
 
+export interface KernelProbeNegativeAssertion {
+    label: string;
+    term: KernelExpression;
+    type: KernelExpression;
+    span: SourceSpan;
+}
+
 export interface KernelProbeConversionAssertion {
     label: string;
     left: KernelExpression;
@@ -71,6 +78,7 @@ export interface KernelProbe {
     requiredModule: typeof LAMBDAPI_V32_MODULE;
     declarations: readonly KernelProbeDeclaration[];
     assertions: readonly KernelProbeAssertion[];
+    negativeAssertions?: readonly KernelProbeNegativeAssertion[];
     conversions?: readonly KernelProbeConversionAssertion[];
     proofTimeComparisons?: readonly KernelProbeProofTimeComparison[];
     nonConversions?: readonly KernelProbeNonConversionAssertion[];
@@ -81,6 +89,7 @@ export interface ProbeSourceMapEntry {
     kind:
         | 'declaration'
         | 'assertion'
+        | 'negative-assertion'
         | 'conversion'
         | 'proof-time-comparison'
         | 'non-conversion';
@@ -153,6 +162,7 @@ export function compileSurfaceProbe(
 export function serializeKernelProbe(probe: KernelProbe): SerializedProbe {
     const lines: string[] = [];
     const sourceMap: ProbeSourceMapEntry[] = [];
+    const negativeAssertions = probe.negativeAssertions ?? [];
     const conversions = probe.conversions ?? [];
     const proofTimeComparisons = probe.proofTimeComparisons ?? [];
     const nonConversions = probe.nonConversions ?? [];
@@ -184,6 +194,7 @@ export function serializeKernelProbe(probe: KernelProbe): SerializedProbe {
         probe.declarations.length > 0 &&
         (
             probe.assertions.length > 0 ||
+            negativeAssertions.length > 0 ||
             conversions.length > 0 ||
             proofTimeComparisons.length > 0 ||
             nonConversions.length > 0
@@ -211,6 +222,35 @@ export function serializeKernelProbe(probe: KernelProbe): SerializedProbe {
 
     if (
         probe.assertions.length > 0 &&
+        (
+            negativeAssertions.length > 0 ||
+            conversions.length > 0 ||
+            proofTimeComparisons.length > 0 ||
+            nonConversions.length > 0
+        )
+    ) {
+        push('');
+    }
+
+    for (const assertion of negativeAssertions) {
+        push(
+            `// ${safeCommentText(assertion.label)}; source ` +
+            formatSourceSpan(assertion.span)
+        );
+        const generatedLine = push(
+            `assertnot ⊢ ${serializeKernelExpression(assertion.term)} : ` +
+            `${serializeKernelExpression(assertion.type)};`
+        );
+        sourceMap.push({
+            generatedLine,
+            kind: 'negative-assertion',
+            label: assertion.label,
+            sourceSpan: assertion.span
+        });
+    }
+
+    if (
+        negativeAssertions.length > 0 &&
         (
             conversions.length > 0 ||
             proofTimeComparisons.length > 0 ||
