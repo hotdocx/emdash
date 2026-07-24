@@ -20,6 +20,8 @@ Primary artifacts:
 - Book sources and evidence map: [`./emdash2/book/`](./emdash2/book/)
 - TypeScript v3.2 elaborator handoff:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md)
+- Implemented ELAB-0 RFC and TypeScript-kernel reassessment:
+  [`./docs/TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md)
 
 ## Development workspace and Git worktrees
 

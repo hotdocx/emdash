@@ -1,7 +1,7 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-Date: 2026-07-22
-Status: workspace-ready pre-implementation handoff for ELAB-0
+Date: 2026-07-23
+Status: ELAB-0 implemented; this remains the authority and growth handoff
 
 ## Purpose
 
@@ -9,6 +9,11 @@ This document prepares the next fresh conversation to work from the Git root
 on a TypeScript elaborator for the active emdash v3.2 Lambdapi kernel. It is a
 handoff and design boundary, not a claim that the existing TypeScript category
 layer already implements v3.2.
+
+The first checked vertical slice now lives under `../src/v3_2/`, with its
+evidence, architecture reassessment, validation record, and human review
+points in
+[`TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md).
 
 The intended word *syntax* is broad. Users may construct a typed surface AST
 with ordinary TypeScript expressions; a string parser can be added later. The
@@ -86,10 +91,10 @@ to a reusable generic invariant or a current v3.2 consumer. A wholesale first
 deletion would erase useful executable evidence and make regressions difficult
 to classify.
 
-## Recommended First Implementation Tranche
+## Implemented First Tranche
 
-Create a short root-side RFC/plan before semantic edits. Its first vertical
-slice should do all of the following:
+The ELAB-0 RFC and isolated `src/v3_2/` implementation now cover this first
+vertical slice:
 
 1. define a minimal source-located TypeScript surface AST and a distinct
    explicit kernel-target AST;
