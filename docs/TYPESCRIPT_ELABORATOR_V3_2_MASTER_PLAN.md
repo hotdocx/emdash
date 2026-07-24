@@ -10,7 +10,7 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Status: active living master plan; ELAB-2A0 is complete and ELAB-2A1 is the
+Status: active living master plan; ELAB-2A1 is complete and ELAB-2A2 is the
 next dependency-ready implementation slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
@@ -166,6 +166,7 @@ cleanly.
 | D-014 | accepted | Treat a rigid object, hom arrow, or ordinary transfor uniformly through its recursively recovered object-category. Record full, capped, and evaluator owners separately; higher-cell action is recursive reuse of the ordinary full hom schema. | ELAB-1B represents `Hom_cat` and `Transf_cat` as semantic category formers, passes the two-level 2-cell consumer without `fapp2`, rejects the wrong inner hom at its source span, and verifies all three active evaluator conversions in Lambdapi. |
 | D-015 | accepted | Decode an object produced by generic `fapp0` from its target category former into the richest rigid Core view currently known. In particular, an object of `Catd_cat(K)` remains an ordinary `K → Cat_cat` functor, while opposite-category membership uses only the active `Obj(Op_cat A) ↪ Obj A` classifier equation and does not identify `A` with `Op_cat A`. | ELAB-1C retains both internal-Hom families after their first object projection, reuses ordinary `fapp0` for the later projection, verifies the distinct `Hom_A(W,Fb)` and `Hom_A(Fb,W)` normal forms in Lambdapi, and rejects both a wrong base object and a variance-reversed conversion. |
 | D-016 | accepted | Use a locally nameless Core: named references denote free declarations, De Bruijn indices denote bound occurrences, and binder names are nonsemantic display hints. Structural equality is alpha-invariant; shift/substitution is index-based and capture-safe; the Lambdapi backend generates canonical noncapturing names. | ELAB-2A0 distinguishes same-spelled free/bound terms, handles shadowing and dependent binder types, rejects dangling/downward-escaping indices, composes ordered instantiation, and emits an alpha-canonical identity accepted by Lambdapi. Plicity and variation remain distinct Core metadata; only plicity has direct Lambdapi binder syntax. |
+| D-017 | accepted | Split Core scope into an immutable ordered free-declaration environment and a persistent outermost-to-innermost local telescope. Store each local type at its owning depth; lookup selects the nearest local occurrence and lifts that type by its De Bruijn index plus one. Explicit declaration lookup remains available beneath local shadowing. | ELAB-2A1 validates closed declaration types and local types at their owning depths, permits only earlier free dependencies, preserves modes/provenance, keeps independent environments isolated, and abstracts a dependent telescope to a Lambdapi-accepted closed identity. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -312,7 +313,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-09 | Partially applied `hom_int` | complete in ELAB-1C | Retained `B → Cat_cat` family, later object action, exact source-varying conversion, and wrong-base rejection |
 | C-10 | Partially applied `hom_con_int` | complete in ELAB-1C | Retained `Op_cat(B) → Cat_cat` family, exact target-varying conversion, and reversal rejection |
 | C-11 | Metavariable/implicit solving over Core | missing | Occurs/scope/ambiguity negatives |
-| C-12 | Context extension and displayed type | missing | Dependent lookup and substitution |
+| C-12 | Context extension and displayed type | partial: Core telescope foundation complete in ELAB-2A1; displayed interpretation remains ELAB-2B | Dependent lookup/lifting and abstraction are green; displayed substitution still requires the ELAB-2B owner experiment |
 | C-13 | Constant displayed family comparison | missing | Both routes plus a deliberate non-collapse |
 | C-14 | Dependent weakening | missing/inventory required | Concrete elaboration consumer |
 | C-15 | Dependency-respecting exchange | missing/inventory required | Permitted and forbidden telescope swaps |
@@ -337,10 +338,10 @@ must identify their common baseline.
 | ELAB-1A | complete | ELAB-0 | Backend-neutral classifier/projection owner schemas and generic surface-operation lowering preserve the three ELAB-0 targets; a separate provenance-bearing Lambdapi catalog emits them plus `tapp0_fapp0`; focused exact-target, wrong-object, and positive/negative conformance probes pass. |
 | ELAB-1B | complete | ELAB-1A | Variable operation telescopes, explicit full/capped/evaluator pairs, recursive object-category recovery, all three full owners, the recursive 2-cell stress case, wrong-inner-hom rejection, and bounded evaluator-conversion probes are green. |
 | ELAB-1C | complete | ELAB-1B | Backend-neutral `hom_int`/`hom_con_int` constructors, category-former object decoding, two retained Hom-valued functors, exact variance conversions, wrong-base rejection, and a reversed-variance Lambdapi negative are green. |
-| ELAB-2A | split | ELAB-1 schema stability | The former all-in-one scope/meta/checker tranche is split into ELAB-2A0 through ELAB-2A2 so each checkpoint owns one reviewable semantic claim. |
+| ELAB-2A | split | ELAB-1 schema stability | The former all-in-one scope/meta/checker tranche is split into ELAB-2A0 through ELAB-2A3 so each checkpoint owns one reviewable semantic claim. |
 | ELAB-2A0 | complete | ELAB-1C | Locally nameless free/bound variables, alpha-invariant equality, capture-safe shift/substitution/instantiation, scope validation, canonical backend naming, and a Lambdapi-accepted dependent binder probe are green. |
-| ELAB-2A1 | next / dependency-ready | ELAB-2A0 | Add an immutable session-owned declaration context and dependent local telescope over Core, with deterministic lookup, extension, shadowing, lifting, and source-located duplicate/unbound/scope negatives. |
-| ELAB-2A2 | pending | ELAB-2A1 | Add per-session metavariable and constraint stores with deterministic identities, scope-escape rejection, occurs checking, solution isolation, and ambiguity evidence. |
+| ELAB-2A1 | complete | ELAB-2A0 | Immutable ordered declarations and a persistent dependent local telescope validate at their owning depths; deterministic nearest lookup, type lifting, shadowing, abstraction, and source-located duplicate/unbound/scope negatives are green. |
+| ELAB-2A2 | next / dependency-ready | ELAB-2A1 | Add per-session metavariable and constraint stores with deterministic identities, scope-escape rejection, occurs checking, solution isolation, and ambiguity evidence. |
 | ELAB-2A3 | pending | ELAB-2A2 | Add the bounded bidirectional Pi/lambda/application checker and schema-driven implicit insertion over Core, including source-located mismatch negatives. |
 | ELAB-2B | pending | ELAB-2A3 | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
 | ELAB-2C | pending | ELAB-2B | Exercise weakening, permitted/forbidden exchange, and contraction. Record missing displayed owners with consumer probes; do not yet assume kernel promotion. |
@@ -655,30 +656,116 @@ Plan rows changed: D-016 accepted; capture-safe substitution inventory
 Remaining prerequisite or human review: none for this bounded slice.
 ```
 
-## Immediate Slice: ELAB-2A1
+## Completed Slice: ELAB-2A1
 
-The next slice builds the immutable context layer on the locally nameless
-foundation:
+ELAB-2A1 introduced:
 
-1. inventory the current `SurfaceContext` and legacy `Context` lookup,
-   extension, shadowing, and global-state behavior as implementation evidence;
-2. add a session-owned Core declaration environment and dependent local
-   telescope without importing the legacy `Term`, globals, or mutable rule
-   registries;
-3. validate every declaration type and local binder type at its owning depth,
-   and define deterministic lookup results containing the correct bound index
-   and lifted dependent type;
-4. keep free declaration identity distinct from local shadowing, preserve
-   binder modes and provenance, and make extension persistent rather than
-   mutating earlier contexts;
-5. pass lookup/extension/shadowing/dependency consumers plus duplicate free
-   declaration, unbound name, and escaping local-type negatives at their
-   originating spans;
-6. run focused tests, `check:ts`, the bounded kernel check, and the
-   proportional repository gate before synchronizing the experiment record.
+- an ordered `CoreDeclarationEnvironment` whose persistent extension validates
+  every free declaration type at depth zero against only earlier declarations;
+- a persistent `CoreContext` telescope storing local types at the depth where
+  they are formed, with no ambient registry, fresh counter, or mutable legacy
+  `Term` dependency;
+- deterministic nearest-local lookup returning both the bound occurrence and
+  its dependent type lifted beneath the binding itself and every newer local;
+- explicit free-declaration lookup beneath local shadowing, plus retained
+  plicity/variation modes and source provenance;
+- telescope abstraction to nested Pi/lambda Core terms, with the dependent
+  identity accepted by the Lambdapi conformance backend;
+- source-located failures for duplicate declarations, forward/unknown free
+  references, unbound uses, and declaration/local types that escape their
+  owning depth.
 
-Do not add metavariables, constraint solving, bidirectional checking,
-displayed-category owners, or legacy category compatibility in ELAB-2A1.
+The existing `SurfaceContext` remains the rigid ELAB-0/1 declaration adapter:
+it resolves only earlier named surface dependencies and has no local telescope.
+The legacy `Context` remains non-authoritative evidence: `extendCtx` prepends a
+new array and `lookupCtx` selects its first matching name, but holes,
+constraints, fresh counters, definitions, and rule registries are tied to
+ambient mutable state. None of those legacy types or globals entered the new
+Core context.
+
+### Experiment ELAB-2A1-PERSISTENT-CONTEXT
+
+```text
+Experiment ID: ELAB-2A1-PERSISTENT-CONTEXT
+Date and checkpoint: 2026-07-23 at ELAB-2A0 checkpoint e3bdf11
+Question/hypothesis: an ordered free environment plus a locally nameless
+  telescope can provide persistent extension, nearest-name shadowing, and
+  correctly lifted dependent lookup types without importing legacy global
+  state or identifying local and free occurrences.
+Authority and owner position inspected: the ELAB-2A0 KernelExpression and
+  scope operations; current SurfaceContext construction/dependency lookup;
+  legacy Context/extendCtx/lookupCtx and global fresh/constraint stores as
+  non-authoritative evidence; active Lambdapi dependent Pi/lambda syntax;
+  canonical ordered telescope notation and the Foundations dependent-context
+  reading.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on goal/typescript-elaborator-v3.2 at
+  e3bdf11; descendant of baseline a06433e.
+Minimal positive consumer: in A : Cat, x : Obj(A), lookup returns x at index
+  zero with type Obj(A) lifted beneath x; after further extension older terms
+  and types receive their exact new indices. Abstracting the telescope around
+  x produces the closed dependent identity accepted by Lambdapi.
+Relevant negative/non-collapse consumer: reject duplicate free declarations,
+  forward/unknown free references, dangling declaration/local indices, and an
+  unbound use at their originating spans; a same-named local resolves to a
+  bound node while explicit declaration lookup still returns the distinct free
+  reference.
+Probe command and bounded result:
+  node --require ts-node/register --test tests/v3_2_core_context_tests.ts
+    passed 10, skipped 1 opt-in probe.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 with the same command
+    passed 11/11; the context-abstracted dependent identity was accepted by
+    Lambdapi.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 over all four v3_2 focused files
+    passed 47/47, including every earlier owner/conversion/negative probe.
+  ./scripts/pnpmw run check:ts
+    passed 199 tests / 47 suites: 190 passed, 9 opt-in probes skipped.
+  EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+    passed the active kernel, four one-way extensions, and diagnostics.
+  EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+    passed the root gate; all 41 active Lambdapi kernel/example targets;
+    39 formal infrastructure tests; 5 print registry tests; active-reference,
+    report-header, book/evidence/typography/KaTeX checks; strict rule-LHS
+    audit; and generated catalog freshness.
+Warning/audit/catalog/health effects, if any: no Lambdapi declaration, rule,
+  diagnostic, generated catalog, or health authority changed.
+Decision: accept. A local binding type belongs to the scope immediately before
+  that binding; lookup at index i therefore weakens it by i+1. Free names
+  remain declaration identities even when surface-name lookup selects a
+  shadowing local. Context extension is persistent and all mutable solving
+  state remains deferred to a session boundary.
+Plan rows changed: D-017 accepted; C-12 records the completed Core-telescope
+  foundation but remains partial until displayed interpretation; ELAB-2A1
+  complete and ELAB-2A2 dependency-ready.
+Remaining prerequisite or human review: none for this bounded slice.
+```
+
+## Immediate Slice: ELAB-2A2
+
+The next slice adds only session-local metavariable and constraint state:
+
+1. inventory legacy `Hole`, dereferencing, occurs checking, constraint
+   ordering, counters, and reset behavior as implementation evidence without
+   importing their mutable nodes or global arrays;
+2. choose and record a Core metavariable identity that is deterministic within
+   a session while preventing one session from observing or solving another
+   session's entries;
+3. store each metavariable's type, creation depth, provenance, and optional
+   single-assignment solution in a session-owned store; keep metavariable
+   occurrences explicit in Core and reject them at the Lambdapi backend
+   boundary until solved;
+4. implement deterministic dereferencing/zonking and a bounded constraint
+   step with occurs checking and solution validation at the metavariable's
+   creation depth;
+5. distinguish solved, rejected, and genuinely ambiguous/stuck constraints;
+   never choose arbitrarily between unconstrained metavariables;
+6. pass fresh-identity, solution-isolation, occurs, scope-escape,
+   cross-session, deterministic-order, and ambiguity cases before running
+   `check:ts`, the bounded kernel check, and the proportional repository gate.
+
+Do not add bidirectional checking, implicit insertion, higher-order pattern
+unification, runtime rewrite rules, displayed-category owners, or legacy
+category compatibility in ELAB-2A2.
 
 ## Human Review Gates
 
