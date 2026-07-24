@@ -3,6 +3,7 @@ export * from './kernel';
 export * from './signature';
 export * from './context';
 export * from './session';
+export * from './checker';
 export * from './lambdapi';
 export * from './surface';
 export * from './elaborator';

@@ -288,6 +288,38 @@ export class CoreContext {
     }
 
     /**
+     * Resolve a local binding by De Bruijn index.
+     *
+     * The returned type is lifted from the scope that owns the binding into
+     * this context in exactly the same way as a name-based local lookup.
+     */
+    lookupIndex(
+        index: number,
+        occurrenceProvenance?: Provenance
+    ): CoreLocalLookup | undefined {
+        if (
+            !Number.isSafeInteger(index) ||
+            index < 0 ||
+            index >= this.telescope.length
+        ) {
+            return undefined;
+        }
+        const binding = this.telescope[this.telescope.length - index - 1];
+        return Object.freeze({
+            kind: 'local',
+            name: binding.name,
+            term: kernelBound(
+                index,
+                occurrenceProvenance ?? binding.provenance
+            ),
+            type: kernelShift(binding.type, index + 1),
+            mode: binding.mode,
+            index,
+            binding
+        });
+    }
+
+    /**
      * Resolve the nearest local binder first, then the free environment.
      *
      * A local type is weakened beneath the binding itself and every newer
@@ -306,18 +338,7 @@ export class CoreContext {
             if (binding.name !== name) continue;
 
             const index = this.telescope.length - position - 1;
-            return Object.freeze({
-                kind: 'local',
-                name,
-                term: kernelBound(
-                    index,
-                    occurrenceProvenance ?? binding.provenance
-                ),
-                type: kernelShift(binding.type, index + 1),
-                mode: binding.mode,
-                index,
-                binding
-            });
+            return this.lookupIndex(index, occurrenceProvenance);
         }
 
         return this.lookupDeclaration(name, occurrenceProvenance);

@@ -2,9 +2,9 @@
  * Session-local metavariables and ordered constraints for emdash Core.
  *
  * This is elaboration state, not the trusted checker. It deliberately solves
- * only direct canonical flex-rigid equations. Structural decomposition,
- * conversion, higher-order pattern solving, and implicit insertion belong to
- * later slices.
+ * only direct canonical flex-rigid equations. The bounded Core checker owns
+ * structural decomposition and implicit insertion; conversion and
+ * higher-order pattern solving remain later work.
  */
 
 import {
