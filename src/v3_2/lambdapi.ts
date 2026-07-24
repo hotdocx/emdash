@@ -8,6 +8,7 @@
 
 import {
     KernelExpression,
+    KernelMetaVariable,
     kernelAssertScoped
 } from './kernel';
 import {
@@ -15,6 +16,16 @@ import {
 } from './schema';
 
 export const LAMBDAPI_V32_MODULE = 'emdash.emdash3_2' as const;
+
+export class UnsolvedKernelMetaError extends Error {
+    constructor(public readonly meta: KernelMetaVariable) {
+        super(
+            `Cannot serialize unsolved Core metavariable ` +
+            `?m${meta.identity.index}; zonk it through its owning session first`
+        );
+        this.name = 'UnsolvedKernelMetaError';
+    }
+}
 
 export interface LambdapiOwnerBinding {
     module: typeof LAMBDAPI_V32_MODULE;
@@ -166,6 +177,11 @@ function collectFreeReferenceNames(
             return;
         case 'bound':
             return;
+        case 'meta':
+            expression.spine.forEach(item =>
+                collectFreeReferenceNames(item, names)
+            );
+            return;
         case 'application':
             expression.arguments.forEach(argument =>
                 collectFreeReferenceNames(argument.value, names)
@@ -215,6 +231,8 @@ function serializeExpression(
             }
             return name;
         }
+        case 'meta':
+            throw new UnsolvedKernelMetaError(expression);
         case 'application': {
             const backend = LAMBDAPI_V32_OWNER_BINDINGS[expression.owner];
             const hasImplicitArguments = expression.arguments.some(

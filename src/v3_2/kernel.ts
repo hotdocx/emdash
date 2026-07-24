@@ -80,6 +80,30 @@ export interface KernelBoundVariable {
     provenance: Provenance;
 }
 
+/**
+ * Session identity is intentionally opaque and process-local. The numeric
+ * index is deterministic within that session; the symbol prevents accidental
+ * cross-session equality without introducing a global counter.
+ */
+export interface KernelMetaIdentity {
+    readonly session: symbol;
+    readonly index: number;
+}
+
+/**
+ * A contextual metavariable occurrence `?m[spine]`.
+ *
+ * `spine[i]` is the current-scope image of De Bruijn index `i` from the
+ * metavariable's creation scope. Solving state lives in the owning session,
+ * never in this Core node.
+ */
+export interface KernelMetaVariable {
+    tag: 'meta';
+    identity: KernelMetaIdentity;
+    spine: readonly KernelExpression[];
+    provenance: Provenance;
+}
+
 export interface KernelArgument {
     plicity: Plicity;
     value: KernelExpression;
@@ -120,6 +144,7 @@ export interface KernelLambda {
 export type KernelExpression =
     | KernelReference
     | KernelBoundVariable
+    | KernelMetaVariable
     | KernelApplication
     | KernelPi
     | KernelLambda;
@@ -182,6 +207,27 @@ export const kernelBound = (
     return {
         tag: 'bound',
         index,
+        provenance: nodeProvenance
+    };
+};
+
+export const kernelMeta = (
+    identity: KernelMetaIdentity,
+    spine: readonly KernelExpression[],
+    nodeProvenance: Provenance
+): KernelMetaVariable => {
+    if (!isNonnegativeInteger(identity.index)) {
+        throw new KernelScopeError(
+            'INVALID_BOUND_INDEX',
+            nodeProvenance,
+            `Core metavariable index must be a nonnegative safe integer; ` +
+            `received ${identity.index}`
+        );
+    }
+    return {
+        tag: 'meta',
+        identity,
+        spine: Object.freeze([...spine]),
         provenance: nodeProvenance
     };
 };
@@ -281,6 +327,13 @@ function shiftAt(
                 ? expression
                 : { ...expression, index: shifted };
         }
+        case 'meta':
+            return {
+                ...expression,
+                spine: expression.spine.map(item =>
+                    shiftAt(item, amount, cutoff)
+                )
+            };
         case 'application':
             return {
                 ...expression,
@@ -341,6 +394,18 @@ function substituteAt(
             return expression.index === targetIndex + depth
                 ? shiftAt(replacement, depth, 0)
                 : expression;
+        case 'meta':
+            return {
+                ...expression,
+                spine: expression.spine.map(item =>
+                    substituteAt(
+                        item,
+                        targetIndex,
+                        replacement,
+                        depth
+                    )
+                )
+            };
         case 'application':
             return {
                 ...expression,
@@ -412,6 +477,88 @@ export function kernelInstantiate(
     return kernelShift(substituted, -1);
 }
 
+function instantiateSpineAt(
+    expression: KernelExpression,
+    spine: readonly KernelExpression[],
+    depth: number
+): KernelExpression {
+    switch (expression.tag) {
+        case 'reference':
+            return expression;
+        case 'bound': {
+            if (expression.index < depth) return expression;
+            const sourceIndex = expression.index - depth;
+            const replacement = spine[sourceIndex];
+            if (!replacement) {
+                throw new KernelScopeError(
+                    'DANGLING_BOUND_VARIABLE',
+                    expression.provenance,
+                    `Core ambient bound-variable index ${sourceIndex} has ` +
+                    `no image in a substitution spine of length ` +
+                    `${spine.length}`
+                );
+            }
+            return shiftAt(replacement, depth, 0);
+        }
+        case 'meta':
+            return {
+                ...expression,
+                spine: expression.spine.map(item =>
+                    instantiateSpineAt(item, spine, depth)
+                )
+            };
+        case 'application':
+            return {
+                ...expression,
+                arguments: expression.arguments.map(argument => ({
+                    ...argument,
+                    value: instantiateSpineAt(
+                        argument.value,
+                        spine,
+                        depth
+                    )
+                }))
+            };
+        case 'pi':
+        case 'lambda':
+            return {
+                ...expression,
+                binder: {
+                    ...expression.binder,
+                    type: instantiateSpineAt(
+                        expression.binder.type,
+                        spine,
+                        depth
+                    )
+                },
+                body: instantiateSpineAt(
+                    expression.body,
+                    spine,
+                    depth + 1
+                )
+            };
+        default: {
+            const exhaustive: never = expression;
+            return exhaustive;
+        }
+    }
+}
+
+/**
+ * Apply a simultaneous substitution for an expression's ambient scope.
+ *
+ * The source expression is checked at ambient depth `spine.length`.
+ * Replacements are simultaneous and are shifted only when crossing binders
+ * internal to the source expression.
+ */
+export function kernelInstantiateSpine(
+    expression: KernelExpression,
+    spine: readonly KernelExpression[]
+): KernelExpression {
+    kernelAssertScoped(expression, spine.length);
+    return instantiateSpineAt(expression, spine, 0);
+}
+
 /**
  * Reject any bound occurrence that has no binder in the supplied ambient
  * depth. Backends use depth zero so malformed open terms cannot be emitted.
@@ -442,6 +589,9 @@ export function kernelAssertScoped(
                         `dangling at binder depth ${depth}`
                     );
                 }
+                return;
+            case 'meta':
+                current.spine.forEach(item => visit(item, depth));
                 return;
             case 'application':
                 current.arguments.forEach(argument =>
@@ -477,6 +627,15 @@ export function kernelExpressionEquals(
         case 'bound': {
             const other = right as KernelBoundVariable;
             return left.index === other.index;
+        }
+        case 'meta': {
+            const other = right as KernelMetaVariable;
+            return left.identity.session === other.identity.session &&
+                left.identity.index === other.identity.index &&
+                left.spine.length === other.spine.length &&
+                left.spine.every((item, index) =>
+                    kernelExpressionEquals(item, other.spine[index])
+                );
         }
         case 'application': {
             const other = right as KernelApplication;

@@ -82,6 +82,11 @@ function visitFreeReferences(
             return;
         case 'bound':
             return;
+        case 'meta':
+            expression.spine.forEach(item =>
+                visitFreeReferences(item, visit)
+            );
+            return;
         case 'application':
             expression.arguments.forEach(argument =>
                 visitFreeReferences(argument.value, visit)
@@ -323,9 +328,9 @@ export class CoreContext {
         );
     }
 
-    private validateBody(body: KernelExpression): void {
+    assertScoped(expression: KernelExpression): void {
         validateExpressionScope(
-            body,
+            expression,
             this.depth,
             this.environment,
             'ILL_SCOPED_EXPRESSION',
@@ -337,7 +342,7 @@ export class CoreContext {
      * Abstract this telescope over a body currently valid at `depth`.
      */
     abstractPi(body: KernelExpression): KernelExpression {
-        this.validateBody(body);
+        this.assertScoped(body);
         let result: KernelExpression = body;
         for (let index = this.telescope.length - 1; index >= 0; index--) {
             const binding = this.telescope[index];
@@ -359,7 +364,7 @@ export class CoreContext {
      * Abstract this telescope as nested lambdas over a scoped body.
      */
     abstractLambda(body: KernelExpression): KernelExpression {
-        this.validateBody(body);
+        this.assertScoped(body);
         let result: KernelExpression = body;
         for (let index = this.telescope.length - 1; index >= 0; index--) {
             const binding = this.telescope[index];

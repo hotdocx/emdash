@@ -31,6 +31,7 @@ import './v3_2_elab0_tests';
 import './v3_2_elab1c_tests';
 import './v3_2_core_binder_tests';
 import './v3_2_core_context_tests';
+import './v3_2_core_session_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,

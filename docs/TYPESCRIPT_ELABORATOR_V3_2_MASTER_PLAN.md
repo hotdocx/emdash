@@ -10,7 +10,7 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Status: active living master plan; ELAB-2A1 is complete and ELAB-2A2 is the
+Status: active living master plan; ELAB-2A2 is complete and ELAB-2A3 is the
 next dependency-ready implementation slice
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
@@ -167,6 +167,7 @@ cleanly.
 | D-015 | accepted | Decode an object produced by generic `fapp0` from its target category former into the richest rigid Core view currently known. In particular, an object of `Catd_cat(K)` remains an ordinary `K → Cat_cat` functor, while opposite-category membership uses only the active `Obj(Op_cat A) ↪ Obj A` classifier equation and does not identify `A` with `Op_cat A`. | ELAB-1C retains both internal-Hom families after their first object projection, reuses ordinary `fapp0` for the later projection, verifies the distinct `Hom_A(W,Fb)` and `Hom_A(Fb,W)` normal forms in Lambdapi, and rejects both a wrong base object and a variance-reversed conversion. |
 | D-016 | accepted | Use a locally nameless Core: named references denote free declarations, De Bruijn indices denote bound occurrences, and binder names are nonsemantic display hints. Structural equality is alpha-invariant; shift/substitution is index-based and capture-safe; the Lambdapi backend generates canonical noncapturing names. | ELAB-2A0 distinguishes same-spelled free/bound terms, handles shadowing and dependent binder types, rejects dangling/downward-escaping indices, composes ordered instantiation, and emits an alpha-canonical identity accepted by Lambdapi. Plicity and variation remain distinct Core metadata; only plicity has direct Lambdapi binder syntax. |
 | D-017 | accepted | Split Core scope into an immutable ordered free-declaration environment and a persistent outermost-to-innermost local telescope. Store each local type at its owning depth; lookup selects the nearest local occurrence and lifts that type by its De Bruijn index plus one. Explicit declaration lookup remains available beneath local shadowing. | ELAB-2A1 validates closed declaration types and local types at their owning depths, permits only earlier free dependencies, preserves modes/provenance, keeps independent environments isolated, and abstracts a dependent telescope to a Lambdapi-accepted closed identity. |
+| D-018 | accepted | Represent an elaboration metavariable by an opaque per-session identity, deterministic session-local ordinal, and explicit contextual De Bruijn substitution spine. Keep its type and single-assignment solution only in the owning session; solve only canonical identity occurrences in this bounded tranche, reject raw metas at the backend, and leave distinct flex-flex constraints explicitly stuck. | ELAB-2A2 reindexes contextual occurrences through shift/substitution and beneath internal binders, zonks transitively, rejects direct/transitive occurs cycles, scope escape, foreign identities, and noncanonical solving, revisits ordered constraints after progress, and emits a solved result accepted by Lambdapi without importing legacy mutable holes or globals. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -312,7 +313,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-08 | Recursive action on a 2-cell | complete in ELAB-1B | Two hom levels use the same full schema; wrong inner endpoint is rejected at its span |
 | C-09 | Partially applied `hom_int` | complete in ELAB-1C | Retained `B → Cat_cat` family, later object action, exact source-varying conversion, and wrong-base rejection |
 | C-10 | Partially applied `hom_con_int` | complete in ELAB-1C | Retained `Op_cat(B) → Cat_cat` family, exact target-varying conversion, and reversal rejection |
-| C-11 | Metavariable/implicit solving over Core | missing | Occurs/scope/ambiguity negatives |
+| C-11 | Metavariable/implicit solving over Core | partial: session-local contextual metas and bounded constraints complete in ELAB-2A2; checker-driven implicit insertion remains ELAB-2A3 | Occurs, scope, cross-session, deterministic-order, and ambiguity negatives are green; implicit recovery still needs bidirectional consumers |
 | C-12 | Context extension and displayed type | partial: Core telescope foundation complete in ELAB-2A1; displayed interpretation remains ELAB-2B | Dependent lookup/lifting and abstraction are green; displayed substitution still requires the ELAB-2B owner experiment |
 | C-13 | Constant displayed family comparison | missing | Both routes plus a deliberate non-collapse |
 | C-14 | Dependent weakening | missing/inventory required | Concrete elaboration consumer |
@@ -341,8 +342,8 @@ must identify their common baseline.
 | ELAB-2A | split | ELAB-1 schema stability | The former all-in-one scope/meta/checker tranche is split into ELAB-2A0 through ELAB-2A3 so each checkpoint owns one reviewable semantic claim. |
 | ELAB-2A0 | complete | ELAB-1C | Locally nameless free/bound variables, alpha-invariant equality, capture-safe shift/substitution/instantiation, scope validation, canonical backend naming, and a Lambdapi-accepted dependent binder probe are green. |
 | ELAB-2A1 | complete | ELAB-2A0 | Immutable ordered declarations and a persistent dependent local telescope validate at their owning depths; deterministic nearest lookup, type lifting, shadowing, abstraction, and source-located duplicate/unbound/scope negatives are green. |
-| ELAB-2A2 | next / dependency-ready | ELAB-2A1 | Add per-session metavariable and constraint stores with deterministic identities, scope-escape rejection, occurs checking, solution isolation, and ambiguity evidence. |
-| ELAB-2A3 | pending | ELAB-2A2 | Add the bounded bidirectional Pi/lambda/application checker and schema-driven implicit insertion over Core, including source-located mismatch negatives. |
+| ELAB-2A2 | complete | ELAB-2A1 | Per-session contextual metavariables and ordered constraints have deterministic isolated identities, capture-safe spines, zonking, scope/occurs rejection, single assignment, explicit stuck/rejected outcomes, and backend-boundary evidence. |
+| ELAB-2A3 | next / dependency-ready | ELAB-2A2 | Add the bounded bidirectional Pi/lambda/application checker and schema-driven implicit insertion over Core, including source-located mismatch negatives. |
 | ELAB-2B | pending | ELAB-2A3 | Implement the bounded dependent-first context experiment using `Catd`, `Pullback_catd`, `Const_catd`, and `Pi_cat`; populate the bridge matrix. |
 | ELAB-2C | pending | ELAB-2B | Exercise weakening, permitted/forbidden exchange, and contraction. Record missing displayed owners with consumer probes; do not yet assume kernel promotion. |
 | KERNEL-DISPLAYED-1 | conditional | ELAB-2C failure evidence | If a concrete uniform elaboration consumer cannot be expressed, design and probe the smallest displayed structural owner package under the v3.2 SOP, including degeneration/comparison and non-collapse cases. Human review is required before promotion. |
@@ -740,32 +741,121 @@ Plan rows changed: D-017 accepted; C-12 records the completed Core-telescope
 Remaining prerequisite or human review: none for this bounded slice.
 ```
 
-## Immediate Slice: ELAB-2A2
+## Completed Slice: ELAB-2A2
 
-The next slice adds only session-local metavariable and constraint state:
+ELAB-2A2 introduced:
 
-1. inventory legacy `Hole`, dereferencing, occurs checking, constraint
-   ordering, counters, and reset behavior as implementation evidence without
-   importing their mutable nodes or global arrays;
-2. choose and record a Core metavariable identity that is deterministic within
-   a session while preventing one session from observing or solving another
-   session's entries;
-3. store each metavariable's type, creation depth, provenance, and optional
-   single-assignment solution in a session-owned store; keep metavariable
-   occurrences explicit in Core and reject them at the Lambdapi backend
-   boundary until solved;
-4. implement deterministic dereferencing/zonking and a bounded constraint
-   step with occurs checking and solution validation at the metavariable's
-   creation depth;
-5. distinguish solved, rejected, and genuinely ambiguous/stuck constraints;
-   never choose arbitrarily between unconstrained metavariables;
-6. pass fresh-identity, solution-isolation, occurs, scope-escape,
-   cross-session, deterministic-order, and ambiguity cases before running
-   `check:ts`, the bounded kernel check, and the proportional repository gate.
+- an explicit contextual Core `meta` occurrence carrying an opaque session
+  token, a deterministic session-local ordinal, and a substitution spine whose
+  entries are the current-scope images of the creation-scope De Bruijn
+  indices;
+- uniform meta-spine traversal in scope checking, structural equality,
+  shifting, substitution, free-reference validation, and backend name
+  collection, plus simultaneous contextual-spine instantiation that remains
+  capture-safe beneath internal Pi/lambda binders;
+- a `CoreElaborationSession` that owns the declaration environment, root
+  context, meta/constraint counters, typed meta entries, optional
+  single-assignment solutions, and ordered constraint entries without
+  process-global reset state;
+- deterministic transitive zonking, direct and transitive occurs checking,
+  creation-scope solution validation, foreign-session rejection, and durable
+  source-located diagnostic codes;
+- a deliberately bounded constraint step: structural equality and canonical
+  flex-rigid assignment solve, invalid assignments reject, distinct flex-flex
+  equations remain ambiguous, and noncanonical or rigid equations remain
+  stuck for the later checker/conversion layers;
+- an explicit Lambdapi backend boundary that rejects every raw meta and emits
+  only the result zonked through its owning session.
 
-Do not add bidirectional checking, implicit insertion, higher-order pattern
-unification, runtime rewrite rules, displayed-category owners, or legacy
-category compatibility in ELAB-2A2.
+The legacy `Hole.ref`, global constraint array, global fresh counters, reset
+requirements, name-based scope filters, and implicit flex-flex behavior were
+used only as non-authoritative inventory evidence. None entered the new Core
+or session API. ELAB-2A2 does not claim type-directed solving: checking a
+candidate solution against a metavariable's stored type and inserting
+implicits are ELAB-2A3 responsibilities.
+
+### Experiment ELAB-2A2-CONTEXTUAL-METAS
+
+```text
+Experiment ID: ELAB-2A2-CONTEXTUAL-METAS
+Date and checkpoint: 2026-07-23 at ELAB-2A1 checkpoint e75e293
+Question/hypothesis: an opaque per-session identity plus an explicit De Bruijn
+  substitution spine can make Core metavariables deterministic, isolated, and
+  capture-safe under ordinary Core scope operations without mutable term
+  references or global reset state.
+Authority and owner position inspected: the ELAB-2A0 Core scope operations,
+  ELAB-2A1 declaration/local contexts, current backend scope/serialization
+  boundary, and the legacy Hole/ref/dereference/occurs/constraint/counter
+  implementation only as non-authoritative evidence. No Lambdapi owner or
+  runtime rule was changed.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on goal/typescript-elaborator-v3.2 at
+  e75e293; descendant of baseline a06433e.
+Minimal positive consumer: solve a contextual meta by its nearest local,
+  weaken and substitute its occurrence, zonk through an internal lambda
+  binder, and emit a separate solved closed meta as Lambdapi-accepted Cat_cat.
+Relevant negative/non-collapse consumer: reject direct/transitive occurs
+  cycles, a solution escaping its creation depth, and foreign-session access;
+  retain distinct flex-flex, noncanonical contextual, and rigid equations as
+  explicit stuck outcomes rather than choosing or collapsing them.
+Probe command and bounded result:
+  node --require ts-node/register --test tests/v3_2_core_session_tests.ts
+    passed 13, skipped 1 opt-in Lambdapi probe.
+  EMDASH_RUN_LAMBDAPI_PROBES=1 over all five v3_2 focused files
+    passed 61/61, including every earlier owner/conversion/negative probe and
+    the zonked-meta acceptance probe.
+  ./scripts/pnpmw run check:ts
+    passed 213 tests / 48 suites: 203 passed, 10 opt-in probes skipped.
+  EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+    passed the active kernel, four one-way extensions, and diagnostics.
+  EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+    passed the root gate; all 41 active Lambdapi kernel/example targets;
+    39 formal infrastructure tests; 5 print registry tests; active-reference,
+    report-header, book/evidence/typography/KaTeX checks; strict rule-LHS
+    audit; and generated catalog freshness.
+Warning/audit/catalog/health effects, if any: no Lambdapi declaration, rule,
+  diagnostic, generated catalog, or health authority changed.
+Decision: accept. Contextual spines make pre-solution scope transformations
+  explicit; the session token prevents cross-session equality and solving;
+  deterministic ordered retries solve newly rigid constraints without
+  guessing flex-flex assignments. Keep higher-order inversion and conversion
+  outside this bounded solver.
+Plan rows changed: D-018 accepted; C-11 records the completed meta/constraint
+  foundation but remains partial until implicit recovery; ELAB-2A2 complete
+  and ELAB-2A3 dependency-ready.
+Remaining prerequisite or human review: none for this bounded slice.
+```
+
+## Immediate Slice: ELAB-2A3
+
+The next slice adds only the bounded bidirectional checker and schema-driven
+implicit insertion over the now-stable Core scope/session foundation:
+
+1. inventory the legacy `infer`/`check`, application, expected-type, and
+   implicit-insertion organization as implementation evidence without
+   importing the old term union, global declarations, or category-specific
+   cases;
+2. identify the smallest explicit Core application/signature additions needed
+   for Pi elimination and type the already cataloged owner applications
+   declaratively; split the slice in the ledger first if this becomes more
+   than one reviewable checker claim;
+3. infer free/local references and explicit applications, check lambdas
+   against expected Pi types, validate Pi/lambda binder scopes and modes, and
+   instantiate dependent codomains with the existing capture-safe operations;
+4. drive omitted implicit binders from expected Pi plicity by allocating
+   session-local metas and constraints; do not add positional or owner-named
+   implicit special cases;
+5. report source-located head, plicity, argument, expected-type, and unsolved
+   constraint failures while preserving genuinely ambiguous metas as explicit
+   incomplete elaboration rather than arbitrary solutions;
+6. pass dependent identity/application, implicit recovery, wrong argument,
+   wrong plicity, non-function application, occurs/scope, and unresolved-meta
+   cases, plus focused Lambdapi conformance, `check:ts`, the bounded kernel
+   check, and the proportional repository gate.
+
+Do not add higher-order pattern unification, runtime rewriting/conversion
+rules, displayed-category owners, a textual parser, or legacy category
+compatibility in ELAB-2A3.
 
 ## Human Review Gates
 
