@@ -130,6 +130,15 @@ const sameMode = (left: BinderMode, right: BinderMode): boolean =>
 
 export const CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT = 256;
 
+export type CoreCheckerConversionResult =
+    | { readonly status: 'equal' }
+    | { readonly status: 'not-equal' }
+    | {
+        readonly status: 'step-limit-exceeded';
+        readonly path: readonly string[];
+        readonly nextStep: string;
+    };
+
 const expressionHead = (expression: KernelExpression): string => {
     switch (expression.tag) {
         case 'universe':
@@ -213,6 +222,44 @@ export class CoreChecker {
         return this.session.rootContext;
     }
 
+    /**
+     * Candidate checkers may override conversion without changing the
+     * released default. The default adapter preserves the exact diagnostic
+     * shape of `coreRuntimeDefinitionalCompare`.
+     */
+    protected compareDefinitions(
+        left: KernelExpression,
+        right: KernelExpression,
+        stepLimit: number
+    ): CoreCheckerConversionResult {
+        const result = coreRuntimeDefinitionalCompare(
+            left,
+            right,
+            stepLimit
+        );
+        if (result.status === 'step-limit-exceeded') {
+            return {
+                status: 'step-limit-exceeded',
+                path: result.path,
+                nextStep: `rule '${result.nextRuleId}'`
+            };
+        }
+        return { status: result.status };
+    }
+
+    /**
+     * The frozen bidirectional checker refuses to infer lambdas. The outer-LF
+     * candidate opts into inference for explicitly annotated lambdas through
+     * this protected hook.
+     */
+    protected permitsAnnotatedLambdaInference(): boolean {
+        return false;
+    }
+
+    protected conversionDiagnosticName(): string {
+        return 'Core runtime conversion';
+    }
+
     private fail(
         code: CoreCheckerErrorCode,
         nodeProvenance: Provenance,
@@ -283,7 +330,7 @@ export class CoreChecker {
         const right = this.session.zonk(rightInput);
         if (kernelExpressionEquals(left, right)) return;
 
-        const comparison = coreRuntimeDefinitionalCompare(
+        const comparison = this.compareDefinitions(
             left,
             right,
             CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT
@@ -293,10 +340,10 @@ export class CoreChecker {
             this.fail(
                 'CONVERSION_STEP_LIMIT',
                 nodeProvenance,
-                `Core runtime conversion exceeded ` +
+                `${this.conversionDiagnosticName()} exceeded ` +
                 `${CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT} steps at ` +
-                `${comparison.path.join(' / ')} before rule ` +
-                `'${comparison.nextRuleId}'`
+                `${comparison.path.join(' / ')} before ` +
+                comparison.nextStep
             );
         }
 
@@ -749,6 +796,58 @@ export class CoreChecker {
         };
     }
 
+    private inferAnnotatedLambdaAt(
+        context: CoreContext,
+        expression: Extract<KernelExpression, { tag: 'lambda' }>
+    ): MutableInferenceResult {
+        const binderType = this.requireType(
+            context,
+            expression.binder.type,
+            `Lambda binder '${expression.binder.name}' annotation`
+        );
+        const bodyContext = context.extend({
+            name: expression.binder.name,
+            type: binderType,
+            mode: expression.binder.mode,
+            provenance: expression.binder.provenance
+        });
+        const body = this.inferAt(bodyContext, expression.body);
+        if (isCoreKind(body.type)) {
+            this.fail(
+                'EXPECTED_TYPE',
+                expression.body.provenance,
+                `Annotated lambda body '${expression.binder.name}' has ` +
+                'checker sort KIND; candidate inference requires a ' +
+                'term-level body type'
+            );
+        }
+        return {
+            term: kernelLambda(
+                kernelBinder(
+                    expression.binder.name,
+                    binderType,
+                    expression.binder.mode,
+                    expression.binder.provenance
+                ),
+                body.term,
+                expression.provenance
+            ),
+            type: kernelPi(
+                kernelBinder(
+                    expression.binder.name,
+                    binderType,
+                    expression.binder.mode,
+                    expression.binder.provenance
+                ),
+                body.type,
+                derived(
+                    'inferred type of annotated lambda',
+                    expression.provenance
+                )
+            )
+        };
+    }
+
     private inferAt(
         context: CoreContext,
         expression: KernelExpression
@@ -821,6 +920,12 @@ export class CoreChecker {
             case 'pi':
                 return this.inferPi(context, expression);
             case 'lambda':
+                if (this.permitsAnnotatedLambdaInference()) {
+                    return this.inferAnnotatedLambdaAt(
+                        context,
+                        expression
+                    );
+                }
                 this.fail(
                     'CANNOT_INFER_LAMBDA',
                     expression.provenance,

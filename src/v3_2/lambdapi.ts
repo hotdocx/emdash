@@ -385,6 +385,18 @@ validateLambdapiRuleEvidenceBindings();
 interface SerializationState {
     nextBoundName: number;
     reservedNames: Set<string>;
+    externalFreeReferences: ReadonlyMap<string, string>;
+}
+
+export interface KernelSerializationOptions {
+    /**
+     * Backend-only spellings for reviewed opaque LF primitive declarations.
+     * Core keeps the portable free-reference identity; the conformance
+     * backend substitutes the active Lambdapi owner only during emission.
+     */
+    readonly externalFreeReferences?: Readonly<
+        Record<string, string | undefined>
+    >;
 }
 
 function collectFreeReferenceNames(
@@ -452,7 +464,8 @@ function serializeExpression(
         case 'universe':
             return 'TYPE';
         case 'reference':
-            return expression.name;
+            return state.externalFreeReferences.get(expression.name) ??
+                expression.name;
         case 'bound': {
             const name = boundNames[expression.index];
             if (name === undefined) {
@@ -535,18 +548,40 @@ function serializeExpression(
 }
 
 export function serializeKernelExpression(
-    expression: KernelExpression
+    expression: KernelExpression,
+    options: KernelSerializationOptions = {}
 ): string {
     kernelAssertScoped(expression);
+    const externalFreeReferences = new Map(
+        Object.entries(options.externalFreeReferences ?? {}).filter(
+            (entry): entry is [string, string] =>
+                entry[1] !== undefined
+        )
+    );
+    for (const [name, serializedName] of externalFreeReferences) {
+        if (name.trim().length === 0 || serializedName.trim().length === 0) {
+            throw new Error(
+                'External Core LF reference bindings require nonempty ' +
+                'Core and backend names'
+            );
+        }
+    }
     const reservedNames = new Set(
         Object.values(LAMBDAPI_V32_OWNER_BINDINGS).map(
             owner => owner.serializedName
         )
     );
+    externalFreeReferences.forEach(serializedName =>
+        reservedNames.add(serializedName)
+    );
     collectFreeReferenceNames(expression, reservedNames);
     return serializeExpression(
         expression,
-        { nextBoundName: 0, reservedNames },
+        {
+            nextBoundName: 0,
+            reservedNames,
+            externalFreeReferences
+        },
         []
     );
 }

@@ -88,6 +88,8 @@ export type CoreConstraintOutcome =
 
 export type CoreConstraintReason =
     | 'STRUCTURAL_EQUALITY'
+    | 'DEFINITIONAL_EQUALITY'
+    | 'CONVERSION_STEP_LIMIT'
     | 'ASSIGNED_LEFT_META'
     | 'ASSIGNED_RIGHT_META'
     | 'ASSIGNED_LEFT_PATTERN_META'
@@ -97,6 +99,11 @@ export type CoreConstraintReason =
     | 'REQUIRES_DECOMPOSITION_OR_CONVERSION'
     | CorePatternStuckReason
     | CoreSessionErrorCode;
+
+export type CoreSessionConstraintConversionResult =
+    | { readonly status: 'equal' }
+    | { readonly status: 'not-equal' }
+    | { readonly status: 'step-limit-exceeded' };
 
 interface CorePatternAssignment {
     readonly outcome: 'assigned';
@@ -190,6 +197,18 @@ export class CoreElaborationSession {
         public readonly environment = CoreDeclarationEnvironment.empty()
     ) {
         this.rootContext = CoreContext.empty(environment);
+    }
+
+    /**
+     * The released session performs structural/meta solving only. Candidate
+     * sessions may override this hook so a constraint that becomes rigid
+     * after zonking can close by a separately bounded conversion engine.
+     */
+    protected compareConstraint(
+        _left: KernelExpression,
+        _right: KernelExpression
+    ): CoreSessionConstraintConversionResult | undefined {
+        return undefined;
     }
 
     private failFromContext(
@@ -806,6 +825,14 @@ export class CoreElaborationSession {
             const right = this.zonk(entry.right);
             if (kernelExpressionEquals(left, right)) {
                 return this.solved(entry, 'STRUCTURAL_EQUALITY');
+            }
+
+            const conversion = this.compareConstraint(left, right);
+            if (conversion?.status === 'equal') {
+                return this.solved(entry, 'DEFINITIONAL_EQUALITY');
+            }
+            if (conversion?.status === 'step-limit-exceeded') {
+                return this.stuck(entry, 'CONVERSION_STEP_LIMIT');
             }
 
             if (left.tag === 'meta' && right.tag === 'meta') {

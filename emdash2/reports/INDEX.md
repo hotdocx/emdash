@@ -238,14 +238,15 @@ implementation plans, and historical decisions.
 
 ## Current Plans
 
-- `../../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`:
-  active living cross-layer plan for replacing the stale root TypeScript
-  category layer with a backend-neutral explicit emdash Core, schema-driven
-  elaborator, candidate TypeScript product kernel, and optional Lambdapi
-  conformance backend. ELAB-0 is complete as a wiring spike; ELAB-1A is the
-  next dependency-ready implementation slice. Any Lambdapi change scheduled
-  there remains subordinate to the active authorities and full kernel SOP.
-  Its persistent-goal branch/checkpoint protocol is
+- `../../docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`:
+  active living cross-layer plan for restoring the outer λΠ logical framework
+  over explicit TypeScript Core and then transferring consumer-led slices of
+  the active categorical/directed DTT. Comprehensive groupoidal closure is a
+  separately deferred Lambdapi-first programme. Any Lambdapi change scheduled
+  here remains subordinate to the active authorities and full kernel SOP.
+  The completed exact `emdash-v3.2-mvp-1` history remains in
+  `../../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`; the shared
+  persistent-goal protocol is
   `../../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
 - `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
   active living cross-project maintenance plan. Its initial AME-0 through

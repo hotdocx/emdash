@@ -3,7 +3,8 @@
 Date: 2026-07-24
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
 RELEASE-READY is complete, with mandatory conformance, final residual and
-performance boundaries, and all validation gates recorded
+performance boundaries, and all validation gates recorded; forward outer-LF
+and directed-DTT work is active in the separate continuation plan
 
 ## Purpose
 
@@ -16,8 +17,10 @@ The first checked vertical slice now lives under `../src/v3_2/`, with its
 evidence, architecture reassessment, validation record, and human review
 points in
 [`TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md).
-Forward implementation is governed by
+The completed profile is governed historically by
 [`TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md).
+Forward outer-LF and directed-DTT implementation is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md).
 Long-running goal branches and checkpoints follow
 [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
 
@@ -38,8 +41,11 @@ Read these in order before selecting a semantic target:
 5. `../emdash2/reports/EMDASH_FOUNDATIONS.md`;
 6. `../emdash2/reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`;
 7. the active task plan selected through `../emdash2/reports/INDEX.md`;
-8. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the cross-layer
-   implementation ledger, subordinate to the mathematical sources above.
+8. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the active
+   cross-layer implementation ledger, subordinate to the mathematical
+   sources above;
+9. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
+   history.
 
 The root `src/` implementation predates the current kernel. Its generic
 elaboration machinery is feasibility evidence, but names such as
@@ -216,8 +222,8 @@ any Git mutation.
 ## Start The Long-Running Implementation
 
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
-`TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`. It names baseline
-`a06433e57cba95e7d35f8577b7c71912862c3d25`, selects the first
-dependency-ready implementation slice, authorizes one dedicated local goal
-branch/worktree and validated checkpoint commits there, and records all
-excluded Git operations.
+`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`. It names the
+completed-profile comparison checkpoint, selects the next dependency-ready
+implementation slice, and records the continuation's Git boundary. The
+completed master plan's historical checkpoint authorization does not
+authorize commits for the new continuation.

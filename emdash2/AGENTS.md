@@ -246,8 +246,10 @@ with warnings enabled before rejecting the proposed rule.
 
 ## Long-Running Cross-Layer Experiments
 
-The active cross-layer TypeScript elaborator/kernel plan is
-`../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`. Its Git workflow is
+The active cross-layer TypeScript DTT/LF continuation plan is
+`../docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`. The
+completed exact-profile history remains in
+`../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`. Their Git workflow is
 `../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. These root documents may
 schedule or record a Lambdapi experiment, but they do not outrank the active
 kernel authorities or relax this file's owner-position, warning,

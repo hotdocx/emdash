@@ -16,6 +16,10 @@ Status: completed implementation ledger for the exact
 `emdash-v3.2-mvp-1` release-ready profile; H-01, H-03, H-04, and H-05 are
 resolved, every concrete slice is complete, and H-02/H-06 remain untriggered
 conditional future gates
+Continuation: forward outer-LF and directed-DTT work is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md);
+this completed plan remains frozen historical evidence for the exact
+`emdash-v3.2-mvp-1` profile
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
