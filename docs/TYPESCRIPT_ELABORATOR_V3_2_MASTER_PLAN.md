@@ -12,10 +12,10 @@ Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
 Human-Decision-Record: on 2026-07-24 the user approved H-01 dependent-first,
 H-03/D-023, H-04/D-030, and H-05/D-039 exactly as proposed
-Status: active living master plan; H-01, H-03, H-04, and H-05 are resolved,
-ELAB-2C is complete without triggering H-02, TSK-2 and TSK-3 are complete,
-MIGRATE-1/MIGRATE-2 are complete, and GRADUATE-1 is complete with
-RELEASE-1A/RELEASE-1B complete and RELEASE-1C next
+Status: completed implementation ledger for the exact
+`emdash-v3.2-mvp-1` release-ready profile; H-01, H-03, H-04, and H-05 are
+resolved, every concrete slice is complete, and H-02/H-06 remain untriggered
+conditional future gates
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -195,6 +195,7 @@ cleanly.
 | D-039 | accepted; H-05 approved 2026-07-24 | Graduate the TypeScript checker/evaluator as the authoritative deployed runtime kernel only for the exact content-pinned `emdash-v3.2-mvp-1` profile: sixteen owners and three H-04-authorized runtime rules, through the narrow browser API, with no production Lambdapi dependency. Retain Lambdapi as active mathematical specification, fixed-corpus CI and subject-reduction oracle, and an ongoing acceptance authority for five selected boundary changes: selected owner signatures; selected rule shape or authority; owner/rule promotion; termination, confluence, or subject-reduction claims; and shared-corpus backend bindings. Refactors, surface/diagnostic work, and packaging changes that preserve the frozen semantic/import boundaries need no new declaration-level authority review. | The user approved H-05/D-039 exactly as proposed. `CORE_MVP_GRADUATION_REVIEW` is the distinct deep-frozen GRADUATE-1B record: it snapshots the unchanged `authorityAuthorized: false` proposal, authorizes deployed TypeScript ownership only for the exact manifest identity, retains every approved Lambdapi role and trigger, forbids production runtime coupling, and preserves all H-04 theorem non-claims. It authorizes no additional owner/rule or performance SLA, does not declare RELEASE-READY, and names that tranche as the next slice. |
 | D-040 | accepted | Split RELEASE-READY into source-mapped conformance diagnostics (RELEASE-1A), mandatory shared-fragment oracle wiring plus documentation/example/policy synchronization (RELEASE-1B), and a final drift-checked release-completion record with performance-claim scope and full gates (RELEASE-1C). Start with C-18 because diagnostic parsing is an implementation boundary independent of the approved acceptance policy. | Lambdapi diagnostics have an observed `[probe-path:line:start-end]` location form, while `SerializedProbe.sourceMap` already owns exact generated statement lines and original spans. RELEASE-1A can therefore preserve raw diagnostics, map only the exact temporary probe path and exact statement line, expose structured mappings, and prepend source-facing annotations without changing Core, the browser runtime, or any mathematical authority. CI policy and release claims remain separate reviewable changes. |
 | D-041 | accepted | Keep `check:ts` as the Lambdapi-independent development baseline, add a separate 60-second `check:conformance` over the exact three TSK-3 shared-corpus suites with every oracle process enabled, and make that command mandatory inside `check:all`. Freeze the post-graduation policy separately from the historical TSK-3 completion and H-05 review. Expose only the already-frozen MVP manifest through the Node-free browser barrel; keep policy, probes, and differential harnesses outside it. | `CORE_MVP_RELEASE_POLICY` pins the H-05 profile, 16/3/2 corpus dimensions, three exact test files, required oracle roles and five triggers, synchronized public artifacts, diagnostic state, parser/review-gate state, and all theorem/performance non-claims. Package-script drift and public-document/example drift are executable failures. The mandatory command passes 19 tests / 3 suites with three actual Lambdapi processes and no skips in 3.5 seconds; the standalone TypeScript/Vite consumer remains green and shows `CORE_MVP_MANIFEST.revision`. |
+| D-042 | accepted | Declare RELEASE-READY only for the exact H-05 profile after all 21 capability rows, RELEASE-1A diagnostics, RELEASE-1B policy, browser packaging, and the complete repository gate are green. Treat KERNEL-DISPLAYED-1/2 and H-02 as conditional on the absent displayed-owner failure, and H-06 as conditional on measured parser need; they are not release blockers. Treat the 256-step comparison limit as an operation budget, authorize no wall-clock/latency/throughput/scale promise, and require representative measurement plus separate review before a future performance claim. | `CORE_MVP_RELEASE_COMPLETION` is a new deep-frozen RELEASE-1C record rather than a mutation of the non-ready graduation/policy history. It pins zero release blockers, both untriggered future gates, eight out-of-profile capabilities/claims, the retained Lambdapi policy, exact H-04 claim ceiling, all final validation commands, and `releaseReady: true` with no next slice. Tests derive all 21 completed capability rows and final release-ledger state from this plan and keep the completion artifact outside the browser barrel. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -456,10 +457,10 @@ must identify their common baseline.
 | GRADUATE-1 | complete | TSK-3, MIGRATE-2 | The graduation recommendation and its human authorization remain separate so evidence cannot authorize its own product/trust boundary. |
 | GRADUATE-1A | complete; recommendation published | TSK-3, MIGRATE-2 | The drift-checked D-039 proposal reviews parity, H-04 claims, bounded operations, browser deployment, maintenance cost, performance non-claims, residual work, and the exact ongoing Lambdapi acceptance triggers. It grants no authority before H-05. |
 | GRADUATE-1B | complete; H-05 approved | GRADUATE-1A, reviewed D-039 | The distinct immutable review artifact records the exact approval, deployed profile, retained Lambdapi roles/triggers, forbidden runtime dependency, H-04 non-claims, and remaining release boundary without rewriting the proposal. |
-| RELEASE-READY | split | GRADUATE-1B | Release work is split so backend diagnostics, mandatory conformance policy, and the final completion claim remain independently reviewable. |
+| RELEASE-READY | complete | GRADUATE-1B | The exact `emdash-v3.2-mvp-1` profile has source-mapped diagnostics, mandatory bounded conformance, synchronized public policy/example/manifest identity, explicit residual and performance boundaries, green browser packaging, and full repository validation. |
 | RELEASE-1A | complete | GRADUATE-1B | C-18 preserves raw Lambdapi output while mapping exact temporary-probe diagnostic locations back to structured source spans and source-facing text. Synthetic ANSI/relative/absolute/duplicate/unmapped cases and one bounded real failure are green without touching the browser runtime. |
 | RELEASE-1B | complete | RELEASE-1A | `check:conformance` enables every oracle process in the exact TSK-3 owner/rule/higher-cell suites under one 60-second bound, and `check:all` requires it. A drift-checked policy binds the approved profile and retained Lambdapi roles to package scripts, public docs, browser manifest identity, and the standalone example without introducing runtime coupling. |
-| RELEASE-1C | dependency-ready / next | RELEASE-1B | Freeze a release-completion record, explicitly bound performance claims, verify browser packaging and all repository gates, and mark RELEASE-READY only if no residual ledger item remains. |
+| RELEASE-1C | complete | RELEASE-1B | The distinct frozen completion record validates all predecessor boundaries, records zero blockers, preserves conditional future gates and explicit exclusions, scopes the 256-step operation budget without a performance SLA, pins final commands, and closes RELEASE-READY only for the exact approved profile. |
 
 If a slice grows beyond one reviewable semantic claim, split it in this table
 before continuing. Do not mark a row complete merely because its code compiles:
@@ -3387,6 +3388,126 @@ git diff --check
   passed
 ```
 
+## Completed Slice: RELEASE-1C
+
+RELEASE-1C closes this plan's concrete implementation ledger while preserving
+the exact scope and history that made the release claim reviewable:
+
+- `CORE_MVP_RELEASE_COMPLETION` is a new deep-frozen record. It depends on but
+  does not mutate the H-03 manifest, H-04 review, H-05 review, MIGRATE-2
+  completion, or RELEASE-1B policy;
+- it marks only `emdash-v3.2-mvp-1` release-ready, with the same content hash,
+  sixteen owners, three runtime rules, browser entry point, and forbidden
+  production Lambdapi dependency;
+- all twenty-one C-00 through C-20 rows are complete. The only non-complete
+  implementation-ledger alternatives are KERNEL-DISPLAYED-1/2, which remain
+  conditional on a concrete displayed-owner failure that ELAB-2C did not
+  produce;
+- the release-blocker list is empty. H-02 remains conditional on that absent
+  failure and H-06 remains conditional on measured textual-parser need;
+- out-of-profile owner/rule promotion, proof-time execution, generic
+  beta/eta/unfolding, general higher-order unification, a textual parser,
+  general confluence, standalone TypeScript subject reduction, and a
+  performance SLA remain explicit exclusions rather than hidden incomplete
+  release work;
+- the fixed checker comparison limit is 256 global runtime rewrite steps.
+  This is an operation budget, not a wall-clock, latency, throughput, or scale
+  guarantee. No benchmark is required for the current no-SLA release;
+  representative workload measurement and separate review are required before
+  any future performance claim;
+- the final artifact pins every focused, conformance, browser, TypeScript,
+  bounded-kernel, full-repository, and diff-check command. It stays outside the
+  narrow browser API.
+
+### Experiment RELEASE-1C-RESIDUAL-AUDIT
+
+```text
+Experiment ID: RELEASE-1C-RESIDUAL-AUDIT
+Date and checkpoint: 2026-07-24 at RELEASE-1B checkpoint 9aa87a0
+Question/hypothesis: after diagnostics and mandatory conformance are complete,
+  does any concrete capability, implementation slice, authority decision,
+  packaging obligation, or measured performance prerequisite still block the
+  exact frozen profile from RELEASE-READY?
+Authority and owner position inspected: C-00 through C-20; the full
+  implementation ledger; H-02/H-06 triggers; H-03/H-04/H-05 artifacts;
+  MIGRATE-2; RELEASE-1A/1B; checker limit; browser graph; and final commands.
+Current worktree/branch and baseline relationship:
+  goal/typescript-elaborator-v3.2 at descendant 9aa87a0 of baseline
+  a06433e57cba95e7d35f8577b7c71912862c3d25
+Minimal positive consumer: all 21 capability rows, exact 16-owner/three-rule
+  manifest, mandatory 19-test oracle corpus, Node-free browser identity
+  example, and final check:all gate.
+Relevant negative/non-collapse consumer: historical records must remain
+  non-ready; the browser must not export completion/policy/probes; no
+  conditional gate, excluded mechanism, theorem non-claim, or performance
+  non-claim may be silently converted into product scope.
+Probe command and bounded result:
+  focused completion/policy/browser tests pass 13 tests / 3 suites; the
+  mandatory oracle passes 19 tests / 3 suites with no skips under 60 seconds;
+  the complete TypeScript corpus passes 252 tests / 29 suites with 20 opt-in
+  probes skipped; browser typecheck/build and bounded active kernel pass.
+Observed result: every concrete ledger row and release criterion is complete.
+  KERNEL-DISPLAYED-1/2, H-02, and H-06 are conditional and untriggered, not
+  residual blockers. No performance claim exists that would require a current
+  benchmark.
+Unexpected result or failure: none. The residual audit found only deliberate
+  frozen-profile exclusions and future-trigger policies already required by
+  H-04/H-05.
+TypeScript consequence: accept D-042 and publish the separate RELEASE-1C
+  completion record with releaseReady true and no next slice.
+Lambdapi consequence: no source or authority change; keep every D-039/D-041
+  mathematical, mandatory-oracle, and selected-change role.
+Decision: accept.
+Plan rows changed: D-042 accepted; RELEASE-1C and RELEASE-READY complete;
+  concrete implementation ledger exhausted.
+Remaining prerequisite or human review: none for this exact profile. Future
+  work begins only from a new request or an already recorded conditional/
+  selected-change trigger.
+```
+
+### RELEASE-1C validation
+
+Validated on the exact RELEASE-1C worktree diff:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_release_completion_tests.ts
+  tests/v3_2_release_policy_tests.ts
+  tests/v3_2_browser_api_tests.ts
+  passed 13 tests / 3 suites with no skips
+
+./scripts/pnpmw run check:conformance
+  passed 19 tests / 3 suites with three actual Lambdapi oracle processes,
+  no skips, and the outer 60-second bound
+
+node --require ts-node/register --test tests/v3_2_*_tests.ts
+  passed 252 tests / 29 suites: 232 passed, 20 opt-in probes skipped
+
+./scripts/pnpmw --dir emdash-template --ignore-workspace exec
+  tsc --noEmit -p tsconfig.json
+./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite build
+  strict TypeScript passed; Vite transformed 48 modules and built the
+  production fixture
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  252 tests / 29 suites: 232 passed, 20 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 252-test result
+  mandatory conformance passed 19 tests / 3 suites with no skips
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
 The user resolved H-01, H-03, H-04, and H-05 on 2026-07-24, and their
@@ -3412,8 +3533,13 @@ dependent slices are complete:
 - GRADUATE-1A freezes the D-039 recommendation without authorizing it.
   GRADUATE-1B records the exact approval without rewriting it. RELEASE-READY
   is split; RELEASE-1A completes C-18, RELEASE-1B makes fixed-corpus
-  conformance mandatory and synchronizes public policy, and RELEASE-1C is
-  next.
+  conformance mandatory and synchronizes public policy, and RELEASE-1C closes
+  the exact-profile residual/performance/validation boundary.
+
+No concrete dependency-ready slice remains in this plan. RELEASE-READY is
+complete for `emdash-v3.2-mvp-1`. KERNEL-DISPLAYED-1/2, H-02, and H-06 remain
+conditional future work and require their recorded trigger rather than
+continuation by default.
 
 None of these approvals promotes a recorded rule authority class. Do not guess a
 displayed-to-ordinary runtime equality, promote the conformance-only owners,

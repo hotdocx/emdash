@@ -2,8 +2,8 @@
 
 Date: 2026-07-24
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
-RELEASE-1B synchronizes its mandatory conformance and public policy, while the
-living master plan owns remaining release work
+RELEASE-READY is complete, with mandatory conformance, final residual and
+performance boundaries, and all validation gates recorded
 
 ## Purpose
 
@@ -85,6 +85,13 @@ reduction. No performance SLA is authorized. `CORE_MVP_RELEASE_POLICY` records
 this boundary without mutating the historical H-03 manifest or H-05 approval.
 The typed AST is the supported construction path; a string parser remains
 unimplemented, and neither H-02 nor H-06 is triggered by this release.
+
+`CORE_MVP_RELEASE_COMPLETION` is the separate final record. It marks only the
+exact profile release-ready, retains the older proposal/review/policy records
+unchanged, and records zero release blockers. The checker's 256-step budget is
+a global rewrite-operation bound, not a wall-clock, latency, throughput, or
+scale promise. Representative workload measurement plus separate review is
+required before making any future performance claim.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

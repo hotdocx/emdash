@@ -23,3 +23,4 @@ export * from './differential_rule';
 export * from './differential_higher_cell';
 export * from './graduation';
 export * from './release';
+export * from './release_completion';

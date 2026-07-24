@@ -29,9 +29,9 @@ Primary artifacts:
 
 ## TypeScript v3.2 deployed profile
 
-After H-05/D-039, the small TypeScript checker/evaluator is the authoritative
-deployed runtime only for the content-pinned `emdash-v3.2-mvp-1` profile: its
-16 owners and three reviewed runtime rules. The browser entry point is
+`emdash-v3.2-mvp-1` is the release-ready exact profile. After H-05/D-039, the
+small TypeScript checker/evaluator is the authoritative deployed runtime only
+for its 16 owners and three reviewed runtime rules. The browser entry point is
 [`src/v3_2/browser.ts`](./src/v3_2/browser.ts), which exposes the frozen
 `CORE_MVP_MANIFEST` identity and has no production Lambdapi dependency.
 String parsing is not part of this release; applications construct the typed
@@ -67,7 +67,10 @@ differential suites with no opt-in skips under a 60-second bound:
 ```
 
 `check:all` now includes that conformance gate before the complete Lambdapi
-workspace CI.
+workspace CI. The deep-frozen `CORE_MVP_RELEASE_COMPLETION` records that all
+21 capability rows and the three release slices are complete, with no release
+blocker. H-02 and H-06 remain conditional, untriggered future gates rather
+than hidden release requirements.
 
 ## Development workspace and Git worktrees
 
