@@ -26,6 +26,7 @@ import './v3_2_continuation_review_tests';
 import './v3_2_directed_1a_tests';
 import './v3_2_directed_1b_proposal_tests';
 import './v3_2_directed_1b_review_tests';
+import './v3_2_directed_foundation_proposal_tests';
 import './v3_2_metatheory_review_tests';
 import './v3_2_differential_owner_tests';
 import './v3_2_differential_rule_tests';

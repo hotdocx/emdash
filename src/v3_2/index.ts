@@ -22,6 +22,7 @@ export * from './continuation_review';
 export * from './directed_1a';
 export * from './directed_1b_proposal';
 export * from './directed_1b_review';
+export * from './directed_foundation_proposal';
 export * from './metatheory';
 export * from './migration';
 export * from './pattern';
