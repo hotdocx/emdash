@@ -102,6 +102,20 @@ export interface SerializedProbe {
     sourceMap: readonly ProbeSourceMapEntry[];
 }
 
+export interface ProbeGeneratedDiagnosticLocation {
+    readonly path: string;
+    readonly line: number;
+    readonly startColumn: number;
+    readonly endColumn: number;
+}
+
+export interface ProbeSourceMappedDiagnostic {
+    readonly generated: ProbeGeneratedDiagnosticLocation;
+    readonly kind: ProbeSourceMapEntry['kind'];
+    readonly label: string;
+    readonly sourceSpan: SourceSpan;
+}
+
 export interface SurfaceProbeCase {
     label: string;
     term: SurfaceTerm;
@@ -366,7 +380,109 @@ export interface LambdapiProbeResult {
     signal: NodeJS.Signals | null;
     stdout: string;
     stderr: string;
+    /**
+     * Unmodified concatenation of Lambdapi stdout, stderr, and spawn errors.
+     */
+    rawDiagnostics: string;
+    /**
+     * Exact generated-statement locations mapped to original source spans.
+     */
+    sourceMappedDiagnostics: readonly ProbeSourceMappedDiagnostic[];
+    /**
+     * Source-facing annotations followed by the raw diagnostics. When no
+     * generated location maps, this is exactly `rawDiagnostics`.
+     */
     diagnostics: string;
+}
+
+const normalizeDiagnosticPath = (path: string): string =>
+    path.replace(/\\/g, '/').replace(/^\.\//, '');
+
+/**
+ * Map Lambdapi's observed `[path:line:start-end]` diagnostic headers back to
+ * exact serialized-probe statements.
+ *
+ * Only an explicitly supplied probe path and an exact source-map line match
+ * are eligible. Diagnostics from imported authorities and generated
+ * whitespace/comments remain raw rather than being attributed speculatively.
+ */
+export function remapLambdapiProbeDiagnostics(
+    rawDiagnostics: string,
+    serialized: SerializedProbe,
+    generatedProbePaths: readonly string[]
+): readonly ProbeSourceMappedDiagnostic[] {
+    const acceptedPaths = new Set(
+        generatedProbePaths.map(normalizeDiagnosticPath)
+    );
+    const entriesByLine = new Map(
+        serialized.sourceMap.map(entry => [entry.generatedLine, entry])
+    );
+    const locationPattern =
+        /\[([^\]\r\n]+):(\d+):(\d+)(?:-(\d+))?\]/g;
+    const locationText = rawDiagnostics.replace(
+        /\u001b\[[0-9;]*m/g,
+        ''
+    );
+    const mappings: ProbeSourceMappedDiagnostic[] = [];
+    const seen = new Set<string>();
+
+    for (
+        let match = locationPattern.exec(locationText);
+        match !== null;
+        match = locationPattern.exec(locationText)
+    ) {
+        const path = normalizeDiagnosticPath(match[1]);
+        if (!acceptedPaths.has(path)) continue;
+
+        const line = Number(match[2]);
+        const startColumn = Number(match[3]);
+        const endColumn = Number(match[4] ?? match[3]);
+        const sourceEntry = entriesByLine.get(line);
+        if (sourceEntry === undefined) continue;
+
+        const key = `${path}:${line}:${startColumn}-${endColumn}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        mappings.push({
+            generated: {
+                path,
+                line,
+                startColumn,
+                endColumn
+            },
+            kind: sourceEntry.kind,
+            label: sourceEntry.label,
+            sourceSpan: sourceEntry.sourceSpan
+        });
+    }
+
+    return mappings;
+}
+
+const formatFullSourceSpan = (span: SourceSpan): string =>
+    `${formatSourceSpan(span)}-${span.end.line}:${span.end.column}`;
+
+const safeDiagnosticLabel = (label: string): string =>
+    label.replace(/[\r\n]+/g, ' ');
+
+export function formatLambdapiProbeDiagnostics(
+    rawDiagnostics: string,
+    mappings: readonly ProbeSourceMappedDiagnostic[]
+): string {
+    if (mappings.length === 0) return rawDiagnostics;
+
+    const sourceFacing = mappings.map(mapping =>
+        `[source ${formatFullSourceSpan(mapping.sourceSpan)}] ` +
+        `${mapping.kind} "${safeDiagnosticLabel(mapping.label)}" ` +
+        `(generated ${mapping.generated.path}:` +
+        `${mapping.generated.line}:${mapping.generated.startColumn}-` +
+        `${mapping.generated.endColumn})`
+    );
+    return (
+        `Source-mapped Lambdapi diagnostics:\n` +
+        `${sourceFacing.join('\n')}\n\n` +
+        `Raw Lambdapi diagnostics:\n${rawDiagnostics}`
+    );
 }
 
 export function checkLambdapiProbe(
@@ -422,9 +538,21 @@ export function checkLambdapiProbe(
         const errorText = result.error
             ? `${result.error.name}: ${result.error.message}`
             : '';
-        const diagnostics = [stdout, stderr, errorText]
+        const rawDiagnostics = [stdout, stderr, errorText]
             .filter(part => part.length > 0)
             .join('\n');
+        const sourceMappedDiagnostics = remapLambdapiProbeDiagnostics(
+            rawDiagnostics,
+            serialized,
+            [
+                relative(packageRoot, probePath),
+                probePath
+            ]
+        );
+        const diagnostics = formatLambdapiProbeDiagnostics(
+            rawDiagnostics,
+            sourceMappedDiagnostics
+        );
 
         return {
             accepted: result.status === 0 && !result.error,
@@ -433,6 +561,8 @@ export function checkLambdapiProbe(
             signal: result.signal,
             stdout,
             stderr,
+            rawDiagnostics,
+            sourceMappedDiagnostics,
             diagnostics
         };
     } finally {

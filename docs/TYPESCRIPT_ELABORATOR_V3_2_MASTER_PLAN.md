@@ -15,7 +15,7 @@ H-03/D-023, H-04/D-030, and H-05/D-039 exactly as proposed
 Status: active living master plan; H-01, H-03, H-04, and H-05 are resolved,
 ELAB-2C is complete without triggering H-02, TSK-2 and TSK-3 are complete,
 MIGRATE-1/MIGRATE-2 are complete, and GRADUATE-1 is complete with
-RELEASE-READY next
+RELEASE-1A source-mapped diagnostics complete and RELEASE-1B next
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -193,6 +193,7 @@ cleanly.
 | D-037 | accepted | Treat MIGRATE-1D as a frozen pre-deletion contract rather than physical deletion itself. Require every port/reimplementation mechanism to be covered by surviving v3.2 evidence, every delete mechanism to be explicitly ready, the thirteen-source/twenty-two-test/one-helper deletion graph to be closed, all direct and transitive consumers to be named, and every replacement-focused checkpoint gate to pass. MIGRATE-2 must rewrite consumers and remove the parser-only dependency without introducing a D0/D1 or legacy category compatibility barrel. | `LEGACY_MIGRATION_READINESS` pins all 36 deletion targets, the root runner and audit transitions, the standalone template API/example/documentation, `package.json`, the shared lockfile, the exact validation commands, and the retained Lambdapi authority boundary. Executable import-graph tests prove that `src/v3_2` and all v3.2 tests are legacy-independent; the only external direct importers are the root runner and template barrel, while the template app is the recorded transitive consumer. The audit discovered the previously implicit template rewrite and `parsimmon` cleanup before deletion rather than after breakage. |
 | D-038 | accepted | Execute MIGRATE-2 as the exact D-037 cut: remove all 36 frozen targets, retain the MIGRATE-1D inventory/readiness records as historical audit inputs, and publish a distinct frozen completion result. Give browser consumers a narrow v3.2 product entry point containing the session/checker/Core path but excluding process-backed probes, differential harnesses, and migration APIs. Preserve the reviewed manifest hash while validating its canonical content directly, so the product checker has no Node-only crypto dependency. Rewrite—not emulate—the standalone example, remove `parsimmon` through pnpm, and retain no legacy compatibility API. | Every target is absent and every surviving import is audited against the deletion set. `src/v3_2/browser.ts` reaches the checker, session, runtime, and manifest with no `node:` import and cannot reach probe/differential/migration modules. Its focused consumer checks a category-polymorphic identity and session isolation; the standalone fixture passes strict TypeScript and a Vite production build. Manifest drift tests remain green with the same reviewed SHA-256 pin, the root runner loads only v3.2 suites, active/historical docs are labeled correctly, and `LEGACY_MIGRATION_COMPLETION` rejects deletion/edit/dependency/browser-boundary drift. |
 | D-039 | accepted; H-05 approved 2026-07-24 | Graduate the TypeScript checker/evaluator as the authoritative deployed runtime kernel only for the exact content-pinned `emdash-v3.2-mvp-1` profile: sixteen owners and three H-04-authorized runtime rules, through the narrow browser API, with no production Lambdapi dependency. Retain Lambdapi as active mathematical specification, fixed-corpus CI and subject-reduction oracle, and an ongoing acceptance authority for five selected boundary changes: selected owner signatures; selected rule shape or authority; owner/rule promotion; termination, confluence, or subject-reduction claims; and shared-corpus backend bindings. Refactors, surface/diagnostic work, and packaging changes that preserve the frozen semantic/import boundaries need no new declaration-level authority review. | The user approved H-05/D-039 exactly as proposed. `CORE_MVP_GRADUATION_REVIEW` is the distinct deep-frozen GRADUATE-1B record: it snapshots the unchanged `authorityAuthorized: false` proposal, authorizes deployed TypeScript ownership only for the exact manifest identity, retains every approved Lambdapi role and trigger, forbids production runtime coupling, and preserves all H-04 theorem non-claims. It authorizes no additional owner/rule or performance SLA, does not declare RELEASE-READY, and names that tranche as the next slice. |
+| D-040 | accepted | Split RELEASE-READY into source-mapped conformance diagnostics (RELEASE-1A), mandatory shared-fragment oracle wiring plus documentation/example/policy synchronization (RELEASE-1B), and a final drift-checked release-completion record with performance-claim scope and full gates (RELEASE-1C). Start with C-18 because diagnostic parsing is an implementation boundary independent of the approved acceptance policy. | Lambdapi diagnostics have an observed `[probe-path:line:start-end]` location form, while `SerializedProbe.sourceMap` already owns exact generated statement lines and original spans. RELEASE-1A can therefore preserve raw diagnostics, map only the exact temporary probe path and exact statement line, expose structured mappings, and prepend source-facing annotations without changing Core, the browser runtime, or any mathematical authority. CI policy and release claims remain separate reviewable changes. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -401,7 +402,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-15 | Dependency-respecting exchange | complete for meta-level telescopes in ELAB-2C | Adjacent swaps at zero and nonzero positions transport dependent suffixes; a newer type that uses the older binder is rejected at that occurrence. |
 | C-16 | Dependent contraction/diagonal | complete for structurally equal telescope binders in ELAB-2C | The explicit non-injective index map transports a dependent suffix and identifies both duplicate occurrences; unequal types, unequal modes, and invalid positions are rejected. Definitional type comparison remains TSK-2 work. |
 | C-17 | TypeScript rule manifest/checker | complete for the reviewed MVP fragment | The exact 16-owner/three-rule product profile compiles and executes through deterministic numeric-slot matching, manifest-ordered root buckets, explicit step limits, structural congruence, and checker conversion. H-04 authorizes termination, bounded evaluation/comparison, and exactly those three runtime rules. Proof-time/non-conversion evidence, excluded owners, unfolding, and generic beta remain non-executable; general confluence and standalone TypeScript subject reduction remain withheld. |
-| C-18 | Source-mapped backend diagnostics | partial; RELEASE-READY follow-up | Generated map exists; diagnostic remapping is still missing. GRADUATE-1A records this as developer-facing backend polish rather than a blocker to the TypeScript runtime-authority decision; it must be resolved or explicitly scoped before RELEASE-READY completes. |
+| C-18 | Source-mapped backend diagnostics | complete | Every serialized declaration/assertion/conversion kind has an exact generated-line entry. Lambdapi location headers for the exact temporary probe path now map to structured original spans and source-facing diagnostics while preserving unmodified raw output; ANSI, relative/absolute path, duplicate, imported-authority, comment/blank, and unmapped-line boundaries are covered. |
 | C-19 | Legacy category-layer removal | complete | The exact thirteen legacy sources, twenty-two obsolete tests, and one helper are deleted. The root runner, standalone browser fixture, package manifest/lockfile, and audit lifecycle are migrated; every forbidden import and absent target is checked; no D0/D1, mutable-global reset, legacy parser, or category compatibility barrel remains. |
 | C-20 | Frozen-fragment differential parity | complete | The manifest-derived 16-owner corpus, all three runtime rows, and both higher-cell packages have shared TypeScript/Lambdapi positive, negative, and conversion outcomes. The drift-checked completion record retains Lambdapi as required oracle until graduation and does not promote conformance-only C-09/C-10 owners. |
 
@@ -454,7 +455,10 @@ must identify their common baseline.
 | GRADUATE-1 | complete | TSK-3, MIGRATE-2 | The graduation recommendation and its human authorization remain separate so evidence cannot authorize its own product/trust boundary. |
 | GRADUATE-1A | complete; recommendation published | TSK-3, MIGRATE-2 | The drift-checked D-039 proposal reviews parity, H-04 claims, bounded operations, browser deployment, maintenance cost, performance non-claims, residual work, and the exact ongoing Lambdapi acceptance triggers. It grants no authority before H-05. |
 | GRADUATE-1B | complete; H-05 approved | GRADUATE-1A, reviewed D-039 | The distinct immutable review artifact records the exact approval, deployed profile, retained Lambdapi roles/triggers, forbidden runtime dependency, H-04 non-claims, and remaining release boundary without rewriting the proposal. |
-| RELEASE-READY | dependency-ready / next | GRADUATE-1B | Documentation, manifests, examples, diagnostics, full repository checks, performance-claim scope, and explicit residual Lambdapi-conformance policy are synchronized. |
+| RELEASE-READY | split | GRADUATE-1B | Release work is split so backend diagnostics, mandatory conformance policy, and the final completion claim remain independently reviewable. |
+| RELEASE-1A | complete | GRADUATE-1B | C-18 preserves raw Lambdapi output while mapping exact temporary-probe diagnostic locations back to structured source spans and source-facing text. Synthetic ANSI/relative/absolute/duplicate/unmapped cases and one bounded real failure are green without touching the browser runtime. |
+| RELEASE-1B | dependency-ready / next | RELEASE-1A | Make the approved shared-fragment Lambdapi corpus mandatory in the conformance gate and synchronize manifests, public documentation, examples, and residual acceptance-policy wording. |
+| RELEASE-1C | pending | RELEASE-1B | Freeze a release-completion record, explicitly bound performance claims, verify browser packaging and all repository gates, and mark RELEASE-READY only if no residual ledger item remains. |
 
 If a slice grows beyond one reviewable semantic claim, split it in this table
 before continuing. Do not mark a row complete merely because its code compiles:
@@ -3168,6 +3172,105 @@ git diff --check
   passed
 ```
 
+## Completed Slice: RELEASE-1A
+
+RELEASE-1A completes C-18 at the process-backed conformance boundary without
+adding a Node dependency to the browser product:
+
+- `LambdapiProbeResult.rawDiagnostics` preserves the exact stdout/stderr/spawn
+  error concatenation that callers previously received;
+- `remapLambdapiProbeDiagnostics` recognizes the observed
+  `[path:line:start-end]` header after removing ANSI only for parsing. It maps
+  only an explicitly supplied temporary probe path and an exact
+  `ProbeSourceMapEntry.generatedLine`;
+- imported-authority paths, same-basename paths, generated comments/blanks,
+  and other unmapped lines remain raw. Duplicate headers produce one
+  structured mapping rather than repeated source attribution;
+- all six generated statement kinds carry their original `SourceSpan`,
+  label, kind, and generated path/range in
+  `ProbeSourceMappedDiagnostic`;
+- `formatLambdapiProbeDiagnostics` places full source spans before the raw
+  backend output. With no mapping it returns the raw text unchanged;
+- `checkLambdapiProbe` accepts both the actual relative temporary path and its
+  absolute path, returns structured mappings, and exposes the source-facing
+  rendering through its existing `diagnostics` field;
+- synthetic tests cover ANSI, relative/absolute paths, all statement kinds,
+  deduplication, and non-attribution. A bounded real Lambdapi failure at
+  generated line 8 maps to `fixtures/c18_surface.ts:42:7-42:19`.
+
+### Experiment RELEASE-1A-DIAGNOSTIC-LOCATION
+
+```text
+Experiment ID: RELEASE-1A-DIAGNOSTIC-LOCATION
+Date and checkpoint: 2026-07-24 at GRADUATE-1B checkpoint aeb5221
+Question/hypothesis: does Lambdapi expose a stable generated location that can
+  be mapped without guessing columns or attributing imported-kernel errors?
+Authority and owner position inspected: process-backed conformance probe only;
+  no mathematical owner or rule changed.
+Current worktree/branch and baseline relationship:
+  goal/typescript-elaborator-v3.2 at descendant aeb5221 of baseline
+  a06433e57cba95e7d35f8577b7c71912862c3d25
+Minimal positive consumer: a valid generated category declaration followed by
+  an intentionally false `assert ⊢ c18_A : TYPE` at mapped generated line 8.
+Relevant negative/non-collapse consumer: ANSI headers, imported
+  emdash3_2.lp locations, a different probe.lp path, generated comment/blank
+  lines, absent source-map rows, and duplicate locations.
+Probe command and bounded result:
+  EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test
+  tests/v3_2_probe_diagnostic_tests.ts
+  passes 4 tests / 1 suite with no skips; the observed assertion failure maps
+  exactly and the checker stays within 30 seconds.
+Observed result: warning-suppressed Lambdapi emits
+  `[tmp/elab0-.../probe.lp:8:0-20] Assertion failed.`. Exact path/line matching
+  is sufficient; generated columns are retained as backend evidence while the
+  original full SourceSpan supplies the user-facing location.
+Unexpected result or failure: ANSI starts with its own `[` control sequence,
+  so parsing the unstripped stream first captured the color code as part of
+  the path. Strip ANSI only into a parsing view while preserving raw output.
+TypeScript consequence: accept D-040's RELEASE-1A split and complete C-18.
+Lambdapi consequence: none; only diagnostics from the optional conformance
+  process are interpreted.
+Decision: accept.
+Plan rows changed: C-18 complete; RELEASE-1A complete; RELEASE-1B next.
+Remaining prerequisite or human review: none for RELEASE-1B.
+```
+
+### RELEASE-1A validation
+
+Validated on the exact RELEASE-1A worktree diff:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_probe_diagnostic_tests.ts
+  tests/v3_2_elab0_tests.ts
+  tests/v3_2_dependent_context_tests.ts
+  passed 26 of 33 tests / 3 suites; seven opt-in probes skipped
+
+EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test
+  tests/v3_2_probe_diagnostic_tests.ts
+  passed 4 tests / 1 suite with no skips
+
+node --require ts-node/register --test tests/v3_2_*_tests.ts
+  passed 241 tests / 27 suites: 221 passed, 20 opt-in probes skipped
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  241 tests / 27 suites: 221 passed, 20 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 241-test result
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
 The user resolved H-01, H-03, H-04, and H-05 on 2026-07-24, and their
@@ -3192,7 +3295,7 @@ dependent slices are complete:
   migrates every consumer/package edge without a compatibility API;
 - GRADUATE-1A freezes the D-039 recommendation without authorizing it.
   GRADUATE-1B records the exact approval without rewriting it. RELEASE-READY
-  is next.
+  is split, RELEASE-1A completes C-18, and RELEASE-1B is next.
 
 None of these approvals promotes a recorded rule authority class. Do not guess a
 displayed-to-ordinary runtime equality, promote the conformance-only owners,
