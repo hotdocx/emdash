@@ -22,6 +22,7 @@ import {
     coreLfDeltaReduceHead
 } from './lf_declarations';
 import {
+    CoreRuntimeHeadRewriteResult,
     coreRuntimeRewriteHead
 } from './evaluator';
 import {
@@ -56,6 +57,21 @@ export type CoreLfCombinedReduction =
         readonly ruleId: string;
         readonly ruleIndex: number;
     };
+
+/**
+ * One immutable, catalog-owned runtime component.
+ *
+ * This is deliberately not a rule-registration API. Candidate catalogs may
+ * supply a concrete reviewed program, while the ordinary LF profile omits
+ * the component and therefore retains its exact pre-DIRECTED semantics.
+ */
+export interface CoreLfCatalogRuntime {
+    readonly revision: string;
+    readonly ruleIds: readonly string[];
+    rewriteHead(
+        expression: KernelExpression
+    ): CoreRuntimeHeadRewriteResult;
+}
 
 export type CoreLfCombinedTraceEntry = CoreLfCombinedReduction & {
     readonly step: number;
@@ -176,7 +192,8 @@ const assertCompatibleSession = (
 export function coreLfCombinedReduceHead(
     environment: CoreLfDeclarationEnvironment,
     expression: KernelExpression,
-    session?: CoreElaborationSession
+    session?: CoreElaborationSession,
+    catalogRuntime?: CoreLfCatalogRuntime
 ): CoreLfCombinedHeadResult {
     assertCompatibleSession(environment, session);
 
@@ -247,6 +264,20 @@ export function coreLfCombinedReduceHead(
         });
     }
 
+    const catalogRewrite = catalogRuntime?.rewriteHead(expression);
+    if (catalogRewrite?.status === 'rewritten') {
+        return Object.freeze({
+            status: 'reduced',
+            reduction: Object.freeze({
+                kind: 'runtime',
+                before: catalogRewrite.before,
+                after: catalogRewrite.after,
+                ruleId: catalogRewrite.ruleId,
+                ruleIndex: catalogRewrite.ruleIndex
+            })
+        });
+    }
+
     const runtime = coreRuntimeRewriteHead(expression);
     if (runtime.status === 'rewritten') {
         return Object.freeze({
@@ -313,7 +344,8 @@ export function coreLfCombinedWeakHead(
     environment: CoreLfDeclarationEnvironment,
     expression: KernelExpression,
     stepLimit: number,
-    session?: CoreElaborationSession
+    session?: CoreElaborationSession,
+    catalogRuntime?: CoreLfCatalogRuntime
 ): CoreLfCombinedWeakHeadResult {
     if (!Number.isSafeInteger(stepLimit) || stepLimit < 0) {
         throw new CoreLfEvaluationError(
@@ -332,7 +364,8 @@ export function coreLfCombinedWeakHead(
         const head = coreLfCombinedReduceHead(
             environment,
             current,
-            session
+            session,
+            catalogRuntime
         );
         if (head.status === 'irreducible') {
             return Object.freeze({
@@ -431,6 +464,7 @@ export type CoreLfComparisonResult =
 interface MutableCoreLfComparisonState {
     readonly environment: CoreLfDeclarationEnvironment;
     readonly session?: CoreElaborationSession;
+    readonly catalogRuntime?: CoreLfCatalogRuntime;
     readonly stepLimit: number;
     readonly trace: CoreLfComparisonTraceEntry[];
 }
@@ -494,7 +528,8 @@ const comparisonWeakHeadAt = (
         state.environment,
         expression,
         state.stepLimit - state.trace.length,
-        state.session
+        state.session,
+        state.catalogRuntime
     );
     appendComparisonTrace(state, side, path, result.trace);
 
@@ -773,7 +808,8 @@ export function coreLfDefinitionalCompare(
     left: KernelExpression,
     right: KernelExpression,
     stepLimit: number,
-    session?: CoreElaborationSession
+    session?: CoreElaborationSession,
+    catalogRuntime?: CoreLfCatalogRuntime
 ): CoreLfComparisonResult {
     if (!Number.isSafeInteger(stepLimit) || stepLimit < 0) {
         throw new CoreLfEvaluationError(
@@ -788,6 +824,7 @@ export function coreLfDefinitionalCompare(
     const state: MutableCoreLfComparisonState = {
         environment,
         session,
+        catalogRuntime,
         stepLimit,
         trace: []
     };
