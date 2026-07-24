@@ -224,6 +224,7 @@ describe('TypeScript v3.2 MIGRATE-1A proof-state traversal', () => {
             [localGoal.identity.index, typeGoal.identity.index]
         );
         assert.equal(state.goals[0].contextDepth, 1);
+        assert.equal(state.goals[0].context, localContext);
         assert.equal(
             state.goals[0].firstOccurrenceProvenance.span?.start.line,
             33

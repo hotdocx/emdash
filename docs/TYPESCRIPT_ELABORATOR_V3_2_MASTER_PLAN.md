@@ -14,7 +14,7 @@ Human-Decision-Record: on 2026-07-24 the user approved H-01 dependent-first,
 H-03/D-023, and H-04/D-030 exactly as proposed
 Status: active living master plan; H-01, H-03, and H-04 are resolved, ELAB-2C
 is complete without triggering H-02, TSK-2 and TSK-3 are complete, and
-MIGRATE-1B is complete with MIGRATE-1C dependency-ready next
+MIGRATE-1C is complete with MIGRATE-1D dependency-ready next
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -186,8 +186,9 @@ cleanly.
 | D-031 | accepted | Interpret TSK-3's common frozen fragment as exactly the 16 H-03-reviewed owners and three runtime rules, not the 24-owner conformance superset. Pin one immutable exit matrix. Give every common owner a positive judgment and a well-scoped negative result-type judgment over the same Core term in both engines; give every rule a positive conversion, well-typed near-miss non-conversion, and malformed candidate rejection; close with recursive functor-hom and native transfor-level higher-cell packages. Batch cases into bounded probes. | TSK-3A derives the exact owner/rule matrix from the reviewed manifest, rejects scope drift, and builds one deterministic owner corpus. The TypeScript checker and one Lambdapi `assert`/`assertnot` probe agree on all 16 positive and 16 negative owner judgments. Existing tests over all 24 owners remain useful conformance evidence but do not redefine product parity. |
 | D-032 | accepted | For each TSK-3B row, use the exact reviewed redex/reduct as the positive pair. Form the negative pair by replacing only the redex's full-projection functor with a fresh rigid declaration of the identical classifier, and pair it with a malformed candidate whose left pattern erases that required full projection. Establish TypeScript well-typedness by the surface-elaborated redex plus checked same-classifier substitution; do not add the active classifier equations needed for standalone full-redex checker replay. Require zero-step TypeScript non-conversion and a Lambdapi `assertnot` over the same negative pair. | All three positive pairs convert in one TypeScript runtime step and in Lambdapi. All three substituted terms are irreducible and differ from their reducts at zero steps; Lambdapi accepts the corresponding non-conversions. The runtime compiler rejects the broadened candidates: two fail the mandatory full-projection decrease and the transfor-hom candidate first exposes its now-unbound `eta`. Direct Core-checker replay still encounters the H-04-recorded object-classifier equation boundary, so TSK-3B records the narrower substitution evidence and does not broaden trusted conversion or claim standalone subject reduction. |
 | D-033 | accepted | Close the frozen TSK-3 matrix with exactly two higher-cell packages. Reuse the ordinary full/capped functor-hom schema recursively for the 2-cell package, and use the native transfor component/hom owners for the second package. Share nine positive typings, three exact wrong-endpoint negative typings, and three reviewed conversions between TypeScript surface elaboration/runtime comparison and one bounded Lambdapi probe. Publish a deep-frozen completion record tied to every scope row, while retaining the oracle until graduation. | The actual terms and types exercise every owner named by both package rows. The recursive conversion uses `projection.functor-hom.evaluate` at the next hom level without a new `fapp2`; the component and hom conversions use the other two reviewed rules. TypeScript rejects all three wrong operands at their source spans, and Lambdapi accepts the same corrupt Core terms as negative typing judgments. The completion status is only for the 16-owner H-03 frozen fragment: C-09/C-10 remain conformance evidence outside that denominator, no broader grammar-representativeness claim is made, and H-04 remains unchanged. |
-| D-034 | accepted | Split MIGRATE-1 into four bounded claims: closed-world inventory plus generic proof-state inspection (MIGRATE-1A), locally nameless higher-order pattern solving (MIGRATE-1B), checked proof refinement (MIGRATE-1C), and a final replacement/readiness audit (MIGRATE-1D). Preserve only independently useful invariants; do not port generic beta/eta, dynamic user inductives/rules, the legacy parser, or category compatibility APIs through this migration. | `LEGACY_MIGRATION_INVENTORY` classifies all ten mechanisms, all thirteen root legacy source files, and all twenty-two loaded legacy test files, and rejects drift. Core-native proof inspection follows session solutions, reports only reachable metas and goal-type dependencies, records local depth/source provenance, and traverses only generic Core constructors. MIGRATE-1A and MIGRATE-1B are complete; checked tactics and physical deletion remain separate. |
+| D-034 | accepted | Split MIGRATE-1 into four bounded claims: closed-world inventory plus generic proof-state inspection (MIGRATE-1A), locally nameless higher-order pattern solving (MIGRATE-1B), checked proof refinement (MIGRATE-1C), and a final replacement/readiness audit (MIGRATE-1D). Preserve only independently useful invariants; do not port generic beta/eta, dynamic user inductives/rules, the legacy parser, or category compatibility APIs through this migration. | `LEGACY_MIGRATION_INVENTORY` classifies all ten mechanisms, all thirteen root legacy source files, and all twenty-two loaded legacy test files, and rejects drift. Core-native proof inspection follows session solutions, reports only reachable metas and goal-type dependencies, records local depth/source provenance, and traverses only generic Core constructors. MIGRATE-1A through MIGRATE-1C are complete; the final audit and physical deletion remain separate. |
 | D-035 | accepted | Solve only contextual Miller flex-rigid equations whose meta spine has its creation arity and consists of pairwise-distinct in-scope bound variables in a descendant context. Invert that spine by capture-safe ambient De Bruijn remapping, require a structural substitution round trip, and assign only through the existing canonical session solve. Keep non-variable and repeated spines plus unrelated context lineages stuck; reject omitted-local scope escape and occurs cycles; keep flex-flex ambiguous and the public direct-solve API canonical-only. | `invertCoreMetaPattern` is pure and has no assignment, checker, evaluator, or backend dependency. Session constraints solve weakened, exchanged, partially used, constant, nested-binder, and either-orientation occurrences; focused negatives distinguish stuck from rejected outcomes at source provenance. No generic beta/eta, ambient user-rule matching, runtime conversion, trusted rule, or H-04 claim is added. |
+| D-036 | accepted | Represent an interactive proof by an immutable Core root plus reachable session-owned goal identities and their persistent creation contexts. `exact` uses the closed checker boundary and introduces no metas. `intro` preserves the syntactic Pi binder's full mode and creates one checked body goal. `apply` requires an inferable complete callee, exhausts its syntactic Pi telescope into ordered argument metas, then lets dependent result checking solve any determined arguments. Permit open results only through a dedicated checker refinement boundary, and make every tactic failure-atomic by restoring solutions, constraints, allocations, and ordinals. | `CoreProofRefiner` can solve exact goals, build and close an identity by intro/exact, expose explicit and implicit premises in order, and close a dependent application by unification. It rejects ill-typed exact terms, unresolved exact terms, non-Pi intro, non-function apply, unreachable goals, and a partially solved mismatching apply without changing the proof state. There is no mutable hole, global definition lookup, category-tag traversal, generic beta/eta, proof-time comparison rule, or Lambdapi backend dependency. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -315,7 +316,7 @@ oracle**, or **delete**.
 | Higher-order pattern unification | port only after Core binder representation stabilizes | Positive pattern cases and negative non-pattern boundary |
 | Rewrite versus unification-rule separation | reimplement as explicit rule classes | Rule validation plus runtime/proof-time differential cases |
 | Capture-avoiding substitution and shifting | reimplemented in ELAB-2A0 | Locally nameless binder, shadowing, dependent-type, escape, and ordered-composition tests are green |
-| Proof-state traversal | retain as evidence, then reimplement generically | No dependency on old category node tags |
+| Proof-state traversal/refinement | reimplemented through MIGRATE-1C | Generic reachable-goal traversal plus failure-atomic checked exact/intro/apply, with no old category tags or mutable global holes |
 | Direct TypeScript constructors | port | Source-location and macro-expansion tests |
 | Existing category constructors/rules | delete after replacement coverage is recorded | No compatibility requirement; retain only independently generic tests |
 | Global mutable standard-library/rule setup | delete | New session-owned rule manifest and deterministic reset-free tests |
@@ -351,7 +352,7 @@ content or coverage drift is rejected.
 | `phase1_tests.ts` | delete without port | `MkCat` and `ComposeMorph` are obsolete category APIs. |
 | `kernel_implicits_tests.ts` | replace then delete | Schema-driven owner recovery/clash tests replace the stale slot table. |
 | `functorial_elaboration.ts` | delete without port | The old `MkFunctorTerm` proof/coherence contract is explicitly rejected. |
-| `proof_mode_tests.ts` | replace then delete | MIGRATE-1A replaces goal inspection; MIGRATE-1C owns checked refinement tactics. |
+| `proof_mode_tests.ts` | replace then delete | MIGRATE-1A/1C replace goal inspection and checked exact/intro/apply over session-local Core. |
 | `emdash2_functor_transfor_tests.ts` | replace then delete | Current owner/binder/differential corpora replace stale category spellings and reductions. |
 | `emdash2_homd_curry_alias_tests.ts` | split then delete | Keep binder modes/internal-Hom variance, not the alias API. |
 | `emdash2_internalized_category_layer_tests.ts` | replace then delete | Current recursive category recovery and owner typing replace this layer. |
@@ -382,7 +383,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-16 | Dependent contraction/diagonal | complete for structurally equal telescope binders in ELAB-2C | The explicit non-injective index map transports a dependent suffix and identifies both duplicate occurrences; unequal types, unequal modes, and invalid positions are rejected. Definitional type comparison remains TSK-2 work. |
 | C-17 | TypeScript rule manifest/checker | complete for the reviewed MVP fragment | The exact 16-owner/three-rule product profile compiles and executes through deterministic numeric-slot matching, manifest-ordered root buckets, explicit step limits, structural congruence, and checker conversion. H-04 authorizes termination, bounded evaluation/comparison, and exactly those three runtime rules. Proof-time/non-conversion evidence, excluded owners, unfolding, and generic beta remain non-executable; general confluence and standalone TypeScript subject reduction remain withheld. |
 | C-18 | Source-mapped backend diagnostics | partial | Generated map exists; diagnostic remapping missing |
-| C-19 | Legacy category-layer removal | partial through MIGRATE-1B | The closed-world inventory, generic proof-state inspection, and contextual Miller-pattern replacement corpus are green. Checked proof refinement, the final replacement audit, and physical MIGRATE-2 deletion remain. |
+| C-19 | Legacy category-layer removal | partial through MIGRATE-1C | The closed-world inventory, generic proof inspection, contextual Miller-pattern solver, and failure-atomic checked proof refinement are green. The final replacement/readiness audit and physical MIGRATE-2 deletion remain. |
 | C-20 | Frozen-fragment differential parity | complete | The manifest-derived 16-owner corpus, all three runtime rows, and both higher-cell packages have shared TypeScript/Lambdapi positive, negative, and conversion outcomes. The drift-checked completion record retains Lambdapi as required oracle until graduation and does not promote conformance-only C-09/C-10 owners. |
 
 The first higher-dimensional corpus must exercise C-05 through C-10 before
@@ -428,8 +429,8 @@ must identify their common baseline.
 | MIGRATE-1 | split / in progress | replacement inventory, TSK-2 | Port/reimplement only independently useful generic proof/unification facilities and classify every legacy source/test before deletion. |
 | MIGRATE-1A | complete | TSK-3 | The deep-frozen inventory covers ten mechanisms, thirteen root legacy source files, and all twenty-two loaded legacy tests. Generic proof inspection follows session solutions and goal-type dependencies through every Core container without old category tags or global state. |
 | MIGRATE-1B | complete | MIGRATE-1A, stable Core binders | Pure capture-safe inversion and session assignment cover the contextual Miller flex-rigid fragment in both orientations. Weakening, exchange, partial use, constants, and nested binders pass; non-variable, repeated, escaping, occurs, flex-flex, unrelated-lineage, and direct-solve boundaries are explicit without runtime conversion. |
-| MIGRATE-1C | dependency-ready / next | MIGRATE-1B, proof-state inspection | Reimplement checked `exact`, `intro`, and `apply` refinement with session-local goals and the Core checker; preserve no mutable-hole or global-definition API. |
-| MIGRATE-1D | pending | MIGRATE-1B, MIGRATE-1C | Freeze the completed mechanism/test disposition state, run every replacement-focused gate, and make the physical deletion boundary reviewable. |
+| MIGRATE-1C | complete | MIGRATE-1B, proof-state inspection | Reachable session goals retain their creation contexts; exact, intro, and exhaustive-Pi apply are checker-validated and failure-atomic. Complete, dependent, plicity, source-error, unreachable, and rollback consumers are green without mutable holes or global lookup. |
+| MIGRATE-1D | dependency-ready / next | MIGRATE-1B, MIGRATE-1C | Freeze the completed mechanism/test disposition state, run every replacement-focused gate, and make the physical deletion boundary reviewable. |
 | MIGRATE-2 | pending | MIGRATE-1, replacement tests | Delete the old category-specific nodes, standard library, reductions, and obsolete category tests; retain no D0/D1 or legacy category compatibility API. |
 | GRADUATE-1 | human gate | TSK-3, MIGRATE-2 | Review parity evidence, trust assumptions, subject reduction, termination/confluence scope, performance, and maintenance cost. Decide whether TypeScript is the authoritative deployed MVP kernel. |
 | RELEASE-READY | pending | GRADUATE-1 | Documentation, manifests, examples, diagnostics, full repository checks, and explicit residual Lambdapi-conformance policy are synchronized. |
@@ -2605,6 +2606,119 @@ git diff --check
   passed
 ```
 
+## Completed Slice: MIGRATE-1C
+
+MIGRATE-1C replaces the checked-refinement invariant of the legacy proof mode
+without retaining its mutable holes, global lookup, or category-specific
+traversal:
+
+- each inspected goal now retains its immutable persistent creation context,
+  so refinement does not recover binders by replaying or opening the proof
+  term with dummy names;
+- `CoreProofRefiner` accepts only a goal identity currently reachable from its
+  immutable root. Solving remains in the owning `CoreElaborationSession`, and
+  inspecting the same root after zonking yields the next proof state;
+- `exact` checks a complete term through the ordinary closed checker boundary.
+  `intro` requires a syntactic Pi, preserves its plicity and variation mode,
+  extends the persistent context, creates one body goal, checks the resulting
+  lambda, and only then assigns the parent;
+- `apply` requires an inferable meta-free callee and exhausts its syntactic Pi
+  telescope into ordered argument metas with the original plicities. The
+  dedicated `checkRefinement` boundary still requires every constraint to
+  solve, but permits those session-owned metas to remain in the checked call;
+  dependent result checking can therefore solve determined arguments before
+  the remaining goals are reported;
+- refinement is synchronous and failure-atomic. A thrown checker or tactic
+  error restores pre-existing solutions and constraint outcomes, removes new
+  metas/constraints, and restores deterministic meta/constraint ordinals;
+- focused negatives cover wrong-type and unresolved `exact`, non-Pi `intro`,
+  non-function `apply`, an unreachable session meta, and an application that
+  first solves an argument and then fails on a later rigid result component.
+  None changes the proof state;
+- `LEGACY_MIGRATION_INVENTORY` revision `MIGRATE-1C` marks proof traversal and
+  refinement covered, points `proof_mode_tests.ts` at both Core replacement
+  suites, and makes the final readiness audit MIGRATE-1D next.
+
+### Experiment MIGRATE-1C-CHECKED-PROOF-REFINEMENT
+
+```text
+Experiment ID: MIGRATE-1C-CHECKED-PROOF-REFINEMENT
+Date and checkpoint: 2026-07-24 at MIGRATE-1B checkpoint 3e48b97
+Question/hypothesis: exact, intro, and apply can refine only reachable
+  session-owned contextual goals through the Core checker while keeping the
+  proof root immutable and making every rejected tactic failure-atomic,
+  without retaining mutable holes, global definitions, or category cases.
+Authority and owner position inspected: D-018/D-020/D-034/D-035 and C-11/C-19
+  in this plan; Core context/session/checker and MIGRATE-1A proof inspection;
+  legacy src/proof.ts and proof_mode_tests.ts. No Lambdapi owner or rule
+  changed.
+Current worktree/branch and baseline relationship:
+  /home/user1/emdash1-elaborator-goal on
+  goal/typescript-elaborator-v3.2 at 3e48b97 before the experiment;
+  descendant of baseline a06433e.
+Minimal positive consumer: check an exact proof of A; construct and close the
+  identity A -> A by intro/exact while preserving a natural binder; apply a
+  unary function and a mixed implicit/explicit function; apply
+  d : (x:A) -> P(x) to goal P(z) and let result checking solve x := z.
+Relevant negative/non-collapse consumer: reject a B-term for an A goal, an
+  unresolved exact term, intro at A, apply of a non-function, an unrelated
+  session meta, and an apply whose result first solves x := z and then
+  mismatches z against a distinct rigid w. Verify no allocation, constraint,
+  solution, or ordinal survives failure. Execute no proof-time product rule.
+Probe command and bounded result: the inventory, proof-state, and refinement
+  suites pass 21 tests / 3 suites with no skips.
+Observed result: exact closes without new goals; intro exposes one contextual
+  body goal; apply exposes ordered plicity-bearing premises; dependent
+  checking can solve an argument and leave no goal; all failure cases preserve
+  the prior proof state and deterministic next ordinal.
+Unexpected result or failure: none. The legacy apply behavior of consuming
+  every syntactic Pi binder was retained only as this explicit bounded tactic
+  contract; no generic normalization or search was added.
+TypeScript consequence: accept D-036; complete MIGRATE-1C; mark the proof
+  mechanism covered and make the frozen replacement/readiness audit
+  MIGRATE-1D next.
+Lambdapi consequence: none. Completed proof terms still cross the existing
+  checker/backend boundary; raw subgoal metas remain non-serializable. Add no
+  declaration, rule, comparison, warning, audit, catalog, or health change.
+Decision: accept.
+Plan rows changed: D-036 accepted; C-19 partial through MIGRATE-1C;
+  MIGRATE-1C complete; MIGRATE-1D dependency-ready.
+Remaining prerequisite or human review: none for MIGRATE-1D. H-05 and H-06
+  remain at their recorded later triggers.
+```
+
+### MIGRATE-1C validation
+
+Validated on the exact MIGRATE-1C worktree diff:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_migration_inventory_tests.ts
+  tests/v3_2_proof_state_tests.ts
+  tests/v3_2_proof_refinement_tests.ts
+  passed 21 tests / 3 suites with no skips
+
+node --require ts-node/register --test tests/v3_2_*_tests.ts
+  passed 215 tests / 22 suites: 196 passed, 19 opt-in probes skipped
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  367 tests / 65 suites: 348 passed, 19 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 367-test result
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
 The user resolved H-01, H-03, and H-04 on 2026-07-24, and their dependent
@@ -2622,8 +2736,9 @@ slices are complete:
   Lambdapi required through H-05;
 - MIGRATE-1A closes the source/test inventory and generic proof-inspection
   tranche; MIGRATE-1B closes the contextual Miller-pattern replacement
-  tranche. MIGRATE-1C checked proof refinement is dependency-ready next, while
-  H-05 remains at GRADUATE-1 after migration.
+  tranche; MIGRATE-1C closes the checked, failure-atomic refinement tranche.
+  MIGRATE-1D's final replacement/readiness audit is dependency-ready next,
+  while H-05 remains at GRADUATE-1 after migration.
 
 Neither approval changes the recorded authority classes. Do not guess a
 displayed-to-ordinary runtime equality, promote the conformance-only owners,

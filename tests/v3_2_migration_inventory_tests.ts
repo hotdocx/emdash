@@ -85,10 +85,10 @@ describe('TypeScript v3.2 MIGRATE-1 legacy inventory', () => {
             LEGACY_MIGRATION_INVENTORY.mechanisms.find(
                 entry => entry.id === 'proof-state-traversal'
             )?.state,
-            'partial'
+            'covered'
         );
-        assert.equal(LEGACY_MIGRATION_INVENTORY.revision, 'MIGRATE-1B');
-        assert.equal(LEGACY_MIGRATION_INVENTORY.nextSlice, 'MIGRATE-1C');
+        assert.equal(LEGACY_MIGRATION_INVENTORY.revision, 'MIGRATE-1C');
+        assert.equal(LEGACY_MIGRATION_INVENTORY.nextSlice, 'MIGRATE-1D');
     });
 
     it('accounts for every root legacy source file exactly once', () => {
@@ -146,7 +146,7 @@ describe('TypeScript v3.2 MIGRATE-1 legacy inventory', () => {
             () => validateLegacyMigrationInventory(
                 changedState as unknown as LegacyMigrationInventory
             ),
-            /differs from the canonical MIGRATE-1B disposition ledger/
+            /differs from the canonical MIGRATE-1C disposition ledger/
         );
 
         const missingTest = cloneInventory() as unknown as {
@@ -157,7 +157,7 @@ describe('TypeScript v3.2 MIGRATE-1 legacy inventory', () => {
             () => validateLegacyMigrationInventory(
                 missingTest as unknown as LegacyMigrationInventory
             ),
-            /differs from the canonical MIGRATE-1B disposition ledger/
+            /differs from the canonical MIGRATE-1C disposition ledger/
         );
     });
 });

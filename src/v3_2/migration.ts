@@ -64,12 +64,12 @@ export interface LegacyTestDispositionEntry {
 }
 
 export interface LegacyMigrationInventory {
-    readonly revision: 'MIGRATE-1B';
+    readonly revision: 'MIGRATE-1C';
     readonly status: 'in-progress';
     readonly mechanisms: readonly LegacyMechanismDispositionEntry[];
     readonly sourceFiles: readonly LegacySourceDispositionEntry[];
     readonly testFiles: readonly LegacyTestDispositionEntry[];
-    readonly nextSlice: 'MIGRATE-1C';
+    readonly nextSlice: 'MIGRATE-1D';
 }
 
 const deepFreeze = <T>(value: T): T => {
@@ -87,7 +87,7 @@ const deepFreeze = <T>(value: T): T => {
 };
 
 const canonicalInventory: LegacyMigrationInventory = {
-    revision: 'MIGRATE-1B',
+    revision: 'MIGRATE-1C',
     status: 'in-progress',
     mechanisms: [
         {
@@ -153,14 +153,15 @@ const canonicalInventory: LegacyMigrationInventory = {
         {
             id: 'proof-state-traversal',
             disposition: 'reimplement',
-            state: 'partial',
+            state: 'covered',
             evidence: [
                 'tests/v3_2_proof_state_tests.ts',
+                'tests/v3_2_proof_refinement_tests.ts',
                 'tests/proof_mode_tests.ts'
             ],
             nextBoundary:
-                'MIGRATE-1C adds checked exact/intro/apply refinement; ' +
-                'MIGRATE-1A covers inspection and reporting only.'
+                'Retain Core inspection/refinement and delete mutable legacy ' +
+                'proof holes and category traversal in MIGRATE-2.'
         },
         {
             id: 'direct-typescript-constructors',
@@ -516,11 +517,12 @@ const canonicalInventory: LegacyMigrationInventory = {
                 'Reachable-goal inspection/reporting and checked intro, exact, ' +
                 'and apply refinement.',
             replacementTests: [
-                'tests/v3_2_proof_state_tests.ts'
+                'tests/v3_2_proof_state_tests.ts',
+                'tests/v3_2_proof_refinement_tests.ts'
             ],
             remainingBoundary:
-                'MIGRATE-1C adds tactics; category-tag traversal is replaced ' +
-                'by generic Core traversal.'
+                'Delete mutable holes, global lookup, and category-tag ' +
+                'traversal with the legacy proof module in MIGRATE-2.'
         },
         {
             file: 'tests/emdash2_functor_transfor_tests.ts',
@@ -573,7 +575,7 @@ const canonicalInventory: LegacyMigrationInventory = {
                 'Delete in MIGRATE-2; a replacement parser requires H-06.'
         }
     ],
-    nextSlice: 'MIGRATE-1C'
+    nextSlice: 'MIGRATE-1D'
 };
 
 export const LEGACY_MIGRATION_INVENTORY = deepFreeze(canonicalInventory);
@@ -584,7 +586,7 @@ const sameInventory = (
 ): boolean => JSON.stringify(left) === JSON.stringify(right);
 
 /**
- * Reject any drift from the reviewed MIGRATE-1B inventory.
+ * Reject any drift from the reviewed MIGRATE-1C inventory.
  *
  * The migration ledger is deliberately closed-world: adding a legacy root
  * source or test requires an explicit disposition before deletion can
@@ -596,7 +598,7 @@ export function validateLegacyMigrationInventory(
     if (!sameInventory(inventory, canonicalInventory)) {
         throw new Error(
             'Legacy migration inventory differs from the canonical ' +
-            'MIGRATE-1B disposition ledger'
+            'MIGRATE-1C disposition ledger'
         );
     }
 }

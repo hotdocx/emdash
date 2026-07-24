@@ -1037,6 +1037,31 @@ export class CoreChecker {
         );
     }
 
+    /**
+     * Check a refinement that may contain session-owned unsolved subgoals.
+     *
+     * Constraints must still close or reject deterministically. Unlike the
+     * ordinary public `check` boundary, this result may retain metas in the
+     * checked term or type so a proof refiner can make them reachable before
+     * returning control to the caller.
+     */
+    checkRefinement(
+        context: CoreContext,
+        expression: KernelExpression,
+        expected: KernelExpression
+    ): CoreCheckResult {
+        this.assertContext(context, expression.provenance);
+        context.assertScoped(expression);
+        context.assertScoped(expected);
+        const result = this.checkAt(context, expression, expected);
+        this.finishConstraints();
+        const term = this.session.zonk(result.term);
+        const type = this.session.zonk(result.type);
+        context.assertScoped(term);
+        context.assertScoped(type);
+        return Object.freeze({ term, type });
+    }
+
     inferOwnerApplication(
         context: CoreContext,
         owner: CoreOwnerId,

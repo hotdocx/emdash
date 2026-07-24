@@ -74,6 +74,7 @@ export interface CoreMetaEntry {
     readonly type: KernelExpression;
     readonly creationDepth: number;
     readonly provenance: Provenance;
+    readonly context: CoreContext;
     readonly solution?: KernelExpression;
 }
 
@@ -156,6 +157,7 @@ const frozenMetaEntry = (entry: MutableMetaEntry): CoreMetaEntry =>
         type: entry.type,
         creationDepth: entry.creationDepth,
         provenance: entry.provenance,
+        context: entry.context,
         solution: entry.solution
     });
 
@@ -359,6 +361,58 @@ export class CoreElaborationSession {
 
     metavariable(meta: KernelMetaVariable): CoreMetaEntry {
         return frozenMetaEntry(this.entryForMeta(meta));
+    }
+
+    /**
+     * Run one synchronous state mutation atomically.
+     *
+     * Proof refinement uses this boundary so failed checking cannot leave
+     * allocated metas, constraints, or partially solved existing entries in
+     * the session. Successful work keeps the normal deterministic ordinals.
+     */
+    withTransaction<T>(operation: () => T): T {
+        const metaSolutions = new Map(
+            [...this.metaEntries].map(([index, entry]) => [
+                index,
+                entry.solution
+            ])
+        );
+        const constraintCount = this.constraintEntries.length;
+        const constraintStates = this.constraintEntries.map(entry => ({
+            entry,
+            outcome: entry.outcome,
+            reason: entry.reason,
+            error: entry.error
+        }));
+        const nextMetaIndex = this.nextMetaIndex;
+        const nextConstraintId = this.nextConstraintId;
+
+        try {
+            return operation();
+        } catch (error: unknown) {
+            for (const index of this.metaEntries.keys()) {
+                if (!metaSolutions.has(index)) {
+                    this.metaEntries.delete(index);
+                }
+            }
+            for (const [index, solution] of metaSolutions) {
+                const entry = this.metaEntries.get(index)!;
+                if (solution === undefined) {
+                    delete entry.solution;
+                } else {
+                    entry.solution = solution;
+                }
+            }
+            this.constraintEntries.splice(constraintCount);
+            for (const snapshot of constraintStates) {
+                snapshot.entry.outcome = snapshot.outcome;
+                snapshot.entry.reason = snapshot.reason;
+                snapshot.entry.error = snapshot.error;
+            }
+            this.nextMetaIndex = nextMetaIndex;
+            this.nextConstraintId = nextConstraintId;
+            throw error;
+        }
     }
 
     private isCanonicalOccurrence(

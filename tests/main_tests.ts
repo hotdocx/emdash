@@ -47,6 +47,7 @@ import './v3_2_differential_higher_cell_tests';
 import './v3_2_migration_inventory_tests';
 import './v3_2_proof_state_tests';
 import './v3_2_pattern_unification_tests';
+import './v3_2_proof_refinement_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,
