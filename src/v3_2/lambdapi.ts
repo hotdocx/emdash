@@ -43,7 +43,7 @@ const binding = (
 });
 
 /**
- * Lambdapi names for every owner in the ELAB-1A Core catalog.
+ * Lambdapi names for every owner in the ELAB-1B Core catalog.
  *
  * Sections are stable source anchors; callers must relocate declarations by
  * name instead of treating a remembered line number as authority.
@@ -79,20 +79,45 @@ export const LAMBDAPI_V32_OWNER_BINDINGS = {
         '6a. Transformation classifier, components, and generic projection calculus',
         'injective symbol Transf'
     ),
+    'hom-category': binding(
+        'Hom_cat',
+        '2. Core categories',
+        'injective symbol Hom_cat'
+    ),
+    'transfor-category': binding(
+        'Transf_cat',
+        '6a. Transformation classifier, components, and generic projection calculus',
+        'injective symbol Transf_cat'
+    ),
     'functor-object': binding(
         'fapp0',
         '3a. Ordinary functor classifier and action',
         'symbol fapp0'
+    ),
+    'functor-hom-full': binding(
+        'fapp1_func',
+        '3a. Ordinary functor classifier and action',
+        'symbol fapp1_func'
     ),
     'functor-hom-capped': binding(
         'fapp1_fapp0',
         '3a. Ordinary functor classifier and action',
         'symbol fapp1_fapp0'
     ),
+    'transfor-component-full': binding(
+        'tapp0_func',
+        '6a. Transformation classifier, components, and generic projection calculus',
+        'symbol tapp0_func'
+    ),
     'transfor-component-capped': binding(
         'tapp0_fapp0',
         '6a. Transformation classifier, components, and generic projection calculus',
         'symbol tapp0_fapp0'
+    ),
+    'transfor-hom-full': binding(
+        'tapp1_func',
+        '6a. Transformation classifier, components, and generic projection calculus',
+        'symbol tapp1_func'
     ),
     'transfor-hom-capped': binding(
         'tapp1_fapp0',

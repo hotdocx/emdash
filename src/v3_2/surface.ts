@@ -2,8 +2,9 @@
  * Direct TypeScript surface AST and rigid v3.2 context types.
  *
  * The context is intentionally small: it knows enough about categories,
- * objects, functors, arrows, and ordinary transfors to recover the implicit
- * slots of the first owner family. It performs no categorical conversion.
+ * objects, functors, iterated arrows, and ordinary transfors to recover the
+ * implicit slots of the first owner family. It performs no categorical
+ * conversion.
  */
 
 import {
@@ -20,34 +21,60 @@ import {
 } from './kernel';
 import { SurfaceOperationId } from './schema';
 
+export type SurfaceCategoryInput = string | SurfaceHomCategory;
+
+export interface SurfaceHomCategory {
+    tag: 'hom-category';
+    category: SurfaceCategoryInput;
+    sourceObject: string;
+    targetObject: string;
+}
+
+export const homCategory = (
+    category: SurfaceCategoryInput,
+    sourceObject: string,
+    targetObject: string
+): SurfaceHomCategory => ({
+    tag: 'hom-category',
+    category,
+    sourceObject,
+    targetObject
+});
+
 export type SurfaceBindingType =
     | { tag: 'category' }
-    | { tag: 'object'; category: string }
-    | { tag: 'functor'; sourceCategory: string; targetCategory: string }
+    | { tag: 'object'; category: SurfaceCategoryInput }
+    | {
+        tag: 'functor';
+        sourceCategory: SurfaceCategoryInput;
+        targetCategory: SurfaceCategoryInput;
+    }
     | {
         tag: 'hom';
-        category: string;
+        category: SurfaceCategoryInput;
         sourceObject: string;
         targetObject: string;
     }
     | {
         tag: 'transfor';
-        sourceCategory: string;
-        targetCategory: string;
+        sourceCategory: SurfaceCategoryInput;
+        targetCategory: SurfaceCategoryInput;
         sourceFunctor: string;
         targetFunctor: string;
     };
 
 export const categoryType = (): SurfaceBindingType => ({ tag: 'category' });
 
-export const objectType = (category: string): SurfaceBindingType => ({
+export const objectType = (
+    category: SurfaceCategoryInput
+): SurfaceBindingType => ({
     tag: 'object',
     category
 });
 
 export const functorType = (
-    sourceCategory: string,
-    targetCategory: string
+    sourceCategory: SurfaceCategoryInput,
+    targetCategory: SurfaceCategoryInput
 ): SurfaceBindingType => ({
     tag: 'functor',
     sourceCategory,
@@ -55,7 +82,7 @@ export const functorType = (
 });
 
 export const homType = (
-    category: string,
+    category: SurfaceCategoryInput,
     sourceObject: string,
     targetObject: string
 ): SurfaceBindingType => ({
@@ -66,8 +93,8 @@ export const homType = (
 });
 
 export const transforType = (
-    sourceCategory: string,
-    targetCategory: string,
+    sourceCategory: SurfaceCategoryInput,
+    targetCategory: SurfaceCategoryInput,
     sourceFunctor: string,
     targetFunctor: string
 ): SurfaceBindingType => ({
@@ -140,6 +167,59 @@ export class SurfaceContextError extends Error {
 
 const derived = (detail: string, span: SourceSpan) =>
     provenance('derived', detail, span);
+
+export type ObjectLikeCoreType = Extract<
+    CoreType,
+    { tag: 'object' | 'hom' | 'transfor' }
+>;
+
+export function isObjectLikeCoreType(
+    type: CoreType
+): type is ObjectLikeCoreType {
+    return type.tag === 'object' ||
+        type.tag === 'hom' ||
+        type.tag === 'transfor';
+}
+
+/**
+ * Recover the category whose objects are represented by this rigid Core type.
+ *
+ * Hom arrows and ordinary transfors are objects of active iterated category
+ * formers. This recursive view is what lets ordinary `fapp0` act at the next
+ * dimension without introducing a special higher-cell node.
+ */
+export function coreTypeObjectCategory(
+    type: CoreType,
+    span: SourceSpan,
+    detail: string
+): KernelExpression | undefined {
+    const nodeProvenance = derived(detail, span);
+
+    switch (type.tag) {
+        case 'object':
+            return type.category;
+        case 'hom':
+            return kernelApplication('hom-category', [
+                { value: type.category },
+                { value: type.sourceObject },
+                { value: type.targetObject }
+            ], nodeProvenance);
+        case 'transfor':
+            return kernelApplication('transfor-category', [
+                { value: type.sourceCategory },
+                { value: type.targetCategory },
+                { value: type.sourceFunctor },
+                { value: type.targetFunctor }
+            ], nodeProvenance);
+        case 'category':
+        case 'functor':
+            return undefined;
+        default: {
+            const exhaustive: never = type;
+            return exhaustive;
+        }
+    }
+}
 
 export function coreTypeToKernelType(
     type: CoreType,
@@ -319,20 +399,55 @@ export class SurfaceContext {
         return binding;
     }
 
+    private resolveCategory(
+        category: SurfaceCategoryInput,
+        owner: SurfaceBinding
+    ): KernelExpression {
+        if (typeof category === 'string') {
+            return this.expectCategory(category, owner).reference;
+        }
+
+        const base = this.resolveCategory(category.category, owner);
+        const source = this.expectObject(
+            category.sourceObject,
+            base,
+            owner
+        );
+        const target = this.expectObject(
+            category.targetObject,
+            base,
+            owner
+        );
+        return kernelApplication('hom-category', [
+            { value: base },
+            { value: source.reference },
+            { value: target.reference }
+        ], derived(
+            `surface hom category for binding ${owner.name}`,
+            owner.span
+        ));
+    }
+
     private expectObject(
         name: string,
         category: KernelExpression,
         owner: SurfaceBinding
     ): ResolvedSurfaceBinding {
         const binding = this.dependency(name, owner);
-        if (binding.coreType.tag !== 'object') {
+        const objectCategory = coreTypeObjectCategory(
+            binding.coreType,
+            binding.span,
+            `object category of dependency ${name}`
+        );
+        if (!objectCategory) {
             throw new SurfaceContextError(
                 'WRONG_DEPENDENCY_TYPE',
                 owner.span,
-                `Binding '${owner.name}' expects '${name}' to be an object`
+                `Binding '${owner.name}' expects '${name}' to be an object ` +
+                'of a category'
             );
         }
-        if (!kernelExpressionEquals(binding.coreType.category, category)) {
+        if (!kernelExpressionEquals(objectCategory, category)) {
             throw new SurfaceContextError(
                 'ENDPOINT_CATEGORY_MISMATCH',
                 owner.span,
@@ -377,77 +492,77 @@ export class SurfaceContext {
             case 'category':
                 return { tag: 'category' };
             case 'object': {
-                const category = this.expectCategory(
+                const category = this.resolveCategory(
                     binding.type.category,
                     binding
                 );
                 return {
                     tag: 'object',
-                    category: category.reference
+                    category
                 };
             }
             case 'functor': {
-                const source = this.expectCategory(
+                const source = this.resolveCategory(
                     binding.type.sourceCategory,
                     binding
                 );
-                const target = this.expectCategory(
+                const target = this.resolveCategory(
                     binding.type.targetCategory,
                     binding
                 );
                 return {
                     tag: 'functor',
-                    sourceCategory: source.reference,
-                    targetCategory: target.reference
+                    sourceCategory: source,
+                    targetCategory: target
                 };
             }
             case 'hom': {
-                const category = this.expectCategory(
+                const category = this.resolveCategory(
                     binding.type.category,
                     binding
                 );
                 const source = this.expectObject(
                     binding.type.sourceObject,
-                    category.reference,
+                    category,
                     binding
                 );
                 const target = this.expectObject(
                     binding.type.targetObject,
-                    category.reference,
+                    category,
                     binding
                 );
                 return {
                     tag: 'hom',
-                    category: category.reference,
+                    category,
                     sourceObject: source.reference,
                     targetObject: target.reference
                 };
             }
             case 'transfor': {
-                const sourceCategory = this.expectCategory(
+                const sourceCategory = this.resolveCategory(
                     binding.type.sourceCategory,
                     binding
                 );
-                const targetCategory = this.expectCategory(
+                const targetCategory = this.resolveCategory(
                     binding.type.targetCategory,
                     binding
                 );
                 const sourceFunctor = this.expectFunctor(
                     binding.type.sourceFunctor,
-                    sourceCategory.reference,
-                    targetCategory.reference,
+                    sourceCategory,
+                    targetCategory,
                     binding
                 );
                 const targetFunctor = this.expectFunctor(
                     binding.type.targetFunctor,
-                    sourceCategory.reference,
-                    targetCategory.reference,
+                    sourceCategory,
+                    targetCategory,
                     binding
                 );
                 return {
                     tag: 'transfor',
-                    sourceCategory: sourceCategory.reference,
-                    targetCategory: targetCategory.reference,
+                    sourceCategory,
+                    targetCategory,
                     sourceFunctor: sourceFunctor.reference,
                     targetFunctor: targetFunctor.reference
                 };
@@ -513,6 +628,28 @@ export const surfaceFapp1 = (
     span
 );
 
+export const surfaceFapp1Func = (
+    functor: SurfaceTerm,
+    sourceEndpoint: SurfaceTerm,
+    targetEndpoint: SurfaceTerm,
+    span: SourceSpan
+): SurfaceTerm => surfaceOperation(
+    'functor.hom.full',
+    [functor, sourceEndpoint, targetEndpoint],
+    span
+);
+
+export const surfaceTapp0Func = (
+    sourceFunctor: SurfaceTerm,
+    targetFunctor: SurfaceTerm,
+    object: SurfaceTerm,
+    span: SourceSpan
+): SurfaceTerm => surfaceOperation(
+    'transfor.component.full',
+    [sourceFunctor, targetFunctor, object],
+    span
+);
+
 export const surfaceTapp0 = (
     transformation: SurfaceTerm,
     object: SurfaceTerm,
@@ -520,6 +657,17 @@ export const surfaceTapp0 = (
 ): SurfaceTerm => surfaceOperation(
     'transfor.component.capped',
     [transformation, object],
+    span
+);
+
+export const surfaceTapp1Func = (
+    transformation: SurfaceTerm,
+    sourceEndpoint: SurfaceTerm,
+    targetEndpoint: SurfaceTerm,
+    span: SourceSpan
+): SurfaceTerm => surfaceOperation(
+    'transfor.hom.full',
+    [transformation, sourceEndpoint, targetEndpoint],
     span
 );
 

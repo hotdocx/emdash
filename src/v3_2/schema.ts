@@ -14,7 +14,7 @@ export type CoreTypeTag =
     | 'hom'
     | 'transfor';
 
-export type CoreOwnerKind = 'classifier' | 'projection';
+export type CoreOwnerKind = 'classifier' | 'category-former' | 'projection';
 
 export type CoreSlotRole =
     | 'classifier'
@@ -48,19 +48,28 @@ export interface ClassifierOwnerSchema {
     slots: readonly CoreOwnerSlotSchema[];
 }
 
+export interface CategoryFormerOwnerSchema {
+    kind: 'category-former';
+    former: 'hom' | 'transfor';
+    slots: readonly CoreOwnerSlotSchema[];
+}
+
 export interface ProjectionOwnerSchema {
     kind: 'projection';
     family: 'functor-action' | 'transfor-action';
     dimension: 'object' | 'hom';
-    extent: 'capped';
+    extent: 'full' | 'capped' | 'evaluator';
     variance: 'diagonal' | 'off-diagonal';
     slots: readonly CoreOwnerSlotSchema[];
 }
 
-export type CoreOwnerSchema = ClassifierOwnerSchema | ProjectionOwnerSchema;
+export type CoreOwnerSchema =
+    | ClassifierOwnerSchema
+    | CategoryFormerOwnerSchema
+    | ProjectionOwnerSchema;
 
 /**
- * The small Core owner catalog needed by ELAB-1A.
+ * The small Core owner catalog needed through ELAB-1B.
  *
  * No entry contains a backend symbol or module name. Slot order and plicity
  * are semantic declaration data shared by checking and all backends.
@@ -112,17 +121,50 @@ export const CORE_OWNER_SCHEMAS = {
             { name: 'G', plicity: 'explicit', role: 'target-functor' }
         ]
     },
+    'hom-category': {
+        kind: 'category-former',
+        former: 'hom',
+        slots: [
+            { name: 'A', plicity: 'explicit', role: 'category' },
+            { name: 'X', plicity: 'explicit', role: 'source-endpoint' },
+            { name: 'Y', plicity: 'explicit', role: 'target-endpoint' }
+        ]
+    },
+    'transfor-category': {
+        kind: 'category-former',
+        former: 'transfor',
+        slots: [
+            { name: 'A', plicity: 'implicit', role: 'source-category' },
+            { name: 'B', plicity: 'implicit', role: 'target-category' },
+            { name: 'F', plicity: 'explicit', role: 'source-functor' },
+            { name: 'G', plicity: 'explicit', role: 'target-functor' }
+        ]
+    },
     'functor-object': {
         kind: 'projection',
         family: 'functor-action',
         dimension: 'object',
-        extent: 'capped',
+        extent: 'evaluator',
         variance: 'diagonal',
         slots: [
             { name: 'A', plicity: 'implicit', role: 'source-category' },
             { name: 'B', plicity: 'implicit', role: 'target-category' },
             { name: 'F', plicity: 'explicit', role: 'functor' },
             { name: 'X', plicity: 'explicit', role: 'object' }
+        ]
+    },
+    'functor-hom-full': {
+        kind: 'projection',
+        family: 'functor-action',
+        dimension: 'hom',
+        extent: 'full',
+        variance: 'diagonal',
+        slots: [
+            { name: 'A', plicity: 'implicit', role: 'source-category' },
+            { name: 'B', plicity: 'implicit', role: 'target-category' },
+            { name: 'F', plicity: 'explicit', role: 'functor' },
+            { name: 'X', plicity: 'implicit', role: 'source-endpoint' },
+            { name: 'Y', plicity: 'implicit', role: 'target-endpoint' }
         ]
     },
     'functor-hom-capped': {
@@ -140,6 +182,20 @@ export const CORE_OWNER_SCHEMAS = {
             { name: 'f', plicity: 'explicit', role: 'arrow' }
         ]
     },
+    'transfor-component-full': {
+        kind: 'projection',
+        family: 'transfor-action',
+        dimension: 'object',
+        extent: 'full',
+        variance: 'diagonal',
+        slots: [
+            { name: 'A', plicity: 'implicit', role: 'source-category' },
+            { name: 'B', plicity: 'implicit', role: 'target-category' },
+            { name: 'F', plicity: 'implicit', role: 'source-functor' },
+            { name: 'G', plicity: 'implicit', role: 'target-functor' },
+            { name: 'Y', plicity: 'explicit', role: 'object' }
+        ]
+    },
     'transfor-component-capped': {
         kind: 'projection',
         family: 'transfor-action',
@@ -152,6 +208,22 @@ export const CORE_OWNER_SCHEMAS = {
             { name: 'F', plicity: 'implicit', role: 'source-functor' },
             { name: 'G', plicity: 'implicit', role: 'target-functor' },
             { name: 'Y', plicity: 'explicit', role: 'object' },
+            { name: 'eta', plicity: 'explicit', role: 'transfor' }
+        ]
+    },
+    'transfor-hom-full': {
+        kind: 'projection',
+        family: 'transfor-action',
+        dimension: 'hom',
+        extent: 'full',
+        variance: 'off-diagonal',
+        slots: [
+            { name: 'A', plicity: 'implicit', role: 'source-category' },
+            { name: 'B', plicity: 'implicit', role: 'target-category' },
+            { name: 'F', plicity: 'implicit', role: 'source-functor' },
+            { name: 'G', plicity: 'implicit', role: 'target-functor' },
+            { name: 'X', plicity: 'implicit', role: 'source-endpoint' },
+            { name: 'Y', plicity: 'implicit', role: 'target-endpoint' },
             { name: 'eta', plicity: 'explicit', role: 'transfor' }
         ]
     },
@@ -176,13 +248,57 @@ export const CORE_OWNER_SCHEMAS = {
 
 export type CoreOwnerId = keyof typeof CORE_OWNER_SCHEMAS;
 
+export interface ProjectionPairSchema {
+    family: ProjectionOwnerSchema['family'];
+    dimension: ProjectionOwnerSchema['dimension'];
+    variance: ProjectionOwnerSchema['variance'];
+    full: CoreOwnerId;
+    capped: CoreOwnerId;
+    evaluator: CoreOwnerId;
+}
+
+/**
+ * The active kernel owns each evaluator connection by a rule of the shape
+ * `fapp0(full, argument) ↪ capped`. Recording the pairs here keeps that
+ * relationship visible without turning either side into a backend spelling.
+ */
+export const PROJECTION_PAIR_SCHEMAS = {
+    'functor-hom': {
+        family: 'functor-action',
+        dimension: 'hom',
+        variance: 'diagonal',
+        full: 'functor-hom-full',
+        capped: 'functor-hom-capped',
+        evaluator: 'functor-object'
+    },
+    'transfor-component': {
+        family: 'transfor-action',
+        dimension: 'object',
+        variance: 'diagonal',
+        full: 'transfor-component-full',
+        capped: 'transfor-component-capped',
+        evaluator: 'functor-object'
+    },
+    'transfor-hom': {
+        family: 'transfor-action',
+        dimension: 'hom',
+        variance: 'off-diagonal',
+        full: 'transfor-hom-full',
+        capped: 'transfor-hom-capped',
+        evaluator: 'functor-object'
+    }
+} as const satisfies Record<string, ProjectionPairSchema>;
+
 export type SurfaceOperationId =
     | 'functor.object'
+    | 'functor.hom.full'
     | 'functor.hom.capped'
+    | 'transfor.component.full'
     | 'transfor.component.capped'
+    | 'transfor.hom.full'
     | 'transfor.hom.capped';
 
-export type OperationOperandName = 'subject' | 'argument';
+export type OperationOperandName = string;
 
 export type CoreTypeField =
     | 'category'
@@ -191,7 +307,8 @@ export type CoreTypeField =
     | 'sourceObject'
     | 'targetObject'
     | 'sourceFunctor'
-    | 'targetFunctor';
+    | 'targetFunctor'
+    | 'objectCategory';
 
 export type SchemaValue =
     | {
@@ -211,7 +328,7 @@ export type SchemaValue =
 
 export interface OperationOperandSchema {
     name: OperationOperandName;
-    expectedType: CoreTypeTag;
+    expectedKind: CoreTypeTag | 'object-like';
     errorCode:
         | 'EXPECTED_FUNCTOR'
         | 'EXPECTED_OBJECT'
@@ -282,32 +399,91 @@ const ownerApplication = (
 const subjectSource = operandTypeField('subject', 'sourceCategory');
 const subjectTarget = operandTypeField('subject', 'targetCategory');
 const argumentCategory = operandTypeField('argument', 'category');
+const argumentObjectCategory = operandTypeField('argument', 'objectCategory');
 const subjectTerm = operandTerm('subject');
 const argumentTerm = operandTerm('argument');
-const sourceFunctor = operandTypeField('subject', 'sourceFunctor');
-const targetFunctor = operandTypeField('subject', 'targetFunctor');
+const subjectSourceFunctor = operandTypeField('subject', 'sourceFunctor');
+const subjectTargetFunctor = operandTypeField('subject', 'targetFunctor');
 const sourceObject = operandTypeField('argument', 'sourceObject');
 const targetObject = operandTypeField('argument', 'targetObject');
 
-const sameSourceCategory: OperationConstraintSchema = {
-    kind: 'equal',
-    left: subjectSource,
-    right: argumentCategory,
-    blame: 'argument',
-    errorCode: 'CATEGORY_MISMATCH'
-};
+const sourceEndpointTerm = operandTerm('sourceEndpoint');
+const targetEndpointTerm = operandTerm('targetEndpoint');
+const sourceEndpointCategory = operandTypeField(
+    'sourceEndpoint',
+    'objectCategory'
+);
+const targetEndpointCategory = operandTypeField(
+    'targetEndpoint',
+    'objectCategory'
+);
 
-const functorObjectAt = (functor: SchemaValue, object: SchemaValue) =>
+const sourceFunctorTerm = operandTerm('sourceFunctor');
+const targetFunctorTerm = operandTerm('targetFunctor');
+const sourceFunctorSource = operandTypeField(
+    'sourceFunctor',
+    'sourceCategory'
+);
+const sourceFunctorTarget = operandTypeField(
+    'sourceFunctor',
+    'targetCategory'
+);
+const targetFunctorSource = operandTypeField(
+    'targetFunctor',
+    'sourceCategory'
+);
+const targetFunctorTarget = operandTypeField(
+    'targetFunctor',
+    'targetCategory'
+);
+
+const equal = (
+    left: SchemaValue,
+    right: SchemaValue,
+    blame: OperationOperandName
+): OperationConstraintSchema => ({
+    kind: 'equal',
+    left,
+    right,
+    blame,
+    errorCode: 'CATEGORY_MISMATCH'
+});
+
+const functorObjectAt = (
+    sourceCategory: SchemaValue,
+    targetCategory: SchemaValue,
+    functor: SchemaValue,
+    object: SchemaValue
+) =>
     ownerApplication(
         'functor-object',
-        subjectSource,
-        subjectTarget,
+        sourceCategory,
+        targetCategory,
         functor,
         object
     );
 
+const homCategoryAt = (
+    category: SchemaValue,
+    source: SchemaValue,
+    target: SchemaValue
+) => ownerApplication('hom-category', category, source, target);
+
+const transforCategoryAt = (
+    sourceCategory: SchemaValue,
+    targetCategory: SchemaValue,
+    sourceFunctor: SchemaValue,
+    targetFunctor: SchemaValue
+) => ownerApplication(
+    'transfor-category',
+    sourceCategory,
+    targetCategory,
+    sourceFunctor,
+    targetFunctor
+);
+
 /**
- * Declarative lowering and result-classifier schemas for the capped ladder.
+ * Declarative lowering and result-classifier schemas for the projection ladder.
  *
  * The elaborator interprets these records uniformly. Adding an operation must
  * not require another operation-specific switch branch.
@@ -319,18 +495,20 @@ export const SURFACE_OPERATION_SCHEMAS = {
         operands: [
             {
                 name: 'subject',
-                expectedType: 'functor',
+                expectedKind: 'functor',
                 errorCode: 'EXPECTED_FUNCTOR',
                 expectation: 'its first operand to be an ordinary functor'
             },
             {
                 name: 'argument',
-                expectedType: 'object',
+                expectedKind: 'object-like',
                 errorCode: 'EXPECTED_OBJECT',
-                expectation: 'its second operand to be an object'
+                expectation: 'its second operand to be an object of a category'
             }
         ],
-        constraints: [sameSourceCategory],
+        constraints: [
+            equal(subjectSource, argumentObjectCategory, 'argument')
+        ],
         ownerArguments: [
             { slot: 'A', value: subjectSource, origin: 'recovered' },
             { slot: 'B', value: subjectTarget, origin: 'recovered' },
@@ -342,24 +520,84 @@ export const SURFACE_OPERATION_SCHEMAS = {
             category: subjectTarget
         }
     },
+    'functor.hom.full': {
+        owner: 'functor-hom-full',
+        diagnosticLabel: 'full functor hom action',
+        operands: [
+            {
+                name: 'subject',
+                expectedKind: 'functor',
+                errorCode: 'EXPECTED_FUNCTOR',
+                expectation: 'an ordinary functor'
+            },
+            {
+                name: 'sourceEndpoint',
+                expectedKind: 'object-like',
+                errorCode: 'EXPECTED_OBJECT',
+                expectation: 'a source endpoint object'
+            },
+            {
+                name: 'targetEndpoint',
+                expectedKind: 'object-like',
+                errorCode: 'EXPECTED_OBJECT',
+                expectation: 'a target endpoint object'
+            }
+        ],
+        constraints: [
+            equal(subjectSource, sourceEndpointCategory, 'sourceEndpoint'),
+            equal(subjectSource, targetEndpointCategory, 'targetEndpoint')
+        ],
+        ownerArguments: [
+            { slot: 'A', value: subjectSource, origin: 'recovered' },
+            { slot: 'B', value: subjectTarget, origin: 'recovered' },
+            { slot: 'F', value: subjectTerm, origin: 'surface' },
+            { slot: 'X', value: sourceEndpointTerm, origin: 'surface' },
+            { slot: 'Y', value: targetEndpointTerm, origin: 'surface' }
+        ],
+        result: {
+            tag: 'functor',
+            sourceCategory: homCategoryAt(
+                subjectSource,
+                sourceEndpointTerm,
+                targetEndpointTerm
+            ),
+            targetCategory: homCategoryAt(
+                subjectTarget,
+                functorObjectAt(
+                    subjectSource,
+                    subjectTarget,
+                    subjectTerm,
+                    sourceEndpointTerm
+                ),
+                functorObjectAt(
+                    subjectSource,
+                    subjectTarget,
+                    subjectTerm,
+                    targetEndpointTerm
+                )
+            )
+        }
+    },
     'functor.hom.capped': {
         owner: 'functor-hom-capped',
         diagnosticLabel: 'functor hom action',
         operands: [
             {
                 name: 'subject',
-                expectedType: 'functor',
+                expectedKind: 'functor',
                 errorCode: 'EXPECTED_FUNCTOR',
                 expectation: 'an ordinary functor'
             },
             {
                 name: 'argument',
-                expectedType: 'hom',
+                expectedKind: 'hom',
                 errorCode: 'EXPECTED_HOM',
                 expectation: 'an ordinary source arrow'
             }
         ],
-        constraints: [sameSourceCategory],
+        constraints: [
+            equal(subjectSource, argumentCategory, 'argument')
+        ],
         ownerArguments: [
             { slot: 'A', value: subjectSource, origin: 'recovered' },
             { slot: 'B', value: subjectTarget, origin: 'recovered' },
@@ -371,8 +609,78 @@ export const SURFACE_OPERATION_SCHEMAS = {
         result: {
             tag: 'hom',
             category: subjectTarget,
-            sourceObject: functorObjectAt(subjectTerm, sourceObject),
-            targetObject: functorObjectAt(subjectTerm, targetObject)
+            sourceObject: functorObjectAt(
+                subjectSource,
+                subjectTarget,
+                subjectTerm,
+                sourceObject
+            ),
+            targetObject: functorObjectAt(
+                subjectSource,
+                subjectTarget,
+                subjectTerm,
+                targetObject
+            )
+        }
+    },
+    'transfor.component.full': {
+        owner: 'transfor-component-full',
+        diagnosticLabel: 'full transfor point component',
+        operands: [
+            {
+                name: 'sourceFunctor',
+                expectedKind: 'functor',
+                errorCode: 'EXPECTED_FUNCTOR',
+                expectation: 'a source functor'
+            },
+            {
+                name: 'targetFunctor',
+                expectedKind: 'functor',
+                errorCode: 'EXPECTED_FUNCTOR',
+                expectation: 'a target functor'
+            },
+            {
+                name: 'argument',
+                expectedKind: 'object-like',
+                errorCode: 'EXPECTED_OBJECT',
+                expectation: 'a source object'
+            }
+        ],
+        constraints: [
+            equal(sourceFunctorSource, targetFunctorSource, 'targetFunctor'),
+            equal(sourceFunctorTarget, targetFunctorTarget, 'targetFunctor'),
+            equal(sourceFunctorSource, argumentObjectCategory, 'argument')
+        ],
+        ownerArguments: [
+            { slot: 'A', value: sourceFunctorSource, origin: 'recovered' },
+            { slot: 'B', value: sourceFunctorTarget, origin: 'recovered' },
+            { slot: 'F', value: sourceFunctorTerm, origin: 'surface' },
+            { slot: 'G', value: targetFunctorTerm, origin: 'surface' },
+            { slot: 'Y', value: argumentTerm, origin: 'surface' }
+        ],
+        result: {
+            tag: 'functor',
+            sourceCategory: transforCategoryAt(
+                sourceFunctorSource,
+                sourceFunctorTarget,
+                sourceFunctorTerm,
+                targetFunctorTerm
+            ),
+            targetCategory: homCategoryAt(
+                sourceFunctorTarget,
+                functorObjectAt(
+                    sourceFunctorSource,
+                    sourceFunctorTarget,
+                    sourceFunctorTerm,
+                    argumentTerm
+                ),
+                functorObjectAt(
+                    sourceFunctorSource,
+                    sourceFunctorTarget,
+                    targetFunctorTerm,
+                    argumentTerm
+                )
+            )
         }
     },
     'transfor.component.capped': {
@@ -381,31 +689,103 @@ export const SURFACE_OPERATION_SCHEMAS = {
         operands: [
             {
                 name: 'subject',
-                expectedType: 'transfor',
+                expectedKind: 'transfor',
                 errorCode: 'EXPECTED_TRANSFOR',
                 expectation: 'an ordinary transfor'
             },
             {
                 name: 'argument',
-                expectedType: 'object',
+                expectedKind: 'object-like',
                 errorCode: 'EXPECTED_OBJECT',
-                expectation: 'an ordinary source object'
+                expectation: 'an object of the transfor source category'
             }
         ],
-        constraints: [sameSourceCategory],
+        constraints: [
+            equal(subjectSource, argumentObjectCategory, 'argument')
+        ],
         ownerArguments: [
             { slot: 'A', value: subjectSource, origin: 'recovered' },
             { slot: 'B', value: subjectTarget, origin: 'recovered' },
-            { slot: 'F', value: sourceFunctor, origin: 'recovered' },
-            { slot: 'G', value: targetFunctor, origin: 'recovered' },
+            { slot: 'F', value: subjectSourceFunctor, origin: 'recovered' },
+            { slot: 'G', value: subjectTargetFunctor, origin: 'recovered' },
             { slot: 'Y', value: argumentTerm, origin: 'surface' },
             { slot: 'eta', value: subjectTerm, origin: 'surface' }
         ],
         result: {
             tag: 'hom',
             category: subjectTarget,
-            sourceObject: functorObjectAt(sourceFunctor, argumentTerm),
-            targetObject: functorObjectAt(targetFunctor, argumentTerm)
+            sourceObject: functorObjectAt(
+                subjectSource,
+                subjectTarget,
+                subjectSourceFunctor,
+                argumentTerm
+            ),
+            targetObject: functorObjectAt(
+                subjectSource,
+                subjectTarget,
+                subjectTargetFunctor,
+                argumentTerm
+            )
+        }
+    },
+    'transfor.hom.full': {
+        owner: 'transfor-hom-full',
+        diagnosticLabel: 'full transfor off-diagonal hom action',
+        operands: [
+            {
+                name: 'subject',
+                expectedKind: 'transfor',
+                errorCode: 'EXPECTED_TRANSFOR',
+                expectation: 'an ordinary transfor'
+            },
+            {
+                name: 'sourceEndpoint',
+                expectedKind: 'object-like',
+                errorCode: 'EXPECTED_OBJECT',
+                expectation: 'a source endpoint object'
+            },
+            {
+                name: 'targetEndpoint',
+                expectedKind: 'object-like',
+                errorCode: 'EXPECTED_OBJECT',
+                expectation: 'a target endpoint object'
+            }
+        ],
+        constraints: [
+            equal(subjectSource, sourceEndpointCategory, 'sourceEndpoint'),
+            equal(subjectSource, targetEndpointCategory, 'targetEndpoint')
+        ],
+        ownerArguments: [
+            { slot: 'A', value: subjectSource, origin: 'recovered' },
+            { slot: 'B', value: subjectTarget, origin: 'recovered' },
+            { slot: 'F', value: subjectSourceFunctor, origin: 'recovered' },
+            { slot: 'G', value: subjectTargetFunctor, origin: 'recovered' },
+            { slot: 'X', value: sourceEndpointTerm, origin: 'surface' },
+            { slot: 'Y', value: targetEndpointTerm, origin: 'surface' },
+            { slot: 'eta', value: subjectTerm, origin: 'surface' }
+        ],
+        result: {
+            tag: 'functor',
+            sourceCategory: homCategoryAt(
+                subjectSource,
+                sourceEndpointTerm,
+                targetEndpointTerm
+            ),
+            targetCategory: homCategoryAt(
+                subjectTarget,
+                functorObjectAt(
+                    subjectSource,
+                    subjectTarget,
+                    subjectSourceFunctor,
+                    sourceEndpointTerm
+                ),
+                functorObjectAt(
+                    subjectSource,
+                    subjectTarget,
+                    subjectTargetFunctor,
+                    targetEndpointTerm
+                )
+            )
         }
     },
     'transfor.hom.capped': {
@@ -414,23 +794,25 @@ export const SURFACE_OPERATION_SCHEMAS = {
         operands: [
             {
                 name: 'subject',
-                expectedType: 'transfor',
+                expectedKind: 'transfor',
                 errorCode: 'EXPECTED_TRANSFOR',
                 expectation: 'an ordinary transfor'
             },
             {
                 name: 'argument',
-                expectedType: 'hom',
+                expectedKind: 'hom',
                 errorCode: 'EXPECTED_HOM',
                 expectation: 'an ordinary source arrow'
             }
         ],
-        constraints: [sameSourceCategory],
+        constraints: [
+            equal(subjectSource, argumentCategory, 'argument')
+        ],
         ownerArguments: [
             { slot: 'A', value: subjectSource, origin: 'recovered' },
             { slot: 'B', value: subjectTarget, origin: 'recovered' },
-            { slot: 'F', value: sourceFunctor, origin: 'recovered' },
-            { slot: 'G', value: targetFunctor, origin: 'recovered' },
+            { slot: 'F', value: subjectSourceFunctor, origin: 'recovered' },
+            { slot: 'G', value: subjectTargetFunctor, origin: 'recovered' },
             { slot: 'X', value: sourceObject, origin: 'recovered' },
             { slot: 'Y', value: targetObject, origin: 'recovered' },
             { slot: 'eta', value: subjectTerm, origin: 'surface' },
@@ -439,8 +821,18 @@ export const SURFACE_OPERATION_SCHEMAS = {
         result: {
             tag: 'hom',
             category: subjectTarget,
-            sourceObject: functorObjectAt(sourceFunctor, sourceObject),
-            targetObject: functorObjectAt(targetFunctor, targetObject)
+            sourceObject: functorObjectAt(
+                subjectSource,
+                subjectTarget,
+                subjectSourceFunctor,
+                sourceObject
+            ),
+            targetObject: functorObjectAt(
+                subjectSource,
+                subjectTarget,
+                subjectTargetFunctor,
+                targetObject
+            )
         }
     }
 } as const satisfies Record<SurfaceOperationId, SurfaceOperationSchema>;
@@ -470,7 +862,56 @@ export function validateSurfaceOperationCatalog(): void {
                 );
             }
         });
+
+        const operandNames = operation.operands.map(operand => operand.name);
+        if (new Set(operandNames).size !== operandNames.length) {
+            throw new Error(
+                `Operation ${operationId} declares a duplicate operand name`
+            );
+        }
+    }
+}
+
+export function validateProjectionPairCatalog(): void {
+    for (const [pairId, pair] of Object.entries(PROJECTION_PAIR_SCHEMAS)) {
+        const full = CORE_OWNER_SCHEMAS[pair.full];
+        const capped = CORE_OWNER_SCHEMAS[pair.capped];
+        const evaluator = CORE_OWNER_SCHEMAS[pair.evaluator];
+
+        if (full.kind !== 'projection' || full.extent !== 'full') {
+            throw new Error(
+                `Projection pair ${pairId} does not name a full projection`
+            );
+        }
+        if (capped.kind !== 'projection' || capped.extent !== 'capped') {
+            throw new Error(
+                `Projection pair ${pairId} does not name a capped projection`
+            );
+        }
+        if (
+            full.family !== pair.family ||
+            capped.family !== pair.family ||
+            full.dimension !== pair.dimension ||
+            capped.dimension !== pair.dimension ||
+            full.variance !== pair.variance ||
+            capped.variance !== pair.variance
+        ) {
+            throw new Error(
+                `Projection pair ${pairId} disagrees with its owner metadata`
+            );
+        }
+        if (
+            evaluator.kind !== 'projection' ||
+            evaluator.family !== 'functor-action' ||
+            evaluator.dimension !== 'object' ||
+            evaluator.extent !== 'evaluator'
+        ) {
+            throw new Error(
+                `Projection pair ${pairId} has a non-evaluator projection`
+            );
+        }
     }
 }
 
 validateSurfaceOperationCatalog();
+validateProjectionPairCatalog();

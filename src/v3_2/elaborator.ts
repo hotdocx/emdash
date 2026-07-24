@@ -1,5 +1,5 @@
 /**
- * Declarative schema-directed elaboration for the ordinary v3.2 projection
+ * Declarative schema-directed elaboration for the active v3.2 projection
  * family.
  *
  * This is intentionally not a second evaluator. It interprets backend-neutral
@@ -31,7 +31,9 @@ import {
 import {
     CoreType,
     SurfaceContext,
-    SurfaceTerm
+    SurfaceTerm,
+    coreTypeObjectCategory,
+    isObjectLikeCoreType
 } from './surface';
 
 export type ElaborationErrorCode =
@@ -102,7 +104,7 @@ function categoryMismatch(
     throw new V32ElaborationError(
         'CATEGORY_MISMATCH',
         span,
-        `${operationName} expected source category ` +
+        `${operationName} expected category ` +
         `${renderExpression(expected)}, but received ` +
         renderExpression(actual)
     );
@@ -120,7 +122,8 @@ function recoveredSlot(
 
 function coreTypeField(
     type: CoreType,
-    field: CoreTypeField
+    field: CoreTypeField,
+    span: SourceSpan
 ): KernelExpression {
     switch (field) {
         case 'category':
@@ -150,6 +153,15 @@ function coreTypeField(
         case 'targetFunctor':
             if (type.tag === 'transfor') return type.targetFunctor;
             break;
+        case 'objectCategory': {
+            const category = coreTypeObjectCategory(
+                type,
+                span,
+                `schema object-category view of ${type.tag}`
+            );
+            if (category) return category;
+            break;
+        }
         default: {
             const exhaustive: never = field;
             return exhaustive;
@@ -172,7 +184,8 @@ function evaluateSchemaValue(
         case 'operand-type-field':
             return coreTypeField(
                 operands[schemaValue.operand].type,
-                schemaValue.field
+                schemaValue.field,
+                span
             );
         case 'owner-application': {
             const ownerSchema = CORE_OWNER_SCHEMAS[schemaValue.owner];
@@ -301,7 +314,11 @@ function elaborateOperation(
     schema.operands.forEach((operandSchema, index) => {
         const operandSurface = surface.operands[index];
         const operand = elaborateSurfaceTerm(context, operandSurface);
-        if (operand.type.tag !== operandSchema.expectedType) {
+        const matchesExpectedKind =
+            operandSchema.expectedKind === 'object-like'
+                ? isObjectLikeCoreType(operand.type)
+                : operand.type.tag === operandSchema.expectedKind;
+        if (!matchesExpectedKind) {
             throw new V32ElaborationError(
                 operandSchema.errorCode,
                 operandSurface.span,
