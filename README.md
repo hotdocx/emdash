@@ -27,6 +27,48 @@ Primary artifacts:
 - Persistent-goal Git experimentation and checkpoint workflow:
   [`./docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md)
 
+## TypeScript v3.2 deployed profile
+
+After H-05/D-039, the small TypeScript checker/evaluator is the authoritative
+deployed runtime only for the content-pinned `emdash-v3.2-mvp-1` profile: its
+16 owners and three reviewed runtime rules. The browser entry point is
+[`src/v3_2/browser.ts`](./src/v3_2/browser.ts), which exposes the frozen
+`CORE_MVP_MANIFEST` identity and has no production Lambdapi dependency.
+String parsing is not part of this release; applications construct the typed
+surface or explicit Core AST directly.
+
+Lambdapi remains the active mathematical specification, the required
+fixed-corpus CI and subject-reduction oracle, and the acceptance authority for
+five selected semantic-boundary changes:
+
+1. a selected owner signature;
+2. a selected runtime-rule shape or authority;
+3. promotion of an owner or rule into the product profile;
+4. a termination, confluence, or subject-reduction claim;
+5. a shared-corpus backend binding.
+
+Refactors, diagnostic/surface work, and packaging changes that preserve the
+frozen semantic and browser-import boundaries do not require a new
+declaration-level authority review. General confluence and standalone
+TypeScript subject reduction remain withheld, and no latency, throughput, or
+scale SLA is claimed.
+
+The TypeScript-only development baseline still skips process-backed probes:
+
+```bash
+./scripts/pnpmw run check:ts
+```
+
+The explicit conformance gate requires Lambdapi and runs all three frozen
+differential suites with no opt-in skips under a 60-second bound:
+
+```bash
+./scripts/pnpmw run check:conformance
+```
+
+`check:all` now includes that conformance gate before the complete Lambdapi
+workspace CI.
+
 ## Development workspace and Git worktrees
 
 The repository uses one pnpm 11 workspace and one `pnpm-lock.yaml` for the
@@ -82,6 +124,7 @@ Common root commands are:
 
 ```bash
 ./scripts/pnpmw run check:ts
+./scripts/pnpmw run check:conformance
 ./scripts/pnpmw run kernel:check
 ./scripts/pnpmw run print:check
 ./scripts/pnpmw run book:check

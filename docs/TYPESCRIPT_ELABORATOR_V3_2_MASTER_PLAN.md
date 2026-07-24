@@ -15,7 +15,7 @@ H-03/D-023, H-04/D-030, and H-05/D-039 exactly as proposed
 Status: active living master plan; H-01, H-03, H-04, and H-05 are resolved,
 ELAB-2C is complete without triggering H-02, TSK-2 and TSK-3 are complete,
 MIGRATE-1/MIGRATE-2 are complete, and GRADUATE-1 is complete with
-RELEASE-1A source-mapped diagnostics complete and RELEASE-1B next
+RELEASE-1A/RELEASE-1B complete and RELEASE-1C next
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -194,6 +194,7 @@ cleanly.
 | D-038 | accepted | Execute MIGRATE-2 as the exact D-037 cut: remove all 36 frozen targets, retain the MIGRATE-1D inventory/readiness records as historical audit inputs, and publish a distinct frozen completion result. Give browser consumers a narrow v3.2 product entry point containing the session/checker/Core path but excluding process-backed probes, differential harnesses, and migration APIs. Preserve the reviewed manifest hash while validating its canonical content directly, so the product checker has no Node-only crypto dependency. Rewrite—not emulate—the standalone example, remove `parsimmon` through pnpm, and retain no legacy compatibility API. | Every target is absent and every surviving import is audited against the deletion set. `src/v3_2/browser.ts` reaches the checker, session, runtime, and manifest with no `node:` import and cannot reach probe/differential/migration modules. Its focused consumer checks a category-polymorphic identity and session isolation; the standalone fixture passes strict TypeScript and a Vite production build. Manifest drift tests remain green with the same reviewed SHA-256 pin, the root runner loads only v3.2 suites, active/historical docs are labeled correctly, and `LEGACY_MIGRATION_COMPLETION` rejects deletion/edit/dependency/browser-boundary drift. |
 | D-039 | accepted; H-05 approved 2026-07-24 | Graduate the TypeScript checker/evaluator as the authoritative deployed runtime kernel only for the exact content-pinned `emdash-v3.2-mvp-1` profile: sixteen owners and three H-04-authorized runtime rules, through the narrow browser API, with no production Lambdapi dependency. Retain Lambdapi as active mathematical specification, fixed-corpus CI and subject-reduction oracle, and an ongoing acceptance authority for five selected boundary changes: selected owner signatures; selected rule shape or authority; owner/rule promotion; termination, confluence, or subject-reduction claims; and shared-corpus backend bindings. Refactors, surface/diagnostic work, and packaging changes that preserve the frozen semantic/import boundaries need no new declaration-level authority review. | The user approved H-05/D-039 exactly as proposed. `CORE_MVP_GRADUATION_REVIEW` is the distinct deep-frozen GRADUATE-1B record: it snapshots the unchanged `authorityAuthorized: false` proposal, authorizes deployed TypeScript ownership only for the exact manifest identity, retains every approved Lambdapi role and trigger, forbids production runtime coupling, and preserves all H-04 theorem non-claims. It authorizes no additional owner/rule or performance SLA, does not declare RELEASE-READY, and names that tranche as the next slice. |
 | D-040 | accepted | Split RELEASE-READY into source-mapped conformance diagnostics (RELEASE-1A), mandatory shared-fragment oracle wiring plus documentation/example/policy synchronization (RELEASE-1B), and a final drift-checked release-completion record with performance-claim scope and full gates (RELEASE-1C). Start with C-18 because diagnostic parsing is an implementation boundary independent of the approved acceptance policy. | Lambdapi diagnostics have an observed `[probe-path:line:start-end]` location form, while `SerializedProbe.sourceMap` already owns exact generated statement lines and original spans. RELEASE-1A can therefore preserve raw diagnostics, map only the exact temporary probe path and exact statement line, expose structured mappings, and prepend source-facing annotations without changing Core, the browser runtime, or any mathematical authority. CI policy and release claims remain separate reviewable changes. |
+| D-041 | accepted | Keep `check:ts` as the Lambdapi-independent development baseline, add a separate 60-second `check:conformance` over the exact three TSK-3 shared-corpus suites with every oracle process enabled, and make that command mandatory inside `check:all`. Freeze the post-graduation policy separately from the historical TSK-3 completion and H-05 review. Expose only the already-frozen MVP manifest through the Node-free browser barrel; keep policy, probes, and differential harnesses outside it. | `CORE_MVP_RELEASE_POLICY` pins the H-05 profile, 16/3/2 corpus dimensions, three exact test files, required oracle roles and five triggers, synchronized public artifacts, diagnostic state, parser/review-gate state, and all theorem/performance non-claims. Package-script drift and public-document/example drift are executable failures. The mandatory command passes 19 tests / 3 suites with three actual Lambdapi processes and no skips in 3.5 seconds; the standalone TypeScript/Vite consumer remains green and shows `CORE_MVP_MANIFEST.revision`. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -457,8 +458,8 @@ must identify their common baseline.
 | GRADUATE-1B | complete; H-05 approved | GRADUATE-1A, reviewed D-039 | The distinct immutable review artifact records the exact approval, deployed profile, retained Lambdapi roles/triggers, forbidden runtime dependency, H-04 non-claims, and remaining release boundary without rewriting the proposal. |
 | RELEASE-READY | split | GRADUATE-1B | Release work is split so backend diagnostics, mandatory conformance policy, and the final completion claim remain independently reviewable. |
 | RELEASE-1A | complete | GRADUATE-1B | C-18 preserves raw Lambdapi output while mapping exact temporary-probe diagnostic locations back to structured source spans and source-facing text. Synthetic ANSI/relative/absolute/duplicate/unmapped cases and one bounded real failure are green without touching the browser runtime. |
-| RELEASE-1B | dependency-ready / next | RELEASE-1A | Make the approved shared-fragment Lambdapi corpus mandatory in the conformance gate and synchronize manifests, public documentation, examples, and residual acceptance-policy wording. |
-| RELEASE-1C | pending | RELEASE-1B | Freeze a release-completion record, explicitly bound performance claims, verify browser packaging and all repository gates, and mark RELEASE-READY only if no residual ledger item remains. |
+| RELEASE-1B | complete | RELEASE-1A | `check:conformance` enables every oracle process in the exact TSK-3 owner/rule/higher-cell suites under one 60-second bound, and `check:all` requires it. A drift-checked policy binds the approved profile and retained Lambdapi roles to package scripts, public docs, browser manifest identity, and the standalone example without introducing runtime coupling. |
+| RELEASE-1C | dependency-ready / next | RELEASE-1B | Freeze a release-completion record, explicitly bound performance claims, verify browser packaging and all repository gates, and mark RELEASE-READY only if no residual ledger item remains. |
 
 If a slice grows beyond one reviewable semantic claim, split it in this table
 before continuing. Do not mark a row complete merely because its code compiles:
@@ -3271,6 +3272,121 @@ git diff --check
   passed
 ```
 
+## Completed Slice: RELEASE-1B
+
+RELEASE-1B turns the H-05 oracle policy into a required repository boundary
+without coupling the deployed checker to Lambdapi:
+
+- `CORE_MVP_RELEASE_POLICY` is a distinct deep-frozen `RELEASE-1B` artifact.
+  It validates the unchanged H-03 manifest, TSK-3 completion, and GRADUATE-1B
+  approval before pinning the exact profile and retained oracle roles;
+- the historical TSK-3 completion still says “required until graduation” and
+  the H-05 review still says `releaseReady: false`. RELEASE-1B does not rewrite
+  either record; its post-graduation policy requires the oracle going forward;
+- `check:conformance` runs the exact owner, rule, and higher-cell differential
+  suites with `EMDASH_RUN_LAMBDAPI_PROBES=1` under one 60-second process
+  bound. `check:all` now requires that command between `check:ts` and the full
+  Lambdapi workspace CI;
+- executable drift checks bind the command bodies, three test files, 16/3/2
+  corpus dimensions, three oracle processes, five acceptance triggers, and
+  every synchronized public artifact;
+- the browser barrel exports the already-reviewed `CORE_MVP_MANIFEST`, letting
+  consumers observe `emdash-v3.2-mvp-1`, 16 owners, and three rules. It still
+  exports no release policy, process probe, or differential harness and remains
+  transitively Node-free;
+- the root README, elaborator handoff, standalone README, and browser example
+  now agree on deployed TypeScript authority, required Lambdapi roles, the
+  absence of production coupling, withheld theorem/performance claims, and the
+  unimplemented parser boundary;
+- the standalone example prints the exact manifest revision before checking
+  its category-polymorphic identity.
+
+### Experiment RELEASE-1B-MANDATORY-ORACLE
+
+```text
+Experiment ID: RELEASE-1B-MANDATORY-ORACLE
+Date and checkpoint: 2026-07-24 at RELEASE-1A checkpoint ac83635
+Question/hypothesis: can the entire frozen shared corpus be mandatory in the
+  repository gate within the 60-second SOP bound while the browser deployment
+  remains Lambdapi- and Node-process-free?
+Authority and owner position inspected: unchanged H-03 manifest, three H-04
+  runtime rules, TSK-3 owner/rule/higher-cell corpus, and H-05 policy only; no
+  mathematical declaration or rule changed.
+Current worktree/branch and baseline relationship:
+  goal/typescript-elaborator-v3.2 at descendant ac83635 of baseline
+  a06433e57cba95e7d35f8577b7c71912862c3d25
+Minimal positive consumer: the exact 19-test TSK-3 corpus with all three
+  process-backed Lambdapi checks enabled, followed by the standalone Vite
+  identity example reading CORE_MVP_MANIFEST.revision.
+Relevant negative/non-collapse consumer: release-policy, package-script,
+  documentation, corpus-dimension, browser-export, theorem-claim, and
+  production-dependency drift; existing import traversal still rejects every
+  Node/process-backed module from the browser graph.
+Probe command and bounded result:
+  ./scripts/pnpmw run check:conformance
+  passes 19 tests / 3 suites with no skips and three actual Lambdapi processes
+  in 3.5 seconds under the outer 60-second bound.
+Observed result: the exact fixed corpus is comfortably bounded and requires no
+  production runtime change. The standalone fixture still typechecks and Vite
+  transforms 48 modules into a production build.
+Unexpected result or failure: the first documentation harness used
+  line-sensitive regular expressions, and one dynamic import omitted the
+  NodeNext `.js` spelling. Whitespace-aware assertions plus the normal static
+  TypeScript import fixed the harness without weakening its semantic checks.
+TypeScript consequence: accept D-041; keep check:ts lightweight, make the
+  explicit conformance command mandatory in check:all, and publish the frozen
+  profile identity through the browser barrel.
+Lambdapi consequence: retain the active sources unchanged as mandatory
+  mathematical/fixed-corpus/subject-reduction evidence and selected-change
+  acceptance authority.
+Decision: accept.
+Plan rows changed: D-041 accepted; RELEASE-1B complete; RELEASE-1C next.
+Remaining prerequisite or human review: none for RELEASE-1C.
+```
+
+### RELEASE-1B validation
+
+Validated on the exact RELEASE-1B worktree diff:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_release_policy_tests.ts
+  tests/v3_2_browser_api_tests.ts
+  tests/v3_2_graduation_review_tests.ts
+  passed 13 tests / 3 suites with no skips
+
+./scripts/pnpmw run check:conformance
+  passed 19 tests / 3 suites with three actual Lambdapi oracle processes,
+  no skips, and a 3.5-second result under the 60-second outer bound
+
+node --require ts-node/register --test tests/v3_2_*_tests.ts
+  passed 246 tests / 28 suites: 226 passed, 20 opt-in probes skipped
+
+./scripts/pnpmw --dir emdash-template --ignore-workspace exec
+  tsc --noEmit -p tsconfig.json
+./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite build
+  strict TypeScript passed; Vite transformed 48 modules and built the
+  production fixture
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  246 tests / 28 suites: 226 passed, 20 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 246-test result
+  mandatory conformance passed 19 tests / 3 suites with no skips
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
 ## Current Dependency State
 
 The user resolved H-01, H-03, H-04, and H-05 on 2026-07-24, and their
@@ -3295,7 +3411,9 @@ dependent slices are complete:
   migrates every consumer/package edge without a compatibility API;
 - GRADUATE-1A freezes the D-039 recommendation without authorizing it.
   GRADUATE-1B records the exact approval without rewriting it. RELEASE-READY
-  is split, RELEASE-1A completes C-18, and RELEASE-1B is next.
+  is split; RELEASE-1A completes C-18, RELEASE-1B makes fixed-corpus
+  conformance mandatory and synchronizes public policy, and RELEASE-1C is
+  next.
 
 None of these approvals promotes a recorded rule authority class. Do not guess a
 displayed-to-ordinary runtime equality, promote the conformance-only owners,

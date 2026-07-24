@@ -3,6 +3,7 @@ import * as emdash from './emdash_api';
 import './styles.css';
 
 const exampleScript = `// Welcome to the emdash playground!
+// Run the exact emdash-v3.2-mvp-1 deployed profile.
 // Build and check a category-polymorphic identity in explicit v3.2 Core.
 const source = emdash.provenance("surface", "playground identity");
 const implicit = emdash.binderMode("implicit", "functorial");
@@ -41,6 +42,7 @@ const term = emdash.kernelLambda(
 const session = new emdash.CoreElaborationSession();
 const checker = new emdash.CoreChecker(session);
 const checked = checker.check(checker.rootContext, term, expected);
+console.log("Runtime profile:", emdash.CORE_MVP_MANIFEST.revision);
 console.log("Checked term:", emdash.serializeKernelExpression(checked.term));
 console.log("Checked type:", emdash.serializeKernelExpression(checked.type));
 `;
@@ -78,7 +80,7 @@ function App() {
   return (
     <div className="container">
       <h1>emdash Playground</h1>
-      <p>Write a v3.2 Core script below and click "Run". Use the <code>emdash</code> object to access the browser-safe API.</p>
+      <p>Write an <code>emdash-v3.2-mvp-1</code> Core script below and click "Run". Use the <code>emdash</code> object to access the browser-safe API.</p>
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}

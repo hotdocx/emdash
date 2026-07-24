@@ -5,6 +5,14 @@ browser-safe emdash v3.2 TypeScript Core API. It uses session-local contexts,
 metavariables, checking, and the reviewed runtime fragment; it does not expose
 the deleted global-state prototype or a legacy compatibility API.
 
+The playground runs the exact content-pinned `emdash-v3.2-mvp-1` deployed
+profile (16 owners and three runtime rules). Its browser barrel exports the
+deep-frozen `CORE_MVP_MANIFEST` so consumers can inspect that identity. The
+TypeScript checker/evaluator is authoritative only for this profile and does
+not execute Lambdapi in production. Lambdapi remains the repository's active
+mathematical specification and mandatory shared-corpus CI/subject-reduction
+oracle.
+
 It can be run in two ways:
 1.  Locally for development and testing using Vite.
 2.  As a template within a Sandpack instance for embedding in web applications like `hotdocx`.
@@ -71,3 +79,6 @@ application must copy the v3.2 modules and adjust the one bridge path.
 
 This produces a self-contained browser project with no ambient global reset,
 legacy parser, D0/D1 category API, or Node-only Lambdapi process dependency.
+The included example prints `CORE_MVP_MANIFEST.revision` before checking a
+category-polymorphic identity, so a copied template retains an observable
+`emdash-v3.2-mvp-1` profile boundary.

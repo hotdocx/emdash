@@ -30,6 +30,9 @@ export {
 export {
     serializeKernelExpression
 } from './lambdapi';
+export {
+    CORE_MVP_MANIFEST
+} from './manifest';
 
 export type {
     BinderMode,
@@ -37,3 +40,6 @@ export type {
     Provenance,
     SourceSpan
 } from './kernel';
+export type {
+    CoreMvpManifestInput
+} from './manifest';

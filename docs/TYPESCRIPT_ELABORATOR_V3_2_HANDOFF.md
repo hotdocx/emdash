@@ -1,8 +1,9 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-Date: 2026-07-23
-Status: ELAB-0 implemented; the living master plan owns forward architecture,
-status, and execution
+Date: 2026-07-24
+Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
+RELEASE-1B synchronizes its mandatory conformance and public policy, while the
+living master plan owns remaining release work
 
 ## Purpose
 
@@ -56,17 +57,34 @@ TypeScript surface AST (string parsing optional)
 backend-neutral explicit emdash Core IR
         ├──→ small TypeScript checker/evaluator
         │       ↓
-        │    candidate deployed MVP kernel
+        │    authoritative deployed kernel for
+        │    exactly emdash-v3.2-mvp-1
         │
         └──→ deterministic Lambdapi conformance emitter
                 ↓
-             bounded differential probes and CI
+             mandatory bounded differential CI
 ```
 
-Lambdapi remains the active mathematical specification and current executable
-acceptance oracle for the shared fragment. It need not be a production runtime
-dependency. The intended TypeScript product kernel becomes authoritative only
-after the master plan's explicit parity/trust graduation gate.
+H-05/D-039 passed the explicit parity/trust graduation gate. TypeScript is now
+the authoritative deployed checker/evaluator only for the content-pinned
+`emdash-v3.2-mvp-1` manifest (16 owners and three runtime rules), through the
+browser-safe entry point. Lambdapi remains the active mathematical
+specification, required fixed-corpus CI and subject-reduction oracle, and
+acceptance authority for five selected semantic-boundary changes. It is not a
+per-term or production runtime dependency.
+
+Those five changes are selected owner signatures; selected runtime-rule shape
+or authority; promotion of an owner or rule into the product profile;
+termination, confluence, or subject-reduction claims; and shared-corpus
+backend bindings. Implementation refactors, surface/diagnostic changes, and
+packaging changes that preserve the frozen semantic/import boundaries do not
+need a new declaration-level authority review.
+
+General confluence remains withheld, as does standalone TypeScript subject
+reduction. No performance SLA is authorized. `CORE_MVP_RELEASE_POLICY` records
+this boundary without mutating the historical H-03 manifest or H-05 approval.
+The typed AST is the supported construction path; a string parser remains
+unimplemented, and neither H-02 nor H-06 is triggered by this release.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints
@@ -178,8 +196,10 @@ between branches.
 During implementation, use focused TypeScript tests first. For every emitted
 kernel form, use `emdash2/scripts/probe.sh` with a bounded temporary consumer,
 then broaden to `make -C emdash2 check`. Run
+`./scripts/pnpmw run check:conformance` to exercise the exact frozen shared
+corpus against Lambdapi with no opt-in skips. Run
 `./scripts/pnpmw run check:all` before handing off a substantial cross-layer
-change.
+change; it includes that mandatory conformance command before full kernel CI.
 
 For a persistent goal, use a dedicated branch/worktree and the checkpoint
 authorization and recovery rules in
