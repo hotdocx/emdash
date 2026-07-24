@@ -14,6 +14,11 @@ import {
 import {
     CoreOwnerId
 } from './schema';
+import {
+    CORE_MVP_MANIFEST_PROPOSAL,
+    CoreManifestRuleId,
+    CoreRuleAuthorityClass
+} from './manifest';
 
 export const LAMBDAPI_V32_MODULE = 'emdash.emdash3_2' as const;
 
@@ -200,6 +205,182 @@ export const LAMBDAPI_V32_PROOF_PROBE_BINDINGS = {
         'injective symbol eq_refl'
     )
 } as const;
+
+export interface LambdapiRuleEvidenceBinding {
+    module: typeof LAMBDAPI_V32_MODULE;
+    authority: CoreRuleAuthorityClass;
+    provenance: {
+        sources: readonly {
+            authorityPath:
+                | 'emdash2/emdash3_2.lp'
+                | 'tests/v3_2_dependent_context_tests.ts';
+            section: string;
+            declaration: string;
+        }[];
+        auditedOn: string;
+    };
+}
+
+const ruleEvidenceBinding = (
+    authority: CoreRuleAuthorityClass,
+    ...sources: LambdapiRuleEvidenceBinding['provenance']['sources']
+): LambdapiRuleEvidenceBinding => ({
+    module: LAMBDAPI_V32_MODULE,
+    authority,
+    provenance: {
+        sources,
+        auditedOn: '2026-07-23'
+    }
+});
+
+/**
+ * Backend-owned source evidence for every semantic TSK-1A rule record.
+ *
+ * Runtime and proof-time records relocate to their active owning rules.
+ * Intentional non-conversion instead relocates to the generated negative
+ * conformance probe, because absence of a runtime rule is not a declaration.
+ */
+export const LAMBDAPI_V32_RULE_EVIDENCE_BINDINGS = {
+    'projection.functor-hom.evaluate': ruleEvidenceBinding(
+        'runtime-reduction',
+        {
+            authorityPath: 'emdash2/emdash3_2.lp',
+            section: '3a. Ordinary functor classifier and action',
+            declaration:
+                'rule fapp0 (fapp1_func $F_AB) $f ↪ ' +
+                'fapp1_fapp0 $F_AB $f'
+        }
+    ),
+    'projection.transfor-component.evaluate': ruleEvidenceBinding(
+        'runtime-reduction',
+        {
+            authorityPath: 'emdash2/emdash3_2.lp',
+            section:
+                '6a. Transformation classifier, components, and generic ' +
+                'projection calculus',
+            declaration:
+                'rule fapp0 (@tapp0_func $A $B $F $G $Y) $ϵ ↪ ' +
+                '@tapp0_fapp0 $A $B $F $G $Y $ϵ'
+        }
+    ),
+    'projection.transfor-hom.evaluate': ruleEvidenceBinding(
+        'runtime-reduction',
+        {
+            authorityPath: 'emdash2/emdash3_2.lp',
+            section:
+                '6a. Transformation classifier, components, and generic ' +
+                'projection calculus',
+            declaration:
+                'rule fapp0 (@tapp1_func $A $B $F $G $X $Y $ϵ) $f ↪ ' +
+                '@tapp1_fapp0 $A $B $F $G $X $Y $ϵ $f'
+        }
+    ),
+    'comparison.constant-section': ruleEvidenceBinding(
+        'proof-time-comparison',
+        {
+            authorityPath: 'emdash2/emdash3_2.lp',
+            section: '3c. Universe categories',
+            declaration:
+                'rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y'
+        },
+        {
+            authorityPath: 'emdash2/emdash3_2.lp',
+            section: '8c. Section categories and Pi action',
+            declaration:
+                "unif_rule @Pi_cat $K (@Const_catd $K $A) ≡ " +
+                "Functor_cat $K' $A'"
+        }
+    ),
+    'nonconversion.constant-section.runtime': ruleEvidenceBinding(
+        'intentional-non-conversion',
+        {
+            authorityPath: 'emdash2/emdash3_2.lp',
+            section: '3c. Universe categories',
+            declaration:
+                'rule Hom_cat Cat_cat $X $Y ↪ Functor_cat $X $Y'
+        },
+        {
+            authorityPath: 'tests/v3_2_dependent_context_tests.ts',
+            section: 'TypeScript v3.2 ELAB-2B dependent-first context',
+            declaration: 'assertnot ⊢ @Pi_cat'
+        }
+    )
+} as const satisfies Record<
+    CoreManifestRuleId,
+    LambdapiRuleEvidenceBinding
+>;
+
+export type LambdapiRuleEvidenceCatalogInput = Readonly<
+    Record<string, LambdapiRuleEvidenceBinding | undefined>
+>;
+
+/**
+ * Ensure semantic provenance keys have one exact backend binding and preserve
+ * their authority class. This still performs no rule matching or evaluation.
+ */
+export function validateLambdapiRuleEvidenceBindings(
+    bindings: LambdapiRuleEvidenceCatalogInput =
+        LAMBDAPI_V32_RULE_EVIDENCE_BINDINGS
+): void {
+    const expected = new Map(
+        CORE_MVP_MANIFEST_PROPOSAL.rules.map(rule => [
+            rule.provenance.evidence,
+            rule
+        ])
+    );
+
+    for (const evidence of Object.keys(bindings)) {
+        if (!expected.has(evidence)) {
+            throw new Error(
+                `Lambdapi rule evidence catalog has unknown key '${evidence}'`
+            );
+        }
+    }
+
+    for (const [evidence, rule] of expected) {
+        const binding_ = bindings[evidence];
+        if (!binding_) {
+            throw new Error(
+                `Lambdapi rule evidence catalog is missing key '${evidence}'`
+            );
+        }
+        if (binding_.authority !== rule.authority) {
+            throw new Error(
+                `Lambdapi rule evidence '${evidence}' has authority ` +
+                `${binding_.authority}, expected ${rule.authority}`
+            );
+        }
+        if (
+            binding_.provenance.auditedOn !==
+            rule.provenance.auditedOn
+        ) {
+            throw new Error(
+                `Lambdapi rule evidence '${evidence}' was audited on ` +
+                `${binding_.provenance.auditedOn}, expected ` +
+                rule.provenance.auditedOn
+            );
+        }
+        if (binding_.provenance.sources.length === 0) {
+            throw new Error(
+                `Lambdapi rule evidence '${evidence}' has incomplete ` +
+                'source provenance'
+            );
+        }
+        for (const source of binding_.provenance.sources) {
+            if (
+                source.section.trim().length === 0 ||
+                source.declaration.trim().length === 0
+            ) {
+                throw new Error(
+                    `Lambdapi rule evidence '${evidence}' has incomplete ` +
+                    'source provenance'
+                );
+            }
+        }
+    }
+}
+
+validateLambdapiRuleEvidenceBindings();
 
 interface SerializationState {
     nextBoundName: number;

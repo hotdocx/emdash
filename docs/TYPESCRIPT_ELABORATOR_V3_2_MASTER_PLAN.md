@@ -10,9 +10,9 @@ Side-Task-Ledger: coverage, implementation, experiment, and human-review
 ledgers in this file
 Infinity-Codex-Origin: none; user-directed post-ELAB-0 review on 2026-07-23
 Infinity-Codex-Decision-Responses: none; decisions are recorded inline
-Status: active living master plan; ELAB-2B is complete, its H-01
-recommendation awaits human review, and independent TSK-1A is the next
-dependency-ready implementation slice
+Status: active living master plan; ELAB-2B and TSK-1A are complete, the H-01
+and H-03 recommendations await human review, and no further implementation
+slice is dependency-ready until one of those gates is resolved
 Pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -172,6 +172,8 @@ cleanly.
 | D-019 | accepted | Give explicit Core a distinct meta-level universe and a generic plicity-bearing call form. Describe every current semantic owner type with one declarative dependent signature language limited to `TYPE`, earlier telescope slots, and owner applications; validate it against the separate arity catalog and let the checker consume it uniformly. | ELAB-2A3A materializes scoped Pi signatures for all 21 owners, passes a saturated application for every signature through Lambdapi, and verifies generic calls through scope/substitution/session/backend paths. `Cat : TYPE` and category-polymorphic application are accepted; arbitrary Type-in-Type polymorphism is outside the supported fragment because Lambdapi correctly exposes the `TYPE`/`KIND` boundary. |
 | D-020 | accepted | Keep `KIND` as a checker-only classification rather than an ordinary or serializable Core term. The bounded checker is structural: it validates TYPE/KIND-level declarations and Pi formation, checks lambdas bidirectionally, decomposes rigid type structure, and delegates only canonical meta leaves to the session. Generic implicits are inserted when a supplied explicit argument crosses an implicit Pi binder, so a partial inner call retains later binders; fixed owner applications are saturated from the declarative signature catalog. | ELAB-2A3B checks every owner signature and saturated application through one uniform path, recovers both generic and owner implicits, preserves a nested partial-call consumer, rejects Type-in-Type, rigid/mode/plicity/non-function/missing/ambiguous/occurs/scope boundaries at source provenance, and emits checked generic/fapp0 terms accepted by Lambdapi. Evaluation, conversion, higher-order inversion, and rule validation remain outside this structural claim. |
 | D-021 | accepted | Represent `Catd(K)` in Core through the decoded object classifier of `Catd_cat(K)`, as required by D-015, and add only semantic owners for displayed pullback, constant displayed families, and section categories. Store bridge authority classes separately and do not grant the structural checker runtime or proof-time conversion powers. | ELAB-2B checks all three new signatures through the uniform 24-owner catalog, recovers implicit bases, distinguishes meta-level telescope substitution from internal `Pullback_catd`, and uses Lambdapi `eq_refl`/`assertnot` evidence to preserve the runtime versus proof-time boundary. `Sigma_cat`, `Functord_cat`, and new kernel owners were not needed for the bounded consumer. |
+| D-022 | accepted | Make a product rule proposal closed-world, deeply immutable, and backend-neutral. A semantic rule record carries an explicit authority class, scoped owner pattern, consumer coverage, and opaque evidence key; exact active names and source locations live in a separately complete conformance-backend binding. Do not port the legacy global rule registries or their RHS-only unification-variable behavior. | TSK-1A validates complete ordered owner coverage, dependency closure, unique rule/evidence identities, owner arity, variable scope, authority-specific shapes, and exact backend evidence coverage without matching or evaluation. It rejects malformed, duplicate, unknown-owner, scope-escaping, cross-class, and recommendation-drift proposals deterministically. |
+| D-023 | recommended; H-03 pending | Freeze, if H-03 approves, the dependency-closed 16-owner ordinary classifier/projection signature and exactly three generic full-to-capped runtime projection betas. Freeze no proof-time comparison rule yet. Keep the other eight current owners, the constant-section proof-time bridge, and its required runtime non-collapse as conformance evidence until their larger rule neighborhoods and gates are bounded. | The ordinary subset covers ELAB-0/1B including recursive 2-cell action. Every excluded owner and rule family records consumer evidence and open consumer-scope, rule-inventory, termination, confluence, subject-reduction, or H-01 risk. The three active runtime rules, the constant-section unification chain, and the negative runtime probe have exact backend provenance. |
 
 “Accepted” records the current engineering direction, not a theorem about the
 mathematics. Entries marked experimental must be resolved by the named
@@ -332,7 +334,7 @@ The coverage ledger is about semantic capabilities, not merely exported names.
 | C-14 | Dependent weakening | missing/inventory required | Concrete elaboration consumer |
 | C-15 | Dependency-respecting exchange | missing/inventory required | Permitted and forbidden telescope swaps |
 | C-16 | Dependent contraction/diagonal | missing/inventory required | Reindexing data and invalid contraction negative |
-| C-17 | TypeScript rule manifest/checker | partial: bounded structural Core checker complete in ELAB-2A3B; frozen rule manifest and evaluator missing | All owner signatures/applications, Pi/lambda checking, and structural negatives are green; manifest proposal/freeze, valid/malformed rules, and differential normal forms remain TSK-1A/1B/2/3 |
+| C-17 | TypeScript rule manifest/checker | partial: structural checker and validated TSK-1A proposal complete; H-03 freeze and evaluator missing | The 24-owner catalog is partitioned into an exact 16-owner candidate and eight explicit exclusions; three runtime candidates plus proof-time/non-collapse evidence validate with focused malformed negatives and complete backend provenance. Freeze, evaluation, and differential normal forms remain TSK-1B/2/3. |
 | C-18 | Source-mapped backend diagnostics | partial | Generated map exists; diagnostic remapping missing |
 | C-19 | Legacy category-layer removal | blocked by replacement | Generic inventory and replacement gates green |
 
@@ -364,7 +366,7 @@ must identify their common baseline.
 | KERNEL-DISPLAYED-1 | conditional | ELAB-2C failure evidence | If a concrete uniform elaboration consumer cannot be expressed, design and probe the smallest displayed structural owner package under the v3.2 SOP, including degeneration/comparison and non-collapse cases. Human review is required before promotion. |
 | KERNEL-DISPLAYED-2 | conditional | reviewed KERNEL-DISPLAYED-1 | Promote only reviewed kernel changes with diagnostics, warning comparison, audits, catalogs, health, examples, and CI synchronized. |
 | TSK-1 | split | ELAB-1 schema stability, ELAB-2A | The manifest tranche is split at H-03 so an implementation proposal cannot silently become the frozen trusted fragment. |
-| TSK-1A | next / dependency-ready | ELAB-1 schema stability, ELAB-2A | Define immutable backend-neutral manifest vocabulary, inventory the smallest consumer-backed owner/rule candidates, reject malformed proposals, and record an exact H-03 recommendation without implementing evaluation. |
+| TSK-1A | complete | ELAB-1 schema stability, ELAB-2A | Immutable backend-neutral manifest vocabulary, exact 16/8 owner partition, three runtime candidates, proof-time/non-collapse evidence, focused malformed rejection, complete backend provenance, and an exact H-03 recommendation are green; no evaluator or freeze was implemented. |
 | TSK-1B | human-gated / pending H-03 | TSK-1A, reviewed fragment | Freeze the reviewed MVP signature/rule manifest and document the exact trusted-core boundary. |
 | TSK-2 | pending | TSK-1B | Implement rule validation, weak-head evaluation, rewriting, proof-time unification/comparison classes, and deterministic diagnostics for the frozen fragment. |
 | TSK-3 | pending | TSK-2 | Build positive, negative, conversion, malformed-rule, and higher-cell differential tests against Lambdapi for every common owner/rule. |
@@ -1118,31 +1120,201 @@ Remaining prerequisite or human review: H-01 must review D-007 before
   ELAB-2C. It does not block TSK-1A.
 ```
 
-## Immediate Slice: TSK-1A
+## Completed Slice: TSK-1A
 
-Build a reviewable manifest proposal before asking H-03 to freeze it:
+TSK-1A introduced:
 
-1. recover the active declarations and owning runtime/unification rules for
-   the smallest consumer-backed candidate fragment already exercised by
-   ELAB-0 through ELAB-2B; do not infer rule authority from TypeScript tests;
-2. define immutable backend-neutral manifest records for signature membership,
-   runtime reduction, proof-time comparison, provenance, and consumer
-   coverage, without implementing matching or evaluation;
-3. require complete owner references, unique rule identities, explicit
-   authority classes, left/right scope validity, and deterministic manifest
-   ordering; reject malformed, duplicate, unknown-owner, and cross-class
-   proposals with focused diagnostics;
-4. distinguish the proposed product fragment from the larger 24-owner
-   conformance catalog and record every exclusion, especially rules or owners
-   whose termination, confluence, subject reduction, or consumer need is not
-   yet bounded;
-5. exercise one representative runtime rule, one proof-time comparison, and
-   one intentional non-collapse as data, then record the exact H-03
-   recommendation and pass all earlier gates.
+- `src/v3_2/manifest.ts`, containing a deeply immutable, closed-world proposal
+  vocabulary for signature membership, runtime reduction, proof-time
+  comparison, intentional non-conversion, semantic provenance keys, consumer
+  coverage, explicit owner/rule-family exclusions, and H-03 recommendations;
+- a complete ordered partition of the 24-owner conformance catalog into a
+  dependency-closed 16-owner ordinary classifier/projection candidate and
+  eight conformance-only owners with concrete consumers, reasons, and open
+  risks;
+- exactly three candidate runtime rules: evaluation of the full ordinary
+  functor hom action, full transfor component, and full off-diagonal transfor
+  hom action to their capped projections;
+- one constant-section proof-time comparison and the paired intentional
+  runtime non-conversion as non-executable data, preserving the ELAB-2B
+  authority boundary;
+- validation of proposal status, complete owner coverage, catalog order,
+  signature dependency closure, consumer references, rule/evidence identity,
+  owner arity, declared-variable use, runtime right-side scope, authority
+  shape, candidate-owner membership, exclusion order, and exact
+  recommendation synchronization;
+- `LAMBDAPI_V32_RULE_EVIDENCE_BINDINGS`, which keeps active spellings, source
+  sections, owning runtime/unification declarations, and the durable negative
+  probe out of backend-neutral Core while requiring one complete binding for
+  every semantic evidence key;
+- `tests/v3_2_manifest_tests.ts`, with positive manifest/provenance checks and
+  focused unknown, duplicate, incomplete, reordered, dependency-escaping,
+  malformed-arity, unbound-variable, runtime-RHS/proof-consequence scope,
+  cross-class, excluded-owner, recommendation-drift, and backend-binding
+  negatives.
 
-Do not call the proposal frozen before H-03, implement evaluator behavior
-(TSK-2), import active Lambdapi spellings into backend-neutral Core, promote
-kernel owners, or begin ELAB-2C while H-01 is pending.
+The H-03 recommendation is exact:
+
+```text
+Status: proposal-awaiting-h03 (not frozen)
+
+Candidate signature owners (16):
+  groupoid-universe, category-universe, decode, object-classifier,
+  functor-classifier, hom-classifier, transfor-classifier, hom-category,
+  transfor-category, functor-object, functor-hom-full,
+  functor-hom-capped, transfor-component-full,
+  transfor-component-capped, transfor-hom-full, transfor-hom-capped
+
+Candidate runtime rules (3):
+  projection.functor-hom.evaluate
+  projection.transfor-component.evaluate
+  projection.transfor-hom.evaluate
+
+Candidate proof-time rules:
+  none
+
+Conformance-only owner extensions (8):
+  category-of-categories, opposite-category,
+  displayed-category-category, internal-hom-source, internal-hom-target,
+  displayed-pullback, constant-displayed-family, section-category
+
+Required conformance boundary:
+  comparison.constant-section is proof-time evidence only;
+  nonconversion.constant-section.runtime must continue to hold.
+```
+
+This boundary is smaller than the elaborator/conformance catalog by design.
+The ordinary subset already owns the recursive 2-cell consumer and its three
+generic projection betas. The category-of-categories, opposite/internal-hom, and
+displayed/dependent extensions have useful checked consumers, but their
+runtime and proof-time neighborhoods include rules whose complete need,
+termination, confluence, or subject-reduction scope has not been bounded.
+The closed-world default excludes every active rule not named in the proposal;
+serializability never implies product-kernel membership.
+
+The legacy TypeScript engine was inspected only for generic evidence. Its
+rewrite and unification rules live in ambient mutable registries; rewrite-rule
+registration catches and logs some failures instead of establishing an
+immutable manifest, and unification rules may create fresh holes for variables
+appearing only in consequences. TSK-1A therefore cleanly reimplements the
+proposal boundary and rejects runtime RHS scope escape instead of extracting
+that machinery or extending its stale category theory.
+
+No evaluator, matcher, proof-time solver, rule freeze, kernel declaration,
+kernel rule, warning baseline, generated catalog, package setup, or old
+category-layer deletion changed in this slice.
+
+### Experiment TSK-1A-CLOSED-WORLD-MANIFEST
+
+```text
+Experiment ID: TSK-1A-CLOSED-WORLD-MANIFEST
+Date and checkpoint: 2026-07-24 at ELAB-2B checkpoint 0f176cb
+Question/hypothesis: a small, dependency-closed product signature and its exact
+  first runtime rules can be proposed as immutable backend-neutral data while
+  preserving proof-time and non-conversion evidence outside the executable
+  fragment and without implementing evaluation.
+Authority and owner position inspected: active declarations and dependent
+  signatures for all 24 semantic owners; the three generic full-to-capped
+  projection beta rules; the Cat_cat hom presentation of ordinary functor
+  categories; the constant-section Pi/Functor unification rule; the durable
+  ELAB-2B assertnot probe; current SOP, Foundations, canonical-syntax report,
+  active plan, and legacy generic rewrite/unification implementation. No
+  Lambdapi declaration or rule changed.
+Branch/worktree and baseline: goal/typescript-elaborator-v3.2 in
+  /home/user1/emdash1-elaborator-goal at 0f176cb before the experiment;
+  descendant of baseline a06433e.
+Minimal positive consumer: encode the three active generic projection betas as
+  scoped semantic owner patterns over the 16-owner ordinary subset, with one
+  proof-time constant-section comparison and one paired runtime non-conversion
+  retained as conformance evidence.
+Relevant negative/non-collapse consumer: reject unknown or duplicate owners,
+  incomplete/reordered catalogs, signature dependencies on excluded owners,
+  duplicate/noncanonical/reordered rule IDs, unknown or wrong-arity owner
+  patterns, undeclared, runtime-RHS-only, and proof-consequence-only variables,
+  cross-class executable records, candidate rules using excluded owners,
+  recommendation drift, and missing/unknown/cross-class backend provenance.
+  Keep the constant-section category pair proof-time comparable but not
+  runtime convertible.
+Probe command and bounded result:
+  timeout 60s env EMDASH_RUN_LAMBDAPI_PROBES=1 node --require
+    ts-node/register --test tests/v3_2_core_binder_tests.ts
+    tests/v3_2_core_checker_tests.ts tests/v3_2_core_context_tests.ts
+    tests/v3_2_core_session_tests.ts tests/v3_2_core_signature_tests.ts
+    tests/v3_2_dependent_context_tests.ts tests/v3_2_elab0_tests.ts
+    tests/v3_2_elab1c_tests.ts tests/v3_2_manifest_tests.ts
+  passed 110 tests in 9 suites, including every opt-in Lambdapi probe.
+Observed result: the 16-owner subset is signature-dependency-closed; the three
+  runtime patterns refer only to selected owners; proof-time and non-conversion
+  records remain non-executable; all malformed cases fail with focused stable
+  codes; exact backend evidence coverage validates separately.
+Unexpected result or failure: none. The active proof-time category comparison
+  needs both the Cat_cat hom presentation rule and the Pi/constant unification
+  rule, so its backend evidence binding records both source owners rather than
+  pretending the semantic Core pattern is a backend spelling.
+TypeScript consequence: add an immutable proposal schema and validation only.
+  Do not connect these records to CoreChecker or a reducer before TSK-1B/2.
+Lambdapi consequence: retain exact declarations and the ELAB-2B negative probe
+  as conformance provenance only; make no kernel change.
+Warning/audit/catalog/health effects, if any: no Lambdapi source or generated
+  authority changed, so no warning baseline, rule audit, catalog, or health
+  artifact changed. The bounded kernel gate remained green.
+Decision: accept D-022 and recommend D-023 for H-03. Do not call the proposal
+  frozen and do not begin TSK-2.
+Plan rows changed: D-022 accepted; D-023 recommended/H-03 pending; C-17
+  proposal complete but freeze/evaluator pending; TSK-1A complete; TSK-1B
+  remains human-gated.
+Remaining prerequisite or human review: H-03 must approve or revise the exact
+  16-owner/three-runtime-rule fragment before TSK-1B. H-01 independently still
+  blocks ELAB-2C.
+```
+
+### TSK-1A validation
+
+Validated on the exact TSK-1A worktree diff:
+
+```text
+node --require ts-node/register --test tests/v3_2_manifest_tests.ts
+  passed 17 tests / 1 suite
+
+timeout 60s env EMDASH_RUN_LAMBDAPI_PROBES=1 node --require
+  ts-node/register --test tests/v3_2_core_binder_tests.ts
+  tests/v3_2_core_checker_tests.ts tests/v3_2_core_context_tests.ts
+  tests/v3_2_core_session_tests.ts tests/v3_2_core_signature_tests.ts
+  tests/v3_2_dependent_context_tests.ts tests/v3_2_elab0_tests.ts
+  tests/v3_2_elab1c_tests.ts tests/v3_2_manifest_tests.ts
+  passed 110 tests / 9 suites with no skips
+
+./scripts/pnpmw run check:ts
+  workspace contract, TypeScript, ESLint, and root tests passed
+  262 tests / 52 suites: 248 passed, 14 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, and diagnostics passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  root TypeScript gate passed with the same 262-test result
+  41 active Lambdapi kernel/example files passed
+  39 formal infrastructure tests and 5 print registry tests passed
+  active-reference/report-header/book/evidence/typography/KaTeX checks passed
+  strict rule-LHS audit and generated catalog freshness passed
+
+git diff --check
+  passed
+```
+
+## Current Dependency Gates
+
+No further implementation row is dependency-ready:
+
+- TSK-1B requires human H-03 review of D-023 before any proposal is called
+  frozen;
+- ELAB-2C requires human H-01 review of D-007 before extending the dependent
+  structural experiment;
+- TSK-2 depends on the reviewed TSK-1B freeze and must not infer that decision
+  from the green TSK-1A proposal.
+
+Continue with the reviewed branch when either gate is resolved. Do not guess a
+rule fragment, displayed representation, or displayed-to-ordinary equality.
 
 ## Human Review Gates
 
@@ -1163,8 +1335,9 @@ decision.
 
 Current gate state: ELAB-2B has recorded a positive dependent-first H-01
 recommendation, but H-01 remains awaiting human review and blocks ELAB-2C.
-Independent TSK-1A is active; it must produce, not assume, the H-03 fragment
-recommendation.
+TSK-1A has recorded the exact D-023 H-03 recommendation, but H-03 remains
+awaiting human review and blocks TSK-1B and TSK-2. No independent
+dependency-ready implementation row remains.
 
 ## Experiment Record Template
 

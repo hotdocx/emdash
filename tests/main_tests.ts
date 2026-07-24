@@ -35,6 +35,7 @@ import './v3_2_core_session_tests';
 import './v3_2_core_signature_tests';
 import './v3_2_core_checker_tests';
 import './v3_2_dependent_context_tests';
+import './v3_2_manifest_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,
