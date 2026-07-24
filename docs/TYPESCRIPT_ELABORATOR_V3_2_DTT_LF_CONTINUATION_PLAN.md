@@ -36,7 +36,7 @@ slice
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`5081afe6759f53cb4e51a5995d2e91276bf6442e`
+`3ee13cf792dfbebe249a95183726e64a318d6e68`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -1537,15 +1537,12 @@ authorities, and ancestry; preserve unrelated work; relocate symbols with rg;
 and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
-The latest recorded local implementation checkpoint is
-5081afe6759f53cb4e51a5995d2e91276bf6442e. DIRECTED-FOUNDATION-1 is
-implemented exactly as approved. The current bounded worktree tranche records
-the exact H-DTTLF-02/DIRECTED-FOUNDATION-2 approval, implements its one decoded
-rule, and completes DIRECTED-1B with the reviewed five-owner/three-owned-rule
-boundary. Once that green tranche is checkpointed and the checkpoint is
-recorded here, continue with DIRECTED-1C's read-only owner/rule inventory and
-fresh proposal; do not execute DIRECTED-1C semantics before its H-DTTLF-02
-decision.
+The latest local implementation checkpoint is
+3ee13cf792dfbebe249a95183726e64a318d6e68. It records the exact
+H-DTTLF-02/DIRECTED-FOUNDATION-2 approval and runtime plus the completed
+DIRECTED-1B five-owner/three-owned-rule integration. Continue with
+DIRECTED-1C's read-only owner/rule inventory and fresh proposal; do not execute
+DIRECTED-1C semantics before its H-DTTLF-02 decision.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -1759,3 +1756,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   and active-Lambdapi tests pass; the full 371-test TypeScript gate, bounded
   kernel check, and complete cross-layer gate pass. DIRECTED-1C is now the
   next dependency-ready inventory/proposal slice.
+- **2026-07-24 — DIRECTED-1B completion checkpointed.** Recorded local
+  checkpoint `3ee13cf792dfbebe249a95183726e64a318d6e68` after the focused
+  generated Lambdapi probe, complete TypeScript gate, bounded active-kernel
+  check, full cross-layer gate, header lint, and exact staged-diff review all
+  passed. The checkpoint contains only the approved Foundation 2 review and
+  runtime, DIRECTED-1B catalog/runtime integration, closed LF/backend seams,
+  exports, focused tests, and synchronized plan. It is comparison and
+  backtracking evidence, not permission to rewrite history or widen scope.
