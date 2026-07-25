@@ -36,6 +36,8 @@ export * from './directed_graduation_proposal';
 export * from './directed_graduation_review';
 export * from './directed_graduation';
 export * from './lambdapi_export_inventory';
+export * from './scale_architecture_review';
+export * from './lf_transfer';
 export * from './metatheory';
 export * from './migration';
 export * from './pattern';

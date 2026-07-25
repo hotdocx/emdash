@@ -7,7 +7,9 @@ performance boundaries, and all validation gates recorded; forward outer-LF
 and directed-DTT work has additionally graduated the exact root-only opt-in
 `emdash-v3.2-dttlf-directed-1` continuation profile under H-DTTLF-03;
 systematic whole-development transfer remains unqualified and is now the
-subject of the active scale-qualification plan
+subject of the active scale-qualification plan, whose shared transfer IR
+SCALE-0B slice is complete and whose generic declaration compiler SCALE-0C
+slice is next
 
 ## Purpose
 
@@ -34,9 +36,12 @@ with ordinary TypeScript expressions; a string parser can be added later. The
 first architectural problem is elaboration and compilation into explicit
 emdash Core applications, not tokenization.
 
-The scale plan's canonical-export parser is a separate developer/build
-interchange tool over already-checked Lambdapi output. It is not the optional
-user-facing source parser and does not change this surface-design boundary.
+The scale plan's approved initial transfer path likewise uses a shared typed
+TypeScript builder rather than a string parser. Canonical export remains a
+separate developer/build inventory, drift, extraction, and conformance tool;
+a fail-closed canonical term/pattern parser may later feed the same transfer
+IR if bulk-acquisition evidence justifies it. Neither path is the optional
+user-facing source parser or changes this surface-design boundary.
 
 ## Authority Boundary
 
@@ -132,9 +137,16 @@ groupoidal-closure claims remain withheld.
 The continuation proves the foundational spine, not a full import
 architecture: 29 signatures, ten runtime rules, and zero proof-time rules are
 far smaller than the active module/rule/unification landscape. The scale plan
-therefore tests a pinned checked canonical-export boundary, backend-neutral
-module IR, separate runtime/proof compilers, and a representative mechanism
-corpus before any claim that future transfers are systematic or mechanical.
+therefore tests one backend-neutral typed module/fragment IR, generic
+declaration/runtime/proof engines, and a representative mechanism corpus
+before any claim that future transfers are systematic or mechanical.
+SCALE-0B now implements and validates that immutable IR, scoped direct
+builder, body distinctions, separate runtime/proof programs, and separate
+policy overlay without semantically installing its active witnesses.
+SCALE-0C must next compile the already reviewed 29-signature continuation
+through that shared path. Pinned checked canonical export supplies inventory
+and provenance and remains an optional later generator input, not an
+immediate term-parser prerequisite.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

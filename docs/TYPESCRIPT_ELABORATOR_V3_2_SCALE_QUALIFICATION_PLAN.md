@@ -24,10 +24,12 @@ careful clarification of whether the final architecture was already settled.
 On 2026-07-24 the user then directed that we gather a varied set of
 representative ingredients from the remaining Lambdapi development in order
 to prove and stress-test whether the remaining transfer can be performed at
-scale, systematically, and mechanically.
-Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete;
-H-DTTLF-SCALE-01/D-DTTLF-SCALE-001 is triggered, and SCALE-0B is gated on
-that acquisition/interchange-architecture decision
+scale, systematically, and mechanically. After clarifying that this direction
+did not require a full Lambdapi term parser as the architectural starting
+point, the user approved revised H-DTTLF-SCALE-01 on 2026-07-24.
+Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
+H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B is complete;
+SCALE-0C is the next dependency-ready slice
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -58,10 +60,13 @@ unification rules. Much of that slice is expressed through hand-authored,
 owner-specific proposal, catalog, runtime, and validation code.
 
 This plan establishes the missing qualification evidence. It selects a
-structurally and mathematically diverse corpus, defines one generic
-source-to-module-IR pipeline, and requires successive corpus additions to be
-data and policy changes rather than new owner-specific parser, checker, or
-evaluator branches.
+structurally and mathematically diverse corpus, defines one generic immutable
+module/fragment IR plus declaration/runtime/proof engines, and requires
+successive corpus additions to be data and policy changes rather than new
+owner-specific materializers, checker exceptions, or evaluator branches.
+Audited typed TypeScript construction is the initial mandatory producer of
+that IR. Canonical-export term parsing is a possible later acquisition
+adapter, not the semantic architecture or an immediate prerequisite.
 
 ## Authority And Trust Boundary
 
@@ -103,21 +108,77 @@ The answer is deliberately split in two:
   to restart the outer LF, explicit Core, scoped builder, catalog/profile
   boundary, or Lambdapi-oracle design.
 - **The whole-development transfer architecture is not yet qualified.** We
-  have not yet demonstrated generic ingestion of modules, definitions,
-  inductives, grouped rewrite rules, proof-time unification rules, protected
-  declarations, or deep dependency closure.
+  have not yet demonstrated one generic representation and engine path for
+  definitions, inductives, grouped rewrite rules, proof-time unification
+  rules, protected declarations, or deep dependency closure.
 
 The next claim to earn is therefore not “the whole kernel has been ported.”
 It is:
 
 > A representative corpus covering every materially distinct active
 > declaration and computation mechanism can pass through one generic,
-> fail-closed interchange architecture, after which adding another instance
-> of an already-qualified mechanism is a mechanical data/policy operation.
+> fail-closed transfer IR and engine architecture, after which adding another
+> instance of an already-qualified mechanism is a mechanical data/policy
+> operation.
 
 The claim is falsified if a representative case requires an owner-named term
-node, parser production, checker exception, or evaluator branch that does not
+node, materializer, checker exception, or evaluator branch that does not
 generalize to the mechanism it represents.
+
+## Three Distinct Kinds Of Genericity
+
+The scale clarification distinguishes three independent concerns:
+
+1. **A generic term/pattern representation is mandatory.** Qualified global
+   references, locally nameless binders, applications, runtime match
+   variables, proof-time problems, and provenance must not be redefined for
+   each semantic owner tranche.
+2. **Generic declaration, runtime-rule, and proof-time-unification engines are
+   mandatory.** The current successful continuation still duplicates
+   expression materialization across DIRECTED-1A, DIRECTED-1B, and
+   DIRECTED-1C, while its Foundation runtime contains owner-specific rewrite
+   functions. Removing those tranche-specific compilers is the immediate
+   scalability problem.
+3. **Generic parsing of canonical Lambdapi terms is optional acquisition
+   automation.** It is likely useful if most of the hundreds of active
+   declarations and clauses are eventually imported, but it is not required
+   to settle or stress-test the TypeScript checker architecture.
+
+The successful method remains valid:
+
+```text
+audit selected active Lambdapi owners/rules
+        │ exact source/export evidence and human semantic policy
+        ▼
+encode an immutable backend-neutral TypeScript transfer specification
+        ▼
+compile it into explicit Core declarations/runtime/proof programs
+        ▼
+run TypeScript checking plus bounded Lambdapi differential evidence
+```
+
+The required change is that the specification language and its compilers
+become shared and mechanism-generic. Direct typed construction is not an
+owner-specific shortcut: adding `Pi_grpd`, `nat_add`, or `WalkingEnd_cat`
+must add specification data and policy rather than a `PiGrpd` Core node,
+`NatAdd` matcher, or `WalkingEnd` evaluator.
+
+The original `main` worktree is relevant implementation evidence. Its
+`src/types.ts`, `src/pattern.ts`, `src/unification.ts`, `src/globals.ts`, and
+rewrite/higher-order test suites already explore:
+
+- separate raw and elaborated rewrite-rule records;
+- structural pattern matching followed by capture-aware substitution;
+- scope-restricted pattern variables and higher-order flex-rigid abstraction;
+- occurs checks and deterministic constraint revisiting; and
+- symmetric proof-time unification-rule matching that emits new constraints.
+
+Those algorithms should be audited and adapted where they remain generic.
+Their named-HOAS closures, mutable global registries, category-specific term
+cases, untyped unification-rule registration, and fail-soft logging are not
+the new trusted architecture. The current locally nameless Core, contextual
+metavariables, immutable profiles, structured failures, and shared operation
+budget remain authoritative implementation boundaries.
 
 ## Executable Source-Landscape Evidence
 
@@ -172,51 +233,70 @@ These hashes are drift detectors for the pinned exporter and current source,
 not new mathematical identities. A deliberate Lambdapi or exporter upgrade
 must regenerate and review them.
 
-## Proposed Acquisition Boundary
+## Approved Transfer And Acquisition Boundary
 
-The proposed development/build pipeline is:
+Revised H-DTTLF-SCALE-01 approves this development/build architecture:
 
 ```text
 active handwritten .lp source
         │ Lambdapi checks with normal subject-reduction policy
-        ▼
-pinned `lambdapi export -o lp`
-        │ deterministic canonical interchange text
-        ▼
-small fail-closed TypeScript canonical parser
-        ▼
-backend-neutral CoreLfModuleSpec
+        ├───────────────┐
+        │               │ pinned canonical export
+        │               │ inventory, hashes, drift, normalized evidence
+        ▼               ▼
+exact audited selection and immutable semantic policy
         │
-        ├── declaration compiler
-        ├── runtime-rule compiler
-        ├── proof-time unification compiler
-        ├── deterministic Lambdapi round-trip/conformance emitter
-        └── committed generated product artifacts
+        ▼
+typed TypeScript CoreLfModuleSpec/module-fragment builder
+        │
+        ▼
+shared backend-neutral transfer IR
+        │
+        ├── generic declaration compiler
+        ├── generic runtime-rule compiler/matcher
+        ├── separate generic proof-time unification compiler/engine
+        ├── deterministic Lambdapi conformance emitter
+        └── committed reviewed product artifacts
+
+optional later bulk adapter:
+pinned canonical export ── fail-closed parser/generator ──► same transfer IR
 ```
 
-Reasons for using the canonical export boundary:
+The mandatory boundary is the shared transfer IR and engines, not a textual
+parser. Initially, an audited typed TypeScript builder constructs exact
+module or dependency-closed fragment specifications. Each specification is
+anchored to qualified active owners, source/export hashes or exact relocatable
+source evidence, and a separate immutable authority/policy decision.
 
-- Lambdapi has already parsed, scoped, elaborated, and checked the active
-  module before export.
-- The exporter makes implicit structure, plicity, applications, modifiers,
-  grouped rules, and unification commands explicit and regular.
-- The TypeScript parser can target a smaller pinned grammar than the complete
-  handwritten surface language.
-- The boundary is reproducible and can be hash-pinned.
-- Lambdapi remains a development/build oracle rather than a deployed runtime
-  dependency.
+Canonical export remains valuable because Lambdapi has already parsed,
+scoped, elaborated, and checked the active module; the output is deterministic
+and normalized enough for inventory, drift detection, exact extraction, and
+future generation. SCALE-0A therefore remains permanent evidence rather than
+discarded parser work.
 
-The parser must reject unknown canonical commands and grammar rather than
-silently discard them. Assertions omitted by canonical export remain a
-separate conformance corpus; they are not product declarations.
+A complete canonical term/pattern parser is probably feasible and could
+eventually make bulk transfer economical. It is not yet known to be the
+shortest path: canonical output still contains binder shorthand, pattern
+variables, wildcards, grouped rules, binder-producing right-hand sides,
+`let` expressions, inductive blocks, unification constraint lists, and
+retained tactic bodies. Parsing those forms proves acquisition coverage, not
+that the TypeScript runtime or proof-time engine implements them correctly.
+The target IR and engines are stabilized against the representative corpus
+before H-DTTLF-SCALE-02 decides whether the optional parser/generator has
+sufficient value.
 
-`raw_dk` is not selected: it loses relevant Lambdapi-level structure and the
-active development does not export cleanly through that route.
+Any later importer must feed exactly the same reviewed transfer IR, reject
+unknown canonical commands and grammar, and remain a developer/build tool.
+Assertions omitted by canonical export remain a separate conformance corpus;
+they are not product declarations. `raw_dk` remains unselected because it
+loses relevant Lambdapi-level structure and the active development does not
+export cleanly through that route.
 
 ## Proposed Backend-Neutral Module IR
 
-`CoreLfModuleSpec` should represent the following without Lambdapi-specific
-runtime objects:
+`CoreLfModuleSpec` and dependency-closed module fragments should represent the
+following without Lambdapi-specific runtime objects, regardless of whether
+they were built directly or by a later acquisition adapter:
 
 | IR component | Required information |
 | --- | --- |
@@ -229,9 +309,11 @@ runtime objects:
 | Proof-time program | typed `unif_rule` left/right problems and generated constraints, source owner, order |
 | Presentation metadata | canonical text/span and enough provenance for exact diagnostics and deterministic emission |
 
-The IR is explicit and locally nameless after term parsing. Qualified symbol
-identities and a module dependency graph prevent accidental name collisions.
-Dependency closure and hashes are deterministic.
+The IR is explicit and locally nameless after typed-builder lowering.
+Qualified symbol identities and a module dependency graph prevent accidental
+name collisions. Dependency closure and hashes are deterministic. A future
+parser must produce the same representation rather than introduce a second
+semantic AST.
 
 Runtime rewrite rules and proof-time unification rules remain separate
 programs. The current continuation has no proof-time rules, but the active
@@ -239,8 +321,9 @@ kernel has 61; treating them as runtime equality would be mathematically and
 operationally incorrect.
 
 The live inventory shows that `export -o lp` does not erase every tactic:
-two protected definitions retain checked `begin`/`end` bodies. SCALE-0B must
-preserve that distinction instead of pretending tactic source is a Core term.
+two protected definitions retain checked `begin`/`end` bodies. The transfer
+IR must preserve that distinction instead of pretending tactic source is a
+Core term.
 The default scalable treatment is to import such theorem/proof owners
 opaquely after Lambdapi has checked them, while retaining their canonical body
 for provenance and conformance. If a product consumer requires delta
@@ -287,25 +370,27 @@ groupoidal theorem or closure.
 | Proof-heavy extension | `omega_equiv_along_evidence_is_prop` family | Large transparent theorem bodies with no runtime-rule promotion |
 | Multi-module directed HIT | `WalkingEnd_cat`, `walking_end_ind_funcd`, its beta rules, and `BNat_cat` | Opaque constructors, dependent eliminator, higher action, imported Nat rules, runtime/proof split |
 
-The set may be refined when the canonical parser exposes a genuinely distinct
-active syntax or rule shape. It must not be narrowed merely to make the
-current hand-authored implementation pass.
+The set may be refined when direct typed encoding or a later acquisition
+adapter exposes a genuinely distinct active syntax or rule shape. It must not
+be narrowed merely to make the current hand-authored implementation pass.
 
 ## Mechanical-Scale Acceptance Criteria
 
 The architecture qualifies only when all of the following hold:
 
-1. All five active modules parse into deterministic module IR under one
-   pinned canonical grammar.
-2. Every command, declaration, runtime clause, and unification rule is either
-   represented or rejected with an explicit reviewed reason; nothing is
-   silently ignored.
+1. Every selected module or dependency-closed fragment is represented in one
+   deterministic immutable transfer IR, initially through the shared typed
+   builder and optionally through a later parser/generator.
+2. Every selected declaration, runtime clause, and unification rule is either
+   represented or rejected with an explicit reviewed reason; nothing in the
+   claimed transfer envelope is silently ignored. SCALE-0A continues to
+   inventory every top-level command of all five active modules.
 3. The representative corpus covers imports/visibility, opaque and
    transparent declarations, inductives, grouped runtime rules, binder RHSs,
    nonlinear patterns, and proof-time unification.
 4. Adding a second instance of a qualified mechanism changes generated
-   data/policy and focused fixtures, not owner-named parser/checker/evaluator
-   code.
+   data/policy and focused fixtures, not owner-named materializer, checker, or
+   evaluator code.
 5. The existing 29-signature/ten-rule directed continuation can be regenerated
    or compiled through the generic path with equivalent manifest content and
    conformance outcomes.
@@ -317,11 +402,16 @@ The architecture qualifies only when all of the following hold:
    source owner and pattern; no fallback silently treats them as opaque
    equality.
 9. Generated product artifacts have no Lambdapi runtime dependency and are
-   reproducible from pinned source, exporter, parser, compiler, and policy
-   hashes.
+   reproducible from pinned source/export evidence, typed specification,
+   generic compilers, and policy hashes. If a parser/generator is later used,
+   its version and hash join that reproducibility record.
 10. A final review can state a precise envelope: which future additions are
-    mechanical, which require only semantic policy review, and which require
-    new engine or mathematical work.
+    mechanical, which require only semantic policy review, which require new
+    engine or mathematical work, and whether bulk acquisition is direct,
+    semi-generated, or fully parsed.
+11. A larger dependency-closed batch passes without compiler changes after
+    its constituent mechanisms have been qualified; representative examples
+    alone do not justify a throughput claim.
 
 ## Implementation Ledger
 
@@ -329,13 +419,15 @@ The architecture qualifies only when all of the following hold:
 | --- | --- | --- | --- |
 | SCALE-PLAN-0 | complete | reviewed directed continuation | This living plan, corrected verdict, source inventory, representative matrix, gates, and launch prompt |
 | SCALE-0A | complete | SCALE-PLAN-0 | Pure TypeScript top-level canonical-export parser/inventory; fixture tests; opt-in live export/version/hash/count gate over all five active modules |
-| SCALE-0B | pending | H-DTTLF-SCALE-01, SCALE-0A | Canonical term/pattern parser and immutable module IR with qualified identities, binders, dependencies, inductive blocks, runtime clauses, and proof rules |
+| SCALE-0B | complete | revised H-DTTLF-SCALE-01, SCALE-0A | Shared immutable typed transfer IR and scoped builder for qualified declarations, explicit/tactic/absent bodies, runtime patterns, and separate proof problems; no parser or semantic promotion |
 | SCALE-0C | pending | SCALE-0B | Generic declaration compiler plus policy overlay; reproduce the reviewed 29-signature continuation without owner-specific catalog construction |
 | SCALE-0D | pending | SCALE-0C | Generic typed runtime-rule compiler/matcher; migrate the ten reviewed rules equivalently before adding stress semantics |
-| SCALE-0E | pending | SCALE-0C | Separate typed proof-time `unif_rule` compiler and bounded comparison engine |
+| SCALE-0E | pending | SCALE-0C | Separate typed proof-time `unif_rule` compiler and bounded comparison engine, informed by reusable generic algorithms on `main` |
+| SCALE-ACQUIRE-1 | deferred decision | SCALE-0C through SCALE-0E and representative encoding evidence | Decide whether bulk acquisition warrants a fail-closed canonical term/pattern parser/generator or a lighter checked extraction adapter; any adapter targets the same IR |
 | SCALE-STRESS-1 | pending | SCALE-0D, applicable semantic review | Outer J, groupoidal Pi/Sigma, and imported Nat grouped-recursion cases |
 | SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
+| SCALE-BATCH-1 | pending | required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
 
 Rows may be split when implementation reveals an independently reviewable
@@ -434,35 +526,128 @@ git diff --check
   passed
 ```
 
-This completes source-landscape acquisition evidence only. It triggers
-H-DTTLF-SCALE-01 and grants no term parser, module compiler, semantic owner,
-runtime rule, proof-time rule, profile, product, or metatheory authority.
+This completes source-landscape acquisition evidence only. It supplied the
+evidence for revised H-DTTLF-SCALE-01 and grants no term parser, module
+compiler, semantic owner, runtime rule, proof-time rule, profile, product, or
+metatheory authority by itself.
+
+## SCALE-0B Completion Record
+
+SCALE-0B adds `src/v3_2/scale_architecture_review.ts` as the separate frozen
+record of approved H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R and
+`src/v3_2/lf_transfer.ts` as the first shared transfer boundary. The latter
+contains no categorical-owner switch and exposes:
+
+- qualified module-owned symbols and exact source/export hashes;
+- one explicit locally nameless expression language for terms, patterns, and
+  templates, with context-specific rejection of captures and wildcards;
+- a one-shot scoped TypeScript builder whose callbacks are lowered immediately
+  and never retained in the IR;
+- absent, explicit-term, and checked-tactic-source declaration bodies;
+- ordered declarations, inductive blocks and generated symbols, grouped
+  runtime clauses, and separate proof-time problems/constraint templates;
+- explicit matched versus fresh-constraint proof variables and restricted
+  higher-order capture scopes;
+- dependency/external-symbol inventories, provenance, modifiers, and a
+  deterministic referenced-symbol closure; and
+- a separately constructed immutable authority/policy overlay.
+
+`createCoreLfModuleSpec()` validates identifiers, hashes, normalized authority
+paths, dependencies, uniqueness/order, local binder scope, capture roles,
+nonlinear pattern bindings, higher-order scope restrictions, rigid runtime
+heads, fresh proof-constraint use, global availability, and all three body
+kinds. It clones before freezing, so validation has no ambient registry and
+does not freeze caller-owned input. It performs representation validation
+only: it does not type-check or install a declaration or rule.
+
+`tests/v3_2_lf_transfer_tests.ts` supplies ten focused tests. In addition to a
+synthetic declaration/inductive/runtime/proof module, it directly represents
+two active, structurally different mechanisms against the exact
+`emdash3_2.lp` source and canonical-export hashes:
+
+- the nonlinear `ind_eqr` reflexivity runtime clause, including repeated
+  captures and a wildcard; and
+- the `Obj(Hom_cat ...)` proof-time injectivity problem, including three
+  generated equality constraints.
+
+Both witnesses use only shared symbol, call, capture, wildcard, variable, and
+constraint data. There is no `ind_eqr`, `Hom_cat`, or other owner-named
+materializer/checker/evaluator branch. Their policy remains
+`conformance-only`; this completion installs neither active rule. Negative
+tests fail closed on escaping indices, unresolved globals, duplicate source
+orders, undeclared captures, a variable mentioned only by another variable's
+dependent type, malformed higher-order scopes, fresh variables in match
+problems, incompatible policy classes, foreign builder terms, and decision
+drift. The frozen 16-owner/three-rule MVP, reviewed
+29-signature/ten-rule continuation, and browser barrel remain exact.
+
+Validation on 2026-07-24:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_lf_transfer_tests.ts
+  10 tests / 1 suite: all passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  433 tests / 53 suites: 406 passed, 27 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  passed the complete TypeScript gate, all 19 frozen MVP differential
+  judgments, 41 kernel/example metric targets, 39 kernel-script tests,
+  five document-registry tests, source/report/book checks, strict LHS and
+  generated-catalog audits, all 11 directed-continuation judgments, and all
+  seven live scale-inventory tests
+
+python3 emdash2/scripts/lint_report_headers.py
+git diff --check
+  passed
+```
+
+SCALE-0B therefore establishes the shared acquisition/representation seam,
+not the claimed systematic-transfer result. It grants no term parser,
+declaration compiler, executable runtime matcher, proof-time comparison
+engine, semantic import, product promotion, browser API, or mechanical-scale
+qualification. SCALE-0C must consume this IR generically and reproduce the
+already reviewed 29-signature continuation without owner-specific catalog
+construction.
 
 ## Human Review Gates
 
-### H-DTTLF-SCALE-01 — Acquisition And Interchange Architecture
+### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
 
-Triggered after SCALE-0A. The exact proposed decision is:
+SCALE-0A triggered the initial acquisition proposal. The user clarified that
+“systematic” meant making the successful reviewed transfer method reusable
+across a mechanism-diverse corpus, not requiring a complete parser for
+`emdash3_2.lp` as the architectural starting point. The initial unapproved
+D-DTTLF-SCALE-001 text is therefore superseded by this approved revision:
 
-> **D-DTTLF-SCALE-001:** use checked, version/hash-pinned
-> `lambdapi export -o lp` as the development/build acquisition boundary;
-> implement the fail-closed canonical parser and backend-neutral
-> `CoreLfModuleSpec`; preserve separate runtime and proof-time programs and a
-> separate immutable authority/policy overlay; distinguish explicit term
-> bodies from checked tactic-source bodies, importing the latter opaquely
-> unless a separately reviewed reification/compiler is required; and commit
-> reviewed generated product artifacts so Lambdapi is never a production
-> runtime dependency.
+> **D-DTTLF-SCALE-001R — approved 2026-07-24:** make the generic immutable
+> module/fragment IR and generic declaration, runtime-rule, and separate
+> proof-time-unification engines mandatory; initially construct reviewed
+> transfer specifications with a shared typed TypeScript builder anchored to
+> exact Lambdapi source/export evidence; retain checked, version/hash-pinned
+> canonical export for inventory, drift detection, extraction, conformance,
+> and an optional later bulk parser/generator; preserve a separate immutable
+> authority/policy overlay and the explicit-term, checked-tactic-source, and
+> absent-body distinction; and commit reviewed product artifacts so Lambdapi
+> is never a production runtime dependency.
 
-Approval authorizes SCALE-0B implementation, not semantic promotion of any
-new declaration or rule.
+This approval authorizes SCALE-0B implementation, including a separate frozen
+decision record and representation-only witnesses. It does not authorize
+semantic promotion of any new declaration or rule, a canonical term parser,
+or any product/profile expansion.
 
 ### H-DTTLF-SCALE-02 — Generic Engine Boundary
 
 Triggered after SCALE-0C through SCALE-0E demonstrate declaration, runtime,
 and proof-time compilation. It reviews the generic engine, migration
 equivalence for the existing continuation, fail-closed unsupported boundary,
-and generated-artifact policy before broad stress imports.
+generated-artifact policy, and whether SCALE-ACQUIRE-1 should use a canonical
+parser/generator or lighter checked extraction before broad stress imports.
 
 ### Existing Semantic And Mathematical Gates
 
@@ -551,13 +736,24 @@ catalog/profile boundary, and Lambdapi conformance role. Do not claim that the
 whole-development transfer architecture is settled until the representative
 mechanism corpus passes the plan's mechanical-scale acceptance criteria.
 
-Use checked, bounded canonical export only as the proposed development/build
-interchange boundary; handwritten active Lambdapi remains mathematical
-authority and production must not invoke Lambdapi. Separate source ingestion
-from semantic policy, and separate runtime rewrites from proof-time
-unification. Fail closed on unsupported commands, terms, patterns, or
-dependencies. Never add an owner-named parser, checker, or evaluator shortcut
-to make one stress case pass.
+Follow approved D-DTTLF-SCALE-001R. Build one immutable backend-neutral
+module/fragment IR and generic declaration, runtime-rule, and separate
+proof-time-unification engines. Initially construct exact reviewed transfer
+specifications through a shared typed TypeScript builder anchored to active
+source/export evidence. Use checked bounded canonical export for inventory,
+drift detection, extraction, conformance, and a possible later bulk
+parser/generator; do not make full term parsing an immediate prerequisite.
+Handwritten active Lambdapi remains mathematical authority and production
+must not invoke Lambdapi.
+
+Separate acquisition from semantic policy and runtime rewrites from
+proof-time unification. Fail closed on unsupported terms, patterns,
+dependencies, or proof problems. Never add an owner-named term node,
+materializer, checker exception, or evaluator shortcut to make one stress
+case pass. Audit the old generic rewrite, pattern, and unification algorithms
+on `main` as implementation evidence, but do not reintroduce their mutable
+global state, category-specific AST, named-HOAS storage, or fail-soft
+behavior.
 
 Do not promote a declaration, definition, runtime rule, proof-time rule,
 product profile, or metatheory claim without its exact recorded evidence and
@@ -606,3 +802,20 @@ scope is affected.
   continuation judgments, report/link/whitespace audits, and the complete
   scale gate passed. The checkpoint grants no H-DTTLF-SCALE-01 decision,
   semantic import, product promotion, or broader Git authority.
+- **2026-07-24 — Revised H-DTTLF-SCALE-01 approved; SCALE-0B opened.**
+  Clarified that generic transfer representation and engines are mandatory
+  while a complete canonical term/pattern parser is optional acquisition
+  automation. Recorded approved D-DTTLF-SCALE-001R, retained SCALE-0A as
+  inventory/drift evidence, added direct typed construction as the initial IR
+  producer, separated later bulk-acquisition qualification, and recorded the
+  reusable and rejected boundaries of the older generic rewrite/unification
+  implementation on `main`. No new semantic owner, runtime rule, proof-time
+  rule, profile, or product authority was granted.
+- **2026-07-24 — SCALE-0B completed.** Added the frozen reviewed architecture
+  artifact, shared immutable module/fragment IR, one-shot scoped builder,
+  distinct term/pattern/template and body classes, separate runtime/proof
+  programs, and separate policy overlay. Ten focused tests represent a
+  nonlinear active runtime rule and a constraint-producing active proof rule
+  without installing either or adding an owner-specific code path. The
+  433-test TypeScript gate passed with both reviewed profiles and the browser
+  boundary unchanged. SCALE-0C is now dependency-ready.

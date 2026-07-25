@@ -1354,7 +1354,7 @@ dependency-ready work rather than guessing a mathematical rule.
 | H-DTTLF-02 | each DIRECTED owner/rule proposal | Is the selected owner signature/rule and its authority class correct for the concrete nested-telescope consumer? |
 | H-DTTLF-03 | DIRECTED-GRADUATE-1 complete | Approve the fresh combined owner/rule manifest, product boundary, oracle policy, and any newly justified termination/confluence/subject-reduction claim? |
 | H-DTTLF-04 | concrete groupoidal closure consumer | Approve opening the separate Lambdapi-first groupoidal closure plan and its initial consumer/owner inventory? |
-| H-DTTLF-SCALE-01 | SCALE-0A complete in the scale plan | Approve the pinned canonical-export acquisition boundary, backend-neutral module IR, explicit-term versus tactic-source distinction, runtime/proof separation, and authority/policy overlay for generic compiler implementation? |
+| H-DTTLF-SCALE-01 | SCALE-0A complete in the scale plan | Approve a shared typed immutable transfer IR plus generic declaration/runtime/proof engines, direct typed construction anchored to active source/export evidence, optional later canonical bulk parsing, explicit-term versus tactic-source distinction, and a separate authority/policy overlay? |
 
 Current gate state: H-DTTLF-01 and the DIRECTED-1A, DIRECTED-1B, and
 DIRECTED-1C instances of H-DTTLF-02 were approved as proposed on 2026-07-24.
@@ -1366,8 +1366,9 @@ on 2026-07-24. The subsequently discovered
 DIRECTED-GRADUATE-1's exact combined-profile recommendation was approved as
 H-DTTLF-03/D-DTTLF-001 on 2026-07-24 and its root-only opt-in promotion is
 complete. H-DTTLF-04 remains untriggered.
-H-DTTLF-SCALE-01 is now triggered by completed SCALE-0A, is owned by the
-active scale-qualification plan, and does not authorize a new semantic
+Revised H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R was approved on 2026-07-24. It is
+owned by the active scale-qualification plan and authorizes the generic typed
+IR/builder and engine work, not a canonical term parser or a new semantic
 profile.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
@@ -2304,3 +2305,16 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   corpus covers modules/visibility, definitions, inductives, grouped runtime
   rules, binder-producing rules, proof-time unification, protected theorem
   closures, internal Pi/Sigma uncurrying, profunctors, and the WalkingEnd HIT.
+- **2026-07-24 — Revised scale architecture approved.** The active scale plan
+  records H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R: one shared immutable typed
+  module/fragment IR and generic declaration/runtime/proof engines are
+  mandatory; exact direct TypeScript construction is the initial producer;
+  canonical export remains inventory, drift, extraction, conformance, and
+  optional later bulk-generation evidence. No canonical term parser,
+  semantic owner/rule, or product profile was authorized.
+- **2026-07-24 — Scale transfer IR completed.** SCALE-0B implemented the
+  frozen architecture review, shared immutable module/fragment IR, scoped
+  builder, explicit/tactic/absent bodies, separate runtime and proof programs,
+  and separate policy overlay. Representation-only active runtime/proof
+  witnesses add no semantic promotion or owner-specific engine path;
+  SCALE-0C is the next dependency-ready row in the active scale plan.
