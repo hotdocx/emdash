@@ -1387,8 +1387,12 @@ SCALE-INDUCTIVE-1A now completes generic signature-only head/constructor
 lowering while withholding generated induction semantics. It separately
 measured the outer-LF rejection of a `TYPE`-annotated Π binder and records
 that product-sort question as SCALE-KIND-PI-1/H-DTTLF-LF-SORT-01 rather than
-silently changing the checker. Generic mixed-phase planning is the next
-dependency-ready scale row.
+silently changing the checker. SCALE-MIXED-PHASE-1A now completes exact
+source-order planning and declaration/runtime prefix orchestration for the
+current stress corpus while keeping its policy conformance-only. Separated
+proof-program composition remains the next independent scale-engine row; the
+proof-free current corpus is ready only for an exact semantic-policy proposal,
+not execution.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2406,3 +2410,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   generated computation remain open. The tranche also records the current
   outer-LF rejection of a `TYPE`-annotated Π binder as a distinct exact
   product-sort review; mixed-phase planning remains independently ready.
+- **2026-07-25 — Generic mixed source order orchestrated.**
+  SCALE-MIXED-PHASE-1A partitions heterogeneous modules into immutable
+  declaration, signature-inductive, grouped-runtime, and proof fragments;
+  projects one exact linkage; threads declaration/runtime prefixes; and
+  preserves explicit dependency-module composition. The active stress data
+  plans without policy promotion, while a synthetic four-kind program and an
+  importing consumer compile through the existing engines. Separated proof
+  phases fail closed pending one shared-priority/session/budget design.

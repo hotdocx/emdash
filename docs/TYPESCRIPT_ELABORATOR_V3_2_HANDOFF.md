@@ -15,10 +15,13 @@ approved; the exact frozen engine review and SCALE-ACQUIRE-1A checked
 canonical-command adapter/contracts are complete; representation-only
 SCALE-STRESS-1A now covers the exact J/Pi/Sigma/Nat corpus and identifies
 generic inductive compilation plus source-ordered mixed-phase planning as its
-engine gaps; signature-only SCALE-INDUCTIVE-1A is now complete, mixed-phase
-planning is the next dependency-ready row, and generated induction semantics
-plus the outer-LF TYPE/KIND Π-formation boundary remain explicit later rows
-before any newly promoted active stress profile or whole-transfer claim
+engine gaps; signature-only SCALE-INDUCTIVE-1A and source-order/runtime
+composition SCALE-MIXED-PHASE-1A are now complete; separated proof-program
+composition is the next independent engine row, the current stress corpus is
+ready for an exact semantic-policy proposal, and generated induction
+semantics plus the outer-LF TYPE/KIND Π-formation boundary remain explicit
+later rows before any newly promoted active stress profile or whole-transfer
+claim
 
 ## Purpose
 
@@ -202,8 +205,23 @@ rejects `Π A : TYPE, ...` because the binder annotation `TYPE` has sort
 `TYPE : TYPE`; no checker semantics changed. SCALE-KIND-PI-1 and
 H-DTTLF-LF-SORT-01 must settle the Lambdapi-aligned rule before arbitrary
 polymorphic-signature transfer can be claimed. The active Sigma signature
-does not require that rule, so SCALE-MIXED-PHASE-1 is independently ready.
-Any active stress profile still requires its exact semantic review.
+does not require that rule.
+
+SCALE-MIXED-PHASE-1A now supplies the second representation-time engine gap.
+Its generic immutable planner produces exact source-order phase fragments,
+keeps grouped runtime clauses atomic, projects one module-wide linkage,
+threads the declaration environment, and composes dependency-module and
+same-module runtime prefixes before calling the existing four compilers. The
+core stress module becomes seven phases and imported Nat becomes a
+declaration plus one ordered three-clause runtime phase; all policies remain
+conformance-only. A synthetic four-kind module and a separate importing
+consumer compile and execute without owner-specific orchestration.
+Separated proof phases fail closed because they still need one shared queue,
+priority, session-effect, and budget design; this is
+SCALE-MIXED-PHASE-1B, the next independent engine row. It does not block the
+proof-free current corpus, so an exact SCALE-STRESS-1B semantic proposal can
+now be prepared. No active stress profile exists until that separate human
+review is approved.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints
