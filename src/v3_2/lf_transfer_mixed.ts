@@ -1,6 +1,6 @@
 /**
  * Generic source-ordered mixed-phase planning for
- * SCALE-MIXED-PHASE-1A/1B.
+ * SCALE-MIXED-PHASE-1A/1B/1C.
  *
  * The planner partitions one shared transfer module into phase-pure
  * fragments and feeds only already reviewed declaration, inductive
@@ -103,7 +103,6 @@ export interface CoreLfMixedPhasePlan {
     readonly doesNotProvide: readonly [
         'active-policy-selection',
         'generated-induction-semantics',
-        'runtime-divergent-proof-phase-composition',
         'kind-level-binder-compilation',
         'browser-api'
     ];
@@ -652,7 +651,6 @@ export function planCoreLfMixedPhases(
         doesNotProvide: [
             'active-policy-selection',
             'generated-induction-semantics',
-            'runtime-divergent-proof-phase-composition',
             'kind-level-binder-compilation',
             'browser-api'
         ]
@@ -926,7 +924,6 @@ export class CoreLfCompiledMixedModule {
     readonly doesNotProvide = Object.freeze([
         'active-policy-selection',
         'generated-induction-semantics',
-        'runtime-divergent-proof-phase-composition',
         'kind-level-binder-compilation',
         'browser-api'
     ] as const);
@@ -1175,12 +1172,13 @@ export function compileCoreLfMixedPhases(
         .map(phase => phase.proof);
     const proofProgram = proofPrograms.length === 0
         ? undefined
-        : proofPrograms.length === 1
-            ? proofPrograms[0]
-            : composeCoreLfProofPrograms(
-                proofPrograms,
-                declarations
-            );
+        : composeCoreLfProofPrograms(
+            proofPrograms,
+            declarations,
+            {
+                executionRuntimeProgram: latestRuntime?.runtime
+            }
+        );
     return new CoreLfCompiledMixedModule(
         plan,
         linkage,

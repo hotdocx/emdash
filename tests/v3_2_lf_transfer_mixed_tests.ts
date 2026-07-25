@@ -1,5 +1,5 @@
 /**
- * Focused SCALE-MIXED-PHASE-1A/1B orchestration/composition tests.
+ * Focused SCALE-MIXED-PHASE-1A/1B/1C orchestration/composition tests.
  */
 
 import assert from 'node:assert/strict';
@@ -15,8 +15,11 @@ import {
     CoreLfTransferPolicyEntry,
     CoreLfTransferPolicyOverlay,
     CoreLfTransferScopedBuilder,
+    KernelExpression,
     binderMode,
+    checkLambdapiProbe,
     compileCoreLfMixedPhases,
+    composeCoreLfProofPrograms,
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
     createCoreLfMixedDeclarationLinkage,
@@ -411,6 +414,30 @@ const assertDeepFrozen = (value: unknown): void => {
     );
 };
 
+const proofRuntimeVisibilityProbe = (
+    assertionBeforeRuntime: boolean
+): string => {
+    const assertion =
+        'assert ⊢ @eq_refl phase_carrier phase_left : ' +
+        'τ (@= phase_carrier phase_left phase_right);';
+    return [
+        'require open emdash.emdash3_2;',
+        'injective symbol phase_carrier : Grpd;',
+        'injective symbol phase_left : τ phase_carrier;',
+        'injective symbol phase_right : τ phase_carrier;',
+        'injective symbol later_runtime',
+        '  (x : τ phase_carrier) : τ phase_carrier;',
+        'injective symbol later_target',
+        '  (x : τ phase_carrier) : τ phase_carrier;',
+        'unif_rule phase_left ≡ phase_right',
+        '  ↪ [ later_runtime phase_left ≡ later_target phase_left ];',
+        ...(assertionBeforeRuntime ? [assertion] : []),
+        'rule later_runtime $x ↪ later_target $x;',
+        ...(assertionBeforeRuntime ? [] : [assertion]),
+        ''
+    ].join('\n');
+};
+
 describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
     it('partitions every source item into a phase-pure immutable plan', () => {
         const module = fixtureModule();
@@ -508,6 +535,22 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
         assert.deepEqual(
             compiled.proofPrograms[0].ruleIds,
             ['fixture.mixed.heads']
+        );
+        assert.ok(
+            compiled.proofProgram instanceof
+                CoreLfComposedProofProgram
+        );
+        if (
+            !(compiled.proofProgram instanceof
+                CoreLfComposedProofProgram)
+        ) return;
+        assert.notEqual(
+            compiled.proofPrograms[0].runtimeProgram,
+            compiled.latestRuntime?.runtime
+        );
+        assert.equal(
+            compiled.proofProgram.runtimeProgram,
+            compiled.latestRuntime?.runtime
         );
 
         const nodeSource = provenance(
@@ -873,15 +916,13 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
         );
     });
 
-    it('composes separated proof phases under one exact prefix and budget', () => {
+    it('composes same-prefix proof phases under one queue and budget', () => {
         const fixture = fixtureModule();
         const module = createCoreLfModuleSpec({
             ...fixture,
             revision: 'mixed-separated-proof-1',
-            runtimeRules: fixture.runtimeRules.map(rule =>
-                rule.id === 'fixture.mixed.double'
-                    ? { ...rule, order: 9 }
-                    : rule
+            runtimeRules: fixture.runtimeRules.filter(
+                rule => rule.id === 'fixture.mixed.normalize'
             ),
             proofRules: [
                 fixture.proofRules[0],
@@ -929,7 +970,7 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
             compiled.proofProgram.runtimeProgram,
             compiled.proofPrograms[0].runtimeProgram
         );
-        assert.notEqual(
+        assert.equal(
             compiled.proofProgram.runtimeProgram,
             compiled.latestRuntime?.runtime
         );
@@ -977,7 +1018,7 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
         );
     });
 
-    it('fails closed when separated proof phases have different runtimes', () => {
+    it('uses the completed runtime for divergent proof prefixes', () => {
         const fixture = fixtureModule();
         const module = createCoreLfModuleSpec({
             ...fixture,
@@ -991,17 +1032,126 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
             module,
             fixturePolicy(module)
         );
+        const compiled = compileCoreLfMixedPhases(
+            plan,
+            fixtureLinkage(plan)
+        );
+        assert.deepEqual(
+            compiled.proofPrograms.map(program =>
+                program.runtimeProgram?.ruleIds
+            ),
+            [
+                ['fixture.mixed.normalize'],
+                [
+                    'fixture.mixed.normalize',
+                    'fixture.mixed.double'
+                ]
+            ]
+        );
+        assert.ok(
+            compiled.proofProgram instanceof
+                CoreLfComposedProofProgram
+        );
+        if (
+            !(compiled.proofProgram instanceof
+                CoreLfComposedProofProgram)
+        ) return;
+        assert.equal(
+            compiled.proofProgram.runtimeProgram,
+            compiled.latestRuntime?.runtime
+        );
+
+        const nodeSource = provenance(
+            'derived',
+            'completed proof runtime witness'
+        );
+        const tokenTerm = kernelFree('mixed_token', nodeSource);
+        const call = (
+            name: string,
+            value: KernelExpression
+        ) => kernelCall(
+            kernelFree(name, nodeSource),
+            [{ plicity: 'explicit', value }],
+            nodeSource
+        );
+        const doubleTerm = call('mixed_double', tokenTerm);
+        const expanded = call(
+            'mixed_normalize',
+            call('mixed_normalize', tokenTerm)
+        );
+        const final = compiled.proofProgram.compare(
+            doubleTerm,
+            expanded,
+            { stepLimit: 4 }
+        );
+        assert.equal(final.status, 'solved');
+        assert.deepEqual(
+            final.trace.flatMap(entry =>
+                entry.kind === 'reduction' &&
+                entry.reduction.kind === 'runtime'
+                    ? [entry.reduction.ruleId]
+                    : []
+            ),
+            ['fixture.mixed.double']
+        );
+        assert.deepEqual(final.ruleApplications, []);
+
         assert.throws(
-            () => compileCoreLfMixedPhases(
-                plan,
-                fixtureLinkage(plan)
+            () => composeCoreLfProofPrograms(
+                compiled.proofPrograms,
+                compiled.declarations,
+                {
+                    executionRuntimeProgram:
+                        compiled.proofPrograms[0].runtimeProgram
+                }
             ),
             error =>
                 error instanceof CoreLfProofCompilerError &&
                 error.code === 'INVALID_PROOF_COMPOSITION' &&
-                /different runtime prefixes/u.test(error.message)
+                /does not extend/u.test(error.message)
         );
     });
+
+    it(
+        'matches Lambdapi final-signature proof/runtime visibility',
+        {
+            skip:
+                process.env.EMDASH_RUN_LAMBDAPI_SCALE_PROBES !== '1'
+        },
+        () => {
+            const options = {
+                packageRoot: resolve(repositoryRoot, 'emdash2'),
+                timeoutMs: 30_000
+            };
+            const completed = checkLambdapiProbe(
+                {
+                    source: proofRuntimeVisibilityProbe(false),
+                    sourceMap: []
+                },
+                options
+            );
+            assert.equal(
+                completed.accepted,
+                true,
+                completed.diagnostics
+            );
+            assert.equal(completed.timedOut, false);
+
+            const sourcePosition = checkLambdapiProbe(
+                {
+                    source: proofRuntimeVisibilityProbe(true),
+                    sourceMap: []
+                },
+                options
+            );
+            assert.equal(sourcePosition.accepted, false);
+            assert.equal(sourcePosition.timedOut, false);
+            assert.match(
+                sourcePosition.diagnostics,
+                /Assertion failed/u
+            );
+        }
+    );
 
     it('keeps orchestration owner-free and outside the browser API', () => {
         const implementation = readFileSync(

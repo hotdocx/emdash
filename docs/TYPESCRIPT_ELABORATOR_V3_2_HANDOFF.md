@@ -17,12 +17,12 @@ SCALE-STRESS-1A now covers the exact J/Pi/Sigma/Nat corpus and identifies
 generic inductive compilation plus source-ordered mixed-phase planning as its
 engine gaps; signature-only SCALE-INDUCTIVE-1A and source-order/runtime
 composition SCALE-MIXED-PHASE-1A plus same-runtime-prefix proof composition
-SCALE-MIXED-PHASE-1B are now complete; runtime-divergent proof-prefix
-semantics remain the next independent engine boundary, the current stress
-corpus is ready for an exact semantic-policy proposal, and generated
-induction semantics plus the outer-LF TYPE/KIND Π-formation boundary remain
-explicit later rows before any newly promoted active stress profile or
-whole-transfer claim
+SCALE-MIXED-PHASE-1B and completed-signature proof execution
+SCALE-MIXED-PHASE-1C are now complete; the mixed-phase parent is closed, the
+current stress corpus is ready for an exact semantic-policy proposal, and
+generated induction semantics plus the outer-LF TYPE/KIND Π-formation
+boundary remain explicit later rows before any newly promoted active stress
+profile or whole-transfer claim
 
 ## Purpose
 
@@ -222,12 +222,21 @@ one exact runtime prefix. Their checked rules execute through one global
 priority order, queue, metavariable session, generated-constraint schedule,
 and comparison budget while the individual phase programs remain available
 as exact compile evidence. A later module runtime is not silently visible to
-the composed proof program. Phases with different runtime prefixes still
-fail closed; SCALE-MIXED-PHASE-1C must settle whether exact prefix-sensitive
-execution is required or that boundary remains unsupported. This residual
-does not block the proof-free current corpus, so an exact SCALE-STRESS-1B
-semantic proposal can now be prepared. No active stress profile exists until
-that separate human review is approved.
+that 1B source-prefix program.
+
+SCALE-MIXED-PHASE-1C subsequently measured Lambdapi's command-order
+semantics: the same typed proof witness fails before a required runtime rule
+and succeeds after it, even though its `unif_rule` was registered earlier.
+The final TypeScript view therefore uses the completed module's declaration
+context and runtime, but accepts that runtime only when every source-time
+runtime is an exact object-identical fragment prefix. Individual source
+programs remain unchanged; one final program covers single or separated
+proof phases under the existing shared priority/session/budget design.
+Shorter or foreign runtime lineage fails closed, and no mutable global
+registry was restored. The new bounded `check:scale-phase-conformance` lane
+pins the Lambdapi positive/negative witness. The mixed-phase parent is
+complete, so an exact SCALE-STRESS-1B semantic proposal can now be prepared.
+No active stress profile exists until that separate human review is approved.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

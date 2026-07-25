@@ -1394,9 +1394,13 @@ SCALE-MIXED-PHASE-1B now composes source-separated proof programs when they
 share one exact runtime prefix, global priority, queue, metavariable session,
 generated-constraint schedule, and comparison budget. It preserves each
 phase's exact compile evidence and does not grant later runtime visibility.
-Runtime-divergent phases remain the explicit SCALE-MIXED-PHASE-1C boundary;
-the proof-free current corpus is ready only for an exact semantic-policy
-proposal, not execution.
+SCALE-MIXED-PHASE-1C subsequently establishes by a bounded Lambdapi
+positive/negative probe that later proof attempts use the completed runtime
+signature. The final TypeScript proof view now accepts that runtime only when
+each source runtime is an exact object-identical compiled-fragment prefix;
+source artifacts remain unchanged and no mutable registry is restored. The
+mixed-phase parent is complete. The proof-free current corpus is ready only
+for an exact semantic-policy proposal, not execution.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2430,3 +2434,12 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   and comparison budget. A later runtime remains invisible, and
   runtime-divergent proof phases fail closed pending the exact
   SCALE-MIXED-PHASE-1C visibility audit/design.
+- **2026-07-25 — Completed-signature proof execution qualified.**
+  SCALE-MIXED-PHASE-1C uses a bounded Lambdapi positive/negative probe to
+  distinguish source-time rule checking from proof use in the completed
+  signature. Exact source proof programs retain their declaration/runtime
+  prefixes; one final executable program uses the completed context and
+  runtime only after object-identical compiled-fragment prefix validation.
+  This closes the mixed-phase parent without restoring the historical
+  mutable global rewrite/unification arrays or changing any active semantic
+  profile.

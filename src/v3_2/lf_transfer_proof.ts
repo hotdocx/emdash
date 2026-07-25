@@ -1,6 +1,7 @@
 /**
  * Generic typed proof-time unification compiler, bounded comparison engine,
- * and shared-prefix composition for SCALE-0E/SCALE-MIXED-PHASE-1B.
+ * and final-signature composition for
+ * SCALE-0E/SCALE-MIXED-PHASE-1B/1C.
  *
  * This is deliberately separate from runtime conversion. Proof rules match
  * one equality problem symmetrically and replace it with an ordered list of
@@ -42,6 +43,9 @@ import {
 import {
     CoreLfCompiledDeclaration
 } from './lf_transfer_compiler';
+import {
+    coreLfRuntimeHasExactPrefix
+} from './lf_transfer_runtime';
 import {
     BinderMode,
     KernelExpression,
@@ -1823,6 +1827,12 @@ export interface CoreLfProofProgramCompositionOptions {
      * program must already carry the same limit.
      */
     readonly comparisonStepLimit?: number;
+    /**
+     * Runtime visible when the completed proof program is executed. Every
+     * source program's exact compile-time runtime must be an immutable prefix
+     * of this program. When omitted, the first source runtime is used.
+     */
+    readonly executionRuntimeProgram?: CoreLfCatalogRuntime;
 }
 
 export interface CoreLfComposedProofPhase {
@@ -1838,9 +1848,9 @@ export interface CoreLfComposedProofPhase {
  *
  * Source programs retain their exact compilation evidence. The executable
  * view flattens their rules once, preserving source priority, one comparison
- * queue, one metavariable session, and one step budget. All programs must
- * have the same runtime prefix; prefix-sensitive composition is a separate
- * mechanism rather than an implicit widening.
+ * queue, one metavariable session, and one step budget. It uses one explicit
+ * completed-signature runtime that must extend every exact source-time
+ * runtime by immutable fragment identity.
  */
 export class CoreLfComposedProofProgram {
     readonly revision: string;
@@ -1873,7 +1883,9 @@ export class CoreLfComposedProofProgram {
             ...programs.map(source =>
                 `${source.module.moduleId}/` +
                 `${source.module.fragmentId}@${source.revision}`
-            )
+            ),
+            `runtime@${program.runtimeProgram?.revision ?? 'none'}`,
+            `budget@${program.comparisonStepLimit}`
         ].join('+');
         this.rules = program.rules;
         this.ruleIds = program.ruleIds;
@@ -2014,32 +2026,39 @@ const proofCompositionModule = (
 };
 
 /**
- * Compose at least two already checked proof phases under one exact runtime
- * prefix and one comparison budget.
+ * Compose one or more already checked proof phases under one exact
+ * completed-signature runtime and one comparison budget.
  */
 export function composeCoreLfProofPrograms(
     programs: readonly CoreLfCompiledProofProgram[],
     declarations: CoreLfProofDeclarationContext,
     options: CoreLfProofProgramCompositionOptions = {}
 ): CoreLfComposedProofProgram {
-    if (programs.length < 2) {
+    if (programs.length === 0) {
         return fail(
             'INVALID_PROOF_COMPOSITION',
             'programs',
-            'Proof composition requires at least two source programs'
+            'Proof composition requires at least one source program'
         );
     }
-    const runtimeProgram = programs[0].runtimeProgram;
-    if (programs.some(
-        program => program.runtimeProgram !== runtimeProgram
-    )) {
-        return fail(
-            'INVALID_PROOF_COMPOSITION',
-            'programs.runtimeProgram',
-            'Proof phases have different runtime prefixes; widening or ' +
-                'prefix-sensitive execution requires an explicit later row'
-        );
-    }
+    const runtimeProgram =
+        options.executionRuntimeProgram ??
+        programs[0].runtimeProgram;
+    programs.forEach((program, programIndex) => {
+        if (
+            !coreLfRuntimeHasExactPrefix(
+                runtimeProgram,
+                program.runtimeProgram
+            )
+        ) {
+            fail(
+                'INVALID_PROOF_COMPOSITION',
+                `programs[${programIndex}].runtimeProgram`,
+                'Completed proof runtime does not extend the exact ' +
+                    `source-time prefix of phase ${programIndex}`
+            );
+        }
+    });
     const sourceLimits = new Set(
         programs.map(program => program.comparisonStepLimit)
     );

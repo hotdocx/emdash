@@ -1117,6 +1117,48 @@ implements CoreLfCatalogRuntime {
     }
 }
 
+const exactRuntimeFragments = (
+    runtime: CoreLfCatalogRuntime
+): readonly CoreLfCompiledRuntimeProgram[] | undefined => {
+    if (runtime instanceof CoreLfCompiledRuntimeProgram) {
+        return [runtime];
+    }
+    if (runtime instanceof CoreLfComposedRuntimeProgram) {
+        return runtime.fragments;
+    }
+    return undefined;
+};
+
+/**
+ * Whether `runtime` is the same immutable runtime as `prefix`, or extends it
+ * by appending exact compiled fragment objects.
+ *
+ * An absent prefix is the empty source-time runtime. Foreign catalog runtime
+ * implementations are comparable only by object identity: their internal
+ * rule lineage is deliberately not guessed from public rule IDs.
+ */
+export function coreLfRuntimeHasExactPrefix(
+    runtime: CoreLfCatalogRuntime | undefined,
+    prefix: CoreLfCatalogRuntime | undefined
+): boolean {
+    if (prefix === undefined) return true;
+    if (runtime === prefix) return true;
+    if (runtime === undefined) return false;
+
+    const runtimeFragments = exactRuntimeFragments(runtime);
+    const prefixFragments = exactRuntimeFragments(prefix);
+    if (
+        runtimeFragments === undefined ||
+        prefixFragments === undefined ||
+        prefixFragments.length > runtimeFragments.length
+    ) {
+        return false;
+    }
+    return prefixFragments.every(
+        (fragment, index) => runtimeFragments[index] === fragment
+    );
+}
+
 export interface CoreLfRuntimeFragmentDependency {
     readonly relation: CoreLfRuntimeFragmentDependencyRelation;
     readonly fragment: CoreLfCompiledRuntimeFragment;
