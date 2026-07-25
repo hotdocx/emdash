@@ -85,3 +85,189 @@ CoreLfCanonicalSelectionContract =
             }
         ]
     });
+
+/**
+ * Checked source/export selection for the internal/pullback dependent-Pi
+ * runtime slice. Existing continuation and SCALE-STRESS-2A declarations are
+ * reused later by qualified identity; this contract pins every additional
+ * declaration and prerequisite rule selected by 2B1.
+ */
+export const CORE_LF_SCALE_STRESS_2_INTERNAL_PI_ACQUISITION:
+CoreLfCanonicalSelectionContract =
+    createCoreLfCanonicalSelectionContract({
+        revision: 'SCALE-STRESS-2-INTERNAL-PI-ACQUISITION-1',
+        moduleId: 'emdash.emdash3_2',
+        authorityPath: 'emdash2/emdash3_2.lp',
+        sourceSha256:
+            'sha256:f438985ca874f1037e9a63b597e58883d0c0fcc86434117a125297592739c613',
+        canonicalExport: {
+            exporterVersion: '3.0.0-90-gdb4f780',
+            sha256:
+                'sha256:355bd868c33553e0c7488a181d7c58661471fc2c878e63d5ceba296d26c056a0',
+            imports: []
+        },
+        commands: [
+            {
+                id: 'internal-pi.opposite-category',
+                ordinal: 236,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:ba6fcaccdc6912593ab52efeb68b485312e2cfdeb2c85e27fbf7ed0b15bb0e8d',
+                name: 'Op_cat',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'internal-pi.opposite-object',
+                ordinal: 238,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:453da01adc70028cd130c2f7d83d93d0a059e388637bab25a2b91a732cc4aeff'
+            },
+            {
+                id: 'internal-pi.displayed-functor-classifier',
+                ordinal: 394,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:340ce5f763e5a50f6e58402526c66ac4de7fb49b60c42f4aa08deb3b75bd0941',
+                name: 'Functord',
+                modifiers: ['injective'],
+                hasBody: true
+            },
+            {
+                id: 'internal-pi.displayed-category-functor',
+                ordinal: 538,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:8d0531d40ff16b0081941883ca306c2e7832a161f79c04f8833fc579a90b8267',
+                name: 'Catd_cat_func',
+                modifiers: [],
+                hasBody: true
+            },
+            {
+                id: 'internal-pi.pullback-family',
+                ordinal: 926,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:d6c5bfa07c17effbf4109627d46b29e38f061c2a5fd24b6d0d346b76db5b6021',
+                name: 'Pullback_catd',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'internal-pi.pullback-fibre',
+                ordinal: 927,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:bfa34e6ee270b4024e9c9cb1d692c38cb3e430fc443f8237612151e04679f88a'
+            },
+            {
+                id: 'internal-pi.pullback-family-functor',
+                ordinal: 930,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:dcb8d95c6a8b2eabaeaf1b4bf4f6737dac50dddede37ab5c379f23c5ea70aa56',
+                name: 'Pullback_catd_func',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'internal-pi.pullback-functor-object',
+                ordinal: 931,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:07f48f70c1ac7226a64f2d035ce0c8e0bd5616a404db5e6b62f35b5cb81257be'
+            },
+            {
+                id: 'internal-pi.constant-family',
+                ordinal: 936,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:da2f154125b7695570e39150c76235a7c3253e589a5d583676ed9a8a016e5507',
+                name: 'Const_catd',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'internal-pi.constant-fibre',
+                ordinal: 939,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:5d9db2424a5ec6ec8a161c63600a2540a22d75761fd63e9e30ea6e9603e055c6'
+            },
+            {
+                id: 'internal-pi.constant-pullback',
+                ordinal: 941,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:09d6f5f01ea17d4c7e823511f4bedb399308ad56a4dc6a398cf006ccd2e187e2'
+            },
+            {
+                id: 'internal-pi.section-functor',
+                ordinal: 969,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:4fa3de83a568d56652210c00057d070801c2034812c515f11506950ac6ebdf87',
+                name: 'Pi_func',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'internal-pi.section-functor-object',
+                ordinal: 970,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:c06ed4abb9a781cc3e36e3039cc8d718c15edcabd28e590f3d390fc2d740278a'
+            },
+            {
+                id: 'internal-pi.package',
+                ordinal: 972,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:a33428ba27fef5b2fbea1a232ca84c288d4b26764a47b1baa75216705fa6cdcc',
+                name: 'Pi_int_funcd',
+                modifiers: ['constant'],
+                hasBody: false
+            },
+            {
+                id: 'internal-pi.package-component',
+                ordinal: 973,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:3ecfb99b73a2b28dbf8a7477c44bd12742f758009c1cd1ca251dd217e8e1fa04'
+            },
+            {
+                id: 'internal-pi.pullback-package',
+                ordinal: 974,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:0ed7f348ea7cfc0d1ca1841d866144ec6ada85f85f3650512733cfbe74d62147',
+                name: 'Pi_pullback_funcd',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'internal-pi.pullback-fold',
+                ordinal: 975,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:b906d4ad5aa1c949f563064a62afffcd1092600b6769f27ebfe473839cf5b462'
+            },
+            {
+                id: 'internal-pi.pullback-component',
+                ordinal: 976,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:06ece07480974614ed337e6043129318bec8fc85b7379c68f550be8b80c6c0c0'
+            }
+        ]
+    });
