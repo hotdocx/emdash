@@ -38,6 +38,8 @@ export * from './directed_graduation';
 export * from './lambdapi_export_inventory';
 export * from './scale_architecture_review';
 export * from './lf_transfer';
+export * from './lf_transfer_compiler';
+export * from './directed_continuation_transfer';
 export * from './metatheory';
 export * from './migration';
 export * from './pattern';

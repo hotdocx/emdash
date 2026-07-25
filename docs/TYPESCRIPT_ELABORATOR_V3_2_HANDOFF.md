@@ -8,8 +8,9 @@ and directed-DTT work has additionally graduated the exact root-only opt-in
 `emdash-v3.2-dttlf-directed-1` continuation profile under H-DTTLF-03;
 systematic whole-development transfer remains unqualified and is now the
 subject of the active scale-qualification plan, whose shared transfer IR
-SCALE-0B slice is complete and whose generic declaration compiler SCALE-0C
-slice is next
+SCALE-0B and generic declaration compiler SCALE-0C slices are complete;
+generic runtime-rule compilation SCALE-0D is next, while the separate
+proof-time engine SCALE-0E is dependency-ready
 
 ## Purpose
 
@@ -143,10 +144,15 @@ before any claim that future transfers are systematic or mechanical.
 SCALE-0B now implements and validates that immutable IR, scoped direct
 builder, body distinctions, separate runtime/proof programs, and separate
 policy overlay without semantically installing its active witnesses.
-SCALE-0C must next compile the already reviewed 29-signature continuation
-through that shared path. Pinned checked canonical export supplies inventory
-and provenance and remains an optional later generator input, not an
-immediate term-parser prerequisite.
+SCALE-0C now compiles all 29 reviewed signatures through one generic
+declaration engine: 20 existing Core owners are checked intrinsically and the
+nine continuation declarations reproduce the reviewed catalog exactly from
+separate typed module, policy, and linkage data. The existing continuation
+factory and authority remain unchanged. SCALE-0D must next migrate the ten
+reviewed runtime rules through the shared rule IR; SCALE-0E may independently
+build the separate proof-time engine. Pinned checked canonical export supplies
+inventory and provenance and remains an optional later generator input, not
+an immediate term-parser prerequisite.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

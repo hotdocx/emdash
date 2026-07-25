@@ -2318,3 +2318,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   and separate policy overlay. Representation-only active runtime/proof
   witnesses add no semantic promotion or owner-specific engine path;
   SCALE-0C is the next dependency-ready row in the active scale plan.
+- **2026-07-24 — Generic declaration migration completed.** SCALE-0C now
+  reconstructs the exact reviewed 29-signature closure from separate typed
+  module, policy, and linkage artifacts through one owner-agnostic compiler.
+  It validates 20 intrinsic Core signatures and reproduces all nine candidate
+  declarations, bodies, transparency choices, and backend mappings without
+  changing this plan's reviewed continuation factory or authority. SCALE-0D
+  is next; SCALE-0E is independently dependency-ready in the active scale
+  plan.

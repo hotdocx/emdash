@@ -58,10 +58,17 @@ export interface CoreLfDeclaration extends CoreBindingInput {
 /**
  * Candidate declaration validation may opt into a reviewed checker while the
  * default remains the frozen Core checker. The factory is supplied an exact
- * persistent declaration environment for each validation phase.
+ * persistent declaration environment and the earlier LF delta environment
+ * for each validation phase.
  */
+export interface CoreLfDeclarationCheckerContext {
+    readonly phase: 'declaration-type' | 'definition-body';
+    readonly lfEnvironment: CoreLfDeclarationEnvironment;
+}
+
 export type CoreLfDeclarationCheckerFactory = (
-    environment: CoreDeclarationEnvironment
+    environment: CoreDeclarationEnvironment,
+    context: CoreLfDeclarationCheckerContext
 ) => CoreChecker;
 
 const defaultCoreLfDeclarationCheckerFactory:
@@ -218,7 +225,10 @@ export class CoreLfDeclarationEnvironment {
                 mode: input.mode,
                 provenance: input.provenance
             });
-            const typeChecker = checkerFactory(nextCoreEnvironment);
+            const typeChecker = checkerFactory(nextCoreEnvironment, {
+                phase: 'declaration-type',
+                lfEnvironment: this
+            });
             if (
                 typeChecker.rootContext.environment !==
                 nextCoreEnvironment
@@ -275,7 +285,11 @@ export class CoreLfDeclarationEnvironment {
 
             try {
                 const bodyChecker = checkerFactory(
-                    this.coreEnvironment
+                    this.coreEnvironment,
+                    {
+                        phase: 'definition-body',
+                        lfEnvironment: this
+                    }
                 );
                 if (
                     bodyChecker.rootContext.environment !==

@@ -29,7 +29,7 @@ did not require a full Lambdapi term parser as the architectural starting
 point, the user approved revised H-DTTLF-SCALE-01 on 2026-07-24.
 Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B is complete;
-SCALE-0C is the next dependency-ready slice
+SCALE-0C is complete; SCALE-0D is next and SCALE-0E is dependency-ready
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -422,7 +422,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-PLAN-0 | complete | reviewed directed continuation | This living plan, corrected verdict, source inventory, representative matrix, gates, and launch prompt |
 | SCALE-0A | complete | SCALE-PLAN-0 | Pure TypeScript top-level canonical-export parser/inventory; fixture tests; opt-in live export/version/hash/count gate over all five active modules |
 | SCALE-0B | complete | revised H-DTTLF-SCALE-01, SCALE-0A | Shared immutable typed transfer IR and scoped builder for qualified declarations, explicit/tactic/absent bodies, runtime patterns, and separate proof problems; no parser or semantic promotion |
-| SCALE-0C | pending | SCALE-0B | Generic declaration compiler plus policy overlay; reproduce the reviewed 29-signature continuation without owner-specific catalog construction |
+| SCALE-0C | complete | SCALE-0B | Generic declaration compiler plus policy overlay; reproduce the reviewed 29-signature continuation without owner-specific catalog construction |
 | SCALE-0D | pending | SCALE-0C | Generic typed runtime-rule compiler/matcher; migrate the ten reviewed rules equivalently before adding stress semantics |
 | SCALE-0E | pending | SCALE-0C | Separate typed proof-time `unif_rule` compiler and bounded comparison engine, informed by reusable generic algorithms on `main` |
 | SCALE-ACQUIRE-1 | deferred decision | SCALE-0C through SCALE-0E and representative encoding evidence | Decide whether bulk acquisition warrants a fail-closed canonical term/pattern parser/generator or a lighter checked extraction adapter; any adapter targets the same IR |
@@ -616,6 +616,97 @@ engine, semantic import, product promotion, browser API, or mechanical-scale
 qualification. SCALE-0C must consume this IR generically and reproduce the
 already reviewed 29-signature continuation without owner-specific catalog
 construction.
+
+## SCALE-0C Completion Record
+
+SCALE-0C adds `src/v3_2/lf_transfer_compiler.ts` as one owner-agnostic
+declaration compiler over the SCALE-0B IR. Its inputs are the immutable module
+specification, the independent semantic policy overlay, and a new independent
+immutable symbol-linkage table. The linkage maps authoritative qualified
+symbols either to an existing intrinsic `CoreOwnerId` or to a safe Core free
+name plus backend spelling; it does not grant semantic policy.
+
+The compiler:
+
+- requires exact policy and linkage coverage and rejects unknown, duplicate,
+  missing, forward, self, or excluded dependencies;
+- lowers `type`, locally nameless `bound`, qualified `global`, generic `call`,
+  dependent `pi`, and `lambda` nodes without an owner-named branch;
+- checks conformance-only intrinsic declarations against
+  `coreOwnerSignatureType()` and does not install a duplicate free
+  declaration for them;
+- installs opaque signatures, checked transparent definitions, and checked
+  opaque theorem bodies in one persistent `CoreLfDeclarationEnvironment`;
+- gives body checking access to only the earlier checked delta environment,
+  generic beta, and an optional injected closed runtime component, without a
+  global rule/declaration registry;
+- validates exact intrinsic arity and plicity, declaration scope, earlier-only
+  bodies, transparency/body policy, and the resulting environment; and
+- refuses inductives, runtime rules, proof rules, checked tactic execution, or
+  unsupported declaration policy rather than silently ignoring another
+  compiler phase.
+
+`src/v3_2/directed_continuation_transfer.ts` is the reviewed migration data
+edge, not another semantic compiler. It adapts the already approved
+`CORE_DIRECTED_GRADUATION_MANIFEST` snapshots through the shared scoped
+builder into one `CoreLfModuleSpec`, with exact active qualified symbols,
+source fragments, source SHA-256, and canonical-export SHA-256. Separate
+policy and linkage artifacts then classify the same ordered 29 declarations:
+
+- 20 base owner signatures are intrinsic `conformance-only` checks;
+- eight reviewed candidate declarations are body-free opaque signatures; and
+- `Sigma_catd_transport_func` is the one checked transparent definition.
+
+Compiling those three data artifacts installs exactly the existing nine
+candidate declarations. The executable equivalence validator checks every
+signature, body, transparency decision, Core name, backend mapping, and
+environment order against `CoreDirected1cCatalog.create()`. The result remains
+eight opaque backend references plus one transparent backend definition. The
+existing continuation factory, frozen MVP, browser graph, Lambdapi source,
+reviewed runtime programs, and all authority/profile records are unchanged.
+The seven-rule directed runtime is injected only while checking the already
+reviewed transparent body; its generic IR compilation is SCALE-0D.
+
+`tests/v3_2_lf_transfer_compiler_tests.ts` supplies eleven focused tests. An
+unrelated fixture proves the same compiler handles intrinsic, opaque,
+transparent, theorem-body, and prior-delta declaration cases without a
+registry. Negative cases reject missing linkage, incomplete policy, a forward
+reference, intrinsic signature drift, and an unsupported tactic body. The
+reviewed migration tests prove the exact 20 + 9 split, recursive immutability,
+live-source fragment/hash relocation, expression-for-expression legacy
+equivalence, owner-agnostic compiler source, and continued browser exclusion.
+
+Validation on 2026-07-24:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_lf_transfer_compiler_tests.ts
+  11 tests / 2 suites: all passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  444 tests / 55 suites: 417 passed, 27 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  passed the complete TypeScript gate, all 19 frozen MVP differential
+  judgments, 41 kernel/example metric targets, 39 kernel-script tests,
+  five document-registry tests, source/report/book checks, strict LHS and
+  generated-catalog audits, all 11 directed-continuation judgments, and all
+  seven live scale-inventory tests
+
+python3 emdash2/scripts/lint_report_headers.py
+git diff --check
+  passed
+```
+
+SCALE-0C establishes generic declaration migration equivalence only. It
+grants no new declaration, runtime or proof rule, semantic profile, parser,
+product promotion, theorem claim, or systematic whole-development
+qualification. SCALE-0D is the next ledger row; SCALE-0E is independently
+dependency-ready from this checkpoint.
 
 ## Human Review Gates
 
@@ -827,3 +918,12 @@ scope is affected.
   active kernel check, complete scale gate, header lint, and whitespace audit
   passed. The checkpoint grants no parser, semantic promotion, product
   expansion, mechanical-transfer qualification, or broader Git authority.
+- **2026-07-24 — SCALE-0C completed.** Added one generic declaration
+  compiler, separate immutable symbol linkage, and an exact typed 29-signature
+  migration specification. Twenty base signatures validate against intrinsic
+  Core schemas and the nine reviewed candidate declarations reproduce the
+  legacy reviewed catalog expression-for-expression, including its 8 opaque
+  + 1 transparent boundary and backend mappings. Eleven focused tests and the
+  444-test TypeScript gate passed; no runtime/proof compiler, semantic
+  promotion, browser API, or mechanical-scale claim was added. SCALE-0D is
+  next and SCALE-0E is dependency-ready.
