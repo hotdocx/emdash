@@ -1380,6 +1380,10 @@ profile, browser export, Lambdapi change, theorem, or mechanical-transfer
 qualification by itself. SCALE-ACQUIRE-1A now implements the first checked
 adapter and exact J/Pi/Sigma/Nat acquisition contracts in the active scale
 plan.
+SCALE-STRESS-1A now supplies the exact immutable typed J/Pi/Sigma/Nat
+representation and classifies generic inductive compilation and mixed
+source-order phase planning as the remaining engine prerequisites before any
+stress-profile proposal.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2378,3 +2382,13 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   command contracts. No term/pattern parsing, active semantic rule/profile,
   browser API, Lambdapi change, theorem, or mechanical-transfer claim was
   added; representation-only SCALE-STRESS-1A is next.
+- **2026-07-25 — First representative stress corpus encoded.**
+  SCALE-STRESS-1A lowers the acquired dependent J, decoded Pi/Sigma, and
+  imported grouped-Nat commands into exact immutable typed mixed-module
+  specifications. Typed motive captures replace the two canonical source
+  wildcards without dropping J's repeated guards; Pi retains a locally
+  nameless binder RHS; Sigma retains its dependent constructor/generated
+  owner identity; and Nat retains dependency and grouped recursive order.
+  Every policy remains conformance-only. The audit opens generic inductive
+  compilation and generic source-ordered mixed-phase planning before any
+  exact active stress-profile review.

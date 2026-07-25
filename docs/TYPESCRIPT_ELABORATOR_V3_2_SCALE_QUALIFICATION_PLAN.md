@@ -33,7 +33,8 @@ Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
 D-DTTLF-SCALE-002 is approved; SCALE-ACQUIRE-1A is complete and
-representation-only SCALE-STRESS-1A is next
+representation-only SCALE-STRESS-1A is complete; generic inductive and
+mixed-phase engine rows are next before semantic promotion
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -54,6 +55,8 @@ SCALE-RUNTIME-DEPS-1 implementation checkpoint:
 `9e8e3f94177e85cbd49c6b50f9f193f6d1978470`
 SCALE-ACQUIRE-1A implementation checkpoint:
 `091538c8c3bda6e4e89dd3fee96fd6eed68a51f8`
+SCALE-STRESS-1A implementation checkpoint:
+`333003084ce1fbf165caccf01c71af17e38c470a`
 
 ## Purpose
 
@@ -443,8 +446,10 @@ The architecture qualifies only when all of the following hold:
 | SCALE-ACQUIRE-1 | complete decision | H-DTTLF-SCALE-02, SCALE-0C through SCALE-0E | D-DTTLF-SCALE-002 selects direct typed specifications plus small fail-closed checked extraction adapters; a complete canonical term/pattern parser remains deferred |
 | SCALE-ACQUIRE-1A | complete | SCALE-ACQUIRE-1 | Generic source/export/import/ordinal/kind/metadata/digest checked command-selection adapter plus exact outer-J, groupoidal Pi/Sigma, and imported grouped-Nat acquisition contracts |
 | SCALE-STRESS-1 | in progress | SCALE-0D, SCALE-RUNTIME-DEPS-1, SCALE-ACQUIRE-1A, applicable semantic review | Parent row for outer J, groupoidal Pi/Sigma, and imported Nat grouped recursion |
-| SCALE-STRESS-1A | pending | SCALE-ACQUIRE-1A | Exact typed representation and fail-closed engine-gap classification for the acquired J/Pi/Sigma/Nat commands, without installing an active semantic profile |
-| SCALE-STRESS-1B | pending | SCALE-STRESS-1A, applicable semantic review | Execute the exact approved subset through generic declaration/runtime/inductive phases with differential witnesses |
+| SCALE-STRESS-1A | complete | SCALE-ACQUIRE-1A | Exact typed representation and fail-closed engine-gap classification for the acquired J/Pi/Sigma/Nat commands, without installing an active semantic profile |
+| SCALE-INDUCTIVE-1 | pending | SCALE-STRESS-1A | Generic immutable inductive head/constructor/generated-owner lowering and compilation, with unsupported recursive/indexed/generated forms explicit and fail-closed; no active semantic promotion |
+| SCALE-MIXED-PHASE-1 | pending | SCALE-STRESS-1A, SCALE-INDUCTIVE-1 | Generic source-ordered planner over the separate declaration/inductive/runtime/proof engines, preserving grouped clauses and explicit module/prior-fragment dependencies without owner-specific orchestration |
+| SCALE-STRESS-1B | pending | SCALE-STRESS-1A, SCALE-INDUCTIVE-1, SCALE-MIXED-PHASE-1, applicable semantic review | Execute the exact approved subset through generic declaration/runtime/inductive phases with differential witnesses |
 | SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
@@ -1115,6 +1120,78 @@ the shared typed IR, classify each unsupported mechanism explicitly, and
 prepare any required semantic-profile gate before SCALE-STRESS-1B executes
 active rules.
 
+## SCALE-STRESS-1A Completion Record
+
+`src/v3_2/scale_stress_1_representation.ts` now lowers the exact acquired
+commands into two immutable mixed `CoreLfModuleSpec` values with separate
+policy overlays. The active mathematical names occur only in this reviewed
+typed data adapter, not in the shared transfer IR or any generic compiler.
+Every policy entry remains `conformance-only`, `productEffects` is empty, and
+the artifact is root-only. Its exact validator rejects both semantic-boundary
+expansion and any representation or mechanism-classification drift.
+
+The core representation preserves one source-ordered sequence:
+
+1. the dependent `ind_eqr` declaration and reflexivity clause;
+2. the parameterized `τΣ_` inductive, dependent `Struct_sigma` constructor,
+   generated `ind_τΣ_` identity, and `sigma_ind` declaration/beta; and
+3. the `Pi_grpd` declaration and binder-producing decoding beta.
+
+The canonical J motive `_` is not passed to the runtime compiler as an
+untyped wildcard. It is lowered to one typed, left-bound, right-unused motive
+capture whose type depends on the acquired category and repeated endpoint.
+The repeated endpoint and explicit `eq_refl` category/endpoint guards remain
+structurally present. The Sigma eliminator motive wildcard is lowered by the
+same typed-capture policy. The Pi right-hand side uses the existing locally
+nameless dependent `pi` node and refers to its new binder at index zero.
+
+The imported Nat representation preserves the open dependency on
+`emdash.emdash3_2`, the injective `nat_add` declaration, one group identity,
+clause orders zero through two, and the recursive successor right-hand side.
+All provenance fragments relocate in the active sources, and the four
+mechanism assessments cover every selected acquisition ID exactly once.
+
+The representation proves that the shared syntax is expressive enough for
+all four selected mechanisms, but the fail-closed executable refusal exposes
+two generic engine gaps rather than an owner-specific failure:
+
+- inductive blocks need generic head/constructor/generated-owner lowering and
+  compilation; and
+- mixed source modules need a source-ordered planner that feeds phase-pure
+  fragments to the already separate declaration, inductive, local/composed
+  runtime, and proof engines while preserving grouped clauses and dependency
+  order.
+
+These are now explicit `SCALE-INDUCTIVE-1` and `SCALE-MIXED-PHASE-1` rows.
+They are non-semantic infrastructure unlocked by D-DTTLF-SCALE-002.
+SCALE-STRESS-1B remains behind both rows and an exact new semantic-profile
+review. No J, Pi, Sigma, Nat, declaration, rule, generated eliminator,
+browser API, product behavior, or whole-transfer claim was promoted here.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_scale_stress_1_representation_tests.ts
+  8 tests / 1 suite: all passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  486 tests / 61 suites: 458 passed, 28 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript gate passed
+  all 19 frozen MVP differential judgments passed
+  41 kernel/example metric targets passed
+  39 kernel-script tests and five registry tests passed
+  source/report/book/audit gates passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -1450,3 +1527,14 @@ scope is affected.
   checkpoint adds no term parser, active declaration or rule, semantic
   profile, browser API, Lambdapi change, theorem, mechanical-transfer claim,
   or broader Git authority.
+- **2026-07-25 — SCALE-STRESS-1A completed and checkpointed.** Recorded
+  local implementation checkpoint
+  `333003084ce1fbf165caccf01c71af17e38c470a` after eight focused
+  representation tests, the 486-test TypeScript gate, bounded active kernel
+  check, complete scale gate, all 14 live inventory/acquisition probes,
+  owner-name hygiene, browser exclusion, and whitespace checks passed. The
+  exact J/Pi/Sigma/Nat commands now have immutable typed representations and
+  fail-closed gap classifications. No active semantic policy or product
+  effect was added. Generic inductive compilation and generic source-ordered
+  mixed-phase planning are the next engine rows before an exact
+  SCALE-STRESS-1B semantic proposal.

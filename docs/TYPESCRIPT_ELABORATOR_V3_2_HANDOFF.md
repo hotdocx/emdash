@@ -13,7 +13,9 @@ through SCALE-0E plus generic prior-runtime-fragment composition
 SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 is
 approved; the exact frozen engine review and SCALE-ACQUIRE-1A checked
 canonical-command adapter/contracts are complete; representation-only
-SCALE-STRESS-1A is next before any newly promoted active stress profile
+SCALE-STRESS-1A now covers the exact J/Pi/Sigma/Nat corpus and identifies
+generic inductive compilation plus source-ordered mixed-phase planning as the
+next engine rows before any newly promoted active stress profile
 
 ## Purpose
 
@@ -176,8 +178,14 @@ adapter: it checks source/export/version/import/ordinal/kind/metadata/digest
 contracts and selects the exact outer-J, decoded groupoidal Pi/Sigma, and
 imported grouped-Nat canonical commands. It parses no terms, grants no
 semantic policy, invokes no production Lambdapi, and remains outside the
-browser. Representation-only SCALE-STRESS-1A is next; any active stress
-profile still requires its exact semantic review.
+browser. Representation-only SCALE-STRESS-1A now lowers all selected commands
+into immutable mixed typed specs: J and Sigma source wildcards become typed
+left-bound/right-unused motives, the Pi beta retains its dependent binder RHS,
+and imported Nat retains one ordered three-clause recursive group. All
+entries remain conformance-only. The executable refusal isolates generic
+inductive compilation and generic source-order phase planning, rather than a
+category-owner exception, as the next two infrastructure rows. Any active
+stress profile still requires its exact semantic review.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints
