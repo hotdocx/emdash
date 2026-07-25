@@ -41,9 +41,13 @@ SCALE-MIXED-PHASE-1B plus completed-signature proof execution
 SCALE-MIXED-PHASE-1C complete; SCALE-STRESS-1B-PREP is complete with one
 dependency-closed, executable-but-non-active proposal and bounded
 TypeScript/Lambdapi evidence; H-DTTLF-SCALE-STRESS-01/
-D-DTTLF-SCALE-STRESS-001 is now the exact next human decision, while
-generated induction semantics, batch deduplication, and the measured
-outer-LF TYPE/KIND product boundary remain explicit gates before
+D-DTTLF-SCALE-STRESS-001 remains the exact pending semantic decision;
+independent representation-only SCALE-STRESS-2A is complete with the exact
+Sigma/Pi telescope-uncurrying `unif_rule`, live positive/negative Lambdapi
+evidence, isolated TypeScript proof execution, and a newly explicit
+dependent-generated-constraint typing boundary; generated induction
+semantics, batch deduplication, that proof-typing boundary, and the measured
+outer-LF TYPE/KIND product boundary remain explicit rows before
 whole-transfer qualification
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
@@ -477,7 +481,10 @@ The architecture qualifies only when all of the following hold:
 | SCALE-MIXED-PHASE-1C | complete | SCALE-MIXED-PHASE-1B | Lambdapi positive/negative probes establish completed-signature runtime visibility; exact source programs retain their compile-time prefixes while one final executable view accepts only object-identical immutable runtime-prefix extension |
 | SCALE-STRESS-1B-PREP | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A, SCALE-MIXED-PHASE-1 | Close the exact equality/reflexivity/Nat dependencies, preserve intrinsic external linkage and constructor-local parameter plicity generically, and compile one isolated proposed J/Pi/Sigma/Nat profile with TypeScript and bounded Lambdapi evidence but no active registration |
 | SCALE-STRESS-1B | awaiting H-DTTLF-SCALE-STRESS-01 | SCALE-STRESS-1B-PREP, applicable semantic review | If approved, freeze the decision record and expose only the exact isolated root-development qualification profile plus its mandatory differential lane; do not claim complete inductive-command equivalence before SCALE-INDUCTIVE-1B or integrated batch reuse before SCALE-BATCH-1 |
-| SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
+| SCALE-STRESS-2 | in progress | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Parent row for internal/pullback Pi and Sigma telescope uncurrying cases |
+| SCALE-STRESS-2A | complete | H-DTTLF-SCALE-02, SCALE-0E, SCALE-MIXED-PHASE-1 | Pin and directly represent `Catd`, `Sigma_proj1_pullback_catd`, and the active Sigma/Pi uncurrying `unif_rule`; compile and execute it only in an isolated proof program, carry the exact initial checking runtime through declaration/proof-only mixed extension, and classify dependent generated-constraint typing without semantic promotion |
+| SCALE-PROOF-CONSTRAINTS-1 | pending | SCALE-STRESS-2A | Replace the exact Lambdapi typing-oracle exception with generic source-ordered validation of dependent generated constraints, or freeze a narrower explicit residual boundary if that cannot be justified |
+| SCALE-STRESS-2B | pending | SCALE-STRESS-2A, SCALE-PROOF-CONSTRAINTS-1, applicable semantic review | Extend the same owner-free path to `Pi_int_funcd`, `Pi_pullback_funcd`, `Sigma_catd_functord_catd`, and `Sigma_transfd_funcd` runtime/telescope cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
@@ -1581,6 +1588,88 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 13 mixed-phase conformance tests passed
 ```
 
+## SCALE-STRESS-2A Completion Record
+
+SCALE-STRESS-2A adds one mechanism-selected, representation-only
+proof-time slice for the active Sigma/Pi telescope uncurrying comparison. The
+checked acquisition contract pins canonical commands 389 (`Catd`), 393
+(`Functord_cat`), 961 (`Pi_cat`), 981 (`Sigma_cat`), 991
+(`Sigma_proj1_pullback_catd`), and 995 (the `unif_rule`) against the existing
+source/export/version hashes. Direct typed IR adds only the two owners absent
+from the reviewed continuation: transparent `Catd` and opaque
+`Sigma_proj1_pullback_catd`. All other heads reuse their object-identical
+reviewed continuation linkage.
+
+The exact proof problem is:
+
+```text
+Pi_cat (Sigma_cat K R) (Sigma_proj1_pullback_catd K R D)
+  ≡ Functord_cat K' R' D'
+  ↪ [ K ≡ K'; R ≡ R'; D ≡ D' ]
+```
+
+The generic proof engine compiles it, matches both forward and symmetrically,
+and processes the three generated problems in source order. A positive
+closed TypeScript witness solves, while changing only `D'` leaves the final
+problem stuck. The bounded Lambdapi witness likewise accepts a value moved
+from the Sigma-section presentation to the displayed-functor presentation
+and rejects the mismatched target with the residual
+`stress2_D2 ≡ stress2_D`.
+
+This stress pass exposed two generic boundaries rather than adding an owner
+case:
+
+1. A later declaration/proof-only mixed fragment must recheck its immutable
+   initial declaration context with the same read-only runtime conversion
+   dependency used by that context. `initialCheckingRuntime` now carries that
+   explicit dependency. Because a raw catalog runtime has no compiled
+   fragment identity, combining it with a local runtime phase fails closed;
+   such composition must use the existing explicit runtime-fragment path.
+2. The standalone proof-rule validator checks each generated equality in a
+   rigid telescope. It therefore cannot yet use the preceding `K ≡ K'`
+   problem to make the later `R/R'` and `D/D'` types homogeneous. The exact
+   active rule compiles only with the already-designed, self-invalidating
+   Lambdapi typing oracle and records the diagnostic naming `K2` versus `K`.
+   SCALE-PROOF-CONSTRAINTS-1 is the smallest correcting row and must either
+   implement generic source-ordered dependent validation or freeze a
+   justified narrower residual boundary.
+
+`CORE_LF_SCALE_STRESS_2A_MODULE` and its proof program are root-development
+evidence only. No default/browser/product profile imports them; no runtime
+rule, proof rule, declaration, Lambdapi source, theorem, generated owner,
+TYPE/KIND formation rule, or mechanical-transfer claim is promoted.
+`check:scale-proof-stress` is a new bounded lane and joins `check:scale`
+because it validates conformance-only acquisition and proof mechanics rather
+than the still-pending SCALE-STRESS-1 semantic proposal.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_scale_stress_2_representation_tests.ts \
+  tests/v3_2_lf_transfer_mixed_tests.ts
+  20 tests / 2 suites: 18 passed, 2 live probes skipped
+
+./scripts/pnpmw run check:scale-proof-stress
+  6 tests / 1 suite: all passed, including exact live acquisition and the
+  bounded positive/negative Lambdapi consumer
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  524 tests / 65 suites: 493 passed, 31 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript and kernel/report/book/audit gates passed
+  all 19 frozen MVP differential judgments passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+  all 14 mixed-phase conformance tests passed
+  all 6 live proof-stress tests passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -1747,6 +1836,18 @@ aggregate gate until H-DTTLF-SCALE-STRESS-01 decides whether the profile may
 be activated. Exact canonical command acquisition is already checked by
 `check:scale-inventory`.
 
+SCALE-STRESS-2A adds:
+
+```text
+./scripts/pnpmw run check:scale-proof-stress
+```
+
+This bounded lane verifies the exact live command selection, the isolated
+forward/symmetric TypeScript proof program, ordered positive/negative
+constraint behavior, and a Lambdapi consumer that succeeds only when the
+generated dependent constraints close. It is part of the aggregate scale
+gate because it grants no active semantic profile.
+
 The aggregate forward gate is:
 
 ```text
@@ -1754,8 +1855,8 @@ The aggregate forward gate is:
 ```
 
 It preserves the complete reviewed continuation gate and then runs the live
-scale inventory and phase-conformance lanes. Later rows must extend this gate
-without mutating the frozen MVP policy.
+scale inventory, phase-conformance, and proof-stress lanes. Later rows must
+extend this gate without mutating the frozen MVP policy.
 
 All Lambdapi invocations remain bounded to at most 60 seconds and retain
 subject-reduction checking.
@@ -2058,3 +2159,16 @@ scope is affected.
   TYPE/KIND formation, browser/default/product effects, Lambdapi changes, and
   mechanical-transfer graduation remain unauthorized. Exact green local
   checkpoint: `1665d31ce056c3b28d4a94789e82863aff4887ca`.
+- **2026-07-25 — SCALE-STRESS-2A completed; dependent proof-typing boundary
+  measured.** Pinned six exact canonical commands and represented the active
+  Sigma-section/displayed-functor uncurrying rule against the reviewed
+  continuation. One generic mixed option now preserves a read-only initial
+  checking runtime for declaration/proof-only extension and rejects raw
+  runtime/local-runtime composition. The isolated proof engine executes the
+  rule forward and symmetrically with three ordered generated constraints;
+  the bounded Lambdapi consumer agrees and rejects a changed dependent
+  target. Standalone TypeScript validation still requires the exact
+  self-invalidating typing oracle because it cannot use the first generated
+  base equality while checking later dependent problems; this opens
+  SCALE-PROOF-CONSTRAINTS-1. No active proof/runtime rule, product/browser
+  API, Lambdapi change, or scale graduation was added.

@@ -12,6 +12,9 @@ import {
     CoreLfDeclarationEnvironment
 } from './lf_declarations';
 import {
+    CoreLfCatalogRuntime
+} from './lf_conversion';
+import {
     CoreLfModuleSpec,
     CoreLfQualifiedSymbol,
     CoreLfTransferDeclaration,
@@ -119,6 +122,7 @@ export type CoreLfMixedCompilerErrorCode =
     | 'UNTYPED_GENERATED_SYMBOL_REFERENCED'
     | 'INVALID_MIXED_LINKAGE'
     | 'INVALID_INITIAL_DECLARATIONS'
+    | 'INVALID_INITIAL_RUNTIME'
     | 'INVALID_RUNTIME_DEPENDENCY'
     | 'FOREIGN_MIXED_PLAN';
 
@@ -986,6 +990,15 @@ export interface CoreLfMixedCompileOptions {
     readonly initialDeclarations?:
         CoreLfMixedDeclarationBaseContext;
     /**
+     * Runtime conversion used when rechecking an immutable initial
+     * declaration context and compiling later declaration/proof-only phases.
+     *
+     * A raw catalog runtime has no transfer-fragment identity, so it cannot
+     * be composed with a local runtime phase. Such a plan fails closed and
+     * must instead supply an explicit compiled runtime dependency.
+     */
+    readonly initialCheckingRuntime?: CoreLfCatalogRuntime;
+    /**
      * Explicit dependency-module runtimes. Same-module earlier phases are
      * added mechanically and never supplied through this option.
      */
@@ -1140,6 +1153,18 @@ export function compileCoreLfMixedPhases(
             'Mixed compilation linkage targets a foreign phase plan'
         );
     }
+    if (
+        options.initialCheckingRuntime !== undefined &&
+        plan.phases.some(phase => phase.kind === 'runtime')
+    ) {
+        return fail(
+            'INVALID_INITIAL_RUNTIME',
+            'options.initialCheckingRuntime',
+            'A raw initial checking runtime cannot be composed with local ' +
+                'runtime phases; supply an explicit compiled runtime ' +
+                'fragment dependency'
+        );
+    }
     const externalRuntimeDependencies =
         options.runtimeDependencies ?? [];
     validateRuntimeDependencies(
@@ -1172,7 +1197,9 @@ export function compileCoreLfMixedPhases(
                     ),
                     {
                         initialEnvironment: declarations.environment,
-                        runtimeProgram: latestRuntime?.runtime,
+                        runtimeProgram:
+                            latestRuntime?.runtime ??
+                            options.initialCheckingRuntime,
                         comparisonStepLimit:
                             phaseOptions.comparisonStepLimit
                     }
@@ -1200,7 +1227,9 @@ export function compileCoreLfMixedPhases(
                     ),
                     {
                         initialEnvironment: declarations.environment,
-                        runtimeProgram: latestRuntime?.runtime,
+                        runtimeProgram:
+                            latestRuntime?.runtime ??
+                            options.initialCheckingRuntime,
                         comparisonStepLimit:
                             phaseOptions.comparisonStepLimit
                     }
@@ -1262,7 +1291,9 @@ export function compileCoreLfMixedPhases(
                     declarations,
                     {
                         ...(options.proofOptions?.(phase) ?? {}),
-                        runtimeProgram: latestRuntime?.runtime
+                        runtimeProgram:
+                            latestRuntime?.runtime ??
+                            options.initialCheckingRuntime
                     }
                 );
                 compiled.push(deepFreeze({
@@ -1311,7 +1342,9 @@ export function compileCoreLfMixedPhases(
             proofPrograms,
             declarations,
             {
-                executionRuntimeProgram: latestRuntime?.runtime
+                executionRuntimeProgram:
+                    latestRuntime?.runtime ??
+                    options.initialCheckingRuntime
             }
         );
     return new CoreLfCompiledMixedModule(

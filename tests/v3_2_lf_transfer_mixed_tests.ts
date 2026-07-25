@@ -605,6 +605,31 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
         assert.equal(Object.isFrozen(compiled.phases), true);
     });
 
+    it('fails closed when a raw initial runtime needs local composition', () => {
+        const module = fixtureModule();
+        const plan = planCoreLfMixedPhases(
+            module,
+            fixturePolicy(module)
+        );
+        const linkage = fixtureLinkage(plan);
+        const baseline = compileCoreLfMixedPhases(plan, linkage);
+        const initialCheckingRuntime =
+            baseline.latestRuntime?.runtime;
+        assert.notEqual(initialCheckingRuntime, undefined);
+        if (initialCheckingRuntime === undefined) return;
+
+        assert.throws(
+            () => compileCoreLfMixedPhases(
+                plan,
+                linkage,
+                { initialCheckingRuntime }
+            ),
+            error =>
+                error instanceof CoreLfMixedCompilerError &&
+                error.code === 'INVALID_INITIAL_RUNTIME'
+        );
+    });
+
     it('preserves intrinsic external linkage into runtime phases', () => {
         const intrinsicModuleId = 'fixture.mixed_intrinsic';
         const intrinsicGrpd = coreLfQualifiedSymbol(

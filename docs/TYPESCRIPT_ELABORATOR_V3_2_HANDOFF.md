@@ -21,10 +21,13 @@ SCALE-MIXED-PHASE-1B and completed-signature proof execution
 SCALE-MIXED-PHASE-1C are now complete; the mixed-phase parent is closed, the
 dependency-closed SCALE-STRESS-1B proposal preparation and isolated
 TypeScript/Lambdapi evidence are now complete; the exact
-H-DTTLF-SCALE-STRESS-01 decision is pending, and generated induction
-semantics, integrated batch deduplication, plus the outer-LF TYPE/KIND
-Π-formation boundary remain explicit later rows before any newly promoted
-active stress profile or whole-transfer claim
+H-DTTLF-SCALE-STRESS-01 decision is pending; independent representation-only
+SCALE-STRESS-2A now pins and executes the active Sigma/Pi uncurrying proof
+rule in an isolated TypeScript program, with bounded Lambdapi agreement and
+an explicit dependent-generated-constraint typing gap; generated induction
+semantics, integrated batch deduplication, that proof-typing row, plus the
+outer-LF TYPE/KIND Π-formation boundary remain explicit later work before
+any newly promoted active stress profile or whole-transfer claim
 
 ## Purpose
 
@@ -258,6 +261,26 @@ does not merge duplicate `τΣ_`/`Struct_sigma` ownership with the reviewed
 29-signature continuation. The exact next question is
 H-DTTLF-SCALE-STRESS-01/D-DTTLF-SCALE-STRESS-001; no active stress profile
 exists until that separate human review is approved.
+
+Independent SCALE-STRESS-2A is nevertheless complete under the already
+approved representation/engine boundary. It pins `Catd`,
+`Functord_cat`, `Pi_cat`, `Sigma_cat`,
+`Sigma_proj1_pullback_catd`, and the active Sigma-section uncurrying
+`unif_rule`; reuses the reviewed continuation linkage for existing heads;
+and compiles only transparent `Catd`, opaque
+`Sigma_proj1_pullback_catd`, and one isolated proof-time rule. The generic
+engine solves forward and symmetric positive witnesses and leaves a changed
+dependent target stuck, matching a bounded Lambdapi positive/negative
+consumer. Mixed declaration/proof-only extension now explicitly carries the
+initial checking runtime and rejects any attempt to use a raw runtime as a
+local runtime-fragment dependency.
+
+The rule still needs the exact self-invalidating Lambdapi typing oracle:
+standalone TypeScript validation cannot yet use its first generated
+`K ≡ K'` constraint while checking the later `R/R'` and `D/D'` dependent
+constraints. SCALE-PROOF-CONSTRAINTS-1 is therefore the next independent
+engine row. This is measured executable evidence, not an active proof-rule
+registration or a mechanical-transfer qualification.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

@@ -45,7 +45,9 @@ opt-in continuation API; all currently scoped implementation rows are
 complete or concretely deferred, while the separate scale plan tests whether
 future transfers can become systematic; its first dependency-closed
 J/Pi/Sigma/Nat semantic profile is now an executable but non-active proposal
-awaiting H-DTTLF-SCALE-STRESS-01
+awaiting H-DTTLF-SCALE-STRESS-01, while independent representation-only
+SCALE-STRESS-2A has executed the active Sigma/Pi uncurrying proof rule and
+opened the exact dependent-generated-constraint typing row
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1414,6 +1416,17 @@ bounded Lambdapi positive/negative probe pass. The resulting
 H-DTTLF-SCALE-STRESS-01/D-DTTLF-SCALE-STRESS-001 decision remains pending;
 the candidate is not registered, and generated induction plus integrated
 deduplication with the 29-signature continuation remain explicit later work.
+Independent SCALE-STRESS-2A reuses that continuation as an immutable initial
+declaration context, adds exact typed `Catd` and
+`Sigma_proj1_pullback_catd` data, and compiles the active Sigma/Pi uncurrying
+comparison into an isolated proof-only program. Forward/symmetric
+TypeScript execution and bounded positive/negative Lambdapi evidence agree.
+The generic mixed compiler now carries an explicit initial checking runtime
+for declaration/proof-only extensions and rejects raw-runtime composition
+with a local runtime phase. The proof rule still needs its exact Lambdapi
+typing oracle because standalone validation cannot propagate the generated
+base equality into later dependent constraints; the scale plan owns
+SCALE-PROOF-CONSTRAINTS-1 as the smallest correcting row.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2468,3 +2481,13 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   non-active pending H-DTTLF-SCALE-STRESS-01; generated induction, integrated
   deduplication, browser/default/product effects, and mechanical-transfer
   graduation remain withheld.
+- **2026-07-25 — Sigma/Pi proof-time uncurrying represented and executed.**
+  SCALE-STRESS-2A pins six exact canonical commands, reuses the reviewed
+  continuation linkage, and executes one active `unif_rule` only in an
+  isolated qualification program. Its three generated constraints preserve
+  handwritten source order; TypeScript forward/symmetric and stuck
+  witnesses agree with bounded Lambdapi positive/negative use. Explicit
+  initial-runtime checking is now generic and fail-closed. Dependent
+  generated-constraint validation remains measured as
+  SCALE-PROOF-CONSTRAINTS-1; no active profile or mechanical-transfer claim
+  was added.
