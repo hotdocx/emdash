@@ -53,6 +53,8 @@ export * from './scale_stress_2_representation';
 export * from './scale_stress_2b_representation';
 export * from './scale_stress_2b2_representation';
 export * from './scale_stress_2b3_representation';
+export * from './scale_stress_3_acquisition';
+export * from './scale_stress_3a1_representation';
 export * from './directed_continuation_transfer';
 export * from './directed_continuation_runtime_transfer';
 export * from './metatheory';

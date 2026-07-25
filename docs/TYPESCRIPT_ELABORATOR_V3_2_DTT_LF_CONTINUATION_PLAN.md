@@ -57,7 +57,10 @@ representation-only SCALE-STRESS-2B2 has extended that exact lineage through
 both base-arrow-action clauses without a generic engine change;
 representation-only SCALE-STRESS-2B3 has added and executed Sigma-total
 displayed-transfor uncurrying, completing the selected SCALE-STRESS-2/2B
-representation parent
+representation parent; SCALE-STRESS-3 is split by mechanism and in progress,
+with SCALE-STRESS-3A1 completing the exact transparent
+`Prof`/`ProfComparison` versus opaque `DefIso`/`Prof_cat`/`Prof_tensor`
+declaration boundary and SCALE-STRESS-3A2 next for profunctor action
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1461,7 +1464,13 @@ Cat-valued `Functord`/`Transf` conversion body and the corresponding subject
 retain one exact opaque/oracle boundary. The rule executes and bounded live
 evidence agrees without a generic engine change. The selected
 SCALE-STRESS-2/2B parent is complete as isolated representation;
-SCALE-STRESS-3 is next.
+SCALE-STRESS-3 is now split by mechanism. Declaration-only
+SCALE-STRESS-3A1 pins `DefIso`, `Prof_cat`, transparent `Prof`, transparent
+`ProfComparison`, and opaque `Prof_tensor`. The unchanged generic declaration
+compiler checks the non-contiguous delta dependency chain, and bounded
+TypeScript/Lambdapi opacity evidence agrees. It activates no profile or rule.
+SCALE-STRESS-3A2 is next for profunctor comparison/tensor action; protected
+and proof-heavy extensions plus WalkingEnd/HIT remain SCALE-STRESS-3B/3C.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2568,3 +2577,12 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   bounded live unfolding, reduction, non-conversion, and rejection agree.
   No generic engine or active profile changed; the selected
   SCALE-STRESS-2/2B representation parent is complete.
+- **2026-07-25 — First profunctor opacity boundary represented.**
+  SCALE-STRESS-3A1 pins the non-contiguous `DefIso`, `Prof_cat`, `Prof`,
+  `ProfComparison`, and `Prof_tensor` commands. The existing declaration
+  compiler checks the transparent `Prof`/`ProfComparison` dependency chain
+  and preserves the three primitive declarations as opaque. TypeScript
+  delta/opacity witnesses and bounded Lambdapi positive/negative evidence
+  agree without any generic engine or active-profile change. Profunctor
+  comparison/tensor action remains SCALE-STRESS-3A2; protected/evidence
+  extensions and WalkingEnd/HIT remain SCALE-STRESS-3B/3C.

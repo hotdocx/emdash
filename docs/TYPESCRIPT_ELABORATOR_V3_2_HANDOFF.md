@@ -34,10 +34,14 @@ representation-only SCALE-STRESS-2B2 extends it through both base-arrow-action
 clauses without a generic engine change; representation-only
 SCALE-STRESS-2B3 now pins and executes Sigma-total displayed-transfor
 uncurrying, completing the selected SCALE-STRESS-2/2B qualification parent;
-generated induction semantics, integrated batch deduplication, further
-mechanism stress, plus the outer-LF TYPE/KIND Π-formation boundary remain
-explicit later work before any newly promoted active stress profile or
-whole-transfer claim
+SCALE-STRESS-3 is now split by mechanism and in progress, with
+declaration-only SCALE-STRESS-3A1 pinning and compiling the transparent
+`Prof`/`ProfComparison` chain across opaque `DefIso`/`Prof_cat` and preserving
+opaque `Prof_tensor`; profunctor action is next in SCALE-STRESS-3A2, while
+protected/evidence extensions and WalkingEnd/HIT remain 3B/3C; generated
+induction semantics, integrated batch deduplication, plus the outer-LF
+TYPE/KIND Π-formation boundary remain explicit later work before any newly
+promoted active stress profile or whole-transfer claim
 
 ## Purpose
 
@@ -342,8 +346,15 @@ after the exact 21-rule 2B2 lineage. `Transfd` is checked transparently.
 retain one exact opaque/self-invalidating-oracle boundary. The clause
 executes, and live unfolding, reduction, non-conversion, and rejection agree
 with Lambdapi. No generic engine or active profile changed. The selected
-SCALE-STRESS-2/2B parent is complete as representation evidence;
-SCALE-STRESS-3 is the next mechanism audit.
+SCALE-STRESS-2/2B parent is complete as representation evidence.
+SCALE-STRESS-3A1 then pins the exact non-contiguous `DefIso`, `Prof_cat`,
+`Prof`, `ProfComparison`, and `Prof_tensor` declarations. The unchanged
+generic declaration compiler checks `Prof` and `ProfComparison` transparently
+through the dependency chain while keeping the three primitive owners opaque.
+Bounded TypeScript delta/opacity witnesses and Lambdapi positive/negative
+evidence agree. No action rule or active profile changed;
+SCALE-STRESS-3A2 next closes `ProfMap`, comparison push/pull, product
+projection computation, and tensor functor action.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

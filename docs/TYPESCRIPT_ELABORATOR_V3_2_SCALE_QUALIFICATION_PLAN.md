@@ -55,10 +55,13 @@ dependent-Pi object, fold, and pointwise-component runtime package and
 representation-only SCALE-STRESS-2B2 complete for its two base-arrow-action
 clauses over the exact inherited runtime lineage plus representation-only
 SCALE-STRESS-2B3 complete for Sigma-total displayed-transfor uncurrying;
-generated induction semantics, batch deduplication, further mechanism stress,
-and the measured outer-LF TYPE/KIND product boundary remain explicit rows
-before whole-transfer qualification; the SCALE-STRESS-3 mechanism audit is
-the next dependency-ready forward row
+SCALE-STRESS-3 is in progress with declaration-only SCALE-STRESS-3A1 complete
+for the first profunctor opaque/transparent boundary; tensor/comparison
+action, protected/evidence extensions, and WalkingEnd/HIT are split into
+SCALE-STRESS-3A2 through 3C; generated induction semantics, batch
+deduplication, and the measured outer-LF TYPE/KIND product boundary remain
+explicit rows before whole-transfer qualification; SCALE-STRESS-3A2 is the
+next dependency-ready forward row
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -511,7 +514,11 @@ The architecture qualifies only when all of the following hold:
 | SCALE-STRESS-2B1 | complete | SCALE-STRESS-2A, SCALE-MIXED-RUNTIME-PREFIX-1 | Pin 18 exact internal-Pi commands; compile eight additional declarations and nine source-ordered runtime clauses against the reviewed ten-rule same-module prefix; exercise `Pi_int_funcd`/`Pi_pullback_funcd` object, fold, and pointwise reductions; retain the exact `Catd_cat_func` body and three subject-normalization cases as explicit boundaries |
 | SCALE-STRESS-2B2 | complete | SCALE-STRESS-2B1 | Pin the exact eight-command base-arrow-action selection; compile six declarations and two `fdapp1_int_cell` clauses after the exact 19-rule 2B1 runtime; retain the two measured transport-body subject-normalization cases as exact self-invalidating oracles |
 | SCALE-STRESS-2B3 | complete | SCALE-STRESS-2B2, SCALE-STRESS-2A | Pin eight exact commands, reuse the reviewed Sigma-family declaration/fibre rule by identity, compile five new declarations and one component rule after the exact 21-rule 2B2 lineage, and retain the measured `Fibre_func` body/subject-normalization closure explicitly |
-| SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
+| SCALE-STRESS-3 | in progress | SCALE-0D, SCALE-0E, applicable semantic review | Parent row for profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
+| SCALE-STRESS-3A1 | complete | SCALE-0C, SCALE-ACQUIRE-1A | Pin and compile the exact `DefIso` → `Prof_cat` → transparent `Prof` → transparent `ProfComparison` dependency chain plus opaque `Prof_tensor`; verify bounded TypeScript/Lambdapi delta and opacity without an active profile or generic engine change |
+| SCALE-STRESS-3A2 | pending | SCALE-STRESS-3A1, SCALE-0D | Add `ProfMap`, comparison push/pull, product/projection closure, `Prof_tensor_map`/`Prof_tensor_func`, and representative action rules through data/policy only; split any exact subject-normalization or generated-owner gap |
+| SCALE-STRESS-3B | pending | SCALE-STRESS-3A2 or independently ready module closure | Qualify protected one-way module visibility and proof-heavy evidence bodies without promoting theorem source to runtime computation |
+| SCALE-STRESS-3C | pending | applicable inductive/import/runtime mechanisms | Qualify the multi-module `WalkingEnd_cat`/dependent-eliminator/higher-action/`BNat_cat` HIT slice and record its exact generated-owner and runtime/proof boundaries |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
 
@@ -2011,8 +2018,8 @@ reviewed, MVP, browser, or product profile. `Fibre_func`'s TypeScript
 transparent-body closure, the remaining `Transfd` proof/runtime bridges and
 `tdapp0` rules, Sigma-total arrow action, generated induction, batch
 throughput, the pending stress-profile decision, and whole-transfer
-graduation remain explicit non-claims. SCALE-STRESS-3 is the next
-mechanism-diverse audit.
+graduation remain explicit non-claims. SCALE-STRESS-3A1 is the first
+mechanism-diverse profunctor tranche recorded below.
 
 Validation on 2026-07-25:
 
@@ -2043,6 +2050,88 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 15 mixed-phase conformance tests passed
   all 5 live oracle-free proof-stress tests passed
   all 15 live Pi/Sigma telescope-stress tests passed
+```
+
+## SCALE-STRESS-3 Audit Split
+
+The mechanism audit rejects a single monolithic SCALE-STRESS-3 import. The
+representatives expose three independently reviewable stresses:
+
+1. the root-module profunctor family first tests a non-contiguous declaration
+   dependency chain, transparent definitions versus opaque primitives, and
+   then product/action rules;
+2. the protected and evidence extensions test cross-module visibility,
+   protected implementation dependencies, and large theorem bodies that must
+   not become product computation merely because Lambdapi checked them; and
+3. the WalkingEnd extension tests an imported directed HIT, opaque
+   constructors, a dependent eliminator, higher action, imported Nat
+   computation, and generated-owner/runtime/proof separation.
+
+Accordingly SCALE-STRESS-3A1 owns only the first profunctor declaration
+boundary. SCALE-STRESS-3A2 owns profunctor comparison/tensor action.
+SCALE-STRESS-3B owns protected/evidence extension policy, and
+SCALE-STRESS-3C owns WalkingEnd/HIT. This split is sequencing, not a reduced
+acceptance corpus: SCALE-BATCH-1 and SCALE-GRADUATE-1 still depend on the
+applicable mechanisms from all three families.
+
+## SCALE-STRESS-3A1 Completion Record
+
+SCALE-STRESS-3A1 pins five exact non-contiguous canonical commands:
+injective opaque `DefIso`, injective opaque `Prof_cat`, transparent `Prof`,
+transparent `ProfComparison`, and opaque `Prof_tensor`. The direct typed
+module uses only the four reviewed intrinsic externals `Cat`, `Grpd`, `τ`,
+and `Obj`, then compiles the five commands through the unchanged generic
+declaration compiler against the exact reviewed continuation environment.
+
+This is a diagnostic dependency chain rather than five unrelated signatures.
+Checking `ProfComparison(P,Q) ≔ DefIso(Prof_cat(A,B),P,Q)` requires the
+earlier transparent equation `Prof(A,B) ≔ Obj(Prof_cat(A,B))` to reconcile
+the types of `P` and `Q` with `DefIso`'s object endpoints. TypeScript records
+both definitions as bounded delta owners and keeps `DefIso`, `Prof_cat`, and
+the semantically coend-like `Prof_tensor` irreducible. The focused comparison
+witness observes both delta paths and observes no delta step through
+`Prof_tensor`.
+
+The live lane checks the exact source/export/version/hash/ordinal contract,
+both active transparent equations, a well-typed `Prof_tensor`
+non-conversion, and the corresponding rejected equality. The browser and all
+active/reviewed/MVP/product profiles remain unchanged. No generic
+declaration, runtime, proof, mixed-phase, checker, or acquisition engine
+changed.
+
+This tranche does **not** yet qualify profunctor action. `ProfMap`,
+`prof_comparison_push`/`pull`, the product-object/projection computation
+closure, `Prof_tensor_map`, `Prof_tensor_func`, and its object/arrow rules are
+the next SCALE-STRESS-3A2 audit. Protected/evidence-module behavior,
+WalkingEnd/HIT, batch throughput, and whole-transfer graduation remain
+explicit non-claims.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_scale_stress_3a1_representation_tests.ts
+  4 tests / 1 suite: 3 passed, 1 live probe skipped
+
+./scripts/pnpmw run check:scale-profunctor-stress
+  4 tests / 1 suite: 4 passed
+
+./scripts/pnpmw run check:ts
+  546 tests / 69 suites: 511 passed, 35 live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript and kernel/report/book/audit gates passed
+  all 19 frozen MVP differential judgments passed
+  all 41 bounded Lambdapi kernel/example files passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+  all 15 mixed-phase conformance tests passed
+  all 5 live oracle-free proof-stress tests passed
+  all 15 live Pi/Sigma telescope-stress tests passed
+  all 4 live profunctor-boundary stress tests passed
 ```
 
 ## Human Review Gates
@@ -2603,3 +2692,12 @@ scope is affected.
   parents are complete as representation-only rows. Exact green local
   implementation checkpoint:
   `ecf1387de7e6248dffeb12ef6b99f08efd609800`.
+- **2026-07-25 — SCALE-STRESS-3A1 profunctor opacity boundary completed.**
+  Pinned five non-contiguous commands and compiled opaque `DefIso` and
+  `Prof_cat`, transparent `Prof`, transparent `ProfComparison`, and opaque
+  `Prof_tensor` through the unchanged generic declaration path. The
+  transparent dependency chain and opaque tensor agree with bounded
+  TypeScript/Lambdapi positive and negative evidence. No action rule, generic
+  engine, or active profile changed. SCALE-STRESS-3A2 remains the next
+  profunctor-action tranche; protected/evidence and WalkingEnd/HIT remain
+  3B/3C.
