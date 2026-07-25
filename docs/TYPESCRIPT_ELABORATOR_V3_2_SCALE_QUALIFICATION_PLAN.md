@@ -106,6 +106,8 @@ SCALE-STRESS-2B2 implementation checkpoint:
 `5e8876f38e9c0d0e9526a0ec30764e0bd1a87b36`
 SCALE-STRESS-2B3 implementation checkpoint:
 `ecf1387de7e6248dffeb12ef6b99f08efd609800`
+SCALE-STRESS-3A1 implementation checkpoint:
+`fb361eed0ca9e58ccaba1bdb520e2db9e55ec56c`
 
 ## Purpose
 
@@ -2700,4 +2702,5 @@ scope is affected.
   TypeScript/Lambdapi positive and negative evidence. No action rule, generic
   engine, or active profile changed. SCALE-STRESS-3A2 remains the next
   profunctor-action tranche; protected/evidence and WalkingEnd/HIT remain
-  3B/3C.
+  3B/3C. Exact green local implementation checkpoint:
+  `fb361eed0ca9e58ccaba1bdb520e2db9e55ec56c`.
