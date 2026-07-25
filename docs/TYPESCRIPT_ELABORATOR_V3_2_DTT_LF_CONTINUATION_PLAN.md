@@ -24,7 +24,9 @@ H-DTTLF-02/DIRECTED-1B as proposed.” The latter message also authorized
 temporary local checkpoint commits when useful for tracking and backtracking.
 Later on 2026-07-24 the user said “Approve
 H-DTTLF-02/DIRECTED-FOUNDATION-1 as proposed.” Most recently on 2026-07-24
-the user said “Approve H-DTTLF-02/DIRECTED-FOUNDATION-2 as proposed.”
+the user said “Approve H-DTTLF-02/DIRECTED-FOUNDATION-2 as proposed.” The
+next exact decision on 2026-07-24 was “Approve
+H-DTTLF-02/DIRECTED-1C as proposed.”
 Status: active proposed continuation and implementation ledger;
 DTTLF-PLAN-0, LF-1A through LF-1C, and LF-SURFACE-1 are complete;
 H-DTTLF-01 and the DIRECTED-1A instance of H-DTTLF-02 are approved as
@@ -32,7 +34,8 @@ proposed; DIRECTED-1A is complete; the DIRECTED-1B instance of H-DTTLF-02 is
 approved as proposed; both separately reviewed prerequisite programs,
 DIRECTED-FOUNDATION-1 and DIRECTED-FOUNDATION-2, are approved and implemented;
 DIRECTED-1B is complete; DIRECTED-1C's one-owner, zero-rule proposal is
-complete and awaits its fresh H-DTTLF-02 decision
+approved and its isolated integration is complete; DIRECTED-GRADUATE-1 is the
+next dependency-ready review/proposal slice
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -462,6 +465,14 @@ trust claim still requires the corresponding human gate.
   owner, and omit its local declaration. This seam does not grant arbitrary
   runtime registration or change the default LF, browser, or deployed MVP.
 
+- **DTTLF-014 — Import section evaluation at the consumer boundary.** Record
+  active `piapp0` as a transparent semantic definition while importing only
+  its exact signature opaquely into the isolated candidate. Reuse the existing
+  `section-category`, generic outer-LF beta, dependent-pair owner, and
+  telescope-fibre rule. Do not transfer its body, add a computation rule, emit
+  a backend shadow, or widen the default LF, base schema, browser, or deployed
+  MVP.
+
 ## Implementation Ledger
 
 Only one row may be actively implemented at a time. “Pending” means scoped
@@ -479,8 +490,8 @@ prerequisite must be satisfied before work begins.
 | DIRECTED-FOUNDATION-1 | **complete — H-DTTLF-02 approved** | Executes exactly the three approved decoded `Obj(Cat_cat)`, `Obj(Catd_cat)`, and `Obj(Functord_cat)` reductions as an immutable opt-in catalog runtime; five implementation tests preserve stable category heads, the default LF, and the still-unapproved decoded Cat-hom case |
 | DIRECTED-FOUNDATION-2 | **complete — H-DTTLF-02 approved** | Executes exactly the approved decoded `τ(Hom Cat_cat A B) ↪ τ(Functor A B)` consequence after FOUNDATION-1; raw classifiers, category heads, default LF/MVP/browser paths, proof rules, and metatheory claims remain unchanged |
 | DIRECTED-1B | **complete — own and both prerequisite H-DTTLF-02 instances approved** | Compiles five reviewed owners after DIRECTED-1A, checks one transparent mirror, and executes the exact seven-rule FOUNDATION-1 → FOUNDATION-2 → DIRECTED-1B order under one LF budget; dependent pair, projection, nested fibre, total transport, builder, negative, serialization, and generated Lambdapi consumers pass with all recorded deferrals preserved |
-| DIRECTED-1C | **proposal complete — H-DTTLF-02 pending** | Authority inventory and bounded probes show that the combined consumer needs exactly one new opaque candidate owner, section-object evaluation mapped to active `piapp0`; existing `section-category`, generic LF β, and the reviewed DIRECTED-1B telescope-fibre rule supply the rest, so the proposal adds zero runtime and zero proof-time rules and defers the larger internal-Pi/section-arrow closure |
-| DIRECTED-GRADUATE-1 | pending | Run the shared TypeScript/Lambdapi graduation example and review the new owner/rule/metatheory/profile boundary |
+| DIRECTED-1C | **complete — H-DTTLF-02 approved** | Added the exact approval record and one body-free opaque `section-object-evaluation` declaration mapped to active `piapp0`; the combined outer-beta/Sigma-telescope consumer, scoped builder, wrong-family/pair negatives, deterministic no-shadow emission, TypeScript checking, and positive/negative Lambdapi oracle judgments pass while reusing the exact DIRECTED-1B runtime by identity |
+| DIRECTED-GRADUATE-1 | **dependency-ready** | Freeze the fresh combined owner/rule manifest, product/non-product boundary, oracle policy, withheld metatheory claims, and exact H-DTTLF-03 recommendation from the completed shared TypeScript/Lambdapi example |
 | GROUPD-PLAN-0 | **deferred** | Separate Lambdapi-first plan; begins only after directed candidate work or a concrete groupoidal consumer justifies it |
 
 ## LF-1A Detailed Contract
@@ -1031,7 +1042,7 @@ normalization, `sigma_arrow`, `sigma_transport_arrow` unfolding,
 constant-family totalization, projection-pullback/section uncurrying, and
 groupoidal path closure remain deferred exactly as reviewed.
 
-### DIRECTED-1C Authority Inventory And Proposal
+### DIRECTED-1C Authority Inventory, Proposal, And Integration Result
 
 The initial DIRECTED-1C seed named a possible “section/internal-Pi and
 telescope-uncurrying closure.” Read-only owner-position inventory narrows that
@@ -1095,12 +1106,34 @@ unchanged MVP identity. Nine focused tests pass exact signature and plicity,
 closure reuse, source relocation, semantic/backend separation, deep freeze,
 MVP/schema/browser preservation, and deliberate boundary, prerequisite,
 owner, expression, closure, binding, MVP, and exact-content drift. This is
-review evidence only: no DIRECTED-1C declaration or execution path has been
-installed.
+the unchanged pre-review evidence.
+
+The user's exact
+`Approve H-DTTLF-02/DIRECTED-1C as proposed.` decision is preserved separately
+in `CORE_DIRECTED_1C_REVIEW`; the proposal remains unchanged. The reviewed
+`CoreDirected1cCatalog` extends the completed DIRECTED-1B environment with one
+`dttlf_piapp0` body-free opaque declaration. It inherits the same closed
+declaration checker and holds the exact seven-rule runtime by identity; no
+runtime wrapper or new rule exists.
+
+The implemented consumer checks `piapp0(s,(k,r))` first at the raw telescope
+fibre and then at the computed `FF[k][r]` fibre. Its outer annotated lambda
+application beta-reduces to the direct evaluator. A type-level witness records
+beta followed by `directed.sigma-telescope-fibre.evaluate` in one comparison
+trace. The scoped builder lowers the same term, wrong telescope families and
+wrong dependent-pair families fail, and a foreign environment or malformed
+arity is rejected.
+
+Deterministic emission maps `dttlf_piapp0` to active `piapp0` alongside all
+reviewed prerequisites and emits no `dttlf_` declaration. The generated
+combined consumer is accepted by Lambdapi and a mismatched-section-family
+program is rejected. The active transparent body remains untransferred, and
+all broader internal-Pi, section-arrow, uncurrying, groupoidal, product, and
+metatheory deferrals remain intact.
 
 ## Strong Combined Graduation Example
 
-A suitable end-to-end example uses:
+The implemented end-to-end example uses:
 
 ```text
 K  : Cat
@@ -1114,7 +1147,7 @@ Sec = Obj(Pi_cat(BΣ))
 s   : Sec
 ```
 
-The TypeScript surface then constructs:
+The reviewed TypeScript continuation surface constructs:
 
 ```text
 (λ t : Sec,
@@ -1122,14 +1155,15 @@ The TypeScript surface then constructs:
 s
 ```
 
-The required pipeline is:
+The implemented pipeline is:
 
 1. the outer LF checks the dependent lambda/application;
 2. generic β reduces it to `piapp0(s, Struct_sigma(k,r))`;
 3. inner directed-DTT computation identifies the fibre of `BΣ` at `(k,r)`
    with `FF[k][r]`;
 4. the result has the expected decoded object type;
-5. deterministic Lambdapi emission accepts the same judgment.
+5. deterministic Lambdapi emission accepts the same judgment and rejects a
+   mismatched section family.
 
 The directed extension adds `p : k → k'` and verifies that action along
 
@@ -1155,15 +1189,16 @@ dependency-ready work rather than guessing a mathematical rule.
 | H-DTTLF-03 | DIRECTED-GRADUATE-1 complete | Approve the fresh combined owner/rule manifest, product boundary, oracle policy, and any newly justified termination/confluence/subject-reduction claim? |
 | H-DTTLF-04 | concrete groupoidal closure consumer | Approve opening the separate Lambdapi-first groupoidal closure plan and its initial consumer/owner inventory? |
 
-Current gate state: H-DTTLF-01 and both the DIRECTED-1A and DIRECTED-1B
-instances of H-DTTLF-02 were approved as proposed on 2026-07-24.
+Current gate state: H-DTTLF-01 and the DIRECTED-1A, DIRECTED-1B, and
+DIRECTED-1C instances of H-DTTLF-02 were approved as proposed on 2026-07-24.
 The newly discovered
 `H-DTTLF-02/DIRECTED-FOUNDATION-1` prerequisite was also approved as proposed
 on 2026-07-24. The subsequently discovered
 `H-DTTLF-02/DIRECTED-FOUNDATION-2` instance was also approved as proposed on
-2026-07-24. DIRECTED-1B is complete. The fresh one-owner, zero-rule
-DIRECTED-1C proposal now triggers `H-DTTLF-02/DIRECTED-1C`; H-DTTLF-03 and
-H-DTTLF-04 remain untriggered.
+2026-07-24. DIRECTED-1B and DIRECTED-1C are complete.
+DIRECTED-GRADUATE-1 is now dependency-ready; H-DTTLF-03 remains untriggered
+until its exact combined-profile recommendation is frozen. H-DTTLF-04 remains
+untriggered.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -1223,7 +1258,7 @@ this exact decoded consequence of the active
 the broader classifier/category rule, another owner, DIRECTED-1C, product
 promotion, or a metatheory claim.
 
-The pending DIRECTED-1C question is:
+The exact approved DIRECTED-1C question was:
 
 > Approve H-DTTLF-02/DIRECTED-1C as proposed: add exactly one
 > backend-neutral candidate owner, `section-object-evaluation`, mapped to the
@@ -1237,11 +1272,12 @@ The pending DIRECTED-1C question is:
 > internal/pullback-Pi, section-arrow, projection-pullback/displayed-transfor
 > uncurrying, groupoidal-closure, product, and metatheory deferrals?
 
-Approval would authorize only isolated catalog integration and testing of that
-exact signature. It would not authorize transferring the active body or its
-evaluation functor, adding any section/internal-Pi rule, changing the browser
-or deployed profile, graduating the combined candidate, or making a new
-metatheory claim.
+The user's exact decision evidence is
+`Approve H-DTTLF-02/DIRECTED-1C as proposed.` It authorizes only isolated
+catalog integration and testing of that exact signature. It does not
+authorize transferring the active body or its evaluation functor, adding any
+section/internal-Pi rule, changing the browser or deployed profile, graduating
+the combined candidate, or making a new metatheory claim.
 
 The exact H-DTTLF-01 proposal is to make the current outer-LF modules the
 active continuation checker API used by later directed candidate slices while
@@ -1280,9 +1316,10 @@ conversion, with both Lambdapi judgments enabled and passing.
 
 The first H-DTTLF-02 decision approved the three-signature, zero-rule
 DIRECTED-1A candidate catalog only. The second approved the exact DIRECTED-1B
-proposal above; it does not authorize DIRECTED-1C or the graduated product
-profile. Neither decision implicitly authorizes the three earlier active
-facade computations discovered during executable signature checking;
+proposal above. The later DIRECTED-1C decision approved only its one opaque
+signature import and no new rule; none of them authorizes the graduated
+product profile. The earlier decisions did not implicitly authorize the three
+active facade computations discovered during executable signature checking;
 DIRECTED-FOUNDATION-1 was therefore reviewed and approved through a separate
 H-DTTLF-02 instance. Its execution exposed the distinct decoded Cat-hom
 dependency, which was isolated, separately approved as
@@ -1379,9 +1416,9 @@ continuation.
 ## Current Dependency State
 
 DTTLF-PLAN-0, LF-1A through LF-1C, LF-SURFACE-1, DIRECTED-1A, both directed
-foundation prerequisites, and DIRECTED-1B are complete. The combined catalog
-contains eight ordered checked declarations without widening
-`CORE_OWNER_SCHEMAS`: seven are opaque imports and
+foundation prerequisites, DIRECTED-1B, and DIRECTED-1C are complete. The
+combined catalog contains nine ordered checked declarations without widening
+`CORE_OWNER_SCHEMAS`: eight are opaque imports and
 `Sigma_catd_transport_func` is an exact checked transparent mirror.
 
 The closed catalog runtime executes FOUNDATION-1's three decoded-object rules,
@@ -1389,25 +1426,24 @@ FOUNDATION-2's one decoded Cat-hom rule, and DIRECTED-1B's three owned rules
 in that order under the existing LF budget. The dependent pair, first
 projection, induced telescope fibre, total transport, transparent δ/β
 comparison, scoped builder, negative consumers, and generated Lambdapi probe
-all pass. Deterministic emission maps every reviewed primitive—including the
-transparent mirror—to its active owner and emits no shadow declaration. The
-default LF, base owner schema, frozen MVP manifest/runtime, browser, reviewed
-proposal history, rule-registration exclusion, and withheld metatheory claims
-remain unchanged.
+all pass. The ninth declaration imports active `piapp0` opaquely, and the
+completed consumer composes section evaluation with generic outer beta and
+the telescope-fibre computation. Deterministic emission maps every reviewed
+primitive—including the transparent mirror and `piapp0`—to its active owner
+and emits no shadow declaration. Positive and negative generated Lambdapi
+programs agree with TypeScript.
 
-DIRECTED-1C's read-only inventory, bounded authority probe, and
-machine-readable proposal are complete. The evidence reduces the initial
-section/internal-Pi seed to one opaque signature import of active `piapp0`.
-`Pi_cat` is already the base `section-category` owner, DIRECTED-1B already
-provides dependent pairs and the telescope-fibre computation, and generic LF
-beta supplies the outer reduction. No new runtime or proof-time rule is
-needed.
+The exact seven-rule runtime remains unchanged and is shared by identity.
+DIRECTED-1C adds no runtime or proof-time rule and transfers no active
+transparent body. The default LF, base owner schema, frozen MVP
+manifest/runtime, browser, reviewed proposal history, rule-registration
+exclusion, and withheld metatheory claims remain unchanged.
 
-Semantic integration is now paused at
-`H-DTTLF-02/DIRECTED-1C`. Until that decision, no DIRECTED-1C owner may enter
-the checked catalog and DIRECTED-GRADUATE-1 is not dependency-ready. The
-larger internal-Pi, section-arrow, uncurrying, and groupoidal closures remain
-deliberately deferred and are not on this consumer's critical path.
+DIRECTED-GRADUATE-1 is now the next dependency-ready slice. It must freeze a
+fresh combined candidate identity and exact H-DTTLF-03 recommendation without
+promoting the browser or deployed product. The larger internal-Pi,
+section-arrow, uncurrying, and groupoidal closures remain deliberately
+deferred and are not on this consumer's critical path.
 
 LF-1B depends on LF-1A's explicit evaluator result/trace contract. LF-1C
 depends on the checked declaration-body model from LF-1B. LF-SURFACE-1 depends
@@ -1617,6 +1653,42 @@ git diff --check
   passed
 ```
 
+DIRECTED-1C approval and integration validation:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_directed_1c_review_tests.ts
+  tests/v3_2_directed_1c_tests.ts
+  passed 17 tests / 2 suites: 15 passed and two opt-in probes skipped
+
+EMDASH_RUN_LAMBDAPI_PROBES=1
+  node --require ts-node/register --test
+  tests/v3_2_directed_1c_tests.ts
+  passed all 11 tests, including generated positive acceptance and
+  mismatched-section-family rejection by Lambdapi
+
+./scripts/pnpmw run typecheck
+./scripts/pnpmw run lint
+  passed
+
+./scripts/pnpmw run check:ts
+  passed workspace contract, typecheck, ESLint, and root tests
+  397 tests / 49 suites: 371 passed, 26 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  passed the active kernel, extensions, and check corpus
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  passed the 397-test TypeScript gate, all 19 mandatory TypeScript/Lambdapi
+  differential judgments, all 41 Lambdapi kernel/example metric targets,
+  39 kernel-script tests, five document-registry tests, source/report/book
+  checks, strict inferred-slot audit, and strict generated-catalog check
+
+python3 emdash2/scripts/lint_report_headers.py
+git diff --check
+  passed
+```
+
 ## Persistent `/goal` Launch Prompt
 
 The following prompt is ready to use. It authorizes implementation within the
@@ -1663,12 +1735,15 @@ authorities, and ancestry; preserve unrelated work; relocate symbols with rg;
 and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
-The latest local implementation checkpoint is
-1c586a0633433126c8d67f8eca67a42f27ce638e. It records DIRECTED-1C's
-read-only inventory and exact one-owner/zero-rule proposal on top of the
-completed DIRECTED-1B integration. Stop at
-H-DTTLF-02/DIRECTED-1C; do not integrate its owner or begin product graduation
-before that decision.
+The latest pre-integration comparison checkpoint is
+1c586a0633433126c8d67f8eca67a42f27ce638e. DIRECTED-1C has since been
+approved and implemented as exactly one opaque `piapp0` signature import with
+no new rule; its combined TypeScript/Lambdapi consumer and negative pass.
+Recover the actual HEAD and checkpoint record, then select
+DIRECTED-GRADUATE-1 as the next dependency-ready slice. Freeze its fresh
+candidate manifest, non-product boundary, oracle policy, withheld claims, and
+exact H-DTTLF-03 recommendation; do not promote the browser/deployed profile
+or claim H-DTTLF-03 approval.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -1908,3 +1983,20 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   checkpoint contains only the non-executable one-owner/zero-rule proposal,
   tests and exports, and synchronized plan. It is review/backtracking evidence
   and grants no semantic integration or broader Git authority.
+- **2026-07-24 — H-DTTLF-02/DIRECTED-1C approved as proposed.** Preserved the
+  exact decision in a separate deeply frozen review artifact without rewriting
+  the proposal. Authorized only one body-free opaque
+  `section-object-evaluation` signature import mapped to active transparent
+  `piapp0`, zero runtime and proof-time rules, reuse of the existing
+  section/telescope/outer-beta closure, and every recorded product,
+  transparent-body, uncurrying, groupoidal, and metatheory non-effect.
+- **2026-07-24 — DIRECTED-1C completed; DIRECTED-GRADUATE-1 opened.** Extended
+  the reviewed catalog with exactly the one opaque evaluator while reusing the
+  seven-rule DIRECTED-1B runtime by identity. The combined section consumer
+  checks at the computed `FF[k][r]` fibre, outer beta and the telescope rule
+  compose, the scoped builder lowers the same term, and wrong family/pair,
+  arity, and environment cases fail. Deterministic emission has no shadow;
+  Lambdapi accepts the positive and rejects the mismatched-family program.
+  The focused 17-test tranche, 397-test TypeScript gate, bounded active kernel
+  check, and complete cross-layer gate pass. DIRECTED-GRADUATE-1 is
+  dependency-ready without any browser/product promotion.
