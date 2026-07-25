@@ -129,6 +129,13 @@ export interface CoreLfTransferTelescopeBinder {
 export interface CoreLfTransferConstructor {
     readonly order: number;
     readonly symbol: CoreLfQualifiedSymbol;
+    /**
+     * Optional constructor-local modes for the inductive parameters.
+     * Lambdapi permits a constructor to expose a parameter with different
+     * plicity while its result still applies the inductive head according to
+     * the head's parameter plicity.
+     */
+    readonly parameterModes?: readonly BinderMode[];
     readonly binders: readonly CoreLfTransferTelescopeBinder[];
     readonly result: CoreLfTransferExpression;
     readonly provenance: CoreLfTransferProvenance;
@@ -1518,6 +1525,24 @@ export function createCoreLfModuleSpec(
                 constructor.provenance,
                 input.authorityPath,
                 `${constructorPath}.provenance`
+            );
+            if (
+                constructor.parameterModes !== undefined &&
+                constructor.parameterModes.length !==
+                    block.parameters.length
+            ) {
+                fail(
+                    'INVALID_EXPRESSION',
+                    `${constructorPath}.parameterModes`,
+                    'Constructor parameter modes must cover every ' +
+                        'inductive parameter exactly once'
+                );
+            }
+            constructor.parameterModes?.forEach((mode, modeIndex) =>
+                validateMode(
+                    mode,
+                    `${constructorPath}.parameterModes[${modeIndex}]`
+                )
             );
             const constructorDepth = validateTelescope(
                 constructor.binders,

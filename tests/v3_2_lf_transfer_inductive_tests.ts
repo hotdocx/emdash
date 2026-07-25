@@ -11,6 +11,7 @@ import {
     CoreLfDeclarationCompilerError,
     CoreLfInductiveCompilerError,
     CoreLfModuleSpec,
+    CoreLfTransferError,
     CoreLfTransferPolicyOverlay,
     binderMode,
     compileCoreLfInductiveSignatures,
@@ -340,6 +341,12 @@ describe('SCALE-INDUCTIVE-1A generic inductive signatures', () => {
         assert.equal(constructor.tag, 'pi');
         if (constructor.tag !== 'pi') return;
         assert.equal(constructor.binder.mode.plicity, 'implicit');
+        assert.equal(constructor.body.tag, 'pi');
+        if (constructor.body.tag !== 'pi') return;
+        assert.equal(
+            constructor.body.binder.mode.plicity,
+            'implicit'
+        );
         assert.equal(
             lowering.doesNotProvide.includes(
                 'generated-eliminator-types'
@@ -462,6 +469,28 @@ describe('SCALE-INDUCTIVE-1A generic inductive signatures', () => {
         expectInductiveError(
             () => lowerCoreLfInductiveSignatures(malformed, policy),
             'INVALID_CONSTRUCTOR_RESULT'
+        );
+    });
+
+    it('requires constructor-local modes to cover every parameter', () => {
+        const fixture = pairFixture();
+        const block = fixture.module.inductives[0];
+        assert.throws(
+            () => createCoreLfModuleSpec({
+                ...fixture.module,
+                revision: 'inductive-parameter-mode-gap-1',
+                inductives: [{
+                    ...block,
+                    constructors: [{
+                        ...block.constructors[0],
+                        parameterModes: []
+                    }]
+                }]
+            }),
+            error =>
+                error instanceof CoreLfTransferError &&
+                error.code === 'INVALID_EXPRESSION' &&
+                /parameter modes/u.test(error.message)
         );
     });
 

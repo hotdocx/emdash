@@ -43,7 +43,9 @@ approved and its isolated integration is complete; DIRECTED-GRADUATE-1's
 exact combined profile is approved and authoritative through the root-only
 opt-in continuation API; all currently scoped implementation rows are
 complete or concretely deferred, while the separate scale plan tests whether
-future transfers can become systematic
+future transfers can become systematic; its first dependency-closed
+J/Pi/Sigma/Nat semantic profile is now an executable but non-active proposal
+awaiting H-DTTLF-SCALE-STRESS-01
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1356,6 +1358,7 @@ dependency-ready work rather than guessing a mathematical rule.
 | H-DTTLF-04 | concrete groupoidal closure consumer | Approve opening the separate Lambdapi-first groupoidal closure plan and its initial consumer/owner inventory? |
 | H-DTTLF-SCALE-01 | SCALE-0A complete in the scale plan | Approve a shared typed immutable transfer IR plus generic declaration/runtime/proof engines, direct typed construction anchored to active source/export evidence, optional later canonical bulk parsing, explicit-term versus tactic-source distinction, and a separate authority/policy overlay? |
 | H-DTTLF-SCALE-02 | generic declaration/local-runtime/composed-runtime/proof engines complete | Approve that engine boundary for representative stress work, direct typed specifications plus small checked extraction adapters, the fail-closed unsupported boundary, and deferred complete canonical term/pattern parsing? |
+| H-DTTLF-SCALE-STRESS-01 | SCALE-STRESS-1B-PREP complete in the scale plan | Approve the exact isolated equality/J/native-Nat/decoded-Sigma/decoded-Pi/grouped-Nat semantic qualification profile, its seven runtime rules and mandatory differential lane, while withholding generated induction and integrated batch reuse? |
 
 Current gate state: H-DTTLF-01 and the DIRECTED-1A, DIRECTED-1B, and
 DIRECTED-1C instances of H-DTTLF-02 were approved as proposed on 2026-07-24.
@@ -1401,6 +1404,16 @@ each source runtime is an exact object-identical compiled-fragment prefix;
 source artifacts remain unchanged and no mutable registry is restored. The
 mixed-phase parent is complete. The proof-free current corpus is ready only
 for an exact semantic-policy proposal, not execution.
+SCALE-STRESS-1B-PREP has now closed the proposal's exact
+equality/reflexivity/native-Nat dependencies and compiled the isolated
+candidate through the generic engines. The stress pass generalized
+constructor-local inherited-parameter modes and mixed intrinsic-external
+linkage, corrected the `ind_eqr` implicit endpoint, and required no runtime
+subject-reduction exception. Its TypeScript guard/priority witnesses and
+bounded Lambdapi positive/negative probe pass. The resulting
+H-DTTLF-SCALE-STRESS-01/D-DTTLF-SCALE-STRESS-001 decision remains pending;
+the candidate is not registered, and generated induction plus integrated
+deduplication with the 29-signature continuation remain explicit later work.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2443,3 +2456,15 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   This closes the mixed-phase parent without restoring the historical
   mutable global rewrite/unification arrays or changing any active semantic
   profile.
+- **2026-07-25 — First dependency-closed stress policy proposed.**
+  SCALE-STRESS-1B-PREP pins the equality/reflexivity/native-Nat dependencies
+  of the selected J/Pi/Sigma/grouped-Nat corpus and compiles the proposed
+  twelve free signatures plus seven runtime rules through the generic mixed
+  engines. The stress pass corrected exact J plicity, generalized
+  constructor-local inherited-parameter modes, and preserved intrinsic
+  external linkage into runtime/proof phases. TypeScript subject,
+  guard/binder/priority witnesses and a bounded Lambdapi positive/negative
+  probe pass with no subject-reduction exception. The artifact remains
+  non-active pending H-DTTLF-SCALE-STRESS-01; generated induction, integrated
+  deduplication, browser/default/product effects, and mechanical-transfer
+  graduation remain withheld.

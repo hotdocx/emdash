@@ -182,7 +182,8 @@ const indEqrType = (): CoreLfTransferExpression => {
                         implicitMode
                     )
                 )
-            )
+            ),
+            implicitMode
         ),
         implicitMode
     ));
@@ -569,6 +570,10 @@ const sigmaInductive = () => ({
     constructors: [{
         order: 0,
         symbol: structSigma,
+        parameterModes: [
+            implicitMode,
+            implicitMode
+        ],
         binders: [
             {
                 hint: 'sigma_Fst',

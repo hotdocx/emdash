@@ -605,6 +605,148 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
         assert.equal(Object.isFrozen(compiled.phases), true);
     });
 
+    it('preserves intrinsic external linkage into runtime phases', () => {
+        const intrinsicModuleId = 'fixture.mixed_intrinsic';
+        const intrinsicGrpd = coreLfQualifiedSymbol(
+            intrinsicModuleId,
+            'Grpd'
+        );
+        const intrinsicTau = coreLfQualifiedSymbol(
+            intrinsicModuleId,
+            'tau'
+        );
+        const classifier = coreLfQualifiedSymbol(
+            intrinsicModuleId,
+            'Classifier'
+        );
+        const carrierType = coreLfQualifiedSymbol(
+            intrinsicModuleId,
+            'Carrier'
+        );
+        const builder = new CoreLfTransferScopedBuilder();
+        const module = createCoreLfModuleSpec({
+            revision: 'mixed-intrinsic-external-1',
+            moduleId: intrinsicModuleId,
+            fragmentId: 'mixed-intrinsic-external',
+            authorityPath,
+            sourceSha256:
+                'sha256:abababababababababababababababababababababababababababababababab',
+            dependencies: [],
+            externalSymbols: [
+                intrinsicGrpd,
+                intrinsicTau
+            ].map(symbol => ({
+                symbol,
+                availability: 'earlier-fragment' as const
+            })),
+            declarations: [
+                {
+                    order: 0,
+                    symbol: classifier,
+                    type: {
+                        tag: 'global',
+                        symbol: intrinsicGrpd
+                    },
+                    body: coreLfTransferAbsentBody(),
+                    modifiers,
+                    provenance: source(
+                        'symbol Classifier : Grpd;'
+                    )
+                },
+                {
+                    order: 1,
+                    symbol: carrierType,
+                    type: { tag: 'type' },
+                    body: coreLfTransferAbsentBody(),
+                    modifiers,
+                    provenance: source('symbol Carrier : TYPE;')
+                }
+            ],
+            inductives: [],
+            runtimeRules: [{
+                order: 2,
+                id: 'fixture.mixed.intrinsic-decode',
+                groupId: 'fixture.mixed.intrinsic-decode',
+                clauseOrder: 0,
+                sourceOwner: intrinsicTau,
+                variables: [],
+                left: builder.pattern(builder.call(
+                    builder.global(intrinsicTau),
+                    [{
+                        plicity: 'explicit',
+                        value: builder.global(classifier)
+                    }]
+                )),
+                right: builder.template(
+                    builder.global(carrierType)
+                ),
+                provenance: source(
+                    'rule tau Classifier ↪ Carrier;'
+                )
+            }],
+            proofRules: []
+        });
+        const policy = fixturePolicy(module);
+        const plan = planCoreLfMixedPhases(module, policy);
+        const linkage = createCoreLfMixedDeclarationLinkage(
+            plan,
+            {
+                revision: 'mixed-intrinsic-linkage-1',
+                moduleRevision: module.revision,
+                entries: [
+                    {
+                        order: 0,
+                        symbol: intrinsicGrpd,
+                        kind: 'core-owner',
+                        owner: 'groupoid-universe'
+                    },
+                    {
+                        order: 1,
+                        symbol: intrinsicTau,
+                        kind: 'core-owner',
+                        owner: 'decode'
+                    },
+                    {
+                        order: 2,
+                        symbol: classifier,
+                        kind: 'free-declaration',
+                        coreName: 'mixed_intrinsic_classifier',
+                        backendName: 'Classifier'
+                    },
+                    {
+                        order: 3,
+                        symbol: carrierType,
+                        kind: 'free-declaration',
+                        coreName: 'mixed_intrinsic_carrier',
+                        backendName: 'Carrier'
+                    }
+                ]
+            }
+        );
+        const compiled = compileCoreLfMixedPhases(
+            plan,
+            linkage
+        );
+
+        assert.equal(
+            compiled.declarations.declaration(intrinsicGrpd)?.status,
+            'intrinsic-conformance'
+        );
+        assert.equal(
+            compiled.declarations.declaration(intrinsicTau)?.link.kind,
+            'core-owner'
+        );
+        assert.deepEqual(
+            compiled.latestRuntime?.runtime.ruleIds,
+            ['fixture.mixed.intrinsic-decode']
+        );
+        assert.equal(
+            compiled.latestRuntime?.localProgram.rules[0]
+                .subjectValidation.kind,
+            'typescript-checked'
+        );
+    });
+
     it('plans the exact stress modules without promoting their policy', () => {
         const stress = CORE_LF_SCALE_STRESS_1_REPRESENTATION;
         const core = planCoreLfMixedPhases(

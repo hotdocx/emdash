@@ -11,6 +11,7 @@ import { describe, it } from 'node:test';
 import {
     CORE_LF_SCALE_ENGINE_REVIEW,
     CORE_LF_SCALE_STRESS_1_ACQUISITION_CONTRACTS,
+    CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION,
     CORE_LF_SCALE_STRESS_1_CORE_ACQUISITION,
     CORE_LF_SCALE_STRESS_1_NAT_ACQUISITION,
     CanonicalLambdapiCommand,
@@ -439,6 +440,15 @@ describe(
                     assertDeepFrozen(contract);
                 }
             );
+            assert.deepEqual(
+                CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION.commands.map(
+                    command => command.ordinal
+                ),
+                [10, 12, 13, 14, 38, 39, 40, 54, 63, 64, 74, 75]
+            );
+            assertDeepFrozen(
+                CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION
+            );
 
             const implementation = readFileSync(
                 resolve(
@@ -528,6 +538,35 @@ describe(
                         canonicalExportText: coreExport,
                         observedExporterVersion: version
                     }
+                );
+                const proposalSelection =
+                    acquireCoreLfCanonicalCommands(
+                        CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION,
+                        {
+                            sourceText: readFileSync(
+                                resolve(
+                                    repositoryRoot,
+                                    CORE_LF_SCALE_STRESS_1B_CORE_ACQUISITION
+                                        .authorityPath
+                                ),
+                                'utf8'
+                            ),
+                            canonicalExportText: coreExport,
+                            observedExporterVersion: version
+                        }
+                    );
+                assert.equal(
+                    proposalSelection.commands.length,
+                    12
+                );
+                assert.deepEqual(
+                    proposalSelection.commands.map(
+                        entry => entry.command.ordinal
+                    ),
+                    [
+                        10, 12, 13, 14, 38, 39,
+                        40, 54, 63, 64, 74, 75
+                    ]
                 );
                 const outerJ = coreSelection.commands.find(
                     entry => entry.id === 'outer-j.reflexivity-beta'

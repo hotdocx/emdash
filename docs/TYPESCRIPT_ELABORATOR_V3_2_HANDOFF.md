@@ -19,10 +19,12 @@ engine gaps; signature-only SCALE-INDUCTIVE-1A and source-order/runtime
 composition SCALE-MIXED-PHASE-1A plus same-runtime-prefix proof composition
 SCALE-MIXED-PHASE-1B and completed-signature proof execution
 SCALE-MIXED-PHASE-1C are now complete; the mixed-phase parent is closed, the
-current stress corpus is ready for an exact semantic-policy proposal, and
-generated induction semantics plus the outer-LF TYPE/KIND Π-formation
-boundary remain explicit later rows before any newly promoted active stress
-profile or whole-transfer claim
+dependency-closed SCALE-STRESS-1B proposal preparation and isolated
+TypeScript/Lambdapi evidence are now complete; the exact
+H-DTTLF-SCALE-STRESS-01 decision is pending, and generated induction
+semantics, integrated batch deduplication, plus the outer-LF TYPE/KIND
+Π-formation boundary remain explicit later rows before any newly promoted
+active stress profile or whole-transfer claim
 
 ## Purpose
 
@@ -235,8 +237,27 @@ proof phases under the existing shared priority/session/budget design.
 Shorter or foreign runtime lineage fails closed, and no mutable global
 registry was restored. The new bounded `check:scale-phase-conformance` lane
 pins the Lambdapi positive/negative witness. The mixed-phase parent is
-complete, so an exact SCALE-STRESS-1B semantic proposal can now be prepared.
-No active stress profile exists until that separate human review is approved.
+complete.
+
+SCALE-STRESS-1B-PREP has now prepared the exact dependency-closed proposal.
+The core selection adds pinned equality/reflexivity and native-Nat
+dependencies before the acquired J/Pi/Sigma commands, then imports the
+existing grouped-`nat_add` representation. Stress compilation found and
+fixed only generic representation/orchestration gaps: the implicit `ind_eqr`
+endpoint, constructor-local inherited-parameter modes required by
+`Struct_sigma [a P]`, and preservation of intrinsic external linkage into
+later mixed runtime/proof phases. All twelve proposed free signatures and
+seven runtime rules compile; every runtime rule is TypeScript subject-checked
+without an exception oracle. Isolated TypeScript guard/binder/priority
+witnesses and a bounded Lambdapi positive/negative probe pass.
+
+`CORE_LF_SCALE_STRESS_1B_PROPOSAL` remains a non-active root-development
+review artifact. It withholds `ind_nat` and `ind_τΣ_`, changes no browser,
+default, MVP, directed-continuation, or Lambdapi profile, and deliberately
+does not merge duplicate `τΣ_`/`Struct_sigma` ownership with the reviewed
+29-signature continuation. The exact next question is
+H-DTTLF-SCALE-STRESS-01/D-DTTLF-SCALE-STRESS-001; no active stress profile
+exists until that separate human review is approved.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

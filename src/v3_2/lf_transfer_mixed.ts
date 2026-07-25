@@ -27,6 +27,7 @@ import {
 import {
     CoreLfCompiledDeclaration,
     CoreLfCompiledDeclarationModule,
+    CoreLfTransferCoreOwnerLink,
     CoreLfTransferDeclarationLink,
     CoreLfTransferDeclarationLinkage,
     compileCoreLfDeclarations,
@@ -50,6 +51,8 @@ import {
     CoreLfRuntimeFragmentDependency,
     compileCoreLfRuntimeFragment
 } from './lf_transfer_runtime';
+import { provenance } from './kernel';
+import { coreOwnerSignatureType } from './signature';
 
 export type CoreLfMixedPhaseKind =
     | 'declaration'
@@ -779,6 +782,134 @@ const EMPTY_DECLARATIONS: CoreLfMixedDeclarationBaseContext =
         ): undefined => undefined
     });
 
+const sameDeclarationLink = (
+    left: CoreLfTransferDeclarationLink,
+    right: CoreLfTransferDeclarationLink
+): boolean => {
+    if (
+        left.symbol.moduleId !== right.symbol.moduleId ||
+        left.symbol.name !== right.symbol.name ||
+        left.kind !== right.kind
+    ) {
+        return false;
+    }
+    if (
+        left.kind === 'core-owner' &&
+        right.kind === 'core-owner'
+    ) {
+        return left.owner === right.owner;
+    }
+    if (
+        left.kind === 'free-declaration' &&
+        right.kind === 'free-declaration'
+    ) {
+        return (
+            left.coreName === right.coreName &&
+            left.backendName === right.backendName
+        );
+    }
+    return false;
+};
+
+/**
+ * Preserve module-level external linkage for later runtime/proof phases.
+ *
+ * Free externals must already be supplied by the immutable initial
+ * declaration context. Intrinsic Core owners require no LF environment
+ * declaration, so this creates only their checked lookup evidence.
+ */
+const externalDeclarationContext = (
+    plan: CoreLfMixedPhasePlan,
+    linkage: CoreLfMixedDeclarationLinkage,
+    initial: CoreLfMixedDeclarationBaseContext =
+        EMPTY_DECLARATIONS
+): CoreLfMixedDeclarationBaseContext => {
+    const links = new Map(
+        linkage.entries.map(entry => [
+            symbolKey(entry.symbol),
+            entry
+        ])
+    );
+    const intrinsic = new Map<
+        string,
+        CoreLfCompiledDeclaration
+    >();
+    plan.sourceModule.externalSymbols.forEach(
+        (external, index) => {
+            const key = symbolKey(external.symbol);
+            const link = links.get(key);
+            if (link === undefined) {
+                fail(
+                    'INVALID_MIXED_LINKAGE',
+                    `sourceModule.externalSymbols[${index}]`,
+                    `External '${displaySymbol(external.symbol)}' ` +
+                        'has no mixed declaration link'
+                );
+            }
+            const existing = initial.declaration(external.symbol);
+            if (existing !== undefined) {
+                if (!sameDeclarationLink(existing.link, link)) {
+                    fail(
+                        'INVALID_INITIAL_DECLARATIONS',
+                        `sourceModule.externalSymbols[${index}]`,
+                        `Initial declaration for ` +
+                            `'${displaySymbol(external.symbol)}' ` +
+                            'does not preserve the mixed linkage'
+                    );
+                }
+                return;
+            }
+            if (link.kind === 'free-declaration') {
+                fail(
+                    'INVALID_INITIAL_DECLARATIONS',
+                    `sourceModule.externalSymbols[${index}]`,
+                    `Initial declarations do not resolve external ` +
+                        `'${displaySymbol(external.symbol)}'`
+                );
+            }
+            if (link.kind !== 'core-owner') {
+                fail(
+                    'INVALID_MIXED_LINKAGE',
+                    `sourceModule.externalSymbols[${index}]`,
+                    'Unsupported external declaration link'
+                );
+            }
+            const intrinsicLink =
+                link as CoreLfTransferCoreOwnerLink;
+            const nodeProvenance = provenance(
+                'recovered',
+                `mixed intrinsic external ` +
+                    `${displaySymbol(external.symbol)} from ` +
+                    plan.sourceModule.authorityPath
+            );
+            intrinsic.set(key, deepFreeze({
+                order: link.order,
+                symbol: { ...external.symbol },
+                policy: 'conformance-only',
+                link: {
+                    ...intrinsicLink,
+                    symbol: { ...intrinsicLink.symbol }
+                },
+                status: 'intrinsic-conformance',
+                type: coreOwnerSignatureType(
+                    intrinsicLink.owner,
+                    nodeProvenance
+                ),
+                provenance: nodeProvenance
+            }));
+        }
+    );
+    return Object.freeze({
+        environment: initial.environment,
+        declaration(
+            symbol: CoreLfQualifiedSymbol
+        ): CoreLfCompiledDeclaration | undefined {
+            return intrinsic.get(symbolKey(symbol)) ??
+                initial.declaration(symbol);
+        }
+    });
+};
+
 /**
  * Persistent declaration view over the initial dependency context and every
  * source-prior local declaration phase.
@@ -1017,7 +1148,11 @@ export function compileCoreLfMixedPhases(
     );
     const usedRuntimeDependencies = new Set<string>();
     let declarations = new CoreLfMixedDeclarationContext(
-        options.initialDeclarations
+        externalDeclarationContext(
+            plan,
+            linkage,
+            options.initialDeclarations
+        )
     );
     let latestRuntime: CoreLfCompiledRuntimeFragment | undefined;
     const compiled: CoreLfCompiledMixedPhase[] = [];

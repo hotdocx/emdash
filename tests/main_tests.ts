@@ -63,6 +63,7 @@ import './v3_2_lf_transfer_mixed_tests';
 import './v3_2_lf_runtime_fragment_tests';
 import './v3_2_lf_transfer_acquisition_tests';
 import './v3_2_scale_stress_1_representation_tests';
+import './v3_2_scale_stress_1b_proposal_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,

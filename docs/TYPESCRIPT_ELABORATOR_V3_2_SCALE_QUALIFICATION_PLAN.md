@@ -38,10 +38,13 @@ is in progress with signature-only SCALE-INDUCTIVE-1A complete; the
 SCALE-MIXED-PHASE-1 parent is complete with source-order/runtime-composition
 SCALE-MIXED-PHASE-1A and same-runtime-prefix proof composition
 SCALE-MIXED-PHASE-1B plus completed-signature proof execution
-SCALE-MIXED-PHASE-1C complete; the exact stress policy is the next human
-decision, while generated induction semantics and the measured outer-LF
-TYPE/KIND product boundary remain explicit gates before whole-transfer
-qualification
+SCALE-MIXED-PHASE-1C complete; SCALE-STRESS-1B-PREP is complete with one
+dependency-closed, executable-but-non-active proposal and bounded
+TypeScript/Lambdapi evidence; H-DTTLF-SCALE-STRESS-01/
+D-DTTLF-SCALE-STRESS-001 is now the exact next human decision, while
+generated induction semantics, batch deduplication, and the measured
+outer-LF TYPE/KIND product boundary remain explicit gates before
+whole-transfer qualification
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -72,6 +75,8 @@ SCALE-MIXED-PHASE-1B implementation checkpoint:
 `b7506a2d23c3c4ce5f9fdccd68cbdc9fe1f67d34`
 SCALE-MIXED-PHASE-1C implementation checkpoint:
 `4d9acc422adc7b0634c89f07826558137070d28c`
+SCALE-STRESS-1B-PREP implementation checkpoint:
+pending exact green local checkpoint
 
 ## Purpose
 
@@ -470,7 +475,8 @@ The architecture qualifies only when all of the following hold:
 | SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines |
 | SCALE-MIXED-PHASE-1B | complete | SCALE-MIXED-PHASE-1A | Same-runtime-prefix proof phases compose in source order under one global priority, queue, metavariable session, and proof budget; each phase retains exact compile evidence and later runtime rules are not silently made visible |
 | SCALE-MIXED-PHASE-1C | complete | SCALE-MIXED-PHASE-1B | Lambdapi positive/negative probes establish completed-signature runtime visibility; exact source programs retain their compile-time prefixes while one final executable view accepts only object-identical immutable runtime-prefix extension |
-| SCALE-STRESS-1B | pending semantic decision | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A, SCALE-MIXED-PHASE-1A, applicable semantic review | Execute the exact approved J/Pi/Sigma/Nat subset through generic declaration/runtime/signature-inductive phases with differential witnesses; do not claim complete inductive-command equivalence before SCALE-INDUCTIVE-1B |
+| SCALE-STRESS-1B-PREP | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A, SCALE-MIXED-PHASE-1 | Close the exact equality/reflexivity/Nat dependencies, preserve intrinsic external linkage and constructor-local parameter plicity generically, and compile one isolated proposed J/Pi/Sigma/Nat profile with TypeScript and bounded Lambdapi evidence but no active registration |
+| SCALE-STRESS-1B | awaiting H-DTTLF-SCALE-STRESS-01 | SCALE-STRESS-1B-PREP, applicable semantic review | If approved, freeze the decision record and expose only the exact isolated root-development qualification profile plus its mandatory differential lane; do not claim complete inductive-command equivalence before SCALE-INDUCTIVE-1B or integrated batch reuse before SCALE-BATCH-1 |
 | SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
@@ -1476,6 +1482,105 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 12 mixed-phase conformance tests passed
 ```
 
+## SCALE-STRESS-1B-PREP Completion Record
+
+Preparing an executable semantic decision exposed dependencies that the
+representation-only corpus had correctly left external but that the reviewed
+29-signature continuation does not provide as one reusable declaration
+context. The proposal now selects the exact canonical commands for `=`,
+`eq_refl`, native `nat` with `zero`/`succ`, `Nat_grpd`, and its decoding rule,
+as well as the previously acquired J, decoded Sigma, decoded Pi, and imported
+grouped-`nat_add` commands. The core command ordinals are exactly
+`10, 12, 13, 14, 38, 39, 40, 54, 63, 64, 74, 75`.
+
+The first compilation attempt found three representation/orchestration
+details, all fixed generically rather than by adding a mathematical-owner
+case:
+
+- the exact `ind_eqr` signature has both `a` and `y` implicit; the typed
+  representation now preserves that source plicity;
+- an inductive constructor may expose inherited parameters with
+  constructor-local modes while its result still applies the inductive head
+  with the head's modes; the transfer IR and signature lowerer now represent
+  and validate that distinction, which is required by
+  `Struct_sigma [a P]` even though `τΣ_` declares `P` explicitly; and
+- mixed declaration phases already understood intrinsic Core-owner links,
+  but later runtime/proof contexts had discarded external intrinsic lookup
+  evidence. The mixed compiler now preserves that immutable validated
+  linkage, requires free externals to come from the explicit initial
+  declaration context, and rejects linkage drift.
+
+`CORE_LF_SCALE_STRESS_1B_PROPOSAL` is a deep-frozen, root-development-only
+review artifact. Its isolated core profile maps only `Grpd` and `τ` to
+existing intrinsic owners. It proposes opaque signatures for equality,
+reflexivity, J, native Nat and its two constructors, `Nat_grpd`, decoded
+Sigma and its constructor/eliminator, and decoded Pi. The imported module
+adds opaque `nat_add`. It proposes seven runtime rules in authority order:
+J beta, Nat decoding, Sigma eliminator beta, Pi decoding, and the three
+ordered `nat_add` clauses. It proposes no proof-time rule.
+
+Both generated owners, `ind_nat` and `ind_τΣ_`, remain named but withheld.
+The proposal therefore claims signature erasure and the explicitly supplied
+runtime clauses only—not backend-generated induction, recursion principles,
+strict positivity, indexed induction, or complete Lambdapi inductive-command
+equivalence. This selected corpus also does not exercise the independent
+`Π A : TYPE` product-sort boundary.
+
+The proposal compiles through the generic mixed declaration,
+signature-inductive, local/prior-runtime, and dependency-module paths. Every
+one of the seven runtime rules passes the TypeScript subject check; no
+external subject-reduction exception is needed. Executable review witnesses
+cover repeated J endpoint/proof guards, binder-producing Pi decoding, Sigma
+eliminator beta, all three Nat clauses, and the successor/right-zero critical
+pair's source priority. A bounded Lambdapi probe accepts the corresponding J,
+Pi, Sigma, Nat, and non-commutativity judgments and rejects the deliberately
+false open commutativity assertion.
+
+This is deliberately an isolated qualification profile. Directly appending
+it to the reviewed 29-signature continuation would redeclare existing
+`τΣ_`/`Struct_sigma` ownership. SCALE-BATCH-1 must demonstrate exact
+declaration reuse/deduplication, or a dependency-closed replacement profile,
+without weakening identity checks. The proposal does not treat duplicate
+names as equivalent by spelling and does not claim integrated batch scale.
+
+No proposal object enters `browser.ts`; no default, frozen MVP, or reviewed
+directed profile changes; no Lambdapi source changes; and no active
+registration occurs. `compileCoreLfScaleStress1bProposal()` is an explicit
+isolated review-evidence function, not a product/catalog factory.
+
+Focused validation on 2026-07-25:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_lf_transfer_inductive_tests.ts \
+  tests/v3_2_lf_transfer_mixed_tests.ts \
+  tests/v3_2_scale_stress_1_representation_tests.ts \
+  tests/v3_2_scale_stress_1b_proposal_tests.ts
+  generic inductive/mixed, representation, and proposal suites passed;
+  the ordinary run skipped only bounded live process probes
+
+./scripts/pnpmw run check:scale-stress-proposal
+  7 tests / 1 suite: all passed, including the bounded positive/negative
+  Lambdapi stress probe
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  517 tests / 64 suites: 487 passed, 30 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript and kernel/report/book/audit gates passed
+  all 19 frozen MVP differential judgments passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+  all 13 mixed-phase conformance tests passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -1539,6 +1644,39 @@ The approval unlocks representative stress and the smallest explicit engine
 rows while preserving every negative boundary in the decision. It does not
 pre-approve the active semantic profile required by SCALE-STRESS-1B.
 
+### H-DTTLF-SCALE-STRESS-01 — First Executable Stress Profile
+
+SCALE-STRESS-1B-PREP now supplies the exact dependency-closed policy,
+linkage, generic compilation evidence, guard/priority witnesses, and bounded
+Lambdapi differential needed for the first representative semantic stress
+decision.
+
+Proposed decision:
+
+> **D-DTTLF-SCALE-STRESS-001:** authorize one isolated root-development
+> qualification profile containing the exact pinned equality/reflexivity,
+> right-J, native-Nat classifier/signatures, decoded dependent-Sigma,
+> decoded dependent-Pi, and imported grouped-`nat_add` subset represented by
+> `CORE_LF_SCALE_STRESS_1B_PROPOSAL`; map only `Grpd` and `τ` to their
+> existing intrinsic Core owners; select the twelve listed free signatures
+> as opaque and the seven listed clauses as catalog-scoped runtime rewrites;
+> retain zero proof-time rules and one shared immutable dependency/runtime
+> lineage and budget; require the recorded TypeScript subject/guard/priority
+> witnesses and bounded Lambdapi positive/negative differential lane; and
+> keep `ind_nat` and `ind_τΣ_` withheld pending explicit generated-owner
+> contracts. This approval authorizes a frozen decision record and exact
+> opt-in root-development qualification API only. It does not alter the
+> frozen MVP, reviewed directed continuation, default LF profile, browser,
+> or Lambdapi; does not authorize a generated eliminator, positivity or
+> recursive/indexed-induction claim, TYPE/KIND change, groupoidal-closure
+> theorem, integrated reuse of duplicate continuation signatures,
+> whole-development mechanical-transfer qualification, release, or remote
+> Git operation.
+
+The exact question requiring a human answer is:
+
+> Approve H-DTTLF-SCALE-STRESS-01/D-DTTLF-SCALE-STRESS-001 as proposed.
+
 ### Existing Semantic And Mathematical Gates
 
 - A new TypeScript signature/runtime/proof profile still requires an exact
@@ -1595,6 +1733,19 @@ This separately bounded lane runs the mixed-phase engine suite with its
 positive/negative Lambdapi proof/runtime command-order probe enabled. It is
 mandatory for changes to source-time proof compilation, final proof-program
 composition, or runtime-prefix lineage.
+
+SCALE-STRESS-1B-PREP adds a proposal-only lane:
+
+```text
+./scripts/pnpmw run check:scale-stress-proposal
+```
+
+It compiles the isolated proposed policy, runs its TypeScript subject,
+guard, binder, and grouped-priority witnesses, and runs the corresponding
+bounded Lambdapi positive/negative probe. It remains separate from the
+aggregate gate until H-DTTLF-SCALE-STRESS-01 decides whether the profile may
+be activated. Exact canonical command acquisition is already checked by
+`check:scale-inventory`.
 
 The aggregate forward gate is:
 
@@ -1892,3 +2043,18 @@ scope is affected.
   semantic rule/profile, browser API, parser, Lambdapi source change, or
   mechanical-transfer claim was added; SCALE-STRESS-1B now awaits its exact
   semantic-policy decision.
+- **2026-07-25 — SCALE-STRESS-1B-PREP completed; exact policy proposed.**
+  Added the pinned equality/reflexivity/native-Nat dependency closure and one
+  isolated deep-frozen H-DTTLF-SCALE-STRESS-01 proposal. Stress compilation
+  corrected the `ind_eqr` implicit endpoint, generalized inductive
+  constructor-local parameter modes for `Struct_sigma`, and preserved
+  intrinsic external linkage into mixed runtime/proof contexts without an
+  owner-specific case. All twelve proposed free signatures and seven runtime
+  clauses compile through the generic engines; all runtime clauses pass the
+  TypeScript subject check without an oracle exception. TypeScript guard,
+  binder, Sigma, and grouped-Nat priority witnesses plus the bounded
+  Lambdapi positive/negative proposal lane pass. Generated `ind_nat` and
+  `ind_τΣ_`, integrated deduplication with the 29-signature continuation,
+  TYPE/KIND formation, browser/default/product effects, Lambdapi changes, and
+  mechanical-transfer graduation remain unauthorized. Exact green local
+  checkpoint: pending.

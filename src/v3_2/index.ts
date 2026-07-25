@@ -47,6 +47,7 @@ export * from './lf_transfer_mixed';
 export * from './lf_transfer_acquisition';
 export * from './scale_stress_1_acquisition';
 export * from './scale_stress_1_representation';
+export * from './scale_stress_1b_proposal';
 export * from './directed_continuation_transfer';
 export * from './directed_continuation_runtime_transfer';
 export * from './metatheory';

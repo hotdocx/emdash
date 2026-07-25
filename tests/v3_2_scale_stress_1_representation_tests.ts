@@ -177,6 +177,23 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
     });
 
     it('lowers J motive wildcard without losing dependent guards', () => {
+        const declaration =
+            representation.core.module.declarations.find(
+                candidate => candidate.symbol.name === 'ind_eqr'
+            );
+        assert.equal(declaration?.type.tag, 'pi');
+        if (declaration?.type.tag !== 'pi') return;
+        assert.equal(
+            declaration.type.binder.mode.plicity,
+            'implicit'
+        );
+        assert.equal(declaration.type.body.tag, 'pi');
+        if (declaration.type.body.tag !== 'pi') return;
+        assert.equal(
+            declaration.type.body.binder.mode.plicity,
+            'implicit'
+        );
+
         const rule = representation.core.module.runtimeRules.find(
             candidate =>
                 candidate.id === 'stress.outer-j.reflexivity'

@@ -337,11 +337,22 @@ export function lowerCoreLfInductiveSignatures(
         block.constructors.forEach(constructor => {
             const order = declarationOrder++;
             constructorDeclarationOrders.push(order);
+            const constructorParameters = block.parameters.map(
+                (parameter, parameterIndex) => ({
+                    ...parameter,
+                    mode:
+                        constructor.parameterModes?.[parameterIndex] ??
+                        parameter.mode
+                })
+            );
             declarations.push({
                 order,
                 symbol: constructor.symbol,
                 type: wrapTelescope(
-                    [...block.parameters, ...constructor.binders],
+                    [
+                        ...constructorParameters,
+                        ...constructor.binders
+                    ],
                     constructor.result
                 ),
                 body: coreLfTransferAbsentBody(),
