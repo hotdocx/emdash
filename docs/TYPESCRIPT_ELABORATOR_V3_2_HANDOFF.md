@@ -16,12 +16,13 @@ canonical-command adapter/contracts are complete; representation-only
 SCALE-STRESS-1A now covers the exact J/Pi/Sigma/Nat corpus and identifies
 generic inductive compilation plus source-ordered mixed-phase planning as its
 engine gaps; signature-only SCALE-INDUCTIVE-1A and source-order/runtime
-composition SCALE-MIXED-PHASE-1A are now complete; separated proof-program
-composition is the next independent engine row, the current stress corpus is
-ready for an exact semantic-policy proposal, and generated induction
-semantics plus the outer-LF TYPE/KIND Π-formation boundary remain explicit
-later rows before any newly promoted active stress profile or whole-transfer
-claim
+composition SCALE-MIXED-PHASE-1A plus same-runtime-prefix proof composition
+SCALE-MIXED-PHASE-1B are now complete; runtime-divergent proof-prefix
+semantics remain the next independent engine boundary, the current stress
+corpus is ready for an exact semantic-policy proposal, and generated
+induction semantics plus the outer-LF TYPE/KIND Π-formation boundary remain
+explicit later rows before any newly promoted active stress profile or
+whole-transfer claim
 
 ## Purpose
 
@@ -216,12 +217,17 @@ core stress module becomes seven phases and imported Nat becomes a
 declaration plus one ordered three-clause runtime phase; all policies remain
 conformance-only. A synthetic four-kind module and a separate importing
 consumer compile and execute without owner-specific orchestration.
-Separated proof phases fail closed because they still need one shared queue,
-priority, session-effect, and budget design; this is
-SCALE-MIXED-PHASE-1B, the next independent engine row. It does not block the
-proof-free current corpus, so an exact SCALE-STRESS-1B semantic proposal can
-now be prepared. No active stress profile exists until that separate human
-review is approved.
+SCALE-MIXED-PHASE-1B now composes source-separated proof phases that share
+one exact runtime prefix. Their checked rules execute through one global
+priority order, queue, metavariable session, generated-constraint schedule,
+and comparison budget while the individual phase programs remain available
+as exact compile evidence. A later module runtime is not silently visible to
+the composed proof program. Phases with different runtime prefixes still
+fail closed; SCALE-MIXED-PHASE-1C must settle whether exact prefix-sensitive
+execution is required or that boundary remains unsupported. This residual
+does not block the proof-free current corpus, so an exact SCALE-STRESS-1B
+semantic proposal can now be prepared. No active stress profile exists until
+that separate human review is approved.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

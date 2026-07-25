@@ -1389,10 +1389,14 @@ measured the outer-LF rejection of a `TYPE`-annotated Π binder and records
 that product-sort question as SCALE-KIND-PI-1/H-DTTLF-LF-SORT-01 rather than
 silently changing the checker. SCALE-MIXED-PHASE-1A now completes exact
 source-order planning and declaration/runtime prefix orchestration for the
-current stress corpus while keeping its policy conformance-only. Separated
-proof-program composition remains the next independent scale-engine row; the
-proof-free current corpus is ready only for an exact semantic-policy proposal,
-not execution.
+current stress corpus while keeping its policy conformance-only.
+SCALE-MIXED-PHASE-1B now composes source-separated proof programs when they
+share one exact runtime prefix, global priority, queue, metavariable session,
+generated-constraint schedule, and comparison budget. It preserves each
+phase's exact compile evidence and does not grant later runtime visibility.
+Runtime-divergent phases remain the explicit SCALE-MIXED-PHASE-1C boundary;
+the proof-free current corpus is ready only for an exact semantic-policy
+proposal, not execution.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2418,3 +2422,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   plans without policy promotion, while a synthetic four-kind program and an
   importing consumer compile through the existing engines. Separated proof
   phases fail closed pending one shared-priority/session/budget design.
+- **2026-07-25 — Same-prefix proof phases composed.**
+  SCALE-MIXED-PHASE-1B preserves the exact separately compiled proof
+  programs and adds one executable flattened view when every phase shares the
+  same immutable runtime prefix. Rules retain global source priority and run
+  through one queue, metavariable session, generated-constraint schedule,
+  and comparison budget. A later runtime remains invisible, and
+  runtime-divergent proof phases fail closed pending the exact
+  SCALE-MIXED-PHASE-1C visibility audit/design.

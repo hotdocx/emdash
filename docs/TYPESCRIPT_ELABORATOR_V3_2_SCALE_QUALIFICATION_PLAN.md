@@ -36,10 +36,11 @@ D-DTTLF-SCALE-002 is approved; SCALE-ACQUIRE-1A is complete and
 representation-only SCALE-STRESS-1A is complete; the SCALE-INDUCTIVE-1 parent
 is in progress with signature-only SCALE-INDUCTIVE-1A complete; the
 SCALE-MIXED-PHASE-1 parent is in progress with source-order/runtime-composition
-SCALE-MIXED-PHASE-1A complete; shared-budget separated-proof composition is
-the next independent dependency-ready engine row, while generated induction
-semantics, exact stress policy, and the measured outer-LF TYPE/KIND product
-boundary remain explicit gates before whole-transfer qualification
+SCALE-MIXED-PHASE-1A and same-runtime-prefix proof composition
+SCALE-MIXED-PHASE-1B complete; runtime-divergent proof-prefix semantics are
+the next independent engine boundary, while generated induction semantics,
+exact stress policy, and the measured outer-LF TYPE/KIND product boundary
+remain explicit gates before whole-transfer qualification
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -66,6 +67,8 @@ SCALE-INDUCTIVE-1A implementation checkpoint:
 `0497604947e69c9d550f1a1050adadfd6a630a85`
 SCALE-MIXED-PHASE-1A implementation checkpoint:
 `9e0265fb0d0d8fb5a7c4a20a1ec460ca1485eb38`
+SCALE-MIXED-PHASE-1B implementation checkpoint:
+`b7506a2d23c3c4ce5f9fdccd68cbdc9fe1f67d34`
 
 ## Purpose
 
@@ -460,9 +463,10 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | pending | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Represent and check generated eliminator types/computation plus recursive/indexed and strict-positivity boundaries; no backend-generated owner is trusted without an explicit typed contract |
 | SCALE-KIND-PI-1 | pending exact LF review | SCALE-INDUCTIVE-1A | Reconcile the checker’s current rejection of a Π binder whose annotation is `TYPE` (and therefore has sort `KIND`) with the Lambdapi-aligned outer LF; distinguish universe/product formation from an assertion that `TYPE : TYPE` |
-| SCALE-MIXED-PHASE-1 | in progress | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Parent row for exact source-order orchestration, module/prior runtime composition, and separated proof-program composition |
-| SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines; separated proof phases fail closed |
-| SCALE-MIXED-PHASE-1B | pending | SCALE-MIXED-PHASE-1A | Compose separated proof phases in source order under one proof budget and their exact runtime/declaration prefixes, without turning proof rules into evaluator rewrites or silently granting later-rule visibility |
+| SCALE-MIXED-PHASE-1 | in progress | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Parent row for exact source-order orchestration, module/prior runtime composition, and separated proof-program composition, including an explicit runtime-prefix visibility boundary |
+| SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines |
+| SCALE-MIXED-PHASE-1B | complete | SCALE-MIXED-PHASE-1A | Same-runtime-prefix proof phases compose in source order under one global priority, queue, metavariable session, and proof budget; each phase retains exact compile evidence and later runtime rules are not silently made visible |
+| SCALE-MIXED-PHASE-1C | pending exact semantic audit/design | SCALE-MIXED-PHASE-1B | Measure and settle proof-rule visibility when source-separated phases have different runtime prefixes; either implement an exact prefix-sensitive composition model or preserve a documented fail-closed boundary, without implicitly widening any phase to the final runtime |
 | SCALE-STRESS-1B | pending semantic decision | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A, SCALE-MIXED-PHASE-1A, applicable semantic review | Execute the exact approved J/Pi/Sigma/Nat subset through generic declaration/runtime/signature-inductive phases with differential witnesses; do not claim complete inductive-command equivalence before SCALE-INDUCTIVE-1B |
 | SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
@@ -1334,6 +1338,68 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 14 live canonical inventory/acquisition probes passed
 ```
 
+## SCALE-MIXED-PHASE-1B Completion Record
+
+`src/v3_2/lf_transfer_proof.ts` now provides one generic immutable
+composition of source-separated proof programs. Every source phase retains
+its exact compile artifact, module/source evidence, rule IDs, and phase-local
+checking record. The executable view validates one pinned source and
+dependency view, unique rule IDs, strict global source order, a resolvable
+final declaration context, one immutable runtime-program identity, and one
+explicit or already-agreed comparison budget before flattening the checked
+rules.
+
+The resulting `CoreLfComposedProofProgram` delegates to one
+`CoreLfCompiledProofProgram`. Consequently all phases use one global
+source-priority order, comparison queue, metavariable session, generated
+constraint schedule, and step budget. Phase metadata separately records each
+phase's rule IDs and all preceding proof-rule IDs; it does not rewrite the
+original phase-local `checkedWithEarlierRuleIds` evidence to claim a stronger
+compile-time dependency than was checked.
+
+`src/v3_2/lf_transfer_mixed.ts` now returns both the exact per-phase
+`proofPrograms` and the one executable `proofProgram`. Two proof phases
+separated by declarations compose when they have the same runtime prefix.
+The executable witness applies the later phase's rule at global rule index
+one and reports that rule as the exact next action under a zero-step budget.
+A runtime rule placed after both proof phases is explicitly absent from their
+composed runtime, so the compiler does not silently widen them to the final
+module runtime and proof rules never become evaluator rewrites.
+
+This tranche intentionally rejects proof phases whose runtime-program
+identities differ. Choosing final-runtime widening would give an earlier
+proof rule later computation retroactively; independently executing each
+phase would multiply queues, sessions, and budgets. `SCALE-MIXED-PHASE-1C`
+therefore retains the exact runtime-divergent visibility audit/design. The
+parent row remains in progress. The current J/Pi/Sigma/Nat stress corpus has
+no proof rules, so its separate semantic-policy proposal remains
+mechanically unblocked and still requires human approval.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_lf_transfer_proof_tests.ts \
+         tests/v3_2_lf_transfer_mixed_tests.ts
+  20 tests / 2 suites: all passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  507 tests / 63 suites: 479 passed, 28 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript gate passed
+  all 19 frozen MVP differential judgments passed
+  41 kernel/example metric targets passed
+  39 kernel-script tests and five registry tests passed
+  source/report/book/audit gates passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -1713,3 +1779,15 @@ scope is affected.
   fail closed and open SCALE-MIXED-PHASE-1B; no active declaration/rule,
   browser API, generated induction semantics, checker policy, or
   mechanical-transfer claim was added.
+- **2026-07-25 — SCALE-MIXED-PHASE-1B completed and checkpointed.** Recorded
+  local implementation checkpoint
+  `b7506a2d23c3c4ce5f9fdccd68cbdc9fe1f67d34` after 20 combined proof/mixed
+  tests, the 507-test TypeScript gate, bounded active-kernel check, complete
+  scale gate, and all live directed/acquisition probes passed. Separated
+  proof phases sharing one exact runtime prefix now execute under one global
+  rule priority, queue, metavariable session, generated-constraint schedule,
+  and comparison budget while retaining their individual compile evidence.
+  Later runtime rules are not silently visible. Runtime-divergent proof
+  phases still fail closed and open SCALE-MIXED-PHASE-1C; no active rule,
+  semantic profile, browser API, checker policy, or mechanical-transfer claim
+  was added.
