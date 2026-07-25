@@ -14,8 +14,11 @@ SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 is
 approved; the exact frozen engine review and SCALE-ACQUIRE-1A checked
 canonical-command adapter/contracts are complete; representation-only
 SCALE-STRESS-1A now covers the exact J/Pi/Sigma/Nat corpus and identifies
-generic inductive compilation plus source-ordered mixed-phase planning as the
-next engine rows before any newly promoted active stress profile
+generic inductive compilation plus source-ordered mixed-phase planning as its
+engine gaps; signature-only SCALE-INDUCTIVE-1A is now complete, mixed-phase
+planning is the next dependency-ready row, and generated induction semantics
+plus the outer-LF TYPE/KIND Π-formation boundary remain explicit later rows
+before any newly promoted active stress profile or whole-transfer claim
 
 ## Purpose
 
@@ -184,8 +187,23 @@ left-bound/right-unused motives, the Pi beta retains its dependent binder RHS,
 and imported Nat retains one ordered three-clause recursive group. All
 entries remain conformance-only. The executable refusal isolates generic
 inductive compilation and generic source-order phase planning, rather than a
-category-owner exception, as the next two infrastructure rows. Any active
-stress profile still requires its exact semantic review.
+category-owner exception, as the next two infrastructure rows.
+SCALE-INDUCTIVE-1A now supplies the first of those pieces as generic
+signature erasure: it validates and lowers heads/constructors through the
+existing declaration compiler, keeps generated eliminator identities
+untyped, and fails closed if one is consumed. The active `τΣ_` shape compiles
+only under a test-only opaque overlay; production policy remains
+conformance-only. Positivity, recursive/indexed induction, and generated
+eliminator semantics remain SCALE-INDUCTIVE-1B.
+
+That tranche also exposed a separate outer-LF boundary: the current checker
+rejects `Π A : TYPE, ...` because the binder annotation `TYPE` has sort
+`KIND`. This is a product-sort question, not an assertion that
+`TYPE : TYPE`; no checker semantics changed. SCALE-KIND-PI-1 and
+H-DTTLF-LF-SORT-01 must settle the Lambdapi-aligned rule before arbitrary
+polymorphic-signature transfer can be claimed. The active Sigma signature
+does not require that rule, so SCALE-MIXED-PHASE-1 is independently ready.
+Any active stress profile still requires its exact semantic review.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

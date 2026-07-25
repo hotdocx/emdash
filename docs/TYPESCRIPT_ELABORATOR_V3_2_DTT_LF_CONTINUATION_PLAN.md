@@ -1381,9 +1381,14 @@ qualification by itself. SCALE-ACQUIRE-1A now implements the first checked
 adapter and exact J/Pi/Sigma/Nat acquisition contracts in the active scale
 plan.
 SCALE-STRESS-1A now supplies the exact immutable typed J/Pi/Sigma/Nat
-representation and classifies generic inductive compilation and mixed
-source-order phase planning as the remaining engine prerequisites before any
-stress-profile proposal.
+representation and classified generic inductive compilation and mixed
+source-order phase planning as its engine prerequisites.
+SCALE-INDUCTIVE-1A now completes generic signature-only head/constructor
+lowering while withholding generated induction semantics. It separately
+measured the outer-LF rejection of a `TYPE`-annotated Π binder and records
+that product-sort question as SCALE-KIND-PI-1/H-DTTLF-LF-SORT-01 rather than
+silently changing the checker. Generic mixed-phase planning is the next
+dependency-ready scale row.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2392,3 +2397,12 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   Every policy remains conformance-only. The audit opens generic inductive
   compilation and generic source-ordered mixed-phase planning before any
   exact active stress-profile review.
+- **2026-07-25 — Generic inductive signatures lowered.**
+  SCALE-INDUCTIVE-1A validates and erases inductive heads/constructors into
+  the generic declaration compiler, preserves generated identities as
+  withheld evidence, and fails closed when an untyped generated owner is
+  consumed. The active Sigma shape passes without an owner-specific compiler
+  case or policy promotion. Positivity, recursive/indexed induction, and
+  generated computation remain open. The tranche also records the current
+  outer-LF rejection of a `TYPE`-annotated Π binder as a distinct exact
+  product-sort review; mixed-phase planning remains independently ready.

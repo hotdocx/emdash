@@ -33,8 +33,11 @@ Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
 D-DTTLF-SCALE-002 is approved; SCALE-ACQUIRE-1A is complete and
-representation-only SCALE-STRESS-1A is complete; generic inductive and
-mixed-phase engine rows are next before semantic promotion
+representation-only SCALE-STRESS-1A is complete; the SCALE-INDUCTIVE-1 parent
+is in progress with signature-only SCALE-INDUCTIVE-1A complete; generic
+mixed-phase planning is the next dependency-ready row, while generated
+induction semantics and the measured outer-LF TYPE/KIND product boundary
+remain explicit later rows before whole-transfer qualification
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -57,6 +60,8 @@ SCALE-ACQUIRE-1A implementation checkpoint:
 `091538c8c3bda6e4e89dd3fee96fd6eed68a51f8`
 SCALE-STRESS-1A implementation checkpoint:
 `333003084ce1fbf165caccf01c71af17e38c470a`
+SCALE-INDUCTIVE-1A implementation checkpoint:
+`0497604947e69c9d550f1a1050adadfd6a630a85`
 
 ## Purpose
 
@@ -447,13 +452,16 @@ The architecture qualifies only when all of the following hold:
 | SCALE-ACQUIRE-1A | complete | SCALE-ACQUIRE-1 | Generic source/export/import/ordinal/kind/metadata/digest checked command-selection adapter plus exact outer-J, groupoidal Pi/Sigma, and imported grouped-Nat acquisition contracts |
 | SCALE-STRESS-1 | in progress | SCALE-0D, SCALE-RUNTIME-DEPS-1, SCALE-ACQUIRE-1A, applicable semantic review | Parent row for outer J, groupoidal Pi/Sigma, and imported Nat grouped recursion |
 | SCALE-STRESS-1A | complete | SCALE-ACQUIRE-1A | Exact typed representation and fail-closed engine-gap classification for the acquired J/Pi/Sigma/Nat commands, without installing an active semantic profile |
-| SCALE-INDUCTIVE-1 | pending | SCALE-STRESS-1A | Generic immutable inductive head/constructor/generated-owner lowering and compilation, with unsupported recursive/indexed/generated forms explicit and fail-closed; no active semantic promotion |
-| SCALE-MIXED-PHASE-1 | pending | SCALE-STRESS-1A, SCALE-INDUCTIVE-1 | Generic source-ordered planner over the separate declaration/inductive/runtime/proof engines, preserving grouped clauses and explicit module/prior-fragment dependencies without owner-specific orchestration |
-| SCALE-STRESS-1B | pending | SCALE-STRESS-1A, SCALE-INDUCTIVE-1, SCALE-MIXED-PHASE-1, applicable semantic review | Execute the exact approved subset through generic declaration/runtime/inductive phases with differential witnesses |
+| SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
+| SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
+| SCALE-INDUCTIVE-1B | pending | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Represent and check generated eliminator types/computation plus recursive/indexed and strict-positivity boundaries; no backend-generated owner is trusted without an explicit typed contract |
+| SCALE-KIND-PI-1 | pending exact LF review | SCALE-INDUCTIVE-1A | Reconcile the checker’s current rejection of a Π binder whose annotation is `TYPE` (and therefore has sort `KIND`) with the Lambdapi-aligned outer LF; distinguish universe/product formation from an assertion that `TYPE : TYPE` |
+| SCALE-MIXED-PHASE-1 | pending | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Generic source-ordered planner over the separate declaration/signature-inductive/runtime/proof engines, preserving grouped clauses and explicit module/prior-fragment dependencies without owner-specific orchestration |
+| SCALE-STRESS-1B | pending | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A, SCALE-MIXED-PHASE-1, applicable semantic review | Execute the exact approved subset through generic declaration/runtime/signature-inductive phases with differential witnesses; do not claim complete inductive-command equivalence before SCALE-INDUCTIVE-1B |
 | SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
-| SCALE-GRADUATE-1 | pending | all required stress rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
+| SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
 
 Rows may be split when implementation reveals an independently reviewable
 mechanism. A failed experiment records its exact unsupported syntax or
@@ -1192,6 +1200,69 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 14 live canonical inventory/acquisition probes passed
 ```
 
+## SCALE-INDUCTIVE-1A Completion Record
+
+`src/v3_2/lf_transfer_inductive.ts` now supplies one owner-agnostic,
+recursively immutable signature-lowering phase. It validates each
+constructor’s rigid result head, argument count and plicity, and unchanged
+parameter arguments; lowers the inductive head and constructors to ordinary
+dependent Π declarations; maps the block’s separate policy to those
+declarations; filters the resulting external/dependency closure; and invokes
+the existing generic declaration compiler through an exact linkage.
+
+The active `τΣ_`/`Struct_sigma` shape passes this phase without any owner name
+or category case in the implementation. The production stress overlay remains
+`conformance-only`; its executable test uses a separate test-only opaque
+overlay and the existing `Grpd`/`τ` Core owners. Backend-generated
+`ind_τΣ_` remains a preserved but untyped identity. Any selected fragment
+that consumes such a generated identity fails closed rather than inventing
+its type or rules.
+
+This is deliberately signature erasure, not complete inductive-command
+semantics. The artifact says exactly that it does not provide strict
+positivity, generated eliminator types or computation, induction semantics,
+kind-level binder compilation, or active semantic policy.
+SCALE-INDUCTIVE-1B retains the generated/recursive/indexed work, and the
+parent row remains in progress.
+
+The tranche also measured an independent outer-LF boundary. A declaration
+containing `Π A : TYPE, ...` currently reaches `CoreChecker.requireType`,
+which rejects the binder annotation because `TYPE` has checker sort `KIND`.
+That is not the same assertion as `TYPE : TYPE`; it is a product-formation
+policy question for the two-level LF. The active `τΣ_` signature does not hit
+the boundary because its outer parameters are typed by `Grpd`. No checker or
+profile semantics changed here. SCALE-KIND-PI-1 must resolve the exact
+Lambdapi-aligned TYPE/KIND rule under a separate LF review before the
+architecture can claim arbitrary polymorphic signature transfer.
+
+`SCALE-MIXED-PHASE-1` depends only on the completed signature phase and is now
+the next dependency-ready row. It can proceed without guessing either
+generated induction semantics or the TYPE/KIND policy.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_lf_transfer_inductive_tests.ts
+  10 tests / 1 suite: all passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  496 tests / 62 suites: 468 passed, 28 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript gate passed
+  all 19 frozen MVP differential judgments passed
+  41 kernel/example metric targets passed
+  39 kernel-script tests and five registry tests passed
+  source/report/book/audit gates passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -1267,6 +1338,15 @@ pre-approve the active semantic profile required by SCALE-STRESS-1B.
   assert new closure and does not trigger that gate.
 - A Lambdapi source change follows the complete owner-position and nested SOP
   workflow regardless of any TypeScript plan approval.
+
+### H-DTTLF-LF-SORT-01 — Outer-LF Product-Sort Boundary
+
+Triggered by SCALE-KIND-PI-1 before changing the checker’s formation rule or
+the reviewed outer-LF profile. The proposal must compare the exact current
+Core `TYPE`/`KIND` judgments with Lambdapi’s accepted products, state which
+sort pairs are permitted, update positive and negative metatheory tests, and
+show that permitting a type-valued binder does not assert or reintroduce
+`TYPE : TYPE`. This gate does not block the independent mixed-phase planner.
 
 ### H-DTTLF-SCALE-03 — Mechanical-Transfer Qualification
 
@@ -1538,3 +1618,15 @@ scope is affected.
   effect was added. Generic inductive compilation and generic source-ordered
   mixed-phase planning are the next engine rows before an exact
   SCALE-STRESS-1B semantic proposal.
+- **2026-07-25 — SCALE-INDUCTIVE-1A completed and checkpointed.** Recorded
+  local implementation checkpoint
+  `0497604947e69c9d550f1a1050adadfd6a630a85` after ten focused tests, the
+  496-test TypeScript gate, bounded active-kernel check, complete scale gate,
+  all 14 live inventory/acquisition probes, owner-name hygiene, browser
+  exclusion, and whitespace checks passed. One generic immutable phase
+  lowers inductive heads and constructors into the existing declaration
+  compiler and withholds untyped generated owners. It does not claim
+  positivity, recursive/indexed induction, generated eliminator semantics,
+  or active policy. The measured `Π A : TYPE` rejection opens
+  SCALE-KIND-PI-1 under exact LF review; mixed-phase planning remains
+  independently dependency-ready.
