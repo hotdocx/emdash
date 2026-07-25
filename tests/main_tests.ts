@@ -58,6 +58,7 @@ import './v3_2_lf_transfer_tests';
 import './v3_2_lf_transfer_compiler_tests';
 import './v3_2_lf_transfer_runtime_tests';
 import './v3_2_lf_transfer_proof_tests';
+import './v3_2_lf_transfer_inductive_tests';
 import './v3_2_lf_runtime_fragment_tests';
 import './v3_2_lf_transfer_acquisition_tests';
 import './v3_2_scale_stress_1_representation_tests';
