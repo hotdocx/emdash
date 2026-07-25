@@ -11,7 +11,9 @@ subject of the active scale-qualification plan, whose shared transfer IR
 SCALE-0B and generic declaration/runtime/proof compiler slices SCALE-0C
 through SCALE-0E plus generic prior-runtime-fragment composition
 SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 is
-proposed and awaits exact approval before representative semantic stress work
+approved; the exact frozen engine review and SCALE-ACQUIRE-1A checked
+canonical-command adapter/contracts are complete; representation-only
+SCALE-STRESS-1A is next before any newly promoted active stress profile
 
 ## Purpose
 
@@ -166,10 +168,16 @@ runtime closure, deterministic transitive flattening/diamond deduplication,
 prefix subject checking, shared execution budgets, and fail-closed
 relation/order/cycle/rule-ID validation. A synthetic dependent type witness
 passes only with its explicit prior runtime; no missing active `Const_catd`
-rule was imported. H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 now awaits approval
-before the applicable semantic stress/batch rows.
-Pinned checked canonical export supplies inventory and provenance and remains
-an optional later generator input, not an immediate term-parser prerequisite.
+rule was imported. H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 is now approved and
+frozen separately. It selects direct typed specifications plus small
+fail-closed checked extraction adapters while deferring a complete canonical
+term/pattern parser. SCALE-ACQUIRE-1A implements the first such root-only
+adapter: it checks source/export/version/import/ordinal/kind/metadata/digest
+contracts and selects the exact outer-J, decoded groupoidal Pi/Sigma, and
+imported grouped-Nat canonical commands. It parses no terms, grants no
+semantic policy, invokes no production Lambdapi, and remains outside the
+browser. Representation-only SCALE-STRESS-1A is next; any active stress
+profile still requires its exact semantic review.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

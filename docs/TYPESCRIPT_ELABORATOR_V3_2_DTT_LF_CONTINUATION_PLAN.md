@@ -1355,6 +1355,7 @@ dependency-ready work rather than guessing a mathematical rule.
 | H-DTTLF-03 | DIRECTED-GRADUATE-1 complete | Approve the fresh combined owner/rule manifest, product boundary, oracle policy, and any newly justified termination/confluence/subject-reduction claim? |
 | H-DTTLF-04 | concrete groupoidal closure consumer | Approve opening the separate Lambdapi-first groupoidal closure plan and its initial consumer/owner inventory? |
 | H-DTTLF-SCALE-01 | SCALE-0A complete in the scale plan | Approve a shared typed immutable transfer IR plus generic declaration/runtime/proof engines, direct typed construction anchored to active source/export evidence, optional later canonical bulk parsing, explicit-term versus tactic-source distinction, and a separate authority/policy overlay? |
+| H-DTTLF-SCALE-02 | generic declaration/local-runtime/composed-runtime/proof engines complete | Approve that engine boundary for representative stress work, direct typed specifications plus small checked extraction adapters, the fail-closed unsupported boundary, and deferred complete canonical term/pattern parsing? |
 
 Current gate state: H-DTTLF-01 and the DIRECTED-1A, DIRECTED-1B, and
 DIRECTED-1C instances of H-DTTLF-02 were approved as proposed on 2026-07-24.
@@ -1370,6 +1371,15 @@ Revised H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R was approved on 2026-07-24. It is
 owned by the active scale-qualification plan and authorizes the generic typed
 IR/builder and engine work, not a canonical term parser or a new semantic
 profile.
+H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 was approved exactly as proposed on
+2026-07-25. Its separate frozen review accepts the completed generic engine
+boundary, selects direct typed specifications plus small fail-closed checked
+extraction adapters, and unlocks representative stress/smallest engine rows.
+It authorizes no active declaration, runtime rule, proof rule, product
+profile, browser export, Lambdapi change, theorem, or mechanical-transfer
+qualification by itself. SCALE-ACQUIRE-1A now implements the first checked
+adapter and exact J/Pi/Sigma/Nat acquisition contracts in the active scale
+plan.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2358,3 +2368,13 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   `Const_catd` or other rule was added. H-DTTLF-SCALE-02/
   D-DTTLF-SCALE-002 is now proposed in the active scale plan before semantic
   stress work.
+- **2026-07-25 — Generic engine boundary approved and checked acquisition
+  completed.** The user approved H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 exactly
+  as proposed. The frozen review preserves the generic IR, declaration,
+  local/composed runtime, and separate proof engine boundary and chooses
+  direct typed specifications plus small fail-closed checked extraction
+  adapters over an immediate complete parser. SCALE-ACQUIRE-1A adds the first
+  generic adapter and exact outer-J, decoded Pi/Sigma, and imported grouped-Nat
+  command contracts. No term/pattern parsing, active semantic rule/profile,
+  browser API, Lambdapi change, theorem, or mechanical-transfer claim was
+  added; representation-only SCALE-STRESS-1A is next.

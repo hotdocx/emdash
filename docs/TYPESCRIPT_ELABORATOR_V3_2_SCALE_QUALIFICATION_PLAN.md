@@ -26,11 +26,14 @@ representative ingredients from the remaining Lambdapi development in order
 to prove and stress-test whether the remaining transfer can be performed at
 scale, systematically, and mechanically. After clarifying that this direction
 did not require a full Lambdapi term parser as the architectural starting
-point, the user approved revised H-DTTLF-SCALE-01 on 2026-07-24.
+point, the user approved revised H-DTTLF-SCALE-01 on 2026-07-24. On
+2026-07-25 the user approved H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 exactly as
+proposed and directed the persistent goal to continue.
 Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
-and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02 is triggered before
-semantic stress/batch work
+and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
+D-DTTLF-SCALE-002 is approved; SCALE-ACQUIRE-1A is complete and
+representation-only SCALE-STRESS-1A is next
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -435,8 +438,11 @@ The architecture qualifies only when all of the following hold:
 | SCALE-0D | complete | SCALE-0C | Generic typed runtime-rule compiler/matcher; migrate the ten reviewed rules equivalently before adding stress semantics |
 | SCALE-0E | complete | SCALE-0C | Separate typed proof-time `unif_rule` compiler and bounded comparison engine, informed by reusable generic algorithms on `main` |
 | SCALE-RUNTIME-DEPS-1 | complete | SCALE-0D | Compose immutable generic runtime fragments through explicit module/prior-fragment dependencies; qualify the mechanism without silently promoting the active `Const_catd` fibre rule or any other new semantic rule |
-| SCALE-ACQUIRE-1 | deferred decision | SCALE-0C through SCALE-0E and representative encoding evidence | Decide whether bulk acquisition warrants a fail-closed canonical term/pattern parser/generator or a lighter checked extraction adapter; any adapter targets the same IR |
-| SCALE-STRESS-1 | pending | SCALE-0D, SCALE-RUNTIME-DEPS-1, applicable semantic review | Outer J, groupoidal Pi/Sigma, and imported Nat grouped-recursion cases |
+| SCALE-ACQUIRE-1 | complete decision | H-DTTLF-SCALE-02, SCALE-0C through SCALE-0E | D-DTTLF-SCALE-002 selects direct typed specifications plus small fail-closed checked extraction adapters; a complete canonical term/pattern parser remains deferred |
+| SCALE-ACQUIRE-1A | complete | SCALE-ACQUIRE-1 | Generic source/export/import/ordinal/kind/metadata/digest checked command-selection adapter plus exact outer-J, groupoidal Pi/Sigma, and imported grouped-Nat acquisition contracts |
+| SCALE-STRESS-1 | in progress | SCALE-0D, SCALE-RUNTIME-DEPS-1, SCALE-ACQUIRE-1A, applicable semantic review | Parent row for outer J, groupoidal Pi/Sigma, and imported Nat grouped recursion |
+| SCALE-STRESS-1A | pending | SCALE-ACQUIRE-1A | Exact typed representation and fail-closed engine-gap classification for the acquired J/Pi/Sigma/Nat commands, without installing an active semantic profile |
+| SCALE-STRESS-1B | pending | SCALE-STRESS-1A, applicable semantic review | Execute the exact approved subset through generic declaration/runtime/inductive phases with differential witnesses |
 | SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
@@ -1018,6 +1024,95 @@ change the reviewed continuation, or claim that all remaining runtime
 dependencies have already been inventoried. H-DTTLF-SCALE-02 is now
 triggered.
 
+## SCALE-ACQUIRE-1A Completion Record
+
+The exact H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 approval is frozen separately
+in `src/v3_2/scale_engine_review.ts`. The immutable record accepts the shared
+IR and declaration/local-runtime/composed-runtime/proof engine boundary,
+selects direct typed specifications plus small fail-closed checked extraction
+adapters, and keeps the complete canonical term/pattern parser deferred until
+acquisition is a measured bottleneck. Its negative boundary grants no active
+declaration, runtime rule, proof rule, product profile, browser API,
+Lambdapi change, theorem, or mechanical-transfer qualification.
+
+`src/v3_2/lf_transfer_acquisition.ts` implements the first approved small
+adapter. Given source text, canonical export text, an observed exporter
+version, and one reviewed immutable contract, it verifies:
+
+- exact source SHA-256, exporter version, and whole-export SHA-256;
+- exact canonical module/import order;
+- unique, strictly increasing selected command ordinals and stable selection
+  IDs;
+- command kind and kind-specific metadata for every top-level command class;
+  and
+- an exact SHA-256 of each selected canonical command.
+
+Unknown or extra expectation fields, malformed paths/hashes/identities,
+artifact drift, import drift, missing ordinals, and command kind/metadata/text
+drift fail closed. The returned selection is recursively immutable and
+contains canonical commands plus evidence only. The adapter does not invoke
+Lambdapi, parse a term or pattern, construct a `CoreLfModuleSpec`, attach
+semantic policy, or enter the browser barrel.
+
+`src/v3_2/scale_stress_1_acquisition.ts` supplies two exact root-only
+contracts. The core contract selects the active `ind_eqr` declaration and
+guarded reflexivity beta, decoded `τΣ_` inductive and Sigma eliminator/beta,
+and `Pi_grpd` declaration/decoding beta. The imported Nat contract selects
+the ordered open import, injective `nat_add` declaration, and its three-clause
+grouped recursion. Source hashes, pinned canonical-export hashes, command
+ordinals, metadata, and per-command digests are all committed evidence.
+
+The live acquisition makes the next engine questions concrete without
+answering them prematurely:
+
+- generic J has an ignored motive wildcard plus repeated category/endpoint
+  guards required for subject reduction;
+- `Pi_grpd` decoding has a dependent binder-producing right-hand side;
+- `τΣ_` requires an inductive/constructor phase that the current declaration
+  compiler deliberately refuses; and
+- `nat_add` requires imported dependency closure and ordered grouped
+  recursion, already represented by the generic runtime and fragment seams.
+
+Seven focused tests cover the exact review artifact, every top-level command
+kind, recursive immutability, malformed/ambiguous contracts, all drift
+classes, current source hashes, browser exclusion, and live J/Pi/Sigma/Nat
+selection. The extended bounded scale-inventory lane passes 14 tests across
+the original complete five-module inventory and the new acquisition suite.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_lf_transfer_acquisition_tests.ts
+  7 tests / 1 suite: 6 passed, 1 live process probe skipped
+
+./scripts/pnpmw run check:scale-inventory
+  14 tests / 2 suites: all live inventory and acquisition probes passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  478 tests / 60 suites: 450 passed, 28 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript gate passed
+  all 19 frozen MVP differential judgments passed
+  41 kernel/example metric targets passed
+  39 kernel-script tests and five registry tests passed
+  source/report/book/audit gates passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+```
+
+This row is acquisition evidence only. It authorizes no typed lowering choice
+for the J wildcard, no inductive compiler design, and no active runtime
+installation. SCALE-STRESS-1A must next encode the exact acquired commands in
+the shared typed IR, classify each unsupported mechanism explicitly, and
+prepare any required semantic-profile gate before SCALE-STRESS-1B executes
+active rules.
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -1053,9 +1148,10 @@ existing continuation, fail-closed unsupported boundary, generated-artifact
 policy, and whether SCALE-ACQUIRE-1 should use a canonical parser/generator
 or lighter checked extraction before broad stress imports.
 
-Proposed decision, not yet approved:
+Approved decision:
 
-> **D-DTTLF-SCALE-002:** accept the shared immutable transfer IR, generic
+> **D-DTTLF-SCALE-002 — approved 2026-07-25:** accept the shared immutable
+> transfer IR, generic
 > declaration compiler, local runtime compiler/matcher, explicit transitive
 > runtime-fragment composition, and separate proof-time compiler/constraint
 > engine as the stable engine boundary for representative stress work; retain
@@ -1072,10 +1168,13 @@ Proposed decision, not yet approved:
 > mathematical theorem, or mechanical-transfer qualification by this
 > architecture decision alone.
 
-Self-contained review question:
+The exact user decision was:
 
-> Approve H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 as proposed, or specify the
-> exact revision required before representative stress work proceeds?
+> Approve H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 as proposed.
+
+The approval unlocks representative stress and the smallest explicit engine
+rows while preserving every negative boundary in the decision. It does not
+pre-approve the active semantic profile required by SCALE-STRESS-1B.
 
 ### Existing Semantic And Mathematical Gates
 
@@ -1164,15 +1263,16 @@ catalog/profile boundary, and Lambdapi conformance role. Do not claim that the
 whole-development transfer architecture is settled until the representative
 mechanism corpus passes the plan's mechanical-scale acceptance criteria.
 
-Follow approved D-DTTLF-SCALE-001R. Build one immutable backend-neutral
-module/fragment IR and generic declaration, runtime-rule, and separate
-proof-time-unification engines. Initially construct exact reviewed transfer
-specifications through a shared typed TypeScript builder anchored to active
-source/export evidence. Use checked bounded canonical export for inventory,
-drift detection, extraction, conformance, and a possible later bulk
-parser/generator; do not make full term parsing an immediate prerequisite.
-Handwritten active Lambdapi remains mathematical authority and production
-must not invoke Lambdapi.
+Follow approved D-DTTLF-SCALE-001R and D-DTTLF-SCALE-002. Preserve the one
+immutable backend-neutral module/fragment IR and generic declaration,
+runtime-rule, composed-runtime, and separate proof-time-unification engines.
+Construct exact reviewed transfer specifications through the shared typed
+TypeScript builder and small fail-closed checked extraction adapters anchored
+to active source/export evidence. Use checked bounded canonical export for
+inventory, drift detection, extraction, conformance, and a possible later
+bulk parser/generator; do not make full term parsing an immediate
+prerequisite. Handwritten active Lambdapi remains mathematical authority and
+production must not invoke Lambdapi.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
@@ -1324,3 +1424,19 @@ scope is affected.
   passed. The checkpoint adds no active semantic rule, parser, product or
   profile expansion, mechanical-transfer qualification, or broader Git
   authority.
+- **2026-07-25 — H-DTTLF-SCALE-02 approved.** The user approved
+  D-DTTLF-SCALE-002 exactly as proposed. The separate frozen review accepts
+  the generic IR/declaration/local-runtime/composed-runtime/proof engine
+  boundary, selects direct typed specifications plus small fail-closed
+  checked extraction adapters, and defers a complete canonical term/pattern
+  parser until acquisition is a measured bottleneck. The approval authorizes
+  representative stress and smallest explicit engine rows, but no active
+  declaration/rule/profile, browser API, Lambdapi change, theorem, or
+  mechanical-transfer claim by itself.
+- **2026-07-25 — SCALE-ACQUIRE-1A completed.** Added one owner-agnostic
+  checked canonical-command selector over exact source/export/version/import/
+  ordinal/kind/metadata/digest contracts. Two committed contracts select the
+  active outer-J, decoded groupoidal Pi/Sigma, and imported grouped-Nat
+  commands. Seven focused tests and all 14 live inventory/acquisition tests
+  pass. The adapter does not parse terms, invoke Lambdapi, attach semantic
+  policy, or enter the browser; SCALE-STRESS-1A is next.
