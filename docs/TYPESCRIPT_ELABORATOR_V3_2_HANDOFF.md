@@ -5,7 +5,9 @@ Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
 RELEASE-READY is complete, with mandatory conformance, final residual and
 performance boundaries, and all validation gates recorded; forward outer-LF
 and directed-DTT work has additionally graduated the exact root-only opt-in
-`emdash-v3.2-dttlf-directed-1` continuation profile under H-DTTLF-03
+`emdash-v3.2-dttlf-directed-1` continuation profile under H-DTTLF-03;
+systematic whole-development transfer remains unqualified and is now the
+subject of the active scale-qualification plan
 
 ## Purpose
 
@@ -20,8 +22,10 @@ points in
 [`TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md).
 The completed profile is governed historically by
 [`TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md).
-Forward outer-LF and directed-DTT implementation is governed by
+The exact implemented outer-LF and directed-DTT continuation is recorded by
 [`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md).
+Forward systematic-transfer work is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md).
 Long-running goal branches and checkpoints follow
 [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
 
@@ -29,6 +33,10 @@ The intended word *syntax* is broad. Users may construct a typed surface AST
 with ordinary TypeScript expressions; a string parser can be added later. The
 first architectural problem is elaboration and compilation into explicit
 emdash Core applications, not tokenization.
+
+The scale plan's canonical-export parser is a separate developer/build
+interchange tool over already-checked Lambdapi output. It is not the optional
+user-facing source parser and does not change this surface-design boundary.
 
 ## Authority Boundary
 
@@ -42,11 +50,13 @@ Read these in order before selecting a semantic target:
 5. `../emdash2/reports/EMDASH_FOUNDATIONS.md`;
 6. `../emdash2/reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`;
 7. the active task plan selected through `../emdash2/reports/INDEX.md`;
-8. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the active
-   cross-layer implementation ledger, subordinate to the mathematical
-   sources above;
-9. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
-   history.
+8. `TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md` for the active
+   systematic-transfer implementation ledger, subordinate to the
+   mathematical sources above;
+9. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the reviewed
+   outer-LF/directed-profile implementation history;
+10. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
+    history.
 
 The root `src/` implementation predates the current kernel. Its generic
 elaboration machinery is feasibility evidence, but names such as
@@ -118,6 +128,13 @@ subject-reduction witnesses are mandatory through
 unrestricted normalization, confluence, standalone TypeScript subject
 reduction, performance, release, internal-Pi/uncurrying, and systematic
 groupoidal-closure claims remain withheld.
+
+The continuation proves the foundational spine, not a full import
+architecture: 29 signatures, ten runtime rules, and zero proof-time rules are
+far smaller than the active module/rule/unification landscape. The scale plan
+therefore tests a pinned checked canonical-export boundary, backend-neutral
+module IR, separate runtime/proof compilers, and a representative mechanism
+corpus before any claim that future transfers are systematic or mechanical.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints
@@ -242,8 +259,8 @@ any Git mutation.
 ## Start The Long-Running Implementation
 
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
-`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`. It names the
-completed-profile comparison checkpoint, selects the next dependency-ready
-implementation slice, and records the continuation's Git boundary. The
-completed master plan's historical checkpoint authorization does not
-authorize commits for the new continuation.
+`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`. It names the
+completed-profile and reviewed-continuation comparison checkpoints, selects
+the next dependency-ready implementation slice, and records the
+continuation's Git boundary. The completed master plan's historical
+checkpoint authorization does not authorize unrelated Git mutations.

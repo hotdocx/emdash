@@ -246,8 +246,10 @@ with warnings enabled before rejecting the proposed rule.
 
 ## Long-Running Cross-Layer Experiments
 
-The active cross-layer TypeScript DTT/LF continuation plan is
-`../docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`. The
+The active cross-layer TypeScript systematic-transfer plan is
+`../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`. The
+reviewed outer-LF/directed continuation is recorded in
+`../docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`, and the
 completed exact-profile history remains in
 `../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`. Their Git workflow is
 `../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. These root documents may

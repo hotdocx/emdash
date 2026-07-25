@@ -23,8 +23,10 @@ Primary artifacts:
 - Completed TypeScript `emdash-v3.2-mvp-1` master plan and historical `/goal`
   prompt:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md)
-- Active TypeScript DTT/LF continuation plan and `/goal` prompt:
+- Reviewed TypeScript DTT/LF continuation plan:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md)
+- Active systematic-transfer scale-qualification plan and `/goal` prompt:
+  [`./docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
 - Implemented ELAB-0 RFC and TypeScript-kernel reassessment:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md)
 - Persistent-goal Git experimentation and checkpoint workflow:
@@ -109,6 +111,34 @@ and then runs that corpus:
 Combined termination, unrestricted normalization, confluence, standalone
 TypeScript subject reduction, performance, release readiness,
 internal-Pi/uncurrying, and systematic groupoidal closure remain unclaimed.
+
+## TypeScript systematic-transfer qualification
+
+The explicit Core, outer LF, scoped builder, reviewed catalog/profile
+boundary, and Lambdapi conformance role are retained. The current
+29-signature/ten-rule continuation does not yet prove a mechanical path for
+the rest of the active Lambdapi development, especially module visibility,
+inductives, grouped rules, transparent proof closures, and proof-time
+unification.
+
+SCALE-0A therefore inventories the checked deterministic canonical export of
+all five active modules with a pure fail-closed TypeScript parser. Run its
+bounded live exporter/hash/count gate with:
+
+```bash
+./scripts/pnpmw run check:scale-inventory
+```
+
+The aggregate forward gate preserves the full reviewed continuation and then
+runs that live inventory:
+
+```bash
+./scripts/pnpmw run check:scale
+```
+
+Canonical export is a development/build interchange candidate only. The
+handwritten Lambdapi sources remain mathematical authority, semantic import
+still requires review, and production has no Lambdapi runtime dependency.
 
 ## Development workspace and Git worktrees
 

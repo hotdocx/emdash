@@ -238,16 +238,20 @@ implementation plans, and historical decisions.
 
 ## Current Plans
 
-- `../../docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`:
-  active living cross-layer plan for restoring the outer λΠ logical framework
-  over explicit TypeScript Core and then transferring consumer-led slices of
-  the active categorical/directed DTT. Comprehensive groupoidal closure is a
-  separately deferred Lambdapi-first programme. Any Lambdapi change scheduled
-  here remains subordinate to the active authorities and full kernel SOP.
-  The completed exact `emdash-v3.2-mvp-1` history remains in
-  `../../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`; the shared
+- `../../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`:
+  active living cross-layer plan for stress-testing a systematic,
+  data/policy-driven transfer architecture against representative groupoidal,
+  directed, internal-Pi/Sigma, profunctor, extension, HIT, runtime-rule, and
+  proof-time-unification mechanisms. Its checked canonical-export importer is
+  a development/build boundary, not mathematical authority or a production
+  Lambdapi dependency. The reviewed outer-LF/directed continuation remains in
+  `../../docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`, the
+  completed exact `emdash-v3.2-mvp-1` history remains in
+  `../../docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`, and the shared
   persistent-goal protocol is
-  `../../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
+  `../../docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. Any Lambdapi change
+  scheduled here remains subordinate to the active authorities and full
+  kernel SOP.
 - `REPORT_EMDASH_V3_2_AUTONOMOUS_MAINTENANCE_AND_EVOLUTION_PLAN_2026-07-22.md`:
   active living cross-project maintenance plan. Its initial AME-0 through
   AME-9 autonomous cycle and the evidence-backed AME-10 Git-worktree, root

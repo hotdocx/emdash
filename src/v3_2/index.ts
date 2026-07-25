@@ -35,6 +35,7 @@ export * from './directed_1c';
 export * from './directed_graduation_proposal';
 export * from './directed_graduation_review';
 export * from './directed_graduation';
+export * from './lambdapi_export_inventory';
 export * from './metatheory';
 export * from './migration';
 export * from './pattern';

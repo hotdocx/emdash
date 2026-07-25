@@ -94,7 +94,8 @@ Long-running or mostly unsupervised `/goal` work must use an active living plan
 and the workflow in
 `docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. The TypeScript elaborator's
 current ledger and ready-to-use launch prompt are in
-`docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`.
+`docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`; the handoff
+routes to the reviewed continuation and completed master-plan history.
 
 A persistent goal does not itself authorize commits, branches, worktrees,
 pushes, merges, history rewriting, publication, or cleanup. Those mutations

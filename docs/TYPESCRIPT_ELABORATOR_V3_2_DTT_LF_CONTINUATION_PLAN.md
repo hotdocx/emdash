@@ -26,9 +26,13 @@ Later on 2026-07-24 the user said “Approve
 H-DTTLF-02/DIRECTED-FOUNDATION-1 as proposed.” Most recently on 2026-07-24
 the user said “Approve H-DTTLF-02/DIRECTED-FOUNDATION-2 as proposed.” The
 next exact decision on 2026-07-24 was “Approve
-H-DTTLF-02/DIRECTED-1C as proposed.” The latest exact decision on 2026-07-24
-was “Approve H-DTTLF-03/D-DTTLF-001 as proposed”.
-Status: active living continuation and implementation ledger;
+H-DTTLF-02/DIRECTED-1C as proposed.” The latest exact approval on 2026-07-24
+was “Approve H-DTTLF-03/D-DTTLF-001 as proposed”. The user subsequently
+directed a representative, mechanism-diverse stress test of the remaining
+Lambdapi development before any claim of systematic mechanical transfer.
+Status: completed exact DTT/LF continuation profile and retained implementation
+ledger; active forward scale qualification is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md);
 DTTLF-PLAN-0, LF-1A through LF-1C, and LF-SURFACE-1 are complete;
 H-DTTLF-01 and the DIRECTED-1A instance of H-DTTLF-02 are approved as
 proposed; DIRECTED-1A is complete; the DIRECTED-1B instance of H-DTTLF-02 is
@@ -38,11 +42,14 @@ DIRECTED-1B is complete; DIRECTED-1C's one-owner, zero-rule proposal is
 approved and its isolated integration is complete; DIRECTED-GRADUATE-1's
 exact combined profile is approved and authoritative through the root-only
 opt-in continuation API; all currently scoped implementation rows are
-complete or concretely deferred
+complete or concretely deferred, while the separate scale plan tests whether
+future transfers can become systematic
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
 `71f46f66aba45d1b79a4c93746970b5d79e42fca`
+Latest documentation checkpoint before scale qualification:
+`29976248189a8caa9797cced533ae11559dbe95c`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -334,7 +341,7 @@ provides the old authoring convenience without its representation problems.
 
 ## Is The Architecture Settled And Scalable?
 
-At the architectural level, yes—with this correction:
+The durable foundational spine is settled enough to retain:
 
 - explicit locally nameless Core is the trusted representation;
 - a safe HOAS/PHOAS-style builder is the direct TypeScript surface;
@@ -345,26 +352,37 @@ At the architectural level, yes—with this correction:
   claims;
 - Lambdapi remains the mathematical specification and conformance oracle.
 
-The implementation is not yet mechanically scalable as a finished DTT product
-because two large coverage gaps remain:
+The final whole-development transfer architecture is **not yet qualified**.
+The work in this plan has now supplied outer beta/delta computation and one
+reviewed directed profile, but that profile contains only 29 signatures, ten
+runtime rules, and no proof-time rules. It does not demonstrate generic
+module imports/visibility, inductive blocks, hundreds of grouped runtime
+clauses, 61 active unification rules, or deep transparent proof bodies.
+Several current proposal/catalog/runtime modules also remain hand-authored for
+their exact owners.
 
-1. outer β/δ/ζ computation is absent;
-2. only a tiny portion of the active directed-DTT owner/rule tower has been
-   promoted into TypeScript.
+The remaining architecture question is therefore empirical and narrower than
+a restart: can one canonical module IR and generic
+declaration/runtime/proof compiler handle a representative instance of every
+materially distinct active mechanism, so subsequent instances are
+data/policy additions rather than owner-specific code? The active
+[`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
+defines that corpus and its falsifiable acceptance criteria.
 
-Once outer LF computation is installed, signature/catalog expansion is
-largely mechanical. Mathematical runtime semantics will never be entirely
-automatic: every promoted rule still requires owner-position, authority,
-subject-reduction, and interaction review. That is a feature of the trust
-architecture, not an architectural failure.
+Mathematical semantic promotion will never be a blind bulk import. Every
+executable rule still requires owner-position, authority, subject-reduction,
+and interaction review. “Mechanical” here means mechanical representation
+and compilation after policy approval, not automatic mathematical authority.
 
 The resulting policy is:
 
 - no full restart;
 - reopen the product plan;
-- settle the outer LF before another broad semantic-owner tranche;
-- then scale the inner directed-DTT catalog through consumer-led vertical
-  slices;
+- retain the now-implemented outer LF and reviewed directed profile;
+- qualify generic acquisition/module/runtime/proof mechanisms against a
+  representative corpus before another broad semantic-owner tranche;
+- then scale the inner directed-DTT catalog through data/policy-driven,
+  consumer-led vertical slices;
 - keep groupoidal closure as a separate Lambdapi-first programme.
 
 ## Objective
@@ -515,6 +533,7 @@ prerequisite must be satisfied before work begins.
 | DIRECTED-1B | **complete — own and both prerequisite H-DTTLF-02 instances approved** | Compiles five reviewed owners after DIRECTED-1A, checks one transparent mirror, and executes the exact seven-rule FOUNDATION-1 → FOUNDATION-2 → DIRECTED-1B order under one LF budget; dependent pair, projection, nested fibre, total transport, builder, negative, serialization, and generated Lambdapi consumers pass with all recorded deferrals preserved |
 | DIRECTED-1C | **complete — H-DTTLF-02 approved** | Added the exact approval record and one body-free opaque `section-object-evaluation` declaration mapped to active `piapp0`; the combined outer-beta/Sigma-telescope consumer, scoped builder, wrong-family/pair negatives, deterministic no-shadow emission, TypeScript checking, and positive/negative Lambdapi oracle judgments pass while reusing the exact DIRECTED-1B runtime by identity |
 | DIRECTED-GRADUATE-1 | **complete — H-DTTLF-03/D-DTTLF-001 approved** | Preserved the exact approval separately, promoted only `emdash-v3.2-dttlf-directed-1` through `createCoreDirectedContinuationKernel()` in the root index, operationalized its fixed positive/negative/subject-reduction corpus through a continuation-only gate, and retained the browser, deployed MVP policy, Lambdapi runtime exclusion, residual risks, deferrals, and withheld claims unchanged |
+| SCALE-QUALIFICATION | **continued in separate active plan** | [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md) inventories every active canonical command mechanism and stress-tests a generic module/declaration/runtime/proof transfer architecture before any systematic-scale claim |
 | GROUPD-PLAN-0 | **deferred** | Separate Lambdapi-first plan; begins only after directed candidate work or a concrete groupoidal consumer justifies it |
 
 ## LF-1A Detailed Contract
@@ -1333,6 +1352,7 @@ dependency-ready work rather than guessing a mathematical rule.
 | H-DTTLF-02 | each DIRECTED owner/rule proposal | Is the selected owner signature/rule and its authority class correct for the concrete nested-telescope consumer? |
 | H-DTTLF-03 | DIRECTED-GRADUATE-1 complete | Approve the fresh combined owner/rule manifest, product boundary, oracle policy, and any newly justified termination/confluence/subject-reduction claim? |
 | H-DTTLF-04 | concrete groupoidal closure consumer | Approve opening the separate Lambdapi-first groupoidal closure plan and its initial consumer/owner inventory? |
+| H-DTTLF-SCALE-01 | SCALE-0A complete in the scale plan | Approve the pinned canonical-export acquisition boundary, backend-neutral module IR, explicit-term versus tactic-source distinction, runtime/proof separation, and authority/policy overlay for generic compiler implementation? |
 
 Current gate state: H-DTTLF-01 and the DIRECTED-1A, DIRECTED-1B, and
 DIRECTED-1C instances of H-DTTLF-02 were approved as proposed on 2026-07-24.
@@ -1344,6 +1364,9 @@ on 2026-07-24. The subsequently discovered
 DIRECTED-GRADUATE-1's exact combined-profile recommendation was approved as
 H-DTTLF-03/D-DTTLF-001 on 2026-07-24 and its root-only opt-in promotion is
 complete. H-DTTLF-04 remains untriggered.
+H-DTTLF-SCALE-01 is now triggered by completed SCALE-0A, is owned by the
+active scale-qualification plan, and does not authorize a new semantic
+profile.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -1593,10 +1616,15 @@ root-only factory, live-profile validator, and continuation-only mandatory
 conformance lane implement the approval without changing the existing
 browser, deployed MVP, or frozen `check:all` policy.
 
-There is no other independent dependency-ready implementation row:
-GROUPD-PLAN-0 requires a concrete groupoidal consumer and H-DTTLF-04, while
-the larger internal-Pi, section-arrow, and uncurrying closures remain
-deliberately deferred beyond the completed representative consumer.
+The user's systematic-transfer direction opened an independent non-semantic
+row in the separate scale-qualification plan. SCALE-0A inventories checked
+canonical exports before any new semantic owner/rule proposal. GROUPD-PLAN-0
+still requires a concrete groupoidal-closure consumer and H-DTTLF-04; merely
+stress-testing already-active groupoidal owners does not assert new
+groupoidal mathematics. The larger internal-Pi, section-arrow, and
+uncurrying closures remain outside this exact reviewed continuation profile
+and are representative scale-plan cases rather than silently authorized
+extensions.
 
 LF-1B depends on LF-1A's explicit evaluator result/trace contract. LF-1C
 depends on the checked declaration-body model from LF-1B. LF-SURFACE-1 depends
@@ -1908,7 +1936,7 @@ described in `PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
 
 ```text
 Kick off or continue implementing
-docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md.
+docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md.
 
 Treat its Persistent /goal Launch Prompt as part of the objective. Recover the
 actual current state from active code, checks, the plan status and ledgers,
@@ -1948,9 +1976,11 @@ documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C,
 DIRECTED-GRADUATE-1, the separate H-DTTLF-03 review, the root-only
 authoritative factory, and the continuation-only fixed conformance lane are
 complete. Recover the actual HEAD and checkpoint record. No independent row
-in this plan is dependency-ready: do not open GROUPD-PLAN-0 without a concrete
-groupoidal consumer and H-DTTLF-04, and do not change the browser/deployed
-profile or broaden a metatheory claim by inference.
+in this completed profile should be widened by inference. Resume the active
+scale plan's non-semantic inventory/compiler row instead; do not open
+GROUPD-PLAN-0 without a concrete groupoidal-closure consumer and H-DTTLF-04,
+and do not change the browser/deployed profile or broaden a metatheory claim
+by inference.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -2264,3 +2294,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   does not claim a mechanical transfer pipeline for the full Lambdapi
   development, systematic groupoidal closure, browser promotion, release
   readiness, or broader metatheory.
+- **2026-07-24 — Systematic-transfer qualification opened.** Corrected the
+  earlier overly broad scalability wording: the explicit-Core/outer-LF/profile
+  spine is retained, but the 29-signature/ten-rule continuation does not
+  qualify a mechanical path for the full development. Routed forward work to
+  `TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`, whose varied
+  corpus covers modules/visibility, definitions, inductives, grouped runtime
+  rules, binder-producing rules, proof-time unification, protected theorem
+  closures, internal Pi/Sigma uncurrying, profunctors, and the WalkingEnd HIT.
