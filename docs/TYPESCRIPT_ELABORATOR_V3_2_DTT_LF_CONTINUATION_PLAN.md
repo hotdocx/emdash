@@ -34,8 +34,8 @@ proposed; DIRECTED-1A is complete; the DIRECTED-1B instance of H-DTTLF-02 is
 approved as proposed; both separately reviewed prerequisite programs,
 DIRECTED-FOUNDATION-1 and DIRECTED-FOUNDATION-2, are approved and implemented;
 DIRECTED-1B is complete; DIRECTED-1C's one-owner, zero-rule proposal is
-approved and its isolated integration is complete; DIRECTED-GRADUATE-1 is the
-next dependency-ready review/proposal slice
+approved and its isolated integration is complete; DIRECTED-GRADUATE-1's
+exact combined-profile proposal is complete and H-DTTLF-03 is pending
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -473,6 +473,16 @@ trust claim still requires the corresponding human gate.
   a backend shadow, or widen the default LF, base schema, browser, or deployed
   MVP.
 
+- **DTTLF-015 — Graduate the full dependency closure, not only its delta.**
+  The combined candidate identity must account for every signature and
+  runtime rule reachable by the authoritative opt-in checker. Record the
+  nine reviewed candidate declarations and seven directed rules as the
+  continuation delta, but hash and review the full closure of 20 base
+  signatures plus those nine declarations (29 total) and seven directed plus
+  three inherited MVP runtime rules (10 total). Preserve the distinction so
+  neither the trust boundary nor the amount of newly transferred authority is
+  understated.
+
 ## Implementation Ledger
 
 Only one row may be actively implemented at a time. “Pending” means scoped
@@ -491,7 +501,7 @@ prerequisite must be satisfied before work begins.
 | DIRECTED-FOUNDATION-2 | **complete — H-DTTLF-02 approved** | Executes exactly the approved decoded `τ(Hom Cat_cat A B) ↪ τ(Functor A B)` consequence after FOUNDATION-1; raw classifiers, category heads, default LF/MVP/browser paths, proof rules, and metatheory claims remain unchanged |
 | DIRECTED-1B | **complete — own and both prerequisite H-DTTLF-02 instances approved** | Compiles five reviewed owners after DIRECTED-1A, checks one transparent mirror, and executes the exact seven-rule FOUNDATION-1 → FOUNDATION-2 → DIRECTED-1B order under one LF budget; dependent pair, projection, nested fibre, total transport, builder, negative, serialization, and generated Lambdapi consumers pass with all recorded deferrals preserved |
 | DIRECTED-1C | **complete — H-DTTLF-02 approved** | Added the exact approval record and one body-free opaque `section-object-evaluation` declaration mapped to active `piapp0`; the combined outer-beta/Sigma-telescope consumer, scoped builder, wrong-family/pair negatives, deterministic no-shadow emission, TypeScript checking, and positive/negative Lambdapi oracle judgments pass while reusing the exact DIRECTED-1B runtime by identity |
-| DIRECTED-GRADUATE-1 | **dependency-ready** | Freeze the fresh combined owner/rule manifest, product/non-product boundary, oracle policy, withheld metatheory claims, and exact H-DTTLF-03 recommendation from the completed shared TypeScript/Lambdapi example |
+| DIRECTED-GRADUATE-1 | **proposal complete — H-DTTLF-03 pending** | Froze fresh profile `emdash-v3.2-dttlf-directed-1` with 20 base plus nine reviewed candidate signatures, seven directed plus three inherited MVP runtime rules, zero proof-time rules, one shared LF budget, an opt-in-only product recommendation, required Lambdapi oracle policy, exact residual risks/deferrals, and no self-authorization |
 | GROUPD-PLAN-0 | **deferred** | Separate Lambdapi-first plan; begins only after directed candidate work or a concrete groupoidal consumer justifies it |
 
 ## LF-1A Detailed Contract
@@ -1177,6 +1187,93 @@ wrong-fibre or wrong-base variant must be rejected by both checkers.
 This exercises both required dependent layers and is substantially stronger
 than either a bare lambda identity or an isolated categorical projection.
 
+## DIRECTED-GRADUATE-1 Exact Proposal
+
+`src/v3_2/directed_graduation_proposal.ts` freezes the fresh candidate
+profile `emdash-v3.2-dttlf-directed-1` for H-DTTLF-03. The artifact is a
+deeply frozen, self-validating proposal: its
+`authorityAuthorized: false` field prevents it from recording its own
+approval, and it neither changes the executable catalog nor promotes the
+browser or deployed MVP.
+
+The full signature closure is 29 entries:
+
+- 20 base signatures: the frozen 16-owner MVP signature plus
+  `category-of-categories`, `displayed-category-category`,
+  `constant-displayed-family`, and `section-category`;
+- nine reviewed candidate declarations, in order:
+  `displayed-functor-category`, `sigma-category`,
+  `sigma-telescope-family`, `decoded-dependent-pair`, `dependent-pair`,
+  `sigma-first-projection`, `sigma-transport-arrow`,
+  `sigma-telescope-transport`, and `section-object-evaluation`;
+- eight candidate declarations are body-free opaque imports, while
+  `sigma-telescope-transport` is the one exact checked transparent mirror.
+
+The full runtime closure is ten rules, in deterministic order:
+
+1. `directed.category-object.decode`;
+2. `directed.displayed-family.decode`;
+3. `directed.displayed-functor.decode`;
+4. `directed.category-hom.decode`;
+5. `directed.sigma-object.decode`;
+6. `directed.sigma-first-projection.evaluate`;
+7. `directed.sigma-telescope-fibre.evaluate`;
+8. `projection.functor-hom.evaluate`;
+9. `projection.transfor-component.evaluate`;
+10. `projection.transfor-hom.evaluate`.
+
+The first seven are the reviewed directed continuation delta. The final three
+are the frozen MVP runtime inherited without mutation. There are zero
+proof-time rules. The outer LF retains the exact
+`zonk → beta → delta → reviewed-runtime` order, one shared 256-step budget,
+disabled eta, and exclusion of arbitrary user rules. The manifest's
+independently reproducible content hash is
+`sha256:5fbf855e044e3d24e1078289eebad4a3391d67747efcee3c5463c2bfb110a8c7`.
+
+The proposed product boundary is deliberately narrower than a browser
+release. Approval would make this exact profile the authoritative opt-in
+TypeScript continuation checker/evaluator exported through
+`src/v3_2/index.ts`. It would leave the browser entry point, deployed
+`emdash-v3.2-mvp-1` identity, and release state unchanged, and it would not
+make Lambdapi a production runtime dependency.
+
+Lambdapi remains the active mathematical specification, a required fixed
+positive/negative and subject-reduction conformance oracle, and the acceptance
+authority for selected owner, rule, LF-policy, corpus, promotion, and
+metatheory changes. It is not required as a per-term production check.
+
+The proposal claims only deterministic bounded checking for this exact
+profile and bounded stopping. The frozen MVP three-rule termination result is
+preserved for that subprogram only. Combined termination, unrestricted
+normalization, confluence, standalone TypeScript subject reduction, a
+performance SLA, release readiness, and authority for any additional owner or
+rule are withheld.
+
+Residual risks remain explicit: the combined evaluator is budgeted rather
+than proved normalizing; beta/delta plus the ten rules lack combined
+termination and confluence proofs; standalone TypeScript subject reduction is
+not proved; only one representative nested telescope has been transferred;
+browser/release packaging is absent; and representative-workload performance
+has not been measured. Transparent `piapp0`/evaluation-functor closure,
+internal and pullback Pi, section-arrow evaluation/uncurrying, general Sigma
+hom and `sigma_arrow`, projection-pullback/displayed-transfor uncurrying,
+systematic groupoidal closure, textual parsing, and browser packaging remain
+deferred.
+
+The exact pending decision is:
+
+> Approve H-DTTLF-03/D-DTTLF-001 as proposed: graduate exactly
+> `emdash-v3.2-dttlf-directed-1` as the authoritative opt-in TypeScript
+> continuation checker/evaluator, with 20 base signatures plus 9 reviewed
+> candidate declarations (29 total), 7 directed plus 3 inherited MVP runtime
+> rules (10 total), zero proof-time rules, one bounded outer-LF budget, no
+> browser or deployed-MVP change, and no Lambdapi production dependency;
+> retain Lambdapi as the active mathematical specification, required fixed
+> positive/negative and subject-reduction oracle, and selected-change
+> acceptance authority; and withhold unrestricted normalization, combined
+> termination, confluence, standalone TypeScript subject reduction,
+> performance, release, internal-Pi/uncurrying, and groupoidal-closure claims?
+
 ## Human Review Gates
 
 A gate blocks only its dependent promotion or claim. Continue independent
@@ -1196,9 +1293,8 @@ The newly discovered
 on 2026-07-24. The subsequently discovered
 `H-DTTLF-02/DIRECTED-FOUNDATION-2` instance was also approved as proposed on
 2026-07-24. DIRECTED-1B and DIRECTED-1C are complete.
-DIRECTED-GRADUATE-1 is now dependency-ready; H-DTTLF-03 remains untriggered
-until its exact combined-profile recommendation is frozen. H-DTTLF-04 remains
-untriggered.
+DIRECTED-GRADUATE-1's exact combined-profile recommendation is now frozen;
+H-DTTLF-03 is triggered and pending. H-DTTLF-04 remains untriggered.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -1439,11 +1535,14 @@ transparent body. The default LF, base owner schema, frozen MVP
 manifest/runtime, browser, reviewed proposal history, rule-registration
 exclusion, and withheld metatheory claims remain unchanged.
 
-DIRECTED-GRADUATE-1 is now the next dependency-ready slice. It must freeze a
-fresh combined candidate identity and exact H-DTTLF-03 recommendation without
-promoting the browser or deployed product. The larger internal-Pi,
-section-arrow, uncurrying, and groupoidal closures remain deliberately
-deferred and are not on this consumer's critical path.
+DIRECTED-GRADUATE-1 has frozen the exact full 29-signature and ten-rule
+closure, fresh profile hash, opt-in-only recommendation, required Lambdapi
+oracle policy, residual risks, explicit deferrals, and withheld claims.
+H-DTTLF-03 now blocks only semantic/product promotion of that proposal.
+There is no other independent dependency-ready implementation row:
+GROUPD-PLAN-0 requires a concrete groupoidal consumer and H-DTTLF-04, while
+the larger internal-Pi, section-arrow, and uncurrying closures remain
+deliberately deferred beyond the completed representative consumer.
 
 LF-1B depends on LF-1A's explicit evaluator result/trace contract. LF-1C
 depends on the checked declaration-body model from LF-1B. LF-SURFACE-1 depends
@@ -1689,6 +1788,32 @@ git diff --check
   passed
 ```
 
+DIRECTED-GRADUATE-1 proposal validation:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_directed_graduation_proposal_tests.ts
+  passed all 11 closure, identity, hash, policy, claim, isolation, and drift
+  tests
+
+./scripts/pnpmw run check:ts
+  passed workspace contract, typecheck, ESLint, and root tests
+  408 tests / 50 suites: 382 passed, 26 opt-in probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  passed the active kernel, extensions, and check corpus
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all
+  passed the 408-test TypeScript gate, all 19 mandatory TypeScript/Lambdapi
+  differential judgments, all 41 Lambdapi kernel/example metric targets,
+  39 kernel-script tests, five document-registry tests, source/report/book
+  checks, strict inferred-slot audit, and strict generated-catalog check
+
+python3 emdash2/scripts/lint_report_headers.py
+git diff --check
+  passed
+```
+
 ## Persistent `/goal` Launch Prompt
 
 The following prompt is ready to use. It authorizes implementation within the
@@ -1736,13 +1861,13 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest local implementation checkpoint is
-197e20ea7925be24147525132f1695710082292c. It records DIRECTED-1C as exactly
-one opaque `piapp0` signature import with no new rule; its combined
-TypeScript/Lambdapi consumer and negative pass. Recover the actual HEAD and
-checkpoint record, then select DIRECTED-GRADUATE-1 as the next
-dependency-ready slice. Freeze its fresh candidate manifest, non-product
-boundary, oracle policy, withheld claims, and exact H-DTTLF-03 recommendation;
-do not promote the browser/deployed profile or claim H-DTTLF-03 approval.
+197e20ea7925be24147525132f1695710082292c, followed by its documentation-only
+checkpoint at the actual recorded HEAD. DIRECTED-1C is complete. Recover the
+actual HEAD and checkpoint record; DIRECTED-GRADUATE-1's fresh 29-signature,
+ten-rule combined manifest and exact H-DTTLF-03 recommendation are now
+complete. Stop its dependent promotion at H-DTTLF-03 unless exact approval
+evidence exists. Do not create an approval artifact, change the
+browser/deployed profile, or broaden a metatheory claim by inference.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -2007,3 +2132,16 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   isolated one-owner integration, focused consumers, exports, and synchronized
   plan. It is comparison/backtracking evidence and grants no product
   promotion, H-DTTLF-03 decision, or broader Git authority.
+- **2026-07-24 — DIRECTED-GRADUATE-1 proposal completed; H-DTTLF-03
+  triggered.** Froze `emdash-v3.2-dttlf-directed-1` as a non-self-authorizing
+  proposal with the complete 20-base-plus-nine-candidate signature closure,
+  seven directed plus three inherited MVP runtime rules, zero proof-time
+  rules, one bounded outer-LF budget, and fresh content hash
+  `sha256:5fbf855e044e3d24e1078289eebad4a3391d67747efcee3c5463c2bfb110a8c7`.
+  Recommended only an authoritative opt-in continuation API, retained the
+  active Lambdapi specification and fixed conformance obligations, preserved
+  the browser and deployed MVP unchanged, and withheld combined termination,
+  unrestricted normalization, confluence, standalone TypeScript subject
+  reduction, performance, release, internal-Pi/uncurrying, and groupoidal
+  claims. No independent implementation row is ready while H-DTTLF-03 is
+  pending.

@@ -32,6 +32,7 @@ export * from './directed_1b';
 export * from './directed_1c_proposal';
 export * from './directed_1c_review';
 export * from './directed_1c';
+export * from './directed_graduation_proposal';
 export * from './metatheory';
 export * from './migration';
 export * from './pattern';
