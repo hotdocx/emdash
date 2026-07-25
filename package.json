@@ -17,6 +17,8 @@
     "workspace:check": "node scripts/check-workspace.mjs",
     "check:ts": "./scripts/pnpmw run workspace:check && ./scripts/pnpmw run typecheck && ./scripts/pnpmw run lint && ./scripts/pnpmw test",
     "check:conformance": "timeout 60s env EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test tests/v3_2_differential_owner_tests.ts tests/v3_2_differential_rule_tests.ts tests/v3_2_differential_higher_cell_tests.ts",
+    "check:directed-conformance": "timeout 60s env EMDASH_RUN_LAMBDAPI_PROBES=1 node --require ts-node/register --test tests/v3_2_directed_1c_tests.ts",
+    "check:continuation": "./scripts/pnpmw run check:all && ./scripts/pnpmw run check:directed-conformance",
     "check": "./scripts/pnpmw run check:ts",
     "check:all": "./scripts/pnpmw run check:ts && ./scripts/pnpmw run check:conformance && make -C emdash2 ci",
     "kernel:check": "make -C emdash2 check",

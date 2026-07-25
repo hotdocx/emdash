@@ -75,6 +75,41 @@ workspace CI. The deep-frozen `CORE_MVP_RELEASE_COMPLETION` records that all
 blocker. H-02 and H-06 remain conditional, untriggered future gates rather
 than hidden release requirements.
 
+## TypeScript DTT/LF opt-in continuation profile
+
+H-DTTLF-03/D-DTTLF-001 separately authorizes
+`emdash-v3.2-dttlf-directed-1` through the root-only
+[`src/v3_2/index.ts`](./src/v3_2/index.ts) entry point. Call
+`createCoreDirectedContinuationKernel()` to obtain its reviewed persistent
+catalog and checker/evaluator. The exact closure contains 20 base signatures,
+nine reviewed continuation declarations, seven directed runtime rules, and
+the three inherited MVP runtime rules. It has zero proof-time rules and one
+shared 256-step outer-LF budget.
+
+This is an authoritative **opt-in** continuation profile, not a browser or
+deployed-MVP replacement. The browser still exposes only
+`emdash-v3.2-mvp-1`; neither profile requires Lambdapi at production runtime.
+Lambdapi remains the active mathematical specification and the required fixed
+positive, negative, and subject-reduction oracle for selected continuation
+changes.
+
+Run its separate mandatory conformance corpus with:
+
+```bash
+./scripts/pnpmw run check:directed-conformance
+```
+
+The complete continuation gate preserves the frozen MVP `check:all` policy
+and then runs that corpus:
+
+```bash
+./scripts/pnpmw run check:continuation
+```
+
+Combined termination, unrestricted normalization, confluence, standalone
+TypeScript subject reduction, performance, release readiness,
+internal-Pi/uncurrying, and systematic groupoidal closure remain unclaimed.
+
 ## Development workspace and Git worktrees
 
 The repository uses one pnpm 11 workspace and one `pnpm-lock.yaml` for the

@@ -37,6 +37,7 @@ import './v3_2_directed_1c_proposal_tests';
 import './v3_2_directed_1c_review_tests';
 import './v3_2_directed_1c_tests';
 import './v3_2_directed_graduation_proposal_tests';
+import './v3_2_directed_graduation_review_tests';
 import './v3_2_metatheory_review_tests';
 import './v3_2_differential_owner_tests';
 import './v3_2_differential_rule_tests';

@@ -4,7 +4,8 @@ Date: 2026-07-24
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
 RELEASE-READY is complete, with mandatory conformance, final residual and
 performance boundaries, and all validation gates recorded; forward outer-LF
-and directed-DTT work is active in the separate continuation plan
+and directed-DTT work has additionally graduated the exact root-only opt-in
+`emdash-v3.2-dttlf-directed-1` continuation profile under H-DTTLF-03
 
 ## Purpose
 
@@ -98,6 +99,25 @@ unchanged, and records zero release blockers. The checker's 256-step budget is
 a global rewrite-operation bound, not a wall-clock, latency, throughput, or
 scale promise. Representative workload measurement plus separate review is
 required before making any future performance claim.
+
+Separately, H-DTTLF-03/D-DTTLF-001 authorizes the exact
+`emdash-v3.2-dttlf-directed-1` checker/evaluator only through the root
+`src/v3_2/index.ts` continuation API. Its named factory is
+`createCoreDirectedContinuationKernel()`. The dependency-closed profile has
+20 base signatures plus nine reviewed candidate declarations, seven directed
+plus three inherited MVP runtime rules, zero proof-time rules, and one shared
+256-step outer-LF budget. It is not imported by `browser.ts`, does not alter
+the deployed MVP identity, is not release-ready, and has no production
+Lambdapi dependency.
+
+The continuation's fixed TypeScript/Lambdapi positive, negative, and
+subject-reduction witnesses are mandatory through
+`./scripts/pnpmw run check:directed-conformance`. The aggregate
+`./scripts/pnpmw run check:continuation` first preserves the frozen MVP
+`check:all` gate and then runs that separate corpus. Combined termination,
+unrestricted normalization, confluence, standalone TypeScript subject
+reduction, performance, release, internal-Pi/uncurrying, and systematic
+groupoidal-closure claims remain withheld.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

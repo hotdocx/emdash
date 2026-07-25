@@ -26,8 +26,9 @@ Later on 2026-07-24 the user said “Approve
 H-DTTLF-02/DIRECTED-FOUNDATION-1 as proposed.” Most recently on 2026-07-24
 the user said “Approve H-DTTLF-02/DIRECTED-FOUNDATION-2 as proposed.” The
 next exact decision on 2026-07-24 was “Approve
-H-DTTLF-02/DIRECTED-1C as proposed.”
-Status: active proposed continuation and implementation ledger;
+H-DTTLF-02/DIRECTED-1C as proposed.” The latest exact decision on 2026-07-24
+was “Approve H-DTTLF-03/D-DTTLF-001 as proposed”.
+Status: active living continuation and implementation ledger;
 DTTLF-PLAN-0, LF-1A through LF-1C, and LF-SURFACE-1 are complete;
 H-DTTLF-01 and the DIRECTED-1A instance of H-DTTLF-02 are approved as
 proposed; DIRECTED-1A is complete; the DIRECTED-1B instance of H-DTTLF-02 is
@@ -35,7 +36,9 @@ approved as proposed; both separately reviewed prerequisite programs,
 DIRECTED-FOUNDATION-1 and DIRECTED-FOUNDATION-2, are approved and implemented;
 DIRECTED-1B is complete; DIRECTED-1C's one-owner, zero-rule proposal is
 approved and its isolated integration is complete; DIRECTED-GRADUATE-1's
-exact combined-profile proposal is complete and H-DTTLF-03 is pending
+exact combined profile is approved and authoritative through the root-only
+opt-in continuation API; all currently scoped implementation rows are
+complete or concretely deferred
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -483,6 +486,16 @@ trust claim still requires the corresponding human gate.
   neither the trust boundary nor the amount of newly transferred authority is
   understated.
 
+- **DTTLF-016 — Preserve the MVP gate while operationalizing continuation
+  conformance.** Record H-DTTLF-03 in a separate immutable review and expose
+  the approved profile through one named root-only factory. Keep the frozen
+  MVP's `check:conformance` and `check:all` policy exact; add a separate
+  mandatory `check:directed-conformance` corpus and aggregate
+  `check:continuation` gate for changes to the opt-in profile. This makes the
+  positive, negative, and subject-reduction oracle obligations executable
+  without importing the continuation into the browser or silently revising
+  the completed deployed profile.
+
 ## Implementation Ledger
 
 Only one row may be actively implemented at a time. “Pending” means scoped
@@ -501,7 +514,7 @@ prerequisite must be satisfied before work begins.
 | DIRECTED-FOUNDATION-2 | **complete — H-DTTLF-02 approved** | Executes exactly the approved decoded `τ(Hom Cat_cat A B) ↪ τ(Functor A B)` consequence after FOUNDATION-1; raw classifiers, category heads, default LF/MVP/browser paths, proof rules, and metatheory claims remain unchanged |
 | DIRECTED-1B | **complete — own and both prerequisite H-DTTLF-02 instances approved** | Compiles five reviewed owners after DIRECTED-1A, checks one transparent mirror, and executes the exact seven-rule FOUNDATION-1 → FOUNDATION-2 → DIRECTED-1B order under one LF budget; dependent pair, projection, nested fibre, total transport, builder, negative, serialization, and generated Lambdapi consumers pass with all recorded deferrals preserved |
 | DIRECTED-1C | **complete — H-DTTLF-02 approved** | Added the exact approval record and one body-free opaque `section-object-evaluation` declaration mapped to active `piapp0`; the combined outer-beta/Sigma-telescope consumer, scoped builder, wrong-family/pair negatives, deterministic no-shadow emission, TypeScript checking, and positive/negative Lambdapi oracle judgments pass while reusing the exact DIRECTED-1B runtime by identity |
-| DIRECTED-GRADUATE-1 | **proposal complete — H-DTTLF-03 pending** | Froze fresh profile `emdash-v3.2-dttlf-directed-1` with 20 base plus nine reviewed candidate signatures, seven directed plus three inherited MVP runtime rules, zero proof-time rules, one shared LF budget, an opt-in-only product recommendation, required Lambdapi oracle policy, exact residual risks/deferrals, and no self-authorization |
+| DIRECTED-GRADUATE-1 | **complete — H-DTTLF-03/D-DTTLF-001 approved** | Preserved the exact approval separately, promoted only `emdash-v3.2-dttlf-directed-1` through `createCoreDirectedContinuationKernel()` in the root index, operationalized its fixed positive/negative/subject-reduction corpus through a continuation-only gate, and retained the browser, deployed MVP policy, Lambdapi runtime exclusion, residual risks, deferrals, and withheld claims unchanged |
 | GROUPD-PLAN-0 | **deferred** | Separate Lambdapi-first plan; begins only after directed candidate work or a concrete groupoidal consumer justifies it |
 
 ## LF-1A Detailed Contract
@@ -1274,6 +1287,41 @@ The exact pending decision is:
 > termination, confluence, standalone TypeScript subject reduction,
 > performance, release, internal-Pi/uncurrying, and groupoidal-closure claims?
 
+### H-DTTLF-03 Review And Opt-In Promotion Result
+
+The user's exact decision evidence is
+`Approve H-DTTLF-03/D-DTTLF-001 as proposed`. The immutable
+`CORE_DIRECTED_GRADUATION_REVIEW` preserves the entire non-self-authorizing
+proposal snapshot and grants only the exact authority stated above.
+
+`CORE_DIRECTED_CONTINUATION_PROFILE` is now the reviewed root-only profile
+record, and `createCoreDirectedContinuationKernel()` is its named
+`src/v3_2/index.ts` factory. The factory validates the approval, manifest, and
+live nine-declaration/seven-directed-rule catalog before returning the
+persistent catalog whose checker composes those rules with the inherited
+three-rule MVP runtime.
+
+The fixed conformance obligation is operational without mutating the frozen
+MVP policy:
+
+```text
+./scripts/pnpmw run check:directed-conformance
+  runs the reviewed DIRECTED-1C TypeScript consumer, two wrong-family/pair
+  negatives, positive generated Lambdapi assertion plus beta/fibre
+  conversions, and generated mismatched-family rejection
+
+./scripts/pnpmw run check:continuation
+  runs the exact existing check:all gate, then check:directed-conformance
+```
+
+The existing `check:conformance`, `check:all`,
+`CORE_MVP_RELEASE_POLICY`, browser entry point, and
+`emdash-v3.2-mvp-1` identity remain exact. Approval does not make the
+continuation browser-visible or release-ready, add an owner or rule, transfer
+another definition body, make Lambdapi a production dependency, open
+GROUPD-PLAN-0, or grant any withheld termination, normalization, confluence,
+subject-reduction, performance, internal-Pi/uncurrying, or groupoidal claim.
+
 ## Human Review Gates
 
 A gate blocks only its dependent promotion or claim. Continue independent
@@ -1293,8 +1341,9 @@ The newly discovered
 on 2026-07-24. The subsequently discovered
 `H-DTTLF-02/DIRECTED-FOUNDATION-2` instance was also approved as proposed on
 2026-07-24. DIRECTED-1B and DIRECTED-1C are complete.
-DIRECTED-GRADUATE-1's exact combined-profile recommendation is now frozen;
-H-DTTLF-03 is triggered and pending. H-DTTLF-04 remains untriggered.
+DIRECTED-GRADUATE-1's exact combined-profile recommendation was approved as
+H-DTTLF-03/D-DTTLF-001 on 2026-07-24 and its root-only opt-in promotion is
+complete. H-DTTLF-04 remains untriggered.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -1454,6 +1503,7 @@ report. Never promote a rule from a temporary probe alone.
 | Lambdapi declaration/rule | every probe, warning comparison, audit, catalog/health, example, and CI requirement in `emdash2/AGENTS.md` |
 | Substantial cross-layer tranche | `EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all` |
 | Candidate promotion | fresh manifest/hash, residual-risk review, human gate, and all proportional gates |
+| Approved continuation-profile change | `./scripts/pnpmw run check:continuation`; this preserves the frozen MVP `check:all` policy and then runs the fixed directed positive/negative/subject-reduction corpus |
 
 Never weaken a gate to make a slice green. Lambdapi commands remain bounded
 to at most 60 seconds.
@@ -1538,7 +1588,11 @@ exclusion, and withheld metatheory claims remain unchanged.
 DIRECTED-GRADUATE-1 has frozen the exact full 29-signature and ten-rule
 closure, fresh profile hash, opt-in-only recommendation, required Lambdapi
 oracle policy, residual risks, explicit deferrals, and withheld claims.
-H-DTTLF-03 now blocks only semantic/product promotion of that proposal.
+H-DTTLF-03/D-DTTLF-001 has approved that exact boundary. The separate review,
+root-only factory, live-profile validator, and continuation-only mandatory
+conformance lane implement the approval without changing the existing
+browser, deployed MVP, or frozen `check:all` policy.
+
 There is no other independent dependency-ready implementation row:
 GROUPD-PLAN-0 requires a concrete groupoidal consumer and H-DTTLF-04, while
 the larger internal-Pi, section-arrow, and uncurrying closures remain
@@ -1814,6 +1868,34 @@ git diff --check
   passed
 ```
 
+Reviewed H-DTTLF-03 profile validation:
+
+```text
+node --require ts-node/register --test
+  tests/v3_2_directed_graduation_review_tests.ts
+  passed all 8 approval, authority, factory, command-policy, corpus, boundary,
+  isolation, and drift tests
+
+./scripts/pnpmw run check:ts
+  passed workspace contract, typecheck, ESLint, and root tests
+  416 tests / 51 suites: 390 passed, 26 opt-in probes skipped
+
+./scripts/pnpmw run check:directed-conformance
+  passed all 11 fixed TypeScript/Lambdapi positive, negative, outer-beta, and
+  Sigma-telescope-fibre judgments
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:continuation
+  passed the unchanged 416-test `check:all` path, all 19 mandatory MVP
+  differential judgments, all 41 Lambdapi kernel/example metric targets,
+  39 kernel-script tests, five document-registry tests, source/report/book
+  checks, strict inferred-slot audit, and strict generated-catalog check;
+  then passed all 11 continuation-only conformance judgments
+
+python3 emdash2/scripts/lint_report_headers.py
+git diff --check
+  passed
+```
+
 ## Persistent `/goal` Launch Prompt
 
 The following prompt is ready to use. It authorizes implementation within the
@@ -1863,12 +1945,15 @@ worktree when available.
 The latest local implementation checkpoint is
 f15430b952fa77cac74888f465d9d53c16dbddf0, followed by any
 documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C and
-the DIRECTED-GRADUATE-1 proposal are complete. Recover the actual HEAD and
-checkpoint record; the fresh 29-signature, ten-rule combined manifest and
-exact H-DTTLF-03 recommendation are frozen. Stop its dependent promotion at
-H-DTTLF-03 unless exact approval evidence exists. Do not create an approval
-artifact, change the browser/deployed profile, or broaden a metatheory claim
-by inference.
+the DIRECTED-GRADUATE-1 proposal are complete, and the exact
+`Approve H-DTTLF-03/D-DTTLF-001 as proposed` evidence now exists. Recover the
+actual HEAD and checkpoint record. If the separate reviewed artifact,
+root-only authoritative factory, and continuation-only fixed conformance
+lane are not yet complete, implement and validate exactly those effects. Once
+they are complete, no independent row is dependency-ready: do not open
+GROUPD-PLAN-0 without a concrete groupoidal consumer and H-DTTLF-04, and do
+not change the browser/deployed profile or broaden a metatheory claim by
+inference.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -2155,3 +2240,21 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   It is review/backtracking evidence and grants no H-DTTLF-03 approval,
   browser/deployed-profile promotion, new metatheory claim, or broader Git
   authority.
+- **2026-07-24 — H-DTTLF-03/D-DTTLF-001 approved as proposed.** Preserved the
+  exact decision in a separate deeply frozen review without mutating the
+  historical non-self-authorizing recommendation. Authorized only the exact
+  root-only `emdash-v3.2-dttlf-directed-1` continuation checker/evaluator,
+  its 29-signature and ten-runtime-rule closure, zero proof-time rules, one
+  bounded LF budget, retained Lambdapi roles, and every stated product,
+  release, metatheory, internal-Pi/uncurrying, and groupoidal non-effect.
+- **2026-07-24 — Reviewed continuation profile operationalized.** Added
+  `CORE_DIRECTED_CONTINUATION_PROFILE` and
+  `createCoreDirectedContinuationKernel()` as the validated root-only
+  authority seam. Added the separate mandatory
+  `check:directed-conformance` and aggregate `check:continuation` commands so
+  the fixed positive, negative, beta/fibre subject-reduction witnesses run
+  without changing the frozen MVP `check:conformance` or `check:all` policy.
+  The browser, deployed MVP identity, runtime dependency boundary, residual
+  risks, explicit deferrals, and withheld claims remain unchanged. No
+  independent implementation row is ready; GROUPD-PLAN-0 still requires a
+  concrete consumer and H-DTTLF-04.
