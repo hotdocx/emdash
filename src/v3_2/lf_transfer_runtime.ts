@@ -1847,6 +1847,25 @@ const flattenedRuntimeDependencies = (
 };
 
 /**
+ * Flatten an already validated list of direct runtime-fragment dependencies
+ * into the exact immutable checking/execution prefix used by a later mixed
+ * fragment. Shared transitive artifacts are retained once by object identity;
+ * conflicting artifacts with the same module/fragment identity fail closed.
+ *
+ * Relation and consumer-order validation remains the responsibility of the
+ * caller because it requires the consuming module. `compileCoreLfRuntimeFragment`
+ * performs that validation before using this helper.
+ */
+export function composeCoreLfRuntimeDependencies(
+    dependencies: readonly CoreLfRuntimeFragmentDependency[]
+): CoreLfComposedRuntimeProgram | undefined {
+    const programs = flattenedRuntimeDependencies(dependencies);
+    return programs.length === 0
+        ? undefined
+        : new CoreLfComposedRuntimeProgram(programs);
+}
+
+/**
  * Compile a local runtime fragment against an explicit dependency prefix and
  * return both the local artifact and its transitively flattened executable
  * closure. Dependency modules precede same-module earlier fragments, and all
@@ -1862,12 +1881,10 @@ export function compileCoreLfRuntimeFragment(
         module,
         options.dependencies
     );
-    const priorPrograms = flattenedRuntimeDependencies(
+    const priorRuntime = composeCoreLfRuntimeDependencies(
         options.dependencies
     );
-    const priorRuntime = priorPrograms.length === 0
-        ? undefined
-        : new CoreLfComposedRuntimeProgram(priorPrograms);
+    const priorPrograms = priorRuntime?.fragments ?? [];
     const localRuleIds = new Set(
         module.runtimeRules.map(rule => rule.id)
     );

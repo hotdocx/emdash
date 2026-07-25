@@ -989,6 +989,184 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
         );
     });
 
+    it('continues from an explicit same-module runtime fragment', () => {
+        const baseModule = fixtureModule();
+        const basePlan = planCoreLfMixedPhases(
+            baseModule,
+            fixturePolicy(baseModule)
+        );
+        const base = compileCoreLfMixedPhases(
+            basePlan,
+            fixtureLinkage(basePlan)
+        );
+        assert.notEqual(base.latestRuntime, undefined);
+        if (base.latestRuntime === undefined) return;
+
+        const consume =
+            coreLfQualifiedSymbol(moduleId, 'continuation_consume');
+        const builder = new CoreLfTransferScopedBuilder();
+        const value = builder.capture('value');
+        const module = createCoreLfModuleSpec({
+            revision: 'mixed-same-module-continuation-1',
+            moduleId,
+            fragmentId: 'mixed-source-continuation',
+            authorityPath,
+            sourceSha256:
+                'sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+            dependencies: [],
+            externalSymbols: [
+                tokenType,
+                normalize
+            ].map(symbol => ({
+                symbol,
+                availability: 'earlier-fragment' as const
+            })),
+            declarations: [{
+                order: 0,
+                symbol: consume,
+                type: unaryTokenType(),
+                body: coreLfTransferAbsentBody(),
+                modifiers,
+                provenance: source(
+                    'symbol continuation_consume ' +
+                        '(value : Token) : Token;'
+                )
+            }],
+            inductives: [],
+            runtimeRules: [{
+                order: 1,
+                id: 'fixture.mixed.continuation-consume',
+                groupId: 'fixture.mixed.continuation-consume',
+                clauseOrder: 0,
+                sourceOwner: consume,
+                variables: [{
+                    name: 'value',
+                    type: {
+                        tag: 'global',
+                        symbol: tokenType
+                    }
+                }],
+                left: builder.pattern(builderCall(
+                    builder,
+                    consume,
+                    [value]
+                )),
+                right: builder.template(builderCall(
+                    builder,
+                    normalize,
+                    [value]
+                )),
+                provenance: source(
+                    'rule continuation_consume $value ' +
+                        '↪ normalize $value;'
+                )
+            }],
+            proofRules: []
+        });
+        const policy = createCoreLfTransferPolicyOverlay(module, {
+            revision: 'mixed-same-module-continuation-policy-1',
+            moduleRevision: module.revision,
+            entries: [
+                {
+                    order: 0,
+                    target: {
+                        kind: 'declaration',
+                        symbol: consume
+                    },
+                    policy: 'opaque-signature',
+                    evidence: 'same-module continuation declaration'
+                },
+                {
+                    order: 1,
+                    target: {
+                        kind: 'runtime-rule',
+                        id: 'fixture.mixed.continuation-consume'
+                    },
+                    policy: 'runtime-rewrite',
+                    evidence: 'same-module continuation runtime'
+                }
+            ]
+        });
+        const plan = planCoreLfMixedPhases(module, policy);
+        const linkage = createCoreLfMixedDeclarationLinkage(plan, {
+            revision: 'mixed-same-module-continuation-linkage-1',
+            moduleRevision: module.revision,
+            entries: [
+                {
+                    order: 0,
+                    symbol: tokenType,
+                    kind: 'free-declaration',
+                    coreName: 'mixed_Token',
+                    backendName: 'Token'
+                },
+                {
+                    order: 1,
+                    symbol: normalize,
+                    kind: 'free-declaration',
+                    coreName: 'mixed_normalize',
+                    backendName: 'normalize'
+                },
+                {
+                    order: 2,
+                    symbol: consume,
+                    kind: 'free-declaration',
+                    coreName: 'mixed_continuation_consume',
+                    backendName: 'continuation_consume'
+                }
+            ]
+        });
+        const compiled = compileCoreLfMixedPhases(
+            plan,
+            linkage,
+            {
+                initialDeclarations: base.declarations,
+                runtimeDependencies: [{
+                    relation: 'earlier-fragment',
+                    fragment: base.latestRuntime
+                }]
+            }
+        );
+
+        assert.deepEqual(
+            compiled.latestRuntime?.runtime.ruleIds,
+            [
+                'fixture.mixed.normalize',
+                'fixture.mixed.double',
+                'fixture.mixed.continuation-consume'
+            ]
+        );
+        assert.deepEqual(
+            compiled.latestRuntime?.localProgram.rules[0]
+                .checkedWithEarlierRuleIds,
+            [
+                'fixture.mixed.normalize',
+                'fixture.mixed.double'
+            ]
+        );
+        assert.deepEqual(
+            compiled.latestRuntime?.dependencies.map(
+                dependency => dependency.relation
+            ),
+            ['earlier-fragment']
+        );
+        assert.throws(
+            () => compileCoreLfMixedPhases(
+                plan,
+                linkage,
+                {
+                    initialDeclarations: base.declarations,
+                    runtimeDependencies: [{
+                        relation: 'dependency-module',
+                        fragment: base.latestRuntime
+                    }]
+                }
+            ),
+            error =>
+                error instanceof CoreLfMixedCompilerError &&
+                error.code === 'INVALID_RUNTIME_DEPENDENCY'
+        );
+    });
+
     it('rejects a runtime group split by another source phase', () => {
         const fixture = fixtureModule();
         const runtimeRules = fixture.runtimeRules.map(

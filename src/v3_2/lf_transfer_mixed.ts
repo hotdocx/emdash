@@ -52,6 +52,7 @@ import {
     CoreLfCompiledRuntimeFragment,
     CoreLfRuntimeCompilerOptions,
     CoreLfRuntimeFragmentDependency,
+    composeCoreLfRuntimeDependencies,
     compileCoreLfRuntimeFragment
 } from './lf_transfer_runtime';
 import { provenance } from './kernel';
@@ -999,8 +1000,10 @@ export interface CoreLfMixedCompileOptions {
      */
     readonly initialCheckingRuntime?: CoreLfCatalogRuntime;
     /**
-     * Explicit dependency-module runtimes. Same-module earlier phases are
-     * added mechanically and never supplied through this option.
+     * Explicit dependency-module or source-prior same-module runtime
+     * fragments. Runtime phases produced inside this plan are still added
+     * mechanically; an `earlier-fragment` entry here represents a distinct
+     * already compiled source fragment.
      */
     readonly runtimeDependencies?:
         readonly CoreLfRuntimeFragmentDependency[];
@@ -1104,32 +1107,61 @@ const validateRuntimeDependencies = (
     dependencies: readonly CoreLfRuntimeFragmentDependency[]
 ): void => {
     let priorModuleIndex = -1;
+    let sawEarlierFragment = false;
     const identities = new Set<string>();
     dependencies.forEach((dependency, index) => {
-        if (dependency.relation !== 'dependency-module') {
-            fail(
-                'INVALID_RUNTIME_DEPENDENCY',
-                `options.runtimeDependencies[${index}].relation`,
-                'Mixed compiler adds earlier-fragment runtimes itself'
-            );
-        }
         const moduleId = dependency.fragment.module.moduleId;
-        const moduleIndex =
-            plan.sourceModule.dependencies.indexOf(moduleId);
-        if (
-            moduleIndex < 0 ||
-            moduleIndex < priorModuleIndex ||
-            identities.has(dependency.fragment.identity)
-        ) {
+        if (identities.has(dependency.fragment.identity)) {
             fail(
                 'INVALID_RUNTIME_DEPENDENCY',
                 `options.runtimeDependencies[${index}]`,
-                `Runtime dependency '${moduleId}' is duplicated, foreign, ` +
-                    'or out of source import order'
+                `Runtime dependency '${moduleId}/` +
+                    `${dependency.fragment.module.fragmentId}' is duplicated`
             );
         }
-        priorModuleIndex = moduleIndex;
         identities.add(dependency.fragment.identity);
+
+        if (dependency.relation === 'dependency-module') {
+            const moduleIndex =
+                plan.sourceModule.dependencies.indexOf(moduleId);
+            if (
+                moduleIndex < 0 ||
+                moduleId === plan.sourceModule.moduleId ||
+                sawEarlierFragment ||
+                moduleIndex < priorModuleIndex
+            ) {
+                fail(
+                    'INVALID_RUNTIME_DEPENDENCY',
+                    `options.runtimeDependencies[${index}].relation`,
+                    `Runtime dependency '${moduleId}/` +
+                        `${dependency.fragment.module.fragmentId}' is ` +
+                        'foreign or out of source import order'
+                );
+            }
+            priorModuleIndex = moduleIndex;
+            return;
+        }
+
+        if (dependency.relation === 'earlier-fragment') {
+            if (
+                moduleId !== plan.sourceModule.moduleId ||
+                dependency.fragment.module.fragmentId ===
+                    plan.sourceModule.fragmentId
+            ) {
+                fail(
+                    'INVALID_RUNTIME_DEPENDENCY',
+                    `options.runtimeDependencies[${index}].relation`,
+                    'An explicit earlier runtime must be a distinct ' +
+                        `source-prior fragment of module ` +
+                        `'${plan.sourceModule.moduleId}'`
+                );
+            }
+            sawEarlierFragment = true;
+            return;
+        }
+
+        const exhaustive: never = dependency.relation;
+        return exhaustive;
     });
 };
 
@@ -1167,11 +1199,25 @@ export function compileCoreLfMixedPhases(
     }
     const externalRuntimeDependencies =
         options.runtimeDependencies ?? [];
+    if (
+        options.initialCheckingRuntime !== undefined &&
+        externalRuntimeDependencies.length > 0
+    ) {
+        return fail(
+            'INVALID_INITIAL_RUNTIME',
+            'options.initialCheckingRuntime',
+            'A raw initial checking runtime and explicit runtime-fragment ' +
+                'dependencies cannot be combined'
+        );
+    }
     validateRuntimeDependencies(
         plan,
         externalRuntimeDependencies
     );
-    const usedRuntimeDependencies = new Set<string>();
+    const externalCheckingRuntime =
+        composeCoreLfRuntimeDependencies(
+            externalRuntimeDependencies
+        );
     let declarations = new CoreLfMixedDeclarationContext(
         externalDeclarationContext(
             plan,
@@ -1199,6 +1245,7 @@ export function compileCoreLfMixedPhases(
                         initialEnvironment: declarations.environment,
                         runtimeProgram:
                             latestRuntime?.runtime ??
+                            externalCheckingRuntime ??
                             options.initialCheckingRuntime,
                         comparisonStepLimit:
                             phaseOptions.comparisonStepLimit
@@ -1229,6 +1276,7 @@ export function compileCoreLfMixedPhases(
                         initialEnvironment: declarations.environment,
                         runtimeProgram:
                             latestRuntime?.runtime ??
+                            externalCheckingRuntime ??
                             options.initialCheckingRuntime,
                         comparisonStepLimit:
                             phaseOptions.comparisonStepLimit
@@ -1245,19 +1293,8 @@ export function compileCoreLfMixedPhases(
                 return;
             }
             case 'runtime': {
-                const directDependencies =
-                    externalRuntimeDependencies.filter(dependency =>
-                        phase.module.dependencies.includes(
-                            dependency.fragment.module.moduleId
-                        )
-                    );
-                directDependencies.forEach(dependency =>
-                    usedRuntimeDependencies.add(
-                        dependency.fragment.identity
-                    )
-                );
                 const dependencies: CoreLfRuntimeFragmentDependency[] = [
-                    ...directDependencies,
+                    ...externalRuntimeDependencies,
                     ...(latestRuntime === undefined
                         ? []
                         : [{
@@ -1293,6 +1330,7 @@ export function compileCoreLfMixedPhases(
                         ...(options.proofOptions?.(phase) ?? {}),
                         runtimeProgram:
                             latestRuntime?.runtime ??
+                            externalCheckingRuntime ??
                             options.initialCheckingRuntime
                     }
                 );
@@ -1312,22 +1350,6 @@ export function compileCoreLfMixedPhases(
         }
     });
 
-    const unusedRuntimeDependency =
-        externalRuntimeDependencies.find(dependency =>
-            !usedRuntimeDependencies.has(
-                dependency.fragment.identity
-            )
-        );
-    if (unusedRuntimeDependency !== undefined) {
-        return fail(
-            'INVALID_RUNTIME_DEPENDENCY',
-            'options.runtimeDependencies',
-            `Runtime dependency ` +
-                `'${unusedRuntimeDependency.fragment.module.moduleId}/` +
-                `${unusedRuntimeDependency.fragment.module.fragmentId}' ` +
-                'was not used by any runtime phase'
-        );
-    }
     const proofPrograms = compiled
         .filter(
             (
@@ -1344,6 +1366,7 @@ export function compileCoreLfMixedPhases(
             {
                 executionRuntimeProgram:
                     latestRuntime?.runtime ??
+                    externalCheckingRuntime ??
                     options.initialCheckingRuntime
             }
         );
