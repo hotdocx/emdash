@@ -42,7 +42,7 @@ complete or concretely deferred
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`f15430b952fa77cac74888f465d9d53c16dbddf0`
+`71f46f66aba45d1b79a4c93746970b5d79e42fca`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -1273,7 +1273,7 @@ hom and `sigma_arrow`, projection-pullback/displayed-transfor uncurrying,
 systematic groupoidal closure, textual parsing, and browser packaging remain
 deferred.
 
-The exact pending decision is:
+The exact decision question was:
 
 > Approve H-DTTLF-03/D-DTTLF-001 as proposed: graduate exactly
 > `emdash-v3.2-dttlf-directed-1` as the authoritative opt-in TypeScript
@@ -1943,17 +1943,14 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest local implementation checkpoint is
-f15430b952fa77cac74888f465d9d53c16dbddf0, followed by any
-documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C and
-the DIRECTED-GRADUATE-1 proposal are complete, and the exact
-`Approve H-DTTLF-03/D-DTTLF-001 as proposed` evidence now exists. Recover the
-actual HEAD and checkpoint record. If the separate reviewed artifact,
-root-only authoritative factory, and continuation-only fixed conformance
-lane are not yet complete, implement and validate exactly those effects. Once
-they are complete, no independent row is dependency-ready: do not open
-GROUPD-PLAN-0 without a concrete groupoidal consumer and H-DTTLF-04, and do
-not change the browser/deployed profile or broaden a metatheory claim by
-inference.
+71f46f66aba45d1b79a4c93746970b5d79e42fca, followed by any
+documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C,
+DIRECTED-GRADUATE-1, the separate H-DTTLF-03 review, the root-only
+authoritative factory, and the continuation-only fixed conformance lane are
+complete. Recover the actual HEAD and checkpoint record. No independent row
+in this plan is dependency-ready: do not open GROUPD-PLAN-0 without a concrete
+groupoidal consumer and H-DTTLF-04, and do not change the browser/deployed
+profile or broaden a metatheory claim by inference.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -2258,3 +2255,12 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   risks, explicit deferrals, and withheld claims remain unchanged. No
   independent implementation row is ready; GROUPD-PLAN-0 still requires a
   concrete consumer and H-DTTLF-04.
+- **2026-07-24 — Reviewed continuation profile checkpointed.** Recorded local
+  checkpoint `71f46f66aba45d1b79a4c93746970b5d79e42fca` after the exact
+  staged-diff review, eight focused approval/profile tests, 416-test
+  TypeScript gate, all 11 directed conformance judgments, bounded active
+  kernel check, full continuation gate, header lint, and whitespace audit
+  passed. The checkpoint grants only the exact approved opt-in profile; it
+  does not claim a mechanical transfer pipeline for the full Lambdapi
+  development, systematic groupoidal closure, browser promotion, release
+  readiness, or broader metatheory.
