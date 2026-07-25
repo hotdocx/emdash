@@ -44,6 +44,7 @@ export * from './lf_transfer_runtime';
 export * from './lf_transfer_proof';
 export * from './lf_transfer_acquisition';
 export * from './scale_stress_1_acquisition';
+export * from './scale_stress_1_representation';
 export * from './directed_continuation_transfer';
 export * from './directed_continuation_runtime_transfer';
 export * from './metatheory';
