@@ -241,7 +241,7 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
         );
         assert.match(
             assessment?.nextRequirement ?? '',
-            /foreign-category.*wrong-endpoint/u
+            /mixed-phase planner.*foreign-category.*wrong-endpoint/u
         );
     });
 
@@ -287,7 +287,7 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
         );
         assert.match(
             assessment?.nextRequirement ?? '',
-            /binder RHS subject-reduction/u
+            /mixed-phase planner.*binder RHS subject-reduction/u
         );
     });
 
@@ -350,7 +350,7 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
         );
         assert.match(
             assessment?.currentBoundary ?? '',
-            /no generic inductive compiler phase/u
+            /no generic inductive compiler or mixed-phase planner/u
         );
         assert.match(
             assessment?.nextRequirement ?? '',
@@ -395,6 +395,15 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
             representation.nat.policy.entries.every(
                 entry => entry.policy === 'conformance-only'
             )
+        );
+        const assessment = representation.assessments.find(
+            candidate =>
+                candidate.mechanism ===
+                    'imported-grouped-nat-recursion'
+        );
+        assert.match(
+            assessment?.currentBoundary ?? '',
+            /mixed phase\/dependency planning/u
         );
     });
 

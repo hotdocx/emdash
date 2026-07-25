@@ -1096,10 +1096,12 @@ const rawRepresentation: CoreLfScaleStress1Representation = {
                 'canonical wildcard lowered to one typed RHS-unused ' +
                 'motive capture; category and endpoint guards repeated',
             currentBoundary:
-                'mixed IR and conformance-only policy are complete',
+                'mixed IR is complete; generic source-ordered phase ' +
+                'planning and active policy are absent',
             nextRequirement:
-                'exact isolated semantic proposal plus guarded positive, ' +
-                'foreign-category, wrong-endpoint, and raw-proof witnesses'
+                'generic mixed-phase planner, exact isolated semantic ' +
+                'proposal, and guarded positive, foreign-category, ' +
+                'wrong-endpoint, and raw-proof witnesses'
         },
         {
             mechanism: 'decoded-groupoidal-pi',
@@ -1111,10 +1113,12 @@ const rawRepresentation: CoreLfScaleStress1Representation = {
                 'dependent Pi declaration and binder-producing RHS use ' +
                 'the existing locally nameless pi node',
             currentBoundary:
-                'mixed IR and conformance-only policy are complete',
+                'mixed IR is complete; generic source-ordered phase ' +
+                'planning and active policy are absent',
             nextRequirement:
-                'exact isolated semantic proposal and binder RHS ' +
-                'subject-reduction/conformance witnesses'
+                'generic mixed-phase planner, exact isolated semantic ' +
+                'proposal, and binder RHS subject-reduction/conformance ' +
+                'witnesses'
         },
         {
             mechanism: 'decoded-dependent-sigma',
@@ -1128,10 +1132,11 @@ const rawRepresentation: CoreLfScaleStress1Representation = {
                 'eliminator identity, and eliminator beta are explicit',
             currentBoundary:
                 'the shared IR represents inductives but no generic ' +
-                'inductive compiler phase exists',
+                'inductive compiler or mixed-phase planner exists',
             nextRequirement:
                 'generic immutable inductive declaration/constructor/' +
-                'generated-owner compiler row before semantic execution'
+                'generated-owner compiler plus mixed-phase planning before ' +
+                'semantic execution'
         },
         {
             mechanism: 'imported-grouped-nat-recursion',
@@ -1144,11 +1149,12 @@ const rawRepresentation: CoreLfScaleStress1Representation = {
                 'dependency-module import plus three ordered clauses and ' +
                 'recursive RHS are explicit',
             currentBoundary:
-                'generic grouping and runtime-fragment seams exist; policy ' +
-                'remains conformance-only',
+                'generic grouping and runtime-fragment seams exist; mixed ' +
+                'phase/dependency planning and active policy are absent',
             nextRequirement:
-                'exact imported semantic proposal and positive, overlap, ' +
-                'open-term, recursion-budget, and near-miss witnesses'
+                'generic mixed-phase/dependency planning, exact imported ' +
+                'semantic proposal, and positive, overlap, open-term, ' +
+                'recursion-budget, and near-miss witnesses'
         }
     ],
     semanticStatus: 'representation-only',
