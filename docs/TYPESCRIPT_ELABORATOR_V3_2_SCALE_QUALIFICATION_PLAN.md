@@ -50,8 +50,10 @@ source-ordered without an oracle; SCALE-MIXED-RUNTIME-PREFIX-1 now carries an
 explicit source-prior same-module runtime fragment through later mixed
 declaration/runtime/proof checking; SCALE-STRESS-2B is now in progress with
 representation-only SCALE-STRESS-2B1 complete for the internal/pullback
-dependent-Pi object, fold, and pointwise-component runtime package;
-base-arrow action and Sigma-transfor uncurrying remain explicit 2B subrows;
+dependent-Pi object, fold, and pointwise-component runtime package and
+representation-only SCALE-STRESS-2B2 complete for its two base-arrow-action
+clauses over the exact inherited runtime lineage; Sigma-transfor uncurrying
+remains the next explicit 2B subrow;
 generated induction semantics, batch deduplication, further mechanism stress,
 and the measured outer-LF TYPE/KIND product boundary remain explicit rows
 before whole-transfer qualification
@@ -95,6 +97,8 @@ SCALE-MIXED-RUNTIME-PREFIX-1 implementation checkpoint:
 `845a46bb760b67ea133f096fc221a18ccf95c435`
 SCALE-STRESS-2B1 implementation checkpoint:
 `568f1c9fa6aab6bb402c4c07d4190d15355cb2b7`
+SCALE-STRESS-2B2 implementation checkpoint:
+`5e8876f38e9c0d0e9526a0ec30764e0bd1a87b36`
 
 ## Purpose
 
@@ -501,7 +505,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-MIXED-RUNTIME-PREFIX-1 | complete | SCALE-STRESS-2A, SCALE-RUNTIME-DEPS-1 | Let a mixed source continuation consume an explicit distinct same-module `earlier-fragment` runtime, use its flattened immutable closure while checking intervening declarations/inductives/proofs and as the prefix of local runtime phases, and reject relation/order/raw-runtime ambiguity |
 | SCALE-STRESS-2B | in progress | SCALE-STRESS-2A, SCALE-PROOF-CONSTRAINTS-1, SCALE-MIXED-RUNTIME-PREFIX-1, applicable semantic review | Parent row extending the same owner-free, representation-only path to internal/pullback Pi and Sigma runtime/telescope cases without activating a semantic profile |
 | SCALE-STRESS-2B1 | complete | SCALE-STRESS-2A, SCALE-MIXED-RUNTIME-PREFIX-1 | Pin 18 exact internal-Pi commands; compile eight additional declarations and nine source-ordered runtime clauses against the reviewed ten-rule same-module prefix; exercise `Pi_int_funcd`/`Pi_pullback_funcd` object, fold, and pointwise reductions; retain the exact `Catd_cat_func` body and three subject-normalization cases as explicit boundaries |
-| SCALE-STRESS-2B2 | pending | SCALE-STRESS-2B1 | Extend the internal-Pi package through its base-arrow action (`fdapp1_int_cell` to `section_pullback_func`) and the smallest exact dependency closure; close or record any newly measured generic subject-normalization boundary |
+| SCALE-STRESS-2B2 | complete | SCALE-STRESS-2B1 | Pin the exact eight-command base-arrow-action selection; compile six declarations and two `fdapp1_int_cell` clauses after the exact 19-rule 2B1 runtime; retain the two measured transport-body subject-normalization cases as exact self-invalidating oracles |
 | SCALE-STRESS-2B3 | pending | SCALE-STRESS-2B2, SCALE-STRESS-2A | Transfer the selected `Sigma_catd_functord_catd` and `Sigma_transfd_funcd` telescope/uncurrying cases through the same generic phase and runtime-lineage path |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
@@ -1901,6 +1905,72 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 5 live internal-Pi telescope-stress tests passed
 ```
 
+## SCALE-STRESS-2B2 Completion Record
+
+SCALE-STRESS-2B2 extends the exact internal dependent-Pi runtime package
+through its base-arrow action. Its checked acquisition contract pins the
+smallest eight-command selection from `emdash2/emdash3_2.lp`: six symbols
+and the two one-clause `fdapp1_int_cell` rules, under the same source and
+canonical-export hashes as 2B1. The direct typed mixed module contains those
+six declarations and two runtime phases; it reuses the exact 2B1 declaration
+context and its completed 19-rule runtime by qualified identity.
+
+`Fibre_cat` is installed from its checked transparent body. The exact
+`functord_transport_lhs_func` and `functord_transport_rhs_func` bodies open a
+separate `comp_cat_fapp0`/`catd_transport_func`/`Fibre_func` computation
+closure, so this bounded slice preserves their checked types opaquely. Both
+runtime clauses therefore carry exact self-invalidating subject-reduction
+oracles for that measured omitted normalization closure. Their patterns,
+plicities, ordered variables, right-hand sides, prior-rule lineages, and
+execution are otherwise checked by the same owner-free generic engines used
+by 2B1. A plicity-corrupted near miss remains irreducible.
+
+The second clause's displayed-family fibre is represented by the exact
+object type of `fapp0 (Op Cat_cat) Cat_cat Catd_cat_func (G x)`. This is the
+active pullback-family computation at that point and avoids silently assuming
+the deliberately omitted transparent body of `Catd_cat_func`. The live lane
+checks canonical acquisition, the transparent `Fibre_cat` unfolding, both
+base-arrow reductions, a well-typed non-conversion assertion, and the
+corresponding rejected assertion.
+
+This was a data-and-policy-only extension: no generic transfer, mixed-phase,
+runtime, proof, or checker engine changed. It installs no active declaration,
+rule, profile, browser/product API, or Lambdapi source change. The transport
+transparent-body closure, section-pullback object/component action,
+Sigma-transfor uncurrying, active stress semantics, batch throughput, and
+whole-transfer graduation remain explicit non-claims. SCALE-STRESS-2B3 is
+the next dependency-ready continuation.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_lf_transfer_mixed_tests.ts \
+  tests/v3_2_scale_stress_2_representation_tests.ts \
+  tests/v3_2_scale_stress_2b_representation_tests.ts \
+  tests/v3_2_scale_stress_2b2_representation_tests.ts
+  30 tests / 4 suites: 26 passed, 4 live probes skipped
+
+./scripts/pnpmw run check:scale-telescope-stress
+  10 tests / 2 suites: 10 passed
+
+./scripts/pnpmw run check:ts
+  537 tests / 67 suites: 504 passed, 33 live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript and kernel/report/book/audit gates passed
+  all 19 frozen MVP differential judgments passed
+  all 41 bounded Lambdapi kernel/example files passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+  all 15 mixed-phase conformance tests passed
+  all 5 live oracle-free proof-stress tests passed
+  all 10 live internal-Pi telescope-stress tests passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -2438,3 +2508,13 @@ scope is affected.
   policy, and mechanical graduation remain explicit non-claims. Exact green
   local implementation checkpoint:
   `568f1c9fa6aab6bb402c4c07d4190d15355cb2b7`.
+- **2026-07-25 — SCALE-STRESS-2B2 Pi base-arrow action completed.** Pinned
+  the exact eight-command selection and compiled six declarations plus two
+  `fdapp1_int_cell` clauses after the exact 19-rule 2B1 lineage. Both clauses
+  execute in TypeScript and agree with bounded live Lambdapi
+  reduction/non-conversion evidence. `Fibre_cat` is transparent; the two
+  transport bodies and their exact subject-normalization cases remain
+  explicit opaque/oracle boundaries. No generic engine changed and no active
+  semantic profile, browser API, or graduation claim was added. Exact green
+  local implementation checkpoint:
+  `5e8876f38e9c0d0e9526a0ec30764e0bd1a87b36`.

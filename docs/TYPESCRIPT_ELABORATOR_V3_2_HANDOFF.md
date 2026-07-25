@@ -29,8 +29,10 @@ generated-constraint typing gap without an oracle; generic
 SCALE-MIXED-RUNTIME-PREFIX-1 now supplies an explicit immutable same-module
 runtime lineage to later mixed continuations; representation-only
 SCALE-STRESS-2B1 now compiles and executes the internal/pullback dependent-Pi
-object, fold, and pointwise-component package over that exact lineage, while
-base-arrow action and Sigma-transfor uncurrying remain the next 2B slices;
+object, fold, and pointwise-component package over that exact lineage, and
+representation-only SCALE-STRESS-2B2 extends it through both base-arrow-action
+clauses without a generic engine change; Sigma-transfor uncurrying remains
+the next 2B slice;
 generated induction semantics, integrated batch deduplication, further
 mechanism stress, plus the outer-LF TYPE/KIND Π-formation boundary remain
 explicit later work before any newly promoted active stress profile or
@@ -318,8 +320,17 @@ so 2B1 retains its checked type opaquely. Six rule subjects are fully
 TypeScript-checked; the internal-Pi component, pullback fold, and pullback
 component keep exact self-invalidating Lambdapi normalization oracles.
 Nothing is activated in a default, reviewed, MVP, browser, or product
-profile. SCALE-STRESS-2B2 next covers internal-Pi base-arrow action, followed
-by SCALE-STRESS-2B3 for `Sigma_catd_functord_catd` and
+profile.
+
+SCALE-STRESS-2B2 then pins the smallest exact eight-command base-arrow-action
+selection, compiles six declarations and both `fdapp1_int_cell` clauses after
+the exact 19-rule 2B1 runtime, and executes both clauses in TypeScript.
+`Fibre_cat` retains its transparent body. The two displayed-transport bodies
+open a distinct computation closure and remain opaque, so both exact subjects
+retain self-invalidating Lambdapi normalization oracles. Live acquisition,
+unfolding, reduction, non-conversion, and rejected-conversion evidence agree.
+This is a data/policy-only extension: no generic engine or active profile
+changed. SCALE-STRESS-2B3 is next for `Sigma_catd_functord_catd` and
 `Sigma_transfd_funcd`.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,

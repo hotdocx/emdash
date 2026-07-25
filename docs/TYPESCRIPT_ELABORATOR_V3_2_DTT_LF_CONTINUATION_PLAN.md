@@ -52,9 +52,10 @@ dependent-generated-constraint typing row without an oracle; generic
 SCALE-MIXED-RUNTIME-PREFIX-1 now carries an explicit same-module runtime
 lineage into later mixed continuations; representation-only
 SCALE-STRESS-2B1 has now compiled and executed the internal/pullback
-dependent-Pi object, fold, and pointwise-component runtime package, with
-base-arrow action and Sigma-transfor uncurrying retained as the next 2B
-subrows
+dependent-Pi object, fold, and pointwise-component runtime package, and
+representation-only SCALE-STRESS-2B2 has extended that exact lineage through
+both base-arrow-action clauses without a generic engine change;
+Sigma-transfor uncurrying remains the next 2B subrow
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1444,8 +1445,14 @@ prefix. All clauses execute and live Lambdapi reductions/non-conversion
 agree. Six subjects check strictly; three exact normalization cases remain
 self-invalidating oracle boundaries because `Catd_cat_func`'s transparent
 composition closure is outside 2B1. This remains isolated representation,
-not an active profile; base-arrow action and Sigma-transfor uncurrying are
-the dependency-ready 2B2/2B3 continuations.
+not an active profile. SCALE-STRESS-2B2 then pins six exact declaration
+commands and two base-arrow runtime rules, compiles them after the complete
+2B1 context and 19-rule lineage, and executes both clauses. `Fibre_cat`
+retains its transparent definition, while two transport bodies and the
+corresponding exact subject-normalization cases remain explicit
+opaque/self-invalidating-oracle boundaries. This data-only extension required
+no generic engine change. Sigma-transfor uncurrying is the dependency-ready
+2B3 continuation.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2534,3 +2541,12 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   oracles. The transparent `Catd_cat_func` composition closure, Pi
   base-arrow action, Sigma-transfor uncurrying, active policy, and
   whole-transfer claim remain withheld.
+- **2026-07-25 — Internal-Pi base-arrow action represented and executed.**
+  SCALE-STRESS-2B2 pins six exact declaration commands plus two
+  `fdapp1_int_cell` rules and compiles them after the complete 2B1
+  declaration/runtime lineage. Both clauses execute and bounded live
+  Lambdapi unfolding, reduction, non-conversion, and rejection agree.
+  `Fibre_cat` is transparent; the two transport bodies and exact subject
+  cases remain opaque/self-invalidating-oracle boundaries. No generic engine,
+  active profile, browser API, or whole-transfer claim changed; 2B3 remains
+  next.
