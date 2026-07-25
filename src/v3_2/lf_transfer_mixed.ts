@@ -1,5 +1,6 @@
 /**
- * Generic source-ordered mixed-phase planning for SCALE-MIXED-PHASE-1A.
+ * Generic source-ordered mixed-phase planning for
+ * SCALE-MIXED-PHASE-1A/1B.
  *
  * The planner partitions one shared transfer module into phase-pure
  * fragments and feeds only already reviewed declaration, inductive
@@ -37,8 +38,10 @@ import {
     lowerCoreLfInductiveSignatures
 } from './lf_transfer_inductive';
 import {
+    CoreLfComposedProofProgram,
     CoreLfCompiledProofProgram,
     CoreLfProofCompilerOptions,
+    composeCoreLfProofPrograms,
     compileCoreLfProofProgram
 } from './lf_transfer_proof';
 import {
@@ -100,7 +103,7 @@ export interface CoreLfMixedPhasePlan {
     readonly doesNotProvide: readonly [
         'active-policy-selection',
         'generated-induction-semantics',
-        'multi-phase-proof-composition',
+        'runtime-divergent-proof-phase-composition',
         'kind-level-binder-compilation',
         'browser-api'
     ];
@@ -115,7 +118,6 @@ export type CoreLfMixedCompilerErrorCode =
     | 'INVALID_MIXED_LINKAGE'
     | 'INVALID_INITIAL_DECLARATIONS'
     | 'INVALID_RUNTIME_DEPENDENCY'
-    | 'UNSUPPORTED_PROOF_PHASE_COMPOSITION'
     | 'FOREIGN_MIXED_PLAN';
 
 export class CoreLfMixedCompilerError extends Error {
@@ -650,7 +652,7 @@ export function planCoreLfMixedPhases(
         doesNotProvide: [
             'active-policy-selection',
             'generated-induction-semantics',
-            'multi-phase-proof-composition',
+            'runtime-divergent-proof-phase-composition',
             'kind-level-binder-compilation',
             'browser-api'
         ]
@@ -918,11 +920,13 @@ export class CoreLfCompiledMixedModule {
     readonly revision: string;
     readonly phases: readonly CoreLfCompiledMixedPhase[];
     readonly proofPrograms: readonly CoreLfCompiledProofProgram[];
+    readonly proofProgram?:
+        CoreLfCompiledProofProgram | CoreLfComposedProofProgram;
     readonly semanticStatus = 'compiled-selected-policy' as const;
     readonly doesNotProvide = Object.freeze([
         'active-policy-selection',
         'generated-induction-semantics',
-        'multi-phase-proof-composition',
+        'runtime-divergent-proof-phase-composition',
         'kind-level-binder-compilation',
         'browser-api'
     ] as const);
@@ -932,7 +936,9 @@ export class CoreLfCompiledMixedModule {
         public readonly linkage: CoreLfMixedDeclarationLinkage,
         public readonly declarations: CoreLfMixedDeclarationContext,
         phases: readonly CoreLfCompiledMixedPhase[],
-        public readonly latestRuntime?: CoreLfCompiledRuntimeFragment
+        public readonly latestRuntime?: CoreLfCompiledRuntimeFragment,
+        proofProgram?:
+            CoreLfCompiledProofProgram | CoreLfComposedProofProgram
     ) {
         this.revision =
             `${plan.revision}+${linkage.revision}+compiled-1`;
@@ -947,6 +953,7 @@ export class CoreLfCompiledMixedModule {
                 )
                 .map(phase => phase.proof)
         );
+        this.proofProgram = proofProgram;
         Object.freeze(this);
     }
 }
@@ -1005,18 +1012,6 @@ export function compileCoreLfMixedPhases(
             'Mixed compilation linkage targets a foreign phase plan'
         );
     }
-    const proofPhases = plan.phases.filter(
-        phase => phase.kind === 'proof'
-    );
-    if (proofPhases.length > 1) {
-        return fail(
-            'UNSUPPORTED_PROOF_PHASE_COMPOSITION',
-            'plan.phases',
-            'Separated proof phases require a shared-budget proof-program ' +
-                'composition row'
-        );
-    }
-
     const externalRuntimeDependencies =
         options.runtimeDependencies ?? [];
     validateRuntimeDependencies(
@@ -1170,11 +1165,28 @@ export function compileCoreLfMixedPhases(
                 'was not used by any runtime phase'
         );
     }
+    const proofPrograms = compiled
+        .filter(
+            (
+                phase
+            ): phase is CoreLfCompiledMixedProofPhase =>
+                phase.kind === 'proof'
+        )
+        .map(phase => phase.proof);
+    const proofProgram = proofPrograms.length === 0
+        ? undefined
+        : proofPrograms.length === 1
+            ? proofPrograms[0]
+            : composeCoreLfProofPrograms(
+                proofPrograms,
+                declarations
+            );
     return new CoreLfCompiledMixedModule(
         plan,
         linkage,
         declarations,
         compiled,
-        latestRuntime
+        latestRuntime,
+        proofProgram
     );
 }

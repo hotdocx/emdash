@@ -1,5 +1,5 @@
 /**
- * Focused SCALE-MIXED-PHASE-1A source-order orchestration tests.
+ * Focused SCALE-MIXED-PHASE-1A/1B orchestration/composition tests.
  */
 
 import assert from 'node:assert/strict';
@@ -8,8 +8,10 @@ import { resolve } from 'node:path';
 import { describe, it } from 'node:test';
 import {
     CORE_LF_SCALE_STRESS_1_REPRESENTATION,
+    CoreLfComposedProofProgram,
     CoreLfMixedCompilerError,
     CoreLfModuleSpec,
+    CoreLfProofCompilerError,
     CoreLfTransferPolicyEntry,
     CoreLfTransferPolicyOverlay,
     CoreLfTransferScopedBuilder,
@@ -166,6 +168,43 @@ const proofRule = () => {
         }],
         provenance: source(
             'unif_rule left_head $x ≡ right_head $y ↪ [ $x ≡ $y ];'
+        )
+    };
+};
+
+const secondProofRule = (order: number) => {
+    const pattern = new CoreLfTransferScopedBuilder();
+    const template = new CoreLfTransferScopedBuilder();
+    return {
+        order,
+        id: 'fixture.mixed.second-heads',
+        sourceOwner: double,
+        variables: ['x', 'y'].map(name => ({
+            name,
+            role: 'matched' as const,
+            type: {
+                tag: 'global' as const,
+                symbol: tokenType
+            }
+        })),
+        problem: {
+            left: pattern.pattern(builderCall(
+                pattern,
+                double,
+                [pattern.capture('x')]
+            )),
+            right: pattern.pattern(builderCall(
+                pattern,
+                rightHead,
+                [pattern.capture('y')]
+            ))
+        },
+        generatedConstraints: [{
+            left: template.template(template.capture('x')),
+            right: template.template(template.capture('y'))
+        }],
+        provenance: source(
+            'unif_rule double $x ≡ right_head $y ↪ [ $x ≡ $y ];'
         )
     };
 };
@@ -372,7 +411,7 @@ const assertDeepFrozen = (value: unknown): void => {
     );
 };
 
-describe('SCALE-MIXED-PHASE-1A generic source-order planner', () => {
+describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
     it('partitions every source item into a phase-pure immutable plan', () => {
         const module = fixtureModule();
         const plan = planCoreLfMixedPhases(
@@ -834,7 +873,7 @@ describe('SCALE-MIXED-PHASE-1A generic source-order planner', () => {
         );
     });
 
-    it('fails closed on separated proof phases', () => {
+    it('composes separated proof phases under one exact prefix and budget', () => {
         const fixture = fixtureModule();
         const module = createCoreLfModuleSpec({
             ...fixture,
@@ -846,11 +885,7 @@ describe('SCALE-MIXED-PHASE-1A generic source-order planner', () => {
             ),
             proofRules: [
                 fixture.proofRules[0],
-                {
-                    ...fixture.proofRules[0],
-                    order: 8,
-                    id: 'fixture.mixed.second-heads'
-                }
+                secondProofRule(8)
             ]
         });
         const plan = planCoreLfMixedPhases(
@@ -861,12 +896,110 @@ describe('SCALE-MIXED-PHASE-1A generic source-order planner', () => {
             plan.phases.filter(phase => phase.kind === 'proof').length,
             2
         );
-        expectMixedError(
+        const compiled = compileCoreLfMixedPhases(
+            plan,
+            fixtureLinkage(plan)
+        );
+        assert.equal(compiled.proofPrograms.length, 2);
+        assert.ok(
+            compiled.proofProgram instanceof
+                CoreLfComposedProofProgram
+        );
+        if (
+            !(compiled.proofProgram instanceof
+                CoreLfComposedProofProgram)
+        ) return;
+        assert.deepEqual(compiled.proofProgram.ruleIds, [
+            'fixture.mixed.heads',
+            'fixture.mixed.second-heads'
+        ]);
+        assert.deepEqual(
+            compiled.proofProgram.phases.map(phase => [
+                phase.ruleIds,
+                phase.precedingRuleIds
+            ]),
+            [
+                [['fixture.mixed.heads'], []],
+                [[
+                    'fixture.mixed.second-heads'
+                ], ['fixture.mixed.heads']]
+            ]
+        );
+        assert.equal(
+            compiled.proofProgram.runtimeProgram,
+            compiled.proofPrograms[0].runtimeProgram
+        );
+        assert.notEqual(
+            compiled.proofProgram.runtimeProgram,
+            compiled.latestRuntime?.runtime
+        );
+
+        const nodeSource = provenance(
+            'derived',
+            'composed proof phase witness'
+        );
+        const tokenTerm = kernelFree('mixed_token', nodeSource);
+        const doubleTerm = kernelCall(
+            kernelFree('mixed_double', nodeSource),
+            [{ plicity: 'explicit', value: tokenTerm }],
+            nodeSource
+        );
+        const right = kernelCall(
+            kernelFree('mixed_right_head', nodeSource),
+            [{ plicity: 'explicit', value: tokenTerm }],
+            nodeSource
+        );
+        const bounded = compiled.proofProgram.compare(
+            doubleTerm,
+            right,
+            { stepLimit: 0 }
+        );
+        assert.equal(bounded.status, 'step-limit-exceeded');
+        if (bounded.status === 'step-limit-exceeded') {
+            assert.deepEqual(bounded.next, {
+                kind: 'proof-rule',
+                ruleId: 'fixture.mixed.second-heads',
+                orientation: 'forward'
+            });
+        }
+        const solved = compiled.proofProgram.compare(
+            doubleTerm,
+            right,
+            { stepLimit: 4 }
+        );
+        assert.equal(solved.status, 'solved');
+        assert.deepEqual(
+            solved.ruleApplications.map(application => [
+                application.ruleId,
+                application.ruleIndex
+            ]),
+            [['fixture.mixed.second-heads', 1]]
+        );
+    });
+
+    it('fails closed when separated proof phases have different runtimes', () => {
+        const fixture = fixtureModule();
+        const module = createCoreLfModuleSpec({
+            ...fixture,
+            revision: 'mixed-divergent-proof-runtime-1',
+            proofRules: [
+                fixture.proofRules[0],
+                secondProofRule(9)
+            ]
+        });
+        const plan = planCoreLfMixedPhases(
+            module,
+            fixturePolicy(module)
+        );
+        assert.throws(
             () => compileCoreLfMixedPhases(
                 plan,
                 fixtureLinkage(plan)
             ),
-            'UNSUPPORTED_PROOF_PHASE_COMPOSITION'
+            error =>
+                error instanceof CoreLfProofCompilerError &&
+                error.code === 'INVALID_PROOF_COMPOSITION' &&
+                /different runtime prefixes/u.test(error.message)
         );
     });
 

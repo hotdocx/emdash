@@ -1,6 +1,6 @@
 /**
- * Generic typed proof-time unification compiler and bounded comparison
- * engine for SCALE-0E.
+ * Generic typed proof-time unification compiler, bounded comparison engine,
+ * and shared-prefix composition for SCALE-0E/SCALE-MIXED-PHASE-1B.
  *
  * This is deliberately separate from runtime conversion. Proof rules match
  * one equality problem symmetrically and replace it with an ordered list of
@@ -33,8 +33,11 @@ import {
     CoreLfModuleSpec,
     CoreLfQualifiedSymbol,
     CoreLfTransferExpression,
+    CoreLfTransferExternalSymbol,
     CoreLfTransferPolicyOverlay,
-    CoreLfTransferProofRule
+    CoreLfTransferProofRule,
+    createCoreLfModuleSpec,
+    createCoreLfTransferPolicyOverlay
 } from './lf_transfer';
 import {
     CoreLfCompiledDeclaration
@@ -192,6 +195,7 @@ export type CoreLfProofCompilerErrorCode =
     | 'INVALID_PROOF_VARIABLE_TYPE'
     | 'INVALID_PROOF_RULE_TYPE'
     | 'INVALID_PROOF_TYPING_ORACLE'
+    | 'INVALID_PROOF_COMPOSITION'
     | 'INCOMPLETE_PROOF_MATCH'
     | 'PROOF_CAPTURE_SCOPE_ESCAPE'
     | 'INVALID_PROOF_STEP_LIMIT';
@@ -1811,6 +1815,295 @@ export class CoreLfCompiledProofProgram {
             ...base()
         });
     }
+}
+
+export interface CoreLfProofProgramCompositionOptions {
+    /**
+     * One explicit budget for the composed queue. If omitted, every source
+     * program must already carry the same limit.
+     */
+    readonly comparisonStepLimit?: number;
+}
+
+export interface CoreLfComposedProofPhase {
+    readonly index: number;
+    readonly moduleId: string;
+    readonly fragmentId: string;
+    readonly ruleIds: readonly string[];
+    readonly precedingRuleIds: readonly string[];
+}
+
+/**
+ * Immutable composition of source-separated proof programs.
+ *
+ * Source programs retain their exact compilation evidence. The executable
+ * view flattens their rules once, preserving source priority, one comparison
+ * queue, one metavariable session, and one step budget. All programs must
+ * have the same runtime prefix; prefix-sensitive composition is a separate
+ * mechanism rather than an implicit widening.
+ */
+export class CoreLfComposedProofProgram {
+    readonly revision: string;
+    readonly phases: readonly CoreLfComposedProofPhase[];
+    readonly rules: readonly CoreLfCompiledProofRule[];
+    readonly ruleIds: readonly string[];
+    readonly comparisonStepLimit: number;
+
+    constructor(
+        public readonly programs:
+            readonly CoreLfCompiledProofProgram[],
+        public readonly program: CoreLfCompiledProofProgram
+    ) {
+        const precedingRuleIds: string[] = [];
+        this.phases = Object.freeze(programs.map(
+            (source, index) => {
+                const phase = deepFreeze({
+                    index,
+                    moduleId: source.module.moduleId,
+                    fragmentId: source.module.fragmentId,
+                    ruleIds: [...source.ruleIds],
+                    precedingRuleIds: [...precedingRuleIds]
+                });
+                precedingRuleIds.push(...source.ruleIds);
+                return phase;
+            }
+        ));
+        this.revision = [
+            'composed-proof-1',
+            ...programs.map(source =>
+                `${source.module.moduleId}/` +
+                `${source.module.fragmentId}@${source.revision}`
+            )
+        ].join('+');
+        this.rules = program.rules;
+        this.ruleIds = program.ruleIds;
+        this.comparisonStepLimit = program.comparisonStepLimit;
+        Object.freeze(this);
+    }
+
+    get declarations(): CoreLfProofDeclarationContext {
+        return this.program.declarations;
+    }
+
+    get runtimeProgram(): CoreLfCatalogRuntime | undefined {
+        return this.program.runtimeProgram;
+    }
+
+    rule(id: string): CoreLfCompiledProofRule | undefined {
+        return this.program.rule(id);
+    }
+
+    compare(
+        left: KernelExpression,
+        right: KernelExpression,
+        options: CoreLfProofComparisonOptions = {}
+    ): CoreLfProofComparisonResult {
+        return this.program.compare(left, right, options);
+    }
+
+    compareAt(
+        context: CoreContext,
+        left: KernelExpression,
+        right: KernelExpression,
+        options: CoreLfProofComparisonOptions = {}
+    ): CoreLfProofComparisonResult {
+        return this.program.compareAt(
+            context,
+            left,
+            right,
+            options
+        );
+    }
+}
+
+const sameData = (left: unknown, right: unknown): boolean =>
+    JSON.stringify(left) === JSON.stringify(right);
+
+const proofCompositionModule = (
+    programs: readonly CoreLfCompiledProofProgram[]
+): CoreLfModuleSpec => {
+    const first = programs[0].module;
+    const externalByKey = new Map<
+        string,
+        CoreLfTransferExternalSymbol
+    >();
+    const proofRules: CoreLfTransferProofRule[] = [];
+    let previousOrder = -1;
+    const ruleIds = new Set<string>();
+
+    programs.forEach((program, programIndex) => {
+        const module = program.module;
+        if (
+            module.moduleId !== first.moduleId ||
+            module.authorityPath !== first.authorityPath ||
+            module.sourceSha256 !== first.sourceSha256 ||
+            !sameData(module.dependencies, first.dependencies) ||
+            !sameData(module.canonicalExport, first.canonicalExport)
+        ) {
+            fail(
+                'INVALID_PROOF_COMPOSITION',
+                `programs[${programIndex}].module`,
+                'Composed proof phases must come from one pinned source ' +
+                    'module and dependency view'
+            );
+        }
+        if (
+            program.rules.length !== module.proofRules.length ||
+            program.ruleIds.some(
+                (id, index) => id !== module.proofRules[index].id
+            )
+        ) {
+            fail(
+                'INVALID_PROOF_COMPOSITION',
+                `programs[${programIndex}].rules`,
+                'Compiled proof phase does not preserve its source rules'
+            );
+        }
+        module.externalSymbols.forEach((external, externalIndex) => {
+            const key = symbolKey(external.symbol);
+            const existing = externalByKey.get(key);
+            if (
+                existing !== undefined &&
+                existing.availability !== external.availability
+            ) {
+                fail(
+                    'INVALID_PROOF_COMPOSITION',
+                    `programs[${programIndex}].module.externalSymbols[` +
+                        `${externalIndex}]`,
+                    `Proof phases disagree on availability of ` +
+                        `'${displaySymbol(external.symbol)}'`
+                );
+            }
+            externalByKey.set(key, external);
+        });
+        module.proofRules.forEach((rule, ruleIndex) => {
+            if (
+                rule.order <= previousOrder ||
+                ruleIds.has(rule.id)
+            ) {
+                fail(
+                    'INVALID_PROOF_COMPOSITION',
+                    `programs[${programIndex}].module.proofRules[` +
+                        `${ruleIndex}]`,
+                    'Composed proof rules must have unique IDs and strict ' +
+                        'global source order'
+                );
+            }
+            previousOrder = rule.order;
+            ruleIds.add(rule.id);
+            proofRules.push(rule);
+        });
+    });
+
+    return createCoreLfModuleSpec({
+        revision: `${first.revision}+proof-composition-1`,
+        moduleId: first.moduleId,
+        fragmentId: `${first.fragmentId}-proof-composition`,
+        authorityPath: first.authorityPath,
+        sourceSha256: first.sourceSha256,
+        ...(first.canonicalExport === undefined
+            ? {}
+            : { canonicalExport: first.canonicalExport }),
+        dependencies: first.dependencies,
+        externalSymbols: [...externalByKey.values()],
+        declarations: [],
+        inductives: [],
+        runtimeRules: [],
+        proofRules
+    });
+};
+
+/**
+ * Compose at least two already checked proof phases under one exact runtime
+ * prefix and one comparison budget.
+ */
+export function composeCoreLfProofPrograms(
+    programs: readonly CoreLfCompiledProofProgram[],
+    declarations: CoreLfProofDeclarationContext,
+    options: CoreLfProofProgramCompositionOptions = {}
+): CoreLfComposedProofProgram {
+    if (programs.length < 2) {
+        return fail(
+            'INVALID_PROOF_COMPOSITION',
+            'programs',
+            'Proof composition requires at least two source programs'
+        );
+    }
+    const runtimeProgram = programs[0].runtimeProgram;
+    if (programs.some(
+        program => program.runtimeProgram !== runtimeProgram
+    )) {
+        return fail(
+            'INVALID_PROOF_COMPOSITION',
+            'programs.runtimeProgram',
+            'Proof phases have different runtime prefixes; widening or ' +
+                'prefix-sensitive execution requires an explicit later row'
+        );
+    }
+    const sourceLimits = new Set(
+        programs.map(program => program.comparisonStepLimit)
+    );
+    if (
+        options.comparisonStepLimit === undefined &&
+        sourceLimits.size !== 1
+    ) {
+        return fail(
+            'INVALID_PROOF_COMPOSITION',
+            'programs.comparisonStepLimit',
+            'Proof phases have different budgets and no composed budget'
+        );
+    }
+    const comparisonStepLimit =
+        options.comparisonStepLimit ??
+        programs[0].comparisonStepLimit;
+    if (
+        !Number.isSafeInteger(comparisonStepLimit) ||
+        comparisonStepLimit < 0
+    ) {
+        return fail(
+            'INVALID_PROOF_COMPOSITION',
+            'options.comparisonStepLimit',
+            'Composed proof budget must be a nonnegative safe integer'
+        );
+    }
+
+    const module = proofCompositionModule(programs);
+    module.referencedSymbols.forEach((symbol, index) => {
+        const declaration = declarations.declaration(symbol);
+        if (
+            declaration === undefined ||
+            declaration.status === 'excluded'
+        ) {
+            fail(
+                'INVALID_PROOF_COMPOSITION',
+                `module.referencedSymbols[${index}]`,
+                `Final declaration context does not resolve ` +
+                    `'${displaySymbol(symbol)}'`
+            );
+        }
+    });
+    const policy = createCoreLfTransferPolicyOverlay(module, {
+        revision: `${module.revision}+policy-1`,
+        moduleRevision: module.revision,
+        entries: programs.flatMap(program =>
+            program.policy.entries
+        ).map((entry, order) => ({
+            ...entry,
+            order
+        }))
+    });
+    const executable = new CoreLfCompiledProofProgram(
+        module,
+        policy,
+        declarations,
+        programs.flatMap(program => program.rules),
+        comparisonStepLimit,
+        runtimeProgram
+    );
+    return new CoreLfComposedProofProgram(
+        Object.freeze([...programs]),
+        executable
+    );
 }
 
 /**
