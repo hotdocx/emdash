@@ -81,6 +81,8 @@ SCALE-MIXED-PHASE-1C implementation checkpoint:
 `4d9acc422adc7b0634c89f07826558137070d28c`
 SCALE-STRESS-1B-PREP implementation checkpoint:
 `1665d31ce056c3b28d4a94789e82863aff4887ca`
+SCALE-STRESS-2A implementation checkpoint:
+`7ad46dc5ff4b677828787ed881d12550284c3450`
 
 ## Purpose
 
@@ -2171,4 +2173,6 @@ scope is affected.
   self-invalidating typing oracle because it cannot use the first generated
   base equality while checking later dependent problems; this opens
   SCALE-PROOF-CONSTRAINTS-1. No active proof/runtime rule, product/browser
-  API, Lambdapi change, or scale graduation was added.
+  API, Lambdapi change, or scale graduation was added. Exact green local
+  implementation checkpoint:
+  `7ad46dc5ff4b677828787ed881d12550284c3450`.
