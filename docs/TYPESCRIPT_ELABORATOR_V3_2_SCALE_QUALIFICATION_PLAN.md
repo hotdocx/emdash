@@ -47,6 +47,8 @@ SCALE-0D implementation checkpoint:
 `3461c2e32f26869099060667e63ce2e65336cb32`
 SCALE-0E implementation checkpoint:
 `ac8c8887d21c5dc2eeb14c9d3ec3ec4e96cd3ed3`
+SCALE-RUNTIME-DEPS-1 implementation checkpoint:
+`9e8e3f94177e85cbd49c6b50f9f193f6d1978470`
 
 ## Purpose
 
@@ -1314,3 +1316,11 @@ scope is affected.
   `Const_catd` or other rule, product/profile, browser API, parser, or
   mechanical-transfer claim was added. H-DTTLF-SCALE-02/
   D-DTTLF-SCALE-002 is now proposed before semantic stress work.
+- **2026-07-24 — SCALE-RUNTIME-DEPS-1 checkpointed.** Recorded local
+  checkpoint `9e8e3f94177e85cbd49c6b50f9f193f6d1978470` after exact staged-diff
+  review, seven focused fragment-composition tests, the combined 18-test
+  runtime gate, the 471-test TypeScript gate, bounded active kernel check,
+  complete scale gate, header lint, source hygiene scan, and whitespace audit
+  passed. The checkpoint adds no active semantic rule, parser, product or
+  profile expansion, mechanical-transfer qualification, or broader Git
+  authority.
