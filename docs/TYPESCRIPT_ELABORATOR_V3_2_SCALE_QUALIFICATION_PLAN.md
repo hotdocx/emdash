@@ -45,6 +45,8 @@ SCALE-0C implementation checkpoint:
 `197e80deb80f30ff964ffc876773d823dd51a402`
 SCALE-0D implementation checkpoint:
 `3461c2e32f26869099060667e63ce2e65336cb32`
+SCALE-0E implementation checkpoint:
+`ac8c8887d21c5dc2eeb14c9d3ec3ec4e96cd3ed3`
 
 ## Purpose
 
@@ -1190,3 +1192,10 @@ scope is affected.
   conversion, browser API, semantic profile, parser, all-61-rule coverage, or
   whole-development qualification was added. SCALE-RUNTIME-DEPS-1 is next
   before H-DTTLF-SCALE-02.
+- **2026-07-24 — SCALE-0E checkpointed.** Recorded local checkpoint
+  `ac8c8887d21c5dc2eeb14c9d3ec3ec4e96cd3ed3` after exact staged-diff
+  review, nine focused proof-engine tests, the 464-test TypeScript gate,
+  bounded active kernel check, complete scale gate, header lint, and
+  whitespace audit passed. The checkpoint adds no active proof rule,
+  runtime conversion, parser, product/profile expansion, all-61-rule or
+  whole-development qualification, or broader Git authority.
