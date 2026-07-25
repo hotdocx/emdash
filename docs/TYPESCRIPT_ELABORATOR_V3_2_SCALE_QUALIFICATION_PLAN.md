@@ -111,6 +111,8 @@ SCALE-STRESS-2B3 implementation checkpoint:
 `ecf1387de7e6248dffeb12ef6b99f08efd609800`
 SCALE-STRESS-3A1 implementation checkpoint:
 `fb361eed0ca9e58ccaba1bdb520e2db9e55ec56c`
+SCALE-STRESS-3A2A implementation checkpoint:
+`9d73a7a61659f3a47d1ae7e3eb448805b648572d`
 
 ## Purpose
 
@@ -2809,4 +2811,5 @@ scope is affected.
   agree with bounded Lambdapi typing/rejection. No active profile, browser
   API, owner-specific engine case, new semantic rule, or whole-transfer claim
   was added. Product/projection and tensor action remain
-  SCALE-STRESS-3A2B.
+  SCALE-STRESS-3A2B. Exact green local implementation checkpoint:
+  `9d73a7a61659f3a47d1ae7e3eb448805b648572d`.
