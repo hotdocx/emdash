@@ -373,3 +373,106 @@ CoreLfCanonicalSelectionContract =
             }
         ]
     });
+
+/**
+ * Checked source/export selection for Sigma-total displayed-transfor
+ * uncurrying.
+ *
+ * The reviewed continuation already represents the Sigma telescope family
+ * and its fibre rule. They are pinned again here as object-identical
+ * prerequisites; the five additional declarations and one later component
+ * rule are the smallest exact closure for the selected computation.
+ */
+export const CORE_LF_SCALE_STRESS_2_SIGMA_TRANSFOR_ACQUISITION:
+CoreLfCanonicalSelectionContract =
+    createCoreLfCanonicalSelectionContract({
+        revision: 'SCALE-STRESS-2-SIGMA-TRANSFOR-ACQUISITION-1',
+        moduleId: 'emdash.emdash3_2',
+        authorityPath: 'emdash2/emdash3_2.lp',
+        sourceSha256:
+            'sha256:f438985ca874f1037e9a63b597e58883d0c0fcc86434117a125297592739c613',
+        canonicalExport: {
+            exporterVersion: '3.0.0-90-gdb4f780',
+            sha256:
+                'sha256:355bd868c33553e0c7488a181d7c58661471fc2c878e63d5ceba296d26c056a0',
+            imports: []
+        },
+        commands: [
+            {
+                id: 'sigma-transfor.transformation-category',
+                ordinal: 401,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:ca6ec76b71fb8b5581a50e3817b7e98021f535239b3f97bbb40765fbc9c7d68c',
+                name: 'Transfd_cat',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'sigma-transfor.transformation-classifier',
+                ordinal: 402,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:ea8c3503ac06650aa3edfb459657bfcd4fca4e74c7eb2e3d86698c50736e49a4',
+                name: 'Transfd',
+                modifiers: ['injective'],
+                hasBody: true
+            },
+            {
+                id: 'sigma-transfor.telescope-family',
+                ordinal: 1006,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:eac3f8bf50274337783f61bbb6d72886cb218c248d20c27022fa1355fe140631',
+                name: 'Sigma_catd_functord_catd',
+                modifiers: [],
+                hasBody: false
+            },
+            {
+                id: 'sigma-transfor.telescope-fibre',
+                ordinal: 1007,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:7e2b69a887ba7adfa2742ab3114efe01047f417570b8673def5c3dd5cdc34099'
+            },
+            {
+                id: 'sigma-transfor.uncurrying-owner',
+                ordinal: 1009,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:d00b2c45055350fd5ad338c93f7670494f37bc10457b1049a7fba1ad17581d68',
+                name: 'Sigma_transfd_funcd',
+                modifiers: ['constant'],
+                hasBody: false
+            },
+            {
+                id: 'sigma-transfor.fibre-functor',
+                ordinal: 1056,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:2ceec6c178192d3c0fb1448b625c2ff2078f4f6124e1da272bfd823699013e62',
+                name: 'Fibre_func',
+                modifiers: [],
+                hasBody: true
+            },
+            {
+                id: 'sigma-transfor.displayed-component',
+                ordinal: 1058,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:5ef7b2dfc71546ae4ad6713b7084076c8f28bc682c0c340c8909de9040091e0d',
+                name: 'tdapp0_fapp0',
+                modifiers: [],
+                hasBody: false
+            },
+            {
+                id: 'sigma-transfor.object-component',
+                ordinal: 1068,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:6a9bb29554b0223450279acba091366c65cacffadbe0e60387a99d3a85abe776'
+            }
+        ]
+    });
