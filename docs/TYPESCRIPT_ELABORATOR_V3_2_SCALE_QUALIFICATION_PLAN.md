@@ -117,6 +117,8 @@ SCALE-STRESS-3A1 implementation checkpoint:
 `fb361eed0ca9e58ccaba1bdb520e2db9e55ec56c`
 SCALE-STRESS-3A2A implementation checkpoint:
 `9d73a7a61659f3a47d1ae7e3eb448805b648572d`
+SCALE-INTRINSIC-DELTA-1 / SCALE-STRESS-3A2B implementation checkpoint:
+`f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8`
 
 ## Purpose
 
@@ -2876,4 +2878,6 @@ scope is affected.
   fourteen live profunctor tests agree with bounded Lambdapi
   positive/negative evidence. No active profile, browser API, Lambdapi
   change, theorem, or whole-transfer claim was added. The representation-only
-  SCALE-STRESS-3A2 parent is complete; SCALE-STRESS-3B is next.
+  SCALE-STRESS-3A2 parent is complete; SCALE-STRESS-3B is next. Exact green
+  local implementation checkpoint:
+  `f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8`.

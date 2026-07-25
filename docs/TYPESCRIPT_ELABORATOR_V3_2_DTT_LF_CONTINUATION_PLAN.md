@@ -70,7 +70,7 @@ complete, and SCALE-STRESS-3B is the next dependency-ready stress row
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`71f46f66aba45d1b79a4c93746970b5d79e42fca`
+`f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8`
 Latest documentation checkpoint before scale qualification:
 `29976248189a8caa9797cced533ae11559dbe95c`
 First scale-qualification implementation checkpoint:
@@ -2107,7 +2107,7 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest local implementation checkpoint is
-71f46f66aba45d1b79a4c93746970b5d79e42fca, followed by any
+f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8, followed by any
 documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C,
 DIRECTED-GRADUATE-1, the separate H-DTTLF-03 review, the root-only
 authoritative factory, and the continuation-only fixed conformance lane are
