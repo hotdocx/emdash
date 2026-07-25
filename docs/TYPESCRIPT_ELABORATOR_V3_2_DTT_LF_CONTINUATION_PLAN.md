@@ -39,7 +39,7 @@ next dependency-ready review/proposal slice
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`1c586a0633433126c8d67f8eca67a42f27ce638e`
+`197e20ea7925be24147525132f1695710082292c`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -1735,15 +1735,14 @@ authorities, and ancestry; preserve unrelated work; relocate symbols with rg;
 and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
-The latest pre-integration comparison checkpoint is
-1c586a0633433126c8d67f8eca67a42f27ce638e. DIRECTED-1C has since been
-approved and implemented as exactly one opaque `piapp0` signature import with
-no new rule; its combined TypeScript/Lambdapi consumer and negative pass.
-Recover the actual HEAD and checkpoint record, then select
-DIRECTED-GRADUATE-1 as the next dependency-ready slice. Freeze its fresh
-candidate manifest, non-product boundary, oracle policy, withheld claims, and
-exact H-DTTLF-03 recommendation; do not promote the browser/deployed profile
-or claim H-DTTLF-03 approval.
+The latest local implementation checkpoint is
+197e20ea7925be24147525132f1695710082292c. It records DIRECTED-1C as exactly
+one opaque `piapp0` signature import with no new rule; its combined
+TypeScript/Lambdapi consumer and negative pass. Recover the actual HEAD and
+checkpoint record, then select DIRECTED-GRADUATE-1 as the next
+dependency-ready slice. Freeze its fresh candidate manifest, non-product
+boundary, oracle policy, withheld claims, and exact H-DTTLF-03 recommendation;
+do not promote the browser/deployed profile or claim H-DTTLF-03 approval.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -2000,3 +1999,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   The focused 17-test tranche, 397-test TypeScript gate, bounded active kernel
   check, and complete cross-layer gate pass. DIRECTED-GRADUATE-1 is
   dependency-ready without any browser/product promotion.
+- **2026-07-24 — DIRECTED-1C implementation checkpointed.** Recorded local
+  checkpoint `197e20ea7925be24147525132f1695710082292c` after the exact staged
+  diff, focused positive/negative Lambdapi run, 397-test TypeScript gate,
+  bounded active-kernel check, full cross-layer gate, header lint, and
+  whitespace audit passed. The checkpoint contains only the approved review,
+  isolated one-owner integration, focused consumers, exports, and synchronized
+  plan. It is comparison/backtracking evidence and grants no product
+  promotion, H-DTTLF-03 decision, or broader Git authority.
