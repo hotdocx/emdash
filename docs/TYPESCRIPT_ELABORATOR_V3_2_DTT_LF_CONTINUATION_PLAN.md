@@ -48,7 +48,9 @@ J/Pi/Sigma/Nat semantic profile is now an executable but non-active proposal
 awaiting H-DTTLF-SCALE-STRESS-01, while independent representation-only
 SCALE-STRESS-2A has executed the active Sigma/Pi uncurrying proof rule and
 generic SCALE-PROOF-CONSTRAINTS-1 has closed its
-dependent-generated-constraint typing row without an oracle
+dependent-generated-constraint typing row without an oracle; generic
+SCALE-MIXED-RUNTIME-PREFIX-1 now carries an explicit same-module runtime
+lineage into later mixed continuations
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -2502,3 +2504,10 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   fails. The active Sigma/Pi rule is now fully TypeScript-checked without an
   oracle. No runtime conversion, active profile, general equality
   reflection, or mechanical-transfer claim was added.
+- **2026-07-25 — Same-module mixed runtime continuation qualified.**
+  SCALE-MIXED-RUNTIME-PREFIX-1 lets a later mixed source fragment consume an
+  explicit distinct same-module `earlier-fragment`. Its object-identical
+  flattened closure checks intervening declaration/inductive/proof phases
+  and prefixes every new runtime fragment. Dependency order, relation,
+  duplicate, and raw-plus-fragment ambiguity checks remain fail-closed. No
+  declaration, rule, profile, browser API, or semantic claim was added.

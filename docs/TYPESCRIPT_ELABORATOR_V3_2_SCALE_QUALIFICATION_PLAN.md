@@ -46,10 +46,11 @@ independent representation-only SCALE-STRESS-2A is complete with the exact
 Sigma/Pi telescope-uncurrying `unif_rule`, live positive/negative Lambdapi
 evidence, and isolated TypeScript proof execution; generic
 SCALE-PROOF-CONSTRAINTS-1 now validates its dependent generated constraints
-source-ordered without an oracle, while generated induction semantics, batch
-deduplication, further mechanism stress, and the measured outer-LF
-TYPE/KIND product boundary remain explicit rows before whole-transfer
-qualification
+source-ordered without an oracle; SCALE-MIXED-RUNTIME-PREFIX-1 now carries an
+explicit source-prior same-module runtime fragment through later mixed
+declaration/runtime/proof checking; generated induction semantics, batch
+deduplication, further mechanism stress, and the measured outer-LF TYPE/KIND
+product boundary remain explicit rows before whole-transfer qualification
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -86,6 +87,8 @@ SCALE-STRESS-2A implementation checkpoint:
 `7ad46dc5ff4b677828787ed881d12550284c3450`
 SCALE-PROOF-CONSTRAINTS-1 implementation checkpoint:
 `a6208fb5d406b4d0acb19f9a77bf2a915b788132`
+SCALE-MIXED-RUNTIME-PREFIX-1 implementation checkpoint:
+`845a46bb760b67ea133f096fc221a18ccf95c435`
 
 ## Purpose
 
@@ -489,7 +492,8 @@ The architecture qualifies only when all of the following hold:
 | SCALE-STRESS-2 | in progress | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Parent row for internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-2A | complete | H-DTTLF-SCALE-02, SCALE-0E, SCALE-MIXED-PHASE-1 | Pin and directly represent `Catd`, `Sigma_proj1_pullback_catd`, and the active Sigma/Pi uncurrying `unif_rule`; compile and execute it only in an isolated proof program, carry the exact initial checking runtime through declaration/proof-only mixed extension, and classify dependent generated-constraint typing without semantic promotion |
 | SCALE-PROOF-CONSTRAINTS-1 | complete | SCALE-STRESS-2A | Validate each generated problem under its checked prefix; reflect only a direct capture equality whose replacement uses strictly earlier captures as an acyclic transparent checking alias; record the exact aliases immutably; reject wrong order and all constraints that remain heterogeneous; remove the SCALE-STRESS-2A typing oracle |
-| SCALE-STRESS-2B | pending | SCALE-STRESS-2A, SCALE-PROOF-CONSTRAINTS-1, applicable semantic review | Extend the same owner-free path to `Pi_int_funcd`, `Pi_pullback_funcd`, `Sigma_catd_functord_catd`, and `Sigma_transfd_funcd` runtime/telescope cases |
+| SCALE-MIXED-RUNTIME-PREFIX-1 | complete | SCALE-STRESS-2A, SCALE-RUNTIME-DEPS-1 | Let a mixed source continuation consume an explicit distinct same-module `earlier-fragment` runtime, use its flattened immutable closure while checking intervening declarations/inductives/proofs and as the prefix of local runtime phases, and reject relation/order/raw-runtime ambiguity |
+| SCALE-STRESS-2B | pending | SCALE-STRESS-2A, SCALE-PROOF-CONSTRAINTS-1, SCALE-MIXED-RUNTIME-PREFIX-1, applicable semantic review | Extend the same owner-free path to `Pi_int_funcd`, `Pi_pullback_funcd`, `Sigma_catd_functord_catd`, and `Sigma_transfd_funcd` runtime/telescope cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
@@ -1764,6 +1768,60 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 5 live oracle-free proof-stress tests passed
 ```
 
+## SCALE-MIXED-RUNTIME-PREFIX-1 Completion Record
+
+The first runtime-bearing continuation after SCALE-STRESS-2A requires more
+than its raw read-only checking runtime: it must compose the already compiled
+same-module runtime lineage with new local rules. The mixed compiler now
+accepts an explicit `earlier-fragment` only when it is a distinct
+source-prior fragment of the same qualified module. Dependency-module
+fragments must still precede it in declared import order, duplicate identities
+and foreign relations fail closed, and a raw `initialCheckingRuntime` cannot
+be combined with explicit fragment evidence.
+
+`composeCoreLfRuntimeDependencies()` exposes the existing deterministic
+transitive flattening as an immutable checking prefix. Mixed declaration,
+inductive-signature, and proof phases use that prefix before any local runtime
+phase exists; each local runtime phase receives the same direct fragment
+evidence plus mechanically accumulated source-local phases. Completed proof
+execution likewise uses the exact resulting lineage. No rules are copied into
+a second relation and no fragment is identified by spelling or revision text.
+
+The focused same-module fixture compiles a later declaration and rule against
+the exact two-rule prefix from an earlier mixed fragment, records both prior
+rule IDs in `checkedWithEarlierRuleIds`, and rejects the same artifact when it
+is falsely tagged as a dependency module. Existing dependency-module,
+same-plan phase, diamond-deduplication, cycle, and rule-collision tests remain
+green.
+
+This is generic orchestration under approved D-DTTLF-SCALE-002. It selects no
+new declaration or rule, changes no frozen or reviewed profile, enters no
+browser API, and makes no semantic or mechanical-transfer claim. It is the
+explicit fragment path anticipated by SCALE-STRESS-2A and is the runtime
+lineage prerequisite for SCALE-STRESS-2B.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_lf_transfer_mixed_tests.ts \
+  tests/v3_2_lf_runtime_fragment_tests.ts
+  22 tests / 2 suites: 21 passed, 1 live probe skipped
+
+./scripts/pnpmw run typecheck
+  passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  527-test TypeScript gate passed
+  all 19 frozen MVP differential judgments passed
+  all 41 bounded Lambdapi kernel/example files passed
+  source/report/book/audit gates passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+  all 15 mixed-phase conformance tests passed
+  all 5 live oracle-free proof-stress tests passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -2281,3 +2339,12 @@ scope is affected.
   conversion, general equality reflection, or graduation claim was added.
   Exact green local implementation checkpoint:
   `a6208fb5d406b4d0acb19f9a77bf2a915b788132`.
+- **2026-07-25 — SCALE-MIXED-RUNTIME-PREFIX-1 completed.** A mixed source
+  continuation can now consume an explicit distinct same-module
+  `earlier-fragment`; its exact flattened runtime checks intervening phases
+  and prefixes later local rules. Dependency-module order, same-module
+  identity, duplicates, and raw-plus-fragment ambiguity fail closed. The
+  focused 22-test runtime/mixed lane and full 527-test/scale gate pass. No
+  semantic owner, rule, profile, browser API, or graduation claim was added.
+  Exact green local implementation checkpoint:
+  `845a46bb760b67ea133f096fc221a18ccf95c435`.

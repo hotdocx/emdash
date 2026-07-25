@@ -25,10 +25,12 @@ H-DTTLF-SCALE-STRESS-01 decision is pending; independent representation-only
 SCALE-STRESS-2A now pins and executes the active Sigma/Pi uncurrying proof
 rule in an isolated TypeScript program, with bounded Lambdapi agreement and
 generic source-ordered SCALE-PROOF-CONSTRAINTS-1 now closes its dependent
-generated-constraint typing gap without an oracle; generated induction
-semantics, integrated batch deduplication, further mechanism stress, plus
-the outer-LF TYPE/KIND Π-formation boundary remain explicit later work
-before any newly promoted active stress profile or whole-transfer claim
+generated-constraint typing gap without an oracle; generic
+SCALE-MIXED-RUNTIME-PREFIX-1 now supplies an explicit immutable same-module
+runtime lineage to later mixed continuations; generated induction semantics,
+integrated batch deduplication, further mechanism stress, plus the outer-LF
+TYPE/KIND Π-formation boundary remain explicit later work before any newly
+promoted active stress profile or whole-transfer claim
 
 ## Purpose
 
@@ -286,6 +288,16 @@ constraints fail closed. The Sigma/Pi rule records `K2 := K`, `R2 := R`, and
 `D2 := D` in immutable typing evidence. This remains isolated executable
 evidence, not an active proof-rule registration, general equality
 reflection, or a mechanical-transfer qualification.
+
+SCALE-MIXED-RUNTIME-PREFIX-1 closes the complementary runtime-bearing seam.
+A mixed module may receive an explicit distinct same-module
+`earlier-fragment` after its ordered dependency-module fragments. The
+flattened object-identical closure checks intervening declarations,
+inductive signatures, and proofs and prefixes every new local runtime phase.
+Raw initial runtime plus fragment evidence, misclassified or foreign
+relations, duplicates, and order drift fail closed. This is generic
+orchestration only: no active declaration, rule, profile, or browser surface
+changed.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints
