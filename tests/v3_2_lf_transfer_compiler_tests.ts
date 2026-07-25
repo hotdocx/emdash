@@ -23,6 +23,7 @@ import {
     binderMode,
     compileCoreDirectedContinuationTransfer,
     compileCoreLfDeclarations,
+    coreLfDefinitionalCompare,
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
     coreLfTransferExplicitBody,
@@ -30,7 +31,10 @@ import {
     createCoreLfModuleSpec,
     createCoreLfTransferDeclarationLinkage,
     createCoreLfTransferPolicyOverlay,
+    kernelApplication,
     kernelExpressionEquals,
+    kernelFree,
+    provenance,
     validateCoreDirectedContinuationTransferEquivalence
 } from '../src/v3_2';
 import * as browser from '../src/v3_2/browser';
@@ -237,6 +241,126 @@ describe('SCALE-0C generic LF declaration compiler', () => {
         });
         compiled.createChecker().validateEnvironment();
         compiled.assertEnvironment(compiled.environment);
+    });
+
+    it('checks a transparent intrinsic owner through the generic policy path', () => {
+        const cat = coreLfQualifiedSymbol(moduleId, 'Cat');
+        const opposite = coreLfQualifiedSymbol(moduleId, 'Opp');
+        const typeBuilder = new CoreLfTransferScopedBuilder();
+        const oppositeType = typeBuilder.term(typeBuilder.pi(
+            'A',
+            typeBuilder.global(cat),
+            _A => typeBuilder.global(cat),
+            binderMode('explicit', 'functorial')
+        ));
+        const bodyBuilder = new CoreLfTransferScopedBuilder();
+        const oppositeBody = bodyBuilder.term(bodyBuilder.lam(
+            'A',
+            bodyBuilder.global(cat),
+            A => A,
+            binderMode('explicit', 'functorial')
+        ));
+        const module = createCoreLfModuleSpec({
+            revision: 'generic-intrinsic-transparent-1',
+            moduleId,
+            fragmentId: 'generic-intrinsic-transparent',
+            authorityPath:
+                'tests/fixtures/generic_declarations.lp',
+            sourceSha256:
+                'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+            dependencies: [],
+            externalSymbols: [{
+                symbol: cat,
+                availability: 'earlier-fragment'
+            }],
+            declarations: [{
+                order: 0,
+                symbol: opposite,
+                type: oppositeType,
+                body: coreLfTransferExplicitBody(oppositeBody),
+                modifiers: {
+                    visibility: 'public',
+                    rigidity: 'ordinary',
+                    sourceOpacity: 'transparent'
+                },
+                provenance: source(
+                    'symbol Opp (A : Cat) : Cat ≔ A;'
+                )
+            }],
+            inductives: [],
+            runtimeRules: [],
+            proofRules: []
+        });
+        const policy = createCoreLfTransferPolicyOverlay(module, {
+            revision: 'generic-intrinsic-transparent-policy-1',
+            moduleRevision: module.revision,
+            entries: [{
+                order: 0,
+                target: {
+                    kind: 'declaration',
+                    symbol: opposite
+                },
+                policy: 'checked-transparent-definition',
+                evidence: 'unrelated intrinsic delta fixture'
+            }]
+        });
+        const linkage = createCoreLfTransferDeclarationLinkage(module, {
+            revision: 'generic-intrinsic-transparent-linkage-1',
+            moduleRevision: module.revision,
+            entries: [
+                {
+                    order: 0,
+                    symbol: cat,
+                    kind: 'core-owner',
+                    owner: 'category-universe'
+                },
+                {
+                    order: 1,
+                    symbol: opposite,
+                    kind: 'core-owner',
+                    owner: 'opposite-category'
+                }
+            ]
+        });
+        const compiled = compileCoreLfDeclarations(
+            module,
+            policy,
+            linkage
+        );
+
+        assert.equal(
+            compiled.declaration(opposite)?.status,
+            'intrinsic-transparent'
+        );
+        assert.equal(compiled.environment.declarations.length, 0);
+        assert.equal(
+            compiled.environment.lookupIntrinsicDefinition(
+                'opposite-category'
+            )?.declarationName,
+            `${moduleId}.Opp`
+        );
+        compiled.assertEnvironment(compiled.environment);
+
+        const nodeProvenance = provenance(
+            'derived',
+            'generic intrinsic transparent comparison'
+        );
+        const A = kernelFree('generic_intrinsic_A', nodeProvenance);
+        const result = coreLfDefinitionalCompare(
+            compiled.environment,
+            kernelApplication(
+                'opposite-category',
+                [{ value: A }],
+                nodeProvenance
+            ),
+            A,
+            2
+        );
+        assert.equal(result.status, 'equal');
+        assert.deepEqual(
+            result.trace.map(entry => entry.reduction.kind),
+            ['delta', 'beta']
+        );
     });
 
     it('uses prior checked delta definitions without a global registry', () => {

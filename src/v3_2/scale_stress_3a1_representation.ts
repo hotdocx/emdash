@@ -37,6 +37,9 @@ import {
     compileCoreLfDeclarations,
     createCoreLfTransferDeclarationLinkage
 } from './lf_transfer_compiler';
+import {
+    CoreLfMixedDeclarationContext
+} from './lf_transfer_mixed';
 import { binderMode } from './kernel';
 import {
     validateCoreLfScaleEngineReview
@@ -553,6 +556,7 @@ export interface CoreLfScaleStress3a1Compilation {
             typeof compileCoreDirectedContinuationTransferWithRuntime
         >;
     readonly compiled: CoreLfCompiledDeclarationModule;
+    readonly declarationContext: CoreLfMixedDeclarationContext;
 }
 
 export function compileCoreLfScaleStress3a1Representation():
@@ -573,8 +577,13 @@ CoreLfScaleStress3a1Compilation {
             runtimeProgram: initialCheckingRuntime
         }
     );
+    const declarationContext = new CoreLfMixedDeclarationContext(
+        initialDeclarations,
+        [compiled]
+    );
     return Object.freeze({
         initialDeclarations,
-        compiled
+        compiled,
+        declarationContext
     });
 }

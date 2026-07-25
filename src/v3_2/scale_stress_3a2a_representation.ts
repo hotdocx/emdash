@@ -3,8 +3,9 @@
  * push/pull.
  *
  * This fragment extends the exact 3A1 declaration context, adds the one
- * source-prior identity-functor object rule needed by the transparent
- * bodies, and keeps tensor/product action for SCALE-STRESS-3A2B.
+ * source-prior Hom owner definition and identity-functor object rule needed
+ * by the transparent bodies, and keeps tensor/product action for
+ * SCALE-STRESS-3A2B.
  */
 
 import {
@@ -88,6 +89,7 @@ const {
 } = CORE_LF_SCALE_STRESS_3A1_SYMBOLS;
 
 export const CORE_LF_SCALE_STRESS_3A2A_SYMBOLS = Object.freeze({
+    homClassifier,
     identityArrow:
         coreLfQualifiedSymbol(moduleId, 'id'),
     identityFunctor:
@@ -118,12 +120,12 @@ const {
 } = CORE_LF_SCALE_STRESS_3A2A_SYMBOLS;
 
 /**
- * `hom-classifier` is already a backend-neutral semantic Core owner. The
- * active transparent `Hom ≔ Obj (Hom_cat ...)` declaration is therefore
- * checked acquisition evidence for a deterministic fold, not a second free
- * declaration that would shadow the owner.
+ * The source declaration keeps the existing backend-neutral
+ * `hom-classifier` owner and contributes only its checked transparent body.
+ * It is installed before every selected consumer, without a shadowing free
+ * declaration or an owner-specific runtime rule.
  */
-export const CORE_LF_SCALE_STRESS_3A2A_OWNER_FOLDS =
+export const CORE_LF_SCALE_STRESS_3A2A_INTRINSIC_DEFINITIONS =
     Object.freeze([
         Object.freeze({
             acquisitionId:
@@ -203,6 +205,18 @@ const homClassifierAt = (
     targetObject: CoreLfTransferBuilderExpression
 ): CoreLfTransferBuilderExpression =>
     globalCall(builder, homClassifier, [
+        { plicity: 'explicit', value: base },
+        { plicity: 'explicit', value: sourceObject },
+        { plicity: 'explicit', value: targetObject }
+    ]);
+
+const homCategoryAt = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression,
+    sourceObject: CoreLfTransferBuilderExpression,
+    targetObject: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, homCategory, [
         { plicity: 'explicit', value: base },
         { plicity: 'explicit', value: sourceObject },
         { plicity: 'explicit', value: targetObject }
@@ -392,6 +406,51 @@ const identityArrowType = (): CoreLfTransferExpression => {
             'X',
             objectType(builder, A),
             X => homType(builder, A, X, X),
+            explicitMode
+        ),
+        explicitMode
+    ));
+};
+
+const homClassifierDefinitionType =
+(): CoreLfTransferExpression => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.pi(
+        'A',
+        builder.global(category),
+        A => builder.pi(
+            'X_A',
+            objectType(builder, A),
+            _X => builder.pi(
+                'Y_A',
+                objectType(builder, A),
+                _Y => builder.global(groupoid),
+                explicitMode
+            ),
+            explicitMode
+        ),
+        explicitMode
+    ));
+};
+
+const homClassifierDefinitionBody =
+(): CoreLfTransferExpression => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.lam(
+        'A',
+        builder.global(category),
+        A => builder.lam(
+            'X_A',
+            objectType(builder, A),
+            X => builder.lam(
+                'Y_A',
+                objectType(builder, A),
+                Y => objectClassifierAt(
+                    builder,
+                    homCategoryAt(builder, A, X, Y)
+                ),
+                explicitMode
+            ),
             explicitMode
         ),
         explicitMode
@@ -728,7 +787,7 @@ const identityObjectRule = () => {
     const A = builder.capture('A');
     const x = builder.capture('x');
     return {
-        order: 2,
+        order: 3,
         id: 'stress.profunctor-comparison.identity-object',
         groupId: 'stress.profunctor-comparison.identity-object',
         clauseOrder: 0,
@@ -783,6 +842,19 @@ const publicModifiers = (
 const declarations: readonly CoreLfTransferDeclaration[] = [
     {
         order: 0,
+        symbol: homClassifier,
+        type: homClassifierDefinitionType(),
+        body: coreLfTransferExplicitBody(
+            homClassifierDefinitionBody()
+        ),
+        modifiers: publicModifiers('injective', 'transparent'),
+        provenance: source(
+            'injective symbol Hom (A : Cat)',
+            230
+        )
+    },
+    {
+        order: 1,
         symbol: identityArrow,
         type: identityArrowType(),
         body: coreLfTransferAbsentBody(),
@@ -793,7 +865,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         )
     },
     {
-        order: 1,
+        order: 2,
         symbol: identityFunctor,
         type: identityFunctorType(),
         body: coreLfTransferExplicitBody(identityFunctorBody()),
@@ -804,7 +876,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         )
     },
     {
-        order: 3,
+        order: 4,
         symbol: postcompositionAction,
         type: postcompositionActionType(),
         body: coreLfTransferAbsentBody(),
@@ -815,7 +887,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         )
     },
     {
-        order: 4,
+        order: 5,
         symbol: definitionalIsomorphismTo,
         type: definitionalIsomorphismProjectionType('to'),
         body: coreLfTransferAbsentBody(),
@@ -826,7 +898,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         )
     },
     {
-        order: 5,
+        order: 6,
         symbol: definitionalIsomorphismFrom,
         type: definitionalIsomorphismProjectionType('from'),
         body: coreLfTransferAbsentBody(),
@@ -837,7 +909,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         )
     },
     {
-        order: 6,
+        order: 7,
         symbol: profunctorMap,
         type: profunctorMapTypeDeclaration(),
         body: coreLfTransferExplicitBody(profunctorMapBody()),
@@ -848,7 +920,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         )
     },
     {
-        order: 7,
+        order: 8,
         symbol: comparisonPush,
         type: comparisonTransportType('push'),
         body: coreLfTransferExplicitBody(
@@ -861,7 +933,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         )
     },
     {
-        order: 8,
+        order: 9,
         symbol: comparisonPull,
         type: comparisonTransportType('pull'),
         body: coreLfTransferExplicitBody(
@@ -903,7 +975,6 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
         decodeOwner,
         objectClassifier,
         functorClassifier,
-        homClassifier,
         homCategory,
         categoryOfCategories,
         functorObject,
@@ -935,6 +1006,16 @@ CoreLfTransferPolicyOverlay =
                     order: 0,
                     target: {
                         kind: 'declaration',
+                        symbol: homClassifier
+                    },
+                    policy: 'checked-transparent-definition',
+                    evidence:
+                        'Exact active transparent Hom owner definition'
+                },
+                {
+                    order: 1,
+                    target: {
+                        kind: 'declaration',
                         symbol: identityArrow
                     },
                     policy: 'opaque-signature',
@@ -942,7 +1023,7 @@ CoreLfTransferPolicyOverlay =
                         'Exact active identity-arrow signature'
                 },
                 {
-                    order: 1,
+                    order: 2,
                     target: {
                         kind: 'declaration',
                         symbol: identityFunctor
@@ -952,7 +1033,7 @@ CoreLfTransferPolicyOverlay =
                         'Exact active transparent identity functor'
                 },
                 {
-                    order: 2,
+                    order: 3,
                     target: {
                         kind: 'runtime-rule',
                         id:
@@ -963,9 +1044,9 @@ CoreLfTransferPolicyOverlay =
                     evidence:
                         'Exact active identity-functor object rule'
                 },
-                ...declarations.slice(2).map(
+                ...declarations.slice(3).map(
                     (declaration, index) => ({
-                        order: index + 3,
+                        order: index + 4,
                         target: {
                             kind: 'declaration' as const,
                             symbol: declaration.symbol
@@ -1035,11 +1116,18 @@ CoreLfMixedDeclarationLinkage =
                 ...declarations.map((declaration, index) => ({
                     order: externalSymbols.length + index,
                     symbol: declaration.symbol,
-                    kind: 'free-declaration' as const,
-                    coreName:
-                        `emdash_v3_2_scale_stress_3a2a_` +
-                        declaration.symbol.name,
-                    backendName: declaration.symbol.name
+                    ...(declaration.symbol === homClassifier
+                        ? {
+                            kind: 'core-owner' as const,
+                            owner: 'hom-classifier' as const
+                        }
+                        : {
+                            kind: 'free-declaration' as const,
+                            coreName:
+                                `emdash_v3_2_scale_stress_3a2a_` +
+                                declaration.symbol.name,
+                            backendName: declaration.symbol.name
+                        })
                 }))
             ]
         }
@@ -1047,12 +1135,13 @@ CoreLfMixedDeclarationLinkage =
 
 export const CORE_LF_SCALE_STRESS_3A2A_BOUNDARY = Object.freeze({
     semanticStatus: 'isolated-representation-only',
-    canonicalOwnerFolds:
-        CORE_LF_SCALE_STRESS_3A2A_OWNER_FOLDS,
+    intrinsicTransparentDefinitions:
+        CORE_LF_SCALE_STRESS_3A2A_INTRINSIC_DEFINITIONS,
     selectedRuntimeRuleIds: Object.freeze([
         'stress.profunctor-comparison.identity-object'
     ]),
     selectedTransparentBodies: Object.freeze([
+        homClassifier,
         identityFunctor,
         profunctorMap,
         comparisonPush,
@@ -1103,7 +1192,7 @@ CoreLfScaleStress3a2aCompilation {
         CORE_LF_SCALE_STRESS_3A2A_PLAN,
         CORE_LF_SCALE_STRESS_3A2A_LINKAGE,
         {
-            initialDeclarations: prerequisite.compiled,
+            initialDeclarations: prerequisite.declarationContext,
             runtimeDependencies: [{
                 relation: 'earlier-fragment',
                 fragment: continuationRuntime

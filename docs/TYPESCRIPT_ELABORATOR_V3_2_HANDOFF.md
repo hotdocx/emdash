@@ -38,10 +38,14 @@ SCALE-STRESS-3 is now split by mechanism and in progress, with
 declaration-only SCALE-STRESS-3A1 pinning the transparent
 `Prof`/`ProfComparison` chain across opaque `DefIso`/`Prof_cat`, and
 comparison-action SCALE-STRESS-3A2A compiling `ProfMap` plus push/pull and the
-identity-object rule; its generic nested-congruence retry and canonical
-`Hom`-owner fold are complete without activating a profile; product/tensor
-action is next in SCALE-STRESS-3A2B, while
-protected/evidence extensions and WalkingEnd/HIT remain 3B/3C; generated
+identity-object rule; its generic nested-congruence retry is complete.
+SCALE-INTRINSIC-DELTA-1 now checks and unfolds transparent definitions on
+existing Core owners without shadow declarations and rejects dependency
+cycles. SCALE-STRESS-3A2B uses that path for active `Hom` and compiles the
+exact product/projection plus `Prof_tensor_map`/`Prof_tensor_func`
+object/capped-arrow closure without an oracle, completing the
+representation-only SCALE-STRESS-3A2 parent. Protected/evidence extensions
+and WalkingEnd/HIT remain 3B/3C; generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
 promoted active stress profile or whole-transfer claim
@@ -357,16 +361,32 @@ through the dependency chain while keeping the three primitive owners opaque.
 Bounded TypeScript delta/opacity witnesses and Lambdapi positive/negative
 evidence agree. No action rule or active profile changed. SCALE-STRESS-3A2A
 subsequently pins the exact `Hom`/identity/`ProfMap`/push/pull dependency
-closure, records the transparent `Hom ≔ Obj(Hom_cat ...)` equation as a
-canonical fold to the existing semantic owner, compiles eight declarations
-and the identity-object clause, and checks push/pull through the opaque
-generic postcomposition owner. This exposed and closed one generic conversion
-gap: after rigid heads differ, the bounded comparator can now normalize the
-first reducible nested child, rebuild, and retry an exposed parent redex while
-retaining one global path-aware budget. Synthetic exhaustion and bounded live
-Lambdapi typing/rejection agree. Nothing is activated in a default, reviewed,
-MVP, browser, or product profile. SCALE-STRESS-3A2B next closes
-product/projection computation and tensor functor action.
+closure, compiles the transparent intrinsic `Hom` definition, eight free
+declarations, and the identity-object clause, and checks push/pull through
+the opaque generic postcomposition owner. This exposed and closed one generic
+conversion gap: after rigid heads differ, the bounded comparator can now
+normalize the first reducible nested child, rebuild, and retry an exposed
+parent redex while retaining one global path-aware budget.
+
+The SCALE-STRESS-3A2B audit then established that `Hom` must expose its exact
+active `Obj(Hom_cat(...))` body to later product-hom computation, rather than
+remain only canonical fold evidence. Generic SCALE-INTRINSIC-DELTA-1 now
+checks transparent bodies linked to existing Core owners, stores them without
+free shadows, rejects self/duplicate/ill-typed/transparent-graph cycles, and
+delta-unfolds owner applications under the existing shared budget. Mixed
+contexts permit only the exact intrinsic-conformance-to-definition
+refinement. An unrelated owner fixture and active `Hom` both exercise the
+same path.
+
+SCALE-STRESS-3A2B pins six opaque declarations and five exact product/tensor
+rules. Product objects decode through a constant-family dependent pair;
+product homs reduce componentwise; and both `Prof_tensor_func` actions reduce
+to `Prof_tensor`/`Prof_tensor_map`. Every subject checks without an oracle,
+focused TypeScript reductions and non-reduction pass, and all fourteen
+bounded live profunctor tests agree with Lambdapi. Nothing is activated in a
+default, reviewed, MVP, browser, or product profile. The representation-only
+SCALE-STRESS-3A2 parent is complete; SCALE-STRESS-3B is the next
+dependency-ready stress row.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

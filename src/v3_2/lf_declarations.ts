@@ -4,8 +4,10 @@
  * Definitions are layered over the existing declaration/checker environment
  * instead of changing the frozen MVP declaration representation. A body is
  * checked in the preceding environment, so every free dependency has a
- * strictly smaller declaration ordinal and the initial delta fragment is
- * acyclic by construction.
+ * strictly smaller declaration ordinal. Transparent equations for intrinsic
+ * owners additionally pass an explicit dependency-graph cycle check because
+ * transfer slices may discover a source-prior owner equation after already
+ * checked declarations that mentioned the then-opaque owner.
  */
 
 import {
@@ -30,8 +32,14 @@ import {
     CoreLfEvaluationError
 } from './lf';
 import {
+    CoreOwnerId
+} from './schema';
+import {
     CoreElaborationSession
 } from './session';
+import {
+    coreOwnerSignatureType
+} from './signature';
 
 export type CoreLfTransparency = 'opaque' | 'transparent';
 
@@ -53,6 +61,43 @@ export interface CoreLfDeclaration extends CoreBindingInput {
      * Distinct free names in first-occurrence order across the checked body.
      */
     readonly bodyDependencies: readonly string[];
+    /**
+     * Distinct semantic owners in first-occurrence order across the body.
+     *
+     * These are recorded even while an owner remains opaque. If that owner is
+     * later given a transparent intrinsic definition, the completed
+     * transparent dependency graph is checked for cycles.
+     */
+    readonly bodyOwnerDependencies: readonly CoreOwnerId[];
+}
+
+export interface CoreLfIntrinsicDefinitionInput {
+    readonly owner: CoreOwnerId;
+    readonly body: KernelExpression;
+    readonly provenance: Provenance;
+    /**
+     * Stable source-facing name used only in delta traces and diagnostics.
+     */
+    readonly declarationName?: string;
+}
+
+/**
+ * A checked transparent equation for an existing semantic Core owner.
+ *
+ * The owner keeps its backend-neutral identity and built-in signature. This
+ * parallel entry supplies only the candidate LF delta body; it never shadows
+ * the owner with a free declaration.
+ */
+export interface CoreLfIntrinsicDefinition {
+    readonly owner: CoreOwnerId;
+    readonly declarationName: string;
+    readonly type: KernelExpression;
+    readonly body: KernelExpression;
+    readonly transparency: 'transparent';
+    readonly provenance: Provenance;
+    readonly ordinal: number;
+    readonly bodyDependencies: readonly string[];
+    readonly ownerDependencies: readonly CoreOwnerId[];
 }
 
 /**
@@ -85,6 +130,8 @@ export type CoreLfDeclarationErrorCode =
     | 'INVALID_DECLARATION_TYPE'
     | 'SELF_REFERENCE'
     | 'UNBOUND_BODY_REFERENCE'
+    | 'DUPLICATE_INTRINSIC_DEFINITION'
+    | 'CYCLIC_INTRINSIC_DEFINITION'
     | 'INVALID_DEFINITION_BODY';
 
 export class CoreLfDeclarationError extends Error {
@@ -142,8 +189,146 @@ const collectFreeReferences = (
     return Object.freeze(references);
 };
 
+const collectOwnerDependencies = (
+    expression: KernelExpression
+): readonly CoreOwnerId[] => {
+    const owners: CoreOwnerId[] = [];
+    const seen = new Set<CoreOwnerId>();
+
+    const visit = (current: KernelExpression): void => {
+        switch (current.tag) {
+            case 'universe':
+            case 'reference':
+            case 'bound':
+                return;
+            case 'meta':
+                current.spine.forEach(visit);
+                return;
+            case 'application':
+                if (!seen.has(current.owner)) {
+                    seen.add(current.owner);
+                    owners.push(current.owner);
+                }
+                current.arguments.forEach(argument => visit(argument.value));
+                return;
+            case 'call':
+                visit(current.callee);
+                current.arguments.forEach(argument => visit(argument.value));
+                return;
+            case 'pi':
+            case 'lambda':
+                visit(current.binder.type);
+                visit(current.body);
+                return;
+            default: {
+                const exhaustive: never = current;
+                return exhaustive;
+            }
+        }
+    };
+
+    visit(expression);
+    return Object.freeze(owners);
+};
+
 const errorText = (error: unknown): string =>
     error instanceof Error ? error.message : String(error);
+
+interface CoreLfDeltaDependencyNode {
+    readonly id: string;
+    readonly label: string;
+    readonly freeDependencies: readonly string[];
+    readonly ownerDependencies: readonly CoreOwnerId[];
+}
+
+const freeDeltaNodeId = (name: string): string => `free:${name}`;
+const ownerDeltaNodeId = (owner: CoreOwnerId): string => `owner:${owner}`;
+
+/**
+ * Return the first deterministic transparent-delta cycle, if any.
+ */
+const coreLfDeltaDependencyCycle = (
+    declarations: readonly CoreLfDeclaration[],
+    intrinsicDefinitions: readonly CoreLfIntrinsicDefinition[]
+): readonly string[] | undefined => {
+    const transparentFree = declarations.filter(declaration =>
+        declaration.transparency === 'transparent' &&
+        declaration.body !== undefined
+    );
+    const freeIds = new Set(
+        transparentFree.map(declaration =>
+            freeDeltaNodeId(declaration.name)
+        )
+    );
+    const ownerIds = new Set(
+        intrinsicDefinitions.map(definition =>
+            ownerDeltaNodeId(definition.owner)
+        )
+    );
+    const nodes = new Map<string, CoreLfDeltaDependencyNode>();
+
+    transparentFree.forEach(declaration => {
+        const id = freeDeltaNodeId(declaration.name);
+        nodes.set(id, {
+            id,
+            label: declaration.name,
+            freeDependencies: declaration.bodyDependencies,
+            ownerDependencies: declaration.bodyOwnerDependencies
+        });
+    });
+    intrinsicDefinitions.forEach(definition => {
+        const id = ownerDeltaNodeId(definition.owner);
+        nodes.set(id, {
+            id,
+            label: definition.declarationName,
+            freeDependencies: definition.bodyDependencies,
+            ownerDependencies: definition.ownerDependencies
+        });
+    });
+
+    const edges = (
+        node: CoreLfDeltaDependencyNode
+    ): readonly string[] => [
+        ...node.freeDependencies
+            .map(freeDeltaNodeId)
+            .filter(id => freeIds.has(id)),
+        ...node.ownerDependencies
+            .map(ownerDeltaNodeId)
+            .filter(id => ownerIds.has(id))
+    ];
+    const active = new Set<string>();
+    const complete = new Set<string>();
+    const stack: string[] = [];
+
+    const visit = (id: string): readonly string[] | undefined => {
+        if (complete.has(id)) return undefined;
+        if (active.has(id)) {
+            const start = stack.indexOf(id);
+            return Object.freeze([
+                ...stack.slice(start),
+                id
+            ].map(item => nodes.get(item)?.label ?? item));
+        }
+        const node = nodes.get(id);
+        if (node === undefined) return undefined;
+        active.add(id);
+        stack.push(id);
+        for (const dependency of edges(node)) {
+            const cycle = visit(dependency);
+            if (cycle !== undefined) return cycle;
+        }
+        stack.pop();
+        active.delete(id);
+        complete.add(id);
+        return undefined;
+    };
+
+    for (const id of nodes.keys()) {
+        const cycle = visit(id);
+        if (cycle !== undefined) return cycle;
+    }
+    return undefined;
+};
 
 /**
  * Persistent candidate definition environment.
@@ -155,18 +340,31 @@ const errorText = (error: unknown): string =>
 export class CoreLfDeclarationEnvironment {
     private readonly declarationMap:
         ReadonlyMap<string, CoreLfDeclaration>;
+    private readonly intrinsicDefinitionMap:
+        ReadonlyMap<CoreOwnerId, CoreLfIntrinsicDefinition>;
 
     private constructor(
         public readonly coreEnvironment: CoreDeclarationEnvironment,
         public readonly declarations: readonly CoreLfDeclaration[],
+        public readonly intrinsicDefinitions:
+            readonly CoreLfIntrinsicDefinition[],
         private readonly checkerFactory:
             CoreLfDeclarationCheckerFactory
     ) {
         this.declarations = Object.freeze([...declarations]);
+        this.intrinsicDefinitions = Object.freeze([
+            ...intrinsicDefinitions
+        ]);
         this.declarationMap = new Map(
             this.declarations.map(declaration => [
                 declaration.name,
                 declaration
+            ])
+        );
+        this.intrinsicDefinitionMap = new Map(
+            this.intrinsicDefinitions.map(definition => [
+                definition.owner,
+                definition
             ])
         );
         Object.freeze(this);
@@ -176,12 +374,19 @@ export class CoreLfDeclarationEnvironment {
         return new CoreLfDeclarationEnvironment(
             CoreDeclarationEnvironment.empty(),
             [],
+            [],
             defaultCoreLfDeclarationCheckerFactory
         );
     }
 
     lookup(name: string): CoreLfDeclaration | undefined {
         return this.declarationMap.get(name);
+    }
+
+    lookupIntrinsicDefinition(
+        owner: CoreOwnerId
+    ): CoreLfIntrinsicDefinition | undefined {
+        return this.intrinsicDefinitionMap.get(owner);
     }
 
     extend(
@@ -259,6 +464,8 @@ export class CoreLfDeclarationEnvironment {
 
         let checkedBody: KernelExpression | undefined;
         let bodyDependencies: readonly string[] = Object.freeze([]);
+        let bodyOwnerDependencies: readonly CoreOwnerId[] =
+            Object.freeze([]);
         if (input.body !== undefined) {
             const references = collectFreeReferences(input.body);
             for (const reference of references) {
@@ -282,6 +489,7 @@ export class CoreLfDeclarationEnvironment {
             bodyDependencies = Object.freeze(
                 references.map(reference => reference.name)
             );
+            bodyOwnerDependencies = collectOwnerDependencies(input.body);
 
             try {
                 const bodyChecker = checkerFactory(
@@ -338,12 +546,137 @@ export class CoreLfDeclarationEnvironment {
             reference: coreDeclaration.reference,
             body: checkedBody,
             transparency,
-            ordinal: this.declarations.length,
-            bodyDependencies
+            ordinal:
+                this.declarations.length +
+                this.intrinsicDefinitions.length,
+            bodyDependencies,
+            bodyOwnerDependencies
         });
         return new CoreLfDeclarationEnvironment(
             nextCoreEnvironment,
             [...this.declarations, declaration],
+            this.intrinsicDefinitions,
+            checkerFactory
+        );
+    }
+
+    /**
+     * Install a checked transparent body for an existing semantic owner.
+     *
+     * Free references must already exist. Owner references may have been
+     * checked while this owner was opaque, so installation validates the
+     * complete transparent dependency graph and rejects any resulting cycle.
+     */
+    extendIntrinsicDefinition(
+        input: CoreLfIntrinsicDefinitionInput,
+        checkerFactory: CoreLfDeclarationCheckerFactory =
+            this.checkerFactory
+    ): CoreLfDeclarationEnvironment {
+        if (this.intrinsicDefinitionMap.has(input.owner)) {
+            throw new CoreLfDeclarationError(
+                'DUPLICATE_INTRINSIC_DEFINITION',
+                input.provenance,
+                `Core LF owner '${input.owner}' already has a transparent ` +
+                    'intrinsic definition'
+            );
+        }
+
+        const references = collectFreeReferences(input.body);
+        for (const reference of references) {
+            if (!this.declarationMap.has(reference.name)) {
+                throw new CoreLfDeclarationError(
+                    'UNBOUND_BODY_REFERENCE',
+                    reference.provenance,
+                    `Core LF intrinsic definition '${input.owner}' refers ` +
+                        `to non-earlier declaration '${reference.name}'`
+                );
+            }
+        }
+        const ownerDependencies =
+            collectOwnerDependencies(input.body);
+        if (ownerDependencies.includes(input.owner)) {
+            throw new CoreLfDeclarationError(
+                'SELF_REFERENCE',
+                input.body.provenance,
+                `Core LF intrinsic definition '${input.owner}' refers to ` +
+                    'its own semantic owner'
+            );
+        }
+
+        const type = coreOwnerSignatureType(
+            input.owner,
+            input.provenance
+        );
+        let checkedBody: KernelExpression;
+        try {
+            const bodyChecker = checkerFactory(
+                this.coreEnvironment,
+                {
+                    phase: 'definition-body',
+                    lfEnvironment: this
+                }
+            );
+            if (
+                bodyChecker.rootContext.environment !==
+                this.coreEnvironment
+            ) {
+                throw new CoreLfDeclarationError(
+                    'INVALID_DEFINITION_BODY',
+                    input.body.provenance,
+                    `Checker factory for intrinsic Core LF definition ` +
+                        `'${input.owner}' returned a checker for a foreign ` +
+                        'declaration environment'
+                );
+            }
+            checkedBody = bodyChecker.check(
+                bodyChecker.rootContext,
+                input.body,
+                type
+            ).term;
+        } catch (error: unknown) {
+            const underlying = error instanceof Error ? error : undefined;
+            throw new CoreLfDeclarationError(
+                'INVALID_DEFINITION_BODY',
+                input.body.provenance,
+                `Invalid body for intrinsic Core LF definition ` +
+                    `'${input.owner}': ${errorText(error)}`,
+                underlying
+            );
+        }
+
+        const checkedReferences = collectFreeReferences(checkedBody);
+        const definition: CoreLfIntrinsicDefinition = Object.freeze({
+            owner: input.owner,
+            declarationName:
+                input.declarationName ?? `@core-owner:${input.owner}`,
+            type,
+            body: checkedBody,
+            transparency: 'transparent',
+            provenance: input.provenance,
+            ordinal:
+                this.declarations.length +
+                this.intrinsicDefinitions.length,
+            bodyDependencies: Object.freeze(
+                checkedReferences.map(reference => reference.name)
+            ),
+            ownerDependencies: collectOwnerDependencies(checkedBody)
+        });
+        const cycle = coreLfDeltaDependencyCycle(
+            this.declarations,
+            [...this.intrinsicDefinitions, definition]
+        );
+        if (cycle !== undefined) {
+            throw new CoreLfDeclarationError(
+                'CYCLIC_INTRINSIC_DEFINITION',
+                input.provenance,
+                `Core LF intrinsic definition '${input.owner}' creates ` +
+                    `transparent delta cycle ${cycle.join(' -> ')}`
+            );
+        }
+        return new CoreLfDeclarationEnvironment(
+            this.coreEnvironment,
+            this.declarations,
+            [...this.intrinsicDefinitions, definition],
             checkerFactory
         );
     }
@@ -462,6 +795,46 @@ export function coreLfDeltaReduceHead(
             reason: 'empty-call'
         });
     }
+    if (spine.head.tag === 'application') {
+        const definition = environment.lookupIntrinsicDefinition(
+            spine.head.owner
+        );
+        if (definition === undefined) {
+            return Object.freeze({
+                status: 'irreducible',
+                expression,
+                head: spine.head,
+                reason: 'not-a-reference-head'
+            });
+        }
+        const arguments_ = [
+            ...spine.head.arguments,
+            ...spine.arguments
+        ];
+        const after = arguments_.length === 0
+            ? definition.body
+            : kernelCall(
+                definition.body,
+                arguments_.map(argument => ({
+                    plicity: argument.plicity,
+                    value: argument.value,
+                    provenance: argument.provenance
+                })),
+                provenance(
+                    'derived',
+                    `outer LF delta unfolding ` +
+                        `${definition.declarationName}`,
+                    expression.provenance.span
+                )
+            );
+        return Object.freeze({
+            status: 'unfolded',
+            before: expression,
+            after,
+            declarationName: definition.declarationName,
+            declarationOrdinal: definition.ordinal
+        });
+    }
     if (spine.head.tag !== 'reference') {
         return Object.freeze({
             status: 'irreducible',
@@ -527,8 +900,9 @@ const frozenDeltaTrace = (
 
 /**
  * Repeatedly unfold only transparent weak-head definitions under a finite
- * step bound. Earlier-only body dependencies give delta-only chains a strict
- * ordinal decrease; the explicit bound remains part of the candidate API.
+ * step bound. Free-only chains decrease declaration ordinals, while
+ * intrinsic-owner equations are admitted only after a transparent dependency
+ * graph cycle check. The explicit global bound remains part of the API.
  */
 export function coreLfDeltaWeakHead(
     environment: CoreLfDeclarationEnvironment,

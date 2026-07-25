@@ -11,7 +11,7 @@ import {
     CORE_LF_SCALE_STRESS_3A2A_BOUNDARY,
     CORE_LF_SCALE_STRESS_3A2A_LINKAGE,
     CORE_LF_SCALE_STRESS_3A2A_MODULE,
-    CORE_LF_SCALE_STRESS_3A2A_OWNER_FOLDS,
+    CORE_LF_SCALE_STRESS_3A2A_INTRINSIC_DEFINITIONS,
     CORE_LF_SCALE_STRESS_3A2A_PLAN,
     CORE_LF_SCALE_STRESS_3A2A_POLICY,
     CORE_LF_SCALE_STRESS_3A2A_SYMBOLS,
@@ -77,7 +77,7 @@ const freeDeclarationName = (
 describe(
     'TypeScript v3.2 SCALE-STRESS-3A2A profunctor comparison action',
     () => {
-        it('pins source order, policy, owner fold, and mixed phases', () => {
+        it('pins source order, policy, intrinsic delta, and mixed phases', () => {
             const contract =
                 CORE_LF_SCALE_STRESS_3_PROFUNCTOR_COMPARISON_ACQUISITION;
             assert.deepEqual(
@@ -89,6 +89,7 @@ describe(
                     declaration => declaration.symbol.name
                 ),
                 [
+                    'Hom',
                     'id',
                     'id_func',
                     'hom_postcomp_fapp0',
@@ -104,6 +105,7 @@ describe(
                     entry => entry.policy
                 ),
                 [
+                    'checked-transparent-definition',
                     'opaque-signature',
                     'checked-transparent-definition',
                     'runtime-rewrite',
@@ -122,6 +124,7 @@ describe(
                 [
                     'declaration',
                     'declaration',
+                    'declaration',
                     'runtime',
                     'declaration',
                     'declaration',
@@ -132,15 +135,17 @@ describe(
                 ]
             );
             assert.deepEqual(
-                CORE_LF_SCALE_STRESS_3A2A_OWNER_FOLDS.map(fold => [
-                    fold.acquisitionId,
-                    fold.sourceSymbol.name,
-                    fold.targetOwner,
-                    fold.sourceDependencies.map(
-                        dependency => dependency.name
-                    ),
-                    fold.consumer.name
-                ]),
+                CORE_LF_SCALE_STRESS_3A2A_INTRINSIC_DEFINITIONS.map(
+                    definition => [
+                        definition.acquisitionId,
+                        definition.sourceSymbol.name,
+                        definition.targetOwner,
+                        definition.sourceDependencies.map(
+                            dependency => dependency.name
+                        ),
+                        definition.consumer.name
+                    ]
+                ),
                 [[
                     'profunctor-comparison.hom-classifier',
                     'Hom',
@@ -159,7 +164,7 @@ describe(
                 CORE_LF_SCALE_STRESS_3A2A_POLICY,
                 CORE_LF_SCALE_STRESS_3A2A_PLAN,
                 CORE_LF_SCALE_STRESS_3A2A_LINKAGE,
-                CORE_LF_SCALE_STRESS_3A2A_OWNER_FOLDS,
+                CORE_LF_SCALE_STRESS_3A2A_INTRINSIC_DEFINITIONS,
                 CORE_LF_SCALE_STRESS_3A2A_BOUNDARY
             ].forEach(assertDeepFrozen);
         });
@@ -178,6 +183,7 @@ describe(
                     declaration.status
                 ]),
                 [
+                    ['Hom', 'intrinsic-transparent'],
                     ['id', 'installed-opaque'],
                     ['id_func', 'installed-transparent'],
                     ['hom_postcomp_fapp0', 'installed-opaque'],
@@ -260,6 +266,43 @@ describe(
                         )
                 ),
                 true
+            );
+
+            const homBody = kernelApplication(
+                'object-classifier',
+                [{
+                    value: kernelApplication(
+                        'hom-category',
+                        [
+                            { value: base },
+                            { value: P },
+                            { value: Q }
+                        ],
+                        source
+                    )
+                }],
+                source
+            );
+            const intrinsicHom = coreLfDefinitionalCompare(
+                compiled.declarations.environment,
+                foldedHom,
+                homBody,
+                8,
+                undefined,
+                compiled.latestRuntime?.runtime
+            );
+            assert.equal(intrinsicHom.status, 'equal');
+            assert.deepEqual(
+                intrinsicHom.trace.map(
+                    entry => entry.reduction.kind
+                ),
+                ['delta', 'beta', 'beta', 'beta']
+            );
+            assert.equal(
+                intrinsicHom.trace[0].reduction.kind === 'delta'
+                    ? intrinsicHom.trace[0].reduction.declarationName
+                    : undefined,
+                'emdash.emdash3_2.Hom'
             );
 
             const identityFunctor = kernelCall(
@@ -528,7 +571,8 @@ describe(
                 )
             );
             assert.ok(authorityText.includes(
-                CORE_LF_SCALE_STRESS_3A2A_OWNER_FOLDS[0].sourceBody
+                CORE_LF_SCALE_STRESS_3A2A_INTRINSIC_DEFINITIONS[0]
+                    .sourceBody
             ));
 
             const genericSources = [

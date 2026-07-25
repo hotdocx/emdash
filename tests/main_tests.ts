@@ -70,6 +70,7 @@ import './v3_2_scale_stress_2b2_representation_tests';
 import './v3_2_scale_stress_2b3_representation_tests';
 import './v3_2_scale_stress_3a1_representation_tests';
 import './v3_2_scale_stress_3a2a_representation_tests';
+import './v3_2_scale_stress_3a2b_representation_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,

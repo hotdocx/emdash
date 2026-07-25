@@ -83,11 +83,11 @@ CoreLfCanonicalSelectionContract =
 /**
  * Checked source/export selection for the comparison push/pull action.
  *
- * The transparent Hom declaration is exact fold evidence for its existing
- * semantic Core owner. The identity-arrow/functor declarations and object
- * rule are the exact source-prior computation needed to check the two
- * transparent comparison bodies. Tensor/product action is deliberately not
- * selected by this contract.
+ * The transparent Hom declaration supplies the exact checked delta body for
+ * its existing semantic Core owner. The identity-arrow/functor declarations
+ * and object rule are the exact source-prior computation needed to check the
+ * two transparent comparison bodies. Tensor/product action is deliberately
+ * not selected by this contract.
  */
 export const CORE_LF_SCALE_STRESS_3_PROFUNCTOR_COMPARISON_ACQUISITION:
 CoreLfCanonicalSelectionContract =
@@ -202,6 +202,134 @@ CoreLfCanonicalSelectionContract =
                 name: 'prof_comparison_pull',
                 modifiers: [],
                 hasBody: true
+            }
+        ]
+    });
+
+/**
+ * Checked source/export selection for product closure and fixed-endpoint
+ * profunctor tensor action.
+ *
+ * The six declarations and five runtime clauses are the smallest audited
+ * closure that types both tensor-functor action rules. Product objects decode
+ * through constant-family dependent pairs, while product homs expose the
+ * component pair required by the capped arrow action.
+ */
+export const CORE_LF_SCALE_STRESS_3_PROFUNCTOR_TENSOR_ACTION_ACQUISITION:
+CoreLfCanonicalSelectionContract =
+    createCoreLfCanonicalSelectionContract({
+        revision:
+            'SCALE-STRESS-3-PROFUNCTOR-TENSOR-ACTION-ACQUISITION-1',
+        moduleId: 'emdash.emdash3_2',
+        authorityPath: 'emdash2/emdash3_2.lp',
+        sourceSha256:
+            'sha256:f438985ca874f1037e9a63b597e58883d0c0fcc86434117a125297592739c613',
+        canonicalExport: {
+            exporterVersion: '3.0.0-90-gdb4f780',
+            sha256:
+                'sha256:355bd868c33553e0c7488a181d7c58661471fc2c878e63d5ceba296d26c056a0',
+            imports: []
+        },
+        commands: [
+            {
+                id: 'profunctor-tensor.sigma-first',
+                ordinal: 59,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:687558ab761b3fa88e307027ee894fbc747d3991a566cf311ff19fd862f851f6',
+                name: 'sigma_Fst',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'profunctor-tensor.sigma-second',
+                ordinal: 61,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:7523d899bc0bbc2fd62cf6581f9e11bb5a86167cf351df3ee1d19e0db79b34de',
+                name: 'sigma_Snd',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'profunctor-tensor.product-groupoid',
+                ordinal: 184,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:9b31c0ca085b3a50e5fd6dac0afd1188ad6c80651b0401eb56fff9450bf3d081',
+                name: 'Product_grpd',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'profunctor-tensor.product-groupoid-decode',
+                ordinal: 185,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:0226d55b9f02c5015797c99e7ea8c787dc8ea9fa05cef89a538153dc9215ae8b'
+            },
+            {
+                id: 'profunctor-tensor.product-category',
+                ordinal: 661,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:be0837def124ded5873293c79e6281bd8eaf8e0c4ffaa79b8f04f5c2d0861163',
+                name: 'Product_cat',
+                modifiers: ['injective'],
+                hasBody: false
+            },
+            {
+                id: 'profunctor-tensor.product-object',
+                ordinal: 663,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:95f279aa966104a460c6c589dcaa7c31475f9d737762efcf254ebe2fb77f909d'
+            },
+            {
+                id: 'profunctor-tensor.product-hom-category',
+                ordinal: 680,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:a7bbf36dfd47ae5fa777d95ae7a40cd9dffb6ff0bb92e41b9df77b3cec5498a8'
+            },
+            {
+                id: 'profunctor-tensor.map',
+                ordinal: 1264,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:354de0e1299652c4b0102e5560a8a039fd7d1c336f64aa3a03a842b7bd3ee575',
+                name: 'Prof_tensor_map',
+                modifiers: [],
+                hasBody: false
+            },
+            {
+                id: 'profunctor-tensor.functor',
+                ordinal: 1265,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:77a7bc1e7a3cded3595c3c90b0791e6a1f0c021cc5910699461b7d232aca95ea',
+                name: 'Prof_tensor_func',
+                modifiers: [],
+                hasBody: false
+            },
+            {
+                id: 'profunctor-tensor.object-action',
+                ordinal: 1266,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:2c27c7e2c097e902a38e1dc52c0cedd78e34ae85124d0064e78151f41004ef5d'
+            },
+            {
+                id: 'profunctor-tensor.arrow-action',
+                ordinal: 1267,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:b297848e827597af12c5e0c0e0e85059b8183da0d6ce20bbf9671beae92d4c8f'
             }
         ]
     });

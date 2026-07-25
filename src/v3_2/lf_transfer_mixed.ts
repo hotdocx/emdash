@@ -816,6 +816,16 @@ const sameDeclarationLink = (
     return false;
 };
 
+const isIntrinsicDefinitionRefinement = (
+    previous: CoreLfCompiledDeclaration,
+    next: CoreLfCompiledDeclaration
+): boolean =>
+    previous.status === 'intrinsic-conformance' &&
+    next.status === 'intrinsic-transparent' &&
+    previous.link.kind === 'core-owner' &&
+    next.link.kind === 'core-owner' &&
+    sameDeclarationLink(previous.link, next.link);
+
 /**
  * Preserve module-level external linkage for later runtime/proof phases.
  *
@@ -941,9 +951,15 @@ implements CoreLfMixedDeclarationBaseContext {
         this.modules.forEach((module, moduleIndex) => {
             module.declarations.forEach((declaration, declarationIndex) => {
                 const key = symbolKey(declaration.symbol);
+                const previous =
+                    bySymbol.get(key) ??
+                    base.declaration(declaration.symbol);
                 if (
-                    bySymbol.has(key) ||
-                    base.declaration(declaration.symbol) !== undefined
+                    previous !== undefined &&
+                    !isIntrinsicDefinitionRefinement(
+                        previous,
+                        declaration
+                    )
                 ) {
                     fail(
                         'INVALID_INITIAL_DECLARATIONS',

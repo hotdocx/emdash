@@ -292,6 +292,178 @@ describe('TypeScript v3.2 DTTLF LF-1B checked definitions and delta', () => {
         );
     });
 
+    it('checks and unfolds intrinsic owner definitions without shadowing owners', () => {
+        const source = because(
+            35,
+            'LF-1B intrinsic opposite-category definition'
+        );
+        const body = categoryIdentityBody(35);
+        const environment =
+            CoreLfDeclarationEnvironment.empty()
+                .extendIntrinsicDefinition({
+                    owner: 'opposite-category',
+                    body,
+                    provenance: source,
+                    declarationName: 'fixture.Opp'
+                });
+
+        assert.deepEqual(environment.declarations, []);
+        assert.equal(environment.intrinsicDefinitions.length, 1);
+        assert.deepEqual(
+            environment.lookupIntrinsicDefinition(
+                'opposite-category'
+            )?.ownerDependencies,
+            ['category-universe']
+        );
+        assert.equal(
+            environment.lookupIntrinsicDefinition(
+                'opposite-category'
+            )?.ordinal,
+            0
+        );
+
+        const argument = free('lf_intrinsic_A', 36);
+        const redex = kernelApplication(
+            'opposite-category',
+            [{ value: argument }],
+            because(36, 'LF-1B intrinsic owner redex')
+        );
+        const delta = coreLfDeltaWeakHead(environment, redex, 1);
+        assert.equal(delta.status, 'weak-head-normal');
+        assert.equal(delta.steps, 1);
+        assert.deepEqual(
+            delta.trace.map(entry => [
+                entry.declarationName,
+                entry.declarationOrdinal
+            ]),
+            [['fixture.Opp', 0]]
+        );
+        assert.equal(delta.expression.tag, 'call');
+        if (delta.expression.tag !== 'call') {
+            throw new Error('Expected intrinsic delta to preserve arguments');
+        }
+        const beta = coreLfBetaWeakHead(delta.expression, 1);
+        assert.equal(beta.status, 'weak-head-normal');
+        assert.equal(
+            kernelExpressionEquals(beta.expression, argument),
+            true
+        );
+
+        assert.throws(
+            () => environment.extendIntrinsicDefinition({
+                owner: 'opposite-category',
+                body,
+                provenance: source
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreLfDeclarationError);
+                assert.equal(
+                    error.code,
+                    'DUPLICATE_INTRINSIC_DEFINITION'
+                );
+                return true;
+            }
+        );
+    });
+
+    it('rejects self and cyclic intrinsic delta dependencies', () => {
+        const source = because(37, 'LF-1B intrinsic delta ordering');
+        const selfBody = kernelLambda(
+            kernelBinder(
+                'A',
+                categoryUniverse(37),
+                explicitFunctorial,
+                source
+            ),
+            kernelApplication(
+                'opposite-category',
+                [{
+                    value: kernelBound(
+                        0,
+                        because(37, 'LF-1B intrinsic self argument')
+                    )
+                }],
+                source
+            ),
+            source
+        );
+        assert.throws(
+            () => CoreLfDeclarationEnvironment.empty()
+                .extendIntrinsicDefinition({
+                    owner: 'opposite-category',
+                    body: selfBody,
+                    provenance: source
+                }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreLfDeclarationError);
+                assert.equal(error.code, 'SELF_REFERENCE');
+                return true;
+            }
+        );
+
+        const withA = categoryAssumption(
+            CoreLfDeclarationEnvironment.empty(),
+            'lf_intrinsic_order_A',
+            38
+        );
+        const prior = withA.extend(declaration(
+            'lf_intrinsic_order_prior',
+            categoryUniverse(38),
+            38,
+            {
+                body: kernelApplication(
+                    'opposite-category',
+                    [{ value: free('lf_intrinsic_order_A', 38) }],
+                    source
+                ),
+                transparency: 'transparent'
+            }
+        ));
+        assert.deepEqual(
+            prior.lookup(
+                'lf_intrinsic_order_prior'
+            )?.bodyOwnerDependencies,
+            ['opposite-category']
+        );
+        const acyclic = prior.extendIntrinsicDefinition({
+            owner: 'opposite-category',
+            body: categoryIdentityBody(39),
+            provenance: source
+        });
+        assert.equal(
+            acyclic.lookupIntrinsicDefinition(
+                'opposite-category'
+            )?.owner,
+            'opposite-category'
+        );
+
+        const cyclicBody = kernelLambda(
+            kernelBinder(
+                'A',
+                categoryUniverse(40),
+                explicitFunctorial,
+                source
+            ),
+            free('lf_intrinsic_order_prior', 40),
+            source
+        );
+        assert.throws(
+            () => prior.extendIntrinsicDefinition({
+                owner: 'opposite-category',
+                body: cyclicBody,
+                provenance: source
+            }),
+            (error: unknown) => {
+                assert.ok(error instanceof CoreLfDeclarationError);
+                assert.equal(
+                    error.code,
+                    'CYCLIC_INTRINSIC_DEFINITION'
+                );
+                return true;
+            }
+        );
+    });
+
     it('unfolds transparent heads while keeping opaque and assumed names closed', () => {
         const withA = categoryAssumption(
             CoreLfDeclarationEnvironment.empty(),

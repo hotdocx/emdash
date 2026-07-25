@@ -126,6 +126,7 @@ export class CoreLfDeclarationCompilerError extends Error {
 
 export type CoreLfCompiledDeclarationStatus =
     | 'intrinsic-conformance'
+    | 'intrinsic-transparent'
     | 'installed-opaque'
     | 'installed-transparent'
     | 'installed-theorem'
@@ -773,7 +774,8 @@ const policyMap = (
 };
 
 const compilerStatus = (
-    policy: CoreLfTransferPolicyClass
+    policy: CoreLfTransferPolicyClass,
+    link: CoreLfTransferDeclarationLink
 ): CoreLfCompiledDeclarationStatus => {
     switch (policy) {
         case 'conformance-only':
@@ -781,7 +783,9 @@ const compilerStatus = (
         case 'opaque-signature':
             return 'installed-opaque';
         case 'checked-transparent-definition':
-            return 'installed-transparent';
+            return link.kind === 'core-owner'
+                ? 'intrinsic-transparent'
+                : 'installed-transparent';
         case 'theorem-body':
             return 'installed-theorem';
         case 'excluded':
@@ -834,7 +838,6 @@ const assertPolicyBody = (
             return;
         case 'checked-transparent-definition':
             if (
-                link.kind !== 'free-declaration' ||
                 declaration.body.kind !== 'explicit-term' ||
                 declaration.modifiers.sourceOpacity !== 'transparent'
             ) {
@@ -842,7 +845,8 @@ const assertPolicyBody = (
                     'INCOMPATIBLE_POLICY',
                     path,
                     'Checked transparent definitions require a transparent ' +
-                        'explicit term and a free-declaration link'
+                        'explicit term and a Core-owner or free-declaration ' +
+                        'link'
                 );
             }
             return;
@@ -976,6 +980,7 @@ export class CoreLfCompiledDeclarationModule {
         const installed = this.declarations.filter(
             declaration =>
                 declaration.status !== 'intrinsic-conformance' &&
+                declaration.status !== 'intrinsic-transparent' &&
                 declaration.status !== 'excluded'
         );
         if (
@@ -1024,6 +1029,42 @@ export class CoreLfCompiledDeclarationModule {
                 );
             }
         });
+        this.declarations
+            .filter(declaration =>
+                declaration.status === 'intrinsic-transparent'
+            )
+            .forEach(declaration => {
+                const link = declaration.link;
+                if (link.kind !== 'core-owner') {
+                    return fail(
+                        'FOREIGN_DECLARATION_ENVIRONMENT',
+                        'environment.intrinsicDefinitions',
+                        'Intrinsic transparent declaration has a non-owner ' +
+                            'linkage'
+                    );
+                }
+                const actual =
+                    environment.lookupIntrinsicDefinition(link.owner);
+                if (
+                    actual === undefined ||
+                    !kernelExpressionEquals(
+                        actual.type,
+                        declaration.type
+                    ) ||
+                    declaration.body === undefined ||
+                    !kernelExpressionEquals(
+                        actual.body,
+                        declaration.body
+                    )
+                ) {
+                    fail(
+                        'FOREIGN_DECLARATION_ENVIRONMENT',
+                        'environment.intrinsicDefinitions',
+                        `Environment does not preserve intrinsic definition ` +
+                            `'${displaySymbol(declaration.symbol)}'`
+                    );
+                }
+            });
     }
 
     createChecker(
@@ -1183,13 +1224,16 @@ export function compileCoreLfDeclarations(
             : undefined;
         if (body !== undefined) kernelAssertScoped(body);
 
-        const status = compilerStatus(selectedPolicy);
+        const status = compilerStatus(selectedPolicy, link);
         const nodeProvenance = expressionProvenance(
             declaration,
             'declaration'
         );
         if (
-            status === 'intrinsic-conformance' &&
+            (
+                status === 'intrinsic-conformance' ||
+                status === 'intrinsic-transparent'
+            ) &&
             link.kind === 'core-owner'
         ) {
             const expected = coreOwnerSignatureType(
@@ -1203,6 +1247,34 @@ export function compileCoreLfDeclarations(
                     `Transferred signature for intrinsic owner ` +
                         `'${link.owner}' differs from its Core schema`
                 );
+            }
+            if (status === 'intrinsic-transparent') {
+                if (body === undefined) {
+                    return fail(
+                        'DECLARATION_CHECK_FAILED',
+                        path,
+                        `Intrinsic transparent declaration ` +
+                            `'${displaySymbol(declaration.symbol)}' has no body`
+                    );
+                }
+                try {
+                    environment = environment.extendIntrinsicDefinition({
+                        owner: link.owner,
+                        body,
+                        provenance: nodeProvenance,
+                        declarationName:
+                            displaySymbol(declaration.symbol)
+                    }, checkerFactory);
+                } catch (error: unknown) {
+                    return fail(
+                        'DECLARATION_CHECK_FAILED',
+                        path,
+                        `Failed to check transferred intrinsic definition ` +
+                            `'${displaySymbol(declaration.symbol)}': ` +
+                            errorText(error),
+                        error instanceof Error ? error : undefined
+                    );
+                }
             }
         } else if (
             status !== 'excluded' &&

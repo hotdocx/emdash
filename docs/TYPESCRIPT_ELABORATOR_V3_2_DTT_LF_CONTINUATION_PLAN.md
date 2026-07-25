@@ -60,9 +60,13 @@ displayed-transfor uncurrying, completing the selected SCALE-STRESS-2/2B
 representation parent; SCALE-STRESS-3 is split by mechanism and in progress,
 with SCALE-STRESS-3A1 completing the exact transparent
 `Prof`/`ProfComparison` versus opaque `DefIso`/`Prof_cat`/`Prof_tensor`
-declaration boundary and SCALE-STRESS-3A2A compiling `ProfMap`,
-comparison push/pull, and identity action after closing the generic nested
-congruence retry; SCALE-STRESS-3A2B is next for product/tensor action
+declaration boundary; SCALE-STRESS-3A2A compiling `ProfMap`, comparison
+push/pull, and identity action after closing the generic nested-congruence
+retry; generic SCALE-INTRINSIC-DELTA-1 checking and unfolding transparent
+definitions attached to existing Core owners; and SCALE-STRESS-3A2B
+executing the exact product/projection plus tensor object/capped-arrow action
+without an oracle. The representation-only SCALE-STRESS-3A2 parent is
+complete, and SCALE-STRESS-3B is the next dependency-ready stress row
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1471,17 +1475,34 @@ SCALE-STRESS-3A1 pins `DefIso`, `Prof_cat`, transparent `Prof`, transparent
 `ProfComparison`, and opaque `Prof_tensor`. The unchanged generic declaration
 compiler checks the non-contiguous delta dependency chain, and bounded
 TypeScript/Lambdapi opacity evidence agrees. It activates no profile or rule.
-SCALE-STRESS-3A2A then pins the exact active `Hom` fold, identity declaration
-and object rule, `ProfMap`, and comparison push/pull closure. It compiles
-eight declarations plus one rule after the reviewed continuation and keeps
-the transparent `Hom ≔ Obj(Hom_cat ...)` source equation as an immutable fold
-to the existing semantic owner. The slice also closes a generic comparison
-gap: a nested child may now normalize under initially mismatched rigid heads,
-rebuild its parent, and expose a head redex under the unchanged shared
-budget. Synthetic exhaustion and live TypeScript/Lambdapi action evidence
-pass without activating a profile or adding a semantic rule.
-SCALE-STRESS-3A2B is next for product/projection and tensor action; protected
-and proof-heavy extensions plus WalkingEnd/HIT remain SCALE-STRESS-3B/3C.
+SCALE-STRESS-3A2A then pins the exact active `Hom` equation, identity
+declaration and object rule, `ProfMap`, and comparison push/pull closure. It
+compiles one intrinsic-owner definition, eight free declarations, and one
+rule after the reviewed continuation. The slice also closes a generic
+comparison gap: a nested child may now normalize under initially mismatched
+rigid heads, rebuild its parent, and expose a head redex under the unchanged
+shared budget. Synthetic exhaustion and live TypeScript/Lambdapi action
+evidence pass without activating a profile or adding a semantic rule.
+
+The SCALE-STRESS-3A2B audit established that active
+`Hom ≔ Obj(Hom_cat ...)` must be a checked transparent definition of its
+existing semantic owner rather than only canonical fold evidence. Generic
+SCALE-INTRINSIC-DELTA-1 now checks exact intrinsic-owner signatures and
+bodies, stores no free shadow, rejects duplicate/self/transparent-graph
+cycles, permits only the exact conformance-to-definition mixed-context
+refinement, and delta-unfolds saturated owner applications under the existing
+shared bound. An unrelated owner fixture and active `Hom` exercise the same
+path.
+
+SCALE-STRESS-3A2B then pins six opaque declarations and five exact rules for
+dependent-pair projections, products, and fixed-endpoint tensor action.
+Product objects decode through a constant-family dependent pair; product homs
+reduce componentwise; and `Prof_tensor_func` object/capped-arrow action
+reduces through `Prof_tensor`/`Prof_tensor_map`. Every subject checks without
+an oracle, focused TypeScript reductions/non-reduction pass, and all fourteen
+bounded live profunctor tests agree with Lambdapi. The representation-only
+SCALE-STRESS-3A2 parent is complete. Protected/evidence extensions plus
+WalkingEnd/HIT remain SCALE-STRESS-3B/3C, with 3B next.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2598,12 +2619,23 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   comparison/tensor action remains SCALE-STRESS-3A2; protected/evidence
   extensions and WalkingEnd/HIT remain SCALE-STRESS-3B/3C.
 - **2026-07-25 — Profunctor comparison action represented.**
-  SCALE-STRESS-3A2A pins the exact `Hom` fold evidence, identity computation,
-  `ProfMap`, and comparison push/pull closure. Eight declarations and one
-  local rule compile after the reviewed continuation; the active transparent
-  `Hom` equation folds to its existing semantic owner. The generic
-  comparator now normalizes a nested descendant beneath mismatched rigid
-  heads, rebuilds, and retries the exposed parent redex under the same global
-  budget. Synthetic exhaustion and bounded live action evidence pass. No
-  active profile or new semantic rule was added; product/projection and
-  tensor action remain SCALE-STRESS-3A2B.
+  SCALE-STRESS-3A2A pins the exact active `Hom` equation, identity
+  computation, `ProfMap`, and comparison push/pull closure. One
+  intrinsic-owner definition, eight free declarations, and one local rule
+  compile after the reviewed continuation. The generic comparator normalizes
+  a nested descendant beneath mismatched rigid heads, rebuilds, and retries
+  the exposed parent redex under the same global budget. Synthetic exhaustion
+  and bounded live action evidence pass. The initial checkpoint retained
+  `Hom` only as canonical fold evidence; the following generic correction
+  replaces that representation without changing its owner or source command.
+- **2026-07-25 — Intrinsic delta and profunctor tensor action represented.**
+  SCALE-INTRINSIC-DELTA-1 checks and unfolds exact transparent definitions
+  attached to existing Core owners, stores no free shadow, rejects
+  transparent dependency cycles, and permits only exact
+  conformance-to-definition refinement. SCALE-STRESS-3A2B uses that generic
+  path for active `Hom`, then compiles six opaque declarations and five
+  product/tensor rules. Every subject checks without an oracle; product
+  decode and tensor object/capped-arrow action execute in TypeScript, and all
+  fourteen bounded live profunctor tests agree with Lambdapi. No active
+  profile or semantic owner was added. The representation-only
+  SCALE-STRESS-3A2 parent is complete; SCALE-STRESS-3B is next.
