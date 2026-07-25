@@ -29,8 +29,8 @@ did not require a full Lambdapi term parser as the architectural starting
 point, the user approved revised H-DTTLF-SCALE-01 on 2026-07-24.
 Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
-are complete; SCALE-RUNTIME-DEPS-1 is next and remains a required
-pre-stress/batch mechanism
+and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02 is triggered before
+semantic stress/batch work
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -432,7 +432,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-0C | complete | SCALE-0B | Generic declaration compiler plus policy overlay; reproduce the reviewed 29-signature continuation without owner-specific catalog construction |
 | SCALE-0D | complete | SCALE-0C | Generic typed runtime-rule compiler/matcher; migrate the ten reviewed rules equivalently before adding stress semantics |
 | SCALE-0E | complete | SCALE-0C | Separate typed proof-time `unif_rule` compiler and bounded comparison engine, informed by reusable generic algorithms on `main` |
-| SCALE-RUNTIME-DEPS-1 | pending | SCALE-0D | Compose immutable generic runtime fragments through explicit module/prior-fragment dependencies; qualify the mechanism without silently promoting the active `Const_catd` fibre rule or any other new semantic rule |
+| SCALE-RUNTIME-DEPS-1 | complete | SCALE-0D | Compose immutable generic runtime fragments through explicit module/prior-fragment dependencies; qualify the mechanism without silently promoting the active `Const_catd` fibre rule or any other new semantic rule |
 | SCALE-ACQUIRE-1 | deferred decision | SCALE-0C through SCALE-0E and representative encoding evidence | Decide whether bulk acquisition warrants a fail-closed canonical term/pattern parser/generator or a lighter checked extraction adapter; any adapter targets the same IR |
 | SCALE-STRESS-1 | pending | SCALE-0D, SCALE-RUNTIME-DEPS-1, applicable semantic review | Outer J, groupoidal Pi/Sigma, and imported Nat grouped-recursion cases |
 | SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
@@ -931,9 +931,90 @@ SCALE-0E completes the three generic local compiler/engine foundations only.
 Its rules are synthetic representation fixtures. The active
 `Obj(Hom_cat ...)` witness remains `conformance-only`; no active proof rule,
 runtime rule, profile, product API, parser, or all-61-rule claim was promoted.
-SCALE-RUNTIME-DEPS-1 is next. Once generic prior-runtime composition is
-qualified, H-DTTLF-SCALE-02 reviews this engine boundary before any semantic
-stress import.
+At the SCALE-0E checkpoint, SCALE-RUNTIME-DEPS-1 was next; its completion
+below triggers H-DTTLF-SCALE-02 before any semantic stress import.
+
+## SCALE-RUNTIME-DEPS-1 Completion Record
+
+SCALE-RUNTIME-DEPS-1 extends the generic runtime compiler with an explicit,
+immutable fragment-closure layer:
+
+- `CoreLfCompiledRuntimeProgram` remains one independently reviewable local
+  module/fragment program;
+- `CoreLfCompiledRuntimeFragment` retains that local program, its direct
+  dependency evidence, and its flattened executable closure; and
+- `CoreLfComposedRuntimeProgram` implements only the existing
+  `CoreLfCatalogRuntime` seam over a dependency-first list of local programs.
+
+`compileCoreLfRuntimeFragment()` accepts direct dependencies tagged
+`dependency-module` or `earlier-fragment`. It validates the relation against
+the consumer module ID and declared module-dependency order, requires
+same-module earlier fragments to be distinct, rejects a transitive return to
+the consumer module/fragment, and keeps module dependencies before earlier
+same-module fragments. It flattens the transitive closure deterministically,
+deduplicates a shared artifact in a diamond, rejects two distinct artifacts
+claiming the same fragment identity, and rejects rule-ID collisions across
+the whole closure.
+
+Every local rule is compiled with the flattened prior runtime plus its
+earlier local clauses as the checker/evaluator prefix.
+`checkedWithEarlierRuleIds` records that exact dependency-first prefix. The
+returned combined runtime tries fragments and rules in the same deterministic
+order and remaps local rule indices to the global closure order. β, δ,
+runtime, proof-time, declaration, and policy ownership remain separate; the
+composition adds no mutable registry or second reduction relation.
+
+The diagnostic fixture is stronger than a concatenation test. It defines an
+opaque code family, a prior representation-only rule
+`alias_code ↪ base_code`, and a local consumer whose left and right types are
+respectively `decode_code alias_code` and `decode_code base_code`. The local
+rule is rejected by the standalone compiler, then passes strict TypeScript
+subject checking only when the explicit prior fragment supplies that
+conversion. A separate dependency-module/earlier-fragment chain performs
+three runtime steps under one combined budget, and a diamond proves that its
+shared base occurs exactly once.
+
+`tests/v3_2_lf_runtime_fragment_tests.ts` supplies seven focused tests.
+Negative cases reject relation drift, module-dependency reordering,
+transitive cycles, and closure-wide rule-ID collisions. The tests also pin
+immutability, owner-agnostic source, root-only API exposure, and the unchanged
+ten-rule reviewed continuation.
+
+Validation on 2026-07-24:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_lf_runtime_fragment_tests.ts
+  7 tests / 1 suite: all passed
+
+node --require ts-node/register --test \
+  tests/v3_2_lf_transfer_runtime_tests.ts \
+  tests/v3_2_lf_runtime_fragment_tests.ts
+  18 tests / 3 suites: all passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  471 tests / 59 suites: 444 passed, 27 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript gate passed
+  all 19 frozen MVP differential judgments passed
+  41 kernel/example metric targets passed
+  39 kernel-script tests and five registry tests passed
+  source/report/book/audit gates passed
+  all 11 directed conformance probes passed
+  all seven live canonical-export inventory probes passed
+```
+
+This row qualifies the generic composition mechanism only. It deliberately
+does not import `@fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A`, alter the
+four SCALE-0D external-oracle obligations, add any active semantic rule,
+change the reviewed continuation, or claim that all remaining runtime
+dependencies have already been inventoried. H-DTTLF-SCALE-02 is now
+triggered.
 
 ## Human Review Gates
 
@@ -969,6 +1050,30 @@ compilation. It reviews the generic engine, migration equivalence for the
 existing continuation, fail-closed unsupported boundary, generated-artifact
 policy, and whether SCALE-ACQUIRE-1 should use a canonical parser/generator
 or lighter checked extraction before broad stress imports.
+
+Proposed decision, not yet approved:
+
+> **D-DTTLF-SCALE-002:** accept the shared immutable transfer IR, generic
+> declaration compiler, local runtime compiler/matcher, explicit transitive
+> runtime-fragment composition, and separate proof-time compiler/constraint
+> engine as the stable engine boundary for representative stress work; retain
+> direct typed specifications plus small fail-closed checked extraction
+> adapters as the default acquisition path; defer a complete canonical
+> term/pattern parser until stress and batch evidence shows that acquisition,
+> rather than an unsupported semantic mechanism, is the limiting cost; keep
+> generated specifications and policy as committed review artifacts with no
+> production Lambdapi dependency; require unsupported wildcards,
+> binder-dependent/higher-order captures, inductives, tactic-body delta,
+> declaration/runtime dependency gaps, and new rule shapes to fail closed and
+> open the smallest explicit engine row; and authorize no active declaration,
+> runtime rule, proof rule, profile, browser API, product expansion,
+> mathematical theorem, or mechanical-transfer qualification by this
+> architecture decision alone.
+
+Self-contained review question:
+
+> Approve H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 as proposed, or specify the
+> exact revision required before representative stress work proceeds?
 
 ### Existing Semantic And Mathematical Gates
 
@@ -1199,3 +1304,13 @@ scope is affected.
   whitespace audit passed. The checkpoint adds no active proof rule,
   runtime conversion, parser, product/profile expansion, all-61-rule or
   whole-development qualification, or broader Git authority.
+- **2026-07-24 — SCALE-RUNTIME-DEPS-1 completed.** Added explicit immutable
+  dependency-module/earlier-fragment runtime closure, deterministic
+  transitive flattening and diamond deduplication, prefix-aware local subject
+  checking, and closure-wide order/cycle/rule-ID validation. A synthetic
+  dependent rule fails standalone and passes only with its explicit prior
+  computation; a three-rule chain executes under one combined budget. Seven
+  focused tests and the 471-test TypeScript gate passed. No active
+  `Const_catd` or other rule, product/profile, browser API, parser, or
+  mechanical-transfer claim was added. H-DTTLF-SCALE-02/
+  D-DTTLF-SCALE-002 is now proposed before semantic stress work.

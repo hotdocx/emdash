@@ -9,9 +9,9 @@ and directed-DTT work has additionally graduated the exact root-only opt-in
 systematic whole-development transfer remains unqualified and is now the
 subject of the active scale-qualification plan, whose shared transfer IR
 SCALE-0B and generic declaration/runtime/proof compiler slices SCALE-0C
-through SCALE-0E are complete; generic prior-runtime-fragment composition
-SCALE-RUNTIME-DEPS-1 is next and remains required before the applicable
-stress and batch rows
+through SCALE-0E plus generic prior-runtime-fragment composition
+SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 is
+proposed and awaits exact approval before representative semantic stress work
 
 ## Purpose
 
@@ -161,8 +161,13 @@ fixtures. It preserves source order, matched/fresh roles, one shared budget,
 session-local Miller assignments, runtime separation, and fail-closed
 wildcard/higher-order boundaries without promoting the existing active
 `Obj(Hom_cat ...)` witness or claiming all-61-rule coverage.
-SCALE-RUNTIME-DEPS-1 is next and must qualify generic prior-fragment runtime
-composition before H-DTTLF-SCALE-02 and the applicable stress/batch rows.
+SCALE-RUNTIME-DEPS-1 now adds explicit dependency-module and earlier-fragment
+runtime closure, deterministic transitive flattening/diamond deduplication,
+prefix subject checking, shared execution budgets, and fail-closed
+relation/order/cycle/rule-ID validation. A synthetic dependent type witness
+passes only with its explicit prior runtime; no missing active `Const_catd`
+rule was imported. H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 now awaits approval
+before the applicable semantic stress/batch rows.
 Pinned checked canonical export supplies inventory and provenance and remains
 an optional later generator input, not an immediate term-parser prerequisite.
 

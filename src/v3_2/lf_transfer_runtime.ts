@@ -164,6 +164,10 @@ export interface CoreLfRuntimeCompilerOptions {
         CoreLfRuntimeSubjectReductionOracle;
 }
 
+export type CoreLfRuntimeFragmentDependencyRelation =
+    | 'dependency-module'
+    | 'earlier-fragment';
+
 export type CoreLfRuntimeCompilerErrorCode =
     | 'INVALID_RUNTIME_CONTEXT'
     | 'INCOMPLETE_RUNTIME_POLICY'
@@ -178,6 +182,9 @@ export type CoreLfRuntimeCompilerErrorCode =
     | 'INVALID_RUNTIME_VARIABLE_TYPE'
     | 'INVALID_RUNTIME_RULE_TYPE'
     | 'INVALID_RUNTIME_SUBJECT_ORACLE'
+    | 'INVALID_RUNTIME_DEPENDENCY'
+    | 'DUPLICATE_RUNTIME_RULE_ID'
+    | 'CYCLIC_RUNTIME_DEPENDENCY'
     | 'INCOMPLETE_RUNTIME_MATCH'
     | 'CAPTURE_SCOPE_ESCAPE'
     | 'INVALID_RUNTIME_STEP_LIMIT';
@@ -1033,6 +1040,128 @@ implements CoreLfCatalogRuntime {
     }
 }
 
+const runtimeFragmentKey = (
+    program: CoreLfCompiledRuntimeProgram
+): string =>
+    `${program.module.moduleId}\u0000` +
+    `${program.module.fragmentId}\u0000${program.revision}`;
+
+/**
+ * Immutable, dependency-first composition of already compiled local runtime
+ * fragments. It implements only the generic catalog-runtime seam; local
+ * programs and their source/policy ownership remain independently visible.
+ */
+export class CoreLfComposedRuntimeProgram
+implements CoreLfCatalogRuntime {
+    readonly revision: string;
+    readonly fragments: readonly CoreLfCompiledRuntimeProgram[];
+    readonly ruleIds: readonly string[];
+
+    constructor(
+        fragments: readonly CoreLfCompiledRuntimeProgram[]
+    ) {
+        const fragmentKeys = new Set<string>();
+        const ruleIds = new Set<string>();
+        fragments.forEach((fragment, fragmentIndex) => {
+            const key = runtimeFragmentKey(fragment);
+            if (fragmentKeys.has(key)) {
+                fail(
+                    'INVALID_RUNTIME_DEPENDENCY',
+                    `fragments[${fragmentIndex}]`,
+                    `Runtime fragment '${fragment.module.moduleId}/` +
+                        `${fragment.module.fragmentId}' is duplicated`
+                );
+            }
+            fragmentKeys.add(key);
+            fragment.ruleIds.forEach((ruleId, ruleIndex) => {
+                if (ruleIds.has(ruleId)) {
+                    fail(
+                        'DUPLICATE_RUNTIME_RULE_ID',
+                        `fragments[${fragmentIndex}].rules[${ruleIndex}]`,
+                        `Composed runtime rule ID '${ruleId}' is duplicated`
+                    );
+                }
+                ruleIds.add(ruleId);
+            });
+        });
+        this.fragments = Object.freeze([...fragments]);
+        this.ruleIds = Object.freeze([...ruleIds]);
+        this.revision = [
+            'composed-runtime-1',
+            ...this.fragments.map(fragment =>
+                `${fragment.module.moduleId}/` +
+                `${fragment.module.fragmentId}@${fragment.revision}`
+            )
+        ].join('+');
+        Object.freeze(this);
+    }
+
+    rewriteHead(
+        expression: KernelExpression
+    ): CoreRuntimeHeadRewriteResult {
+        let ruleOffset = 0;
+        for (const fragment of this.fragments) {
+            const result = fragment.rewriteHead(expression);
+            if (result.status === 'rewritten') {
+                return Object.freeze({
+                    ...result,
+                    ruleIndex: ruleOffset + result.ruleIndex
+                });
+            }
+            ruleOffset += fragment.ruleIds.length;
+        }
+        return Object.freeze({
+            status: 'irreducible',
+            expression
+        });
+    }
+}
+
+export interface CoreLfRuntimeFragmentDependency {
+    readonly relation: CoreLfRuntimeFragmentDependencyRelation;
+    readonly fragment: CoreLfCompiledRuntimeFragment;
+}
+
+export interface CoreLfRuntimeFragmentCompilerOptions
+    extends CoreLfRuntimeCompilerOptions {
+    readonly dependencies:
+        readonly CoreLfRuntimeFragmentDependency[];
+}
+
+/**
+ * One local program plus its immutable, transitively flattened runtime
+ * closure. Direct dependency evidence stays separate from the flattened
+ * execution component so module/fragment ownership remains reviewable.
+ */
+export class CoreLfCompiledRuntimeFragment {
+    readonly identity: string;
+    readonly dependencies:
+        readonly CoreLfRuntimeFragmentDependency[];
+
+    constructor(
+        public readonly localProgram: CoreLfCompiledRuntimeProgram,
+        dependencies: readonly CoreLfRuntimeFragmentDependency[],
+        public readonly runtime: CoreLfComposedRuntimeProgram
+    ) {
+        this.identity = runtimeFragmentKey(localProgram);
+        this.dependencies = Object.freeze(
+            dependencies.map(dependency => Object.freeze({
+                relation: dependency.relation,
+                fragment: dependency.fragment
+            }))
+        );
+        Object.freeze(this);
+    }
+
+    get module(): CoreLfModuleSpec {
+        return this.localProgram.module;
+    }
+
+    get policy(): CoreLfTransferPolicyOverlay {
+        return this.localProgram.policy;
+    }
+}
+
 const runtimePolicyMap = (
     module: CoreLfModuleSpec,
     policy: CoreLfTransferPolicyOverlay
@@ -1122,6 +1251,38 @@ const checkingCaptureValues = (
         sourceDepth: 0
     }));
 
+const runtimePrefix = (
+    prior: CoreLfCatalogRuntime | undefined,
+    local: CoreLfCompiledRuntimeProgram
+): CoreLfCatalogRuntime => {
+    if (prior === undefined) return local;
+    const ruleIds = Object.freeze([
+        ...prior.ruleIds,
+        ...local.ruleIds
+    ]);
+    return Object.freeze({
+        revision: `${prior.revision}+${local.revision}`,
+        ruleIds,
+        rewriteHead(
+            expression: KernelExpression
+        ): CoreRuntimeHeadRewriteResult {
+            const priorResult = prior.rewriteHead(expression);
+            if (priorResult.status === 'rewritten') {
+                return priorResult;
+            }
+            const localResult = local.rewriteHead(expression);
+            if (localResult.status === 'irreducible') {
+                return localResult;
+            }
+            return Object.freeze({
+                ...localResult,
+                ruleIndex:
+                    prior.ruleIds.length + localResult.ruleIndex
+            });
+        }
+    });
+};
+
 const compileRule = (
     source: CoreLfTransferRuntimeRule,
     context: CoreLfRuntimeDeclarationContext,
@@ -1130,7 +1291,9 @@ const compileRule = (
     policy: CoreLfTransferPolicyOverlay,
     comparisonStepLimit: number,
     subjectReductionOracle:
-        CoreLfRuntimeSubjectReductionOracle | undefined
+        CoreLfRuntimeSubjectReductionOracle | undefined,
+    priorRuntime: CoreLfCatalogRuntime | undefined,
+    priorRuleIds: readonly string[]
 ): CoreLfCompiledRuntimeRule => {
     const captures = new Map(
         source.variables.map((variable, slot) => [
@@ -1183,11 +1346,15 @@ const compileRule = (
         );
     }
 
-    const priorProgram = new CoreLfCompiledRuntimeProgram(
+    const localPrefix = new CoreLfCompiledRuntimeProgram(
         module,
         policy,
         earlierRules,
         comparisonStepLimit
+    );
+    const checkingRuntime = runtimePrefix(
+        priorRuntime,
+        localPrefix
     );
     let ruleEnvironment = context.environment;
     const checkingReferences: KernelExpression[] = [];
@@ -1222,7 +1389,7 @@ const compileRule = (
             const typeChecker = createCoreLfChecker(
                 ruleEnvironment,
                 comparisonStepLimit,
-                priorProgram
+                checkingRuntime
             );
             const inferredType = typeChecker.infer(
                 typeChecker.rootContext,
@@ -1293,7 +1460,7 @@ const compileRule = (
         const checker: CoreLfChecker = createCoreLfChecker(
             ruleEnvironment,
             comparisonStepLimit,
-            priorProgram
+            checkingRuntime
         );
         const inferred = checker.infer(
             checker.rootContext,
@@ -1346,7 +1513,10 @@ const compileRule = (
         variables,
         left,
         right,
-        checkedWithEarlierRuleIds: earlierRules.map(rule => rule.id),
+        checkedWithEarlierRuleIds: [
+            ...priorRuleIds,
+            ...earlierRules.map(rule => rule.id)
+        ],
         subjectValidation,
         provenance: derivedProvenance(source, 'compiled')
     });
@@ -1392,15 +1562,29 @@ const validateSubjectReductionOracle = (
     });
 };
 
-/**
- * Compile and type-check a runtime-only transfer fragment.
- */
-export function compileCoreLfRuntimeProgram(
+const compileCoreLfRuntimeProgramWithPrefix = (
     module: CoreLfModuleSpec,
     policy: CoreLfTransferPolicyOverlay,
     context: CoreLfRuntimeDeclarationContext,
-    options: CoreLfRuntimeCompilerOptions = {}
-): CoreLfCompiledRuntimeProgram {
+    options: CoreLfRuntimeCompilerOptions,
+    priorRuntime: CoreLfCatalogRuntime | undefined,
+    priorRuleIds: readonly string[]
+): CoreLfCompiledRuntimeProgram => {
+    if (
+        (priorRuntime === undefined && priorRuleIds.length !== 0) ||
+        (priorRuntime !== undefined && (
+            priorRuntime.ruleIds.length !== priorRuleIds.length ||
+            priorRuntime.ruleIds.some(
+                (id, index) => id !== priorRuleIds[index]
+            )
+        ))
+    ) {
+        return fail(
+            'INVALID_RUNTIME_DEPENDENCY',
+            'priorRuntime',
+            'Runtime prefix IDs do not match the supplied prior runtime'
+        );
+    }
     if (
         module.declarations.length > 0 ||
         module.inductives.length > 0 ||
@@ -1460,7 +1644,9 @@ export function compileCoreLfRuntimeProgram(
             module,
             policy,
             comparisonStepLimit,
-            options.subjectReductionOracle
+            options.subjectReductionOracle,
+            priorRuntime,
+            priorRuleIds
         ));
     }
     const usedOracleRuleIds = rules
@@ -1489,5 +1675,188 @@ export function compileCoreLfRuntimeProgram(
         policy,
         rules,
         comparisonStepLimit
+    );
+};
+
+/**
+ * Compile and type-check one independent runtime-only transfer fragment.
+ */
+export function compileCoreLfRuntimeProgram(
+    module: CoreLfModuleSpec,
+    policy: CoreLfTransferPolicyOverlay,
+    context: CoreLfRuntimeDeclarationContext,
+    options: CoreLfRuntimeCompilerOptions = {}
+): CoreLfCompiledRuntimeProgram {
+    return compileCoreLfRuntimeProgramWithPrefix(
+        module,
+        policy,
+        context,
+        options,
+        undefined,
+        []
+    );
+}
+
+const moduleFragmentKey = (module: CoreLfModuleSpec): string =>
+    `${module.moduleId}\u0000${module.fragmentId}`;
+
+const validateDirectRuntimeDependencies = (
+    module: CoreLfModuleSpec,
+    dependencies: readonly CoreLfRuntimeFragmentDependency[]
+): void => {
+    const direct = new Set<string>();
+    const consumerKey = moduleFragmentKey(module);
+    let previousModuleDependencyIndex = -1;
+    let sawEarlierFragment = false;
+
+    dependencies.forEach((dependency, index) => {
+        const path = `options.dependencies[${index}]`;
+        const dependencyModule = dependency.fragment.module;
+        if (direct.has(dependency.fragment.identity)) {
+            fail(
+                'INVALID_RUNTIME_DEPENDENCY',
+                path,
+                `Direct runtime dependency '${dependencyModule.moduleId}/` +
+                    `${dependencyModule.fragmentId}' is duplicated`
+            );
+        }
+        direct.add(dependency.fragment.identity);
+
+        if (dependency.relation === 'dependency-module') {
+            const dependencyIndex = module.dependencies.indexOf(
+                dependencyModule.moduleId
+            );
+            if (
+                dependencyModule.moduleId === module.moduleId ||
+                dependencyIndex < 0 ||
+                sawEarlierFragment ||
+                dependencyIndex < previousModuleDependencyIndex
+            ) {
+                fail(
+                    'INVALID_RUNTIME_DEPENDENCY',
+                    `${path}.relation`,
+                    `Runtime dependency '${dependencyModule.moduleId}/` +
+                        `${dependencyModule.fragmentId}' is not in consumer ` +
+                        'module-dependency order'
+                );
+            }
+            previousModuleDependencyIndex = dependencyIndex;
+        } else if (dependency.relation === 'earlier-fragment') {
+            if (
+                dependencyModule.moduleId !== module.moduleId ||
+                dependencyModule.fragmentId === module.fragmentId
+            ) {
+                fail(
+                    'INVALID_RUNTIME_DEPENDENCY',
+                    `${path}.relation`,
+                    `Earlier runtime fragment must be a distinct fragment ` +
+                        `of module '${module.moduleId}'`
+                );
+            }
+            sawEarlierFragment = true;
+        } else {
+            const exhaustive: never = dependency.relation;
+            return exhaustive;
+        }
+
+        if (
+            dependency.fragment.runtime.fragments.some(
+                fragment =>
+                    moduleFragmentKey(fragment.module) === consumerKey
+            )
+        ) {
+            fail(
+                'CYCLIC_RUNTIME_DEPENDENCY',
+                path,
+                `Runtime dependency closure already contains consumer ` +
+                    `'${module.moduleId}/${module.fragmentId}'`
+            );
+        }
+    });
+};
+
+const flattenedRuntimeDependencies = (
+    dependencies: readonly CoreLfRuntimeFragmentDependency[]
+): readonly CoreLfCompiledRuntimeProgram[] => {
+    const programs: CoreLfCompiledRuntimeProgram[] = [];
+    const byIdentity = new Map<string, CoreLfCompiledRuntimeProgram>();
+    dependencies.forEach((dependency, dependencyIndex) => {
+        dependency.fragment.runtime.fragments.forEach(
+            (program, closureIndex) => {
+                const key = runtimeFragmentKey(program);
+                const existing = byIdentity.get(key);
+                if (existing === program) return;
+                if (existing !== undefined) {
+                    fail(
+                        'INVALID_RUNTIME_DEPENDENCY',
+                        `options.dependencies[${dependencyIndex}]` +
+                            `.closure[${closureIndex}]`,
+                        `Runtime dependency closure supplies two distinct ` +
+                            `artifacts for '${program.module.moduleId}/` +
+                            `${program.module.fragmentId}'`
+                    );
+                }
+                byIdentity.set(key, program);
+                programs.push(program);
+            }
+        );
+    });
+    return Object.freeze(programs);
+};
+
+/**
+ * Compile a local runtime fragment against an explicit dependency prefix and
+ * return both the local artifact and its transitively flattened executable
+ * closure. Dependency modules precede same-module earlier fragments, and all
+ * prior rules precede the local rule order.
+ */
+export function compileCoreLfRuntimeFragment(
+    module: CoreLfModuleSpec,
+    policy: CoreLfTransferPolicyOverlay,
+    context: CoreLfRuntimeDeclarationContext,
+    options: CoreLfRuntimeFragmentCompilerOptions
+): CoreLfCompiledRuntimeFragment {
+    validateDirectRuntimeDependencies(
+        module,
+        options.dependencies
+    );
+    const priorPrograms = flattenedRuntimeDependencies(
+        options.dependencies
+    );
+    const priorRuntime = priorPrograms.length === 0
+        ? undefined
+        : new CoreLfComposedRuntimeProgram(priorPrograms);
+    const localRuleIds = new Set(
+        module.runtimeRules.map(rule => rule.id)
+    );
+    priorRuntime?.ruleIds.forEach((ruleId, index) => {
+        if (localRuleIds.has(ruleId)) {
+            fail(
+                'DUPLICATE_RUNTIME_RULE_ID',
+                `options.dependencies.rules[${index}]`,
+                `Local runtime rule ID '${ruleId}' duplicates a prior rule`
+            );
+        }
+    });
+    const localProgram = compileCoreLfRuntimeProgramWithPrefix(
+        module,
+        policy,
+        context,
+        {
+            comparisonStepLimit: options.comparisonStepLimit,
+            subjectReductionOracle:
+                options.subjectReductionOracle
+        },
+        priorRuntime,
+        priorRuntime?.ruleIds ?? []
+    );
+    const runtime = new CoreLfComposedRuntimeProgram([
+        ...priorPrograms,
+        localProgram
+    ]);
+    return new CoreLfCompiledRuntimeFragment(
+        localProgram,
+        options.dependencies,
+        runtime
     );
 }

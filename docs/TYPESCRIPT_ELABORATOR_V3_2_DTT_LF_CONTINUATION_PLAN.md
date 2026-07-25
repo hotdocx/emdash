@@ -2347,3 +2347,14 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   parity claim is made for wildcard/higher-order patterns or the active
   61-rule inventory. SCALE-RUNTIME-DEPS-1 is next in the active scale plan
   before H-DTTLF-SCALE-02 and semantic stress imports.
+- **2026-07-24 — Generic prior-runtime composition completed.**
+  SCALE-RUNTIME-DEPS-1 adds explicit dependency-module and earlier-fragment
+  relations, deterministic transitive flattening and diamond deduplication,
+  local-rule checking against the exact prior prefix, and one combined
+  runtime budget. Seven representation-only tests include a dependent local
+  rule that fails standalone and passes only with its synthetic prior
+  computation. Relation/order/cycle/rule-ID drift fails closed; the exact
+  reviewed ten-rule continuation remains unchanged, and no active
+  `Const_catd` or other rule was added. H-DTTLF-SCALE-02/
+  D-DTTLF-SCALE-002 is now proposed in the active scale plan before semantic
+  stress work.
