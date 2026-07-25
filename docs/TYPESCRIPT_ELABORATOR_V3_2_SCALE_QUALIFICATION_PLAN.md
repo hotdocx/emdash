@@ -43,6 +43,8 @@ SCALE-0B implementation checkpoint:
 `2fd69f55ca8e5576fd91cf41990870bf16e1bb5f`
 SCALE-0C implementation checkpoint:
 `197e80deb80f30ff964ffc876773d823dd51a402`
+SCALE-0D implementation checkpoint:
+`3461c2e32f26869099060667e63ce2e65336cb32`
 
 ## Purpose
 
@@ -1064,3 +1066,11 @@ scope is affected.
   Eleven focused tests and the 455-test TypeScript gate passed; SCALE-0E is
   next, and SCALE-RUNTIME-DEPS-1 records the generic prior-fragment
   composition prerequisite exposed by this tranche.
+- **2026-07-24 — SCALE-0D checkpointed.** Recorded local checkpoint
+  `3461c2e32f26869099060667e63ce2e65336cb32` after exact staged-diff
+  review, eleven focused runtime/migration tests, the 455-test TypeScript
+  gate, bounded active kernel check, complete scale gate, header lint, and
+  whitespace audit passed. The checkpoint adds no semantic rule, standalone
+  subject-reduction claim, parser, product/profile expansion,
+  whole-development mechanical-transfer qualification, or broader Git
+  authority.
