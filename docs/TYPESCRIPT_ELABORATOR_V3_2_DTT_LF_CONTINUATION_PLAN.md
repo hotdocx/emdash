@@ -2326,3 +2326,14 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   changing this plan's reviewed continuation factory or authority. SCALE-0D
   is next; SCALE-0E is independently dependency-ready in the active scale
   plan.
+- **2026-07-24 — Generic runtime migration completed.** SCALE-0D now
+  reconstructs all ten reviewed runtime rules through one owner-agnostic
+  typed compiler/matcher and reaches a stable generic declaration/runtime
+  fixed point. Exact rewrites and plicity near misses agree with the existing
+  7+3 runtime. Six rules pass standalone TypeScript subject checking; the
+  nested Sigma-fibre rule and three frozen MVP rules preserve this plan's
+  already approved Lambdapi-oracle requirement and standalone TypeScript
+  subject-reduction non-claim. No `Const_catd` or other runtime rule was
+  added. SCALE-0E is next in the active scale plan; generic prior-runtime
+  fragment composition is separately recorded before applicable stress and
+  batch work.

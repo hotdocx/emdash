@@ -29,7 +29,8 @@ did not require a full Lambdapi term parser as the architectural starting
 point, the user approved revised H-DTTLF-SCALE-01 on 2026-07-24.
 Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B is complete;
-SCALE-0C is complete; SCALE-0D is next and SCALE-0E is dependency-ready
+SCALE-0C and SCALE-0D are complete; SCALE-0E is next; generic prior-runtime
+fragment composition remains a required pre-stress/batch mechanism
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -425,13 +426,14 @@ The architecture qualifies only when all of the following hold:
 | SCALE-0A | complete | SCALE-PLAN-0 | Pure TypeScript top-level canonical-export parser/inventory; fixture tests; opt-in live export/version/hash/count gate over all five active modules |
 | SCALE-0B | complete | revised H-DTTLF-SCALE-01, SCALE-0A | Shared immutable typed transfer IR and scoped builder for qualified declarations, explicit/tactic/absent bodies, runtime patterns, and separate proof problems; no parser or semantic promotion |
 | SCALE-0C | complete | SCALE-0B | Generic declaration compiler plus policy overlay; reproduce the reviewed 29-signature continuation without owner-specific catalog construction |
-| SCALE-0D | pending | SCALE-0C | Generic typed runtime-rule compiler/matcher; migrate the ten reviewed rules equivalently before adding stress semantics |
+| SCALE-0D | complete | SCALE-0C | Generic typed runtime-rule compiler/matcher; migrate the ten reviewed rules equivalently before adding stress semantics |
 | SCALE-0E | pending | SCALE-0C | Separate typed proof-time `unif_rule` compiler and bounded comparison engine, informed by reusable generic algorithms on `main` |
+| SCALE-RUNTIME-DEPS-1 | pending | SCALE-0D | Compose immutable generic runtime fragments through explicit module/prior-fragment dependencies; qualify the mechanism without silently promoting the active `Const_catd` fibre rule or any other new semantic rule |
 | SCALE-ACQUIRE-1 | deferred decision | SCALE-0C through SCALE-0E and representative encoding evidence | Decide whether bulk acquisition warrants a fail-closed canonical term/pattern parser/generator or a lighter checked extraction adapter; any adapter targets the same IR |
-| SCALE-STRESS-1 | pending | SCALE-0D, applicable semantic review | Outer J, groupoidal Pi/Sigma, and imported Nat grouped-recursion cases |
-| SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
+| SCALE-STRESS-1 | pending | SCALE-0D, SCALE-RUNTIME-DEPS-1, applicable semantic review | Outer J, groupoidal Pi/Sigma, and imported Nat grouped-recursion cases |
+| SCALE-STRESS-2 | pending | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
-| SCALE-BATCH-1 | pending | required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
+| SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
 
 Rows may be split when implementation reveals an independently reviewable
@@ -710,6 +712,119 @@ product promotion, theorem claim, or systematic whole-development
 qualification. SCALE-0D is the next ledger row; SCALE-0E is independently
 dependency-ready from this checkpoint.
 
+## SCALE-0D Completion Record
+
+SCALE-0D adds `src/v3_2/lf_transfer_runtime.ts` as one owner-agnostic
+runtime-rule compiler and immutable matcher over the SCALE-0B IR. It consumes
+one runtime-only `CoreLfModuleSpec`, the separate exact policy overlay, and an
+already compiled qualified declaration context. The generic engine:
+
+- resolves every qualified rigid head through declaration linkage, validates
+  exact intrinsic/free arity and plicity, requires complete runtime policy,
+  contiguous ordered rule groups, and an exact source-owner head;
+- compiles typed dependent rule-variable telescopes in order and validates
+  each new variable type against only the already compiled rule prefix,
+  without revalidating a trusted declaration context under an artificially
+  smaller runtime;
+- checks rule subject reduction against the same earlier prefix by default;
+- compiles one immutable slot-based structural matcher with deterministic
+  source order, repeated-capture equality, exact plicity, capture-safe
+  template instantiation, and bounded weak-head execution;
+- separates the ambient De Bruijn depth of an open checker subterm from
+  binders written inside a rule pattern or template, so a first-order
+  binder-independent capture is canonicalized and shifted without capture;
+- rejects wildcards and genuinely higher-order binder-dependent captures at
+  this row rather than treating them as unconstrained equality; and
+- permits an exact external subject-reduction-oracle exception only when its
+  authority path, ordered rule IDs, and evidence are supplied. Every listed
+  exception must actually fail the current TypeScript subject check; an
+  unknown, reordered, foreign, duplicate, or newly stale exception fails
+  compilation.
+
+`src/v3_2/directed_continuation_runtime_transfer.ts` is the reviewed
+migration-data edge, not an owner-specific evaluator. It adapts the exact
+four Foundation and three DIRECTED-1B typed rule snapshots plus the three
+frozen MVP snapshots into the shared rule IR. The latter variables are
+assigned dependent types mechanically from their left-pattern owner slots.
+All ten entries retain manifest order, active source fragments, the pinned
+source/export hashes, separate runtime policy, and the existing 7-directed
+then 3-MVP execution boundary.
+
+The migration bootstraps declaration signatures with the already reviewed
+legacy runtime only as a construction oracle, compiles the generic ten-rule
+runtime, recompiles all 29 declarations with that generic runtime, recompiles
+the runtime against those generic declarations, and rejects any difference
+between the two compiled rule sets. The returned fixed-point pair owns only
+generic declaration/runtime artifacts. Its equivalence validator exercises
+every exact left side with deterministic bindings, compares the result and
+binding order against the legacy 7+3 programs, compares an exact plicity near
+miss for every rule, checks the zero-step boundary, and revalidates the old
+catalog only as an oracle.
+
+Six rules pass standalone TypeScript subject checking against their compiled
+prefix. Four preserve their previously approved external-oracle boundary:
+
+1. `directed.sigma-telescope-fibre.evaluate`;
+2. `projection.functor-hom.evaluate`;
+3. `projection.transfor-component.evaluate`; and
+4. `projection.transfor-hom.evaluate`.
+
+The first diagnostic is concrete: typing its reduct needs the active
+`@fapp0 $K Cat_cat (@Const_catd $K $A) $_ ↪ $A` computation, which is not in
+the reviewed ten-rule profile. The final three retain the checker limitation
+already recorded by D-028 for the frozen MVP evaluator. H-DTTLF-03 explicitly
+requires the Lambdapi subject-reduction oracle and withholds standalone
+TypeScript subject reduction, so SCALE-0D records these four exact,
+self-invalidating exceptions instead of silently installing an eleventh
+rule, adding a checker coercion, or strengthening the profile claim.
+
+This dependency finding opens `SCALE-RUNTIME-DEPS-1`: generic immutable
+composition of prior runtime fragments must be qualified before imported
+grouped recursion and the larger batch. That mechanism can be implemented
+with representation-only fixtures; importing the active `Const_catd` fibre
+rule or any other new executable semantic content still requires its exact
+evidence and human gate.
+
+`tests/v3_2_lf_transfer_runtime_tests.ts` supplies eleven focused tests. An
+unrelated opaque `Nat` fixture proves strict checking and execution of two
+free-declaration-headed rules, including a capture below a lambda and an open
+ambient redex. Negative cases reject missing policy, plicity drift, a foreign
+source owner, malformed grouped order, a non-preserving rule, wildcard and
+higher-order patterns, and stale or foreign oracle exceptions. The reviewed
+tests prove the 29+10 fixed point, exact subject-validation split, all ten
+legacy rewrites and near misses, immutable source/policy evidence,
+owner-agnostic compiler source, and continued browser exclusion.
+
+Validation on 2026-07-24:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_lf_transfer_runtime_tests.ts
+  11 tests / 2 suites: all passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  455 tests / 57 suites: 428 passed, 27 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript gate passed
+  all 19 frozen MVP differential judgments passed
+  41 kernel/example metric targets passed
+  39 kernel-script tests and five registry tests passed
+  source/report/book/audit gates passed
+  all 11 directed conformance probes passed
+  all seven live canonical-export inventory probes passed
+```
+
+SCALE-0D establishes generic runtime compilation and exact migration
+equivalence only. It adds no new semantic rule, profile, browser API,
+standalone subject-reduction claim, parser, or whole-development mechanical
+qualification. SCALE-0E is next; SCALE-RUNTIME-DEPS-1 is independently
+dependency-ready and is required before the applicable stress/batch rows.
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -738,11 +853,12 @@ or any product/profile expansion.
 
 ### H-DTTLF-SCALE-02 — Generic Engine Boundary
 
-Triggered after SCALE-0C through SCALE-0E demonstrate declaration, runtime,
-and proof-time compilation. It reviews the generic engine, migration
-equivalence for the existing continuation, fail-closed unsupported boundary,
-generated-artifact policy, and whether SCALE-ACQUIRE-1 should use a canonical
-parser/generator or lighter checked extraction before broad stress imports.
+Triggered after SCALE-0C through SCALE-0E and SCALE-RUNTIME-DEPS-1
+demonstrate declaration, local runtime, composed prior-runtime, and proof-time
+compilation. It reviews the generic engine, migration equivalence for the
+existing continuation, fail-closed unsupported boundary, generated-artifact
+policy, and whether SCALE-ACQUIRE-1 should use a canonical parser/generator
+or lighter checked extraction before broad stress imports.
 
 ### Existing Semantic And Mathematical Gates
 
@@ -936,3 +1052,15 @@ scope is affected.
   whitespace audit passed. The checkpoint grants no runtime/proof compiler,
   semantic promotion, parser, product expansion, mechanical-transfer
   qualification, or broader Git authority.
+- **2026-07-24 — SCALE-0D completed.** Added one generic typed runtime
+  compiler/matcher and an exact ten-rule migration adapter. The 29-declaration
+  and ten-rule compilers reach a stable generic fixed point, and all ten
+  positive rewrites, binding orders, plicity near misses, and the zero-step
+  boundary agree with the reviewed 7+3 legacy programs. Six rules pass strict
+  TypeScript subject checking. The nested Sigma-fibre rule and three frozen
+  MVP rules retain exact self-invalidating Lambdapi-oracle obligations under
+  the already approved standalone-subject-reduction non-claim. No missing
+  `Const_catd` computation or other semantic rule was silently promoted.
+  Eleven focused tests and the 455-test TypeScript gate passed; SCALE-0E is
+  next, and SCALE-RUNTIME-DEPS-1 records the generic prior-fragment
+  composition prerequisite exposed by this tranche.

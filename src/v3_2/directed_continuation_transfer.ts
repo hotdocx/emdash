@@ -43,6 +43,9 @@ import {
     createCoreLfTransferDeclarationLinkage
 } from './lf_transfer_compiler';
 import {
+    CoreLfCatalogRuntime
+} from './lf_conversion';
+import {
     CoreLfModuleSpec,
     CoreLfQualifiedSymbol,
     CoreLfTransferBinderToken,
@@ -299,6 +302,49 @@ const ownerPlicities = new Map<string, readonly Plicity[]>([
         entry.signatureSnapshot.slots.map(slot => slot.plicity)
     ] as const)
 ]);
+
+export const CORE_DIRECTED_CONTINUATION_TRANSFER_SYMBOLS:
+Readonly<Record<string, CoreLfQualifiedSymbol>> = Object.freeze(
+    Object.fromEntries(bindings.map(binding => [
+        binding.owner,
+        Object.freeze({ ...binding.symbol })
+    ]))
+);
+
+export const CORE_DIRECTED_CONTINUATION_TRANSFER_PLICITIES:
+Readonly<Record<string, readonly Plicity[]>> = Object.freeze(
+    Object.fromEntries([...ownerPlicities].map(([owner, plicities]) => [
+        owner,
+        Object.freeze([...plicities])
+    ]))
+);
+
+export function coreDirectedContinuationTransferSymbol(
+    owner: string
+): CoreLfQualifiedSymbol {
+    const symbol = CORE_DIRECTED_CONTINUATION_TRANSFER_SYMBOLS[owner];
+    if (symbol === undefined) {
+        return fail(
+            'REVIEWED_TRANSFER_DRIFT',
+            `Owner '${owner}' is outside the reviewed transfer closure`
+        );
+    }
+    return symbol;
+}
+
+export function coreDirectedContinuationTransferPlicities(
+    owner: string
+): readonly Plicity[] {
+    const plicities =
+        CORE_DIRECTED_CONTINUATION_TRANSFER_PLICITIES[owner];
+    if (plicities === undefined) {
+        return fail(
+            'REVIEWED_TRANSFER_DRIFT',
+            `Owner '${owner}' has no reviewed transfer telescope`
+        );
+    }
+    return plicities;
+}
 
 type BuilderScope = ReadonlyMap<
     string,
@@ -757,12 +803,20 @@ export const CORE_DIRECTED_CONTINUATION_TRANSFER_LINKAGE =
  */
 export function compileCoreDirectedContinuationTransfer():
 CoreLfCompiledDeclarationModule {
+    return compileCoreDirectedContinuationTransferWithRuntime(
+        CoreDirected1bRuntimeProgram.create()
+    );
+}
+
+export function compileCoreDirectedContinuationTransferWithRuntime(
+    runtimeProgram: CoreLfCatalogRuntime
+): CoreLfCompiledDeclarationModule {
     return compileCoreLfDeclarations(
         CORE_DIRECTED_CONTINUATION_TRANSFER_MODULE,
         CORE_DIRECTED_CONTINUATION_TRANSFER_POLICY,
         CORE_DIRECTED_CONTINUATION_TRANSFER_LINKAGE,
         {
-            runtimeProgram: CoreDirected1bRuntimeProgram.create(),
+            runtimeProgram,
             comparisonStepLimit:
                 CORE_DIRECTED_CONTINUATION_PROFILE.outerLf
                     .comparisonStepLimit

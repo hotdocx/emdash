@@ -56,6 +56,7 @@ import './v3_2_release_policy_tests';
 import './v3_2_release_completion_tests';
 import './v3_2_lf_transfer_tests';
 import './v3_2_lf_transfer_compiler_tests';
+import './v3_2_lf_transfer_runtime_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,

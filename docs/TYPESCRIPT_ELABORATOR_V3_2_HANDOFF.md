@@ -8,9 +8,10 @@ and directed-DTT work has additionally graduated the exact root-only opt-in
 `emdash-v3.2-dttlf-directed-1` continuation profile under H-DTTLF-03;
 systematic whole-development transfer remains unqualified and is now the
 subject of the active scale-qualification plan, whose shared transfer IR
-SCALE-0B and generic declaration compiler SCALE-0C slices are complete;
-generic runtime-rule compilation SCALE-0D is next, while the separate
-proof-time engine SCALE-0E is dependency-ready
+SCALE-0B, generic declaration compiler SCALE-0C, and generic runtime compiler
+SCALE-0D slices are complete; the separate proof-time engine SCALE-0E is
+next, while generic prior-runtime-fragment composition remains required
+before the applicable stress and batch rows
 
 ## Purpose
 
@@ -148,11 +149,16 @@ SCALE-0C now compiles all 29 reviewed signatures through one generic
 declaration engine: 20 existing Core owners are checked intrinsically and the
 nine continuation declarations reproduce the reviewed catalog exactly from
 separate typed module, policy, and linkage data. The existing continuation
-factory and authority remain unchanged. SCALE-0D must next migrate the ten
-reviewed runtime rules through the shared rule IR; SCALE-0E may independently
-build the separate proof-time engine. Pinned checked canonical export supplies
-inventory and provenance and remains an optional later generator input, not
-an immediate term-parser prerequisite.
+factory and authority remain unchanged. SCALE-0D now compiles the exact ten
+reviewed rules through one owner-agnostic typed matcher and reaches a stable
+generic declaration/runtime fixed point. All ten rewrites and near misses
+agree with the reviewed runtime; six pass strict TypeScript subject checking,
+while the nested Sigma-fibre rule and three frozen MVP rules retain their
+exact approved Lambdapi-oracle boundary. No missing `Const_catd` reduction was
+promoted. SCALE-0E is next, and SCALE-RUNTIME-DEPS-1 must qualify generic
+prior-fragment runtime composition before the applicable stress/batch rows.
+Pinned checked canonical export supplies inventory and provenance and remains
+an optional later generator input, not an immediate term-parser prerequisite.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints
