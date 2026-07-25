@@ -76,7 +76,7 @@ SCALE-MIXED-PHASE-1B implementation checkpoint:
 SCALE-MIXED-PHASE-1C implementation checkpoint:
 `4d9acc422adc7b0634c89f07826558137070d28c`
 SCALE-STRESS-1B-PREP implementation checkpoint:
-pending exact green local checkpoint
+`1665d31ce056c3b28d4a94789e82863aff4887ca`
 
 ## Purpose
 
@@ -2057,4 +2057,4 @@ scope is affected.
   `ind_τΣ_`, integrated deduplication with the 29-signature continuation,
   TYPE/KIND formation, browser/default/product effects, Lambdapi changes, and
   mechanical-transfer graduation remain unauthorized. Exact green local
-  checkpoint: pending.
+  checkpoint: `1665d31ce056c3b28d4a94789e82863aff4887ca`.
