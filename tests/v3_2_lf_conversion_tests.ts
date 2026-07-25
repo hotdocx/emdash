@@ -10,6 +10,7 @@ import {
     CoreCheckerError,
     CoreElaborationSession,
     CoreLfChecker,
+    CoreLfCatalogRuntime,
     CoreLfConversionError,
     CoreLfDeclarationEnvironment,
     CoreLfElaborationSession,
@@ -372,6 +373,124 @@ describe('TypeScript v3.2 DTTLF LF-1C combined conversion', () => {
                 ? exhausted.path
                 : undefined,
             ['$', 'application:decode:argument:0']
+        );
+    });
+
+    it('retries a mismatched parent after nested normalization exposes a redex', () => {
+        let environment = CoreLfDeclarationEnvironment.empty();
+        environment = environment.extend({
+            name: 'lf_parent_alias',
+            type: categoryUniverse(25),
+            mode: explicitFunctorial,
+            provenance: because(25, 'LF-1C parent-redex alias'),
+            body: kernelApplication(
+                'category-of-categories',
+                [],
+                because(25, 'LF-1C parent-redex alias body')
+            ),
+            transparency: 'transparent'
+        });
+        const normalizedRedex = kernelApplication(
+            'object-classifier',
+            [{
+                value: kernelApplication(
+                    'category-of-categories',
+                    [],
+                    because(26, 'LF-1C normalized parent argument')
+                )
+            }],
+            because(26, 'LF-1C normalized parent redex')
+        );
+        const left = categoryUniverse(27);
+        const runtime: CoreLfCatalogRuntime = Object.freeze({
+            revision: 'LF-1C-PARENT-AFTER-CHILD-1',
+            ruleIds: Object.freeze(['fixture.parent-after-child']),
+            rewriteHead(expression) {
+                if (!kernelExpressionEquals(expression, normalizedRedex)) {
+                    return Object.freeze({
+                        status: 'irreducible',
+                        expression
+                    });
+                }
+                return Object.freeze({
+                    status: 'rewritten',
+                    ruleId: 'fixture.parent-after-child',
+                    ruleIndex: 0,
+                    before: expression,
+                    after: left,
+                    match: Object.freeze({
+                        ruleId: 'fixture.parent-after-child',
+                        bindings: Object.freeze([])
+                    })
+                });
+            }
+        });
+        const right = kernelApplication(
+            'object-classifier',
+            [{ value: free('lf_parent_alias', 28) }],
+            because(28, 'LF-1C parent-before-child wrapper')
+        );
+
+        const comparison = coreLfDefinitionalCompare(
+            environment,
+            left,
+            right,
+            2,
+            undefined,
+            runtime
+        );
+        assert.equal(comparison.status, 'equal');
+        assert.deepEqual(
+            comparison.trace.map(entry => ({
+                kind: entry.reduction.kind,
+                path: entry.path,
+                ruleId: entry.reduction.kind === 'runtime'
+                    ? entry.reduction.ruleId
+                    : undefined
+            })),
+            [
+                {
+                    kind: 'delta',
+                    path: [
+                        '$',
+                        'application:object-classifier:argument:0'
+                    ],
+                    ruleId: undefined
+                },
+                {
+                    kind: 'runtime',
+                    path: ['$'],
+                    ruleId: 'fixture.parent-after-child'
+                }
+            ]
+        );
+
+        const exhausted = coreLfDefinitionalCompare(
+            environment,
+            left,
+            right,
+            1,
+            undefined,
+            runtime
+        );
+        assert.equal(exhausted.status, 'step-limit-exceeded');
+        assert.deepEqual(
+            exhausted.status === 'step-limit-exceeded'
+                ? {
+                    side: exhausted.side,
+                    path: exhausted.path,
+                    next: exhausted.next
+                }
+                : undefined,
+            {
+                side: 'right',
+                path: ['$'],
+                next: {
+                    kind: 'runtime',
+                    ruleId: 'fixture.parent-after-child',
+                    ruleIndex: 0
+                }
+            }
         );
     });
 

@@ -60,7 +60,9 @@ displayed-transfor uncurrying, completing the selected SCALE-STRESS-2/2B
 representation parent; SCALE-STRESS-3 is split by mechanism and in progress,
 with SCALE-STRESS-3A1 completing the exact transparent
 `Prof`/`ProfComparison` versus opaque `DefIso`/`Prof_cat`/`Prof_tensor`
-declaration boundary and SCALE-STRESS-3A2 next for profunctor action
+declaration boundary and SCALE-STRESS-3A2A compiling `ProfMap`,
+comparison push/pull, and identity action after closing the generic nested
+congruence retry; SCALE-STRESS-3A2B is next for product/tensor action
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1469,7 +1471,16 @@ SCALE-STRESS-3A1 pins `DefIso`, `Prof_cat`, transparent `Prof`, transparent
 `ProfComparison`, and opaque `Prof_tensor`. The unchanged generic declaration
 compiler checks the non-contiguous delta dependency chain, and bounded
 TypeScript/Lambdapi opacity evidence agrees. It activates no profile or rule.
-SCALE-STRESS-3A2 is next for profunctor comparison/tensor action; protected
+SCALE-STRESS-3A2A then pins the exact active `Hom` fold, identity declaration
+and object rule, `ProfMap`, and comparison push/pull closure. It compiles
+eight declarations plus one rule after the reviewed continuation and keeps
+the transparent `Hom ≔ Obj(Hom_cat ...)` source equation as an immutable fold
+to the existing semantic owner. The slice also closes a generic comparison
+gap: a nested child may now normalize under initially mismatched rigid heads,
+rebuild its parent, and expose a head redex under the unchanged shared
+budget. Synthetic exhaustion and live TypeScript/Lambdapi action evidence
+pass without activating a profile or adding a semantic rule.
+SCALE-STRESS-3A2B is next for product/projection and tensor action; protected
 and proof-heavy extensions plus WalkingEnd/HIT remain SCALE-STRESS-3B/3C.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
@@ -2586,3 +2597,13 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   agree without any generic engine or active-profile change. Profunctor
   comparison/tensor action remains SCALE-STRESS-3A2; protected/evidence
   extensions and WalkingEnd/HIT remain SCALE-STRESS-3B/3C.
+- **2026-07-25 — Profunctor comparison action represented.**
+  SCALE-STRESS-3A2A pins the exact `Hom` fold evidence, identity computation,
+  `ProfMap`, and comparison push/pull closure. Eight declarations and one
+  local rule compile after the reviewed continuation; the active transparent
+  `Hom` equation folds to its existing semantic owner. The generic
+  comparator now normalizes a nested descendant beneath mismatched rigid
+  heads, rebuilds, and retries the exposed parent redex under the same global
+  budget. Synthetic exhaustion and bounded live action evidence pass. No
+  active profile or new semantic rule was added; product/projection and
+  tensor action remain SCALE-STRESS-3A2B.

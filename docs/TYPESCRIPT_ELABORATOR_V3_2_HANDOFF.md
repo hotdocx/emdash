@@ -35,9 +35,12 @@ clauses without a generic engine change; representation-only
 SCALE-STRESS-2B3 now pins and executes Sigma-total displayed-transfor
 uncurrying, completing the selected SCALE-STRESS-2/2B qualification parent;
 SCALE-STRESS-3 is now split by mechanism and in progress, with
-declaration-only SCALE-STRESS-3A1 pinning and compiling the transparent
-`Prof`/`ProfComparison` chain across opaque `DefIso`/`Prof_cat` and preserving
-opaque `Prof_tensor`; profunctor action is next in SCALE-STRESS-3A2, while
+declaration-only SCALE-STRESS-3A1 pinning the transparent
+`Prof`/`ProfComparison` chain across opaque `DefIso`/`Prof_cat`, and
+comparison-action SCALE-STRESS-3A2A compiling `ProfMap` plus push/pull and the
+identity-object rule; its generic nested-congruence retry and canonical
+`Hom`-owner fold are complete without activating a profile; product/tensor
+action is next in SCALE-STRESS-3A2B, while
 protected/evidence extensions and WalkingEnd/HIT remain 3B/3C; generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
@@ -352,9 +355,18 @@ SCALE-STRESS-3A1 then pins the exact non-contiguous `DefIso`, `Prof_cat`,
 generic declaration compiler checks `Prof` and `ProfComparison` transparently
 through the dependency chain while keeping the three primitive owners opaque.
 Bounded TypeScript delta/opacity witnesses and Lambdapi positive/negative
-evidence agree. No action rule or active profile changed;
-SCALE-STRESS-3A2 next closes `ProfMap`, comparison push/pull, product
-projection computation, and tensor functor action.
+evidence agree. No action rule or active profile changed. SCALE-STRESS-3A2A
+subsequently pins the exact `Hom`/identity/`ProfMap`/push/pull dependency
+closure, records the transparent `Hom ≔ Obj(Hom_cat ...)` equation as a
+canonical fold to the existing semantic owner, compiles eight declarations
+and the identity-object clause, and checks push/pull through the opaque
+generic postcomposition owner. This exposed and closed one generic conversion
+gap: after rigid heads differ, the bounded comparator can now normalize the
+first reducible nested child, rebuild, and retry an exposed parent redex while
+retaining one global path-aware budget. Synthetic exhaustion and bounded live
+Lambdapi typing/rejection agree. Nothing is activated in a default, reviewed,
+MVP, browser, or product profile. SCALE-STRESS-3A2B next closes
+product/projection computation and tensor functor action.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints
