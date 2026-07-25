@@ -39,7 +39,7 @@ exact combined-profile proposal is complete and H-DTTLF-03 is pending
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`197e20ea7925be24147525132f1695710082292c`
+`f15430b952fa77cac74888f465d9d53c16dbddf0`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
@@ -1861,13 +1861,14 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest local implementation checkpoint is
-197e20ea7925be24147525132f1695710082292c, followed by its documentation-only
-checkpoint at the actual recorded HEAD. DIRECTED-1C is complete. Recover the
-actual HEAD and checkpoint record; DIRECTED-GRADUATE-1's fresh 29-signature,
-ten-rule combined manifest and exact H-DTTLF-03 recommendation are now
-complete. Stop its dependent promotion at H-DTTLF-03 unless exact approval
-evidence exists. Do not create an approval artifact, change the
-browser/deployed profile, or broaden a metatheory claim by inference.
+f15430b952fa77cac74888f465d9d53c16dbddf0, followed by any
+documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C and
+the DIRECTED-GRADUATE-1 proposal are complete. Recover the actual HEAD and
+checkpoint record; the fresh 29-signature, ten-rule combined manifest and
+exact H-DTTLF-03 recommendation are frozen. Stop its dependent promotion at
+H-DTTLF-03 unless exact approval evidence exists. Do not create an approval
+artifact, change the browser/deployed profile, or broaden a metatheory claim
+by inference.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -2145,3 +2146,12 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   reduction, performance, release, internal-Pi/uncurrying, and groupoidal
   claims. No independent implementation row is ready while H-DTTLF-03 is
   pending.
+- **2026-07-24 — DIRECTED-GRADUATE-1 proposal checkpointed.** Recorded local
+  checkpoint `f15430b952fa77cac74888f465d9d53c16dbddf0` after the exact
+  staged-diff review, 11 focused proposal tests, 408-test TypeScript gate,
+  bounded active-kernel check, full cross-layer gate, header lint, and
+  whitespace audit passed. The checkpoint contains only the non-authorizing
+  combined manifest/recommendation, tests and exports, and synchronized plan.
+  It is review/backtracking evidence and grants no H-DTTLF-03 approval,
+  browser/deployed-profile promotion, new metatheory claim, or broader Git
+  authority.
