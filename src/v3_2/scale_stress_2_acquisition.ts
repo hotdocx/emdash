@@ -271,3 +271,105 @@ CoreLfCanonicalSelectionContract =
             }
         ]
     });
+
+/**
+ * Checked source/export selection for the internal-Pi base-arrow action.
+ *
+ * The six selected declarations are the smallest exact type dependency
+ * closure for the two active `fdapp1_int_cell` rules. Transparent bodies
+ * whose wider computation closure is not selected remain explicit policy
+ * boundaries in the representation layer.
+ */
+export const CORE_LF_SCALE_STRESS_2_PI_BASE_ACTION_ACQUISITION:
+CoreLfCanonicalSelectionContract =
+    createCoreLfCanonicalSelectionContract({
+        revision: 'SCALE-STRESS-2-PI-BASE-ACTION-ACQUISITION-1',
+        moduleId: 'emdash.emdash3_2',
+        authorityPath: 'emdash2/emdash3_2.lp',
+        sourceSha256:
+            'sha256:f438985ca874f1037e9a63b597e58883d0c0fcc86434117a125297592739c613',
+        canonicalExport: {
+            exporterVersion: '3.0.0-90-gdb4f780',
+            sha256:
+                'sha256:355bd868c33553e0c7488a181d7c58661471fc2c878e63d5ceba296d26c056a0',
+            imports: []
+        },
+        commands: [
+            {
+                id: 'pi-base-action.terminal-category',
+                ordinal: 512,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:cefdb784ec1b0e4011340c457ee0589cd74ceedac88ac2ee697e68f5446172fb',
+                name: 'Terminal_cat',
+                modifiers: ['constant'],
+                hasBody: false
+            },
+            {
+                id: 'pi-base-action.fibre-category',
+                ordinal: 925,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:d7aaaf14f6f371ec87a6f2a372c51f32ba74b006508ba8669573970245dcb459',
+                name: 'Fibre_cat',
+                modifiers: [],
+                hasBody: true
+            },
+            {
+                id: 'pi-base-action.transport-left',
+                ordinal: 1074,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:eab1554f095d3c280f6f8e4fdae536f5deac70119f097dd980272c568d539041',
+                name: 'functord_transport_lhs_func',
+                modifiers: [],
+                hasBody: true
+            },
+            {
+                id: 'pi-base-action.transport-right',
+                ordinal: 1075,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:5e5174bcbf284984062799b12ce7eac24471f94851bc3cf922c1841fa600e9ff',
+                name: 'functord_transport_rhs_func',
+                modifiers: [],
+                hasBody: true
+            },
+            {
+                id: 'pi-base-action.internal-cell',
+                ordinal: 1095,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:8f5b9674ff6c1971047eeac626c6bf0e44fc312be9c0dea09a163373e2ec4273',
+                name: 'fdapp1_int_cell',
+                modifiers: [],
+                hasBody: false
+            },
+            {
+                id: 'pi-base-action.section-pullback',
+                ordinal: 1189,
+                kind: 'symbol',
+                textSha256:
+                    'sha256:6cebfc1c0241d6b67496d63e5989e3501841b6ae19e5013ecd8484c6c48d3d57',
+                name: 'section_pullback_func',
+                modifiers: [],
+                hasBody: false
+            },
+            {
+                id: 'pi-base-action.internal',
+                ordinal: 1195,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:883201c0f6a0ac632fa2f2a4b6567d48d2b624c534f4987f99150ce41a3221ac'
+            },
+            {
+                id: 'pi-base-action.pullback',
+                ordinal: 1196,
+                kind: 'rule',
+                clauseCount: 1,
+                textSha256:
+                    'sha256:b0e5c0dfe9828bb32f2cf5388cbbe9a08faf6e3662dbd492f2dffab7eee4865f'
+            }
+        ]
+    });
