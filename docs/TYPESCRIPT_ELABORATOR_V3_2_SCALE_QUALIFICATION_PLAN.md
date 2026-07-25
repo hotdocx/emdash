@@ -52,6 +52,8 @@ SCALE-0E implementation checkpoint:
 `ac8c8887d21c5dc2eeb14c9d3ec3ec4e96cd3ed3`
 SCALE-RUNTIME-DEPS-1 implementation checkpoint:
 `9e8e3f94177e85cbd49c6b50f9f193f6d1978470`
+SCALE-ACQUIRE-1A implementation checkpoint:
+`091538c8c3bda6e4e89dd3fee96fd6eed68a51f8`
 
 ## Purpose
 
@@ -1440,3 +1442,11 @@ scope is affected.
   commands. Seven focused tests and all 14 live inventory/acquisition tests
   pass. The adapter does not parse terms, invoke Lambdapi, attach semantic
   policy, or enter the browser; SCALE-STRESS-1A is next.
+- **2026-07-25 — SCALE-ACQUIRE-1A checkpointed.** Recorded local checkpoint
+  `091538c8c3bda6e4e89dd3fee96fd6eed68a51f8` after exact staged-diff
+  review, seven focused tests, the 478-test TypeScript gate, bounded active
+  kernel check, complete scale gate, all 14 live inventory/acquisition probes,
+  header lint, source hygiene scan, and whitespace audit passed. The
+  checkpoint adds no term parser, active declaration or rule, semantic
+  profile, browser API, Lambdapi change, theorem, mechanical-transfer claim,
+  or broader Git authority.
