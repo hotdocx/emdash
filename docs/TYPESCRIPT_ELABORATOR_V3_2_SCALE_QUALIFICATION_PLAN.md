@@ -44,11 +44,12 @@ TypeScript/Lambdapi evidence; H-DTTLF-SCALE-STRESS-01/
 D-DTTLF-SCALE-STRESS-001 remains the exact pending semantic decision;
 independent representation-only SCALE-STRESS-2A is complete with the exact
 Sigma/Pi telescope-uncurrying `unif_rule`, live positive/negative Lambdapi
-evidence, isolated TypeScript proof execution, and a newly explicit
-dependent-generated-constraint typing boundary; generated induction
-semantics, batch deduplication, that proof-typing boundary, and the measured
-outer-LF TYPE/KIND product boundary remain explicit rows before
-whole-transfer qualification
+evidence, and isolated TypeScript proof execution; generic
+SCALE-PROOF-CONSTRAINTS-1 now validates its dependent generated constraints
+source-ordered without an oracle, while generated induction semantics, batch
+deduplication, further mechanism stress, and the measured outer-LF
+TYPE/KIND product boundary remain explicit rows before whole-transfer
+qualification
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -485,7 +486,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-STRESS-1B | awaiting H-DTTLF-SCALE-STRESS-01 | SCALE-STRESS-1B-PREP, applicable semantic review | If approved, freeze the decision record and expose only the exact isolated root-development qualification profile plus its mandatory differential lane; do not claim complete inductive-command equivalence before SCALE-INDUCTIVE-1B or integrated batch reuse before SCALE-BATCH-1 |
 | SCALE-STRESS-2 | in progress | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Parent row for internal/pullback Pi and Sigma telescope uncurrying cases |
 | SCALE-STRESS-2A | complete | H-DTTLF-SCALE-02, SCALE-0E, SCALE-MIXED-PHASE-1 | Pin and directly represent `Catd`, `Sigma_proj1_pullback_catd`, and the active Sigma/Pi uncurrying `unif_rule`; compile and execute it only in an isolated proof program, carry the exact initial checking runtime through declaration/proof-only mixed extension, and classify dependent generated-constraint typing without semantic promotion |
-| SCALE-PROOF-CONSTRAINTS-1 | pending | SCALE-STRESS-2A | Replace the exact Lambdapi typing-oracle exception with generic source-ordered validation of dependent generated constraints, or freeze a narrower explicit residual boundary if that cannot be justified |
+| SCALE-PROOF-CONSTRAINTS-1 | complete | SCALE-STRESS-2A | Validate each generated problem under its checked prefix; reflect only a direct capture equality whose replacement uses strictly earlier captures as an acyclic transparent checking alias; record the exact aliases immutably; reject wrong order and all constraints that remain heterogeneous; remove the SCALE-STRESS-2A typing oracle |
 | SCALE-STRESS-2B | pending | SCALE-STRESS-2A, SCALE-PROOF-CONSTRAINTS-1, applicable semantic review | Extend the same owner-free path to `Pi_int_funcd`, `Pi_pullback_funcd`, `Sigma_catd_functord_catd`, and `Sigma_transfd_funcd` runtime/telescope cases |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
@@ -901,9 +902,10 @@ The compiler:
 - records source order and the exact earlier proof-rule prefix without using
   a mutable registration table; and
 - supports an exact, ordered, self-invalidating Lambdapi typing-oracle
-  exception for a future reviewed dependent rule that the current standalone
-  checker cannot validate. No SCALE-0E fixture needs that exception; unknown,
-  foreign, reordered, duplicate, or stale exceptions fail compilation.
+  exception for a future reviewed rule outside the generic source-ordered
+  checking-alias envelope. No current generic fixture or SCALE-STRESS-2A
+  rule needs that exception; unknown, foreign, reordered, duplicate, or stale
+  exceptions fail compilation.
 
 The comparison engine first runs the existing bounded β/δ/runtime
 definitional comparison. If conversion does not close the problem, it tries
@@ -943,16 +945,17 @@ iteration bound, or console/fail-soft error handling. Current explicit Core,
 immutable policy, qualified declarations, and session-local metavariables own
 those responsibilities instead.
 
-`tests/v3_2_lf_transfer_proof_tests.ts` supplies nine focused tests over an
+`tests/v3_2_lf_transfer_proof_tests.ts` supplies twelve focused tests over an
 unrelated opaque `Nat`/`Code` declaration fixture. Two executable
 representation-only rules prove strict typing, deterministic prefix order,
 forward/symmetric matching, direct generated-meta solving, RHS-only fresh
 metas, ordered multi-constraint success and stuck evidence, and bounded
-cyclic application. Negative cases reject incomplete policy, plicity drift,
-ill-typed constraints, wildcard/higher-order patterns, and stale/foreign
-typing-oracle exceptions. Source/API tests prove that the compiler contains
-no active category owner, old global-registry path, runtime interface, or
-browser export.
+cyclic application. SCALE-PROOF-CONSTRAINTS-1 adds dependent
+capture/capture, capture/closed-term, and wrong-source-order cases. Negative
+cases also reject incomplete policy, plicity drift, ill-typed constraints,
+wildcard/higher-order patterns, and stale/foreign typing-oracle exceptions.
+Source/API tests prove that the compiler contains no active category owner,
+old global-registry path, runtime interface, or browser export.
 
 Validation on 2026-07-24:
 
@@ -1627,14 +1630,12 @@ case:
    explicit dependency. Because a raw catalog runtime has no compiled
    fragment identity, combining it with a local runtime phase fails closed;
    such composition must use the existing explicit runtime-fragment path.
-2. The standalone proof-rule validator checks each generated equality in a
-   rigid telescope. It therefore cannot yet use the preceding `K ≡ K'`
-   problem to make the later `R/R'` and `D/D'` types homogeneous. The exact
-   active rule compiles only with the already-designed, self-invalidating
-   Lambdapi typing oracle and records the diagnostic naming `K2` versus `K`.
-   SCALE-PROOF-CONSTRAINTS-1 is the smallest correcting row and must either
-   implement generic source-ordered dependent validation or freeze a
-   justified narrower residual boundary.
+2. At the SCALE-STRESS-2A checkpoint, the standalone proof-rule validator
+   checked each generated equality in a rigid telescope. It could not use the
+   preceding `K ≡ K'` problem to make the later `R/R'` and `D/D'` types
+   homogeneous, so the exact active rule temporarily required the existing
+   self-invalidating Lambdapi typing oracle. SCALE-PROOF-CONSTRAINTS-1 below
+   closes that measured boundary without weakening independent checking.
 
 `CORE_LF_SCALE_STRESS_2A_MODULE` and its proof program are root-development
 evidence only. No default/browser/product profile imports them; no runtime
@@ -1670,6 +1671,95 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 14 live canonical inventory/acquisition probes passed
   all 14 mixed-phase conformance tests passed
   all 6 live proof-stress tests passed
+```
+
+## SCALE-PROOF-CONSTRAINTS-1 Completion Record
+
+SCALE-PROOF-CONSTRAINTS-1 replaces the exact Sigma/Pi typing exception with a
+generic, bounded equality-assumption context for static proof-rule checking.
+Generated problems remain ordered data and are processed as follows:
+
+1. The main proof problem is checked in the original rigid synthetic variable
+   telescope.
+2. Each generated equality must be independently well typed under only the
+   already accepted prefix. No alias from the current or a later problem is
+   available while making this check.
+3. After that check, one side may be reflected as a checking-only transparent
+   definition when it is a direct capture and the other side contains only
+   strictly earlier captures. The compiler chooses the unique acyclic
+   orientation, rebuilds the complete synthetic telescope through the same
+   checked declaration/runtime path, and then checks the next problem.
+4. Equalities without that safe direct-capture orientation grant no static
+   assumption. A dependent problem that remains heterogeneous fails closed.
+
+This is a deliberately smaller and more auditable mechanism than general
+equality reflection. It cannot introduce a cycle, make an earlier declaration
+depend on a later capture, skip type checking of the learned equality, or add
+conversion to the executable runtime. The frozen
+`generatedConstraintAliases` record exposes every checking assumption with
+its source constraint index, target variable slot/name, and exact compiled
+replacement.
+
+Generic fixtures cover both:
+
+```text
+index ≡ index2; element ≡ element2
+```
+
+where the element types depend on their respective indices, and:
+
+```text
+index ≡ zero; element ≡ elementAtZero
+```
+
+where a capture is equated to a closed term. Reversing the dependent problem
+ahead of its base equality is rejected. The active Sigma/Pi rule now records
+the deterministic aliases `K2 := K`, `R2 := R`, and `D2 := D`; its
+`typingValidation` is `typescript-checked`, and
+`compileCoreLfScaleStress2aRepresentation` accepts no typing-oracle option.
+Forward/symmetric execution and the bounded positive/negative Lambdapi
+consumer are otherwise unchanged.
+
+The historical TypeScript prototype on `main` also appended unification-rule
+constraints in source order and attempted rules symmetrically. It did not
+type-check those rule problems and used mutable process-global rule and
+constraint arrays. This slice retains only the useful ordering and symmetry
+evidence; it does not restore named-HOAS storage, mutable registries,
+fail-soft logging, or owner-specific unification cases.
+
+No active proof/runtime rule, product/browser profile, Lambdapi source,
+general equality-reflection principle, transport term, semantic theorem, or
+mechanical-transfer graduation is added. The remaining proof typing-oracle
+API stays exact and self-invalidating for genuinely unsupported future rule
+shapes; SCALE-STRESS-2A no longer uses it.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_lf_transfer_proof_tests.ts \
+  tests/v3_2_scale_stress_2_representation_tests.ts
+  17 tests / 2 suites: 16 passed, 1 live probe skipped
+
+./scripts/pnpmw run check:scale-proof-stress
+  5 tests / 1 suite: all passed, including exact live acquisition and the
+  bounded positive/negative Lambdapi consumer
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  526 tests / 65 suites: 495 passed, 31 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript and kernel/report/book/audit gates passed
+  all 19 frozen MVP differential judgments passed
+  all 41 bounded Lambdapi kernel/example files passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+  all 14 mixed-phase conformance tests passed
+  all 5 live oracle-free proof-stress tests passed
 ```
 
 ## Human Review Gates
@@ -2176,3 +2266,14 @@ scope is affected.
   API, Lambdapi change, or scale graduation was added. Exact green local
   implementation checkpoint:
   `7ad46dc5ff4b677828787ed881d12550284c3450`.
+- **2026-07-25 — SCALE-PROOF-CONSTRAINTS-1 completed.** Generated proof
+  problems are now checked under their source prefix. Only an independently
+  well-typed direct-capture equality to a replacement using strictly earlier
+  captures may become an acyclic transparent checking alias; every such
+  assumption is retained in immutable compiled evidence. Synthetic
+  capture/capture and capture/closed-term dependent fixtures pass, while a
+  dependent problem placed before its base equality fails closed. The active
+  Sigma/Pi rule records `K2 := K`, `R2 := R`, and `D2 := D` and is now
+  TypeScript-checked without its Lambdapi typing exception. Proof execution
+  and bounded conformance are unchanged; no semantic profile, runtime
+  conversion, general equality reflection, or graduation claim was added.

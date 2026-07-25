@@ -63,6 +63,11 @@ const bridgeLeft =
     coreLfQualifiedSymbol(fixtureModuleId, 'bridge_left');
 const bridgeRight =
     coreLfQualifiedSymbol(fixtureModuleId, 'bridge_right');
+const family = coreLfQualifiedSymbol(fixtureModuleId, 'Family');
+const dependentLeft =
+    coreLfQualifiedSymbol(fixtureModuleId, 'dependent_left');
+const dependentRight =
+    coreLfQualifiedSymbol(fixtureModuleId, 'dependent_right');
 
 const fixtureSource = (sourceFragment: string) => ({
     authorityPath: 'tests/fixtures/generic_proof.lp',
@@ -84,6 +89,31 @@ const functionType = (
         'x',
         builder.global(argumentType),
         _ => builder.global(resultType)
+    ));
+};
+
+const familyType = () => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.pi(
+        'index',
+        builder.global(nat),
+        _index => builder.type()
+    ));
+};
+
+const dependentHeadType = () => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.pi(
+        'index',
+        builder.global(nat),
+        index => builder.pi(
+            'element',
+            builder.call(builder.global(family), [{
+                plicity: 'explicit',
+                value: index
+            }]),
+            _element => builder.global(code)
+        )
     ));
 };
 
@@ -179,6 +209,30 @@ const genericProofFixture = (): GenericProofFixture => {
                 modifiers: declarationModifiers,
                 provenance: fixtureSource(
                     `symbol ${symbol.name} (x : Nat) : Code;`
+                )
+            })),
+            {
+                order: 8,
+                symbol: family,
+                type: familyType(),
+                body: coreLfTransferAbsentBody(),
+                modifiers: declarationModifiers,
+                provenance: fixtureSource(
+                    'symbol Family (index : Nat) : TYPE;'
+                )
+            },
+            ...[
+                dependentLeft,
+                dependentRight
+            ].map((symbol, index) => ({
+                order: index + 9,
+                symbol,
+                type: dependentHeadType(),
+                body: coreLfTransferAbsentBody(),
+                modifiers: declarationModifiers,
+                provenance: fixtureSource(
+                    `symbol ${symbol.name} (index : Nat) ` +
+                        '(element : Family index) : Code;'
                 )
             }))
         ],
@@ -380,6 +434,194 @@ const replaceProofRules = (
     };
 };
 
+const dependentProofFixture = (
+    constraintOrder: 'base-first' | 'element-first'
+): GenericProofFixture => {
+    const fixture = genericProofFixture();
+    const builder = new CoreLfTransferScopedBuilder();
+    const index = builder.capture('index');
+    const element = builder.capture('element');
+    const index2 = builder.capture('index2');
+    const element2 = builder.capture('element2');
+    const familyAt = (
+        value: ReturnType<typeof builder.capture>
+    ) => builder.call(builder.global(family), [{
+        plicity: 'explicit',
+        value
+    }]);
+    const headAt = (
+        head: typeof dependentLeft,
+        indexValue: ReturnType<typeof builder.capture>,
+        elementValue: ReturnType<typeof builder.capture>
+    ) => builder.call(builder.global(head), [
+        {
+            plicity: 'explicit',
+            value: indexValue
+        },
+        {
+            plicity: 'explicit',
+            value: elementValue
+        }
+    ]);
+    const baseConstraint = {
+        left: builder.template(index),
+        right: builder.template(index2)
+    };
+    const elementConstraint = {
+        left: builder.template(element),
+        right: builder.template(element2)
+    };
+    const rule: CoreLfTransferProofRule = {
+        order: 0,
+        id: 'fixture.dependent.source-order',
+        sourceOwner: dependentLeft,
+        variables: [
+            {
+                name: 'index',
+                role: 'matched',
+                type: builder.template(builder.global(nat))
+            },
+            {
+                name: 'element',
+                role: 'matched',
+                type: builder.template(familyAt(index))
+            },
+            {
+                name: 'index2',
+                role: 'matched',
+                type: builder.template(builder.global(nat))
+            },
+            {
+                name: 'element2',
+                role: 'matched',
+                type: builder.template(familyAt(index2))
+            }
+        ],
+        problem: {
+            left: builder.pattern(
+                headAt(dependentLeft, index, element)
+            ),
+            right: builder.pattern(
+                headAt(dependentRight, index2, element2)
+            )
+        },
+        generatedConstraints:
+            constraintOrder === 'base-first'
+                ? [baseConstraint, elementConstraint]
+                : [elementConstraint, baseConstraint],
+        provenance: fixtureSource(
+            'unif_rule dependent_left $index $element ≡ ' +
+                'dependent_right $index2 $element2 ↪ ' +
+                (constraintOrder === 'base-first'
+                    ? '[ $index ≡ $index2; ' +
+                        '$element ≡ $element2 ];'
+                    : '[ $element ≡ $element2; ' +
+                        '$index ≡ $index2 ];')
+        )
+    };
+    return replaceProofRules(
+        fixture,
+        `generic-proof-dependent-${constraintOrder}-1`,
+        [rule],
+        [
+            nat,
+            family,
+            dependentLeft,
+            dependentRight
+        ].map(symbol => ({
+            symbol,
+            availability: 'earlier-fragment' as const
+        }))
+    );
+};
+
+const closedIndexProofFixture = (): GenericProofFixture => {
+    const fixture = genericProofFixture();
+    const builder = new CoreLfTransferScopedBuilder();
+    const index = builder.capture('index');
+    const element = builder.capture('element');
+    const elementAtZero = builder.capture('elementAtZero');
+    const familyAt = (
+        value: ReturnType<typeof builder.capture>
+    ) => builder.call(builder.global(family), [{
+        plicity: 'explicit',
+        value
+    }]);
+    const headAt = (
+        head: typeof dependentLeft,
+        indexValue: ReturnType<typeof builder.capture>,
+        elementValue: ReturnType<typeof builder.capture>
+    ) => builder.call(builder.global(head), [
+        { plicity: 'explicit', value: indexValue },
+        { plicity: 'explicit', value: elementValue }
+    ]);
+    const zeroExpression = builder.global(zero);
+    const rule: CoreLfTransferProofRule = {
+        order: 0,
+        id: 'fixture.dependent.closed-index',
+        sourceOwner: dependentLeft,
+        variables: [
+            {
+                name: 'index',
+                role: 'matched',
+                type: builder.template(builder.global(nat))
+            },
+            {
+                name: 'element',
+                role: 'matched',
+                type: builder.template(familyAt(index))
+            },
+            {
+                name: 'elementAtZero',
+                role: 'matched',
+                type: builder.template(familyAt(zeroExpression))
+            }
+        ],
+        problem: {
+            left: builder.pattern(
+                headAt(dependentLeft, index, element)
+            ),
+            right: builder.pattern(
+                headAt(
+                    dependentRight,
+                    zeroExpression,
+                    elementAtZero
+                )
+            )
+        },
+        generatedConstraints: [
+            {
+                left: builder.template(index),
+                right: builder.template(zeroExpression)
+            },
+            {
+                left: builder.template(element),
+                right: builder.template(elementAtZero)
+            }
+        ],
+        provenance: fixtureSource(
+            'unif_rule dependent_left $index $element ≡ ' +
+                'dependent_right zero $elementAtZero ↪ ' +
+                '[ $index ≡ zero; $element ≡ $elementAtZero ];'
+        )
+    };
+    return replaceProofRules(
+        fixture,
+        'generic-proof-dependent-closed-index-1',
+        [rule],
+        [
+            nat,
+            zero,
+            family,
+            dependentLeft,
+            dependentRight
+        ].map(symbol => ({
+            symbol,
+            availability: 'earlier-fragment' as const
+        }))
+    );
+};
+
 const coreName = (
     fixture: GenericProofFixture,
     symbol: typeof nat
@@ -437,6 +679,92 @@ describe('SCALE-0E generic LF proof-time compiler', () => {
         assertDeepFrozen(program.rules);
         assertDeepFrozen(program.module);
         assertDeepFrozen(program.policy);
+    });
+
+    it('checks dependent generated constraints in source order', () => {
+        const fixture = dependentProofFixture('base-first');
+        const program = compileCoreLfProofProgram(
+            fixture.module,
+            fixture.policy,
+            fixture.declarations
+        );
+        const validation = program.rules[0].typingValidation;
+        assert.equal(validation.kind, 'typescript-checked');
+        if (validation.kind !== 'typescript-checked') return;
+        assert.deepEqual(
+            validation.generatedConstraintAliases,
+            [
+                {
+                    constraintIndex: 0,
+                    variableSlot: 2,
+                    variableName: 'index2',
+                    replacement: {
+                        tag: 'capture',
+                        slot: 0,
+                        name: 'index'
+                    }
+                },
+                {
+                    constraintIndex: 1,
+                    variableSlot: 3,
+                    variableName: 'element2',
+                    replacement: {
+                        tag: 'capture',
+                        slot: 1,
+                        name: 'element'
+                    }
+                }
+            ]
+        );
+        assertDeepFrozen(validation);
+    });
+
+    it('reflects a checked capture-to-closed-term equality', () => {
+        const fixture = closedIndexProofFixture();
+        const program = compileCoreLfProofProgram(
+            fixture.module,
+            fixture.policy,
+            fixture.declarations
+        );
+        const validation = program.rules[0].typingValidation;
+        assert.equal(validation.kind, 'typescript-checked');
+        if (validation.kind !== 'typescript-checked') return;
+        assert.deepEqual(
+            validation.generatedConstraintAliases,
+            [
+                {
+                    constraintIndex: 0,
+                    variableSlot: 0,
+                    variableName: 'index',
+                    replacement: {
+                        tag: 'reference',
+                        name: 'proof_fixture_zero'
+                    }
+                },
+                {
+                    constraintIndex: 1,
+                    variableSlot: 2,
+                    variableName: 'elementAtZero',
+                    replacement: {
+                        tag: 'capture',
+                        slot: 1,
+                        name: 'element'
+                    }
+                }
+            ]
+        );
+    });
+
+    it('rejects a dependent constraint before its base equality', () => {
+        const fixture = dependentProofFixture('element-first');
+        expectProofError(
+            () => compileCoreLfProofProgram(
+                fixture.module,
+                fixture.policy,
+                fixture.declarations
+            ),
+            'INVALID_PROOF_RULE_TYPE'
+        );
     });
 
     it('matches symmetrically and solves generated meta constraints', () => {

@@ -13,9 +13,7 @@ import {
     CORE_LF_SCALE_STRESS_2A_MODULE,
     CORE_LF_SCALE_STRESS_2A_PLAN,
     CORE_LF_SCALE_STRESS_2A_POLICY,
-    CORE_LF_SCALE_STRESS_2A_TYPING_ORACLE,
     CORE_LF_SCALE_STRESS_2_UNCURRYING_ACQUISITION,
-    CoreLfProofCompilerError,
     acquireCoreLfCanonicalCommands,
     checkLambdapiProbe,
     compileCoreLfScaleStress2aRepresentation,
@@ -217,18 +215,7 @@ describe(
             assertDeepFrozen(CORE_LF_SCALE_STRESS_2A_PLAN);
         });
 
-        it('fails closed without the exact dependent typing oracle', () => {
-            assert.throws(
-                () =>
-                    compileCoreLfScaleStress2aRepresentation(false),
-                error =>
-                    error instanceof CoreLfProofCompilerError &&
-                    error.code === 'INVALID_PROOF_RULE_TYPE' &&
-                    /K2.*K|K.*K2/u.test(error.message)
-            );
-        });
-
-        it('compiles only an isolated proof program with explicit evidence', () => {
+        it('checks dependent constraints in source order without an oracle', () => {
             const { compiled } =
                 compileCoreLfScaleStress2aRepresentation();
             assert.deepEqual(
@@ -245,17 +232,39 @@ describe(
             assert.deepEqual(
                 rule?.typingValidation,
                 {
-                    kind: 'external-oracle-required',
-                    authorityPath:
-                        CORE_LF_SCALE_STRESS_2A_TYPING_ORACLE
-                            .authorityPath,
-                    evidence:
-                        CORE_LF_SCALE_STRESS_2A_TYPING_ORACLE
-                            .evidence,
-                    diagnostic:
-                        "Core type mismatch: free name " +
-                        "'proof_2_3_K2' differs from free name " +
-                        "'proof_2_0_K'"
+                    kind: 'typescript-checked',
+                    generatedConstraintAliases: [
+                        {
+                            constraintIndex: 0,
+                            variableSlot: 3,
+                            variableName: 'K2',
+                            replacement: {
+                                tag: 'capture',
+                                slot: 0,
+                                name: 'K'
+                            }
+                        },
+                        {
+                            constraintIndex: 1,
+                            variableSlot: 4,
+                            variableName: 'R2',
+                            replacement: {
+                                tag: 'capture',
+                                slot: 1,
+                                name: 'R'
+                            }
+                        },
+                        {
+                            constraintIndex: 2,
+                            variableSlot: 5,
+                            variableName: 'D2',
+                            replacement: {
+                                tag: 'capture',
+                                slot: 2,
+                                name: 'D'
+                            }
+                        }
+                    ]
                 }
             );
             assert.equal(compiled.latestRuntime, undefined);

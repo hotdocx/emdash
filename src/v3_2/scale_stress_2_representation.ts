@@ -3,10 +3,9 @@
  * uncurrying comparison.
  *
  * This compiles one isolated proof-time program against the reviewed
- * 29-signature continuation. The Lambdapi typing oracle is intentionally
- * explicit: the current standalone TypeScript rule validator cannot yet
- * propagate an earlier generated base constraint into the types of later
- * dependent generated constraints.
+ * 29-signature continuation. Generic source-ordered checking aliases let
+ * the standalone validator use an earlier generated base equality while
+ * checking later dependent generated constraints.
  */
 
 import {
@@ -41,9 +40,6 @@ import {
     createCoreLfMixedDeclarationLinkage,
     planCoreLfMixedPhases
 } from './lf_transfer_mixed';
-import {
-    CoreLfProofTypingOracle
-} from './lf_transfer_proof';
 import { binderMode } from './kernel';
 import {
     validateCoreLfScaleEngineReview
@@ -489,16 +485,6 @@ CoreLfMixedDeclarationLinkage =
         }
     );
 
-export const CORE_LF_SCALE_STRESS_2A_TYPING_ORACLE:
-CoreLfProofTypingOracle = Object.freeze({
-    authorityPath: 'emdash2/emdash3_2.lp',
-    ruleIds: Object.freeze(['stress.sigma-pi.uncurrying']),
-    evidence:
-        'Active Lambdapi v3.2 checks the exact source rule; the current ' +
-        'standalone TypeScript validator cannot yet use generated K ≡ K2 ' +
-        'while checking the dependent R/R2 and D/D2 constraints'
-});
-
 export interface CoreLfScaleStress2aCompilation {
     readonly initialDeclarations:
         ReturnType<
@@ -507,9 +493,8 @@ export interface CoreLfScaleStress2aCompilation {
     readonly compiled: CoreLfCompiledMixedModule;
 }
 
-export function compileCoreLfScaleStress2aRepresentation(
-    useTypingOracle = true
-): CoreLfScaleStress2aCompilation {
+export function compileCoreLfScaleStress2aRepresentation():
+CoreLfScaleStress2aCompilation {
     validateCoreLfScaleEngineReview();
     const initialCheckingRuntime =
         CoreDirected1bRuntimeProgram.create();
@@ -522,15 +507,7 @@ export function compileCoreLfScaleStress2aRepresentation(
         CORE_LF_SCALE_STRESS_2A_LINKAGE,
         {
             initialDeclarations,
-            initialCheckingRuntime,
-            ...(useTypingOracle
-                ? {
-                    proofOptions: () => ({
-                        typingOracle:
-                            CORE_LF_SCALE_STRESS_2A_TYPING_ORACLE
-                    })
-                }
-                : {})
+            initialCheckingRuntime
         }
     );
     return Object.freeze({

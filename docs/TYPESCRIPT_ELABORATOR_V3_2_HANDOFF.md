@@ -24,10 +24,11 @@ TypeScript/Lambdapi evidence are now complete; the exact
 H-DTTLF-SCALE-STRESS-01 decision is pending; independent representation-only
 SCALE-STRESS-2A now pins and executes the active Sigma/Pi uncurrying proof
 rule in an isolated TypeScript program, with bounded Lambdapi agreement and
-an explicit dependent-generated-constraint typing gap; generated induction
-semantics, integrated batch deduplication, that proof-typing row, plus the
-outer-LF TYPE/KIND Π-formation boundary remain explicit later work before
-any newly promoted active stress profile or whole-transfer claim
+generic source-ordered SCALE-PROOF-CONSTRAINTS-1 now closes its dependent
+generated-constraint typing gap without an oracle; generated induction
+semantics, integrated batch deduplication, further mechanism stress, plus
+the outer-LF TYPE/KIND Π-formation boundary remain explicit later work
+before any newly promoted active stress profile or whole-transfer claim
 
 ## Purpose
 
@@ -275,12 +276,16 @@ consumer. Mixed declaration/proof-only extension now explicitly carries the
 initial checking runtime and rejects any attempt to use a raw runtime as a
 local runtime-fragment dependency.
 
-The rule still needs the exact self-invalidating Lambdapi typing oracle:
-standalone TypeScript validation cannot yet use its first generated
-`K ≡ K'` constraint while checking the later `R/R'` and `D/D'` dependent
-constraints. SCALE-PROOF-CONSTRAINTS-1 is therefore the next independent
-engine row. This is measured executable evidence, not an active proof-rule
-registration or a mechanical-transfer qualification.
+SCALE-PROOF-CONSTRAINTS-1 has since removed that rule's exact typing oracle.
+The proof compiler checks each generated equality under its accepted source
+prefix and reflects only a direct capture equality to a replacement using
+strictly earlier captures as an acyclic transparent checking alias. It
+rebuilds the complete synthetic variable telescope through the same checked
+declaration/runtime path; wrong source order and all still-heterogeneous
+constraints fail closed. The Sigma/Pi rule records `K2 := K`, `R2 := R`, and
+`D2 := D` in immutable typing evidence. This remains isolated executable
+evidence, not an active proof-rule registration, general equality
+reflection, or a mechanical-transfer qualification.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

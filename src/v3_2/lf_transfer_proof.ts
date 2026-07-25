@@ -140,9 +140,24 @@ export interface CoreLfCompiledProofProblem {
     readonly right: CoreLfCompiledProofExpression;
 }
 
+/**
+ * A source-ordered equality that was safe to reflect as a transparent
+ * checking-only alias. The target capture is always later than every capture
+ * in the replacement, so rebuilding the synthetic rule telescope stays
+ * acyclic and preserves its original dependency order.
+ */
+export interface CoreLfProofGeneratedConstraintAlias {
+    readonly constraintIndex: number;
+    readonly variableSlot: number;
+    readonly variableName: string;
+    readonly replacement: CoreLfCompiledProofExpression;
+}
+
 export type CoreLfProofTypingValidation =
     | {
         readonly kind: 'typescript-checked';
+        readonly generatedConstraintAliases:
+            readonly CoreLfProofGeneratedConstraintAlias[];
     }
     | {
         readonly kind: 'external-oracle-required';
@@ -180,8 +195,8 @@ export interface CoreLfProofCompilerOptions {
     readonly runtimeProgram?: CoreLfCatalogRuntime;
     /**
      * Exact, self-invalidating exception for an active Lambdapi rule whose
-     * dependent generated constraints cannot yet be validated standalone by
-     * the TypeScript checker. Structural validation and variable-telescope
+     * generated constraints remain outside the generic source-ordered
+     * checking-alias envelope. Structural validation and variable-telescope
      * checking still run. Every listed exception must actually be needed.
      */
     readonly typingOracle?: CoreLfProofTypingOracle;
@@ -985,6 +1000,153 @@ const checkingCaptureValues = (
         sourceDepth: 0
     }));
 
+const substituteProofCheckingAliases = (
+    expression: CoreLfCompiledProofExpression,
+    aliases:
+        ReadonlyMap<number, CoreLfCompiledProofExpression>
+): CoreLfCompiledProofExpression => {
+    const substitute = (
+        child: CoreLfCompiledProofExpression
+    ): CoreLfCompiledProofExpression =>
+        substituteProofCheckingAliases(child, aliases);
+
+    switch (expression.tag) {
+        case 'universe':
+        case 'bound':
+        case 'reference':
+        case 'wildcard':
+            return expression;
+        case 'capture': {
+            const replacement = aliases.get(expression.slot);
+            return replacement === undefined
+                ? expression
+                : substitute(replacement);
+        }
+        case 'application':
+            return deepFreeze({
+                ...expression,
+                arguments: expression.arguments.map(argument => ({
+                    ...argument,
+                    value: substitute(argument.value)
+                }))
+            });
+        case 'call':
+            return deepFreeze({
+                ...expression,
+                callee: substitute(expression.callee),
+                arguments: expression.arguments.map(argument => ({
+                    ...argument,
+                    value: substitute(argument.value)
+                }))
+            });
+        case 'pi':
+        case 'lambda':
+            return deepFreeze({
+                ...expression,
+                binder: {
+                    ...expression.binder,
+                    mode: { ...expression.binder.mode },
+                    type: substitute(expression.binder.type)
+                },
+                body: substitute(expression.body)
+            });
+        default: {
+            const exhaustive: never = expression;
+            return exhaustive;
+        }
+    }
+};
+
+const proofCaptureSlots = (
+    expression: CoreLfCompiledProofExpression
+): readonly number[] => {
+    const slots = new Set<number>();
+    const visit = (
+        current: CoreLfCompiledProofExpression
+    ): void => {
+        switch (current.tag) {
+            case 'universe':
+            case 'bound':
+            case 'reference':
+            case 'wildcard':
+                return;
+            case 'capture':
+                slots.add(current.slot);
+                return;
+            case 'application':
+                current.arguments.forEach(argument =>
+                    visit(argument.value)
+                );
+                return;
+            case 'call':
+                visit(current.callee);
+                current.arguments.forEach(argument =>
+                    visit(argument.value)
+                );
+                return;
+            case 'pi':
+            case 'lambda':
+                visit(current.binder.type);
+                visit(current.body);
+                return;
+            default: {
+                const exhaustive: never = current;
+                return exhaustive;
+            }
+        }
+    };
+    visit(expression);
+    return Object.freeze([...slots].sort((left, right) => left - right));
+};
+
+const checkingAliasCandidate = (
+    constraint: CoreLfCompiledProofProblem,
+    constraintIndex: number,
+    variables: readonly CoreLfCompiledProofVariable[],
+    aliases:
+        ReadonlyMap<number, CoreLfCompiledProofExpression>
+): CoreLfProofGeneratedConstraintAlias | undefined => {
+    const left = substituteProofCheckingAliases(
+        constraint.left,
+        aliases
+    );
+    const right = substituteProofCheckingAliases(
+        constraint.right,
+        aliases
+    );
+    const candidates = [
+        { target: left, replacement: right },
+        { target: right, replacement: left }
+    ];
+    for (const candidate of candidates) {
+        if (
+            candidate.target.tag !== 'capture' ||
+            aliases.has(candidate.target.slot)
+        ) {
+            continue;
+        }
+        const targetSlot = candidate.target.slot;
+        const replacementSlots =
+            proofCaptureSlots(candidate.replacement);
+        if (
+            replacementSlots.some(
+                slot => slot >= targetSlot
+            )
+        ) {
+            continue;
+        }
+        const variable = variables[targetSlot];
+        if (variable === undefined) continue;
+        return deepFreeze({
+            constraintIndex,
+            variableSlot: variable.slot,
+            variableName: variable.name,
+            replacement: candidate.replacement
+        });
+    }
+    return undefined;
+};
+
 const ensureComparable = (
     checker: CoreLfChecker,
     left: KernelExpression,
@@ -1094,9 +1256,11 @@ const compileRule = (
 
     let ruleEnvironment = context.environment;
     const checkingReferences: KernelExpression[] = [];
+    const checkingNames = variables.map(variable =>
+        `proof_${source.order}_${variable.slot}_${variable.name}`
+    );
     for (const variable of variables) {
-        const checkingName =
-            `proof_${source.order}_${variable.slot}_${variable.name}`;
+        const checkingName = checkingNames[variable.slot];
         if (ruleEnvironment.lookup(checkingName) !== undefined) {
             return fail(
                 'INVALID_PROOF_CONTEXT',
@@ -1171,6 +1335,57 @@ const compileRule = (
     const witness = kernelUniverse(
         derivedProvenance(source, 'typing witness')
     );
+    const checkingEnvironmentWithAliases = (
+        aliases:
+            ReadonlyMap<number, CoreLfCompiledProofExpression>
+    ): CoreLfDeclarationEnvironment => {
+        let environment = context.environment;
+        const references: KernelExpression[] = [];
+        for (const variable of variables) {
+            const checkingName = checkingNames[variable.slot];
+            const values = checkingCaptureValues(references);
+            const type = instantiateCompiledExpression(
+                variable.type,
+                values,
+                source,
+                witness,
+                0
+            );
+            const alias = aliases.get(variable.slot);
+            const body = alias === undefined
+                ? undefined
+                : instantiateCompiledExpression(
+                    alias,
+                    values,
+                    source,
+                    witness,
+                    0
+                );
+            environment = environment.extend({
+                name: checkingName,
+                type,
+                mode: {
+                    plicity: 'explicit',
+                    variation: 'functorial'
+                },
+                provenance: derivedProvenance(
+                    source,
+                    `variable ${variable.name} checking alias`
+                ),
+                body,
+                transparency:
+                    alias === undefined ? 'opaque' : 'transparent'
+            });
+            references.push(kernelFree(
+                checkingName,
+                derivedProvenance(
+                    source,
+                    `variable ${variable.name} checking alias reference`
+                )
+            ));
+        }
+        return environment;
+    };
     const instantiateChecking = (
         expression: CoreLfCompiledProofExpression
     ): KernelExpression => instantiateCompiledExpression(
@@ -1192,20 +1407,40 @@ const compileRule = (
             instantiateChecking(problem.right),
             `Proof rule '${source.id}' problem`
         );
-        generatedConstraints.forEach((constraint, index) =>
+        const checkingAliases =
+            new Map<number, CoreLfCompiledProofExpression>();
+        const generatedConstraintAliases:
+            CoreLfProofGeneratedConstraintAlias[] = [];
+        let generatedConstraintEnvironment = ruleEnvironment;
+        generatedConstraints.forEach((constraint, index) => {
             ensureComparable(
                 createCoreLfChecker(
-                    ruleEnvironment,
+                    generatedConstraintEnvironment,
                     comparisonStepLimit,
                     runtimeProgram
                 ),
                 instantiateChecking(constraint.left),
                 instantiateChecking(constraint.right),
                 `Proof rule '${source.id}' generated constraint ${index}`
-            )
-        );
+            );
+            const alias = checkingAliasCandidate(
+                constraint,
+                index,
+                variables,
+                checkingAliases
+            );
+            if (alias === undefined) return;
+            checkingAliases.set(
+                alias.variableSlot,
+                alias.replacement
+            );
+            generatedConstraintAliases.push(alias);
+            generatedConstraintEnvironment =
+                checkingEnvironmentWithAliases(checkingAliases);
+        });
         typingValidation = deepFreeze({
-            kind: 'typescript-checked'
+            kind: 'typescript-checked',
+            generatedConstraintAliases
         });
     } catch (error: unknown) {
         if (error instanceof CoreLfProofCompilerError) throw error;

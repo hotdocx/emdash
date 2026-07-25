@@ -47,7 +47,8 @@ future transfers can become systematic; its first dependency-closed
 J/Pi/Sigma/Nat semantic profile is now an executable but non-active proposal
 awaiting H-DTTLF-SCALE-STRESS-01, while independent representation-only
 SCALE-STRESS-2A has executed the active Sigma/Pi uncurrying proof rule and
-opened the exact dependent-generated-constraint typing row
+generic SCALE-PROOF-CONSTRAINTS-1 has closed its
+dependent-generated-constraint typing row without an oracle
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1423,10 +1424,12 @@ comparison into an isolated proof-only program. Forward/symmetric
 TypeScript execution and bounded positive/negative Lambdapi evidence agree.
 The generic mixed compiler now carries an explicit initial checking runtime
 for declaration/proof-only extensions and rejects raw-runtime composition
-with a local runtime phase. The proof rule still needs its exact Lambdapi
-typing oracle because standalone validation cannot propagate the generated
-base equality into later dependent constraints; the scale plan owns
-SCALE-PROOF-CONSTRAINTS-1 as the smallest correcting row.
+with a local runtime phase. SCALE-PROOF-CONSTRAINTS-1 subsequently made each
+generated proof problem check under its accepted source prefix. Only an
+independently typed direct-capture equality to an expression using strictly
+earlier captures becomes an acyclic transparent checking alias. The active
+rule records `K2 := K`, `R2 := R`, and `D2 := D` and no longer needs its
+Lambdapi typing oracle; wrong ordering remains a hard type error.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2491,3 +2494,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   generated-constraint validation remains measured as
   SCALE-PROOF-CONSTRAINTS-1; no active profile or mechanical-transfer claim
   was added.
+- **2026-07-25 — Dependent generated-constraint checking closed.**
+  SCALE-PROOF-CONSTRAINTS-1 adds a generic source-prefix validation context
+  whose only learned assumptions are independently typed, acyclic
+  direct-capture aliases to strictly earlier expressions. Synthetic
+  capture/capture and capture/closed-term fixtures pass; wrong ordering
+  fails. The active Sigma/Pi rule is now fully TypeScript-checked without an
+  oracle. No runtime conversion, active profile, general equality
+  reflection, or mechanical-transfer claim was added.
