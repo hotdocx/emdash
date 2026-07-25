@@ -34,6 +34,8 @@ Reviewed directed-continuation implementation checkpoint:
 `71f46f66aba45d1b79a4c93746970b5d79e42fca`
 Pre-plan documentation checkpoint:
 `29976248189a8caa9797cced533ae11559dbe95c`
+SCALE-0A implementation checkpoint:
+`920c0d41b547edf41d8095ea02834abab6585657`
 
 ## Purpose
 
@@ -597,3 +599,10 @@ scope is affected.
   standalone opacity, 11 core inductive blocks, 633 canonical core runtime
   clauses, and 14 inductive constructors. The full scale gate passed while
   preserving both reviewed TypeScript profiles and all Lambdapi sources.
+- **2026-07-24 — SCALE-0A checkpointed.** Recorded local checkpoint
+  `920c0d41b547edf41d8095ea02834abab6585657` after the exact staged diff,
+  focused and live inventory suites, 423-test TypeScript gate, all 19 frozen
+  MVP differentials, all 41 kernel/example targets, all 11 directed
+  continuation judgments, report/link/whitespace audits, and the complete
+  scale gate passed. The checkpoint grants no H-DTTLF-SCALE-01 decision,
+  semantic import, product promotion, or broader Git authority.

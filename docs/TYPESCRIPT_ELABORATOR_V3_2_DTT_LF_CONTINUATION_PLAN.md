@@ -50,6 +50,8 @@ Latest local implementation checkpoint:
 `71f46f66aba45d1b79a4c93746970b5d79e42fca`
 Latest documentation checkpoint before scale qualification:
 `29976248189a8caa9797cced533ae11559dbe95c`
+First scale-qualification implementation checkpoint:
+`920c0d41b547edf41d8095ea02834abab6585657`
 Historical pre-implementation baseline:
 `a06433e57cba95e7d35f8577b7c71912862c3d25`
 
