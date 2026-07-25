@@ -38,6 +38,8 @@ Pre-plan documentation checkpoint:
 `29976248189a8caa9797cced533ae11559dbe95c`
 SCALE-0A implementation checkpoint:
 `920c0d41b547edf41d8095ea02834abab6585657`
+SCALE-0B implementation checkpoint:
+`2fd69f55ca8e5576fd91cf41990870bf16e1bb5f`
 
 ## Purpose
 
@@ -819,3 +821,9 @@ scope is affected.
   without installing either or adding an owner-specific code path. The
   433-test TypeScript gate passed with both reviewed profiles and the browser
   boundary unchanged. SCALE-0C is now dependency-ready.
+- **2026-07-24 — SCALE-0B checkpointed.** Recorded local checkpoint
+  `2fd69f55ca8e5576fd91cf41990870bf16e1bb5f` after exact staged-diff
+  review, ten focused transfer tests, the 433-test TypeScript gate, bounded
+  active kernel check, complete scale gate, header lint, and whitespace audit
+  passed. The checkpoint grants no parser, semantic promotion, product
+  expansion, mechanical-transfer qualification, or broader Git authority.
