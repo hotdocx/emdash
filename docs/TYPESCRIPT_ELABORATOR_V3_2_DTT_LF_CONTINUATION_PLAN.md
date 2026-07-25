@@ -50,7 +50,11 @@ SCALE-STRESS-2A has executed the active Sigma/Pi uncurrying proof rule and
 generic SCALE-PROOF-CONSTRAINTS-1 has closed its
 dependent-generated-constraint typing row without an oracle; generic
 SCALE-MIXED-RUNTIME-PREFIX-1 now carries an explicit same-module runtime
-lineage into later mixed continuations
+lineage into later mixed continuations; representation-only
+SCALE-STRESS-2B1 has now compiled and executed the internal/pullback
+dependent-Pi object, fold, and pointwise-component runtime package, with
+base-arrow action and Sigma-transfor uncurrying retained as the next 2B
+subrows
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1432,6 +1436,16 @@ independently typed direct-capture equality to an expression using strictly
 earlier captures becomes an acyclic transparent checking alias. The active
 rule records `K2 := K`, `R2 := R`, and `D2 := D` and no longer needs its
 Lambdapi typing oracle; wrong ordering remains a hard type error.
+SCALE-MIXED-RUNTIME-PREFIX-1 then made the reviewed same-module runtime
+lineage an explicit immutable dependency for later mixed continuations.
+SCALE-STRESS-2B1 uses that path for 18 pinned internal-Pi commands, compiling
+eight new declarations and nine rules after the exact ten-rule continuation
+prefix. All clauses execute and live Lambdapi reductions/non-conversion
+agree. Six subjects check strictly; three exact normalization cases remain
+self-invalidating oracle boundaries because `Catd_cat_func`'s transparent
+composition closure is outside 2B1. This remains isolated representation,
+not an active profile; base-arrow action and Sigma-transfor uncurrying are
+the dependency-ready 2B2/2B3 continuations.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2511,3 +2525,12 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   and prefixes every new runtime fragment. Dependency order, relation,
   duplicate, and raw-plus-fragment ambiguity checks remain fail-closed. No
   declaration, rule, profile, browser API, or semantic claim was added.
+- **2026-07-25 — Internal/pullback dependent-Pi representation executed.**
+  SCALE-STRESS-2B1 pins 18 exact commands and compiles eight additional
+  declarations plus nine source-ordered rules after the reviewed ten-rule
+  same-module runtime. All clauses execute; live acquisition, reduction,
+  non-conversion, and rejection agree with Lambdapi. Six subjects check
+  strictly and three exact normalization cases retain self-invalidating
+  oracles. The transparent `Catd_cat_func` composition closure, Pi
+  base-arrow action, Sigma-transfor uncurrying, active policy, and
+  whole-transfer claim remain withheld.

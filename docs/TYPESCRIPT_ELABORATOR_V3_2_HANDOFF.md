@@ -27,10 +27,14 @@ rule in an isolated TypeScript program, with bounded Lambdapi agreement and
 generic source-ordered SCALE-PROOF-CONSTRAINTS-1 now closes its dependent
 generated-constraint typing gap without an oracle; generic
 SCALE-MIXED-RUNTIME-PREFIX-1 now supplies an explicit immutable same-module
-runtime lineage to later mixed continuations; generated induction semantics,
-integrated batch deduplication, further mechanism stress, plus the outer-LF
-TYPE/KIND Π-formation boundary remain explicit later work before any newly
-promoted active stress profile or whole-transfer claim
+runtime lineage to later mixed continuations; representation-only
+SCALE-STRESS-2B1 now compiles and executes the internal/pullback dependent-Pi
+object, fold, and pointwise-component package over that exact lineage, while
+base-arrow action and Sigma-transfor uncurrying remain the next 2B slices;
+generated induction semantics, integrated batch deduplication, further
+mechanism stress, plus the outer-LF TYPE/KIND Π-formation boundary remain
+explicit later work before any newly promoted active stress profile or
+whole-transfer claim
 
 ## Purpose
 
@@ -298,6 +302,25 @@ Raw initial runtime plus fragment evidence, misclassified or foreign
 relations, duplicates, and order drift fail closed. This is generic
 orchestration only: no active declaration, rule, profile, or browser surface
 changed.
+
+SCALE-STRESS-2B1 exercises that seam with the first internal/pullback
+dependent-Pi runtime continuation. One checked acquisition contract pins 18
+exact active commands. The direct typed module reuses `Const_catd` and the
+SCALE-STRESS-2A/reviewed-continuation declarations by qualified identity,
+then compiles eight additional declarations and nine source-ordered rules
+against the exact reviewed ten-rule same-module runtime prefix. Every clause
+executes, and bounded Lambdapi acquisition, positive reduction,
+non-conversion, and rejected-conversion evidence agrees.
+
+`Functord` is checked transparently. The exact transparent
+`Catd_cat_func` body opens a separate composition/functor-category closure,
+so 2B1 retains its checked type opaquely. Six rule subjects are fully
+TypeScript-checked; the internal-Pi component, pullback fold, and pullback
+component keep exact self-invalidating Lambdapi normalization oracles.
+Nothing is activated in a default, reviewed, MVP, browser, or product
+profile. SCALE-STRESS-2B2 next covers internal-Pi base-arrow action, followed
+by SCALE-STRESS-2B3 for `Sigma_catd_functord_catd` and
+`Sigma_transfd_funcd`.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

@@ -48,9 +48,13 @@ evidence, and isolated TypeScript proof execution; generic
 SCALE-PROOF-CONSTRAINTS-1 now validates its dependent generated constraints
 source-ordered without an oracle; SCALE-MIXED-RUNTIME-PREFIX-1 now carries an
 explicit source-prior same-module runtime fragment through later mixed
-declaration/runtime/proof checking; generated induction semantics, batch
-deduplication, further mechanism stress, and the measured outer-LF TYPE/KIND
-product boundary remain explicit rows before whole-transfer qualification
+declaration/runtime/proof checking; SCALE-STRESS-2B is now in progress with
+representation-only SCALE-STRESS-2B1 complete for the internal/pullback
+dependent-Pi object, fold, and pointwise-component runtime package;
+base-arrow action and Sigma-transfor uncurrying remain explicit 2B subrows;
+generated induction semantics, batch deduplication, further mechanism stress,
+and the measured outer-LF TYPE/KIND product boundary remain explicit rows
+before whole-transfer qualification
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -89,6 +93,8 @@ SCALE-PROOF-CONSTRAINTS-1 implementation checkpoint:
 `a6208fb5d406b4d0acb19f9a77bf2a915b788132`
 SCALE-MIXED-RUNTIME-PREFIX-1 implementation checkpoint:
 `845a46bb760b67ea133f096fc221a18ccf95c435`
+SCALE-STRESS-2B1 implementation checkpoint:
+`568f1c9fa6aab6bb402c4c07d4190d15355cb2b7`
 
 ## Purpose
 
@@ -493,7 +499,10 @@ The architecture qualifies only when all of the following hold:
 | SCALE-STRESS-2A | complete | H-DTTLF-SCALE-02, SCALE-0E, SCALE-MIXED-PHASE-1 | Pin and directly represent `Catd`, `Sigma_proj1_pullback_catd`, and the active Sigma/Pi uncurrying `unif_rule`; compile and execute it only in an isolated proof program, carry the exact initial checking runtime through declaration/proof-only mixed extension, and classify dependent generated-constraint typing without semantic promotion |
 | SCALE-PROOF-CONSTRAINTS-1 | complete | SCALE-STRESS-2A | Validate each generated problem under its checked prefix; reflect only a direct capture equality whose replacement uses strictly earlier captures as an acyclic transparent checking alias; record the exact aliases immutably; reject wrong order and all constraints that remain heterogeneous; remove the SCALE-STRESS-2A typing oracle |
 | SCALE-MIXED-RUNTIME-PREFIX-1 | complete | SCALE-STRESS-2A, SCALE-RUNTIME-DEPS-1 | Let a mixed source continuation consume an explicit distinct same-module `earlier-fragment` runtime, use its flattened immutable closure while checking intervening declarations/inductives/proofs and as the prefix of local runtime phases, and reject relation/order/raw-runtime ambiguity |
-| SCALE-STRESS-2B | pending | SCALE-STRESS-2A, SCALE-PROOF-CONSTRAINTS-1, SCALE-MIXED-RUNTIME-PREFIX-1, applicable semantic review | Extend the same owner-free path to `Pi_int_funcd`, `Pi_pullback_funcd`, `Sigma_catd_functord_catd`, and `Sigma_transfd_funcd` runtime/telescope cases |
+| SCALE-STRESS-2B | in progress | SCALE-STRESS-2A, SCALE-PROOF-CONSTRAINTS-1, SCALE-MIXED-RUNTIME-PREFIX-1, applicable semantic review | Parent row extending the same owner-free, representation-only path to internal/pullback Pi and Sigma runtime/telescope cases without activating a semantic profile |
+| SCALE-STRESS-2B1 | complete | SCALE-STRESS-2A, SCALE-MIXED-RUNTIME-PREFIX-1 | Pin 18 exact internal-Pi commands; compile eight additional declarations and nine source-ordered runtime clauses against the reviewed ten-rule same-module prefix; exercise `Pi_int_funcd`/`Pi_pullback_funcd` object, fold, and pointwise reductions; retain the exact `Catd_cat_func` body and three subject-normalization cases as explicit boundaries |
+| SCALE-STRESS-2B2 | pending | SCALE-STRESS-2B1 | Extend the internal-Pi package through its base-arrow action (`fdapp1_int_cell` to `section_pullback_func`) and the smallest exact dependency closure; close or record any newly measured generic subject-normalization boundary |
+| SCALE-STRESS-2B3 | pending | SCALE-STRESS-2B2, SCALE-STRESS-2A | Transfer the selected `Sigma_catd_functord_catd` and `Sigma_transfd_funcd` telescope/uncurrying cases through the same generic phase and runtime-lineage path |
 | SCALE-STRESS-3 | pending | SCALE-0D, SCALE-0E, applicable semantic review | Profunctor, protected/evidence extension, and WalkingEnd/HIT cases |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
@@ -1822,6 +1831,76 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 5 live oracle-free proof-stress tests passed
 ```
 
+## SCALE-STRESS-2B1 Completion Record
+
+SCALE-STRESS-2B1 is the first runtime-bearing internal dependent-Pi
+continuation. Its checked acquisition contract pins 18 exact commands from
+`emdash2/emdash3_2.lp`: nine symbols and nine one-clause runtime rules, with
+source hash
+`sha256:f438985ca874f1037e9a63b597e58883d0c0fcc86434117a125297592739c613`
+and canonical-export hash
+`sha256:355bd868c33553e0c7488a181d7c58661471fc2c878e63d5ceba296d26c056a0`.
+`Const_catd` is already present by qualified identity, so the local mixed
+module contains eight new declarations and the nine rules in 17 exact
+source-ordered phases.
+
+The direct typed representation extends the exact SCALE-STRESS-2A
+declaration context and compiles the reviewed ten-rule directed-continuation
+runtime as an explicit same-module `earlier-fragment`. Every local rule is
+therefore checked against, and executes after, its exact immutable runtime
+lineage. The slice covers opposite-category objects, pullback and constant
+family fibres, pullback-family functor objects, `Pi_func` objects,
+`Pi_int_funcd` components, the `Pi_pullback_funcd` fold, and its pointwise
+component. `Functord` is installed from its checked transparent definition.
+
+The active `Catd_cat_func` transparent body opens a separate
+`comp_cat_fapp0`/`Functor_cat_func` dependency closure and is deliberately
+retained as an exact opaque type in 2B1. Six rule subjects validate strictly
+in TypeScript. Three exact rules—internal-Pi package component, pullback fold,
+and pullback component—retain self-invalidating Lambdapi subject-reduction
+oracles because that omitted body closure and the standalone displayed-hom
+normalization path are outside this bounded slice. Every one of the nine
+clauses executes in TypeScript, and a plicity-corrupted near miss remains
+irreducible.
+
+The new bounded `check:scale-telescope-stress` lane checks the pinned live
+canonical acquisition, six positive Lambdapi reductions, an accepted
+non-conversion assertion, and the corresponding rejected assertion. This is
+isolated representation and qualification evidence only. It installs no
+active declaration, rule, policy, or product/browser API; does not complete
+the transparent `Catd_cat_func` body; and does not yet cover internal-Pi
+base-arrow action, Sigma-transfor uncurrying, or mechanical whole-transfer
+qualification. Those are the explicit SCALE-STRESS-2B2/2B3 continuations.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_lf_transfer_mixed_tests.ts \
+  tests/v3_2_scale_stress_2_representation_tests.ts \
+  tests/v3_2_scale_stress_2b_representation_tests.ts
+  25 tests / 3 suites: 22 passed, 3 live probes skipped
+
+./scripts/pnpmw run check:scale-telescope-stress
+  5 tests / 1 suite: 5 passed
+
+./scripts/pnpmw run check:ts
+  532 tests / 66 suites: 500 passed, 32 live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript and kernel/report/book/audit gates passed
+  all 19 frozen MVP differential judgments passed
+  all 41 bounded Lambdapi kernel/example files passed
+  all 11 directed conformance probes passed
+  all 14 live canonical inventory/acquisition probes passed
+  all 15 mixed-phase conformance tests passed
+  all 5 live oracle-free proof-stress tests passed
+  all 5 live internal-Pi telescope-stress tests passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -2348,3 +2427,14 @@ scope is affected.
   semantic owner, rule, profile, browser API, or graduation claim was added.
   Exact green local implementation checkpoint:
   `845a46bb760b67ea133f096fc221a18ccf95c435`.
+- **2026-07-25 — SCALE-STRESS-2B1 internal/pullback Pi completed.** Pinned
+  18 exact active commands and compiled eight additional declarations plus
+  nine source-ordered runtime clauses against the exact reviewed ten-rule
+  same-module prefix. All clauses execute in TypeScript; six subjects check
+  strictly and three retain exact self-invalidating normalization oracles.
+  Live acquisition, six reductions, non-conversion, rejected-conversion,
+  root, kernel, and full scale gates pass. `Catd_cat_func`'s transparent
+  composition closure, base-arrow action, Sigma-transfor uncurrying, active
+  policy, and mechanical graduation remain explicit non-claims. Exact green
+  local implementation checkpoint:
+  `568f1c9fa6aab6bb402c4c07d4190d15355cb2b7`.
