@@ -40,6 +40,7 @@ export * from './scale_architecture_review';
 export * from './lf_transfer';
 export * from './lf_transfer_compiler';
 export * from './lf_transfer_runtime';
+export * from './lf_transfer_proof';
 export * from './directed_continuation_transfer';
 export * from './directed_continuation_runtime_transfer';
 export * from './metatheory';

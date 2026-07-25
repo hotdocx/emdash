@@ -28,9 +28,9 @@ scale, systematically, and mechanically. After clarifying that this direction
 did not require a full Lambdapi term parser as the architectural starting
 point, the user approved revised H-DTTLF-SCALE-01 on 2026-07-24.
 Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
-H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B is complete;
-SCALE-0C and SCALE-0D are complete; SCALE-0E is next; generic prior-runtime
-fragment composition remains a required pre-stress/batch mechanism
+H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
+are complete; SCALE-RUNTIME-DEPS-1 is next and remains a required
+pre-stress/batch mechanism
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -429,7 +429,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-0B | complete | revised H-DTTLF-SCALE-01, SCALE-0A | Shared immutable typed transfer IR and scoped builder for qualified declarations, explicit/tactic/absent bodies, runtime patterns, and separate proof problems; no parser or semantic promotion |
 | SCALE-0C | complete | SCALE-0B | Generic declaration compiler plus policy overlay; reproduce the reviewed 29-signature continuation without owner-specific catalog construction |
 | SCALE-0D | complete | SCALE-0C | Generic typed runtime-rule compiler/matcher; migrate the ten reviewed rules equivalently before adding stress semantics |
-| SCALE-0E | pending | SCALE-0C | Separate typed proof-time `unif_rule` compiler and bounded comparison engine, informed by reusable generic algorithms on `main` |
+| SCALE-0E | complete | SCALE-0C | Separate typed proof-time `unif_rule` compiler and bounded comparison engine, informed by reusable generic algorithms on `main` |
 | SCALE-RUNTIME-DEPS-1 | pending | SCALE-0D | Compose immutable generic runtime fragments through explicit module/prior-fragment dependencies; qualify the mechanism without silently promoting the active `Const_catd` fibre rule or any other new semantic rule |
 | SCALE-ACQUIRE-1 | deferred decision | SCALE-0C through SCALE-0E and representative encoding evidence | Decide whether bulk acquisition warrants a fail-closed canonical term/pattern parser/generator or a lighter checked extraction adapter; any adapter targets the same IR |
 | SCALE-STRESS-1 | pending | SCALE-0D, SCALE-RUNTIME-DEPS-1, applicable semantic review | Outer J, groupoidal Pi/Sigma, and imported Nat grouped-recursion cases |
@@ -824,8 +824,114 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
 SCALE-0D establishes generic runtime compilation and exact migration
 equivalence only. It adds no new semantic rule, profile, browser API,
 standalone subject-reduction claim, parser, or whole-development mechanical
-qualification. SCALE-0E is next; SCALE-RUNTIME-DEPS-1 is independently
-dependency-ready and is required before the applicable stress/batch rows.
+qualification. SCALE-RUNTIME-DEPS-1 is independently dependency-ready and is
+required before the applicable stress/batch rows.
+
+## SCALE-0E Completion Record
+
+SCALE-0E adds `src/v3_2/lf_transfer_proof.ts` as one owner-agnostic,
+proof-only compiler and bounded comparison engine over the SCALE-0B IR. It
+accepts a proof-only `CoreLfModuleSpec`, an exact separate
+`proof-unification` policy overlay, an already compiled qualified declaration
+context, and an optional immutable runtime-conversion dependency. It exposes
+no evaluator or `rewriteHead` interface.
+
+The compiler:
+
+- resolves every qualified symbol through the compiled declaration context,
+  checks exact intrinsic/free arity and plicity, rejects excluded owners, and
+  requires one policy entry for every proof rule;
+- compiles each dependent matched/fresh variable telescope in order, allowing
+  a variable type to depend only on the already compiled prefix;
+- validates both sides of the source problem and every generated constraint
+  with the current TypeScript LF checker;
+- records source order and the exact earlier proof-rule prefix without using
+  a mutable registration table; and
+- supports an exact, ordered, self-invalidating Lambdapi typing-oracle
+  exception for a future reviewed dependent rule that the current standalone
+  checker cannot validate. No SCALE-0E fixture needs that exception; unknown,
+  foreign, reordered, duplicate, or stale exceptions fail compilation.
+
+The comparison engine first runs the existing bounded β/δ/runtime
+definitional comparison. If conversion does not close the problem, it tries
+proof rules in immutable source order, forward and then symmetrically per
+rule. A successful match accumulates one substitution across both problem
+sides, allocates `fresh-constraint` metavariables in telescope order, and
+places the generated problems on an ordered worklist. Direct canonical
+meta/rigid problems delegate to the existing session, retaining its
+scope/occurs/Miller-pattern assignment checks. Conversion reductions,
+meta assignments, and proof-rule applications consume one shared explicit
+budget and produce an immutable trace, rule-application list, resolution
+order, and metavariable snapshot. Cyclic rule application therefore returns
+a structured next step at the exact bound rather than looping.
+
+First-order captures below binders use the same locally nameless discipline
+as the runtime matcher: a candidate independent of rule-local binders is
+canonicalized at the ambient comparison depth and reinserted capture-safely.
+Wildcards and genuinely higher-order `allowedBoundIndices` captures remain
+fail-closed boundaries in this row. The engine also deliberately makes no
+claim of complete Lambdapi-unifier parity, arbitrary rigid decomposition,
+flex-flex search, or coverage of the active 61-rule inventory.
+
+The old-main audit was performed against
+`30394f9ad7e3834e2786e1b42cc9ec396fcc2c8f`, specifically
+`src/types.ts`, `src/pattern.ts`, `src/unification.ts`, `src/state.ts`, and
+`src/globals.ts`. SCALE-0E retained only the generic operational lessons:
+
+- symmetric matching of an equality pair with one accumulated substitution;
+- ordered replacement of one problem by generated constraints;
+- fresh metavariables for variables used only by generated constraints; and
+- Miller-style scope, occurs, and bounded-worklist discipline.
+
+It did not copy the mutable process-global `userUnificationRules` array,
+untyped `addUnificationRule`, named-HOAS storage, category-specific term
+switches, undefined-argument-to-fresh-hole behavior, heuristic global
+iteration bound, or console/fail-soft error handling. Current explicit Core,
+immutable policy, qualified declarations, and session-local metavariables own
+those responsibilities instead.
+
+`tests/v3_2_lf_transfer_proof_tests.ts` supplies nine focused tests over an
+unrelated opaque `Nat`/`Code` declaration fixture. Two executable
+representation-only rules prove strict typing, deterministic prefix order,
+forward/symmetric matching, direct generated-meta solving, RHS-only fresh
+metas, ordered multi-constraint success and stuck evidence, and bounded
+cyclic application. Negative cases reject incomplete policy, plicity drift,
+ill-typed constraints, wildcard/higher-order patterns, and stale/foreign
+typing-oracle exceptions. Source/API tests prove that the compiler contains
+no active category owner, old global-registry path, runtime interface, or
+browser export.
+
+Validation on 2026-07-24:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_lf_transfer_proof_tests.ts
+  9 tests / 1 suite: all passed
+
+./scripts/pnpmw run check:ts
+  workspace contract, typecheck, ESLint, and root tests passed
+  464 tests / 58 suites: 437 passed, 27 process probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active core, all four extensions, and checks passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
+  complete TypeScript gate passed
+  all 19 frozen MVP differential judgments passed
+  41 kernel/example metric targets passed
+  39 kernel-script tests and five registry tests passed
+  source/report/book/audit gates passed
+  all 11 directed conformance probes passed
+  all seven live canonical-export inventory probes passed
+```
+
+SCALE-0E completes the three generic local compiler/engine foundations only.
+Its rules are synthetic representation fixtures. The active
+`Obj(Hom_cat ...)` witness remains `conformance-only`; no active proof rule,
+runtime rule, profile, product API, parser, or all-61-rule claim was promoted.
+SCALE-RUNTIME-DEPS-1 is next. Once generic prior-runtime composition is
+qualified, H-DTTLF-SCALE-02 reviews this engine boundary before any semantic
+stress import.
 
 ## Human Review Gates
 
@@ -1074,3 +1180,13 @@ scope is affected.
   subject-reduction claim, parser, product/profile expansion,
   whole-development mechanical-transfer qualification, or broader Git
   authority.
+- **2026-07-24 — SCALE-0E completed.** Added one generic proof-only compiler
+  and bounded symmetric constraint engine after auditing the reusable and
+  rejected parts of the old-main pattern/unification implementation. Two
+  unrelated typed fixture rules exercise accumulated pair matching,
+  RHS-only fresh metas, ordered generated constraints, direct session
+  assignments, and exact cyclic-budget exhaustion. Nine focused tests and
+  the 464-test TypeScript gate passed. No active `unif_rule`, runtime
+  conversion, browser API, semantic profile, parser, all-61-rule coverage, or
+  whole-development qualification was added. SCALE-RUNTIME-DEPS-1 is next
+  before H-DTTLF-SCALE-02.

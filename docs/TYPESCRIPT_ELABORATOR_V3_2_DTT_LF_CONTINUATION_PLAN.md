@@ -2337,3 +2337,13 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   added. SCALE-0E is next in the active scale plan; generic prior-runtime
   fragment composition is separately recorded before applicable stress and
   batch work.
+- **2026-07-24 — Generic proof-time engine completed.** SCALE-0E adds one
+  owner-agnostic typed proof-rule compiler and bounded symmetric
+  constraint-replacement engine over the shared transfer IR. It preserves
+  matched versus fresh variables, immutable source order, runtime/proof
+  separation, session-local scope/occurs/Miller assignments, and one shared
+  conversion/rule budget. Nine representation-only fixture tests pass; no
+  active `unif_rule`, continuation profile, or browser API was added, and no
+  parity claim is made for wildcard/higher-order patterns or the active
+  61-rule inventory. SCALE-RUNTIME-DEPS-1 is next in the active scale plan
+  before H-DTTLF-SCALE-02 and semantic stress imports.

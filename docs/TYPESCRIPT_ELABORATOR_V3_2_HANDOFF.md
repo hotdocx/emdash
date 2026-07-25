@@ -8,10 +8,10 @@ and directed-DTT work has additionally graduated the exact root-only opt-in
 `emdash-v3.2-dttlf-directed-1` continuation profile under H-DTTLF-03;
 systematic whole-development transfer remains unqualified and is now the
 subject of the active scale-qualification plan, whose shared transfer IR
-SCALE-0B, generic declaration compiler SCALE-0C, and generic runtime compiler
-SCALE-0D slices are complete; the separate proof-time engine SCALE-0E is
-next, while generic prior-runtime-fragment composition remains required
-before the applicable stress and batch rows
+SCALE-0B and generic declaration/runtime/proof compiler slices SCALE-0C
+through SCALE-0E are complete; generic prior-runtime-fragment composition
+SCALE-RUNTIME-DEPS-1 is next and remains required before the applicable
+stress and batch rows
 
 ## Purpose
 
@@ -155,8 +155,14 @@ generic declaration/runtime fixed point. All ten rewrites and near misses
 agree with the reviewed runtime; six pass strict TypeScript subject checking,
 while the nested Sigma-fibre rule and three frozen MVP rules retain their
 exact approved Lambdapi-oracle boundary. No missing `Const_catd` reduction was
-promoted. SCALE-0E is next, and SCALE-RUNTIME-DEPS-1 must qualify generic
-prior-fragment runtime composition before the applicable stress/batch rows.
+promoted. SCALE-0E now adds a separate owner-agnostic typed proof-rule
+compiler and bounded symmetric constraint engine over representation-only
+fixtures. It preserves source order, matched/fresh roles, one shared budget,
+session-local Miller assignments, runtime separation, and fail-closed
+wildcard/higher-order boundaries without promoting the existing active
+`Obj(Hom_cat ...)` witness or claiming all-61-rule coverage.
+SCALE-RUNTIME-DEPS-1 is next and must qualify generic prior-fragment runtime
+composition before H-DTTLF-SCALE-02 and the applicable stress/batch rows.
 Pinned checked canonical export supplies inventory and provenance and remains
 an optional later generator input, not an immediate term-parser prerequisite.
 
