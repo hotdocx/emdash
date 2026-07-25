@@ -84,6 +84,8 @@ SCALE-STRESS-1B-PREP implementation checkpoint:
 `1665d31ce056c3b28d4a94789e82863aff4887ca`
 SCALE-STRESS-2A implementation checkpoint:
 `7ad46dc5ff4b677828787ed881d12550284c3450`
+SCALE-PROOF-CONSTRAINTS-1 implementation checkpoint:
+`a6208fb5d406b4d0acb19f9a77bf2a915b788132`
 
 ## Purpose
 
@@ -2277,3 +2279,5 @@ scope is affected.
   TypeScript-checked without its Lambdapi typing exception. Proof execution
   and bounded conformance are unchanged; no semantic profile, runtime
   conversion, general equality reflection, or graduation claim was added.
+  Exact green local implementation checkpoint:
+  `a6208fb5d406b4d0acb19f9a77bf2a915b788132`.
