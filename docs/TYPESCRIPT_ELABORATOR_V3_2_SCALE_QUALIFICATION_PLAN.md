@@ -70,6 +70,8 @@ SCALE-MIXED-PHASE-1A implementation checkpoint:
 `9e0265fb0d0d8fb5a7c4a20a1ec460ca1485eb38`
 SCALE-MIXED-PHASE-1B implementation checkpoint:
 `b7506a2d23c3c4ce5f9fdccd68cbdc9fe1f67d34`
+SCALE-MIXED-PHASE-1C implementation checkpoint:
+`4d9acc422adc7b0634c89f07826558137070d28c`
 
 ## Purpose
 
@@ -1876,13 +1878,15 @@ scope is affected.
   phases still fail closed and open SCALE-MIXED-PHASE-1C; no active rule,
   semantic profile, browser API, checker policy, or mechanical-transfer claim
   was added.
-- **2026-07-25 — SCALE-MIXED-PHASE-1C completed.** A bounded
-  positive/negative Lambdapi probe established that a registered proof rule
-  uses runtime rules available at the later proof attempt, not only those
-  preceding its source command. Exact source-time proof artifacts are still
-  retained, while their completed-module executable view receives the final
-  declaration context and an immutable runtime that must extend every source
-  prefix by compiled-fragment object identity. The new bounded
+- **2026-07-25 — SCALE-MIXED-PHASE-1C completed and checkpointed.** Recorded
+  local implementation checkpoint
+  `4d9acc422adc7b0634c89f07826558137070d28c`. A bounded positive/negative
+  Lambdapi probe established that a registered proof rule uses runtime rules
+  available at the later proof attempt, not only those preceding its source
+  command. Exact source-time proof artifacts are still retained, while their
+  completed-module executable view receives the final declaration context
+  and an immutable runtime that must extend every source prefix by
+  compiled-fragment object identity. The new bounded
   `check:scale-phase-conformance` lane is part of `check:scale`; all 12 tests
   pass. The mixed-phase parent is complete. No mutable registry, active
   semantic rule/profile, browser API, parser, Lambdapi source change, or
