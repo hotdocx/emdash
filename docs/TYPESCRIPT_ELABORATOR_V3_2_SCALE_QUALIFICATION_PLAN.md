@@ -40,6 +40,8 @@ SCALE-0A implementation checkpoint:
 `920c0d41b547edf41d8095ea02834abab6585657`
 SCALE-0B implementation checkpoint:
 `2fd69f55ca8e5576fd91cf41990870bf16e1bb5f`
+SCALE-0C implementation checkpoint:
+`197e80deb80f30ff964ffc876773d823dd51a402`
 
 ## Purpose
 
@@ -927,3 +929,10 @@ scope is affected.
   444-test TypeScript gate passed; no runtime/proof compiler, semantic
   promotion, browser API, or mechanical-scale claim was added. SCALE-0D is
   next and SCALE-0E is dependency-ready.
+- **2026-07-24 — SCALE-0C checkpointed.** Recorded local checkpoint
+  `197e80deb80f30ff964ffc876773d823dd51a402` after exact staged-diff
+  review, eleven focused compiler/migration tests, the 444-test TypeScript
+  gate, bounded active kernel check, complete scale gate, header lint, and
+  whitespace audit passed. The checkpoint grants no runtime/proof compiler,
+  semantic promotion, parser, product expansion, mechanical-transfer
+  qualification, or broader Git authority.
