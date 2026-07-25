@@ -31,8 +31,9 @@ runtime lineage to later mixed continuations; representation-only
 SCALE-STRESS-2B1 now compiles and executes the internal/pullback dependent-Pi
 object, fold, and pointwise-component package over that exact lineage, and
 representation-only SCALE-STRESS-2B2 extends it through both base-arrow-action
-clauses without a generic engine change; Sigma-transfor uncurrying remains
-the next 2B slice;
+clauses without a generic engine change; representation-only
+SCALE-STRESS-2B3 now pins and executes Sigma-total displayed-transfor
+uncurrying, completing the selected SCALE-STRESS-2/2B qualification parent;
 generated induction semantics, integrated batch deduplication, further
 mechanism stress, plus the outer-LF TYPE/KIND Π-formation boundary remain
 explicit later work before any newly promoted active stress profile or
@@ -330,8 +331,19 @@ open a distinct computation closure and remain opaque, so both exact subjects
 retain self-invalidating Lambdapi normalization oracles. Live acquisition,
 unfolding, reduction, non-conversion, and rejected-conversion evidence agree.
 This is a data/policy-only extension: no generic engine or active profile
-changed. SCALE-STRESS-2B3 is next for `Sigma_catd_functord_catd` and
-`Sigma_transfd_funcd`.
+changed.
+
+SCALE-STRESS-2B3 then pins eight exact commands, reuses the reviewed
+`Sigma_catd_functord_catd` declaration and fibre rule by identity, and adds
+five declarations plus the `Sigma_transfd_funcd` object-component clause
+after the exact 21-rule 2B2 lineage. `Transfd` is checked transparently.
+`Fibre_func`'s exact body crosses a still-uninternalized Cat-valued
+`Functord`/`Transf` conversion seam, so that body and the component subject
+retain one exact opaque/self-invalidating-oracle boundary. The clause
+executes, and live unfolding, reduction, non-conversion, and rejection agree
+with Lambdapi. No generic engine or active profile changed. The selected
+SCALE-STRESS-2/2B parent is complete as representation evidence;
+SCALE-STRESS-3 is the next mechanism audit.
 
 The TypeScript layer may recover omitted categories, endpoints, variances,
 binder modes, and implicit arguments, and should produce useful constraints

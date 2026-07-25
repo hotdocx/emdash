@@ -55,7 +55,9 @@ SCALE-STRESS-2B1 has now compiled and executed the internal/pullback
 dependent-Pi object, fold, and pointwise-component runtime package, and
 representation-only SCALE-STRESS-2B2 has extended that exact lineage through
 both base-arrow-action clauses without a generic engine change;
-Sigma-transfor uncurrying remains the next 2B subrow
+representation-only SCALE-STRESS-2B3 has added and executed Sigma-total
+displayed-transfor uncurrying, completing the selected SCALE-STRESS-2/2B
+representation parent
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1451,8 +1453,15 @@ commands and two base-arrow runtime rules, compiles them after the complete
 retains its transparent definition, while two transport bodies and the
 corresponding exact subject-normalization cases remain explicit
 opaque/self-invalidating-oracle boundaries. This data-only extension required
-no generic engine change. Sigma-transfor uncurrying is the dependency-ready
-2B3 continuation.
+no generic engine change. SCALE-STRESS-2B3 now pins the eight-command
+Sigma-transfor closure, reuses the reviewed Sigma-family/fibre computation,
+and compiles five declarations plus one component rule after the exact
+21-rule lineage. `Transfd` is checked transparently; `Fibre_func`'s
+Cat-valued `Functord`/`Transf` conversion body and the corresponding subject
+retain one exact opaque/oracle boundary. The rule executes and bounded live
+evidence agrees without a generic engine change. The selected
+SCALE-STRESS-2/2B parent is complete as isolated representation;
+SCALE-STRESS-3 is next.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2550,3 +2559,12 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   cases remain opaque/self-invalidating-oracle boundaries. No generic engine,
   active profile, browser API, or whole-transfer claim changed; 2B3 remains
   next.
+- **2026-07-25 — Sigma-total displayed-transfor uncurrying represented.**
+  SCALE-STRESS-2B3 pins eight commands, reuses the reviewed Sigma-family
+  declaration/fibre rule, and compiles five new declarations plus one
+  component rule after the exact 21-rule 2B2 runtime. `Transfd` is
+  transparent; `Fibre_func`'s body and the corresponding subject retain one
+  exact opaque/self-invalidating-oracle boundary. TypeScript execution and
+  bounded live unfolding, reduction, non-conversion, and rejection agree.
+  No generic engine or active profile changed; the selected
+  SCALE-STRESS-2/2B representation parent is complete.
