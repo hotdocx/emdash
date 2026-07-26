@@ -134,6 +134,8 @@ SCALE-STRESS-3A2A implementation checkpoint:
 `9d73a7a61659f3a47d1ae7e3eb448805b648572d`
 SCALE-INTRINSIC-DELTA-1 / SCALE-STRESS-3A2B implementation checkpoint:
 `f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8`
+SCALE-STRESS-3B0 retention / USABILITY-0A/0B implementation checkpoint:
+`c2c6da01386b7fda1d26e71379c4256fb06ea637`
 
 ## Purpose
 
@@ -3008,4 +3010,5 @@ scope is affected.
   data/linkage/policy/evidence without checker/evaluator algorithm changes.
   Bulk 3B1/3B2 transfer is deferred behind the new usability critical path or
   an independent measured priority; no active profile, theorem, parser trust,
-  or whole-transfer claim was added.
+  or whole-transfer claim was added. Exact green local consolidation/demo
+  checkpoint: `c2c6da01386b7fda1d26e71379c4256fb06ea637`.

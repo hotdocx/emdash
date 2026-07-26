@@ -75,7 +75,7 @@ packages the existing dependent demo and qualifies categorical binders
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8`
+`c2c6da01386b7fda1d26e71379c4256fb06ea637`
 Latest documentation checkpoint before scale qualification:
 `29976248189a8caa9797cced533ae11559dbe95c`
 First scale-qualification implementation checkpoint:

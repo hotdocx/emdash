@@ -31,6 +31,8 @@ consolidation and USABILITY-0B's runnable dependent demo are complete;
 USABILITY-1A is the next dependency-ready categorical-binder specification
 slice, and wider declaration acquisition is explicitly deferred while the
 binder frontend is qualified
+USABILITY-0A/0B implementation checkpoint:
+`c2c6da01386b7fda1d26e71379c4256fb06ea637`
 
 ## Outcome And Corrected Priority
 
@@ -729,3 +731,8 @@ CI obligations.
   TypeScript, complete scale, all 41 kernel/example, directed, inventory,
   mixed, proof, telescope, profunctor, and module stress gates passed.
   USABILITY-1A is next.
+- **2026-07-26 — USABILITY-0A/0B checkpointed.** Recorded exact green local
+  checkpoint `c2c6da01386b7fda1d26e71379c4256fb06ea637` after exact staged
+  path/diff review and whitespace audit. The checkpoint grants no parser,
+  browser/profile expansion, new semantic owner or rule, frontend graduation,
+  remote Git operation, integration, publication, release, or cleanup.
