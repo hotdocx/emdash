@@ -116,9 +116,23 @@ constant, composition, explicit diagonal, evaluation after typed pairing,
 exchange, and nested product-context/curry, with generic LF checking and
 bounded positive/negative Lambdapi evidence. USABILITY-1B supplies the
 immutable callback-once contextual IR and exact object/arrow/full application
-selection from the USABILITY-1A RFC. The next dependency-ready row is
-USABILITY-1D API/serialization/diagnostic/example consolidation; the final
-frontend architecture is not yet graduated.
+selection from the USABILITY-1A RFC.
+
+USABILITY-1D now exposes that compiler through the stable root-only
+`CoreCategoricalProgram` facade and versioned backend-neutral
+`EMDASH-CORE-SEXP-1` inspection form. It normalizes immutable source-located
+diagnostics and packages pointwise application, diagonal, and exchange in:
+
+```text
+./scripts/pnpmw run demo:categorical-bracket
+```
+
+Every result is inferred and checked through the generic LF structural
+environment; the output contains semantic Core identities rather than
+Lambdapi spellings. There is no string-parser or production-Lambdapi
+dependency, and the facade remains outside the deployed browser profile. The
+next dependency-ready row is USABILITY-2A natural/displayed dependent
+qualification; the final frontend architecture is not yet graduated.
 
 ## Authority Boundary
 

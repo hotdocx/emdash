@@ -31,9 +31,10 @@ Status: active living plan; D-DTTLF-USABILITY-001 is approved; USABILITY-0A
 consolidation, USABILITY-0B's runnable dependent demo, and USABILITY-1A's
 categorical-binder/application specification plus USABILITY-1B's ordinary eta
 frontend plus USABILITY-1C's ordinary structural bracket compiler are
-complete; USABILITY-1D is the next dependency-ready ergonomic/API,
-serialization, diagnostic, and example consolidation slice, and wider
-declaration acquisition is
+complete; USABILITY-1D's ergonomic API, serialization, diagnostic, and
+example consolidation slice is also complete;
+USABILITY-2A is the next dependency-ready natural/displayed dependent
+frontend slice, and wider declaration acquisition is
 explicitly deferred while the binder frontend is qualified
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
@@ -43,6 +44,8 @@ USABILITY-1B implementation checkpoint:
 `da1cc36ced9dd80ba95a2a477af1903f77db3b6a`
 USABILITY-1C implementation checkpoint:
 `33282735bb685db67bdfa5658fbe77d05d7bf131`
+USABILITY-1D implementation checkpoint: pending the synchronized local
+checkpoint recorded after this tranche
 
 ## Outcome And Corrected Priority
 
@@ -409,7 +412,7 @@ frontend variables.
 | USABILITY-1A | complete | USABILITY-0B | Exact binder/application RFC and executable typed-surface specification; distinguishes LF and categorical abstraction, freezes five orthogonal axes, sixteen application judgments, a first-order contextual-IR contract, thirteen ordinary bracket prerequisites, nine diagnostic contracts, backend relocation, and fail-closed active/reserved/absent owner policies without semantic installation |
 | USABILITY-1B | complete | USABILITY-1A | Root-only immutable contextual surface, callback-once locally nameless eta evidence, ordinary functorial eta abstraction, generic declarative-operation reuse, exact object/capped-arrow/whole-hom action selection, higher Hom-object disambiguation, and fail-closed layer/classifier/object-only/natural/polarity/foreign/escaped/non-eta cases |
 | USABILITY-1C | complete | USABILITY-1B | Ordinary bracket-abstraction basis: exact typed transfer of the thirteen prerequisites plus `Functor_cat`/`Functor` support, unused-variable/constant weakening, exchange, duplicated-variable diagonal, evaluation after pairing, composition, and nested abstraction/curry; no owner-specific evaluator additions |
-| USABILITY-1D | pending | USABILITY-1C | Ergonomic surface/API consolidation, deterministic explicit-Core serialization, stable diagnostics, and focused TypeScript/Lambdapi conformance corpus |
+| USABILITY-1D | complete | USABILITY-1C | Stable root-only `CoreCategoricalProgram` facade, versioned deterministic backend-neutral explicit-Core serialization, normalized source-located diagnostics, exact fixtures, and a runnable pointwise/diagonal/exchange demo reusing the bounded TypeScript/Lambdapi corpus |
 | USABILITY-2A | pending | USABILITY-1D, active displayed owners | One natural/indexed or displayed dependent Pi/Sigma binder and application example through the same contextual IR; precise unsupported-action negative for the first absent structural capability |
 | USABILITY-GRADUATE-1 | pending | USABILITY-2A | Architecture review stating the exact mechanically reusable frontend envelope, remaining kernel-owner gaps, residual notation/parser choices, validation, and proposed product/trust boundary |
 | SCALE-RETURN-1 | deferred | USABILITY-GRADUATE-1 or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
@@ -782,12 +785,131 @@ EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
   active kernel, extensions, examples, and checks passed
 ```
 
-USABILITY-1D is next. It packages this now-working compiler into a stable
+USABILITY-1D, recorded below, packages this working compiler into a stable
 end-user construction API and example, gives the new generic-call output
 deterministic readable serialization, consolidates source diagnostics, and
-freezes the TypeScript/Lambdapi corpus. It must preserve the root-only
-candidate boundary and does not yet authorize the natural/displayed 2A
-slice or frontend graduation.
+freezes the TypeScript/Lambdapi corpus. It preserves the root-only candidate
+boundary and does not by itself authorize frontend graduation.
+
+## USABILITY-1D Completion Record
+
+USABILITY-1D adds a stable typed construction facade without adding a string
+parser, a second categorical semantics, or a backend dependency.
+`CoreCategoricalProgram` owns one program-local declaration environment,
+category-handle identity, source-site policy, ordinary categorical scoped
+builder, transferred structural compilation, and generic LF checker. Its
+public ordinary slice supplies:
+
+- program-local category assumptions and derived ordinary functor/product
+  category handles;
+- typed object, functor, and Hom assumptions;
+- whole-Hom boundaries;
+- one uniform type-directed `apply`;
+- functorial categorical `lambda`;
+- immutable contextual inspection; and
+- `compile`, which lowers, infers, checks, and returns the explicit term,
+  inferred/expected Core classifiers, structural evidence, and deterministic
+  serialized forms.
+
+Foreign category handles and foreign terms fail closed. Each categorical
+callback continues to execute exactly once and is immediately replaced by
+the first-order locally nameless contextual IR implemented in USABILITY-1B.
+The facade introduces no owner-specific checker/evaluator branch: all emitted
+terms are checked against the USABILITY-1C declaration environment and its
+generic composed runtime.
+
+`EMDASH-CORE-SEXP-1` is the first versioned backend-neutral explicit-Core
+inspection format. It:
+
+- preserves semantic owner identities, free-declaration identities,
+  application plicity, binder plicity/variation, locally nameless indices,
+  and contextual meta sharing;
+- omits source provenance and binder display hints, so alpha-equivalent
+  locally nameless terms with different source locations serialize
+  identically;
+- assigns contextual meta-session labels by deterministic encounter order;
+- permits presentation-only labels for free declarations, which the
+  categorical facade uses to replace compiler-private names with stable
+  `emdash.categorical.*` identities; and
+- is explicitly an inspection/conformance artifact, not a textual parser,
+  deserializer, Lambdapi syntax, or new trusted representation.
+
+The facade normalizes the existing surface, LF-declaration, checker, and
+program-boundary error families to one immutable diagnostic record containing
+phase, stable code, message, provenance detail, copied source span, and
+formatted location. The negative fixture applies an `A -> B` functor to an
+object of `C` and records
+`CLASSIFIER_ARGUMENT_MISMATCH` at the exact supplied site. This does not hide
+the original typed exception or turn unsupported actions into free
+constants.
+
+The non-interactive command:
+
+```text
+./scripts/pnpmw run demo:categorical-bracket
+```
+
+constructs and checks three representative end-user inputs directly in
+TypeScript:
+
+```text
+λ x :^f A. (H x) (K x)
+λ x :^f A. (D x) x
+λ x :^f A. λ y :^f B. (E y) x
+```
+
+The first exposes general pointwise application as identity/composition,
+typed `Product_pair`, and `Eval_func`; the second exposes contraction through
+`diag_func_func`; and the third exposes exchange through `sym_func_func`.
+The report prints the source form, canonical explicit Core, inferred
+classifier, and exact structural prerequisites. Inferred classifiers may use
+the transparent object-of-`Functor_cat` view; generic checking verifies them
+against the expected intrinsic `Functor` classifier. The demo then reports
+the source-located wrong-category negative and states both its zero string
+parser dependency and zero production Lambdapi dependency.
+
+The fixed identity fixture, pointwise structural fixture, callback-once and
+alpha/provenance invariance tests, object/capped-arrow/whole-Hom facade tests,
+diagnostic fixtures, demo contract, and browser-exclusion test freeze this
+API boundary. The existing bounded USABILITY-1C live Lambdapi corpus remains
+the conformance oracle for every selected structural owner, exact
+product-functor normalization, and a bad-codomain negative; USABILITY-1D does
+not duplicate that authority in production.
+
+Validation on 2026-07-26:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_core_serialization_tests.ts \
+  tests/v3_2_categorical_surface_spec_tests.ts \
+  tests/v3_2_categorical_surface_tests.ts \
+  tests/v3_2_categorical_bracket_tests.ts \
+  tests/v3_2_categorical_structural_transfer_tests.ts \
+  tests/v3_2_categorical_program_tests.ts \
+  tests/v3_2_categorical_bracket_demo_tests.ts
+  50 tests / 7 suites: 49 passed, 1 opt-in probe skipped
+
+./scripts/pnpmw run demo:categorical-bracket
+  deterministic 36-line pointwise/diagonal/exchange report completed
+
+./scripts/pnpmw run check:ts
+  workspace, typecheck, lint, and 622-test TypeScript gate passed
+  583 passed, 39 opt-in live probes skipped
+
+EMDASH_RUN_LAMBDAPI_CATEGORICAL_BRACKET_PROBES=1 \
+  node --require ts-node/register --test \
+  tests/v3_2_categorical_bracket_tests.ts
+  7 tests / 1 suite passed, including bounded positive/negative Lambdapi
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, examples, and checks passed
+```
+
+No active Lambdapi source, semantic owner catalog, runtime algorithm, deployed
+profile, browser export, parser, notation, or library-acquisition policy
+changed. USABILITY-2A is next: it must reuse this exact facade/contextual
+architecture for one natural/indexed or displayed dependent Pi/Sigma
+consumer and fail at the first genuinely absent active structural capability.
 
 ## Acceptance Criteria
 
@@ -884,7 +1006,7 @@ EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
 
 The packaged demo adds a deterministic non-interactive command recorded in
 `package.json`. Its output is fixture-tested; the command itself is executed
-before checkpointing USABILITY-0B.
+before checkpointing USABILITY-0B or USABILITY-1D as applicable.
 
 Any emitted or newly selected categorical owner requires a bounded Lambdapi
 positive and relevant negative probe. Changes to continuation semantics also
@@ -934,7 +1056,7 @@ declaration/runtime/proof/mixed-phase transfer mechanisms. Direct typed
 TypeScript transfer is the default; “mechanical” means data, linkage, policy,
 and focused evidence rather than a new checker/evaluator algorithm.
 
-Preserve completed USABILITY-0A/0B/1A/1B/1C: the parser experiment remains
+Preserve completed USABILITY-0A/0B/1A/1B/1C/1D: the parser experiment remains
 removed,
 the generic visibility/tactic/inventory infrastructure remains validated,
 and the runnable dependent Sigma-telescope demo retains direct TypeScript
@@ -960,7 +1082,17 @@ diagonal, typed pairing/evaluation, exchange, and nested
 product-context/curry lowering, its generic LF checks, and the
 root-only/browser/profile boundary.
 
-Begin with dependency-ready USABILITY-1D, then implement the
+Preserve the USABILITY-1D product boundary: the program-local typed facade,
+category handles, category/object/functor/Hom constructors, uniform
+application and functorial lambda, generic LF inference/checking,
+`EMDASH-CORE-SEXP-1` provenance-free alpha-invariant serialization,
+presentation-only semantic free labels, normalized immutable source
+diagnostics, exact identity/pointwise fixtures, and runnable
+pointwise/diagonal/exchange demo. Keep the serializer an inspection artifact,
+not a parser or backend syntax, and keep all of this out of the frozen browser
+profile.
+
+Begin with dependency-ready USABILITY-2A, then implement the
 categorical-binder frontend in the ledger's order and follow
 docs/TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md. Keep outer LF
 lambda separate from functorial abstraction. Use a small
@@ -1085,3 +1217,14 @@ CI obligations.
   staged review and whitespace audit. It preserves the frozen deployed and
   browser profiles and authorizes no remote Git, integration, publication,
   release, history rewrite, or cleanup operation.
+- **2026-07-26 — USABILITY-1D ergonomic program API completed.** Added the
+  root-only `CoreCategoricalProgram`, deterministic versioned
+  `EMDASH-CORE-SEXP-1` inspection form, semantic presentation labels,
+  normalized source diagnostics, fixed identity/pointwise fixtures, and the
+  runnable `demo:categorical-bracket` pointwise/diagonal/exchange witness.
+  Every emitted term is inferred and checked through the generic LF
+  structural environment; no parser, Lambdapi production process, semantic
+  owner, runtime shortcut, browser export, or product-profile expansion was
+  added. Fifty focused tests, the 622-test TypeScript gate, the seven-case
+  bounded live Lambdapi bracket corpus, and the complete active-kernel check
+  passed. USABILITY-2A is next.

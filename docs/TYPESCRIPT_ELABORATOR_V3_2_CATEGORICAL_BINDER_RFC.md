@@ -3,13 +3,18 @@
 Status: accepted implementation specification for `USABILITY-1A`
 
 Implementation: `USABILITY-1B` ordinary contextual eta/application and
-`USABILITY-1C` structural bracket abstraction are complete;
-`USABILITY-1D` API/serialization/example consolidation is next
+`USABILITY-1C` structural bracket abstraction plus `USABILITY-1D`
+API/serialization/diagnostic/example consolidation are complete;
+`USABILITY-2A` natural/displayed qualification is next
 
 Plan: `TS-ELAB-V3.2-USABILITY`
 
-Executable artifact:
-`src/v3_2/categorical_surface_spec.ts`
+Executable artifacts:
+`src/v3_2/categorical_surface_spec.ts`,
+`src/v3_2/categorical_surface.ts`,
+`src/v3_2/categorical_program.ts`, and
+`src/v3_2/core_serialization.ts`; the runnable witness is
+`src/v3_2/categorical_bracket_demo.ts`
 
 Authority audited: `emdash2/emdash3_2.lp` on 2026-07-26
 
@@ -430,7 +435,8 @@ component-level cells.
 Accordingly:
 
 - `USABILITY-1B` and `USABILITY-1C` implement ordinary functorial abstraction;
-- `USABILITY-1D` stabilizes the ergonomic API and conformance corpus;
+- `USABILITY-1D` stabilizes the ergonomic API, explicit-Core inspection,
+  diagnostics, demo, and conformance corpus;
 - `USABILITY-2A` qualifies one natural/indexed or displayed dependent
   example through the same contextual IR;
 - missing displayed structure produces a precise diagnostic rather than an
@@ -532,16 +538,32 @@ evaluator case was added.
 
 ### `USABILITY-1D`
 
-Consolidate:
+Completed:
 
-- stable TypeScript surface constructors;
-- deterministic explicit-Core serialization;
-- source-located diagnostics;
-- end-user examples;
-- focused TypeScript tests; and
-- Lambdapi conformance probes for the emitted explicit Core.
+- `CoreCategoricalProgram` provides program-local category handles,
+  category/object/functor/Hom assumptions, derived functor/product
+  categories, whole-Hom boundaries, uniform type-directed application,
+  functorial categorical lambda, contextual inspection, and checked
+  compilation;
+- `EMDASH-CORE-SEXP-1` deterministically serializes backend-neutral explicit
+  Core while omitting provenance and binder hints, retaining owner/free
+  identity, plicity, variation, locally nameless indices, and meta sharing;
+- presentation-only free-reference labels replace compiler-private
+  structural names with stable `emdash.categorical.*` identities without
+  selecting a backend;
+- existing surface/declaration/checker/program exceptions normalize to
+  immutable phase/code/message/detail/span/location diagnostics;
+- the fixed identity and pointwise fixtures, alpha/provenance invariance,
+  object/capped-arrow/whole-Hom actions, source diagnostics, and browser
+  exclusion are tested;
+- `demo:categorical-bracket` checks pointwise application, diagonal, and
+  exchange, prints canonical Core plus inferred classifiers and structural
+  evidence, and rejects one wrong-category input at its supplied source; and
+- the bounded USABILITY-1C Lambdapi corpus remains the exact conformance
+  oracle for all emitted structural prerequisites and the relevant negative.
 
-No string parser is required.
+No string parser, production Lambdapi process, owner-specific semantic path,
+browser export, or profile expansion was added.
 
 ### `USABILITY-2A`
 
@@ -576,9 +598,10 @@ also checks the reviewed `DIRECTED-1C` prerequisite, existing Core owner
 membership and backend bindings, exact content, unique selection keys, and
 the absence of backend spellings from semantic data.
 
-The artifact is root-only and deliberately absent from `src/v3_2/browser.ts`.
-It specifies the compiler boundary; it does not yet expose a browser product
-API.
+The specification, contextual builder, program facade, serializer, and demo
+are root-only and deliberately absent from `src/v3_2/browser.ts`. They
+implement and qualify the candidate compiler boundary; they do not yet expose
+a browser product API or establish the USABILITY-GRADUATE verdict.
 
 ## Explicit Non-Effects
 

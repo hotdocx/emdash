@@ -1,5 +1,6 @@
 export * from './schema';
 export * from './kernel';
+export * from './core_serialization';
 export * from './signature';
 export * from './context';
 export * from './structural';
@@ -39,6 +40,8 @@ export * from './directed_dependent_demo';
 export * from './categorical_surface_spec';
 export * from './categorical_surface';
 export * from './categorical_structural_transfer';
+export * from './categorical_program';
+export * from './categorical_bracket_demo';
 export * from './lambdapi_export_inventory';
 export * from './scale_architecture_review';
 export * from './scale_engine_review';
