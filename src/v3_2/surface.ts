@@ -154,6 +154,28 @@ export type CoreType =
         targetCategory: KernelExpression;
         sourceFunctor: KernelExpression;
         targetFunctor: KernelExpression;
+    }
+    | {
+        /**
+         * A rigid object of `Pi_cat family`.
+         *
+         * `category` is retained explicitly so the generic object view stays
+         * independent of any candidate free-declaration spelling.
+         */
+        tag: 'dependent-section';
+        category: KernelExpression;
+        baseCategory: KernelExpression;
+        family: KernelExpression;
+    }
+    | {
+        /**
+         * A rigid object of `Functord_cat sourceFamily targetFamily`.
+         */
+        tag: 'displayed-functor';
+        category: KernelExpression;
+        baseCategory: KernelExpression;
+        sourceFamily: KernelExpression;
+        targetFamily: KernelExpression;
     };
 
 export interface ResolvedSurfaceBinding extends SurfaceBinding {
@@ -185,7 +207,14 @@ const derived = (detail: string, span: SourceSpan) =>
 
 export type ObjectLikeCoreType = Extract<
     CoreType,
-    { tag: 'object' | 'hom' | 'transfor' }
+    {
+        tag:
+            | 'object'
+            | 'hom'
+            | 'transfor'
+            | 'dependent-section'
+            | 'displayed-functor';
+    }
 >;
 
 export function isObjectLikeCoreType(
@@ -193,7 +222,9 @@ export function isObjectLikeCoreType(
 ): type is ObjectLikeCoreType {
     return type.tag === 'object' ||
         type.tag === 'hom' ||
-        type.tag === 'transfor';
+        type.tag === 'transfor' ||
+        type.tag === 'dependent-section' ||
+        type.tag === 'displayed-functor';
 }
 
 /**
@@ -226,6 +257,9 @@ export function coreTypeObjectCategory(
                 { value: type.sourceFunctor },
                 { value: type.targetFunctor }
             ], nodeProvenance);
+        case 'dependent-section':
+        case 'displayed-functor':
+            return type.category;
         case 'category':
         case 'functor':
             return undefined;
@@ -330,6 +364,13 @@ export function coreTypeToKernelType(
                     value: type.category
                 }], nodeProvenance)
             }], nodeProvenance);
+        case 'dependent-section':
+        case 'displayed-functor':
+            return kernelApplication('decode', [{
+                value: kernelApplication('object-classifier', [{
+                    value: type.category
+                }], nodeProvenance)
+            }], nodeProvenance);
         case 'functor':
             return kernelApplication('decode', [{
                 value: kernelApplication('functor-classifier', [
@@ -408,6 +449,37 @@ export function coreTypeEquals(left: CoreType, right: CoreType): boolean {
                 left.targetFunctor,
                 other.targetFunctor
             );
+        }
+        case 'dependent-section': {
+            const other = right as Extract<
+                CoreType,
+                { tag: 'dependent-section' }
+            >;
+            return kernelExpressionEquals(left.category, other.category) &&
+                kernelExpressionEquals(
+                    left.baseCategory,
+                    other.baseCategory
+                ) &&
+                kernelExpressionEquals(left.family, other.family);
+        }
+        case 'displayed-functor': {
+            const other = right as Extract<
+                CoreType,
+                { tag: 'displayed-functor' }
+            >;
+            return kernelExpressionEquals(left.category, other.category) &&
+                kernelExpressionEquals(
+                    left.baseCategory,
+                    other.baseCategory
+                ) &&
+                kernelExpressionEquals(
+                    left.sourceFamily,
+                    other.sourceFamily
+                ) &&
+                kernelExpressionEquals(
+                    left.targetFamily,
+                    other.targetFamily
+                );
         }
         default: {
             const exhaustive: never = left;

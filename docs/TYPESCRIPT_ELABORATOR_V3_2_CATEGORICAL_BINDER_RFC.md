@@ -567,11 +567,66 @@ browser export, or profile expansion was added.
 
 ### `USABILITY-2A`
 
-Use the same contextual machinery for one representative
-natural/indexed/displayed dependent example. Transfer only the active owners
-it needs. Stop at the first absent structural capability with the exact
+Implement in two dependency-ordered slices:
+
+1. `USABILITY-2A0` transfers exact active `Fibre_func` and
+   `functord_transport_func` signatures and reuses reviewed `piapp0` for
+   closed-index section, fibre-functor, and base-arrow transport application.
+   The deliberately inactive whole displayed laxity transfor must fail with
+   `UNAVAILABLE_DISPLAYED_ACTION`.
+2. `USABILITY-2A1` adds a first-order indexed contextual classifier and one
+   genuine natural/displayed Pi/Sigma eta or binder witness through the same
+   callback-once IR. An open classifier such as `E[k]` must refer to the
+   contextual slot explicitly; it may not smuggle an unscoped Core bound
+   variable into a closed `CoreType`.
+
+Closed application in 2A0 is prerequisite evidence, not completion of the
+dependent-binder architecture. Transfer only active owners the witness needs.
+Stop at the first absent structural capability with the exact
 `UNAVAILABLE_DISPLAYED_ACTION` evidence; do not synthesize a missing whole
 laxity theorem.
+
+#### `USABILITY-2A0` implementation result
+
+The closed-index slice is complete. The generic LF transfer path now compiles
+the exact active `Fibre_func` and `functord_transport_func` signatures over
+the existing ordinary structural environment. Both are root-only opaque
+candidate declarations: their Lambdapi transparent bodies remain authority,
+and no runtime/proof rule or owner-specific checker/evaluator case was added.
+
+`CoreCategoricalProgram` now admits program-local displayed-family handles,
+fibre categories, dependent-section assumptions, and displayed-functor
+assumptions. Its uniform application method checks and emits:
+
+- reviewed `section-object-evaluation` for `s[k]`;
+- transferred `displayed-functor-fibre` for `FF[k]`; and
+- transferred `displayed-functor-transport` for `FF[p]`.
+
+The resulting `FF[k]` is an ordinary functor between exact fibres and reuses
+ordinary application without a displayed shortcut. The first-order
+inspection IR retains the selected dependent prerequisite under nested
+ordinary application, and deterministic Core serialization uses semantic
+presentation labels rather than backend spellings.
+
+The USABILITY-1A specification is intentionally still a frozen snapshot of
+the pre-transfer availability state. Selection accepts a narrow
+post-transfer qualification overlay only for an
+`active-kernel-untransferred` row named by the transferred target. The
+overlay cannot promote the `not-active` whole-laxity row or a reserved
+naturality row. Source-located negatives cover that absent laxity, mismatched
+and foreign displayed families, and open callback-slot application.
+
+In particular, the open negative demonstrates the remaining architectural
+work accurately: `FF[k]` for a contextual slot needs a classifier whose fibre
+mentions that slot. The current closed `CoreType` cannot represent this
+honestly, and the implementation refuses to insert an unscoped Core bound
+index. `USABILITY-2A1` must extend the first-order contextual classifier and
+then qualify a genuine natural/displayed eta or binder witness. Therefore
+2A0 is not an architecture-graduation result.
+
+The focused 30-test TypeScript corpus (29 pass, one opt-in skip), eight-case
+live Lambdapi corpus, 634-test full TypeScript gate, and bounded complete
+active-kernel check pass.
 
 ## Executable Evidence
 
@@ -587,10 +642,13 @@ laxity theorem.
 - non-effects on notation, parsing, Core owners, the MVP manifest, and the
   browser entry point.
 
-Its selector demonstrates that the ordinary eta consumer can resolve
+Its base selector demonstrates that the ordinary eta consumer can resolve
 `functor-object`, `functor-hom-capped`, and `functor-hom-full`, while section
 arrow, displayed action, reserved naturality, ambiguous displayed action, and
-classifier mismatch fail with their recorded codes.
+classifier mismatch fail with their recorded codes. The USABILITY-2A0
+target-exact qualification overlay additionally resolves only the two
+transferred displayed-functor rows; the deliberately inactive whole-laxity
+row remains unavailable even if named in an attempted overlay.
 
 The separate Lambdapi evidence table relocates every candidate and structural
 prerequisite by declaration fragment in `emdash2/emdash3_2.lp`. Validation

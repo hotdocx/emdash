@@ -33,9 +33,11 @@ categorical-binder/application specification plus USABILITY-1B's ordinary eta
 frontend plus USABILITY-1C's ordinary structural bracket compiler are
 complete; USABILITY-1D's ergonomic API, serialization, diagnostic, and
 example consolidation slice is also complete;
-USABILITY-2A is the next dependency-ready natural/displayed dependent
-frontend slice, and wider declaration acquisition is
-explicitly deferred while the binder frontend is qualified
+USABILITY-2A0's closed-index section/fibre/transport transfer and facade
+slice is complete; USABILITY-2A1's indexed contextual classifier and genuine
+natural/displayed binder witness is the next dependency-ready slice, and
+wider declaration acquisition is explicitly deferred while the binder
+frontend is qualified
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
@@ -46,6 +48,8 @@ USABILITY-1C implementation checkpoint:
 `33282735bb685db67bdfa5658fbe77d05d7bf131`
 USABILITY-1D implementation checkpoint:
 `e5d5471e251e7cb8d726ec5eecad84ba23c03aee`
+USABILITY-2A0 implementation checkpoint:
+pending exact local checkpoint after synchronized staged-diff review
 
 ## Outcome And Corrected Priority
 
@@ -413,7 +417,9 @@ frontend variables.
 | USABILITY-1B | complete | USABILITY-1A | Root-only immutable contextual surface, callback-once locally nameless eta evidence, ordinary functorial eta abstraction, generic declarative-operation reuse, exact object/capped-arrow/whole-hom action selection, higher Hom-object disambiguation, and fail-closed layer/classifier/object-only/natural/polarity/foreign/escaped/non-eta cases |
 | USABILITY-1C | complete | USABILITY-1B | Ordinary bracket-abstraction basis: exact typed transfer of the thirteen prerequisites plus `Functor_cat`/`Functor` support, unused-variable/constant weakening, exchange, duplicated-variable diagonal, evaluation after pairing, composition, and nested abstraction/curry; no owner-specific evaluator additions |
 | USABILITY-1D | complete | USABILITY-1C | Stable root-only `CoreCategoricalProgram` facade, versioned deterministic backend-neutral explicit-Core serialization, normalized source-located diagnostics, exact fixtures, and a runnable pointwise/diagonal/exchange demo reusing the bounded TypeScript/Lambdapi corpus |
-| USABILITY-2A | pending | USABILITY-1D, active displayed owners | One natural/indexed or displayed dependent Pi/Sigma binder and application example through the same contextual IR; precise unsupported-action negative for the first absent structural capability |
+| USABILITY-2A0 | complete | USABILITY-1D, reviewed continuation, active displayed owners | Exact typed transfer of the minimal closed-index displayed application prerequisites; facade types/constructors and selection for section object evaluation, displayed-functor fibre projection, and displayed-functor base-arrow transport; deliberate whole-laxity negative |
+| USABILITY-2A1 | next dependency-ready | USABILITY-2A0 | Extend the same first-order contextual IR with an indexed/dependent slot classifier and qualify one genuine natural/displayed Pi/Sigma eta or binder witness; package the dependent categorical demo and its first absent structural-action negative |
+| USABILITY-2A | in progress (split) | USABILITY-2A0, USABILITY-2A1 | Umbrella acceptance: one natural/indexed or displayed dependent Pi/Sigma binder and application example through the same contextual architecture, with no owner-specific checker/evaluator path |
 | USABILITY-GRADUATE-1 | pending | USABILITY-2A | Architecture review stating the exact mechanically reusable frontend envelope, remaining kernel-owner gaps, residual notation/parser choices, validation, and proposed product/trust boundary |
 | SCALE-RETURN-1 | deferred | USABILITY-GRADUATE-1 or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
@@ -911,6 +917,148 @@ changed. USABILITY-2A is next: it must reuse this exact facade/contextual
 architecture for one natural/indexed or displayed dependent Pi/Sigma
 consumer and fail at the first genuinely absent active structural capability.
 
+## USABILITY-2A Decomposition And Selected First Slice
+
+The first implementation review distinguishes two questions that the
+umbrella row must not conflate.
+
+`USABILITY-2A0` qualifies closed-index dependent application. It transfers,
+through the existing generic LF declaration engine, exactly the active
+`Fibre_func` and `functord_transport_func` signatures needed in addition to
+the already-reviewed `piapp0`. It then extends the root-only typed facade with
+program-local displayed-family handles and rigid section/displayed-functor
+term classifiers. One uniform application route must select:
+
+```text
+s[k]       -> piapp0(s,k)
+FF[k]      -> Fibre_func(FF,k)
+FF[p]      -> functord_transport_func(FF,p)
+```
+
+for a closed base object `k` or base arrow `p`. `FF[k]` remains an ordinary
+functor between the two exact fibres and can therefore be fed back into the
+already-qualified ordinary application path. A request for the whole
+displayed laxity transfor at `p` must fail with
+`UNAVAILABLE_DISPLAYED_ACTION`, because `functord_laxity_transf` is
+deliberately commented out in the active authority. This slice installs no
+replacement coherence and claims no dependent bracket abstraction.
+
+`USABILITY-2A1` is the actual binder stress test. A base slot
+`k :^n K` makes the result classifier `E[k]` depend on contextual input, so it
+cannot be represented honestly as the current closed `CoreType.object`
+category. The contextual IR must gain a first-order indexed/dependent
+classifier that refers to slot identity without inserting an unscoped Core
+De Bruijn variable. The first witness should be a section eta such as
+
+```text
+λ k :^n K. s[k]
+```
+
+or the dependency-equivalent displayed-functor eta, and must lower to an
+active Pi/displayed owner through the same callback-once architecture.
+Merely assuming a section or displayed functor and applying it at a closed
+index does not complete this row. If abstraction needs general displayed
+weakening, contraction, reindexing, or coherence absent from the active
+kernel, the compiler records the exact classifier/owner position and invokes
+H-DTTLF-USABILITY-02 rather than fabricating a TypeScript rule.
+
+This split is an implementation dependency refinement inside approved
+D-DTTLF-USABILITY-001. It authorizes no new mathematical owner, semantic
+profile, parser, browser surface, or graduation conclusion.
+
+## USABILITY-2A0 Completion Record
+
+USABILITY-2A0 is complete as the deliberately bounded closed-index
+prerequisite slice. It does not complete USABILITY-2A or settle the dependent
+binder architecture.
+
+The new root-only generic transfer module:
+
+- pins the exact active-source hash and declaration anchors for
+  `Fibre_func` and `functord_transport_func`;
+- reconstructs both dependent signatures with the shared scoped LF transfer
+  builder, existing structural/continuation linkage, and no owner-specific
+  term node;
+- compiles both as opaque candidate signatures through the generic LF
+  declaration compiler on top of the 23-declaration ordinary structural
+  environment, yielding a checked 25-declaration environment;
+- installs no transparent body, runtime rule, proof rule, intrinsic owner,
+  evaluator branch, semantic profile, browser API, or production Lambdapi
+  dependency; and
+- records that the whole `functord_laxity_transf` declaration is deliberately
+  inactive in the current authority and therefore cannot be transferred or
+  synthesized.
+
+The backend-neutral `CoreType` and contextual frontend now have rigid
+`dependent-section` and `displayed-functor` classifiers. The stable
+`CoreCategoricalProgram` facade adds program-local displayed-family handles
+and constructors for displayed families, fibre categories, sections, and
+displayed functors. Closed applications select:
+
+```text
+apply(s,  k, dependent-object)  -> section-object-evaluation / piapp0
+apply(FF, k, fibre-functor)     -> displayed-functor-fibre / Fibre_func
+apply(FF, p, transport-functor) -> displayed-functor-transport /
+                                   functord_transport_func
+```
+
+The selected terms then pass through the same generic LF infer/check boundary
+as the ordinary facade. `FF[k]` has an ordinary functor classifier between
+the exact `E[k]` and `D[k]` fibres, so applying it to
+`u : Obj(E[k])` reuses the existing ordinary `functor-object` path. Canonical
+Core inspection reports the dependent prerequisite even when it is nested
+under that ordinary application.
+
+The frozen USABILITY-1A specification remains historical evidence of what
+was untransferred at that point. A narrow qualification overlay may expose
+only an active-untransferred row whose target has since passed a transfer
+boundary. It cannot promote a `not-active` target or bypass reserved
+naturality. Consequently:
+
+- requesting the whole displayed laxity transfor still returns
+  `UNAVAILABLE_DISPLAYED_ACTION` with exact source provenance;
+- a displayed functor over families with different bases and a family from
+  another program are rejected;
+- a closed fibre point must be an object of the exact base category; and
+- applying a displayed functor to the open callback slot in an ordinary
+  categorical lambda fails with an explicit USABILITY-2A1 diagnostic.
+
+That last negative is an architectural acceptance condition, not a temporary
+test inconvenience. An open slot `k` makes `E[k]` an indexed contextual
+classifier. USABILITY-2A0 refuses to encode it using an unscoped Core bound
+index or to call closed application “dependent abstraction.” USABILITY-2A1
+must add the first-order indexed classifier and lower a genuine witness such
+as `λ k :^n K. s[k]`.
+
+Validated completion evidence:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_categorical_surface_spec_tests.ts \
+  tests/v3_2_categorical_dependent_transfer_tests.ts \
+  tests/v3_2_categorical_program_tests.ts \
+  tests/v3_2_categorical_dependent_program_tests.ts
+  30 tests / 4 suites: 29 passed, 1 opt-in oracle skipped
+
+timeout 60s env \
+  EMDASH_RUN_LAMBDAPI_CATEGORICAL_DEPENDENT_PROBES=1 \
+  node --require ts-node/register --test \
+  tests/v3_2_categorical_dependent_program_tests.ts
+  8 tests / 1 suite passed, including section, fibre, transport,
+  and the intentionally wrong transport-fibre negative
+
+./scripts/pnpmw run check:ts
+  workspace, typecheck, lint, and 634-test TypeScript gate passed
+  594 passed, 40 opt-in live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, examples, and checks passed
+```
+
+No Lambdapi source changed, so there is no warning/catalog/health delta to
+refresh. The active source was still checked in full because both transferred
+signatures and the absent-laxity boundary depend on its current content.
+
 ## Acceptance Criteria
 
 USABILITY-GRADUATE-1 may propose that the frontend architecture is settled
@@ -1092,7 +1240,17 @@ pointwise/diagonal/exchange demo. Keep the serializer an inspection artifact,
 not a parser or backend syntax, and keep all of this out of the frozen browser
 profile.
 
-Begin with dependency-ready USABILITY-2A, then implement the
+Preserve completed USABILITY-2A0: the generic two-signature
+`Fibre_func`/`functord_transport_func` transfer, rigid section and displayed
+functor classifiers, program-local displayed-family/fibre/section/displayed-
+functor constructors, closed section/fibre/transport application, nested
+ordinary fibre application, exact Core prerequisite inspection, qualified
+historical application row, wrong-base/foreign-family checks, and the
+inactive whole-laxity/open-index fail-closed boundaries. Do not reinterpret
+closed-index application as a completed dependent binder or make the
+deliberately inactive `functord_laxity_transf` available.
+
+Begin with dependency-ready USABILITY-2A1 and then complete the
 categorical-binder frontend in the ledger's order and follow
 docs/TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md. Keep outer LF
 lambda separate from functorial abstraction. Use a small
@@ -1233,3 +1391,22 @@ CI obligations.
   review and whitespace audit. It authorizes no browser/profile promotion,
   new semantic owner or rule, remote Git operation, integration, publication,
   release, history rewrite, or cleanup.
+- **2026-07-26 — USABILITY-2A split and 2A0 selected.** Recorded that closed
+  section/displayed application is dependency-ready but does not by itself
+  prove dependent bracket abstraction. Selected exact active `Fibre_func` and
+  `functord_transport_func` transfer plus existing `piapp0`, closed object and
+  base-arrow application, ordinary fibre application reuse, and the inactive
+  whole-laxity diagnostic for 2A0. Reserved a first-order indexed contextual
+  classifier and genuine natural/displayed eta witness for 2A1.
+- **2026-07-26 — USABILITY-2A0 complete.** Transferred the exact two active
+  closed-index displayed signatures through the generic LF compiler; added
+  rigid section/displayed-functor types and program-local displayed-family,
+  fibre, section, and displayed-functor constructors; checked section object,
+  fibre-functor, nested fibre-object, and base-arrow transport applications;
+  and preserved the frozen USABILITY-1A snapshot through a target-exact
+  post-transfer qualification overlay. The inactive whole laxity, open
+  indexed callback application, wrong-base, and foreign-family routes fail
+  closed. The focused TypeScript corpus, live positive/negative Lambdapi
+  corpus, 634-test TypeScript gate, and full bounded active-kernel check pass.
+  USABILITY-2A1 is next; no dependent-binder or architecture-graduation claim
+  is made.

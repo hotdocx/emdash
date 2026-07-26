@@ -1,5 +1,5 @@
 /**
- * USABILITY-1B/1C ordinary categorical surface and contextual IR.
+ * USABILITY-1B through USABILITY-2A0 categorical surface and contextual IR.
  *
  * The builder supports the first dependency-ready vertical slice:
  *
@@ -13,9 +13,14 @@
  * Callback tokens and callbacks are temporary construction devices. The
  * recorded abstraction body is immutable first-order locally nameless data,
  * and the compiled result is existing explicit Core. Unsupported
- * natural/displayed and open higher-action cases remain fail-closed.
+ * Open indexed binders and unsupported higher actions remain fail-closed.
  */
 
+import {
+    CORE_CATEGORICAL_DEPENDENT_PREREQUISITES,
+    CoreCategoricalDependentPrerequisiteId,
+    coreCategoricalDependentCoreName
+} from './categorical_dependent_transfer';
 import {
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
     CoreCategoricalStructuralPrerequisiteId,
@@ -35,6 +40,9 @@ import {
     CORE_CATEGORICAL_SURFACE_SPECIFICATION,
     selectCoreCategoricalApplication
 } from './categorical_surface_spec';
+import {
+    CORE_DIRECTED_1C_PRIMITIVE_NAMES
+} from './directed_1c';
 import {
     ElaboratedSurfaceTerm,
     V32ElaborationError,
@@ -66,6 +74,14 @@ import {
 const CORE_CATEGORICAL_TERM = Symbol('CoreCategoricalTerm');
 const CORE_CATEGORICAL_SLOT = Symbol('CoreCategoricalSlot');
 const CORE_CATEGORICAL_BOUNDARY = Symbol('CoreCategoricalBoundary');
+
+const dependentApplicationQualification = Object.freeze({
+    transferredTargets: Object.freeze(
+        CORE_CATEGORICAL_DEPENDENT_PREREQUISITES.map(
+            prerequisite => prerequisite.id
+        )
+    )
+});
 
 export interface CoreCategoricalTerm {
     readonly [CORE_CATEGORICAL_TERM]: true;
@@ -150,8 +166,14 @@ export interface CoreCategoricalTermInspection {
     readonly ir: CoreCategoricalContextualIr;
     readonly abstractions:
         readonly CoreCategoricalAbstractionEvidence[];
+    readonly dependentPrerequisites:
+        readonly CoreCategoricalDependentApplicationPrerequisiteId[];
     readonly lowered: boolean;
 }
+
+export type CoreCategoricalDependentApplicationPrerequisiteId =
+    | 'section-object-evaluation'
+    | CoreCategoricalDependentPrerequisiteId;
 
 export interface CoreCategoricalBinderOptions {
     readonly plicity?: Plicity;
@@ -293,6 +315,21 @@ const copyCoreType = (type: CoreType): CoreType => {
                 sourceFunctor: type.sourceFunctor,
                 targetFunctor: type.targetFunctor
             };
+        case 'dependent-section':
+            return {
+                tag: 'dependent-section',
+                category: type.category,
+                baseCategory: type.baseCategory,
+                family: type.family
+            };
+        case 'displayed-functor':
+            return {
+                tag: 'displayed-functor',
+                category: type.category,
+                baseCategory: type.baseCategory,
+                sourceFamily: type.sourceFamily,
+                targetFamily: type.targetFamily
+            };
         default: {
             const exhaustive: never = type;
             return exhaustive;
@@ -346,6 +383,55 @@ const mergePrerequisites = (
             }
         }
     }
+    return Object.freeze(result);
+};
+
+const collectDependentPrerequisites = (
+    term: CoreCategoricalContextualIr
+): readonly CoreCategoricalDependentApplicationPrerequisiteId[] => {
+    const result: CoreCategoricalDependentApplicationPrerequisiteId[] = [];
+    const add = (
+        prerequisite: CoreCategoricalDependentApplicationPrerequisiteId
+    ): void => {
+        if (!result.includes(prerequisite)) result.push(prerequisite);
+    };
+    const visitBoundary = (
+        boundary: CoreCategoricalHomBoundaryIr
+    ): void => {
+        visit(boundary.sourceEndpoint);
+        visit(boundary.targetEndpoint);
+    };
+    const visit = (current: CoreCategoricalContextualIr): void => {
+        switch (current.tag) {
+            case 'slot-reference':
+            case 'explicit-core-term':
+                return;
+            case 'typed-application':
+                if (
+                    current.target ===
+                        'section-object-evaluation' ||
+                    current.target === 'displayed-functor-fibre' ||
+                    current.target === 'displayed-functor-transport'
+                ) {
+                    add(current.target);
+                }
+                visit(current.subject);
+                if (current.argument.tag === 'hom-boundary') {
+                    visitBoundary(current.argument);
+                } else {
+                    visit(current.argument);
+                }
+                return;
+            case 'categorical-abstraction':
+                visit(current.body);
+                return;
+            default: {
+                const exhaustive: never = current;
+                return exhaustive;
+            }
+        }
+    };
+    visit(term);
     return Object.freeze(result);
 };
 
@@ -587,6 +673,34 @@ export class CoreCategoricalScopedBuilder {
                 nodeProvenance
             ),
             arguments_,
+            nodeProvenance
+        );
+    }
+
+    private dependentCall(
+        prerequisite: CoreCategoricalDependentPrerequisiteId,
+        arguments_: readonly {
+            readonly plicity: Plicity;
+            readonly value: KernelExpression;
+        }[],
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalDependentCoreName(prerequisite),
+                nodeProvenance
+            ),
+            arguments_,
+            nodeProvenance
+        );
+    }
+
+    private categoryOfCategories(
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelApplication(
+            'category-of-categories',
+            [],
             nodeProvenance
         );
     }
@@ -929,6 +1043,417 @@ export class CoreCategoricalScopedBuilder {
         };
     }
 
+    private closedDependentApplication(
+        subject: InternalCoreCategoricalTerm,
+        argument: InternalCoreCategoricalTerm,
+        judgment: CoreCategoricalApplicationJudgment,
+        type: CoreType,
+        term: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (
+            subject.closed === undefined ||
+            argument.closed === undefined
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Open indexed application requires the first-order ' +
+                'dependent contextual classifier staged for USABILITY-2A1'
+            );
+        }
+        const closed = deepFreeze({
+            term,
+            type: copyCoreType(type),
+            sourceSpan: this.spanFor(nodeProvenance),
+            recovered: [
+                ...subject.closed.recovered,
+                ...argument.closed.recovered
+            ]
+        });
+        return this.makeTerm(
+            {
+                tag: 'typed-application',
+                judgment,
+                subject,
+                argument,
+                provenance: nodeProvenance
+            },
+            type,
+            mergeUsage(subject.usage, argument.usage),
+            closed,
+            [
+                ...subject.abstractions,
+                ...argument.abstractions
+            ]
+        );
+    }
+
+    private applyDependentSection(
+        subject: InternalCoreCategoricalTerm,
+        argumentValue:
+            | CoreCategoricalTerm
+            | CoreCategoricalHomBoundary,
+        expectedShape: CoreCategoricalExpectedShape | undefined,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (
+            typeof argumentValue === 'object' &&
+            argumentValue !== null &&
+            (argumentValue as InternalCoreCategoricalHomBoundary)[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            this.fail(
+                'UNAVAILABLE_DEPENDENT_ACTION',
+                nodeProvenance,
+                'Whole section Hom-action requires the active piapp1_func ' +
+                'transfer after USABILITY-2A0'
+            );
+        }
+        const argument = this.requireTerm(
+            argumentValue as CoreCategoricalTerm,
+            nodeProvenance
+        );
+        if (argument.type.tag === 'hom') {
+            if (
+                kernelExpressionEquals(
+                    argument.type.category,
+                    subject.type.tag === 'dependent-section'
+                        ? subject.type.baseCategory
+                        : argument.type.category
+                )
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DEPENDENT_ACTION',
+                    nodeProvenance,
+                    'Section base-arrow action requires the active ' +
+                    'piapp1_fapp0 transfer after USABILITY-2A0'
+                );
+            }
+        }
+        if (
+            expectedShape !== undefined &&
+            expectedShape !== 'dependent-object'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Dependent section application cannot produce expected ` +
+                `shape '${expectedShape}' in USABILITY-2A0`
+            );
+        }
+        if (subject.type.tag !== 'dependent-section') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Internal dependent section classifier was lost'
+            );
+        }
+        const argumentCategory = this.categoricalObjectCategory(
+            argument.type,
+            nodeProvenance,
+            'dependent section base object'
+        );
+        if (
+            argumentCategory === undefined ||
+            !coreObjectCategoryEquals(
+                argumentCategory,
+                subject.type.baseCategory
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Dependent section argument is not an object of its base ' +
+                'category'
+            );
+        }
+        if (
+            subject.closed === undefined ||
+            argument.closed === undefined
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Open section application requires the indexed contextual ' +
+                'classifier staged for USABILITY-2A1'
+            );
+        }
+        const point = argument.closed.term;
+        const fibre = this.functorObject(
+            subject.type.baseCategory,
+            this.categoryOfCategories(nodeProvenance),
+            subject.type.family,
+            point,
+            nodeProvenance
+        );
+        const resultType: CoreType = {
+            tag: 'object',
+            category: fibre
+        };
+        const judgment = selectCoreCategoricalApplication({
+            layer: 'categorical',
+            subjectClassifier: 'dependent-section',
+            subjectForm: 'term',
+            argumentDimension: 'object',
+            expectedShape: 'dependent-object',
+            dependency: 'displayed'
+        });
+        const result = kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1C_PRIMITIVE_NAMES[
+                    'section-object-evaluation'
+                ],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: subject.type.baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: subject.type.family
+                },
+                {
+                    plicity: 'explicit',
+                    value: subject.closed.term
+                },
+                {
+                    plicity: 'explicit',
+                    value: point
+                }
+            ],
+            nodeProvenance
+        );
+        return this.closedDependentApplication(
+            subject,
+            argument,
+            judgment,
+            resultType,
+            result,
+            nodeProvenance
+        );
+    }
+
+    private applyDisplayedFunctor(
+        subject: InternalCoreCategoricalTerm,
+        argumentValue:
+            | CoreCategoricalTerm
+            | CoreCategoricalHomBoundary,
+        expectedShape: CoreCategoricalExpectedShape | undefined,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (subject.type.tag !== 'displayed-functor') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Internal displayed functor classifier was lost'
+            );
+        }
+        if (
+            typeof argumentValue === 'object' &&
+            argumentValue !== null &&
+            (argumentValue as InternalCoreCategoricalHomBoundary)[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'A displayed functor has no active whole laxity transfor; ' +
+                'only component-level cells are active'
+            );
+        }
+        const argument = this.requireTerm(
+            argumentValue as CoreCategoricalTerm,
+            nodeProvenance
+        );
+        if (
+            expectedShape === 'whole-laxity-transfor'
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'functord_laxity_transf is deliberately inactive in the ' +
+                'active kernel; TypeScript cannot synthesize it'
+            );
+        }
+        if (
+            subject.closed === undefined ||
+            argument.closed === undefined
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Open displayed application requires the indexed contextual ' +
+                'classifier staged for USABILITY-2A1'
+            );
+        }
+
+        const base = subject.type.baseCategory;
+        const sourceFamily = subject.type.sourceFamily;
+        const targetFamily = subject.type.targetFamily;
+        let judgment: CoreCategoricalApplicationJudgment;
+        let resultType: CoreType;
+        let result: KernelExpression;
+        if (argument.type.tag === 'hom') {
+            if (
+                expectedShape !== undefined &&
+                expectedShape !== 'transport-functor'
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    `Displayed base-arrow application cannot produce ` +
+                    `expected shape '${expectedShape}'`
+                );
+            }
+            if (
+                !kernelExpressionEquals(
+                    argument.type.category,
+                    base
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Displayed functor base arrow belongs to the wrong ' +
+                    'category'
+                );
+            }
+            const sourceFibre = this.functorObject(
+                base,
+                this.categoryOfCategories(nodeProvenance),
+                sourceFamily,
+                argument.type.sourceObject,
+                nodeProvenance
+            );
+            const targetFibre = this.functorObject(
+                base,
+                this.categoryOfCategories(nodeProvenance),
+                targetFamily,
+                argument.type.targetObject,
+                nodeProvenance
+            );
+            resultType = {
+                tag: 'functor',
+                sourceCategory: sourceFibre,
+                targetCategory: targetFibre
+            };
+            judgment = selectCoreCategoricalApplication({
+                layer: 'categorical',
+                subjectClassifier: 'displayed-functor',
+                subjectForm: 'term',
+                argumentDimension: 'arrow',
+                expectedShape: 'transport-functor',
+                dependency: 'displayed'
+            }, dependentApplicationQualification);
+            result = this.dependentCall(
+                'displayed-functor-transport',
+                [
+                    { plicity: 'implicit', value: base },
+                    { plicity: 'implicit', value: sourceFamily },
+                    { plicity: 'implicit', value: targetFamily },
+                    {
+                        plicity: 'explicit',
+                        value: subject.closed.term
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: argument.type.sourceObject
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: argument.type.targetObject
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: argument.closed.term
+                    }
+                ],
+                nodeProvenance
+            );
+        } else {
+            if (
+                expectedShape !== undefined &&
+                expectedShape !== 'fibre-functor'
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    `Displayed base-object application cannot produce ` +
+                    `expected shape '${expectedShape}'`
+                );
+            }
+            const argumentCategory = this.categoricalObjectCategory(
+                argument.type,
+                nodeProvenance,
+                'displayed functor base object'
+            );
+            if (
+                argumentCategory === undefined ||
+                !coreObjectCategoryEquals(argumentCategory, base)
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Displayed functor argument is not an object of its ' +
+                    'base category'
+                );
+            }
+            const point = argument.closed.term;
+            resultType = {
+                tag: 'functor',
+                sourceCategory: this.functorObject(
+                    base,
+                    this.categoryOfCategories(nodeProvenance),
+                    sourceFamily,
+                    point,
+                    nodeProvenance
+                ),
+                targetCategory: this.functorObject(
+                    base,
+                    this.categoryOfCategories(nodeProvenance),
+                    targetFamily,
+                    point,
+                    nodeProvenance
+                )
+            };
+            judgment = selectCoreCategoricalApplication({
+                layer: 'categorical',
+                subjectClassifier: 'displayed-functor',
+                subjectForm: 'term',
+                argumentDimension: 'object',
+                expectedShape: 'fibre-functor',
+                dependency: 'displayed'
+            }, dependentApplicationQualification);
+            result = this.dependentCall(
+                'displayed-functor-fibre',
+                [
+                    { plicity: 'implicit', value: base },
+                    { plicity: 'implicit', value: sourceFamily },
+                    { plicity: 'implicit', value: targetFamily },
+                    {
+                        plicity: 'explicit',
+                        value: subject.closed.term
+                    },
+                    { plicity: 'explicit', value: point }
+                ],
+                nodeProvenance
+            );
+        }
+        return this.closedDependentApplication(
+            subject,
+            argument,
+            judgment,
+            resultType,
+            result,
+            nodeProvenance
+        );
+    }
+
     apply(
         subjectValue: CoreCategoricalTerm,
         argumentValue:
@@ -945,6 +1470,22 @@ export class CoreCategoricalScopedBuilder {
             subjectValue,
             nodeProvenance
         );
+        if (subject.type.tag === 'dependent-section') {
+            return this.applyDependentSection(
+                subject,
+                argumentValue,
+                expectedShape,
+                nodeProvenance
+            );
+        }
+        if (subject.type.tag === 'displayed-functor') {
+            return this.applyDisplayedFunctor(
+                subject,
+                argumentValue,
+                expectedShape,
+                nodeProvenance
+            );
+        }
         if (subject.type.tag !== 'functor') {
             this.fail(
                 'EXPECTED_FUNCTOR',
@@ -1897,7 +2438,7 @@ export class CoreCategoricalScopedBuilder {
                 'UNAVAILABLE_DISPLAYED_ACTION',
                 nodeProvenance,
                 'Natural/indexed or displayed categorical abstraction is ' +
-                'staged for USABILITY-2A'
+                'staged for USABILITY-2A1'
             );
         }
         if (polarity !== 'covariant') {
@@ -2138,17 +2679,20 @@ export class CoreCategoricalScopedBuilder {
             termValue,
             this.defaultProvenance
         );
+        const ir = this.normalizeNode(
+            term,
+            this.activeTokenOrdinals
+        );
         return deepFreeze({
             type: copyCoreType(term.type),
             usage: term.usage.map(([ordinal, count]) => ({
                 index: this.activeTokenOrdinals.indexOf(ordinal),
                 count
             })),
-            ir: this.normalizeNode(
-                term,
-                this.activeTokenOrdinals
-            ),
+            ir,
             abstractions: [...term.abstractions],
+            dependentPrerequisites:
+                collectDependentPrerequisites(ir),
             lowered: term.closed !== undefined
         });
     }

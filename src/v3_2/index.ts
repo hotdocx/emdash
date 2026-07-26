@@ -40,6 +40,7 @@ export * from './directed_dependent_demo';
 export * from './categorical_surface_spec';
 export * from './categorical_surface';
 export * from './categorical_structural_transfer';
+export * from './categorical_dependent_transfer';
 export * from './categorical_program';
 export * from './categorical_bracket_demo';
 export * from './lambdapi_export_inventory';

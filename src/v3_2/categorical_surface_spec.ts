@@ -279,6 +279,19 @@ export interface CoreCategoricalApplicationQuery {
     readonly dependency: CoreCategoricalDependency;
 }
 
+/**
+ * A transfer slice may qualify an application row that the frozen
+ * USABILITY-1A snapshot correctly recorded as untransferred.
+ *
+ * The overlay cannot promote a deliberately inactive authority gap or a
+ * reserved naturality surface. It only records that an active owner has since
+ * passed through a reviewed transfer boundary.
+ */
+export interface CoreCategoricalApplicationQualification {
+    readonly transferredTargets:
+        readonly CoreCategoricalCandidateTargetId[];
+}
+
 export type CoreCategoricalSurfaceErrorCode =
     | CoreCategoricalDiagnosticSpecification['code']
     | 'INVALID_SPECIFICATION'
@@ -1098,7 +1111,8 @@ const matchApplicationQuery = (
  * decision deterministic and directly testable.
  */
 export function selectCoreCategoricalApplication(
-    query: CoreCategoricalApplicationQuery
+    query: CoreCategoricalApplicationQuery,
+    qualification?: CoreCategoricalApplicationQualification
 ): CoreCategoricalApplicationJudgment {
     const candidates =
         CORE_CATEGORICAL_SURFACE_SPECIFICATION.applications.filter(row =>
@@ -1128,6 +1142,20 @@ export function selectCoreCategoricalApplication(
     }
 
     const selected = candidates[0];
+    const transferred =
+        selected.implementationStatus ===
+            'active-kernel-untransferred' &&
+        (
+            selected.surfaceDisposition ===
+                'requires-owner-transfer' ||
+            selected.surfaceDisposition ===
+                'requires-usability-2a'
+        ) &&
+        qualification?.transferredTargets.includes(
+            selected.target as CoreCategoricalCandidateTargetId
+        ) === true;
+    if (transferred) return selected;
+
     switch (selected.surfaceDisposition) {
         case 'eligible':
             return selected;

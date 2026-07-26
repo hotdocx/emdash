@@ -1,6 +1,6 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-Date: 2026-07-24
+Date: 2026-07-26
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
 RELEASE-READY is complete, with mandatory conformance, final residual and
 performance boundaries, and all validation gates recorded; forward outer-LF
@@ -49,7 +49,9 @@ and WalkingEnd/HIT remain 3B/3C; exact module visibility, opaque
 tactic-source retention, and the first 3B closure measurement are complete.
 The isolated canonical-symbol parser experiment and wider 3B declaration
 transfer are now optional/deferred. The active critical path is the dependent
-demo and categorical-binder frontend in the usability plan. Generated
+demo and categorical-binder frontend in the usability plan. Its closed-index
+USABILITY-2A0 section/fibre/transport prerequisite is complete, and
+USABILITY-2A1's indexed contextual binder is next. Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
 promoted active stress profile or whole-transfer claim
@@ -131,8 +133,16 @@ Every result is inferred and checked through the generic LF structural
 environment; the output contains semantic Core identities rather than
 Lambdapi spellings. There is no string-parser or production-Lambdapi
 dependency, and the facade remains outside the deployed browser profile. The
-next dependency-ready row is USABILITY-2A natural/displayed dependent
-qualification; the final frontend architecture is not yet graduated.
+closed-index USABILITY-2A0 prerequisite is also complete: exact active
+`Fibre_func` and `functord_transport_func` signatures are generically
+transferred, while the facade now represents displayed families, fibres,
+sections, and displayed functors and checks `s[k]`, `FF[k]`, and `FF[p]`.
+The inactive whole displayed laxity remains a source-located error, and open
+indexed callback application deliberately fails rather than smuggling an
+unscoped Core index into a closed classifier. The next dependency-ready row
+is USABILITY-2A1's first-order indexed contextual classifier and genuine
+natural/displayed eta or binder witness; the final frontend architecture is
+not yet graduated.
 
 ## Authority Boundary
 

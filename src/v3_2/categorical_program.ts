@@ -1,5 +1,5 @@
 /**
- * Stable root-only TypeScript facade for the ordinary categorical frontend.
+ * Stable root-only TypeScript facade for the categorical frontend.
  *
  * The facade owns declaration scope, source sites, structural compilation,
  * generic LF checking, and deterministic explicit-Core inspection. It is a
@@ -24,17 +24,31 @@ import {
     CoreCategoricalTermInspection
 } from './categorical_surface';
 import {
+    CORE_CATEGORICAL_DEPENDENT_PREREQUISITES,
+    CoreCategoricalDependentCompilation,
+    compileCoreCategoricalDependentTransfer,
+    coreCategoricalDependentCoreName
+} from './categorical_dependent_transfer';
+import {
     CORE_CATEGORICAL_STRUCTURAL_PREREQUISITES,
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
-    CoreCategoricalStructuralCompilation,
     CoreCategoricalStructuralPrerequisiteId,
-    compileCoreCategoricalStructuralTransfer,
     coreCategoricalStructuralCoreName,
     coreCategoricalStructuralSymbolCoreName
 } from './categorical_structural_transfer';
 import {
     CoreCategoricalExpectedShape
 } from './categorical_surface_spec';
+import {
+    coreDisplayedFamilyType,
+    coreSectionCategory
+} from './dependent';
+import {
+    CORE_DIRECTED_1A_PRIMITIVE_NAMES
+} from './directed_1a';
+import {
+    CORE_DIRECTED_1C_PRIMITIVE_NAMES
+} from './directed_1c';
 import {
     serializeCoreExpression
 } from './core_serialization';
@@ -50,6 +64,7 @@ import {
     formatSourceSpan,
     kernelApplication,
     kernelCall,
+    kernelExpressionEquals,
     kernelFree,
     provenance,
     sourceSpan
@@ -67,10 +82,12 @@ import {
 } from './surface';
 
 export const CORE_CATEGORICAL_PROGRAM_REVISION =
-    'USABILITY-1D-CATEGORICAL-PROGRAM-1' as const;
+    'USABILITY-2A0-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
+const CORE_CATEGORICAL_DISPLAYED_FAMILY =
+    Symbol('CoreCategoricalProgramDisplayedFamily');
 
 export interface CoreCategoricalCategory {
     readonly [CORE_CATEGORICAL_CATEGORY]: true;
@@ -80,6 +97,18 @@ export interface CoreCategoricalCategory {
 interface InternalCoreCategoricalCategory
 extends CoreCategoricalCategory {
     readonly programIdentity: symbol;
+    readonly expression: KernelExpression;
+}
+
+export interface CoreCategoricalDisplayedFamily {
+    readonly [CORE_CATEGORICAL_DISPLAYED_FAMILY]: true;
+    readonly label: string;
+}
+
+interface InternalCoreCategoricalDisplayedFamily
+extends CoreCategoricalDisplayedFamily {
+    readonly programIdentity: symbol;
+    readonly baseCategory: InternalCoreCategoricalCategory;
     readonly expression: KernelExpression;
 }
 
@@ -112,6 +141,8 @@ export interface CoreCategoricalLambdaOptions {
 
 export type CoreCategoricalProgramErrorCode =
     | 'FOREIGN_CATEGORY'
+    | 'FOREIGN_DISPLAYED_FAMILY'
+    | 'DISPLAYED_BASE_MISMATCH'
     | 'EXPECTED_CATEGORY_OBJECT'
     | 'UNEXPECTED_KIND';
 
@@ -163,6 +194,8 @@ export interface CoreCategoricalProgramCompilation {
         readonly CoreCategoricalAbstractionEvidence[];
     readonly structuralPrerequisites:
         readonly CoreCategoricalStructuralPrerequisiteId[];
+    readonly dependentPrerequisites:
+        CoreCategoricalTermInspection['dependentPrerequisites'];
     readonly productionLambdapiDependency: false;
 }
 
@@ -179,6 +212,17 @@ categoricalLabels[
         CORE_CATEGORICAL_STRUCTURAL_SYMBOLS.functorCategory
     )
 ] = 'emdash.categorical.functor-category';
+for (const prerequisite of CORE_CATEGORICAL_DEPENDENT_PREREQUISITES) {
+    categoricalLabels[
+        coreCategoricalDependentCoreName(prerequisite.id)
+    ] = `emdash.categorical.${prerequisite.id}`;
+}
+categoricalLabels[
+    CORE_DIRECTED_1A_PRIMITIVE_NAMES['displayed-functor-category']
+] = 'emdash.categorical.displayed-functor-category';
+categoricalLabels[
+    CORE_DIRECTED_1C_PRIMITIVE_NAMES['section-object-evaluation']
+] = 'emdash.categorical.section-object-evaluation';
 
 export const CORE_CATEGORICAL_EXPLICIT_FREE_LABELS:
 Readonly<Record<string, string>> = Object.freeze({
@@ -279,16 +323,16 @@ const collectStructuralPrerequisites = (
 export class CoreCategoricalProgram {
     private readonly programIdentity = Symbol('CoreCategoricalProgram');
     private readonly sourceFile: string;
-    private readonly structural: CoreCategoricalStructuralCompilation;
+    private readonly dependent: CoreCategoricalDependentCompilation;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
     constructor(options: CoreCategoricalProgramOptions = {}) {
         this.sourceFile =
             options.sourceFile ?? '<categorical-program>';
-        this.structural =
-            compileCoreCategoricalStructuralTransfer();
-        this.environment = this.structural.compiled.environment;
+        this.dependent =
+            compileCoreCategoricalDependentTransfer();
+        this.environment = this.dependent.compiled.environment;
         this.builder = new CoreCategoricalScopedBuilder(
             this.at('categorical program')
         );
@@ -347,6 +391,65 @@ export class CoreCategoricalProgram {
         });
     }
 
+    private requireDisplayedFamily(
+        value: CoreCategoricalDisplayedFamily,
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalDisplayedFamily {
+        if (
+            typeof value !== 'object' ||
+            value === null ||
+            (value as InternalCoreCategoricalDisplayedFamily)[
+                CORE_CATEGORICAL_DISPLAYED_FAMILY
+            ] !== true ||
+            (value as InternalCoreCategoricalDisplayedFamily)
+                .programIdentity !== this.programIdentity
+        ) {
+            throw new CoreCategoricalProgramError(
+                'FOREIGN_DISPLAYED_FAMILY',
+                nodeProvenance,
+                'Displayed family belongs to another program'
+            );
+        }
+        return value as InternalCoreCategoricalDisplayedFamily;
+    }
+
+    private makeDisplayedFamily(
+        label: string,
+        baseCategory: InternalCoreCategoricalCategory,
+        expression: KernelExpression
+    ): CoreCategoricalDisplayedFamily {
+        return Object.freeze({
+            [CORE_CATEGORICAL_DISPLAYED_FAMILY]: true as const,
+            programIdentity: this.programIdentity,
+            label,
+            baseCategory,
+            expression
+        });
+    }
+
+    private fibreCategoryExpression(
+        family: InternalCoreCategoricalDisplayedFamily,
+        point: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelApplication(
+            'functor-object',
+            [
+                { value: family.baseCategory.expression },
+                {
+                    value: kernelApplication(
+                        'category-of-categories',
+                        [],
+                        nodeProvenance
+                    )
+                },
+                { value: family.expression },
+                { value: point }
+            ],
+            nodeProvenance
+        );
+    }
+
     private assume(
         name: string,
         type: CoreType,
@@ -395,6 +498,169 @@ export class CoreCategoricalProgram {
             name,
             kernelFree(name, nodeProvenance)
         );
+    }
+
+    displayedFamily(
+        name: string,
+        baseValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            `displayed family assumption ${name}`,
+            source
+        );
+        const baseCategory = this.requireCategory(
+            baseValue,
+            nodeProvenance
+        );
+        this.environment = this.environment.extend({
+            name,
+            type: coreDisplayedFamilyType(
+                baseCategory.expression,
+                nodeProvenance
+            ),
+            mode: explicitFunctorial,
+            provenance: nodeProvenance
+        });
+        return this.makeDisplayedFamily(
+            name,
+            baseCategory,
+            kernelFree(name, nodeProvenance)
+        );
+    }
+
+    fibre(
+        familyValue: CoreCategoricalDisplayedFamily,
+        point: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory {
+        const nodeProvenance = this.at(
+            'displayed fibre category',
+            source
+        );
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const pointInspection = this.builder.inspect(point);
+        const pointCategory = coreTypeObjectCategory(
+            pointInspection.type,
+            nodeProvenance.span as SourceSpan,
+            `fibre point for displayed family '${family.label}'`
+        );
+        if (
+            pointCategory === undefined ||
+            !coreObjectCategoryEquals(
+                pointCategory,
+                family.baseCategory.expression
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_CATEGORY_OBJECT',
+                nodeProvenance,
+                `Fibre point for displayed family '${family.label}' is ` +
+                `not an object of base category ` +
+                `'${family.baseCategory.label}'`
+            );
+        }
+        const pointExpression = this.builder.compile(point).term;
+        return this.makeCategory(
+            `${family.label}[point]`,
+            this.fibreCategoryExpression(
+                family,
+                pointExpression,
+                nodeProvenance
+            )
+        );
+    }
+
+    section(
+        name: string,
+        familyValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `dependent section assumption ${name}`,
+            source
+        );
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const category = coreSectionCategory(
+            family.baseCategory.expression,
+            family.expression,
+            nodeProvenance
+        );
+        return this.assume(name, {
+            tag: 'dependent-section',
+            category,
+            baseCategory: family.baseCategory.expression,
+            family: family.expression
+        }, nodeProvenance);
+    }
+
+    displayedFunctor(
+        name: string,
+        sourceValue: CoreCategoricalDisplayedFamily,
+        targetValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `displayed functor assumption ${name}`,
+            source
+        );
+        const sourceFamily = this.requireDisplayedFamily(
+            sourceValue,
+            nodeProvenance
+        );
+        const targetFamily = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFamily.baseCategory.expression,
+                targetFamily.baseCategory.expression
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                `Displayed functor '${name}' has families over different ` +
+                'base categories'
+            );
+        }
+        const category = kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1A_PRIMITIVE_NAMES[
+                    'displayed-functor-category'
+                ],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: sourceFamily.baseCategory.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: sourceFamily.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: targetFamily.expression
+                }
+            ],
+            nodeProvenance
+        );
+        return this.assume(name, {
+            tag: 'displayed-functor',
+            category,
+            baseCategory: sourceFamily.baseCategory.expression,
+            sourceFamily: sourceFamily.expression,
+            targetFamily: targetFamily.expression
+        }, nodeProvenance);
     }
 
     functorCategory(
@@ -662,7 +928,7 @@ export class CoreCategoricalProgram {
             lowered.sourceSpan,
             'categorical program expected result'
         );
-        const checker = this.structural.compiled.createChecker(
+        const checker = this.dependent.compiled.createChecker(
             this.environment
         );
         const inferred = checker.infer(
@@ -698,6 +964,8 @@ export class CoreCategoricalProgram {
                 serializeCoreCategoricalExpression(expectedType),
             abstractions: Object.freeze([...inspected.abstractions]),
             structuralPrerequisites: prerequisites,
+            dependentPrerequisites:
+                inspected.dependentPrerequisites,
             productionLambdapiDependency: false
         });
     }

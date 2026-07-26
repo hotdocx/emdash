@@ -2646,8 +2646,10 @@ product-functor normalization, identity/weakening/composition/diagonal,
 typed pairing/evaluation, exchange, nested curry, generic LF checks, and
 bounded Lambdapi corpus. Preserve the root-only categorical program facade,
 versioned deterministic explicit-Core inspection format, normalized source
-diagnostics, and pointwise/diagonal/exchange demo. Continue with
-USABILITY-2A rather than reopening bulk acquisition.
+diagnostics, and pointwise/diagonal/exchange demo. Preserve the completed
+USABILITY-2A0 generic closed-index section/fibre/transport transfer, facade,
+and inactive-laxity/open-index boundaries. Continue with USABILITY-2A1's
+genuine indexed contextual binder rather than reopening bulk acquisition.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
