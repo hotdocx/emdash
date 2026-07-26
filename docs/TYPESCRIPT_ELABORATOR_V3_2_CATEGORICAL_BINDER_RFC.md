@@ -2,6 +2,9 @@
 
 Status: accepted implementation specification for `USABILITY-1A`
 
+Implementation: `USABILITY-1B` ordinary contextual eta/application slice is
+complete; `USABILITY-1C` structural bracket abstraction is next
+
 Plan: `TS-ELAB-V3.2-USABILITY`
 
 Executable artifact:

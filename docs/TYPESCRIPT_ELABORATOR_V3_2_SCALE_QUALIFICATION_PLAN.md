@@ -2608,7 +2608,7 @@ Treat its Persistent /goal Launch Prompt as part of the objective. Recover
 actual state from active code, checks, the plan and its ledgers, all Git
 worktrees and staged/unstaged diffs, and the active authority order. Follow
 the root AGENTS.md and, for every emdash2 action, emdash2/AGENTS.md and the
-current v3.2 SOP. Preserve completed USABILITY-0A/0B/1A and resume the
+current v3.2 SOP. Preserve completed USABILITY-0A/0B/1A/1B and resume the
 current next dependency-ready bounded slice named by the usability ledger,
 and implement executable evidence rather than only extending the
 architectural prose.

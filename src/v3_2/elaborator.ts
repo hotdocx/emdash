@@ -307,25 +307,33 @@ function instantiateCoreType(
     }
 }
 
-function elaborateOperation(
-    context: SurfaceContext,
-    surface: Extract<SurfaceTerm, { tag: 'operation' }>
+/**
+ * Interpret one declarative operation schema from already elaborated terms.
+ *
+ * This is the reusable boundary for later typed surface layers: they may
+ * classify and construct contextual terms independently, then reuse the same
+ * owner telescope, constraint, result-type, and provenance interpreter once
+ * every operand is closed explicit Core.
+ */
+export function elaborateSurfaceOperationFromOperands(
+    operation: SurfaceOperationId,
+    operandList: readonly ElaboratedSurfaceTerm[],
+    span: SourceSpan
 ): ElaboratedSurfaceTerm {
     const schema: SurfaceOperationSchema =
-        SURFACE_OPERATION_SCHEMAS[surface.operation];
-    if (surface.operands.length !== schema.operands.length) {
+        SURFACE_OPERATION_SCHEMAS[operation];
+    if (operandList.length !== schema.operands.length) {
         throw new V32ElaborationError(
             'OPERATION_ARITY_MISMATCH',
-            surface.span,
+            span,
             `${schema.diagnosticLabel} expects ${schema.operands.length} ` +
-            `surface operands, received ${surface.operands.length}`
+            `surface operands, received ${operandList.length}`
         );
     }
 
     const partialOperands: Partial<ElaboratedOperands> = {};
     schema.operands.forEach((operandSchema, index) => {
-        const operandSurface = surface.operands[index];
-        const operand = elaborateSurfaceTerm(context, operandSurface);
+        const operand = operandList[index];
         const matchesExpectedKind =
             operandSchema.expectedKind === 'object-like'
                 ? isObjectLikeCoreType(operand.type)
@@ -333,7 +341,7 @@ function elaborateOperation(
         if (!matchesExpectedKind) {
             throw new V32ElaborationError(
                 operandSchema.errorCode,
-                operandSurface.span,
+                operand.sourceSpan,
                 `${schema.diagnosticLabel} expects ` +
                 operandSchema.expectation
             );
@@ -343,11 +351,11 @@ function elaborateOperation(
     const operands = partialOperands as ElaboratedOperands;
 
     for (const constraint of schema.constraints) {
-        const left = evaluateSchemaValue(constraint.left, operands, surface.span);
+        const left = evaluateSchemaValue(constraint.left, operands, span);
         const right = evaluateSchemaValue(
             constraint.right,
             operands,
-            surface.span
+            span
         );
         const equalCategories = constraint.comparison === 'object-category'
             ? coreObjectCategoryEquals(left, right)
@@ -363,8 +371,8 @@ function elaborateOperation(
     }
 
     const nodeProvenance = surfaceProvenance(
-        `surface operation ${surface.operation}`,
-        surface.span
+        `surface operation ${operation}`,
+        span
     );
     const term = kernelApplication(
         schema.owner,
@@ -372,7 +380,7 @@ function elaborateOperation(
             const value = evaluateSchemaValue(
                 argument.value,
                 operands,
-                surface.span
+                span
             );
             return {
                 value,
@@ -380,7 +388,7 @@ function elaborateOperation(
                     ? recoveredProvenance(
                         schema.owner,
                         argument.slot,
-                        surface.span
+                        span
                     )
                     : value.provenance
             };
@@ -396,23 +404,36 @@ function elaborateOperation(
         const value = evaluateSchemaValue(
             argument.value,
             operands,
-            surface.span
+            span
         );
         return [recoveredSlot(
-            surface.operation,
+            operation,
             schema.owner,
             argument.slot,
             value,
-            surface.span
+            span
         )];
     });
 
     return {
         term,
-        type: instantiateCoreType(schema.result, operands, surface.span),
-        sourceSpan: surface.span,
+        type: instantiateCoreType(schema.result, operands, span),
+        sourceSpan: span,
         recovered: [...childRecovered, ...ownRecovered]
     };
+}
+
+function elaborateOperation(
+    context: SurfaceContext,
+    surface: Extract<SurfaceTerm, { tag: 'operation' }>
+): ElaboratedSurfaceTerm {
+    return elaborateSurfaceOperationFromOperands(
+        surface.operation,
+        surface.operands.map(operand =>
+            elaborateSurfaceTerm(context, operand)
+        ),
+        surface.span
+    );
 }
 
 export function elaborateSurfaceTerm(

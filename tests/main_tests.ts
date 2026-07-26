@@ -40,6 +40,7 @@ import './v3_2_directed_graduation_proposal_tests';
 import './v3_2_directed_graduation_review_tests';
 import './v3_2_directed_dependent_demo_tests';
 import './v3_2_categorical_surface_spec_tests';
+import './v3_2_categorical_surface_tests';
 import './v3_2_lambdapi_export_inventory_tests';
 import './v3_2_metatheory_review_tests';
 import './v3_2_differential_owner_tests';

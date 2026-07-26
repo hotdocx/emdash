@@ -29,13 +29,15 @@ comprehensively into the plans, implementation continue, and a corresponding
 persistent `/goal` objective be set.
 Status: active living plan; D-DTTLF-USABILITY-001 is approved; USABILITY-0A
 consolidation, USABILITY-0B's runnable dependent demo, and USABILITY-1A's
-categorical-binder/application specification are complete; USABILITY-1B is
-the next dependency-ready implementation slice, and wider declaration
-acquisition is explicitly deferred while the binder frontend is qualified
+categorical-binder/application specification plus USABILITY-1B's ordinary eta
+frontend are complete; USABILITY-1C is the next dependency-ready structural
+bracket implementation slice, and wider declaration acquisition is
+explicitly deferred while the binder frontend is qualified
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
 `c37275a021a45edb08324d326fbb8d90b2010ada`
+USABILITY-1B implementation checkpoint: pending local checkpoint
 
 ## Outcome And Corrected Priority
 
@@ -400,7 +402,7 @@ frontend variables.
 | USABILITY-0A | complete | USABILITY-PLAN-0, completed SCALE-STRESS-3B0 infrastructure | Removed only the unused canonical-symbol parser experiment; preserved and validated exact module visibility, tactic-source retention, and 3B closure measurement; repaired the pre-existing runtime fixture to supply its now-required exact provider interface; reconciled navigation and scale ledgers |
 | USABILITY-0B | complete | USABILITY-0A, reviewed DIRECTED-1C continuation | Runnable direct-TypeScript dependent demo with readable input, inferred type, serialized explicit Core, reduced result, beta-to-Sigma-fibre trace, and one wrong-family/pair diagnostic |
 | USABILITY-1A | complete | USABILITY-0B | Exact binder/application RFC and executable typed-surface specification; distinguishes LF and categorical abstraction, freezes five orthogonal axes, sixteen application judgments, a first-order contextual-IR contract, thirteen ordinary bracket prerequisites, nine diagnostic contracts, backend relocation, and fail-closed active/reserved/absent owner policies without semantic installation |
-| USABILITY-1B | pending | USABILITY-1A | Minimal contextual/wiring IR plus ordinary functorial eta abstraction; object and arrow application select exact `fapp0`/`fapp1_fapp0`; whole-action expectation selects `fapp1_func`; include ambiguity and non-functorial-body negatives |
+| USABILITY-1B | complete | USABILITY-1A | Root-only immutable contextual surface, callback-once locally nameless eta evidence, ordinary functorial eta abstraction, generic declarative-operation reuse, exact object/capped-arrow/whole-hom action selection, higher Hom-object disambiguation, and fail-closed layer/classifier/object-only/natural/polarity/foreign/escaped/non-eta cases |
 | USABILITY-1C | pending | USABILITY-1B | Ordinary bracket-abstraction basis: unused-variable/constant weakening, exchange, duplicated-variable diagonal, evaluation after pairing, and nested abstraction/curry; no owner-specific evaluator additions |
 | USABILITY-1D | pending | USABILITY-1C | Ergonomic surface/API consolidation, deterministic explicit-Core serialization, stable diagnostics, and focused TypeScript/Lambdapi conformance corpus |
 | USABILITY-2A | pending | USABILITY-1D, active displayed owners | One natural/indexed or displayed dependent Pi/Sigma binder and application example through the same contextual IR; precise unsupported-action negative for the first absent structural capability |
@@ -586,7 +588,97 @@ EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
 
 The frozen MVP remains 24 owners, the browser entry point is unchanged, and
 backend spellings occur only in the separate authority binding table.
-USABILITY-1B is now dependency-ready.
+USABILITY-1B was thereby dependency-ready.
+
+## USABILITY-1B Completion Record
+
+USABILITY-1B adds the root-only `CoreCategoricalScopedBuilder` and immutable
+contextual IR in `src/v3_2/categorical_surface.ts`. It does not add a Core
+owner or an operation-specific checking path. Instead,
+`elaborateSurfaceOperationFromOperands()` exposes the existing declarative
+surface-operation interpreter at an already-typed operand boundary; both the
+older direct surface and the categorical frontend reuse the same telescope,
+constraint, recovered-slot, result-classifier, and provenance data.
+
+The first supported direct TypeScript abstraction is:
+
+```ts
+const h = builder.categoricalLambda(
+  "u",
+  A,
+  B,
+  u => builder.apply(F, u)
+);
+```
+
+The callback executes exactly once and is not stored. Its opaque slot token is
+reified into immutable first-order evidence:
+
+```text
+typed-application functor.object
+  subject = explicit-core-term F
+  argument = slot-reference 0
+```
+
+The eta bracket rule then compiles `h` to the existing explicit Core term
+`F : Functor(A,B)`. Applying `h` afterward uses the same frozen USABILITY-1A
+selector and declarative owner schemas:
+
+```text
+h x                 -> functor-object(F,x)
+h f                 -> functor-hom-capped(F,f)
+wholeAction(h,x,y)  -> functor-hom-full(F,x,y)
+```
+
+The whole-action API is a typed Hom-boundary request, not a concrete arrow
+term. A full transfor-style evaluator can therefore never be obtained by
+silently discarding a supplied term. The classifier also distinguishes an
+arrow `f : Hom_A(x,y)` used as the arrow input of `F : A ⊢ B` from the same
+`f` used as an object input of
+`H : Hom_cat(A,x,y) ⊢ B`.
+
+The stored abstraction evidence records plicity, functorial variation,
+covariant polarity, object cell level, ordinary dependency, source/target
+categories, locally nameless body, result IR, and provenance. Builder-local
+terms reject foreign-builder composition, and a slot captured outside its
+callback rejects as `ESCAPED_SLOT`.
+
+USABILITY-1B deliberately recognizes only eta. Other well-typed bracket
+shapes stop at their exact structural dependency:
+
+- `u => u` names `identity-functor`;
+- an unused `u` names `constant-functor-abstraction`;
+- a general open application names `evaluation-functor`; and
+- repeated use names `diagonal-functor-abstraction`.
+
+Object-only input rejects with `OBJECT_ONLY_ARROW_USE`; natural/displayed
+input remains routed to USABILITY-2A; an ordinary contravariant request must
+first use the opposite source classifier; absent layer information reports
+`AMBIGUOUS_ABSTRACTION_LAYER`; and category/expectation mismatches do not
+guess another action.
+
+Validation on 2026-07-26:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_categorical_surface_tests.ts \
+  tests/v3_2_categorical_surface_spec_tests.ts \
+  tests/v3_2_elab0_tests.ts
+  42 tests / 3 suites: 37 passed, 5 opt-in probes skipped
+
+./scripts/pnpmw run check:ts
+  workspace, typecheck, lint, and 595-test TypeScript gate passed
+  557 passed, 38 opt-in live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, examples, and checks passed
+```
+
+The 24-owner MVP, reviewed directed continuation, backend mappings, and
+browser entry point remain unchanged. USABILITY-1C is now dependency-ready
+and will transfer/use the smallest exact structural prerequisites for
+identity, weakening, exchange, contraction, evaluation after pairing, and
+nested abstraction.
 
 ## Acceptance Criteria
 
@@ -733,7 +825,8 @@ declaration/runtime/proof/mixed-phase transfer mechanisms. Direct typed
 TypeScript transfer is the default; “mechanical” means data, linkage, policy,
 and focused evidence rather than a new checker/evaluator algorithm.
 
-Preserve completed USABILITY-0A/0B/1A: the parser experiment remains removed,
+Preserve completed USABILITY-0A/0B/1A/1B: the parser experiment remains
+removed,
 the generic visibility/tactic/inventory infrastructure remains validated,
 and the runnable dependent Sigma-telescope demo retains direct TypeScript
 input, inferred and reduced types, explicit Core, the two-step trace, and its
@@ -744,7 +837,14 @@ reserved/untransferred/absent actions, and the separate thirteen-owner
 ordinary structural prerequisite catalog. No 70-root or extension declaration
 transfer is a prerequisite for that demo or the ordinary eta slice.
 
-Begin with dependency-ready USABILITY-1B, then implement the
+Preserve the USABILITY-1B contextual builder and generic typed-operand reuse:
+callbacks run once; stored eta evidence is first-order and locally nameless;
+ordinary object, capped-arrow, and whole-hom actions select exact semantic
+owners; higher Hom objects are distinguished from base arrows; and ambiguity,
+object-only/natural/polarity, foreign/escaped tokens, and non-eta bodies fail
+closed.
+
+Begin with dependency-ready USABILITY-1C, then implement the
 categorical-binder frontend in the ledger's order and follow
 docs/TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md. Keep outer LF
 lambda separate from functorial abstraction. Use a small
@@ -840,3 +940,12 @@ CI obligations.
   review and whitespace audit. It installs no semantic owner/rule or browser
   surface and authorizes no remote Git, integration, publication, release,
   history rewrite, or cleanup operation.
+- **2026-07-26 — USABILITY-1B ordinary eta frontend completed.** Added a
+  root-only scoped categorical builder and immutable first-order contextual
+  evidence. Callback-once eta abstraction compiles to the underlying functor;
+  object, capped-arrow, and typed whole-Hom requests reuse the declarative
+  operation schema interpreter; higher Hom objects remain distinct from base
+  arrows. Layer ambiguity, classifier mismatch, object-only/natural/polarity
+  misuse, foreign or escaped slots, and non-eta structural cases fail closed.
+  Forty-two focused/spec/regression tests, the 595-test TypeScript gate, and
+  the bounded active-kernel gate passed. USABILITY-1C is next.

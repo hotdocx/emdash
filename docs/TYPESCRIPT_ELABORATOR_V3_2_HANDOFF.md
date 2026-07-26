@@ -106,10 +106,12 @@ executes `beta` followed by
 `directed.sigma-telescope-fibre.evaluate`, and reports one source-located
 wrong-family dependent-pair error. It has no production Lambdapi dependency
 and is intentionally absent from the deployed browser profile. The next
-dependency-ready row, USABILITY-1B, implements the minimal contextual IR,
-ordinary functorial eta abstraction, and type-directed object/arrow/full
-application from the completed USABILITY-1A RFC; the final frontend
-architecture is not yet graduated.
+dependency-ready row, USABILITY-1C, transfers and uses the ordinary
+identity/weakening/exchange/contraction/product/evaluation/composition/curry
+basis for general bracket abstraction. USABILITY-1B already implements the
+minimal immutable contextual IR, callback-once functorial eta abstraction,
+and exact object/arrow/full application selection from the USABILITY-1A RFC;
+the final frontend architecture is not yet graduated.
 
 ## Authority Boundary
 
