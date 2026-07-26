@@ -29,6 +29,13 @@ did not require a full Lambdapi term parser as the architectural starting
 point, the user approved revised H-DTTLF-SCALE-01 on 2026-07-24. On
 2026-07-25 the user approved H-DTTLF-SCALE-02/D-DTTLF-SCALE-002 exactly as
 proposed and directed the persistent goal to continue.
+On 2026-07-26 the user accepted the follow-up usability review: direct typed
+transfer remains the default; the isolated canonical-symbol parser experiment
+is removed and parser acquisition is optional/deferred; the immediate
+critical path is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md),
+starting with a polished existing dependent demo and then categorical-binder
+compilation.
 Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
@@ -65,10 +72,18 @@ rejects transparent dependency cycles. SCALE-STRESS-3A2B uses that generic
 path for active `Hom`, pins the smallest product/projection closure, and
 checks and executes `Prof_tensor_map`/`Prof_tensor_func` object and capped
 arrow action without an oracle. Protected/evidence extensions and
-WalkingEnd/HIT remain SCALE-STRESS-3B/3C; generated induction semantics,
-batch deduplication, and the measured outer-LF TYPE/KIND product boundary
-remain explicit rows before whole-transfer qualification;
-SCALE-STRESS-3B is the next dependency-ready forward row
+WalkingEnd/HIT remain SCALE-STRESS-3B/3C. SCALE-STRESS-3B has a completed
+first infrastructure/inventory tranche:
+generic compiled-module exposition and tactic-theorem retention are complete,
+and checked acquisition pins the protected hom-action and evidence-property
+closures plus their measured root prerequisite. The unexported 1,022-line
+canonical-symbol parser prototype was rejected as the immediate next step and
+removed; SCALE-ACQUIRE-1B and bulk SCALE-STRESS-3B1/3B2 transfer are deferred
+behind the usability plan or an independently measured acquisition need.
+Generated induction semantics, batch deduplication, and the measured outer-LF
+TYPE/KIND product boundary remain explicit rows before whole-transfer
+qualification. No SCALE-STRESS-3B semantic profile or theorem has been
+promoted
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -534,7 +549,13 @@ The architecture qualifies only when all of the following hold:
 | SCALE-STRESS-3A2A | complete | SCALE-STRESS-3A1, SCALE-CONVERSION-CONGRUENCE-1 | Pin the exact transparent `Hom` equation, identity declaration/computation, `ProfMap`, and comparison push/pull closure; compile one intrinsic-owner definition, eight free declarations, and one source rule after the reviewed continuation without activating a profile |
 | SCALE-INTRINSIC-DELTA-1 | complete | SCALE-0C, SCALE-STRESS-3A2A, SCALE-STRESS-3A2B dependency audit | Permit `checked-transparent-definition` on an existing Core-owner link; check its exact intrinsic signature and body, retain immutable dependency evidence, reject self/graph cycles, refine only the same prior intrinsic-conformance symbol, and delta-unfold owner applications under the existing shared bound |
 | SCALE-STRESS-3A2B | complete | SCALE-STRESS-3A2A, SCALE-INTRINSIC-DELTA-1, SCALE-0D | Pin the six-declaration/five-rule product/projection closure plus `Prof_tensor_map`/`Prof_tensor_func`; strictly type and execute object/capped-arrow action through data/policy only, with bounded live agreement and no subject oracle |
-| SCALE-STRESS-3B | pending | SCALE-STRESS-3A2 or independently ready module closure | Qualify protected one-way module visibility and proof-heavy evidence bodies without promoting theorem source to runtime computation |
+| SCALE-STRESS-3B | paused after completed 3B0 | SCALE-STRESS-3A2 or independently ready module closure | Parent row for protected one-way module visibility, checked declaration acquisition, and proof-heavy evidence bodies without promoting theorem source to runtime computation; wider transfer resumes through direct typed data or a separately justified adapter after the usability critical path or an independent measured need |
+| SCALE-MODULE-VISIBILITY-1 | complete | SCALE-0C through SCALE-0E, first protected dependency consumer | Derive an immutable public/protected/private exposition interface from exact compiled provider artifacts; preserve the provider's full checked environment; permit protected imports only in external runtime patterns; reject private/general use and link/environment drift |
+| SCALE-TACTIC-THEOREM-1 | complete | SCALE-0C, first tactic-backed declaration consumer | Retain exact checked tactic source in transfer IR while installing only an opaque checked signature; never execute or delta-unfold the tactic body |
+| SCALE-STRESS-3B0 | complete | SCALE-ACQUIRE-1A, SCALE-MODULE-VISIBILITY-1, SCALE-TACTIC-THEOREM-1 | Pin the 58-command protected hom-action and 25-command evidence-property closures, verify live source/export/import/digest/dependency evidence, and measure the 90-command root prerequisite without parsing or semantic promotion |
+| SCALE-ACQUIRE-1B | deferred; prototype removed | SCALE-STRESS-3B0 plus a measured future acquisition need | Optional narrow fail-closed declaration adapter feeding the existing IR; the abandoned unexported canonical-symbol prototype is not architectural infrastructure and must not be recreated without a recorded cost/benefit trigger |
+| SCALE-STRESS-3B1 | deferred | usability graduation or an independently measured transfer priority; exact root/generated-owner boundary | Directly construct and compile the smallest typed root prerequisite and protected hom-action declaration closure through data/policy only, preserving protected exposition and opaque tactic theorems; no parser dependency |
+| SCALE-STRESS-3B2 | deferred | SCALE-STRESS-3B1 | Compile the evidence-property declaration closure against exact root/protected interfaces and check representative transparent bodies without activating a profile |
 | SCALE-STRESS-3C | pending | applicable inductive/import/runtime mechanisms | Qualify the multi-module `WalkingEnd_cat`/dependent-eliminator/higher-action/`BNat_cat` HIT slice and record its exact generated-owner and runtime/proof boundaries |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
@@ -2283,6 +2304,89 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   all 14 live profunctor stress tests passed
 ```
 
+## SCALE-STRESS-3B0, SCALE-MODULE-VISIBILITY-1, And
+SCALE-TACTIC-THEOREM-1 Completion Record
+
+The first protected/evidence tranche closes two generic engine boundaries
+before attempting bulk declaration terms. A compiled module now exposes an
+immutable source interface separate from its full checked provider
+environment. Public declarations are ordinary external dependencies;
+protected declarations are permitted only inside an external runtime-rule
+pattern whose root owner remains local; private declarations are never
+externally referenceable. Every free dependency use requires the exact
+compiled interface, linkage, type, and provider environment. This preserves a
+public transparent wrapper's ability to reduce through protected
+implementation dependencies without exposing those dependencies as general
+consumer terms. Existing intrinsic Core-owner links remain the explicit
+pre-existing Core boundary.
+
+A `checked-tactic-source` theorem is retained exactly in the immutable module
+IR but installs only its checked opaque signature. It is never executed or
+delta-unfolded by TypeScript. Explicit theorem terms are still checked and
+installed opaque through the same `theorem-body` policy. The stricter
+interface also updates the existing isolated SCALE-STRESS-1B proposal
+consumer to provide its exact compiled dependency interface; that artifact
+remains non-active and still awaits its separate human gate.
+
+SCALE-STRESS-3B0 pins two exact source-prior symbol closures:
+
+- all 58 commands through `groupoidal_core_homwise` in the protected
+  hom-action module: 56 protected declarations, 56 explicit terms, two
+  retained tactic bodies, and 63,945 canonical command bytes; and
+- 25 non-contiguous commands through
+  `omega_equiv_along_evidence_is_prop`: 25 explicit terms and 14,614
+  canonical command bytes.
+
+Live export verifies source/export/version/import hashes, every selected
+command digest, and lexical source-prior local dependency closure. The two
+modules directly reference 57 root names. Their declaration-producer closure
+contains 90 source-prior root commands. The already compiled 3A lineage
+supplies a consumer-usable part of 20 commands (the decoded-Sigma inductive
+producer remains partial because generated `ind_τΣ_` is withheld). Seventy
+commands remain: 68 symbols and two inductives, containing 49 explicit terms,
+19 absent bodies, and 24,131 canonical bytes. The two absent inductive
+producers are `TruncLevel` and `OmegaEquivAlongEqData`.
+
+This measurement identifies direct term construction as a real future
+throughput cost, but not as the immediate product blocker and not as
+justification for a general Lambdapi parser. The measured commands are
+nonuniform: opaque signatures are relatively small; transparent bodies,
+runtime/proof rules, inductives, generated owners, and tactic-backed theorems
+carry substantially different representation and evidence costs. Direct
+typed transcription by a Codex agent remains feasible in bounded tranches and
+is still the default producer of the generic transfer IR.
+
+The subsequent 1,022-line canonical `symbol` prototype parsed neither rules,
+patterns, inductives, tactics, nor notation and had no export, consumer, or
+dedicated tests. The accepted 2026-07-26 usability decision removed that
+isolated experiment and deferred SCALE-ACQUIRE-1B. A future narrow
+adapter/generator is permitted only after measured repetitive work shows it
+to be cheaper than direct typed construction. It must feed the existing IR,
+remain fail-closed and source/hash-pinned, and stay outside semantic policy
+and the trusted checker/evaluator.
+
+Accordingly, “mechanical transfer” continues to mean that another qualified
+mechanism requires data, linkage, policy, and focused evidence rather than a
+new checker/evaluator algorithm. It does not require automatic `.lp` parsing.
+SCALE-STRESS-3B1/3B2 can later proceed through direct typed construction, but
+the current critical path is the dependent demo and categorical-binder
+frontend in the usability plan. Rule/pattern parsing, inductive parsing,
+tactic execution, notation, semantic policy, generated-owner trust, active
+profiles, browser APIs, and any theorem or whole-transfer claim remain
+outside the deferred acquisition row.
+
+Validation on 2026-07-25:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_lf_transfer_visibility_tests.ts \
+  tests/v3_2_scale_stress_3b_acquisition_tests.ts
+  8 tests / 2 suites: 7 passed, 1 live probe skipped
+
+./scripts/pnpmw run check:scale-module-stress
+  8 tests / 2 suites: 8 passed
+```
+
 ## Human Review Gates
 
 ### H-DTTLF-SCALE-01 — Transfer IR And Acquisition Architecture
@@ -2494,13 +2598,16 @@ authorized.
 
 ```text
 Kick off or continue implementing
-docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md.
+docs/TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md, while preserving
+docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md as the retained
+systematic-transfer ledger.
 
 Treat its Persistent /goal Launch Prompt as part of the objective. Recover
 actual state from active code, checks, the plan and its ledgers, all Git
 worktrees and staged/unstaged diffs, and the active authority order. Follow
 the root AGENTS.md and, for every emdash2 action, emdash2/AGENTS.md and the
-current v3.2 SOP. Resume the in-progress row or select the next
+current v3.2 SOP. Preserve completed USABILITY-0A/0B and resume
+USABILITY-1A or select the next
 dependency-ready bounded slice, and implement executable evidence rather than
 only extending the architectural prose.
 
@@ -2521,6 +2628,16 @@ inventory, drift detection, extraction, conformance, and a possible later
 bulk parser/generator; do not make full term parsing an immediate
 prerequisite. Handwritten active Lambdapi remains mathematical authority and
 production must not invoke Lambdapi.
+
+Follow approved D-DTTLF-USABILITY-001. The isolated unexported canonical
+symbol-parser prototype is removed and SCALE-ACQUIRE-1B plus bulk
+SCALE-STRESS-3B1/3B2 are deferred. Do not recreate that parser or make the
+measured 70-root/extension closures the immediate critical path. First package
+the existing dependent Sigma-telescope computation, then qualify the
+categorical-binder/contextual-IR frontend through ordinary functorial and one
+natural/displayed example as specified by the usability plan. Direct typed
+construction remains the default acquisition path; reconsider a narrow
+adapter only after measured repetition and a synchronized plan decision.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
@@ -2881,3 +2998,14 @@ scope is affected.
   SCALE-STRESS-3A2 parent is complete; SCALE-STRESS-3B is next. Exact green
   local implementation checkpoint:
   `f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8`.
+- **2026-07-26 — SCALE-STRESS-3B0 retained; SCALE-ACQUIRE-1B deferred.**
+  Completed generic module visibility, tactic-source retention, and exact
+  58/25-command plus 90-root closure measurement are preserved. The
+  unexported, unconsumed 1,022-line canonical-symbol parser experiment was
+  removed because it covered neither rules, proof patterns, inductives,
+  tactics, nor notation and was not the immediate product blocker. Direct
+  typed construction remains the default and “mechanical” continues to mean
+  data/linkage/policy/evidence without checker/evaluator algorithm changes.
+  Bulk 3B1/3B2 transfer is deferred behind the new usability critical path or
+  an independent measured priority; no active profile, theorem, parser trust,
+  or whole-transfer claim was added.

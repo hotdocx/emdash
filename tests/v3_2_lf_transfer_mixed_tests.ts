@@ -22,6 +22,7 @@ import {
     composeCoreLfProofPrograms,
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
+    createCoreLfCompiledModuleInterface,
     createCoreLfMixedDeclarationLinkage,
     createCoreLfModuleSpec,
     createCoreLfTransferPolicyOverlay,
@@ -958,6 +959,11 @@ describe('SCALE-MIXED-PHASE-1 generic source-order planner', () => {
             linkage,
             {
                 initialDeclarations: base.declarations,
+                dependencyInterfaces: [
+                    createCoreLfCompiledModuleInterface(
+                        base.declarations.modules
+                    )
+                ],
                 runtimeDependencies: [{
                     relation: 'dependency-module',
                     fragment: base.latestRuntime

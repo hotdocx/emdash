@@ -20,6 +20,7 @@ import {
     coreLfCombinedWeakHead,
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
+    createCoreLfCompiledModuleInterface,
     createCoreLfModuleSpec,
     createCoreLfTransferDeclarationLinkage,
     createCoreLfTransferPolicyOverlay,
@@ -390,6 +391,8 @@ const runtimeModule = (
 
 const compileBaseClosure = () => {
     const declarations = compileDeclarations();
+    const declarationInterface =
+        createCoreLfCompiledModuleInterface(declarations);
     const baseModule = runtimeModule({
         revision: 'runtime-dependency-base-1',
         moduleId: 'fixture.runtime_dependency_base',
@@ -402,7 +405,10 @@ const compileBaseClosure = () => {
         baseModule,
         runtimePolicy(baseModule),
         declarations,
-        { dependencies: [] }
+        {
+            dependencies: [],
+            dependencyInterfaces: [declarationInterface]
+        }
     );
 
     const consumerModule = runtimeModule({
@@ -422,7 +428,8 @@ const compileBaseClosure = () => {
             dependencies: [{
                 relation: 'dependency-module',
                 fragment: base
-            }]
+            }],
+            dependencyInterfaces: [declarationInterface]
         }
     );
 
@@ -443,10 +450,17 @@ const compileBaseClosure = () => {
             dependencies: [{
                 relation: 'earlier-fragment',
                 fragment: consumer
-            }]
+            }],
+            dependencyInterfaces: [declarationInterface]
         }
     );
-    return { declarations, base, consumer, later };
+    return {
+        declarations,
+        declarationInterface,
+        base,
+        consumer,
+        later
+    };
 };
 
 const freeTerm = (
@@ -605,7 +619,10 @@ describe('SCALE-RUNTIME-DEPS-1 generic runtime composition', () => {
             priorModule,
             runtimePolicy(priorModule),
             closure.declarations,
-            { dependencies: [] }
+            {
+                dependencies: [],
+                dependencyInterfaces: [closure.declarationInterface]
+            }
         );
 
         const localPattern = new CoreLfTransferScopedBuilder();
@@ -664,7 +681,12 @@ describe('SCALE-RUNTIME-DEPS-1 generic runtime composition', () => {
             () => compileCoreLfRuntimeProgram(
                 localModule,
                 localPolicy,
-                closure.declarations
+                closure.declarations,
+                {
+                    dependencyInterfaces: [
+                        closure.declarationInterface
+                    ]
+                }
             ),
             'INVALID_RUNTIME_RULE_TYPE'
         );
@@ -676,7 +698,8 @@ describe('SCALE-RUNTIME-DEPS-1 generic runtime composition', () => {
                 dependencies: [{
                     relation: 'dependency-module',
                     fragment: prior
-                }]
+                }],
+                dependencyInterfaces: [closure.declarationInterface]
             }
         );
         assert.deepEqual(
@@ -710,7 +733,8 @@ describe('SCALE-RUNTIME-DEPS-1 generic runtime composition', () => {
                 dependencies: [{
                     relation: 'dependency-module',
                     fragment: closure.base
-                }]
+                }],
+                dependencyInterfaces: [closure.declarationInterface]
             }
         );
         const topModule = runtimeModule({
@@ -739,7 +763,8 @@ describe('SCALE-RUNTIME-DEPS-1 generic runtime composition', () => {
                         relation: 'dependency-module',
                         fragment: siblingFragment
                     }
-                ]
+                ],
+                dependencyInterfaces: [closure.declarationInterface]
             }
         );
         assert.deepEqual(topFragment.runtime.ruleIds, [

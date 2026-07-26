@@ -38,6 +38,7 @@ import './v3_2_directed_1c_review_tests';
 import './v3_2_directed_1c_tests';
 import './v3_2_directed_graduation_proposal_tests';
 import './v3_2_directed_graduation_review_tests';
+import './v3_2_directed_dependent_demo_tests';
 import './v3_2_lambdapi_export_inventory_tests';
 import './v3_2_metatheory_review_tests';
 import './v3_2_differential_owner_tests';
@@ -57,6 +58,7 @@ import './v3_2_release_completion_tests';
 import './v3_2_lf_transfer_tests';
 import './v3_2_lf_transfer_compiler_tests';
 import './v3_2_lf_transfer_runtime_tests';
+import './v3_2_lf_transfer_visibility_tests';
 import './v3_2_lf_transfer_proof_tests';
 import './v3_2_lf_transfer_inductive_tests';
 import './v3_2_lf_transfer_mixed_tests';
@@ -71,6 +73,7 @@ import './v3_2_scale_stress_2b3_representation_tests';
 import './v3_2_scale_stress_3a1_representation_tests';
 import './v3_2_scale_stress_3a2a_representation_tests';
 import './v3_2_scale_stress_3a2b_representation_tests';
+import './v3_2_scale_stress_3b_acquisition_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,

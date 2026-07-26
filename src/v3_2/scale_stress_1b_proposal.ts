@@ -32,6 +32,9 @@ import {
     planCoreLfMixedPhases
 } from './lf_transfer_mixed';
 import {
+    createCoreLfCompiledModuleInterface
+} from './lf_transfer_visibility';
+import {
     validateCoreLfScaleEngineReview
 } from './scale_engine_review';
 import {
@@ -926,6 +929,11 @@ export function compileCoreLfScaleStress1bProposal(
         natLinkage,
         {
             initialDeclarations: compiledCore.declarations,
+            dependencyInterfaces: [
+                createCoreLfCompiledModuleInterface(
+                    compiledCore.declarations.modules
+                )
+            ],
             runtimeDependencies: [{
                 relation: 'dependency-module',
                 fragment: compiledCore.latestRuntime

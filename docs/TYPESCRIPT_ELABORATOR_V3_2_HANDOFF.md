@@ -45,7 +45,11 @@ cycles. SCALE-STRESS-3A2B uses that path for active `Hom` and compiles the
 exact product/projection plus `Prof_tensor_map`/`Prof_tensor_func`
 object/capped-arrow closure without an oracle, completing the
 representation-only SCALE-STRESS-3A2 parent. Protected/evidence extensions
-and WalkingEnd/HIT remain 3B/3C; generated
+and WalkingEnd/HIT remain 3B/3C; exact module visibility, opaque
+tactic-source retention, and the first 3B closure measurement are complete.
+The isolated canonical-symbol parser experiment and wider 3B declaration
+transfer are now optional/deferred. The active critical path is the dependent
+demo and categorical-binder frontend in the usability plan. Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
 promoted active stress profile or whole-transfer claim
@@ -67,6 +71,9 @@ The exact implemented outer-LF and directed-DTT continuation is recorded by
 [`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md).
 Forward systematic-transfer work is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md).
+The current product-facing dependent-demo and categorical-binder work is
+governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md).
 Long-running goal branches and checkpoints follow
 [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
 
@@ -78,9 +85,27 @@ emdash Core applications, not tokenization.
 The scale plan's approved initial transfer path likewise uses a shared typed
 TypeScript builder rather than a string parser. Canonical export remains a
 separate developer/build inventory, drift, extraction, and conformance tool;
-a fail-closed canonical term/pattern parser may later feed the same transfer
-IR if bulk-acquisition evidence justifies it. Neither path is the optional
-user-facing source parser or changes this surface-design boundary.
+a narrow fail-closed canonical adapter may later feed the same transfer IR if
+measured bulk-acquisition evidence justifies it. The abandoned canonical
+symbol-parser prototype is not retained architecture. Neither acquisition
+path is the optional user-facing source parser or changes this
+surface-design boundary.
+
+The first packaged dependent demo is now runnable from the root:
+
+```text
+./scripts/pnpmw run demo:directed-dependent
+```
+
+It constructs a Sigma-telescope section application with the direct
+TypeScript scoped builder, prints explicit Core plus inferred/reduced types,
+executes `beta` followed by
+`directed.sigma-telescope-fibre.evaluate`, and reports one source-located
+wrong-family dependent-pair error. It has no production Lambdapi dependency
+and is intentionally absent from the deployed browser profile. The next
+dependency-ready row, USABILITY-1A, specifies the categorical-binder and
+type-directed application frontend; the final frontend architecture is not
+yet graduated.
 
 ## Authority Boundary
 
@@ -94,12 +119,14 @@ Read these in order before selecting a semantic target:
 5. `../emdash2/reports/EMDASH_FOUNDATIONS.md`;
 6. `../emdash2/reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`;
 7. the active task plan selected through `../emdash2/reports/INDEX.md`;
-8. `TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md` for the active
+8. `TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md` for the active
+   dependent-demo and categorical-binder frontend critical path;
+9. `TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md` for the retained
    systematic-transfer implementation ledger, subordinate to the
    mathematical sources above;
-9. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the reviewed
+10. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the reviewed
    outer-LF/directed-profile implementation history;
-10. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
+11. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
     history.
 
 The root `src/` implementation predates the current kernel. Its generic
@@ -511,7 +538,7 @@ any Git mutation.
 ## Start The Long-Running Implementation
 
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
-`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`. It names the
+`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`. It names the
 completed-profile and reviewed-continuation comparison checkpoints, selects
 the next dependency-ready implementation slice, and records the
 continuation's Git boundary. The completed master plan's historical

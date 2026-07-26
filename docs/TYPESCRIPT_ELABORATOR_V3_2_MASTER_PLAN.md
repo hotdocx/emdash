@@ -21,6 +21,9 @@ recorded by
 [`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md);
 forward systematic-transfer work is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md);
+the current dependent-demo and categorical-binder frontend critical path is
+governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md);
 this completed plan remains frozen historical evidence for the exact
 `emdash-v3.2-mvp-1` profile
 Pre-implementation baseline:
@@ -3658,9 +3661,11 @@ described in `PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
 
 ```text
 Kick off or continue implementing
-docs/TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md.
+docs/TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md, treating this completed
+master plan as frozen historical authority for emdash-v3.2-mvp-1.
 
-Treat it as the living master plan and decision ledger: determine the actual
+Treat the usability file as the living active plan and decision ledger:
+determine the actual
 current state from the active code, checks, plan status/ledger, and Git
 worktree; then resume the in-progress slice or select the next
 dependency-ready bounded slice according to the plan. Read and follow the root
@@ -3710,4 +3715,10 @@ invalidates a planned step, document the result and pursue any independent
 dependency-ready work that remains in scope. A need for human mathematical
 review blocks only the affected slice; never guess a rule or a
 displayed-to-ordinary equality.
+
+Follow the usability plan's accepted acquisition deferral and categorical
+binder architecture. Preserve the completed generic scale infrastructure,
+but do not recreate the removed canonical-symbol parser or make bulk
+declaration transfer the immediate prerequisite for the runnable dependent
+demo and functorial/natural/displayed frontend slices.
 ```

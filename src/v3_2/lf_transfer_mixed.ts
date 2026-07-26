@@ -55,6 +55,9 @@ import {
     composeCoreLfRuntimeDependencies,
     compileCoreLfRuntimeFragment
 } from './lf_transfer_runtime';
+import {
+    CoreLfCompiledModuleInterface
+} from './lf_transfer_visibility';
 import { provenance } from './kernel';
 import { coreOwnerSignatureType } from './signature';
 
@@ -1007,6 +1010,13 @@ export interface CoreLfMixedCompileOptions {
     readonly initialDeclarations?:
         CoreLfMixedDeclarationBaseContext;
     /**
+     * Exact source-exposition interfaces for ordinary declarations imported
+     * from dependency modules. The same interfaces govern declaration,
+     * runtime, and proof phases.
+     */
+    readonly dependencyInterfaces?:
+        readonly CoreLfCompiledModuleInterface[];
+    /**
      * Runtime conversion used when rechecking an immutable initial
      * declaration context and compiling later declaration/proof-only phases.
      *
@@ -1259,6 +1269,8 @@ export function compileCoreLfMixedPhases(
                     ),
                     {
                         initialEnvironment: declarations.environment,
+                        dependencyInterfaces:
+                            options.dependencyInterfaces,
                         runtimeProgram:
                             latestRuntime?.runtime ??
                             externalCheckingRuntime ??
@@ -1290,6 +1302,8 @@ export function compileCoreLfMixedPhases(
                     ),
                     {
                         initialEnvironment: declarations.environment,
+                        dependencyInterfaces:
+                            options.dependencyInterfaces,
                         runtimeProgram:
                             latestRuntime?.runtime ??
                             externalCheckingRuntime ??
@@ -1324,7 +1338,9 @@ export function compileCoreLfMixedPhases(
                     declarations,
                     {
                         dependencies,
-                        ...(options.runtimeOptions?.(phase) ?? {})
+                        ...(options.runtimeOptions?.(phase) ?? {}),
+                        dependencyInterfaces:
+                            options.dependencyInterfaces
                     }
                 );
                 latestRuntime = artifact;
@@ -1344,6 +1360,8 @@ export function compileCoreLfMixedPhases(
                     declarations,
                     {
                         ...(options.proofOptions?.(phase) ?? {}),
+                        dependencyInterfaces:
+                            options.dependencyInterfaces,
                         runtimeProgram:
                             latestRuntime?.runtime ??
                             externalCheckingRuntime ??

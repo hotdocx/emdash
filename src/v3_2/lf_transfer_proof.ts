@@ -44,6 +44,10 @@ import {
     CoreLfCompiledDeclaration
 } from './lf_transfer_compiler';
 import {
+    CoreLfCompiledModuleInterface,
+    CoreLfDependencyAccess
+} from './lf_transfer_visibility';
+import {
     coreLfRuntimeHasExactPrefix
 } from './lf_transfer_runtime';
 import {
@@ -187,6 +191,8 @@ export interface CoreLfProofTypingOracle {
 
 export interface CoreLfProofCompilerOptions {
     readonly comparisonStepLimit?: number;
+    readonly dependencyInterfaces?:
+        readonly CoreLfCompiledModuleInterface[];
     /**
      * Runtime conversion remains a separate immutable dependency. It may be
      * used while checking rule types and while normalizing comparison
@@ -2401,6 +2407,10 @@ export function compileCoreLfProofProgram(
             symbolKey(external.symbol)
         )
     );
+    const dependencyAccess = new CoreLfDependencyAccess(
+        module,
+        options.dependencyInterfaces ?? []
+    );
     for (const symbol of module.referencedSymbols) {
         const declaration = context.declaration(symbol);
         if (
@@ -2415,6 +2425,14 @@ export function compileCoreLfProofProgram(
                     `'${displaySymbol(symbol)}'`
             );
         }
+        dependencyAccess.assertExternal(
+            symbol,
+            declaration.link,
+            context.environment,
+            'general-term',
+            'module.referencedSymbols',
+            declaration.type
+        );
     }
 
     const rules: CoreLfCompiledProofRule[] = [];

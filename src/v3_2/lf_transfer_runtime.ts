@@ -31,6 +31,10 @@ import {
     CoreLfCompiledDeclaration
 } from './lf_transfer_compiler';
 import {
+    CoreLfCompiledModuleInterface,
+    CoreLfDependencyAccess
+} from './lf_transfer_visibility';
+import {
     CoreRuntimeHeadRewriteResult,
     CoreRuntimeMatch,
     CoreRuntimeWeakHeadResult,
@@ -153,6 +157,8 @@ export interface CoreLfRuntimeSubjectReductionOracle {
 
 export interface CoreLfRuntimeCompilerOptions {
     readonly comparisonStepLimit?: number;
+    readonly dependencyInterfaces?:
+        readonly CoreLfCompiledModuleInterface[];
     /**
      * Exact, fail-closed exception for a reviewed rule whose standalone
      * TypeScript subject reduction remains explicitly unclaimed. The
@@ -226,6 +232,41 @@ const symbolKey = (symbol: CoreLfQualifiedSymbol): string =>
 
 const displaySymbol = (symbol: CoreLfQualifiedSymbol): string =>
     `${symbol.moduleId}.${symbol.name}`;
+
+const transferExpressionSymbols = (
+    expression: CoreLfTransferExpression
+): readonly CoreLfQualifiedSymbol[] => {
+    const byKey = new Map<string, CoreLfQualifiedSymbol>();
+    const visit = (current: CoreLfTransferExpression): void => {
+        switch (current.tag) {
+            case 'type':
+            case 'bound':
+            case 'capture':
+            case 'wildcard':
+                return;
+            case 'global':
+                byKey.set(symbolKey(current.symbol), current.symbol);
+                return;
+            case 'call':
+                visit(current.callee);
+                current.arguments.forEach(argument =>
+                    visit(argument.value)
+                );
+                return;
+            case 'pi':
+            case 'lambda':
+                visit(current.binder.type);
+                visit(current.body);
+                return;
+            default: {
+                const exhaustive: never = current;
+                return exhaustive;
+            }
+        }
+    };
+    visit(expression);
+    return Object.freeze([...byKey.values()]);
+};
 
 const fail = (
     code: CoreLfRuntimeCompilerErrorCode,
@@ -1676,6 +1717,51 @@ const compileCoreLfRuntimeProgramWithPrefix = (
             );
         }
     }
+    const dependencyAccess = new CoreLfDependencyAccess(
+        module,
+        options.dependencyInterfaces ?? []
+    );
+    const assertDependencyUse = (
+        expression: CoreLfTransferExpression,
+        use: 'general-term' | 'external-runtime-pattern',
+        path: string
+    ): void => {
+        transferExpressionSymbols(expression).forEach(symbol => {
+            const declaration = declarationFor(
+                context,
+                symbol,
+                path
+            );
+            dependencyAccess.assertExternal(
+                symbol,
+                declaration.link,
+                context.environment,
+                use,
+                path,
+                declaration.type
+            );
+        });
+    };
+    module.runtimeRules.forEach((rule, ruleIndex) => {
+        rule.variables.forEach((variable, variableIndex) =>
+            assertDependencyUse(
+                variable.type,
+                'general-term',
+                `module.runtimeRules[${ruleIndex}].variables[` +
+                    `${variableIndex}].type`
+            )
+        );
+        assertDependencyUse(
+            rule.left,
+            'external-runtime-pattern',
+            `module.runtimeRules[${ruleIndex}].left`
+        );
+        assertDependencyUse(
+            rule.right,
+            'general-term',
+            `module.runtimeRules[${ruleIndex}].right`
+        );
+    });
 
     const rules: CoreLfCompiledRuntimeRule[] = [];
     for (const source of module.runtimeRules) {
@@ -1903,6 +1989,7 @@ export function compileCoreLfRuntimeFragment(
         context,
         {
             comparisonStepLimit: options.comparisonStepLimit,
+            dependencyInterfaces: options.dependencyInterfaces,
             subjectReductionOracle:
                 options.subjectReductionOracle
         },

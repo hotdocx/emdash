@@ -38,6 +38,10 @@ import {
     CoreLfTransferPolicyOverlay
 } from './lf_transfer';
 import {
+    CoreLfCompiledModuleInterface,
+    CoreLfDependencyAccess
+} from './lf_transfer_visibility';
+import {
     KernelExpression,
     Provenance,
     assertSafeIdentifier,
@@ -145,6 +149,14 @@ export interface CoreLfCompiledDeclaration {
 
 export interface CoreLfDeclarationCompilerOptions {
     readonly initialEnvironment?: CoreLfDeclarationEnvironment;
+    /**
+     * Exact compiled interfaces for ordinary free declarations imported from
+     * dependency modules. The provider's complete environment remains the
+     * checking/evaluation substrate, while this separate interface enforces
+     * source exposition at each external reference.
+     */
+    readonly dependencyInterfaces?:
+        readonly CoreLfCompiledModuleInterface[];
     /**
      * Optional closed runtime used only while checking declaration types and
      * explicit bodies. Rule compilation remains a separate SCALE slice.
@@ -853,13 +865,16 @@ const assertPolicyBody = (
         case 'theorem-body':
             if (
                 link.kind !== 'free-declaration' ||
-                declaration.body.kind !== 'explicit-term'
+                (
+                    declaration.body.kind !== 'explicit-term' &&
+                    declaration.body.kind !== 'checked-tactic-source'
+                )
             ) {
                 fail(
                     'INCOMPATIBLE_POLICY',
                     path,
-                    'Theorem bodies require an explicit term and a ' +
-                        'free-declaration link'
+                    'Theorem bodies require an explicit term or retained ' +
+                        'checked tactic source and a free-declaration link'
                 );
             }
             return;
@@ -1125,6 +1140,10 @@ export function compileCoreLfDeclarations(
     const initialEnvironment =
         options.initialEnvironment ??
         CoreLfDeclarationEnvironment.empty();
+    const dependencyAccess = new CoreLfDependencyAccess(
+        module,
+        options.dependencyInterfaces ?? []
+    );
     let environment = initialEnvironment;
 
     for (const external of module.externalSymbols) {
@@ -1136,6 +1155,13 @@ export function compileCoreLfDeclarations(
                 `External '${displaySymbol(external.symbol)}' has no link`
             );
         }
+        dependencyAccess.assertExternal(
+            external.symbol,
+            link,
+            initialEnvironment,
+            'general-term',
+            'module.externalSymbols'
+        );
         if (
             link.kind === 'free-declaration' &&
             initialEnvironment.lookup(link.coreName) === undefined

@@ -33,6 +33,8 @@ Lambdapi development before any claim of systematic mechanical transfer.
 Status: completed exact DTT/LF continuation profile and retained implementation
 ledger; active forward scale qualification is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md);
+the current end-user/frontend critical path is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md);
 DTTLF-PLAN-0, LF-1A through LF-1C, and LF-SURFACE-1 are complete;
 H-DTTLF-01 and the DIRECTED-1A instance of H-DTTLF-02 are approved as
 proposed; DIRECTED-1A is complete; the DIRECTED-1B instance of H-DTTLF-02 is
@@ -66,7 +68,10 @@ retry; generic SCALE-INTRINSIC-DELTA-1 checking and unfolding transparent
 definitions attached to existing Core owners; and SCALE-STRESS-3A2B
 executing the exact product/projection plus tensor object/capped-arrow action
 without an oracle. The representation-only SCALE-STRESS-3A2 parent is
-complete, and SCALE-STRESS-3B is the next dependency-ready stress row
+complete. SCALE-STRESS-3B0 retains exact module-visibility,
+tactic-source, and closure evidence, while its canonical-symbol parser
+experiment and bulk continuation are deferred; the next implementation path
+packages the existing dependent demo and qualifies categorical binders
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -1502,7 +1507,10 @@ reduces through `Prof_tensor`/`Prof_tensor_map`. Every subject checks without
 an oracle, focused TypeScript reductions/non-reduction pass, and all fourteen
 bounded live profunctor tests agree with Lambdapi. The representation-only
 SCALE-STRESS-3A2 parent is complete. Protected/evidence extensions plus
-WalkingEnd/HIT remain SCALE-STRESS-3B/3C, with 3B next.
+WalkingEnd/HIT remain SCALE-STRESS-3B/3C. The generic visibility,
+tactic-source, and exact 3B closure inventory are retained, while bulk 3B
+acquisition is deferred behind the categorical-binder usability critical
+path.
 `CORE_LF_CONTINUATION_PROFILE_REVIEW` authorizes only the active continuation
 checker API; `CORE_DIRECTED_1A_REVIEW` authorizes only the exact
 three-signature, zero-rule isolated candidate catalog.
@@ -2072,7 +2080,7 @@ described in `PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
 
 ```text
 Kick off or continue implementing
-docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md.
+docs/TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md.
 
 Treat its Persistent /goal Launch Prompt as part of the objective. Recover the
 actual current state from active code, checks, the plan status and ledgers,
@@ -2112,11 +2120,13 @@ documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C,
 DIRECTED-GRADUATE-1, the separate H-DTTLF-03 review, the root-only
 authoritative factory, and the continuation-only fixed conformance lane are
 complete. Recover the actual HEAD and checkpoint record. No independent row
-in this completed profile should be widened by inference. Resume the active
-scale plan's non-semantic inventory/compiler row instead; do not open
-GROUPD-PLAN-0 without a concrete groupoidal-closure consumer and H-DTTLF-04,
-and do not change the browser/deployed profile or broaden a metatheory claim
-by inference.
+in this completed profile should be widened by inference. Preserve the active
+usability plan's completed consolidation/demo and resume its
+categorical-binder rows; retain the
+scale plan's completed generic infrastructure while its canonical parser and
+bulk declaration rows are deferred. Do not open GROUPD-PLAN-0 without a
+concrete groupoidal-closure consumer and H-DTTLF-04, and do not change the
+browser/deployed profile or broaden a metatheory claim by inference.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -2639,3 +2649,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   fourteen bounded live profunctor tests agree with Lambdapi. No active
   profile or semantic owner was added. The representation-only
   SCALE-STRESS-3A2 parent is complete; SCALE-STRESS-3B is next.
+- **2026-07-26 — Forward critical path moved to categorical usability.**
+  Linked the accepted usability plan. The completed directed continuation and
+  generic scale infrastructure remain unchanged; exact module visibility,
+  tactic-source retention, and 3B closure measurement are preserved. The
+  isolated canonical-symbol parser and bulk declaration acquisition are
+  deferred while the existing dependent computation is packaged and
+  ordinary plus natural/displayed categorical-binder compilation is
+  qualified.
