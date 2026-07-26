@@ -34,7 +34,8 @@ the next dependency-ready implementation slice, and wider declaration
 acquisition is explicitly deferred while the binder frontend is qualified
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
-USABILITY-1A implementation checkpoint: pending local checkpoint
+USABILITY-1A implementation checkpoint:
+`c37275a021a45edb08324d326fbb8d90b2010ada`
 
 ## Outcome And Corrected Priority
 
@@ -834,3 +835,8 @@ CI obligations.
   laxity, and reserved ordinary naturality. Eleven focused tests, the
   583-test TypeScript gate, and the bounded active-kernel gate passed.
   USABILITY-1B is next.
+- **2026-07-26 — USABILITY-1A checkpointed.** Recorded exact green local
+  checkpoint `c37275a021a45edb08324d326fbb8d90b2010ada` after exact-path staged
+  review and whitespace audit. It installs no semantic owner/rule or browser
+  surface and authorizes no remote Git, integration, publication, release,
+  history rewrite, or cleanup operation.
