@@ -30,8 +30,10 @@ persistent `/goal` objective be set.
 Status: active living plan; D-DTTLF-USABILITY-001 is approved; USABILITY-0A
 consolidation, USABILITY-0B's runnable dependent demo, and USABILITY-1A's
 categorical-binder/application specification plus USABILITY-1B's ordinary eta
-frontend are complete; USABILITY-1C is the next dependency-ready structural
-bracket implementation slice, and wider declaration acquisition is
+frontend plus USABILITY-1C's ordinary structural bracket compiler are
+complete; USABILITY-1D is the next dependency-ready ergonomic/API,
+serialization, diagnostic, and example consolidation slice, and wider
+declaration acquisition is
 explicitly deferred while the binder frontend is qualified
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
@@ -39,6 +41,7 @@ USABILITY-1A implementation checkpoint:
 `c37275a021a45edb08324d326fbb8d90b2010ada`
 USABILITY-1B implementation checkpoint:
 `da1cc36ced9dd80ba95a2a477af1903f77db3b6a`
+USABILITY-1C implementation checkpoint: pending this synchronized tranche
 
 ## Outcome And Corrected Priority
 
@@ -404,7 +407,7 @@ frontend variables.
 | USABILITY-0B | complete | USABILITY-0A, reviewed DIRECTED-1C continuation | Runnable direct-TypeScript dependent demo with readable input, inferred type, serialized explicit Core, reduced result, beta-to-Sigma-fibre trace, and one wrong-family/pair diagnostic |
 | USABILITY-1A | complete | USABILITY-0B | Exact binder/application RFC and executable typed-surface specification; distinguishes LF and categorical abstraction, freezes five orthogonal axes, sixteen application judgments, a first-order contextual-IR contract, thirteen ordinary bracket prerequisites, nine diagnostic contracts, backend relocation, and fail-closed active/reserved/absent owner policies without semantic installation |
 | USABILITY-1B | complete | USABILITY-1A | Root-only immutable contextual surface, callback-once locally nameless eta evidence, ordinary functorial eta abstraction, generic declarative-operation reuse, exact object/capped-arrow/whole-hom action selection, higher Hom-object disambiguation, and fail-closed layer/classifier/object-only/natural/polarity/foreign/escaped/non-eta cases |
-| USABILITY-1C | pending | USABILITY-1B | Ordinary bracket-abstraction basis: unused-variable/constant weakening, exchange, duplicated-variable diagonal, evaluation after pairing, and nested abstraction/curry; no owner-specific evaluator additions |
+| USABILITY-1C | complete | USABILITY-1B | Ordinary bracket-abstraction basis: exact typed transfer of the thirteen prerequisites plus `Functor_cat`/`Functor` support, unused-variable/constant weakening, exchange, duplicated-variable diagonal, evaluation after pairing, composition, and nested abstraction/curry; no owner-specific evaluator additions |
 | USABILITY-1D | pending | USABILITY-1C | Ergonomic surface/API consolidation, deterministic explicit-Core serialization, stable diagnostics, and focused TypeScript/Lambdapi conformance corpus |
 | USABILITY-2A | pending | USABILITY-1D, active displayed owners | One natural/indexed or displayed dependent Pi/Sigma binder and application example through the same contextual IR; precise unsupported-action negative for the first absent structural capability |
 | USABILITY-GRADUATE-1 | pending | USABILITY-2A | Architecture review stating the exact mechanically reusable frontend envelope, remaining kernel-owner gaps, residual notation/parser choices, validation, and proposed product/trust boundary |
@@ -676,10 +679,114 @@ EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
 ```
 
 The 24-owner MVP, reviewed directed continuation, backend mappings, and
-browser entry point remain unchanged. USABILITY-1C is now dependency-ready
-and will transfer/use the smallest exact structural prerequisites for
-identity, weakening, exchange, contraction, evaluation after pairing, and
-nested abstraction.
+browser entry point remain unchanged. That completed USABILITY-1B boundary
+became the input to the now-complete USABILITY-1C structural slice below.
+
+## USABILITY-1C Completion Record
+
+USABILITY-1C implements the ordinary categorical bracket basis without
+changing the frozen intrinsic-owner catalog or adding an owner-specific
+checker/evaluator branch.
+
+The declaration boundary in
+`src/v3_2/categorical_structural_transfer.ts` is direct typed transfer data
+for the existing generic LF compiler:
+
+- all thirteen USABILITY-1A prerequisites retain their exact active names,
+  telescopes, plicities, source fragments, opacity/rigidity evidence, and
+  backend spellings;
+- `Functor_cat` is the one additional free classifier declaration needed to
+  state those signatures;
+- the existing intrinsic `Functor` owner receives its exact active
+  transparent refinement
+  `Functor(A,B) ≔ Obj(Functor_cat(A,B))`, rather than a checker exception;
+- transparent candidate bodies such as `id_func`, `comp_cat_fapp0`,
+  `Product_pair`, curry, and uncurry remain opaque in this first frontend
+  transfer, with active Lambdapi bodies retained as conformance authority;
+  and
+- the exact active normalization
+  `Functor_cat X (Product_cat A B) ↪
+  Product_cat (Functor_cat X A) (Functor_cat X B)`
+  is compiled through the generic runtime-rule engine. It is the sole new
+  TypeScript runtime rule in this slice and makes typed `Product_pair`
+  application check without TypeScript-only conversion semantics.
+
+This is fifteen source declaration records—thirteen bracket prerequisites,
+`Functor_cat`, and the intrinsic `Functor` refinement—not fifteen new Core
+owners. Fourteen become ordinary free declarations; `Functor` refines its
+existing backend-neutral intrinsic identity. The module is root-only and
+pins the active `emdash3_2.lp` SHA-256. It installs no proof-time rule,
+browser export, deployed-profile change, or bulk acquisition claim.
+
+`src/v3_2/categorical_surface.ts` now lowers the reified contextual tree
+mechanically:
+
+```text
+[x] x                    -> id_func
+[x] b                    -> fapp0(Const_func_func, b)
+[x] F(t[x])              -> comp_cat_fapp0(F, [x]t)
+[x] H(x)(x)              -> fapp0(diag_func_func, H)
+[x] S[x](T[x])           -> Eval_func ∘
+                             Product_pair([x]S, [x]T)
+[x][y] H(y)(x)           -> fapp0(sym_func_func, H)
+[x][y] t                 -> fapp0(curry_func_func,
+                             [x,y]product-context(t))
+```
+
+General nested abstraction creates an explicit product context, lifts outer
+wiring through `Product_projL_func`, wires the inner input through
+`Product_projR_func`, composes the resulting maps, and curries. A swapped
+two-input eta form uses `sym_func_func` directly. General open application
+first compiles the subject and argument as functors from the same context,
+pairs those functor objects with `Product_pair`, and composes `Eval_func`.
+The exact duplicated eta form uses `diag_func_func`, so contraction remains
+visible rather than becoming graph sharing.
+
+The TypeScript callback remains an ergonomic construction boundary only:
+each callback runs once, a nested abstraction is stored as immutable
+first-order locally nameless contextual IR, open functor objects are
+recognized through the transferred `Functor_cat` classifier, and only a
+fully closed outer bracket produces explicit Core. Evidence records the
+ordered structural prerequisites actually used by each lowering.
+
+The focused corpus covers identity, weakening, composition, diagonal,
+evaluation after typed pairing, exchange, nested product wiring/curry, exact
+source hashing, generic declaration/runtime compilation, frozen profile
+non-expansion, and generic LF checking of every emitted bracket. Its bounded
+active Lambdapi positive probe types every one of the thirteen selected
+owners and the product-functor normalization; the negative probe rejects a
+composition whose inferred codomain is `C` where `B` was claimed.
+
+Validation on 2026-07-26:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_categorical_surface_spec_tests.ts \
+  tests/v3_2_categorical_surface_tests.ts \
+  tests/v3_2_categorical_bracket_tests.ts \
+  tests/v3_2_categorical_structural_transfer_tests.ts \
+  tests/v3_2_elab0_tests.ts
+  54 tests / 5 suites: 48 passed, 6 opt-in probes skipped
+
+EMDASH_RUN_LAMBDAPI_CATEGORICAL_BRACKET_PROBES=1 \
+  node --require ts-node/register --test \
+  tests/v3_2_categorical_bracket_tests.ts
+  7 tests / 1 suite passed, including bounded positive/negative Lambdapi
+
+./scripts/pnpmw run check:ts
+  workspace, typecheck, lint, and 607-test TypeScript gate passed
+  568 passed, 39 opt-in live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, examples, and checks passed
+```
+
+USABILITY-1D is next. It packages this now-working compiler into a stable
+end-user construction API and example, gives the new generic-call output
+deterministic readable serialization, consolidates source diagnostics, and
+freezes the TypeScript/Lambdapi corpus. It must preserve the root-only
+candidate boundary and does not yet authorize the natural/displayed 2A
+slice or frontend graduation.
 
 ## Acceptance Criteria
 
@@ -826,7 +933,7 @@ declaration/runtime/proof/mixed-phase transfer mechanisms. Direct typed
 TypeScript transfer is the default; “mechanical” means data, linkage, policy,
 and focused evidence rather than a new checker/evaluator algorithm.
 
-Preserve completed USABILITY-0A/0B/1A/1B: the parser experiment remains
+Preserve completed USABILITY-0A/0B/1A/1B/1C: the parser experiment remains
 removed,
 the generic visibility/tactic/inventory infrastructure remains validated,
 and the runnable dependent Sigma-telescope demo retains direct TypeScript
@@ -836,16 +943,23 @@ specification: two abstraction layers, five orthogonal axes, exact
 application selection, first-order contextual-IR contract, fail-closed
 reserved/untransferred/absent actions, and the separate thirteen-owner
 ordinary structural prerequisite catalog. No 70-root or extension declaration
-transfer is a prerequisite for that demo or the ordinary eta slice.
+transfer is a prerequisite for that demo or the ordinary bracket slice.
 
-Preserve the USABILITY-1B contextual builder and generic typed-operand reuse:
+Preserve the USABILITY-1B/1C contextual builder and generic typed-operand
+reuse:
 callbacks run once; stored eta evidence is first-order and locally nameless;
 ordinary object, capped-arrow, and whole-hom actions select exact semantic
 owners; higher Hom objects are distinguished from base arrows; and ambiguity,
-object-only/natural/polarity, foreign/escaped tokens, and non-eta bodies fail
-closed.
+object-only/natural/polarity, foreign/escaped tokens, and unsupported open
+whole-Hom/arrow actions fail closed. Preserve the direct typed structural
+catalog: thirteen active prerequisites plus `Functor_cat`, the exact
+intrinsic `Functor` refinement, and the sole generic product-functor
+normalization rule. Preserve identity, constant, composition, explicit
+diagonal, typed pairing/evaluation, exchange, and nested
+product-context/curry lowering, its generic LF checks, and the
+root-only/browser/profile boundary.
 
-Begin with dependency-ready USABILITY-1C, then implement the
+Begin with dependency-ready USABILITY-1D, then implement the
 categorical-binder frontend in the ledger's order and follow
 docs/TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md. Keep outer LF
 lambda separate from functorial abstraction. Use a small
@@ -955,3 +1069,13 @@ CI obligations.
   review and whitespace audit. It preserves the frozen semantic and browser
   profiles and authorizes no remote Git, integration, publication, release,
   history rewrite, or cleanup operation.
+- **2026-07-26 — USABILITY-1C ordinary bracket compiler completed.**
+  Transferred the thirteen exact active prerequisites plus the
+  `Functor_cat` support signature and intrinsic transparent `Functor`
+  equation through the generic LF declaration engine. Transferred the one
+  exact product-functor normalization through the generic runtime engine.
+  Extended the first-order contextual frontend with identity, weakening,
+  composition, diagonal, typed pairing/evaluation, exchange, and nested
+  product-context/curry lowering. The 607-test TypeScript gate, focused
+  generic LF checks, bounded positive/negative Lambdapi corpus, and complete
+  active-kernel check passed. USABILITY-1D is next.

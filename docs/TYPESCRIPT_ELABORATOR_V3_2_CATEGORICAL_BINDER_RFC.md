@@ -2,8 +2,9 @@
 
 Status: accepted implementation specification for `USABILITY-1A`
 
-Implementation: `USABILITY-1B` ordinary contextual eta/application slice is
-complete; `USABILITY-1C` structural bracket abstraction is next
+Implementation: `USABILITY-1B` ordinary contextual eta/application and
+`USABILITY-1C` structural bracket abstraction are complete;
+`USABILITY-1D` API/serialization/example consolidation is next
 
 Plan: `TS-ELAB-V3.2-USABILITY`
 
@@ -394,9 +395,14 @@ the completed MVP profile and its hashes do not drift accidentally.
 
 All thirteen are active kernel declarations. They are marked
 `active-kernel-untransferred` rather than being inserted into the frozen Core
-catalog by this RFC. `USABILITY-1C` must transfer the smallest exact subset
-needed by each bracket rule, with signatures, linkage, runtime/proof behavior,
-and conformance evidence as required by the existing transfer architecture.
+catalog by this USABILITY-1A snapshot. USABILITY-1C subsequently transferred
+all thirteen as direct typed root-only candidate declarations, plus the
+supporting `Functor_cat` signature and exact intrinsic transparent `Functor`
+equation. The implementation is in
+`src/v3_2/categorical_structural_transfer.ts`; it does not insert those
+owners into the frozen intrinsic catalog. The separate transfer artifact,
+rather than this historical status field, is the current implementation
+ledger.
 
 This is direct typed transfer. It does not require a generic Lambdapi parser.
 
@@ -504,7 +510,8 @@ whole structural basis before demonstrating the first categorical lambda.
 
 ### `USABILITY-1C`
 
-Transfer and use the exact ordinary structural prerequisites required for:
+Completed: transferred and used the exact ordinary structural prerequisites
+required for:
 
 - unused-variable weakening;
 - exchange;
@@ -515,7 +522,13 @@ Transfer and use the exact ordinary structural prerequisites required for:
 
 Each transfer remains backend-neutral in Core, keeps Lambdapi spelling in its
 backend binding, and carries exact signature/rule/proof evidence according to
-the qualified transfer pipeline.
+the qualified transfer pipeline. The one required conversion,
+`Functor_cat X (Product_cat A B)` to the product of functor categories, is an
+exact active rule compiled by the generic runtime engine. Identity,
+weakening, composition, explicit diagonal, evaluation after `Product_pair`,
+exchange, and product-context curry all pass the generic LF checker and the
+bounded positive/negative Lambdapi corpus. No owner-specific checker or
+evaluator case was added.
 
 ### `USABILITY-1D`
 

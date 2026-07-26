@@ -1,5 +1,5 @@
 /**
- * USABILITY-1B ordinary categorical surface and contextual IR.
+ * USABILITY-1B/1C ordinary categorical surface and contextual IR.
  *
  * The builder supports the first dependency-ready vertical slice:
  *
@@ -7,14 +7,21 @@
  * - scoped categorical object slots;
  * - classifier-directed ordinary functor application;
  * - whole Hom-action requests; and
- * - functorial eta abstraction.
+ * - functorial eta abstraction; and
+ * - structural bracket abstraction through the active ordinary basis.
  *
  * Callback tokens and callbacks are temporary construction devices. The
  * recorded abstraction body is immutable first-order locally nameless data,
- * and the compiled result is existing explicit Core. Non-eta bracket cases
- * fail with the exact structural prerequisite needed by USABILITY-1C.
+ * and the compiled result is existing explicit Core. Unsupported
+ * natural/displayed and open higher-action cases remain fail-closed.
  */
 
+import {
+    CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
+    CoreCategoricalStructuralPrerequisiteId,
+    coreCategoricalStructuralCoreName,
+    coreCategoricalStructuralSymbolCoreName
+} from './categorical_structural_transfer';
 import {
     CoreCategoricalAbstractionJudgment,
     CoreCategoricalAbstractionLayer,
@@ -40,8 +47,11 @@ import {
     SourceSpan,
     assertSafeIdentifier,
     formatSourceSpan,
+    kernelApplication,
     kernelAssertScoped,
+    kernelCall,
     kernelExpressionEquals,
+    kernelFree,
     provenance,
     sourceSpan
 } from './kernel';
@@ -98,6 +108,15 @@ export type CoreCategoricalContextualIr =
             | CoreCategoricalHomBoundaryIr;
         readonly type: CoreType;
         readonly provenance: Provenance;
+    }
+    | {
+        readonly tag: 'categorical-abstraction';
+        readonly name: string;
+        readonly sourceCategory: KernelExpression;
+        readonly targetCategory: KernelExpression;
+        readonly body: CoreCategoricalContextualIr;
+        readonly type: CoreType;
+        readonly provenance: Provenance;
     };
 
 export interface CoreCategoricalHomBoundaryIr {
@@ -109,7 +128,7 @@ export interface CoreCategoricalHomBoundaryIr {
 }
 
 export interface CoreCategoricalAbstractionEvidence {
-    readonly rule: 'categorical.eta';
+    readonly rule: 'categorical.eta' | 'categorical.bracket';
     readonly name: string;
     readonly plicity: Plicity;
     readonly variation: 'functorial';
@@ -120,6 +139,8 @@ export interface CoreCategoricalAbstractionEvidence {
     readonly targetCategory: KernelExpression;
     readonly body: CoreCategoricalContextualIr;
     readonly result: CoreCategoricalContextualIr;
+    readonly structuralPrerequisites:
+        readonly CoreCategoricalStructuralPrerequisiteId[];
     readonly provenance: Provenance;
 }
 
@@ -189,6 +210,15 @@ type TemporaryCategoricalNode =
         readonly argument:
             | InternalCoreCategoricalTerm
             | InternalCoreCategoricalHomBoundary;
+        readonly provenance: Provenance;
+    }
+    | {
+        readonly tag: 'categorical-abstraction';
+        readonly ordinal: number;
+        readonly name: string;
+        readonly sourceCategory: KernelExpression;
+        readonly targetCategory: KernelExpression;
+        readonly body: InternalCoreCategoricalTerm;
         readonly provenance: Provenance;
     };
 
@@ -290,6 +320,44 @@ const usageCount = (
     usage: InternalCategoricalUsage,
     ordinal: number
 ): number => usage.find(entry => entry[0] === ordinal)?.[1] ?? 0;
+
+const removeUsage = (
+    usage: InternalCategoricalUsage,
+    ordinal: number
+): InternalCategoricalUsage => Object.freeze(
+    usage.filter(entry => entry[0] !== ordinal)
+);
+
+const usageIntersects = (
+    usage: InternalCategoricalUsage,
+    ordinals: ReadonlySet<number>
+): boolean => usage.some(([ordinal]) => ordinals.has(ordinal));
+
+const mergePrerequisites = (
+    ...lists: readonly (
+        readonly CoreCategoricalStructuralPrerequisiteId[]
+    )[]
+): readonly CoreCategoricalStructuralPrerequisiteId[] => {
+    const result: CoreCategoricalStructuralPrerequisiteId[] = [];
+    for (const list of lists) {
+        for (const prerequisite of list) {
+            if (!result.includes(prerequisite)) {
+                result.push(prerequisite);
+            }
+        }
+    }
+    return Object.freeze(result);
+};
+
+interface CoreCategoricalContextualCompilation {
+    readonly term: KernelExpression;
+    readonly targetCategory: KernelExpression;
+    readonly structuralPrerequisites:
+        readonly CoreCategoricalStructuralPrerequisiteId[];
+}
+
+type CoreCategoricalWiring =
+ReadonlyMap<number, CoreCategoricalContextualCompilation>;
 
 const abstractionById = (
     id: CoreCategoricalAbstractionJudgment['id']
@@ -505,6 +573,130 @@ export class CoreCategoricalScopedBuilder {
             DEFAULT_CATEGORICAL_SPAN;
     }
 
+    private structuralCall(
+        prerequisite: CoreCategoricalStructuralPrerequisiteId,
+        arguments_: readonly {
+            readonly plicity: Plicity;
+            readonly value: KernelExpression;
+        }[],
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalStructuralCoreName(prerequisite),
+                nodeProvenance
+            ),
+            arguments_,
+            nodeProvenance
+        );
+    }
+
+    private functorCategory(
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalStructuralSymbolCoreName(
+                    CORE_CATEGORICAL_STRUCTURAL_SYMBOLS.functorCategory
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'explicit',
+                    value: sourceCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: targetCategory
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private productCategory(
+        left: KernelExpression,
+        right: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return this.structuralCall(
+            'product-category',
+            [
+                { plicity: 'explicit', value: left },
+                { plicity: 'explicit', value: right }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private functorObject(
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        functor: KernelExpression,
+        object: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelApplication(
+            'functor-object',
+            [
+                { value: sourceCategory },
+                { value: targetCategory },
+                { value: functor },
+                { value: object }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private categoricalObjectCategory(
+        type: CoreType,
+        nodeProvenance: Provenance,
+        detail: string
+    ): KernelExpression | undefined {
+        if (type.tag === 'functor') {
+            return this.functorCategory(
+                type.sourceCategory,
+                type.targetCategory,
+                nodeProvenance
+            );
+        }
+        return coreTypeObjectCategory(
+            type,
+            this.spanFor(nodeProvenance),
+            detail
+        );
+    }
+
+    private categoricalTypeForCategoryObject(
+        category: KernelExpression,
+        nodeProvenance: Provenance,
+        detail: string
+    ): CoreType {
+        if (
+            category.tag === 'call' &&
+            category.callee.tag === 'reference' &&
+            category.callee.name ===
+                coreCategoricalStructuralSymbolCoreName(
+                    CORE_CATEGORICAL_STRUCTURAL_SYMBOLS.functorCategory
+                ) &&
+            category.arguments.length === 2
+        ) {
+            return {
+                tag: 'functor',
+                sourceCategory: category.arguments[0].value,
+                targetCategory: category.arguments[1].value
+            };
+        }
+        return coreTypeForCategoryObject(
+            category,
+            this.spanFor(nodeProvenance),
+            detail
+        );
+    }
+
     fromElaborated(
         elaborated: ElaboratedSurfaceTerm
     ): CoreCategoricalTerm {
@@ -660,9 +852,9 @@ export class CoreCategoricalScopedBuilder {
             );
         }
 
-        const objectCategory = coreTypeObjectCategory(
+        const objectCategory = this.categoricalObjectCategory(
             argument.type,
-            this.spanFor(nodeProvenance),
+            nodeProvenance,
             'categorical application object view'
         );
         const matchesObject =
@@ -868,13 +1060,10 @@ export class CoreCategoricalScopedBuilder {
                 nodeProvenance
             );
             type = closed.type;
-        } else if (
-            selection.operation === 'functor.object' &&
-            subject.closed !== undefined
-        ) {
-            type = coreTypeForCategoryObject(
+        } else if (selection.operation === 'functor.object') {
+            type = this.categoricalTypeForCategoryObject(
                 subject.type.targetCategory,
-                this.spanFor(nodeProvenance),
+                nodeProvenance,
                 'open categorical object application result'
             );
         } else {
@@ -976,6 +1165,19 @@ export class CoreCategoricalScopedBuilder {
                     type: copyCoreType(term.type),
                     provenance: term.node.provenance
                 });
+            case 'categorical-abstraction':
+                return deepFreeze({
+                    tag: 'categorical-abstraction',
+                    name: term.node.name,
+                    sourceCategory: term.node.sourceCategory,
+                    targetCategory: term.node.targetCategory,
+                    body: this.normalizeNode(
+                        term.node.body,
+                        [term.node.ordinal, ...scope]
+                    ),
+                    type: copyCoreType(term.type),
+                    provenance: term.node.provenance
+                });
             default: {
                 const exhaustive: never = term.node;
                 return exhaustive;
@@ -983,18 +1185,676 @@ export class CoreCategoricalScopedBuilder {
         }
     }
 
-    private missingBracketTarget(
-        body: InternalCoreCategoricalTerm,
-        ordinal: number
-    ): string {
-        const count = usageCount(body.usage, ordinal);
-        if (count === 0) return 'constant-functor-abstraction';
-        if (count > 1) return 'diagonal-functor-abstraction';
-        if (body.node.tag === 'slot-token') return 'identity-functor';
-        if (body.node.tag === 'typed-application') {
-            return 'evaluation-functor';
+    private identityFunctor(
+        category: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalContextualCompilation {
+        return {
+            term: this.structuralCall(
+                'identity-functor',
+                [{ plicity: 'implicit', value: category }],
+                nodeProvenance
+            ),
+            targetCategory: category,
+            structuralPrerequisites: Object.freeze([
+                'identity-functor'
+            ])
+        };
+    }
+
+    private composeFunctors(
+        sourceCategory: KernelExpression,
+        middleCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        outer: KernelExpression,
+        inner: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return this.structuralCall(
+            'functor-composition',
+            [
+                {
+                    plicity: 'implicit',
+                    value: sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: middleCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: targetCategory
+                },
+                { plicity: 'explicit', value: outer },
+                { plicity: 'explicit', value: inner }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private constantCompilation(
+        baseCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        object: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalContextualCompilation {
+        const functorCategory = this.functorCategory(
+            baseCategory,
+            targetCategory,
+            nodeProvenance
+        );
+        const constantAbstraction = this.structuralCall(
+            'constant-functor-abstraction',
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: targetCategory
+                }
+            ],
+            nodeProvenance
+        );
+        return {
+            term: this.functorObject(
+                targetCategory,
+                functorCategory,
+                constantAbstraction,
+                object,
+                nodeProvenance
+            ),
+            targetCategory,
+            structuralPrerequisites: Object.freeze([
+                'constant-functor-abstraction'
+            ])
+        };
+    }
+
+    private compileApplicationContext(
+        term: InternalCoreCategoricalTerm,
+        baseCategory: KernelExpression,
+        wiring: CoreCategoricalWiring,
+        nodeProvenance: Provenance
+    ): CoreCategoricalContextualCompilation {
+        if (
+            term.node.tag !== 'typed-application' ||
+            term.node.judgment.target !== 'functor-object' ||
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] === true
+        ) {
+            this.fail(
+                'MISSING_STRUCTURAL_OWNER',
+                nodeProvenance,
+                'USABILITY-1C bracket lowering currently supports open ' +
+                    'ordinary object application only'
+            );
         }
-        return 'functor-composition';
+        const subject = term.node.subject;
+        const argument = term.node.argument as
+            InternalCoreCategoricalTerm;
+        if (subject.type.tag !== 'functor') {
+            this.fail(
+                'EXPECTED_FUNCTOR',
+                nodeProvenance,
+                'Contextual application subject is not a functor'
+            );
+        }
+        const sourceCategory = subject.type.sourceCategory;
+        const targetCategory = subject.type.targetCategory;
+        const argumentCompilation = this.compileContextual(
+            argument,
+            baseCategory,
+            wiring,
+            nodeProvenance
+        );
+        if (
+            !kernelExpressionEquals(
+                argumentCompilation.targetCategory,
+                sourceCategory
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Contextual application argument compiled to the wrong ' +
+                    'source category'
+            );
+        }
+
+        const activeOrdinals = new Set(wiring.keys());
+        if (
+            subject.closed !== undefined &&
+            !usageIntersects(subject.usage, activeOrdinals)
+        ) {
+            return {
+                term: this.composeFunctors(
+                    baseCategory,
+                    sourceCategory,
+                    targetCategory,
+                    subject.closed.term,
+                    argumentCompilation.term,
+                    nodeProvenance
+                ),
+                targetCategory,
+                structuralPrerequisites: mergePrerequisites(
+                    argumentCompilation.structuralPrerequisites,
+                    ['functor-composition']
+                )
+            };
+        }
+
+        const subjectCompilation = this.compileContextual(
+            subject,
+            baseCategory,
+            wiring,
+            nodeProvenance
+        );
+        const expectedSubjectTarget = this.functorCategory(
+            sourceCategory,
+            targetCategory,
+            nodeProvenance
+        );
+        if (
+            !kernelExpressionEquals(
+                subjectCompilation.targetCategory,
+                expectedSubjectTarget
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Contextual application subject compiled to the wrong ' +
+                    'functor category'
+            );
+        }
+
+        const evaluationInput = this.productCategory(
+            expectedSubjectTarget,
+            sourceCategory,
+            nodeProvenance
+        );
+        const subjectFunctorCategory = this.functorCategory(
+            baseCategory,
+            expectedSubjectTarget,
+            nodeProvenance
+        );
+        const argumentFunctorCategory = this.functorCategory(
+            baseCategory,
+            sourceCategory,
+            nodeProvenance
+        );
+        const paired = this.structuralCall(
+            'product-pair',
+            [
+                {
+                    plicity: 'implicit',
+                    value: subjectFunctorCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: argumentFunctorCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: subjectCompilation.term
+                },
+                {
+                    plicity: 'explicit',
+                    value: argumentCompilation.term
+                }
+            ],
+            nodeProvenance
+        );
+        const evaluation = this.structuralCall(
+            'evaluation-functor',
+            [
+                {
+                    plicity: 'implicit',
+                    value: sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: targetCategory
+                }
+            ],
+            nodeProvenance
+        );
+        return {
+            term: this.composeFunctors(
+            baseCategory,
+            evaluationInput,
+            targetCategory,
+            evaluation,
+            paired,
+            nodeProvenance
+            ),
+            targetCategory,
+            structuralPrerequisites: mergePrerequisites(
+                subjectCompilation.structuralPrerequisites,
+                argumentCompilation.structuralPrerequisites,
+                [
+                    'product-category',
+                    'product-pair',
+                    'evaluation-functor',
+                    'functor-composition'
+                ]
+            )
+        };
+    }
+
+    private directDiagonal(
+        term: InternalCoreCategoricalTerm,
+        ordinal: number,
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalContextualCompilation | undefined {
+        if (
+            term.node.tag !== 'typed-application' ||
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] === true
+        ) {
+            return undefined;
+        }
+        const finalArgument = term.node.argument as
+            InternalCoreCategoricalTerm;
+        const firstApplication = term.node.subject;
+        if (
+            finalArgument.node.tag !== 'slot-token' ||
+            finalArgument.node.ordinal !== ordinal ||
+            firstApplication.node.tag !== 'typed-application' ||
+            firstApplication.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            return undefined;
+        }
+        const firstArgument = firstApplication.node.argument as
+            InternalCoreCategoricalTerm;
+        const original = firstApplication.node.subject;
+        const expectedOriginalTarget = this.functorCategory(
+            sourceCategory,
+            targetCategory,
+            nodeProvenance
+        );
+        if (
+            firstArgument.node.tag !== 'slot-token' ||
+            firstArgument.node.ordinal !== ordinal ||
+            original.closed === undefined ||
+            original.type.tag !== 'functor' ||
+            !kernelExpressionEquals(
+                original.type.sourceCategory,
+                sourceCategory
+            ) ||
+            !kernelExpressionEquals(
+                original.type.targetCategory,
+                expectedOriginalTarget
+            )
+        ) {
+            return undefined;
+        }
+
+        const diagonalSource = this.functorCategory(
+            sourceCategory,
+            expectedOriginalTarget,
+            nodeProvenance
+        );
+        const diagonalTarget = expectedOriginalTarget;
+        const diagonal = this.structuralCall(
+            'diagonal-functor-abstraction',
+            [
+                {
+                    plicity: 'implicit',
+                    value: sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: targetCategory
+                }
+            ],
+            nodeProvenance
+        );
+        return {
+            term: this.functorObject(
+                diagonalSource,
+                diagonalTarget,
+                diagonal,
+                original.closed.term,
+                nodeProvenance
+            ),
+            targetCategory,
+            structuralPrerequisites: Object.freeze([
+                'diagonal-functor-abstraction'
+            ])
+        };
+    }
+
+    private exchangedNestedEta(
+        term: InternalCoreCategoricalTerm,
+        baseCategory: KernelExpression,
+        wiring: CoreCategoricalWiring,
+        nodeProvenance: Provenance
+    ): CoreCategoricalContextualCompilation | undefined {
+        if (
+            term.node.tag !== 'categorical-abstraction' ||
+            wiring.size !== 1 ||
+            term.node.body.node.tag !== 'typed-application' ||
+            term.node.body.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            return undefined;
+        }
+        const [outerOrdinal] = wiring.keys();
+        const finalArgument = term.node.body.node.argument as
+            InternalCoreCategoricalTerm;
+        const firstApplication = term.node.body.node.subject;
+        if (
+            finalArgument.node.tag !== 'slot-token' ||
+            finalArgument.node.ordinal !== outerOrdinal ||
+            firstApplication.node.tag !== 'typed-application' ||
+            firstApplication.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            return undefined;
+        }
+        const firstArgument = firstApplication.node.argument as
+            InternalCoreCategoricalTerm;
+        const original = firstApplication.node.subject;
+        if (
+            firstArgument.node.tag !== 'slot-token' ||
+            firstArgument.node.ordinal !== term.node.ordinal ||
+            original.closed === undefined ||
+            original.type.tag !== 'functor'
+        ) {
+            return undefined;
+        }
+
+        const innerFunctorCategory = this.functorCategory(
+            baseCategory,
+            term.node.targetCategory,
+            nodeProvenance
+        );
+        if (
+            !kernelExpressionEquals(
+                original.type.sourceCategory,
+                term.node.sourceCategory
+            ) ||
+            !kernelExpressionEquals(
+                original.type.targetCategory,
+                innerFunctorCategory
+            )
+        ) {
+            return undefined;
+        }
+
+        const exchangeSource = this.functorCategory(
+            term.node.sourceCategory,
+            innerFunctorCategory,
+            nodeProvenance
+        );
+        const exchangeTarget = this.functorCategory(
+            baseCategory,
+            this.functorCategory(
+                term.node.sourceCategory,
+                term.node.targetCategory,
+                nodeProvenance
+            ),
+            nodeProvenance
+        );
+        const exchange = this.structuralCall(
+            'exchange-functor-abstraction',
+            [
+                {
+                    plicity: 'implicit',
+                    value: term.node.sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: term.node.targetCategory
+                }
+            ],
+            nodeProvenance
+        );
+        return {
+            term: this.functorObject(
+                exchangeSource,
+                exchangeTarget,
+                exchange,
+                original.closed.term,
+                nodeProvenance
+            ),
+            targetCategory: this.functorCategory(
+                term.node.sourceCategory,
+                term.node.targetCategory,
+                nodeProvenance
+            ),
+            structuralPrerequisites: Object.freeze([
+                'exchange-functor-abstraction'
+            ])
+        };
+    }
+
+    private compileNestedAbstractionContext(
+        term: InternalCoreCategoricalTerm,
+        baseCategory: KernelExpression,
+        wiring: CoreCategoricalWiring,
+        nodeProvenance: Provenance
+    ): CoreCategoricalContextualCompilation {
+        if (term.node.tag !== 'categorical-abstraction') {
+            throw new Error('Expected a categorical abstraction node');
+        }
+        const exchanged = this.exchangedNestedEta(
+            term,
+            baseCategory,
+            wiring,
+            nodeProvenance
+        );
+        if (exchanged !== undefined) return exchanged;
+
+        const extendedBase = this.productCategory(
+            baseCategory,
+            term.node.sourceCategory,
+            nodeProvenance
+        );
+        const leftProjection = this.structuralCall(
+            'product-left-projection',
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: term.node.sourceCategory
+                }
+            ],
+            nodeProvenance
+        );
+        const rightProjection = this.structuralCall(
+            'product-right-projection',
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: term.node.sourceCategory
+                }
+            ],
+            nodeProvenance
+        );
+        const extendedWiring = new Map<
+            number,
+            CoreCategoricalContextualCompilation
+        >();
+        for (const [ordinal, compilation] of wiring) {
+            extendedWiring.set(ordinal, {
+                term: this.composeFunctors(
+                    extendedBase,
+                    baseCategory,
+                    compilation.targetCategory,
+                    compilation.term,
+                    leftProjection,
+                    nodeProvenance
+                ),
+                targetCategory: compilation.targetCategory,
+                structuralPrerequisites: mergePrerequisites(
+                    compilation.structuralPrerequisites,
+                    [
+                        'product-category',
+                        'product-left-projection',
+                        'functor-composition'
+                    ]
+                )
+            });
+        }
+        extendedWiring.set(term.node.ordinal, {
+            term: rightProjection,
+            targetCategory: term.node.sourceCategory,
+            structuralPrerequisites: Object.freeze([
+                'product-category',
+                'product-right-projection'
+            ])
+        });
+
+        const body = this.compileContextual(
+            term.node.body,
+            extendedBase,
+            extendedWiring,
+            nodeProvenance
+        );
+        if (
+            !kernelExpressionEquals(
+                body.targetCategory,
+                term.node.targetCategory
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Nested categorical abstraction '${term.node.name}' ` +
+                    'compiled to the wrong target category'
+            );
+        }
+
+        const uncurriedCategory = this.functorCategory(
+            extendedBase,
+            term.node.targetCategory,
+            nodeProvenance
+        );
+        const curriedCategory = this.functorCategory(
+            baseCategory,
+            this.functorCategory(
+                term.node.sourceCategory,
+                term.node.targetCategory,
+                nodeProvenance
+            ),
+            nodeProvenance
+        );
+        const curry = this.structuralCall(
+            'curry-package',
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: term.node.sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: term.node.targetCategory
+                }
+            ],
+            nodeProvenance
+        );
+        return {
+            term: this.functorObject(
+                uncurriedCategory,
+                curriedCategory,
+                curry,
+                body.term,
+                nodeProvenance
+            ),
+            targetCategory: this.functorCategory(
+                term.node.sourceCategory,
+                term.node.targetCategory,
+                nodeProvenance
+            ),
+            structuralPrerequisites: mergePrerequisites(
+                body.structuralPrerequisites,
+                ['product-category', 'curry-package']
+            )
+        };
+    }
+
+    private compileContextual(
+        term: InternalCoreCategoricalTerm,
+        baseCategory: KernelExpression,
+        wiring: CoreCategoricalWiring,
+        nodeProvenance: Provenance
+    ): CoreCategoricalContextualCompilation {
+        switch (term.node.tag) {
+            case 'slot-token': {
+                const compilation = wiring.get(term.node.ordinal);
+                if (compilation === undefined) {
+                    this.fail(
+                        'ESCAPED_SLOT',
+                        term.node.provenance,
+                        `Categorical slot '${term.node.hint}' has no ` +
+                            'contextual wiring'
+                    );
+                }
+                return compilation;
+            }
+            case 'explicit-core-term': {
+                const targetCategory = this.categoricalObjectCategory(
+                    term.type,
+                    nodeProvenance,
+                    'constant bracket target'
+                );
+                if (targetCategory === undefined) {
+                    this.fail(
+                        'CLASSIFIER_ARGUMENT_MISMATCH',
+                        nodeProvenance,
+                        'Categorical bracket body is not an object of a ' +
+                            'supported category'
+                    );
+                }
+                return this.constantCompilation(
+                    baseCategory,
+                    targetCategory,
+                    term.node.term,
+                    nodeProvenance
+                );
+            }
+            case 'typed-application':
+                return this.compileApplicationContext(
+                    term,
+                    baseCategory,
+                    wiring,
+                    nodeProvenance
+                );
+            case 'categorical-abstraction':
+                return this.compileNestedAbstractionContext(
+                    term,
+                    baseCategory,
+                    wiring,
+                    nodeProvenance
+                );
+            default: {
+                const exhaustive: never = term.node;
+                return exhaustive;
+            }
+        }
     }
 
     categoricalLambda(
@@ -1069,9 +1929,10 @@ export class CoreCategoricalScopedBuilder {
                 nodeProvenance
             );
 
-            const expectedBodyType = coreTypeForCategoryObject(
+            const expectedBodyType =
+                this.categoricalTypeForCategoryObject(
                 targetCategory,
-                this.spanFor(nodeProvenance),
+                nodeProvenance,
                 `categorical abstraction ${name} target`
             );
             if (!coreTypeEquals(body.type, expectedBodyType)) {
@@ -1082,66 +1943,145 @@ export class CoreCategoricalScopedBuilder {
                     'target classifier'
                 );
             }
-            if (
-                body.node.tag !== 'typed-application' ||
-                body.node.judgment.target !== 'functor-object' ||
-                body.node.argument[
-                    CORE_CATEGORICAL_BOUNDARY
-                ] === true
-            ) {
-                const target = this.missingBracketTarget(
-                    body,
-                    token.node.tag === 'slot-token'
-                        ? token.node.ordinal
-                        : -1
-                );
-                this.fail(
-                    'MISSING_STRUCTURAL_OWNER',
-                    nodeProvenance,
-                    `Categorical abstraction '${name}' is not the eta case; ` +
-                    `its next bracket prerequisite is '${target}'`
-                );
-            }
-
-            const argument = body.node.argument as
-                InternalCoreCategoricalTerm;
             const ordinal = token.node.tag === 'slot-token'
                 ? token.node.ordinal
                 : -1;
+            const etaArgument =
+                body.node.tag === 'typed-application' &&
+                body.node.judgment.target === 'functor-object' &&
+                body.node.argument[
+                    CORE_CATEGORICAL_BOUNDARY
+                ] !== true
+                    ? body.node.argument as
+                        InternalCoreCategoricalTerm
+                    : undefined;
+            const etaSubject =
+                body.node.tag === 'typed-application'
+                    ? body.node.subject
+                    : undefined;
             if (
-                argument.node.tag !== 'slot-token' ||
-                argument.node.ordinal !== ordinal ||
-                usageCount(body.node.subject.usage, ordinal) !== 0 ||
-                usageCount(body.usage, ordinal) !== 1 ||
-                body.node.subject.type.tag !== 'functor' ||
-                !kernelExpressionEquals(
-                    body.node.subject.type.sourceCategory,
+                etaArgument?.node.tag === 'slot-token' &&
+                etaArgument.node.ordinal === ordinal &&
+                etaSubject !== undefined &&
+                usageCount(etaSubject.usage, ordinal) === 0 &&
+                usageCount(body.usage, ordinal) === 1 &&
+                etaSubject.type.tag === 'functor' &&
+                kernelExpressionEquals(
+                    etaSubject.type.sourceCategory,
                     sourceCategory
-                ) ||
-                !kernelExpressionEquals(
-                    body.node.subject.type.targetCategory,
+                ) &&
+                kernelExpressionEquals(
+                    etaSubject.type.targetCategory,
                     targetCategory
-                ) ||
-                body.node.subject.closed === undefined
+                ) &&
+                etaSubject.closed !== undefined
             ) {
-                this.fail(
-                    'MISSING_STRUCTURAL_OWNER',
-                    nodeProvenance,
-                    `Categorical abstraction '${name}' requires general ` +
-                    'evaluation/structural bracket lowering'
+                const bodyIr = this.normalizeNode(
+                    body,
+                    [ordinal, ...outerScope]
+                );
+                const resultIr = this.normalizeNode(
+                    etaSubject,
+                    outerScope
+                );
+                const evidence = deepFreeze({
+                    rule: 'categorical.eta' as const,
+                    name,
+                    plicity,
+                    variation: 'functorial' as const,
+                    polarity: 'covariant' as const,
+                    cellLevel: 'object' as const,
+                    dependency: 'ordinary' as const,
+                    sourceCategory,
+                    targetCategory,
+                    body: bodyIr,
+                    result: resultIr,
+                    structuralPrerequisites: Object.freeze([]),
+                    provenance: nodeProvenance
+                });
+                const closed = deepFreeze({
+                    term: etaSubject.closed.term,
+                    type: copyCoreType(etaSubject.type),
+                    sourceSpan: this.spanFor(nodeProvenance),
+                    recovered: [...etaSubject.closed.recovered]
+                });
+                return this.makeTerm(
+                    etaSubject.node,
+                    etaSubject.type,
+                    etaSubject.usage,
+                    closed,
+                    [...etaSubject.abstractions, evidence]
                 );
             }
 
-            const bodyIr = this.normalizeNode(
+            const abstractionNode: TemporaryCategoricalNode = {
+                tag: 'categorical-abstraction',
+                ordinal,
+                name,
+                sourceCategory,
+                targetCategory,
                 body,
-                [ordinal, ...outerScope]
+                provenance: nodeProvenance
+            };
+            const resultType: CoreType = {
+                tag: 'functor',
+                sourceCategory,
+                targetCategory
+            };
+            const remainingUsage = removeUsage(body.usage, ordinal);
+            const provisional = this.makeTerm(
+                abstractionNode,
+                resultType,
+                remainingUsage,
+                undefined,
+                body.abstractions
             );
-            const resultIr = this.normalizeNode(
-                body.node.subject,
-                outerScope
-            );
+
+            if (outerScope.length > 0) {
+                return provisional;
+            }
+
+            const wiring = new Map<
+                number,
+                CoreCategoricalContextualCompilation
+            >([[
+                ordinal,
+                this.identityFunctor(
+                    sourceCategory,
+                    nodeProvenance
+                )
+            ]]);
+            const compilation =
+                this.directDiagonal(
+                    body,
+                    ordinal,
+                    sourceCategory,
+                    targetCategory,
+                    nodeProvenance
+                ) ??
+                this.compileContextual(
+                    body,
+                    sourceCategory,
+                    wiring,
+                    nodeProvenance
+                );
+            if (
+                !kernelExpressionEquals(
+                    compilation.targetCategory,
+                    targetCategory
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    `Categorical abstraction '${name}' lowered to the ` +
+                        'wrong target category'
+                );
+            }
+            const bodyIr = this.normalizeNode(body, [ordinal]);
+            const resultIr = this.normalizeNode(provisional, []);
             const evidence = deepFreeze({
-                rule: 'categorical.eta' as const,
+                rule: 'categorical.bracket' as const,
                 name,
                 plicity,
                 variation: 'functorial' as const,
@@ -1152,23 +2092,24 @@ export class CoreCategoricalScopedBuilder {
                 targetCategory,
                 body: bodyIr,
                 result: resultIr,
+                structuralPrerequisites:
+                    compilation.structuralPrerequisites,
                 provenance: nodeProvenance
             });
-            const subject = body.node.subject;
             const closed = deepFreeze({
-                term: (subject.closed as ElaboratedSurfaceTerm).term,
-                type: copyCoreType(subject.type),
+                term: compilation.term,
+                type: copyCoreType(resultType),
                 sourceSpan: this.spanFor(nodeProvenance),
-                recovered: [
-                    ...(subject.closed as ElaboratedSurfaceTerm).recovered
-                ]
+                recovered: body.closed === undefined
+                    ? []
+                    : [...body.closed.recovered]
             });
             return this.makeTerm(
-                subject.node,
-                subject.type,
-                subject.usage,
+                abstractionNode,
+                resultType,
+                remainingUsage,
                 closed,
-                [...subject.abstractions, evidence]
+                [...body.abstractions, evidence]
             );
         } finally {
             this.activeTokenOrdinals.shift();

@@ -38,6 +38,7 @@ export * from './directed_graduation';
 export * from './directed_dependent_demo';
 export * from './categorical_surface_spec';
 export * from './categorical_surface';
+export * from './categorical_structural_transfer';
 export * from './lambdapi_export_inventory';
 export * from './scale_architecture_review';
 export * from './scale_engine_review';

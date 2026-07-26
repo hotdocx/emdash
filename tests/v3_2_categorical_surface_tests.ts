@@ -1,5 +1,5 @@
 /**
- * Focused USABILITY-1B contextual IR and functorial eta tests.
+ * Focused USABILITY-1B/1C contextual IR, eta, and basic bracket tests.
  */
 
 import assert from 'node:assert/strict';
@@ -17,9 +17,11 @@ import {
     CoreCategoricalScopedBuilder,
     CoreCategoricalTerm,
     KernelApplication,
+    KernelCall,
     SurfaceContext,
     categoryType,
     coreTypeEquals,
+    coreCategoricalStructuralCoreName,
     elaborateSurfaceOperationFromOperands,
     elaborateSurfaceTerm,
     functorType,
@@ -118,7 +120,7 @@ const assertDeepFrozen = (value: unknown): void => {
     );
 };
 
-describe('TypeScript v3.2 USABILITY-1B categorical surface', () => {
+describe('TypeScript v3.2 USABILITY-1B/1C categorical surface', () => {
     it('reuses the declarative operation interpreter for typed operands', () => {
         const context = buildContext();
         const F = ref(context, 'cat_F', 20);
@@ -444,34 +446,50 @@ describe('TypeScript v3.2 USABILITY-1B categorical surface', () => {
         assert.equal(callbackCount, 0);
     });
 
-    it('names the next structural prerequisite for non-eta bodies', () => {
+    it('lowers constant and identity brackets through active owners', () => {
         const context = buildContext();
         const builder = new CoreCategoricalScopedBuilder();
         const A = ref(context, 'cat_A', 100).term;
         const B = ref(context, 'cat_B', 100).term;
         const b = builder.fromElaborated(ref(context, 'cat_b', 100));
 
-        assertFrontendError(
-            () => builder.categoricalLambda(
-                'u',
-                A,
-                B,
-                _u => b,
-                { provenance: here(100, 'constant body') }
-            ),
-            'MISSING_STRUCTURAL_OWNER',
-            /constant-functor-abstraction/
+        const constant = builder.categoricalLambda(
+            'u',
+            A,
+            B,
+            _u => b,
+            { provenance: here(100, 'constant body') }
         );
-        assertFrontendError(
-            () => builder.categoricalLambda(
-                'u',
-                A,
-                A,
-                u => u,
-                { provenance: here(101, 'identity body') }
-            ),
-            'MISSING_STRUCTURAL_OWNER',
-            /identity-functor/
+        const identity = builder.categoricalLambda(
+            'u',
+            A,
+            A,
+            u => u,
+            { provenance: here(101, 'identity body') }
+        );
+        const compiledConstant = builder.compile(constant);
+        const compiledIdentity = builder.compile(identity);
+        assert.equal(compiledConstant.term.tag, 'application');
+        assert.equal(
+            (compiledConstant.term as KernelApplication).owner,
+            'functor-object'
+        );
+        assert.equal(compiledIdentity.term.tag, 'call');
+        assert.equal(
+            ((compiledIdentity.term as KernelCall).callee as {
+                readonly name: string;
+            }).name,
+            coreCategoricalStructuralCoreName('identity-functor')
+        );
+        assert.deepEqual(
+            builder.inspect(constant).abstractions[0]
+                .structuralPrerequisites,
+            ['constant-functor-abstraction']
+        );
+        assert.deepEqual(
+            builder.inspect(identity).abstractions[0]
+                .structuralPrerequisites,
+            ['identity-functor']
         );
     });
 

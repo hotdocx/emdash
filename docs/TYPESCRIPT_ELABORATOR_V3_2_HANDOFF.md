@@ -105,13 +105,20 @@ TypeScript scoped builder, prints explicit Core plus inferred/reduced types,
 executes `beta` followed by
 `directed.sigma-telescope-fibre.evaluate`, and reports one source-located
 wrong-family dependent-pair error. It has no production Lambdapi dependency
-and is intentionally absent from the deployed browser profile. The next
-dependency-ready row, USABILITY-1C, transfers and uses the ordinary
+and is intentionally absent from the deployed browser profile.
+USABILITY-1C now transfers and uses the ordinary
 identity/weakening/exchange/contraction/product/evaluation/composition/curry
-basis for general bracket abstraction. USABILITY-1B already implements the
-minimal immutable contextual IR, callback-once functorial eta abstraction,
-and exact object/arrow/full application selection from the USABILITY-1A RFC;
-the final frontend architecture is not yet graduated.
+basis for general bracket abstraction. Its direct typed root-only module
+contains the thirteen active prerequisites, `Functor_cat`, the exact
+intrinsic transparent `Functor` refinement, and one generic
+product-functor normalization rule. The contextual compiler covers identity,
+constant, composition, explicit diagonal, evaluation after typed pairing,
+exchange, and nested product-context/curry, with generic LF checking and
+bounded positive/negative Lambdapi evidence. USABILITY-1B supplies the
+immutable callback-once contextual IR and exact object/arrow/full application
+selection from the USABILITY-1A RFC. The next dependency-ready row is
+USABILITY-1D API/serialization/diagnostic/example consolidation; the final
+frontend architecture is not yet graduated.
 
 ## Authority Boundary
 

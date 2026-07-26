@@ -2608,7 +2608,7 @@ Treat its Persistent /goal Launch Prompt as part of the objective. Recover
 actual state from active code, checks, the plan and its ledgers, all Git
 worktrees and staged/unstaged diffs, and the active authority order. Follow
 the root AGENTS.md and, for every emdash2 action, emdash2/AGENTS.md and the
-current v3.2 SOP. Preserve completed USABILITY-0A/0B/1A/1B and resume the
+current v3.2 SOP. Preserve completed USABILITY-0A/0B/1A/1B/1C and resume the
 current next dependency-ready bounded slice named by the usability ledger,
 and implement executable evidence rather than only extending the
 architectural prose.
@@ -2640,6 +2640,12 @@ categorical-binder/contextual-IR frontend through ordinary functorial and one
 natural/displayed example as specified by the usability plan. Direct typed
 construction remains the default acquisition path; reconsider a narrow
 adapter only after measured repetition and a synchronized plan decision.
+Preserve the completed ordinary bracket evidence: the thirteen-prerequisite
+typed catalog plus `Functor_cat`/`Functor` support, sole generic
+product-functor normalization, identity/weakening/composition/diagonal,
+typed pairing/evaluation, exchange, nested curry, generic LF checks, and
+bounded Lambdapi corpus. Continue with USABILITY-1D rather than reopening
+bulk acquisition.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,

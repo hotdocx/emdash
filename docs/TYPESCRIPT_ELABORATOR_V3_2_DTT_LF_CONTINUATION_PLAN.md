@@ -2121,8 +2121,8 @@ DIRECTED-GRADUATE-1, the separate H-DTTLF-03 review, the root-only
 authoritative factory, and the continuation-only fixed conformance lane are
 complete. Recover the actual HEAD and checkpoint record. No independent row
 in this completed profile should be widened by inference. Preserve the active
-usability plan's completed consolidation/demo and resume its
-categorical-binder rows; retain the
+usability plan's completed consolidation, demo, specification, eta, and
+ordinary-bracket rows and resume USABILITY-1D; retain the
 scale plan's completed generic infrastructure while its canonical parser and
 bulk declaration rows are deferred. Do not open GROUPD-PLAN-0 without a
 concrete groupoidal-closure consumer and H-DTTLF-04, and do not change the
