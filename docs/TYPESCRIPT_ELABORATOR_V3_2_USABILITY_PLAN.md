@@ -49,7 +49,7 @@ USABILITY-1C implementation checkpoint:
 USABILITY-1D implementation checkpoint:
 `e5d5471e251e7cb8d726ec5eecad84ba23c03aee`
 USABILITY-2A0 implementation checkpoint:
-pending exact local checkpoint after synchronized staged-diff review
+`682f9af01e964301d3e1dc14f402717390ad2e74`
 
 ## Outcome And Corrected Priority
 
@@ -1410,3 +1410,8 @@ CI obligations.
   corpus, 634-test TypeScript gate, and full bounded active-kernel check pass.
   USABILITY-2A1 is next; no dependent-binder or architecture-graduation claim
   is made.
+- **2026-07-26 — USABILITY-2A0 checkpointed.** Recorded exact green local
+  checkpoint `682f9af01e964301d3e1dc14f402717390ad2e74` after exact
+  staged-path review and whitespace audit. It grants no new owner/profile,
+  parser, production Lambdapi dependency, remote Git operation, integration,
+  publication, release, history rewrite, or cleanup authority.

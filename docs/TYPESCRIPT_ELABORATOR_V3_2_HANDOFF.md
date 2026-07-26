@@ -142,7 +142,8 @@ indexed callback application deliberately fails rather than smuggling an
 unscoped Core index into a closed classifier. The next dependency-ready row
 is USABILITY-2A1's first-order indexed contextual classifier and genuine
 natural/displayed eta or binder witness; the final frontend architecture is
-not yet graduated.
+not yet graduated. The exact green USABILITY-2A0 implementation checkpoint is
+`682f9af01e964301d3e1dc14f402717390ad2e74`.
 
 ## Authority Boundary
 

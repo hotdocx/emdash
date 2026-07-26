@@ -2114,8 +2114,8 @@ authorities, and ancestry; preserve unrelated work; relocate symbols with rg;
 and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
-The latest local implementation checkpoint is
-f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8, followed by any
+The latest plan-spanning local implementation checkpoint is
+682f9af01e964301d3e1dc14f402717390ad2e74, followed by any
 documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C,
 DIRECTED-GRADUATE-1, the separate H-DTTLF-03 review, the root-only
 authoritative factory, and the continuation-only fixed conformance lane are
