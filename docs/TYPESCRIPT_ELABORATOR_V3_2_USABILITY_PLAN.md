@@ -37,7 +37,8 @@ USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
 `c37275a021a45edb08324d326fbb8d90b2010ada`
-USABILITY-1B implementation checkpoint: pending local checkpoint
+USABILITY-1B implementation checkpoint:
+`da1cc36ced9dd80ba95a2a477af1903f77db3b6a`
 
 ## Outcome And Corrected Priority
 
@@ -949,3 +950,8 @@ CI obligations.
   misuse, foreign or escaped slots, and non-eta structural cases fail closed.
   Forty-two focused/spec/regression tests, the 595-test TypeScript gate, and
   the bounded active-kernel gate passed. USABILITY-1C is next.
+- **2026-07-26 — USABILITY-1B checkpointed.** Recorded exact green local
+  checkpoint `da1cc36ced9dd80ba95a2a477af1903f77db3b6a` after exact-path staged
+  review and whitespace audit. It preserves the frozen semantic and browser
+  profiles and authorizes no remote Git, integration, publication, release,
+  history rewrite, or cleanup operation.
