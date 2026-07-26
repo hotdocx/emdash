@@ -6,6 +6,7 @@ Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md),
 [`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md),
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md),
+[`TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md),
 and the active emdash v3.2 mathematical authorities
 Governs: the current end-user demo and categorical-binder frontend critical
 path; it does not replace the completed-profile history or erase the separate
@@ -27,12 +28,13 @@ type-directed applications. The user directed that the review be integrated
 comprehensively into the plans, implementation continue, and a corresponding
 persistent `/goal` objective be set.
 Status: active living plan; D-DTTLF-USABILITY-001 is approved; USABILITY-0A
-consolidation and USABILITY-0B's runnable dependent demo are complete;
-USABILITY-1A is the next dependency-ready categorical-binder specification
-slice, and wider declaration acquisition is explicitly deferred while the
-binder frontend is qualified
+consolidation, USABILITY-0B's runnable dependent demo, and USABILITY-1A's
+categorical-binder/application specification are complete; USABILITY-1B is
+the next dependency-ready implementation slice, and wider declaration
+acquisition is explicitly deferred while the binder frontend is qualified
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
+USABILITY-1A implementation checkpoint: pending local checkpoint
 
 ## Outcome And Corrected Priority
 
@@ -396,7 +398,7 @@ frontend variables.
 | USABILITY-PLAN-0 | complete | agreed 2026-07-26 review | This living plan, corrected priority, acquisition deferral, binder architecture, gates, and launch prompt |
 | USABILITY-0A | complete | USABILITY-PLAN-0, completed SCALE-STRESS-3B0 infrastructure | Removed only the unused canonical-symbol parser experiment; preserved and validated exact module visibility, tactic-source retention, and 3B closure measurement; repaired the pre-existing runtime fixture to supply its now-required exact provider interface; reconciled navigation and scale ledgers |
 | USABILITY-0B | complete | USABILITY-0A, reviewed DIRECTED-1C continuation | Runnable direct-TypeScript dependent demo with readable input, inferred type, serialized explicit Core, reduced result, beta-to-Sigma-fibre trace, and one wrong-family/pair diagnostic |
-| USABILITY-1A | pending | USABILITY-0B | Exact binder/application RFC and typed surface judgments; distinguish LF and categorical abstraction, define orthogonal axes, selection rules, contextual IR, provenance, and fail-closed diagnostics against active owners |
+| USABILITY-1A | complete | USABILITY-0B | Exact binder/application RFC and executable typed-surface specification; distinguishes LF and categorical abstraction, freezes five orthogonal axes, sixteen application judgments, a first-order contextual-IR contract, thirteen ordinary bracket prerequisites, nine diagnostic contracts, backend relocation, and fail-closed active/reserved/absent owner policies without semantic installation |
 | USABILITY-1B | pending | USABILITY-1A | Minimal contextual/wiring IR plus ordinary functorial eta abstraction; object and arrow application select exact `fapp0`/`fapp1_fapp0`; whole-action expectation selects `fapp1_func`; include ambiguity and non-functorial-body negatives |
 | USABILITY-1C | pending | USABILITY-1B | Ordinary bracket-abstraction basis: unused-variable/constant weakening, exchange, duplicated-variable diagonal, evaluation after pairing, and nested abstraction/curry; no owner-specific evaluator additions |
 | USABILITY-1D | pending | USABILITY-1C | Ergonomic surface/API consolidation, deterministic explicit-Core serialization, stable diagnostics, and focused TypeScript/Lambdapi conformance corpus |
@@ -504,6 +506,86 @@ python3 emdash2/scripts/lint_report_headers.py
 git diff --check
   passed
 ```
+
+## USABILITY-1A Completion Record
+
+USABILITY-1A is specified by
+[`TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md)
+and the root-only executable artifact
+`src/v3_2/categorical_surface_spec.ts`.
+
+The RFC settles the next compiler boundary:
+
+- outer dependent-LF abstraction remains `KernelLambda` checked against an LF
+  Pi and eliminated by ordinary Core call;
+- categorical abstraction is a separate judgment compiled through a typed
+  contextual/wiring IR to an actual ordinary or displayed categorical
+  object;
+- plicity, variation capability, polarity, cell level, and
+  ordinary/displayed dependency are orthogonal axes;
+- an ergonomic callback is immediately reified into first-order locally
+  nameless storage with ordered context, free-slot usage, result classifier,
+  polarity, dependency, cell level, and source provenance;
+- classifier, subject form, argument dimension, expected action shape, and
+  dependency select one explicit semantic owner; and
+- a whole action request is distinct from applying an action to one value, so
+  a concrete transfor is never erased merely to obtain an evaluator.
+
+The executable specification freezes sixteen application judgments. The
+eligible existing paths are outer LF call, ordinary functor object/full
+hom/capped hom action, ordinary transfor full point evaluator/capped point
+component, and reviewed dependent-section object evaluation. It separately
+records:
+
+- ordinary off-diagonal transfor action as representable in explicit Core but
+  blocked by the active kernel's external-naturality reservation;
+- full and capped section arrow action as active but not yet transferred;
+- displayed-functor fibre and transport plus displayed-transfor component
+  families as active but staged for USABILITY-2A; and
+- the desired whole displayed-functor laxity transfor as deliberately absent
+  from the active authority, whose component-level cells do not authorize
+  reconstructing it.
+
+The ordinary bracket compiler's exact active but untransferred basis is
+recorded separately from the frozen 24-owner base Core catalog:
+`id_func`, `Const_func_func`, `sym_func_func`, `diag_func_func`,
+`Product_cat`, both product projections, `Product_pair`,
+`Product_map_func`, `Eval_func`, `comp_cat_fapp0`, `curry_func_func`, and
+`uncurry_func_func`. This avoids accidental MVP/profile drift and gives
+USABILITY-1C a direct typed-transfer list; no generic Lambdapi parser is
+required.
+
+The selector returns the exact ordinary semantic owners for object, one
+arrow, and whole hom action. It fails closed with stable codes for missing
+expected shape, classifier mismatch, untransferred section action, displayed
+action, the absent whole laxity owner, and reserved ordinary naturality. The
+frozen diagnostic contract additionally covers abstraction-layer ambiguity,
+object-only arrow use, polarity mismatch, and a missing bracket structural
+owner.
+
+Only `:^n` remains canonical source notation. `functorial` and `object-only`
+are stable internal TypeScript variation names; this row does not standardize
+`:^f` or `:^o`. It also installs no Core owner, runtime/proof rule, surface
+parser, browser export, or semantic profile.
+
+Validation on 2026-07-26:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_categorical_surface_spec_tests.ts
+  11 tests / 1 suite: 11 passed
+
+./scripts/pnpmw run check:ts
+  workspace, typecheck, lint, and 583-test TypeScript gate passed
+  545 passed, 38 opt-in live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, examples, and checks passed
+```
+
+The frozen MVP remains 24 owners, the browser entry point is unchanged, and
+backend spellings occur only in the separate authority binding table.
+USABILITY-1B is now dependency-ready.
 
 ## Acceptance Criteria
 
@@ -650,16 +732,21 @@ declaration/runtime/proof/mixed-phase transfer mechanisms. Direct typed
 TypeScript transfer is the default; “mechanical” means data, linkage, policy,
 and focused evidence rather than a new checker/evaluator algorithm.
 
-Preserve completed USABILITY-0A/0B: the parser experiment remains removed,
+Preserve completed USABILITY-0A/0B/1A: the parser experiment remains removed,
 the generic visibility/tactic/inventory infrastructure remains validated,
 and the runnable dependent Sigma-telescope demo retains direct TypeScript
 input, inferred and reduced types, explicit Core, the two-step trace, and its
-wrong-family diagnostic. No 70-root or extension declaration transfer is a
-prerequisite for that demo.
+wrong-family diagnostic. Preserve the categorical-binder RFC and executable
+specification: two abstraction layers, five orthogonal axes, exact
+application selection, first-order contextual-IR contract, fail-closed
+reserved/untransferred/absent actions, and the separate thirteen-owner
+ordinary structural prerequisite catalog. No 70-root or extension declaration
+transfer is a prerequisite for that demo or the ordinary eta slice.
 
-Begin with dependency-ready USABILITY-1A, then specify and implement the
-categorical-binder frontend in the ledger's order. Keep outer LF lambda
-separate from functorial abstraction. Use a small
+Begin with dependency-ready USABILITY-1B, then implement the
+categorical-binder frontend in the ledger's order and follow
+docs/TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md. Keep outer LF
+lambda separate from functorial abstraction. Use a small
 typed contextual/wiring IR and lower variable, discard, permutation,
 duplication, evaluation, composition, and nested abstraction through active
 identity/constant/symmetry/diagonal/product/evaluation/composition/curry
@@ -730,9 +817,20 @@ CI obligations.
   readable source-located wrong-family `TYPE_MISMATCH`. Focused, full
   TypeScript, complete scale, all 41 kernel/example, directed, inventory,
   mixed, proof, telescope, profunctor, and module stress gates passed.
-  USABILITY-1A is next.
+  At that checkpoint, USABILITY-1A was next.
 - **2026-07-26 — USABILITY-0A/0B checkpointed.** Recorded exact green local
   checkpoint `c2c6da01386b7fda1d26e71379c4256fb06ea637` after exact staged
   path/diff review and whitespace audit. The checkpoint grants no parser,
   browser/profile expansion, new semantic owner or rule, frontend graduation,
   remote Git operation, integration, publication, release, or cleanup.
+- **2026-07-26 — USABILITY-1A categorical surface specification
+  completed.** Added the comprehensive categorical-binder RFC and a deeply
+  frozen executable specification. It distinguishes outer LF from categorical
+  abstraction; fixes five orthogonal axes, sixteen exact application
+  judgments, a first-order contextual-IR contract, thirteen active structural
+  prerequisites, and nine fail-closed diagnostics; relocates backend evidence
+  separately; preserves the reviewed section-object path; and gates
+  untransferred section arrows, displayed action, absent whole displayed
+  laxity, and reserved ordinary naturality. Eleven focused tests, the
+  583-test TypeScript gate, and the bounded active-kernel gate passed.
+  USABILITY-1B is next.

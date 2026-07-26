@@ -74,6 +74,9 @@ Forward systematic-transfer work is governed by
 The current product-facing dependent-demo and categorical-binder work is
 governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md).
+Its accepted binder/application judgments and exact active-owner boundary are
+specified by
+[`TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md).
 Long-running goal branches and checkpoints follow
 [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
 
@@ -103,9 +106,10 @@ executes `beta` followed by
 `directed.sigma-telescope-fibre.evaluate`, and reports one source-located
 wrong-family dependent-pair error. It has no production Lambdapi dependency
 and is intentionally absent from the deployed browser profile. The next
-dependency-ready row, USABILITY-1A, specifies the categorical-binder and
-type-directed application frontend; the final frontend architecture is not
-yet graduated.
+dependency-ready row, USABILITY-1B, implements the minimal contextual IR,
+ordinary functorial eta abstraction, and type-directed object/arrow/full
+application from the completed USABILITY-1A RFC; the final frontend
+architecture is not yet graduated.
 
 ## Authority Boundary
 
@@ -121,12 +125,14 @@ Read these in order before selecting a semantic target:
 7. the active task plan selected through `../emdash2/reports/INDEX.md`;
 8. `TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md` for the active
    dependent-demo and categorical-binder frontend critical path;
-9. `TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md` for the retained
+9. `TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md` for the accepted
+   binder/application judgments and exact structural-owner prerequisites;
+10. `TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md` for the retained
    systematic-transfer implementation ledger, subordinate to the
    mathematical sources above;
-10. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the reviewed
+11. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the reviewed
    outer-LF/directed-profile implementation history;
-11. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
+12. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
     history.
 
 The root `src/` implementation predates the current kernel. Its generic
