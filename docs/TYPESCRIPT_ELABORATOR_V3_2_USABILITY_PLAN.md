@@ -44,8 +44,8 @@ USABILITY-1B implementation checkpoint:
 `da1cc36ced9dd80ba95a2a477af1903f77db3b6a`
 USABILITY-1C implementation checkpoint:
 `33282735bb685db67bdfa5658fbe77d05d7bf131`
-USABILITY-1D implementation checkpoint: pending the synchronized local
-checkpoint recorded after this tranche
+USABILITY-1D implementation checkpoint:
+`e5d5471e251e7cb8d726ec5eecad84ba23c03aee`
 
 ## Outcome And Corrected Priority
 
@@ -1228,3 +1228,8 @@ CI obligations.
   added. Fifty focused tests, the 622-test TypeScript gate, the seven-case
   bounded live Lambdapi bracket corpus, and the complete active-kernel check
   passed. USABILITY-2A is next.
+- **2026-07-26 — USABILITY-1D checkpointed.** Recorded exact green local
+  checkpoint `e5d5471e251e7cb8d726ec5eecad84ba23c03aee` after exact staged-path
+  review and whitespace audit. It authorizes no browser/profile promotion,
+  new semantic owner or rule, remote Git operation, integration, publication,
+  release, history rewrite, or cleanup.
