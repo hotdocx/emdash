@@ -90,7 +90,7 @@ dependent-bracket or profile promotion.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`f77af05a8f58cbef74d2008fb445a4e7af707f07`
+`62ef5b37ac9fcd26cec144ee2efeb4e5009be41b`
 USABILITY-GRADUATE-1 review implementation checkpoint:
 `735ad90fbc99024b0e01ef3f76666fd715652c5b`
 Latest documentation checkpoint before scale qualification:
@@ -2132,7 +2132,7 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest plan-spanning local implementation checkpoint is
-f77af05a8f58cbef74d2008fb445a4e7af707f07, followed by any
+62ef5b37ac9fcd26cec144ee2efeb4e5009be41b, followed by any
 documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C,
 DIRECTED-GRADUATE-1, the separate H-DTTLF-03 review, the root-only
 authoritative factory, and the continuation-only fixed conformance lane are

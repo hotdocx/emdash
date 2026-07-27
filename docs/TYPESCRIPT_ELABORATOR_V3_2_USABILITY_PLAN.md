@@ -82,8 +82,7 @@ USABILITY-GRADUATE-1 proposal checkpoint:
 USABILITY-GRADUATE-1 review implementation checkpoint:
 `735ad90fbc99024b0e01ef3f76666fd715652c5b`
 USABILITY-DEPENDENT-1A implementation checkpoint:
-current synchronized green tranche; exact hash is recorded by the following
-documentation checkpoint
+`62ef5b37ac9fcd26cec144ee2efeb4e5009be41b`
 
 ## Outcome And Corrected Priority
 
@@ -2318,4 +2317,5 @@ CI obligations.
   classifier reductions through generic transfer engines. Focused and live
   pointwise conformance evidence is green. No new Lambdapi mathematical
   owner/rule, general dependent bracket, profile, parser/acquisition choice,
-  or bulk-transfer resumption was added.
+  or bulk-transfer resumption was added. Exact green local implementation
+  checkpoint: `62ef5b37ac9fcd26cec144ee2efeb4e5009be41b`.

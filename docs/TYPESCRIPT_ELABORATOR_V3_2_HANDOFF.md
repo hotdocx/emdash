@@ -205,7 +205,9 @@ implementation checkpoint is
 `60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`.
 The exact green graduation proposal checkpoint is
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`; the review implementation
-checkpoint is `735ad90fbc99024b0e01ef3f76666fd715652c5b`.
+checkpoint is `735ad90fbc99024b0e01ef3f76666fd715652c5b`. The exact green
+USABILITY-DEPENDENT-1A implementation checkpoint is
+`62ef5b37ac9fcd26cec144ee2efeb4e5009be41b`.
 
 The completed first dependent-usability continuation preserves
 H-01/D-007's dependent-first

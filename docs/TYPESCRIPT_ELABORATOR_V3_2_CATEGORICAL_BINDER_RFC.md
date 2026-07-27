@@ -772,7 +772,9 @@ does not change the frozen MVP or directed profiles, production trust,
 Lambdapi source, any owner/rule, acquisition strategy, or browser surface,
 and it does not resume bulk transfer. The exact green proposal checkpoint is
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`; the review implementation
-checkpoint is `735ad90fbc99024b0e01ef3f76666fd715652c5b`.
+checkpoint is `735ad90fbc99024b0e01ef3f76666fd715652c5b`. The exact green
+USABILITY-DEPENDENT-1A implementation checkpoint is
+`62ef5b37ac9fcd26cec144ee2efeb4e5009be41b`.
 
 ### General binder continuation
 
