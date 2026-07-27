@@ -32,6 +32,13 @@ asked that the dependent/displayed binder-feasibility boundary be stated
 explicitly. The user then clarified that the usability problem must be solved
 for ordinary and displayed/dependent binding, but that algorithmic or
 implementation uniformity between those cases is not itself a requirement.
+On 2026-07-26 the user said exactly “Approve
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 as proposed.” The user then
+clarified that neither a shared algorithm nor separate algorithms are
+required: the accepted design criterion is whichever natural,
+authority-correct, scalable/generalizable, non-hacky architecture solves the
+end-user usability problem. Plausible alternatives remain recorded rather
+than being prematurely excluded.
 Status: active living plan; D-DTTLF-USABILITY-001 is approved; USABILITY-0A
 consolidation, USABILITY-0B's runnable dependent demo, and USABILITY-1A's
 categorical-binder/application specification plus USABILITY-1B's ordinary eta
@@ -45,13 +52,17 @@ are complete; the USABILITY-2A umbrella is complete;
 USABILITY-GRADUATE-1 and its separate immutable review are complete under
 H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002. The exact outer-LF,
 ordinary first-order bracket, and direct-slot indexed section-eta envelope
-is settled and mechanically reusable. General displayed/dependent bracket
+is settled and mechanically reusable.
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 is separately
+reviewed-approved, and the bounded `USABILITY-DEPENDENT-1A` non-eta
+section-composition witness is complete. It elaborates
+`λ k :^n K. FF[k](s[k])` through indexed classifiers and generic
+`comp_fapp0` at `Catd_cat K`, with no new Lambdapi mathematical owner/rule
+and no promotion or mutation of a deployed/browser or frozen reviewed
+profile. General displayed/dependent bracket
 abstraction remains unimplemented and not yet mechanically confirmed; wider
 declaration acquisition remains explicitly deferred, and no follow-on slice
-is selected automatically by this approval. A post-review assessment now
-proposes `USABILITY-DEPENDENT-1A` as the next product-usability slice, but it
-awaits H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 before
-implementation.
+is selected automatically by this approval.
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
@@ -70,6 +81,9 @@ USABILITY-GRADUATE-1 proposal checkpoint:
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`
 USABILITY-GRADUATE-1 review implementation checkpoint:
 `735ad90fbc99024b0e01ef3f76666fd715652c5b`
+USABILITY-DEPENDENT-1A implementation checkpoint:
+current synchronized green tranche; exact hash is recorded by the following
+documentation checkpoint
 
 ## Outcome And Corrected Priority
 
@@ -473,8 +487,8 @@ frontend variables.
 | USABILITY-2A1 | complete | USABILITY-2A0 | First-order indexed/dependent slot classifier; callback-once natural/displayed section eta `λ k :^n K. s[k]`; exact family/usage checks; retained contextual evidence; generic LF checking; runnable dependent categorical demo; escaped/wrong-family/mode negatives; first untransferred `piapp1_fapp0` action negative |
 | USABILITY-2A | complete (split) | USABILITY-2A0, USABILITY-2A1 | Umbrella acceptance: one natural/indexed displayed-Pi section binder/application witness uses the same contextual architecture and generic checker/evaluator path as the ordinary compiler |
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
-| USABILITY-DEPENDENT-PLAN-0 | proposal prepared; awaiting H-DTTLF-USABILITY-DEPENDENT | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Non-authorizing assessment of the general binder-usability architecture: preserve the dependent-first semantic interpretation and classified constant-family bridge; reuse contextual/classifier infrastructure where sound, while permitting distinct ordinary and displayed representations or lowering algorithms and judging success by usable authority-correct behavior rather than implementation uniformity |
-| USABILITY-DEPENDENT-1A | gated | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: elaborate `λ k :^n K. FF[k](s[k])` from indexed fibre classifiers through generic displayed-functor/section composition to explicit `comp_fapp0` at `Catd_cat K`; preserve the ordinary corpus, fail closed on family/base/scope errors, and add no kernel owner/rule or product-profile effect |
+| USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
+| USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -1617,7 +1631,7 @@ classifier, not a completed general binder algorithm.
    classifies some bridges as proof-time only, and still defers displayed
    structural logic, product/curry compatibility, and general dependent
    adjunctions.
-3. The selected starting proposal is layered: retain one dependent-first
+3. The bounded starting implementation is layered: retain one dependent-first
    semantic account, reuse contextual representation, scoping, dependency
    analysis, application classification, and diagnostics where the current
    evidence supports doing so, then use authority-aware lowerings. A constant
@@ -1631,10 +1645,23 @@ The acceptance criterion is therefore not uniformity. It is that convenient
 ordinary and displayed/dependent binders elaborate deterministically to
 authority-backed Core, preserve dependency and substitution, agree with
 bounded Lambdapi evidence, and fail closed at a precisely identified missing
-operation. Shared implementation is preferred only where it makes those
-properties easier to maintain. This also preserves fail-closed owner
-discovery: a missing dependent rule reports the exact contextual operation
-and active-owner boundary instead of inventing a TypeScript-only equation.
+operation. Nor is implementation separation required: shared and distinct
+lowering are equally admissible when justified by evidence. This also
+preserves fail-closed owner discovery: a missing dependent rule reports the
+exact contextual operation and active-owner boundary instead of inventing a
+TypeScript-only equation.
+
+The retained design alternatives are:
+
+- a progressively shared dependent-first contextual compiler;
+- one surface/scoping frontend with authority-specific ordinary and displayed
+  lowerers; and
+- a later data-driven table of typed semantic contextual laws once multiple
+  consumers demonstrate stable common structure.
+
+The completed 1A witness uses the second shape with substantial shared
+infrastructure. That implementation result does not rule out convergence
+toward either of the other shapes.
 
 ### Dependency-ready non-eta witness
 
@@ -1672,42 +1699,102 @@ Fibre_func(FF,k)[piapp0(s,k)].
 
 The probe passed in 6.8 seconds and the temporary source was removed. This is
 a genuine non-eta dependent body using the generic `Catd_cat` composition
-owner; it needs no new Lambdapi declaration or rule. The TypeScript
-continuation already contains the generic composition and displayed-category
-prerequisites, so the remaining work belongs initially in surface
-classification/contextual lowering rather than kernel mathematics.
+owner; it needs no new Lambdapi declaration or rule. The active Lambdapi
+kernel already owned the required closure. The reviewed TypeScript product
+environment did not yet contain its exact generic-composition facade:
+implementation therefore transferred only `Terminal_cat`, `comp_fapp0`, and
+the two existing classifier reductions through the generic declaration and
+runtime engines before completing surface classification/contextual
+lowering. The reductions are installed at the stable Core `Hom` and `Obj`
+heads, so decoded equality follows through the generic congruence engine
+rather than a witness-specific outer rewrite. This is transfer of active
+authority, not new kernel mathematics.
 
-### Proposed implementation boundary
+### Reviewed implementation boundary and completion record
 
-`USABILITY-DEPENDENT-1A` should:
+`USABILITY-DEPENDENT-1A` now:
 
-1. extend the contextual classifier layer to represent an indexed fibre
+1. extends the contextual classifier layer to represent an indexed fibre
    category, its displayed fibre functor, and an indexed object without
    inserting an unscoped Core De Bruijn occurrence;
-2. reify `FF[k](s[k])` as first-order locally nameless application data;
-3. add a classifier-directed dependent abstraction path for eta and displayed
+2. reifies `FF[k](s[k])` as first-order locally nameless application data;
+3. adds a classifier-directed dependent abstraction path for eta and displayed
    composition, reusing existing contextual machinery where sound while
-   imposing no requirement that the ordinary and dependent compiler
-   functions or stored IR be identical;
-4. emit the exact generic `comp_fapp0` term above and check it as
+   imposing no requirement that ordinary and dependent compiler functions or
+   stored IR be identical or distinct;
+4. emits the exact generic `comp_fapp0` term above and checks it as
    `Obj(Pi_cat D)` through the TypeScript LF environment;
-5. prove callback-once, alpha/provenance invariance, exact prerequisite
+5. proves callback-once, alpha/provenance invariance, exact prerequisite
    retention, pointwise TypeScript/Lambdapi agreement, and deterministic
    wrong-base, wrong-family, foreign-slot, escaped-slot, and unsupported-form
    failures; and
-6. leave general displayed weakening/exchange/contraction, dependent curry,
+6. leaves general displayed weakening/exchange/contraction, dependent curry,
    arbitrary reindexing, owner promotion, browser/profile promotion,
    parsing, and bulk transfer outside the slice.
 
-Success would validate the chosen layered solution beyond eta. It still would
-not prove complete general dependent bracket abstraction. Later consumers
-should add one dependency-sensitive structural operation at a time and open
-H-DTTLF-USABILITY-02 only when a concrete lowering actually lacks an active
-owner.
+The executable artifacts are
+`categorical_dependent_composition_transfer.ts`,
+`categorical_dependent_usability_proposal.ts`,
+`categorical_dependent_usability_review.ts`,
+`categorical_surface.ts`, `categorical_program.ts`, and the runnable
+`categorical_dependent_composition_demo.ts`. The opt-in live Lambdapi test
+checks both the emitted type and the pointwise computation. The historical
+sixteen-row application partition and default reviewed eta-only program
+remain unchanged; the new indexed-fibre-functor/object judgment is an
+explicitly separate reviewed continuation.
 
-### Exact proposed decision
+This success validates one natural layered solution beyond eta. It does not
+prove complete general dependent bracket abstraction or select the final
+factoring for every dependent consumer. Later consumers should add one
+dependency-sensitive structural operation at a time and open a new human
+gate only when a concrete lowering actually lacks an active owner or expands
+the graduated semantic/profile boundary.
 
-The next yes-or-revise question is:
+### USABILITY-DEPENDENT-1A validation
+
+The synchronized completion gate on 2026-07-26 is:
+
+```text
+./scripts/pnpmw run demo:categorical-dependent-composition
+  emitted the direct-TypeScript input, locally nameless contextual body,
+  generic comp_fapp0 Core, inferred/expected classifiers, pointwise meaning,
+  and deterministic wrong-family diagnostic
+
+timeout 60s env \
+  EMDASH_RUN_LAMBDAPI_CATEGORICAL_DEPENDENT_COMPOSITION_PROBES=1 \
+  node --require ts-node/register --test \
+  tests/v3_2_categorical_dependent_composition_tests.ts
+  8 tests / 1 suite passed, including whole-section typing and pointwise
+  computation in live Lambdapi
+
+./scripts/pnpmw run check:ts
+  workspace, typecheck, lint, and 681-test TypeScript gate passed
+  639 passed, 42 opt-in live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, examples, and checks passed
+
+./scripts/pnpmw run check:conformance
+  19 shared owner/rule/higher-cell differential tests passed against
+  live Lambdapi
+
+./scripts/pnpmw run check:directed-conformance
+  11 reviewed DIRECTED-1C TypeScript/live-Lambdapi tests passed
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 ci
+  41 bounded Lambdapi files, health/report/catalog audits, 39 Python tests,
+  book evidence/typography/KaTeX/assembly, registry, shell, reference,
+  report-header, rule-LHS, and catalog gates passed
+```
+
+The focused proposal/review, transfer, lowering, demo, default-profile
+regression, family/base/scope rejection, alpha/provenance, and immutable
+boundary tests are wired into `tests/main_tests.ts`. No tracked Lambdapi
+source changed.
+
+### Exact decision and review result
+
+The proposed yes-or-revise question was:
 
 > Approve
 > H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 as proposed: retain
@@ -1722,8 +1809,17 @@ The next yes-or-revise question is:
 > kernel owner/rule, changing a product profile, selecting a parser, or
 > resuming bulk transfer?
 
-Until that question is approved, this assessment is non-authorizing and
-USABILITY-DEPENDENT-1A remains gated.
+On 2026-07-26 the user answered exactly:
+
+> Approve H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 as proposed.
+
+The immutable proposal remains non-self-authorizing; a separate frozen review
+artifact records the approval and its exact bounded authority. The user then
+clarified that the design is not required either to share or to separate
+ordinary/dependent lowering algorithms. The implemented factoring is
+accepted because it is natural for this consumer and reuses generic
+infrastructure without an owner-specific shortcut—not because its internal
+code shape is prescribed for future slices.
 
 ## Acceptance Criteria
 
@@ -1816,16 +1912,18 @@ displayed/dependent bracket abstraction.
 
 ### H-DTTLF-USABILITY-DEPENDENT — General Binder Usability
 
-The post-review assessment proposes D-DTTLF-USABILITY-003 and
-USABILITY-DEPENDENT-1A. Human approval is required because this selects the
-next frontend architecture tranche beyond the exact graduated envelope.
+The post-review assessment proposed D-DTTLF-USABILITY-003 and
+USABILITY-DEPENDENT-1A. The user approved the exact decision on 2026-07-26,
+and the bounded implementation tranche is complete.
 
-Approval would authorize only the dependent-first semantic continuation and
+Approval authorizes only the dependent-first semantic continuation and
 non-eta displayed section-composition witness recorded above. The initial
-implementation may reuse the current contextual classifier where sound or
-introduce a distinct dependent representation when concrete evidence
-requires it. It would not require identical ordinary/displayed implementation
-functions or IR, add or alter a Lambdapi owner/rule, complete displayed
+implementation reuses the current contextual classifier where sound and adds
+one authority-backed semantic lowering law. Future consumers may continue
+that factoring or introduce a distinct dependent representation when
+concrete evidence requires it. The decision requires neither identical nor
+deliberately separate ordinary/displayed implementation functions or IR. It
+does not add or alter a Lambdapi mathematical owner/rule, complete displayed
 structural logic, promote a browser/product profile, select
 parsing/acquisition automation, or resume bulk transfer.
 
@@ -1992,20 +2090,24 @@ deferred 70-root/extension closure, propose acquisition automation, or open a
 general dependent-bracket tranche only after an updated plan explicitly
 selects it from a concrete consumer or measured need.
 
-Preserve the non-authorizing USABILITY-DEPENDENT-PLAN-0 assessment. The
+Preserve the immutable non-authorizing proposal and its separate exact
+D-DTTLF-USABILITY-003 reviewed approval. The
 controlling H-01/D-007 architecture is dependent-first: contexts are
 categories, types are displayed families, terms are sections, substitution
 is functorial pullback, and ordinary binders are recovered only through an
 authority-classified constant-family bridge. That is a semantic constraint,
 not a requirement that ordinary and displayed TypeScript representations,
-dispatchers, or lowering algorithms be identical. Reuse contextual scoping,
+dispatchers, or lowering algorithms be identical or distinct. Reuse
+contextual scoping,
 dependency analysis, application classification, and diagnostics where
 sound, but judge the result by deterministic usable behavior,
 authority-backed Core, substitution/dependency preservation, conformance,
-and fail-closed errors. The exact next proposed witness is
-`λ k :^n K. FF[k](s[k])`, lowered through generic `comp_fapp0` at
-`Catd_cat K`. Do not implement USABILITY-DEPENDENT-1A until
-H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 is supplied.
+and fail-closed errors. Preserve completed USABILITY-DEPENDENT-1A:
+`λ k :^n K. FF[k](s[k])` lowers through generic `comp_fapp0` at
+`Catd_cat K`, using the minimal transferred active closure and no new
+Lambdapi mathematical owner/rule. Do not infer a general dependent bracket,
+additional owner/profile authority, parser/acquisition decision, or bulk
+transfer resumption from this approval.
 
 Recover the actual descendant HEAD; named baselines and checkpoints are
 comparison/backtracking evidence, never permission to reset or rewrite.
@@ -2015,8 +2117,8 @@ ledger/navigation, exact staged-diff review, and
 git diff --cached --check. It authorizes no push, merge, PR, publication,
 release, history rewriting, new branch/worktree, cleanup, or deletion.
 
-No follow-on implementation row is authorized by the completed review alone;
-the proposed dependent-usability row remains at its new human gate. Keep every
+No follow-on implementation row is authorized by the completed dependent
+review and witness alone. Keep every
 Lambdapi process bounded to at most 60 seconds and preserve all proportional
 subject-reduction, warning, audit, catalog, health, examples, conformance, and
 CI obligations.
@@ -2202,3 +2304,18 @@ CI obligations.
   dependent-first semantics and classified constant-family bridge remain
   controlling; implementation sharing is evidence-driven rather than a gate
   condition.
+- **2026-07-26 — D-DTTLF-USABILITY-003 approved and non-eta witness
+  completed.** Recorded the exact approval separately from the immutable
+  non-authorizing proposal. The subsequent clarification requires neither
+  shared nor separate ordinary/dependent lowering; a natural,
+  authority-correct, scalable/generalizable solution is the criterion, and
+  three plausible future factorizations remain recorded. The completed
+  `USABILITY-DEPENDENT-1A` path shares scoping, locally nameless evidence,
+  classifier checks, diagnostics, explicit Core, and generic LF checking,
+  then lowers the typed semantic body `FF[k](s[k])` through generic
+  `comp_fapp0` at `Catd_cat K`. The TypeScript environment received only the
+  missing active `Terminal_cat`/`comp_fapp0` declarations and two existing
+  classifier reductions through generic transfer engines. Focused and live
+  pointwise conformance evidence is green. No new Lambdapi mathematical
+  owner/rule, general dependent bracket, profile, parser/acquisition choice,
+  or bulk-transfer resumption was added.

@@ -3730,14 +3730,19 @@ architecture as settled only for outer LF, ordinary first-order bracket, and
 direct-slot indexed section eta. Do not resume bulk transfer from that
 approval or confuse its eta-only dependent coverage with general dependent
 bracket abstraction, displayed structural completeness, bulk library
-transfer, or parser/notation completion. Preserve the subsequent
-non-authorizing dependent-binder assessment and its exact generic `Catd_cat`
-section-composition witness. H-01/D-007 fixes the dependent-first semantic
-interpretation and classified constant-family bridge, not a requirement that
-ordinary and displayed TypeScript representations or lowering algorithms be
-identical. Reuse shared scoping, dependency, application, or diagnostic
-machinery where sound, but judge the continuation by usable,
-authority-correct ordinary and displayed behavior. Do not implement
-USABILITY-DEPENDENT-1A before
-H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 is supplied.
+transfer, or parser/notation completion. Preserve the subsequent immutable
+dependent-binder proposal, its separate exact
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 approval, and completed
+generic `Catd_cat` section-composition witness. H-01/D-007 fixes the
+dependent-first semantic interpretation and classified constant-family
+bridge, not a requirement that ordinary and displayed TypeScript
+representations or lowering algorithms be identical or separate. Reuse
+shared scoping, dependency, application, or diagnostic machinery where
+sound, but judge candidate factorizations by natural, scalable/generalizable,
+authority-correct ordinary and displayed behavior. Preserve
+USABILITY-DEPENDENT-1A's indexed first-order `FF[k](s[k])` lowering through
+generic `comp_fapp0`, its minimal active TypeScript transfer closure, and its
+fail-closed/live-conformance evidence. Do not infer general dependent bracket
+abstraction, a new Lambdapi mathematical owner/rule, profile promotion,
+parser/acquisition selection, or bulk-transfer resumption.
 ```

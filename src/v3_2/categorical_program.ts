@@ -30,6 +30,12 @@ import {
     coreCategoricalDependentCoreName
 } from './categorical_dependent_transfer';
 import {
+    CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PREREQUISITES,
+    CoreCategoricalDependentCompositionCompilation,
+    compileCoreCategoricalDependentCompositionTransfer,
+    coreCategoricalDependentCompositionCoreName
+} from './categorical_dependent_composition_transfer';
+import {
     CORE_CATEGORICAL_STRUCTURAL_PREREQUISITES,
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
     CoreCategoricalStructuralPrerequisiteId,
@@ -84,6 +90,9 @@ import {
 export const CORE_CATEGORICAL_PROGRAM_REVISION =
     'USABILITY-2A1-CATEGORICAL-PROGRAM-1' as const;
 
+export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
+    'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
+
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
 const CORE_CATEGORICAL_DISPLAYED_FAMILY =
@@ -123,6 +132,14 @@ export interface CoreCategoricalSourceSite {
 
 export interface CoreCategoricalProgramOptions {
     readonly sourceFile?: string;
+    /**
+     * The default preserves the exact reviewed USABILITY-2A1 program. The
+     * continuation profile adds only the approved D-003 section-composition
+     * closure and remains root-only.
+     */
+    readonly profile?:
+        | 'reviewed-usability-2a1'
+        | 'usability-dependent-1a';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -216,6 +233,21 @@ for (const prerequisite of CORE_CATEGORICAL_DEPENDENT_PREREQUISITES) {
     categoricalLabels[
         coreCategoricalDependentCoreName(prerequisite.id)
     ] = `emdash.categorical.${prerequisite.id}`;
+}
+for (
+    const prerequisite of
+        CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PREREQUISITES
+) {
+    if (
+        prerequisite.id === 'terminal-category' ||
+        prerequisite.id === 'generic-category-composition'
+    ) {
+        categoricalLabels[
+            coreCategoricalDependentCompositionCoreName(
+                prerequisite.id
+            )
+        ] = `emdash.categorical.${prerequisite.id}`;
+    }
 }
 categoricalLabels[
     CORE_DIRECTED_1A_PRIMITIVE_NAMES['displayed-functor-category']
@@ -332,23 +364,35 @@ const collectDependentPrerequisites = (
 };
 
 /**
- * End-user construction scope for the reviewed ordinary categorical slice.
+ * End-user construction scope for the reviewed categorical programs.
+ *
+ * The default retains the graduated ordinary/indexed-eta envelope. Explicit
+ * root-only continuation profiles may add only their reviewed capabilities.
  */
 export class CoreCategoricalProgram {
     private readonly programIdentity = Symbol('CoreCategoricalProgram');
     private readonly sourceFile: string;
-    private readonly dependent: CoreCategoricalDependentCompilation;
+    private readonly dependent:
+        | CoreCategoricalDependentCompilation
+        | CoreCategoricalDependentCompositionCompilation;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
     constructor(options: CoreCategoricalProgramOptions = {}) {
         this.sourceFile =
             options.sourceFile ?? '<categorical-program>';
-        this.dependent =
-            compileCoreCategoricalDependentTransfer();
+        const profile =
+            options.profile ?? 'reviewed-usability-2a1';
+        this.dependent = profile === 'usability-dependent-1a'
+            ? compileCoreCategoricalDependentCompositionTransfer()
+            : compileCoreCategoricalDependentTransfer();
         this.environment = this.dependent.compiled.environment;
         this.builder = new CoreCategoricalScopedBuilder(
-            this.at('categorical program')
+            this.at('categorical program'),
+            {
+                dependentSectionComposition:
+                    profile === 'usability-dependent-1a'
+            }
         );
     }
 
@@ -557,7 +601,10 @@ export class CoreCategoricalProgram {
             nodeProvenance
         );
         const pointInspection = this.builder.inspect(point);
-        if (pointInspection.type.tag === 'indexed-object') {
+        if (
+            pointInspection.type.tag === 'indexed-object' ||
+            pointInspection.type.tag === 'indexed-functor'
+        ) {
             throw new CoreCategoricalProgramError(
                 'EXPECTED_CATEGORY_OBJECT',
                 nodeProvenance,
@@ -832,7 +879,10 @@ export class CoreCategoricalProgram {
             this.builder.inspect(targetObject)
         ];
         for (const endpoint of endpoints) {
-            if (endpoint.type.tag === 'indexed-object') {
+            if (
+                endpoint.type.tag === 'indexed-object' ||
+                endpoint.type.tag === 'indexed-functor'
+            ) {
                 throw new CoreCategoricalProgramError(
                     'EXPECTED_CATEGORY_OBJECT',
                     nodeProvenance,

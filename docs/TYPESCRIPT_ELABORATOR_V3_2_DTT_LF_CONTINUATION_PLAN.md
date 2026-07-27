@@ -82,8 +82,11 @@ indexed-eta categorical-binder envelope; the executable
 USABILITY-GRADUATE-1 recommendation is now separately reviewed-approved under
 H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 for that exact envelope.
 The dependent-first general-binder continuation and non-eta section-
-composition witness are proposed under
-H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003, which remains pending.
+composition witness are separately reviewed-approved under
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003, and bounded
+USABILITY-DEPENDENT-1A is complete. It uses generic `comp_fapp0` at
+`Catd_cat K`, no new Lambdapi mathematical owner/rule, and no general
+dependent-bracket or profile promotion.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -2143,15 +2146,18 @@ frontend-envelope proposal and its separate exact
 H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 reviewed approval. Treat the
 architecture as settled only for outer LF, ordinary first-order bracket, and
 direct-slot indexed section eta; do not resume bulk transfer from that
-approval. Preserve the non-authorizing dependent-first general-binder
-assessment and its `λ k :^n K. FF[k](s[k])` generic `Catd_cat` composition
-witness. Preserve dependent-first semantics and the classified
-constant-family bridge, but do not require one ordinary/dependent TypeScript
-representation or lowering algorithm; reuse shared machinery only where
-sound and judge the slice by usable authority-correct behavior. Do not
-implement USABILITY-DEPENDENT-1A before
-H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003. Retain the scale plan's
-completed generic
+approval. Preserve the immutable dependent-first general-binder proposal,
+its separate exact
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 approval, and completed
+`λ k :^n K. FF[k](s[k])` generic `Catd_cat` composition witness. Preserve
+dependent-first semantics and the classified constant-family bridge, but
+require neither one ordinary/dependent TypeScript lowering nor deliberately
+separate lowerings; choose shared or distinct machinery from authority and
+consumer evidence. Preserve the minimal active
+`Terminal_cat`/`comp_fapp0` plus classifier-reduction transfer and do not
+infer a new Lambdapi mathematical owner/rule, general dependent bracket,
+profile, parser/acquisition choice, or bulk-transfer resumption. Retain the
+scale plan's completed generic
 infrastructure while its canonical parser and bulk declaration rows are
 deferred. Do not open GROUPD-PLAN-0 without a concrete groupoidal-closure
 consumer and H-DTTLF-04, and do not change the browser/deployed profile or
@@ -2703,3 +2709,15 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   `λ k :^n K. FF[k](s[k])` through generic `Catd_cat` composition without a
   new owner/rule. USABILITY-DEPENDENT-1A remains non-authorizing pending
   H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003.
+- **2026-07-26 — Dependent continuation approved and bounded witness
+  completed.** Recorded the exact D-DTTLF-USABILITY-003 approval separately
+  from its immutable non-authorizing proposal. The subsequent clarification
+  requires neither shared nor separate ordinary/dependent lowering: natural,
+  authority-correct, scalable/generalizable usability is the criterion, with
+  alternative compiler factorizations retained. USABILITY-DEPENDENT-1A now
+  elaborates `FF[k](s[k])` through indexed first-order evidence and generic
+  `comp_fapp0` at `Catd_cat K`; the minimal missing active TypeScript closure
+  was transferred through generic engines and live pointwise Lambdapi
+  evidence agrees. No new Lambdapi mathematical owner/rule, general
+  dependent bracket, product/profile promotion, acquisition decision, or
+  bulk transfer was added.

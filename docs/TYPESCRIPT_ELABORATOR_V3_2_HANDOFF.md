@@ -57,9 +57,13 @@ H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 for only the outer-LF,
 ordinary first-order bracket, and direct-slot indexed section-eta envelope.
 General displayed/dependent bracket abstraction remains unimplemented and
 not yet mechanically confirmed. The post-review dependent-first assessment
-now proposes the non-eta section-composition witness
-`λ k :^n K. FF[k](s[k])` under
-H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003; that gate is pending.
+and exact non-eta section-composition witness
+`λ k :^n K. FF[k](s[k])` are now separately reviewed-approved under
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003, and bounded
+USABILITY-DEPENDENT-1A is complete. The implementation uses first-order
+indexed classifiers and generic `comp_fapp0` at `Catd_cat K`; it introduces
+no new Lambdapi mathematical owner/rule and authorizes no general dependent
+bracket or automatic follow-on.
 Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
@@ -203,18 +207,20 @@ The exact green graduation proposal checkpoint is
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`; the review implementation
 checkpoint is `735ad90fbc99024b0e01ef3f76666fd715652c5b`.
 
-The next proposed usability design preserves H-01/D-007's dependent-first
+The completed first dependent-usability continuation preserves
+H-01/D-007's dependent-first
 semantic interpretation and authority-classified constant-family bridge, but
-does not require ordinary and dependent TypeScript representations or
-lowering algorithms to be identical. It starts by reusing contextual scoping,
-dependency, application, and diagnostic machinery where sound; distinct
-authority-aware lowerings or IR are permitted if the concrete dependent
-consumer requires them. A bounded active-kernel probe already proves that a
-displayed functor composed with a section has the required section type and
-pointwise `FF[k](s[k])` computation through generic `comp_fapp0` at
-`Catd_cat K`. The remaining first slice is a TypeScript dependent-binder
-usability change, not evidence for a new kernel owner. It is non-authorizing
-until D-DTTLF-USABILITY-003 is approved.
+requires neither identical nor separate ordinary/dependent TypeScript
+representations or lowering algorithms. It reuses contextual scoping,
+dependency, application, diagnostic, explicit-Core, and generic LF machinery
+where sound, then applies the authority-backed displayed section-composition
+law. The active TypeScript environment received only the missing
+`Terminal_cat`/`comp_fapp0` declarations and two existing classifier
+reductions through generic transfer engines. Bounded TypeScript/Lambdapi
+evidence proves the required section type and pointwise `FF[k](s[k])`
+computation. The retained alternatives are a progressively shared compiler,
+one frontend with authority-specific lowerers, and a later data-driven
+contextual-law table; future evidence may select among or combine them.
 
 ## Authority Boundary
 
@@ -653,8 +659,9 @@ Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
 completed-profile and reviewed-continuation comparison checkpoints, preserves
 the non-authorizing USABILITY-GRADUATE-1 proposal together with its separate
 exact reviewed approval and withheld general dependent/displayed boundary,
-and records the continuation's Git boundary. The dependent-first
-USABILITY-DEPENDENT-1A continuation is proposed but gated by
-D-DTTLF-USABILITY-003; no follow-on implementation row is authorized
+and records the continuation's Git boundary. Preserve the immutable
+dependent-usability proposal, its separate exact D-DTTLF-USABILITY-003
+approval, and completed USABILITY-DEPENDENT-1A non-eta witness. No general
+dependent bracket or follow-on implementation row is authorized
 automatically. The completed master plan's historical checkpoint
 authorization does not authorize unrelated Git mutations.

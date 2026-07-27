@@ -9,9 +9,10 @@ API/serialization/diagnostic/example consolidation are complete;
 complete; the exact `USABILITY-GRADUATE-1` proposal is separately
 reviewed-approved under
 H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002
-for its exact bounded envelope; the proposed general dependent-binder
-continuation awaits
-H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003
+for its exact bounded envelope; the separate
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 decision is
+reviewed-approved and the bounded `USABILITY-DEPENDENT-1A` non-eta
+section-composition continuation is complete
 
 Plan: `TS-ELAB-V3.2-USABILITY`
 
@@ -21,11 +22,18 @@ Executable artifacts:
 `src/v3_2/categorical_program.ts`, and
 `src/v3_2/core_serialization.ts`; the runnable witnesses are
 `src/v3_2/categorical_bracket_demo.ts` and
-`src/v3_2/categorical_dependent_demo.ts`; the non-authorizing graduation
+`src/v3_2/categorical_dependent_eta_demo.ts`, plus
+`src/v3_2/categorical_dependent_composition_demo.ts`; the minimal
+section-composition transfer closure is
+`src/v3_2/categorical_dependent_composition_transfer.ts`; the
+non-authorizing graduation
 artifact is
 `src/v3_2/categorical_usability_graduation_proposal.ts`; its separate
 approval record is
-`src/v3_2/categorical_usability_graduation_review.ts`
+`src/v3_2/categorical_usability_graduation_review.ts`; the dependent
+continuation's immutable proposal and separate exact approval are
+`src/v3_2/categorical_dependent_usability_proposal.ts` and
+`src/v3_2/categorical_dependent_usability_review.ts`
 
 Authority audited: `emdash2/emdash3_2.lp` on 2026-07-26
 
@@ -781,15 +789,16 @@ A[σ]               Pullback_catd A σ
 ordinary B         Const_catd Γ B plus its classified bridge
 ```
 
-The preferred starting continuation reuses contextual representation, locally
+The completed starting continuation reuses contextual representation, locally
 nameless scoping, dependency/substitution analysis, application
 classification, and diagnostics where that is sound. Its lowering remains
 authority-aware: constant-family terms may use the existing ordinary bracket
 basis through the recorded bridge, while genuinely varying families use
 active displayed and section owners. Neither identical functions nor an
-identical stored IR is an acceptance requirement; a distinct dependent
-algorithm is permitted when concrete dependency or owner evidence requires
-it. Proof-time comparisons must not be misrepresented as runtime collapse.
+identical stored IR is an acceptance requirement, and deliberate separation
+is not required either; shared or distinct lowering is chosen from concrete
+dependency and owner evidence. Proof-time comparisons must not be
+misrepresented as runtime collapse.
 
 The actual acceptance criterion is a usable, deterministic frontend for both
 ordinary and displayed/dependent binding that preserves dependency and
@@ -797,23 +806,38 @@ substitution, emits authority-backed Core, agrees with bounded conformance
 evidence, and fails closed on unsupported structure. Uniform implementation
 is only a possible means to that end.
 
-The first proposed non-eta witness is:
+The first completed non-eta witness is:
 
 ```text
 λ k :^n K. FF[k](s[k])
 ```
 
-for `FF : Functord E D` and `s : Obj(Pi_cat E)`. A bounded active-kernel
-probe establishes that it lowers to generic `comp_fapp0` in `Catd_cat K`,
-has type `Obj(Pi_cat D)`, and computes pointwise to
-`Fibre_func(FF,k)[piapp0(s,k)]`. The remaining TypeScript work is to represent
-indexed fibre categories/functors in the contextual classifier layer and
-dispatch this composition rule without an owner-named AST shortcut.
+for `FF : Functord E D` and `s : Obj(Pi_cat E)`. The implementation
+represents `FF[k]` and `s[k]` by first-order locally nameless indexed
+classifiers, recognizes their typed semantic composition, and emits generic
+`comp_fapp0` in `Catd_cat K` without an owner-named AST or evaluator
+shortcut. The active kernel already owned the mathematics; the TypeScript
+program acquired only `Terminal_cat`, `comp_fapp0`, and the two existing
+Hom/section classifier reductions through generic transfer engines. The
+reductions live at the stable Core `Hom`/`Obj` heads; generic congruence, not
+a witness-specific decoded rewrite, transports them into checked types.
 
-This proposed USABILITY-DEPENDENT-1A slice needs no new kernel owner/rule and
-does not require complete displayed structural logic. It remains
-non-authorizing pending D-DTTLF-USABILITY-003; later dependent weakening,
-exchange, contraction, curry, and composite reindexing stay consumer-led.
+Both the TypeScript checker and a bounded live Lambdapi test establish type
+`Obj(Pi_cat D)` and pointwise computation
+`Fibre_func(FF,k)[piapp0(s,k)]`. The old eta-only program remains the default;
+the completed continuation is an explicit opt-in reviewed profile and its
+application judgment remains outside the frozen historical sixteen-row
+partition.
+
+This USABILITY-DEPENDENT-1A slice needs no new Lambdapi mathematical
+owner/rule and does not require complete displayed structural logic. It
+demonstrates one natural factoring—shared scoping/classification/IR plus an
+authority-specific semantic lowering law—but does not prescribe that
+factoring for later consumers. The alternatives retained for future evidence
+are a progressively shared compiler, one frontend with distinct
+authority-specific lowerers, and a later data-driven contextual-law table.
+Dependent weakening, exchange, contraction, curry, composite reindexing, and
+general dependent bracket abstraction stay consumer-led and human-gated.
 
 ## Executable Evidence
 

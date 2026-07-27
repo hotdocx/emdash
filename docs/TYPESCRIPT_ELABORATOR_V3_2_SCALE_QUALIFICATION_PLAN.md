@@ -19,6 +19,8 @@ scale audit in session
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019f9686-d7a3-7030-ba41-92e1e69b97fd`
 Infinity-Codex-Decision-Responses: direct user scale-qualification direction
 on 2026-07-24; active code, authorities, and this plan outrank the archive
+Status: active living plan; detailed synchronized status and implementation
+ledger follow below
 Human-Direction: after approving H-DTTLF-03/D-DTTLF-001, the user requested a
 careful clarification of whether the final architecture was already settled.
 On 2026-07-24 the user then directed that we gather a varied set of
@@ -41,7 +43,7 @@ requested a solution-oriented reassessment of general ordinary and
 dependent/displayed binder usability. The user clarified that solving that
 usability problem, rather than enforcing algorithmic uniformity, is the
 criterion.
-Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
+Detailed-Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
 D-DTTLF-SCALE-002 is approved; SCALE-ACQUIRE-1A is complete and
@@ -91,9 +93,11 @@ qualification. No SCALE-STRESS-3B semantic profile or theorem has been
 promoted. The separate usability plan has prepared its exact qualified
 frontend graduation proposal and recorded its separate exact
 H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 approval. That decision does
-not authorize this plan to resume bulk acquisition or transfer. The proposed
-dependent-first non-eta binder continuation awaits
-H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003.
+not authorize this plan to resume bulk acquisition or transfer. The separate
+dependent-first non-eta binder continuation is now reviewed-approved under
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003, and its bounded
+USABILITY-DEPENDENT-1A section-composition witness is complete. That decision
+also does not select SCALE-RETURN-1 or resume acquisition/transfer.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -2670,14 +2674,14 @@ H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 reviewed approval. Treat the
 frontend as settled only for the exact outer-LF, ordinary bracket, and
 direct-slot indexed eta envelope; do not reopen bulk acquisition from that
 decision. Preserve the non-authorizing dependent-first assessment and
-generic `Catd_cat` section-composition witness. Its dependent-first semantics
-and classified constant-family bridge do not require one ordinary/dependent
-TypeScript representation or lowering algorithm; reuse common mechanisms
-only where sound. Do not implement
-USABILITY-DEPENDENT-1A before
-H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003. Do not misstate eta-only
-indexed coverage as general dependent bracket abstraction or whole-library
-transfer.
+generic `Catd_cat` section-composition witness, its separate exact
+D-DTTLF-USABILITY-003 review, and completed USABILITY-DEPENDENT-1A
+implementation. Its dependent-first semantics and classified constant-family
+bridge require neither one ordinary/dependent TypeScript lowering nor
+deliberately separate lowerings; choose common or distinct mechanisms only
+from concrete authority and consumer evidence. Do not misstate the completed
+non-eta witness as general dependent bracket abstraction or whole-library
+transfer, and do not infer acquisition resumption from it.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
@@ -3068,3 +3072,13 @@ scope is affected.
   is not. That slice remains pending
   H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003; SCALE-RETURN-1 is still
   unselected.
+- **2026-07-26 — Dependent non-eta witness completed; scale work still
+  deferred.** D-DTTLF-USABILITY-003 is recorded separately from its immutable
+  proposal, and USABILITY-DEPENDENT-1A now lowers indexed
+  `FF[k](s[k])` through generic `comp_fapp0` at `Catd_cat K` with bounded
+  live conformance. The clarification requires neither shared nor separate
+  ordinary/dependent lowering; natural, authority-correct,
+  scalable/generalizable usability is the criterion. The minimal active
+  TypeScript closure was transferred through generic engines, not acquired by
+  parsing and not added as new Lambdapi mathematics. SCALE-RETURN-1 remains
+  unselected; bulk root/extension transfer remains deferred.
