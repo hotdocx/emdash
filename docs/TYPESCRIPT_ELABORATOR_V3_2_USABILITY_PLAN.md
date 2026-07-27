@@ -52,8 +52,8 @@ USABILITY-1D implementation checkpoint:
 `e5d5471e251e7cb8d726ec5eecad84ba23c03aee`
 USABILITY-2A0 implementation checkpoint:
 `682f9af01e964301d3e1dc14f402717390ad2e74`
-USABILITY-2A1 implementation checkpoint: pending exact green local
-checkpoint and follow-up ledger record
+USABILITY-2A1 implementation checkpoint:
+`60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`
 
 ## Outcome And Corrected Priority
 
@@ -1666,3 +1666,9 @@ CI obligations.
   active-kernel check pass. General dependent bracket abstraction, displayed
   structural completeness, parser/notation, browser promotion, groupoidal
   closure, and whole-library transfer remain non-claims.
+- **2026-07-26 — USABILITY-2A1 checkpointed.** Recorded exact green local
+  checkpoint `60d584a8ba9ec7ed6fa624d2007baf7d4afaebae` after the exact
+  15-path staged review and whitespace audit. It grants no semantic
+  owner/rule or profile promotion, parser, browser export, production
+  Lambdapi dependency, remote Git operation, integration, publication,
+  release, history rewrite, or cleanup authority.

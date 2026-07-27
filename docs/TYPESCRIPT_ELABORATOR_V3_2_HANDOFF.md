@@ -172,8 +172,9 @@ displayed structural completeness, `piapp1_*` transfer, groupoidal closure,
 bulk library transfer, notation/parsing, and browser promotion remain
 separate non-claims pending their own evidence and gates. The exact green
 USABILITY-2A0 implementation checkpoint is
-`682f9af01e964301d3e1dc14f402717390ad2e74`; the 2A1 checkpoint is recorded
-in the active usability plan after its exact staged review.
+`682f9af01e964301d3e1dc14f402717390ad2e74`; the exact green 2A1
+implementation checkpoint is
+`60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`.
 
 ## Authority Boundary
 
