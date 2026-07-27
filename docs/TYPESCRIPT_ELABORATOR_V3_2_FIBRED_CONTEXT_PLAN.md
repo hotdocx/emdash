@@ -27,6 +27,8 @@ FIBRED-CONTEXT-0A implementation checkpoint:
 `d25ddb349e97dc0629cd6bc1aa941e1cc200066e`
 FIBRED-CONTEXT-0B implementation checkpoint:
 `569ebac0c8eaaeaaec63f93bde02fd91f50864f9`
+FIBRED-PRODUCT-0B proposal checkpoint:
+`ec5d87f2b3cfe298fd5272456740f35428f65925`
 
 ## Purpose And Exact Outcome
 
