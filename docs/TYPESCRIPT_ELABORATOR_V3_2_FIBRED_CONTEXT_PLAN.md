@@ -21,6 +21,8 @@ Human-Decision-Record: on 2026-07-27 the user accepted the consolidated
 displayed-binder and corrected fibred-sibling analyses, requested this
 dedicated plan and continued implementation, and separately cautioned that a
 generic total-category pullback must not be assumed
+FIBRED-CONTEXT-0A implementation checkpoint:
+`d25ddb349e97dc0629cd6bc1aa941e1cc200066e`
 
 ## Purpose And Exact Outcome
 
