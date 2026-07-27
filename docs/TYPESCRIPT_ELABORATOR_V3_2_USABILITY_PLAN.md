@@ -97,6 +97,12 @@ USABILITY-DEPENDENT-1A implementation checkpoint:
 `62ef5b37ac9fcd26cec144ee2efeb4e5009be41b`
 FIBRED-CONTEXT-0A continuation checkpoint:
 `d25ddb349e97dc0629cd6bc1aa941e1cc200066e`
+FIBRED-CONTEXT-0B continuation checkpoint:
+`569ebac0c8eaaeaaec63f93bde02fd91f50864f9`
+FIBRED-PRODUCT-0B proposal checkpoint:
+`ec5d87f2b3cfe298fd5272456740f35428f65925`
+FIBRED-COMPREHENSION-0B proposal checkpoint:
+`093a99a42edc0d36c489ac461a94b00401869417`
 
 ## Outcome And Corrected Priority
 
