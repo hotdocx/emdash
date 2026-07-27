@@ -36,6 +36,11 @@ import {
     coreCategoricalDependentCompositionCoreName
 } from './categorical_dependent_composition_transfer';
 import {
+    CoreCategoricalComprehensionCompilation,
+    compileCoreCategoricalComprehensionTransfer,
+    coreCategoricalComprehensionCoreName
+} from './categorical_comprehension_transfer';
+import {
     CORE_CATEGORICAL_STRUCTURAL_PREREQUISITES,
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
     CoreCategoricalStructuralPrerequisiteId,
@@ -53,6 +58,9 @@ import {
     CORE_DIRECTED_1A_PRIMITIVE_NAMES
 } from './directed_1a';
 import {
+    CORE_DIRECTED_1B_PRIMITIVE_NAMES
+} from './directed_1b';
+import {
     CORE_DIRECTED_1C_PRIMITIVE_NAMES
 } from './directed_1c';
 import {
@@ -69,9 +77,12 @@ import {
     binderMode,
     formatSourceSpan,
     kernelApplication,
+    kernelBinder,
+    kernelBound,
     kernelCall,
     kernelExpressionEquals,
     kernelFree,
+    kernelLambda,
     provenance,
     sourceSpan
 } from './kernel';
@@ -92,6 +103,9 @@ export const CORE_CATEGORICAL_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_COMPREHENSION_PROGRAM_REVISION =
+    'FIBRED-COMPREHENSION-1A-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -135,11 +149,13 @@ export interface CoreCategoricalProgramOptions {
     /**
      * The default preserves the exact reviewed USABILITY-2A1 program. The
      * continuation profile adds only the approved D-003 section-composition
-     * closure and remains root-only.
+     * closure. The fibred-comprehension profile additionally exposes the
+     * approved asymmetric base-change totalization and remains root-only.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
-        | 'usability-dependent-1a';
+        | 'usability-dependent-1a'
+        | 'fibred-comprehension-1a';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -161,6 +177,9 @@ export type CoreCategoricalProgramErrorCode =
     | 'FOREIGN_DISPLAYED_FAMILY'
     | 'DISPLAYED_BASE_MISMATCH'
     | 'EXPECTED_CATEGORY_OBJECT'
+    | 'EXPECTED_FUNCTOR'
+    | 'EXPECTED_HOM'
+    | 'UNAVAILABLE_COMPREHENSION'
     | 'UNEXPECTED_KIND';
 
 export class CoreCategoricalProgramError extends Error {
@@ -253,8 +272,22 @@ categoricalLabels[
     CORE_DIRECTED_1A_PRIMITIVE_NAMES['displayed-functor-category']
 ] = 'emdash.categorical.displayed-functor-category';
 categoricalLabels[
+    CORE_DIRECTED_1A_PRIMITIVE_NAMES['sigma-category']
+] = 'emdash.categorical.sigma-category';
+categoricalLabels[
+    CORE_DIRECTED_1B_PRIMITIVE_NAMES['dependent-pair']
+] = 'emdash.categorical.dependent-pair';
+categoricalLabels[
     CORE_DIRECTED_1C_PRIMITIVE_NAMES['section-object-evaluation']
 ] = 'emdash.categorical.section-object-evaluation';
+categoricalLabels[
+    coreCategoricalComprehensionCoreName('sigma-arrow')
+] = 'emdash.categorical.sigma-arrow';
+categoricalLabels[
+    coreCategoricalComprehensionCoreName(
+        'sigma-pullback-total-functor'
+    )
+] = 'emdash.categorical.sigma-pullback-total-functor';
 
 export const CORE_CATEGORICAL_EXPLICIT_FREE_LABELS:
 Readonly<Record<string, string>> = Object.freeze({
@@ -374,7 +407,9 @@ export class CoreCategoricalProgram {
     private readonly sourceFile: string;
     private readonly dependent:
         | CoreCategoricalDependentCompilation
-        | CoreCategoricalDependentCompositionCompilation;
+        | CoreCategoricalDependentCompositionCompilation
+        | CoreCategoricalComprehensionCompilation;
+    private readonly comprehensionEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -383,15 +418,19 @@ export class CoreCategoricalProgram {
             options.sourceFile ?? '<categorical-program>';
         const profile =
             options.profile ?? 'reviewed-usability-2a1';
-        this.dependent = profile === 'usability-dependent-1a'
-            ? compileCoreCategoricalDependentCompositionTransfer()
-            : compileCoreCategoricalDependentTransfer();
+        this.comprehensionEnabled =
+            profile === 'fibred-comprehension-1a';
+        this.dependent = this.comprehensionEnabled
+            ? compileCoreCategoricalComprehensionTransfer()
+            : profile === 'usability-dependent-1a'
+                ? compileCoreCategoricalDependentCompositionTransfer()
+                : compileCoreCategoricalDependentTransfer();
         this.environment = this.dependent.compiled.environment;
         this.builder = new CoreCategoricalScopedBuilder(
             this.at('categorical program'),
             {
                 dependentSectionComposition:
-                    profile === 'usability-dependent-1a'
+                    profile !== 'reviewed-usability-2a1'
             }
         );
     }
@@ -485,6 +524,32 @@ export class CoreCategoricalProgram {
         });
     }
 
+    private requireComprehension(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.comprehensionEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_COMPREHENSION',
+                nodeProvenance,
+                'Fibred comprehension is available only in the explicit ' +
+                "'fibred-comprehension-1a' root profile"
+            );
+        }
+    }
+
+    private makeTerm(
+        expression: KernelExpression,
+        type: CoreType,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        return this.builder.fromElaborated({
+            term: expression,
+            type,
+            sourceSpan: nodeProvenance.span as SourceSpan,
+            recovered: Object.freeze([])
+        });
+    }
+
     private fibreCategoryExpression(
         family: InternalCoreCategoricalDisplayedFamily,
         point: KernelExpression,
@@ -506,6 +571,177 @@ export class CoreCategoricalProgram {
             ],
             nodeProvenance
         );
+    }
+
+    private totalCategoryExpression(
+        family: InternalCoreCategoricalDisplayedFamily,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1A_PRIMITIVE_NAMES['sigma-category'],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: family.baseCategory.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: family.expression
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private dependentPairExpression(
+        family: InternalCoreCategoricalDisplayedFamily,
+        first: KernelExpression,
+        second: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        const base = family.baseCategory.expression;
+        const binderType = coreTypeToKernelType(
+            {
+                tag: 'object',
+                category: base
+            },
+            nodeProvenance.span as SourceSpan,
+            'dependent-pair base classifier'
+        );
+        const point = kernelBound(0, nodeProvenance);
+        const fibreClassifier = kernelApplication(
+            'object-classifier',
+            [{
+                value: this.fibreCategoryExpression(
+                    family,
+                    point,
+                    nodeProvenance
+                )
+            }],
+            nodeProvenance
+        );
+        return kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1B_PRIMITIVE_NAMES['dependent-pair'],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: kernelApplication(
+                        'object-classifier',
+                        [{ value: base }],
+                        nodeProvenance
+                    )
+                },
+                {
+                    plicity: 'implicit',
+                    value: kernelLambda(
+                        kernelBinder(
+                            'pairPoint',
+                            binderType,
+                            explicitFunctorial,
+                            nodeProvenance
+                        ),
+                        fibreClassifier,
+                        nodeProvenance
+                    )
+                },
+                { plicity: 'explicit', value: first },
+                { plicity: 'explicit', value: second }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private requireObjectTerm(
+        value: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly expression: KernelExpression;
+        readonly category: KernelExpression;
+    } {
+        const inspection = this.builder.inspect(value);
+        if (inspection.type.tag !== 'object') {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_CATEGORY_OBJECT',
+                nodeProvenance,
+                `${detail} must be a closed category object`
+            );
+        }
+        return {
+            expression: this.builder.compile(value).term,
+            category: inspection.type.category
+        };
+    }
+
+    private requireFunctorTerm(
+        value: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly expression: KernelExpression;
+        readonly sourceCategory: KernelExpression;
+        readonly targetCategory: KernelExpression;
+    } {
+        const inspection = this.builder.inspect(value);
+        if (inspection.type.tag !== 'functor') {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_FUNCTOR',
+                nodeProvenance,
+                `${detail} must be an ordinary functor`
+            );
+        }
+        return {
+            expression: this.builder.compile(value).term,
+            sourceCategory: inspection.type.sourceCategory,
+            targetCategory: inspection.type.targetCategory
+        };
+    }
+
+    private requireHomTerm(
+        value: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly expression: KernelExpression;
+        readonly category: KernelExpression;
+        readonly sourceObject: KernelExpression;
+        readonly targetObject: KernelExpression;
+    } {
+        const inspection = this.builder.inspect(value);
+        if (inspection.type.tag !== 'hom') {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_HOM',
+                nodeProvenance,
+                `${detail} must be a closed category arrow`
+            );
+        }
+        return {
+            expression: this.builder.compile(value).term,
+            category: inspection.type.category,
+            sourceObject: inspection.type.sourceObject,
+            targetObject: inspection.type.targetObject
+        };
+    }
+
+    private requireSameCategory(
+        actual: KernelExpression,
+        expected: KernelExpression,
+        nodeProvenance: Provenance,
+        detail: string
+    ): void {
+        if (!coreObjectCategoryEquals(actual, expected)) {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_CATEGORY_OBJECT',
+                nodeProvenance,
+                `${detail} belongs to the wrong category`
+            );
+        }
     }
 
     private assume(
@@ -640,6 +876,498 @@ export class CoreCategoricalProgram {
                 pointExpression,
                 nodeProvenance
             )
+        );
+    }
+
+    totalCategory(
+        familyValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory {
+        const nodeProvenance = this.at(
+            'Sigma total category',
+            source
+        );
+        this.requireComprehension(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        return this.makeCategory(
+            `Sigma(${family.label})`,
+            this.totalCategoryExpression(family, nodeProvenance)
+        );
+    }
+
+    pullbackFamily(
+        familyValue: CoreCategoricalDisplayedFamily,
+        substitutionValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'displayed-family substitution',
+            source
+        );
+        this.requireComprehension(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const substitution = this.requireFunctorTerm(
+            substitutionValue,
+            nodeProvenance,
+            'Displayed-family substitution'
+        );
+        if (!kernelExpressionEquals(
+            substitution.targetCategory,
+            family.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                `Substitution target does not match displayed family ` +
+                `'${family.label}'`
+            );
+        }
+        const sourceCategory = this.makeCategory(
+            `source(${family.label})`,
+            substitution.sourceCategory
+        ) as InternalCoreCategoricalCategory;
+        return this.makeDisplayedFamily(
+            `${family.label}[substitution]`,
+            sourceCategory,
+            kernelApplication(
+                'displayed-pullback',
+                [
+                    { value: substitution.sourceCategory },
+                    { value: substitution.targetCategory },
+                    { value: family.expression },
+                    { value: substitution.expression }
+                ],
+                nodeProvenance
+            )
+        );
+    }
+
+    substituteFamily(
+        familyValue: CoreCategoricalDisplayedFamily,
+        substitutionValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        return this.pullbackFamily(
+            familyValue,
+            substitutionValue,
+            source
+        );
+    }
+
+    dependentPair(
+        familyValue: CoreCategoricalDisplayedFamily,
+        firstValue: CoreCategoricalTerm,
+        secondValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'dependent pair',
+            source
+        );
+        this.requireComprehension(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const first = this.requireObjectTerm(
+            firstValue,
+            nodeProvenance,
+            'Dependent-pair first component'
+        );
+        this.requireSameCategory(
+            first.category,
+            family.baseCategory.expression,
+            nodeProvenance,
+            'Dependent-pair first component'
+        );
+        const second = this.requireObjectTerm(
+            secondValue,
+            nodeProvenance,
+            'Dependent-pair second component'
+        );
+        const expectedFibre = this.fibreCategoryExpression(
+            family,
+            first.expression,
+            nodeProvenance
+        );
+        this.requireSameCategory(
+            second.category,
+            expectedFibre,
+            nodeProvenance,
+            'Dependent-pair second component'
+        );
+        const expression = this.dependentPairExpression(
+            family,
+            first.expression,
+            second.expression,
+            nodeProvenance
+        );
+        return this.makeTerm(
+            expression,
+            {
+                tag: 'object',
+                category:
+                    this.totalCategoryExpression(
+                        family,
+                        nodeProvenance
+                    )
+            },
+            nodeProvenance
+        );
+    }
+
+    familyTransport(
+        familyValue: CoreCategoricalDisplayedFamily,
+        baseArrowValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed-family arrow transport',
+            source
+        );
+        this.requireComprehension(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const baseArrow = this.requireHomTerm(
+            baseArrowValue,
+            nodeProvenance,
+            'Displayed-family transport index'
+        );
+        if (!kernelExpressionEquals(
+            baseArrow.category,
+            family.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                `Transport arrow is outside the base of displayed family ` +
+                `'${family.label}'`
+            );
+        }
+        const sourceFibre = this.fibreCategoryExpression(
+            family,
+            baseArrow.sourceObject,
+            nodeProvenance
+        );
+        const targetFibre = this.fibreCategoryExpression(
+            family,
+            baseArrow.targetObject,
+            nodeProvenance
+        );
+        return this.makeTerm(
+            kernelApplication(
+                'functor-hom-capped',
+                [
+                    { value: family.baseCategory.expression },
+                    {
+                        value: kernelApplication(
+                            'category-of-categories',
+                            [],
+                            nodeProvenance
+                        )
+                    },
+                    { value: family.expression },
+                    { value: baseArrow.sourceObject },
+                    { value: baseArrow.targetObject },
+                    { value: baseArrow.expression }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'functor',
+                sourceCategory: sourceFibre,
+                targetCategory: targetFibre
+            },
+            nodeProvenance
+        );
+    }
+
+    sigmaArrow(
+        familyValue: CoreCategoricalDisplayedFamily,
+        sourceValue: CoreCategoricalTerm,
+        targetValue: CoreCategoricalTerm,
+        baseArrowValue: CoreCategoricalTerm,
+        fibreArrowValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'canonical Sigma arrow',
+            source
+        );
+        this.requireComprehension(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const sourceObject = this.requireObjectTerm(
+            sourceValue,
+            nodeProvenance,
+            'Sigma-arrow source fibre value'
+        );
+        const targetObject = this.requireObjectTerm(
+            targetValue,
+            nodeProvenance,
+            'Sigma-arrow target fibre value'
+        );
+        const baseArrow = this.requireHomTerm(
+            baseArrowValue,
+            nodeProvenance,
+            'Sigma-arrow base component'
+        );
+        if (!kernelExpressionEquals(
+            baseArrow.category,
+            family.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Sigma-arrow base component is outside the family base'
+            );
+        }
+        const sourceFibre = this.fibreCategoryExpression(
+            family,
+            baseArrow.sourceObject,
+            nodeProvenance
+        );
+        const targetFibre = this.fibreCategoryExpression(
+            family,
+            baseArrow.targetObject,
+            nodeProvenance
+        );
+        this.requireSameCategory(
+            sourceObject.category,
+            sourceFibre,
+            nodeProvenance,
+            'Sigma-arrow source fibre value'
+        );
+        this.requireSameCategory(
+            targetObject.category,
+            targetFibre,
+            nodeProvenance,
+            'Sigma-arrow target fibre value'
+        );
+        const transport = kernelApplication(
+            'functor-hom-capped',
+            [
+                { value: family.baseCategory.expression },
+                {
+                    value: kernelApplication(
+                        'category-of-categories',
+                        [],
+                        nodeProvenance
+                    )
+                },
+                { value: family.expression },
+                { value: baseArrow.sourceObject },
+                { value: baseArrow.targetObject },
+                { value: baseArrow.expression }
+            ],
+            nodeProvenance
+        );
+        const transportedSource = kernelApplication(
+            'functor-object',
+            [
+                { value: sourceFibre },
+                { value: targetFibre },
+                { value: transport },
+                { value: sourceObject.expression }
+            ],
+            nodeProvenance
+        );
+        const fibreArrow = this.requireHomTerm(
+            fibreArrowValue,
+            nodeProvenance,
+            'Sigma-arrow fibre component'
+        );
+        if (
+            !kernelExpressionEquals(
+                fibreArrow.category,
+                targetFibre
+            ) ||
+            !kernelExpressionEquals(
+                fibreArrow.sourceObject,
+                transportedSource
+            ) ||
+            !kernelExpressionEquals(
+                fibreArrow.targetObject,
+                targetObject.expression
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_HOM',
+                nodeProvenance,
+                'Sigma-arrow fibre component has the wrong transported ' +
+                'source, target, or fibre'
+            );
+        }
+        const sourcePair = this.dependentPairExpression(
+            family,
+            baseArrow.sourceObject,
+            sourceObject.expression,
+            nodeProvenance
+        );
+        const targetPair = this.dependentPairExpression(
+            family,
+            baseArrow.targetObject,
+            targetObject.expression,
+            nodeProvenance
+        );
+        const total = this.totalCategoryExpression(
+            family,
+            nodeProvenance
+        );
+        return this.makeTerm(
+            kernelCall(
+                kernelFree(
+                    coreCategoricalComprehensionCoreName(
+                        'sigma-arrow'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: family.baseCategory.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: family.expression
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: baseArrow.sourceObject
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: baseArrow.targetObject
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: sourceObject.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: targetObject.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: baseArrow.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: fibreArrow.expression
+                    }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'hom',
+                category: total,
+                sourceObject: sourcePair,
+                targetObject: targetPair
+            },
+            nodeProvenance
+        );
+    }
+
+    pullbackTotal(
+        substitutionValue: CoreCategoricalTerm,
+        familyValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'pullback totalization',
+            source
+        );
+        this.requireComprehension(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const substitution = this.requireFunctorTerm(
+            substitutionValue,
+            nodeProvenance,
+            'Pullback totalization substitution'
+        );
+        if (!kernelExpressionEquals(
+            substitution.targetCategory,
+            family.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                `Pullback totalization target does not match family ` +
+                `'${family.label}'`
+            );
+        }
+        const sourceBase = this.makeCategory(
+            `source(${family.label})`,
+            substitution.sourceCategory
+        ) as InternalCoreCategoricalCategory;
+        const reindexed = this.makeDisplayedFamily(
+            `${family.label}[substitution]`,
+            sourceBase,
+            kernelApplication(
+                'displayed-pullback',
+                [
+                    { value: substitution.sourceCategory },
+                    { value: substitution.targetCategory },
+                    { value: family.expression },
+                    { value: substitution.expression }
+                ],
+                nodeProvenance
+            )
+        ) as InternalCoreCategoricalDisplayedFamily;
+        return this.makeTerm(
+            kernelCall(
+                kernelFree(
+                    coreCategoricalComprehensionCoreName(
+                        'sigma-pullback-total-functor'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: substitution.sourceCategory
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: substitution.targetCategory
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: substitution.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: family.expression
+                    }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'functor',
+                sourceCategory:
+                    this.totalCategoryExpression(
+                        reindexed,
+                        nodeProvenance
+                    ),
+                targetCategory:
+                    this.totalCategoryExpression(
+                        family,
+                        nodeProvenance
+                    )
+            },
+            nodeProvenance
         );
     }
 

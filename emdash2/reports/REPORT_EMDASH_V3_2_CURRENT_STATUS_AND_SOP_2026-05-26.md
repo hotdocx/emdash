@@ -1721,6 +1721,27 @@ ladder for its fibre action; `sigma_map_transf` exposes the next generic hom
 action as an ordinary transfor between total maps. Arbitrary displayed
 functors are lax rather than silently strict/cartesian.
 
+Asymmetric family reindexing now has its general total-category map. For
+`F : A -> K` and `D : Catd K`,
+
+```text
+sigma_pullback_total_func(F,D)
+  : Sigma_cat(Pullback_catd D F) -> Sigma_cat D
+(a,u)       |-> (F[a],u)
+(p,alpha)   |-> (F[p],alpha).
+```
+
+This owner was added only after auditing `Sigma_func`, `sigma_map_func`,
+`Pullback_catd`, `Pullback_catd_func`, and the section/Sigma-introduction
+surfaces and finding no existing owner of this base-changing map. It is the
+Grothendieck totalization of the existing asymmetric family pullback, not a
+generic pullback constructor for arbitrary total functors. Contextual pairing
+therefore remains an explicit composite: terminal totalization,
+`sigma_map_func` for a section of the pulled-back family, then
+`sigma_pullback_total_func`. The direct arrow action of
+`sigma_intro_tapp0_func`, a named `section_total` presentation facade, and a
+whole-functor first-projection beta remain separate.
+
 `Functor_catd`, `Hom_catd`, and `Transf_catd` are mixed-variance family
 constructors. Pointwise formulas do not replace their required base-arrow
 actions.
@@ -2264,6 +2285,9 @@ The following remain explicit future work rather than hidden assumptions:
 - full general dependent adjunctions `Sigma_F ⊣ F^* ⊣ Pi_F`, including the
   planned `Pi_f`/comma-category infrastructure;
 - displayed structural logic and remaining product/curry compatibility;
+- a named `section_total` presentation facade and packaged projection laws;
+  its transparent expression and the general
+  `sigma_pullback_total_func(F,D)` base-change totalization are active;
 - semantic uncurry action on arbitrary transfors;
 - whole-transfor displayed laxity beyond `fdapp1_int_cell`;
 - the arrow action of `sigma_intro_tapp0_func`;

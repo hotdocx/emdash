@@ -2732,6 +2732,18 @@ scope is affected.
   authority overlay, selected a mechanism-diverse stress corpus, defined
   mechanical acceptance criteria and review gates, and selected SCALE-0A as
   the first non-semantic implementation slice.
+- **2026-07-27 — Later comprehension slice repinned live drift evidence.**
+  The separately governed usability continuation added the audited
+  `sigma_pullback_total_func` owner and two runtime rules. The generic
+  inventory now observes 758 core symbols, 599 exported runtime-rule
+  commands, and 635 canonical runtime clauses; the source and canonical
+  export hashes are
+  `sha256:1f741d471474eeea93ed6f89685fefd283d1b5bc3c40657a6e290d7c40c9136a`
+  and
+  `sha256:61242c1a1c4c6fe032ff9d22ae7292556ff3abd41921ff79352642e3f1790000`.
+  Exact acquisition selections remain valid. The initial inventory tables
+  above remain historical measurements rather than silently changing their
+  baseline.
 - **2026-07-24 — SCALE-PLAN-0 and SCALE-0A completed;
   H-DTTLF-SCALE-01 triggered.** Added a pure immutable canonical-export
   inventory parser, focused fail-closed fixtures, and a separate bounded live

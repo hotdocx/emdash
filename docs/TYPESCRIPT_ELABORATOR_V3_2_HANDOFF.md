@@ -78,18 +78,27 @@ works with zero warning delta. Its deep-frozen proposal requests exactly two
 prospective runtime rules, no declaration or alias, and preserves
 `Functord`-product comparison, pullback stability, structural maps, full base
 two-cell action, and total-category pullback as separate work.
-FIBRED-PRODUCT-1A is blocked pending the exact
-H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 decision.
+D-DTTLF-USABILITY-004 is approved and FIBRED-PRODUCT-1A is the next
+dependency-ready implementation tranche. Its selection preserves the active
+transparent product and avoids a duplicate primitive; the zero warning delta
+is supporting interaction evidence, not an automatic design veto over the
+broader alternatives.
 The independent FIBRED-COMPREHENSION-0A/0B audit is also complete. A
 zero-owner Sigma-introduction composite is type correct but computationally
 stuck; a direct pair owner computes with `+2/0` warnings; and the selected
 general asymmetric pullback-total owner computes contextual-pair object and
 arrow action plus further-family object/base-arrow substitution with one
-declaration, two structured runtime projections, and zero warning delta. Its
-immutable proposal awaits the separate exact
-H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 decision. The direct
-Sigma-introduction arrow action remains separate after a measured `+10/+1`
-interaction delta. Neither prospective owner/rule set is active.
+declaration, two structured runtime projections, and zero warning delta.
+D-DTTLF-USABILITY-005 is approved and FIBRED-COMPREHENSION-1A is complete.
+The active kernel/Foundation audit found no pre-existing owner for the
+general `Sigma(F^*D) -> Sigma(D)` map, so the implementation adds exactly
+that reusable base-change totalization and no pair-specific or generic
+pullback primitive. Generic TypeScript compilation subject-checks the two
+existing pullback rules and two new projections; a root-only
+`fibred-comprehension-1a` facade and runnable demo exercise totalization of
+dependent objects and arrows and substitution of a further family over
+`Sigma(D)`. The direct Sigma-introduction arrow action remains separate after
+a measured `+10/+1` interaction delta.
 Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
@@ -694,7 +703,10 @@ dependent-usability proposal, its separate exact D-DTTLF-USABILITY-003
 approval, and completed USABILITY-DEPENDENT-1A non-eta witness. No general
 dependent bracket or follow-on implementation row is authorized merely by
 the older approvals. The later explicit fibred-context direction authorizes
-the sub-plan's dependency-ready frontend rows, but no proposed Lambdapi owner
-or rule before its exact H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 and
-D-DTTLF-USABILITY-005 gates. The completed master plan's historical checkpoint
-authorization does not authorize unrelated Git mutations.
+the sub-plan's dependency-ready frontend rows. D-DTTLF-USABILITY-004 and
+D-DTTLF-USABILITY-005 are approved; the latter's audited comprehension
+closure is complete and the former's exact two-rule product closure is next.
+Do not infer any additional owner/rule, structural map, total pullback, or
+profile authority from those bounded approvals. The completed master plan's
+historical checkpoint authorization does not authorize unrelated Git
+mutations.

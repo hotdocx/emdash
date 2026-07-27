@@ -12686,6 +12686,30 @@ symbol sigma_map_transport_arrow [K : Cat] [E D : τ (Catd K)]
 	    u))
     (@sigma_transport_arrow K E x y p u);
 
+// Total functor induced by asymmetric family pullback.
+//
+// Surface/formula:
+//   sigma_pullback_total_func(F,D) : Sigma(F^*D) ⊢ Sigma(D)
+//   sigma_pullback_total_func(F,D)[(a,u)] = (F[a],u).
+//
+// This is the Grothendieck totalization of the already-active family
+// reindexing `Pullback_catd D F`. It is not a pullback constructor for
+// arbitrary functors between total categories.
+injective symbol sigma_pullback_total_func [A K : Cat]
+  (F : τ (Functor A K))
+  (D : τ (Catd K))
+  : τ (Functor
+      (@Sigma_cat A (@Pullback_catd A K D F))
+      (@Sigma_cat K D));
+
+// Object projection of pullback totalization: (a,u) ↦ (F[a],u).
+rule @fapp0
+      _
+      _
+      (@sigma_pullback_total_func $A $K $F _)
+      (Struct_sigma $a $u)
+  ↪ Struct_sigma (@fapp0 $A $K $F $a) $u;
+
 // 9c. Families over Sigma totals and displayed-transfor uncurrying
 //
 // Internalized-x prerequisite: Cat-valued family over a total category induced
@@ -15152,6 +15176,30 @@ rule @fapp1_fapp0 _ Cat_cat (@Pullback_catd $A $B $E $F) $a $a' $p
       (@fapp0 $A $B $F $a)
       (@fapp0 $A $B $F $a')
       (@fapp1_fapp0 $A $B $F $a $a' $p);
+
+// Structured-arrow projection of pullback totalization:
+//   (p,alpha) ↦ (F[p],alpha).
+//
+// This rule follows the capped Pullback_catd transport owner so the source
+// endpoint of alpha is already visible to subject reduction. Restricting the
+// argument to the canonical Sigma-arrow pair leaves arbitrary ordinary arrows
+// under the generic functor action.
+rule @fapp1_fapp0
+      _
+      _
+      (@sigma_pullback_total_func $A $K $F $D)
+      (Struct_sigma $a $u)
+      (Struct_sigma $b $v)
+      (Struct_sigma $p $alpha)
+  ↪ @sigma_arrow
+      $K
+      $D
+      (@fapp0 $A $K $F $a)
+      (@fapp0 $A $K $F $b)
+      $u
+      $v
+      (@fapp1_fapp0 $A $K $F $a $b $p)
+      $alpha;
 
 // Semantic curry sanity checks. These live after `Product_pair_tele_func`
 // computation rules, because the primary curry package is a definition through

@@ -77,14 +77,14 @@ const liveExpectations: readonly LiveExportExpectation[] = [
         moduleId: 'emdash.emdash3_2',
         file: 'emdash3_2.lp',
         sha256:
-            '355bd868c33553e0c7488a181d7c58661471fc2c878e63d5ceba296d26c056a0',
+            '61242c1a1c4c6fe032ff9d22ae7292556ff3abd41921ff79352642e3f1790000',
         imports: [],
         counts: {
             require: 0,
             flag: 5,
-            symbol: 757,
+            symbol: 758,
             inductive: 11,
-            rule: 597,
+            rule: 599,
             unif_rule: 61,
             builtin: 6,
             notation: 3,
@@ -92,10 +92,10 @@ const liveExpectations: readonly LiveExportExpectation[] = [
         },
         shape: {
             definitions: 479,
-            assumptions: 278,
+            assumptions: 279,
             protectedDefinitions: 0,
             tacticBodies: 0,
-            runtimeClauses: 633,
+            runtimeClauses: 635,
             constructors: 14
         }
     },

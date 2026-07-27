@@ -3753,8 +3753,16 @@ fibred-context sub-plan's corrected distinction between genuine dependency
 edges and independent siblings, its dependency-graph implementation ledger,
 its measured transparent-product transport gap, its total-category
 pullback non-assumption, its zero-warning-delta two-rule product proposal
-under pending D-DTTLF-USABILITY-004, and its zero-warning-delta asymmetric
-pullback-totalization owner proposal under pending D-DTTLF-USABILITY-005.
-Neither pending proposal authorizes an active Lambdapi owner/rule, the
-measured broader Sigma-introduction action, or a generic total pullback.
+approved under D-DTTLF-USABILITY-004, and its asymmetric
+pullback-totalization owner proposal approved under D-DTTLF-USABILITY-005.
+Preserve the completed FIBRED-COMPREHENSION-1A audited one-owner/two-rule
+kernel closure, generic TypeScript transfer, genuine dependent-chain
+consumer, further-family reindexing, and runnable demo. Warning comparisons
+are diagnostic rather than automatic design vetoes, and every prospective
+primitive must first be checked against active kernel constructions and
+Foundations. FIBRED-PRODUCT-1A is the next dependency-ready approved tranche;
+implement only its frozen two-rule existing-owner closure and first
+grouped-sibling transport. Neither approval authorizes the measured broader
+Sigma-introduction action, product structural maps, profile promotion, or a
+generic total pullback.
 ```

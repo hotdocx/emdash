@@ -23,6 +23,7 @@
     "demo:categorical-bracket": "node --require ts-node/register examples/v3_2_categorical_bracket_demo.ts",
     "demo:categorical-dependent": "node --require ts-node/register examples/v3_2_categorical_dependent_eta_demo.ts",
     "demo:categorical-dependent-composition": "node --require ts-node/register examples/v3_2_categorical_dependent_composition_demo.ts",
+    "demo:categorical-comprehension": "node --require ts-node/register examples/v3_2_categorical_comprehension_demo.ts",
     "check:scale-inventory": "timeout 60s env EMDASH_RUN_LAMBDAPI_SCALE_PROBES=1 node --require ts-node/register --test tests/v3_2_lambdapi_export_inventory_tests.ts tests/v3_2_lf_transfer_acquisition_tests.ts",
     "check:scale-phase-conformance": "timeout 60s env EMDASH_RUN_LAMBDAPI_SCALE_PROBES=1 node --require ts-node/register --test tests/v3_2_lf_transfer_mixed_tests.ts",
     "check:scale-proof-stress": "timeout 60s env EMDASH_RUN_LAMBDAPI_SCALE_PROOF_STRESS_PROBES=1 node --require ts-node/register --test tests/v3_2_scale_stress_2_representation_tests.ts",

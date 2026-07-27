@@ -17775,6 +17775,250 @@ assert [K : Cat] (E D : τ (Catd K)) (η : τ (Functord E D)) ⊢
     (@sigma_map_func K E D η)
     ≡ @Sigma_proj1_func K E;
 
+// A terminal section gives the first, transparent factor of contextual
+// pairing: A -> Sigma_A(const_A 1).
+symbol sigma_terminal_total_func_check
+  (A : Cat)
+  : τ (Functor
+      A
+      (@Sigma_cat A (@Const_catd A Terminal_cat)))
+≔ @Struct_sigma
+    (Obj (Functor_cat A A))
+    (λ _ : τ (Obj (Functor_cat A A)),
+      Obj (Functor_cat A Terminal_cat))
+    (@id_func A)
+    (@Const_func A Terminal_cat Terminal_obj);
+
+// Contextual pairing is not a second owner. It is the explicit composite of
+// terminal totalization, the fixed-base Sigma map, and pullback totalization.
+symbol contextual_pair_pullback_total_check
+  [A K : Cat]
+  (F : τ (Functor A K))
+  (E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat A (@Pullback_catd A K E F))))
+  : τ (Functor A (@Sigma_cat K E))
+≔ @comp_cat_fapp0
+    A
+    (@Sigma_cat A (@Pullback_catd A K E F))
+    (@Sigma_cat K E)
+    (@sigma_pullback_total_func A K F E)
+    (@comp_cat_fapp0
+      A
+      (@Sigma_cat A (@Const_catd A Terminal_cat))
+      (@Sigma_cat A (@Pullback_catd A K E F))
+      (@sigma_map_func
+        A
+        (@Const_catd A Terminal_cat)
+        (@Pullback_catd A K E F)
+        s)
+      (@sigma_terminal_total_func_check A));
+
+// Pullback totalization exposes exactly its base-changed dependent pair.
+assert [A K : Cat]
+  (F : τ (Functor A K))
+  (D : τ (Catd K))
+  (a : τ (Obj A))
+  (u : τ (Obj (Fibre_cat (@Pullback_catd A K D F) a))) ⊢
+  @fapp0
+    (@Sigma_cat A (@Pullback_catd A K D F))
+    (@Sigma_cat K D)
+    (@sigma_pullback_total_func A K F D)
+    (Struct_sigma a u)
+  ≡ @Struct_sigma
+      (Obj K)
+      (λ k : τ (Obj K), Obj (Fibre_cat D k))
+      (@fapp0 A K F a)
+      u;
+
+assert [A K : Cat]
+  (F : τ (Functor A K))
+  (D : τ (Catd K))
+  (a b : τ (Obj A))
+  (u : τ (Obj (Fibre_cat (@Pullback_catd A K D F) a)))
+  (v : τ (Obj (Fibre_cat (@Pullback_catd A K D F) b)))
+  (p : τ (Hom A a b))
+  (alpha : τ (Hom
+      (Fibre_cat D (@fapp0 A K F b))
+      (@fapp0
+        (Fibre_cat D (@fapp0 A K F a))
+        (Fibre_cat D (@fapp0 A K F b))
+        (@catd_transport_func
+          K D
+          (@fapp0 A K F a)
+          (@fapp0 A K F b)
+          (@fapp1_fapp0 A K F a b p))
+        u)
+      v)) ⊢
+  @fapp1_fapp0
+    (@Sigma_cat A (@Pullback_catd A K D F))
+    (@Sigma_cat K D)
+    (@sigma_pullback_total_func A K F D)
+    (Struct_sigma a u)
+    (Struct_sigma b v)
+    (@sigma_arrow
+      A
+      (@Pullback_catd A K D F)
+      a b u v p alpha)
+  ≡ @sigma_arrow
+      K
+      D
+      (@fapp0 A K F a)
+      (@fapp0 A K F b)
+      u
+      v
+      (@fapp1_fapp0 A K F a b p)
+      alpha;
+
+// The transparent contextual pair computes on both objects and base arrows.
+assert [A K : Cat]
+  (F : τ (Functor A K))
+  (E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat A (@Pullback_catd A K E F))))
+  (a : τ (Obj A)) ⊢
+  @fapp0
+    A
+    (@Sigma_cat K E)
+    (@contextual_pair_pullback_total_check A K F E s)
+    a
+  ≡ @Struct_sigma
+      (Obj K)
+      (λ k : τ (Obj K), Obj (Fibre_cat E k))
+      (@fapp0 A K F a)
+      (@piapp0 A (@Pullback_catd A K E F) s a);
+
+assert [A K : Cat]
+  (F : τ (Functor A K))
+  (E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat A (@Pullback_catd A K E F))))
+  (a b : τ (Obj A))
+  (p : τ (Hom A a b)) ⊢
+  @fapp1_fapp0
+    A
+    (@Sigma_cat K E)
+    (@contextual_pair_pullback_total_check A K F E s)
+    a b p
+  ≡ @sigma_arrow
+      K
+      E
+      (@fapp0 A K F a)
+      (@fapp0 A K F b)
+      (@piapp0 A (@Pullback_catd A K E F) s a)
+      (@piapp0 A (@Pullback_catd A K E F) s b)
+      (@fapp1_fapp0 A K F a b p)
+      (@piapp1_fapp0
+        A
+        (@Pullback_catd A K E F)
+        s
+        a b p);
+
+// Substitution of a further genuinely dependent family computes at objects.
+assert [A K : Cat]
+  (F : τ (Functor A K))
+  (E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat A (@Pullback_catd A K E F))))
+  (D : τ (Catd (@Sigma_cat K E)))
+  (a : τ (Obj A)) ⊢
+  @Fibre_cat
+    A
+    (@Pullback_catd
+      A
+      (@Sigma_cat K E)
+      D
+      (@contextual_pair_pullback_total_check A K F E s))
+    a
+  ≡ @Fibre_cat
+      (@Sigma_cat K E)
+      D
+      (@Struct_sigma
+        (Obj K)
+        (λ k : τ (Obj K), Obj (Fibre_cat E k))
+        (@fapp0 A K F a)
+        (@piapp0 A (@Pullback_catd A K E F) s a));
+
+// The same substitution retains the further family's directed arrow action.
+assert [A K : Cat]
+  (F : τ (Functor A K))
+  (E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat A (@Pullback_catd A K E F))))
+  (D : τ (Catd (@Sigma_cat K E)))
+  (a b : τ (Obj A))
+  (p : τ (Hom A a b)) ⊢
+  @fapp1_fapp0
+    A
+    Cat_cat
+    (@Pullback_catd
+      A
+      (@Sigma_cat K E)
+      D
+      (@contextual_pair_pullback_total_check A K F E s))
+    a b p
+  ≡ @fapp1_fapp0
+      (@Sigma_cat K E)
+      Cat_cat
+      D
+      (@Struct_sigma
+        (Obj K)
+        (λ k : τ (Obj K), Obj (Fibre_cat E k))
+        (@fapp0 A K F a)
+        (@piapp0 A (@Pullback_catd A K E F) s a))
+      (@Struct_sigma
+        (Obj K)
+        (λ k : τ (Obj K), Obj (Fibre_cat E k))
+        (@fapp0 A K F b)
+        (@piapp0 A (@Pullback_catd A K E F) s b))
+      (@sigma_arrow
+        K
+        E
+        (@fapp0 A K F a)
+        (@fapp0 A K F b)
+        (@piapp0 A (@Pullback_catd A K E F) s a)
+        (@piapp0 A (@Pullback_catd A K E F) s b)
+        (@fapp1_fapp0 A K F a b p)
+        (@piapp1_fapp0
+          A
+          (@Pullback_catd A K E F)
+          s
+          a b p));
+
+// First projection computes pointwise, but no whole-functor beta is added.
+assert [A K : Cat]
+  (F : τ (Functor A K))
+  (E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat A (@Pullback_catd A K E F))))
+  (a : τ (Obj A)) ⊢
+  @fapp0
+    A
+    K
+    (@comp_cat_fapp0
+      A
+      (@Sigma_cat K E)
+      K
+      (@Sigma_proj1_func K E)
+      (@contextual_pair_pullback_total_check A K F E s))
+    a
+  ≡ @fapp0 A K F a;
+
+assertnot [A K : Cat]
+  (F : τ (Functor A K))
+  (E : τ (Catd K))
+  (s : τ (Obj (@Pi_cat A (@Pullback_catd A K E F)))) ⊢
+  @comp_cat_fapp0
+    A
+    (@Sigma_cat K E)
+    K
+    (@Sigma_proj1_func K E)
+    (@contextual_pair_pullback_total_check A K F E s)
+  ≡ F;
+
+// An arbitrary total functor does not collapse to the new stable owner.
+assertnot [A K : Cat]
+  (F : τ (Functor A K))
+  (D : τ (Catd K))
+  (G : τ (Functor
+      (@Sigma_cat A (@Pullback_catd A K D F))
+      (@Sigma_cat K D))) ⊢
+  G ≡ @sigma_pullback_total_func A K F D;
+
 assert [K : Cat] (E : τ (Catd K))
   (s : τ (Obj (Pi_cat E)))
   (x : τ (Obj K)) ⊢

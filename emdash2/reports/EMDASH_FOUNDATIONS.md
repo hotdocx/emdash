@@ -1214,11 +1214,35 @@ section_total(s)(k) = (k, s[k])
 π₁ ∘ section_total(s) = id_K
 ```
 
-This construction is not currently exposed as a named primitive in v3.2. It is
-a useful future facade: it would let section action be understood through the
-same Sigma-category infrastructure used for total-category arrows. The current
-implementation instead exposes the direct section action `s[f]`, with the
-dependent hom construction as the shared internal architecture.
+The named `section_total` facade is not currently exposed as a primitive in
+v3.2, but its construction is no longer semantically missing. A transparent
+terminal-total functor
+
+```text
+K → Σ_K Const_K(1)
+```
+
+followed by `sigma_map_func(s)` gives the section totalization. More
+generally, for `F : A → K` and `D : Catd(K)`, the active owner
+
+```text
+sigma_pullback_total_func(F,D) : Σ_A(F^*D) → Σ_K D
+```
+
+computes on both levels:
+
+```text
+(a,u)       ↦ (F[a],u)
+(p,alpha)   ↦ (F[p],alpha).
+```
+
+Thus a contextual pair over `F` is expressed transparently as terminal
+totalization, then `sigma_map_func(s)` into `Σ_A(F^*D)`, then
+`sigma_pullback_total_func(F,D)`. This is the Grothendieck totalization of the
+existing asymmetric family reindexing `Pullback_catd D F`; it is not a
+pullback constructor for arbitrary functors between total categories. The
+direct section action `s[f]` remains available, with the dependent hom
+construction as the shared internal architecture.
 
 ## 8. Arrows Between Sections
 
@@ -1332,9 +1356,10 @@ or, unfolded:
 s[f] : Hom_{E[y]}(E[f](s[x]), s[y])
 ```
 
-A future named `section_total(s) : K → Σ_K E` would make this sharing more
-visible at the presentation level, but the common core is already the
-dependent-hom construction.
+A future named `section_total(s) : K → Σ_K E` facade would make this sharing
+more visible at the presentation level, but its transparent total-category
+construction and the more general base-change totalization are active. The
+common arrow core remains the dependent-hom construction.
 
 ## 10. Mixed-Variance Families
 
@@ -2470,7 +2495,10 @@ The current foundations intentionally do not yet include:
 - dependent join elimination or a semantic collage construction;
 - a finalized surface syntax for the future proof assistant;
 - full coherence APIs for every Sigma/Pi helper;
-- a named `section_total(s) : K → Σ_K E` construction and its projection laws;
+- a named `section_total(s) : K → Σ_K E` presentation facade and packaged
+  projection laws; its transparent terminal-total/`sigma_map_func`
+  construction and the general
+  `sigma_pullback_total_func(F,D) : Σ_A(F^*D) → Σ_K D` are active;
 - full product/curry adjunction coherence for `Product_cat`, beyond the
   current product normal form, projection computation, and functor-level
   curry/uncurry action laws;
@@ -2529,6 +2557,7 @@ vocabulary.
 | `const_section_{K,A}(p)` | `Const_transfd K A p` |
 | `Σ_k E[k]` | `Sigma_cat E` |
 | `(k,u)` | `Struct_sigma k u` |
+| `Σ_A(F^*D) → Σ_K D` | `sigma_pullback_total_func F D` |
 | `{src,dst : A; witness : src = dst}` | `PathRecord_grpd A` / `Struct_path_record` |
 | shaped paths of dependent records | `PathRecordPathView A r s` / `PathRecordPathRefl A r` |
 | source/dependent-tail path observers | `path_record_path_src` / `path_record_path_tail` |
@@ -2558,7 +2587,7 @@ vocabulary.
 | `PathInd_transfd(Z)` | `PathInd_transfd Z` |
 | `Sigma_transfd_funcd(eta)` | `Sigma_transfd_funcd eta` |
 | Sigma-total path induction | `PathInd_funcd Z` |
-| `section_total(s)` | future presentation-level facade; not currently named |
+| `section_total(s)` | future named facade; transparently expressible through terminal totalization and `sigma_map_func(s)` |
 | `K × A` | `Product_cat K A`; also the normal form of `Sigma_cat(Const_catd K A)` |
 | `π₁ : K × A → K` | `Product_projL_func K A` |
 | `π₂ : K × A → A` | `Product_projR_func K A` |
