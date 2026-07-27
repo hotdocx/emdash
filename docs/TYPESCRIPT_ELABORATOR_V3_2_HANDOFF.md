@@ -65,10 +65,14 @@ indexed classifiers and generic `comp_fapp0` at `Catd_cat K`; it introduces
 no new Lambdapi mathematical owner/rule and authorizes no general dependent
 bracket or automatic follow-on. The user has since explicitly selected the
 dedicated fibred-context continuation: its generic locally nameless
-dependency graph foundation FIBRED-CONTEXT-0A is complete, and its bounded
+dependency graph foundation FIBRED-CONTEXT-0A and categorical representation
+adapter FIBRED-CONTEXT-0B are complete. The latter records genuine chains,
+sequential pullbacks, independent sibling grouping, and a zero-owner product
+boundary without changing the ordinary or D-003 lowerers. Its bounded
 product probe shows that the transparent uncurried family product computes
-fibres but not base-arrow transport. The exact product owner/action decision
-therefore remains behind H-DTTLF-USABILITY-02.
+fibres but not base-arrow transport. FIBRED-PRODUCT-0B is therefore the next
+comparison, and the exact product owner/action decision remains behind
+H-DTTLF-USABILITY-02.
 Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly

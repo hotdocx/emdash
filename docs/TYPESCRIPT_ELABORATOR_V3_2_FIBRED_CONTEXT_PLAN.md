@@ -10,9 +10,9 @@ USABILITY-DEPENDENT-1A
 Status: active implementation sub-plan; the corrected architectural direction
 is user-accepted, FIBRED-PLAN-0 and the read-only FIBRED-PRODUCT-0A authority
 probe are complete, FIBRED-CONTEXT-0A's dependency-analysis foundation is
-complete, FIBRED-CONTEXT-0B is the next dependency-ready implementation
-slice, and any new Lambdapi mathematical owner or rule remains behind
-H-DTTLF-USABILITY-02
+complete, FIBRED-CONTEXT-0B's categorical representation adapter is complete,
+FIBRED-PRODUCT-0B is the next dependency-ready comparison, and any new
+Lambdapi mathematical owner or rule remains behind H-DTTLF-USABILITY-02
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -513,7 +513,7 @@ usability profile.
 | FIBRED-PLAN-0 | complete | accepted consolidated review | This dedicated plan records the dependency-edge/sibling correction, the two-foundation architecture, displayed-binder semantics, product and total-category boundaries, qualification corpus, gates, and persistent launch prompt |
 | FIBRED-PRODUCT-0A | complete; ignored read-only probe | active v3.2 product, uncurry, Catd, and composition owners | The transparent `uncurry(Product_cat_func) ∘ ⟨B,C⟩` candidate computes to pointwise product fibres but deliberately does not compute its base-arrow transport to `Product_map_func`; no active source, owner, rule, or catalog changed |
 | FIBRED-CONTEXT-0A | complete | FIBRED-PLAN-0 | Added backend-neutral dependency-graph inspection for persistent Core telescopes: dependencies are recovered beneath internal binders; direct/closure/prefix data, shared-base versus weakened siblings, genuine edges, exchange suffix transport, owner-neutral usage planning, exact provenance, fail-closed errors, immutability, and six focused tests are green |
-| FIBRED-CONTEXT-0B | pending | FIBRED-CONTEXT-0A | Adapt the general dependency evidence to categorical contextual slots without changing completed ordinary and D-003 behavior; represent sequential sibling pullbacks and grouped-product intent explicitly |
+| FIBRED-CONTEXT-0B | complete | FIBRED-CONTEXT-0A | Adapted the generic graph to categorical contextual slots through explicit locally nameless classifier references; represents genuine edges/chains, direct versus pullback-then-Sigma sequential extension, shared-base versus weakened sibling groups, grouped displayed-product structural intent, exact errors/provenance, and a zero-owner boundary without changing completed ordinary or D-003 behavior |
 | FIBRED-PRODUCT-0B | pending | FIBRED-PRODUCT-0A, concrete first categorical consumer | Compare the generic-product-higher-action, stable-`Product_catd`, and narrow-hybrid owner positions in a bounded full-file probe; specify exact type, fibre/transport/projection consumers, non-collapse, higher-action boundary, rule orientation, warnings, and critical-pair risks |
 | FIBRED-PRODUCT-1A | blocked on H-DTTLF-USABILITY-02 if a new owner/rule is selected | FIBRED-PRODUCT-0B and human approval | Implement only the approved active Lambdapi product package, synchronize checks/catalog/health, transfer the minimal exact closure through generic TypeScript mechanisms, and preserve frozen profiles |
 | FIBRED-STRUCTURE-1 | pending | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A or a proved existing-owner derivation | Lower displayed projection, pairing, swap, diagonal, and reindexing stability for independent siblings with positive, negative, and higher-action evidence |
@@ -587,6 +587,75 @@ This slice emits no categorical owner, changes no runtime/profile semantics,
 and does not claim that the categorical surface already stores the new graph.
 That adaptation is exactly FIBRED-CONTEXT-0B.
 
+## FIBRED-CONTEXT-0B Completion Record
+
+The categorical adapter now turns first-order contextual classifier syntax
+into the same generic dependency graph used by persistent outer-LF Core:
+
+- categorical classifier references are nearest-first locally nameless
+  indices with source provenance, not caller-maintained dependency flags;
+- the generic graph constructor validates that every occurrence points
+  strictly backward, merges repeated evidence, and derives direct
+  dependencies, transitive closure, and the least ordered dependency prefix;
+- closed slots and displayed-family applications are retained as distinct
+  classifiers, while the already implemented one-index
+  `indexed-object` classifier has an explicit compatibility adapter;
+- sequential planning distinguishes direct Sigma extension from a family
+  that must first be pulled back past intervening independent slots;
+- grouping distinguishes siblings with the same minimal dependency base from
+  independent factors needing weakening to a common base, and retains
+  projection, pairing, exchange, and diagonal intent; and
+- every grouped product remains explicitly
+  `representation-only-owner-unqualified`: its semantic candidate name is
+  `Product_catd`, but `selectedCoreOwner` is `null`, emitted-owner count is
+  zero, and generic total-category pullback is false.
+
+The executable corpus uses:
+
+```text
+Γ, a : A, b : B(a), c : C(a), d : D(b,c).
+```
+
+It records the sequential pullback of `C` past `b`, recognizes `b,c` as
+shared-base siblings, records the grouped pointwise-product and
+componentwise-base-arrow obligations, and rejects grouping `c,d` at the
+exact occurrence where `D` depends on `c`. A second case recognizes a
+constant displayed factor as independent only after weakening. Escaping
+indices and incompatible base categories fail closed.
+
+Implementation:
+`src/v3_2/context_dependencies.ts`,
+`src/v3_2/categorical_context_dependencies.ts`, and
+`tests/v3_2_categorical_context_dependency_tests.ts`.
+
+Validation:
+
+```text
+./scripts/pnpmw run typecheck
+  passed
+
+./scripts/pnpmw run lint
+  passed
+
+node --require ts-node/register --test \
+  tests/v3_2_context_dependency_tests.ts \
+  tests/v3_2_categorical_context_dependency_tests.ts
+  13 passed, 0 failed
+
+./scripts/pnpmw run check:ts
+  694 tests, 652 passed, 42 opt-in skipped, 0 failed
+
+./scripts/pnpmw run check:all
+  passed, including 19 mandatory live differential tests,
+  41 active Lambdapi kernel/example files, warning/LHS/catalog/health,
+  print, book, and reference gates
+```
+
+This is an inspectable planning boundary, not a new surface elaboration
+claim. The completed ordinary bracket and D-003 `FF[k](s[k])` lowerers are
+unchanged. Concrete displayed product and contextual Sigma owners are
+selected only by the subsequent authority-qualified rows.
+
 ## Human Review Gates
 
 ### Existing H-DTTLF-USABILITY-02 — New Mathematical Owner Or Rule
@@ -627,7 +696,7 @@ an explicit unsupported-action table, and separate statements about:
 
 ## Acceptance And Validation Policy
 
-FIBRED-CONTEXT-0A is complete only when:
+FIBRED-CONTEXT-0A and FIBRED-CONTEXT-0B are complete only when:
 
 1. dependencies are derived from stored locally nameless Core rather than
    user-maintained duplicate flags;
@@ -638,7 +707,9 @@ FIBRED-CONTEXT-0A is complete only when:
    unqualified categorical owner;
 5. invalid positions/counts fail closed;
 6. all public records and arrays are immutable; and
-7. focused tests plus `./scripts/pnpmw run check:ts` pass.
+7. the categorical adapter retains sequential pullback and grouped-product
+   obligations while emitting no unapproved owner; and
+8. focused tests plus `./scripts/pnpmw run check:ts` pass.
 
 Any active Lambdapi edit follows `emdash2/AGENTS.md` and the current v3.2 SOP:
 intended-owner full-file probe, positive and negative consumers, bounded
@@ -766,3 +837,10 @@ conformance, and CI obligations.
   with sibling/edge, weakening, exchange-suffix, and structural-use analysis.
   Six focused tests distinguish the accepted sibling and rejected chain
   examples without emitting or selecting a displayed product owner.
+- **2026-07-27 — FIBRED-CONTEXT-0B completed.** Generalized the dependency
+  graph over syntax-specific binding evidence and adapted categorical
+  contextual classifiers to it. Seven focused cases now preserve genuine
+  chains, sequential pullback intent, shared-base and weakened sibling
+  grouping, structural obligations, provenance, immutability, and the
+  explicit zero-owner/zero-total-pullback boundary. FIBRED-PRODUCT-0B is now
+  the next comparison row.

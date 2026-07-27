@@ -22,10 +22,17 @@ export interface CoreContextDirectDependency {
     readonly occurrences: readonly Provenance[];
 }
 
-export interface CoreContextDependencyNode {
+export interface CoreDependencyGraphBinding {
+    readonly name: string;
+    readonly provenance: Provenance;
+}
+
+export interface CoreContextDependencyNode<
+    TBinding extends CoreDependencyGraphBinding = CoreLocalBinding
+> {
     readonly position: number;
     readonly name: string;
-    readonly binding: CoreLocalBinding;
+    readonly binding: TBinding;
     readonly directDependencies:
         readonly CoreContextDirectDependency[];
     readonly dependencyClosure: readonly number[];
@@ -36,15 +43,27 @@ export interface CoreContextDependencyNode {
     readonly dependencyPrefix: number;
 }
 
-export interface CoreContextDependencyGraph {
-    readonly context: CoreContext;
-    readonly nodes: readonly CoreContextDependencyNode[];
+export interface CoreContextDependencyGraph<
+    TContext = CoreContext,
+    TBinding extends CoreDependencyGraphBinding = CoreLocalBinding
+> {
+    readonly context: TContext;
+    readonly nodes: readonly CoreContextDependencyNode<TBinding>[];
+}
+
+export interface CoreDependencyGraphSlotEvidence<
+    TBinding extends CoreDependencyGraphBinding
+> {
+    readonly binding: TBinding;
+    readonly directDependencies:
+        readonly CoreContextDirectDependency[];
 }
 
 export type CoreContextDependencyAnalysisErrorCode =
     | 'INVALID_CONTEXT_POSITION'
     | 'INVALID_SIBLING_BLOCK'
-    | 'INVALID_CONTEXT_USE_COUNT';
+    | 'INVALID_CONTEXT_USE_COUNT'
+    | 'INVALID_DIRECT_DEPENDENCY';
 
 export class CoreContextDependencyAnalysisError extends Error {
     constructor(
@@ -81,10 +100,10 @@ const dependencyPrefix = (
     : positions[positions.length - 1] + 1;
 
 const nodeAt = (
-    graph: CoreContextDependencyGraph,
+    graph: CoreContextDependencyGraph<unknown, CoreDependencyGraphBinding>,
     position: number,
     operationProvenance: Provenance
-): CoreContextDependencyNode => {
+): CoreContextDependencyNode<CoreDependencyGraphBinding> => {
     if (
         Number.isSafeInteger(position) &&
         position >= 0 &&
@@ -101,26 +120,61 @@ const nodeAt = (
 };
 
 /**
- * Recover direct and transitive dependencies from stored binding types.
+ * Build the common dependency graph from syntax-specific direct evidence.
  *
- * Positions are outermost-first. No caller-maintained dependency flags are
- * trusted or duplicated.
+ * The caller owns syntax traversal; this function validates that every
+ * locally nameless dependency points strictly backward, groups repeated
+ * occurrences, and computes the transitive closure and least ordered prefix.
  */
-export const coreContextDependencyGraph = (
-    context: CoreContext
-): CoreContextDependencyGraph => {
-    const nodes: CoreContextDependencyNode[] = [];
+export const coreDependencyGraphFromSlotEvidence = <
+    TContext,
+    TBinding extends CoreDependencyGraphBinding
+>(
+    context: TContext,
+    slots: readonly CoreDependencyGraphSlotEvidence<TBinding>[]
+): CoreContextDependencyGraph<TContext, TBinding> => {
+    const nodes: CoreContextDependencyNode<TBinding>[] = [];
 
-    context.telescope.forEach((binding, position) => {
-        const directDependencies = kernelAmbientDependencies(
-            binding.type,
-            position
-        ).map(dependency =>
-            Object.freeze({
-                position: position - dependency.index - 1,
-                occurrences: dependency.occurrences
-            })
-        ).sort((left, right) => left.position - right.position);
+    slots.forEach((slot, position) => {
+        const grouped = new Map<number, Provenance[]>();
+        for (const dependency of slot.directDependencies) {
+            if (
+                !Number.isSafeInteger(dependency.position) ||
+                dependency.position < 0 ||
+                dependency.position >= position ||
+                dependency.occurrences.length === 0
+            ) {
+                throw new CoreContextDependencyAnalysisError(
+                    'INVALID_DIRECT_DEPENDENCY',
+                    dependency.occurrences[0] ??
+                        slot.binding.provenance,
+                    `Dependency evidence for context slot ` +
+                    `'${slot.binding.name}' at position ${position} must ` +
+                    `refer to an earlier position and retain at least one ` +
+                    `source occurrence; received position ` +
+                    `${dependency.position}`
+                );
+            }
+            const existing = grouped.get(dependency.position);
+            if (existing) {
+                existing.push(...dependency.occurrences);
+            } else {
+                grouped.set(
+                    dependency.position,
+                    [...dependency.occurrences]
+                );
+            }
+        }
+        const directDependencies = Object.freeze(
+            [...grouped.entries()]
+                .sort(([left], [right]) => left - right)
+                .map(([dependencyPosition, occurrences]) =>
+                    Object.freeze({
+                        position: dependencyPosition,
+                        occurrences: Object.freeze([...occurrences])
+                    })
+                )
+        );
 
         const closure = sortedUnique(
             directDependencies.flatMap(dependency => [
@@ -131,9 +185,9 @@ export const coreContextDependencyGraph = (
 
         nodes.push(Object.freeze({
             position,
-            name: binding.name,
-            binding,
-            directDependencies: Object.freeze(directDependencies),
+            name: slot.binding.name,
+            binding: slot.binding,
+            directDependencies,
             dependencyClosure: closure,
             dependencyPrefix: dependencyPrefix(closure)
         }));
@@ -144,6 +198,28 @@ export const coreContextDependencyGraph = (
         nodes: Object.freeze(nodes)
     });
 };
+
+/**
+ * Recover direct and transitive dependencies from stored Core binding types.
+ *
+ * Positions are outermost-first. No caller-maintained dependency flags are
+ * trusted or duplicated.
+ */
+export const coreContextDependencyGraph = (
+    context: CoreContext
+): CoreContextDependencyGraph => coreDependencyGraphFromSlotEvidence(
+    context,
+    context.telescope.map((binding, position) => ({
+        binding,
+        directDependencies: kernelAmbientDependencies(
+            binding.type,
+            position
+        ).map(dependency => ({
+            position: position - dependency.index - 1,
+            occurrences: dependency.occurrences
+        }))
+    }))
+);
 
 export type CoreAdjacentContextExchangeAnalysis =
     | {
@@ -171,8 +247,11 @@ export type CoreAdjacentContextExchangeAnalysis =
  * A permitted exchange still records later classifiers that depend on either
  * slot and therefore need transport through the permutation.
  */
-export const analyzeCoreAdjacentContextExchange = (
-    graph: CoreContextDependencyGraph,
+export const analyzeCoreAdjacentContextExchange = <
+    TContext,
+    TBinding extends CoreDependencyGraphBinding
+>(
+    graph: CoreContextDependencyGraph<TContext, TBinding>,
     olderPosition: number,
     operationProvenance: Provenance
 ): CoreAdjacentContextExchangeAnalysis => {
@@ -265,8 +344,11 @@ export type CoreContextSiblingBlockAnalysis =
  * The result records semantic intent only. A later categorical lowerer must
  * supply active displayed product/projection/action owners.
  */
-export const analyzeCoreContextSiblingBlock = (
-    graph: CoreContextDependencyGraph,
+export const analyzeCoreContextSiblingBlock = <
+    TContext,
+    TBinding extends CoreDependencyGraphBinding
+>(
+    graph: CoreContextDependencyGraph<TContext, TBinding>,
     positions: readonly number[],
     operationProvenance: Provenance
 ): CoreContextSiblingBlockAnalysis => {
@@ -365,8 +447,11 @@ export interface CoreContextSlotUsePlan {
  * This is deliberately owner-neutral: categorical projection/diagonal
  * selection remains a later authority-backed lowering step.
  */
-export const planCoreContextSlotUse = (
-    graph: CoreContextDependencyGraph,
+export const planCoreContextSlotUse = <
+    TContext,
+    TBinding extends CoreDependencyGraphBinding
+>(
+    graph: CoreContextDependencyGraph<TContext, TBinding>,
     position: number,
     count: number,
     operationProvenance: Provenance
