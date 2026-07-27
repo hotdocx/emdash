@@ -42,6 +42,7 @@ export * from './categorical_surface_spec';
 export * from './categorical_surface';
 export * from './categorical_context_dependencies';
 export * from './categorical_fibred_product_proposal';
+export * from './categorical_comprehension_proposal';
 export * from './categorical_structural_transfer';
 export * from './categorical_dependent_transfer';
 export * from './categorical_dependent_composition_transfer';

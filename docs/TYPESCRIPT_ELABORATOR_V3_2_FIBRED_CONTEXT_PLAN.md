@@ -13,8 +13,12 @@ probe are complete, FIBRED-CONTEXT-0A's dependency-analysis foundation is
 complete, FIBRED-CONTEXT-0B's categorical representation adapter is complete,
 FIBRED-PRODUCT-0B's three-way owner-position comparison and immutable proposal
 are complete, FIBRED-PRODUCT-1A awaits the exact
-H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 decision, and no proposed Lambdapi
-rule is active before that approval
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 decision,
+FIBRED-COMPREHENSION-0A/0B's semantic audit, three-way owner-position
+comparison, and immutable proposal are complete,
+FIBRED-COMPREHENSION-1A awaits the separate exact
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 decision, and no proposed Lambdapi
+owner or rule is active before its corresponding approval
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -448,6 +452,239 @@ transferring their minimal closure, and lowering the first grouped-sibling
 transport are FIBRED-PRODUCT-1A and require
 H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 approval.
 
+## Comprehension And Contextual Pairing Owner Audit
+
+FIBRED-COMPREHENSION-0A/0B has now isolated the missing computational
+boundary for a genuinely dependent context extension. For:
+
+```text
+F : Functor A K
+E : Catd K
+s : Obj(Pi_cat(Pullback_catd E F)),
+```
+
+the desired contextual substitution is:
+
+```text
+⟨F,s⟩ : Functor A (Sigma_cat E)
+⟨F,s⟩[a] = (F[a],s[a])
+⟨F,s⟩[p] = (F[p],s[p]).
+```
+
+This is the categorical comprehension map needed to substitute both objects
+and arrows into a further family:
+
+```text
+D : Catd (Sigma_cat E)
+Pullback_catd D ⟨F,s⟩ : Catd A.
+```
+
+### Active ingredients and the exact missing boundary
+
+The active kernel already provides:
+
+- `Pullback_catd E F`, the asymmetric reindexing of a family;
+- `Pullback_catd_func F`, its family-level functor;
+- `sigma_map_func η`, the total map of a displayed functor over one fixed
+  base;
+- `Sigma_cat E` and `Sigma_proj1_func E`;
+- `section_pullback_func F E`; and
+- `sigma_intro_transf E`, the fibrewise inclusion into the constant total
+  category.
+
+Those ingredients establish the semantic shape, but they do not provide the
+base-changing total map:
+
+```text
+Sigma_cat(Pullback_catd D F) -> Sigma_cat D.
+```
+
+That map is the Grothendieck totalization of the already-active asymmetric
+family pullback. It is **not** a pullback of arbitrary total-category
+functors and does not introduce a generic categorical pullback.
+
+### FIBRED-COMPREHENSION-0A semantic route
+
+A zero-owner route can be typed using the pullback of
+`sigma_intro_transf E` and the section `s`. It is useful semantic evidence:
+
+```text
+pullback_F(sigma_intro_transf E) ∘ s
+  : Functor A (Sigma_cat E).
+```
+
+Under the current reductions, however, its ordinary consumers remain stuck:
+
+- object evaluation does not expose `(F[a],s[a])`;
+- arrow evaluation does not expose `(F[p],s[p])`;
+- an explicit constant-family displayed component folds back to the same
+  stuck ordinary evaluation; and
+- first projection does not expose `F`.
+
+It therefore cannot serve as the computational elaboration target for the
+first end-user dependent chain without adding a broader commuting-conversion
+closure.
+
+### FIBRED-COMPREHENSION-0B three-way comparison
+
+The full-file owner-position comparison measured:
+
+| Candidate | New declarations/rules | Consumer result | Warning inventory |
+| --- | --- | --- | --- |
+| semantic Sigma-introduction composite | 0 declarations, 0 rules | type correct, but object, arrow, substitution, and projection consumers remain stuck | `1010/159`, delta `0/0` |
+| direct specialized `sigma_pair_func(F,E,s)` | 1 declaration, 3 runtime rules | object, arrow, substitution, and whole first projection compute | `1012/159`, delta `+2/0` |
+| asymmetric pullback-total owner | 1 declaration, 2 runtime rules | object, arrow, pointwise projection, and object/arrow substitution compute through a transparent contextual-pair composite | `1010/159`, delta `0/0` |
+
+The direct pair's arbitrary-arrow rule intersects the generic identity action
+in two unjoined cuts. More importantly, a dedicated pair owner packages one
+special consumer instead of exposing the reusable base-change operation that
+also applies to later substitutions and displayed constructions.
+
+The selected prospective owner is:
+
+```text
+injective symbol sigma_pullback_total_func [A K : Cat]
+  (F : Functor A K)
+  (D : Catd K)
+  : Functor
+      (Sigma_cat (Pullback_catd D F))
+      (Sigma_cat D).
+```
+
+It requests exactly two runtime projections:
+
+```text
+sigma_pullback_total_func(F,D)[(a,u)]
+  -> (F[a],u)
+
+sigma_pullback_total_func(F,D)[(p,alpha)]
+  -> (F[p],alpha).
+```
+
+The object rule owns total-object evaluation near the Sigma-map package. The
+structured-arrow rule is placed after the active capped
+`Pullback_catd` transport rule; placing it before that cut failed subject
+reduction because the source endpoint was not yet computationally visible.
+Its left-hand side is restricted to a structured Sigma arrow, so it does not
+compete with arbitrary ordinary arrows.
+
+### Transparent contextual pairing
+
+No dedicated contextual-pair owner is required. Define the pair as the
+following explicit three-factor composite:
+
+```text
+A
+  -> Sigma_cat(Const_catd A Terminal_cat)
+  -> Sigma_cat(Pullback_catd E F)
+  -> Sigma_cat E.
+```
+
+The factors are:
+
+```text
+terminal_total_A
+  := Struct_sigma
+       (id_func A)
+       (Const_func A Terminal_cat Terminal_obj)
+
+sigma_map_func(s)
+
+sigma_pullback_total_func(F,E).
+```
+
+This reuses `sigma_map_func` for the section's same-base lax displayed action
+and uses the new owner only for base change. The resulting composite computes:
+
+```text
+⟨F,s⟩[a] = (F[a],s[a])
+⟨F,s⟩[p] = sigma_arrow(E,F[p],s[p]).
+```
+
+For every further `D : Catd(Sigma_cat E)`, both selected substitution
+consumers compute:
+
+```text
+(Pullback_catd D ⟨F,s⟩)[a]
+  = D[(F[a],s[a])]
+
+(Pullback_catd D ⟨F,s⟩)[p]
+  = D[(F[p],s[p])].
+```
+
+First projection computes pointwise. The whole-functor equation:
+
+```text
+Sigma_proj1_func(E) ∘ ⟨F,s⟩ = F
+```
+
+is deliberately **not** added as a runtime beta in this tranche. An opaque
+total functor also does not collapse to the proposed owner.
+
+### Sigma-introduction arrow action remains separate
+
+The deferred direct component action:
+
+```text
+sigma_intro_tapp0_func(E,k)[alpha]
+  -> sigma_arrow(E,id_k,alpha)
+```
+
+is not needed by the selected contextual-pair factorization. A separate
+full-file subexperiment made that rule compute but changed the inventory from
+`1010/159` to `1020/160`: ten new critical pairs and one replaceable pattern.
+The overlaps cover generic identity action, off-diagonal naturality,
+precomposition, postcomposition, and composition/higher action.
+
+That evidence does not say the mathematical action is invalid. It says its
+runtime closure is substantially broader than the first comprehension
+consumer and must be qualified separately. It is not bundled into
+D-DTTLF-USABILITY-005.
+
+### Architectural consequence and remaining boundary
+
+This result is stronger than a one-off demo:
+
+- the frontend dependency graph supplies the general telescope shape;
+- active `Pullback_catd` supplies substitution of families;
+- active `sigma_map_func` supplies fixed-base totalization;
+- the proposed pullback-total owner supplies the one missing base-change
+  boundary; and
+- contextual pairing remains a backend-neutral explicit Core composite.
+
+The design is therefore mechanically reusable for arbitrary first-order
+genuine dependent chains at the object/base-arrow level. It does not yet
+graduate all displayed binding: displayed product structural maps,
+full higher-cell action, direct `:^fd`/`:^nd` abstraction, the deferred
+Sigma-introduction action, and groupoidal closure remain later rows.
+FIBRED-PRODUCT's D-004 decision remains independent; after both approved
+implementations, grouped siblings and sequential comprehension can compose
+without assuming a total-category pullback.
+
+The final selected quiet and warning-enabled probes pass with strict LHS
+audit `0/45/27`. The relevant ignored evidence is:
+
+```text
+emdash2/tmp/probes/
+  typescript_usability_fibred_comprehension_0a.lp
+  typescript_usability_fibred_comprehension_0b_direct_pair.lp
+  typescript_usability_fibred_comprehension_0b_base_change.lp
+
+emdash2/logs/probes/
+  typescript_usability_fibred_comprehension_0b_direct_pair-20260727-181305.log
+  typescript_usability_fibred_comprehension_0b_direct_pair-20260727-181314.log
+  typescript_usability_fibred_comprehension_0b_base_change-20260727-181402.log
+  typescript_usability_fibred_comprehension_0b_base_change-20260727-181411.log
+```
+
+These ignored files are experiment evidence, not authority. The durable,
+deep-frozen, non-authorizing proposal is
+`src/v3_2/categorical_comprehension_proposal.ts`; its focused tests are in
+`tests/v3_2_categorical_comprehension_proposal_tests.ts`.
+
+The selection is exact but not active. FIBRED-COMPREHENSION-1A requires
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 approval.
+
 ## Total-Category Comparison Is A Theorem Boundary, Not An Assumed Rewrite
 
 The semantic slogan:
@@ -645,11 +882,14 @@ usability profile.
 | FIBRED-CONTEXT-0B | complete | FIBRED-CONTEXT-0A | Adapted the generic graph to categorical contextual slots through explicit locally nameless classifier references; represents genuine edges/chains, direct versus pullback-then-Sigma sequential extension, shared-base versus weakened sibling groups, grouped displayed-product structural intent, exact errors/provenance, and a zero-owner boundary without changing completed ordinary or D-003 behavior |
 | FIBRED-PRODUCT-0B | complete; immutable proposal awaits D-DTTLF-USABILITY-004 | FIBRED-PRODUCT-0A, concrete first categorical consumer | Compared broad generic, stable-head, and narrow shared-base existing-owner routes in full-file probes. Selected the zero-warning-delta transparent semantic family plus exactly two existing-owner runtime projections; froze positive/negative conversions, higher-action limits, no-owner/no-total-pullback boundary, and the exact human decision |
 | FIBRED-PRODUCT-1A | blocked pending H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 | FIBRED-PRODUCT-0B and exact human approval | If approved, promote only the Cat-valued postcomposition capped action and shared-base product-action projection, run the full Lambdapi SOP, transfer exactly that closure through generic TypeScript mechanisms, and lower the first grouped-sibling transport while preserving frozen profiles |
+| FIBRED-COMPREHENSION-0A | complete; ignored semantic probe | FIBRED-CONTEXT-0B and active Sigma/pullback/section owners | Constructed the zero-owner semantic contextual pair through pulled-back `sigma_intro_transf`; its type is correct, but ordinary object, arrow, substitution, and projection consumers remain computationally stuck |
+| FIBRED-COMPREHENSION-0B | complete; immutable proposal awaits D-DTTLF-USABILITY-005 | FIBRED-COMPREHENSION-0A and concrete object/arrow substitution consumers | Compared the semantic composite, a direct specialized pair owner (`+2/0` warnings), and a general asymmetric pullback-total owner (`+0/0`). Selected one new owner with two structured runtime projections, a transparent three-factor contextual pair, object/base-arrow substitution evidence, strict `0/45/27` audit, exact non-collapse boundaries, and separate Sigma-introduction action deferral |
+| FIBRED-COMPREHENSION-1A | blocked pending H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 | FIBRED-COMPREHENSION-0B and exact human approval | If approved, promote only `sigma_pullback_total_func` with its object and structured-arrow projections, run the full Lambdapi SOP, transfer that one-owner/two-rule closure, and lower one genuine dependent-chain contextual substitution |
+| FIBRED-SIGMA-INTRO-ACTION-1 | deferred separate closure | concrete consumer beyond contextual pairing | Reassess direct `sigma_intro_tapp0_func` arrow action only with a closure that joins the measured `+10/+1` identity, naturality, composition, and higher-action interactions |
 | FIBRED-STRUCTURE-1 | pending | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A or a proved existing-owner derivation | Lower displayed projection, pairing, swap, diagonal, and reindexing stability for independent siblings with positive, negative, and higher-action evidence |
 | FIBRED-BINDER-1 | pending | FIBRED-STRUCTURE-1 and existing Sigma/Pi comparisons | Implement the first direct `:^fd`-equivalent typed API and show direct/nested classifier compatibility without collapsing proof-time and runtime equality |
 | FIBRED-TRANSFD-1 | pending | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Implement one coherent displayed-transfor abstraction and component/higher-cell consumer |
-| FIBRED-COMPREHENSION-1 | pending owner audit | FIBRED-CONTEXT-0B | Qualify contextual pairing and the deferred Sigma-introduction arrow action for genuinely dependent chains; return any missing mathematical owner to H-DTTLF-USABILITY-02 |
-| FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1, FIBRED-COMPREHENSION-1 | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
+| FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1, FIBRED-COMPREHENSION-1A | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
 | FIBRED-GRADUATE-1 | pending | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate human graduation decision |
 
@@ -829,19 +1069,54 @@ The exact question is:
 > product comparison, pullback stability, structural maps, total pullback,
 > and profile promotion as separate unapproved work?
 
-FIBRED-COMPREHENSION-1 may independently trigger the same owner class later.
-Before any such active Lambdapi change, its separate proposal must name:
+FIBRED-COMPREHENSION-0B has now independently triggered the same gate with one
+new mathematical owner. Its immutable decision is:
 
-- the exact missing owner position and the smallest semantic boundary;
-- the complete type and intended stable normal form;
-- positive contextual-pairing, Sigma-introduction, substitution, and relevant
-  higher-action consumers;
-- a non-collapse case;
-- runtime versus proof-time orientation;
-- subject-reduction, overlap, termination, and warning evidence;
-- interaction with `Pullback_catd`, `Sigma_cat`, and the qualified
-  displayed-product structure; and
-- the minimal TypeScript transfer/profile effect.
+**D-DTTLF-USABILITY-005 — pending human decision.** Add:
+
+```text
+sigma_pullback_total_func(F,D)
+  : Functor
+      (Sigma_cat(Pullback_catd D F))
+      (Sigma_cat D)
+```
+
+with only:
+
+```text
+(a,u) -> (F[a],u)
+(p,alpha) -> (F[p],alpha).
+```
+
+Derive contextual pairing transparently from the terminal-total map,
+`sigma_map_func(s)`, and this pullback-total map. After the active Lambdapi
+package passes the full nested SOP, transfer only that one-owner/two-rule
+closure through the generic TypeScript engines and lower one genuine
+dependent-chain object/arrow substitution consumer.
+
+This decision does **not** authorize:
+
+- a dedicated `sigma_pair_func` owner;
+- the direct `sigma_intro_tapp0_func` arrow rule or its measured
+  identity/naturality/composition closure;
+- a whole-functor first-projection runtime beta;
+- a pullback of arbitrary total functors or generic total-category pullback;
+- D-DTTLF-USABILITY-004 or any product structural map;
+- browser/frozen-profile promotion; or
+- parsing, acquisition, bulk transfer, or general displayed graduation.
+
+The exact question is:
+
+> Approve H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 as proposed: add
+> `sigma_pullback_total_func` as the asymmetric family-pullback total map with
+> only object `(a,u) -> (F[a],u)` and structured-arrow
+> `(p,alpha) -> (F[p],alpha)` runtime projections; derive contextual pairing
+> as the transparent terminal-total, `sigma_map_func`, and pullback-total
+> composite; transfer only that one-owner/two-rule closure and one genuine
+> dependent-chain consumer to TypeScript; and retain a dedicated pair owner,
+> the direct Sigma-introduction arrow rule, whole first-projection beta,
+> generic total pullback, D-004 product work, and profile promotion as
+> separate unapproved work?
 
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
@@ -888,6 +1163,23 @@ FIBRED-PRODUCT-0B is complete only when:
    exact human gate; and
 7. focused tests, TypeScript gates, the final bounded owner-position probe,
    and strict LHS audit pass.
+
+FIBRED-COMPREHENSION-0B is complete only when:
+
+1. the zero-owner semantic, direct-pair, and general base-change candidates
+   are tested at their intended full-file owner positions;
+2. contextual-pair object and arrow action plus further-family object and
+   base-arrow substitution are exercised;
+3. the chosen owner is the asymmetric total map of family pullback and cannot
+   be mistaken for a pullback of arbitrary total functors;
+4. direct-pair identity overlaps and direct Sigma-introduction action
+   overlaps are measured and retained as separate evidence;
+5. whole first projection and opaque-owner non-collapse boundaries are
+   explicit;
+6. the proposal is executable, deeply frozen, self-validating, and names the
+   separate exact human gate; and
+7. focused tests, TypeScript gates, the final quiet/warning probes, and strict
+   LHS audit pass.
 
 Any active Lambdapi edit follows `emdash2/AGENTS.md` and the current v3.2 SOP:
 intended-owner full-file probe, positive and negative consumers, bounded
@@ -956,6 +1248,23 @@ approved. If approved, implement only FIBRED-PRODUCT-1A's frozen two-rule
 closure and first grouped-sibling transport; if not yet approved, continue
 only a genuinely independent dependency-ready audit and do not guess the
 decision.
+
+Preserve FIBRED-COMPREHENSION-0A/0B's exact result. A contextual-pair
+expression built only by pulling back `sigma_intro_transf` is type correct but
+computationally stuck. A dedicated direct pair owner computes but adds two
+generic identity-action critical pairs and duplicates the more reusable
+base-change construction. The selected proposal adds exactly one asymmetric
+family-pullback totalization owner,
+`sigma_pullback_total_func(F,D)`, with only structured object
+`(a,u) -> (F[a],u)` and arrow `(p,alpha) -> (F[p],alpha)` projections.
+Contextual pairing stays a transparent terminal-total/`sigma_map_func`/
+pullback-total composite; further-family object and base-arrow substitution
+compute with zero warning delta. Do not promote the owner or either rule
+until H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 is explicitly approved. If
+approved, implement only FIBRED-COMPREHENSION-1A's frozen one-owner/two-rule
+closure and first genuine dependent-chain consumer. Keep the direct
+Sigma-introduction arrow action separate: its measured `+10/+1` interaction
+closure is not needed for contextual pairing.
 
 Treat the ordinary `Functor_cat X (Product_cat A B)` rule as useful evidence,
 not as an automatically valid family-level rule. The first owner-position
@@ -1039,3 +1348,15 @@ conformance, and CI obligations.
   quiet and warning-enabled probes, and the strict `0/45/27` LHS audit pass.
   FIBRED-PRODUCT-1A now awaits
   H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004.
+- **2026-07-27 — FIBRED-COMPREHENSION-0A/0B completed and exact owner gate
+  opened.** The zero-owner Sigma-introduction composite is type correct but
+  computationally stuck. A direct specialized pair computes with one
+  declaration, three rules, and `+2/0` warnings. The selected general
+  asymmetric pullback-total owner computes contextual-pair object/arrow
+  action plus further-family object/base-arrow substitution with one
+  declaration, two structured rules, and `+0/0`. The direct
+  Sigma-introduction arrow action was separately measured at `+10/+1` and is
+  not bundled. The immutable proposal and five focused tests preserve
+  pointwise-only first projection, opaque non-collapse, no generic total
+  pullback, product-decision independence, and the exact
+  H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 gate.

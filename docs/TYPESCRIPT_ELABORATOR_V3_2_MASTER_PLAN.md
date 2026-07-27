@@ -3752,5 +3752,9 @@ parser/acquisition selection, or bulk-transfer resumption. Follow the
 fibred-context sub-plan's corrected distinction between genuine dependency
 edges and independent siblings, its dependency-graph implementation ledger,
 its measured transparent-product transport gap, its total-category
-pullback non-assumption, and its H-DTTLF-USABILITY-02 owner gate.
+pullback non-assumption, its zero-warning-delta two-rule product proposal
+under pending D-DTTLF-USABILITY-004, and its zero-warning-delta asymmetric
+pullback-totalization owner proposal under pending D-DTTLF-USABILITY-005.
+Neither pending proposal authorizes an active Lambdapi owner/rule, the
+measured broader Sigma-introduction action, or a generic total pullback.
 ```

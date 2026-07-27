@@ -1,6 +1,6 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-Date: 2026-07-26
+Date: 2026-07-27
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
 RELEASE-READY is complete, with mandatory conformance, final residual and
 performance boundaries, and all validation gates recorded; forward outer-LF
@@ -80,6 +80,16 @@ prospective runtime rules, no declaration or alias, and preserves
 two-cell action, and total-category pullback as separate work.
 FIBRED-PRODUCT-1A is blocked pending the exact
 H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 decision.
+The independent FIBRED-COMPREHENSION-0A/0B audit is also complete. A
+zero-owner Sigma-introduction composite is type correct but computationally
+stuck; a direct pair owner computes with `+2/0` warnings; and the selected
+general asymmetric pullback-total owner computes contextual-pair object and
+arrow action plus further-family object/base-arrow substitution with one
+declaration, two structured runtime projections, and zero warning delta. Its
+immutable proposal awaits the separate exact
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 decision. The direct
+Sigma-introduction arrow action remains separate after a measured `+10/+1`
+interaction delta. Neither prospective owner/rule set is active.
 Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
@@ -684,7 +694,7 @@ dependent-usability proposal, its separate exact D-DTTLF-USABILITY-003
 approval, and completed USABILITY-DEPENDENT-1A non-eta witness. No general
 dependent bracket or follow-on implementation row is authorized merely by
 the older approvals. The later explicit fibred-context direction authorizes
-the sub-plan's dependency-ready frontend rows, but no new Lambdapi owner or
-rule before its exact H-DTTLF-USABILITY-02 gate. The completed master plan's
-historical checkpoint
+the sub-plan's dependency-ready frontend rows, but no proposed Lambdapi owner
+or rule before its exact H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 and
+D-DTTLF-USABILITY-005 gates. The completed master plan's historical checkpoint
 authorization does not authorize unrelated Git mutations.
