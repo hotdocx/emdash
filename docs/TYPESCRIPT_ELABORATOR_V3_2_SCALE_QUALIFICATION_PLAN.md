@@ -35,7 +35,12 @@ is removed and parser acquisition is optional/deferred; the immediate
 critical path is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md),
 starting with a polished existing dependent demo and then categorical-binder
-compilation.
+compilation. The user subsequently approved
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 exactly as proposed and
+requested a solution-oriented reassessment of general ordinary and
+dependent/displayed binder usability. The user clarified that solving that
+usability problem, rather than enforcing algorithmic uniformity, is the
+criterion.
 Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
@@ -83,10 +88,12 @@ behind the usability plan or an independently measured acquisition need.
 Generated induction semantics, batch deduplication, and the measured outer-LF
 TYPE/KIND product boundary remain explicit rows before whole-transfer
 qualification. No SCALE-STRESS-3B semantic profile or theorem has been
-promoted. The separate usability plan has now prepared its exact qualified
-frontend graduation proposal; H-DTTLF-USABILITY-GRADUATE/
-D-DTTLF-USABILITY-002 is pending and does not authorize this plan to resume
-bulk acquisition or transfer.
+promoted. The separate usability plan has prepared its exact qualified
+frontend graduation proposal and recorded its separate exact
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 approval. That decision does
+not authorize this plan to resume bulk acquisition or transfer. The proposed
+dependent-first non-eta binder continuation awaits
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -141,6 +148,8 @@ SCALE-STRESS-3B0 retention / USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-GRADUATE-1 proposal checkpoint:
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`
+USABILITY-GRADUATE-1 review implementation checkpoint:
+`PENDING-CURRENT-TRANCHE`
 
 ## Purpose
 
@@ -2656,11 +2665,19 @@ USABILITY-2A0 generic closed-index section/fibre/transport transfer, facade,
 and inactive-laxity boundary. Preserve completed USABILITY-2A1's honest
 locally nameless indexed classifier, callback-once section eta, runnable demo,
 and active-but-untransferred `piapp1_fapp0` negative. Preserve the completed
-USABILITY-GRADUATE-1 exact frontend-envelope proposal while
-H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 is pending. Do not create a
-review artifact, call the frontend settled, or reopen bulk acquisition from
-the recommendation alone. Do not misstate eta-only indexed coverage as
-general dependent bracket abstraction or whole-library transfer.
+USABILITY-GRADUATE-1 exact frontend-envelope proposal and its separate exact
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 reviewed approval. Treat the
+frontend as settled only for the exact outer-LF, ordinary bracket, and
+direct-slot indexed eta envelope; do not reopen bulk acquisition from that
+decision. Preserve the non-authorizing dependent-first assessment and
+generic `Catd_cat` section-composition witness. Its dependent-first semantics
+and classified constant-family bridge do not require one ordinary/dependent
+TypeScript representation or lowering algorithm; reuse common mechanisms
+only where sound. Do not implement
+USABILITY-DEPENDENT-1A before
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003. Do not misstate eta-only
+indexed coverage as general dependent bracket abstraction or whole-library
+transfer.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
@@ -3041,3 +3058,13 @@ scope is affected.
   SCALE-RETURN-1, recreate parser acquisition, or resume the measured
   root/extension closures. Exact proposal checkpoint:
   `f77af05a8f58cbef74d2008fb445a4e7af707f07`.
+- **2026-07-26 — Frontend envelope approved; scale work still deferred.**
+  D-DTTLF-USABILITY-002 is recorded in a separate immutable review and
+  authorizes no acquisition or transfer resumption. The follow-up
+  solution-oriented assessment recovers dependent-first H-01/D-007 and
+  proposes a non-eta section-composition frontend slice using generic
+  `Catd_cat` composition, not parser acquisition. Working
+  ordinary/displayed usability is the criterion; implementation uniformity
+  is not. That slice remains pending
+  H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003; SCALE-RETURN-1 is still
+  unselected.

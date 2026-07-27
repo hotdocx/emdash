@@ -3723,10 +3723,21 @@ declaration transfer the immediate prerequisite for the runnable dependent
 demo and functorial/natural/displayed frontend slices. Preserve completed
 USABILITY-2A1's honest locally nameless indexed classifier and
 natural/displayed section-eta witness. Preserve the completed,
-non-authorizing USABILITY-GRADUATE-1 exact frontend-envelope proposal while
-H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 is pending. Do not create a
-review record, call the architecture settled, or resume bulk transfer from
-that recommendation alone; do not confuse its eta-only dependent coverage
-with general dependent bracket abstraction, displayed structural
-completeness, bulk library transfer, or parser/notation completion.
+non-authorizing USABILITY-GRADUATE-1 exact frontend-envelope proposal and its
+separate exact
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 reviewed approval. Treat the
+architecture as settled only for outer LF, ordinary first-order bracket, and
+direct-slot indexed section eta. Do not resume bulk transfer from that
+approval or confuse its eta-only dependent coverage with general dependent
+bracket abstraction, displayed structural completeness, bulk library
+transfer, or parser/notation completion. Preserve the subsequent
+non-authorizing dependent-binder assessment and its exact generic `Catd_cat`
+section-composition witness. H-01/D-007 fixes the dependent-first semantic
+interpretation and classified constant-family bridge, not a requirement that
+ordinary and displayed TypeScript representations or lowering algorithms be
+identical. Reuse shared scoping, dependency, application, or diagnostic
+machinery where sound, but judge the continuation by usable,
+authority-correct ordinary and displayed behavior. Do not implement
+USABILITY-DEPENDENT-1A before
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 is supplied.
 ```

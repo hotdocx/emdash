@@ -51,6 +51,7 @@ import './v3_2_categorical_dependent_eta_tests';
 import './v3_2_categorical_bracket_demo_tests';
 import './v3_2_categorical_dependent_eta_demo_tests';
 import './v3_2_categorical_usability_graduation_proposal_tests';
+import './v3_2_categorical_usability_graduation_review_tests';
 import './v3_2_lambdapi_export_inventory_tests';
 import './v3_2_metatheory_review_tests';
 import './v3_2_differential_owner_tests';

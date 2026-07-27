@@ -29,7 +29,13 @@ next exact decision on 2026-07-24 was “Approve
 H-DTTLF-02/DIRECTED-1C as proposed.” The latest exact approval on 2026-07-24
 was “Approve H-DTTLF-03/D-DTTLF-001 as proposed”. The user subsequently
 directed a representative, mechanism-diverse stress test of the remaining
-Lambdapi development before any claim of systematic mechanical transfer.
+Lambdapi development before any claim of systematic mechanical transfer. On
+2026-07-26 the user said exactly “Approve
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 as proposed” and then asked
+for a solution-oriented reassessment of ordinary and dependent/displayed
+binder usability without requiring implementation uniformity for its own
+sake. The user further clarified that solving the usability problem is the
+criterion; ordinary and dependent implementations need not be uniform.
 Status: completed exact DTT/LF continuation profile and retained implementation
 ledger; active forward scale qualification is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md);
@@ -73,12 +79,17 @@ tactic-source, and closure evidence, while its canonical-symbol parser
 experiment and bulk continuation are deferred; the next implementation path
 has packaged the dependent demo and qualified the exact ordinary plus
 indexed-eta categorical-binder envelope; the executable
-USABILITY-GRADUATE-1 recommendation now awaits
-H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 and grants no authority.
+USABILITY-GRADUATE-1 recommendation is now separately reviewed-approved under
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 for that exact envelope.
+The dependent-first general-binder continuation and non-eta section-
+composition witness are proposed under
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003, which remains pending.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`
+USABILITY-GRADUATE-1 review implementation checkpoint:
+`PENDING-CURRENT-TRANCHE`
 Latest documentation checkpoint before scale qualification:
 `29976248189a8caa9797cced533ae11559dbe95c`
 First scale-qualification implementation checkpoint:
@@ -2128,10 +2139,19 @@ usability plan's completed consolidation, demo, specification, eta, and
 ordinary-bracket, ergonomic-program, and closed-index displayed-application
 rows plus USABILITY-2A1's genuine locally nameless indexed section-eta
 witness. Preserve the completed, non-authorizing USABILITY-GRADUATE-1 exact
-frontend-envelope proposal while
-H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 is pending. Do not create a
-review record, call the architecture settled, or resume bulk transfer from
-the recommendation alone. Retain the scale plan's completed generic
+frontend-envelope proposal and its separate exact
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 reviewed approval. Treat the
+architecture as settled only for outer LF, ordinary first-order bracket, and
+direct-slot indexed section eta; do not resume bulk transfer from that
+approval. Preserve the non-authorizing dependent-first general-binder
+assessment and its `λ k :^n K. FF[k](s[k])` generic `Catd_cat` composition
+witness. Preserve dependent-first semantics and the classified
+constant-family bridge, but do not require one ordinary/dependent TypeScript
+representation or lowering algorithm; reuse shared machinery only where
+sound and judge the slice by usable authority-correct behavior. Do not
+implement USABILITY-DEPENDENT-1A before
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003. Retain the scale plan's
+completed generic
 infrastructure while its canonical parser and bulk declaration rows are
 deferred. Do not open GROUPD-PLAN-0 without a concrete groupoidal-closure
 consumer and H-DTTLF-04, and do not change the browser/deployed profile or
@@ -2672,3 +2692,14 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 remains pending; the
   proposal grants no semantic/profile authority and does not reopen
   acquisition, bulk transfer, groupoidal closure, or browser promotion.
+- **2026-07-26 — Qualified frontend reviewed; dependent-first continuation
+  proposed.** Recorded the exact D-DTTLF-USABILITY-002 approval separately
+  from the unchanged proposal. Recovered H-01/D-007 as the controlling
+  context/family/section representation and proposed authority-aware ordinary
+  and displayed lowerings rather than forced implementation uniformity. The
+  user clarified that working ordinary/displayed usability, not shared code
+  shape, is the acceptance criterion. A bounded active-kernel probe validates
+  non-eta section composition
+  `λ k :^n K. FF[k](s[k])` through generic `Catd_cat` composition without a
+  new owner/rule. USABILITY-DEPENDENT-1A remains non-authorizing pending
+  H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003.

@@ -52,8 +52,15 @@ transfer are now optional/deferred. The active critical path is the dependent
 demo and categorical-binder frontend in the usability plan. Its closed-index
 USABILITY-2A0 prerequisite and indexed natural/displayed section-eta
 USABILITY-2A1 witness are complete; the exact executable frontend-envelope
-graduation proposal is prepared and awaits
-H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002. Generated
+graduation proposal is separately reviewed-approved under
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 for only the outer-LF,
+ordinary first-order bracket, and direct-slot indexed section-eta envelope.
+General displayed/dependent bracket abstraction remains unimplemented and
+not yet mechanically confirmed. The post-review dependent-first assessment
+now proposes the non-eta section-composition witness
+`λ k :^n K. FF[k](s[k])` under
+H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003; that gate is pending.
+Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
 promoted active stress profile or whole-transfer claim
@@ -174,19 +181,40 @@ settling only the outer-LF, ordinary first-order bracket, and direct-slot
 indexed section-eta envelope. Its `authorityAuthorized` field is false and
 the proposal is absent from the browser entry point.
 
-The gate remains genuinely open. General dependent bracket abstraction,
-displayed structural completeness, `piapp1_*`/`tdapp0_*` transfer,
-groupoidal closure, bulk library transfer, acquisition automation,
-notation/parsing, and browser promotion remain separate non-claims pending
-their own evidence and gates. Approval would require a separate immutable
-review record and would not automatically resume bulk transfer or promote a
+The separate
+`src/v3_2/categorical_usability_graduation_review.ts` records the user's
+exact D-DTTLF-USABILITY-002 approval while preserving the unchanged proposal
+snapshot and all its boundaries. The result confirms general outer-LF
+dependent binding, ordinary first-order categorical binding, and the narrow
+direct-slot dependent/displayed eta witness. It does not confirm a general
+displayed/dependent bracket compiler.
+
+General dependent bracket abstraction, displayed structural completeness,
+`piapp1_*`/`tdapp0_*` transfer, groupoidal closure, bulk library transfer,
+acquisition automation, notation/parsing, and browser promotion remain
+separate non-claims pending their own evidence, plan selection, and gates.
+The approval does not automatically resume bulk transfer or promote a
 semantic/profile boundary. The exact green USABILITY-2A0 implementation
 checkpoint is
 `682f9af01e964301d3e1dc14f402717390ad2e74`; the exact green 2A1
 implementation checkpoint is
 `60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`.
 The exact green graduation proposal checkpoint is
-`f77af05a8f58cbef74d2008fb445a4e7af707f07`.
+`f77af05a8f58cbef74d2008fb445a4e7af707f07`; the review implementation
+checkpoint is `PENDING-CURRENT-TRANCHE`.
+
+The next proposed usability design preserves H-01/D-007's dependent-first
+semantic interpretation and authority-classified constant-family bridge, but
+does not require ordinary and dependent TypeScript representations or
+lowering algorithms to be identical. It starts by reusing contextual scoping,
+dependency, application, and diagnostic machinery where sound; distinct
+authority-aware lowerings or IR are permitted if the concrete dependent
+consumer requires them. A bounded active-kernel probe already proves that a
+displayed functor composed with a section has the required section type and
+pointwise `FF[k](s[k])` computation through generic `comp_fapp0` at
+`Catd_cat K`. The remaining first slice is a TypeScript dependent-binder
+usability change, not evidence for a new kernel owner. It is non-authorizing
+until D-DTTLF-USABILITY-003 is approved.
 
 ## Authority Boundary
 
@@ -623,7 +651,10 @@ any Git mutation.
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
 `TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`. It names the
 completed-profile and reviewed-continuation comparison checkpoints, preserves
-the non-authorizing USABILITY-GRADUATE-1 proposal at its pending human gate,
-and records the continuation's Git boundary. The completed master plan's
-historical checkpoint authorization does not authorize unrelated Git
-mutations.
+the non-authorizing USABILITY-GRADUATE-1 proposal together with its separate
+exact reviewed approval and withheld general dependent/displayed boundary,
+and records the continuation's Git boundary. The dependent-first
+USABILITY-DEPENDENT-1A continuation is proposed but gated by
+D-DTTLF-USABILITY-003; no follow-on implementation row is authorized
+automatically. The completed master plan's historical checkpoint
+authorization does not authorize unrelated Git mutations.
