@@ -11,6 +11,10 @@ and the active emdash v3.2 mathematical authorities
 Governs: the current end-user demo and categorical-binder frontend critical
 path; it does not replace the completed-profile history or erase the separate
 mechanical-transfer qualification ledger
+Selected-Continuation:
+[`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md)
+governs the explicitly selected dependency-aware displayed-product and
+fibred-sibling continuation
 Side-Task-Ledger: architecture decisions, implementation slices, experiments,
 validation, and human-review gates in this file
 Infinity-Codex-Origin:
@@ -62,7 +66,12 @@ and no promotion or mutation of a deployed/browser or frozen reviewed
 profile. General displayed/dependent bracket
 abstraction remains unimplemented and not yet mechanically confirmed; wider
 declaration acquisition remains explicitly deferred, and no follow-on slice
-is selected automatically by this approval.
+is selected automatically by this approval. On 2026-07-27 the user
+subsequently and explicitly selected the corrected fibred-context,
+displayed-product, and displayed-binder continuation. Its dedicated sub-plan
+records the accepted distinction between genuine dependency edges and
+independent siblings, the pointwise-product probe, and the still-gated
+mathematical owner question.
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
@@ -488,6 +497,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
+| USABILITY-FIBRED-CONTINUATION | delegated to active sub-plan | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A | Continue dependency-aware general telescopes plus fibrewise-cartesian sibling structure, provisional displayed binders, and the `Product_catd` owner audit in `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`; FIBRED-CONTEXT-0A is complete, while any new Lambdapi owner/rule remains behind H-DTTLF-USABILITY-02 |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2117,7 +2127,11 @@ git diff --cached --check. It authorizes no push, merge, PR, publication,
 release, history rewriting, new branch/worktree, cleanup, or deletion.
 
 No follow-on implementation row is authorized by the completed dependent
-review and witness alone. Keep every
+review and witness alone. The user's later explicit 2026-07-27 direction
+selected the dedicated
+`docs/TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`; continue its
+dependency-ready rows and obey its stricter product-owner and total-pullback
+boundaries. Keep every
 Lambdapi process bounded to at most 60 seconds and preserve all proportional
 subject-reduction, warning, audit, catalog, health, examples, conformance, and
 CI obligations.

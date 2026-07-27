@@ -4,6 +4,7 @@ export * from './core_serialization';
 export * from './signature';
 export * from './context';
 export * from './structural';
+export * from './context_dependencies';
 export * from './session';
 export * from './checker';
 export * from './dependent';

@@ -14,6 +14,13 @@ H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003 decision is
 reviewed-approved and the bounded `USABILITY-DEPENDENT-1A` non-eta
 section-composition continuation is complete
 
+Continuation:
+[`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md)
+governs the explicitly selected general dependency-graph,
+fibrewise-cartesian sibling, displayed-product, and provisional direct
+displayed-binder qualification. It extends this accepted bounded RFC without
+retroactively broadening its graduated envelope.
+
 Plan: `TS-ELAB-V3.2-USABILITY`
 
 Executable artifacts:

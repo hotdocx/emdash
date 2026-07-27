@@ -884,6 +884,97 @@ export function kernelAssertScoped(
     visit(expression, ambientDepth);
 }
 
+/**
+ * One ambient De Bruijn dependency together with every stored occurrence.
+ *
+ * `index` is nearest-first in the ambient scope supplied to
+ * `kernelAmbientDependencies`. Occurrences bound by Pi/lambda nodes inside
+ * the inspected expression are excluded.
+ */
+export interface KernelAmbientDependency {
+    readonly index: number;
+    readonly occurrences: readonly Provenance[];
+}
+
+/**
+ * Inspect the ambient variables used by a scoped expression.
+ *
+ * This is dependency evidence for contextual planning. It does not rewrite
+ * the expression, infer semantic dependencies absent from Core, or construct
+ * a categorical weakening/pullback owner.
+ */
+export function kernelAmbientDependencies(
+    expression: KernelExpression,
+    ambientDepth: number
+): readonly KernelAmbientDependency[] {
+    kernelAssertScoped(expression, ambientDepth);
+    const occurrences = new Map<number, Provenance[]>();
+
+    const visit = (
+        current: KernelExpression,
+        internalDepth: number
+    ): void => {
+        switch (current.tag) {
+            case 'universe':
+            case 'reference':
+                return;
+            case 'bound': {
+                if (current.index < internalDepth) return;
+                const ambientIndex = current.index - internalDepth;
+                const existing = occurrences.get(ambientIndex);
+                if (existing) {
+                    existing.push(current.provenance);
+                } else {
+                    occurrences.set(
+                        ambientIndex,
+                        [current.provenance]
+                    );
+                }
+                return;
+            }
+            case 'meta':
+                current.spine.forEach(item =>
+                    visit(item, internalDepth)
+                );
+                return;
+            case 'application':
+                current.arguments.forEach(argument =>
+                    visit(argument.value, internalDepth)
+                );
+                return;
+            case 'call':
+                visit(current.callee, internalDepth);
+                current.arguments.forEach(argument =>
+                    visit(argument.value, internalDepth)
+                );
+                return;
+            case 'pi':
+            case 'lambda':
+                visit(current.binder.type, internalDepth);
+                visit(current.body, internalDepth + 1);
+                return;
+            default: {
+                const exhaustive: never = current;
+                return exhaustive;
+            }
+        }
+    };
+
+    visit(expression, 0);
+    return Object.freeze(
+        [...occurrences.entries()]
+            .sort(([left], [right]) => left - right)
+            .map(([index, dependencyOccurrences]) =>
+                Object.freeze({
+                    index,
+                    occurrences: Object.freeze([
+                        ...dependencyOccurrences
+                    ])
+                })
+            )
+    );
+}
+
 export function kernelExpressionEquals(
     left: KernelExpression,
     right: KernelExpression

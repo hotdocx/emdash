@@ -13,6 +13,7 @@ import './v3_2_core_serialization_tests';
 import './v3_2_core_checker_tests';
 import './v3_2_dependent_context_tests';
 import './v3_2_telescope_structural_tests';
+import './v3_2_context_dependency_tests';
 import './v3_2_manifest_tests';
 import './v3_2_runtime_tests';
 import './v3_2_runtime_rewrite_tests';

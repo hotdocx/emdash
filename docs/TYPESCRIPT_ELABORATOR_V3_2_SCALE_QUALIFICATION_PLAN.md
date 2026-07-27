@@ -43,6 +43,12 @@ requested a solution-oriented reassessment of general ordinary and
 dependent/displayed binder usability. The user clarified that solving that
 usability problem, rather than enforcing algorithmic uniformity, is the
 criterion.
+On 2026-07-27 the user explicitly selected the dependent-context and
+fibrewise-cartesian sibling continuation governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md).
+That sub-plan may reuse SCALE-STRESS-2A through 2B3 as representation
+evidence, but it does not resume bulk acquisition or promote an isolated
+scale profile.
 Detailed-Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/

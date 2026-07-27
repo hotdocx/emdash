@@ -63,7 +63,12 @@ H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003, and bounded
 USABILITY-DEPENDENT-1A is complete. The implementation uses first-order
 indexed classifiers and generic `comp_fapp0` at `Catd_cat K`; it introduces
 no new Lambdapi mathematical owner/rule and authorizes no general dependent
-bracket or automatic follow-on.
+bracket or automatic follow-on. The user has since explicitly selected the
+dedicated fibred-context continuation: its generic locally nameless
+dependency graph foundation FIBRED-CONTEXT-0A is complete, and its bounded
+product probe shows that the transparent uncurried family product computes
+fibres but not base-arrow transport. The exact product owner/action decision
+therefore remains behind H-DTTLF-USABILITY-02.
 Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
@@ -89,6 +94,8 @@ Forward systematic-transfer work is governed by
 The current product-facing dependent-demo and categorical-binder work is
 governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md).
+Its selected dependency-aware displayed-product continuation is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md).
 Its accepted binder/application judgments and exact active-owner boundary are
 specified by
 [`TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md).
@@ -657,13 +664,16 @@ any Git mutation.
 ## Start The Long-Running Implementation
 
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
-`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`. It names the
+`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`. It names the
 completed-profile and reviewed-continuation comparison checkpoints, preserves
 the non-authorizing USABILITY-GRADUATE-1 proposal together with its separate
 exact reviewed approval and withheld general dependent/displayed boundary,
 and records the continuation's Git boundary. Preserve the immutable
 dependent-usability proposal, its separate exact D-DTTLF-USABILITY-003
 approval, and completed USABILITY-DEPENDENT-1A non-eta witness. No general
-dependent bracket or follow-on implementation row is authorized
-automatically. The completed master plan's historical checkpoint
+dependent bracket or follow-on implementation row is authorized merely by
+the older approvals. The later explicit fibred-context direction authorizes
+the sub-plan's dependency-ready frontend rows, but no new Lambdapi owner or
+rule before its exact H-DTTLF-USABILITY-02 gate. The completed master plan's
+historical checkpoint
 authorization does not authorize unrelated Git mutations.

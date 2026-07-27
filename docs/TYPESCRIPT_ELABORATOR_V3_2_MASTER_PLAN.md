@@ -24,6 +24,9 @@ forward systematic-transfer work is governed by
 the current dependent-demo and categorical-binder frontend critical path is
 governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md);
+the selected displayed-product and dependency-aware fibred-context
+continuation is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md);
 this completed plan remains frozen historical evidence for the exact
 `emdash-v3.2-mvp-1` profile
 Pre-implementation baseline:
@@ -3661,8 +3664,9 @@ described in `PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
 
 ```text
 Kick off or continue implementing
-docs/TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md, treating this completed
-master plan as frozen historical authority for emdash-v3.2-mvp-1.
+docs/TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md, treating the linked
+usability plan as its parent living ledger and this completed master plan as
+frozen historical authority for emdash-v3.2-mvp-1.
 
 Treat the usability file as the living active plan and decision ledger:
 determine the actual
@@ -3744,5 +3748,9 @@ USABILITY-DEPENDENT-1A's indexed first-order `FF[k](s[k])` lowering through
 generic `comp_fapp0`, its minimal active TypeScript transfer closure, and its
 fail-closed/live-conformance evidence. Do not infer general dependent bracket
 abstraction, a new Lambdapi mathematical owner/rule, profile promotion,
-parser/acquisition selection, or bulk-transfer resumption.
+parser/acquisition selection, or bulk-transfer resumption. Follow the
+fibred-context sub-plan's corrected distinction between genuine dependency
+edges and independent siblings, its dependency-graph implementation ledger,
+its measured transparent-product transport gap, its total-category
+pullback non-assumption, and its H-DTTLF-USABILITY-02 owner gate.
 ```
