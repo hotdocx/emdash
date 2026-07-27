@@ -3722,9 +3722,11 @@ but do not recreate the removed canonical-symbol parser or make bulk
 declaration transfer the immediate prerequisite for the runnable dependent
 demo and functorial/natural/displayed frontend slices. Preserve completed
 USABILITY-2A1's honest locally nameless indexed classifier and
-natural/displayed section-eta witness. Resume with
-USABILITY-GRADUATE-1's exact frontend-envelope audit; do not confuse its
-eta-only dependent coverage with general dependent bracket abstraction,
-displayed structural completeness, bulk library transfer, or parser/notation
-completion.
+natural/displayed section-eta witness. Preserve the completed,
+non-authorizing USABILITY-GRADUATE-1 exact frontend-envelope proposal while
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 is pending. Do not create a
+review record, call the architecture settled, or resume bulk transfer from
+that recommendation alone; do not confuse its eta-only dependent coverage
+with general dependent bracket abstraction, displayed structural
+completeness, bulk library transfer, or parser/notation completion.
 ```

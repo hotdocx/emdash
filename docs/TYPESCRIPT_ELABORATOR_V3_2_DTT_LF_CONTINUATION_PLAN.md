@@ -71,7 +71,10 @@ without an oracle. The representation-only SCALE-STRESS-3A2 parent is
 complete. SCALE-STRESS-3B0 retains exact module-visibility,
 tactic-source, and closure evidence, while its canonical-symbol parser
 experiment and bulk continuation are deferred; the next implementation path
-packages the existing dependent demo and qualifies categorical binders
+has packaged the dependent demo and qualified the exact ordinary plus
+indexed-eta categorical-binder envelope; the executable
+USABILITY-GRADUATE-1 recommendation now awaits
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 and grants no authority.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -2124,11 +2127,15 @@ in this completed profile should be widened by inference. Preserve the active
 usability plan's completed consolidation, demo, specification, eta, and
 ordinary-bracket, ergonomic-program, and closed-index displayed-application
 rows plus USABILITY-2A1's genuine locally nameless indexed section-eta
-witness; resume USABILITY-GRADUATE-1's exact frontend-envelope audit. Retain
-the scale plan's completed generic infrastructure while its canonical parser
-and bulk declaration rows are deferred. Do not open GROUPD-PLAN-0 without a
-concrete groupoidal-closure consumer and H-DTTLF-04, and do not change the
-browser/deployed profile or broaden a metatheory claim by inference.
+witness. Preserve the completed, non-authorizing USABILITY-GRADUATE-1 exact
+frontend-envelope proposal while
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 is pending. Do not create a
+review record, call the architecture settled, or resume bulk transfer from
+the recommendation alone. Retain the scale plan's completed generic
+infrastructure while its canonical parser and bulk declaration rows are
+deferred. Do not open GROUPD-PLAN-0 without a concrete groupoidal-closure
+consumer and H-DTTLF-04, and do not change the browser/deployed profile or
+broaden a metatheory claim by inference.
 
 This continuation prompt authorizes temporary local checkpoint commits only
 on the existing goal branch after a bounded tranche is green, its plan ledger
@@ -2659,3 +2666,9 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   deferred while the existing dependent computation is packaged and
   ordinary plus natural/displayed categorical-binder compilation is
   qualified.
+- **2026-07-26 — Qualified frontend proposal reached its human gate.**
+  Linked the deeply frozen USABILITY-GRADUATE-1 recommendation for only the
+  outer-LF, ordinary first-order bracket, and indexed section-eta envelope.
+  H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 remains pending; the
+  proposal grants no semantic/profile authority and does not reopen
+  acquisition, bulk transfer, groupoidal closure, or browser promotion.

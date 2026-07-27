@@ -37,8 +37,9 @@ USABILITY-2A0's closed-index section/fibre/transport transfer and facade
 slice and USABILITY-2A1's indexed contextual classifier, natural/displayed
 section-eta witness, runnable demo, and first untransferred-action negative
 are complete; the USABILITY-2A umbrella is complete;
-USABILITY-GRADUATE-1 is the next dependency-ready architecture-review slice,
-and wider declaration acquisition is explicitly deferred while the exact
+USABILITY-GRADUATE-1's executable architecture-audit proposal is prepared
+and awaits H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002; wider
+declaration acquisition is explicitly deferred while that exact qualified
 frontend reuse envelope is reviewed
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
@@ -54,6 +55,8 @@ USABILITY-2A0 implementation checkpoint:
 `682f9af01e964301d3e1dc14f402717390ad2e74`
 USABILITY-2A1 implementation checkpoint:
 `60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`
+USABILITY-GRADUATE-1 proposal checkpoint:
+pending the exact green local checkpoint recorded below
 
 ## Outcome And Corrected Priority
 
@@ -440,7 +443,7 @@ frontend variables.
 | USABILITY-2A0 | complete | USABILITY-1D, reviewed continuation, active displayed owners | Exact typed transfer of the minimal closed-index displayed application prerequisites; facade types/constructors and selection for section object evaluation, displayed-functor fibre projection, and displayed-functor base-arrow transport; deliberate whole-laxity negative |
 | USABILITY-2A1 | complete | USABILITY-2A0 | First-order indexed/dependent slot classifier; callback-once natural/displayed section eta `λ k :^n K. s[k]`; exact family/usage checks; retained contextual evidence; generic LF checking; runnable dependent categorical demo; escaped/wrong-family/mode negatives; first untransferred `piapp1_fapp0` action negative |
 | USABILITY-2A | complete (split) | USABILITY-2A0, USABILITY-2A1 | Umbrella acceptance: one natural/indexed displayed-Pi section binder/application witness uses the same contextual architecture and generic checker/evaluator path as the ordinary compiler |
-| USABILITY-GRADUATE-1 | next dependency-ready | USABILITY-2A | Architecture review stating the exact mechanically reusable frontend envelope, remaining kernel-owner gaps, residual notation/parser choices, validation, and proposed product/trust boundary |
+| USABILITY-GRADUATE-1 | proposal complete; awaiting H-DTTLF-USABILITY-GRADUATE | USABILITY-2A | Deeply frozen executable architecture proposal stating the exact mechanically reusable frontend envelope, complete sixteen-row application partition, remaining kernel-owner and algorithm gaps, residual notation/parser choices, validation, and proposed product/trust boundary; installs no authority |
 | SCALE-RETURN-1 | deferred | USABILITY-GRADUATE-1 or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -1284,6 +1287,230 @@ dependent contextual classifier honestly?” question. It does not resolve
 every future displayed operation. The next task is a bounded graduation
 audit and human decision, not bulk transcription or a speculative parser.
 
+## USABILITY-GRADUATE-1 Proposal Record
+
+Proposal preparation is complete. The executable artifact is
+`src/v3_2/categorical_usability_graduation_proposal.ts`, exported only
+through the root TypeScript entry point and tested by
+`tests/v3_2_categorical_usability_graduation_proposal_tests.ts`. It is absent
+from `src/v3_2/browser.ts`.
+
+The artifact is deliberately a proposal, not a review record:
+
+```text
+revision:       USABILITY-GRADUATE-1
+status:         proposal-awaiting-h-dttlf-usability-graduate
+review gate:    H-DTTLF-USABILITY-GRADUATE
+decision:       D-DTTLF-USABILITY-002
+authorization:  false
+```
+
+It recommends approving the frontend architecture only for:
+
+```text
+outer dependent LF
+  + first-order ordinary categorical bracket abstraction
+  + direct-slot natural/displayed section eta
+```
+
+The recommendation does not rewrite the completed USABILITY-1/2 evidence,
+install an owner, or approve itself. If the user approves it, a separate
+review artifact must snapshot this exact proposal and record the decision;
+the pre-review artifact must retain `authorityAuthorized: false`.
+
+### Exact qualified pipeline
+
+The proposed mechanically reusable pipeline is:
+
+```text
+one-shot typed TypeScript callback
+        |
+        v
+opaque slot identities and closed/indexed classifiers
+        |
+        v
+immutable first-order locally nameless contextual IR
+        |
+        v
+classifier + argument + expected-shape selection
+        |
+        v
+ordinary categorical bracket or qualified dependent eta
+        |
+        v
+backend-neutral explicit Core
+        |
+        v
+generic TypeScript LF infer/check/evaluate
+        |
+        v
+bounded Lambdapi conformance
+```
+
+The frozen contextual IR has exactly five node forms:
+
+- slot reference;
+- explicit Core term;
+- typed application;
+- typed pair; and
+- typed composition.
+
+It records ordered context, free-slot usage, result classifier, cell level,
+polarity, ordinary/displayed dependency, and source provenance. Discard,
+duplication, permutation, and application lower respectively through
+explicit weakening, contraction, exchange, and evaluation after pairing.
+The ergonomic callback is reified immediately; neither stored IR nor Core
+contains a JavaScript closure.
+
+The abstraction boundary is equally explicit:
+
+| Abstraction | Qualified state |
+| --- | --- |
+| outer LF | general dependent λ/Π is available |
+| ordinary functorial | first-order structural bracket is implemented |
+| natural/indexed | only direct-slot section eta is implemented |
+| object-only | capability and notation review remain deferred |
+
+Contravariant, higher-cell, and more general displayed abstraction are not
+silently included in any row.
+
+### Complete application partition
+
+The executable proposal accounts for all sixteen frozen application
+judgments, rather than listing only the successful demo cases:
+
+| State | Exact targets |
+| --- | --- |
+| eligible or post-transfer qualified | `outer-lf-call`, `functor-object`, `functor-hom-full`, `functor-hom-capped`, `transfor-component-full`, `transfor-component-capped`, `section-object-evaluation`, `displayed-functor-fibre`, `displayed-functor-transport` |
+| represented but externally reserved | `transfor-hom-full`, `transfor-hom-capped` |
+| active authority, not transferred | `section-hom-full`, `section-hom-capped`, `displayed-transfor-component-full`, `displayed-transfor-component-capped` |
+| deliberately inactive authority | `displayed-functor-laxity` |
+
+The stable program facade currently exercises six exact application
+selections: ordinary functor object/capped-arrow/whole-Hom action, section
+object evaluation, displayed-functor fibre projection, and displayed-functor
+base-arrow transport. The integrated transfor component rows remain part of
+the frozen selection specification; the table does not claim that every
+matrix row has a polished facade constructor.
+
+The four active-but-untransferred targets relocate to:
+
+```text
+section-hom-full                     piapp1_func
+section-hom-capped                   piapp1_fapp0
+displayed-transfor-component-full    tdapp0_func
+displayed-transfor-component-capped  tdapp0_fapp0
+```
+
+They are transfer/qualification questions. In contrast,
+`displayed-functor-laxity` relocates to the deliberately inactive
+`functord_laxity_transf`, and a complete general displayed bracket basis has
+no currently qualified owner set. Those are authority/consumer-led
+mathematics questions. The proposal validator checks this distinction
+against the current frozen selection rows and Lambdapi binding evidence.
+
+### Exact reuse and residual algorithm boundary
+
+Within the proposed envelope:
+
+- another already-expressible ordinary program changes typed program data and
+  contextual wiring, not the checker or evaluator;
+- another direct-slot section eta changes the family, section, and program
+  data, not the dependent-eta algorithm;
+- another already-active owner uses the generic transfer engine plus exact
+  qualification and evidence, rather than an owner-specific AST/checker/
+  evaluator case; and
+- no new checker or evaluator algorithm is required merely to reuse those
+  already-qualified forms.
+
+This is the intended meaning of *mechanically reusable*. It is not a claim
+that every future expression is data-only. The executable proposal records
+the remaining frontend-algorithm gaps separately:
+
+- general non-eta dependent bracket abstraction;
+- indirect or composite open-index reindexing;
+- general displayed weakening, exchange, and contraction;
+- contravariant categorical abstraction;
+- object-only categorical abstraction; and
+- higher displayed-action surface.
+
+Any such case may require another contextual-IR rule, exact owner transfer,
+or Lambdapi-first owner proposal. It must be selected as a new bounded plan
+slice rather than smuggled into this approval.
+
+### Transfer, acquisition, notation, and trust remain separate
+
+The proposal keeps the measured 70-root plus 83-extension library closure as
+deferred coverage work. Direct typed TypeScript construction remains the
+default acquisition path. A parser or generator is optional and may be
+proposed only after measured repetition shows that a narrow adapter is
+worthwhile; it is not part of the semantic architecture or this gate.
+
+Final `:^f` and `:^o` notation, a string parser, groupoidal-DTT closure, and
+browser promotion remain separate decisions. The active handwritten
+Lambdapi development remains mathematical authority. The candidate product
+path is TypeScript surface to explicit Core to the TypeScript LF kernel,
+with no production Lambdapi dependency; deterministic Lambdapi emission
+remains an optional backend and required conformance oracle.
+
+The frozen MVP profile and reviewed directed continuation remain unchanged.
+The proposal withholds whole-development transfer, complete displayed
+structural logic, complete groupoidal DTT, standalone TypeScript subject
+reduction, termination, confluence, performance, and final textual-syntax
+claims. Approval would not promote a semantic owner, expose the browser
+entry point, or resume bulk transfer automatically.
+
+### Executable validation
+
+Validation on 2026-07-26:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_categorical_usability_graduation_proposal_tests.ts
+  10 tests / 1 suite passed
+
+timeout 60s env \
+  EMDASH_RUN_LAMBDAPI_CATEGORICAL_BRACKET_PROBES=1 \
+  node --require ts-node/register --test \
+  tests/v3_2_categorical_bracket_tests.ts
+  7 tests / 1 suite passed
+
+timeout 60s env \
+  EMDASH_RUN_LAMBDAPI_CATEGORICAL_DEPENDENT_ETA_PROBES=1 \
+  node --require ts-node/register --test \
+  tests/v3_2_categorical_dependent_eta_tests.ts
+  8 tests / 1 suite passed
+
+./scripts/pnpmw run check:ts
+  workspace, typecheck, lint, and 655-test TypeScript gate passed
+  614 passed, 41 opt-in live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, examples, and checks passed
+```
+
+The deep validator additionally rejects current-program revision drift,
+structural/dependent prerequisite count drift, contextual-IR drift, any
+change to the complete sixteen-row application partition, active-versus-
+inactive owner-boundary drift, an authorization flip, bulk-transfer
+auto-resumption, and any other mutation of the exact recommendation.
+
+### Exact pending decision
+
+The one yes-or-revise question is:
+
+> Approve H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 as proposed:
+> treat the callback-once, first-order locally nameless categorical frontend
+> as settled and mechanically reusable only for the exact outer-LF, ordinary
+> bracket, and indexed section-eta envelope; retain every recorded
+> algorithmic, owner-coverage, acquisition, notation, groupoidal, browser,
+> whole-transfer, and metatheory boundary?
+
+Until that question is answered, the proposal remains non-authoritative and
+USABILITY-GRADUATE-1 remains at its human gate. No dependent semantic,
+profile, acquisition, or bulk-transfer work may be inferred from the
+recommendation.
+
 ## Acceptance Criteria
 
 USABILITY-GRADUATE-1 may propose that the frontend architecture is settled
@@ -1315,6 +1542,10 @@ Success does not by itself establish complete groupoidal DTT closure,
 whole-development transfer, arbitrary displayed structural logic, general
 termination/confluence, standalone TypeScript subject reduction, performance,
 release readiness, or a final textual source syntax.
+
+The executable proposal and validation record above now supply evidence for
+all ten criteria. That permits the proposal to be presented; it does not
+grant the requested human verdict.
 
 ## Human Review Gates
 
@@ -1362,7 +1593,12 @@ USABILITY-GRADUATE-1 must present:
   acquisition.
 
 Human approval is required before calling the final frontend architecture
-settled or promoting another product profile.
+settled or promoting another product profile. The exact proposal is now
+prepared as `USABILITY-GRADUATE-1` with
+`authorityAuthorized: false`; D-DTTLF-USABILITY-002 is pending the one
+yes-or-revise question recorded above. Approval must be captured in a
+separate immutable review artifact rather than by changing the historical
+proposal.
 
 ## Validation And Checkpoint Policy
 
@@ -1486,7 +1722,8 @@ Core bound index, generalize the eta-only rule into an unproved dependent
 bracket compiler, or claim that active-but-untransferred and mathematically
 absent displayed actions are the same kind of gap.
 
-Begin with dependency-ready USABILITY-GRADUATE-1 and follow
+Preserve the completed, deeply frozen USABILITY-GRADUATE-1 proposal and
+follow
 docs/TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md. Keep outer LF
 lambda separate from functorial abstraction. Use a small
 typed contextual/wiring IR and lower variable, discard, permutation,
@@ -1512,16 +1749,19 @@ An ergonomic HOAS/PHOAS construction API may lower immediately to immutable
 first-order locally nameless storage.
 
 The ordinary functorial bracket corpus and first natural/displayed
-dependent-Pi eta now pass end to end. Prepare the exact graduation audit:
-state what is mechanically reusable, distinguish eta-only indexed coverage
-from general dependent bracket abstraction, list every active-untransferred
-and authority-absent action separately, and preserve all parser, notation,
-browser, groupoidal-closure, whole-transfer, and metatheory non-claims. Do not
-call the frontend architecture settled beyond that recorded envelope until
-H-DTTLF-USABILITY-GRADUATE approves it. Keep bulk library-transfer
-qualification separate; resume
-the deferred 70-root/extension closure or propose acquisition automation only
-after this critical path or an independently measured need.
+dependent-Pi eta pass end to end. The executable graduation audit now freezes
+the exact contextual IR, complete sixteen-row application partition,
+mechanical-reuse envelope, active-untransferred versus authority-gap split,
+and every parser, notation, browser, groupoidal-closure, whole-transfer, and
+metatheory non-claim. It awaits
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002. Do not create a reviewed
+approval artifact, call the architecture settled, promote a profile, or
+resume bulk transfer until the exact human decision is supplied. Safe work
+while the gate is pending is limited to validation, drift repair,
+documentation/checkpoint synchronization, and another independently
+authorized row. Resume the deferred 70-root/extension closure or propose
+acquisition automation only after an updated plan selects it from a measured
+need.
 
 Recover the actual descendant HEAD; named baselines and checkpoints are
 comparison/backtracking evidence, never permission to reset or rewrite.
@@ -1672,3 +1912,17 @@ CI obligations.
   owner/rule or profile promotion, parser, browser export, production
   Lambdapi dependency, remote Git operation, integration, publication,
   release, history rewrite, or cleanup authority.
+- **2026-07-26 — USABILITY-GRADUATE-1 proposal prepared; human gate
+  pending.** Added a deeply frozen root-only proposal and drift validator
+  that snapshot the callback-to-Core pipeline, exact contextual IR, four-way
+  partition of all sixteen application judgments, qualified ordinary and
+  indexed-eta witness envelope, mechanical reuse claim, active-untransferred
+  versus inactive/absent authority split, residual frontend algorithms,
+  acquisition/notation/product separation, trust boundary, non-claims, and
+  one exact H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 question.
+  Focused proposal tests, both bounded Lambdapi witness corpora, the 655-test
+  TypeScript gate, and the complete bounded active-kernel check pass. No
+  review artifact, semantic owner/rule, profile, parser, browser export,
+  production Lambdapi dependency, bulk-transfer resumption, or broader Git
+  authority was added. The exact green local proposal checkpoint is pending
+  the checkpoint-record follow-up.

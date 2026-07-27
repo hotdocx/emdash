@@ -5,7 +5,9 @@ Status: accepted implementation specification for `USABILITY-1A`
 Implementation: `USABILITY-1B` ordinary contextual eta/application and
 `USABILITY-1C` structural bracket abstraction plus `USABILITY-1D`
 API/serialization/diagnostic/example consolidation are complete;
-`USABILITY-2A` natural/displayed qualification is next
+`USABILITY-2A0/2A1` closed displayed application and indexed section eta are
+complete; the exact `USABILITY-GRADUATE-1` proposal awaits
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002
 
 Plan: `TS-ELAB-V3.2-USABILITY`
 
@@ -13,8 +15,11 @@ Executable artifacts:
 `src/v3_2/categorical_surface_spec.ts`,
 `src/v3_2/categorical_surface.ts`,
 `src/v3_2/categorical_program.ts`, and
-`src/v3_2/core_serialization.ts`; the runnable witness is
-`src/v3_2/categorical_bracket_demo.ts`
+`src/v3_2/core_serialization.ts`; the runnable witnesses are
+`src/v3_2/categorical_bracket_demo.ts` and
+`src/v3_2/categorical_dependent_demo.ts`; the non-authorizing graduation
+artifact is
+`src/v3_2/categorical_usability_graduation_proposal.ts`
 
 Authority audited: `emdash2/emdash3_2.lp` on 2026-07-26
 
@@ -50,10 +55,13 @@ not select exactly one authorized owner, elaboration fails with the inferred
 classifier, argument dimension, expectation, candidate owners, and source
 provenance. It never guesses.
 
-This settles the frontend architecture needed before more library
-acquisition. It does not claim that all categorical structural owners have
-already been transferred. Those exact prerequisites are enumerated below and
-are the implementation input to `USABILITY-1B` and `USABILITY-1C`.
+This defines the frontend architecture to qualify before more library
+acquisition. The completed ordinary and indexed-eta witnesses are now enough
+for USABILITY-GRADUATE-1 to recommend that architecture only within its
+exact first-order envelope. The recommendation remains non-authoritative
+until its recorded human gate; it does not claim that all categorical
+structural owners have been transferred. Those exact prerequisites and
+boundaries are enumerated below.
 
 ## Architectural Boundary
 
@@ -688,6 +696,51 @@ witness. It does not implement general dependent bracket abstraction,
 displayed weakening/contraction/reindexing/coherence, section-arrow action,
 groupoidal closure, bulk library acquisition, or final notation/parsing.
 Those boundaries belong in the separate graduation review.
+
+### `USABILITY-GRADUATE-1`
+
+Proposal preparation is complete. The deeply frozen executable artifact
+recommends settling the architecture only for this exact envelope:
+
+```text
+outer dependent LF
+  + ordinary first-order structural bracket abstraction
+  + direct-slot natural/displayed section eta
+```
+
+It snapshots the callback-once surface, opaque slot identities,
+closed/indexed classifier split, five-node locally nameless contextual IR,
+classifier/argument/expected-shape selection, bracket-or-eta lowering,
+backend-neutral explicit Core, generic LF checking/evaluation, and bounded
+Lambdapi conformance.
+
+The proposal accounts for all sixteen application judgments:
+
+- nine are eligible or exactly post-transfer qualified;
+- the two ordinary transfor Hom actions remain behind their naturality gate;
+- four section/displayed-transfor actions have active Lambdapi owners but
+  remain untransferred; and
+- the whole displayed-functor laxity action is deliberately inactive.
+
+The four untransferred rows name `piapp1_func`, `piapp1_fapp0`,
+`tdapp0_func`, and `tdapp0_fapp0`. The inactive row names
+`functord_laxity_transf`. A complete general displayed bracket basis is
+recorded separately as an owner-coverage question, not falsely grouped with
+those transfers.
+
+Within the qualified envelope, another ordinary term or direct-slot section
+eta is data/contextual-wiring work and requires no checker/evaluator
+algorithm change. General non-eta dependent bracket abstraction, composite
+open reindexing, displayed weakening/exchange/contraction, contravariant,
+object-only, and higher displayed abstraction remain algorithmic gaps. Bulk
+library coverage, acquisition automation, notation/string parsing,
+groupoidal closure, and browser/product promotion remain separate work.
+
+The proposal remains root-only with `authorityAuthorized: false`. It does not
+change the frozen MVP or directed profiles, production trust, Lambdapi
+source, or any owner/rule. Its one pending decision is
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 as quoted in the usability
+plan. A separate immutable review artifact is required for any approval.
 
 ## Executable Evidence
 

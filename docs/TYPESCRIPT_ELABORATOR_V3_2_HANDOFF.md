@@ -51,8 +51,9 @@ The isolated canonical-symbol parser experiment and wider 3B declaration
 transfer are now optional/deferred. The active critical path is the dependent
 demo and categorical-binder frontend in the usability plan. Its closed-index
 USABILITY-2A0 prerequisite and indexed natural/displayed section-eta
-USABILITY-2A1 witness are complete; the exact frontend-envelope graduation
-review is next. Generated
+USABILITY-2A1 witness are complete; the exact executable frontend-envelope
+graduation proposal is prepared and awaits
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002. Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
 promoted active stress profile or whole-transfer claim
@@ -165,16 +166,27 @@ added.
 
 The ordinary and first indexed witness corpora now both pass through the
 same TypeScript callback → locally nameless contextual IR →
-classifier-directed explicit Core → generic LF checker architecture. The
-next dependency-ready row is `USABILITY-GRADUATE-1`: audit and propose the
-exact mechanically reusable envelope. General dependent bracket abstraction,
-displayed structural completeness, `piapp1_*` transfer, groupoidal closure,
-bulk library transfer, notation/parsing, and browser promotion remain
-separate non-claims pending their own evidence and gates. The exact green
-USABILITY-2A0 implementation checkpoint is
+classifier-directed explicit Core → generic LF checker architecture.
+`USABILITY-GRADUATE-1` now freezes the exact qualified recommendation and
+complete application partition in
+`src/v3_2/categorical_usability_graduation_proposal.ts`. It recommends
+settling only the outer-LF, ordinary first-order bracket, and direct-slot
+indexed section-eta envelope. Its `authorityAuthorized` field is false and
+the proposal is absent from the browser entry point.
+
+The gate remains genuinely open. General dependent bracket abstraction,
+displayed structural completeness, `piapp1_*`/`tdapp0_*` transfer,
+groupoidal closure, bulk library transfer, acquisition automation,
+notation/parsing, and browser promotion remain separate non-claims pending
+their own evidence and gates. Approval would require a separate immutable
+review record and would not automatically resume bulk transfer or promote a
+semantic/profile boundary. The exact green USABILITY-2A0 implementation
+checkpoint is
 `682f9af01e964301d3e1dc14f402717390ad2e74`; the exact green 2A1
 implementation checkpoint is
 `60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`.
+The graduation proposal checkpoint is pending the exact green local
+checkpoint record.
 
 ## Authority Boundary
 
@@ -610,7 +622,8 @@ any Git mutation.
 
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
 `TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`. It names the
-completed-profile and reviewed-continuation comparison checkpoints, selects
-the next dependency-ready implementation slice, and records the
-continuation's Git boundary. The completed master plan's historical
-checkpoint authorization does not authorize unrelated Git mutations.
+completed-profile and reviewed-continuation comparison checkpoints, preserves
+the non-authorizing USABILITY-GRADUATE-1 proposal at its pending human gate,
+and records the continuation's Git boundary. The completed master plan's
+historical checkpoint authorization does not authorize unrelated Git
+mutations.

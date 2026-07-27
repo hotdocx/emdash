@@ -83,7 +83,10 @@ behind the usability plan or an independently measured acquisition need.
 Generated induction semantics, batch deduplication, and the measured outer-LF
 TYPE/KIND product boundary remain explicit rows before whole-transfer
 qualification. No SCALE-STRESS-3B semantic profile or theorem has been
-promoted
+promoted. The separate usability plan has now prepared its exact qualified
+frontend graduation proposal; H-DTTLF-USABILITY-GRADUATE/
+D-DTTLF-USABILITY-002 is pending and does not authorize this plan to resume
+bulk acquisition or transfer.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Reviewed directed-continuation implementation checkpoint:
@@ -2650,10 +2653,12 @@ diagnostics, and pointwise/diagonal/exchange demo. Preserve the completed
 USABILITY-2A0 generic closed-index section/fibre/transport transfer, facade,
 and inactive-laxity boundary. Preserve completed USABILITY-2A1's honest
 locally nameless indexed classifier, callback-once section eta, runnable demo,
-and active-but-untransferred `piapp1_fapp0` negative. Continue with
-USABILITY-GRADUATE-1's exact frontend-envelope audit rather than reopening
-bulk acquisition. Do not misstate eta-only indexed coverage as general
-dependent bracket abstraction or whole-library transfer.
+and active-but-untransferred `piapp1_fapp0` negative. Preserve the completed
+USABILITY-GRADUATE-1 exact frontend-envelope proposal while
+H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 is pending. Do not create a
+review artifact, call the frontend settled, or reopen bulk acquisition from
+the recommendation alone. Do not misstate eta-only indexed coverage as
+general dependent bracket abstraction or whole-library transfer.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
@@ -3026,3 +3031,10 @@ scope is affected.
   an independent measured priority; no active profile, theorem, parser trust,
   or whole-transfer claim was added. Exact green local consolidation/demo
   checkpoint: `c2c6da01386b7fda1d26e71379c4256fb06ea637`.
+- **2026-07-26 — Frontend graduation proposal pending; scale work remains
+  deferred.** The usability plan now has a deeply frozen recommendation for
+  only the qualified outer-LF, ordinary bracket, and indexed section-eta
+  envelope. H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 is not yet
+  approved. It grants no whole-transfer result and does not select
+  SCALE-RETURN-1, recreate parser acquisition, or resume the measured
+  root/extension closures.
