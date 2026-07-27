@@ -82,7 +82,7 @@ import {
 } from './surface';
 
 export const CORE_CATEGORICAL_PROGRAM_REVISION =
-    'USABILITY-2A0-CATEGORICAL-PROGRAM-1' as const;
+    'USABILITY-2A1-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -317,6 +317,20 @@ const collectStructuralPrerequisites = (
     return Object.freeze(result);
 };
 
+const collectDependentPrerequisites = (
+    inspection: CoreCategoricalTermInspection
+): CoreCategoricalTermInspection['dependentPrerequisites'] => {
+    const result = [...inspection.dependentPrerequisites];
+    for (const abstraction of inspection.abstractions) {
+        for (const prerequisite of abstraction.dependentPrerequisites) {
+            if (!result.includes(prerequisite)) {
+                result.push(prerequisite);
+            }
+        }
+    }
+    return Object.freeze(result);
+};
+
 /**
  * End-user construction scope for the reviewed ordinary categorical slice.
  */
@@ -543,6 +557,14 @@ export class CoreCategoricalProgram {
             nodeProvenance
         );
         const pointInspection = this.builder.inspect(point);
+        if (pointInspection.type.tag === 'indexed-object') {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_CATEGORY_OBJECT',
+                nodeProvenance,
+                `Fibre point for displayed family '${family.label}' is an ` +
+                'open indexed object, not a closed base object'
+            );
+        }
         const pointCategory = coreTypeObjectCategory(
             pointInspection.type,
             nodeProvenance.span as SourceSpan,
@@ -810,6 +832,13 @@ export class CoreCategoricalProgram {
             this.builder.inspect(targetObject)
         ];
         for (const endpoint of endpoints) {
+            if (endpoint.type.tag === 'indexed-object') {
+                throw new CoreCategoricalProgramError(
+                    'EXPECTED_CATEGORY_OBJECT',
+                    nodeProvenance,
+                    `Arrow assumption '${name}' has an open indexed endpoint`
+                );
+            }
             const endpointCategory = coreTypeObjectCategory(
                 endpoint.type,
                 nodeProvenance.span as SourceSpan,
@@ -912,6 +941,38 @@ export class CoreCategoricalProgram {
         );
     }
 
+    dependentLambda(
+        name: string,
+        familyValue: CoreCategoricalDisplayedFamily,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `dependent categorical abstraction ${name}`,
+            options.source
+        );
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        return this.builder.dependentLambda(
+            name,
+            family.baseCategory.expression,
+            family.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
     inspect(
         term: CoreCategoricalTerm
     ): CoreCategoricalTermInspection {
@@ -955,7 +1016,7 @@ export class CoreCategoricalProgram {
             explicitTerm: checked.term,
             inferredType: inferred.type,
             expectedType,
-            surfaceType: inspected.type,
+            surfaceType: lowered.type,
             explicitCore:
                 serializeCoreCategoricalExpression(checked.term),
             explicitInferredType:
@@ -965,7 +1026,7 @@ export class CoreCategoricalProgram {
             abstractions: Object.freeze([...inspected.abstractions]),
             structuralPrerequisites: prerequisites,
             dependentPrerequisites:
-                inspected.dependentPrerequisites,
+                collectDependentPrerequisites(inspected),
             productionLambdapiDependency: false
         });
     }

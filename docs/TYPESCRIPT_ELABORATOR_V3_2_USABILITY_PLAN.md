@@ -34,10 +34,12 @@ frontend plus USABILITY-1C's ordinary structural bracket compiler are
 complete; USABILITY-1D's ergonomic API, serialization, diagnostic, and
 example consolidation slice is also complete;
 USABILITY-2A0's closed-index section/fibre/transport transfer and facade
-slice is complete; USABILITY-2A1's indexed contextual classifier and genuine
-natural/displayed binder witness is the next dependency-ready slice, and
-wider declaration acquisition is explicitly deferred while the binder
-frontend is qualified
+slice and USABILITY-2A1's indexed contextual classifier, natural/displayed
+section-eta witness, runnable demo, and first untransferred-action negative
+are complete; the USABILITY-2A umbrella is complete;
+USABILITY-GRADUATE-1 is the next dependency-ready architecture-review slice,
+and wider declaration acquisition is explicitly deferred while the exact
+frontend reuse envelope is reviewed
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
@@ -50,6 +52,8 @@ USABILITY-1D implementation checkpoint:
 `e5d5471e251e7cb8d726ec5eecad84ba23c03aee`
 USABILITY-2A0 implementation checkpoint:
 `682f9af01e964301d3e1dc14f402717390ad2e74`
+USABILITY-2A1 implementation checkpoint: pending exact green local
+checkpoint and follow-up ledger record
 
 ## Outcome And Corrected Priority
 
@@ -77,7 +81,10 @@ the first functioning dependent end-user path.
 The final frontend design must not be called settled merely because the
 backend accepts explicit Core. It becomes provisionally settled only after
 the ordinary functorial slice and one natural/displayed Pi/Sigma slice pass
-end to end without owner-specific checker or evaluator shortcuts.
+end to end without owner-specific checker or evaluator shortcuts. Both
+experiments now pass; USABILITY-GRADUATE-1 must audit the exact envelope and
+obtain the recorded human verdict before that provisional result is called a
+settled product architecture.
 
 ## Authority And Trust Boundary
 
@@ -156,16 +163,29 @@ dependent proof, internal Pi, Sigma-transfor, and profunctor tranches have
 shown that those engines can absorb diverse data without owner-specific
 evaluator cases.
 
-That evidence settles neither all source coverage nor the end-user frontend:
+That baseline evidence alone settled neither all source coverage nor the
+end-user frontend. The subsequent usability tranches now add a distinct
+root-only categorical surface:
 
-- the current `CoreLfScopedBuilder.lam` is an outer-LF lambda;
-- its variation mode is metadata and does not construct a categorical
-  functor;
-- the current surface has explicit operation nodes but no categorical
-  bracket-abstraction compiler;
-- the 29/10 continuation is much smaller than the full active development;
-  and
-- natural/displayed structural coverage is intentionally incomplete.
+- `CoreLfScopedBuilder.lam` remains an outer-LF lambda and is not
+  reinterpreted;
+- `CoreCategoricalProgram.lambda` lowers ordinary callback-once functorial
+  abstraction through a first-order bracket compiler with the active
+  identity/weakening/exchange/contraction/product/evaluation/composition/curry
+  basis;
+- `CoreCategoricalProgram.dependentLambda` lowers the first exact
+  natural/displayed section eta through an honest indexed contextual
+  classifier;
+- every resulting closed term is inferred and checked through the generic LF
+  environment, with Lambdapi only a bounded conformance oracle; and
+- both ordinary and dependent end-user paths have runnable deterministic
+  demos.
+
+The remaining limits are now narrower and explicit: the 29/10 continuation
+is still much smaller than the full active development; the indexed rule is
+eta-only rather than a general dependent bracket compiler; many displayed
+actions remain active-but-untransferred or mathematically absent; and
+natural/displayed structural coverage is intentionally incomplete.
 
 ## Acquisition And Direct Transfer Decision
 
@@ -418,9 +438,9 @@ frontend variables.
 | USABILITY-1C | complete | USABILITY-1B | Ordinary bracket-abstraction basis: exact typed transfer of the thirteen prerequisites plus `Functor_cat`/`Functor` support, unused-variable/constant weakening, exchange, duplicated-variable diagonal, evaluation after pairing, composition, and nested abstraction/curry; no owner-specific evaluator additions |
 | USABILITY-1D | complete | USABILITY-1C | Stable root-only `CoreCategoricalProgram` facade, versioned deterministic backend-neutral explicit-Core serialization, normalized source-located diagnostics, exact fixtures, and a runnable pointwise/diagonal/exchange demo reusing the bounded TypeScript/Lambdapi corpus |
 | USABILITY-2A0 | complete | USABILITY-1D, reviewed continuation, active displayed owners | Exact typed transfer of the minimal closed-index displayed application prerequisites; facade types/constructors and selection for section object evaluation, displayed-functor fibre projection, and displayed-functor base-arrow transport; deliberate whole-laxity negative |
-| USABILITY-2A1 | next dependency-ready | USABILITY-2A0 | Extend the same first-order contextual IR with an indexed/dependent slot classifier and qualify one genuine natural/displayed Pi/Sigma eta or binder witness; package the dependent categorical demo and its first absent structural-action negative |
-| USABILITY-2A | in progress (split) | USABILITY-2A0, USABILITY-2A1 | Umbrella acceptance: one natural/indexed or displayed dependent Pi/Sigma binder and application example through the same contextual architecture, with no owner-specific checker/evaluator path |
-| USABILITY-GRADUATE-1 | pending | USABILITY-2A | Architecture review stating the exact mechanically reusable frontend envelope, remaining kernel-owner gaps, residual notation/parser choices, validation, and proposed product/trust boundary |
+| USABILITY-2A1 | complete | USABILITY-2A0 | First-order indexed/dependent slot classifier; callback-once natural/displayed section eta `λ k :^n K. s[k]`; exact family/usage checks; retained contextual evidence; generic LF checking; runnable dependent categorical demo; escaped/wrong-family/mode negatives; first untransferred `piapp1_fapp0` action negative |
+| USABILITY-2A | complete (split) | USABILITY-2A0, USABILITY-2A1 | Umbrella acceptance: one natural/indexed displayed-Pi section binder/application witness uses the same contextual architecture and generic checker/evaluator path as the ordinary compiler |
+| USABILITY-GRADUATE-1 | next dependency-ready | USABILITY-2A | Architecture review stating the exact mechanically reusable frontend envelope, remaining kernel-owner gaps, residual notation/parser choices, validation, and proposed product/trust boundary |
 | SCALE-RETURN-1 | deferred | USABILITY-GRADUATE-1 or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -1059,6 +1079,211 @@ No Lambdapi source changed, so there is no warning/catalog/health delta to
 refresh. The active source was still checked in full because both transferred
 signatures and the absent-laxity boundary depend on its current content.
 
+## USABILITY-2A1 Completion Record
+
+USABILITY-2A1 completes the deliberately narrow natural/indexed binder stress
+test. It does not claim general dependent bracket abstraction or complete
+displayed structural coverage.
+
+The contextual frontend now distinguishes two classifier domains:
+
+```text
+closed Core classifier
+    CoreType
+
+open first-order fibre classifier
+    IndexedObject(baseCategory, family, contextualSlot)
+```
+
+The public indexed classifier stores a locally nameless slot index. The
+builder uses an opaque builder-local slot ordinal while the callback is
+active and converts that ordinal to a locally nameless index only while
+normalizing retained contextual evidence. It never creates a
+`KernelBound`, inserts a free placeholder, or passes an open family to the
+closed Core checker. APIs requiring a closed `CoreType` reject the indexed
+classifier explicitly.
+
+A dependent section application at one direct open base slot now produces a
+typed contextual application whose result is
+`IndexedObject(K, E, k)`. More complicated open index expressions remain
+fail-closed; 2A1 does not pretend to have implemented arbitrary reindexing.
+The new program facade constructor:
+
+```text
+dependentLambda("k", E, k => apply(s, k))
+```
+
+selects the frozen `natural-indexed-abstraction` judgment, defaults to
+natural variation and displayed dependency, evaluates the callback exactly
+once, and validates all of the following before lowering:
+
+- the body is an object of the requested family at exactly the bound slot;
+- the bound slot occurs exactly once in the section application;
+- the section subject is independent of that slot;
+- the subject has exactly the requested base and family;
+- the subject is already a closed, checker-visible dependent section; and
+- the body is the exact qualified `section-object-evaluation` application.
+
+The first qualified rule is intentionally eta-only:
+
+```text
+surface/contextual input:  λ k :^n K. s[k]
+contextual body type:      E[k]
+explicit Core result:      s
+checked result type:       Obj(Pi_cat E)
+```
+
+The eta reduction does not erase audit evidence. The closed result retains a
+`categorical.dependent-eta` record containing the locally nameless
+`section-object-evaluation` body, its indexed classifier, source provenance,
+orthogonal binder axes, and the exact dependent prerequisite. Program
+compilation merges prerequisites from both the surviving term IR and
+eta-eliminated abstraction evidence, so the output still reports
+`section-object-evaluation` even though explicit Core is just `s`.
+
+The stable root-only end-user demo is:
+
+```text
+./scripts/pnpmw run demo:categorical-dependent
+```
+
+It prints the direct TypeScript surface rendering
+`λ k :^n demo_K. demo_s[k]`, the indexed classifier with index zero, explicit
+Core `(free "demo_s")`, equal inferred and expected
+`Obj(Pi_cat demo_E)` encodings, and the dependent prerequisite. It also
+requests:
+
+```text
+demo_s[demo_p]
+```
+
+for `demo_p : Hom demo_K demo_x demo_y`. That route fails at the supplied
+source position with `UNAVAILABLE_DEPENDENT_ACTION` and names the exact
+active-but-untransferred `piapp1_fapp0` boundary. This is a future owner
+transfer question, not permission to synthesize a TypeScript-only arrow
+action. The separately inactive whole displayed laxity remains the stronger
+authority-gap negative from 2A0.
+
+Focused negatives additionally prove:
+
+- a section over another displayed family cannot inhabit the requested
+  indexed classifier;
+- a functorial/ordinary mode cannot be substituted for the natural/displayed
+  binder axes;
+- an indexed callback result cannot escape its construction scope;
+- binder hints and source locations do not change explicit Core or its
+  classifier; and
+- the ordinary closed category/Hom APIs do not accept an indexed classifier
+  accidentally.
+
+Validated completion evidence:
+
+```text
+node --require ts-node/register --test \
+  tests/v3_2_categorical_dependent_eta_tests.ts \
+  tests/v3_2_categorical_dependent_eta_demo_tests.ts \
+  tests/v3_2_categorical_dependent_program_tests.ts
+  19 tests / 3 suites: 17 passed, 2 opt-in oracles skipped
+
+timeout 60s env \
+  EMDASH_RUN_LAMBDAPI_CATEGORICAL_DEPENDENT_ETA_PROBES=1 \
+  node --require ts-node/register --test \
+  tests/v3_2_categorical_dependent_eta_tests.ts
+  8 tests / 1 suite passed, including active Pi-category/component
+  signatures and a wrong-family result negative
+
+./scripts/pnpmw run demo:categorical-dependent
+  deterministic dependent eta report and exact piapp1_fapp0 negative
+
+./scripts/pnpmw run check:ts
+  workspace, typecheck, lint, and 645-test TypeScript gate passed
+  604 passed, 41 opt-in live probes skipped
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  active kernel, extensions, examples, and checks passed
+```
+
+No Lambdapi source, owner, runtime/proof rule, generated authority, browser
+export, deployed profile, parser, or production Lambdapi dependency changed.
+
+## Architecture Assessment After USABILITY-2A1
+
+The implementation now answers the central frontend experiment positively,
+but with a precise envelope.
+
+The following architecture has survived both ordinary functorial bracket
+abstraction and a genuinely indexed displayed-Pi witness:
+
+```text
+ergonomic one-shot TypeScript callback
+                |
+                v
+opaque slot identities + inferred closed/indexed classifiers
+                |
+                v
+immutable first-order locally nameless contextual IR
+                |
+                v
+classifier/argument/expected-shape owner selection
+                |
+                v
+ordinary structural bracket lowering or qualified dependent eta
+                |
+                v
+backend-neutral explicit Core
+                |
+                v
+generic TypeScript LF infer/check/evaluate + bounded Lambdapi oracle
+```
+
+Within this implemented envelope, adding another already-expressible
+ordinary term is mechanical: it changes typed surface data and contextual
+wiring, not the checker or evaluator. Adding another eta-shaped indexed
+section changes the program data and family, not the abstraction algorithm.
+Adding an already-active categorical capability follows the existing
+owner-transfer plus exact qualification boundary rather than adding an
+owner-named AST or semantic exception. HOAS/PHOAS ergonomics and locally
+nameless storage have therefore proved complementary; choosing one does not
+require abandoning the other.
+
+This is strong enough for USABILITY-GRADUATE-1 to propose that the frontend
+architecture is settled for the qualified first-order envelope. It is not
+evidence for any of the following broader claims:
+
+- general dependent bracket abstraction for a non-eta body;
+- general displayed weakening, exchange, contraction, reindexing, or
+  coherence;
+- transfer of `piapp1_fapp0`, `piapp1_func`, or every displayed
+  functor/transfor action;
+- complete groupoidal-DTT specialization/closure;
+- complete transfer of the measured 70-root plus 83-extension declarations;
+- automatic or generic parsing of Lambdapi source;
+- final `:^f`/`:^o` notation or textual syntax;
+- browser-profile promotion; or
+- whole-development subject-reduction, termination, confluence, or
+  performance.
+
+These remaining items split into different kinds of work and must stay
+separate:
+
+1. **frontend algorithm coverage** — general indexed bracket abstraction may
+   need more contextual lowering rules;
+2. **mathematical owner coverage** — a required displayed structural action
+   may need transfer or Lambdapi-first development;
+3. **library coverage** — additional declarations/rules can continue through
+   the qualified generic transfer engines;
+4. **acquisition throughput** — direct typed transcription remains the
+   default, with a narrow adapter reconsidered only from measured repetition;
+5. **source notation** — optional parsing and final binder glyphs are product
+   decisions outside the semantic architecture; and
+6. **product trust/profile** — browser exposure and any broader runtime claim
+   require their own review.
+
+Accordingly, 2A1 resolves the earlier “can the same architecture represent a
+dependent contextual classifier honestly?” question. It does not resolve
+every future displayed operation. The next task is a bounded graduation
+audit and human decision, not bulk transcription or a speculative parser.
+
 ## Acceptance Criteria
 
 USABILITY-GRADUATE-1 may propose that the frontend architecture is settled
@@ -1250,8 +1475,18 @@ inactive whole-laxity/open-index fail-closed boundaries. Do not reinterpret
 closed-index application as a completed dependent binder or make the
 deliberately inactive `functord_laxity_transf` available.
 
-Begin with dependency-ready USABILITY-2A1 and then complete the
-categorical-binder frontend in the ledger's order and follow
+Preserve completed USABILITY-2A1: the closed/indexed classifier separation,
+builder-local slot ordinals normalized to first-order locally nameless
+indices, direct-slot section application, callback-once
+`categorical.dependent-eta` evidence, exact base/family/usage checks,
+dependent-prerequisite retention after eta, generic LF checking, runnable
+`demo:categorical-dependent`, wrong-family/mode/escaped-slot negatives, and
+the exact `piapp1_fapp0` next-action diagnostic. Do not insert an unscoped
+Core bound index, generalize the eta-only rule into an unproved dependent
+bracket compiler, or claim that active-but-untransferred and mathematically
+absent displayed actions are the same kind of gap.
+
+Begin with dependency-ready USABILITY-GRADUATE-1 and follow
 docs/TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md. Keep outer LF
 lambda separate from functorial abstraction. Use a small
 typed contextual/wiring IR and lower variable, discard, permutation,
@@ -1276,10 +1511,15 @@ named-HOAS storage, retired D0/D1 compatibility API, or fail-soft behavior.
 An ergonomic HOAS/PHOAS construction API may lower immediately to immutable
 first-order locally nameless storage.
 
-Do not call the frontend architecture settled until one ordinary
-functorial bracket-abstraction corpus and one natural/displayed dependent
-Pi/Sigma example pass end to end and H-DTTLF-USABILITY-GRADUATE approves the
-recorded envelope. Keep bulk library-transfer qualification separate; resume
+The ordinary functorial bracket corpus and first natural/displayed
+dependent-Pi eta now pass end to end. Prepare the exact graduation audit:
+state what is mechanically reusable, distinguish eta-only indexed coverage
+from general dependent bracket abstraction, list every active-untransferred
+and authority-absent action separately, and preserve all parser, notation,
+browser, groupoidal-closure, whole-transfer, and metatheory non-claims. Do not
+call the frontend architecture settled beyond that recorded envelope until
+H-DTTLF-USABILITY-GRADUATE approves it. Keep bulk library-transfer
+qualification separate; resume
 the deferred 70-root/extension closure or propose acquisition automation only
 after this critical path or an independently measured need.
 
@@ -1415,3 +1655,14 @@ CI obligations.
   staged-path review and whitespace audit. It grants no new owner/profile,
   parser, production Lambdapi dependency, remote Git operation, integration,
   publication, release, history rewrite, or cleanup authority.
+- **2026-07-26 — USABILITY-2A1 complete.** Added an honest first-order
+  indexed fibre classifier, callback-once natural/displayed section eta,
+  retained locally nameless evidence, exact closed/indexed trust boundaries,
+  prerequisite preservation after eta reduction, and the root-only
+  `demo:categorical-dependent` command. `λ k :^n K. s[k]` compiles to `s`
+  and checks as `Obj(Pi_cat E)`; wrong-family/mode/escape routes fail, and
+  `s[p]` names the active-but-untransferred `piapp1_fapp0` boundary. The
+  focused and live Lambdapi corpora, 645-test TypeScript gate, and bounded
+  active-kernel check pass. General dependent bracket abstraction, displayed
+  structural completeness, parser/notation, browser promotion, groupoidal
+  closure, and whole-library transfer remain non-claims.

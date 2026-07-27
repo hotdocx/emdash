@@ -3720,5 +3720,11 @@ Follow the usability plan's accepted acquisition deferral and categorical
 binder architecture. Preserve the completed generic scale infrastructure,
 but do not recreate the removed canonical-symbol parser or make bulk
 declaration transfer the immediate prerequisite for the runnable dependent
-demo and functorial/natural/displayed frontend slices.
+demo and functorial/natural/displayed frontend slices. Preserve completed
+USABILITY-2A1's honest locally nameless indexed classifier and
+natural/displayed section-eta witness. Resume with
+USABILITY-GRADUATE-1's exact frontend-envelope audit; do not confuse its
+eta-only dependent coverage with general dependent bracket abstraction,
+displayed structural completeness, bulk library transfer, or parser/notation
+completion.
 ```

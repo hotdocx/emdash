@@ -50,8 +50,9 @@ tactic-source retention, and the first 3B closure measurement are complete.
 The isolated canonical-symbol parser experiment and wider 3B declaration
 transfer are now optional/deferred. The active critical path is the dependent
 demo and categorical-binder frontend in the usability plan. Its closed-index
-USABILITY-2A0 section/fibre/transport prerequisite is complete, and
-USABILITY-2A1's indexed contextual binder is next. Generated
+USABILITY-2A0 prerequisite and indexed natural/displayed section-eta
+USABILITY-2A1 witness are complete; the exact frontend-envelope graduation
+review is next. Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
 promoted active stress profile or whole-transfer claim
@@ -137,13 +138,42 @@ closed-index USABILITY-2A0 prerequisite is also complete: exact active
 `Fibre_func` and `functord_transport_func` signatures are generically
 transferred, while the facade now represents displayed families, fibres,
 sections, and displayed functors and checks `s[k]`, `FF[k]`, and `FF[p]`.
-The inactive whole displayed laxity remains a source-located error, and open
-indexed callback application deliberately fails rather than smuggling an
-unscoped Core index into a closed classifier. The next dependency-ready row
-is USABILITY-2A1's first-order indexed contextual classifier and genuine
-natural/displayed eta or binder witness; the final frontend architecture is
-not yet graduated. The exact green USABILITY-2A0 implementation checkpoint is
-`682f9af01e964301d3e1dc14f402717390ad2e74`.
+The inactive whole displayed laxity remains a source-located error.
+
+USABILITY-2A1 now represents `E[k]` honestly as a first-order locally
+nameless indexed contextual classifier, while keeping that open classifier
+outside closed Core. The callback-once facade accepts the exact
+natural/displayed eta:
+
+```text
+λ k :^n K. s[k]
+```
+
+and lowers it to explicit Core `s`, checks it as `Obj(Pi_cat E)`, and retains
+the indexed `section-object-evaluation` body and prerequisite as immutable
+evidence. The runnable report is:
+
+```text
+./scripts/pnpmw run demo:categorical-dependent
+```
+
+It also reports `s[p]` as `UNAVAILABLE_DEPENDENT_ACTION` at the exact
+active-but-untransferred `piapp1_fapp0` boundary. Wrong-family, wrong-mode,
+and escaped-index cases fail closed. No unscoped Core index, new semantic
+owner/rule, parser, browser export, or production Lambdapi dependency was
+added.
+
+The ordinary and first indexed witness corpora now both pass through the
+same TypeScript callback → locally nameless contextual IR →
+classifier-directed explicit Core → generic LF checker architecture. The
+next dependency-ready row is `USABILITY-GRADUATE-1`: audit and propose the
+exact mechanically reusable envelope. General dependent bracket abstraction,
+displayed structural completeness, `piapp1_*` transfer, groupoidal closure,
+bulk library transfer, notation/parsing, and browser promotion remain
+separate non-claims pending their own evidence and gates. The exact green
+USABILITY-2A0 implementation checkpoint is
+`682f9af01e964301d3e1dc14f402717390ad2e74`; the 2A1 checkpoint is recorded
+in the active usability plan after its exact staged review.
 
 ## Authority Boundary
 

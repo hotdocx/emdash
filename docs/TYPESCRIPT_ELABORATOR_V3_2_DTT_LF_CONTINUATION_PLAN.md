@@ -2123,9 +2123,10 @@ complete. Recover the actual HEAD and checkpoint record. No independent row
 in this completed profile should be widened by inference. Preserve the active
 usability plan's completed consolidation, demo, specification, eta, and
 ordinary-bracket, ergonomic-program, and closed-index displayed-application
-rows and resume USABILITY-2A1's genuine indexed-binder slice; retain the scale
-plan's completed generic infrastructure while its canonical parser and bulk
-declaration rows are deferred. Do not open GROUPD-PLAN-0 without a
+rows plus USABILITY-2A1's genuine locally nameless indexed section-eta
+witness; resume USABILITY-GRADUATE-1's exact frontend-envelope audit. Retain
+the scale plan's completed generic infrastructure while its canonical parser
+and bulk declaration rows are deferred. Do not open GROUPD-PLAN-0 without a
 concrete groupoidal-closure consumer and H-DTTLF-04, and do not change the
 browser/deployed profile or broaden a metatheory claim by inference.
 

@@ -582,9 +582,10 @@ Implement in two dependency-ordered slices:
 
 Closed application in 2A0 is prerequisite evidence, not completion of the
 dependent-binder architecture. Transfer only active owners the witness needs.
-Stop at the first absent structural capability with the exact
-`UNAVAILABLE_DISPLAYED_ACTION` evidence; do not synthesize a missing whole
-laxity theorem.
+Stop at the first active-but-untransferred action with
+`UNAVAILABLE_DEPENDENT_ACTION`, or at a mathematically absent capability with
+`UNAVAILABLE_DISPLAYED_ACTION`; do not conflate those states or synthesize a
+missing theorem.
 
 #### `USABILITY-2A0` implementation result
 
@@ -628,6 +629,66 @@ The focused 30-test TypeScript corpus (29 pass, one opt-in skip), eight-case
 live Lambdapi corpus, 634-test full TypeScript gate, and bounded complete
 active-kernel check pass.
 
+#### `USABILITY-2A1` implementation result
+
+The indexed binder slice is complete for one exact section-eta rule. The
+contextual frontend classifier is now a disjoint union of closed `CoreType`
+and a first-order indexed object:
+
+```text
+IndexedObject {
+  baseCategory: K,
+  family: E,
+  index: locally-nameless contextual slot
+}
+```
+
+The internal builder tracks an opaque slot ordinal and normalizes it to the
+public locally nameless index only in retained contextual evidence. The
+classifier is not a Core term: it cannot cross the closed checker boundary,
+cannot become an unscoped `KernelBound`, and is rejected explicitly by
+closed fibre/Hom APIs.
+
+Open application of a closed dependent section to one direct contextual base
+slot produces this classifier. `dependentLambda` then selects the frozen
+`natural-indexed-abstraction` row, runs its callback once, checks natural
+variation/displayed dependency and exact base/family/usage, and qualifies
+only:
+
+```text
+λ k :^n K. s[k]
+```
+
+The result eta-lowers to explicit Core `s` with type `Obj(Pi_cat E)`. A
+frozen `categorical.dependent-eta` evidence record retains the original
+`section-object-evaluation` body, indexed classifier, slot index, provenance,
+and dependent prerequisite. Compilation merges that evidence with
+prerequisites visible in the surviving result IR, so eta reduction does not
+make the selected owner unauditable.
+
+`demo:categorical-dependent` presents the typed input, contextual classifier,
+explicit Core, inferred/expected type, and prerequisite without a parser or
+production Lambdapi process. Its first next-action negative is `s[p]`:
+`piapp1_fapp0` is active in Lambdapi but remains untransferred, so the facade
+reports `UNAVAILABLE_DEPENDENT_ACTION` at the supplied source. The
+deliberately inactive whole displayed laxity from 2A0 remains a distinct
+`UNAVAILABLE_DISPLAYED_ACTION` authority gap.
+
+Wrong-family, non-natural mode, and escaped-index tests fail closed. Binder
+renaming and provenance changes leave explicit Core and its type invariant.
+The focused 19-case corpus has 17 passes and two opt-in skips; the eight-case
+live 2A1 corpus passes, including an active Pi/component signature and a
+wrong-family result negative; the 645-test root gate and bounded active-kernel
+check pass.
+
+This result validates the surface-callback → locally nameless contextual IR →
+classifier-directed lowering → explicit Core → generic LF checker shape for
+both ordinary bracket abstraction and one genuine indexed displayed-Pi
+witness. It does not implement general dependent bracket abstraction,
+displayed weakening/contraction/reindexing/coherence, section-arrow action,
+groupoidal closure, bulk library acquisition, or final notation/parsing.
+Those boundaries belong in the separate graduation review.
+
 ## Executable Evidence
 
 `src/v3_2/categorical_surface_spec.ts` freezes:
@@ -656,7 +717,7 @@ also checks the reviewed `DIRECTED-1C` prerequisite, existing Core owner
 membership and backend bindings, exact content, unique selection keys, and
 the absence of backend spellings from semantic data.
 
-The specification, contextual builder, program facade, serializer, and demo
+The specification, contextual builder, program facade, serializer, and demos
 are root-only and deliberately absent from `src/v3_2/browser.ts`. They
 implement and qualify the candidate compiler boundary; they do not yet expose
 a browser product API or establish the USABILITY-GRADUATE verdict.

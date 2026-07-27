@@ -2648,8 +2648,12 @@ bounded Lambdapi corpus. Preserve the root-only categorical program facade,
 versioned deterministic explicit-Core inspection format, normalized source
 diagnostics, and pointwise/diagonal/exchange demo. Preserve the completed
 USABILITY-2A0 generic closed-index section/fibre/transport transfer, facade,
-and inactive-laxity/open-index boundaries. Continue with USABILITY-2A1's
-genuine indexed contextual binder rather than reopening bulk acquisition.
+and inactive-laxity boundary. Preserve completed USABILITY-2A1's honest
+locally nameless indexed classifier, callback-once section eta, runnable demo,
+and active-but-untransferred `piapp1_fapp0` negative. Continue with
+USABILITY-GRADUATE-1's exact frontend-envelope audit rather than reopening
+bulk acquisition. Do not misstate eta-only indexed coverage as general
+dependent bracket abstraction or whole-library transfer.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
