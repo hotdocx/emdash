@@ -201,7 +201,7 @@ implementation checkpoint is
 `60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`.
 The exact green graduation proposal checkpoint is
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`; the review implementation
-checkpoint is `PENDING-CURRENT-TRANCHE`.
+checkpoint is `735ad90fbc99024b0e01ef3f76666fd715652c5b`.
 
 The next proposed usability design preserves H-01/D-007's dependent-first
 semantic interpretation and authority-classified constant-family bridge, but

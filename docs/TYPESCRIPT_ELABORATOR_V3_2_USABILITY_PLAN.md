@@ -69,7 +69,7 @@ USABILITY-2A1 implementation checkpoint:
 USABILITY-GRADUATE-1 proposal checkpoint:
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`
 USABILITY-GRADUATE-1 review implementation checkpoint:
-`PENDING-CURRENT-TRANCHE`
+`735ad90fbc99024b0e01ef3f76666fd715652c5b`
 
 ## Outcome And Corrected Priority
 
@@ -2182,7 +2182,7 @@ CI obligations.
   full application partition, active-untransferred and authority gaps, all
   parser/acquisition/notation/groupoidal/browser/metatheory boundaries, and
   selects no automatic follow-on. Exact green review implementation
-  checkpoint: `PENDING-CURRENT-TRANCHE`.
+  checkpoint: `735ad90fbc99024b0e01ef3f76666fd715652c5b`.
 - **2026-07-26 — General binder-usability architecture reassessed.**
   Recovered the already-approved H-01/D-007 dependent-first constraint and
   confirmed that the current ordinary bracket and dependent eta paths share

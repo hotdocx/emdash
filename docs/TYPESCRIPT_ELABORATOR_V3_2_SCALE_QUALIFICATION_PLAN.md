@@ -149,7 +149,7 @@ SCALE-STRESS-3B0 retention / USABILITY-0A/0B implementation checkpoint:
 USABILITY-GRADUATE-1 proposal checkpoint:
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`
 USABILITY-GRADUATE-1 review implementation checkpoint:
-`PENDING-CURRENT-TRANCHE`
+`735ad90fbc99024b0e01ef3f76666fd715652c5b`
 
 ## Purpose
 

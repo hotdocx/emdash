@@ -89,7 +89,7 @@ Completed-profile comparison checkpoint:
 Latest local implementation checkpoint:
 `f77af05a8f58cbef74d2008fb445a4e7af707f07`
 USABILITY-GRADUATE-1 review implementation checkpoint:
-`PENDING-CURRENT-TRANCHE`
+`735ad90fbc99024b0e01ef3f76666fd715652c5b`
 Latest documentation checkpoint before scale qualification:
 `29976248189a8caa9797cced533ae11559dbe95c`
 First scale-qualification implementation checkpoint:
