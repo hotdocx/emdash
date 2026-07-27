@@ -50,7 +50,7 @@ FIBRED-PRODUCT-0B proposal checkpoint:
 FIBRED-COMPREHENSION-0B proposal checkpoint:
 `093a99a42edc0d36c489ac461a94b00401869417`
 FIBRED-COMPREHENSION-1A implementation checkpoint:
-pending the current green tranche's authorized local checkpoint
+`999e1187bbb1ce976cf7c97d3b5e470cdf4bc097`
 
 ## Purpose And Exact Outcome
 
@@ -1498,3 +1498,10 @@ conformance, and CI obligations.
   `0/45/27` audit, unchanged `1010/159` warning inventory, catalog, health,
   live canonical export/acquisition, focused TypeScript, and Lambdapi
   conformance evidence are green. FIBRED-PRODUCT-1A is next.
+- **2026-07-27 — FIBRED-COMPREHENSION-1A checkpointed.** Recorded local
+  checkpoint `999e1187bbb1ce976cf7c97d3b5e470cdf4bc097` after exact staged
+  review, source/export hash verification, focused and live conformance,
+  713-test TypeScript validation, full repository CI, nested health/catalog,
+  unchanged warning inventory, and strict rule audit passed. The checkpoint
+  grants no product structural map, generic total pullback, profile
+  promotion, remote operation, or broader Git authority.

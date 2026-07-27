@@ -116,7 +116,7 @@ FIBRED-PRODUCT-0B proposal checkpoint:
 FIBRED-COMPREHENSION-0B proposal checkpoint:
 `093a99a42edc0d36c489ac461a94b00401869417`
 FIBRED-COMPREHENSION-1A implementation checkpoint:
-pending the current green tranche's authorized local checkpoint
+`999e1187bbb1ce976cf7c97d3b5e470cdf4bc097`
 
 ## Outcome And Corrected Priority
 
