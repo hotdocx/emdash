@@ -78,7 +78,7 @@ H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 and grants no authority.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
-`c2c6da01386b7fda1d26e71379c4256fb06ea637`
+`f77af05a8f58cbef74d2008fb445a4e7af707f07`
 Latest documentation checkpoint before scale qualification:
 `29976248189a8caa9797cced533ae11559dbe95c`
 First scale-qualification implementation checkpoint:
@@ -2118,7 +2118,7 @@ and run bounded proportional gates. Reuse the existing dedicated clean goal
 worktree when available.
 
 The latest plan-spanning local implementation checkpoint is
-60d584a8ba9ec7ed6fa624d2007baf7d4afaebae, followed by any
+f77af05a8f58cbef74d2008fb445a4e7af707f07, followed by any
 documentation-only checkpoint at the actual recorded HEAD. DIRECTED-1C,
 DIRECTED-GRADUATE-1, the separate H-DTTLF-03 review, the root-only
 authoritative factory, and the continuation-only fixed conformance lane are

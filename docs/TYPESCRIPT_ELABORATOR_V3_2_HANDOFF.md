@@ -185,8 +185,8 @@ checkpoint is
 `682f9af01e964301d3e1dc14f402717390ad2e74`; the exact green 2A1
 implementation checkpoint is
 `60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`.
-The graduation proposal checkpoint is pending the exact green local
-checkpoint record.
+The exact green graduation proposal checkpoint is
+`f77af05a8f58cbef74d2008fb445a4e7af707f07`.
 
 ## Authority Boundary
 

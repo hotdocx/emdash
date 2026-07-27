@@ -139,6 +139,8 @@ SCALE-INTRINSIC-DELTA-1 / SCALE-STRESS-3A2B implementation checkpoint:
 `f42b08fdd25dcbb540cdcaaffea9750a2c8b2ed8`
 SCALE-STRESS-3B0 retention / USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
+USABILITY-GRADUATE-1 proposal checkpoint:
+`f77af05a8f58cbef74d2008fb445a4e7af707f07`
 
 ## Purpose
 
@@ -3037,4 +3039,5 @@ scope is affected.
   envelope. H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 is not yet
   approved. It grants no whole-transfer result and does not select
   SCALE-RETURN-1, recreate parser acquisition, or resume the measured
-  root/extension closures.
+  root/extension closures. Exact proposal checkpoint:
+  `f77af05a8f58cbef74d2008fb445a4e7af707f07`.

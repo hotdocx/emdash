@@ -741,6 +741,8 @@ change the frozen MVP or directed profiles, production trust, Lambdapi
 source, or any owner/rule. Its one pending decision is
 H-DTTLF-USABILITY-GRADUATE/D-DTTLF-USABILITY-002 as quoted in the usability
 plan. A separate immutable review artifact is required for any approval.
+The exact green proposal checkpoint is
+`f77af05a8f58cbef74d2008fb445a4e7af707f07`.
 
 ## Executable Evidence
 

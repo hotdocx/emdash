@@ -56,7 +56,7 @@ USABILITY-2A0 implementation checkpoint:
 USABILITY-2A1 implementation checkpoint:
 `60d584a8ba9ec7ed6fa624d2007baf7d4afaebae`
 USABILITY-GRADUATE-1 proposal checkpoint:
-pending the exact green local checkpoint recorded below
+`f77af05a8f58cbef74d2008fb445a4e7af707f07`
 
 ## Outcome And Corrected Priority
 
@@ -1924,5 +1924,5 @@ CI obligations.
   TypeScript gate, and the complete bounded active-kernel check pass. No
   review artifact, semantic owner/rule, profile, parser, browser export,
   production Lambdapi dependency, bulk-transfer resumption, or broader Git
-  authority was added. The exact green local proposal checkpoint is pending
-  the checkpoint-record follow-up.
+  authority was added. Exact green local proposal checkpoint:
+  `f77af05a8f58cbef74d2008fb445a4e7af707f07`.
