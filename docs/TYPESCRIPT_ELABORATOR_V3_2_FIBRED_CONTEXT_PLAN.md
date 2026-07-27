@@ -23,6 +23,8 @@ dedicated plan and continued implementation, and separately cautioned that a
 generic total-category pullback must not be assumed
 FIBRED-CONTEXT-0A implementation checkpoint:
 `d25ddb349e97dc0629cd6bc1aa941e1cc200066e`
+FIBRED-CONTEXT-0B implementation checkpoint:
+`569ebac0c8eaaeaaec63f93bde02fd91f50864f9`
 
 ## Purpose And Exact Outcome
 
