@@ -70,9 +70,16 @@ adapter FIBRED-CONTEXT-0B are complete. The latter records genuine chains,
 sequential pullbacks, independent sibling grouping, and a zero-owner product
 boundary without changing the ordinary or D-003 lowerers. Its bounded
 product probe shows that the transparent uncurried family product computes
-fibres but not base-arrow transport. FIBRED-PRODUCT-0B is therefore the next
-comparison, and the exact product owner/action decision remains behind
-H-DTTLF-USABILITY-02.
+fibres but not base-arrow transport. FIBRED-PRODUCT-0B has now compared three
+owner positions. The broad existing-owner action works with three additional
+critical pairs; a new stable `Product_catd` head works with five and
+duplicates semantics; the selected narrow same-base existing-owner route
+works with zero warning delta. Its deep-frozen proposal requests exactly two
+prospective runtime rules, no declaration or alias, and preserves
+`Functord`-product comparison, pullback stability, structural maps, full base
+two-cell action, and total-category pullback as separate work.
+FIBRED-PRODUCT-1A is blocked pending the exact
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 decision.
 Generated
 induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly

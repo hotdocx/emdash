@@ -11,8 +11,10 @@ Status: active implementation sub-plan; the corrected architectural direction
 is user-accepted, FIBRED-PLAN-0 and the read-only FIBRED-PRODUCT-0A authority
 probe are complete, FIBRED-CONTEXT-0A's dependency-analysis foundation is
 complete, FIBRED-CONTEXT-0B's categorical representation adapter is complete,
-FIBRED-PRODUCT-0B is the next dependency-ready comparison, and any new
-Lambdapi mathematical owner or rule remains behind H-DTTLF-USABILITY-02
+FIBRED-PRODUCT-0B's three-way owner-position comparison and immutable proposal
+are complete, FIBRED-PRODUCT-1A awaits the exact
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 decision, and no proposed Lambdapi
+rule is active before that approval
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -321,6 +323,129 @@ coherent boundary. The next product row must compare these routes. It may not
 choose a primitive merely for notation, and it may not force the general
 uncurry action solely to make one demo pass.
 
+### FIBRED-PRODUCT-0B owner-position comparison result
+
+The bounded full-file comparison has now resolved the first consumer more
+narrowly than either original endpoint. All three candidates use or reproduce
+the same intended family:
+
+```text
+P(B,C)
+  := uncurry(Product_cat_func) ∘ Struct_sigma(B,C)
+  : Catd K.
+```
+
+The required first two computations are:
+
+```text
+Fibre_cat (P(B,C)) k
+  ≡ Product_cat (Fibre_cat B k) (Fibre_cat C k)
+
+catd_transport_func (P(B,C)) p
+  ≡ Product_map_func
+      (catd_transport_func B p)
+      (catd_transport_func C p).
+```
+
+The owner-position measurements are:
+
+| Candidate | Kernel presentation | New declarations/rules | Result | Warning inventory |
+| --- | --- | --- | --- | --- |
+| broad generic product off-diagonal | transparent semantic composite plus unrestricted `(F * 1)[G] -> Product_map_func(F,G)` | 0 declarations, 2 runtime rules | fibre and transport pass, but the broad action meets three unjoined naturality/higher-action cuts | `1013/159`, delta `+3/0` |
+| stable `Product_catd` head | new injective family head with direct fibre and transport projections | 1 declaration, 2 runtime rules | fibre and transport pass, but semantics are duplicated and reindexing/full base-two-cell action are still absent | `1015/159`, delta `+5/0` |
+| narrow shared-base existing-owner projection | transparent semantic composite plus a generic Cat-valued postcomposition action and a product fold requiring two actions over the same base arrow | 0 declarations, 2 runtime rules | fibre and componentwise transport pass with the smallest tested boundary | `1010/159`, delta `0/0` |
+
+The five extra stable-head critical pairs comprise two fibre-projection
+overlaps, an identity-transport overlap between `Product_map_func(id,id)` and
+`id_func`, and two naturality transport overlaps. The three broad-rule
+critical pairs are the unrestricted product off-diagonal action meeting
+existing naturality and still-deferred higher action. These are not treated
+as mere warning-count objections: they identify semantic closure that the
+first grouped-sibling consumer does not require and that this tranche cannot
+yet join.
+
+The selected candidate retains the transparent semantic family and proposes
+exactly these existing-owner runtime projections:
+
+```text
+// Cat-valued represented postcomposition, at hom_postcomp_fapp0:
+(E[p] ∘ G)[q]
+  ↦ E[p][G[q]]
+
+// Product action, at Product_cat_fapp1_fapp0_functord:
+(B[p] * 1)[C[p]]
+  ↦ Product_map_func(B[p],C[p])
+```
+
+The second left-hand side is deliberately restricted to
+`B[p]` and `C[p]` arising as `fapp1_fapp0` actions of two Cat-valued families
+over the same `K`, endpoints, and base arrow `p`. It is not the unrestricted
+`(F * 1)[G]` fold. The first rule supplies the capped action needed while
+semantic uncurry traverses represented postcomposition; the second exposes
+the already stable componentwise `Product_map_func` transport.
+
+This result changes the provisional `Product_catd` recommendation:
+
+- no active `Product_catd` primitive or injective head is needed for the
+  first consumer;
+- no notation-only Lambdapi alias is needed;
+- a readable TypeScript displayed-product surface operation may lower
+  directly to the explicit transparent composite;
+- the returned `Product_map_func` already has active object, full-hom, and
+  capped-arrow action, so downstream consumers can iterate that stable head;
+  and
+- the full base-two-cell action of the *family*, arbitrary off-diagonal
+  product action, and their naturality closure remain separately
+  unqualified.
+
+The bounded negative corpus is equally important:
+
+```text
+opaque E
+  ≢ P(B,C)
+
+Functord_cat E (P(B,C))
+  ≢ Product_cat (Functord_cat E B) (Functord_cat E C)
+
+Pullback_catd (P(B,C)) F
+  ≢ P(Pullback_catd B F, Pullback_catd C F).
+```
+
+The first two negatives prevent a global family or classifier collapse. The
+`Functord_cat` product comparison should be derived later from qualified
+displayed projections and pairing functors, not installed as a global
+runtime conversion. The pullback comparison did not convert at runtime, and
+an explicit proof-time reflexivity attempt also failed: existing unification
+does not currently establish it. Reindexing stability therefore remains a
+separate owner-or-proof-time audit rather than an inferred side effect.
+
+The final narrow probe passes quietly and with warnings enabled. Its strict
+LHS audit reports zero unreviewed reconstructible slots and retains the
+active 45 annotated slots across 27 intentional clauses. The warning-enabled
+inventory is exactly the active `1010` unjoinable critical pairs plus `159`
+replaceable-pattern warnings. The relevant ignored evidence is:
+
+```text
+emdash2/tmp/probes/
+  typescript_usability_fibred_product_0b_generic_projection.lp
+  typescript_usability_fibred_product_0b_stable_head.lp
+  typescript_usability_fibred_product_0b_narrow_projection.lp
+
+emdash2/logs/probes/
+  typescript_usability_fibred_product_0b_narrow_projection-20260727-174145.log
+  typescript_usability_fibred_product_0b_narrow_projection-20260727-174148.log
+```
+
+These ignored files remain experimental evidence, not authority. The durable,
+deep-frozen, non-authorizing proposal is
+`src/v3_2/categorical_fibred_product_proposal.ts`; its five focused tests are
+in `tests/v3_2_categorical_fibred_product_proposal_tests.ts`.
+
+The selection is now exact but not active: adding the two Lambdapi rules,
+transferring their minimal closure, and lowering the first grouped-sibling
+transport are FIBRED-PRODUCT-1A and require
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 approval.
+
 ## Total-Category Comparison Is A Theorem Boundary, Not An Assumed Rewrite
 
 The semantic slogan:
@@ -516,8 +641,8 @@ usability profile.
 | FIBRED-PRODUCT-0A | complete; ignored read-only probe | active v3.2 product, uncurry, Catd, and composition owners | The transparent `uncurry(Product_cat_func) ∘ ⟨B,C⟩` candidate computes to pointwise product fibres but deliberately does not compute its base-arrow transport to `Product_map_func`; no active source, owner, rule, or catalog changed |
 | FIBRED-CONTEXT-0A | complete | FIBRED-PLAN-0 | Added backend-neutral dependency-graph inspection for persistent Core telescopes: dependencies are recovered beneath internal binders; direct/closure/prefix data, shared-base versus weakened siblings, genuine edges, exchange suffix transport, owner-neutral usage planning, exact provenance, fail-closed errors, immutability, and six focused tests are green |
 | FIBRED-CONTEXT-0B | complete | FIBRED-CONTEXT-0A | Adapted the generic graph to categorical contextual slots through explicit locally nameless classifier references; represents genuine edges/chains, direct versus pullback-then-Sigma sequential extension, shared-base versus weakened sibling groups, grouped displayed-product structural intent, exact errors/provenance, and a zero-owner boundary without changing completed ordinary or D-003 behavior |
-| FIBRED-PRODUCT-0B | pending | FIBRED-PRODUCT-0A, concrete first categorical consumer | Compare the generic-product-higher-action, stable-`Product_catd`, and narrow-hybrid owner positions in a bounded full-file probe; specify exact type, fibre/transport/projection consumers, non-collapse, higher-action boundary, rule orientation, warnings, and critical-pair risks |
-| FIBRED-PRODUCT-1A | blocked on H-DTTLF-USABILITY-02 if a new owner/rule is selected | FIBRED-PRODUCT-0B and human approval | Implement only the approved active Lambdapi product package, synchronize checks/catalog/health, transfer the minimal exact closure through generic TypeScript mechanisms, and preserve frozen profiles |
+| FIBRED-PRODUCT-0B | complete; immutable proposal awaits D-DTTLF-USABILITY-004 | FIBRED-PRODUCT-0A, concrete first categorical consumer | Compared broad generic, stable-head, and narrow shared-base existing-owner routes in full-file probes. Selected the zero-warning-delta transparent semantic family plus exactly two existing-owner runtime projections; froze positive/negative conversions, higher-action limits, no-owner/no-total-pullback boundary, and the exact human decision |
+| FIBRED-PRODUCT-1A | blocked pending H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 | FIBRED-PRODUCT-0B and exact human approval | If approved, promote only the Cat-valued postcomposition capped action and shared-base product-action projection, run the full Lambdapi SOP, transfer exactly that closure through generic TypeScript mechanisms, and lower the first grouped-sibling transport while preserving frozen profiles |
 | FIBRED-STRUCTURE-1 | pending | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A or a proved existing-owner derivation | Lower displayed projection, pairing, swap, diagonal, and reindexing stability for independent siblings with positive, negative, and higher-action evidence |
 | FIBRED-BINDER-1 | pending | FIBRED-STRUCTURE-1 and existing Sigma/Pi comparisons | Implement the first direct `:^fd`-equivalent typed API and show direct/nested classifier compatibility without collapsing proof-time and runtime equality |
 | FIBRED-TRANSFD-1 | pending | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Implement one coherent displayed-transfor abstraction and component/higher-cell consumer |
@@ -662,26 +787,59 @@ selected only by the subsequent authority-qualified rows.
 
 ### Existing H-DTTLF-USABILITY-02 — New Mathematical Owner Or Rule
 
-FIBRED-PRODUCT-0B and FIBRED-COMPREHENSION-1 may trigger the existing
-usability owner gate. Before any active Lambdapi change, the proposal must
-name:
+FIBRED-PRODUCT-0B has triggered the existing usability rule gate without
+requesting a new mathematical owner. The immutable decision is:
 
-- the exact owner position and whether it completes generic product/uncurry
-  action, adds stable `Product_catd`, or uses a narrower semantic facade;
+**D-DTTLF-USABILITY-004 — pending human decision.** Keep the fibrewise product
+as the transparent existing-owner composite. Add only:
+
+1. the probed Cat-valued postcomposition capped-action rule at
+   `hom_postcomp_fapp0`; and
+2. the same-base product projection
+   `(B[p] * 1)[C[p]] -> Product_map_func(B[p],C[p])` at
+   `Product_cat_fapp1_fapp0_functord`.
+
+After the active Lambdapi package passes the full nested SOP, transfer only
+that two-rule closure through the generic TypeScript runtime and lower the
+first grouped-sibling transport to backend-neutral explicit Core.
+
+This decision does **not** authorize:
+
+- a `Product_catd` primitive, injective head, or notation-only kernel alias;
+- the broad arbitrary `(F * 1)[G]` off-diagonal rule;
+- full base-two-cell action or its naturality closure;
+- global `Functord_cat`-product conversion;
+- pullback/reindexing stability;
+- displayed projection, pairing, swap, or diagonal;
+- a generic total-category pullback or equivalence;
+- browser/frozen-profile promotion; or
+- parsing, acquisition, or bulk transfer.
+
+The exact question is:
+
+> Approve H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 as proposed: keep the
+> fibrewise product as the transparent existing-owner composite; add only the
+> probed Cat-valued postcomposition capped-action rule and the shared-base
+> product projection `(B[p] * 1)[C[p]] ->
+> Product_map_func(B[p],C[p])`; transfer only that two-rule closure and first
+> grouped-sibling transport to TypeScript; and retain the broad off-diagonal
+> action, a primitive `Product_catd` head, base two-cell action, `Functord`
+> product comparison, pullback stability, structural maps, total pullback,
+> and profile promotion as separate unapproved work?
+
+FIBRED-COMPREHENSION-1 may independently trigger the same owner class later.
+Before any such active Lambdapi change, its separate proposal must name:
+
+- the exact missing owner position and the smallest semantic boundary;
 - the complete type and intended stable normal form;
-- positive fibre, base-arrow, projection/pairing, reindexing, and relevant
+- positive contextual-pairing, Sigma-introduction, substitution, and relevant
   higher-action consumers;
 - a non-collapse case;
 - runtime versus proof-time orientation;
 - subject-reduction, overlap, termination, and warning evidence;
-- interaction with `Pullback_catd`, `Sigma_cat`, ordinary product, and
-  product-map composition; and
+- interaction with `Pullback_catd`, `Sigma_cat`, and the qualified
+  displayed-product structure; and
 - the minimal TypeScript transfer/profile effect.
-
-The user accepted investigating this high-priority package, not an
-unspecified primitive or rewrite. An exact decision ID and approval question
-will be added only after FIBRED-PRODUCT-0B has enough evidence to choose a
-bounded proposal.
 
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
@@ -712,6 +870,22 @@ FIBRED-CONTEXT-0A and FIBRED-CONTEXT-0B are complete only when:
 7. the categorical adapter retains sequential pullback and grouped-product
    obligations while emitting no unapproved owner; and
 8. focused tests plus `./scripts/pnpmw run check:ts` pass.
+
+FIBRED-PRODUCT-0B is complete only when:
+
+1. broad generic, stable-head, and narrow shared-base candidates are tested
+   at their intended full-file owner positions;
+2. both pointwise fibre and componentwise base-arrow transport compute for
+   every candidate;
+3. warning deltas and critical-pair families are measured, not inferred;
+4. opaque-family, family-level classifier-collapse, and pullback-stability
+   negatives are retained;
+5. the selected candidate introduces no unrecorded owner, alias, proof-time
+   rule, full two-cell action, or total pullback;
+6. the proposal is executable, deeply frozen, self-validating, and names the
+   exact human gate; and
+7. focused tests, TypeScript gates, the final bounded owner-position probe,
+   and strict LHS audit pass.
 
 Any active Lambdapi edit follows `emdash2/AGENTS.md` and the current v3.2 SOP:
 intended-owner full-file probe, positive and negative consumers, bounded
@@ -768,20 +942,27 @@ higher-action lowering only through active authority-backed owners.
 Preserve FIBRED-PRODUCT-0A's exact result: the transparent
 `uncurry(Product_cat_func) ∘ ⟨B,C⟩` candidate computes pointwise fibres but
 does not currently compute base-arrow transport to `Product_map_func`.
-Do not claim it is a completed directed displayed product. Compare completing
-the generic Product/uncurry higher action, adding a narrow stable
-`Product_catd` semantic head, and a minimal hybrid facade. Prefer semantic
-definitions, but let concrete fibre/transport/projection/higher-action and
-critical-pair evidence decide. Do not add or alter a Lambdapi owner or rule
-without first preparing the exact H-DTTLF-USABILITY-02 proposal and obtaining
-human approval.
+Preserve FIBRED-PRODUCT-0B's measured correction: the broad generic action
+works but adds three unjoined critical pairs; a new stable `Product_catd`
+head works but duplicates semantics and adds five; the narrow shared-base
+existing-owner route works with zero warning delta. Its exact proposal keeps
+the transparent family and requests only the Cat-valued postcomposition
+capped action plus the same-base
+`(B[p] * 1)[C[p]] -> Product_map_func(B[p],C[p])` projection. Do not promote
+either rule until H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004 is explicitly
+approved. If approved, implement only FIBRED-PRODUCT-1A's frozen two-rule
+closure and first grouped-sibling transport; if not yet approved, continue
+only a genuinely independent dependency-ready audit and do not guess the
+decision.
 
 Treat the ordinary `Functor_cat X (Product_cat A B)` rule as useful evidence,
-not as an automatically valid family-level rule. Audit the meaningful
-`Functord_cat E (Product_catd B C)` product comparison and choose runtime,
-proof-time, or derived status only from typed evidence. Preserve stable
-heads where higher projections require them; never add a primitive merely
-for notation.
+not as an automatically valid family-level rule. The first owner-position
+comparison has rejected global runtime collapse of
+`Functord_cat E P(B,C)` to a product. Derive that comparison later from
+qualified displayed projection and pairing functors unless new typed evidence
+selects a proof-time owner. Pullback stability and full base-two-cell action
+also remain separate audits. Preserve stable returned heads where higher
+projections require them; never add a primitive merely for notation.
 
 Do not assume a generic computational total-category pullback
 `Sigma_cat B ×K Sigma_cat C`. Active `Pullback_catd E F` is asymmetric
@@ -844,5 +1025,15 @@ conformance, and CI obligations.
   contextual classifiers to it. Seven focused cases now preserve genuine
   chains, sequential pullback intent, shared-base and weakened sibling
   grouping, structural obligations, provenance, immutability, and the
-  explicit zero-owner/zero-total-pullback boundary. FIBRED-PRODUCT-0B is now
-  the next comparison row.
+  explicit zero-owner/zero-total-pullback boundary.
+- **2026-07-27 — FIBRED-PRODUCT-0B completed and exact rule gate opened.**
+  Full-file probes compared the transparent broad-action route
+  (`+3` critical pairs), a new stable `Product_catd` head (`+5`), and the
+  narrow shared-base existing-owner route (`+0`). The selected proposal adds
+  no declaration or alias and freezes exactly two prospective runtime rules,
+  positive fibre/transport computation, three non-collapse boundaries, the
+  unproved pullback-stability boundary, iterable `Product_map_func` result,
+  and all higher-action/non-effect limits. Five executable proposal tests,
+  quiet and warning-enabled probes, and the strict `0/45/27` LHS audit pass.
+  FIBRED-PRODUCT-1A now awaits
+  H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-004.
