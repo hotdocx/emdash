@@ -204,6 +204,8 @@ FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint:
 `4f173cec9336d41bac9a08563c3697e0fc657d66`
 FIBRED-WEAKEN-REINDEX-1 implementation checkpoint:
 `246481130ebf29a09d04b9b4337dbdb716484d43`
+FIBRED-DEPENDENT-TARGET-1 generic proof-subject checkpoint:
+`91c3f32e207e64d3791dd62186712c4ecb6670a1`
 
 ## Purpose And Exact Outcome
 
@@ -3151,7 +3153,9 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   conversion, independent redex inference, non-collapse boundaries, and every
   original non-effect remain unchanged. The generic implementation and exact
   ignored descendant replay are green; the complete TypeScript gate reports
-  788 tests, 742 active passes, and 46 intentional skips.
+  788 tests, 742 active passes, and 46 intentional skips. The exact local
+  implementation checkpoint is
+  `91c3f32e207e64d3791dd62186712c4ecb6670a1`.
 - **2026-07-27 — Dedicated fibred-context plan created.** Integrated the
   accepted displayed-binder analysis and the corrected distinction between
   dependency-chain exchange and fibrewise-cartesian sibling structure.
