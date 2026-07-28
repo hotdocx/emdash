@@ -886,6 +886,16 @@ intentional skips, zero failures), repeated 19-judgment live conformance
 gate, and bounded active-kernel check pass. The exact proposal checkpoint is
 `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
 
+H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 is now
+approved exactly as proposed under the user's standing unattended delegation
+after no immediate response followed presentation. Its separate immutable
+review preserves the pending proposal snapshot and human supersession. It
+authorizes only DISPLAYED-EVAL-0B read-only owner-position,
+derived-construction, and profile-mismatch evidence; all semantic and
+deployment boundaries remain closed. Its nine focused tests, full 860-test
+root gate (814 active passes, 46 intentional skips, zero failures), and all
+19 repeated live conformance judgments pass.
+
 All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated
 19-judgment live Lambdapi conformance oracle, the bounded active-kernel

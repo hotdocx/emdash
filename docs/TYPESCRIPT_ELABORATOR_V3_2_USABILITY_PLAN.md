@@ -1966,6 +1966,14 @@ and derived-construction probe, not another frontend layer. Failure to derive
 the construction would require a separate minimal-owner proposal before any
 semantic implementation.
 
+After the exact D-010 question was presented without an immediate human
+response, the user's standing unattended delegation approved it as proposed
+through a separate immutable review with human supersession. That review
+authorizes only the read-only DISPLAYED-EVAL-0B owner-position,
+derived-construction, and profile-mismatch investigation. It does not
+authorize a semantic recursive case, new owner/rule, checker layer, profile
+join, dependent chain, general `:^nd`, or deployed surface.
+
 ## Acceptance Criteria
 
 USABILITY-GRADUATE-1 may propose that the frontend architecture is settled
@@ -2314,6 +2322,13 @@ CI obligations.
   and the complete 851-test root gate pass: 805 active passes, 46 intentional
   skips, and zero failures. The exact proposal checkpoint is
   `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
+- **2026-07-28 — D-DTTLF-USABILITY-010 separately approved.** With no
+  immediate human answer after presentation, the standing unattended
+  delegation was exercised through a deeply frozen review retaining human
+  supersession and every proposal non-effect. Nine focused tests validate
+  that only read-only DISPLAYED-EVAL-0B evidence work is authorized. The
+  complete 860-test root gate (814 active passes, 46 intentional skips, zero
+  failures) and all 19 repeated live conformance judgments pass.
 - **2026-07-26 — USABILITY-PLAN-0 opened and direction approved.** Recorded
   the corrected priority from the user's accepted architecture review:
   preserve the backend and generic transfer work, remove only the isolated

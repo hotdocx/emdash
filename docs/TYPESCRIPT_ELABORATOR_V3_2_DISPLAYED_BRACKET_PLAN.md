@@ -43,9 +43,14 @@ cases, the exact restricted displayed cases, and the owner/action gaps
 without extending the semantic grammar. In particular, active
 `Functor_catd`, ordinary `Eval_func`/`fapp0_func`, and displayed pairing are
 ingredients but are not silently treated as a selected coherent displayed
-evaluator. The proposal awaits
-H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 and authorizes
-no successor by its own existence. Its exact green local checkpoint is
+evaluator. After no immediate human response followed presentation of the
+exact gate, H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/
+D-DTTLF-USABILITY-010 was approved as proposed under the user's standing
+unattended delegation. The separate immutable review retains human
+supersession and authorizes only read-only DISPLAYED-EVAL-0B. Its nine
+focused tests, the full 860-test root gate (814 active passes, 46 intentional
+skips, zero failures), and all 19 repeated live conformance judgments pass.
+The unchanged proposal's exact green local checkpoint is
 `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
 
 ## Authority And Relationship To The Completed Architecture
@@ -423,8 +428,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | --- | --- | --- | --- |
 | DISPLAYED-BRACKET-0A | proposal frozen, validated, checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`, and approved exactly as proposed by a separate delegated review with human supersession | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused proposal tests, nine focused review tests, the 830-test reviewed root gate, and unchanged 19-judgment live conformance pass |
 | DISPLAYED-BRACKET-1A | complete; validated; checkpointed `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab` | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
-| DISPLAYED-LIFTING-0A | executable proposal frozen, validated, checkpointed `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`; H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 pending | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
-| DISPLAYED-EVAL-0B | proposed read-only next row; not self-authorized | approved DISPLAYED-LIFTING-0A | Run owner-position and derived-construction probes for coherent evaluation of a `Functor_catd`-valued varying subject at fixed and varying arguments; determine whether active authority suffices or freeze a minimal new-owner proposal; classify the profile-join mismatch without a semantic patch |
+| DISPLAYED-LIFTING-0A | executable proposal frozen, validated, checkpointed `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`, and approved exactly as proposed by a separate delegated review with human supersession | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
+| DISPLAYED-EVAL-0B | next authorized read-only evidence row; no semantic implementation authority | approved DISPLAYED-LIFTING-0A/D-010 | Run owner-position and derived-construction probes for coherent evaluation of a `Functor_catd`-valued varying subject at fixed and varying arguments; determine whether active authority suffices or freeze a minimal new-owner proposal; classify the profile-join mismatch without a semantic patch |
 | DISPLAYED-LIFTING-1A | deferred pending 0B evidence and a separate exact proposal/review | DISPLAYED-EVAL-0B | Extend the displayed recursive grammar only for exact licensed application judgments, with positive/negative consumers and no whole-body recognizer growth |
 | DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
@@ -961,6 +966,19 @@ implementation checkpoint is
   conformance judgments, and the bounded active-kernel check pass. The exact
   proposal checkpoint is
   `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
+- **2026-07-28 — D-DTTLF-USABILITY-010 approved under delegated unattended
+  authority.** No immediate human response followed presentation of the
+  frozen D-010 gate, so the user's plan-specific standing delegation was
+  exercised. A separate deeply immutable review snapshots the unchanged
+  pending proposal, retains human supersession, and authorizes only
+  DISPLAYED-EVAL-0B read-only active-authority inspection, bounded temporary
+  probes, derived-construction comparison, and profile-mismatch isolation.
+  It authorizes neither semantic DISPLAYED-LIFTING-1A nor a new owner/rule,
+  recursive grammar case, checker layer, profile join, dependent chain,
+  general `:^nd`, parser/acquisition work, browser promotion, or broader Git
+  action. Nine focused review tests, the full 860-test root gate (814 active
+  passes, 46 intentional skips, zero failures), and all 19 repeated live
+  conformance judgments pass.
 
 ## Git Boundary
 
@@ -1013,18 +1031,20 @@ token may occur freely under supported subexpressions, and an unsupported
 typed node fails closed. Preserve the permanent ordinary
 `lambda x :^f A. F x y0` fixed-evaluation regression.
 
-Preserve frozen DISPLAYED-LIFTING-0A. Its executable matrix records the six
+Preserve frozen and reviewed DISPLAYED-LIFTING-0A. Its executable matrix
+records the six
 implemented ordinary recursive cases; the implemented displayed slot,
 closed-subject/open-argument, pair, and qualified weakening cases; and the
 exact unresolved coherent displayed-evaluation, nested abstraction,
 contravariant, higher-cell, genuine-chain, and profile-composition rows. It
 finds `Functor_catd`, ordinary `Eval_func`/`fapp0_func`, and displayed
 pairing as ingredients but does not claim that they already form a coherent
-displayed evaluator or that a new primitive is necessary. The proposal is
-non-self-authorizing and awaits
-H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010.
+displayed evaluator or that a new primitive is necessary.
+H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 is approved
+exactly as proposed by a separate immutable delegated review with human
+supersession.
 
-After an exact approval/review, implement only DISPLAYED-EVAL-0B as a
+Implement only DISPLAYED-EVAL-0B as a
 read-only owner-position and derived-construction probe. First attempt to
 derive coherent displayed evaluation from active authority; if this is not
 possible, freeze a separate minimal-owner proposal and do not add the owner

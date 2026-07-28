@@ -3918,6 +3918,18 @@ conformance judgments, and the bounded active-kernel check pass. The exact
 green proposal checkpoint is
 `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
 
+After no immediate human response followed presentation of the exact D-010
+gate, H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/
+D-DTTLF-USABILITY-010 was approved as proposed under the user's standing
+unattended delegation. The separate immutable review retains human
+supersession and authorizes only DISPLAYED-EVAL-0B read-only owner-position,
+derived-construction, and profile-mismatch evidence. It adds no semantic
+DISPLAYED-LIFTING-1A, new owner/rule, grammar/checker case, profile join,
+dependent-chain/general-`:^nd` work, parser/acquisition work, deployed
+surface, or broader Git authority. Its nine focused tests, full 860-test root
+gate (814 active passes, 46 intentional skips, zero failures), and all 19
+repeated live conformance judgments pass.
+
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
 follows a presented bounded proposal. Preserve the proposal as
