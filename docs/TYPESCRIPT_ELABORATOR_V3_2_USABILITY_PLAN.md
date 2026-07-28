@@ -140,7 +140,7 @@ FIBRED-PRODUCT-1A implementation checkpoint:
 FIBRED-STRUCTURE-1A implementation checkpoint:
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`
 FIBRED-BINDER-1 implementation checkpoint:
-pending exact green checkpoint in the dedicated sub-plan
+`698280f42c3c9c339ebc82a8cfb0df1d51838704`
 
 ## Outcome And Corrected Priority
 
@@ -2420,4 +2420,5 @@ CI obligations.
   754-test root gate pass with no active kernel edit or new mathematical
   owner/rule. General `fd`, `nd`, grouped/sequential conformance, parsing,
   bulk transfer, and deployed-profile promotion remain open.
-  FIBRED-TRANSFD-1 is next.
+  FIBRED-TRANSFD-1 is next. Exact green local implementation checkpoint:
+  `698280f42c3c9c339ebc82a8cfb0df1d51838704`.

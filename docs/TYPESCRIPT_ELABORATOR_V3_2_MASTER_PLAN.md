@@ -3785,7 +3785,7 @@ component, higher-cell, next-hom, and SCALE-STRESS-2B3 contract. Do not infer
 general `fd`/`nd` completion from the bounded direct-functor slice. The
 FIBRED-STRUCTURE-1A checkpoint remains
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized binder
-checkpoint is recorded by the active sub-plan.
+checkpoint is `698280f42c3c9c339ebc82a8cfb0df1d51838704`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

@@ -3122,4 +3122,5 @@ scope is affected.
   rules are transferred through the generic runtime engine for the runnable
   composition consumer. This strengthens systematic-reuse evidence without
   selecting SCALE-RETURN-1, parser acquisition, bulk root/extension transfer,
-  or a new active scale profile.
+  or a new active scale profile. Consumer checkpoint:
+  `698280f42c3c9c339ebc82a8cfb0df1d51838704`.
