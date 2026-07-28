@@ -2044,6 +2044,18 @@ failures); all 19 live Lambdapi conformance judgments pass; and the bounded
 active-kernel check passes. The exact audit/proposal checkpoint is
 `7df9993f06fc55e2f34b09094b87987ef19cecba`.
 
+After no immediate human response followed presentation of D-011, the
+user's standing unattended delegation approved the exact OWNER-0C proposal
+through a separate immutable review with human supersession. It authorizes
+only the two proposed owners and point-component rules, generic transfer, the
+mechanical dependent-target runtime recheck, and the two recursive
+existing-IR application judgments. It does not authorize another frontend,
+arbitrary mixed-domain evaluation, dependent chains, general `:^nd`,
+parsing/bulk work, or deployment. Ten focused review tests, typecheck, and
+lint pass; the full 892-test root gate (846 active passes, 46 intentional
+skips, zero failures) and all 19 live conformance judgments also pass. The
+review checkpoint is recorded by the active displayed plan.
+
 ## Acceptance Criteria
 
 USABILITY-GRADUATE-1 may propose that the frontend architecture is settled
@@ -2211,6 +2223,8 @@ rules, standard dependent-target final-runtime recheck, generic transfer,
 and two recursive existing-IR application judgments. Otherwise preserve the
 proposal boundary. Keep arbitrary mixed-domain evaluation, dependent chains,
 general :^nd, parsing/bulk transfer, and browser promotion separate.
+Preserve the separate delegated D-011 approval review once checkpointed;
+human response supersedes it and its authorization cannot be broadened.
 
 Preserve the exact deployed emdash-v3.2-mvp-1 profile and exact reviewed
 root-only emdash-v3.2-dttlf-directed-1 continuation. Retain the outer
@@ -2382,6 +2396,12 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-28 — D-011 delegated review recorded.** With no immediate human
+  response after the exact OWNER-0C gate, the user's standing delegation was
+  exercised through a separate immutable review. It preserves the proposal
+  snapshot and authorizes only the bounded DISPLAYED-EVAL-1A semantic slice;
+  all broader frontend, variance, chain, higher, parser, deployment, and Git
+  effects remain closed.
 - **2026-07-28 — DISPLAYED-EVAL-0B assessment integrated.** Recorded that
   the typed surface and recursive compiler remain the correct usability
   boundary; no former working solution was discarded. The read-only audit

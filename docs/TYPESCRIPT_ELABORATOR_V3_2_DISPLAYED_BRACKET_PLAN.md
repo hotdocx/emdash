@@ -79,9 +79,15 @@ active passes, 46 intentional skips, and zero failures; all 19 live
 Lambdapi conformance judgments and the bounded active-kernel check also pass.
 The exact audit/proposal checkpoint is
 `7df9993f06fc55e2f34b09094b87987ef19cecba`.
-Semantic implementation still awaits
+After no immediate human response followed presentation of the exact gate,
 H-DTTLF-USABILITY-DISPLAYED-EVAL-OWNER-01/
-D-DTTLF-USABILITY-011.
+D-DTTLF-USABILITY-011 is approved as proposed under the user's standing
+unattended delegation. The separate immutable review preserves human
+supersession, the unchanged pending proposal snapshot, and every withheld
+effect. It authorizes only the exact DISPLAYED-EVAL-1A slice. Its ten focused
+tests pass, as does the complete 892-test root gate (846 active passes, 46
+intentional skips, zero failures) and all 19 live conformance judgments. The
+exact review checkpoint is recorded when the review tranche closes.
 
 ## Authority And Relationship To The Completed Architecture
 
@@ -460,8 +466,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-BRACKET-1A | complete; validated; checkpointed `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab` | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
 | DISPLAYED-LIFTING-0A | executable proposal frozen, validated, checkpointed `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`, and approved exactly as proposed at review checkpoint `7badcd5b930bd098b178d89bf4488637695fb14d` with human supersession | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
 | DISPLAYED-EVAL-0B | complete read-only authority audit; no semantic delta; checkpointed `7df9993f06fc55e2f34b09094b87987ef19cecba` | approved DISPLAYED-LIFTING-0A/D-010 | Proved the arbitrary mixed-variance/plain-argument obstruction, qualified the constant-domain case, compared the universe-natural alternative, owner-position-probed the minimal stable closure, and classified the dependent-target mismatch as stale runtime wiring |
-| DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal checkpointed with 0B at `7df9993f06fc55e2f34b09094b87987ef19cecba`; awaiting D-011 | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
-| DISPLAYED-EVAL-1A | proposed, not authorized | approved DISPLAYED-EVAL-OWNER-0C/D-011 | Implement the varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; add no new surface/checker layer or whole-body recognizer |
+| DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal checkpointed with 0B at `7df9993f06fc55e2f34b09094b87987ef19cecba`; approved exactly as proposed by a separate delegated review with human supersession | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
+| DISPLAYED-EVAL-1A | exact implementation authorized by reviewed D-011; implementation pending | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Implement the varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; add no new surface/checker layer or whole-body recognizer |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
@@ -782,9 +788,9 @@ architecture question.
 - no active `.lp`, catalog, health report, browser export, parser, or runtime
   profile changed in the audit/proposal tranche.
 
-### Exact next decision gate
+### Exact delegated decision record
 
-The frozen proposal asks:
+The frozen proposal asked:
 
 > Approve H-DTTLF-USABILITY-DISPLAYED-EVAL-OWNER-01/
 > D-DTTLF-USABILITY-011 as proposed: add exactly the stable `Eval_funcd` and
@@ -795,6 +801,13 @@ The frozen proposal asks:
 > both-open and fixed-argument displayed evaluation judgments, while
 > withholding the generic mixed-domain case, dependent chains, general
 > `:^nd`, parser/bulk work, browser promotion, and broader Git authority?
+
+No immediate human response followed that presented gate. Under the user's
+recorded plan-specific unattended delegation, the separate immutable
+`categorical_displayed_evaluation_owner_review.ts` records D-011 as
+approved exactly as proposed. A later human decision supersedes it. The
+review does not mutate the pending proposal and does not itself install any
+owner, rule, profile repair, or recursive compiler case.
 
 ## DISPLAYED-BRACKET-1A Frozen Contract
 
@@ -1159,6 +1172,19 @@ implementation checkpoint is
 
 ## Change Log
 
+- **2026-07-28 — D-DTTLF-USABILITY-011 approved under delegated unattended
+  authority.** No immediate human response followed presentation of the
+  exact frozen OWNER-0C gate. A separate deeply immutable review snapshots
+  the unchanged non-self-authorizing proposal, retains human supersession,
+  and authorizes only DISPLAYED-EVAL-1A: exactly `Eval_funcd`,
+  `Terminal_funcd`, two component rules, generic transfer, the standard
+  dependent-target final-runtime recheck, and the two existing-IR recursive
+  application judgments. It preserves generic `fapp`/`tapp` coherence
+  ownership, the diagnostic warning comparison, all variance/dependent/
+  higher/parser/browser boundaries, and the Git SOP. Ten focused review
+  tests, the full 892-test root gate (846 active passes, 46 intentional
+  skips, zero failures), all 19 live conformance judgments, typecheck, and
+  lint pass. The exact checkpoint is recorded when the tranche closes.
 - **2026-07-28 — DISPLAYED-EVAL-0B completed and OWNER-0C frozen.** The
   executable read-only audit proves that the naive arbitrary
   mixed-variance/plain-argument family is ill-kinded, while the
@@ -1327,6 +1353,11 @@ immediate human D-DTTLF-USABILITY-011 decision exists, obey it. Otherwise,
 only after the exact unchanged proposal is green and locally checkpointed,
 the user's standing unattended delegation permits a separate immutable
 approval review with human supersession and all non-effects preserved.
+
+Preserve the resulting separate D-011 delegated approval review once its
+green checkpoint is recorded. It authorizes only DISPLAYED-EVAL-1A and a
+later human decision supersedes it. Do not mutate the pre-review proposal or
+infer any authorization beyond the review's exact fields.
 
 If and only if D-011 is approved exactly as proposed, implement bounded
 DISPLAYED-EVAL-1A: add exactly stable `Eval_funcd` and `Terminal_funcd`,

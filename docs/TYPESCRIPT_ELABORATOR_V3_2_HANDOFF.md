@@ -942,6 +942,17 @@ live Lambdapi conformance judgments, and the bounded active-kernel check
 pass. The exact audit/proposal checkpoint is
 `7df9993f06fc55e2f34b09094b87987ef19cecba`.
 
+With no immediate human response after the exact D-011 gate, the user's
+standing unattended delegation was exercised through a separate immutable
+review with human supersession. The pending proposal remains unchanged. The
+review authorizes only DISPLAYED-EVAL-1A's two owners, two component rules,
+generic transfer, mechanical dependent-target runtime recheck, and two
+recursive existing-IR judgments. Ten focused review tests, typecheck, and
+lint pass, as do the full 892-test root gate (846 active passes, 46
+intentional skips, zero failures) and all 19 live conformance judgments.
+Broader mixed-domain, dependent-chain, `:^nd`, parser, browser, and Git
+authority remains closed.
+
 All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated
 19-judgment live Lambdapi conformance oracle, the bounded active-kernel

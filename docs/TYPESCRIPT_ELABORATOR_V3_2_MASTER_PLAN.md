@@ -3974,6 +3974,17 @@ all 19 live Lambdapi conformance judgments, and the bounded active-kernel
 check pass. The exact audit/proposal checkpoint is
 7df9993f06fc55e2f34b09094b87987ef19cecba.
 
+After no immediate human response followed the exact D-011 presentation, the
+user's standing unattended delegation approved OWNER-0C through a separate
+immutable review retaining human supersession and every frozen non-effect.
+It authorizes only DISPLAYED-EVAL-1A's exact two owners, two component rules,
+generic transfer, mechanical dependent-target runtime recheck, and two
+recursive existing-IR application judgments. Preserve that review once
+checkpointed; do not infer arbitrary mixed-domain, chain, `:^nd`, parser,
+browser, or broader Git authority. Its ten focused tests, full 892-test root
+gate (846 active passes, 46 intentional skips, zero failures), and all 19
+live conformance judgments pass.
+
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
 follows a presented bounded proposal. Preserve the proposal as
