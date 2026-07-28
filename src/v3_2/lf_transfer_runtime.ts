@@ -111,6 +111,7 @@ export type CoreLfCompiledRuntimeExpression =
     }
     | {
         readonly tag: 'wildcard';
+        readonly checking?: CoreLfCompiledRuntimeExpression;
     };
 
 export interface CoreLfCompiledRuntimeArgument {
@@ -289,7 +290,11 @@ const transferExpressionSymbols = (
             case 'type':
             case 'bound':
             case 'capture':
+                return;
             case 'wildcard':
+                if (current.checking !== undefined) {
+                    visit(current.checking);
+                }
                 return;
             case 'global':
                 byKey.set(symbolKey(current.symbol), current.symbol);
@@ -471,11 +476,25 @@ const compileRuntimeExpression = (
             });
         }
         case 'wildcard':
-            return fail(
-                'UNSUPPORTED_RUNTIME_PATTERN',
-                path,
-                'Typed runtime compilation does not yet support wildcards'
-            );
+            if (
+                state.purpose !== 'pattern' ||
+                expression.checking === undefined
+            ) {
+                return fail(
+                    'UNSUPPORTED_RUNTIME_PATTERN',
+                    path,
+                    'A runtime wildcard requires a typed checking witness ' +
+                        'and is permitted only in a match pattern'
+                );
+            }
+            return deepFreeze({
+                tag: 'wildcard',
+                checking: descend(
+                    expression.checking,
+                    `${path}.checking`,
+                    { purpose: 'template' }
+                )
+            });
         case 'call': {
             if (expression.callee.tag === 'global') {
                 const declaration = declarationFor(
@@ -737,11 +756,14 @@ const instantiateCompiledExpression = (
             }
         }
         case 'wildcard':
-            return fail(
-                'UNSUPPORTED_RUNTIME_PATTERN',
-                `runtimeRules.${rule.id}`,
-                'A wildcard cannot occur in a runtime template'
-            );
+            if (expression.checking === undefined) {
+                return fail(
+                    'UNSUPPORTED_RUNTIME_PATTERN',
+                    `runtimeRules.${rule.id}`,
+                    'A runtime wildcard has no typed checking witness'
+                );
+            }
+            return instantiate(expression.checking);
         default: {
             const exhaustive: never = expression;
             return exhaustive;

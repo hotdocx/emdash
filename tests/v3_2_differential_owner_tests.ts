@@ -7,18 +7,28 @@ import { resolve } from 'node:path';
 import { describe, it } from 'node:test';
 import {
     CORE_MVP_DIFFERENTIAL_SCOPE,
-    CORE_MVP_MANIFEST,
-    CoreChecker,
-    CoreCheckerError,
-    CoreElaborationSession,
     CoreMvpDifferentialError,
     CoreMvpDifferentialScopeInput,
     buildCoreMvpOwnerDifferentialCorpus,
-    checkLambdapiProbe,
-    kernelExpressionEquals,
-    serializeKernelProbe,
     validateCoreMvpDifferentialScope
-} from '../src/v3_2';
+} from '../src/v3_2/differential';
+import {
+    CORE_MVP_MANIFEST
+} from '../src/v3_2/manifest';
+import {
+    CoreChecker,
+    CoreCheckerError
+} from '../src/v3_2/checker';
+import {
+    CoreElaborationSession
+} from '../src/v3_2/session';
+import {
+    checkLambdapiProbe,
+    serializeKernelProbe
+} from '../src/v3_2/probe';
+import {
+    kernelExpressionEquals
+} from '../src/v3_2/kernel';
 
 const cloneScope = (): CoreMvpDifferentialScopeInput =>
     JSON.parse(JSON.stringify(CORE_MVP_DIFFERENTIAL_SCOPE));

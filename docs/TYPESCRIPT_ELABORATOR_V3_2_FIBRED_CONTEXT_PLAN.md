@@ -106,29 +106,38 @@ added. Its complete repository gate is green: all 19 live differential
 judgments, all 41 kernel/example health targets, 39 infrastructure tests,
 five document-registry tests, report/book checks, the unchanged strict
 `0/47/29` LHS audit, and catalog freshness pass.
-FIBRED-DEPENDENT-TARGET-1 is now in implementation. Its descendant audit
-replaced the provisional five-declaration estimate with an exact
-ten-declaration/ten-runtime-rule/one-proof-rule existing-authority closure.
-The separately frozen H-DTTLF-USABILITY-PROOF-SUBJECT/
-D-DTTLF-USABILITY-007 contract and its exact post-audit corrective addendum
-D-DTTLF-USABILITY-007A are approved under the user's delegated unattended
-authority: eight runtime clauses must subject-check directly and exactly two
-may use the one active ordinary/displayed category proof rule through a new
-fail-closed generic compile-time validation path. The addendum installs the
-active transparent `Hom` refinement and transfers the already-active
-`Hom_cat(Catd_cat) -> Functord_cat` runtime prerequisite; it adds no
-mathematical owner or rule. No runtime category collapse, external oracle, or
-Lambdapi mathematical change is authorized.
-The generic boundary is now implementation-complete: runtime subjects record
-direct versus exact proof-assisted validation; proof programs rebase only
-across exact opaque declaration and runtime-prefix extensions; stale
-exceptions fail closed; and normalized proof comparison descends only through
-equal rigid heads under one shared budget. The exact ignored descendant replay
-passes at ten declarations, ten runtime rules, eight direct validations, and
-two proof-assisted validations. The full TypeScript gate passes with 788
-tests: 742 active passes and 46 intentional skips. The tracked categorical
-transfer, root-only target/fibre/eta consumer, differential evidence, and
-complete repository gate remain the next sub-slice.
+FIBRED-DEPENDENT-TARGET-1 is now implementation-complete and fully
+validated. Its descendant audit replaced the provisional five-declaration
+estimate with an exact ten-declaration/ten-runtime-rule/one-proof-rule
+existing-authority closure. The separately frozen
+H-DTTLF-USABILITY-PROOF-SUBJECT/D-DTTLF-USABILITY-007 contract and corrective
+D-DTTLF-USABILITY-007A/007B addenda are approved under the user's delegated
+unattended authority. Eight runtime clauses subject-check directly and only
+package-component/pullback-component use the one active
+ordinary/displayed-category proof rule through the fail-closed generic
+compile-time validation path. The active transparent `Hom` refinement and
+`Hom_cat(Catd_cat) -> Functord_cat` prerequisite are transferred without a
+new mathematical owner or rule. The literal active `_` in the `Pi_func`
+object rule is retained through a generic pattern-only typed checking
+witness; it checks the subject but is ignored only during matching, while
+untyped/template wildcards remain rejected.
+The root-only profile constructs `G : K -> Op(Cat_cat)`, its pulled-back
+displayed-category motive, `Pi_pullback_funcd(G)`, and
+`Sigma_catd_functord_catd(Pi_pullback_funcd(G))`. The target fibre at `(k,M)`
+reduces through eight existing runtime clauses to `Pi_cat(G[k],M)`, and the
+explicit-total-context eta abstraction lowers to the original coherent
+section. The runnable direct-TypeScript demo and unchanged bounded Lambdapi
+qualification probe pass. The final TypeScript gate passes 795 tests: 749
+active passes and 46 intentional skips. The unchanged mandatory conformance
+command passes all 19 live judgments/3 suites under its 60-second bound; its
+three frozen files now import their original narrow modules instead of the
+unrelated root barrel, without changing the file list, corpus, command, or
+timeout. Kernel CI passes all 41 health targets, 39 infrastructure tests,
+five registry tests, report/book checks, the strict `0/47/29` LHS audit, and
+catalog freshness. No runtime category collapse, external oracle, arbitrary
+coherence synthesis, parser, deployed-profile promotion, new Lambdapi
+mathematics, or broader transfer claim was added. The bounded local
+implementation checkpoint remains to be recorded.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -174,6 +183,15 @@ initial inventory/evidence counts: the exact closure is ten declarations,
 ten runtime rules, and one proof rule; eight runtime rules check directly,
 while only package-component and pullback-component need the proof rule.
 Every original non-effect remains binding.
+The tracked consumer then exposed that the active `Pi_func` object rule uses
+an intentional inferred `_` source-category slot while the older stress
+fixture had narrowed it to `Catd_cat(K)`. On 2026-07-28 the same delegated
+authority approved the separately frozen D-DTTLF-USABILITY-007B correction:
+a wildcard may carry a mandatory pattern-only typed checking witness, but
+runtime matching still ignores that slot. Exactly one dependent-target rule
+uses it. Untyped/template wildcards remain rejected, no proof-modulo runtime
+matcher or category collapse was added, and the ten/ten/one plus
+eight-direct/two-proof contract is unchanged.
 The user also clarified that warning counts are diagnostic evidence about
 interactions and possible closure work, never an automatic veto on a desired
 design. The implementation audit therefore retains warning comparisons but
@@ -1308,9 +1326,9 @@ usability profile.
 | FIBRED-GROUPED-SEQUENTIAL-1 | complete; validated; checkpointed `4f173cec9336d41bac9a08563c3697e0fc657d66` | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Implemented a finite block of two-or-more independent displayed siblings over one common base; the generic dependency graph drives a left-to-right Sigma/pullback lowering and a left-associated transparent product lowering; checked `((k,b),c)` and `(k,(b,c))`, accumulated/base projections, product component functors, three-sibling scaling, and dependency-edge rejection using only existing owners; explicitly claims no total-category equality/equivalence or Sigma-projection arrow computation; nine focused cases, runnable demo, the 776-test TypeScript gate, and complete repository gate pass |
 | FIBRED-QUALIFICATION-REMAINDER-0 | complete; read-only existing-authority audit | FIBRED-BINDER-1, FIBRED-TRANSFD-1, FIBRED-GROUPED-SEQUENTIAL-1 | The active-kernel consumer probe closes the authority question for cases 2–4: Sigma-projection section pullback, `Pullback_catd_func` hom action, and the `Pi_pullback_funcd`/`Sigma_catd_functord_catd` composite all check and compute without a new owner/rule; selected two executable implementation rows and froze their exact nonclaims |
 | FIBRED-WEAKEN-REINDEX-1 | complete; validated; checkpointed `246481130ebf29a09d04b9b4337dbdb716484d43` | FIBRED-QUALIFICATION-REMAINDER-0, FIBRED-TRANSFD-1 | Transferred `Pullback_catd_func`, `Obj_func`, `section_pullback_func`, and `section_pullback_sec`; executable subject checking exposed and transferred two exact existing prerequisite reductions before the four frozen consumer clauses. Added root-only `indexOf`, exact closed-section `:^fd` weakening, frontend semantic-origin point lowering, displayed-functor hom-action reindexing, eta stability, point computation, fail-closed negatives, and a runnable demo. Category presentations remain runtime-distinct/proof-compatible; zero Lambdapi mathematical owners/rules were added; the 785-test TypeScript and complete repository gates pass |
-| FIBRED-DEPENDENT-TARGET-1 | in progress; corrected contract approved; generic proof-subject boundary implementation-complete and TypeScript-green | FIBRED-WEAKEN-REINDEX-1 | The generic compiler now enforces exact opaque/runtime-prefix proof rebasing, independent proof-path subject inference, stale-exception rejection, exact proof-rule evidence, and bounded equal-rigid-head congruence; the active descendant audit passes the corrected ten-declaration/ten-runtime/eight-direct/two-proof inventory without category collapse or oracle. Next track that exact transfer and construct `G : K -> Cat^op`, the motive family, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd` target; execute `B[k,M] = Pi_cat(G[k],M)` and total-context dependent-section eta without claiming arbitrary coherent section synthesis |
+| FIBRED-DEPENDENT-TARGET-1 | complete; validated; D-007/007A/007B approved; checkpoint pending | FIBRED-WEAKEN-REINDEX-1 | Tracked the exact ten-declaration/ten-runtime/one-proof existing-authority closure through generic engines: eight subjects check directly and only package-component/pullback-component use the category-presentation proof rule. Added exact pattern-only typed-wildcard fidelity for the active `Pi_func` inferred slot while retaining untyped/template rejection. The root-only profile constructs `G : K -> Op(Cat_cat)`, `Pullback_catd(Catd_cat_func,G)`, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd`; `B[k,M]` reduces through eight existing clauses to `Pi_cat(G[k],M)`, total-context eta lowers to the original section, wrong base/family cases fail, the runnable direct-TypeScript demo and unchanged live Lambdapi qualification probe pass, and no category collapse, oracle, arbitrary coherence, parser, or new Lambdapi mathematics was added. The final 795-test TypeScript, 19-judgment conformance, and complete kernel/repository component gates pass |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
-| FIBRED-GRADUATE-1 | pending | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate human graduation decision |
+| FIBRED-GRADUATE-1 | dependency-ready; assessment/proposal only | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate graduation decision; this row does not itself authorize profile promotion or claim complete general displayed usability |
 
 ## FIBRED-CONTEXT-0A Completion Record
 
@@ -2336,16 +2354,13 @@ FIBRED-WEAKEN-REINDEX-1 is frozen as follows:
   string-parser deferral, bulk-transfer deferral, groupoidal deferral, and
   total-category nonclaims.
 
-FIBRED-DEPENDENT-TARGET-1 is frozen at the architectural level but remains
-dependent on the first row's concrete environment. It may transfer only the
-five still-missing active declarations `Op_cat`, `Catd_cat_func`, `Pi_func`,
-`Pi_int_funcd`, and `Pi_pullback_funcd` plus the smallest exact existing
-runtime clauses required for the three displayed equations above. It must
-reuse the already-transferred `Pullback_catd`,
-`Sigma_catd_functord_catd`, and generic application machinery. Before coding,
-its executable contract must enumerate that runtime closure and its
-unsupported-action table against the descendant environment; no new
-Lambdapi owner/rule is authorized.
+The provisional five-declaration estimate for FIBRED-DEPENDENT-TARGET-1 is
+superseded by the exact descendant audit and frozen contract below. The
+completed row transfers exactly ten declarations, ten existing runtime
+clauses, and one existing proof rule, while reusing the already-transferred
+`Pullback_catd`, `Sigma_catd_functord_catd`, application, and classifier
+machinery. Eight subjects check directly and two use the proof rule only at
+compile time. No new Lambdapi owner/rule is introduced.
 
 The unsupported boundary after the audit is explicit:
 
@@ -2758,6 +2773,131 @@ the category-presentation proof rule. A later human decision supersedes this
 record. Implementation remains limited to a coherent green local checkpoint
 on the existing goal branch.
 
+### D-DTTLF-USABILITY-007B — Exact inferred-slot correction
+
+The first tracked end-user fibre computation exposed one last distinction
+between the older representation stress fixture and the literal active
+source. Active v3.2 states the `Pi_func` object projection as:
+
+```text
+rule @fapp0 _ Cat_cat (@Pi_func $K) $E
+  ↪ @Pi_cat $K $E.
+```
+
+The `_` is intentional. The inferred source category is checked as
+`Catd_cat(K)`, but runtime matching must not require that literal
+presentation: the dependent-target consumer reaches the same typed redex
+with the proof-compatible presentation
+`Functor_cat(G[k],Cat_cat)`. The older SCALE-STRESS-2B1 transfer fixture had
+materialized `Catd_cat(K)` in the pattern. That narrower fixture
+subject-checked, but it prevented the final
+`B[k,M] -> Pi_cat(G[k],M)` projection even though the active Lambdapi rule
+computes.
+
+**D-DTTLF-USABILITY-007B — frozen corrective addendum.** Amend only the
+generic pattern representation and this one runtime clause:
+
+1. allow a runtime-pattern wildcard to carry one explicit typed checking
+   witness;
+2. require that witness for every wildcard accepted by the runtime compiler;
+3. instantiate the witness only for the independent TypeScript subject check,
+   while runtime matching ignores the wildcard slot exactly as the active
+   source does;
+4. continue to reject untyped wildcards, template wildcards, wildcard rule
+   heads, and wildcards outside runtime patterns;
+5. represent only
+   `categorical.dependent-target.section-functor-object` with the literal
+   active wildcard and the exact checking witness `Catd_cat(K)`; and
+6. preserve the corrected ten-declaration/ten-runtime/one-proof inventory and
+   the exact eight-direct/two-proof subject-validation partition.
+
+This is typed inferred-slot fidelity, not proof-aware runtime matching and not
+a category-presentation rewrite. It changes no runtime right-hand side, rule
+order, proof exception, active Lambdapi source, or mathematical owner/rule.
+Generic positive and negative tests must show that a typed wildcard checks and
+matches arbitrary terms in its slot, while the prior untyped wildcard remains
+fail-closed. The dependent target must then reduce through the exact
+`section-functor-object` rule to `Pi_cat(G[k],M)`.
+
+Every D-DTTLF-USABILITY-007/007A non-effect remains binding. In particular,
+this addendum authorizes no untyped erasure, arbitrary proof-modulo runtime
+matching, runtime category collapse, external subject oracle, new Lambdapi
+mathematics, arbitrary coherent-section synthesis, general dependent
+displayed bracket, parser, bulk transfer, profile promotion, remote Git
+operation, or wider checkpoint authority.
+
+The exact corrective question is:
+
+> Approve D-DTTLF-USABILITY-007B as proposed: retain the literal active `_`
+> in the `Pi_func` object rule through a generic pattern-only typed checking
+> witness, preserve the exact eight-direct/two-proof partition and all
+> runtime/proof non-collapse boundaries, and use it only to complete the
+> already-approved dependent-target fibre computation?
+
+**D-DTTLF-USABILITY-007B — approved 2026-07-28 by delegated unattended
+authority.** No immediate human response was available during the unattended
+continuation after the exact inferred-slot mismatch was isolated. Acting only
+under the user's recorded plan-specific delegation, the coding agent approves
+this bounded correction. The focused generic tests retain rejection of an
+untyped wildcard and pass the typed-witness match; the tracked categorical
+transfer still records eight direct and exactly two proof-assisted subjects;
+the root-only consumer now reduces through eight existing runtime clauses to
+`Pi_cat(G[k],M)`; and the unchanged active Lambdapi qualification probe passes.
+A later human decision supersedes this record. Checkpoint authority remains
+limited to the coherent green local tranche on the existing goal branch.
+
+## FIBRED-DEPENDENT-TARGET-1 Completion Record
+
+The completed existing-authority slice adds one root-only successor profile
+and no Lambdapi mathematics:
+
+- the generic LF runtime compiler accepts a wildcard only in a pattern and
+  only with an explicit checking witness; the witness participates in
+  independent subject checking while matching ignores exactly that slot;
+- the transfer installs the exact ten declarations, seven prerequisite
+  runtime clauses, three consumer runtime clauses, and one proof rule frozen
+  above; eight subjects record `typescript-checked`, while exactly
+  package-component and pullback-component record
+  `typescript-proof-checked`;
+- the proof rule is absent from the composed runtime program, and runtime
+  comparison therefore retains the category-presentation non-collapse;
+- `contravariantCategoryFamily`, `dependentSectionMotive`,
+  `dependentSectionTarget`, and `dependentSectionCategoryAt` construct and
+  inspect the already-authorized internal-Pi target without a parser or
+  production Lambdapi process;
+- `B[(k,M)]` reduces through eight existing runtime clauses to
+  `Pi_cat(G[k],M)`, while total-context
+  `λ z :^n Σ(k,M). s[z]` lowers to the original section and evaluates its
+  TypeScript callback exactly once;
+- wrong codomain, base, motive fibre, target family, earlier-profile, stale
+  proof exception, and untyped/template-wildcard paths fail closed; and
+- the runnable command
+  `./scripts/pnpmw run demo:categorical-fibred-dependent-target` reports the
+  construction, reduction trace, eta output, validation partition, and one
+  provenance-bearing negative diagnostic.
+
+Validation is complete:
+
+- focused generic, transfer, profile, and demo tests pass;
+- the unchanged bounded qualification probe
+  `tmp/probes/typescript_usability_fibred_qualification_remainder.lp`
+  passes against active v3.2;
+- `./scripts/pnpmw run check:ts` passes 795 tests: 749 active passes, 46
+  intentional skips, and zero failures;
+- the exact mandatory `./scripts/pnpmw run check:conformance` passes all 19
+  live judgments in the same three frozen files under the same global
+  60-second bound. Those tests now import only the original modules they
+  exercise, avoiding eager construction of unrelated root-only transfer
+  modules without changing any corpus row or product API; and
+- `make -C emdash2 ci` passes all 41 kernel/example files, 39 infrastructure
+  tests, five registry tests, all report/book checks, the strict `0/47/29`
+  audit, and catalog freshness.
+
+No `.lp` source, mathematical owner/rule, default/browser/deployed profile,
+general dependent displayed bracket, arbitrary coherent-section synthesis,
+internal-Pi arrow action, total-category theorem, parser/acquisition route,
+bulk transfer, or groupoidal closure changed.
+
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
 Completing individual product or binder examples does not by itself settle
@@ -3096,23 +3236,35 @@ become a global registry or kernel equality. Add no Lambdapi source,
 mathematical owner/rule, runtime category collapse, deployed profile, parser,
 or bulk transfer.
 
-FIBRED-DEPENDENT-TARGET-1 is the in-progress dependency-ready row. Preserve
-the approved D-DTTLF-USABILITY-007 contract as corrected only by approved
-D-DTTLF-USABILITY-007A: ten exact existing declarations, ten exact existing
-runtime rules, one exact existing proof rule, eight direct subject checks, and
-exactly two proof-assisted subject checks. Preserve independent left-side
-inference, exact opaque declaration/runtime-prefix rebasing, stale-exception
-rejection, and bounded rigid proof congruence; add no runtime category
-collapse or external oracle. Complete the already-probed
-`Sigma_catd_functord_catd(Pi_pullback_funcd(G))` family and demonstrate
-`B[k,M] = Pi_cat(G[k],M)` plus total-context dependent-section eta. Reuse
-existing `Pullback_catd`, `Sigma_catd_functord_catd`, application, and
-classifier machinery. Do not infer a new primitive, arbitrary pointwise
-coherence, or general dependent displayed bracket. Do not mark
-FIBRED-GRADUATE-1 ready until this row is executable. If a genuinely missing
-computation appears, audit existing constructions and Foundations and compare
-the smallest owner positions before opening an exact gate; no convenient
-notation is itself authority for a primitive.
+FIBRED-DEPENDENT-TARGET-1 is complete and validated. Preserve the approved
+D-DTTLF-USABILITY-007 contract as corrected only by approved
+D-DTTLF-USABILITY-007A and D-DTTLF-USABILITY-007B: ten exact existing
+declarations, ten exact existing runtime rules, one exact existing proof
+rule, eight direct subject checks, and exactly two proof-assisted subject
+checks. Preserve independent left-side inference, exact opaque declaration/
+runtime-prefix rebasing, stale-exception rejection, bounded rigid proof
+congruence, and the active `Pi_func` inferred `_` through the generic
+pattern-only typed checking witness. Untyped/template wildcards remain
+rejected; the witness checks the subject but runtime matching ignores only
+its literal wildcard slot. Preserve the root-only
+`Sigma_catd_functord_catd(Pi_pullback_funcd(G))` family,
+`B[k,M] = Pi_cat(G[k],M)` runtime computation, total-context
+dependent-section eta, runnable demo, and exact runtime/proof non-collapse.
+Add no proof-modulo runtime matcher, category collapse, external oracle, new
+primitive, arbitrary pointwise coherence, or general dependent displayed
+bracket.
+
+FIBRED-GRADUATE-1 is now the next dependency-ready row, but only as an exact
+assessment and non-self-authorizing proposal. Inventory the supported
+frontend/dependency/binder envelope, active mathematical owner coverage,
+residual action/total-category/groupoidal gaps, generic transfer reuse and
+measured throughput, optional acquisition/parsing boundary, profile/browser
+status, and TypeScript/Lambdapi conformance. Distinguish evidence that the
+architecture scales mechanically from work that still requires mathematical
+owner design or ergonomic discovery. Freeze a self-validating recommendation
+and exact decision question before any graduation or profile promotion. Do
+not treat completion of the qualification corpus as automatic authorization
+for a broader product claim.
 
 Keep canonical Lambdapi term/declaration parsing deferred and optional.
 Direct typed TypeScript construction remains the default. Do not resume the
@@ -3142,6 +3294,37 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
 
 ## Change Log
 
+- **2026-07-28 — FIBRED-DEPENDENT-TARGET-1 implementation and validation
+  complete.** The root-only successor transfers the exact
+  ten-declaration/ten-runtime/one-proof existing-authority closure, records
+  eight direct and exactly two proof-assisted runtime subject checks, and
+  keeps the proof rule out of runtime conversion. The direct TypeScript
+  profile constructs the pulled-back internal-Pi target, reduces
+  `B[k,M]` through eight existing clauses to `Pi_cat(G[k],M)`, lowers
+  total-context eta to the supplied section, rejects wrong-family inputs, and
+  has a runnable no-parser/no-production-Lambdapi demo. The final root gate
+  passes 795 tests (749 active, 46 skipped); the unchanged mandatory
+  conformance command passes all 19 live judgments under 60 seconds after its
+  three frozen test files were narrowed from the unrelated root barrel to
+  their original modules; and complete kernel CI passes 41 health targets,
+  39 infrastructure tests, five registry tests, report/book checks, strict
+  `0/47/29`, and catalog freshness. No `.lp` source or mathematical owner/rule
+  changed. The implementation checkpoint is pending the exact staged review.
+- **2026-07-28 — D-DTTLF-USABILITY-007B inferred-slot correction
+  approved and focused evidence green.** The tracked target-fibre consumer
+  exposed that active `rule @fapp0 _ Cat_cat (@Pi_func $K) $E` deliberately
+  ignores its inferred source-category slot, while the older stress fixture
+  had narrowed that slot to the checking witness `Catd_cat(K)`. The separately
+  frozen correction was approved under the user's unattended delegation.
+  Generic runtime patterns now require a typed checking witness for any
+  wildcard, use it only for subject validation, and ignore the slot only
+  during matching; untyped/template wildcards remain rejected. Exactly the
+  one active section-functor rule uses it, the ten/ten/one and
+  eight-direct/two-proof contracts remain unchanged, and no category collapse
+  or proof-aware evaluator was introduced. The tracked profile computes
+  `B[k,M]` to `Pi_cat(G[k],M)`, total-context eta lowers to the original
+  section, focused generic/categorical/demo suites pass, and the unchanged
+  live qualification probe succeeds.
 - **2026-07-28 — D-DTTLF-USABILITY-007A descendant correction approved.**
   Executable replay of the active transparent `Hom` body exposed the exact
   source-prior `Hom_cat(Catd_cat) -> Functord_cat` dependency. The separately

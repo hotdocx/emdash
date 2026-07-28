@@ -7,22 +7,38 @@ import { resolve } from 'node:path';
 import { describe, it } from 'node:test';
 import {
     CORE_MVP_DIFFERENTIAL_COMPLETION,
-    CORE_MVP_DIFFERENTIAL_SCOPE,
     CoreMvpDifferentialCompletionInput,
-    CoreMvpDifferentialError,
-    KernelExpression,
-    V32ElaborationError,
     buildCoreMvpHigherCellDifferentialCorpus,
-    checkLambdapiProbe,
-    coreRuntimeDefinitionalCompare,
-    coreRuntimeRewriteHead,
-    coreTypeToKernelType,
-    elaborateSurfaceTerm,
-    kernelExpressionEquals,
-    serializeKernelExpression,
-    serializeKernelProbe,
     validateCoreMvpDifferentialCompletion
-} from '../src/v3_2';
+} from '../src/v3_2/differential_higher_cell';
+import {
+    CORE_MVP_DIFFERENTIAL_SCOPE,
+    CoreMvpDifferentialError
+} from '../src/v3_2/differential';
+import {
+    KernelExpression,
+    kernelExpressionEquals
+} from '../src/v3_2/kernel';
+import {
+    V32ElaborationError,
+    elaborateSurfaceTerm
+} from '../src/v3_2/elaborator';
+import {
+    coreTypeToKernelType
+} from '../src/v3_2/surface';
+import {
+    checkLambdapiProbe,
+    serializeKernelProbe
+} from '../src/v3_2/probe';
+import {
+    coreRuntimeDefinitionalCompare
+} from '../src/v3_2/conversion';
+import {
+    coreRuntimeRewriteHead
+} from '../src/v3_2/evaluator';
+import {
+    serializeKernelExpression
+} from '../src/v3_2/lambdapi';
 
 const cloneCompletion = (): CoreMvpDifferentialCompletionInput =>
     JSON.parse(JSON.stringify(CORE_MVP_DIFFERENTIAL_COMPLETION));

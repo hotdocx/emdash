@@ -6,20 +6,38 @@ import assert from 'node:assert';
 import { resolve } from 'node:path';
 import { describe, it } from 'node:test';
 import {
-    CORE_MVP_DIFFERENTIAL_SCOPE,
-    CORE_MVP_MANIFEST,
+    CORE_MVP_DIFFERENTIAL_SCOPE
+} from '../src/v3_2/differential';
+import {
+    CORE_MVP_MANIFEST
+} from '../src/v3_2/manifest';
+import {
     CORE_MVP_RUNTIME_PROGRAM,
-    CoreChecker,
-    CoreElaborationSession,
     CoreRuntimeCompilationError,
-    buildCoreMvpRuleDifferentialCorpus,
+    compileCoreRuntimeRuleCandidate
+} from '../src/v3_2/runtime';
+import {
+    CoreChecker
+} from '../src/v3_2/checker';
+import {
+    CoreElaborationSession
+} from '../src/v3_2/session';
+import {
+    buildCoreMvpRuleDifferentialCorpus
+} from '../src/v3_2/differential_rule';
+import {
     checkLambdapiProbe,
-    compileCoreRuntimeRuleCandidate,
-    coreRuntimeDefinitionalCompare,
-    coreRuntimeRewriteHead,
-    kernelExpressionEquals,
     serializeKernelProbe
-} from '../src/v3_2';
+} from '../src/v3_2/probe';
+import {
+    coreRuntimeDefinitionalCompare
+} from '../src/v3_2/conversion';
+import {
+    coreRuntimeRewriteHead
+} from '../src/v3_2/evaluator';
+import {
+    kernelExpressionEquals
+} from '../src/v3_2/kernel';
 
 describe('TypeScript v3.2 TSK-3B rule differential corpus', () => {
     it('pins exactly one shared row to each reviewed runtime rule', () => {

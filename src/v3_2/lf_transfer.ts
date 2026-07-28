@@ -70,6 +70,13 @@ export type CoreLfTransferExpression =
     }
     | {
         readonly tag: 'wildcard';
+        /**
+         * Optional typed witness used only when checking the rule subject.
+         * Runtime matching still ignores the wildcard position. This models
+         * source patterns such as Lambdapi `_` without weakening the
+         * standalone TypeScript subject check.
+         */
+        readonly checking?: CoreLfTransferExpression;
     };
 
 export type CoreLfTransferBody =
@@ -528,6 +535,8 @@ type CoreLfTransferBuilderNode =
     }
     | {
         readonly tag: 'wildcard';
+        readonly checking?:
+            InternalCoreLfTransferBuilderExpression;
     }
     | {
         readonly tag: 'token';
@@ -692,8 +701,20 @@ export class CoreLfTransferScopedBuilder {
         });
     }
 
-    wildcard(): CoreLfTransferBuilderExpression {
-        return this.makeExpression({ tag: 'wildcard' });
+    wildcard(
+        checking?: CoreLfTransferBuilderExpression
+    ): CoreLfTransferBuilderExpression {
+        return this.makeExpression({
+            tag: 'wildcard',
+            ...(checking === undefined
+                ? {}
+                : {
+                    checking: this.requireExpression(
+                        checking,
+                        'wildcard.checking'
+                    )
+                })
+        });
     }
 
     call(
@@ -833,7 +854,17 @@ export class CoreLfTransferScopedBuilder {
                             'Wildcard is permitted only in a match pattern'
                         );
                     }
-                    return { tag: 'wildcard' };
+                    return {
+                        tag: 'wildcard',
+                        ...(current.node.checking === undefined
+                            ? {}
+                            : {
+                                checking: visit(
+                                    current.node.checking,
+                                    scope
+                                )
+                            })
+                    };
                 case 'token': {
                     const position = scope.lastIndexOf(current);
                     if (position < 0) {
@@ -1096,6 +1127,17 @@ const validateExpression = (
                     'INVALID_CAPTURE',
                     path,
                     'Wildcard is permitted only in a match pattern'
+                );
+            }
+            if (expression.checking !== undefined) {
+                validateExpression(
+                    expression.checking,
+                    {
+                        ...context,
+                        purpose: 'template',
+                        captureOccurrences: new Map()
+                    },
+                    `${path}.checking`
                 );
             }
             return;

@@ -70,8 +70,16 @@ import {
     coreCategoricalFibredWeakenReindexCoreName
 } from './categorical_fibred_weaken_reindex_transfer';
 import {
+    CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES,
+    CoreCategoricalFibredDependentTargetCompilation,
+    compileCoreCategoricalFibredDependentTargetTransfer
+} from './categorical_fibred_dependent_target_transfer';
+import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
+import {
+    validateCoreCategoricalFibredDependentTargetContract
+} from './categorical_fibred_dependent_target_contract';
 import {
     CoreCategoricalContextDependencyPlan,
     coreCategoricalClosedContextClassifier,
@@ -174,6 +182,9 @@ export const CORE_CATEGORICAL_GROUPED_SEQUENTIAL_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_FIBRED_WEAKEN_REINDEX_PROGRAM_REVISION =
     'FIBRED-WEAKEN-REINDEX-1-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_PROGRAM_REVISION =
+    'FIBRED-DEPENDENT-TARGET-1-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -324,7 +335,10 @@ export interface CoreCategoricalProgramOptions {
      * Sigma/pullback and grouped transparent-product context presentations.
      * The weakening/reindexing profile then adds the exact contextual
      * `indexOf` section weakening and existing-authority displayed
-     * base-change action.
+     * base-change action. The dependent-target profile finally adds the
+     * exact contravariant category family, pulled-back displayed-family
+     * motive, internal-Pi package, Sigma-total target, and target-fibre
+     * computation selected by D-DTTLF-USABILITY-007/007A.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -335,7 +349,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-binder-1'
         | 'fibred-transfd-1'
         | 'fibred-grouped-sequential-1'
-        | 'fibred-weaken-reindex-1';
+        | 'fibred-weaken-reindex-1'
+        | 'fibred-dependent-target-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -369,6 +384,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_FIBRED_TRANSFD'
     | 'UNAVAILABLE_GROUPED_SEQUENTIAL'
     | 'UNAVAILABLE_WEAKEN_REINDEX'
+    | 'UNAVAILABLE_DEPENDENT_TARGET'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
 
@@ -446,6 +462,13 @@ export interface CoreCategoricalFibredTransfdClassifierCompatibility {
     readonly directOrdinaryProofTime: CoreLfProofComparisonResult;
     readonly directOrdinaryObjectRuntime: CoreLfComparisonResult;
     readonly directSigmaPiRuntime: CoreLfComparisonResult;
+    readonly preservesPresentations: true;
+}
+
+export interface CoreCategoricalFibredDependentTargetCompatibility {
+    readonly runtime: CoreLfComparisonResult;
+    readonly proofTime: CoreLfProofComparisonResult;
+    readonly runtimeCategoryPresentationCollapseInstalled: false;
     readonly preservesPresentations: true;
 }
 
@@ -600,6 +623,33 @@ for (const [
     categoricalLabels[
         coreCategoricalFibredTransfdCoreName(id)
     ] = label;
+}
+for (const [
+    coreName,
+    label
+] of [
+    [
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+            .oppositeCategory,
+        'emdash.categorical.opposite-category'
+    ],
+    [
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+            .displayedCategoryFunctor,
+        'emdash.categorical.displayed-category-functor'
+    ],
+    [
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+            .sectionCategoryFunctor,
+        'emdash.categorical.section-category-functor'
+    ],
+    [
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+            .pullbackPi,
+        'emdash.categorical.pullback-section-package'
+    ]
+] as const) {
+    categoricalLabels[coreName] = label;
 }
 for (const [
     id,
@@ -774,7 +824,8 @@ export class CoreCategoricalProgram {
         | CoreCategoricalFibredStructureCompilation
         | CoreCategoricalFibredBinderCompilation
         | CoreCategoricalFibredTransfdCompilation
-        | CoreCategoricalFibredWeakenReindexCompilation;
+        | CoreCategoricalFibredWeakenReindexCompilation
+        | CoreCategoricalFibredDependentTargetCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -782,6 +833,7 @@ export class CoreCategoricalProgram {
     private readonly fibredTransfdEnabled: boolean;
     private readonly groupedSequentialEnabled: boolean;
     private readonly fibredWeakenReindexEnabled: boolean;
+    private readonly fibredDependentTargetEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -797,41 +849,55 @@ export class CoreCategoricalProgram {
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
-            profile === 'fibred-weaken-reindex-1';
+            profile === 'fibred-weaken-reindex-1' ||
+            profile === 'fibred-dependent-target-1';
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
-            profile === 'fibred-weaken-reindex-1';
+            profile === 'fibred-weaken-reindex-1' ||
+            profile === 'fibred-dependent-target-1';
         this.fibredStructureEnabled =
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
-            profile === 'fibred-weaken-reindex-1';
+            profile === 'fibred-weaken-reindex-1' ||
+            profile === 'fibred-dependent-target-1';
         this.fibredBinderEnabled =
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
-            profile === 'fibred-weaken-reindex-1';
+            profile === 'fibred-weaken-reindex-1' ||
+            profile === 'fibred-dependent-target-1';
         this.fibredTransfdEnabled =
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
-            profile === 'fibred-weaken-reindex-1';
+            profile === 'fibred-weaken-reindex-1' ||
+            profile === 'fibred-dependent-target-1';
         this.groupedSequentialEnabled =
             profile === 'fibred-grouped-sequential-1' ||
-            profile === 'fibred-weaken-reindex-1';
+            profile === 'fibred-weaken-reindex-1' ||
+            profile === 'fibred-dependent-target-1';
         this.fibredWeakenReindexEnabled =
-            profile === 'fibred-weaken-reindex-1';
+            profile === 'fibred-weaken-reindex-1' ||
+            profile === 'fibred-dependent-target-1';
+        this.fibredDependentTargetEnabled =
+            profile === 'fibred-dependent-target-1';
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
         if (this.fibredWeakenReindexEnabled) {
             validateCoreCategoricalFibredWeakenReindexContract();
         }
-        this.dependent = this.fibredWeakenReindexEnabled
+        if (this.fibredDependentTargetEnabled) {
+            validateCoreCategoricalFibredDependentTargetContract();
+        }
+        this.dependent = this.fibredDependentTargetEnabled
+            ? compileCoreCategoricalFibredDependentTargetTransfer()
+            : this.fibredWeakenReindexEnabled
             ? compileCoreCategoricalFibredWeakenReindexTransfer()
             : this.fibredTransfdEnabled
             ? compileCoreCategoricalFibredTransfdTransfer()
@@ -1050,6 +1116,20 @@ export class CoreCategoricalProgram {
                 'Contextual displayed weakening and displayed-functor ' +
                     'reindexing are available only in the explicit ' +
                     "'fibred-weaken-reindex-1' root profile"
+            );
+        }
+    }
+
+    private requireFibredDependentTarget(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.fibredDependentTargetEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_DEPENDENT_TARGET',
+                nodeProvenance,
+                'Contravariant category families and their dependent ' +
+                    'section targets are available only in the explicit ' +
+                    "'fibred-dependent-target-1' root profile"
             );
         }
     }
@@ -1466,6 +1546,82 @@ export class CoreCategoricalProgram {
         );
     }
 
+    private oppositeCategoryExpression(
+        categoryValue: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+                    .oppositeCategory,
+                nodeProvenance
+            ),
+            [{
+                plicity: 'explicit',
+                value: categoryValue
+            }],
+            nodeProvenance
+        );
+    }
+
+    private categoryOfCategoriesExpression(
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelApplication(
+            'category-of-categories',
+            [],
+            nodeProvenance
+        );
+    }
+
+    private dependentSectionMotiveExpression(
+        baseCategory: KernelExpression,
+        contravariantFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        const categoryOfCategories =
+            this.categoryOfCategoriesExpression(nodeProvenance);
+        return this.displayedPullbackExpression(
+            baseCategory,
+            this.oppositeCategoryExpression(
+                categoryOfCategories,
+                nodeProvenance
+            ),
+            kernelFree(
+                CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+                    .displayedCategoryFunctor,
+                nodeProvenance
+            ),
+            contravariantFamily,
+            nodeProvenance
+        );
+    }
+
+    private dependentSectionPackageExpression(
+        baseCategory: KernelExpression,
+        contravariantFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+                    .pullbackPi,
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: contravariantFamily
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
     private dependentPairExpression(
         family: InternalCoreCategoricalDisplayedFamily,
         first: KernelExpression,
@@ -1599,6 +1755,42 @@ export class CoreCategoricalProgram {
             sourceCategory: inspection.type.sourceCategory,
             targetCategory: inspection.type.targetCategory
         };
+    }
+
+    private requireContravariantCategoryFamilyTerm(
+        value: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly expression: KernelExpression;
+        readonly baseCategory: KernelExpression;
+        readonly targetCategory: KernelExpression;
+    } {
+        this.requireFibredDependentTarget(nodeProvenance);
+        const family = this.requireFunctorTerm(
+            value,
+            nodeProvenance,
+            detail
+        );
+        const expectedTarget = this.oppositeCategoryExpression(
+            this.categoryOfCategoriesExpression(nodeProvenance),
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            family.targetCategory,
+            expectedTarget
+        )) {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_FUNCTOR',
+                nodeProvenance,
+                `${detail} must target Op(Cat_cat)`
+            );
+        }
+        return Object.freeze({
+            expression: family.expression,
+            baseCategory: family.sourceCategory,
+            targetCategory: family.targetCategory
+        });
     }
 
     private requireDisplayedFunctorTerm(
@@ -1822,6 +2014,212 @@ export class CoreCategoricalProgram {
             name,
             baseCategory,
             kernelFree(name, nodeProvenance)
+        );
+    }
+
+    /**
+     * Assume a category-valued contravariant family
+     * `G : Functor(K,Op(Cat_cat))`.
+     */
+    contravariantCategoryFamily(
+        name: string,
+        baseValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `contravariant category family assumption ${name}`,
+            source
+        );
+        this.requireFibredDependentTarget(nodeProvenance);
+        const base = this.requireCategory(
+            baseValue,
+            nodeProvenance
+        );
+        const target = this.oppositeCategoryExpression(
+            this.categoryOfCategoriesExpression(nodeProvenance),
+            nodeProvenance
+        );
+        return this.assume(name, {
+            tag: 'functor',
+            sourceCategory: base.expression,
+            targetCategory: target
+        }, nodeProvenance);
+    }
+
+    /**
+     * Pull back the internal displayed-category family along
+     * `G : K -> Op(Cat_cat)`.
+     *
+     * The fibre at `k` is the displayed-family category over `G[k]`.
+     */
+    dependentSectionMotive(
+        contravariantFamilyValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'dependent section motive family',
+            source
+        );
+        const family = this.requireContravariantCategoryFamilyTerm(
+            contravariantFamilyValue,
+            nodeProvenance,
+            'Dependent section motive input'
+        );
+        const base = this.makeCategory(
+            'source(dependent-section-motive)',
+            family.baseCategory
+        ) as InternalCoreCategoricalCategory;
+        return this.makeDisplayedFamily(
+            'Pullback(Catd_cat_func,G)',
+            base,
+            this.dependentSectionMotiveExpression(
+                family.baseCategory,
+                family.expression,
+                nodeProvenance
+            )
+        );
+    }
+
+    /**
+     * Form the Cat-valued family over the explicit total context
+     * `Sigma(K,Pullback(Catd_cat_func,G))`.
+     *
+     * Its fibre at `(k,M)` computes to `Pi_cat(G[k],M)`.
+     */
+    dependentSectionTarget(
+        contravariantFamilyValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'dependent section total-context target',
+            source
+        );
+        const family = this.requireContravariantCategoryFamilyTerm(
+            contravariantFamilyValue,
+            nodeProvenance,
+            'Dependent section target input'
+        );
+        const base = this.makeCategory(
+            'source(dependent-section-target)',
+            family.baseCategory
+        ) as InternalCoreCategoricalCategory;
+        const motive = this.makeDisplayedFamily(
+            'Pullback(Catd_cat_func,G)',
+            base,
+            this.dependentSectionMotiveExpression(
+                family.baseCategory,
+                family.expression,
+                nodeProvenance
+            )
+        ) as InternalCoreCategoricalDisplayedFamily;
+        const total = this.makeCategory(
+            'Sigma(Pullback(Catd_cat_func,G))',
+            this.totalCategoryExpression(motive, nodeProvenance)
+        ) as InternalCoreCategoricalCategory;
+        return this.makeDisplayedFamily(
+            'Sigma(Pi_pullback_funcd(G))',
+            total,
+            kernelCall(
+                kernelFree(
+                    CORE_DIRECTED_1A_PRIMITIVE_NAMES[
+                        'sigma-telescope-family'
+                    ],
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: family.baseCategory
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: motive.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value:
+                            this.dependentSectionPackageExpression(
+                                family.baseCategory,
+                                family.expression,
+                                nodeProvenance
+                            )
+                    }
+                ],
+                nodeProvenance
+            )
+        );
+    }
+
+    /**
+     * Expected normal form of the dependent target fibre at `(k,M)`.
+     *
+     * This helper validates the same motive indices as `dependentPair`; it
+     * does not synthesize a section or add an equality.
+     */
+    dependentSectionCategoryAt(
+        contravariantFamilyValue: CoreCategoricalTerm,
+        pointValue: CoreCategoricalTerm,
+        displayedFamilyValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory {
+        const nodeProvenance = this.at(
+            'dependent section target fibre normal form',
+            source
+        );
+        const family = this.requireContravariantCategoryFamilyTerm(
+            contravariantFamilyValue,
+            nodeProvenance,
+            'Dependent section fibre family'
+        );
+        const point = this.requireObjectTerm(
+            pointValue,
+            nodeProvenance,
+            'Dependent section fibre base point'
+        );
+        this.requireSameCategory(
+            point.category,
+            family.baseCategory,
+            nodeProvenance,
+            'Dependent section fibre base point'
+        );
+        const motive = this.dependentSectionMotiveExpression(
+            family.baseCategory,
+            family.expression,
+            nodeProvenance
+        );
+        const displayedFamily = this.requireObjectTerm(
+            displayedFamilyValue,
+            nodeProvenance,
+            'Dependent section fibre displayed family'
+        );
+        this.requireSameCategory(
+            displayedFamily.category,
+            this.fibreCategoryOfExpression(
+                family.baseCategory,
+                motive,
+                point.expression,
+                nodeProvenance
+            ),
+            nodeProvenance,
+            'Dependent section fibre displayed family'
+        );
+        const categoryAtPoint = kernelApplication(
+            'functor-object',
+            [
+                { value: family.baseCategory },
+                { value: family.targetCategory },
+                { value: family.expression },
+                { value: point.expression }
+            ],
+            nodeProvenance
+        );
+        return this.makeCategory(
+            'Pi(G[k],M)',
+            coreSectionCategory(
+                categoryAtPoint,
+                displayedFamily.expression,
+                nodeProvenance
+            )
         );
     }
 
@@ -4749,7 +5147,12 @@ export class CoreCategoricalProgram {
                 'displayed-functor classifiers'
             );
         }
-        const compilation = this.fibredWeakenReindexEnabled
+        const compilation = this.fibredDependentTargetEnabled
+            ? (
+                this.dependent as
+                    CoreCategoricalFibredDependentTargetCompilation
+            ).prerequisite.prerequisite
+            : this.fibredWeakenReindexEnabled
             ? (
                 this.dependent as
                     CoreCategoricalFibredWeakenReindexCompilation
@@ -4900,6 +5303,61 @@ export class CoreCategoricalProgram {
         term: CoreCategoricalTerm
     ): CoreCategoricalTermInspection {
         return this.builder.inspect(term);
+    }
+
+    serializeCategory(
+        value: CoreCategoricalCategory
+    ): string {
+        const category = this.requireCategory(
+            value,
+            this.at('categorical category serialization')
+        );
+        return serializeCoreCategoricalExpression(
+            category.expression
+        );
+    }
+
+    dependentTargetCategoryCompatibility(
+        leftValue: CoreCategoricalCategory,
+        rightValue: CoreCategoricalCategory,
+        stepLimit = 4_000
+    ): CoreCategoricalFibredDependentTargetCompatibility {
+        const nodeProvenance = this.at(
+            'dependent-target runtime/proof category comparison'
+        );
+        this.requireFibredDependentTarget(nodeProvenance);
+        const left = this.requireCategory(
+            leftValue,
+            nodeProvenance
+        );
+        const right = this.requireCategory(
+            rightValue,
+            nodeProvenance
+        );
+        const compilation =
+            this.dependent as
+                CoreCategoricalFibredDependentTargetCompilation;
+        return Object.freeze({
+            runtime: coreLfDefinitionalCompare(
+                this.environment,
+                left.expression,
+                right.expression,
+                stepLimit,
+                undefined,
+                compilation.composedRuntime
+            ),
+            proofTime:
+                compilation.proofProgram
+                    .compareUnderOpaqueDeclarationExtension(
+                        this.environment,
+                        compilation.composedRuntime,
+                        left.expression,
+                        right.expression
+                    ),
+            runtimeCategoryPresentationCollapseInstalled:
+                false as const,
+            preservesPresentations: true as const
+        });
     }
 
     compareCategories(

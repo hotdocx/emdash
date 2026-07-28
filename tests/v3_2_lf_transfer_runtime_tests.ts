@@ -836,6 +836,100 @@ describe('SCALE-0D generic LF runtime compiler', () => {
         );
     });
 
+    it(
+        'checks a typed wildcard witness while ignoring that runtime slot',
+        () => {
+            const fixture = genericRuntimeFixture();
+            const pattern = new CoreLfTransferScopedBuilder();
+            const left = pattern.pattern(pattern.call(
+                pattern.global(identity),
+                [{
+                    plicity: 'explicit',
+                    value: pattern.wildcard(
+                        pattern.global(zero)
+                    )
+                }]
+            ));
+            const template = new CoreLfTransferScopedBuilder();
+            const right = template.template(
+                template.global(zero)
+            );
+            const module = replaceRuntimeRules(
+                fixture,
+                'generic-runtime-typed-wildcard-1',
+                [{
+                    order: 0,
+                    id: 'fixture.typed-wildcard.evaluate',
+                    groupId: 'fixture.typed-wildcard.evaluate',
+                    clauseOrder: 0,
+                    sourceOwner: identity,
+                    variables: [],
+                    left,
+                    right,
+                    provenance: fixtureSource(
+                        'rule identity _ ↪ zero;'
+                    )
+                }],
+                [...fixture.module.externalSymbols, {
+                    symbol: zero,
+                    availability: 'earlier-fragment'
+                }]
+            );
+            const runtime = compileCoreLfRuntimeProgram(
+                module.module,
+                module.policy,
+                module.declarations
+            );
+
+            assert.equal(
+                runtime.rules[0].subjectValidation.kind,
+                'typescript-checked'
+            );
+            const identityLink =
+                fixture.declarations.declaration(identity)?.link;
+            const zeroLink =
+                fixture.declarations.declaration(zero)?.link;
+            assert.equal(identityLink?.kind, 'free-declaration');
+            assert.equal(zeroLink?.kind, 'free-declaration');
+            if (
+                identityLink?.kind !== 'free-declaration' ||
+                zeroLink?.kind !== 'free-declaration'
+            ) {
+                return;
+            }
+            const nodeProvenance = provenance(
+                'derived',
+                'typed wildcard runtime redex'
+            );
+            const redex = kernelCall(
+                kernelFree(identityLink.coreName, nodeProvenance),
+                [{
+                    plicity: 'explicit',
+                    value: kernelFree(
+                        zeroLink.coreName,
+                        nodeProvenance
+                    )
+                }],
+                nodeProvenance
+            );
+            const rewritten = runtime.rewriteHead(redex);
+            assert.equal(rewritten.status, 'rewritten');
+            if (rewritten.status !== 'rewritten') return;
+            assert.equal(
+                rewritten.ruleId,
+                'fixture.typed-wildcard.evaluate'
+            );
+            assert.equal(
+                kernelExpressionEquals(
+                    rewritten.after,
+                    kernelFree(zeroLink.coreName, nodeProvenance)
+                ),
+                true
+            );
+            assertDeepFrozen(runtime.rules[0]);
+        }
+    );
+
     it('uses exact proof rules only for selected inferred subjects', () => {
         const fixture = proofSubjectRuntimeFixture();
         expectRuntimeError(

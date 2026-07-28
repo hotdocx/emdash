@@ -502,6 +502,14 @@ describe('TypeScript v3.2 reviewed SCALE-0B transfer IR', () => {
         assert.equal(builder.pattern(capture).tag, 'capture');
         assert.equal(builder.template(capture).tag, 'capture');
         assert.equal(builder.pattern(builder.wildcard()).tag, 'wildcard');
+        const typedWildcard = builder.pattern(
+            builder.wildcard(builder.type())
+        );
+        assert.deepEqual(typedWildcard, {
+            tag: 'wildcard',
+            checking: { tag: 'type' }
+        });
+        assertDeepFrozen(typedWildcard);
         expectTransferError(
             () => builder.term(capture),
             'INVALID_BUILDER_EXPRESSION'
