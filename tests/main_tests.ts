@@ -16,6 +16,7 @@ import './v3_2_telescope_structural_tests';
 import './v3_2_context_dependency_tests';
 import './v3_2_categorical_context_dependency_tests';
 import './v3_2_categorical_fibred_product_proposal_tests';
+import './v3_2_categorical_fibred_structure_proposal_tests';
 import './v3_2_categorical_comprehension_proposal_tests';
 import './v3_2_manifest_tests';
 import './v3_2_runtime_tests';

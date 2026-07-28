@@ -88,7 +88,14 @@ runnable demo compute the pointwise product fibre in 12 steps and shared-base
 pullback-stability, higher-action, structural-map, and profile boundaries
 remain explicit. The zero warning delta is supporting interaction evidence,
 not an automatic design veto over the broader alternatives.
-FIBRED-STRUCTURE-1 is now the next bounded row.
+FIBRED-STRUCTURE-0A is now complete. Its active-owner/Foundation audit and
+five-way full-file comparison select a deeply frozen but non-authorizing
+three-owner/eleven-rule fixed-base displayed projection/pairing package.
+Swap and diagonal are transparent composites; grouped-product reindexing is
+canonicalized in the dependency-aware frontend, while raw
+`Pullback_catd(P(B,C),F)` remains a kernel non-conversion. Exact
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-006 approval is required before
+FIBRED-STRUCTURE-1A or any active structural owner/rule.
 The independent FIBRED-COMPREHENSION-0A/0B audit is also complete. A
 zero-owner Sigma-introduction composite is type correct but computationally
 stuck; a direct pair owner computes with `+2/0` warnings; and the selected
@@ -714,9 +721,12 @@ D-DTTLF-USABILITY-005 are approved, and both bounded closures are complete.
 The former retains the transparent product and adds exactly two
 existing-owner rules plus its first grouped-sibling fibre/transport demo; the
 latter adds the audited one-owner/two-rule comprehension totalization and
-dependent chain. FIBRED-STRUCTURE-1 is next, beginning with an
-active-owner/Foundation audit of displayed projection, pairing, swap,
-diagonal, and pullback stability. Do not infer any additional owner/rule,
-structural map, total pullback, or profile authority from those bounded
-approvals. The completed master plan's historical checkpoint authorization
-does not authorize unrelated Git mutations.
+dependent chain. FIBRED-STRUCTURE-0A has completed the next active-owner/
+Foundation audit and frozen D-DTTLF-USABILITY-006: exactly three fixed-base
+projection/pairing owners, eleven point/full/capped/beta rules, transparent
+swap/diagonal, and frontend canonical grouped-product reindexing. It adds no
+`Product_catd` head or kernel reindexing equality. FIBRED-STRUCTURE-1A awaits
+exact approval. Do not infer any additional owner/rule, structural map,
+total pullback, or profile authority from older bounded approvals. The
+completed master plan's historical checkpoint authorization does not
+authorize unrelated Git mutations.

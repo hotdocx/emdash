@@ -23,9 +23,15 @@ chain and runnable demo. FIBRED-PRODUCT-1A is also complete: its two approved
 existing-owner rules are active, its transparent family and shared-base
 transport are transferred through the generic TypeScript engines, and its
 root-only direct-TypeScript facade and runnable demo compute both the
-pointwise fibre and componentwise base-arrow action. FIBRED-STRUCTURE-1 is the
-next dependency-ready bounded row; product projections, pairing, swap,
-diagonal, and pullback stability remain unimplemented until that audit
+pointwise fibre and componentwise base-arrow action. FIBRED-STRUCTURE-0A's
+existing-owner/Foundation audit, five-way comparison, bounded full-file
+probes, and immutable proposal are now complete. The selected prospective
+FIBRED-STRUCTURE-1A boundary uses three fixed-base displayed universal-
+property owners and eleven point/full/capped/beta rules, derives swap and
+diagonal transparently, and canonicalizes grouped-product reindexing before
+Core emission. It awaits exact H-DTTLF-USABILITY-02/
+D-DTTLF-USABILITY-006 approval; no active structural owner or rule has been
+promoted.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -44,7 +50,7 @@ selects owners by active foundational fit, semantic generality, exact consumer
 need, and non-duplication first. The user further clarified that “necessary”
 means auditing existing kernel constructions and foundational design intent
 before adding a primitive; the completed comprehension audit did so and found
-no existing owner for the general map `Sigma(F^*D) -> Sigma(D)`
+no existing owner for the general map `Sigma(F^*D) -> Sigma(D)`.
 FIBRED-CONTEXT-0A implementation checkpoint:
 `d25ddb349e97dc0629cd6bc1aa941e1cc200066e`
 FIBRED-CONTEXT-0B implementation checkpoint:
@@ -476,8 +482,245 @@ kernel contains only the two rules above; the TypeScript runtime compiles
 those rules together with the minimal existing prerequisite closure, and the
 first grouped-sibling consumer computes fibres and shared-base transport
 without a `Product_catd` declaration. The structural projections, pairing,
-swap, diagonal, and pullback-stability comparison remain the separate
-FIBRED-STRUCTURE-1 audit.
+swap, diagonal, and pullback-stability comparison were left for the separate
+FIBRED-STRUCTURE audit completed below.
+
+## Displayed Product Structural Owner Audit
+
+FIBRED-STRUCTURE-0A has now completed that audit without editing the active
+kernel. The concrete context is:
+
+```text
+Γ, a : A, b : B(a), c : C(a),
+```
+
+where `b` and `c` are independent siblings over the same dependent base
+`Γ,a:A`. Their fibrewise product is still the completed transparent family:
+
+```text
+P(B,C)
+  := uncurry(Product_cat_func) ∘ Struct_sigma(B,C)
+  : Catd K.
+```
+
+This is the fibred-product point of view requested by the usability design.
+It supplies weakening/projection, contraction/diagonal, exchange/symmetry, and
+pairing for the sibling variables `b,c`. It does not claim that a genuinely
+dependent telescope edge such as `a:A, b:B(a)` can be exchanged. The generic
+dependency graph remains responsible for distinguishing those cases before
+categorical lowering.
+
+### Existing authority and the exact missing boundary
+
+The active kernel already provides all ordinary ingredients:
+
+- `Product_projL_func` and `Product_projR_func`;
+- `Product_pair` and product-valued functor computation;
+- `Product_map_func`, including iterable full and capped hom action;
+- `id_funcd` and displayed composition at `Catd_cat K`;
+- `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`;
+- `Pullback_catd`; and
+- the completed two-rule product-family transport closure.
+
+Neither the active source nor Foundations supplies a fixed-base displayed
+projection:
+
+```text
+P(B,C) -> B
+P(B,C) -> C,
+```
+
+or the shared-source displayed pairing:
+
+```text
+FF : Functord(E,B)
+GG : Functord(E,C)
+--------------------------------
+pair(FF,GG) : Functord(E,P(B,C)).
+```
+
+The ordinary owners cannot simply be reused as terms of those displayed
+types. A global runtime equation
+
+```text
+Functord_cat E P(B,C)
+  = Product_cat (Functord_cat E B) (Functord_cat E C)
+```
+
+also remains deliberately false in the bounded corpus. It would not by
+itself supply the required `tapp0`/`tapp1` computation for a raw pair.
+Consequently the audit identifies an actual mathematical operation gap, not
+a notation gap or a reason to add a `Product_catd` family primitive.
+
+### Selected fixed-base universal-property package
+
+The smallest complete owner-position candidate adds exactly:
+
+```text
+Product_projL_funcd(B,C)
+  : Functord(P(B,C),B)
+
+Product_projR_funcd(B,C)
+  : Functord(P(B,C),C)
+
+Product_pair_funcd(FF,GG)
+  : Functord(E,P(B,C)).
+```
+
+It adds eleven runtime clauses:
+
+1. point, full off-diagonal, and capped action for the left projection;
+2. point, full off-diagonal, and capped action for the right projection;
+3. point, full off-diagonal, and capped action for pairing; and
+4. the two whole displayed universal-property betas
+   `projL ∘ pair(FF,GG) -> FF` and
+   `projR ∘ pair(FF,GG) -> GG`.
+
+The full projection action is not a capped-only shortcut. It is the existing
+full family action of `B` or `C` precomposed with the corresponding ordinary
+source-fibre projection. The pairing full action is the ordinary
+`Struct_sigma` pair of its two full component actions. Therefore both sides
+remain first-class functors that can be iterated at the next cell.
+
+No fourth or fifth primitive is needed:
+
+```text
+swap(B,C)
+  := pair(projR(B,C),projL(B,C))
+
+diag(B)
+  := pair(id_funcd(B),id_funcd(B)).
+```
+
+The TypeScript structural surface can emit those explicit Core composites.
+Check-only Lambdapi aliases may state the formulas in diagnostics, but the
+proposal does not add active swap, diagonal, or product-family aliases.
+
+### Positive, negative, and higher-action evidence
+
+The final fixed-base full-file probe computes:
+
+- left projection in a fibre;
+- pairing in a fibre;
+- left projection over an arbitrary shared base arrow;
+- componentwise pairing over that arrow;
+- point components of the derived swap and diagonal;
+- both whole projection/pairing beta laws; and
+- the completed product family’s existing fibre and same-base transport
+  results.
+
+For genuine next-cell evidence, with
+
+```text
+p,q : Hom_K(x,y)
+alpha : Hom_{Hom_K(x,y)}(p,q),
+```
+
+the projection full action accepts `alpha` and returns a transformation
+between the two capped projection actions. Pairing does the same, and both
+projections of that next-cell result reduce to the corresponding higher
+actions of `FF` and `GG`. This proves an iterable owner boundary, not merely a
+pointwise object demo. It does not yet claim a global coherence theorem or
+all later omega-dimensional naturality laws.
+
+The retained negatives are:
+
+```text
+opaque E
+  ≢ P(B,C)
+
+Functord_cat E P(B,C)
+  ≢ Product_cat (Functord_cat E B) (Functord_cat E C)
+
+Pullback_catd(P(B,C),F)
+  ≢ P(Pullback_catd(B,F),Pullback_catd(C,F)).
+```
+
+The fixed-base package passes quiet and warning-enabled checks with the
+unchanged active inventory `1010/159`. The zero delta is interaction
+evidence, not the semantic reason for selecting the package.
+
+### Rejected or deferred owner positions
+
+The audit tested the relevant alternatives at full-file owner positions:
+
+| Candidate | Tested closure | First structural consumer | Warning delta | Disposition |
+| --- | --- | --- | --- | --- |
+| fixed-base displayed universal property | 3 owners, 11 rules | projections, pairing, swap, diagonal, betas, and next-cell iteration compute | `0/0` | selected |
+| universe-level projection transfors, then generic prewhiskering | 2 owners, 8 rules, 2 transparent derived projections | declarations and prewhiskering typecheck, but fixed-base point projection remains stuck and pairing is still absent | `+2/+6` | defer until generic whiskering and pairing close independently |
+| raw composition distributed over a paired Cat diagram | 0 owners, 1 rule | explicit semantic composition computes, but stable outer `Pullback_catd` remains distinct | `+6/0` | reject for this consumer |
+| stable `Pullback_catd` distributed over a paired Cat diagram | 0 owners, 1 rule | generic explicit diagram computes, but a nested transparent product alias remains a brittle discriminator | `+9/0` | reject for this consumer |
+| stable `Product_catd` head from the prior product audit | 1 owner, 2 family rules before structural maps | duplicates the selected family and supplies none of the structural operations | `+5/0` | reject |
+
+Warnings do not veto a desired semantic design. Here the alternatives are
+not selected because they fail to close the required consumer, duplicate an
+existing construction, or broaden kernel rewriting without necessity. Their
+warning deltas diagnose the additional closure that a later concrete use
+would have to address.
+
+### Reindexing stability is canonical Core selection
+
+The frontend already knows that `B,C` form an independent sibling group and
+knows the reindexing map `F : A -> K`. It can therefore compile:
+
+```text
+reindex(groupedProduct(B,C),F)
+```
+
+directly to:
+
+```text
+P(Pullback_catd(B,F),Pullback_catd(C,F)).
+```
+
+It must not first emit:
+
+```text
+Pullback_catd(P(B,C),F)
+```
+
+and then hope that a rewrite recognizes a nested transparent family.
+Abstracting before or after reindexing consequently selects the same
+backend-neutral explicit Core by construction. This is a scalable
+elaboration normalization because it uses the already-explicit sibling
+group in the contextual IR; it is not a fabricated kernel equality.
+
+The proposal therefore retains all three statements:
+
+- no product-specific kernel reindexing runtime rule;
+- no proof-time equality claim between the two presentations; and
+- the raw `Pullback_catd(P(B,C),F)` non-conversion remains a regression
+  boundary.
+
+If a later kernel theorem or generic stable owner is needed independently,
+it receives a new owner-position audit. Frontend canonicalization is enough
+for the current end-user structural syntax and avoids making optional string
+parsing or Lambdapi acquisition part of the architecture.
+
+### Durable proposal and exact gate
+
+The ignored final fixed-base evidence is:
+
+```text
+emdash2/tmp/probes/
+  typescript_usability_fibred_product_1a_current.lp
+
+emdash2/logs/probes/
+  typescript_usability_fibred_product_1a_current-20260727-213158.log
+  typescript_usability_fibred_product_1a_current-20260727-213200.log
+```
+
+The alternative logs at `212359`, `212450`, and `213056` retain respectively
+the raw-composition reindex, stable-pullback reindex, and universe-level
+projection warning evidence. Ignored probes and logs are recovery evidence,
+not authority.
+
+The durable, deeply frozen, non-authorizing proposal is
+`src/v3_2/categorical_fibred_structure_proposal.ts`. Its six focused tests
+are in
+`tests/v3_2_categorical_fibred_structure_proposal_tests.ts`.
+FIBRED-STRUCTURE-0A is complete. FIBRED-STRUCTURE-1A may edit the active
+kernel only after the exact D-DTTLF-USABILITY-006 decision below.
 
 ## Comprehension And Contextual Pairing Owner Audit
 
@@ -915,10 +1158,11 @@ usability profile.
 | FIBRED-COMPREHENSION-0B | complete; D-DTTLF-USABILITY-005 approved | FIBRED-COMPREHENSION-0A and concrete object/arrow substitution consumers | Compared the semantic composite, a direct specialized pair owner (`+2/0` warnings), and a general asymmetric pullback-total owner (`+0/0`). Selected one new owner with two structured runtime projections, a transparent three-factor contextual pair, object/base-arrow substitution evidence, strict `0/45/27` audit, exact non-collapse boundaries, and separate Sigma-introduction action deferral. The warning comparison diagnoses closure size; necessity follows from the missing base-changing totalization and stuck existing-owner consumer |
 | FIBRED-COMPREHENSION-1A | complete; approved D-DTTLF-USABILITY-005 | FIBRED-COMPREHENSION-0B and exact human approval | Added only `sigma_pullback_total_func` with object and structured-arrow projections after a named-owner/foundational audit; retained contextual pairing as the explicit three-factor composite; transferred `Pullback_catd`, canonical `sigma_arrow`, and the new owner/rules through generic declaration/runtime engines; all four local rules are TypeScript subject-checked; added root-only `fibred-comprehension-1a` operations and a genuine further-family object/arrow chain plus runnable demo; preserved all recorded non-effects |
 | FIBRED-SIGMA-INTRO-ACTION-1 | deferred separate closure | concrete consumer beyond contextual pairing | Reassess direct `sigma_intro_tapp0_func` arrow action only with a closure that joins the measured `+10/+1` identity, naturality, composition, and higher-action interactions |
-| FIBRED-STRUCTURE-1 | pending | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A or a proved existing-owner derivation | Lower displayed projection, pairing, swap, diagonal, and reindexing stability for independent siblings with positive, negative, and higher-action evidence |
-| FIBRED-BINDER-1 | pending | FIBRED-STRUCTURE-1 and existing Sigma/Pi comparisons | Implement the first direct `:^fd`-equivalent typed API and show direct/nested classifier compatibility without collapsing proof-time and runtime equality |
+| FIBRED-STRUCTURE-0A | complete; D-DTTLF-USABILITY-006 awaiting exact approval | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A, active-owner/Foundation audit | Compared five structural/reindexing owner positions in bounded full-file probes. Selected three fixed-base projection/pairing owners with eleven point/full/capped/beta rules, zero warning delta, derived swap/diagonal, genuine next-cell evidence, and frontend canonical reindexing that preserves the raw kernel non-conversion. Froze the exact non-authorizing proposal and six tests |
+| FIBRED-STRUCTURE-1A | pending exact D-DTTLF-USABILITY-006 approval | FIBRED-STRUCTURE-0A and exact human approval | Promote only the proposed three-owner/eleven-rule fixed-base closure; transfer it generically; derive swap/diagonal as explicit Core; canonicalize grouped-product reindexing before emission; retain every recorded kernel comparison and profile boundary |
+| FIBRED-BINDER-1 | pending | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Implement the first direct `:^fd`-equivalent typed API and show direct/nested classifier compatibility without collapsing proof-time and runtime equality |
 | FIBRED-TRANSFD-1 | pending | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Implement one coherent displayed-transfor abstraction and component/higher-cell consumer |
-| FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1, FIBRED-COMPREHENSION-1A | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
+| FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
 | FIBRED-GRADUATE-1 | pending | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate human graduation decision |
 
@@ -1184,6 +1428,78 @@ interaction evidence only. The semantic reasons for selecting it over
 serves contextual pairing and later substitutions, and leaves pairing itself
 as explicit Core composition.
 
+FIBRED-STRUCTURE-0A has now triggered the same gate for the three missing
+fixed-base displayed universal-property operations.
+
+**D-DTTLF-USABILITY-006 — proposed 2026-07-27; awaiting exact approval.**
+Retain:
+
+```text
+P(B,C)
+  := uncurry(Product_cat_func) ∘ Struct_sigma(B,C)
+```
+
+with no active `Product_catd` owner or alias. Add exactly:
+
+```text
+Product_projL_funcd(B,C) : Functord(P(B,C),B)
+Product_projR_funcd(B,C) : Functord(P(B,C),C)
+Product_pair_funcd(FF,GG) : Functord(E,P(B,C))
+```
+
+and only the eleven probed point/full/capped/beta runtime clauses recorded in
+the immutable proposal. Derive:
+
+```text
+swap := pair(projR,projL)
+diag := pair(id_funcd,id_funcd)
+```
+
+as transparent TypeScript Core composites rather than active primitive
+owners. For grouped-product reindexing, the dependency-aware frontend emits:
+
+```text
+P(Pullback_catd(B,F),Pullback_catd(C,F))
+```
+
+directly. It does not emit `Pullback_catd(P(B,C),F)`, does not add a kernel
+reindexing rule, and does not claim runtime or proof-time equality between
+those whole presentations.
+
+This proposal does **not** authorize:
+
+- a `Product_catd` family head or active notation alias;
+- universe-level product-projection transfors;
+- a primitive displayed swap or diagonal;
+- either probed generic kernel reindexing rule;
+- a global `Functord_cat` product conversion;
+- a generic total-category pullback;
+- dependent-chain exchange;
+- direct `:^fd` or `:^nd` binder implementation;
+- browser/frozen-profile promotion; or
+- parsing, acquisition, or bulk-transfer resumption.
+
+The exact question is:
+
+> Approve H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-006 as proposed: retain
+> `P(B,C)` as the transparent uncurry/product composite; add exactly
+> `Product_projL_funcd`, `Product_projR_funcd`, and
+> `Product_pair_funcd` with the eleven probed point/full/capped/beta rules;
+> derive swap and diagonal transparently; canonicalize grouped-product
+> reindexing in the dependency-aware TypeScript frontend to
+> `P(Pullback_catd(B,F),Pullback_catd(C,F))`; and retain a `Product_catd`
+> head, universe-level projection transfors, kernel reindexing rules or
+> equality claims, global `Functord` product conversion, direct `fd`/`nd`
+> binders, and profile promotion as separate unapproved work?
+
+The proposal follows the user's warning and primitive-necessity
+clarifications. The selected owners fill the active fixed-base projection and
+pairing gap after ordinary product, displayed identity/composition, product
+transport, universe-level, stable-head, and reindexing alternatives were
+actually probed. The `0/0` warning delta supports the interaction assessment;
+selection follows the complete consumer, existing semantic family,
+reusability, higher iterability, and non-duplication criteria.
+
 ## FIBRED-COMPREHENSION-1A Completion Record
 
 The implementation follows that approved boundary exactly:
@@ -1311,7 +1627,9 @@ Validation evidence:
 The completion does not supply displayed projections, pairing, swap,
 diagonal, pullback stability, arbitrary off-diagonal action, full family
 base-two-cell action, a total-category pullback, or a deployed profile.
-FIBRED-STRUCTURE-1 is the next bounded audit and implementation row.
+FIBRED-STRUCTURE-0A has since completed the bounded structural audit and
+frozen D-DTTLF-USABILITY-006. FIBRED-STRUCTURE-1A is the next implementation
+row, but only after exact approval; no audited structural owner is active yet.
 
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
@@ -1358,6 +1676,24 @@ FIBRED-PRODUCT-0B is complete only when:
    exact human gate; and
 7. focused tests, TypeScript gates, the final bounded owner-position probe,
    and strict LHS audit pass.
+
+FIBRED-STRUCTURE-0A is complete only when:
+
+1. active ordinary product, displayed composition, pullback, and Foundations
+   owners are audited before proposing a primitive;
+2. fixed-base, universe-level, semantic-composition reindexing, stable-
+   pullback reindexing, and stable-product-head alternatives are compared at
+   bounded full-file owner positions;
+3. projection, pairing, swap, diagonal, both universal-property betas, base-
+   arrow action, and a genuine next-cell consumer are positive;
+4. opaque-family, global `Functord` product, and raw whole-pullback conversion
+   negatives remain explicit;
+5. reindexing stability is frozen as frontend canonical Core selection without
+   a kernel equality or rewrite claim;
+6. the exact three owners, eleven rules, derived operations, evidence,
+   non-effects, and human question are deeply frozen and self-validating; and
+7. focused proposal tests, TypeScript gates, and the final quiet/warning probe
+   pass.
 
 FIBRED-COMPREHENSION-0B is complete only when:
 
@@ -1458,10 +1794,21 @@ generic five-signature/25-clause TypeScript transfer, and the first
 grouped-sibling fibre/transport demo. Preserve its split-arrow discriminator,
 four typed existing-rule normal-form specializations, no-new-pattern-shape
 boundary, root-only profile, and zero new product owners. FIBRED-STRUCTURE-1
-is the next dependency-ready bounded row: audit existing active owners and
-Foundations before selecting displayed projection, pairing, swap, diagonal,
-or pullback-stability computation, and open an exact human gate before any
-new mathematical owner or rule.
+has now been split. FIBRED-STRUCTURE-0A is complete: the active-owner and
+Foundations audit plus five-way full-file comparison selects exactly
+`Product_projL_funcd`, `Product_projR_funcd`, and `Product_pair_funcd` with
+eleven point/full/capped/beta rules and unchanged `1010/159` warnings.
+Swap and diagonal remain transparent composites. Universe-level projection
+prewhiskering leaves the first fixed-base consumer stuck and pairing absent
+(`+2/+6`); raw-composition and stable-pullback reindex rules add `+6/0` and
+`+9/0` while failing the selected stable-boundary criteria; a stable product
+head still duplicates semantics. Reindex grouped products before Core
+emission as
+`P(Pullback_catd(B,F),Pullback_catd(C,F))`; preserve the negative that raw
+`Pullback_catd(P(B,C),F)` does not convert, and add no kernel equality or
+reindex rule. The immutable D-DTTLF-USABILITY-006 proposal awaits exact
+approval. Do not begin FIBRED-STRUCTURE-1A or promote any of its three owners
+or eleven rules until that approval.
 
 Preserve FIBRED-COMPREHENSION-0A/0B's exact result. A contextual-pair
 expression built only by pulling back `sigma_intro_transf` is type correct but
@@ -1610,3 +1957,14 @@ conformance, and CI obligations.
   passed. The checkpoint grants no structural map, general off-diagonal or
   higher action, product primitive, profile promotion, remote operation, or
   broader Git authority.
+- **2026-07-27 — FIBRED-STRUCTURE-0A completed and exact gate opened.**
+  Audited active ordinary/displayed owners and Foundations, then compared the
+  fixed-base, universe-level, two reindexing, and stable-product-head
+  alternatives in bounded full-file probes. The selected three-owner/
+  eleven-rule fixed-base package computes projection, pairing, derived swap/
+  diagonal, betas, base-arrow action, and genuine next-cell action with an
+  unchanged `1010/159` inventory. Reindexing is canonical Core selection in
+  the dependency-aware frontend, while the raw whole-pullback non-conversion
+  remains explicit. The deeply frozen proposal and six tests request exact
+  H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-006 approval; no active kernel
+  structural owner or rule was added.

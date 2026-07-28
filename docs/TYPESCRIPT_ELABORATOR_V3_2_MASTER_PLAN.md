@@ -3763,9 +3763,15 @@ primitive must first be checked against active kernel constructions and
 Foundations. Preserve the completed FIBRED-PRODUCT-1A transparent family,
 exact two-rule existing-owner kernel closure, generic five-signature/25-clause
 TypeScript transfer, same-base discriminator, and first grouped-sibling
-fibre/transport demo. FIBRED-STRUCTURE-1 is next and must first audit existing
-owners and Foundations before selecting displayed projection, pairing, swap,
-diagonal, or pullback-stability computation. Neither approval authorizes the
-measured broader Sigma-introduction action, product structural maps, profile
+fibre/transport demo. FIBRED-STRUCTURE-0A has completed the required existing-
+owner/Foundation audit and five-way full-file comparison. Its immutable
+D-DTTLF-USABILITY-006 proposal selects exactly three fixed-base displayed
+projection/pairing owners and eleven point/full/capped/beta rules, derives
+swap and diagonal transparently, and canonicalizes grouped-product
+reindexing before Core emission while preserving raw whole-pullback
+non-conversion. FIBRED-STRUCTURE-1A awaits exact approval; do not promote any
+of those owners/rules, add a `Product_catd` head, or install a kernel
+reindexing equality before it. Neither older approval authorizes the measured
+broader Sigma-introduction action, product structural maps, profile
 promotion, or a generic total pullback.
 ```
