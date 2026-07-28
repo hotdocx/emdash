@@ -44,6 +44,9 @@ import {
     coreCategoricalFibredTransfdCoreName
 } from './categorical_fibred_transfd_transfer';
 import {
+    coreCategoricalFibredWeakenReindexCoreName
+} from './categorical_fibred_weaken_reindex_transfer';
+import {
     CoreCategoricalAbstractionJudgment,
     CoreCategoricalAbstractionLayer,
     CoreCategoricalApplicationJudgment,
@@ -59,6 +62,9 @@ import {
 import {
     CORE_DIRECTED_1A_PRIMITIVE_NAMES
 } from './directed_1a';
+import {
+    CORE_DIRECTED_1B_PRIMITIVE_NAMES
+} from './directed_1b';
 import {
     CORE_DIRECTED_1C_PRIMITIVE_NAMES
 } from './directed_1c';
@@ -299,7 +305,8 @@ export type CoreCategoricalAbstractionEvidence =
             readonly rule:
                 | 'categorical.displayed-functor-identity'
                 | 'categorical.displayed-functor-eta'
-                | 'categorical.displayed-functor-composition';
+                | 'categorical.displayed-functor-composition'
+                | 'categorical.displayed-functor-weakening';
             readonly variation: 'functorial';
             readonly dependency: 'displayed';
             readonly sourceFamily: KernelExpression;
@@ -337,6 +344,9 @@ export type CoreCategoricalDependentApplicationPrerequisiteId =
     | 'sigma-pi-uncurrying-proof'
     | 'displayed-transfor-component-capped'
     | 'displayed-transfor-higher-cell'
+    | 'sigma-first-projection'
+    | 'section-pullback-functor'
+    | 'constant-displayed-family-object'
     | CoreCategoricalDependentPrerequisiteId
     | CoreCategoricalDependentCompositionPrerequisiteId;
 
@@ -355,6 +365,11 @@ export interface CoreCategoricalScopedBuilderOptions {
      * Enable only the FIBRED-TRANSFD-1 coherent component-eta abstraction.
      */
     readonly displayedTransforAbstraction?: boolean;
+    /**
+     * Enable only the existing-authority FIBRED-WEAKEN-REINDEX-1
+     * contextual-index weakening and displayed reindexing contract.
+     */
+    readonly displayedWeakeningReindexing?: boolean;
 }
 
 export interface CoreCategoricalBinderOptions {
@@ -438,6 +453,32 @@ interface InternalCoreCategoricalTerm extends CoreCategoricalTerm {
     readonly abstractions:
         readonly CoreCategoricalAbstractionEvidence[];
     readonly [CORE_CATEGORICAL_SLOT]?: true;
+    /**
+     * Frontend semantic origin for the exact structural weakening
+     * `λ a :^fd E. s[indexOf(a)]`. It is not serialized into Core.
+     */
+    readonly displayedSectionWeakening?: {
+        readonly section: InternalCoreCategoricalTerm;
+    };
+    /**
+     * The fibre functor obtained by projecting that weakening at a base
+     * point. This lets object application lower to `s[k]` without claiming a
+     * new kernel rewrite for the transparent point functor.
+     */
+    readonly displayedWeakeningFibre?: {
+        readonly section: InternalCoreCategoricalTerm;
+        readonly basePoint: InternalCoreCategoricalTerm;
+    };
+}
+
+interface InternalCoreCategoricalTermMetadata {
+    readonly displayedSectionWeakening?: {
+        readonly section: InternalCoreCategoricalTerm;
+    };
+    readonly displayedWeakeningFibre?: {
+        readonly section: InternalCoreCategoricalTerm;
+        readonly basePoint: InternalCoreCategoricalTerm;
+    };
 }
 
 interface InternalCoreCategoricalIndexedObjectClassifier {
@@ -830,7 +871,8 @@ export class CoreCategoricalScopedBuilder {
         closed?: ElaboratedSurfaceTerm,
         abstractions:
             readonly CoreCategoricalAbstractionEvidence[] = [],
-        slotToken = false
+        slotToken = false,
+        metadata: InternalCoreCategoricalTermMetadata = {}
     ): InternalCoreCategoricalTerm {
         const term = {
             [CORE_CATEGORICAL_TERM]: true as const,
@@ -849,7 +891,25 @@ export class CoreCategoricalScopedBuilder {
                     sourceSpan: closed.sourceSpan,
                     recovered: [...closed.recovered]
                 }),
-            abstractions: deepFreeze([...abstractions])
+            abstractions: deepFreeze([...abstractions]),
+            ...(metadata.displayedSectionWeakening === undefined
+                ? {}
+                : {
+                    displayedSectionWeakening: Object.freeze({
+                        section:
+                            metadata.displayedSectionWeakening.section
+                    })
+                }),
+            ...(metadata.displayedWeakeningFibre === undefined
+                ? {}
+                : {
+                    displayedWeakeningFibre: Object.freeze({
+                        section:
+                            metadata.displayedWeakeningFibre.section,
+                        basePoint:
+                            metadata.displayedWeakeningFibre.basePoint
+                    })
+                })
         };
         return Object.freeze(term);
     }
@@ -1305,6 +1365,51 @@ export class CoreCategoricalScopedBuilder {
         );
     }
 
+    /**
+     * Recover the hidden natural base index of an active displayed object.
+     *
+     * This is contextual construction metadata only: it emits no Core node
+     * and cannot escape the callback that owns the displayed slot.
+     */
+    indexOf(
+        value: CoreCategoricalTerm,
+        suppliedProvenance?: Provenance
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.nodeProvenance(
+            'displayed contextual index',
+            suppliedProvenance
+        );
+        if (this.options.displayedWeakeningReindexing !== true) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Contextual displayed indices require the ' +
+                    'FIBRED-WEAKEN-REINDEX-1 capability'
+            );
+        }
+        const indexed = this.requireTerm(value, nodeProvenance);
+        if (
+            indexed.type.tag !== 'indexed-object' ||
+            indexed.node.tag !== 'slot-token'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'indexOf expects the active displayed object token'
+            );
+        }
+        const base =
+            this.activeDisplayedBases.get(indexed.type.indexOrdinal);
+        if (base === undefined || base.node.tag !== 'slot-token') {
+            this.fail(
+                'ESCAPED_SLOT',
+                nodeProvenance,
+                'The displayed object has no active hidden base index'
+            );
+        }
+        return base;
+    }
+
     homBoundary(
         category: KernelExpression,
         sourceEndpoint: CoreCategoricalTerm,
@@ -1517,7 +1622,8 @@ export class CoreCategoricalScopedBuilder {
         judgment: CoreCategoricalApplicationJudgment,
         type: CoreType,
         term: KernelExpression,
-        nodeProvenance: Provenance
+        nodeProvenance: Provenance,
+        metadata: InternalCoreCategoricalTermMetadata = {}
     ): CoreCategoricalTerm {
         if (
             subject.closed === undefined ||
@@ -1553,7 +1659,9 @@ export class CoreCategoricalScopedBuilder {
             [
                 ...subject.abstractions,
                 ...argument.abstractions
-            ]
+            ],
+            false,
+            metadata
         );
     }
 
@@ -1851,7 +1959,17 @@ export class CoreCategoricalScopedBuilder {
                 [
                     ...subject.abstractions,
                     ...argument.abstractions
-                ]
+                ],
+                false,
+                subject.displayedSectionWeakening === undefined
+                    ? {}
+                    : {
+                        displayedWeakeningFibre: {
+                            section:
+                                subject.displayedSectionWeakening.section,
+                            basePoint: argument
+                        }
+                    }
             );
         }
         if (subject.closed === undefined) {
@@ -2018,7 +2136,17 @@ export class CoreCategoricalScopedBuilder {
             judgment,
             resultType,
             result,
-            nodeProvenance
+            nodeProvenance,
+            subject.displayedSectionWeakening === undefined ||
+                argument.type.tag === 'hom'
+                ? {}
+                : {
+                    displayedWeakeningFibre: {
+                        section:
+                            subject.displayedSectionWeakening.section,
+                        basePoint: argument
+                    }
+                }
         );
     }
 
@@ -2407,6 +2535,14 @@ export class CoreCategoricalScopedBuilder {
                 'slot and the functor source family'
             );
         }
+        if (subject.displayedWeakeningFibre !== undefined) {
+            return this.applyDependentSection(
+                subject.displayedWeakeningFibre.section,
+                subject.displayedWeakeningFibre.basePoint,
+                'dependent-object',
+                nodeProvenance
+            );
+        }
         return this.makeTerm(
             {
                 tag: 'typed-application',
@@ -2532,6 +2668,64 @@ export class CoreCategoricalScopedBuilder {
                 subject,
                 argumentValue,
                 expectedShape,
+                nodeProvenance
+            );
+        }
+        if (
+            subject.type.tag === 'functor' &&
+            subject.displayedWeakeningFibre !== undefined
+        ) {
+            if (
+                typeof argumentValue === 'object' &&
+                argumentValue !== null &&
+                (argumentValue as InternalCoreCategoricalHomBoundary)[
+                    CORE_CATEGORICAL_BOUNDARY
+                ] === true
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'A weakened displayed fibre functor expects an object'
+                );
+            }
+            const argument = this.requireTerm(
+                argumentValue as CoreCategoricalTerm,
+                nodeProvenance
+            );
+            const argumentCategory = this.categoricalObjectCategory(
+                argument.type,
+                nodeProvenance,
+                'weakened displayed fibre argument'
+            );
+            if (
+                argumentCategory === undefined ||
+                !coreObjectCategoryEquals(
+                    argumentCategory,
+                    subject.type.sourceCategory
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Weakened displayed fibre argument belongs to the ' +
+                        'wrong source fibre'
+                );
+            }
+            if (
+                expectedShape !== undefined &&
+                expectedShape !== 'object-value'
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    `Weakened displayed fibre application cannot produce ` +
+                        `expected shape '${expectedShape}'`
+                );
+            }
+            return this.applyDependentSection(
+                subject.displayedWeakeningFibre.section,
+                subject.displayedWeakeningFibre.basePoint,
+                'dependent-object',
                 nodeProvenance
             );
         }
@@ -3830,6 +4024,147 @@ export class CoreCategoricalScopedBuilder {
         return Object.freeze([...prefix, displayedFunctor]);
     }
 
+    private displayedSectionWeakeningBody(
+        body: InternalCoreCategoricalTerm,
+        fibreOrdinal: number,
+        baseOrdinal: number,
+        baseCategory: KernelExpression,
+        targetFamily: KernelExpression
+    ): InternalCoreCategoricalTerm | undefined {
+        if (
+            this.options.displayedWeakeningReindexing !== true ||
+            body.node.tag !== 'typed-application' ||
+            body.node.judgment.target !==
+                'section-object-evaluation' ||
+            body.node.argument[CORE_CATEGORICAL_BOUNDARY] === true
+        ) {
+            return undefined;
+        }
+        const index = body.node.argument as
+            InternalCoreCategoricalTerm;
+        const section = body.node.subject;
+        if (
+            index.node.tag !== 'slot-token' ||
+            index.node.ordinal !== baseOrdinal ||
+            section.type.tag !== 'dependent-section' ||
+            section.closed === undefined ||
+            !kernelExpressionEquals(
+                section.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                section.type.family,
+                targetFamily
+            ) ||
+            usageCount(section.usage, fibreOrdinal) !== 0 ||
+            usageCount(section.usage, baseOrdinal) !== 0 ||
+            usageCount(body.usage, fibreOrdinal) !== 0 ||
+            usageCount(body.usage, baseOrdinal) !== 1
+        ) {
+            return undefined;
+        }
+        return section;
+    }
+
+    private lowerDisplayedSectionWeakening(
+        section: InternalCoreCategoricalTerm,
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        if (
+            this.options.displayedWeakeningReindexing !== true ||
+            section.type.tag !== 'dependent-section' ||
+            section.closed === undefined
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Displayed section weakening lost its qualified section'
+            );
+        }
+        const totalCategory = kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1A_PRIMITIVE_NAMES['sigma-category'],
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: baseCategory },
+                { plicity: 'explicit', value: sourceFamily }
+            ],
+            nodeProvenance
+        );
+        const projection = kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1B_PRIMITIVE_NAMES[
+                    'sigma-first-projection'
+                ],
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: baseCategory },
+                { plicity: 'explicit', value: sourceFamily }
+            ],
+            nodeProvenance
+        );
+        const pulledTarget = kernelApplication(
+            'displayed-pullback',
+            [
+                { value: totalCategory },
+                { value: baseCategory },
+                { value: targetFamily },
+                { value: projection }
+            ],
+            nodeProvenance
+        );
+        const pullbackFunctor = kernelCall(
+            kernelFree(
+                coreCategoricalFibredWeakenReindexCoreName(
+                    'sectionPullback'
+                ),
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: totalCategory },
+                { plicity: 'implicit', value: baseCategory },
+                { plicity: 'explicit', value: projection },
+                { plicity: 'explicit', value: targetFamily }
+            ],
+            nodeProvenance
+        );
+        const sourceSectionCategory = this.displayedFunctorCategory(
+            baseCategory,
+            this.constantDisplayedFamily(
+                baseCategory,
+                this.terminalCategory(nodeProvenance),
+                nodeProvenance
+            ),
+            targetFamily,
+            nodeProvenance
+        );
+        const targetSectionCategory = this.displayedFunctorCategory(
+            totalCategory,
+            this.constantDisplayedFamily(
+                totalCategory,
+                this.terminalCategory(nodeProvenance),
+                nodeProvenance
+            ),
+            pulledTarget,
+            nodeProvenance
+        );
+        return kernelApplication(
+            'functor-object',
+            [
+                { value: sourceSectionCategory },
+                { value: targetSectionCategory },
+                { value: pullbackFunctor },
+                { value: section.closed.term }
+            ],
+            nodeProvenance
+        );
+    }
+
     /**
      * First direct displayed-functor abstraction.
      *
@@ -3944,37 +4279,68 @@ export class CoreCategoricalScopedBuilder {
                     'object of the target family over its hidden base'
                 );
             }
-            const chain = this.directDisplayedFunctorChain(
-                body,
-                fibreOrdinal,
-                baseOrdinal,
-                baseCategory,
-                sourceFamily
-            );
-            if (
-                chain === undefined ||
-                usageCount(body.usage, fibreOrdinal) !== 1 ||
-                usageCount(body.usage, baseOrdinal) !== chain.length
-            ) {
-                this.fail(
-                    'UNAVAILABLE_DISPLAYED_ACTION',
-                    nodeProvenance,
-                    'FIBRED-BINDER-1 accepts identity, eta, or a finite ' +
-                    'closed displayed-functor application chain'
+            const weakeningSection =
+                this.displayedSectionWeakeningBody(
+                    body,
+                    fibreOrdinal,
+                    baseOrdinal,
+                    baseCategory,
+                    targetFamily
                 );
+            let chain:
+                readonly InternalCoreCategoricalTerm[] = [];
+            if (weakeningSection === undefined) {
+                const candidate = this.directDisplayedFunctorChain(
+                    body,
+                    fibreOrdinal,
+                    baseOrdinal,
+                    baseCategory,
+                    sourceFamily
+                );
+                if (
+                    candidate === undefined ||
+                    usageCount(body.usage, fibreOrdinal) !== 1 ||
+                    usageCount(body.usage, baseOrdinal) !==
+                        candidate.length
+                ) {
+                    this.fail(
+                        'UNAVAILABLE_DISPLAYED_ACTION',
+                        nodeProvenance,
+                        'The displayed binder accepts identity, eta, a ' +
+                            'finite closed displayed-functor chain, or the ' +
+                            'exact qualified section weakening'
+                    );
+                }
+                chain = candidate;
             }
 
             let rule:
                 | 'categorical.displayed-functor-identity'
                 | 'categorical.displayed-functor-eta'
-                | 'categorical.displayed-functor-composition';
+                | 'categorical.displayed-functor-composition'
+                | 'categorical.displayed-functor-weakening';
             let resultExpression: KernelExpression;
             const prerequisites:
                 CoreCategoricalDependentApplicationPrerequisiteId[] = [
                     'sigma-projection-pullback',
                     'sigma-pi-uncurrying-proof'
                 ];
-            if (chain.length === 0) {
+            if (weakeningSection !== undefined) {
+                rule = 'categorical.displayed-functor-weakening';
+                prerequisites.push(
+                    'sigma-first-projection',
+                    'section-pullback-functor',
+                    'constant-displayed-family-object'
+                );
+                resultExpression =
+                    this.lowerDisplayedSectionWeakening(
+                        weakeningSection,
+                        baseCategory,
+                        sourceFamily,
+                        targetFamily,
+                        nodeProvenance
+                    );
+            } else if (chain.length === 0) {
                 if (
                     !kernelExpressionEquals(
                         sourceFamily,
@@ -4107,11 +4473,13 @@ export class CoreCategoricalScopedBuilder {
                 term: resultExpression,
                 type: copyCoreType(resultType),
                 sourceSpan: this.spanFor(nodeProvenance),
-                recovered: chain.flatMap(displayed =>
-                    displayed.closed === undefined
-                        ? []
-                        : [...displayed.closed.recovered]
-                )
+                recovered: weakeningSection === undefined
+                    ? chain.flatMap(displayed =>
+                        displayed.closed === undefined
+                            ? []
+                            : [...displayed.closed.recovered]
+                    )
+                    : [...weakeningSection.closed.recovered]
             });
             const provisional = this.makeTerm(
                 resultNode,
@@ -4154,7 +4522,15 @@ export class CoreCategoricalScopedBuilder {
                 resultType,
                 remainingUsage,
                 closed,
-                [...body.abstractions, evidence]
+                [...body.abstractions, evidence],
+                false,
+                weakeningSection === undefined
+                    ? {}
+                    : {
+                        displayedSectionWeakening: {
+                            section: weakeningSection
+                        }
+                    }
             );
         } finally {
             this.activeDisplayedBases.delete(baseOrdinal);

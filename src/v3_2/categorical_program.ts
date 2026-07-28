@@ -65,6 +65,14 @@ import {
     coreCategoricalFibredTransfdCoreName
 } from './categorical_fibred_transfd_transfer';
 import {
+    CoreCategoricalFibredWeakenReindexCompilation,
+    compileCoreCategoricalFibredWeakenReindexTransfer,
+    coreCategoricalFibredWeakenReindexCoreName
+} from './categorical_fibred_weaken_reindex_transfer';
+import {
+    validateCoreCategoricalFibredWeakenReindexContract
+} from './categorical_fibred_weaken_reindex_contract';
+import {
     CoreCategoricalContextDependencyPlan,
     coreCategoricalClosedContextClassifier,
     coreCategoricalContextSlotReference,
@@ -163,6 +171,9 @@ export const CORE_CATEGORICAL_FIBRED_TRANSFD_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_GROUPED_SEQUENTIAL_PROGRAM_REVISION =
     'FIBRED-GROUPED-SEQUENTIAL-1-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_FIBRED_WEAKEN_REINDEX_PROGRAM_REVISION =
+    'FIBRED-WEAKEN-REINDEX-1-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -311,6 +322,9 @@ export interface CoreCategoricalProgramOptions {
      * transported higher cell. The grouped-sequential profile additionally
      * connects the generic dependency graph to finite sequential
      * Sigma/pullback and grouped transparent-product context presentations.
+     * The weakening/reindexing profile then adds the exact contextual
+     * `indexOf` section weakening and existing-authority displayed
+     * base-change action.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -320,7 +334,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-structure-1a'
         | 'fibred-binder-1'
         | 'fibred-transfd-1'
-        | 'fibred-grouped-sequential-1';
+        | 'fibred-grouped-sequential-1'
+        | 'fibred-weaken-reindex-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -353,6 +368,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_FIBRED_BINDER'
     | 'UNAVAILABLE_FIBRED_TRANSFD'
     | 'UNAVAILABLE_GROUPED_SEQUENTIAL'
+    | 'UNAVAILABLE_WEAKEN_REINDEX'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
 
@@ -585,6 +601,31 @@ for (const [
         coreCategoricalFibredTransfdCoreName(id)
     ] = label;
 }
+for (const [
+    id,
+    label
+] of [
+    [
+        'pullbackDisplayedFamilyFunctor',
+        'emdash.categorical.displayed-pullback-functor'
+    ],
+    [
+        'pointFunctor',
+        'emdash.categorical.point-functor'
+    ],
+    [
+        'sectionPullback',
+        'emdash.categorical.section-pullback'
+    ],
+    [
+        'sectionPullbackSection',
+        'emdash.categorical.section-pullback-section'
+    ]
+] as const) {
+    categoricalLabels[
+        coreCategoricalFibredWeakenReindexCoreName(id)
+    ] = label;
+}
 
 export const CORE_CATEGORICAL_EXPLICIT_FREE_LABELS:
 Readonly<Record<string, string>> = Object.freeze({
@@ -732,13 +773,15 @@ export class CoreCategoricalProgram {
         | CoreCategoricalFibredProductCompilation
         | CoreCategoricalFibredStructureCompilation
         | CoreCategoricalFibredBinderCompilation
-        | CoreCategoricalFibredTransfdCompilation;
+        | CoreCategoricalFibredTransfdCompilation
+        | CoreCategoricalFibredWeakenReindexCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
     private readonly fibredBinderEnabled: boolean;
     private readonly fibredTransfdEnabled: boolean;
     private readonly groupedSequentialEnabled: boolean;
+    private readonly fibredWeakenReindexEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -753,31 +796,44 @@ export class CoreCategoricalProgram {
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
-            profile === 'fibred-grouped-sequential-1';
+            profile === 'fibred-grouped-sequential-1' ||
+            profile === 'fibred-weaken-reindex-1';
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
-            profile === 'fibred-grouped-sequential-1';
+            profile === 'fibred-grouped-sequential-1' ||
+            profile === 'fibred-weaken-reindex-1';
         this.fibredStructureEnabled =
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
-            profile === 'fibred-grouped-sequential-1';
+            profile === 'fibred-grouped-sequential-1' ||
+            profile === 'fibred-weaken-reindex-1';
         this.fibredBinderEnabled =
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
-            profile === 'fibred-grouped-sequential-1';
+            profile === 'fibred-grouped-sequential-1' ||
+            profile === 'fibred-weaken-reindex-1';
         this.fibredTransfdEnabled =
             profile === 'fibred-transfd-1' ||
-            profile === 'fibred-grouped-sequential-1';
+            profile === 'fibred-grouped-sequential-1' ||
+            profile === 'fibred-weaken-reindex-1';
         this.groupedSequentialEnabled =
-            profile === 'fibred-grouped-sequential-1';
+            profile === 'fibred-grouped-sequential-1' ||
+            profile === 'fibred-weaken-reindex-1';
+        this.fibredWeakenReindexEnabled =
+            profile === 'fibred-weaken-reindex-1';
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
-        this.dependent = this.fibredTransfdEnabled
+        if (this.fibredWeakenReindexEnabled) {
+            validateCoreCategoricalFibredWeakenReindexContract();
+        }
+        this.dependent = this.fibredWeakenReindexEnabled
+            ? compileCoreCategoricalFibredWeakenReindexTransfer()
+            : this.fibredTransfdEnabled
             ? compileCoreCategoricalFibredTransfdTransfer()
             : this.fibredBinderEnabled
             ? compileCoreCategoricalFibredBinderTransfer()
@@ -799,7 +855,9 @@ export class CoreCategoricalProgram {
                 displayedFunctorAbstraction:
                     this.fibredBinderEnabled,
                 displayedTransforAbstraction:
-                    this.fibredTransfdEnabled
+                    this.fibredTransfdEnabled,
+                displayedWeakeningReindexing:
+                    this.fibredWeakenReindexEnabled
             }
         );
     }
@@ -978,6 +1036,20 @@ export class CoreCategoricalProgram {
                 'Dependency-directed sequential/grouped contexts are ' +
                 'available only in the explicit ' +
                 "'fibred-grouped-sequential-1' root profile"
+            );
+        }
+    }
+
+    private requireFibredWeakenReindex(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.fibredWeakenReindexEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_WEAKEN_REINDEX',
+                nodeProvenance,
+                'Contextual displayed weakening and displayed-functor ' +
+                    'reindexing are available only in the explicit ' +
+                    "'fibred-weaken-reindex-1' root profile"
             );
         }
     }
@@ -2847,6 +2919,118 @@ export class CoreCategoricalProgram {
         );
     }
 
+    /**
+     * Reindex a displayed functor along an ordinary base substitution.
+     *
+     * The result is the hom action of the already-active
+     * `Pullback_catd_func`; no pointwise coherence is synthesized.
+     */
+    pullbackDisplayedFunctor(
+        displayedFunctorValue: CoreCategoricalTerm,
+        substitutionValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed-functor base change',
+            source
+        );
+        this.requireFibredWeakenReindex(nodeProvenance);
+        const displayedFunctor = this.requireDisplayedFunctorTerm(
+            displayedFunctorValue,
+            nodeProvenance,
+            'Displayed-functor base-change subject'
+        );
+        const substitution = this.requireFunctorTerm(
+            substitutionValue,
+            nodeProvenance,
+            'Displayed-functor base substitution'
+        );
+        if (!kernelExpressionEquals(
+            substitution.targetCategory,
+            displayedFunctor.baseCategory
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Displayed-functor substitution has the wrong codomain'
+            );
+        }
+        const sourceFamily = this.displayedPullbackExpression(
+            substitution.sourceCategory,
+            substitution.targetCategory,
+            displayedFunctor.sourceFamily,
+            substitution.expression,
+            nodeProvenance
+        );
+        const targetFamily = this.displayedPullbackExpression(
+            substitution.sourceCategory,
+            substitution.targetCategory,
+            displayedFunctor.targetFamily,
+            substitution.expression,
+            nodeProvenance
+        );
+        const sourceDisplayedCategory = kernelApplication(
+            'displayed-category-category',
+            [{ value: substitution.targetCategory }],
+            nodeProvenance
+        );
+        const targetDisplayedCategory = kernelApplication(
+            'displayed-category-category',
+            [{ value: substitution.sourceCategory }],
+            nodeProvenance
+        );
+        const pullbackFunctor = kernelCall(
+            kernelFree(
+                coreCategoricalFibredWeakenReindexCoreName(
+                    'pullbackDisplayedFamilyFunctor'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: substitution.sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: substitution.targetCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: substitution.expression
+                }
+            ],
+            nodeProvenance
+        );
+        return this.makeTerm(
+            kernelApplication(
+                'functor-hom-capped',
+                [
+                    { value: sourceDisplayedCategory },
+                    { value: targetDisplayedCategory },
+                    { value: pullbackFunctor },
+                    { value: displayedFunctor.sourceFamily },
+                    { value: displayedFunctor.targetFamily },
+                    { value: displayedFunctor.expression }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategoryExpression(
+                    substitution.sourceCategory,
+                    sourceFamily,
+                    targetFamily,
+                    nodeProvenance
+                ),
+                baseCategory: substitution.sourceCategory,
+                sourceFamily,
+                targetFamily
+            },
+            nodeProvenance
+        );
+    }
+
     dependentPair(
         familyValue: CoreCategoricalDisplayedFamily,
         firstValue: CoreCategoricalTerm,
@@ -4084,6 +4268,24 @@ export class CoreCategoricalProgram {
         );
     }
 
+    /**
+     * Contextual base index of the active `:^fd` callback token.
+     */
+    indexOf(
+        displayedObject: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed contextual index',
+            source
+        );
+        this.requireFibredWeakenReindex(nodeProvenance);
+        return this.builder.indexOf(
+            displayedObject,
+            nodeProvenance
+        );
+    }
+
     lambda(
         name: string,
         sourceValue: CoreCategoricalCategory,
@@ -4547,8 +4749,13 @@ export class CoreCategoricalProgram {
                 'displayed-functor classifiers'
             );
         }
-        const compilation =
-            this.dependent as CoreCategoricalFibredTransfdCompilation;
+        const compilation = this.fibredWeakenReindexEnabled
+            ? (
+                this.dependent as
+                    CoreCategoricalFibredWeakenReindexCompilation
+            ).prerequisite
+            : this.dependent as
+                CoreCategoricalFibredTransfdCompilation;
         const classifiers = coreCategoricalFibredTransfdClassifiers(
             sourceFunctor.baseCategory,
             sourceFunctor.sourceFamily,
