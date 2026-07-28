@@ -2739,4 +2739,5 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   DISPLAYED-CHAIN-0A is next. Aggregate validation passes 904 TypeScript
   tests (857 active, 47 intentional skips), 19/19 frozen conformance
   judgments, all 41 kernel health targets, and 1,714 classified checks with
-  zero failures.
+  zero failures. Exact implementation checkpoint:
+  `1a7ce3f023391aa22c34dc5626057710429bc7c3`.

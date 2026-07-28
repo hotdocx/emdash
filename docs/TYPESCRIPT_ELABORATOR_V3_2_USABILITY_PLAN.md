@@ -2081,8 +2081,8 @@ the audited final recompilation against the composed runtime. Focused/demo/
 live/kernel checks and aggregate `check:all` are green: 904 TypeScript tests
 (857 active, 47 intentional skips), 19/19 frozen conformance judgments, all
 41 kernel health targets, 1,714 classified checks, and zero failures. The
-implementation checkpoint is being recorded and will be followed by exact
-ledger synchronization.
+exact implementation checkpoint is
+`1a7ce3f023391aa22c34dc5626057710429bc7c3`.
 
 This is further cumulative progress rather than a backtrack. The remaining
 general-usability boundary is one genuine dependency edge, arbitrary
@@ -2255,16 +2255,17 @@ checkpoint 7df9993f06fc55e2f34b09094b87987ef19cecba. Do not
 add another RawExpr/parser/checker layer. Preserve the separate delegated
 D-011 approval review at exact checkpoint
 1251e5c666d2be2ee914d0d122848a259f578da3 and completed
-DISPLAYED-EVAL-1A: exactly two owners, two component rules, the standard
-dependent-target final-runtime recheck, generic transfer with explicit
-prerequisites and zero intrinsic owners, and two recursive existing-IR
-application judgments. Human response supersedes the review and its
-authorization cannot be broadened. If final validation/checkpoint recording
-is incomplete, finish that synchronization first. Then follow the displayed
-plan's proposal-only DISPLAYED-CHAIN-0A instructions; do not implement a
-semantic chain continuation before its separate exact decision. Keep
-arbitrary mixed-domain evaluation, general :^nd, parsing/bulk transfer, and
-browser promotion separate.
+DISPLAYED-EVAL-1A at exact implementation checkpoint
+1a7ce3f023391aa22c34dc5626057710429bc7c3: exactly two owners, two
+component rules, the standard dependent-target final-runtime recheck,
+generic transfer with explicit prerequisites and zero intrinsic owners, and
+two recursive existing-IR application judgments. Human response supersedes
+the review and its authorization cannot be broadened. If final validation/
+checkpoint recording is incomplete, finish that synchronization first.
+Then follow the displayed plan's proposal-only DISPLAYED-CHAIN-0A
+instructions; do not implement a semantic chain continuation before its
+separate exact decision. Keep arbitrary mixed-domain evaluation, general
+:^nd, parsing/bulk transfer, and browser promotion separate.
 
 Preserve the exact deployed emdash-v3.2-mvp-1 profile and exact reviewed
 root-only emdash-v3.2-dttlf-directed-1 continuation. Retain the outer

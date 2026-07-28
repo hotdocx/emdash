@@ -4007,6 +4007,8 @@ dedicated displayed plan now selects proposal-only DISPLAYED-CHAIN-0A as its
 next row. Aggregate validation passes 904 TypeScript tests (857 active, 47
 intentional skips), 19/19 frozen conformance judgments, all 41 kernel health
 targets, and 1,714 classified checks with zero failures.
+The exact implementation checkpoint is
+1a7ce3f023391aa22c34dc5626057710429bc7c3.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

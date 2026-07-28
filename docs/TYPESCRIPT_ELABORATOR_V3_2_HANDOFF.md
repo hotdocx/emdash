@@ -986,8 +986,8 @@ higher-action/reindexing evidence, the bounded kernel check, warning
 summary, and strict-LHS audit pass. The aggregate `check:all` gate also
 passes: 904 TypeScript tests (857 active, 47 intentional skips), all 19
 frozen conformance judgments, all 41 kernel health targets, 1,714 classified
-checks, and zero failures. The implementation checkpoint is being recorded,
-then a ledger-only follow-up will bind its exact hash.
+checks, and zero failures. The exact implementation checkpoint is
+`1a7ce3f023391aa22c34dc5626057710429bc7c3`.
 The next dependency-ready row is proposal-only DISPLAYED-CHAIN-0A: compare
 sequential-total, repeated pullback/Sigma, and direct displayed lowerings for
 one genuine dependency edge before authorizing new semantics.

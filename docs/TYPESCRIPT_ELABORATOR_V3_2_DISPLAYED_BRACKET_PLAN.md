@@ -116,8 +116,8 @@ kernel checks, warning summary, and strict-LHS audit are green. Final
 repository validation is also green: `check:all` passes 904 TypeScript tests
 (857 active passes, 47 intentional skips), all 19 frozen conformance
 judgments, all 41 health targets, strict catalog/TOC/reference/report/book
-checks, and zero failures. The implementation checkpoint is being recorded
-by this tranche; a following ledger-only checkpoint will bind its exact hash.
+checks, and zero failures. The exact implementation checkpoint is
+`1a7ce3f023391aa22c34dc5626057710429bc7c3`.
 
 ## Authority And Relationship To The Completed Architecture
 
@@ -497,7 +497,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-LIFTING-0A | executable proposal frozen, validated, checkpointed `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`, and approved exactly as proposed at review checkpoint `7badcd5b930bd098b178d89bf4488637695fb14d` with human supersession | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
 | DISPLAYED-EVAL-0B | complete read-only authority audit; no semantic delta; checkpointed `7df9993f06fc55e2f34b09094b87987ef19cecba` | approved DISPLAYED-LIFTING-0A/D-010 | Proved the arbitrary mixed-variance/plain-argument obstruction, qualified the constant-domain case, compared the universe-natural alternative, owner-position-probed the minimal stable closure, and classified the dependent-target mismatch as stale runtime wiring |
 | DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal checkpointed with 0B at `7df9993f06fc55e2f34b09094b87987ef19cecba`; approved exactly as proposed at separate delegated review checkpoint `1251e5c666d2be2ee914d0d122848a259f578da3` with human supersession | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
-| DISPLAYED-EVAL-1A | complete and fully validated; implementation checkpoint being recorded, followed by exact ledger synchronization | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
+| DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | next dependency-ready read-only executable proposal; no semantic continuation authorized | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; inventory existing authority and identify exact Sigma-arrow/total-comparison needs before semantic implementation |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
@@ -1336,8 +1336,8 @@ Validation is green:
 - aggregate `./scripts/pnpmw run check:all`.
 
 The generated health report covers all 41 active modules/examples. The exact
-implementation checkpoint is recorded immediately after the checkpoint
-commit in a ledger-only follow-up.
+implementation checkpoint is
+`1a7ce3f023391aa22c34dc5626057710429bc7c3`.
 
 ### Qualified feasibility result
 
@@ -1373,8 +1373,8 @@ separate non-self-authorizing proposal before any new semantics.
   whole-body-recognizer rewrite. Focused/demo/live/kernel and aggregate
   repository gates are green at 904 tests (857 active, 47 intentional
   skips), 19/19 frozen conformance judgments, 1,714 classified kernel
-  checks, and zero failures. Exact checkpoint recording follows this
-  implementation commit.
+  checks, and zero failures. Exact implementation checkpoint:
+  `1a7ce3f023391aa22c34dc5626057710429bc7c3`.
 - **2026-07-28 — D-DTTLF-USABILITY-011 approved under delegated unattended
   authority.** No immediate human response followed presentation of the
   exact frozen OWNER-0C gate. A separate deeply immutable review snapshots
@@ -1564,7 +1564,8 @@ authorizes only DISPLAYED-EVAL-1A and a later human decision supersedes it.
 Do not mutate the pre-review proposal or infer any authorization beyond the
 review's exact fields.
 
-Preserve completed DISPLAYED-EVAL-1A. It adds exactly stable `Eval_funcd`
+Preserve completed DISPLAYED-EVAL-1A at exact implementation checkpoint
+1a7ce3f023391aa22c34dc5626057710429bc7c3. It adds exactly stable `Eval_funcd`
 and `Terminal_funcd`, their two `tapp0_fapp0` point-component rules, generic
 declaration/runtime transfer, and the standard final recompilation of the
 dependent-target declarations against the composed runtime. Its existing
