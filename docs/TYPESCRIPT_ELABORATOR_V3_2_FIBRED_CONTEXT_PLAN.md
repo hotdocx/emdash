@@ -129,7 +129,7 @@ FIBRED-BINDER-1 implementation checkpoint:
 FIBRED-TRANSFD-1 implementation checkpoint:
 `4d26100378fae67ade72ad6c7295d2623fd1fc8f`
 FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint:
-pending the green local checkpoint for this completed tranche
+`4f173cec9336d41bac9a08563c3697e0fc657d66`
 
 ## Purpose And Exact Outcome
 
@@ -1229,7 +1229,7 @@ usability profile.
 | FIBRED-STRUCTURE-1A | complete; validated; checkpointed `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d` | FIBRED-STRUCTURE-0A and exact D-DTTLF-USABILITY-006 approval | Added only the approved three injective owners and eleven runtime rules; retained the transparent family and necessary beta guards; transferred six declarations and 15 subject-checked local rules through generic engines; added derived swap/diagonal, full/capped action, frontend-only canonical reindexing, a root-only profile, and a runnable no-Lambdapi demo while retaining all frozen non-conversions; focused/live conformance, 739-test TypeScript, canonical inventory, complete health, and full repository gates pass |
 | FIBRED-BINDER-1 | complete; validated; checkpointed `698280f42c3c9c339ebc82a8cfb0df1d51838704` | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Added a root-only `displayedFunctorLambda`/`:^fd`-equivalent typed API for identity, eta, and finite closed displayed-functor composition chains. The callback is evaluated once and discarded; hidden base/fibre slots are retained as immutable locally nameless `k :^n K; a :^f E[k]` evidence. Lowering reuses `id_funcd` and `comp_fapp0` at `Catd_cat K`; the exact SCALE-STRESS-2A `Catd`/`Sigma_proj1_pullback_catd` declarations and Sigma/Pi proof rule plus two already-active point-computation rules compile through generic engines. Direct `Functord_cat(E,D)` and nested `Pi_cat(Sigma_cat(E),Sigma_proj1_pullback_catd(E,D))` compare as `solved` only in the proof engine and remain `not-equal` at runtime. A direct-TypeScript demo, 14 active focused tests, one opt-in live Lambdapi test, and the 754-test root gate pass with zero new Lambdapi owners/rules |
 | FIBRED-TRANSFD-1 | complete; validated; checkpointed `4d26100378fae67ade72ad6c7295d2623fd1fc8f` | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Froze the direct/ordinary/Sigma-Pi next-hom contract; transferred six exact active signatures, seven subject-checked runtime rules, and one proof rule through generic engines; added the root-only callback-once `displayedTransforLambda`/`:^nd` coherent eta, `eta[x]`, `eta[x][u]`, `eta[p][u]`, vertical composition, four-way classifier evidence, and a runnable no-Lambdapi demo; preserved category runtime non-conversion and every general-bracket/profile/acquisition non-effect; the 767-test TypeScript and complete repository gates pass |
-| FIBRED-GROUPED-SEQUENTIAL-1 | complete; fully validated; checkpoint pending | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Implemented a finite block of two-or-more independent displayed siblings over one common base; the generic dependency graph drives a left-to-right Sigma/pullback lowering and a left-associated transparent product lowering; checked `((k,b),c)` and `(k,(b,c))`, accumulated/base projections, product component functors, three-sibling scaling, and dependency-edge rejection using only existing owners; explicitly claims no total-category equality/equivalence or Sigma-projection arrow computation; nine focused cases, runnable demo, the 776-test TypeScript gate, and complete repository gate pass |
+| FIBRED-GROUPED-SEQUENTIAL-1 | complete; validated; checkpointed `4f173cec9336d41bac9a08563c3697e0fc657d66` | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Implemented a finite block of two-or-more independent displayed siblings over one common base; the generic dependency graph drives a left-to-right Sigma/pullback lowering and a left-associated transparent product lowering; checked `((k,b),c)` and `(k,(b,c))`, accumulated/base projections, product component functors, three-sibling scaling, and dependency-edge rejection using only existing owners; explicitly claims no total-category equality/equivalence or Sigma-projection arrow computation; nine focused cases, runnable demo, the 776-test TypeScript gate, and complete repository gate pass |
 | FIBRED-QUALIFICATION-REMAINDER-0 | pending | FIBRED-BINDER-1, FIBRED-TRANSFD-1, FIBRED-GROUPED-SEQUENTIAL-1 | Audit the remaining qualification-corpus cases: displayed weakening, abstraction/reindex stability, and a genuinely fibre-dependent target; freeze the smallest dependency-ready executable rows and any exact owner gaps before implementation |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
 | FIBRED-GRADUATE-1 | pending | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate human graduation decision |
@@ -2678,3 +2678,11 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   parser/acquisition route, or deployed profile changed.
   FIBRED-QUALIFICATION-REMAINDER-0 is next because corpus cases 2 through 4
   remain open.
+- **2026-07-28 — FIBRED-GROUPED-SEQUENTIAL-1 checkpointed.** Recorded green
+  local implementation checkpoint
+  `4f173cec9336d41bac9a08563c3697e0fc657d66` after the exact 13-path staged
+  review, nine focused cases, 776-test TypeScript gate, and complete repository
+  gate passed. The staged tranche contained no unrelated or unstaged changes,
+  Lambdapi source edits, whitespace errors, sensitive material, or suppression
+  markers. The checkpoint grants no remote operation, integration,
+  publication, history rewrite, cleanup, or broader semantic authority.

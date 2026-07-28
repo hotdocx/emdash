@@ -3805,8 +3805,8 @@ FIBRED-STRUCTURE-1A checkpoint remains
 checkpoint is `698280f42c3c9c339ebc82a8cfb0df1d51838704`; the
 FIBRED-TRANSFD-1 implementation checkpoint is
 `4d26100378fae67ade72ad6c7295d2623fd1fc8f`; the
-FIBRED-GROUPED-SEQUENTIAL-1 checkpoint is pending the tranche's exact green
-staged review.
+FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint is
+`4f173cec9336d41bac9a08563c3697e0fc657d66`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
