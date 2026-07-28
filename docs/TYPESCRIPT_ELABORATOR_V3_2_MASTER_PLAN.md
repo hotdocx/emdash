@@ -3775,7 +3775,9 @@ kernel reindexing equality, universe-level projection, global `Functord_cat`
 product conversion, or infer the measured broader Sigma-introduction action,
 profile promotion, direct `fd`/`nd` binders, parsing/bulk transfer, or a
 generic total pullback from that bounded approval. Continue the fibred-context
-sub-plan with its next dependency-ready FIBRED-BINDER-1 row.
+sub-plan from green implementation checkpoint
+`4b532aac9d89ff54b761dd94f49c6eeb4f046b4d` with its next
+dependency-ready FIBRED-BINDER-1 row.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

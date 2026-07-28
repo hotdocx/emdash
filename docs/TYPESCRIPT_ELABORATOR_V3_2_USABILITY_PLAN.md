@@ -133,6 +133,8 @@ FIBRED-COMPREHENSION-1A implementation checkpoint:
 `999e1187bbb1ce976cf7c97d3b5e470cdf4bc097`
 FIBRED-PRODUCT-1A implementation checkpoint:
 `d654545d00d5949f8da72345d2265808b15a7461`
+FIBRED-STRUCTURE-1A implementation checkpoint:
+`4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`
 
 ## Outcome And Corrected Priority
 

@@ -731,7 +731,9 @@ canonical grouped-product reindexing, and a runnable root-only demo. It adds
 no `Product_catd` head or kernel reindexing equality. Continue with
 FIBRED-BINDER-1, beginning from an executable direct-versus-nested classifier
 contract and stopping at a separate exact gate if active computation is
-missing. Do not infer any additional owner/rule, structural map, total
+missing. The green FIBRED-STRUCTURE-1A implementation checkpoint is
+`4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`. Do not infer any additional
+owner/rule, structural map, total
 pullback, direct `fd`/`nd` completion, or profile authority from the bounded
 approvals. The completed master plan's historical checkpoint authorization
 does not authorize unrelated Git mutations. For future exact gates in this

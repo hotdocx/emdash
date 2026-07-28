@@ -33,7 +33,7 @@ Core emission. H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-006 is approved as
 proposed, and FIBRED-STRUCTURE-1A is implemented across the active kernel,
 generic TypeScript transfer, root-only direct-TypeScript facade, and runnable
 demo. Full proportional and repository-wide validation is green;
-local-checkpoint synchronization is in progress.
+the implementation is recorded in the green local checkpoint below.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -81,6 +81,8 @@ FIBRED-COMPREHENSION-1A implementation checkpoint:
 `999e1187bbb1ce976cf7c97d3b5e470cdf4bc097`
 FIBRED-PRODUCT-1A implementation checkpoint:
 `d654545d00d5949f8da72345d2265808b15a7461`
+FIBRED-STRUCTURE-1A implementation checkpoint:
+`4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`
 
 ## Purpose And Exact Outcome
 
@@ -1177,7 +1179,7 @@ usability profile.
 | FIBRED-COMPREHENSION-1A | complete; approved D-DTTLF-USABILITY-005 | FIBRED-COMPREHENSION-0B and exact human approval | Added only `sigma_pullback_total_func` with object and structured-arrow projections after a named-owner/foundational audit; retained contextual pairing as the explicit three-factor composite; transferred `Pullback_catd`, canonical `sigma_arrow`, and the new owner/rules through generic declaration/runtime engines; all four local rules are TypeScript subject-checked; added root-only `fibred-comprehension-1a` operations and a genuine further-family object/arrow chain plus runnable demo; preserved all recorded non-effects |
 | FIBRED-SIGMA-INTRO-ACTION-1 | deferred separate closure | concrete consumer beyond contextual pairing | Reassess direct `sigma_intro_tapp0_func` arrow action only with a closure that joins the measured `+10/+1` identity, naturality, composition, and higher-action interactions |
 | FIBRED-STRUCTURE-0A | complete; D-DTTLF-USABILITY-006 approved as proposed | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A, active-owner/Foundation audit | Compared five structural/reindexing owner positions in bounded full-file probes. Selected three fixed-base projection/pairing owners with eleven point/full/capped/beta rules, zero warning delta, derived swap/diagonal, genuine next-cell evidence, and frontend canonical reindexing that preserves the raw kernel non-conversion. Froze the exact non-authorizing proposal and six tests; the approval is recorded separately without mutating its historical authorization bit |
-| FIBRED-STRUCTURE-1A | complete; validated; local checkpoint pending | FIBRED-STRUCTURE-0A and exact D-DTTLF-USABILITY-006 approval | Added only the approved three injective owners and eleven runtime rules; retained the transparent family and necessary beta guards; transferred six declarations and 15 subject-checked local rules through generic engines; added derived swap/diagonal, full/capped action, frontend-only canonical reindexing, a root-only profile, and a runnable no-Lambdapi demo while retaining all frozen non-conversions; focused/live conformance, 739-test TypeScript, canonical inventory, complete health, and full repository gates pass |
+| FIBRED-STRUCTURE-1A | complete; validated; checkpointed `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d` | FIBRED-STRUCTURE-0A and exact D-DTTLF-USABILITY-006 approval | Added only the approved three injective owners and eleven runtime rules; retained the transparent family and necessary beta guards; transferred six declarations and 15 subject-checked local rules through generic engines; added derived swap/diagonal, full/capped action, frontend-only canonical reindexing, a root-only profile, and a runnable no-Lambdapi demo while retaining all frozen non-conversions; focused/live conformance, 739-test TypeScript, canonical inventory, complete health, and full repository gates pass |
 | FIBRED-BINDER-1 | pending | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Implement the first direct `:^fd`-equivalent typed API and show direct/nested classifier compatibility without collapsing proof-time and runtime equality |
 | FIBRED-TRANSFD-1 | pending | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Implement one coherent displayed-transfor abstraction and component/higher-cell consumer |
 | FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
@@ -2136,8 +2138,15 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   green: 739 TypeScript tests, eight live slice cases, 14 live
   inventory/acquisition cases, 19 mandatory differential judgments, all 41
   health targets, unchanged warnings, strict `0/47/29` audit, report/book
-  gates, and catalog freshness pass. Local checkpoint synchronization is in
-  progress.
+  gates, and catalog freshness pass.
+- **2026-07-27 — FIBRED-STRUCTURE-1A checkpointed.** Recorded local
+  implementation checkpoint
+  `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d` after exact 36-path staged
+  review and whitespace audit. The checkpoint contains exactly three new
+  kernel owners, eleven new rules, the generic transfer/frontend/demo,
+  source/export drift pins, generated catalog/health evidence, and
+  synchronized authorities/plans. It grants no remote operation, integration,
+  publication, history rewrite, cleanup, or broader semantic authority.
 - **2026-07-27 — Unattended goal-gate delegation recorded.** The user permits
   the coding agent to approve a future exact bounded proposal for this goal
   when no immediate human response arrives, provided the proposal and a
