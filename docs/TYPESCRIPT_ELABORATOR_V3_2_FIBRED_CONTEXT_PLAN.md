@@ -1331,7 +1331,7 @@ usability profile.
 | FIBRED-WEAKEN-REINDEX-1 | complete; validated; checkpointed `246481130ebf29a09d04b9b4337dbdb716484d43` | FIBRED-QUALIFICATION-REMAINDER-0, FIBRED-TRANSFD-1 | Transferred `Pullback_catd_func`, `Obj_func`, `section_pullback_func`, and `section_pullback_sec`; executable subject checking exposed and transferred two exact existing prerequisite reductions before the four frozen consumer clauses. Added root-only `indexOf`, exact closed-section `:^fd` weakening, frontend semantic-origin point lowering, displayed-functor hom-action reindexing, eta stability, point computation, fail-closed negatives, and a runnable demo. Category presentations remain runtime-distinct/proof-compatible; zero Lambdapi mathematical owners/rules were added; the 785-test TypeScript and complete repository gates pass |
 | FIBRED-DEPENDENT-TARGET-1 | complete; validated; checkpointed `90b79b8b367f40993f788669b3c7823886111ea2`; D-007/007A/007B approved | FIBRED-WEAKEN-REINDEX-1 | Tracked the exact ten-declaration/ten-runtime/one-proof existing-authority closure through generic engines: eight subjects check directly and only package-component/pullback-component use the category-presentation proof rule. Added exact pattern-only typed-wildcard fidelity for the active `Pi_func` inferred slot while retaining untyped/template rejection. The root-only profile constructs `G : K -> Op(Cat_cat)`, `Pullback_catd(Catd_cat_func,G)`, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd`; `B[k,M]` reduces through eight existing clauses to `Pi_cat(G[k],M)`, total-context eta lowers to the original section, wrong base/family cases fail, the runnable direct-TypeScript demo and unchanged live Lambdapi qualification probe pass, and no category collapse, oracle, arbitrary coherence, parser, or new Lambdapi mathematics was added. The final 795-test TypeScript, 19-judgment conformance, and complete kernel/repository component gates pass |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
-| FIBRED-GRADUATE-1 | dependency-ready; assessment/proposal only | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate graduation decision; this row does not itself authorize profile promotion or claim complete general displayed usability |
+| FIBRED-GRADUATE-1 | proposal frozen; awaiting H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008; no semantic authority | complete qualification corpus | The root-only self-validating proposal freezes the demonstrated frontend envelope, cumulative 36-declaration/69-runtime/3-proof slice evidence, four-owner/fifteen-rule mathematical delta, residual owner/action/total/groupoidal/ergonomic gaps, direct-typed acquisition default, optional parser boundary, conformance evidence, and exact qualified graduation question. It proposes that the architecture is settled/mechanically scalable only within the demonstrated existing-authority envelope and explicitly withholds whole-library automation, general displayed syntax, profile promotion, and new semantics |
 
 ## FIBRED-CONTEXT-0A Completion Record
 
@@ -2901,18 +2901,230 @@ general dependent displayed bracket, arbitrary coherent-section synthesis,
 internal-Pi arrow action, total-category theorem, parser/acquisition route,
 bulk transfer, or groupoidal closure changed.
 
-### Future FIBRED-GRADUATE-1 — General Displayed Usability
+## FIBRED-GRADUATE-1 Frozen Qualified Architecture Proposal
 
-Completing individual product or binder examples does not by itself settle
-the general architecture. Graduation requires the executable corpus above,
-an explicit unsupported-action table, and separate statements about:
+FIBRED-GRADUATE-1 is an assessment and decision boundary, not another
+semantic implementation slice. Its executable proposal is
+`src/v3_2/categorical_fibred_graduation_proposal.ts`; the proposal is
+root-only, deeply frozen, self-validating, and absent from the browser entry
+point. It installs no owner, rewrite rule, unification rule, Core primitive,
+profile, parser, or bulk-transfer workflow.
 
-- frontend dependency/binder scalability;
-- mathematical displayed-owner coverage;
-- bulk library transfer throughput;
-- optional acquisition/parsing;
-- groupoidal closure; and
-- product/browser promotion.
+The recommended conclusion is deliberately qualified:
+
+> The backend-neutral, dependency-aware contextual-lowering and
+> qualification-guided generic transfer architecture is settled and
+> mechanically scalable for the demonstrated active-v3.2
+> existing-authority envelope. The work does not establish an automatic
+> whole-development importer, a complete general displayed language, final
+> notation, or complete categorical/groupoidal DTT.
+
+### What “settled” means
+
+The following architectural choices have survived the ordinary, dependent,
+fibred-product, comprehension, displayed-structure, displayed-binder,
+displayed-transfor, grouped/sequential, weakening/reindexing, and genuinely
+dependent-target consumers:
+
+1. an outer dependent LF compiled to a backend-neutral locally nameless
+   explicit Core;
+2. a small TypeScript checker/evaluator as the production semantic path,
+   with active Lambdapi as mathematical authority and bounded conformance
+   oracle rather than a production dependency;
+3. one-shot typed TypeScript callbacks reified immediately into immutable
+   first-order contextual IR;
+4. dependencies derived from stored terms and classifiers rather than
+   duplicated user flags;
+5. finite ordered dependency planning that distinguishes genuine chains
+   from independent sibling blocks and records sequential pullback versus
+   grouped displayed-product presentations;
+6. generic, source-ordered declaration, runtime-rule, proof-rule, and mixed
+   transfer engines;
+7. a strict runtime/proof distinction: proof-time category-presentation
+   compatibility validates subjects without silently becoming runtime
+   conversion;
+8. consumer-led owner-position qualification before adding mathematics;
+   and
+9. direct typed TypeScript construction/transcription as the default
+   acquisition route. Parsing Lambdapi text is optional and deferred.
+
+This is enough architecture to continue implementing bounded existing-
+authority consumers and transfers without redesigning the Core or adding
+owner-specific checker/evaluator branches. It is not evidence that every
+remaining source declaration can be copied without dependency review,
+qualification, or occasional generic engine extensions.
+
+### Demonstrated frontend envelope
+
+The executable corpus covers all of the following:
+
+- general outer-LF dependent Pi/lambda abstraction, scoping, beta/delta, and
+  reviewed runtime conversion;
+- ordinary functorial identity, constants, composition, weakening,
+  contraction, exchange, typed pairing/evaluation, nested product contexts,
+  and classifier-directed object/arrow application;
+- finite ordered categorical contexts, genuine dependency chains,
+  independent sibling groups, sequential Sigma/pullback intent, grouped
+  displayed-product intent, and dependency-sensitive rejection of invalid
+  exchange;
+- displayed-product fibres and same-base-arrow action; displayed
+  projections, pairing, two beta laws, and derived sibling swap/diagonal;
+- the approved asymmetric pullback-totalization owner, finite sequential
+  Sigma extension, finite independent-sibling product folds, and
+  object-level grouped/sequential conformance;
+- direct `:^fd` identity, eta, and finite composition;
+- direct `:^nd` eta of an already coherent displayed transfor, its component
+  and fibre-point consumers, and one qualified higher-naturality-cell
+  consumer;
+- closed-section displayed weakening through the hidden base index,
+  displayed-functor pullback/reindexing through existing hom action, point
+  computation, and direct-eta structural stability; and
+- a genuinely fibre-dependent target
+  `Sigma_catd_functord_catd(Pi_pullback_funcd(G))`, whose fibre at `(k,M)`
+  computes to `Pi_cat(G[k],M)`, together with total-context dependent-section
+  eta.
+
+The direct `:^fd` and `:^nd` forms are therefore real end-user constructs,
+but they remain intentionally bounded. `:^fd` accepts the qualified
+identity/eta/composition family plus the exact weakening and reindexing
+consumers. `:^nd` accepts an already coherent closed displayed transfor and
+its qualified consumers. Neither claim is shorthand for arbitrary callback
+body compilation or automatic coherence synthesis.
+
+### Measured transfer reuse
+
+The seven representative closure boundaries give the following cumulative
+slice-entry counts. They deliberately count prerequisite entries again when
+a later slice packages them; they are not unique-library declaration counts.
+
+| closure | declaration slots | runtime-rule slots | proof-rule slots | new mathematical owners | new mathematical runtime rules |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| fibred product | 5 | 25 | 0 | 0 | 2 |
+| comprehension | 3 | 4 | 0 | 1 | 2 |
+| fibred structure | 6 | 15 | 0 | 3 | 11 |
+| displayed-functor binder | 2 | 2 | 1 | 0 | 0 |
+| displayed-transfor binder | 6 | 7 | 1 | 0 | 0 |
+| weakening/reindexing | 4 | 6 | 0 | 0 | 0 |
+| dependent target | 10 | 10 | 1 | 0 | 0 |
+| **cumulative slice entries** | **36** | **69** | **3** | **4** | **15** |
+
+All entries use the generic transfer engines. Across this corpus those
+engines have exercised:
+
+- opaque signatures and transparent definitions;
+- runtime rewrite rules and proof-time unification rules;
+- direct and proof-assisted runtime-subject validation;
+- source-order dependency composition;
+- typed pattern wildcards for inferred source slots;
+- mixed runtime/proof programs with deliberate non-collapse; and
+- provenance-bearing negative diagnostics.
+
+No owner-specific branch was added to the LF checker or evaluator. The early
+product/comprehension/structure work nevertheless added four mathematical
+owners and fifteen mathematical runtime clauses after exact active-kernel
+necessity review. That fact is important: generic transfer is mechanical
+once authority and presentation are settled, while determining missing
+mathematics remains a design task.
+
+The measurements prove representative mechanism diversity, not
+whole-corpus throughput. The historical remaining inventory of roughly 70
+root commands plus 83 extension declarations has not been run end to end
+through this workflow. Direct typed transcription by a human or coding agent
+is feasible in principle and remains the default next experiment. A generic
+Lambdapi parser or generator may later be measured as an optimization, but
+it is neither required by nor selected through this graduation.
+
+### Explicit residual boundaries
+
+The following frontend and ergonomic work remains separate:
+
+- general dependent/displayed bracket and coherence synthesis;
+- arbitrary `:^fd` and `:^nd` callback-body lowering;
+- dependent-chain exchange and the necessary transports;
+- whole-displayed-functor laxity and broader higher-action surfaces;
+- contravariant and object-only binder ergonomics; and
+- final notation and diagnostic design.
+
+The following items require mathematical owner, rule, theorem, or
+Lambdapi-first design rather than merely more frontend wiring:
+
+- Sigma-introduction arrow action;
+- a generic total-category pullback/comparison and any
+  grouped/sequential-total equivalence;
+- a raw product-reindexing kernel equality, if one is actually wanted;
+- internal-Pi arrow action;
+- whole displayed-functor laxity/higher action; and
+- groupoidal specialization and closure.
+
+The following remain independent product or metatheory work:
+
+- transferring and measuring the remaining library inventory;
+- any optional string parser or source generator;
+- browser/deployed-profile promotion;
+- standalone subject reduction, termination, confluence, and performance
+  characterization.
+
+Warnings continue to diagnose interactions and do not veto an otherwise
+wanted design. Conversely, warnings do not themselves authorize a semantic
+owner: active constructions and foundational intent must still be audited
+before a primitive is introduced.
+
+### Exact decision and non-effects
+
+**H-DTTLF-USABILITY-FIBRED-GRADUATE — pending.**
+
+**D-DTTLF-USABILITY-008 — proposed.**
+
+> Approve H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008 as
+> proposed: treat the backend-neutral, dependency-aware contextual-lowering
+> and qualification-guided generic transfer architecture as settled and
+> mechanically scalable for the demonstrated active-v3.2
+> existing-authority envelope, while retaining arbitrary displayed
+> bracket/coherence synthesis, missing arrow/total/groupoidal mathematics,
+> full remaining-library acquisition, final notation, metatheory, and
+> browser/deployed promotion as separate work; this decision adds no
+> semantic owner or rule and authorizes no profile promotion or bulk
+> transfer?
+
+Approval records only the qualified architectural conclusion. It does not:
+
+- add or authorize any Lambdapi or Core semantic owner/rule;
+- claim that general displayed syntax or arbitrary coherence is complete;
+- claim automatic or already-benchmarked whole-development transfer;
+- select a parser, generator, or textual syntax;
+- resume the remaining inventory automatically;
+- promote a browser/default/deployed profile;
+- close groupoidal DTT or the withheld metatheory; or
+- broaden the existing local-checkpoint Git authority.
+
+The next implementation after approval must still be selected as an exact
+bounded plan row. Under the plan-specific unattended delegation, the exact
+decision above may be recorded separately as delegated approval only if no
+immediate human answer follows its presentation and only if doing so leads
+through a coherent green local checkpoint. Any human answer supersedes that
+delegated record.
+
+### Proposal validation record
+
+The frozen proposal preparation is green:
+
+- its nine focused executable tests pass, including live-boundary
+  reconciliation, exact cumulative accounting, deep freezing, browser
+  exclusion, and fail-closed evidence/authority/recommendation drift;
+- root typecheck and lint pass;
+- `./scripts/pnpmw run check:ts` passes 804 tests: 758 active passes, 46
+  intentional skips, and zero failures;
+- the unchanged mandatory `./scripts/pnpmw run check:conformance` passes all
+  19 live Lambdapi judgments in 31.8 seconds under the same global 60-second
+  bound; and
+- `make -C emdash2 ci` passes all 41 kernel/example files, 39 infrastructure
+  tests, five registry tests, all source/report/book checks, the strict
+  `0/47/29` LHS audit, and catalog freshness.
+
+No `.lp` source or browser entry point changed. Six untracked
+`emdash2/tmp/elab0-*` directories left by earlier externally timed-out
+conformance workers remain preserved and excluded because cleanup is not
+authorized by this tranche.
 
 ## Acceptance And Validation Policy
 
@@ -3057,6 +3269,28 @@ FIBRED-COMPREHENSION-1A is complete only when:
    recorded deferrals remain intact; and
 6. source/export pins, live acquisition, catalog, health, warning, audit,
    conformance, TypeScript, and full CI gates pass.
+
+FIBRED-GRADUATE-1 proposal preparation is complete only when:
+
+1. the executable proposal inventories the outer LF, ordinary bracket,
+   dependency planner, grouped/sequential context, displayed product and
+   structure, `:^fd`, `:^nd`, weakening/reindexing, and genuinely dependent
+   target envelopes without generalizing past their tested callbacks;
+2. every one of the seven representative transfer rows is checked against
+   its live boundary object, and the cumulative counts are explicitly marked
+   as overlapping slice entries rather than unique library coverage;
+3. generic engine reuse is distinguished from the four mathematical owners
+   and fifteen runtime clauses added by the early kernel closures;
+4. frontend/ergonomic gaps, mathematical owner/theorem gaps,
+   coverage/acquisition gaps, and product/metatheory gaps remain separate;
+5. direct typed construction remains the default, parsing remains optional,
+   and no unmeasured whole-library throughput claim is made;
+6. the proposal is deeply frozen, self-validating, root-only, absent from
+   the browser, and names one exact decision with all semantic/profile/bulk
+   non-effects; and
+7. focused tests, `check:ts`, unchanged live conformance, active-kernel CI,
+   synchronized ledgers/navigation, and exact staged-diff review pass before
+   checkpointing.
 
 Any active Lambdapi edit follows `emdash2/AGENTS.md` and the current v3.2 SOP:
 intended-owner full-file probe, positive and negative consumers, bounded
@@ -3257,17 +3491,20 @@ Add no proof-modulo runtime matcher, category collapse, external oracle, new
 primitive, arbitrary pointwise coherence, or general dependent displayed
 bracket.
 
-FIBRED-GRADUATE-1 is now the next dependency-ready row, but only as an exact
-assessment and non-self-authorizing proposal. Inventory the supported
-frontend/dependency/binder envelope, active mathematical owner coverage,
-residual action/total-category/groupoidal gaps, generic transfer reuse and
-measured throughput, optional acquisition/parsing boundary, profile/browser
-status, and TypeScript/Lambdapi conformance. Distinguish evidence that the
-architecture scales mechanically from work that still requires mathematical
-owner design or ergonomic discovery. Freeze a self-validating recommendation
-and exact decision question before any graduation or profile promotion. Do
-not treat completion of the qualification corpus as automatic authorization
-for a broader product claim.
+FIBRED-GRADUATE-1 now has a frozen root-only executable proposal awaiting
+H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008. Preserve its exact
+qualified recommendation: the dependency-aware contextual-lowering and
+qualification-guided generic transfer architecture is settled and
+mechanically scalable only for the demonstrated active-v3.2
+existing-authority envelope. Preserve its cumulative overlapping
+seven-slice evidence of 36 declaration, 69 runtime-rule, and three
+proof-rule slots; its separate four-owner/fifteen-runtime-rule mathematical
+delta; and its zero owner-specific checker/evaluator branches. Preserve all
+withheld claims: general displayed brackets and coherence, missing
+arrow/total/groupoidal mathematics, whole-library throughput, final
+notation, metatheory, parsing selection, and browser/deployed promotion.
+Do not implement a successor or record a wider product claim before the
+separate exact decision is approved.
 
 Keep canonical Lambdapi term/declaration parsing deferred and optional.
 Direct typed TypeScript construction remains the default. Do not resume the
@@ -3297,6 +3534,21 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
 
 ## Change Log
 
+- **2026-07-28 — FIBRED-GRADUATE-1 qualified architecture proposal
+  frozen and validated.** A root-only, deeply frozen, self-validating
+  proposal now recommends graduation only for the demonstrated
+  dependency-aware contextual-lowering and qualification-guided generic
+  transfer envelope. Seven representative closures cumulatively account for
+  36 declaration, 69 runtime-rule, and three proof-rule slice slots through
+  generic engines, while separately identifying four mathematical owners
+  and fifteen mathematical runtime clauses. The proposal keeps general
+  displayed brackets/coherence, missing arrow/total/groupoidal mathematics,
+  whole-library throughput, parser selection, final notation, metatheory,
+  and browser/deployed promotion explicit and separate. Its nine focused
+  tests, root 804-test gate, 19-judgment live conformance gate, and complete
+  41-file kernel CI pass. H-DTTLF-USABILITY-FIBRED-GRADUATE/
+  D-DTTLF-USABILITY-008 remains an exact separate decision and adds no
+  semantic or product authority.
 - **2026-07-28 — FIBRED-DEPENDENT-TARGET-1 implementation and validation
   complete.** The root-only successor transfers the exact
   ten-declaration/ten-runtime/one-proof existing-authority closure, records

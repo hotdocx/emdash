@@ -781,11 +781,24 @@ has a runnable direct-TypeScript demo. Its 795-test TypeScript gate,
 19-judgment mandatory conformance gate, and complete 41-file kernel CI pass.
 It adds no `.lp` mathematics, category collapse, external oracle, arbitrary
 coherence synthesis, parser, or deployed-profile authority.
-Continue with FIBRED-GRADUATE-1 only as the now dependency-ready exact
-assessment/proposal row: inventory the supported envelope, residual
-mathematical and ergonomic gaps, measured generic-transfer reuse, optional
-acquisition boundary, and conformance before any separate graduation or
-profile-promotion decision. The green
+FIBRED-GRADUATE-1 now has a frozen root-only executable proposal awaiting
+H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008. It recommends
+graduating the dependency-aware contextual-lowering and
+qualification-guided generic transfer architecture only for the demonstrated
+active-v3.2 existing-authority envelope. The seven representative closure
+rows cumulatively exercise 36 declaration, 69 runtime-rule, and three
+proof-rule slots through generic engines and separately record four
+mathematical owners plus fifteen mathematical runtime clauses. These are
+overlapping slice-entry counts, not unique-library coverage or a whole-
+corpus throughput benchmark. Direct typed TypeScript construction remains
+the default and parsing remains optional. General displayed
+bracket/coherence synthesis, missing arrow/total/groupoidal mathematics, the
+remaining inventory, final notation, metatheory, and browser/deployed
+promotion are explicitly withheld. The decision adds no semantic authority
+and selects no successor automatically. Its nine focused tests, root
+804-test gate (758 active passes, 46 intentional skips), unchanged
+19-judgment live conformance gate, and complete 41-file kernel CI pass. The
+green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
 FIBRED-BINDER-1 implementation checkpoint is

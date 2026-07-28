@@ -3820,11 +3820,25 @@ zero-new-Lambdapi-mathematics result. Its 795-test TypeScript gate,
 19-judgment mandatory conformance gate, and complete 41-file kernel CI pass.
 Do not infer general `fd`/`nd` completion, arbitrary coherent-section
 synthesis, parsing/bulk-transfer authority, or deployed-profile promotion.
-FIBRED-GRADUATE-1 is now dependency-ready only as an exact assessment and
-non-self-authorizing proposal. Inventory the supported envelope, residual
-owner/action/total-category/groupoidal gaps, generic transfer reuse and
-measured throughput, optional acquisition boundary, and conformance before a
-separate graduation decision. The
+FIBRED-GRADUATE-1 now has a frozen root-only executable proposal awaiting
+H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008. It recommends that
+the dependency-aware contextual-lowering and qualification-guided generic
+transfer architecture be treated as settled and mechanically scalable only
+for the demonstrated active-v3.2 existing-authority envelope. Its seven
+representative closure rows cumulatively exercise 36 declaration, 69
+runtime-rule, and three proof-rule slots through generic engines, while
+separately recording the four mathematical owners and fifteen mathematical
+runtime clauses added by the early product/comprehension/structure work.
+These are overlapping slice-entry counts, not unique-library coverage or an
+end-to-end throughput benchmark. The proposal keeps direct typed TypeScript
+construction as the default, parsing optional, and explicitly withholds
+general displayed brackets/coherence, missing arrow/total/groupoidal
+mathematics, the remaining 70-root/83-extension closure, final notation,
+metatheory, and browser/deployed promotion. The decision adds no semantic
+authority and does not automatically select a successor. The proposal's
+nine focused tests, root 804-test gate (758 active passes, 46 intentional
+skips), unchanged 19-judgment live conformance gate, and complete 41-file
+kernel CI pass. The
 FIBRED-STRUCTURE-1A checkpoint remains
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized binder
 checkpoint is `698280f42c3c9c339ebc82a8cfb0df1d51838704`; the
