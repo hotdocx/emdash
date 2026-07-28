@@ -34,6 +34,15 @@ proposed, and FIBRED-STRUCTURE-1A is implemented across the active kernel,
 generic TypeScript transfer, root-only direct-TypeScript facade, and runnable
 demo. Full proportional and repository-wide validation is green;
 the implementation is recorded in the green local checkpoint below.
+FIBRED-BINDER-1 is also complete at its bounded existing-authority boundary:
+the root-only TypeScript facade now accepts the first direct
+`displayedFunctorLambda`/`:^fd`-equivalent identity, eta, and finite closed
+composition-chain bodies; retains their hidden
+`k :^n K; a :^f E[k]` locally nameless presentation; and uses the already
+active Sigma/Pi unification rule to compare direct and nested classifiers
+without installing a runtime equality. The executable demo, 754-test root
+gate, and bounded live Lambdapi oracle are green. This slice changes no
+Lambdapi source and adds no mathematical owner or rule.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -83,6 +92,8 @@ FIBRED-PRODUCT-1A implementation checkpoint:
 `d654545d00d5949f8da72345d2265808b15a7461`
 FIBRED-STRUCTURE-1A implementation checkpoint:
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`
+FIBRED-BINDER-1 implementation checkpoint:
+pending exact green checkpoint for this synchronized tranche
 
 ## Purpose And Exact Outcome
 
@@ -1180,7 +1191,7 @@ usability profile.
 | FIBRED-SIGMA-INTRO-ACTION-1 | deferred separate closure | concrete consumer beyond contextual pairing | Reassess direct `sigma_intro_tapp0_func` arrow action only with a closure that joins the measured `+10/+1` identity, naturality, composition, and higher-action interactions |
 | FIBRED-STRUCTURE-0A | complete; D-DTTLF-USABILITY-006 approved as proposed | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A, active-owner/Foundation audit | Compared five structural/reindexing owner positions in bounded full-file probes. Selected three fixed-base projection/pairing owners with eleven point/full/capped/beta rules, zero warning delta, derived swap/diagonal, genuine next-cell evidence, and frontend canonical reindexing that preserves the raw kernel non-conversion. Froze the exact non-authorizing proposal and six tests; the approval is recorded separately without mutating its historical authorization bit |
 | FIBRED-STRUCTURE-1A | complete; validated; checkpointed `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d` | FIBRED-STRUCTURE-0A and exact D-DTTLF-USABILITY-006 approval | Added only the approved three injective owners and eleven runtime rules; retained the transparent family and necessary beta guards; transferred six declarations and 15 subject-checked local rules through generic engines; added derived swap/diagonal, full/capped action, frontend-only canonical reindexing, a root-only profile, and a runnable no-Lambdapi demo while retaining all frozen non-conversions; focused/live conformance, 739-test TypeScript, canonical inventory, complete health, and full repository gates pass |
-| FIBRED-BINDER-1 | pending | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Implement the first direct `:^fd`-equivalent typed API and show direct/nested classifier compatibility without collapsing proof-time and runtime equality |
+| FIBRED-BINDER-1 | complete; validated; checkpoint pending | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Added a root-only `displayedFunctorLambda`/`:^fd`-equivalent typed API for identity, eta, and finite closed displayed-functor composition chains. The callback is evaluated once and discarded; hidden base/fibre slots are retained as immutable locally nameless `k :^n K; a :^f E[k]` evidence. Lowering reuses `id_funcd` and `comp_fapp0` at `Catd_cat K`; the exact SCALE-STRESS-2A `Catd`/`Sigma_proj1_pullback_catd` declarations and Sigma/Pi proof rule plus two already-active point-computation rules compile through generic engines. Direct `Functord_cat(E,D)` and nested `Pi_cat(Sigma_cat(E),Sigma_proj1_pullback_catd(E,D))` compare as `solved` only in the proof engine and remain `not-equal` at runtime. A direct-TypeScript demo, 14 active focused tests, one opt-in live Lambdapi test, and the 754-test root gate pass with zero new Lambdapi owners/rules |
 | FIBRED-TRANSFD-1 | pending | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Implement one coherent displayed-transfor abstraction and component/higher-cell consumer |
 | FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
@@ -1713,11 +1724,14 @@ proposal unchanged:
   runtime clauses: this slice contributes exactly three body-free symbols and
   eleven rule commands/clauses.
 
-This closure does not add direct `:^fd`/`:^nd` abstraction, universe-level
-product projection transfors, a global `Functord_cat` product conversion,
-kernel pullback stability, dependent-chain exchange, a generic total-category
-pullback, full family base-two-cell action, browser/deployed-profile
-promotion, string parsing, acquisition, or bulk transfer.
+At its checkpoint this closure did not add direct `:^fd`/`:^nd` abstraction,
+universe-level product projection transfors, a global `Functord_cat` product
+conversion, kernel pullback stability, dependent-chain exchange, a generic
+total-category pullback, full family base-two-cell action,
+browser/deployed-profile promotion, string parsing, acquisition, or bulk
+transfer. FIBRED-BINDER-1 has since supplied only the bounded direct
+`:^fd`-equivalent identity/eta/composition subset recorded below; the other
+boundaries, including `:^nd` and general displayed abstraction, remain.
 
 Validation evidence:
 
@@ -1738,6 +1752,87 @@ Validation evidence:
   differential judgments, Python/script tests, report/reference lint, book
   evidence/typography/KaTeX/assembly checks, catalog freshness, and the strict
   rule audit.
+
+## FIBRED-BINDER-1 Completion Record
+
+This slice settles the first direct displayed-functor binder as a bounded
+frontend and transfer consumer, not as a new Core binder mode or Lambdapi
+notation:
+
+- the public root-only `fibred-binder-1` profile adds
+  `displayedFunctorLambda(name, E, D, body)`, corresponding provisionally to
+  `λ a :^fd E. body`. The actual end-user input is a typed TypeScript
+  expression; no string parser or production Lambdapi process participates;
+- the callback sees one ergonomic fibre variable `a : E[k]`, is evaluated
+  exactly once, and is never retained. The builder creates a hidden natural
+  base slot `k : K`, records every direct `FF[a]` use as the existing nested
+  first-order applications `FF[k](a)`, and freezes the resulting locally
+  nameless body with `a` at index 0 and `k` at index 1;
+- the accepted finite closed body grammar is deliberately narrow but
+  compositional: `a` lowers to `id_funcd(E)`, `FF[a]` eta-lowers to `FF`, and
+  `GG[FF[a]]`—or a longer type-correct rigid chain—folds through generic
+  `comp_fapp0` in `Catd_cat K`. Wrong bases/families, escaped or foreign
+  tokens, non-chain bodies, non-functorial modes, displayed transfors, and
+  genuinely fibre-dependent codomains fail closed;
+- the implementation shares generic scoped slots, indexed application,
+  diagnostics, explicit Core, and composition machinery with earlier
+  categorical work, but the displayed-functor capability is not made
+  semantically contingent on the separate section-composition feature. This
+  preserves the architectural rule that ordinary/dependent implementations
+  may share mechanisms where natural without requiring either uniformity or
+  separation;
+- `categorical_fibred_binder_transfer.ts` reuses the exact
+  SCALE-STRESS-2A source-ordered `Catd` and
+  `Sigma_proj1_pullback_catd` declarations plus its active Sigma/Pi
+  unification rule. It additionally transfers exactly two already-active
+  runtime computations through the generic subject-checking engine:
+  displayed composition projects pointwise to ordinary fibre composition,
+  and ordinary functor composition computes on objects. This is transferred
+  coverage, not new Lambdapi mathematics;
+- the direct classifier
+  `Functord_cat(E,D)` and nested classifier
+  `Pi_cat(Sigma_cat(E),Sigma_proj1_pullback_catd(E,D))` are both retained.
+  The proof engine solves either orientation using
+  `stress.sigma-pi.uncurrying`; ordinary runtime comparison returns
+  `not-equal`. The elaborator therefore uses the active proof-time relation
+  without turning it into a runtime rewrite or erasing the chosen
+  presentation; and
+- `demo:categorical-fibred-binder` prints the three readable inputs, explicit
+  Core and inferred types, the hidden telescope, pointwise composition
+  computation, proof/runtime classifier distinction, and a source-located
+  wrong-target diagnostic. It runs entirely against the TypeScript
+  checker/evaluator.
+
+The live Lambdapi oracle independently checks displayed identity, fibrewise
+composition, object application, proof-time Sigma/Pi compatibility, and
+runtime non-conversion. No active `.lp` file, warning inventory, rule audit,
+catalog, generated health target, or canonical export changes in this slice.
+
+Validation evidence:
+
+- the four focused suites pass 14 active cases; their one opt-in Lambdapi
+  case also passes under
+  `EMDASH_RUN_LAMBDAPI_CATEGORICAL_FIBRED_BINDER_PROBES=1`;
+- `./scripts/pnpmw run demo:categorical-fibred-binder` runs the complete
+  direct-TypeScript example;
+- `./scripts/pnpmw run check:ts` passes 754 tests: 708 passed and 46
+  intentional opt-in skips;
+- the bounded active-kernel check and the opt-in binder-specific Lambdapi
+  oracle pass; and
+- `EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all` passes all 19
+  mandatory live differential judgments, all 41 kernel/example health
+  targets with unchanged source-metrics fingerprint, 39 infrastructure
+  tests, five print-registry tests, source/reference/book gates, strict
+  `0/47/29` LHS audit, and generated-catalog freshness.
+
+This completion does not provide `:^nd`, arbitrary dependent displayed
+codomains `B[k,a]`, a general displayed bracket, displayed weakening or
+exchange lowering, sequential/grouped conformance, runtime
+`Pi_cat`/`Functord_cat` collapse, a new kernel owner/rule, parser/acquisition,
+bulk transfer, groupoidal closure, or browser/deployed-profile promotion.
+The next ordered binder slice is FIBRED-TRANSFD-1; the independently
+dependency-ready grouped/sequential consumer remains available if that
+transfor slice reaches a mathematical gate.
 
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
@@ -1823,6 +1918,27 @@ FIBRED-STRUCTURE-1A is complete only when:
 7. source/export pins, live acquisition, catalog, health, warning, audit,
    focused/live conformance, TypeScript, examples, and full repository gates
    pass.
+
+FIBRED-BINDER-1 is complete only when:
+
+1. the direct API evaluates its callback once, stores no closure, and retains
+   the hidden base/fibre telescope as immutable locally nameless evidence;
+2. identity, eta, and finite rigid displayed-functor chains lower only through
+   active `id_funcd`/`comp_fapp0` authority and pointwise application
+   computes;
+3. the exact existing Sigma/Pi declarations and unification rule are compiled
+   through generic transfer/proof engines against the descendant
+   environment, with no new mathematical owner or rule;
+4. direct and nested classifiers solve in both proof orientations while
+   runtime comparison remains `not-equal` and both presentations are
+   inspectable;
+5. wrong bases/families/modes, escaped or foreign slots, and unsupported
+   dependent bodies fail closed without affecting older profiles;
+6. the runnable direct-TypeScript demo has no parser or production Lambdapi
+   dependency; and
+7. focused tests, the bounded live Lambdapi oracle, `check:ts`, bounded kernel
+   validation, full repository validation, plan synchronization, and exact
+   staged-diff review pass before checkpointing.
 
 FIBRED-COMPREHENSION-0B is complete only when:
 
@@ -1994,14 +2110,21 @@ active Sigma/Pi uncurrying comparison to relate total-context sections to
 direct and nested classifier presentations and never turn proof-time
 comparisons into runtime rewrites.
 
-After the FIBRED-STRUCTURE-1A checkpoint, the next dependency-ready bounded
-row is FIBRED-BINDER-1. Start by freezing an executable direct-versus-nested
-classifier contract for one `:^fd`-equivalent typed TypeScript abstraction,
-then implement it only through already active owners and generic contextual
-machinery. If a required computation is absent, stop at the smallest exact
-owner/rule proposal and human gate. `:^nd`, FIBRED-TRANSFD-1, and the combined
-grouped/sequential consumer remain later rows; no convenient notation is
-itself authority for a primitive.
+FIBRED-BINDER-1 is complete. Preserve its root-only direct
+`displayedFunctorLambda` identity/eta/finite-composition contract, callback-
+once hidden `k :^n K; a :^f E[k]` evidence, exact existing-authority
+transfer, proof-only Sigma/Pi classifier compatibility, runtime
+non-conversion, fail-closed boundary, and no-new-kernel-mathematics result.
+The next ordered bounded row is FIBRED-TRANSFD-1. Begin by recovering the
+active `Transfd_cat`, `tdapp0_fapp0`, `tdapp1_int_cell`, Sigma-total
+uncurrying, and next-hom authorities and freezing an executable
+direct-versus-nested `:^nd`-equivalent contract with one concrete
+component/higher-cell consumer. Reuse the exact SCALE-STRESS-2B3 closure if
+it is sufficient. If computation is missing, compare existing constructions
+and Foundations before opening the smallest exact owner/rule proposal.
+FIBRED-GROUPED-SEQUENTIAL-1 remains independently dependency-ready and may
+proceed while a transfor-only mathematical gate waits; no convenient
+notation is itself authority for a primitive.
 
 Keep canonical Lambdapi term/declaration parsing deferred and optional.
 Direct typed TypeScript construction remains the default. Do not resume the
@@ -2154,3 +2277,16 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   captured only in a coherent green local checkpoint under the existing SOP.
   Human responses control; destructive/external actions, scope broadening,
   pushes, merges, publication, and history rewriting remain unauthorized.
+- **2026-07-28 — FIBRED-BINDER-1 completed at an existing-authority
+  boundary.** Froze the direct/nested contract and implemented the root-only
+  callback-once `displayedFunctorLambda` API for identity, eta, and finite
+  rigid displayed-functor chains. The frontend retains the hidden
+  `k :^n K; a :^f E[k]` locally nameless body and lowers through active
+  `id_funcd`/`comp_fapp0` owners. The exact SCALE-STRESS-2A declarations and
+  Sigma/Pi proof rule plus two existing point-computation rules compile
+  through generic engines. The TypeScript proof engine and bounded Lambdapi
+  oracle accept direct/nested classifier compatibility while runtime
+  conversion remains negative. The runnable demo and 754-test root gate pass;
+  the complete repository gate also passes. No Lambdapi source, mathematical
+  owner/rule, parser, bulk transfer, or deployed profile changed.
+  FIBRED-TRANSFD-1 is next.

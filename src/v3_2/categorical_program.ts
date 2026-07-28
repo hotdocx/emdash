@@ -51,6 +51,13 @@ import {
     coreCategoricalFibredStructureCoreName
 } from './categorical_fibred_structure_transfer';
 import {
+    CORE_CATEGORICAL_FIBRED_BINDER_CORE_NAMES,
+    CoreCategoricalFibredBinderCompilation,
+    compileCoreCategoricalFibredBinderProof,
+    compileCoreCategoricalFibredBinderTransfer,
+    coreCategoricalFibredBinderClassifiers
+} from './categorical_fibred_binder_transfer';
+import {
     CORE_CATEGORICAL_STRUCTURAL_PREREQUISITES,
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
     CoreCategoricalStructuralPrerequisiteId,
@@ -106,6 +113,9 @@ import {
     coreLfDefinitionalCompare
 } from './lf_conversion';
 import {
+    CoreLfProofComparisonResult
+} from './lf_transfer_proof';
+import {
     CoreType,
     coreObjectCategoryEquals,
     coreTypeObjectCategory,
@@ -126,6 +136,9 @@ export const CORE_CATEGORICAL_FIBRED_PRODUCT_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_FIBRED_STRUCTURE_PROGRAM_REVISION =
     'FIBRED-STRUCTURE-1A-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_FIBRED_BINDER_PROGRAM_REVISION =
+    'FIBRED-BINDER-1-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -184,14 +197,17 @@ export interface CoreCategoricalProgramOptions {
      * family product and same-base transport. The fibred-structure profile
      * adds the fixed-base displayed projections/pairing and frontend-only
      * canonical grouped-product reindexing approved by
-     * D-DTTLF-USABILITY-006.
+     * D-DTTLF-USABILITY-006. The fibred-binder profile additionally exposes
+     * the existing-authority direct displayed-functor abstraction and
+     * proof-only direct/nested classifier comparison.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
         | 'usability-dependent-1a'
         | 'fibred-comprehension-1a'
         | 'fibred-product-1a'
-        | 'fibred-structure-1a';
+        | 'fibred-structure-1a'
+        | 'fibred-binder-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -220,6 +236,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_COMPREHENSION'
     | 'UNAVAILABLE_FIBRED_PRODUCT'
     | 'UNAVAILABLE_FIBRED_STRUCTURE'
+    | 'UNAVAILABLE_FIBRED_BINDER'
     | 'UNEXPECTED_KIND';
 
 export class CoreCategoricalProgramError extends Error {
@@ -273,6 +290,16 @@ export interface CoreCategoricalProgramCompilation {
     readonly dependentPrerequisites:
         CoreCategoricalTermInspection['dependentPrerequisites'];
     readonly productionLambdapiDependency: false;
+}
+
+export interface CoreCategoricalFibredBinderClassifierCompatibility {
+    readonly directClassifier: KernelExpression;
+    readonly nestedClassifier: KernelExpression;
+    readonly explicitDirectClassifier: string;
+    readonly explicitNestedClassifier: string;
+    readonly runtime: CoreLfComparisonResult;
+    readonly proofTime: CoreLfProofComparisonResult;
+    readonly preservesPresentations: true;
 }
 
 const explicitFunctorial = binderMode('explicit', 'functorial');
@@ -383,6 +410,14 @@ categoricalLabels[
         'displayed-product-pair'
     )
 ] = 'emdash.categorical.displayed-product-pair';
+categoricalLabels[
+    CORE_CATEGORICAL_FIBRED_BINDER_CORE_NAMES
+        .displayedFamilyClassifier
+] = 'emdash.categorical.displayed-family-classifier';
+categoricalLabels[
+    CORE_CATEGORICAL_FIBRED_BINDER_CORE_NAMES
+        .sigmaProjectionPullback
+] = 'emdash.categorical.sigma-projection-pullback';
 
 export const CORE_CATEGORICAL_EXPLICIT_FREE_LABELS:
 Readonly<Record<string, string>> = Object.freeze({
@@ -505,10 +540,12 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDependentCompositionCompilation
         | CoreCategoricalComprehensionCompilation
         | CoreCategoricalFibredProductCompilation
-        | CoreCategoricalFibredStructureCompilation;
+        | CoreCategoricalFibredStructureCompilation
+        | CoreCategoricalFibredBinderCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
+    private readonly fibredBinderEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -520,13 +557,20 @@ export class CoreCategoricalProgram {
         this.comprehensionEnabled =
             profile === 'fibred-comprehension-1a' ||
             profile === 'fibred-product-1a' ||
-            profile === 'fibred-structure-1a';
+            profile === 'fibred-structure-1a' ||
+            profile === 'fibred-binder-1';
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
-            profile === 'fibred-structure-1a';
+            profile === 'fibred-structure-1a' ||
+            profile === 'fibred-binder-1';
         this.fibredStructureEnabled =
-            profile === 'fibred-structure-1a';
-        this.dependent = this.fibredStructureEnabled
+            profile === 'fibred-structure-1a' ||
+            profile === 'fibred-binder-1';
+        this.fibredBinderEnabled =
+            profile === 'fibred-binder-1';
+        this.dependent = this.fibredBinderEnabled
+            ? compileCoreCategoricalFibredBinderTransfer()
+            : this.fibredStructureEnabled
             ? compileCoreCategoricalFibredStructureTransfer()
             : this.fibredProductEnabled
             ? compileCoreCategoricalFibredProductTransfer()
@@ -540,7 +584,9 @@ export class CoreCategoricalProgram {
             this.at('categorical program'),
             {
                 dependentSectionComposition:
-                    profile !== 'reviewed-usability-2a1'
+                    profile !== 'reviewed-usability-2a1',
+                displayedFunctorAbstraction:
+                    this.fibredBinderEnabled
             }
         );
     }
@@ -678,6 +724,19 @@ export class CoreCategoricalProgram {
                 'Fibrewise displayed projections and pairing are ' +
                 "available only in the explicit 'fibred-structure-1a' " +
                 'root profile'
+            );
+        }
+    }
+
+    private requireFibredBinder(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.fibredBinderEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_FIBRED_BINDER',
+                nodeProvenance,
+                'Direct displayed-functor abstraction is available only ' +
+                "in the explicit 'fibred-binder-1' root profile"
             );
         }
     }
@@ -2938,6 +2997,140 @@ export class CoreCategoricalProgram {
                 provenance: nodeProvenance
             }
         );
+    }
+
+    /**
+     * Direct `λ a :^fd E. body`-equivalent abstraction.
+     *
+     * The builder hides a natural base slot, records the body as the nested
+     * `k :^n K; a :^f E[k]` contextual presentation, and lowers only the
+     * FIBRED-BINDER-1 identity/eta/composition contract.
+     */
+    displayedFunctorLambda(
+        name: string,
+        sourceValue: CoreCategoricalDisplayedFamily,
+        targetValue: CoreCategoricalDisplayedFamily,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `displayed-functor abstraction ${name}`,
+            options.source
+        );
+        this.requireFibredBinder(nodeProvenance);
+        const sourceFamily = this.requireDisplayedFamily(
+            sourceValue,
+            nodeProvenance
+        );
+        const targetFamily = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFamily.baseCategory.expression,
+                targetFamily.baseCategory.expression
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                `Displayed-functor abstraction '${name}' has source and ` +
+                'target families over different bases'
+            );
+        }
+        return this.builder.displayedFunctorLambda(
+            name,
+            sourceFamily.baseCategory.expression,
+            sourceFamily.expression,
+            targetFamily.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
+     * Execute the active proof-only Sigma/Pi uncurrying comparison while
+     * retaining the negative runtime comparison.
+     */
+    displayedFunctorClassifierCompatibility(
+        sourceValue: CoreCategoricalDisplayedFamily,
+        targetValue: CoreCategoricalDisplayedFamily,
+        stepLimit = 2_000,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalFibredBinderClassifierCompatibility {
+        const nodeProvenance = this.at(
+            'displayed-functor direct/nested classifier compatibility',
+            source
+        );
+        this.requireFibredBinder(nodeProvenance);
+        const sourceFamily = this.requireDisplayedFamily(
+            sourceValue,
+            nodeProvenance
+        );
+        const targetFamily = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFamily.baseCategory.expression,
+                targetFamily.baseCategory.expression
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Direct/nested classifier comparison requires one base'
+            );
+        }
+        const compilation =
+            this.dependent as CoreCategoricalFibredBinderCompilation;
+        const classifiers = coreCategoricalFibredBinderClassifiers(
+            sourceFamily.baseCategory.expression,
+            sourceFamily.expression,
+            targetFamily.expression,
+            nodeProvenance
+        );
+        const proof = compileCoreCategoricalFibredBinderProof(
+            compilation,
+            this.environment
+        );
+        return Object.freeze({
+            directClassifier: classifiers.direct,
+            nestedClassifier: classifiers.nested,
+            explicitDirectClassifier:
+                serializeCoreCategoricalExpression(
+                    classifiers.direct
+                ),
+            explicitNestedClassifier:
+                serializeCoreCategoricalExpression(
+                    classifiers.nested
+                ),
+            runtime: coreLfDefinitionalCompare(
+                this.environment,
+                classifiers.nested,
+                classifiers.direct,
+                stepLimit,
+                undefined,
+                compilation.composedRuntime
+            ),
+            proofTime: proof.compare(
+                classifiers.nested,
+                classifiers.direct,
+                { stepLimit }
+            ),
+            preservesPresentations: true as const
+        });
     }
 
     inspect(

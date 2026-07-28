@@ -48,7 +48,14 @@ fibrewise-cartesian sibling continuation governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md).
 That sub-plan may reuse SCALE-STRESS-2A through 2B3 as representation
 evidence, but it does not resume bulk acquisition or promote an isolated
-scale profile.
+scale profile. FIBRED-BINDER-1 has now supplied the first active usability
+consumer of that path: it recompiles the exact SCALE-STRESS-2A `Catd` and
+`Sigma_proj1_pullback_catd` declarations and Sigma/Pi proof rule against the
+descendant fibred-structure environment, then uses the compiled proof program
+to compare direct and nested displayed-functor classifiers while preserving
+runtime non-conversion. This is concrete mechanical-reuse evidence for the
+generic transfer architecture, not promotion of the remaining scale corpus
+or acquisition work.
 Detailed-Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
@@ -563,7 +570,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-STRESS-1B-PREP | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A, SCALE-MIXED-PHASE-1 | Close the exact equality/reflexivity/Nat dependencies, preserve intrinsic external linkage and constructor-local parameter plicity generically, and compile one isolated proposed J/Pi/Sigma/Nat profile with TypeScript and bounded Lambdapi evidence but no active registration |
 | SCALE-STRESS-1B | awaiting H-DTTLF-SCALE-STRESS-01 | SCALE-STRESS-1B-PREP, applicable semantic review | If approved, freeze the decision record and expose only the exact isolated root-development qualification profile plus its mandatory differential lane; do not claim complete inductive-command equivalence before SCALE-INDUCTIVE-1B or integrated batch reuse before SCALE-BATCH-1 |
 | SCALE-STRESS-2 | complete | SCALE-0D, SCALE-0E, SCALE-RUNTIME-DEPS-1, applicable semantic review | Completed representation-only qualification parent for internal/pullback Pi and Sigma telescope uncurrying; no semantic profile was activated |
-| SCALE-STRESS-2A | complete | H-DTTLF-SCALE-02, SCALE-0E, SCALE-MIXED-PHASE-1 | Pin and directly represent `Catd`, `Sigma_proj1_pullback_catd`, and the active Sigma/Pi uncurrying `unif_rule`; compile and execute it only in an isolated proof program, carry the exact initial checking runtime through declaration/proof-only mixed extension, and classify dependent generated-constraint typing without semantic promotion |
+| SCALE-STRESS-2A | complete; subsequently reused by FIBRED-BINDER-1 | H-DTTLF-SCALE-02, SCALE-0E, SCALE-MIXED-PHASE-1 | Pin and directly represent `Catd`, `Sigma_proj1_pullback_catd`, and the active Sigma/Pi uncurrying `unif_rule`; compile and execute it first in an isolated proof program, carry the exact initial checking runtime through declaration/proof-only mixed extension, and classify dependent generated-constraint typing without semantic promotion. The later root-only FIBRED-BINDER-1 consumer recompiles this exact source-ordered closure against a descendant declaration/runtime environment and obtains proof-only direct/nested displayed-functor classifier compatibility without changing the scale profile or runtime equality |
 | SCALE-PROOF-CONSTRAINTS-1 | complete | SCALE-STRESS-2A | Validate each generated problem under its checked prefix; reflect only a direct capture equality whose replacement uses strictly earlier captures as an acyclic transparent checking alias; record the exact aliases immutably; reject wrong order and all constraints that remain heterogeneous; remove the SCALE-STRESS-2A typing oracle |
 | SCALE-MIXED-RUNTIME-PREFIX-1 | complete | SCALE-STRESS-2A, SCALE-RUNTIME-DEPS-1 | Let a mixed source continuation consume an explicit distinct same-module `earlier-fragment` runtime, use its flattened immutable closure while checking intervening declarations/inductives/proofs and as the prefix of local runtime phases, and reject relation/order/raw-runtime ambiguity |
 | SCALE-STRESS-2B | complete | SCALE-STRESS-2A, SCALE-PROOF-CONSTRAINTS-1, SCALE-MIXED-RUNTIME-PREFIX-1, applicable semantic review | Completed owner-free, representation-only path through internal/pullback Pi object, component, fold and base-arrow action plus Sigma-total displayed-transfor uncurrying, without activating a semantic profile |
@@ -3106,3 +3113,13 @@ scope is affected.
   TypeScript closure was transferred through generic engines, not acquired by
   parsing and not added as new Lambdapi mathematics. SCALE-RETURN-1 remains
   unselected; bulk root/extension transfer remains deferred.
+- **2026-07-28 — SCALE-STRESS-2A reused by a direct displayed-binder
+  consumer.** FIBRED-BINDER-1 recompiles the exact source-ordered
+  `Catd`/`Sigma_proj1_pullback_catd` declarations and Sigma/Pi proof rule
+  against the descendant fibred-structure environment, then executes both
+  proof orientations for direct/nested classifier compatibility while
+  preserving runtime non-conversion. Two already-active point-computation
+  rules are transferred through the generic runtime engine for the runnable
+  composition consumer. This strengthens systematic-reuse evidence without
+  selecting SCALE-RETURN-1, parser acquisition, bulk root/extension transfer,
+  or a new active scale profile.

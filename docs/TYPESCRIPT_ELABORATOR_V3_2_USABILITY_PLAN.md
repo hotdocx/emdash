@@ -98,9 +98,13 @@ projection/pairing owners and eleven point/full/capped/beta rules, derives
 swap and diagonal transparently, transfers the closure through generic
 TypeScript mechanisms, and canonicalizes grouped-product reindexing in a
 root-only dependency-aware frontend without claiming a kernel equality. Its
-runnable demo has no production Lambdapi dependency. Direct `fd`/`nd`
-abstraction, profile promotion, and the wider structural boundaries remain
-separate.
+runnable demo has no production Lambdapi dependency. FIBRED-BINDER-1 now
+supplies the first bounded direct `displayedFunctorLambda`/`:^fd`-equivalent
+identity/eta/finite-composition consumer, retaining a hidden locally nameless
+base/fibre telescope and using the existing Sigma/Pi comparison only at proof
+time. Its demo and live oracle pass without any new Lambdapi mathematical
+owner/rule. General `fd`, `nd`, profile promotion, and the wider structural
+boundaries remain separate; FIBRED-TRANSFD-1 is next.
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
@@ -135,6 +139,8 @@ FIBRED-PRODUCT-1A implementation checkpoint:
 `d654545d00d5949f8da72345d2265808b15a7461`
 FIBRED-STRUCTURE-1A implementation checkpoint:
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`
+FIBRED-BINDER-1 implementation checkpoint:
+pending exact green checkpoint in the dedicated sub-plan
 
 ## Outcome And Corrected Priority
 
@@ -540,7 +546,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | delegated to active sub-plan; D-DTTLF-USABILITY-004/005/006 approved; comprehension/product/structure closures complete | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A | Continue dependency-aware general telescopes plus fibrewise-cartesian sibling structure and provisional displayed binders in `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`. FIBRED-CONTEXT-0A/0B are complete. FIBRED-COMPREHENSION-1A adds the audited missing `Sigma(F^*D) -> Sigma(D)` owner with exactly two projections, generic transfer, direct object/arrow consumer, further-family reindexing, and runnable demo. FIBRED-PRODUCT-1A retains the transparent existing semantic family, adds exactly two narrow existing-owner rules and no product owner, transfers a 23-prerequisite/two-new-rule closure through generic TypeScript mechanisms, and computes the first grouped-sibling fibre/transport demo. FIBRED-STRUCTURE-1A adds exactly the approved three fixed-base owners/eleven rules, necessary beta guards, generic six-declaration/15-rule transfer, derived swap/diagonal, next-cell evidence, and frontend-only canonical reindexing. FIBRED-BINDER-1 is next. Warning deltas remain diagnostic, every prospective primitive first receives an existing-construction/Foundation audit, and no approval adds generic total pullback, activates the deferred Sigma-introduction arrow action (`+10/+1`), claims raw whole-pullback conversion, completes direct `fd`/`nd` binders, or promotes a deployed/browser profile |
+| USABILITY-FIBRED-CONTINUATION | delegated to active sub-plan; D-DTTLF-USABILITY-004/005/006 approved; comprehension/product/structure and bounded direct-functor binder closures complete | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A | Continue dependency-aware general telescopes plus fibrewise-cartesian sibling structure and provisional displayed binders in `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`. FIBRED-CONTEXT-0A/0B are complete. FIBRED-COMPREHENSION-1A adds the audited missing `Sigma(F^*D) -> Sigma(D)` owner with exactly two projections, generic transfer, direct object/arrow consumer, further-family reindexing, and runnable demo. FIBRED-PRODUCT-1A retains the transparent existing semantic family, adds exactly two narrow existing-owner rules and no product owner, transfers a 23-prerequisite/two-new-rule closure through generic TypeScript mechanisms, and computes the first grouped-sibling fibre/transport demo. FIBRED-STRUCTURE-1A adds exactly the approved three fixed-base owners/eleven rules, necessary beta guards, generic six-declaration/15-rule transfer, derived swap/diagonal, next-cell evidence, and frontend-only canonical reindexing. FIBRED-BINDER-1 reuses existing authority for a root-only callback-once `:^fd`-equivalent identity/eta/finite-composition API, hidden two-slot evidence, proof-only direct/nested classifier compatibility, and runnable demo with zero new Lambdapi mathematics. FIBRED-TRANSFD-1 is next. Warning deltas remain diagnostic, every prospective primitive first receives an existing-construction/Foundation audit, and no approval adds generic total pullback, activates the deferred Sigma-introduction arrow action (`+10/+1`), claims raw whole-pullback conversion, completes general `fd`/`nd` binders, or promotes a deployed/browser profile |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2166,9 +2172,16 @@ authorizes and FIBRED-STRUCTURE-1A implements exactly three fixed-base
 displayed projection/pairing owners and eleven rules, a generic
 six-declaration/15-rule transfer, transparent swap/diagonal, and
 frontend-only canonical grouped-product reindexing. The raw pullback remains
-non-convertible and no `Product_catd`, direct `fd`/`nd` completion, kernel
-reindexing equality, total pullback, parser, bulk transfer, or deployed
-profile follows. Continue FIBRED-BINDER-1 under the dedicated sub-plan.
+non-convertible and no `Product_catd`, kernel reindexing equality, total
+pullback, parser, bulk transfer, or deployed profile follows.
+FIBRED-BINDER-1 is complete at its bounded existing-authority boundary:
+preserve its root-only callback-once direct `displayedFunctorLambda`,
+identity/eta/finite-chain lowering, hidden `k :^n K; a :^f E[k]` evidence,
+proof-only Sigma/Pi classifier compatibility, runtime non-conversion, and
+no-new-kernel-mathematics result. Continue FIBRED-TRANSFD-1 under the
+dedicated sub-plan by first freezing the exact `Transfd_cat`,
+`tdapp0_fapp0`, `tdapp1_int_cell`, next-hom, and SCALE-STRESS-2B3 contract.
+Do not infer general `fd`/`nd` completion from the bounded binder slice.
 
 Recover the actual descendant HEAD; named baselines and checkpoints are
 comparison/backtracking evidence, never permission to reset or rewrite.
@@ -2392,6 +2405,19 @@ CI obligations.
   root-only structural facade, transparent swap/diagonal, and runnable
   projection/pairing/reindexing demo. Canonical grouped reindexing remains a
   frontend Core choice and raw whole-pullback non-conversion is retained.
-  Direct `fd`/`nd` binders, `Product_catd`, universe/global structure, total
-  pullback, parsing/bulk transfer, and deployed-profile promotion remain
-  separate. FIBRED-BINDER-1 is the next dependency-ready row.
+  At that checkpoint direct `fd`/`nd` binders, `Product_catd`,
+  universe/global structure, total pullback, parsing/bulk transfer, and
+  deployed-profile promotion remained separate.
+- **2026-07-28 — First bounded direct displayed-functor binder completed.**
+  FIBRED-BINDER-1 adds the root-only callback-once
+  `displayedFunctorLambda` API for identity, eta, and finite rigid
+  displayed-functor chains, retains the hidden two-slot locally nameless
+  body, and lowers only through existing displayed identity and generic
+  category composition. It reuses the exact SCALE-STRESS-2A declaration and
+  proof-time unification closure plus two active point-computation rules.
+  Direct and nested classifiers remain runtime-distinct, while both proof
+  orientations solve. The runnable no-Lambdapi demo, bounded live oracle, and
+  754-test root gate pass with no active kernel edit or new mathematical
+  owner/rule. General `fd`, `nd`, grouped/sequential conformance, parsing,
+  bulk transfer, and deployed-profile promotion remain open.
+  FIBRED-TRANSFD-1 is next.

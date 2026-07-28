@@ -96,8 +96,17 @@ generic TypeScript engines, and exposes a root-only direct-TypeScript facade
 and runnable demo. Swap and diagonal remain transparent composites;
 grouped-product reindexing is canonicalized in the dependency-aware frontend,
 while raw `Pullback_catd(P(B,C),F)` remains a kernel non-conversion. No
-`Product_catd`, kernel reindexing equality, direct `fd`/`nd` binder, or
-deployed/browser profile is implied.
+`Product_catd`, kernel reindexing equality, or deployed/browser profile is
+implied. FIBRED-BINDER-1 has since completed the first bounded direct
+`displayedFunctorLambda`/`:^fd`-equivalent consumer. It accepts identity, eta,
+and finite closed displayed-functor chains; records the hidden
+`k :^n K; a :^f E[k]` body as immutable locally nameless evidence; lowers
+through existing `id_funcd` and `comp_fapp0`; and reuses the exact
+SCALE-STRESS-2A Sigma/Pi proof rule without collapsing runtime classifier
+presentations. Its direct-TypeScript demo, 754-test root gate, and bounded
+Lambdapi oracle pass with no `.lp` edit or new mathematical owner/rule.
+General `:^fd`, `:^nd`, dependent displayed codomains, and profile promotion
+remain open.
 The independent FIBRED-COMPREHENSION-0A/0B audit is also complete. A
 zero-owner Sigma-introduction composite is type correct but computationally
 stuck; a direct pair owner computes with `+2/0` warnings; and the selected
@@ -728,15 +737,23 @@ FIBRED-STRUCTURE-1A is complete: exactly three fixed-base projection/pairing
 owners, eleven point/full/capped/beta rules, a generic
 six-declaration/15-rule transfer, transparent swap/diagonal, frontend
 canonical grouped-product reindexing, and a runnable root-only demo. It adds
-no `Product_catd` head or kernel reindexing equality. Continue with
-FIBRED-BINDER-1, beginning from an executable direct-versus-nested classifier
-contract and stopping at a separate exact gate if active computation is
-missing. The green FIBRED-STRUCTURE-1A implementation checkpoint is
-`4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`. Do not infer any additional
-owner/rule, structural map, total
-pullback, direct `fd`/`nd` completion, or profile authority from the bounded
-approvals. The completed master plan's historical checkpoint authorization
-does not authorize unrelated Git mutations. For future exact gates in this
+no `Product_catd` head or kernel reindexing equality. FIBRED-BINDER-1 is also
+complete at its bounded existing-authority boundary: root-only direct
+`displayedFunctorLambda` handles identity, eta, and finite composition
+chains, retains the hidden two-slot telescope, and keeps direct/nested
+classifiers proof-compatible but runtime-distinct. Continue with
+FIBRED-TRANSFD-1 by auditing and freezing the exact `Transfd_cat`,
+`tdapp0_fapp0`, `tdapp1_int_cell`, next-hom, and SCALE-STRESS-2B3
+direct-versus-nested closure before implementing one `:^nd`-equivalent
+component/higher-cell consumer. If that row reaches a mathematical gate, the
+independently ready grouped/sequential consumer may proceed. The green
+FIBRED-STRUCTURE-1A implementation checkpoint is
+`4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
+FIBRED-BINDER-1 checkpoint is recorded in the dedicated sub-plan. Do not
+infer any additional owner/rule, structural map, total pullback, general
+`fd`/`nd` completion, or profile authority from the bounded work. The
+completed master plan's historical checkpoint authorization does not
+authorize unrelated Git mutations. For future exact gates in this
 fibred-context goal, the user permits a separately recorded delegated
 unattended approval if no immediate human response follows a presented
 bounded proposal. It must preserve the proposal's non-effects and reach a
