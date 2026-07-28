@@ -7,6 +7,12 @@ Depends-On:
 approved H-01/D-007 dependent-first semantics, approved
 H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003, and completed
 USABILITY-DEPENDENT-1A
+
+The completed qualified graduation from this plan is continued by
+[`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
+That successor targets the still-withheld general `:^fd` usability boundary;
+it does not rewrite this plan's completed history.
+
 Status: active implementation sub-plan; the corrected architectural direction
 is user-accepted, FIBRED-PLAN-0 and the read-only FIBRED-PRODUCT-0A authority
 probe are complete, FIBRED-CONTEXT-0A's dependency-analysis foundation is

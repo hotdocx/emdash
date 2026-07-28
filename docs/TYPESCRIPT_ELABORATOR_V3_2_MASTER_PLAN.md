@@ -3859,6 +3859,18 @@ FIBRED-GRADUATE-1 proposal checkpoint is
 `517e64e67a411412b0300f05f910b8eb25b5f395`; the green delegated-review
 checkpoint is `b08c022fcbb8c70ad4349052cbf52a2fdbf77a71`.
 
+The next proposed continuation is
+docs/TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md. Its executable
+DISPLAYED-BRACKET-0A proposal selects a generic first-order displayed
+contextual compiler and freezes root-only DISPLAYED-BRACKET-1A for finite
+independent sibling blocks. H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/
+D-DTTLF-USABILITY-009 is pending. It authorizes no new Lambdapi mathematics
+by itself and keeps genuine dependent-chain lowering, general :^nd
+coherence, Sigma arrow action, total-category comparison, parsing/bulk
+transfer, and browser promotion separate. Its eight focused tests, root
+821-test gate (775 active passes, 46 intentional skips), and unchanged
+19-judgment conformance gate pass.
+
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
 follows a presented bounded proposal. Preserve the proposal as

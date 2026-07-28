@@ -718,7 +718,9 @@ any Git mutation.
 ## Start The Long-Running Implementation
 
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
-`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`. It names the
+`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`. The completed
+fibred-context plan remains its authority and historical ledger. The
+successor prompt names the
 completed-profile and reviewed-continuation comparison checkpoints, preserves
 the non-authorizing USABILITY-GRADUATE-1 proposal together with its separate
 exact reviewed approval and withheld general dependent/displayed boundary,
@@ -803,7 +805,20 @@ and selects no successor automatically. Its nine focused tests, root
 19-judgment live conformance gate, and complete 41-file kernel CI all pass. The
 separate delegated review's nine focused tests, root 813-test gate (767
 active passes, 46 intentional skips), and repeated 19-judgment conformance
-gate also pass. The green
+gate also pass.
+The successor DISPLAYED-BRACKET-0A proposal is frozen and awaiting
+H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/D-DTTLF-USABILITY-009. It selects a
+generic first-order displayed contextual compiler over extending the rigid
+body recognizer, compiling only through total contexts, or adding a kernel
+bracket owner. The first authorized-on-approval row would support finite
+independent sibling blocks through one typed-pair IR node and existing
+identity/composition/projection/pairing/weakening/reindexing authority.
+Genuine dependent chains and general `:^nd` coherence remain separate
+first-class rows. No new Lambdapi mathematics, browser profile, parser, bulk
+transfer, or wider Git action is proposed. Its eight focused tests, root
+821-test gate (775 active passes, 46 intentional skips), and unchanged
+19-judgment conformance gate pass.
+The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
 FIBRED-BINDER-1 implementation checkpoint is
