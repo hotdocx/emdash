@@ -4037,6 +4037,8 @@ skips, zero failures). The exact green proposal checkpoint is
 aba1c957afbeb18f2bfe25add56bfa6aacfa4dda.
 The separate explicit-human review adds nine focused tests; its aggregate
 923-test root gate passes (876 active, 47 intentional skips, zero failures).
+Its exact green local checkpoint is
+2c81dc4f2c4860f3a12f9371139b795906efeca9.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
