@@ -4003,7 +4003,8 @@ owner. Varying `F x`, nested `H[e](G[d])`, and fixed `F a` compile, with the
 fixed argument derived through terminal weakening. The dependent-target
 final-runtime wiring defect is mechanically repaired. This closes neither
 arbitrary mixed-domain evaluation nor a genuine dependency chain; its
-proposal-only DISPLAYED-CHAIN-0A successor is now frozen and awaits D-012.
+proposal-only DISPLAYED-CHAIN-0A successor is frozen and has since received
+the separate explicit D-012 approval described below.
 Aggregate validation passes 904 TypeScript tests (857 active, 47
 intentional skips), 19/19 frozen conformance judgments, all 41 kernel health
 targets, and 1,714 classified checks with zero failures.
@@ -4023,12 +4024,19 @@ existing-signature/two existing-rule transfer prerequisites from that new
 semantic delta, records a +8 critical-pair/+0 replaceable-variable warning
 delta, and selects a recursive `fibred-displayed-chain-1` consumer without a
 new AST, checker, parser, intrinsic Core owner, or total-category
-equivalence. Do not implement it before the separate exact
-H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision. The
+equivalence. The separate exact
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision is now
+explicitly approved. Its immutable review authorizes only
+DISPLAYED-CHAIN-1A: the frozen one-owner/six-rule kernel closure, exact
+generic TypeScript transfer prerequisites and delta, and root-only recursive
+consumer. It preserves every recorded non-effect and the checkpoint-only Git
+boundary. The
 proposal's ten focused tests, root typecheck/lint, bounded active-kernel
 check, and aggregate 914-test root gate pass (867 active, 47 intentional
 skips, zero failures). The exact green proposal checkpoint is
 aba1c957afbeb18f2bfe25add56bfa6aacfa4dda.
+The separate explicit-human review adds nine focused tests; its aggregate
+923-test root gate passes (876 active, 47 intentional skips, zero failures).
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

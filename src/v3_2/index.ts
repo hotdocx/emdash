@@ -86,6 +86,7 @@ export * from './categorical_displayed_evaluation_audit';
 export * from './categorical_displayed_evaluation_owner_proposal';
 export * from './categorical_displayed_evaluation_owner_review';
 export * from './categorical_displayed_chain_proposal';
+export * from './categorical_displayed_chain_review';
 export * from './categorical_usability_graduation_proposal';
 export * from './categorical_usability_graduation_review';
 export * from './categorical_dependent_usability_proposal';

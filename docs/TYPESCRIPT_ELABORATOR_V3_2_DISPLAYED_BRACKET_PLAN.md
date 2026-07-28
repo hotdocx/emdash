@@ -499,7 +499,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal checkpointed with 0B at `7df9993f06fc55e2f34b09094b87987ef19cecba`; approved exactly as proposed at separate delegated review checkpoint `1251e5c666d2be2ee914d0d122848a259f578da3` with human supersession | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
-| DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; owner-position and warning probes pass; awaiting separate H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 review; no semantic continuation authorized | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
+| DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review recorded; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
+| DISPLAYED-CHAIN-1A | approved exact implementation in progress | reviewed DISPLAYED-CHAIN-0A/D-012 | Promote exactly one `sigma_functord_sec` owner and six measured runtime rules; transfer three existing-signature/two existing-rule prerequisites plus the semantic delta through generic engines; add only the root-only `fibred-displayed-chain-1` profile and recursive `displayedDependentContextLambda` consumer; qualify the frozen object/arrow/reindexing/negative/non-collapse corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1620,12 +1621,27 @@ frontend solution or second elaborator is missing; the blocker is a bounded,
 owner-position-tested semantic bridge.
 
 The deeply frozen executable proposal is
-`src/v3_2/categorical_displayed_chain_proposal.ts`. It is
-non-self-authorizing and awaits the separate exact
-`H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012` decision.
+`src/v3_2/categorical_displayed_chain_proposal.ts`. It remains
+non-self-authorizing and unchanged. The separate immutable
+`src/v3_2/categorical_displayed_chain_review.ts` records the user's exact
+`H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012` approval and
+authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-28 — D-DTTLF-USABILITY-012 explicitly approved.** The user
+  approved the frozen DISPLAYED-CHAIN-0A proposal exactly as proposed. A
+  separate deeply immutable review snapshots the unchanged pending proposal
+  and authorizes only DISPLAYED-CHAIN-1A: one `sigma_functord_sec` owner,
+  six measured runtime rules, three existing-signature/two existing-rule
+  transfer prerequisites through generic engines, and the root-only
+  `fibred-displayed-chain-1` recursive consumer. It retains the +8
+  diagnostic critical-pair/+0 replaceable-variable comparison, exact
+  positive/negative corpus, and all exclusions concerning RawExpr, a second
+  checker, parsing, total-category equivalence, arbitrary mixed-domain
+  coercion, general `:^nd`, browser promotion, acquisition, and broader Git
+  authority. Nine focused review tests and the aggregate 923-test root gate
+  pass (876 active, 47 intentional skips, zero failures).
 - **2026-07-28 — DISPLAYED-CHAIN-0A executable proposal frozen.** The
   active-authority comparison establishes that sequential Sigma totals,
   repeated `sigma_map_func`/`sigma_pullback_total_func` substitution, and
@@ -1874,7 +1890,9 @@ mixed-domain coercion, or constructor-specific identity/composition/
 naturality rule.
 
 Preserve the completed, deeply immutable, executable, non-self-authorizing
-DISPLAYED-CHAIN-0A proposal. It selects complementary sequential Sigma
+DISPLAYED-CHAIN-0A proposal and its separate explicit-human D-012 review.
+The review authorizes only DISPLAYED-CHAIN-1A. The proposal selects
+complementary sequential Sigma
 context layout, recursive pullback/`sigma_map_func`/pullback-total
 substitution, and direct displayed terms. Its exact candidate is one new
 `sigma_functord_sec` owner plus six owner-position-tested runtime rules,
@@ -1883,11 +1901,16 @@ root-only recursive `fibred-displayed-chain-1` consumer. Preserve the exact
 1,171 -> 1,179 warning comparison, zero strict-LHS findings, object/arrow/
 reindexing/recursive/non-collapse corpus, and every non-effect.
 
-Do not implement that semantic continuation or add an active kernel owner or
-rule before a separate exact
-H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision. Do not
-assume a generic total-category pullback/equivalence, raw product-reindex
-equality, arbitrary mixed variance, or general :^nd coherence.
+The separate exact
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision is now
+explicitly approved. Implement only the frozen bounded continuation: promote
+the one owner and six rules at their probed owner positions; add permanent
+object/arrow/reindexing/negative/non-collapse checks; satisfy the warning,
+strict-LHS, catalog, health, examples, and CI SOP; transfer the exact
+prerequisite and semantic closure through generic TypeScript engines; and add
+only the root-only recursive consumer. Do not assume a generic total-category
+pullback/equivalence, raw product-reindex equality, arbitrary mixed variance,
+or general :^nd coherence.
 
 For a future exact bounded gate in this goal, if no immediate human response
 follows presentation of its frozen proposal, the user's standing delegation
