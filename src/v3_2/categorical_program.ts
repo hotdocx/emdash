@@ -65,6 +65,17 @@ import {
     coreCategoricalFibredTransfdCoreName
 } from './categorical_fibred_transfd_transfer';
 import {
+    CoreCategoricalContextDependencyPlan,
+    coreCategoricalClosedContextClassifier,
+    coreCategoricalContextSlotReference,
+    coreCategoricalDisplayedContextClassifier,
+    planCoreCategoricalContextDependencies
+} from './categorical_context_dependencies';
+import {
+    CORE_CATEGORICAL_GROUPED_SEQUENTIAL_CONTRACT,
+    validateCoreCategoricalGroupedSequentialContract
+} from './categorical_grouped_sequential_contract';
+import {
     CORE_CATEGORICAL_STRUCTURAL_PREREQUISITES,
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
     CoreCategoricalStructuralPrerequisiteId,
@@ -150,10 +161,15 @@ export const CORE_CATEGORICAL_FIBRED_BINDER_PROGRAM_REVISION =
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_PROGRAM_REVISION =
     'FIBRED-TRANSFD-1-CATEGORICAL-PROGRAM-1' as const;
 
+export const CORE_CATEGORICAL_GROUPED_SEQUENTIAL_PROGRAM_REVISION =
+    'FIBRED-GROUPED-SEQUENTIAL-1-CATEGORICAL-PROGRAM-1' as const;
+
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
 const CORE_CATEGORICAL_DISPLAYED_FAMILY =
     Symbol('CoreCategoricalProgramDisplayedFamily');
+const CORE_CATEGORICAL_GROUPED_SEQUENTIAL_CONTEXT =
+    Symbol('CoreCategoricalGroupedSequentialContext');
 
 export interface CoreCategoricalCategory {
     readonly [CORE_CATEGORICAL_CATEGORY]: true;
@@ -187,6 +203,86 @@ extends CoreCategoricalDisplayedFamily {
     };
 }
 
+export interface CoreCategoricalGroupedSequentialBinding {
+    readonly name: string;
+    readonly family: CoreCategoricalDisplayedFamily;
+}
+
+export interface CoreCategoricalGroupedSequentialExtension {
+    readonly position: number;
+    readonly name: string;
+    readonly originalFamily: CoreCategoricalDisplayedFamily;
+    readonly effectiveFamily: CoreCategoricalDisplayedFamily;
+    readonly sourceCategory: CoreCategoricalCategory;
+    readonly totalCategory: CoreCategoricalCategory;
+    readonly projectionToPrevious: CoreCategoricalTerm;
+    readonly projectionToBase: CoreCategoricalTerm;
+    readonly pullbackPastPositions: readonly number[];
+    readonly presentation:
+        | 'direct-sigma-extension'
+        | 'pullback-then-sigma-extension';
+}
+
+export interface CoreCategoricalGroupedSequentialContext {
+    readonly [CORE_CATEGORICAL_GROUPED_SEQUENTIAL_CONTEXT]: true;
+    readonly revision:
+        typeof CORE_CATEGORICAL_GROUPED_SEQUENTIAL_PROGRAM_REVISION;
+    readonly baseName: string;
+    readonly baseCategory: CoreCategoricalCategory;
+    readonly siblings: readonly {
+        readonly position: number;
+        readonly name: string;
+        readonly family: CoreCategoricalDisplayedFamily;
+    }[];
+    readonly plan: CoreCategoricalContextDependencyPlan;
+    readonly sequential: {
+        readonly syntax: string;
+        readonly extensions:
+            readonly CoreCategoricalGroupedSequentialExtension[];
+        readonly totalCategory: CoreCategoricalCategory;
+    };
+    readonly grouped: {
+        readonly syntax: string;
+        readonly association: 'left';
+        readonly family: CoreCategoricalDisplayedFamily;
+        readonly totalCategory: CoreCategoricalCategory;
+    };
+    readonly boundary: {
+        readonly newLambdapiOwnerOrRule: false;
+        readonly totalCategoryEqualityClaimed: false;
+        readonly totalCategoryEquivalenceClaimed: false;
+        readonly arrowLevelTotalComparisonClaimed: false;
+    };
+}
+
+interface InternalCoreCategoricalGroupedSequentialContext
+extends CoreCategoricalGroupedSequentialContext {
+    readonly programIdentity: symbol;
+}
+
+export interface CoreCategoricalGroupedSequentialComparison {
+    readonly id: string;
+    readonly status: 'equal';
+    readonly steps: number;
+    readonly ruleIds: readonly string[];
+}
+
+export interface CoreCategoricalGroupedSequentialObject {
+    readonly context: CoreCategoricalGroupedSequentialContext;
+    readonly basePoint: CoreCategoricalTerm;
+    readonly siblingValues: readonly CoreCategoricalTerm[];
+    readonly sequentialPrefixObjects: readonly CoreCategoricalTerm[];
+    readonly sequentialObject: CoreCategoricalTerm;
+    readonly groupedTuple: CoreCategoricalTerm;
+    readonly groupedFibreObject: CoreCategoricalTerm;
+    readonly groupedObject: CoreCategoricalTerm;
+    readonly sequentialFibreComparisons:
+        readonly CoreCategoricalGroupedSequentialComparison[];
+    readonly groupedFibreComparison:
+        CoreCategoricalGroupedSequentialComparison;
+    readonly totalCategoryCompared: false;
+}
+
 export interface CoreCategoricalSourceSite {
     readonly file?: string;
     readonly line: number;
@@ -212,7 +308,9 @@ export interface CoreCategoricalProgramOptions {
      * proof-only direct/nested classifier comparison.
      * The fibred-transfd profile adds the coherent direct `:^nd` eta
      * abstraction, fibre components, point components, and the active
-     * transported higher cell.
+     * transported higher cell. The grouped-sequential profile additionally
+     * connects the generic dependency graph to finite sequential
+     * Sigma/pullback and grouped transparent-product context presentations.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -221,7 +319,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-product-1a'
         | 'fibred-structure-1a'
         | 'fibred-binder-1'
-        | 'fibred-transfd-1';
+        | 'fibred-transfd-1'
+        | 'fibred-grouped-sequential-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -253,6 +352,8 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_FIBRED_STRUCTURE'
     | 'UNAVAILABLE_FIBRED_BINDER'
     | 'UNAVAILABLE_FIBRED_TRANSFD'
+    | 'UNAVAILABLE_GROUPED_SEQUENTIAL'
+    | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
 
 export class CoreCategoricalProgramError extends Error {
@@ -371,6 +472,9 @@ categoricalLabels[
 categoricalLabels[
     CORE_DIRECTED_1A_PRIMITIVE_NAMES['sigma-category']
 ] = 'emdash.categorical.sigma-category';
+categoricalLabels[
+    CORE_DIRECTED_1B_PRIMITIVE_NAMES['sigma-first-projection']
+] = 'emdash.categorical.sigma-first-projection';
 categoricalLabels[
     CORE_DIRECTED_1B_PRIMITIVE_NAMES['dependent-pair']
 ] = 'emdash.categorical.dependent-pair';
@@ -589,6 +693,29 @@ const collectDependentPrerequisites = (
     return Object.freeze(result);
 };
 
+const groupedSequentialComparison = (
+    id: string,
+    result: CoreLfComparisonResult
+): CoreCategoricalGroupedSequentialComparison => {
+    if (result.status !== 'equal') {
+        throw new Error(
+            `Grouped/sequential comparison '${id}' did not close`
+        );
+    }
+    return Object.freeze({
+        id,
+        status: 'equal' as const,
+        steps: result.steps,
+        ruleIds: Object.freeze(
+            result.trace.flatMap(entry =>
+                entry.reduction.kind === 'runtime'
+                    ? [entry.reduction.ruleId]
+                    : []
+            )
+        )
+    });
+};
+
 /**
  * End-user construction scope for the reviewed categorical programs.
  *
@@ -611,6 +738,7 @@ export class CoreCategoricalProgram {
     private readonly fibredStructureEnabled: boolean;
     private readonly fibredBinderEnabled: boolean;
     private readonly fibredTransfdEnabled: boolean;
+    private readonly groupedSequentialEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -624,21 +752,31 @@ export class CoreCategoricalProgram {
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
-            profile === 'fibred-transfd-1';
+            profile === 'fibred-transfd-1' ||
+            profile === 'fibred-grouped-sequential-1';
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
-            profile === 'fibred-transfd-1';
+            profile === 'fibred-transfd-1' ||
+            profile === 'fibred-grouped-sequential-1';
         this.fibredStructureEnabled =
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
-            profile === 'fibred-transfd-1';
+            profile === 'fibred-transfd-1' ||
+            profile === 'fibred-grouped-sequential-1';
         this.fibredBinderEnabled =
             profile === 'fibred-binder-1' ||
-            profile === 'fibred-transfd-1';
+            profile === 'fibred-transfd-1' ||
+            profile === 'fibred-grouped-sequential-1';
         this.fibredTransfdEnabled =
-            profile === 'fibred-transfd-1';
+            profile === 'fibred-transfd-1' ||
+            profile === 'fibred-grouped-sequential-1';
+        this.groupedSequentialEnabled =
+            profile === 'fibred-grouped-sequential-1';
+        if (this.groupedSequentialEnabled) {
+            validateCoreCategoricalGroupedSequentialContract();
+        }
         this.dependent = this.fibredTransfdEnabled
             ? compileCoreCategoricalFibredTransfdTransfer()
             : this.fibredBinderEnabled
@@ -828,6 +966,42 @@ export class CoreCategoricalProgram {
                 'root profile'
             );
         }
+    }
+
+    private requireGroupedSequential(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.groupedSequentialEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_GROUPED_SEQUENTIAL',
+                nodeProvenance,
+                'Dependency-directed sequential/grouped contexts are ' +
+                'available only in the explicit ' +
+                "'fibred-grouped-sequential-1' root profile"
+            );
+        }
+    }
+
+    private requireGroupedSequentialContext(
+        value: CoreCategoricalGroupedSequentialContext,
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalGroupedSequentialContext {
+        if (
+            typeof value !== 'object' ||
+            value === null ||
+            (value as InternalCoreCategoricalGroupedSequentialContext)[
+                CORE_CATEGORICAL_GROUPED_SEQUENTIAL_CONTEXT
+            ] !== true ||
+            (value as InternalCoreCategoricalGroupedSequentialContext)
+                .programIdentity !== this.programIdentity
+        ) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_GROUPED_SEQUENTIAL_CONTEXT',
+                nodeProvenance,
+                'Grouped/sequential context belongs to another program'
+            );
+        }
+        return value as InternalCoreCategoricalGroupedSequentialContext;
     }
 
     private makeTerm(
@@ -1281,6 +1455,34 @@ export class CoreCategoricalProgram {
         );
     }
 
+    private productObjectPairExpression(
+        leftCategory: KernelExpression,
+        rightCategory: KernelExpression,
+        left: KernelExpression,
+        right: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalStructuralCoreName('product-pair'),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: leftCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: rightCategory
+                },
+                { plicity: 'explicit', value: left },
+                { plicity: 'explicit', value: right }
+            ],
+            nodeProvenance
+        );
+    }
+
     private requireObjectTerm(
         value: CoreCategoricalTerm,
         nodeProvenance: Provenance,
@@ -1424,6 +1626,52 @@ export class CoreCategoricalProgram {
                 `${detail} belongs to the wrong category`
             );
         }
+    }
+
+    private convertObjectToCategory(
+        value: CoreCategoricalTerm,
+        expectedCategory: KernelExpression,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly term: CoreCategoricalTerm;
+        readonly comparison: CoreLfComparisonResult;
+    } {
+        const actual = this.requireObjectTerm(
+            value,
+            nodeProvenance,
+            detail
+        );
+        const runtime = 'composedRuntime' in this.dependent
+            ? this.dependent.composedRuntime
+            : this.dependent.structural.composedRuntime;
+        const comparison = coreLfDefinitionalCompare(
+            this.environment,
+            actual.category,
+            expectedCategory,
+            4_000,
+            undefined,
+            runtime
+        );
+        if (comparison.status !== 'equal') {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_CATEGORY_OBJECT',
+                nodeProvenance,
+                `${detail} belongs to a category that does not convert ` +
+                'to the dependency-directed expected fibre'
+            );
+        }
+        return Object.freeze({
+            term: this.makeTerm(
+                actual.expression,
+                {
+                    tag: 'object',
+                    category: expectedCategory
+                },
+                nodeProvenance
+            ),
+            comparison
+        });
     }
 
     private assume(
@@ -2041,6 +2289,507 @@ export class CoreCategoricalProgram {
             `Sigma(${family.label})`,
             this.totalCategoryExpression(family, nodeProvenance)
         );
+    }
+
+    sigmaProjection(
+        familyValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'Sigma first projection',
+            source
+        );
+        this.requireComprehension(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        return this.makeTerm(
+            kernelCall(
+                kernelFree(
+                    CORE_DIRECTED_1B_PRIMITIVE_NAMES[
+                        'sigma-first-projection'
+                    ],
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: family.baseCategory.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: family.expression
+                    }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'functor',
+                sourceCategory:
+                    this.totalCategoryExpression(
+                        family,
+                        nodeProvenance
+                    ),
+                targetCategory: family.baseCategory.expression
+            },
+            nodeProvenance
+        );
+    }
+
+    groupedSequentialContext(
+        baseName: string,
+        baseValue: CoreCategoricalCategory,
+        bindingValues:
+            readonly CoreCategoricalGroupedSequentialBinding[],
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalGroupedSequentialContext {
+        const nodeProvenance = this.at(
+            'dependency-directed grouped/sequential context',
+            source
+        );
+        this.requireGroupedSequential(nodeProvenance);
+        if (
+            bindingValues.length <
+                CORE_CATEGORICAL_GROUPED_SEQUENTIAL_CONTRACT
+                    .input.minimumSiblingCount
+        ) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_GROUPED_SEQUENTIAL_CONTEXT',
+                nodeProvenance,
+                'A grouped/sequential context requires at least two ' +
+                'displayed sibling bindings'
+            );
+        }
+        const base = this.requireCategory(
+            baseValue,
+            nodeProvenance
+        );
+        const names = new Set<string>([baseName]);
+        const siblings = bindingValues.map((binding, offset) => {
+            if (names.has(binding.name)) {
+                throw new CoreCategoricalProgramError(
+                    'INVALID_GROUPED_SEQUENTIAL_CONTEXT',
+                    nodeProvenance,
+                    `Duplicate contextual binding name '${binding.name}'`
+                );
+            }
+            names.add(binding.name);
+            const family = this.requireDisplayedFamily(
+                binding.family,
+                nodeProvenance
+            );
+            if (!kernelExpressionEquals(
+                family.baseCategory.expression,
+                base.expression
+            )) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    `Displayed sibling '${binding.name}' is not over ` +
+                    `base category '${base.label}'`
+                );
+            }
+            return Object.freeze({
+                position: offset + 1,
+                name: binding.name,
+                family
+            });
+        });
+        const plan = planCoreCategoricalContextDependencies({
+            slots: [
+                {
+                    name: baseName,
+                    classifier:
+                        coreCategoricalClosedContextClassifier(
+                            {
+                                tag: 'object',
+                                category: base.expression
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                },
+                ...siblings.map(sibling => ({
+                    name: sibling.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            base.expression,
+                            sibling.family.expression,
+                            [
+                                coreCategoricalContextSlotReference(
+                                    sibling.position - 1,
+                                    nodeProvenance
+                                )
+                            ],
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory: base.expression,
+                                family: sibling.family.expression,
+                                index: sibling.position - 1
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                }))
+            ],
+            siblingGroups: [{
+                positions: siblings.map(sibling => sibling.position),
+                provenance: nodeProvenance
+            }]
+        });
+        if (
+            plan.groupedProducts.length !== 1 ||
+            plan.groupedProducts[0].positions.length !== siblings.length
+        ) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_GROUPED_SEQUENTIAL_CONTEXT',
+                nodeProvenance,
+                'Dependency planner did not retain the requested sibling ' +
+                'block'
+            );
+        }
+
+        const extensions:
+            CoreCategoricalGroupedSequentialExtension[] = [];
+        let currentCategory =
+            baseValue;
+        let projectionToBase: CoreCategoricalTerm | undefined;
+        for (const sibling of siblings) {
+            const intent = plan.sequential[sibling.position];
+            if (intent.kind !== 'displayed-sigma-extension') {
+                throw new CoreCategoricalProgramError(
+                    'INVALID_GROUPED_SEQUENTIAL_CONTEXT',
+                    nodeProvenance,
+                    `Dependency planner did not emit a Sigma extension ` +
+                    `for '${sibling.name}'`
+                );
+            }
+            const effectiveFamily = sibling.position === 1
+                ? sibling.family
+                : this.pullbackFamily(
+                    sibling.family,
+                    projectionToBase as CoreCategoricalTerm,
+                    source
+                ) as InternalCoreCategoricalDisplayedFamily;
+            const totalCategory = this.totalCategory(
+                effectiveFamily,
+                source
+            );
+            const projectionToPrevious = this.sigmaProjection(
+                effectiveFamily,
+                source
+            );
+            const nextProjectionToBase = sibling.position === 1
+                ? projectionToPrevious
+                : this.composeFunctors(
+                    projectionToBase as CoreCategoricalTerm,
+                    projectionToPrevious,
+                    source
+                );
+            extensions.push(Object.freeze({
+                position: sibling.position,
+                name: sibling.name,
+                originalFamily: sibling.family,
+                effectiveFamily,
+                sourceCategory: currentCategory,
+                totalCategory,
+                projectionToPrevious,
+                projectionToBase: nextProjectionToBase,
+                pullbackPastPositions: Object.freeze([
+                    ...intent.pullbackPastPositions
+                ]),
+                presentation: intent.presentation
+            }));
+            currentCategory = totalCategory;
+            projectionToBase = nextProjectionToBase;
+        }
+
+        let groupedFamily:
+            CoreCategoricalDisplayedFamily = siblings[0].family;
+        for (const sibling of siblings.slice(1)) {
+            groupedFamily = this.displayedProduct(
+                groupedFamily,
+                sibling.family,
+                source
+            );
+        }
+        const groupedTotal = this.totalCategory(
+            groupedFamily,
+            source
+        );
+        const sequentialSyntax = [
+            `${baseName} : ${base.label}`,
+            ...siblings.map(sibling =>
+                `${sibling.name} : ${sibling.family.label}[${baseName}]`
+            )
+        ].join('; ');
+        const groupedNames =
+            siblings.map(sibling => sibling.name).join(',');
+        const groupedFamilies =
+            siblings.map(sibling => sibling.family.label).join(',');
+
+        return Object.freeze({
+            [CORE_CATEGORICAL_GROUPED_SEQUENTIAL_CONTEXT]:
+                true as const,
+            revision:
+                CORE_CATEGORICAL_GROUPED_SEQUENTIAL_PROGRAM_REVISION,
+            programIdentity: this.programIdentity,
+            baseName,
+            baseCategory: baseValue,
+            siblings: Object.freeze(
+                siblings.map(sibling => Object.freeze({
+                    position: sibling.position,
+                    name: sibling.name,
+                    family:
+                        sibling.family as
+                            CoreCategoricalDisplayedFamily
+                }))
+            ),
+            plan,
+            sequential: Object.freeze({
+                syntax: sequentialSyntax,
+                extensions: Object.freeze(extensions),
+                totalCategory:
+                    extensions[extensions.length - 1].totalCategory
+            }),
+            grouped: Object.freeze({
+                syntax:
+                    `${baseName} : ${base.label}; ` +
+                    `(${groupedNames}) : ` +
+                    `P(${groupedFamilies})[${baseName}]`,
+                association: 'left' as const,
+                family: groupedFamily,
+                totalCategory: groupedTotal
+            }),
+            boundary: Object.freeze({
+                newLambdapiOwnerOrRule: false as const,
+                totalCategoryEqualityClaimed: false as const,
+                totalCategoryEquivalenceClaimed: false as const,
+                arrowLevelTotalComparisonClaimed: false as const
+            })
+        });
+    }
+
+    groupedSequentialObject(
+        contextValue: CoreCategoricalGroupedSequentialContext,
+        basePointValue: CoreCategoricalTerm,
+        siblingValues: readonly CoreCategoricalTerm[],
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalGroupedSequentialObject {
+        const nodeProvenance = this.at(
+            'grouped/sequential context object',
+            source
+        );
+        this.requireGroupedSequential(nodeProvenance);
+        const context = this.requireGroupedSequentialContext(
+            contextValue,
+            nodeProvenance
+        );
+        if (siblingValues.length !== context.siblings.length) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_GROUPED_SEQUENTIAL_CONTEXT',
+                nodeProvenance,
+                `Expected ${context.siblings.length} sibling values but ` +
+                `received ${siblingValues.length}`
+            );
+        }
+        const base = this.requireCategory(
+            context.baseCategory,
+            nodeProvenance
+        );
+        const convertedBase = this.convertObjectToCategory(
+            basePointValue,
+            base.expression,
+            nodeProvenance,
+            'Grouped/sequential base point'
+        ).term;
+        const basePoint = this.requireObjectTerm(
+            convertedBase,
+            nodeProvenance,
+            'Grouped/sequential base point'
+        );
+
+        const originalComponents = siblingValues.map(
+            (value, index) => {
+                const family = this.requireDisplayedFamily(
+                    context.siblings[index].family,
+                    nodeProvenance
+                );
+                const expected = this.fibreCategoryExpression(
+                    family,
+                    basePoint.expression,
+                    nodeProvenance
+                );
+                return this.convertObjectToCategory(
+                    value,
+                    expected,
+                    nodeProvenance,
+                    `Sibling value '${context.siblings[index].name}'`
+                ).term;
+            }
+        );
+
+        const sequentialPrefixObjects: CoreCategoricalTerm[] = [];
+        const sequentialFibreComparisons:
+            CoreCategoricalGroupedSequentialComparison[] = [];
+        let sequentialPoint = convertedBase;
+        for (
+            let index = 0;
+            index < context.sequential.extensions.length;
+            index += 1
+        ) {
+            const extension =
+                context.sequential.extensions[index];
+            const family = this.requireDisplayedFamily(
+                extension.effectiveFamily,
+                nodeProvenance
+            );
+            const point = this.requireObjectTerm(
+                sequentialPoint,
+                nodeProvenance,
+                'Sequential prefix object'
+            );
+            const expectedFibre = this.fibreCategoryExpression(
+                family,
+                point.expression,
+                nodeProvenance
+            );
+            const converted = this.convertObjectToCategory(
+                originalComponents[index],
+                expectedFibre,
+                nodeProvenance,
+                `Sequential component '${extension.name}'`
+            );
+            sequentialFibreComparisons.push(
+                groupedSequentialComparison(
+                    `sequential-${extension.name}-fibre`,
+                    converted.comparison
+                )
+            );
+            const total = this.requireCategory(
+                extension.totalCategory,
+                nodeProvenance
+            );
+            sequentialPoint = this.makeTerm(
+                this.dependentPairExpression(
+                    family,
+                    point.expression,
+                    this.requireObjectTerm(
+                        converted.term,
+                        nodeProvenance,
+                        `Sequential component '${extension.name}'`
+                    ).expression,
+                    nodeProvenance
+                ),
+                {
+                    tag: 'object',
+                    category: total.expression
+                },
+                nodeProvenance
+            );
+            sequentialPrefixObjects.push(sequentialPoint);
+        }
+
+        let groupedTuple = originalComponents[0];
+        let groupedTupleInspection = this.requireObjectTerm(
+            groupedTuple,
+            nodeProvenance,
+            'First grouped component'
+        );
+        for (
+            let index = 1;
+            index < originalComponents.length;
+            index += 1
+        ) {
+            const right = this.requireObjectTerm(
+                originalComponents[index],
+                nodeProvenance,
+                `Grouped component '${context.siblings[index].name}'`
+            );
+            const productCategory = this.productCategoryExpression(
+                groupedTupleInspection.category,
+                right.category,
+                nodeProvenance
+            );
+            groupedTuple = this.makeTerm(
+                this.productObjectPairExpression(
+                    groupedTupleInspection.category,
+                    right.category,
+                    groupedTupleInspection.expression,
+                    right.expression,
+                    nodeProvenance
+                ),
+                {
+                    tag: 'object',
+                    category: productCategory
+                },
+                nodeProvenance
+            );
+            groupedTupleInspection = this.requireObjectTerm(
+                groupedTuple,
+                nodeProvenance,
+                'Accumulated grouped tuple'
+            );
+        }
+        const groupedFamily = this.requireDisplayedFamily(
+            context.grouped.family,
+            nodeProvenance
+        );
+        const groupedFibre = this.fibreCategoryExpression(
+            groupedFamily,
+            basePoint.expression,
+            nodeProvenance
+        );
+        const convertedGrouped = this.convertObjectToCategory(
+            groupedTuple,
+            groupedFibre,
+            nodeProvenance,
+            'Grouped product tuple'
+        );
+        const groupedTotal = this.requireCategory(
+            context.grouped.totalCategory,
+            nodeProvenance
+        );
+        const groupedObject = this.makeTerm(
+            this.dependentPairExpression(
+                groupedFamily,
+                basePoint.expression,
+                this.requireObjectTerm(
+                    convertedGrouped.term,
+                    nodeProvenance,
+                    'Grouped product tuple'
+                ).expression,
+                nodeProvenance
+            ),
+            {
+                tag: 'object',
+                category: groupedTotal.expression
+            },
+            nodeProvenance
+        );
+
+        return Object.freeze({
+            context: contextValue,
+            basePoint: convertedBase,
+            siblingValues: Object.freeze([...originalComponents]),
+            sequentialPrefixObjects:
+                Object.freeze(sequentialPrefixObjects),
+            sequentialObject:
+                sequentialPrefixObjects[
+                    sequentialPrefixObjects.length - 1
+                ],
+            groupedTuple,
+            groupedFibreObject: convertedGrouped.term,
+            groupedObject,
+            sequentialFibreComparisons:
+                Object.freeze(sequentialFibreComparisons),
+            groupedFibreComparison: groupedSequentialComparison(
+                'grouped-product-fibre',
+                convertedGrouped.comparison
+            ),
+            totalCategoryCompared: false as const
+        });
     }
 
     pullbackFamily(
@@ -2921,6 +3670,78 @@ export class CoreCategoricalProgram {
             leftValue,
             rightValue,
             source
+        );
+    }
+
+    composeFunctors(
+        outerValue: CoreCategoricalTerm,
+        innerValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'ordinary functor composition',
+            source
+        );
+        this.requireComprehension(nodeProvenance);
+        const outer = this.requireFunctorTerm(
+            outerValue,
+            nodeProvenance,
+            'Outer composition operand'
+        );
+        const inner = this.requireFunctorTerm(
+            innerValue,
+            nodeProvenance,
+            'Inner composition operand'
+        );
+        if (!kernelExpressionEquals(
+            inner.targetCategory,
+            outer.sourceCategory
+        )) {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_FUNCTOR',
+                nodeProvenance,
+                'Functor composition operands have incompatible middle ' +
+                'categories'
+            );
+        }
+        return this.makeTerm(
+            kernelCall(
+                kernelFree(
+                    coreCategoricalStructuralCoreName(
+                        'functor-composition'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: inner.sourceCategory
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: inner.targetCategory
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: outer.targetCategory
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: outer.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: inner.expression
+                    }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'functor',
+                sourceCategory: inner.sourceCategory,
+                targetCategory: outer.targetCategory
+            },
+            nodeProvenance
         );
     }
 

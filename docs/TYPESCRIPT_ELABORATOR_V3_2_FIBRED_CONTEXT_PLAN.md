@@ -59,6 +59,22 @@ infrastructure tests, five document-registry tests, report/book checks, the
 unchanged strict `0/47/29` LHS audit, and catalog freshness pass. No active
 Lambdapi source, mathematical owner/rule, parser, bulk-transfer workflow, or
 deployed profile changed.
+FIBRED-GROUPED-SEQUENTIAL-1 is now implemented without expanding that
+kernel boundary. The root-only successor profile accepts any finite ordered
+block of at least two independent displayed siblings over one base, retains
+the generic dependency plan, and emits both accumulated Sigma/pullback and
+left-associated transparent-product presentations. It checks
+`((k,b),c)` and `(k,Product_pair(b,c))`, computes the relevant fibres,
+prefix/base projections, and product component functors, scales to three
+siblings, and rejects a genuine dependency edge with provenance. Nine
+focused cases, the runnable direct-TypeScript demo, and the 776-test root
+gate pass. The complete repository gate is green as well: all 19 live
+differential judgments, all 41 kernel/example health targets, 39
+infrastructure tests, five document-registry tests, report/book checks, the
+unchanged strict `0/47/29` LHS audit, and catalog freshness pass. It claims
+no equality/equivalence of the total categories and adds no Sigma-projection
+arrow computation, Lambdapi owner/rule, parser, acquisition route, or
+deployed profile.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -112,6 +128,8 @@ FIBRED-BINDER-1 implementation checkpoint:
 `698280f42c3c9c339ebc82a8cfb0df1d51838704`
 FIBRED-TRANSFD-1 implementation checkpoint:
 `4d26100378fae67ade72ad6c7295d2623fd1fc8f`
+FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint:
+pending the green local checkpoint for this completed tranche
 
 ## Purpose And Exact Outcome
 
@@ -1211,7 +1229,8 @@ usability profile.
 | FIBRED-STRUCTURE-1A | complete; validated; checkpointed `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d` | FIBRED-STRUCTURE-0A and exact D-DTTLF-USABILITY-006 approval | Added only the approved three injective owners and eleven runtime rules; retained the transparent family and necessary beta guards; transferred six declarations and 15 subject-checked local rules through generic engines; added derived swap/diagonal, full/capped action, frontend-only canonical reindexing, a root-only profile, and a runnable no-Lambdapi demo while retaining all frozen non-conversions; focused/live conformance, 739-test TypeScript, canonical inventory, complete health, and full repository gates pass |
 | FIBRED-BINDER-1 | complete; validated; checkpointed `698280f42c3c9c339ebc82a8cfb0df1d51838704` | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Added a root-only `displayedFunctorLambda`/`:^fd`-equivalent typed API for identity, eta, and finite closed displayed-functor composition chains. The callback is evaluated once and discarded; hidden base/fibre slots are retained as immutable locally nameless `k :^n K; a :^f E[k]` evidence. Lowering reuses `id_funcd` and `comp_fapp0` at `Catd_cat K`; the exact SCALE-STRESS-2A `Catd`/`Sigma_proj1_pullback_catd` declarations and Sigma/Pi proof rule plus two already-active point-computation rules compile through generic engines. Direct `Functord_cat(E,D)` and nested `Pi_cat(Sigma_cat(E),Sigma_proj1_pullback_catd(E,D))` compare as `solved` only in the proof engine and remain `not-equal` at runtime. A direct-TypeScript demo, 14 active focused tests, one opt-in live Lambdapi test, and the 754-test root gate pass with zero new Lambdapi owners/rules |
 | FIBRED-TRANSFD-1 | complete; validated; checkpointed `4d26100378fae67ade72ad6c7295d2623fd1fc8f` | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Froze the direct/ordinary/Sigma-Pi next-hom contract; transferred six exact active signatures, seven subject-checked runtime rules, and one proof rule through generic engines; added the root-only callback-once `displayedTransforLambda`/`:^nd` coherent eta, `eta[x]`, `eta[x][u]`, `eta[p][u]`, vertical composition, four-way classifier evidence, and a runnable no-Lambdapi demo; preserved category runtime non-conversion and every general-bracket/profile/acquisition non-effect; the 767-test TypeScript and complete repository gates pass |
-| FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
+| FIBRED-GROUPED-SEQUENTIAL-1 | complete; fully validated; checkpoint pending | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Implemented a finite block of two-or-more independent displayed siblings over one common base; the generic dependency graph drives a left-to-right Sigma/pullback lowering and a left-associated transparent product lowering; checked `((k,b),c)` and `(k,(b,c))`, accumulated/base projections, product component functors, three-sibling scaling, and dependency-edge rejection using only existing owners; explicitly claims no total-category equality/equivalence or Sigma-projection arrow computation; nine focused cases, runnable demo, the 776-test TypeScript gate, and complete repository gate pass |
+| FIBRED-QUALIFICATION-REMAINDER-0 | pending | FIBRED-BINDER-1, FIBRED-TRANSFD-1, FIBRED-GROUPED-SEQUENTIAL-1 | Audit the remaining qualification-corpus cases: displayed weakening, abstraction/reindex stability, and a genuinely fibre-dependent target; freeze the smallest dependency-ready executable rows and any exact owner gaps before implementation |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
 | FIBRED-GRADUATE-1 | pending | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate human graduation decision |
 
@@ -1973,6 +1992,155 @@ the direct and ordinary categories, the broader Sigma-total arrow action,
 grouped/sequential conformance, string parsing/acquisition, bulk library
 transfer, groupoidal closure, or browser/deployed-profile promotion.
 
+## FIBRED-GROUPED-SEQUENTIAL-1 Completion Record
+
+The next slice connects, rather than redesigns, the completed foundations.
+Its first executable consumer is one base object and a finite ordered block
+of at least two independent displayed siblings:
+
+```text
+k : K; b : B[k]; c : C[k]; ...
+```
+
+The same FIBRED-CONTEXT-0B dependency graph must drive both presentations.
+For the first two siblings, the sequential presentation is:
+
+```text
+Sigma_cat(
+  Pullback_catd C (Sigma_proj1_func B)
+)
+```
+
+and the grouped presentation is:
+
+```text
+Sigma_cat(P(B,C)).
+```
+
+For a larger finite sibling block, the sequential lowerer proceeds
+left-to-right. After every Sigma extension it composes the new first
+projection with the accumulated projection to `K`, then pulls the next
+original family back along that composite. The grouped lowerer folds the
+already-completed transparent displayed product to the left. This is one
+dependency-directed algorithm over an arbitrary finite sibling block, not a
+special case containing only literal names `b` and `c`.
+
+The first conformance boundary is deliberately object/fibre/component level:
+
+```text
+sequential object: ((k,b),c)
+grouped object:    (k,(b,c)).
+```
+
+Every later sequential component is retyped only after the TypeScript
+runtime checker establishes that the pullback fibre at the accumulated Sigma
+pair converts to its original fibre at `k`. The grouped tuple is retyped only
+after the transparent product fibre converts to the corresponding iterated
+ordinary product. Existing Sigma first-projection and product component
+rules then expose the common components. A dependency edge inside a requested
+group remains a provenance-bearing error.
+
+This slice does **not** compare the two total categories for runtime equality,
+construct an equivalence between them, or claim arrow-level total-context
+conformance. In particular, the active `Sigma_proj1_func` has the needed
+object projection but not a qualified structured-arrow projection. Adding
+that arrow computation merely to strengthen this demo would cross the
+separately deferred Sigma-introduction/action boundary. A total comparison
+also remains FIBRED-TOTAL-COMPARE-1 and requires an exact active
+pullback/comma/equivalence construction.
+
+The executable deep-frozen contract is
+`src/v3_2/categorical_grouped_sequential_contract.ts`. It authorizes no new
+Lambdapi owner, runtime rule, proof rule, intrinsic Core owner, parser,
+transfer-acquisition route, or browser/deployed profile. Implementation may
+reuse only the completed dependency planner, `Sigma_cat`,
+`Sigma_proj1_func`, `Pullback_catd`, `Struct_sigma`, generic identity and
+composition, and the completed transparent product/structural package.
+
+The root-only `fibred-grouped-sequential-1` profile now implements that
+contract. `groupedSequentialContext` accepts one base and any finite ordered
+block of at least two displayed families over that base. It:
+
+1. constructs and retains the FIBRED-CONTEXT-0B plan;
+2. rejects duplicate names, foreign handles, mismatched bases, and malformed
+   blocks before lowering;
+3. emits the first family directly;
+4. pulls each later family back along the accumulated projection to the
+   common base;
+5. extends the sequential total with `Sigma_cat`;
+6. composes each new `Sigma_proj1_func` into the next accumulated
+   projection; and
+7. folds the same original families through the completed transparent
+   displayed product.
+
+The two-factor checked terms are:
+
+```text
+((k,b),c)
+  : Obj(Sigma(Pullback(C,Sigma_proj1(B))))
+
+(k,Product_pair(b,c))
+  : Obj(Sigma(P(B,C))).
+```
+
+The stable active `Product_pair` owner is important at the checker boundary.
+A generic `Struct_sigma(b,c)` is runtime-convertible to the same product
+object carrier, but its inferred generic Sigma type is not rigid enough for
+the current checker to use as a nested decoded-product term. Emitting the
+already-active `Product_pair` gives the tuple its exact
+`Obj(Product_cat(...))` type and still delta-presents the same
+`Struct_sigma` semantics. No TypeScript declaration or runtime rule was
+added for this choice.
+
+`groupedSequentialObject` checks each supplied component in its original
+fibre, then retypes it only after the composed TypeScript runtime proves the
+effective sequential pullback fibre convertible. It constructs and checks
+all sequential prefixes, the grouped ordinary tuple, and both total objects.
+For the two-factor demo:
+
+- the second sequential fibre closes through
+  `Pullback_catd` fibre computation and Sigma first projection;
+- the grouped family fibre closes to the ordinary product through the
+  completed transparent product runtime;
+- the sequential prefix, sequential base, and grouped base projections
+  compute;
+- the grouped displayed left/right projection components compute to the
+  ordinary product projections; and
+- a requested sibling group with a real `b -> c` dependency is rejected at
+  the dependency occurrence.
+
+The same API is tested on three siblings. Its dependency plan records direct
+edges `k -> b`, `k -> c`, and `k -> d`; the sequential presentations pull
+the third family past both earlier sibling positions, and the grouped family
+is left-associated. This is executable evidence that the architecture is a
+finite-block algorithm rather than a literal two-name demo.
+
+Validation evidence:
+
+- the contract, context, and demo focused suites pass nine active cases;
+- `./scripts/pnpmw run demo:categorical-grouped-sequential` succeeds;
+- focused TypeScript typecheck and ESLint pass; and
+- `./scripts/pnpmw run check:ts` passes 776 tests: 730 passed and 46
+  intentional opt-in skips; and
+- `EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all` passes all 19
+  mandatory live differential judgments, all 41 kernel/example health
+  targets, 39 infrastructure tests, five document-registry tests, the
+  report/book checks, the unchanged strict `0/47/29` LHS audit, and generated
+  catalog freshness.
+
+No active Lambdapi source, declaration, runtime rule, proof rule, warning
+inventory, strict audit, catalog, parser/acquisition path, bulk transfer,
+browser/deployed profile, or groupoidal closure changed. The complete
+repository gate is green.
+
+This row closes qualification-corpus case 8 and connects the already-complete
+cases 6, 7, 9, and 10. It does not silently close cases 2 through 4:
+displayed weakening, abstraction-before/after-reindexing stability, and a
+genuinely fibre-dependent target remain. FIBRED-GRADUATE-1 therefore is not
+dependency-ready. The next row is FIBRED-QUALIFICATION-REMAINDER-0, which
+must audit those three cases and freeze the smallest executable follow-on
+rows before implementation.
+
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
 Completing individual product or binder examples does not by itself settle
@@ -2283,14 +2451,25 @@ profile and runnable demo; and zero-new-kernel-mathematics result. Do not
 infer arbitrary pointwise coherence, a general `:^nd` bracket, whole
 displayed laxity, or runtime category collapse.
 
-The next ordered bounded row is FIBRED-GROUPED-SEQUENTIAL-1. Exercise
-sequential dependencies and grouped independent siblings through the
-existing dependency graph, explicit products, Sigma/pullback, contextual
-pairing, and owner-backed Core. Freeze the smallest executable conformance
-contract before implementation. If a genuinely missing computation appears,
-audit existing constructions and Foundations and compare the smallest owner
-positions before opening an exact gate; no convenient notation is itself
-authority for a primitive.
+FIBRED-GROUPED-SEQUENTIAL-1 is complete. Preserve its finite two-or-more
+sibling API, retained dependency plan, left-to-right accumulated
+Sigma/pullback lowering, left-associated transparent-product lowering,
+checked sequential/grouped objects, stable active `Product_pair` emission,
+projection/component computations, three-sibling evidence, and
+provenance-bearing dependency-edge rejection. Preserve the exact non-claims:
+no runtime equality or equivalence of the two total categories, no
+Sigma-projection arrow computation, and no grouping across a genuine
+dependency edge.
+
+The next dependency-ready row is FIBRED-QUALIFICATION-REMAINDER-0. Audit
+qualification-corpus cases 2 through 4: displayed weakening, abstraction
+before versus after reindexing, and a genuinely fibre-dependent target using
+the active Sigma/Pi/internal-pullback package. Freeze the smallest executable
+follow-on rows and exact unsupported-action/owner table before implementation.
+Do not mark FIBRED-GRADUATE-1 ready until that corpus is executable. If a
+genuinely missing computation appears, audit existing constructions and
+Foundations and compare the smallest owner positions before opening an exact
+gate; no convenient notation is itself authority for a primitive.
 
 Keep canonical Lambdapi term/declaration parsing deferred and optional.
 Direct typed TypeScript construction remains the default. Do not resume the
@@ -2483,3 +2662,19 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   review, and staged whitespace audit passed. The checkpoint grants no
   remote operation, integration, publication, history rewrite, cleanup, or
   broader semantic authority.
+- **2026-07-28 — FIBRED-GROUPED-SEQUENTIAL-1 implemented.** Froze and
+  implemented one dependency-directed finite-block algorithm over any
+  two-or-more independent displayed siblings. It retains the generic
+  dependency plan, emits accumulated Sigma/pullback and left-associated
+  transparent-product presentations, checks `((k,b),c)` and
+  `(k,Product_pair(b,c))`, and computes the relevant fibres, prefix/base
+  projections, and product component functors. A three-sibling case confirms
+  iterative scaling; a real dependency edge is rejected with provenance.
+  Nine focused cases, the runnable demo, the 776-test TypeScript gate, all 19
+  live differential judgments, all 41 kernel/example targets,
+  infrastructure/document/report/book checks, the unchanged strict
+  `0/47/29` audit, and catalog freshness pass. No Lambdapi source/owner/rule,
+  total-category equality/equivalence, Sigma-projection arrow action,
+  parser/acquisition route, or deployed profile changed.
+  FIBRED-QUALIFICATION-REMAINDER-0 is next because corpus cases 2 through 4
+  remain open.
