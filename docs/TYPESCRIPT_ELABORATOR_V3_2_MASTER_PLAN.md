@@ -3869,7 +3869,8 @@ by itself and keeps genuine dependent-chain lowering, general :^nd
 coherence, Sigma arrow action, total-category comparison, parsing/bulk
 transfer, and browser promotion separate. Its eight focused tests, root
 821-test gate (775 active passes, 46 intentional skips), and unchanged
-19-judgment conformance gate pass.
+19-judgment conformance gate pass. The exact green proposal checkpoint is
+`e4b743f70c0454d63a93587dc045a3e2d0273ee5`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

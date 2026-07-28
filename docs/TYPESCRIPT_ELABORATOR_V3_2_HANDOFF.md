@@ -817,7 +817,8 @@ Genuine dependent chains and general `:^nd` coherence remain separate
 first-class rows. No new Lambdapi mathematics, browser profile, parser, bulk
 transfer, or wider Git action is proposed. Its eight focused tests, root
 821-test gate (775 active passes, 46 intentional skips), and unchanged
-19-judgment conformance gate pass.
+19-judgment conformance gate pass. The exact green proposal checkpoint is
+`e4b743f70c0454d63a93587dc045a3e2d0273ee5`.
 The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized

@@ -233,7 +233,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 
 | row | status | dependency | exact scope |
 | --- | --- | --- | --- |
-| DISPLAYED-BRACKET-0A | proposal frozen and fully validated; checkpoint pending; awaiting H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/D-DTTLF-USABILITY-009 | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused tests, the 821-test root gate, and unchanged 19-judgment live conformance pass |
+| DISPLAYED-BRACKET-0A | proposal frozen and fully validated; checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`; awaiting H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/D-DTTLF-USABILITY-009 | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused tests, the 821-test root gate, and unchanged 19-judgment live conformance pass |
 | DISPLAYED-BRACKET-1A | blocked on D-DTTLF-USABILITY-009 | DISPLAYED-BRACKET-0A | Implement the root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, and runnable demo |
 | DISPLAYED-CHAIN-0A | deferred; not authorized by D-009 | DISPLAYED-BRACKET-1A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for a genuine dependency edge; identify exact Sigma-arrow/total-comparison needs |
 | DISPLAYED-ND-0A | deferred; not authorized by D-009 | DISPLAYED-BRACKET-1A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
@@ -429,7 +429,21 @@ No `.lp` source, kernel-owned report, catalog, health target, browser entry
 point, parser, or product profile changed. The complete 41-file kernel CI
 from the immediately preceding validated fibred-graduation boundary remains
 applicable. The six preserved untracked timeout-artifact directories remain
-excluded and untouched.
+excluded and untouched. The exact green local proposal checkpoint is
+`e4b743f70c0454d63a93587dc045a3e2d0273ee5`.
+
+## Change Log
+
+- **2026-07-28 — DISPLAYED-BRACKET-0A frozen, validated, and
+  checkpointed.** The executable four-way comparison selects a generic
+  first-order displayed contextual compiler. It freezes a no-new-mathematics
+  DISPLAYED-BRACKET-1A for finite independent sibling blocks, one typed-pair
+  frontend node, and existing displayed identity/composition/projection/
+  pairing/weakening/reindexing authority. Genuine dependency chains and
+  general `:^nd` coherence remain separate. Eight focused tests, the
+  821-test root gate, and all 19 live conformance judgments pass. The exact
+  local checkpoint is `e4b743f70c0454d63a93587dc045a3e2d0273ee5`;
+  D-DTTLF-USABILITY-009 remains pending.
 
 ## Git Boundary
 
