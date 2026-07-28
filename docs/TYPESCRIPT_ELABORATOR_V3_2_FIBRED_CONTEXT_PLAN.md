@@ -137,7 +137,8 @@ five registry tests, report/book checks, the strict `0/47/29` LHS audit, and
 catalog freshness. No runtime category collapse, external oracle, arbitrary
 coherence synthesis, parser, deployed-profile promotion, new Lambdapi
 mathematics, or broader transfer claim was added. The bounded local
-implementation checkpoint remains to be recorded.
+implementation checkpoint is
+`90b79b8b367f40993f788669b3c7823886111ea2`.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -224,6 +225,8 @@ FIBRED-WEAKEN-REINDEX-1 implementation checkpoint:
 `246481130ebf29a09d04b9b4337dbdb716484d43`
 FIBRED-DEPENDENT-TARGET-1 generic proof-subject checkpoint:
 `91c3f32e207e64d3791dd62186712c4ecb6670a1`
+FIBRED-DEPENDENT-TARGET-1 implementation checkpoint:
+`90b79b8b367f40993f788669b3c7823886111ea2`
 
 ## Purpose And Exact Outcome
 
@@ -1326,7 +1329,7 @@ usability profile.
 | FIBRED-GROUPED-SEQUENTIAL-1 | complete; validated; checkpointed `4f173cec9336d41bac9a08563c3697e0fc657d66` | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Implemented a finite block of two-or-more independent displayed siblings over one common base; the generic dependency graph drives a left-to-right Sigma/pullback lowering and a left-associated transparent product lowering; checked `((k,b),c)` and `(k,(b,c))`, accumulated/base projections, product component functors, three-sibling scaling, and dependency-edge rejection using only existing owners; explicitly claims no total-category equality/equivalence or Sigma-projection arrow computation; nine focused cases, runnable demo, the 776-test TypeScript gate, and complete repository gate pass |
 | FIBRED-QUALIFICATION-REMAINDER-0 | complete; read-only existing-authority audit | FIBRED-BINDER-1, FIBRED-TRANSFD-1, FIBRED-GROUPED-SEQUENTIAL-1 | The active-kernel consumer probe closes the authority question for cases 2–4: Sigma-projection section pullback, `Pullback_catd_func` hom action, and the `Pi_pullback_funcd`/`Sigma_catd_functord_catd` composite all check and compute without a new owner/rule; selected two executable implementation rows and froze their exact nonclaims |
 | FIBRED-WEAKEN-REINDEX-1 | complete; validated; checkpointed `246481130ebf29a09d04b9b4337dbdb716484d43` | FIBRED-QUALIFICATION-REMAINDER-0, FIBRED-TRANSFD-1 | Transferred `Pullback_catd_func`, `Obj_func`, `section_pullback_func`, and `section_pullback_sec`; executable subject checking exposed and transferred two exact existing prerequisite reductions before the four frozen consumer clauses. Added root-only `indexOf`, exact closed-section `:^fd` weakening, frontend semantic-origin point lowering, displayed-functor hom-action reindexing, eta stability, point computation, fail-closed negatives, and a runnable demo. Category presentations remain runtime-distinct/proof-compatible; zero Lambdapi mathematical owners/rules were added; the 785-test TypeScript and complete repository gates pass |
-| FIBRED-DEPENDENT-TARGET-1 | complete; validated; D-007/007A/007B approved; checkpoint pending | FIBRED-WEAKEN-REINDEX-1 | Tracked the exact ten-declaration/ten-runtime/one-proof existing-authority closure through generic engines: eight subjects check directly and only package-component/pullback-component use the category-presentation proof rule. Added exact pattern-only typed-wildcard fidelity for the active `Pi_func` inferred slot while retaining untyped/template rejection. The root-only profile constructs `G : K -> Op(Cat_cat)`, `Pullback_catd(Catd_cat_func,G)`, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd`; `B[k,M]` reduces through eight existing clauses to `Pi_cat(G[k],M)`, total-context eta lowers to the original section, wrong base/family cases fail, the runnable direct-TypeScript demo and unchanged live Lambdapi qualification probe pass, and no category collapse, oracle, arbitrary coherence, parser, or new Lambdapi mathematics was added. The final 795-test TypeScript, 19-judgment conformance, and complete kernel/repository component gates pass |
+| FIBRED-DEPENDENT-TARGET-1 | complete; validated; checkpointed `90b79b8b367f40993f788669b3c7823886111ea2`; D-007/007A/007B approved | FIBRED-WEAKEN-REINDEX-1 | Tracked the exact ten-declaration/ten-runtime/one-proof existing-authority closure through generic engines: eight subjects check directly and only package-component/pullback-component use the category-presentation proof rule. Added exact pattern-only typed-wildcard fidelity for the active `Pi_func` inferred slot while retaining untyped/template rejection. The root-only profile constructs `G : K -> Op(Cat_cat)`, `Pullback_catd(Catd_cat_func,G)`, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd`; `B[k,M]` reduces through eight existing clauses to `Pi_cat(G[k],M)`, total-context eta lowers to the original section, wrong base/family cases fail, the runnable direct-TypeScript demo and unchanged live Lambdapi qualification probe pass, and no category collapse, oracle, arbitrary coherence, parser, or new Lambdapi mathematics was added. The final 795-test TypeScript, 19-judgment conformance, and complete kernel/repository component gates pass |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
 | FIBRED-GRADUATE-1 | dependency-ready; assessment/proposal only | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate graduation decision; this row does not itself authorize profile promotion or claim complete general displayed usability |
 
@@ -3309,7 +3312,8 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   their original modules; and complete kernel CI passes 41 health targets,
   39 infrastructure tests, five registry tests, report/book checks, strict
   `0/47/29`, and catalog freshness. No `.lp` source or mathematical owner/rule
-  changed. The implementation checkpoint is pending the exact staged review.
+  changed. The exact local implementation checkpoint is
+  `90b79b8b367f40993f788669b3c7823886111ea2`.
 - **2026-07-28 — D-DTTLF-USABILITY-007B inferred-slot correction
   approved and focused evidence green.** The tracked target-fibre consumer
   exposed that active `rule @fapp0 _ Cat_cat (@Pi_func $K) $E` deliberately

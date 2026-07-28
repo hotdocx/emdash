@@ -768,10 +768,24 @@ remain runtime-distinct and proof-compatible through the existing
 repository gate pass, including all 19 live differential judgments, all 41
 kernel/example health targets, the unchanged strict `0/47/29` LHS audit, and
 catalog freshness.
-Continue with FIBRED-DEPENDENT-TARGET-1 by first freezing the exact
-descendant-environment internal-Pi declaration/runtime contract, then
-executing `B[k,M] = Pi_cat(G[k],M)` and total-context section eta.
-FIBRED-GRADUATE-1 is not yet dependency-ready. The green
+FIBRED-DEPENDENT-TARGET-1 is now fully validated. Its root-only successor
+transfers the exact ten-declaration/ten-runtime/one-proof existing-authority
+closure; eight runtime subjects check directly and only package-component
+and pullback-component use the category-presentation proof rule at compile
+time. A generic typed pattern wildcard retains the literal active `_` in the
+`Pi_func` object rule without adding runtime proof matching. The profile
+constructs the pulled-back internal-Pi target, computes
+`B[k,M]` to `Pi_cat(G[k],M)` through eight existing clauses, lowers
+total-context eta to the original section, rejects wrong-family inputs, and
+has a runnable direct-TypeScript demo. Its 795-test TypeScript gate,
+19-judgment mandatory conformance gate, and complete 41-file kernel CI pass.
+It adds no `.lp` mathematics, category collapse, external oracle, arbitrary
+coherence synthesis, parser, or deployed-profile authority.
+Continue with FIBRED-GRADUATE-1 only as the now dependency-ready exact
+assessment/proposal row: inventory the supported envelope, residual
+mathematical and ergonomic gaps, measured generic-transfer reuse, optional
+acquisition boundary, and conformance before any separate graduation or
+profile-promotion decision. The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
 FIBRED-BINDER-1 implementation checkpoint is
@@ -781,7 +795,9 @@ implementation checkpoint is
 FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint is
 `4f173cec9336d41bac9a08563c3697e0fc657d66`; the validated
 FIBRED-WEAKEN-REINDEX-1 implementation checkpoint is
-`246481130ebf29a09d04b9b4337dbdb716484d43`. Do not
+`246481130ebf29a09d04b9b4337dbdb716484d43`; the validated
+FIBRED-DEPENDENT-TARGET-1 implementation checkpoint is
+`90b79b8b367f40993f788669b3c7823886111ea2`. Do not
 infer any additional owner/rule, structural map, total pullback, general
 `fd`/`nd` completion, or profile authority from the bounded work. The
 completed master plan's historical checkpoint authorization does not

@@ -3810,11 +3810,21 @@ runtime-distinct and proof-compatible only through the existing
 repository gates pass, including all 19 live differential judgments, all 41
 kernel/example health targets, the unchanged strict `0/47/29` LHS audit, and
 catalog freshness.
-Continue with FIBRED-DEPENDENT-TARGET-1: first freeze the exact
-descendant-environment internal-Pi declaration/runtime contract, then execute
-`B[k,M] = Pi_cat(G[k],M)` and total-context section eta. Do not infer general
-`fd`/`nd` completion from these bounded slices or mark FIBRED-GRADUATE-1
-ready. The
+FIBRED-DEPENDENT-TARGET-1 is now fully validated. Preserve its exact
+ten-declaration/ten-runtime/one-proof existing-authority closure, eight-direct/
+two-proof subject-validation partition, typed pattern-only `Pi_func`
+wildcard, root-only internal-Pi target, eight-clause
+`B[k,M] = Pi_cat(G[k],M)` computation, total-context eta, fail-closed
+negatives, runnable demo, runtime/proof category non-collapse, and
+zero-new-Lambdapi-mathematics result. Its 795-test TypeScript gate,
+19-judgment mandatory conformance gate, and complete 41-file kernel CI pass.
+Do not infer general `fd`/`nd` completion, arbitrary coherent-section
+synthesis, parsing/bulk-transfer authority, or deployed-profile promotion.
+FIBRED-GRADUATE-1 is now dependency-ready only as an exact assessment and
+non-self-authorizing proposal. Inventory the supported envelope, residual
+owner/action/total-category/groupoidal gaps, generic transfer reuse and
+measured throughput, optional acquisition boundary, and conformance before a
+separate graduation decision. The
 FIBRED-STRUCTURE-1A checkpoint remains
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized binder
 checkpoint is `698280f42c3c9c339ebc82a8cfb0df1d51838704`; the
@@ -3823,7 +3833,9 @@ FIBRED-TRANSFD-1 implementation checkpoint is
 FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint is
 `4f173cec9336d41bac9a08563c3697e0fc657d66`; the
 FIBRED-WEAKEN-REINDEX-1 implementation checkpoint is
-`246481130ebf29a09d04b9b4337dbdb716484d43`.
+`246481130ebf29a09d04b9b4337dbdb716484d43`; the
+FIBRED-DEPENDENT-TARGET-1 implementation checkpoint is
+`90b79b8b367f40993f788669b3c7823886111ea2`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
