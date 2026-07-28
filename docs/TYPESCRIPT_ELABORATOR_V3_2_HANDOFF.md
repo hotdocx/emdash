@@ -810,7 +810,9 @@ FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint is
 FIBRED-WEAKEN-REINDEX-1 implementation checkpoint is
 `246481130ebf29a09d04b9b4337dbdb716484d43`; the validated
 FIBRED-DEPENDENT-TARGET-1 implementation checkpoint is
-`90b79b8b367f40993f788669b3c7823886111ea2`. Do not
+`90b79b8b367f40993f788669b3c7823886111ea2`; the green
+FIBRED-GRADUATE-1 proposal checkpoint is
+`517e64e67a411412b0300f05f910b8eb25b5f395`. Do not
 infer any additional owner/rule, structural map, total pullback, general
 `fd`/`nd` completion, or profile authority from the bounded work. The
 completed master plan's historical checkpoint authorization does not

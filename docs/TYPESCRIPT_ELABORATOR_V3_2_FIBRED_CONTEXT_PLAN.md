@@ -1331,7 +1331,7 @@ usability profile.
 | FIBRED-WEAKEN-REINDEX-1 | complete; validated; checkpointed `246481130ebf29a09d04b9b4337dbdb716484d43` | FIBRED-QUALIFICATION-REMAINDER-0, FIBRED-TRANSFD-1 | Transferred `Pullback_catd_func`, `Obj_func`, `section_pullback_func`, and `section_pullback_sec`; executable subject checking exposed and transferred two exact existing prerequisite reductions before the four frozen consumer clauses. Added root-only `indexOf`, exact closed-section `:^fd` weakening, frontend semantic-origin point lowering, displayed-functor hom-action reindexing, eta stability, point computation, fail-closed negatives, and a runnable demo. Category presentations remain runtime-distinct/proof-compatible; zero Lambdapi mathematical owners/rules were added; the 785-test TypeScript and complete repository gates pass |
 | FIBRED-DEPENDENT-TARGET-1 | complete; validated; checkpointed `90b79b8b367f40993f788669b3c7823886111ea2`; D-007/007A/007B approved | FIBRED-WEAKEN-REINDEX-1 | Tracked the exact ten-declaration/ten-runtime/one-proof existing-authority closure through generic engines: eight subjects check directly and only package-component/pullback-component use the category-presentation proof rule. Added exact pattern-only typed-wildcard fidelity for the active `Pi_func` inferred slot while retaining untyped/template rejection. The root-only profile constructs `G : K -> Op(Cat_cat)`, `Pullback_catd(Catd_cat_func,G)`, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd`; `B[k,M]` reduces through eight existing clauses to `Pi_cat(G[k],M)`, total-context eta lowers to the original section, wrong base/family cases fail, the runnable direct-TypeScript demo and unchanged live Lambdapi qualification probe pass, and no category collapse, oracle, arbitrary coherence, parser, or new Lambdapi mathematics was added. The final 795-test TypeScript, 19-judgment conformance, and complete kernel/repository component gates pass |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
-| FIBRED-GRADUATE-1 | proposal frozen; awaiting H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008; no semantic authority | complete qualification corpus | The root-only self-validating proposal freezes the demonstrated frontend envelope, cumulative 36-declaration/69-runtime/3-proof slice evidence, four-owner/fifteen-rule mathematical delta, residual owner/action/total/groupoidal/ergonomic gaps, direct-typed acquisition default, optional parser boundary, conformance evidence, and exact qualified graduation question. It proposes that the architecture is settled/mechanically scalable only within the demonstrated existing-authority envelope and explicitly withholds whole-library automation, general displayed syntax, profile promotion, and new semantics |
+| FIBRED-GRADUATE-1 | proposal frozen; validated; checkpointed `517e64e67a411412b0300f05f910b8eb25b5f395`; awaiting H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008; no semantic authority | complete qualification corpus | The root-only self-validating proposal freezes the demonstrated frontend envelope, cumulative 36-declaration/69-runtime/3-proof slice evidence, four-owner/fifteen-rule mathematical delta, residual owner/action/total/groupoidal/ergonomic gaps, direct-typed acquisition default, optional parser boundary, conformance evidence, and exact qualified graduation question. It proposes that the architecture is settled/mechanically scalable only within the demonstrated existing-authority envelope and explicitly withholds whole-library automation, general displayed syntax, profile promotion, and new semantics |
 
 ## FIBRED-CONTEXT-0A Completion Record
 
@@ -3124,7 +3124,8 @@ The frozen proposal preparation is green:
 No `.lp` source or browser entry point changed. Six untracked
 `emdash2/tmp/elab0-*` directories left by earlier externally timed-out
 conformance workers remain preserved and excluded because cleanup is not
-authorized by this tranche.
+authorized by this tranche. The exact green local proposal checkpoint is
+`517e64e67a411412b0300f05f910b8eb25b5f395`.
 
 ## Acceptance And Validation Policy
 
@@ -3548,7 +3549,8 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   tests, root 804-test gate, 19-judgment live conformance gate, and complete
   41-file kernel CI pass. H-DTTLF-USABILITY-FIBRED-GRADUATE/
   D-DTTLF-USABILITY-008 remains an exact separate decision and adds no
-  semantic or product authority.
+  semantic or product authority. The exact green local proposal checkpoint
+  is `517e64e67a411412b0300f05f910b8eb25b5f395`.
 - **2026-07-28 — FIBRED-DEPENDENT-TARGET-1 implementation and validation
   complete.** The root-only successor transfers the exact
   ten-declaration/ten-runtime/one-proof existing-authority closure, records
