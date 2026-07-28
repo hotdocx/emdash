@@ -1035,7 +1035,8 @@ semantics or TypeScript consumer is implemented before the separate exact
 H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision. Its ten
 focused tests, root typecheck/lint, bounded active-kernel check, and
 aggregate 914-test root gate pass (867 active, 47 intentional skips, zero
-failures).
+failures). The exact green proposal checkpoint is
+`aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`.
 
 For the earlier DISPLAYED-BRACKET-1A tranche, all ten focused
 implementation/demo tests pass, as do the permanent ordinary

@@ -4027,7 +4027,8 @@ equivalence. Do not implement it before the separate exact
 H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision. The
 proposal's ten focused tests, root typecheck/lint, bounded active-kernel
 check, and aggregate 914-test root gate pass (867 active, 47 intentional
-skips, zero failures).
+skips, zero failures). The exact green proposal checkpoint is
+aba1c957afbeb18f2bfe25add56bfa6aacfa4dda.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

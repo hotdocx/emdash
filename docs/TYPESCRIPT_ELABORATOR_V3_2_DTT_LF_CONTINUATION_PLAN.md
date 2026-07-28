@@ -2759,3 +2759,5 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   before H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012. Its ten
   focused proposal tests, root typecheck/lint, bounded kernel check, and
   aggregate 914-test root gate pass (867 active, 47 intentional skips).
+  Exact proposal checkpoint:
+  `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`.
