@@ -1792,6 +1792,38 @@ implied.
 constructors. Pointwise formulas do not replace their required base-arrow
 actions.
 
+The constant-domain displayed-evaluation closure is now active. For
+`A : Cat`, `B : Catd K`, and
+`S(A,B) = Functor_catd(Const_catd(Op_cat K,A),B)`, the two new reusable
+owners are:
+
+```text
+Eval_funcd(B)     : Functord(P(S(A,B),Const_catd(K,A)),B)
+Terminal_funcd(E) : Functord(E,Const_catd(K,Terminal_cat)).
+```
+
+Each has exactly one `tapp0_fapp0` point-component rule:
+
+```text
+Eval_funcd(B)[k]     -> Eval_func(A,B[k])
+Terminal_funcd(E)[k] -> Terminal_func(E[k]).
+```
+
+The second owner composes with `const_section_func` to derive a coherent
+fixed argument, so there is no third fixed-argument evaluator. Varying
+subject/varying argument and varying subject/fixed argument are both
+recursive TypeScript contextual-compiler consumers. The nested consumer
+`H[e](G[d])` confirms recursion through both subject and argument
+subexpressions rather than a whole-body recognizer.
+
+The global `fapp`/`tapp` calculus remains the sole generic owner of
+identity, composition, base-arrow action, and higher naturality. The two
+component rules add two intentional critical-pair diagnostics but do not add
+constructor-specific coherence rules. The specialization is deliberately
+constant-domain: arbitrary mixed-domain evaluation, polarity-directed
+contravariant lowering, genuine dependent-chain abstraction, and general
+displayed-transfor coherence remain separate.
+
 ### Sections 11–17: representables, dependent hom, and displayed action
 
 The dependent-hom architecture is shared by Sigma homs, fibre transport, and

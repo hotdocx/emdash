@@ -13094,6 +13094,32 @@ injective symbol Functor_catd [K : Cat]
 rule @fapp0 $K Cat_cat (@Functor_catd $K $A $B) $k
   ↪ Functor_cat (Fibre_cat $A $k) (Fibre_cat $B $k);
 
+// Coherent evaluation for a constant-domain displayed functor family.
+//
+// For B : K ⊢ Cat and an ordinary category A, write
+//
+//   S(A,B) = Functor_catd(const_(K^op)(A),B).
+//
+// Then Eval_funcd(B) : P(S(A,B),const_K(A)) ⊢_K B and
+// Eval_funcd(B)[k] = Eval_func(A,B[k]).  The generic tapp/fapp calculus
+// carries the base-arrow action and higher naturality; no constructor-specific
+// identity, composition, or naturality rule is added here.
+injective symbol Eval_funcd [K A : Cat] (B : τ (Catd K))
+  : τ (Functord
+      (@comp_cat_fapp0
+        K
+        (Product_cat Cat_cat Cat_cat)
+        Cat_cat
+        (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+        (Struct_sigma
+          (@Functor_catd K (@Const_catd (Op_cat K) A) B)
+          (@Const_catd K A)))
+      B);
+
+// Point component of coherent displayed evaluation.
+rule @tapp0_fapp0 _ Cat_cat _ _ $k (@Eval_funcd _ $A $B)
+  ↪ @Eval_func $A (Fibre_cat $B $k);
+
 // Internalized constructor package for mixed-variance functor families.
 injective symbol Functor_catd_func (K : Cat)
   : τ (Functor
@@ -14910,6 +14936,22 @@ rule @tapp0_fapp0
       $E $k
       (@pi_eval_transf $K $E)
   ↪ @piapp0_func $K $E $k;
+
+// Reusable displayed weakening to the constant terminal family.
+//
+// Surface/formula:
+//   Terminal_funcd(E) : E ⊢_K const_K(1)
+//   Terminal_funcd(E)[k] = Terminal_func(E[k]).
+//
+// Composing this owner with Const_func(a) derives a coherent constant map
+// from any displayed source.  In particular it supplies the fixed argument
+// of Eval_funcd without a specialized third evaluation owner.
+injective symbol Terminal_funcd [K : Cat] (E : τ (Catd K))
+  : τ (Functord E (@Const_catd K Terminal_cat));
+
+// Point component of displayed terminal weakening.
+rule @tapp0_fapp0 _ Cat_cat _ _ $k (@Terminal_funcd _ $E)
+  ↪ Terminal_func (Fibre_cat $E $k);
 
 // 17b. Constant sections and delayed product-pair telescope rules
 //

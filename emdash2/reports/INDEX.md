@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-23
+Date: 2026-07-28
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
@@ -34,6 +34,14 @@ implementation plans, and historical decisions.
   foundations and explicit staging limits.
 - `REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`: notation
   authority for comments, examples, and future parser work.
+
+The 2026-07-28 constant-domain displayed-evaluation closure adds the stable
+`Eval_funcd` and `Terminal_funcd` owners plus their two point-component
+rules. The current-status report records owner/coherence boundaries,
+Foundations gives the mathematical reading, and the canonical-syntax report
+records `S(A,B)`, evaluator, and terminal-weakening notation. Generic
+`fapp`/`tapp` remains the sole generic coherence owner; arbitrary
+mixed-domain and genuine dependent-chain lowering remain deferred.
 
 ## Recently Completed Plan Ledgers
 

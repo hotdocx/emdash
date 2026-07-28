@@ -1186,14 +1186,43 @@ CoreCategoricalFibredDependentTargetCompilation {
             }
         }
     );
+    const compiled = compileCoreLfDeclarations(
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_TRANSFER_MODULE,
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_TRANSFER_POLICY,
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_TRANSFER_LINKAGE,
+        {
+            initialEnvironment: prerequisite.compiled.environment,
+            runtimeProgram: consumerRuntimeFragment.runtime
+        }
+    );
+    const declarationContext = new CoreLfMixedDeclarationContext(
+        prerequisite.declarationContext,
+        [compiled]
+    );
+    /*
+     * The consumer rules were subject-checked with the source-time proof
+     * program above. Recompile the same proof rule against the final
+     * declaration objects and composed runtime returned to callers. This
+     * preserves the proof compiler's exact-prefix invariant after the
+     * required final declaration recheck; it does not weaken opaque-
+     * extension validation or add a proof/runtime rule.
+     */
+    const proofProgram = compileCoreLfProofProgram(
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_PROOF_MODULE,
+        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_PROOF_POLICY,
+        declarationContext,
+        {
+            runtimeProgram: consumerRuntimeFragment.runtime
+        }
+    );
     cachedCompilation = Object.freeze({
         prerequisite,
-        compiled: initialCompiled,
-        declarationContext: initialContext,
+        compiled,
+        declarationContext,
         prerequisiteRuntimeFragment,
         consumerRuntimeFragment,
         composedRuntime: consumerRuntimeFragment.runtime,
-        proofProgram: subjectProofProgram
+        proofProgram
     });
     return cachedCompilation;
 }

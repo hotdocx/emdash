@@ -90,6 +90,35 @@ intentional skips, zero failures) and all 19 live conformance judgments. The
 exact review checkpoint is
 `1251e5c666d2be2ee914d0d122848a259f578da3`.
 
+DISPLAYED-EVAL-1A is now implemented at the reviewed boundary. It retains
+the direct typed TypeScript construction IR and the one existing recursive
+displayed contextual compiler. Programmatic
+`displayedContextLambda`/`apply`/`fibrePair` constructors remain acceptable:
+the usability property is that bound categorical variables may occur under
+supported typed subexpressions, not that the API hides every constructor or
+parses text. The varying case recursively compiles both children, including
+the nested witness `H[e](G[d])`; the fixed case compiles `F a` by deriving a
+coherent constant argument through `Terminal_funcd` and
+`const_section_func`. No whole-body recognizer, second AST/checker, or prior
+working abstraction path was introduced, restored, or discarded.
+
+The active kernel adds exactly `Eval_funcd`, `Terminal_funcd`, and their two
+point-component rules. Generic `fapp`/`tapp` remains the sole coherence
+owner. The TypeScript transfer adds no intrinsic Core owner. Because the
+older TypeScript profile did not yet contain three pre-existing active
+signatures (`Functor_catd`, `Terminal_func`, `const_section_func`) or the
+existing `Functor_catd` fibre rule, the transfer names those four items
+explicitly as prerequisites; they are not counted as new mathematical
+semantics. The audited dependent-target final-runtime recompilation is also
+installed. Focused TypeScript tests, the runnable demo, live Lambdapi
+object/component/base-arrow/higher-action/reindexing evidence, bounded
+kernel checks, warning summary, and strict-LHS audit are green. Final
+repository validation is also green: `check:all` passes 904 TypeScript tests
+(857 active passes, 47 intentional skips), all 19 frozen conformance
+judgments, all 41 health targets, strict catalog/TOC/reference/report/book
+checks, and zero failures. The implementation checkpoint is being recorded
+by this tranche; a following ledger-only checkpoint will bind its exact hash.
+
 ## Authority And Relationship To The Completed Architecture
 
 The active mathematical authority remains the Lambdapi v3.2 development
@@ -468,9 +497,9 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-LIFTING-0A | executable proposal frozen, validated, checkpointed `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`, and approved exactly as proposed at review checkpoint `7badcd5b930bd098b178d89bf4488637695fb14d` with human supersession | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
 | DISPLAYED-EVAL-0B | complete read-only authority audit; no semantic delta; checkpointed `7df9993f06fc55e2f34b09094b87987ef19cecba` | approved DISPLAYED-LIFTING-0A/D-010 | Proved the arbitrary mixed-variance/plain-argument obstruction, qualified the constant-domain case, compared the universe-natural alternative, owner-position-probed the minimal stable closure, and classified the dependent-target mismatch as stale runtime wiring |
 | DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal checkpointed with 0B at `7df9993f06fc55e2f34b09094b87987ef19cecba`; approved exactly as proposed at separate delegated review checkpoint `1251e5c666d2be2ee914d0d122848a259f578da3` with human supersession | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
-| DISPLAYED-EVAL-1A | exact implementation authorized by reviewed D-011; implementation pending | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Implement the varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; add no new surface/checker layer or whole-body recognizer |
+| DISPLAYED-EVAL-1A | complete and fully validated; implementation checkpoint being recorded, followed by exact ledger synchronization | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
-| DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
+| DISPLAYED-CHAIN-0A | next dependency-ready read-only executable proposal; no semantic continuation authorized | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; inventory existing authority and identify exact Sigma-arrow/total-comparison needs before semantic implementation |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -530,13 +559,13 @@ The displayed/dependent matrix is deliberately more qualified:
 | closed coherent displayed subject, open argument | implemented | `comp_fapp0` |
 | fibre pair | implemented | `Product_pair_funcd` |
 | exact closed-section weakening | implemented, qualified | `section_pullback_func` |
-| varying fibre-functor subject, fixed/coherent argument | unresolved owner/derived construction | `Functor_catd`, ordinary `Eval_func`/`fapp0_func` are ingredients; a coherent displayed evaluator and its reindexing behavior are not yet selected |
-| varying subject, varying argument | unresolved owner/derived construction | displayed pairing exists, but pairing alone does not supply coherent evaluation |
+| varying fibre-functor subject, fixed/coherent argument | implemented for the stable constant-domain family | `Terminal_funcd`, `const_section_func`, displayed pairing, then `Eval_funcd`; no third evaluator owner |
+| varying subject, varying argument | implemented for the stable constant-domain family | recursively compile both typed children, pair them with `Product_pair_funcd`, then compose with `Eval_funcd` |
 | nested displayed abstraction | comparison required | direct displayed curry versus sequential totalization versus repeated pullback/Sigma |
 | genuine dependency edge | separate `DISPLAYED-CHAIN-0A` | compare the three presentations and audit Sigma arrow action |
 | contravariant position | frontend route unselected | `Functor_catd`, `Op_catd`, and pre/postcomposition ingredients require polarity-directed lowering |
 | transformation/higher action | separate `DISPLAYED-ND-0A` | select among `tapp*`, `tdapp*`, and `fdapp*` by typed cell level; do not claim general coherence synthesis |
-| dependent-target/direct-displayed profile composition | measured mismatch | preserve the `TYPE_MISMATCH` reproduction and isolate transfer/presentation interaction before any semantic patch |
+| dependent-target/direct-displayed profile composition | mechanically repaired | final declaration recompilation now uses the composed runtime; the unchanged formerly failing term checks |
 
 The absence of a lexically obvious generic displayed-evaluation owner is not
 a proof that the construction is mathematically impossible or that a new
@@ -569,6 +598,13 @@ read-only evidence row. Once separately approved, it must answer:
 Semantic DISPLAYED-LIFTING-1A remains withheld until that evidence freezes an
 exact implementation row. Genuine dependency chains and general `:^nd`
 coherence remain independent later rows.
+
+This paragraph records the historical 0A selection. DISPLAYED-EVAL-0B and
+the reviewed DISPLAYED-EVAL-1A continuation have since answered all four
+questions for the constant-domain case and implemented the exact result.
+They do not extend the conclusion to arbitrary mixed-domain application or a
+genuine dependency edge. The next dependency-ready row is therefore
+proposal-only DISPLAYED-CHAIN-0A, not another frontend/checker rewrite.
 
 ### Exact decision gate
 
@@ -1171,8 +1207,174 @@ Exact staged-path review and `git diff --cached --check` passed. The local
 implementation checkpoint is
 `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
 
+## DISPLAYED-EVAL-1A Completion Record
+
+### End-user and compiler boundary
+
+The implementation confirms the corrected usability interpretation. The
+input remains the existing direct typed TypeScript categorical API; spelling
+`displayedContextLambda`, `apply`, and `fibrePair` is acceptable. What
+matters is that one callback-once contextual abstraction recursively
+compiles bound-variable occurrences beneath supported typed subexpressions.
+It does not ask the user to provide internal bracket punctuation or factor a
+whole body into a special evaluator form.
+
+The public `fibred-displayed-evaluation-1` profile demonstrates:
+
+```text
+λ (F : S, x : X) :^fd. F x
+λ (e : E, d : D) :^fd. H[e](G[d])
+λ F :^fd S. F a
+```
+
+where:
+
+```text
+S = Functor_catd(Const_catd(Op_cat K,A),B)
+X = Const_catd(K,A).
+```
+
+The nested example is material: both the evaluator subject and argument are
+recursively compiled indexed applications. This rules out a whole-lambda-
+body recognizer as the demonstrated architecture. Unsupported typed nodes,
+wrong families, wrong fixed-object categories, wrong variance, absent
+profiles, escaped values, and foreign-program values fail closed with
+provenance.
+
+The stable pipeline is:
+
+```text
+typed TypeScript construction IR
+  -> recursive typed-application tree
+  -> displayed contextual compiler
+  -> backend-neutral explicit Core
+  -> generic checker/evaluator.
+```
+
+No RawExpr, second bidirectional checker, parser, explicit bracket token,
+owner-specific LF node, or intrinsic Core owner was added.
+
+### Exact mathematical and transfer delta
+
+The active Lambdapi delta is exactly two declarations and two rules:
+
+```text
+Eval_funcd(B)
+  : Functord(P(S(A,B),Const_catd(K,A)),B)
+
+Terminal_funcd(E)
+  : Functord(E,Const_catd(K,Terminal_cat))
+
+Eval_funcd(B)[k]     -> Eval_func(A,B[k])
+Terminal_funcd(E)[k] -> Terminal_func(E[k]).
+```
+
+The fixed case composes `Terminal_funcd(E)` with
+`const_section_func(K,A)` and pairs the resulting coherent argument with the
+varying subject before `Eval_funcd`. It therefore adds no third evaluator.
+Generic `fapp`/`tapp` remains the sole owner of identity, composition,
+base-arrow action, and higher naturality.
+
+The older TypeScript runtime did not yet transfer three existing signatures
+(`Functor_catd`, `Terminal_func`, `const_section_func`) and the existing
+`Functor_catd` fibre projection. The new transfer records those four as
+prerequisites and the two owners/two rules as the semantic delta. Every
+signature and rule subject is checked by the generic transfer engines; no
+declaration-specific checker or intrinsic owner was added.
+
+The dependent-target profile repair repeats its final declaration
+compilation against the composed runtime. Its returned proof program is
+likewise compiled against the final declaration objects and composed
+runtime, preserving the proof compiler's exact opaque-extension-prefix
+invariant. This is a mechanical wiring correction, not a new equation.
+
+Active-source and canonical-export evidence was synchronized to:
+
+```text
+source sha256:
+  10638f01b4bd2163b7c7cd254db76d5343b073ddbc7cc7a18c6ca2755c35a91a
+canonical export sha256:
+  c736d3447721ac7a48b6f35f5287734774816283954eb25a35de09c0f0b9c425
+```
+
+The live export inventory passes for all five active modules.
+
+### Computation and validation
+
+The TypeScript facade checks:
+
+- stable functor-family fibre computation;
+- varying, recursively nested, and fixed object evaluation;
+- generic base-arrow action without constructor-specific coherence rules;
+- reindexing;
+- retained iterable higher action; and
+- negative family, object-category, variance, profile, and ownership cases.
+
+The permanent Lambdapi diagnostics classify seven displayed-evaluation
+checks and cover owner components, both consumer betas, base-arrow action,
+higher action, and the `Op_cat K ≠ K` non-collapse. The compact warning
+inventory is 1,171 diagnostics: 1,012 unjoinable critical pairs and 159
+replaceable variables. The proposal's raw warning-marker comparison remains
+1,175 baseline versus 1,177 candidate; these are different counting
+presentations of the same intentional two-marker delta. Strict LHS audit is
+zero unreviewed clauses, with 47 annotated slots across 29 intentional
+clauses.
+
+Validation is green:
+
+- 22 focused audit/transfer/frontend/demo tests;
+- `./scripts/pnpmw run check:ts`: 904 tests, 857 active passes, 47
+  intentional skips, zero failures;
+- frozen `check:conformance`: 19/19 judgments;
+- live displayed-evaluation conformance: owner component, object beta,
+  terminal component, both consumers, base-arrow action, higher action, and
+  variance negative;
+- opt-in canonical export inventory for all five active modules;
+- runnable `demo:categorical-displayed-evaluation`;
+- bounded kernel check, warnings, examples, catalog, health, and CI;
+- catalog: 1,714 checks, 62 mapped areas, zero unclassified; and
+- aggregate `./scripts/pnpmw run check:all`.
+
+The generated health report covers all 41 active modules/examples. The exact
+implementation checkpoint is recorded immediately after the checkpoint
+commit in a ledger-only follow-up.
+
+### Qualified feasibility result
+
+This tranche settles the frontend architecture and mechanical transfer path
+for recursive constant-domain displayed evaluation. It is cumulative: no
+working ordinary/displayed abstraction implementation was discarded or
+replaced. It does not prove arbitrary mixed-domain application, general
+contravariant occurrence lowering, a genuine dependent telescope edge,
+nested displayed abstraction, general `:^nd` coherence, Sigma arrow action,
+total-category equivalence, groupoidal closure, parsing/acquisition, or a
+deployed browser profile.
+
+The next dependency-ready task is therefore read-only DISPLAYED-CHAIN-0A.
+It must compare the existing sequential-total, repeated pullback/Sigma, and
+direct displayed presentations for one genuine dependency edge and freeze a
+separate non-self-authorizing proposal before any new semantics.
+
 ## Change Log
 
+- **2026-07-28 — DISPLAYED-EVAL-1A implemented at the reviewed semantic
+  boundary.** Added exactly the active `Eval_funcd` and `Terminal_funcd`
+  owners and their two point-component rules; generic `fapp`/`tapp` still
+  owns all generic coherence. The generic TypeScript transfer records the
+  pre-existing `Functor_catd`, `Terminal_func`, `const_section_func`, and
+  `Functor_catd` fibre-rule prerequisites separately from the two-owner/
+  two-rule semantic delta and introduces zero intrinsic Core owners. The
+  existing typed application IR and recursive displayed contextual compiler
+  now handle varying `F x`, recursively nested `H[e](G[d])`, and fixed `F a`;
+  the last derives its coherent argument through `Terminal_funcd` rather than
+  a third evaluator. The dependent-target transfer now performs the audited
+  final declaration recompilation against its composed runtime. This is a
+  semantic variable-occurrence extension, not a RawExpr/parser/checker or
+  whole-body-recognizer rewrite. Focused/demo/live/kernel and aggregate
+  repository gates are green at 904 tests (857 active, 47 intentional
+  skips), 19/19 frozen conformance judgments, 1,714 classified kernel
+  checks, and zero failures. Exact checkpoint recording follows this
+  implementation commit.
 - **2026-07-28 — D-DTTLF-USABILITY-011 approved under delegated unattended
   authority.** No immediate human response followed presentation of the
   exact frozen OWNER-0C gate. A separate deeply immutable review snapshots
@@ -1362,29 +1564,46 @@ authorizes only DISPLAYED-EVAL-1A and a later human decision supersedes it.
 Do not mutate the pre-review proposal or infer any authorization beyond the
 review's exact fields.
 
-If and only if D-011 is approved exactly as proposed, implement bounded
-DISPLAYED-EVAL-1A: add exactly stable `Eval_funcd` and `Terminal_funcd`,
-their two `tapp0_fapp0` point-component rules, generic declaration/runtime
-transfer, and the standard final recompilation of the dependent-target
-declarations against the composed runtime. Extend the existing recursive
-typed contextual compiler only for varying-subject/varying-argument and
-varying-subject/fixed-argument application judgments. Derive fixed
-evaluation through `Terminal_funcd`; do not add a third fixed-evaluator
-owner. Keep global `fapp`/`tapp` as the sole owner of generic functoriality
-and naturality. Retain the exact two-critical-pair warning comparison as
-diagnostic evidence rather than a veto or an excuse for silent scope change.
+Preserve completed DISPLAYED-EVAL-1A. It adds exactly stable `Eval_funcd`
+and `Terminal_funcd`, their two `tapp0_fapp0` point-component rules, generic
+declaration/runtime transfer, and the standard final recompilation of the
+dependent-target declarations against the composed runtime. Its existing
+recursive typed contextual compiler handles varying-subject/
+varying-argument and varying-subject/fixed-argument judgments, including a
+nested recursive subject-and-argument witness; fixed evaluation is derived
+through `Terminal_funcd`, with no third evaluator owner. Global
+`fapp`/`tapp` remains the sole owner of generic functoriality and naturality.
+The transfer's three existing-signature and one existing-rule prerequisites
+are not new mathematical semantics. Preserve the exact warning comparison as
+diagnostic evidence. If its final full gates or exact local checkpoint are
+not yet recorded, finish only that bounded synchronization first.
 
 Add no parallel RawExpr, second checker, parser, explicit bracket
 punctuation, whole-body recognizer, intrinsic Core owner, arbitrary
 mixed-domain coercion, or constructor-specific identity/composition/
 naturality rule.
 
-Keep DISPLAYED-EVAL-1A and DISPLAYED-CHAIN-0A separate. The latter must
-compare sequential-total, repeated pullback/Sigma, and direct displayed
-lowerings on one genuine dependency edge. Do not assume Sigma arrow action,
-a generic total-category pullback/equivalence, raw product-reindex equality,
-or general :^nd coherence. Freeze a separate exact executable proposal
-before any semantic implementation or new owner/rule.
+The next dependency-ready slice is proposal-only DISPLAYED-CHAIN-0A. Perform
+a read-only active-authority and executable-TypeScript comparison of
+sequential totalization, repeated pullback/Sigma, and direct displayed
+lowering for one genuine dependency edge. Inventory the exact reusable
+`Sigma_cat`, `Pullback_catd`, `sigma_map_func`,
+`sigma_pullback_total_func`, dependent-hom, section-action, and structural
+sibling authority before proposing any owner. Distinguish a dependency edge
+from independent siblings over the same base; record where weakening,
+contraction, and exchange remain valid within a fibre product. Test object
+and arrow behavior, recursive variable occurrence, reindexing, and relevant
+negative/non-collapse cases. Identify any exact Sigma-arrow or total-
+comparison gap rather than assuming one.
+
+Freeze the result as a deeply immutable, executable, non-self-authorizing
+DISPLAYED-CHAIN-0A proposal with alternatives, dependency closure, owner/rule
+delta, warning expectations, TypeScript consumer shape, positive/negative
+corpus, and explicit non-effects. Do not implement its semantic continuation
+or add a kernel owner/rule before a separate exact
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision.
+Do not assume a generic total-category pullback/equivalence, raw product-
+reindex equality, or general :^nd coherence.
 
 For a future exact bounded gate in this goal, if no immediate human response
 follows presentation of its frozen proposal, the user's standing delegation

@@ -1470,6 +1470,43 @@ Transf_catd(A,B,FF,GG)[k] = Transf(FF[k], GG[k])
 These pointwise constructions are useful, but they do not replace the full
 natural transformation structure when arrows over the base must be tracked.
 
+The active kernel now also has coherent evaluation for the important
+constant-domain specialization. For an ordinary category `A` and a
+Cat-valued displayed family `B : K → Cat`, let:
+
+```text
+S(A,B) = Functor_catd(Const_catd(Op_cat K,A),B).
+```
+
+Thus `S(A,B)[k] = Functor(A,B[k])`. The stable displayed evaluator is:
+
+```text
+Eval_funcd(B) : P(S(A,B),Const_catd(K,A)) →_K B
+Eval_funcd(B)[k] = Eval_func(A,B[k]).
+```
+
+Here `P` is the transparent fibrewise sibling product, not a new product
+family owner. The formula is deliberately constant-domain: an arbitrary
+contravariant family cannot simultaneously be reused as the covariant
+argument family. The generic `fapp`/`tapp` calculus supplies base-arrow
+action and higher naturality, so the evaluator needs only its stable owner
+and point-component computation.
+
+Fixed arguments are derived from reusable displayed weakening:
+
+```text
+Terminal_funcd(E) : E →_K Const_catd(K,Terminal_cat)
+Terminal_funcd(E)[k] = Terminal_func(E[k]).
+```
+
+Composing `Terminal_funcd(E)` with a constant section gives a coherent map
+from any displayed source to `Const_catd(K,A)`. Pairing that map with a
+varying subject and then applying `Eval_funcd` accounts for expressions such
+as `F a` without a separate fixed-argument evaluator. This closure handles
+recursive constant-domain displayed application. Arbitrary mixed-domain
+evaluation, general contravariant occurrence lowering, and abstraction
+across a genuine dependent telescope edge remain separate problems.
+
 ## 11. Basic Sigma/Pi Operations And Adjunction Shadows
 
 The active v3.2 implementation includes an ordinary functor adjunction
@@ -2647,6 +2684,9 @@ vocabulary.
 | Natural family morphisms | `Functord_cat E D` / `Functord E D` |
 | Natural family transformations | `Transfd_cat FF GG` / `Transfd FF GG` |
 | `Functor_catd(A,B)` | `Functor_catd A B` |
+| `S(A,B)[k] = Functor(A,B[k])` for constant `A` | `Functor_catd (Const_catd (Op_cat K) A) B` |
+| coherent displayed evaluation `P(S(A,B),Const_K(A)) →_K B` | `Eval_funcd B` |
+| displayed terminal weakening `E →_K Const_K(1)` | `Terminal_funcd E` |
 | `Hom_catd(E,X,Y)` | `Hom_catd E X Y` |
 | `Transf_catd(A,B,FF,GG)` | `Transf_catd A B FF GG` |
 | `PathOut_Z(x)` | `PathOut_cat Z x` |

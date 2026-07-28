@@ -50,6 +50,12 @@ import {
     coreCategoricalFibredWeakenReindexCoreName
 } from './categorical_fibred_weaken_reindex_transfer';
 import {
+    coreCategoricalDisplayedEvaluationCoreName
+} from './categorical_displayed_evaluation_transfer';
+import {
+    CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+} from './categorical_fibred_dependent_target_transfer';
+import {
     CoreCategoricalAbstractionJudgment,
     CoreCategoricalAbstractionLayer,
     CoreCategoricalApplicationJudgment,
@@ -219,9 +225,72 @@ CoreCategoricalDependentContinuationApplicationJudgment = Object.freeze({
         'acts on an indexed object of its source family.'
 });
 
+export interface CoreCategoricalDisplayedEvaluationApplicationJudgment {
+    readonly id:
+        | 'displayed-evaluation.varying-argument'
+        | 'displayed-evaluation.fixed-argument';
+    readonly layer: 'categorical';
+    readonly subjectClassifier:
+        'indexed-constant-domain-functor-family-object';
+    readonly subjectForm: 'term';
+    readonly argumentDimension: 'object';
+    readonly expectedShape: 'object-value';
+    readonly dependency: 'displayed';
+    readonly target:
+        | 'displayed-evaluation-varying-object'
+        | 'displayed-evaluation-fixed-object';
+    readonly consumesSubjectTerm: true;
+    readonly implementationStatus: 'reviewed-continuation';
+    readonly surfaceDisposition: 'eligible';
+    readonly rule: string;
+}
+
+export const
+CORE_CATEGORICAL_DISPLAYED_EVALUATION_VARYING_APPLICATION:
+CoreCategoricalDisplayedEvaluationApplicationJudgment = Object.freeze({
+    id: 'displayed-evaluation.varying-argument',
+    layer: 'categorical',
+    subjectClassifier:
+        'indexed-constant-domain-functor-family-object',
+    subjectForm: 'term',
+    argumentDimension: 'object',
+    expectedShape: 'object-value',
+    dependency: 'displayed',
+    target: 'displayed-evaluation-varying-object',
+    consumesSubjectTerm: true,
+    implementationStatus: 'reviewed-continuation',
+    surfaceDisposition: 'eligible',
+    rule:
+        'A recursively compiled object of ' +
+        'Functor_catd(Const_(Op K)(A),B) evaluates at a recursively ' +
+        'compiled object of Const_K(A).'
+});
+
+export const
+CORE_CATEGORICAL_DISPLAYED_EVALUATION_FIXED_APPLICATION:
+CoreCategoricalDisplayedEvaluationApplicationJudgment = Object.freeze({
+    id: 'displayed-evaluation.fixed-argument',
+    layer: 'categorical',
+    subjectClassifier:
+        'indexed-constant-domain-functor-family-object',
+    subjectForm: 'term',
+    argumentDimension: 'object',
+    expectedShape: 'object-value',
+    dependency: 'displayed',
+    target: 'displayed-evaluation-fixed-object',
+    consumesSubjectTerm: true,
+    implementationStatus: 'reviewed-continuation',
+    surfaceDisposition: 'eligible',
+    rule:
+        'A recursively compiled object of ' +
+        'Functor_catd(Const_(Op K)(A),B) evaluates at a closed object of A ' +
+        'through Terminal_funcd and the existing constant-section package.'
+});
+
 type CoreCategoricalStoredApplicationJudgment =
     | CoreCategoricalApplicationJudgment
-    | CoreCategoricalDependentContinuationApplicationJudgment;
+    | CoreCategoricalDependentContinuationApplicationJudgment
+    | CoreCategoricalDisplayedEvaluationApplicationJudgment;
 
 export type CoreCategoricalContextualIr =
     | {
@@ -376,6 +445,10 @@ export type CoreCategoricalDependentApplicationPrerequisiteId =
     | 'displayed-product-left-projection'
     | 'displayed-product-right-projection'
     | 'displayed-product-pair'
+    | 'stable-functor-family'
+    | 'displayed-evaluation'
+    | 'displayed-terminal'
+    | 'constant-section-functor'
     | CoreCategoricalDependentPrerequisiteId
     | CoreCategoricalDependentCompositionPrerequisiteId;
 
@@ -404,6 +477,11 @@ export interface CoreCategoricalScopedBuilderOptions {
      * sibling compiler and typed fibre-pair construction node.
      */
     readonly displayedContextualAbstraction?: boolean;
+    /**
+     * Enable only the two DISPLAYED-EVAL-1A recursive typed-application
+     * judgments over the stable constant-domain `Functor_catd` family.
+     */
+    readonly displayedEvaluation?: boolean;
 }
 
 export interface CoreCategoricalBinderOptions {
@@ -1237,6 +1315,178 @@ export class CoreCategoricalScopedBuilder {
                 { value: baseCategory },
                 { value: fibreCategory }
             ],
+            nodeProvenance
+        );
+    }
+
+    private oppositeCategory(
+        category: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+                    .oppositeCategory,
+                nodeProvenance
+            ),
+            [{
+                plicity: 'explicit',
+                value: category
+            }],
+            nodeProvenance
+        );
+    }
+
+    private displayedEvaluationFamilyShape(
+        family: KernelExpression,
+        baseCategory: KernelExpression,
+        nodeProvenance: Provenance
+    ): {
+        readonly domainCategory: KernelExpression;
+        readonly targetFamily: KernelExpression;
+    } | undefined {
+        if (
+            family.tag !== 'call' ||
+            family.callee.tag !== 'reference' ||
+            family.callee.namespace !== 'free' ||
+            family.callee.name !==
+                coreCategoricalDisplayedEvaluationCoreName(
+                    'stableFunctorFamily'
+                ) ||
+            family.arguments.length !== 3 ||
+            family.arguments[0].plicity !== 'implicit' ||
+            family.arguments[1].plicity !== 'explicit' ||
+            family.arguments[2].plicity !== 'explicit' ||
+            !kernelExpressionEquals(
+                family.arguments[0].value,
+                baseCategory
+            )
+        ) {
+            return undefined;
+        }
+        const domainFamily = family.arguments[1].value;
+        if (
+            domainFamily.tag !== 'application' ||
+            domainFamily.owner !== 'constant-displayed-family' ||
+            domainFamily.arguments.length !== 2 ||
+            !kernelExpressionEquals(
+                domainFamily.arguments[0].value,
+                this.oppositeCategory(
+                    baseCategory,
+                    nodeProvenance
+                )
+            )
+        ) {
+            return undefined;
+        }
+        return {
+            domainCategory: domainFamily.arguments[1].value,
+            targetFamily: family.arguments[2].value
+        };
+    }
+
+    private displayedEvaluationTerm(
+        baseCategory: KernelExpression,
+        domainCategory: KernelExpression,
+        targetFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalDisplayedEvaluationCoreName(
+                    'displayedEvaluation'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: domainCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: targetFamily
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private displayedTerminalTerm(
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalDisplayedEvaluationCoreName(
+                    'displayedTerminal'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: sourceFamily
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private constantSectionTerm(
+        baseCategory: KernelExpression,
+        domainCategory: KernelExpression,
+        object: InternalCoreCategoricalTerm,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        if (object.closed === undefined) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'A fixed displayed-evaluation argument must be closed'
+            );
+        }
+        const constantFamily = this.constantDisplayedFamily(
+            baseCategory,
+            domainCategory,
+            nodeProvenance
+        );
+        return this.functorObject(
+            domainCategory,
+            this.sectionCategory(
+                baseCategory,
+                constantFamily,
+                nodeProvenance
+            ),
+            kernelCall(
+                kernelFree(
+                    coreCategoricalDisplayedEvaluationCoreName(
+                        'constantSectionFunctor'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'explicit',
+                        value: baseCategory
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: domainCategory
+                    }
+                ],
+                nodeProvenance
+            ),
+            object.closed.term,
             nodeProvenance
         );
     }
@@ -2796,6 +3046,143 @@ export class CoreCategoricalScopedBuilder {
         );
     }
 
+    private applyDisplayedEvaluation(
+        subject: InternalCoreCategoricalTerm,
+        argumentValue:
+            | CoreCategoricalTerm
+            | CoreCategoricalHomBoundary,
+        expectedShape: CoreCategoricalExpectedShape | undefined,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (
+            this.options.displayedEvaluation !== true ||
+            subject.type.tag !== 'indexed-object'
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Open displayed evaluation requires the reviewed ' +
+                    'DISPLAYED-EVAL-1A capability'
+            );
+        }
+        if (
+            typeof argumentValue === 'object' &&
+            argumentValue !== null &&
+            (argumentValue as InternalCoreCategoricalHomBoundary)[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Displayed evaluation expects an object argument, not a ' +
+                    'whole Hom boundary'
+            );
+        }
+        if (
+            expectedShape !== undefined &&
+            expectedShape !== 'object-value'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Displayed evaluation cannot produce expected shape ` +
+                    `'${expectedShape}'`
+            );
+        }
+        const shape = this.displayedEvaluationFamilyShape(
+            subject.type.family,
+            subject.type.baseCategory,
+            nodeProvenance
+        );
+        if (shape === undefined) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Displayed evaluation requires the stable constant-domain ' +
+                    'Functor_catd(Const_(Op K)(A),B) subject family'
+            );
+        }
+        const argument = this.requireTerm(
+            argumentValue as CoreCategoricalTerm,
+            nodeProvenance
+        );
+        const coherentArgumentFamily = this.constantDisplayedFamily(
+            subject.type.baseCategory,
+            shape.domainCategory,
+            nodeProvenance
+        );
+        let judgment:
+            CoreCategoricalDisplayedEvaluationApplicationJudgment;
+        if (argument.type.tag === 'indexed-object') {
+            if (
+                argument.type.indexOrdinal !==
+                    subject.type.indexOrdinal ||
+                !kernelExpressionEquals(
+                    argument.type.baseCategory,
+                    subject.type.baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    argument.type.family,
+                    coherentArgumentFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'The varying displayed-evaluation argument must be an ' +
+                        'object of Const_K(A) at the subject base slot'
+                );
+            }
+            judgment =
+                CORE_CATEGORICAL_DISPLAYED_EVALUATION_VARYING_APPLICATION;
+        } else {
+            const argumentCategory = this.categoricalObjectCategory(
+                argument.type,
+                nodeProvenance,
+                'fixed displayed-evaluation argument'
+            );
+            if (
+                argument.closed === undefined ||
+                argumentCategory === undefined ||
+                !coreObjectCategoryEquals(
+                    argumentCategory,
+                    shape.domainCategory
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'The fixed displayed-evaluation argument must be a ' +
+                        'closed object of the constant domain A'
+                );
+            }
+            judgment =
+                CORE_CATEGORICAL_DISPLAYED_EVALUATION_FIXED_APPLICATION;
+        }
+        return this.makeTerm(
+            {
+                tag: 'typed-application',
+                judgment,
+                subject,
+                argument,
+                provenance: nodeProvenance
+            },
+            {
+                tag: 'indexed-object',
+                baseCategory: subject.type.baseCategory,
+                family: shape.targetFamily,
+                indexOrdinal: subject.type.indexOrdinal
+            },
+            mergeUsage(subject.usage, argument.usage),
+            undefined,
+            [
+                ...subject.abstractions,
+                ...argument.abstractions
+            ]
+        );
+    }
+
     apply(
         subjectValue: CoreCategoricalTerm,
         argumentValue:
@@ -2859,6 +3246,21 @@ export class CoreCategoricalScopedBuilder {
                     nodeProvenance
                 );
             }
+        }
+        if (
+            subject.type.tag === 'indexed-object' &&
+            this.displayedEvaluationFamilyShape(
+                subject.type.family,
+                subject.type.baseCategory,
+                nodeProvenance
+            ) !== undefined
+        ) {
+            return this.applyDisplayedEvaluation(
+                subject,
+                argumentValue,
+                expectedShape,
+                nodeProvenance
+            );
         }
         if (subject.type.tag === 'indexed-functor') {
             return this.applyIndexedFibreFunctor(
@@ -4759,6 +5161,254 @@ export class CoreCategoricalScopedBuilder {
         return wiring;
     }
 
+    private compileDisplayedEvaluationApplication(
+        term: InternalCoreCategoricalTerm,
+        baseOrdinal: number,
+        baseCategory: KernelExpression,
+        wiring: CoreCategoricalDisplayedWiring,
+        activeOrdinals: ReadonlySet<number>,
+        nodeProvenance: Provenance
+    ): CoreCategoricalDisplayedContextualCompilation {
+        if (
+            this.options.displayedEvaluation !== true ||
+            term.node.tag !== 'typed-application' ||
+            (
+                term.node.judgment.target !==
+                    'displayed-evaluation-varying-object' &&
+                term.node.judgment.target !==
+                    'displayed-evaluation-fixed-object'
+            ) ||
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] === true ||
+            term.node.subject.type.tag !== 'indexed-object' ||
+            term.node.subject.type.indexOrdinal !== baseOrdinal ||
+            term.type.tag !== 'indexed-object' ||
+            term.type.indexOrdinal !== baseOrdinal
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                term.node.provenance,
+                'Displayed contextual evaluation lost its reviewed typed ' +
+                    'application judgment'
+            );
+        }
+        const subject = term.node.subject;
+        const argument = term.node.argument as
+            InternalCoreCategoricalTerm;
+        if (
+            subject.type.tag !== 'indexed-object' ||
+            term.type.tag !== 'indexed-object'
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                term.node.provenance,
+                'Displayed evaluation lost its indexed-object classifier'
+            );
+        }
+        const subjectType = subject.type;
+        const resultType = term.type;
+        const shape = this.displayedEvaluationFamilyShape(
+            subjectType.family,
+            baseCategory,
+            term.node.provenance
+        );
+        if (
+            shape === undefined ||
+            !kernelExpressionEquals(
+                subjectType.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                resultType.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                resultType.family,
+                shape.targetFamily
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                term.node.provenance,
+                'Displayed evaluation classifier drifted from its stable ' +
+                    'constant-domain source or target family'
+            );
+        }
+        const subjectCompilation = this.compileDisplayedContextual(
+            subject,
+            baseOrdinal,
+            baseCategory,
+            wiring,
+            activeOrdinals,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            subjectCompilation.targetFamily,
+            subjectType.family
+        )) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                term.node.provenance,
+                'Recursively compiled displayed-evaluation subject has the ' +
+                    'wrong target family'
+            );
+        }
+        const coherentArgumentFamily = this.constantDisplayedFamily(
+            baseCategory,
+            shape.domainCategory,
+            term.node.provenance
+        );
+        let argumentCompilation:
+            CoreCategoricalDisplayedContextualCompilation;
+        if (
+            term.node.judgment.target ===
+                'displayed-evaluation-varying-object'
+        ) {
+            if (
+                argument.type.tag !== 'indexed-object' ||
+                argument.type.indexOrdinal !== baseOrdinal ||
+                !kernelExpressionEquals(
+                    argument.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    argument.type.family,
+                    coherentArgumentFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    term.node.provenance,
+                    'The recursively varying evaluation argument must have ' +
+                        'the constant family Const_K(A)'
+                );
+            }
+            argumentCompilation = this.compileDisplayedContextual(
+                argument,
+                baseOrdinal,
+                baseCategory,
+                wiring,
+                activeOrdinals,
+                nodeProvenance
+            );
+        } else {
+            const argumentCategory = this.categoricalObjectCategory(
+                argument.type,
+                term.node.provenance,
+                'fixed displayed-evaluation argument'
+            );
+            if (
+                argument.closed === undefined ||
+                argumentCategory === undefined ||
+                !coreObjectCategoryEquals(
+                    argumentCategory,
+                    shape.domainCategory
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    term.node.provenance,
+                    'The fixed displayed-evaluation argument must remain a ' +
+                        'closed object of A'
+                );
+            }
+            const sourceFamily = subjectCompilation.sourceFamily;
+            const terminalFamily = this.constantDisplayedFamily(
+                baseCategory,
+                this.terminalCategory(term.node.provenance),
+                term.node.provenance
+            );
+            const terminalCompilation:
+            CoreCategoricalDisplayedContextualCompilation = {
+                term: this.displayedTerminalTerm(
+                    baseCategory,
+                    sourceFamily,
+                    term.node.provenance
+                ),
+                sourceFamily,
+                targetFamily: terminalFamily,
+                identity: false,
+                structuralPrerequisites: Object.freeze([]),
+                dependentPrerequisites: Object.freeze([
+                    'displayed-terminal'
+                ])
+            };
+            const constantSectionCompilation:
+            CoreCategoricalDisplayedContextualCompilation = {
+                term: this.constantSectionTerm(
+                    baseCategory,
+                    shape.domainCategory,
+                    argument,
+                    term.node.provenance
+                ),
+                sourceFamily: terminalFamily,
+                targetFamily: coherentArgumentFamily,
+                identity: false,
+                structuralPrerequisites: Object.freeze([]),
+                dependentPrerequisites: Object.freeze([
+                    'constant-section-functor',
+                    'section-object-classifier-reduction'
+                ])
+            };
+            argumentCompilation =
+                this.composeDisplayedCompilations(
+                    baseCategory,
+                    constantSectionCompilation,
+                    terminalCompilation,
+                    term.node.provenance
+                );
+        }
+        if (!kernelExpressionEquals(
+            argumentCompilation.targetFamily,
+            coherentArgumentFamily
+        )) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                term.node.provenance,
+                'Compiled displayed-evaluation argument has the wrong ' +
+                    'constant family'
+            );
+        }
+        const paired = this.pairDisplayedCompilations(
+            baseCategory,
+            subjectCompilation,
+            argumentCompilation,
+            term.node.provenance
+        );
+        const evaluator:
+        CoreCategoricalDisplayedContextualCompilation = {
+            term: this.displayedEvaluationTerm(
+                baseCategory,
+                shape.domainCategory,
+                shape.targetFamily,
+                term.node.provenance
+            ),
+            sourceFamily: this.displayedProductFamily(
+                baseCategory,
+                subjectType.family,
+                coherentArgumentFamily,
+                term.node.provenance
+            ),
+            targetFamily: shape.targetFamily,
+            identity: false,
+            structuralPrerequisites: Object.freeze([
+                'product-category',
+                'product-pair',
+                'functor-composition',
+                'uncurry-package'
+            ]),
+            dependentPrerequisites: Object.freeze([
+                'stable-functor-family',
+                'displayed-evaluation'
+            ])
+        };
+        return this.composeDisplayedCompilations(
+            baseCategory,
+            evaluator,
+            paired,
+            term.node.provenance
+        );
+    }
+
     private compileDisplayedContextual(
         term: InternalCoreCategoricalTerm,
         baseOrdinal: number,
@@ -4832,6 +5482,21 @@ export class CoreCategoricalScopedBuilder {
                 return paired;
             }
             case 'typed-application': {
+                if (
+                    term.node.judgment.target ===
+                        'displayed-evaluation-varying-object' ||
+                    term.node.judgment.target ===
+                        'displayed-evaluation-fixed-object'
+                ) {
+                    return this.compileDisplayedEvaluationApplication(
+                        term,
+                        baseOrdinal,
+                        baseCategory,
+                        wiring,
+                        activeOrdinals,
+                        nodeProvenance
+                    );
+                }
                 if (
                     term.node.judgment.target !==
                         'indexed-fibre-functor-object' ||

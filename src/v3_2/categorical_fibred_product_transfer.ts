@@ -80,13 +80,9 @@ const MODULE_ID = 'emdash.emdash3_2';
 export const CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_REVISION =
     'FIBRED-PRODUCT-1A-TRANSPARENT-PRODUCT-1' as const;
 
-/*
- * Updated mechanically after the active two-rule kernel tranche is frozen.
- * This temporary value intentionally remains the immediately preceding
- * checkpoint hash while the tranche is in progress.
- */
+/* Updated mechanically after the active kernel tranche is frozen. */
 export const CORE_CATEGORICAL_FIBRED_PRODUCT_SOURCE_SHA256 =
-    'sha256:33e7e78b6516180507f2e99cff465119effbb84f2981d44b609d751963e24f94';
+    'sha256:10638f01b4bd2163b7c7cd254db76d5343b073ddbc7cc7a18c6ca2755c35a91a';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');

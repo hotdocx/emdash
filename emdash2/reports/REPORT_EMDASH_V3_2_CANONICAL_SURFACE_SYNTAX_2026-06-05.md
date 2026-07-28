@@ -381,6 +381,44 @@ The generic `->_[z]^Cat` reading is useful when emphasizing that
 `Functor_catd` is the `Cat`-ambient instance of `Hom_catd`; the `⊢_[z]`
 reading is preferred when emphasizing the functor/program-family type former.
 
+### Constant-domain displayed evaluation
+
+For `A : Cat` and `B : Catd K`, use the readable abbreviation:
+
+```text
+S(A,B) = Functor_catd(Const_catd(Op_cat K,A),B).
+```
+
+Its fibres are `S(A,B)[k] = Functor(A,B[k])`. The active coherent evaluator
+is written:
+
+```text
+Eval_funcd(B) : P(S(A,B),Const_catd(K,A)) ⊢_K B
+Eval_funcd(B)[k] = Eval_func(A,B[k]).
+```
+
+The source is the transparent displayed sibling product described below.
+The constant-domain qualification is semantic, not merely notational: an
+arbitrary `Catd(Op_cat K)` family cannot also serve as the covariant argument
+family. Generic `fapp`/`tapp` owns the evaluator's identity, composition,
+base-arrow action, and higher naturality; do not add constructor-specific
+copies of those rules.
+
+Displayed weakening to a fixed argument is:
+
+```text
+Terminal_funcd(E) : E ⊢_K Const_catd(K,Terminal_cat)
+Terminal_funcd(E)[k] = Terminal_func(E[k]).
+```
+
+Compose it with `const_section_{K,A}(a)` to obtain a coherent constant
+argument from any displayed source. Consequently a future convenient
+categorical binder may present `F x` or `F a` without spelling the product,
+pairing, or evaluator, while direct TypeScript construction may retain
+explicit `apply` nodes. This notation does not select a text parser,
+explicit bracket punctuation, arbitrary mixed-domain evaluation, or a
+general dependent-chain lowering.
+
 ## Displayed Sibling Product Notation
 
 For Cat-valued displayed families `B,C : Catd K`, write:

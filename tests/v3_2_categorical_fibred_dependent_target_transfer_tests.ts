@@ -235,6 +235,10 @@ describe(
                     .proofRules.map(rule => rule.id)
             );
             assert.equal(
+                compilation.proofProgram.declarations.environment,
+                compilation.compiled.environment
+            );
+            assert.equal(
                 compilation.composedRuntime.ruleIds.includes(
                     'categorical.dependent-target.' +
                         'category-presentation'

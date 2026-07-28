@@ -9589,6 +9589,217 @@ assert [K : Cat]
         q
         alpha;
 
+// catalog-area: Constant-domain displayed evaluation
+// Coherent displayed evaluation with a constant ordinary domain.
+symbol Displayed_eval_subject_check [K A : Cat] (B : τ (Catd K))
+  : τ (Catd K)
+≔ @Functor_catd K (@Const_catd (Op_cat K) A) B;
+
+symbol Displayed_eval_source_check [K A : Cat] (B : τ (Catd K))
+  : τ (Catd K)
+≔ @comp_cat_fapp0
+    K
+    (Product_cat Cat_cat Cat_cat)
+    Cat_cat
+    (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+    (Struct_sigma
+      (@Displayed_eval_subject_check K A B)
+      (@Const_catd K A));
+
+// The stable displayed evaluator projects to ordinary product evaluation.
+assert [K A : Cat]
+  (B : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K Cat_cat
+      (@Displayed_eval_source_check K A B)
+      B
+      k
+      (@Eval_funcd K A B)
+    ≡ @Eval_func A (Fibre_cat B k);
+
+// Object beta at a fibre computes to ordinary functor application.
+assert [K A : Cat]
+  (B : τ (Catd K))
+  (k : τ (Obj K))
+  (F : τ (Functor A (Fibre_cat B k)))
+  (a : τ (Obj A)) ⊢
+  @fapp0
+      (Product_cat (Functor_cat A (Fibre_cat B k)) A)
+      (Fibre_cat B k)
+      (@tapp0_fapp0
+        K Cat_cat
+        (@Displayed_eval_source_check K A B)
+        B
+        k
+        (@Eval_funcd K A B))
+      (Struct_sigma F a)
+    ≡ @fapp0 A (Fibre_cat B k) F a;
+
+// Displayed terminal weakening projects to the ordinary unique functor.
+assert [K : Cat]
+  (E : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K Cat_cat E (@Const_catd K Terminal_cat) k
+      (@Terminal_funcd K E)
+    ≡ @Terminal_func (Fibre_cat E k);
+
+// A coherent constant map from any displayed source is derived, not
+// primitive.
+symbol Const_funcd_check [K A : Cat]
+  [E : τ (Catd K)]
+  (a : τ (Obj A))
+  : τ (Functord E (@Const_catd K A))
+≔ @comp_fapp0
+    (@Catd_cat K)
+    E
+    (@Const_catd K Terminal_cat)
+    (@Const_catd K A)
+    (@Const_func K A a)
+    (@Terminal_funcd K E);
+
+// Varying displayed functor and varying coherent argument.
+symbol Displayed_eval_varying_check [K A : Cat]
+  [E B : τ (Catd K)]
+  (FF : τ (Functord E (@Displayed_eval_subject_check K A B)))
+  (xx : τ (Functord E (@Const_catd K A)))
+  : τ (Functord E B)
+≔ @comp_fapp0
+    (@Catd_cat K)
+    E
+    (@Displayed_eval_source_check K A B)
+    B
+    (@Eval_funcd K A B)
+    (@Product_pair_funcd
+      K E
+      (@Displayed_eval_subject_check K A B)
+      (@Const_catd K A)
+      FF xx);
+
+assert [K A : Cat]
+  (E B : τ (Catd K))
+  (FF : τ (Functord E (@Displayed_eval_subject_check K A B)))
+  (xx : τ (Functord E (@Const_catd K A)))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k))) ⊢
+  @fapp0
+      (Fibre_cat E k)
+      (Fibre_cat B k)
+      (@tapp0_fapp0
+        K Cat_cat E B k
+        (@Displayed_eval_varying_check K A E B FF xx))
+      e
+    ≡ @fapp0
+        A
+        (Fibre_cat B k)
+        (@fapp0
+          (Fibre_cat E k)
+          (Functor_cat A (Fibre_cat B k))
+          (@tapp0_fapp0
+            K Cat_cat E
+            (@Displayed_eval_subject_check K A B)
+            k FF)
+          e)
+        (@fapp0
+          (Fibre_cat E k)
+          A
+          (@tapp0_fapp0 K Cat_cat E (@Const_catd K A) k xx)
+          e);
+
+// Fixed evaluation is derived through Terminal_funcd rather than a third
+// stable owner.
+symbol Displayed_eval_fixed_check [K A : Cat]
+  [B : τ (Catd K)]
+  (a : τ (Obj A))
+  : τ (Functord (@Displayed_eval_subject_check K A B) B)
+≔ @comp_fapp0
+    (@Catd_cat K)
+    (@Displayed_eval_subject_check K A B)
+    (@Displayed_eval_source_check K A B)
+    B
+    (@Eval_funcd K A B)
+    (@Product_pair_funcd
+      K
+      (@Displayed_eval_subject_check K A B)
+      (@Displayed_eval_subject_check K A B)
+      (@Const_catd K A)
+      (@id
+        (@Catd_cat K)
+        (@Displayed_eval_subject_check K A B))
+      (@Const_funcd_check
+        K A
+        (@Displayed_eval_subject_check K A B)
+        a));
+
+assert [K A : Cat]
+  (B : τ (Catd K))
+  (a : τ (Obj A))
+  (k : τ (Obj K))
+  (F : τ (Functor A (Fibre_cat B k))) ⊢
+  @fapp0
+      (Functor_cat A (Fibre_cat B k))
+      (Fibre_cat B k)
+      (@tapp0_fapp0
+        K Cat_cat
+        (@Displayed_eval_subject_check K A B)
+        B k
+        (@Displayed_eval_fixed_check K A B a))
+      F
+    ≡ @fapp0 A (Fibre_cat B k) F a;
+
+// Base-arrow action is inherited from the generic displayed-functor
+// projection and remains at iterable functor level.
+assert [K A : Cat]
+  (B : τ (Catd K))
+  (x y : τ (Obj K)) ⊢
+  @tapp1_func
+      K Cat_cat
+      (@Displayed_eval_source_check K A B)
+      B x y
+      (@Eval_funcd K A B)
+    : τ (Functor
+        (Hom_cat K x y)
+        (Functor_cat
+          (Fibre_cat (@Displayed_eval_source_check K A B) x)
+          (Fibre_cat B y)));
+
+// The same generic action remains iterable at the next hom level.
+symbol Displayed_eval_higher_check [K A : Cat]
+  [B : τ (Catd K)]
+  [x y : τ (Obj K)]
+  [p q : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) p q))
+  : τ (Transf
+      (@tapp1_fapp0
+        K Cat_cat
+        (@Displayed_eval_source_check K A B)
+        B x y
+        (@Eval_funcd K A B)
+        p)
+      (@tapp1_fapp0
+        K Cat_cat
+        (@Displayed_eval_source_check K A B)
+        B x y
+        (@Eval_funcd K A B)
+        q))
+≔ @fapp1_fapp0
+    (Hom_cat K x y)
+    (Functor_cat
+      (Fibre_cat (@Displayed_eval_source_check K A B) x)
+      (Fibre_cat B y))
+    (@tapp1_func
+      K Cat_cat
+      (@Displayed_eval_source_check K A B)
+      B x y
+      (@Eval_funcd K A B))
+    p q alpha;
+
+// The arbitrary mixed-domain/plain-argument route would require identifying
+// the directed base with its opposite; that collapse remains absent.
+assertnot [K : Cat] ⊢ Op_cat K ≡ K;
+
+// catalog-area: auto
 assert [A B : Cat] (F : τ (Functor A B)) (x : τ (Obj A)) ⊢
   fapp0 (@Eval_func A B) (Struct_sigma F x)
     ≡ fapp0 F x;

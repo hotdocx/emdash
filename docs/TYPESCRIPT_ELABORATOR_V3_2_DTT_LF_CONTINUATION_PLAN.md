@@ -1,6 +1,6 @@
 # TypeScript DTT/LF Continuation For emdash v3.2 — Living Plan
 
-Date: 2026-07-24
+Date: 2026-07-28
 Plan-ID: TS-ELAB-V3.2-DTT-LF-CONTINUATION
 Depends-On: the completed
 [`TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md),
@@ -41,6 +41,8 @@ ledger; active forward scale qualification is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md);
 the current end-user/frontend critical path is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md);
+its general displayed contextual-abstraction continuation is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md);
 DTTLF-PLAN-0, LF-1A through LF-1C, and LF-SURFACE-1 are complete;
 H-DTTLF-01 and the DIRECTED-1A instance of H-DTTLF-02 are approved as
 proposed; DIRECTED-1A is complete; the DIRECTED-1B instance of H-DTTLF-02 is
@@ -2721,3 +2723,20 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   evidence agrees. No new Lambdapi mathematical owner/rule, general
   dependent bracket, product/profile promotion, acquisition decision, or
   bulk transfer was added.
+- **2026-07-28 — Constant-domain displayed application implemented
+  recursively.** The dedicated displayed-bracket plan now implements
+  DISPLAYED-EVAL-1A through the existing typed construction IR, recursive
+  contextual compiler, explicit Core, and generic checker. Exactly
+  `Eval_funcd`, `Terminal_funcd`, and their two point-component rules were
+  added to active authority; varying `F x`, nested `H[e](G[d])`, and fixed
+  `F a` compile, with fixed evaluation derived through terminal weakening.
+  The TypeScript transfer adds no intrinsic Core owner and mechanically
+  repairs the separately audited dependent-target runtime wiring. This
+  confirms semantic variable occurrence beneath supported displayed
+  subexpressions without adding RawExpr, another checker, a parser, or a
+  whole-body recognizer. Arbitrary mixed-domain application, genuine
+  dependency chains, and general `:^nd` remain separate; proposal-only
+  DISPLAYED-CHAIN-0A is next. Aggregate validation passes 904 TypeScript
+  tests (857 active, 47 intentional skips), 19/19 frozen conformance
+  judgments, all 41 kernel health targets, and 1,714 classified checks with
+  zero failures.

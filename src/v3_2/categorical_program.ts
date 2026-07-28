@@ -75,6 +75,11 @@ import {
     compileCoreCategoricalFibredDependentTargetTransfer
 } from './categorical_fibred_dependent_target_transfer';
 import {
+    CoreCategoricalDisplayedEvaluationCompilation,
+    compileCoreCategoricalDisplayedEvaluationTransfer,
+    coreCategoricalDisplayedEvaluationCoreName
+} from './categorical_displayed_evaluation_transfer';
+import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
 import {
@@ -191,6 +196,9 @@ export const CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_DISPLAYED_BRACKET_PROGRAM_REVISION =
     'DISPLAYED-BRACKET-1A-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_DISPLAYED_EVALUATION_PROGRAM_REVISION =
+    'DISPLAYED-EVAL-1A-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -352,6 +360,9 @@ export interface CoreCategoricalProgramOptions {
      * computation selected by D-DTTLF-USABILITY-007/007A.
      * The displayed-bracket profile adds only the reviewed generic
      * first-order bracket for finite independent displayed siblings.
+     * The displayed-evaluation profile joins that recursive compiler to the
+     * repaired dependent-target runtime and adds only the two reviewed
+     * constant-domain evaluation judgments.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -364,7 +375,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-grouped-sequential-1'
         | 'fibred-weaken-reindex-1'
         | 'fibred-dependent-target-1'
-        | 'fibred-displayed-bracket-1';
+        | 'fibred-displayed-bracket-1'
+        | 'fibred-displayed-evaluation-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -400,6 +412,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_WEAKEN_REINDEX'
     | 'UNAVAILABLE_DEPENDENT_TARGET'
     | 'UNAVAILABLE_DISPLAYED_CONTEXT'
+    | 'UNAVAILABLE_DISPLAYED_EVALUATION'
     | 'INVALID_DISPLAYED_CONTEXT'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
@@ -692,6 +705,35 @@ for (const [
         coreCategoricalFibredWeakenReindexCoreName(id)
     ] = label;
 }
+for (const [
+    id,
+    label
+] of [
+    [
+        'stableFunctorFamily',
+        'emdash.categorical.stable-functor-family'
+    ],
+    [
+        'terminalFunctor',
+        'emdash.categorical.terminal-functor'
+    ],
+    [
+        'constantSectionFunctor',
+        'emdash.categorical.constant-section-functor'
+    ],
+    [
+        'displayedEvaluation',
+        'emdash.categorical.displayed-evaluation'
+    ],
+    [
+        'displayedTerminal',
+        'emdash.categorical.displayed-terminal'
+    ]
+] as const) {
+    categoricalLabels[
+        coreCategoricalDisplayedEvaluationCoreName(id)
+    ] = label;
+}
 
 export const CORE_CATEGORICAL_EXPLICIT_FREE_LABELS:
 Readonly<Record<string, string>> = Object.freeze({
@@ -841,7 +883,8 @@ export class CoreCategoricalProgram {
         | CoreCategoricalFibredBinderCompilation
         | CoreCategoricalFibredTransfdCompilation
         | CoreCategoricalFibredWeakenReindexCompilation
-        | CoreCategoricalFibredDependentTargetCompilation;
+        | CoreCategoricalFibredDependentTargetCompilation
+        | CoreCategoricalDisplayedEvaluationCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -851,6 +894,7 @@ export class CoreCategoricalProgram {
     private readonly fibredWeakenReindexEnabled: boolean;
     private readonly fibredDependentTargetEnabled: boolean;
     private readonly displayedContextualEnabled: boolean;
+    private readonly displayedEvaluationEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -868,7 +912,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
-            profile === 'fibred-displayed-bracket-1';
+            profile === 'fibred-displayed-bracket-1' ||
+            profile === 'fibred-displayed-evaluation-1';
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
@@ -877,7 +922,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
-            profile === 'fibred-displayed-bracket-1';
+            profile === 'fibred-displayed-bracket-1' ||
+            profile === 'fibred-displayed-evaluation-1';
         this.fibredStructureEnabled =
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
@@ -885,33 +931,42 @@ export class CoreCategoricalProgram {
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
-            profile === 'fibred-displayed-bracket-1';
+            profile === 'fibred-displayed-bracket-1' ||
+            profile === 'fibred-displayed-evaluation-1';
         this.fibredBinderEnabled =
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
-            profile === 'fibred-displayed-bracket-1';
+            profile === 'fibred-displayed-bracket-1' ||
+            profile === 'fibred-displayed-evaluation-1';
         this.fibredTransfdEnabled =
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
-            profile === 'fibred-displayed-bracket-1';
+            profile === 'fibred-displayed-bracket-1' ||
+            profile === 'fibred-displayed-evaluation-1';
         this.groupedSequentialEnabled =
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
-            profile === 'fibred-displayed-bracket-1';
+            profile === 'fibred-displayed-bracket-1' ||
+            profile === 'fibred-displayed-evaluation-1';
         this.fibredWeakenReindexEnabled =
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
-            profile === 'fibred-displayed-bracket-1';
+            profile === 'fibred-displayed-bracket-1' ||
+            profile === 'fibred-displayed-evaluation-1';
         this.fibredDependentTargetEnabled =
-            profile === 'fibred-dependent-target-1';
+            profile === 'fibred-dependent-target-1' ||
+            profile === 'fibred-displayed-evaluation-1';
         this.displayedContextualEnabled =
-            profile === 'fibred-displayed-bracket-1';
+            profile === 'fibred-displayed-bracket-1' ||
+            profile === 'fibred-displayed-evaluation-1';
+        this.displayedEvaluationEnabled =
+            profile === 'fibred-displayed-evaluation-1';
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
@@ -924,7 +979,9 @@ export class CoreCategoricalProgram {
         if (this.displayedContextualEnabled) {
             validateCoreCategoricalDisplayedBracketContract();
         }
-        this.dependent = this.fibredDependentTargetEnabled
+        this.dependent = this.displayedEvaluationEnabled
+            ? compileCoreCategoricalDisplayedEvaluationTransfer()
+            : this.fibredDependentTargetEnabled
             ? compileCoreCategoricalFibredDependentTargetTransfer()
             : this.fibredWeakenReindexEnabled
             ? compileCoreCategoricalFibredWeakenReindexTransfer()
@@ -954,7 +1011,9 @@ export class CoreCategoricalProgram {
                 displayedWeakeningReindexing:
                     this.fibredWeakenReindexEnabled,
                 displayedContextualAbstraction:
-                    this.displayedContextualEnabled
+                    this.displayedContextualEnabled,
+                displayedEvaluation:
+                    this.displayedEvaluationEnabled
             }
         );
     }
@@ -1175,6 +1234,20 @@ export class CoreCategoricalProgram {
                 'Generic displayed contextual abstraction is available ' +
                     'only in the explicit ' +
                     "'fibred-displayed-bracket-1' root profile"
+            );
+        }
+    }
+
+    private requireDisplayedEvaluation(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.displayedEvaluationEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_DISPLAYED_EVALUATION',
+                nodeProvenance,
+                'Constant-domain displayed evaluation is available only ' +
+                    'in the explicit ' +
+                    "'fibred-displayed-evaluation-1' root profile"
             );
         }
     }
@@ -2059,6 +2132,106 @@ export class CoreCategoricalProgram {
             name,
             baseCategory,
             kernelFree(name, nodeProvenance)
+        );
+    }
+
+    /**
+     * Construct the literal constant displayed family `Const_catd(K,A)`.
+     */
+    constantDisplayedFamily(
+        baseValue: CoreCategoricalCategory,
+        fibreValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'constant displayed family',
+            source
+        );
+        this.requireDisplayedEvaluation(nodeProvenance);
+        const base = this.requireCategory(
+            baseValue,
+            nodeProvenance
+        );
+        const fibre = this.requireCategory(
+            fibreValue,
+            nodeProvenance
+        );
+        return this.makeDisplayedFamily(
+            `Const(${base.label},${fibre.label})`,
+            base,
+            kernelApplication(
+                'constant-displayed-family',
+                [
+                    { value: base.expression },
+                    { value: fibre.expression }
+                ],
+                nodeProvenance
+            )
+        );
+    }
+
+    /**
+     * Construct the stable constant-domain family
+     * `Functor_catd(Const_catd(Op_cat K,A),B)`.
+     */
+    displayedFunctorFamily(
+        domainValue: CoreCategoricalCategory,
+        targetValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'constant-domain displayed functor family',
+            source
+        );
+        this.requireDisplayedEvaluation(nodeProvenance);
+        const domain = this.requireCategory(
+            domainValue,
+            nodeProvenance
+        );
+        const target = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        const base = target.baseCategory;
+        const contravariantConstant = kernelApplication(
+            'constant-displayed-family',
+            [
+                {
+                    value: this.oppositeCategoryExpression(
+                        base.expression,
+                        nodeProvenance
+                    )
+                },
+                { value: domain.expression }
+            ],
+            nodeProvenance
+        );
+        return this.makeDisplayedFamily(
+            `Functor(${domain.label},${target.label})`,
+            base,
+            kernelCall(
+                kernelFree(
+                    coreCategoricalDisplayedEvaluationCoreName(
+                        'stableFunctorFamily'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: base.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: contravariantConstant
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: target.expression
+                    }
+                ],
+                nodeProvenance
+            )
         );
     }
 

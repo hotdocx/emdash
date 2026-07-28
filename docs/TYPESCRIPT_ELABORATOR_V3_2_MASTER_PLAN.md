@@ -1,6 +1,6 @@
 # TypeScript Elaborator/Kernel For emdash v3.2 — Living Master Plan
 
-Date: 2026-07-24
+Date: 2026-07-28
 Plan-ID: TS-ELAB-V3.2
 Depends-On: active emdash v3.2 authorities and the completed ELAB-0 wiring
 slice
@@ -27,6 +27,9 @@ governed by
 the selected displayed-product and dependency-aware fibred-context
 continuation is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md);
+the active general displayed contextual-abstraction continuation is governed
+by
+[`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md);
 this completed plan remains frozen historical evidence for the exact
 `emdash-v3.2-mvp-1` profile
 Pre-implementation baseline:
@@ -3986,6 +3989,24 @@ gate (846 active passes, 46 intentional skips, zero failures), and all 19
 live conformance judgments pass.
 The exact delegated-review checkpoint is
 1251e5c666d2be2ee914d0d122848a259f578da3.
+
+DISPLAYED-EVAL-1A is implemented at the reviewed boundary. It preserves the
+existing typed TypeScript construction IR, recursive contextual compiler,
+backend-neutral explicit Core, and generic checker; explicit programmatic
+`displayedContextLambda`, `apply`, and `fibrePair` constructors are
+compatible with the usability goal because variable occurrences recurse
+beneath supported typed subexpressions. The active mathematical delta is
+exactly `Eval_funcd`, `Terminal_funcd`, and their two point-component rules.
+The transfer distinguishes the older TypeScript profile's four
+active-authority prerequisites from that delta and adds no intrinsic Core
+owner. Varying `F x`, nested `H[e](G[d])`, and fixed `F a` compile, with the
+fixed argument derived through terminal weakening. The dependent-target
+final-runtime wiring defect is mechanically repaired. This closes neither
+arbitrary mixed-domain evaluation nor a genuine dependency chain; the
+dedicated displayed plan now selects proposal-only DISPLAYED-CHAIN-0A as its
+next row. Aggregate validation passes 904 TypeScript tests (857 active, 47
+intentional skips), 19/19 frozen conformance judgments, all 41 kernel health
+targets, and 1,714 classified checks with zero failures.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

@@ -17,7 +17,6 @@ import {
     CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_TRANSFER_POLICY,
     CoreCategoricalDisplayedEvaluationAuditError,
     CoreCategoricalProgram,
-    CoreCheckerError,
     compileCoreCategoricalFibredDependentTargetTransfer,
     compileCoreLfDeclarations,
     measureCoreCategoricalDisplayedEvaluationProfileJoin,
@@ -182,7 +181,7 @@ describe('TypeScript v3.2 DISPLAYED-EVAL-0B authority audit', () => {
         assert.match(evidence.warningDelta.interpretation, /not-an-/u);
     });
 
-    it('reproduces the transfer-only profile mismatch and composed-runtime join', () => {
+    it('retains the old mismatch measurement after installing the repair', () => {
         const program = new CoreCategoricalProgram({
             sourceFile: 'displayed-eval-0b-profile-test.ts',
             profile: 'fibred-dependent-target-1'
@@ -205,12 +204,8 @@ describe('TypeScript v3.2 DISPLAYED-EVAL-0B authority audit', () => {
                 { expectedShape: 'object-value' }
             )
         );
-        assert.throws(
-            () => program.compile(composition),
-            error =>
-                error instanceof CoreCheckerError &&
-                error.code === 'TYPE_MISMATCH'
-        );
+        const repaired = program.compile(composition);
+        assert.equal(repaired.surfaceType.tag, 'displayed-functor');
 
         const measurement =
             measureCoreCategoricalDisplayedEvaluationProfileJoin();

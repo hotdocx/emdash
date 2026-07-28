@@ -103,7 +103,7 @@ export const CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_REVISION =
     'FIBRED-TRANSFD-1-DIRECT-NEXT-HOM-TRANSFER-1' as const;
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_SOURCE_SHA256 =
-    'sha256:33e7e78b6516180507f2e99cff465119effbb84f2981d44b609d751963e24f94';
+    'sha256:10638f01b4bd2163b7c7cd254db76d5343b073ddbc7cc7a18c6ca2755c35a91a';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
