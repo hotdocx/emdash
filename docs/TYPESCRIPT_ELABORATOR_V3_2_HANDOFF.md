@@ -741,16 +741,26 @@ no `Product_catd` head or kernel reindexing equality. FIBRED-BINDER-1 is also
 complete at its bounded existing-authority boundary: root-only direct
 `displayedFunctorLambda` handles identity, eta, and finite composition
 chains, retains the hidden two-slot telescope, and keeps direct/nested
-classifiers proof-compatible but runtime-distinct. Continue with
-FIBRED-TRANSFD-1 by auditing and freezing the exact `Transfd_cat`,
-`tdapp0_fapp0`, `tdapp1_int_cell`, next-hom, and SCALE-STRESS-2B3
-direct-versus-nested closure before implementing one `:^nd`-equivalent
-component/higher-cell consumer. If that row reaches a mathematical gate, the
-independently ready grouped/sequential consumer may proceed. The green
+classifiers proof-compatible but runtime-distinct. FIBRED-TRANSFD-1 is now
+complete at its bounded existing-authority boundary as well. Its root-only
+`displayedTransforLambda` accepts exactly coherent
+`λ k :^nd K. eta[k]`; `eta[x]`, `eta[x][u]`, `eta[p][u]`, and vertical
+composition compile through six exact active signatures, seven runtime
+rules, and one proof rule. Direct and ordinary next-hom categories remain
+runtime-distinct, while proof-time, object-classifier, and Sigma/Pi bridges
+have their exact positive statuses. Its runnable demo has no production
+Lambdapi dependency and no new kernel owner/rule was added. The 767-test
+TypeScript gate and the complete repository gate—including all 19 live
+differential judgments and all 41 kernel/example health targets—pass.
+Continue with
+FIBRED-GROUPED-SEQUENTIAL-1 by freezing the smallest executable conformance
+contract over the existing dependency graph, grouped products, sequential
+Sigma/pullback, and contextual pairing. The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
 FIBRED-BINDER-1 implementation checkpoint is
-`698280f42c3c9c339ebc82a8cfb0df1d51838704`. Do not
+`698280f42c3c9c339ebc82a8cfb0df1d51838704`; the FIBRED-TRANSFD-1
+checkpoint is pending this tranche's exact green staged review. Do not
 infer any additional owner/rule, structural map, total pullback, general
 `fd`/`nd` completion, or profile authority from the bounded work. The
 completed master plan's historical checkpoint authorization does not

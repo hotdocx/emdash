@@ -3779,13 +3779,25 @@ existing-authority boundary. Preserve its root-only callback-once direct
 `displayedFunctorLambda`, identity/eta/finite-chain lowering, hidden
 `k :^n K; a :^f E[k]` evidence, exact reuse of the SCALE-STRESS-2A
 Sigma/Pi proof closure, runtime classifier non-conversion, and zero-new-
-Lambdapi-mathematics result. Continue the fibred-context sub-plan with
-FIBRED-TRANSFD-1, first freezing the exact direct/nested `Transfd_cat`,
-component, higher-cell, next-hom, and SCALE-STRESS-2B3 contract. Do not infer
-general `fd`/`nd` completion from the bounded direct-functor slice. The
+Lambdapi-mathematics result. FIBRED-TRANSFD-1 is also complete at its
+bounded existing-authority boundary. Preserve its six-signature/seven-
+runtime-rule/one-proof-rule generic transfer, coherent callback-once
+`displayedTransforLambda`, `eta[x]`, `eta[x][u]`, and `eta[p][u]`
+consumers, vertical composition, exact direct/ordinary/Sigma-Pi classifier
+relations, root-only demo, green 767-test TypeScript and complete repository
+gates, and zero-new-kernel-mathematics result. Do not
+infer arbitrary pointwise coherence, a general `:^nd` bracket, whole
+displayed laxity, or runtime direct/ordinary category collapse. Continue the
+fibred-context sub-plan with FIBRED-GROUPED-SEQUENTIAL-1, first freezing the
+smallest executable sequential-versus-grouped conformance contract over the
+existing dependency graph and owner-backed product/Sigma/pullback/contextual
+pairing Core. Do not infer general `fd`/`nd` completion from either bounded
+binder slice. The
 FIBRED-STRUCTURE-1A checkpoint remains
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized binder
-checkpoint is `698280f42c3c9c339ebc82a8cfb0df1d51838704`.
+checkpoint is `698280f42c3c9c339ebc82a8cfb0df1d51838704`; the
+FIBRED-TRANSFD-1 checkpoint is pending the tranche's exact green staged
+review.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

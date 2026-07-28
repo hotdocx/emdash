@@ -176,6 +176,19 @@ export type CoreType =
         baseCategory: KernelExpression;
         sourceFamily: KernelExpression;
         targetFamily: KernelExpression;
+    }
+    | {
+        /**
+         * A rigid object of
+         * `Transfd_cat sourceFunctor targetFunctor`.
+         */
+        tag: 'displayed-transfor';
+        category: KernelExpression;
+        baseCategory: KernelExpression;
+        sourceFamily: KernelExpression;
+        targetFamily: KernelExpression;
+        sourceFunctor: KernelExpression;
+        targetFunctor: KernelExpression;
     };
 
 export interface ResolvedSurfaceBinding extends SurfaceBinding {
@@ -213,7 +226,8 @@ export type ObjectLikeCoreType = Extract<
             | 'hom'
             | 'transfor'
             | 'dependent-section'
-            | 'displayed-functor';
+            | 'displayed-functor'
+            | 'displayed-transfor';
     }
 >;
 
@@ -224,7 +238,8 @@ export function isObjectLikeCoreType(
         type.tag === 'hom' ||
         type.tag === 'transfor' ||
         type.tag === 'dependent-section' ||
-        type.tag === 'displayed-functor';
+        type.tag === 'displayed-functor' ||
+        type.tag === 'displayed-transfor';
 }
 
 /**
@@ -259,6 +274,7 @@ export function coreTypeObjectCategory(
             ], nodeProvenance);
         case 'dependent-section':
         case 'displayed-functor':
+        case 'displayed-transfor':
             return type.category;
         case 'category':
         case 'functor':
@@ -366,6 +382,7 @@ export function coreTypeToKernelType(
             }], nodeProvenance);
         case 'dependent-section':
         case 'displayed-functor':
+        case 'displayed-transfor':
             return kernelApplication('decode', [{
                 value: kernelApplication('object-classifier', [{
                     value: type.category
@@ -479,6 +496,33 @@ export function coreTypeEquals(left: CoreType, right: CoreType): boolean {
                 kernelExpressionEquals(
                     left.targetFamily,
                     other.targetFamily
+                );
+        }
+        case 'displayed-transfor': {
+            const other = right as Extract<
+                CoreType,
+                { tag: 'displayed-transfor' }
+            >;
+            return kernelExpressionEquals(left.category, other.category) &&
+                kernelExpressionEquals(
+                    left.baseCategory,
+                    other.baseCategory
+                ) &&
+                kernelExpressionEquals(
+                    left.sourceFamily,
+                    other.sourceFamily
+                ) &&
+                kernelExpressionEquals(
+                    left.targetFamily,
+                    other.targetFamily
+                ) &&
+                kernelExpressionEquals(
+                    left.sourceFunctor,
+                    other.sourceFunctor
+                ) &&
+                kernelExpressionEquals(
+                    left.targetFunctor,
+                    other.targetFunctor
                 );
         }
         default: {

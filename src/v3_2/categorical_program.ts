@@ -58,6 +58,13 @@ import {
     coreCategoricalFibredBinderClassifiers
 } from './categorical_fibred_binder_transfer';
 import {
+    CoreCategoricalFibredTransfdCompilation,
+    compileCoreCategoricalFibredTransfdProof,
+    compileCoreCategoricalFibredTransfdTransfer,
+    coreCategoricalFibredTransfdClassifiers,
+    coreCategoricalFibredTransfdCoreName
+} from './categorical_fibred_transfd_transfer';
+import {
     CORE_CATEGORICAL_STRUCTURAL_PREREQUISITES,
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
     CoreCategoricalStructuralPrerequisiteId,
@@ -140,6 +147,9 @@ export const CORE_CATEGORICAL_FIBRED_STRUCTURE_PROGRAM_REVISION =
 export const CORE_CATEGORICAL_FIBRED_BINDER_PROGRAM_REVISION =
     'FIBRED-BINDER-1-CATEGORICAL-PROGRAM-1' as const;
 
+export const CORE_CATEGORICAL_FIBRED_TRANSFD_PROGRAM_REVISION =
+    'FIBRED-TRANSFD-1-CATEGORICAL-PROGRAM-1' as const;
+
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
 const CORE_CATEGORICAL_DISPLAYED_FAMILY =
@@ -200,6 +210,9 @@ export interface CoreCategoricalProgramOptions {
      * D-DTTLF-USABILITY-006. The fibred-binder profile additionally exposes
      * the existing-authority direct displayed-functor abstraction and
      * proof-only direct/nested classifier comparison.
+     * The fibred-transfd profile adds the coherent direct `:^nd` eta
+     * abstraction, fibre components, point components, and the active
+     * transported higher cell.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -207,7 +220,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-comprehension-1a'
         | 'fibred-product-1a'
         | 'fibred-structure-1a'
-        | 'fibred-binder-1';
+        | 'fibred-binder-1'
+        | 'fibred-transfd-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -231,12 +245,14 @@ export type CoreCategoricalProgramErrorCode =
     | 'EXPECTED_CATEGORY_OBJECT'
     | 'EXPECTED_FUNCTOR'
     | 'EXPECTED_DISPLAYED_FUNCTOR'
+    | 'EXPECTED_DISPLAYED_TRANSFOR'
     | 'EXPECTED_HOM'
     | 'DISPLAYED_SOURCE_MISMATCH'
     | 'UNAVAILABLE_COMPREHENSION'
     | 'UNAVAILABLE_FIBRED_PRODUCT'
     | 'UNAVAILABLE_FIBRED_STRUCTURE'
     | 'UNAVAILABLE_FIBRED_BINDER'
+    | 'UNAVAILABLE_FIBRED_TRANSFD'
     | 'UNEXPECTED_KIND';
 
 export class CoreCategoricalProgramError extends Error {
@@ -299,6 +315,20 @@ export interface CoreCategoricalFibredBinderClassifierCompatibility {
     readonly explicitNestedClassifier: string;
     readonly runtime: CoreLfComparisonResult;
     readonly proofTime: CoreLfProofComparisonResult;
+    readonly preservesPresentations: true;
+}
+
+export interface CoreCategoricalFibredTransfdClassifierCompatibility {
+    readonly directClassifier: KernelExpression;
+    readonly ordinaryNextHomClassifier: KernelExpression;
+    readonly sigmaPiNextHomClassifier: KernelExpression;
+    readonly explicitDirectClassifier: string;
+    readonly explicitOrdinaryNextHomClassifier: string;
+    readonly explicitSigmaPiNextHomClassifier: string;
+    readonly directOrdinaryRuntime: CoreLfComparisonResult;
+    readonly directOrdinaryProofTime: CoreLfProofComparisonResult;
+    readonly directOrdinaryObjectRuntime: CoreLfComparisonResult;
+    readonly directSigmaPiRuntime: CoreLfComparisonResult;
     readonly preservesPresentations: true;
 }
 
@@ -418,6 +448,39 @@ categoricalLabels[
     CORE_CATEGORICAL_FIBRED_BINDER_CORE_NAMES
         .sigmaProjectionPullback
 ] = 'emdash.categorical.sigma-projection-pullback';
+for (const [
+    id,
+    label
+] of [
+    [
+        'displayed-transformation-category',
+        'emdash.categorical.displayed-transformation-category'
+    ],
+    [
+        'displayed-transformation-classifier',
+        'emdash.categorical.displayed-transformation-classifier'
+    ],
+    [
+        'displayed-component',
+        'emdash.categorical.displayed-component'
+    ],
+    [
+        'transport-lhs',
+        'emdash.categorical.displayed-transport-lhs'
+    ],
+    [
+        'transport-rhs',
+        'emdash.categorical.displayed-transport-rhs'
+    ],
+    [
+        'higher-cell',
+        'emdash.categorical.displayed-transfor-higher-cell'
+    ]
+] as const) {
+    categoricalLabels[
+        coreCategoricalFibredTransfdCoreName(id)
+    ] = label;
+}
 
 export const CORE_CATEGORICAL_EXPLICIT_FREE_LABELS:
 Readonly<Record<string, string>> = Object.freeze({
@@ -541,11 +604,13 @@ export class CoreCategoricalProgram {
         | CoreCategoricalComprehensionCompilation
         | CoreCategoricalFibredProductCompilation
         | CoreCategoricalFibredStructureCompilation
-        | CoreCategoricalFibredBinderCompilation;
+        | CoreCategoricalFibredBinderCompilation
+        | CoreCategoricalFibredTransfdCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
     private readonly fibredBinderEnabled: boolean;
+    private readonly fibredTransfdEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -558,17 +623,25 @@ export class CoreCategoricalProgram {
             profile === 'fibred-comprehension-1a' ||
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
-            profile === 'fibred-binder-1';
+            profile === 'fibred-binder-1' ||
+            profile === 'fibred-transfd-1';
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
-            profile === 'fibred-binder-1';
+            profile === 'fibred-binder-1' ||
+            profile === 'fibred-transfd-1';
         this.fibredStructureEnabled =
             profile === 'fibred-structure-1a' ||
-            profile === 'fibred-binder-1';
+            profile === 'fibred-binder-1' ||
+            profile === 'fibred-transfd-1';
         this.fibredBinderEnabled =
-            profile === 'fibred-binder-1';
-        this.dependent = this.fibredBinderEnabled
+            profile === 'fibred-binder-1' ||
+            profile === 'fibred-transfd-1';
+        this.fibredTransfdEnabled =
+            profile === 'fibred-transfd-1';
+        this.dependent = this.fibredTransfdEnabled
+            ? compileCoreCategoricalFibredTransfdTransfer()
+            : this.fibredBinderEnabled
             ? compileCoreCategoricalFibredBinderTransfer()
             : this.fibredStructureEnabled
             ? compileCoreCategoricalFibredStructureTransfer()
@@ -586,7 +659,9 @@ export class CoreCategoricalProgram {
                 dependentSectionComposition:
                     profile !== 'reviewed-usability-2a1',
                 displayedFunctorAbstraction:
-                    this.fibredBinderEnabled
+                    this.fibredBinderEnabled,
+                displayedTransforAbstraction:
+                    this.fibredTransfdEnabled
             }
         );
     }
@@ -741,6 +816,20 @@ export class CoreCategoricalProgram {
         }
     }
 
+    private requireFibredTransfd(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.fibredTransfdEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_FIBRED_TRANSFD',
+                nodeProvenance,
+                'Direct displayed-transfor abstraction and higher cells ' +
+                "are available only in the explicit 'fibred-transfd-1' " +
+                'root profile'
+            );
+        }
+    }
+
     private makeTerm(
         expression: KernelExpression,
         type: CoreType,
@@ -832,6 +921,47 @@ export class CoreCategoricalProgram {
                 {
                     plicity: 'explicit',
                     value: targetFamily
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private displayedTransforCategoryExpression(
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        sourceFunctor: KernelExpression,
+        targetFunctor: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalFibredTransfdCoreName(
+                    'displayed-transformation-category'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: sourceFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: targetFamily
+                },
+                {
+                    plicity: 'explicit',
+                    value: sourceFunctor
+                },
+                {
+                    plicity: 'explicit',
+                    value: targetFunctor
                 }
             ],
             nodeProvenance
@@ -1220,6 +1350,38 @@ export class CoreCategoricalProgram {
             baseCategory: inspection.type.baseCategory,
             sourceFamily: inspection.type.sourceFamily,
             targetFamily: inspection.type.targetFamily
+        };
+    }
+
+    private requireDisplayedTransforTerm(
+        value: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly expression: KernelExpression;
+        readonly category: KernelExpression;
+        readonly baseCategory: KernelExpression;
+        readonly sourceFamily: KernelExpression;
+        readonly targetFamily: KernelExpression;
+        readonly sourceFunctor: KernelExpression;
+        readonly targetFunctor: KernelExpression;
+    } {
+        const inspection = this.builder.inspect(value);
+        if (inspection.type.tag !== 'displayed-transfor') {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_DISPLAYED_TRANSFOR',
+                nodeProvenance,
+                `${detail} must be a displayed transformation`
+            );
+        }
+        return {
+            expression: this.builder.compile(value).term,
+            category: inspection.type.category,
+            baseCategory: inspection.type.baseCategory,
+            sourceFamily: inspection.type.sourceFamily,
+            targetFamily: inspection.type.targetFamily,
+            sourceFunctor: inspection.type.sourceFunctor,
+            targetFunctor: inspection.type.targetFunctor
         };
     }
 
@@ -1821,7 +1983,8 @@ export class CoreCategoricalProgram {
         const pointInspection = this.builder.inspect(point);
         if (
             pointInspection.type.tag === 'indexed-object' ||
-            pointInspection.type.tag === 'indexed-functor'
+            pointInspection.type.tag === 'indexed-functor' ||
+            pointInspection.type.tag === 'indexed-transfor'
         ) {
             throw new CoreCategoricalProgramError(
                 'EXPECTED_CATEGORY_OBJECT',
@@ -2428,6 +2591,175 @@ export class CoreCategoricalProgram {
         }, nodeProvenance);
     }
 
+    displayedTransfor(
+        name: string,
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `displayed transfor assumption ${name}`,
+            source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        const sourceFunctor = this.requireDisplayedFunctorTerm(
+            sourceFunctorValue,
+            nodeProvenance,
+            `source of displayed transfor '${name}'`
+        );
+        const targetFunctor = this.requireDisplayedFunctorTerm(
+            targetFunctorValue,
+            nodeProvenance,
+            `target of displayed transfor '${name}'`
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFunctor.baseCategory,
+                targetFunctor.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.sourceFamily,
+                targetFunctor.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.targetFamily,
+                targetFunctor.targetFamily
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                `Displayed transfor '${name}' has incompatible displayed-` +
+                'functor endpoints'
+            );
+        }
+        const category = this.displayedTransforCategoryExpression(
+            sourceFunctor.baseCategory,
+            sourceFunctor.sourceFamily,
+            sourceFunctor.targetFamily,
+            sourceFunctor.expression,
+            targetFunctor.expression,
+            nodeProvenance
+        );
+        return this.assume(name, {
+            tag: 'displayed-transfor',
+            category,
+            baseCategory: sourceFunctor.baseCategory,
+            sourceFamily: sourceFunctor.sourceFamily,
+            targetFamily: sourceFunctor.targetFamily,
+            sourceFunctor: sourceFunctor.expression,
+            targetFunctor: targetFunctor.expression
+        }, nodeProvenance);
+    }
+
+    composeDisplayedTransfor(
+        outerValue: CoreCategoricalTerm,
+        innerValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed transfor vertical composition',
+            source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        const outer = this.requireDisplayedTransforTerm(
+            outerValue,
+            nodeProvenance,
+            'outer displayed transfor'
+        );
+        const inner = this.requireDisplayedTransforTerm(
+            innerValue,
+            nodeProvenance,
+            'inner displayed transfor'
+        );
+        if (
+            !kernelExpressionEquals(
+                outer.baseCategory,
+                inner.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                outer.sourceFamily,
+                inner.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                outer.targetFamily,
+                inner.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                inner.targetFunctor,
+                outer.sourceFunctor
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                'Displayed transfor vertical composition has incompatible ' +
+                'endpoints'
+            );
+        }
+        const category = this.displayedTransforCategoryExpression(
+            inner.baseCategory,
+            inner.sourceFamily,
+            inner.targetFamily,
+            inner.sourceFunctor,
+            outer.targetFunctor,
+            nodeProvenance
+        );
+        const expression = kernelCall(
+            kernelFree(
+                coreCategoricalDependentCompositionCoreName(
+                    'generic-category-composition'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: this.displayedFunctorCategoryExpression(
+                        inner.baseCategory,
+                        inner.sourceFamily,
+                        inner.targetFamily,
+                        nodeProvenance
+                    )
+                },
+                {
+                    plicity: 'implicit',
+                    value: inner.sourceFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: inner.targetFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: outer.targetFunctor
+                },
+                {
+                    plicity: 'explicit',
+                    value: outer.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: inner.expression
+                }
+            ],
+            nodeProvenance
+        );
+        return this.makeTerm(
+            expression,
+            {
+                tag: 'displayed-transfor',
+                category,
+                baseCategory: inner.baseCategory,
+                sourceFamily: inner.sourceFamily,
+                targetFamily: inner.targetFamily,
+                sourceFunctor: inner.sourceFunctor,
+                targetFunctor: outer.targetFunctor
+            },
+            nodeProvenance
+        );
+    }
+
     functorCategory(
         sourceValue: CoreCategoricalCategory,
         targetValue: CoreCategoricalCategory,
@@ -2857,7 +3189,8 @@ export class CoreCategoricalProgram {
         for (const endpoint of endpoints) {
             if (
                 endpoint.type.tag === 'indexed-object' ||
-                endpoint.type.tag === 'indexed-functor'
+                endpoint.type.tag === 'indexed-functor' ||
+                endpoint.type.tag === 'indexed-transfor'
             ) {
                 throw new CoreCategoricalProgramError(
                     'EXPECTED_CATEGORY_OBJECT',
@@ -3056,6 +3389,408 @@ export class CoreCategoricalProgram {
                 provenance: nodeProvenance
             }
         );
+    }
+
+    displayedTransforComponent(
+        transformation: CoreCategoricalTerm,
+        point: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed transfor fibre component',
+            source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        return this.builder.apply(
+            transformation,
+            point,
+            'displayed-component',
+            nodeProvenance
+        );
+    }
+
+    displayedTransforPoint(
+        transformation: CoreCategoricalTerm,
+        point: CoreCategoricalTerm,
+        fibreObject: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed transfor point component',
+            source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        const component = this.builder.apply(
+            transformation,
+            point,
+            'displayed-component',
+            nodeProvenance
+        );
+        return this.builder.apply(
+            component,
+            fibreObject,
+            'point-component',
+            nodeProvenance
+        );
+    }
+
+    /**
+     * Active component-level displayed naturality cell:
+     *
+     *   eta[p][u] :
+     *     D[p](FF[x](u)) -> GG[y](E[p](u)).
+     */
+    displayedTransforNaturality(
+        transformationValue: CoreCategoricalTerm,
+        baseArrowValue: CoreCategoricalTerm,
+        fibreObjectValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed transfor higher naturality cell',
+            source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        const transformation = this.requireDisplayedTransforTerm(
+            transformationValue,
+            nodeProvenance,
+            'displayed naturality subject'
+        );
+        const baseArrow = this.requireHomTerm(
+            baseArrowValue,
+            nodeProvenance,
+            'displayed naturality base arrow'
+        );
+        if (
+            !kernelExpressionEquals(
+                baseArrow.category,
+                transformation.baseCategory
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Displayed naturality arrow belongs to the wrong base'
+            );
+        }
+        const fibreObject = this.requireObjectTerm(
+            fibreObjectValue,
+            nodeProvenance,
+            'displayed naturality fibre object'
+        );
+        const sourceFibre = this.fibreCategoryOfExpression(
+            transformation.baseCategory,
+            transformation.sourceFamily,
+            baseArrow.sourceObject,
+            nodeProvenance
+        );
+        const targetFibre = this.fibreCategoryOfExpression(
+            transformation.baseCategory,
+            transformation.targetFamily,
+            baseArrow.targetObject,
+            nodeProvenance
+        );
+        this.requireSameCategory(
+            fibreObject.category,
+            sourceFibre,
+            nodeProvenance,
+            'Displayed naturality fibre object'
+        );
+        const transport = (
+            side: 'transport-lhs' | 'transport-rhs',
+            displayedFunctor: KernelExpression
+        ): KernelExpression => kernelCall(
+            kernelFree(
+                coreCategoricalFibredTransfdCoreName(side),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: transformation.baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.sourceFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.targetFamily
+                },
+                {
+                    plicity: 'explicit',
+                    value: displayedFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: baseArrow.sourceObject
+                },
+                {
+                    plicity: 'implicit',
+                    value: baseArrow.targetObject
+                },
+                {
+                    plicity: 'explicit',
+                    value: baseArrow.expression
+                }
+            ],
+            nodeProvenance
+        );
+        const applyTransport = (
+            functor: KernelExpression
+        ): KernelExpression => kernelApplication(
+            'functor-object',
+            [
+                { value: sourceFibre },
+                { value: targetFibre },
+                { value: functor },
+                { value: fibreObject.expression }
+            ],
+            nodeProvenance
+        );
+        const sourceObject = applyTransport(transport(
+            'transport-lhs',
+            transformation.sourceFunctor
+        ));
+        const targetObject = applyTransport(transport(
+            'transport-rhs',
+            transformation.targetFunctor
+        ));
+        const expression = kernelCall(
+            kernelFree(
+                coreCategoricalFibredTransfdCoreName('higher-cell'),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: transformation.baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.sourceFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.targetFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.sourceFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.targetFunctor
+                },
+                {
+                    plicity: 'explicit',
+                    value: transformation.expression
+                },
+                {
+                    plicity: 'implicit',
+                    value: baseArrow.sourceObject
+                },
+                {
+                    plicity: 'implicit',
+                    value: baseArrow.targetObject
+                },
+                {
+                    plicity: 'explicit',
+                    value: baseArrow.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: fibreObject.expression
+                }
+            ],
+            nodeProvenance
+        );
+        return this.makeTerm(
+            expression,
+            {
+                tag: 'hom',
+                category: targetFibre,
+                sourceObject,
+                targetObject
+            },
+            nodeProvenance
+        );
+    }
+
+    /**
+     * Direct `λ k :^nd K. eta[k]`-equivalent coherent eta abstraction.
+     */
+    displayedTransforLambda(
+        name: string,
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `displayed-transfor abstraction ${name}`,
+            options.source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        const sourceFunctor = this.requireDisplayedFunctorTerm(
+            sourceFunctorValue,
+            nodeProvenance,
+            `source endpoint of displayed-transfor abstraction '${name}'`
+        );
+        const targetFunctor = this.requireDisplayedFunctorTerm(
+            targetFunctorValue,
+            nodeProvenance,
+            `target endpoint of displayed-transfor abstraction '${name}'`
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFunctor.baseCategory,
+                targetFunctor.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.sourceFamily,
+                targetFunctor.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.targetFamily,
+                targetFunctor.targetFamily
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                `Displayed-transfor abstraction '${name}' has incompatible ` +
+                'displayed-functor endpoints'
+            );
+        }
+        return this.builder.displayedTransforLambda(
+            name,
+            sourceFunctor.baseCategory,
+            sourceFunctor.sourceFamily,
+            sourceFunctor.targetFamily,
+            sourceFunctor.expression,
+            targetFunctor.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    displayedTransforClassifierCompatibility(
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        stepLimit = 2_000,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalFibredTransfdClassifierCompatibility {
+        const nodeProvenance = this.at(
+            'displayed-transfor direct/next-hom compatibility',
+            source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        const sourceFunctor = this.requireDisplayedFunctorTerm(
+            sourceFunctorValue,
+            nodeProvenance,
+            'displayed-transfor compatibility source'
+        );
+        const targetFunctor = this.requireDisplayedFunctorTerm(
+            targetFunctorValue,
+            nodeProvenance,
+            'displayed-transfor compatibility target'
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFunctor.baseCategory,
+                targetFunctor.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.sourceFamily,
+                targetFunctor.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.targetFamily,
+                targetFunctor.targetFamily
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                'Displayed-transfor compatibility requires matching ' +
+                'displayed-functor classifiers'
+            );
+        }
+        const compilation =
+            this.dependent as CoreCategoricalFibredTransfdCompilation;
+        const classifiers = coreCategoricalFibredTransfdClassifiers(
+            sourceFunctor.baseCategory,
+            sourceFunctor.sourceFamily,
+            sourceFunctor.targetFamily,
+            sourceFunctor.expression,
+            targetFunctor.expression,
+            nodeProvenance
+        );
+        const proof = compileCoreCategoricalFibredTransfdProof(
+            compilation,
+            this.environment
+        );
+        return Object.freeze({
+            directClassifier: classifiers.direct,
+            ordinaryNextHomClassifier:
+                classifiers.ordinaryNextHom,
+            sigmaPiNextHomClassifier:
+                classifiers.sigmaPiNextHom,
+            explicitDirectClassifier:
+                serializeCoreCategoricalExpression(
+                    classifiers.direct
+                ),
+            explicitOrdinaryNextHomClassifier:
+                serializeCoreCategoricalExpression(
+                    classifiers.ordinaryNextHom
+                ),
+            explicitSigmaPiNextHomClassifier:
+                serializeCoreCategoricalExpression(
+                    classifiers.sigmaPiNextHom
+                ),
+            directOrdinaryRuntime: coreLfDefinitionalCompare(
+                this.environment,
+                classifiers.ordinaryNextHom,
+                classifiers.direct,
+                stepLimit,
+                undefined,
+                compilation.composedRuntime
+            ),
+            directOrdinaryProofTime:
+                proof.compare(
+                    classifiers.ordinaryNextHom,
+                    classifiers.direct,
+                    { stepLimit }
+                ),
+            directOrdinaryObjectRuntime:
+                coreLfDefinitionalCompare(
+                    this.environment,
+                    classifiers.ordinaryObjectClassifier,
+                    classifiers.directObjectClassifier,
+                    stepLimit,
+                    undefined,
+                    compilation.composedRuntime
+                ),
+            directSigmaPiRuntime: coreLfDefinitionalCompare(
+                this.environment,
+                classifiers.sigmaPiNextHom,
+                classifiers.direct,
+                stepLimit,
+                undefined,
+                compilation.composedRuntime
+            ),
+            preservesPresentations: true as const
+        });
     }
 
     /**

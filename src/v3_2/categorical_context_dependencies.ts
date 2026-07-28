@@ -260,6 +260,16 @@ const copyCoreType = (type: CoreType): CoreType => {
                 sourceFamily: type.sourceFamily,
                 targetFamily: type.targetFamily
             };
+        case 'displayed-transfor':
+            return {
+                tag: 'displayed-transfor',
+                category: type.category,
+                baseCategory: type.baseCategory,
+                sourceFamily: type.sourceFamily,
+                targetFamily: type.targetFamily,
+                sourceFunctor: type.sourceFunctor,
+                targetFunctor: type.targetFunctor
+            };
         default: {
             const exhaustive: never = type;
             return exhaustive;
@@ -284,6 +294,17 @@ const copyClassifier = (
             baseCategory: classifier.baseCategory,
             sourceFamily: classifier.sourceFamily,
             targetFamily: classifier.targetFamily,
+            index: classifier.index
+        };
+    }
+    if (classifier.tag === 'indexed-transfor') {
+        return {
+            tag: 'indexed-transfor',
+            baseCategory: classifier.baseCategory,
+            sourceFamily: classifier.sourceFamily,
+            targetFamily: classifier.targetFamily,
+            sourceFunctor: classifier.sourceFunctor,
+            targetFunctor: classifier.targetFunctor,
             index: classifier.index
         };
     }

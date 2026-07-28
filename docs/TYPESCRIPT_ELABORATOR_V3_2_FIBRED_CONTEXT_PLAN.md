@@ -43,6 +43,22 @@ active Sigma/Pi unification rule to compare direct and nested classifiers
 without installing a runtime equality. The executable demo, 754-test root
 gate, and bounded live Lambdapi oracle are green. This slice changes no
 Lambdapi source and adds no mathematical owner or rule.
+FIBRED-TRANSFD-1 is now implemented at the same existing-authority boundary.
+The root-only `fibred-transfd-1` profile accepts the coherent
+`displayedTransforLambda`/`:^nd`-equivalent eta body
+`λ k. eta[k]`, projects `eta[x]` and `eta[x][u]`, exposes the active
+transported component cell `eta[p][u]`, and composes displayed transfors
+vertically. Six exact active signatures, seven existing runtime rules, and
+the direct second-hom proof rule compile through the generic engines. Direct
+and ordinary next-hom categories remain runtime-distinct; proof comparison,
+object-classifier runtime comparison, and Sigma/Pi next-hom runtime comparison
+have their exact positive statuses. The direct-TypeScript demo and 767-test
+root gate are green. The complete repository gate is green as well: all 19
+live differential judgments, all 41 kernel/example health targets, 39
+infrastructure tests, five document-registry tests, report/book checks, the
+unchanged strict `0/47/29` LHS audit, and catalog freshness pass. No active
+Lambdapi source, mathematical owner/rule, parser, bulk-transfer workflow, or
+deployed profile changed.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -94,6 +110,8 @@ FIBRED-STRUCTURE-1A implementation checkpoint:
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`
 FIBRED-BINDER-1 implementation checkpoint:
 `698280f42c3c9c339ebc82a8cfb0df1d51838704`
+FIBRED-TRANSFD-1 implementation checkpoint:
+pending the green local checkpoint for this completed tranche
 
 ## Purpose And Exact Outcome
 
@@ -1192,7 +1210,7 @@ usability profile.
 | FIBRED-STRUCTURE-0A | complete; D-DTTLF-USABILITY-006 approved as proposed | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A, active-owner/Foundation audit | Compared five structural/reindexing owner positions in bounded full-file probes. Selected three fixed-base projection/pairing owners with eleven point/full/capped/beta rules, zero warning delta, derived swap/diagonal, genuine next-cell evidence, and frontend canonical reindexing that preserves the raw kernel non-conversion. Froze the exact non-authorizing proposal and six tests; the approval is recorded separately without mutating its historical authorization bit |
 | FIBRED-STRUCTURE-1A | complete; validated; checkpointed `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d` | FIBRED-STRUCTURE-0A and exact D-DTTLF-USABILITY-006 approval | Added only the approved three injective owners and eleven runtime rules; retained the transparent family and necessary beta guards; transferred six declarations and 15 subject-checked local rules through generic engines; added derived swap/diagonal, full/capped action, frontend-only canonical reindexing, a root-only profile, and a runnable no-Lambdapi demo while retaining all frozen non-conversions; focused/live conformance, 739-test TypeScript, canonical inventory, complete health, and full repository gates pass |
 | FIBRED-BINDER-1 | complete; validated; checkpointed `698280f42c3c9c339ebc82a8cfb0df1d51838704` | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Added a root-only `displayedFunctorLambda`/`:^fd`-equivalent typed API for identity, eta, and finite closed displayed-functor composition chains. The callback is evaluated once and discarded; hidden base/fibre slots are retained as immutable locally nameless `k :^n K; a :^f E[k]` evidence. Lowering reuses `id_funcd` and `comp_fapp0` at `Catd_cat K`; the exact SCALE-STRESS-2A `Catd`/`Sigma_proj1_pullback_catd` declarations and Sigma/Pi proof rule plus two already-active point-computation rules compile through generic engines. Direct `Functord_cat(E,D)` and nested `Pi_cat(Sigma_cat(E),Sigma_proj1_pullback_catd(E,D))` compare as `solved` only in the proof engine and remain `not-equal` at runtime. A direct-TypeScript demo, 14 active focused tests, one opt-in live Lambdapi test, and the 754-test root gate pass with zero new Lambdapi owners/rules |
-| FIBRED-TRANSFD-1 | pending | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Implement one coherent displayed-transfor abstraction and component/higher-cell consumer |
+| FIBRED-TRANSFD-1 | complete; fully validated; checkpoint pending | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Froze the direct/ordinary/Sigma-Pi next-hom contract; transferred six exact active signatures, seven subject-checked runtime rules, and one proof rule through generic engines; added the root-only callback-once `displayedTransforLambda`/`:^nd` coherent eta, `eta[x]`, `eta[x][u]`, `eta[p][u]`, vertical composition, four-way classifier evidence, and a runnable no-Lambdapi demo; preserved category runtime non-conversion and every general-bracket/profile/acquisition non-effect; the 767-test TypeScript and complete repository gates pass |
 | FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
 | FIBRED-GRADUATE-1 | pending | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate human graduation decision |
@@ -1830,9 +1848,130 @@ codomains `B[k,a]`, a general displayed bracket, displayed weakening or
 exchange lowering, sequential/grouped conformance, runtime
 `Pi_cat`/`Functord_cat` collapse, a new kernel owner/rule, parser/acquisition,
 bulk transfer, groupoidal closure, or browser/deployed-profile promotion.
-The next ordered binder slice is FIBRED-TRANSFD-1; the independently
-dependency-ready grouped/sequential consumer remains available if that
-transfor slice reaches a mathematical gate.
+The next ordered dependency-ready slice is
+FIBRED-GROUPED-SEQUENTIAL-1. It must exercise sequential and grouped sibling
+syntax through the existing dependency-aware representation and explicit
+owner-backed Core; FIBRED-TRANSFD-1 does not silently complete that work.
+
+## FIBRED-TRANSFD-1 Completion Record
+
+This slice answers the next displayed-binder usability question without
+inventing a pointwise coherence principle or changing the active kernel.
+
+The active v3.2 authority already provides three complementary classifier
+presentations:
+
+- direct:
+  `Transfd_cat(E,D,FF,GG)`;
+- ordinary next hom:
+  `Hom_cat(Transf_cat(K,Cat_cat,E,D),FF,GG)`; and
+- Sigma/Pi next hom:
+  `Hom_cat(Pi_cat(Sigma_cat(E),Sigma_proj1_pullback_catd(E,D)),FF,GG)`.
+
+They are deliberately not one runtime category. The active direct
+second-hom `unif_rule` compares the first two at proof time. The runtime
+`Obj(Transfd_cat ...)` bridge compares their object classifiers, while the
+active Pi next-hom and Sigma uncurrying rules reduce the third presentation
+to the direct one. The implementation preserves the presentation selected by
+elaboration and reports all four outcomes explicitly:
+
+- direct versus ordinary category at runtime: `not-equal`;
+- direct versus ordinary at proof time: `solved`;
+- their object classifiers at runtime: `equal`; and
+- Sigma/Pi next hom versus direct at runtime: `equal`.
+
+The transfer closure contains exactly these six existing declarations:
+
+1. `Transfd_cat`;
+2. transparent `Transfd`;
+3. `tdapp0_fapp0`;
+4. transparent `functord_transport_lhs_func`;
+5. transparent `functord_transport_rhs_func`; and
+6. `tdapp1_int_cell`.
+
+The first three retain their reviewed SCALE-STRESS-2B3 Core linkage names.
+Their declaration syntax is transparently normalized to the product
+frontend's existing `Obj(Functord_cat ...)` and fibre-evaluation
+presentations, rather than importing the stress fixture's otherwise unused
+`Functord` and `Fibre_cat` facade declarations. This is not a semantic
+change: the active source signatures, rigidity/opacity, provenance, and
+backend names remain the authority. It is evidence that the generic transfer
+architecture can select a small consumer closure without inheriting an
+entire historical stress lineage.
+
+Seven existing active runtime rules are transferred and subject checked:
+
+1. `Hom_cat(Functord_cat(E,D),FF,GG) -> Transfd_cat(FF,GG)`;
+2. the `Obj(Transfd_cat)` ordinary-next-hom bridge;
+3. the `Hom_cat(Pi_cat(E),s,t)` displayed-section next-hom projection;
+4. the Sigma/Pi object-classifier join;
+5. the Sigma/Pi `Transfd_cat` next-hom uncurrying rule; and
+6. the direct-`Functord_cat` and
+7. ordinary-`Transf_cat` clauses for displayed components of vertical
+   composition.
+
+The direct second-hom proof rule generates its five dependent constraints in
+source order. All declarations, runtime rules, and proof rules go through
+the existing owner-generic declaration/runtime/proof compilers. There is no
+owner-specific checker or evaluator case and no subject oracle.
+
+The end-user TypeScript API now supports:
+
+```text
+eta : Transfd FF GG
+λ k :^nd K. eta[k]     ↦ eta
+eta[x]                 ↦ tdapp0_fapp0(x,eta)
+eta[x][u]              ↦ tapp0_fapp0(u,tdapp0_fapp0(x,eta))
+eta[p][u]              ↦ tdapp1_int_cell(eta,p,u)
+(theta ∘ eta)[x]       ↦ tdapp0_fapp0(x,comp_fapp0(theta,eta))
+```
+
+`displayedTransforLambda` evaluates its callback once and stores no closure.
+Its contextual body has an explicit locally nameless `indexed-transfor`
+classifier. It accepts exactly component eta for an already closed coherent
+displayed transfor and lowers to that subject. This dedicated `:^nd`
+surface is justified even though a nested ordinary presentation exists:
+classifier conversion and elaborated presentation are separate questions,
+and users need a direct displayed-transformation abstraction whose
+coherence is inherited from an existing `Transfd` term. Arbitrary pointwise
+families are rejected rather than silently promoted to coherent transfors.
+
+The same application pipeline then treats `eta[x]` as an ordinary transfor,
+so the existing ordinary capped component owner checks `eta[x][u]`. The
+higher-cell helper uses the active stable component-level owner
+`tdapp1_int_cell`; it does not fabricate the deliberately inactive whole
+displayed-functor laxity transfor.
+
+The executable `demo:categorical-fibred-transfd` command prints all five
+inputs, explicit Core and expected types, the callback-once eta reduction,
+all classifier comparisons, and a source-located incoherent-body diagnostic.
+It runs entirely against the TypeScript checker/evaluator. A bounded ignored
+Lambdapi contract probe separately checked all classifier relations,
+component typing, vertical component composition, point application,
+`tdapp1_int_cell`, and the negative that a higher cell is not a point
+component in the source fibre.
+
+Validation evidence:
+
+- the contract, transfer, facade, and demo focused suites pass 13 active
+  cases;
+- `./scripts/pnpmw run demo:categorical-fibred-transfd` succeeds;
+- `./scripts/pnpmw run check:ts` passes 767 tests: 721 passed and 46
+  intentional opt-in skips;
+- the bounded active-kernel baseline and dedicated ignored Lambdapi probe
+  pass; and
+- `EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:all` passes all 19
+  mandatory live differential judgments, all 41 kernel/example health
+  targets, 39 infrastructure tests, five document-registry tests, the
+  report/book checks, the unchanged strict `0/47/29` LHS audit, and generated
+  catalog freshness.
+
+This completion does not provide arbitrary pointwise-to-coherent
+displayed-transfor synthesis, a general `:^nd` bracket, dependent displayed
+codomain abstraction, whole displayed-functor laxity, runtime collapse of
+the direct and ordinary categories, the broader Sigma-total arrow action,
+grouped/sequential conformance, string parsing/acquisition, bulk library
+transfer, groupoidal closure, or browser/deployed-profile promotion.
 
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
@@ -1939,6 +2078,26 @@ FIBRED-BINDER-1 is complete only when:
 7. focused tests, the bounded live Lambdapi oracle, `check:ts`, bounded kernel
    validation, full repository validation, plan synchronization, and exact
    staged-diff review pass before checkpointing.
+
+FIBRED-TRANSFD-1 is complete only when:
+
+1. the direct API evaluates its callback once, stores no closure, records an
+   immutable `indexed-transfor` body, and accepts only coherent component eta;
+2. `eta[x]`, `eta[x][u]`, `eta[p][u]`, and vertical composition check through
+   the exact active component and transport owners;
+3. all six declarations, seven runtime rules, and the direct second-hom proof
+   rule compile through generic engines without an owner-specific path,
+   wildcard, oracle, or new mathematical authority;
+4. direct/ordinary category runtime comparison remains `not-equal`, direct/
+   ordinary proof comparison is `solved`, and the object and Sigma/Pi runtime
+   bridges are `equal`;
+5. wrong bases, families, endpoints, modes, escaped slots, and incoherent
+   pointwise bodies fail closed without changing older profiles;
+6. the runnable direct-TypeScript demo has no parser or production Lambdapi
+   dependency; and
+7. focused tests, the bounded Lambdapi contract probe, `check:ts`, bounded
+   kernel validation, full repository validation, plan synchronization, and
+   exact staged-diff review pass before checkpointing.
 
 FIBRED-COMPREHENSION-0B is complete only when:
 
@@ -2115,16 +2274,23 @@ FIBRED-BINDER-1 is complete. Preserve its root-only direct
 once hidden `k :^n K; a :^f E[k]` evidence, exact existing-authority
 transfer, proof-only Sigma/Pi classifier compatibility, runtime
 non-conversion, fail-closed boundary, and no-new-kernel-mathematics result.
-The next ordered bounded row is FIBRED-TRANSFD-1. Begin by recovering the
-active `Transfd_cat`, `tdapp0_fapp0`, `tdapp1_int_cell`, Sigma-total
-uncurrying, and next-hom authorities and freezing an executable
-direct-versus-nested `:^nd`-equivalent contract with one concrete
-component/higher-cell consumer. Reuse the exact SCALE-STRESS-2B3 closure if
-it is sufficient. If computation is missing, compare existing constructions
-and Foundations before opening the smallest exact owner/rule proposal.
-FIBRED-GROUPED-SEQUENTIAL-1 remains independently dependency-ready and may
-proceed while a transfor-only mathematical gate waits; no convenient
-notation is itself authority for a primitive.
+FIBRED-TRANSFD-1 is also complete. Preserve its six-signature/seven-runtime-
+rule/one-proof-rule existing-authority transfer; callback-once coherent
+`displayedTransforLambda`; `eta[x]`, `eta[x][u]`, and `eta[p][u]` consumers;
+direct/ordinary runtime category non-conversion; proof-time and
+object/Sigma-Pi bridges; runtime vertical-component clauses; root-only
+profile and runnable demo; and zero-new-kernel-mathematics result. Do not
+infer arbitrary pointwise coherence, a general `:^nd` bracket, whole
+displayed laxity, or runtime category collapse.
+
+The next ordered bounded row is FIBRED-GROUPED-SEQUENTIAL-1. Exercise
+sequential dependencies and grouped independent siblings through the
+existing dependency graph, explicit products, Sigma/pullback, contextual
+pairing, and owner-backed Core. Freeze the smallest executable conformance
+contract before implementation. If a genuinely missing computation appears,
+audit existing constructions and Foundations and compare the smallest owner
+positions before opening an exact gate; no convenient notation is itself
+authority for a primitive.
 
 Keep canonical Lambdapi term/declaration parsing deferred and optional.
 Direct typed TypeScript construction remains the default. Do not resume the
@@ -2297,3 +2463,16 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   review, and staged whitespace audit passed. The checkpoint grants no
   remote operation, integration, publication, history rewrite, cleanup, or
   broader semantic authority.
+- **2026-07-28 — FIBRED-TRANSFD-1 completed at an existing-authority
+  boundary.** Froze the direct/ordinary/Sigma-Pi next-hom contract and
+  compiled six active declarations, seven runtime rules, and the direct
+  second-hom proof rule through the generic TypeScript engines. The root-only
+  callback-once `displayedTransforLambda` accepts exactly coherent component
+  eta; component, point, higher-cell, and vertical-composition consumers
+  lower to active owners. The runnable demo exposes all four classifier
+  outcomes and a fail-closed incoherent-body diagnostic. Thirteen focused
+  cases, the 767-test TypeScript gate, 19 live differential judgments, all 41
+  kernel/example health targets, infrastructure/document/report/book checks,
+  the unchanged strict `0/47/29` audit, and catalog freshness pass. No active
+  Lambdapi source, new mathematical owner/rule, acquisition route, or
+  deployed profile changed. FIBRED-GROUPED-SEQUENTIAL-1 is next.

@@ -41,6 +41,9 @@ import {
     coreCategoricalFibredStructureCoreName
 } from './categorical_fibred_structure_transfer';
 import {
+    coreCategoricalFibredTransfdCoreName
+} from './categorical_fibred_transfd_transfer';
+import {
     CoreCategoricalAbstractionJudgment,
     CoreCategoricalAbstractionLayer,
     CoreCategoricalApplicationJudgment,
@@ -92,11 +95,12 @@ const CORE_CATEGORICAL_SLOT = Symbol('CoreCategoricalSlot');
 const CORE_CATEGORICAL_BOUNDARY = Symbol('CoreCategoricalBoundary');
 
 const dependentApplicationQualification = Object.freeze({
-    transferredTargets: Object.freeze(
-        CORE_CATEGORICAL_DEPENDENT_PREREQUISITES.map(
+    transferredTargets: Object.freeze([
+        ...CORE_CATEGORICAL_DEPENDENT_PREREQUISITES.map(
             prerequisite => prerequisite.id
-        )
-    )
+        ),
+        'displayed-transfor-component-capped' as const
+    ])
 });
 
 export interface CoreCategoricalTerm {
@@ -146,10 +150,27 @@ export interface CoreCategoricalIndexedFunctorClassifier {
     readonly index: number;
 }
 
+/**
+ * A coherent displayed transformation projected at one contextual base slot.
+ *
+ * The classifier is construction-only. The enclosing direct `:^nd`
+ * abstraction must eliminate the slot before explicit Core is checked.
+ */
+export interface CoreCategoricalIndexedTransforClassifier {
+    readonly tag: 'indexed-transfor';
+    readonly baseCategory: KernelExpression;
+    readonly sourceFamily: KernelExpression;
+    readonly targetFamily: KernelExpression;
+    readonly sourceFunctor: KernelExpression;
+    readonly targetFunctor: KernelExpression;
+    readonly index: number;
+}
+
 export type CoreCategoricalClassifier =
     | CoreType
     | CoreCategoricalIndexedObjectClassifier
-    | CoreCategoricalIndexedFunctorClassifier;
+    | CoreCategoricalIndexedFunctorClassifier
+    | CoreCategoricalIndexedTransforClassifier;
 
 export interface CoreCategoricalDependentContinuationApplicationJudgment {
     readonly id: 'indexed-fibre-functor.object';
@@ -285,6 +306,17 @@ export type CoreCategoricalAbstractionEvidence =
             readonly targetFamily: KernelExpression;
             readonly chainLength: number;
         }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule: 'categorical.displayed-transfor-eta';
+            readonly variation: 'natural';
+            readonly dependency: 'displayed';
+            readonly sourceFamily: KernelExpression;
+            readonly targetFamily: KernelExpression;
+            readonly sourceFunctor: KernelExpression;
+            readonly targetFunctor: KernelExpression;
+        }
     );
 
 export interface CoreCategoricalTermInspection {
@@ -303,6 +335,8 @@ export type CoreCategoricalDependentApplicationPrerequisiteId =
     | 'displayed-identity'
     | 'sigma-projection-pullback'
     | 'sigma-pi-uncurrying-proof'
+    | 'displayed-transfor-component-capped'
+    | 'displayed-transfor-higher-cell'
     | CoreCategoricalDependentPrerequisiteId
     | CoreCategoricalDependentCompositionPrerequisiteId;
 
@@ -317,6 +351,10 @@ export interface CoreCategoricalScopedBuilderOptions {
      * identity/eta/composition contract.
      */
     readonly displayedFunctorAbstraction?: boolean;
+    /**
+     * Enable only the FIBRED-TRANSFD-1 coherent component-eta abstraction.
+     */
+    readonly displayedTransforAbstraction?: boolean;
 }
 
 export interface CoreCategoricalBinderOptions {
@@ -417,10 +455,21 @@ interface InternalCoreCategoricalIndexedFunctorClassifier {
     readonly indexOrdinal: number;
 }
 
+interface InternalCoreCategoricalIndexedTransforClassifier {
+    readonly tag: 'indexed-transfor';
+    readonly baseCategory: KernelExpression;
+    readonly sourceFamily: KernelExpression;
+    readonly targetFamily: KernelExpression;
+    readonly sourceFunctor: KernelExpression;
+    readonly targetFunctor: KernelExpression;
+    readonly indexOrdinal: number;
+}
+
 type InternalCoreCategoricalClassifier =
     | CoreType
     | InternalCoreCategoricalIndexedObjectClassifier
-    | InternalCoreCategoricalIndexedFunctorClassifier;
+    | InternalCoreCategoricalIndexedFunctorClassifier
+    | InternalCoreCategoricalIndexedTransforClassifier;
 
 interface InternalCoreCategoricalHomBoundary
 extends CoreCategoricalHomBoundary {
@@ -497,6 +546,16 @@ const copyCoreType = (type: CoreType): CoreType => {
                 sourceFamily: type.sourceFamily,
                 targetFamily: type.targetFamily
             };
+        case 'displayed-transfor':
+            return {
+                tag: 'displayed-transfor',
+                category: type.category,
+                baseCategory: type.baseCategory,
+                sourceFamily: type.sourceFamily,
+                targetFamily: type.targetFamily,
+                sourceFunctor: type.sourceFunctor,
+                targetFunctor: type.targetFunctor
+            };
         default: {
             const exhaustive: never = type;
             return exhaustive;
@@ -521,6 +580,17 @@ const copyInternalClassifier = (
             baseCategory: classifier.baseCategory,
             sourceFamily: classifier.sourceFamily,
             targetFamily: classifier.targetFamily,
+            indexOrdinal: classifier.indexOrdinal
+        };
+    }
+    if (classifier.tag === 'indexed-transfor') {
+        return {
+            tag: 'indexed-transfor',
+            baseCategory: classifier.baseCategory,
+            sourceFamily: classifier.sourceFamily,
+            targetFamily: classifier.targetFamily,
+            sourceFunctor: classifier.sourceFunctor,
+            targetFunctor: classifier.targetFunctor,
             indexOrdinal: classifier.indexOrdinal
         };
     }
@@ -601,9 +671,16 @@ const collectDependentPrerequisites = (
                     current.target ===
                         'section-object-evaluation' ||
                     current.target === 'displayed-functor-fibre' ||
-                    current.target === 'displayed-functor-transport'
+                    current.target === 'displayed-functor-transport' ||
+                    current.target ===
+                        'displayed-transfor-component-capped'
                 ) {
-                    add(current.target);
+                    add(
+                        current.target ===
+                            'displayed-transfor-component-capped'
+                            ? 'displayed-transfor-component-capped'
+                            : current.target
+                    );
                 }
                 visit(current.subject);
                 if (current.argument.tag === 'hom-boundary') {
@@ -926,6 +1003,36 @@ export class CoreCategoricalScopedBuilder {
         );
     }
 
+    private fibredTransfdCall(
+        id:
+            | 'displayed-component'
+            | 'transport-lhs'
+            | 'transport-rhs'
+            | 'higher-cell',
+        arguments_: readonly {
+            readonly plicity: Plicity;
+            readonly value: KernelExpression;
+        }[],
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        if (this.options.displayedTransforAbstraction !== true) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Displayed-transfor projection requires the ' +
+                'FIBRED-TRANSFD-1 capability'
+            );
+        }
+        return kernelCall(
+            kernelFree(
+                coreCategoricalFibredTransfdCoreName(id),
+                nodeProvenance
+            ),
+            arguments_,
+            nodeProvenance
+        );
+    }
+
     private terminalCategory(
         nodeProvenance: Provenance
     ): KernelExpression {
@@ -1085,7 +1192,8 @@ export class CoreCategoricalScopedBuilder {
     ): KernelExpression | undefined {
         if (
             type.tag === 'indexed-object' ||
-            type.tag === 'indexed-functor'
+            type.tag === 'indexed-functor' ||
+            type.tag === 'indexed-transfor'
         ) {
             return undefined;
         }
@@ -1215,7 +1323,8 @@ export class CoreCategoricalScopedBuilder {
         ] as const) {
             if (
                 endpoint.type.tag === 'indexed-object' ||
-                endpoint.type.tag === 'indexed-functor'
+                endpoint.type.tag === 'indexed-functor' ||
+                endpoint.type.tag === 'indexed-transfor'
             ) {
                 this.fail(
                     'CLASSIFIER_ARGUMENT_MISMATCH',
@@ -1258,7 +1367,8 @@ export class CoreCategoricalScopedBuilder {
         operation:
             | 'functor.object'
             | 'functor.hom.full'
-            | 'functor.hom.capped',
+            | 'functor.hom.capped'
+            | 'transfor.component.capped',
         operands: readonly InternalCoreCategoricalTerm[],
         nodeProvenance: Provenance
     ): ElaboratedSurfaceTerm {
@@ -1912,6 +2022,320 @@ export class CoreCategoricalScopedBuilder {
         );
     }
 
+    private applyDisplayedTransfor(
+        subject: InternalCoreCategoricalTerm,
+        argumentValue:
+            | CoreCategoricalTerm
+            | CoreCategoricalHomBoundary,
+        expectedShape: CoreCategoricalExpectedShape | undefined,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (subject.type.tag !== 'displayed-transfor') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Internal displayed-transfor classifier was lost'
+            );
+        }
+        if (
+            typeof argumentValue === 'object' &&
+            argumentValue !== null &&
+            (argumentValue as InternalCoreCategoricalHomBoundary)[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'FIBRED-TRANSFD-1 exposes the coherent fibre component, ' +
+                'not a whole displayed higher-action evaluator'
+            );
+        }
+        if (
+            expectedShape !== undefined &&
+            expectedShape !== 'displayed-component'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Displayed-transfor application cannot produce expected ` +
+                `shape '${expectedShape}'`
+            );
+        }
+        const argument = this.requireTerm(
+            argumentValue as CoreCategoricalTerm,
+            nodeProvenance
+        );
+        const argumentCategory = this.categoricalObjectCategory(
+            argument.type,
+            nodeProvenance,
+            'displayed-transfor base object'
+        );
+        if (
+            argumentCategory === undefined ||
+            !coreObjectCategoryEquals(
+                argumentCategory,
+                subject.type.baseCategory
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Displayed-transfor component index belongs to the wrong ' +
+                'base category'
+            );
+        }
+        const judgment = selectCoreCategoricalApplication({
+            layer: 'categorical',
+            subjectClassifier: 'displayed-transfor',
+            subjectForm: 'term',
+            argumentDimension: 'object',
+            expectedShape: 'displayed-component',
+            dependency: 'displayed'
+        }, dependentApplicationQualification);
+
+        if (argument.closed === undefined) {
+            if (
+                this.options.displayedTransforAbstraction !== true ||
+                subject.closed === undefined ||
+                argument.node.tag !== 'slot-token'
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'Open displayed-transfor projection requires the direct ' +
+                    'FIBRED-TRANSFD-1 base slot and a closed coherent subject'
+                );
+            }
+            return this.makeTerm(
+                {
+                    tag: 'typed-application',
+                    judgment,
+                    subject,
+                    argument,
+                    provenance: nodeProvenance
+                },
+                {
+                    tag: 'indexed-transfor',
+                    baseCategory: subject.type.baseCategory,
+                    sourceFamily: subject.type.sourceFamily,
+                    targetFamily: subject.type.targetFamily,
+                    sourceFunctor: subject.type.sourceFunctor,
+                    targetFunctor: subject.type.targetFunctor,
+                    indexOrdinal: argument.node.ordinal
+                },
+                mergeUsage(subject.usage, argument.usage),
+                undefined,
+                [
+                    ...subject.abstractions,
+                    ...argument.abstractions
+                ]
+            );
+        }
+        if (subject.closed === undefined) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Displayed-transfor subject remains open after its base ' +
+                'index was closed'
+            );
+        }
+
+        const point = argument.closed.term;
+        const displayedType = subject.type;
+        const sourceFibre = this.functorObject(
+            displayedType.baseCategory,
+            this.categoryOfCategories(nodeProvenance),
+            displayedType.sourceFamily,
+            point,
+            nodeProvenance
+        );
+        const targetFibre = this.functorObject(
+            displayedType.baseCategory,
+            this.categoryOfCategories(nodeProvenance),
+            displayedType.targetFamily,
+            point,
+            nodeProvenance
+        );
+        const fibreFunctor = (
+            displayedFunctor: KernelExpression
+        ): KernelExpression => this.dependentCall(
+            'displayed-functor-fibre',
+            [
+                {
+                    plicity: 'implicit',
+                    value: displayedType.baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedType.sourceFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedType.targetFamily
+                },
+                {
+                    plicity: 'explicit',
+                    value: displayedFunctor
+                },
+                { plicity: 'explicit', value: point }
+            ],
+            nodeProvenance
+        );
+        const resultType: CoreType = {
+            tag: 'transfor',
+            sourceCategory: sourceFibre,
+            targetCategory: targetFibre,
+            sourceFunctor: fibreFunctor(
+                displayedType.sourceFunctor
+            ),
+            targetFunctor: fibreFunctor(
+                displayedType.targetFunctor
+            )
+        };
+        const result = this.fibredTransfdCall(
+            'displayed-component',
+            [
+                {
+                    plicity: 'implicit',
+                    value: displayedType.baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedType.sourceFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedType.targetFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedType.sourceFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedType.targetFunctor
+                },
+                { plicity: 'explicit', value: point },
+                {
+                    plicity: 'explicit',
+                    value: subject.closed.term
+                }
+            ],
+            nodeProvenance
+        );
+        return this.closedDependentApplication(
+            subject,
+            argument,
+            judgment,
+            resultType,
+            result,
+            nodeProvenance
+        );
+    }
+
+    private applyOrdinaryTransfor(
+        subject: InternalCoreCategoricalTerm,
+        argumentValue:
+            | CoreCategoricalTerm
+            | CoreCategoricalHomBoundary,
+        expectedShape: CoreCategoricalExpectedShape | undefined,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (subject.type.tag !== 'transfor') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Internal ordinary-transfor classifier was lost'
+            );
+        }
+        if (
+            typeof argumentValue === 'object' &&
+            argumentValue !== null &&
+            (argumentValue as InternalCoreCategoricalHomBoundary)[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            this.fail(
+                'RESERVED_NATURALITY_ACTION',
+                nodeProvenance,
+                'Whole ordinary transfor Hom-action remains behind its ' +
+                'separate naturality gate'
+            );
+        }
+        if (
+            expectedShape !== undefined &&
+            expectedShape !== 'point-component'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Ordinary transfor application cannot produce expected ` +
+                `shape '${expectedShape}'`
+            );
+        }
+        const argument = this.requireTerm(
+            argumentValue as CoreCategoricalTerm,
+            nodeProvenance
+        );
+        const argumentCategory = this.categoricalObjectCategory(
+            argument.type,
+            nodeProvenance,
+            'ordinary transfor component index'
+        );
+        if (
+            argumentCategory === undefined ||
+            !coreObjectCategoryEquals(
+                argumentCategory,
+                subject.type.sourceCategory
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Ordinary transfor component index belongs to the wrong ' +
+                'source category'
+            );
+        }
+        if (
+            subject.closed === undefined ||
+            argument.closed === undefined
+        ) {
+            this.fail(
+                'MISSING_STRUCTURAL_OWNER',
+                nodeProvenance,
+                'Open ordinary transfor components require later ' +
+                'contextual naturality lowering'
+            );
+        }
+        const judgment = selectCoreCategoricalApplication({
+            layer: 'categorical',
+            subjectClassifier: 'ordinary-transfor',
+            subjectForm: 'term',
+            argumentDimension: 'object',
+            expectedShape: 'point-component',
+            dependency: 'ordinary'
+        });
+        const closed = this.operation(
+            'transfor.component.capped',
+            [subject, argument],
+            nodeProvenance
+        );
+        return this.makeTerm(
+            {
+                tag: 'typed-application',
+                judgment,
+                subject,
+                argument,
+                provenance: nodeProvenance
+            },
+            closed.type,
+            mergeUsage(subject.usage, argument.usage),
+            closed,
+            [...subject.abstractions, ...argument.abstractions]
+        );
+    }
+
     private applyIndexedFibreFunctor(
         subject: InternalCoreCategoricalTerm,
         argumentValue:
@@ -2095,6 +2519,22 @@ export class CoreCategoricalScopedBuilder {
                 nodeProvenance
             );
         }
+        if (subject.type.tag === 'displayed-transfor') {
+            return this.applyDisplayedTransfor(
+                subject,
+                argumentValue,
+                expectedShape,
+                nodeProvenance
+            );
+        }
+        if (subject.type.tag === 'transfor') {
+            return this.applyOrdinaryTransfor(
+                subject,
+                argumentValue,
+                expectedShape,
+                nodeProvenance
+            );
+        }
         if (subject.type.tag !== 'functor') {
             this.fail(
                 'EXPECTED_FUNCTOR',
@@ -2266,7 +2706,8 @@ export class CoreCategoricalScopedBuilder {
     ): CoreCategoricalClassifier {
         if (
             classifier.tag !== 'indexed-object' &&
-            classifier.tag !== 'indexed-functor'
+            classifier.tag !== 'indexed-functor' &&
+            classifier.tag !== 'indexed-transfor'
         ) {
             return copyCoreType(classifier);
         }
@@ -2287,11 +2728,22 @@ export class CoreCategoricalScopedBuilder {
                 index
             };
         }
+        if (classifier.tag === 'indexed-functor') {
+            return {
+                tag: 'indexed-functor',
+                baseCategory: classifier.baseCategory,
+                sourceFamily: classifier.sourceFamily,
+                targetFamily: classifier.targetFamily,
+                index
+            };
+        }
         return {
-            tag: 'indexed-functor',
+            tag: 'indexed-transfor',
             baseCategory: classifier.baseCategory,
             sourceFamily: classifier.sourceFamily,
             targetFamily: classifier.targetFamily,
+            sourceFunctor: classifier.sourceFunctor,
+            targetFunctor: classifier.targetFunctor,
             index
         };
     }
@@ -3711,6 +4163,207 @@ export class CoreCategoricalScopedBuilder {
         }
     }
 
+    /**
+     * First direct displayed-transfor abstraction.
+     *
+     * The callback sees `k : Obj K` and may project one already-coherent,
+     * closed displayed transfor at that slot. The eta body is reified as
+     * `eta[k]` and lowers back to `eta`; arbitrary pointwise families are not
+     * promoted to coherent displayed transformations.
+     */
+    displayedTransforLambda(
+        name: string,
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        sourceFunctor: KernelExpression,
+        targetFunctor: KernelExpression,
+        bodyBuilder: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        assertSafeIdentifier(name, 'Displayed-transfor binder hint');
+        kernelAssertScoped(baseCategory);
+        kernelAssertScoped(sourceFamily);
+        kernelAssertScoped(targetFamily);
+        kernelAssertScoped(sourceFunctor);
+        kernelAssertScoped(targetFunctor);
+        const nodeProvenance = this.nodeProvenance(
+            `displayed-transfor abstraction ${name}`,
+            options.provenance
+        );
+        if (this.options.displayedTransforAbstraction !== true) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Direct displayed-transfor abstraction requires the ' +
+                'FIBRED-TRANSFD-1 capability'
+            );
+        }
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'natural';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'displayed';
+        if (
+            variation !== 'natural' ||
+            dependency !== 'displayed'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Displayed-transfor binder '${name}' requires natural ` +
+                'variation and displayed dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                `Displayed-transfor binder '${name}' is covariant`
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'FIBRED-TRANSFD-1 abstracts one natural base object slot'
+            );
+        }
+
+        const token = this.slot(name, baseCategory, nodeProvenance);
+        const ordinal = token.node.tag === 'slot-token'
+            ? token.node.ordinal
+            : -1;
+        const outerScope = [...this.activeTokenOrdinals];
+        this.activeTokenOrdinals.unshift(ordinal);
+        try {
+            // Evaluate exactly once; no callback is retained.
+            const body = this.requireTerm(
+                bodyBuilder(token as CoreCategoricalSlotToken),
+                nodeProvenance
+            );
+            const etaArgument =
+                body.node.tag === 'typed-application' &&
+                body.node.judgment.target ===
+                    'displayed-transfor-component-capped' &&
+                body.node.argument[
+                    CORE_CATEGORICAL_BOUNDARY
+                ] !== true
+                    ? body.node.argument as
+                        InternalCoreCategoricalTerm
+                    : undefined;
+            const etaSubject =
+                body.node.tag === 'typed-application'
+                    ? body.node.subject
+                    : undefined;
+            if (
+                body.type.tag !== 'indexed-transfor' ||
+                body.type.indexOrdinal !== ordinal ||
+                !kernelExpressionEquals(
+                    body.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.sourceFamily,
+                    sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.targetFamily,
+                    targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.sourceFunctor,
+                    sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.targetFunctor,
+                    targetFunctor
+                ) ||
+                etaArgument?.node.tag !== 'slot-token' ||
+                etaArgument.node.ordinal !== ordinal ||
+                etaSubject === undefined ||
+                etaSubject.type.tag !== 'displayed-transfor' ||
+                !kernelExpressionEquals(
+                    etaSubject.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    etaSubject.type.sourceFamily,
+                    sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    etaSubject.type.targetFamily,
+                    targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    etaSubject.type.sourceFunctor,
+                    sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    etaSubject.type.targetFunctor,
+                    targetFunctor
+                ) ||
+                usageCount(etaSubject.usage, ordinal) !== 0 ||
+                usageCount(body.usage, ordinal) !== 1 ||
+                etaSubject.closed === undefined
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'FIBRED-TRANSFD-1 accepts exactly coherent component ' +
+                    'eta: λ k. eta[k] for one closed displayed transfor eta'
+                );
+            }
+
+            const bodyIr = this.normalizeNode(
+                body,
+                [ordinal, ...outerScope]
+            );
+            const resultIr = this.normalizeNode(
+                etaSubject,
+                outerScope
+            );
+            const evidence = deepFreeze({
+                rule: 'categorical.displayed-transfor-eta' as const,
+                name,
+                plicity,
+                variation: 'natural' as const,
+                polarity: 'covariant' as const,
+                cellLevel: 'object' as const,
+                dependency: 'displayed' as const,
+                sourceCategory: baseCategory,
+                sourceFamily,
+                targetFamily,
+                sourceFunctor,
+                targetFunctor,
+                body: bodyIr,
+                result: resultIr,
+                structuralPrerequisites: Object.freeze([]),
+                dependentPrerequisites: Object.freeze([
+                    'displayed-transfor-component-capped' as const
+                ]),
+                provenance: nodeProvenance
+            });
+            const closed = deepFreeze({
+                term: etaSubject.closed.term,
+                type: copyCoreType(etaSubject.type),
+                sourceSpan: this.spanFor(nodeProvenance),
+                recovered: [...etaSubject.closed.recovered]
+            });
+            return this.makeTerm(
+                etaSubject.node,
+                etaSubject.type,
+                etaSubject.usage,
+                closed,
+                [...etaSubject.abstractions, evidence]
+            );
+        } finally {
+            this.activeTokenOrdinals.shift();
+        }
+    }
+
     dependentLambda(
         name: string,
         baseCategory: KernelExpression,
@@ -3973,6 +4626,7 @@ export class CoreCategoricalScopedBuilder {
             if (
                 body.type.tag === 'indexed-object' ||
                 body.type.tag === 'indexed-functor' ||
+                body.type.tag === 'indexed-transfor' ||
                 !coreTypeEquals(body.type, expectedBodyType)
             ) {
                 this.fail(
