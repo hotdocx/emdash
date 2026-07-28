@@ -20,6 +20,7 @@ import {
     CoreLfTransferScopedBuilder,
     compileCoreDirectedContinuationRuntimeTransfer,
     compileCoreLfDeclarations,
+    compileCoreLfProofProgram,
     compileCoreLfRuntimeProgram,
     coreLfQualifiedSymbol,
     coreLfTransferAbsentBody,
@@ -62,6 +63,10 @@ const nat = coreLfQualifiedSymbol(fixtureModuleId, 'Nat');
 const zero = coreLfQualifiedSymbol(fixtureModuleId, 'zero');
 const identity = coreLfQualifiedSymbol(fixtureModuleId, 'identity');
 const beneath = coreLfQualifiedSymbol(fixtureModuleId, 'beneath');
+const leftType = coreLfQualifiedSymbol(fixtureModuleId, 'Left');
+const rightType = coreLfQualifiedSymbol(fixtureModuleId, 'Right');
+const leftHead = coreLfQualifiedSymbol(fixtureModuleId, 'left_head');
+const rightValue = coreLfQualifiedSymbol(fixtureModuleId, 'right_value');
 
 const fixtureSource = (sourceFragment: string) => ({
     authorityPath: 'tests/fixtures/generic_runtime.lp',
@@ -301,6 +306,219 @@ const genericRuntimeFixture = (): GenericRuntimeFixture => {
         declarations,
         module,
         policy: runtimePolicy(module, 'generic-runtime-policy-1')
+    };
+};
+
+const proofSubjectRuntimeFixture = () => {
+    const declarationModule = createCoreLfModuleSpec({
+        revision: 'proof-subject-runtime-declarations-1',
+        moduleId: fixtureModuleId,
+        fragmentId: 'proof-subject-runtime-declarations',
+        authorityPath: 'tests/fixtures/generic_runtime.lp',
+        sourceSha256:
+            'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        dependencies: [],
+        externalSymbols: [],
+        declarations: [
+            {
+                order: 0,
+                symbol: leftType,
+                type: { tag: 'type' as const },
+                body: coreLfTransferAbsentBody(),
+                modifiers: declarationModifiers,
+                provenance: fixtureSource('symbol Left : TYPE;')
+            },
+            {
+                order: 1,
+                symbol: rightType,
+                type: { tag: 'type' as const },
+                body: coreLfTransferAbsentBody(),
+                modifiers: declarationModifiers,
+                provenance: fixtureSource('symbol Right : TYPE;')
+            },
+            {
+                order: 2,
+                symbol: leftHead,
+                type: functionType(leftType, leftType),
+                body: coreLfTransferAbsentBody(),
+                modifiers: declarationModifiers,
+                provenance: fixtureSource(
+                    'symbol left_head (x : Left) : Left;'
+                )
+            },
+            {
+                order: 3,
+                symbol: rightValue,
+                type: { tag: 'global' as const, symbol: rightType },
+                body: coreLfTransferAbsentBody(),
+                modifiers: declarationModifiers,
+                provenance: fixtureSource(
+                    'symbol right_value : Right;'
+                )
+            }
+        ],
+        inductives: [],
+        runtimeRules: [],
+        proofRules: []
+    });
+    const declarationPolicy = createCoreLfTransferPolicyOverlay(
+        declarationModule,
+        {
+            revision: 'proof-subject-runtime-declaration-policy-1',
+            moduleRevision: declarationModule.revision,
+            entries: declarationModule.declarations.map(
+                (declaration, order) => ({
+                    order,
+                    target: {
+                        kind: 'declaration' as const,
+                        symbol: declaration.symbol
+                    },
+                    policy: 'opaque-signature' as const,
+                    evidence: 'proof-subject runtime fixture'
+                })
+            )
+        }
+    );
+    const linkage = createCoreLfTransferDeclarationLinkage(
+        declarationModule,
+        {
+            revision: 'proof-subject-runtime-linkage-1',
+            moduleRevision: declarationModule.revision,
+            entries: declarationModule.declarations.map(
+                (declaration, order) => ({
+                    order,
+                    symbol: declaration.symbol,
+                    kind: 'free-declaration' as const,
+                    coreName:
+                        `proof_subject_fixture_${declaration.symbol.name}`,
+                    backendName: declaration.symbol.name
+                })
+            )
+        }
+    );
+    const declarations = compileCoreLfDeclarations(
+        declarationModule,
+        declarationPolicy,
+        linkage
+    );
+
+    const proofBuilder = new CoreLfTransferScopedBuilder();
+    const proofRule = {
+        order: 0,
+        id: 'fixture.proof-subject.types',
+        sourceOwner: leftType,
+        variables: [],
+        problem: {
+            left: proofBuilder.pattern(proofBuilder.global(leftType)),
+            right: proofBuilder.pattern(proofBuilder.global(rightType))
+        },
+        generatedConstraints: [{
+            left: proofBuilder.template(proofBuilder.global(leftType)),
+            right: proofBuilder.template(proofBuilder.global(leftType))
+        }],
+        provenance: fixtureSource(
+            'unif_rule Left ≡ Right ↪ [Left ≡ Left];'
+        )
+    };
+    const proofModule = createCoreLfModuleSpec({
+        revision: 'proof-subject-runtime-proof-1',
+        moduleId: fixtureModuleId,
+        fragmentId: 'proof-subject-runtime-proof',
+        authorityPath: 'tests/fixtures/generic_runtime.lp',
+        sourceSha256:
+            'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        dependencies: [],
+        externalSymbols: [leftType, rightType].map(symbol => ({
+            symbol,
+            availability: 'earlier-fragment' as const
+        })),
+        declarations: [],
+        inductives: [],
+        runtimeRules: [],
+        proofRules: [proofRule]
+    });
+    const proofPolicy = createCoreLfTransferPolicyOverlay(
+        proofModule,
+        {
+            revision: 'proof-subject-runtime-proof-policy-1',
+            moduleRevision: proofModule.revision,
+            entries: [{
+                order: 0,
+                target: {
+                    kind: 'proof-rule' as const,
+                    id: proofRule.id
+                },
+                policy: 'proof-unification' as const,
+                evidence: 'proof-subject runtime fixture'
+            }]
+        }
+    );
+    const proofProgram = compileCoreLfProofProgram(
+        proofModule,
+        proofPolicy,
+        declarations
+    );
+
+    const runtimeBuilder = new CoreLfTransferScopedBuilder();
+    const runtimeRule = {
+        order: 0,
+        id: 'fixture.proof-subject.evaluate',
+        groupId: 'fixture.proof-subject.evaluate',
+        clauseOrder: 0,
+        sourceOwner: leftHead,
+        variables: [{
+            name: 'x',
+            type: runtimeBuilder.template(
+                runtimeBuilder.global(leftType)
+            )
+        }],
+        left: runtimeBuilder.pattern(runtimeBuilder.call(
+            runtimeBuilder.global(leftHead),
+            [{
+                plicity: 'explicit' as const,
+                value: runtimeBuilder.capture('x')
+            }]
+        )),
+        right: runtimeBuilder.template(
+            runtimeBuilder.global(rightValue)
+        ),
+        provenance: fixtureSource(
+            'rule left_head $x ↪ right_value;'
+        )
+    };
+    const module = createCoreLfModuleSpec({
+        revision: 'proof-subject-runtime-rules-1',
+        moduleId: fixtureModuleId,
+        fragmentId: 'proof-subject-runtime-rules',
+        authorityPath: 'tests/fixtures/generic_runtime.lp',
+        sourceSha256:
+            'sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        dependencies: [],
+        externalSymbols: [
+            leftType,
+            leftHead,
+            rightValue
+        ].map(symbol => ({
+            symbol,
+            availability: 'earlier-fragment' as const
+        })),
+        declarations: [],
+        inductives: [],
+        runtimeRules: [runtimeRule],
+        proofRules: []
+    });
+    return {
+        declarations,
+        module,
+        policy: runtimePolicy(
+            module,
+            'proof-subject-runtime-policy-1'
+        ),
+        proofProgram,
+        expectation: {
+            runtimeRuleId: runtimeRule.id,
+            proofRuleIds: [proofRule.id]
+        }
     };
 };
 
@@ -615,6 +833,117 @@ describe('SCALE-0D generic LF runtime compiler', () => {
                 higher.declarations
             ),
             'UNSUPPORTED_HIGHER_ORDER_PATTERN'
+        );
+    });
+
+    it('uses exact proof rules only for selected inferred subjects', () => {
+        const fixture = proofSubjectRuntimeFixture();
+        expectRuntimeError(
+            () => compileCoreLfRuntimeProgram(
+                fixture.module,
+                fixture.policy,
+                fixture.declarations
+            ),
+            'INVALID_RUNTIME_RULE_TYPE'
+        );
+        const runtime = compileCoreLfRuntimeProgram(
+            fixture.module,
+            fixture.policy,
+            fixture.declarations,
+            {
+                subjectReductionProof: {
+                    program: fixture.proofProgram,
+                    rules: [fixture.expectation]
+                }
+            }
+        );
+        assert.equal(
+            runtime.rules[0].subjectValidation.kind,
+            'typescript-proof-checked'
+        );
+        assert.deepEqual(
+            runtime.rules[0].subjectValidation.kind ===
+                'typescript-proof-checked'
+                ? runtime.rules[0].subjectValidation.proofRuleIds
+                : [],
+            ['fixture.proof-subject.types']
+        );
+        assertDeepFrozen(runtime.rules[0].subjectValidation);
+    });
+
+    it('makes subject-proof expectations exact and self-invalidating', () => {
+        const fixture = proofSubjectRuntimeFixture();
+        const generic = genericRuntimeFixture();
+        expectRuntimeError(
+            () => compileCoreLfRuntimeProgram(
+                generic.module,
+                generic.policy,
+                generic.declarations,
+                {
+                    subjectReductionProof: {
+                        program: fixture.proofProgram,
+                        rules: [{
+                            runtimeRuleId: 'fixture.identity.evaluate',
+                            proofRuleIds: [
+                                'fixture.proof-subject.types'
+                            ]
+                        }]
+                    }
+                }
+            ),
+            'INVALID_RUNTIME_SUBJECT_PROOF'
+        );
+        expectRuntimeError(
+            () => compileCoreLfRuntimeProgram(
+                fixture.module,
+                fixture.policy,
+                fixture.declarations,
+                {
+                    subjectReductionProof: {
+                        program: fixture.proofProgram,
+                        rules: [{
+                            ...fixture.expectation,
+                            proofRuleIds: ['fixture.unknown-proof']
+                        }]
+                    }
+                }
+            ),
+            'INVALID_RUNTIME_SUBJECT_PROOF'
+        );
+        expectRuntimeError(
+            () => compileCoreLfRuntimeProgram(
+                fixture.module,
+                fixture.policy,
+                fixture.declarations,
+                {
+                    subjectReductionProof: {
+                        program: fixture.proofProgram,
+                        rules: [fixture.expectation]
+                    },
+                    subjectReductionOracle: {
+                        authorityPath: fixture.module.authorityPath,
+                        ruleIds: [fixture.expectation.runtimeRuleId],
+                        evidence: 'deliberate overlap'
+                    }
+                }
+            ),
+            'INVALID_RUNTIME_SUBJECT_PROOF'
+        );
+
+        const foreign = proofSubjectRuntimeFixture();
+        expectRuntimeError(
+            () => compileCoreLfRuntimeProgram(
+                fixture.module,
+                fixture.policy,
+                fixture.declarations,
+                {
+                    subjectReductionProof: {
+                        program: foreign.proofProgram,
+                        rules: [fixture.expectation]
+                    }
+                }
+            ),
+            'INVALID_RUNTIME_SUBJECT_PROOF'
         );
     });
 

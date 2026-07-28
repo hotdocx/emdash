@@ -807,6 +807,74 @@ describe('SCALE-0E generic LF proof-time compiler', () => {
         );
     });
 
+    it('reaches nested proof rules through bounded rigid congruence', () => {
+        const base = genericProofFixture();
+        const builder = new CoreLfTransferScopedBuilder();
+        const rule: CoreLfTransferProofRule = {
+            order: 0,
+            id: 'fixture.constants.identify',
+            sourceOwner: zero,
+            variables: [],
+            problem: {
+                left: builder.pattern(builder.global(zero)),
+                right: builder.pattern(builder.global(one))
+            },
+            generatedConstraints: [{
+                left: builder.template(builder.global(nat)),
+                right: builder.template(builder.global(nat))
+            }],
+            provenance: fixtureSource(
+                'unif_rule zero ≡ one ↪ [Nat ≡ Nat];'
+            )
+        };
+        const fixture = replaceProofRules(
+            base,
+            'generic-proof-nested-congruence-1',
+            [rule],
+            [nat, zero, one].map(symbol => ({
+                symbol,
+                availability: 'earlier-fragment' as const
+            }))
+        );
+        const program = compileCoreLfProofProgram(
+            fixture.module,
+            fixture.policy,
+            fixture.declarations
+        );
+        const left = fixtureApplication(
+            fixture,
+            leftHead,
+            fixtureTerm(fixture, zero)
+        );
+        const right = fixtureApplication(
+            fixture,
+            leftHead,
+            fixtureTerm(fixture, one)
+        );
+        const solved = program.compare(left, right, { stepLimit: 2 });
+        assert.equal(solved.status, 'solved');
+        assert.deepEqual(
+            solved.trace.map(entry => entry.kind),
+            ['congruence', 'proof-rule']
+        );
+        assert.deepEqual(solved.resolutionOrder, [0, 1, 2]);
+        assert.deepEqual(
+            solved.ruleApplications.map(application =>
+                application.ruleId
+            ),
+            ['fixture.constants.identify']
+        );
+
+        const bounded = program.compare(left, right, { stepLimit: 0 });
+        assert.equal(bounded.status, 'step-limit-exceeded');
+        if (bounded.status === 'step-limit-exceeded') {
+            assert.deepEqual(bounded.next, {
+                kind: 'congruence',
+                expressionTag: 'call'
+            });
+        }
+    });
+
     it('allocates RHS-only metas in order and preserves stuck evidence', () => {
         const fixture = genericProofFixture();
         const program = compileCoreLfProofProgram(

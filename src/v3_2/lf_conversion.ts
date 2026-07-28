@@ -445,6 +445,8 @@ export interface CoreLfComparisonEqual extends CoreLfComparisonBase {
 
 export interface CoreLfComparisonNotEqual extends CoreLfComparisonBase {
     readonly status: 'not-equal';
+    readonly normalizedLeft: KernelExpression;
+    readonly normalizedRight: KernelExpression;
     readonly mismatch: CoreLfComparisonMismatch;
 }
 
@@ -1420,6 +1422,8 @@ export function coreLfDefinitionalCompare(
             return Object.freeze({
                 status: 'not-equal',
                 ...base,
+                normalizedLeft: outcome.normalizedLeft,
+                normalizedRight: outcome.normalizedRight,
                 mismatch: outcome.mismatch
             });
         case 'step-limit-exceeded':

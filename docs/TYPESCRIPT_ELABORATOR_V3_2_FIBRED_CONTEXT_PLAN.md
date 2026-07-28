@@ -106,7 +106,29 @@ added. Its complete repository gate is green: all 19 live differential
 judgments, all 41 kernel/example health targets, 39 infrastructure tests,
 five document-registry tests, report/book checks, the unchanged strict
 `0/47/29` LHS audit, and catalog freshness pass.
-FIBRED-DEPENDENT-TARGET-1 is now the next dependency-ready row.
+FIBRED-DEPENDENT-TARGET-1 is now in implementation. Its descendant audit
+replaced the provisional five-declaration estimate with an exact
+ten-declaration/ten-runtime-rule/one-proof-rule existing-authority closure.
+The separately frozen H-DTTLF-USABILITY-PROOF-SUBJECT/
+D-DTTLF-USABILITY-007 contract and its exact post-audit corrective addendum
+D-DTTLF-USABILITY-007A are approved under the user's delegated unattended
+authority: eight runtime clauses must subject-check directly and exactly two
+may use the one active ordinary/displayed category proof rule through a new
+fail-closed generic compile-time validation path. The addendum installs the
+active transparent `Hom` refinement and transfers the already-active
+`Hom_cat(Catd_cat) -> Functord_cat` runtime prerequisite; it adds no
+mathematical owner or rule. No runtime category collapse, external oracle, or
+Lambdapi mathematical change is authorized.
+The generic boundary is now implementation-complete: runtime subjects record
+direct versus exact proof-assisted validation; proof programs rebase only
+across exact opaque declaration and runtime-prefix extensions; stale
+exceptions fail closed; and normalized proof comparison descends only through
+equal rigid heads under one shared budget. The exact ignored descendant replay
+passes at ten declarations, ten runtime rules, eight direct validations, and
+two proof-assisted validations. The full TypeScript gate passes with 788
+tests: 742 active passes and 46 intentional skips. The tracked categorical
+transfer, root-only target/fibre/eta consumer, differential evidence, and
+complete repository gate remain the next sub-slice.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -134,6 +156,24 @@ decision is easy to inspect and backtrack. A human response always takes
 precedence. This delegation does not authorize destructive actions, remote
 Git operations, publication, integration, history rewriting, or silent scope
 expansion.
+On 2026-07-28 that delegation was used for the separately frozen
+H-DTTLF-USABILITY-PROOF-SUBJECT/D-DTTLF-USABILITY-007 contract after no
+immediate human response followed its exact presentation. The decision
+authorizes only the fail-closed generic proof-assisted compile-time subject
+validation, exact nine-declaration/nine-runtime-rule/one-proof-rule transfer,
+and bounded root-only dependent-target/fibre/eta consumer recorded below.
+It adds no runtime proof rewrite, external oracle, kernel mathematics,
+general dependent displayed bracket, profile promotion, or broader Git
+authority.
+The subsequent executable descendant audit found that installing the exact
+active transparent `Hom` body exposes its source-prior
+`Hom_cat(Catd_cat) -> Functord_cat` computation. On 2026-07-28 the delegated
+unattended authority was therefore used again for the separately frozen
+D-DTTLF-USABILITY-007A corrective addendum below. It supersedes only the
+initial inventory/evidence counts: the exact closure is ten declarations,
+ten runtime rules, and one proof rule; eight runtime rules check directly,
+while only package-component and pullback-component need the proof rule.
+Every original non-effect remains binding.
 The user also clarified that warning counts are diagnostic evidence about
 interactions and possible closure work, never an automatic veto on a desired
 design. The implementation audit therefore retains warning comparisons but
@@ -1266,7 +1306,7 @@ usability profile.
 | FIBRED-GROUPED-SEQUENTIAL-1 | complete; validated; checkpointed `4f173cec9336d41bac9a08563c3697e0fc657d66` | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Implemented a finite block of two-or-more independent displayed siblings over one common base; the generic dependency graph drives a left-to-right Sigma/pullback lowering and a left-associated transparent product lowering; checked `((k,b),c)` and `(k,(b,c))`, accumulated/base projections, product component functors, three-sibling scaling, and dependency-edge rejection using only existing owners; explicitly claims no total-category equality/equivalence or Sigma-projection arrow computation; nine focused cases, runnable demo, the 776-test TypeScript gate, and complete repository gate pass |
 | FIBRED-QUALIFICATION-REMAINDER-0 | complete; read-only existing-authority audit | FIBRED-BINDER-1, FIBRED-TRANSFD-1, FIBRED-GROUPED-SEQUENTIAL-1 | The active-kernel consumer probe closes the authority question for cases 2–4: Sigma-projection section pullback, `Pullback_catd_func` hom action, and the `Pi_pullback_funcd`/`Sigma_catd_functord_catd` composite all check and compute without a new owner/rule; selected two executable implementation rows and froze their exact nonclaims |
 | FIBRED-WEAKEN-REINDEX-1 | complete; validated; checkpointed `246481130ebf29a09d04b9b4337dbdb716484d43` | FIBRED-QUALIFICATION-REMAINDER-0, FIBRED-TRANSFD-1 | Transferred `Pullback_catd_func`, `Obj_func`, `section_pullback_func`, and `section_pullback_sec`; executable subject checking exposed and transferred two exact existing prerequisite reductions before the four frozen consumer clauses. Added root-only `indexOf`, exact closed-section `:^fd` weakening, frontend semantic-origin point lowering, displayed-functor hom-action reindexing, eta stability, point computation, fail-closed negatives, and a runnable demo. Category presentations remain runtime-distinct/proof-compatible; zero Lambdapi mathematical owners/rules were added; the 785-test TypeScript and complete repository gates pass |
-| FIBRED-DEPENDENT-TARGET-1 | dependency-ready; executable contract must be frozen first | FIBRED-WEAKEN-REINDEX-1 | Audit the descendant environment, enumerate the exact still-missing internal-Pi declarations and smallest active runtime closure, then construct `G : K -> Cat^op`, the motive family, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd` target; execute `B[k,M] = Pi_cat(G[k],M)` and total-context dependent-section eta without claiming arbitrary coherent section synthesis |
+| FIBRED-DEPENDENT-TARGET-1 | in progress; corrected contract approved; generic proof-subject boundary implementation-complete and TypeScript-green | FIBRED-WEAKEN-REINDEX-1 | The generic compiler now enforces exact opaque/runtime-prefix proof rebasing, independent proof-path subject inference, stale-exception rejection, exact proof-rule evidence, and bounded equal-rigid-head congruence; the active descendant audit passes the corrected ten-declaration/ten-runtime/eight-direct/two-proof inventory without category collapse or oracle. Next track that exact transfer and construct `G : K -> Cat^op`, the motive family, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd` target; execute `B[k,M] = Pi_cat(G[k],M)` and total-context dependent-section eta without claiming arbitrary coherent section synthesis |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
 | FIBRED-GRADUATE-1 | pending | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate human graduation decision |
 
@@ -2473,6 +2513,249 @@ It may implement the already-probed
 section eta, but it may not infer a new primitive or promote arbitrary
 pointwise TypeScript data to a coherent section.
 
+## FIBRED-DEPENDENT-TARGET-1 Frozen Executable Contract
+
+The descendant audit corrects two provisional simplifications in the
+qualification decomposition.
+
+First, the five provisionally named declarations are not a closed exact
+transfer. `Pi_int_funcd` uses the active transparent groupoid classifier
+`Functord`, and the active transparent body of `Catd_cat_func` uses the fixed
+evaluation and internalized functor-category packages. The exact missing
+declaration closure is therefore:
+
+```text
+Op_cat
+Functord
+fapp0_func
+Functor_cat_func
+Functor_cat_fapp0_func
+Catd_cat_func
+Pi_func
+Pi_int_funcd
+Pi_pullback_funcd.
+```
+
+`Functord` and `Catd_cat_func` retain their exact checked transparent bodies.
+The other seven declarations retain their exact active signatures and may
+remain opaque in this slice. Already transferred `Pullback_catd`,
+`Pullback_catd_func`, `Sigma_catd_functord_catd`, `Const_catd`, application,
+composition, classifier, and Sigma machinery must be reused.
+
+Second, exact transparent computation does not turn the stable category head
+`Catd_cat(K)` into the ordinary presentation `Functor_cat(K,Cat_cat)`.
+`Catd_cat_func[K]` correctly computes to the latter, while the active kernel
+relates the two categories only through:
+
+```text
+unif_rule Functor_cat $K Cat_cat ≡ @Catd_cat $K'
+  ↪ [ $K ≡ $K' ].
+```
+
+Adding a runtime rewrite between those category heads would erase the
+intentional runtime/proof distinction already preserved throughout this
+plan. Hiding the mismatch behind the old external Lambdapi subject oracle
+would also be too weak: the exact existing proof rule is already within the
+generic TypeScript proof engine's supported envelope.
+
+### H-DTTLF-USABILITY-PROOF-SUBJECT proposal
+
+**D-DTTLF-USABILITY-007 — frozen non-self-authorizing proposal.** Add a
+generic proof-assisted runtime subject-validation path with all of these
+guards:
+
+1. the left and right sides of a runtime rule must each infer independently;
+2. ordinary TypeScript checking is always attempted first;
+3. proof assistance may run only for an explicitly listed runtime rule after
+   that ordinary check fails;
+4. the proof program must have been checked against an exact source-time
+   runtime prefix;
+5. its comparison may be rebased only over an exact extension by opaque,
+   body-free synthetic telescope declarations;
+6. the comparison must solve, must use at least one proof rule, and must use
+   exactly the expected proof-rule IDs;
+7. stale, unnecessary, unknown, duplicated, out-of-order, foreign-prefix, or
+   overlapping external-oracle exceptions fail closed; and
+8. the compiled runtime rule records its immutable direct or proof-assisted
+   subject-validation evidence.
+
+This is compile-time validation only. A proof rule never becomes an evaluator
+rewrite, and the result does not authorize a global standalone
+subject-reduction theorem.
+
+The exact transferred runtime closure is:
+
+```text
+categorical.dependent-target.opposite-object
+categorical.dependent-target.fixed-evaluation-object
+categorical.dependent-target.functor-category-first-object
+categorical.dependent-target.functor-category-second-object
+categorical.dependent-target.constant-pullback
+categorical.dependent-target.section-functor-object
+categorical.dependent-target.package-component
+categorical.dependent-target.pullback-fold
+categorical.dependent-target.pullback-component.
+```
+
+The first six clauses must be `typescript-checked`. Exactly the final three
+may be `typescript-proof-checked`, each with exactly:
+
+```text
+categorical.dependent-target.category-presentation
+```
+
+as its proof-rule evidence. That proof rule is the exact active
+`Functor_cat(K,Cat_cat) ≡ Catd_cat(K')` unification rule above. All nine
+runtime clauses and the proof rule already exist in active v3.2; this
+proposal adds no Lambdapi mathematical owner or rule.
+
+After that generic boundary is executable, the root-only
+`fibred-dependent-target-1` profile may:
+
+1. construct `G : K -> Op(Cat_cat)`;
+2. construct the motive family
+   `Pullback_catd(Catd_cat_func,G)`;
+3. construct `Pi_pullback_funcd(G)`;
+4. totalize the codomain family as
+   `Sigma_catd_functord_catd(Pi_pullback_funcd(G))`;
+5. compute its fibre at `(k,M)` to `Pi_cat(G[k],M)`; and
+6. reuse the existing outer-LF `dependentLambda` for a section-eta witness
+   over that explicit total context.
+
+The proof-assisted checker itself requires focused generic positive and
+negative tests. The categorical slice additionally requires exact
+declaration/rule inventory tests, direct-versus-proof subject-validation
+tests, proof/runtime category non-collapse, target-fibre computation,
+total-context eta, wrong-base/family failures, deterministic demo output, the
+root TypeScript gate, bounded live Lambdapi differential evidence, and the
+complete repository gate before checkpointing.
+
+This proposal does **not** authorize:
+
+- a runtime `Functor_cat(K,Cat_cat) -> Catd_cat(K)` collapse;
+- a proof rule in the runtime evaluator;
+- an external subject-reduction oracle for the three named clauses;
+- proof assistance for any unlisted runtime rule;
+- arbitrary pointwise TypeScript data as a coherent displayed section;
+- a general dependent displayed bracket or complete `:^fd`/`:^nd` syntax;
+- a new internal-Pi arrow action, groupoidal closure, parser/acquisition
+  route, bulk transfer, browser/deployed profile, or total-category theorem;
+  or
+- any Lambdapi source change, remote Git operation, integration,
+  publication, history rewrite, cleanup, or wider checkpoint authority.
+
+The exact question is:
+
+> Approve
+> H-DTTLF-USABILITY-PROOF-SUBJECT/D-DTTLF-USABILITY-007 as proposed:
+> transfer the exact nine-declaration/nine-runtime-rule/one-proof-rule
+> existing-authority closure; add only the fail-closed generic proof-assisted
+> compile-time subject-validation path described above; permit exactly the
+> package-component, pullback-fold, and pullback-component clauses to use
+> exactly the category-presentation proof rule; implement the root-only
+> dependent target, fibre computation, and total-context eta; and retain
+> runtime category collapse, arbitrary coherent-section synthesis, general
+> dependent displayed brackets, new kernel mathematics, parsing/bulk
+> transfer, profile promotion, and broader metatheory as separate work?
+
+Under the user's plan-specific unattended delegation, no immediate human
+response to this presented exact proposal permits a separate delegated
+approval record. The proposal itself remains non-authorizing, a human
+response supersedes delegation, and implementation may proceed only to the
+bounded green local checkpoint described by the Git SOP.
+
+**D-DTTLF-USABILITY-007 — approved 2026-07-28 by delegated unattended
+authority.** No immediate human response followed the exact proposal above.
+Acting only under the user's recorded plan-specific delegation, the coding
+agent approves that proposal without changing its immutable
+non-self-authorizing text. The approval is limited to the exact generic
+validation contract, transfer inventory, three-to-one runtime/proof evidence
+mapping, root-only dependent target, fibre computation, and total-context eta
+named above. Every listed non-effect remains binding. A later human decision
+supersedes this delegated record, and the Git authorization remains only a
+bounded green local checkpoint on the existing goal branch.
+
+### D-DTTLF-USABILITY-007A — Exact descendant-audit correction
+
+The first executable replay of D-DTTLF-USABILITY-007 reached one dependency
+that the frozen estimate had treated only through the older Core facade.
+Active v3.2 defines:
+
+```text
+Hom(A,X,Y) := Obj(Hom_cat(A,X,Y))
+Hom_cat(Catd_cat(K),E,D) -> Functord_cat(K,E,D).
+```
+
+The descendant already had an exact intrinsic owner for `Hom`, but only its
+opaque conformance type. Installing the active transparent body is necessary
+for the package-component subject to expose the intended nested
+`Functor_cat(K,Cat_cat) ≡ Catd_cat(K')` proof problem. Once that body unfolds,
+the older transferred classifier-level facade no longer supplies the exact
+source-prior hom computation needed to infer the pullback-fold redex.
+Transferring the active `Hom_cat(Catd_cat) -> Functord_cat` rule at its literal
+owner closes that inference path. This is not a new rule: it is the existing
+active v3.2 rule already cited throughout the completed displayed-composition
+slices.
+
+**D-DTTLF-USABILITY-007A — frozen corrective addendum.** Amend only the exact
+inventory and validation partition of D-DTTLF-USABILITY-007:
+
+1. add the active transparent intrinsic refinement `Hom` to the transferred
+   declaration closure, for ten declarations total;
+2. add
+   `categorical.dependent-target.displayed-hom-category`, the exact active
+   `Hom_cat(Catd_cat) -> Functord_cat` clause, to the source-prior runtime
+   closure, for ten runtime rules total;
+3. keep the generic proof rule exactly
+   `categorical.dependent-target.category-presentation`;
+4. require the first seven clauses, including the added hom-category clause,
+   and `categorical.dependent-target.pullback-fold` to be
+   `typescript-checked`;
+5. permit exactly
+   `categorical.dependent-target.package-component` and
+   `categorical.dependent-target.pullback-component` to be
+   `typescript-proof-checked`, with exactly the one category-presentation
+   proof-rule ID; and
+6. permit the generic proof engine to descend through normalized equal rigid
+   heads only after no whole proof rule applies, consuming one bounded,
+   immutable `congruence` trace step for each decomposition.
+
+The proof congruence is comparison-only. It neither changes runtime
+normalization nor invents congruence across different heads, arities,
+plicities, or binder modes. The independent-left-inference guard remains:
+proof assistance cannot rescue an ill-typed runtime redex. Stale proof
+exceptions still fail closed; this is why pullback-fold is removed from the
+exception list once the exact hom-category rule makes it check directly. The
+pre-existing, explicitly unclaimed external-oracle boundary is unchanged:
+legacy representation-only slices may still delegate their whole standalone
+subject judgment to that oracle, but no D-DTTLF-USABILITY-007A clause uses it.
+
+Every original D-DTTLF-USABILITY-007 non-effect remains unchanged. In
+particular, the addendum authorizes no runtime category-presentation collapse,
+external subject oracle, new Lambdapi owner/rule, arbitrary coherent-section
+synthesis, general dependent displayed bracket, profile promotion, parser,
+bulk transfer, remote Git operation, or wider checkpoint authority.
+
+The exact corrective question is:
+
+> Approve D-DTTLF-USABILITY-007A as proposed: replace only the provisional
+> nine/nine/six-direct/three-proof inventory with the exact
+> ten-declaration/ten-runtime/eight-direct/two-proof closure above, transfer
+> the already-active transparent `Hom` body and
+> `Hom_cat(Catd_cat) -> Functord_cat` prerequisite, and add only bounded rigid
+> proof congruence while preserving every D-DTTLF-USABILITY-007 non-effect?
+
+**D-DTTLF-USABILITY-007A — approved 2026-07-28 by delegated unattended
+authority.** No immediate human response was available during the unattended
+continuation after the exact correction was frozen. Acting only under the
+user's recorded plan-specific delegation, the coding agent approves this
+bounded correction. The ignored executable audit now compiles all ten
+declarations and ten runtime rules: eight record `typescript-checked`, exactly
+the two named clauses record `typescript-proof-checked`, and both cite only
+the category-presentation proof rule. A later human decision supersedes this
+record. Implementation remains limited to a coherent green local checkpoint
+on the existing goal branch.
+
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
 Completing individual product or binder examples does not by itself settle
@@ -2811,11 +3094,14 @@ become a global registry or kernel equality. Add no Lambdapi source,
 mathematical owner/rule, runtime category collapse, deployed profile, parser,
 or bulk transfer.
 
-The next dependency-ready row is FIBRED-DEPENDENT-TARGET-1. First freeze an
-executable contract against the actual descendant environment: re-audit the
-five provisionally named internal-Pi declarations and enumerate the smallest
-source-prior runtime closure, separating prerequisites from consumer
-equations. Then implement the already-probed
+FIBRED-DEPENDENT-TARGET-1 is the in-progress dependency-ready row. Preserve
+the approved D-DTTLF-USABILITY-007 contract as corrected only by approved
+D-DTTLF-USABILITY-007A: ten exact existing declarations, ten exact existing
+runtime rules, one exact existing proof rule, eight direct subject checks, and
+exactly two proof-assisted subject checks. Preserve independent left-side
+inference, exact opaque declaration/runtime-prefix rebasing, stale-exception
+rejection, and bounded rigid proof congruence; add no runtime category
+collapse or external oracle. Complete the already-probed
 `Sigma_catd_functord_catd(Pi_pullback_funcd(G))` family and demonstrate
 `B[k,M] = Pi_cat(G[k],M)` plus total-context dependent-section eta. Reuse
 existing `Pullback_catd`, `Sigma_catd_functord_catd`, application, and
@@ -2854,6 +3140,18 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
 
 ## Change Log
 
+- **2026-07-28 — D-DTTLF-USABILITY-007A descendant correction approved.**
+  Executable replay of the active transparent `Hom` body exposed the exact
+  source-prior `Hom_cat(Catd_cat) -> Functord_cat` dependency. The separately
+  frozen corrective addendum was approved under the user's unattended
+  delegation. The exact closure is now ten declarations, ten existing runtime
+  rules, and one existing proof rule; eight runtime subjects check directly
+  and only package-component/pullback-component use the proof rule. The
+  generic engine gained bounded normalized rigid congruence, while runtime
+  conversion, independent redex inference, non-collapse boundaries, and every
+  original non-effect remain unchanged. The generic implementation and exact
+  ignored descendant replay are green; the complete TypeScript gate reports
+  788 tests, 742 active passes, and 46 intentional skips.
 - **2026-07-27 — Dedicated fibred-context plan created.** Integrated the
   accepted displayed-binder analysis and the corrected distinction between
   dependency-chain exchange and fibrewise-cartesian sibling structure.

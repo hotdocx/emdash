@@ -129,6 +129,11 @@ export type CoreLfRuntimeSubjectValidation =
         readonly kind: 'typescript-checked';
     }
     | {
+        readonly kind: 'typescript-proof-checked';
+        readonly proofRuleIds: readonly string[];
+        readonly diagnostic: string;
+    }
+    | {
         readonly kind: 'external-oracle-required';
         readonly authorityPath: string;
         readonly evidence: string;
@@ -155,10 +160,51 @@ export interface CoreLfRuntimeSubjectReductionOracle {
     readonly evidence: string;
 }
 
+export interface CoreLfRuntimeSubjectProofComparisonResult {
+    readonly status: string;
+    readonly ruleApplications: readonly {
+        readonly ruleId: string;
+    }[];
+}
+
+/**
+ * Structural interface implemented by the generic proof engine without
+ * importing it into the runtime module (the proof engine already depends on
+ * runtime-prefix validation).
+ */
+export interface CoreLfRuntimeSubjectProofProgram {
+    readonly ruleIds: readonly string[];
+    readonly runtimeProgram?: CoreLfCatalogRuntime;
+    compareUnderOpaqueDeclarationExtension(
+        environment: CoreLfDeclarationEnvironment,
+        runtimeProgram: CoreLfCatalogRuntime,
+        left: KernelExpression,
+        right: KernelExpression
+    ): CoreLfRuntimeSubjectProofComparisonResult;
+}
+
+export interface CoreLfRuntimeSubjectProofExpectation {
+    readonly runtimeRuleId: string;
+    readonly proofRuleIds: readonly string[];
+}
+
+export interface CoreLfRuntimeSubjectReductionProof {
+    readonly program: CoreLfRuntimeSubjectProofProgram;
+    readonly rules: readonly CoreLfRuntimeSubjectProofExpectation[];
+}
+
 export interface CoreLfRuntimeCompilerOptions {
     readonly comparisonStepLimit?: number;
     readonly dependencyInterfaces?:
         readonly CoreLfCompiledModuleInterface[];
+    /**
+     * Exact, fail-closed proof-time validation for selected rule subjects
+     * which infer independently but are related by checked unification rules
+     * rather than runtime conversion. Every expectation must be necessary
+     * and must use exactly its listed proof rules.
+     */
+    readonly subjectReductionProof?:
+        CoreLfRuntimeSubjectReductionProof;
     /**
      * Exact, fail-closed exception for a reviewed rule whose standalone
      * TypeScript subject reduction remains explicitly unclaimed. The
@@ -187,6 +233,7 @@ export type CoreLfRuntimeCompilerErrorCode =
     | 'UNSUPPORTED_HIGHER_ORDER_PATTERN'
     | 'INVALID_RUNTIME_VARIABLE_TYPE'
     | 'INVALID_RUNTIME_RULE_TYPE'
+    | 'INVALID_RUNTIME_SUBJECT_PROOF'
     | 'INVALID_RUNTIME_SUBJECT_ORACLE'
     | 'INVALID_RUNTIME_DEPENDENCY'
     | 'DUPLICATE_RUNTIME_RULE_ID'
@@ -1339,6 +1386,14 @@ const runtimePrefix = (
     local: CoreLfCompiledRuntimeProgram
 ): CoreLfCatalogRuntime => {
     if (prior === undefined) return local;
+    if (local.ruleIds.length === 0) return prior;
+    const priorFragments = exactRuntimeFragments(prior);
+    if (priorFragments !== undefined) {
+        return new CoreLfComposedRuntimeProgram([
+            ...priorFragments,
+            local
+        ]);
+    }
     const ruleIds = Object.freeze([
         ...prior.ruleIds,
         ...local.ruleIds
@@ -1373,6 +1428,8 @@ const compileRule = (
     module: CoreLfModuleSpec,
     policy: CoreLfTransferPolicyOverlay,
     comparisonStepLimit: number,
+    subjectReductionProof:
+        CoreLfRuntimeSubjectReductionProof | undefined,
     subjectReductionOracle:
         CoreLfRuntimeSubjectReductionOracle | undefined,
     priorRuntime: CoreLfCatalogRuntime | undefined,
@@ -1538,13 +1595,25 @@ const compileRule = (
         syntheticRedex,
         0
     );
-    let subjectValidation: CoreLfRuntimeSubjectValidation;
+    let subjectValidation:
+        CoreLfRuntimeSubjectValidation | undefined;
+    const checker: CoreLfChecker = createCoreLfChecker(
+        ruleEnvironment,
+        comparisonStepLimit,
+        checkingRuntime
+    );
+    const externalOracleValidation = (
+        diagnostic: string
+    ): CoreLfRuntimeSubjectValidation => deepFreeze({
+        kind: 'external-oracle-required',
+        authorityPath: subjectReductionOracle!.authorityPath,
+        evidence: subjectReductionOracle!.evidence,
+        diagnostic
+    });
+    const hasExternalOracle =
+        subjectReductionOracle?.ruleIds.includes(source.id) ?? false;
+    let inferredLeftType: KernelExpression | undefined;
     try {
-        const checker: CoreLfChecker = createCoreLfChecker(
-            ruleEnvironment,
-            comparisonStepLimit,
-            checkingRuntime
-        );
         const inferred = checker.infer(
             checker.rootContext,
             leftTerm
@@ -1556,35 +1625,163 @@ const compileRule = (
                 `Runtime rule '${source.id}' left side has KIND`
             );
         }
-        checker.check(
-            checker.rootContext,
-            rightTerm,
-            inferred.type
-        );
-        subjectValidation = deepFreeze({
-            kind: 'typescript-checked'
-        });
+        inferredLeftType = inferred.type;
     } catch (error: unknown) {
         if (error instanceof CoreLfRuntimeCompilerError) throw error;
-        if (
-            subjectReductionOracle?.ruleIds.includes(source.id)
-        ) {
-            subjectValidation = deepFreeze({
-                kind: 'external-oracle-required',
-                authorityPath:
-                    subjectReductionOracle.authorityPath,
-                evidence: subjectReductionOracle.evidence,
-                diagnostic: errorText(error)
-            });
+        /*
+         * Preserve the pre-existing external-oracle boundary: those legacy
+         * representation slices explicitly do not claim standalone
+         * TypeScript subject typing. The new proof-assisted path is stricter
+         * and can never enter here because it requires an independently
+         * inferred left subject.
+         */
+        if (hasExternalOracle) {
+            subjectValidation =
+                externalOracleValidation(errorText(error));
         } else {
             return fail(
                 'INVALID_RUNTIME_RULE_TYPE',
-                `runtimeRules.${source.id}`,
-                `Runtime rule '${source.id}' is not type preserving against ` +
-                    `its earlier compiled prefix: ${errorText(error)}`,
+                `runtimeRules.${source.id}.left`,
+                `Runtime rule '${source.id}' left side does not infer ` +
+                    `against its earlier compiled prefix: ` +
+                    `${errorText(error)}`,
                 error instanceof Error ? error : undefined
             );
         }
+    }
+
+    if (inferredLeftType !== undefined) {
+        try {
+            checker.check(
+                checker.rootContext,
+                rightTerm,
+                inferredLeftType
+            );
+            subjectValidation = deepFreeze({
+                kind: 'typescript-checked'
+            });
+        } catch (error: unknown) {
+            if (error instanceof CoreLfRuntimeCompilerError) throw error;
+            const proofExpectation = subjectReductionProof?.rules.find(
+                expectation => expectation.runtimeRuleId === source.id
+            );
+            if (proofExpectation !== undefined) {
+                let inferredRightType: KernelExpression;
+                try {
+                    const rightChecker = createCoreLfChecker(
+                        ruleEnvironment,
+                        comparisonStepLimit,
+                        checkingRuntime
+                    );
+                    const inferred = rightChecker.infer(
+                        rightChecker.rootContext,
+                        rightTerm
+                    );
+                    if (isCoreKind(inferred.type)) {
+                        return fail(
+                            'INVALID_RUNTIME_RULE_TYPE',
+                            `runtimeRules.${source.id}.right`,
+                            `Runtime rule '${source.id}' right side has KIND`
+                        );
+                    }
+                    inferredRightType = inferred.type;
+                } catch (rightError: unknown) {
+                    if (
+                        rightError instanceof CoreLfRuntimeCompilerError
+                    ) {
+                        throw rightError;
+                    }
+                    return fail(
+                        'INVALID_RUNTIME_RULE_TYPE',
+                        `runtimeRules.${source.id}.right`,
+                        `Runtime rule '${source.id}' right side does not ` +
+                            `infer independently: ${errorText(rightError)}`,
+                        rightError instanceof Error
+                            ? rightError
+                            : undefined
+                    );
+                }
+
+                let comparison:
+                    CoreLfRuntimeSubjectProofComparisonResult;
+                try {
+                    comparison =
+                        subjectReductionProof.program
+                            .compareUnderOpaqueDeclarationExtension(
+                                ruleEnvironment,
+                                checkingRuntime,
+                                inferredLeftType,
+                                inferredRightType
+                            );
+                } catch (proofError: unknown) {
+                    return fail(
+                        'INVALID_RUNTIME_SUBJECT_PROOF',
+                        `runtimeRules.${source.id}`,
+                        `Runtime rule '${source.id}' subject proof could not ` +
+                            `be validated: ${errorText(proofError)}`,
+                        proofError instanceof Error
+                            ? proofError
+                            : undefined
+                    );
+                }
+                if (comparison.status !== 'solved') {
+                    return fail(
+                        'INVALID_RUNTIME_SUBJECT_PROOF',
+                        `runtimeRules.${source.id}`,
+                        `Runtime rule '${source.id}' subject proof did not ` +
+                            `solve (status '${comparison.status}')`
+                    );
+                }
+                const proofRuleIds: string[] = [];
+                comparison.ruleApplications.forEach(application => {
+                    if (!proofRuleIds.includes(application.ruleId)) {
+                        proofRuleIds.push(application.ruleId);
+                    }
+                });
+                if (
+                    proofRuleIds.length === 0 ||
+                    proofRuleIds.length !==
+                        proofExpectation.proofRuleIds.length ||
+                    proofRuleIds.some(
+                        (id, index) =>
+                            id !== proofExpectation.proofRuleIds[index]
+                    )
+                ) {
+                    return fail(
+                        'INVALID_RUNTIME_SUBJECT_PROOF',
+                        `runtimeRules.${source.id}`,
+                        `Runtime rule '${source.id}' subject proof used ` +
+                            `[${proofRuleIds.join(', ')}], expected exactly ` +
+                            `[${proofExpectation.proofRuleIds.join(', ')}]`
+                    );
+                }
+                subjectValidation = deepFreeze({
+                    kind: 'typescript-proof-checked',
+                    proofRuleIds,
+                    diagnostic: errorText(error)
+                });
+            } else if (hasExternalOracle) {
+                subjectValidation =
+                    externalOracleValidation(errorText(error));
+            } else {
+                return fail(
+                    'INVALID_RUNTIME_RULE_TYPE',
+                    `runtimeRules.${source.id}`,
+                    `Runtime rule '${source.id}' is not type preserving ` +
+                        `against its earlier compiled prefix: ` +
+                        `${errorText(error)}`,
+                    error instanceof Error ? error : undefined
+                );
+            }
+        }
+    }
+
+    if (subjectValidation === undefined) {
+        return fail(
+            'INVALID_RUNTIME_RULE_TYPE',
+            `runtimeRules.${source.id}`,
+            `Runtime rule '${source.id}' has no subject-validation result`
+        );
     }
 
     return deepFreeze({
@@ -1602,6 +1799,64 @@ const compileRule = (
         ],
         subjectValidation,
         provenance: derivedProvenance(source, 'compiled')
+    });
+};
+
+const validateSubjectReductionProof = (
+    module: CoreLfModuleSpec,
+    proof: CoreLfRuntimeSubjectReductionProof | undefined,
+    oracle: CoreLfRuntimeSubjectReductionOracle | undefined
+): void => {
+    if (proof === undefined) return;
+    const knownRuntime = new Map(
+        module.runtimeRules.map(rule => [rule.id, rule.order])
+    );
+    const knownProof = new Set(proof.program.ruleIds);
+    const oracleRuleIds = new Set(oracle?.ruleIds ?? []);
+    const seenRuntime = new Set<string>();
+    let previousOrder = -1;
+    proof.rules.forEach((expectation, index) => {
+        const order = knownRuntime.get(expectation.runtimeRuleId);
+        if (
+            order === undefined ||
+            seenRuntime.has(expectation.runtimeRuleId) ||
+            order <= previousOrder ||
+            oracleRuleIds.has(expectation.runtimeRuleId)
+        ) {
+            fail(
+                'INVALID_RUNTIME_SUBJECT_PROOF',
+                `options.subjectReductionProof.rules[${index}]`,
+                'Runtime subject-proof rule IDs must be unique, known, in ' +
+                    'module order, and disjoint from external-oracle IDs'
+            );
+        }
+        seenRuntime.add(expectation.runtimeRuleId);
+        previousOrder = order;
+
+        const seenProof = new Set<string>();
+        expectation.proofRuleIds.forEach((id, proofIndex) => {
+            if (
+                !knownProof.has(id) ||
+                seenProof.has(id)
+            ) {
+                fail(
+                    'INVALID_RUNTIME_SUBJECT_PROOF',
+                    `options.subjectReductionProof.rules[${index}]` +
+                        `.proofRuleIds[${proofIndex}]`,
+                    'Expected proof-rule IDs must be nonempty, unique, and ' +
+                        'present in the supplied proof program'
+                );
+            }
+            seenProof.add(id);
+        });
+        if (expectation.proofRuleIds.length === 0) {
+            fail(
+                'INVALID_RUNTIME_SUBJECT_PROOF',
+                `options.subjectReductionProof.rules[${index}].proofRuleIds`,
+                'A runtime subject-proof expectation must name at least ' +
+                    'one checked proof rule'
+            );
+        }
     });
 };
 
@@ -1683,6 +1938,11 @@ const compileCoreLfRuntimeProgramWithPrefix = (
     validateGroups(module);
     validateSubjectReductionOracle(
         module,
+        options.subjectReductionOracle
+    );
+    validateSubjectReductionProof(
+        module,
+        options.subjectReductionProof,
         options.subjectReductionOracle
     );
     const comparisonStepLimit =
@@ -1772,10 +2032,46 @@ const compileCoreLfRuntimeProgramWithPrefix = (
             module,
             policy,
             comparisonStepLimit,
+            options.subjectReductionProof,
             options.subjectReductionOracle,
             priorRuntime,
             priorRuleIds
         ));
+    }
+    const usedProofRules = rules
+        .filter(rule =>
+            rule.subjectValidation.kind ===
+                'typescript-proof-checked'
+        )
+        .map(rule => ({
+            runtimeRuleId: rule.id,
+            proofRuleIds: rule.subjectValidation.kind ===
+                'typescript-proof-checked'
+                ? rule.subjectValidation.proofRuleIds
+                : []
+        }));
+    const requestedProofRules =
+        options.subjectReductionProof?.rules ?? [];
+    if (
+        usedProofRules.length !== requestedProofRules.length ||
+        usedProofRules.some((used, index) => {
+            const requested = requestedProofRules[index];
+            return requested === undefined ||
+                used.runtimeRuleId !== requested.runtimeRuleId ||
+                used.proofRuleIds.length !==
+                    requested.proofRuleIds.length ||
+                used.proofRuleIds.some(
+                    (id, proofIndex) =>
+                        id !== requested.proofRuleIds[proofIndex]
+                );
+        })
+    ) {
+        return fail(
+            'INVALID_RUNTIME_SUBJECT_PROOF',
+            'options.subjectReductionProof.rules',
+            'Every runtime subject-proof expectation must be necessary ' +
+                'under the current TypeScript checker'
+        );
     }
     const usedOracleRuleIds = rules
         .filter(rule =>
@@ -1990,6 +2286,8 @@ export function compileCoreLfRuntimeFragment(
         {
             comparisonStepLimit: options.comparisonStepLimit,
             dependencyInterfaces: options.dependencyInterfaces,
+            subjectReductionProof:
+                options.subjectReductionProof,
             subjectReductionOracle:
                 options.subjectReductionOracle
         },

@@ -304,7 +304,13 @@ describe(
             assert.equal(negative.status, 'stuck');
             if (negative.status !== 'stuck') return;
             assert.equal(negative.reason, 'no-proof-rule');
-            assert.deepEqual(negative.resolutionOrder, [0, 1, 2]);
+            assert.deepEqual(negative.resolutionOrder, [0, 1, 2, 3]);
+            assert.equal(
+                negative.trace.some(entry =>
+                    entry.kind === 'congruence'
+                ),
+                true
+            );
             assert.equal(
                 negative.ruleApplications[0]?.generatedProblems.length,
                 3

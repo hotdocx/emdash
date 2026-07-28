@@ -281,6 +281,13 @@ export type CoreLfProofComparisonTraceEntry =
         readonly ruleIndex: number;
         readonly orientation: CoreLfProofOrientation;
         readonly generatedProblemIds: readonly number[];
+    }
+    | {
+        readonly step: number;
+        readonly kind: 'congruence';
+        readonly problemId: number;
+        readonly expressionTag: KernelExpression['tag'];
+        readonly generatedProblemIds: readonly number[];
     };
 
 interface CoreLfProofComparisonBase {
@@ -325,6 +332,10 @@ export type CoreLfProofNextStep =
         readonly kind: 'proof-rule';
         readonly ruleId: string;
         readonly orientation: CoreLfProofOrientation;
+    }
+    | {
+        readonly kind: 'congruence';
+        readonly expressionTag: KernelExpression['tag'];
     };
 
 export interface CoreLfProofComparisonStepLimit
@@ -1546,6 +1557,173 @@ const freezeApplication = (
 });
 
 /**
+ * Proof rules compiled against an immutable declaration environment remain
+ * valid when runtime-rule captures are installed as fresh opaque
+ * declarations. Reject every broader environment change: in particular, no
+ * transparent definition or intrinsic owner may be introduced through this
+ * validation path.
+ */
+const isExactOpaqueDeclarationExtension = (
+    extension: CoreLfDeclarationEnvironment,
+    base: CoreLfDeclarationEnvironment
+): boolean => {
+    const exactPrefix = <T>(
+        values: readonly T[],
+        prefix: readonly T[]
+    ): boolean =>
+        prefix.length <= values.length &&
+        prefix.every((value, index) => values[index] === value);
+
+    if (
+        !exactPrefix(extension.declarations, base.declarations) ||
+        !exactPrefix(
+            extension.coreEnvironment.declarations,
+            base.coreEnvironment.declarations
+        ) ||
+        extension.intrinsicDefinitions.length !==
+            base.intrinsicDefinitions.length ||
+        !extension.intrinsicDefinitions.every(
+            (definition, index) =>
+                definition === base.intrinsicDefinitions[index]
+        )
+    ) {
+        return false;
+    }
+
+    const declarations =
+        extension.declarations.slice(base.declarations.length);
+    const coreDeclarations = extension.coreEnvironment.declarations.slice(
+        base.coreEnvironment.declarations.length
+    );
+    return declarations.length === coreDeclarations.length &&
+        declarations.every((declaration, index) => {
+            const core = coreDeclarations[index];
+            return core !== undefined &&
+                declaration.name === core.name &&
+                declaration.type === core.type &&
+                declaration.reference === core.reference &&
+                declaration.mode.plicity === core.mode.plicity &&
+                declaration.mode.variation === core.mode.variation &&
+                declaration.transparency === 'opaque' &&
+                declaration.body === undefined &&
+                declaration.bodyDependencies.length === 0 &&
+                declaration.bodyOwnerDependencies.length === 0;
+        });
+};
+
+interface CoreLfProofCongruence {
+    readonly expressionTag: KernelExpression['tag'];
+    readonly problems: readonly {
+        readonly left: KernelExpression;
+        readonly right: KernelExpression;
+    }[];
+}
+
+/**
+ * Decompose one normalized rigid equality after no whole proof rule applies.
+ * This is proof-time congruence, not evaluator computation.
+ */
+const proofCongruence = (
+    left: KernelExpression,
+    right: KernelExpression
+): CoreLfProofCongruence | undefined => {
+    if (left.tag !== right.tag) return undefined;
+    const unequal = (
+        pairs: readonly {
+            readonly left: KernelExpression;
+            readonly right: KernelExpression;
+        }[]
+    ) => pairs.filter(pair =>
+        !kernelExpressionEquals(pair.left, pair.right)
+    );
+    let problems: readonly {
+        readonly left: KernelExpression;
+        readonly right: KernelExpression;
+    }[];
+    switch (left.tag) {
+        case 'application': {
+            const other = right as typeof left;
+            if (
+                left.owner !== other.owner ||
+                left.arguments.length !== other.arguments.length ||
+                left.arguments.some(
+                    (argument, index) =>
+                        argument.plicity !==
+                            other.arguments[index].plicity
+                )
+            ) {
+                return undefined;
+            }
+            problems = unequal(left.arguments.map(
+                (argument, index) => ({
+                    left: argument.value,
+                    right: other.arguments[index].value
+                })
+            ));
+            break;
+        }
+        case 'call': {
+            const other = right as typeof left;
+            if (
+                !kernelExpressionEquals(
+                    left.callee,
+                    other.callee
+                ) ||
+                left.arguments.length !== other.arguments.length ||
+                left.arguments.some(
+                    (argument, index) =>
+                        argument.plicity !==
+                            other.arguments[index].plicity
+                )
+            ) {
+                return undefined;
+            }
+            problems = unequal(
+                left.arguments.map((argument, index) => ({
+                    left: argument.value,
+                    right: other.arguments[index].value
+                }))
+            );
+            break;
+        }
+        case 'pi':
+        case 'lambda': {
+            const other = right as typeof left;
+            if (
+                left.binder.mode.plicity !==
+                    other.binder.mode.plicity ||
+                left.binder.mode.variation !==
+                    other.binder.mode.variation
+            ) {
+                return undefined;
+            }
+            problems = unequal([
+                {
+                    left: left.binder.type,
+                    right: other.binder.type
+                },
+                { left: left.body, right: other.body }
+            ]);
+            break;
+        }
+        case 'universe':
+        case 'reference':
+        case 'bound':
+        case 'meta':
+            return undefined;
+        default: {
+            const exhaustive: never = left;
+            return exhaustive;
+        }
+    }
+    if (problems.length === 0) return undefined;
+    return deepFreeze({
+        expressionTag: left.tag,
+        problems
+    });
+};
+
+/**
  * One immutable proof-only program. It owns no mutable rule registry and has
  * no evaluator interface.
  */
@@ -1581,6 +1759,63 @@ export class CoreLfCompiledProofProgram {
 
     rule(id: string): CoreLfCompiledProofRule | undefined {
         return this.rules.find(rule => rule.id === id);
+    }
+
+    /**
+     * Compare subject types under the synthetic opaque declarations used to
+     * check one runtime-rule telescope. The runtime may only append exact
+     * checked fragments to the proof program's source-time runtime.
+     */
+    compareUnderOpaqueDeclarationExtension(
+        environment: CoreLfDeclarationEnvironment,
+        runtimeProgram: CoreLfCatalogRuntime,
+        left: KernelExpression,
+        right: KernelExpression
+    ): CoreLfProofComparisonResult {
+        if (
+            !isExactOpaqueDeclarationExtension(
+                environment,
+                this.declarations.environment
+            )
+        ) {
+            return fail(
+                'INVALID_PROOF_CONTEXT',
+                'environment',
+                'Proof subject validation requires an exact extension by ' +
+                    'opaque body-free declarations'
+            );
+        }
+        if (
+            !coreLfRuntimeHasExactPrefix(
+                runtimeProgram,
+                this.runtimeProgram
+            )
+        ) {
+            return fail(
+                'INVALID_PROOF_CONTEXT',
+                'runtimeProgram',
+                'Proof subject-validation runtime does not extend the ' +
+                    'exact checked source-time runtime prefix'
+            );
+        }
+        const authorityDeclarations = this.declarations;
+        const extendedDeclarations: CoreLfProofDeclarationContext =
+            Object.freeze({
+                environment,
+                declaration(
+                    symbol: CoreLfQualifiedSymbol
+                ): CoreLfCompiledDeclaration | undefined {
+                    return authorityDeclarations.declaration(symbol);
+                }
+            });
+        return new CoreLfCompiledProofProgram(
+            this.module,
+            this.policy,
+            extendedDeclarations,
+            this.rules,
+            this.comparisonStepLimit,
+            runtimeProgram
+        ).compare(left, right);
     }
 
     private sourceRule(
@@ -1960,6 +2195,8 @@ export class CoreLfCompiledProofProgram {
                     ...base()
                 });
             }
+            const normalizedLeft = conversion.normalizedLeft;
+            const normalizedRight = conversion.normalizedRight;
 
             let selected:
                 | {
@@ -1975,8 +2212,8 @@ export class CoreLfCompiledProofProgram {
             ) {
                 const rule = this.rules[ruleIndex];
                 const forward = matchOrientation(
-                    left,
-                    right,
+                    normalizedLeft,
+                    normalizedRight,
                     rule,
                     'forward',
                     context.depth
@@ -1986,8 +2223,8 @@ export class CoreLfCompiledProofProgram {
                     break;
                 }
                 const symmetric = matchOrientation(
-                    left,
-                    right,
+                    normalizedLeft,
+                    normalizedRight,
                     rule,
                     'symmetric',
                     context.depth
@@ -1998,11 +2235,49 @@ export class CoreLfCompiledProofProgram {
                 }
             }
             if (selected === undefined) {
+                const congruence = proofCongruence(
+                    normalizedLeft,
+                    normalizedRight
+                );
+                if (congruence !== undefined) {
+                    if (steps === stepLimit) {
+                        return Object.freeze({
+                            status: 'step-limit-exceeded',
+                            problemId: pending.id,
+                            left: normalizedLeft,
+                            right: normalizedRight,
+                            next: {
+                                kind: 'congruence' as const,
+                                expressionTag:
+                                    congruence.expressionTag
+                            },
+                            ...base()
+                        });
+                    }
+                    const generatedPending =
+                        congruence.problems.map(problem => ({
+                            id: nextProblemId++,
+                            left: problem.left,
+                            right: problem.right
+                        }));
+                    trace.push(deepFreeze({
+                        step: steps,
+                        kind: 'congruence' as const,
+                        problemId: pending.id,
+                        expressionTag: congruence.expressionTag,
+                        generatedProblemIds:
+                            generatedPending.map(problem => problem.id)
+                    }));
+                    steps++;
+                    resolutionOrder.push(pending.id);
+                    queue.unshift(...generatedPending);
+                    continue;
+                }
                 return Object.freeze({
                     status: 'stuck',
                     problemId: pending.id,
-                    left,
-                    right,
+                    left: normalizedLeft,
+                    right: normalizedRight,
                     reason: 'no-proof-rule',
                     mismatch: conversion.mismatch,
                     ...base()
@@ -2012,8 +2287,8 @@ export class CoreLfCompiledProofProgram {
                 return Object.freeze({
                     status: 'step-limit-exceeded',
                     problemId: pending.id,
-                    left,
-                    right,
+                    left: normalizedLeft,
+                    right: normalizedRight,
                     next: {
                         kind: 'proof-rule' as const,
                         ruleId: selected.rule.id,
@@ -2026,7 +2301,7 @@ export class CoreLfCompiledProofProgram {
             const application = this.applyMatch(
                 context,
                 session,
-                left,
+                normalizedLeft,
                 selected.rule,
                 selected.ruleIndex,
                 selected.match
@@ -2144,6 +2419,20 @@ export class CoreLfComposedProofProgram {
 
     rule(id: string): CoreLfCompiledProofRule | undefined {
         return this.program.rule(id);
+    }
+
+    compareUnderOpaqueDeclarationExtension(
+        environment: CoreLfDeclarationEnvironment,
+        runtimeProgram: CoreLfCatalogRuntime,
+        left: KernelExpression,
+        right: KernelExpression
+    ): CoreLfProofComparisonResult {
+        return this.program.compareUnderOpaqueDeclarationExtension(
+            environment,
+            runtimeProgram,
+            left,
+            right
+        );
     }
 
     compare(
