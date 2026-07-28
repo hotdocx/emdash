@@ -4051,7 +4051,8 @@ variables), strict LHS has zero unreviewed findings, and the refreshed catalog
 has 1,723 classified checks across 63 areas with zero unclassified checks.
 Generic TypeScript transfer and the root-only recursive consumer remain the
 next dependency-ready work; do not claim the full row complete before they
-and their conformance gates pass.
+and their conformance gates pass. Exact green Lambdapi checkpoint:
+f22785e44cfc0a5185bb92e110a30c6a0ada7de4.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
