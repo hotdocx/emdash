@@ -3928,7 +3928,8 @@ DISPLAYED-LIFTING-1A, new owner/rule, grammar/checker case, profile join,
 dependent-chain/general-`:^nd` work, parser/acquisition work, deployed
 surface, or broader Git authority. Its nine focused tests, full 860-test root
 gate (814 active passes, 46 intentional skips, zero failures), and all 19
-repeated live conformance judgments pass.
+repeated live conformance judgments pass. The exact review checkpoint is
+`7badcd5b930bd098b178d89bf4488637695fb14d`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

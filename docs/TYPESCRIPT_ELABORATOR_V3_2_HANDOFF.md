@@ -894,7 +894,8 @@ authorizes only DISPLAYED-EVAL-0B read-only owner-position,
 derived-construction, and profile-mismatch evidence; all semantic and
 deployment boundaries remain closed. Its nine focused tests, full 860-test
 root gate (814 active passes, 46 intentional skips, zero failures), and all
-19 repeated live conformance judgments pass.
+19 repeated live conformance judgments pass. The exact review checkpoint is
+`7badcd5b930bd098b178d89bf4488637695fb14d`.
 
 All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated

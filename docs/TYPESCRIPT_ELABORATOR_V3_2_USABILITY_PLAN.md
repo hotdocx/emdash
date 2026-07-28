@@ -2328,7 +2328,8 @@ CI obligations.
   supersession and every proposal non-effect. Nine focused tests validate
   that only read-only DISPLAYED-EVAL-0B evidence work is authorized. The
   complete 860-test root gate (814 active passes, 46 intentional skips, zero
-  failures) and all 19 repeated live conformance judgments pass.
+  failures) and all 19 repeated live conformance judgments pass. Exact review
+  checkpoint: `7badcd5b930bd098b178d89bf4488637695fb14d`.
 - **2026-07-26 — USABILITY-PLAN-0 opened and direction approved.** Recorded
   the corrected priority from the user's accepted architecture review:
   preserve the backend and generic transfer work, remove only the isolated
