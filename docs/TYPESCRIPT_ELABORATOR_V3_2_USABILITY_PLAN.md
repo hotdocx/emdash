@@ -2312,7 +2312,8 @@ CI obligations.
   It proposes only a separately approved DISPLAYED-EVAL-0B read-only probe
   before any semantic grammar or kernel-owner change. Its ten focused tests
   and the complete 851-test root gate pass: 805 active passes, 46 intentional
-  skips, and zero failures.
+  skips, and zero failures. The exact proposal checkpoint is
+  `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
 - **2026-07-26 — USABILITY-PLAN-0 opened and direction approved.** Recorded
   the corrected priority from the user's accepted architecture review:
   preserve the backend and generic transfer work, remove only the isolated

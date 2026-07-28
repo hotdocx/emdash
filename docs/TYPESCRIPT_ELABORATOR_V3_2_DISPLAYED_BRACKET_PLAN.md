@@ -45,7 +45,8 @@ without extending the semantic grammar. In particular, active
 ingredients but are not silently treated as a selected coherent displayed
 evaluator. The proposal awaits
 H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 and authorizes
-no successor by its own existence.
+no successor by its own existence. Its exact green local checkpoint is
+`29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
 
 ## Authority And Relationship To The Completed Architecture
 
@@ -422,7 +423,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | --- | --- | --- | --- |
 | DISPLAYED-BRACKET-0A | proposal frozen, validated, checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`, and approved exactly as proposed by a separate delegated review with human supersession | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused proposal tests, nine focused review tests, the 830-test reviewed root gate, and unchanged 19-judgment live conformance pass |
 | DISPLAYED-BRACKET-1A | complete; validated; checkpointed `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab` | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
-| DISPLAYED-LIFTING-0A | executable proposal frozen and focused-green; H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 pending | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
+| DISPLAYED-LIFTING-0A | executable proposal frozen, validated, checkpointed `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`; H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 pending | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
 | DISPLAYED-EVAL-0B | proposed read-only next row; not self-authorized | approved DISPLAYED-LIFTING-0A | Run owner-position and derived-construction probes for coherent evaluation of a `Functor_catd`-valued varying subject at fixed and varying arguments; determine whether active authority suffices or freeze a minimal new-owner proposal; classify the profile-join mismatch without a semantic patch |
 | DISPLAYED-LIFTING-1A | deferred pending 0B evidence and a separate exact proposal/review | DISPLAYED-EVAL-0B | Extend the displayed recursive grammar only for exact licensed application judgments, with positive/negative consumers and no whole-body recognizer growth |
 | DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
@@ -957,7 +958,9 @@ implementation checkpoint is
   DISPLAYED-EVAL-0B owner-position/derived-construction probe and adds no
   semantic or Git authority. Ten focused tests, the complete 851-test root
   gate (805 active passes, 46 intentional skips, zero failures), all 19 live
-  conformance judgments, and the bounded active-kernel check pass.
+  conformance judgments, and the bounded active-kernel check pass. The exact
+  proposal checkpoint is
+  `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
 
 ## Git Boundary
 

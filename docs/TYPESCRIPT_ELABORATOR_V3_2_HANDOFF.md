@@ -883,7 +883,8 @@ read-only DISPLAYED-EVAL-0B owner-position/derived-construction probe the
 next row; semantic DISPLAYED-LIFTING-1A remains withheld. The ten focused
 proposal tests, complete 851-test root gate (805 active passes, 46
 intentional skips, zero failures), repeated 19-judgment live conformance
-gate, and bounded active-kernel check pass.
+gate, and bounded active-kernel check pass. The exact proposal checkpoint is
+`29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
 
 All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated

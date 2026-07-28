@@ -3914,7 +3914,9 @@ derived-construction probe; semantic DISPLAYED-LIFTING-1A, new owners/rules,
 genuine chains, general `:^nd`, parsing/bulk transfer, and browser promotion
 remain withheld. Its ten focused tests, the complete 851-test root gate (805
 active passes, 46 intentional skips, zero failures), all 19 repeated live
-conformance judgments, and the bounded active-kernel check pass.
+conformance judgments, and the bounded active-kernel check pass. The exact
+green proposal checkpoint is
+`29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
