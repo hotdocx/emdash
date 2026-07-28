@@ -75,6 +75,7 @@ export * from './categorical_dependent_composition_demo';
 export * from './categorical_fibred_graduation_proposal';
 export * from './categorical_fibred_graduation_review';
 export * from './categorical_displayed_bracket_proposal';
+export * from './categorical_displayed_bracket_review';
 export * from './categorical_usability_graduation_proposal';
 export * from './categorical_usability_graduation_review';
 export * from './categorical_dependent_usability_proposal';

@@ -83,6 +83,7 @@ import './v3_2_categorical_dependent_composition_demo_tests';
 import './v3_2_categorical_fibred_graduation_proposal_tests';
 import './v3_2_categorical_fibred_graduation_review_tests';
 import './v3_2_categorical_displayed_bracket_proposal_tests';
+import './v3_2_categorical_displayed_bracket_review_tests';
 import './v3_2_categorical_usability_graduation_proposal_tests';
 import './v3_2_categorical_usability_graduation_review_tests';
 import './v3_2_categorical_dependent_usability_review_tests';

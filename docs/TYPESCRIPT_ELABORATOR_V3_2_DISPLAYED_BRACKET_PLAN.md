@@ -18,9 +18,11 @@ general displayed-transfor coherence.
 
 The exact first decision is frozen in
 `src/v3_2/categorical_displayed_bracket_proposal.ts`.
-H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/D-DTTLF-USABILITY-009 remains
-pending. The proposal is non-self-authorizing and installs no semantic
-authority.
+H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/D-DTTLF-USABILITY-009 is approved
+exactly as proposed under the user's delegated unattended authority after no
+immediate human response. The separate immutable review records human
+supersession and authorizes only root-only DISPLAYED-BRACKET-1A. The
+pre-review proposal remains unchanged and non-self-authorizing.
 
 ## Authority And Relationship To The Completed Architecture
 
@@ -233,8 +235,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 
 | row | status | dependency | exact scope |
 | --- | --- | --- | --- |
-| DISPLAYED-BRACKET-0A | proposal frozen and fully validated; checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`; awaiting H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/D-DTTLF-USABILITY-009 | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused tests, the 821-test root gate, and unchanged 19-judgment live conformance pass |
-| DISPLAYED-BRACKET-1A | blocked on D-DTTLF-USABILITY-009 | DISPLAYED-BRACKET-0A | Implement the root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, and runnable demo |
+| DISPLAYED-BRACKET-0A | proposal frozen, validated, checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`, and approved exactly as proposed by a separate delegated review with human supersession | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused proposal tests, nine focused review tests, the 830-test reviewed root gate, and unchanged 19-judgment live conformance pass |
+| DISPLAYED-BRACKET-1A | approved and dependency-ready; implementation in progress | reviewed DISPLAYED-BRACKET-0A/D-009 | Implement the root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, and runnable demo |
 | DISPLAYED-CHAIN-0A | deferred; not authorized by D-009 | DISPLAYED-BRACKET-1A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for a genuine dependency edge; identify exact Sigma-arrow/total-comparison needs |
 | DISPLAYED-ND-0A | deferred; not authorized by D-009 | DISPLAYED-BRACKET-1A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
@@ -356,9 +358,10 @@ lowerers from sharing one implementation function.
 
 ## Exact Decision
 
-**H-DTTLF-USABILITY-DISPLAYED-BRACKET-01 — pending.**
+**H-DTTLF-USABILITY-DISPLAYED-BRACKET-01 — approved under delegated
+unattended authority; human supersession retained.**
 
-**D-DTTLF-USABILITY-009 — proposed.**
+**D-DTTLF-USABILITY-009 — approved as proposed.**
 
 > Approve H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/
 > D-DTTLF-USABILITY-009 as proposed: select a generic first-order displayed
@@ -370,15 +373,17 @@ lowerers from sharing one implementation function.
 > coherence, Sigma arrow action, total-category comparison, parsing/bulk
 > transfer, and browser promotion as separate rows?
 
-Approval authorizes only DISPLAYED-BRACKET-1A as frozen above. It does not
+The recorded approval authorizes only DISPLAYED-BRACKET-1A as frozen above.
+It does not
 authorize DISPLAYED-CHAIN-0A, DISPLAYED-ND-0A, a new mathematical owner/rule,
 parser, bulk transfer, browser promotion, or broader Git action.
 
-Under the user's plan-specific delegation, if no immediate human response
-follows presentation of this exact frozen proposal during unattended
-continuation, the coding agent may record a separate delegated approval with
-human supersession and proceed only through a coherent green local
-checkpoint. The proposal itself remains non-self-authorizing.
+The separate executable review is
+`src/v3_2/categorical_displayed_bracket_review.ts`. It records that no
+immediate human response followed presentation of the exact frozen proposal,
+uses the user's plan-specific unattended delegation, requires the Git
+checkpoint SOP, and remains supersedable by a later human decision. The
+proposal itself remains non-self-authorizing.
 
 ## Acceptance And Validation
 
@@ -432,6 +437,21 @@ applicable. The six preserved untracked timeout-artifact directories remain
 excluded and untouched. The exact green local proposal checkpoint is
 `e4b743f70c0454d63a93587dc045a3e2d0273ee5`.
 
+## D-DTTLF-USABILITY-009 Delegated Review Record
+
+The separate immutable review records the exact frozen proposal snapshot,
+the delegated unattended approval condition, and human supersession. It
+authorizes only the root-only `fibred-displayed-bracket-1` implementation
+row and one `typed-pair` frontend node using existing displayed authority.
+It explicitly withholds DISPLAYED-CHAIN-0A, general `:^nd` coherence, Sigma
+arrow action, total-category comparison, any semantic owner/rule, browser
+promotion, parsing, bulk transfer, and broader Git action.
+
+All nine focused review tests pass. The root reviewed gate passes 830 tests:
+784 active passes, 46 intentional skips, and zero failures. No semantic
+artifact changed, so the unchanged 19-judgment conformance result and the
+complete 41-file kernel CI at the parent boundary remain applicable.
+
 ## Change Log
 
 - **2026-07-28 — DISPLAYED-BRACKET-0A frozen, validated, and
@@ -443,7 +463,15 @@ excluded and untouched. The exact green local proposal checkpoint is
   general `:^nd` coherence remain separate. Eight focused tests, the
   821-test root gate, and all 19 live conformance judgments pass. The exact
   local checkpoint is `e4b743f70c0454d63a93587dc045a3e2d0273ee5`;
-  D-DTTLF-USABILITY-009 remains pending.
+  its synchronized proposal-ledger checkpoint is
+  `6ee1b55b395eec4a9a9909afff0f1b0f693312f4`.
+- **2026-07-28 — D-DTTLF-USABILITY-009 approved under delegated
+  unattended authority.** No immediate human response followed presentation
+  of the exact frozen proposal, so the user's standing plan-specific
+  delegation was exercised. The separate immutable review retains human
+  supersession and authorizes only root-only DISPLAYED-BRACKET-1A. Nine
+  focused tests and the 830-test reviewed root gate pass; no semantic,
+  browser, acquisition, or broader Git authority was added.
 
 ## Git Boundary
 
@@ -473,15 +501,15 @@ Preserve the qualified D-DTTLF-USABILITY-008 conclusion and every withheld
 claim. DISPLAYED-BRACKET-0A's exact executable proposal selects a generic
 first-order displayed contextual compiler rather than extending the current
 rigid body recognizer, compiling only through total categories, or adding a
-kernel bracket owner. D-DTTLF-USABILITY-009 is pending until human or
-separately recorded delegated unattended approval.
+kernel bracket owner. D-DTTLF-USABILITY-009 is approved exactly as proposed
+by a separate immutable delegated review with human supersession.
 
-If D-DTTLF-USABILITY-009 is approved, implement only root-only
-DISPLAYED-BRACKET-1A: finite nonempty independent sibling blocks over one
-common base, one-shot callbacks, derived dependency/usage evidence, one
-typed-pair frontend IR node, left-associated transparent displayed-product
-source, and existing id_funcd/comp_fapp0/Product_projL_funcd/
-Product_projR_funcd/Product_pair_funcd/section_pullback_func authority.
+Implement only root-only DISPLAYED-BRACKET-1A: finite nonempty independent
+sibling blocks over one common base, one-shot callbacks, derived
+dependency/usage evidence, one typed-pair frontend IR node, left-associated
+transparent displayed-product source, and existing
+id_funcd/comp_fapp0/Product_projL_funcd/Product_projR_funcd/
+Product_pair_funcd/section_pullback_func authority.
 Exercise projection, exchange, contraction, mapped pairing, three-sibling
 scaling, and all preserved one-slot cases. Add no Lambdapi owner/rule,
 primitive Core binder mode, owner-specific LF path, Product_catd head,

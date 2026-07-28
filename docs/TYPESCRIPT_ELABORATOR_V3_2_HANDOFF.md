@@ -806,19 +806,25 @@ and selects no successor automatically. Its nine focused tests, root
 separate delegated review's nine focused tests, root 813-test gate (767
 active passes, 46 intentional skips), and repeated 19-judgment conformance
 gate also pass.
-The successor DISPLAYED-BRACKET-0A proposal is frozen and awaiting
-H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/D-DTTLF-USABILITY-009. It selects a
-generic first-order displayed contextual compiler over extending the rigid
-body recognizer, compiling only through total contexts, or adding a kernel
-bracket owner. The first authorized-on-approval row would support finite
-independent sibling blocks through one typed-pair IR node and existing
-identity/composition/projection/pairing/weakening/reindexing authority.
+The successor DISPLAYED-BRACKET-0A proposal is frozen and
+H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/D-DTTLF-USABILITY-009 is approved
+exactly as proposed under the user's delegated unattended authority after no
+immediate human response. Its separate immutable review retains human
+supersession and authorizes only root-only DISPLAYED-BRACKET-1A. The selected
+generic first-order displayed contextual compiler replaces further extension
+of the rigid body recognizer, compiling only through existing direct
+displayed authority rather than total contexts or a new kernel bracket
+owner. The approved row supports finite independent sibling blocks through
+one typed-pair IR node and existing identity/composition/projection/pairing/
+weakening/reindexing authority.
 Genuine dependent chains and general `:^nd` coherence remain separate
 first-class rows. No new Lambdapi mathematics, browser profile, parser, bulk
-transfer, or wider Git action is proposed. Its eight focused tests, root
-821-test gate (775 active passes, 46 intentional skips), and unchanged
-19-judgment conformance gate pass. The exact green proposal checkpoint is
-`e4b743f70c0454d63a93587dc045a3e2d0273ee5`.
+transfer, or wider Git action is authorized. Its eight focused proposal
+tests, nine focused review tests, root 830-test reviewed gate (784 active
+passes, 46 intentional skips), and unchanged 19-judgment conformance gate
+pass. The exact green proposal checkpoint is
+`e4b743f70c0454d63a93587dc045a3e2d0273ee5`; the proposal-ledger checkpoint
+is `6ee1b55b395eec4a9a9909afff0f1b0f693312f4`.
 The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
