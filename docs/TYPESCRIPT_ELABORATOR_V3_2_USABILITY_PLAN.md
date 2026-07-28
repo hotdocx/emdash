@@ -2041,7 +2041,8 @@ frontend architecture.
 The audit/proposal tranche is green: 22 focused tests pass; the complete
 root gate passes 882 tests (836 active passes, 46 intentional skips, zero
 failures); all 19 live Lambdapi conformance judgments pass; and the bounded
-active-kernel check passes.
+active-kernel check passes. The exact audit/proposal checkpoint is
+`7df9993f06fc55e2f34b09094b87987ef19cecba`.
 
 ## Acceptance Criteria
 
@@ -2202,7 +2203,8 @@ For the active recursive displayed continuation, the more specific
 `docs/TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` and its launch
 prompt control. Preserve completed DISPLAYED-EVAL-0B, its constant-domain
 variance qualification, its transfer-runtime-wiring diagnosis, and its
-deeply frozen non-self-authorizing DISPLAYED-EVAL-OWNER-0C proposal. Do not
+deeply frozen non-self-authorizing DISPLAYED-EVAL-OWNER-0C proposal at exact
+checkpoint 7df9993f06fc55e2f34b09094b87987ef19cecba. Do not
 add another RawExpr/parser/checker layer. If D-DTTLF-USABILITY-011 is
 approved exactly as proposed, implement only its two owners, two component
 rules, standard dependent-target final-runtime recheck, generic transfer,

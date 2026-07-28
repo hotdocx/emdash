@@ -939,7 +939,8 @@ compiler case.
 The executable tranche is green: 22 focused tests, the complete 882-test
 root gate (836 active passes, 46 intentional skips, zero failures), all 19
 live Lambdapi conformance judgments, and the bounded active-kernel check
-pass.
+pass. The exact audit/proposal checkpoint is
+`7df9993f06fc55e2f34b09094b87987ef19cecba`.
 
 All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated

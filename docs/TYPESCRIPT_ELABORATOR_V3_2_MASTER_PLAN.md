@@ -3971,7 +3971,8 @@ existing-IR application judgments. Add no semantic effect before that gate.
 The completed audit/proposal evidence is green: 22 focused tests, the full
 882-test root gate (836 active passes, 46 intentional skips, zero failures),
 all 19 live Lambdapi conformance judgments, and the bounded active-kernel
-check pass.
+check pass. The exact audit/proposal checkpoint is
+7df9993f06fc55e2f34b09094b87987ef19cecba.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

@@ -77,7 +77,8 @@ whole-body recognizer, or intrinsic Core owner. The audit and proposal have
 22 focused passing tests. The complete root gate passes 882 tests: 836
 active passes, 46 intentional skips, and zero failures; all 19 live
 Lambdapi conformance judgments and the bounded active-kernel check also pass.
-The exact checkpoint is recorded below once this tranche is closed.
+The exact audit/proposal checkpoint is
+`7df9993f06fc55e2f34b09094b87987ef19cecba`.
 Semantic implementation still awaits
 H-DTTLF-USABILITY-DISPLAYED-EVAL-OWNER-01/
 D-DTTLF-USABILITY-011.
@@ -458,8 +459,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-BRACKET-0A | proposal frozen, validated, checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`, and approved exactly as proposed by a separate delegated review with human supersession | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused proposal tests, nine focused review tests, the 830-test reviewed root gate, and unchanged 19-judgment live conformance pass |
 | DISPLAYED-BRACKET-1A | complete; validated; checkpointed `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab` | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
 | DISPLAYED-LIFTING-0A | executable proposal frozen, validated, checkpointed `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`, and approved exactly as proposed at review checkpoint `7badcd5b930bd098b178d89bf4488637695fb14d` with human supersession | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
-| DISPLAYED-EVAL-0B | complete read-only authority audit; no semantic delta | approved DISPLAYED-LIFTING-0A/D-010 | Proved the arbitrary mixed-variance/plain-argument obstruction, qualified the constant-domain case, compared the universe-natural alternative, owner-position-probed the minimal stable closure, and classified the dependent-target mismatch as stale runtime wiring |
-| DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal awaiting D-011 | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
+| DISPLAYED-EVAL-0B | complete read-only authority audit; no semantic delta; checkpointed `7df9993f06fc55e2f34b09094b87987ef19cecba` | approved DISPLAYED-LIFTING-0A/D-010 | Proved the arbitrary mixed-variance/plain-argument obstruction, qualified the constant-domain case, compared the universe-natural alternative, owner-position-probed the minimal stable closure, and classified the dependent-target mismatch as stale runtime wiring |
+| DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal checkpointed with 0B at `7df9993f06fc55e2f34b09094b87987ef19cecba`; awaiting D-011 | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
 | DISPLAYED-EVAL-1A | proposed, not authorized | approved DISPLAYED-EVAL-OWNER-0C/D-011 | Implement the varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; add no new surface/checker layer or whole-body recognizer |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
@@ -1173,7 +1174,8 @@ implementation checkpoint is
   by the audit/proposal tranche. Its two focused files pass 22 tests; the
   complete 882-test root gate (836 active passes, 46 intentional skips, zero
   failures), all 19 live conformance judgments, and the bounded active-kernel
-  check pass. The exact checkpoint is recorded after bounded closure.
+  check pass. The exact audit/proposal checkpoint is
+  `7df9993f06fc55e2f34b09094b87987ef19cecba`.
 - **2026-07-28 — DISPLAYED-BRACKET-0A frozen, validated, and
   checkpointed.** The executable four-way comparison selects a generic
   first-order displayed contextual compiler. It freezes a no-new-mathematics
@@ -1310,6 +1312,8 @@ exactly as proposed by a separate immutable delegated review with human
 supersession.
 
 Preserve completed DISPLAYED-EVAL-0B and its deeply frozen, read-only audit.
+Its exact audit/proposal checkpoint is
+7df9993f06fc55e2f34b09094b87987ef19cecba.
 It proves that an arbitrary `Catd(Op K)` domain cannot also be reused as a
 plain covariant argument family, selects only the stable constant-domain
 specialization, retains the feasible universe-natural evaluator as an
