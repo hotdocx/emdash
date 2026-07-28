@@ -752,18 +752,26 @@ have their exact positive statuses. Its runnable demo has no production
 Lambdapi dependency and no new kernel owner/rule was added. The 767-test
 TypeScript gate and the complete repository gate—including all 19 live
 differential judgments and all 41 kernel/example health targets—pass.
-FIBRED-GROUPED-SEQUENTIAL-1 is now complete at an existing-authority
-boundary. Its finite two-or-more-sibling API retains one dependency plan and
-emits accumulated Sigma/pullback plus left-associated transparent-product
-contexts; checked sequential/grouped objects, projections/components,
-three-sibling scaling, and dependency-edge rejection pass the 776-test root
-gate and complete repository gate. It claims no equality/equivalence of the
-total categories and adds no Sigma-projection arrow computation or kernel
-owner/rule. Continue with
-FIBRED-QUALIFICATION-REMAINDER-0: audit displayed weakening,
-abstraction/reindex stability, and a genuinely fibre-dependent target before
-freezing the smallest executable follow-on rows. FIBRED-GRADUATE-1 is not yet
-dependency-ready. The green
+FIBRED-GROUPED-SEQUENTIAL-1 remains complete at its existing-authority
+boundary. FIBRED-QUALIFICATION-REMAINDER-0 subsequently proved all three
+remaining corpus cases against the active kernel and split implementation
+into two rows. FIBRED-WEAKEN-REINDEX-1 is now fully validated: the root-only
+successor profile transfers four existing signatures and six existing
+runtime clauses (two source-prior prerequisites plus four consumer clauses),
+implements scoped `indexOf`, exact closed-section displayed weakening,
+displayed-functor hom-action reindexing, point computation, direct-eta
+stability, negative gates, and a runnable demo. It adds no Lambdapi
+mathematical owner/rule. Term checking uses the active runtime
+object-classifier join; the direct and Sigma-section category presentations
+remain runtime-distinct and proof-compatible through the existing
+`stress.sigma-pi.uncurrying` rule. Its 785-test TypeScript gate and complete
+repository gate pass, including all 19 live differential judgments, all 41
+kernel/example health targets, the unchanged strict `0/47/29` LHS audit, and
+catalog freshness.
+Continue with FIBRED-DEPENDENT-TARGET-1 by first freezing the exact
+descendant-environment internal-Pi declaration/runtime contract, then
+executing `B[k,M] = Pi_cat(G[k],M)` and total-context section eta.
+FIBRED-GRADUATE-1 is not yet dependency-ready. The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
 FIBRED-BINDER-1 implementation checkpoint is
@@ -771,7 +779,9 @@ FIBRED-BINDER-1 implementation checkpoint is
 implementation checkpoint is
 `4d26100378fae67ade72ad6c7295d2623fd1fc8f`; the
 FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint is
-`4f173cec9336d41bac9a08563c3697e0fc657d66`. Do not
+`4f173cec9336d41bac9a08563c3697e0fc657d66`; the validated
+FIBRED-WEAKEN-REINDEX-1 implementation checkpoint is
+`246481130ebf29a09d04b9b4337dbdb716484d43`. Do not
 infer any additional owner/rule, structural map, total pullback, general
 `fd`/`nd` completion, or profile authority from the bounded work. The
 completed master plan's historical checkpoint authorization does not

@@ -75,6 +75,38 @@ unchanged strict `0/47/29` LHS audit, and catalog freshness pass. It claims
 no equality/equivalence of the total categories and adds no Sigma-projection
 arrow computation, Lambdapi owner/rule, parser, acquisition route, or
 deployed profile.
+FIBRED-QUALIFICATION-REMAINDER-0 is now complete as a read-only authority and
+architecture audit. A bounded active-kernel consumer probe establishes all
+three remaining cases without a new owner or rule: Sigma-projection section
+pullback gives displayed weakening; the hom action of
+`Pullback_catd_func(σ)` gives displayed-functor reindexing and its pointwise
+component; and `Pi_pullback_funcd(G)` followed by
+`Sigma_catd_functord_catd` gives a genuinely fibre-dependent target
+`B[k,M] = Pi_cat(G[k],M)`. The implementation is deliberately decomposed into
+FIBRED-WEAKEN-REINDEX-1 followed by FIBRED-DEPENDENT-TARGET-1 so the
+frontend/classifier join and the larger internal-Pi transfer remain separate
+green checkpoint boundaries. Neither row authorizes new kernel mathematics.
+FIBRED-WEAKEN-REINDEX-1 is now implementation-complete, fully validated, and
+recorded in the green local checkpoint below.
+Its root-only successor profile transfers four existing signatures and six
+existing runtime clauses: two prerequisite reductions
+(`Const_catd(K,A)[k] -> A` and the Sigma-projection pullback stable fold) plus
+the four consumer object/component clauses frozen by the qualification audit.
+The direct surface accepts exactly
+`λ a :^fd E. s[indexOf(a)]`, lowers it through
+`section_pullback_func(Sigma_proj1_func(E),D)`, and computes its point to
+`s[k]`. Displayed reindexing is the hom action of
+`Pullback_catd_func(σ)`, computes to `FF[σ(x)]`, and commutes structurally
+with the supported direct eta abstraction. The category presentations remain
+runtime-distinct and proof-compatible through the existing
+`stress.sigma-pi.uncurrying` rule; only the active object-classifier join is
+used for ordinary term checking. No Lambdapi source, mathematical owner/rule,
+runtime category collapse, parser, bulk acquisition, or deployed profile was
+added. Its complete repository gate is green: all 19 live differential
+judgments, all 41 kernel/example health targets, 39 infrastructure tests,
+five document-registry tests, report/book checks, the unchanged strict
+`0/47/29` LHS audit, and catalog freshness pass.
+FIBRED-DEPENDENT-TARGET-1 is now the next dependency-ready row.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -130,6 +162,8 @@ FIBRED-TRANSFD-1 implementation checkpoint:
 `4d26100378fae67ade72ad6c7295d2623fd1fc8f`
 FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint:
 `4f173cec9336d41bac9a08563c3697e0fc657d66`
+FIBRED-WEAKEN-REINDEX-1 implementation checkpoint:
+`246481130ebf29a09d04b9b4337dbdb716484d43`
 
 ## Purpose And Exact Outcome
 
@@ -1230,7 +1264,9 @@ usability profile.
 | FIBRED-BINDER-1 | complete; validated; checkpointed `698280f42c3c9c339ebc82a8cfb0df1d51838704` | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Added a root-only `displayedFunctorLambda`/`:^fd`-equivalent typed API for identity, eta, and finite closed displayed-functor composition chains. The callback is evaluated once and discarded; hidden base/fibre slots are retained as immutable locally nameless `k :^n K; a :^f E[k]` evidence. Lowering reuses `id_funcd` and `comp_fapp0` at `Catd_cat K`; the exact SCALE-STRESS-2A `Catd`/`Sigma_proj1_pullback_catd` declarations and Sigma/Pi proof rule plus two already-active point-computation rules compile through generic engines. Direct `Functord_cat(E,D)` and nested `Pi_cat(Sigma_cat(E),Sigma_proj1_pullback_catd(E,D))` compare as `solved` only in the proof engine and remain `not-equal` at runtime. A direct-TypeScript demo, 14 active focused tests, one opt-in live Lambdapi test, and the 754-test root gate pass with zero new Lambdapi owners/rules |
 | FIBRED-TRANSFD-1 | complete; validated; checkpointed `4d26100378fae67ade72ad6c7295d2623fd1fc8f` | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Froze the direct/ordinary/Sigma-Pi next-hom contract; transferred six exact active signatures, seven subject-checked runtime rules, and one proof rule through generic engines; added the root-only callback-once `displayedTransforLambda`/`:^nd` coherent eta, `eta[x]`, `eta[x][u]`, `eta[p][u]`, vertical composition, four-way classifier evidence, and a runnable no-Lambdapi demo; preserved category runtime non-conversion and every general-bracket/profile/acquisition non-effect; the 767-test TypeScript and complete repository gates pass |
 | FIBRED-GROUPED-SEQUENTIAL-1 | complete; validated; checkpointed `4f173cec9336d41bac9a08563c3697e0fc657d66` | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Implemented a finite block of two-or-more independent displayed siblings over one common base; the generic dependency graph drives a left-to-right Sigma/pullback lowering and a left-associated transparent product lowering; checked `((k,b),c)` and `(k,(b,c))`, accumulated/base projections, product component functors, three-sibling scaling, and dependency-edge rejection using only existing owners; explicitly claims no total-category equality/equivalence or Sigma-projection arrow computation; nine focused cases, runnable demo, the 776-test TypeScript gate, and complete repository gate pass |
-| FIBRED-QUALIFICATION-REMAINDER-0 | pending | FIBRED-BINDER-1, FIBRED-TRANSFD-1, FIBRED-GROUPED-SEQUENTIAL-1 | Audit the remaining qualification-corpus cases: displayed weakening, abstraction/reindex stability, and a genuinely fibre-dependent target; freeze the smallest dependency-ready executable rows and any exact owner gaps before implementation |
+| FIBRED-QUALIFICATION-REMAINDER-0 | complete; read-only existing-authority audit | FIBRED-BINDER-1, FIBRED-TRANSFD-1, FIBRED-GROUPED-SEQUENTIAL-1 | The active-kernel consumer probe closes the authority question for cases 2–4: Sigma-projection section pullback, `Pullback_catd_func` hom action, and the `Pi_pullback_funcd`/`Sigma_catd_functord_catd` composite all check and compute without a new owner/rule; selected two executable implementation rows and froze their exact nonclaims |
+| FIBRED-WEAKEN-REINDEX-1 | complete; validated; checkpointed `246481130ebf29a09d04b9b4337dbdb716484d43` | FIBRED-QUALIFICATION-REMAINDER-0, FIBRED-TRANSFD-1 | Transferred `Pullback_catd_func`, `Obj_func`, `section_pullback_func`, and `section_pullback_sec`; executable subject checking exposed and transferred two exact existing prerequisite reductions before the four frozen consumer clauses. Added root-only `indexOf`, exact closed-section `:^fd` weakening, frontend semantic-origin point lowering, displayed-functor hom-action reindexing, eta stability, point computation, fail-closed negatives, and a runnable demo. Category presentations remain runtime-distinct/proof-compatible; zero Lambdapi mathematical owners/rules were added; the 785-test TypeScript and complete repository gates pass |
+| FIBRED-DEPENDENT-TARGET-1 | dependency-ready; executable contract must be frozen first | FIBRED-WEAKEN-REINDEX-1 | Audit the descendant environment, enumerate the exact still-missing internal-Pi declarations and smallest active runtime closure, then construct `G : K -> Cat^op`, the motive family, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd` target; execute `B[k,M] = Pi_cat(G[k],M)` and total-context dependent-section eta without claiming arbitrary coherent section synthesis |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
 | FIBRED-GRADUATE-1 | pending | complete qualification corpus | Freeze the exact supported envelope, residual owner/action gaps, mechanical-reuse assessment, TypeScript/Lambdapi conformance, and a separate human graduation decision |
 
@@ -2141,6 +2177,302 @@ dependency-ready. The next row is FIBRED-QUALIFICATION-REMAINDER-0, which
 must audit those three cases and freeze the smallest executable follow-on
 rows before implementation.
 
+## FIBRED-QUALIFICATION-REMAINDER-0 Audit And Frozen Decomposition
+
+The read-only audit began from the active v3.2 kernel and Foundations rather
+than proposing convenience primitives. Its bounded consumer probe is:
+
+`emdash2/tmp/probes/typescript_usability_fibred_qualification_remainder.lp`
+
+The probe succeeds under the 60-second SOP bound. It establishes three
+independent facts.
+
+### Case 2 — displayed weakening already has a semantic lowering
+
+For `E D : Catd(K)` and `s : Pi_cat(D)`, the active term
+
+```text
+section_pullback_func(Sigma_proj1_func(E), D)[s]
+```
+
+checks directly as an object of `Functord_cat(E,D)`. Its source presentation
+is the section category over `K`; its target presentation is the section
+category over `Sigma_cat(E)` of the Sigma-projection pullback of `D`. The
+already-active classifier projections and Sigma/Pi join reconcile that target
+with the direct displayed-functor classifier. The existing
+`section_pullback_sec` component rule computes the intended body:
+
+```text
+λ k :^n K. λ a :^f E[k]. s[k].
+```
+
+Therefore no primitive `weakd`, no new displayed-functor constructor, and no
+new proof-time equality is justified. The frontend only needs to recover the
+hidden base index of `a`, recognize the exact zero-use-of-`a` section body,
+and emit the existing semantic pullback.
+
+### Case 3 — displayed substitution is generic hom action
+
+For `σ : A -> K` and `FF : Functord(E,D)`, the active term
+
+```text
+fapp1_fapp0(Pullback_catd_func(σ), E, D, FF)
+  : Functord(σ*E, σ*D)
+```
+
+checks without qualification. Its active pointwise projection computes at
+`a : A` to `FF[σ(a)]`. Thus “abstract then reindex” and “reindex then
+eta-abstract” need no new categorical law: both frontend routes can lower to
+the same explicit hom-action term. This is a frontend substitution-stability
+invariant backed by one existing kernel owner and its existing projections,
+not a proposed runtime equality between arbitrary syntax trees.
+
+### Case 4 — the internal Pi package gives a genuinely dependent codomain
+
+For `G : K -> Op(Cat)`, define:
+
+```text
+Motives(G) = Pullback_catd(Catd_cat_func, G) : Catd(K)
+PiTarget(G) = Pi_pullback_funcd(G)
+  : Functord(Motives(G), Const_catd(K,Cat))
+DepTarget(G) = Sigma_catd_functord_catd(PiTarget(G))
+  : Catd(Sigma_cat(Motives(G))).
+```
+
+At a total-context object `(k,M)`, the active runtime computes:
+
+```text
+DepTarget(G)[(k,M)] = Pi_cat(G[k],M).
+```
+
+The result genuinely depends on the fibre variable `M`; it is not a fixed
+family `D[k]` with an unused displayed input. A section over this total
+context therefore supplies the ordinary dependent target
+`B[k,M]`. The current total-context `dependentLambda` eta mechanism can
+consume such a section once the exact internal-Pi declarations and runtime
+closure are promoted into the root-only usability lineage. This confirms the
+architecture while preserving the important boundary: arbitrary pointwise
+TypeScript callbacks are not silently accepted as coherent sections.
+
+### Selected implementation order
+
+A single large promotion was considered but rejected as an unnecessarily wide
+checkpoint. The selected order is:
+
+1. **FIBRED-WEAKEN-REINDEX-1** closes cases 2 and 3 over the small common
+   reindexing boundary.
+2. **FIBRED-DEPENDENT-TARGET-1** then closes case 4 over the larger
+   internal/pullback-Pi transfer closure.
+
+FIBRED-WEAKEN-REINDEX-1 is frozen as follows:
+
+- add only a root-only successor profile;
+- transfer exactly the already-active declarations
+  `Pullback_catd_func`, `Obj_func`, `section_pullback_func`, and
+  `section_pullback_sec`; `Obj_func` is required to retain the literal active
+  right-hand side of the section-component rule and may remain an opaque
+  TypeScript signature in this slice;
+- transfer the four already-active consumer clauses: pullback-functor object
+  projection, pointwise hom-action projection, section-pullback object
+  projection, and section-pullback component projection. Executable generic
+  subject checking may add only a separately counted exact existing
+  prerequisite reduction needed by those literal active clauses;
+- expose a frontend-only contextual-index accessor for an indexed fibre
+  token; it emits no Core node and cannot escape its active scope;
+- extend direct displayed-functor abstraction with exactly the weakening body
+  `s[k]` where the fibre token is unused, the hidden base token is used once,
+  and `s` is a closed section of the requested target family;
+- expose displayed-functor reindexing only as the generic hom action of
+  `Pullback_catd_func(σ)`;
+- require abstraction-before/after-reindexing to emit structurally equal
+  explicit Core and require its point application to compute to
+  `FF[σ(a)]`;
+- reject wrong bases, wrong source/target families, escaped contextual
+  indices, a body that merely ignores its input without being the qualified
+  section pattern, and all unqualified arbitrary callback bodies; and
+- retain the existing runtime/proof split, default/browser/MVP profiles,
+  string-parser deferral, bulk-transfer deferral, groupoidal deferral, and
+  total-category nonclaims.
+
+FIBRED-DEPENDENT-TARGET-1 is frozen at the architectural level but remains
+dependent on the first row's concrete environment. It may transfer only the
+five still-missing active declarations `Op_cat`, `Catd_cat_func`, `Pi_func`,
+`Pi_int_funcd`, and `Pi_pullback_funcd` plus the smallest exact existing
+runtime clauses required for the three displayed equations above. It must
+reuse the already-transferred `Pullback_catd`,
+`Sigma_catd_functord_catd`, and generic application machinery. Before coding,
+its executable contract must enumerate that runtime closure and its
+unsupported-action table against the descendant environment; no new
+Lambdapi owner/rule is authorized.
+
+The unsupported boundary after the audit is explicit:
+
+| Concern | Supported after the selected rows | Still not claimed |
+| --- | --- | --- |
+| Displayed weakening | Closed section weakened through Sigma projection; object component computes | arbitrary callback coherence or a primitive `weakd` |
+| Reindexing | displayed functor hom action, eta stability, object component | a new global reindexing equality or unqualified higher-cell synthesis |
+| Dependent target | total-context family and section eta at `B[k,M]` | arbitrary coherent construction of a section from pointwise TypeScript data |
+| Sigma structure | existing object/fibre/selected structured-arrow routes | deferred general Sigma-introduction arrow action |
+| Products/contexts | completed independent sibling and sequential presentations | equality/equivalence of their total categories |
+
+No mathematical approval gate is opened by this audit because the probe found
+no missing mathematical construction. Any later concrete need for a new
+owner or rule must stop, perform the normal active-owner/Foundation audit and
+owner-position comparison, and freeze a separate exact gate.
+
+## FIBRED-WEAKEN-REINDEX-1 Completion Record
+
+The implementation closes qualification cases 2 and 3 without changing the
+active Lambdapi source.
+
+### Exact transfer closure
+
+The frozen four declarations are:
+
+```text
+Pullback_catd_func
+Obj_func
+section_pullback_func
+section_pullback_sec.
+```
+
+All are existing active v3.2 declarations. `Obj_func` is transferred as the
+exact signature named by the literal active section-component right-hand
+side; this slice does not claim or require its transparent body as a new
+owner.
+
+Generic TypeScript subject checking found that the four consumer clauses have
+two source-prior computational prerequisites which the qualification prose
+had not counted:
+
+```text
+Const_catd(K,A)[k] -> A
+Pullback_catd(D,Sigma_proj1_func(R))
+  -> Sigma_proj1_pullback_catd(R,D).
+```
+
+The first exposes the terminal source of `Obj_func`; the second exposes the
+stable family head required by the existing Sigma/Pi uncurrying bridge.
+Hiding either dependency behind an external subject oracle was rejected
+because both are small, already-active runtime clauses and both pass the
+generic TypeScript subject checker. The transferred runtime closure is
+therefore exactly six clauses: two separately counted prerequisites followed
+by the four audit-selected consumer clauses. It adds zero Lambdapi
+mathematical runtime rules.
+
+### Surface and lowering
+
+The root-only `fibred-weaken-reindex-1` profile is a successor of the
+grouped/sequential and `:^nd` profiles. Earlier profiles are unchanged. Its
+frontend adds:
+
+1. `indexOf(a)`, which recovers the hidden natural base token of the active
+   displayed callback object. It emits no Core node and fails if the token is
+   foreign, escaped, closed, or outside this profile.
+2. The exact displayed weakening body:
+
+   ```text
+   λ a :^fd E. s[indexOf(a)]
+   ```
+
+   where `s` is a closed section of the requested target family, the fibre
+   token occurs zero times, and the hidden base occurs once. It lowers to the
+   existing semantic term:
+
+   ```text
+   section_pullback_func(Sigma_proj1_func(E),D)[s].
+   ```
+
+3. `pullbackDisplayedFunctor(FF,σ)`, which emits:
+
+   ```text
+   fapp1_fapp0(Pullback_catd_func(σ),E,D,FF).
+   ```
+
+   No new pointwise coherence constructor or reindexing equality is
+   synthesized.
+
+The weakening term retains small immutable elaboration-only semantic-origin
+metadata. Projecting it at `k` and then applying it to `a : E[k]` lowers
+directly to the already-checked section application `s[k]`. This metadata is
+not serialized into Core, is not global state, and is not a claimed runtime
+equality for arbitrary functors. It is the structural erasure evidence for
+the exact zero-use displayed input. Thus the point consumer does not require
+a new primitive `weakd` or an invented `Obj_func` object rewrite.
+
+The emitted weakening term checks at the direct
+`Functord_cat(K,E,D)` object classifier through the active runtime
+object-classifier join. The stronger category presentations remain
+deliberately distinct at runtime:
+
+```text
+Functord_cat(K,E,D)
+Pi_cat(Sigma_cat(E),Sigma_proj1_pullback_catd(E,D)).
+```
+
+Their existing proof-time comparison is still solved by
+`stress.sigma-pi.uncurrying`. No category-level runtime collapse was added.
+
+For reindexing, the point component reduces through the transferred active
+hom-component clause:
+
+```text
+(σ*FF)[x] = FF[σ(x)].
+```
+
+Elaborating direct eta before reindexing and reindexing before direct eta
+produces structurally identical backend-neutral explicit Core.
+
+### Executable evidence and boundaries
+
+The runnable command is:
+
+```text
+./scripts/pnpmw run demo:categorical-fibred-weaken-reindex
+```
+
+It reports both surface examples, explicit Core, the weakening point
+computation, the reindexing point computation, the runtime/proof classifier
+split, eta/reindex stability, and a wrong-base diagnostic. It uses direct
+TypeScript construction and no production Lambdapi process.
+
+Focused evidence covers the deeply frozen contract, exact four-declaration/
+six-clause transfer, generic subject checking, weakening recognition and
+point lowering, scoped `indexOf`, displayed reindexing, active component
+reduction, eta stability, profile/base failures, deterministic demo output,
+and zero-new-mathematics boundary. The root TypeScript gate passes:
+
+```text
+785 tests, 739 passed, 46 intentional opt-in skips, 0 failed.
+```
+
+The complete repository gate also passes:
+
+```text
+19 mandatory live TypeScript/Lambdapi differential judgments
+41 active kernel/example health targets
+39 formal infrastructure tests
+5 document-registry tests
+report/header/book/evidence/typography/KaTeX checks
+strict 0/47/29 rule-LHS audit
+generated catalog freshness
+```
+
+No `.lp` source was changed. String parsing, general dependent displayed
+bracket synthesis, arbitrary callback coherence, section-arrow computation,
+new reindexing equalities, the default/browser/deployed profiles, bulk
+transfer, total-category comparison, groupoidal closure, and the genuinely
+fibre-dependent target remain outside this row.
+
+FIBRED-DEPENDENT-TARGET-1 is now dependency-ready. Its first action is a
+descendant-environment contract audit: enumerate the exact missing
+internal-Pi signatures and source-prior runtime clauses, distinguishing
+prerequisite computation from the target consumer just as this row now does.
+It may implement the already-probed
+`Sigma_catd_functord_catd(Pi_pullback_funcd(G))` target and total-context
+section eta, but it may not infer a new primitive or promote arbitrary
+pointwise TypeScript data to a coherent section.
+
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
 Completing individual product or binder examples does not by itself settle
@@ -2461,15 +2793,38 @@ no runtime equality or equivalence of the two total categories, no
 Sigma-projection arrow computation, and no grouping across a genuine
 dependency edge.
 
-The next dependency-ready row is FIBRED-QUALIFICATION-REMAINDER-0. Audit
-qualification-corpus cases 2 through 4: displayed weakening, abstraction
-before versus after reindexing, and a genuinely fibre-dependent target using
-the active Sigma/Pi/internal-pullback package. Freeze the smallest executable
-follow-on rows and exact unsupported-action/owner table before implementation.
-Do not mark FIBRED-GRADUATE-1 ready until that corpus is executable. If a
-genuinely missing computation appears, audit existing constructions and
-Foundations and compare the smallest owner positions before opening an exact
-gate; no convenient notation is itself authority for a primitive.
+FIBRED-QUALIFICATION-REMAINDER-0 and FIBRED-WEAKEN-REINDEX-1 are complete.
+Preserve the successful active-kernel consumer evidence, zero-new-owner/rule
+conclusion, and exact unsupported-action table. Preserve the root-only
+`indexOf` weakening
+`λ a :^fd E. s[indexOf(a)]`, its section-pullback lowering and exact `s[k]`
+point result; preserve displayed-functor reindexing as the hom action of
+`Pullback_catd_func`, its `FF[σ(x)]` component, and direct-eta structural
+stability. Preserve the exact four existing declarations and six existing
+runtime clauses: two separately counted prerequisites
+(`Const_catd` object action and the Sigma-projection pullback stable fold)
+before the four consumer clauses. Preserve the runtime object-classifier term
+join while keeping category presentations runtime-distinct and proof-
+compatible only through `stress.sigma-pi.uncurrying`. The semantic-origin
+metadata used to erase the displayed point is frontend-only and must never
+become a global registry or kernel equality. Add no Lambdapi source,
+mathematical owner/rule, runtime category collapse, deployed profile, parser,
+or bulk transfer.
+
+The next dependency-ready row is FIBRED-DEPENDENT-TARGET-1. First freeze an
+executable contract against the actual descendant environment: re-audit the
+five provisionally named internal-Pi declarations and enumerate the smallest
+source-prior runtime closure, separating prerequisites from consumer
+equations. Then implement the already-probed
+`Sigma_catd_functord_catd(Pi_pullback_funcd(G))` family and demonstrate
+`B[k,M] = Pi_cat(G[k],M)` plus total-context dependent-section eta. Reuse
+existing `Pullback_catd`, `Sigma_catd_functord_catd`, application, and
+classifier machinery. Do not infer a new primitive, arbitrary pointwise
+coherence, or general dependent displayed bracket. Do not mark
+FIBRED-GRADUATE-1 ready until this row is executable. If a genuinely missing
+computation appears, audit existing constructions and Foundations and compare
+the smallest owner positions before opening an exact gate; no convenient
+notation is itself authority for a primitive.
 
 Keep canonical Lambdapi term/declaration parsing deferred and optional.
 Direct typed TypeScript construction remains the default. Do not resume the
@@ -2686,3 +3041,41 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
   Lambdapi source edits, whitespace errors, sensitive material, or suppression
   markers. The checkpoint grants no remote operation, integration,
   publication, history rewrite, cleanup, or broader semantic authority.
+- **2026-07-28 — qualification remainder audited and decomposed.** The bounded
+  active-kernel consumer probe
+  `typescript_usability_fibred_qualification_remainder.lp` checks all three
+  remaining corpus cases: Sigma-projection section weakening,
+  `Pullback_catd_func` displayed-functor reindexing and point computation, and
+  the genuinely dependent
+  `Sigma_catd_functord_catd(Pi_pullback_funcd(G))[(k,M)] =
+  Pi_cat(G[k],M)` target. No missing owner or rule was found. Froze
+  FIBRED-WEAKEN-REINDEX-1 as the next four-declaration/four-rule
+  existing-authority frontend slice and left the larger five-declaration
+  internal-Pi promotion as FIBRED-DEPENDENT-TARGET-1. Parsing/acquisition,
+  arbitrary callback coherence, total-category comparison, browser
+  promotion, bulk transfer, and groupoidal closure remain deferred.
+- **2026-07-28 — FIBRED-WEAKEN-REINDEX-1 checkpointed.** Recorded green
+  local implementation checkpoint
+  `246481130ebf29a09d04b9b4337dbdb716484d43`. The tranche added a deeply
+  frozen no-new-mathematics contract, exact four-signature transfer, and six
+  generic subject-checked existing runtime clauses. The two clauses beyond
+  the four qualification consumers are explicitly classified prerequisites:
+  constant displayed-family object action and the Sigma-projection pullback
+  stable fold. Added the root-only `fibred-weaken-reindex-1` profile,
+  contextual `indexOf`, exact closed-section displayed weakening, frontend-
+  only semantic-origin point erasure, displayed-functor hom-action
+  reindexing, eta stability, fail-closed diagnostics, and a runnable demo.
+  Weakening points lower to `s[k]`; reindexed components compute to
+  `FF[σ(x)]`. Term checking uses the active runtime object-classifier join,
+  while category presentations remain runtime-distinct and compare only
+  through the existing Sigma/Pi proof rule. The 785-test TypeScript gate
+  passes with 739 active passes and 46 intentional skips. The complete
+  repository gate also passes: all 19 live differential judgments, all 41
+  kernel/example health targets, 39 infrastructure tests, five registry
+  tests, report/book checks, the unchanged strict `0/47/29` LHS audit, and
+  catalog freshness are green. No Lambdapi source, mathematical owner/rule,
+  parser, bulk-transfer route, or deployed profile changed.
+  Exact 12-path staged review, whitespace, sensitive-material, and
+  suppression scans passed. The checkpoint grants no remote operation,
+  integration, publication, history rewrite, cleanup, or broader semantic
+  authority. FIBRED-DEPENDENT-TARGET-1 is next.

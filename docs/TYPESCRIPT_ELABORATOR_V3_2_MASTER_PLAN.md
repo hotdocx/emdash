@@ -3795,18 +3795,35 @@ presentations, checked sequential/grouped objects, stable `Product_pair`
 emission, projection/component evidence, three-sibling scaling, and
 dependency-edge rejection. It claims no total-category equality/equivalence
 and adds no Sigma-projection arrow computation or kernel owner/rule. Its
-776-test TypeScript and complete repository gates pass. Continue with
-FIBRED-QUALIFICATION-REMAINDER-0 by auditing displayed weakening,
-abstraction/reindex stability, and a genuinely fibre-dependent target, then
-freeze the smallest executable follow-on rows. Do not infer general `fd`/`nd`
-completion from these bounded slices or mark FIBRED-GRADUATE-1 ready. The
+776-test TypeScript and complete repository gates pass.
+FIBRED-QUALIFICATION-REMAINDER-0 is complete and proves the remaining three
+corpus cases against existing active authority. FIBRED-WEAKEN-REINDEX-1 is
+now fully validated with a root-only successor profile, exact
+closed-section `indexOf` weakening, displayed-functor hom-action reindexing,
+point computation, direct-eta stability, negative gates, and a runnable demo.
+Its transfer contains four existing signatures and six existing runtime
+clauses: two explicitly counted source-prior prerequisites and four consumer
+clauses. It adds no Lambdapi mathematical owner/rule. Preserve the runtime
+object-classifier term join while keeping the category presentations
+runtime-distinct and proof-compatible only through the existing
+`stress.sigma-pi.uncurrying` rule. Its 785-test TypeScript and complete
+repository gates pass, including all 19 live differential judgments, all 41
+kernel/example health targets, the unchanged strict `0/47/29` LHS audit, and
+catalog freshness.
+Continue with FIBRED-DEPENDENT-TARGET-1: first freeze the exact
+descendant-environment internal-Pi declaration/runtime contract, then execute
+`B[k,M] = Pi_cat(G[k],M)` and total-context section eta. Do not infer general
+`fd`/`nd` completion from these bounded slices or mark FIBRED-GRADUATE-1
+ready. The
 FIBRED-STRUCTURE-1A checkpoint remains
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized binder
 checkpoint is `698280f42c3c9c339ebc82a8cfb0df1d51838704`; the
 FIBRED-TRANSFD-1 implementation checkpoint is
 `4d26100378fae67ade72ad6c7295d2623fd1fc8f`; the
 FIBRED-GROUPED-SEQUENTIAL-1 implementation checkpoint is
-`4f173cec9336d41bac9a08563c3697e0fc657d66`.
+`4f173cec9336d41bac9a08563c3697e0fc657d66`; the
+FIBRED-WEAKEN-REINDEX-1 implementation checkpoint is
+`246481130ebf29a09d04b9b4337dbdb716484d43`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
