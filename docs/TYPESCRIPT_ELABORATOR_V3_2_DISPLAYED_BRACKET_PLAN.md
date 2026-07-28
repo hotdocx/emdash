@@ -34,6 +34,19 @@ TypeScript gate passes 841 tests: 795 active passes, 46 intentional skips,
 and zero failures. The exact local implementation checkpoint is
 `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
 
+DISPLAYED-LIFTING-0A is now frozen as the root-only executable proposal
+`src/v3_2/categorical_displayed_lifting_proposal.ts`. Its ten focused tests
+pass, as do the full 851-test root gate (805 active passes, 46 intentional
+skips, zero failures), the repeated 19-judgment live conformance gate, and
+the bounded active-kernel check. It records the existing recursive ordinary
+cases, the exact restricted displayed cases, and the owner/action gaps
+without extending the semantic grammar. In particular, active
+`Functor_catd`, ordinary `Eval_func`/`fapp0_func`, and displayed pairing are
+ingredients but are not silently treated as a selected coherent displayed
+evaluator. The proposal awaits
+H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 and authorizes
+no successor by its own existence.
+
 ## Authority And Relationship To The Completed Architecture
 
 The active mathematical authority remains the Lambdapi v3.2 development
@@ -409,11 +422,124 @@ is compositional, authority-correct behavior rather than code deduplication.
 | --- | --- | --- | --- |
 | DISPLAYED-BRACKET-0A | proposal frozen, validated, checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`, and approved exactly as proposed by a separate delegated review with human supersession | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused proposal tests, nine focused review tests, the 830-test reviewed root gate, and unchanged 19-judgment live conformance pass |
 | DISPLAYED-BRACKET-1A | complete; validated; checkpointed `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab` | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
-| DISPLAYED-LIFTING-0A | next executable read-only proposal; selected by the 2026-07-28 recursive-lifting reassessment | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
-| DISPLAYED-LIFTING-1A | deferred pending the exact 0A proposal/review | DISPLAYED-LIFTING-0A | Extend the displayed recursive grammar only for the exact existing-authority application cases selected by 0A, with positive/negative consumers and no whole-body recognizer growth |
+| DISPLAYED-LIFTING-0A | executable proposal frozen and focused-green; H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 pending | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
+| DISPLAYED-EVAL-0B | proposed read-only next row; not self-authorized | approved DISPLAYED-LIFTING-0A | Run owner-position and derived-construction probes for coherent evaluation of a `Functor_catd`-valued varying subject at fixed and varying arguments; determine whether active authority suffices or freeze a minimal new-owner proposal; classify the profile-join mismatch without a semantic patch |
+| DISPLAYED-LIFTING-1A | deferred pending 0B evidence and a separate exact proposal/review | DISPLAYED-EVAL-0B | Extend the displayed recursive grammar only for exact licensed application judgments, with positive/negative consumers and no whole-body recognizer growth |
 | DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
+
+## DISPLAYED-LIFTING-0A Frozen Executable Proposal
+
+The immutable proposal is
+`src/v3_2/categorical_displayed_lifting_proposal.ts`; its focused test is
+`tests/v3_2_categorical_displayed_lifting_proposal_tests.ts`. It is a
+read-only architectural and owner audit. It adds no runtime behavior, Core
+owner, Lambdapi declaration/rule, parser, checker, browser export, or profile
+join.
+
+### Architecture verdict
+
+The source boundary remains the existing typed TypeScript construction IR.
+The outer abstraction invokes a deterministic recursive contextual-lifting
+operation. Bound variables may occur freely beneath supported typed
+subexpressions; they do not require local bracket punctuation. The result is
+backend-neutral explicit Core and is checked/evaluated by the existing
+generic checker. An unsupported typed constructor fails closed with
+provenance.
+
+Accordingly, the proposal adds neither a parallel `RawExpr` language nor a
+second bidirectional checker. It also imposes no implementation-layout dogma:
+ordinary and displayed lowering may share helpers or differ as their typed
+judgments naturally require. The invariant is scalable syntax-directed
+recursion with explicit authority, not uniform source code.
+
+The historical assessment remains:
+
+- MIGRATE-2 physically deleted the old generic HOAS LF frontend from this
+  branch, but those mechanisms remain recoverable from `main` and history;
+- it did not delete an earlier recursive categorical bracket compiler,
+  because the old mode-aware LF lambda plus explicit categorical action nodes
+  did not perform the current structural abstraction; and
+- restoring the stale category-specific frontend is not selected.
+
+### Ordinary and displayed matrix
+
+The ordinary compiler is already closed over the currently registered
+first-order cases:
+
+| occurrence form | status | lowering |
+| --- | --- | --- |
+| slot | implemented | identity |
+| closed term | implemented | constant abstraction |
+| closed subject, open argument | implemented | composition |
+| open subject, closed argument | implemented and permanently tested | `Eval_func` after pairing `F o id` with `Const(y0)`; `fapp0_func` is an available specialized presentation |
+| open subject, open argument | implemented | pairing followed by `Eval_func` |
+| nested abstraction | implemented | curry package |
+
+The displayed/dependent matrix is deliberately more qualified:
+
+| occurrence or judgment | status | authority or exact gap |
+| --- | --- | --- |
+| slot/projection | implemented | `id_funcd`, `Product_projL_funcd`, `Product_projR_funcd` |
+| closed coherent displayed subject, open argument | implemented | `comp_fapp0` |
+| fibre pair | implemented | `Product_pair_funcd` |
+| exact closed-section weakening | implemented, qualified | `section_pullback_func` |
+| varying fibre-functor subject, fixed/coherent argument | unresolved owner/derived construction | `Functor_catd`, ordinary `Eval_func`/`fapp0_func` are ingredients; a coherent displayed evaluator and its reindexing behavior are not yet selected |
+| varying subject, varying argument | unresolved owner/derived construction | displayed pairing exists, but pairing alone does not supply coherent evaluation |
+| nested displayed abstraction | comparison required | direct displayed curry versus sequential totalization versus repeated pullback/Sigma |
+| genuine dependency edge | separate `DISPLAYED-CHAIN-0A` | compare the three presentations and audit Sigma arrow action |
+| contravariant position | frontend route unselected | `Functor_catd`, `Op_catd`, and pre/postcomposition ingredients require polarity-directed lowering |
+| transformation/higher action | separate `DISPLAYED-ND-0A` | select among `tapp*`, `tdapp*`, and `fdapp*` by typed cell level; do not claim general coherence synthesis |
+| dependent-target/direct-displayed profile composition | measured mismatch | preserve the `TYPE_MISMATCH` reproduction and isolate transfer/presentation interaction before any semantic patch |
+
+The absence of a lexically obvious generic displayed-evaluation owner is not
+a proof that the construction is mathematically impossible or that a new
+primitive is necessary. It is an exact evidence gap. Before adding any
+owner, the required workflow is to probe the relevant owner positions and
+attempt a transparent derived construction from active authority. If that
+fails, a separate proposal must state the minimal signature, computation,
+coherence, warning impact, and consumer that justify a new owner.
+
+### Feasibility conclusion and selected next evidence
+
+The design is settled enough to continue systematically for ordinary
+first-order abstraction and for the demonstrated independent displayed
+grammar. The result is not yet a graduation proof for arbitrary
+displayed/dependent, higher, or contravariant bodies. The remaining obstacle
+is now localized: coherent displayed evaluation and related reindexing laws,
+not a missing parser, cosmetic surface AST, or lost former compiler.
+
+The proposal therefore selects `DISPLAYED-EVAL-0B` as the next bounded
+read-only evidence row. Once separately approved, it must answer:
+
+1. whether `Functor_catd` plus active evaluation/functoriality authority
+   derives coherent displayed evaluation;
+2. if not, the minimal owner and law set needed for it;
+3. exactly which fixed-argument and both-open recursive frontend judgments
+   the result licenses; and
+4. whether the measured profile join is only a transfer/presentation problem
+   or exposes a semantic mismatch.
+
+Semantic DISPLAYED-LIFTING-1A remains withheld until that evidence freezes an
+exact implementation row. Genuine dependency chains and general `:^nd`
+coherence remain independent later rows.
+
+### Exact decision gate
+
+The executable proposal asks:
+
+> Approve H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/
+> D-DTTLF-USABILITY-010 as proposed: preserve the existing typed TypeScript
+> IR, recursive contextual compiler, explicit Core, and generic checker
+> without adding RawExpr, a second bidirectional checker, parser, or bracket
+> punctuation; accept the executable owner/action matrix and its exact
+> coherent displayed-evaluation gap; authorize only root/active-authority
+> DISPLAYED-EVAL-0B owner-position and derived-construction probes; and keep
+> semantic DISPLAYED-LIFTING-1A, any new kernel owner/rule, genuine-chain
+> lowering, general `:^nd` coherence, Sigma arrow action, parsing/bulk
+> transfer, browser promotion, and broader Git authority withheld pending
+> separate exact proposals?
 
 ## DISPLAYED-BRACKET-1A Frozen Contract
 
@@ -818,6 +944,20 @@ implementation checkpoint is
   was discarded. Selected proposal-only DISPLAYED-LIFTING-0A to freeze the
   typed recursive lifting/owner matrix before extending the displayed
   grammar; genuine dependency chains remain a subsequent first-class row.
+- **2026-07-28 — DISPLAYED-LIFTING-0A executable proposal frozen.** Added a
+  deeply immutable root-only owner/action matrix with ten focused tests. It
+  preserves the existing typed IR and recursive checker boundary, records
+  all six implemented ordinary occurrence cases, distinguishes four
+  implemented/qualified displayed cases from open-subject evaluation,
+  nested, variance, higher, and genuine-chain gaps, and isolates the measured
+  profile mismatch. The audit finds active `Functor_catd`, ordinary
+  evaluation, and displayed-pairing ingredients but no selected generic
+  coherent displayed evaluator; absence is not treated as proof that a new
+  primitive is needed. It proposes only a separately reviewed
+  DISPLAYED-EVAL-0B owner-position/derived-construction probe and adds no
+  semantic or Git authority. Ten focused tests, the complete 851-test root
+  gate (805 active passes, 46 intentional skips, zero failures), all 19 live
+  conformance judgments, and the bounded active-kernel check pass.
 
 ## Git Boundary
 
@@ -870,16 +1010,25 @@ token may occur freely under supported subexpressions, and an unsupported
 typed node fails closed. Preserve the permanent ordinary
 `lambda x :^f A. F x y0` fixed-evaluation regression.
 
-Then implement only DISPLAYED-LIFTING-0A as a root-only, executable,
-read-only proposal and owner audit. Freeze the matrix of typed constructor
-and application judgment, closed/varying subject and argument, binder mode,
-variance/cell level, and active owner or exact gap. Compare closed-subject/
-open-argument composition, open-subject/closed-argument fixed evaluation,
-both-open pairing/evaluation, nested abstraction, contravariant action,
-displayed/dependent reindexing, and transformation-valued higher action.
-Isolate the measured dependent-target/direct-displayed composition mismatch.
-Do not extend the semantic grammar in 0A and do not introduce a new owner,
-rule, surface checker, or profile join.
+Preserve frozen DISPLAYED-LIFTING-0A. Its executable matrix records the six
+implemented ordinary recursive cases; the implemented displayed slot,
+closed-subject/open-argument, pair, and qualified weakening cases; and the
+exact unresolved coherent displayed-evaluation, nested abstraction,
+contravariant, higher-cell, genuine-chain, and profile-composition rows. It
+finds `Functor_catd`, ordinary `Eval_func`/`fapp0_func`, and displayed
+pairing as ingredients but does not claim that they already form a coherent
+displayed evaluator or that a new primitive is necessary. The proposal is
+non-self-authorizing and awaits
+H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010.
+
+After an exact approval/review, implement only DISPLAYED-EVAL-0B as a
+read-only owner-position and derived-construction probe. First attempt to
+derive coherent displayed evaluation from active authority; if this is not
+possible, freeze a separate minimal-owner proposal and do not add the owner
+or rules in 0B. Isolate whether the measured dependent-target/direct-
+displayed composition mismatch is a transfer/presentation issue or a
+semantic one. Add no recursive grammar case, semantic owner/rule, second
+surface checker, or profile join in 0B.
 
 Keep DISPLAYED-LIFTING-1A and DISPLAYED-CHAIN-0A separate. The latter must
 compare sequential-total, repeated pullback/Sigma, and direct displayed

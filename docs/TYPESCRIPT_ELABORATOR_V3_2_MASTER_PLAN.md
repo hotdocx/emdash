@@ -3881,9 +3881,9 @@ abstraction already recurses through ordinary subexpressions: the exact
 `lambda x :^f A. F x y0` witness lowers through identity, composition,
 constant abstraction, pairing, and `Eval_func` without local bracket syntax.
 The displayed compiler remains restricted to slots, closed displayed
-application, and fibre pairs. DISPLAYED-LIFTING-0A is now the next
-proposal-only typed owner/action matrix; genuine dependency chains remain a
-subsequent first-class row. The review also records accurately that
+application, and fibre pairs. DISPLAYED-LIFTING-0A was therefore selected as
+the next proposal-only typed owner/action matrix; genuine dependency chains
+remain a subsequent first-class row. The review also records accurately that
 MIGRATE-2 removed the old generic HOAS LF frontend from this branch but did
 not discard an earlier recursive categorical bracket implementation. No new
 Lambdapi owner/rule, browser surface, parser, or bulk-transfer authority is
@@ -3901,6 +3901,20 @@ intentional skips), together with the permanent ordinary fixed-evaluation
 regression, bounded active-kernel check, and all 19 live conformance
 judgments. The exact green local implementation checkpoint is
 `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
+
+DISPLAYED-LIFTING-0A is now frozen as an executable owner/action matrix. Its
+ten focused tests confirm the corrected no-second-RawExpr/checker boundary,
+all six implemented ordinary recursive occurrence cases, and the exact
+qualified displayed coverage. The audit identifies `Functor_catd`, ordinary
+`Eval_func`/`fapp0_func`, and `Product_pair_funcd` as ingredients for open
+displayed application but does not falsely claim a selected coherent
+displayed evaluator or infer that a new owner is necessary. It proposes only
+a separately approved DISPLAYED-EVAL-0B owner-position and
+derived-construction probe; semantic DISPLAYED-LIFTING-1A, new owners/rules,
+genuine chains, general `:^nd`, parsing/bulk transfer, and browser promotion
+remain withheld. Its ten focused tests, the complete 851-test root gate (805
+active passes, 46 intentional skips, zero failures), all 19 repeated live
+conformance judgments, and the bounded active-kernel check pass.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

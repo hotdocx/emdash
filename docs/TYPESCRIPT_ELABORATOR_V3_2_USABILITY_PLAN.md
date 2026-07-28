@@ -1954,6 +1954,18 @@ including closed/open application cases and the current profile-composition
 mismatch, before a semantic grammar extension. Genuine dependency chains
 remain a separate first-class row.
 
+That executable matrix is now frozen. It confirms all six ordinary
+occurrence cases, including fixed evaluation, and the implemented displayed
+slot, closed-subject/open-argument, fibre-pair, and qualified weakening
+cases. For a varying `Functor_catd`-valued subject, active `Functor_catd`,
+ordinary `Eval_func`/`fapp0_func`, and `Product_pair_funcd` are relevant
+ingredients, but the audit does not find or invent a selected coherent
+displayed evaluator with reindexing laws. This is now the precise
+feasibility boundary: the next proposed row is a read-only owner-position
+and derived-construction probe, not another frontend layer. Failure to derive
+the construction would require a separate minimal-owner proposal before any
+semantic implementation.
+
 ## Acceptance Criteria
 
 USABILITY-GRADUATE-1 may propose that the frontend architecture is settled
@@ -2292,6 +2304,15 @@ CI obligations.
   synchronized DISPLAYED-BRACKET-1A implementation and permanent ordinary
   regression are checkpointed at
   `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
+- **2026-07-28 — DISPLAYED-LIFTING-0A matrix frozen.** The new executable
+  proposal makes the latest status assessment testable: no second RawExpr or
+  checker, no lost earlier categorical compiler, complete ordinary recursive
+  occurrence coverage, qualified initial displayed coverage, and an exact
+  coherent displayed-evaluation/variance/higher/chain authority boundary.
+  It proposes only a separately approved DISPLAYED-EVAL-0B read-only probe
+  before any semantic grammar or kernel-owner change. Its ten focused tests
+  and the complete 851-test root gate pass: 805 active passes, 46 intentional
+  skips, and zero failures.
 - **2026-07-26 — USABILITY-PLAN-0 opened and direction approved.** Recorded
   the corrected priority from the user's accepted architecture review:
   preserve the backend and generic transfer work, remove only the isolated

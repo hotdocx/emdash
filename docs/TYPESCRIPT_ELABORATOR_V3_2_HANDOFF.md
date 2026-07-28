@@ -869,6 +869,22 @@ categorical bracket compiler: the old mode-aware lambdas retained LF
 lambda/Pi syntax and explicit categorical action nodes. No stale
 category-specific AST restoration is selected.
 
+DISPLAYED-LIFTING-0A is now an executable, deeply frozen owner/action
+matrix. It confirms that ordinary slot, constant, composition, fixed
+evaluation, both-open evaluation, and curry cases are implemented. On the
+displayed side, slot/projection, closed-subject/open-argument composition,
+fibre pairing, and exact section weakening are implemented or qualified.
+Open `Functor_catd`-valued subjects remain an exact authority question:
+`Functor_catd`, ordinary `Eval_func`/`fapp0_func`, and displayed pairing are
+ingredients, but no generic coherent displayed evaluator and reindexing law
+has been selected. The proposal neither declares that construction
+impossible nor assumes a new primitive. It makes a separately approved,
+read-only DISPLAYED-EVAL-0B owner-position/derived-construction probe the
+next row; semantic DISPLAYED-LIFTING-1A remains withheld. The ten focused
+proposal tests, complete 851-test root gate (805 active passes, 46
+intentional skips, zero failures), repeated 19-judgment live conformance
+gate, and bounded active-kernel check pass.
+
 All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated
 19-judgment live Lambdapi conformance oracle, the bounded active-kernel
