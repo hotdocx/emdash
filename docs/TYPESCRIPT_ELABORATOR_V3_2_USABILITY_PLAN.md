@@ -123,6 +123,8 @@ FIBRED-COMPREHENSION-0B proposal checkpoint:
 `093a99a42edc0d36c489ac461a94b00401869417`
 FIBRED-COMPREHENSION-1A implementation checkpoint:
 `999e1187bbb1ce976cf7c97d3b5e470cdf4bc097`
+FIBRED-PRODUCT-1A implementation checkpoint:
+`d654545d00d5949f8da72345d2265808b15a7461`
 
 ## Outcome And Corrected Priority
 

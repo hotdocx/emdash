@@ -55,6 +55,8 @@ FIBRED-COMPREHENSION-0B proposal checkpoint:
 `093a99a42edc0d36c489ac461a94b00401869417`
 FIBRED-COMPREHENSION-1A implementation checkpoint:
 `999e1187bbb1ce976cf7c97d3b5e470cdf4bc097`
+FIBRED-PRODUCT-1A implementation checkpoint:
+`d654545d00d5949f8da72345d2265808b15a7461`
 
 ## Purpose And Exact Outcome
 
@@ -1600,3 +1602,11 @@ conformance, and CI obligations.
   canonical export pins, `601/637` rule inventory, unchanged `1010/159`
   warnings, strict `0/45/27` audit, catalog, health, and focused/live
   conformance evidence are synchronized. FIBRED-STRUCTURE-1 is next.
+- **2026-07-27 — FIBRED-PRODUCT-1A checkpointed.** Recorded local checkpoint
+  `d654545d00d5949f8da72345d2265808b15a7461` after exact staged review,
+  source/export hash and inventory verification, focused and live
+  conformance, 723-test TypeScript validation, the complete repository gate,
+  nested health/catalog, unchanged warning inventory, and strict rule audit
+  passed. The checkpoint grants no structural map, general off-diagonal or
+  higher action, product primitive, profile promotion, remote operation, or
+  broader Git authority.
