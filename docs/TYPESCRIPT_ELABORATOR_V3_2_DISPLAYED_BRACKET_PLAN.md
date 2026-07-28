@@ -499,7 +499,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal checkpointed with 0B at `7df9993f06fc55e2f34b09094b87987ef19cecba`; approved exactly as proposed at separate delegated review checkpoint `1251e5c666d2be2ee914d0d122848a259f578da3` with human supersession | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
-| DISPLAYED-CHAIN-0A | next dependency-ready read-only executable proposal; no semantic continuation authorized | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; inventory existing authority and identify exact Sigma-arrow/total-comparison needs before semantic implementation |
+| DISPLAYED-CHAIN-0A | proposal complete; owner-position and warning probes pass; awaiting separate H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 review; no semantic continuation authorized | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -603,8 +603,10 @@ This paragraph records the historical 0A selection. DISPLAYED-EVAL-0B and
 the reviewed DISPLAYED-EVAL-1A continuation have since answered all four
 questions for the constant-domain case and implemented the exact result.
 They do not extend the conclusion to arbitrary mixed-domain application or a
-genuine dependency edge. The next dependency-ready row is therefore
-proposal-only DISPLAYED-CHAIN-0A, not another frontend/checker rewrite.
+genuine dependency edge. At that point the next dependency-ready row was
+therefore proposal-only DISPLAYED-CHAIN-0A, not another frontend/checker
+rewrite. That proposal is now frozen by the later consolidated section and
+awaits D-012; this historical gate is not reopened.
 
 ### Exact decision gate
 
@@ -1350,13 +1352,298 @@ nested displayed abstraction, general `:^nd` coherence, Sigma arrow action,
 total-category equivalence, groupoidal closure, parsing/acquisition, or a
 deployed browser profile.
 
-The next dependency-ready task is therefore read-only DISPLAYED-CHAIN-0A.
-It must compare the existing sequential-total, repeated pullback/Sigma, and
-direct displayed presentations for one genuine dependency edge and freeze a
-separate non-self-authorizing proposal before any new semantics.
+That next read-only task was DISPLAYED-CHAIN-0A. It has now compared the
+existing sequential-total, repeated pullback/Sigma, and direct displayed
+presentations for one genuine dependency edge and frozen the separate
+non-self-authorizing proposal below. The dependency-ready state is now
+review-only: preserve the proposal and do not implement its semantic
+continuation before D-012.
+
+## DISPLAYED-CHAIN-0A Consolidated Analysis And Proposal
+
+### The corrected feasibility question
+
+The usability problem is not a request for another raw expression language,
+string parser, or bidirectional checker. The existing typed TypeScript
+construction IR already records applications recursively, and the existing
+categorical compiler already walks supported subject and argument
+subexpressions. The genuine remaining question is how that same recursive
+compiler represents a telescope in which a later family depends on an earlier
+bound variable, while retaining both object and arrow occurrences.
+
+The representative edge is:
+
+```text
+k : K
+a : A[k]                 A : Catd K
+b : B[(k,a)]             B : Catd(Sigma_cat A).
+```
+
+This is different from independent siblings `b : B[k]` and `c : C[k]`.
+Independent siblings use the fibrewise product and its weakening,
+contraction, and exchange maps. The genuine edge uses a sequential Sigma
+total, and it is generally ill-typed to exchange `a` and `b`. Fibrewise
+structural logic remains available for siblings at any one prefix; it is not
+promoted across a dependency edge.
+
+### The three presentations are complementary
+
+The owner audit rejects the premise that one of the three presentations must
+replace the other two.
+
+1. **Sequential totalization is the canonical context layout.**
+
+   ```text
+   Sigma_cat B
+   ```
+
+   has objects `((k,a),b)` and structured arrows `((p,alpha),beta)`. Existing
+   `Sigma_cat`, `sigma_arrow`, dependent-hom, and total-transport authority
+   already represent this context.
+
+2. **Repeated pullback and totalization is the canonical substitution
+   recursion.** For `F : X -> K`, `E : Catd X`, and
+   `eta : Functord(E,F^*A)`, one edge is:
+
+   ```text
+   Sigma E
+     -- sigma_map_func(eta) -->
+   Sigma(F^*A)
+     -- sigma_pullback_total_func(F,A) -->
+   Sigma A.
+   ```
+
+   If `B : Catd(Sigma A)`, pull `B` back along that composite, totalize the
+   next displayed map, and repeat. The read-only probe checks the first
+   composite on objects and arbitrary structured arrows and checks an object
+   through a second dependency edge. No generic pullback of arbitrary total
+   functors and no equality/equivalence between total-category
+   presentations is needed.
+
+3. **Direct displayed functors are the canonical term presentation.**
+   A recursively compiled term should remain a direct displayed functor so
+   generic `tapp*`, `fapp*`, dependent-hom action, and later cell iteration
+   remain available. Compiling every term only as an ordinary functor on the
+   total context would lose that direct classifier and would not be a
+   satisfactory sole lowering.
+
+The selected architecture is therefore a hybrid invariant:
+
+```text
+sequential Sigma totals for context shape
+  + repeated pullback/sigma_map/pullback-total for substitutions
+  + direct displayed functors for terms
+  + one explicit bridge when a direct term must be used as a Sigma section.
+```
+
+This is one recursive compiler and one explicit Core, not another
+frontend/checker layer.
+
+### What the active kernel already proves
+
+The active authority is stronger than the earlier surface status suggested:
+
+- `sigma_map_func` computes on total objects and arbitrary structured Sigma
+  arrows through `fdapp1_int_hom_fapp0`;
+- `sigma_pullback_total_func` computes on total objects and structured
+  arrows;
+- `Pullback_catd` computes on objects and base arrows;
+- `section_pullback_func` and `section_pullback_sec` type the weakening of a
+  section along any base functor;
+- the proof-time comparison
+
+  ```text
+  Pi_cat(Sigma_cat R, Sigma_proj1_pullback_catd(R,D))
+    ~= Functord_cat(R,D)
+  ```
+
+  types the section and direct-displayed presentations; and
+- the dependent-hom tower already owns the generic displayed action. No new
+  constructor-specific identity, composition, or naturality law is needed.
+
+The direct substitution composite is therefore already computational on
+objects and arrows. The exact failure appears only when a term is moved
+between the direct displayed and Sigma-section presentations.
+
+### Why proof-time uncurrying alone is insufficient
+
+The focused active-source probe first established the negative boundary:
+
+```text
+id_funcd A
+  : Obj(Pi_cat(Sigma_cat A,
+      Sigma_proj1_pullback_catd(A,A)))
+```
+
+is accepted through the proof-time comparison, as is its weakening through a
+later `B` by `section_pullback_func`. Nevertheless, evaluation at `(k,a)` and
+at `((k,a),b)` does not compute. This is not a recursive-AST failure; it is a
+runtime component gap.
+
+A tempting global rule that reinterprets any section object as a displayed
+functor was tested at the real owner position. It fails subject reduction.
+The proof-time comparison is deliberately not a runtime coercion, and the
+rule checker cannot safely recover the direct displayed type of an arbitrary
+section term. That alternative is rejected.
+
+The smallest successful repair is an explicit stable term owner:
+
+```text
+sigma_functord_sec(FF)
+  : Obj(Pi_cat(
+      Sigma_cat R,
+      Sigma_proj1_pullback_catd(R,D)))
+
+sigma_functord_sec(FF)[(k,r)] = FF[k](r).
+```
+
+This owner does not assert a whole-category runtime equality or equivalence.
+It records the intentional direction in which the compiler converts a direct
+displayed term into a section before weakening.
+
+### Exact object-and-arrow closure
+
+The full-file owner-position candidate passes with exactly one new owner and
+six runtime rules:
+
+1. `Sigma_proj1_func` sends a structured Sigma arrow `(p,alpha)` to `p`;
+2. `Sigma_proj1_pullback_catd(R,D)` sends `(p,alpha)` to `D[p]`;
+3. `sigma_functord_sec(FF)` at `(k,r)` is the point functor at `FF[k](r)`;
+4. its section action over `(p,alpha)` is the existing
+   `fdapp1_int_hom_fapp0(FF,p,r,alpha)`;
+5. `section_pullback_sec` along a Sigma projection, viewed directly as a
+   displayed functor, has the constant fibre functor at the original section
+   component; and
+6. its base-arrow laxity cell is the original section action, retained at the
+   generic terminal-source `fdapp1_int_cell` owner.
+
+The two projection-arrow rules are not cosmetic. Without the stable
+projection-pullback arrow action, the section-action bridge fails subject
+reduction because the target-family transport cannot reduce to `D[p]`.
+The first-projection arrow rule also supplies the expected computational
+context projection rather than leaving arrow variables opaque.
+
+The two action rules return existing generic dependent-hom cells. They do not
+duplicate ordinary functoriality or naturality and remain iterable at the
+next hom level.
+
+The candidate passes:
+
+- immediate and weakened outer-variable object computation;
+- immediate and weakened outer-variable arrow computation;
+- direct total-substitution object and structured-arrow computation;
+- a second dependent substitution edge on objects;
+- reindexing;
+- arbitrary-total-functor non-collapse;
+- arbitrary-section non-collapse without the explicit bridge; and
+- strict LHS audit with zero unreviewed compounds.
+
+The active warning inventory is 1,171 diagnostics: 1,012 unjoinable critical
+pairs and 159 replaceable pattern variables. The candidate is 1,179:
+1,020 critical pairs and the same 159 replaceable variables. The exact
+`+8/+0` delta consists of measured overlaps with constant-family Sigma
+reduction and existing generic component/composition paths. Both quiet and
+warning-enabled owner-position checks pass. As required by the kernel SOP,
+these warnings diagnose the interactions; they do not veto a semantically
+selected rule family.
+
+### Exact transfer boundary
+
+The TypeScript continuation must distinguish existing active authority from
+new mathematics.
+
+Existing declarations not yet present in the composed TypeScript profile:
+
+```text
+sigma_map_func
+fdapp1_int_cell
+fdapp1_int_hom_fapp0
+```
+
+Existing runtime rules to transfer:
+
+```text
+sigma_map_func object action
+sigma_map_func structured-arrow action.
+```
+
+The already transferred dependency closure includes `sigma_arrow`,
+`sigma_pullback_total_func`, `Sigma_proj1_func`,
+`Sigma_proj1_pullback_catd`, `section_pullback_func`,
+`section_pullback_sec`, `Fibre_func`, and the direct displayed transport
+endpoint owners. These prerequisite transfers are not new mathematical
+semantics.
+
+After a separate decision, the semantic delta would be the one owner and six
+rules above. All declarations and rules remain inputs to the generic transfer
+compilers; no intrinsic Core case and no Lambdapi string parser is selected.
+
+### TypeScript consumer and scalability assessment
+
+The proposed root-only profile is `fibred-displayed-chain-1`, with a direct
+typed method tentatively named `displayedDependentContextLambda`. A
+representative input is:
+
+```text
+displayedDependentContextLambda(
+  [a : A, b : B],
+  D,
+  ([a,b]) => body
+)
+```
+
+where `A : Catd K`, `B : Catd(Sigma_cat A)`, and the callback tokens may occur
+recursively beneath any supported typed application/pair node. The callback
+is evaluated once, unsupported nodes fail closed with provenance, and the
+pipeline stays:
+
+```text
+typed TypeScript construction IR
+  -> recursive contextual occurrence compiler
+  -> sequential-Sigma/direct-displayed lowering
+  -> backend-neutral explicit Core
+  -> generic checker/evaluator.
+```
+
+This settles a scalable architecture for one genuine dependency edge and
+identifies the recursive extension invariant: wrap a direct term as a Sigma
+section, pull it back along the next projection, then expose the result again
+through the existing proof-time classifier comparison. Additional object and
+arrow edges are expected to repeat mechanically.
+
+It does not yet claim a theorem for arbitrary telescope depth, arbitrary
+mixed variance, general `:^nd` coherence, groupoidal closure, parsing,
+browser promotion, or whole-library transfer. Those claims require the
+selected closure to be implemented and qualified on a larger corpus. The
+important feasibility result is narrower and concrete: no discarded
+frontend solution or second elaborator is missing; the blocker is a bounded,
+owner-position-tested semantic bridge.
+
+The deeply frozen executable proposal is
+`src/v3_2/categorical_displayed_chain_proposal.ts`. It is
+non-self-authorizing and awaits the separate exact
+`H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012` decision.
 
 ## Change Log
 
+- **2026-07-28 — DISPLAYED-CHAIN-0A executable proposal frozen.** The
+  active-authority comparison establishes that sequential Sigma totals,
+  repeated `sigma_map_func`/`sigma_pullback_total_func` substitution, and
+  direct displayed terms are complementary rather than competing whole
+  architectures. Direct substitution already computes through two edges;
+  the exact recursive-variable gap is runtime projection-pullback section
+  uncurrying. A global arbitrary-section reinterpretation fails subject
+  reduction. The successful full-file owner-position alternative freezes
+  one `sigma_functord_sec` owner and six object/arrow rules, including the
+  previously absent Sigma first-projection and stable projection-pullback
+  arrow actions. Immediate and weakened variable objects/arrows, reindexing,
+  substitution, and non-collapse cases pass. Warning comparison is
+  1,171 -> 1,179 diagnostics (1,012 -> 1,020 critical pairs; replaceable
+  variables remain 159), with zero strict-LHS findings. The executable
+  proposal's ten focused tests, root typecheck/lint, bounded active-kernel
+  check, and aggregate 914-test root gate pass (867 active, 47 intentional
+  skips, zero failures). It adds no active kernel semantics and awaits separate
+  H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 review.
 - **2026-07-28 — DISPLAYED-EVAL-1A implemented at the reviewed semantic
   boundary.** Added exactly the active `Eval_funcd` and `Terminal_funcd`
   owners and their two point-component rules; generic `fapp`/`tapp` still
@@ -1584,27 +1871,21 @@ punctuation, whole-body recognizer, intrinsic Core owner, arbitrary
 mixed-domain coercion, or constructor-specific identity/composition/
 naturality rule.
 
-The next dependency-ready slice is proposal-only DISPLAYED-CHAIN-0A. Perform
-a read-only active-authority and executable-TypeScript comparison of
-sequential totalization, repeated pullback/Sigma, and direct displayed
-lowering for one genuine dependency edge. Inventory the exact reusable
-`Sigma_cat`, `Pullback_catd`, `sigma_map_func`,
-`sigma_pullback_total_func`, dependent-hom, section-action, and structural
-sibling authority before proposing any owner. Distinguish a dependency edge
-from independent siblings over the same base; record where weakening,
-contraction, and exchange remain valid within a fibre product. Test object
-and arrow behavior, recursive variable occurrence, reindexing, and relevant
-negative/non-collapse cases. Identify any exact Sigma-arrow or total-
-comparison gap rather than assuming one.
+Preserve the completed, deeply immutable, executable, non-self-authorizing
+DISPLAYED-CHAIN-0A proposal. It selects complementary sequential Sigma
+context layout, recursive pullback/`sigma_map_func`/pullback-total
+substitution, and direct displayed terms. Its exact candidate is one new
+`sigma_functord_sec` owner plus six owner-position-tested runtime rules,
+three existing-signature and two existing-rule transfer prerequisites, and a
+root-only recursive `fibred-displayed-chain-1` consumer. Preserve the exact
+1,171 -> 1,179 warning comparison, zero strict-LHS findings, object/arrow/
+reindexing/recursive/non-collapse corpus, and every non-effect.
 
-Freeze the result as a deeply immutable, executable, non-self-authorizing
-DISPLAYED-CHAIN-0A proposal with alternatives, dependency closure, owner/rule
-delta, warning expectations, TypeScript consumer shape, positive/negative
-corpus, and explicit non-effects. Do not implement its semantic continuation
-or add a kernel owner/rule before a separate exact
-H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision.
-Do not assume a generic total-category pullback/equivalence, raw product-
-reindex equality, or general :^nd coherence.
+Do not implement that semantic continuation or add an active kernel owner or
+rule before a separate exact
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision. Do not
+assume a generic total-category pullback/equivalence, raw product-reindex
+equality, arbitrary mixed variance, or general :^nd coherence.
 
 For a future exact bounded gate in this goal, if no immediate human response
 follows presentation of its frozen proposal, the user's standing delegation

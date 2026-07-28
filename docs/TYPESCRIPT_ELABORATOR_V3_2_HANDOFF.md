@@ -988,9 +988,54 @@ passes: 904 TypeScript tests (857 active, 47 intentional skips), all 19
 frozen conformance judgments, all 41 kernel health targets, 1,714 classified
 checks, and zero failures. The exact implementation checkpoint is
 `1a7ce3f023391aa22c34dc5626057710429bc7c3`.
-The next dependency-ready row is proposal-only DISPLAYED-CHAIN-0A: compare
-sequential-total, repeated pullback/Sigma, and direct displayed lowerings for
-one genuine dependency edge before authorizing new semantics.
+
+DISPLAYED-CHAIN-0A has now completed that proposal-only comparison for the
+genuine telescope
+
+```text
+k : K
+a : A[k]
+b : B[(k,a)].
+```
+
+The result preserves the existing typed construction IR, recursive
+contextual compiler, explicit backend-neutral Core, and generic checker.
+Sequential `Sigma_cat` totals, repeated
+`sigma_map_func`/`sigma_pullback_total_func`, and direct `Functord_cat`
+terms are complementary rather than competing frontend designs: they are,
+respectively, the canonical context layout, recursive substitution
+extension, and term representation. No prior recursive abstraction solution
+was discarded, and no RawExpr, second checker, parser, bracket punctuation,
+or whole-body recognizer is selected.
+
+A generic proof-time rule reinterpreting every section as a displayed
+functor was rejected because the full owner-position probe fails subject
+reduction. The successful bounded alternative adds one injective
+`sigma_functord_sec` bridge owner and six object/arrow runtime rules: Sigma
+projection arrow action, stable pullback arrow action, bridge object and
+arrow action, and direct weakened-section object and arrow action. It keeps
+the direct displayed term as the canonical term and uses the bridge only
+when a recursive dependency edge must be weakened through a Sigma context.
+The exact TypeScript transfer prerequisite is three existing signatures
+(`sigma_map_func`, `fdapp1_int_cell`, and `fdapp1_int_hom_fapp0`) plus the
+two existing object/structured-arrow `sigma_map_func` rules; the proposed
+one-owner/six-rule closure is the separate mathematical delta.
+
+The full-file candidate passes object, arbitrary structured-arrow, second
+dependency-edge, recursive-occurrence, reindexing, and non-collapse probes.
+Its warning comparison is 1,171 to 1,179 total warnings: +8 diagnostic
+critical pairs and +0 replaceable-variable warnings, with zero strict-LHS
+findings. Those warnings identify known constant-family Sigma folds and
+generic component/composition interactions; they do not veto the proposed
+architecture. The root-only successor would be the recursive
+`fibred-displayed-chain-1` profile with a typed
+`displayedDependentContextLambda`-style consumer. This remains a deeply
+frozen, executable, non-self-authorizing proposal: no active kernel
+semantics or TypeScript consumer is implemented before the separate exact
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision. Its ten
+focused tests, root typecheck/lint, bounded active-kernel check, and
+aggregate 914-test root gate pass (867 active, 47 intentional skips, zero
+failures).
 
 For the earlier DISPLAYED-BRACKET-1A tranche, all ten focused
 implementation/demo tests pass, as do the permanent ordinary

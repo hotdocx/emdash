@@ -4002,13 +4002,32 @@ active-authority prerequisites from that delta and adds no intrinsic Core
 owner. Varying `F x`, nested `H[e](G[d])`, and fixed `F a` compile, with the
 fixed argument derived through terminal weakening. The dependent-target
 final-runtime wiring defect is mechanically repaired. This closes neither
-arbitrary mixed-domain evaluation nor a genuine dependency chain; the
-dedicated displayed plan now selects proposal-only DISPLAYED-CHAIN-0A as its
-next row. Aggregate validation passes 904 TypeScript tests (857 active, 47
+arbitrary mixed-domain evaluation nor a genuine dependency chain; its
+proposal-only DISPLAYED-CHAIN-0A successor is now frozen and awaits D-012.
+Aggregate validation passes 904 TypeScript tests (857 active, 47
 intentional skips), 19/19 frozen conformance judgments, all 41 kernel health
 targets, and 1,714 classified checks with zero failures.
 The exact implementation checkpoint is
 1a7ce3f023391aa22c34dc5626057710429bc7c3.
+
+DISPLAYED-CHAIN-0A now gives a bounded answer to the next architectural
+question. Sequential Sigma totals are the context layout, repeated
+`sigma_map_func`/`sigma_pullback_total_func` is the substitution recursion,
+and direct displayed functors are the term representation. A global
+unwrapped section-to-displayed runtime rule fails subject reduction; a
+stable explicit `sigma_functord_sec` term owner succeeds. Its full-file
+candidate adds exactly six object/arrow rules, including the missing Sigma
+projection and projection-pullback arrow actions, and computes immediate and
+weakened outer variables at both levels. The proposal separates three
+existing-signature/two existing-rule transfer prerequisites from that new
+semantic delta, records a +8 critical-pair/+0 replaceable-variable warning
+delta, and selects a recursive `fibred-displayed-chain-1` consumer without a
+new AST, checker, parser, intrinsic Core owner, or total-category
+equivalence. Do not implement it before the separate exact
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision. The
+proposal's ten focused tests, root typecheck/lint, bounded active-kernel
+check, and aggregate 914-test root gate pass (867 active, 47 intentional
+skips, zero failures).
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

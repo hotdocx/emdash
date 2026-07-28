@@ -2734,10 +2734,28 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   repairs the separately audited dependent-target runtime wiring. This
   confirms semantic variable occurrence beneath supported displayed
   subexpressions without adding RawExpr, another checker, a parser, or a
-  whole-body recognizer. Arbitrary mixed-domain application, genuine
-  dependency chains, and general `:^nd` remain separate; proposal-only
-  DISPLAYED-CHAIN-0A is next. Aggregate validation passes 904 TypeScript
+  whole-body recognizer. Arbitrary mixed-domain application and general
+  `:^nd` remain separate; its genuine-chain successor is now frozen as
+  DISPLAYED-CHAIN-0A and awaits D-012. Aggregate validation passes 904 TypeScript
   tests (857 active, 47 intentional skips), 19/19 frozen conformance
   judgments, all 41 kernel health targets, and 1,714 classified checks with
   zero failures. Exact implementation checkpoint:
   `1a7ce3f023391aa22c34dc5626057710429bc7c3`.
+- **2026-07-28 — Genuine displayed dependency edge proposed.** The
+  DISPLAYED-CHAIN-0A full-file audit selects sequential Sigma totals for
+  context layout, repeated `sigma_map_func`/pullback-totalization for
+  substitutions, and direct displayed functors for terms. These
+  presentations are complementary and require no generic total pullback or
+  total-category equivalence. The proof-time Sigma/Pi comparison alone does
+  not compute variable components, and an arbitrary runtime
+  reinterpretation fails subject reduction. The successful candidate uses
+  one explicit `sigma_functord_sec` term owner plus six object/arrow rules,
+  including the missing Sigma projection and projection-pullback arrow
+  actions. Immediate and recursively weakened variable objects/arrows,
+  reindexing, two-edge substitution evidence, and negatives pass. The
+  proposal separates three existing-signature/two existing-rule TypeScript
+  prerequisites from the one-owner/six-rule semantic delta and records the
+  1,171 -> 1,179 diagnostic warning comparison. It adds no active semantics
+  before H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012. Its ten
+  focused proposal tests, root typecheck/lint, bounded kernel check, and
+  aggregate 914-test root gate pass (867 active, 47 intentional skips).

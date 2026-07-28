@@ -549,7 +549,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | recursive architecture preserved; constant-domain DISPLAYED-EVAL-1A implemented; proposal-only genuine-chain comparison next | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` adds the root-only recursive independent-sibling compiler and rejects another RawExpr/checker layer. DISPLAYED-EVAL-1A adds exactly two reusable owners/two component rules, repairs final-runtime wiring, and recursively compiles varying, nested, and fixed constant-domain applications through the existing typed IR with zero intrinsic Core owners. Every prospective primitive still receives an existing-construction/Foundation audit; next is read-only DISPLAYED-CHAIN-0A, and no approval adds generic total pullback, arbitrary mixed-domain evaluation, general `fd`/`nd`, parsing/bulk transfer, or a deployed/browser profile |
+| USABILITY-FIBRED-CONTINUATION | recursive architecture preserved; constant-domain DISPLAYED-EVAL-1A implemented; DISPLAYED-CHAIN-0A proposal frozen and awaiting D-012 | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` adds the recursive independent-sibling/evaluation compiler and rejects another RawExpr/checker layer. DISPLAYED-CHAIN-0A now selects complementary sequential-Sigma contexts, recursive pullback/totalization substitutions, and direct displayed terms. A generic unwrapped section reinterpretation fails subject reduction; the full-file successful alternative freezes one necessary `sigma_functord_sec` owner and six object/arrow rules, plus three existing-signature/two existing-rule transfer prerequisites. No semantic continuation precedes D-012, and no approval adds generic total pullback, arbitrary mixed variance, general `nd`, parsing/bulk transfer, or a deployed/browser profile |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2088,8 +2088,72 @@ This is further cumulative progress rather than a backtrack. The remaining
 general-usability boundary is one genuine dependency edge, arbitrary
 mixed-domain/polarity-directed application, nested displayed abstraction,
 and general higher `:^nd` coherence. The active displayed plan therefore
-selects only a read-only, non-self-authorizing DISPLAYED-CHAIN-0A proposal
-next.
+selected a read-only, non-self-authorizing DISPLAYED-CHAIN-0A proposal as
+the next bounded row. That proposal is now frozen as described immediately
+below and awaits D-012; no semantic continuation has been smuggled into the
+proposal tranche.
+
+### 2026-07-28 genuine dependent-chain architecture proposal
+
+DISPLAYED-CHAIN-0A confirms that the current progress was not work on a
+superficial bracket syntax and did not discard a former recursive solution.
+The existing typed TypeScript IR and recursive compiler remain the frontend
+architecture. The new audit isolates the mathematical/runtime boundary for:
+
+```text
+k : K; a : A[k]; b : B[(k,a)].
+```
+
+Sequential `Sigma_cat` totals are the canonical context representation;
+repeated `sigma_map_func` followed by
+`sigma_pullback_total_func` is the canonical extension of substitutions; and
+direct `Functord_cat` terms retain the usable `fapp*`/`tapp*` and
+dependent-hom actions. These presentations are complementary. No
+total-category equality/equivalence or generic total pullback is required.
+
+The active proof-time Sigma/Pi comparison types a direct displayed term as a
+section over the corresponding total category, but it does not supply
+runtime component computation. A candidate global rewrite which silently
+reinterprets any section as a displayed functor fails subject reduction. The
+successful full-file alternative uses one explicit stable
+`sigma_functord_sec` term owner and six rules:
+
+- structured-arrow action of `Sigma_proj1_func`;
+- structured-arrow action of `Sigma_proj1_pullback_catd`;
+- object and arrow components of `sigma_functord_sec`; and
+- direct object and arrow components of a `section_pullback_sec` along a
+  Sigma projection.
+
+This closure computes the newest variable and an outer variable through a
+later dependent binder, at both object and arrow level. It retains action at
+the generic `fdapp1_int_cell`/`fdapp1_int_hom_fapp0` owners instead of adding
+constructor-specific functoriality. Direct substitution computes on objects
+and arbitrary structured arrows, a second dependency edge computes on
+objects, and reindexing and negative non-collapse cases pass.
+
+The strict LHS audit is clean. Warning comparison is 1,171 to 1,179 total
+diagnostics: critical pairs increase from 1,012 to 1,020 and replaceable
+variables remain 159. The warnings are recorded interactions with
+constant-family Sigma reduction and generic component composition, not a
+selection veto.
+
+The exact TypeScript transfer prerequisites are three existing signatures
+(`sigma_map_func`, `fdapp1_int_cell`, and
+`fdapp1_int_hom_fapp0`) plus the two existing `sigma_map_func` object/arrow
+rules. The one-owner/six-rule set is the proposed new semantic delta. All
+remain generic transfer inputs; no intrinsic Core owner, parser, or new
+checker is selected.
+
+The proposed `fibred-displayed-chain-1` consumer extends the same recursive
+compiler with a typed `displayedDependentContextLambda`-style entry point.
+Tokens may occur beneath supported typed subexpressions; no explicit internal
+bracket is required. The architecture is now settled and mechanically
+plausible for one genuine dependency edge and exposes a recursive extension
+invariant. Arbitrary-depth qualification, mixed variance, general `:^nd`,
+groupoidal closure, and deployment remain later evidence obligations.
+
+The executable proposal is non-self-authorizing and awaits the separate
+`H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012` decision.
 
 ## Acceptance Criteria
 
@@ -2262,10 +2326,12 @@ generic transfer with explicit prerequisites and zero intrinsic owners, and
 two recursive existing-IR application judgments. Human response supersedes
 the review and its authorization cannot be broadened. If final validation/
 checkpoint recording is incomplete, finish that synchronization first.
-Then follow the displayed plan's proposal-only DISPLAYED-CHAIN-0A
-instructions; do not implement a semantic chain continuation before its
-separate exact decision. Keep arbitrary mixed-domain evaluation, general
-:^nd, parsing/bulk transfer, and browser promotion separate.
+Preserve the displayed plan's completed proposal-only DISPLAYED-CHAIN-0A
+artifact, one-owner/six-rule candidate, exact transfer prerequisites,
+warning comparison, recursive corpus, and non-effects. Do not implement a
+semantic chain continuation before its separate exact D-012 decision. Keep
+arbitrary mixed-domain evaluation, general :^nd, parsing/bulk transfer, and
+browser promotion separate.
 
 Preserve the exact deployed emdash-v3.2-mvp-1 profile and exact reviewed
 root-only emdash-v3.2-dttlf-directed-1 continuation. Retain the outer
@@ -2437,6 +2503,18 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-28 — DISPLAYED-CHAIN-0A proposal completed.** Integrated the
+  corrected end-user meaning of recursive variable occurrence with one
+  genuine telescope edge. The owner audit selects complementary sequential
+  contexts, repeated substitution totalization, and direct displayed terms;
+  rejects an unsound global runtime reinterpretation; and freezes the
+  successful one-owner/six-rule object-and-arrow bridge. The exact existing
+  transfer prerequisites, +8 diagnostic critical pairs, clean LHS audit,
+  recursive consumer shape, feasibility qualification, and non-effects are
+  executable. Ten focused tests, root typecheck/lint, the bounded
+  active-kernel check, and the aggregate 914-test root gate pass (867 active,
+  47 intentional skips, zero failures). No semantic continuation precedes
+  D-012.
 - **2026-07-28 — DISPLAYED-EVAL-1A implemented without a frontend
   restart.** Exactly `Eval_funcd`, `Terminal_funcd`, and their two
   point-component rules close the stable constant-domain evaluator. The
@@ -2446,7 +2524,7 @@ CI obligations.
   `F a`; the audited dependent-target final-runtime repair is installed.
   Explicit TypeScript constructors remain acceptable and no RawExpr, second
   checker, parser, bracket punctuation, or whole-body recognizer was added.
-  Proposal-only DISPLAYED-CHAIN-0A is the next dependency-ready row.
+  Its successor DISPLAYED-CHAIN-0A is now frozen and awaits D-012.
 - **2026-07-28 — D-011 delegated review recorded.** With no immediate human
   response after the exact OWNER-0C gate, the user's standing delegation was
   exercised through a separate immutable review. It preserves the proposal
