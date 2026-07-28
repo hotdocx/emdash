@@ -952,6 +952,8 @@ lint pass, as do the full 892-test root gate (846 active passes, 46
 intentional skips, zero failures) and all 19 live conformance judgments.
 Broader mixed-domain, dependent-chain, `:^nd`, parser, browser, and Git
 authority remains closed.
+The exact delegated-review checkpoint is
+`1251e5c666d2be2ee914d0d122848a259f578da3`.
 
 All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated

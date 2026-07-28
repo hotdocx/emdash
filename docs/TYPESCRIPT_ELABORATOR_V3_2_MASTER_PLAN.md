@@ -3984,6 +3984,8 @@ checkpointed; do not infer arbitrary mixed-domain, chain, `:^nd`, parser,
 browser, or broader Git authority. Its ten focused tests, full 892-test root
 gate (846 active passes, 46 intentional skips, zero failures), and all 19
 live conformance judgments pass.
+The exact delegated-review checkpoint is
+1251e5c666d2be2ee914d0d122848a259f578da3.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

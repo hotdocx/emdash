@@ -2055,6 +2055,8 @@ parsing/bulk work, or deployment. Ten focused review tests, typecheck, and
 lint pass; the full 892-test root gate (846 active passes, 46 intentional
 skips, zero failures) and all 19 live conformance judgments also pass. The
 review checkpoint is recorded by the active displayed plan.
+Its exact checkpoint is
+`1251e5c666d2be2ee914d0d122848a259f578da3`.
 
 ## Acceptance Criteria
 
@@ -2225,6 +2227,7 @@ proposal boundary. Keep arbitrary mixed-domain evaluation, dependent chains,
 general :^nd, parsing/bulk transfer, and browser promotion separate.
 Preserve the separate delegated D-011 approval review once checkpointed;
 human response supersedes it and its authorization cannot be broadened.
+Its exact checkpoint is 1251e5c666d2be2ee914d0d122848a259f578da3.
 
 Preserve the exact deployed emdash-v3.2-mvp-1 profile and exact reviewed
 root-only emdash-v3.2-dttlf-directed-1 continuation. Retain the outer
