@@ -1331,7 +1331,7 @@ usability profile.
 | FIBRED-WEAKEN-REINDEX-1 | complete; validated; checkpointed `246481130ebf29a09d04b9b4337dbdb716484d43` | FIBRED-QUALIFICATION-REMAINDER-0, FIBRED-TRANSFD-1 | Transferred `Pullback_catd_func`, `Obj_func`, `section_pullback_func`, and `section_pullback_sec`; executable subject checking exposed and transferred two exact existing prerequisite reductions before the four frozen consumer clauses. Added root-only `indexOf`, exact closed-section `:^fd` weakening, frontend semantic-origin point lowering, displayed-functor hom-action reindexing, eta stability, point computation, fail-closed negatives, and a runnable demo. Category presentations remain runtime-distinct/proof-compatible; zero Lambdapi mathematical owners/rules were added; the 785-test TypeScript and complete repository gates pass |
 | FIBRED-DEPENDENT-TARGET-1 | complete; validated; checkpointed `90b79b8b367f40993f788669b3c7823886111ea2`; D-007/007A/007B approved | FIBRED-WEAKEN-REINDEX-1 | Tracked the exact ten-declaration/ten-runtime/one-proof existing-authority closure through generic engines: eight subjects check directly and only package-component/pullback-component use the category-presentation proof rule. Added exact pattern-only typed-wildcard fidelity for the active `Pi_func` inferred slot while retaining untyped/template rejection. The root-only profile constructs `G : K -> Op(Cat_cat)`, `Pullback_catd(Catd_cat_func,G)`, `Pi_pullback_funcd(G)`, and `Sigma_catd_functord_catd`; `B[k,M]` reduces through eight existing clauses to `Pi_cat(G[k],M)`, total-context eta lowers to the original section, wrong base/family cases fail, the runnable direct-TypeScript demo and unchanged live Lambdapi qualification probe pass, and no category collapse, oracle, arbitrary coherence, parser, or new Lambdapi mathematics was added. The final 795-test TypeScript, 19-judgment conformance, and complete kernel/repository component gates pass |
 | FIBRED-TOTAL-COMPARE-1 | deferred theorem/owner boundary | concrete need after grouped/sequential success | State or implement the total-category comparison only with an exact active pullback/comma/equivalence construction; never treat notation `×K` as an existing generic computational owner |
-| FIBRED-GRADUATE-1 | proposal frozen; validated; checkpointed `517e64e67a411412b0300f05f910b8eb25b5f395`; awaiting H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008; no semantic authority | complete qualification corpus | The root-only self-validating proposal freezes the demonstrated frontend envelope, cumulative 36-declaration/69-runtime/3-proof slice evidence, four-owner/fifteen-rule mathematical delta, residual owner/action/total/groupoidal/ergonomic gaps, direct-typed acquisition default, optional parser boundary, conformance evidence, and exact qualified graduation question. It proposes that the architecture is settled/mechanically scalable only within the demonstrated existing-authority envelope and explicitly withholds whole-library automation, general displayed syntax, profile promotion, and new semantics |
+| FIBRED-GRADUATE-1 | complete; proposal and delegated review frozen and validated; H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008 approved under delegated unattended authority; proposal checkpoint `517e64e67a411412b0300f05f910b8eb25b5f395`; review checkpoint pending; no semantic authority | complete qualification corpus | The root-only self-validating proposal freezes the demonstrated frontend envelope, cumulative 36-declaration/69-runtime/3-proof slice evidence, four-owner/fifteen-rule mathematical delta, residual owner/action/total/groupoidal/ergonomic gaps, direct-typed acquisition default, optional parser boundary, conformance evidence, and exact qualified graduation question. The separate immutable review records the user's unattended delegation and approves only that the architecture is settled/mechanically scalable within the demonstrated existing-authority envelope; it explicitly withholds whole-library automation, general displayed syntax, profile promotion, new semantics, and automatic successor authority. Its nine focused tests, 813-test root gate, and unchanged 19-judgment live conformance gate pass |
 
 ## FIBRED-CONTEXT-0A Completion Record
 
@@ -3071,9 +3071,10 @@ before a primitive is introduced.
 
 ### Exact decision and non-effects
 
-**H-DTTLF-USABILITY-FIBRED-GRADUATE — pending.**
+**H-DTTLF-USABILITY-FIBRED-GRADUATE — approved 2026-07-28 under the
+user's delegated unattended authority.**
 
-**D-DTTLF-USABILITY-008 — proposed.**
+**D-DTTLF-USABILITY-008 — approved as proposed under the same authority.**
 
 > Approve H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008 as
 > proposed: treat the backend-neutral, dependency-aware contextual-lowering
@@ -3098,11 +3099,14 @@ Approval records only the qualified architectural conclusion. It does not:
 - broaden the existing local-checkpoint Git authority.
 
 The next implementation after approval must still be selected as an exact
-bounded plan row. Under the plan-specific unattended delegation, the exact
-decision above may be recorded separately as delegated approval only if no
-immediate human answer follows its presentation and only if doing so leads
-through a coherent green local checkpoint. Any human answer supersedes that
-delegated record.
+bounded plan row. No immediate human answer followed the exact presented and
+checkpointed proposal before the persistent goal continued unattended.
+Accordingly, the coding agent exercised the user's plan-specific delegation
+and recorded the decision separately in
+`src/v3_2/categorical_fibred_graduation_review.ts`. The record identifies
+delegated unattended authority, snapshots the unchanged proposal, preserves
+every non-effect above, requires a further bounded successor selection, and
+states that any later human answer supersedes the delegated decision.
 
 ### Proposal validation record
 
@@ -3126,6 +3130,24 @@ No `.lp` source or browser entry point changed. Six untracked
 conformance workers remain preserved and excluded because cleanup is not
 authorized by this tranche. The exact green local proposal checkpoint is
 `517e64e67a411412b0300f05f910b8eb25b5f395`.
+
+### Delegated review validation record
+
+The separate D-DTTLF-USABILITY-008 review is green:
+
+- all nine focused review tests pass, including exact delegation authority,
+  immutable proposal snapshotting, complete evidence/gap retention,
+  browser exclusion, Git non-effects, human supersession, and fail-closed
+  decision/proposal/authorization drift;
+- `./scripts/pnpmw run check:ts` passes 813 tests: 767 active passes, 46
+  intentional skips, and zero failures; and
+- the unchanged `./scripts/pnpmw run check:conformance` again passes all 19
+  live judgments in 30.2 seconds under its global 60-second bound.
+
+The previously green 41-file active-kernel CI remains applicable because no
+`.lp`, kernel-owned report, catalog, health target, or browser entry point
+changed. The same six untracked timeout-artifact directories remain excluded
+and untouched.
 
 ## Acceptance And Validation Policy
 
@@ -3492,20 +3514,21 @@ Add no proof-modulo runtime matcher, category collapse, external oracle, new
 primitive, arbitrary pointwise coherence, or general dependent displayed
 bracket.
 
-FIBRED-GRADUATE-1 now has a frozen root-only executable proposal awaiting
-H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008. Preserve its exact
-qualified recommendation: the dependency-aware contextual-lowering and
+FIBRED-GRADUATE-1's frozen root-only executable proposal is approved exactly
+as proposed under the user's delegated unattended authority after no
+immediate human answer preceded this persistent continuation. Preserve the
+separate immutable review and its human-supersession clause. The approved
+recommendation says only that the dependency-aware contextual-lowering and
 qualification-guided generic transfer architecture is settled and
-mechanically scalable only for the demonstrated active-v3.2
-existing-authority envelope. Preserve its cumulative overlapping
-seven-slice evidence of 36 declaration, 69 runtime-rule, and three
-proof-rule slots; its separate four-owner/fifteen-runtime-rule mathematical
-delta; and its zero owner-specific checker/evaluator branches. Preserve all
-withheld claims: general displayed brackets and coherence, missing
-arrow/total/groupoidal mathematics, whole-library throughput, final
-notation, metatheory, parsing selection, and browser/deployed promotion.
-Do not implement a successor or record a wider product claim before the
-separate exact decision is approved.
+mechanically scalable for the demonstrated active-v3.2 existing-authority
+envelope. Preserve its cumulative overlapping seven-slice evidence of 36
+declaration, 69 runtime-rule, and three proof-rule slots; its separate
+four-owner/fifteen-runtime-rule mathematical delta; and its zero
+owner-specific checker/evaluator branches. Preserve all withheld claims:
+general displayed brackets and coherence, missing arrow/total/groupoidal
+mathematics, whole-library throughput, final notation, metatheory, parsing
+selection, and browser/deployed promotion. The approval selects no successor;
+freeze a separate bounded row before any further implementation.
 
 Keep canonical Lambdapi term/declaration parsing deferred and optional.
 Direct typed TypeScript construction remains the default. Do not resume the
@@ -3535,6 +3558,17 @@ warning, audit, catalog, health, example, conformance, and CI obligations.
 
 ## Change Log
 
+- **2026-07-28 — H-DTTLF-USABILITY-FIBRED-GRADUATE/
+  D-DTTLF-USABILITY-008 approved under delegated unattended authority.**
+  No immediate human answer followed the exact frozen and checkpointed
+  proposal before persistent continuation. The coding agent therefore used
+  the user's explicit plan-specific delegation and added a separate immutable
+  review with human supersession. The review approves only the qualified
+  demonstrated existing-authority architecture, snapshots every retained
+  gap and non-effect, grants no owner/profile/bulk/parser/successor authority,
+  and preserves the local-only Git boundary. Its nine focused tests, root
+  813-test gate, and unchanged 19-judgment live conformance gate pass; the
+  active kernel remains unchanged.
 - **2026-07-28 — FIBRED-GRADUATE-1 qualified architecture proposal
   frozen and validated.** A root-only, deeply frozen, self-validating
   proposal now recommends graduation only for the demonstrated

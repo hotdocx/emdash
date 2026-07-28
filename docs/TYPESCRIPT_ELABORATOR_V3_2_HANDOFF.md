@@ -781,11 +781,14 @@ has a runnable direct-TypeScript demo. Its 795-test TypeScript gate,
 19-judgment mandatory conformance gate, and complete 41-file kernel CI pass.
 It adds no `.lp` mathematics, category collapse, external oracle, arbitrary
 coherence synthesis, parser, or deployed-profile authority.
-FIBRED-GRADUATE-1 now has a frozen root-only executable proposal awaiting
-H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008. It recommends
-graduating the dependency-aware contextual-lowering and
-qualification-guided generic transfer architecture only for the demonstrated
-active-v3.2 existing-authority envelope. The seven representative closure
+FIBRED-GRADUATE-1's frozen root-only executable proposal is approved exactly
+as proposed under the user's delegated unattended authority after no
+immediate human answer preceded persistent continuation. Its separate
+immutable review retains human supersession and records no successor
+authority. The approved recommendation graduates the dependency-aware
+contextual-lowering and qualification-guided generic transfer architecture
+only for the demonstrated active-v3.2 existing-authority envelope. The seven
+representative closure
 rows cumulatively exercise 36 declaration, 69 runtime-rule, and three
 proof-rule slots through generic engines and separately record four
 mathematical owners plus fifteen mathematical runtime clauses. These are
@@ -797,8 +800,10 @@ remaining inventory, final notation, metatheory, and browser/deployed
 promotion are explicitly withheld. The decision adds no semantic authority
 and selects no successor automatically. Its nine focused tests, root
 804-test gate (758 active passes, 46 intentional skips), unchanged
-19-judgment live conformance gate, and complete 41-file kernel CI pass. The
-green
+19-judgment live conformance gate, and complete 41-file kernel CI all pass. The
+separate delegated review's nine focused tests, root 813-test gate (767
+active passes, 46 intentional skips), and repeated 19-judgment conformance
+gate also pass. The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
 FIBRED-BINDER-1 implementation checkpoint is
