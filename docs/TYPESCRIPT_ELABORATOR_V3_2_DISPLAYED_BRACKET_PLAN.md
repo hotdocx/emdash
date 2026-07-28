@@ -31,8 +31,8 @@ slot/application/pair grammar through existing active-v3.2 displayed
 identity, composition, projection, pairing, weakening, and reindexing
 authority. No `.lp` owner or rule was added. The final repository-wide
 TypeScript gate passes 841 tests: 795 active passes, 46 intentional skips,
-and zero failures. The exact local implementation checkpoint is recorded
-below after exact staging.
+and zero failures. The exact local implementation checkpoint is
+`d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
 
 ## Authority And Relationship To The Completed Architecture
 
@@ -408,7 +408,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | row | status | dependency | exact scope |
 | --- | --- | --- | --- |
 | DISPLAYED-BRACKET-0A | proposal frozen, validated, checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`, and approved exactly as proposed by a separate delegated review with human supersession | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused proposal tests, nine focused review tests, the 830-test reviewed root gate, and unchanged 19-judgment live conformance pass |
-| DISPLAYED-BRACKET-1A | implemented; focused, conformance, kernel, and 841-test root gates green; exact checkpoint pending | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
+| DISPLAYED-BRACKET-1A | complete; validated; checkpointed `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab` | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
 | DISPLAYED-LIFTING-0A | next executable read-only proposal; selected by the 2026-07-28 recursive-lifting reassessment | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
 | DISPLAYED-LIFTING-1A | deferred pending the exact 0A proposal/review | DISPLAYED-LIFTING-0A | Extend the displayed recursive grammar only for the exact existing-authority application cases selected by 0A, with positive/negative consumers and no whole-body recognizer growth |
 | DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
@@ -772,8 +772,9 @@ collapse between the two composition heads is assumed.
 - no `.lp`, kernel catalog, health report, browser entry point, parser, or
   transfer-acquisition artifact changed.
 
-The exact implementation checkpoint is filled in after exact staged-path
-review and `git diff --cached --check`.
+Exact staged-path review and `git diff --cached --check` passed. The local
+implementation checkpoint is
+`d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
 
 ## Change Log
 
@@ -802,8 +803,10 @@ review and `git diff --cached --check`.
   pairing, three siblings, all preserved one-slot cases, fail-closed
   diagnostics, object/arrow computation, and a compact direct-TypeScript demo
   pass. The dependent-target profile remains deliberately separate pending
-  DISPLAYED-CHAIN-0A analysis. No Lambdapi owner/rule or deployed surface was
-  added.
+  DISPLAYED-LIFTING-0A and the later DISPLAYED-CHAIN-0A analysis. No
+  Lambdapi owner/rule or deployed surface was added. The exact green local
+  implementation checkpoint is
+  `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
 - **2026-07-28 — Recursive contextual-lifting architecture corrected.**
   Confirmed by execution that the existing ordinary compiler recursively
   accepts `lambda x :^f A. F x y0` without inner bracket syntax and lowers it

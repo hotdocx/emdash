@@ -2288,7 +2288,10 @@ CI obligations.
   the fact that no earlier categorical bracket solution was discarded, and
   the revised feasibility assessment. The active displayed-bracket successor
   now makes proposal-only DISPLAYED-LIFTING-0A the next owner/action matrix
-  before semantic displayed-grammar or genuine-chain expansion.
+  before semantic displayed-grammar or genuine-chain expansion. The
+  synchronized DISPLAYED-BRACKET-1A implementation and permanent ordinary
+  regression are checkpointed at
+  `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
 - **2026-07-26 — USABILITY-PLAN-0 opened and direction approved.** Recorded
   the corrected priority from the user's accepted architecture review:
   preserve the backend and generic transfer work, remove only the isolated

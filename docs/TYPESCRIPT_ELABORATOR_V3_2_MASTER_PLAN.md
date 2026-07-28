@@ -3899,8 +3899,8 @@ checkpoint is `679a380`. The post-review synchronized root gate passes 841
 tests (795 active passes, 46
 intentional skips), together with the permanent ordinary fixed-evaluation
 regression, bounded active-kernel check, and all 19 live conformance
-judgments; only the exact implementation checkpoint hash remains pending
-exact staging.
+judgments. The exact green local implementation checkpoint is
+`d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

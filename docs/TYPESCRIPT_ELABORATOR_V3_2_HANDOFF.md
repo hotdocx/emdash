@@ -873,8 +873,8 @@ All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated
 19-judgment live Lambdapi conformance oracle, the bounded active-kernel
 check, and the 841-test root gate (795 active passes, 46 intentional skips).
-Only the exact implementation checkpoint hash remains to be synchronized in
-the living displayed-bracket plan after exact staging.
+The exact green local implementation checkpoint is
+`d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab`.
 
 The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
