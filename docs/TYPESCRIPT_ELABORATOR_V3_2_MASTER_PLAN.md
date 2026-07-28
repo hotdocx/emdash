@@ -3864,13 +3864,43 @@ docs/TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md. Its executable
 DISPLAYED-BRACKET-0A proposal selects a generic first-order displayed
 contextual compiler and freezes root-only DISPLAYED-BRACKET-1A for finite
 independent sibling blocks. H-DTTLF-USABILITY-DISPLAYED-BRACKET-01/
-D-DTTLF-USABILITY-009 is pending. It authorizes no new Lambdapi mathematics
-by itself and keeps genuine dependent-chain lowering, general :^nd
-coherence, Sigma arrow action, total-category comparison, parsing/bulk
-transfer, and browser promotion separate. Its eight focused tests, root
-821-test gate (775 active passes, 46 intentional skips), and unchanged
-19-judgment conformance gate pass. The exact green proposal checkpoint is
-`e4b743f70c0454d63a93587dc045a3e2d0273ee5`.
+D-DTTLF-USABILITY-009 is approved exactly as proposed by a separate
+immutable delegated review with human supersession. The approved
+DISPLAYED-BRACKET-1A implementation adds the root-only
+`fibred-displayed-bracket-1` profile, one typed-pair construction-IR node,
+and a compositional compiler for finite independent displayed sibling
+blocks. Projection, exchange, contraction, mapped pairing, three-sibling
+scaling, preserved one-slot cases, object/arrow computation, fail-closed
+diagnostics, and a compact direct-TypeScript demo are focused-green. It uses
+the last green weakening/reindexing transfer and deliberately does not join
+the dependent-target profile: that join reproduced a pre-existing
+two-closed-functor displayed-composition `TYPE_MISMATCH` and is an explicit
+DISPLAYED-LIFTING-0A analysis item. The post-implementation review rejects
+another parallel RawExpr/checker layer and confirms that internal bracket
+abstraction already recurses through ordinary subexpressions: the exact
+`lambda x :^f A. F x y0` witness lowers through identity, composition,
+constant abstraction, pairing, and `Eval_func` without local bracket syntax.
+The displayed compiler remains restricted to slots, closed displayed
+application, and fibre pairs. DISPLAYED-LIFTING-0A is now the next
+proposal-only typed owner/action matrix; genuine dependency chains remain a
+subsequent first-class row. The review also records accurately that
+MIGRATE-2 removed the old generic HOAS LF frontend from this branch but did
+not discard an earlier recursive categorical bracket implementation. No new
+Lambdapi owner/rule, browser surface, parser, or bulk-transfer authority is
+added. Genuine dependency chains, general :^nd coherence, Sigma arrow
+action, and total-category comparison remain separate. The proposal's eight
+focused tests and
+821-test gate pass; the separate review's nine focused tests and 830-test
+gate pass; all ten implementation/demo tests and the repeated 19-judgment
+live conformance gate pass. The exact proposal checkpoint is
+`e4b743f70c0454d63a93587dc045a3e2d0273ee5`; the synchronized proposal
+ledger is `6ee1b55b395eec4a9a9909afff0f1b0f693312f4`; the delegated-review
+checkpoint is `679a380`. The post-review synchronized root gate passes 841
+tests (795 active passes, 46
+intentional skips), together with the permanent ordinary fixed-evaluation
+regression, bounded active-kernel check, and all 19 live conformance
+judgments; only the exact implementation checkpoint hash remains pending
+exact staging.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

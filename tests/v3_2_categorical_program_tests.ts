@@ -112,6 +112,64 @@ describe('TypeScript v3.2 USABILITY-1D categorical program', () => {
         );
     });
 
+    it('recursively abstracts fixed inner evaluation without sub-brackets', () => {
+        const emdash = program();
+        const A = emdash.category('A', { line: 1 });
+        const B = emdash.category('B', { line: 2 });
+        const C = emdash.category('C', { line: 3 });
+        const functorsBC = emdash.functorCategory(B, C, { line: 4 });
+        const F = emdash.functor('F', A, functorsBC, { line: 5 });
+        const y0 = emdash.object('y0', B, { line: 6 });
+        const evaluatedAtY0 = emdash.lambda(
+            'x',
+            A,
+            C,
+            x => emdash.apply(
+                emdash.apply(F, x, {
+                    source: { line: 8, column: 5 }
+                }),
+                y0,
+                { source: { line: 8, column: 10 } }
+            ),
+            { source: { line: 7 } }
+        );
+        const result = emdash.compile(evaluatedAtY0);
+
+        assert.equal(
+            result.explicitCore.includes(
+                '"emdash.categorical.evaluation-functor"'
+            ),
+            true
+        );
+        assert.equal(
+            result.explicitCore.includes(
+                '"emdash.categorical.product-pair"'
+            ),
+            true
+        );
+        assert.equal(
+            result.explicitCore.includes(
+                '"emdash.categorical.constant-functor-abstraction"'
+            ),
+            true
+        );
+        assert.deepEqual(
+            result.structuralPrerequisites,
+            [
+                'identity-functor',
+                'functor-composition',
+                'constant-functor-abstraction',
+                'product-category',
+                'product-pair',
+                'evaluation-functor'
+            ]
+        );
+        assert.equal(
+            result.explicitInferredType,
+            result.explicitExpectedType
+        );
+    });
+
     it('is alpha- and provenance-invariant after immediate lowering', () => {
         const build = (
             file: string,

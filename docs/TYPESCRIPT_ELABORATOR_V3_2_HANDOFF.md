@@ -825,6 +825,57 @@ passes, 46 intentional skips), and unchanged 19-judgment conformance gate
 pass. The exact green proposal checkpoint is
 `e4b743f70c0454d63a93587dc045a3e2d0273ee5`; the proposal-ledger checkpoint
 is `6ee1b55b395eec4a9a9909afff0f1b0f693312f4`.
+
+DISPLAYED-BRACKET-1A is now implemented in the root-only
+`fibred-displayed-bracket-1` profile. The public direct-TypeScript API
+`displayedContextLambda(bindings, target, callback)` reifies its callback
+once into immutable slot/application/typed-pair IR, derives sibling
+independence through the existing locally nameless dependency planner, forms
+the left-associated transparent displayed-product source, and compiles
+projection wiring, closed displayed-functor application, and pairing through
+existing active owners. Projection, exchange, contraction, mapped pairing,
+three-sibling scaling, all preserved one-slot cases, object/arrow
+computation, fail-closed diagnostics, and a compact runnable demo are
+focused-green. The API returns complete explicit Core even though the CLI
+prints readable constructor/type summaries.
+
+The bracket profile intentionally uses the last green
+FIBRED-WEAKEN-REINDEX-1 transfer foundation and does not expose
+FIBRED-DEPENDENT-TARGET-1. An attempted profile join reproduced a pre-existing
+`TYPE_MISMATCH` for the old two-closed-functor direct displayed composition;
+the same consumer remains green in the binder and weakening/reindexing
+profiles. Reciprocal tests freeze that separation. DISPLAYED-CHAIN-0A is the
+genuine-dependency successor, but the post-implementation usability review
+inserts DISPLAYED-LIFTING-0A first. That executable read-only proposal must
+isolate this presentation/transfer interaction and freeze the typed
+constructor/judgment × occurrence × binder mode × variance owner matrix
+before any displayed grammar extension or profile join.
+
+The correction explicitly rejects another parallel `RawExpr` language or
+bidirectional checker as the immediate solution. The existing typed
+construction IR, recursive contextual compiler, explicit Core, and generic
+checker are the boundary. Internal bracket abstraction does not require
+brackets around subexpressions: the ordinary compiler already accepts
+`lambda x :^f A. F x y0` and lowers it to evaluation after pairing
+`F o id_A` with `Const(y0)`. A permanent regression freezes that result.
+DISPLAYED-BRACKET-1A remains recursive only over slots, closed displayed
+application, and fibre pairs; open displayed subjects, nested abstraction,
+genuine dependency, higher action, and contravariance remain ungraduated.
+
+The same review records that MIGRATE-2 physically removed the old generic
+HOAS LF frontend from this branch, while preserving it on `main`/in history
+for selective reuse comparison. It did not discard a prior recursive
+categorical bracket compiler: the old mode-aware lambdas retained LF
+lambda/Pi syntax and explicit categorical action nodes. No stale
+category-specific AST restoration is selected.
+
+All ten focused implementation/demo tests pass, as do the permanent ordinary
+fixed-inner-evaluation regression, root typecheck/lint, the repeated
+19-judgment live Lambdapi conformance oracle, the bounded active-kernel
+check, and the 841-test root gate (795 active passes, 46 intentional skips).
+Only the exact implementation checkpoint hash remains to be synchronized in
+the living displayed-bracket plan after exact staging.
+
 The green
 FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized

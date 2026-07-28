@@ -546,7 +546,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | delegated to active sub-plan; D-DTTLF-USABILITY-004/005/006 approved; comprehension/product/structure and bounded direct-functor binder closures complete | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A | Continue dependency-aware general telescopes plus fibrewise-cartesian sibling structure and provisional displayed binders in `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`. FIBRED-CONTEXT-0A/0B are complete. FIBRED-COMPREHENSION-1A adds the audited missing `Sigma(F^*D) -> Sigma(D)` owner with exactly two projections, generic transfer, direct object/arrow consumer, further-family reindexing, and runnable demo. FIBRED-PRODUCT-1A retains the transparent existing semantic family, adds exactly two narrow existing-owner rules and no product owner, transfers a 23-prerequisite/two-new-rule closure through generic TypeScript mechanisms, and computes the first grouped-sibling fibre/transport demo. FIBRED-STRUCTURE-1A adds exactly the approved three fixed-base owners/eleven rules, necessary beta guards, generic six-declaration/15-rule transfer, derived swap/diagonal, next-cell evidence, and frontend-only canonical reindexing. FIBRED-BINDER-1 reuses existing authority for a root-only callback-once `:^fd`-equivalent identity/eta/finite-composition API, hidden two-slot evidence, proof-only direct/nested classifier compatibility, and runnable demo with zero new Lambdapi mathematics. FIBRED-TRANSFD-1 is next. Warning deltas remain diagnostic, every prospective primitive first receives an existing-construction/Foundation audit, and no approval adds generic total pullback, activates the deferred Sigma-introduction arrow action (`+10/+1`), claims raw whole-pullback conversion, completes general `fd`/`nd` binders, or promotes a deployed/browser profile |
+| USABILITY-FIBRED-CONTINUATION | predecessor qualified and active successor selected | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` adds the root-only recursive independent-sibling `displayedContextLambda` compiler and now governs the recursive-lifting continuation. Its post-implementation correction rejects another RawExpr/checker layer, freezes `lambda x :^f A. F x y0` as an already-working ordinary recursive case, and makes DISPLAYED-LIFTING-0A the next proposal-only typed owner/action matrix before any displayed grammar extension or genuine-chain implementation. Every prospective primitive still receives an existing-construction/Foundation audit; no approval adds generic total pullback, claims raw whole-pullback conversion, completes general `fd`/`nd` binders, resumes parsing/bulk transfer, or promotes a deployed/browser profile |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -1879,6 +1879,81 @@ accepted because it is natural for this consumer and reuses generic
 infrastructure without an owner-specific shortcut—not because its internal
 code shape is prescribed for future slices.
 
+### 2026-07-28 recursive contextual-lifting correction
+
+The later displayed-bracket implementation and end-user review sharpen the
+meaning of usability. The immediate architecture is not another
+`RawExpr`/bidirectional elaborator layer. The current TypeScript construction
+surface already reifies typed applications and abstractions once into
+locally nameless contextual IR, lowers to backend-neutral explicit Core, and
+checks that Core through the generic bidirectional checker. Optional textual
+syntax may later elaborate into that boundary without owning a second
+categorical abstraction algorithm.
+
+“Bracket” denotes an internal syntax-directed abstraction `[x]t`, not
+required end-user punctuation around subexpressions. The existing ordinary
+compiler recursively handles variables, constants, typed applications,
+pairing/evaluation, and nested abstraction. In particular, for:
+
+```text
+F  : Functor A (Functor_cat B C)
+y0 : Obj B
+```
+
+the direct TypeScript body:
+
+```ts
+emdash.lambda(
+  "x",
+  A,
+  C,
+  x => emdash.apply(emdash.apply(F, x), y0),
+)
+```
+
+already compiles to:
+
+```text
+Eval_func(B,C) o
+  Product_pair(F o id_func(A), Const_func(y0)).
+```
+
+The bound `x` occurs freely inside the subject of a further application; no
+inner bracket node is required. A permanent regression records the exact
+identity/composition/constant/product/pair/evaluation closure. Arbitrary
+semantic factoring modulo unrestricted equations is not attempted:
+contextual lifting is a deterministic partial recursion over supported typed
+constructors, and an unknown action fails closed at the precise node.
+
+The active `displayedContextLambda` is compositional but presently recurses
+only through displayed slots, typed fibre pairs, and a closed displayed
+functor applied to a recursively compiled argument. It does not yet support
+an open displayed-functor subject with a fixed argument, both subject and
+argument varying, nested displayed abstraction, genuine dependent chains,
+contravariant positions, or general `tapp*`/`:^nd` coherence. The next
+architecture work therefore extends the existing typed contextual compiler;
+it does not grow the older rigid whole-body recognizer.
+
+The historical status is also explicit. MIGRATE-2 physically removed the old
+HOAS generic LF frontend, inference, implicits, holes/unification, rewriting,
+and proof-state files from the goal branch, though they remain available on
+`main` and in history for selective reuse comparison. That cut did not delete
+a working recursive categorical bracket compiler: old `LamMode` retained
+binder metadata and reconstructed an outer LF lambda/Pi while categorical
+actions were explicit nodes. The current ordinary structural abstraction is
+new functionality. Restoring the stale category-specific AST is not
+selected.
+
+Feasibility is consequently high for the ordinary recursive grammar and
+positive for independent displayed siblings. General displayed/dependent,
+higher, and contravariant coverage remains ungraduated because it may expose
+missing authority or coherence, not because another parser/checker is
+needed. The active successor plan now schedules DISPLAYED-LIFTING-0A to
+freeze the typed node/judgment × occurrence × mode × variance owner matrix,
+including closed/open application cases and the current profile-composition
+mismatch, before a semantic grammar extension. Genuine dependency chains
+remain a separate first-class row.
+
 ## Acceptance Criteria
 
 USABILITY-GRADUATE-1 may propose that the frontend architecture is settled
@@ -2204,6 +2279,16 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-28 — Recursive contextual-lifting correction integrated.**
+  Confirmed that the existing ordinary compiler already accepts
+  `lambda x :^f A. F x y0` recursively and requires no inner bracket syntax;
+  added the exact permanent regression and rejected another parallel
+  RawExpr/checker as the immediate architecture. Recorded the current
+  displayed grammar boundary, the recoverable MIGRATE-2 generic-LF deletion,
+  the fact that no earlier categorical bracket solution was discarded, and
+  the revised feasibility assessment. The active displayed-bracket successor
+  now makes proposal-only DISPLAYED-LIFTING-0A the next owner/action matrix
+  before semantic displayed-grammar or genuine-chain expansion.
 - **2026-07-26 — USABILITY-PLAN-0 opened and direction approved.** Recorded
   the corrected priority from the user's accepted architecture review:
   preserve the backend and generic transfer work, remove only the isolated

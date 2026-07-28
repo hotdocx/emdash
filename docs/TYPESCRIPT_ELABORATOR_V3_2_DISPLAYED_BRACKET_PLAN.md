@@ -24,6 +24,16 @@ immediate human response. The separate immutable review records human
 supersession and authorizes only root-only DISPLAYED-BRACKET-1A. The
 pre-review proposal remains unchanged and non-self-authorizing.
 
+DISPLAYED-BRACKET-1A is now implemented in the root TypeScript workbench.
+Its public `fibred-displayed-bracket-1` profile accepts a finite independent
+displayed sibling block, reifies its callback once, and compiles the frozen
+slot/application/pair grammar through existing active-v3.2 displayed
+identity, composition, projection, pairing, weakening, and reindexing
+authority. No `.lp` owner or rule was added. The final repository-wide
+TypeScript gate passes 841 tests: 795 active passes, 46 intentional skips,
+and zero failures. The exact local implementation checkpoint is recorded
+below after exact staging.
+
 ## Authority And Relationship To The Completed Architecture
 
 The active mathematical authority remains the Lambdapi v3.2 development
@@ -52,6 +62,169 @@ locally nameless slots, dependency analysis, usage accounting, provenance,
 and first-order IR are reused because they fit naturally. Displayed
 projection, pairing, composition, reindexing, and coherence use their own
 qualified categorical owners and rules.
+
+## Recursive Contextual-Lifting Reassessment
+
+The post-implementation usability review corrects one earlier framing. The
+next architectural step is **not** another `RawExpr` language plus another
+bidirectional elaborator/checker. The root workbench already has:
+
+- a direct typed TypeScript construction surface;
+- callback-once reification into scoped first-order contextual IR;
+- classifier-directed ordinary and displayed application judgments;
+- backend-neutral explicit emdash Core; and
+- the generic bidirectional Core checker/evaluator.
+
+A future textual parser may have a raw syntax tree, but that optional tree
+would elaborate into this existing typed boundary. It must not duplicate the
+categorical abstraction algorithm. The usability problem here is semantic:
+variables bound categorically must be abstracted recursively through
+subexpressions and lowered to the appropriate structural action.
+
+### Bracket means an internal recursive compiler
+
+The notation `[x]t` names an internal contextual-lifting operation. It does
+not require an end user to put an explicit bracket around each subexpression.
+For the already-completed ordinary compiler, the outer `lambda` invokes the
+operation once and the bound token may then occur freely beneath every
+supported typed IR constructor:
+
+```text
+[x] x                    -> id_func
+[x] c                    -> Const_func(c)
+[x] F(t[x])              -> F o [x]t              when F is closed
+[x] S[x](T[x])           -> Eval_func o
+                              Product_pair([x]S,[x]T)
+[x] (s[x],t[x])          -> pair([x]s,[x]t)
+[x] (lambda y. t[x,y])   -> curry([x,y]t)
+```
+
+This is a deterministic partial structural recursion over a typed finite
+AST. It is not a search for an arbitrary semantic factorization modulo every
+kernel equation. Every supported constructor has a declared contextual
+action; an opaque or unsupported constructor fails closed at that node with
+provenance. Arbitrary semantic factoring could be undecidable, but this
+syntax-directed compiler is decidable over its registered grammar.
+
+### Exact ordinary fixed-evaluation witness
+
+The current implementation already accepts the direct TypeScript equivalent
+of:
+
+```text
+F  : Functor A (Functor_cat B C)
+y0 : Obj B
+
+lambda x :^f A. F x y0
+```
+
+using only the outer abstraction plus recursive `apply` nodes:
+
+```ts
+emdash.lambda(
+  "x",
+  A,
+  C,
+  x => emdash.apply(emdash.apply(F, x), y0),
+)
+```
+
+It compiles to:
+
+```text
+Eval_func(B,C) o
+  Product_pair(F o id_func(A), Const_func(y0)).
+```
+
+The active kernel also has specialized fixed-evaluation presentations such
+as `fapp0_func(y0)`. Selecting one later as a canonicalization is optional;
+the general evaluation/pairing result is already authority-correct. A
+permanent regression now freezes this example, including identity,
+composition, constant abstraction, product, pairing, and evaluation
+prerequisites. It proves that inner subexpressions do not need explicit
+bracket syntax.
+
+### Exact displayed limitation
+
+DISPLAYED-BRACKET-1A is recursive, but only over its frozen initial grammar:
+
+```text
+body ::= displayed-slot
+       | closed-displayed-functor [ body ]
+       | fibrePair(body, body)
+```
+
+It recursively handles both pair branches and the argument of a closed
+displayed functor. It does **not** yet abstract:
+
+- an open displayed-functor-valued subject applied to a closed argument;
+- an open displayed subject and open displayed argument paired for
+  evaluation;
+- nested displayed abstractions/currying;
+- a later binding whose family genuinely depends on an earlier fibre
+  binding;
+- general `tapp*`/higher naturality actions;
+- contravariant application positions; or
+- general `:^fd`/`:^nd` coherence.
+
+The old `displayedFunctorLambda` remains useful for its exact
+identity/eta/closed-chain/section-weakening envelope, but adding more
+whole-body recognizer cases is not the continuation architecture.
+`displayedContextLambda` is the compositional replacement and should grow by
+typed recursive lifting cases.
+
+### Migration correction
+
+The historical `MIGRATE-2` checkpoint physically removed the old root
+HOAS-style `Term`/`Lam`/`App`/`Pi`, inference, implicit insertion, holes,
+higher-order unification, rewriting, and proof-state source from this goal
+branch. Those files remain recoverable from `main` and Git history. The cut
+therefore did remove an integrated generic LF user-term frontend, and future
+work should compare the old generic mechanisms with the current v3.2 modules
+and selectively recover any still-missing reusable capability.
+
+It did **not** remove a completed recursive categorical bracket compiler.
+The old `LamMode` checked binder-mode metadata and reconstructed an outer LF
+lambda/Pi while categorical action used explicit `FMap`/`FDApp`/`TDApp`
+nodes. It did not lower a free functorial occurrence recursively to
+identity/constant/pairing/evaluation/curry structure. The current ordinary
+compiler is new functionality. Restoring the stale category-specific AST is
+not selected.
+
+### Revised feasibility and next architecture row
+
+The ordinary first-order contextual-lifting architecture is substantially
+settled and the independent displayed sibling compiler is a positive
+compositional witness. No from-scratch redesign or second surface checker is
+indicated. The remaining risk is coverage of authority-backed lifting laws:
+some displayed, dependent, higher, or contravariant cases may expose a
+missing kernel owner or coherence boundary.
+
+The next bounded row is therefore `DISPLAYED-LIFTING-0A`, an executable
+read-only proposal and owner audit. It must freeze a matrix indexed by:
+
+- typed IR constructor and application judgment;
+- binder variation/dependency mode (`:^f`, `:^n`, `:^fd`, `:^nd`);
+- occurrence profile (closed/varying subject and argument);
+- polarity/variance and cell level; and
+- selected active owner or exact fail-closed gap.
+
+For application it must distinguish at least:
+
+```text
+subject closed, argument varying  -> composition
+subject varying, argument closed  -> fixed evaluation
+subject varying, argument varying -> pairing then evaluation
+contravariant position            -> opposite/precomposition action
+displayed/dependent position      -> displayed composition/evaluation/reindexing
+transformation-valued position    -> typed tapp*/higher action
+```
+
+The row also isolates the current dependent-target/direct-displayed profile
+composition mismatch. Only after that frozen comparison may a separate
+implementation row extend the displayed grammar. Genuine dependency-chain
+lowering remains a first-class subsequent comparison rather than being
+silently treated as an independent product.
 
 ## Problem Statement
 
@@ -139,13 +312,12 @@ The active displayed authority already qualified and transferred is:
 - `section_pullback_func`; and
 - `Pullback_catd_func`.
 
-The current executable `CoreCategoricalContextualIr` contains slot,
-explicit-Core, typed-application, and categorical-abstraction nodes. The
-older surface specification also names typed pair and typed composition
-nodes, but they are not presently executable node variants. The first row
-therefore adds one generic `typed-pair` node; it does not add a new Core
-owner. A dedicated typed-composition node is not required initially because
-closed displayed-functor application can compile through
+`CoreCategoricalContextualIr` now contains slot, explicit-Core,
+typed-application, typed-pair, and categorical-abstraction nodes. The
+`typed-pair` node is construction IR only: it is eliminated by
+`displayedContextLambda` into the existing displayed-product pairing owner
+and does not add a Core semantic owner. A dedicated typed-composition node is
+not required because closed displayed-functor application compiles through
 `typed-application` plus `comp_fapp0`.
 
 ## Alternatives
@@ -236,9 +408,11 @@ is compositional, authority-correct behavior rather than code deduplication.
 | row | status | dependency | exact scope |
 | --- | --- | --- | --- |
 | DISPLAYED-BRACKET-0A | proposal frozen, validated, checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`, and approved exactly as proposed by a separate delegated review with human supersession | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused proposal tests, nine focused review tests, the 830-test reviewed root gate, and unchanged 19-judgment live conformance pass |
-| DISPLAYED-BRACKET-1A | approved and dependency-ready; implementation in progress | reviewed DISPLAYED-BRACKET-0A/D-009 | Implement the root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, and runnable demo |
-| DISPLAYED-CHAIN-0A | deferred; not authorized by D-009 | DISPLAYED-BRACKET-1A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for a genuine dependency edge; identify exact Sigma-arrow/total-comparison needs |
-| DISPLAYED-ND-0A | deferred; not authorized by D-009 | DISPLAYED-BRACKET-1A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
+| DISPLAYED-BRACKET-1A | implemented; focused, conformance, kernel, and 841-test root gates green; exact checkpoint pending | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
+| DISPLAYED-LIFTING-0A | next executable read-only proposal; selected by the 2026-07-28 recursive-lifting reassessment | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
+| DISPLAYED-LIFTING-1A | deferred pending the exact 0A proposal/review | DISPLAYED-LIFTING-0A | Extend the displayed recursive grammar only for the exact existing-authority application cases selected by 0A, with positive/negative consumers and no whole-body recognizer growth |
+| DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
+| DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
 ## DISPLAYED-BRACKET-1A Frozen Contract
@@ -452,6 +626,155 @@ All nine focused review tests pass. The root reviewed gate passes 830 tests:
 artifact changed, so the unchanged 19-judgment conformance result and the
 complete 41-file kernel CI at the parent boundary remain applicable.
 
+## DISPLAYED-BRACKET-1A Implementation Record
+
+### End-user input and result
+
+The direct typed TypeScript surface now accepts, for example:
+
+```ts
+const mapped = emdash.displayedContextLambda(
+  [
+    { name: "b", family: B },
+    { name: "c", family: C },
+  ],
+  emdash.displayedProduct(D, Q),
+  ([b, c]) => emdash.fibrePair(
+    emdash.apply(FF, b),
+    emdash.apply(GG, c),
+  ),
+)
+```
+
+where `B,C,D,Q : Catd K`, `FF : Functord B D`, and
+`GG : Functord C Q`. It compiles to the direct displayed functor summarized
+as
+
+```text
+Product_pair_funcd(
+  comp_fapp0(FF, Product_projL_funcd(B,C)),
+  comp_fapp0(GG, Product_projR_funcd(B,C)))
+:
+Functord(Product_catd(B,C),Product_catd(D,Q)).
+```
+
+Here `Product_catd` is the established readable name for the transparent
+uncurried/product-pair construction, not a new primitive owner. The returned
+programmatic compilation retains the complete backend-neutral explicit Core
+term, inferred/expected classifiers, abstraction evidence, and prerequisite
+sets. The CLI demo prints a compact stable synopsis instead of flooding the
+end user with the complete serialized Core.
+
+The same API and compiler handle:
+
+- projection `λ (b,c). b`;
+- exchange `λ (b,c). (c,b)`;
+- contraction `λ b. (b,b)`;
+- closed-functor mapped pairing;
+- a three-sibling left-associated reordering; and
+- the previously supported one-slot identity, eta, finite composition, and
+  exact section weakening.
+
+The projection demo evaluates at both `x : Obj K` and `p : Hom K x y`.
+Object action reduces through the active displayed left-projection point
+rule; arrow action reduces through its capped-action rule and the established
+displayed full-action path.
+
+Run the self-contained report with:
+
+```bash
+./scripts/pnpmw run demo:categorical-displayed-bracket
+```
+
+### Compiler pipeline
+
+`displayedContextLambda`:
+
+1. validates a finite nonempty same-base binding list and target;
+2. asks the generic locally nameless dependency planner to prove that the
+   requested displayed factors are siblings over one minimal base, without
+   caller-supplied independence flags;
+3. allocates one hidden base slot and one indexed fibre slot per binding;
+4. invokes the TypeScript callback exactly once and retains no closure;
+5. normalizes slot, indexed closed-functor application, and typed-pair nodes
+   into immutable first-order contextual IR with usage and provenance;
+6. forms the left-associated transparent displayed-product family;
+7. recursively wires each factor to existing nested displayed projections;
+8. compiles application by generic category composition at `Catd_cat K`;
+9. compiles pairs through the existing displayed-product pair owner; and
+10. returns a checked closed direct displayed functor plus explicit
+    `categorical.displayed-context-bracket` evidence.
+
+Discard, permutation, and contraction are consequences of projection wiring
+and repeated branches. They are not separate primitive owners or recognizer
+cases. The old one-slot exact section weakening remains a deliberately
+qualified lowering because its closed-section input and active
+`section_pullback_func` authority are stronger than arbitrary weakening.
+
+### Fail-closed boundary
+
+Executable negatives reject:
+
+- empty and duplicate binding lists;
+- families or targets over another base;
+- a body with the wrong indexed target;
+- escaped and foreign terms;
+- pairing outside a valid active fibre context;
+- a nested pointwise/open capture presented as a coherent displayed functor;
+- access through the default and dependent-target profiles; and
+- a genuine dependency edge requested as an independent sibling product.
+
+The public API has no unchecked raw-node constructor, so an arbitrary
+pointwise family cannot be forged as coherent first-order bracket input.
+Closed displayed-functor subjects are admitted only when their usage is
+disjoint from every active contextual slot and their source, target, and base
+classifiers match literally.
+
+### Profile composition finding
+
+The new `fibred-displayed-bracket-1` profile deliberately uses the last green
+`fibred-weaken-reindex-1` transfer as its runtime foundation. It does not
+expose `fibred-dependent-target-1`. This is not a mathematical retreat or an
+accidental omission: an implementation trial that layered the bracket on the
+dependent-target transfer reproduced a pre-existing `TYPE_MISMATCH` for the
+older two-closed-functor `displayedFunctorLambda` composition, while the same
+consumer passes in `fibred-binder-1` and `fibred-weaken-reindex-1`.
+
+Reciprocal tests now freeze the separation: the bracket profile rejects
+dependent-target constructors, and the dependent-target profile rejects the
+new bracket. DISPLAYED-CHAIN-0A must isolate the transfer/presentation
+interaction before proposing a joined profile. It must not paper over the
+failure by adding a new semantic rule.
+
+The mapped-pair point test also preserves the existing distinction between
+generic composition at the category of categories and the specialized
+ordinary-category composition presentation. Expected terms are built
+through already-qualified direct displayed functors; no unreviewed runtime
+collapse between the two composition heads is assumed.
+
+### Validation to date
+
+- root typecheck and lint pass;
+- all ten focused implementation/demo tests pass;
+- the complete focused corpus takes approximately 4 minutes 43 seconds in
+  the current evaluator, with no performance SLA claimed;
+- the compact runnable demo passes and reports all five representative
+  inputs, object/arrow computation, and a source-located cross-base
+  diagnostic;
+- the synchronized `./scripts/pnpmw run check:ts` gate passes 841 tests:
+  795 active passes, 46 intentional skips, and zero failures in approximately
+  8 minutes 4 seconds, including the permanent ordinary
+  `lambda x :^f A. F x y0` regression;
+- the mandatory live Lambdapi conformance oracle passes all 19 judgments in
+  20.5 seconds under the global 60-second bound;
+- `EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check` passes the active
+  kernel, extensions, and diagnostics; and
+- no `.lp`, kernel catalog, health report, browser entry point, parser, or
+  transfer-acquisition artifact changed.
+
+The exact implementation checkpoint is filled in after exact staged-path
+review and `git diff --cached --check`.
+
 ## Change Log
 
 - **2026-07-28 — DISPLAYED-BRACKET-0A frozen, validated, and
@@ -472,6 +795,26 @@ complete 41-file kernel CI at the parent boundary remain applicable.
   supersession and authorizes only root-only DISPLAYED-BRACKET-1A. Nine
   focused tests and the 830-test reviewed root gate pass; no semantic,
   browser, acquisition, or broader Git authority was added.
+- **2026-07-28 — DISPLAYED-BRACKET-1A implemented.** The new root-only
+  profile reifies finite independent displayed contexts into first-order
+  slot/application/pair IR and compiles them compositionally through existing
+  displayed product structure. Projection, exchange, contraction, mapped
+  pairing, three siblings, all preserved one-slot cases, fail-closed
+  diagnostics, object/arrow computation, and a compact direct-TypeScript demo
+  pass. The dependent-target profile remains deliberately separate pending
+  DISPLAYED-CHAIN-0A analysis. No Lambdapi owner/rule or deployed surface was
+  added.
+- **2026-07-28 — Recursive contextual-lifting architecture corrected.**
+  Confirmed by execution that the existing ordinary compiler recursively
+  accepts `lambda x :^f A. F x y0` without inner bracket syntax and lowers it
+  through identity, composition, constant abstraction, pairing, and
+  `Eval_func`. Rejected an additional parallel `RawExpr`/checker as the
+  immediate architecture. Recorded the exact restricted recursion of
+  DISPLAYED-BRACKET-1A, the physical-but-recoverable MIGRATE-2 generic-LF
+  deletion, and the distinction that no prior categorical bracket solution
+  was discarded. Selected proposal-only DISPLAYED-LIFTING-0A to freeze the
+  typed recursive lifting/owner matrix before extending the displayed
+  grammar; genuine dependency chains remain a subsequent first-class row.
 
 ## Git Boundary
 
@@ -504,22 +847,51 @@ rigid body recognizer, compiling only through total categories, or adding a
 kernel bracket owner. D-DTTLF-USABILITY-009 is approved exactly as proposed
 by a separate immutable delegated review with human supersession.
 
-Implement only root-only DISPLAYED-BRACKET-1A: finite nonempty independent
-sibling blocks over one common base, one-shot callbacks, derived
-dependency/usage evidence, one typed-pair frontend IR node, left-associated
-transparent displayed-product source, and existing
+Preserve completed DISPLAYED-BRACKET-1A: finite nonempty independent sibling
+blocks over one common base, one-shot callbacks, derived dependency/usage
+evidence, one typed-pair frontend IR node, left-associated transparent
+displayed-product source, and existing
 id_funcd/comp_fapp0/Product_projL_funcd/Product_projR_funcd/
-Product_pair_funcd/section_pullback_func authority.
-Exercise projection, exchange, contraction, mapped pairing, three-sibling
-scaling, and all preserved one-slot cases. Add no Lambdapi owner/rule,
-primitive Core binder mode, owner-specific LF path, Product_catd head,
-browser profile, parser, or bulk transfer.
+Product_pair_funcd/section_pullback_func authority. If its final root gate or
+exact implementation checkpoint is not yet recorded, complete only that
+bounded synchronization first. Add no Lambdapi owner/rule, primitive Core
+binder mode, owner-specific LF path, Product_catd head, browser profile,
+parser, or bulk transfer.
 
-Keep genuine dependency-chain lowering first-class but separate as
-DISPLAYED-CHAIN-0A. Do not assume Sigma arrow action, a generic total-category
-pullback/equivalence, raw product-reindex equality, or general :^nd coherence.
-Freeze a separate exact decision if implementation evidence exposes missing
-mathematics.
+Preserve the 2026-07-28 recursive contextual-lifting correction. Do not add a
+parallel RawExpr language, parser, or bidirectional checker for this task.
+The existing typed TypeScript construction IR, recursive contextual
+compiler, explicit Core, and generic checker are the implementation
+boundary. Treat `[x]t` as an internal syntax-directed recursion: the bound
+token may occur freely under supported subexpressions, and an unsupported
+typed node fails closed. Preserve the permanent ordinary
+`lambda x :^f A. F x y0` fixed-evaluation regression.
+
+Then implement only DISPLAYED-LIFTING-0A as a root-only, executable,
+read-only proposal and owner audit. Freeze the matrix of typed constructor
+and application judgment, closed/varying subject and argument, binder mode,
+variance/cell level, and active owner or exact gap. Compare closed-subject/
+open-argument composition, open-subject/closed-argument fixed evaluation,
+both-open pairing/evaluation, nested abstraction, contravariant action,
+displayed/dependent reindexing, and transformation-valued higher action.
+Isolate the measured dependent-target/direct-displayed composition mismatch.
+Do not extend the semantic grammar in 0A and do not introduce a new owner,
+rule, surface checker, or profile join.
+
+Keep DISPLAYED-LIFTING-1A and DISPLAYED-CHAIN-0A separate. The latter must
+compare sequential-total, repeated pullback/Sigma, and direct displayed
+lowerings on one genuine dependency edge. Do not assume Sigma arrow action,
+a generic total-category pullback/equivalence, raw product-reindex equality,
+or general :^nd coherence. Freeze a separate exact executable proposal
+before any semantic implementation or new owner/rule.
+
+For a future exact bounded gate in this goal, if no immediate human response
+follows presentation of its frozen proposal, the user's standing delegation
+permits a separate explicit unattended approval review. Keep the proposal
+non-self-authorizing, retain human supersession, preserve every frozen
+non-effect, and proceed only to a coherent green local checkpoint. Delegation
+does not broaden semantic scope or authorize destructive, remote,
+integration, publication, or history-rewrite actions.
 
 Use the existing local-checkpoint authorization only after bounded green
 validation, synchronized ledgers, exact staging, and

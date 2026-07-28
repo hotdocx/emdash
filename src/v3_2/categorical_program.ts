@@ -81,6 +81,9 @@ import {
     validateCoreCategoricalFibredDependentTargetContract
 } from './categorical_fibred_dependent_target_contract';
 import {
+    validateCoreCategoricalDisplayedBracketContract
+} from './categorical_displayed_bracket_contract';
+import {
     CoreCategoricalContextDependencyPlan,
     coreCategoricalClosedContextClassifier,
     coreCategoricalContextSlotReference,
@@ -186,6 +189,9 @@ export const CORE_CATEGORICAL_FIBRED_WEAKEN_REINDEX_PROGRAM_REVISION =
 export const CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_PROGRAM_REVISION =
     'FIBRED-DEPENDENT-TARGET-1-CATEGORICAL-PROGRAM-1' as const;
 
+export const CORE_CATEGORICAL_DISPLAYED_BRACKET_PROGRAM_REVISION =
+    'DISPLAYED-BRACKET-1A-CATEGORICAL-PROGRAM-1' as const;
+
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
 const CORE_CATEGORICAL_DISPLAYED_FAMILY =
@@ -226,6 +232,11 @@ extends CoreCategoricalDisplayedFamily {
 }
 
 export interface CoreCategoricalGroupedSequentialBinding {
+    readonly name: string;
+    readonly family: CoreCategoricalDisplayedFamily;
+}
+
+export interface CoreCategoricalDisplayedContextBinding {
     readonly name: string;
     readonly family: CoreCategoricalDisplayedFamily;
 }
@@ -339,6 +350,8 @@ export interface CoreCategoricalProgramOptions {
      * exact contravariant category family, pulled-back displayed-family
      * motive, internal-Pi package, Sigma-total target, and target-fibre
      * computation selected by D-DTTLF-USABILITY-007/007A.
+     * The displayed-bracket profile adds only the reviewed generic
+     * first-order bracket for finite independent displayed siblings.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -350,7 +363,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-transfd-1'
         | 'fibred-grouped-sequential-1'
         | 'fibred-weaken-reindex-1'
-        | 'fibred-dependent-target-1';
+        | 'fibred-dependent-target-1'
+        | 'fibred-displayed-bracket-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -385,6 +399,8 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_GROUPED_SEQUENTIAL'
     | 'UNAVAILABLE_WEAKEN_REINDEX'
     | 'UNAVAILABLE_DEPENDENT_TARGET'
+    | 'UNAVAILABLE_DISPLAYED_CONTEXT'
+    | 'INVALID_DISPLAYED_CONTEXT'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
 
@@ -834,6 +850,7 @@ export class CoreCategoricalProgram {
     private readonly groupedSequentialEnabled: boolean;
     private readonly fibredWeakenReindexEnabled: boolean;
     private readonly fibredDependentTargetEnabled: boolean;
+    private readonly displayedContextualEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -850,7 +867,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
-            profile === 'fibred-dependent-target-1';
+            profile === 'fibred-dependent-target-1' ||
+            profile === 'fibred-displayed-bracket-1';
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
@@ -858,34 +876,42 @@ export class CoreCategoricalProgram {
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
-            profile === 'fibred-dependent-target-1';
+            profile === 'fibred-dependent-target-1' ||
+            profile === 'fibred-displayed-bracket-1';
         this.fibredStructureEnabled =
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
-            profile === 'fibred-dependent-target-1';
+            profile === 'fibred-dependent-target-1' ||
+            profile === 'fibred-displayed-bracket-1';
         this.fibredBinderEnabled =
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
-            profile === 'fibred-dependent-target-1';
+            profile === 'fibred-dependent-target-1' ||
+            profile === 'fibred-displayed-bracket-1';
         this.fibredTransfdEnabled =
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
-            profile === 'fibred-dependent-target-1';
+            profile === 'fibred-dependent-target-1' ||
+            profile === 'fibred-displayed-bracket-1';
         this.groupedSequentialEnabled =
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
-            profile === 'fibred-dependent-target-1';
+            profile === 'fibred-dependent-target-1' ||
+            profile === 'fibred-displayed-bracket-1';
         this.fibredWeakenReindexEnabled =
             profile === 'fibred-weaken-reindex-1' ||
-            profile === 'fibred-dependent-target-1';
+            profile === 'fibred-dependent-target-1' ||
+            profile === 'fibred-displayed-bracket-1';
         this.fibredDependentTargetEnabled =
             profile === 'fibred-dependent-target-1';
+        this.displayedContextualEnabled =
+            profile === 'fibred-displayed-bracket-1';
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
@@ -894,6 +920,9 @@ export class CoreCategoricalProgram {
         }
         if (this.fibredDependentTargetEnabled) {
             validateCoreCategoricalFibredDependentTargetContract();
+        }
+        if (this.displayedContextualEnabled) {
+            validateCoreCategoricalDisplayedBracketContract();
         }
         this.dependent = this.fibredDependentTargetEnabled
             ? compileCoreCategoricalFibredDependentTargetTransfer()
@@ -923,7 +952,9 @@ export class CoreCategoricalProgram {
                 displayedTransforAbstraction:
                     this.fibredTransfdEnabled,
                 displayedWeakeningReindexing:
-                    this.fibredWeakenReindexEnabled
+                    this.fibredWeakenReindexEnabled,
+                displayedContextualAbstraction:
+                    this.displayedContextualEnabled
             }
         );
     }
@@ -1130,6 +1161,20 @@ export class CoreCategoricalProgram {
                 'Contravariant category families and their dependent ' +
                     'section targets are available only in the explicit ' +
                     "'fibred-dependent-target-1' root profile"
+            );
+        }
+    }
+
+    private requireDisplayedContextual(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.displayedContextualEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Generic displayed contextual abstraction is available ' +
+                    'only in the explicit ' +
+                    "'fibred-displayed-bracket-1' root profile"
             );
         }
     }
@@ -4741,6 +4786,188 @@ export class CoreCategoricalProgram {
             name,
             family.baseCategory.expression,
             family.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
+     * Construct one first-order pair node inside a displayed contextual
+     * callback. It is unavailable outside the reviewed bracket profile.
+     */
+    fibrePair(
+        left: CoreCategoricalTerm,
+        right: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'typed displayed fibre pair',
+            source
+        );
+        this.requireDisplayedContextual(nodeProvenance);
+        return this.builder.fibrePair(
+            left,
+            right,
+            nodeProvenance
+        );
+    }
+
+    /**
+     * Compile a finite independent displayed sibling block through the
+     * generic first-order displayed contextual compiler.
+     */
+    displayedContextLambda(
+        bindingValues:
+            readonly CoreCategoricalDisplayedContextBinding[],
+        targetValue: CoreCategoricalDisplayedFamily,
+        body: (
+            tokens: readonly CoreCategoricalSlotToken[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed contextual abstraction',
+            options.source
+        );
+        this.requireDisplayedContextual(nodeProvenance);
+        if (bindingValues.length === 0) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Displayed contextual abstraction requires at least one ' +
+                    'binding'
+            );
+        }
+        const names = new Set<string>();
+        const bindings = bindingValues.map((binding, offset) => {
+            if (names.has(binding.name)) {
+                throw new CoreCategoricalProgramError(
+                    'INVALID_DISPLAYED_CONTEXT',
+                    nodeProvenance,
+                    `Duplicate displayed contextual binding ` +
+                        `'${binding.name}'`
+                );
+            }
+            names.add(binding.name);
+            return Object.freeze({
+                position: offset + 1,
+                name: binding.name,
+                family: this.requireDisplayedFamily(
+                    binding.family,
+                    nodeProvenance
+                )
+            });
+        });
+        const base = bindings[0].family.baseCategory;
+        for (const binding of bindings.slice(1)) {
+            if (!kernelExpressionEquals(
+                binding.family.baseCategory.expression,
+                base.expression
+            )) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    `Displayed contextual binding '${binding.name}' is ` +
+                        'over a different base'
+                );
+            }
+        }
+        const target = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            target.baseCategory.expression,
+            base.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Displayed contextual target is over a different base'
+            );
+        }
+
+        const plan = planCoreCategoricalContextDependencies({
+            slots: [
+                {
+                    name: `${bindings[0].name}Base`,
+                    classifier:
+                        coreCategoricalClosedContextClassifier(
+                            {
+                                tag: 'object',
+                                category: base.expression
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                },
+                ...bindings.map(binding => ({
+                    name: binding.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            base.expression,
+                            binding.family.expression,
+                            [
+                                coreCategoricalContextSlotReference(
+                                    binding.position - 1,
+                                    nodeProvenance
+                                )
+                            ],
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory: base.expression,
+                                family: binding.family.expression,
+                                index: binding.position - 1
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                }))
+            ],
+            siblingGroups: bindings.length === 1
+                ? undefined
+                : [{
+                    positions:
+                        bindings.map(binding => binding.position),
+                    provenance: nodeProvenance
+                }]
+        });
+        if (
+            plan.dependencyEdges.some(edge =>
+                edge.dependencyPosition !== 0 &&
+                edge.dependentPosition !== 0
+            ) ||
+            (
+                bindings.length > 1 &&
+                (
+                    plan.groupedProducts.length !== 1 ||
+                    plan.groupedProducts[0].positions.length !==
+                        bindings.length
+                )
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Dependency analysis did not establish one independent ' +
+                    'displayed sibling block'
+            );
+        }
+
+        return this.builder.displayedContextLambda(
+            bindings.map(binding => ({
+                name: binding.name,
+                family: binding.family.expression
+            })),
+            base.expression,
+            target.expression,
             body,
             {
                 plicity: options.plicity,
