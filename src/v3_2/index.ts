@@ -80,6 +80,8 @@ export * from './categorical_displayed_bracket_proposal';
 export * from './categorical_displayed_bracket_review';
 export * from './categorical_displayed_lifting_proposal';
 export * from './categorical_displayed_lifting_review';
+export * from './categorical_displayed_evaluation_audit';
+export * from './categorical_displayed_evaluation_owner_proposal';
 export * from './categorical_usability_graduation_proposal';
 export * from './categorical_usability_graduation_review';
 export * from './categorical_dependent_usability_proposal';

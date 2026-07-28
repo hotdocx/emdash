@@ -3931,6 +3931,48 @@ gate (814 active passes, 46 intentional skips, zero failures), and all 19
 repeated live conformance judgments pass. The exact review checkpoint is
 `7badcd5b930bd098b178d89bf4488637695fb14d`.
 
+DISPLAYED-EVAL-0B is now complete as a read-only executable audit and the
+non-self-authorizing DISPLAYED-EVAL-OWNER-0C proposal is frozen. Preserve the
+latest usability clarification: `displayedContextLambda`, `apply`, and
+`fibrePair` may remain explicit typed TypeScript constructors; the important
+property is recursive contextual abstraction beneath supported
+subexpressions, not a new RawExpr/parser/checker layer or bracket
+punctuation. No previously working categorical abstraction implementation
+was discarded during this continuation.
+
+The audit proves that arbitrary `A : Catd(Op K)` cannot also be treated as a
+plain covariant argument family over `K`, but that the stable
+constant-domain family
+`Functor_catd(Const_catd(Op K,A),B)` supports coherent varying and fixed
+evaluation. It retains universe-natural evaluation as an alternative and
+selects the minimal stable closure only because active authority does not
+derive that presentation or arbitrary displayed terminal weakening:
+`Eval_funcd`, `Terminal_funcd`, and one `tapp0_fapp0` component rule for
+each. Pairing derives both-open evaluation; terminal weakening derives the
+fixed case. Global `fapp`/`tapp` remains the sole generic
+functoriality/naturality owner.
+
+The dependent-target mismatch is independently localized to a transfer that
+returns a declaration checker wired to its prerequisite runtime after
+installing a needed rule. The standard final recompilation against the
+composed runtime accepts the unchanged term, so the pending proposal includes
+one mechanical profile repair and no semantic workaround. Candidate warning
+comparison adds exactly two diagnostic unjoinable critical-pair markers and
+zero replaceable-pattern-variable markers.
+
+The architecture is therefore settled and implementation-feasible for this
+constant-domain displayed-application slice, without claiming arbitrary
+mixed-domain evaluation, genuine dependent chains, nested displayed
+abstraction, general `:^nd`, or groupoidal completion. Await or separately
+review H-DTTLF-USABILITY-DISPLAYED-EVAL-OWNER-01/
+D-DTTLF-USABILITY-011 before implementing exactly its two owners, two
+component rules, generic transfer, profile repair, and two recursive
+existing-IR application judgments. Add no semantic effect before that gate.
+The completed audit/proposal evidence is green: 22 focused tests, the full
+882-test root gate (836 active passes, 46 intentional skips, zero failures),
+all 19 live Lambdapi conformance judgments, and the bounded active-kernel
+check pass.
+
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
 follows a presented bounded proposal. Preserve the proposal as

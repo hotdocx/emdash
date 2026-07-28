@@ -546,7 +546,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | predecessor qualified and active successor selected | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` adds the root-only recursive independent-sibling `displayedContextLambda` compiler and now governs the recursive-lifting continuation. Its post-implementation correction rejects another RawExpr/checker layer, freezes `lambda x :^f A. F x y0` as an already-working ordinary recursive case, and makes DISPLAYED-LIFTING-0A the next proposal-only typed owner/action matrix before any displayed grammar extension or genuine-chain implementation. Every prospective primitive still receives an existing-construction/Foundation audit; no approval adds generic total pullback, claims raw whole-pullback conversion, completes general `fd`/`nd` binders, resumes parsing/bulk transfer, or promotes a deployed/browser profile |
+| USABILITY-FIBRED-CONTINUATION | recursive architecture preserved; displayed-evaluation audit complete; exact owner proposal pending D-011 | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` adds the root-only recursive independent-sibling compiler and rejects another RawExpr/checker layer. DISPLAYED-EVAL-0B now proves the stable constant-domain evaluation slice feasible, isolates the dependent-target failure as runtime wiring, and freezes a proposal for exactly two reusable owners, two component rules, one mechanical profile repair, and two recursive application judgments. Every prospective primitive still receives an existing-construction/Foundation audit; no approval adds generic total pullback, arbitrary mixed-domain evaluation, general `fd`/`nd`, parsing/bulk transfer, or a deployed/browser profile |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -1974,6 +1974,75 @@ derived-construction, and profile-mismatch investigation. It does not
 authorize a semantic recursive case, new owner/rule, checker layer, profile
 join, dependent chain, general `:^nd`, or deployed surface.
 
+### 2026-07-28 displayed-evaluation audit and feasibility update
+
+DISPLAYED-EVAL-0B is complete without changing active semantics. It confirms
+the earlier usability clarification: explicit programmatic constructors such
+as `displayedContextLambda`, `apply`, and `fibrePair` are an acceptable typed
+surface. The substantive requirement is that the contextual compiler
+recursively processes their subexpressions so a bound categorical/displayed
+variable may occur wherever its typed judgment licenses it. Another
+`RawExpr`, parser, or bidirectional checker would duplicate the existing
+elaboration boundary and is not selected.
+
+The audit finds a real variance boundary rather than a frontend failure.
+For arbitrary
+`A : Catd(Op_cat K)`, the domain of `Functor_catd(A,B)` cannot also be used
+as a plain covariant argument family over `K`; the negative owner probe
+requires `Op_cat K = K`. The first stable coherent slice instead fixes an
+ordinary category `A` and uses:
+
+```text
+Functor_catd(Const_catd(Op_cat K,A),B)
+```
+
+as the varying subject family and `Const_catd(K,A)` as the argument family.
+Both the varying-argument and closed-argument cases are computationally
+feasible. The universe-natural `Eval_func` construction is also feasible but
+does not definitionally present this stable `Functor_catd` family, so it is
+retained as an alternative rather than silently substituted.
+
+Active authority lacks two reusable maps for this selected presentation:
+a stable coherent displayed evaluator and weakening from an arbitrary
+displayed source to the constant terminal family. Bounded owner-position
+probes accept exactly `Eval_funcd` and `Terminal_funcd` with one object
+component rule each. Displayed pairing then derives the both-open evaluator;
+`Terminal_funcd` plus `Const_func` derives the fixed argument and avoids a
+specialized third owner. Their types carry base-arrow coherence, while the
+global `fapp`/`tapp` calculus remains the only owner of generic
+functoriality/naturality and iterable higher action.
+
+The dependent-target/direct-displayed `TYPE_MISMATCH` is now independently
+classified. The needed `Hom_cat(Catd_cat ...)` runtime rule is installed, but
+the transfer returns a declaration checker wired to its prerequisite
+runtime. Repeating the standard final compilation against the composed
+runtime accepts the unchanged explicit term. This is a mechanical profile
+wiring repair, not evidence against the recursive compiler or the
+categorical construction.
+
+The deeply frozen DISPLAYED-EVAL-OWNER-0C proposal therefore asks D-011 to
+authorize exactly those two owners and two component rules, the standard
+profile recheck, generic transfer, and the two recursive existing-IR
+application judgments. The known warning comparison adds exactly two
+unjoinable critical-pair markers for `Terminal_funcd` versus generic strict
+naturality; this remains diagnostic, not a semantic veto. Arbitrary
+mixed-domain evaluation, genuine dependency chains, nested displayed
+abstraction, general `:^nd`, parsing/bulk transfer, and deployed surfaces
+remain separate.
+
+This is cumulative progress, not a backtrack: no working bracket or
+elaboration layer was removed during the usability continuation. The
+architecture is settled and implementation-feasible for the proposed
+constant-domain application slice. It is not yet graduated for every
+DTT-like displayed occurrence; the remaining rows are now localized
+mathematical/variance/coherence extensions rather than an unresolved
+frontend architecture.
+
+The audit/proposal tranche is green: 22 focused tests pass; the complete
+root gate passes 882 tests (836 active passes, 46 intentional skips, zero
+failures); all 19 live Lambdapi conformance judgments pass; and the bounded
+active-kernel check passes.
+
 ## Acceptance Criteria
 
 USABILITY-GRADUATE-1 may propose that the frontend architecture is settled
@@ -2128,6 +2197,18 @@ the active authority order. Follow the root AGENTS.md and, for every emdash2
 action, emdash2/AGENTS.md and the current v3.2 SOP. Resume the in-progress row
 or select the next dependency-ready bounded implementation slice; produce
 executable evidence rather than only expanding architectural prose.
+
+For the active recursive displayed continuation, the more specific
+`docs/TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` and its launch
+prompt control. Preserve completed DISPLAYED-EVAL-0B, its constant-domain
+variance qualification, its transfer-runtime-wiring diagnosis, and its
+deeply frozen non-self-authorizing DISPLAYED-EVAL-OWNER-0C proposal. Do not
+add another RawExpr/parser/checker layer. If D-DTTLF-USABILITY-011 is
+approved exactly as proposed, implement only its two owners, two component
+rules, standard dependent-target final-runtime recheck, generic transfer,
+and two recursive existing-IR application judgments. Otherwise preserve the
+proposal boundary. Keep arbitrary mixed-domain evaluation, dependent chains,
+general :^nd, parsing/bulk transfer, and browser promotion separate.
 
 Preserve the exact deployed emdash-v3.2-mvp-1 profile and exact reviewed
 root-only emdash-v3.2-dttlf-directed-1 continuation. Retain the outer
@@ -2299,6 +2380,16 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-28 — DISPLAYED-EVAL-0B assessment integrated.** Recorded that
+  the typed surface and recursive compiler remain the correct usability
+  boundary; no former working solution was discarded. The read-only audit
+  qualifies the stable constant-domain displayed-evaluation case, proves the
+  naive arbitrary mixed-domain/plain-argument case ill-kinded, retains the
+  universe-natural alternative, and isolates the dependent-target failure as
+  stale runtime wiring. The exact pending OWNER-0C proposal selects two
+  reusable owners, two component rules, one mechanical profile repair, and
+  two recursive typed application judgments. All broader displayed,
+  dependent-chain, parser, deployment, and Git effects remain withheld.
 - **2026-07-28 — Recursive contextual-lifting correction integrated.**
   Confirmed that the existing ordinary compiler already accepts
   `lambda x :^f A. F x y0` recursively and requires no inner bracket syntax;

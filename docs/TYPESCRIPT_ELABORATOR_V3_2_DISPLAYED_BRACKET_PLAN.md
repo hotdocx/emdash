@@ -54,6 +54,34 @@ The unchanged proposal's exact green local checkpoint is
 `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`; the separate review checkpoint
 is `7badcd5b930bd098b178d89bf4488637695fb14d`.
 
+DISPLAYED-EVAL-0B is now complete as a read-only authority audit. It did not
+replace the typed TypeScript IR, add another elaborator, or discard any
+working contextual-abstraction code. It instead localized two independent
+issues. First, coherent displayed evaluation is feasible for the stable
+constant-domain family
+`Functor_catd(Const_catd(Op_cat K,A),B)`, but active authority does not
+derive that stable presentation or arbitrary displayed weakening without
+two small owners. Second, the dependent-target/direct-displayed
+`TYPE_MISMATCH` is a mechanical runtime-profile wiring defect: the transfer
+installs the needed `Hom_cat(Catd_cat ...)` rule but returns a declaration
+checker still wired to its prerequisite runtime. Repeating the standard
+final declaration compilation against the composed runtime accepts the
+unchanged term.
+
+The deeply frozen, non-self-authorizing
+DISPLAYED-EVAL-OWNER-0C proposal therefore selects exactly
+`Eval_funcd`, `Terminal_funcd`, their two point-component rules, one
+standard profile-wiring repair, and two recursive existing-IR application
+judgments. It adds no `RawExpr`, second checker, parser, bracket punctuation,
+whole-body recognizer, or intrinsic Core owner. The audit and proposal have
+22 focused passing tests. The complete root gate passes 882 tests: 836
+active passes, 46 intentional skips, and zero failures; all 19 live
+Lambdapi conformance judgments and the bounded active-kernel check also pass.
+The exact checkpoint is recorded below once this tranche is closed.
+Semantic implementation still awaits
+H-DTTLF-USABILITY-DISPLAYED-EVAL-OWNER-01/
+D-DTTLF-USABILITY-011.
+
 ## Authority And Relationship To The Completed Architecture
 
 The active mathematical authority remains the Lambdapi v3.2 development
@@ -430,8 +458,10 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-BRACKET-0A | proposal frozen, validated, checkpointed `e4b743f70c0454d63a93587dc045a3e2d0273ee5`, and approved exactly as proposed by a separate delegated review with human supersession | approved FIBRED-GRADUATE-1 review | Compare four architectures, select the generic first-order displayed contextual compiler, freeze DISPLAYED-BRACKET-1A, and authorize no mathematics by the proposal itself. Eight focused proposal tests, nine focused review tests, the 830-test reviewed root gate, and unchanged 19-judgment live conformance pass |
 | DISPLAYED-BRACKET-1A | complete; validated; checkpointed `d4e0e9bc5ca4dc07dcdfa44e2cb048545f3ee8ab` | reviewed DISPLAYED-BRACKET-0A/D-009 | Root-only finite independent-sibling compiler, one `typed-pair` frontend node, existing-authority lowerings, positive/negative corpus, runnable compact demo, and permanent ordinary fixed-inner-evaluation regression |
 | DISPLAYED-LIFTING-0A | executable proposal frozen, validated, checkpointed `29f2c5174c96c852f88a7a6ffa84c1ad502f21bd`, and approved exactly as proposed at review checkpoint `7badcd5b930bd098b178d89bf4488637695fb14d` with human supersession | DISPLAYED-BRACKET-1A | Freeze the typed node/judgment × occurrence × mode × variance lifting matrix; prove the existing ordinary fixed-evaluation witness; audit existing owners for closed/open displayed application cases, nested abstraction, higher action, and contravariance; isolate the dependent-target/direct-displayed profile mismatch; add no semantic owner/rule |
-| DISPLAYED-EVAL-0B | next authorized read-only evidence row; no semantic implementation authority | approved DISPLAYED-LIFTING-0A/D-010 | Run owner-position and derived-construction probes for coherent evaluation of a `Functor_catd`-valued varying subject at fixed and varying arguments; determine whether active authority suffices or freeze a minimal new-owner proposal; classify the profile-join mismatch without a semantic patch |
-| DISPLAYED-LIFTING-1A | deferred pending 0B evidence and a separate exact proposal/review | DISPLAYED-EVAL-0B | Extend the displayed recursive grammar only for exact licensed application judgments, with positive/negative consumers and no whole-body recognizer growth |
+| DISPLAYED-EVAL-0B | complete read-only authority audit; no semantic delta | approved DISPLAYED-LIFTING-0A/D-010 | Proved the arbitrary mixed-variance/plain-argument obstruction, qualified the constant-domain case, compared the universe-natural alternative, owner-position-probed the minimal stable closure, and classified the dependent-target mismatch as stale runtime wiring |
+| DISPLAYED-EVAL-OWNER-0C | deeply frozen non-self-authorizing proposal awaiting D-011 | DISPLAYED-EVAL-0B | Propose exactly `Eval_funcd`, `Terminal_funcd`, two point-component rules, the standard final-runtime profile repair, generic transfer, and two recursive typed application judgments; preserve every broader non-effect |
+| DISPLAYED-EVAL-1A | proposed, not authorized | approved DISPLAYED-EVAL-OWNER-0C/D-011 | Implement the varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; add no new surface/checker layer or whole-body recognizer |
+| DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | subsequent read-only comparison; not a product case | DISPLAYED-LIFTING-0A | Compare sequential-total, repeated pullback/Sigma, and direct displayed lowerings for one genuine dependency edge; identify exact Sigma-arrow/total-comparison needs before semantic implementation |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
@@ -547,6 +577,223 @@ The executable proposal asks:
 > lowering, general `:^nd` coherence, Sigma arrow action, parsing/bulk
 > transfer, browser promotion, and broader Git authority withheld pending
 > separate exact proposals?
+
+## DISPLAYED-EVAL-0B Audit And OWNER-0C Proposal
+
+The executable audit is
+`src/v3_2/categorical_displayed_evaluation_audit.ts`; the exact continuation
+proposal is
+`src/v3_2/categorical_displayed_evaluation_owner_proposal.ts`. Both are
+deeply frozen and fail closed on prerequisite, evidence, or scope drift. The
+audit has no semantic delta, and the proposal is deliberately
+non-self-authorizing.
+
+### Usability and compiler-boundary clarification
+
+The end-user goal remains ordinary-DTT-like variable usability for the
+categorical and displayed judgments: a bound variable may occur anywhere
+beneath a supported typed expression, and contextual abstraction recursively
+supplies the required identity, constant, composition, pairing, evaluation,
+projection, contraction, exchange, and reindexing structure. This is a
+semantic elaboration problem, not a string-parsing or cosmetic-syntax
+problem.
+
+It is acceptable that the programmatic input currently spells constructors
+such as `displayedContextLambda`, `apply`, and `fibrePair`. Those constructors
+are typed, immutable surface/IR evidence; they are not explicit categorical
+bracket punctuation and do not force the user to factor the entire body into
+one special recognizer shape. The compiler must recurse into their
+subexpressions. A later notation or parser may construct the same nodes
+without owning another abstraction algorithm.
+
+Accordingly, no previous solution has been backtracked or discarded during
+the bracket work. The completed ordinary compiler, independent displayed
+context compiler, product/pullback owners, and direct-slot dependent example
+remain in use. The large amount of completed work established the backend,
+transfer, structural, profile, and recursive-IR prerequisites. What remained
+was not another general bidirectional checker; it was the first missing
+semantic action exposed by a new recursive application judgment.
+
+### Variance result and exact selected domain
+
+Active authority declares:
+
+```text
+Functor_catd [K] (A : Catd(Op_cat K)) (B : Catd K) : Catd K.
+```
+
+For arbitrary varying `A`, the functor's domain varies contravariantly over
+`K`. Reusing that same `A` as an ordinary covariant argument family over
+`K` would force `Op_cat K` to unify with `K`; the bounded negative owner
+probe fails with exactly that constraint. This rules out the naive
+same-base fibrewise product, not all possible notions of mixed-variance
+evaluation.
+
+The selected stable first slice is the computationally meaningful
+constant-domain specialization:
+
+```text
+K : Cat
+A : Cat
+B : Catd K
+S(A,B) = Functor_catd(Const_catd(Op_cat K,A), B)
+X(A)   = Const_catd(K,A)
+```
+
+Here a coherent evaluator has source the transparent fibrewise product
+`P(S(A,B),X(A))` and target `B`. At `k : K`, it computes to ordinary
+`Eval_func(A,Fibre_cat(B,k))`. This supports both a varying functor and
+varying coherent argument and a varying functor at one closed `a : Obj A`.
+The arbitrary mixed-domain problem remains an explicit later variance-design
+row rather than being hidden behind an unsound coercion.
+
+### Existing-authority comparison
+
+Ordinary `Eval_func`, `fapp0_func`, transparent fibrewise products,
+`Product_pair_funcd`, displayed composition, and generic `tapp*`/`fapp*`
+naturality are active ingredients. Two derivation attempts materially
+constrain the design:
+
+1. A universe-natural transformation whose component at `B` is
+   `Eval_func(A,B)` is accepted and may be precomposed over any
+   `B : Functor K Cat_cat`. It remains a useful transparent alternative.
+   Its source family, however, is not definitionally the stable
+   `Functor_catd` constant-domain family used by the public displayed
+   construction.
+2. `Terminal_func(Sigma_cat E)` after `sigma_intro_transf(E)` does not
+   produce an arbitrary displayed map `E -> Const_K(Terminal_cat)`. Its
+   classifier is an ordinary functor out of the total category, not the
+   required `Transf_cat`/`Functord` classifier.
+
+Thus active authority does not by itself close the selected stable frontend,
+but the missing closure is small and reusable. The proposal adds exactly:
+
+```text
+Eval_funcd [K A : Cat] (B : Catd K)
+  : Functord(
+      P(Functor_catd(Const_catd(Op_cat K,A),B),
+        Const_catd(K,A)),
+      B)
+
+tapp0_fapp0(k, Eval_funcd(K,A,B))
+  ↪ Eval_func(A, Fibre_cat(B,k))
+
+Terminal_funcd [K : Cat] (E : Catd K)
+  : Functord(E, Const_catd(K,Terminal_cat))
+
+tapp0_fapp0(k, Terminal_funcd(K,E))
+  ↪ Terminal_func(Fibre_cat(E,k)).
+```
+
+No specialized fixed evaluator is needed. Structural weakening derives:
+
+```text
+Const_funcd(E,a)
+  = Const_func(K,A,a) after Terminal_funcd(K,E)
+
+Eval_at_funcd(B,a)
+  = Eval_funcd(K,A,B) after
+      Product_pair_funcd(id, Const_funcd(S(A,B),a)).
+```
+
+Given recursively compiled
+`FF : Functord(E,S(A,B))` and
+`xx : Functord(E,Const_catd(K,A))`, the both-open case derives:
+
+```text
+Eval_funcd(K,A,B) after Product_pair_funcd(FF,xx)
+  : Functord(E,B).
+```
+
+Owner-position and component probes accept both owners. The varying and fixed
+object beta consumers both compute to `F[a]`. The owners' displayed-functor
+types carry base-arrow coherence; the existing global `fapp`/`tapp` calculus
+continues to own generic identity, composition, naturality, and iterable
+higher action. No constructor-specific functoriality rules are proposed.
+
+### Dependent-target profile diagnosis
+
+The older explicit term
+
+```text
+comp_fapp0(Catd_cat K,E,D,Q,GG,FF)
+```
+
+passes in `fibred-binder-1` and `fibred-weaken-reindex-1` but previously
+failed in `fibred-dependent-target-1`. The audit establishes that this is
+not a categorical, recursive-bracket, or elaboration-design failure.
+
+`compileCoreCategoricalFibredDependentTargetTransfer` adds transparent
+`Hom = Obj(Hom_cat ...)` authority and compiles the required
+`Hom_cat(Catd_cat K,E,D) -> Functord_cat(K,E,D)` runtime rule. It then
+returns its initial declaration compilation, whose checker is still wired to
+the prerequisite runtime. Direct definitional comparison is unequal under
+that old runtime and equal under the composed runtime. Repeating the same
+standard final compilation used by neighboring transfer stages accepts the
+unchanged term. OWNER-0C therefore proposes one mechanical final-runtime
+recheck, with no owner or semantic-rule change.
+
+### Warning evidence and feasibility status
+
+The active kernel baseline has 1,175 warning markers, including 1,010
+unjoinable critical-pair markers and 159 replaceable pattern-variable
+markers. The combined owner-position candidate remains quiet-check green
+under 60 seconds and has 1,177/1,012/159 respectively. The exact two-pair
+delta is the `Terminal_funcd` component rule interacting with generic strict
+naturality over `Cat_cat`. Per project policy this is diagnostic evidence,
+not an automatic veto. The interaction must remain recorded and should be
+improved if a joinable presentation is later found, without changing the
+desired weakening semantics merely to silence a warning.
+
+The reassessed feasibility boundary is:
+
+- the existing typed-IR/recursive-compiler/backend architecture is settled
+  for the selected application slice;
+- ordinary contextual abstraction and independent displayed structural
+  abstraction remain complete within their recorded grammars;
+- constant-domain coherent displayed evaluation, including varying and fixed
+  arguments, is owner-position-proven and mechanically implementable with
+  two owners, two component rules, generic transfer, and two recursive
+  judgments;
+- no new parser, second inferrer/checker, or whole-development transcription
+  is needed for that implementation;
+- arbitrary mixed-variance domains require a different argument notion and
+  remain open;
+- genuine dependent chains, nested displayed abstraction, general `:^nd`,
+  Sigma arrow action, and groupoidal closure remain later rows.
+
+Therefore the work is materially closer to the end-user goal and has not
+been cycling through discarded frontend designs. It is not yet a claim that
+all DTT-like categorical variable occurrences are complete. Rather, the next
+semantic extension is now an exact vertical slice instead of an unresolved
+architecture question.
+
+### Validation
+
+- 22/22 focused audit/proposal tests pass, including the live reproduction of
+  stale-runtime inequality and composed-runtime equality;
+- root workspace contract, typecheck, and lint pass;
+- `./scripts/pnpmw run check:ts` passes 882 tests: 836 active passes, 46
+  intentional skips, and zero failures;
+- all 19 repeated live Lambdapi conformance judgments pass;
+- `EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check` passes the active
+  kernel and checked extensions; and
+- no active `.lp`, catalog, health report, browser export, parser, or runtime
+  profile changed in the audit/proposal tranche.
+
+### Exact next decision gate
+
+The frozen proposal asks:
+
+> Approve H-DTTLF-USABILITY-DISPLAYED-EVAL-OWNER-01/
+> D-DTTLF-USABILITY-011 as proposed: add exactly the stable `Eval_funcd` and
+> `Terminal_funcd` owners and their two point-component rules; retain generic
+> `fapp`/`tapp` ownership of functoriality and naturality; make the standard
+> dependent-target final-runtime recheck; transfer the exact closure through
+> the generic engines; and implement only the existing-IR recursive
+> both-open and fixed-argument displayed evaluation judgments, while
+> withholding the generic mixed-domain case, dependent chains, general
+> `:^nd`, parser/bulk work, browser promotion, and broader Git authority?
 
 ## DISPLAYED-BRACKET-1A Frozen Contract
 
@@ -911,6 +1158,22 @@ implementation checkpoint is
 
 ## Change Log
 
+- **2026-07-28 — DISPLAYED-EVAL-0B completed and OWNER-0C frozen.** The
+  executable read-only audit proves that the naive arbitrary
+  mixed-variance/plain-argument family is ill-kinded, while the
+  constant-domain displayed-evaluation specialization is coherent and
+  owner-position-feasible. It compares the universe-natural alternative,
+  finds the exact reusable displayed-weakening gap, and freezes a
+  non-self-authorizing proposal for only `Eval_funcd`, `Terminal_funcd`, two
+  point-component rules, the standard final-runtime profile repair, generic
+  transfer, and two recursive typed application judgments. The
+  dependent-target mismatch is classified as stale checker/runtime wiring,
+  not a semantic or bracket failure. No owner/rule, profile repair, recursive
+  case, second frontend/checker, parser, or deployed surface is implemented
+  by the audit/proposal tranche. Its two focused files pass 22 tests; the
+  complete 882-test root gate (836 active passes, 46 intentional skips, zero
+  failures), all 19 live conformance judgments, and the bounded active-kernel
+  check pass. The exact checkpoint is recorded after bounded closure.
 - **2026-07-28 — DISPLAYED-BRACKET-0A frozen, validated, and
   checkpointed.** The executable four-way comparison selects a generic
   first-order displayed contextual compiler. It freezes a no-new-mathematics
@@ -1046,16 +1309,39 @@ H-DTTLF-USABILITY-DISPLAYED-LIFTING-01/D-DTTLF-USABILITY-010 is approved
 exactly as proposed by a separate immutable delegated review with human
 supersession.
 
-Implement only DISPLAYED-EVAL-0B as a
-read-only owner-position and derived-construction probe. First attempt to
-derive coherent displayed evaluation from active authority; if this is not
-possible, freeze a separate minimal-owner proposal and do not add the owner
-or rules in 0B. Isolate whether the measured dependent-target/direct-
-displayed composition mismatch is a transfer/presentation issue or a
-semantic one. Add no recursive grammar case, semantic owner/rule, second
-surface checker, or profile join in 0B.
+Preserve completed DISPLAYED-EVAL-0B and its deeply frozen, read-only audit.
+It proves that an arbitrary `Catd(Op K)` domain cannot also be reused as a
+plain covariant argument family, selects only the stable constant-domain
+specialization, retains the feasible universe-natural evaluator as an
+alternative, and finds active authority insufficient for the selected
+stable presentation by exactly two reusable owners. Preserve its diagnosis
+that the dependent-target `TYPE_MISMATCH` is stale declaration-checker
+runtime wiring, not a semantic or bracket failure.
 
-Keep DISPLAYED-LIFTING-1A and DISPLAYED-CHAIN-0A separate. The latter must
+Preserve the non-self-authorizing DISPLAYED-EVAL-OWNER-0C proposal. If an
+immediate human D-DTTLF-USABILITY-011 decision exists, obey it. Otherwise,
+only after the exact unchanged proposal is green and locally checkpointed,
+the user's standing unattended delegation permits a separate immutable
+approval review with human supersession and all non-effects preserved.
+
+If and only if D-011 is approved exactly as proposed, implement bounded
+DISPLAYED-EVAL-1A: add exactly stable `Eval_funcd` and `Terminal_funcd`,
+their two `tapp0_fapp0` point-component rules, generic declaration/runtime
+transfer, and the standard final recompilation of the dependent-target
+declarations against the composed runtime. Extend the existing recursive
+typed contextual compiler only for varying-subject/varying-argument and
+varying-subject/fixed-argument application judgments. Derive fixed
+evaluation through `Terminal_funcd`; do not add a third fixed-evaluator
+owner. Keep global `fapp`/`tapp` as the sole owner of generic functoriality
+and naturality. Retain the exact two-critical-pair warning comparison as
+diagnostic evidence rather than a veto or an excuse for silent scope change.
+
+Add no parallel RawExpr, second checker, parser, explicit bracket
+punctuation, whole-body recognizer, intrinsic Core owner, arbitrary
+mixed-domain coercion, or constructor-specific identity/composition/
+naturality rule.
+
+Keep DISPLAYED-EVAL-1A and DISPLAYED-CHAIN-0A separate. The latter must
 compare sequential-total, repeated pullback/Sigma, and direct displayed
 lowerings on one genuine dependency edge. Do not assume Sigma arrow action,
 a generic total-category pullback/equivalence, raw product-reindex equality,

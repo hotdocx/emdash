@@ -897,6 +897,50 @@ root gate (814 active passes, 46 intentional skips, zero failures), and all
 19 repeated live conformance judgments pass. The exact review checkpoint is
 `7badcd5b930bd098b178d89bf4488637695fb14d`.
 
+DISPLAYED-EVAL-0B is now complete as an executable read-only audit. It
+preserves the current typed surface and recursive contextual compiler:
+programmatic `displayedContextLambda`, `apply`, and `fibrePair` nodes are
+acceptable, provided abstraction recurses through supported subexpressions.
+No parallel RawExpr, second checker, parser, or prior working bracket
+implementation has been introduced, restored, or discarded.
+
+The audit rejects only the naive fully varying mixed-domain shape:
+`A : Catd(Op K)` cannot simultaneously be the plain covariant argument
+family over `K`. It owner-position-proves the stable constant-domain slice
+with subjects in
+`Functor_catd(Const_catd(Op K,A),B)` and arguments in
+`Const_catd(K,A)`. Active authority does not derive that stable evaluator or
+arbitrary displayed terminal weakening, so the frozen
+DISPLAYED-EVAL-OWNER-0C proposal selects exactly `Eval_funcd`,
+`Terminal_funcd`, their two point-component rules, generic transfer, and
+two recursive existing-IR application judgments. Pairing derives the
+both-open case; `Terminal_funcd` derives a constant map and hence the fixed
+case, so no third evaluator owner is proposed. Generic `fapp`/`tapp`
+continues to own functoriality and naturality.
+
+The dependent-target/direct-displayed `TYPE_MISMATCH` is separately proven
+to be stale runtime wiring. The transfer compiles the needed
+`Hom_cat(Catd_cat ...)` rule but returns a declaration checker wired to the
+prerequisite runtime; the neighboring-stage final recompilation against the
+composed runtime accepts the unchanged term. The proposal includes that one
+mechanical repair and no semantic rule for it. The known owner candidate
+adds two diagnostic unjoinable critical-pair markers for `Terminal_funcd`
+versus generic strict naturality, with no replaceable-variable delta.
+
+This establishes implementation feasibility and settles the frontend
+architecture for the constant-domain displayed-evaluation slice. It does
+not yet graduate arbitrary mixed-domain application, genuine dependent
+chains, nested displayed abstraction, general `:^nd`, or groupoidal
+closure. H-DTTLF-USABILITY-DISPLAYED-EVAL-OWNER-01/
+D-DTTLF-USABILITY-011 is the exact pending semantic gate; until approved,
+the audit/proposal adds no Lambdapi owner/rule, runtime repair, or recursive
+compiler case.
+
+The executable tranche is green: 22 focused tests, the complete 882-test
+root gate (836 active passes, 46 intentional skips, zero failures), all 19
+live Lambdapi conformance judgments, and the bounded active-kernel check
+pass.
+
 All ten focused implementation/demo tests pass, as do the permanent ordinary
 fixed-inner-evaluation regression, root typecheck/lint, the repeated
 19-judgment live Lambdapi conformance oracle, the bounded active-kernel
