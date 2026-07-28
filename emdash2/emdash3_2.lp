@@ -12153,6 +12153,234 @@ rule @tapp0_fapp0
       (@tapp0_fapp0 $K Cat_cat $D $C $x $FF)
       (@tapp0_fapp0 $K Cat_cat $E $D $x $GG);
 
+// Fixed-base fibrewise-product structural owners.
+//
+// For B,C : K ⊢ Cat, write
+//
+//   P(B,C) = uncurry(Product_cat_func) o Product_pair(B,C).
+//
+// The family remains this transparent semantic composite; no Product_catd
+// family head is introduced. These three owners supply the fixed-base
+// universal property needed for independent displayed siblings.
+
+// Fibrewise left projection: P(B,C) ⊢_K B.
+injective symbol Product_projL_funcd [K : Cat]
+  (B C : τ (Catd K))
+  : τ (Functord
+      (@comp_cat_fapp0
+        K
+        (Product_cat Cat_cat Cat_cat)
+        Cat_cat
+        (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+        (Struct_sigma B C))
+      B);
+
+// Fibrewise right projection: P(B,C) ⊢_K C.
+injective symbol Product_projR_funcd [K : Cat]
+  (B C : τ (Catd K))
+  : τ (Functord
+      (@comp_cat_fapp0
+        K
+        (Product_cat Cat_cat Cat_cat)
+        Cat_cat
+        (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+        (Struct_sigma B C))
+      C);
+
+// Fibrewise pairing with one literal shared source:
+//   FF : E ⊢_K B, GG : E ⊢_K C ⊢ pair(FF,GG) : E ⊢_K P(B,C).
+injective symbol Product_pair_funcd [K : Cat]
+  [E B C : τ (Catd K)]
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C))
+  : τ (Functord
+      E
+      (@comp_cat_fapp0
+        K
+        (Product_cat Cat_cat Cat_cat)
+        Cat_cat
+        (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+        (Struct_sigma B C)));
+
+// Point projection: the displayed left projection is ordinary π₁ in each
+// fibre.
+rule @tapp0_fapp0
+      $K Cat_cat _ _ $x
+      (@Product_projL_funcd $K $B $C)
+  ↪ @Product_projL_func
+      (Fibre_cat $B $x)
+      (Fibre_cat $C $x);
+
+// Full off-diagonal action of the left projection. The returned
+// precomposition functor remains iterable at the next cell.
+rule @tapp1_func
+      $K Cat_cat _ _ $x $y
+      (@Product_projL_funcd $K $B $C)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $K $x $y)
+      (Functor_cat (Fibre_cat $B $x) (Fibre_cat $B $y))
+      (Functor_cat
+        (Fibre_cat
+          (@comp_cat_fapp0
+            $K
+            (Product_cat Cat_cat Cat_cat)
+            Cat_cat
+            (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+            (Struct_sigma $B $C))
+          $x)
+        (Fibre_cat $B $y))
+      (@comp_cat_con_func
+        (Fibre_cat
+          (@comp_cat_fapp0
+            $K
+            (Product_cat Cat_cat Cat_cat)
+            Cat_cat
+            (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+            (Struct_sigma $B $C))
+          $x)
+        (Fibre_cat $B $x)
+        (Fibre_cat $B $y)
+        (@Product_projL_func
+          (Fibre_cat $B $x)
+          (Fibre_cat $C $x)))
+      (@fapp1_func $K Cat_cat $B $x $y);
+
+// Capped base-arrow action of the left projection.
+rule @tapp1_fapp0
+      $K Cat_cat _ _ $x $y
+      (@Product_projL_funcd $K $B $C)
+      $p
+  ↪ @hom_precomp_along_fapp0
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      (Fibre_cat $B $y)
+      (Fibre_cat
+        (@comp_cat_fapp0
+          $K
+          (Product_cat Cat_cat Cat_cat)
+          Cat_cat
+          (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+          (Struct_sigma $B $C))
+        $x)
+      (Fibre_cat $B $x)
+      (@Product_projL_func
+        (Fibre_cat $B $x)
+        (Fibre_cat $C $x))
+      (@fapp1_fapp0 $K Cat_cat $B $x $y $p);
+
+// Point projection: the displayed right projection is ordinary π₂ in each
+// fibre.
+rule @tapp0_fapp0
+      $K Cat_cat _ _ $x
+      (@Product_projR_funcd $K $B $C)
+  ↪ @Product_projR_func
+      (Fibre_cat $B $x)
+      (Fibre_cat $C $x);
+
+// Full off-diagonal action of the right projection.
+rule @tapp1_func
+      $K Cat_cat _ _ $x $y
+      (@Product_projR_funcd $K $B $C)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $K $x $y)
+      (Functor_cat (Fibre_cat $C $x) (Fibre_cat $C $y))
+      (Functor_cat
+        (Fibre_cat
+          (@comp_cat_fapp0
+            $K
+            (Product_cat Cat_cat Cat_cat)
+            Cat_cat
+            (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+            (Struct_sigma $B $C))
+          $x)
+        (Fibre_cat $C $y))
+      (@comp_cat_con_func
+        (Fibre_cat
+          (@comp_cat_fapp0
+            $K
+            (Product_cat Cat_cat Cat_cat)
+            Cat_cat
+            (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+            (Struct_sigma $B $C))
+          $x)
+        (Fibre_cat $C $x)
+        (Fibre_cat $C $y)
+        (@Product_projR_func
+          (Fibre_cat $B $x)
+          (Fibre_cat $C $x)))
+      (@fapp1_func $K Cat_cat $C $x $y);
+
+// Capped base-arrow action of the right projection.
+rule @tapp1_fapp0
+      $K Cat_cat _ _ $x $y
+      (@Product_projR_funcd $K $B $C)
+      $p
+  ↪ @hom_precomp_along_fapp0
+      Cat_cat
+      Cat_cat
+      (@id Cat_cat Cat_cat)
+      (Fibre_cat $C $y)
+      (Fibre_cat
+        (@comp_cat_fapp0
+          $K
+          (Product_cat Cat_cat Cat_cat)
+          Cat_cat
+          (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+          (Struct_sigma $B $C))
+        $x)
+      (Fibre_cat $C $x)
+      (@Product_projR_func
+        (Fibre_cat $B $x)
+        (Fibre_cat $C $x))
+      (@fapp1_fapp0 $K Cat_cat $C $x $y $p);
+
+// Pointwise displayed pairing.
+rule @tapp0_fapp0
+      $K Cat_cat _ _ $x
+      (@Product_pair_funcd $K $E $B $C $FF $GG)
+  ↪ Struct_sigma
+      (@tapp0_fapp0 $K Cat_cat $E $B $x $FF)
+      (@tapp0_fapp0 $K Cat_cat $E $C $x $GG);
+
+// Full off-diagonal action of pairing remains a product-valued functor.
+rule @tapp1_func
+      $K Cat_cat _ _ $x $y
+      (@Product_pair_funcd $K $E $B $C $FF $GG)
+  ↪ Struct_sigma
+      (@tapp1_func $K Cat_cat $E $B $x $y $FF)
+      (@tapp1_func $K Cat_cat $E $C $x $y $GG);
+
+// Capped base-arrow action of pairing is componentwise.
+rule @tapp1_fapp0
+      $K Cat_cat _ _ $x $y
+      (@Product_pair_funcd $K $E $B $C $FF $GG)
+      $p
+  ↪ Struct_sigma
+      (@tapp1_fapp0 $K Cat_cat $E $B $x $y $FF $p)
+      (@tapp1_fapp0 $K Cat_cat $E $C $x $y $GG $p);
+
+// Fixed-base product universal-property betas.
+// lhs-audit: keep 1 -- Catd_cat is the subject-reduction guard for the displayed left beta.
+rule @comp_fapp0
+      (@Catd_cat $K)
+      _
+      _
+      _
+      (@Product_projL_funcd $K $B $C)
+      (@Product_pair_funcd $K _ $B $C $FF _)
+  ↪ $FF;
+
+// lhs-audit: keep 1 -- Catd_cat is the subject-reduction guard for the displayed right beta.
+rule @comp_fapp0
+      (@Catd_cat $K)
+      _
+      _
+      _
+      (@Product_projR_funcd $K $B $C)
+      (@Product_pair_funcd $K _ $B $C _ $GG)
+  ↪ $GG;
+
 // 8c. Section categories and Pi action
 //
 // Fixed-base layer: stable section-category facade for a displayed family.

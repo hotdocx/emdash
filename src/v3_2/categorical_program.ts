@@ -46,6 +46,11 @@ import {
     coreCategoricalFibredProductCoreName
 } from './categorical_fibred_product_transfer';
 import {
+    CoreCategoricalFibredStructureCompilation,
+    compileCoreCategoricalFibredStructureTransfer,
+    coreCategoricalFibredStructureCoreName
+} from './categorical_fibred_structure_transfer';
+import {
     CORE_CATEGORICAL_STRUCTURAL_PREREQUISITES,
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
     CoreCategoricalStructuralPrerequisiteId,
@@ -119,6 +124,9 @@ export const CORE_CATEGORICAL_COMPREHENSION_PROGRAM_REVISION =
 export const CORE_CATEGORICAL_FIBRED_PRODUCT_PROGRAM_REVISION =
     'FIBRED-PRODUCT-1A-CATEGORICAL-PROGRAM-1' as const;
 
+export const CORE_CATEGORICAL_FIBRED_STRUCTURE_PROGRAM_REVISION =
+    'FIBRED-STRUCTURE-1A-CATEGORICAL-PROGRAM-1' as const;
+
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
 const CORE_CATEGORICAL_DISPLAYED_FAMILY =
@@ -145,6 +153,15 @@ extends CoreCategoricalDisplayedFamily {
     readonly programIdentity: symbol;
     readonly baseCategory: InternalCoreCategoricalCategory;
     readonly expression: KernelExpression;
+    /**
+     * Elaboration-only origin retained for the approved canonical
+     * reindexing of an independent sibling group. This metadata is not a
+     * kernel equality and is never serialized into explicit Core.
+     */
+    readonly groupedProduct?: {
+        readonly left: InternalCoreCategoricalDisplayedFamily;
+        readonly right: InternalCoreCategoricalDisplayedFamily;
+    };
 }
 
 export interface CoreCategoricalSourceSite {
@@ -164,13 +181,17 @@ export interface CoreCategoricalProgramOptions {
      * closure. The fibred-comprehension profile additionally exposes the
      * approved asymmetric base-change totalization. The fibred-product
      * profile extends that root-only lineage with the approved transparent
-     * family product and same-base transport.
+     * family product and same-base transport. The fibred-structure profile
+     * adds the fixed-base displayed projections/pairing and frontend-only
+     * canonical grouped-product reindexing approved by
+     * D-DTTLF-USABILITY-006.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
         | 'usability-dependent-1a'
         | 'fibred-comprehension-1a'
-        | 'fibred-product-1a';
+        | 'fibred-product-1a'
+        | 'fibred-structure-1a';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -193,9 +214,12 @@ export type CoreCategoricalProgramErrorCode =
     | 'DISPLAYED_BASE_MISMATCH'
     | 'EXPECTED_CATEGORY_OBJECT'
     | 'EXPECTED_FUNCTOR'
+    | 'EXPECTED_DISPLAYED_FUNCTOR'
     | 'EXPECTED_HOM'
+    | 'DISPLAYED_SOURCE_MISMATCH'
     | 'UNAVAILABLE_COMPREHENSION'
     | 'UNAVAILABLE_FIBRED_PRODUCT'
+    | 'UNAVAILABLE_FIBRED_STRUCTURE'
     | 'UNEXPECTED_KIND';
 
 export class CoreCategoricalProgramError extends Error {
@@ -329,6 +353,36 @@ categoricalLabels[
         'fixed-right-product-map'
     )
 ] = 'emdash.categorical.fixed-right-product-map';
+categoricalLabels[
+    coreCategoricalFibredStructureCoreName(
+        'precomposition-functor'
+    )
+] = 'emdash.categorical.precomposition-functor';
+categoricalLabels[
+    coreCategoricalFibredStructureCoreName(
+        'precomposition-action'
+    )
+] = 'emdash.categorical.precomposition-action';
+categoricalLabels[
+    coreCategoricalFibredStructureCoreName(
+        'displayed-identity'
+    )
+] = 'emdash.categorical.displayed-identity';
+categoricalLabels[
+    coreCategoricalFibredStructureCoreName(
+        'displayed-product-left-projection'
+    )
+] = 'emdash.categorical.displayed-product-left-projection';
+categoricalLabels[
+    coreCategoricalFibredStructureCoreName(
+        'displayed-product-right-projection'
+    )
+] = 'emdash.categorical.displayed-product-right-projection';
+categoricalLabels[
+    coreCategoricalFibredStructureCoreName(
+        'displayed-product-pair'
+    )
+] = 'emdash.categorical.displayed-product-pair';
 
 export const CORE_CATEGORICAL_EXPLICIT_FREE_LABELS:
 Readonly<Record<string, string>> = Object.freeze({
@@ -450,9 +504,11 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDependentCompilation
         | CoreCategoricalDependentCompositionCompilation
         | CoreCategoricalComprehensionCompilation
-        | CoreCategoricalFibredProductCompilation;
+        | CoreCategoricalFibredProductCompilation
+        | CoreCategoricalFibredStructureCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
+    private readonly fibredStructureEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -463,10 +519,16 @@ export class CoreCategoricalProgram {
             options.profile ?? 'reviewed-usability-2a1';
         this.comprehensionEnabled =
             profile === 'fibred-comprehension-1a' ||
-            profile === 'fibred-product-1a';
+            profile === 'fibred-product-1a' ||
+            profile === 'fibred-structure-1a';
         this.fibredProductEnabled =
-            profile === 'fibred-product-1a';
-        this.dependent = this.fibredProductEnabled
+            profile === 'fibred-product-1a' ||
+            profile === 'fibred-structure-1a';
+        this.fibredStructureEnabled =
+            profile === 'fibred-structure-1a';
+        this.dependent = this.fibredStructureEnabled
+            ? compileCoreCategoricalFibredStructureTransfer()
+            : this.fibredProductEnabled
             ? compileCoreCategoricalFibredProductTransfer()
             : this.comprehensionEnabled
             ? compileCoreCategoricalComprehensionTransfer()
@@ -561,14 +623,21 @@ export class CoreCategoricalProgram {
     private makeDisplayedFamily(
         label: string,
         baseCategory: InternalCoreCategoricalCategory,
-        expression: KernelExpression
+        expression: KernelExpression,
+        groupedProduct?: {
+            readonly left: InternalCoreCategoricalDisplayedFamily;
+            readonly right: InternalCoreCategoricalDisplayedFamily;
+        }
     ): CoreCategoricalDisplayedFamily {
         return Object.freeze({
             [CORE_CATEGORICAL_DISPLAYED_FAMILY]: true as const,
             programIdentity: this.programIdentity,
             label,
             baseCategory,
-            expression
+            expression,
+            groupedProduct: groupedProduct === undefined
+                ? undefined
+                : Object.freeze({ ...groupedProduct })
         });
     }
 
@@ -593,7 +662,22 @@ export class CoreCategoricalProgram {
                 'UNAVAILABLE_FIBRED_PRODUCT',
                 nodeProvenance,
                 'Fibrewise family products are available only in the ' +
-                "explicit 'fibred-product-1a' root profile"
+                "explicit 'fibred-product-1a' or " +
+                "'fibred-structure-1a' root profile"
+            );
+        }
+    }
+
+    private requireFibredStructure(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.fibredStructureEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_FIBRED_STRUCTURE',
+                nodeProvenance,
+                'Fibrewise displayed projections and pairing are ' +
+                "available only in the explicit 'fibred-structure-1a' " +
+                'root profile'
             );
         }
     }
@@ -611,15 +695,292 @@ export class CoreCategoricalProgram {
         });
     }
 
-    private fibreCategoryExpression(
+    private functorCategoryExpression(
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalStructuralSymbolCoreName(
+                    CORE_CATEGORICAL_STRUCTURAL_SYMBOLS
+                        .functorCategory
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'explicit',
+                    value: sourceCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: targetCategory
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private productCategoryExpression(
+        leftCategory: KernelExpression,
+        rightCategory: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalStructuralCoreName(
+                    'product-category'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'explicit',
+                    value: leftCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: rightCategory
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private displayedFunctorCategoryExpression(
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1A_PRIMITIVE_NAMES[
+                    'displayed-functor-category'
+                ],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: baseCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: sourceFamily
+                },
+                {
+                    plicity: 'explicit',
+                    value: targetFamily
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private displayedProductExpression(
+        base: KernelExpression,
+        left: KernelExpression,
+        right: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        const cat = kernelApplication(
+            'category-of-categories',
+            [],
+            nodeProvenance
+        );
+        const catProduct = this.productCategoryExpression(
+            cat,
+            cat,
+            nodeProvenance
+        );
+        const catEndofunctors = this.functorCategoryExpression(
+            cat,
+            cat,
+            nodeProvenance
+        );
+        const uncurryPackage = kernelCall(
+            kernelFree(
+                coreCategoricalStructuralCoreName(
+                    'uncurry-package'
+                ),
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: cat },
+                { plicity: 'implicit', value: cat },
+                { plicity: 'implicit', value: cat }
+            ],
+            nodeProvenance
+        );
+        const uncurriedProduct = kernelApplication(
+            'functor-object',
+            [
+                {
+                    value: this.functorCategoryExpression(
+                        cat,
+                        catEndofunctors,
+                        nodeProvenance
+                    )
+                },
+                {
+                    value: this.functorCategoryExpression(
+                        catProduct,
+                        cat,
+                        nodeProvenance
+                    )
+                },
+                { value: uncurryPackage },
+                {
+                    value: kernelFree(
+                        coreCategoricalFibredProductCoreName(
+                            'internal-product-functor'
+                        ),
+                        nodeProvenance
+                    )
+                }
+            ],
+            nodeProvenance
+        );
+        const familyCategory = this.functorCategoryExpression(
+            base,
+            cat,
+            nodeProvenance
+        );
+        const pairedFamilies = kernelCall(
+            kernelFree(
+                coreCategoricalStructuralCoreName(
+                    'product-pair'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: familyCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: familyCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: left
+                },
+                {
+                    plicity: 'explicit',
+                    value: right
+                }
+            ],
+            nodeProvenance
+        );
+        return kernelCall(
+            kernelFree(
+                coreCategoricalStructuralCoreName(
+                    'functor-composition'
+                ),
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: base },
+                {
+                    plicity: 'implicit',
+                    value: catProduct
+                },
+                { plicity: 'implicit', value: cat },
+                {
+                    plicity: 'explicit',
+                    value: uncurriedProduct
+                },
+                {
+                    plicity: 'explicit',
+                    value: pairedFamilies
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private displayedPullbackExpression(
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        family: KernelExpression,
+        substitution: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelApplication(
+            'displayed-pullback',
+            [
+                { value: sourceCategory },
+                { value: targetCategory },
+                { value: family },
+                { value: substitution }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private reindexDisplayedFamily(
         family: InternalCoreCategoricalDisplayedFamily,
+        sourceBase: InternalCoreCategoricalCategory,
+        targetCategory: KernelExpression,
+        substitution: KernelExpression,
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalDisplayedFamily {
+        if (
+            this.fibredStructureEnabled &&
+            family.groupedProduct !== undefined
+        ) {
+            const left = this.reindexDisplayedFamily(
+                family.groupedProduct.left,
+                sourceBase,
+                targetCategory,
+                substitution,
+                nodeProvenance
+            );
+            const right = this.reindexDisplayedFamily(
+                family.groupedProduct.right,
+                sourceBase,
+                targetCategory,
+                substitution,
+                nodeProvenance
+            );
+            return this.makeDisplayedFamily(
+                `${family.label}[substitution]`,
+                sourceBase,
+                this.displayedProductExpression(
+                    sourceBase.expression,
+                    left.expression,
+                    right.expression,
+                    nodeProvenance
+                ),
+                { left, right }
+            ) as InternalCoreCategoricalDisplayedFamily;
+        }
+        return this.makeDisplayedFamily(
+            `${family.label}[substitution]`,
+            sourceBase,
+            this.displayedPullbackExpression(
+                sourceBase.expression,
+                targetCategory,
+                family.expression,
+                substitution,
+                nodeProvenance
+            )
+        ) as InternalCoreCategoricalDisplayedFamily;
+    }
+
+    private fibreCategoryOfExpression(
+        baseCategory: KernelExpression,
+        family: KernelExpression,
         point: KernelExpression,
         nodeProvenance: Provenance
     ): KernelExpression {
         return kernelApplication(
             'functor-object',
             [
-                { value: family.baseCategory.expression },
+                { value: baseCategory },
                 {
                     value: kernelApplication(
                         'category-of-categories',
@@ -627,9 +988,22 @@ export class CoreCategoricalProgram {
                         nodeProvenance
                     )
                 },
-                { value: family.expression },
+                { value: family },
                 { value: point }
             ],
+            nodeProvenance
+        );
+    }
+
+    private fibreCategoryExpression(
+        family: InternalCoreCategoricalDisplayedFamily,
+        point: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return this.fibreCategoryOfExpression(
+            family.baseCategory.expression,
+            family.expression,
+            point,
             nodeProvenance
         );
     }
@@ -761,6 +1135,32 @@ export class CoreCategoricalProgram {
             expression: this.builder.compile(value).term,
             sourceCategory: inspection.type.sourceCategory,
             targetCategory: inspection.type.targetCategory
+        };
+    }
+
+    private requireDisplayedFunctorTerm(
+        value: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly expression: KernelExpression;
+        readonly baseCategory: KernelExpression;
+        readonly sourceFamily: KernelExpression;
+        readonly targetFamily: KernelExpression;
+    } {
+        const inspection = this.builder.inspect(value);
+        if (inspection.type.tag !== 'displayed-functor') {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_DISPLAYED_FUNCTOR',
+                nodeProvenance,
+                `${detail} must be a displayed functor`
+            );
+        }
+        return {
+            expression: this.builder.compile(value).term,
+            baseCategory: inspection.type.baseCategory,
+            sourceFamily: inspection.type.sourceFamily,
+            targetFamily: inspection.type.targetFamily
         };
     }
 
@@ -922,117 +1322,197 @@ export class CoreCategoricalProgram {
             );
         }
 
-        const base = left.baseCategory.expression;
-        const cat = kernelApplication(
-            'category-of-categories',
-            [],
-            nodeProvenance
-        );
-        const functorCategory = (
-            sourceCategory: KernelExpression,
-            targetCategory: KernelExpression
-        ): KernelExpression => kernelCall(
-            kernelFree(
-                coreCategoricalStructuralSymbolCoreName(
-                    CORE_CATEGORICAL_STRUCTURAL_SYMBOLS
-                        .functorCategory
-                ),
+        return this.makeDisplayedFamily(
+            `Productd(${left.label},${right.label})`,
+            left.baseCategory,
+            this.displayedProductExpression(
+                left.baseCategory.expression,
+                left.expression,
+                right.expression,
                 nodeProvenance
             ),
-            [
-                {
-                    plicity: 'explicit',
-                    value: sourceCategory
-                },
-                {
-                    plicity: 'explicit',
-                    value: targetCategory
-                }
-            ],
-            nodeProvenance
+            { left, right }
         );
-        const productCategory = (
-            leftCategory: KernelExpression,
-            rightCategory: KernelExpression
-        ): KernelExpression => kernelCall(
-            kernelFree(
-                coreCategoricalStructuralCoreName(
-                    'product-category'
-                ),
-                nodeProvenance
-            ),
-            [
-                {
-                    plicity: 'explicit',
-                    value: leftCategory
-                },
-                {
-                    plicity: 'explicit',
-                    value: rightCategory
-                }
-            ],
-            nodeProvenance
-        );
+    }
 
-        const catProduct = productCategory(cat, cat);
-        const catEndofunctors = functorCategory(cat, cat);
-        const uncurryPackage = kernelCall(
+    private displayedProductProjection(
+        side: 'left' | 'right',
+        leftValue: CoreCategoricalDisplayedFamily,
+        rightValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `fibrewise product ${side} projection`,
+            source
+        );
+        this.requireFibredStructure(nodeProvenance);
+        const left = this.requireDisplayedFamily(
+            leftValue,
+            nodeProvenance
+        );
+        const right = this.requireDisplayedFamily(
+            rightValue,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            left.baseCategory.expression,
+            right.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Displayed projection factors must have the same base'
+            );
+        }
+        const base = left.baseCategory.expression;
+        const product = this.displayedProductExpression(
+            base,
+            left.expression,
+            right.expression,
+            nodeProvenance
+        );
+        const target = side === 'left'
+            ? left.expression
+            : right.expression;
+        const expression = kernelCall(
             kernelFree(
-                coreCategoricalStructuralCoreName(
-                    'uncurry-package'
+                coreCategoricalFibredStructureCoreName(
+                    side === 'left'
+                        ? 'displayed-product-left-projection'
+                        : 'displayed-product-right-projection'
                 ),
                 nodeProvenance
             ),
             [
-                { plicity: 'implicit', value: cat },
-                { plicity: 'implicit', value: cat },
-                { plicity: 'implicit', value: cat }
-            ],
-            nodeProvenance
-        );
-        const uncurriedProduct = kernelApplication(
-            'functor-object',
-            [
+                { plicity: 'implicit', value: base },
                 {
-                    value: functorCategory(
-                        cat,
-                        catEndofunctors
-                    )
+                    plicity: 'explicit',
+                    value: left.expression
                 },
                 {
-                    value: functorCategory(
-                        catProduct,
-                        cat
-                    )
-                },
-                { value: uncurryPackage },
-                {
-                    value: kernelFree(
-                        coreCategoricalFibredProductCoreName(
-                            'internal-product-functor'
-                        ),
-                        nodeProvenance
-                    )
+                    plicity: 'explicit',
+                    value: right.expression
                 }
             ],
             nodeProvenance
         );
-        const familyCategory = functorCategory(base, cat);
-        const pairedFamilies = kernelCall(
+        return this.makeTerm(
+            expression,
+            {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategoryExpression(
+                    base,
+                    product,
+                    target,
+                    nodeProvenance
+                ),
+                baseCategory: base,
+                sourceFamily: product,
+                targetFamily: target
+            },
+            nodeProvenance
+        );
+    }
+
+    displayedProductLeftProjection(
+        leftValue: CoreCategoricalDisplayedFamily,
+        rightValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        return this.displayedProductProjection(
+            'left',
+            leftValue,
+            rightValue,
+            source
+        );
+    }
+
+    displayedProductRightProjection(
+        leftValue: CoreCategoricalDisplayedFamily,
+        rightValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        return this.displayedProductProjection(
+            'right',
+            leftValue,
+            rightValue,
+            source
+        );
+    }
+
+    /**
+     * Pair two displayed functors with one literal shared source family.
+     */
+    displayedProductPair(
+        leftValue: CoreCategoricalTerm,
+        rightValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'fibrewise displayed-functor pairing',
+            source
+        );
+        this.requireFibredStructure(nodeProvenance);
+        const left = this.requireDisplayedFunctorTerm(
+            leftValue,
+            nodeProvenance,
+            'Left displayed-pair component'
+        );
+        const right = this.requireDisplayedFunctorTerm(
+            rightValue,
+            nodeProvenance,
+            'Right displayed-pair component'
+        );
+        if (!kernelExpressionEquals(
+            left.baseCategory,
+            right.baseCategory
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Displayed-pair components must have the same base'
+            );
+        }
+        if (!kernelExpressionEquals(
+            left.sourceFamily,
+            right.sourceFamily
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                'Displayed-pair components must have one literal shared ' +
+                'source family'
+            );
+        }
+        const target = this.displayedProductExpression(
+            left.baseCategory,
+            left.targetFamily,
+            right.targetFamily,
+            nodeProvenance
+        );
+        const expression = kernelCall(
             kernelFree(
-                coreCategoricalStructuralCoreName(
-                    'product-pair'
+                coreCategoricalFibredStructureCoreName(
+                    'displayed-product-pair'
                 ),
                 nodeProvenance
             ),
             [
                 {
                     plicity: 'implicit',
-                    value: familyCategory
+                    value: left.baseCategory
                 },
                 {
                     plicity: 'implicit',
-                    value: familyCategory
+                    value: left.sourceFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: left.targetFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: right.targetFamily
                 },
                 {
                     plicity: 'explicit',
@@ -1045,10 +1525,66 @@ export class CoreCategoricalProgram {
             ],
             nodeProvenance
         );
-        const expression = kernelCall(
+        return this.makeTerm(
+            expression,
+            {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategoryExpression(
+                    left.baseCategory,
+                    left.sourceFamily,
+                    target,
+                    nodeProvenance
+                ),
+                baseCategory: left.baseCategory,
+                sourceFamily: left.sourceFamily,
+                targetFamily: target
+            },
+            nodeProvenance
+        );
+    }
+
+    /**
+     * Transparent exchange of two independent displayed siblings.
+     */
+    displayedProductSwap(
+        leftValue: CoreCategoricalDisplayedFamily,
+        rightValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const right = this.displayedProductRightProjection(
+            leftValue,
+            rightValue,
+            source
+        );
+        const left = this.displayedProductLeftProjection(
+            leftValue,
+            rightValue,
+            source
+        );
+        return this.displayedProductPair(right, left, source);
+    }
+
+    /**
+     * Transparent contraction into two copies of one displayed family.
+     */
+    displayedProductDiagonal(
+        familyValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'fibrewise displayed diagonal',
+            source
+        );
+        this.requireFibredStructure(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const base = family.baseCategory.expression;
+        const identity = kernelCall(
             kernelFree(
-                coreCategoricalStructuralCoreName(
-                    'functor-composition'
+                coreCategoricalFibredStructureCoreName(
+                    'displayed-identity'
                 ),
                 nodeProvenance
             ),
@@ -1056,25 +1592,157 @@ export class CoreCategoricalProgram {
                 { plicity: 'implicit', value: base },
                 {
                     plicity: 'implicit',
-                    value: catProduct
-                },
-                { plicity: 'implicit', value: cat },
-                {
-                    plicity: 'explicit',
-                    value: uncurriedProduct
-                },
-                {
-                    plicity: 'explicit',
-                    value: pairedFamilies
+                    value: family.expression
                 }
             ],
             nodeProvenance
         );
+        const target = this.displayedProductExpression(
+            base,
+            family.expression,
+            family.expression,
+            nodeProvenance
+        );
+        const expression = kernelCall(
+            kernelFree(
+                coreCategoricalFibredStructureCoreName(
+                    'displayed-product-pair'
+                ),
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: base },
+                {
+                    plicity: 'implicit',
+                    value: family.expression
+                },
+                {
+                    plicity: 'implicit',
+                    value: family.expression
+                },
+                {
+                    plicity: 'implicit',
+                    value: family.expression
+                },
+                { plicity: 'explicit', value: identity },
+                { plicity: 'explicit', value: identity }
+            ],
+            nodeProvenance
+        );
+        return this.makeTerm(
+            expression,
+            {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategoryExpression(
+                    base,
+                    family.expression,
+                    target,
+                    nodeProvenance
+                ),
+                baseCategory: base,
+                sourceFamily: family.expression,
+                targetFamily: target
+            },
+            nodeProvenance
+        );
+    }
 
-        return this.makeDisplayedFamily(
-            `Productd(${left.label},${right.label})`,
-            left.baseCategory,
-            expression
+    /**
+     * Expose the iterable off-diagonal action of a displayed functor.
+     *
+     * This is intentionally profile-gated: earlier frozen profiles retain
+     * their component-only surface, while FIBRED-STRUCTURE-1A can exercise
+     * the approved `tapp1_func` rules and their next-cell action.
+     */
+    displayedFunctorFullAction(
+        displayedFunctorValue: CoreCategoricalTerm,
+        sourcePointValue: CoreCategoricalTerm,
+        targetPointValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'full displayed-functor base action',
+            source
+        );
+        this.requireFibredStructure(nodeProvenance);
+        const displayedFunctor = this.requireDisplayedFunctorTerm(
+            displayedFunctorValue,
+            nodeProvenance,
+            'Full displayed action subject'
+        );
+        const sourcePoint = this.requireObjectTerm(
+            sourcePointValue,
+            nodeProvenance,
+            'Full displayed action source point'
+        );
+        const targetPoint = this.requireObjectTerm(
+            targetPointValue,
+            nodeProvenance,
+            'Full displayed action target point'
+        );
+        this.requireSameCategory(
+            sourcePoint.category,
+            displayedFunctor.baseCategory,
+            nodeProvenance,
+            'Full displayed action source point'
+        );
+        this.requireSameCategory(
+            targetPoint.category,
+            displayedFunctor.baseCategory,
+            nodeProvenance,
+            'Full displayed action target point'
+        );
+        const sourceHom = kernelApplication(
+            'hom-category',
+            [
+                { value: displayedFunctor.baseCategory },
+                { value: sourcePoint.expression },
+                { value: targetPoint.expression }
+            ],
+            nodeProvenance
+        );
+        const sourceFibre = this.fibreCategoryOfExpression(
+            displayedFunctor.baseCategory,
+            displayedFunctor.sourceFamily,
+            sourcePoint.expression,
+            nodeProvenance
+        );
+        const targetFibre = this.fibreCategoryOfExpression(
+            displayedFunctor.baseCategory,
+            displayedFunctor.targetFamily,
+            targetPoint.expression,
+            nodeProvenance
+        );
+        return this.makeTerm(
+            kernelApplication(
+                'transfor-hom-full',
+                [
+                    { value: displayedFunctor.baseCategory },
+                    {
+                        value: kernelApplication(
+                            'category-of-categories',
+                            [],
+                            nodeProvenance
+                        )
+                    },
+                    { value: displayedFunctor.sourceFamily },
+                    { value: displayedFunctor.targetFamily },
+                    { value: sourcePoint.expression },
+                    { value: targetPoint.expression },
+                    { value: displayedFunctor.expression }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'functor',
+                sourceCategory: sourceHom,
+                targetCategory: this.functorCategoryExpression(
+                    sourceFibre,
+                    targetFibre,
+                    nodeProvenance
+                )
+            },
+            nodeProvenance
         );
     }
 
@@ -1187,19 +1855,12 @@ export class CoreCategoricalProgram {
             `source(${family.label})`,
             substitution.sourceCategory
         ) as InternalCoreCategoricalCategory;
-        return this.makeDisplayedFamily(
-            `${family.label}[substitution]`,
+        return this.reindexDisplayedFamily(
+            family,
             sourceCategory,
-            kernelApplication(
-                'displayed-pullback',
-                [
-                    { value: substitution.sourceCategory },
-                    { value: substitution.targetCategory },
-                    { value: family.expression },
-                    { value: substitution.expression }
-                ],
-                nodeProvenance
-            )
+            substitution.targetCategory,
+            substitution.expression,
+            nodeProvenance
         );
     }
 
@@ -1567,20 +2228,13 @@ export class CoreCategoricalProgram {
             `source(${family.label})`,
             substitution.sourceCategory
         ) as InternalCoreCategoricalCategory;
-        const reindexed = this.makeDisplayedFamily(
-            `${family.label}[substitution]`,
+        const reindexed = this.reindexDisplayedFamily(
+            family,
             sourceBase,
-            kernelApplication(
-                'displayed-pullback',
-                [
-                    { value: substitution.sourceCategory },
-                    { value: substitution.targetCategory },
-                    { value: family.expression },
-                    { value: substitution.expression }
-                ],
-                nodeProvenance
-            )
-        ) as InternalCoreCategoricalDisplayedFamily;
+            substitution.targetCategory,
+            substitution.expression,
+            nodeProvenance
+        );
         return this.makeTerm(
             kernelCall(
                 kernelFree(
@@ -1795,6 +2449,200 @@ export class CoreCategoricalProgram {
                 ],
                 nodeProvenance
             )
+        );
+    }
+
+    private productProjection(
+        side: 'left' | 'right',
+        leftValue: CoreCategoricalCategory,
+        rightValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `ordinary product ${side} projection`,
+            source
+        );
+        const left = this.requireCategory(
+            leftValue,
+            nodeProvenance
+        );
+        const right = this.requireCategory(
+            rightValue,
+            nodeProvenance
+        );
+        return this.makeTerm(
+            kernelCall(
+                kernelFree(
+                    coreCategoricalStructuralCoreName(
+                        side === 'left'
+                            ? 'product-left-projection'
+                            : 'product-right-projection'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: left.expression
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: right.expression
+                    }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'functor',
+                sourceCategory: this.productCategoryExpression(
+                    left.expression,
+                    right.expression,
+                    nodeProvenance
+                ),
+                targetCategory: side === 'left'
+                    ? left.expression
+                    : right.expression
+            },
+            nodeProvenance
+        );
+    }
+
+    productLeftProjection(
+        leftValue: CoreCategoricalCategory,
+        rightValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        return this.productProjection(
+            'left',
+            leftValue,
+            rightValue,
+            source
+        );
+    }
+
+    productRightProjection(
+        leftValue: CoreCategoricalCategory,
+        rightValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        return this.productProjection(
+            'right',
+            leftValue,
+            rightValue,
+            source
+        );
+    }
+
+    identityFunctor(
+        categoryValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'ordinary identity functor',
+            source
+        );
+        const category = this.requireCategory(
+            categoryValue,
+            nodeProvenance
+        );
+        return this.makeTerm(
+            kernelCall(
+                kernelFree(
+                    coreCategoricalStructuralCoreName(
+                        'identity-functor'
+                    ),
+                    nodeProvenance
+                ),
+                [{
+                    plicity: 'implicit',
+                    value: category.expression
+                }],
+                nodeProvenance
+            ),
+            {
+                tag: 'functor',
+                sourceCategory: category.expression,
+                targetCategory: category.expression
+            },
+            nodeProvenance
+        );
+    }
+
+    functorPair(
+        leftValue: CoreCategoricalTerm,
+        rightValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'ordinary functor pairing',
+            source
+        );
+        const left = this.requireFunctorTerm(
+            leftValue,
+            nodeProvenance,
+            'Left functor-pair component'
+        );
+        const right = this.requireFunctorTerm(
+            rightValue,
+            nodeProvenance,
+            'Right functor-pair component'
+        );
+        if (!kernelExpressionEquals(
+            left.sourceCategory,
+            right.sourceCategory
+        )) {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_FUNCTOR',
+                nodeProvenance,
+                'Functor-pair components must have one shared source'
+            );
+        }
+        return this.makeTerm(
+            kernelCall(
+                kernelFree(
+                    coreCategoricalStructuralCoreName(
+                        'product-pair'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: this.functorCategoryExpression(
+                            left.sourceCategory,
+                            left.targetCategory,
+                            nodeProvenance
+                        )
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: this.functorCategoryExpression(
+                            right.sourceCategory,
+                            right.targetCategory,
+                            nodeProvenance
+                        )
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: left.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: right.expression
+                    }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'functor',
+                sourceCategory: left.sourceCategory,
+                targetCategory: this.productCategoryExpression(
+                    left.targetCategory,
+                    right.targetCategory,
+                    nodeProvenance
+                )
+            },
+            nodeProvenance
         );
     }
 
@@ -2111,6 +2959,35 @@ export class CoreCategoricalProgram {
             nodeProvenance
         );
         const right = this.requireCategory(
+            rightValue,
+            nodeProvenance
+        );
+        const runtime = 'composedRuntime' in this.dependent
+            ? this.dependent.composedRuntime
+            : this.dependent.structural.composedRuntime;
+        return coreLfDefinitionalCompare(
+            this.environment,
+            left.expression,
+            right.expression,
+            stepLimit,
+            undefined,
+            runtime
+        );
+    }
+
+    compareDisplayedFamilies(
+        leftValue: CoreCategoricalDisplayedFamily,
+        rightValue: CoreCategoricalDisplayedFamily,
+        stepLimit = 512
+    ): CoreLfComparisonResult {
+        const nodeProvenance = this.at(
+            'displayed-family comparison'
+        );
+        const left = this.requireDisplayedFamily(
+            leftValue,
+            nodeProvenance
+        );
+        const right = this.requireDisplayedFamily(
             rightValue,
             nodeProvenance
         );

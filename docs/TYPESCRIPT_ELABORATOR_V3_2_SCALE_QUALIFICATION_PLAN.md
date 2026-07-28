@@ -2732,16 +2732,19 @@ scope is affected.
   authority overlay, selected a mechanism-diverse stress corpus, defined
   mechanical acceptance criteria and review gates, and selected SCALE-0A as
   the first non-semantic implementation slice.
-- **2026-07-27 — Later comprehension and fibred-product slices repinned live
-  drift evidence.** The separately governed usability continuation added the
+- **2026-07-27 — Later comprehension, fibred-product, and fixed-base
+  structural slices repinned live drift evidence.** The separately governed
+  usability continuation added the
   audited `sigma_pullback_total_func` owner and its two runtime rules, then
   added the two approved existing-owner fibred-product computation rules
-  without a product declaration. The generic inventory now observes 758 core
-  symbols, 601 exported runtime-rule commands, and 637 canonical runtime
-  clauses; the source and canonical export hashes are
-  `sha256:fac748f9fa27a80ca6a1198145db0fb283dc46ed60d513154c31d706646136ed`
+  without a product declaration, then added exactly three fixed-base
+  projection/pairing owners and eleven rules under D-DTTLF-USABILITY-006.
+  The generic inventory now observes 761 core symbols, 612 exported
+  runtime-rule commands, and 648 canonical runtime clauses; the source and
+  canonical export hashes are
+  `sha256:33e7e78b6516180507f2e99cff465119effbb84f2981d44b609d751963e24f94`
   and
-  `sha256:fb6fbcf4d486f22fa000f16f2deefc4b9bae65a066b8def952a3f1756030cf2f`.
+  `sha256:539dd35e70262a69c8f507b7a4e1562e72548983f186b3dbe940df3562063323`.
   Exact acquisition selections remain valid. The initial inventory tables
   above remain historical measurements rather than silently changing their
   baseline.

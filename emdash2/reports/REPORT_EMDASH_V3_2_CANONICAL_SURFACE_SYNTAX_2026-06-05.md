@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-07-20
+Last reviewed: 2026-07-27
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -380,6 +380,59 @@ Functor_catd A B
 The generic `->_[z]^Cat` reading is useful when emphasizing that
 `Functor_catd` is the `Cat`-ambient instance of `Hom_catd`; the `⊢_[z]`
 reading is preferred when emphasizing the functor/program-family type former.
+
+## Displayed Sibling Product Notation
+
+For Cat-valued displayed families `B,C : Catd K`, write:
+
+```text
+P(B,C) : Catd K
+```
+
+for the transparent family:
+
+```text
+uncurry(Product_cat_func) o Struct_sigma(B,C).
+```
+
+`P` is mathematical and direct-TypeScript surface notation, not a
+`Product_catd` kernel owner or an implemented string-parser token.
+
+The fixed-base structural maps are written:
+
+```text
+projL_d(B,C) : P(B,C) ⊢_K B
+projR_d(B,C) : P(B,C) ⊢_K C
+
+FF : E ⊢_K B
+GG : E ⊢_K C
+pair_d(FF,GG) : E ⊢_K P(B,C).
+```
+
+Their active kernel owners are `Product_projL_funcd`,
+`Product_projR_funcd`, and `Product_pair_funcd`. The derived structural maps
+are:
+
+```text
+swap_d(B,C) = pair_d(projR_d(B,C),projL_d(B,C))
+diag_d(B)   = pair_d(id_d(B),id_d(B)).
+```
+
+These express exchange and contraction of independent siblings over one
+shared base. They do not license exchange across a genuine dependency edge.
+
+The dependency-aware direct-TypeScript frontend uses the canonical
+reindexing presentation:
+
+```text
+P(B,C)[F] = P(B[F],C[F]).
+```
+
+The right side means
+`P(Pullback_catd(B,F),Pullback_catd(C,F))`. This spelling records frontend
+Core selection only: the raw kernel term `Pullback_catd(P(B,C),F)` is not
+currently definitionally equal to it, and no generic total-category pullback
+is intended.
 
 ## Transformations
 

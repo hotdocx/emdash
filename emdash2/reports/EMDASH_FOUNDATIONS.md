@@ -1267,12 +1267,46 @@ The second equation deliberately recognizes the two component actions over
 the same literal base arrow `p`. It does not assert an unrestricted
 off-diagonal product action for unrelated `p` and `q`. Consequently this
 transparent product supplies the first grouped-sibling fibre and transport
-semantics while preserving `Product_map_func` as the iterable result. A
-primitive `Product_catd`, global
+semantics while preserving `Product_map_func` as the iterable result.
+
+Its fixed-base cartesian universal property is supplied by the active
+displayed functors
+
+```text
+projL_d(B,C) : P(B,C) ⊢_K B
+projR_d(B,C) : P(B,C) ⊢_K C
+pair_d(FF,GG) : E ⊢_K P(B,C).
+```
+
+They compute at objects, on their full off-diagonal action, and on capped
+base-arrow action. Both projection-after-pairing composites reduce to the
+corresponding component. The full-action equations, rather than only their
+capped instances, preserve the functor-valued result needed for iteration at
+the next cell. Fibrewise exchange and contraction are therefore derived:
+
+```text
+swap_d(B,C) = pair_d(projR_d(B,C),projL_d(B,C))
+diag_d(B)   = pair_d(id_d(B),id_d(B)).
+```
+
+This is structural logic for independent siblings over one fixed base, not
+exchange across a genuine dependency edge. A primitive `Product_catd`,
+global
 `Functord_cat(E,P(B,C)) = Product_cat(Functord_cat(E,B),Functord_cat(E,C))`,
-pullback stability, displayed projections/pairing/swap/diagonal, and full
-base-two-cell action are not consequences of these two computations; they
-remain separately qualified structural work.
+universe-level projection transfors, and full base-two-cell action are still
+not consequences of the fixed-base closure.
+
+Reindexing stability is currently a canonical elaboration choice rather than
+a kernel equality. A dependency-aware frontend lowers reindexing of a grouped
+product directly to
+
+```text
+P(Pullback_catd(B,F),Pullback_catd(C,F)).
+```
+
+The raw whole-family expression `Pullback_catd(P(B,C),F)` deliberately
+remains non-convertible to this form. No generic pullback of total categories
+is assumed.
 
 ## 8. Arrows Between Sections
 
@@ -2532,9 +2566,11 @@ The current foundations intentionally do not yet include:
 - full product/curry adjunction coherence for `Product_cat`, beyond the
   current product normal form, projection computation, and functor-level
   curry/uncurry action laws; the transparent fibrewise product of two
-  Cat-valued displayed families and its same-base object/arrow action are
-  active, while displayed projection/pairing/swap/diagonal, pullback
-  stability, and full family higher action remain future work;
+  Cat-valued displayed families, its same-base object/arrow action, fixed-base
+  displayed projection/pairing, derived swap/diagonal, and universal-property
+  betas are active, while universe-level projection transfors, raw kernel
+  pullback stability, global displayed-functor/product conversion,
+  dependent-chain exchange, and full family higher action remain future work;
 - general dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base
   functors;
 - a general coend/coinserter implementation of profunctor tensor;

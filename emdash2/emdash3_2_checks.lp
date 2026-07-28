@@ -9131,6 +9131,464 @@ assertnot [A K : Cat]
         (@Pullback_catd A K B F)
         (@Pullback_catd A K C F);
 
+// Fixed-base fibrewise product projections and pairing.
+//
+// These check-only aliases expose swap and diagonal as transparent
+// compositions of the three active structural owners.
+symbol Product_swap_funcd_check [K : Cat]
+  (B C : τ (Catd K))
+  : τ (Functord
+      (@Product_catd_transparent_check K B C)
+      (@Product_catd_transparent_check K C B))
+≔ @Product_pair_funcd
+    K
+    (@Product_catd_transparent_check K B C)
+    C
+    B
+    (@Product_projR_funcd K B C)
+    (@Product_projL_funcd K B C);
+
+symbol Product_diag_funcd_check [K : Cat]
+  (B : τ (Catd K))
+  : τ (Functord
+      B
+      (@Product_catd_transparent_check K B B))
+≔ @Product_pair_funcd
+    K
+    B
+    B
+    B
+    (@id_funcd K B)
+    (@id_funcd K B);
+
+// Both point projections expose the ordinary fibre projections.
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      B
+      k
+      (@Product_projL_funcd K B C)
+    ≡ @Product_projL_func
+        (Fibre_cat B k)
+        (Fibre_cat C k);
+
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      C
+      k
+      (@Product_projR_funcd K B C)
+    ≡ @Product_projR_func
+        (Fibre_cat B k)
+        (Fibre_cat C k);
+
+// Full projection action remains at iterable functor level.
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (x y : τ (Obj K)) ⊢
+  @tapp1_func
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      B
+      x
+      y
+      (@Product_projL_funcd K B C)
+    ≡ @comp_cat_fapp0
+        (Hom_cat K x y)
+        (Functor_cat (Fibre_cat B x) (Fibre_cat B y))
+        (Functor_cat
+          (Fibre_cat (@Product_catd_transparent_check K B C) x)
+          (Fibre_cat B y))
+        (@comp_cat_con_func
+          (Fibre_cat (@Product_catd_transparent_check K B C) x)
+          (Fibre_cat B x)
+          (Fibre_cat B y)
+          (@Product_projL_func
+            (Fibre_cat B x)
+            (Fibre_cat C x)))
+        (@fapp1_func K Cat_cat B x y);
+
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (x y : τ (Obj K)) ⊢
+  @tapp1_func
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      C
+      x
+      y
+      (@Product_projR_funcd K B C)
+    ≡ @comp_cat_fapp0
+        (Hom_cat K x y)
+        (Functor_cat (Fibre_cat C x) (Fibre_cat C y))
+        (Functor_cat
+          (Fibre_cat (@Product_catd_transparent_check K B C) x)
+          (Fibre_cat C y))
+        (@comp_cat_con_func
+          (Fibre_cat (@Product_catd_transparent_check K B C) x)
+          (Fibre_cat C x)
+          (Fibre_cat C y)
+          (@Product_projR_func
+            (Fibre_cat B x)
+            (Fibre_cat C x)))
+        (@fapp1_func K Cat_cat C x y);
+
+// Capped projection actions retain stable precomposition owners.
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @tapp1_fapp0
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      B
+      x
+      y
+      (@Product_projL_funcd K B C)
+      p
+    ≡ @hom_precomp_along_fapp0
+        Cat_cat
+        Cat_cat
+        (@id Cat_cat Cat_cat)
+        (Fibre_cat B y)
+        (Fibre_cat (@Product_catd_transparent_check K B C) x)
+        (Fibre_cat B x)
+        (@Product_projL_func
+          (Fibre_cat B x)
+          (Fibre_cat C x))
+        (@fapp1_fapp0 K Cat_cat B x y p);
+
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @tapp1_fapp0
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      C
+      x
+      y
+      (@Product_projR_funcd K B C)
+      p
+    ≡ @hom_precomp_along_fapp0
+        Cat_cat
+        Cat_cat
+        (@id Cat_cat Cat_cat)
+        (Fibre_cat C y)
+        (Fibre_cat (@Product_catd_transparent_check K B C) x)
+        (Fibre_cat C x)
+        (@Product_projR_func
+          (Fibre_cat B x)
+          (Fibre_cat C x))
+        (@fapp1_fapp0 K Cat_cat C x y p);
+
+// Pairing computes pointwise and at both full and capped base action.
+assert [K : Cat]
+  (E B C : τ (Catd K))
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K
+      Cat_cat
+      E
+      (@Product_catd_transparent_check K B C)
+      k
+      (@Product_pair_funcd K E B C FF GG)
+    ≡ @Product_pair
+        (Functor_cat (Fibre_cat E k) (Fibre_cat B k))
+        (Functor_cat (Fibre_cat E k) (Fibre_cat C k))
+        (@tapp0_fapp0 K Cat_cat E B k FF)
+        (@tapp0_fapp0 K Cat_cat E C k GG);
+
+assert [K : Cat]
+  (E B C : τ (Catd K))
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C))
+  (x y : τ (Obj K)) ⊢
+  @tapp1_func
+      K
+      Cat_cat
+      E
+      (@Product_catd_transparent_check K B C)
+      x
+      y
+      (@Product_pair_funcd K E B C FF GG)
+    ≡ @Product_pair
+        (Functor_cat (Hom_cat K x y)
+          (Functor_cat (Fibre_cat E x) (Fibre_cat B y)))
+        (Functor_cat (Hom_cat K x y)
+          (Functor_cat (Fibre_cat E x) (Fibre_cat C y)))
+        (@tapp1_func K Cat_cat E B x y FF)
+        (@tapp1_func K Cat_cat E C x y GG);
+
+assert [K : Cat]
+  (E B C : τ (Catd K))
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @tapp1_fapp0
+      K
+      Cat_cat
+      E
+      (@Product_catd_transparent_check K B C)
+      x
+      y
+      (@Product_pair_funcd K E B C FF GG)
+      p
+    ≡ @Product_pair
+        (Functor_cat (Fibre_cat E x) (Fibre_cat B y))
+        (Functor_cat (Fibre_cat E x) (Fibre_cat C y))
+        (@tapp1_fapp0 K Cat_cat E B x y FF p)
+        (@tapp1_fapp0 K Cat_cat E C x y GG p);
+
+// Whole displayed universal-property betas.
+assert [K : Cat]
+  (E B C : τ (Catd K))
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C)) ⊢
+  @comp_fapp0
+      (@Catd_cat K)
+      E
+      (@Product_catd_transparent_check K B C)
+      B
+      (@Product_projL_funcd K B C)
+      (@Product_pair_funcd K E B C FF GG)
+    ≡ FF;
+
+assert [K : Cat]
+  (E B C : τ (Catd K))
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C)) ⊢
+  @comp_fapp0
+      (@Catd_cat K)
+      E
+      (@Product_catd_transparent_check K B C)
+      C
+      (@Product_projR_funcd K B C)
+      (@Product_pair_funcd K E B C FF GG)
+    ≡ GG;
+
+// Derived exchange and contraction have the expected fibre components.
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      (@Product_catd_transparent_check K C B)
+      k
+      (@Product_swap_funcd_check K B C)
+    ≡ @Product_pair
+        (Functor_cat
+          (Product_cat (Fibre_cat B k) (Fibre_cat C k))
+          (Fibre_cat C k))
+        (Functor_cat
+          (Product_cat (Fibre_cat B k) (Fibre_cat C k))
+          (Fibre_cat B k))
+        (@Product_projR_func
+          (Fibre_cat B k)
+          (Fibre_cat C k))
+        (@Product_projL_func
+          (Fibre_cat B k)
+          (Fibre_cat C k));
+
+assert [K : Cat]
+  (B : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K
+      Cat_cat
+      B
+      (@Product_catd_transparent_check K B B)
+      k
+      (@Product_diag_funcd_check K B)
+    ≡ @Product_pair
+        (Functor_cat (Fibre_cat B k) (Fibre_cat B k))
+        (Functor_cat (Fibre_cat B k) (Fibre_cat B k))
+        (@id_func (Fibre_cat B k))
+        (@id_func (Fibre_cat B k));
+
+// The full projection actions accept a genuine next base cell.
+symbol Product_projL_funcd_higher_check
+  [K : Cat]
+  [B C : τ (Catd K)]
+  [x y : τ (Obj K)]
+  [p q : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) p q))
+  : τ (Transf
+      (@tapp1_fapp0
+        K
+        Cat_cat
+        (@Product_catd_transparent_check K B C)
+        B
+        x
+        y
+        (@Product_projL_funcd K B C)
+        p)
+      (@tapp1_fapp0
+        K
+        Cat_cat
+        (@Product_catd_transparent_check K B C)
+        B
+        x
+        y
+        (@Product_projL_funcd K B C)
+        q))
+≔ @fapp1_fapp0
+    (Hom_cat K x y)
+    (Functor_cat
+      (Fibre_cat (@Product_catd_transparent_check K B C) x)
+      (Fibre_cat B y))
+    (@tapp1_func
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      B
+      x
+      y
+      (@Product_projL_funcd K B C))
+    p
+    q
+    alpha;
+
+symbol Product_projR_funcd_higher_check
+  [K : Cat]
+  [B C : τ (Catd K)]
+  [x y : τ (Obj K)]
+  [p q : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) p q))
+  : τ (Transf
+      (@tapp1_fapp0
+        K
+        Cat_cat
+        (@Product_catd_transparent_check K B C)
+        C
+        x
+        y
+        (@Product_projR_funcd K B C)
+        p)
+      (@tapp1_fapp0
+        K
+        Cat_cat
+        (@Product_catd_transparent_check K B C)
+        C
+        x
+        y
+        (@Product_projR_funcd K B C)
+        q))
+≔ @fapp1_fapp0
+    (Hom_cat K x y)
+    (Functor_cat
+      (Fibre_cat (@Product_catd_transparent_check K B C) x)
+      (Fibre_cat C y))
+    (@tapp1_func
+      K
+      Cat_cat
+      (@Product_catd_transparent_check K B C)
+      C
+      x
+      y
+      (@Product_projR_funcd K B C))
+    p
+    q
+    alpha;
+
+// Pairing's full action remains iterable, and both higher projections compute.
+symbol Product_pair_funcd_higher_check
+  [K : Cat]
+  [E B C : τ (Catd K)]
+  [FF : τ (Functord E B)]
+  [GG : τ (Functord E C)]
+  [x y : τ (Obj K)]
+  [p q : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) p q))
+  : τ (Transf
+      (@tapp1_fapp0
+        K
+        Cat_cat
+        E
+        (@Product_catd_transparent_check K B C)
+        x
+        y
+        (@Product_pair_funcd K E B C FF GG)
+        p)
+      (@tapp1_fapp0
+        K
+        Cat_cat
+        E
+        (@Product_catd_transparent_check K B C)
+        x
+        y
+        (@Product_pair_funcd K E B C FF GG)
+        q))
+≔ @fapp1_fapp0
+    (Hom_cat K x y)
+    (Functor_cat
+      (Fibre_cat E x)
+      (Fibre_cat (@Product_catd_transparent_check K B C) y))
+    (@tapp1_func
+      K
+      Cat_cat
+      E
+      (@Product_catd_transparent_check K B C)
+      x
+      y
+      (@Product_pair_funcd K E B C FF GG))
+    p
+    q
+    alpha;
+
+assert [K : Cat]
+  (E B C : τ (Catd K))
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C))
+  (x y : τ (Obj K))
+  (p q : τ (Hom K x y))
+  (alpha : τ (Hom (Hom_cat K x y) p q)) ⊢
+  sigma_Fst
+      (@Product_pair_funcd_higher_check
+        K E B C FF GG x y p q alpha)
+    ≡ @fapp1_fapp0
+        (Hom_cat K x y)
+        (Functor_cat (Fibre_cat E x) (Fibre_cat B y))
+        (@tapp1_func K Cat_cat E B x y FF)
+        p
+        q
+        alpha;
+
+assert [K : Cat]
+  (E B C : τ (Catd K))
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C))
+  (x y : τ (Obj K))
+  (p q : τ (Hom K x y))
+  (alpha : τ (Hom (Hom_cat K x y) p q)) ⊢
+  sigma_Snd
+      (@Product_pair_funcd_higher_check
+        K E B C FF GG x y p q alpha)
+    ≡ @fapp1_fapp0
+        (Hom_cat K x y)
+        (Functor_cat (Fibre_cat E x) (Fibre_cat C y))
+        (@tapp1_func K Cat_cat E C x y GG)
+        p
+        q
+        alpha;
+
 assert [A B : Cat] (F : τ (Functor A B)) (x : τ (Obj A)) ⊢
   fapp0 (@Eval_func A B) (Struct_sigma F x)
     ≡ fapp0 F x;

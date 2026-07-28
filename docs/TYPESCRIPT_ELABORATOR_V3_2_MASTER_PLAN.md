@@ -3763,15 +3763,26 @@ primitive must first be checked against active kernel constructions and
 Foundations. Preserve the completed FIBRED-PRODUCT-1A transparent family,
 exact two-rule existing-owner kernel closure, generic five-signature/25-clause
 TypeScript transfer, same-base discriminator, and first grouped-sibling
-fibre/transport demo. FIBRED-STRUCTURE-0A has completed the required existing-
-owner/Foundation audit and five-way full-file comparison. Its immutable
-D-DTTLF-USABILITY-006 proposal selects exactly three fixed-base displayed
-projection/pairing owners and eleven point/full/capped/beta rules, derives
-swap and diagonal transparently, and canonicalizes grouped-product
-reindexing before Core emission while preserving raw whole-pullback
-non-conversion. FIBRED-STRUCTURE-1A awaits exact approval; do not promote any
-of those owners/rules, add a `Product_catd` head, or install a kernel
-reindexing equality before it. Neither older approval authorizes the measured
-broader Sigma-introduction action, product structural maps, profile
-promotion, or a generic total pullback.
+fibre/transport demo. D-DTTLF-USABILITY-006 is approved as proposed and
+FIBRED-STRUCTURE-1A is complete after the required existing-owner/Foundation
+audit and five-way full-file comparison. Preserve exactly its three
+fixed-base displayed projection/pairing owners and eleven
+point/full/capped/beta rules, necessary beta guards, generic
+six-declaration/15-rule TypeScript transfer, transparent swap/diagonal, and
+frontend canonical grouped-product reindexing. The raw whole-pullback
+presentation remains non-convertible. Do not add a `Product_catd` head,
+kernel reindexing equality, universe-level projection, global `Functord_cat`
+product conversion, or infer the measured broader Sigma-introduction action,
+profile promotion, direct `fd`/`nd` binders, parsing/bulk transfer, or a
+generic total pullback from that bounded approval. Continue the fibred-context
+sub-plan with its next dependency-ready FIBRED-BINDER-1 row.
+
+For future exact gates within that active fibred-context goal, the user
+permits delegated unattended approval when no immediate human response
+follows a presented bounded proposal. Preserve the proposal as
+non-self-authorizing, record any delegated approval separately and explicitly,
+and proceed only to a coherent green local checkpoint under the existing SOP.
+Human responses supersede delegation. This grants no scope broadening,
+destructive/external action, remote Git operation, integration, publication,
+or history rewriting.
 ```

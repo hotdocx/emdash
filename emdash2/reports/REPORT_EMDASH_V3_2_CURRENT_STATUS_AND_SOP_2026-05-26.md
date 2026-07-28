@@ -100,21 +100,23 @@ The 2026-07-22 synchronized baseline is:
 ```text
 make check                         pass
 make health                        pass (41 measured targets)
-diagnostic checks                1,677 (1,502 assert + 175 assertnot)
+diagnostic checks                1,707 (1,526 assert + 181 assertnot)
 catalog areas                       61
 legacy/unclassified checks          0 / 0
 strict LHS audit                    0 unreviewed candidates
-intentional LHS annotations        45 slots across 27 clauses
+intentional LHS annotations        47 slots across 29 clauses
 warning inventory               1,169
   unjoinable critical pairs       1,010
   replaceable pattern variables     159
 source TOC                          86 parent-correct/sequential headings
 ```
 
-The kernel is 19,201 lines with 758 symbols, 602 rewrite rules, and 61
-unification rules. The source/example portion of the generated health report
-is fresh at
-`sha256:1883910f565c1bef715f7c5e723de14ac336e8c10bd1a7af6071b64533f6791e`;
+The kernel source is 19,530 lines with 762 source-level symbol declarations,
+617 source-level rewrite-rule commands, and 61 unification-rule commands.
+The canonical export contains 761 symbols, 612 runtime-rule commands, and
+648 runtime clauses. The source/example portion of the generated health
+report is fresh at
+`sha256:3307a7f29930e2d3bef42b69803fb97cd7902c7f7ef94aef4a701274016b5f74`;
 the fingerprint intentionally excludes volatile timings. P10–P12 are closed,
 and current maintenance is owned by the July 22 autonomous plan.
 
@@ -1754,9 +1756,37 @@ computes its fibre at `k` to `Product_cat(B[k],C[k])` and its transport over
 one shared base arrow `p` to `Product_map_func(B[p],C[p])`. The active closure
 adds only the missing Cat-valued postcomposition capped-arrow projection and
 the narrow same-literal-base product fold. Two unrelated parallel arrows do
-not trigger the fold. This does not provide a product-family primitive,
-global displayed-functor/product conversion, pullback stability, displayed
-projection/pairing/swap/diagonal, or the full base-two-cell action.
+not trigger the fold.
+
+The fixed-base universal property is also active without introducing a
+product-family head. The three injective owners
+
+```text
+Product_projL_funcd(B,C) : Functord(P(B,C),B)
+Product_projR_funcd(B,C) : Functord(P(B,C),C)
+Product_pair_funcd(FF,GG) : Functord(E,P(B,C))
+```
+
+have point, full-action, and capped-action projections, and pairing satisfies
+both whole displayed-composition betas. The full and capped results remain
+first-class functors, so a next-cell consumer can project them again. The two
+beta rules deliberately retain `Catd_cat K` as a subject-reduction guard;
+replacing that source classifier by `_` is ill typed. Displayed swap and
+diagonal are transparent pairing composites with the displayed projections
+and `id_funcd`, not additional primitive owners.
+
+For frontend reindexing, grouped siblings are canonicalized before Core
+emission:
+
+```text
+P(B,C)[F]  elaborates as  P(Pullback_catd(B,F),Pullback_catd(C,F)).
+```
+
+The raw kernel term `Pullback_catd(P(B,C),F)` still does not convert to that
+canonical presentation. No kernel reindexing rule, `Product_catd` head,
+global displayed-functor/product conversion, universe-level product
+projection, generic total pullback, or full family base-two-cell action is
+implied.
 
 `Functor_catd`, `Hom_catd`, and `Transf_catd` are mixed-variance family
 constructors. Pointwise formulas do not replace their required base-arrow
@@ -2300,11 +2330,13 @@ The following remain explicit future work rather than hidden assumptions:
 
 - full general dependent adjunctions `Sigma_F ⊣ F^* ⊣ Pi_F`, including the
   planned `Pi_f`/comma-category infrastructure;
-- displayed structural logic and remaining product/curry compatibility; the
-  transparent Cat-valued sibling product now computes pointwise fibres and
-  same-base `Product_map_func` transport, while displayed
-  projection/pairing/swap/diagonal, pullback stability, and full family
-  higher action remain open;
+- remaining displayed structural logic and product/curry compatibility; the
+  transparent Cat-valued sibling product now has fixed-base
+  projection/pairing, derived swap/diagonal, point/full/capped action, both
+  universal-property betas, and same-base `Product_map_func` transport, while
+  universe-level projection transfors, raw kernel pullback stability, a
+  global `Functord_cat` product conversion, dependent-chain exchange, and
+  full family base-two-cell action remain open;
 - a named `section_total` presentation facade and packaged projection laws;
   its transparent expression and the general
   `sigma_pullback_total_func(F,D)` base-change totalization are active;

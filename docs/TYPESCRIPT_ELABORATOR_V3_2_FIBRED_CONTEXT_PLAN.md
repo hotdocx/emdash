@@ -29,9 +29,11 @@ probes, and immutable proposal are now complete. The selected prospective
 FIBRED-STRUCTURE-1A boundary uses three fixed-base displayed universal-
 property owners and eleven point/full/capped/beta rules, derives swap and
 diagonal transparently, and canonicalizes grouped-product reindexing before
-Core emission. It awaits exact H-DTTLF-USABILITY-02/
-D-DTTLF-USABILITY-006 approval; no active structural owner or rule has been
-promoted.
+Core emission. H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-006 is approved as
+proposed, and FIBRED-STRUCTURE-1A is implemented across the active kernel,
+generic TypeScript transfer, root-only direct-TypeScript facade, and runnable
+demo. Full proportional and repository-wide validation is green;
+local-checkpoint synchronization is in progress.
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -43,6 +45,22 @@ generic total-category pullback must not be assumed. Later on 2026-07-27 the
 user explicitly approved D-DTTLF-USABILITY-004 and
 D-DTTLF-USABILITY-005 as proposed, conditional on the recorded alternatives
 having been reviewed for semantic necessity, computation, and feasibility.
+Later on 2026-07-27 the user explicitly approved
+H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-006 as proposed. That exact approval
+authorizes only the frozen three-owner/eleven-rule fixed-base closure,
+transparent swap/diagonal, and frontend canonical reindexing; it does not
+authorize a `Product_catd` head, kernel reindexing equality, direct `fd`/`nd`
+binders, profile promotion, parsing, or bulk transfer.
+The user subsequently delegated future unattended gate decisions for this
+goal: after an exact bounded proposal has been presented and no immediate
+human response is received, the coding agent may approve that proposal
+itself. Such an approval must be recorded separately as delegated unattended
+authority, must preserve every frozen non-effect, and must be followed only
+through a coherent green local checkpoint under the existing Git SOP so the
+decision is easy to inspect and backtrack. A human response always takes
+precedence. This delegation does not authorize destructive actions, remote
+Git operations, publication, integration, history rewriting, or silent scope
+expansion.
 The user also clarified that warning counts are diagnostic evidence about
 interactions and possible closure work, never an automatic veto on a desired
 design. The implementation audit therefore retains warning comparisons but
@@ -1158,8 +1176,8 @@ usability profile.
 | FIBRED-COMPREHENSION-0B | complete; D-DTTLF-USABILITY-005 approved | FIBRED-COMPREHENSION-0A and concrete object/arrow substitution consumers | Compared the semantic composite, a direct specialized pair owner (`+2/0` warnings), and a general asymmetric pullback-total owner (`+0/0`). Selected one new owner with two structured runtime projections, a transparent three-factor contextual pair, object/base-arrow substitution evidence, strict `0/45/27` audit, exact non-collapse boundaries, and separate Sigma-introduction action deferral. The warning comparison diagnoses closure size; necessity follows from the missing base-changing totalization and stuck existing-owner consumer |
 | FIBRED-COMPREHENSION-1A | complete; approved D-DTTLF-USABILITY-005 | FIBRED-COMPREHENSION-0B and exact human approval | Added only `sigma_pullback_total_func` with object and structured-arrow projections after a named-owner/foundational audit; retained contextual pairing as the explicit three-factor composite; transferred `Pullback_catd`, canonical `sigma_arrow`, and the new owner/rules through generic declaration/runtime engines; all four local rules are TypeScript subject-checked; added root-only `fibred-comprehension-1a` operations and a genuine further-family object/arrow chain plus runnable demo; preserved all recorded non-effects |
 | FIBRED-SIGMA-INTRO-ACTION-1 | deferred separate closure | concrete consumer beyond contextual pairing | Reassess direct `sigma_intro_tapp0_func` arrow action only with a closure that joins the measured `+10/+1` identity, naturality, composition, and higher-action interactions |
-| FIBRED-STRUCTURE-0A | complete; D-DTTLF-USABILITY-006 awaiting exact approval | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A, active-owner/Foundation audit | Compared five structural/reindexing owner positions in bounded full-file probes. Selected three fixed-base projection/pairing owners with eleven point/full/capped/beta rules, zero warning delta, derived swap/diagonal, genuine next-cell evidence, and frontend canonical reindexing that preserves the raw kernel non-conversion. Froze the exact non-authorizing proposal and six tests |
-| FIBRED-STRUCTURE-1A | pending exact D-DTTLF-USABILITY-006 approval | FIBRED-STRUCTURE-0A and exact human approval | Promote only the proposed three-owner/eleven-rule fixed-base closure; transfer it generically; derive swap/diagonal as explicit Core; canonicalize grouped-product reindexing before emission; retain every recorded kernel comparison and profile boundary |
+| FIBRED-STRUCTURE-0A | complete; D-DTTLF-USABILITY-006 approved as proposed | FIBRED-CONTEXT-0B, FIBRED-PRODUCT-1A, active-owner/Foundation audit | Compared five structural/reindexing owner positions in bounded full-file probes. Selected three fixed-base projection/pairing owners with eleven point/full/capped/beta rules, zero warning delta, derived swap/diagonal, genuine next-cell evidence, and frontend canonical reindexing that preserves the raw kernel non-conversion. Froze the exact non-authorizing proposal and six tests; the approval is recorded separately without mutating its historical authorization bit |
+| FIBRED-STRUCTURE-1A | complete; validated; local checkpoint pending | FIBRED-STRUCTURE-0A and exact D-DTTLF-USABILITY-006 approval | Added only the approved three injective owners and eleven runtime rules; retained the transparent family and necessary beta guards; transferred six declarations and 15 subject-checked local rules through generic engines; added derived swap/diagonal, full/capped action, frontend-only canonical reindexing, a root-only profile, and a runnable no-Lambdapi demo while retaining all frozen non-conversions; focused/live conformance, 739-test TypeScript, canonical inventory, complete health, and full repository gates pass |
 | FIBRED-BINDER-1 | pending | FIBRED-STRUCTURE-1A and existing Sigma/Pi comparisons | Implement the first direct `:^fd`-equivalent typed API and show direct/nested classifier compatibility without collapsing proof-time and runtime equality |
 | FIBRED-TRANSFD-1 | pending | FIBRED-BINDER-1 and transferred exact `Transfd` application closure | Implement one coherent displayed-transfor abstraction and component/higher-cell consumer |
 | FIBRED-GROUPED-SEQUENTIAL-1 | pending | FIBRED-STRUCTURE-1A, FIBRED-COMPREHENSION-1A | Demonstrate sequential and grouped sibling syntax through one dependency-aware model and explicit owner-backed Core |
@@ -1431,7 +1449,7 @@ as explicit Core composition.
 FIBRED-STRUCTURE-0A has now triggered the same gate for the three missing
 fixed-base displayed universal-property operations.
 
-**D-DTTLF-USABILITY-006 — proposed 2026-07-27; awaiting exact approval.**
+**D-DTTLF-USABILITY-006 — approved as proposed 2026-07-27.**
 Retain:
 
 ```text
@@ -1479,7 +1497,7 @@ This proposal does **not** authorize:
 - browser/frozen-profile promotion; or
 - parsing, acquisition, or bulk-transfer resumption.
 
-The exact question is:
+The exact approved question was:
 
 > Approve H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-006 as proposed: retain
 > `P(B,C)` as the transparent uncurry/product composite; add exactly
@@ -1538,11 +1556,12 @@ The implementation follows that approved boundary exactly:
   types, and the two computed results without a production Lambdapi
   dependency; and
 - the source hash is
-  `sha256:fac748f9fa27a80ca6a1198145db0fb283dc46ed60d513154c31d706646136ed`;
+  `sha256:33e7e78b6516180507f2e99cff465119effbb84f2981d44b609d751963e24f94`;
   the canonical-export hash is
-  `sha256:fb6fbcf4d486f22fa000f16f2deefc4b9bae65a066b8def952a3f1756030cf2f`.
+  `sha256:539dd35e70262a69c8f507b7a4e1562e72548983f186b3dbe940df3562063323`.
   The live reviewed acquisition corpus remains valid, while the inventory
-  grows by one body-free symbol and two runtime rules.
+  delta attributable to this slice is one body-free symbol and two runtime
+  rules.
 
 Validation evidence:
 
@@ -1601,12 +1620,12 @@ The implementation follows D-DTTLF-USABILITY-004 exactly:
   explicit Core and inferred types, and has no production Lambdapi
   dependency; and
 - the current source and canonical-export hashes are
-  `sha256:fac748f9fa27a80ca6a1198145db0fb283dc46ed60d513154c31d706646136ed`
+  `sha256:33e7e78b6516180507f2e99cff465119effbb84f2981d44b609d751963e24f94`
   and
-  `sha256:fb6fbcf4d486f22fa000f16f2deefc4b9bae65a066b8def952a3f1756030cf2f`.
-  The live export now contains 758 symbols, 601 runtime-rule commands, and
-  637 runtime clauses: the product slice adds exactly two rule commands and
-  no symbol.
+  `sha256:539dd35e70262a69c8f507b7a4e1562e72548983f186b3dbe940df3562063323`.
+  After the later structural closure, the live export contains 761 symbols,
+  612 runtime-rule commands, and 648 runtime clauses. The product slice's
+  own delta remains exactly two rule commands and no symbol.
 
 Validation evidence:
 
@@ -1624,12 +1643,99 @@ Validation evidence:
   nested health sweep, examples, report/book/reference gates, catalog
   freshness, and strict rule audit.
 
-The completion does not supply displayed projections, pairing, swap,
-diagonal, pullback stability, arbitrary off-diagonal action, full family
-base-two-cell action, a total-category pullback, or a deployed profile.
-FIBRED-STRUCTURE-0A has since completed the bounded structural audit and
-frozen D-DTTLF-USABILITY-006. FIBRED-STRUCTURE-1A is the next implementation
-row, but only after exact approval; no audited structural owner is active yet.
+At its checkpoint this completion did not supply displayed projections,
+pairing, swap, diagonal, pullback stability, arbitrary off-diagonal action,
+full family base-two-cell action, a total-category pullback, or a deployed
+profile. FIBRED-STRUCTURE-1A has since supplied only the approved fixed-base
+projection/pairing and derived swap/diagonal subset; every other boundary in
+that list remains explicit.
+
+## FIBRED-STRUCTURE-1A Completion Record
+
+The implementation is bound to the exact separate
+D-DTTLF-USABILITY-006 review and leaves the immutable non-authorizing 0A
+proposal unchanged:
+
+- `emdash2/emdash3_2.lp` adds exactly the three injective owners
+  `Product_projL_funcd`, `Product_projR_funcd`, and `Product_pair_funcd` at the
+  displayed-functor layer before section categories. The product family stays
+  the transparent
+  `uncurry(Product_cat_func) o Struct_sigma(B,C)` composite; no
+  `Product_catd` declaration or alias is introduced;
+- exactly eleven active runtime rules provide left/right point, full, and
+  capped projections, pairing point/full/capped action, and the two
+  projection-after-pairing betas. A bounded subject-reduction probe showed
+  that both beta left-hand sides must retain the `Catd_cat K` source
+  classifier: replacing it with `_` is ill typed, so the two guards have
+  explicit necessary LHS-audit annotations rather than being hidden;
+- `emdash2/emdash3_2_checks.lp` exercises the projection and pairing actions,
+  derived swap and diagonal, both betas, full/capped coherence, and a genuine
+  next-cell projection. It also preserves opaque-owner, global
+  `Functord_cat`-product, and raw whole-pullback non-conversion boundaries;
+- an ignored full-file owner-position probe with the three declarations
+  marked `injective` remains quiet and warning-neutral. The active inventory
+  remains exactly 1,010 unjoinable critical pairs plus 159 replaceable
+  pattern-variable warnings. This is interaction evidence, not the reason
+  the owners were selected;
+- `categorical_fibred_structure_transfer.ts` imports three existing
+  prerequisite signatures (`comp_cat_con_func`,
+  `hom_precomp_along_fapp0`, and `id_funcd`) alongside the three new owners.
+  It compiles 15 local runtime clauses through the generic transfer engines:
+  the exact eleven new rules plus four existing
+  fibre/transport/full-action/identity normal-form deltas required by explicit
+  Core. All 15 pass the TypeScript subject-reduction checker without an
+  owner-specific checker/evaluator case, wildcard matcher, new pattern shape,
+  or Lambdapi oracle;
+- the root-only `fibred-structure-1a` direct-TypeScript profile adds typed
+  fixed-base projection, pairing, derived swap, derived diagonal, and
+  full-action operations. Pairing requires one literal shared source family.
+  The default and every older frozen/root-only profile reject or ignore the
+  new structure exactly as before;
+- the frontend retains grouped-product origin metadata. Under the new profile,
+  reindexing `P(B,C)` along `F` emits
+  `P(Pullback_catd(B,F),Pullback_catd(C,F))` recursively before Core
+  serialization. The preceding `fibred-product-1a` profile still emits the
+  raw pullback, and comparison against the canonical presentation remains
+  `not-equal`; therefore this is a frontend normalization boundary, not a
+  kernel conversion claim;
+- `demo:categorical-fibred-structure` accepts direct typed TypeScript
+  declarations for `K`, `E`, `B`, `C`, `FF`, `GG`, objects, and an arrow. It
+  computes projection, pairing, swap, diagonal, full/capped coherence, and
+  canonical grouped reindexing, prints explicit Core and inferred types, and
+  has `productionLambdapiDependency: false`; and
+- the current active-source and canonical-export SHA-256 values are
+  `33e7e78b6516180507f2e99cff465119effbb84f2981d44b609d751963e24f94`
+  and
+  `539dd35e70262a69c8f507b7a4e1562e72548983f186b3dbe940df3562063323`.
+  The live export contains 761 symbols, 612 runtime-rule commands, and 648
+  runtime clauses: this slice contributes exactly three body-free symbols and
+  eleven rule commands/clauses.
+
+This closure does not add direct `:^fd`/`:^nd` abstraction, universe-level
+product projection transfors, a global `Functord_cat` product conversion,
+kernel pullback stability, dependent-chain exchange, a generic total-category
+pullback, full family base-two-cell action, browser/deployed-profile
+promotion, string parsing, acquisition, or bulk transfer.
+
+Validation evidence:
+
+- the focused transfer/demo suites pass all ten cases, and the opt-in live
+  Lambdapi transfer suite passes all eight cases including point, beta, and
+  raw-reindex boundaries;
+- `./scripts/pnpmw run check:ts` passes 739 tests: 694 passed and 45
+  intentional opt-in skips;
+- live canonical inventory/acquisition passes all 14 cases after repinning the
+  exact source/export drift;
+- bounded kernel check, unchanged `1010/159` warning inventory, strict
+  `0/47/29` LHS audit, catalog regeneration, and source TOC pass;
+- the complete generated health sweep passes all 41 measured targets with
+  source-metrics fingerprint
+  `sha256:3307a7f29930e2d3bef42b69803fb97cd7902c7f7ef94aef4a701274016b5f74`;
+  and
+- `./scripts/pnpmw run check:all` passes, including all 19 mandatory live
+  differential judgments, Python/script tests, report/reference lint, book
+  evidence/typography/KaTeX/assembly checks, catalog freshness, and the strict
+  rule audit.
 
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
@@ -1693,6 +1799,27 @@ FIBRED-STRUCTURE-0A is complete only when:
 6. the exact three owners, eleven rules, derived operations, evidence,
    non-effects, and human question are deeply frozen and self-validating; and
 7. focused proposal tests, TypeScript gates, and the final quiet/warning probe
+   pass.
+
+FIBRED-STRUCTURE-1A is complete only when:
+
+1. the active source contains exactly the approved three injective owners and
+   eleven runtime rules, with no `Product_catd`, swap, diagonal, or
+   reindexing owner;
+2. the point/full/capped equations, both betas, derived swap/diagonal, and a
+   genuine next-cell consumer pass, while every frozen negative remains;
+3. the two beta source-classifier slots are either safely inferred or
+   documented as necessary subject-reduction guards;
+4. all six declarations and 15 local runtime clauses compile through the
+   generic TypeScript engines and are subject checked without a wildcard,
+   new matcher shape, owner-specific checker/evaluator path, or oracle;
+5. the new root-only facade canonicalizes grouped-product reindexing before
+   emission, while the older profile demonstrates raw whole-pullback
+   non-conversion;
+6. the runnable direct-TypeScript demo has no production Lambdapi dependency
+   and older frozen/profile behavior remains unchanged; and
+7. source/export pins, live acquisition, catalog, health, warning, audit,
+   focused/live conformance, TypeScript, examples, and full repository gates
    pass.
 
 FIBRED-COMPREHENSION-0B is complete only when:
@@ -1806,9 +1933,23 @@ head still duplicates semantics. Reindex grouped products before Core
 emission as
 `P(Pullback_catd(B,F),Pullback_catd(C,F))`; preserve the negative that raw
 `Pullback_catd(P(B,C),F)` does not convert, and add no kernel equality or
-reindex rule. The immutable D-DTTLF-USABILITY-006 proposal awaits exact
-approval. Do not begin FIBRED-STRUCTURE-1A or promote any of its three owners
-or eleven rules until that approval.
+reindex rule. D-DTTLF-USABILITY-006 is approved as proposed and
+FIBRED-STRUCTURE-1A is complete with exactly those three injective owners and
+eleven rules. Preserve its separate immutable approval record, necessary
+`Catd_cat` beta guards, six-declaration/15-rule generic TypeScript transfer,
+derived swap/diagonal Core, root-only direct-TypeScript profile, runnable
+demo, and raw older-profile `not-equal` reindexing witness. Do not broaden
+that approval into a `Product_catd` head, universe-level projection, global
+`Functord_cat` product conversion, kernel reindexing equality, total
+pullback, profile promotion, parsing, or bulk transfer.
+
+For later exact gates in this goal, the user permits delegated unattended
+approval when no immediate human response follows a presented proposal. Keep
+the proposal non-self-authorizing, create a separate explicit decision record
+identifying delegated unattended authority, and checkpoint only after all
+bounded implementation, evidence, ledgers, and staged-diff checks are green.
+A human response supersedes delegation. This grants no remote, destructive,
+integration, publication, history-rewrite, or wider Git action.
 
 Preserve FIBRED-COMPREHENSION-0A/0B's exact result. A contextual-pair
 expression built only by pulling back `sigma_intro_transf` is type correct but
@@ -1851,6 +1992,15 @@ active Sigma/Pi uncurrying comparison to relate total-context sections to
 direct and nested classifier presentations and never turn proof-time
 comparisons into runtime rewrites.
 
+After the FIBRED-STRUCTURE-1A checkpoint, the next dependency-ready bounded
+row is FIBRED-BINDER-1. Start by freezing an executable direct-versus-nested
+classifier contract for one `:^fd`-equivalent typed TypeScript abstraction,
+then implement it only through already active owners and generic contextual
+machinery. If a required computation is absent, stop at the smallest exact
+owner/rule proposal and human gate. `:^nd`, FIBRED-TRANSFD-1, and the combined
+grouped/sequential consumer remain later rows; no convenient notation is
+itself authority for a primitive.
+
 Keep canonical Lambdapi term/declaration parsing deferred and optional.
 Direct typed TypeScript construction remains the default. Do not resume the
 70-root/83-extension transfer closure, promote a browser/product profile,
@@ -1865,11 +2015,16 @@ exact staged-diff review, and `git diff --cached --check`. It authorizes no
 push, merge, PR, publication, release, new branch/worktree, amend, rebase,
 reset, cleanup, or deletion.
 
-When a row reaches a human mathematical gate, record the exact evidence and
-approval question, continue any independent dependency-ready row, and never
-guess the missing rule. Keep every Lambdapi process bounded to at most 60
-seconds and run all proportional warning, audit, catalog, health, example,
-conformance, and CI obligations.
+When a row reaches a mathematical gate, record the exact evidence, proposal,
+approval question, and non-effects before acting. If the human responds, that
+decision controls. Under the user's plan-specific unattended delegation, if
+no immediate response arrives the coding agent may separately record a
+delegated approval of that exact bounded proposal and proceed, but only
+through a coherent green local checkpoint that makes later backtracking
+straightforward. Never guess a missing rule or use delegated approval for
+scope expansion, destructive/external action, or broader Git authority. Keep
+every Lambdapi process bounded to at most 60 seconds and run all proportional
+warning, audit, catalog, health, example, conformance, and CI obligations.
 ```
 
 ## Change Log
@@ -1968,3 +2123,25 @@ conformance, and CI obligations.
   remains explicit. The deeply frozen proposal and six tests request exact
   H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-006 approval; no active kernel
   structural owner or rule was added.
+- **2026-07-27 — D-DTTLF-USABILITY-006 approved and
+  FIBRED-STRUCTURE-1A implemented.** Recorded the exact approval in a separate
+  immutable review, then added only the three approved injective owners and
+  eleven point/full/capped/beta rules. The two `Catd_cat` beta guards are
+  necessary for subject reduction. Six signatures and 15 local rules compile
+  through the generic TypeScript engines; swap and diagonal remain explicit
+  composites. A root-only facade and runnable demo exercise projection,
+  pairing, swap, diagonal, full/capped coherence, a genuine next cell, and
+  frontend-only canonical grouped reindexing. The raw whole-pullback
+  non-conversion and every unapproved boundary remain. Full validation is
+  green: 739 TypeScript tests, eight live slice cases, 14 live
+  inventory/acquisition cases, 19 mandatory differential judgments, all 41
+  health targets, unchanged warnings, strict `0/47/29` audit, report/book
+  gates, and catalog freshness pass. Local checkpoint synchronization is in
+  progress.
+- **2026-07-27 — Unattended goal-gate delegation recorded.** The user permits
+  the coding agent to approve a future exact bounded proposal for this goal
+  when no immediate human response arrives, provided the proposal and a
+  separate delegated decision remain explicit and the implementation is
+  captured only in a coherent green local checkpoint under the existing SOP.
+  Human responses control; destructive/external actions, scope broadening,
+  pushes, merges, publication, and history rewriting remain unauthorized.
