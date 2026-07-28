@@ -3796,8 +3796,8 @@ binder slice. The
 FIBRED-STRUCTURE-1A checkpoint remains
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized binder
 checkpoint is `698280f42c3c9c339ebc82a8cfb0df1d51838704`; the
-FIBRED-TRANSFD-1 checkpoint is pending the tranche's exact green staged
-review.
+FIBRED-TRANSFD-1 implementation checkpoint is
+`4d26100378fae67ade72ad6c7295d2623fd1fc8f`.
 
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response

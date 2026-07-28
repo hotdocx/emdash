@@ -760,7 +760,8 @@ FIBRED-STRUCTURE-1A implementation checkpoint is
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`; the synchronized
 FIBRED-BINDER-1 implementation checkpoint is
 `698280f42c3c9c339ebc82a8cfb0df1d51838704`; the FIBRED-TRANSFD-1
-checkpoint is pending this tranche's exact green staged review. Do not
+implementation checkpoint is
+`4d26100378fae67ade72ad6c7295d2623fd1fc8f`. Do not
 infer any additional owner/rule, structural map, total pullback, general
 `fd`/`nd` completion, or profile authority from the bounded work. The
 completed master plan's historical checkpoint authorization does not
