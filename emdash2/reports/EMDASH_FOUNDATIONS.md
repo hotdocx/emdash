@@ -1244,6 +1244,36 @@ pullback constructor for arbitrary functors between total categories. The
 direct section action `s[f]` remains available, with the dependent hom
 construction as the shared internal architecture.
 
+Independent displayed siblings over one base also have a computational
+fibrewise product without a new primitive family owner. For
+`B,C : Catd(K)`, regard both as Cat-valued functors and form the transparent
+composite
+
+```text
+P(B,C)
+  = uncurry(Product_cat_func) o Product_pair(B,C)
+  : K -> Cat.
+```
+
+The existing product/uncurry semantics plus two owner-position projections
+now compute
+
+```text
+P(B,C)[k] = Product_cat(B[k],C[k])
+P(B,C)[p] = Product_map_func(B[p],C[p]).
+```
+
+The second equation deliberately recognizes the two component actions over
+the same literal base arrow `p`. It does not assert an unrestricted
+off-diagonal product action for unrelated `p` and `q`. Consequently this
+transparent product supplies the first grouped-sibling fibre and transport
+semantics while preserving `Product_map_func` as the iterable result. A
+primitive `Product_catd`, global
+`Functord_cat(E,P(B,C)) = Product_cat(Functord_cat(E,B),Functord_cat(E,C))`,
+pullback stability, displayed projections/pairing/swap/diagonal, and full
+base-two-cell action are not consequences of these two computations; they
+remain separately qualified structural work.
+
 ## 8. Arrows Between Sections
 
 In non-directed HoTT notation one might expect:
@@ -2501,7 +2531,10 @@ The current foundations intentionally do not yet include:
   `sigma_pullback_total_func(F,D) : Σ_A(F^*D) → Σ_K D` are active;
 - full product/curry adjunction coherence for `Product_cat`, beyond the
   current product normal form, projection computation, and functor-level
-  curry/uncurry action laws;
+  curry/uncurry action laws; the transparent fibrewise product of two
+  Cat-valued displayed families and its same-base object/arrow action are
+  active, while displayed projection/pairing/swap/diagonal, pullback
+  stability, and full family higher action remain future work;
 - general dependent adjunctions `Σ_F ⊣ F^* ⊣ Π_F` along arbitrary base
   functors;
 - a general coend/coinserter implementation of profunctor tensor;

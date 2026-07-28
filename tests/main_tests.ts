@@ -55,6 +55,8 @@ import './v3_2_categorical_dependent_eta_tests';
 import './v3_2_categorical_dependent_composition_tests';
 import './v3_2_categorical_comprehension_transfer_tests';
 import './v3_2_categorical_comprehension_demo_tests';
+import './v3_2_categorical_fibred_product_transfer_tests';
+import './v3_2_categorical_fibred_product_demo_tests';
 import './v3_2_categorical_bracket_demo_tests';
 import './v3_2_categorical_dependent_eta_demo_tests';
 import './v3_2_categorical_dependent_composition_demo_tests';

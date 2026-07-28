@@ -7287,6 +7287,33 @@ rule @fapp0
       (@fapp1_fapp0 $B Cat_cat $E $X $Y $p)
       (@fapp0 $W (@fapp0 $B Cat_cat $E $X) $G $w);
 
+// Capped arrow action of Cat-valued postcomposition:
+//   (E[p] o G)[q] = E[p][G[q]].
+//
+// This is the arrow projection following the object projection above. It
+// preserves the existing family and postcomposition owners rather than
+// introducing a displayed-product constructor.
+rule @fapp1_fapp0
+      _ _
+      (@hom_postcomp_fapp0
+        Cat_cat $B $E $W $X $Y $p $G)
+      $w
+      $w'
+      $q
+  ↪ @fapp1_fapp0
+      (@fapp0 $B Cat_cat $E $X)
+      (@fapp0 $B Cat_cat $E $Y)
+      (@fapp1_fapp0 $B Cat_cat $E $X $Y $p)
+      (@fapp0 $W (@fapp0 $B Cat_cat $E $X) $G $w)
+      (@fapp0 $W (@fapp0 $B Cat_cat $E $X) $G $w')
+      (@fapp1_fapp0
+        $W
+        (@fapp0 $B Cat_cat $E $X)
+        $G
+        $w
+        $w'
+        $q);
+
 // Hom-action functoriality for postcomposition. These joins prevent the
 // stable postcomposition owner from hiding the functoriality already present
 // in `hom_(F,W)`.
@@ -11196,6 +11223,32 @@ rule @fapp1_fapp0 _ _
         $B $B' $G
         (sigma_Snd $ab) (sigma_Snd $ab')
         (sigma_Snd $pq));
+
+// Narrow product projection for two Cat-valued family actions over the same
+// base arrow:
+//   (B[p] * 1)[C[p]] = B[p] × C[p].
+//
+// Sharing the literal base arrow is the discriminator. The unrestricted
+// off-diagonal projection and its higher naturality closure remain separate.
+rule @tapp1_fapp0
+      Cat_cat
+      Cat_cat
+      _
+      _
+      _
+      _
+      (@Product_cat_fapp1_fapp0_functord
+        _
+        _
+        (@fapp1_fapp0 $K Cat_cat $B $x $y $p))
+      (@fapp1_fapp0 $K Cat_cat $C $x $y $p)
+  ↪ @Product_map_func
+      (@fapp0 $K Cat_cat $B $x)
+      (@fapp0 $K Cat_cat $B $y)
+      (@fapp0 $K Cat_cat $C $x)
+      (@fapp0 $K Cat_cat $C $y)
+      (@fapp1_fapp0 $K Cat_cat $B $x $y $p)
+      (@fapp1_fapp0 $K Cat_cat $C $x $y $p);
 
 // Product/one-slot factorizations of the primitive Hom action are proof-time
 // comparisons. Runtime preserves the factored cuts and the rigid Unit_prof

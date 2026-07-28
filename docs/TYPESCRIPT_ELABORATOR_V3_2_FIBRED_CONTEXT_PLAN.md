@@ -19,9 +19,13 @@ H-DTTLF-USABILITY-02/D-DTTLF-USABILITY-005 is approved. The selected
 dependent-first implementation order has completed FIBRED-COMPREHENSION-1A:
 the audited base-change totalization is active in the kernel, transferred
 through the generic TypeScript engines, and exercised by a direct dependent
-chain and runnable demo. FIBRED-PRODUCT-1A is the next dependency-ready
-approved implementation tranche; it is not described as active until its
-kernel, TypeScript, documentation, and validation work is actually complete
+chain and runnable demo. FIBRED-PRODUCT-1A is also complete: its two approved
+existing-owner rules are active, its transparent family and shared-base
+transport are transferred through the generic TypeScript engines, and its
+root-only direct-TypeScript facade and runnable demo compute both the
+pointwise fibre and componentwise base-arrow action. FIBRED-STRUCTURE-1 is the
+next dependency-ready bounded row; product projections, pairing, swap,
+diagonal, and pullback stability remain unimplemented until that audit
 Infinity-Codex-Decision-Responses:
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019fa4cd-724e-7cc0-8f16-a32c82870ef1`
 and
@@ -465,9 +469,13 @@ deep-frozen, non-authorizing proposal is
 `src/v3_2/categorical_fibred_product_proposal.ts`; its five focused tests are
 in `tests/v3_2_categorical_fibred_product_proposal_tests.ts`.
 
-The selection is exact and approved but not yet implemented: adding the two
-Lambdapi rules, transferring their minimal closure, and lowering the first
-grouped-sibling transport are precisely the next FIBRED-PRODUCT-1A tranche.
+The selection is now implemented exactly as FIBRED-PRODUCT-1A. The active
+kernel contains only the two rules above; the TypeScript runtime compiles
+those rules together with the minimal existing prerequisite closure, and the
+first grouped-sibling consumer computes fibres and shared-base transport
+without a `Product_catd` declaration. The structural projections, pairing,
+swap, diagonal, and pullback-stability comparison remain the separate
+FIBRED-STRUCTURE-1 audit.
 
 ## Comprehension And Contextual Pairing Owner Audit
 
@@ -900,7 +908,7 @@ usability profile.
 | FIBRED-CONTEXT-0A | complete | FIBRED-PLAN-0 | Added backend-neutral dependency-graph inspection for persistent Core telescopes: dependencies are recovered beneath internal binders; direct/closure/prefix data, shared-base versus weakened siblings, genuine edges, exchange suffix transport, owner-neutral usage planning, exact provenance, fail-closed errors, immutability, and six focused tests are green |
 | FIBRED-CONTEXT-0B | complete | FIBRED-CONTEXT-0A | Adapted the generic graph to categorical contextual slots through explicit locally nameless classifier references; represents genuine edges/chains, direct versus pullback-then-Sigma sequential extension, shared-base versus weakened sibling groups, grouped displayed-product structural intent, exact errors/provenance, and a zero-owner boundary without changing completed ordinary or D-003 behavior |
 | FIBRED-PRODUCT-0B | complete; D-DTTLF-USABILITY-004 approved | FIBRED-PRODUCT-0A, concrete first categorical consumer | Compared broad generic, stable-head, and narrow shared-base existing-owner routes in full-file probes. Selected the transparent semantic family plus exactly two existing-owner runtime projections; froze positive/negative conversions, higher-action limits, no-owner/no-total-pullback boundary, and the exact human decision. The zero warning delta is retained as interaction evidence, not the semantic selection criterion |
-| FIBRED-PRODUCT-1A | approved; next dependency-ready implementation tranche | FIBRED-PRODUCT-0B, exact human approval, completed FIBRED-COMPREHENSION-1A | Promote only the Cat-valued postcomposition capped action and shared-base product-action projection, run the full Lambdapi SOP, transfer exactly that closure through generic TypeScript mechanisms, and lower the first grouped-sibling transport while preserving frozen profiles |
+| FIBRED-PRODUCT-1A | complete; approved D-DTTLF-USABILITY-004 | FIBRED-PRODUCT-0B, exact human approval, completed FIBRED-COMPREHENSION-1A | Added only the Cat-valued postcomposition capped action and same-literal-base product-action projection; retained the transparent product with no new owner; transferred five existing signatures and 25 subject-checked local runtime clauses through the generic engines, of which 23 are prerequisites and exactly two are the new kernel rules; added a root-only direct-TypeScript grouped-sibling product/transport facade and runnable 12-step fibre/26-step transport demo; preserved the split-arrow negative and every frozen profile |
 | FIBRED-COMPREHENSION-0A | complete; ignored semantic probe | FIBRED-CONTEXT-0B and active Sigma/pullback/section owners | Constructed the zero-owner semantic contextual pair through pulled-back `sigma_intro_transf`; its type is correct, but ordinary object, arrow, substitution, and projection consumers remain computationally stuck |
 | FIBRED-COMPREHENSION-0B | complete; D-DTTLF-USABILITY-005 approved | FIBRED-COMPREHENSION-0A and concrete object/arrow substitution consumers | Compared the semantic composite, a direct specialized pair owner (`+2/0` warnings), and a general asymmetric pullback-total owner (`+0/0`). Selected one new owner with two structured runtime projections, a transparent three-factor contextual pair, object/base-arrow substitution evidence, strict `0/45/27` audit, exact non-collapse boundaries, and separate Sigma-introduction action deferral. The warning comparison diagnoses closure size; necessity follows from the missing base-changing totalization and stuck existing-owner consumer |
 | FIBRED-COMPREHENSION-1A | complete; approved D-DTTLF-USABILITY-005 | FIBRED-COMPREHENSION-0B and exact human approval | Added only `sigma_pullback_total_func` with object and structured-arrow projections after a named-owner/foundational audit; retained contextual pairing as the explicit three-factor composite; transferred `Pullback_catd`, canonical `sigma_arrow`, and the new owner/rules through generic declaration/runtime engines; all four local rules are TypeScript subject-checked; added root-only `fibred-comprehension-1a` operations and a genuine further-family object/arrow chain plus runnable demo; preserved all recorded non-effects |
@@ -1051,9 +1059,9 @@ selected only by the subsequent authority-qualified rows.
 FIBRED-PRODUCT-0B has triggered the existing usability rule gate without
 requesting a new mathematical owner. The immutable decision is:
 
-**D-DTTLF-USABILITY-004 — approved 2026-07-27; implementation not yet
-complete.** Keep the fibrewise product as the transparent existing-owner
-composite. Add only:
+**D-DTTLF-USABILITY-004 — approved 2026-07-27;
+FIBRED-PRODUCT-1A complete.** Keep the fibrewise product as the transparent
+existing-owner composite. Add only:
 
 1. the probed Cat-valued postcomposition capped-action rule at
    `hom_postcomp_fapp0`; and
@@ -1212,9 +1220,9 @@ The implementation follows that approved boundary exactly:
   types, and the two computed results without a production Lambdapi
   dependency; and
 - the source hash is
-  `sha256:1f741d471474eeea93ed6f89685fefd283d1b5bc3c40657a6e290d7c40c9136a`;
+  `sha256:fac748f9fa27a80ca6a1198145db0fb283dc46ed60d513154c31d706646136ed`;
   the canonical-export hash is
-  `sha256:61242c1a1c4c6fe032ff9d22ae7292556ff3abd41921ff79352642e3f1790000`.
+  `sha256:fb6fbcf4d486f22fa000f16f2deefc4b9bae65a066b8def952a3f1756030cf2f`.
   The live reviewed acquisition corpus remains valid, while the inventory
   grows by one body-free symbol and two runtime rules.
 
@@ -1233,6 +1241,75 @@ Validation evidence:
 - `./scripts/pnpmw run check:all` passes, including all 19 mandatory frozen
   differential judgments, the complete nested 41-file health sweep, examples,
   report/book gates, catalog freshness, and strict rule audit.
+
+## FIBRED-PRODUCT-1A Completion Record
+
+The implementation follows D-DTTLF-USABILITY-004 exactly:
+
+- `emdash2/emdash3_2.lp` adds no declaration, alias, or product head. It adds
+  only the Cat-valued capped-arrow projection for
+  `hom_postcomp_fapp0` and the narrow
+  `Product_cat_fapp1_fapp0_functord`/`tapp1_fapp0` fold whose two family
+  actions contain the same literal base arrow. The result is the already
+  iterable `Product_map_func`;
+- `emdash2/emdash3_2_checks.lp` defines a local transparent check-only
+  presentation of
+  `uncurry(Product_cat_func) o Product_pair(B,C)`. It checks pointwise fibre
+  and shared-base transport computation, rejects a split `B[p]`/`C[q]`
+  transport, and retains opaque-family, global `Functord_cat`-product, and
+  pullback-stability non-collapse boundaries;
+- the generic TypeScript transfer imports five existing signatures and
+  compiles 25 local runtime clauses through the existing declaration/runtime
+  engines. Twenty-three clauses are prerequisite computation and exactly two
+  correspond to the new kernel rules. Every clause is TypeScript
+  subject-checked without a Lambdapi subject oracle;
+- four of those prerequisite clauses are typed normal-form specializations
+  for explicit Core after inferred endpoints normalize: identity-functor
+  arrow delta, Cat-valued evaluation arrow normalization, and the object and
+  arrow forms of postcomposition with an identity target. They specialize
+  already active computation; they are neither additional kernel rules nor a
+  relaxation of the frozen structural matcher. No wildcard or new pattern
+  shape was required;
+- the root-only `fibred-product-1a` facade lowers
+  `displayedProduct(B,C)` directly to the transparent explicit Core
+  composite, exposes `productMap`, and adds category comparison for the
+  computed fibre. The default, D-003, ordinary, indexed-eta, and
+  `fibred-comprehension-1a` profiles remain unchanged;
+- the runnable `demo:categorical-fibred-product` input declares
+  `K : Cat`, `B,C : Catd K`, `x,y : Obj K`, and
+  `p : Hom K x y`. It computes
+  `(B x C)[x] = B[x] x C[x]` in 12 runtime steps and
+  `(B x C)[p] = Product_map_func(B[p],C[p])` in 26 runtime steps, prints
+  explicit Core and inferred types, and has no production Lambdapi
+  dependency; and
+- the current source and canonical-export hashes are
+  `sha256:fac748f9fa27a80ca6a1198145db0fb283dc46ed60d513154c31d706646136ed`
+  and
+  `sha256:fb6fbcf4d486f22fa000f16f2deefc4b9bae65a066b8def952a3f1756030cf2f`.
+  The live export now contains 758 symbols, 601 runtime-rule commands, and
+  637 runtime clauses: the product slice adds exactly two rule commands and
+  no symbol.
+
+Validation evidence:
+
+- the focused TypeScript transfer/demo suite and its opt-in live Lambdapi
+  conformance probe pass all ten cases;
+- bounded `make check`, warning comparison, and strict `audit-rules` pass;
+  the warning inventory remains exactly 1,010 unjoinable critical pairs plus
+  159 replaceable-pattern warnings (`0/0` delta), and the strict inferred-slot
+  result remains `0/45/27`;
+- live canonical inventory/acquisition passes all 14 cases; catalog
+  regeneration and the complete 41-file generated health sweep pass; and
+- `./scripts/pnpmw run check:ts` passes with 723 tests, 679 passed and 44
+  explicit opt-in skips; `./scripts/pnpmw run check:all` also passes,
+  including all 19 mandatory live differential judgments, the complete
+  nested health sweep, examples, report/book/reference gates, catalog
+  freshness, and strict rule audit.
+
+The completion does not supply displayed projections, pairing, swap,
+diagonal, pullback stability, arbitrary off-diagonal action, full family
+base-two-cell action, a total-category pullback, or a deployed profile.
+FIBRED-STRUCTURE-1 is the next bounded audit and implementation row.
 
 ### Future FIBRED-GRADUATE-1 — General Displayed Usability
 
@@ -1374,8 +1451,15 @@ the transparent family and requests only the Cat-valued postcomposition
 capped action plus the same-base
 `(B[p] * 1)[C[p]] -> Product_map_func(B[p],C[p])` projection. Do not promote
 anything beyond those rules. D-DTTLF-USABILITY-004 is approved and
-FIBRED-PRODUCT-1A is the next dependency-ready tranche: implement only its
-frozen two-rule closure and first grouped-sibling transport.
+FIBRED-PRODUCT-1A is complete with only that frozen two-rule closure, the
+generic five-signature/25-clause TypeScript transfer, and the first
+grouped-sibling fibre/transport demo. Preserve its split-arrow discriminator,
+four typed existing-rule normal-form specializations, no-new-pattern-shape
+boundary, root-only profile, and zero new product owners. FIBRED-STRUCTURE-1
+is the next dependency-ready bounded row: audit existing active owners and
+Foundations before selecting displayed projection, pairing, swap, diagonal,
+or pullback-stability computation, and open an exact human gate before any
+new mathematical owner or rule.
 
 Preserve FIBRED-COMPREHENSION-0A/0B's exact result. A contextual-pair
 expression built only by pulling back `sigma_intro_transf` is type correct but
@@ -1505,3 +1589,14 @@ conformance, and CI obligations.
   unchanged warning inventory, and strict rule audit passed. The checkpoint
   grants no product structural map, generic total pullback, profile
   promotion, remote operation, or broader Git authority.
+- **2026-07-27 — FIBRED-PRODUCT-1A completed.** Added no product owner and
+  promoted only the approved Cat-valued postcomposition arrow projection and
+  same-literal-base product fold. The generic TypeScript engines compile five
+  existing signatures and 25 subject-checked local runtime clauses—23
+  prerequisites and exactly the two new rules—without a wildcard matcher or
+  oracle. A root-only facade and runnable demo compute pointwise fibres in
+  12 steps and componentwise shared-base transport in 26 steps; the
+  split-arrow and all wider non-collapse boundaries remain. Live source and
+  canonical export pins, `601/637` rule inventory, unchanged `1010/159`
+  warnings, strict `0/45/27` audit, catalog, health, and focused/live
+  conformance evidence are synchronized. FIBRED-STRUCTURE-1 is next.

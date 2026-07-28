@@ -1742,6 +1742,22 @@ therefore remains an explicit composite: terminal totalization,
 `sigma_intro_tapp0_func`, a named `section_total` presentation facade, and a
 whole-functor first-projection beta remain separate.
 
+Independent Cat-valued displayed siblings reuse the ordinary product
+semantics rather than a new `Product_catd` head. For `B,C : Catd K`, the
+transparent family
+
+```text
+uncurry(Product_cat_func) o Product_pair(B,C)
+```
+
+computes its fibre at `k` to `Product_cat(B[k],C[k])` and its transport over
+one shared base arrow `p` to `Product_map_func(B[p],C[p])`. The active closure
+adds only the missing Cat-valued postcomposition capped-arrow projection and
+the narrow same-literal-base product fold. Two unrelated parallel arrows do
+not trigger the fold. This does not provide a product-family primitive,
+global displayed-functor/product conversion, pullback stability, displayed
+projection/pairing/swap/diagonal, or the full base-two-cell action.
+
 `Functor_catd`, `Hom_catd`, and `Transf_catd` are mixed-variance family
 constructors. Pointwise formulas do not replace their required base-arrow
 actions.
@@ -2284,7 +2300,11 @@ The following remain explicit future work rather than hidden assumptions:
 
 - full general dependent adjunctions `Sigma_F ⊣ F^* ⊣ Pi_F`, including the
   planned `Pi_f`/comma-category infrastructure;
-- displayed structural logic and remaining product/curry compatibility;
+- displayed structural logic and remaining product/curry compatibility; the
+  transparent Cat-valued sibling product now computes pointwise fibres and
+  same-base `Product_map_func` transport, while displayed
+  projection/pairing/swap/diagonal, pullback stability, and full family
+  higher action remain open;
 - a named `section_total` presentation facade and packaged projection laws;
   its transparent expression and the general
   `sigma_pullback_total_func(F,D)` base-change totalization are active;

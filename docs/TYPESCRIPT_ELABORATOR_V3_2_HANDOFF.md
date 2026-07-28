@@ -78,11 +78,17 @@ works with zero warning delta. Its deep-frozen proposal requests exactly two
 prospective runtime rules, no declaration or alias, and preserves
 `Functord`-product comparison, pullback stability, structural maps, full base
 two-cell action, and total-category pullback as separate work.
-D-DTTLF-USABILITY-004 is approved and FIBRED-PRODUCT-1A is the next
-dependency-ready implementation tranche. Its selection preserves the active
-transparent product and avoids a duplicate primitive; the zero warning delta
-is supporting interaction evidence, not an automatic design veto over the
-broader alternatives.
+D-DTTLF-USABILITY-004 is approved and FIBRED-PRODUCT-1A is complete. Exactly
+the two approved existing-owner rules are active, with no `Product_catd`
+declaration. The generic TypeScript transfer compiles five existing
+signatures and 25 subject-checked local runtime clauses (23 prerequisites
+plus the two new rules), while a root-only direct-TypeScript facade and
+runnable demo compute the pointwise product fibre in 12 steps and shared-base
+`Product_map_func` transport in 26. Split-arrow, `Functord`-product,
+pullback-stability, higher-action, structural-map, and profile boundaries
+remain explicit. The zero warning delta is supporting interaction evidence,
+not an automatic design veto over the broader alternatives.
+FIBRED-STRUCTURE-1 is now the next bounded row.
 The independent FIBRED-COMPREHENSION-0A/0B audit is also complete. A
 zero-owner Sigma-introduction composite is type correct but computationally
 stuck; a direct pair owner computes with `+2/0` warnings; and the selected
@@ -704,9 +710,13 @@ approval, and completed USABILITY-DEPENDENT-1A non-eta witness. No general
 dependent bracket or follow-on implementation row is authorized merely by
 the older approvals. The later explicit fibred-context direction authorizes
 the sub-plan's dependency-ready frontend rows. D-DTTLF-USABILITY-004 and
-D-DTTLF-USABILITY-005 are approved; the latter's audited comprehension
-closure is complete and the former's exact two-rule product closure is next.
-Do not infer any additional owner/rule, structural map, total pullback, or
-profile authority from those bounded approvals. The completed master plan's
-historical checkpoint authorization does not authorize unrelated Git
-mutations.
+D-DTTLF-USABILITY-005 are approved, and both bounded closures are complete.
+The former retains the transparent product and adds exactly two
+existing-owner rules plus its first grouped-sibling fibre/transport demo; the
+latter adds the audited one-owner/two-rule comprehension totalization and
+dependent chain. FIBRED-STRUCTURE-1 is next, beginning with an
+active-owner/Foundation audit of displayed projection, pairing, swap,
+diagonal, and pullback stability. Do not infer any additional owner/rule,
+structural map, total pullback, or profile authority from those bounded
+approvals. The completed master plan's historical checkpoint authorization
+does not authorize unrelated Git mutations.

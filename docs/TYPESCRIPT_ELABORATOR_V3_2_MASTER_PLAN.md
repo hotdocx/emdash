@@ -3760,9 +3760,12 @@ kernel closure, generic TypeScript transfer, genuine dependent-chain
 consumer, further-family reindexing, and runnable demo. Warning comparisons
 are diagnostic rather than automatic design vetoes, and every prospective
 primitive must first be checked against active kernel constructions and
-Foundations. FIBRED-PRODUCT-1A is the next dependency-ready approved tranche;
-implement only its frozen two-rule existing-owner closure and first
-grouped-sibling transport. Neither approval authorizes the measured broader
-Sigma-introduction action, product structural maps, profile promotion, or a
-generic total pullback.
+Foundations. Preserve the completed FIBRED-PRODUCT-1A transparent family,
+exact two-rule existing-owner kernel closure, generic five-signature/25-clause
+TypeScript transfer, same-base discriminator, and first grouped-sibling
+fibre/transport demo. FIBRED-STRUCTURE-1 is next and must first audit existing
+owners and Foundations before selecting displayed projection, pairing, swap,
+diagonal, or pullback-stability computation. Neither approval authorizes the
+measured broader Sigma-introduction action, product structural maps, profile
+promotion, or a generic total pullback.
 ```

@@ -9044,6 +9044,93 @@ assert [A A' B : Cat] (G : τ (Functor A A')) ⊢
     G
     ≡ @Product_cat_fapp1_tapp0_func A A' B G;
 
+// Transparent fibrewise product: no Product_catd owner is introduced.
+symbol Product_catd_transparent_check [K : Cat]
+  (B C : τ (Catd K))
+  : τ (Catd K)
+≔ @comp_cat_fapp0
+    K
+    (Product_cat Cat_cat Cat_cat)
+    Cat_cat
+    (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+    (Struct_sigma B C);
+
+// The existing semantic composite computes its pointwise fibre.
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  Fibre_cat (@Product_catd_transparent_check K B C) k
+    ≡ Product_cat (Fibre_cat B k) (Fibre_cat C k);
+
+// The two existing-owner projections expose componentwise base-arrow
+// transport while retaining Product_map_func as the iterable result.
+assert [K : Cat]
+  (B C : τ (Catd K))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  catd_transport_func
+    (@Product_catd_transparent_check K B C)
+    p
+    ≡ @Product_map_func
+        (Fibre_cat B x)
+        (Fibre_cat B y)
+        (Fibre_cat C x)
+        (Fibre_cat C y)
+        (catd_transport_func B p)
+        (catd_transport_func C p);
+
+// The shared base arrow is a real discriminator: two unrelated parallel
+// arrows do not trigger the narrow product projection.
+assertnot [K : Cat]
+  (B C : τ (Catd K))
+  (x y : τ (Obj K))
+  (p q : τ (Hom K x y)) ⊢
+  @tapp1_fapp0
+      Cat_cat
+      Cat_cat
+      (@Product_cat_fapp0_func (Fibre_cat B x))
+      (@Product_cat_fapp0_func (Fibre_cat B y))
+      (Fibre_cat C x)
+      (Fibre_cat C y)
+      (@Product_cat_fapp1_fapp0_functord
+        (Fibre_cat B x)
+        (Fibre_cat B y)
+        (catd_transport_func B p))
+      (catd_transport_func C q)
+    ≡ @Product_map_func
+        (Fibre_cat B x)
+        (Fibre_cat B y)
+        (Fibre_cat C x)
+        (Fibre_cat C y)
+        (catd_transport_func B p)
+        (catd_transport_func C q);
+
+// An opaque family is not identified with the transparent product.
+assertnot [K : Cat]
+  (E B C : τ (Catd K)) ⊢
+  E ≡ @Product_catd_transparent_check K B C;
+
+// Displayed functor categories do not globally collapse to products.
+assertnot [K : Cat]
+  (E B C : τ (Catd K)) ⊢
+  @Functord_cat K E (@Product_catd_transparent_check K B C)
+    ≡ @Product_cat
+        (@Functord_cat K E B)
+        (@Functord_cat K E C);
+
+// Pullback stability remains a separate comparison/theorem boundary.
+assertnot [A K : Cat]
+  (F : τ (Functor A K))
+  (B C : τ (Catd K)) ⊢
+  @Pullback_catd
+      A K
+      (@Product_catd_transparent_check K B C)
+      F
+    ≡ @Product_catd_transparent_check
+        A
+        (@Pullback_catd A K B F)
+        (@Pullback_catd A K C F);
+
 assert [A B : Cat] (F : τ (Functor A B)) (x : τ (Obj A)) ⊢
   fapp0 (@Eval_func A B) (Struct_sigma F x)
     ≡ fapp0 F x;
