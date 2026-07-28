@@ -12760,6 +12760,18 @@ injective symbol Sigma_proj1_func [K : Cat] (E : τ (Catd K))
 // First projection on objects: pi_1[(k,u)] ↪ k.
 rule fapp0 (Sigma_proj1_func $E) (Struct_sigma $k $u) ↪ $k;
 
+// Structured-arrow projection: pi_1[(p,alpha)] = p.
+// lhs-audit: keep 1,2 -- the Sigma source and base target guard the
+// projection action.
+rule @fapp1_fapp0
+      (@Sigma_cat $K $E)
+      $K
+      (@Sigma_proj1_func $K $E)
+      (Struct_sigma _ _)
+      (Struct_sigma _ _)
+      (Struct_sigma $p _)
+  ↪ $p;
+
 // Stable head for the computationally important projection pullback. General
 // `Pullback_catd` stays a definition by composition, but this special case is
 // discriminable so sections over the total category can contract to displayed
@@ -12797,6 +12809,19 @@ rule @fapp0
       (Struct_sigma $k $r)
   ↪ @Fibre_cat $K $D $k;
 
+// Structured-arrow action of the stable projection pullback. It is exactly
+// D[p]; the fibre component of the Sigma arrow is irrelevant.
+// lhs-audit: keep 1,2 -- the Sigma source and Cat target guard the stable
+// pullback action.
+rule @fapp1_fapp0
+      (@Sigma_cat $K $R)
+      Cat_cat
+      (@Sigma_proj1_pullback_catd $K $R $D)
+      (Struct_sigma $x _)
+      (Struct_sigma $y _)
+      (Struct_sigma $p _)
+  ↪ @fapp1_fapp0 $K Cat_cat $D $x $y $p;
+
 // Proof-time uncurrying comparison: sections over a Sigma-projection
 // pullback and displayed functors R => D are stable presentations.
 unif_rule
@@ -12805,6 +12830,37 @@ unif_rule
     (@Sigma_proj1_pullback_catd $K $R $D)
   ≡ @Functord_cat $K' $R' $D'
   ↪ [ $K ≡ $K'; $R ≡ $R'; $D ≡ $D' ];
+
+// DISPLAYED-CHAIN-1A explicit object-level bridge from a displayed functor to
+// its section over the Sigma total. A stable wrapper is required: the
+// proof-time category comparison alone is insufficient to establish subject
+// reduction for a rewrite that reinterprets an arbitrary section object as a
+// displayed functor.
+injective symbol sigma_functord_sec [K : Cat] [R D : τ (Catd K)]
+  (FF : τ (Functord R D))
+  : τ (Obj
+      (@Pi_cat
+        (@Sigma_cat K R)
+        (@Sigma_proj1_pullback_catd K R D)));
+
+// Component at (k,r): uncurry(FF)[(k,r)] = FF[k](r).
+// lhs-audit: keep 1,3,4 -- the Sigma source, terminal source family, and
+// projection-pullback target family are the semantic discriminator and
+// subject-reduction guard.
+rule @tapp0_fapp0
+      (@Sigma_cat $K $R)
+      Cat_cat
+      (@Const_catd (@Sigma_cat $K $R) Terminal_cat)
+      (@Sigma_proj1_pullback_catd $K $R $D)
+      (Struct_sigma $k $r)
+      (@sigma_functord_sec $K $R $D $FF)
+  ↪ @Obj_func
+      (Fibre_cat $D $k)
+      (@fapp0
+        (Fibre_cat $R $k)
+        (Fibre_cat $D $k)
+        (@tapp0_fapp0 $K Cat_cat $R $D $k $FF)
+        $r);
 
 // Runtime classifier join after the general Pi and displayed-facade
 // projections expose the ordinary Cat-valued-transfor presentation. This is
@@ -14492,6 +14548,23 @@ rule @fdapp1_int_hom_fapp0
       $p
       Terminal_obj;
 
+// Section-action projection for the explicit Sigma uncurrying wrapper.
+// Action over (p,alpha) is the underlying internalized displayed-functor
+// action on alpha.
+// lhs-audit: keep 1,2,3 -- the Sigma base, terminal source family, and
+// projection-pullback target family guard the uncurrying action.
+rule @fdapp1_int_cell
+      (@Sigma_cat $K $R)
+      (@Const_catd (@Sigma_cat $K $R) Terminal_cat)
+      (@Sigma_proj1_pullback_catd $K $R $D)
+      (@sigma_functord_sec $K $R $D $FF)
+      (Struct_sigma $x $u)
+      (Struct_sigma $y $v)
+      (Struct_sigma $p $alpha)
+      Terminal_obj
+  ↪ @fdapp1_int_hom_fapp0
+      $K $R $D $FF $x $y $p $u $v $alpha;
+
 // 16d. Arbitrary displayed-transfor hom-action projections
 /*
   Generic displayed internal-hom action projections.
@@ -15561,6 +15634,57 @@ rule @tapp0_fapp0
   ↪ @Obj_func
       (Fibre_cat (@Pullback_catd $A $B $E $F) $a)
       (@piapp0 $B $E $s (@fapp0 $A $B $F $a));
+
+// Direct displayed component of section weakening along a Sigma projection.
+// At z, it is the constant fibre functor with value s[z].
+// lhs-audit: keep 1,3,4 -- the fixed direct displayed endpoints are the
+// projection-pullback uncurrying discriminator and subject-reduction guard.
+rule @tapp0_fapp0
+      $B
+      Cat_cat
+      $R
+      $E
+      $z
+      (@section_pullback_sec
+        (@Sigma_cat $B $R)
+        $B
+        (@Sigma_proj1_func $B $R)
+        $E
+        $s)
+  ↪ @Const_func
+      (Fibre_cat $R $z)
+      (Fibre_cat $E $z)
+      (@piapp0 $B $E $s $z);
+
+// Base-arrow laxity component of the same direct displayed weakening. It is
+// exactly the original section action, retained at the generic
+// terminal-source displayed-laxity owner, and is independent of the
+// source-fibre object.
+// lhs-audit: keep 1,2,3 -- the direct displayed endpoints guard the
+// projection-pullback uncurrying action.
+rule @fdapp1_int_cell
+      $B
+      $R
+      $E
+      (@section_pullback_sec
+        (@Sigma_cat $B $R)
+        $B
+        (@Sigma_proj1_func $B $R)
+        $E
+        $s)
+      $z
+      $z'
+      $q
+      _
+  ↪ @fdapp1_int_cell
+      $B
+      (@Const_catd $B Terminal_cat)
+      $E
+      $s
+      $z
+      $z'
+      $q
+      Terminal_obj;
 
 // Internalized-x prerequisite: naturality component of Pi along a base functor.
 //

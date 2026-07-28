@@ -4040,6 +4040,19 @@ The separate explicit-human review adds nine focused tests; its aggregate
 Its exact green local checkpoint is
 2c81dc4f2c4860f3a12f9371139b795906efeca9.
 
+The Lambdapi half of DISPLAYED-CHAIN-1A is now implemented at the frozen
+boundary: exactly one `sigma_functord_sec` owner and six runtime rules.
+Permanent diagnostics cover immediate/weakened variable objects, structured
+Sigma projection and pullback action, the wrapper's internalized
+`fdapp1_int_hom_fapp0` fibre-arrow action, weakening's `fdapp1_int_cell`
+base-arrow action, and generic-section non-collapse. Warning comparison is
+exactly the proposed 1,179 total (1,020 critical pairs, 159 replaceable
+variables), strict LHS has zero unreviewed findings, and the refreshed catalog
+has 1,723 classified checks across 63 areas with zero unclassified checks.
+Generic TypeScript transfer and the root-only recursive consumer remain the
+next dependency-ready work; do not claim the full row complete before they
+and their conformance gates pass.
+
 For future exact gates within that active fibred-context goal, the user
 permits delegated unattended approval when no immediate human response
 follows a presented bounded proposal. Preserve the proposal as

@@ -9799,6 +9799,502 @@ symbol Displayed_eval_higher_check [K A : Cat]
 // the directed base with its opposite; that collapse remains absent.
 assertnot [K : Cat] ⊢ Op_cat K ≡ K;
 
+// catalog-area: Displayed dependent chain
+// One genuine dependency edge:
+//
+//   k : K, a : A[k], b : B[(k,a)].
+//
+// The direct terms remain displayed functors. The outer variable is first
+// internalized as a section over Sigma(A), then weakened along the next Sigma
+// projection; the inner variable is the displayed identity at B.
+symbol Displayed_chain_K_check : Cat;
+symbol Displayed_chain_A_check
+  : τ (Catd Displayed_chain_K_check);
+symbol Displayed_chain_B_check
+  : τ (Catd
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check));
+
+symbol Displayed_chain_A_var_check
+  : τ (Obj
+      (@Functord_cat
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        (@Const_catd
+          (@Sigma_cat
+            Displayed_chain_K_check
+            Displayed_chain_A_check)
+          Terminal_cat)
+        (@Sigma_proj1_pullback_catd
+          Displayed_chain_K_check
+          Displayed_chain_A_check
+          Displayed_chain_A_check)))
+≔ @sigma_functord_sec
+    Displayed_chain_K_check
+    Displayed_chain_A_check
+    Displayed_chain_A_check
+    (@id_funcd
+      Displayed_chain_K_check
+      Displayed_chain_A_check);
+
+symbol Displayed_chain_A_after_B_check
+  : τ (Obj
+      (@Functord_cat
+        (@Sigma_cat
+          (@Sigma_cat
+            Displayed_chain_K_check
+            Displayed_chain_A_check)
+          Displayed_chain_B_check)
+        (@Const_catd
+          (@Sigma_cat
+            (@Sigma_cat
+              Displayed_chain_K_check
+              Displayed_chain_A_check)
+            Displayed_chain_B_check)
+          Terminal_cat)
+        (@Sigma_proj1_pullback_catd
+          (@Sigma_cat
+            Displayed_chain_K_check
+            Displayed_chain_A_check)
+          Displayed_chain_B_check
+          (@Sigma_proj1_pullback_catd
+            Displayed_chain_K_check
+            Displayed_chain_A_check
+            Displayed_chain_A_check))))
+≔ @fapp0
+    (@Functord_cat
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      (@Const_catd
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        Terminal_cat)
+      (@Sigma_proj1_pullback_catd
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_A_check))
+    (@Functord_cat
+      (@Sigma_cat
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        Displayed_chain_B_check)
+      (@Const_catd
+        (@Sigma_cat
+          (@Sigma_cat
+            Displayed_chain_K_check
+            Displayed_chain_A_check)
+          Displayed_chain_B_check)
+        Terminal_cat)
+      (@Sigma_proj1_pullback_catd
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        Displayed_chain_B_check
+        (@Sigma_proj1_pullback_catd
+          Displayed_chain_K_check
+          Displayed_chain_A_check
+          Displayed_chain_A_check)))
+    (@section_pullback_func
+      (@Sigma_cat
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        Displayed_chain_B_check)
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      (@Sigma_proj1_func
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        Displayed_chain_B_check)
+      (@Sigma_proj1_pullback_catd
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_A_check))
+    Displayed_chain_A_var_check;
+
+symbol Displayed_chain_B_var_check
+  : τ (Obj
+      (@Functord_cat
+        (@Sigma_cat
+          (@Sigma_cat
+            Displayed_chain_K_check
+            Displayed_chain_A_check)
+          Displayed_chain_B_check)
+        (@Const_catd
+          (@Sigma_cat
+            (@Sigma_cat
+              Displayed_chain_K_check
+              Displayed_chain_A_check)
+            Displayed_chain_B_check)
+          Terminal_cat)
+        (@Sigma_proj1_pullback_catd
+          (@Sigma_cat
+            Displayed_chain_K_check
+            Displayed_chain_A_check)
+          Displayed_chain_B_check
+          Displayed_chain_B_check)))
+≔ @sigma_functord_sec
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    Displayed_chain_B_check
+    Displayed_chain_B_check
+    (@id_funcd
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      Displayed_chain_B_check);
+
+// Immediate and recursively weakened variable objects both compute.
+assert
+  (k : τ (Obj Displayed_chain_K_check))
+  (a : τ (Obj (Fibre_cat Displayed_chain_A_check k))) ⊢
+  @piapp0
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    (@Sigma_proj1_pullback_catd
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_A_check)
+    Displayed_chain_A_var_check
+    (Struct_sigma k a)
+  ≡ a;
+
+assert
+  (k : τ (Obj Displayed_chain_K_check))
+  (a : τ (Obj (Fibre_cat Displayed_chain_A_check k)))
+  (b : τ (Obj
+      (Fibre_cat
+        Displayed_chain_B_check
+        (Struct_sigma k a)))) ⊢
+  @piapp0
+    (@Sigma_cat
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      Displayed_chain_B_check)
+    (@Sigma_proj1_pullback_catd
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      Displayed_chain_B_check
+      (@Sigma_proj1_pullback_catd
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_A_check))
+    Displayed_chain_A_after_B_check
+    (Struct_sigma (Struct_sigma k a) b)
+  ≡ a;
+
+assert
+  (k : τ (Obj Displayed_chain_K_check))
+  (a : τ (Obj (Fibre_cat Displayed_chain_A_check k)))
+  (b : τ (Obj
+      (Fibre_cat
+        Displayed_chain_B_check
+        (Struct_sigma k a)))) ⊢
+  @piapp0
+    (@Sigma_cat
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      Displayed_chain_B_check)
+    (@Sigma_proj1_pullback_catd
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      Displayed_chain_B_check
+      Displayed_chain_B_check)
+    Displayed_chain_B_var_check
+    (Struct_sigma (Struct_sigma k a) b)
+  ≡ b;
+
+symbol Displayed_chain_D_check
+  : τ (Catd Displayed_chain_K_check);
+symbol Displayed_chain_FF_check
+  : τ (Functord
+      Displayed_chain_A_check
+      Displayed_chain_D_check);
+
+// The bridge preserves an arbitrary displayed functor's object action.
+assert
+  (k : τ (Obj Displayed_chain_K_check))
+  (a : τ (Obj (Fibre_cat Displayed_chain_A_check k))) ⊢
+  @piapp0
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    (@Sigma_proj1_pullback_catd
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check)
+    (@sigma_functord_sec
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check
+      Displayed_chain_FF_check)
+    (Struct_sigma k a)
+  ≡ @fapp0
+      (Fibre_cat Displayed_chain_A_check k)
+      (Fibre_cat Displayed_chain_D_check k)
+      (@tapp0_fapp0
+        Displayed_chain_K_check
+        Cat_cat
+        Displayed_chain_A_check
+        Displayed_chain_D_check
+        k
+        Displayed_chain_FF_check)
+      a;
+
+symbol Displayed_chain_k0_check
+  : τ (Obj Displayed_chain_K_check);
+symbol Displayed_chain_k1_check
+  : τ (Obj Displayed_chain_K_check);
+symbol Displayed_chain_a0_check
+  : τ (Obj
+      (Fibre_cat
+        Displayed_chain_A_check
+        Displayed_chain_k0_check));
+symbol Displayed_chain_a1_check
+  : τ (Obj
+      (Fibre_cat
+        Displayed_chain_A_check
+        Displayed_chain_k1_check));
+symbol Displayed_chain_p_check
+  : τ (Hom
+      Displayed_chain_K_check
+      Displayed_chain_k0_check
+      Displayed_chain_k1_check);
+symbol Displayed_chain_alpha_check
+  : τ (Hom
+      (Fibre_cat
+        Displayed_chain_A_check
+        Displayed_chain_k1_check)
+      (@fapp0
+        (Fibre_cat
+          Displayed_chain_A_check
+          Displayed_chain_k0_check)
+        (Fibre_cat
+          Displayed_chain_A_check
+          Displayed_chain_k1_check)
+        (@catd_transport_func
+          Displayed_chain_K_check
+          Displayed_chain_A_check
+          Displayed_chain_k0_check
+          Displayed_chain_k1_check
+          Displayed_chain_p_check)
+        Displayed_chain_a0_check)
+      Displayed_chain_a1_check);
+symbol Displayed_chain_q_check
+  : τ (Hom
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      (Struct_sigma
+        Displayed_chain_k0_check
+        Displayed_chain_a0_check)
+      (Struct_sigma
+        Displayed_chain_k1_check
+        Displayed_chain_a1_check))
+≔ @sigma_arrow
+    Displayed_chain_K_check
+    Displayed_chain_A_check
+    Displayed_chain_k0_check
+    Displayed_chain_k1_check
+    Displayed_chain_a0_check
+    Displayed_chain_a1_check
+    Displayed_chain_p_check
+    Displayed_chain_alpha_check;
+
+// The total projection and its pulled-back family preserve the base arrow.
+assert ⊢
+  @fapp1_fapp0
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    Displayed_chain_K_check
+    (@Sigma_proj1_func
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    (Struct_sigma
+      Displayed_chain_k0_check
+      Displayed_chain_a0_check)
+    (Struct_sigma
+      Displayed_chain_k1_check
+      Displayed_chain_a1_check)
+    Displayed_chain_q_check
+  ≡ Displayed_chain_p_check;
+
+assert ⊢
+  @fapp1_fapp0
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    Cat_cat
+    (@Sigma_proj1_pullback_catd
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check)
+    (Struct_sigma
+      Displayed_chain_k0_check
+      Displayed_chain_a0_check)
+    (Struct_sigma
+      Displayed_chain_k1_check
+      Displayed_chain_a1_check)
+    Displayed_chain_q_check
+  ≡ @fapp1_fapp0
+      Displayed_chain_K_check
+      Cat_cat
+      Displayed_chain_D_check
+      Displayed_chain_k0_check
+      Displayed_chain_k1_check
+      Displayed_chain_p_check;
+
+// The bridge's structured-arrow component delegates to the already
+// internalized displayed hom action, retaining the fibre arrow alpha.
+assert ⊢
+  @fdapp1_int_cell
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    (@Const_catd
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      Terminal_cat)
+    (@Sigma_proj1_pullback_catd
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_A_check)
+    (@sigma_functord_sec
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_A_check
+      (@id_funcd
+        Displayed_chain_K_check
+        Displayed_chain_A_check))
+    (Struct_sigma
+      Displayed_chain_k0_check
+      Displayed_chain_a0_check)
+    (Struct_sigma
+      Displayed_chain_k1_check
+      Displayed_chain_a1_check)
+    (Struct_sigma
+      Displayed_chain_p_check
+      Displayed_chain_alpha_check)
+    Terminal_obj
+  ≡ @fdapp1_int_hom_fapp0
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_A_check
+      (@id_funcd
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      Displayed_chain_k0_check
+      Displayed_chain_k1_check
+      Displayed_chain_p_check
+      Displayed_chain_a0_check
+      Displayed_chain_a1_check
+      Displayed_chain_alpha_check;
+
+symbol Displayed_chain_b0_check
+  : τ (Obj
+      (Fibre_cat
+        Displayed_chain_B_check
+        (Struct_sigma
+          Displayed_chain_k0_check
+          Displayed_chain_a0_check)));
+
+// Weakening the outer variable preserves that same internalized action and
+// is independent of the object in the new source fibre.
+assert ⊢
+  @fdapp1_int_cell
+    (@Sigma_cat
+      Displayed_chain_K_check
+      Displayed_chain_A_check)
+    Displayed_chain_B_check
+    (@Sigma_proj1_pullback_catd
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_A_check)
+    (@section_pullback_sec
+      (@Sigma_cat
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        Displayed_chain_B_check)
+      (@Sigma_cat
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      (@Sigma_proj1_func
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        Displayed_chain_B_check)
+      (@Sigma_proj1_pullback_catd
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_A_check)
+      (@sigma_functord_sec
+        Displayed_chain_K_check
+        Displayed_chain_A_check
+        Displayed_chain_A_check
+        (@id_funcd
+          Displayed_chain_K_check
+          Displayed_chain_A_check)))
+    (Struct_sigma
+      Displayed_chain_k0_check
+      Displayed_chain_a0_check)
+    (Struct_sigma
+      Displayed_chain_k1_check
+      Displayed_chain_a1_check)
+    (Struct_sigma
+      Displayed_chain_p_check
+      Displayed_chain_alpha_check)
+    Displayed_chain_b0_check
+  ≡ @fdapp1_int_hom_fapp0
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_A_check
+      (@id_funcd
+        Displayed_chain_K_check
+        Displayed_chain_A_check)
+      Displayed_chain_k0_check
+      Displayed_chain_k1_check
+      Displayed_chain_p_check
+      Displayed_chain_a0_check
+      Displayed_chain_a1_check
+      Displayed_chain_alpha_check;
+
+// A generic section of the same classifier does not become the explicit
+// displayed-functor bridge.
+symbol Displayed_chain_generic_section_check
+  : τ (Obj
+      (@Pi_cat
+        (@Sigma_cat
+          Displayed_chain_K_check
+          Displayed_chain_A_check)
+        (@Sigma_proj1_pullback_catd
+          Displayed_chain_K_check
+          Displayed_chain_A_check
+          Displayed_chain_D_check)));
+
+assertnot ⊢
+  Displayed_chain_generic_section_check
+  ≡ @sigma_functord_sec
+      Displayed_chain_K_check
+      Displayed_chain_A_check
+      Displayed_chain_D_check
+      Displayed_chain_FF_check;
+
 // catalog-area: auto
 assert [A B : Cat] (F : τ (Functor A B)) (x : τ (Obj A)) ⊢
   fapp0 (@Eval_func A B) (Struct_sigma F x)

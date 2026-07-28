@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved exact implementation in progress | reviewed DISPLAYED-CHAIN-0A/D-012 | Promote exactly one `sigma_functord_sec` owner and six measured runtime rules; transfer three existing-signature/two existing-rule prerequisites plus the semantic delta through generic engines; add only the root-only `fibred-displayed-chain-1` profile and recursive `displayedDependentContextLambda` consumer; qualify the frozen object/arrow/reindexing/negative/non-collapse corpus |
+| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks complete; TypeScript transfer/consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012 | Promote exactly one `sigma_functord_sec` owner and six measured runtime rules; transfer three existing-signature/two existing-rule prerequisites plus the semantic delta through generic engines; add only the root-only `fibred-displayed-chain-1` profile and recursive `displayedDependentContextLambda` consumer; qualify the frozen object/arrow/reindexing/negative/non-collapse corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1629,6 +1629,20 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-28 — DISPLAYED-CHAIN-1A Lambdapi closure implemented.** Promoted
+  exactly the owner-position-tested `sigma_functord_sec` owner and six
+  runtime rules. This is not an object-only context encoding: permanent
+  checks cover immediate and weakened variable objects, structured Sigma
+  projection, projection-pullback arrow action, the wrapper's internalized
+  fibre-arrow action through `fdapp1_int_hom_fapp0`, and weakening's
+  base-arrow action through `fdapp1_int_cell`. A same-classifier generic
+  section remains non-convertible. The diagnostics reproduce the frozen
+  1,179-warning inventory (1,020 critical pairs, 159 replaceable variables),
+  strict LHS remains zero unreviewed findings, and the regenerated catalog
+  records 1,723 classified checks in 63 areas with zero unclassified checks.
+  The health report is current and all 41 health targets pass. This closes
+  only the Lambdapi semantic half; generic TypeScript transfer and the
+  root-only recursive consumer remain in progress.
 - **2026-07-28 — D-DTTLF-USABILITY-012 explicitly approved.** The user
   approved the frozen DISPLAYED-CHAIN-0A proposal exactly as proposed. A
   separate deeply immutable review snapshots the unchanged pending proposal
