@@ -661,7 +661,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-ND-1A | implementation complete, fully validated, and checkpointed `d8b450222273167ab326701c76fff03f0f539b18` at the exact separately reviewed D-018 boundary | reviewed DISPLAYED-ND-0A audit/proposal | `composeCells` plus one generic `typed-cell-composition` IR node initially accepts only compatible `indexed-transfor` children; `displayedTransforLambda` recursively factors component leaves and nested vertical compositions to genuine outer `Transfd` terms through existing `comp_fapp0` at `Functord_cat`. Nine permanent tests plus the 1,045-test root gate (998 active, 47 skipped), 19/19 live conformance, and bounded active-kernel check cover recursive frozen evidence, component beta, a checked base-arrow cell, exact negatives, retained eta, and zero Lambdapi/transfer/intrinsic/checker/browser delta |
 | DISPLAYED-ND-HIGHER-1B | executable read-only audit complete at `4db1ce8a80725c0030ac8908f416d412591620bd`; separate delegated D-019 review complete and focused-green with human supersession; review checkpoint pending | completed DISPLAYED-ND-1A and active canonical source/export evidence | Pins 13 prerequisite declarations plus three active `tdapp1_int_*_transfd` owners and two projection rules; proves target-only transfer is not closed; checks a concrete next-hom consumer; selects only the 13-declaration rule-free foundation as DISPLAYED-ND-HIGHER-FOUNDATION-1A |
 | DISPLAYED-ND-HIGHER-FOUNDATION-1A | D-020 directly approved; implementation and six focused tests green; checkpoint pending with this semantic tranche | completed DISPLAYED-ND-HIGHER-1B audit, separate D-019 review, and direct D-020 approval | All thirteen declarations compile through the generic engine with five unchanged checked-transparent bodies and eight opaque/injective interfaces; the omitted existing `Obj`/`Hom` links and ordinal-237 opposite involution close the dependency; no new Lambdapi mathematics, intrinsic owner, checker branch, or surface method |
-| DISPLAYED-ND-HIGHER-TARGET-1A | exact non-self-authorizing D-021 proposal frozen below | green DISPLAYED-ND-HIGHER-FOUNDATION-1A | Transfer the three existing `tdapp1_int_*_transfd` opaque declarations and two existing projection rules; add one isolated successor profile plus typed `displayedTransforCategory` and `displayedTransforInternalHomAction` constructors; reuse generic `displayedTransfor`, `hom`, `homBoundary`, and recursive `apply` for the concrete next-hom consumer |
+| DISPLAYED-ND-HIGHER-TARGET-1A | D-021 approved exactly as proposed by a separate minimal delegated review with human supersession; implementation-ready | green DISPLAYED-ND-HIGHER-FOUNDATION-1A and immutable proposal checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e` | Transfer the three existing `tdapp1_int_*_transfd` opaque declarations and two existing projection rules; add one isolated successor profile plus typed `displayedTransforCategory` and `displayedTransforInternalHomAction` constructors; reuse generic `displayedTransfor`, `hom`, `homBoundary`, and recursive `apply` for the concrete next-hom consumer |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
 
@@ -2939,12 +2939,24 @@ The exact non-self-authorizing decision is:
 > new-context-node, parser, browser, bulk-transfer, unrelated-computation,
 > and broader-Git deltas at zero; and stop on any further closure drift?
 
+The proposal and green foundation are immutable at
+`fead6e10a625c0402eb6e5c2f6336c797e70f29e`. No immediate human response
+followed presentation of the exact gate, so the user's standing unattended
+delegation approves D-021 exactly as proposed. This separate review retains
+human supersession and authorizes no scope beyond TARGET-1A. It deliberately
+adds no parallel executable review module or aggregate validation run.
+
 Run focused tests while implementing and one aggregate root gate only after
 the target consumer is complete. Synchronize and checkpoint the foundation,
 target, consumer, tests, and living ledgers as one semantic tranche.
 
 ## Change Log
 
+- **2026-07-29 — D-021 minimally reviewed-approved under the standing
+  unattended delegation.** The immutable proposal checkpoint is
+  `fead6e10a625c0402eb6e5c2f6336c797e70f29e`. Human supersession and every
+  zero-delta boundary remain explicit. No executable audit/review layer or
+  aggregate gate was added for this authorization record.
 - **2026-07-29 — D-020 directly approved and foundation focused-green.**
   All thirteen declarations now compile through the generic declaration
   engine over the one existing-rule correction. Five active transparent
