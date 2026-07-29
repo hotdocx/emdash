@@ -308,8 +308,9 @@ Exact proposal/audit checkpoint:
 `ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59`. A separate immutable review
 records D-DTTLF-SCALE-INDUCTIVE-001 as approved exactly as proposed under the
 standing unattended delegation with human supersession. Its five focused
-tests, typecheck, and lint pass. SCALE-INDUCTIVE-1B1 implementation is now the
-dependency-ready row.
+tests, typecheck, and lint pass. Exact review checkpoint:
+`33960a8b6aa924e5d69f438b0b43881b4e13f029`.
+SCALE-INDUCTIVE-1B1 implementation is now the dependency-ready row.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark

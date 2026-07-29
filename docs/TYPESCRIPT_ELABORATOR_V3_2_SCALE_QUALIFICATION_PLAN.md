@@ -149,7 +149,8 @@ supersession. It authorizes only the required nonrecursive indexed transfer
 contract and explicitly withholds an end-user inductive-declaration facade.
 Exact proposal/audit checkpoint:
 `830fb975756d1d13d8ddcb516690ea88b19d51d6`; proposal-ledger checkpoint:
-`ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59`. The following
+`ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59`; exact separate review
+checkpoint: `33960a8b6aa924e5d69f438b0b43881b4e13f029`. The following
 order is SCALE-INDUCTIVE-1B1, SCALE-INDUCTIVE-1B2,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -667,7 +668,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | in progress | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Parent row for explicit generated-owner contracts, parameter/index fidelity, recursive/indexed validation, and strict-positivity boundaries; no backend-generated owner is trusted from its name alone |
-| SCALE-INDUCTIVE-1B1 | separately reviewed-approved; implementation ready; proposal `830fb975756d1d13d8ddcb516690ea88b19d51d6`; ledger `ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59` | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Correct the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; associate the exact explicit `ind_τΣ_` type and one beta as a checked companion contract; compile the polymorphic first-projection consumer through existing generic engines; qualify only the nonrecursive indexed case |
+| SCALE-INDUCTIVE-1B1 | separately reviewed-approved at `33960a8b6aa924e5d69f438b0b43881b4e13f029`; implementation ready; proposal `830fb975756d1d13d8ddcb516690ea88b19d51d6`; ledger `ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59` | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Correct the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; associate the exact explicit `ind_τΣ_` type and one beta as a checked companion contract; compile the polymorphic first-projection consumer through existing generic engines; qualify only the nonrecursive indexed case |
 | SCALE-INDUCTIVE-1B2 | pending | SCALE-INDUCTIVE-1B1 | Use the measured `ind_nat` type/two betas to qualify direct structural recursion, recursive induction-hypothesis contracts, and negative strict-positivity rejection; keep mutual and general higher-order positivity separate unless active consumers require them |
 | SCALE-KIND-PI-1 | complete at `b4cb8d39bd31adc768784308263fd91d83ddeefe`; audit/proposal checkpoint `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserves the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
@@ -1722,6 +1723,8 @@ implementation effects, and separately denies direct recursion, recursive
 induction hypotheses, general strict positivity, automatic eliminator
 synthesis, an end-user inductive-declaration facade, parser/surface work,
 profile/browser promotion, Lambdapi changes, and wider Git actions.
+Exact separate review checkpoint:
+`33960a8b6aa924e5d69f438b0b43881b4e13f029`.
 
 Review validation on 2026-07-29:
 
@@ -3154,7 +3157,8 @@ scope is affected.
   with human supersession. The immutable review authorizes only the required
   nonrecursive indexed contract/correction and explicitly withholds recursive
   induction, automatic synthesis, and an end-user inductive-declaration
-  facade. Five focused review tests, typecheck, and lint pass.
+  facade. Five focused review tests, typecheck, and lint pass. Exact review
+  checkpoint: `33960a8b6aa924e5d69f438b0b43881b4e13f029`.
 - **2026-07-29 — SCALE-INDUCTIVE-1B1 audit exposed the parameter/index
   boundary and froze an exact proposal.** Live `print` evidence shows that
   `τΣ_`'s inline `a,P` binders vary in the generated motive, unlike fixed
