@@ -117,13 +117,16 @@ demo. It does not prove arbitrary depth, arbitrary mixed variance, or general
 `:^nd`. The executable deeply immutable DISPLAYED-BRACKET-GRADUATE-1
 proposal is now complete and green: it freezes nine evidence classes,
 separates recursive supported-body lowering from the hard one-edge context
-presentation, and awaits H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/
-D-DTTLF-USABILITY-016. Its exact successor contract keeps the existing
-method and freezes the four-binding, three-level shape `a; b,c; d`, derives
-the middle sibling group, expects zero new owner/rule/transfer entry, and
-halts for a separate closure decision on drift. General `:^nd` and the
-recorded scale sequence follow only after that bounded stress. Exact proposal
-checkpoint: `6c06cb10ea6eb9fa298544d084df5f129950a3a1`.
+presentation, and is separately approved exactly as proposed under
+H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 by an
+immutable delegated review with human supersession. Its exact successor
+contract keeps the existing method and freezes the four-binding, three-level
+shape `a; b,c; d`, derives the middle sibling group, expects zero new
+owner/rule/transfer entry, and halts for a separate closure decision on
+drift. Ten focused review tests and the 995-test reviewed root gate pass.
+General `:^nd` and the recorded scale sequence follow only after that bounded
+stress. Exact proposal checkpoint:
+`6c06cb10ea6eb9fa298544d084df5f129950a3a1`.
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
@@ -573,7 +576,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-1A; DISPLAYED-BRACKET-GRADUATE-1 proposal complete at `6c06cb10ea6eb9fa298544d084df5f129950a3a1` and awaiting D-DTTLF-USABILITY-016 | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-015 | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active displayed plan preserves one typed recursive frontend for independent siblings, stable evaluation, and the exact one-edge chain. Its new deeply frozen graduation artifact validates nine evidence classes, records that displayed body recursion is broader than the still-hard two-binding presentation, and freezes only the existing-method `a; b,c; d` successor with transparent product/Sigma/section-pullback authority, zero expected semantic/transfer delta, exact object/arrow/reindexing/negative evidence, and a mandatory stop on drift. Twelve focused tests and the 985-test root gate pass; the artifact self-authorizes nothing |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-1A; DISPLAYED-BRACKET-GRADUATE-1 proposal checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1` and separately approved under D-DTTLF-USABILITY-016 with human supersession; DISPLAYED-CHAIN-2A implementation ready | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-016 | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active displayed plan preserves one typed recursive frontend for independent siblings, stable evaluation, and the exact one-edge chain. Its deeply frozen graduation proposal validates nine evidence classes and records that displayed body recursion is broader than the still-hard two-binding presentation. A separate delegated review authorizes only the existing-method `a; b,c; d` successor with transparent product/Sigma/section-pullback authority, zero expected semantic/transfer delta, exact object/arrow/reindexing/negative evidence, and a mandatory stop on drift. Twelve focused proposal tests, ten focused review tests, and the 995-test reviewed root gate pass; the proposal itself remains non-self-authorizing |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2347,12 +2350,13 @@ or select the next dependency-ready bounded implementation slice; produce
 executable evidence rather than only expanding architectural prose.
 
 For the active recursive displayed continuation, the more specific displayed
-plan and its launch prompt control. Preserve the completed non-self-authorizing
-DISPLAYED-BRACKET-GRADUATE-1 proposal and present or recover exact
-H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016. It freezes the
-implemented usability envelope and the existing-method four-binding
-`a; b,c; d` three-level stress. Do not implement that stress before approval;
-after approval, halt for a separate closure proposal if its expected zero
+plan and its launch prompt control. Preserve the completed
+non-self-authorizing DISPLAYED-BRACKET-GRADUATE-1 proposal and its separate
+immutable exact H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/
+D-DTTLF-USABILITY-016 delegated review with human supersession. It freezes
+the implemented usability envelope and authorizes only the existing-method
+four-binding `a; b,c; d` three-level stress. Implement that exact row and halt
+for a separate closure proposal if its expected zero
 owner/rule/transfer-entry delta is false. Preserve completed
 DISPLAYED-EVAL-0B, its
 constant-domain
@@ -2548,6 +2552,14 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-USABILITY-016 delegated review synchronized.**
+  After no immediate human response to the exact frozen gate, a separate
+  immutable review records approval as proposed with human supersession. It
+  graduates only the demonstrated envelope and authorizes only the
+  existing-method DISPLAYED-CHAIN-2A `a; b,c; d` stress, with all expected
+  semantic/checker/transfer deltas fixed at zero and a mandatory separate
+  decision on drift. Ten focused review tests, the 995-test root gate, all 19
+  live conformance judgments, and the bounded active-kernel check pass.
 - **2026-07-29 — Displayed graduation proposal synchronized.** The active
   displayed plan now contains an executable deeply immutable assessment of
   the nine demonstrated binder/evaluation/chain evidence classes and their

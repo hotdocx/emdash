@@ -140,18 +140,22 @@ tests and the complete 985-test TypeScript gate pass: 938 active passes,
 envelope and, crucially, distinguishes recursive supported-body compilation
 from the still-bounded one-edge dependent context-presentation compiler.
 Its exact proposal checkpoint is
-`6c06cb10ea6eb9fa298544d084df5f129950a3a1`. It awaits
-H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016.
+`6c06cb10ea6eb9fa298544d084df5f129950a3a1`. No immediate human response
+followed presentation of its exact gate. The separate immutable
+`categorical_displayed_graduation_review.ts` therefore records
+H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 as approved
+exactly as proposed under the user's standing unattended delegation, with
+human supersession and every frozen non-effect retained.
 
 The same proposal freezes the agreed first post-graduation stress as
 DISPLAYED-CHAIN-2A: one three-level mixed telescope containing both genuine
 dependency transitions and one independent fibred-sibling block. It reuses
 the existing `displayedDependentContextLambda` API and existing active
 owners, expects zero owner/rule delta, and must stop for a separate closure
-decision if that expectation is false. No DISPLAYED-CHAIN-2A implementation
-is authorized before D-016. General `:^nd` coherence/higher action follows
-only after that bounded stress. Whole-transfer qualification then returns to
-the separate scale plan.
+decision if that expectation is false. D-016 authorizes exactly that bounded
+implementation and no semantic or transfer expansion. General `:^nd`
+coherence/higher action follows only after that bounded stress.
+Whole-transfer qualification then returns to the separate scale plan.
 
 ## Authority And Relationship To The Completed Architecture
 
@@ -536,8 +540,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
 | DISPLAYED-CHAIN-1A | complete, green, and checkpointed `86ac6e480e50e38486bf4155556bbf41760be2cf`; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e`; the root-only recursive consumer and runnable demo pass nine new focused tests and the aggregate 973-test root gate (926 active passes, 47 intentional skips, zero failures) | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-INTEGRATE-1 | complete and validated; exact consolidation checkpoint `222a718fc1ef667964a15cfec0e82e0cf807dd96` | complete DISPLAYED-CHAIN-1A and green full integration audit | Synchronized the displayed/usability/scale/handoff/master routing; classified `DECL-REFINE-1A` as optional deferred module/linking infrastructure; removed only six verified generated probe directories; passed the complete repository gate; checkpointed exactly the consolidation; and authorized the immediately following verified local-main fast-forward with no push or worktree removal |
-| DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; awaiting H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused tests and the aggregate 985-test root gate pass; the artifact authorizes nothing by itself |
-| DISPLAYED-CHAIN-2A | exact API/closure/corpus proposal frozen inside DISPLAYED-BRACKET-GRADUATE-1; implementation not yet authorized | approved D-DTTLF-USABILITY-016 | Extend the existing `displayedDependentContextLambda` method only to the flat source-ordered `a; b,c; d` shape. Derive the independent `b,c` group without user flags; use the transparent displayed product and sequential Sigma total; require object/internalized-arrow/reindexing/negative evidence and zero new owners/rules; halt for a separate closure proposal on drift |
+| DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; approved exactly as proposed by a separate delegated review with human supersession | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused proposal tests, ten focused review tests, the 985-test proposal gate, and the 995-test reviewed gate pass; the proposal remains non-self-authorizing |
+| DISPLAYED-CHAIN-2A | exact API/closure/corpus frozen inside DISPLAYED-BRACKET-GRADUATE-1; implementation ready under reviewed D-016 | approved D-DTTLF-USABILITY-016 | Extend the existing `displayedDependentContextLambda` method only to the flat source-ordered `a; b,c; d` shape. Derive the independent `b,c` group without user flags; use the transparent displayed product and sequential Sigma total; require object/internalized-arrow/reindexing/negative evidence and zero new owners/rules; halt for a separate closure proposal on drift |
 | DISPLAYED-ND-0A | deferred behind graduation and the mixed-telescope stress | DISPLAYED-LIFTING-0A, DISPLAYED-CHAIN-1A, and the selected post-graduation boundary | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
@@ -2043,9 +2047,8 @@ does not promote them to the browser or assert whole-library completion.
 
 After integration, the agreed priority is:
 
-1. review the completed proposal-only DISPLAYED-BRACKET-GRADUATE-1 under
-   exact D-016;
-2. subject to that separate decision, implement only its frozen three-level
+1. preserve the completed proposal and separate delegated D-016 review;
+2. implement only its frozen three-level
    mixed telescope with dependency edges and independent fibred siblings
    before claiming arbitrary depth;
 3. audit general `:^nd` coherence and higher action if it remains the next
@@ -2258,8 +2261,8 @@ measured independent-fragment need justifies comparison with monotone checked
 signature-to-body merging. Neither item is a new LF/Core semantic feature or
 a prerequisite for DISPLAYED-CHAIN-2A.
 
-The pending proposal itself authorizes nothing. Exact approval of
-H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 would:
+The proposal itself authorizes nothing. The separate exact approval of
+H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016:
 
 - record only the qualified displayed graduation described above;
 - authorize only the frozen zero-delta DISPLAYED-CHAIN-2A implementation and
@@ -2269,13 +2272,36 @@ H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 would:
   parser/generator, external/destructive Git action, or broader semantic
   work.
 
-An unattended decision, if eventually needed under the user's standing
-delegation, must be a separate immutable review after the unchanged proposal,
-green validation, synchronized ledger, and rollback checkpoint. An immediate
-human decision supersedes it.
+No immediate human response followed presentation of that exact gate. Under
+the user's standing plan-specific delegation, the immutable
+`src/v3_2/categorical_displayed_graduation_review.ts` records D-016 as
+approved exactly as proposed. It snapshots the unchanged pending proposal,
+retains human supersession, fixes every expected semantic/checker/transfer
+delta at zero, and requires a separate decision if closure audit contradicts
+any zero.
+
+Its ten focused tests pass. The complete reviewed TypeScript gate passes 995
+tests: 948 active passes, 47 intentional skips, and zero failures. The
+repeated 19-judgment live conformance gate and bounded active-kernel check
+pass. The review adds no semantic implementation; DISPLAYED-CHAIN-2A is only
+implementation-ready under the frozen contract.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-USABILITY-016 approved under delegated unattended
+  authority.** No immediate human response followed presentation of the exact
+  frozen graduation gate. A separate deeply immutable review snapshots the
+  unchanged non-self-authorizing proposal, records only the qualified
+  demonstrated envelope, retains human supersession, and authorizes exactly
+  the existing-method `a; b,c; d` DISPLAYED-CHAIN-2A stress. All expected
+  Lambdapi owner/runtime/proof, intrinsic Core, owner-specific checker/
+  evaluator, and transfer-entry deltas remain zero; any closure drift requires
+  a separate proposal and decision. General `:^nd`, arbitrary depth or mixed
+  variance, parsing, bulk transfer, groupoidal work, browser promotion, and
+  broader Git action remain closed. Ten focused review tests, the 995-test
+  reviewed root gate (948 active passes, 47 intentional skips, zero
+  failures), all 19 live conformance judgments, and the bounded active-kernel
+  check pass.
 - **2026-07-29 — DISPLAYED-BRACKET-GRADUATE-1 executable proposal
   completed.** The new deeply frozen root-only assessment validates the
   prior usability/fibred reviews, six capability contracts, nine program
@@ -2659,20 +2685,17 @@ Preserve completed DISPLAYED-INTEGRATE-1 after its exact consolidation
 checkpoint and verified local-main fast-forward. Do not repeat or broaden
 the consumed cleanup/merge authorization. Preserve the completed,
 deeply immutable, non-self-authorizing DISPLAYED-BRACKET-GRADUATE-1
-proposal, its twelve focused tests, and the synchronized 985-test gate.
-If its exact local checkpoint or ledger hash is absent, finish only that
-bounded synchronization. Then present or recover
-H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016. The proposal
-freezes the exact outer-LF, ordinary bracket, independent displayed sibling,
+proposal, its twelve focused tests, synchronized 985-test gate, and separate
+immutable D-016 delegated review with human supersession. The review records
+only the qualified outer-LF, ordinary bracket, independent displayed sibling,
 stable displayed evaluation, direct `:^fd`/bounded `:^nd`,
 weakening/reindexing, dependent-target, and one-genuine-edge envelope while
 withholding arbitrary depth, mixed variance, general `:^nd`, groupoidal,
-browser, and whole-transfer claims.
+browser, and whole-transfer claims. If its exact local review checkpoint or
+ledger hash is absent, finish only that bounded synchronization first.
 
-Do not implement DISPLAYED-CHAIN-2A before exact D-016 approval or a separate
-immutable delegated review under the standing unattended procedure. If
-approved, implement only the frozen existing-method, four-binding,
-three-displayed-level shape
+D-016 authorizes only DISPLAYED-CHAIN-2A. Audit and implement the frozen
+existing-method, four-binding, three-displayed-level shape
 `k; a:A[k]; b:B[(k,a)], c:C[(k,a)]; d:D[((k,a),(b,c))]`.
 Derive `[b,c]` as the independent middle group, reuse the transparent
 displayed product plus sequential Sigma/section-pullback closure, require the

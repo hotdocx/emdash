@@ -60,12 +60,14 @@ On 2026-07-29 the user accepted the post-chain integration assessment and
 selected the continuation order. The displayed usability path is complete
 through stable evaluation and one genuine dependency edge. Its executable
 deeply immutable DISPLAYED-BRACKET-GRADUATE-1 assessment is now green and
-checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`, awaiting
-D-DTTLF-USABILITY-016; it freezes the existing-method
-`a; b,c; d` three-level successor with zero expected owner/rule/transfer
-delta and a mandatory stop on closure drift. Only after that separate
-decision may the mixed stress proceed, followed by general `:^nd`. When
-control returns to this scale plan, the selected order is SCALE-KIND-PI-1,
+checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`. A separate
+immutable delegated review with human supersession records
+D-DTTLF-USABILITY-016 as approved exactly as proposed; it authorizes only the
+existing-method `a; b,c; d` three-level successor with zero expected
+owner/rule/transfer delta and a mandatory stop on closure drift. Ten focused
+review tests and the aggregate 995-test reviewed root gate pass. The mixed
+stress is now dependency-ready, followed by general `:^nd`. When control
+returns to this scale plan, the selected order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2662,9 +2664,10 @@ worktrees and staged/unstaged diffs, and the active authority order. Follow
 the root AGENTS.md and, for every emdash2 action, emdash2/AGENTS.md and the
 current v3.2 SOP. Preserve the completed usability and displayed-chain
 tranches. Preserve the completed executable, deeply immutable,
-non-self-authorizing DISPLAYED-BRACKET-GRADUATE-1 assessment and present or
-recover exact D-DTTLF-USABILITY-016. Do not implement its frozen
-DISPLAYED-CHAIN-2A successor before approval, and do not broaden its
+non-self-authorizing DISPLAYED-BRACKET-GRADUATE-1 assessment and its separate
+immutable exact D-DTTLF-USABILITY-016 delegated review with human
+supersession. Implement only its frozen DISPLAYED-CHAIN-2A successor, and do
+not broaden its
 four-binding/three-level API, zero expected owner/rule/transfer delta,
 mandatory stop, or exact evidence corpus.
 
@@ -2769,10 +2772,17 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-USABILITY-016 delegated review synchronized.**
+  The separate immutable review graduates only the demonstrated displayed
+  envelope and authorizes only the existing-method `a; b,c; d` stress. Every
+  expected semantic/checker/transfer delta remains zero and any drift requires
+  a separate decision. This changes no scale profile or bulk-acquisition
+  authority. Ten focused review tests, the 995-test root gate, all 19 live
+  conformance judgments, and the bounded active-kernel check pass.
 - **2026-07-29 — Displayed graduation proposal synchronized.** The
   executable proposal now freezes the demonstrated architecture separately
-  from arbitrary-depth and whole-transfer claims and awaits D-016. Its only
-  proposed successor is the existing-method `a; b,c; d` stress with zero
+  from arbitrary-depth and whole-transfer claims. Its only proposed successor
+  was the existing-method `a; b,c; d` stress with zero
   expected owner/rule/transfer delta and a mandatory closure-drift stop.
   This records no scale promotion or bulk-acquisition authority.
 - **2026-07-29 — Post-chain routing and deferred module-refinement

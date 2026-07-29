@@ -149,10 +149,12 @@ conclusion is narrower and clearer:
 - the executable deeply immutable DISPLAYED-BRACKET-GRADUATE-1 proposal now
   freezes nine evidence classes and distinguishes recursive supported-body
   compilation from the hard two-binding dependent presentation; its twelve
-  focused tests and the aggregate 985-test gate pass, but exact
-  H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 remains
-  pending; its proposal checkpoint is
-  `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; and
+  focused tests and aggregate 985-test gate pass, and a separate immutable
+  review records exact
+  H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 approval
+  under the user's unattended delegation with human supersession; its ten
+  focused review tests and aggregate 995-test gate pass; its proposal
+  checkpoint is `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; and
 - this settles a mechanically reusable architecture for the demonstrated
   envelope, not arbitrary depth, arbitrary mixed variance, general `:^nd`,
   whole-library transfer, groupoidal closure, or deployment.
@@ -186,9 +188,8 @@ worktree removal.
 After integration, use the displayed-bracket plan's launch prompt. The
 selected sequence is:
 
-1. review the completed proposal-only DISPLAYED-BRACKET-GRADUATE-1 under
-   D-016;
-2. after approval, implement only its frozen four-binding, three-level mixed
+1. preserve the completed proposal and separate delegated D-016 review;
+2. implement only its frozen four-binding, three-level mixed
    telescope combining genuine dependency transitions and the independent
    middle siblings `[b,c]`, with zero expected owner/rule/transfer delta and
    a mandatory stop on closure drift;
@@ -790,10 +791,11 @@ Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
 fibred-context plan remains its authority and historical ledger. The
 current proposal-only DISPLAYED-BRACKET-GRADUATE-1 artifact is complete,
 green, checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`,
-and awaiting exact D-016 review. Do not resume
+and separately approved exactly as proposed under D-016 by an immutable
+delegated review with human supersession. Do not resume
 the stale DISPLAYED-CHAIN-0A/1A implementation wording below: that slice is
-complete at its kernel, transfer, consumer, and ledger checkpoints. After
-approval, the agreed next stress is exactly the existing-method
+complete at its kernel, transfer, consumer, and ledger checkpoints. The
+dependency-ready stress is exactly the existing-method
 `a; b,c; d` three-level mixed dependency/sibling telescope frozen in the
 proposal. It must reuse existing authority and halt if its expected zero
 owner/rule/transfer delta is false. General `:^nd` and the recorded scale
