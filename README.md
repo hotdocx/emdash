@@ -27,6 +27,8 @@ Primary artifacts:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md)
 - Active systematic-transfer scale-qualification plan and `/goal` prompt:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
+- Active external-review demo and measured product-boundary plan:
+  [`./docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md)
 - Implemented ELAB-0 RFC and TypeScript-kernel reassessment:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_ELAB_0_RFC.md)
 - Persistent-goal Git experimentation and checkpoint workflow:

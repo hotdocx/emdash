@@ -161,7 +161,9 @@ the existing transparent `nat_elim` as consumer. It uses no recursive
 association or TypeScript positivity checker. The deeply frozen
 SCALE-INDUCTIVE-1B2 proposal therefore selects that exact lean route and now
 awaits H-DTTLF-SCALE-INDUCTIVE-02/D-DTTLF-SCALE-INDUCTIVE-002. After that
-gate, the order is SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
+gate, the product-facing continuation in
+[`TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md)
+is inserted before SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
 Exact HYBRID-0A audit/1B2 proposal checkpoint:
 `850bc7260019ce24bfb2b1325b23dac357e72e88`.
 The 1B1 implementation and all final gates are green. Its
@@ -720,6 +722,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-ACQUIRE-1B | deferred; prototype removed | SCALE-STRESS-3B0 plus a measured future acquisition need | Optional narrow fail-closed declaration adapter feeding the existing IR; the abandoned unexported canonical-symbol prototype is not architectural infrastructure and must not be recreated without a recorded cost/benefit trigger |
 | SCALE-STRESS-3B1 | deferred | usability graduation or an independently measured transfer priority; exact root/generated-owner boundary | Directly construct and compile the smallest typed root prerequisite and protected hom-action declaration closure through data/policy only, preserving protected exposition and opaque tactic theorems; no parser dependency |
 | SCALE-STRESS-3B2 | deferred | SCALE-STRESS-3B1 | Compile the evidence-property declaration closure against exact root/protected interfaces and check representative transparent bodies without activating a profile |
+| PRODUCT-FACING-CONTINUATION | active in the dedicated product-demo plan; PRODUCT-DEMO-0A complete and PRODUCT-DEMO-1A awaiting D-DTTLF-PRODUCT-DEMO-001 | completed usability/displayed evidence and SCALE-INDUCTIVE-HYBRID-0A; independent of the pending inductive closeout review | Assemble one truthful external-review CLI/guide from existing green structured demos, then measure browser and user-syntax boundaries before selecting either implementation; no scale row or transfer claim is closed by presentation |
 | SCALE-STRESS-3C | pending | applicable inductive/import/runtime mechanisms | Qualify the multi-module `WalkingEnd_cat`/dependent-eliminator/higher-action/`BNat_cat` HIT slice and record its exact generated-owner and runtime/proof boundaries |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
@@ -3327,7 +3330,12 @@ separate review, then close the inductive parent without adding a new engine.
 Keep TypeScript-side positivity validation, automatic eliminator synthesis,
 and an end-user inductive-declaration API deferred unless a later reviewed
 product decision selects untrusted/source-level inductive declarations.
-After the parent closes, continue with SCALE-STRESS-3C, SCALE-BATCH-1, and
+After the parent closes, follow the dependency-ready reviewed rows in
+`docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md`. Its external-review
+demo is a product presentation of existing green capabilities, not a new
+semantic or scale result. Its browser and user-syntax work remain measured
+gates rather than preselected implementations. When that living plan routes
+back here, continue with SCALE-STRESS-3C, SCALE-BATCH-1, and
 SCALE-GRADUATE-1. Do not silently substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
 
@@ -3897,3 +3905,12 @@ scope is affected.
   selecting SCALE-RETURN-1, parser acquisition, bulk root/extension transfer,
   or a new active scale profile. Consumer checkpoint:
   `698280f42c3c9c339ebc82a8cfb0df1d51838704`.
+- **2026-07-29 — Product-facing continuation inserted before remaining
+  scale stress.** The completed PRODUCT-DEMO-0A inventory found sixteen
+  executable root demos, a deliberately minimal Core-only browser barrel,
+  and the historical Parsimmon grammar as reusable-but-nonauthoritative
+  evidence. The dedicated product plan now proposes one three-panel
+  external-review CLI/guide from existing outer-LF, ordinary bracket, and
+  displayed-chain results, followed by measured browser and user-syntax
+  audits. This reprioritization neither approves those implementations nor
+  closes SCALE-STRESS-3C, SCALE-BATCH-1, or SCALE-GRADUATE-1.

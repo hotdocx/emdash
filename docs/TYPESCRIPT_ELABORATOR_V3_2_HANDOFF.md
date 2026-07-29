@@ -347,6 +347,22 @@ declaration API, and mutual/higher-order inductives. Exact HYBRID-0A
 audit/1B2 proposal checkpoint:
 `850bc7260019ce24bfb2b1325b23dac357e72e88`.
 
+The current product-priority reassessment is recorded in
+[`TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md).
+Its completed read-only PRODUCT-DEMO-0A inventory found sixteen executable
+root demos, a deliberately minimal Core-only browser barrel, and the
+historical 162-line Parsimmon frontend at commit
+`6cb146364dfdaa299e95d3aa72a33da78e64c5e7`. The recommended immediate
+implementation is a root-only external-review command and self-contained
+guide composed from the existing outer dependent-LF, ordinary categorical
+bracket, and genuine displayed-chain results. The variable-cost displayed
+next-hom/higher-action demo remains an optional advanced witness. Browser and
+user-facing syntax first receive separate bounded audits; neither a browser
+promotion nor a parser dependency is selected. This priority insertion does
+not close or cancel SCALE-STRESS-3C, SCALE-BATCH-1, or SCALE-GRADUATE-1.
+The exact PRODUCT-DEMO-1A implementation contract now awaits
+H-DTTLF-PRODUCT-DEMO-01/D-DTTLF-PRODUCT-DEMO-001.
+
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
 was slower than the recent serial focused baselines, so do not replace the
@@ -382,7 +398,9 @@ scale plan's living launch prompt. The selected sequence is:
    `ind_nat`/two-rule/`nat_elim` evidence;
 3. obtain or record the exact D-DTTLF-SCALE-INDUCTIVE-002 review and close
    only the frozen zero-new-engine SCALE-INDUCTIVE-1B2 continuation; and
-4. continue through SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
+4. follow the product plan through its reviewed external-review demo and
+   measured parser/browser decision gates; then
+5. return through SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
 
 ## Purpose
 
@@ -401,6 +419,9 @@ The exact implemented outer-LF and directed-DTT continuation is recorded by
 [`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md).
 Forward systematic-transfer work is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md).
+The current external-review demo and measured product-boundary continuation
+is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md).
 The current product-facing dependent-demo and categorical-binder work is
 governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md).
