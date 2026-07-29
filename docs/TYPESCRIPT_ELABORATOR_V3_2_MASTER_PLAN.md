@@ -3699,10 +3699,11 @@ DISPLAYED-ND-1A. Its exact proposal checkpoint is
 D-018 review now records exact approval with human supersession. Seven
 focused tests, the 1,036-test root gate (989 active passes and 47 intentional
 skips), all 19 live conformance judgments, and the bounded active-kernel check
-pass; its exact checkpoint remains required before implementation. The
-selected scale sequence follows the selected ND work. The historical text
-below must not be used to resume the completed fibred-context or
-displayed-chain implementation.
+pass. Its exact checkpoint is
+`fb818203df88e68b27b2e5725737512010efdb13`, making only the reviewed
+DISPLAYED-ND-1A implementation dependency-ready. The selected scale sequence
+follows the selected ND work. The historical text below must not be used to
+resume the completed fibred-context or displayed-chain implementation.
 
 When starting a fresh persistent session, review and trust the root project
 hook through `/hooks` and verify the shared archive as described in

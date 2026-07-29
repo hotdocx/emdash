@@ -200,9 +200,11 @@ active-kernel check pass. Its exact proposal checkpoint is
 records D-018 approval under the standing unattended delegation with human
 supersession. Its seven focused tests, 1,036-test root gate (989 active
 passes, 47 intentional skips), all 19 live conformance judgments, and bounded
-active-kernel check pass; its exact local checkpoint remains mandatory before
-DISPLAYED-ND-1A. The recorded scale sequence resumes only after the selected
-ND work or an explicit priority change.
+active-kernel check pass. Its exact local checkpoint is
+`fb818203df88e68b27b2e5725737512010efdb13`; DISPLAYED-ND-1A is now
+implementation-ready within only that reviewed scope. The recorded scale
+sequence resumes only after the selected ND work or an explicit priority
+change.
 
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence

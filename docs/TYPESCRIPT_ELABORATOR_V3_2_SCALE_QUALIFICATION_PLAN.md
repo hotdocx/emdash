@@ -91,8 +91,9 @@ ND tranche before returning here. Its exact proposal checkpoint is
 `bc29f0d98de32fe0fdbad992859e97711e493e5c`. A separate immutable delegated
 review now records D-018 approval with human supersession; its focused gate
 and 1,036-test aggregate gate pass together with 19/19 live conformance and
-the bounded active-kernel check. Its exact checkpoint remains mandatory
-before implementation. When control returns to this scale plan, the selected
+the bounded active-kernel check. Its exact checkpoint is
+`fb818203df88e68b27b2e5725737512010efdb13`; only the reviewed ND tranche is
+implementation-ready. When control returns to this scale plan, the selected
 order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
@@ -2816,8 +2817,8 @@ scope is affected.
   with human supersession. It authorizes only the zero-semantic-delta
   recursive vertical-composition frontend case and changes no scale profile.
   Seven focused review tests, the 1,036-test root gate, all 19 live
-  conformance judgments, and the bounded active-kernel check pass; its exact
-  checkpoint remains required before implementation.
+  conformance judgments, and the bounded active-kernel check pass. Exact
+  review checkpoint: `fb818203df88e68b27b2e5725737512010efdb13`.
 - **2026-07-29 — DISPLAYED-ND-0A audit returned a bounded D-018 gate.**
   The displayed critical path now has executable evidence distinguishing
   coherent `Transfd` introduction from object/point/base-arrow/next-hom
