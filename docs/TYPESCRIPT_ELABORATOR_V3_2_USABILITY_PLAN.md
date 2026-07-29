@@ -142,8 +142,19 @@ object/internalized-arrow/recursive/reindexing/negative corpus. The complete
 repository gate passes 1,022 TypeScript tests (975 active, 47 intentionally
 skipped), all 19 live conformance judgments, and complete kernel CI. Exact
 staged review and the rollback-safe local checkpoint
-`89afe5f64710b99a262ff92cb193e2742a11827f` are complete. General `:^nd`
-audit is now next; the recorded scale sequence follows that bounded audit.
+`89afe5f64710b99a262ff92cb193e2742a11827f` are complete.
+DISPLAYED-ND-0A is now an executable green audit with zero semantic delta.
+It distinguishes coherent introduction from object/point/base-arrow and
+next-hom observation, confirms the first three TypeScript paths, and records
+the active but untransferred higher `tdapp1_int_*_transfd` package. Its
+non-self-authorizing D-018 proposal selects only `composeCells`, one generic
+`typed-cell-composition` contextual node, and recursive lowering of
+`lambda k :^nd K. theta[k] after eta[k]` to `comp_fapp0` at
+`Functord_cat`. Arbitrary pointwise coherence, identity syntax, next-hom
+transfer, and mixed variance remain separate. The recorded scale sequence
+follows the selected ND work. Seven focused tests, the 1,029-test root gate
+(982 active passes and 47 intentional skips), all 19 live conformance
+judgments, and the bounded active-kernel check pass.
 D-017 proposal checkpoint:
 `f647791281095e02c6ebe3f1490e272b4e58c7a0`. D-017 delegated-review
 checkpoint: `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`.
@@ -599,7 +610,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-2A/D-017 and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-017 | One typed recursive frontend now covers independent siblings, stable evaluation, one genuine edge, and the exact `a; b,c; d` mixed telescope. D-017 adds no owner: zero new symbols, one existing-owner pair-cell rule, three signatures/nine generic continuation rules, 512-step continuation budget, zero oracle/intrinsic/second-frontend change. Twelve focused tests and the 1,022-test/19-conformance/kernel-CI repository gate pass. DISPLAYED-ND-0A is next |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-2A/D-017 and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f`; DISPLAYED-ND-0A audit/D-018 proposal complete and awaiting exact decision | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-017 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, and `a; b,c; d`. The ND audit freezes coherent object/point/base-arrow/next-hom boundaries and proposes only generic typed-cell composition plus recursive outer-`Transfd` factoring for pointwise vertical composition, with zero semantic/transfer delta |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2388,11 +2399,16 @@ entry implementation, typed inferred-slot corrections, isolated profile, and
 generic 512-step LF budget seam with no oracle/intrinsic/owner-specific
 checker path. Its final repository validation, plan/report synchronization,
 exact staged review, and local checkpoint
-`89afe5f64710b99a262ff92cb193e2742a11827f` are complete. Select
-DISPLAYED-ND-0A as the next
-dependency-ready read-only/executable audit of general `:^nd` coherence and
-higher action; freeze measured cases and gaps before any semantic
-implementation. Preserve completed
+`89afe5f64710b99a262ff92cb193e2742a11827f` are complete. Preserve the
+completed executable DISPLAYED-ND-0A audit and its exact
+H-DTTLF-USABILITY-DISPLAYED-ND-01/D-DTTLF-USABILITY-018 proposal. It selects
+only `composeCells`, one generic `typed-cell-composition` node for
+`indexed-transfor`, and recursive pointwise vertical-composition lowering to
+`comp_fapp0` at `Functord_cat`; all kernel/transfer/intrinsic/checker deltas
+remain zero. Await or separately review D-018 before implementing
+DISPLAYED-ND-1A, and keep next-hom transfer, identity, arbitrary coherence,
+mixed variance, and composite-cell normalization separately gated. Preserve
+completed
 DISPLAYED-EVAL-0B, its
 constant-domain
 variance qualification, its transfer-runtime-wiring diagnosis, and its

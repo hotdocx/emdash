@@ -185,9 +185,19 @@ the usability property is recursive bound-variable occurrence under
 supported typed subexpressions. Canonical Lambdapi parsing remains optional
 and deferred. Direct typed transfer is the default acquisition path. After
 the DISPLAYED-CHAIN-2A checkpoint, the next dependency-ready slice is the
-bounded DISPLAYED-ND-0A audit of general `:^nd` coherence and higher action;
-the recorded scale sequence resumes only after that audit or an explicit
-priority change.
+bounded DISPLAYED-ND-0A audit of general `:^nd` coherence and higher action.
+That audit is now executable and green. It confirms existing object,
+point, and base-arrow observations; identifies the active but untransferred
+`tdapp1_int_*_transfd` next-hom package; and rejects treating arbitrary
+pointwise components as coherent. Its non-self-authorizing D-018 proposal
+selects only `composeCells`, one generic `typed-cell-composition` contextual
+node, and recursive lowering of pointwise vertical composition to
+`comp_fapp0` at `Functord_cat`, with zero Lambdapi/transfer/intrinsic/checker
+delta. Its seven focused tests, 1,029-test root gate (982 active passes and
+47 intentional skips), all 19 live conformance judgments, and bounded
+active-kernel check pass. Await or separately review that exact decision
+before implementing DISPLAYED-ND-1A. The recorded scale sequence resumes
+only after the selected ND work or an explicit priority change.
 
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence
@@ -810,9 +820,11 @@ any Git mutation.
 ## Start The Long-Running Implementation
 
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
-`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`. The completed
-fibred-context plan remains its authority and historical ledger. The
-current proposal-only DISPLAYED-BRACKET-GRADUATE-1 artifact is complete,
+`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`. That retained
+systematic-transfer ledger routes the current critical path through
+`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`; the completed
+fibred-context plan remains its authority and historical ledger. The current
+proposal-only DISPLAYED-BRACKET-GRADUATE-1 artifact is complete,
 green, checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`,
 and separately approved exactly as proposed under D-016 by an immutable
 delegated review with human supersession at checkpoint

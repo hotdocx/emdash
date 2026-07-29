@@ -188,6 +188,28 @@ complete kernel CI. Exact staged review and the rollback-safe local checkpoint
 completed the tranche at checkpoint
 `89afe5f64710b99a262ff92cb193e2742a11827f`.
 
+DISPLAYED-ND-0A is now an executable, read-only coherence/higher-action
+audit. It confirms that existing coherent displayed transformations already
+have object components `eta[k]`, point components `eta[k][u]`, and
+base-arrow cells `eta[p][u]` in the TypeScript profile. Active Lambdapi also
+has the internal-hom object and next-hom action package
+`tdapp1_int_{func_transfd,fapp0_transfd,fapp1_func_transfd}`, but that package
+is not yet transferred or surfaced in TypeScript.
+
+The audit separates those elimination facts from introduction. A `:^nd`
+body cannot be treated as an arbitrary pointwise family because the
+base-arrow coherence would be missing. It can, however, be compiled
+recursively whenever each typed body constructor has a genuine coherent
+outer `Transfd_cat` constructor. The exact first case
+`lambda k :^nd K. theta[k] after eta[k]` is therefore feasible without any
+new Lambdapi owner, rule, transfer entry, intrinsic Core owner, or
+checker/evaluator branch: one generic `typed-cell-composition` IR node and
+`composeCells` method recursively factor the two children to
+`comp_fapp0` at `Functord_cat`. D-018 is frozen as a non-self-authorizing
+proposal for only that bounded implementation. Arbitrary pointwise
+coherence, identity syntax, the existing-authority next-hom transfer, and
+mixed-variance `Pi_cat(Transf_catd(...))` remain separate.
+
 ## Authority And Relationship To The Completed Architecture
 
 The active mathematical authority remains the Lambdapi v3.2 development
@@ -574,7 +596,9 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; approved exactly as proposed by a separate delegated review with human supersession at checkpoint `24ce6ffede79e115bc5d387c65366598e56f5d3d` | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused proposal tests, ten focused review tests, the 985-test proposal gate, and the 995-test reviewed gate pass; the proposal remains non-self-authorizing |
 | DISPLAYED-CHAIN-2A | complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | approved D-DTTLF-USABILITY-016 plus separately reviewed D-DTTLF-USABILITY-017 | The existing `displayedDependentContextLambda` method accepts only the flat source-ordered `a; b,c; d` shape in `fibred-displayed-chain-2a`. It derives the independent `b,c` group without flags and passes the frozen object/internalized-arrow/reindexing/recursive/negative corpus without another frontend or checker. Final gate: 1,022 TypeScript tests (975 active, 47 skipped), 19/19 live conformance judgments, and complete kernel CI |
 | DISPLAYED-CHAIN-2A-CLOSURE-0A | proposal/review checkpoints preserved; exact semantic and transfer closure complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | D-016 mandatory closure-drift stop plus separately reviewed D-017 | Zero new symbol, one componentwise existing-owner rule; three existing signatures; six exact, two derived, and one new TypeScript runtime entries; typed inferred-slot corrections; 512-step continuation budget with 256 default; zero oracle/intrinsic/owner-specific path |
-| DISPLAYED-ND-0A | next dependency-ready audit after the DISPLAYED-CHAIN-2A checkpoint | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Audit general `:^nd` coherence synthesis, object/base-arrow/higher action, and exact end-user cases before proposing any new semantic owner or extending coherent-eta recognition by cases |
+| DISPLAYED-ND-0A | executable read-only audit and non-self-authorizing D-018 continuation proposal complete; 1,029-test root gate, 19/19 live conformance, and bounded active-kernel check green; exact proposal checkpoint pending | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Separates coherent introduction from object/point/base-arrow/next-hom observation. Confirms the first three observations implemented; finds active but untransferred next-hom owners; rejects arbitrary pointwise coherence; selects one generic typed-cell-composition node and recursive outer-`Transfd` factoring for the exact first vertical-composition case with zero semantic/transfer delta |
+| DISPLAYED-ND-1A | proposed; awaits H-DTTLF-USABILITY-DISPLAYED-ND-01/D-DTTLF-USABILITY-018 or a separate delegated review | completed DISPLAYED-ND-0A audit | Add only `composeCells`, one generic `typed-cell-composition` IR node whose first accepted classifier is `indexed-transfor`, and recursive lowering of `lambda k :^nd K. theta[k] after eta[k]` to `comp_fapp0` at `Functord_cat`; require component beta, a well-typed base-arrow cell, exact negatives, and unchanged prior profiles; add no Lambdapi owner/rule or transfer entry |
+| DISPLAYED-ND-HIGHER-1B | deferred separate existing-authority transfer audit | DISPLAYED-ND-0A and a concrete next-hom consumer | Qualify generic transfer/surface exposure of active `tdapp1_int_func_transfd`, `tdapp1_int_fapp0_transfd`, `tdapp1_int_fapp1_func_transfd`, and related projection rules; do not conflate this with first-order component-expression factoring |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
 
@@ -2448,8 +2472,9 @@ fibre. The frozen profile/base/target/name/arity/order/dependency/escape/
 foreign/unsupported-body/mode negatives all fail closed. Owner-position
 positive/noncollapse probes, bounded kernel checks, warning comparison,
 strict LHS audit, catalog/health refreshes, and focused tests are green. The
-complete aggregate/repository rerun and exact staged-diff review remain
-mandatory before the local implementation checkpoint.
+complete aggregate/repository rerun and exact staged-diff review passed
+before local implementation checkpoint
+`89afe5f64710b99a262ff92cb193e2742a11827f`.
 
 ### Alternatives and authorization boundary
 
@@ -2464,8 +2489,123 @@ authorize general `:^nd`, arbitrary telescope depth or mixed variance,
 groupoidal closure, parsing, a second frontend/checker, browser promotion,
 bulk whole-library transfer, `DECL-REFINE-1A`, or broader Git operations.
 
+## DISPLAYED-ND-0A Executable Coherence/Higher-Action Audit
+
+The root-only audit is
+`src/v3_2/categorical_displayed_nd_audit.ts`; its permanent focused evidence
+is `tests/v3_2_categorical_displayed_nd_audit_tests.ts`. It adds no runtime
+effect and remains absent from the browser entry point.
+
+### Meaning of the binder
+
+The provisional surface
+
+```text
+lambda k :^nd K. component-body
+```
+
+constructs an object of `Transfd_cat(E,D,FF,GG)`. Its callback sees one
+object slot `k : Obj(K)` and must return an indexed transformation
+`FF[k] => GG[k]`. The crucial point is that a family of such components is
+not automatically a displayed transformation: a genuine `Transfd_cat`
+object also carries its base-arrow/internalized action. The selected
+architecture therefore does not infer coherence from arbitrary pointwise
+data. It recursively factors only typed component syntax for which an active
+outer categorical constructor already constructs a coherent `Transfd` term.
+The generic LF checker then checks that explicit outer term.
+
+This is the same syntax-directed contextual-compilation principle already
+used for ordinary brackets, dependent section composition, displayed-functor
+chains, sibling products, and genuine dependent contexts. It does not
+require the ordinary and displayed implementations to share one algorithm;
+it requires each successful case to have a natural, authority-correct outer
+factorization.
+
+### Object, base-arrow, and next-hom observations
+
+The audit freezes five distinct observations:
+
+| observation | active owner/route | TypeScript state |
+|---|---|---|
+| `eta[k]` | `tdapp0_fapp0` | implemented |
+| `eta[k][u]` | `tapp0_fapp0` after `tdapp0_fapp0` | implemented |
+| `eta[p][u]` | `tdapp1_int_cell` | implemented |
+| internal-hom object action on `eta` | `tdapp1_int_fapp0_transfd` | active Lambdapi, not transferred/surfaced |
+| next-hom action on `m : eta -> theta` | `tdapp1_int_fapp1_func_transfd` | active Lambdapi, not transferred/surfaced |
+
+The existing TypeScript measurement rechecks direct eta and eta of a closed
+vertical composite, compiles a component, point component, and base-arrow
+cell, and preserves the established classifier boundary: direct versus
+ordinary second-hom categories do not runtime-collapse, their object
+classifiers agree, the proof-time comparison solves, and the Sigma/Pi
+next-hom presentation runtime-joins.
+
+The active kernel's next-hom package is therefore evidence of feasibility,
+not evidence that the current TypeScript surface already exposes it. Its
+eventual transfer is the separate `DISPLAYED-ND-HIGHER-1B` row so that
+surface component recursion is not conflated with higher modification
+observation.
+
+### Introduction cases and computation boundary
+
+The audit classifies:
+
+- `lambda k. eta[k]`: implemented coherent eta;
+- `lambda k. (theta after eta)[k]`: implemented by first constructing the
+  closed coherent composite and using eta;
+- `lambda k. theta[k] after eta[k]`: feasible recursive component syntax,
+  with canonical outer lowering `comp_fapp0` at `Functord_cat`;
+- `lambda k. id(FF[k])`: likewise feasible later through `id` at
+  `Functord_cat`, but outside the first proposal;
+- an arbitrary component family: correctly withheld until it supplies
+  coherence or factors through a coherence-carrying owner; and
+- `Pi_cat(Transf_catd(...))`: a useful mixed-variance pointwise-data
+  presentation, not silently convertible to `Transfd`.
+
+Active computation already projects identity and vertical-composite
+components through `tdapp0_fapp0`. The identity base-arrow cell folds through
+`tdapp1_int_cell` to `fdapp1_int_cell`. There is not currently a
+componentwise beta for the base-arrow cell of a vertical composite. That does
+not block constructing or typechecking the coherent composite; it is a
+separate normalization question to reopen only for a concrete consumer that
+needs the stronger normal form.
+
+### Frozen D-018 proposal
+
+The audit embeds a deeply frozen, non-self-authorizing
+H-DTTLF-USABILITY-DISPLAYED-ND-01/D-DTTLF-USABILITY-018 proposal:
+
+1. add the TypeScript method `composeCells`;
+2. add one generic contextual IR node tagged `typed-cell-composition`;
+3. accept only `indexed-transfor` as its first classifier, requiring the same
+   contextual index, base/families/category, and adjacent transformation
+   endpoints;
+4. recursively factor both children to genuine outer `Transfd` terms;
+5. lower the exact first case to `comp_fapp0` at `Functord_cat`;
+6. prove callback-once/deep-freeze, component beta, a typechecked base-arrow
+   cell, exact endpoint/index/family/scope negatives, and unchanged prior
+   profiles; and
+7. add zero Lambdapi owners/rules, TypeScript transfer entries, intrinsic
+   owners, owner-specific checker/evaluator branches, parser layers, or
+   browser promotion.
+
+The proposal rejects extending the eta whole-body recognizer with ad hoc
+cases, treating arbitrary pointwise families as coherent, forcing
+`Pi(Transf_catd)` to equal `Transfd`, or adding a primitive `nd` lambda owner.
+Identity syntax, next-hom transfer, mixed variance, composite-cell
+normalization, deployment, and scale work remain separately gated.
+
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-ND-0A executable audit and D-018 proposal
+  complete.** Seven focused tests, the 1,029-test root gate (982 active
+  passes, 47 intentional skips, zero failures), all 19 live conformance
+  judgments, and the bounded active-kernel check pass. The audit
+  reproduces coherent eta/composite eta, object/point/base-arrow observation,
+  and the direct/ordinary/Sigma-Pi classifier boundary; confirms the active
+  but untransferred next-hom package; and freezes only the zero-semantic-delta
+  `composeCells`/`typed-cell-composition` recursive vertical-composition
+  proposal. Exact proposal checkpoint and a separate D-018 decision remain.
 - **2026-07-29 — DISPLAYED-CHAIN-2A implementation and permanent corpus
   complete; complete repository gate green.** The active kernel adds zero symbols
   and one existing-owner componentwise pair-cell rule. The isolated generic
@@ -2940,17 +3080,39 @@ The final aggregate/repository validation, report synchronization, exact
 staged review, and authorized local checkpoint
 `89afe5f64710b99a262ff92cb193e2742a11827f` are complete.
 
-After the green DISPLAYED-CHAIN-2A checkpoint, the next dependency-ready row
-is DISPLAYED-ND-0A: perform a read-only/executable audit of general `:^nd`
-coherence and higher action across object, base-arrow, and next-hom
-observations; freeze exact end-user cases and measured owner/transfer gaps
-before any semantic implementation. Do not guess general `:^nd` by adding eta
-cases. When an exact bounded proposal is presented during unattended work and
-no immediate human response follows, the user's plan-specific standing
-delegation permits a separate immutable approval review with human
-supersession, provided the Git checkpoint SOP is followed. That delegation
-does not authorize unfrozen scope, push, merge, history rewrite, cleanup,
-publication, or other Git expansion.
+Preserve completed DISPLAYED-ND-0A: its executable read-only audit separates
+coherent introduction from object, point, base-arrow, internal-hom, and
+next-hom observation. Preserve the existing object/point/base-arrow
+TypeScript envelope, the active-but-untransferred Lambdapi next-hom package,
+the noncollapse of arbitrary pointwise data into `Transfd`, and the separate
+`Pi_cat(Transf_catd(...))` mixed-variance presentation.
+
+Its exact non-self-authorizing
+H-DTTLF-USABILITY-DISPLAYED-ND-01/D-DTTLF-USABILITY-018 proposal selects only
+DISPLAYED-ND-1A: add `composeCells`, one generic
+`typed-cell-composition` contextual node whose first accepted classifier is
+`indexed-transfor`, and recursive factoring of
+`lambda k :^nd K. theta[k] after eta[k]` to `comp_fapp0` at
+`Functord_cat`. Require callback-once/frozen evidence, component beta, a
+typechecked base-arrow cell, exact negatives, and unchanged prior profiles.
+Add no Lambdapi owner/rule, transfer entry, intrinsic owner, checker/evaluator
+branch, parser, or browser promotion. Do not include identity syntax,
+arbitrary coherence, next-hom transfer, mixed variance, or composite-cell
+normalization.
+
+If no immediate human response follows the exact green proposal checkpoint,
+the user's plan-specific standing delegation permits a separate immutable
+D-018 approval review with human supersession, provided the Git checkpoint
+SOP is followed. Only after that exact decision may DISPLAYED-ND-1A be
+implemented. The delegation does not authorize unfrozen scope, push, merge,
+history rewrite, cleanup, publication, or other Git expansion.
+
+For later dependency-ready gates in this same persistent goal, the same
+standing delegation applies only after an exact bounded proposal has been
+presented and receives no immediate human response. Each exercise requires
+its own immutable review, preserves human supersession and every proposal
+non-effect, and reaches a reviewed green local checkpoint before semantic
+implementation. It is not blanket authority to invent or expand a gate.
 
 Keep `DECL-REFINE-1A` optional and deferred as an outer-LF
 implementation/module-linking qualification. Prefer dependency-closed

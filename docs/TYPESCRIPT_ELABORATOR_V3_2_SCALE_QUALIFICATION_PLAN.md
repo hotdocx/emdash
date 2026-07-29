@@ -80,8 +80,15 @@ kernel CI; exact staged review and its local checkpoint
 `89afe5f64710b99a262ff92cb193e2742a11827f` are complete. It adds zero
 symbols, one existing-owner rule, three declarations, nine generic runtime
 entries, and no oracle/intrinsic/second-frontend path.
-DISPLAYED-ND-0A is now next. When control returns to this scale
-plan, the selected order is SCALE-KIND-PI-1,
+DISPLAYED-ND-0A is now complete as an executable, zero-semantic-delta audit.
+Its non-self-authorizing D-018 proposal selects only a generic typed
+cell-composition node and recursive pointwise vertical-composition lowering
+to `comp_fapp0` at `Functord_cat`; next-hom transfer and arbitrary coherence
+remain separate. Its seven focused tests, 1,029-test root gate (982 active
+passes and 47 intentional skips), all 19 live conformance judgments, and
+bounded active-kernel check pass. Await/review D-018 and complete its selected
+ND tranche before returning here. When control returns to this scale plan,
+the selected order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2766,9 +2773,16 @@ behavior.
 
 Do not promote a declaration, definition, runtime rule, proof-time rule,
 product profile, or metatheory claim without its exact recorded evidence and
-human gate. Existing active owners may be inventoried and conformance-tested
-without changing Lambdapi. Any proposed Lambdapi semantic change returns to
-owner position and follows the nested SOP in full.
+gate. For a future exact bounded dependency-ready proposal in this persistent
+goal, the user's standing delegation permits a separate immutable unattended
+approval review only when no immediate human response follows presentation,
+the Git checkpoint SOP is followed, human supersession is retained, and every
+frozen non-effect is preserved. That delegated review counts as the exact
+gate only for its recorded scope; it does not authorize an unfrozen proposal,
+semantic expansion, or broader Git operation. Existing active owners may be
+inventoried and conformance-tested without changing Lambdapi. Any proposed
+Lambdapi semantic change returns to owner position and follows the nested SOP
+in full.
 
 Use commit 0b585e955c5a59f87be9daf9024f37e2b3403982 as the completed-profile
 comparison checkpoint, 71f46f66aba45d1b79a4c93746970b5d79e42fca as the

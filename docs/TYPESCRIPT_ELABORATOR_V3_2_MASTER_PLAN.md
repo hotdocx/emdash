@@ -3685,9 +3685,18 @@ checkpoint are now separated: the complete repository gate passes 1,022
 TypeScript tests (975 active, 47 intentionally skipped), all 19 live
 conformance judgments, and complete kernel CI; exact staged review and the
 local checkpoint `89afe5f64710b99a262ff92cb193e2742a11827f` are complete.
-DISPLAYED-ND-0A and then the selected scale sequence follow the completed
-mixed stress. The historical text below must not be used to resume the
-completed fibred-context or displayed-chain implementation.
+DISPLAYED-ND-0A now provides the executable read-only audit after that mixed
+stress. It confirms coherent object/point/base-arrow observation, identifies
+the active but untransferred next-hom package, and freezes the
+non-self-authorizing D-018 proposal for only `composeCells`, one generic
+`typed-cell-composition` node, and recursive pointwise vertical-composition
+lowering to `comp_fapp0` at `Functord_cat`, with zero semantic/transfer
+delta. Seven focused tests, the 1,029-test root gate (982 active passes and
+47 intentional skips), all 19 live conformance judgments, and the bounded
+active-kernel check pass. Await/review that exact gate before
+DISPLAYED-ND-1A; the selected scale sequence follows the selected ND work.
+The historical text below must not be used to resume the completed
+fibred-context or displayed-chain implementation.
 
 When starting a fresh persistent session, review and trust the root project
 hook through `/hooks` and verify the shared archive as described in
