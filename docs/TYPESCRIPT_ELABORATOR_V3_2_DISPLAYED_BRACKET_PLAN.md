@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; generic transfer exposed one missing ambient `Terminal_obj` signature and is paused behind the frozen H-DTTLF-USABILITY-DISPLAYED-CHAIN-02/D-DTTLF-USABILITY-013 correction gate at proposal checkpoint `6a46dea169ec358a3882f9ec86a04be9af713963`; consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012; pending TRANSFER-CORRECTION-0A | Promote exactly one `sigma_functord_sec` owner and six measured runtime rules; preserve the three chain-specific existing-signature/two existing-rule prerequisites; if separately approved, add only the pre-existing ambient `Terminal_obj` signature through the generic declaration compiler; add only the root-only `fibred-displayed-chain-1` profile and recursive `displayedDependentContextLambda` consumer; qualify the frozen object/arrow/reindexing/negative/non-collapse corpus |
+| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; H-DTTLF-USABILITY-DISPLAYED-CHAIN-02/D-DTTLF-USABILITY-013 separately approves the one ambient `Terminal_obj` transfer correction; generic transfer/consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012 and TRANSFER-CORRECTION-0A/D-013 | Promote exactly one `sigma_functord_sec` owner and six measured runtime rules; preserve the three chain-specific existing-signature/two existing-rule prerequisites; add only the pre-existing ambient `Terminal_obj` signature through the generic declaration compiler; add only the root-only `fibred-displayed-chain-1` profile and recursive `displayedDependentContextLambda` consumer; qualify the frozen object/arrow/reindexing/negative/non-collapse corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1678,6 +1678,20 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-28 — D-DTTLF-USABILITY-013 approved under delegated unattended
+  authority.** After the exact unchanged proposal was presented, passed six
+  focused tests, the 929-test root gate, and the 14-test live
+  canonical-export gate, and was independently checkpointed, no immediate
+  human response superseded it. A separate immutable review uses the user's
+  standing delegation with human supersession and authorizes only the
+  pre-existing ambient `Terminal_obj` signature through the generic
+  declaration compiler. The three D-012 chain-specific declarations, two
+  existing rules, one new owner, and six new rules remain unchanged. No
+  Lambdapi edit, wildcard, altered terminal normal form, intrinsic Core
+  owner, parser/checker layer, browser promotion, bulk work, or broader Git
+  authority is authorized. Six focused review tests and the aggregate
+  935-test gate pass (888 active passes, 47 intentional skips, zero
+  failures).
 - **2026-07-28 — DISPLAYED-CHAIN-TRANSFER-CORRECTION-0A proposed.** The
   generic LF module builder rejected the unfinished D-012 transfer because
   `Terminal_obj`, used literally by two approved arrow/action rules, has no
@@ -1998,18 +2012,17 @@ pullback/equivalence, raw product-reindex equality, arbitrary mixed variance,
 or general :^nd coherence.
 
 Preserve the non-self-authorizing
-DISPLAYED-CHAIN-TRANSFER-CORRECTION-0A proposal. Generic compilation found
+DISPLAYED-CHAIN-TRANSFER-CORRECTION-0A proposal and its separate delegated
+D-013 review with human supersession. Generic compilation found
 that the literal active `Terminal_obj` appearing in two of the approved six
 rules is not declared by any earlier TypeScript fragment. The proposal keeps
 the D-012 three chain-specific declarations and two existing rules unchanged
 and requests only one additional pre-existing ambient `Terminal_obj`
 signature through the generic declaration compiler. It rejects wildcard
 broadening, carrying an arbitrary terminal term, replacing the opaque
-constant with native `tt`, and adding an intrinsic Core escape. If the exact
-proposal is green and locally checkpointed and no immediate human response
-follows its presentation, the standing unattended delegation permits a
-separate D-DTTLF-USABILITY-013 review with human supersession. Do not rely on
-the extra ambient signature before that separate review.
+constant with native `tt`, and adding an intrinsic Core escape. The separate
+review authorizes only that ambient signature through the generic compiler;
+do not infer any further semantic or profile authority from it.
 
 For a future exact bounded gate in this goal, if no immediate human response
 follows presentation of its frozen proposal, the user's standing delegation
