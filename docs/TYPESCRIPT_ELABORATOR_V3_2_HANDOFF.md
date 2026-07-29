@@ -360,8 +360,10 @@ next-hom/higher-action demo remains an optional advanced witness. Browser and
 user-facing syntax first receive separate bounded audits; neither a browser
 promotion nor a parser dependency is selected. This priority insertion does
 not close or cancel SCALE-STRESS-3C, SCALE-BATCH-1, or SCALE-GRADUATE-1.
-The exact PRODUCT-DEMO-1A implementation contract now awaits
-H-DTTLF-PRODUCT-DEMO-01/D-DTTLF-PRODUCT-DEMO-001.
+The exact PRODUCT-DEMO-1A implementation contract is now separately approved
+under H-DTTLF-PRODUCT-DEMO-01/D-DTTLF-PRODUCT-DEMO-001 with human
+supersession after proposal checkpoint `e786c61`; PRODUCT-DEMO-1B is
+dependency-ready.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark

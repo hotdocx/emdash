@@ -12,7 +12,8 @@ Supersedes: no completed profile, mathematical authority, scale row,
 usability result, or browser boundary
 Status: active living product-facing continuation; inventory
 PRODUCT-DEMO-0A is complete; the exact PRODUCT-DEMO-1A implementation
-proposal awaits review
+proposal is separately approved under D-DTTLF-PRODUCT-DEMO-001 with human
+supersession; PRODUCT-DEMO-1B is dependency-ready
 
 ## Human Direction And Purpose
 
@@ -180,10 +181,15 @@ PRODUCT-DEMO-0A inventory
 Browser and parser audits may run in either order after PRODUCT-DEMO-1B.
 Neither implementation is silently selected by this plan.
 
-## PRODUCT-DEMO-1A — Frozen External-Reviewer Proposal
+## PRODUCT-DEMO-1A — Approved External-Reviewer Proposal
 
 Gate:
 `H-DTTLF-PRODUCT-DEMO-01 / D-DTTLF-PRODUCT-DEMO-001`
+
+Separate review:
+[`TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_D001_REVIEW.md),
+approved as proposed under the user's standing unattended delegation with
+human supersession after the proposal checkpoint `e786c61`.
 
 ### Proposed implementation
 
@@ -278,8 +284,8 @@ change, and preserve every listed deferral.
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | PRODUCT-DEMO-0A | complete | current code and history | Existing demo/API/browser/parser inventory and feasibility verdict recorded above |
-| PRODUCT-DEMO-1A | proposed; awaiting exact D-001 review | PRODUCT-DEMO-0A | Deeply frozen three-panel external-review implementation contract |
-| PRODUCT-DEMO-1B | pending | approved PRODUCT-DEMO-1A | Root-only report module, command, reviewer guide, tests, and synchronized navigation |
+| PRODUCT-DEMO-1A | approved exactly as proposed under D-DTTLF-PRODUCT-DEMO-001 with human supersession; proposal checkpoint `e786c61` | PRODUCT-DEMO-0A | Deeply frozen three-panel external-review implementation contract |
+| PRODUCT-DEMO-1B | dependency-ready | approved PRODUCT-DEMO-1A | Root-only report module, command, reviewer guide, tests, and synchronized navigation |
 | PRODUCT-DEMO-ORACLE-0A | pending | PRODUCT-DEMO-1B | Decide whether one bounded optional conformance command materially improves peer review without making Lambdapi a runtime dependency |
 | PRODUCT-BROWSER-0A | pending | PRODUCT-DEMO-1B | Measure transitive browser safety, bundle/worker/startup boundary, exact public facade, and minimal UI options; produce a separate implementation proposal only if justified |
 | PRODUCT-BROWSER-1 | gated/deferred | approved browser proposal | Implement only the selected browser profile and UI; likely deserves a dedicated subplan |
@@ -422,3 +428,9 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   cost higher-action demo as an optional advanced witness, and separated
   browser and user-syntax work into measured gates. No semantic, dependency,
   browser, parser, or Git mutation was made by the inventory.
+- **2026-07-29 — D-DTTLF-PRODUCT-DEMO-001 recorded with human
+  supersession.** After no immediate objection to checkpoint `e786c61`, a
+  separate immutable decision record approves only the exact three-panel
+  root-only PRODUCT-DEMO-1B report/guide/test scope under the user's standing
+  unattended delegation. It authorizes no semantic, parser, browser,
+  dependency, Lambdapi, or broader Git change.
