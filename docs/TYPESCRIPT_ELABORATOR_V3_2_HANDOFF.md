@@ -255,7 +255,8 @@ is involved. The runnable demo and eight focused tests pass. Aggregate/
 conformance validation is also green: the 1,071-test root gate has 1,023
 active passes, 48 intentional skips, and zero failures; the live higher-action
 audit passes 7/7; and the bounded active-kernel check passes. Exact staged
-review and the semantic checkpoint remain before the recorded scale sequence
+review passed and the semantic tranche is checkpointed
+`c5a23c208f614ec42c9037c3a05f377c1375746a`; the recorded scale sequence now
 resumes. Exact D-021 review checkpoint:
 `107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`.
 Exact DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
@@ -904,9 +905,10 @@ foundation checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e`, the
 separate D-021 review at
 `107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`, and the focused-green target,
 surface consumer, tests, and demo. Preserve its green 1,071-test root gate,
-7/7 live higher-action audit, and bounded active-kernel check. Finish only
-exact staged review, synchronized ledger, and the bounded local checkpoint;
-then resume the recorded scale order.
+7/7 live higher-action audit, bounded active-kernel check, and exact
+implementation checkpoint
+`c5a23c208f614ec42c9037c3a05f377c1375746a`; then resume the recorded scale
+order.
 `DECL-REFINE-1A`, generic parsing, and bulk protected-module transfer are not
 the immediate critical path.
 

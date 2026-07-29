@@ -130,9 +130,10 @@ without a new binder, contextual node, checker, parser, intrinsic, or
 Lambdapi mathematical owner/rule. The implementation, runnable demo, and
 eight focused tests pass. The 1,071-test root gate (1,023 active passes and
 48 intentional skips), 7/7 live higher-action audit, and bounded
-active-kernel check also pass; exact staged review and its semantic checkpoint
-remain under the active displayed and scale ledgers. Exact D-021 review
-checkpoint:
+active-kernel check also pass. Exact staged review passed and the downstream
+semantic checkpoint is
+`c5a23c208f614ec42c9037c3a05f377c1375746a`; the active scale ledger resumes.
+Exact D-021 review checkpoint:
 `107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`

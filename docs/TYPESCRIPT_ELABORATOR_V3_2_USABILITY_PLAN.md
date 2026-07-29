@@ -212,8 +212,9 @@ Eight focused tests and the runnable demo pass with zero new binder,
 contextual node, checker, parser, intrinsic, browser path, or Lambdapi
 mathematics. The 1,071-test root gate (1,023 active passes, 48 intentional
 skips), 7/7 live higher-action audit, and bounded active-kernel check pass.
-Exact staged review and the semantic checkpoint remain before returning to
-scale qualification.
+Exact staged review passed and the semantic tranche is checkpointed
+`c5a23c208f614ec42c9037c3a05f377c1375746a`; control returns to scale
+qualification.
 DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
 `4db1ce8a80725c0030ac8908f416d412591620bd`.
 D-017 proposal checkpoint:
@@ -671,7 +672,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-ND-1A at `d8b450222273167ab326701c76fff03f0f539b18`; higher audit and reviews checkpointed; D-020 foundation complete at `fead6e10a625c0402eb6e5c2f6336c797e70f29e`; D-021 target/consumer and all validation green with semantic checkpoint pending | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-021 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, `a; b,c; d`, recursively composed coherent `:^nd` component expressions, and a concrete next-Hom higher-cell observation. The higher closure reuses thirteen foundation declarations, three target declarations, and three existing runtime rules in total; the direct surface adds two rich constructors while the generic action ladder performs all recursive applications. The 1,071-test root gate, 7/7 live audit, and bounded kernel check pass with zero new binder/checker/parser/kernel mathematics |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-ND-HIGHER-TARGET-1A at `c5a23c208f614ec42c9037c3a05f377c1375746a`; D-020 foundation checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e`; reviews through D-021 preserved | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-021 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, `a; b,c; d`, recursively composed coherent `:^nd` component expressions, and a concrete next-Hom higher-cell observation. The higher closure reuses thirteen foundation declarations, three target declarations, and three existing runtime rules in total; the direct surface adds two rich constructors while the generic action ladder performs all recursive applications. The 1,071-test root gate, 7/7 live audit, and bounded kernel check pass with zero new binder/checker/parser/kernel mathematics |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2482,12 +2483,11 @@ mandatory drift stop. Preserve its separate D-019 review at
 `f674be92ae04eff5642428724053fb4e75274e50`, the corrected and completed
 D-020 foundation at `fead6e10a625c0402eb6e5c2f6336c797e70f29e`, and the
 separate D-021 target review at
-`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. Finish only the implemented
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. Preserve the completed
 three-owner/two-rule target, isolated direct-TypeScript profile, generic
-object/whole-Hom/capped-Hom consumer, tests, and demo through exact staged
-review, synchronized ledger, and a bounded local checkpoint; its aggregate,
-live-audit, and active-kernel gates are already green. Then return control to
-the scale plan. Keep
+object/whole-Hom/capped-Hom consumer, tests, demo, and exact checkpoint
+`c5a23c208f614ec42c9037c3a05f377c1375746a`. Return control to the scale
+plan. Keep
 identity syntax, arbitrary pointwise coherence, mixed variance, and
 composite-cell normalization separately gated. Preserve
 completed

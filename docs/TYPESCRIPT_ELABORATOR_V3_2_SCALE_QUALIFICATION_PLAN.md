@@ -123,8 +123,9 @@ TypeScript consumer at
 generic object/whole-Hom/higher-cell action ladder, and eight focused tests
 are green. The 1,071-test root gate (1,023 active passes and 48 intentional
 skips), 7/7 live higher-action audit, and bounded active-kernel check also
-pass. Exact staged review and its local semantic checkpoint remain before the
-selected ND work returns control here. The following order is SCALE-KIND-PI-1,
+pass. Exact staged review passed and the local semantic checkpoint is
+`c5a23c208f614ec42c9037c3a05f377c1375746a`. The selected ND work returns
+control here. The following order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2752,11 +2753,10 @@ review with human supersession at
 `f674be92ae04eff5642428724053fb4e75274e50`. Preserve corrected and completed
 D-020 foundation checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e`
 and the separate D-021 target review at
-`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. Finish only the already
-implemented target/runtime transfer, direct-TypeScript higher-cell consumer,
-demo, exact staged review, and bounded local checkpoint before resuming this
-scale ledger; preserve its already green aggregate, live-audit, and
-active-kernel evidence.
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. Preserve the completed
+target/runtime transfer, direct-TypeScript higher-cell consumer, demo, green
+aggregate/live-audit/active-kernel evidence, and exact checkpoint
+`c5a23c208f614ec42c9037c3a05f377c1375746a`. Resume this scale ledger.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit
@@ -2788,10 +2788,9 @@ and review. Preserve the completed `a; b,c; d` telescope and its separately
 reviewed D-017 closure, completed DISPLAYED-ND-0A/D-018 audit and review, and
 completed first recursive `:^nd` component-composition case. Preserve the
 completed DISPLAYED-ND-HIGHER-1B qualification, D-019 review, D-020
-foundation, and D-021 review. Complete only the focused-green three-owner/
-two-rule target and rich generic consumer through its final validation and
-checkpoint before returning to the scale rows. Direct typed construction
-remains the default acquisition path; reconsider a narrow
+foundation, D-021 review, and target/consumer checkpoint
+`c5a23c208f614ec42c9037c3a05f377c1375746a`. Resume the scale rows. Direct
+typed construction remains the default acquisition path; reconsider a narrow
 adapter only after measured repetition and a synchronized plan decision.
 Preserve the completed ordinary bracket evidence: the thirteen-prerequisite
 typed catalog plus `Functor_cat`/`Functor` support, sole generic
