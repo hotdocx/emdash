@@ -120,6 +120,7 @@ export * from './lf_transfer_runtime';
 export * from './lf_transfer_visibility';
 export * from './lf_transfer_proof';
 export * from './lf_transfer_inductive';
+export * from './lf_transfer_inductive_contract';
 export * from './lf_transfer_mixed';
 export * from './lf_transfer_acquisition';
 export * from './scale_stress_1_acquisition';

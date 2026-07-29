@@ -33,8 +33,13 @@ import {
     lowerCoreLfInductiveSignatures
 } from './lf_transfer_inductive';
 import {
+    CoreLfGeneratedInductiveContractAssociation,
+    CoreLfGeneratedInductiveContractSpec,
+    associateCoreLfGeneratedInductiveContract,
+    compileCoreLfGeneratedInductiveContract
+} from './lf_transfer_inductive_contract';
+import {
     CoreLfCompiledMixedModule,
-    compileCoreLfMixedPhases,
     createCoreLfMixedDeclarationLinkage,
     planCoreLfMixedPhases
 } from './lf_transfer_mixed';
@@ -382,30 +387,39 @@ CoreLfTransferInductiveBlock => {
     const block = sourceSigmaBlock();
     const constructor = block.constructors[0];
     if (
-        block.parameters.length !== 2 ||
-        block.indices.length !== 0 ||
+        block.parameters.length !== 0 ||
+        block.indices.length !== 2 ||
         constructor === undefined ||
-        constructor.parameterModes?.length !== 2
+        constructor.parameterModes !== undefined ||
+        constructor.binders.length !== 4 ||
+        constructor.binders[0].hint !== 'a' ||
+        constructor.binders[0].mode.plicity !== 'implicit' ||
+        constructor.binders[1].hint !== 'P' ||
+        constructor.binders[1].mode.plicity !== 'implicit'
     ) {
         throw new Error(
-            'Acquired τΣ_ block no longer matches the measured 1A shape'
+            'Acquired τΣ_ block no longer matches the corrected 1B1 shape'
         );
     }
-    const reboundIndices = block.parameters.map((parameter, index) => ({
-        ...parameter,
-        mode: constructor.parameterModes![index]
-    }));
+    return block;
+};
+
+/**
+ * Recover the former signature-only classification solely to prove that the
+ * 1B1 correction has no erased declaration delta.
+ */
+const legacyTauSigmaBlock = (): CoreLfTransferInductiveBlock => {
+    const block = correctedTauSigmaBlock();
+    const constructor = block.constructors[0];
+    const reboundIndices = constructor.binders.slice(0, 2);
     return {
         ...block,
-        parameters: [],
-        indices: block.parameters,
+        parameters: block.indices,
+        indices: [],
         constructors: [{
             ...constructor,
-            parameterModes: undefined,
-            binders: [
-                ...reboundIndices,
-                ...constructor.binders
-            ]
+            parameterModes: reboundIndices.map(binder => binder.mode),
+            binders: constructor.binders.slice(2)
         }]
     };
 };
@@ -425,7 +439,7 @@ const sourceClassifiedSignatureModule = createCoreLfModuleSpec({
         { symbol: tau, availability: 'existing-core' }
     ],
     declarations: [],
-    inductives: [sourceSigmaBlock()],
+    inductives: [legacyTauSigmaBlock()],
     runtimeRules: [],
     proofRules: []
 });
@@ -587,6 +601,21 @@ const contractPlan = planCoreLfMixedPhases(
     contractPolicy
 );
 
+const contractSpec: CoreLfGeneratedInductiveContractSpec = {
+    revision: 'SCALE-INDUCTIVE-1B1-TAU-SIGMA-ASSOCIATION-1',
+    sourceModuleRevision: signatureModule.revision,
+    contractModuleRevision: contractModule.revision,
+    block: tauSigma,
+    generatedOwner: generatedIndTauSigma,
+    runtimeRuleIds: ['inductive.generated.tau-sigma-beta'],
+    classification: {
+        kind: 'nonrecursive-indexed',
+        expectedParameterCount: 0,
+        expectedIndexCount: 2,
+        expectedConstructorCount: 1
+    }
+};
+
 const contractLinkage = createCoreLfMixedDeclarationLinkage(
     contractPlan,
     {
@@ -676,6 +705,8 @@ export const CORE_LF_SCALE_INDUCTIVE_1B1_SYMBOLS = Object.freeze({
 
 export interface CoreLfScaleInductive1b1Compilation {
     readonly signatureModule: CoreLfModuleSpec;
+    readonly association:
+        CoreLfGeneratedInductiveContractAssociation;
     readonly contract: CoreLfCompiledMixedModule;
 }
 
@@ -732,14 +763,21 @@ CoreLfScaleInductive1b1Compilation {
         lowering,
         signatureLinkage
     );
-    const contract = compileCoreLfMixedPhases(
+    const association = associateCoreLfGeneratedInductiveContract(
+        signatureModule,
+        contractModule,
+        contractSpec
+    );
+    const contract = compileCoreLfGeneratedInductiveContract(
+        association,
         contractPlan,
         contractLinkage,
         { initialDeclarations: signature }
     );
     return Object.freeze({
         signatureModule,
-        contract
+        association,
+        contract: contract.compiled
     });
 }
 

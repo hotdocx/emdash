@@ -311,6 +311,18 @@ describe('SCALE-INDUCTIVE-1A generic inductive signatures', () => {
 
     it('lowers the active dependent Sigma shape without promoting it', () => {
         const stress = CORE_LF_SCALE_STRESS_1_REPRESENTATION.core;
+        const block = stress.module.inductives[0];
+        assert.deepEqual(block.parameters, []);
+        assert.deepEqual(
+            block.indices.map(index => [
+                index.hint,
+                index.mode.plicity
+            ]),
+            [
+                ['a', 'implicit'],
+                ['P', 'explicit']
+            ]
+        );
         const lowering = lowerCoreLfInductiveSignatures(
             stress.module,
             stress.policy

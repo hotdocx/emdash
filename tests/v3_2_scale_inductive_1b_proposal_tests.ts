@@ -95,6 +95,21 @@ describe('SCALE-INDUCTIVE-1B1 generated-owner proposal', () => {
         const compiled =
             compileCoreLfScaleInductive1b1Proposal();
         assert.deepEqual(
+            compiled.association.classification,
+            {
+                kind: 'nonrecursive-indexed',
+                parameterCount: 0,
+                indexCount: 2,
+                constructorCount: 1,
+                recursiveOccurrencePaths: [],
+                strictPositivity: 'trivial-nonrecursive'
+            }
+        );
+        assert.equal(
+            compiled.association.generatedOwner.name,
+            'ind_τΣ_'
+        );
+        assert.deepEqual(
             compiled.contract.phases.map(phase => phase.kind),
             ['declaration', 'declaration', 'runtime']
         );

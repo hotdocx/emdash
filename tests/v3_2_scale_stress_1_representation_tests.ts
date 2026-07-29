@@ -91,7 +91,7 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
     it('freezes the exact representation-only boundary', () => {
         assert.equal(
             representation.revision,
-            'SCALE-STRESS-1A-REPRESENTATION-1'
+            'SCALE-STRESS-1A-REPRESENTATION-2'
         );
         assert.equal(representation.semanticStatus, 'representation-only');
         assert.deepEqual(representation.productEffects, []);
@@ -308,13 +308,14 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
         );
     });
 
-    it('represents dependent Sigma ownership and records its compiler gap', () => {
+    it('classifies inline Sigma binders as generated-motive indices', () => {
         const block = representation.core.module.inductives[0];
         assert.equal(block.symbol.name, 'τΣ_');
+        assert.deepEqual(block.parameters, []);
         assert.deepEqual(
-            block.parameters.map(parameter => [
-                parameter.hint,
-                parameter.mode.plicity
+            block.indices.map(index => [
+                index.hint,
+                index.mode.plicity
             ]),
             [
                 ['a', 'implicit'],
@@ -330,11 +331,12 @@ describe('TypeScript v3.2 SCALE-STRESS-1A representation', () => {
         assert.equal(constructor.symbol.name, 'Struct_sigma');
         assert.deepEqual(
             constructor.binders.map(binder => binder.hint),
-            ['sigma_Fst', 'sigma_Snd']
+            ['a', 'P', 'sigma_Fst', 'sigma_Snd']
         );
+        assert.equal(constructor.parameterModes, undefined);
         assert.equal(
             expressionContains(
-                constructor.binders[1].type,
+                constructor.binders[3].type,
                 candidate =>
                     candidate.tag === 'bound' &&
                     candidate.index === 1

@@ -526,7 +526,13 @@ const piRuntimeRule = () => {
 const sigmaInductive = () => ({
     order: 2,
     symbol: tauSigma,
-    parameters: [
+    parameters: [],
+    /*
+     * These binders occur after the inductive name in the active source.
+     * Lambdapi's generated motive varies over both, so they are indices
+     * rather than fixed prefix parameters.
+     */
+    indices: [
         {
             hint: 'a',
             mode: implicitMode,
@@ -565,16 +571,48 @@ const sigmaInductive = () => ({
             }
         }
     ],
-    indices: [],
     sort: { tag: 'type' as const },
     constructors: [{
         order: 0,
         symbol: structSigma,
-        parameterModes: [
-            implicitMode,
-            implicitMode
-        ],
         binders: [
+            {
+                hint: 'a',
+                mode: implicitMode,
+                type: {
+                    tag: 'global' as const,
+                    symbol: grpd
+                }
+            },
+            {
+                hint: 'P',
+                mode: implicitMode,
+                type: {
+                    tag: 'pi' as const,
+                    binder: {
+                        hint: 'x',
+                        mode: binderMode('explicit', 'functorial'),
+                        type: {
+                            tag: 'call' as const,
+                            callee: {
+                                tag: 'global' as const,
+                                symbol: tau
+                            },
+                            arguments: [{
+                                plicity: 'explicit' as const,
+                                value: {
+                                    tag: 'bound' as const,
+                                    index: 0
+                                }
+                            }]
+                        }
+                    },
+                    body: {
+                        tag: 'global' as const,
+                        symbol: grpd
+                    }
+                }
+            },
             {
                 hint: 'sigma_Fst',
                 mode: binderMode('explicit', 'functorial'),
@@ -663,7 +701,7 @@ const sigmaInductive = () => ({
 
 const createCoreRepresentation = (): CoreLfModuleSpec =>
     createCoreLfModuleSpec({
-        revision: 'SCALE-STRESS-1A-CORE-REPRESENTATION-1',
+        revision: 'SCALE-STRESS-1A-CORE-REPRESENTATION-2',
         moduleId: coreModuleId,
         fragmentId: 'scale-stress-1a-core-representation',
         authorityPath:
@@ -736,7 +774,7 @@ const createCorePolicy = (
     module: CoreLfModuleSpec
 ): CoreLfTransferPolicyOverlay =>
     createCoreLfTransferPolicyOverlay(module, {
-        revision: 'SCALE-STRESS-1A-CORE-POLICY-1',
+        revision: 'SCALE-STRESS-1A-CORE-POLICY-2',
         moduleRevision: module.revision,
         entries: [
             {
@@ -1024,7 +1062,7 @@ export interface CoreLfScaleStressMechanismAssessment {
 }
 
 export interface CoreLfScaleStress1Representation {
-    readonly revision: 'SCALE-STRESS-1A-REPRESENTATION-1';
+    readonly revision: 'SCALE-STRESS-1A-REPRESENTATION-2';
     readonly core: {
         readonly module: CoreLfModuleSpec;
         readonly policy: CoreLfTransferPolicyOverlay;
@@ -1081,7 +1119,7 @@ const coreRepresentation = createCoreRepresentation();
 const natRepresentation = createNatRepresentation();
 
 const rawRepresentation: CoreLfScaleStress1Representation = {
-    revision: 'SCALE-STRESS-1A-REPRESENTATION-1',
+    revision: 'SCALE-STRESS-1A-REPRESENTATION-2',
     core: {
         module: coreRepresentation,
         policy: createCorePolicy(coreRepresentation)

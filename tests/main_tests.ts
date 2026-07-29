@@ -144,6 +144,7 @@ import './v3_2_lf_transfer_runtime_tests';
 import './v3_2_lf_transfer_visibility_tests';
 import './v3_2_lf_transfer_proof_tests';
 import './v3_2_lf_transfer_inductive_tests';
+import './v3_2_lf_transfer_inductive_contract_tests';
 import './v3_2_lf_transfer_mixed_tests';
 import './v3_2_lf_runtime_fragment_tests';
 import './v3_2_lf_transfer_acquisition_tests';

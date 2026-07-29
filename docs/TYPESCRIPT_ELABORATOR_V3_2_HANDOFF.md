@@ -48,7 +48,7 @@ representation-only SCALE-STRESS-3A2 parent. Protected/evidence extensions
 and WalkingEnd/HIT remain 3B/3C; exact module visibility, opaque
 tactic-source retention, and the first 3B closure measurement are complete.
 The isolated canonical-symbol parser experiment and wider 3B declaration
-transfer are now optional/deferred. The active critical path is the dependent
+transfer are now optional/deferred. The former critical path was the dependent
 demo and categorical-binder frontend in the usability plan. Its closed-index
 USABILITY-2A0 prerequisite and indexed natural/displayed section-eta
 USABILITY-2A1 witness are complete; the exact executable frontend-envelope
@@ -294,8 +294,12 @@ facade; it is not definitionally the fully parameter-polymorphic
 `ind_τΣ_`. H-DTTLF-SCALE-INDUCTIVE-01/
 D-DTTLF-SCALE-INDUCTIVE-001 now gates only the zero-erased-signature index
 correction and generic explicit-contract association/validator.
-SCALE-INDUCTIVE-1B2 separately retains direct `ind_nat` recursion, recursive
-induction hypotheses, two generated betas, and negative strict positivity.
+After the 1B1 checkpoint, SCALE-INDUCTIVE-HYBRID-0A first tests direct
+`ind_nat` transfer as an ordinary explicit declaration, two ordinary runtime
+rules, and one recursive consumer through the existing engines. Only the
+smallest measured/reviewed route then advances to SCALE-INDUCTIVE-1B2;
+TypeScript-side positivity validation or automatic generation is not assumed
+necessary merely because Lambdapi generated the owner.
 No LF checker connective, native-`TYPE` quantification, surface parser,
 categorical-binder frontend, active profile, browser API, or Lambdapi source
 change is proposed by 1B1. This work is immediately required for faithful
@@ -310,7 +314,26 @@ records D-DTTLF-SCALE-INDUCTIVE-001 as approved exactly as proposed under the
 standing unattended delegation with human supersession. Its five focused
 tests, typecheck, and lint pass. Exact review checkpoint:
 `33960a8b6aa924e5d69f438b0b43881b4e13f029`.
-SCALE-INDUCTIVE-1B1 implementation is now the dependency-ready row.
+
+SCALE-INDUCTIVE-1B1 is now implemented and final-green, with only the local
+checkpoint synchronization pending. The revision-2 stress
+representation classifies inline `a,P` as indices and explicitly rebinds them
+in `Struct_sigma`, while a reconstructed legacy view proves zero erased
+signature delta. The new owner-generic
+`lf_transfer_inductive_contract.ts` boundary requires one listed generated
+identity, one absent-body ordinary opaque declaration with exact
+`generatedBy`, an exhaustive generated-owner beta set, the reviewed indexed
+shape, and zero recursive occurrences. It then delegates declaration and
+runtime checking to the existing mixed generic engines and verifies the
+local installed owner/rules. The explicit `ind_τΣ_` contract and
+first-projection consumer pass TypeScript and live Lambdapi. It adds no
+automatic synthesis or end-user inductive-declaration facade; recursive
+`ind_nat` remains outside 1B1. The full 1,095-test root gate and bounded
+active-kernel check pass. The explicit declaration and beta are the ordinary
+semantic transfer inputs; the association is bounded provenance/integrity
+evidence and is not yet claimed as universally necessary. The next
+dependency-ready row is the read-only SCALE-INDUCTIVE-HYBRID-0A audit before
+a 1B2 proposal is frozen.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
@@ -338,17 +361,16 @@ six verified generated probe directories left by an interrupted run, records
 an exact checkpoint, and fast-forwards local `main`; it authorizes no push or
 worktree removal.
 
-After integration, use the displayed-bracket plan's launch prompt. The
-selected sequence is:
+The displayed-bracket integration, mixed telescope, `:^nd` component and
+higher-action qualification, and SCALE-KIND-PI-1 are now complete. Use the
+scale plan's living launch prompt. The selected sequence is:
 
-1. preserve the completed proposal and separate delegated D-016 review;
-2. implement only its frozen four-binding, three-level mixed
-   telescope combining genuine dependency transitions and the independent
-   middle siblings `[b,c]`, with zero expected owner/rule/transfer delta and
-   a mandatory stop on closure drift;
-3. a general `:^nd` coherence/higher-action audit; and
-4. SCALE-KIND-PI-1, SCALE-INDUCTIVE-1B, SCALE-STRESS-3C,
-   SCALE-BATCH-1, and SCALE-GRADUATE-1.
+1. checkpoint the final-green SCALE-INDUCTIVE-1B1 implementation;
+2. perform the read-only SCALE-INDUCTIVE-HYBRID-0A audit, beginning with the
+   lean expanded-symbol `ind_nat` declaration/rules/consumer route;
+3. freeze and implement only the smallest evidence-selected
+   SCALE-INDUCTIVE-1B2 continuation; and
+4. continue through SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
 
 ## Purpose
 
