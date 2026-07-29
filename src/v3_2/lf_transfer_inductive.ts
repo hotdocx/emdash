@@ -65,7 +65,7 @@ export interface CoreLfInductiveSignatureLowering {
         'generated-eliminator-types',
         'generated-computation-rules',
         'induction-semantics',
-        'kind-level-binder-compilation',
+        'implicit-native-TYPE-parameter-encoding',
         'active-semantic-policy'
     ];
 }
@@ -446,7 +446,7 @@ export function lowerCoreLfInductiveSignatures(
             'generated-eliminator-types',
             'generated-computation-rules',
             'induction-semantics',
-            'kind-level-binder-compilation',
+            'implicit-native-TYPE-parameter-encoding',
             'active-semantic-policy'
         ]
     });

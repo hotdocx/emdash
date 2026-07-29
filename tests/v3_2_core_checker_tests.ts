@@ -332,7 +332,7 @@ const expectCheckerError = (
 };
 
 describe('TypeScript v3.2 ELAB-2A3B Core checker', () => {
-    it('tracks TYPE/KIND without admitting Type-in-Type', () => {
+    it('tracks lambda-Pi sorts and rejects KIND-domain products', () => {
         const session = new CoreElaborationSession();
         const checker = new CoreChecker(session);
 
@@ -366,18 +366,21 @@ describe('TypeScript v3.2 ELAB-2A3B Core checker', () => {
             true
         );
 
-        const typeInType = kernelPi(
+        const kindDomainProduct = kernelPi(
             kernelBinder(
                 'T',
-                kernelUniverse(because(23, 'forbidden TYPE domain')),
+                kernelUniverse(because(23, 'KIND-sorted domain')),
                 explicitFunctorial,
-                because(23, 'forbidden type binder')
+                because(23, 'forbidden KIND-domain binder')
             ),
-            kernelUniverse(because(23, 'forbidden type body')),
-            because(23, 'forbidden Type-in-Type Pi')
+            kernelUniverse(because(23, 'KIND-sorted body')),
+            because(23, 'forbidden KIND-domain Pi')
         );
         const error = expectCheckerError(
-            () => checker.infer(checker.rootContext, typeInType),
+            () => checker.infer(
+                checker.rootContext,
+                kindDomainProduct
+            ),
             'EXPECTED_TYPE'
         );
         assert.match(error.message, /checker sort KIND, not TYPE/);

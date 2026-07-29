@@ -646,7 +646,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | pending | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Represent and check generated eliminator types/computation plus recursive/indexed and strict-positivity boundaries; no backend-generated owner is trusted without an explicit typed contract |
-| SCALE-KIND-PI-1 | executable audit/proposal complete and focused-green; exact H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 decision pending; proposal checkpoint pending | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserve the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Correct the misleading inductive boundary label and require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
+| SCALE-KIND-PI-1 | audit/proposal checkpointed `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed; no-semantic-change implementation and focused tests green; implementation checkpoint pending | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserve the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
 | SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines |
 | SCALE-MIXED-PHASE-1B | complete | SCALE-MIXED-PHASE-1A | Same-runtime-prefix proof phases compose in source order under one global priority, queue, metavariable session, and proof budget; each phase retains exact compile evidence and later runtime rules are not silently made visible |
@@ -1518,8 +1518,19 @@ The exact non-self-authorizing decision is:
 > browser, parser, bulk-transfer, release, or broader Git semantic authority;
 > and stop if implementation would change any product judgment?
 
-Implementation requires a separate immutable review. The audit/proposal
+Implementation requires the exact separate decision below. The audit/proposal
 itself changes no checker or transfer behavior.
+
+Exact immutable audit/proposal checkpoint:
+`62452031f963b272538360871256bbdf2efc43f7`.
+The user directly approved H-DTTLF-LF-SORT-01/
+D-DTTLF-LF-SORT-001 exactly as proposed on 2026-07-29. The implementation
+changes no checker judgment: it renames the misleading checker test, replaces
+the inductive/mixed `kind-level-binder-compilation` non-feature label with
+`implicit-native-TYPE-parameter-encoding`, and retains the executable matrix
+and explicit-code-universe witness. Focused checker, inductive, mixed-planner,
+typecheck, and lint gates pass. Exact staged review and the bounded local
+checkpoint remain before SCALE-INDUCTIVE-1B.
 
 Validation on 2026-07-25:
 
@@ -2895,8 +2906,10 @@ merging only after a measured independent-fragment need. Neither strategy may
 change LF/Core semantics. Once the displayed graduation, mixed-telescope
 stress, and `:^nd` audit return control here, resume in this order:
 preserve the completed SCALE-KIND-PI-1 product-sort audit, obtain or record
-the exact D-DTTLF-LF-SORT-001 decision, implement only its no-semantic-change
-classification/evidence correction, and then continue with
+the exact D-DTTLF-LF-SORT-001 decision, and implement only its
+no-semantic-change classification/evidence correction. The decision is now
+directly approved and that correction is focused-green; finish only its exact
+staged review and bounded local checkpoint, and then continue with
 SCALE-INDUCTIVE-1B, SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do
 not silently substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.

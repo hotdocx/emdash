@@ -113,7 +113,7 @@ export interface CoreLfMixedPhasePlan {
     readonly doesNotProvide: readonly [
         'active-policy-selection',
         'generated-induction-semantics',
-        'kind-level-binder-compilation',
+        'implicit-native-TYPE-parameter-encoding',
         'browser-api'
     ];
 }
@@ -662,7 +662,7 @@ export function planCoreLfMixedPhases(
         doesNotProvide: [
             'active-policy-selection',
             'generated-induction-semantics',
-            'kind-level-binder-compilation',
+            'implicit-native-TYPE-parameter-encoding',
             'browser-api'
         ]
     });
@@ -1097,7 +1097,7 @@ export class CoreLfCompiledMixedModule {
     readonly doesNotProvide = Object.freeze([
         'active-policy-selection',
         'generated-induction-semantics',
-        'kind-level-binder-compilation',
+        'implicit-native-TYPE-parameter-encoding',
         'browser-api'
     ] as const);
 

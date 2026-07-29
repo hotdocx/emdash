@@ -286,7 +286,7 @@ describe('SCALE-INDUCTIVE-1A generic inductive signatures', () => {
         compiled.assertEnvironment(compiled.environment);
     });
 
-    it('keeps the current kind-level binder limitation explicit', () => {
+    it('rejects implicit native-TYPE parameter encoding', () => {
         const fixture = pairFixture();
         const lowering = lowerCoreLfInductiveSignatures(
             fixture.module,
@@ -304,7 +304,7 @@ describe('SCALE-INDUCTIVE-1A generic inductive signatures', () => {
         );
         assert.ok(
             lowering.doesNotProvide.includes(
-                'kind-level-binder-compilation'
+                'implicit-native-TYPE-parameter-encoding'
             )
         );
     });
@@ -359,7 +359,7 @@ describe('SCALE-INDUCTIVE-1A generic inductive signatures', () => {
         );
         assert.equal(
             lowering.doesNotProvide.includes(
-                'kind-level-binder-compilation'
+                'implicit-native-TYPE-parameter-encoding'
             ),
             true
         );
