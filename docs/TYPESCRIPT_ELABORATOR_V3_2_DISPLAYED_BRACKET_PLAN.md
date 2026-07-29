@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; H-DTTLF-USABILITY-DISPLAYED-CHAIN-02/D-DTTLF-USABILITY-013 separately approves the one ambient `Terminal_obj` transfer correction at review checkpoint `b33a1621908425d06879898b05b1cfffda230eb4`; generic transfer/consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012 and TRANSFER-CORRECTION-0A/D-013 | Promote exactly one `sigma_functord_sec` owner and six measured runtime rules; preserve the three chain-specific existing-signature/two existing-rule prerequisites; add only the pre-existing ambient `Terminal_obj` signature through the generic declaration compiler; add only the root-only `fibred-displayed-chain-1` profile and recursive `displayedDependentContextLambda` consumer; qualify the frozen object/arrow/reindexing/negative/non-collapse corpus |
+| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; exhaustive linkage audit found exactly one final residual `Const_func`, now frozen behind H-DTTLF-USABILITY-DISPLAYED-CHAIN-03/D-DTTLF-USABILITY-014; generic transfer/consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012 and TRANSFER-CORRECTION-0A/D-013; pending CONST-FUNCTOR-CORRECTION-0A | Preserve the three chain-specific declarations/two existing rules; after separate approval, compile the two pre-existing ambient signatures `Terminal_obj` and `Const_func`; retain exactly one new owner/six rules; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen evidence corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1678,6 +1678,21 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-28 — DISPLAYED-CHAIN-CONST-FUNCTOR-CORRECTION-0A proposed.**
+  Applying D-013 advanced the fail-closed generic module builder to the only
+  remaining undeclared global: the active injective `Const_func` used by the
+  approved direct-object rule. A complete comparison of every semantic
+  external against the union of composed linkages confirms that the original
+  residual set was exactly `Terminal_obj, Const_func`, D-013 removes the
+  first, and this proposal would remove the second with no further missing
+  globals expected. Replacing it by a terminal-point composite changes the
+  selected normal form; an intrinsic owner bypasses the generic compiler.
+  The frozen proposal therefore requests only the pre-existing `Const_func`
+  signature as the second ambient dependency. The three chain-specific
+  declarations, two existing rules, one new owner, six new rules, zero
+  Lambdapi edits, and every scope/Git non-effect remain unchanged. It is
+  non-self-authorizing and awaits
+  H-DTTLF-USABILITY-DISPLAYED-CHAIN-03/D-DTTLF-USABILITY-014.
 - **2026-07-28 — D-DTTLF-USABILITY-013 approved under delegated unattended
   authority.** After the exact unchanged proposal was presented, passed six
   focused tests, the 929-test root gate, and the 14-test live
@@ -2024,6 +2039,16 @@ broadening, carrying an arbitrary terminal term, replacing the opaque
 constant with native `tt`, and adding an intrinsic Core escape. The separate
 review authorizes only that ambient signature through the generic compiler;
 do not infer any further semantic or profile authority from it.
+
+Preserve the non-self-authorizing
+DISPLAYED-CHAIN-CONST-FUNCTOR-CORRECTION-0A proposal. Its exhaustive linkage
+audit identifies `Const_func` as the exact and final residual external after
+D-013. It requests only that pre-existing injective signature through the
+generic declaration compiler and keeps the D-012/D-013 semantic and Git
+boundaries unchanged. If the exact proposal is green and locally checkpointed
+and no immediate human response follows its presentation, the standing
+unattended delegation permits a separate D-DTTLF-USABILITY-014 review with
+human supersession. Do not rely on `Const_func` before that separate review.
 
 For a future exact bounded gate in this goal, if no immediate human response
 follows presentation of its frozen proposal, the user's standing delegation
