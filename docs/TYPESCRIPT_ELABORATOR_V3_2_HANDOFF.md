@@ -164,7 +164,9 @@ conclusion is narrower and clearer:
   owner: three existing signatures, six exact existing rules, two narrow
   derived pair-projection normal forms, the one new rule, and generic 512-step
   LF budget plumbing with zero oracle/intrinsic/owner-specific checker path;
-  implementation remains stopped pending its separate review; and
+  its separate immutable D-017 review records delegated unattended approval
+  with human supersession, so the exact closure implementation is
+  dependency-ready; and
 - this settles a mechanically reusable architecture for the demonstrated
   envelope, not arbitrary depth, arbitrary mixed variance, general `:^nd`,
   whole-library transfer, groupoidal closure, or deployment.

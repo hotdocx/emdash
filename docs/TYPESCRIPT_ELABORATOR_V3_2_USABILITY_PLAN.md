@@ -129,7 +129,11 @@ The executable, non-self-authorizing D-017 closure proposal selects three
 existing signatures, six exact existing rules, two narrow derived projection
 normal forms, that one rule, and generic 512-step LF budget plumbing with no
 oracle or intrinsic path. Ten focused D-016 review tests, seven focused D-017
-proposal tests, and the corresponding bounded gates pass.
+proposal tests, and the corresponding bounded gates pass. A separate
+immutable D-017 delegated review with human supersession approves exactly that
+closure. Its eight focused tests and the aggregate 1,010-test root gate pass
+(963 active passes, 47 intentional skips, zero failures), making the exact
+closure implementation dependency-ready.
 General `:^nd` and the recorded scale sequence follow only after that bounded
 stress. Exact proposal checkpoint:
 `6c06cb10ea6eb9fa298544d084df5f129950a3a1`. Exact delegated-review
@@ -583,7 +587,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-1A; D-016 review checkpointed `24ce6ffede79e115bc5d387c65366598e56f5d3d`; DISPLAYED-CHAIN-2A stopped on its frozen closure-drift condition; D-017 executable proposal green and pending separate review | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-016 | The active displayed plan preserves one typed recursive frontend for independent siblings, stable evaluation, and the exact one-edge chain. The `a; b,c; d` lowering architecture works, but the recursive paired internalized cell needs one existing-owner rule. D-017 proposes no owner: an isolated three-signature/nine-rule TypeScript continuation, one active `fdapp1_int_cell(Product_pair_funcd(...))` rule, generic 512-step LF budget plumbing, and zero oracle/intrinsic/second-frontend change. Seven focused proposal tests pass; implementation remains stopped until separate approval |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-1A; D-016 review checkpointed `24ce6ffede79e115bc5d387c65366598e56f5d3d`; DISPLAYED-CHAIN-2A stopped on its frozen closure-drift condition; D-017 proposal green and separately approved under delegated unattended authority with human supersession; exact closure implementation dependency-ready | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-017 | The active displayed plan preserves one typed recursive frontend for independent siblings, stable evaluation, and the exact one-edge chain. The `a; b,c; d` lowering architecture works, but the recursive paired internalized cell needs one existing-owner rule. Reviewed D-017 adds no owner: it authorizes an isolated three-signature/nine-rule TypeScript continuation, one active `fdapp1_int_cell(Product_pair_funcd(...))` rule, generic 512-step LF budget plumbing, and zero oracle/intrinsic/second-frontend change |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2365,8 +2369,8 @@ the implemented usability envelope and authorizes only the existing-method
 four-binding `a; b,c; d` three-level stress. Implement that exact row and halt
 for a separate closure proposal if its expected zero
 owner/rule/transfer-entry delta is false. That stop has fired. Preserve the
-deeply frozen DISPLAYED-CHAIN-2A-CLOSURE-0A/D-017 proposal and defer semantic
-promotion until its separate decision. If approved, implement exactly its
+deeply frozen DISPLAYED-CHAIN-2A-CLOSURE-0A proposal and its separate immutable
+D-017 delegated review with human supersession. Implement exactly its
 one existing-owner rule, three existing signatures, nine TypeScript runtime
 entries, two typed inferred-slot corrections, isolated profile, and generic
 512-step LF budget seam with no oracle/intrinsic/owner-specific checker path;

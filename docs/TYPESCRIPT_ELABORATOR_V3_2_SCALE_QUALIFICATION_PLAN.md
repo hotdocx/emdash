@@ -68,12 +68,12 @@ existing-method `a; b,c; d` three-level successor with zero expected
 owner/rule/transfer delta and a mandatory stop on closure drift. Ten focused
 review tests and the aggregate 995-test reviewed root gate pass. The stop has
 now fired at the recursive paired internalized cell. The displayed plan's
-pending D-017 proposal selects one existing-owner rule, three existing
-signatures, nine TypeScript continuation rules, and generic 512-step LF
-budget plumbing with zero oracle/intrinsic/second-frontend change. The mixed
-stress resumes only after that separate review, followed by general `:^nd`.
-When control
-returns to this scale plan, the selected order is SCALE-KIND-PI-1,
+separately reviewed D-017 proposal selects one existing-owner rule, three
+existing signatures, nine TypeScript continuation rules, and generic
+512-step LF budget plumbing with zero oracle/intrinsic/second-frontend
+change. The exact closure implementation is dependency-ready, followed by
+general `:^nd`. When control returns to this scale plan, the selected order
+is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2673,8 +2673,8 @@ tranches. Preserve the completed executable, deeply immutable,
 non-self-authorizing DISPLAYED-BRACKET-GRADUATE-1 assessment and its separate
 immutable exact D-DTTLF-USABILITY-016 delegated review with human
 supersession. Its mandatory stop has fired. Preserve the deeply frozen,
-non-self-authorizing DISPLAYED-CHAIN-2A-CLOSURE-0A/D-017 proposal and do not
-promote it before a separate review. If approved, implement exactly its
+non-self-authorizing DISPLAYED-CHAIN-2A-CLOSURE-0A proposal and its separate
+immutable D-017 delegated review with human supersession. Implement exactly its
 one existing-owner rule, three existing signatures, nine continuation rules,
 typed inferred-slot corrections, isolated profile, and generic 512-step LF
 budget seam with zero oracle/intrinsic/owner-specific checker path; then

@@ -542,8 +542,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-1A | complete, green, and checkpointed `86ac6e480e50e38486bf4155556bbf41760be2cf`; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e`; the root-only recursive consumer and runnable demo pass nine new focused tests and the aggregate 973-test root gate (926 active passes, 47 intentional skips, zero failures) | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-INTEGRATE-1 | complete and validated; exact consolidation checkpoint `222a718fc1ef667964a15cfec0e82e0cf807dd96` | complete DISPLAYED-CHAIN-1A and green full integration audit | Synchronized the displayed/usability/scale/handoff/master routing; classified `DECL-REFINE-1A` as optional deferred module/linking infrastructure; removed only six verified generated probe directories; passed the complete repository gate; checkpointed exactly the consolidation; and authorized the immediately following verified local-main fast-forward with no push or worktree removal |
 | DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; approved exactly as proposed by a separate delegated review with human supersession at checkpoint `24ce6ffede79e115bc5d387c65366598e56f5d3d` | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused proposal tests, ten focused review tests, the 985-test proposal gate, and the 995-test reviewed gate pass; the proposal remains non-self-authorizing |
-| DISPLAYED-CHAIN-2A | D-016 lowering audit reached the frozen mixed shape, then stopped exactly as required when the zero-rule/transfer assumption proved false; implementation remains gated on D-017 | approved D-DTTLF-USABILITY-016 plus pending DISPLAYED-CHAIN-2A-CLOSURE-0A | Extend the existing `displayedDependentContextLambda` method only to the flat source-ordered `a; b,c; d` shape. Derive the independent `b,c` group without user flags; use the transparent displayed product and sequential Sigma total; require object/internalized-arrow/reindexing/negative evidence. The lowering architecture and all object projections work, but the recursive paired internalized cell requires the separately proposed closure below |
-| DISPLAYED-CHAIN-2A-CLOSURE-0A | executable deeply immutable, non-self-authorizing proposal complete, green, and checkpointed `f647791281095e02c6ebe3f1490e272b4e58c7a0`; awaiting H-DTTLF-USABILITY-DISPLAYED-CHAIN-2A-CLOSURE-01/D-DTTLF-USABILITY-017 | D-016 mandatory closure-drift stop plus owner-position Lambdapi and generic TypeScript prototypes | Add no owner: add one componentwise `fdapp1_int_cell(Product_pair_funcd(...))` rule; transfer three existing signatures, six exact existing equations, two checked `Product_pair` projection normal forms, and the new rule into an isolated `fibred-displayed-chain-2a` continuation; honor the existing generic LF comparison budget at 512 while retaining the 256 default; require zero oracle/intrinsic/owner-specific checker branch |
+| DISPLAYED-CHAIN-2A | D-016 lowering audit reached the frozen mixed shape, then stopped exactly as required when the zero-rule/transfer assumption proved false; exact closure implementation dependency-ready under reviewed D-017 | approved D-DTTLF-USABILITY-016 plus separately reviewed D-DTTLF-USABILITY-017 | Extend the existing `displayedDependentContextLambda` method only to the flat source-ordered `a; b,c; d` shape. Derive the independent `b,c` group without user flags; use the transparent displayed product and sequential Sigma total; require object/internalized-arrow/reindexing/negative evidence. The lowering architecture and all object projections work; implement only the separately reviewed closure below before completing the frozen corpus |
+| DISPLAYED-CHAIN-2A-CLOSURE-0A | executable deeply immutable, non-self-authorizing proposal complete, green, and checkpointed `f647791281095e02c6ebe3f1490e272b4e58c7a0`; approved exactly as proposed by a separate delegated review with human supersession | D-016 mandatory closure-drift stop plus owner-position Lambdapi and generic TypeScript prototypes | Add no owner: add one componentwise `fdapp1_int_cell(Product_pair_funcd(...))` rule; transfer three existing signatures, six exact existing equations, two checked `Product_pair` projection normal forms, and the new rule into an isolated `fibred-displayed-chain-2a` continuation; honor the existing generic LF comparison budget at 512 while retaining the 256 default; require zero oracle/intrinsic/owner-specific checker branch |
 | DISPLAYED-ND-0A | deferred behind graduation and the mixed-telescope stress | DISPLAYED-LIFTING-0A, DISPLAYED-CHAIN-1A, and the selected post-graduation boundary | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
@@ -2328,9 +2328,14 @@ The deeply frozen executable proposal is
 `src/v3_2/categorical_displayed_chain_2a_closure_proposal.ts`; its focused
 test is
 `tests/v3_2_categorical_displayed_chain_2a_closure_proposal_tests.ts`.
-It is pending
+The proposal retains its pending
 H-DTTLF-USABILITY-DISPLAYED-CHAIN-2A-CLOSURE-01/
-D-DTTLF-USABILITY-017 and authorizes nothing by itself.
+D-DTTLF-USABILITY-017 status and authorizes nothing by itself. The separate
+immutable review in
+`src/v3_2/categorical_displayed_chain_2a_closure_review.ts`
+records D-017 as approved exactly as proposed under the user's standing
+unattended delegation with human supersession; it does not mutate the pending
+proposal.
 
 ### Active-kernel qualification
 
@@ -2420,14 +2425,27 @@ product/binder owner, using an external oracle, or importing broad Sigma
 constructor computation. It defers declaration refinement and selects the
 isolated canonical closure plus one existing-owner rule.
 
-Approval of D-017 would authorize exactly that closure followed by completion
-of the already-frozen DISPLAYED-CHAIN-2A corpus. It would not authorize
-general `:^nd`, arbitrary telescope depth or mixed variance, groupoidal
-closure, parsing, a second frontend/checker, browser promotion, bulk
-whole-library transfer, `DECL-REFINE-1A`, or broader Git operations.
+The separate D-017 review authorizes exactly that closure followed by
+completion of the already-frozen DISPLAYED-CHAIN-2A corpus. It does not
+authorize general `:^nd`, arbitrary telescope depth or mixed variance,
+groupoidal closure, parsing, a second frontend/checker, browser promotion,
+bulk whole-library transfer, `DECL-REFINE-1A`, or broader Git operations.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-USABILITY-017 approved under delegated unattended
+  authority.** After the exact green D-017 gate and rollback-safe proposal
+  checkpoint were presented without immediate human supersession, a separate
+  deeply immutable review snapshots the unchanged pending proposal and
+  records only the authorized measured closure: zero new symbols, one
+  existing-owner runtime rule, three existing declarations, nine isolated
+  TypeScript runtime entries, two typed inferred-slot corrections, and generic
+  512-step continuation checking with the 256 default unchanged. It retains
+  zero oracle/intrinsic/owner-specific checker path and every withheld claim.
+  Eight focused review tests and the aggregate 1,010-test root gate pass
+  (963 active passes, 47 intentional skips, zero failures); all 19 live
+  conformance judgments and the bounded active-kernel check pass.
+  Implementation is dependency-ready after the exact review checkpoint.
 - **2026-07-29 — DISPLAYED-CHAIN-2A zero-delta assumption falsified and
   D-017 closure proposal frozen.** The existing recursive frontend reaches the
   exact `a; b,c; d` shape and all object/direct internalized-arrow observations
@@ -2855,16 +2873,15 @@ withholding arbitrary depth, mixed variance, general `:^nd`, groupoidal,
 browser, and whole-transfer claims. If its exact local review checkpoint or
 ledger hash is absent, finish only that bounded synchronization first.
 
-Preserve the D-016 mandatory stop: the frozen existing-method
+Preserve the D-016 mandatory stop and its separately approved D-017 closure:
+the frozen existing-method
 `k; a:A[k]; b:B[(k,a)], c:C[(k,a)]; d:D[((k,a),(b,c))]` lowering is sound,
 but its zero-rule/transfer assumption is false at the recursive paired
 internalized cell. Preserve the deeply frozen, non-self-authorizing
-DISPLAYED-CHAIN-2A-CLOSURE-0A proposal and its focused tests. Do not promote
-the experimental closure until
-H-DTTLF-USABILITY-DISPLAYED-CHAIN-2A-CLOSURE-01/
-D-DTTLF-USABILITY-017 is recorded separately.
+DISPLAYED-CHAIN-2A-CLOSURE-0A proposal, its separate immutable D-017 delegated
+review with human supersession, and their focused tests.
 
-If D-017 is approved, implement exactly one existing-owner Lambdapi rule at
+Implement exactly one existing-owner Lambdapi rule at
 `fdapp1_int_cell(Product_pair_funcd(...))`; an isolated
 `categorical_displayed_chain_2a_closure_transfer` with three existing
 signatures, six exact existing equations, two checked narrow pair-projection

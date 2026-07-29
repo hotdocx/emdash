@@ -3674,10 +3674,11 @@ DISPLAYED-CHAIN-2A-CLOSURE-0A/D-017 proposal: no new owner, one new
 `fdapp1_int_cell(Product_pair_funcd(...))` rule, three existing signatures,
 nine TypeScript continuation rules, generic 512-step LF budget plumbing, and
 zero oracle/intrinsic/second-frontend delta. Its seven focused tests pass;
-implementation awaits a separate review. General `:^nd` and the selected
-scale sequence follow the completed mixed stress. The historical text below
-must not be used to resume the completed fibred-context or displayed-chain
-implementation.
+a separate immutable D-017 delegated review with human supersession approves
+that exact boundary, and implementation is dependency-ready. General `:^nd`
+and the selected scale sequence follow the completed mixed stress. The
+historical text below must not be used to resume the completed fibred-context
+or displayed-chain implementation.
 
 When starting a fresh persistent session, review and trust the root project
 hook through `/hooks` and verify the shared archive as described in
