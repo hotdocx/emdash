@@ -102,6 +102,8 @@ separate reviewed proposal/audit rather than a retroactive expansion of this
 completed continuation profile. Its final validation passes nine focused
 tests, the 1,045-test root gate (998 active passes and 47 intentional skips),
 all 19 live conformance judgments, and the bounded active-kernel check.
+Exact downstream implementation checkpoint:
+`d8b450222273167ab326701c76fff03f0f539b18`.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -2784,4 +2786,6 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   `emdash-v3.2-dttlf-directed-1` continuation. The displayed and scale plans
   govern checkpointing and the next-hom audit. Nine focused tests, the
   1,045-test root gate (998 active passes and 47 intentional skips), 19/19
-  live conformance, and the bounded active-kernel check pass.
+  live conformance, and the bounded active-kernel check pass. Exact downstream
+  implementation checkpoint:
+  `d8b450222273167ab326701c76fff03f0f539b18`.

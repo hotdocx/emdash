@@ -170,8 +170,10 @@ callback-once/frozen recursive IR, component beta, a checked base-arrow cell,
 exact classifier/scope/profile negatives, retained eta, and zero
 Lambdapi/transfer/intrinsic/checker/browser delta. The final gate passes 1,045
 TypeScript tests (998 active passes and 47 intentional skips), all 19 live
-conformance judgments, and the bounded active-kernel check; exact checkpoint
-recording remains. The next semantic row is not automatic:
+conformance judgments, and the bounded active-kernel check. Exact local
+implementation checkpoint:
+`d8b450222273167ab326701c76fff03f0f539b18`. The next semantic row is not
+automatic:
 DISPLAYED-ND-HIGHER-1B must first freeze and review the existing-authority
 next-hom transfer/surface audit.
 D-017 proposal checkpoint:
@@ -2425,12 +2427,12 @@ only `composeCells`, one generic `typed-cell-composition` node for
 `indexed-transfor`, and recursive pointwise vertical-composition lowering to
 `comp_fapp0` at `Functord_cat`; all kernel/transfer/intrinsic/checker deltas
 remain zero. Preserve the separate immutable D-018 review and completed
-DISPLAYED-ND-1A recursive factorer, including callback-once/frozen body
+DISPLAYED-ND-1A recursive factorer at exact implementation checkpoint
+`d8b450222273167ab326701c76fff03f0f539b18`, including callback-once/frozen body
 evidence, nested composition, direct component beta, the checked base-arrow
 cell, exact negatives, retained eta, and zero semantic/transfer/profile
-delta. If final aggregate or checkpoint synchronization is incomplete,
-finish only that bounded work. Then prepare, but do not implement without a
-separate reviewed decision, DISPLAYED-ND-HIGHER-1B's existing-authority
+delta. Prepare, but do not implement without a separate reviewed decision,
+DISPLAYED-ND-HIGHER-1B's existing-authority
 next-hom transfer/surface audit. Keep identity, arbitrary coherence, mixed
 variance, and composite-cell normalization separately gated. Preserve
 completed

@@ -97,7 +97,8 @@ IR, recursive factoring to genuine outer `Transfd` composition, direct
 component beta, a checked base-arrow cell, exact negatives, and zero
 kernel/transfer/checker/browser delta. Its final gate passes 1,045 TypeScript
 tests (998 active passes and 47 intentional skips), all 19 live conformance
-judgments, and the bounded active-kernel check. The displayed plan next
+judgments, and the bounded active-kernel check. Its exact local implementation
+checkpoint is `d8b450222273167ab326701c76fff03f0f539b18`. The displayed plan next
 requires the proposal/audit-only
 DISPLAYED-ND-HIGHER-1B existing-authority next-hom qualification. Once that
 selected ND work returns control here, the order is SCALE-KIND-PI-1,
@@ -2708,12 +2709,13 @@ generic 512-step LF budget seam with zero
 oracle/intrinsic/owner-specific checker path. Finish only any missing final
 validation/report/checkpoint synchronization. Preserve completed
 DISPLAYED-ND-0A, its separate immutable D-018 review, and completed
-DISPLAYED-ND-1A: one generic typed-cell-composition node initially restricted
+DISPLAYED-ND-1A at exact implementation checkpoint
+`d8b450222273167ab326701c76fff03f0f539b18`: one generic
+typed-cell-composition node initially restricted
 to compatible `indexed-transfor` children and recursive factoring to
 existing `comp_fapp0` at `Functord_cat`, with callback-once/frozen IR,
 component beta, a checked base-arrow cell, exact negatives, retained eta,
-and zero Lambdapi/transfer/intrinsic/checker/browser delta. Finish only any
-missing final validation or checkpoint synchronization, then route through
+and zero Lambdapi/transfer/intrinsic/checker/browser delta. Then route through
 proposal/audit-only DISPLAYED-ND-HIGHER-1B before resuming this scale ledger.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
@@ -2836,7 +2838,8 @@ scope is affected.
   intrinsic, checker, or browser delta. This does not resume bulk transfer or
   promote a scale profile. Nine focused tests, the 1,045-test root gate (998
   active passes and 47 intentional skips), all 19 live conformance judgments,
-  and the bounded active-kernel check pass;
+  and the bounded active-kernel check pass. Exact local implementation
+  checkpoint: `d8b450222273167ab326701c76fff03f0f539b18`.
   DISPLAYED-ND-HIGHER-1B is the next proposal/audit before the selected
   SCALE-KIND-PI-1 → SCALE-INDUCTIVE-1B → SCALE-STRESS-3C →
   SCALE-BATCH-1 → SCALE-GRADUATE-1 sequence.

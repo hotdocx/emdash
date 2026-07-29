@@ -212,8 +212,8 @@ beta, a generic-Core-checked base-arrow cell, exact classifier/scope/profile
 negatives, retained eta, and zero Lambdapi/transfer/intrinsic/checker/browser
 delta. The final gate passes 1,045 TypeScript tests (998 active passes and 47
 intentional skips), all 19 live conformance judgments, and the bounded active
-kernel check; exact checkpoint recording is the only remaining
-synchronization.
+kernel check. Exact local implementation checkpoint:
+`d8b450222273167ab326701c76fff03f0f539b18`.
 DISPLAYED-ND-HIGHER-1B is the next proposal/audit; it must separately qualify
 the active existing-authority next-hom package before implementation. The
 recorded scale sequence resumes only after that selected ND work or an
@@ -853,8 +853,8 @@ the stale DISPLAYED-CHAIN-0A/1A implementation wording below: that slice is
 complete at its kernel, transfer, consumer, and ledger checkpoints. The
 three-level `a; b,c; d` stress, its separately reviewed measured closure,
 DISPLAYED-ND-0A/D-018 audit and review, and first recursive `:^nd`
-component-composition case are also complete and fully validated. Finish only
-the exact DISPLAYED-ND-1A checkpoint synchronization, then use the displayed
+component-composition case are also complete, fully validated, and
+checkpointed `d8b450222273167ab326701c76fff03f0f539b18`. Use the displayed
 plan's proposal/audit-only DISPLAYED-ND-HIGHER-1B row to qualify the active
 existing-authority next-hom package. The recorded scale order follows.
 `DECL-REFINE-1A`, generic parsing, and bulk protected-module transfer are not
