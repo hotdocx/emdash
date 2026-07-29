@@ -262,6 +262,17 @@ resumes. Exact D-021 review checkpoint:
 Exact DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
 `4db1ce8a80725c0030ac8908f416d412591620bd`.
 
+The first resumed row, SCALE-KIND-PI-1, has measured that no checker feature
+is missing. Both TypeScript and live Lambdapi accept Pi products only when
+the domain annotation has sort `TYPE`; a body of sort `TYPE` yields sort
+`TYPE`, and a body of sort `KIND` yields sort `KIND`. Both `KIND`-domain
+cells—including native `(A : TYPE)`—and `TYPE : TYPE` are rejected.
+Object-language polymorphism must use explicit codes/decoding, as active
+`Grpd : TYPE` and `τ : Grpd → TYPE` already do. The frozen
+D-DTTLF-LF-SORT-001 proposal therefore makes no checker/Core/Lambdapi semantic
+change; it only adds permanent matrix/code-universe evidence and corrects the
+misleading inductive boundary classification before SCALE-INDUCTIVE-1B.
+
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence
 of a missing mathematical kernel operation. `DECL-REFINE-1A` is consequently
@@ -908,7 +919,10 @@ surface consumer, tests, and demo. Preserve its green 1,071-test root gate,
 7/7 live higher-action audit, bounded active-kernel check, and exact
 implementation checkpoint
 `c5a23c208f614ec42c9037c3a05f377c1375746a`; then resume the recorded scale
-order.
+order. Preserve the SCALE-KIND-PI-1 executable product-sort audit and obtain
+or record its exact D-DTTLF-LF-SORT-001 decision before any correction. Its
+proposal preserves the checker and uses explicit code universes; it does not
+authorize native `TYPE` quantification.
 `DECL-REFINE-1A`, generic parsing, and bulk protected-module transfer are not
 the immediate critical path.
 

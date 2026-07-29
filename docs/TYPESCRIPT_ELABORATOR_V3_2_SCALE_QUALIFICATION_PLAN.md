@@ -125,7 +125,14 @@ are green. The 1,071-test root gate (1,023 active passes and 48 intentional
 skips), 7/7 live higher-action audit, and bounded active-kernel check also
 pass. Exact staged review passed and the local semantic checkpoint is
 `c5a23c208f614ec42c9037c3a05f377c1375746a`. The selected ND work returns
-control here. The following order is SCALE-KIND-PI-1,
+control here. SCALE-KIND-PI-1's executable TypeScript/live-Lambdapi audit now
+shows that the checker already implements the exact lambda-Pi product-sort
+matrix: only domain annotations of sort `TYPE` are permitted, while the body
+may have sort `TYPE` or `KIND`; native `(A : TYPE)` and `TYPE : TYPE` remain
+rejected. Its frozen D-DTTLF-LF-SORT-001 proposal selects no checker change,
+only permanent matrix/code-universe evidence and correction of a misleading
+inductive boundary label. A separate review is pending. The following order
+after that exact decision is
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -639,7 +646,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | pending | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Represent and check generated eliminator types/computation plus recursive/indexed and strict-positivity boundaries; no backend-generated owner is trusted without an explicit typed contract |
-| SCALE-KIND-PI-1 | pending exact LF review | SCALE-INDUCTIVE-1A | Reconcile the checker’s current rejection of a Π binder whose annotation is `TYPE` (and therefore has sort `KIND`) with the Lambdapi-aligned outer LF; distinguish universe/product formation from an assertion that `TYPE : TYPE` |
+| SCALE-KIND-PI-1 | executable audit/proposal complete and focused-green; exact H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 decision pending; proposal checkpoint pending | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserve the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Correct the misleading inductive boundary label and require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
 | SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines |
 | SCALE-MIXED-PHASE-1B | complete | SCALE-MIXED-PHASE-1A | Same-runtime-prefix proof phases compose in source order under one global priority, queue, metavariable session, and proof budget; each phase retains exact compile evidence and later runtime rules are not silently made visible |
@@ -1440,18 +1447,79 @@ SCALE-INDUCTIVE-1B retains the generated/recursive/indexed work, and the
 parent row remains in progress.
 
 The tranche also measured an independent outer-LF boundary. A declaration
-containing `Π A : TYPE, ...` currently reaches `CoreChecker.requireType`,
-which rejects the binder annotation because `TYPE` has checker sort `KIND`.
-That is not the same assertion as `TYPE : TYPE`; it is a product-formation
-policy question for the two-level LF. The active `τΣ_` signature does not hit
-the boundary because its outer parameters are typed by `Grpd`. No checker or
-profile semantics changed here. SCALE-KIND-PI-1 must resolve the exact
-Lambdapi-aligned TYPE/KIND rule under a separate LF review before the
-architecture can claim arbitrary polymorphic signature transfer.
+containing `Π A : TYPE, ...` reaches `CoreChecker.requireType`, which rejects
+the binder annotation because native `TYPE` has checker sort `KIND`. The
+subsequent SCALE-KIND-PI-1 live audit confirms that this is not a missing
+checker feature: Lambdapi rejects the same product. Its lambda-Pi LF permits
+only a domain annotation of sort `TYPE`; a body of sort `TYPE` gives a
+`TYPE`-sorted product and a body of sort `KIND` gives a `KIND`-sorted product.
+Both products whose domain annotation has sort `KIND` are rejected, and
+`TYPE : TYPE` is independently false.
+
+Object-language polymorphism therefore uses an explicit universe of codes,
+schematically `Type : TYPE` and `El : Type → TYPE`. The active emdash
+analogue is already `Grpd : TYPE` and `τ : Grpd → TYPE`; this is why the
+active `τΣ_` signature does not hit the boundary. The compiler must preserve
+such explicit authority rather than inventing a native universe or silently
+translating `(A : TYPE)`.
 
 The subsequently completed `SCALE-MIXED-PHASE-1A` depended only on this
 signature phase and therefore proceeded without guessing either generated
 induction semantics or the TYPE/KIND policy.
+
+## SCALE-KIND-PI-1 Audit And Frozen Proposal
+
+The executable audit is `src/v3_2/scale_kind_pi_audit.ts`; its focused test is
+`tests/v3_2_scale_kind_pi_audit_tests.ts`. It compares the current TypeScript
+checker with bounded live standalone Lambdapi probes:
+
+| domain-annotation sort | body sort | Lambdapi and TypeScript result |
+| --- | --- | --- |
+| `TYPE` | `TYPE` | accepted; product sort `TYPE` |
+| `TYPE` | `KIND` | accepted; product sort `KIND` |
+| `KIND` | `TYPE` | rejected; a Pi domain annotation must inhabit `TYPE` |
+| `KIND` | `KIND` | rejected; a Pi domain annotation must inhabit `TYPE` |
+
+The audit additionally checks a higher-kind binder annotation, separately
+confirms that Lambdapi rejects `TYPE : TYPE`, and checks a TypeScript
+`Type : TYPE`/`El : Type → TYPE` encoded-universe consumer. All seven focused
+tests pass with the live probe enabled. The checked conclusion is therefore
+`preserve-current-checker-and-use-explicit-code-universes`.
+
+The exact bounded correction proposed under
+H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 is:
+
+1. make no `CoreChecker`, Core term, outer-LF, or Lambdapi semantic change;
+2. retain the exact two accepted and two rejected product-sort cells above;
+3. rename the misleading checker test that conflated a rejected
+   `KIND`-domain product with “Type-in-Type” and preserve the separate
+   `TYPE : KIND`/not-`TYPE : TYPE` invariant;
+4. replace the misleading inductive/mixed boundary label
+   `kind-level-binder-compilation` with
+   `implicit-native-TYPE-parameter-encoding`: the transfer engine does not
+   invent an object-language code universe for an invalid native
+   `(A : TYPE)` parameter; and
+5. require the first SCALE-INDUCTIVE-1B generated-owner consumer to use an
+   explicit authority-aligned code universe/decoder, with `Grpd`/`τ` as the
+   current emdash precedent.
+
+This proposal adds no `TYPE : TYPE`, `KIND`-domain product, native
+higher-kinded quantification, implicit code-universe invention, generated
+eliminator, checker/Core semantic branch, Lambdapi source change, browser or
+release promotion, parser/bulk transfer, or broader Git authority.
+
+The exact non-self-authorizing decision is:
+
+> Approve H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 as proposed: preserve the
+> current Lambdapi-aligned lambda-Pi checker and exact product-sort matrix;
+> correct only the misleading test and inductive/mixed boundary
+> classification; require explicit code universes such as `Grpd`/`τ` for
+> subsequent generated-owner work; add no checker, Core, outer-LF, Lambdapi,
+> browser, parser, bulk-transfer, release, or broader Git semantic authority;
+> and stop if implementation would change any product judgment?
+
+Implementation requires a separate immutable review. The audit/proposal
+itself changes no checker or transfer behavior.
 
 Validation on 2026-07-25:
 
@@ -2612,11 +2680,15 @@ The exact question requiring a human answer is:
 ### H-DTTLF-LF-SORT-01 — Outer-LF Product-Sort Boundary
 
 Triggered by SCALE-KIND-PI-1 before changing the checker’s formation rule or
-the reviewed outer-LF profile. The proposal must compare the exact current
-Core `TYPE`/`KIND` judgments with Lambdapi’s accepted products, state which
-sort pairs are permitted, update positive and negative metatheory tests, and
-show that permitting a type-valued binder does not assert or reintroduce
-`TYPE : TYPE`. This gate does not block the independent mixed-phase planner.
+the reviewed outer-LF profile. The executable audit has now compared the exact
+Core `TYPE`/`KIND` judgments with live Lambdapi and found no checker gap:
+domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or
+`KIND`; `KIND`-domain products and `TYPE : TYPE` are rejected. The frozen
+D-DTTLF-LF-SORT-001 proposal therefore authorizes only permanent matrix/code-
+universe evidence and correction of the misleading inductive boundary
+classification. Any future proposal to broaden this matrix would require a
+new exact LF review. This gate does not block the independent mixed-phase
+planner.
 
 ### H-DTTLF-SCALE-03 — Mechanical-Transfer Qualification
 
@@ -2822,8 +2894,11 @@ relinking is the default; compare monotone checked signature-to-body module
 merging only after a measured independent-fragment need. Neither strategy may
 change LF/Core semantics. Once the displayed graduation, mixed-telescope
 stress, and `:^nd` audit return control here, resume in this order:
-SCALE-KIND-PI-1, SCALE-INDUCTIVE-1B, SCALE-STRESS-3C,
-SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently substitute the pending
+preserve the completed SCALE-KIND-PI-1 product-sort audit, obtain or record
+the exact D-DTTLF-LF-SORT-001 decision, implement only its no-semantic-change
+classification/evidence correction, and then continue with
+SCALE-INDUCTIVE-1B, SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do
+not silently substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
 
 Separate acquisition from semantic policy and runtime rewrites from
@@ -2869,6 +2944,21 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — SCALE-KIND-PI-1 audit found no checker gap.** The
+  executable four-cell TypeScript/live-Lambdapi matrix accepts only
+  `TYPE`-sorted domain annotations, with either `TYPE`- or `KIND`-sorted
+  bodies, and rejects both `KIND`-domain cells plus `TYPE : TYPE`. An explicit
+  code universe/decoder checks without a checker change, matching active
+  `Grpd`/`τ`. The frozen non-self-authorizing D-DTTLF-LF-SORT-001 proposal
+  selects only permanent evidence and correction of the misleading
+  `kind-level-binder-compilation` label before SCALE-INDUCTIVE-1B.
+- **2026-07-29 — DISPLAYED-ND-HIGHER-TARGET-1A returned control to scale.**
+  The existing-authority foundation, three target declarations, two
+  projection rules, isolated direct-TypeScript profile, runnable higher-cell
+  demo, and generic action consumer are complete at
+  `c5a23c208f614ec42c9037c3a05f377c1375746a`. The 1,071-test root gate, 7/7
+  live higher-action audit, and bounded active-kernel check pass with no new
+  checker, binder, Core intrinsic, or Lambdapi mathematics.
 - **2026-07-29 — DISPLAYED-ND-HIGHER-1B returned a dependency-first
   transfer gate.** The executable audit pins the exact active closure at
   thirteen identity/internalized-hom/opposite/presheaf prerequisites, three
