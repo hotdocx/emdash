@@ -137,6 +137,7 @@ export * from './scale_stress_3a2b_representation';
 export * from './scale_stress_3b_acquisition';
 export * from './scale_kind_pi_audit';
 export * from './scale_inductive_1b_proposal';
+export * from './scale_inductive_1b_review';
 export * from './directed_continuation_transfer';
 export * from './directed_continuation_runtime_transfer';
 export * from './metatheory';

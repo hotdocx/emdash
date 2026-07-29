@@ -142,10 +142,14 @@ The deeply frozen SCALE-INDUCTIVE-1B1 proposal represents the exact printed
 `ind_τΣ_` type and one beta as an explicit companion contract, compiles the
 polymorphic generated-first-projection consumer through the existing generic
 engines, and leaves direct recursion/strict positivity to measured
-SCALE-INDUCTIVE-1B2. It awaits the separate
-H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 review. Exact
-proposal/audit checkpoint:
-`830fb975756d1d13d8ddcb516690ea88b19d51d6`. The following
+SCALE-INDUCTIVE-1B2. A separate immutable review now records
+H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 as approved exactly
+as proposed under the user's standing unattended delegation with human
+supersession. It authorizes only the required nonrecursive indexed transfer
+contract and explicitly withholds an end-user inductive-declaration facade.
+Exact proposal/audit checkpoint:
+`830fb975756d1d13d8ddcb516690ea88b19d51d6`; proposal-ledger checkpoint:
+`ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59`. The following
 order is SCALE-INDUCTIVE-1B1, SCALE-INDUCTIVE-1B2,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -663,7 +667,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | in progress | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Parent row for explicit generated-owner contracts, parameter/index fidelity, recursive/indexed validation, and strict-positivity boundaries; no backend-generated owner is trusted from its name alone |
-| SCALE-INDUCTIVE-1B1 | proposal complete at `830fb975756d1d13d8ddcb516690ea88b19d51d6`; awaiting H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Correct the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; associate the exact explicit `ind_τΣ_` type and one beta as a checked companion contract; compile the polymorphic first-projection consumer through existing generic engines; qualify only the nonrecursive indexed case |
+| SCALE-INDUCTIVE-1B1 | separately reviewed-approved; implementation ready; proposal `830fb975756d1d13d8ddcb516690ea88b19d51d6`; ledger `ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59` | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Correct the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; associate the exact explicit `ind_τΣ_` type and one beta as a checked companion contract; compile the polymorphic first-projection consumer through existing generic engines; qualify only the nonrecursive indexed case |
 | SCALE-INDUCTIVE-1B2 | pending | SCALE-INDUCTIVE-1B1 | Use the measured `ind_nat` type/two betas to qualify direct structural recursion, recursive induction-hypothesis contracts, and negative strict-positivity rejection; keep mutual and general higher-order positivity separate unless active consumers require them |
 | SCALE-KIND-PI-1 | complete at `b4cb8d39bd31adc768784308263fd91d83ddeefe`; audit/proposal checkpoint `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserves the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
@@ -1704,6 +1708,30 @@ EMDASH_RUN_LAMBDAPI_SCALE_INDUCTIVE_PROBES=1 \
   aggregate node:test duration: 1,150,267 ms
 
 EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  passed
+```
+
+The separate immutable review is
+`src/v3_2/scale_inductive_1b_review.ts`; its focused test is
+`tests/v3_2_scale_inductive_1b_review_tests.ts`. Under the user's standing
+unattended delegation, after no immediate objection followed presentation of
+the checkpointed gate, it records D-DTTLF-SCALE-INDUCTIVE-001 as approved
+exactly as proposed with human supersession. It retains a cloned immutable
+proposal, pins both rollback checkpoints, authorizes only the six listed 1B1
+implementation effects, and separately denies direct recursion, recursive
+induction hypotheses, general strict positivity, automatic eliminator
+synthesis, an end-user inductive-declaration facade, parser/surface work,
+profile/browser promotion, Lambdapi changes, and wider Git actions.
+
+Review validation on 2026-07-29:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_scale_inductive_1b_review_tests.ts
+  5 tests: all passed
+
+./scripts/pnpmw run typecheck
+./scripts/pnpmw run lint
   passed
 ```
 
@@ -3120,6 +3148,13 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-SCALE-INDUCTIVE-001 separately reviewed.**
+  After the exact checkpointed gate was presented without an immediate
+  objection, the standing unattended delegation records approval as proposed
+  with human supersession. The immutable review authorizes only the required
+  nonrecursive indexed contract/correction and explicitly withholds recursive
+  induction, automatic synthesis, and an end-user inductive-declaration
+  facade. Five focused review tests, typecheck, and lint pass.
 - **2026-07-29 — SCALE-INDUCTIVE-1B1 audit exposed the parameter/index
   boundary and froze an exact proposal.** Live `print` evidence shows that
   `τΣ_`'s inline `a,P` binders vary in the generated motive, unlike fixed
