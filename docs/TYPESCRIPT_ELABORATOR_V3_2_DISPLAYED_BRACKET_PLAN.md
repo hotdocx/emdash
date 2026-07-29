@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; TypeScript transfer/consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012 | Promote exactly one `sigma_functord_sec` owner and six measured runtime rules; transfer three existing-signature/two existing-rule prerequisites plus the semantic delta through generic engines; add only the root-only `fibred-displayed-chain-1` profile and recursive `displayedDependentContextLambda` consumer; qualify the frozen object/arrow/reindexing/negative/non-collapse corpus |
+| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; generic transfer exposed one missing ambient `Terminal_obj` signature and is paused behind the frozen H-DTTLF-USABILITY-DISPLAYED-CHAIN-02/D-DTTLF-USABILITY-013 correction gate; consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012; pending TRANSFER-CORRECTION-0A | Promote exactly one `sigma_functord_sec` owner and six measured runtime rules; preserve the three chain-specific existing-signature/two existing-rule prerequisites; if separately approved, add only the pre-existing ambient `Terminal_obj` signature through the generic declaration compiler; add only the root-only `fibred-displayed-chain-1` profile and recursive `displayedDependentContextLambda` consumer; qualify the frozen object/arrow/reindexing/negative/non-collapse corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1579,6 +1579,55 @@ After a separate decision, the semantic delta would be the one owner and six
 rules above. All declarations and rules remain inputs to the generic transfer
 compilers; no intrinsic Core case and no Lambdapi string parser is selected.
 
+### Implementation-discovered ambient dependency correction
+
+Generic rule compilation found one precise inventory omission after D-012.
+Two of the approved six rules literally use the existing opaque
+`Terminal_obj` constant:
+
+```text
+fdapp1_int_cell(sigma_functord_sec(FF),(p,alpha),Terminal_obj)
+
+fdapp1_int_cell(Const(Terminal),E,s,q,Terminal_obj).
+```
+
+No earlier TypeScript fragment declares `Terminal_obj`. The generic compiler
+correctly rejects a pattern or template whose global has no typed declaration.
+This does not invalidate the selected mathematical closure, but it means that
+the approved list of three *chain-specific* signature prerequisites was not
+the complete ambient environment needed to compile the rules.
+
+The alternatives are not equivalent:
+
+- a wildcard in the first terminal slot broadens the active rule;
+- carrying the arbitrary source term to the second rule's RHS changes its
+  selected normal form;
+- native `tt` cannot replace `Terminal_obj`, because the latter is opaque and
+  is not definitionally equal to the unit constructor; and
+- an intrinsic Core constant would violate the generic-transfer boundary.
+
+The smallest faithful correction is therefore to retain the exact three
+chain-specific prerequisites and additionally transfer the pre-existing
+signature
+
+```text
+constant symbol Terminal_obj : τ (Obj Terminal_cat);
+```
+
+as one ambient dependency through the generic declaration compiler. The
+resulting partition is three chain-specific declarations plus one ambient
+constant, two pre-existing runtime rules, one new mathematical owner, and six
+new mathematical runtime rules. It requires no Lambdapi edit, new runtime
+rule, wildcard, intrinsic Core owner, parser, or checker layer.
+
+The deeply frozen, non-self-authorizing executable proposal is
+`src/v3_2/categorical_displayed_chain_transfer_correction_proposal.ts` under
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-02/D-DTTLF-USABILITY-013. It must receive a
+separate review before the TypeScript transfer relies on the extra ambient
+signature. The user's standing unattended delegation may authorize that
+separate review only after the unchanged proposal is presented, green, and
+locally checkpointed; any later human decision supersedes it.
+
 ### TypeScript consumer and scalability assessment
 
 The proposed root-only profile is `fibred-displayed-chain-1`, with a direct
@@ -1629,6 +1678,24 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-28 — DISPLAYED-CHAIN-TRANSFER-CORRECTION-0A proposed.** The
+  generic LF module builder rejected the unfinished D-012 transfer because
+  `Terminal_obj`, used literally by two approved arrow/action rules, has no
+  declaration in any earlier TypeScript fragment. Wildcard broadening,
+  carrying an arbitrary terminal term, substituting native `tt`, and adding
+  an intrinsic Core constant are all non-equivalent and rejected. The
+  smallest correction freezes one pre-existing ambient opaque signature
+  through the generic declaration compiler, while preserving the three
+  chain-specific declarations, two existing rules, one new owner, six new
+  rules, zero Lambdapi edits, and every scope/Git non-effect. The proposal is
+  non-self-authorizing. Its six focused tests, aggregate 929-test gate
+  (882 active passes, 47 intentional skips, zero failures), and 14-test live
+  canonical-export/acquisition gate pass. The prior kernel edit's live source
+  and canonical-export evidence is synchronized at checkpoint
+  `a09df520ac3b855c7f418f459bef0a9c71ff4d0c` without retroactively changing
+  the frozen D-012 proposal's recorded source snapshot. The correction awaits
+  the separate
+  H-DTTLF-USABILITY-DISPLAYED-CHAIN-02/D-DTTLF-USABILITY-013 review.
 - **2026-07-28 — DISPLAYED-CHAIN-1A Lambdapi closure implemented.** Promoted
   exactly the owner-position-tested `sigma_functord_sec` owner and six
   runtime rules. This is not an object-only context encoding: permanent
@@ -1928,6 +1995,20 @@ prerequisite and semantic closure through generic TypeScript engines; and add
 only the root-only recursive consumer. Do not assume a generic total-category
 pullback/equivalence, raw product-reindex equality, arbitrary mixed variance,
 or general :^nd coherence.
+
+Preserve the non-self-authorizing
+DISPLAYED-CHAIN-TRANSFER-CORRECTION-0A proposal. Generic compilation found
+that the literal active `Terminal_obj` appearing in two of the approved six
+rules is not declared by any earlier TypeScript fragment. The proposal keeps
+the D-012 three chain-specific declarations and two existing rules unchanged
+and requests only one additional pre-existing ambient `Terminal_obj`
+signature through the generic declaration compiler. It rejects wildcard
+broadening, carrying an arbitrary terminal term, replacing the opaque
+constant with native `tt`, and adding an intrinsic Core escape. If the exact
+proposal is green and locally checkpointed and no immediate human response
+follows its presentation, the standing unattended delegation permits a
+separate D-DTTLF-USABILITY-013 review with human supersession. Do not rely on
+the extra ambient signature before that separate review.
 
 For a future exact bounded gate in this goal, if no immediate human response
 follows presentation of its frozen proposal, the user's standing delegation
