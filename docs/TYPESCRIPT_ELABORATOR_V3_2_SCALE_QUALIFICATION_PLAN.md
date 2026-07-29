@@ -139,6 +139,10 @@ SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
 implementation/module-linking work, not a new LF semantic feature and not a
 prerequisite for the completed displayed-chain demo.
+Root-test parallelism is separately measured and deferred in
+`TYPESCRIPT_TEST_PARALLELISM_PLAN.md`: a two-process cache-heavy benchmark was
+slower than recent serial focused baselines, so naive 154-file/19-worker
+sharding is not a quick prerequisite for this scale sequence.
 Detailed-Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/

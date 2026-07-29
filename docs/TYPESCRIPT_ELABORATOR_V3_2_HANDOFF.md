@@ -277,6 +277,13 @@ corrects the misleading checker-test and inductive/mixed boundary
 classification. Exact staged review passed and the implementation checkpoint
 is `b4cb8d39bd31adc768784308263fd91d83ddeefe`. SCALE-INDUCTIVE-1B is next.
 
+Root-test parallelization is a measured, deferred side plan in
+`docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
+was slower than the recent serial focused baselines, so do not replace the
+single-process aggregate with Node's host-dependent nineteen-worker default.
+The side plan qualifies precompiled and coarse dependency-aware sharding
+without delaying semantic scale work.
+
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence
 of a missing mathematical kernel operation. `DECL-REFINE-1A` is consequently
