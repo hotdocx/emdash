@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; bounded COMPUTATION-CLOSURE-CORRECTION-0A proposal validated and checkpointed `adc7bcc804d932640bcfe505044b76948beec36e` under H-DTTLF-USABILITY-DISPLAYED-CHAIN-04/D-DTTLF-USABILITY-015; generic transfer/consumer pending that separate review | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, and CONST-FUNCTOR-CORRECTION-0A/D-014; computation-closure proposal awaiting D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
+| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; its seven focused tests, aggregate 959-test root gate, and bounded kernel check pass; generic transfer/consumer ready | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1719,6 +1719,70 @@ be recorded only after the unchanged proposal is presented, green, and
 locally checkpointed, remains supersedable by a later human decision, and
 authorizes no scope beyond this bounded computation closure.
 
+#### Mechanical-transfer qualification
+
+“Checked mirror” and “opaque `piapp0`” describe TypeScript transfer state,
+not new emdash semantics and not immutability of the active Lambdapi kernel.
+The Lambdapi source remains living and may be corrected or extended under
+its normal SOP whenever a mathematical or computational gap is found.
+
+The `Obj_func` mirror is an exact TypeScript declaration with the active
+signature and transparent body, checked by the generic LF compiler and
+deterministically mapped back to backend owner `Obj_func`. It has a distinct
+local Core name only because the earlier TypeScript slice imported
+`Obj_func` opaquely and the current generic environment has no operation for
+refining an already-declared opaque Core name to a transparent definition.
+Changing the completed earlier slice directly also changes the live counts
+consulted by its historical graduation validator. The mirror therefore
+preserves checkpoint isolation; it is not a new kernel owner, evaluator case,
+or mathematical construction.
+
+Likewise, `piapp0` is transparent in Lambdapi but was deliberately imported
+signature-only by DIRECTED-1C. Its selected TypeScript normal-form
+specialization is derived mechanically from the exact active `piapp0` and
+`piapp0_func` bodies plus existing application/composition equations. It is a
+bounded alternative to importing that larger transparent dependency graph
+in this consumer, not evidence that the body is unavailable or mysterious.
+
+This closure is adequate for DISPLAYED-CHAIN-1A, but it does not settle the
+ultimate bulk-import representation. The existing
+SCALE-INTRINSIC-DELTA-1 mechanism already checks a transparent definition
+against an existing *intrinsic Core owner*, preserves that owner's identity,
+unfolds it under the shared reduction budget, and rejects dependency cycles.
+`Obj_func` is a different case: it is a transferred free declaration with a
+canonical backend owner, so the mixed declaration context currently rejects
+a later occurrence as a duplicate rather than recognizing an exact
+opaque-to-transparent refinement.
+
+The recommended later `DECL-REFINE-1A` qualification therefore extends the
+existing checked-delta architecture rather than inventing a second
+definition mechanism:
+
+```text
+absent -> opaque(canonical signature)
+       -> transparent(same signature, checked body)
+```
+
+The merge key is the qualified active owner/backend identity. The transition
+must preserve the exact type, plicity, visibility, linkage, and provenance
+contract; check the body and its dependency closure through the generic LF
+compiler; retain one logical Core identity and one emitted backend owner; be
+independent of fragment-composition order; and reject changed signatures,
+conflicting bodies, reverse refinement, or unsupported cycles. A consumer
+should be able to request signature-only or transparent availability, with
+only the reachable body dependency closure acquired. Exact transparent
+import is the default for bounded closures; a typed normal-form summary
+remains an explicitly recorded optimization for a deliberately deferred
+larger body, not a replacement for declaration refinement.
+
+The first acceptance corpus should import `Obj_func` opaquely, refine it in a
+later fragment, remove the local mirror, preserve one Core/backend identity,
+and close the displayed-chain computation. One unrelated free definition
+must repeat the result, while conflict/order/cycle negatives fail closed.
+`piapp0` is the subsequent larger-closure stress case. This qualification is
+deliberately deferred until after the current end-user demo slice and does
+not reopen the one-owner/six-rule mathematics or authorize bulk acquisition.
+
 ### TypeScript consumer and scalability assessment
 
 The proposed root-only profile is `fibred-displayed-chain-1`, with a direct
@@ -1769,6 +1833,22 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-USABILITY-015 approved under delegated unattended
+  authority.** The frozen computation-closure proposal was presented only
+  after its exact proposal and ledger checkpoints were green. No immediate
+  human response superseded the user's standing delegation, so a separate
+  immutable review records approval-as-proposed with human supersession. It
+  authorizes only the two restored transparent transport bodies, one exact
+  checked `Obj_func` mirror, five exact existing equations, one typed
+  `piapp0` normal-form specialization, and one typed unused-term capture.
+  The mathematical delta remains one owner/six rules; no Lambdapi edit,
+  mutation of the completed weakening transfer, global DIRECTED-1C
+  transparency, intrinsic owner, subject oracle, semantic-rule broadening,
+  parser/checker layer, browser promotion, or bulk transfer is authorized.
+  Seven focused review tests, root typecheck/lint, the aggregate 959-test
+  root gate (912 active passes, 47 intentional skips, zero failures), and
+  the bounded active-kernel check pass. Exact separate review checkpoint:
+  `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`.
 - **2026-07-29 — DISPLAYED-CHAIN-COMPUTATION-CLOSURE-CORRECTION-0A
   proposed.** The D-013/D-014 linkage corrections allow generic compilation
   to reach subject conversion. A rule-by-rule audit then identifies exactly
@@ -1784,7 +1864,7 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
   D-DTTLF-USABILITY-015 review. Six focused tests, root typecheck/lint, the
   aggregate 952-test root gate (905 active passes, 47 intentional skips,
   zero failures), and the bounded active-kernel check pass. Exact proposal
-  checkpoint: `adc7bcc804d932640bcfe505044b76948beec36e`.
+  checkpoint: `adc7bcc5677ec64efcb400b43e3182c40bf6ff10`.
 - **2026-07-28 — D-DTTLF-USABILITY-014 approved under delegated unattended
   authority.** After the exact unchanged proposal was presented, separately
   checkpointed, and its five focused tests, 940-test aggregate root gate,
@@ -2177,6 +2257,20 @@ The review authorizes only that pre-existing injective signature through the
 generic declaration compiler and keeps the D-012/D-013 semantic and Git
 boundaries unchanged. Do not infer any additional semantic or profile
 authority from the review.
+
+Preserve the non-self-authorizing
+DISPLAYED-CHAIN-COMPUTATION-CLOSURE-CORRECTION-0A proposal and its separate
+delegated D-015 review with human supersession. It authorizes only two exact
+transparent transport bodies, one exact checked `Obj_func` mirror, five
+exact existing equations, one typed `piapp0` normal-form specialization, and
+one typed unused-term capture. Keep the mathematical delta at one owner/six
+rules and preserve every recorded non-effect. The mirror is a bounded
+checkpoint-isolation bridge for a transferred free declaration; the existing
+SCALE-INTRINSIC-DELTA-1 intrinsic-owner facility does not yet refine that
+free declaration in place. Defer the generic DECL-REFINE-1A qualification
+and any bulk-transfer claim until after the displayed-chain demo. Preserve
+the exact separate review checkpoint
+`7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`.
 
 For a future exact bounded gate in this goal, if no immediate human response
 follows presentation of its frozen proposal, the user's standing delegation
