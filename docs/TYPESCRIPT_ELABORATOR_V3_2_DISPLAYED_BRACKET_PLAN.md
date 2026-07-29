@@ -264,7 +264,9 @@ methods. The three target owners, two projection rules, and rich TypeScript
 consumer remain a following separate decision. Seven focused live tests, the
 1,052-test root gate (1,004 active passes and 48 intentional skips), all 19
 live conformance judgments, and the bounded active-kernel check pass. D-019
-remains non-self-authorizing pending its separate review.
+is now approved exactly as proposed by a separate immutable delegated review
+with human supersession. Five focused review tests pass; only
+DISPLAYED-ND-HIGHER-FOUNDATION-1A is implementation-ready.
 
 Exact DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
 `4db1ce8a80725c0030ac8908f416d412591620bd`.
@@ -657,8 +659,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-2A-CLOSURE-0A | proposal/review checkpoints preserved; exact semantic and transfer closure complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | D-016 mandatory closure-drift stop plus separately reviewed D-017 | Zero new symbol, one componentwise existing-owner rule; three existing signatures; six exact, two derived, and one new TypeScript runtime entries; typed inferred-slot corrections; 512-step continuation budget with 256 default; zero oracle/intrinsic/owner-specific path |
 | DISPLAYED-ND-0A | executable read-only audit/proposal checkpointed `bc29f0d98de32fe0fdbad992859e97711e493e5c`; separate delegated D-018 review complete, fully green, and checkpointed `fb818203df88e68b27b2e5725737512010efdb13` with human supersession | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Separates coherent introduction from object/point/base-arrow/next-hom observation. Confirms the first three observations implemented; finds active but untransferred next-hom owners; rejects arbitrary pointwise coherence; selects one generic typed-cell-composition node and recursive outer-`Transfd` factoring for the exact first vertical-composition case with zero semantic/transfer delta. Final proposal gate: 1,029 TypeScript tests (982 active, 47 skipped); final review gate: 1,036 tests (989 active, 47 skipped); both pass 19/19 live conformance and the bounded active-kernel check |
 | DISPLAYED-ND-1A | implementation complete, fully validated, and checkpointed `d8b450222273167ab326701c76fff03f0f539b18` at the exact separately reviewed D-018 boundary | reviewed DISPLAYED-ND-0A audit/proposal | `composeCells` plus one generic `typed-cell-composition` IR node initially accepts only compatible `indexed-transfor` children; `displayedTransforLambda` recursively factors component leaves and nested vertical compositions to genuine outer `Transfd` terms through existing `comp_fapp0` at `Functord_cat`. Nine permanent tests plus the 1,045-test root gate (998 active, 47 skipped), 19/19 live conformance, and bounded active-kernel check cover recursive frozen evidence, component beta, a checked base-arrow cell, exact negatives, retained eta, and zero Lambdapi/transfer/intrinsic/checker/browser delta |
-| DISPLAYED-ND-HIGHER-1B | executable read-only audit complete and green; non-self-authorizing D-019 dependency-first proposal pending separate review | completed DISPLAYED-ND-1A and active canonical source/export evidence | Pins 13 prerequisite declarations plus three active `tdapp1_int_*_transfd` owners and two projection rules; proves target-only transfer is not closed; checks a concrete next-hom consumer; proposes only the 13-declaration rule-free foundation as DISPLAYED-ND-HIGHER-FOUNDATION-1A |
-| DISPLAYED-ND-HIGHER-FOUNDATION-1A | proposed only; no implementation authority before D-019 review | completed DISPLAYED-ND-HIGHER-1B audit | Transfer five source-transparent definitions and eight opaque/injective interfaces through the generic declaration engine, with zero rules, new mathematics, intrinsic owners, checker branches, or surface methods; mandatory stop on any unlisted dependency |
+| DISPLAYED-ND-HIGHER-1B | executable read-only audit complete at `4db1ce8a80725c0030ac8908f416d412591620bd`; separate delegated D-019 review complete and focused-green with human supersession; review checkpoint pending | completed DISPLAYED-ND-1A and active canonical source/export evidence | Pins 13 prerequisite declarations plus three active `tdapp1_int_*_transfd` owners and two projection rules; proves target-only transfer is not closed; checks a concrete next-hom consumer; selects only the 13-declaration rule-free foundation as DISPLAYED-ND-HIGHER-FOUNDATION-1A |
+| DISPLAYED-ND-HIGHER-FOUNDATION-1A | reviewed and implementation-ready at the exact D-019 boundary | completed DISPLAYED-ND-HIGHER-1B audit and separate D-019 review | Transfer five source-transparent definitions and eight opaque/injective interfaces through the generic declaration engine, with zero rules, new mathematics, intrinsic owners, checker branches, or surface methods; mandatory stop on any unlisted dependency |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
 
@@ -2799,10 +2801,13 @@ The audit embeds the following non-self-authorizing decision:
 > and broader Git authority for a later separate decision?
 
 The mandatory stop fires if any exact type or transparent body requires an
-unlisted owner, rule, intrinsic, or checker path. D-019 does not itself
-authorize the foundation implementation. The proposal must receive a
-separate immutable review, with human supersession, before semantic transfer
-begins.
+unlisted owner, rule, intrinsic, or checker path. The audit remains
+non-self-authorizing and unchanged. After the exact checkpointed proposal was
+presented without an immediate objection, the standing unattended delegation
+was exercised in the separate immutable
+`categorical_displayed_nd_higher_review.ts` record. Human supersession is
+retained. That review authorizes only FOUNDATION-1A; the target package and
+surface consumer remain outside it.
 
 Seven focused tests pass with the live canonical acquisition and consumer
 enabled. The complete root gate passes 1,052 tests: 1,004 active passes, 48
@@ -2814,6 +2819,14 @@ target remain outside this tranche.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-USABILITY-019 separately approved.** After the
+  exact audit/proposal checkpoint and ledger were presented without an
+  immediate objection, the standing unattended delegation recorded a
+  separate immutable review with human supersession. Five focused review
+  tests pass. It authorizes only the thirteen-declaration, zero-rule
+  FOUNDATION-1A and retains the three higher-action owners, two projection
+  rules, rich surface consumer, and all broader non-effects for a later
+  decision.
 - **2026-07-29 — DISPLAYED-ND-HIGHER-1B executable audit and D-019
   dependency-first proposal complete.** The audit pins an eighteen-command
   active source closure: thirteen identity/internalized-hom/opposite/presheaf
@@ -3369,11 +3382,19 @@ without weakening old contracts. Its D-019 proposal selects only
 DISPLAYED-ND-HIGHER-FOUNDATION-1A: five checked transparent definitions,
 eight opaque signatures, zero rules, reuse/extraction of the already reviewed
 SCALE-STRESS-3A2A `id` representation without its unrelated profunctor
-profile, and a mandatory drift stop. Obtain or record the required separate
-immutable D-019 review before implementing that foundation. Keep the three
-target owners, two projection rules, rich surface consumer, identity-cell
-syntax, arbitrary pointwise coherence, mixed variance, composite base-arrow
-normalization, parsing, deployment, and scale promotion separately gated.
+profile, and a mandatory drift stop. Preserve the separate immutable D-019
+review with human supersession and implement only that foundation. Keep the
+three target owners, two projection rules, rich surface consumer,
+identity-cell syntax, arbitrary pointwise coherence, mixed variance,
+composite base-arrow normalization, parsing, deployment, and scale promotion
+separately gated.
+
+Keep the critical path capability-first: implement and exercise the reviewed
+foundation, then qualify the higher-action target and recursive TypeScript
+consumer. Add transfer/acquisition/DevOps infrastructure only when that
+consumer exposes a measured blocker. Use focused tests during implementation
+and one aggregate root gate per bounded semantic tranche; do not rerun the
+aggregate gate merely to record a documentation-only checkpoint hash.
 
 For later dependency-ready gates in this same persistent goal, the same
 standing delegation applies only after an exact bounded proposal has been

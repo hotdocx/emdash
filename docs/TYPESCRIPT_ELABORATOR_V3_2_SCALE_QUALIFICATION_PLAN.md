@@ -111,9 +111,10 @@ SCALE-STRESS-3A2A `id` representation is reusable/extractable without its
 unrelated profunctor profile; no new mathematics, intrinsic owner, checker
 branch, or surface method is needed. Seven focused live tests,
 the 1,052-test root gate (1,004 active passes, 48 intentional skips), 19/19
-live conformance, and the bounded active-kernel check pass. A separate D-019
-review is the next gate. Once the selected ND work returns control here, the
-order is SCALE-KIND-PI-1,
+live conformance, and the bounded active-kernel check pass. A separate
+immutable delegated D-019 review now approves only that foundation with
+human supersession; its focused gate passes. Once the selected ND work
+returns control here, the order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2736,10 +2737,10 @@ exact closure is thirteen prerequisite declarations, three
 live consumer passes; and the target-only transfer is not closed. Preserve
 its D-019 proposal for only rule-free
 DISPLAYED-ND-HIGHER-FOUNDATION-1A—five checked transparent definitions and
-eight opaque signatures—and require the separate immutable D-019 review
-before implementation. Keep the target owners, projection rules, and rich
-surface consumer behind the following separate decision before resuming this
-scale ledger.
+eight opaque signatures—and preserve its separate immutable delegated D-019
+review with human supersession. Implement only that foundation. Keep the
+target owners, projection rules, and rich surface consumer behind the
+following separate decision before resuming this scale ledger.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit

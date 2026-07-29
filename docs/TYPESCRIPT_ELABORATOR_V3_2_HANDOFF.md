@@ -235,11 +235,12 @@ already has a reviewed isolated SCALE-STRESS-3A2A representation; reuse or
 extract it without importing that row's unrelated profunctor profile. The
 three target owners, two rules, and rich TypeScript consumer remain a later
 separate decision. Seven focused live tests, the 1,052-test root gate (1,004
-active passes and 48
-intentional skips), all 19 live conformance judgments, and the bounded
-active-kernel check pass. A separate D-019 review is the next gate; the
-recorded scale sequence resumes only after that selected ND work or an
-explicit priority change.
+active passes and 48 intentional skips), all 19 live conformance judgments,
+and the bounded active-kernel check pass. The separate D-019 review is now
+recorded under the standing unattended delegation with human supersession
+and five focused passing tests. Only FOUNDATION-1A is
+implementation-ready; the recorded scale sequence resumes only after the
+selected ND work or an explicit priority change.
 Exact DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
 `4db1ce8a80725c0030ac8908f416d412591620bd`.
 
@@ -879,10 +880,9 @@ three-level `a; b,c; d` stress, its separately reviewed measured closure,
 DISPLAYED-ND-0A/D-018 audit and review, and first recursive `:^nd`
 component-composition case are also complete, fully validated, and
 checkpointed `d8b450222273167ab326701c76fff03f0f539b18`. Use the displayed
-plan's completed DISPLAYED-ND-HIGHER-1B audit and non-self-authorizing D-019
+plan's completed DISPLAYED-ND-HIGHER-1B audit and separately reviewed D-019
 proposal. It proves that the three-owner/two-rule higher-action target first
-needs the exact thirteen-declaration rule-free foundation. The next gate is the
-separate D-019 review of only
+needs the exact thirteen-declaration rule-free foundation. Implement only
 DISPLAYED-ND-HIGHER-FOUNDATION-1A; do not implement the target package or
 surface consumer under that foundation decision. The recorded scale order
 follows.

@@ -116,8 +116,9 @@ signatures, with zero rules—before a later separate target/surface decision.
 The `id` signature can reuse or extract its already reviewed isolated
 SCALE-STRESS-3A2A representation without importing that row's unrelated
 profunctor profile. Exact downstream audit/proposal checkpoint:
-`4db1ce8a80725c0030ac8908f416d412591620bd`. The active displayed and scale
-ledgers govern that review and implementation.
+`4db1ce8a80725c0030ac8908f416d412591620bd`. A separate immutable delegated
+D-019 review with human supersession now authorizes only that foundation.
+The active displayed and scale ledgers govern its implementation.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
