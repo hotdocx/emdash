@@ -234,12 +234,14 @@ branch, and a mandatory dependency-drift stop. Its exact `id` signature
 already has a reviewed isolated SCALE-STRESS-3A2A representation; reuse or
 extract it without importing that row's unrelated profunctor profile. The
 three target owners, two rules, and rich TypeScript consumer remain a later
-separate decision. Seven
-focused live tests, the 1,052-test root gate (1,004 active passes and 48
+separate decision. Seven focused live tests, the 1,052-test root gate (1,004
+active passes and 48
 intentional skips), all 19 live conformance judgments, and the bounded
 active-kernel check pass. A separate D-019 review is the next gate; the
 recorded scale sequence resumes only after that selected ND work or an
 explicit priority change.
+Exact DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
+`4db1ce8a80725c0030ac8908f416d412591620bd`.
 
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence

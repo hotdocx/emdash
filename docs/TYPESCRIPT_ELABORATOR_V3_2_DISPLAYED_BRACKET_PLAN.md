@@ -266,6 +266,9 @@ consumer remain a following separate decision. Seven focused live tests, the
 live conformance judgments, and the bounded active-kernel check pass. D-019
 remains non-self-authorizing pending its separate review.
 
+Exact DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
+`4db1ce8a80725c0030ac8908f416d412591620bd`.
+
 ## Authority And Relationship To The Completed Architecture
 
 The active mathematical authority remains the Lambdapi v3.2 development

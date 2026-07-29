@@ -115,8 +115,9 @@ foundation—five checked transparent definitions and eight opaque/injective
 signatures, with zero rules—before a later separate target/surface decision.
 The `id` signature can reuse or extract its already reviewed isolated
 SCALE-STRESS-3A2A representation without importing that row's unrelated
-profunctor profile. The active
-displayed and scale ledgers govern that review and implementation.
+profunctor profile. Exact downstream audit/proposal checkpoint:
+`4db1ce8a80725c0030ac8908f416d412591620bd`. The active displayed and scale
+ledgers govern that review and implementation.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:

@@ -232,6 +232,8 @@ USABILITY-GRADUATE-1 review implementation checkpoint:
 `735ad90fbc99024b0e01ef3f76666fd715652c5b`
 USABILITY-DEPENDENT-1A implementation checkpoint:
 `62ef5b37ac9fcd26cec144ee2efeb4e5009be41b`
+DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
+`4db1ce8a80725c0030ac8908f416d412591620bd`
 
 ## Purpose
 

@@ -194,6 +194,8 @@ focused live tests, the 1,052-test root gate (1,004 active passes and 48
 intentional skips), 19/19 live conformance, and the bounded active-kernel
 check pass. The next action is a separate immutable D-019 review, not
 semantic implementation under the audit itself.
+DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
+`4db1ce8a80725c0030ac8908f416d412591620bd`.
 D-017 proposal checkpoint:
 `f647791281095e02c6ebe3f1490e272b4e58c7a0`. D-017 delegated-review
 checkpoint: `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`.
