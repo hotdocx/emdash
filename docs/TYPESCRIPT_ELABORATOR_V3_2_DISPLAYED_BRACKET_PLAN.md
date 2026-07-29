@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; its seven focused tests, aggregate 959-test root gate, and bounded kernel check pass; generic transfer/consumer ready | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
+| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is implemented and green with five focused tests and the aggregate 964-test root gate (917 active passes, 47 intentional skips, zero failures); root-only recursive consumer next | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1754,34 +1754,58 @@ canonical backend owner, so the mixed declaration context currently rejects
 a later occurrence as a duplicate rather than recognizing an exact
 opaque-to-transparent refinement.
 
-The recommended later `DECL-REFINE-1A` qualification therefore extends the
-existing checked-delta architecture rather than inventing a second
-definition mechanism:
+`DECL-REFINE-1A` is therefore a later *transfer/linking architecture
+qualification*, not a predetermined LF feature and not evidence for a new
+semantic operation. The semantic fact remains the ordinary Lambdapi one:
+one owner has one canonical signature and, when transparent, one body. The
+opaque/transparent split exists only because incremental TypeScript slices
+acquired different amounts of that same declaration.
+
+The qualification must compare two generic strategies before selecting
+either one:
+
+1. **Dependency-closed canonical relinking.** Re-resolve the consumer's
+   reachable declaration closure and compile `Obj_func` once, transparently,
+   under its canonical Core/backend identity. If this removes the mirror
+   without disturbing frozen predecessor evidence, no declaration-refinement
+   operation is needed.
+2. **Monotone checked module linking.** If independently compiled fragments
+   must compose without recompilation, generalize the existing checked-delta
+   machinery so a later body can refine the same previously imported free
+   signature:
 
 ```text
 absent -> opaque(canonical signature)
        -> transparent(same signature, checked body)
 ```
 
-The merge key is the qualified active owner/backend identity. The transition
-must preserve the exact type, plicity, visibility, linkage, and provenance
-contract; check the body and its dependency closure through the generic LF
-compiler; retain one logical Core identity and one emitted backend owner; be
-independent of fragment-composition order; and reject changed signatures,
-conflicting bodies, reverse refinement, or unsupported cycles. A consumer
-should be able to request signature-only or transparent availability, with
-only the reachable body dependency closure acquired. Exact transparent
-import is the default for bounded closures; a typed normal-form summary
-remains an explicitly recorded optimization for a deliberately deferred
-larger body, not a replacement for declaration refinement.
+For the second strategy, the merge key is the qualified active owner/backend
+identity. The transition must preserve the exact type, plicity, visibility,
+linkage, and provenance contract; check the body and its dependency closure
+through the generic LF compiler; retain one logical Core identity and one
+emitted backend owner; be independent of fragment-composition order; and
+reject changed signatures, conflicting bodies, reverse refinement, or
+unsupported cycles.
 
-The first acceptance corpus should import `Obj_func` opaquely, refine it in a
-later fragment, remove the local mirror, preserve one Core/backend identity,
-and close the displayed-chain computation. One unrelated free definition
-must repeat the result, while conflict/order/cycle negatives fail closed.
-`piapp0` is the subsequent larger-closure stress case. This qualification is
-deliberately deferred until after the current end-user demo slice and does
-not reopen the one-owner/six-rule mathematics or authorize bulk acquisition.
+Both strategies must let a consumer request signature-only or transparent
+availability while acquiring only the reachable body dependency closure.
+Neither may add a Core term former, evaluator law, rewrite rule, proof rule,
+kernel owner, or alternative LF semantics. Exact transparent import is the
+default for bounded closures; a typed normal-form summary remains an
+explicitly recorded optimization for a deliberately deferred larger body,
+not a substitute for canonical definition availability.
+
+The first acceptance corpus should remove the local `Obj_func` mirror,
+preserve one Core/backend identity, and close the displayed-chain
+computation through each feasible strategy. The selection should use
+implementation size, recompilation/incrementality requirements, frozen
+evidence stability, and failure-surface measurements rather than assuming
+that refinement is semantically necessary. If monotone linking remains a
+candidate, one unrelated free definition must repeat the result while
+conflict/order/cycle negatives fail closed. `piapp0` is the subsequent
+larger-closure stress case. This qualification is deliberately deferred
+until after the current end-user demo slice and does not reopen the
+one-owner/six-rule mathematics or authorize bulk acquisition.
 
 ### TypeScript consumer and scalability assessment
 
@@ -1833,6 +1857,23 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-CHAIN-1A generic TypeScript transfer
+  implemented.** The generic declaration compiler checks the three
+  chain-specific prerequisites, two ambient prerequisites, one transparent
+  transfer-only `Obj_func` mirror, and the sole semantic
+  `sigma_functord_sec` owner. The generic runtime compiler checks five exact
+  existing equations, one typed `piapp0` normal-form specialization, and all
+  six approved semantic rules. The earlier transfd transfer now retains the
+  exact transparent bodies of `functord_transport_lhs_func` and
+  `functord_transport_rhs_func`. The transfer boundary proves that the mirror
+  emits backend owner `Obj_func` while adding zero backend or mathematical
+  owners; every runtime subject is TypeScript-checked and no diagnostic rule
+  is installed. Five focused tests, root typecheck/lint, and the aggregate
+  964-test root gate (917 active passes, 47 intentional skips, zero failures)
+  pass. The separate deferred `DECL-REFINE-1A` qualification is clarified as
+  a comparison of dependency-closed canonical relinking and monotone checked
+  module linking, not a new LF/Core semantic feature. The root-only recursive
+  displayed-chain consumer remains next.
 - **2026-07-29 — D-DTTLF-USABILITY-015 approved under delegated unattended
   authority.** The frozen computation-closure proposal was presented only
   after its exact proposal and ledger checkpoints were green. No immediate
@@ -2267,8 +2308,11 @@ one typed unused-term capture. Keep the mathematical delta at one owner/six
 rules and preserve every recorded non-effect. The mirror is a bounded
 checkpoint-isolation bridge for a transferred free declaration; the existing
 SCALE-INTRINSIC-DELTA-1 intrinsic-owner facility does not yet refine that
-free declaration in place. Defer the generic DECL-REFINE-1A qualification
-and any bulk-transfer claim until after the displayed-chain demo. Preserve
+free declaration in place. Defer the generic DECL-REFINE-1A qualification,
+which must compare dependency-closed canonical relinking with monotone
+checked signature-to-body merging and select the simpler adequate strategy,
+and any bulk-transfer claim until after the displayed-chain demo. Neither
+candidate may change LF/Core semantics. Preserve
 the exact separate review checkpoint
 `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`.
 

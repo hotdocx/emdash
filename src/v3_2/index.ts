@@ -93,6 +93,7 @@ export * from './categorical_displayed_chain_constant_functor_correction_proposa
 export * from './categorical_displayed_chain_constant_functor_correction_review';
 export * from './categorical_displayed_chain_computation_closure_correction_proposal';
 export * from './categorical_displayed_chain_computation_closure_correction_review';
+export * from './categorical_displayed_chain_transfer';
 export * from './categorical_usability_graduation_proposal';
 export * from './categorical_usability_graduation_review';
 export * from './categorical_dependent_usability_proposal';

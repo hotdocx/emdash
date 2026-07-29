@@ -143,6 +143,8 @@ const displayedFunctorCategory =
     );
 const functorObject =
     coreDirectedContinuationTransferSymbol('functor-object');
+const functorHomCapped =
+    coreDirectedContinuationTransferSymbol('functor-hom-capped');
 const {
     functorCategory
 } = CORE_CATEGORICAL_STRUCTURAL_SYMBOLS;
@@ -399,6 +401,26 @@ const fapp0At = (
         { plicity: 'implicit', value: target },
         { plicity: 'explicit', value: functor },
         { plicity: 'explicit', value: object }
+    ]);
+
+const transportAt = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression,
+    family: CoreLfTransferBuilderExpression,
+    sourcePoint: CoreLfTransferBuilderExpression,
+    targetPoint: CoreLfTransferBuilderExpression,
+    arrow: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, functorHomCapped, [
+        { plicity: 'implicit', value: base },
+        {
+            plicity: 'implicit',
+            value: builder.global(categoryOfCategories)
+        },
+        { plicity: 'explicit', value: family },
+        { plicity: 'implicit', value: sourcePoint },
+        { plicity: 'implicit', value: targetPoint },
+        { plicity: 'explicit', value: arrow }
     ]);
 
 const displayedComponentAt = (
@@ -716,6 +738,108 @@ const transportType = (
     ));
 };
 
+const transportBody = (
+    side: 'lhs' | 'rhs'
+): CoreLfTransferExpression => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.lam(
+        'K',
+        builder.global(category),
+        K => builder.lam(
+            'E',
+            displayedFamilyType(builder, K),
+            E => builder.lam(
+                'D',
+                displayedFamilyType(builder, K),
+                D => builder.lam(
+                    'FF',
+                    displayedFunctorType(builder, K, E, D),
+                    FF => builder.lam(
+                        'x',
+                        objectType(builder, K),
+                        x => builder.lam(
+                            'y',
+                            objectType(builder, K),
+                            y => builder.lam(
+                                'p',
+                                homType(builder, K, x, y),
+                                p => {
+                                    const fibreEx =
+                                        fibreCategoryAt(builder, K, E, x);
+                                    const fibreEy =
+                                        fibreCategoryAt(builder, K, E, y);
+                                    const fibreDx =
+                                        fibreCategoryAt(builder, K, D, x);
+                                    const fibreDy =
+                                        fibreCategoryAt(builder, K, D, y);
+                                    return side === 'lhs'
+                                        ? composeAt(
+                                            builder,
+                                            builder.global(
+                                                categoryOfCategories
+                                            ),
+                                            fibreEx,
+                                            fibreDx,
+                                            fibreDy,
+                                            transportAt(
+                                                builder,
+                                                K,
+                                                D,
+                                                x,
+                                                y,
+                                                p
+                                            ),
+                                            fibreFunctorAt(
+                                                builder,
+                                                K,
+                                                E,
+                                                D,
+                                                FF,
+                                                x
+                                            )
+                                        )
+                                        : composeAt(
+                                            builder,
+                                            builder.global(
+                                                categoryOfCategories
+                                            ),
+                                            fibreEx,
+                                            fibreEy,
+                                            fibreDy,
+                                            fibreFunctorAt(
+                                                builder,
+                                                K,
+                                                E,
+                                                D,
+                                                FF,
+                                                y
+                                            ),
+                                            transportAt(
+                                                builder,
+                                                K,
+                                                E,
+                                                x,
+                                                y,
+                                                p
+                                            )
+                                        );
+                                },
+                                explicitMode
+                            ),
+                            implicitMode
+                        ),
+                        implicitMode
+                    ),
+                    explicitMode
+                ),
+                implicitMode
+            ),
+            implicitMode
+        ),
+        implicitMode
+    ));
+};
+
 const higherCellType = (): CoreLfTransferExpression => {
     const builder = new CoreLfTransferScopedBuilder();
     return builder.term(builder.pi(
@@ -954,7 +1078,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = Object.freeze([
         order: 3,
         symbol: transportLhs,
         type: transportType(transportLhs),
-        body: coreLfTransferAbsentBody(),
+        body: coreLfTransferExplicitBody(transportBody('lhs')),
         modifiers: publicModifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol functord_transport_lhs_func [K : Cat] ' +
@@ -966,7 +1090,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = Object.freeze([
         order: 4,
         symbol: transportRhs,
         type: transportType(transportRhs),
-        body: coreLfTransferAbsentBody(),
+        body: coreLfTransferExplicitBody(transportBody('rhs')),
         modifiers: publicModifiers('ordinary', 'transparent'),
         provenance: source(
             'symbol functord_transport_rhs_func [K : Cat] ' +
@@ -999,8 +1123,10 @@ const declarationExternalSymbols = Object.freeze([
     displayedCategoryCategory,
     displayedFunctorCategory,
     functorObject,
+    functorHomCapped,
     displayedFamilyClassifier,
-    fibreFunctor
+    fibreFunctor,
+    genericComposition
 ]);
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE:
@@ -1037,6 +1163,8 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
             policy:
                 declaration.symbol ===
                     displayedTransformationClassifier
+                    || declaration.symbol === transportLhs
+                    || declaration.symbol === transportRhs
                     ? 'checked-transparent-definition' as const
                     : 'opaque-signature' as const,
             evidence: declaration.order < 3
@@ -1643,7 +1771,6 @@ const runtimeExternalSymbols = Object.freeze([
     sigmaCategory,
     functorCategory,
     terminalCategory,
-    genericComposition,
     sigmaProjectionPullback,
     displayedTransformationCategory,
     displayedTransformationClassifier,
