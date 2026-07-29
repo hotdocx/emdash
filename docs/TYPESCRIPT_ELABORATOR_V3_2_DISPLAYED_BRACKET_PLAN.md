@@ -255,18 +255,23 @@ that a cell in `Hom(Transfd_cat(FF,GG),epsilon,epsilon')` is mapped by
 `tdapp1_int_fapp1_func_transfd` to the next internalized-hom cell and that
 the generic `fapp1_func` spelling computes to the capped owner.
 
-The embedded D-019 proposal therefore authorizes no higher-action semantics
-yet. It selects only dependency-first
+The embedded D-019 proposal selected only dependency-first
 DISPLAYED-ND-HIGHER-FOUNDATION-1A: five checked transparent definitions and
 eight opaque/injective signatures, with zero rules, zero new mathematical
 owners, zero intrinsic owners, zero checker branches, and zero surface
-methods. The three target owners, two projection rules, and rich TypeScript
-consumer remain a following separate decision. Seven focused live tests, the
+methods. Seven focused live tests, the
 1,052-test root gate (1,004 active passes and 48 intentional skips), all 19
 live conformance judgments, and the bounded active-kernel check pass. D-019
 is now approved exactly as proposed by a separate immutable delegated review
-with human supersession. Five focused review tests pass; only
-DISPLAYED-ND-HIGHER-FOUNDATION-1A is implementation-ready.
+with human supersession at
+`f674be92ae04eff5642428724053fb4e75274e50`. D-020's measured dependency
+correction and the foundation are complete at
+`fead6e10a625c0402eb6e5c2f6336c797e70f29e`. Separately reviewed D-021 then
+authorizes the three target owners, two projection rules, and rich
+TypeScript consumer. That target, runnable demo, and eight focused tests are
+green. Its 1,071-test root gate, 7/7 live higher-action audit, and bounded
+active-kernel check pass; exact staged review and the semantic checkpoint
+remain.
 
 Exact DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
 `4db1ce8a80725c0030ac8908f416d412591620bd`.
@@ -659,9 +664,9 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-2A-CLOSURE-0A | proposal/review checkpoints preserved; exact semantic and transfer closure complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | D-016 mandatory closure-drift stop plus separately reviewed D-017 | Zero new symbol, one componentwise existing-owner rule; three existing signatures; six exact, two derived, and one new TypeScript runtime entries; typed inferred-slot corrections; 512-step continuation budget with 256 default; zero oracle/intrinsic/owner-specific path |
 | DISPLAYED-ND-0A | executable read-only audit/proposal checkpointed `bc29f0d98de32fe0fdbad992859e97711e493e5c`; separate delegated D-018 review complete, fully green, and checkpointed `fb818203df88e68b27b2e5725737512010efdb13` with human supersession | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Separates coherent introduction from object/point/base-arrow/next-hom observation. Confirms the first three observations implemented; finds active but untransferred next-hom owners; rejects arbitrary pointwise coherence; selects one generic typed-cell-composition node and recursive outer-`Transfd` factoring for the exact first vertical-composition case with zero semantic/transfer delta. Final proposal gate: 1,029 TypeScript tests (982 active, 47 skipped); final review gate: 1,036 tests (989 active, 47 skipped); both pass 19/19 live conformance and the bounded active-kernel check |
 | DISPLAYED-ND-1A | implementation complete, fully validated, and checkpointed `d8b450222273167ab326701c76fff03f0f539b18` at the exact separately reviewed D-018 boundary | reviewed DISPLAYED-ND-0A audit/proposal | `composeCells` plus one generic `typed-cell-composition` IR node initially accepts only compatible `indexed-transfor` children; `displayedTransforLambda` recursively factors component leaves and nested vertical compositions to genuine outer `Transfd` terms through existing `comp_fapp0` at `Functord_cat`. Nine permanent tests plus the 1,045-test root gate (998 active, 47 skipped), 19/19 live conformance, and bounded active-kernel check cover recursive frozen evidence, component beta, a checked base-arrow cell, exact negatives, retained eta, and zero Lambdapi/transfer/intrinsic/checker/browser delta |
-| DISPLAYED-ND-HIGHER-1B | executable read-only audit complete at `4db1ce8a80725c0030ac8908f416d412591620bd`; separate delegated D-019 review complete and focused-green with human supersession; review checkpoint pending | completed DISPLAYED-ND-1A and active canonical source/export evidence | Pins 13 prerequisite declarations plus three active `tdapp1_int_*_transfd` owners and two projection rules; proves target-only transfer is not closed; checks a concrete next-hom consumer; selects only the 13-declaration rule-free foundation as DISPLAYED-ND-HIGHER-FOUNDATION-1A |
-| DISPLAYED-ND-HIGHER-FOUNDATION-1A | D-020 directly approved; implementation and six focused tests green; checkpoint pending with this semantic tranche | completed DISPLAYED-ND-HIGHER-1B audit, separate D-019 review, and direct D-020 approval | All thirteen declarations compile through the generic engine with five unchanged checked-transparent bodies and eight opaque/injective interfaces; the omitted existing `Obj`/`Hom` links and ordinal-237 opposite involution close the dependency; no new Lambdapi mathematics, intrinsic owner, checker branch, or surface method |
-| DISPLAYED-ND-HIGHER-TARGET-1A | D-021 approved exactly as proposed by a separate minimal delegated review with human supersession; implementation-ready | green DISPLAYED-ND-HIGHER-FOUNDATION-1A and immutable proposal checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e` | Transfer the three existing `tdapp1_int_*_transfd` opaque declarations and two existing projection rules; add one isolated successor profile plus typed `displayedTransforCategory` and `displayedTransforInternalHomAction` constructors; reuse generic `displayedTransfor`, `hom`, `homBoundary`, and recursive `apply` for the concrete next-hom consumer |
+| DISPLAYED-ND-HIGHER-1B | executable read-only audit complete at `4db1ce8a80725c0030ac8908f416d412591620bd`; separate delegated D-019 review complete, focused-green, and checkpointed `f674be92ae04eff5642428724053fb4e75274e50` with human supersession | completed DISPLAYED-ND-1A and active canonical source/export evidence | Pins 13 prerequisite declarations plus three active `tdapp1_int_*_transfd` owners and two projection rules; proves target-only transfer is not closed; checks a concrete next-hom consumer; selects only the 13-declaration rule-free foundation as DISPLAYED-ND-HIGHER-FOUNDATION-1A |
+| DISPLAYED-ND-HIGHER-FOUNDATION-1A | complete and focused-green at checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e` under directly approved D-020 | completed DISPLAYED-ND-HIGHER-1B audit, separate D-019 review, and direct D-020 approval | All thirteen declarations compile through the generic engine with five unchanged checked-transparent bodies and eight opaque/injective interfaces; the omitted existing `Obj`/`Hom` links and ordinal-237 opposite involution close the dependency; no new Lambdapi mathematics, intrinsic owner, checker branch, or surface method |
+| DISPLAYED-ND-HIGHER-TARGET-1A | D-021 approved exactly as proposed by a separate minimal delegated review with human supersession at checkpoint `107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`; implementation and all validation green; semantic checkpoint pending | completed DISPLAYED-ND-HIGHER-FOUNDATION-1A and immutable proposal checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e` | Three existing opaque `tdapp1_int_*_transfd` declarations and two existing projection rules compile through generic engines. The isolated profile exposes typed `displayedTransforCategory` and `displayedTransforInternalHomAction`; generic `displayedTransfor`, `hom`, `homBoundary`, and recursive `apply` construct object action, whole-Hom action, and a checked higher cell. Eight focused tests, the runnable demo, the 1,071-test root gate, 7/7 live higher-action judgments, and bounded active-kernel check pass with no contextual IR, binder, checker, parser, browser, or Lambdapi semantic delta |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
 
@@ -2914,7 +2919,7 @@ m  = hom("m", C, epsilon, epsilon')
 H[epsilon] = apply(H, epsilon)
 H[epsilon -> epsilon'] =
   apply(H, homBoundary(C, epsilon, epsilon'), whole-hom-action)
-H[m] = apply(H[epsilon -> epsilon'], m, arrow-value)
+H[m] = apply(H[epsilon -> epsilon'], m, object-value)
 ```
 
 The final term is the explicit Core expression
@@ -2946,15 +2951,42 @@ delegation approves D-021 exactly as proposed. This separate review retains
 human supersession and authorizes no scope beyond TARGET-1A. It deliberately
 adds no parallel executable review module or aggregate validation run.
 
-Run focused tests while implementing and one aggregate root gate only after
-the target consumer is complete. Synchronize and checkpoint the foundation,
-target, consumer, tests, and living ledgers as one semantic tranche.
+The separate minimal review is checkpointed at
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. TARGET-1A is now implemented
+through the generic transfer/runtime engines and the direct typed
+`CoreCategoricalProgram` surface. In the final application, `m` is an object
+of the source Hom category, so the expected application shape is
+`object-value`. The result is nevertheless the intended higher cell and is
+classified by the rich explicit-Core `hom` tag. The initially considered
+`arrow-value` expectation correctly fails; this is a surface-classifier
+correction, not a new kernel rule, owner, or checker path.
+
+The runnable demo and eight focused tests cover exact three-declaration/
+two-rule transfer, checked runtime lineage, object and whole-Hom projections,
+recursive capped application, the higher-cell classifier, the rejected
+`arrow-value` spelling, profile/endpoint negatives, and every D-021
+zero-delta boundary. The aggregate root gate passes 1,071 tests: 1,023 active
+passes, 48 intentional skips, and zero failures, together with workspace
+integrity, typecheck, and full lint. The bounded live higher-action audit
+passes 7/7 and the bounded active-kernel check passes. Exact staged review and
+the semantic checkpoint remain before returning to the scale ledger.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-ND-HIGHER-TARGET-1A implemented and
+  focused-green.** The three existing opaque target declarations and two
+  existing projection rules compile through the generic engines. The
+  isolated direct-TypeScript profile exposes the transformation category and
+  its internal Hom action; generic `hom`, `homBoundary`, and recursive
+  `apply` produce a checked higher cell. Eight focused tests and the runnable
+  demo pass. The 1,071-test aggregate gate (1,023 active passes and 48
+  intentional skips), 7/7 live higher-action judgments, and the bounded
+  active-kernel check also pass. Only exact staged review and the bounded
+  semantic checkpoint remain.
 - **2026-07-29 — D-021 minimally reviewed-approved under the standing
   unattended delegation.** The immutable proposal checkpoint is
-  `fead6e10a625c0402eb6e5c2f6336c797e70f29e`. Human supersession and every
+  `fead6e10a625c0402eb6e5c2f6336c797e70f29e`; the separate review checkpoint
+  is `107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. Human supersession and every
   zero-delta boundary remain explicit. No executable audit/review layer or
   aggregate gate was added for this authorization record.
 - **2026-07-29 — D-020 directly approved and foundation focused-green.**
@@ -3533,11 +3565,9 @@ DISPLAYED-ND-HIGHER-FOUNDATION-1A: five checked transparent definitions,
 eight opaque signatures, zero rules, reuse/extraction of the already reviewed
 SCALE-STRESS-3A2A `id` representation without its unrelated profunctor
 profile, and a mandatory drift stop. Preserve the separate immutable D-019
-review with human supersession and implement only that foundation. Keep the
-three target owners, two projection rules, rich surface consumer,
-identity-cell syntax, arbitrary pointwise coherence, mixed variance,
-composite base-arrow normalization, parsing, deployment, and scale promotion
-separately gated.
+review with human supersession at
+`f674be92ae04eff5642428724053fb4e75274e50` and completed foundation at
+`fead6e10a625c0402eb6e5c2f6336c797e70f29e`.
 
 Preserve direct H-DTTLF-USABILITY-DISPLAYED-ND-HIGHER-CORRECTION-01/
 D-DTTLF-USABILITY-020 approval. FOUNDATION-1A is focused-green with the same
@@ -3549,14 +3579,22 @@ DISPLAYED-ND-HIGHER-TARGET-1A proposal is frozen under D-021: three existing
 opaque target owners, two existing projection rules, one isolated root-only
 successor profile, two typed construction methods, and a concrete consumer
 through generic `displayedTransfor`, `hom`, `homBoundary`, and `apply`.
-Obtain or record the separate D-021 decision before implementing that target.
+Preserve its separate D-021 review at
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11` and the implemented
+generic target/consumer. The final recursive application takes the Hom-object
+`m` under the `object-value` judgment and produces a rich-Core `hom` higher
+cell. Its 1,071-test aggregate gate, 7/7 live higher-action audit, and bounded
+active-kernel check pass. Finish only the exact staged review, ledger
+evidence, and bounded semantic checkpoint before returning to the recorded
+scale sequence. Keep identity-cell syntax, arbitrary pointwise
+coherence, mixed variance, composite base-arrow normalization, parsing,
+deployment, and scale promotion separately gated.
 
-Keep the critical path capability-first: implement and exercise the reviewed
-foundation, then qualify the higher-action target and recursive TypeScript
-consumer. Add transfer/acquisition/DevOps infrastructure only when that
-consumer exposes a measured blocker. Use focused tests during implementation
-and one aggregate root gate per bounded semantic tranche; do not rerun the
-aggregate gate merely to record a documentation-only checkpoint hash.
+Keep the critical path capability-first. Add transfer/acquisition/DevOps
+infrastructure only when a semantic consumer exposes a measured blocker. Use
+focused tests during implementation and one aggregate root gate per bounded
+semantic tranche; do not rerun the aggregate gate merely to record a
+documentation-only checkpoint hash.
 
 For later dependency-ready gates in this same persistent goal, the same
 standing delegation applies only after an exact bounded proposal has been

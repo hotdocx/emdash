@@ -1330,6 +1330,30 @@ CoreLfTransferDeclarationLinkage =
         }
     );
 
+export type CoreCategoricalDisplayedNdHigherFoundationSymbolId =
+    keyof typeof
+        CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_SYMBOLS;
+
+export function coreCategoricalDisplayedNdHigherFoundationCoreName(
+    id: CoreCategoricalDisplayedNdHigherFoundationSymbolId
+): string {
+    const target =
+        CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_SYMBOLS[id];
+    const link =
+        CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_LINKAGE
+            .entries.find(candidate =>
+                candidate.symbol.moduleId === target.moduleId &&
+                candidate.symbol.name === target.name
+            );
+    if (link === undefined || link.kind !== 'free-declaration') {
+        throw new Error(
+            `Displayed higher foundation declaration '${id}' has no ` +
+            'free Core declaration'
+        );
+    }
+    return link.coreName;
+}
+
 export const
 CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_BOUNDARY =
 Object.freeze({

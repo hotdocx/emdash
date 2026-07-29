@@ -87,6 +87,13 @@ import {
 import type {
     CoreCategoricalDisplayedChain2aClosureCompilation
 } from './categorical_displayed_chain_2a_closure_transfer';
+import type {
+    CoreCategoricalDisplayedNdHigherTargetCompilation,
+    CoreCategoricalDisplayedNdHigherTargetSymbolId
+} from './categorical_displayed_nd_higher_target_transfer';
+import type {
+    CoreCategoricalDisplayedNdHigherFoundationSymbolId
+} from './categorical_displayed_nd_higher_foundation_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -193,6 +200,35 @@ CoreCategoricalDisplayedChain2aClosureCompilation => {
         .compileCoreCategoricalDisplayedChain2aClosureTransfer();
 };
 
+const displayedNdHigherTargetModule = () => require(
+    './categorical_displayed_nd_higher_target_transfer'
+) as typeof import(
+    './categorical_displayed_nd_higher_target_transfer'
+);
+
+const displayedNdHigherFoundationModule = () => require(
+    './categorical_displayed_nd_higher_foundation_transfer'
+) as typeof import(
+    './categorical_displayed_nd_higher_foundation_transfer'
+);
+
+const compileCoreCategoricalDisplayedNdHigherTarget = ():
+CoreCategoricalDisplayedNdHigherTargetCompilation =>
+    displayedNdHigherTargetModule()
+        .compileCoreCategoricalDisplayedNdHigherTargetTransfer();
+
+const displayedNdHigherTargetCoreName = (
+    id: CoreCategoricalDisplayedNdHigherTargetSymbolId
+): string =>
+    displayedNdHigherTargetModule()
+        .coreCategoricalDisplayedNdHigherTargetCoreName(id);
+
+const displayedNdHigherFoundationCoreName = (
+    id: CoreCategoricalDisplayedNdHigherFoundationSymbolId
+): string =>
+    displayedNdHigherFoundationModule()
+        .coreCategoricalDisplayedNdHigherFoundationCoreName(id);
+
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
 
@@ -231,6 +267,9 @@ export const CORE_CATEGORICAL_DISPLAYED_CHAIN_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_PROGRAM_REVISION =
     'DISPLAYED-CHAIN-2A-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_PROGRAM_REVISION =
+    'DISPLAYED-ND-HIGHER-TARGET-1A-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -399,7 +438,10 @@ export interface CoreCategoricalProgramOptions {
      * The displayed-chain profile adds the approved one-genuine-edge
      * sequential-Sigma/direct-displayed lowering. The isolated chain-2a
      * profile adds only the reviewed four-binding mixed telescope and its
-     * exact D-017 transfer closure.
+     * exact D-017 transfer closure. The displayed-ND-higher profile extends
+     * that lineage with the D-020 foundation, the three D-021 next-hom
+     * owners and two projections, and two rich typed constructors; generic
+     * `hom`, `homBoundary`, and `apply` still own the action ladder.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -415,7 +457,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-displayed-bracket-1'
         | 'fibred-displayed-evaluation-1'
         | 'fibred-displayed-chain-1'
-        | 'fibred-displayed-chain-2a';
+        | 'fibred-displayed-chain-2a'
+        | 'fibred-displayed-nd-higher-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -453,6 +496,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_DISPLAYED_CONTEXT'
     | 'UNAVAILABLE_DISPLAYED_EVALUATION'
     | 'UNAVAILABLE_DISPLAYED_CHAIN'
+    | 'UNAVAILABLE_DISPLAYED_ND_HIGHER'
     | 'INVALID_DISPLAYED_CONTEXT'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
@@ -937,7 +981,8 @@ export class CoreCategoricalProgram {
         | CoreCategoricalFibredDependentTargetCompilation
         | CoreCategoricalDisplayedEvaluationCompilation
         | CoreCategoricalDisplayedChainCompilation
-        | CoreCategoricalDisplayedChain2aClosureCompilation;
+        | CoreCategoricalDisplayedChain2aClosureCompilation
+        | CoreCategoricalDisplayedNdHigherTargetCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -950,6 +995,7 @@ export class CoreCategoricalProgram {
     private readonly displayedEvaluationEnabled: boolean;
     private readonly displayedChainEnabled: boolean;
     private readonly displayedChain2aEnabled: boolean;
+    private readonly displayedNdHigherEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -958,8 +1004,11 @@ export class CoreCategoricalProgram {
             options.sourceFile ?? '<categorical-program>';
         const profile =
             options.profile ?? 'reviewed-usability-2a1';
+        const displayedNdHigherProfile =
+            profile === 'fibred-displayed-nd-higher-1';
         const displayedChain2aProfile =
-            profile === 'fibred-displayed-chain-2a';
+            profile === 'fibred-displayed-chain-2a' ||
+            displayedNdHigherProfile;
         this.comprehensionEnabled =
             profile === 'fibred-comprehension-1a' ||
             profile === 'fibred-product-1a' ||
@@ -1048,6 +1097,7 @@ export class CoreCategoricalProgram {
             profile === 'fibred-displayed-chain-1' ||
             displayedChain2aProfile;
         this.displayedChain2aEnabled = displayedChain2aProfile;
+        this.displayedNdHigherEnabled = displayedNdHigherProfile;
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
@@ -1060,7 +1110,9 @@ export class CoreCategoricalProgram {
         if (this.displayedContextualEnabled) {
             validateCoreCategoricalDisplayedBracketContract();
         }
-        this.dependent = this.displayedChain2aEnabled
+        this.dependent = this.displayedNdHigherEnabled
+            ? compileCoreCategoricalDisplayedNdHigherTarget()
+            : this.displayedChain2aEnabled
             ? compileCoreCategoricalDisplayedChain2aClosure()
             : this.displayedChainEnabled
             ? compileCoreCategoricalDisplayedChainTransfer()
@@ -1349,6 +1401,20 @@ export class CoreCategoricalProgram {
                 'Genuinely dependent displayed contextual abstraction is ' +
                     'available only in the explicit displayed-chain root ' +
                     'profiles'
+            );
+        }
+    }
+
+    private requireDisplayedNdHigher(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.displayedNdHigherEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_DISPLAYED_ND_HIGHER',
+                nodeProvenance,
+                'Displayed next-hom internal action is available only in ' +
+                    "the explicit 'fibred-displayed-nd-higher-1' root " +
+                    'profile'
             );
         }
     }
@@ -1742,6 +1808,42 @@ export class CoreCategoricalProgram {
         );
     }
 
+    private displayedNdHigherFoundationCall(
+        id: CoreCategoricalDisplayedNdHigherFoundationSymbolId,
+        arguments_: readonly {
+            readonly plicity: Plicity;
+            readonly value: KernelExpression;
+        }[],
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                displayedNdHigherFoundationCoreName(id),
+                nodeProvenance
+            ),
+            arguments_,
+            nodeProvenance
+        );
+    }
+
+    private displayedNdHigherTargetCall(
+        id: CoreCategoricalDisplayedNdHigherTargetSymbolId,
+        arguments_: readonly {
+            readonly plicity: Plicity;
+            readonly value: KernelExpression;
+        }[],
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                displayedNdHigherTargetCoreName(id),
+                nodeProvenance
+            ),
+            arguments_,
+            nodeProvenance
+        );
+    }
+
     private totalCategoryExpression(
         family: InternalCoreCategoricalDisplayedFamily,
         nodeProvenance: Provenance
@@ -2036,6 +2138,52 @@ export class CoreCategoricalProgram {
             sourceFamily: inspection.type.sourceFamily,
             targetFamily: inspection.type.targetFamily
         };
+    }
+
+    private requireCompatibleDisplayedFunctorPair(
+        sourceValue: CoreCategoricalTerm,
+        targetValue: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly source: ReturnType<
+            CoreCategoricalProgram['requireDisplayedFunctorTerm']
+        >;
+        readonly target: ReturnType<
+            CoreCategoricalProgram['requireDisplayedFunctorTerm']
+        >;
+    } {
+        const source = this.requireDisplayedFunctorTerm(
+            sourceValue,
+            nodeProvenance,
+            `${detail} source`
+        );
+        const target = this.requireDisplayedFunctorTerm(
+            targetValue,
+            nodeProvenance,
+            `${detail} target`
+        );
+        if (
+            !kernelExpressionEquals(
+                source.baseCategory,
+                target.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                source.sourceFamily,
+                target.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                source.targetFamily,
+                target.targetFamily
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                `${detail} requires compatible displayed-functor endpoints`
+            );
+        }
+        return Object.freeze({ source, target });
     }
 
     private requireDisplayedTransforTerm(
@@ -4468,6 +4616,192 @@ export class CoreCategoricalProgram {
             sourceFunctor: sourceFunctor.expression,
             targetFunctor: targetFunctor.expression
         }, nodeProvenance);
+    }
+
+    /**
+     * The category `Transfd_cat(FF,GG)` exposed as a rich surface category.
+     */
+    displayedTransforCategory(
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory {
+        const nodeProvenance = this.at(
+            'displayed-transfor category',
+            source
+        );
+        this.requireDisplayedNdHigher(nodeProvenance);
+        const endpoints = this.requireCompatibleDisplayedFunctorPair(
+            sourceFunctorValue,
+            targetFunctorValue,
+            nodeProvenance,
+            'Displayed-transfor category'
+        );
+        return this.makeCategory(
+            'Transfd(' +
+                serializeCoreExpression(endpoints.source.expression) +
+                ',' +
+                serializeCoreExpression(endpoints.target.expression) +
+                ')',
+            this.displayedTransforCategoryExpression(
+                endpoints.source.baseCategory,
+                endpoints.source.sourceFamily,
+                endpoints.source.targetFamily,
+                endpoints.source.expression,
+                endpoints.target.expression,
+                nodeProvenance
+            )
+        );
+    }
+
+    /**
+     * Internal displayed-hom action
+     * `tdapp1_int_func_transfd(FF,GG)`.
+     *
+     * Object, whole-Hom, and capped-Hom applications remain generic `apply`
+     * operations; this method constructs only the coherence-carrying functor
+     * and its rich source/target classifiers.
+     */
+    displayedTransforInternalHomAction(
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed-transfor internal hom action',
+            source
+        );
+        this.requireDisplayedNdHigher(nodeProvenance);
+        const endpoints = this.requireCompatibleDisplayedFunctorPair(
+            sourceFunctorValue,
+            targetFunctorValue,
+            nodeProvenance,
+            'Displayed-transfor internal hom action'
+        );
+        const K = endpoints.source.baseCategory;
+        const E = endpoints.source.sourceFamily;
+        const D = endpoints.source.targetFamily;
+        const FF = endpoints.source.expression;
+        const GG = endpoints.target.expression;
+        const sourceCategory = this.displayedTransforCategoryExpression(
+            K,
+            E,
+            D,
+            FF,
+            GG,
+            nodeProvenance
+        );
+        const oppositeE = this.displayedNdHigherFoundationCall(
+            'displayedOpposite',
+            [
+                { plicity: 'implicit', value: K },
+                { plicity: 'explicit', value: E }
+            ],
+            nodeProvenance
+        );
+        const oppositeD = this.displayedNdHigherFoundationCall(
+            'displayedOpposite',
+            [
+                { plicity: 'implicit', value: K },
+                { plicity: 'explicit', value: D }
+            ],
+            nodeProvenance
+        );
+        const homTargetE = this.displayedNdHigherFoundationCall(
+            'displayedHomTarget',
+            [
+                { plicity: 'implicit', value: K },
+                { plicity: 'explicit', value: E }
+            ],
+            nodeProvenance
+        );
+        const displayedIdentity = kernelCall(
+            kernelFree(
+                coreCategoricalFibredStructureCoreName(
+                    'displayed-identity'
+                ),
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: K },
+                { plicity: 'implicit', value: E }
+            ],
+            nodeProvenance
+        );
+        const sourceInternalHom =
+            this.displayedNdHigherFoundationCall(
+                'displayedInternalHom',
+                [
+                    { plicity: 'implicit', value: K },
+                    { plicity: 'implicit', value: E },
+                    { plicity: 'implicit', value: E },
+                    { plicity: 'explicit', value: displayedIdentity }
+                ],
+                nodeProvenance
+            );
+        const targetInternalHom =
+            this.displayedNdHigherFoundationCall(
+                'displayedInternalHom',
+                [
+                    { plicity: 'implicit', value: K },
+                    { plicity: 'implicit', value: E },
+                    { plicity: 'implicit', value: D },
+                    { plicity: 'explicit', value: GG }
+                ],
+                nodeProvenance
+            );
+        const oppositeAction =
+            this.displayedNdHigherFoundationCall(
+                'displayedOppositeAction',
+                [
+                    { plicity: 'implicit', value: K },
+                    { plicity: 'implicit', value: E },
+                    { plicity: 'implicit', value: D },
+                    { plicity: 'explicit', value: FF }
+                ],
+                nodeProvenance
+            );
+        const targetComposite =
+            this.displayedNdHigherFoundationCall(
+                'displayedComposition',
+                [
+                    { plicity: 'implicit', value: K },
+                    { plicity: 'implicit', value: oppositeE },
+                    { plicity: 'implicit', value: oppositeD },
+                    { plicity: 'implicit', value: homTargetE },
+                    { plicity: 'explicit', value: targetInternalHom },
+                    { plicity: 'explicit', value: oppositeAction }
+                ],
+                nodeProvenance
+            );
+        const targetCategory = this.displayedTransforCategoryExpression(
+            K,
+            oppositeE,
+            homTargetE,
+            sourceInternalHom,
+            targetComposite,
+            nodeProvenance
+        );
+        const action = this.displayedNdHigherTargetCall(
+            'action-functor',
+            [
+                { plicity: 'implicit', value: K },
+                { plicity: 'implicit', value: E },
+                { plicity: 'implicit', value: D },
+                { plicity: 'implicit', value: FF },
+                { plicity: 'implicit', value: GG }
+            ],
+            nodeProvenance
+        );
+        return this.makeTerm(
+            action,
+            {
+                tag: 'functor',
+                sourceCategory,
+                targetCategory
+            },
+            nodeProvenance
+        );
     }
 
     /**

@@ -232,15 +232,32 @@ eight opaque/injective signatures through the generic declaration engine,
 with zero rules, zero new mathematics, zero intrinsic owner, zero checker
 branch, and a mandatory dependency-drift stop. Its exact `id` signature
 already has a reviewed isolated SCALE-STRESS-3A2A representation; reuse or
-extract it without importing that row's unrelated profunctor profile. The
-three target owners, two rules, and rich TypeScript consumer remain a later
-separate decision. Seven focused live tests, the 1,052-test root gate (1,004
+extract it without importing that row's unrelated profunctor profile. Seven
+focused live tests, the 1,052-test root gate (1,004
 active passes and 48 intentional skips), all 19 live conformance judgments,
 and the bounded active-kernel check pass. The separate D-019 review is now
-recorded under the standing unattended delegation with human supersession
-and five focused passing tests. Only FOUNDATION-1A is
-implementation-ready; the recorded scale sequence resumes only after the
-selected ND work or an explicit priority change.
+recorded under the standing unattended delegation with human supersession at
+`f674be92ae04eff5642428724053fb4e75274e50`. D-020 corrected only two
+omitted existing Core-owner links and one existing opposite-involution
+runtime prerequisite; the thirteen-declaration foundation is focused-green
+at `fead6e10a625c0402eb6e5c2f6336c797e70f29e`.
+
+The separately reviewed D-021 target is now implemented: three existing
+opaque `tdapp1_int_*_transfd` declarations, two existing projection rules,
+the isolated `fibred-displayed-nd-higher-1` direct-TypeScript profile, and
+typed constructors for the transformation category and its internal Hom
+action. Generic `displayedTransfor`, `hom`, `homBoundary`, and recursive
+`apply` construct object action, whole-Hom action, and `H[m]`. Here `m` is an
+object of the source Hom category, so the final application uses the
+`object-value` judgment and yields a rich-Core `hom` higher cell; no new
+binder, contextual node, checker, parser, intrinsic, or Lambdapi mathematics
+is involved. The runnable demo and eight focused tests pass. Aggregate/
+conformance validation is also green: the 1,071-test root gate has 1,023
+active passes, 48 intentional skips, and zero failures; the live higher-action
+audit passes 7/7; and the bounded active-kernel check passes. Exact staged
+review and the semantic checkpoint remain before the recorded scale sequence
+resumes. Exact D-021 review checkpoint:
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`.
 Exact DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
 `4db1ce8a80725c0030ac8908f416d412591620bd`.
 
@@ -882,10 +899,14 @@ component-composition case are also complete, fully validated, and
 checkpointed `d8b450222273167ab326701c76fff03f0f539b18`. Use the displayed
 plan's completed DISPLAYED-ND-HIGHER-1B audit and separately reviewed D-019
 proposal. It proves that the three-owner/two-rule higher-action target first
-needs the exact thirteen-declaration rule-free foundation. Implement only
-DISPLAYED-ND-HIGHER-FOUNDATION-1A; do not implement the target package or
-surface consumer under that foundation decision. The recorded scale order
-follows.
+needs the exact thirteen-declaration foundation. Preserve completed D-020
+foundation checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e`, the
+separate D-021 review at
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`, and the focused-green target,
+surface consumer, tests, and demo. Preserve its green 1,071-test root gate,
+7/7 live higher-action audit, and bounded active-kernel check. Finish only
+exact staged review, synchronized ledger, and the bounded local checkpoint;
+then resume the recorded scale order.
 `DECL-REFINE-1A`, generic parsing, and bulk protected-module transfer are not
 the immediate critical path.
 

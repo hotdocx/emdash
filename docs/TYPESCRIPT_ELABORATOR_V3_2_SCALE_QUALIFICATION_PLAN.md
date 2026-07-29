@@ -113,8 +113,18 @@ branch, or surface method is needed. Seven focused live tests,
 the 1,052-test root gate (1,004 active passes, 48 intentional skips), 19/19
 live conformance, and the bounded active-kernel check pass. A separate
 immutable delegated D-019 review now approves only that foundation with
-human supersession; its focused gate passes. Once the selected ND work
-returns control here, the order is SCALE-KIND-PI-1,
+human supersession at
+`f674be92ae04eff5642428724053fb4e75274e50`. D-020's exact dependency
+correction and thirteen-declaration foundation are complete at
+`fead6e10a625c0402eb6e5c2f6336c797e70f29e`. D-021 separately reviews the
+three existing target declarations, two projection rules, and direct
+TypeScript consumer at
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`; that target, runnable demo,
+generic object/whole-Hom/higher-cell action ladder, and eight focused tests
+are green. The 1,071-test root gate (1,023 active passes and 48 intentional
+skips), 7/7 live higher-action audit, and bounded active-kernel check also
+pass. Exact staged review and its local semantic checkpoint remain before the
+selected ND work returns control here. The following order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2738,9 +2748,15 @@ live consumer passes; and the target-only transfer is not closed. Preserve
 its D-019 proposal for only rule-free
 DISPLAYED-ND-HIGHER-FOUNDATION-1A—five checked transparent definitions and
 eight opaque signatures—and preserve its separate immutable delegated D-019
-review with human supersession. Implement only that foundation. Keep the
-target owners, projection rules, and rich surface consumer behind the
-following separate decision before resuming this scale ledger.
+review with human supersession at
+`f674be92ae04eff5642428724053fb4e75274e50`. Preserve corrected and completed
+D-020 foundation checkpoint `fead6e10a625c0402eb6e5c2f6336c797e70f29e`
+and the separate D-021 target review at
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. Finish only the already
+implemented target/runtime transfer, direct-TypeScript higher-cell consumer,
+demo, exact staged review, and bounded local checkpoint before resuming this
+scale ledger; preserve its already green aggregate, live-audit, and
+active-kernel evidence.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit
@@ -2771,10 +2787,10 @@ bounded-presentation distinction are frozen by the completed D-016 proposal
 and review. Preserve the completed `a; b,c; d` telescope and its separately
 reviewed D-017 closure, completed DISPLAYED-ND-0A/D-018 audit and review, and
 completed first recursive `:^nd` component-composition case. Preserve the
-completed DISPLAYED-ND-HIGHER-1B qualification and obtain the separate
-D-019 review before implementing its selected thirteen-declaration foundation.
-Keep its target owners/rules and rich consumer behind the following separate
-decision before returning to the scale rows. Direct typed construction
+completed DISPLAYED-ND-HIGHER-1B qualification, D-019 review, D-020
+foundation, and D-021 review. Complete only the focused-green three-owner/
+two-rule target and rich generic consumer through its final validation and
+checkpoint before returning to the scale rows. Direct typed construction
 remains the default acquisition path; reconsider a narrow
 adapter only after measured repetition and a synchronized plan decision.
 Preserve the completed ordinary bracket evidence: the thirteen-prerequisite

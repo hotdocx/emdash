@@ -112,13 +112,28 @@ dependency-closed over the current TypeScript fragment. The frozen
 non-self-authorizing D-019 proposal therefore selects only the exact
 thirteen-declaration identity/internalized-hom/opposite/presheaf
 foundation—five checked transparent definitions and eight opaque/injective
-signatures, with zero rules—before a later separate target/surface decision.
+signatures, with zero rules.
 The `id` signature can reuse or extract its already reviewed isolated
 SCALE-STRESS-3A2A representation without importing that row's unrelated
 profunctor profile. Exact downstream audit/proposal checkpoint:
 `4db1ce8a80725c0030ac8908f416d412591620bd`. A separate immutable delegated
-D-019 review with human supersession now authorizes only that foundation.
-The active displayed and scale ledgers govern its implementation.
+D-019 review with human supersession is checkpointed
+`f674be92ae04eff5642428724053fb4e75274e50`; the corrected D-020 foundation is
+complete at `fead6e10a625c0402eb6e5c2f6336c797e70f29e`.
+
+The separately reviewed D-021 target remains within the same architecture.
+Three existing target declarations and two existing projection rules expose
+the transformation category and its internal Hom action in one isolated
+direct-TypeScript profile. Existing generic `displayedTransfor`, `hom`,
+`homBoundary`, and recursive `apply` construct a rich-Core `hom` higher cell
+without a new binder, contextual node, checker, parser, intrinsic, or
+Lambdapi mathematical owner/rule. The implementation, runnable demo, and
+eight focused tests pass. The 1,071-test root gate (1,023 active passes and
+48 intentional skips), 7/7 live higher-action audit, and bounded
+active-kernel check also pass; exact staged review and its semantic checkpoint
+remain under the active displayed and scale ledgers. Exact D-021 review
+checkpoint:
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -2812,3 +2827,9 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   only the rule-free thirteen-declaration foundation under a separate D-019
   review. This adds no semantics or profile authority to the completed
   directed continuation.
+- **2026-07-29 — Downstream higher-action target preserved the selected LF
+  architecture.** D-020 closes the existing-authority foundation dependency,
+  and separately reviewed D-021 transfers the three target declarations and
+  two projection rules. Its direct-TypeScript consumer obtains object action,
+  whole-Hom action, and a checked higher cell entirely through the existing
+  generic action ladder. No outer-LF or Core semantic extension was needed.

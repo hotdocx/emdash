@@ -188,14 +188,32 @@ DISPLAYED-ND-HIGHER-FOUNDATION-1A: five checked transparent definitions,
 eight opaque/injective signatures, and zero rules, new mathematics,
 intrinsics, checker branches, or surface methods. The exact `id` signature
 already has an isolated SCALE-STRESS-3A2A representation; reuse/extraction
-must not pull in that row's unrelated profunctor profile. The target owners,
-rules, and rich surface consumer remain a following separate decision. Seven
+must not pull in that row's unrelated profunctor profile. Seven
 focused live tests, the 1,052-test root gate (1,004 active passes and 48
 intentional skips), 19/19 live conformance, and the bounded active-kernel
 check pass. The audit itself remains non-authorizing. Its separate immutable
 D-019 review is now recorded under the standing unattended delegation with
-human supersession; five focused tests pass and FOUNDATION-1A alone is
-implementation-ready.
+human supersession at
+`f674be92ae04eff5642428724053fb4e75274e50`. D-020 then corrected only the
+omitted existing `Obj`/`Hom` links and existing opposite-involution runtime
+prerequisite; FOUNDATION-1A is complete and focused-green at
+`fead6e10a625c0402eb6e5c2f6336c797e70f29e`.
+
+D-021 separately reviews the exact three-owner/two-rule target and direct
+TypeScript consumer at
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. The implementation is now
+focused-green: the isolated profile exposes the displayed-transformation
+category and internal Hom action, and generic `displayedTransfor`, `hom`,
+`homBoundary`, and recursive `apply` construct object action, whole-Hom
+action, and a rich-Core `hom` higher cell. Since `m` is an object of the
+source Hom category, its final application uses `object-value`; the rejected
+`arrow-value` spelling is a classifier negative, not missing semantics.
+Eight focused tests and the runnable demo pass with zero new binder,
+contextual node, checker, parser, intrinsic, browser path, or Lambdapi
+mathematics. The 1,071-test root gate (1,023 active passes, 48 intentional
+skips), 7/7 live higher-action audit, and bounded active-kernel check pass.
+Exact staged review and the semantic checkpoint remain before returning to
+scale qualification.
 DISPLAYED-ND-HIGHER-1B audit/proposal checkpoint:
 `4db1ce8a80725c0030ac8908f416d412591620bd`.
 D-017 proposal checkpoint:
@@ -653,7 +671,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-ND-1A at `d8b450222273167ab326701c76fff03f0f539b18`; DISPLAYED-ND-HIGHER-1B audit checkpointed `4db1ce8a80725c0030ac8908f416d412591620bd`; separate delegated D-019 review complete and focused-green, checkpoint pending | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-019 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, `a; b,c; d`, and recursively composed coherent `:^nd` component expressions. The higher-action audit pins a 13-foundation + 3-target + 2-rule existing-authority closure, proves target-only transfer is not closed, checks a live next-hom consumer, and authorizes only the thirteen-declaration zero-rule foundation before any target/surface decision |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-ND-1A at `d8b450222273167ab326701c76fff03f0f539b18`; higher audit and reviews checkpointed; D-020 foundation complete at `fead6e10a625c0402eb6e5c2f6336c797e70f29e`; D-021 target/consumer and all validation green with semantic checkpoint pending | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-021 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, `a; b,c; d`, recursively composed coherent `:^nd` component expressions, and a concrete next-Hom higher-cell observation. The higher closure reuses thirteen foundation declarations, three target declarations, and three existing runtime rules in total; the direct surface adds two rich constructors while the generic action ladder performs all recursive applications. The 1,071-test root gate, 7/7 live audit, and bounded kernel check pass with zero new binder/checker/parser/kernel mathematics |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2460,10 +2478,18 @@ projection rules; target-only transfer is not closed and its concrete
 next-hom consumer passes. Preserve D-019 as a proposal for only the
 thirteen-declaration, zero-rule DISPLAYED-ND-HIGHER-FOUNDATION-1A tranche,
 with five checked transparent definitions, eight opaque signatures, and a
-mandatory drift stop. Require the separate immutable D-019 review before
-implementation, and keep the target owners/rules, rich surface consumer,
-identity, arbitrary coherence, mixed variance, and composite-cell
-normalization separately gated. Preserve
+mandatory drift stop. Preserve its separate D-019 review at
+`f674be92ae04eff5642428724053fb4e75274e50`, the corrected and completed
+D-020 foundation at `fead6e10a625c0402eb6e5c2f6336c797e70f29e`, and the
+separate D-021 target review at
+`107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. Finish only the implemented
+three-owner/two-rule target, isolated direct-TypeScript profile, generic
+object/whole-Hom/capped-Hom consumer, tests, and demo through exact staged
+review, synchronized ledger, and a bounded local checkpoint; its aggregate,
+live-audit, and active-kernel gates are already green. Then return control to
+the scale plan. Keep
+identity syntax, arbitrary pointwise coherence, mixed variance, and
+composite-cell normalization separately gated. Preserve
 completed
 DISPLAYED-EVAL-0B, its
 constant-domain
@@ -2671,8 +2697,8 @@ CI obligations.
   non-self-authorizing. Seven focused live tests, the 1,052-test root gate
   (1,004 active passes, 48 intentional skips), 19/19 live conformance, and
   the bounded active-kernel check pass.
-- **2026-07-29 — D-DTTLF-USABILITY-018 separately approved; review
-  checkpoint pending.** With no immediate human answer after presentation of
+- **2026-07-29 — D-DTTLF-USABILITY-018 separately approved and
+  checkpointed.** With no immediate human answer after presentation of
   the exact checkpointed proposal, the standing unattended delegation was
   exercised through a separate immutable review retaining human
   supersession and every proposal non-effect. Seven focused tests, the
