@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is implemented, green, and checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e` with five focused tests and the aggregate 964-test root gate (917 active passes, 47 intentional skips, zero failures); root-only recursive consumer next | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
+| DISPLAYED-CHAIN-1A | complete and green pending only immediate exact checkpoint-ledger recording; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e`; the root-only recursive consumer and runnable demo pass nine new focused tests and the aggregate 973-test root gate (926 active passes, 47 intentional skips, zero failures) | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1809,9 +1809,9 @@ one-owner/six-rule mathematics or authorize bulk acquisition.
 
 ### TypeScript consumer and scalability assessment
 
-The proposed root-only profile is `fibred-displayed-chain-1`, with a direct
-typed method tentatively named `displayedDependentContextLambda`. A
-representative input is:
+The implemented root-only profile is `fibred-displayed-chain-1`, with the
+direct typed method `displayedDependentContextLambda`. A representative
+input is:
 
 ```text
 displayedDependentContextLambda(
@@ -1822,9 +1822,11 @@ displayedDependentContextLambda(
 ```
 
 where `A : Catd K`, `B : Catd(Sigma_cat A)`, and the callback tokens may occur
-recursively beneath any supported typed application/pair node. The callback
-is evaluated once, unsupported nodes fail closed with provenance, and the
-pipeline stays:
+recursively beneath any supported typed application or pair node. The public
+program derives and checks the exact dependency graph
+`k -> a`, `k -> b`, and `a -> b`; it does not misclassify the edge as an
+independent sibling product. The callback is evaluated once, unsupported
+nodes fail closed with provenance, and the pipeline is:
 
 ```text
 typed TypeScript construction IR
@@ -1834,19 +1836,55 @@ typed TypeScript construction IR
   -> generic checker/evaluator.
 ```
 
+The immediate `b` variable lowers to the existing displayed identity. The
+outer `a` variable lowers to the canonical
+`sigma_functord_sec(id_funcd A)` section and then uses the existing
+`section_pullback_func` weakening across `B`. The same pre-existing recursive
+displayed contextual compiler traverses direct slots, closed displayed-functor
+applications, and typed fibre pairs; there is no whole-body recognizer,
+parallel AST, second checker, or retained callback.
+
+Permanent evidence checks:
+
+- outer- and inner-variable object computation;
+- recursive weakening beneath a displayed-functor application;
+- recursion through a typed pair;
+- exact internalized arrow action through the transferred
+  `fdapp1_int_cell` owner, including independence from an ignored `b` input
+  and intentional non-collapse to the plain fibre arrow;
+- preservation of ordinary displayed-functor reindexing; and
+- profile, base, arity, escaped-token, foreign-term, and
+  dependent-edge-as-sibling rejection.
+
+The public `displayedFunctorInternalCell` observation constructs its exact
+source and target endpoints from the already transferred transparent
+transport definitions and then applies the active internal-cell owner. It is
+arrow-level evidence for the existing internalized semantics, not a new
+evaluator case, naturality rule, or mathematical owner.
+
 This settles a scalable architecture for one genuine dependency edge and
 identifies the recursive extension invariant: wrap a direct term as a Sigma
 section, pull it back along the next projection, then expose the result again
-through the existing proof-time classifier comparison. Additional object and
-arrow edges are expected to repeat mechanically.
+through the existing proof-time classifier comparison. The successful
+object, recursive-subexpression, internalized-arrow, and reindexing corpus is
+positive evidence that additional edges can repeat this construction; it is
+not yet an arbitrary-depth theorem.
 
 It does not yet claim a theorem for arbitrary telescope depth, arbitrary
 mixed variance, general `:^nd` coherence, groupoidal closure, parsing,
 browser promotion, or whole-library transfer. Those claims require the
 selected closure to be implemented and qualified on a larger corpus. The
 important feasibility result is narrower and concrete: no discarded
-frontend solution or second elaborator is missing; the blocker is a bounded,
-owner-position-tested semantic bridge.
+frontend solution or second elaborator is missing, and the bounded
+owner-position-tested semantic bridge now executes end to end. The runnable
+`demo:categorical-displayed-chain` command depends on neither a string parser
+nor a production Lambdapi process.
+
+The demo also proves that `DECL-REFINE-1A` is not a semantic prerequisite for
+this usability slice. That later qualification may simplify or improve
+incremental transfer/module linking, but it cannot retroactively become an
+LF term former or a condition for the demonstrated displayed-chain
+computation.
 
 The deeply frozen executable proposal is
 `src/v3_2/categorical_displayed_chain_proposal.ts`. It remains
@@ -1857,6 +1895,31 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-CHAIN-1A root-only recursive consumer and demo
+  implemented.** The new `fibred-displayed-chain-1` profile composes the
+  reviewed generic transfer and exposes exactly one
+  `displayedDependentContextLambda` edge
+  `k : K; a : A[k]; b : B[(k,a)]`. The public program validates the exact
+  dependency graph, and the existing first-order recursive contextual
+  compiler lowers direct outer/inner variables, a closed displayed-functor
+  application, and a typed fibre pair. The outer variable uses
+  `sigma_functord_sec(id_funcd A)` followed by existing section-pullback
+  weakening; the inner variable uses displayed identity. A root-only
+  `displayedFunctorInternalCell` observation supplies exact arrow-level
+  evidence through the transferred owner and transparent transport
+  endpoints; it verifies ignored-`b` independence while retaining the
+  active non-collapsed internal-hom action. Ordinary reindexing and
+  profile/base/arity/escape/foreign/dependency negatives pass. The runnable
+  `demo:categorical-displayed-chain` report presents the typed TypeScript
+  input, five-stage pipeline, object/arrow/reindexing outputs, and exact
+  one-owner/six-rule boundary. Nine new focused tests, root typecheck/lint,
+  the aggregate 973-test root gate (926 active passes, 47 intentional skips,
+  zero failures), and the bounded active-kernel check pass. The consumer adds
+  no Lambdapi edit, intrinsic Core owner, parser, RawExpr/checker layer,
+  body recognizer, arbitrary-depth telescope, or general `:^nd` claim.
+  `DECL-REFINE-1A` remains a deferred transfer/linking qualification and was
+  not needed by this end-to-end slice. Exact implementation checkpoint:
+  pending immediate ledger recording.
 - **2026-07-29 — DISPLAYED-CHAIN-1A generic TypeScript transfer
   implemented.** The generic declaration compiler checks the three
   chain-specific prerequisites, two ambient prerequisites, one transparent

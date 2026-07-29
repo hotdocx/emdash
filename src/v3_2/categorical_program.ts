@@ -80,6 +80,11 @@ import {
     coreCategoricalDisplayedEvaluationCoreName
 } from './categorical_displayed_evaluation_transfer';
 import {
+    CoreCategoricalDisplayedChainCompilation,
+    compileCoreCategoricalDisplayedChainTransfer,
+    coreCategoricalDisplayedChainCoreName
+} from './categorical_displayed_chain_transfer';
+import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
 import {
@@ -199,6 +204,9 @@ export const CORE_CATEGORICAL_DISPLAYED_BRACKET_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_DISPLAYED_EVALUATION_PROGRAM_REVISION =
     'DISPLAYED-EVAL-1A-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_DISPLAYED_CHAIN_PROGRAM_REVISION =
+    'DISPLAYED-CHAIN-1A-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -363,6 +371,9 @@ export interface CoreCategoricalProgramOptions {
      * The displayed-evaluation profile joins that recursive compiler to the
      * repaired dependent-target runtime and adds only the two reviewed
      * constant-domain evaluation judgments.
+     * The displayed-chain profile adds the approved one-genuine-edge
+     * sequential-Sigma/direct-displayed lowering and no broader telescope
+     * claim.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -376,7 +387,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-weaken-reindex-1'
         | 'fibred-dependent-target-1'
         | 'fibred-displayed-bracket-1'
-        | 'fibred-displayed-evaluation-1';
+        | 'fibred-displayed-evaluation-1'
+        | 'fibred-displayed-chain-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -413,6 +425,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_DEPENDENT_TARGET'
     | 'UNAVAILABLE_DISPLAYED_CONTEXT'
     | 'UNAVAILABLE_DISPLAYED_EVALUATION'
+    | 'UNAVAILABLE_DISPLAYED_CHAIN'
     | 'INVALID_DISPLAYED_CONTEXT'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
@@ -734,6 +747,17 @@ for (const [
         coreCategoricalDisplayedEvaluationCoreName(id)
     ] = label;
 }
+categoricalLabels[
+    coreCategoricalDisplayedChainCoreName('sigmaFunctordSection')
+] = 'emdash.categorical.sigma-functord-section';
+categoricalLabels[
+    coreCategoricalDisplayedChainCoreName('displayedInternalCell')
+] = 'emdash.categorical.displayed-internal-cell';
+categoricalLabels[
+    coreCategoricalDisplayedChainCoreName(
+        'displayedInternalHomAction'
+    )
+] = 'emdash.categorical.displayed-internal-hom-action';
 
 export const CORE_CATEGORICAL_EXPLICIT_FREE_LABELS:
 Readonly<Record<string, string>> = Object.freeze({
@@ -884,7 +908,8 @@ export class CoreCategoricalProgram {
         | CoreCategoricalFibredTransfdCompilation
         | CoreCategoricalFibredWeakenReindexCompilation
         | CoreCategoricalFibredDependentTargetCompilation
-        | CoreCategoricalDisplayedEvaluationCompilation;
+        | CoreCategoricalDisplayedEvaluationCompilation
+        | CoreCategoricalDisplayedChainCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -895,6 +920,7 @@ export class CoreCategoricalProgram {
     private readonly fibredDependentTargetEnabled: boolean;
     private readonly displayedContextualEnabled: boolean;
     private readonly displayedEvaluationEnabled: boolean;
+    private readonly displayedChainEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -913,7 +939,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
@@ -923,7 +950,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.fibredStructureEnabled =
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
@@ -932,7 +960,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.fibredBinderEnabled =
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
@@ -940,33 +969,42 @@ export class CoreCategoricalProgram {
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.fibredTransfdEnabled =
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.groupedSequentialEnabled =
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.fibredWeakenReindexEnabled =
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.fibredDependentTargetEnabled =
             profile === 'fibred-dependent-target-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.displayedContextualEnabled =
             profile === 'fibred-displayed-bracket-1' ||
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
         this.displayedEvaluationEnabled =
-            profile === 'fibred-displayed-evaluation-1';
+            profile === 'fibred-displayed-evaluation-1' ||
+            profile === 'fibred-displayed-chain-1';
+        this.displayedChainEnabled =
+            profile === 'fibred-displayed-chain-1';
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
@@ -979,7 +1017,9 @@ export class CoreCategoricalProgram {
         if (this.displayedContextualEnabled) {
             validateCoreCategoricalDisplayedBracketContract();
         }
-        this.dependent = this.displayedEvaluationEnabled
+        this.dependent = this.displayedChainEnabled
+            ? compileCoreCategoricalDisplayedChainTransfer()
+            : this.displayedEvaluationEnabled
             ? compileCoreCategoricalDisplayedEvaluationTransfer()
             : this.fibredDependentTargetEnabled
             ? compileCoreCategoricalFibredDependentTargetTransfer()
@@ -1013,7 +1053,9 @@ export class CoreCategoricalProgram {
                 displayedContextualAbstraction:
                     this.displayedContextualEnabled,
                 displayedEvaluation:
-                    this.displayedEvaluationEnabled
+                    this.displayedEvaluationEnabled,
+                displayedDependentContextualAbstraction:
+                    this.displayedChainEnabled
             }
         );
     }
@@ -1248,6 +1290,20 @@ export class CoreCategoricalProgram {
                 'Constant-domain displayed evaluation is available only ' +
                     'in the explicit ' +
                     "'fibred-displayed-evaluation-1' root profile"
+            );
+        }
+    }
+
+    private requireDisplayedChain(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.displayedChainEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_DISPLAYED_CHAIN',
+                nodeProvenance,
+                'Genuinely dependent displayed contextual abstraction is ' +
+                    'available only in the explicit ' +
+                    "'fibred-displayed-chain-1' root profile"
             );
         }
     }
@@ -2898,6 +2954,174 @@ export class CoreCategoricalProgram {
                     targetFibre,
                     nodeProvenance
                 )
+            },
+            nodeProvenance
+        );
+    }
+
+    /**
+     * Expose the active internalized arrow action of a displayed functor.
+     *
+     * This is the arrow-level observation used by DISPLAYED-CHAIN-1A. It is
+     * an application of the transferred `fdapp1_int_cell` owner, not a new
+     * evaluator case or a reconstructed naturality law.
+     */
+    displayedFunctorInternalCell(
+        displayedFunctorValue: CoreCategoricalTerm,
+        baseArrowValue: CoreCategoricalTerm,
+        sourceFibreObjectValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'internalized displayed-functor arrow action',
+            source
+        );
+        this.requireDisplayedChain(nodeProvenance);
+        const displayedFunctor = this.requireDisplayedFunctorTerm(
+            displayedFunctorValue,
+            nodeProvenance,
+            'Internal displayed action subject'
+        );
+        const baseArrow = this.requireHomTerm(
+            baseArrowValue,
+            nodeProvenance,
+            'Internal displayed action base arrow'
+        );
+        if (!kernelExpressionEquals(
+            baseArrow.category,
+            displayedFunctor.baseCategory
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Internal displayed action arrow belongs to the wrong base'
+            );
+        }
+        const sourceFibre = this.fibreCategoryOfExpression(
+            displayedFunctor.baseCategory,
+            displayedFunctor.sourceFamily,
+            baseArrow.sourceObject,
+            nodeProvenance
+        );
+        const targetFibre = this.fibreCategoryOfExpression(
+            displayedFunctor.baseCategory,
+            displayedFunctor.targetFamily,
+            baseArrow.targetObject,
+            nodeProvenance
+        );
+        const sourceFibreObject = this.requireObjectTerm(
+            sourceFibreObjectValue,
+            nodeProvenance,
+            'Internal displayed action source-fibre object'
+        );
+        this.requireSameCategory(
+            sourceFibreObject.category,
+            sourceFibre,
+            nodeProvenance,
+            'Internal displayed action source-fibre object'
+        );
+        const transport = (
+            id: 'transport-lhs' | 'transport-rhs'
+        ): KernelExpression => kernelCall(
+            kernelFree(
+                coreCategoricalFibredTransfdCoreName(id),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: displayedFunctor.baseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedFunctor.sourceFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedFunctor.targetFamily
+                },
+                {
+                    plicity: 'explicit',
+                    value: displayedFunctor.expression
+                },
+                {
+                    plicity: 'implicit',
+                    value: baseArrow.sourceObject
+                },
+                {
+                    plicity: 'implicit',
+                    value: baseArrow.targetObject
+                },
+                {
+                    plicity: 'explicit',
+                    value: baseArrow.expression
+                }
+            ],
+            nodeProvenance
+        );
+        const endpoint = (
+            transportFunctor: KernelExpression
+        ): KernelExpression => kernelApplication(
+            'functor-object',
+            [
+                { value: sourceFibre },
+                { value: targetFibre },
+                { value: transportFunctor },
+                { value: sourceFibreObject.expression }
+            ],
+            nodeProvenance
+        );
+        const sourceEndpoint = endpoint(transport('transport-lhs'));
+        const targetEndpoint = endpoint(transport('transport-rhs'));
+        return this.makeTerm(
+            kernelCall(
+                kernelFree(
+                    coreCategoricalDisplayedChainCoreName(
+                        'displayedInternalCell'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: displayedFunctor.baseCategory
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: displayedFunctor.sourceFamily
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: displayedFunctor.targetFamily
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: displayedFunctor.expression
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: baseArrow.sourceObject
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: baseArrow.targetObject
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: baseArrow.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: sourceFibreObject.expression
+                    }
+                ],
+                nodeProvenance
+            ),
+            {
+                tag: 'hom',
+                category: targetFibre,
+                sourceObject: sourceEndpoint,
+                targetObject: targetEndpoint
             },
             nodeProvenance
         );
@@ -5140,6 +5364,209 @@ export class CoreCategoricalProgram {
                 family: binding.family.expression
             })),
             base.expression,
+            target.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
+     * Compile exactly one genuine displayed dependency edge:
+     *
+     *   k : K; a : A[k]; b : B[(k,a)].
+     *
+     * `A` is based on K, while `B` and the target are based on Sigma(A).
+     * The callback is evaluated once and lowered through the existing
+     * recursive contextual IR compiler.
+     */
+    displayedDependentContextLambda(
+        bindingValues:
+            readonly CoreCategoricalDisplayedContextBinding[],
+        targetValue: CoreCategoricalDisplayedFamily,
+        body: (
+            tokens: readonly CoreCategoricalSlotToken[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'displayed dependent contextual abstraction',
+            options.source
+        );
+        this.requireDisplayedChain(nodeProvenance);
+        if (bindingValues.length !== 2) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'DISPLAYED-CHAIN-1A requires exactly two bindings: one ' +
+                    'prefix family and one genuinely dependent family'
+            );
+        }
+        if (bindingValues[0].name === bindingValues[1].name) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                `Duplicate displayed dependent binding ` +
+                    `'${bindingValues[0].name}'`
+            );
+        }
+        const prefix = Object.freeze({
+            position: 1,
+            name: bindingValues[0].name,
+            family: this.requireDisplayedFamily(
+                bindingValues[0].family,
+                nodeProvenance
+            )
+        });
+        const next = Object.freeze({
+            position: 2,
+            name: bindingValues[1].name,
+            family: this.requireDisplayedFamily(
+                bindingValues[1].family,
+                nodeProvenance
+            )
+        });
+        const contextRoot = prefix.family.baseCategory;
+        const totalBase = this.totalCategoryExpression(
+            prefix.family,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            next.family.baseCategory.expression,
+            totalBase
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                `Displayed dependent binding '${next.name}' must be based ` +
+                    `on Sigma(${prefix.name})`
+            );
+        }
+        const target = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            target.baseCategory.expression,
+            totalBase
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Displayed dependent contextual target must be based on ' +
+                    `Sigma(${prefix.name})`
+            );
+        }
+
+        const plan = planCoreCategoricalContextDependencies({
+            slots: [
+                {
+                    name: `${prefix.name}ContextBase`,
+                    classifier:
+                        coreCategoricalClosedContextClassifier(
+                            {
+                                tag: 'object',
+                                category: contextRoot.expression
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                },
+                {
+                    name: prefix.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            contextRoot.expression,
+                            prefix.family.expression,
+                            [
+                                coreCategoricalContextSlotReference(
+                                    0,
+                                    nodeProvenance
+                                )
+                            ],
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory: contextRoot.expression,
+                                family: prefix.family.expression,
+                                index: 0
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                },
+                {
+                    name: next.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            totalBase,
+                            next.family.expression,
+                            [
+                                coreCategoricalContextSlotReference(
+                                    0,
+                                    nodeProvenance
+                                ),
+                                coreCategoricalContextSlotReference(
+                                    1,
+                                    nodeProvenance
+                                )
+                            ],
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory: totalBase,
+                                family: next.family.expression,
+                                index: 0
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                }
+            ]
+        });
+        const edgeKeys = new Set(
+            plan.dependencyEdges.map(edge =>
+                `${edge.dependencyPosition}:${edge.dependentPosition}`
+            )
+        );
+        const nextChain = plan.dependencyChains.find(chain =>
+            chain.dependentPosition === 2
+        );
+        if (
+            edgeKeys.size !== 3 ||
+            !edgeKeys.has('0:1') ||
+            !edgeKeys.has('0:2') ||
+            !edgeKeys.has('1:2') ||
+            nextChain === undefined ||
+            nextChain.dependencyPositions.length !== 2 ||
+            nextChain.dependencyPositions[0] !== 0 ||
+            nextChain.dependencyPositions[1] !== 1 ||
+            plan.groupedProducts.length !== 0
+        ) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Dependency analysis did not establish exactly one ' +
+                    'genuine displayed dependency edge'
+            );
+        }
+
+        return this.builder.displayedDependentContextLambda(
+            [
+                {
+                    name: prefix.name,
+                    family: prefix.family.expression
+                },
+                {
+                    name: next.name,
+                    family: next.family.expression
+                }
+            ],
+            contextRoot.expression,
             target.expression,
             body,
             {

@@ -53,6 +53,9 @@ import {
     coreCategoricalDisplayedEvaluationCoreName
 } from './categorical_displayed_evaluation_transfer';
 import {
+    coreCategoricalDisplayedChainCoreName
+} from './categorical_displayed_chain_transfer';
+import {
     CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
 } from './categorical_fibred_dependent_target_transfer';
 import {
@@ -410,6 +413,25 @@ export type CoreCategoricalAbstractionEvidence =
     )
     | (
         CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
+                'categorical.displayed-dependent-context-bracket';
+            readonly variation: 'functorial';
+            readonly dependency: 'displayed';
+            readonly bindingNames: readonly [string, string];
+            readonly sourceFamilies:
+                readonly [KernelExpression, KernelExpression];
+            readonly sourceFamily: KernelExpression;
+            readonly targetFamily: KernelExpression;
+            readonly contextRootCategory: KernelExpression;
+            readonly totalBaseCategory: KernelExpression;
+            readonly liftedPrefixFamily: KernelExpression;
+            readonly contextSize: 2;
+            readonly contextRelation:
+                'one-genuine-dependency-edge';
+        }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
             readonly rule: 'categorical.displayed-transfor-eta';
             readonly variation: 'natural';
             readonly dependency: 'displayed';
@@ -449,6 +471,7 @@ export type CoreCategoricalDependentApplicationPrerequisiteId =
     | 'displayed-evaluation'
     | 'displayed-terminal'
     | 'constant-section-functor'
+    | 'sigma-functord-section'
     | CoreCategoricalDependentPrerequisiteId
     | CoreCategoricalDependentCompositionPrerequisiteId;
 
@@ -482,6 +505,11 @@ export interface CoreCategoricalScopedBuilderOptions {
      * judgments over the stable constant-domain `Functor_catd` family.
      */
     readonly displayedEvaluation?: boolean;
+    /**
+     * Enable only DISPLAYED-CHAIN-1A's recursive compiler for one genuine
+     * dependency edge `k : K; a : A[k]; b : B[(k,a)]`.
+     */
+    readonly displayedDependentContextualAbstraction?: boolean;
 }
 
 export interface CoreCategoricalBinderOptions {
@@ -4747,6 +4775,22 @@ export class CoreCategoricalScopedBuilder {
                 'Displayed section weakening lost its qualified section'
             );
         }
+        return this.lowerDisplayedSectionWeakeningTerm(
+            section.closed.term,
+            baseCategory,
+            sourceFamily,
+            targetFamily,
+            nodeProvenance
+        );
+    }
+
+    private lowerDisplayedSectionWeakeningTerm(
+        sectionTerm: KernelExpression,
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
         const totalCategory = kernelCall(
             kernelFree(
                 CORE_DIRECTED_1A_PRIMITIVE_NAMES['sigma-category'],
@@ -4822,7 +4866,7 @@ export class CoreCategoricalScopedBuilder {
                 { value: sourceSectionCategory },
                 { value: targetSectionCategory },
                 { value: pullbackFunctor },
-                { value: section.closed.term }
+                { value: sectionTerm }
             ],
             nodeProvenance
         );
@@ -5950,6 +5994,423 @@ export class CoreCategoricalScopedBuilder {
             ) {
                 this.activeTokenOrdinals.shift();
             }
+        }
+    }
+
+    /**
+     * Recursive displayed bracket for exactly one genuine dependency edge:
+     *
+     *   k : K; a : A[k]; b : B[(k,a)].
+     *
+     * The result is a direct displayed functor from B over Sigma(A). The
+     * immediate variable b uses identity wiring. The outer variable a uses
+     * `sigma_functord_sec(id_funcd A)` and the existing section-pullback
+     * weakening across B. The body itself is compiled by the same recursive
+     * contextual occurrence compiler used for independent siblings.
+     */
+    displayedDependentContextLambda(
+        bindings: readonly {
+            readonly name: string;
+            readonly family: KernelExpression;
+        }[],
+        contextRootCategory: KernelExpression,
+        targetFamily: KernelExpression,
+        bodyBuilder: (
+            tokens: readonly CoreCategoricalSlotToken[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        kernelAssertScoped(contextRootCategory);
+        kernelAssertScoped(targetFamily);
+        const nodeProvenance = this.nodeProvenance(
+            'displayed dependent contextual abstraction',
+            options.provenance
+        );
+        if (
+            this.options
+                .displayedDependentContextualAbstraction !== true
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Displayed dependent contextual abstraction requires the ' +
+                    'reviewed DISPLAYED-CHAIN-1A capability'
+            );
+        }
+        if (bindings.length !== 2) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'DISPLAYED-CHAIN-1A accepts exactly one prefix family and ' +
+                    'one genuinely dependent next family'
+            );
+        }
+        const [prefixBinding, nextBinding] = bindings;
+        assertSafeIdentifier(
+            prefixBinding.name,
+            'Displayed dependent prefix binder hint'
+        );
+        assertSafeIdentifier(
+            nextBinding.name,
+            'Displayed dependent next binder hint'
+        );
+        kernelAssertScoped(prefixBinding.family);
+        kernelAssertScoped(nextBinding.family);
+        if (prefixBinding.name === nextBinding.name) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Duplicate displayed dependent binder ` +
+                    `'${prefixBinding.name}'`
+            );
+        }
+
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'functorial';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'displayed';
+        if (variation !== 'functorial' || dependency !== 'displayed') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Displayed dependent contextual abstraction requires ' +
+                    'functorial variation and displayed dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                'Displayed dependent contextual abstraction is covariant'
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'DISPLAYED-CHAIN-1A abstracts displayed objects'
+            );
+        }
+
+        const totalBaseCategory = kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1A_PRIMITIVE_NAMES['sigma-category'],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: contextRootCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: prefixBinding.family
+                }
+            ],
+            nodeProvenance
+        );
+        const prefixProjection = kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1B_PRIMITIVE_NAMES[
+                    'sigma-first-projection'
+                ],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: contextRootCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: prefixBinding.family
+                }
+            ],
+            nodeProvenance
+        );
+        const liftedPrefixFamily = kernelApplication(
+            'displayed-pullback',
+            [
+                { value: totalBaseCategory },
+                { value: contextRootCategory },
+                { value: prefixBinding.family },
+                { value: prefixProjection }
+            ],
+            nodeProvenance
+        );
+
+        const baseToken = this.slot(
+            `${prefixBinding.name}${nextBinding.name}ContextBase`,
+            totalBaseCategory,
+            nodeProvenance
+        );
+        const baseOrdinal = baseToken.node.tag === 'slot-token'
+            ? baseToken.node.ordinal
+            : -1;
+        const prefixToken = this.indexedObjectSlot(
+            prefixBinding.name,
+            totalBaseCategory,
+            liftedPrefixFamily,
+            baseOrdinal,
+            nodeProvenance
+        );
+        const nextToken = this.indexedObjectSlot(
+            nextBinding.name,
+            totalBaseCategory,
+            nextBinding.family,
+            baseOrdinal,
+            nodeProvenance
+        );
+        const prefixOrdinal =
+            prefixToken.node.tag === 'slot-token'
+                ? prefixToken.node.ordinal
+                : -1;
+        const nextOrdinal =
+            nextToken.node.tag === 'slot-token'
+                ? nextToken.node.ordinal
+                : -1;
+        const outerScope = [...this.activeTokenOrdinals];
+        this.activeTokenOrdinals.unshift(baseOrdinal);
+        this.activeTokenOrdinals.unshift(prefixOrdinal);
+        this.activeTokenOrdinals.unshift(nextOrdinal);
+        this.activeDisplayedBases.set(baseOrdinal, baseToken);
+        try {
+            // Evaluate exactly once; no callback is retained.
+            const body = this.requireTerm(
+                bodyBuilder(Object.freeze([
+                    prefixToken as CoreCategoricalSlotToken,
+                    nextToken as CoreCategoricalSlotToken
+                ])),
+                nodeProvenance
+            );
+            const localOrdinals = new Set([
+                baseOrdinal,
+                prefixOrdinal,
+                nextOrdinal
+            ]);
+            if (usageIntersects(body.usage, new Set(outerScope))) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'DISPLAYED-CHAIN-1A does not capture an outer context'
+                );
+            }
+            if (
+                body.type.tag !== 'indexed-object' ||
+                body.type.indexOrdinal !== baseOrdinal ||
+                !kernelExpressionEquals(
+                    body.type.baseCategory,
+                    totalBaseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.family,
+                    targetFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Displayed dependent contextual body is not an object ' +
+                        'of the target family over Sigma(A)'
+                );
+            }
+
+            const prefixIdentity =
+                this.displayedIdentityCompilation(
+                    contextRootCategory,
+                    prefixBinding.family,
+                    nodeProvenance
+                );
+            const prefixSection = kernelCall(
+                kernelFree(
+                    coreCategoricalDisplayedChainCoreName(
+                        'sigmaFunctordSection'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: contextRootCategory
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: prefixBinding.family
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: prefixBinding.family
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: prefixIdentity.term
+                    }
+                ],
+                nodeProvenance
+            );
+            const prefixUnderNext:
+            CoreCategoricalDisplayedContextualCompilation = {
+                term: this.lowerDisplayedSectionWeakeningTerm(
+                    prefixSection,
+                    totalBaseCategory,
+                    nextBinding.family,
+                    liftedPrefixFamily,
+                    nodeProvenance
+                ),
+                sourceFamily: nextBinding.family,
+                targetFamily: liftedPrefixFamily,
+                identity: false,
+                structuralPrerequisites: Object.freeze([]),
+                dependentPrerequisites:
+                    mergeDependentPrerequisites(
+                        prefixIdentity.dependentPrerequisites,
+                        [
+                            'sigma-functord-section',
+                            'sigma-projection-pullback',
+                            'sigma-pi-uncurrying-proof',
+                            'sigma-first-projection',
+                            'section-pullback-functor',
+                            'constant-displayed-family-object'
+                        ]
+                    )
+            };
+            const wiring:
+            CoreCategoricalDisplayedWiring = new Map([
+                [prefixOrdinal, prefixUnderNext],
+                [
+                    nextOrdinal,
+                    this.displayedIdentityCompilation(
+                        totalBaseCategory,
+                        nextBinding.family,
+                        nodeProvenance
+                    )
+                ]
+            ]);
+            const compilation = this.compileDisplayedContextual(
+                body,
+                baseOrdinal,
+                totalBaseCategory,
+                wiring,
+                localOrdinals,
+                nodeProvenance
+            );
+            if (
+                !kernelExpressionEquals(
+                    compilation.sourceFamily,
+                    nextBinding.family
+                ) ||
+                !kernelExpressionEquals(
+                    compilation.targetFamily,
+                    targetFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Displayed dependent contextual compilation produced ' +
+                        'the wrong source or target family'
+                );
+            }
+
+            const resultExpression = compilation.term;
+            const resultType: CoreType = {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategory(
+                    totalBaseCategory,
+                    nextBinding.family,
+                    targetFamily,
+                    nodeProvenance
+                ),
+                baseCategory: totalBaseCategory,
+                sourceFamily: nextBinding.family,
+                targetFamily
+            };
+            const resultNode: TemporaryCategoricalNode = {
+                tag: 'explicit-core-term',
+                term: resultExpression,
+                provenance: nodeProvenance
+            };
+            let remainingUsage = body.usage;
+            for (const ordinal of [
+                baseOrdinal,
+                prefixOrdinal,
+                nextOrdinal
+            ]) {
+                remainingUsage = removeUsage(
+                    remainingUsage,
+                    ordinal
+                );
+            }
+            const closed = deepFreeze({
+                term: resultExpression,
+                type: copyCoreType(resultType),
+                sourceSpan: this.spanFor(nodeProvenance),
+                recovered: body.closed === undefined
+                    ? []
+                    : [...body.closed.recovered]
+            });
+            const provisional = this.makeTerm(
+                resultNode,
+                resultType,
+                remainingUsage,
+                closed,
+                body.abstractions
+            );
+            const bodyScope = [
+                nextOrdinal,
+                prefixOrdinal,
+                baseOrdinal,
+                ...outerScope
+            ];
+            const evidence = deepFreeze({
+                rule: (
+                    'categorical.displayed-dependent-context-bracket'
+                ) as const,
+                name:
+                    `${prefixBinding.name},${nextBinding.name}`,
+                plicity,
+                variation: 'functorial' as const,
+                polarity: 'covariant' as const,
+                cellLevel: 'object' as const,
+                dependency: 'displayed' as const,
+                sourceCategory: totalBaseCategory,
+                bindingNames: [
+                    prefixBinding.name,
+                    nextBinding.name
+                ] as const,
+                sourceFamilies: [
+                    prefixBinding.family,
+                    nextBinding.family
+                ] as const,
+                sourceFamily: nextBinding.family,
+                targetFamily,
+                contextRootCategory,
+                totalBaseCategory,
+                liftedPrefixFamily,
+                contextSize: 2 as const,
+                contextRelation:
+                    'one-genuine-dependency-edge' as const,
+                body: this.normalizeNode(body, bodyScope),
+                result: this.normalizeNode(provisional, outerScope),
+                structuralPrerequisites:
+                    compilation.structuralPrerequisites,
+                dependentPrerequisites:
+                    compilation.dependentPrerequisites,
+                provenance: nodeProvenance
+            });
+            return this.makeTerm(
+                resultNode,
+                resultType,
+                remainingUsage,
+                closed,
+                [...body.abstractions, evidence]
+            );
+        } finally {
+            this.activeDisplayedBases.delete(baseOrdinal);
+            this.activeTokenOrdinals.shift();
+            this.activeTokenOrdinals.shift();
+            this.activeTokenOrdinals.shift();
         }
     }
 
