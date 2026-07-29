@@ -275,7 +275,34 @@ proposed. Its focused-green implementation makes no checker/Core/Lambdapi
 semantic change; it only adds permanent matrix/code-universe evidence and
 corrects the misleading checker-test and inductive/mixed boundary
 classification. Exact staged review passed and the implementation checkpoint
-is `b4cb8d39bd31adc768784308263fd91d83ddeefe`. SCALE-INDUCTIVE-1B is next.
+is `b4cb8d39bd31adc768784308263fd91d83ddeefe`.
+
+SCALE-INDUCTIVE-1B is now split from live generated-owner evidence. Lambdapi
+prints `ind_τΣ_` with a motive varying over `A,P,s`, whereas a prefix-parameter
+owner such as `ind_PathRecordData` fixes its prefix `A` before the motive.
+The acquired `τΣ_` block must therefore classify inline `a,P` as indices, not
+fixed prefix parameters. The executable SCALE-INDUCTIVE-1B1 proposal proves
+that correction leaves the already checked 1A-erased `τΣ_`/`Struct_sigma`
+declaration types structurally identical. It then compiles an explicit
+companion contract—the exact generated declaration, one constructor beta,
+and a polymorphic first-projection consumer—through the existing generic
+declaration, mixed, runtime, and conversion engines. Both TypeScript and a
+bounded live Lambdapi probe reduce the consumer on `Struct_sigma`.
+
+The fixed-parameter `sigma_ind` is correctly retained as a separate stable
+facade; it is not definitionally the fully parameter-polymorphic
+`ind_τΣ_`. H-DTTLF-SCALE-INDUCTIVE-01/
+D-DTTLF-SCALE-INDUCTIVE-001 now gates only the zero-erased-signature index
+correction and generic explicit-contract association/validator.
+SCALE-INDUCTIVE-1B2 separately retains direct `ind_nat` recursion, recursive
+induction hypotheses, two generated betas, and negative strict positivity.
+No LF checker connective, native-`TYPE` quantification, surface parser,
+categorical-binder frontend, active profile, browser API, or Lambdapi source
+change is proposed by 1B1. This work is immediately required for faithful
+transfer because active emdash declarations already consume generated
+induction owners. The first-projection definition is a conformance witness,
+not a new end-user inductive-declaration facade; optional user-facing
+declaration syntax or automatic eliminator generation remains deferred.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark

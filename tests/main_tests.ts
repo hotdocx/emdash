@@ -158,6 +158,7 @@ import './v3_2_scale_stress_3a2a_representation_tests';
 import './v3_2_scale_stress_3a2b_representation_tests';
 import './v3_2_scale_stress_3b_acquisition_tests';
 import './v3_2_scale_kind_pi_audit_tests';
+import './v3_2_scale_inductive_1b_proposal_tests';
 
 // Global setup or teardown for all tests can be managed here if needed,
 // using `before` and `after` hooks from `node:test` if run in the same process,

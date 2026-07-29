@@ -133,8 +133,18 @@ rejected. Its frozen D-DTTLF-LF-SORT-001 proposal selects no checker change,
 only permanent matrix/code-universe evidence and correction of a misleading
 inductive boundary label. The proposal is directly approved and its exact
 no-semantic-change correction is complete at
-`b4cb8d39bd31adc768784308263fd91d83ddeefe`. The following order is
-SCALE-INDUCTIVE-1B,
+`b4cb8d39bd31adc768784308263fd91d83ddeefe`. SCALE-INDUCTIVE-1B's first live
+audit has now exposed the required parameter/index distinction: prefix
+binders are fixed generated-eliminator parameters, while `τΣ_`'s inline
+`a,P` binders vary in the generated motive and are indices. Reclassifying
+them leaves the 1A-erased head and constructor types structurally identical.
+The deeply frozen SCALE-INDUCTIVE-1B1 proposal represents the exact printed
+`ind_τΣ_` type and one beta as an explicit companion contract, compiles the
+polymorphic generated-first-projection consumer through the existing generic
+engines, and leaves direct recursion/strict positivity to measured
+SCALE-INDUCTIVE-1B2. It awaits the separate
+H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 review. The following
+order is SCALE-INDUCTIVE-1B1, SCALE-INDUCTIVE-1B2,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
 implementation/module-linking work, not a new LF semantic feature and not a
@@ -650,7 +660,9 @@ The architecture qualifies only when all of the following hold:
 | SCALE-STRESS-1A | complete | SCALE-ACQUIRE-1A | Exact typed representation and fail-closed engine-gap classification for the acquired J/Pi/Sigma/Nat commands, without installing an active semantic profile |
 | SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
-| SCALE-INDUCTIVE-1B | pending | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Represent and check generated eliminator types/computation plus recursive/indexed and strict-positivity boundaries; no backend-generated owner is trusted without an explicit typed contract |
+| SCALE-INDUCTIVE-1B | in progress | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Parent row for explicit generated-owner contracts, parameter/index fidelity, recursive/indexed validation, and strict-positivity boundaries; no backend-generated owner is trusted from its name alone |
+| SCALE-INDUCTIVE-1B1 | proposal complete; awaiting H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Correct the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; associate the exact explicit `ind_τΣ_` type and one beta as a checked companion contract; compile the polymorphic first-projection consumer through existing generic engines; qualify only the nonrecursive indexed case |
+| SCALE-INDUCTIVE-1B2 | pending | SCALE-INDUCTIVE-1B1 | Use the measured `ind_nat` type/two betas to qualify direct structural recursion, recursive induction-hypothesis contracts, and negative strict-positivity rejection; keep mutual and general higher-order positivity separate unless active consumers require them |
 | SCALE-KIND-PI-1 | complete at `b4cb8d39bd31adc768784308263fd91d83ddeefe`; audit/proposal checkpoint `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserves the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
 | SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines |
@@ -1560,6 +1572,137 @@ EMDASH_TYPECHECK_TIMEOUT=60s ./scripts/pnpmw run check:scale
   source/report/book/audit gates passed
   all 11 directed conformance probes passed
   all 14 live canonical inventory/acquisition probes passed
+```
+
+## SCALE-INDUCTIVE-1B1 Audit And Frozen Proposal
+
+The executable proposal is
+`src/v3_2/scale_inductive_1b_proposal.ts`; its focused test is
+`tests/v3_2_scale_inductive_1b_proposal_tests.ts`. A bounded live query with
+implicit arguments and domains displayed reports the following shape:
+
+```text
+ind_τΣ_ :
+  (Π A : Grpd, Π P : τ A → Grpd, τΣ_ A P → Grpd) →
+  (Π A : Grpd, Π P : τ A → Grpd,
+     Π x : τ A, Π u : τ (P x),
+     τ (motive A P (Struct_sigma x u))) →
+  Π A : Grpd, Π P : τ A → Grpd,
+  Π s : τΣ_ A P, τ (motive A P s)
+```
+
+It also reports one constructor beta. This matters because Lambdapi
+distinguishes two syntactic positions:
+
+- `(A : Grpd) inductive PathRecordData ...` makes `A` one fixed prefix
+  parameter of `ind_PathRecordData`; and
+- `inductive τΣ_ [a : Grpd] (P : τ a → Grpd) ...` makes `a,P`
+  eliminator-varying indices in the motive.
+
+The SCALE-INDUCTIVE-1A representation had placed `a,P` in `parameters` because
+that was enough to erase the correct head and constructor signatures. It was
+not a sound basis for generated semantics. The proposed correction moves
+them to `indices` and explicitly rebinds them in `Struct_sigma` with the
+constructor's two implicit modes. Executable comparison proves that the
+lowered `τΣ_` and `Struct_sigma` declaration types and modifiers are
+structurally identical before and after the correction. Thus this is a
+semantic-classification correction, not a normal-form or public-signature
+migration.
+
+The exact generated owner is not inferred from the spelling `ind_τΣ_`.
+The proposal records a companion `CoreLfModuleSpec` containing:
+
+1. the explicit checked generated declaration with `generatedBy: τΣ_`;
+2. the one explicit constructor computation rule, with the constructor
+   parameter equality made structural by repeated `A,P` captures; and
+3. a transparent, genuinely polymorphic first-projection consumer
+
+   ```text
+   ind_τΣ_ (λ A P _, A) (λ A P x _, x).
+   ```
+
+The fixed-parameter `sigma_ind` is not that consumer. Its motive fixes one
+`A,P`, whereas generated `ind_τΣ_` quantifies across every `A,P`; the active
+kernel therefore exposes `sigma_ind` as a separate stable facade and beta,
+not a definitional alias. The polymorphic first projection is the correct
+first generated-owner consumer. Both live Lambdapi and TypeScript reduce it
+on `Struct_sigma` to the first component.
+
+The companion contract already compiles as two ordinary declaration phases
+and one runtime phase through the existing generic engines. The proposed
+implementation adds only the generic association/validation boundary needed
+to ensure that:
+
+- the contract names an identity listed by exactly one inductive block;
+- its declaration records that block as `generatedBy`;
+- its explicit type checks after the corrected head/constructors;
+- its beta rules are owned by that generated declaration and pass the
+  ordinary runtime subject check; and
+- the selected block is classified as indexed but nonrecursive, with zero
+  recursive occurrences and therefore a trivial strict-positivity result.
+
+This is transfer/validation infrastructure, not a new outer-LF connective or
+Lambdapi semantic feature. It does not synthesize a trusted eliminator from a
+backend name. The explicit contract remains the reviewable authority.
+
+This is also an immediate transfer prerequisite rather than a selected
+end-user convenience feature. Active emdash declarations already consume
+generated owners including `ind_τΣ_`, `ind_nat`, and
+`ind_PathRecordData`; signature-only transfer cannot check those consumers
+without faithful parameter/index classification, explicit generated-owner
+types, and checked constructor computation. The transparent first-projection
+definition is only a minimal executable conformance consumer. This row adds
+no end-user inductive-declaration facade, surface syntax, automatic
+eliminator generator, or usability-profile API. Such packaging remains
+optional/deferred unless a later implementation step is a mechanically
+negligible projection of the required checked contract.
+
+The proposal deliberately splits the remaining parent. SCALE-INDUCTIVE-1B2
+uses the separately measured active `ind_nat` type and two rules to qualify
+direct recursive occurrences, the generated recursive induction hypothesis,
+and a negative strict-positivity fixture. General higher-order positivity,
+mutual inductives, automatic unchecked generation, implicit native-`TYPE`
+polymorphism, active profile/browser promotion, Lambdapi changes, parser
+work, and whole-transfer graduation remain outside 1B1.
+
+The exact non-self-authorizing decision is:
+
+> Approve H-DTTLF-SCALE-INDUCTIVE-01/
+> D-DTTLF-SCALE-INDUCTIVE-001 as proposed: correct `τΣ_`'s inline `a,P`
+> binders from fixed parameters to indices while retaining structurally
+> identical erased head/constructor declarations; add one generic explicit
+> generated-owner companion-contract association and validation path; check
+> only the exact printed `ind_τΣ_` declaration, one constructor beta, and the
+> polymorphic generated-first-projection consumer through existing generic
+> engines; classify this case as indexed and nonrecursive; leave direct
+> recursion, recursive induction hypotheses, and negative strict positivity
+> to SCALE-INDUCTIVE-1B2; and add no backend-name-only trust, automatic
+> unchecked eliminator synthesis, native-`TYPE` polymorphism, active profile,
+> browser, Lambdapi, parser, bulk-transfer, release, remote-Git, or
+> history-rewrite authority?
+
+Focused validation on 2026-07-29:
+
+```text
+node --require ts-node/register \
+  --test tests/v3_2_scale_inductive_1b_proposal_tests.ts
+  7 tests: 6 passed, 1 live Lambdapi probe skipped
+
+EMDASH_RUN_LAMBDAPI_SCALE_INDUCTIVE_PROBES=1 \
+  node --require ts-node/register \
+  --test tests/v3_2_scale_inductive_1b_proposal_tests.ts
+  7 tests: all passed
+
+./scripts/pnpmw run typecheck
+./scripts/pnpmw run lint
+  passed
+
+./scripts/pnpmw run check:ts
+  1,085 tests: 1,035 passed, 50 intentionally skipped, zero failures
+  aggregate node:test duration: 1,150,267 ms
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  passed
 ```
 
 ## SCALE-MIXED-PHASE-1A Completion Record
@@ -2707,6 +2850,17 @@ classification. Any future proposal to broaden this matrix would require a
 new exact LF review. This gate does not block the independent mixed-phase
 planner.
 
+### H-DTTLF-SCALE-INDUCTIVE-01 — First Explicit Generated Owner
+
+Triggered by SCALE-INDUCTIVE-1B1 after live generated-owner inspection
+distinguished prefix parameters from inline indices. It may authorize only
+the zero-erased-signature `τΣ_` representation correction, a generic explicit
+companion-contract association/validator, the exact checked `ind_τΣ_` type
+and one beta, and the polymorphic first-projection consumer. It does not
+authorize generated-owner trust by naming convention, recursive/mutual
+graduation, general higher-order positivity, native-`TYPE` polymorphism, an
+active profile, a Lambdapi change, or whole-transfer graduation.
+
 ### H-DTTLF-SCALE-03 — Mechanical-Transfer Qualification
 
 Triggered by SCALE-GRADUATE-1. It may authorize only the exact supported
@@ -2911,13 +3065,14 @@ relinking is the default; compare monotone checked signature-to-body module
 merging only after a measured independent-fragment need. Neither strategy may
 change LF/Core semantics. Once the displayed graduation, mixed-telescope
 stress, and `:^nd` audit return control here, resume in this order:
-preserve the completed SCALE-KIND-PI-1 product-sort audit, obtain or record
-the exact D-DTTLF-LF-SORT-001 decision, and implement only its
-no-semantic-change classification/evidence correction. The decision is now
-directly approved and that correction is focused-green; finish only its exact
-staged review and bounded local checkpoint, and then continue with
-SCALE-INDUCTIVE-1B, SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do
-not silently substitute the pending
+preserve the completed SCALE-KIND-PI-1 product-sort audit and its directly
+approved no-semantic-change correction. Continue through the living
+SCALE-INDUCTIVE-1B split: first recover and validate the frozen 1B1
+parameter/index and explicit generated-contract proposal, obtain or record
+its exact separate D-DTTLF-SCALE-INDUCTIVE-001 review, implement only that
+boundary, then qualify direct `ind_nat` recursion/strict positivity in 1B2.
+After the parent closes, continue with SCALE-STRESS-3C, SCALE-BATCH-1, and
+SCALE-GRADUATE-1. Do not silently substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
 
 Separate acquisition from semantic policy and runtime rewrites from
@@ -2963,6 +3118,16 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — SCALE-INDUCTIVE-1B1 audit exposed the parameter/index
+  boundary and froze an exact proposal.** Live `print` evidence shows that
+  `τΣ_`'s inline `a,P` binders vary in the generated motive, unlike fixed
+  prefix parameters. The executable correction moves them to indices while
+  preserving structurally identical 1A-erased head/constructor declarations.
+  An explicit `ind_τΣ_` companion declaration, one beta, and a polymorphic
+  generated-first-projection consumer already compile and reduce through the
+  generic engines and agree with bounded Lambdapi. The proposal awaits
+  H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001; direct `ind_nat`
+  recursion and negative strict positivity remain 1B2.
 - **2026-07-29 — SCALE-KIND-PI-1 audit found no checker gap.** The
   executable four-cell TypeScript/live-Lambdapi matrix accepts only
   `TYPE`-sorted domain annotations, with either `TYPE`- or `KIND`-sorted
