@@ -100,7 +100,7 @@ export const CORE_CATEGORICAL_DISPLAYED_CHAIN_TRANSFER_REVISION =
     'DISPLAYED-CHAIN-1A-GENERIC-TRANSFER-1' as const;
 
 export const CORE_CATEGORICAL_DISPLAYED_CHAIN_SOURCE_SHA256 =
-    'sha256:16b5b1adc5ec462012e03555cfe65db91679983ef370e01adb9948a0bacc61cb';
+    'sha256:ccda94c638af8d4fa7ce122967dcc30159c713846eedd53cee0df83123b48a11';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
@@ -421,6 +421,48 @@ const sigmaPair = (
             value: objectClassifierAt(builder, base)
         },
         { plicity: 'implicit', value: familyClassifier },
+        { plicity: 'explicit', value: first },
+        { plicity: 'explicit', value: second }
+    ]);
+};
+
+/**
+ * Runtime-pattern view of Struct_sigma.
+ *
+ * Lambdapi source rules write the pair constructor with its decoded carrier
+ * and family-classifier arguments inferred. They therefore do not constrain
+ * those arguments as part of matching. The transfer must preserve that
+ * behavior: composite transparent families can normalize their inferred
+ * classifier differently while denoting the same explicit base/family data.
+ * Typed wildcards retain subject checking without turning inferred slots into
+ * accidental rigid owner positions.
+ */
+const sigmaPairPattern = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression,
+    family: CoreLfTransferBuilderExpression,
+    first: CoreLfTransferBuilderExpression,
+    second: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression => {
+    const carrier = objectClassifierAt(builder, base);
+    const familyClassifier = builder.lam(
+        'pairPoint',
+        objectType(builder, base),
+        pairPoint => objectClassifierAt(
+            builder,
+            fibre(builder, base, family, pairPoint)
+        ),
+        explicitMode
+    );
+    return globalCall(builder, dependentPair, [
+        {
+            plicity: 'implicit',
+            value: builder.wildcard(carrier)
+        },
+        {
+            plicity: 'implicit',
+            value: builder.wildcard(familyClassifier)
+        },
         { plicity: 'explicit', value: first },
         { plicity: 'explicit', value: second }
     ]);
@@ -1309,7 +1351,7 @@ const sigmaMapObjectRule = (): CoreLfTransferRuntimeRule => {
             sigmaTotal(builder, K, E),
             sigmaTotal(builder, K, D),
             sigmaMapAt(builder, K, E, D, eta),
-            sigmaPair(builder, K, E, k, u)
+            sigmaPairPattern(builder, K, E, k, u)
         )),
         right: builder.template(sigmaPair(
             builder,
@@ -1429,8 +1471,8 @@ const sigmaMapStructuredArrowRule =
             sigmaTotal(builder, K, E),
             sigmaTotal(builder, K, D),
             sigmaMapAt(builder, K, E, D, eta),
-            sigmaPair(builder, K, E, x, u),
-            sigmaPair(builder, K, E, y, v),
+            sigmaPairPattern(builder, K, E, x, u),
+            sigmaPairPattern(builder, K, E, y, v),
             sigmaArrowAt(builder, K, E, x, y, u, v, p, alpha)
         )),
         right: builder.template(sigmaArrowAt(
@@ -1519,7 +1561,7 @@ const prerequisiteRuntimeRules = Object.freeze([
                 sigmaTotal(builder, K, R),
                 builder.global(categoryOfCategories),
                 sigmaProjectionPullbackAt(builder, K, R, D),
-                sigmaPair(builder, K, R, k, r)
+                sigmaPairPattern(builder, K, R, k, r)
             )),
             right: builder.template(fibre(builder, K, D, k)),
             provenance: source(
@@ -1975,8 +2017,8 @@ const projectionStructuredArrowRule =
             sigmaTotal(builder, K, E),
             K,
             sigmaProjectionAt(builder, K, E),
-            sigmaPair(builder, K, E, x, u),
-            sigmaPair(builder, K, E, y, v),
+            sigmaPairPattern(builder, K, E, x, u),
+            sigmaPairPattern(builder, K, E, y, v),
             sigmaArrowAt(builder, K, E, x, y, u, v, p, alpha)
         )),
         right: builder.template(p),
@@ -2067,8 +2109,8 @@ const projectionPullbackStructuredArrowRule =
             sigmaTotal(builder, K, R),
             builder.global(categoryOfCategories),
             sigmaProjectionPullbackAt(builder, K, R, D),
-            sigmaPair(builder, K, R, x, u),
-            sigmaPair(builder, K, R, y, v),
+            sigmaPairPattern(builder, K, R, x, u),
+            sigmaPairPattern(builder, K, R, y, v),
             sigmaArrowAt(builder, K, R, x, y, u, v, p, alpha)
         )),
         right: builder.template(functorArrowAt(
@@ -2146,7 +2188,7 @@ const sigmaSectionObjectRule =
                 builder.global(terminalCategory)
             ),
             sigmaProjectionPullbackAt(builder, K, R, D),
-            sigmaPair(builder, K, R, k, r),
+            sigmaPairPattern(builder, K, R, k, r),
             sigmaSectionAt(builder, K, R, D, FF)
         )),
         right: builder.template(pointFunctorAt(
@@ -2263,8 +2305,8 @@ const sigmaSectionStructuredArrowRule =
             sourceFamily,
             targetFamily,
             sigmaSectionAt(builder, K, R, D, FF),
-            sigmaPair(builder, K, R, x, u),
-            sigmaPair(builder, K, R, y, v),
+            sigmaPairPattern(builder, K, R, x, u),
+            sigmaPairPattern(builder, K, R, y, v),
             sigmaArrowAt(builder, K, R, x, y, u, v, p, alpha),
             builder.global(terminalObject)
         )),

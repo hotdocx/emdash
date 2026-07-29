@@ -133,6 +133,10 @@ export class CoreLfChecker extends CoreChecker {
         return 'Combined Core LF conversion';
     }
 
+    protected constraintComparisonStepLimit(): number {
+        return this.lfSession.comparisonStepLimit;
+    }
+
     protected compareDefinitions(
         left: KernelExpression,
         right: KernelExpression,

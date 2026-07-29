@@ -73,8 +73,14 @@ existing signatures, nine TypeScript continuation rules, and generic
 512-step LF budget plumbing with zero oracle/intrinsic/second-frontend
 change. Its exact review checkpoint is
 `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`. The closure implementation is
-dependency-ready, followed by general `:^nd`. When control returns to this
-scale plan, the selected order is SCALE-KIND-PI-1,
+now complete with twelve permanent focused transfer/consumer tests. The
+complete repository gate passes 1,022 TypeScript tests (975 active, 47
+intentionally skipped), all 19 live conformance judgments, and complete
+kernel CI; exact staged review and its local checkpoint remain. It adds zero
+symbols, one existing-owner rule, three declarations, nine generic runtime
+entries, and no oracle/intrinsic/second-frontend path.
+DISPLAYED-ND-0A follows that checkpoint. When control returns to this scale
+plan, the selected order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2675,11 +2681,13 @@ non-self-authorizing DISPLAYED-BRACKET-GRADUATE-1 assessment and its separate
 immutable exact D-DTTLF-USABILITY-016 delegated review with human
 supersession. Its mandatory stop has fired. Preserve the deeply frozen,
 non-self-authorizing DISPLAYED-CHAIN-2A-CLOSURE-0A proposal and its separate
-immutable D-017 delegated review with human supersession. Implement exactly its
-one existing-owner rule, three existing signatures, nine continuation rules,
-typed inferred-slot corrections, isolated profile, and generic 512-step LF
-budget seam with zero oracle/intrinsic/owner-specific checker path; then
-finish only the frozen four-binding/three-level evidence corpus.
+immutable D-017 delegated review with human supersession. Preserve its
+completed one existing-owner rule, three existing signatures, nine
+continuation rules, typed inferred-slot corrections, isolated profile, and
+generic 512-step LF budget seam with zero
+oracle/intrinsic/owner-specific checker path. Finish only any missing final
+validation/report/checkpoint synchronization, then route through
+DISPLAYED-ND-0A before resuming this scale ledger.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit

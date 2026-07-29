@@ -14548,6 +14548,46 @@ rule @fdapp1_int_hom_fapp0
       $p
       Terminal_obj;
 
+// Componentwise internalized laxity cell of displayed product pairing.
+// This is the fdapp1_int_cell projection of the existing
+// Product_pair_funcd owner, not a new displayed-product constructor.
+rule @fdapp1_int_cell
+      $K
+      $E
+      _
+      (@Product_pair_funcd $K $E $B $C $FF $GG)
+      $x
+      $y
+      $p
+      $u
+  ↪ @Product_pair
+      (Hom_cat
+        (Fibre_cat $B $y)
+        (@fapp0
+          (Fibre_cat $E $x)
+          (Fibre_cat $B $y)
+          (@functord_transport_lhs_func $K $E $B $FF $x $y $p)
+          $u)
+        (@fapp0
+          (Fibre_cat $E $x)
+          (Fibre_cat $B $y)
+          (@functord_transport_rhs_func $K $E $B $FF $x $y $p)
+          $u))
+      (Hom_cat
+        (Fibre_cat $C $y)
+        (@fapp0
+          (Fibre_cat $E $x)
+          (Fibre_cat $C $y)
+          (@functord_transport_lhs_func $K $E $C $GG $x $y $p)
+          $u)
+        (@fapp0
+          (Fibre_cat $E $x)
+          (Fibre_cat $C $y)
+          (@functord_transport_rhs_func $K $E $C $GG $x $y $p)
+          $u))
+      (@fdapp1_int_cell $K $E $B $FF $x $y $p $u)
+      (@fdapp1_int_cell $K $E $C $GG $x $y $p $u);
+
 // Section-action projection for the explicit Sigma uncurrying wrapper.
 // Action over (p,alpha) is the underlying internalized displayed-functor
 // action on alpha.

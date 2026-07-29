@@ -84,6 +84,9 @@ import {
     compileCoreCategoricalDisplayedChainTransfer,
     coreCategoricalDisplayedChainCoreName
 } from './categorical_displayed_chain_transfer';
+import type {
+    CoreCategoricalDisplayedChain2aClosureCompilation
+} from './categorical_displayed_chain_2a_closure_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -172,6 +175,24 @@ import {
 export const CORE_CATEGORICAL_PROGRAM_REVISION =
     'USABILITY-2A1-CATEGORICAL-PROGRAM-1' as const;
 
+/**
+ * Load the separately reviewed DISPLAYED-CHAIN-2A closure only after this
+ * program module has initialized. Its immutable review reaches older
+ * graduation evidence that intentionally validates
+ * `CORE_CATEGORICAL_PROGRAM_REVISION`; a static value import here would read
+ * that revision through a circular dependency before initialization.
+ */
+const compileCoreCategoricalDisplayedChain2aClosure = ():
+CoreCategoricalDisplayedChain2aClosureCompilation => {
+    const transfer = require(
+        './categorical_displayed_chain_2a_closure_transfer'
+    ) as typeof import(
+        './categorical_displayed_chain_2a_closure_transfer'
+    );
+    return transfer
+        .compileCoreCategoricalDisplayedChain2aClosureTransfer();
+};
+
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
 
@@ -207,6 +228,9 @@ export const CORE_CATEGORICAL_DISPLAYED_EVALUATION_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_DISPLAYED_CHAIN_PROGRAM_REVISION =
     'DISPLAYED-CHAIN-1A-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_PROGRAM_REVISION =
+    'DISPLAYED-CHAIN-2A-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -372,8 +396,9 @@ export interface CoreCategoricalProgramOptions {
      * repaired dependent-target runtime and adds only the two reviewed
      * constant-domain evaluation judgments.
      * The displayed-chain profile adds the approved one-genuine-edge
-     * sequential-Sigma/direct-displayed lowering and no broader telescope
-     * claim.
+     * sequential-Sigma/direct-displayed lowering. The isolated chain-2a
+     * profile adds only the reviewed four-binding mixed telescope and its
+     * exact D-017 transfer closure.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -388,7 +413,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-dependent-target-1'
         | 'fibred-displayed-bracket-1'
         | 'fibred-displayed-evaluation-1'
-        | 'fibred-displayed-chain-1';
+        | 'fibred-displayed-chain-1'
+        | 'fibred-displayed-chain-2a';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -909,7 +935,8 @@ export class CoreCategoricalProgram {
         | CoreCategoricalFibredWeakenReindexCompilation
         | CoreCategoricalFibredDependentTargetCompilation
         | CoreCategoricalDisplayedEvaluationCompilation
-        | CoreCategoricalDisplayedChainCompilation;
+        | CoreCategoricalDisplayedChainCompilation
+        | CoreCategoricalDisplayedChain2aClosureCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -921,6 +948,7 @@ export class CoreCategoricalProgram {
     private readonly displayedContextualEnabled: boolean;
     private readonly displayedEvaluationEnabled: boolean;
     private readonly displayedChainEnabled: boolean;
+    private readonly displayedChain2aEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -929,6 +957,8 @@ export class CoreCategoricalProgram {
             options.sourceFile ?? '<categorical-program>';
         const profile =
             options.profile ?? 'reviewed-usability-2a1';
+        const displayedChain2aProfile =
+            profile === 'fibred-displayed-chain-2a';
         this.comprehensionEnabled =
             profile === 'fibred-comprehension-1a' ||
             profile === 'fibred-product-1a' ||
@@ -940,7 +970,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.fibredProductEnabled =
             profile === 'fibred-product-1a' ||
             profile === 'fibred-structure-1a' ||
@@ -951,7 +982,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.fibredStructureEnabled =
             profile === 'fibred-structure-1a' ||
             profile === 'fibred-binder-1' ||
@@ -961,7 +993,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.fibredBinderEnabled =
             profile === 'fibred-binder-1' ||
             profile === 'fibred-transfd-1' ||
@@ -970,7 +1003,8 @@ export class CoreCategoricalProgram {
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.fibredTransfdEnabled =
             profile === 'fibred-transfd-1' ||
             profile === 'fibred-grouped-sequential-1' ||
@@ -978,33 +1012,41 @@ export class CoreCategoricalProgram {
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.groupedSequentialEnabled =
             profile === 'fibred-grouped-sequential-1' ||
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.fibredWeakenReindexEnabled =
             profile === 'fibred-weaken-reindex-1' ||
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-bracket-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.fibredDependentTargetEnabled =
             profile === 'fibred-dependent-target-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.displayedContextualEnabled =
             profile === 'fibred-displayed-bracket-1' ||
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.displayedEvaluationEnabled =
             profile === 'fibred-displayed-evaluation-1' ||
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
         this.displayedChainEnabled =
-            profile === 'fibred-displayed-chain-1';
+            profile === 'fibred-displayed-chain-1' ||
+            displayedChain2aProfile;
+        this.displayedChain2aEnabled = displayedChain2aProfile;
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
@@ -1017,7 +1059,9 @@ export class CoreCategoricalProgram {
         if (this.displayedContextualEnabled) {
             validateCoreCategoricalDisplayedBracketContract();
         }
-        this.dependent = this.displayedChainEnabled
+        this.dependent = this.displayedChain2aEnabled
+            ? compileCoreCategoricalDisplayedChain2aClosure()
+            : this.displayedChainEnabled
             ? compileCoreCategoricalDisplayedChainTransfer()
             : this.displayedEvaluationEnabled
             ? compileCoreCategoricalDisplayedEvaluationTransfer()
@@ -1302,8 +1346,8 @@ export class CoreCategoricalProgram {
                 'UNAVAILABLE_DISPLAYED_CHAIN',
                 nodeProvenance,
                 'Genuinely dependent displayed contextual abstraction is ' +
-                    'available only in the explicit ' +
-                    "'fibred-displayed-chain-1' root profile"
+                    'available only in the explicit displayed-chain root ' +
+                    'profiles'
             );
         }
     }
@@ -5378,6 +5422,285 @@ export class CoreCategoricalProgram {
     }
 
     /**
+     * Validate and lower the frozen three-level mixed telescope selected by
+     * DISPLAYED-CHAIN-2A. Dependency and sibling structure are derived from
+     * the supplied family bases and source order; callers provide no flags.
+     */
+    private displayedMixedDependentContextLambda(
+        bindingValues:
+            readonly CoreCategoricalDisplayedContextBinding[],
+        targetValue: CoreCategoricalDisplayedFamily,
+        body: (
+            tokens: readonly CoreCategoricalSlotToken[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (!this.displayedChain2aEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_DISPLAYED_CHAIN',
+                nodeProvenance,
+                'The four-binding mixed displayed telescope is available ' +
+                    'only in the explicit ' +
+                    "'fibred-displayed-chain-2a' root profile"
+            );
+        }
+        if (bindingValues.length !== 4) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'DISPLAYED-CHAIN-2A requires exactly four bindings: one ' +
+                    'prefix, two independent middle siblings, and one ' +
+                    'deepest family'
+            );
+        }
+        const names = new Set<string>();
+        const bindings = bindingValues.map((binding, offset) => {
+            if (names.has(binding.name)) {
+                throw new CoreCategoricalProgramError(
+                    'INVALID_DISPLAYED_CONTEXT',
+                    nodeProvenance,
+                    `Duplicate displayed mixed dependent binding ` +
+                        `'${binding.name}'`
+                );
+            }
+            names.add(binding.name);
+            return Object.freeze({
+                position: offset + 1,
+                name: binding.name,
+                family: this.requireDisplayedFamily(
+                    binding.family,
+                    nodeProvenance
+                )
+            });
+        });
+        const [prefix, left, right, deepest] = bindings;
+        const contextRoot = prefix.family.baseCategory;
+        const firstTotalBase = this.totalCategoryExpression(
+            prefix.family,
+            nodeProvenance
+        );
+        for (const sibling of [left, right]) {
+            if (!kernelExpressionEquals(
+                sibling.family.baseCategory.expression,
+                firstTotalBase
+            )) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    `Displayed middle binding '${sibling.name}' must be ` +
+                        `based on Sigma(${prefix.name})`
+                );
+            }
+        }
+        const groupedMiddleFamily = this.displayedProductExpression(
+            firstTotalBase,
+            left.family.expression,
+            right.family.expression,
+            nodeProvenance
+        );
+        const totalBase = kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1A_PRIMITIVE_NAMES['sigma-category'],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: firstTotalBase
+                },
+                {
+                    plicity: 'explicit',
+                    value: groupedMiddleFamily
+                }
+            ],
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            deepest.family.baseCategory.expression,
+            totalBase
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                `Displayed deepest binding '${deepest.name}' must be based ` +
+                    `on Sigma(Productd(${left.name},${right.name}))`
+            );
+        }
+        const target = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            target.baseCategory.expression,
+            totalBase
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Displayed mixed dependent contextual target must be based ' +
+                    `on Sigma(Productd(${left.name},${right.name}))`
+            );
+        }
+
+        const reference = (
+            index: number
+        ) => coreCategoricalContextSlotReference(
+            index,
+            nodeProvenance
+        );
+        const plan = planCoreCategoricalContextDependencies({
+            slots: [
+                {
+                    name: `${prefix.name}ContextBase`,
+                    classifier:
+                        coreCategoricalClosedContextClassifier(
+                            {
+                                tag: 'object',
+                                category: contextRoot.expression
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                },
+                {
+                    name: prefix.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            contextRoot.expression,
+                            prefix.family.expression,
+                            [reference(0)],
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory: contextRoot.expression,
+                                family: prefix.family.expression,
+                                index: 0
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                },
+                {
+                    name: left.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            firstTotalBase,
+                            left.family.expression,
+                            [reference(0), reference(1)],
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory: firstTotalBase,
+                                family: left.family.expression,
+                                index: 0
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                },
+                {
+                    name: right.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            firstTotalBase,
+                            right.family.expression,
+                            [reference(1), reference(2)],
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory: firstTotalBase,
+                                family: right.family.expression,
+                                index: 0
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                },
+                {
+                    name: deepest.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            totalBase,
+                            deepest.family.expression,
+                            [
+                                reference(0),
+                                reference(1),
+                                reference(2),
+                                reference(3)
+                            ],
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory: totalBase,
+                                family: deepest.family.expression,
+                                index: 0
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                }
+            ],
+            siblingGroups: [{
+                positions: [2, 3],
+                provenance: nodeProvenance
+            }]
+        });
+        const edgeKeys = new Set(
+            plan.dependencyEdges.map(edge =>
+                `${edge.dependencyPosition}:${edge.dependentPosition}`
+            )
+        );
+        const expectedEdgeKeys = [
+            '0:1',
+            '0:2',
+            '1:2',
+            '0:3',
+            '1:3',
+            '0:4',
+            '1:4',
+            '2:4',
+            '3:4'
+        ];
+        const group = plan.groupedProducts[0];
+        const deepestChain = plan.dependencyChains.find(chain =>
+            chain.dependentPosition === 4
+        );
+        if (
+            edgeKeys.size !== expectedEdgeKeys.length ||
+            expectedEdgeKeys.some(key => !edgeKeys.has(key)) ||
+            group === undefined ||
+            group.positions.join(',') !== '2,3' ||
+            group.relation !== 'shared-minimal-base-siblings' ||
+            group.commonDependencies.join(',') !== '0,1' ||
+            deepestChain === undefined ||
+            deepestChain.dependencyPositions.join(',') !== '0,1,2,3'
+        ) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Dependency analysis did not establish the exact prefix, ' +
+                    'independent middle sibling block, and deepest ' +
+                    'dependency transition'
+            );
+        }
+
+        return this.builder.displayedDependentContextLambda(
+            bindings.map(binding => ({
+                name: binding.name,
+                family: binding.family.expression
+            })),
+            contextRoot.expression,
+            target.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
      * Compile exactly one genuine displayed dependency edge:
      *
      *   k : K; a : A[k]; b : B[(k,a)].
@@ -5400,6 +5723,15 @@ export class CoreCategoricalProgram {
             options.source
         );
         this.requireDisplayedChain(nodeProvenance);
+        if (bindingValues.length === 4) {
+            return this.displayedMixedDependentContextLambda(
+                bindingValues,
+                targetValue,
+                body,
+                options,
+                nodeProvenance
+            );
+        }
         if (bindingValues.length !== 2) {
             throw new CoreCategoricalProgramError(
                 'INVALID_DISPLAYED_CONTEXT',

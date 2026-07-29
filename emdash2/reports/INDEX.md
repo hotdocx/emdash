@@ -43,6 +43,14 @@ records `S(A,B)`, evaluator, and terminal-weakening notation. Generic
 `fapp`/`tapp` remains the sole generic coherence owner; arbitrary
 mixed-domain and genuine dependent-chain lowering remain deferred.
 
+The 2026-07-29 mixed displayed-chain closure adds no symbol and one
+componentwise rule at the existing `fdapp1_int_cell` owner for
+`Product_pair_funcd`. The current-status report records the owner, diagnostics,
+and bounded TypeScript consumer; Foundations records the componentwise
+mathematical action; and the canonical-syntax report records the exact
+root-only `a; b,c; d` telescope. Arbitrary depth and general `:^nd` coherence
+remain deferred.
+
 ## Recently Completed Plan Ledgers
 
 - `REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`:

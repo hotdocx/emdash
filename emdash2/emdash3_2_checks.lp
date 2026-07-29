@@ -9355,6 +9355,97 @@ assert [K : Cat]
         (@tapp1_fapp0 K Cat_cat E B x y FF p)
         (@tapp1_fapp0 K Cat_cat E C x y GG p);
 
+// The canonical internalized cell of displayed pairing is componentwise.
+assert [K : Cat]
+  [E B C : τ (Catd K)]
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x))) ⊢
+  @fdapp1_int_cell
+    K
+    E
+    (@Product_catd_transparent_check K B C)
+    (@Product_pair_funcd K E B C FF GG)
+    x
+    y
+    p
+    u
+  ≡ @Product_pair
+      (Hom_cat
+        (Fibre_cat B y)
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat B y)
+          (@functord_transport_lhs_func K E B FF x y p)
+          u)
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat B y)
+          (@functord_transport_rhs_func K E B FF x y p)
+          u))
+      (Hom_cat
+        (Fibre_cat C y)
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat C y)
+          (@functord_transport_lhs_func K E C GG x y p)
+          u)
+        (@fapp0
+          (Fibre_cat E x)
+          (Fibre_cat C y)
+          (@functord_transport_rhs_func K E C GG x y p)
+          u))
+      (@fdapp1_int_cell K E B FF x y p u)
+      (@fdapp1_int_cell K E C GG x y p u);
+
+// Componentwise computation does not identify the paired cell with an
+// arbitrary opaque arrow having the same endpoints.
+assertnot [K : Cat]
+  [E B C : τ (Catd K)]
+  (FF : τ (Functord E B))
+  (GG : τ (Functord E C))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (u : τ (Obj (Fibre_cat E x)))
+  (h : τ (Hom
+    (Fibre_cat (@Product_catd_transparent_check K B C) y)
+    (@fapp0
+      (Fibre_cat E x)
+      (Fibre_cat (@Product_catd_transparent_check K B C) y)
+      (@functord_transport_lhs_func
+        K
+        E
+        (@Product_catd_transparent_check K B C)
+        (@Product_pair_funcd K E B C FF GG)
+        x
+        y
+        p)
+      u)
+    (@fapp0
+      (Fibre_cat E x)
+      (Fibre_cat (@Product_catd_transparent_check K B C) y)
+      (@functord_transport_rhs_func
+        K
+        E
+        (@Product_catd_transparent_check K B C)
+        (@Product_pair_funcd K E B C FF GG)
+        x
+        y
+        p)
+      u))) ⊢
+  @fdapp1_int_cell
+      K
+      E
+      (@Product_catd_transparent_check K B C)
+      (@Product_pair_funcd K E B C FF GG)
+      x
+      y
+      p
+      u
+  ≡ h;
+
 // Whole displayed universal-property betas.
 assert [K : Cat]
   (E B C : τ (Catd K))

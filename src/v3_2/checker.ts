@@ -260,6 +260,16 @@ export class CoreChecker {
         return 'Core runtime conversion';
     }
 
+    /**
+     * Keep the released Core checker on its frozen default budget. Candidate
+     * checkers with an explicit conversion budget may override this hook so
+     * structural constraint checking and their direct comparison path honor
+     * the same bound.
+     */
+    protected constraintComparisonStepLimit(): number {
+        return CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT;
+    }
+
     private fail(
         code: CoreCheckerErrorCode,
         nodeProvenance: Provenance,
@@ -330,10 +340,12 @@ export class CoreChecker {
         const right = this.session.zonk(rightInput);
         if (kernelExpressionEquals(left, right)) return;
 
+        const comparisonStepLimit =
+            this.constraintComparisonStepLimit();
         const comparison = this.compareDefinitions(
             left,
             right,
-            CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT
+            comparisonStepLimit
         );
         if (comparison.status === 'equal') return;
         if (comparison.status === 'step-limit-exceeded') {
@@ -341,7 +353,7 @@ export class CoreChecker {
                 'CONVERSION_STEP_LIMIT',
                 nodeProvenance,
                 `${this.conversionDiagnosticName()} exceeded ` +
-                `${CORE_CHECKER_RUNTIME_COMPARISON_STEP_LIMIT} steps at ` +
+                `${comparisonStepLimit} steps at ` +
                 `${comparison.path.join(' / ')} before ` +
                 comparison.nextStep
             );

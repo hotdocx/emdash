@@ -458,6 +458,15 @@ diag_d(B)   = pair_d(id_d(B),id_d(B)).
 
 These express exchange and contraction of independent siblings over one
 shared base. They do not license exchange across a genuine dependency edge.
+The internalized arrow/cell action of pairing is written componentwise:
+
+```text
+cell(pair_d(FF,GG),p,u)
+  = pair(cell(FF,p,u),cell(GG,p,u)).
+```
+
+The active owner is still `fdapp1_int_cell`; this notation does not introduce
+a displayed-product cell owner.
 
 The dependency-aware direct-TypeScript frontend uses the canonical
 reindexing presentation:
@@ -471,6 +480,21 @@ The right side means
 Core selection only: the raw kernel term `Pullback_catd(P(B,C),F)` is not
 currently definitionally equal to it, and no generic total-category pullback
 is intended.
+
+The bounded direct-TypeScript mixed telescope is:
+
+```text
+k : K;
+a : A[k];
+b : B[(k,a)], c : C[(k,a)];
+d : D[((k,a),(b,c))].
+```
+
+It is constructed with `displayedDependentContextLambda` in the root-only
+`fibred-displayed-chain-2a` profile. The middle sibling block is inferred from
+the typed family bases; explicit `apply` and `fibrePair` nodes remain valid
+direct-TypeScript syntax. This is not a string-parser grammar or a claim of
+arbitrary `:^nd` telescope depth.
 
 ## Transformations
 

@@ -982,6 +982,28 @@ E^op[k] = E[k]^op
 F^*E[a] = E[F[a]]
 ```
 
+Two independent families over the same base have a fibrewise product without
+introducing a new primitive family former:
+
+```text
+P(B,C)[k] = B[k] × C[k].
+```
+
+The kernel constructs `P(B,C)` from ordinary product functoriality and pairs
+family morphisms componentwise. Its internalized action is likewise
+componentwise:
+
+```text
+cell(pair(FF,GG),p,u)
+  = (cell(FF,p,u), cell(GG,p,u)).
+```
+
+This equation is computational at the existing displayed-cell and pairing
+owners. It supplies the arrow/higher-action half of independent fibred
+siblings; it does not assert that genuinely dependent telescope variables can
+be exchanged. The TypeScript elaborator uses it in one bounded mixed context
+`a; b,c; d`, where only `b` and `c` are siblings over the same prefix.
+
 ## 6. Dependent Sums: Total Categories
 
 For a functorial family `E : K → Cat`, the dependent sum or total category is:

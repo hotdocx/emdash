@@ -82,7 +82,7 @@ export const CORE_CATEGORICAL_FIBRED_STRUCTURE_TRANSFER_REVISION =
     'FIBRED-STRUCTURE-1A-FIXED-BASE-UNIVERSAL-PROPERTY-1' as const;
 
 export const CORE_CATEGORICAL_FIBRED_STRUCTURE_SOURCE_SHA256 =
-    'sha256:16b5b1adc5ec462012e03555cfe65db91679983ef370e01adb9948a0bacc61cb';
+    'sha256:ccda94c638af8d4fa7ce122967dcc30159c713846eedd53cee0df83123b48a11';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
@@ -1128,8 +1128,8 @@ const projectionPointRule = (
             builder,
             K,
             builder.global(categoryOfCategories),
-            product,
-            target,
+            builder.wildcard(product),
+            builder.wildcard(target),
             x,
             displayedProjectionAt(builder, side, K, B, C)
         )),
@@ -1173,8 +1173,8 @@ const projectionFullRule = (
             builder,
             K,
             cat,
-            product,
-            target,
+            builder.wildcard(product),
+            builder.wildcard(target),
             x,
             y,
             displayedProjectionAt(builder, side, K, B, C)
@@ -1237,8 +1237,8 @@ const projectionCappedRule = (
             builder,
             K,
             cat,
-            product,
-            target,
+            builder.wildcard(product),
+            builder.wildcard(target),
             x,
             y,
             displayedProjectionAt(builder, side, K, B, C),

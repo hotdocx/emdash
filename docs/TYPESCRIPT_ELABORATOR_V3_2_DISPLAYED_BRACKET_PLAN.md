@@ -158,6 +158,35 @@ implementation and no semantic or transfer expansion. General `:^nd`
 coherence/higher action follows only after that bounded stress.
 Whole-transfer qualification then returns to the separate scale plan.
 
+DISPLAYED-CHAIN-2A is now implemented at the separately reviewed D-017
+boundary. The active kernel adds no symbol and exactly one componentwise rule
+at the existing `fdapp1_int_cell` owner for
+`Product_pair_funcd(FF,GG)`. The isolated generic TypeScript continuation
+adds exactly three existing declarations and nine runtime entries—six exact
+existing equations, two checked narrow pair-projection normal forms, and the
+one new rule—under a 512-step LF comparison budget while the default Core
+budget remains 256. Every entry is TypeScript subject-checked; there is no
+oracle, intrinsic owner, owner-specific checker/evaluator branch, second
+frontend, or parser.
+
+The existing `displayedDependentContextLambda` method now accepts only the
+frozen four-binding shape in the isolated
+`fibred-displayed-chain-2a` profile. It derives the independent `b,c` sibling
+block from family bases and source order, then recursively lowers
+`a`, `b`, `c`, `d`, `pair(b,c)`, and a closed displayed-functor application.
+Permanent tests cover all five object computations, all five internalized
+actions, the new pair-cell trace, noncollapse against opaque `rho`, retained
+`Product_pair`, ordinary reindexing, callback-once/frozen evidence, and the
+complete profile/base/target/name/arity/order/escape/foreign/body/mode
+negative partition. The completed chain-1 profile remains unchanged.
+Focused 12-test TypeScript evidence, bounded kernel checks, the exact
+1179/1020/159 warning inventory, strict LHS audit, catalog regeneration, and
+health refresh are green. The complete repository gate is also green:
+1,022 TypeScript tests (975 active passes, 47 intentional skips, zero
+failures), all 19 live TypeScript/Lambdapi conformance judgments, and the
+complete kernel CI. Exact staged review and the rollback-safe local checkpoint
+remain the current tranche boundary.
+
 ## Authority And Relationship To The Completed Architecture
 
 The active mathematical authority remains the Lambdapi v3.2 development
@@ -542,9 +571,9 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-1A | complete, green, and checkpointed `86ac6e480e50e38486bf4155556bbf41760be2cf`; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e`; the root-only recursive consumer and runnable demo pass nine new focused tests and the aggregate 973-test root gate (926 active passes, 47 intentional skips, zero failures) | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-INTEGRATE-1 | complete and validated; exact consolidation checkpoint `222a718fc1ef667964a15cfec0e82e0cf807dd96` | complete DISPLAYED-CHAIN-1A and green full integration audit | Synchronized the displayed/usability/scale/handoff/master routing; classified `DECL-REFINE-1A` as optional deferred module/linking infrastructure; removed only six verified generated probe directories; passed the complete repository gate; checkpointed exactly the consolidation; and authorized the immediately following verified local-main fast-forward with no push or worktree removal |
 | DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; approved exactly as proposed by a separate delegated review with human supersession at checkpoint `24ce6ffede79e115bc5d387c65366598e56f5d3d` | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused proposal tests, ten focused review tests, the 985-test proposal gate, and the 995-test reviewed gate pass; the proposal remains non-self-authorizing |
-| DISPLAYED-CHAIN-2A | D-016 lowering audit reached the frozen mixed shape, then stopped exactly as required when the zero-rule/transfer assumption proved false; exact closure implementation dependency-ready under reviewed D-017 | approved D-DTTLF-USABILITY-016 plus separately reviewed D-DTTLF-USABILITY-017 | Extend the existing `displayedDependentContextLambda` method only to the flat source-ordered `a; b,c; d` shape. Derive the independent `b,c` group without user flags; use the transparent displayed product and sequential Sigma total; require object/internalized-arrow/reindexing/negative evidence. The lowering architecture and all object projections work; implement only the separately reviewed closure below before completing the frozen corpus |
-| DISPLAYED-CHAIN-2A-CLOSURE-0A | executable deeply immutable, non-self-authorizing proposal complete, green, and checkpointed `f647791281095e02c6ebe3f1490e272b4e58c7a0`; approved exactly as proposed by a separate delegated review with human supersession at checkpoint `6e9c9fc165f7c388620a12bfd47d8b082a6a8417` | D-016 mandatory closure-drift stop plus owner-position Lambdapi and generic TypeScript prototypes | Add no owner: add one componentwise `fdapp1_int_cell(Product_pair_funcd(...))` rule; transfer three existing signatures, six exact existing equations, two checked `Product_pair` projection normal forms, and the new rule into an isolated `fibred-displayed-chain-2a` continuation; honor the existing generic LF comparison budget at 512 while retaining the 256 default; require zero oracle/intrinsic/owner-specific checker branch |
-| DISPLAYED-ND-0A | deferred behind graduation and the mixed-telescope stress | DISPLAYED-LIFTING-0A, DISPLAYED-CHAIN-1A, and the selected post-graduation boundary | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
+| DISPLAYED-CHAIN-2A | implementation, permanent focused evidence, and complete repository gate green; exact staged review and local checkpoint pending | approved D-DTTLF-USABILITY-016 plus separately reviewed D-DTTLF-USABILITY-017 | The existing `displayedDependentContextLambda` method accepts only the flat source-ordered `a; b,c; d` shape in `fibred-displayed-chain-2a`. It derives the independent `b,c` group without flags and passes the frozen object/internalized-arrow/reindexing/recursive/negative corpus without another frontend or checker. Final gate: 1,022 TypeScript tests (975 active, 47 skipped), 19/19 live conformance judgments, and complete kernel CI |
+| DISPLAYED-CHAIN-2A-CLOSURE-0A | proposal/review checkpoints preserved; exact semantic and transfer closure implemented and fully validated; exact staged review and local checkpoint pending | D-016 mandatory closure-drift stop plus separately reviewed D-017 | Zero new symbol, one componentwise existing-owner rule; three existing signatures; six exact, two derived, and one new TypeScript runtime entries; typed inferred-slot corrections; 512-step continuation budget with 256 default; zero oracle/intrinsic/owner-specific path |
+| DISPLAYED-ND-0A | next dependency-ready audit after the DISPLAYED-CHAIN-2A checkpoint | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Audit general `:^nd` coherence synthesis, object/base-arrow/higher action, and exact end-user cases before proposing any new semantic owner or extending coherent-eta recognition by cases |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
 
@@ -2401,9 +2430,9 @@ unification principle, evaluator case, or LF semantic feature. There are zero
 intrinsic Core owners, zero owner-specific checker/evaluator branches, and
 zero oracle exceptions.
 
-### Prototype evidence and remaining graduation corpus
+### Permanent implementation evidence
 
-The final prototype establishes:
+Permanent TypeScript tests establish:
 
 - object equality for `a`, `b`, `c`, `d`, and `pair(b,c)`;
 - internalized-arrow independence for those same five observations, with the
@@ -2412,11 +2441,14 @@ The final prototype establishes:
   arrow; and
 - retention of the component `Product_pair` normal form for the paired cell.
 
-Implementation must still promote permanent ordinary-reindexing evidence and
-the frozen profile/base/arity/escape/foreign/dependency negatives. It must
-run the owner-position positive/noncollapse probes, bounded kernel check,
-warning comparison, strict LHS audit, catalog/health refreshes, focused/root
-tests, and the complete repository gate before a checkpoint.
+Ordinary reindexing now compares the reindexed fibre functor with direct
+application at `u[x]` and typechecks an actual point in the literal pullback
+fibre. The frozen profile/base/target/name/arity/order/dependency/escape/
+foreign/unsupported-body/mode negatives all fail closed. Owner-position
+positive/noncollapse probes, bounded kernel checks, warning comparison,
+strict LHS audit, catalog/health refreshes, and focused tests are green. The
+complete aggregate/repository rerun and exact staged-diff review remain
+mandatory before the local implementation checkpoint.
 
 ### Alternatives and authorization boundary
 
@@ -2433,6 +2465,21 @@ bulk whole-library transfer, `DECL-REFINE-1A`, or broader Git operations.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-CHAIN-2A implementation and permanent corpus
+  complete; complete repository gate green.** The active kernel adds zero symbols
+  and one existing-owner componentwise pair-cell rule. The isolated generic
+  transfer compiles three declarations and nine runtime entries at 512 steps,
+  all `typescript-checked`, while default Core remains 256 and no oracle,
+  intrinsic owner, or owner-specific branch is added. The existing recursive
+  frontend lowers the exact `a; b,c; d` telescope and passes twelve focused
+  transfer/consumer tests spanning five objects, five internalized actions,
+  recursive application, pair trace/noncollapse, reindexing, and the complete
+  negative partition. Bounded kernel checks, warning inventory
+  1179/1020/159 with zero delta, strict LHS audit, catalog, and health are
+  green. The complete repository gate passes 1,022 TypeScript tests (975
+  active, 47 intentionally skipped), all 19 live conformance judgments, and
+  complete kernel CI. Exact staged review and the authorized rollback-safe
+  local checkpoint remain before advancing to DISPLAYED-ND-0A.
 - **2026-07-29 — D-DTTLF-USABILITY-017 approved under delegated unattended
   authority.** After the exact green D-017 gate and rollback-safe proposal
   checkpoint were presented without immediate human supersession, a separate
@@ -2874,26 +2921,33 @@ withholding arbitrary depth, mixed variance, general `:^nd`, groupoidal,
 browser, and whole-transfer claims. If its exact local review checkpoint or
 ledger hash is absent, finish only that bounded synchronization first.
 
-Preserve the D-016 mandatory stop and its separately approved D-017 closure:
+Preserve the D-016 mandatory stop, its separately approved D-017 closure, and
+the completed implementation:
 the frozen existing-method
 `k; a:A[k]; b:B[(k,a)], c:C[(k,a)]; d:D[((k,a),(b,c))]` lowering is sound,
 but its zero-rule/transfer assumption is false at the recursive paired
 internalized cell. Preserve the deeply frozen, non-self-authorizing
 DISPLAYED-CHAIN-2A-CLOSURE-0A proposal, its separate immutable D-017 delegated
-review with human supersession, and their focused tests.
+review with human supersession, the one existing-owner Lambdapi rule, isolated
+three-declaration/nine-rule generic transfer, typed inferred-slot corrections,
+512-step continuation/256-step default budget boundary, and twelve permanent
+focused tests. Require zero external oracle, zero intrinsic owner, zero
+owner-specific checker/evaluator branch, and an unchanged chain-1 profile.
+The final aggregate/repository validation and report synchronization are
+green. If exact staged review or the authorized local checkpoint is
+incomplete, finish only that bounded synchronization first.
 
-Implement exactly one existing-owner Lambdapi rule at
-`fdapp1_int_cell(Product_pair_funcd(...))`; an isolated
-`categorical_displayed_chain_2a_closure_transfer` with three existing
-signatures, six exact existing equations, two checked narrow pair-projection
-normal forms, and the new rule; two typed inferred-slot representation
-corrections; and generic LF budget plumbing that leaves the default at 256
-and uses 512 only for the continuation. Require TypeScript subject checking
-with zero external oracle, zero intrinsic owner, and zero owner-specific
-checker/evaluator branch. Then complete the frozen object/internalized-arrow/
-reindexing/negative corpus and checkpoint only after full Lambdapi and root
-gates. General `:^nd` follows that stress rather than being guessed by
-additional eta cases.
+After the green DISPLAYED-CHAIN-2A checkpoint, the next dependency-ready row
+is DISPLAYED-ND-0A: perform a read-only/executable audit of general `:^nd`
+coherence and higher action across object, base-arrow, and next-hom
+observations; freeze exact end-user cases and measured owner/transfer gaps
+before any semantic implementation. Do not guess general `:^nd` by adding eta
+cases. When an exact bounded proposal is presented during unattended work and
+no immediate human response follows, the user's plan-specific standing
+delegation permits a separate immutable approval review with human
+supersession, provided the Git checkpoint SOP is followed. That delegation
+does not authorize unfrozen scope, push, merge, history rewrite, cleanup,
+publication, or other Git expansion.
 
 Keep `DECL-REFINE-1A` optional and deferred as an outer-LF
 implementation/module-linking qualification. Prefer dependency-closed

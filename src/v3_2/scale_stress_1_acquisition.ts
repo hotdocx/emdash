@@ -16,7 +16,7 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:16b5b1adc5ec462012e03555cfe65db91679983ef370e01adb9948a0bacc61cb',
+            'sha256:ccda94c638af8d4fa7ce122967dcc30159c713846eedd53cee0df83123b48a11',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:

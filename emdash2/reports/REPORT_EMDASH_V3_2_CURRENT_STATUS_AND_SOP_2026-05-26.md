@@ -1775,6 +1775,38 @@ replacing that source classifier by `_` is ill typed. Displayed swap and
 diagonal are transparent pairing composites with the displayed projections
 and `id_funcd`, not additional primitive owners.
 
+The internalized capped cell of displayed pairing is now componentwise at the
+existing generic owner:
+
+```text
+fdapp1_int_cell(Product_pair_funcd(FF,GG),p,u)
+  -> Product_pair(
+       fdapp1_int_cell(FF,p,u),
+       fdapp1_int_cell(GG,p,u)).
+```
+
+This is one runtime rule and zero new symbols. It closes the next-cell
+observation of the already-existing pairing owner; it is not a new product
+family, binder, laxity connective, or second functoriality calculus. A
+positive conversion and opaque-cell noncollapse assertion live in
+`emdash3_2_checks.lp`. Warning-enabled validation retains exactly 1179
+warnings—1020 critical pairs and 159 replaceable pattern variables—and strict
+LHS audit finds zero unreviewed candidates.
+
+The root-only TypeScript `fibred-displayed-chain-2a` consumer uses this rule
+for the exact mixed telescope
+
+```text
+k : K; a : A[k]; b : B[(k,a)], c : C[(k,a)];
+d : D[((k,a),(b,c))].
+```
+
+It keeps the existing recursive `displayedDependentContextLambda` frontend,
+derives the independent middle siblings, and transfers three existing
+signatures plus nine checked runtime entries through the generic LF engines.
+This is bounded elaborator evidence; it does not make arbitrary telescope
+depth, general `:^nd`, or parsed surface syntax part of the active kernel.
+
 For frontend reindexing, grouped siblings are canonicalized before Core
 emission:
 
@@ -1821,8 +1853,10 @@ identity, composition, base-arrow action, and higher naturality. The two
 component rules add two intentional critical-pair diagnostics but do not add
 constructor-specific coherence rules. The specialization is deliberately
 constant-domain: arbitrary mixed-domain evaluation, polarity-directed
-contravariant lowering, genuine dependent-chain abstraction, and general
-displayed-transfor coherence remain separate.
+contravariant lowering, arbitrary dependent-chain abstraction, and general
+displayed-transfor coherence remain separate. The TypeScript frontend now has
+bounded one-edge and exact `a; b,c; d` dependent-chain consumers; those
+consumer profiles do not imply a general kernel binder.
 
 ### Sections 11–17: representables, dependent hom, and displayed action
 

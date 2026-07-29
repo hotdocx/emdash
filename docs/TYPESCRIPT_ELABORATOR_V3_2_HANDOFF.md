@@ -158,16 +158,21 @@ conclusion is narrower and clearer:
   review checkpoint is `24ce6ffede79e115bc5d387c65366598e56f5d3d`;
 - the D-016 mixed-telescope audit obeyed its mandatory stop after discovering
   that the recursive `pair(b,c)` internalized cell needs one componentwise
-  rule at the existing `fdapp1_int_cell` owner. The lowering architecture and
-  object/direct-arrow evidence are sound. A deeply frozen, non-self-
-  authorizing D-017 proposal selects an isolated continuation with no new
-  owner: three existing signatures, six exact existing rules, two narrow
-  derived pair-projection normal forms, the one new rule, and generic 512-step
-  LF budget plumbing with zero oracle/intrinsic/owner-specific checker path;
-  its separate immutable D-017 review records delegated unattended approval
-  with human supersession, so the exact closure implementation is
-  dependency-ready (review checkpoint
-  `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`); and
+  rule at the existing `fdapp1_int_cell` owner. The separately reviewed D-017
+  closure is now implemented: zero new symbols, one existing-owner rule,
+  three existing declarations, nine generic TypeScript runtime entries, a
+  continuation-only 512-step comparison budget with the 256 default
+  unchanged, and zero oracle/intrinsic/owner-specific checker path. The
+  existing `displayedDependentContextLambda` method lowers exactly
+  `a; b,c; d` in the isolated `fibred-displayed-chain-2a` profile. Twelve
+  permanent focused tests cover five object and five internalized-arrow
+  observations, recursive pair/application, pair-cell noncollapse,
+  reindexing, and the complete negative partition. The complete repository
+  gate passes 1,022 TypeScript tests (975 active, 47 intentionally skipped),
+  all 19 live conformance judgments, and complete kernel CI; exact staged
+  review and the local checkpoint remain. The immutable D-017
+  review checkpoint remains
+  `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`; and
 - this settles a mechanically reusable architecture for the demonstrated
   envelope, not arbitrary depth, arbitrary mixed variance, general `:^nd`,
   whole-library transfer, groupoidal closure, or deployment.
@@ -177,7 +182,11 @@ whole-body recognizer. Explicit TypeScript constructors such as
 `displayedDependentContextLambda`, `apply`, and `fibrePair` remain acceptable;
 the usability property is recursive bound-variable occurrence under
 supported typed subexpressions. Canonical Lambdapi parsing remains optional
-and deferred. Direct typed transfer is the default acquisition path.
+and deferred. Direct typed transfer is the default acquisition path. After
+the DISPLAYED-CHAIN-2A checkpoint, the next dependency-ready slice is the
+bounded DISPLAYED-ND-0A audit of general `:^nd` coherence and higher action;
+the recorded scale sequence resumes only after that audit or an explicit
+priority change.
 
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence

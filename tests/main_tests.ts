@@ -110,6 +110,8 @@ import './v3_2_categorical_displayed_graduation_proposal_tests';
 import './v3_2_categorical_displayed_graduation_review_tests';
 import './v3_2_categorical_displayed_chain_2a_closure_proposal_tests';
 import './v3_2_categorical_displayed_chain_2a_closure_review_tests';
+import './v3_2_categorical_displayed_chain_2a_transfer_tests';
+import './v3_2_categorical_displayed_chain_2a_tests';
 import './v3_2_categorical_usability_graduation_proposal_tests';
 import './v3_2_categorical_usability_graduation_review_tests';
 import './v3_2_categorical_dependent_usability_review_tests';
