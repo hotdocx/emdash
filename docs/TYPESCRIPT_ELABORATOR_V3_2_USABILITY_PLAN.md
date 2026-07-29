@@ -114,10 +114,15 @@ typed recursive frontend, adds exactly one active semantic owner and six
 runtime rules, transfers its exact closure through generic TypeScript
 engines, and exposes a runnable root-only object/internalized-arrow/reindexing
 demo. It does not prove arbitrary depth, arbitrary mixed variance, or general
-`:^nd`. DISPLAYED-BRACKET-GRADUATE-1 is now the next proposal-only row;
-subject to its separate decision, a three-level mixed telescope combining
-dependency edges with independent fibred siblings is the agreed first stress
-test, followed by a general `:^nd` audit and the recorded scale sequence.
+`:^nd`. The executable deeply immutable DISPLAYED-BRACKET-GRADUATE-1
+proposal is now complete and green: it freezes nine evidence classes,
+separates recursive supported-body lowering from the hard one-edge context
+presentation, and awaits H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/
+D-DTTLF-USABILITY-016. Its exact successor contract keeps the existing
+method and freezes the four-binding, three-level shape `a; b,c; d`, derives
+the middle sibling group, expects zero new owner/rule/transfer entry, and
+halts for a separate closure decision on drift. General `:^nd` and the
+recorded scale sequence follow only after that bounded stress.
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
@@ -567,7 +572,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-1A; next row is proposal-only DISPLAYED-BRACKET-GRADUATE-1 | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-015 | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` preserves the same typed recursive frontend for independent siblings, displayed evaluation, and the genuine sequential-Sigma chain `k : K; a : A[k]; b : B[(k,a)]`. DISPLAYED-CHAIN-1A is green at exact kernel/transfer/consumer checkpoints with one semantic owner/six rules, generic transfer prerequisites, and object/internalized-arrow/reindexing evidence. It adds no RawExpr/checker/parser layer and proves neither arbitrary depth, arbitrary mixed variance, general `nd`, bulk transfer, nor deployment. Graduation must freeze that exact envelope before a separately reviewed three-level mixed-telescope stress |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-1A; DISPLAYED-BRACKET-GRADUATE-1 proposal complete and awaiting D-DTTLF-USABILITY-016 | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-015 | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active displayed plan preserves one typed recursive frontend for independent siblings, stable evaluation, and the exact one-edge chain. Its new deeply frozen graduation artifact validates nine evidence classes, records that displayed body recursion is broader than the still-hard two-binding presentation, and freezes only the existing-method `a; b,c; d` successor with transparent product/Sigma/section-pullback authority, zero expected semantic/transfer delta, exact object/arrow/reindexing/negative evidence, and a mandatory stop on drift. Twelve focused tests and the 985-test root gate pass; the artifact self-authorizes nothing |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2341,10 +2346,14 @@ or select the next dependency-ready bounded implementation slice; produce
 executable evidence rather than only expanding architectural prose.
 
 For the active recursive displayed continuation, the more specific displayed
-plan and its launch prompt control. The next dependency-ready row is
-proposal-only DISPLAYED-BRACKET-GRADUATE-1. It must freeze the exact
-implemented usability envelope before selecting or implementing the agreed
-three-level mixed-telescope stress. Preserve completed DISPLAYED-EVAL-0B, its
+plan and its launch prompt control. Preserve the completed non-self-authorizing
+DISPLAYED-BRACKET-GRADUATE-1 proposal and present or recover exact
+H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016. It freezes the
+implemented usability envelope and the existing-method four-binding
+`a; b,c; d` three-level stress. Do not implement that stress before approval;
+after approval, halt for a separate closure proposal if its expected zero
+owner/rule/transfer-entry delta is false. Preserve completed
+DISPLAYED-EVAL-0B, its
 constant-domain
 variance qualification, its transfer-runtime-wiring diagnosis, and its
 deeply frozen non-self-authorizing DISPLAYED-EVAL-OWNER-0C proposal at exact
@@ -2538,6 +2547,14 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-29 — Displayed graduation proposal synchronized.** The active
+  displayed plan now contains an executable deeply immutable assessment of
+  the nine demonstrated binder/evaluation/chain evidence classes and their
+  exact residual boundaries. It freezes D-016 and the bounded
+  DISPLAYED-CHAIN-2A `a; b,c; d` API, existing-authority closure,
+  object/internalized-arrow/reindexing/negative corpus, zero-delta
+  expectation, and mandatory stop condition. Twelve focused tests and the
+  aggregate 985-test gate pass; no successor is self-authorized.
 - **2026-07-29 — DISPLAYED-CHAIN-1A and continuation routing
   synchronized.** The one-edge recursive dependent-chain slice is complete
   across active-kernel semantics, generic TypeScript transfer, consumer, and

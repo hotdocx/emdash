@@ -58,11 +58,14 @@ generic transfer architecture, not promotion of the remaining scale corpus
 or acquisition work.
 On 2026-07-29 the user accepted the post-chain integration assessment and
 selected the continuation order. The displayed usability path is complete
-through stable evaluation and one genuine dependency edge; its immediate
-successor is proposal-only DISPLAYED-BRACKET-GRADUATE-1, followed only after
-a separate decision by a three-level mixed dependency/sibling telescope and
-then a general `:^nd` audit. When control returns to this scale plan, the
-selected order is SCALE-KIND-PI-1, SCALE-INDUCTIVE-1B,
+through stable evaluation and one genuine dependency edge. Its executable
+deeply immutable DISPLAYED-BRACKET-GRADUATE-1 assessment is now green and
+awaiting D-DTTLF-USABILITY-016; it freezes the existing-method
+`a; b,c; d` three-level successor with zero expected owner/rule/transfer
+delta and a mandatory stop on closure drift. Only after that separate
+decision may the mixed stress proceed, followed by general `:^nd`. When
+control returns to this scale plan, the selected order is SCALE-KIND-PI-1,
+SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
 implementation/module-linking work, not a new LF semantic feature and not a
@@ -2657,10 +2660,12 @@ actual state from active code, checks, the plan and its ledgers, all Git
 worktrees and staged/unstaged diffs, and the active authority order. Follow
 the root AGENTS.md and, for every emdash2 action, emdash2/AGENTS.md and the
 current v3.2 SOP. Preserve the completed usability and displayed-chain
-tranches. The current next dependency-ready row is proposal-only
-DISPLAYED-BRACKET-GRADUATE-1; implement executable, deeply immutable
-assessment evidence rather than only extending prose, but do not implement a
-new semantic row before its separate decision.
+tranches. Preserve the completed executable, deeply immutable,
+non-self-authorizing DISPLAYED-BRACKET-GRADUATE-1 assessment and present or
+recover exact D-DTTLF-USABILITY-016. Do not implement its frozen
+DISPLAYED-CHAIN-2A successor before approval, and do not broaden its
+four-binding/three-level API, zero expected owner/rule/transfer delta,
+mandatory stop, or exact evidence corpus.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit
@@ -2686,11 +2691,12 @@ SCALE-STRESS-3B1/3B2 are deferred. Do not recreate that parser or make the
 measured 70-root/extension closures the immediate critical path. The
 dependent Sigma-telescope demo, ordinary bracket, independent displayed
 siblings, stable displayed evaluation, and one genuine dependent-chain
-example are now complete. Freeze their exact envelope through
-DISPLAYED-BRACKET-GRADUATE-1. Subject to its separate decision, stress one
-three-level mixed telescope with both dependency edges and independent
-fibred siblings, then audit general `:^nd`. Direct typed construction remains
-the default acquisition path; reconsider a narrow
+example are now complete. Their exact envelope and recursive-body versus
+bounded-presentation distinction are frozen by the pending D-016 proposal.
+Subject to approval, stress only the proposed three-level
+`a; b,c; d` telescope with both dependency transitions and independent
+middle siblings, then audit general `:^nd`. Direct typed construction
+remains the default acquisition path; reconsider a narrow
 adapter only after measured repetition and a synchronized plan decision.
 Preserve the completed ordinary bracket evidence: the thirteen-prerequisite
 typed catalog plus `Functor_cat`/`Functor` support, sole generic
@@ -2762,6 +2768,12 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — Displayed graduation proposal synchronized.** The
+  executable proposal now freezes the demonstrated architecture separately
+  from arbitrary-depth and whole-transfer claims and awaits D-016. Its only
+  proposed successor is the existing-method `a; b,c; d` stress with zero
+  expected owner/rule/transfer delta and a mandatory closure-drift stop.
+  This records no scale promotion or bulk-acquisition authority.
 - **2026-07-29 — Post-chain routing and deferred module-refinement
   classification synchronized.** The completed one-edge displayed-chain
   consumer returns no immediate authority to bulk transfer. The selected

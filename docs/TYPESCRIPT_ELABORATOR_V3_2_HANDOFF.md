@@ -146,9 +146,15 @@ conclusion is narrower and clearer:
   `sigma_functord_sec` owner and six rules, generic TypeScript transfer, and a
   runnable root-only `fibred-displayed-chain-1` demo covering object,
   internalized-arrow, reindexing, and negative evidence;
-- this settles a mechanically extensible architecture for the demonstrated
-  one-edge envelope, not arbitrary depth, arbitrary mixed variance, general
-  `:^nd`, whole-library transfer, groupoidal closure, or deployment.
+- the executable deeply immutable DISPLAYED-BRACKET-GRADUATE-1 proposal now
+  freezes nine evidence classes and distinguishes recursive supported-body
+  compilation from the hard two-binding dependent presentation; its twelve
+  focused tests and the aggregate 985-test gate pass, but exact
+  H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 remains
+  pending; and
+- this settles a mechanically reusable architecture for the demonstrated
+  envelope, not arbitrary depth, arbitrary mixed variance, general `:^nd`,
+  whole-library transfer, groupoidal closure, or deployment.
 
 The implementation did not backtrack to a second RawExpr, parser, checker, or
 whole-body recognizer. Explicit TypeScript constructors such as
@@ -179,9 +185,12 @@ worktree removal.
 After integration, use the displayed-bracket plan's launch prompt. The
 selected sequence is:
 
-1. proposal-only DISPLAYED-BRACKET-GRADUATE-1;
-2. after its separate decision, a three-level mixed telescope combining
-   genuine dependency edges and independent fibred siblings;
+1. review the completed proposal-only DISPLAYED-BRACKET-GRADUATE-1 under
+   D-016;
+2. after approval, implement only its frozen four-binding, three-level mixed
+   telescope combining genuine dependency transitions and the independent
+   middle siblings `[b,c]`, with zero expected owner/rule/transfer delta and
+   a mandatory stop on closure drift;
 3. a general `:^nd` coherence/higher-action audit; and
 4. SCALE-KIND-PI-1, SCALE-INDUCTIVE-1B, SCALE-STRESS-3C,
    SCALE-BATCH-1, and SCALE-GRADUATE-1.
@@ -778,12 +787,15 @@ any Git mutation.
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
 `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`. The completed
 fibred-context plan remains its authority and historical ledger. The
-current next row is proposal-only DISPLAYED-BRACKET-GRADUATE-1. Do not resume
+current proposal-only DISPLAYED-BRACKET-GRADUATE-1 artifact is complete,
+green, and awaiting exact D-016 review/checkpoint recording. Do not resume
 the stale DISPLAYED-CHAIN-0A/1A implementation wording below: that slice is
-complete at its kernel, transfer, consumer, and ledger checkpoints. After a
-separate graduation decision, the agreed next stress is a three-level mixed
-dependency/sibling telescope, followed by general `:^nd` and the recorded
-scale order. `DECL-REFINE-1A`, generic parsing, and bulk protected-module
+complete at its kernel, transfer, consumer, and ledger checkpoints. After
+approval, the agreed next stress is exactly the existing-method
+`a; b,c; d` three-level mixed dependency/sibling telescope frozen in the
+proposal. It must reuse existing authority and halt if its expected zero
+owner/rule/transfer delta is false. General `:^nd` and the recorded scale
+order follow. `DECL-REFINE-1A`, generic parsing, and bulk protected-module
 transfer are not the immediate critical path.
 
 The successor prompt names the

@@ -3659,11 +3659,15 @@ PLAN-0.
 The prompt below is retained as frozen MVP-era recovery history and is **not**
 the current launch prompt. Use the ready-to-paste prompt in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
-As of 2026-07-29 the one-edge DISPLAYED-CHAIN-1A slice is complete; the next
-row is proposal-only DISPLAYED-BRACKET-GRADUATE-1, followed only after
-separate review by the mixed three-level telescope, general `:^nd`, and the
-selected scale sequence. The historical text below must not be used to resume
-the completed fibred-context or displayed-chain implementation.
+As of 2026-07-29 the one-edge DISPLAYED-CHAIN-1A slice is complete and the
+executable deeply immutable DISPLAYED-BRACKET-GRADUATE-1 proposal is green
+and awaiting D-DTTLF-USABILITY-016. It freezes the recursive-body versus
+bounded-presentation distinction and the exact existing-method
+four-binding/three-level `a; b,c; d` successor, with zero expected
+owner/rule/transfer delta and a mandatory closure-drift stop. Only after
+separate review may that mixed stress proceed; general `:^nd` and the
+selected scale sequence follow. The historical text below must not be used
+to resume the completed fibred-context or displayed-chain implementation.
 
 When starting a fresh persistent session, review and trust the root project
 hook through `/hooks` and verify the shared archive as described in
