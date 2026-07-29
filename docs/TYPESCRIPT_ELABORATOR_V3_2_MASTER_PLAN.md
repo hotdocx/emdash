@@ -3694,9 +3694,10 @@ lowering to `comp_fapp0` at `Functord_cat`, with zero semantic/transfer
 delta. Seven focused tests, the 1,029-test root gate (982 active passes and
 47 intentional skips), all 19 live conformance judgments, and the bounded
 active-kernel check pass. Await/review that exact gate before
-DISPLAYED-ND-1A; the selected scale sequence follows the selected ND work.
-The historical text below must not be used to resume the completed
-fibred-context or displayed-chain implementation.
+DISPLAYED-ND-1A. Its exact proposal checkpoint is
+`bc29f0d98de32fe0fdbad992859e97711e493e5c`; the selected scale sequence
+follows the selected ND work. The historical text below must not be used to
+resume the completed fibred-context or displayed-chain implementation.
 
 When starting a fresh persistent session, review and trust the root project
 hook through `/hooks` and verify the shared archive as described in

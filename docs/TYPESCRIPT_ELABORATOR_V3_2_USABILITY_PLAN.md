@@ -154,7 +154,8 @@ non-self-authorizing D-018 proposal selects only `composeCells`, one generic
 transfer, and mixed variance remain separate. The recorded scale sequence
 follows the selected ND work. Seven focused tests, the 1,029-test root gate
 (982 active passes and 47 intentional skips), all 19 live conformance
-judgments, and the bounded active-kernel check pass.
+judgments, and the bounded active-kernel check pass. Exact proposal
+checkpoint: `bc29f0d98de32fe0fdbad992859e97711e493e5c`.
 D-017 proposal checkpoint:
 `f647791281095e02c6ebe3f1490e272b4e58c7a0`. D-017 delegated-review
 checkpoint: `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`.
@@ -610,7 +611,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-2A/D-017 and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f`; DISPLAYED-ND-0A audit/D-018 proposal complete and awaiting exact decision | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-017 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, and `a; b,c; d`. The ND audit freezes coherent object/point/base-arrow/next-hom boundaries and proposes only generic typed-cell composition plus recursive outer-`Transfd` factoring for pointwise vertical composition, with zero semantic/transfer delta |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-2A/D-017 at `89afe5f64710b99a262ff92cb193e2742a11827f`; DISPLAYED-ND-0A audit/D-018 proposal complete and checkpointed `bc29f0d98de32fe0fdbad992859e97711e493e5c`, awaiting exact decision | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-017 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, and `a; b,c; d`. The ND audit freezes coherent object/point/base-arrow/next-hom boundaries and proposes only generic typed-cell composition plus recursive outer-`Transfd` factoring for pointwise vertical composition, with zero semantic/transfer delta |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2603,6 +2604,16 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-ND-0A audit and D-018 proposal synchronized.**
+  The executable read-only audit confirms coherent eta/composite eta and
+  object/point/base-arrow observations, identifies the active but
+  untransferred next-hom package, and rejects arbitrary pointwise data as a
+  coherent `Transfd`. It freezes only generic `typed-cell-composition`,
+  `composeCells`, and recursive vertical-composition lowering through
+  existing `comp_fapp0`, with zero semantic/transfer delta. Seven focused
+  tests, the 1,029-test root gate (982 active, 47 skipped), all 19 live
+  conformance judgments, and the bounded active-kernel check pass. Exact
+  proposal checkpoint: `bc29f0d98de32fe0fdbad992859e97711e493e5c`.
 - **2026-07-29 — D-DTTLF-USABILITY-016 delegated review synchronized.**
   After no immediate human response to the exact frozen gate, a separate
   immutable review records approval as proposed with human supersession. It

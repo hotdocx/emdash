@@ -206,7 +206,8 @@ new Lambdapi owner, rule, transfer entry, intrinsic Core owner, or
 checker/evaluator branch: one generic `typed-cell-composition` IR node and
 `composeCells` method recursively factor the two children to
 `comp_fapp0` at `Functord_cat`. D-018 is frozen as a non-self-authorizing
-proposal for only that bounded implementation. Arbitrary pointwise
+proposal for only that bounded implementation at exact local checkpoint
+`bc29f0d98de32fe0fdbad992859e97711e493e5c`. Arbitrary pointwise
 coherence, identity syntax, the existing-authority next-hom transfer, and
 mixed-variance `Pi_cat(Transf_catd(...))` remain separate.
 
@@ -596,7 +597,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; approved exactly as proposed by a separate delegated review with human supersession at checkpoint `24ce6ffede79e115bc5d387c65366598e56f5d3d` | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused proposal tests, ten focused review tests, the 985-test proposal gate, and the 995-test reviewed gate pass; the proposal remains non-self-authorizing |
 | DISPLAYED-CHAIN-2A | complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | approved D-DTTLF-USABILITY-016 plus separately reviewed D-DTTLF-USABILITY-017 | The existing `displayedDependentContextLambda` method accepts only the flat source-ordered `a; b,c; d` shape in `fibred-displayed-chain-2a`. It derives the independent `b,c` group without flags and passes the frozen object/internalized-arrow/reindexing/recursive/negative corpus without another frontend or checker. Final gate: 1,022 TypeScript tests (975 active, 47 skipped), 19/19 live conformance judgments, and complete kernel CI |
 | DISPLAYED-CHAIN-2A-CLOSURE-0A | proposal/review checkpoints preserved; exact semantic and transfer closure complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | D-016 mandatory closure-drift stop plus separately reviewed D-017 | Zero new symbol, one componentwise existing-owner rule; three existing signatures; six exact, two derived, and one new TypeScript runtime entries; typed inferred-slot corrections; 512-step continuation budget with 256 default; zero oracle/intrinsic/owner-specific path |
-| DISPLAYED-ND-0A | executable read-only audit and non-self-authorizing D-018 continuation proposal complete; 1,029-test root gate, 19/19 live conformance, and bounded active-kernel check green; exact proposal checkpoint pending | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Separates coherent introduction from object/point/base-arrow/next-hom observation. Confirms the first three observations implemented; finds active but untransferred next-hom owners; rejects arbitrary pointwise coherence; selects one generic typed-cell-composition node and recursive outer-`Transfd` factoring for the exact first vertical-composition case with zero semantic/transfer delta |
+| DISPLAYED-ND-0A | executable read-only audit and non-self-authorizing D-018 continuation proposal complete, fully validated, and checkpointed `bc29f0d98de32fe0fdbad992859e97711e493e5c` | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Separates coherent introduction from object/point/base-arrow/next-hom observation. Confirms the first three observations implemented; finds active but untransferred next-hom owners; rejects arbitrary pointwise coherence; selects one generic typed-cell-composition node and recursive outer-`Transfd` factoring for the exact first vertical-composition case with zero semantic/transfer delta. Final proposal gate: 1,029 TypeScript tests (982 active, 47 skipped), 19/19 live conformance, and bounded active-kernel check |
 | DISPLAYED-ND-1A | proposed; awaits H-DTTLF-USABILITY-DISPLAYED-ND-01/D-DTTLF-USABILITY-018 or a separate delegated review | completed DISPLAYED-ND-0A audit | Add only `composeCells`, one generic `typed-cell-composition` IR node whose first accepted classifier is `indexed-transfor`, and recursive lowering of `lambda k :^nd K. theta[k] after eta[k]` to `comp_fapp0` at `Functord_cat`; require component beta, a well-typed base-arrow cell, exact negatives, and unchanged prior profiles; add no Lambdapi owner/rule or transfer entry |
 | DISPLAYED-ND-HIGHER-1B | deferred separate existing-authority transfer audit | DISPLAYED-ND-0A and a concrete next-hom consumer | Qualify generic transfer/surface exposure of active `tdapp1_int_func_transfd`, `tdapp1_int_fapp0_transfd`, `tdapp1_int_fapp1_func_transfd`, and related projection rules; do not conflate this with first-order component-expression factoring |
 
@@ -2605,7 +2606,9 @@ normalization, deployment, and scale work remain separately gated.
   and the direct/ordinary/Sigma-Pi classifier boundary; confirms the active
   but untransferred next-hom package; and freezes only the zero-semantic-delta
   `composeCells`/`typed-cell-composition` recursive vertical-composition
-  proposal. Exact proposal checkpoint and a separate D-018 decision remain.
+  proposal. Exact proposal checkpoint:
+  `bc29f0d98de32fe0fdbad992859e97711e493e5c`. A separate D-018 decision
+  remains.
 - **2026-07-29 — DISPLAYED-CHAIN-2A implementation and permanent corpus
   complete; complete repository gate green.** The active kernel adds zero symbols
   and one existing-owner componentwise pair-cell rule. The isolated generic
@@ -3085,7 +3088,8 @@ coherent introduction from object, point, base-arrow, internal-hom, and
 next-hom observation. Preserve the existing object/point/base-arrow
 TypeScript envelope, the active-but-untransferred Lambdapi next-hom package,
 the noncollapse of arbitrary pointwise data into `Transfd`, and the separate
-`Pi_cat(Transf_catd(...))` mixed-variance presentation.
+`Pi_cat(Transf_catd(...))` mixed-variance presentation. Its exact proposal
+checkpoint is `bc29f0d98de32fe0fdbad992859e97711e493e5c`.
 
 Its exact non-self-authorizing
 H-DTTLF-USABILITY-DISPLAYED-ND-01/D-DTTLF-USABILITY-018 proposal selects only

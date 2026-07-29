@@ -87,8 +87,9 @@ to `comp_fapp0` at `Functord_cat`; next-hom transfer and arbitrary coherence
 remain separate. Its seven focused tests, 1,029-test root gate (982 active
 passes and 47 intentional skips), all 19 live conformance judgments, and
 bounded active-kernel check pass. Await/review D-018 and complete its selected
-ND tranche before returning here. When control returns to this scale plan,
-the selected order is SCALE-KIND-PI-1,
+ND tranche before returning here. Its exact proposal checkpoint is
+`bc29f0d98de32fe0fdbad992859e97711e493e5c`. When control returns to this
+scale plan, the selected order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2805,6 +2806,16 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-ND-0A audit returned a bounded D-018 gate.**
+  The displayed critical path now has executable evidence distinguishing
+  coherent `Transfd` introduction from object/point/base-arrow/next-hom
+  observation. The audit proposes only recursive pointwise vertical
+  composition through generic typed-cell IR and existing `comp_fapp0`;
+  next-hom transfer, arbitrary coherence, identity syntax, and mixed variance
+  remain separate. Seven focused tests, the 1,029-test root gate, all 19 live
+  conformance judgments, and the bounded active-kernel check pass. Exact
+  proposal checkpoint: `bc29f0d98de32fe0fdbad992859e97711e493e5c`.
+  No scale profile or bulk-acquisition authority changes.
 - **2026-07-29 — D-DTTLF-USABILITY-016 delegated review synchronized.**
   The separate immutable review graduates only the demonstrated displayed
   envelope and authorizes only the existing-method `a; b,c; d` stress. Every

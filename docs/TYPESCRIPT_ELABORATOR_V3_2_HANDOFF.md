@@ -195,9 +195,11 @@ node, and recursive lowering of pointwise vertical composition to
 `comp_fapp0` at `Functord_cat`, with zero Lambdapi/transfer/intrinsic/checker
 delta. Its seven focused tests, 1,029-test root gate (982 active passes and
 47 intentional skips), all 19 live conformance judgments, and bounded
-active-kernel check pass. Await or separately review that exact decision
-before implementing DISPLAYED-ND-1A. The recorded scale sequence resumes
-only after the selected ND work or an explicit priority change.
+active-kernel check pass. Its exact proposal checkpoint is
+`bc29f0d98de32fe0fdbad992859e97711e493e5c`. Await or separately review
+that exact decision before implementing DISPLAYED-ND-1A. The recorded scale
+sequence resumes only after the selected ND work or an explicit priority
+change.
 
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence
