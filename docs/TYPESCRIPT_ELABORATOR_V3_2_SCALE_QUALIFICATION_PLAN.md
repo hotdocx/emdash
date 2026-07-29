@@ -162,6 +162,8 @@ association or TypeScript positivity checker. The deeply frozen
 SCALE-INDUCTIVE-1B2 proposal therefore selects that exact lean route and now
 awaits H-DTTLF-SCALE-INDUCTIVE-02/D-DTTLF-SCALE-INDUCTIVE-002. After that
 gate, the order is SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
+Exact HYBRID-0A audit/1B2 proposal checkpoint:
+`850bc7260019ce24bfb2b1325b23dac357e72e88`.
 The 1B1 implementation and all final gates are green. Its
 explicit generated declaration and beta are ordinary checked transfer
 inputs; the extra association is a bounded provenance/integrity guard, not a
@@ -686,8 +688,8 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | in progress | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Parent row for explicit generated-owner contracts, parameter/index fidelity, recursive/indexed validation, and strict-positivity boundaries; no backend-generated owner is trusted from its name alone |
 | SCALE-INDUCTIVE-1B1 | complete at `45ca42801677a37c1ec079a278085262bcaa000e`; review `33960a8b6aa924e5d69f438b0b43881b4e13f029`; proposal `830fb975756d1d13d8ddcb516690ea88b19d51d6` | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Corrected the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; the new owner-generic explicit-contract association validates unique generated identity, `generatedBy`, exact opaque declaration/rule ownership, expected indexed shape, and zero recursive occurrences; the existing generic engines check the exact `ind_τΣ_` type, beta, and polymorphic first-projection consumer |
-| SCALE-INDUCTIVE-HYBRID-0A | executable audit focused/live-green; checkpoint synchronization pending | SCALE-INDUCTIVE-1B1 | The exact printed `ind_nat` declaration, two generated betas, and active `nat_elim` consumer compile and reduce through ordinary declaration/runtime/conversion engines; the recursive IH is explicit in the successor RHS; `generatedBy` remains inert provenance; recursive association and TypeScript positivity dependencies are zero |
-| SCALE-INDUCTIVE-1B2 | deeply frozen proposal awaiting H-DTTLF-SCALE-INDUCTIVE-02/D-DTTLF-SCALE-INDUCTIVE-002; proposal checkpoint pending | SCALE-INDUCTIVE-HYBRID-0A | Select the exact expanded-symbol audit as sufficient qualification for already Lambdapi-checked generated owners, close the inductive qualification parent with no new engine, and defer TypeScript source-inductive generation, positivity checking, automatic synthesis, end-user declaration API, and mutual/higher-order inductives |
+| SCALE-INDUCTIVE-HYBRID-0A | complete at `850bc7260019ce24bfb2b1325b23dac357e72e88` | SCALE-INDUCTIVE-1B1 | The exact printed `ind_nat` declaration, two generated betas, and active `nat_elim` consumer compile and reduce through ordinary declaration/runtime/conversion engines; the recursive IH is explicit in the successor RHS; `generatedBy` remains inert provenance; recursive association and TypeScript positivity dependencies are zero |
+| SCALE-INDUCTIVE-1B2 | deeply frozen proposal awaiting H-DTTLF-SCALE-INDUCTIVE-02/D-DTTLF-SCALE-INDUCTIVE-002 at `850bc7260019ce24bfb2b1325b23dac357e72e88` | SCALE-INDUCTIVE-HYBRID-0A | Select the exact expanded-symbol audit as sufficient qualification for already Lambdapi-checked generated owners, close the inductive qualification parent with no new engine, and defer TypeScript source-inductive generation, positivity checking, automatic synthesis, end-user declaration API, and mutual/higher-order inductives |
 | SCALE-KIND-PI-1 | complete at `b4cb8d39bd31adc768784308263fd91d83ddeefe`; audit/proposal checkpoint `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserves the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
 | SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines |
@@ -1931,6 +1933,8 @@ as the recursive generated-owner qualification, adding no new engine, closing
 SCALE-INDUCTIVE-1B and SCALE-INDUCTIVE-1, and deferring recursive association,
 TypeScript source-inductive generation/positivity, automatic synthesis, an
 end-user declaration API, and mutual/higher-order inductives.
+Exact audit/proposal checkpoint:
+`850bc7260019ce24bfb2b1325b23dac357e72e88`.
 
 The exact pending decision is:
 
@@ -3315,7 +3319,8 @@ D-DTTLF-SCALE-INDUCTIVE-001 review and implementation checkpoint
 focused/live-green SCALE-INDUCTIVE-HYBRID-0A evidence: the explicit
 `ind_nat` declaration, two ordinary subject-checked rules, recursive
 successor RHS, and `nat_elim` consumer pass without a recursive association
-or TypeScript positivity checker. Preserve its deeply frozen, non-
+or TypeScript positivity checker. Exact audit/proposal checkpoint:
+`850bc7260019ce24bfb2b1325b23dac357e72e88`. Preserve its deeply frozen, non-
 self-authorizing H-DTTLF-SCALE-INDUCTIVE-02/
 D-DTTLF-SCALE-INDUCTIVE-002 proposal. Obtain or record only that exact
 separate review, then close the inductive parent without adding a new engine.
@@ -3379,6 +3384,8 @@ scope is affected.
   now awaits H-DTTLF-SCALE-INDUCTIVE-02/
   D-DTTLF-SCALE-INDUCTIVE-002; source-level generation, positivity, automatic
   synthesis, and end-user declaration convenience remain deferred.
+  Exact audit/proposal checkpoint:
+  `850bc7260019ce24bfb2b1325b23dac357e72e88`.
 - **2026-07-29 — SCALE-INDUCTIVE-1B1 implementation final-green; hybrid
   necessity audit queued.**
   The corrected revision-2 `τΣ_` representation uses inline `a,P` indices

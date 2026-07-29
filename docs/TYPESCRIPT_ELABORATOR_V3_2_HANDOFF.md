@@ -343,7 +343,9 @@ SCALE-INDUCTIVE-1B2 proposal now awaits
 H-DTTLF-SCALE-INDUCTIVE-02/D-DTTLF-SCALE-INDUCTIVE-002 and proposes no new
 engine: after exact review it closes the inductive parent while deferring
 source-level generation, positivity, automatic synthesis, the end-user
-declaration API, and mutual/higher-order inductives.
+declaration API, and mutual/higher-order inductives. Exact HYBRID-0A
+audit/1B2 proposal checkpoint:
+`850bc7260019ce24bfb2b1325b23dac357e72e88`.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
