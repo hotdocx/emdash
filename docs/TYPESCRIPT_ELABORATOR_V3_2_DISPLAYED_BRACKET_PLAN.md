@@ -239,11 +239,32 @@ intentional skips), all 19 live conformance judgments, and the bounded active
 kernel check. Identity-cell syntax, arbitrary pointwise coherence, the active
 next-hom package, mixed variance, and a componentwise base-arrow-composite
 normal form remain separately gated. DISPLAYED-ND-HIGHER-1B is therefore the
-next dependency-ready proposal/audit rather than another first-order
-composition case.
+separately selected higher-action proposal/audit rather than another
+first-order composition case.
 
 Exact local implementation checkpoint:
 `d8b450222273167ab326701c76fff03f0f539b18`.
+
+DISPLAYED-ND-HIGHER-1B is now complete as an executable, read-only,
+non-self-authorizing audit. It pins the exact active source closure at 16
+declarations and two projection rules: thirteen identity/internalized-hom/
+opposite/presheaf foundation declarations, followed by the three
+`tdapp1_int_*_transfd` owners and their two generic functor projections. A
+target-only transfer is not closed. A bounded live Lambdapi consumer confirms
+that a cell in `Hom(Transfd_cat(FF,GG),epsilon,epsilon')` is mapped by
+`tdapp1_int_fapp1_func_transfd` to the next internalized-hom cell and that
+the generic `fapp1_func` spelling computes to the capped owner.
+
+The embedded D-019 proposal therefore authorizes no higher-action semantics
+yet. It selects only dependency-first
+DISPLAYED-ND-HIGHER-FOUNDATION-1A: five checked transparent definitions and
+eight opaque/injective signatures, with zero rules, zero new mathematical
+owners, zero intrinsic owners, zero checker branches, and zero surface
+methods. The three target owners, two projection rules, and rich TypeScript
+consumer remain a following separate decision. Seven focused live tests, the
+1,052-test root gate (1,004 active passes and 48 intentional skips), all 19
+live conformance judgments, and the bounded active-kernel check pass. D-019
+remains non-self-authorizing pending its separate review.
 
 ## Authority And Relationship To The Completed Architecture
 
@@ -633,7 +654,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-2A-CLOSURE-0A | proposal/review checkpoints preserved; exact semantic and transfer closure complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | D-016 mandatory closure-drift stop plus separately reviewed D-017 | Zero new symbol, one componentwise existing-owner rule; three existing signatures; six exact, two derived, and one new TypeScript runtime entries; typed inferred-slot corrections; 512-step continuation budget with 256 default; zero oracle/intrinsic/owner-specific path |
 | DISPLAYED-ND-0A | executable read-only audit/proposal checkpointed `bc29f0d98de32fe0fdbad992859e97711e493e5c`; separate delegated D-018 review complete, fully green, and checkpointed `fb818203df88e68b27b2e5725737512010efdb13` with human supersession | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Separates coherent introduction from object/point/base-arrow/next-hom observation. Confirms the first three observations implemented; finds active but untransferred next-hom owners; rejects arbitrary pointwise coherence; selects one generic typed-cell-composition node and recursive outer-`Transfd` factoring for the exact first vertical-composition case with zero semantic/transfer delta. Final proposal gate: 1,029 TypeScript tests (982 active, 47 skipped); final review gate: 1,036 tests (989 active, 47 skipped); both pass 19/19 live conformance and the bounded active-kernel check |
 | DISPLAYED-ND-1A | implementation complete, fully validated, and checkpointed `d8b450222273167ab326701c76fff03f0f539b18` at the exact separately reviewed D-018 boundary | reviewed DISPLAYED-ND-0A audit/proposal | `composeCells` plus one generic `typed-cell-composition` IR node initially accepts only compatible `indexed-transfor` children; `displayedTransforLambda` recursively factors component leaves and nested vertical compositions to genuine outer `Transfd` terms through existing `comp_fapp0` at `Functord_cat`. Nine permanent tests plus the 1,045-test root gate (998 active, 47 skipped), 19/19 live conformance, and bounded active-kernel check cover recursive frozen evidence, component beta, a checked base-arrow cell, exact negatives, retained eta, and zero Lambdapi/transfer/intrinsic/checker/browser delta |
-| DISPLAYED-ND-HIGHER-1B | next dependency-ready proposal/audit; no implementation authority yet | completed DISPLAYED-ND-1A and a concrete next-hom consumer | Qualify generic transfer/surface exposure of active `tdapp1_int_func_transfd`, `tdapp1_int_fapp0_transfd`, `tdapp1_int_fapp1_func_transfd`, and related projection rules; do not conflate this with first-order component-expression factoring |
+| DISPLAYED-ND-HIGHER-1B | executable read-only audit complete and green; non-self-authorizing D-019 dependency-first proposal pending separate review | completed DISPLAYED-ND-1A and active canonical source/export evidence | Pins 13 prerequisite declarations plus three active `tdapp1_int_*_transfd` owners and two projection rules; proves target-only transfer is not closed; checks a concrete next-hom consumer; proposes only the 13-declaration rule-free foundation as DISPLAYED-ND-HIGHER-FOUNDATION-1A |
+| DISPLAYED-ND-HIGHER-FOUNDATION-1A | proposed only; no implementation authority before D-019 review | completed DISPLAYED-ND-HIGHER-1B audit | Transfer five source-transparent definitions and eight opaque/injective interfaces through the generic declaration engine, with zero rules, new mathematics, intrinsic owners, checker branches, or surface methods; mandatory stop on any unlisted dependency |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
 
@@ -2577,9 +2599,11 @@ next-hom presentation runtime-joins.
 
 The active kernel's next-hom package is therefore evidence of feasibility,
 not evidence that the current TypeScript surface already exposes it. Its
-eventual transfer is the separate `DISPLAYED-ND-HIGHER-1B` row so that
-surface component recursion is not conflated with higher modification
-observation.
+transfer qualification was assigned to the separate
+`DISPLAYED-ND-HIGHER-1B` row so that surface component recursion was not
+conflated with higher modification observation. The later executable audit
+below has now completed that qualification while retaining target
+implementation behind a separate decision.
 
 ### Introduction cases and computation boundary
 
@@ -2671,8 +2695,135 @@ implementation changes no Lambdapi source, declaration/rule transfer
 fragment, intrinsic owner, LF checker/evaluator case, parser, browser entry
 point, or deployed profile.
 
+## DISPLAYED-ND-HIGHER-1B Dependency And Consumer Audit
+
+The executable audit is
+`src/v3_2/categorical_displayed_nd_higher_audit.ts`; its permanent focused
+evidence is
+`tests/v3_2_categorical_displayed_nd_higher_audit_tests.ts`, with the live
+authority consumer in
+`tests/fixtures/v3_2_categorical_displayed_nd_higher_probe.lp`. The audit is
+deeply frozen, fail-closed, absent from the browser, and has zero semantic
+delta.
+
+### Exact measured closure
+
+The advertised three-owner package is not closed over the currently
+transferred displayed-`Transfd` fragment. Its exact active source closure is:
+
+| phase | exact declarations/rules | transfer treatment |
+|---|---|---|
+| transparent foundation | `comp_catd_fapp0`, `Edge_catd_func`, `Presheaf_catd_func`, `HomPresheaf_catd_func`, `Homd_target_catd` | checked transparent definitions; retain their source bodies |
+| opaque/injective foundation | `id`, `Op_func`, `Op_catd_func`, `hom_int`, `Op_catd`, `Op_funcd`, `Functor_catd_func`, `homd_int` | exact opaque signatures |
+| higher-action target | `tdapp1_int_func_transfd`, `tdapp1_int_fapp0_transfd`, `tdapp1_int_fapp1_func_transfd` | later separate target transfer |
+| target projections | object projection through `fapp0`; next-hom projection through `fapp1_func` | later separate two-rule transfer |
+
+Thus the complete measured package contains 16 declarations and two rules,
+but the dependency-ready first tranche contains only thirteen declarations
+and zero rules. All eighteen commands are existing active Lambdapi authority.
+Nothing in the audit proposes a new mathematical constructor or computation
+law. The validator also recompiles the completed displayed-chain-2A
+environment and checks the exact nine intrinsic-owner links and twelve
+transferred free-declaration links needed by those thirteen declarations.
+That check is what exposed `id` as one additional existing-authority
+signature; the closure is not inferred from spelling alone. The audit also
+checks that the exact opaque `id` representation already exists in the
+isolated SCALE-STRESS-3A2A linkage as
+`emdash_v3_2_scale_stress_3a2a_id`. FOUNDATION-1A should reuse or extract
+that representation without importing the unrelated profunctor profile; this
+is dependency wiring, not a new primitive or LF feature.
+
+The acquisition contract pins active-source SHA-256
+`ccda94c638af8d4fa7ce122967dcc30159c713846eedd53cee0df83123b48a11`,
+the eighteen exact canonical command ordinals and text hashes, Lambdapi's
+reported version `3.0.0-90-gdb4f780`, and the currently reproduced canonical
+export SHA-256
+`91f0deb710b93acc55aa3a6f947505de973b9deaa94d68e1a213037dfcc9c3d3`.
+The older scale contracts recorded export digest
+`18500d46d4ff3583fef1f25a3c28eff7b849a61d528a6f9e20e89b32db13f1b2`
+under the same reported exporter version. The audit records that discrepancy
+as catalog-only acquisition drift: the active source hash, selected command
+ordinals/text hashes, and live semantic consumer agree. It does not weaken an
+existing hash gate or retroactively rewrite an older acquisition contract.
+
+### Concrete higher-cell consumer
+
+For
+
+```text
+m : Hom(Transfd_cat(FF,GG), epsilon, epsilon')
+```
+
+the live fixture checks the whole hom action
+
+```text
+fapp1_func(tdapp1_int_func_transfd(FF,GG), epsilon, epsilon')
+```
+
+and its capped application
+
+```text
+fapp0(tdapp1_int_fapp1_func_transfd(epsilon,epsilon'), m).
+```
+
+The result is a higher cell between
+`tdapp1_int_fapp0_transfd(epsilon)` and
+`tdapp1_int_fapp0_transfd(epsilon')` in the internalized displayed-hom
+`Transfd_cat`. Lambdapi checks the type and confirms that the generic
+`fapp1_func` projection computes to the capped higher-action owner.
+
+This consumer accounts for both object action and next-hom action. It also
+confirms that no new binder mode, contextual IR node, RawExpr/parser layer,
+second bidirectional checker, intrinsic Core owner, or owner-specific LF
+checker branch is needed. The existing generic surface mechanisms for hom
+assumptions, whole-hom boundaries, functor object action, whole hom action,
+and capped arrow action are sufficient. A later surface implementation needs
+only rich classifier-preserving constructors for the existing `Transfd_cat`
+object and hom levels.
+
+### Frozen D-019 proposal
+
+The audit embeds the following non-self-authorizing decision:
+
+> Approve H-DTTLF-USABILITY-DISPLAYED-ND-HIGHER-01/
+> D-DTTLF-USABILITY-019 as proposed: accept the measured thirteen-declaration
+> dependency foundation and authorize only
+> DISPLAYED-ND-HIGHER-FOUNDATION-1A through the generic transfer engines with
+> five checked-transparent definitions, eight opaque signatures, zero rules,
+> zero new mathematical owners, and the mandatory drift stop; retain the
+> three `tdapp1_int` target owners, their two projection rules, rich surface
+> consumer, unrelated computation rules, parsing, deployment, bulk transfer,
+> and broader Git authority for a later separate decision?
+
+The mandatory stop fires if any exact type or transparent body requires an
+unlisted owner, rule, intrinsic, or checker path. D-019 does not itself
+authorize the foundation implementation. The proposal must receive a
+separate immutable review, with human supersession, before semantic transfer
+begins.
+
+Seven focused tests pass with the live canonical acquisition and consumer
+enabled. The complete root gate passes 1,052 tests: 1,004 active passes, 48
+intentional skips, and zero failures. All 19 live conformance judgments and
+the bounded active-kernel check pass. Identity-cell syntax, arbitrary
+pointwise coherence, mixed variance, composite base-arrow normalization,
+parsing, deployment, scale promotion, and the later three-owner/two-rule
+target remain outside this tranche.
+
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-ND-HIGHER-1B executable audit and D-019
+  dependency-first proposal complete.** The audit pins an eighteen-command
+  active source closure: thirteen identity/internalized-hom/opposite/presheaf
+  prerequisites, three higher-action owners, and two projection rules. It
+  proves that target-only transfer is not closed and checks a concrete
+  next-hom consumer through both the generic and capped action spellings. The
+  non-self-authorizing proposal selects only the rule-free
+  thirteen-declaration foundation, preserving five transparent bodies and
+  eight opaque interfaces. Seven focused live tests, the 1,052-test root
+  gate (1,004
+  active passes, 48 intentional skips), 19/19 live conformance, and the
+  bounded active-kernel check pass. No semantic implementation is authorized
+  before the separate D-019 review.
 - **2026-07-29 — DISPLAYED-ND-1A recursive vertical composition
   implemented, fully validated, and checkpointed.** Added only
   public `composeCells`, one generic typed-cell-composition contextual node
@@ -3204,13 +3355,21 @@ component beta, a checked base-arrow cell, exact classifier/scope/profile
 negatives, unchanged eta and prior profiles, and zero Lambdapi
 owner/rule/transfer/intrinsic/checker/browser delta.
 
-The next dependency-ready row is proposal/audit-only
-DISPLAYED-ND-HIGHER-1B. Inspect and qualify the active existing-authority
-`tdapp1_int_func_transfd`, `tdapp1_int_fapp0_transfd`, and
-`tdapp1_int_fapp1_func_transfd` package and its concrete next-hom consumer
-before proposing transfer or surface exposure. Do not implement it before a
-separately frozen and reviewed decision. Keep identity-cell syntax,
-arbitrary pointwise coherence, mixed variance, composite base-arrow
+Preserve completed, deeply frozen, non-self-authorizing
+DISPLAYED-ND-HIGHER-1B. Its executable audit pins thirteen prerequisite
+internalized-hom/opposite/presheaf declarations, the three active
+`tdapp1_int_*_transfd` target owners, and two projection rules; proves that
+the target-only transfer is not dependency-closed; checks one concrete
+next-hom consumer through generic and capped action; and adds zero semantics.
+Preserve the current-versus-historical canonical-export digest evidence
+without weakening old contracts. Its D-019 proposal selects only
+DISPLAYED-ND-HIGHER-FOUNDATION-1A: five checked transparent definitions,
+eight opaque signatures, zero rules, reuse/extraction of the already reviewed
+SCALE-STRESS-3A2A `id` representation without its unrelated profunctor
+profile, and a mandatory drift stop. Obtain or record the required separate
+immutable D-019 review before implementing that foundation. Keep the three
+target owners, two projection rules, rich surface consumer, identity-cell
+syntax, arbitrary pointwise coherence, mixed variance, composite base-arrow
 normalization, parsing, deployment, and scale promotion separately gated.
 
 For later dependency-ready gates in this same persistent goal, the same

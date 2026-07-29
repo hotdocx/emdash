@@ -104,6 +104,19 @@ tests, the 1,045-test root gate (998 active passes and 47 intentional skips),
 all 19 live conformance judgments, and the bounded active-kernel check.
 Exact downstream implementation checkpoint:
 `d8b450222273167ab326701c76fff03f0f539b18`.
+The subsequent DISPLAYED-ND-HIGHER-1B audit confirms that the active
+next-hom action remains compatible with this same outer-LF/explicit-Core
+architecture. Its live consumer needs no new binder, contextual node, or
+checker, but the three `tdapp1_int_*_transfd` target owners are not
+dependency-closed over the current TypeScript fragment. The frozen
+non-self-authorizing D-019 proposal therefore selects only the exact
+thirteen-declaration identity/internalized-hom/opposite/presheaf
+foundation—five checked transparent definitions and eight opaque/injective
+signatures, with zero rules—before a later separate target/surface decision.
+The `id` signature can reuse or extract its already reviewed isolated
+SCALE-STRESS-3A2A representation without importing that row's unrelated
+profunctor profile. The active
+displayed and scale ledgers govern that review and implementation.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -2789,3 +2802,11 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   live conformance, and the bounded active-kernel check pass. Exact downstream
   implementation checkpoint:
   `d8b450222273167ab326701c76fff03f0f539b18`.
+- **2026-07-29 — Downstream higher-action audit preserved the selected LF
+  architecture.** DISPLAYED-ND-HIGHER-1B checks a concrete
+  `Transfd_cat` next-hom consumer through the generic functor action ladder
+  without a new binder/checker layer. It measures an exact
+  thirteen-foundation + three-target + two-rule active closure and proposes
+  only the rule-free thirteen-declaration foundation under a separate D-019
+  review. This adds no semantics or profile authority to the completed
+  directed continuation.

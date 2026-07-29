@@ -214,8 +214,30 @@ delta. The final gate passes 1,045 TypeScript tests (998 active passes and 47
 intentional skips), all 19 live conformance judgments, and the bounded active
 kernel check. Exact local implementation checkpoint:
 `d8b450222273167ab326701c76fff03f0f539b18`.
-DISPLAYED-ND-HIGHER-1B is the next proposal/audit; it must separately qualify
-the active existing-authority next-hom package before implementation. The
+DISPLAYED-ND-HIGHER-1B has now separately qualified the active
+existing-authority next-hom package without implementing it. Its executable
+audit pins thirteen prerequisite identity/internalized-hom/opposite/presheaf
+declarations, the three
+`tdapp1_int_*_transfd` target owners, and their two
+projection rules. A target-only transfer is not dependency-closed. The live
+consumer maps
+`m : Hom(Transfd_cat(FF,GG),epsilon,epsilon')` through the generic
+`fapp1_func` projection and capped
+`tdapp1_int_fapp1_func_transfd`, confirming feasibility without a new
+binder, contextual node, checker, or parser.
+
+The audit's non-self-authorizing D-019 proposal selects only
+DISPLAYED-ND-HIGHER-FOUNDATION-1A: five source-transparent definitions and
+eight opaque/injective signatures through the generic declaration engine,
+with zero rules, zero new mathematics, zero intrinsic owner, zero checker
+branch, and a mandatory dependency-drift stop. Its exact `id` signature
+already has a reviewed isolated SCALE-STRESS-3A2A representation; reuse or
+extract it without importing that row's unrelated profunctor profile. The
+three target owners, two rules, and rich TypeScript consumer remain a later
+separate decision. Seven
+focused live tests, the 1,052-test root gate (1,004 active passes and 48
+intentional skips), all 19 live conformance judgments, and the bounded
+active-kernel check pass. A separate D-019 review is the next gate; the
 recorded scale sequence resumes only after that selected ND work or an
 explicit priority change.
 
@@ -855,8 +877,13 @@ three-level `a; b,c; d` stress, its separately reviewed measured closure,
 DISPLAYED-ND-0A/D-018 audit and review, and first recursive `:^nd`
 component-composition case are also complete, fully validated, and
 checkpointed `d8b450222273167ab326701c76fff03f0f539b18`. Use the displayed
-plan's proposal/audit-only DISPLAYED-ND-HIGHER-1B row to qualify the active
-existing-authority next-hom package. The recorded scale order follows.
+plan's completed DISPLAYED-ND-HIGHER-1B audit and non-self-authorizing D-019
+proposal. It proves that the three-owner/two-rule higher-action target first
+needs the exact thirteen-declaration rule-free foundation. The next gate is the
+separate D-019 review of only
+DISPLAYED-ND-HIGHER-FOUNDATION-1A; do not implement the target package or
+surface consumer under that foundation decision. The recorded scale order
+follows.
 `DECL-REFINE-1A`, generic parsing, and bulk protected-module transfer are not
 the immediate critical path.
 

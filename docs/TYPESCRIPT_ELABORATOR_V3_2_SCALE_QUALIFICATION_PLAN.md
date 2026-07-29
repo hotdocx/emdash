@@ -99,9 +99,21 @@ kernel/transfer/checker/browser delta. Its final gate passes 1,045 TypeScript
 tests (998 active passes and 47 intentional skips), all 19 live conformance
 judgments, and the bounded active-kernel check. Its exact local implementation
 checkpoint is `d8b450222273167ab326701c76fff03f0f539b18`. The displayed plan next
-requires the proposal/audit-only
-DISPLAYED-ND-HIGHER-1B existing-authority next-hom qualification. Once that
-selected ND work returns control here, the order is SCALE-KIND-PI-1,
+required the proposal/audit-only DISPLAYED-ND-HIGHER-1B existing-authority
+next-hom qualification. That executable audit is now complete and green. It
+pins thirteen prerequisite declarations plus the three higher-action owners
+and two projection rules, proves that target-only transfer is not closed,
+and checks a live next-hom consumer. Its non-self-authorizing D-019 proposal
+selects only the thirteen-declaration, zero-rule
+DISPLAYED-ND-HIGHER-FOUNDATION-1A tranche: five checked transparent
+definitions and eight opaque/injective signatures. The existing isolated
+SCALE-STRESS-3A2A `id` representation is reusable/extractable without its
+unrelated profunctor profile; no new mathematics, intrinsic owner, checker
+branch, or surface method is needed. Seven focused live tests,
+the 1,052-test root gate (1,004 active passes, 48 intentional skips), 19/19
+live conformance, and the bounded active-kernel check pass. A separate D-019
+review is the next gate. Once the selected ND work returns control here, the
+order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2715,8 +2727,17 @@ typed-cell-composition node initially restricted
 to compatible `indexed-transfor` children and recursive factoring to
 existing `comp_fapp0` at `Functord_cat`, with callback-once/frozen IR,
 component beta, a checked base-arrow cell, exact negatives, retained eta,
-and zero Lambdapi/transfer/intrinsic/checker/browser delta. Then route through
-proposal/audit-only DISPLAYED-ND-HIGHER-1B before resuming this scale ledger.
+and zero Lambdapi/transfer/intrinsic/checker/browser delta. Preserve the
+completed, non-self-authorizing DISPLAYED-ND-HIGHER-1B executable audit: its
+exact closure is thirteen prerequisite declarations, three
+`tdapp1_int_*_transfd` target declarations, and two projection rules; its
+live consumer passes; and the target-only transfer is not closed. Preserve
+its D-019 proposal for only rule-free
+DISPLAYED-ND-HIGHER-FOUNDATION-1A—five checked transparent definitions and
+eight opaque signatures—and require the separate immutable D-019 review
+before implementation. Keep the target owners, projection rules, and rich
+surface consumer behind the following separate decision before resuming this
+scale ledger.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit
@@ -2746,10 +2767,12 @@ example are now complete. Their exact envelope and recursive-body versus
 bounded-presentation distinction are frozen by the completed D-016 proposal
 and review. Preserve the completed `a; b,c; d` telescope and its separately
 reviewed D-017 closure, completed DISPLAYED-ND-0A/D-018 audit and review, and
-completed first recursive `:^nd` component-composition case. Qualify the
-active existing-authority next-hom package through DISPLAYED-ND-HIGHER-1B
-before returning to the scale rows. Direct typed construction remains the
-default acquisition path; reconsider a narrow
+completed first recursive `:^nd` component-composition case. Preserve the
+completed DISPLAYED-ND-HIGHER-1B qualification and obtain the separate
+D-019 review before implementing its selected thirteen-declaration foundation.
+Keep its target owners/rules and rich consumer behind the following separate
+decision before returning to the scale rows. Direct typed construction
+remains the default acquisition path; reconsider a narrow
 adapter only after measured repetition and a synchronized plan decision.
 Preserve the completed ordinary bracket evidence: the thirteen-prerequisite
 typed catalog plus `Functor_cat`/`Functor` support, sole generic
@@ -2828,6 +2851,19 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-ND-HIGHER-1B returned a dependency-first
+  transfer gate.** The executable audit pins the exact active closure at
+  thirteen identity/internalized-hom/opposite/presheaf prerequisites, three
+  `tdapp1_int_*_transfd` owners, and two projection rules. It proves the
+  target-only package is not closed and checks the concrete next-hom
+  consumer through the generic and capped action spellings. D-019 remains
+  non-self-authorizing and selects only the thirteen-declaration, zero-rule
+  foundation through generic transfer: five checked transparent definitions
+  and eight opaque interfaces. It changes no scale profile or generic engine.
+  Seven focused live tests, the 1,052-test root gate (1,004 active passes, 48
+  intentional skips), 19/19 live conformance, and the bounded active-kernel
+  check pass. The three target owners, two rules, rich surface consumer, and
+  return to the selected scale sequence remain later gates.
 - **2026-07-29 — DISPLAYED-ND-1A recursive coherence implementation
   returned bounded scale evidence.** The displayed critical path now
   recursively factors typed pointwise component composition to genuine outer
@@ -2840,7 +2876,8 @@ scope is affected.
   active passes and 47 intentional skips), all 19 live conformance judgments,
   and the bounded active-kernel check pass. Exact local implementation
   checkpoint: `d8b450222273167ab326701c76fff03f0f539b18`.
-  DISPLAYED-ND-HIGHER-1B is the next proposal/audit before the selected
+  DISPLAYED-ND-HIGHER-1B was the next proposal/audit; its completed
+  dependency-first result is recorded above before the selected
   SCALE-KIND-PI-1 → SCALE-INDUCTIVE-1B → SCALE-STRESS-3C →
   SCALE-BATCH-1 → SCALE-GRADUATE-1 sequence.
 - **2026-07-29 — D-DTTLF-USABILITY-018 delegated review opened.** After no

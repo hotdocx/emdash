@@ -174,8 +174,26 @@ conformance judgments, and the bounded active-kernel check. Exact local
 implementation checkpoint:
 `d8b450222273167ab326701c76fff03f0f539b18`. The next semantic row is not
 automatic:
-DISPLAYED-ND-HIGHER-1B must first freeze and review the existing-authority
-next-hom transfer/surface audit.
+DISPLAYED-ND-HIGHER-1B has now frozen and validated the existing-authority
+next-hom transfer/surface audit without implementing it. The exact closure is
+thirteen prerequisite identity/internalized-hom/opposite/presheaf
+declarations, three
+`tdapp1_int_*_transfd` owners, and two projection rules. A target-only
+transfer is not dependency-closed, while the live higher-cell consumer
+confirms that the generic hom/functor action ladder is sufficient and no new
+binder, contextual node, checker, or parser is needed.
+
+Its non-self-authorizing D-019 proposal selects only
+DISPLAYED-ND-HIGHER-FOUNDATION-1A: five checked transparent definitions,
+eight opaque/injective signatures, and zero rules, new mathematics,
+intrinsics, checker branches, or surface methods. The exact `id` signature
+already has an isolated SCALE-STRESS-3A2A representation; reuse/extraction
+must not pull in that row's unrelated profunctor profile. The target owners,
+rules, and rich surface consumer remain a following separate decision. Seven
+focused live tests, the 1,052-test root gate (1,004 active passes and 48
+intentional skips), 19/19 live conformance, and the bounded active-kernel
+check pass. The next action is a separate immutable D-019 review, not
+semantic implementation under the audit itself.
 D-017 proposal checkpoint:
 `f647791281095e02c6ebe3f1490e272b4e58c7a0`. D-017 delegated-review
 checkpoint: `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`.
@@ -631,7 +649,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-2A/D-017 at `89afe5f64710b99a262ff92cb193e2742a11827f`; DISPLAYED-ND-0A audit/D-018 proposal checkpointed `bc29f0d98de32fe0fdbad992859e97711e493e5c`; separate delegated D-018 review complete at `fb818203df88e68b27b2e5725737512010efdb13` | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-018 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, and `a; b,c; d`. The ND audit freezes coherent object/point/base-arrow/next-hom boundaries and selects only generic typed-cell composition plus recursive outer-`Transfd` factoring for pointwise vertical composition, with zero semantic/transfer delta |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-ND-1A at `d8b450222273167ab326701c76fff03f0f539b18`; DISPLAYED-ND-HIGHER-1B audit complete and green; non-self-authorizing D-019 foundation proposal awaits separate review | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-018 | One typed recursive frontend covers independent siblings, stable evaluation, one genuine edge, `a; b,c; d`, and recursively composed coherent `:^nd` component expressions. The higher-action audit pins a 13-foundation + 3-target + 2-rule existing-authority closure, proves target-only transfer is not closed, checks a live next-hom consumer, and proposes only the thirteen-declaration zero-rule foundation before any target/surface decision |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2431,10 +2449,17 @@ DISPLAYED-ND-1A recursive factorer at exact implementation checkpoint
 `d8b450222273167ab326701c76fff03f0f539b18`, including callback-once/frozen body
 evidence, nested composition, direct component beta, the checked base-arrow
 cell, exact negatives, retained eta, and zero semantic/transfer/profile
-delta. Prepare, but do not implement without a separate reviewed decision,
-DISPLAYED-ND-HIGHER-1B's existing-authority
-next-hom transfer/surface audit. Keep identity, arbitrary coherence, mixed
-variance, and composite-cell normalization separately gated. Preserve
+delta. Preserve completed, deeply frozen, non-self-authorizing
+DISPLAYED-ND-HIGHER-1B. Its exact existing-authority closure is thirteen
+prerequisite declarations, three higher-action target owners, and two
+projection rules; target-only transfer is not closed and its concrete
+next-hom consumer passes. Preserve D-019 as a proposal for only the
+thirteen-declaration, zero-rule DISPLAYED-ND-HIGHER-FOUNDATION-1A tranche,
+with five checked transparent definitions, eight opaque signatures, and a
+mandatory drift stop. Require the separate immutable D-019 review before
+implementation, and keep the target owners/rules, rich surface consumer,
+identity, arbitrary coherence, mixed variance, and composite-cell
+normalization separately gated. Preserve
 completed
 DISPLAYED-EVAL-0B, its
 constant-domain
@@ -2630,6 +2655,18 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-ND-HIGHER-1B completed the higher-action
+  usability audit without adding a frontend.** The exact active closure is
+  thirteen identity/internalized-hom/opposite/presheaf prerequisites, three
+  `tdapp1_int_*_transfd` owners, and two projection rules. A live consumer
+  confirms both the object and next-hom action and the generic-to-capped
+  projection. The existing generic hom/functor action surface is sufficient;
+  later exposure needs rich classifier preservation rather than a new binder
+  mode, contextual node, RawExpr/parser layer, or checker. D-019 proposes
+  only the thirteen-declaration, zero-rule foundation and remains
+  non-self-authorizing. Seven focused live tests, the 1,052-test root gate
+  (1,004 active passes, 48 intentional skips), 19/19 live conformance, and
+  the bounded active-kernel check pass.
 - **2026-07-29 — D-DTTLF-USABILITY-018 separately approved; review
   checkpoint pending.** With no immediate human answer after presentation of
   the exact checkpointed proposal, the standing unattended delegation was
