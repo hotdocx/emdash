@@ -185,7 +185,8 @@ health refresh are green. The complete repository gate is also green:
 1,022 TypeScript tests (975 active passes, 47 intentional skips, zero
 failures), all 19 live TypeScript/Lambdapi conformance judgments, and the
 complete kernel CI. Exact staged review and the rollback-safe local checkpoint
-remain the current tranche boundary.
+completed the tranche at checkpoint
+`89afe5f64710b99a262ff92cb193e2742a11827f`.
 
 ## Authority And Relationship To The Completed Architecture
 
@@ -571,8 +572,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-1A | complete, green, and checkpointed `86ac6e480e50e38486bf4155556bbf41760be2cf`; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e`; the root-only recursive consumer and runnable demo pass nine new focused tests and the aggregate 973-test root gate (926 active passes, 47 intentional skips, zero failures) | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-INTEGRATE-1 | complete and validated; exact consolidation checkpoint `222a718fc1ef667964a15cfec0e82e0cf807dd96` | complete DISPLAYED-CHAIN-1A and green full integration audit | Synchronized the displayed/usability/scale/handoff/master routing; classified `DECL-REFINE-1A` as optional deferred module/linking infrastructure; removed only six verified generated probe directories; passed the complete repository gate; checkpointed exactly the consolidation; and authorized the immediately following verified local-main fast-forward with no push or worktree removal |
 | DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; approved exactly as proposed by a separate delegated review with human supersession at checkpoint `24ce6ffede79e115bc5d387c65366598e56f5d3d` | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused proposal tests, ten focused review tests, the 985-test proposal gate, and the 995-test reviewed gate pass; the proposal remains non-self-authorizing |
-| DISPLAYED-CHAIN-2A | implementation, permanent focused evidence, and complete repository gate green; exact staged review and local checkpoint pending | approved D-DTTLF-USABILITY-016 plus separately reviewed D-DTTLF-USABILITY-017 | The existing `displayedDependentContextLambda` method accepts only the flat source-ordered `a; b,c; d` shape in `fibred-displayed-chain-2a`. It derives the independent `b,c` group without flags and passes the frozen object/internalized-arrow/reindexing/recursive/negative corpus without another frontend or checker. Final gate: 1,022 TypeScript tests (975 active, 47 skipped), 19/19 live conformance judgments, and complete kernel CI |
-| DISPLAYED-CHAIN-2A-CLOSURE-0A | proposal/review checkpoints preserved; exact semantic and transfer closure implemented and fully validated; exact staged review and local checkpoint pending | D-016 mandatory closure-drift stop plus separately reviewed D-017 | Zero new symbol, one componentwise existing-owner rule; three existing signatures; six exact, two derived, and one new TypeScript runtime entries; typed inferred-slot corrections; 512-step continuation budget with 256 default; zero oracle/intrinsic/owner-specific path |
+| DISPLAYED-CHAIN-2A | complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | approved D-DTTLF-USABILITY-016 plus separately reviewed D-DTTLF-USABILITY-017 | The existing `displayedDependentContextLambda` method accepts only the flat source-ordered `a; b,c; d` shape in `fibred-displayed-chain-2a`. It derives the independent `b,c` group without flags and passes the frozen object/internalized-arrow/reindexing/recursive/negative corpus without another frontend or checker. Final gate: 1,022 TypeScript tests (975 active, 47 skipped), 19/19 live conformance judgments, and complete kernel CI |
+| DISPLAYED-CHAIN-2A-CLOSURE-0A | proposal/review checkpoints preserved; exact semantic and transfer closure complete, fully validated, and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | D-016 mandatory closure-drift stop plus separately reviewed D-017 | Zero new symbol, one componentwise existing-owner rule; three existing signatures; six exact, two derived, and one new TypeScript runtime entries; typed inferred-slot corrections; 512-step continuation budget with 256 default; zero oracle/intrinsic/owner-specific path |
 | DISPLAYED-ND-0A | next dependency-ready audit after the DISPLAYED-CHAIN-2A checkpoint | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Audit general `:^nd` coherence synthesis, object/base-arrow/higher action, and exact end-user cases before proposing any new semantic owner or extending coherent-eta recognition by cases |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
@@ -2478,8 +2479,10 @@ bulk whole-library transfer, `DECL-REFINE-1A`, or broader Git operations.
   1179/1020/159 with zero delta, strict LHS audit, catalog, and health are
   green. The complete repository gate passes 1,022 TypeScript tests (975
   active, 47 intentionally skipped), all 19 live conformance judgments, and
-  complete kernel CI. Exact staged review and the authorized rollback-safe
-  local checkpoint remain before advancing to DISPLAYED-ND-0A.
+  complete kernel CI. Exact staged review completed at the authorized
+  rollback-safe local checkpoint
+  `89afe5f64710b99a262ff92cb193e2742a11827f`; DISPLAYED-ND-0A is now the
+  next dependency-ready row.
 - **2026-07-29 — D-DTTLF-USABILITY-017 approved under delegated unattended
   authority.** After the exact green D-017 gate and rollback-safe proposal
   checkpoint were presented without immediate human supersession, a separate
@@ -2933,9 +2936,9 @@ three-declaration/nine-rule generic transfer, typed inferred-slot corrections,
 512-step continuation/256-step default budget boundary, and twelve permanent
 focused tests. Require zero external oracle, zero intrinsic owner, zero
 owner-specific checker/evaluator branch, and an unchanged chain-1 profile.
-The final aggregate/repository validation and report synchronization are
-green. If exact staged review or the authorized local checkpoint is
-incomplete, finish only that bounded synchronization first.
+The final aggregate/repository validation, report synchronization, exact
+staged review, and authorized local checkpoint
+`89afe5f64710b99a262ff92cb193e2742a11827f` are complete.
 
 After the green DISPLAYED-CHAIN-2A checkpoint, the next dependency-ready row
 is DISPLAYED-ND-0A: perform a read-only/executable audit of general `:^nd`

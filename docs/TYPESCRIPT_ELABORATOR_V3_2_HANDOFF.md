@@ -170,7 +170,8 @@ conclusion is narrower and clearer:
   reindexing, and the complete negative partition. The complete repository
   gate passes 1,022 TypeScript tests (975 active, 47 intentionally skipped),
   all 19 live conformance judgments, and complete kernel CI; exact staged
-  review and the local checkpoint remain. The immutable D-017
+  review and the local checkpoint
+  `89afe5f64710b99a262ff92cb193e2742a11827f` are complete. The immutable D-017
   review checkpoint remains
   `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`; and
 - this settles a mechanically reusable architecture for the demonstrated

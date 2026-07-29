@@ -140,10 +140,11 @@ close the exact `a; b,c; d` profile with no oracle, intrinsic owner, second
 frontend, or parser. Twelve permanent focused tests cover the full
 object/internalized-arrow/recursive/reindexing/negative corpus. The complete
 repository gate passes 1,022 TypeScript tests (975 active, 47 intentionally
-skipped), all 19 live conformance judgments, and complete kernel CI; exact
-staged review and the rollback-safe local checkpoint remain. General `:^nd`
-audit and the recorded scale sequence follow only after that bounded
-checkpoint. D-017 proposal checkpoint:
+skipped), all 19 live conformance judgments, and complete kernel CI. Exact
+staged review and the rollback-safe local checkpoint
+`89afe5f64710b99a262ff92cb193e2742a11827f` are complete. General `:^nd`
+audit is now next; the recorded scale sequence follows that bounded audit.
+D-017 proposal checkpoint:
 `f647791281095e02c6ebe3f1490e272b4e58c7a0`. D-017 delegated-review
 checkpoint: `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`.
 D-016 graduation proposal checkpoint:
@@ -598,7 +599,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-2A/D-017 implementation and full repository validation; exact staged review/local checkpoint pending | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-017 | One typed recursive frontend now covers independent siblings, stable evaluation, one genuine edge, and the exact `a; b,c; d` mixed telescope. D-017 adds no owner: zero new symbols, one existing-owner pair-cell rule, three signatures/nine generic continuation rules, 512-step continuation budget, zero oracle/intrinsic/second-frontend change. Twelve focused tests and the 1,022-test/19-conformance/kernel-CI repository gate pass. DISPLAYED-ND-0A is next after the checkpoint |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-2A/D-017 and checkpointed `89afe5f64710b99a262ff92cb193e2742a11827f` | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-017 | One typed recursive frontend now covers independent siblings, stable evaluation, one genuine edge, and the exact `a; b,c; d` mixed telescope. D-017 adds no owner: zero new symbols, one existing-owner pair-cell rule, three signatures/nine generic continuation rules, 512-step continuation budget, zero oracle/intrinsic/second-frontend change. Twelve focused tests and the 1,022-test/19-conformance/kernel-CI repository gate pass. DISPLAYED-ND-0A is next |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2385,9 +2386,10 @@ D-017 delegated review with human supersession. Preserve its completed
 one-existing-owner-rule, three-existing-signature, nine-TypeScript-runtime
 entry implementation, typed inferred-slot corrections, isolated profile, and
 generic 512-step LF budget seam with no oracle/intrinsic/owner-specific
-checker path. If its final repository validation, plan/report synchronization,
-exact staged review, or local checkpoint remains incomplete, finish that
-bounded tranche first. Then select DISPLAYED-ND-0A as the next
+checker path. Its final repository validation, plan/report synchronization,
+exact staged review, and local checkpoint
+`89afe5f64710b99a262ff92cb193e2742a11827f` are complete. Select
+DISPLAYED-ND-0A as the next
 dependency-ready read-only/executable audit of general `:^nd` coherence and
 higher action; freeze measured cases and gaps before any semantic
 implementation. Preserve completed

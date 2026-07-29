@@ -3684,9 +3684,10 @@ full `a; b,c; d` corpus. Final aggregate/repository validation and its local
 checkpoint are now separated: the complete repository gate passes 1,022
 TypeScript tests (975 active, 47 intentionally skipped), all 19 live
 conformance judgments, and complete kernel CI; exact staged review and the
-local checkpoint remain. DISPLAYED-ND-0A and then the selected scale sequence
-follow the completed mixed stress. The historical text below must not be used
-to resume the completed fibred-context or displayed-chain implementation.
+local checkpoint `89afe5f64710b99a262ff92cb193e2742a11827f` are complete.
+DISPLAYED-ND-0A and then the selected scale sequence follow the completed
+mixed stress. The historical text below must not be used to resume the
+completed fibred-context or displayed-chain implementation.
 
 When starting a fresh persistent session, review and trust the root project
 hook through `/hooks` and verify the shared archive as described in

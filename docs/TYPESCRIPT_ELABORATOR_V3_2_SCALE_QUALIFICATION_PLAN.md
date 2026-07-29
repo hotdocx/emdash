@@ -76,10 +76,11 @@ change. Its exact review checkpoint is
 now complete with twelve permanent focused transfer/consumer tests. The
 complete repository gate passes 1,022 TypeScript tests (975 active, 47
 intentionally skipped), all 19 live conformance judgments, and complete
-kernel CI; exact staged review and its local checkpoint remain. It adds zero
+kernel CI; exact staged review and its local checkpoint
+`89afe5f64710b99a262ff92cb193e2742a11827f` are complete. It adds zero
 symbols, one existing-owner rule, three declarations, nine generic runtime
 entries, and no oracle/intrinsic/second-frontend path.
-DISPLAYED-ND-0A follows that checkpoint. When control returns to this scale
+DISPLAYED-ND-0A is now next. When control returns to this scale
 plan, the selected order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
