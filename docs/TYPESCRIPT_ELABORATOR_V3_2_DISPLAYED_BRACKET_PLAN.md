@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; the final residual `Const_func` proposal is checkpointed `fe20a7af2b5ad8835a98f0acce987953c29d33de` and approved under delegated D-014 review checkpoint `b05c84a4e67c13f5c9f136b98ebb7bdae5ce41ff` with human supersession; dependency-closed generic transfer/consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, and CONST-FUNCTOR-CORRECTION-0A/D-014 | Compile exactly three chain-specific and two ambient declarations plus two existing and six semantic rules through generic engines; retain exactly one new owner/six rules; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
+| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; post-linkage generic subject checking has frozen the bounded COMPUTATION-CLOSURE-CORRECTION-0A proposal under H-DTTLF-USABILITY-DISPLAYED-CHAIN-04/D-DTTLF-USABILITY-015; generic transfer/consumer pending that separate review | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, and CONST-FUNCTOR-CORRECTION-0A/D-014; computation-closure proposal awaiting D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1628,6 +1628,97 @@ signature. The user's standing unattended delegation may authorize that
 separate review only after the unchanged proposal is presented, green, and
 locally checkpointed; any later human decision supersedes it.
 
+### Post-linkage computation-closure correction
+
+D-013 and D-014 close the declaration-linkage inventory, but a typed global
+is not yet a computation-closed dependency. Compiling the selected rules one
+at a time through the generic declaration and runtime engines exposed a
+second, independent inventory dimension. Several active definitions and
+equations needed by subject conversion had deliberately been transferred
+only as opaque signatures or had not been demanded by earlier consumers.
+
+The staged audit is now exhaustive for the approved six rules:
+
+1. the pre-existing `sigma_map_func` structured-arrow rule needs the exact
+   transparent bodies
+   `functord_transport_lhs_func = D[p] o Fibre_func(FF,x)` and
+   `functord_transport_rhs_func = Fibre_func(FF,y) o E[p]`;
+2. the section object and structured-arrow rules need the existing
+   `Sigma_proj1_pullback_catd` object action;
+3. the structured-arrow rule also needs the exact transparent
+   `Obj_func(y) = Const_func(Terminal_cat,Y,y)` body and the existing
+   `Const_func` object action;
+4. the final direct displayed-arrow rule needs the existing constant
+   displayed-family base-arrow action
+   `Const_catd(K,A)[p] = id_func(A)`; and
+5. its selected RHS contains `piapp0(s,k)`, whose active transparent body
+   reduces through `piapp0_func`, composition, terminal evaluation, and the
+   point component of `s`.
+
+Supplying those dependencies makes all six selected semantic rules compile.
+There is no seventh residual. The remaining `_` source-fibre slot in the
+active final rule is a term slot; the transfer's experimental use of a type
+wildcard there was a representation error. A typed captured term, unused on
+the RHS, realizes the same match-all active pattern without broadening it or
+changing the selected normal form.
+
+Seven alternatives were compared. Reopening DIRECTED-1C and transferring the
+entire `piapp0_func` closure is faithful but imports a larger evaluation
+graph than this consumer needs. Making the frozen DIRECTED-1C catalog
+globally transparent mutates an earlier reviewed boundary. Restoring
+`Obj_func` in the completed weakening/reindexing transfer is faithful in
+isolation, but it changes that row's frozen declaration/rule inventory and
+invalidates the immutable fibred-graduation evidence. Keeping every short
+definition opaque and specializing only `fapp0(Obj_func(...),...)` was tested
+and is insufficient: it reduces point application but does not expose the
+transparent category conversion needed to check the direct arrow subject.
+Specializing the six semantic rules themselves or consulting an external
+subject-reduction oracle would either duplicate the approved mathematics or
+weaken the TypeScript trusted boundary.
+
+The selected architecture is therefore hybrid and consumer-led:
+
+- restore the two exact transport bodies at their existing owning transfer;
+- retain D-014's chain-local `Const_func` declaration and add one checked
+  transparent TypeScript mirror of `Obj_func` whose deterministic backend
+  name remains the active `Obj_func`; this is the already-established mirror
+  seam and does not mutate the completed weakening/reindexing transfer;
+- compile five exact pre-existing runtime equations: the original two
+  `sigma_map_func` actions plus projection-pullback object action,
+  `Const_func` object action, and `Const_catd` base-arrow action; and
+- retain global DIRECTED-1C opacity while adding one typed explicit-Core
+  `piapp0` delta-normal-form specialization derived mechanically from the
+  active transparent `piapp0`/`piapp0_func` bodies and existing generic
+  application/composition equations.
+
+Typed normal-form specialization is an established transfer mechanism, used
+already by FIBRED-PRODUCT-1A when explicit endpoint normalization makes a
+literal active rule insufficient. It does not add a Lambdapi rule or new
+mathematics. Here it is deliberately reserved for `piapp0`, whose larger
+transparent closure was explicitly deferred by DIRECTED-1C. `Obj_func` uses
+the complementary checked-transparent-mirror seam because its body is short
+but its original importing transfer is already frozen and graduated.
+
+The resulting generic transfer partition is six declarations: three
+chain-specific, local `Terminal_obj` and `Const_func`, plus one
+transfer-only checked mirror mapping to active `Obj_func`. The active backend
+authority is not new: the approved D-012 through D-014 declaration inventory
+remains five, and the sixth Core declaration is a mirror of the already
+inherited active `Obj_func`. The closure contains five exact existing
+equations and one typed normal-form specialization before the unchanged six
+semantic rules.
+The mathematical delta remains exactly one `sigma_functord_sec` owner and
+six rules, with zero proof rules, Lambdapi edits, intrinsic owners, external
+oracles, parser/RawExpr/checker layers, or browser/bulk work.
+
+The deeply frozen, non-self-authorizing executable proposal is
+`src/v3_2/categorical_displayed_chain_computation_closure_correction_proposal.ts`
+under H-DTTLF-USABILITY-DISPLAYED-CHAIN-04/D-DTTLF-USABILITY-015. It requires
+a separate review. Under the standing unattended delegation, that review may
+be recorded only after the unchanged proposal is presented, green, and
+locally checkpointed, remains supersedable by a later human decision, and
+authorizes no scope beyond this bounded computation closure.
+
 ### TypeScript consumer and scalability assessment
 
 The proposed root-only profile is `fibred-displayed-chain-1`, with a direct
@@ -1678,6 +1769,19 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-CHAIN-COMPUTATION-CLOSURE-CORRECTION-0A
+  proposed.** The D-013/D-014 linkage corrections allow generic compilation
+  to reach subject conversion. A rule-by-rule audit then identifies exactly
+  two omitted transparent bodies, one exact checked `Obj_func` mirror, three
+  additionally demanded existing equations beyond the original two, one
+  typed `piapp0` normal-form specialization, and one term-wildcard
+  representation correction. With the candidate closure, all six approved
+  semantic rules compile and no further
+  residual remains. The proposal keeps the mathematical delta at one owner
+  and six rules, retains global DIRECTED-1C opacity, adds no Lambdapi edit,
+  intrinsic owner, oracle, parser/checker layer, browser, or bulk work, and
+  awaits the separate H-DTTLF-USABILITY-DISPLAYED-CHAIN-04/
+  D-DTTLF-USABILITY-015 review.
 - **2026-07-28 — D-DTTLF-USABILITY-014 approved under delegated unattended
   authority.** After the exact unchanged proposal was presented, separately
   checkpointed, and its five focused tests, 940-test aggregate root gate,
