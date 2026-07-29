@@ -372,7 +372,8 @@ skips), and the bounded active-kernel check passes. The browser, parser,
 dependencies, Lambdapi sources, generic engines, elaborators, and
 mathematical owners/rules have zero delta. The optional higher-action command
 remains outside the default report. PRODUCT-DEMO-ORACLE-0A is next after the
-exact implementation checkpoint.
+exact implementation checkpoint
+`f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark

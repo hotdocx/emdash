@@ -13,8 +13,9 @@ usability result, or browser boundary
 Status: active living product-facing continuation; inventory
 PRODUCT-DEMO-0A is complete; the exact PRODUCT-DEMO-1A implementation
 proposal is separately approved under D-DTTLF-PRODUCT-DEMO-001 with human
-supersession; PRODUCT-DEMO-1B is implemented and final-green pending its exact
-local checkpoint; PRODUCT-DEMO-ORACLE-0A is next
+supersession; PRODUCT-DEMO-1B is implemented and final-green at exact local
+checkpoint `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`;
+PRODUCT-DEMO-ORACLE-0A is next
 
 ## Human Direction And Purpose
 
@@ -316,8 +317,8 @@ product report's three-panel execution at 2.1 seconds. These two timings are
 orientation evidence only; no performance SLA is claimed. The slower
 displayed next-hom/higher-action command remains optional.
 
-Exact local implementation checkpoint: pending the required staged-diff
-review.
+Exact local implementation checkpoint:
+`f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`.
 
 ## Later Bounded Rows
 
@@ -325,7 +326,7 @@ review.
 | --- | --- | --- | --- |
 | PRODUCT-DEMO-0A | complete | current code and history | Existing demo/API/browser/parser inventory and feasibility verdict recorded above |
 | PRODUCT-DEMO-1A | approved exactly as proposed under D-DTTLF-PRODUCT-DEMO-001 with human supersession; proposal checkpoint `e786c61` | PRODUCT-DEMO-0A | Deeply frozen three-panel external-review implementation contract |
-| PRODUCT-DEMO-1B | implemented and final-green; exact checkpoint pending staged review | approved PRODUCT-DEMO-1A | Root-only three-panel report module, command, reviewer guide, tests, and synchronized navigation with zero semantic/browser/parser delta |
+| PRODUCT-DEMO-1B | complete and final-green at `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc` | approved PRODUCT-DEMO-1A | Root-only three-panel report module, command, reviewer guide, tests, and synchronized navigation with zero semantic/browser/parser delta |
 | PRODUCT-DEMO-ORACLE-0A | next | PRODUCT-DEMO-1B | Decide whether one bounded optional conformance command materially improves peer review without making Lambdapi a runtime dependency |
 | PRODUCT-BROWSER-0A | pending | PRODUCT-DEMO-1B | Measure transitive browser safety, bundle/worker/startup boundary, exact public facade, and minimal UI options; produce a separate implementation proposal only if justified |
 | PRODUCT-BROWSER-1 | gated/deferred | approved browser proposal | Implement only the selected browser profile and UI; likely deserves a dedicated subplan |
@@ -479,4 +480,5 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   five focused tests. The actual command and 1,109-test aggregate gate pass,
   as does the bounded active-kernel check. The browser, parser/dependencies,
   Lambdapi sources, generic engines, elaborators, and mathematical
-  owners/rules are unchanged. Exact checkpoint follows staged review.
+  owners/rules are unchanged. Exact green local checkpoint:
+  `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`.
