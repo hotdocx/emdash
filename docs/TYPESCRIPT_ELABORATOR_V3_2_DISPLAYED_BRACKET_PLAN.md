@@ -500,7 +500,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-EVAL-1A | complete; fully validated; implementation checkpoint `1a7ce3f023391aa22c34dc5626057710429bc7c3` | reviewed DISPLAYED-EVAL-OWNER-0C/D-011 | Varying-subject/varying-argument and varying-subject/fixed-argument judgments within the existing recursive displayed contextual compiler; exactly two active owners/two component rules, explicit prerequisite transfer, zero intrinsic Core owners, and the mechanical dependent-target final-runtime repair |
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
-| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; exhaustive linkage audit found exactly one final residual `Const_func`, frozen at proposal checkpoint `fe20a7af2b5ad8835a98f0acce987953c29d33de` behind H-DTTLF-USABILITY-DISPLAYED-CHAIN-03/D-DTTLF-USABILITY-014; generic transfer/consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012 and TRANSFER-CORRECTION-0A/D-013; pending CONST-FUNCTOR-CORRECTION-0A | Preserve the three chain-specific declarations/two existing rules; after separate approval, compile the two pre-existing ambient signatures `Terminal_obj` and `Const_func`; retain exactly one new owner/six rules; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen evidence corpus |
+| DISPLAYED-CHAIN-1A | approved implementation in progress; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; the final residual `Const_func` proposal is checkpointed `fe20a7af2b5ad8835a98f0acce987953c29d33de` and approved under delegated D-014 review checkpoint `b05c84a4e67c13f5c9f136b98ebb7bdae5ce41ff` with human supersession; dependency-closed generic transfer/consumer pending | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, and CONST-FUNCTOR-CORRECTION-0A/D-014 | Compile exactly three chain-specific and two ambient declarations plus two existing and six semantic rules through generic engines; retain exactly one new owner/six rules; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 | DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
 
@@ -1678,6 +1678,23 @@ authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
 ## Change Log
 
+- **2026-07-28 — D-DTTLF-USABILITY-014 approved under delegated unattended
+  authority.** After the exact unchanged proposal was presented, separately
+  checkpointed, and its five focused tests, 940-test aggregate root gate,
+  14-test live canonical-export gate, root typecheck/lint, and bounded kernel
+  check passed, no immediate human response superseded it. A separate
+  immutable review uses the user's standing delegation with human
+  supersession and authorizes only the pre-existing injective `Const_func`
+  signature through the generic declaration compiler. Together with D-013,
+  this closes the exhaustive ambient linkage residual at exactly
+  `Terminal_obj, Const_func`; the three chain-specific declarations, two
+  existing rules, one new owner, and six semantic rules remain unchanged.
+  No Lambdapi edit, wildcard, altered normal form, intrinsic Core owner,
+  parser/checker layer, browser promotion, bulk work, or broader Git
+  authority is authorized. Six focused review tests and the aggregate
+  946-test gate pass (899 active passes, 47 intentional skips, zero
+  failures). Exact review checkpoint:
+  `b05c84a4e67c13f5c9f136b98ebb7bdae5ce41ff`.
 - **2026-07-28 — DISPLAYED-CHAIN-CONST-FUNCTOR-CORRECTION-0A proposed.**
   Applying D-013 advanced the fail-closed generic module builder to the only
   remaining undeclared global: the active injective `Const_func` used by the
@@ -2046,14 +2063,13 @@ review authorizes only that ambient signature through the generic compiler;
 do not infer any further semantic or profile authority from it.
 
 Preserve the non-self-authorizing
-DISPLAYED-CHAIN-CONST-FUNCTOR-CORRECTION-0A proposal. Its exhaustive linkage
-audit identifies `Const_func` as the exact and final residual external after
-D-013. It requests only that pre-existing injective signature through the
+DISPLAYED-CHAIN-CONST-FUNCTOR-CORRECTION-0A proposal and its separate
+delegated D-014 review with human supersession. Its exhaustive linkage audit
+identifies `Const_func` as the exact and final residual external after D-013.
+The review authorizes only that pre-existing injective signature through the
 generic declaration compiler and keeps the D-012/D-013 semantic and Git
-boundaries unchanged. If the exact proposal is green and locally checkpointed
-and no immediate human response follows its presentation, the standing
-unattended delegation permits a separate D-DTTLF-USABILITY-014 review with
-human supersession. Do not rely on `Const_func` before that separate review.
+boundaries unchanged. Do not infer any additional semantic or profile
+authority from the review.
 
 For a future exact bounded gate in this goal, if no immediate human response
 follows presentation of its frozen proposal, the user's standing delegation
