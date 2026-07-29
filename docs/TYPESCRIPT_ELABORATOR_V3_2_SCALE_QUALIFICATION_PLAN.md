@@ -143,7 +143,9 @@ The deeply frozen SCALE-INDUCTIVE-1B1 proposal represents the exact printed
 polymorphic generated-first-projection consumer through the existing generic
 engines, and leaves direct recursion/strict positivity to measured
 SCALE-INDUCTIVE-1B2. It awaits the separate
-H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 review. The following
+H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 review. Exact
+proposal/audit checkpoint:
+`830fb975756d1d13d8ddcb516690ea88b19d51d6`. The following
 order is SCALE-INDUCTIVE-1B1, SCALE-INDUCTIVE-1B2,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -661,7 +663,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | in progress | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Parent row for explicit generated-owner contracts, parameter/index fidelity, recursive/indexed validation, and strict-positivity boundaries; no backend-generated owner is trusted from its name alone |
-| SCALE-INDUCTIVE-1B1 | proposal complete; awaiting H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Correct the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; associate the exact explicit `ind_τΣ_` type and one beta as a checked companion contract; compile the polymorphic first-projection consumer through existing generic engines; qualify only the nonrecursive indexed case |
+| SCALE-INDUCTIVE-1B1 | proposal complete at `830fb975756d1d13d8ddcb516690ea88b19d51d6`; awaiting H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Correct the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; associate the exact explicit `ind_τΣ_` type and one beta as a checked companion contract; compile the polymorphic first-projection consumer through existing generic engines; qualify only the nonrecursive indexed case |
 | SCALE-INDUCTIVE-1B2 | pending | SCALE-INDUCTIVE-1B1 | Use the measured `ind_nat` type/two betas to qualify direct structural recursion, recursive induction-hypothesis contracts, and negative strict-positivity rejection; keep mutual and general higher-order positivity separate unless active consumers require them |
 | SCALE-KIND-PI-1 | complete at `b4cb8d39bd31adc768784308263fd91d83ddeefe`; audit/proposal checkpoint `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserves the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
@@ -3126,8 +3128,10 @@ scope is affected.
   An explicit `ind_τΣ_` companion declaration, one beta, and a polymorphic
   generated-first-projection consumer already compile and reduce through the
   generic engines and agree with bounded Lambdapi. The proposal awaits
-  H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001; direct `ind_nat`
-  recursion and negative strict positivity remain 1B2.
+  H-DTTLF-SCALE-INDUCTIVE-01/D-DTTLF-SCALE-INDUCTIVE-001 at exact
+  proposal/audit checkpoint
+  `830fb975756d1d13d8ddcb516690ea88b19d51d6`; direct `ind_nat` recursion
+  and negative strict positivity remain 1B2.
 - **2026-07-29 — SCALE-KIND-PI-1 audit found no checker gap.** The
   executable four-cell TypeScript/live-Lambdapi matrix accepts only
   `TYPE`-sorted domain annotations, with either `TYPE`- or `KIND`-sorted

@@ -303,6 +303,8 @@ transfer because active emdash declarations already consume generated
 induction owners. The first-projection definition is a conformance witness,
 not a new end-user inductive-declaration facade; optional user-facing
 declaration syntax or automatic eliminator generation remains deferred.
+Exact proposal/audit checkpoint:
+`830fb975756d1d13d8ddcb516690ea88b19d51d6`.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
