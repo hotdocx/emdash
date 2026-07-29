@@ -86,15 +86,21 @@ cell-composition node and recursive pointwise vertical-composition lowering
 to `comp_fapp0` at `Functord_cat`; next-hom transfer and arbitrary coherence
 remain separate. Its seven focused tests, 1,029-test root gate (982 active
 passes and 47 intentional skips), all 19 live conformance judgments, and
-bounded active-kernel check pass. Await/review D-018 and complete its selected
-ND tranche before returning here. Its exact proposal checkpoint is
+bounded active-kernel check pass. Its exact proposal checkpoint is
 `bc29f0d98de32fe0fdbad992859e97711e493e5c`. A separate immutable delegated
 review now records D-018 approval with human supersession; its focused gate
 and 1,036-test aggregate gate pass together with 19/19 live conformance and
 the bounded active-kernel check. Its exact checkpoint is
-`fb818203df88e68b27b2e5725737512010efdb13`; only the reviewed ND tranche is
-implementation-ready. When control returns to this scale plan, the selected
-order is SCALE-KIND-PI-1,
+`fb818203df88e68b27b2e5725737512010efdb13`. DISPLAYED-ND-1A now
+implements only that reviewed tranche: generic typed component-composition
+IR, recursive factoring to genuine outer `Transfd` composition, direct
+component beta, a checked base-arrow cell, exact negatives, and zero
+kernel/transfer/checker/browser delta. Its final gate passes 1,045 TypeScript
+tests (998 active passes and 47 intentional skips), all 19 live conformance
+judgments, and the bounded active-kernel check. The displayed plan next
+requires the proposal/audit-only
+DISPLAYED-ND-HIGHER-1B existing-authority next-hom qualification. Once that
+selected ND work returns control here, the order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2700,8 +2706,15 @@ completed one existing-owner rule, three existing signatures, nine
 continuation rules, typed inferred-slot corrections, isolated profile, and
 generic 512-step LF budget seam with zero
 oracle/intrinsic/owner-specific checker path. Finish only any missing final
-validation/report/checkpoint synchronization, then route through
-DISPLAYED-ND-0A before resuming this scale ledger.
+validation/report/checkpoint synchronization. Preserve completed
+DISPLAYED-ND-0A, its separate immutable D-018 review, and completed
+DISPLAYED-ND-1A: one generic typed-cell-composition node initially restricted
+to compatible `indexed-transfor` children and recursive factoring to
+existing `comp_fapp0` at `Functord_cat`, with callback-once/frozen IR,
+component beta, a checked base-arrow cell, exact negatives, retained eta,
+and zero Lambdapi/transfer/intrinsic/checker/browser delta. Finish only any
+missing final validation or checkpoint synchronization, then route through
+proposal/audit-only DISPLAYED-ND-HIGHER-1B before resuming this scale ledger.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit
@@ -2728,11 +2741,13 @@ measured 70-root/extension closures the immediate critical path. The
 dependent Sigma-telescope demo, ordinary bracket, independent displayed
 siblings, stable displayed evaluation, and one genuine dependent-chain
 example are now complete. Their exact envelope and recursive-body versus
-bounded-presentation distinction are frozen by the pending D-016 proposal.
-Subject to approval, stress only the proposed three-level
-`a; b,c; d` telescope with both dependency transitions and independent
-middle siblings, then audit general `:^nd`. Direct typed construction
-remains the default acquisition path; reconsider a narrow
+bounded-presentation distinction are frozen by the completed D-016 proposal
+and review. Preserve the completed `a; b,c; d` telescope and its separately
+reviewed D-017 closure, completed DISPLAYED-ND-0A/D-018 audit and review, and
+completed first recursive `:^nd` component-composition case. Qualify the
+active existing-authority next-hom package through DISPLAYED-ND-HIGHER-1B
+before returning to the scale rows. Direct typed construction remains the
+default acquisition path; reconsider a narrow
 adapter only after measured repetition and a synchronized plan decision.
 Preserve the completed ordinary bracket evidence: the thirteen-prerequisite
 typed catalog plus `Functor_cat`/`Functor` support, sole generic
@@ -2811,6 +2826,20 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-ND-1A recursive coherence implementation
+  returned bounded scale evidence.** The displayed critical path now
+  recursively factors typed pointwise component composition to genuine outer
+  `Transfd` composition through existing `comp_fapp0`, while rejecting
+  arbitrary pointwise data. Nine focused tests cover nested recursion,
+  component beta, a checked base-arrow cell, classifier/scope/profile
+  negatives, retained eta, and zero Lambdapi owner/rule, transfer,
+  intrinsic, checker, or browser delta. This does not resume bulk transfer or
+  promote a scale profile. Nine focused tests, the 1,045-test root gate (998
+  active passes and 47 intentional skips), all 19 live conformance judgments,
+  and the bounded active-kernel check pass;
+  DISPLAYED-ND-HIGHER-1B is the next proposal/audit before the selected
+  SCALE-KIND-PI-1 → SCALE-INDUCTIVE-1B → SCALE-STRESS-3C →
+  SCALE-BATCH-1 → SCALE-GRADUATE-1 sequence.
 - **2026-07-29 — D-DTTLF-USABILITY-018 delegated review opened.** After no
   immediate human response to the exact checkpointed proposal, a separate
   immutable review records approval under the user's standing delegation

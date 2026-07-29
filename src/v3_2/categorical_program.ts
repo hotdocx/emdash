@@ -379,10 +379,11 @@ export interface CoreCategoricalProgramOptions {
      * D-DTTLF-USABILITY-006. The fibred-binder profile additionally exposes
      * the existing-authority direct displayed-functor abstraction and
      * proof-only direct/nested classifier comparison.
-     * The fibred-transfd profile adds the coherent direct `:^nd` eta
-     * abstraction, fibre components, point components, and the active
-     * transported higher cell. The grouped-sequential profile additionally
-     * connects the generic dependency graph to finite sequential
+     * The fibred-transfd profile adds coherent direct `:^nd` eta and
+     * recursively typed vertical component-composition abstraction, fibre
+     * components, point components, and the active transported higher cell.
+     * The grouped-sequential profile additionally connects the generic
+     * dependency graph to finite sequential
      * Sigma/pullback and grouped transparent-product context presentations.
      * The weakening/reindexing profile then adds the exact contextual
      * `indexOf` section weakening and existing-authority displayed
@@ -4467,6 +4468,29 @@ export class CoreCategoricalProgram {
             sourceFunctor: sourceFunctor.expression,
             targetFunctor: targetFunctor.expression
         }, nodeProvenance);
+    }
+
+    /**
+     * Compose two compatible typed cells inside a scoped categorical
+     * callback. DISPLAYED-ND-1A initially accepts only indexed displayed
+     * transformations; the enclosing `displayedTransforLambda` recursively
+     * factors the result into a genuine coherent outer transformation.
+     */
+    composeCells(
+        outerValue: CoreCategoricalTerm,
+        innerValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'typed categorical cell composition',
+            source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        return this.builder.composeCells(
+            outerValue,
+            innerValue,
+            nodeProvenance
+        );
     }
 
     composeDisplayedTransfor(

@@ -160,8 +160,20 @@ immutable delegated D-018 review now records approval exactly as proposed
 with human supersession. Its seven focused tests, 1,036-test root gate (989
 active passes and 47 intentional skips), all 19 live conformance judgments,
 and bounded active-kernel check pass. Exact review checkpoint:
-`fb818203df88e68b27b2e5725737512010efdb13`; only the reviewed
-DISPLAYED-ND-1A scope is implementation-ready.
+`fb818203df88e68b27b2e5725737512010efdb13`. DISPLAYED-ND-1A now
+implements exactly that reviewed scope: public `composeCells`, one generic
+`typed-cell-composition` node initially restricted to compatible
+`indexed-transfor` children, and recursive factoring of component leaves and
+nested pointwise vertical composition to genuine outer `Transfd` terms
+through existing `comp_fapp0` at `Functord_cat`. Nine focused tests cover
+callback-once/frozen recursive IR, component beta, a checked base-arrow cell,
+exact classifier/scope/profile negatives, retained eta, and zero
+Lambdapi/transfer/intrinsic/checker/browser delta. The final gate passes 1,045
+TypeScript tests (998 active passes and 47 intentional skips), all 19 live
+conformance judgments, and the bounded active-kernel check; exact checkpoint
+recording remains. The next semantic row is not automatic:
+DISPLAYED-ND-HIGHER-1B must first freeze and review the existing-authority
+next-hom transfer/surface audit.
 D-017 proposal checkpoint:
 `f647791281095e02c6ebe3f1490e272b4e58c7a0`. D-017 delegated-review
 checkpoint: `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`.
@@ -2412,9 +2424,15 @@ H-DTTLF-USABILITY-DISPLAYED-ND-01/D-DTTLF-USABILITY-018 proposal. It selects
 only `composeCells`, one generic `typed-cell-composition` node for
 `indexed-transfor`, and recursive pointwise vertical-composition lowering to
 `comp_fapp0` at `Functord_cat`; all kernel/transfer/intrinsic/checker deltas
-remain zero. Await or separately review D-018 before implementing
-DISPLAYED-ND-1A, and keep next-hom transfer, identity, arbitrary coherence,
-mixed variance, and composite-cell normalization separately gated. Preserve
+remain zero. Preserve the separate immutable D-018 review and completed
+DISPLAYED-ND-1A recursive factorer, including callback-once/frozen body
+evidence, nested composition, direct component beta, the checked base-arrow
+cell, exact negatives, retained eta, and zero semantic/transfer/profile
+delta. If final aggregate or checkpoint synchronization is incomplete,
+finish only that bounded work. Then prepare, but do not implement without a
+separate reviewed decision, DISPLAYED-ND-HIGHER-1B's existing-authority
+next-hom transfer/surface audit. Keep identity, arbitrary coherence, mixed
+variance, and composite-cell normalization separately gated. Preserve
 completed
 DISPLAYED-EVAL-0B, its
 constant-domain

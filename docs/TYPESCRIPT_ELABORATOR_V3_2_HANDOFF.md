@@ -201,10 +201,23 @@ records D-018 approval under the standing unattended delegation with human
 supersession. Its seven focused tests, 1,036-test root gate (989 active
 passes, 47 intentional skips), all 19 live conformance judgments, and bounded
 active-kernel check pass. Its exact local checkpoint is
-`fb818203df88e68b27b2e5725737512010efdb13`; DISPLAYED-ND-1A is now
-implementation-ready within only that reviewed scope. The recorded scale
-sequence resumes only after the selected ND work or an explicit priority
-change.
+`fb818203df88e68b27b2e5725737512010efdb13`. DISPLAYED-ND-1A now
+implements exactly that reviewed scope. `composeCells` builds one generic
+typed contextual composition node for compatible `indexed-transfor`
+children, and `displayedTransforLambda` recursively factors component eta
+leaves and nested pointwise vertical composition to genuine outer `Transfd`
+terms through existing `comp_fapp0` at `Functord_cat`. Nine focused tests
+cover callback-once/deeply frozen body IR, nested recursion, direct component
+beta, a generic-Core-checked base-arrow cell, exact classifier/scope/profile
+negatives, retained eta, and zero Lambdapi/transfer/intrinsic/checker/browser
+delta. The final gate passes 1,045 TypeScript tests (998 active passes and 47
+intentional skips), all 19 live conformance judgments, and the bounded active
+kernel check; exact checkpoint recording is the only remaining
+synchronization.
+DISPLAYED-ND-HIGHER-1B is the next proposal/audit; it must separately qualify
+the active existing-authority next-hom package before implementation. The
+recorded scale sequence resumes only after that selected ND work or an
+explicit priority change.
 
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence
@@ -838,12 +851,14 @@ delegated review with human supersession at checkpoint
 `24ce6ffede79e115bc5d387c65366598e56f5d3d`. Do not resume
 the stale DISPLAYED-CHAIN-0A/1A implementation wording below: that slice is
 complete at its kernel, transfer, consumer, and ledger checkpoints. The
-dependency-ready stress is exactly the existing-method
-`a; b,c; d` three-level mixed dependency/sibling telescope frozen in the
-proposal. It must reuse existing authority and halt if its expected zero
-owner/rule/transfer delta is false. General `:^nd` and the recorded scale
-order follow. `DECL-REFINE-1A`, generic parsing, and bulk protected-module
-transfer are not the immediate critical path.
+three-level `a; b,c; d` stress, its separately reviewed measured closure,
+DISPLAYED-ND-0A/D-018 audit and review, and first recursive `:^nd`
+component-composition case are also complete and fully validated. Finish only
+the exact DISPLAYED-ND-1A checkpoint synchronization, then use the displayed
+plan's proposal/audit-only DISPLAYED-ND-HIGHER-1B row to qualify the active
+existing-authority next-hom package. The recorded scale order follows.
+`DECL-REFINE-1A`, generic parsing, and bulk protected-module transfer are not
+the immediate critical path.
 
 The successor prompt names the
 completed-profile and reviewed-continuation comparison checkpoints, preserves
@@ -868,17 +883,20 @@ no `Product_catd` head or kernel reindexing equality. FIBRED-BINDER-1 is also
 complete at its bounded existing-authority boundary: root-only direct
 `displayedFunctorLambda` handles identity, eta, and finite composition
 chains, retains the hidden two-slot telescope, and keeps direct/nested
-classifiers proof-compatible but runtime-distinct. FIBRED-TRANSFD-1 is now
-complete at its bounded existing-authority boundary as well. Its root-only
-`displayedTransforLambda` accepts exactly coherent
-`λ k :^nd K. eta[k]`; `eta[x]`, `eta[x][u]`, `eta[p][u]`, and vertical
-composition compile through six exact active signatures, seven runtime
-rules, and one proof rule. Direct and ordinary next-hom categories remain
-runtime-distinct, while proof-time, object-classifier, and Sigma/Pi bridges
-have their exact positive statuses. Its runnable demo has no production
-Lambdapi dependency and no new kernel owner/rule was added. The 767-test
-TypeScript gate and the complete repository gate—including all 19 live
-differential judgments and all 41 kernel/example health targets—pass.
+classifiers proof-compatible but runtime-distinct. FIBRED-TRANSFD-1 completed
+its original bounded existing-authority boundary with coherent
+`λ k :^nd K. eta[k]`, `eta[x]`, `eta[x][u]`, `eta[p][u]`, closed vertical
+composition, six exact active signatures, seven runtime rules, and one proof
+rule. DISPLAYED-ND-1A now extends only the root TypeScript recursive surface
+over that unchanged transfer: pointwise `theta[k] after eta[k]` and nested
+compositions factor to the same genuine outer vertical composites. Direct
+and ordinary next-hom categories remain runtime-distinct, while proof-time,
+object-classifier, and Sigma/Pi bridges retain their exact positive statuses.
+The runnable demo has no production Lambdapi dependency and no new kernel
+owner/rule was added. The original 767-test gate and its complete repository
+gate remain historical green evidence; the ND-1A aggregate gate is recorded
+separately with 1,045 tests (998 active passes and 47 intentional skips),
+19/19 live conformance, and the bounded active-kernel check.
 FIBRED-GROUPED-SEQUENTIAL-1 remains complete at its existing-authority
 boundary. FIBRED-QUALIFICATION-REMAINDER-0 subsequently proved all three
 remaining corpus cases against the active kernel and split implementation

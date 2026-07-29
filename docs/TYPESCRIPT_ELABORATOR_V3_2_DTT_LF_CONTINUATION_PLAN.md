@@ -89,6 +89,19 @@ H-DTTLF-USABILITY-DEPENDENT/D-DTTLF-USABILITY-003, and bounded
 USABILITY-DEPENDENT-1A is complete. It uses generic `comp_fapp0` at
 `Catd_cat K`, no new Lambdapi mathematical owner/rule, and no general
 dependent-bracket or profile promotion.
+The downstream displayed-bracket plan has since completed independent
+siblings, stable displayed evaluation, one genuine dependency edge, the
+mixed `a; b,c; d` telescope, and the first recursively compositional
+displayed-transfor binder case. DISPLAYED-ND-1A reifies
+`theta[k] after eta[k]` as typed contextual IR and recursively factors it to
+the existing coherent outer `comp_fapp0` term at `Functord_cat`; component
+beta and a checked base-arrow cell pass with no new Lambdapi owner/rule,
+transfer entry, intrinsic owner, or checker/evaluator branch. The active
+forward ledger remains the displayed/scale plans; next-hom transfer remains a
+separate reviewed proposal/audit rather than a retroactive expansion of this
+completed continuation profile. Its final validation passes nine focused
+tests, the 1,045-test root gate (998 active passes and 47 intentional skips),
+all 19 live conformance judgments, and the bounded active-kernel check.
 Completed-profile comparison checkpoint:
 `0b585e955c5a59f87be9daf9024f37e2b3403982`
 Latest local implementation checkpoint:
@@ -2761,3 +2774,14 @@ proportional warning, audit, catalog, health, example, and CI requirement.
   aggregate 914-test root gate pass (867 active, 47 intentional skips).
   Exact proposal checkpoint:
   `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`.
+- **2026-07-29 — First recursive displayed-transfor composition
+  implemented downstream.** DISPLAYED-ND-1A preserves the outer LF and
+  explicit Core boundary established here while extending the typed
+  contextual frontend with one generic cell-composition node. Exact coherent
+  component leaves and nested vertical composition factor to existing outer
+  `Transfd` terms; arbitrary pointwise data still fails closed. This adds no
+  semantics or profile authority to the completed
+  `emdash-v3.2-dttlf-directed-1` continuation. The displayed and scale plans
+  govern checkpointing and the next-hom audit. Nine focused tests, the
+  1,045-test root gate (998 active passes and 47 intentional skips), 19/19
+  live conformance, and the bounded active-kernel check pass.

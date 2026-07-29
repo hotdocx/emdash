@@ -13,7 +13,9 @@
  * - the approved non-eta displayed section-composition witness when its
  *   explicit USABILITY-DEPENDENT-1A capability is enabled; and
  * - the first direct displayed-functor identity/eta/composition abstraction
- *   when its FIBRED-BINDER-1 capability is enabled.
+ *   when its FIBRED-BINDER-1 capability is enabled; and
+ * - direct displayed-transfor eta plus recursively typed vertical component
+ *   composition when its FIBRED-TRANSFD-1 capability is enabled.
  *
  * Callback tokens and callbacks are temporary construction devices. The
  * recorded abstraction body is immutable first-order locally nameless data,
@@ -322,6 +324,13 @@ export type CoreCategoricalContextualIr =
         readonly provenance: Provenance;
     }
     | {
+        readonly tag: 'typed-cell-composition';
+        readonly outer: CoreCategoricalContextualIr;
+        readonly inner: CoreCategoricalContextualIr;
+        readonly type: CoreCategoricalIndexedTransforClassifier;
+        readonly provenance: Provenance;
+    }
+    | {
         readonly tag: 'typed-pair';
         readonly left: CoreCategoricalContextualIr;
         readonly right: CoreCategoricalContextualIr;
@@ -466,7 +475,9 @@ export type CoreCategoricalAbstractionEvidence =
     )
     | (
         CoreCategoricalAbstractionEvidenceBase & {
-            readonly rule: 'categorical.displayed-transfor-eta';
+            readonly rule:
+                | 'categorical.displayed-transfor-eta'
+                | 'categorical.displayed-transfor-composition';
             readonly variation: 'natural';
             readonly dependency: 'displayed';
             readonly sourceFamily: KernelExpression;
@@ -521,7 +532,8 @@ export interface CoreCategoricalScopedBuilderOptions {
      */
     readonly displayedFunctorAbstraction?: boolean;
     /**
-     * Enable only the FIBRED-TRANSFD-1 coherent component-eta abstraction.
+     * Enable the FIBRED-TRANSFD-1 coherent component-eta abstraction and
+     * DISPLAYED-ND-1A recursive typed vertical component composition.
      */
     readonly displayedTransforAbstraction?: boolean;
     /**
@@ -606,6 +618,12 @@ type TemporaryCategoricalNode =
         readonly argument:
             | InternalCoreCategoricalTerm
             | InternalCoreCategoricalHomBoundary;
+        readonly provenance: Provenance;
+    }
+    | {
+        readonly tag: 'typed-cell-composition';
+        readonly outer: InternalCoreCategoricalTerm;
+        readonly inner: InternalCoreCategoricalTerm;
         readonly provenance: Provenance;
     }
     | {
@@ -925,6 +943,11 @@ const collectDependentPrerequisites = (
                 } else {
                     visit(current.argument);
                 }
+                return;
+            case 'typed-cell-composition':
+                visit(current.outer);
+                visit(current.inner);
+                add('generic-category-composition');
                 return;
             case 'typed-pair':
                 visit(current.left);
@@ -1361,6 +1384,32 @@ export class CoreCategoricalScopedBuilder {
                 { plicity: 'implicit', value: baseCategory },
                 { plicity: 'explicit', value: sourceFamily },
                 { plicity: 'explicit', value: targetFamily }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private displayedTransforCategory(
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        sourceFunctor: KernelExpression,
+        targetFunctor: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalFibredTransfdCoreName(
+                    'displayed-transformation-category'
+                ),
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: baseCategory },
+                { plicity: 'implicit', value: sourceFamily },
+                { plicity: 'implicit', value: targetFamily },
+                { plicity: 'explicit', value: sourceFunctor },
+                { plicity: 'explicit', value: targetFunctor }
             ],
             nodeProvenance
         );
@@ -1948,6 +1997,90 @@ export class CoreCategoricalScopedBuilder {
             mergeUsage(left.usage, right.usage),
             undefined,
             [...left.abstractions, ...right.abstractions]
+        );
+    }
+
+    /**
+     * Compose two typed categorical cells inside one contextual callback.
+     *
+     * DISPLAYED-ND-1A deliberately accepts only `indexed-transfor` first.
+     * The generic node records typed recursive syntax; the enclosing
+     * displayed-transfor abstraction is responsible for factoring it into
+     * a genuine coherence-carrying outer term.
+     */
+    composeCells(
+        outerValue: CoreCategoricalTerm,
+        innerValue: CoreCategoricalTerm,
+        suppliedProvenance?: Provenance
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.nodeProvenance(
+            'typed categorical cell composition',
+            suppliedProvenance
+        );
+        if (this.options.displayedTransforAbstraction !== true) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Typed indexed cell composition requires the reviewed ' +
+                    'DISPLAYED-ND-1A capability'
+            );
+        }
+        const outer = this.requireTerm(
+            outerValue,
+            nodeProvenance
+        );
+        const inner = this.requireTerm(
+            innerValue,
+            nodeProvenance
+        );
+        if (
+            outer.type.tag !== 'indexed-transfor' ||
+            inner.type.tag !== 'indexed-transfor' ||
+            outer.type.indexOrdinal !== inner.type.indexOrdinal ||
+            !kernelExpressionEquals(
+                outer.type.baseCategory,
+                inner.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                outer.type.sourceFamily,
+                inner.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                outer.type.targetFamily,
+                inner.type.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                inner.type.targetFunctor,
+                outer.type.sourceFunctor
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Typed cell composition requires indexed transformations ' +
+                    'at the same contextual base and families with adjacent ' +
+                    'endpoints'
+            );
+        }
+        return this.makeTerm(
+            {
+                tag: 'typed-cell-composition',
+                outer,
+                inner,
+                provenance: nodeProvenance
+            },
+            {
+                tag: 'indexed-transfor',
+                baseCategory: inner.type.baseCategory,
+                sourceFamily: inner.type.sourceFamily,
+                targetFamily: inner.type.targetFamily,
+                sourceFunctor: inner.type.sourceFunctor,
+                targetFunctor: outer.type.targetFunctor,
+                indexOrdinal: inner.type.indexOrdinal
+            },
+            mergeUsage(outer.usage, inner.usage),
+            undefined,
+            [...outer.abstractions, ...inner.abstractions]
         );
     }
 
@@ -3703,6 +3836,32 @@ export class CoreCategoricalScopedBuilder {
                     ),
                     provenance: term.node.provenance
                 });
+            case 'typed-cell-composition': {
+                const type = this.normalizeClassifier(
+                    term.type,
+                    scope,
+                    term.node.provenance
+                );
+                if (type.tag !== 'indexed-transfor') {
+                    throw new Error(
+                        'Typed cell composition lost its indexed-transfor ' +
+                            'classifier'
+                    );
+                }
+                return deepFreeze({
+                    tag: 'typed-cell-composition',
+                    outer: this.normalizeNode(
+                        term.node.outer,
+                        scope
+                    ),
+                    inner: this.normalizeNode(
+                        term.node.inner,
+                        scope
+                    ),
+                    type,
+                    provenance: term.node.provenance
+                });
+            }
             case 'typed-pair': {
                 const type = this.normalizeClassifier(
                     term.type,
@@ -4409,6 +4568,13 @@ export class CoreCategoricalScopedBuilder {
                     baseCategory,
                     wiring,
                     nodeProvenance
+                );
+            case 'typed-cell-composition':
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Typed cell composition lowers only inside the ' +
+                        'reviewed displayed-transfor abstraction'
                 );
             case 'typed-pair':
                 this.fail(
@@ -5669,6 +5835,13 @@ export class CoreCategoricalScopedBuilder {
                 }
                 return paired;
             }
+            case 'typed-cell-composition':
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    term.node.provenance,
+                    'Typed cell composition lowers only inside the ' +
+                        'reviewed displayed-transfor abstraction'
+                );
             case 'typed-application': {
                 if (
                     term.node.judgment.target ===
@@ -7357,12 +7530,209 @@ export class CoreCategoricalScopedBuilder {
     }
 
     /**
-     * First direct displayed-transfor abstraction.
+     * Factor the reviewed `:^nd` component grammar back into a genuine
+     * coherence-carrying displayed transformation.
      *
-     * The callback sees `k : Obj K` and may project one already-coherent,
-     * closed displayed transfor at that slot. The eta body is reified as
-     * `eta[k]` and lowers back to `eta`; arbitrary pointwise families are not
-     * promoted to coherent displayed transformations.
+     * A leaf must be the component of one already-coherent closed
+     * transformation at the current slot. Composition recursively factors
+     * both children and composes the recovered outer transformations in
+     * `Functord_cat`. Any other pointwise term remains deliberately
+     * unqualified: component data alone does not synthesize naturality.
+     */
+    private factorDisplayedTransforComponent(
+        term: InternalCoreCategoricalTerm,
+        ordinal: number
+    ): InternalCoreCategoricalTerm | undefined {
+        if (
+            term.type.tag !== 'indexed-transfor' ||
+            term.type.indexOrdinal !== ordinal
+        ) {
+            return undefined;
+        }
+
+        if (
+            term.node.tag === 'typed-application' &&
+            term.node.judgment.target ===
+                'displayed-transfor-component-capped' &&
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] !== true
+        ) {
+            const argument = term.node.argument as
+                InternalCoreCategoricalTerm;
+            const subject = term.node.subject;
+            if (
+                argument.node.tag !== 'slot-token' ||
+                argument.node.ordinal !== ordinal ||
+                subject.type.tag !== 'displayed-transfor' ||
+                !kernelExpressionEquals(
+                    subject.type.baseCategory,
+                    term.type.baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.sourceFamily,
+                    term.type.sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.targetFamily,
+                    term.type.targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.sourceFunctor,
+                    term.type.sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.targetFunctor,
+                    term.type.targetFunctor
+                ) ||
+                usageCount(subject.usage, ordinal) !== 0 ||
+                usageCount(term.usage, ordinal) !== 1 ||
+                subject.closed === undefined
+            ) {
+                return undefined;
+            }
+            return subject;
+        }
+
+        if (term.node.tag !== 'typed-cell-composition') {
+            return undefined;
+        }
+        const outer = this.factorDisplayedTransforComponent(
+            term.node.outer,
+            ordinal
+        );
+        const inner = this.factorDisplayedTransforComponent(
+            term.node.inner,
+            ordinal
+        );
+        if (
+            outer === undefined ||
+            inner === undefined ||
+            outer.type.tag !== 'displayed-transfor' ||
+            inner.type.tag !== 'displayed-transfor' ||
+            outer.closed === undefined ||
+            inner.closed === undefined ||
+            !kernelExpressionEquals(
+                outer.type.baseCategory,
+                inner.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                outer.type.sourceFamily,
+                inner.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                outer.type.targetFamily,
+                inner.type.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                inner.type.targetFunctor,
+                outer.type.sourceFunctor
+            ) ||
+            !kernelExpressionEquals(
+                term.type.baseCategory,
+                inner.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                term.type.sourceFamily,
+                inner.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                term.type.targetFamily,
+                inner.type.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                term.type.sourceFunctor,
+                inner.type.sourceFunctor
+            ) ||
+            !kernelExpressionEquals(
+                term.type.targetFunctor,
+                outer.type.targetFunctor
+            ) ||
+            usageCount(outer.usage, ordinal) !== 0 ||
+            usageCount(inner.usage, ordinal) !== 0
+        ) {
+            return undefined;
+        }
+
+        const nodeProvenance = term.node.provenance;
+        const resultExpression = this.dependentCompositionCall(
+            [
+                {
+                    plicity: 'implicit',
+                    value: this.displayedFunctorCategory(
+                        inner.type.baseCategory,
+                        inner.type.sourceFamily,
+                        inner.type.targetFamily,
+                        nodeProvenance
+                    )
+                },
+                {
+                    plicity: 'implicit',
+                    value: inner.type.sourceFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: inner.type.targetFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: outer.type.targetFunctor
+                },
+                {
+                    plicity: 'explicit',
+                    value: outer.closed.term
+                },
+                {
+                    plicity: 'explicit',
+                    value: inner.closed.term
+                }
+            ],
+            nodeProvenance
+        );
+        const resultType: CoreType = {
+            tag: 'displayed-transfor',
+            category: this.displayedTransforCategory(
+                inner.type.baseCategory,
+                inner.type.sourceFamily,
+                inner.type.targetFamily,
+                inner.type.sourceFunctor,
+                outer.type.targetFunctor,
+                nodeProvenance
+            ),
+            baseCategory: inner.type.baseCategory,
+            sourceFamily: inner.type.sourceFamily,
+            targetFamily: inner.type.targetFamily,
+            sourceFunctor: inner.type.sourceFunctor,
+            targetFunctor: outer.type.targetFunctor
+        };
+        const resultNode: TemporaryCategoricalNode = {
+            tag: 'explicit-core-term',
+            term: resultExpression,
+            provenance: nodeProvenance
+        };
+        const closed = deepFreeze({
+            term: resultExpression,
+            type: copyCoreType(resultType),
+            sourceSpan: this.spanFor(nodeProvenance),
+            recovered: [
+                ...outer.closed.recovered,
+                ...inner.closed.recovered
+            ]
+        });
+        return this.makeTerm(
+            resultNode,
+            resultType,
+            mergeUsage(outer.usage, inner.usage),
+            closed,
+            [...outer.abstractions, ...inner.abstractions]
+        );
+    }
+
+    /**
+     * Direct recursively factored displayed-transfor abstraction.
+     *
+     * The callback sees `k : Obj K`. A leaf `eta[k]` lowers back to the
+     * already-coherent `eta`; a typed recursive vertical composition lowers
+     * to composition of the recovered outer transformations. Arbitrary
+     * pointwise families are not promoted to coherent transformations.
      */
     displayedTransforLambda(
         name: string,
@@ -7437,20 +7807,6 @@ export class CoreCategoricalScopedBuilder {
                 bodyBuilder(token as CoreCategoricalSlotToken),
                 nodeProvenance
             );
-            const etaArgument =
-                body.node.tag === 'typed-application' &&
-                body.node.judgment.target ===
-                    'displayed-transfor-component-capped' &&
-                body.node.argument[
-                    CORE_CATEGORICAL_BOUNDARY
-                ] !== true
-                    ? body.node.argument as
-                        InternalCoreCategoricalTerm
-                    : undefined;
-            const etaSubject =
-                body.node.tag === 'typed-application'
-                    ? body.node.subject
-                    : undefined;
             if (
                 body.type.tag !== 'indexed-transfor' ||
                 body.type.indexOrdinal !== ordinal ||
@@ -7473,53 +7829,70 @@ export class CoreCategoricalScopedBuilder {
                 !kernelExpressionEquals(
                     body.type.targetFunctor,
                     targetFunctor
-                ) ||
-                etaArgument?.node.tag !== 'slot-token' ||
-                etaArgument.node.ordinal !== ordinal ||
-                etaSubject === undefined ||
-                etaSubject.type.tag !== 'displayed-transfor' ||
-                !kernelExpressionEquals(
-                    etaSubject.type.baseCategory,
-                    baseCategory
-                ) ||
-                !kernelExpressionEquals(
-                    etaSubject.type.sourceFamily,
-                    sourceFamily
-                ) ||
-                !kernelExpressionEquals(
-                    etaSubject.type.targetFamily,
-                    targetFamily
-                ) ||
-                !kernelExpressionEquals(
-                    etaSubject.type.sourceFunctor,
-                    sourceFunctor
-                ) ||
-                !kernelExpressionEquals(
-                    etaSubject.type.targetFunctor,
-                    targetFunctor
-                ) ||
-                usageCount(etaSubject.usage, ordinal) !== 0 ||
-                usageCount(body.usage, ordinal) !== 1 ||
-                etaSubject.closed === undefined
+                )
             ) {
                 this.fail(
                     'UNAVAILABLE_DISPLAYED_ACTION',
                     nodeProvenance,
-                    'FIBRED-TRANSFD-1 accepts exactly coherent component ' +
-                    'eta: λ k. eta[k] for one closed displayed transfor eta'
+                    'The displayed-transfor body must be an indexed ' +
+                        'transformation with the requested contextual base, ' +
+                        'families, and endpoints'
                 );
             }
 
+            const factored = this.factorDisplayedTransforComponent(
+                body,
+                ordinal
+            );
+            if (
+                factored === undefined ||
+                factored.type.tag !== 'displayed-transfor' ||
+                factored.closed === undefined ||
+                usageCount(factored.usage, ordinal) !== 0 ||
+                !kernelExpressionEquals(
+                    factored.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFamily,
+                    sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFamily,
+                    targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFunctor,
+                    sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFunctor,
+                    targetFunctor
+                )
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'The active :^nd frontend accepts component eta leaves ' +
+                        'and their typed recursive vertical compositions; ' +
+                        'this body needs another coherence-carrying outer ' +
+                        'constructor'
+                );
+            }
             const bodyIr = this.normalizeNode(
                 body,
                 [ordinal, ...outerScope]
             );
             const resultIr = this.normalizeNode(
-                etaSubject,
+                factored,
                 outerScope
             );
+            const rule =
+                body.node.tag === 'typed-cell-composition'
+                    ? 'categorical.displayed-transfor-composition' as const
+                    : 'categorical.displayed-transfor-eta' as const;
             const evidence = deepFreeze({
-                rule: 'categorical.displayed-transfor-eta' as const,
+                rule,
                 name,
                 plicity,
                 variation: 'natural' as const,
@@ -7534,23 +7907,22 @@ export class CoreCategoricalScopedBuilder {
                 body: bodyIr,
                 result: resultIr,
                 structuralPrerequisites: Object.freeze([]),
-                dependentPrerequisites: Object.freeze([
-                    'displayed-transfor-component-capped' as const
-                ]),
+                dependentPrerequisites:
+                    collectDependentPrerequisites(bodyIr),
                 provenance: nodeProvenance
             });
             const closed = deepFreeze({
-                term: etaSubject.closed.term,
-                type: copyCoreType(etaSubject.type),
+                term: factored.closed.term,
+                type: copyCoreType(factored.type),
                 sourceSpan: this.spanFor(nodeProvenance),
-                recovered: [...etaSubject.closed.recovered]
+                recovered: [...factored.closed.recovered]
             });
             return this.makeTerm(
-                etaSubject.node,
-                etaSubject.type,
-                etaSubject.usage,
+                factored.node,
+                factored.type,
+                factored.usage,
                 closed,
-                [...etaSubject.abstractions, evidence]
+                [...factored.abstractions, evidence]
             );
         } finally {
             this.activeTokenOrdinals.shift();
