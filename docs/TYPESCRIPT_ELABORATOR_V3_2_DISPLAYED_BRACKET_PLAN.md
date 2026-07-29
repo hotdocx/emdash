@@ -660,7 +660,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-ND-0A | executable read-only audit/proposal checkpointed `bc29f0d98de32fe0fdbad992859e97711e493e5c`; separate delegated D-018 review complete, fully green, and checkpointed `fb818203df88e68b27b2e5725737512010efdb13` with human supersession | completed DISPLAYED-CHAIN-2A plus DISPLAYED-LIFTING-0A matrix | Separates coherent introduction from object/point/base-arrow/next-hom observation. Confirms the first three observations implemented; finds active but untransferred next-hom owners; rejects arbitrary pointwise coherence; selects one generic typed-cell-composition node and recursive outer-`Transfd` factoring for the exact first vertical-composition case with zero semantic/transfer delta. Final proposal gate: 1,029 TypeScript tests (982 active, 47 skipped); final review gate: 1,036 tests (989 active, 47 skipped); both pass 19/19 live conformance and the bounded active-kernel check |
 | DISPLAYED-ND-1A | implementation complete, fully validated, and checkpointed `d8b450222273167ab326701c76fff03f0f539b18` at the exact separately reviewed D-018 boundary | reviewed DISPLAYED-ND-0A audit/proposal | `composeCells` plus one generic `typed-cell-composition` IR node initially accepts only compatible `indexed-transfor` children; `displayedTransforLambda` recursively factors component leaves and nested vertical compositions to genuine outer `Transfd` terms through existing `comp_fapp0` at `Functord_cat`. Nine permanent tests plus the 1,045-test root gate (998 active, 47 skipped), 19/19 live conformance, and bounded active-kernel check cover recursive frozen evidence, component beta, a checked base-arrow cell, exact negatives, retained eta, and zero Lambdapi/transfer/intrinsic/checker/browser delta |
 | DISPLAYED-ND-HIGHER-1B | executable read-only audit complete at `4db1ce8a80725c0030ac8908f416d412591620bd`; separate delegated D-019 review complete and focused-green with human supersession; review checkpoint pending | completed DISPLAYED-ND-1A and active canonical source/export evidence | Pins 13 prerequisite declarations plus three active `tdapp1_int_*_transfd` owners and two projection rules; proves target-only transfer is not closed; checks a concrete next-hom consumer; selects only the 13-declaration rule-free foundation as DISPLAYED-ND-HIGHER-FOUNDATION-1A |
-| DISPLAYED-ND-HIGHER-FOUNDATION-1A | reviewed and implementation-ready at the exact D-019 boundary | completed DISPLAYED-ND-HIGHER-1B audit and separate D-019 review | Transfer five source-transparent definitions and eight opaque/injective interfaces through the generic declaration engine, with zero rules, new mathematics, intrinsic owners, checker branches, or surface methods; mandatory stop on any unlisted dependency |
+| DISPLAYED-ND-HIGHER-FOUNDATION-1A | D-020 directly approved; implementation and six focused tests green; checkpoint pending with this semantic tranche | completed DISPLAYED-ND-HIGHER-1B audit, separate D-019 review, and direct D-020 approval | All thirteen declarations compile through the generic engine with five unchanged checked-transparent bodies and eight opaque/injective interfaces; the omitted existing `Obj`/`Hom` links and ordinal-237 opposite involution close the dependency; no new Lambdapi mathematics, intrinsic owner, checker branch, or surface method |
+| DISPLAYED-ND-HIGHER-TARGET-1A | exact non-self-authorizing D-021 proposal frozen below | green DISPLAYED-ND-HIGHER-FOUNDATION-1A | Transfer the three existing `tdapp1_int_*_transfd` opaque declarations and two existing projection rules; add one isolated successor profile plus typed `displayedTransforCategory` and `displayedTransforInternalHomAction` constructors; reuse generic `displayedTransfor`, `hom`, `homBoundary`, and recursive `apply` for the concrete next-hom consumer |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
 
@@ -2817,8 +2818,145 @@ pointwise coherence, mixed variance, composite base-arrow normalization,
 parsing, deployment, scale promotion, and the later three-owner/two-rule
 target remain outside this tranche.
 
+### D-019 mandatory stop and frozen D-020 correction
+
+The first generic compilation of the reviewed thirteen declarations exercised
+the mandatory stop rather than weakening a source type or making a transparent
+definition opaque. It found exactly three omitted existing-authority
+dependencies:
+
+1. the reused active `id` signature mentions intrinsic owners `Obj` and
+   `Hom`; both already exist in Core, but the D-019 linkage inventory omitted
+   them; and
+2. the transparent `HomPresheaf_catd_func` body requires the active
+   normalization
+
+   ```text
+   rule Op_cat (Op_cat $A) ↪ $A;
+   ```
+
+   so that the source of its `Op_func` application converts from
+   `Op_cat (Op_cat Z)` to `Z`.
+
+The rule is canonical command ordinal 237 in the current export and its exact
+command-text SHA-256 is
+`c9ff2c9e112c82facf9f1a01573c5cbf7aa9fa6cfa5458d1c46e77c94feb24ec`.
+It is existing active Lambdapi computation, not a proposed kernel rule.
+No current TypeScript runtime ancestor in the completed displayed-chain-2A
+lineage represents it.
+
+The correction therefore changes only the TypeScript dependency closure:
+two links to existing intrinsic Core owners and one generic runtime-rule
+representation of existing authority. It preserves the same thirteen
+declarations, their five-transparent/eight-opaque policies, and all D-019
+non-effects. The active Lambdapi symbol/rule delta remains zero. The
+TypeScript intrinsic-owner, checker/evaluator-branch, surface-method,
+parser, browser, and target-owner deltas remain zero.
+
+The exact non-self-authorizing correction decision is:
+
+> Approve H-DTTLF-USABILITY-DISPLAYED-ND-HIGHER-CORRECTION-01/
+> D-DTTLF-USABILITY-020 as proposed: correct only
+> DISPLAYED-ND-HIGHER-FOUNDATION-1A's dependency closure by linking the
+> already implemented intrinsic `Obj` and `Hom` owners and transferring the
+> existing active ordinal-237 opposite-involution rule through the generic
+> runtime engine; retain the exact thirteen declarations and D-019 policies;
+> add no Lambdapi mathematics, Core intrinsic, checker/evaluator branch,
+> surface method, target `tdapp1_int_*_transfd` owner/rule, parser, browser
+> profile, bulk transfer, or broader Git authority; and stop again on any
+> further unlisted dependency?
+
+The user directly approved D-020 on 2026-07-29. The generic implementation
+now compiles all thirteen declarations. The ordinal-237 rule first closes
+`HomPresheaf_catd_func`; the remaining `Homd_target_catd` mismatch was a
+TypeScript transcription error, not another dependency. Its nested
+composition had confused the domain of `Functor_catd_func (Op_cat Z)` with
+the category of the functor returned by its object action. Correcting those
+explicit category slots to `Catd_cat (Op_cat Z)` checks the unchanged active
+body without another rule or checker path. Six focused tests cover the exact
+D-020 correction, active-source hash, five/eight policy split, existing
+`id` reuse, all thirteen compiled declarations, the one checked runtime
+rule, unchanged predecessor lineage, and retained target/browser boundary.
+
+### Frozen D-021 higher-action target proposal
+
+The dependency-closed target is now exact and requires no further audit
+layer. DISPLAYED-ND-HIGHER-TARGET-1A proposes:
+
+1. three existing opaque declarations,
+   `tdapp1_int_func_transfd`, `tdapp1_int_fapp0_transfd`, and
+   `tdapp1_int_fapp1_func_transfd`;
+2. the two existing active projection rules
+
+   ```text
+   fapp0 (tdapp1_int_func_transfd FF GG) epsilon
+     ↪ tdapp1_int_fapp0_transfd epsilon
+
+   fapp1_func (tdapp1_int_func_transfd FF GG) epsilon epsilon'
+     ↪ tdapp1_int_fapp1_func_transfd epsilon epsilon';
+   ```
+
+3. one isolated root-only `fibred-displayed-nd-higher-1` successor profile;
+   and
+4. exactly two rich typed constructors:
+   `displayedTransforCategory(FF,GG)` and
+   `displayedTransforInternalHomAction(FF,GG)`.
+
+The public end-user program then uses the already generic operations rather
+than three owner-specific application helpers:
+
+```text
+C  = displayedTransforCategory(FF,GG)
+H  = displayedTransforInternalHomAction(FF,GG)
+epsilon, epsilon' = displayedTransfor(...,FF,GG)
+m  = hom("m", C, epsilon, epsilon')
+
+H[epsilon] = apply(H, epsilon)
+H[epsilon -> epsilon'] =
+  apply(H, homBoundary(C, epsilon, epsilon'), whole-hom-action)
+H[m] = apply(H[epsilon -> epsilon'], m, arrow-value)
+```
+
+The final term is the explicit Core expression
+`fapp0(fapp1_func(tdapp1_int_func_transfd(FF,GG),epsilon,epsilon'),m)`.
+The two active rules normalize its functor stages to
+`fapp0(tdapp1_int_fapp1_func_transfd(epsilon,epsilon'),m)`.
+This supplies the requested next-hom cell while exercising the ordinary
+functor action ladder recursively. It adds no contextual IR node, binder
+mode, RawExpr/parser layer, second checker, owner-specific evaluator branch,
+Lambdapi declaration/rule, intrinsic Core owner, browser profile, or bulk
+transfer.
+
+The exact non-self-authorizing decision is:
+
+> Approve H-DTTLF-USABILITY-DISPLAYED-ND-HIGHER-TARGET-01/
+> D-DTTLF-USABILITY-021 as proposed: implement exactly
+> DISPLAYED-ND-HIGHER-TARGET-1A with the three existing opaque target
+> declarations, two existing projection rules, isolated root-only successor
+> profile, and two typed construction methods above; require the concrete
+> object/whole-hom/capped-hom consumer to pass through existing generic
+> `apply`; retain all new-mathematics, new-intrinsic, new-checker/evaluator,
+> new-context-node, parser, browser, bulk-transfer, unrelated-computation,
+> and broader-Git deltas at zero; and stop on any further closure drift?
+
+Run focused tests while implementing and one aggregate root gate only after
+the target consumer is complete. Synchronize and checkpoint the foundation,
+target, consumer, tests, and living ledgers as one semantic tranche.
+
 ## Change Log
 
+- **2026-07-29 — D-020 directly approved and foundation focused-green.**
+  All thirteen declarations now compile through the generic declaration
+  engine over the one existing-rule correction. Five active transparent
+  bodies remain checked and eight interfaces remain opaque. Six focused
+  tests pass. The dependency-closed three-owner/two-rule target and exact
+  generic-action consumer are frozen as D-021 above.
+- **2026-07-29 — D-019 mandatory stop measured one existing-rule
+  prerequisite.** Generic compilation preserved the active transparent
+  bodies and exposed the omitted `Obj`/`Hom` Core links plus the existing
+  opposite-involution rule at canonical ordinal 237. Frozen D-020 corrects
+  only that dependency closure. No source mathematics or product surface
+  changes before a separate review.
 - **2026-07-29 — D-DTTLF-USABILITY-019 separately approved.** After the
   exact audit/proposal checkpoint and ledger were presented without an
   immediate objection, the standing unattended delegation recorded a
@@ -3388,6 +3526,18 @@ three target owners, two projection rules, rich surface consumer,
 identity-cell syntax, arbitrary pointwise coherence, mixed variance,
 composite base-arrow normalization, parsing, deployment, and scale promotion
 separately gated.
+
+Preserve direct H-DTTLF-USABILITY-DISPLAYED-ND-HIGHER-CORRECTION-01/
+D-DTTLF-USABILITY-020 approval. FOUNDATION-1A is focused-green with the same
+thirteen declarations and five-transparent/eight-opaque policy, two omitted
+existing Core-owner links, and exactly one existing ordinal-237
+opposite-involution runtime prerequisite. Preserve its zero active-Lambdapi,
+intrinsic, checker, surface, and browser deltas. The exact dependency-closed
+DISPLAYED-ND-HIGHER-TARGET-1A proposal is frozen under D-021: three existing
+opaque target owners, two existing projection rules, one isolated root-only
+successor profile, two typed construction methods, and a concrete consumer
+through generic `displayedTransfor`, `hom`, `homBoundary`, and `apply`.
+Obtain or record the separate D-021 decision before implementing that target.
 
 Keep the critical path capability-first: implement and exercise the reviewed
 foundation, then qualify the higher-action target and recursive TypeScript
