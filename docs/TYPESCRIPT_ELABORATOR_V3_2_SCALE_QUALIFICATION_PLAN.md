@@ -152,15 +152,23 @@ Exact proposal/audit checkpoint:
 `ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59`; exact separate review
 checkpoint: `33960a8b6aa924e5d69f438b0b43881b4e13f029`. The final-green
 SCALE-INDUCTIVE-1B1 implementation is checkpointed at
-`45ca42801677a37c1ec079a278085262bcaa000e`. The following order is a
-read-only SCALE-INDUCTIVE-HYBRID-0A necessity/architecture audit, the selected
-SCALE-INDUCTIVE-1B2 `ind_nat` route, SCALE-STRESS-3C, SCALE-BATCH-1, and
-SCALE-GRADUATE-1. The 1B1 implementation and all final gates are green. Its
+`45ca42801677a37c1ec079a278085262bcaa000e`.
+SCALE-INDUCTIVE-HYBRID-0A is now executable and focused/live-green. It proves
+that the already Lambdapi-checked `ind_nat` can be transferred as one ordinary
+explicit declaration plus two ordinary subject-checked runtime rules, with
+the recursive induction-hypothesis call explicit in the successor RHS and
+the existing transparent `nat_elim` as consumer. It uses no recursive
+association or TypeScript positivity checker. The deeply frozen
+SCALE-INDUCTIVE-1B2 proposal therefore selects that exact lean route and now
+awaits H-DTTLF-SCALE-INDUCTIVE-02/D-DTTLF-SCALE-INDUCTIVE-002. After that
+gate, the order is SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
+The 1B1 implementation and all final gates are green. Its
 explicit generated declaration and beta are ordinary checked transfer
 inputs; the extra association is a bounded provenance/integrity guard, not a
 new LF connective and not yet claimed as universally necessary for every
-generated owner. The hybrid audit must therefore try the lean expanded-symbol
-route first before selecting any stronger recursive-inductive machinery.
+generated owner. TypeScript-side positivity and automatic eliminator
+generation remain relevant only if a later product accepts untrusted
+inductive sources or owns source-level inductive declarations.
 The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
 implementation/module-linking work, not a new LF semantic feature and not a
@@ -678,8 +686,8 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | in progress | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Parent row for explicit generated-owner contracts, parameter/index fidelity, recursive/indexed validation, and strict-positivity boundaries; no backend-generated owner is trusted from its name alone |
 | SCALE-INDUCTIVE-1B1 | complete at `45ca42801677a37c1ec079a278085262bcaa000e`; review `33960a8b6aa924e5d69f438b0b43881b4e13f029`; proposal `830fb975756d1d13d8ddcb516690ea88b19d51d6` | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Corrected the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; the new owner-generic explicit-contract association validates unique generated identity, `generatedBy`, exact opaque declaration/rule ownership, expected indexed shape, and zero recursive occurrences; the existing generic engines check the exact `ind_τΣ_` type, beta, and polymorphic first-projection consumer |
-| SCALE-INDUCTIVE-HYBRID-0A | dependency-ready read-only audit | SCALE-INDUCTIVE-1B1 | Compare the lean expanded-symbol route—an explicit checked `ind_nat` declaration plus its two ordinary runtime rules and consumer—against optional generated-owner provenance validation; determine from executable evidence whether any recursive association/positivity machinery is required before freezing 1B2 |
-| SCALE-INDUCTIVE-1B2 | pending selected implementation after SCALE-INDUCTIVE-HYBRID-0A | SCALE-INDUCTIVE-HYBRID-0A | Implement the smallest reviewed route that faithfully transfers the measured `ind_nat` declaration, two betas, recursive induction-hypothesis behavior, and a real consumer through the ordinary engines; add TypeScript-side positivity validation or generation only if the audit demonstrates it is required, and otherwise retain it with mutual/higher-order inductives and an end-user declaration API as deferred work |
+| SCALE-INDUCTIVE-HYBRID-0A | executable audit focused/live-green; checkpoint synchronization pending | SCALE-INDUCTIVE-1B1 | The exact printed `ind_nat` declaration, two generated betas, and active `nat_elim` consumer compile and reduce through ordinary declaration/runtime/conversion engines; the recursive IH is explicit in the successor RHS; `generatedBy` remains inert provenance; recursive association and TypeScript positivity dependencies are zero |
+| SCALE-INDUCTIVE-1B2 | deeply frozen proposal awaiting H-DTTLF-SCALE-INDUCTIVE-02/D-DTTLF-SCALE-INDUCTIVE-002; proposal checkpoint pending | SCALE-INDUCTIVE-HYBRID-0A | Select the exact expanded-symbol audit as sufficient qualification for already Lambdapi-checked generated owners, close the inductive qualification parent with no new engine, and defer TypeScript source-inductive generation, positivity checking, automatic synthesis, end-user declaration API, and mutual/higher-order inductives |
 | SCALE-KIND-PI-1 | complete at `b4cb8d39bd31adc768784308263fd91d83ddeefe`; audit/proposal checkpoint `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserves the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
 | SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines |
@@ -1674,13 +1682,15 @@ eliminator generator, or usability-profile API. Such packaging remains
 optional/deferred unless a later implementation step is a mechanically
 negligible projection of the required checked contract.
 
-The proposal deliberately splits the remaining parent. SCALE-INDUCTIVE-1B2
-uses the separately measured active `ind_nat` type and two rules to qualify
-direct recursive occurrences, the generated recursive induction hypothesis,
-and a negative strict-positivity fixture. General higher-order positivity,
-mutual inductives, automatic unchecked generation, implicit native-`TYPE`
-polymorphism, active profile/browser promotion, Lambdapi changes, parser
-work, and whole-transfer graduation remain outside 1B1.
+At 1B1 proposal time, the remaining parent was split so that the separately
+measured `ind_nat` type and two rules could determine whether recursive
+association and negative strict-positivity machinery were actually required.
+The later HYBRID-0A completion record below answers that question for trusted
+expanded artifacts: the ordinary declaration/rule path suffices, so
+TypeScript positivity is not a 1B2 prerequisite. General higher-order
+positivity, mutual inductives, automatic unchecked generation, implicit
+native-`TYPE` polymorphism, active profile/browser promotion, Lambdapi
+changes, parser work, and whole-transfer graduation remain outside 1B1.
 
 The exact non-self-authorizing decision is:
 
@@ -1766,8 +1776,9 @@ parameter/index/constructor counts. Association fails closed unless:
 
 The last condition yields only
 `strictPositivity: trivial-nonrecursive`. It intentionally rejects `ind_nat`
-and every other recursive case until SCALE-INDUCTIVE-1B2 qualifies recursive
-occurrences, induction hypotheses, and real strict positivity.
+and every other recursive case rather than pretending this association
+generalizes. HYBRID-0A separately demonstrates below that recursive expanded
+owners do not need this association in their execution path.
 
 The generic compile wrapper then delegates to the existing mixed-phase
 declaration/runtime compiler, verifies that the generated declaration was
@@ -1821,15 +1832,15 @@ EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
   passed
 ```
 
-### SCALE-INDUCTIVE-HYBRID-0A Post-Checkpoint Audit Boundary
+### SCALE-INDUCTIVE-HYBRID-0A Audit And 1B2 Frozen Proposal
 
 The working 1B1 implementation must be checkpointed before revisiting its
 generality. The checkpoint is positive evidence that the explicit-contract
 path is feasible; it is not evidence that every part of that path must become
 the architecture for recursive or bulk transfer.
 
-The next dependency-ready slice is a read-only executable architecture and
-necessity audit. It must begin from Lambdapi's already accepted, printed
+The dependency-ready slice was a read-only executable architecture and
+necessity audit. It began from Lambdapi's already accepted, printed
 `ind_nat` symbol and hidden computation rules and first attempt to represent
 them exactly as:
 
@@ -1838,7 +1849,7 @@ them exactly as:
 3. one concrete recursive consumer checked and reduced by the existing
    declaration, runtime, conversion, and mixed-phase engines.
 
-The audit must separately classify the value of the 1B1 generated-owner
+The audit separately classifies the value of the 1B1 generated-owner
 association as provenance/integrity evidence. It may retain that association,
 generalize a minimal subset, or omit it from the recursive execution path,
 but only from measured owner-free evidence. It must not assume that
@@ -1848,11 +1859,92 @@ originally generated the symbol. Those remain deferred unless the explicit
 expanded-symbol experiment fails for a semantic reason or a later reviewed
 product goal deliberately selects source-level inductive declarations.
 
-The hybrid conclusion is therefore intentionally open: ordinary checked
-declarations/rules remain the semantic baseline, while lightweight
-association metadata may remain useful for drift detection, provenance, and
-bulk-transfer integrity. Freeze a new non-self-authorizing 1B2 proposal only
-after this audit; do not backtrack or enlarge the green 1B1 checkpoint.
+The executable result closes that question for the selected transfer
+boundary. Lambdapi prints:
+
+```text
+ind_nat :
+  Π P : nat → Grpd,
+  τ (P zero) →
+  (Π n : nat, τ (P n) → τ (P (succ n))) →
+  Π n : nat, τ (P n)
+
+ind_nat P u_zero u_succ zero
+  ↪ u_zero
+
+ind_nat P u_zero u_succ (succ n)
+  ↪ u_succ n (ind_nat P u_zero u_succ n)
+```
+
+`src/v3_2/scale_inductive_hybrid_0a_audit.ts` represents that explicit
+declaration and the two rules directly. It lowers the already represented
+native `nat`, `zero`, and `succ` signatures, retains `generatedBy: nat` only
+as inert provenance, carries the active `Nat_grpd` decoding beta, and checks
+the exact transparent `nat_elim` body in source order. The ordinary mixed
+compiler produces declaration/runtime/declaration/runtime/declaration phases;
+both generated clauses pass generic TypeScript subject checking. Conversion
+reduces `nat_elim` at both `zero` and `succ zero`, and the successor trace uses
+the recursive generated rule. The module neither imports nor calls the 1B1
+generated-owner association path and remains outside the browser/product
+barrel.
+
+This evidence selects the lean side of the hybrid:
+
+- ordinary explicit declarations and rules are the semantic transfer
+  baseline for artifacts already checked by Lambdapi;
+- `generatedBy` and an optional association can remain useful acquisition
+  provenance/integrity evidence, but are not execution dependencies;
+- TypeScript-side positivity checking and eliminator generation are not
+  prerequisites for transferring trusted expanded artifacts; and
+- those stronger mechanisms become relevant only if TypeScript later accepts
+  untrusted inductive sources or exposes its own source-level `inductive`
+  declaration facility.
+
+Focused validation on 2026-07-29:
+
+```text
+node --require ts-node/register --test --test-concurrency=1 \
+  tests/v3_2_scale_inductive_hybrid_0a_audit_tests.ts \
+  tests/v3_2_scale_inductive_1b2_proposal_tests.ts
+  9 tests: 8 passed, 1 intentional live skip, zero failures
+
+EMDASH_RUN_LAMBDAPI_SCALE_INDUCTIVE_HYBRID_PROBES=1 \
+  node --require ts-node/register \
+  --test tests/v3_2_scale_inductive_hybrid_0a_audit_tests.ts
+  5 tests: all passed
+
+./scripts/pnpmw run typecheck
+./scripts/pnpmw run lint
+  passed
+
+./scripts/pnpmw run check:ts
+  1,104 tests: 1,053 passed, 51 intentionally skipped, zero failures
+  aggregate node:test duration: 1,111,151 ms
+
+EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check
+  passed
+```
+
+`src/v3_2/scale_inductive_1b2_proposal.ts` now freezes the corresponding
+non-self-authorizing closure. It proposes retaining the exact audit artifacts
+as the recursive generated-owner qualification, adding no new engine, closing
+SCALE-INDUCTIVE-1B and SCALE-INDUCTIVE-1, and deferring recursive association,
+TypeScript source-inductive generation/positivity, automatic synthesis, an
+end-user declaration API, and mutual/higher-order inductives.
+
+The exact pending decision is:
+
+> Approve H-DTTLF-SCALE-INDUCTIVE-02/
+> D-DTTLF-SCALE-INDUCTIVE-002 as proposed: select the exact
+> SCALE-INDUCTIVE-HYBRID-0A expanded-symbol route for already
+> Lambdapi-checked generated owners; retain the explicit `ind_nat`
+> declaration, its two subject-checked betas, and the checked transparent
+> `nat_elim` consumer as the complete 1B2 qualification; retain `generatedBy`
+> only as inert provenance; add no recursive association, TypeScript
+> positivity checker, automatic eliminator synthesis, source-level or
+> end-user inductive declaration API, profile/browser promotion, Lambdapi
+> source change, bulk graduation, or wider Git authority; and close
+> SCALE-INDUCTIVE-1B plus SCALE-INDUCTIVE-1 after the exact review?
 
 ## SCALE-MIXED-PHASE-1A Completion Record
 
@@ -3219,15 +3311,17 @@ approved no-semantic-change correction. Preserve the completed/final-green
 SCALE-INDUCTIVE-1B1 parameter/index correction and explicit generated
 contract, including its exact separate
 D-DTTLF-SCALE-INDUCTIVE-001 review and implementation checkpoint
-`45ca42801677a37c1ec079a278085262bcaa000e`. Perform
-SCALE-INDUCTIVE-HYBRID-0A as a read-only
-necessity audit: try `ind_nat` first as one explicit ordinary declaration,
-two ordinary rules, and one consumer through existing engines; distinguish
-that semantic transfer baseline from optional provenance association; and
-freeze a bounded 1B2 proposal from measured evidence. Do not make
-TypeScript-side positivity validation, automatic eliminator synthesis, or an
-end-user inductive-declaration API a prerequisite unless that audit proves
-the lean route insufficient or a later reviewed product decision selects it.
+`45ca42801677a37c1ec079a278085262bcaa000e`. Preserve the completed,
+focused/live-green SCALE-INDUCTIVE-HYBRID-0A evidence: the explicit
+`ind_nat` declaration, two ordinary subject-checked rules, recursive
+successor RHS, and `nat_elim` consumer pass without a recursive association
+or TypeScript positivity checker. Preserve its deeply frozen, non-
+self-authorizing H-DTTLF-SCALE-INDUCTIVE-02/
+D-DTTLF-SCALE-INDUCTIVE-002 proposal. Obtain or record only that exact
+separate review, then close the inductive parent without adding a new engine.
+Keep TypeScript-side positivity validation, automatic eliminator synthesis,
+and an end-user inductive-declaration API deferred unless a later reviewed
+product decision selects untrusted/source-level inductive declarations.
 After the parent closes, continue with SCALE-STRESS-3C, SCALE-BATCH-1, and
 SCALE-GRADUATE-1. Do not silently substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
@@ -3275,6 +3369,16 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — SCALE-INDUCTIVE-HYBRID-0A selected the lean expanded-symbol
+  route and froze 1B2.** Lambdapi's explicit `ind_nat` declaration and two
+  generated rules compile through the ordinary TypeScript engines; both rules
+  are subject-checked, the recursive IH remains explicit in the successor
+  RHS, and the active transparent `nat_elim` consumer reduces at both
+  constructors. The live five-test oracle agrees. No recursive association or
+  TypeScript positivity checker participates. A deeply frozen 1B2 proposal
+  now awaits H-DTTLF-SCALE-INDUCTIVE-02/
+  D-DTTLF-SCALE-INDUCTIVE-002; source-level generation, positivity, automatic
+  synthesis, and end-user declaration convenience remain deferred.
 - **2026-07-29 — SCALE-INDUCTIVE-1B1 implementation final-green; hybrid
   necessity audit queued.**
   The corrected revision-2 `τΣ_` representation uses inline `a,P` indices
@@ -3286,8 +3390,8 @@ scope is affected.
   kernel check pass. Recursive blocks and every user-facing declaration
   convenience remain outside 1B1; the association is recorded as bounded
   integrity/provenance evidence, not a newly required LF semantic feature.
-  SCALE-INDUCTIVE-HYBRID-0A will test the lean expanded-symbol `ind_nat` route
-  before any 1B2 design is frozen. Exact local implementation checkpoint:
+  The later HYBRID-0A audit tested and selected the lean expanded-symbol
+  `ind_nat` route before freezing 1B2. Exact local implementation checkpoint:
   `45ca42801677a37c1ec079a278085262bcaa000e`.
 - **2026-07-29 — D-DTTLF-SCALE-INDUCTIVE-001 separately reviewed.**
   After the exact checkpointed gate was presented without an immediate

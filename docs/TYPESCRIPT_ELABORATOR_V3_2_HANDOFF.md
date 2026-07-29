@@ -294,12 +294,12 @@ facade; it is not definitionally the fully parameter-polymorphic
 `ind_τΣ_`. H-DTTLF-SCALE-INDUCTIVE-01/
 D-DTTLF-SCALE-INDUCTIVE-001 now gates only the zero-erased-signature index
 correction and generic explicit-contract association/validator.
-After the 1B1 checkpoint, SCALE-INDUCTIVE-HYBRID-0A first tests direct
-`ind_nat` transfer as an ordinary explicit declaration, two ordinary runtime
-rules, and one recursive consumer through the existing engines. Only the
-smallest measured/reviewed route then advances to SCALE-INDUCTIVE-1B2;
-TypeScript-side positivity validation or automatic generation is not assumed
-necessary merely because Lambdapi generated the owner.
+After the 1B1 checkpoint, SCALE-INDUCTIVE-HYBRID-0A tested direct `ind_nat`
+transfer as an ordinary explicit declaration, two ordinary runtime rules,
+and one recursive consumer through the existing engines. Its green result
+selects that smallest route for the frozen SCALE-INDUCTIVE-1B2 proposal;
+TypeScript-side positivity validation or automatic generation is not needed
+merely because Lambdapi generated the already checked owner.
 No LF checker connective, native-`TYPE` quantification, surface parser,
 categorical-binder frontend, active profile, browser API, or Lambdapi source
 change is proposed by 1B1. This work is immediately required for faithful
@@ -332,8 +332,18 @@ automatic synthesis or end-user inductive-declaration facade; recursive
 active-kernel check pass. The explicit declaration and beta are the ordinary
 semantic transfer inputs; the association is bounded provenance/integrity
 evidence and is not yet claimed as universally necessary. The next
-dependency-ready row is the read-only SCALE-INDUCTIVE-HYBRID-0A audit before
-a 1B2 proposal is frozen.
+SCALE-INDUCTIVE-HYBRID-0A audit is now complete and focused/live-green.
+The exact printed `ind_nat` declaration, both generated betas, the recursive
+induction-hypothesis RHS, and the active transparent `nat_elim` consumer pass
+through the ordinary TypeScript engines without the association validator or
+a TypeScript positivity checker. This selects expanded artifacts as the
+semantic transfer baseline for already Lambdapi-checked inductives;
+`generatedBy` remains inert provenance. The deeply frozen
+SCALE-INDUCTIVE-1B2 proposal now awaits
+H-DTTLF-SCALE-INDUCTIVE-02/D-DTTLF-SCALE-INDUCTIVE-002 and proposes no new
+engine: after exact review it closes the inductive parent while deferring
+source-level generation, positivity, automatic synthesis, the end-user
+declaration API, and mutual/higher-order inductives.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
@@ -366,10 +376,10 @@ higher-action qualification, and SCALE-KIND-PI-1 are now complete. Use the
 scale plan's living launch prompt. The selected sequence is:
 
 1. preserve the final-green SCALE-INDUCTIVE-1B1 implementation checkpoint;
-2. perform the read-only SCALE-INDUCTIVE-HYBRID-0A audit, beginning with the
-   lean expanded-symbol `ind_nat` declaration/rules/consumer route;
-3. freeze and implement only the smallest evidence-selected
-   SCALE-INDUCTIVE-1B2 continuation; and
+2. preserve the completed lean SCALE-INDUCTIVE-HYBRID-0A
+   `ind_nat`/two-rule/`nat_elim` evidence;
+3. obtain or record the exact D-DTTLF-SCALE-INDUCTIVE-002 review and close
+   only the frozen zero-new-engine SCALE-INDUCTIVE-1B2 continuation; and
 4. continue through SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
 
 ## Purpose
