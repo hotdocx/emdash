@@ -71,9 +71,10 @@ now fired at the recursive paired internalized cell. The displayed plan's
 separately reviewed D-017 proposal selects one existing-owner rule, three
 existing signatures, nine TypeScript continuation rules, and generic
 512-step LF budget plumbing with zero oracle/intrinsic/second-frontend
-change. The exact closure implementation is dependency-ready, followed by
-general `:^nd`. When control returns to this scale plan, the selected order
-is SCALE-KIND-PI-1,
+change. Its exact review checkpoint is
+`6e9c9fc165f7c388620a12bfd47d8b082a6a8417`. The closure implementation is
+dependency-ready, followed by general `:^nd`. When control returns to this
+scale plan, the selected order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript

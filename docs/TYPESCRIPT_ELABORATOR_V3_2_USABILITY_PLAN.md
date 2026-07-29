@@ -135,7 +135,10 @@ closure. Its eight focused tests and the aggregate 1,010-test root gate pass
 (963 active passes, 47 intentional skips, zero failures), making the exact
 closure implementation dependency-ready.
 General `:^nd` and the recorded scale sequence follow only after that bounded
-stress. Exact proposal checkpoint:
+stress. D-017 proposal checkpoint:
+`f647791281095e02c6ebe3f1490e272b4e58c7a0`. D-017 delegated-review
+checkpoint: `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`.
+D-016 graduation proposal checkpoint:
 `6c06cb10ea6eb9fa298544d084df5f129950a3a1`. Exact delegated-review
 checkpoint: `24ce6ffede79e115bc5d387c65366598e56f5d3d`.
 USABILITY-0A/0B implementation checkpoint:

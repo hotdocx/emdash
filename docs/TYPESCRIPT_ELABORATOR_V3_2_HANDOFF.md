@@ -166,7 +166,8 @@ conclusion is narrower and clearer:
   LF budget plumbing with zero oracle/intrinsic/owner-specific checker path;
   its separate immutable D-017 review records delegated unattended approval
   with human supersession, so the exact closure implementation is
-  dependency-ready; and
+  dependency-ready (review checkpoint
+  `6e9c9fc165f7c388620a12bfd47d8b082a6a8417`); and
 - this settles a mechanically reusable architecture for the demonstrated
   envelope, not arbitrary depth, arbitrary mixed variance, general `:^nd`,
   whole-library transfer, groupoidal closure, or deployment.
