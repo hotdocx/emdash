@@ -131,8 +131,9 @@ matrix: only domain annotations of sort `TYPE` are permitted, while the body
 may have sort `TYPE` or `KIND`; native `(A : TYPE)` and `TYPE : TYPE` remain
 rejected. Its frozen D-DTTLF-LF-SORT-001 proposal selects no checker change,
 only permanent matrix/code-universe evidence and correction of a misleading
-inductive boundary label. A separate review is pending. The following order
-after that exact decision is
+inductive boundary label. The proposal is directly approved and its exact
+no-semantic-change correction is complete at
+`b4cb8d39bd31adc768784308263fd91d83ddeefe`. The following order is
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -646,7 +647,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | pending | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Represent and check generated eliminator types/computation plus recursive/indexed and strict-positivity boundaries; no backend-generated owner is trusted without an explicit typed contract |
-| SCALE-KIND-PI-1 | audit/proposal checkpointed `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed; no-semantic-change implementation and focused tests green; implementation checkpoint pending | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserve the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
+| SCALE-KIND-PI-1 | complete at `b4cb8d39bd31adc768784308263fd91d83ddeefe`; audit/proposal checkpoint `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserves the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
 | SCALE-MIXED-PHASE-1A | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Owner-free immutable planner partitions mixed modules into phase-pure fragments, projects one exact linkage, accumulates declaration/runtime prefixes, preserves grouped clauses and dependency modules, and feeds all four existing engines |
 | SCALE-MIXED-PHASE-1B | complete | SCALE-MIXED-PHASE-1A | Same-runtime-prefix proof phases compose in source order under one global priority, queue, metavariable session, and proof budget; each phase retains exact compile evidence and later runtime rules are not silently made visible |
@@ -1529,8 +1530,9 @@ changes no checker judgment: it renames the misleading checker test, replaces
 the inductive/mixed `kind-level-binder-compilation` non-feature label with
 `implicit-native-TYPE-parameter-encoding`, and retains the executable matrix
 and explicit-code-universe witness. Focused checker, inductive, mixed-planner,
-typecheck, and lint gates pass. Exact staged review and the bounded local
-checkpoint remain before SCALE-INDUCTIVE-1B.
+typecheck, and lint gates pass. Exact staged review passed; implementation
+checkpoint:
+`b4cb8d39bd31adc768784308263fd91d83ddeefe`. SCALE-INDUCTIVE-1B is next.
 
 Validation on 2026-07-25:
 

@@ -274,8 +274,8 @@ D-DTTLF-LF-SORT-001 proposal is checkpointed
 proposed. Its focused-green implementation makes no checker/Core/Lambdapi
 semantic change; it only adds permanent matrix/code-universe evidence and
 corrects the misleading checker-test and inductive/mixed boundary
-classification before SCALE-INDUCTIVE-1B. Exact staged review and its local
-checkpoint remain.
+classification. Exact staged review passed and the implementation checkpoint
+is `b4cb8d39bd31adc768784308263fd91d83ddeefe`. SCALE-INDUCTIVE-1B is next.
 
 The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
 chain transfer are checkpoint-isolation/linkage accommodations, not evidence
@@ -924,10 +924,10 @@ surface consumer, tests, and demo. Preserve its green 1,071-test root gate,
 implementation checkpoint
 `c5a23c208f614ec42c9037c3a05f377c1375746a`; then resume the recorded scale
 order. Preserve the SCALE-KIND-PI-1 executable product-sort audit and directly
-approved D-DTTLF-LF-SORT-001 decision. Finish only its focused-green
-classification/evidence correction checkpoint, then continue to
-SCALE-INDUCTIVE-1B. The proposal preserves the checker and uses explicit code
-universes; it does not authorize native `TYPE` quantification.
+approved D-DTTLF-LF-SORT-001 decision plus complete correction checkpoint
+`b4cb8d39bd31adc768784308263fd91d83ddeefe`, then continue to
+SCALE-INDUCTIVE-1B. The completed row preserves the checker and uses explicit
+code universes; it does not authorize native `TYPE` quantification.
 `DECL-REFINE-1A`, generic parsing, and bulk protected-module transfer are not
 the immediate critical path.
 
