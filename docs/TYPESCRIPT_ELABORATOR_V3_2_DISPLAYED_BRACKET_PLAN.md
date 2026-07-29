@@ -139,8 +139,9 @@ tests and the complete 985-test TypeScript gate pass: 938 active passes,
 47 intentional skips, and zero failures. It freezes the exact implemented
 envelope and, crucially, distinguishes recursive supported-body compilation
 from the still-bounded one-edge dependent context-presentation compiler.
-It awaits H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/
-D-DTTLF-USABILITY-016.
+Its exact proposal checkpoint is
+`6c06cb10ea6eb9fa298544d084df5f129950a3a1`. It awaits
+H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016.
 
 The same proposal freezes the agreed first post-graduation stress as
 DISPLAYED-CHAIN-2A: one three-level mixed telescope containing both genuine
@@ -535,7 +536,7 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
 | DISPLAYED-CHAIN-1A | complete, green, and checkpointed `86ac6e480e50e38486bf4155556bbf41760be2cf`; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e`; the root-only recursive consumer and runnable demo pass nine new focused tests and the aggregate 973-test root gate (926 active passes, 47 intentional skips, zero failures) | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-INTEGRATE-1 | complete and validated; exact consolidation checkpoint `222a718fc1ef667964a15cfec0e82e0cf807dd96` | complete DISPLAYED-CHAIN-1A and green full integration audit | Synchronized the displayed/usability/scale/handoff/master routing; classified `DECL-REFINE-1A` as optional deferred module/linking infrastructure; removed only six verified generated probe directories; passed the complete repository gate; checkpointed exactly the consolidation; and authorized the immediately following verified local-main fast-forward with no push or worktree removal |
-| DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete and green; awaiting H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016; exact checkpoint pending current tranche | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused tests and the aggregate 985-test root gate pass; the artifact authorizes nothing by itself |
+| DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; awaiting H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused tests and the aggregate 985-test root gate pass; the artifact authorizes nothing by itself |
 | DISPLAYED-CHAIN-2A | exact API/closure/corpus proposal frozen inside DISPLAYED-BRACKET-GRADUATE-1; implementation not yet authorized | approved D-DTTLF-USABILITY-016 | Extend the existing `displayedDependentContextLambda` method only to the flat source-ordered `a; b,c; d` shape. Derive the independent `b,c` group without user flags; use the transparent displayed product and sequential Sigma total; require object/internalized-arrow/reindexing/negative evidence and zero new owners/rules; halt for a separate closure proposal on drift |
 | DISPLAYED-ND-0A | deferred behind graduation and the mixed-telescope stress | DISPLAYED-LIFTING-0A, DISPLAYED-CHAIN-1A, and the selected post-graduation boundary | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 
@@ -2293,7 +2294,8 @@ human decision supersedes it.
   active kernel/example checks, 39 formal/SOP tests, 5 document-registry
   tests, and every reference/report/book/strict-LHS/catalog check. No
   semantic, browser, parser, bulk-transfer, or Git authority is installed.
-  Exact proposal checkpoint is pending the current synchronized tranche.
+  Exact proposal checkpoint:
+  `6c06cb10ea6eb9fa298544d084df5f129950a3a1`.
 - **2026-07-29 — Post-chain integration and next-phase direction
   approved.** The user accepted the evidence-backed distinction between the
   completed DISPLAYED-CHAIN-1A goal and the still-active overall programme,

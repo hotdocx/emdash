@@ -60,7 +60,8 @@ On 2026-07-29 the user accepted the post-chain integration assessment and
 selected the continuation order. The displayed usability path is complete
 through stable evaluation and one genuine dependency edge. Its executable
 deeply immutable DISPLAYED-BRACKET-GRADUATE-1 assessment is now green and
-awaiting D-DTTLF-USABILITY-016; it freezes the existing-method
+checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`, awaiting
+D-DTTLF-USABILITY-016; it freezes the existing-method
 `a; b,c; d` three-level successor with zero expected owner/rule/transfer
 delta and a mandatory stop on closure drift. Only after that separate
 decision may the mixed stress proceed, followed by general `:^nd`. When

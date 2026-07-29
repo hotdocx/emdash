@@ -3661,8 +3661,9 @@ the current launch prompt. Use the ready-to-paste prompt in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
 As of 2026-07-29 the one-edge DISPLAYED-CHAIN-1A slice is complete and the
 executable deeply immutable DISPLAYED-BRACKET-GRADUATE-1 proposal is green
-and awaiting D-DTTLF-USABILITY-016. It freezes the recursive-body versus
-bounded-presentation distinction and the exact existing-method
+at checkpoint `6c06cb10ea6eb9fa298544d084df5f129950a3a1` and awaits
+D-DTTLF-USABILITY-016. It freezes the recursive-body versus bounded
+presentation distinction and the exact existing-method
 four-binding/three-level `a; b,c; d` successor, with zero expected
 owner/rule/transfer delta and a mandatory closure-drift stop. Only after
 separate review may that mixed stress proceed; general `:^nd` and the

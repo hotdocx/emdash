@@ -151,7 +151,8 @@ conclusion is narrower and clearer:
   compilation from the hard two-binding dependent presentation; its twelve
   focused tests and the aggregate 985-test gate pass, but exact
   H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 remains
-  pending; and
+  pending; its proposal checkpoint is
+  `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; and
 - this settles a mechanically reusable architecture for the demonstrated
   envelope, not arbitrary depth, arbitrary mixed variance, general `:^nd`,
   whole-library transfer, groupoidal closure, or deployment.
@@ -788,7 +789,8 @@ Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
 `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`. The completed
 fibred-context plan remains its authority and historical ledger. The
 current proposal-only DISPLAYED-BRACKET-GRADUATE-1 artifact is complete,
-green, and awaiting exact D-016 review/checkpoint recording. Do not resume
+green, checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`,
+and awaiting exact D-016 review. Do not resume
 the stale DISPLAYED-CHAIN-0A/1A implementation wording below: that slice is
 complete at its kernel, transfer, consumer, and ledger checkpoints. After
 approval, the agreed next stress is exactly the existing-method
