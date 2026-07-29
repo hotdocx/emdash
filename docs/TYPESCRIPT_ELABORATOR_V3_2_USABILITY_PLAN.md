@@ -106,8 +106,18 @@ supplies the first bounded direct `displayedFunctorLambda`/`:^fd`-equivalent
 identity/eta/finite-composition consumer, retaining a hidden locally nameless
 base/fibre telescope and using the existing Sigma/Pi comparison only at proof
 time. Its demo and live oracle pass without any new Lambdapi mathematical
-owner/rule. General `fd`, `nd`, profile promotion, and the wider structural
-boundaries remain separate; FIBRED-TRANSFD-1 is next.
+owner/rule. The subsequent displayed-bracket continuation is also complete
+through independent sibling contexts, stable constant-domain displayed
+evaluation, and one genuine dependency edge
+`k : K; a : A[k]; b : B[(k,a)]`. DISPLAYED-CHAIN-1A retains the existing
+typed recursive frontend, adds exactly one active semantic owner and six
+runtime rules, transfers its exact closure through generic TypeScript
+engines, and exposes a runnable root-only object/internalized-arrow/reindexing
+demo. It does not prove arbitrary depth, arbitrary mixed variance, or general
+`:^nd`. DISPLAYED-BRACKET-GRADUATE-1 is now the next proposal-only row;
+subject to its separate decision, a three-level mixed telescope combining
+dependency edges with independent fibred siblings is the agreed first stress
+test, followed by a general `:^nd` audit and the recorded scale sequence.
 USABILITY-0A/0B implementation checkpoint:
 `c2c6da01386b7fda1d26e71379c4256fb06ea637`
 USABILITY-1A implementation checkpoint:
@@ -144,6 +154,14 @@ FIBRED-STRUCTURE-1A implementation checkpoint:
 `4b532aac9d89ff54b761dd94f49c6eeb4f046b4d`
 FIBRED-BINDER-1 implementation checkpoint:
 `698280f42c3c9c339ebc82a8cfb0df1d51838704`
+DISPLAYED-CHAIN-1A Lambdapi implementation checkpoint:
+`f22785e44cfc0a5185bb92e110a30c6a0ada7de4`
+DISPLAYED-CHAIN-1A TypeScript transfer checkpoint:
+`3d14825fe695d8c679d1168714164ec14cf6f05e`
+DISPLAYED-CHAIN-1A recursive consumer checkpoint:
+`86ac6e480e50e38486bf4155556bbf41760be2cf`
+DISPLAYED-CHAIN-1A synchronized ledger checkpoint:
+`1e2beba435bcf4d96fcfd6cdb5d7d8752f2ddaf5`
 
 ## Outcome And Corrected Priority
 
@@ -549,7 +567,7 @@ frontend variables.
 | USABILITY-GRADUATE-1 | complete; reviewed-approved D-DTTLF-USABILITY-002 | USABILITY-2A | Deeply frozen executable architecture proposal plus separate immutable review: settles only the exact outer-LF, ordinary first-order bracket, and direct-slot indexed section-eta envelope; retains the complete sixteen-row application partition, general dependent/displayed algorithm and owner gaps, notation/parser choices, trust boundary, and all non-effects |
 | USABILITY-DEPENDENT-PLAN-0 | complete; reviewed-approved D-DTTLF-USABILITY-003 | reviewed USABILITY-GRADUATE-1, accepted H-01/D-007 dependent-first design | Immutable non-authorizing proposal plus separate exact review: preserve the dependent-first semantic interpretation and classified constant-family bridge; require neither shared nor separate ordinary/displayed lowering; judge candidate factorizations by natural, usable, authority-correct, scalable/generalizable behavior and retain credible alternatives |
 | USABILITY-DEPENDENT-1A | complete | D-DTTLF-USABILITY-003 | First non-eta dependent vertical slice: `λ k :^n K. FF[k](s[k])` elaborates from first-order locally nameless indexed fibre classifiers through the semantic section-composition law to explicit generic `comp_fapp0` at `Catd_cat K`; the minimal existing active closure is transferred through generic engines, the ordinary/default eta corpus is preserved, family/base/scope errors fail closed, and no new Lambdapi mathematical owner/rule or deployed/browser/frozen-profile promotion is introduced |
-| USABILITY-FIBRED-CONTINUATION | recursive architecture preserved; constant-domain DISPLAYED-EVAL-1A implemented; DISPLAYED-CHAIN-0A proposal frozen at `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda` and awaiting D-012 | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` adds the recursive independent-sibling/evaluation compiler and rejects another RawExpr/checker layer. DISPLAYED-CHAIN-0A now selects complementary sequential-Sigma contexts, recursive pullback/totalization substitutions, and direct displayed terms. A generic unwrapped section reinterpretation fails subject reduction; the full-file successful alternative freezes one necessary `sigma_functord_sec` owner and six object/arrow rules, plus three existing-signature/two existing-rule transfer prerequisites. No semantic continuation precedes D-012, and no approval adds generic total pullback, arbitrary mixed variance, general `nd`, parsing/bulk transfer, or a deployed/browser profile |
+| USABILITY-FIBRED-CONTINUATION | complete through DISPLAYED-CHAIN-1A; next row is proposal-only DISPLAYED-BRACKET-GRADUATE-1 | explicit accepted 2026-07-27 continuation direction, USABILITY-DEPENDENT-1A, reviewed D-011 through D-015 | The completed `TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md` records context/product/comprehension/structure, direct displayed-functor/transfor, weakening/reindexing, dependent-target, and qualified graduation slices. The active `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` preserves the same typed recursive frontend for independent siblings, displayed evaluation, and the genuine sequential-Sigma chain `k : K; a : A[k]; b : B[(k,a)]`. DISPLAYED-CHAIN-1A is green at exact kernel/transfer/consumer checkpoints with one semantic owner/six rules, generic transfer prerequisites, and object/internalized-arrow/reindexing evidence. It adds no RawExpr/checker/parser layer and proves neither arbitrary depth, arbitrary mixed variance, general `nd`, bulk transfer, nor deployment. Graduation must freeze that exact envelope before a separately reviewed three-level mixed-telescope stress |
 | SCALE-RETURN-1 | deferred; not selected by graduation approval | explicit updated plan selection or independently measured acquisition need | Resume wider direct typed declaration transfer and/or propose a measured narrow acquisition adapter; the current 70-root plus extension closures remain inventory evidence, not a demo prerequisite |
 
 Rows may be split when implementation exposes an independently reusable
@@ -2084,16 +2102,16 @@ live/kernel checks and aggregate `check:all` are green: 904 TypeScript tests
 exact implementation checkpoint is
 `1a7ce3f023391aa22c34dc5626057710429bc7c3`.
 
-This is further cumulative progress rather than a backtrack. The remaining
-general-usability boundary is one genuine dependency edge, arbitrary
-mixed-domain/polarity-directed application, nested displayed abstraction,
-and general higher `:^nd` coherence. The active displayed plan therefore
-selected a read-only, non-self-authorizing DISPLAYED-CHAIN-0A proposal as
-the next bounded row. That proposal is now frozen as described immediately
-below and awaits D-012; no semantic continuation has been smuggled into the
-proposal tranche.
+This was further cumulative progress rather than a backtrack. The active
+displayed plan then selected the read-only, non-self-authorizing
+DISPLAYED-CHAIN-0A proposal described immediately below. D-012 approved that
+exact proposal, D-013 through D-015 approved its measured transfer/runtime
+corrections, and DISPLAYED-CHAIN-1A is now complete. The remaining
+general-usability boundary has moved to arbitrary-depth mixed telescopes,
+arbitrary mixed-domain/polarity-directed application, nested displayed
+abstraction, and general higher `:^nd` coherence.
 
-### 2026-07-28 genuine dependent-chain architecture proposal
+### 2026-07-28/29 genuine dependent-chain architecture and implementation
 
 DISPLAYED-CHAIN-0A confirms that the current progress was not work on a
 superficial bracket syntax and did not discard a former recursive solution.
@@ -2152,8 +2170,15 @@ plausible for one genuine dependency edge and exposes a recursive extension
 invariant. Arbitrary-depth qualification, mixed variance, general `:^nd`,
 groupoidal closure, and deployment remain later evidence obligations.
 
-The executable proposal is non-self-authorizing and awaits the separate
-`H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012` decision.
+The executable proposal remained non-self-authorizing until the separate
+`H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012` decision. The
+completed implementation preserves its exact mathematical boundary: one
+`sigma_functord_sec` owner, six rules, permanent object/arrow/reindexing and
+non-collapse checks, generic declaration/runtime transfer, and the
+root-only `fibred-displayed-chain-1` recursive consumer. The complete
+repository gate passes at the post-implementation head. This establishes a
+mechanically extensible one-edge architecture, not an arbitrary-depth or
+general-`:^nd` theorem.
 
 ## Acceptance Criteria
 
@@ -2292,15 +2317,20 @@ the existing `goal/typescript-elaborator-v3.2` branch/worktree after a bounded
 coherent tranche is green, this ledger/navigation is synchronized, and the
 exact staged diff excludes unrelated work.
 
-No push, merge, PR, publication, release, new branch/worktree, rebase, amend,
-reset, history rewrite, cleanup, branch deletion, or worktree removal is
+The more specific displayed-plan authorization governs
+DISPLAYED-INTEGRATE-1 only: it permits deletion of the six exact verified
+generated probe directories, one validated consolidation checkpoint, and a
+local fast-forward-only merge into `main`. Once consumed, no push, further
+merge, PR, publication, release, new branch/worktree, rebase, amend, reset,
+history rewrite, other cleanup, branch deletion, or worktree removal is
 authorized.
 
 ## Persistent `/goal` Launch Prompt
 
 ```text
-Kick off or continue implementing
-docs/TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md.
+Kick off or continue implementing the active successor
+docs/TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md while preserving
+this parent usability plan.
 
 Treat its Persistent /goal Launch Prompt as part of the objective. Recover
 actual state from active code, tests, this plan and its ledgers, the linked
@@ -2310,9 +2340,12 @@ action, emdash2/AGENTS.md and the current v3.2 SOP. Resume the in-progress row
 or select the next dependency-ready bounded implementation slice; produce
 executable evidence rather than only expanding architectural prose.
 
-For the active recursive displayed continuation, the more specific
-`docs/TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md` and its launch
-prompt control. Preserve completed DISPLAYED-EVAL-0B, its constant-domain
+For the active recursive displayed continuation, the more specific displayed
+plan and its launch prompt control. The next dependency-ready row is
+proposal-only DISPLAYED-BRACKET-GRADUATE-1. It must freeze the exact
+implemented usability envelope before selecting or implementing the agreed
+three-level mixed-telescope stress. Preserve completed DISPLAYED-EVAL-0B, its
+constant-domain
 variance qualification, its transfer-runtime-wiring diagnosis, and its
 deeply frozen non-self-authorizing DISPLAYED-EVAL-OWNER-0C proposal at exact
 checkpoint 7df9993f06fc55e2f34b09094b87987ef19cecba. Do not
@@ -2326,12 +2359,13 @@ generic transfer with explicit prerequisites and zero intrinsic owners, and
 two recursive existing-IR application judgments. Human response supersedes
 the review and its authorization cannot be broadened. If final validation/
 checkpoint recording is incomplete, finish that synchronization first.
-Preserve the displayed plan's completed proposal-only DISPLAYED-CHAIN-0A
-artifact, one-owner/six-rule candidate, exact transfer prerequisites,
-warning comparison, recursive corpus, and non-effects. Do not implement a
-semantic chain continuation before its separate exact D-012 decision. Keep
-arbitrary mixed-domain evaluation, general :^nd, parsing/bulk transfer, and
-browser promotion separate.
+Preserve completed DISPLAYED-CHAIN-1A and its exact D-012 through D-015
+decisions: one semantic owner/six rules, exact transfer prerequisites and
+runtime closure, warning evidence, permanent object/internalized-arrow/
+reindexing corpus, recursive consumer, runnable demo, checkpoints, and all
+non-effects. Do not mistake that one genuine dependency edge for arbitrary
+depth. Keep arbitrary mixed-domain evaluation, general `:^nd`,
+parsing/bulk transfer, and browser promotion separate.
 
 Preserve the exact deployed emdash-v3.2-mvp-1 profile and exact reviewed
 root-only emdash-v3.2-dttlf-directed-1 continuation. Retain the outer
@@ -2487,15 +2521,16 @@ comparison/backtracking evidence, never permission to reset or rewrite.
 Existing authorization permits temporary local checkpoint commits only on
 the existing goal branch after a bounded green tranche, synchronized
 ledger/navigation, exact staged-diff review, and
-git diff --cached --check. It authorizes no push, merge, PR, publication,
-release, history rewriting, new branch/worktree, cleanup, or deletion.
+git diff --cached --check. After the one-time DISPLAYED-INTEGRATE-1 cleanup
+and local fast-forward are consumed, it authorizes no push, further merge,
+PR, publication, release, history rewriting, new branch/worktree, cleanup,
+or deletion.
 
-No follow-on implementation row is authorized by the completed dependent
-review and witness alone. The user's later explicit 2026-07-27 direction
-selected the dedicated
-`docs/TYPESCRIPT_ELABORATOR_V3_2_FIBRED_CONTEXT_PLAN.md`; continue its
-dependency-ready rows and obey its stricter product-owner and total-pullback
-boundaries. Keep every
+The completed fibred-context and displayed-chain rows do not self-authorize a
+further semantic delta. Continue the displayed plan's proposal-only
+graduation row. Subject to a separate decision, the agreed sequence is the
+three-level mixed telescope, general `:^nd` audit, and then the scale plan's
+KIND/PI, inductive, WalkingEnd/HIT, batch, and graduation rows. Keep every
 Lambdapi process bounded to at most 60 seconds and preserve all proportional
 subject-reduction, warning, audit, catalog, health, examples, conformance, and
 CI obligations.
@@ -2503,6 +2538,15 @@ CI obligations.
 
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-CHAIN-1A and continuation routing
+  synchronized.** The one-edge recursive dependent-chain slice is complete
+  across active-kernel semantics, generic TypeScript transfer, consumer, and
+  runnable demo at its four exact checkpoints. The next row is proposal-only
+  DISPLAYED-BRACKET-GRADUATE-1, followed only after separate review by a
+  three-level mixed dependency/sibling telescope, a general `:^nd` audit,
+  and the recorded scale sequence. Canonical parsing remains optional;
+  `DECL-REFINE-1A` is deferred implementation/module-linking infrastructure,
+  not an LF semantic prerequisite.
 - **2026-07-28 — DISPLAYED-CHAIN-0A proposal completed.** Integrated the
   corrected end-user meaning of recursive variable occurrence with one
   genuine telescope edge. The owner audit selects complementary sequential

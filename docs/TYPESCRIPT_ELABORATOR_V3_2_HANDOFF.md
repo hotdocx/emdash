@@ -130,6 +130,62 @@ induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
 promoted active stress profile or whole-transfer claim
 
+## Current Integration Boundary — 2026-07-29
+
+The long status above is cumulative history. The current operational
+conclusion is narrower and clearer:
+
+- the outer dependent LF, explicit backend-neutral Core, generic
+  declaration/runtime/proof transfer engines, and small TypeScript
+  checker/evaluator are functional;
+- ordinary categorical bracket abstraction, independent displayed siblings,
+  stable constant-domain displayed evaluation, direct bounded `:^fd`/`:^nd`
+  consumers, weakening/reindexing, dependent targets, and one genuine
+  dependency edge are executable through the same typed recursive frontend;
+- DISPLAYED-CHAIN-1A is complete with exactly one active
+  `sigma_functord_sec` owner and six rules, generic TypeScript transfer, and a
+  runnable root-only `fibred-displayed-chain-1` demo covering object,
+  internalized-arrow, reindexing, and negative evidence;
+- this settles a mechanically extensible architecture for the demonstrated
+  one-edge envelope, not arbitrary depth, arbitrary mixed variance, general
+  `:^nd`, whole-library transfer, groupoidal closure, or deployment.
+
+The implementation did not backtrack to a second RawExpr, parser, checker, or
+whole-body recognizer. Explicit TypeScript constructors such as
+`displayedDependentContextLambda`, `apply`, and `fibrePair` remain acceptable;
+the usability property is recursive bound-variable occurrence under
+supported typed subexpressions. Canonical Lambdapi parsing remains optional
+and deferred. Direct typed transfer is the default acquisition path.
+
+The checked `Obj_func` mirror and bounded `piapp0` specialization used by the
+chain transfer are checkpoint-isolation/linkage accommodations, not evidence
+of a missing mathematical kernel operation. `DECL-REFINE-1A` is consequently
+optional deferred outer-LF implementation/module-linking infrastructure. It
+must not be presented as a new LF semantic feature; dependency-closed
+canonical relinking remains the preferred zero-feature strategy until a
+measured independent-fragment need justifies comparison with monotone checked
+signature-to-body merging.
+
+At descendant `1e2beba435bcf4d96fcfd6cdb5d7d8752f2ddaf5`, the goal branch was
+178 commits ahead of local `main` with zero divergence, and the complete
+repository gate passed: 973 TypeScript tests (926 active passes, 47
+intentional skips), all 19 mandatory conformance judgments, all 41
+kernel/example health targets, and all strict documentation/catalog/book
+checks. DISPLAYED-INTEGRATE-1 synchronizes the living plans, removes only the
+six verified generated probe directories left by an interrupted run, records
+an exact checkpoint, and fast-forwards local `main`; it authorizes no push or
+worktree removal.
+
+After integration, use the displayed-bracket plan's launch prompt. The
+selected sequence is:
+
+1. proposal-only DISPLAYED-BRACKET-GRADUATE-1;
+2. after its separate decision, a three-level mixed telescope combining
+   genuine dependency edges and independent fibred siblings;
+3. a general `:^nd` coherence/higher-action audit; and
+4. SCALE-KIND-PI-1, SCALE-INDUCTIVE-1B, SCALE-STRESS-3C,
+   SCALE-BATCH-1, and SCALE-GRADUATE-1.
+
 ## Purpose
 
 This document prepares the next fresh conversation to work from the Git root
@@ -722,7 +778,15 @@ any Git mutation.
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
 `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`. The completed
 fibred-context plan remains its authority and historical ledger. The
-successor prompt names the
+current next row is proposal-only DISPLAYED-BRACKET-GRADUATE-1. Do not resume
+the stale DISPLAYED-CHAIN-0A/1A implementation wording below: that slice is
+complete at its kernel, transfer, consumer, and ledger checkpoints. After a
+separate graduation decision, the agreed next stress is a three-level mixed
+dependency/sibling telescope, followed by general `:^nd` and the recorded
+scale order. `DECL-REFINE-1A`, generic parsing, and bulk protected-module
+transfer are not the immediate critical path.
+
+The successor prompt names the
 completed-profile and reviewed-continuation comparison checkpoints, preserves
 the non-authorizing USABILITY-GRADUATE-1 proposal together with its separate
 exact reviewed approval and withheld general dependent/displayed boundary,
@@ -1027,15 +1091,20 @@ Its warning comparison is 1,171 to 1,179 total warnings: +8 diagnostic
 critical pairs and +0 replaceable-variable warnings, with zero strict-LHS
 findings. Those warnings identify known constant-family Sigma folds and
 generic component/composition interactions; they do not veto the proposed
-architecture. The root-only successor would be the recursive
-`fibred-displayed-chain-1` profile with a typed
-`displayedDependentContextLambda`-style consumer. This remains a deeply
-frozen, executable, non-self-authorizing proposal: no active kernel
-semantics or TypeScript consumer is implemented before the separate exact
-H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision. Its ten
-focused tests, root typecheck/lint, bounded active-kernel check, and
-aggregate 914-test root gate pass (867 active, 47 intentional skips, zero
-failures). The exact green proposal checkpoint is
+architecture. D-012 approved the deeply frozen proposal, D-013 through D-015
+approved its exact measured transfer/runtime corrections, and the root-only
+recursive `fibred-displayed-chain-1` profile is now implemented. Its typed
+`displayedDependentContextLambda` consumer handles exactly one genuine
+dependency edge and retains object/internalized-arrow/reindexing evidence
+without a second frontend or checker. The exact kernel, generic transfer,
+consumer, and synchronized-ledger checkpoints are respectively
+`f22785e44cfc0a5185bb92e110a30c6a0ada7de4`,
+`3d14825fe695d8c679d1168714164ec14cf6f05e`,
+`86ac6e480e50e38486bf4155556bbf41760be2cf`, and
+`1e2beba435bcf4d96fcfd6cdb5d7d8752f2ddaf5`. The complete post-chain gate
+passes 973 TypeScript tests (926 active, 47 intentional skips), all 19
+mandatory conformance judgments, and all 41 kernel/example health targets.
+The earlier proposal checkpoint remains
 `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`.
 
 For the earlier DISPLAYED-BRACKET-1A tranche, all ten focused

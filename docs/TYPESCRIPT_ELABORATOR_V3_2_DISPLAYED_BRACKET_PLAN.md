@@ -119,6 +119,28 @@ judgments, all 41 health targets, strict catalog/TOC/reference/report/book
 checks, and zero failures. The exact implementation checkpoint is
 `1a7ce3f023391aa22c34dc5626057710429bc7c3`.
 
+DISPLAYED-CHAIN-1A is now complete across the active Lambdapi kernel,
+generic TypeScript transfer, root-only recursive consumer, and runnable demo.
+The mathematical delta is exactly one `sigma_functord_sec` owner and six
+runtime rules. The public `fibred-displayed-chain-1` profile handles exactly
+one genuine dependency edge
+`k : K; a : A[k]; b : B[(k,a)]`; direct outer and inner variables,
+displayed-functor application, typed pairing, object computation,
+internalized arrow action, reindexing, and fail-closed negative cases pass.
+The final root gate passes 973 tests (926 active passes, 47 intentional
+skips, zero failures), and the complete repository gate passes at the
+post-implementation head. The exact consumer checkpoint is
+`86ac6e480e50e38486bf4155556bbf41760be2cf`.
+
+The next dependency-ready work is proposal and graduation work, not another
+unreviewed semantic extension. DISPLAYED-BRACKET-GRADUATE-1 must freeze the
+exact implemented envelope and the remaining gaps. The agreed first
+post-graduation stress target is a three-level mixed telescope containing
+both genuine dependency edges and independent fibred siblings. General
+`:^nd` coherence/higher action follows only after that envelope and stress
+contract are explicit. Whole-transfer qualification then returns to the
+separate scale plan.
+
 ## Authority And Relationship To The Completed Architecture
 
 The active mathematical authority remains the Lambdapi v3.2 development
@@ -501,8 +523,10 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-LIFTING-1A | superseded as an imprecise umbrella by exact DISPLAYED-EVAL-1A plus later rows | DISPLAYED-EVAL-0B | Retained only as the historical name for future displayed lifting; application, genuine-chain, variance, and higher-cell work now have separate dependency rows |
 | DISPLAYED-CHAIN-0A | proposal complete at checkpoint `aba1c957afbeb18f2bfe25add56bfa6aacfa4dda`; explicitly approved as proposed by H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012; separate immutable review checkpointed `2c81dc4f2c4860f3a12f9371139b795906efeca9`; semantic implementation ready | completed DISPLAYED-EVAL-1A plus DISPLAYED-LIFTING-0A matrix | Executable proposal selects complementary sequential-Sigma context layout, recursive pullback/Sigma substitution, and direct displayed-term lowering. It freezes one necessary `sigma_functord_sec` owner, six runtime rules, three existing-signature/two existing-rule transfer prerequisites, +8 diagnostic critical pairs, a recursive TypeScript consumer, object/arrow/reindexing/negative corpus, and explicit non-effects |
 | DISPLAYED-CHAIN-1A | complete, green, and checkpointed `86ac6e480e50e38486bf4155556bbf41760be2cf`; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e`; the root-only recursive consumer and runnable demo pass nine new focused tests and the aggregate 973-test root gate (926 active passes, 47 intentional skips, zero failures) | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
-| DISPLAYED-ND-0A | deferred | DISPLAYED-LIFTING-0A and chain evidence | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
-| DISPLAYED-BRACKET-GRADUATE-1 | deferred | independent and genuine-chain evidence | Reassess general displayed usability, remaining mathematics, and product boundary |
+| DISPLAYED-INTEGRATE-1 | user-approved consolidation in progress; exact checkpoint pending | complete DISPLAYED-CHAIN-1A and green full integration audit | Synchronize the displayed/usability/scale/handoff/master routing; classify `DECL-REFINE-1A` as optional deferred module/linking infrastructure; remove only six verified generated probe directories; run the complete repository gate; checkpoint exactly the consolidation; and fast-forward local `main` with no push or worktree removal |
+| DISPLAYED-BRACKET-GRADUATE-1 | next dependency-ready proposal/reassessment; explicitly selected 2026-07-29 | completed independent-sibling and genuine-chain evidence | Freeze the exact present usability envelope, separate proved architecture from arbitrary-depth/general-`:^nd` claims, measure remaining mathematical and product boundaries, and propose the next bounded stress row without semantic self-authorization |
+| DISPLAYED-CHAIN-2A | proposed post-graduation stress; no semantic implementation yet authorized | reviewed DISPLAYED-BRACKET-GRADUATE-1 decision | Stress the recursive design with a three-level mixed telescope containing genuine dependency edges and independent fibred siblings; require freely nested occurrences, object/internalized-arrow/reindexing evidence, fail-closed unsupported cases, and no arbitrary-depth claim before it passes |
+| DISPLAYED-ND-0A | deferred behind graduation and the mixed-telescope stress | DISPLAYED-LIFTING-0A, DISPLAYED-CHAIN-1A, and the selected post-graduation boundary | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
 
@@ -1754,12 +1778,15 @@ canonical backend owner, so the mixed declaration context currently rejects
 a later occurrence as a duplicate rather than recognizing an exact
 opaque-to-transparent refinement.
 
-`DECL-REFINE-1A` is therefore a later *transfer/linking architecture
-qualification*, not a predetermined LF feature and not evidence for a new
+`DECL-REFINE-1A` is therefore a later optional *outer-LF
+implementation/module-linking architecture qualification*, not a
+predetermined feature of the core LF calculus and not evidence for a new
 semantic operation. The semantic fact remains the ordinary Lambdapi one:
 one owner has one canonical signature and, when transparent, one body. The
 opaque/transparent split exists only because incremental TypeScript slices
-acquired different amounts of that same declaration.
+acquired different amounts of that same declaration. A future richer LF
+module calculus would require its own proposal rather than inheriting
+authorization from this seam.
 
 The qualification must compare two generic strategies before selecting
 either one:
@@ -1893,8 +1920,146 @@ non-self-authorizing and unchanged. The separate immutable
 `H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012` approval and
 authorizes only the bounded DISPLAYED-CHAIN-1A row.
 
+## Post-Chain Integration And Next-Phase Verdict
+
+The 2026-07-29 post-implementation review distinguishes completion of the
+bounded persistent goal from completion of the whole TypeScript/emdash
+programme. The former is complete; the latter remains governed by this
+graduation continuation and the separate systematic-transfer plan.
+
+### Status against the intended end state
+
+| Goal area | Current evidence-backed status |
+| --- | --- |
+| Outer dependent LF | Substantially implemented: dependent Pi/lambda/application, beta, transparent delta, scoped contexts and metas, bidirectional checking, runtime rewriting, and proof-time unification. The important remaining LF boundary is the exact `TYPE`/`KIND` product-formation review in `SCALE-KIND-PI-1`. |
+| Autonomous categorical/directed DTT | Demonstrated through displayed families, Sigma totals, pullback/reindexing, sections, displayed functors/transfors, internal Pi, fibrewise products and structural maps, weakening, genuinely dependent targets, and internalized arrow action. This is a representative transferred envelope, not the complete active library. |
+| End-user binder usability | Ordinary categorical brackets are recursive and structural. Displayed binding covers independent sibling blocks, recursive application/pairing, stable constant-domain displayed evaluation, direct `:^fd`/bounded `:^nd` witnesses, and one genuine dependency edge. |
+| Systematic transfer architecture | Generic declaration/definition, runtime-rule, proof-rule, mixed-phase, runtime-dependency, visibility, opaque tactic-theorem, and intrinsic-definition paths have varied executable evidence. New instances of an already qualified mechanism are normally data/linkage/policy work. |
+| Whole Lambdapi transfer | Not yet qualified. Generated eliminator/inductive semantics, the outer-LF sort boundary, WalkingEnd/HIT, protected extension transfer, and a larger compiler-unchanged batch remain open. |
+| Product deployment | Advanced categorical profiles remain root-only and opt-in. The browser continues to expose only the frozen `emdash-v3.2-mvp-1` profile. |
+| Groupoidal closure | Remains a separate Lambdapi-first mathematical programme rather than a prerequisite for this directed categorical-DTT usability result. |
+
+The correct feasibility statement has three levels:
+
+1. the fundamental architecture is settled: direct typed TypeScript
+   construction, callback-once locally nameless evidence, backend-neutral
+   explicit Core, generic checking/evaluation, and optional deterministic
+   Lambdapi conformance;
+2. scaling another instance of a qualified mechanism is largely mechanical
+   data and policy work; but
+3. arbitrary displayed telescope depth, general `:^nd`, and whole-library
+   mechanical transfer remain plausible, localized, testable claims rather
+   than completed facts.
+
+### Recorded corrections and deviations
+
+The work did not return to the old mutable HOAS implementation. The public
+TypeScript callback API retains HOAS-like ergonomics while immediately
+reifying immutable locally nameless evidence. This is an implementation
+choice, not a loss of end-user binding.
+
+The unexported general canonical-symbol parser experiment was a temporary
+detour. It was removed when measurement showed that it covered neither the
+full semantic command landscape nor the immediate usability blocker. Direct
+typed transfer remains the default; canonical export remains useful for
+inventory, drift, command selection, and bounded conformance.
+
+Bulk root/extension transcription was deliberately sequenced behind
+categorical-binder usability at the user's direction. That sequencing has
+now produced ordinary and displayed contextual compilers plus concrete
+object/arrow/reindexing consumers. It did not prove the larger batch claim.
+
+Several consumers exposed genuinely missing active computation. Those gaps
+were resolved only after owner-position and Foundation audits, with the
+smallest reviewed mathematical deltas. The resulting owner additions are
+kernel work discovered by real consumers, not TypeScript-only shortcuts.
+
+The checkpoint-heavy approach preserved review and backtracking evidence but
+also produced fragmented parent ledgers and a long integration branch.
+DISPLAYED-INTEGRATE-1 exists to correct that documentation/DevOps drift
+before further semantic experimentation.
+
+### `DECL-REFINE-1A` classification
+
+`DECL-REFINE-1A` is an optional deferred **outer-LF implementation/module
+linking facility**. It is not part of the core lambda-Pi calculus and is not
+required by the displayed-chain semantics or demo. The first candidate
+remains dependency-closed canonical relinking, under which an owner is
+compiled once with its reachable transparent body. Only a measured need to
+compose independently compiled fragments without recompilation can justify
+the more elaborate monotone checked signature-to-body merge.
+
+Either implementation must retain one logical owner identity and cannot add
+a Core term former, evaluator law, runtime/proof rule, mathematical owner, or
+alternative LF semantics. If a future design intentionally introduces a
+richer LF module calculus, that is a separate proposal and must not be
+smuggled in through this transfer seam. This optional facility has lower
+priority than displayed graduation/mixed-telescope evidence and the
+sort/inductive/HIT/batch scale rows.
+
+### Integration audit and approved boundary
+
+At the reviewed pre-consolidation head
+`1e2beba435bcf4d96fcfd6cdb5d7d8752f2ddaf5`, the goal branch was exactly
+178 commits ahead of local `main` with zero divergence. It changed 361 files
+as the accumulated replacement, LF, transfer, kernel, usability, and
+evidence programme. A fresh complete integration gate passed:
+
+- 973 TypeScript tests: 926 active passes, 47 intentional skips, zero
+  failures;
+- all 19 mandatory TypeScript/Lambdapi differential judgments;
+- all 41 active kernel/example checks;
+- Python/formal infrastructure and document-registry tests;
+- report, book, typography, KaTeX, active-reference, source-TOC, and health
+  checks; and
+- strict rule-LHS and generated-catalog freshness gates.
+
+Six untracked `emdash2/tmp/elab0-*` directories were inspected. They contain
+only six generated `probe.lp` inputs, in three byte-identical pairs, totaling
+approximately 136 KiB. They survived external interruption before the
+probe runner's `finally` cleanup and contain no unique result or unfinished
+source. The user expressly authorized deletion of those exact directories,
+the consolidation checkpoint, and a local fast-forward of `main`. That
+one-time authorization includes no push, publication, branch/worktree
+removal, rebase, squash, amend, or history rewrite.
+
+Integration need not wait for all future scale rows. The advanced profiles
+are opt-in with explicit nonclaims, and fast-forwarding validated development
+does not promote them to the browser or assert whole-library completion.
+
+### Selected continuation order
+
+After integration, the agreed priority is:
+
+1. complete proposal-only DISPLAYED-BRACKET-GRADUATE-1 and freeze the exact
+   present usability envelope;
+2. subject to its separate decision, stress a three-level mixed telescope
+   with dependency edges and independent fibred siblings before claiming
+   arbitrary depth;
+3. audit general `:^nd` coherence and higher action if it remains the next
+   end-user priority; and
+4. return to whole-transfer qualification in this order:
+   `SCALE-KIND-PI-1`, `SCALE-INDUCTIVE-1B`, `SCALE-STRESS-3C`
+   WalkingEnd/HIT, `SCALE-BATCH-1`, and `SCALE-GRADUATE-1`.
+
+This order advances the original objective directly: genuinely usable
+dependent categorical binders, followed by evidence that the remaining
+active library can be transferred mechanically. It does not automatically
+approve any post-graduation semantic row.
+
 ## Change Log
 
+- **2026-07-29 — Post-chain integration and next-phase direction
+  approved.** The user accepted the evidence-backed distinction between the
+  completed DISPLAYED-CHAIN-1A goal and the still-active overall programme,
+  selected DISPLAYED-BRACKET-GRADUATE-1 followed by a three-level mixed
+  telescope and then general `:^nd`, kept `DECL-REFINE-1A` optional and
+  deferred behind higher priorities, and approved exact plan/handoff
+  consolidation, deletion of six verified generated probes, a validated
+  local checkpoint, and local fast-forward integration into `main`. No push,
+  publication, history rewrite, branch/worktree removal, or post-graduation
+  semantic implementation was authorized. Exact consolidation checkpoint:
+  pending immediate ledger recording.
 - **2026-07-29 — DISPLAYED-CHAIN-1A root-only recursive consumer and demo
   implemented.** The new `fibred-displayed-chain-1` profile composes the
   reviewed generic transfer and exposes exactly one
@@ -2221,8 +2386,15 @@ Existing authorization permits exact local checkpoints on the current
 green, ledgers are synchronized, unrelated files are excluded, and
 `git diff --cached --check` passes.
 
-No push, merge, PR, publication, release, new branch/worktree, amend, rebase,
-reset, history rewrite, cleanup, deletion, or worktree removal is authorized.
+For DISPLAYED-INTEGRATE-1 only, the user's 2026-07-29 direction additionally
+authorizes deletion of the six exact verified generated
+`emdash2/tmp/elab0-*` directories, an exact validated consolidation
+checkpoint, and a local fast-forward-only merge of
+`goal/typescript-elaborator-v3.2` into `main`. Resolve both branch tips and
+the zero-divergence relation again immediately before the merge. This
+one-time authorization does not include a push, PR, publication, release,
+new branch/worktree, amend, rebase, squash, reset, history rewrite,
+branch/worktree removal, or unrelated cleanup.
 
 ## Persistent `/goal` Launch Prompt
 
@@ -2235,6 +2407,32 @@ Recover the actual descendant state, worktrees, staged/unstaged changes,
 active authority, completed fibred-context plan, immutable
 FIBRED-GRADUATE-1 proposal/review, and this plan's ledger. Follow root
 AGENTS.md and emdash2/AGENTS.md for every active-kernel action.
+
+Preserve completed DISPLAYED-INTEGRATE-1 after its exact consolidation
+checkpoint and verified local-main fast-forward. Do not repeat or broaden
+the consumed cleanup/merge authorization. The next dependency-ready row is
+proposal-only DISPLAYED-BRACKET-GRADUATE-1. Freeze an executable,
+deeply immutable assessment of the exact implemented outer-LF, ordinary
+bracket, independent displayed siblings, stable displayed evaluation,
+direct `:^fd`/bounded `:^nd`, weakening/reindexing, dependent target, and
+one-genuine-edge envelope. It must separate demonstrated architecture from
+arbitrary-depth, mixed-variance, general-`:^nd`, groupoidal, browser, and
+whole-transfer claims, and select no semantic successor by self-approval.
+
+The agreed candidate after a separately reviewed graduation decision is
+DISPLAYED-CHAIN-2A: one three-level mixed telescope with both genuine
+dependency edges and independent fibred siblings. Do not implement it before
+the exact graduation proposal and decision freeze its API, mathematical
+closure, object/internalized-arrow/reindexing corpus, negatives, and
+non-effects. General `:^nd` follows that stress rather than being guessed by
+additional eta cases.
+
+Keep `DECL-REFINE-1A` optional and deferred as an outer-LF
+implementation/module-linking qualification. Prefer dependency-closed
+canonical relinking if sufficient; consider monotone checked
+signature-to-body merging only after a measured independent-fragment need.
+Neither option may change the core LF calculus, Core term language,
+evaluation, runtime/proof rules, or mathematical owner set.
 
 Preserve the qualified D-DTTLF-USABILITY-008 conclusion and every withheld
 claim. DISPLAYED-BRACKET-0A's exact executable proposal selects a generic
@@ -2333,14 +2531,13 @@ reindexing/recursive/non-collapse corpus, and every non-effect.
 
 The separate exact
 H-DTTLF-USABILITY-DISPLAYED-CHAIN-01/D-DTTLF-USABILITY-012 decision is now
-explicitly approved. Implement only the frozen bounded continuation: promote
-the one owner and six rules at their probed owner positions; add permanent
-object/arrow/reindexing/negative/non-collapse checks; satisfy the warning,
-strict-LHS, catalog, health, examples, and CI SOP; transfer the exact
-prerequisite and semantic closure through generic TypeScript engines; and add
-only the root-only recursive consumer. Do not assume a generic total-category
-pullback/equivalence, raw product-reindex equality, arbitrary mixed variance,
-or general :^nd coherence.
+explicitly approved, and its frozen bounded continuation is complete.
+Preserve exactly the one owner and six rules at their reviewed owner
+positions, permanent object/arrow/reindexing/negative/non-collapse checks,
+generic prerequisite and semantic transfer, root-only recursive consumer,
+runnable demo, and recorded checkpoints. Do not reopen the slice or assume a
+generic total-category pullback/equivalence, raw product-reindex equality,
+arbitrary mixed variance, or general `:^nd` coherence.
 
 Preserve the non-self-authorizing
 DISPLAYED-CHAIN-TRANSFER-CORRECTION-0A proposal and its separate delegated
@@ -2373,11 +2570,12 @@ one typed unused-term capture. Keep the mathematical delta at one owner/six
 rules and preserve every recorded non-effect. The mirror is a bounded
 checkpoint-isolation bridge for a transferred free declaration; the existing
 SCALE-INTRINSIC-DELTA-1 intrinsic-owner facility does not yet refine that
-free declaration in place. Defer the generic DECL-REFINE-1A qualification,
-which must compare dependency-closed canonical relinking with monotone
-checked signature-to-body merging and select the simpler adequate strategy,
-and any bulk-transfer claim until after the displayed-chain demo. Neither
-candidate may change LF/Core semantics. Preserve
+free declaration in place. Keep the generic `DECL-REFINE-1A` qualification
+optional and deferred until a measured independent-fragment/module-linking
+need justifies comparing dependency-closed canonical relinking with monotone
+checked signature-to-body merging. The completed displayed-chain demo proves
+that this facility is not a semantic prerequisite. Neither candidate may
+change LF/Core semantics. Preserve
 the exact separate review checkpoint
 `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`.
 
@@ -2391,6 +2589,8 @@ integration, publication, or history-rewrite actions.
 
 Use the existing local-checkpoint authorization only after bounded green
 validation, synchronized ledgers, exact staging, and
-git diff --cached --check. Do not push, merge, publish, rewrite history, or
-clean up the preserved worktree artifacts.
+git diff --cached --check. After DISPLAYED-INTEGRATE-1 consumes its one-time
+exact cleanup and local fast-forward authorization, do not push, merge,
+publish, rewrite history, remove branches/worktrees, or clean up other
+preserved artifacts without new authorization.
 ```

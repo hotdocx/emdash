@@ -3656,14 +3656,18 @@ PLAN-0.
 
 ## Persistent `/goal` Launch Prompt
 
-The following prompt is ready to use. It explicitly authorizes creating or
-reusing one dedicated local goal branch/worktree and making local validated
-checkpoint commits there; it does not authorize pushing, merging, publishing,
-rewriting history, or deleting worktrees.
+The prompt below is retained as frozen MVP-era recovery history and is **not**
+the current launch prompt. Use the ready-to-paste prompt in
+[`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
+As of 2026-07-29 the one-edge DISPLAYED-CHAIN-1A slice is complete; the next
+row is proposal-only DISPLAYED-BRACKET-GRADUATE-1, followed only after
+separate review by the mixed three-level telescope, general `:^nd`, and the
+selected scale sequence. The historical text below must not be used to resume
+the completed fibred-context or displayed-chain implementation.
 
-Before pasting it, start a new Codex session from the Git root, review and
-trust the root project hook through `/hooks`, and verify the shared archive as
-described in `PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
+When starting a fresh persistent session, review and trust the root project
+hook through `/hooks` and verify the shared archive as described in
+`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`.
 
 ```text
 Kick off or continue implementing

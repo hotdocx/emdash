@@ -56,6 +56,17 @@ to compare direct and nested displayed-functor classifiers while preserving
 runtime non-conversion. This is concrete mechanical-reuse evidence for the
 generic transfer architecture, not promotion of the remaining scale corpus
 or acquisition work.
+On 2026-07-29 the user accepted the post-chain integration assessment and
+selected the continuation order. The displayed usability path is complete
+through stable evaluation and one genuine dependency edge; its immediate
+successor is proposal-only DISPLAYED-BRACKET-GRADUATE-1, followed only after
+a separate decision by a three-level mixed dependency/sibling telescope and
+then a general `:^nd` audit. When control returns to this scale plan, the
+selected order is SCALE-KIND-PI-1, SCALE-INDUCTIVE-1B,
+SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
+`DECL-REFINE-1A` facility is optional deferred TypeScript
+implementation/module-linking work, not a new LF semantic feature and not a
+prerequisite for the completed displayed-chain demo.
 Detailed-Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
@@ -583,6 +594,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-STRESS-3A2 | complete | SCALE-STRESS-3A1, SCALE-0D | Completed representation-only parent for `ProfMap`, comparison push/pull, product/projection closure, `Prof_tensor_map`/`Prof_tensor_func`, and representative object/capped-arrow action rules |
 | SCALE-STRESS-3A2A | complete | SCALE-STRESS-3A1, SCALE-CONVERSION-CONGRUENCE-1 | Pin the exact transparent `Hom` equation, identity declaration/computation, `ProfMap`, and comparison push/pull closure; compile one intrinsic-owner definition, eight free declarations, and one source rule after the reviewed continuation without activating a profile |
 | SCALE-INTRINSIC-DELTA-1 | complete | SCALE-0C, SCALE-STRESS-3A2A, SCALE-STRESS-3A2B dependency audit | Permit `checked-transparent-definition` on an existing Core-owner link; check its exact intrinsic signature and body, retain immutable dependency evidence, reject self/graph cycles, refine only the same prior intrinsic-conformance symbol, and delta-unfold owner applications under the existing shared bound |
+| DECL-REFINE-1A | optional and deferred; not selected | a measured need to link independently compiled opaque-signature and transparent-body fragments that dependency-closed canonical relinking cannot satisfy | Compare dependency-closed canonical relinking with monotone checked signature-to-body module merging. This is implementation/linking infrastructure only: it may not add an LF term former, Core owner, evaluator rule, or mathematical semantic owner. Prefer no new mechanism when canonical relinking is adequate |
 | SCALE-STRESS-3A2B | complete | SCALE-STRESS-3A2A, SCALE-INTRINSIC-DELTA-1, SCALE-0D | Pin the six-declaration/five-rule product/projection closure plus `Prof_tensor_map`/`Prof_tensor_func`; strictly type and execute object/capped-arrow action through data/policy only, with bounded live agreement and no subject oracle |
 | SCALE-STRESS-3B | paused after completed 3B0 | SCALE-STRESS-3A2 or independently ready module closure | Parent row for protected one-way module visibility, checked declaration acquisition, and proof-heavy evidence bodies without promoting theorem source to runtime computation; wider transfer resumes through direct typed data or a separately justified adapter after the usability critical path or an independent measured need |
 | SCALE-MODULE-VISIBILITY-1 | complete | SCALE-0C through SCALE-0E, first protected dependency consumer | Derive an immutable public/protected/private exposition interface from exact compiled provider artifacts; preserve the provider's full checked environment; permit protected imports only in external runtime patterns; reject private/general use and link/environment drift |
@@ -2625,26 +2637,30 @@ Temporary local checkpoint commits are authorized only on the existing
 green, this ledger and affected navigation are synchronized, and the exact
 staged diff excludes unrelated work.
 
-No push, merge, PR, publication, release, new branch/worktree, rebase, amend,
-reset, history rewrite, branch/worktree deletion, or unrelated cleanup is
-authorized.
+The more specific displayed-plan authorization governs
+DISPLAYED-INTEGRATE-1 only: it permits the six exact verified generated-probe
+deletions, one validated consolidation checkpoint, and a local
+fast-forward-only merge into `main`. Once consumed, no push, further merge,
+PR, publication, release, new branch/worktree, rebase, amend, reset, history
+rewrite, branch/worktree deletion, or unrelated cleanup is authorized.
 
 ## Persistent `/goal` Launch Prompt
 
 ```text
 Kick off or continue implementing
-docs/TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md, while preserving
-docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md as the retained
-systematic-transfer ledger.
+docs/TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md, while preserving
+docs/TYPESCRIPT_ELABORATOR_V3_2_USABILITY_PLAN.md as its parent and this
+scale plan as the retained systematic-transfer ledger.
 
 Treat its Persistent /goal Launch Prompt as part of the objective. Recover
 actual state from active code, checks, the plan and its ledgers, all Git
 worktrees and staged/unstaged diffs, and the active authority order. Follow
 the root AGENTS.md and, for every emdash2 action, emdash2/AGENTS.md and the
-current v3.2 SOP. Preserve completed USABILITY-0A/0B/1A/1B/1C/1D and resume the
-current next dependency-ready bounded slice named by the usability ledger,
-and implement executable evidence rather than only extending the
-architectural prose.
+current v3.2 SOP. Preserve the completed usability and displayed-chain
+tranches. The current next dependency-ready row is proposal-only
+DISPLAYED-BRACKET-GRADUATE-1; implement executable, deeply immutable
+assessment evidence rather than only extending prose, but do not implement a
+new semantic row before its separate decision.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit
@@ -2667,11 +2683,14 @@ production must not invoke Lambdapi.
 Follow approved D-DTTLF-USABILITY-001. The isolated unexported canonical
 symbol-parser prototype is removed and SCALE-ACQUIRE-1B plus bulk
 SCALE-STRESS-3B1/3B2 are deferred. Do not recreate that parser or make the
-measured 70-root/extension closures the immediate critical path. First package
-the existing dependent Sigma-telescope computation, then qualify the
-categorical-binder/contextual-IR frontend through ordinary functorial and one
-natural/displayed example as specified by the usability plan. Direct typed
-construction remains the default acquisition path; reconsider a narrow
+measured 70-root/extension closures the immediate critical path. The
+dependent Sigma-telescope demo, ordinary bracket, independent displayed
+siblings, stable displayed evaluation, and one genuine dependent-chain
+example are now complete. Freeze their exact envelope through
+DISPLAYED-BRACKET-GRADUATE-1. Subject to its separate decision, stress one
+three-level mixed telescope with both dependency edges and independent
+fibred siblings, then audit general `:^nd`. Direct typed construction remains
+the default acquisition path; reconsider a narrow
 adapter only after measured repetition and a synchronized plan decision.
 Preserve the completed ordinary bracket evidence: the thirteen-prerequisite
 typed catalog plus `Functor_cat`/`Functor` support, sole generic
@@ -2698,6 +2717,15 @@ from concrete authority and consumer evidence. Do not misstate the completed
 non-eta witness as general dependent bracket abstraction or whole-library
 transfer, and do not infer acquisition resumption from it.
 
+Keep `DECL-REFINE-1A` optional and deferred. Dependency-closed canonical
+relinking is the default; compare monotone checked signature-to-body module
+merging only after a measured independent-fragment need. Neither strategy may
+change LF/Core semantics. Once the displayed graduation, mixed-telescope
+stress, and `:^nd` audit return control here, resume in this order:
+SCALE-KIND-PI-1, SCALE-INDUCTIVE-1B, SCALE-STRESS-3C,
+SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently substitute the pending
+SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
+
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
 dependencies, or proof problems. Never add an owner-named term node,
@@ -2719,7 +2747,9 @@ reviewed continuation implementation checkpoint, and recover the actual
 descendant HEAD. These are comparison/backtracking evidence, never
 permission to reset or rewrite descendants.
 
-The existing authorization permits temporary local checkpoint commits only
+After the one-time DISPLAYED-INTEGRATE-1 cleanup and local-main fast-forward
+are consumed, the existing authorization permits temporary local checkpoint
+commits only
 on the existing goal branch after a bounded green tranche, synchronized
 ledger/navigation, and exact staged-diff review. It authorizes no other Git
 mutation, integration, remote operation, publication, release, or cleanup.
@@ -2732,6 +2762,15 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — Post-chain routing and deferred module-refinement
+  classification synchronized.** The completed one-edge displayed-chain
+  consumer returns no immediate authority to bulk transfer. The selected
+  order is displayed graduation, a separately reviewed three-level mixed
+  telescope, a general `:^nd` audit, then SCALE-KIND-PI-1,
+  SCALE-INDUCTIVE-1B, SCALE-STRESS-3C, SCALE-BATCH-1, and
+  SCALE-GRADUATE-1. `DECL-REFINE-1A` is recorded as optional
+  implementation/module-linking infrastructure triggered only by measured
+  need, never as a new LF semantic feature.
 - **2026-07-24 — SCALE-PLAN-0 opened.** Corrected the scalability verdict:
   the foundational spine is retained, but a systematic full-development
   transfer is not yet qualified. Recorded canonical-export evidence across
