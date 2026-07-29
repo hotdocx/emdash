@@ -3663,7 +3663,8 @@ As of 2026-07-29 the one-edge DISPLAYED-CHAIN-1A slice is complete and the
 executable deeply immutable DISPLAYED-BRACKET-GRADUATE-1 proposal is green
 at checkpoint `6c06cb10ea6eb9fa298544d084df5f129950a3a1`. A separate
 immutable delegated review with human supersession records
-D-DTTLF-USABILITY-016 as approved exactly as proposed. It freezes the
+D-DTTLF-USABILITY-016 as approved exactly as proposed at checkpoint
+`24ce6ffede79e115bc5d387c65366598e56f5d3d`. It freezes the
 recursive-body versus bounded-presentation distinction and authorizes only
 the exact existing-method four-binding/three-level `a; b,c; d` successor,
 with zero expected owner/rule/transfer delta and a mandatory closure-drift

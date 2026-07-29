@@ -154,7 +154,8 @@ conclusion is narrower and clearer:
   H-DTTLF-USABILITY-DISPLAYED-GRADUATE-01/D-DTTLF-USABILITY-016 approval
   under the user's unattended delegation with human supersession; its ten
   focused review tests and aggregate 995-test gate pass; its proposal
-  checkpoint is `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; and
+  checkpoint is `6c06cb10ea6eb9fa298544d084df5f129950a3a1` and its exact
+  review checkpoint is `24ce6ffede79e115bc5d387c65366598e56f5d3d`; and
 - this settles a mechanically reusable architecture for the demonstrated
   envelope, not arbitrary depth, arbitrary mixed variance, general `:^nd`,
   whole-library transfer, groupoidal closure, or deployment.
@@ -792,7 +793,8 @@ fibred-context plan remains its authority and historical ledger. The
 current proposal-only DISPLAYED-BRACKET-GRADUATE-1 artifact is complete,
 green, checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`,
 and separately approved exactly as proposed under D-016 by an immutable
-delegated review with human supersession. Do not resume
+delegated review with human supersession at checkpoint
+`24ce6ffede79e115bc5d387c65366598e56f5d3d`. Do not resume
 the stale DISPLAYED-CHAIN-0A/1A implementation wording below: that slice is
 complete at its kernel, transfer, consumer, and ledger checkpoints. The
 dependency-ready stress is exactly the existing-method

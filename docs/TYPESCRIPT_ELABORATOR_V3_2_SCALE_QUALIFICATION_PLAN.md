@@ -62,7 +62,8 @@ through stable evaluation and one genuine dependency edge. Its executable
 deeply immutable DISPLAYED-BRACKET-GRADUATE-1 assessment is now green and
 checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`. A separate
 immutable delegated review with human supersession records
-D-DTTLF-USABILITY-016 as approved exactly as proposed; it authorizes only the
+D-DTTLF-USABILITY-016 as approved exactly as proposed at checkpoint
+`24ce6ffede79e115bc5d387c65366598e56f5d3d`; it authorizes only the
 existing-method `a; b,c; d` three-level successor with zero expected
 owner/rule/transfer delta and a mandatory stop on closure drift. Ten focused
 review tests and the aggregate 995-test reviewed root gate pass. The mixed
@@ -2778,7 +2779,8 @@ scope is affected.
   expected semantic/checker/transfer delta remains zero and any drift requires
   a separate decision. This changes no scale profile or bulk-acquisition
   authority. Ten focused review tests, the 995-test root gate, all 19 live
-  conformance judgments, and the bounded active-kernel check pass.
+  conformance judgments, and the bounded active-kernel check pass. Exact
+  review checkpoint: `24ce6ffede79e115bc5d387c65366598e56f5d3d`.
 - **2026-07-29 — Displayed graduation proposal synchronized.** The
   executable proposal now freezes the demonstrated architecture separately
   from arbitrary-depth and whole-transfer claims. Its only proposed successor
