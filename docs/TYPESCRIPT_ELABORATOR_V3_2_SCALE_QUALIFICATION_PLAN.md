@@ -88,8 +88,12 @@ remain separate. Its seven focused tests, 1,029-test root gate (982 active
 passes and 47 intentional skips), all 19 live conformance judgments, and
 bounded active-kernel check pass. Await/review D-018 and complete its selected
 ND tranche before returning here. Its exact proposal checkpoint is
-`bc29f0d98de32fe0fdbad992859e97711e493e5c`. When control returns to this
-scale plan, the selected order is SCALE-KIND-PI-1,
+`bc29f0d98de32fe0fdbad992859e97711e493e5c`. A separate immutable delegated
+review now records D-018 approval with human supersession; its focused gate
+and 1,036-test aggregate gate pass together with 19/19 live conformance and
+the bounded active-kernel check. Its exact checkpoint remains mandatory
+before implementation. When control returns to this scale plan, the selected
+order is SCALE-KIND-PI-1,
 SCALE-INDUCTIVE-1B,
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
@@ -2806,6 +2810,14 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-USABILITY-018 delegated review opened.** After no
+  immediate human response to the exact checkpointed proposal, a separate
+  immutable review records approval under the user's standing delegation
+  with human supersession. It authorizes only the zero-semantic-delta
+  recursive vertical-composition frontend case and changes no scale profile.
+  Seven focused review tests, the 1,036-test root gate, all 19 live
+  conformance judgments, and the bounded active-kernel check pass; its exact
+  checkpoint remains required before implementation.
 - **2026-07-29 — DISPLAYED-ND-0A audit returned a bounded D-018 gate.**
   The displayed critical path now has executable evidence distinguishing
   coherent `Transfd` introduction from object/point/base-arrow/next-hom
