@@ -312,11 +312,11 @@ const activeRepresentativeInput = (): CoreLfModuleSpecInput => {
         fragmentId: 'scale-representation-witness',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:10638f01b4bd2163b7c7cd254db76d5343b073ddbc7cc7a18c6ca2755c35a91a',
+            'sha256:16b5b1adc5ec462012e03555cfe65db91679983ef370e01adb9948a0bacc61cb',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:c736d3447721ac7a48b6f35f5287734774816283954eb25a35de09c0f0b9c425'
+                'sha256:18500d46d4ff3583fef1f25a3c28eff7b849a61d528a6f9e20e89b32db13f1b2'
         },
         dependencies: [],
         externalSymbols: [

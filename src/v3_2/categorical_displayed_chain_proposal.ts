@@ -10,7 +10,6 @@ import {
     CORE_CATEGORICAL_COMPREHENSION_TRANSFER_BOUNDARY
 } from './categorical_comprehension_transfer';
 import {
-    CORE_CATEGORICAL_DISPLAYED_EVALUATION_SOURCE_SHA256,
     CORE_CATEGORICAL_DISPLAYED_EVALUATION_TRANSFER_BOUNDARY,
     CORE_CATEGORICAL_DISPLAYED_EVALUATION_TRANSFER_REVISION
 } from './categorical_displayed_evaluation_transfer';
@@ -35,6 +34,15 @@ const deepFreeze = <T>(value: T): T => {
     return value;
 };
 
+/**
+ * Preserve the exact source snapshot reviewed at the recorded
+ * DISPLAYED-EVAL-1A checkpoint. The live transfer module's conformance hash
+ * advances whenever the active authority gains later declarations; a frozen
+ * proposal must not change retroactively with it.
+ */
+const DISPLAYED_EVALUATION_CHECKPOINT_SOURCE_SHA256 =
+    'sha256:10638f01b4bd2163b7c7cd254db76d5343b073ddbc7cc7a18c6ca2755c35a91a';
+
 const rawProposal = {
     revision: 'DISPLAYED-CHAIN-0A-PROPOSAL-1',
     status:
@@ -45,7 +53,7 @@ const rawProposal = {
         displayedEvaluationTransferRevision:
             CORE_CATEGORICAL_DISPLAYED_EVALUATION_TRANSFER_REVISION,
         displayedEvaluationSourceSha256:
-            CORE_CATEGORICAL_DISPLAYED_EVALUATION_SOURCE_SHA256,
+            DISPLAYED_EVALUATION_CHECKPOINT_SOURCE_SHA256,
         displayedEvaluationImplementationCheckpoint:
             '1a7ce3f023391aa22c34dc5626057710429bc7c3',
         displayedEvaluationLedgerCheckpoint:
@@ -480,7 +488,7 @@ export function validateCoreCategoricalDisplayedChainProposal(
         proposal.prerequisite.displayedEvaluationTransferRevision !==
             CORE_CATEGORICAL_DISPLAYED_EVALUATION_TRANSFER_REVISION ||
         proposal.prerequisite.displayedEvaluationSourceSha256 !==
-            CORE_CATEGORICAL_DISPLAYED_EVALUATION_SOURCE_SHA256 ||
+            DISPLAYED_EVALUATION_CHECKPOINT_SOURCE_SHA256 ||
         proposal.prerequisite.displayedEvaluationOwnerCount !== 2 ||
         proposal.prerequisite.displayedEvaluationRuntimeRuleCount !== 2 ||
         proposal.prerequisite.measuredRootGate.tests !== 904 ||
