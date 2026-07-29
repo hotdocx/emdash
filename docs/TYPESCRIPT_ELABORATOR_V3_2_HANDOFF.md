@@ -362,8 +362,17 @@ promotion nor a parser dependency is selected. This priority insertion does
 not close or cancel SCALE-STRESS-3C, SCALE-BATCH-1, or SCALE-GRADUATE-1.
 The exact PRODUCT-DEMO-1A implementation contract is now separately approved
 under H-DTTLF-PRODUCT-DEMO-01/D-DTTLF-PRODUCT-DEMO-001 with human
-supersession after proposal checkpoint `e786c61`; PRODUCT-DEMO-1B is
-dependency-ready.
+supersession after proposal checkpoint `e786c61`. PRODUCT-DEMO-1B now
+implements its exact root-only scope: one structured three-panel report and
+`demo:external-review` command over the existing outer dependent-LF,
+ordinary bracket, and genuine displayed-chain results, plus a self-contained
+guide and five focused tests. The actual command passes; the aggregate
+TypeScript gate passes 1,109 tests (1,058 active passes and 51 intentional
+skips), and the bounded active-kernel check passes. The browser, parser,
+dependencies, Lambdapi sources, generic engines, elaborators, and
+mathematical owners/rules have zero delta. The optional higher-action command
+remains outside the default report. PRODUCT-DEMO-ORACLE-0A is next after the
+exact implementation checkpoint.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark

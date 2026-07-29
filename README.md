@@ -142,6 +142,30 @@ Canonical export is a development/build interchange candidate only. The
 handwritten Lambdapi sources remain mathematical authority, semantic import
 still requires review, and production has no Lambdapi runtime dependency.
 
+## TypeScript external-review demo
+
+The current root-only TypeScript continuation can be reviewed as one
+three-panel demonstration:
+
+```bash
+./scripts/pnpmw run demo:external-review
+```
+
+It runs the existing outer dependent-LF Sigma-telescope, ordinary functorial
+bracket, and genuine displayed dependency-chain witnesses; prints explicit
+Core, inferred/reduced types, structural lowering, object/arrow computation,
+and negative diagnostics; and has no production Lambdapi or string-parser
+dependency. The command adds no mathematical owner, runtime rule, or checker
+branch and does not change the frozen browser profile.
+
+The self-contained walkthrough and exact limitation boundary are in
+[`./docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md).
+The optional higher-action witness remains available as:
+
+```bash
+./scripts/pnpmw run demo:categorical-displayed-nd-higher
+```
+
 ## Development workspace and Git worktrees
 
 The repository uses one pnpm 11 workspace and one `pnpm-lock.yaml` for the

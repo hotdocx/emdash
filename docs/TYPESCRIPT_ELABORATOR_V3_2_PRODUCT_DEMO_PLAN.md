@@ -13,7 +13,8 @@ usability result, or browser boundary
 Status: active living product-facing continuation; inventory
 PRODUCT-DEMO-0A is complete; the exact PRODUCT-DEMO-1A implementation
 proposal is separately approved under D-DTTLF-PRODUCT-DEMO-001 with human
-supersession; PRODUCT-DEMO-1B is dependency-ready
+supersession; PRODUCT-DEMO-1B is implemented and final-green pending its exact
+local checkpoint; PRODUCT-DEMO-ORACLE-0A is next
 
 ## Human Direction And Purpose
 
@@ -279,14 +280,53 @@ and guide from existing green structured demos, retain the higher-action
 witness as optional unless measured cheap, add no semantic or browser/parser
 change, and preserve every listed deferral.
 
+## PRODUCT-DEMO-1B — Implementation Record
+
+PRODUCT-DEMO-1B implements exactly D-DTTLF-PRODUCT-DEMO-001:
+
+- `src/v3_2/product_review_demo.ts` composes the existing structured
+  directed-dependent, ordinary bracket, and displayed-chain results;
+- `examples/v3_2_product_review_demo.ts` and
+  `demo:external-review` expose one root command;
+- the formatter presents one coherent report rather than concatenating the
+  three verbose component formatters;
+- the root barrel exports the report, while `src/v3_2/browser.ts` remains
+  unchanged;
+- the external-review guide gives the default, full-component, optional
+  higher-action, TypeScript validation, and bounded Lambdapi-oracle commands;
+  and
+- focused tests fail closed on component-boundary drift and verify exact
+  panel selection, readonly report structure, deterministic formatting, zero
+  semantic effect, browser exclusion, and no process oracle.
+
+Observed validation:
+
+- focused PRODUCT-DEMO-1B: 5/5 tests pass;
+- actual `demo:external-review`: pass, 68.59-second local cold CLI
+  observation;
+- aggregate `check:ts`: 1,109 tests, 1,058 active passes, 51 intentional
+  skips, zero failures, 1,155,579 ms;
+- bounded `EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check`: pass; and
+- browser entry point, lockfile, Lambdapi sources, owners/rules, checker,
+  evaluator, transfer engines, contextual elaborators, and dependencies:
+  zero delta.
+
+The aggregate process reused warmed component modules and recorded the
+product report's three-panel execution at 2.1 seconds. These two timings are
+orientation evidence only; no performance SLA is claimed. The slower
+displayed next-hom/higher-action command remains optional.
+
+Exact local implementation checkpoint: pending the required staged-diff
+review.
+
 ## Later Bounded Rows
 
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | PRODUCT-DEMO-0A | complete | current code and history | Existing demo/API/browser/parser inventory and feasibility verdict recorded above |
 | PRODUCT-DEMO-1A | approved exactly as proposed under D-DTTLF-PRODUCT-DEMO-001 with human supersession; proposal checkpoint `e786c61` | PRODUCT-DEMO-0A | Deeply frozen three-panel external-review implementation contract |
-| PRODUCT-DEMO-1B | dependency-ready | approved PRODUCT-DEMO-1A | Root-only report module, command, reviewer guide, tests, and synchronized navigation |
-| PRODUCT-DEMO-ORACLE-0A | pending | PRODUCT-DEMO-1B | Decide whether one bounded optional conformance command materially improves peer review without making Lambdapi a runtime dependency |
+| PRODUCT-DEMO-1B | implemented and final-green; exact checkpoint pending staged review | approved PRODUCT-DEMO-1A | Root-only three-panel report module, command, reviewer guide, tests, and synchronized navigation with zero semantic/browser/parser delta |
+| PRODUCT-DEMO-ORACLE-0A | next | PRODUCT-DEMO-1B | Decide whether one bounded optional conformance command materially improves peer review without making Lambdapi a runtime dependency |
 | PRODUCT-BROWSER-0A | pending | PRODUCT-DEMO-1B | Measure transitive browser safety, bundle/worker/startup boundary, exact public facade, and minimal UI options; produce a separate implementation proposal only if justified |
 | PRODUCT-BROWSER-1 | gated/deferred | approved browser proposal | Implement only the selected browser profile and UI; likely deserves a dedicated subplan |
 | PRODUCT-SYNTAX-0A | pending | PRODUCT-DEMO-1B | Compare direct TypeScript, historical Parsimmon grammar, tagged-template, and small located-syntax adapters against the existing contextual compiler; freeze mode/application and diagnostic boundaries |
@@ -434,3 +474,9 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   root-only PRODUCT-DEMO-1B report/guide/test scope under the user's standing
   unattended delegation. It authorizes no semantic, parser, browser,
   dependency, Lambdapi, or broader Git change.
+- **2026-07-29 — PRODUCT-DEMO-1B implemented and final-green.** Added one
+  root-only three-panel structured report, CLI command, reviewer guide, and
+  five focused tests. The actual command and 1,109-test aggregate gate pass,
+  as does the bounded active-kernel check. The browser, parser/dependencies,
+  Lambdapi sources, generic engines, elaborators, and mathematical
+  owners/rules are unchanged. Exact checkpoint follows staged review.
