@@ -100,6 +100,7 @@ import './v3_2_categorical_displayed_chain_review_tests';
 import './v3_2_categorical_displayed_chain_transfer_correction_proposal_tests';
 import './v3_2_categorical_displayed_chain_transfer_correction_review_tests';
 import './v3_2_categorical_displayed_chain_constant_functor_correction_proposal_tests';
+import './v3_2_categorical_displayed_chain_constant_functor_correction_review_tests';
 import './v3_2_categorical_usability_graduation_proposal_tests';
 import './v3_2_categorical_usability_graduation_review_tests';
 import './v3_2_categorical_dependent_usability_review_tests';
