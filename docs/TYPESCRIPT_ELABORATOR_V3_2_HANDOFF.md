@@ -315,8 +315,8 @@ standing unattended delegation with human supersession. Its five focused
 tests, typecheck, and lint pass. Exact review checkpoint:
 `33960a8b6aa924e5d69f438b0b43881b4e13f029`.
 
-SCALE-INDUCTIVE-1B1 is now implemented and final-green, with only the local
-checkpoint synchronization pending. The revision-2 stress
+SCALE-INDUCTIVE-1B1 is implemented and final-green at exact local checkpoint
+`45ca42801677a37c1ec079a278085262bcaa000e`. The revision-2 stress
 representation classifies inline `a,P` as indices and explicitly rebinds them
 in `Struct_sigma`, while a reconstructed legacy view proves zero erased
 signature delta. The new owner-generic
@@ -365,7 +365,7 @@ The displayed-bracket integration, mixed telescope, `:^nd` component and
 higher-action qualification, and SCALE-KIND-PI-1 are now complete. Use the
 scale plan's living launch prompt. The selected sequence is:
 
-1. checkpoint the final-green SCALE-INDUCTIVE-1B1 implementation;
+1. preserve the final-green SCALE-INDUCTIVE-1B1 implementation checkpoint;
 2. perform the read-only SCALE-INDUCTIVE-HYBRID-0A audit, beginning with the
    lean expanded-symbol `ind_nat` declaration/rules/consumer route;
 3. freeze and implement only the smallest evidence-selected

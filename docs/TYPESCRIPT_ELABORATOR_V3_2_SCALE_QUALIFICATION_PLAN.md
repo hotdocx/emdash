@@ -150,9 +150,10 @@ contract and explicitly withholds an end-user inductive-declaration facade.
 Exact proposal/audit checkpoint:
 `830fb975756d1d13d8ddcb516690ea88b19d51d6`; proposal-ledger checkpoint:
 `ecc0cf32b3b5a96662cca2b9e1fff283e65f9d59`; exact separate review
-checkpoint: `33960a8b6aa924e5d69f438b0b43881b4e13f029`. The following
-order is the SCALE-INDUCTIVE-1B1 implementation checkpoint, a read-only
-SCALE-INDUCTIVE-HYBRID-0A necessity/architecture audit, the selected
+checkpoint: `33960a8b6aa924e5d69f438b0b43881b4e13f029`. The final-green
+SCALE-INDUCTIVE-1B1 implementation is checkpointed at
+`45ca42801677a37c1ec079a278085262bcaa000e`. The following order is a
+read-only SCALE-INDUCTIVE-HYBRID-0A necessity/architecture audit, the selected
 SCALE-INDUCTIVE-1B2 `ind_nat` route, SCALE-STRESS-3C, SCALE-BATCH-1, and
 SCALE-GRADUATE-1. The 1B1 implementation and all final gates are green. Its
 explicit generated declaration and beta are ordinary checked transfer
@@ -676,8 +677,8 @@ The architecture qualifies only when all of the following hold:
 | SCALE-INDUCTIVE-1 | in progress | SCALE-STRESS-1A | Parent row for generic inductive signatures, recursive/indexed validation, and explicitly typed generated owners; no active semantic promotion |
 | SCALE-INDUCTIVE-1A | complete | SCALE-STRESS-1A | Owner-free immutable signature erasure lowers inductive heads and constructors to ordinary declaration compilation, preserves generated identities as withheld evidence, and fails closed when an untyped generated owner is consumed |
 | SCALE-INDUCTIVE-1B | in progress | SCALE-INDUCTIVE-1A, first generated-owner consumer, applicable LF semantic review | Parent row for explicit generated-owner contracts, parameter/index fidelity, recursive/indexed validation, and strict-positivity boundaries; no backend-generated owner is trusted from its name alone |
-| SCALE-INDUCTIVE-1B1 | implementation complete and final-green; local implementation checkpoint pending; review `33960a8b6aa924e5d69f438b0b43881b4e13f029`; proposal `830fb975756d1d13d8ddcb516690ea88b19d51d6` | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Corrected the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; the new owner-generic explicit-contract association validates unique generated identity, `generatedBy`, exact opaque declaration/rule ownership, expected indexed shape, and zero recursive occurrences; the existing generic engines check the exact `ind_τΣ_` type, beta, and polymorphic first-projection consumer |
-| SCALE-INDUCTIVE-HYBRID-0A | pending read-only audit after the 1B1 checkpoint | SCALE-INDUCTIVE-1B1 | Compare the lean expanded-symbol route—an explicit checked `ind_nat` declaration plus its two ordinary runtime rules and consumer—against optional generated-owner provenance validation; determine from executable evidence whether any recursive association/positivity machinery is required before freezing 1B2 |
+| SCALE-INDUCTIVE-1B1 | complete at `45ca42801677a37c1ec079a278085262bcaa000e`; review `33960a8b6aa924e5d69f438b0b43881b4e13f029`; proposal `830fb975756d1d13d8ddcb516690ea88b19d51d6` | SCALE-INDUCTIVE-1A, SCALE-KIND-PI-1, live `ind_τΣ_` print and consumer | Corrected the acquired `τΣ_` inline binders from fixed parameters to indices with zero erased-signature delta; the new owner-generic explicit-contract association validates unique generated identity, `generatedBy`, exact opaque declaration/rule ownership, expected indexed shape, and zero recursive occurrences; the existing generic engines check the exact `ind_τΣ_` type, beta, and polymorphic first-projection consumer |
+| SCALE-INDUCTIVE-HYBRID-0A | dependency-ready read-only audit | SCALE-INDUCTIVE-1B1 | Compare the lean expanded-symbol route—an explicit checked `ind_nat` declaration plus its two ordinary runtime rules and consumer—against optional generated-owner provenance validation; determine from executable evidence whether any recursive association/positivity machinery is required before freezing 1B2 |
 | SCALE-INDUCTIVE-1B2 | pending selected implementation after SCALE-INDUCTIVE-HYBRID-0A | SCALE-INDUCTIVE-HYBRID-0A | Implement the smallest reviewed route that faithfully transfers the measured `ind_nat` declaration, two betas, recursive induction-hypothesis behavior, and a real consumer through the ordinary engines; add TypeScript-side positivity validation or generation only if the audit demonstrates it is required, and otherwise retain it with mutual/higher-order inductives and an end-user declaration API as deferred work |
 | SCALE-KIND-PI-1 | complete at `b4cb8d39bd31adc768784308263fd91d83ddeefe`; audit/proposal checkpoint `62452031f963b272538360871256bbdf2efc43f7`; H-DTTLF-LF-SORT-01/D-DTTLF-LF-SORT-001 directly approved exactly as proposed | SCALE-INDUCTIVE-1A and live Lambdapi product-sort matrix | Preserves the already Lambdapi-aligned lambda-Pi checker: Pi domain annotations must have sort `TYPE`; bodies may have sort `TYPE` or `KIND` and determine the result sort; `KIND`-domain products and `TYPE : TYPE` remain rejected. Corrected the misleading checker-test and inductive/mixed boundary labels to require explicit code universes such as `Grpd : TYPE`/`τ : Grpd → TYPE` rather than inventing native `TYPE` quantification |
 | SCALE-MIXED-PHASE-1 | complete | SCALE-STRESS-1A, SCALE-INDUCTIVE-1A | Exact source-order orchestration, module/prior runtime composition, source-time proof evidence, and completed-signature proof execution are implemented without mutable registration |
@@ -3217,8 +3218,9 @@ preserve the completed SCALE-KIND-PI-1 product-sort audit and its directly
 approved no-semantic-change correction. Preserve the completed/final-green
 SCALE-INDUCTIVE-1B1 parameter/index correction and explicit generated
 contract, including its exact separate
-D-DTTLF-SCALE-INDUCTIVE-001 review. Finish only missing checkpoint
-synchronization, then perform SCALE-INDUCTIVE-HYBRID-0A as a read-only
+D-DTTLF-SCALE-INDUCTIVE-001 review and implementation checkpoint
+`45ca42801677a37c1ec079a278085262bcaa000e`. Perform
+SCALE-INDUCTIVE-HYBRID-0A as a read-only
 necessity audit: try `ind_nat` first as one explicit ordinary declaration,
 two ordinary rules, and one consumer through existing engines; distinguish
 that semantic transfer baseline from optional provenance association; and
@@ -3285,8 +3287,8 @@ scope is affected.
   convenience remain outside 1B1; the association is recorded as bounded
   integrity/provenance evidence, not a newly required LF semantic feature.
   SCALE-INDUCTIVE-HYBRID-0A will test the lean expanded-symbol `ind_nat` route
-  before any 1B2 design is frozen. The local implementation checkpoint remains
-  pending.
+  before any 1B2 design is frozen. Exact local implementation checkpoint:
+  `45ca42801677a37c1ec079a278085262bcaa000e`.
 - **2026-07-29 — D-DTTLF-SCALE-INDUCTIVE-001 separately reviewed.**
   After the exact checkpointed gate was presented without an immediate
   objection, the standing unattended delegation records approval as proposed
