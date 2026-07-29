@@ -542,7 +542,8 @@ is compositional, authority-correct behavior rather than code deduplication.
 | DISPLAYED-CHAIN-1A | complete, green, and checkpointed `86ac6e480e50e38486bf4155556bbf41760be2cf`; one-owner/six-rule Lambdapi closure and nine permanent checks checkpointed `f22785e44cfc0a5185bb92e110a30c6a0ada7de4`; D-013 approves `Terminal_obj`; D-014 approves `Const_func`; D-015 approves the bounded computation closure under a separate delegated review with human supersession, checkpointed `7b19cf1aaf0a9643671d65a66a4568301d4f7cb9`; generic TypeScript declaration/runtime transfer is checkpointed `3d14825fe695d8c679d1168714164ec14cf6f05e`; the root-only recursive consumer and runnable demo pass nine new focused tests and the aggregate 973-test root gate (926 active passes, 47 intentional skips, zero failures) | reviewed DISPLAYED-CHAIN-0A/D-012, TRANSFER-CORRECTION-0A/D-013, CONST-FUNCTOR-CORRECTION-0A/D-014, and COMPUTATION-CLOSURE-CORRECTION-0A/D-015 | Retain exactly one new owner/six semantic rules; restore two exact transparent bodies, add one exact checked `Obj_func` mirror, five exact existing equations, one typed `piapp0` normal-form specialization, and one typed pattern capture through generic engines; add only the root-only `fibred-displayed-chain-1` recursive consumer and frozen object/internalized-arrow evidence corpus |
 | DISPLAYED-INTEGRATE-1 | complete and validated; exact consolidation checkpoint `222a718fc1ef667964a15cfec0e82e0cf807dd96` | complete DISPLAYED-CHAIN-1A and green full integration audit | Synchronized the displayed/usability/scale/handoff/master routing; classified `DECL-REFINE-1A` as optional deferred module/linking infrastructure; removed only six verified generated probe directories; passed the complete repository gate; checkpointed exactly the consolidation; and authorized the immediately following verified local-main fast-forward with no push or worktree removal |
 | DISPLAYED-BRACKET-GRADUATE-1 | executable deeply immutable proposal complete, green, and checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`; approved exactly as proposed by a separate delegated review with human supersession at checkpoint `24ce6ffede79e115bc5d387c65366598e56f5d3d` | completed independent-sibling and genuine-chain evidence | Freeze nine exact evidence classes, the recursive-body/bounded-presentation distinction, every withheld claim, and one exact zero-owner/rule-delta DISPLAYED-CHAIN-2A successor contract. Twelve focused proposal tests, ten focused review tests, the 985-test proposal gate, and the 995-test reviewed gate pass; the proposal remains non-self-authorizing |
-| DISPLAYED-CHAIN-2A | exact API/closure/corpus frozen inside DISPLAYED-BRACKET-GRADUATE-1; implementation ready under reviewed D-016 | approved D-DTTLF-USABILITY-016 | Extend the existing `displayedDependentContextLambda` method only to the flat source-ordered `a; b,c; d` shape. Derive the independent `b,c` group without user flags; use the transparent displayed product and sequential Sigma total; require object/internalized-arrow/reindexing/negative evidence and zero new owners/rules; halt for a separate closure proposal on drift |
+| DISPLAYED-CHAIN-2A | D-016 lowering audit reached the frozen mixed shape, then stopped exactly as required when the zero-rule/transfer assumption proved false; implementation remains gated on D-017 | approved D-DTTLF-USABILITY-016 plus pending DISPLAYED-CHAIN-2A-CLOSURE-0A | Extend the existing `displayedDependentContextLambda` method only to the flat source-ordered `a; b,c; d` shape. Derive the independent `b,c` group without user flags; use the transparent displayed product and sequential Sigma total; require object/internalized-arrow/reindexing/negative evidence. The lowering architecture and all object projections work, but the recursive paired internalized cell requires the separately proposed closure below |
+| DISPLAYED-CHAIN-2A-CLOSURE-0A | executable deeply immutable, non-self-authorizing proposal complete and green; awaiting H-DTTLF-USABILITY-DISPLAYED-CHAIN-2A-CLOSURE-01/D-DTTLF-USABILITY-017 | D-016 mandatory closure-drift stop plus owner-position Lambdapi and generic TypeScript prototypes | Add no owner: add one componentwise `fdapp1_int_cell(Product_pair_funcd(...))` rule; transfer three existing signatures, six exact existing equations, two checked `Product_pair` projection normal forms, and the new rule into an isolated `fibred-displayed-chain-2a` continuation; honor the existing generic LF comparison budget at 512 while retaining the 256 default; require zero oracle/intrinsic/owner-specific checker branch |
 | DISPLAYED-ND-0A | deferred behind graduation and the mixed-telescope stress | DISPLAYED-LIFTING-0A, DISPLAYED-CHAIN-1A, and the selected post-graduation boundary | Audit general `:^nd` coherence synthesis and higher action rather than extending coherent-eta recognition by cases |
 
 ## DISPLAYED-LIFTING-0A Frozen Executable Proposal
@@ -2287,8 +2288,165 @@ repeated 19-judgment live conformance gate and bounded active-kernel check
 pass. The review adds no semantic implementation; DISPLAYED-CHAIN-2A is only
 implementation-ready under the frozen contract.
 
+## DISPLAYED-CHAIN-2A Closure-Drift Proposal
+
+The D-016 implementation audit obeyed its mandatory stop condition. The
+existing recursive frontend successfully planned and lowered the exact frozen
+shape
+
+```text
+k : K;
+a : A[k];
+b : B[(k,a)], c : C[(k,a)];
+d : D[((k,a),(b,c))]
+```
+
+without adding another AST, checker, binder mode, or category-theoretic
+primitive. The middle sibling group is derived from the dependency graph and
+lowered through the existing transparent fibrewise product; the next level is
+the existing sequential Sigma/section-pullback substitution. All five object
+observations `a`, `b`, `c`, `d`, and `pair(b,c)` compute. The direct
+internalized-arrow observations for `a`, `b`, `c`, and `d` also compute and
+retain the intended noncollapsed hom-action.
+
+The recursive paired internalized cell did not compute. This falsifies only
+the D-016 zero-rule/zero-transfer expectation, not the lowering architecture:
+the active kernel lacks the componentwise projection
+
+```text
+fdapp1_int_cell(Product_pair_funcd(FF,GG),p,u)
+  ↪ Product_pair(
+      fdapp1_int_cell(FF,p,u),
+      fdapp1_int_cell(GG,p,u))
+```
+
+at the already-existing `fdapp1_int_cell` owner. No new `Product_catd`,
+dependent-binder owner, fibred-product primitive, or outer-LF connective is
+needed.
+
+The deeply frozen executable proposal is
+`src/v3_2/categorical_displayed_chain_2a_closure_proposal.ts`; its focused
+test is
+`tests/v3_2_categorical_displayed_chain_2a_closure_proposal_tests.ts`.
+It is pending
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-2A-CLOSURE-01/
+D-DTTLF-USABILITY-017 and authorizes nothing by itself.
+
+### Active-kernel qualification
+
+A full active-kernel copy placed the candidate at the owning
+`fdapp1_int_cell` position rather than appending it after the rest of the
+file. A generic positive conversion and an opaque-cell noncollapse negative
+both pass. The quiet and warning-enabled probes pass; strict inferred-slot
+audit reports zero unreviewed candidates. The warning inventory is exactly
+unchanged:
+
+| diagnostic | baseline | candidate | delta |
+| --- | ---: | ---: | ---: |
+| total warnings | 1179 | 1179 | 0 |
+| critical pairs | 1020 | 1020 | 0 |
+| replaceable pattern variables | 159 | 159 | 0 |
+
+The inferred target-family slot remains `_` in Lambdapi and a typed wildcard
+in transfer IR, following the active owner-position SOP. The warning result
+is diagnostic evidence, not a veto.
+
+### Exact TypeScript continuation closure
+
+The selected implementation does not expand the completed
+`fibred-displayed-chain-1` fragment in place. A new
+`categorical_displayed_chain_2a_closure_transfer` fragment and
+`fibred-displayed-chain-2a` profile compose the completed chain with exactly:
+
+- three existing signatures: `sigma_Fst`, `sigma_Snd`, and `Product_grpd`;
+- six exact existing runtime equations: `Product_grpd` decoding,
+  `Obj(Product_cat)`, left/right product-projection object action, general
+  product `Hom_cat`, and `Product_map_func` object action;
+- two checked explicit-Core normal forms reducing
+  `sigma_Fst/Snd(Product_pair(x,y))` directly, derived from the active
+  transparent `Product_pair` body plus existing Sigma constructor betas; and
+- the one new componentwise `fdapp1_int_cell(Product_pair_funcd(...))` rule.
+
+That is three transferred declarations and nine continuation runtime entries:
+six exact existing, two derived, and one new. Importing the two broad Sigma
+constructor betas was tested and is unnecessary, so the proposal omits them
+to limit unrelated normal-form effects. `DECL-REFINE-1A` remains optional and
+deferred; no transparent-declaration merge is needed for this slice.
+
+Two inferred-slot representation corrections are included: decoded Sigma
+constructor carrier/family slots and displayed projection source/target
+family slots become typed wildcards instead of accidentally rigid computed
+arguments. These changes mirror Lambdapi inference and alter neither the
+mathematical rules nor their selected normal forms.
+
+### Generic checking boundary
+
+The first TypeScript prototype stopped at the checker's fixed 256-step
+constraint comparison bound. The runtime compiler already accepts an explicit
+candidate comparison budget, but that constraint path did not honor it. The
+selected generic plumbing makes the LF checker use its existing configured
+budget while leaving the released/default Core checker at 256. The isolated
+continuation compiles at 512 steps. After the missing
+`Product_map_func` object action was imported, the new rule is
+`typescript-checked`; the fail-closed runtime compiler rejects an external
+subject-reduction oracle as unnecessary.
+
+This is bounded DevOps/checker-budget plumbing, not a new judgment,
+unification principle, evaluator case, or LF semantic feature. There are zero
+intrinsic Core owners, zero owner-specific checker/evaluator branches, and
+zero oracle exceptions.
+
+### Prototype evidence and remaining graduation corpus
+
+The final prototype establishes:
+
+- object equality for `a`, `b`, `c`, `d`, and `pair(b,c)`;
+- internalized-arrow independence for those same five observations, with the
+  paired case exercising the new rule;
+- noncollapse of the `b`, `c`, and paired cells against an arbitrary opaque
+  arrow; and
+- retention of the component `Product_pair` normal form for the paired cell.
+
+Implementation must still promote permanent ordinary-reindexing evidence and
+the frozen profile/base/arity/escape/foreign/dependency negatives. It must
+run the owner-position positive/noncollapse probes, bounded kernel check,
+warning comparison, strict LHS audit, catalog/health refreshes, focused/root
+tests, and the complete repository gate before a checkpoint.
+
+### Alternatives and authorization boundary
+
+The proposal rejects pretending that D-016 remains zero-delta, adding a new
+product/binder owner, using an external oracle, or importing broad Sigma
+constructor computation. It defers declaration refinement and selects the
+isolated canonical closure plus one existing-owner rule.
+
+Approval of D-017 would authorize exactly that closure followed by completion
+of the already-frozen DISPLAYED-CHAIN-2A corpus. It would not authorize
+general `:^nd`, arbitrary telescope depth or mixed variance, groupoidal
+closure, parsing, a second frontend/checker, browser promotion, bulk
+whole-library transfer, `DECL-REFINE-1A`, or broader Git operations.
+
 ## Change Log
 
+- **2026-07-29 — DISPLAYED-CHAIN-2A zero-delta assumption falsified and
+  D-017 closure proposal frozen.** The existing recursive frontend reaches the
+  exact `a; b,c; d` shape and all object/direct internalized-arrow observations
+  close, but the recursive sibling-pair cell requires one componentwise rule
+  at the existing `fdapp1_int_cell` owner. An owner-position full-file probe
+  passes positive and noncollapse assertions with an unchanged
+  1179/1020/159 warning inventory and a clean strict LHS audit. The selected
+  isolated TypeScript continuation transfers three existing signatures, six
+  exact existing rules, two narrow derived projection normal forms, and the
+  one new rule. Generic LF constraint checking honors an opt-in 512-step
+  budget while the 256 default remains; the rule is TypeScript-checked and an
+  external oracle is unnecessary. Seven focused executable-proposal tests and
+  the aggregate 1,002-test root gate pass (955 active passes, 47 intentional
+  skips, zero failures); the 19-judgment live conformance gate, bounded
+  active-kernel check, full kernel example/metrics pass, 39-test kernel
+  support suite, documentation/book checks, strict LHS audit, and strict
+  catalog check also pass. The proposal remains non-self-authorizing pending
+  H-DTTLF-USABILITY-DISPLAYED-CHAIN-2A-CLOSURE-01/
+  D-DTTLF-USABILITY-017.
 - **2026-07-29 — D-DTTLF-USABILITY-016 approved under delegated unattended
   authority.** No immediate human response followed presentation of the exact
   frozen graduation gate. A separate deeply immutable review snapshots the
@@ -2696,16 +2854,27 @@ withholding arbitrary depth, mixed variance, general `:^nd`, groupoidal,
 browser, and whole-transfer claims. If its exact local review checkpoint or
 ledger hash is absent, finish only that bounded synchronization first.
 
-D-016 authorizes only DISPLAYED-CHAIN-2A. Audit and implement the frozen
-existing-method, four-binding, three-displayed-level shape
-`k; a:A[k]; b:B[(k,a)], c:C[(k,a)]; d:D[((k,a),(b,c))]`.
-Derive `[b,c]` as the independent middle group, reuse the transparent
-displayed product plus sequential Sigma/section-pullback closure, require the
-frozen object/internalized-arrow/reindexing/negative corpus, and expect zero
-new owner, rule, intrinsic, checker/evaluator branch, or transfer entry.
-Halt for a separate closure proposal if any expected zero is false. General
-`:^nd` follows that stress rather than being guessed by additional eta
-cases.
+Preserve the D-016 mandatory stop: the frozen existing-method
+`k; a:A[k]; b:B[(k,a)], c:C[(k,a)]; d:D[((k,a),(b,c))]` lowering is sound,
+but its zero-rule/transfer assumption is false at the recursive paired
+internalized cell. Preserve the deeply frozen, non-self-authorizing
+DISPLAYED-CHAIN-2A-CLOSURE-0A proposal and its focused tests. Do not promote
+the experimental closure until
+H-DTTLF-USABILITY-DISPLAYED-CHAIN-2A-CLOSURE-01/
+D-DTTLF-USABILITY-017 is recorded separately.
+
+If D-017 is approved, implement exactly one existing-owner Lambdapi rule at
+`fdapp1_int_cell(Product_pair_funcd(...))`; an isolated
+`categorical_displayed_chain_2a_closure_transfer` with three existing
+signatures, six exact existing equations, two checked narrow pair-projection
+normal forms, and the new rule; two typed inferred-slot representation
+corrections; and generic LF budget plumbing that leaves the default at 256
+and uses 512 only for the continuation. Require TypeScript subject checking
+with zero external oracle, zero intrinsic owner, and zero owner-specific
+checker/evaluator branch. Then complete the frozen object/internalized-arrow/
+reindexing/negative corpus and checkpoint only after full Lambdapi and root
+gates. General `:^nd` follows that stress rather than being guessed by
+additional eta cases.
 
 Keep `DECL-REFINE-1A` optional and deferred as an outer-LF
 implementation/module-linking qualification. Prefer dependency-closed

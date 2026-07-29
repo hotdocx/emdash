@@ -3668,10 +3668,16 @@ D-DTTLF-USABILITY-016 as approved exactly as proposed at checkpoint
 recursive-body versus bounded-presentation distinction and authorizes only
 the exact existing-method four-binding/three-level `a; b,c; d` successor,
 with zero expected owner/rule/transfer delta and a mandatory closure-drift
-stop. Ten focused review tests and the aggregate 995-test reviewed gate pass.
-That mixed stress is now dependency-ready; general `:^nd` and the selected
-scale sequence follow. The historical text below must not be used to resume
-the completed fibred-context or displayed-chain implementation.
+stop. That stop has now fired at the recursive paired internalized cell.
+The active displayed plan contains the deeply frozen, non-self-authorizing
+DISPLAYED-CHAIN-2A-CLOSURE-0A/D-017 proposal: no new owner, one new
+`fdapp1_int_cell(Product_pair_funcd(...))` rule, three existing signatures,
+nine TypeScript continuation rules, generic 512-step LF budget plumbing, and
+zero oracle/intrinsic/second-frontend delta. Its seven focused tests pass;
+implementation awaits a separate review. General `:^nd` and the selected
+scale sequence follow the completed mixed stress. The historical text below
+must not be used to resume the completed fibred-context or displayed-chain
+implementation.
 
 When starting a fresh persistent session, review and trust the root project
 hook through `/hooks` and verify the shared archive as described in

@@ -97,6 +97,7 @@ export * from './categorical_displayed_chain_computation_closure_correction_revi
 export * from './categorical_displayed_chain_transfer';
 export * from './categorical_displayed_graduation_proposal';
 export * from './categorical_displayed_graduation_review';
+export * from './categorical_displayed_chain_2a_closure_proposal';
 export * from './categorical_usability_graduation_proposal';
 export * from './categorical_usability_graduation_review';
 export * from './categorical_dependent_usability_proposal';

@@ -155,7 +155,16 @@ conclusion is narrower and clearer:
   under the user's unattended delegation with human supersession; its ten
   focused review tests and aggregate 995-test gate pass; its proposal
   checkpoint is `6c06cb10ea6eb9fa298544d084df5f129950a3a1` and its exact
-  review checkpoint is `24ce6ffede79e115bc5d387c65366598e56f5d3d`; and
+  review checkpoint is `24ce6ffede79e115bc5d387c65366598e56f5d3d`;
+- the D-016 mixed-telescope audit obeyed its mandatory stop after discovering
+  that the recursive `pair(b,c)` internalized cell needs one componentwise
+  rule at the existing `fdapp1_int_cell` owner. The lowering architecture and
+  object/direct-arrow evidence are sound. A deeply frozen, non-self-
+  authorizing D-017 proposal selects an isolated continuation with no new
+  owner: three existing signatures, six exact existing rules, two narrow
+  derived pair-projection normal forms, the one new rule, and generic 512-step
+  LF budget plumbing with zero oracle/intrinsic/owner-specific checker path;
+  implementation remains stopped pending its separate review; and
 - this settles a mechanically reusable architecture for the demonstrated
   envelope, not arbitrary depth, arbitrary mixed variance, general `:^nd`,
   whole-library transfer, groupoidal closure, or deployment.
