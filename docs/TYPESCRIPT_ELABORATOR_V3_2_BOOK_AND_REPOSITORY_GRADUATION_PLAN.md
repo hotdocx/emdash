@@ -29,8 +29,11 @@ under the standing unattended delegation with human supersession.
 `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`.
 `BOOK-PROSE-1A` is complete at exact local checkpoint
 `43870651aebaa48bc4af4bd838229cab979a924d`.
-`BOOK-ARTIFACT-1B` is the next row after that checkpoint. No generated
-artifact, remote release/publication, or bulk scale change is yet included.
+`BOOK-ARTIFACT-1B` is final-green with its bounded local checkpoint pending.
+The checked `0.3.0-dev` PDF is now the byte-identical canonical
+`docs/emdash-book.pdf` and compatibility `docs/emdash3_2.pdf` artifact.
+`REPO-PRESENT-1C` is the next dependency-ready row. No remote
+release/publication or bulk scale change is included.
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
@@ -253,8 +256,8 @@ by preparing the static artifact and README.
 | BOOK-REVIEWER-BRIDGE-1A | **complete at `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`** | exact D001 approval | The tenth `nested-exchange` preset exactly equals its direct TypeScript construction, exposes `exchange-functor-abstraction`, and has a root `reviewer:dev` alias; no parser/checker/kernel change |
 | H-DTTLF-BOOK-SOURCE-CONTRACT-01 / D-DTTLF-BOOK-REPOSITORY-002 | **approved exactly as proposed at review checkpoint `1dee8fe414b63973e5f848936ae6d3c9d2319b35`; human supersession retained** | measured stale validator literal and proposal `21b5ebdbb9d82ba8d9139319aaa2ae1f8f96f881` | Replace only the retired formal-layer literal in `check_book.mjs`; retain every other source/render contract |
 | BOOK-PROSE-1A | **complete at `43870651aebaa48bc4af4bd838229cab979a924d`** | exact D001/D002 approvals and green reviewer bridge | The ten authored/structured sources now present fibrewise contexts, base change/evaluation, fibred cuts, binder notation, the bounded TypeScript architecture, three new checked evidence claims, and exact retained boundaries as theorem-led prose |
-| BOOK-ARTIFACT-1B | **dependency-ready; selected next** | final-green authored edition and exact D001 approval | Run the single final book release, one necessary repeat PDF generation, visual QA, and deterministic promotion to `docs/emdash-book.pdf` |
-| REPO-PRESENT-1C | gated | validated book artifact and exact separate review | Consolidate root README/public entry points around the book and integrated reviewer, with internal details routed to handoff/plans |
+| BOOK-ARTIFACT-1B | **final-green; bounded local checkpoint pending** | final-green authored edition and exact D001 approval | The single final release, exporter-only deterministic repeat, 199-page visual QA, and checked byte-for-byte promotion to both tracked public PDF paths are complete |
+| REPO-PRESENT-1C | **dependency-ready; selected next** | validated book artifact and exact D001 review | Consolidate root README/public entry points around the book and integrated reviewer, with internal details routed to handoff/plans |
 | PRODUCT-BOOK-GRADUATE-1 | gated | BOOK-PROSE-1A through REPO-PRESENT-1C | Freeze exact reader-facing capabilities, commands, artifact checksum, limitations, and the future-scale handoff |
 | FUTURE-SCALE-GOAL | deferred/out of scope for this persistent goal | later explicit user goal | Resume pending SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other preserved scale rows without implying they were completed here |
 
@@ -378,6 +381,26 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `BOOK-ARTIFACT-1B` final-green.** The manifest-owned
+  `functorial-type-theory-0.3.0-dev.pdf` passed the single final
+  `book:release` boundary with 199 pages, 16 embedded fonts, and SHA-256
+  `b34b7e430deacf4b91ce354c5e5eb3d2674ef08e93d3bcbd4ca7618ea37f41d7`.
+  A second invocation of the PDF exporter alone produced the identical
+  digest; no aggregate build, source check, or render check was repeated.
+  Visual review covered the title and contents, every pagination-shifted
+  chapter/appendix/bibliography start, the changed fibrewise-context and
+  fibred-cut pages, the evidence register, Appendices F/G, binder examples,
+  architecture table, formal boundary, credits, and license. It found no
+  clipping, overlap, missing glyphs, broken tables, or other render defect.
+  The new manifest-driven `book:promote` owner first runs the lightweight PDF
+  integrity check and then atomically copies the already checked bytes to
+  `docs/emdash-book.pdf` and the retained `docs/emdash3_2.pdf`
+  compatibility path. The source and both public copies are 1,850,797 bytes
+  and have the exact digest above. Only the ignored temporary page-render
+  sheets were removed after inspection. No remote publication, deployment,
+  tag, push, kernel gate, TypeScript aggregate, or bulk-scale work ran.
+  `REPO-PRESENT-1C` is now dependency-ready; the bounded local artifact
+  checkpoint is pending.
 - **2026-07-30 — `BOOK-PROSE-1A` final source-green.** The exact ten
   authored/structured sources now form the `0.3.0-dev` edition. Chapter 2
   develops independent fibrewise siblings, genuine dependency, asymmetric

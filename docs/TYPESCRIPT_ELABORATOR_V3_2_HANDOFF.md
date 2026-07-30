@@ -684,9 +684,19 @@ pass. A measured stale validator literal required the one-line D002
 correction proposed at
 `21b5ebdbb9d82ba8d9139319aaa2ae1f8f96f881` and separately approved with
 human supersession at
-`1dee8fe414b63973e5f848936ae6d3c9d2319b35`. No PDF, renderer build, kernel,
-TypeScript aggregate, or publication ran. `BOOK-ARTIFACT-1B` is the next row
-after the authored-edition checkpoint.
+`1dee8fe414b63973e5f848936ae6d3c9d2319b35`.
+`BOOK-ARTIFACT-1B` is final-green with its bounded local checkpoint pending.
+The single final book release produced a 199-page, 16-font PDF; an
+exporter-only repeat was byte-identical. The manifest-owned PDF,
+`docs/emdash-book.pdf`, and the retained `docs/emdash3_2.pdf` compatibility
+copy are all 1,850,797 bytes with SHA-256
+`b34b7e430deacf4b91ce354c5e5eb3d2674ef08e93d3bcbd4ca7618ea37f41d7`.
+Visual inspection covered the changed pages and every shifted
+chapter/appendix/end-matter start without finding a render defect. The root
+`book:promote` command now owns checked atomic promotion from the
+manifest-selected artifact; it does not create a second renderer. No
+multi-minute aggregate was repeated after the final release, and no remote
+publication occurred. `REPO-PRESENT-1C` is the next dependency-ready row.
 The plan then updates the book as theorem-led mathematical prose rather than
 a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.

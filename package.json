@@ -64,7 +64,8 @@
     "book:render": "./scripts/pnpmw --dir emdash2/print book:render",
     "book:pdf": "./scripts/pnpmw --dir emdash2/print book:pdf",
     "book:pdf:check": "./scripts/pnpmw --dir emdash2/print book:pdf:check",
-    "book:release": "./scripts/pnpmw --dir emdash2/print book:release"
+    "book:release": "./scripts/pnpmw --dir emdash2/print book:release",
+    "book:promote": "./scripts/pnpmw run book:pdf:check && node scripts/promote-book-pdf.mjs"
   },
   "keywords": [],
   "author": "",
