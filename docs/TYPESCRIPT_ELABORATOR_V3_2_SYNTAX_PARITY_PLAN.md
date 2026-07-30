@@ -39,7 +39,11 @@ frozen non-self-authorizing D005 proposal checkpointed at
 `487ed014c210ab8426b27c40241b2de0f2f1dc4e`; a separate immutable unattended
 D005 review now approves it exactly as proposed with human supersession; the
 bounded 1C1 implementation is final-green at exact local checkpoint
-`be437f3a7d64a6a554578036f76621322d5626fc`.
+`be437f3a7d64a6a554578036f76621322d5626fc`; `SYNTAX-PARITY-1C2` now has a
+focused-green zero-behavior argument-kind and redundant-generic-route audit
+with a deeply frozen non-self-authorizing D006 proposal for its bounded 1C2A
+mechanical constructor tranche; separate review remains required before any
+new displayed/fibred text behavior.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -861,6 +865,96 @@ preset run would add no changed-boundary evidence. No mathematical owner,
 program method, Core/checker/evaluator/runtime branch, semantic profile,
 transfer input, or Lambdapi source changed.
 
+## `SYNTAX-PARITY-1C2` Displayed/Fibred Constructor Audit
+
+The executable zero-behavior audit in
+`src/v3_2/categorical_text_displayed_constructor_audit.ts` measures the
+argument kinds and removes redundant aliases before selecting behavior. It
+corrects one overly broad statement inherited from the original 0A
+inventory:
+
+- `eta x` already equals direct
+  `displayedTransforComponent(eta,x)` through generic whitespace
+  application;
+- `eta x u` already equals direct
+  `displayedTransforPoint(eta,x,u)` through two recursive applications;
+- `eta p u` is not the same route and currently fails closed with
+  `CATEGORICAL_REJECTION`, because a displayed transformation takes a base
+  object to its fibre component; and
+- the transported naturality cell remains the distinct existing
+  `displayedTransforNaturality(eta,p,u)` internalized construction.
+
+This is an inventory correction, not a semantic deficiency or an external
+coherence premise. The TypeScript program already constructs and checks the
+cell through active internal owners. Text merely lacks a named route.
+
+The corrected residual split is:
+
+| Row | Exact responsibility |
+| --- | --- |
+| `SYNTAX-PARITY-1C2A` | Twelve mechanical displayed-product, Sigma/comprehension, transport, pullback-totalization, and displayed-transformation-composition term heads |
+| `SYNTAX-PARITY-1C2B` | Four separately reviewed whole/higher internalized action constructors: `displayedFunctorFullAction`, `displayedFunctorInternalCell`, `displayedTransforNaturality`, and `displayedTransforInternalHomAction` |
+| `SYNTAX-PARITY-1C3` | Category and displayed-family result constructors over the same parser/checker architecture |
+
+`displayedTransforComponent` and `displayedTransforPoint` are therefore not
+given redundant reserved aliases. Hom boundaries remain typed inputs to the
+generic application ladder; none of the selected 1C2A constructors fabricates
+one.
+
+### Proposed gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-06`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-006` proposes only
+`SYNTAX-PARITY-1C2A`:
+
+- add the exact fixed-arity spines
+  `pi1d B C`, `pi2d B C`, `paird FF GG`, `swapd B C`, `diagd B`,
+  `sigmaProj E`, `pullbackFunctord FF F`, `sigmaPair E x u`,
+  `transport E p`, `sigmaArrow E u v p alpha`, `pullbackTotal F E`,
+  and `composeTransfd theta eta`;
+- add no grammar production or located node;
+- resolve term operands recursively through the existing term resolver;
+- resolve displayed-family operands only as checked immutable family
+  identifiers until 1C3 supplies checked family-valued expressions;
+- call only the twelve existing typed `CoreCategoricalProgram` methods;
+- retain the program as the sole owner of classifier, base/fibre, endpoint,
+  scope, and profile validation;
+- preserve generic `apply` as the only non-reserved application route; and
+- prove exact direct/text explicit-Core and inferred-classifier equality with
+  complete kind, arity, base, fibre, transport, endpoint, foreign-value, and
+  profile negatives.
+
+The selected names distinguish displayed structural terms from the ordinary
+1C1 algebra and from existing fibre-object pairing:
+
+```text
+paird FF GG       -- pair displayed functors
+fibrePair u v     -- pair fibre objects in a contextual body
+sigmaPair E x u   -- form an object of Sigma(E)
+```
+
+The four whole/higher action constructors remain gated in 1C2B so their
+notation and expected-shape relationship can be reviewed without delaying
+the mechanical structural algebra. Category/family-result syntax remains
+1C3.
+
+The proposal adds no mathematical owner, program method, Core node,
+checker/evaluator/runtime/proof rule, expected-action table, parser
+dependency, Lambdapi declaration/rule/profile/input, browser preset, book
+prose, scale row, or publication. Its focused executable audit passes 5/5;
+root typecheck and lint pass.
+
+The exact separate gate is:
+
+> Approve `H-DTTLF-PRODUCT-SYNTAX-PARITY-06 /
+> D-DTTLF-PRODUCT-SYNTAX-PARITY-006` as proposed: implement only the twelve
+> frozen 1C2A displayed structural/comprehension term heads through existing
+> typed program methods, recursive term resolution, checked family
+> identifiers, direct equality, and exact negatives; retain component/point
+> observations as generic whitespace application and leave all four
+> whole/higher action constructors, category/family-result syntax, semantic
+> owners/rules/profiles, Lambdapi changes, reviewer presets, book/scale work,
+> publication, and wider Git authority outside this decision?
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -966,7 +1060,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C0 | **focused-green zero-behavior audit at `487ed014c210ab8426b27c40241b2de0f2f1dc4e`** | final-green `SYNTAX-PARITY-1B3` | Executable residual constructor inventory, exact 1C1/1C2/1C3 split, six direct-green ordinary witnesses, and bounded non-self-authorizing D005 proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C0 audit/proposal | Authorizes only six ordinary structural term heads over existing typed methods |
 | SYNTAX-PARITY-1C1 | **final-green at `be437f3a7d64a6a554578036f76621322d5626fc`** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality, recursive constructor/application spines, exact negatives, 71/71 affected/audit tests, and green browser packaging |
-| SYNTAX-PARITY-1C2 | gated | final-green 1C1 plus a separate exact audit/review | Remaining selected displayed/fibred term constructors with finite typed argument contracts |
+| SYNTAX-PARITY-1C2 | **focused-green zero-behavior audit; bounded 1C2A D006 proposal awaiting separate review** | final-green 1C1 | Corrected generic component/point versus explicit higher-action inventory; freeze twelve mechanical displayed structural/comprehension heads while retaining four whole/higher action constructors for 1C2B |
 | SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
@@ -1028,12 +1122,14 @@ SYNTAX-PARITY-1C0 residual-constructor audit, approved D005 review, and
 final-green 1C1 implementation. Do not reimplement those rows.
 Preserve commas as independent siblings at one dependency level and
 semicolons as successive dependency levels only for exact direct group sizes
-`[1,1]` and `[1,2,1]`. Checkpoint and synchronize 1C1 if needed, then continue
-with a zero-behavior 1C2 argument-kind/redundant-generic-route audit and
-bounded proposal. Do not add 1C2 displayed/fibred behavior or 1C3
-category/family-result behavior before their separate exact reviews. A
-missing direct semantic capability belongs in the relevant usability/kernel
-plan, not in parser heuristics.
+`[1,1]` and `[1,2,1]`. Recover the focused-green 1C2 audit and its bounded
+non-self-authorizing D006 proposal. It retains `eta x` and `eta x u` as
+generic whitespace application, selects only twelve mechanical 1C2A
+displayed structural/comprehension heads, and separately gates four
+whole/higher internalized action constructors as 1C2B. Do not add 1C2A,
+1C2B, or 1C3 behavior before its applicable separate exact review. A missing
+direct semantic capability belongs in the relevant usability/kernel plan,
+not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -1049,6 +1145,16 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1C2` displayed constructors audited.**
+  Executably confirmed that `eta x` and `eta x u` are already exact generic
+  applications while `eta p u` is a distinct existing internalized
+  naturality construction, correcting an aspirational 0A inventory claim
+  without changing semantics. Split twelve mechanical structural and
+  comprehension term heads into the bounded non-self-authorizing 1C2A D006
+  proposal and retained four whole/higher action constructors for separately
+  reviewed 1C2B notation. Five focused tests, typecheck, and lint pass; no
+  parser/resolver, program, Core, Lambdapi, browser, book, or scale behavior
+  changed.
 - **2026-07-30 — `SYNTAX-PARITY-1C1` implemented and final-green.** Added
   only the six reviewed ordinary structural heads through their existing
   typed methods and one checked category-identifier helper. Recursive nested

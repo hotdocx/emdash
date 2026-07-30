@@ -557,6 +557,17 @@ source changed. Exact local implementation checkpoint:
 `be437f3a7d64a6a554578036f76621322d5626fc`. 1C2 is the next zero-behavior
 residual displayed/fibred constructor audit.
 
+That 1C2 audit is now focused-green and freezes a bounded
+non-self-authorizing D006 proposal. It confirms that `eta x` and `eta x u`
+already equal the direct displayed component/point helpers through recursive
+generic application, while `eta p u` is correctly not that route: transported
+naturality is an existing distinct internalized construction. It selects
+twelve mechanical displayed structural/comprehension term heads for 1C2A and
+retains four whole/higher internalized action constructors for a separately
+reviewed 1C2B notation decision. Five focused tests, root typecheck, and lint
+pass with zero behavior delta. Separate D006 review is the next gate; no 1C2
+text behavior is yet authorized.
+
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
 That plan audits the capability delta from the user-selected `8217aa3...`
