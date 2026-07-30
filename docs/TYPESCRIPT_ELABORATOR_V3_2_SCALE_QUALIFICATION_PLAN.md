@@ -722,7 +722,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-ACQUIRE-1B | deferred; prototype removed | SCALE-STRESS-3B0 plus a measured future acquisition need | Optional narrow fail-closed declaration adapter feeding the existing IR; the abandoned unexported canonical-symbol prototype is not architectural infrastructure and must not be recreated without a recorded cost/benefit trigger |
 | SCALE-STRESS-3B1 | deferred | usability graduation or an independently measured transfer priority; exact root/generated-owner boundary | Directly construct and compile the smallest typed root prerequisite and protected hom-action declaration closure through data/policy only, preserving protected exposition and opaque tactic theorems; no parser dependency |
 | SCALE-STRESS-3B2 | deferred | SCALE-STRESS-3B1 | Compile the evidence-property declaration closure against exact root/protected interfaces and check representative transparent bodies without activating a profile |
-| PRODUCT-FACING-CONTINUATION | active in the dedicated product/browser/syntax plans; PRODUCT-DEMO-1B final-green at `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`; ORACLE-0A, BROWSER-0A, and SYNTAX-0A complete | completed usability/displayed evidence and SCALE-INDUCTIVE-HYBRID-0A; independent of the pending inductive closeout review | The root-only three-panel external-review CLI/guide passes with a 1,109-test aggregate and bounded kernel check. Existing optional oracles are retained without a new umbrella. The directed-dependent closure is Vite/Chromium-green; the categorical report's Node reachability is localized to acquisition/audit layering. A small parser-independent located syntax/resolver architecture is settled without selecting a dependency. Next review the additive BROWSER-DIRECTED-1A proposal; no categorical browser, parser, scale row, or transfer claim is closed by presentation |
+| PRODUCT-FACING-CONTINUATION | active in the dedicated product/browser/syntax plans; PRODUCT-DEMO-1B final-green at `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`; ORACLE-0A, BROWSER-0A, SYNTAX-0A, and the reviewed BROWSER-DIRECTED-1A implementation complete | completed usability/displayed evidence and SCALE-INDUCTIVE-HYBRID-0A; independent of the pending inductive closeout review | The root-only three-panel report remains the full reviewed presentation. The additive browser entry now runs the outer dependent-LF witness and preserved minimal-Core playground in a Node-free portable static build; Chromium, strict Vite, and the 1,114-test aggregate pass. Categorical browser promotion remains behind runtime/acquisition separation. The parser-independent SYNTAX-RESOLVE-0B contract is next; no parser dependency, scale row, or transfer claim is closed |
 | SCALE-STRESS-3C | pending | applicable inductive/import/runtime mechanisms | Qualify the multi-module `WalkingEnd_cat`/dependent-eliminator/higher-action/`BNat_cat` HIT slice and record its exact generated-owner and runtime/proof boundaries |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
@@ -3335,9 +3335,11 @@ After the parent closes, follow the dependency-ready reviewed rows in
 demo is a product presentation of existing green capabilities, not a new
 semantic or scale result. Its measured browser and user-syntax audits are
 complete and route to their dedicated living plans. Take only the selected
-additive directed-browser proposal after exact review; keep categorical
-browser separation and parser/resolver implementation gated by their own
-rows. When those living plans route back here, continue with
+additive directed-browser proposal after exact review; that slice is now
+complete and final-green. Keep categorical browser separation, static
+publication, and parser/resolver implementation gated by their own rows. The
+next product boundary is the parser-independent SYNTAX-RESOLVE-0B contract.
+When those living plans route back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
@@ -3935,3 +3937,12 @@ scope is affected.
   recursive resolver into the existing scoped LF/categorical programs.
   BROWSER-DIRECTED-1A is the next exact product proposal; categorical
   promotion, parser selection, and scale rows remain separately gated.
+- **2026-07-29 — BROWSER-DIRECTED-1A final-green.** Under the separate exact
+  D-DTTLF-PRODUCT-BROWSER-001 review, added an opt-in Node-free directed
+  browser entry over the unchanged minimal API and a two-view Vite fixture.
+  After explicit human clarification, the build targets portable static
+  hosting rather than Sandpack and emits relative assets suitable for a
+  project subpath. Strict build, real Chromium with zero console errors, five
+  focused browser checks, six MIGRATE-2 checks, and the 1,114-test aggregate
+  pass. No categorical browser, parser/dependency, backend, publication,
+  mathematical owner/rule, engine, or scale result changed.

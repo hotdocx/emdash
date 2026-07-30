@@ -17,10 +17,10 @@ supersession; PRODUCT-DEMO-1B is implemented and final-green at exact local
 checkpoint `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`;
 PRODUCT-DEMO-ORACLE-0A, PRODUCT-BROWSER-0A, and PRODUCT-SYNTAX-0A are
 complete; the dedicated browser plan freezes BROWSER-DIRECTED-1A as the next
-product implementation and records its exact separate
-D-DTTLF-PRODUCT-BROWSER-001 review with human supersession, while the
-dedicated user-syntax plan retains its parser-independent resolver
-architecture as a later gated continuation
+product implementation, records its exact separate
+D-DTTLF-PRODUCT-BROWSER-001 review with human supersession, and now records
+that slice final-green; the dedicated user-syntax plan's
+parser-independent resolver contract is the next proposal boundary
 
 ## Human Direction And Purpose
 
@@ -180,9 +180,9 @@ PRODUCT-DEMO-0A inventory
   -> PRODUCT-DEMO-ORACLE-0A optional-oracle assessment
   -> PRODUCT-BROWSER-0A measured browser audit
   -> PRODUCT-SYNTAX-0A measured user-syntax audit
-  -> BROWSER-DIRECTED-1A exact review/implementation
-  -> separately select either categorical-browser runtime separation
-     or parser-independent syntax resolution
+  -> BROWSER-DIRECTED-1A exact review/implementation (complete)
+  -> SYNTAX-RESOLVE-0B exact parser-independent contract proposal
+  -> separately decide whether to implement that resolver or return to scale
   -> PRODUCT-GRADUATE-1
   -> return to SCALE-STRESS-3C / SCALE-BATCH-1 / SCALE-GRADUATE-1
 ```
@@ -338,9 +338,9 @@ Exact local implementation checkpoint:
 | PRODUCT-DEMO-1B | complete and final-green at `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc` | approved PRODUCT-DEMO-1A | Root-only three-panel report module, command, reviewer guide, tests, and synchronized navigation with zero semantic/browser/parser delta |
 | PRODUCT-DEMO-ORACLE-0A | complete; no new command selected | PRODUCT-DEMO-1B | Reuse the documented `check:conformance`, directed conformance, displayed-evaluation conformance, and bounded kernel commands. A new umbrella command would either duplicate them or misstate displayed-chain coverage; production remains Lambdapi-free |
 | PRODUCT-BROWSER-0A | complete; routed to dedicated browser plan | PRODUCT-DEMO-1B | The directed dependent closure is Node-free and Vite/Chromium-green; the full report reaches `node:crypto` through acquisition/audit modules. Frozen additive BROWSER-DIRECTED-1A and deferred categorical runtime-spec separation are recorded in [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md) |
-| PRODUCT-BROWSER-1 | approved exact directed slice; next | D-DTTLF-PRODUCT-BROWSER-001 | Implement only the additive directed browser entry and two-view fixture selected by the dedicated browser plan |
+| PRODUCT-BROWSER-1 | complete and final-green; implementation checkpoint to be recorded by the browser ledger | D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, fixed dependent-LF plus preserved minimal-Core views, Node-free/static project-subpath build, real-browser evidence, and no semantic/dependency delta |
 | PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); Parsimmon versus a tiny parser remains gated |
-| PRODUCT-SYNTAX-1 | gated/deferred | approved syntax proposal | Implement only the selected user-facing syntax adapter; likely deserves a dedicated subplan |
+| PRODUCT-SYNTAX-1 | next proposal boundary; implementation still gated | SYNTAX-RESOLVE-0B plus separate review | First freeze the parser-independent recursive-resolution API; implement only after its dedicated plan selects an exact scope |
 | PRODUCT-GRADUATE-1 | pending | required product rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
@@ -532,3 +532,11 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   grammar evidence. The additive directed browser proposal is next; no
   categorical browser, parser dependency, or syntax implementation is
   silently authorized.
+- **2026-07-29 — Additive directed browser slice completed.** The dedicated
+  browser plan now records the unchanged frozen minimal entry, additive
+  directed-dependent entry, two-view Vite fixture, relative static assets for
+  a likely `/emdash/` GitHub Pages path, 75-module production build, clean
+  Chromium execution, and the 1,114-test aggregate. Sandpack is not a
+  requirement; no workflow/publication, backend, categorical browser,
+  parser, dependency, or semantic change was made. The parser-independent
+  SYNTAX-RESOLVE-0B contract is the next proposal boundary.

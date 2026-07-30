@@ -382,9 +382,20 @@ The measured browser work is now in
 the directed-dependent closure production-builds at an observed 221.72 kB /
 52.25 kB gzip and executes correctly in Chromium, while the combined
 categorical report reaches `node:crypto` only through transfer
-acquisition/digest evidence. The next exact proposal is an additive directed
-browser entry and two-view standalone fixture; categorical promotion remains
-behind a runtime-spec/audit separation row.
+acquisition/digest evidence. The selected additive browser slice is now
+implemented and final-green: `browser_directed.ts` re-exports the unchanged
+minimal API and adds only the directed dependent witness; the standalone Vite
+fixture preserves its editable minimal-Core view and adds the fixed dependent
+report. The actual combined React build transforms 75 modules and emits
+421.35 kB / 114.31 kB gzip JavaScript. Both views execute in Chromium with a
+clean console, the 1,114-test aggregate passes, and the entry's recursive
+local closure contains no Node builtin.
+
+Sandpack is no longer a requirement following explicit human clarification.
+Vite emits relative assets for a fully client-side project-subpath target such
+as `https://hotdocx.github.io/emdash/`. No GitHub Pages workflow, push,
+publication, backend, or remote change is part of this result. Categorical
+promotion remains behind the recorded runtime-spec/audit separation row.
 
 The user-syntax audit is recorded separately in
 [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md).
@@ -395,7 +406,10 @@ expected-classifier guidance, and exact source spans. This is an input
 adapter, not another `RawExpr` type theory or checker. The historical
 Parsimmon implementation remains grammar evidence; Parsimmon versus a tiny
 parser is a later measured choice. No parser dependency or syntax
-implementation is yet selected.
+implementation is yet selected. With the directed browser slice complete,
+the dedicated syntax plan routes next to a deeply frozen
+SYNTAX-RESOLVE-0B parser-independent API/diagnostic contract before any
+implementation or parser-library decision.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark

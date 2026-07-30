@@ -1,9 +1,10 @@
-# emdash v3.2 Sandpack Playground
+# emdash v3.2 Browser Playground
 
 This directory contains a standalone React/Vite playground for the
-browser-safe emdash v3.2 TypeScript Core API. It uses session-local contexts,
-metavariables, checking, and the reviewed runtime fragment; it does not expose
-the deleted global-state prototype or a legacy compatibility API.
+browser-safe emdash v3.2 TypeScript Core API. It preserves the editable
+minimal-Core playground and adds a fixed outer dependent-LF demonstration.
+Both use session-local checking and the reviewed TypeScript runtime; neither
+exposes the deleted global-state prototype or a legacy compatibility API.
 
 The playground runs the exact content-pinned `emdash-v3.2-mvp-1` deployed
 profile (16 owners and three runtime rules). Its browser barrel exports the
@@ -13,72 +14,61 @@ not execute Lambdapi in production. Lambdapi remains the repository's active
 mathematical specification and mandatory shared-corpus CI/subject-reduction
 oracle.
 
-It can be run in two ways:
-1.  Locally for development and testing using Vite.
-2.  As a template within a Sandpack instance for embedding in web applications like `hotdocx`.
+The additive `browser_directed.ts` entry also runs the already reviewed
+root-only `emdash-v3.2-dttlf-directed-1` dependent Sigma-telescope witness in
+the browser. It is an opt-in demonstration, not a change to the frozen MVP
+manifest and not a categorical-browser promotion. The additive entry
+re-exports the frozen `src/v3_2/browser.ts` API rather than modifying or
+replacing it.
+
+It can be run locally with Vite or deployed as a static client-side site.
+Sandpack compatibility is not a requirement. The production build uses
+relative asset paths so it can be hosted below a project path such as
+`https://hotdocx.github.io/emdash/` without a Node backend.
 
 ## Running Locally with Vite
 
 This is the recommended way to work on the playground UI itself. The local Vite server uses Hot Module Replacement (HMR) for a fast development experience.
 
-**Prerequisites:**
+After bootstrapping the repository worktree, start the development server from
+the repository root:
 
-* Node.js and npm (or pnpm/yarn) installed.
+```bash
+./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite
+```
 
-**Steps:**
-
-1.  Navigate to this directory from the project root:
-    ```bash
-    cd emdash-template
-    ```
-2.  Install the dependencies:
-    ```bash
-    npm install
-    ```
-3.  Start the development server:
-    ```bash
-    npx vite
-    ```
 Vite starts a local server at the URL it reports (usually
 `http://localhost:5173`). The local application resolves
-`../src/v3_2/browser.ts` through `src/emdash_api.ts`.
+`../src/v3_2/browser_directed.ts` through `src/emdash_api.ts`.
 
-## Using as a Sandpack Template
+From the repository root, the bounded production gate is:
 
-This template can also run inside
-[Sandpack](https://sandpack.codesandbox.io/). Construct its virtual file map
-from the template and the browser-safe v3.2 dependency tree.
+```bash
+./scripts/pnpmw run check:browser-directed
+```
 
-Sandpack cannot resolve files outside its virtual root, so the host
-application must copy the v3.2 modules and adjust the one bridge path.
+## Static Hosting
 
-**Procedure:**
+Run the production gate from the repository root:
 
-1. **Collect template files.** Map the files under `emdash-template` into the
-   Sandpack root, excluding generated directories such as `node_modules` and
-   `dist`.
+```bash
+./scripts/pnpmw run check:browser-directed
+```
 
-   * `emdash-template/index.html` → `/index.html`
-   * `emdash-template/package.json` → `/package.json`
-   * `emdash-template/src/App.tsx` → `/src/App.tsx`
+The deployable site is generated under `emdash-template/dist/`. Its HTML,
+JavaScript, and CSS are self-contained static assets with relative URLs. A
+GitHub Pages workflow may later upload that directory as its artifact, but
+workflow creation and publication are separate reviewed operations and are
+not performed by the browser implementation itself.
 
-2. **Collect the v3.2 browser dependency tree.** Copy the TypeScript modules
-   reachable from `src/v3_2/browser.ts`, preserving their directory:
+No backend is needed for the current functionality. The browser executes the
+same TypeScript checker/evaluator and immutable runtime data locally. A future
+backend would be justified only by a separately selected capability that
+cannot remain client-side, not by the present LF demo.
 
-   * `src/v3_2/browser.ts` → `/src/v3_2/browser.ts`
-   * its relative v3.2 imports → the corresponding `/src/v3_2/*.ts` paths
-
-   Do not package `probe.ts`, the differential harnesses, or other
-   process/filesystem-backed conformance tooling. The browser barrel is the
-   reviewed boundary.
-
-3. **Adjust the API bridge.** In
-   `emdash-template/src/emdash_api.ts`, replace
-   `../../src/v3_2/browser.js` with `./v3_2/browser.js`, then install that
-   content as `/src/emdash_api.ts`.
-
-This produces a self-contained browser project with no ambient global reset,
-legacy parser, D0/D1 category API, or Node-only Lambdapi process dependency.
-The included example prints `CORE_MVP_MANIFEST.revision` before checking a
-category-polymorphic identity, so a copied template retains an observable
-`emdash-v3.2-mvp-1` profile boundary.
+The build contains no ambient global reset, legacy parser, D0/D1 category
+API, Node builtin, or Lambdapi process dependency. The editable example
+prints `CORE_MVP_MANIFEST.revision` before checking a category-polymorphic
+identity. The fixed dependent view separately prints its opt-in continuation
+identity, explicit Core, inferred/reduced types, reduction trace, and
+wrong-family diagnostic.

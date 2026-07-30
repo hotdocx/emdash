@@ -44,9 +44,6 @@ textarea {
 }
 
 button {
-  display: block;
-  width: 120px;
-  margin-top: 1rem;
   padding: 10px 15px;
   border: none;
   background-color: #007bff;
@@ -57,6 +54,38 @@ button {
   font-weight: bold;
 }
 
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab {
+  width: auto;
+  margin: 0;
+  color: #28445f;
+  background-color: #e9f2fa;
+}
+
+.tab:hover {
+  color: #fff;
+}
+
+.tab.active {
+  color: #fff;
+  background-color: #0056b3;
+}
+
+.action {
+  display: block;
+  width: auto;
+  min-width: 180px;
+  margin-top: 1rem;
+}
+
 button:hover {
   background-color: #0056b3;
 }
@@ -64,6 +93,32 @@ button:hover {
 button:disabled {
     background-color: #aaa;
     cursor: not-allowed;
+}
+
+.boundary {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1rem;
+  color: #333;
+  background: #f3f7fa;
+  border: 1px solid #dce7ef;
+  border-radius: 4px;
+}
+
+.boundary div {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.4fr) 1fr;
+  gap: 1rem;
+}
+
+.boundary dt {
+  font-weight: 700;
+}
+
+.boundary dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-family: "Fira Code", "Courier New", monospace;
 }
 
 .output {
@@ -78,4 +133,18 @@ button:disabled {
   font-size: 14px;
   line-height: 1.5;
   margin-top: 1rem;
-} 
+  min-height: 4rem;
+}
+
+@media (max-width: 640px) {
+  .container {
+    margin: 0;
+    padding: 1rem;
+    border-radius: 0;
+  }
+
+  .boundary div {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}

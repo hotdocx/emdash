@@ -4,6 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "main": "/src/index.tsx",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "vite build",
+    "check": "tsc --noEmit -p tsconfig.json && vite build"
+  },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -14,4 +19,4 @@
     "typescript": "~5.7.2",
     "vite": "^5.2.0"
   }
-} 
+}

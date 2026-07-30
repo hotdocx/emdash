@@ -23,9 +23,6 @@ import {
     coreLfDefinitionalCompare
 } from './lf_conversion';
 import {
-    CoreLfDeclarationEnvironment
-} from './lf_declarations';
-import {
     KernelExpression,
     binderMode,
     kernelApplication,

@@ -242,8 +242,13 @@ describe('TypeScript v3.2 MIGRATE-2 physical deletion audit', () => {
         );
         assert.deepEqual(
             apiImports.map(entry => entry.target),
-            ['src/v3_2/browser.ts']
+            ['src/v3_2/browser_directed.ts']
         );
+        const directedEntry = readFileSync(
+            resolve(repositoryRoot, 'src/v3_2/browser_directed.ts'),
+            'utf8'
+        );
+        assert.match(directedEntry, /export \* from ['"]\.\/browser['"]/);
 
         const app = readFileSync(
             resolve(repositoryRoot, 'emdash-template/src/App.tsx'),
@@ -270,6 +275,10 @@ describe('TypeScript v3.2 MIGRATE-2 physical deletion audit', () => {
         const fixtureReadme = readFileSync(
             resolve(repositoryRoot, 'emdash-template/README.md'),
             'utf8'
+        );
+        assert.match(
+            fixtureReadme,
+            /src\/v3_2\/browser_directed\.ts/
         );
         assert.match(fixtureReadme, /src\/v3_2\/browser\.ts/);
         assert.doesNotMatch(fixtureReadme, /\.\.\/src\/types\.ts/);

@@ -11,7 +11,9 @@ Supersedes: no mathematical profile, checker, Core owner/rule set, release
 profile, or user-syntax decision
 Status: active product subplan; measured BROWSER-0A audit complete;
 BROWSER-DIRECTED-1A is approved exactly as proposed under
-D-DTTLF-PRODUCT-BROWSER-001 with human supersession and is next
+D-DTTLF-PRODUCT-BROWSER-001 with human supersession, implemented, and
+final-green; categorical promotion and static publication remain separately
+gated
 
 ## Purpose
 
@@ -33,6 +35,14 @@ This split is not a retreat from the categorical product goal. It prevents a
 Node packaging issue from being misdiagnosed as a categorical-kernel gap, and
 it makes a useful browser artifact available while the larger runtime
 boundary is corrected.
+
+The selected deployment model is a fully client-side static build, with
+`https://hotdocx.github.io/emdash/` as the likely eventual host. Sandpack
+compatibility is no longer a requirement. The current checker/evaluator
+closure needs no backend; a Node service remains a fallback only for a later
+capability that cannot be made browser-safe. Static-site workflow creation
+and publication are separate Git/remote operations and are not authorized by
+this plan.
 
 ## Authority And Non-Claims
 
@@ -239,7 +249,10 @@ human supersession after proposal checkpoint `2d0583e`.
    - prove the old `browser.ts` source and frozen manifest are unchanged.
 6. Add one bounded browser-fixture check command or documented command that
    performs strict TypeScript compilation and a Vite production build.
-7. Exercise the built page in a real browser and record its visible result
+7. Configure relative production asset URLs so the build works from a static
+   project subpath such as `/emdash/`, without retaining the obsolete
+   Sandpack-only public HTML fixture.
+8. Exercise the built page in a real browser and record its visible result
    and console status before checkpointing.
 
 ### Exact exclusions
@@ -249,6 +262,7 @@ BROWSER-DIRECTED-1A does not authorize:
 - changing `src/v3_2/browser.ts` or `CORE_MVP_MANIFEST`;
 - exporting `CoreCategoricalProgram` or a categorical demo to the browser;
 - a string parser, editor language service, worker, or server;
+- a GitHub Pages workflow, remote deployment, or publication;
 - Node polyfills;
 - Lambdapi invocation in production;
 - a new owner, rule, checker/evaluator case, transfer engine, or profile;
@@ -267,6 +281,103 @@ The row is complete only when:
 - the exact staged diff contains no unrelated work; and
 - the living product, browser, scale, and handoff ledgers record the result
   and non-effects.
+
+## BROWSER-DIRECTED-1A Completion
+
+The approved additive slice is implemented.
+
+### Product entry and boundary
+
+[`src/v3_2/browser_directed.ts`](../src/v3_2/browser_directed.ts):
+
+- re-exports the exact frozen `browser.ts` API without modifying that file;
+- exports the existing structured directed-dependent result and formatter;
+- provides `runCoreDirectedBrowserDemo` as an import-side-effect-free browser
+  smoke seam;
+- checks the base manifest and continuation result identities at runtime; and
+- publishes the deeply frozen `BROWSER-DIRECTED-1A` boundary with zero Node,
+  parser, categorical-profile, or production-Lambdapi dependency.
+
+The SHA-256 of `src/v3_2/browser.ts` remains
+`9923a7a85672d6fbf6441f23f69f1062c702764167338ee40e1a65be9e42cfcc`.
+`CORE_MVP_MANIFEST` retains its exact reviewed content hash. The additive
+entry does not enter the frozen browser module's own exports.
+
+### Browser experience
+
+The existing `emdash-template` fixture now has two explicit views:
+
+1. **Dependent LF demo.** The default fixed view runs the actual
+   `emdash-v3.2-dttlf-directed-1` TypeScript checker/evaluator witness and
+   displays its input path, assumptions, explicit Core, inferred/reduced
+   dependent types, two-step computation trace, wrong-family rejection, and
+   production boundary.
+2. **Minimal Core playground.** The former editable
+   `emdash-v3.2-mvp-1` JavaScript playground remains available and still
+   checks the category-polymorphic identity through a fresh session.
+
+The historical v1 `emdash-template` at `f50ecb5` was inspected before the UI
+edit. It used essentially the same editable-JavaScript shell, but depended on
+the retired global reset and legacy elaborator. The new page preserves only
+that useful interaction continuity; it uses no v1 state, parser, term model,
+or compatibility API.
+
+### Static-hosting correction
+
+Following the user's explicit clarification, Sandpack is not a requirement.
+The fixture now has a Vite configuration with `base: './'`, removes the
+obsolete Sandpack-only public HTML file, and emits relative production asset
+URLs. The exact generated page references:
+
+```text
+./assets/index-BrtZm8tA.js
+./assets/index-BjwqK14e.css
+```
+
+This makes a client-only project-subpath deployment such as
+`https://hotdocx.github.io/emdash/` feasible. No backend, workflow, push, or
+publication was added. The retained package/directory identity is a fixture
+compatibility detail, not a Sandpack product commitment.
+
+### Strict fixture hygiene
+
+The larger browser closure exposed four pre-existing declarations rejected by
+the fixture's stricter `noUnusedLocals` setting. The implementation removed
+one unused proposal helper and three unused imports. This is a mechanical
+zero-runtime-effect cleanup; no declaration, rule, checker, evaluator, or
+surface behavior changed.
+
+The MIGRATE-2 fixture invariant now requires the additive entry and separately
+requires that it re-export the frozen base. It continues to audit the original
+minimal entry's Node-free closure.
+
+### Validation
+
+- focused BROWSER-DIRECTED-1A: 5/5 pass;
+- focused MIGRATE-2 browser/fixture regression: 6/6 pass;
+- root typecheck and affected lint: pass;
+- aggregate TypeScript runtime suite: 1,114 tests, 1,063 active passes,
+  51 intentional skips, zero failures, 806,550 ms;
+- standalone strict TypeScript plus Vite production gate: pass;
+- production build: 75 transformed modules, 421.35 kB JavaScript /
+  114.31 kB gzip, 1.83 kB CSS / 0.77 kB gzip;
+- transitive local entry closure: at least 38 modules and zero Node builtin;
+  and
+- real Chromium: both views run, the dependent report contains every
+  reviewed evidence field, and the final console has zero errors and zero
+  warnings.
+
+The first aggregate run usefully exposed the two stale MIGRATE-2 fixture
+expectations. After updating those exact invariants, their focused suite and
+the repeated full aggregate pass. This was a product-boundary synchronization,
+not a semantic correction.
+
+### Exact non-effects
+
+The completion adds no parser, dependency/lock change, categorical browser,
+Lambdapi source/process, mathematical owner, runtime/proof/unification rule,
+checker/evaluator branch, contextual compiler case, backend, worker, remote
+workflow, publication, or scale/graduation claim.
 
 ## BROWSER-CATEGORICAL-0A — Deferred Runtime-Boundary Refactor
 
@@ -298,11 +409,12 @@ displayed profile.
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | BROWSER-0A | complete | PRODUCT-DEMO-1B | Measured static closure, actual Vite success/failure, real-browser directed witness, and packaging diagnosis |
-| BROWSER-DIRECTED-1A | approved exactly as proposed under D-DTTLF-PRODUCT-BROWSER-001 with human supersession; next | BROWSER-0A | Additive directed browser entry, two-view fixture, focused safety tests, production build, and real-browser evidence |
+| BROWSER-DIRECTED-1A | complete and final-green; local implementation checkpoint to be recorded immediately after this synchronized tranche | BROWSER-0A and D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, two-view fixture, focused safety tests, portable static production build, and real-browser evidence |
 | BROWSER-CATEGORICAL-0A | deferred; not selected by D-001 | BROWSER-DIRECTED-1A or independent priority | Separate immutable runtime specs from Node acquisition/audit evidence and qualify the ordinary bracket bundle |
 | BROWSER-CATEGORICAL-1A | gated | BROWSER-CATEGORICAL-0A plus separate review | Additive ordinary categorical browser entry and UI |
 | BROWSER-DISPLAYED-1A | gated | browser-safe displayed closure plus separate review | Displayed-chain browser witness without widening the claimed usability envelope |
-| BROWSER-GRADUATE-1 | pending | selected browser rows | Exact browser capability, package/runtime boundary, performance observation, and product-plan handoff |
+| BROWSER-STATIC-DEPLOY-0A | deferred; publication not authorized | BROWSER-DIRECTED-1A and an explicit deployment priority | Audit the existing repository CI/pages configuration and freeze an exact static artifact/workflow/domain proposal; no Node backend unless a measured client-side blocker exists |
+| BROWSER-GRADUATE-1 | complete for the selected directed slice; does not graduate categorical/deploy rows | BROWSER-DIRECTED-1A | Exact browser capability, package/runtime boundary, observed build, static-host feasibility, residual categorical/deployment gates, and product-plan handoff recorded above |
 
 ## Git Boundary
 
@@ -358,3 +470,11 @@ browser, parser, semantic, publication, or Git effects.
   additive directed-dependent entry, two-view fixture, focused Node-free
   tests, production build, and browser smoke run. Categorical promotion,
   parsing, dependencies, semantics, and broader Git effects remain closed.
+- **2026-07-29 — BROWSER-DIRECTED-1A implemented and final-green.** Added
+  the opt-in browser entry and exact frozen boundary, retained the unchanged
+  minimal entry, exposed fixed dependent-LF and editable minimal-Core views,
+  made Vite output portable to a static `/emdash/` project path, and removed
+  the obsolete Sandpack-only public page. Five focused browser checks, six
+  MIGRATE-2 checks, strict fixture build, real Chromium with a clean console,
+  and the 1,114-test aggregate pass. No categorical browser, parser,
+  dependency, backend, semantics, or publication was added.

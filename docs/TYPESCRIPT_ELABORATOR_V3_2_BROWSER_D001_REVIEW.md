@@ -60,3 +60,17 @@ pass `git diff --cached --check` before an authorized local checkpoint.
 
 This review is a decision record only. It does not itself implement the
 browser row.
+
+## Later Human Hosting Clarification
+
+After this review, the user explicitly clarified that Sandpack compatibility
+is no longer required and that the likely deployment target is a fully
+client-side GitHub Pages site at
+`https://hotdocx.github.io/emdash/`, with a Node backend only if static
+execution proves infeasible.
+
+That clarification supersedes any Sandpack-oriented packaging assumption and
+permits BROWSER-DIRECTED-1A to configure portable relative Vite assets,
+remove the obsolete Sandpack-only public HTML fixture, and document static
+hosting. It does not authorize creating a GitHub Pages workflow, publishing,
+pushing, changing remotes, or adding a backend.

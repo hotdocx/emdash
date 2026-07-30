@@ -11,8 +11,9 @@ and
 Supersedes: no typed TypeScript construction API, existing contextual
 compiler, checker, Core, parser/acquisition decision, or usability envelope
 Status: active design subplan; SYNTAX-0A architecture audit complete;
-implementation selection remains gated behind browser-directed product work
-or an independent priority decision
+the selected browser-directed product slice is complete and
+SYNTAX-RESOLVE-0B is the next proposal boundary; implementation remains gated
+behind a separate exact review
 
 ## Purpose And Meaning Of Usability
 

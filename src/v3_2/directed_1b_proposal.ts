@@ -438,18 +438,6 @@ const telescopePointFunctor = (
     telescope
 );
 
-const telescopeFibreAtPair = (
-    base: CoreDirected1bExpression,
-    family: CoreDirected1bExpression,
-    telescope: CoreDirected1bExpression,
-    point: CoreDirected1bExpression,
-    value: CoreDirected1bExpression
-): CoreDirected1bExpression => fibre(
-    sigmaCategory(base, family),
-    sigmaTelescopeFamily(base, family, telescope),
-    dependentPair(base, family, point, value)
-);
-
 const K = variable('K');
 const R = variable('R');
 const E = variable('E');

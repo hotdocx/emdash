@@ -1,1 +1,1 @@
-export * from '../../src/v3_2/browser.js';
+export * from '../../src/v3_2/browser_directed.js';

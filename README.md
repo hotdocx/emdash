@@ -170,6 +170,28 @@ The optional higher-action witness remains available as:
 ./scripts/pnpmw run demo:categorical-displayed-nd-higher
 ```
 
+## TypeScript browser demo
+
+The standalone browser fixture now exposes two client-side views:
+
+- a fixed outer dependent-LF Sigma-telescope witness with explicit Core,
+  inferred/reduced types, a two-step computation trace, and a wrong-family
+  diagnostic; and
+- the preserved editable `emdash-v3.2-mvp-1` minimal-Core playground.
+
+Build both from the repository root with:
+
+```bash
+./scripts/pnpmw run check:browser-directed
+```
+
+The output under `emdash-template/dist/` uses relative assets and is suitable
+for a static project-subpath deployment such as
+`https://hotdocx.github.io/emdash/`. It runs the TypeScript checker/evaluator
+entirely in the client with no Node builtin or production Lambdapi process.
+No GitHub Pages workflow or publication is included yet, and categorical
+browser promotion remains a separately measured boundary.
+
 ## Development workspace and Git worktrees
 
 The repository uses one pnpm 11 workspace and one `pnpm-lock.yaml` for the

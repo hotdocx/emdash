@@ -16,12 +16,10 @@ import {
     CoreDeclarationEnvironment
 } from './context';
 import {
-    CoreChecker,
-    CoreCheckerError
+    CoreChecker
 } from './checker';
 import {
     KernelArgument,
-    KernelCall,
     KernelExpression,
     KernelReference,
     Provenance,
