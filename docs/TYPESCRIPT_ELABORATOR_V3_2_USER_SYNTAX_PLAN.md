@@ -20,7 +20,8 @@ exactly under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; the user's
 H-DTTLF-PRODUCT-SYNTAX-03 / D-DTTLF-PRODUCT-SYNTAX-003 correction separates
 intrinsic `λ^mode` capability from an optional `: annotation`; no located tree
 or resolver landed as unused runtime infrastructure; SYNTAX-1A is implemented
-and final-green, with its exact local checkpoint pending
+and final-green at exact local checkpoint
+`7513cbe9e0d1439b5b1250982f40cede48e9a811`
 
 ## Purpose And Meaning Of Usability
 
@@ -903,7 +904,7 @@ Node-independent, but a browser UI is a separate product boundary.
 | SYNTAX-RESOLVE-0B | approved exactly as proposed under D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; proposal checkpoint `5e33a58` | SYNTAX-0A and selected product priority | Deeply frozen parser-independent types/API/diagnostic/qualification contract; no standalone runtime AST |
 | SYNTAX-PARSER-0C | complete | D-DTTLF-PRODUCT-SYNTAX-001 | Parsimmon and tiny-parser parsed/rejected the same corpus; both browser-build; measurements above select the dependency-free tiny parser |
 | SYNTAX-NOTATION-0D | complete as direct human correction D-DTTLF-PRODUCT-SYNTAX-003; synchronization active | approved D-DTTLF-PRODUCT-SYNTAX-002 implementation, before its runtime checkpoint | Intrinsic `λ^mode`, optional checked `: annotation`, expected-source recovery, mode-specific semantic gates, and deferred repository-wide notation consolidation |
-| SYNTAX-1A | complete and final-green under D-DTTLF-PRODUCT-SYNTAX-002 as corrected by direct human D-DTTLF-PRODUCT-SYNTAX-003; exact local checkpoint pending; proposal checkpoint `6766eba` | parser-selection/implementation review and SYNTAX-NOTATION-0D | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example landed as one user-visible slice |
+| SYNTAX-1A | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811` under D-DTTLF-PRODUCT-SYNTAX-002 as corrected by direct human D-DTTLF-PRODUCT-SYNTAX-003; proposal checkpoint `6766eba` | parser-selection/implementation review and SYNTAX-NOTATION-0D | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example landed as one user-visible slice |
 | SYNTAX-BROWSER-1B | deferred | reviewed parser and browser profile | Editable browser input without a second checker or server |
 | SYNTAX-GRADUATE-1 | pending | selected syntax rows | Exact grammar, binder/action matrix, diagnostics, performance observation, and deferrals |
 
@@ -998,8 +999,9 @@ broader grammar, semantic feature, dependency, browser, or Git effect.
   witnesses; `G p` follows the existing expected whole-Hom action. Thirteen
   focused tests, typecheck, lint, the actual demo, the 1,127-test aggregate,
   and bounded active Lambdapi check pass. No dependency/lock, Core/checker/
-  evaluator/action-table, Lambdapi, or browser-entry delta occurred. The
-  exact local implementation checkpoint is pending.
+  evaluator/action-table, Lambdapi, or browser-entry delta occurred. Exact
+  local implementation checkpoint:
+  `7513cbe9e0d1439b5b1250982f40cede48e9a811`.
 - **2026-07-29 — D-DTTLF-PRODUCT-SYNTAX-003 human correction recorded.**
   During the uncommitted SYNTAX-1A implementation, the user clarified that
   functorial, natural, displayed-functorial, and displayed-natural capability

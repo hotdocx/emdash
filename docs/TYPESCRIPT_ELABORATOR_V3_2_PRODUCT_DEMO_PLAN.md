@@ -27,7 +27,8 @@ implementation proposal, now separately approved with human supersession;
 direct human correction H-DTTLF-PRODUCT-SYNTAX-03 /
 D-DTTLF-PRODUCT-SYNTAX-003 separates intrinsic `λ^mode` capability from an
 optional checked `: annotation`, and the corrected SYNTAX-1A implementation
-is final-green with its exact local checkpoint pending
+is final-green at exact local checkpoint
+`7513cbe9e0d1439b5b1250982f40cede48e9a811`
 
 ## Human Direction And Purpose
 
@@ -353,7 +354,7 @@ Exact local implementation checkpoint:
 | PRODUCT-BROWSER-0A | complete; routed to dedicated browser plan | PRODUCT-DEMO-1B | The directed dependent closure is Node-free and Vite/Chromium-green; the full report reaches `node:crypto` through acquisition/audit modules. Frozen additive BROWSER-DIRECTED-1A and deferred categorical runtime-spec separation are recorded in [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md) |
 | PRODUCT-BROWSER-1 | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, fixed dependent-LF plus preserved minimal-Core views, Node-free/static project-subpath build, real-browser evidence, and no semantic/dependency delta |
 | PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); the measured comparison selected the tiny dependency-free parser |
-| PRODUCT-SYNTAX-1 | complete and final-green; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003; exact local checkpoint pending | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
+| PRODUCT-SYNTAX-1 | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003 | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
 | PRODUCT-GRADUATE-1 | pending | required product rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
@@ -589,4 +590,5 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   program. Thirteen focused tests, the actual demo, typecheck/lint, the
   1,127-test aggregate, and bounded active Lambdapi check pass. No
   dependency/lock, checker/evaluator/Core/action-table, browser, or Lambdapi
-  delta occurred; the exact local implementation checkpoint is pending.
+  delta occurred. Exact local implementation checkpoint:
+  `7513cbe9e0d1439b5b1250982f40cede48e9a811`.

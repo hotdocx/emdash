@@ -3352,11 +3352,11 @@ D-DTTLF-PRODUCT-SYNTAX-003 now requires intrinsic binder heads (`λ^f`,
 checked by expected classifier information. Only ordinary `^f` lowering is in
 the active slice; parsing the other modes does not implement them, and final
 cross-environment notation consolidation remains deferred. No standalone
-second AST may land. The corrected SYNTAX-1A slice is now implemented and
-final-green with its exact local checkpoint pending: 13 focused tests, the
-actual command, typecheck/lint, the 1,127-test aggregate, and bounded active
-Lambdapi check pass with no dependency/lock, semantic-engine, browser, or
-Lambdapi delta.
+second AST may land. The corrected SYNTAX-1A slice is implemented and
+final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`: 13 focused tests,
+the actual command, typecheck/lint, the 1,127-test aggregate, and bounded
+active Lambdapi check pass with no dependency/lock, semantic-engine, browser,
+or Lambdapi delta.
 When those living plans route back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending
@@ -3999,5 +3999,6 @@ scope is affected.
   Core, neutral application reuses the existing action classifier, and
   unsupported modes fail closed. The command, typecheck/lint, 1,127-test
   aggregate, and bounded active Lambdapi check pass. No dependency/lock,
-  checker/evaluator/Core/action-table, browser, or Lambdapi delta occurred;
-  the exact local implementation checkpoint is pending.
+  checker/evaluator/Core/action-table, browser, or Lambdapi delta occurred.
+  Exact local implementation checkpoint:
+  `7513cbe9e0d1439b5b1250982f40cede48e9a811`.

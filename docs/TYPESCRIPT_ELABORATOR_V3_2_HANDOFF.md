@@ -419,10 +419,11 @@ implementation the user supplied H-DTTLF-PRODUCT-SYNTAX-03 /
 D-DTTLF-PRODUCT-SYNTAX-003 as a direct correction: capability is intrinsic
 (`λ^f`, `λ^n`, `λ^fd`, `λ^nd`) while `: A` is a separate optional annotation
 checked against bidirectional expected information. Corrected SYNTAX-1A is now
-implemented and final-green, with its exact local checkpoint pending: the
-private parser/resolver, public development export, command, example, and 13
-focused tests landed together; the 1,127-test aggregate and bounded active
-Lambdapi check pass. Only `^f` lowers in the first profile; other modes are
+implemented and final-green at
+`7513cbe9e0d1439b5b1250982f40cede48e9a811`: the private parser/resolver,
+public development export, command, example, and 13 focused tests landed
+together; the 1,127-test aggregate and bounded active Lambdapi check pass.
+Only `^f` lowers in the first profile; other modes are
 lexically recognized and fail closed. No unused second AST/resolver, parser
 dependency, checker/action table, Core owner, browser entry, or Lambdapi
 change was added, and this experimental TypeScript spelling does not yet
