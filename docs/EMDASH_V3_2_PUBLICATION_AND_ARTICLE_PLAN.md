@@ -4,7 +4,7 @@ Date: 2026-07-30
 Plan-ID: EMDASH-V3.2-PUBLICATION-AND-ARTICLE
 Status: active living publication plan; repository cleanup, artifact ownership,
 landing/reviewer, overview article, and bounded publication checkpoint
-complete; integration and deployment in progress
+complete; local integration complete; deployment in progress
 
 Depends-On:
 
@@ -434,7 +434,7 @@ route fails for a measured repository constraint.
 | ARTICLE-PROSE-1E | complete at `f547dd4f0b38aad7b2062b91faab777ed4584a9a`; 7,127-word descriptive source registered as `emdash-v3-2-overview` | ARTICLE-THESIS-1D | Rewrite the active v3.2 workbench as the descriptive overview source and register it |
 | ARTICLE-ARTIFACT-1F | complete and focused-green at `f547dd4f0b38aad7b2062b91faab777ed4584a9a`; 15 pages, 11 embedded fonts, all-page visual QA, exact public promotion | PUBLICATION-OWNERS-1B, ARTICLE-PROSE-1E | Targeted validation, deterministic PDF, all-page visual QA, and promoted `docs/emdash3_2.{md,pdf}` |
 | PUBLICATION-CHECKPOINT-1G | complete at `f547dd4f0b38aad7b2062b91faab777ed4584a9a` | LANDING-REVIEWER-1C, ARTICLE-ARTIFACT-1F | Exact staged review, focused green gates, synchronized ledgers, bounded local checkpoint |
-| PUBLICATION-INTEGRATE-1H | pending | PUBLICATION-CHECKPOINT-1G | Fetch, verify ancestry, fast-forward local `main`, and preserve worktree |
+| PUBLICATION-INTEGRATE-1H | complete at integrated product head `0c973b329cf374df311884e4609f0ef731637eda` | PUBLICATION-CHECKPOINT-1G | Fetch, verify ancestry, fast-forward local `main`, and preserve worktree |
 | PUBLICATION-PAGES-1I | pending | PUBLICATION-INTEGRATE-1H | Push `main`, configure Actions Pages, monitor deployment, and verify the live reviewer/book/article routes |
 | PUBLICATION-GRADUATE-1J | pending | PUBLICATION-PAGES-1I | Freeze the exact public capability, recovery state, and remaining research boundaries |
 
@@ -517,6 +517,15 @@ does not authorize mathematical changes.
   byte sizes, and no console or page error. No root TypeScript, Lambdapi,
   conformance, complete print, full-book render, or repository-wide aggregate
   was rerun.
+- **2026-07-30 - `PUBLICATION-INTEGRATE-1H` complete at integrated product
+  head `0c973b329cf374df311884e4609f0ef731637eda`.** Fetched `origin/main` and
+  inspected all four registered worktrees, including staged and unstaged
+  state; all were clean. `origin/main` was a strict ancestor of local `main`
+  by 185 commits, and local `main` was a strict ancestor of the goal branch by
+  132 commits. Both divergence checks reported zero commits on the opposing
+  side. Fast-forwarded `/home/user1/emdash1` from
+  `e7c4928f56b7015cd70f4ec49b3a36caafbe5753` to the integrated product head
+  without merge commit, reset, rebase, worktree removal, or branch deletion.
 
 ## Targeted Validation
 
