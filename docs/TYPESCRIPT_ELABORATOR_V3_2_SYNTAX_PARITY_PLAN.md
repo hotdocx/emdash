@@ -33,7 +33,10 @@ non-self-authorizing D004 proposal checkpointed at
 `4eada97f9ee8fe284b70dea6c0548dfdb9754189`; a separate immutable unattended
 D004 review now approves it exactly as proposed with human supersession; the
 bounded 1B3 implementation is final-green at exact local checkpoint
-`3dcf25ec008bb3d30723e3251c222e88acc216a3`.
+`3dcf25ec008bb3d30723e3251c222e88acc216a3`; `SYNTAX-PARITY-1C0` is a
+focused-green zero-behavior-delta residual-constructor audit with a deeply
+frozen non-self-authorizing D005 proposal in the goal worktree; its exact
+local audit checkpoint is pending.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -719,6 +722,81 @@ historical graduation, reviewer, build, and real-browser gates cover the
 changed boundary. No live Lambdapi rerun is triggered because this slice
 changes no mathematical source or transferred semantic input.
 
+## `SYNTAX-PARITY-1C0` Residual Constructor Audit
+
+The executable post-1B3 audit in
+`src/v3_2/categorical_text_constructor_audit.ts` reclassifies the remaining
+mathematical-constructor surface before adding behavior. It confirms:
+
+- the private located tree still needs no new node kind;
+- `indexOf`, `fibrePair`, and `composeCells` are the only reserved operation
+  heads presently routed before generic application;
+- `compose G F` therefore fails exactly with `UNKNOWN_IDENTIFIER` on
+  `compose`, while direct `composeFunctors(G,F)` is green;
+- all six ordinary structural term constructors are already owned and typed
+  by the direct program;
+- displayed/fibred term constructors need a finite argument-kind audit, not a
+  new action table; and
+- category/displayed-family-valued constructors need one checked result-kind
+  contract over the same parser and program, not a second AST, checker, or
+  dependent-family inference algorithm.
+
+The audit refines 1C into four finite rows:
+
+| Row | Exact responsibility |
+| --- | --- |
+| `SYNTAX-PARITY-1C1` | Six ordinary structural term heads: `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` |
+| `SYNTAX-PARITY-1C2` | Remaining selected displayed/fibred term constructors after an explicit family/category/term/Hom-boundary argument-kind audit |
+| `SYNTAX-PARITY-1C3` | Category and displayed-family result constructors through one typed result contract over the same located parser |
+| `SYNTAX-PARITY-GRADUATE-1` | Freeze the exact mathematical-expression target and classify host context construction/inspection as textual or deliberately non-expression behavior |
+
+This split prevents two opposite errors: it does not stop at six convenient
+ordinary heads and falsely call that complete parity, and it does not turn
+host fixture/inspection methods into expression grammar merely because they
+are public TypeScript methods.
+
+### Proposed gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-05`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-005` proposes only
+`SYNTAX-PARITY-1C1`:
+
+- recognize the exact fixed-arity reserved spines
+  `id A`, `compose G F`, `pair F H`, `map F P`, `pi1 B C`, and `pi2 B C`;
+- add no grammar production or located node;
+- resolve term arguments recursively through the existing resolver;
+- resolve category arguments only as checked immutable category bindings in
+  this row;
+- call the existing `identityFunctor`, `composeFunctors`, `functorPair`,
+  `productMap`, `productLeftProjection`, and `productRightProjection`
+  methods;
+- retain the direct program as the sole classifier/endpoint/profile
+  authority and generic `apply` as the only non-reserved application path;
+- prove equal explicit Core and inferred functor classifiers against all six
+  direct constructions; and
+- add no reviewer preset, because the existing editable workbench already
+  accepts arbitrary source and another frozen preset would add product
+  ceremony rather than capability evidence.
+
+Exact negatives cover arity, category-versus-term kinds, foreign values,
+composition endpoint mismatch, pair source mismatch, and profile
+unavailability. The proposal adds no category/family result syntax,
+displayed/fibred constructor syntax, mathematical owner, program method,
+Core/checker/evaluator/runtime branch, expected-action table, parser
+dependency, Lambdapi input, browser preset, book prose, scale row, or
+publication.
+
+Five focused executable tests, root typecheck, and lint pass. The audit
+changes no runtime behavior. Its separate exact gate is:
+
+> Approve `H-DTTLF-PRODUCT-SYNTAX-PARITY-05 /
+> D-DTTLF-PRODUCT-SYNTAX-PARITY-005` as proposed: implement only the six
+> frozen ordinary structural term heads through their existing typed program
+> methods, recursive term resolution, checked category identifiers, direct
+> equality and exact negatives; add no category/family-valued syntax,
+> displayed/fibred constructor syntax, semantic owner/rule/profile,
+> Lambdapi change, reviewer preset, book/scale work, publication, or wider
+> Git authority?
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -821,7 +899,11 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B2 | **final-green at `ba34771074363f4c5b33814269b8822d4d2362bb`; audit/proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15`** | approved D003 review | One comma sibling group, optional positional family annotations, ordered-family expected contract, existing `displayedContextLambda`/`fibrePair` routes, eighth reviewer preset, 64/64 proportional gate, production build, and real Chromium |
 | SYNTAX-PARITY-1B3 | **final-green at `3dcf25ec008bb3d30723e3251c222e88acc216a3`; audit/proposal at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`** | final-green 1B2 and approved D004 review | Exact semicolon/comma `[1,1]`/`[1,2,1]` presentations, grouped expected families, existing dependent-context route, complete negatives, browser-safe reviewed runtime split, ninth reviewer preset, production build, and real Chromium |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-04 / D-DTTLF-PRODUCT-SYNTAX-PARITY-004 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B3 audit/proposal | Authorizes only semicolon dependency levels for the two existing direct shapes and one mixed-telescope reviewer preset |
-| SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
+| SYNTAX-PARITY-1C0 | **focused-green zero-behavior audit in goal worktree; checkpoint pending** | final-green `SYNTAX-PARITY-1B3` | Executable residual constructor inventory, exact 1C1/1C2/1C3 split, six direct-green ordinary witnesses, and bounded non-self-authorizing D005 proposal |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | pending separate exact review | checkpointed 1C0 audit/proposal | Would authorize only six ordinary structural term heads over existing typed methods |
+| SYNTAX-PARITY-1C1 | gated | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality and exact negatives |
+| SYNTAX-PARITY-1C2 | gated | final-green 1C1 plus a separate exact audit/review | Remaining selected displayed/fibred term constructors with finite typed argument contracts |
+| SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
@@ -876,15 +958,16 @@ classifier-directed programs, and distinguish parsing, typed elaboration,
 and internal categorical factorization. Never guess an application action or
 promote arbitrary pointwise data to coherent categorical data.
 
-Recover the completed SYNTAX-PARITY-0A inventory and final-green
-SYNTAX-PARITY-1A, 1B1, 1B2, and 1B3 implementations. Do not reimplement those
-rows. Preserve commas as independent siblings at one dependency level and
+Recover the completed SYNTAX-PARITY-0A inventory, final-green
+SYNTAX-PARITY-1A/1B implementations, and focused-green zero-behavior
+SYNTAX-PARITY-1C0 residual-constructor audit. Do not reimplement those rows.
+Preserve commas as independent siblings at one dependency level and
 semicolons as successive dependency levels only for exact direct group sizes
-`[1,1]` and `[1,2,1]`. Continue with a zero-behavior `SYNTAX-PARITY-1C`
-inventory refinement and bounded proposal for the remaining selected
-mathematical constructors; do not add constructor behavior before its
-separate exact review. A missing direct semantic capability belongs in the
-relevant usability/kernel plan, not in parser heuristics.
+`[1,1]` and `[1,2,1]`. Checkpoint the 1C0 audit/proposal if needed, obtain or
+record its separate exact D005 review, then implement only the approved 1C1
+ordinary structural heads. Do not silently add 1C2 displayed/fibred or 1C3
+category/family-result behavior. A missing direct semantic capability belongs
+in the relevant usability/kernel plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -900,6 +983,15 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1C0` residual constructors audited.**
+  Reclassified the post-1B3 mathematical surface into six mechanical ordinary
+  term heads, a separately gated displayed/fibred term row, a separately
+  gated category/family-result row, and graduation-time host-operation
+  classification. Direct execution confirms all six ordinary targets are
+  green while text fails exactly at the unknown `compose` head. Froze a
+  bounded non-self-authorizing D005 proposal with no browser preset or
+  semantic delta. Five focused tests, typecheck, and lint pass; exact local
+  audit/proposal checkpoint is pending.
 - **2026-07-30 — `SYNTAX-PARITY-1B3` implemented and final-green.** Added
   exact semicolon dependency levels for only `[1,1]` and `[1,2,1]`, grouped
   expected families, positional optional annotations, recursive existing-body

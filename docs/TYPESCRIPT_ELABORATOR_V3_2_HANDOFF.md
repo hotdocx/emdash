@@ -531,7 +531,18 @@ green; Chromium accepts the mixed telescope with zero console errors or
 warnings. No owner, rule, profile, Core/checker/evaluator path, dependency
 planner, factorization case, transfer semantic input, or Lambdapi source
 changed. Arbitrary-depth/general dependent syntax remains closed; 1C is the
-next zero-behavior constructor inventory/proposal row.
+next constructor-parity stage.
+
+Its first zero-behavior row, `SYNTAX-PARITY-1C0`, is focused-green in the goal
+worktree and awaits only its audit/proposal checkpoint. It confirms that the
+six ordinary structural term constructors are direct-green while
+`compose G F` fails text resolution exactly at the unknown `compose` head.
+It freezes `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` as the bounded
+non-self-authorizing D005 proposal, with no grammar node, semantic owner,
+browser preset, or Lambdapi change. It separately gates displayed/fibred term
+constructors as 1C2 and category/displayed-family result constructors as 1C3;
+the latter must reuse the same parser/checker architecture rather than add a
+second frontend. Five focused tests, typecheck, and lint pass.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

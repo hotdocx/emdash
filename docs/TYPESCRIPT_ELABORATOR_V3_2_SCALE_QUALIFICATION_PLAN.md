@@ -3441,6 +3441,13 @@ are outside the current persistent goal and require a future explicit goal.
 Do not silently substitute the pending SCALE-STRESS-1B profile or deferred
 protected-module/bulk rows.
 
+The focused-green zero-behavior `SYNTAX-PARITY-1C0` audit now refines that
+product row into 1C1 ordinary structural term heads, 1C2 displayed/fibred
+term constructors, and 1C3 category/family-result constructors. Its D005
+proposal selects only the six direct-green ordinary heads and explicitly adds
+no scale owner, profile, transfer input, Lambdapi change, or reviewer preset.
+Its exact local audit checkpoint is pending.
+
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
 bounded review approves it. This is not bulk scale authority. The current

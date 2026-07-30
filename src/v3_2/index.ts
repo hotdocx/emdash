@@ -113,6 +113,7 @@ export * from './categorical_text_parity_audit';
 export * from './categorical_text_structural_audit';
 export * from './categorical_text_sibling_audit';
 export * from './categorical_text_dependent_audit';
+export * from './categorical_text_constructor_audit';
 export * from './categorical_usability_graduation_proposal';
 export * from './categorical_usability_graduation_review';
 export * from './categorical_dependent_usability_proposal';
