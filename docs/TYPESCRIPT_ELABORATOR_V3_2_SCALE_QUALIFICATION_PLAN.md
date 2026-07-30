@@ -3418,8 +3418,9 @@ audit now selects one parenthesized comma sibling group, exact `fibrePair`,
 and an expected ordered-family contract over the existing direct methods;
 semicolons and genuine dependencies remain separately gated as 1B3. Its
 deeply frozen D003 proposal awaits exact review at checkpoint
-`f53fd6885dd2fac0345bad5db257c7a66f86af15`. None changes or resumes a scale
-row. After exact parity graduation, follow
+`f53fd6885dd2fac0345bad5db257c7a66f86af15`; a separate immutable unattended
+review now approves only that exact scope with human supersession. None
+changes or resumes a scale row. After exact parity graduation, follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows
 are outside the current persistent goal and require a future explicit goal.

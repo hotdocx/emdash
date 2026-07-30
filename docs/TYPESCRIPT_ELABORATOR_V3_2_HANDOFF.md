@@ -498,6 +498,9 @@ independent dependency level, reserves semicolons for 1B3, and freezes a
 non-self-authorizing D003 proposal over only the existing direct methods.
 Exact local audit/proposal checkpoint:
 `f53fd6885dd2fac0345bad5db257c7a66f86af15`.
+A separate immutable D003 unattended review now approves that exact bounded
+scope with human supersession; 1B2 implementation is dependency-ready, while
+semicolon-dependent 1B3 remains closed.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
