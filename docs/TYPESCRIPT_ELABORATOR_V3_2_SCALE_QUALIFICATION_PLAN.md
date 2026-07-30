@@ -3357,7 +3357,10 @@ final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`: 13 focused tests,
 the actual command, typecheck/lint, the 1,127-test aggregate, and bounded
 active Lambdapi check pass with no dependency/lock, semantic-engine, browser,
 or Lambdapi delta.
-When those living plans route back here, continue with
+The product plan now freezes the documentation-only
+H-DTTLF-PRODUCT-GRADUATE-01 / D-DTTLF-PRODUCT-GRADUATE-001 proposal to
+consolidate the three runnable product lanes and their exact limitations.
+After its separate review and completion route back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.

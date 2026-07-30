@@ -28,7 +28,8 @@ direct human correction H-DTTLF-PRODUCT-SYNTAX-03 /
 D-DTTLF-PRODUCT-SYNTAX-003 separates intrinsic `λ^mode` capability from an
 optional checked `: annotation`, and the corrected SYNTAX-1A implementation
 is final-green at exact local checkpoint
-`7513cbe9e0d1439b5b1250982f40cede48e9a811`
+`7513cbe9e0d1439b5b1250982f40cede48e9a811`; PRODUCT-GRADUATE-1 is the
+dependency-ready bounded documentation/handoff row
 
 ## Human Direction And Purpose
 
@@ -355,7 +356,7 @@ Exact local implementation checkpoint:
 | PRODUCT-BROWSER-1 | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, fixed dependent-LF plus preserved minimal-Core views, Node-free/static project-subpath build, real-browser evidence, and no semantic/dependency delta |
 | PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); the measured comparison selected the tiny dependency-free parser |
 | PRODUCT-SYNTAX-1 | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003 | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
-| PRODUCT-GRADUATE-1 | pending | required product rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
+| PRODUCT-GRADUATE-1 | proposed exactly as H-DTTLF-PRODUCT-GRADUATE-01 / D-DTTLF-PRODUCT-GRADUATE-001; not self-authorized | completed selected browser and syntax rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
 
@@ -447,6 +448,67 @@ layering. The syntax audit confirms that text needs only a small located
 syntax plus recursive resolution into the existing programs; it does not
 justify a second checker or select Parsimmon merely from historical use.
 
+## PRODUCT-GRADUATE-1 — Frozen Product Handoff Proposal
+
+Gate:
+`H-DTTLF-PRODUCT-GRADUATE-01 /
+D-DTTLF-PRODUCT-GRADUATE-001`
+
+This is a bounded documentation and routing row. It adds no runtime feature.
+The proposal may only:
+
+1. update
+   [`TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md`](./TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md)
+   into the current self-contained product-capability handoff;
+2. retain `demo:external-review` as the curated direct-TypeScript
+   outer-LF/ordinary/displayed report;
+3. add `demo:categorical-text` as the editable ordinary categorical input
+   lane, showing both inferred and explicit source annotations;
+4. add `check:browser-directed` as the existing fully client-side directed
+   dependent-LF plus minimal-Core browser lane;
+5. distinguish executable TypeScript text syntax from informal historical
+   Lambdapi/kernel binder notation;
+6. publish one exact command/capability/limitation matrix;
+7. record the green checkpoints and current validation counts; and
+8. route the persistent product continuation back to SCALE-STRESS-3C,
+   SCALE-BATCH-1, and SCALE-GRADUATE-1.
+
+The handoff must say plainly:
+
+- direct typed TypeScript remains the most complete input surface;
+- the text adapter currently lowers only ordinary `^f`, with `^n`, `^fd`, and
+  `^nd` fail-closed;
+- displayed/dependent text telescopes are not implemented even though their
+  direct typed TypeScript consumers are executable;
+- the intrinsic `λ^mode` plus optional `: annotation` spelling is an
+  experimental TypeScript decision, not final cross-environment notation;
+- the browser currently exposes the directed-dependent witness and preserved
+  minimal Core playground, not the categorical text adapter;
+- categorical browser promotion still requires
+  BROWSER-CATEGORICAL-0A runtime-boundary separation and a later review;
+- no GitHub Pages workflow or publication is present;
+- production invokes no Lambdapi process; and
+- product demonstration does not graduate whole-library mechanical transfer,
+  arbitrary displayed depth, groupoidal closure, confluence, unrestricted
+  normalization, or standalone subject reduction.
+
+Acceptance is documentation-specific and bounded:
+
+- every named command and linked source file exists;
+- the new text examples match the final-green SYNTAX-1A tests/demo;
+- the selected browser claim matches the final-green additive browser plan;
+- current aggregate counts and checkpoints are exact;
+- README, handoff, product, syntax, browser, and scale navigation agree;
+- `git diff --check` and `git diff --cached --check` pass; and
+- the exact staged diff changes documentation only.
+
+### Exact non-authorization
+
+The proposal authorizes no parser or semantic expansion, browser entry or UI,
+runtime-boundary refactor, dependency/lock change, checker/evaluator/Core/
+action-table change, Lambdapi source or process change, deployment/workflow/
+publication, scale result, or remote/broad Git operation.
+
 ## Scale Relationship
 
 This plan changes priority, not truth:
@@ -522,6 +584,12 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-29 — H-DTTLF-PRODUCT-GRADUATE-01 frozen.** With the selected
+  external-review, directed-browser, and ordinary categorical-text rows
+  final-green, proposed one documentation-only graduation that consolidates
+  their runnable command matrix and exact limitations, then routes back to
+  the remaining scale qualification. It changes no runtime or product
+  behavior and is not self-authorizing.
 - **2026-07-29 — PRODUCT-DEMO-0A completed and PRODUCT-DEMO-1A proposed.**
   Inventoried sixteen current root demos, the minimal browser barrel, and the
   historical Parsimmon frontend. Selected a three-panel external-review CLI

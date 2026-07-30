@@ -465,7 +465,8 @@ scale plan's living launch prompt. The selected sequence is:
 3. obtain or record the exact D-DTTLF-SCALE-INDUCTIVE-002 review and close
    only the frozen zero-new-engine SCALE-INDUCTIVE-1B2 continuation; and
 4. follow the product plan through its reviewed external-review demo and
-   measured parser/browser decision gates; then
+   measured parser/browser decision gates, then close the documentation-only
+   H-DTTLF-PRODUCT-GRADUATE-01 handoff; then
 5. return through SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
 
 ## Purpose
