@@ -63,7 +63,8 @@ graduation. A separate immutable D009 unattended review approves that exact
 scope with human supersession. The bounded 1D1 correction is now
 focused-green at exact local checkpoint
 `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`. Final syntax graduation is
-next.
+next. The exact zero-behavior `SYNTAX-PARITY-GRADUATE-1` proposal is frozen
+below for separate D010 review.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1463,6 +1464,77 @@ implementation checkpoint is
 `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`.
 `SYNTAX-PARITY-GRADUATE-1` is now the next dependency-ready row.
 
+## `SYNTAX-PARITY-GRADUATE-1` Exact Proposal
+
+This is a product-boundary decision, not another parser implementation. It
+binds the executable post-1C3 inventory/audit to the final-green 1D1
+correction and proposes graduation only for the following exact envelope:
+
+1. the original 68 public categorical-program methods remain partitioned
+   into 47 mathematical-expression methods and 21 deliberately host-side
+   declaration, fixture, inspection, comparison, serialization, and
+   compilation methods;
+2. the mathematical text surface consists of the 37 canonical named heads,
+   four intrinsic binder modes, the reviewed sibling and exact
+   `[1,1]`/`[1,2,1]` dependency presentations, generic classifier-directed
+   application, and explicitly expected finite ordinary-lambda nesting;
+3. `substituteFamily` remains normalized to the sole `pullback` spelling;
+4. every selected direct-green mathematical parser gap in the executable
+   audit is closed, including the reviewed nested ordinary
+   exchange/currying construction; and
+5. all resolution still targets the one existing typed
+   `CoreCategoricalProgram`, explicit Core, checker, evaluator, and runtime.
+
+Graduation deliberately preserves the following boundaries:
+
+- compound binder annotations are optional presentation convenience rather
+  than a missing semantic capability;
+- arbitrary displayed telescope depth and arbitrary pointwise coherence
+  synthesis remain limitations of the direct semantic API itself;
+- mixed nested `^n`/`^fd`/`^nd` classifiers remain an unreviewed direct
+  semantic boundary, not a silently inferred text feature;
+- text parity does not mean parity with arbitrary JavaScript callback
+  control flow;
+- parsing, typed resolution, and internal categorical factorization remain
+  distinct fail-closed phases; and
+- future direct mathematical capabilities must first exist coherently in the
+  typed API and then receive their own measured syntax route.
+
+The evidence is intentionally layered and proportional. The executable
+graduation audit remains deeply frozen and green; the 1D1 implementation
+corpus is 4/4; the graduation-audit plus base-text regressions are 17/17;
+and root typecheck/lint are green. Earlier syntax checkpoints retain their
+recorded aggregate, production-build, and Chromium evidence. Since 1D1
+changes no Core, checker, evaluator, runtime, browser entry, packaging,
+Lambdapi source, or semantic profile, this proposal carries that evidence
+forward rather than rerunning the twenty-minute aggregate or browser gates.
+Those gates remain required when their actual boundary changes or at a later
+repository/product release boundary that genuinely needs them.
+
+Graduation adds no behavior and authorizes no new token, AST, parser
+dependency, application heuristic, category decomposition, external
+coherence evidence, mathematical owner, program method, Core/checker/
+evaluator/runtime/proof rule, semantic profile, transfer input, Lambdapi
+source, browser preset, book prose/artifact, scale row, publication, merge,
+or push. Its sole successor effect is to make `BOOK-DELTA-0A`
+dependency-ready under the dedicated book/repository plan.
+
+### Proposed gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-10`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-010` asks:
+
+> Approve `H-DTTLF-PRODUCT-SYNTAX-PARITY-10 /
+> D-DTTLF-PRODUCT-SYNTAX-PARITY-010` as proposed: graduate the text adapter
+> only for the exact audited mathematical-expression envelope above, retain
+> all semantic and host-operation boundaries and non-effects, accept the
+> proportional carried-forward aggregate/browser evidence because no
+> corresponding boundary changed, and route the current product goal to
+> `BOOK-DELTA-0A` without resuming bulk scale work?
+
+The proposal is non-self-authorizing. It requires a separate immutable exact
+review, with any explicit later human decision superseding an unattended
+review under the standing delegation.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1577,7 +1649,8 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-GRADUATE-0A | **focused-green audit at `8d5671e5062910d9a1b52727db469fc582c9669c`; graduation blocked by one measured direct-green parser gap** | final-green 1C3 | Exact 68-method host/expression partition, 37-head text envelope, semantic versus presentation residuals, and bounded 1D1 correction proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-09 / D-DTTLF-PRODUCT-SYNTAX-PARITY-009 | **approved as proposed; immutable unattended review with human supersession** | checkpointed graduation audit/proposal | Authorizes only recursive ordinary-functor `bodyExpected` and the reviewed nested exchange/currying witness |
 | SYNTAX-PARITY-1D1 | **final-green at `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`** | graduation audit and D009 review | Recursive expected-classifier route for the reviewed nested ordinary `^f` exchange/currying witness, three-level recursion, exact negative boundaries, 4/4 focused implementation plus 17/17 audit/base regressions, and green typecheck/lint |
-| SYNTAX-PARITY-GRADUATE-1 | **dependency-ready for exact graduation audit/review** | focused-green 1D1 plus exact graduation review | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-10 / D-DTTLF-PRODUCT-SYNTAX-PARITY-010 | **exact zero-behavior graduation proposal frozen; separate review pending** | final-green 1D1 and executable graduation audit | Proposes only the exact 47-expression/21-host partition, current text envelope, retained semantic boundaries, proportional evidence reuse, and route to BOOK-DELTA-0A |
+| SYNTAX-PARITY-GRADUATE-1 | **proposal frozen; awaiting separate exact D010 review** | final-green 1D1 plus exact graduation review | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
 
@@ -1644,10 +1717,10 @@ focused-green, deeply frozen 1C2B audit/proposal. Retain `eta x` and `eta x u`
 as generic whitespace application, `eta p u` as rejected generic component
 application, and `FF p u` as the distinct object-level route. A nested
 ordinary lambda is supported only to the explicit recursive expected-tree
-depth; missing or stale expectations remain fail-closed. Continue with the
-exact `SYNTAX-PARITY-GRADUATE-1` audit/review. A missing direct semantic
-capability belongs in the relevant usability/kernel plan, not in parser
-heuristics.
+depth; missing or stale expectations remain fail-closed. Recover the frozen
+zero-behavior D010 graduation proposal and do not route to book work before
+its separate exact review. A missing direct semantic capability belongs in
+the relevant usability/kernel plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -1663,6 +1736,13 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-GRADUATE-1` exact proposal frozen.** Bound
+  the executable 68-method audit to final-green 1D1, retained the exact
+  47-expression/21-host partition and all semantic residuals, and proposed
+  only graduation of the current mathematical text envelope followed by
+  `BOOK-DELTA-0A`. The proposal carries forward recorded aggregate/browser
+  evidence because no corresponding boundary changed and requires a
+  separate immutable D010 review. It changes no behavior.
 - **2026-07-30 — `SYNTAX-PARITY-1D1` implemented and focused-green.** Added
   only an optional recursive ordinary-functor expected contract and routed
   matching nested lambda bodies through the existing root dispatcher and

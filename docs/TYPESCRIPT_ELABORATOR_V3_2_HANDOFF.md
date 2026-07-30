@@ -634,7 +634,12 @@ implementation corpus, 17/17 graduation-audit/base-text regressions, and
 typecheck/lint pass. No aggregate/browser rerun was performed because no
 corresponding boundary changed. Exact local implementation checkpoint:
 `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`.
-`SYNTAX-PARITY-GRADUATE-1` is next.
+The exact zero-behavior `SYNTAX-PARITY-GRADUATE-1` proposal is now frozen as
+H-DTTLF-PRODUCT-SYNTAX-PARITY-10 /
+D-DTTLF-PRODUCT-SYNTAX-PARITY-010. It proposes only the audited
+47-expression/21-host envelope, retained semantic boundaries, proportional
+reuse of recorded aggregate/browser evidence, and routing to
+`BOOK-DELTA-0A`; its separate exact review is next.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

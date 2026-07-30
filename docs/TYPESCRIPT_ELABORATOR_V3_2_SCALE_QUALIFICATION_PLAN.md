@@ -3493,6 +3493,9 @@ scale owner, profile, transfer input, Lambdapi source, or browser behavior
 changed. Final syntax graduation remains the product route, while every bulk
 scale row stays deferred. Exact local implementation checkpoint:
 `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`.
+The zero-behavior D010 graduation proposal is now frozen and awaits its
+separate exact review; it adds no scale authority and routes only to
+`BOOK-DELTA-0A` if approved.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
