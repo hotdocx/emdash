@@ -1543,8 +1543,8 @@ The separate immutable
 approves only this exact zero-behavior graduation envelope under the user's
 standing unattended delegation, with human supersession. The reviewed
 proposal checkpoint is
-`be1eb6cf1e33c17c88615d243fae8a58d1d8cbba`; the exact review checkpoint is
-pending synchronized staged review.
+`be1eb6cf1e33c17c88615d243fae8a58d1d8cbba`; exact review checkpoint:
+`38e0bc2b177773db0faba36e8aaafd12d5e50982`.
 
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
@@ -1660,7 +1660,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-GRADUATE-0A | **focused-green audit at `8d5671e5062910d9a1b52727db469fc582c9669c`; graduation blocked by one measured direct-green parser gap** | final-green 1C3 | Exact 68-method host/expression partition, 37-head text envelope, semantic versus presentation residuals, and bounded 1D1 correction proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-09 / D-DTTLF-PRODUCT-SYNTAX-PARITY-009 | **approved as proposed; immutable unattended review with human supersession** | checkpointed graduation audit/proposal | Authorizes only recursive ordinary-functor `bodyExpected` and the reviewed nested exchange/currying witness |
 | SYNTAX-PARITY-1D1 | **final-green at `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`** | graduation audit and D009 review | Recursive expected-classifier route for the reviewed nested ordinary `^f` exchange/currying witness, three-level recursion, exact negative boundaries, 4/4 focused implementation plus 17/17 audit/base regressions, and green typecheck/lint |
-| H-DTTLF-PRODUCT-SYNTAX-PARITY-10 / D-DTTLF-PRODUCT-SYNTAX-PARITY-010 | **approved as proposed; immutable unattended review with human supersession; proposal at `be1eb6cf1e33c17c88615d243fae8a58d1d8cbba`, review checkpoint pending staged review** | final-green 1D1 and executable graduation audit | Approves only the exact 47-expression/21-host partition, current text envelope, retained semantic boundaries, proportional evidence reuse, and route to BOOK-DELTA-0A |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-10 / D-DTTLF-PRODUCT-SYNTAX-PARITY-010 | **approved as proposed; immutable unattended review with human supersession; proposal at `be1eb6cf1e33c17c88615d243fae8a58d1d8cbba`, review at `38e0bc2b177773db0faba36e8aaafd12d5e50982`** | final-green 1D1 and executable graduation audit | Approves only the exact 47-expression/21-host partition, current text envelope, retained semantic boundaries, proportional evidence reuse, and route to BOOK-DELTA-0A |
 | SYNTAX-PARITY-GRADUATE-1 | **complete; exact D010 envelope approved** | final-green 1D1 plus exact graduation review | Exact text/direct-TypeScript parity envelope and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | **dependency-ready selected successor** | completed SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
@@ -1754,7 +1754,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   approving only the exact audited expression/host partition, retained
   semantic boundaries, proportional evidence reuse, and route to
   `BOOK-DELTA-0A`. The review authorizes no new behavior, book mutation, or
-  scale work; exact review checkpoint pending staged review.
+  scale work. Exact review checkpoint:
+  `38e0bc2b177773db0faba36e8aaafd12d5e50982`.
 - **2026-07-30 — `SYNTAX-PARITY-GRADUATE-1` exact proposal frozen.** Bound
   the executable 68-method audit to final-green 1D1, retained the exact
   47-expression/21-host partition and all semantic residuals, and proposed

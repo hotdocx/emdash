@@ -641,8 +641,8 @@ D-DTTLF-PRODUCT-SYNTAX-PARITY-010. It proposes only the audited
 reuse of recorded aggregate/browser evidence, and routing to
 `BOOK-DELTA-0A`. A separate immutable D010 unattended review approves exactly
 that zero-behavior envelope with human supersession. Syntax parity is
-graduated; the exact review checkpoint is pending synchronized staged review
-and `BOOK-DELTA-0A` is next.
+graduated at exact review checkpoint
+`38e0bc2b177773db0faba36e8aaafd12d5e50982`; `BOOK-DELTA-0A` is next.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

@@ -15,9 +15,10 @@ Syntax parity is final-green through `SYNTAX-PARITY-1D1` at
 `SYNTAX-PARITY-GRADUATE-1` proposal is checkpointed at
 `be1eb6cf1e33c17c88615d243fae8a58d1d8cbba` and approved as proposed by a
 separate immutable D010 unattended review with human supersession. The exact
-review checkpoint is pending synchronized staged review. `BOOK-DELTA-0A` is
-the next row; no book prose, generated artifact, release, public
-presentation, or bulk scale change is yet authorized
+review checkpoint is
+`38e0bc2b177773db0faba36e8aaafd12d5e50982`. `BOOK-DELTA-0A` is the next
+row; no book prose, generated artifact, release, public presentation, or
+bulk scale change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal

@@ -3495,8 +3495,9 @@ scale row stays deferred. Exact local implementation checkpoint:
 `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`.
 The zero-behavior D010 graduation proposal is now approved exactly as
 proposed by a separate immutable unattended review with human supersession.
-It adds no scale authority and makes only `BOOK-DELTA-0A` dependency-ready;
-the exact review checkpoint is pending synchronized staged review.
+It adds no scale authority and makes only `BOOK-DELTA-0A` dependency-ready.
+Exact review checkpoint:
+`38e0bc2b177773db0faba36e8aaafd12d5e50982`.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
