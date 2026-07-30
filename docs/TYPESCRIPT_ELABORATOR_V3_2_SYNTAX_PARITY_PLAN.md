@@ -36,7 +36,8 @@ bounded 1B3 implementation is final-green at exact local checkpoint
 `3dcf25ec008bb3d30723e3251c222e88acc216a3`; `SYNTAX-PARITY-1C0` is a
 focused-green zero-behavior-delta residual-constructor audit with a deeply
 frozen non-self-authorizing D005 proposal checkpointed at
-`487ed014c210ab8426b27c40241b2de0f2f1dc4e`.
+`487ed014c210ab8426b27c40241b2de0f2f1dc4e`; a separate immutable unattended
+D005 review now approves it exactly as proposed with human supersession.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -797,6 +798,11 @@ changes no runtime behavior. Its separate exact gate is:
 > Lambdapi change, reviewer preset, book/scale work, publication, or wider
 > Git authority?
 
+The separate immutable
+[`D-DTTLF-PRODUCT-SYNTAX-PARITY-005` review](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_D005_REVIEW.md)
+now approves only that exact frozen scope under the user's standing
+unattended delegation, with any later explicit human decision superseding it.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -900,8 +906,8 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B3 | **final-green at `3dcf25ec008bb3d30723e3251c222e88acc216a3`; audit/proposal at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`** | final-green 1B2 and approved D004 review | Exact semicolon/comma `[1,1]`/`[1,2,1]` presentations, grouped expected families, existing dependent-context route, complete negatives, browser-safe reviewed runtime split, ninth reviewer preset, production build, and real Chromium |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-04 / D-DTTLF-PRODUCT-SYNTAX-PARITY-004 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B3 audit/proposal | Authorizes only semicolon dependency levels for the two existing direct shapes and one mixed-telescope reviewer preset |
 | SYNTAX-PARITY-1C0 | **focused-green zero-behavior audit at `487ed014c210ab8426b27c40241b2de0f2f1dc4e`** | final-green `SYNTAX-PARITY-1B3` | Executable residual constructor inventory, exact 1C1/1C2/1C3 split, six direct-green ordinary witnesses, and bounded non-self-authorizing D005 proposal |
-| H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | pending separate exact review | checkpointed 1C0 audit/proposal | Would authorize only six ordinary structural term heads over existing typed methods |
-| SYNTAX-PARITY-1C1 | gated | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality and exact negatives |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C0 audit/proposal | Authorizes only six ordinary structural term heads over existing typed methods |
+| SYNTAX-PARITY-1C1 | **dependency-ready** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality and exact negatives |
 | SYNTAX-PARITY-1C2 | gated | final-green 1C1 plus a separate exact audit/review | Remaining selected displayed/fibred term constructors with finite typed argument contracts |
 | SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -993,6 +999,12 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   semantic delta. Five focused tests, typecheck, and lint pass; exact local
   audit/proposal checkpoint:
   `487ed014c210ab8426b27c40241b2de0f2f1dc4e`.
+- **2026-07-30 — D005 separately approved under unattended delegation.**
+  After no immediate human objection to the checkpointed constructor
+  proposal, recorded an immutable, human-supersedable review authorizing only
+  `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` over their existing typed
+  methods. All 1C2/1C3, browser, semantic, book, and scale additions remain
+  withheld.
 - **2026-07-30 — `SYNTAX-PARITY-1B3` implemented and final-green.** Added
   exact semicolon dependency levels for only `[1,1]` and `[1,2,1]`, grouped
   expected families, positional optional annotations, recursive existing-body

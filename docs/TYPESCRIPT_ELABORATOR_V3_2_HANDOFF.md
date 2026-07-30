@@ -544,6 +544,8 @@ browser preset, or Lambdapi change. It separately gates displayed/fibred term
 constructors as 1C2 and category/displayed-family result constructors as 1C3;
 the latter must reuse the same parser/checker architecture rather than add a
 second frontend. Five focused tests, typecheck, and lint pass.
+A separate immutable D005 unattended review approves only those six heads
+with human supersession; `SYNTAX-PARITY-1C1` is dependency-ready.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

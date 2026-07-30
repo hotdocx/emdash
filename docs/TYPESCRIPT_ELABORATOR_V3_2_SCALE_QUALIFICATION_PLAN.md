@@ -3448,6 +3448,9 @@ proposal selects only the six direct-green ordinary heads and explicitly adds
 no scale owner, profile, transfer input, Lambdapi change, or reviewer preset.
 Exact local audit/proposal checkpoint:
 `487ed014c210ab8426b27c40241b2de0f2f1dc4e`.
+A separate immutable unattended D005 review approves only that exact
+ordinary-term presentation scope with human supersession. It grants no scale
+capability.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate

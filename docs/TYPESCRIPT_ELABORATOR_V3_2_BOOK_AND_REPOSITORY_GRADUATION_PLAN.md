@@ -15,9 +15,10 @@ final-green through `SYNTAX-PARITY-1B3` at
 `4eada97f9ee8fe284b70dea6c0548dfdb9754189` and its separate exact review is
 approved with human supersession; 1C and exact syntax graduation remain
 ahead, with the zero-behavior 1C0 residual-constructor audit focused-green at
-`487ed014c210ab8426b27c40241b2de0f2f1dc4e`; planning boundary only; no book
-prose, generated artifact, release, or public presentation change is yet
-authorized
+`487ed014c210ab8426b27c40241b2de0f2f1dc4e` and its bounded D005 ordinary
+constructor proposal separately approved with human supersession; planning
+boundary only; no book prose, generated artifact, release, or public
+presentation change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
