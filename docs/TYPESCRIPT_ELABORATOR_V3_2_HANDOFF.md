@@ -654,10 +654,21 @@ fibred-context mathematics, renewed TypeScript formal-presentation boundary,
 evidence additions, reader workflow, developer-only exclusions, and future
 scale limits. It selects the existing nested ordinary exchange/currying
 witness as the primary running example and the existing mixed displayed
-context as the necessary secondary witness. `BOOK-NARRATIVE-0B` is next: it
-must freeze the exact prose/evidence/product/artifact proposal before edits.
+context as the necessary secondary witness.
 Exact local audit checkpoint:
 `9f3d744010d1bba210d1dcd1762df0afc35cf270`.
+`BOOK-NARRATIVE-0B` is now frozen at
+`3f5cfab9082c2f863304395658c9d54824c81f44` in
+[`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md).
+The separate
+[`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md)
+approves H-DTTLF-BOOK-REPOSITORY-01 /
+D-DTTLF-BOOK-REPOSITORY-001 exactly as proposed under the standing
+unattended delegation with human supersession. The next row is the bounded
+`BOOK-REVIEWER-BRIDGE-1A`: expose the already working nested exchange witness
+as one reviewer preset and root development command before editing the
+authored edition. No new parser/checker/kernel behavior, generated artifact,
+remote publication, or bulk scale work is included.
 The plan then updates the book as theorem-led mathematical prose rather than
 a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.
