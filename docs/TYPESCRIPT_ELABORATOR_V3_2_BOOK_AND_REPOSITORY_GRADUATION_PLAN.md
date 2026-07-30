@@ -29,7 +29,8 @@ under the standing unattended delegation with human supersession.
 `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`.
 `BOOK-PROSE-1A` is complete at exact local checkpoint
 `43870651aebaa48bc4af4bd838229cab979a924d`.
-`BOOK-ARTIFACT-1B` is final-green with its bounded local checkpoint pending.
+`BOOK-ARTIFACT-1B` is complete at exact local checkpoint
+`f7baeb1e2e5828c8237767bb7d19ab5faccf8992`.
 The checked `0.3.0-dev` PDF is now the byte-identical canonical
 `docs/emdash-book.pdf` and compatibility `docs/emdash3_2.pdf` artifact.
 `REPO-PRESENT-1C` is the next dependency-ready row. No remote
@@ -256,7 +257,7 @@ by preparing the static artifact and README.
 | BOOK-REVIEWER-BRIDGE-1A | **complete at `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`** | exact D001 approval | The tenth `nested-exchange` preset exactly equals its direct TypeScript construction, exposes `exchange-functor-abstraction`, and has a root `reviewer:dev` alias; no parser/checker/kernel change |
 | H-DTTLF-BOOK-SOURCE-CONTRACT-01 / D-DTTLF-BOOK-REPOSITORY-002 | **approved exactly as proposed at review checkpoint `1dee8fe414b63973e5f848936ae6d3c9d2319b35`; human supersession retained** | measured stale validator literal and proposal `21b5ebdbb9d82ba8d9139319aaa2ae1f8f96f881` | Replace only the retired formal-layer literal in `check_book.mjs`; retain every other source/render contract |
 | BOOK-PROSE-1A | **complete at `43870651aebaa48bc4af4bd838229cab979a924d`** | exact D001/D002 approvals and green reviewer bridge | The ten authored/structured sources now present fibrewise contexts, base change/evaluation, fibred cuts, binder notation, the bounded TypeScript architecture, three new checked evidence claims, and exact retained boundaries as theorem-led prose |
-| BOOK-ARTIFACT-1B | **final-green; bounded local checkpoint pending** | final-green authored edition and exact D001 approval | The single final release, exporter-only deterministic repeat, 199-page visual QA, and checked byte-for-byte promotion to both tracked public PDF paths are complete |
+| BOOK-ARTIFACT-1B | **complete at `f7baeb1e2e5828c8237767bb7d19ab5faccf8992`** | final-green authored edition and exact D001 approval | The single final release, exporter-only deterministic repeat, 199-page visual QA, and checked byte-for-byte promotion to both tracked public PDF paths are complete |
 | REPO-PRESENT-1C | **dependency-ready; selected next** | validated book artifact and exact D001 review | Consolidate root README/public entry points around the book and integrated reviewer, with internal details routed to handoff/plans |
 | PRODUCT-BOOK-GRADUATE-1 | gated | BOOK-PROSE-1A through REPO-PRESENT-1C | Freeze exact reader-facing capabilities, commands, artifact checksum, limitations, and the future-scale handoff |
 | FUTURE-SCALE-GOAL | deferred/out of scope for this persistent goal | later explicit user goal | Resume pending SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other preserved scale rows without implying they were completed here |
@@ -399,8 +400,9 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   and have the exact digest above. Only the ignored temporary page-render
   sheets were removed after inspection. No remote publication, deployment,
   tag, push, kernel gate, TypeScript aggregate, or bulk-scale work ran.
-  `REPO-PRESENT-1C` is now dependency-ready; the bounded local artifact
-  checkpoint is pending.
+  Exact local artifact checkpoint:
+  `f7baeb1e2e5828c8237767bb7d19ab5faccf8992`.
+  `REPO-PRESENT-1C` is now dependency-ready.
 - **2026-07-30 — `BOOK-PROSE-1A` final source-green.** The exact ten
   authored/structured sources now form the `0.3.0-dev` edition. Chapter 2
   develops independent fibrewise siblings, genuine dependency, asymmetric

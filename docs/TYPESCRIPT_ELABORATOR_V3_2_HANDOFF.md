@@ -685,7 +685,8 @@ correction proposed at
 `21b5ebdbb9d82ba8d9139319aaa2ae1f8f96f881` and separately approved with
 human supersession at
 `1dee8fe414b63973e5f848936ae6d3c9d2319b35`.
-`BOOK-ARTIFACT-1B` is final-green with its bounded local checkpoint pending.
+`BOOK-ARTIFACT-1B` is complete at exact local checkpoint
+`f7baeb1e2e5828c8237767bb7d19ab5faccf8992`.
 The single final book release produced a 199-page, 16-font PDF; an
 exporter-only repeat was byte-identical. The manifest-owned PDF,
 `docs/emdash-book.pdf`, and the retained `docs/emdash3_2.pdf` compatibility
