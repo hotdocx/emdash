@@ -3452,11 +3452,11 @@ A separate immutable unattended D005 review approves only that exact
 ordinary-term presentation scope with human supersession. It grants no scale
 capability.
 
-The bounded 1C1 implementation is final-green in the goal worktree with all
-six ordinary heads, recursive constructor/application evidence, a 71/71
-affected/audit gate, and green browser packaging. It adds no scale owner,
-profile, transfer input, or Lambdapi change. Exact local implementation
-checkpoint is pending; 1C2 remains a product audit, not resumed scale work.
+The bounded 1C1 implementation is final-green at
+`be437f3a7d64a6a554578036f76621322d5626fc` with all six ordinary heads,
+recursive constructor/application evidence, a 71/71 affected/audit gate, and
+green browser packaging. It adds no scale owner, profile, transfer input, or
+Lambdapi change. 1C2 remains a product audit, not resumed scale work.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate

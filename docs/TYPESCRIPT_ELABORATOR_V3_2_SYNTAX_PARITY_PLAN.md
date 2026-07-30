@@ -38,8 +38,8 @@ focused-green zero-behavior-delta residual-constructor audit with a deeply
 frozen non-self-authorizing D005 proposal checkpointed at
 `487ed014c210ab8426b27c40241b2de0f2f1dc4e`; a separate immutable unattended
 D005 review now approves it exactly as proposed with human supersession; the
-bounded 1C1 implementation is final-green in the goal worktree and awaits
-only its exact local checkpoint.
+bounded 1C1 implementation is final-green at exact local checkpoint
+`be437f3a7d64a6a554578036f76621322d5626fc`.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -965,7 +965,7 @@ strings parse. For every promoted row it must demonstrate:
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-04 / D-DTTLF-PRODUCT-SYNTAX-PARITY-004 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B3 audit/proposal | Authorizes only semicolon dependency levels for the two existing direct shapes and one mixed-telescope reviewer preset |
 | SYNTAX-PARITY-1C0 | **focused-green zero-behavior audit at `487ed014c210ab8426b27c40241b2de0f2f1dc4e`** | final-green `SYNTAX-PARITY-1B3` | Executable residual constructor inventory, exact 1C1/1C2/1C3 split, six direct-green ordinary witnesses, and bounded non-self-authorizing D005 proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C0 audit/proposal | Authorizes only six ordinary structural term heads over existing typed methods |
-| SYNTAX-PARITY-1C1 | **final-green in goal worktree; exact checkpoint pending** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality, recursive constructor/application spines, exact negatives, 71/71 affected/audit tests, and green browser packaging |
+| SYNTAX-PARITY-1C1 | **final-green at `be437f3a7d64a6a554578036f76621322d5626fc`** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality, recursive constructor/application spines, exact negatives, 71/71 affected/audit tests, and green browser packaging |
 | SYNTAX-PARITY-1C2 | gated | final-green 1C1 plus a separate exact audit/review | Remaining selected displayed/fibred term constructors with finite typed argument contracts |
 | SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -1055,7 +1055,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   constructors and subsequent generic application are green. The corrected
   affected/audit corpus passes 71/71, the reviewer 8/8, typecheck/lint and
   browser production build pass, and no browser preset or semantic input
-  changed. Exact local implementation checkpoint is pending.
+  changed. Exact local implementation checkpoint:
+  `be437f3a7d64a6a554578036f76621322d5626fc`.
 - **2026-07-30 — `SYNTAX-PARITY-1C0` residual constructors audited.**
   Reclassified the post-1B3 mathematical surface into six mechanical ordinary
   term heads, a separately gated displayed/fibred term row, a separately

@@ -553,8 +553,9 @@ and subsequent application remains generic `apply`. Nested constructor
 sources are direct-equal. The corrected affected/audit corpus passes 71/71,
 the reviewer passes 8/8, typecheck/lint and the 141-module production build
 are green, and no browser preset, owner, profile, transfer input, or Lambdapi
-source changed. Exact local implementation checkpoint is pending; 1C2 is the
-next zero-behavior residual displayed/fibred constructor audit.
+source changed. Exact local implementation checkpoint:
+`be437f3a7d64a6a554578036f76621322d5626fc`. 1C2 is the next zero-behavior
+residual displayed/fibred constructor audit.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

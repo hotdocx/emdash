@@ -611,7 +611,7 @@ it and a separate bounded review authorizes it.
 | SYNTAX-PARITY-1B2 | final-green at `ba34771074363f4c5b33814269b8822d4d2362bb` | approved D003 review | Eighth independent-sibling preset, comma group, exact `fibrePair`, affected 64/64, production build, and Chromium |
 | SYNTAX-PARITY-1B3 | final-green at `3dcf25ec008bb3d30723e3251c222e88acc216a3` | approved D004 review | Ninth mixed-telescope preset, exact semicolon/comma `[1,1]`/`[1,2,1]` routes, browser-safe checked chain-2A runtime, affected 75/75, production build, and Chromium |
 | SYNTAX-PARITY-1C0 / D005 | focused-green audit at `487ed014c210ab8426b27c40241b2de0f2f1dc4e`; exact proposal approved by immutable unattended review with human supersession | final-green 1B3 | Residual 1C1/1C2/1C3 constructor split; authorizes only six ordinary structural term heads |
-| SYNTAX-PARITY-1C1 | final-green in goal worktree; exact checkpoint pending | approved D005 review | Six recursive ordinary constructor heads, 71/71 affected/audit tests, unchanged 8/8 reviewer, and green 141-module production build; no new preset |
+| SYNTAX-PARITY-1C1 | final-green at `be437f3a7d64a6a554578036f76621322d5626fc` | approved D005 review | Six recursive ordinary constructor heads, 71/71 affected/audit tests, unchanged 8/8 reviewer, and green 141-module production build; no new preset |
 | BOOK-DELTA-0A | selected post-syntax successor | SYNTAX-PARITY-GRADUATE-1 | Capability-oriented book delta audit followed by theorem-led prose/artifact/repository graduation under its dedicated plan |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |
 

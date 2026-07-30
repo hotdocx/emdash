@@ -329,7 +329,7 @@ Current selected product evidence:
 - constructor audit/review/implementation:
   `487ed014c210ab8426b27c40241b2de0f2f1dc4e` /
   `981730d` /
-  exact implementation checkpoint pending;
+  `be437f3a7d64a6a554578036f76621322d5626fc`;
 - focused integrated reviewer test: eight checks, eight passes, zero
   failures, including direct-TypeScript equality for all nine presets;
 - focused independent-sibling implementation corpus: six checks, six passes,
