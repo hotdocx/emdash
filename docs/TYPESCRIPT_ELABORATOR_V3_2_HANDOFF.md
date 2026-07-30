@@ -665,11 +665,16 @@ The separate
 approves H-DTTLF-BOOK-REPOSITORY-01 /
 D-DTTLF-BOOK-REPOSITORY-001 exactly as proposed under the standing
 unattended delegation with human supersession. Exact local review checkpoint:
-`9a14695b401c696f9f55dc785689f2e4e49d7a5b`. The next row is the bounded
-`BOOK-REVIEWER-BRIDGE-1A`: expose the already working nested exchange witness
-as one reviewer preset and root development command before editing the
-authored edition. No new parser/checker/kernel behavior, generated artifact,
-remote publication, or bulk scale work is included.
+`9a14695b401c696f9f55dc785689f2e4e49d7a5b`.
+`BOOK-REVIEWER-BRIDGE-1A` is now complete at exact local checkpoint
+`93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`: the already working nested
+exchange witness is the tenth reviewer preset, exactly equals its direct
+TypeScript construction, reports `exchange-functor-abstraction`, and is
+reachable through the root `reviewer:dev` command. Its focused 12/12 affected
+tests, root typecheck/lint, and browser fixture typecheck/build pass. No
+aggregate, kernel, parser/checker, Core-owner, or Lambdapi behavior changed.
+The next row is `BOOK-PROSE-1A`, editing only the ten frozen
+authored/structured book authorities before the separate artifact gate.
 The plan then updates the book as theorem-led mathematical prose rather than
 a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.

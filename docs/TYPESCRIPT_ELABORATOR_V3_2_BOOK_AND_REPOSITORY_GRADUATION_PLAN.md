@@ -25,8 +25,10 @@ H-DTTLF-BOOK-REPOSITORY-01 / D-DTTLF-BOOK-REPOSITORY-001 is approved
 exactly as proposed by the separate immutable
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md)
 under the standing unattended delegation with human supersession.
-`BOOK-REVIEWER-BRIDGE-1A` is the next implementation row. No generated
-artifact, remote release/publication, or bulk scale change is authorized.
+`BOOK-REVIEWER-BRIDGE-1A` is complete at exact local checkpoint
+`93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`.
+`BOOK-PROSE-1A` is the next implementation row. No generated artifact,
+remote release/publication, or bulk scale change is authorized.
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
@@ -246,8 +248,8 @@ by preparing the static artifact and README.
 | BOOK-DELTA-0A | **complete at `9f3d744010d1bba210d1dcd1762df0afc35cf270`** | syntax-parity graduation and `8217aa3...` audit anchor | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md) classifies the mathematical, formal-presentation, evidence, workflow, developer-only, and future-boundary deltas without prose mutation |
 | BOOK-NARRATIVE-0B | **complete; proposal checkpoint `3f5cfab9082c2f863304395658c9d54824c81f44`** | complete delta matrix and book authorities | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md) freezes two running examples, ten authored/structured book sources, three evidence claims, one reviewer preset, one PDF-promotion owner, README scope, non-claims, and proportional validation |
 | H-DTTLF-BOOK-REPOSITORY-01 / D-DTTLF-BOOK-REPOSITORY-001 | **approved exactly as proposed at review checkpoint `9a14695b401c696f9f55dc785689f2e4e49d7a5b`; human supersession retained** | immutable proposal at `3f5cfab9082c2f863304395658c9d54824c81f44` | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md) approves only the exact authored sources, evidence/manifest effects, one derived preset, artifact ownership, README scope, validation, and Git boundary |
-| BOOK-REVIEWER-BRIDGE-1A | **dependency-ready; selected next** | exact D001 approval | Add only the nested-exchange preset, direct-equality test, ten-preset handoff, and root `reviewer:dev` alias; no parser/checker/kernel change |
-| BOOK-PROSE-1A | gated on green reviewer bridge | exact D001 approval | Edit only reviewed authored book sources and structured evidence/architecture authorities; preserve theorem-led prose and formal-status discipline |
+| BOOK-REVIEWER-BRIDGE-1A | **complete at `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`** | exact D001 approval | The tenth `nested-exchange` preset exactly equals its direct TypeScript construction, exposes `exchange-functor-abstraction`, and has a root `reviewer:dev` alias; no parser/checker/kernel change |
+| BOOK-PROSE-1A | **dependency-ready; selected next** | exact D001 approval and green reviewer bridge | Edit only reviewed authored book sources and structured evidence/architecture authorities; preserve theorem-led prose and formal-status discipline |
 | BOOK-ARTIFACT-1B | gated | BOOK-PROSE-1A and exact separate review | Run full book checks/render/release, visually inspect affected and repaginated pages, and deterministically promote the validated PDF to `docs/emdash-book.pdf` |
 | REPO-PRESENT-1C | gated | validated book artifact and exact separate review | Consolidate root README/public entry points around the book and integrated reviewer, with internal details routed to handoff/plans |
 | PRODUCT-BOOK-GRADUATE-1 | gated | BOOK-PROSE-1A through REPO-PRESENT-1C | Freeze exact reader-facing capabilities, commands, artifact checksum, limitations, and the future-scale handoff |
@@ -373,6 +375,18 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `BOOK-REVIEWER-BRIDGE-1A` completed.** The integrated
+  reviewer now exposes the already graduated
+  `λ^f x : A. λ^f y : B. E y x` witness as its tenth preset. Parsed text is
+  exactly equal to the direct TypeScript construction and reports the
+  existing `exchange-functor-abstraction` prerequisite. The root
+  `reviewer:dev` alias starts the same client-only Vite workbench. The
+  focused 12/12 affected tests, root typecheck/lint, and browser fixture
+  typecheck/build pass. No aggregate, kernel, book-render, parser, checker,
+  Core-owner, or Lambdapi behavior was run or changed. Exact local
+  implementation checkpoint:
+  `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`.
+  `BOOK-PROSE-1A` is now dependency-ready.
 - **2026-07-30 — H-DTTLF-BOOK-REPOSITORY-01 /
   D-DTTLF-BOOK-REPOSITORY-001 approved as proposed.** A separate immutable
   [D001 review](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md)

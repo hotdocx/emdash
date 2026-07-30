@@ -5,7 +5,7 @@ Candidate: `emdash-v3.2-integrated-reviewer-1`
 Inputs: direct typed TypeScript plus bounded categorical text
 Production Lambdapi dependency: none
 Component runtime checkpoint:
-`7513cbe9e0d1439b5b1250982f40cede48e9a811`
+`93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`
 Integrated implementation: green in the current reviewed tranche
 
 ## What This Demonstrates
@@ -303,6 +303,8 @@ TypeScript runtime do not invoke Lambdapi in production.
 
 Current selected product evidence:
 
+- book/reviewer bridge:
+  `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`;
 - integrated reviewer proposal/review:
   `f94d770b2fe91ac43352b9848c350fd258000db4` /
   `7d65de7`;
