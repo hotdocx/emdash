@@ -3,7 +3,7 @@
   "articles": [
     {
       "id": "emdash-v3-2-overview",
-      "documentId": "index-3-2",
+      "documentId": "emdash-v3-2-overview",
       "displayTitle": "Functorial Type Theory: An Executable Architecture for Directed Dependency",
       "authors": [
         "The emdash contributors"

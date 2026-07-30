@@ -16,7 +16,7 @@ function fixture() {
 test('the live article manifest resolves one active authored overview', () => {
   const manifest = loadArticleManifest();
   assert.equal(manifest.articles.length, 1);
-  assert.equal(manifest.articles[0].document.id, 'index-3-2');
+  assert.equal(manifest.articles[0].document.id, 'emdash-v3-2-overview');
   assert.match(manifest.articles[0].artifactPath, /emdash2\/output\/pdf\/.+\.pdf$/);
 });
 

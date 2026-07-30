@@ -10,13 +10,13 @@ Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
 Infinity-Codex-Decision-Responses: none
 
-Status: completed article architecture and historical publication-decision
-ledger. The long v3.2 workbench implements the selected two-arc architecture.
-On 2026-07-30 the user made the previously deferred editorial decision to
-derive and publicly distribute a new approximately 16-page overview paper,
-retire the archival v2 print routes, and restore `docs/emdash3_2.{md,pdf}` to
-article ownership. The living implementation and publication boundary is now
-owned by
+Status: completed article architecture, overview-paper artifact, and
+historical publication-decision ledger. On 2026-07-30 the user made the
+previously deferred editorial decision to derive and publicly distribute a
+new approximately 16-page overview paper, retire the archival v2 print
+routes, and restore `docs/emdash3_2.{md,pdf}` to article ownership. That paper
+is now implemented and checked. The living integration and publication
+boundary is owned by
 [`../../docs/EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md`](../../docs/EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md).
 External venue submission and a versioned research release remain separate
 human decisions.
@@ -32,7 +32,7 @@ join-category, DefIso/comparison, and MathOps/Infinity-Codex developments.
 The new public paper is not a mechanical shortening of the long workbench or
 a concatenation of book sections. Its selected overview thesis joins:
 
-1. the active categorical/directive kernel and synthetic arrow-induction
+1. the active categorical/directed kernel and synthetic arrow-induction
    computation;
 2. the outer dependent logical framework and explicit backend-neutral Core;
 3. usable ordinary, functorial, natural, displayed-functorial, and
@@ -47,18 +47,34 @@ authority for the Lambdapi kernel. The living publication plan owns the exact
 outline, evidence map, source rename/rewrite, page budget, generated
 distribution artifacts, and visual review.
 
+The completed authored source is
+`print/public/emdash-v3-2-overview.md`, registered as
+`emdash-v3-2-overview`; `index_3_2` is now only a retained route alias. The
+article is titled *Functorial Type Theory: An Executable Architecture for
+Directed Dependency*. Its 7,127 words render as 15 two-column pages, within
+the selected 14–18 page interval, with two checked Arrowgram diagrams and 11
+embedded fonts. The final PDF SHA-256 is
+`39a9a7f380042383a4c63df93860ea91149a8f140ac7ae8f52ff711318da8f14`.
+All pages were rasterized and visually inspected after correcting two
+measured page-7 column crossings. The public
+`docs/emdash3_2.{md,pdf}` files are exact promoted copies and are no longer
+aliases of the 199-page book.
+
 ## 2026-07-22 Source, Lifecycle, And Maintenance Boundary
 
-`print/documents.json` is the executable paper-artifact registry. Its selected
-boundary is now explicit:
+`print/documents.json` is the executable paper-artifact registry. The
+2026-07-22 boundary recorded:
 
-- `print/public/index.md` and `print/public/index_0.md` are authored archival
-  v2 snapshots. They remain renderable as historical research artifacts, but
-  their present-tense claims are not active implementation claims.
-- `print/public/index_3_2.md` is the authored active v3.2 workbench. It is a
-  draft, not a released or submitted edition.
+- `print/public/index.md` and `print/public/index_0.md` as authored archival
+  v2 snapshots; and
+- `print/public/index_3_2.md` as the authored active v3.2 workbench.
 - `print/public/emdash-book.md` is generated output owned by
   `book/book.json`; it is never an authoring source.
+
+The later user publication decision superseded the first two bullets:
+the obsolete v2 sources were removed, the ambiguous v3.2 source was replaced
+by `print/public/emdash-v3-2-overview.md`, and Git history remains the recovery
+route. The generated-book ownership rule remains current.
 
 The registry records source mode, exact authority, and lifecycle for every
 document. Validation rejects an authored document whose authority is not its
@@ -330,20 +346,22 @@ recovery evidence support the artifact without becoming part of the theorem
 statement. After deleting the section, renumber the conclusion as Section 15
 and update the front-matter contents and road map.
 
-## Print Pipeline Facts
+## Current Print Pipeline Facts
 
 The current print pipeline is documented in `print/AGENTS.md`.
 
-- Archival full v2 source: `print/public/index.md`.
-- Archival short v2 source: `print/public/index_0.md`.
-- Active v3.2 workbench source: `print/public/index_3_2.md`.
+- Active overview source: `print/public/emdash-v3-2-overview.md`.
+- Retained route aliases: `index`, `index_3_2`, and `index_3_2.md`.
+- Public distribution copies: `../../docs/emdash3_2.{md,pdf}`.
 - Renderer: `print/src/App.tsx`.
 - Supported embedded artifacts: KaTeX, Mermaid, Vega-Lite, Arrowgram.
 - Validation:
 
 ```bash
-npm run validate:paper
-npm run check:render
+./scripts/pnpmw run article:check
+./scripts/pnpmw run article:render
+./scripts/pnpmw run article:pdf:check
+./scripts/pnpmw run article:promote
 ```
 
 The validator and renderer select only entries explicitly allowlisted by

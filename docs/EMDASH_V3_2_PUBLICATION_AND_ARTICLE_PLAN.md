@@ -2,8 +2,9 @@
 
 Date: 2026-07-30
 Plan-ID: EMDASH-V3.2-PUBLICATION-AND-ARTICLE
-Status: active living publication plan; ownership audit complete; implementation
-in progress
+Status: active living publication plan; repository cleanup, artifact ownership,
+landing/reviewer, and overview article complete; checkpoint, integration, and
+deployment in progress
 
 Depends-On:
 
@@ -86,7 +87,7 @@ This goal does not:
 
 ## Completed Ownership And Reference Audit
 
-### Git and publication state
+### Git and publication state at the initial audit
 
 - Dedicated worktree:
   `/home/user1/emdash1-elaborator-goal`
@@ -99,17 +100,16 @@ This goal does not:
 - The goal branch is a descendant of local `main` with no divergence.
 - The GitHub repository is `hotdocx/emdash`; the authenticated account has
   repository administration permission.
-- GitHub Pages is not configured and the requested project URL currently
-  returns 404.
+- GitHub Pages was not configured and the requested project URL returned 404.
 
-### Book artifacts
+### Book artifacts at the initial audit
 
 The active book sources are the chapter-sized files ordered by
 `emdash2/book/book.json`. The assembled
 `emdash2/print/public/emdash-book.md` is generated and ignored. The checked
 PDF is generated under `emdash2/output/pdf/` and is ignored.
 
-The tracked public book PDF is:
+The tracked public book PDF was:
 
 ```text
 docs/emdash-book.pdf
@@ -118,23 +118,74 @@ bytes: 1,850,797
 sha256: b34b7e430deacf4b91ce354c5e5eb3d2674ef08e93d3bcbd4ca7618ea37f41d7
 ```
 
-No tracked `docs/emdash-book.md` currently exists. It should be promoted
-byte-for-byte from the checked assembled Markdown, never edited independently.
+No tracked `docs/emdash-book.md` existed. It was to be promoted byte-for-byte
+from the checked assembled Markdown, never edited independently.
 
-### Article artifacts
+### Completed book artifacts
 
-`emdash2/print/public/index_3_2.md` is the current authored v3.2 article
+The promotion owner now maintains exact public copies:
+
+```text
+docs/emdash-book.md
+bytes: 427,754
+sha256: e3293ceaf13cbfd4dc33278f4fca6a5e480bfcd506f061ca10728ff134b0f446
+
+docs/emdash-book.pdf
+pages: 199
+bytes: 1,850,797
+sha256: b34b7e430deacf4b91ce354c5e5eb3d2674ef08e93d3bcbd4ca7618ea37f41d7
+```
+
+The Markdown and PDF are byte-identical to their checked generated owners.
+
+### Article artifacts at the initial audit
+
+`emdash2/print/public/index_3_2.md` was the authored v3.2 article
 workbench. The article architecture report already recommends a
 computation-first narrative centered on synthetic arrow induction, then a
 broader categorical calculus. It deliberately deferred deriving a short paper
 until a human editorial decision. The user's current direction supplies that
 decision.
 
-The tracked `docs/emdash3_2.pdf` is currently byte-identical to the 199-page
+The tracked `docs/emdash3_2.pdf` was byte-identical to the 199-page
 book. It is not an article. `docs/emdash3_2.md` is a stale 413,485-byte
 assembled snapshot rather than the current 427,754-byte book assembly or the
 59,014-byte article workbench. Both public `emdash3_2` paths therefore need a
 new, explicit article owner.
+
+### Completed overview article
+
+The initial state above has now been replaced without erasing its audit
+history. The canonical authored source is:
+
+```text
+emdash2/print/public/emdash-v3-2-overview.md
+title: Functorial Type Theory: An Executable Architecture for Directed Dependency
+words: 7,127
+Arrowgram diagrams: 2
+```
+
+`index_3_2` remains only a route alias in the registry. The checked public
+copies are:
+
+```text
+docs/emdash3_2.md
+bytes: 51,292
+sha256: 56e22f0b526b87b316b1e1eac4fda329e323087e8f77f8688e0ff6add614b758
+
+docs/emdash3_2.pdf
+pages: 15
+bytes: 687,034
+embedded fonts: 11
+sha256: 39a9a7f380042383a4c63df93860ea91149a8f140ac7ae8f52ff711318da8f14
+```
+
+Both public files are byte-identical to their canonical checked
+source/generated owners. The 15-page result is within the selected 14–18 page
+acceptance interval and is distinct from the 199-page book. All pages were
+rendered and visually inspected; two over-wide page-7 displays were narrowed,
+and the final PDF has no observed clipping, overlap, malformed math, blank
+page, console error, page error, request error, or render error.
 
 ### Obsolete tracked material
 
@@ -379,9 +430,9 @@ route fails for a measured repository constraint.
 | PUBLICATION-CLEAN-1A | complete and focused-green at `72747ec791f648ede3f743052a5705a1e7c3c38f` | PUBLICATION-PLAN-0B | Ignore `.playwright-cli/`; remove exact audited `spec/`, legacy docs, and v2 print sources; update registry and references |
 | PUBLICATION-OWNERS-1B | complete and focused-green at `fcf925af85cf078f4956a2208e220fd2dd078909`; real article artifact acceptance belongs to ARTICLE-ARTIFACT-1F | PUBLICATION-CLEAN-1A | Separate book and article promotion owners; add full-book Markdown distribution; remove book-to-article compatibility copying |
 | LANDING-REVIEWER-1C | complete and focused-green at `bb6ebee5cb63f950e71040a44be534d67530ed17` | PUBLICATION-PLAN-0B | Responsive landing page and same-page reviewer using the frozen brief |
-| ARTICLE-THESIS-1D | in progress; current workbench measured at 23 pages against the selected 14-18 page budget | PUBLICATION-PLAN-0B | Freeze title, abstract promise, outline, evidence map, and page budget against active authorities |
-| ARTICLE-PROSE-1E | pending | ARTICLE-THESIS-1D | Rewrite the active v3.2 workbench as the descriptive overview source and register it |
-| ARTICLE-ARTIFACT-1F | pending | PUBLICATION-OWNERS-1B, ARTICLE-PROSE-1E | Targeted validation, deterministic PDF, all-page visual QA, and promoted `docs/emdash3_2.{md,pdf}` |
+| ARTICLE-THESIS-1D | complete; the selected title, two-computation thesis, evidence boundary, and 14–18 page budget are realized | PUBLICATION-PLAN-0B | Freeze title, abstract promise, outline, evidence map, and page budget against active authorities |
+| ARTICLE-PROSE-1E | complete; 7,127-word descriptive source registered as `emdash-v3-2-overview` | ARTICLE-THESIS-1D | Rewrite the active v3.2 workbench as the descriptive overview source and register it |
+| ARTICLE-ARTIFACT-1F | complete and focused-green; 15 pages, 11 embedded fonts, all-page visual QA, exact public promotion | PUBLICATION-OWNERS-1B, ARTICLE-PROSE-1E | Targeted validation, deterministic PDF, all-page visual QA, and promoted `docs/emdash3_2.{md,pdf}` |
 | PUBLICATION-CHECKPOINT-1G | pending | LANDING-REVIEWER-1C, ARTICLE-ARTIFACT-1F | Exact staged review, focused green gates, synchronized ledgers, bounded local checkpoint |
 | PUBLICATION-INTEGRATE-1H | pending | PUBLICATION-CHECKPOINT-1G | Fetch, verify ancestry, fast-forward local `main`, and preserve worktree |
 | PUBLICATION-PAGES-1I | pending | PUBLICATION-INTEGRATE-1H | Push `main`, configure Actions Pages, monitor deployment, and verify the live reviewer/book/article routes |
@@ -438,9 +489,32 @@ does not authorize mathematical changes.
   The mobile full-page visual inspection found no overlap, clipping, or
   unreadable panel. The UI explicitly explains that the embedded report's
   historical “browser promotion: no” line belongs to its pre-browser semantic
-  graduation snapshot. Paper and book currently deduplicate only because the
-  tracked `docs/emdash3_2.pdf` is still the old book alias; final distinct-link
-  acceptance belongs to `ARTICLE-ARTIFACT-1F`.
+  graduation snapshot. At that checkpoint, paper and book deduplicated because
+  the tracked `docs/emdash3_2.pdf` was still the old book alias; final
+  distinct-link acceptance therefore belonged to `ARTICLE-ARTIFACT-1F`.
+- **2026-07-30 - `ARTICLE-THESIS-1D`, `ARTICLE-PROSE-1E`, and
+  `ARTICLE-ARTIFACT-1F` complete and focused-green.** Replaced the ambiguous
+  8,293-word, 23-page workbench with the descriptively owned 7,127-word
+  `emdash-v3-2-overview` article, while retaining `index_3_2` only as a route
+  alias. The article is an independent academic narrative rather than an
+  assembled book excerpt: it joins the outer dependent LF, the inner directed
+  categorical calculus, synthetic arrow induction, computational composition,
+  recursive ordinary/displayed binders, explicit Core, the browser artifact,
+  and bounded research claims. Registry and manifest tests pass 9/9; both
+  Arrowgram blocks validate; the production renderer reports 15 pages with no
+  console, page, request, or render errors; structural PDF checks report 11
+  embedded fonts. Every page was rasterized and inspected. Two measured
+  page-7 column crossings were corrected, after which only page 7 changed
+  relative to the otherwise already approved raster set. Exact promotion
+  produced `docs/emdash3_2.md` with SHA-256
+  `56e22f0b526b87b316b1e1eac4fda329e323087e8f77f8688e0ff6add614b758`
+  and `docs/emdash3_2.pdf` with SHA-256
+  `39a9a7f380042383a4c63df93860ea91149a8f140ac7ae8f52ff711318da8f14`.
+  A final standalone landing check emits distinct paper and book PDF assets;
+  a real headless browser retrieves both with HTTP 200, their exact expected
+  byte sizes, and no console or page error. No root TypeScript, Lambdapi,
+  conformance, complete print, full-book render, or repository-wide aggregate
+  was rerun.
 
 ## Targeted Validation
 

@@ -27,7 +27,9 @@ for browser render checks, but not for the root TypeScript or Lambdapi checks.
 
 The browser accepts these registered selectors:
 
-- `/`, `?paper=index`, or `?paper=index_3_2` — active v3.2 article workbench;
+- `/`, `?paper=index`, or `?paper=emdash-v3-2-overview` — active v3.2
+  overview article;
+- `?paper=index_3_2` — retained route alias for the overview article;
 - `?paper=emdash-book` or `?paper=book` — generated book.
 
 Absolute HTTP(S) URLs and `?paper=ls:key` remain explicit

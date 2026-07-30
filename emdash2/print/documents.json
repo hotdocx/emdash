@@ -2,20 +2,21 @@
   "version": 2,
   "documents": [
     {
-      "id": "index-3-2",
-      "slug": "index_3_2",
-      "file": "index_3_2.md",
-      "title": "Emdash v3.2 research article",
+      "id": "emdash-v3-2-overview",
+      "slug": "emdash-v3-2-overview",
+      "file": "emdash-v3-2-overview.md",
+      "title": "Functorial Type Theory: An Executable Architecture for Directed Dependency",
       "kind": "article",
       "default": true,
       "source": {
         "mode": "authored",
-        "authority": "print/public/index_3_2.md"
+        "authority": "print/public/emdash-v3-2-overview.md"
       },
       "lifecycle": "active-workbench",
       "aliases": [
         "",
         "index",
+        "index_3_2",
         "index_3_2.md"
       ],
       "groups": [

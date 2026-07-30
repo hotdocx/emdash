@@ -29,7 +29,7 @@ test('an authored document owns its exact public Markdown source', () => {
   article.source.authority = 'print/public/not-the-article.md';
   assert.throws(
     () => validateDocumentRegistry(registry, { authorityExists: everyAuthorityExists }),
-    /authored document authority must be print\/public\/index_3_2\.md/
+    /authored document authority must be print\/public\/emdash-v3-2-overview\.md/
   );
 });
 
