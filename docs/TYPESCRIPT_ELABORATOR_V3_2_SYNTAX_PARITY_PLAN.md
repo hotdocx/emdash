@@ -1398,6 +1398,13 @@ The exact gate is:
 > non-effects and leaving syntax graduation pending until that witness is
 > green?
 
+The separate immutable
+[`D-DTTLF-PRODUCT-SYNTAX-PARITY-009` review](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_D009_REVIEW.md)
+approves only that exact frozen nested-ordinary scope under the user's
+standing unattended delegation, with any later explicit human decision
+superseding it. Reviewed proposal checkpoint:
+`8d5671e5062910d9a1b52727db469fc582c9669c`.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1509,8 +1516,9 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C2B | **final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; audit at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`** | final-green 1C2A and approved D007 review | Four exact mathematical heads for existing whole/higher internalized actions; recursive operands, generic continuations, exact distinct-boundary negatives, 5/5 implementation and 4/4 audit tests |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-08 / D-DTTLF-PRODUCT-SYNTAX-PARITY-008 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C3 proposal at `cfacee11affc6360a3b81021d0a51fd43071f50c` | Authorizes only twelve canonical result heads, two checked root-result kinds, and recursive typed category/family operands |
 | SYNTAX-PARITY-1C3 | **final-green at `126023e5ce8ab31f28730e1be508da11083084b4`; audit at `cfacee11affc6360a3b81021d0a51fd43071f50c`** | final-green 1C2 and approved D008 review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, 4/4 implementation plus 4/4 audit tests, and no new parser/checker/kernel semantics |
-| SYNTAX-PARITY-GRADUATE-0A | **focused audit; graduation blocked by one measured direct-green parser gap** | final-green 1C3 | Exact 68-method host/expression partition, 37-head text envelope, semantic versus presentation residuals, and bounded non-self-authorizing 1D1 correction proposal |
-| SYNTAX-PARITY-1D1 | proposed; requires separate exact review | graduation audit | Recursive expected-classifier route for the reviewed nested ordinary `^f` exchange/currying witness only |
+| SYNTAX-PARITY-GRADUATE-0A | **focused-green audit at `8d5671e5062910d9a1b52727db469fc582c9669c`; graduation blocked by one measured direct-green parser gap** | final-green 1C3 | Exact 68-method host/expression partition, 37-head text envelope, semantic versus presentation residuals, and bounded 1D1 correction proposal |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-09 / D-DTTLF-PRODUCT-SYNTAX-PARITY-009 | **approved as proposed; immutable unattended review with human supersession** | checkpointed graduation audit/proposal | Authorizes only recursive ordinary-functor `bodyExpected` and the reviewed nested exchange/currying witness |
+| SYNTAX-PARITY-1D1 | approved; implementation pending | graduation audit and D009 review | Recursive expected-classifier route for the reviewed nested ordinary `^f` exchange/currying witness only |
 | SYNTAX-PARITY-GRADUATE-1 | gated | final-green 1D1 plus exact graduation review | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |

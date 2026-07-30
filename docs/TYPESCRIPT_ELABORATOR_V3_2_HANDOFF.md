@@ -623,7 +623,9 @@ existing direct exchange/currying example supports
 `λ^f x : A. λ^f y : B. E y x`, but text rejects the inner binder. Its frozen
 D009 proposal selects only a recursive ordinary-functor `bodyExpected`
 contract over the existing dispatcher and program; no nested non-ordinary,
-semantic, browser, Lambdapi, book, or scale behavior is included.
+semantic, browser, Lambdapi, book, or scale behavior is included. A separate
+immutable D009 unattended review now approves exactly that scope with human
+supersession; `SYNTAX-PARITY-1D1` implementation is next.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

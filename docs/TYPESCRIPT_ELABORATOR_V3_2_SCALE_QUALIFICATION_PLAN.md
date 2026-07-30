@@ -3484,8 +3484,10 @@ The subsequent syntax-graduation audit finds one direct-green presentation
 gap before graduation: nested ordinary `^f` exchange/currying is supported
 by the reviewed TypeScript program but rejected by text. It freezes only a
 recursive expected-classifier `SYNTAX-PARITY-1D1` correction. This adds no
-scale capability; the correction and final syntax graduation remain the
-product route, while every bulk scale row stays deferred.
+scale capability. A separate immutable D009 unattended review approves only
+that scope with human supersession; its correction and final syntax
+graduation remain the product route, while every bulk scale row stays
+deferred.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
