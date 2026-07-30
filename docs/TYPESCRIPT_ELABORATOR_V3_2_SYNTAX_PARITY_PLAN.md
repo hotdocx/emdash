@@ -64,7 +64,10 @@ scope with human supersession. The bounded 1D1 correction is now
 focused-green at exact local checkpoint
 `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`. Final syntax graduation is
 next. The exact zero-behavior `SYNTAX-PARITY-GRADUATE-1` proposal is frozen
-below for separate D010 review.
+below at
+`be1eb6cf1e33c17c88615d243fae8a58d1d8cbba`. A separate immutable D010
+unattended review approves it exactly as proposed with human supersession;
+syntax parity is graduated and `BOOK-DELTA-0A` is dependency-ready.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1535,6 +1538,14 @@ The proposal is non-self-authorizing. It requires a separate immutable exact
 review, with any explicit later human decision superseding an unattended
 review under the standing delegation.
 
+The separate immutable
+[`D-DTTLF-PRODUCT-SYNTAX-PARITY-010` review](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_D010_REVIEW.md)
+approves only this exact zero-behavior graduation envelope under the user's
+standing unattended delegation, with human supersession. The reviewed
+proposal checkpoint is
+`be1eb6cf1e33c17c88615d243fae8a58d1d8cbba`; the exact review checkpoint is
+pending synchronized staged review.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1649,10 +1660,10 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-GRADUATE-0A | **focused-green audit at `8d5671e5062910d9a1b52727db469fc582c9669c`; graduation blocked by one measured direct-green parser gap** | final-green 1C3 | Exact 68-method host/expression partition, 37-head text envelope, semantic versus presentation residuals, and bounded 1D1 correction proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-09 / D-DTTLF-PRODUCT-SYNTAX-PARITY-009 | **approved as proposed; immutable unattended review with human supersession** | checkpointed graduation audit/proposal | Authorizes only recursive ordinary-functor `bodyExpected` and the reviewed nested exchange/currying witness |
 | SYNTAX-PARITY-1D1 | **final-green at `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`** | graduation audit and D009 review | Recursive expected-classifier route for the reviewed nested ordinary `^f` exchange/currying witness, three-level recursion, exact negative boundaries, 4/4 focused implementation plus 17/17 audit/base regressions, and green typecheck/lint |
-| H-DTTLF-PRODUCT-SYNTAX-PARITY-10 / D-DTTLF-PRODUCT-SYNTAX-PARITY-010 | **exact zero-behavior graduation proposal frozen; separate review pending** | final-green 1D1 and executable graduation audit | Proposes only the exact 47-expression/21-host partition, current text envelope, retained semantic boundaries, proportional evidence reuse, and route to BOOK-DELTA-0A |
-| SYNTAX-PARITY-GRADUATE-1 | **proposal frozen; awaiting separate exact D010 review** | final-green 1D1 plus exact graduation review | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-10 / D-DTTLF-PRODUCT-SYNTAX-PARITY-010 | **approved as proposed; immutable unattended review with human supersession; proposal at `be1eb6cf1e33c17c88615d243fae8a58d1d8cbba`, review checkpoint pending staged review** | final-green 1D1 and executable graduation audit | Approves only the exact 47-expression/21-host partition, current text envelope, retained semantic boundaries, proportional evidence reuse, and route to BOOK-DELTA-0A |
+| SYNTAX-PARITY-GRADUATE-1 | **complete; exact D010 envelope approved** | final-green 1D1 plus exact graduation review | Exact text/direct-TypeScript parity envelope and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
-| BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
+| BOOK-DELTA-0A | **dependency-ready selected successor** | completed SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
 
 ## Explicit Non-Authorization
 
@@ -1718,9 +1729,10 @@ as generic whitespace application, `eta p u` as rejected generic component
 application, and `FF p u` as the distinct object-level route. A nested
 ordinary lambda is supported only to the explicit recursive expected-tree
 depth; missing or stale expectations remain fail-closed. Recover the frozen
-zero-behavior D010 graduation proposal and do not route to book work before
-its separate exact review. A missing direct semantic capability belongs in
-the relevant usability/kernel plan, not in parser heuristics.
+zero-behavior D010 graduation proposal and its separate exact approved
+review; do not re-open or broaden them. Continue with `BOOK-DELTA-0A` under
+the dedicated book/repository plan. A missing direct semantic capability
+belongs in the relevant usability/kernel plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -1736,6 +1748,13 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — D010 separately approved under unattended delegation.**
+  After no immediate human objection to the checkpointed zero-behavior
+  graduation proposal, recorded an immutable, human-supersedable review
+  approving only the exact audited expression/host partition, retained
+  semantic boundaries, proportional evidence reuse, and route to
+  `BOOK-DELTA-0A`. The review authorizes no new behavior, book mutation, or
+  scale work; exact review checkpoint pending staged review.
 - **2026-07-30 — `SYNTAX-PARITY-GRADUATE-1` exact proposal frozen.** Bound
   the executable 68-method audit to final-green 1D1, retained the exact
   47-expression/21-host partition and all semantic residuals, and proposed

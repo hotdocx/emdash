@@ -9,30 +9,15 @@ the completed book architecture plan
 [`REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`](../emdash2/reports/REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md),
 and the completed category/formal-presentation expansion plan
 [`REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`](../emdash2/reports/REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md)
-Status: selected post-syntax product-graduation route; syntax parity is
-final-green through `SYNTAX-PARITY-1B3` at
-`3dcf25ec008bb3d30723e3251c222e88acc216a3`; its audit is checkpointed at
-`4eada97f9ee8fe284b70dea6c0548dfdb9754189` and its separate exact review is
-approved with human supersession; 1C and exact syntax graduation remain
-ahead, with the zero-behavior 1C0 residual-constructor audit focused-green at
-`487ed014c210ab8426b27c40241b2de0f2f1dc4e` and its bounded D005 ordinary
-constructor proposal separately approved with human supersession; its 1C1
-implementation is final-green at
-`be437f3a7d64a6a554578036f76621322d5626fc`, while 1C2/1C3 and syntax
-graduation remain ahead; the focused-green zero-behavior 1C2 audit now
-separates twelve mechanical structural/comprehension heads from four
-whole/higher action constructors, is checkpointed at
-`20093b71e3802c3d2b7cbf20670862a58a71b653`, and its exact twelve-head 1C2A
-proposal is separately approved with human supersession; planning boundary
-and its bounded implementation is final-green at
-`c1bd21eec9456a3600e22b1ef0dc8084958fd123`; the four-constructor 1C2B
-whole/higher-action audit is focused-green with its exact D007 proposal
-checkpointed at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`; its separate
-immutable D007 review approves the bounded four-head scope at
-`f1fd8fa6c8039267fa0ae03955df8738d8048999`; its implementation is
-final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; 1C3 and syntax
-graduation remain ahead; no book prose, generated artifact, release, or
-public presentation change is yet authorized
+Status: selected and dependency-ready post-syntax product-graduation route.
+Syntax parity is final-green through `SYNTAX-PARITY-1D1` at
+`59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`. The exact zero-behavior
+`SYNTAX-PARITY-GRADUATE-1` proposal is checkpointed at
+`be1eb6cf1e33c17c88615d243fae8a58d1d8cbba` and approved as proposed by a
+separate immutable D010 unattended review with human supersession. The exact
+review checkpoint is pending synchronized staged review. `BOOK-DELTA-0A` is
+the next row; no book prose, generated artifact, release, public
+presentation, or bulk scale change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
@@ -249,7 +234,7 @@ by preparing the static artifact and README.
 
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
-| BOOK-DELTA-0A | selected; dependency-ready after SYNTAX-PARITY-GRADUATE-1 | syntax-parity graduation and `8217aa3...` audit anchor | Capability-oriented delta matrix with destinations, exclusions, evidence needs, and no prose mutation |
+| BOOK-DELTA-0A | **dependency-ready; selected next after approved SYNTAX-PARITY-GRADUATE-1** | syntax-parity graduation and `8217aa3...` audit anchor | Capability-oriented delta matrix with destinations, exclusions, evidence needs, and no prose mutation |
 | BOOK-NARRATIVE-0B | gated on BOOK-DELTA-0A | complete delta matrix and book authorities | Exact theorem-led running example, section-level edit map, status/evidence map, notation boundary, and bounded implementation proposal |
 | H-DTTLF-BOOK-REPOSITORY-01 | pending exact proposal | BOOK-NARRATIVE-0B | Separate review of exact authored sources, evidence/manifest effects, artifact ownership, README scope, and validation |
 | BOOK-PROSE-1A | gated | exact separate review | Edit only reviewed authored book sources and structured evidence/architecture authorities; preserve theorem-led prose and formal-status discipline |
@@ -335,13 +320,9 @@ Recover current code/tests, all worktrees and ancestry, staged and unstaged
 state, active root and nested authorities, and living decisions before
 acting. Follow the next reviewed row rather than a stale task snapshot.
 
-First finish any interrupted integrated-reviewer checkpoint. Then graduate
-text parity with the mathematical constructions already exposed by direct
-typed TypeScript, prioritizing existing ^n, ^fd, and ^nd capabilities while
-preserving deterministic parsing, typed action selection, internal
-factorization, one explicit Core, and one checker/evaluator.
-
-After syntax graduation, audit capability deltas from 8217aa3... and update
+Recover the completed integrated reviewer and exact approved syntax
+graduation; do not re-open or reimplement them. Begin with `BOOK-DELTA-0A`:
+audit capability deltas from 8217aa3... without mutating prose. Then update
 the book as theorem-led mathematical prose, not a developer report. Correct
 the formal-presentation boundary, use a small compelling running example,
 update compact evidence/status records, validate and visually review the
@@ -362,11 +343,11 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
-- **2026-07-30 — Book route remains next after final-green dependent text.**
-  SYNTAX-PARITY-1B3 now gives the reviewer an executable genuine mixed
-  displayed telescope without changing the mathematical kernel. 1C and exact
-  syntax graduation remain prerequisites to BOOK-DELTA-0A; no book prose or
-  bulk scale row has started early.
+- **2026-07-30 — `BOOK-DELTA-0A` is dependency-ready.** Exact D010 syntax
+  graduation is approved with human supersession after final-green 1D1. The
+  current goal now enters the capability-oriented delta audit; no prose,
+  generated artifact, repository presentation, or bulk scale work has
+  started early.
 - **2026-07-30 — Post-syntax priority explicitly reaffirmed.** The user
   confirmed that book reconciliation, the stable public PDF, and the root
   repository presentation are the current goal's high-yield successor to

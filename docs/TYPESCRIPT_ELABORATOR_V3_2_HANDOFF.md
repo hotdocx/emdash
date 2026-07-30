@@ -639,7 +639,10 @@ H-DTTLF-PRODUCT-SYNTAX-PARITY-10 /
 D-DTTLF-PRODUCT-SYNTAX-PARITY-010. It proposes only the audited
 47-expression/21-host envelope, retained semantic boundaries, proportional
 reuse of recorded aggregate/browser evidence, and routing to
-`BOOK-DELTA-0A`; its separate exact review is next.
+`BOOK-DELTA-0A`. A separate immutable D010 unattended review approves exactly
+that zero-behavior envelope with human supersession. Syntax parity is
+graduated; the exact review checkpoint is pending synchronized staged review
+and `BOOK-DELTA-0A` is next.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
