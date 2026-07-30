@@ -4,18 +4,22 @@ This directory contains the static React/Vite reviewer interface for the
 TypeScript emdash v3.2 implementation. It consolidates four existing
 ingredients into one client-side journey:
 
-1. editable ordinary categorical text;
+1. ten editable categorical examples across the reviewed `^f`, `^n`, `^fd`,
+   and `^nd` modes;
 2. the checked outer-LF, ordinary-functorial, and genuinely displayed
    three-panel research report;
-3. the generated current emdash book; and
+3. the concise overview paper and generated current emdash book; and
 4. the preserved editable minimal explicit-Core playground.
 
-The default expression view accepts the three reviewed ordinary presets:
+Representative expression presets include:
 
 ```text
 λ^f x. (H x) (K x)
 λ^f x. F x y0
 G pA
+λ^n k : K. (FF k) (s k)
+λ^fd (a : A; b : B, c : C; d : D). fibrePair b c
+λ^nd k : K. composeCells (theta k) (eta k)
 ```
 
 The source is parsed and recursively resolved by the existing categorical
@@ -28,8 +32,11 @@ path.
 The comparatively large categorical/report closure is loaded as a separate
 Vite chunk. Loading it does not execute the report. The report runs only
 after the reviewer selects **Run full research report**, with a visible
-running state. Vite fingerprints and emits `../docs/emdash-book.pdf` as a
-static asset.
+running state. The report retains its original pre-browser graduation
+boundary; the interface labels that provenance rather than rewriting the
+historical component report. Vite fingerprints and emits
+`../docs/emdash3_2.pdf` and `../docs/emdash-book.pdf` as distinct static
+assets.
 
 The minimal playground still reaches the exact content-pinned
 `emdash-v3.2-mvp-1` browser API and frozen `CORE_MVP_MANIFEST` through
@@ -67,22 +74,23 @@ The deployable artifact is generated under `emdash-template/dist/`. It uses
 relative asset URLs and requires no Node backend, so it is suitable for a
 project subpath such as `https://hotdocx.github.io/emdash/`.
 
-No GitHub Pages workflow, deployment, publication, custom domain, or release
-is part of this implementation. Those remain separate reviewed operations.
+The root `.github/workflows/pages.yml` builds this standalone fixture from
+`main`, uploads only `dist/`, and deploys it with the official GitHub Pages
+Actions route. No generated `gh-pages` branch or committed `dist/` is needed.
 
 ## Exact Boundary
 
 The current browser demonstrates:
 
-- three editable ordinary categorical examples with expected-type-directed
-  application;
+- ten editable categorical examples across `^f`, `^n`, `^fd`, and `^nd`,
+  with expected-type-directed action selection and source diagnostics;
 - the unchanged outer dependent-LF, ordinary binder, and displayed-chain
   report;
-- the generated book asset; and
+- the overview paper and generated book assets; and
 - the frozen minimal Core checker example.
 
-It does not yet provide displayed categorical text syntax, `^n`, `^fd`, or
-`^nd` text resolution, arbitrary displayed telescope depth, browser-side
-source acquisition, systematic groupoidal closure, or whole-library transfer
-graduation. Direct typed TypeScript remains the most complete construction
-surface.
+It does not provide arbitrary-depth categorical text beyond the reviewed
+nested presets, the remaining displayed structural-constructor syntax,
+arbitrary displayed telescope depth, browser-side source acquisition,
+systematic groupoidal closure, or whole-library transfer graduation. Direct
+typed TypeScript remains the most complete construction surface.

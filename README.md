@@ -13,13 +13,22 @@ of global metatheory.
 
 ## Read And Review
 
-Start with the current development edition of
-[*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf).
+Start with the concise
+[*Functorial Type Theory: An Executable Architecture for Directed Dependency*](./docs/emdash3_2.pdf)
+overview, then continue to the current development edition of
+[*Functorial Type Theory: Univalent Foundations for Mathematics*](./docs/emdash-book.pdf)
+([assembled Markdown](./docs/emdash-book.md)).
 The active mathematical source is
 [`emdash2/emdash3_2.lp`](./emdash2/emdash3_2.lp), together with the modules it
 imports.
 
-After bootstrapping a fresh checkout, launch the integrated browser reviewer:
+Use the
+[live integrated reviewer](https://hotdocx.github.io/emdash/)
+to elaborate the bounded categorical syntax, inspect explicit Core and
+computation, run the three-panel research report, and read the book in the
+same client-side workbench.
+
+To run that reviewer locally after bootstrapping a fresh checkout:
 
 ```bash
 ./scripts/bootstrap-worktree.sh
@@ -32,9 +41,9 @@ For a compact terminal walkthrough of the same architecture:
 ./scripts/pnpmw run demo:external-review
 ```
 
-The browser workbench is client-side. It does not require a Lambdapi process
-at production runtime, and this repository does not yet include a remote
-deployment or publication workflow for it.
+The browser workbench is published from `main` by GitHub Pages. It is wholly
+client-side and does not require a Lambdapi process or other production
+backend.
 
 ## What The Reviewer Shows
 

@@ -15,3 +15,11 @@ export const EMDASH_BOOK_URL = new URL(
     '../../docs/emdash-book.pdf',
     import.meta.url
 ).href;
+
+/**
+ * Vite fingerprints and emits the current overview paper as a static asset.
+ */
+export const EMDASH_ARTICLE_URL = new URL(
+    '../../docs/emdash3_2.pdf',
+    import.meta.url
+).href;

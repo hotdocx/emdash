@@ -377,8 +377,8 @@ route fails for a measured repository constraint.
 | PUBLICATION-0A | complete | user direction | Git/reference/ownership audit, exact retirement inventory, artifact roles, Pages state |
 | PUBLICATION-PLAN-0B | complete at `72747ec791f648ede3f743052a5705a1e7c3c38f` | PUBLICATION-0A | This living plan plus links from the prior article, book, browser, and handoff ledgers |
 | PUBLICATION-CLEAN-1A | complete and focused-green at `72747ec791f648ede3f743052a5705a1e7c3c38f` | PUBLICATION-PLAN-0B | Ignore `.playwright-cli/`; remove exact audited `spec/`, legacy docs, and v2 print sources; update registry and references |
-| PUBLICATION-OWNERS-1B | implementation and focused contract checks complete; checkpoint in progress; real article artifact acceptance belongs to ARTICLE-ARTIFACT-1F | PUBLICATION-CLEAN-1A | Separate book and article promotion owners; add full-book Markdown distribution; remove book-to-article compatibility copying |
-| LANDING-REVIEWER-1C | pending | PUBLICATION-PLAN-0B | Responsive landing page and same-page reviewer using the frozen brief |
+| PUBLICATION-OWNERS-1B | complete and focused-green at `fcf925af85cf078f4956a2208e220fd2dd078909`; real article artifact acceptance belongs to ARTICLE-ARTIFACT-1F | PUBLICATION-CLEAN-1A | Separate book and article promotion owners; add full-book Markdown distribution; remove book-to-article compatibility copying |
+| LANDING-REVIEWER-1C | implementation, production build, desktop/mobile visual QA, and all three interactive panel checks complete; checkpoint pending | PUBLICATION-PLAN-0B | Responsive landing page and same-page reviewer using the frozen brief |
 | ARTICLE-THESIS-1D | in progress; current workbench measured at 23 pages against the selected 14-18 page budget | PUBLICATION-PLAN-0B | Freeze title, abstract promise, outline, evidence map, and page budget against active authorities |
 | ARTICLE-PROSE-1E | pending | ARTICLE-THESIS-1D | Rewrite the active v3.2 workbench as the descriptive overview source and register it |
 | ARTICLE-ARTIFACT-1F | pending | PUBLICATION-OWNERS-1B, ARTICLE-PROSE-1E | Targeted validation, deterministic PDF, all-page visual QA, and promoted `docs/emdash3_2.{md,pdf}` |
@@ -424,6 +424,22 @@ does not authorize mathematical changes.
   substantive compression before the new article artifact can pass; it is
   not a tooling blocker. No root TypeScript, Lambdapi, conformance, complete
   print, or book render aggregate was run.
+- **2026-07-30 - `LANDING-REVIEWER-1C` implementation and focused review
+  complete.** Reframed the static React fixture as one responsive editorial
+  landing and reviewer under a stable `#reviewer` anchor, with transparent
+  research boundaries and routes to the overview paper, full book, and
+  active Lambdapi source. Preserved the existing ten-preset text adapter,
+  three-panel report, and minimal Core API rather than adding a browser-only
+  checker. The standalone TypeScript/Vite production build passes. Real
+  browser QA at 1440x1000 and 390x844 exercised an ordinary preset, the mixed
+  displayed telescope preset, the explicit three-part research report, and
+  the editable Core script with no console error or failed static request.
+  The mobile full-page visual inspection found no overlap, clipping, or
+  unreadable panel. The UI explicitly explains that the embedded report's
+  historical “browser promotion: no” line belongs to its pre-browser semantic
+  graduation snapshot. Paper and book currently deduplicate only because the
+  tracked `docs/emdash3_2.pdf` is still the old book alias; final distinct-link
+  acceptance belongs to `ARTICLE-ARTIFACT-1F`.
 
 ## Targeted Validation
 

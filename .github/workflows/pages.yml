@@ -1,0 +1,63 @@
+name: Deploy reviewer to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/pages.yml
+      - docs/emdash-book.pdf
+      - docs/emdash3_2.pdf
+      - emdash-template/**
+      - src/v3_2/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: emdash-template/package-lock.json
+
+      - name: Install reviewer dependencies
+        run: npm ci
+        working-directory: emdash-template
+
+      - name: Build reviewer
+        run: npm run build
+        working-directory: emdash-template
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload reviewer artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: emdash-template/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
