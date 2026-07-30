@@ -15,7 +15,10 @@ PRODUCT-DEMO-0A is complete; the exact PRODUCT-DEMO-1A implementation
 proposal is separately approved under D-DTTLF-PRODUCT-DEMO-001 with human
 supersession; PRODUCT-DEMO-1B is implemented and final-green at exact local
 checkpoint `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`;
-PRODUCT-DEMO-ORACLE-0A is next
+PRODUCT-DEMO-ORACLE-0A, PRODUCT-BROWSER-0A, and PRODUCT-SYNTAX-0A are
+complete; the dedicated browser plan freezes BROWSER-DIRECTED-1A as the next
+product implementation proposal, while the dedicated user-syntax plan retains
+its parser-independent resolver architecture as a later gated continuation
 
 ## Human Direction And Purpose
 
@@ -175,13 +178,17 @@ PRODUCT-DEMO-0A inventory
   -> PRODUCT-DEMO-ORACLE-0A optional-oracle assessment
   -> PRODUCT-BROWSER-0A measured browser audit
   -> PRODUCT-SYNTAX-0A measured user-syntax audit
-  -> promote at most one reviewed browser/parser implementation subplan
+  -> BROWSER-DIRECTED-1A exact review/implementation
+  -> separately select either categorical-browser runtime separation
+     or parser-independent syntax resolution
   -> PRODUCT-GRADUATE-1
   -> return to SCALE-STRESS-3C / SCALE-BATCH-1 / SCALE-GRADUATE-1
 ```
 
 Browser and parser audits may run in either order after PRODUCT-DEMO-1B.
-Neither implementation is silently selected by this plan.
+The completed measurements select only the additive directed browser proposal
+as the immediate product implementation. They do not silently select a
+categorical browser profile, parser dependency, or syntax implementation.
 
 ## PRODUCT-DEMO-1A — Approved External-Reviewer Proposal
 
@@ -327,12 +334,30 @@ Exact local implementation checkpoint:
 | PRODUCT-DEMO-0A | complete | current code and history | Existing demo/API/browser/parser inventory and feasibility verdict recorded above |
 | PRODUCT-DEMO-1A | approved exactly as proposed under D-DTTLF-PRODUCT-DEMO-001 with human supersession; proposal checkpoint `e786c61` | PRODUCT-DEMO-0A | Deeply frozen three-panel external-review implementation contract |
 | PRODUCT-DEMO-1B | complete and final-green at `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc` | approved PRODUCT-DEMO-1A | Root-only three-panel report module, command, reviewer guide, tests, and synchronized navigation with zero semantic/browser/parser delta |
-| PRODUCT-DEMO-ORACLE-0A | next | PRODUCT-DEMO-1B | Decide whether one bounded optional conformance command materially improves peer review without making Lambdapi a runtime dependency |
-| PRODUCT-BROWSER-0A | pending | PRODUCT-DEMO-1B | Measure transitive browser safety, bundle/worker/startup boundary, exact public facade, and minimal UI options; produce a separate implementation proposal only if justified |
-| PRODUCT-BROWSER-1 | gated/deferred | approved browser proposal | Implement only the selected browser profile and UI; likely deserves a dedicated subplan |
-| PRODUCT-SYNTAX-0A | pending | PRODUCT-DEMO-1B | Compare direct TypeScript, historical Parsimmon grammar, tagged-template, and small located-syntax adapters against the existing contextual compiler; freeze mode/application and diagnostic boundaries |
+| PRODUCT-DEMO-ORACLE-0A | complete; no new command selected | PRODUCT-DEMO-1B | Reuse the documented `check:conformance`, directed conformance, displayed-evaluation conformance, and bounded kernel commands. A new umbrella command would either duplicate them or misstate displayed-chain coverage; production remains Lambdapi-free |
+| PRODUCT-BROWSER-0A | complete; routed to dedicated browser plan | PRODUCT-DEMO-1B | The directed dependent closure is Node-free and Vite/Chromium-green; the full report reaches `node:crypto` through acquisition/audit modules. Frozen additive BROWSER-DIRECTED-1A and deferred categorical runtime-spec separation are recorded in [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md) |
+| PRODUCT-BROWSER-1 | next gated proposal | D-DTTLF-PRODUCT-BROWSER-001 | Implement only the additive directed browser entry and two-view fixture selected by the dedicated browser plan |
+| PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); Parsimmon versus a tiny parser remains gated |
 | PRODUCT-SYNTAX-1 | gated/deferred | approved syntax proposal | Implement only the selected user-facing syntax adapter; likely deserves a dedicated subplan |
 | PRODUCT-GRADUATE-1 | pending | required product rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
+
+## PRODUCT-DEMO-ORACLE-0A Completion
+
+The external-review guide already names the truthful optional authority
+commands:
+
+- the nineteen-judgment MVP conformance command;
+- directed-continuation conformance;
+- categorical displayed-evaluation conformance; and
+- the bounded active-kernel check.
+
+The product report installs no new semantics. There is no dedicated live
+displayed-chain oracle command whose coverage could be truthfully relabeled as
+the whole three-panel report. Adding an umbrella script now would therefore
+either repeat existing commands without improving evidence, or overstate the
+oracle boundary. ORACLE-0A selects documentation reuse and zero package-script
+delta. Lambdapi remains an optional development/conformance authority, never
+a browser or production runtime dependency.
 
 ## User-Syntax Audit Questions
 
@@ -386,6 +411,19 @@ PRODUCT-BROWSER-0A must determine:
 This audit may produce a dedicated
 `TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`; it does not pre-authorize
 one.
+
+Both audits are now complete. Their detailed measurements and staged
+architectures are recorded in:
+
+- [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md);
+  and
+- [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md).
+
+The browser audit proves an immediate, Node-free directed-dependent browser
+slice and diagnoses categorical bundle failure as runtime/acquisition
+layering. The syntax audit confirms that text needs only a small located
+syntax plus recursive resolution into the existing programs; it does not
+justify a second checker or select Parsimmon merely from historical use.
 
 ## Scale Relationship
 
@@ -482,3 +520,13 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   Lambdapi sources, generic engines, elaborators, and mathematical
   owners/rules are unchanged. Exact green local checkpoint:
   `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`.
+- **2026-07-29 — Product audits completed and split into dedicated plans.**
+  ORACLE-0A selects the already documented optional conformance commands
+  rather than a misleading umbrella. BROWSER-0A proves the directed demo
+  Vite/Chromium-green and finds the categorical report's `node:crypto`
+  reachability in acquisition/audit layering. SYNTAX-0A specifies a
+  parser-independent located syntax and recursive resolver into the existing
+  LF/categorical programs, retaining the historical Parsimmon source only as
+  grammar evidence. The additive directed browser proposal is next; no
+  categorical browser, parser dependency, or syntax implementation is
+  silently authorized.

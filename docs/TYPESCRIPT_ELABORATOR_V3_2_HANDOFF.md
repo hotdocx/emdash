@@ -371,9 +371,31 @@ TypeScript gate passes 1,109 tests (1,058 active passes and 51 intentional
 skips), and the bounded active-kernel check passes. The browser, parser,
 dependencies, Lambdapi sources, generic engines, elaborators, and
 mathematical owners/rules have zero delta. The optional higher-action command
-remains outside the default report. PRODUCT-DEMO-ORACLE-0A is next after the
-exact implementation checkpoint
+remains outside the default report. Exact implementation checkpoint:
 `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`.
+
+The three bounded product audits are now complete. ORACLE-0A retains the
+already documented conformance commands rather than adding an umbrella that
+would either duplicate them or overstate displayed-chain oracle coverage.
+The measured browser work is now in
+[`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md):
+the directed-dependent closure production-builds at an observed 221.72 kB /
+52.25 kB gzip and executes correctly in Chromium, while the combined
+categorical report reaches `node:crypto` only through transfer
+acquisition/digest evidence. The next exact proposal is an additive directed
+browser entry and two-view standalone fixture; categorical promotion remains
+behind a runtime-spec/audit separation row.
+
+The user-syntax audit is recorded separately in
+[`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md).
+Text input is specified as a small located name-bearing syntax resolved
+recursively through the existing scoped LF builder and
+`CoreCategoricalProgram`, with an immutable typed host environment,
+expected-classifier guidance, and exact source spans. This is an input
+adapter, not another `RawExpr` type theory or checker. The historical
+Parsimmon implementation remains grammar evidence; Parsimmon versus a tiny
+parser is a later measured choice. No parser dependency or syntax
+implementation is yet selected.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
