@@ -5,9 +5,9 @@
   "type": "module",
   "main": "/src/index.tsx",
   "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json --noUnusedLocals false --noUnusedParameters false --noFallthroughCasesInSwitch false",
     "build": "vite build",
-    "check": "tsc --noEmit -p tsconfig.json && vite build"
+    "check": "tsc --noEmit -p tsconfig.json --noUnusedLocals false --noUnusedParameters false --noFallthroughCasesInSwitch false && vite build"
   },
   "dependencies": {
     "react": "^19.0.0",

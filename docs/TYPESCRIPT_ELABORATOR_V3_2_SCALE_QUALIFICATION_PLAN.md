@@ -19,8 +19,10 @@ scale audit in session
 `infinity-codex:019f9243-9fba-7c73-861b-ff4eacf0c56c:019f9686-d7a3-7030-ba41-92e1e69b97fd`
 Infinity-Codex-Decision-Responses: direct user scale-qualification direction
 on 2026-07-24; active code, authorities, and this plan outrank the archive
-Status: active living plan; detailed synchronized status and implementation
-ledger follow below
+Status: preserved living architecture-qualification plan; detailed
+synchronized status and implementation ledger follow below, but remaining
+bulk rows are deferred/out of scope for the current reader-facing persistent
+goal and require a future explicit goal
 Human-Direction: after approving H-DTTLF-03/D-DTTLF-001, the user requested a
 careful clarification of whether the final architecture was already settled.
 On 2026-07-24 the user then directed that we gather a varied set of
@@ -173,6 +175,16 @@ new LF connective and not yet claimed as universally necessary for every
 generated owner. TypeScript-side positivity and automatic eliminator
 generation remain relevant only if a later product accepts untrusted
 inductive sources or owns source-level inductive declarations.
+On 2026-07-30 the user selected a further product-priority correction. After
+the integrated reviewer and direct-TypeScript/text syntax parity, the current
+persistent goal proceeds through
+[`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md):
+a capability-oriented book audit, theorem-led prose/evidence update,
+deterministic public book artifact, and consolidated repository
+introduction. Pending SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and
+other bulk scale rows remain valid and incomplete, but are deferred to a
+future explicit persistent goal. This priority correction does not weaken or
+graduate their acceptance criteria.
 The previously discussed
 `DECL-REFINE-1A` facility is optional deferred TypeScript
 implementation/module-linking work, not a new LF semantic feature and not a
@@ -181,7 +193,7 @@ Root-test parallelism is separately measured and deferred in
 `TYPESCRIPT_TEST_PARALLELISM_PLAN.md`: a two-process cache-heavy benchmark was
 slower than recent serial focused baselines, so naive 154-file/19-worker
 sharding is not a quick prerequisite for this scale sequence.
-Detailed-Status: active living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
+Detailed-Status: preserved living plan; SCALE-PLAN-0 and SCALE-0A are complete; revised
 H-DTTLF-SCALE-01/D-DTTLF-SCALE-001R is approved; SCALE-0B through SCALE-0E
 and SCALE-RUNTIME-DEPS-1 are complete; H-DTTLF-SCALE-02/
 D-DTTLF-SCALE-002 is approved; SCALE-ACQUIRE-1A is complete and
@@ -722,10 +734,10 @@ The architecture qualifies only when all of the following hold:
 | SCALE-ACQUIRE-1B | deferred; prototype removed | SCALE-STRESS-3B0 plus a measured future acquisition need | Optional narrow fail-closed declaration adapter feeding the existing IR; the abandoned unexported canonical-symbol prototype is not architectural infrastructure and must not be recreated without a recorded cost/benefit trigger |
 | SCALE-STRESS-3B1 | deferred | usability graduation or an independently measured transfer priority; exact root/generated-owner boundary | Directly construct and compile the smallest typed root prerequisite and protected hom-action declaration closure through data/policy only, preserving protected exposition and opaque tactic theorems; no parser dependency |
 | SCALE-STRESS-3B2 | deferred | SCALE-STRESS-3B1 | Compile the evidence-property declaration closure against exact root/protected interfaces and check representative transparent bodies without activating a profile |
-| PRODUCT-FACING-CONTINUATION | active in the dedicated integrated-reviewer plan; existing CLI, directed-browser, and ordinary-text ingredients are final-green; combined categorical/report Vite and Chromium audit complete; H-DTTLF-PRODUCT-REVIEWER-01 approved under separate D-DTTLF-PRODUCT-REVIEWER-001 | completed usability/displayed evidence and product ingredients | Join the unchanged three-panel report, editable ordinary categorical text, generated book, and minimal implementation evidence in one browser reviewer shell after separating immutable selection-contract creation from Node-only acquisition hashing. No new semantic or scale claim; an exact scale item may move earlier only for a measured reviewer prerequisite |
-| SCALE-STRESS-3C | pending | applicable inductive/import/runtime mechanisms | Qualify the multi-module `WalkingEnd_cat`/dependent-eliminator/higher-action/`BNat_cat` HIT slice and record its exact generated-owner and runtime/proof boundaries |
-| SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
-| SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
+| PRODUCT-FACING-CONTINUATION | integrated reviewer final-green with checkpoint ready; syntax-parity and book/repository graduation selected | completed usability/displayed evidence and product ingredients | Preserve the consolidated report/text/book/minimal-Core browser, graduate text parity with existing direct-TypeScript mathematical constructions, then complete the theorem-led book/public-repository route. No new semantic or scale claim; an exact scale item may move earlier only for a measured reader-facing prerequisite |
+| SCALE-STRESS-3C | pending; deferred to a future persistent goal | applicable inductive/import/runtime mechanisms | Qualify the multi-module `WalkingEnd_cat`/dependent-eliminator/higher-action/`BNat_cat` HIT slice and record its exact generated-owner and runtime/proof boundaries |
+| SCALE-BATCH-1 | pending; deferred to a future persistent goal | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
+| SCALE-GRADUATE-1 | pending; deferred to a future persistent goal | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
 
 Rows may be split when implementation reveals an independently reviewable
 mechanism. A failed experiment records its exact unsupported syntax or
@@ -3204,10 +3216,22 @@ rewrite, branch/worktree deletion, or unrelated cleanup is authorized.
 ## Persistent `/goal` Launch Prompt
 
 ```text
-Kick off or continue implementing
-docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md as the current
-top-level living ledger, while preserving the completed usability and
-displayed-bracket plans as product/architecture evidence.
+Kick off or continue the current reader-facing product route, using
+docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md as the preserved
+top-level architecture/history ledger and
+docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md as the recovery entry. Follow the
+current rows routed through
+docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md,
+docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md, and
+docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md.
+
+The direct human 2026-07-30 priority correction supersedes any legacy
+“resume scale” wording retained later in this historical prompt for the
+current goal. Finish the reviewer checkpoint, syntax parity, and theorem-led
+book/repository graduation. Keep SCALE-STRESS-3C, SCALE-BATCH-1,
+SCALE-GRADUATE-1, and other bulk scale rows pending for a future explicit
+goal. Promote only one exact dependency required by a measured reader-facing
+example and separately reviewed.
 
 Treat its Persistent /goal Launch Prompt as part of the objective. Recover
 actual state from active code, checks, the plan and its ledgers, all Git
@@ -3247,7 +3271,8 @@ and the separate D-021 target review at
 `107f43a8d68c5500d8b9823ce8bdd487dc3d4e11`. Preserve the completed
 target/runtime transfer, direct-TypeScript higher-cell consumer, demo, green
 aggregate/live-audit/active-kernel evidence, and exact checkpoint
-`c5a23c208f614ec42c9037c3a05f377c1375746a`. Resume this scale ledger.
+`c5a23c208f614ec42c9037c3a05f377c1375746a`. Preserve this scale ledger for
+the future scale goal.
 
 Preserve the completed emdash-v3.2-mvp-1 profile and the reviewed root-only
 emdash-v3.2-dttlf-directed-1 continuation unchanged. Keep the explicit
@@ -3280,7 +3305,7 @@ reviewed D-017 closure, completed DISPLAYED-ND-0A/D-018 audit and review, and
 completed first recursive `:^nd` component-composition case. Preserve the
 completed DISPLAYED-ND-HIGHER-1B qualification, D-019 review, D-020
 foundation, D-021 review, and target/consumer checkpoint
-`c5a23c208f614ec42c9037c3a05f377c1375746a`. Resume the scale rows. Direct
+`c5a23c208f614ec42c9037c3a05f377c1375746a`. Preserve the scale rows. Direct
 typed construction remains the default acquisition path; reconsider a narrow
 adapter only after measured repetition and a synchronized plan decision.
 Preserve the completed ordinary bracket evidence: the thirteen-prerequisite
@@ -3311,8 +3336,9 @@ transfer, and do not infer acquisition resumption from it.
 Keep `DECL-REFINE-1A` optional and deferred. Dependency-closed canonical
 relinking is the default; compare monotone checked signature-to-body module
 merging only after a measured independent-fragment need. Neither strategy may
-change LF/Core semantics. Once the displayed graduation, mixed-telescope
-stress, and `:^nd` audit return control here, resume in this order:
+change LF/Core semantics. The historical scale order after displayed
+graduation, mixed-telescope stress, and the `:^nd` audit is retained below for
+the future scale goal:
 preserve the completed SCALE-KIND-PI-1 product-sort audit and its directly
 approved no-semantic-change correction. Preserve the completed/final-green
 SCALE-INDUCTIVE-1B1 parameter/index correction and explicit generated
@@ -3364,12 +3390,19 @@ consolidate the three runnable product lanes and their exact limitations; its
 separate exact review is recorded with human supersession. The
 documentation-only handoff is implemented in the current draft, but the
 user's later direct correction rejects separate documented lanes as the final
-reviewer product. The dependency-ready continuation is now the measured and
-frozen proposal in
-`docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`; scale remains
-the top-level architecture ledger but does not resume bulk order until that
-plan routes back. Do not silently substitute the pending
-SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
+reviewer product. The reviewed implementation in
+`docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md` is present and
+final-green with its bounded checkpoint ready. The user's direct priority
+then routes to
+`docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`: inventory text parity
+with mathematical constructions already exposed by direct TypeScript,
+prioritizing `^n`, `^fd`, and `^nd`, and freeze a separate exact proposal
+before changing behavior. After exact parity graduation, follow
+`docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
+Scale remains the top-level architecture/history ledger, but its bulk rows
+are outside the current persistent goal and require a future explicit goal.
+Do not silently substitute the pending SCALE-STRESS-1B profile or deferred
+protected-module/bulk rows.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
@@ -3419,6 +3452,12 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-30 — Bulk scale moved to a future persistent goal.** The user
+  selected syntax parity followed by a capability-oriented, theorem-led
+  book/repository graduation as the remainder of the current product goal.
+  SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other pending scale
+  rows remain incomplete with unchanged acceptance criteria; this ledger is
+  preserved as their future authority.
 - **2026-07-29 — SCALE-INDUCTIVE-HYBRID-0A selected the lean expanded-symbol
   route and froze 1B2.** Lambdapi's explicit `ind_nat` declaration and two
   generated rules compile through the ordinary TypeScript engines; both rules
@@ -4006,6 +4045,15 @@ scope is affected.
   existing comparison boundary. This changes no Core/checker/action semantics,
   implements no deferred binder mode, and does not settle or bulk-rewrite
   informal Lambdapi/kernel notation.
+- **2026-07-30 — Integrated reviewer implemented; syntax parity selected
+  before bulk scale.** The reviewed browser-safe acquisition-contract split,
+  lazy report/text/book/minimal-Core workbench, and focused/browser evidence
+  are final-green after exact D002/D003 corrections, with the bounded
+  checkpoint ready. The user directly
+  selected a dedicated API-to-text parity audit next, beginning with existing
+  `^n`, `^fd`, and `^nd` mathematical capabilities. Parsing remains
+  deterministic and separate from typed resolution/internal factorization;
+  no heuristic coherence synthesis or scale semantic is implied.
 - **2026-07-29 — Corrected SYNTAX-1A final-green.** The dependency-free private
   parser and recursive resolver, root development export,
   `demo:categorical-text`, 13 focused tests, and aggregate wiring landed as

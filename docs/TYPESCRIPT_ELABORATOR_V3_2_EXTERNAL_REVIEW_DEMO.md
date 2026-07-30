@@ -1,18 +1,23 @@
 # Emdash v3.2 TypeScript External-Review Demo
 
-Date: 2026-07-29
-Candidate: `emdash-v3.2-product-capability-2`
+Date: 2026-07-30
+Candidate: `emdash-v3.2-integrated-reviewer-1`
 Inputs: direct typed TypeScript plus bounded ordinary categorical text
 Production Lambdapi dependency: none
-Runtime checkpoint:
+Component runtime checkpoint:
 `7513cbe9e0d1439b5b1250982f40cede48e9a811`
+Integrated implementation: green in the current reviewed tranche
 
 ## What This Demonstrates
 
-The TypeScript implementation currently exposes three complementary runnable
-capability ingredients over one checker/evaluator architecture:
+The TypeScript implementation now exposes one integrated external-reviewer
+workbench over the existing checker/evaluator architecture:
 
-1. a curated direct-TypeScript report across:
+1. an editable ordinary categorical expression view with three presets:
+   - recursive pointwise application `λ^f x. (H x) (K x)`;
+   - fixed-inner evaluation `λ^f x. F x y0`; and
+   - expected-type-directed whole-Hom action `G pA`;
+2. an explicitly started direct-TypeScript report across:
    - an outer dependent logical framework with lambda, Pi, dependent
      Sigma-telescope data, type inference/checking, beta reduction, and
      source-located rejection;
@@ -22,36 +27,54 @@ capability ingredients over one checker/evaluator architecture:
    - displayed categorical binders over one genuine dependency edge,
      including object behavior, internalized-arrow behavior, reindexing,
      recursive subexpressions, and a wrong-base diagnostic;
-2. an editable ordinary categorical text adapter with recursive whitespace
-   application, intrinsic `λ^f`, optional checked source annotation, exact
-   source spans, and type-directed whole-Hom action; and
-3. a fully client-side browser fixture containing the directed dependent-LF
-   witness plus the preserved editable minimal-Core playground.
+3. the generated current [`emdash-book.pdf`](./emdash-book.pdf), emitted by
+   Vite as a fingerprinted static asset; and
+4. the preserved editable minimal-Core playground.
 
 Direct construction and parsed ordinary text both elaborate to backend-neutral
 explicit emdash Core and run through the existing generic LF checker,
 evaluator, rewrite machinery, and categorical program. The text adapter owns
 no second action table or checker. None of these product lanes spawns
-Lambdapi.
+Lambdapi. The categorical/report closure is loaded as a separate browser
+chunk, and the full report does not execute until the reviewer selects its
+explicit action.
 
-These commands are not the final intended reviewer UX. The user's later
-clarification requires one browser workbench that joins this exact
-three-panel report, editable categorical text, the generated emdash book, and
-the minimal implementation evidence. The completed combined Vite/Chromium
-audit and frozen implementation proposal are in
+The completed combined Vite/Chromium audit, decision, implementation record,
+and exact boundary are in
 [`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md).
-Until that separately approved slice lands, this document is the
-self-contained terminal/capability handoff rather than a claim that the
-reviewer journey is already integrated.
 
 ## Runnable Product Matrix
 
 | Command | Input and result | Exact boundary |
 | --- | --- | --- |
+| `./scripts/pnpmw run check:browser-reviewer` | Typechecks, lints, and builds the integrated static workbench | Primary reviewer product; deployment remains separate |
 | `./scripts/pnpmw run demo:external-review` | Fixed direct-TypeScript outer LF, ordinary categorical, and genuine displayed-chain report | Most complete semantic demonstration; not editable text |
 | `./scripts/pnpmw run demo:categorical-text` | Editable strings such as `λ^f x. (H x) (K x)` checked into explicit Core | Ordinary `^f` only; no displayed/dependent text telescope |
-| `./scripts/pnpmw run check:browser-directed` | Strict build/tests for the client-side dependent-LF view and minimal-Core playground | Browser contains neither categorical continuation nor categorical text |
+| `./scripts/pnpmw run check:browser-directed` | Exact compatibility alias of `check:browser-reviewer` | Historical command name only |
 | `./scripts/pnpmw run demo:categorical-displayed-nd-higher` | Optional direct-TypeScript object, whole-Hom, and higher-cell action | Advanced bounded witness; not a general `^nd` text binder |
+
+## Run The Integrated Browser
+
+Start the local reviewer workbench from the repository root:
+
+```bash
+./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite
+```
+
+Then open the URL printed by Vite. The intended review path is:
+
+1. choose or edit a categorical expression and select **Elaborate and
+   check**;
+2. inspect its explicit Core, inferred type, expected type, and structural
+   lowering—or its source-located rejection;
+3. open **Research evidence**, select **Run full research report**, and
+   inspect the outer-LF, ordinary, and displayed witnesses;
+4. open the fingerprinted emdash book from the same view; and
+5. optionally use the preserved **Minimal Core playground** to exercise the
+   generic LF checker directly.
+
+No backend is required. The page does not acquire active Lambdapi source or
+run a Lambdapi process.
 
 ## Run The Curated Report
 
@@ -197,26 +220,25 @@ The text-lane source is
 with its adapter in
 [`src/v3_2/categorical_text.ts`](../src/v3_2/categorical_text.ts).
 
-## Build The Client-Side Browser Lane
+## Build The Client-Side Reviewer
 
-The selected browser fixture has a fixed directed dependent-LF view and the
-preserved editable minimal-Core JavaScript playground:
+The selected browser fixture now contains the editable ordinary text view,
+explicit three-panel report, generated book link, and preserved minimal-Core
+playground:
 
 ```bash
-./scripts/pnpmw run check:browser-directed
+./scripts/pnpmw run check:browser-reviewer
 ```
 
-The command runs the fixture's strict TypeScript checks and Vite production
-build. Its relative assets are compatible with a static project subpath such
-as `https://hotdocx.github.io/emdash/`; no Pages workflow, deployment, or
-publication has been added.
+The command runs root typecheck and lint, fixture typechecking, and the Vite
+production build. Its relative assets are compatible with a static project
+subpath such as `https://hotdocx.github.io/emdash/`; no Pages workflow,
+deployment, or publication has been added.
 
-The browser entry is additive and does not modify the frozen minimal
-`src/v3_2/browser.ts` API. It does not currently expose
-`CoreCategoricalProgram`, the categorical text adapter, or the displayed
-continuation. Categorical browser promotion remains behind the separately
-deferred BROWSER-CATEGORICAL-0A runtime/acquisition-boundary refactor and a
-later exact review.
+The browser imports only the narrow reviewer entry. It does not expose an
+arbitrary `CoreCategoricalProgram` or the Node-only acquisition adapter to
+editable JavaScript. The frozen minimal `src/v3_2/browser.ts` API and manifest
+remain byte-for-byte unchanged.
 
 ## Optional Advanced Higher-Action Witness
 
@@ -259,14 +281,22 @@ TypeScript runtime do not invoke Lambdapi in production.
 
 Current selected product evidence:
 
+- integrated reviewer proposal/review:
+  `f94d770b2fe91ac43352b9848c350fd258000db4` /
+  `7d65de7`;
 - external-review report:
   `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`;
 - additive directed browser:
   `7f696cea4b6a369e5db41c0d5e57e778b61fa10c`;
 - ordinary categorical text adapter:
   `7513cbe9e0d1439b5b1250982f40cede48e9a811`; and
-- latest aggregate after the text slice: 1,127 tests, 1,076 active passes,
-  51 intentional skips, zero failures.
+- focused integrated reviewer test: eight checks, eight passes, zero
+  failures;
+- Vite production build: 140 modules, a 116.73 kB-gzip initial script and a
+  158.56 kB-gzip lazy reviewer chunk; and
+- real Chromium execution of an accepted edit, a source-located rejection,
+  the full three-panel report, the emitted PDF link, and the minimal-Core
+  checker, with zero console messages.
 
 ## Exact Boundary
 
@@ -282,7 +312,8 @@ This candidate demonstrates:
 - bounded ordinary categorical text with recursive whitespace application,
   optional checked source annotation, exact diagnostics, and whole-Hom
   expected routing;
-- a client-side directed dependent-LF view and editable minimal-Core
+- an integrated client-side reviewer with editable categorical text,
+  explicit research report, generated book, and editable minimal-Core
   playground; and
 - backend-neutral Core plus generic TypeScript checking/evaluation.
 
@@ -294,7 +325,8 @@ It does not yet claim:
   nested lambdas, outer-LF terms, Pi, let, or holes;
 - final agreement between experimental TypeScript `λ^mode` syntax and
   informal Lambdapi/kernel notation;
-- browser promotion of the categorical continuation;
+- displayed/dependent categorical text parity or additional text binder
+  modes;
 - a GitHub Pages workflow, deployment, or publication;
 - systematic groupoidal-DTT closure;
 - complete transfer of the Lambdapi library;
@@ -302,12 +334,18 @@ It does not yet claim:
   or
 - a performance or release SLA.
 
-The selected text and historical directed-browser rows are recorded in
+The selected text, historical directed-browser, and integrated reviewer rows
+are recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md)
 and
 [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md).
 The historical Parsimmon parser remains baseline grammar evidence; the
 implemented adapter is dependency-free. The immediate product continuation
-routes through the integrated reviewer plan; scale remains the top-level
-architecture ledger, and one exact scale dependency may move earlier only
-when a compelling reviewer witness measurably requires it.
+is the dedicated
+[`syntax-parity plan`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md):
+inventory parity with the mathematical constructions exposed by the
+implemented TypeScript API, starting with a measured `^n` / `^fd` / `^nd`
+routing audit. Parsing remains deterministic; typed resolution and internal
+factorization may fail closed without heuristic action or naturality
+synthesis. Bulk scale remains deferred; one exact scale dependency may move
+earlier only when a compelling reviewer witness measurably requires it.

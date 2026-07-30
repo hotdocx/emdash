@@ -160,7 +160,7 @@ describe(
                 CORE_LF_SCALE_STRESS_2_UNCURRYING_ACQUISITION;
             assert.deepEqual(
                 contract.commands.map(command => command.ordinal),
-                [389, 393, 961, 981, 991, 995]
+                [389, 393, 977, 997, 1008, 1013]
             );
             assert.deepEqual(
                 contract.commands.map(command => command.id),

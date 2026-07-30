@@ -435,7 +435,7 @@ matrix remains useful, but the user's later explicit clarification supersedes
 its route back to scale: the CLI report, browser, categorical text, and book
 are ingredients of one reviewer journey.
 
-The current dependency-ready product continuation is
+The current product continuation is
 [`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md).
 Its measured audit directly Vite-built and Chromium-ran the categorical text
 program and all three existing report candidates after a disposable
@@ -446,10 +446,30 @@ review entry, joins editable ordinary text and the existing report with the
 generated book, and preserves the minimal playground. The frozen
 H-DTTLF-PRODUCT-REVIEWER-01 proposal is now separately approved exactly as
 proposed under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession after
-proposal checkpoint `f94d770`; REVIEWER-INTEGRATE-1A is dependency-ready. No
-new scale semantic is needed by the present witness; a specifically required
-scale ingredient may move earlier only through its own measured bounded
+proposal checkpoint `f94d770`. REVIEWER-INTEGRATE-1A is implemented and
+focused/browser-green. D-DTTLF-PRODUCT-REVIEWER-002/003 corrected only the
+active export/count/ordinal pins and seven derivative expected-ordinal arrays;
+their proportional zero-failure gates are green and the bounded local
+checkpoint is ready. No new scale semantic is needed by the present witness.
+
+The selected successor is
+[`TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md).
+Before deferred bulk scale, SYNTAX-PARITY-0A inventories the mathematical
+constructions exposed by direct typed TypeScript and maps them to
+deterministic text routes, prioritizing existing `^n`, `^fd`, and `^nd`
+capabilities. Parsing remains distinct from typed elaboration and internal
+categorical factorization: ambiguity fails closed, and arbitrary pointwise
+data is never promoted to coherent categorical data. A specifically required
+scale ingredient may still move earlier only through its own measured bounded
 review.
+
+After exact syntax graduation, the current product goal continues through
+[`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
+That plan audits the capability delta from the user-selected `8217aa3...`
+anchor, updates the book as theorem-led mathematical prose rather than a
+developer report, validates one deterministic public
+`docs/emdash-book.pdf`, and consolidates the root repository introduction.
+The remaining bulk scale rows stay pending for a future persistent goal.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
@@ -489,11 +509,15 @@ scale plan's living launch prompt. The selected sequence is:
 4. preserve the completed external-review CLI, directed browser, and
    categorical text checkpoints plus the documentation-only capability
    matrix;
-5. follow the integrated reviewer plan through its separate exact review,
-   browser/report/text/book implementation, and runnable graduation; then
-6. take the next product or specifically justified scale dependency routed by
-   the living ledgers, eventually including SCALE-STRESS-3C, SCALE-BATCH-1,
-   and SCALE-GRADUATE-1.
+5. checkpoint the final-green integrated reviewer;
+6. follow the syntax-parity plan through its direct-TypeScript capability
+   inventory and separately reviewed bounded implementation, beginning with
+   existing `^n`, `^fd`, and `^nd` routes;
+7. follow the book/repository graduation plan through its capability-delta
+   audit, exact editorial review, validated public PDF, and concise root
+   presentation; then
+8. graduate the current product goal while preserving SCALE-STRESS-3C,
+   SCALE-BATCH-1, and SCALE-GRADUATE-1 for a future explicit goal.
 
 ## Purpose
 
@@ -514,6 +538,10 @@ Forward systematic-transfer work is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md).
 The current integrated external-reviewer continuation is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md).
+Its selected post-reviewer syntax-parity continuation is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md).
+Its selected post-syntax reader-facing graduation is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
 Its CLI, browser, and syntax ingredient history is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md).
 The current product-facing dependent-demo and categorical-binder work is
@@ -1092,10 +1120,15 @@ any Git mutation.
 ## Start The Long-Running Implementation
 
 Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
-`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`. That retained
-systematic-transfer ledger routes the current critical path through
+`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`. Recover
+through this handoff and retain the scale plan as the complete future
+systematic-transfer ledger, but do not resume its bulk rows in the current
+product goal. The current path is integrated-reviewer checkpoint, syntax
+parity, then reader-facing book/repository graduation.
+
+The historical scale-led continuation routed the critical path through
 `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`; the completed
-fibred-context plan remains its authority and historical ledger. The current
+fibred-context plan remains its authority and historical ledger. The
 proposal-only DISPLAYED-BRACKET-GRADUATE-1 artifact is complete,
 green, checkpointed `6c06cb10ea6eb9fa298544d084df5f129950a3a1`,
 and separately approved exactly as proposed under D-016 by an immutable
@@ -1116,11 +1149,13 @@ separate D-021 review at
 surface consumer, tests, and demo. Preserve its green 1,071-test root gate,
 7/7 live higher-action audit, bounded active-kernel check, and exact
 implementation checkpoint
-`c5a23c208f614ec42c9037c3a05f377c1375746a`; then resume the recorded scale
-order. Preserve the SCALE-KIND-PI-1 executable product-sort audit and directly
+`c5a23c208f614ec42c9037c3a05f377c1375746a`. The historical continuation then
+resumed the recorded scale order; preserve the resulting SCALE-KIND-PI-1
+executable product-sort audit and directly
 approved D-DTTLF-LF-SORT-001 decision plus complete correction checkpoint
-`b4cb8d39bd31adc768784308263fd91d83ddeefe`, then continue to
-SCALE-INDUCTIVE-1B. The completed row preserves the checker and uses explicit
+`b4cb8d39bd31adc768784308263fd91d83ddeefe` and the completed/frozen
+SCALE-INDUCTIVE evidence. Do not continue into bulk scale during the current
+reader-facing goal. The completed row preserves the checker and uses explicit
 code universes; it does not authorize native `TYPE` quantification.
 `DECL-REFINE-1A`, generic parsing, and bulk protected-module transfer are not
 the immediate critical path.

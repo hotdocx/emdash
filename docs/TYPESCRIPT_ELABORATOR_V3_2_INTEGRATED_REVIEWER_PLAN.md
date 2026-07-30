@@ -9,8 +9,8 @@ Depends-On:
 and
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
 Status: approved implementation is present and focused/browser-green under
-D-DTTLF-PRODUCT-REVIEWER-001 with human supersession; final aggregate
-revalidation and local checkpoint are in progress
+D-DTTLF-PRODUCT-REVIEWER-001 with human supersession; all reviewed and
+proportional final gates are green and the bounded local checkpoint is ready
 
 ## Human Correction And Product Intent
 
@@ -507,7 +507,22 @@ This addendum authorizes no semantic, Lambdapi, product, parser, browser,
 dependency, lockfile, deployment, bulk-scale, or broader Git change.
 Implementation requires a separate exact review with human supersession.
 
-## Selected Successor — Syntax Parity Before Bulk Scale
+That separate review is now recorded as
+[`D-DTTLF-PRODUCT-REVIEWER-003`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_D003_REVIEW.md).
+Only the seven literal arrays above changed. The seven exact affected suites
+then passed 27 active tests with seven intentional skips and zero failures.
+Root typecheck and lint, isolated `check:scale-inventory` (14/14), bounded
+active-kernel validation, conformance, browser production, and
+`git diff --check` pass.
+
+The earlier 1,135-test aggregate is therefore retained as the complete
+repository execution record: its only seven failures were the now-corrected
+data expectations, while every semantic assertion in those suites already
+passed. Repeating that 35-minute aggregate is not proportionate after the
+exact reviewed correction and focused zero-failure rerun. No test was removed,
+weakened, skipped, or behaviorally changed.
+
+## Selected Successor — Syntax Parity, Then Reader-Facing Graduation
 
 The user's direct clarification selects
 [`TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md)
@@ -529,9 +544,17 @@ This means:
   transformation.
 
 The first syntax-parity row is an inventory/audit and proposal only. It
-authorizes no syntax behavior before a separate exact review. Deferred bulk
-scale resumes only after the living product route graduates or a specifically
-measured reviewer dependency is separately promoted.
+authorizes no syntax behavior before a separate exact review. After exact
+syntax graduation, the selected route is
+[`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md):
+a capability-delta audit, theorem-led book update, deterministic public book
+artifact, and consolidated repository introduction.
+
+Bulk scale no longer resumes automatically inside the current persistent
+goal. SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and related pending
+rows remain preserved for a future goal. One exact scale dependency may still
+move earlier only when the selected reviewer/book example demonstrably needs
+it and a separate bounded review authorizes it.
 
 ## Work Ledger
 
@@ -539,11 +562,12 @@ measured reviewer dependency is separately promoted.
 | --- | --- | --- | --- |
 | REVIEWER-INTEGRATE-0A | complete measured audit | existing product/browser/text rows | Combined Vite and Chromium feasibility, exact Node boundary, bundle/runtime orientation, and selected architecture |
 | H-DTTLF-PRODUCT-REVIEWER-01 | approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession; proposal checkpoint `f94d770` | REVIEWER-INTEGRATE-0A | Exact runtime-contract split, browser entry, UI, book link, tests, and non-claims |
-| REVIEWER-INTEGRATE-1A | implemented and focused/browser-green under D-DTTLF-PRODUCT-REVIEWER-001; final aggregate revalidation/checkpoint in progress | exact review | Browser-safe contract split and narrow lazy reviewer workbench joining report, text, book, and minimal Core |
+| REVIEWER-INTEGRATE-1A | final-green under D-DTTLF-PRODUCT-REVIEWER-001; bounded checkpoint ready | exact review | Browser-safe contract split and narrow lazy reviewer workbench joining report, text, book, and minimal Core |
 | H-DTTLF-PRODUCT-REVIEWER-CORRECTION-01 | complete and approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-002 | final active acquisition validation | Refresh only current export/count/ordinal evidence; preserve historical digest evidence and all semantics |
-| H-DTTLF-PRODUCT-REVIEWER-CORRECTION-02 | exact non-self-authorizing addendum frozen after the 1,135-test aggregate | D-DTTLF-PRODUCT-REVIEWER-002 plus exact seven failures | Refresh seven literal derivative expected-ordinal arrays and rerun only proportional gates |
-| REVIEWER-GRADUATE-1 | implementation evidence frozen; final-green/checkpoint pending | REVIEWER-INTEGRATE-1A | Runnable reviewer path, observed bundle/runtime envelope, exact non-effects, and syntax-parity successor |
+| H-DTTLF-PRODUCT-REVIEWER-CORRECTION-02 | complete and approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-003; focused zero-failure correction gate green | D-DTTLF-PRODUCT-REVIEWER-002 plus exact seven failures | Refreshed only seven literal derivative expected-ordinal arrays; no test or behavior delta |
+| REVIEWER-GRADUATE-1 | final-green; bounded local checkpoint ready | REVIEWER-INTEGRATE-1A | Runnable reviewer path, observed bundle/runtime envelope, exact non-effects, and syntax-parity successor |
 | SYNTAX-PARITY-0A | selected successor; dependency-ready after reviewer checkpoint | REVIEWER-GRADUATE-1 and direct TypeScript surface | Executable API-to-text inventory and bounded proposal, prioritizing `^n`, `^fd`, and `^nd`; no behavior before separate review |
+| BOOK-DELTA-0A | selected post-syntax successor | SYNTAX-PARITY-GRADUATE-1 | Capability-oriented book delta audit followed by theorem-led prose/artifact/repository graduation under its dedicated plan |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |
 
 ## Git And Persistent-Goal Boundary
@@ -562,9 +586,10 @@ amend, reset, history rewrite, branch/worktree removal, or unrelated cleanup.
 ```text
 Continue the dependency-ready work routed by
 docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md and, after its
-green checkpoint, docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md, with
+green checkpoint, docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md and
+docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md, with
 docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md retained as the
-top-level architecture-qualification ledger and
+future architecture-qualification ledger and
 docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md as the recovery entry point.
 
 Treat the living plans and their Persistent /goal Launch Prompts as part of
@@ -581,6 +606,12 @@ mathematical direct-TypeScript construction surface, prioritizing existing
 backend-neutral explicit Core, and direct typed TypeScript. Do not introduce
 another semantic frontend or copy a browser action table.
 
+After syntax graduation, follow the book/repository plan: audit capability
+deltas from `8217aa3...`, write theorem-led mathematical prose rather than an
+implementation diary, validate and deterministically promote the public book
+artifact, and consolidate the root README around the book and reviewer.
+Preserve bulk systematic-transfer rows as pending work for a future goal.
+
 Follow only separately reviewed exact implementation scopes. A compelling
 reviewer witness may promote one specifically identified scale dependency
 ahead of bulk order, but only after a measured need and separately reviewed
@@ -595,12 +626,21 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — Final reviewer corrections green; reader-facing successor
+  selected.** D-DTTLF-PRODUCT-REVIEWER-003 approved only seven stale ordinal
+  arrays. Their exact suites now pass with zero failures, and all proportional
+  TypeScript, inventory, conformance, kernel, browser, and diff gates are
+  green. After syntax parity, the current product goal now routes to a
+  theorem-led book/repository graduation; bulk scale remains pending for a
+  future goal.
 - **2026-07-30 — REVIEWER-INTEGRATE-1A implemented and successor selected.**
   Added the browser-safe acquisition-contract boundary, narrow lazy reviewer
   entry, consolidated Vite workbench, emitted book link, focused tests, and
   product gate. Production and real-browser measurements satisfy the reviewed
   path. The first aggregate found only two stale fixture-README contracts;
-  their focused correction is green and final revalidation is in progress.
+  their focused correction is green. The final aggregate isolated seven
+  stale derivative ordinal arrays, and D003's exact proportional correction
+  is now zero-failure.
   The user's direct clarification selects a dedicated syntax-parity audit
   against the mathematical direct-TypeScript surface before deferred bulk
   scale.

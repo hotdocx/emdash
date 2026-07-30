@@ -17,7 +17,8 @@ final-green at exact local checkpoint
 correction now promotes the measured categorical/report/browser integration
 to the frozen exact gate in
 [`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md);
-static publication remains separately gated
+that implementation is present and focused/browser-green with final
+aggregate/checkpoint in progress; static publication remains separately gated
 
 ## Purpose
 
@@ -426,7 +427,10 @@ The integrated proposal therefore selects a browser-safe acquisition-contract
 module, editable ordinary text, the unchanged fixed three-panel report
 (including its genuine displayed-chain evidence), the generated book, and a
 non-eager full-report action. Editable displayed syntax and broader profile
-exposure remain separately gated.
+exposure remain separately gated. The selected post-reviewer continuation is
+the direct-TypeScript syntax-parity audit in
+[`TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md);
+it does not broaden this browser row retroactively.
 
 ## Work Ledger
 
@@ -434,9 +438,9 @@ exposure remain separately gated.
 | --- | --- | --- | --- |
 | BROWSER-0A | complete | PRODUCT-DEMO-1B | Measured static closure, actual Vite success/failure, real-browser directed witness, and packaging diagnosis |
 | BROWSER-DIRECTED-1A | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | BROWSER-0A and D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, two-view fixture, focused safety tests, portable static production build, and real-browser evidence |
-| BROWSER-CATEGORICAL-0A | active measured continuation; exact audit completed in the integrated reviewer plan | direct human product correction after BROWSER-DIRECTED-1A | Separate immutable selection-contract creation from Node acquisition hashing and qualify text plus the existing report |
-| BROWSER-CATEGORICAL-1A | dependency-ready under D-DTTLF-PRODUCT-REVIEWER-001 | BROWSER-CATEGORICAL-0A and approved integrated proposal | One narrow reviewer browser entry and UI over the existing categorical text and report runners |
-| BROWSER-DISPLAYED-1A | included only through the existing fixed three-panel report in the proposed integrated reviewer; editable displayed text remains gated | browser-safe displayed closure plus separate review | Execute the already reviewed displayed-chain witness without widening its usability envelope |
+| BROWSER-CATEGORICAL-0A | complete measured audit | direct human product correction after BROWSER-DIRECTED-1A | Separate immutable selection-contract creation from Node acquisition hashing and qualify text plus the existing report |
+| BROWSER-CATEGORICAL-1A | implemented and focused/browser-green under D-DTTLF-PRODUCT-REVIEWER-001; final aggregate/checkpoint in progress | BROWSER-CATEGORICAL-0A and approved integrated proposal | One narrow reviewer browser entry and UI over the existing categorical text and report runners |
+| BROWSER-DISPLAYED-1A | complete for the fixed three-panel report only; editable displayed text routed to syntax-parity audit | browser-safe displayed closure plus separate review | Execute the already reviewed displayed-chain witness without widening its usability envelope |
 | BROWSER-STATIC-DEPLOY-0A | deferred; publication not authorized | BROWSER-DIRECTED-1A and an explicit deployment priority | Audit the existing repository CI/pages configuration and freeze an exact static artifact/workflow/domain proposal; no Node backend unless a measured client-side blocker exists |
 | BROWSER-GRADUATE-1 | complete only for the historical directed slice; integrated graduation remains gated | BROWSER-DIRECTED-1A | Exact directed capability and residual boundary; no longer the final reviewer product |
 
@@ -455,7 +459,8 @@ rewrite, branch/worktree deletion, or unrelated cleanup is authorized.
 
 ```text
 Continue the next dependency-ready reviewed row routed by
-docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md, while retaining
+docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md and, after its
+checkpoint, docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md, while retaining
 docs/TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md as the browser
 capability/history ledger,
 docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md as the product ledger,
@@ -482,6 +487,12 @@ browser, parser, semantic, publication, or Git effects.
 
 ## Change Log
 
+- **2026-07-30 — Integrated categorical browser implemented.** The
+  browser-safe contract split, lazy reviewer entry, editable ordinary text,
+  explicit full report, emitted book, and preserved minimal Core are present
+  and real-browser green; final aggregate/checkpoint is in progress. Editable
+  `^n`/`^fd`/`^nd` and other target-API parity are routed to the dedicated
+  syntax-parity audit rather than silently added here.
 - **2026-07-30 — Categorical browser row promoted and narrowed.** The user
   clarified that browser, text, CLI report, and book are one reviewer
   product. Disposable direct imports isolated `node:crypto` acquisition

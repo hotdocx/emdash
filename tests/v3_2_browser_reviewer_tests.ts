@@ -1,0 +1,442 @@
+/**
+ * Focused REVIEWER-INTEGRATE-1A integrated browser-entry tests.
+ */
+
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import {
+    existsSync,
+    readFileSync
+} from 'node:fs';
+import {
+    dirname,
+    resolve
+} from 'node:path';
+import {
+    describe,
+    it
+} from 'node:test';
+import ts from 'typescript';
+import {
+    CoreCategoricalProgram,
+    CoreCategoricalProgramCompilation
+} from '../src/v3_2/categorical_program';
+import {
+    CORE_BROWSER_REVIEWER_BOUNDARY,
+    CORE_BROWSER_REVIEWER_PRESETS,
+    CoreBrowserReviewerError,
+    CoreBrowserReviewerPresetId,
+    CoreBrowserReviewerTextAccepted,
+    formatCoreBrowserReviewerFullReport,
+    runCoreBrowserReviewerFullReport,
+    runCoreBrowserReviewerText
+} from '../src/v3_2/browser_reviewer';
+import * as acquisition from '../src/v3_2/lf_transfer_acquisition';
+import * as contract from
+    '../src/v3_2/lf_transfer_acquisition_contract';
+
+const assertDeepFrozen = (value: unknown): void => {
+    if (value === null || typeof value !== 'object') return;
+    assert.equal(Object.isFrozen(value), true);
+    Object.values(value as Record<string, unknown>).forEach(
+        assertDeepFrozen
+    );
+};
+
+const directCompilation = (
+    presetId: CoreBrowserReviewerPresetId
+): CoreCategoricalProgramCompilation => {
+    const program = new CoreCategoricalProgram({
+        sourceFile: '<browser-reviewer-direct>'
+    });
+    const A = program.category('review_A');
+    const B = program.category('review_B');
+    const C = program.category('review_C');
+    const functorsBC = program.functorCategory(B, C);
+    const H = program.functor('review_H', A, functorsBC);
+    const K = program.functor('review_K', A, B);
+    const F = program.functor('review_F', A, functorsBC);
+    const G = program.functor('review_G', A, B);
+    const y0 = program.object('review_y0', B);
+    const x0 = program.object('review_x0', A);
+    const x1 = program.object('review_x1', A);
+    const pA = program.homBoundary(A, x0, x1);
+
+    switch (presetId) {
+        case 'pointwise-application':
+            return program.compile(program.lambda(
+                'x',
+                A,
+                C,
+                x => program.apply(
+                    program.apply(H, x),
+                    program.apply(K, x)
+                )
+            ));
+        case 'fixed-inner-evaluation':
+            return program.compile(program.lambda(
+                'x',
+                A,
+                C,
+                x => program.apply(
+                    program.apply(F, x),
+                    y0
+                )
+            ));
+        case 'whole-hom-action':
+            return program.compile(program.apply(G, pA, {
+                expectedShape: 'whole-hom-action'
+            }));
+        default: {
+            const exhaustive: never = presetId;
+            return exhaustive;
+        }
+    }
+};
+
+const nodeBuiltins = new Set([
+    'assert',
+    'buffer',
+    'child_process',
+    'crypto',
+    'events',
+    'fs',
+    'http',
+    'https',
+    'module',
+    'net',
+    'os',
+    'path',
+    'perf_hooks',
+    'process',
+    'stream',
+    'timers',
+    'tls',
+    'tty',
+    'url',
+    'util',
+    'v8',
+    'vm',
+    'worker_threads',
+    'zlib'
+]);
+
+const moduleSpecifiers = (
+    file: string,
+    source: string
+): readonly string[] => {
+    const syntax = ts.createSourceFile(
+        file,
+        source,
+        ts.ScriptTarget.Latest,
+        true,
+        file.endsWith('.tsx')
+            ? ts.ScriptKind.TSX
+            : ts.ScriptKind.TS
+    );
+    const specifiers: string[] = [];
+    const visit = (node: ts.Node): void => {
+        if (
+            (
+                ts.isImportDeclaration(node) ||
+                ts.isExportDeclaration(node)
+            ) &&
+            node.moduleSpecifier !== undefined &&
+            ts.isStringLiteral(node.moduleSpecifier)
+        ) {
+            specifiers.push(node.moduleSpecifier.text);
+        }
+        if (
+            ts.isCallExpression(node) &&
+            node.expression.kind === ts.SyntaxKind.ImportKeyword &&
+            node.arguments.length === 1 &&
+            ts.isStringLiteral(node.arguments[0])
+        ) {
+            specifiers.push(node.arguments[0].text);
+        }
+        if (
+            ts.isCallExpression(node) &&
+            ts.isIdentifier(node.expression) &&
+            node.expression.text === 'require' &&
+            node.arguments.length === 1 &&
+            ts.isStringLiteral(node.arguments[0])
+        ) {
+            specifiers.push(node.arguments[0].text);
+        }
+        ts.forEachChild(node, visit);
+    };
+    visit(syntax);
+    return Object.freeze(specifiers);
+};
+
+const resolveLocalModule = (
+    importingFile: string,
+    specifier: string
+): string => {
+    const unresolved = resolve(dirname(importingFile), specifier);
+    const withoutJs = specifier.endsWith('.js')
+        ? unresolved.slice(0, -3)
+        : unresolved;
+    const candidates = [
+        withoutJs,
+        `${withoutJs}.ts`,
+        `${withoutJs}.tsx`,
+        resolve(withoutJs, 'index.ts')
+    ];
+    const resolved = candidates.find(candidate => existsSync(candidate));
+    assert.notEqual(
+        resolved,
+        undefined,
+        `Cannot resolve reviewer dependency ${specifier} from ${importingFile}`
+    );
+    return resolved as string;
+};
+
+const collectLocalClosure = (
+    entry: string
+): ReadonlySet<string> => {
+    const pending = [resolve(entry)];
+    const visited = new Set<string>();
+    while (pending.length > 0) {
+        const file = pending.pop() as string;
+        if (visited.has(file)) continue;
+        visited.add(file);
+        const source = readFileSync(file, 'utf8');
+        for (const specifier of moduleSpecifiers(file, source)) {
+            if (specifier.startsWith('.')) {
+                pending.push(resolveLocalModule(file, specifier));
+                continue;
+            }
+            const bare = specifier.startsWith('node:')
+                ? specifier.slice('node:'.length)
+                : specifier.split('/')[0];
+            assert.equal(
+                specifier.startsWith('node:') ||
+                    nodeBuiltins.has(bare),
+                false,
+                `Reviewer dependency reaches Node builtin ${specifier} ` +
+                    `from ${file}`
+            );
+        }
+    }
+    return visited;
+};
+
+describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
+    it('checks every editable preset through the same direct program path', () => {
+        assert.deepEqual(
+            CORE_BROWSER_REVIEWER_PRESETS.map(preset => preset.id),
+            [
+                'pointwise-application',
+                'fixed-inner-evaluation',
+                'whole-hom-action'
+            ]
+        );
+        for (const preset of CORE_BROWSER_REVIEWER_PRESETS) {
+            const result = runCoreBrowserReviewerText({
+                presetId: preset.id,
+                source: preset.source
+            });
+            assert.equal(result.status, 'accepted');
+            if (result.status !== 'accepted') continue;
+            const direct = directCompilation(preset.id);
+            assert.equal(result.explicitCore, direct.explicitCore);
+            assert.equal(
+                result.inferredType,
+                direct.explicitInferredType
+            );
+            assert.equal(
+                result.expectedType,
+                direct.explicitExpectedType
+            );
+            assert.deepEqual(
+                result.structuralPrerequisites,
+                direct.structuralPrerequisites
+            );
+            assert.equal(result.productionLambdapiDependency, false);
+            assertDeepFrozen(result);
+        }
+    });
+
+    it('returns an exact source-located edited-input diagnostic', () => {
+        const result = runCoreBrowserReviewerText({
+            presetId: 'whole-hom-action',
+            source: 'G\n C',
+            sourceFile: 'reviewer-input.emdash'
+        });
+        assert.equal(result.status, 'rejected');
+        if (result.status !== 'rejected') return;
+        assert.deepEqual(result.diagnostic, {
+            phase: 'resolution',
+            code: 'EXPECTED_ARGUMENT',
+            message:
+                "Category 'C' is not an admissible categorical " +
+                'application argument at reviewer-input.emdash:2:2',
+            detail:
+                "Category 'C' is not an admissible categorical " +
+                'application argument',
+            span: {
+                file: 'reviewer-input.emdash',
+                start: { line: 2, column: 2 },
+                end: { line: 2, column: 3 }
+            }
+        });
+        assertDeepFrozen(result);
+    });
+
+    it('fails closed on an unknown runtime preset', () => {
+        assert.throws(
+            () => runCoreBrowserReviewerText({
+                presetId:
+                    'not-reviewed' as CoreBrowserReviewerPresetId,
+                source: 'G pA'
+            }),
+            error =>
+                error instanceof CoreBrowserReviewerError &&
+                error.code === 'UNKNOWN_REVIEWER_PRESET'
+        );
+    });
+
+    it('publishes the exact deeply frozen capability boundary', () => {
+        assert.equal(
+            CORE_BROWSER_REVIEWER_BOUNDARY.revision,
+            'REVIEWER-INTEGRATE-1A-BROWSER-1'
+        );
+        assert.equal(
+            CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
+            'explicit-user-action'
+        );
+        assert.equal(
+            CORE_BROWSER_REVIEWER_BOUNDARY.semanticEffects
+                .newCheckerOrEvaluatorBranchCount,
+            0
+        );
+        assert.ok(
+            CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
+                'existing outer-LF, ordinary, and displayed three-panel report'
+            )
+        );
+        assert.ok(
+            CORE_BROWSER_REVIEWER_BOUNDARY.deferred.includes(
+                'whole-library transfer graduation'
+            )
+        );
+        assertDeepFrozen(CORE_BROWSER_REVIEWER_BOUNDARY);
+        assertDeepFrozen(CORE_BROWSER_REVIEWER_PRESETS);
+    });
+
+    it(
+        'executes and formats the unchanged three research candidates',
+        { timeout: 180_000 },
+        () => {
+            const report = runCoreBrowserReviewerFullReport();
+            assert.equal(
+                report.components.outerDependentLf.profile,
+                'emdash-v3.2-dttlf-directed-1'
+            );
+            assert.equal(
+                report.components.ordinaryFunctorialBinding.candidate,
+                'emdash-v3.2-usability-1d'
+            );
+            assert.equal(
+                report.components.displayedDependentBinding.candidate,
+                'emdash-v3.2-displayed-chain-1a'
+            );
+            const formatted =
+                formatCoreBrowserReviewerFullReport(report);
+            assert.match(
+                formatted,
+                /=== 1\. Outer dependent logical framework ===/u
+            );
+            assert.match(
+                formatted,
+                /=== 3\. Displayed dependent binding ===/u
+            );
+        }
+    );
+
+    it('keeps one contract implementation and the Node verifier API', () => {
+        assert.equal(
+            acquisition.createCoreLfCanonicalSelectionContract,
+            contract.createCoreLfCanonicalSelectionContract
+        );
+        assert.equal(
+            acquisition.CoreLfCanonicalAcquisitionError,
+            contract.CoreLfCanonicalAcquisitionError
+        );
+        assert.equal(
+            typeof acquisition.acquireCoreLfCanonicalCommands,
+            'function'
+        );
+    });
+
+    it('has a Node-free closure through contracts but not acquisition', () => {
+        const closure = collectLocalClosure(
+            'src/v3_2/browser_reviewer.ts'
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/browser_reviewer.ts')),
+            true
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_transfer_acquisition_contract.ts'
+            )),
+            true
+        );
+        assert.equal(
+            closure.has(resolve(
+                'src/v3_2/lf_transfer_acquisition.ts'
+            )),
+            false
+        );
+        assert.equal(
+            closure.has(resolve('src/v3_2/product_review_demo.ts')),
+            true
+        );
+    });
+
+    it('wires one lazy reviewer shell, generated book, and frozen Core', () => {
+        const bridge = readFileSync(
+            'emdash-template/src/emdash_api.ts',
+            'utf8'
+        );
+        const app = readFileSync(
+            'emdash-template/src/App.tsx',
+            'utf8'
+        );
+        const rootPackage = JSON.parse(
+            readFileSync('package.json', 'utf8')
+        ) as { readonly scripts: Readonly<Record<string, string>> };
+        const minimalBrowser = readFileSync(
+            'src/v3_2/browser.ts',
+            'utf8'
+        );
+
+        assert.match(
+            bridge,
+            /import\(['"]\.\.\/\.\.\/src\/v3_2\/browser_reviewer\.js['"]\)/u
+        );
+        assert.match(
+            bridge,
+            /new URL\(\s*['"]\.\.\/\.\.\/docs\/emdash-book\.pdf['"]/u
+        );
+        assert.doesNotMatch(
+            bridge,
+            /export \* from ['"]\.\.\/\.\.\/src\/v3_2\/index/u
+        );
+        assert.match(app, /Categorical expression/u);
+        assert.match(app, /Run full research report/u);
+        assert.match(app, /Open the emdash book/u);
+        assert.match(app, /Minimal Core playground/u);
+        assert.equal(
+            rootPackage.scripts['check:browser-directed'],
+            rootPackage.scripts['check:browser-reviewer']
+        );
+        assert.equal(
+            createHash('sha256').update(minimalBrowser).digest('hex'),
+            '9923a7a85672d6fbf6441f23f69f1062c702764167338ee40e1a65be9e42cfcc'
+        );
+        assert.equal(existsSync('docs/emdash-book.pdf'), true);
+    });
+});

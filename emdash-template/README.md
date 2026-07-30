@@ -1,74 +1,88 @@
-# emdash v3.2 Browser Playground
+# emdash v3.2 External-Review Workbench
 
-This directory contains a standalone React/Vite playground for the
-browser-safe emdash v3.2 TypeScript Core API. It preserves the editable
-minimal-Core playground and adds a fixed outer dependent-LF demonstration.
-Both use session-local checking and the reviewed TypeScript runtime; neither
-exposes the deleted global-state prototype or a legacy compatibility API.
+This directory contains the static React/Vite reviewer interface for the
+TypeScript emdash v3.2 implementation. It consolidates four existing
+ingredients into one client-side journey:
 
-The playground runs the exact content-pinned `emdash-v3.2-mvp-1` deployed
-profile (16 owners and three runtime rules). Its browser barrel exports the
-deep-frozen `CORE_MVP_MANIFEST` so consumers can inspect that identity. The
-TypeScript checker/evaluator is authoritative only for this profile and does
-not execute Lambdapi in production. Lambdapi remains the repository's active
-mathematical specification and mandatory shared-corpus CI/subject-reduction
-oracle.
+1. editable ordinary categorical text;
+2. the checked outer-LF, ordinary-functorial, and genuinely displayed
+   three-panel research report;
+3. the generated current emdash book; and
+4. the preserved editable minimal explicit-Core playground.
 
-The additive `browser_directed.ts` entry also runs the already reviewed
-root-only `emdash-v3.2-dttlf-directed-1` dependent Sigma-telescope witness in
-the browser. It is an opt-in demonstration, not a change to the frozen MVP
-manifest and not a categorical-browser promotion. The additive entry
-re-exports the frozen `src/v3_2/browser.ts` API rather than modifying or
-replacing it.
+The default expression view accepts the three reviewed ordinary presets:
 
-It can be run locally with Vite or deployed as a static client-side site.
-Sandpack compatibility is not a requirement. The production build uses
-relative asset paths so it can be hosted below a project path such as
-`https://hotdocx.github.io/emdash/` without a Node backend.
+```text
+λ^f x. (H x) (K x)
+λ^f x. F x y0
+G pA
+```
 
-## Running Locally with Vite
+The source is parsed and recursively resolved by the existing categorical
+text adapter, lowered through the existing `CoreCategoricalProgram`, and
+checked as backend-neutral explicit Core. The browser owns no second
+categorical action table, checker, evaluator, or semantic profile. Edited
+invalid input returns the same source-located diagnostic as the TypeScript
+path.
 
-This is the recommended way to work on the playground UI itself. The local Vite server uses Hot Module Replacement (HMR) for a fast development experience.
+The comparatively large categorical/report closure is loaded as a separate
+Vite chunk. Loading it does not execute the report. The report runs only
+after the reviewer selects **Run full research report**, with a visible
+running state. Vite fingerprints and emits `../docs/emdash-book.pdf` as a
+static asset.
 
-After bootstrapping the repository worktree, start the development server from
-the repository root:
+The minimal playground still reaches the exact content-pinned
+`emdash-v3.2-mvp-1` browser API and frozen `CORE_MVP_MANIFEST` through
+`src/v3_2/browser_directed.ts`, which preserves the original
+`src/v3_2/browser.ts` exports. The integrated entry does not mutate that
+manifest. Lambdapi remains the active mathematical specification and bounded
+conformance oracle. The client-side workbench does not execute Lambdapi in production.
+
+## Run Locally
+
+After bootstrapping the repository worktree:
 
 ```bash
 ./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite
 ```
 
-Vite starts a local server at the URL it reports (usually
-`http://localhost:5173`). The local application resolves
-`../src/v3_2/browser_directed.ts` through `src/emdash_api.ts`.
+Vite reports the local URL, normally `http://localhost:5173`.
 
-From the repository root, the bounded production gate is:
+The product-facing production gate is:
 
 ```bash
-./scripts/pnpmw run check:browser-directed
+./scripts/pnpmw run check:browser-reviewer
 ```
+
+The historical `check:browser-directed` command remains an exact compatibility
+alias. The gate runs root typecheck and lint, fixture typechecking, and the
+Vite production build. App-level TypeScript does not reimpose
+`noUnusedLocals`, `noUnusedParameters`, or switch-style diagnostics on the
+entire imported research-library closure; those source checks remain owned by
+the root package.
 
 ## Static Hosting
 
-Run the production gate from the repository root:
+The deployable artifact is generated under `emdash-template/dist/`. It uses
+relative asset URLs and requires no Node backend, so it is suitable for a
+project subpath such as `https://hotdocx.github.io/emdash/`.
 
-```bash
-./scripts/pnpmw run check:browser-directed
-```
+No GitHub Pages workflow, deployment, publication, custom domain, or release
+is part of this implementation. Those remain separate reviewed operations.
 
-The deployable site is generated under `emdash-template/dist/`. Its HTML,
-JavaScript, and CSS are self-contained static assets with relative URLs. A
-GitHub Pages workflow may later upload that directory as its artifact, but
-workflow creation and publication are separate reviewed operations and are
-not performed by the browser implementation itself.
+## Exact Boundary
 
-No backend is needed for the current functionality. The browser executes the
-same TypeScript checker/evaluator and immutable runtime data locally. A future
-backend would be justified only by a separately selected capability that
-cannot remain client-side, not by the present LF demo.
+The current browser demonstrates:
 
-The build contains no ambient global reset, legacy parser, D0/D1 category
-API, Node builtin, or Lambdapi process dependency. The editable example
-prints `CORE_MVP_MANIFEST.revision` before checking a category-polymorphic
-identity. The fixed dependent view separately prints its opt-in continuation
-identity, explicit Core, inferred/reduced types, reduction trace, and
-wrong-family diagnostic.
+- three editable ordinary categorical examples with expected-type-directed
+  application;
+- the unchanged outer dependent-LF, ordinary binder, and displayed-chain
+  report;
+- the generated book asset; and
+- the frozen minimal Core checker example.
+
+It does not yet provide displayed categorical text syntax, `^n`, `^fd`, or
+`^nd` text resolution, arbitrary displayed telescope depth, browser-side
+source acquisition, systematic groupoidal closure, or whole-library transfer
+graduation. Direct typed TypeScript remains the most complete construction
+surface.

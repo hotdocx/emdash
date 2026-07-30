@@ -29,6 +29,9 @@ Primary artifacts:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
 - Active external-review demo and measured product-boundary plan:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md)
+- Integrated reviewer workbench plan and executable handoff:
+  [`./docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md),
+  [`./docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md)
 - Measured browser-demonstration subplan:
   [`./docs/TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md)
 - User-syntax and recursive-resolution subplan:
@@ -45,8 +48,10 @@ small TypeScript checker/evaluator is the authoritative deployed runtime only
 for its 16 owners and three reviewed runtime rules. The browser entry point is
 [`src/v3_2/browser.ts`](./src/v3_2/browser.ts), which exposes the frozen
 `CORE_MVP_MANIFEST` identity and has no production Lambdapi dependency.
-String parsing is not part of this release; applications construct the typed
-surface or explicit Core AST directly.
+String parsing is not part of this frozen minimal release profile;
+applications may construct the typed surface or explicit Core AST directly.
+The additive integrated reviewer described below separately exposes bounded
+ordinary categorical text without mutating this manifest.
 
 Lambdapi remains the active mathematical specification, the required
 fixed-corpus CI and subject-reduction oracle, and the acceptance authority for
@@ -94,10 +99,12 @@ nine reviewed continuation declarations, seven directed runtime rules, and
 the three inherited MVP runtime rules. It has zero proof-time rules and one
 shared 256-step outer-LF budget.
 
-This is an authoritative **opt-in** continuation profile, not a browser or
-deployed-MVP replacement. The browser still exposes only
-`emdash-v3.2-mvp-1`; neither profile requires Lambdapi at production runtime.
-Lambdapi remains the active mathematical specification and the required fixed
+This is an authoritative **opt-in** continuation profile, not a
+deployed-MVP replacement. The frozen `src/v3_2/browser.ts` entry still exposes
+only `emdash-v3.2-mvp-1`; the separately reviewed workbench dynamically
+imports one narrow categorical/report entry without changing that barrel or
+manifest. Neither path requires Lambdapi at production runtime. Lambdapi
+remains the active mathematical specification and the required fixed
 positive, negative, and subject-reduction oracle for selected continuation
 changes.
 
@@ -172,8 +179,9 @@ The living
 [`integrated reviewer plan`](./docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md)
 records the corrected product objective: join this same report, editable
 categorical text, the generated emdash book, and the minimal implementation
-evidence in one client-side reviewer workbench. Its measured feasibility is
-complete; runtime implementation remains behind its separate exact review.
+evidence in one client-side reviewer workbench. That separately reviewed
+implementation is now present and focused/browser-green; final aggregate
+revalidation and its local checkpoint are in progress.
 The optional higher-action witness remains available as:
 
 ```bash
@@ -207,30 +215,45 @@ contracts. The optional `: A` is recovered from or checked against the
 bidirectional expected classifier; the intrinsic mode is never inferred.
 This experimental TypeScript spelling does not yet standardize the informal
 binder/telescope notation used during Lambdapi kernel development, and it is
-not a Lambdapi-source parser or part of the frozen deployed MVP/browser
-profile.
+not a Lambdapi-source parser or part of the frozen deployed MVP barrel. The
+integrated reviewer now uses this exact bounded ordinary adapter.
 
-## TypeScript browser demo
+The selected next product-facing audit is
+[`syntax parity with the direct TypeScript mathematical construction surface`](./docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md).
+It will inventory and separately review deterministic routes for already
+implemented capabilities—beginning with `^n`, `^fd`, and `^nd`—rather than
+guessing categorical action or synthesizing naturality from arbitrary
+pointwise data.
 
-The standalone browser fixture now exposes two client-side views:
+## TypeScript external-review workbench
 
-- a fixed outer dependent-LF Sigma-telescope witness with explicit Core,
-  inferred/reduced types, a two-step computation trace, and a wrong-family
-  diagnostic; and
+The standalone browser fixture now exposes one consolidated client-side
+review path:
+
+- editable ordinary categorical text with explicit Core, inferred/expected
+  types, structural lowering, and source-located rejection;
+- an explicitly started three-panel report covering the outer dependent LF,
+  ordinary functorial binding, and one genuine displayed dependency edge;
+- the generated current emdash book; and
 - the preserved editable `emdash-v3.2-mvp-1` minimal-Core playground.
 
-Build both from the repository root with:
+Build the workbench from the repository root with:
 
 ```bash
-./scripts/pnpmw run check:browser-directed
+./scripts/pnpmw run check:browser-reviewer
 ```
 
+`check:browser-directed` remains an exact compatibility alias.
 The output under `emdash-template/dist/` uses relative assets and is suitable
 for a static project-subpath deployment such as
 `https://hotdocx.github.io/emdash/`. It runs the TypeScript checker/evaluator
-entirely in the client with no Node builtin or production Lambdapi process.
-No GitHub Pages workflow or publication is included yet, and categorical
-browser promotion remains a separately measured boundary.
+entirely in the client with no production Lambdapi process. The heavy
+categorical/report engine is a lazy chunk, and the full report runs only on
+explicit request. No GitHub Pages workflow or publication is included.
+
+See
+[`docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md)
+for the exact reviewer path and current non-claims.
 
 ## Development workspace and Git worktrees
 

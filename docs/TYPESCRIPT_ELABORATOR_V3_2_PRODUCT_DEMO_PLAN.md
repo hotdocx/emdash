@@ -187,14 +187,17 @@ product decision, not restoration of an accidentally omitted dependency.
 | Selected directed browser | complete and final-green | high | medium | preserve; categorical browser remains gated |
 | User-syntax/parser audit | complete | medium | high for correct frontend boundary | preserve |
 | Ordinary `^f` text adapter | complete and final-green; displayed modes remain gated | high | medium | preserve |
-| Integrated reviewer browser | measured feasible; exact contract-layer/UI proposal frozen | very high | high; proves one real product boundary | immediate after separate review |
-| SCALE-STRESS-3C WalkingEnd/HIT | medium and semantically diverse | low immediate unless selected for a reviewer story | high | after integrated graduation or earlier only for an exact demo prerequisite |
-| SCALE-BATCH-1 | deterministic only after constituent mechanisms; labor-heavy | low immediate | high | later scale proof |
-| SCALE-GRADUATE-1 | cheap only after required evidence exists | medium | high | final scale row |
+| Integrated reviewer browser | final-green; bounded checkpoint ready | very high | high; proves one real product boundary | preserve |
+| Direct-TypeScript/text syntax parity | high-confidence bounded frontend work | very high | high; completes the usable reviewer input envelope | immediate after reviewer checkpoint |
+| Book and repository graduation | high after exact syntax boundary; editorial judgment required | very high | high; presents the research programme coherently | current goal after syntax parity |
+| SCALE-STRESS-3C WalkingEnd/HIT | medium and semantically diverse | low immediate unless selected for a reviewer story | high | future persistent goal or exact selected prerequisite |
+| SCALE-BATCH-1 | deterministic only after constituent mechanisms; labor-heavy | low immediate | high | future scale goal |
+| SCALE-GRADUATE-1 | cheap only after required evidence exists | medium | high | future scale goal |
 
 The product-facing continuation is not evidence that the last three scale
 rows are unnecessary. It is evidence that more declarations are not required
-to demonstrate the first genuinely useful system.
+to demonstrate, explain, and externally review the first genuinely useful
+system. Those scale rows remain pending under a future goal.
 
 ## Selected Product Sequence
 
@@ -215,8 +218,15 @@ PRODUCT-DEMO-0A inventory
   -> REVIEWER-INTEGRATE-0A combined browser measurement (complete)
   -> H-DTTLF-PRODUCT-REVIEWER-01 / separate exact review
   -> REVIEWER-INTEGRATE-1A browser + report + text + book
+     (final-green; bounded checkpoint ready)
   -> REVIEWER-GRADUATE-1
-  -> select the next product or specifically justified scale dependency
+  -> SYNTAX-PARITY-0A inventory mathematical target-API parity and freeze
+     a ^n/^fd/^nd-first proposal
+  -> SYNTAX-PARITY-1A / SYNTAX-PARITY-GRADUATE-1 after exact review
+  -> BOOK-DELTA-0A capability-oriented audit from 8217aa3...
+  -> BOOK-NARRATIVE-0B exact theorem-led editorial proposal
+  -> reviewed book/artifact/README graduation
+  -> hand pending bulk scale rows to a future persistent goal
 ```
 
 Browser and parser audits may run in either order after PRODUCT-DEMO-1B.
@@ -375,7 +385,9 @@ Exact local implementation checkpoint:
 | PRODUCT-SYNTAX-1 | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003 | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
 | PRODUCT-GRADUATE-1 | exact documentation scope approved under D-DTTLF-PRODUCT-GRADUATE-001 and implemented in the current draft; its route-back claim is superseded by direct human product correction | completed selected browser and syntax rows | Historical capability matrix and non-claims; not integrated product graduation |
 | REVIEWER-INTEGRATE-0A | complete measured audit in the dedicated integrated-reviewer plan | existing CLI, browser, text, and book ingredients | Real Vite/Chromium proof that one browser can execute text plus all three report candidates after correcting the acquisition/hash dependency |
-| REVIEWER-INTEGRATE-1A | dependency-ready under D-DTTLF-PRODUCT-REVIEWER-001 | approved H-DTTLF-PRODUCT-REVIEWER-01 | One browser reviewer workbench joining the existing report, editable categorical text, generated book, and minimal Core evidence |
+| REVIEWER-INTEGRATE-1A | final-green under D-DTTLF-PRODUCT-REVIEWER-001/002/003; bounded checkpoint ready | approved H-DTTLF-PRODUCT-REVIEWER-01 and exact corrections | One browser reviewer workbench joining the existing report, editable categorical text, generated book, and minimal Core evidence |
+| SYNTAX-PARITY-0A | selected successor; dependency-ready after reviewer checkpoint | integrated reviewer plus direct TypeScript construction surface | Inventory deterministic text parity with mathematical API capabilities, prioritizing `^n`, `^fd`, and `^nd`, then freeze a bounded separately reviewed proposal |
+| BOOK-REPOSITORY-GRADUATION | selected after syntax-parity graduation | exact text/direct-TypeScript boundary | Capability-delta audit, theorem-led book update, deterministic `docs/emdash-book.pdf`, consolidated root presentation, and current product-goal handoff |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
 
@@ -578,6 +590,13 @@ This plan changes priority, not truth:
 The product demo may expose existing higher-action or induction evidence, but
 it cannot close those rows by presentation.
 
+The user's current priority now makes those remaining bulk rows explicitly
+out of scope for this persistent product goal. They remain pending rather than
+being relabeled complete. After syntax parity, the dedicated
+[`book and repository graduation plan`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
+updates the reader-facing mathematical narrative and public entry points,
+then hands scale qualification to a future explicit goal.
+
 The demo and scale plans are not silos. If the integrated reviewer story
 exposes a specific missing owner, rule, proof-time mechanism, or unification
 case, that exact scale dependency may be promoted ahead of bulk order after
@@ -603,11 +622,13 @@ authorized.
 
 ```text
 Kick off or continue the current dependency-ready work routed by
-docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md, with
+docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md and, after its
+green checkpoint, docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md and
+docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md, with
 docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md retained as the product
 history/ingredient ledger and
 docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md retained as the
-top-level architecture-qualification ledger and
+future architecture-qualification ledger and
 docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md as the recovery entry point.
 
 Treat the living plans and their Persistent /goal Launch Prompts as part of
@@ -624,18 +645,24 @@ explicit Core. Direct typed TypeScript remains a valid primary input.
 Treat the documentation-only PRODUCT-GRADUATE-1 scope as historical
 capability documentation rather than integrated product completion. Follow
 the measured browser/report/text/book composition and exact review in the
-integrated reviewer plan. The selected ordinary categorical text parser is
-only an input adapter, not a second checker or Lambdapi-source acquisition;
-further grammar remains optional and gated.
+integrated reviewer plan. Then inventory parity between text and the
+mathematical constructions already exposed by direct TypeScript,
+prioritizing `^n`, `^fd`, and `^nd`. The selected ordinary categorical text
+parser is only an input adapter, not a second checker or Lambdapi-source
+acquisition; behavior changes remain separately reviewed.
+
+After syntax graduation, audit the post-8217aa3 mathematical/product delta and
+update the book as theorem-led prose, then validate its generated public PDF
+and consolidate the root repository presentation. Do not turn implementation
+ledgers into book chapters.
 
 Preserve completed usability, displayed-chain, higher-action, LF-sort, and
 inductive audit checkpoints. Preserve every pending decision as pending
 unless its exact separate review is obtained or validly recorded. A product
 demo does not close WalkingEnd/HIT, batch-transfer, or scale-graduation rows.
-Return to the scale ledger when the integrated reviewer plan routes back to
-it. A specific scale item may move earlier only when a measured reviewer
-concept requires that exact dependency and a separate bounded review
-authorizes it.
+Keep those rows pending for a future persistent goal. A specific scale item
+may move earlier only when the selected reader-facing example requires that
+exact dependency and a separate bounded review authorizes it.
 
 For a narrowly frozen dependency-ready proposal, the user's standing
 delegation permits a separate immutable unattended approval only after no
@@ -650,6 +677,20 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — Post-syntax book/repository graduation selected.** The
+  current product route now continues from the integrated reviewer through
+  direct-TypeScript/text parity, a capability-oriented book delta,
+  theorem-led prose and evidence updates, deterministic public PDF ownership,
+  and a consolidated root introduction. Bulk scale rows remain pending for a
+  future goal rather than automatically resuming here.
+- **2026-07-30 — Integrated reviewer implemented and syntax parity selected.**
+  The reviewed contract split and consolidated browser workbench are
+  final-green after the exact D002/D003 corrections, with its bounded
+  checkpoint ready. The user
+  selected a dedicated post-reviewer audit of text parity with mathematical
+  direct-TypeScript constructions, beginning with existing `^n`, `^fd`, and
+  `^nd`, before deferred bulk scale. No heuristic action or coherence
+  synthesis is implied.
 - **2026-07-30 — Product lanes corrected into one reviewer journey.** The
   user clarified that the CLI report, browser, categorical text, and book are
   ingredients of one external-reviewer product. The dedicated integrated

@@ -22,7 +22,7 @@ import { binderMode } from './kernel';
 import {
     CoreLfCanonicalSelectionContract,
     createCoreLfCanonicalSelectionContract
-} from './lf_transfer_acquisition';
+} from './lf_transfer_acquisition_contract';
 import {
     CoreLfCompiledMixedModule,
     CoreLfMixedDeclarationLinkage,

@@ -95,8 +95,8 @@ describe(
             assert.deepEqual(
                 contract.commands.map(command => command.ordinal),
                 [
-                    236, 238, 394, 538, 926, 927, 930, 931, 936,
-                    939, 941, 969, 970, 972, 973, 974, 975, 976
+                    236, 238, 394, 538, 928, 929, 932, 933, 938,
+                    941, 943, 985, 986, 988, 989, 990, 991, 992
                 ]
             );
             assert.deepEqual(

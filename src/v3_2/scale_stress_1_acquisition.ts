@@ -7,12 +7,12 @@
 import {
     CoreLfCanonicalSelectionContract,
     createCoreLfCanonicalSelectionContract
-} from './lf_transfer_acquisition';
+} from './lf_transfer_acquisition_contract';
 
 export const CORE_LF_SCALE_STRESS_1_CORE_ACQUISITION:
 CoreLfCanonicalSelectionContract =
     createCoreLfCanonicalSelectionContract({
-        revision: 'SCALE-STRESS-1-CORE-ACQUISITION-1',
+        revision: 'SCALE-STRESS-1-CORE-ACQUISITION-2',
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
@@ -20,7 +20,7 @@ CoreLfCanonicalSelectionContract =
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:18500d46d4ff3583fef1f25a3c28eff7b849a61d528a6f9e20e89b32db13f1b2',
+                'sha256:91f0deb710b93acc55aa3a6f947505de973b9deaa94d68e1a213037dfcc9c3d3',
             imports: []
         },
         commands: [

@@ -10,7 +10,7 @@ import {
     CoreLfCanonicalCommandExpectation,
     CoreLfCanonicalSelectionContract,
     createCoreLfCanonicalSelectionContract
-} from './lf_transfer_acquisition';
+} from './lf_transfer_acquisition_contract';
 
 type SymbolExpectationTuple = readonly [
     ordinal: number,

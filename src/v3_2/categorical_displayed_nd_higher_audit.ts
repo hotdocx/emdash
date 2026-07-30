@@ -23,7 +23,7 @@ import {
 import {
     CoreLfCanonicalSelectionContract,
     createCoreLfCanonicalSelectionContract
-} from './lf_transfer_acquisition';
+} from './lf_transfer_acquisition_contract';
 import {
     CORE_OWNER_SCHEMAS,
     CoreOwnerId

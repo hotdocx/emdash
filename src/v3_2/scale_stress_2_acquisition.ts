@@ -9,12 +9,12 @@
 import {
     CoreLfCanonicalSelectionContract,
     createCoreLfCanonicalSelectionContract
-} from './lf_transfer_acquisition';
+} from './lf_transfer_acquisition_contract';
 
 export const CORE_LF_SCALE_STRESS_2_UNCURRYING_ACQUISITION:
 CoreLfCanonicalSelectionContract =
     createCoreLfCanonicalSelectionContract({
-        revision: 'SCALE-STRESS-2-UNCURRYING-ACQUISITION-1',
+        revision: 'SCALE-STRESS-2-UNCURRYING-ACQUISITION-2',
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
@@ -22,7 +22,7 @@ CoreLfCanonicalSelectionContract =
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:18500d46d4ff3583fef1f25a3c28eff7b849a61d528a6f9e20e89b32db13f1b2',
+                'sha256:91f0deb710b93acc55aa3a6f947505de973b9deaa94d68e1a213037dfcc9c3d3',
             imports: []
         },
         commands: [
@@ -48,7 +48,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'uncurrying.section-category',
-                ordinal: 961,
+                ordinal: 977,
                 kind: 'symbol',
                 textSha256:
                     'sha256:92bdb854bb5fe0d28580f6f4d8c612b898b8eac994f39fdc7f0333f75c58e0b6',
@@ -58,7 +58,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'uncurrying.sigma-category',
-                ordinal: 981,
+                ordinal: 997,
                 kind: 'symbol',
                 textSha256:
                     'sha256:1a61c1de4ef87b206301c45224a66852bc723cd9b1a6cf4bc2974938a111a6cb',
@@ -68,7 +68,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'uncurrying.sigma-projection-pullback',
-                ordinal: 991,
+                ordinal: 1008,
                 kind: 'symbol',
                 textSha256:
                     'sha256:f18555d66e70c8c4d8bb4629ae66aa0a3eba955e0276d47fd390ba088677e6bf',
@@ -78,7 +78,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'uncurrying.sigma-section-comparison',
-                ordinal: 995,
+                ordinal: 1013,
                 kind: 'unif_rule',
                 textSha256:
                     'sha256:0f0e404db54dc5af8d2db9e6965e9c018d53d61e0668d497139e6e8cd91ec99f'
@@ -95,7 +95,7 @@ CoreLfCanonicalSelectionContract =
 export const CORE_LF_SCALE_STRESS_2_INTERNAL_PI_ACQUISITION:
 CoreLfCanonicalSelectionContract =
     createCoreLfCanonicalSelectionContract({
-        revision: 'SCALE-STRESS-2-INTERNAL-PI-ACQUISITION-1',
+        revision: 'SCALE-STRESS-2-INTERNAL-PI-ACQUISITION-2',
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
@@ -103,7 +103,7 @@ CoreLfCanonicalSelectionContract =
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:18500d46d4ff3583fef1f25a3c28eff7b849a61d528a6f9e20e89b32db13f1b2',
+                'sha256:91f0deb710b93acc55aa3a6f947505de973b9deaa94d68e1a213037dfcc9c3d3',
             imports: []
         },
         commands: [
@@ -147,7 +147,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.pullback-family',
-                ordinal: 926,
+                ordinal: 928,
                 kind: 'symbol',
                 textSha256:
                     'sha256:d6c5bfa07c17effbf4109627d46b29e38f061c2a5fd24b6d0d346b76db5b6021',
@@ -157,7 +157,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.pullback-fibre',
-                ordinal: 927,
+                ordinal: 929,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -165,7 +165,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.pullback-family-functor',
-                ordinal: 930,
+                ordinal: 932,
                 kind: 'symbol',
                 textSha256:
                     'sha256:dcb8d95c6a8b2eabaeaf1b4bf4f6737dac50dddede37ab5c379f23c5ea70aa56',
@@ -175,7 +175,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.pullback-functor-object',
-                ordinal: 931,
+                ordinal: 933,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -183,7 +183,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.constant-family',
-                ordinal: 936,
+                ordinal: 938,
                 kind: 'symbol',
                 textSha256:
                     'sha256:da2f154125b7695570e39150c76235a7c3253e589a5d583676ed9a8a016e5507',
@@ -193,7 +193,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.constant-fibre',
-                ordinal: 939,
+                ordinal: 941,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -201,7 +201,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.constant-pullback',
-                ordinal: 941,
+                ordinal: 943,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -209,7 +209,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.section-functor',
-                ordinal: 969,
+                ordinal: 985,
                 kind: 'symbol',
                 textSha256:
                     'sha256:4fa3de83a568d56652210c00057d070801c2034812c515f11506950ac6ebdf87',
@@ -219,7 +219,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.section-functor-object',
-                ordinal: 970,
+                ordinal: 986,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -227,7 +227,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.package',
-                ordinal: 972,
+                ordinal: 988,
                 kind: 'symbol',
                 textSha256:
                     'sha256:a33428ba27fef5b2fbea1a232ca84c288d4b26764a47b1baa75216705fa6cdcc',
@@ -237,7 +237,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.package-component',
-                ordinal: 973,
+                ordinal: 989,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -245,7 +245,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.pullback-package',
-                ordinal: 974,
+                ordinal: 990,
                 kind: 'symbol',
                 textSha256:
                     'sha256:0ed7f348ea7cfc0d1ca1841d866144ec6ada85f85f3650512733cfbe74d62147',
@@ -255,7 +255,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.pullback-fold',
-                ordinal: 975,
+                ordinal: 991,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -263,7 +263,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'internal-pi.pullback-component',
-                ordinal: 976,
+                ordinal: 992,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -283,7 +283,7 @@ CoreLfCanonicalSelectionContract =
 export const CORE_LF_SCALE_STRESS_2_PI_BASE_ACTION_ACQUISITION:
 CoreLfCanonicalSelectionContract =
     createCoreLfCanonicalSelectionContract({
-        revision: 'SCALE-STRESS-2-PI-BASE-ACTION-ACQUISITION-1',
+        revision: 'SCALE-STRESS-2-PI-BASE-ACTION-ACQUISITION-2',
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
@@ -291,7 +291,7 @@ CoreLfCanonicalSelectionContract =
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:18500d46d4ff3583fef1f25a3c28eff7b849a61d528a6f9e20e89b32db13f1b2',
+                'sha256:91f0deb710b93acc55aa3a6f947505de973b9deaa94d68e1a213037dfcc9c3d3',
             imports: []
         },
         commands: [
@@ -307,7 +307,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi-base-action.fibre-category',
-                ordinal: 925,
+                ordinal: 927,
                 kind: 'symbol',
                 textSha256:
                     'sha256:d7aaaf14f6f371ec87a6f2a372c51f32ba74b006508ba8669573970245dcb459',
@@ -317,7 +317,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi-base-action.transport-left',
-                ordinal: 1074,
+                ordinal: 1098,
                 kind: 'symbol',
                 textSha256:
                     'sha256:eab1554f095d3c280f6f8e4fdae536f5deac70119f097dd980272c568d539041',
@@ -327,7 +327,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi-base-action.transport-right',
-                ordinal: 1075,
+                ordinal: 1099,
                 kind: 'symbol',
                 textSha256:
                     'sha256:5e5174bcbf284984062799b12ce7eac24471f94851bc3cf922c1841fa600e9ff',
@@ -337,7 +337,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi-base-action.internal-cell',
-                ordinal: 1095,
+                ordinal: 1119,
                 kind: 'symbol',
                 textSha256:
                     'sha256:8f5b9674ff6c1971047eeac626c6bf0e44fc312be9c0dea09a163373e2ec4273',
@@ -347,7 +347,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi-base-action.section-pullback',
-                ordinal: 1189,
+                ordinal: 1218,
                 kind: 'symbol',
                 textSha256:
                     'sha256:6cebfc1c0241d6b67496d63e5989e3501841b6ae19e5013ecd8484c6c48d3d57',
@@ -357,7 +357,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi-base-action.internal',
-                ordinal: 1195,
+                ordinal: 1226,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -365,7 +365,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'pi-base-action.pullback',
-                ordinal: 1196,
+                ordinal: 1227,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -386,7 +386,7 @@ CoreLfCanonicalSelectionContract =
 export const CORE_LF_SCALE_STRESS_2_SIGMA_TRANSFOR_ACQUISITION:
 CoreLfCanonicalSelectionContract =
     createCoreLfCanonicalSelectionContract({
-        revision: 'SCALE-STRESS-2-SIGMA-TRANSFOR-ACQUISITION-1',
+        revision: 'SCALE-STRESS-2-SIGMA-TRANSFOR-ACQUISITION-2',
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
@@ -394,7 +394,7 @@ CoreLfCanonicalSelectionContract =
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
-                'sha256:18500d46d4ff3583fef1f25a3c28eff7b849a61d528a6f9e20e89b32db13f1b2',
+                'sha256:91f0deb710b93acc55aa3a6f947505de973b9deaa94d68e1a213037dfcc9c3d3',
             imports: []
         },
         commands: [
@@ -420,7 +420,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma-transfor.telescope-family',
-                ordinal: 1006,
+                ordinal: 1028,
                 kind: 'symbol',
                 textSha256:
                     'sha256:eac3f8bf50274337783f61bbb6d72886cb218c248d20c27022fa1355fe140631',
@@ -430,7 +430,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma-transfor.telescope-fibre',
-                ordinal: 1007,
+                ordinal: 1029,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:
@@ -438,7 +438,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma-transfor.uncurrying-owner',
-                ordinal: 1009,
+                ordinal: 1031,
                 kind: 'symbol',
                 textSha256:
                     'sha256:d00b2c45055350fd5ad338c93f7670494f37bc10457b1049a7fba1ad17581d68',
@@ -448,7 +448,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma-transfor.fibre-functor',
-                ordinal: 1056,
+                ordinal: 1080,
                 kind: 'symbol',
                 textSha256:
                     'sha256:2ceec6c178192d3c0fb1448b625c2ff2078f4f6124e1da272bfd823699013e62',
@@ -458,7 +458,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma-transfor.displayed-component',
-                ordinal: 1058,
+                ordinal: 1082,
                 kind: 'symbol',
                 textSha256:
                     'sha256:5ef7b2dfc71546ae4ad6713b7084076c8f28bc682c0c340c8909de9040091e0d',
@@ -468,7 +468,7 @@ CoreLfCanonicalSelectionContract =
             },
             {
                 id: 'sigma-transfor.object-component',
-                ordinal: 1068,
+                ordinal: 1092,
                 kind: 'rule',
                 clauseCount: 1,
                 textSha256:

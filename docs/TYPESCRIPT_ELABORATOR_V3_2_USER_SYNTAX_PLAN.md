@@ -24,8 +24,12 @@ and final-green at exact local checkpoint
 `7513cbe9e0d1439b5b1250982f40cede48e9a811`; the user's later integrated
 product correction promotes browser joining of this exact ordinary syntax
 through
-[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md),
-while additional modes and final notation remain deferred
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md);
+that integration is now implemented and focused/browser-green, and the
+user's latest priority selects the dedicated
+[`TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md)
+audit for existing `^n`, `^fd`, `^nd`, and other direct-TypeScript
+mathematical capabilities before deferred bulk scale
 
 ## Purpose And Meaning Of Usability
 
@@ -896,11 +900,18 @@ SYNTAX-0A architecture audit (complete)
   -> SYNTAX-BROWSER-1B join it to the frozen integrated reviewer proposal
   -> SYNTAX-GRADUATE-1 record the exact supported grammar/usability envelope
      in the runnable integrated reviewer handoff
+  -> SYNTAX-PARITY-0A inventory the complete mathematical direct-TypeScript
+     target and freeze a bounded ^n/^fd/^nd-first proposal
+  -> after exact parity graduation, route to the theorem-led book/repository
+     graduation plan; retain bulk scale for a future goal
 ```
 
-Browser joining remains a separate reviewed product boundary, but it is now
-the dependency-ready continuation rather than an optional indefinite
-deferral. The resolver and parser remain Node-independent input adapters.
+Browser joining remains a separate reviewed product boundary and is now
+final-green with its bounded checkpoint ready. The resolver and parser remain
+Node-independent input adapters. The next selected task is not
+arbitrary grammar expansion: it is measured parity with the existing
+mathematical direct-TypeScript construction surface under the dedicated
+syntax-parity plan.
 
 ## Work Ledger
 
@@ -911,8 +922,33 @@ deferral. The resolver and parser remain Node-independent input adapters.
 | SYNTAX-PARSER-0C | complete | D-DTTLF-PRODUCT-SYNTAX-001 | Parsimmon and tiny-parser parsed/rejected the same corpus; both browser-build; measurements above select the dependency-free tiny parser |
 | SYNTAX-NOTATION-0D | complete as direct human correction D-DTTLF-PRODUCT-SYNTAX-003; synchronization active | approved D-DTTLF-PRODUCT-SYNTAX-002 implementation, before its runtime checkpoint | Intrinsic `λ^mode`, optional checked `: annotation`, expected-source recovery, mode-specific semantic gates, and deferred repository-wide notation consolidation |
 | SYNTAX-1A | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811` under D-DTTLF-PRODUCT-SYNTAX-002 as corrected by direct human D-DTTLF-PRODUCT-SYNTAX-003; proposal checkpoint `6766eba` | parser-selection/implementation review and SYNTAX-NOTATION-0D | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example landed as one user-visible slice |
-| SYNTAX-BROWSER-1B | dependency-ready under D-DTTLF-PRODUCT-REVIEWER-001 | reviewed parser plus measured browser profile | Editable ordinary categorical input in the integrated reviewer without a second checker or server |
-| SYNTAX-GRADUATE-1 | documentation scope complete; runnable product graduation gated on SYNTAX-BROWSER-1B | selected syntax rows | Exact grammar, intrinsic-mode/optional-annotation boundary, binder/action matrix, diagnostics, browser interaction, and deferrals |
+| SYNTAX-BROWSER-1B | final-green under D-DTTLF-PRODUCT-REVIEWER-001/002/003; bounded integrated checkpoint ready | reviewed parser plus measured browser profile | Editable ordinary categorical input in the integrated reviewer without a second checker or server |
+| SYNTAX-GRADUATE-1 | documentation and runnable product scope final-green; bounded integrated checkpoint ready | selected syntax rows | Exact grammar, intrinsic-mode/optional-annotation boundary, binder/action matrix, diagnostics, browser interaction, and deferrals |
+| SYNTAX-PARITY-0A | selected successor; dependency-ready after integrated-reviewer checkpoint | current direct TypeScript construction surface | Executable API-to-text inventory, deterministic routing classification, equivalence/negative corpus, and bounded `^n`/`^fd`/`^nd`-first proposal |
+| BOOK-DELTA-0A | selected after syntax-parity graduation | exact text/direct-TypeScript boundary | Hand the completed syntax envelope to the dedicated theorem-led book/repository graduation plan |
+
+## Clarified Parity And Internalization Boundary
+
+The new parity target is every mathematical construction already exposed by
+the direct typed TypeScript API, not arbitrary JavaScript callback control
+flow. Grammar parsing remains deterministic. A valid located term may still
+fail during typed resolution or recursive categorical factorization.
+
+No semantic heuristic is selected:
+
+- subject, argument, binder mode, and expected classifiers choose existing
+  application judgments;
+- unresolved ambiguity requires an annotation or produces a diagnostic;
+- current `^fd`/`^nd` factorers recognize finite recursive grammars of
+  internally coherent constructors; and
+- general discovery of a naturality proof for arbitrary pointwise data is
+  outside the parser.
+
+The existing `CoreCategoricalAbstractionEvidence` records lowering,
+occurrence, selected-rule, and prerequisite trace data. It is not an
+externally supplied coherence premise. The dedicated parity plan makes this
+terminology and the parse/elaborate/factor distinction normative for the next
+audit.
 
 ## Feasibility Assessment
 
@@ -964,9 +1000,12 @@ rewrite, branch/worktree deletion, or unrelated cleanup is authorized.
 
 ```text
 Continue the next dependency-ready reviewed row routed by
-docs/TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md, while retaining the
-product, usability, fibred-context, scale, and handoff plans as authority and
-recovery context.
+docs/TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md and, after the integrated
+reviewer checkpoint,
+docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md, then
+docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md, while
+retaining the product, usability, fibred-context, future scale, and handoff
+plans as authority and recovery context.
 
 Treat usability as recursive typed variable occurrence and type-directed
 categorical action, not merely tokenization. Preserve direct typed TypeScript,
@@ -985,9 +1024,15 @@ from an optional checked domain/family annotation. Do not infer the capability
 from an expected classifier, and do not claim the experimental TypeScript
 spelling has already standardized informal Lambdapi/kernel notation.
 
-Do not select Parsimmon, a hand-written parser, tagged templates, or browser
-joining before the applicable measured row and separate review. Do not
+Treat syntax parity as parity with mathematical direct-TypeScript
+constructions, not arbitrary JavaScript behavior. Keep parsing deterministic,
+route applications through existing classifier-directed programs, and keep
+internal factorization separate from parsing. Do not guess naturality or
 conflate user syntax with Lambdapi-source acquisition.
+
+After parity graduation, update the book and repository presentation through
+their dedicated reader-facing plan. Keep bulk scale qualification pending for
+a future goal rather than resuming it automatically.
 
 The user's standing unattended delegation permits separate approval of a
 narrowly frozen dependency-ready proposal after no immediate response, with
@@ -997,6 +1042,16 @@ broader grammar, semantic feature, dependency, browser, or Git effect.
 
 ## Change Log
 
+- **2026-07-30 — Reader-facing successor recorded.** Exact syntax parity now
+  hands the current product goal to the theorem-led book/repository graduation
+  plan. Remaining bulk scale rows stay pending for a future goal.
+- **2026-07-30 — Direct-TypeScript syntax parity selected next.** The user
+  clarified that after the integrated reviewer and before deferred bulk scale,
+  text should be synchronized with mathematical constructions already exposed
+  by the target TypeScript API, especially `^n`, `^fd`, and `^nd`. Added a
+  dedicated audit/plan route. Parsing is deterministic; typed resolution and
+  internal factorization may reject valid syntax without heuristic action or
+  naturality synthesis.
 - **2026-07-30 — SYNTAX-BROWSER-1B promoted into the integrated reviewer.**
   The user's direct product clarification supersedes indefinite browser
   deferral for the already final-green ordinary `^f` adapter. The measured
