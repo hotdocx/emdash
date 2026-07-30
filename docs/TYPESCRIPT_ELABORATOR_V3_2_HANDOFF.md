@@ -574,9 +574,9 @@ operands recurse, family operands remain checked identifiers, and nested
 Transfd composition and Sigma projection/application agree with direct
 TypeScript. The complete text family passes 82/82, the reviewer 8/8,
 typecheck/lint and browser packaging pass, and no semantic or Lambdapi input
-changed. Checkpointing the implementation and then auditing the four
-whole/higher 1C2B action constructors is next; 1C2B behavior and 1C3 remain
-unauthorized.
+changed. Exact local implementation checkpoint:
+`c1bd21eec9456a3600e22b1ef0dc8084958fd123`. Auditing the four whole/higher
+1C2B action constructors is next; 1C2B behavior and 1C3 remain unauthorized.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

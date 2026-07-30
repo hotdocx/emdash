@@ -24,9 +24,10 @@ separates twelve mechanical structural/comprehension heads from four
 whole/higher action constructors, is checkpointed at
 `20093b71e3802c3d2b7cbf20670862a58a71b653`, and its exact twelve-head 1C2A
 proposal is separately approved with human supersession; planning boundary
-and its bounded implementation is final-green in the goal worktree; 1C2B,
-1C3, and syntax graduation remain ahead; no book prose, generated artifact,
-release, or public presentation change is yet authorized
+and its bounded implementation is final-green at
+`c1bd21eec9456a3600e22b1ef0dc8084958fd123`; 1C2B, 1C3, and syntax
+graduation remain ahead; no book prose, generated artifact, release, or
+public presentation change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal

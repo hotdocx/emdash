@@ -45,8 +45,9 @@ with a deeply frozen non-self-authorizing D006 proposal for its bounded 1C2A
 mechanical constructor tranche checkpointed at
 `20093b71e3802c3d2b7cbf20670862a58a71b653`; a separate immutable unattended
 D006 review now approves exactly that 1C2A proposal with human supersession;
-the bounded 1C2A implementation is final-green in the goal worktree; no 1C2B
-or 1C3 behavior is authorized.
+the bounded 1C2A implementation is final-green at exact local checkpoint
+`c1bd21eec9456a3600e22b1ef0dc8084958fd123`; no 1C2B or 1C3 behavior is
+authorized.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1014,7 +1015,8 @@ No browser preset or browser-specific implementation changed, so another
 fixed-preset Chromium run would add no changed-boundary evidence. No
 mathematical owner, categorical-program method, Core/checker/evaluator/runtime
 branch, expected-action table, semantic profile, transfer input, or Lambdapi
-source changed.
+source changed. Exact local implementation checkpoint:
+`c1bd21eec9456a3600e22b1ef0dc8084958fd123`.
 
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
@@ -1122,7 +1124,7 @@ strings parse. For every promoted row it must demonstrate:
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C0 audit/proposal | Authorizes only six ordinary structural term heads over existing typed methods |
 | SYNTAX-PARITY-1C1 | **final-green at `be437f3a7d64a6a554578036f76621322d5626fc`** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality, recursive constructor/application spines, exact negatives, 71/71 affected/audit tests, and green browser packaging |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-06 / D-DTTLF-PRODUCT-SYNTAX-PARITY-006 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C2 audit/proposal at `20093b71e3802c3d2b7cbf20670862a58a71b653` | Authorizes only twelve frozen 1C2A displayed structural/comprehension term heads over existing typed methods |
-| SYNTAX-PARITY-1C2A | **final-green in the goal worktree; audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Twelve mechanical displayed structural/comprehension heads, recursive term operands, checked family identifiers, exact direct equality/negatives, 82/82 text family, 8/8 reviewer, and green browser packaging |
+| SYNTAX-PARITY-1C2A | **final-green at `c1bd21eec9456a3600e22b1ef0dc8084958fd123`; audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Twelve mechanical displayed structural/comprehension heads, recursive term operands, checked family identifiers, exact direct equality/negatives, 82/82 text family, 8/8 reviewer, and green browser packaging |
 | SYNTAX-PARITY-1C2B | gated | final-green 1C2A plus a separate exact audit/review | Four whole/higher internalized action constructors; retain generic component/point application and audit exact notation/expected-shape relationships |
 | SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -1215,7 +1217,9 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   Nested composition and Sigma projection/application are exact; generic
   component/point and gated naturality boundaries are retained. The complete
   text family passes 82/82, the reviewer 8/8, typecheck/lint and browser
-  production build pass, and no semantic or Lambdapi input changed.
+  production build pass, and no semantic or Lambdapi input changed. Exact
+  local implementation checkpoint:
+  `c1bd21eec9456a3600e22b1ef0dc8084958fd123`.
 - **2026-07-30 — D006 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed 1C2A proposal,
   recorded an immutable, human-supersedable review authorizing only the
