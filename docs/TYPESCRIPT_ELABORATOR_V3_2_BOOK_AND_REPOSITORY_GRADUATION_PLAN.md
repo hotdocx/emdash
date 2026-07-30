@@ -330,6 +330,78 @@ measured capability required by the book’s selected running example may still
 be promoted early through its own bounded proposal and separate review; the
 book is not blanket authority for scale work.
 
+## `PRODUCT-BOOK-GRADUATE-1` Exact Proposal
+
+Gate:
+`H-DTTLF-BOOK-REPOSITORY-GRADUATE-01 /
+D-DTTLF-BOOK-REPOSITORY-003`
+
+This is a zero-behavior reader-facing graduation decision. The book,
+artifact, README, reviewer, text adapter, checker/evaluator, active kernel,
+and their validation evidence are already complete for the selected product
+boundary. The remaining measured defect is documentation drift in
+[`TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md`](./TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md):
+its opening preset list is current, but later paragraphs still describe
+nested ordinary lambdas, structural/result constructors, and the 1B/1C
+syntax rows as pending.
+
+The proposal authorizes only:
+
+1. replace that guide with one concise self-contained external-review route
+   that records:
+   - the canonical `0.3.0-dev` book PDF and exact SHA-256;
+   - the local browser and terminal commands;
+   - the ten current reviewer presets and the direct-TypeScript report;
+   - the graduated bounded text envelope—37 canonical heads, four intrinsic
+     binder modes, reviewed sibling/dependency groups, generic typed
+     application, and explicitly expected finite ordinary nesting;
+   - the active Lambdapi authority, backend-neutral explicit Core, generic
+     TypeScript LF, and optional conformance roles; and
+   - the exact parser, displayed-depth/coherence, whole-transfer,
+     groupoidal-closure, metatheory, deployment, and performance non-claims;
+2. remove stale interim language, cold-start anecdotes, checkpoint/test-count
+   catalogues, and superseded “next syntax row” routing from that reader
+   guide, while retaining links to the living plans for implementation
+   evidence;
+3. synchronize this plan and
+   [`TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md`](./TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md)
+   with the exact reviewed graduation checkpoint; and
+4. close only the current reader-facing product goal, leaving
+   `SCALE-STRESS-3C`, `SCALE-BATCH-1`, `SCALE-GRADUATE-1`, and all other
+   preserved bulk-transfer rows pending for a future explicit persistent
+   goal.
+
+Validation is documentation-specific and proportional:
+
+- resolve every local link and named package command in the revised guide;
+- verify the recorded source/public PDF digest against all three files;
+- run `git diff --check` and exact staged-diff review; and
+- carry forward the already recorded TypeScript, browser, kernel, book,
+  deterministic-PDF, and visual evidence because no covered boundary changes.
+
+No multi-minute aggregate, renderer, browser, kernel, conformance, or
+TypeScript gate is rerun for this documentation-only freeze.
+
+The proposal authorizes no source code, package script, dependency, lockfile,
+book source, evidence manifest, generated artifact, Lambdapi declaration or
+rule, parser/resolver/checker/evaluator/Core/runtime behavior, browser UI,
+deployment, publication, scale result, push, merge, PR, history rewrite,
+branch/worktree removal, or unrelated cleanup.
+
+Decision `D-DTTLF-BOOK-REPOSITORY-003` asks:
+
+> Approve `H-DTTLF-BOOK-REPOSITORY-GRADUATE-01 /
+> D-DTTLF-BOOK-REPOSITORY-003` as proposed: correct and consolidate only the
+> external-review guide against the already graduated reviewer, syntax,
+> book, artifact, and README boundary; accept proportional carried-forward
+> implementation evidence; close the current reader-facing product goal;
+> and preserve all remaining bulk scale work for a future explicit goal?
+
+This proposal is non-self-authorizing. It requires a separate immutable exact
+review; under the user's standing unattended delegation, that review may
+approve only this frozen scope with human supersession if no immediate human
+decision intervenes.
+
 ## Git And Persistent-Goal Boundary
 
 This plan inherits
