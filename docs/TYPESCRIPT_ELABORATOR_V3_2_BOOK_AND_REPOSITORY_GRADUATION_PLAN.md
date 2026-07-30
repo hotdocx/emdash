@@ -27,10 +27,11 @@ proposal is separately approved with human supersession; planning boundary
 and its bounded implementation is final-green at
 `c1bd21eec9456a3600e22b1ef0dc8084958fd123`; the four-constructor 1C2B
 whole/higher-action audit is focused-green with its exact D007 proposal
-checkpointed at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9` and awaiting
-separate review; 1C2B behavior, 1C3, and syntax graduation remain ahead; no
-book prose, generated artifact, release, or public presentation change is
-yet authorized
+checkpointed at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`; its separate
+immutable D007 review approves the bounded four-head scope at
+`f1fd8fa6c8039267fa0ae03955df8738d8048999`; 1C2B implementation, 1C3,
+and syntax graduation remain ahead; no book prose, generated artifact,
+release, or public presentation change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal

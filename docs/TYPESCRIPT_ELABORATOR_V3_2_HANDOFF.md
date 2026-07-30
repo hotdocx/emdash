@@ -582,8 +582,10 @@ zero-behavior 1C2B audit selects exactly `fullAction FF x y`,
 terms. It proves that `FF p u` remains an object while `cell FF p u` is an
 internalized Hom, and retains all subsequent action as generic `apply`.
 Its deeply frozen D007 proposal is checkpointed at
-`d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9` and awaits separate exact
-review; 1C2B behavior and 1C3 remain unauthorized.
+`d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`; a separate immutable D007
+unattended review approves that exact four-head scope at
+`f1fd8fa6c8039267fa0ae03955df8738d8048999` with human supersession. The
+bounded 1C2B implementation is dependency-ready; 1C3 remains unauthorized.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
