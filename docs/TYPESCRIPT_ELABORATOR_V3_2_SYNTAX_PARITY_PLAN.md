@@ -55,7 +55,8 @@ the bounded 1C2B implementation is final-green at exact local checkpoint
 `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; the 1C3 audit is checkpointed
 at `cfacee11affc6360a3b81021d0a51fd43071f50c`, its separate immutable D008
 review approves the exact frozen scope with human supersession, and the
-bounded implementation is focused-green pending its local checkpoint.
+bounded implementation is final-green at exact local checkpoint
+`126023e5ce8ab31f28730e1be508da11083084b4`.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1311,6 +1312,8 @@ runtime/proof rule, action table, external coherence evidence, semantic
 profile, transfer input, Lambdapi source, browser preset, book, or scale
 delta. The next dependency-ready product row is
 `SYNTAX-PARITY-GRADUATE-1`.
+Exact local implementation checkpoint:
+`126023e5ce8ab31f28730e1be508da11083084b4`.
 
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
@@ -1422,7 +1425,7 @@ strings parse. For every promoted row it must demonstrate:
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-07 / D-DTTLF-PRODUCT-SYNTAX-PARITY-007 | **approved as proposed at `f1fd8fa6c8039267fa0ae03955df8738d8048999`; immutable unattended review with human supersession** | checkpointed 1C2B audit/proposal at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9` | Authorizes only four frozen whole/higher internalized-action heads over existing typed methods, with all later application generic |
 | SYNTAX-PARITY-1C2B | **final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; audit at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`** | final-green 1C2A and approved D007 review | Four exact mathematical heads for existing whole/higher internalized actions; recursive operands, generic continuations, exact distinct-boundary negatives, 5/5 implementation and 4/4 audit tests |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-08 / D-DTTLF-PRODUCT-SYNTAX-PARITY-008 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C3 proposal at `cfacee11affc6360a3b81021d0a51fd43071f50c` | Authorizes only twelve canonical result heads, two checked root-result kinds, and recursive typed category/family operands |
-| SYNTAX-PARITY-1C3 | **focused-green; local implementation checkpoint pending** | final-green 1C2 and approved D008 review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, 4/4 implementation plus 4/4 audit tests, and no new parser/checker/kernel semantics |
+| SYNTAX-PARITY-1C3 | **final-green at `126023e5ce8ab31f28730e1be508da11083084b4`; audit at `cfacee11affc6360a3b81021d0a51fd43071f50c`** | final-green 1C2 and approved D008 review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, 4/4 implementation plus 4/4 audit tests, and no new parser/checker/kernel semantics |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |

@@ -3477,7 +3477,8 @@ human supersession. Its bounded implementation is now focused-green: twelve
 routes, recursive checked category/family operands, a real nested-program
 witness, the frozen audit, typecheck, and lint pass without a semantic,
 Lambdapi, browser, or scale delta. Syntax graduation, not any deferred scale
-row, is next after the local implementation checkpoint.
+row, is next after exact local implementation checkpoint
+`126023e5ce8ab31f28730e1be508da11083084b4`.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate

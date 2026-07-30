@@ -610,7 +610,8 @@ resolvers reuse the one located tree and existing typed program. All twelve
 routes and representative real nested expressions pass, as do the frozen
 audit, typecheck, and lint. No aggregate/browser rerun or semantic/kernel
 change occurred. `SYNTAX-PARITY-GRADUATE-1` is next after the bounded local
-implementation checkpoint.
+implementation checkpoint
+`126023e5ce8ab31f28730e1be508da11083084b4`.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
