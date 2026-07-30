@@ -75,9 +75,27 @@ Before nontrivial edits:
 2. run `git status --short`, inspect staged and unstaged diffs separately, and
    preserve unrelated work;
 3. locate definitions and consumers with `rg` rather than remembered lines;
-4. run `./scripts/pnpmw run check:ts` as the bounded root baseline;
+4. select a proportional baseline: for TypeScript or tooling work run
+   `workspace:check`, typecheck/lint as relevant, and the nearest focused
+   tests; for plan or documentation work inspect the exact diff and run only
+   its owning document checks;
 5. run `EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check` when the proposed
    elaborator target depends on current kernel names or computation.
+
+The complete root aggregate is not a routine pre-edit baseline:
+
+- plan/documentation-only changes require exact diff and Markdown/link hygiene,
+  not TypeScript, browser, kernel, print, or repository aggregates;
+- isolated TypeScript behavior changes require affected focused tests plus
+  typecheck/lint during implementation;
+- when shared TypeScript behavior actually changes—including the generic
+  LF/compiler/runtime/checker, test runner, public barrel, or package/workspace
+  setup—run one complete `./scripts/pnpmw run check:ts` after the bounded
+  tranche is otherwise green and before its checkpoint or integration;
+- run `check:all` only at an affected cross-layer/integration or release
+  boundary; and
+- carry forward recent green aggregate evidence for unchanged boundaries
+  rather than rerunning a multi-minute command for reassurance.
 
 Do not begin the redesign by deleting all old category nodes. First inventory
 which generic mechanisms and tests are reusable, define a v3.2 target IR and
