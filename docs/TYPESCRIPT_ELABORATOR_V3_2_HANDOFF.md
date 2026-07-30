@@ -567,7 +567,7 @@ retains four whole/higher internalized action constructors for a separately
 reviewed 1C2B notation decision. Five focused tests, root typecheck, and lint
 pass with zero behavior delta. Separate D006 review is the next gate; no 1C2
 text behavior is yet authorized. Exact local audit/proposal checkpoint:
-`20093b783725ec80bbfbad96cf28e94001edc286`.
+`20093b71e3802c3d2b7cbf20670862a58a71b653`.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

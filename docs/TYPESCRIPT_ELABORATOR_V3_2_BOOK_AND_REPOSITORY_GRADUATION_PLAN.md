@@ -22,7 +22,7 @@ implementation is final-green at
 graduation remain ahead; the focused-green zero-behavior 1C2 audit now
 separates twelve mechanical structural/comprehension heads from four
 whole/higher action constructors, is checkpointed at
-`20093b783725ec80bbfbad96cf28e94001edc286`, and awaits its exact D006 review;
+`20093b71e3802c3d2b7cbf20670862a58a71b653`, and awaits its exact D006 review;
 planning boundary only; no book prose, generated artifact, release, or
 public presentation change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
