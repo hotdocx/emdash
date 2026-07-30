@@ -698,8 +698,9 @@ chapter/appendix/end-matter start without finding a render defect. The root
 manifest-selected artifact; it does not create a second renderer. No
 multi-minute aggregate was repeated after the final release, and no remote
 publication occurred.
-`REPO-PRESENT-1C` is now final-green with its bounded local checkpoint
-pending. The root README is a concise reader-first route through the
+`REPO-PRESENT-1C` is complete at exact local checkpoint
+`18fe2ea2d78c996a63d06bb38b2361c8e959eed9`. The root README is a concise
+reader-first route through the
 mathematical thesis, canonical book, integrated browser reviewer, terminal
 demo, active Lambdapi authority, bounded TypeScript product, exact current
 limitations, and focused contributor guidance. Its six local links, five

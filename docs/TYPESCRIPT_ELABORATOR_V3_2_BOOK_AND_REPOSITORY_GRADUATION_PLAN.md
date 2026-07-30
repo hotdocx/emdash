@@ -33,7 +33,8 @@ under the standing unattended delegation with human supersession.
 `f7baeb1e2e5828c8237767bb7d19ab5faccf8992`.
 The checked `0.3.0-dev` PDF is now the byte-identical canonical
 `docs/emdash-book.pdf` and compatibility `docs/emdash3_2.pdf` artifact.
-`REPO-PRESENT-1C` is final-green with its bounded local checkpoint pending.
+`REPO-PRESENT-1C` is complete at exact local checkpoint
+`18fe2ea2d78c996a63d06bb38b2361c8e959eed9`.
 `PRODUCT-BOOK-GRADUATE-1` is the next dependency-ready row. No remote
 release/publication or bulk scale change is included.
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
@@ -259,7 +260,7 @@ by preparing the static artifact and README.
 | H-DTTLF-BOOK-SOURCE-CONTRACT-01 / D-DTTLF-BOOK-REPOSITORY-002 | **approved exactly as proposed at review checkpoint `1dee8fe414b63973e5f848936ae6d3c9d2319b35`; human supersession retained** | measured stale validator literal and proposal `21b5ebdbb9d82ba8d9139319aaa2ae1f8f96f881` | Replace only the retired formal-layer literal in `check_book.mjs`; retain every other source/render contract |
 | BOOK-PROSE-1A | **complete at `43870651aebaa48bc4af4bd838229cab979a924d`** | exact D001/D002 approvals and green reviewer bridge | The ten authored/structured sources now present fibrewise contexts, base change/evaluation, fibred cuts, binder notation, the bounded TypeScript architecture, three new checked evidence claims, and exact retained boundaries as theorem-led prose |
 | BOOK-ARTIFACT-1B | **complete at `f7baeb1e2e5828c8237767bb7d19ab5faccf8992`** | final-green authored edition and exact D001 approval | The single final release, exporter-only deterministic repeat, 199-page visual QA, and checked byte-for-byte promotion to both tracked public PDF paths are complete |
-| REPO-PRESENT-1C | **final-green; bounded local checkpoint pending** | validated book artifact and exact D001 review | The concise reader-first root README now joins the book, integrated reviewer, mathematical authority, exact limitations, focused contributor route, and compact related/historical links |
+| REPO-PRESENT-1C | **complete at `18fe2ea2d78c996a63d06bb38b2361c8e959eed9`** | validated book artifact and exact D001 review | The concise reader-first root README now joins the book, integrated reviewer, mathematical authority, exact limitations, focused contributor route, and compact related/historical links |
 | PRODUCT-BOOK-GRADUATE-1 | **dependency-ready; selected next** | BOOK-PROSE-1A through REPO-PRESENT-1C | Freeze exact reader-facing capabilities, commands, artifact checksum, limitations, and the future-scale handoff |
 | FUTURE-SCALE-GOAL | deferred/out of scope for this persistent goal | later explicit user goal | Resume pending SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other preserved scale rows without implying they were completed here |
 
@@ -396,9 +397,10 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   A focused local contract check resolved all six repository links, all five
   named package scripts, and the executable bootstrap; Markdown diff hygiene
   passes. No command body changed and no TypeScript, browser, kernel, book,
-  renderer, or repository aggregate was rerun. `PRODUCT-BOOK-GRADUATE-1` is
-  now dependency-ready; the bounded local presentation checkpoint is
-  pending.
+  renderer, or repository aggregate was rerun. Exact local presentation
+  checkpoint:
+  `18fe2ea2d78c996a63d06bb38b2361c8e959eed9`.
+  `PRODUCT-BOOK-GRADUATE-1` is now dependency-ready.
 - **2026-07-30 — `BOOK-ARTIFACT-1B` final-green.** The manifest-owned
   `functorial-type-theory-0.3.0-dev.pdf` passed the single final
   `book:release` boundary with 199 pages, 16 embedded fonts, and SHA-256
