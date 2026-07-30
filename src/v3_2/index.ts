@@ -63,6 +63,7 @@ export * from './categorical_fibred_weaken_reindex_transfer';
 export * from './categorical_fibred_dependent_target_transfer';
 export * from './categorical_displayed_evaluation_transfer';
 export * from './categorical_program';
+export * from './categorical_text';
 export * from './categorical_displayed_evaluation_demo';
 export * from './categorical_displayed_chain_demo';
 export * from './categorical_comprehension_demo';

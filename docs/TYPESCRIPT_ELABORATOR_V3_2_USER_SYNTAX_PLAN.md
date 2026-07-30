@@ -16,9 +16,11 @@ SYNTAX-RESOLVE-0B is approved exactly as proposed under
 D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; SYNTAX-PARSER-0C is the
 completed measurement; the dependency-free tiny parser is selected in the
 frozen H-DTTLF-PRODUCT-SYNTAX-02 implementation proposal, now approved
-exactly under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; SYNTAX-1A
-is the active implementation row and no located tree or resolver may land as
-unused runtime infrastructure
+exactly under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; the user's
+H-DTTLF-PRODUCT-SYNTAX-03 / D-DTTLF-PRODUCT-SYNTAX-003 correction separates
+intrinsic `λ^mode` capability from an optional `: annotation`; no located tree
+or resolver landed as unused runtime infrastructure; SYNTAX-1A is implemented
+and final-green, with its exact local checkpoint pending
 
 ## Purpose And Meaning Of Usability
 
@@ -73,8 +75,8 @@ the existing typed application classifier. Its abstraction APIs include:
 - independent displayed-sibling `displayedContextLambda`;
 - the reviewed one-edge and exact mixed four-binding
   `displayedDependentContextLambda`;
-- bounded direct `displayedFunctorLambda` (`:^fd`-equivalent); and
-- bounded coherent `displayedTransforLambda` (`:^nd`-equivalent).
+- bounded direct `displayedFunctorLambda` (`^fd`-equivalent); and
+- bounded coherent `displayedTransforLambda` (`^nd`-equivalent).
 
 The underlying first-order contextual IR already contains slot references,
 closed Core terms, typed application, typed pair, cell composition,
@@ -85,7 +87,7 @@ closed when the requested action is outside the active profile.
 The ordinary compiler already handles the important nontrivial form:
 
 ```text
-λ x :^f A. F x y0
+λ^f x. F x y0
 ```
 
 where `x` occurs inside the subject of an inner application and `y0` is
@@ -97,7 +99,7 @@ The displayed compiler now handles independent siblings, stable evaluation,
 one genuine dependency edge, the exact `a; b,c; d` mixed telescope, recursive
 coherent component composition, and one next-Hom observation. These are real
 but bounded capabilities; syntax must not advertise arbitrary depth, arbitrary
-mixed variance, or general `:^nd` coherence.
+mixed variance, or general `^nd` coherence.
 
 ## Historical Parsimmon Evidence
 
@@ -243,9 +245,9 @@ the parser must not select an arbitrary `fapp*` or `tapp*` spelling.
 Explicit application annotations may later be added as disambiguation, but
 ordinary whitespace remains the canonical surface application node.
 
-### Binder notation is capability syntax, not a Core-owner enumeration
+### Binder capability and annotation are independent
 
-Provisional forms such as:
+Earlier kernel-development discussions used provisional forms such as:
 
 ```text
 λ x :^o X. body
@@ -255,20 +257,56 @@ Provisional forms such as:
 λ k :^nd K. body
 ```
 
-combine abstraction layer, plicity, variation, polarity, cell level, and
-displayed dependency. They do not each name a primitive Core binder or one
-kernel owner. In particular:
+Those forms put capability information in an annotation-like position. That
+is useful informal/historical evidence, but it conflates three independent
+pieces of a source abstraction:
+
+1. the intrinsic abstraction capability or mode;
+2. the bound name; and
+3. an optional domain, family, or classifier annotation.
+
+The experimental TypeScript text adapter therefore uses:
+
+```text
+λ^f  x. body
+λ^f  x : A. body
+λ^n  k. body
+λ^fd a : E. body
+λ^nd k : K. body
+```
+
+and equivalent ASCII heads such as `\^f`. The mode is never inferred merely
+from an omitted domain annotation: it selects the abstraction judgment to be
+formed. An expected classifier may supply the domain/family, making the
+annotation optional; when written, the annotation is resolved and checked
+against that expectation. Thus `λ^f x. body` is ordinary bidirectional
+checking, while `λ^f x : A. body` adds a checked source annotation.
+
+This separation applies to `f`, `n`, `fd`, `nd`, and any later reviewed
+capability, but it does not make those modes semantically interchangeable.
+Each mode still needs its own expected-classifier and coherent lowering
+contract. In particular:
 
 - outer-LF binding and categorical object-only capability must not be
-  conflated merely because a draft spelling uses `o`;
-- `:^fd` lowers through coherent displayed-functor construction, not a
+  conflated merely because an earlier draft used `o`;
+- `^fd` lowers through coherent displayed-functor construction, not a
   pointwise family of arbitrary functions;
-- `:^nd` accepts only the reviewed coherent envelope and cannot synthesize
+- `^nd` accepts only the reviewed coherent envelope and cannot synthesize
   missing naturality from point data; and
 - owners such as `fapp*_func`, `tapp*_func`, evaluation, and internalized Hom
   contribute action cases but do not automatically define new binder modes.
 
-The exact spelling remains revisable independently of the semantic adapter.
+The first text slice recognizes mode tokens lexically but accepts only `^f`
+semantically. The other spellings fail closed until their existing typed
+constructors receive reviewed resolver contracts.
+
+This is not a repository-wide notation migration. Existing Lambdapi comments,
+mathematical telescope notation such as `x :^n K`, and historical demo text
+remain provisional evidence. They are not silently rewritten or interpreted
+as the finalized product grammar. A later notation-consolidation gate must
+compare the TypeScript surface, Lambdapi development conventions, outer-LF
+binding, categorical object-only binding, plicity, and displayed dependency
+after the relevant modes have executable evidence.
 
 ### Dependent telescopes
 
@@ -307,11 +345,11 @@ The first semantic syntax implementation must not be accepted for parsing one
 hard-coded demo string. It should qualify recursive resolution with at least:
 
 1. ordinary open/open recursion:
-   `λ x :^f A. (H x) (K x)`;
+   `λ^f x. (H x) (K x)`;
 2. ordinary open/closed nested evaluation:
-   `λ x :^f A. F x y0`;
+   `λ^f x : A. F x y0`;
 3. one displayed dependency edge with recursive outer and inner occurrences:
-   `λ a :^fd A. λ b :^fd B(a). FF[a]`;
+   `λ^fd a : A. λ^fd b : B(a). FF[a]`;
 4. one independent displayed sibling pair or contraction case;
 5. one arrow/Hom-boundary application proving that whitespace is not hard
    wired to object action; and
@@ -332,17 +370,20 @@ architecture without claiming the outer-LF, displayed-telescope, or complete
 notation surface. Its grammar is:
 
 ```text
-expression  ::= lambda | application
-lambda      ::= ("λ" | "\\") identifier ":^f" identifier "." expression
-application ::= atom atom*
-atom        ::= identifier | "(" expression ")"
+expression   ::= lambda | application
+lambda       ::= lambda-head whitespace identifier annotation? "." expression
+lambda-head  ::= ("λ" | "\\") "^" mode
+mode         ::= ASCII-letter+
+annotation   ::= whitespace? ":" whitespace? identifier
+application  ::= atom atom*
+atom         ::= identifier | "(" expression ")"
 ```
 
 Whitespace between atoms creates one neutral left-associated application
 spine. The parser never emits `fapp*`, `tapp*`, evaluation, pairing, weakening,
 contraction, or exchange owner names.
 
-This slice supports one outer `:^f` lambda per elaboration request and
+This slice supports one outer `^f` lambda per elaboration request and
 arbitrarily recursive identifier/application/parenthesis subexpressions in
 its body. A syntactically nested lambda is parsed, then rejected with an exact
 unsupported-expectation diagnostic until a recursive expected-classifier
@@ -350,8 +391,8 @@ contract is separately frozen. This restriction does not prevent the first
 slice from qualifying:
 
 ```text
-λ x :^f A. (H x) (K x)
-λ x :^f A. F x y0
+λ^f x. (H x) (K x)
+λ^f x : A. F x y0
 F p
 ```
 
@@ -404,13 +445,15 @@ program; foreign values are rejected by the existing program methods.
 Callback extension binds the exact `CoreCategoricalSlotToken` supplied by
 `program.lambda`, never a fabricated variable or De Bruijn index.
 
-For a lambda request, the parsed annotation must resolve to the exact source
-category supplied by the `ordinary-functor` expectation; the expectation
-supplies the target category already required by `program.lambda`. Category
-agreement uses the existing program comparison/checking boundary, not label
-equality. A lambda under `kind: 'term'`, an application/identifier under an
-inapplicable functor expectation, or a nested lambda without a reviewed
-recursive expectation fails closed.
+For a lambda request, the intrinsic mode is always present. The
+`ordinary-functor` expectation supplies the exact source and target categories
+required by `program.lambda`. If a source annotation is present, it must
+resolve to a category and compare equal to that expected source through the
+existing program comparison/checking boundary, not label equality. If it is
+omitted, the resolver uses the expected source directly; this is bidirectional
+checking, not parser-owned type inference. A lambda under `kind: 'term'`, an
+application/identifier under an inapplicable functor expectation, or a nested
+lambda without a reviewed recursive expectation fails closed.
 
 For application, the resolver first resolves the subject and then every
 argument recursively. It calls `program.apply` once per argument, passing a
@@ -468,7 +511,7 @@ At minimum, the green slice must prove:
    entry without a server; and
 8. the aggregate root TypeScript gate remains green.
 
-Displayed `:^fd`/`:^nd`, dependent telescopes, outer-LF text, let/Pi/holes,
+Displayed `^fd`/`^nd`, dependent telescopes, outer-LF text, let/Pi/holes,
 implicit arguments, recovery, editor services, and browser UI are explicit
 later rows. The current direct TypeScript demonstrations remain the
 qualification oracle for those rows.
@@ -621,6 +664,48 @@ must be removed after these observations are recorded. No spike source is
 copied into production verbatim; production TypeScript is implemented under
 the exact proposal below.
 
+## SYNTAX-NOTATION-0D — Human Correction To The First Slice
+
+`H-DTTLF-PRODUCT-SYNTAX-03 /
+D-DTTLF-PRODUCT-SYNTAX-003` records the user's direct clarification during
+the still-uncommitted SYNTAX-1A implementation:
+
+- abstraction capability is intrinsic to the binder head: `λ^f`, `λ^n`,
+  `λ^fd`, or `λ^nd`;
+- the bound name follows that head;
+- `: A` is a separate annotation and is optional when the bidirectional
+  expected classifier supplies the required source/family;
+- an explicit annotation is checked, not trusted;
+- omitted annotation never permits the resolver to infer or guess the binder
+  capability; and
+- parsing a mode token does not implement that mode's semantic lowering.
+
+This correction supersedes only the old first-slice spelling and
+mandatory-annotation wording in D-DTTLF-PRODUCT-SYNTAX-001/002. It does not
+broaden the approved semantic profile, public API, checker boundary, browser
+surface, or Git effects. The exact implemented ordinary forms are:
+
+```text
+λ^f x. body
+λ^f x : A. body
+\^f x. body
+\^f x : A. body
+```
+
+The resolver continues to require
+`expected: { kind: 'ordinary-functor', source, target }`. With no annotation,
+`source` is passed directly to the existing `program.lambda`. With an
+annotation, the named category must compare equal to `source`, after which
+the expected source remains authoritative for construction.
+
+The same syntactic separation is the working hypothesis for `^n`, `^fd`, and
+`^nd`, but their annotation shapes and expected-classifier trees remain later
+reviewed semantic rows. Outer-LF lambda versus categorical object-only lambda
+also remains open. This correction deliberately does not normalize every
+informal Lambdapi/kernel comment or historical plan example. Final
+cross-environment notation consolidation is deferred until executable
+evidence covers the relevant modes.
+
 ## SYNTAX-1A — Frozen Integrated Implementation Proposal
 
 ### Decision gate
@@ -649,7 +734,10 @@ only the adapter's typed boundary and diagnostics.
 
 The implementation uses the existing portable identifier grammar
 `[A-Za-z][A-Za-z0-9_]*`. It accepts `λ` and `\`, recognizes a located binder
-mode token, and rejects every mode except `:^f` with a stable diagnostic.
+head such as `λ^f` or `\^f`, and rejects every mode except `^f` with a stable
+diagnostic. The mode is intrinsic and mandatory. A separate `: category`
+annotation is optional because the ordinary-functor expectation already
+supplies the source; when present, it is checked against that source.
 Whitespace application remains neutral and left-associated. Parentheses
 change association and extend source coverage but do not become a semantic
 node.
@@ -660,8 +748,9 @@ The adapter:
 2. parses exactly one expression and consumes all input;
 3. resolves identifiers recursively, extending one lambda body with the
    exact callback token returned by `program.lambda`;
-4. compares the annotation category with the expected source using
-   `program.compareCategories`, requiring `status: 'equal'`;
+4. uses the expected source when the annotation is omitted, or compares an
+   explicit annotation category with it using `program.compareCategories`,
+   requiring `status: 'equal'`;
 5. calls only `program.lambda` and `program.apply` for semantic construction;
 6. forwards a term expectation's optional application shape only to the root
    application node, never indiscriminately to nested applications; and
@@ -671,7 +760,8 @@ The adapter:
 The initial resolver rejects a nested lambda with
 `UNSUPPORTED_NESTED_ABSTRACTION`; recursive expected-classifier trees remain
 a later exact design row. It also rejects categories in term positions and
-terms/boundaries in annotation positions before calling the program.
+terms/boundaries in annotation positions before calling the program. Merely
+recognizing `^n`, `^fd`, and `^nd` does not authorize their semantic lowering.
 
 The exact stable text-error code union is:
 
@@ -710,16 +800,17 @@ structural prerequisites, equality with the direct TypeScript construction,
 and one source-located negative diagnostic. It covers at least:
 
 ```text
-λ x :^f A. (H x) (K x)
-λ x :^f A. F x y0
+λ^f x. (H x) (K x)
+λ^f x : A. F x y0
 F p
 ```
 
 Focused tests must additionally cover Unicode/ASCII equivalence, multiline
 and parenthesized spans, full-input consumption, zero/one/two binder uses,
-all frozen error codes that can arise in this slice, foreign terms, root-only
-expected-shape forwarding, exact explicit-Core equivalence, and the absence
-of Node builtin imports or project dependency/lock changes.
+omitted-annotation recovery from the expected source, explicit-annotation
+checking, all frozen error codes that can arise in this slice, foreign terms,
+root-only expected-shape forwarding, exact explicit-Core equivalence, and the
+absence of Node builtin imports or project dependency/lock changes.
 
 ### Exact non-effects
 
@@ -731,6 +822,8 @@ The slice does not:
   profile;
 - add Parsimmon, `@types/parsimmon`, or any package/lock change;
 - support outer-LF or displayed/dependent text binders;
+- settle the final repository-wide notation or rewrite provisional Lambdapi
+  binder/telescope notation;
 - export the located syntax union;
 - enter `browser.ts`, `browser_directed.ts`, or the browser fixture;
 - add a GitHub Pages workflow, backend, worker, deployment, or publication;
@@ -742,6 +835,45 @@ After a separate approval, implementation may make one bounded green local
 checkpoint followed by a distinct ledger checkpoint under the existing Git
 authority. No broader Git operation is authorized.
 
+## SYNTAX-1A Completion Evidence
+
+The corrected integrated slice is implemented through the existing typed
+categorical program and is final-green:
+
+- `src/v3_2/categorical_text.ts` owns only a private located
+  identifier/application/lambda tree, cursor parser, immutable typed
+  environment, recursive resolver, and source-located adapter diagnostics;
+- `λ^f x. body` takes its source from the required expected ordinary-functor
+  classifier, while `λ^f x : A. body` resolves and compares `A` before using
+  the same expected source;
+- `^n`, `^fd`, and `^nd` are parsed as intrinsic modes and rejected with
+  `UNSUPPORTED_BINDER_MODE` before any unsupported semantic construction;
+- neutral whitespace application delegates each step to the existing
+  `program.apply`, and root expected action shape is forwarded only to the
+  root application;
+- the public barrel, `demo:categorical-text` command, README, and aggregate
+  test runner expose the slice without entering the frozen deployed browser
+  profile.
+
+Validation:
+
+- focused categorical-text suite: 13 pass, zero fail;
+- Unicode and ASCII heads, omitted and explicit annotation, recursive
+  open/open and open/closed application, whole-Hom action, zero/one/two use,
+  exact spans, all reachable frozen error classes, foreign terms, and
+  dependency absence: pass;
+- actual `demo:categorical-text`: pass, with exact explicit-Core equality
+  against direct TypeScript construction and a source-located negative;
+- root typecheck and lint: pass;
+- aggregate `check:ts`: 1,127 tests, 1,076 pass, 51 intentional skips, zero
+  fail;
+- bounded active Lambdapi `make -C emdash2 check`: pass; and
+- package dependencies, lockfile, Core/checker/evaluator/action table,
+  Lambdapi sources, and browser entries: zero delta.
+
+The aggregate wall time is intentionally not recorded: the user confirmed
+that concurrent OBS and other heavy applications made that run atypical.
+
 ## Proposed Sequence
 
 ```text
@@ -752,8 +884,10 @@ SYNTAX-0A architecture audit (complete)
   -> SYNTAX-PARSER-0C compare Parsimmon and tiny-parser spikes (complete)
   -> H-DTTLF-PRODUCT-SYNTAX-02 exact implementation proposal
   -> separate D-DTTLF-PRODUCT-SYNTAX-002 review
+  -> SYNTAX-NOTATION-0D apply direct human correction separating
+     intrinsic λ^mode from optional : annotation
   -> SYNTAX-1A land tiny parser + located nodes + resolver + example
-     together through existing APIs
+     together through existing APIs (complete and final-green)
   -> SYNTAX-BROWSER-1B optionally join it to a reviewed browser profile
   -> SYNTAX-GRADUATE-1 record the exact supported grammar/usability envelope
 ```
@@ -768,7 +902,8 @@ Node-independent, but a browser UI is a separate product boundary.
 | SYNTAX-0A | complete | PRODUCT-DEMO-1B and current contextual programs | Historical parser audit, current semantic-seam inventory, resolver architecture, qualification matrix, and alternatives |
 | SYNTAX-RESOLVE-0B | approved exactly as proposed under D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; proposal checkpoint `5e33a58` | SYNTAX-0A and selected product priority | Deeply frozen parser-independent types/API/diagnostic/qualification contract; no standalone runtime AST |
 | SYNTAX-PARSER-0C | complete | D-DTTLF-PRODUCT-SYNTAX-001 | Parsimmon and tiny-parser parsed/rejected the same corpus; both browser-build; measurements above select the dependency-free tiny parser |
-| SYNTAX-1A | approved exactly as proposed under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; implementation active; proposal checkpoint `6766eba` | separate parser-selection/implementation review | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example land as one user-visible slice |
+| SYNTAX-NOTATION-0D | complete as direct human correction D-DTTLF-PRODUCT-SYNTAX-003; synchronization active | approved D-DTTLF-PRODUCT-SYNTAX-002 implementation, before its runtime checkpoint | Intrinsic `λ^mode`, optional checked `: annotation`, expected-source recovery, mode-specific semantic gates, and deferred repository-wide notation consolidation |
+| SYNTAX-1A | complete and final-green under D-DTTLF-PRODUCT-SYNTAX-002 as corrected by direct human D-DTTLF-PRODUCT-SYNTAX-003; exact local checkpoint pending; proposal checkpoint `6766eba` | parser-selection/implementation review and SYNTAX-NOTATION-0D | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example landed as one user-visible slice |
 | SYNTAX-BROWSER-1B | deferred | reviewed parser and browser profile | Editable browser input without a second checker or server |
 | SYNTAX-GRADUATE-1 | pending | selected syntax rows | Exact grammar, binder/action matrix, diagnostics, performance observation, and deferrals |
 
@@ -786,8 +921,8 @@ The low-risk work is tokenization, names, spans, ordinary application chains,
 and routing into already supported constructors. The material risks are:
 
 - target/expected classifier design for categorical lambdas;
-- syntax for layer versus variation without overloading `:^o`;
-- honest representation of bounded rather than arbitrary `:^fd`/`:^nd`;
+- syntax for layer versus variation without overloading `^o`;
+- honest representation of bounded rather than arbitrary `^fd`/`^nd`;
 - contravariant and higher-action ambiguity;
 - dependent telescope family resolution under earlier bindings; and
 - keeping a parser library choice from hardening into a second semantic AST.
@@ -799,11 +934,10 @@ categorical kernel, or contextual-compilation architecture.
 
 Until a later row is separately approved, this plan adds no:
 
-- dependency or lockfile change;
-- parser or exported located syntax;
+- parser dependency, lockfile change, or exported located syntax;
 - new checker, unifier, evaluator, Core node, owner, or rule;
 - new categorical binder capability;
-- arbitrary-depth displayed or general `:^nd` claim;
+- arbitrary-depth displayed or general `^nd` claim;
 - Lambdapi-source acquisition parser;
 - browser promotion; or
 - scale-graduation claim.
@@ -839,6 +973,11 @@ Keep the host environment immutable and typed, propagate exact source spans,
 require expected information where the existing sound API needs it, and fail
 closed on ambiguity or unsupported profile shapes.
 
+Keep intrinsic abstraction capability (`λ^f`, `λ^n`, `λ^fd`, `λ^nd`) separate
+from an optional checked domain/family annotation. Do not infer the capability
+from an expected classifier, and do not claim the experimental TypeScript
+spelling has already standardized informal Lambdapi/kernel notation.
+
 Do not select Parsimmon, a hand-written parser, tagged templates, or browser
 joining before the applicable measured row and separate review. Do not
 conflate user syntax with Lambdapi-source acquisition.
@@ -851,6 +990,26 @@ broader grammar, semantic feature, dependency, browser, or Git effect.
 
 ## Change Log
 
+- **2026-07-29 — Corrected SYNTAX-1A implemented and final-green.** Added the
+  dependency-free private located parser and recursive resolver, root export,
+  `demo:categorical-text`, focused tests, aggregate wiring, and user-facing
+  documentation. The exact ordinary inputs `λ^f x. (H x) (K x)` and
+  `λ^f x : A. F x y0` compile identically to their direct TypeScript
+  witnesses; `G p` follows the existing expected whole-Hom action. Thirteen
+  focused tests, typecheck, lint, the actual demo, the 1,127-test aggregate,
+  and bounded active Lambdapi check pass. No dependency/lock, Core/checker/
+  evaluator/action-table, Lambdapi, or browser-entry delta occurred. The
+  exact local implementation checkpoint is pending.
+- **2026-07-29 — D-DTTLF-PRODUCT-SYNTAX-003 human correction recorded.**
+  During the uncommitted SYNTAX-1A implementation, the user clarified that
+  functorial, natural, displayed-functorial, and displayed-natural capability
+  belongs intrinsically on the abstraction head (`λ^f`, `λ^n`, `λ^fd`,
+  `λ^nd`), whereas `: A` is a separate generally optional annotation. Updated
+  the experimental TypeScript grammar and resolver contract so the existing
+  expected ordinary-functor classifier supplies an omitted source and checks
+  an explicit one. This does not implement the deferred modes or settle the
+  final cross-environment notation; earlier informal `x :^mode A` evidence is
+  preserved rather than bulk rewritten.
 - **2026-07-29 — D-DTTLF-PRODUCT-SYNTAX-002 recorded.** After no immediate
   objection to the exact checkpointed implementation proposal, applied the
   user's standing unattended delegation with human supersession. The

@@ -23,7 +23,11 @@ that slice final-green; the dedicated user-syntax plan now freezes
 H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001 as the next exact
 contract, completes the disposable parser comparison, and freezes
 H-DTTLF-PRODUCT-SYNTAX-02 / D-DTTLF-PRODUCT-SYNTAX-002 as the next exact
-implementation proposal
+implementation proposal, now separately approved with human supersession;
+direct human correction H-DTTLF-PRODUCT-SYNTAX-03 /
+D-DTTLF-PRODUCT-SYNTAX-003 separates intrinsic `λ^mode` capability from an
+optional checked `: annotation`, and the corrected SYNTAX-1A implementation
+is final-green with its exact local checkpoint pending
 
 ## Human Direction And Purpose
 
@@ -89,7 +93,9 @@ change is involved.
 
 ### Existing executable surface
 
-The root package already exposes sixteen direct-TypeScript demo commands:
+The root package now exposes eighteen direct-TypeScript or typed-text demo
+commands: seventeen individual capability commands plus the composed
+external-review report.
 
 1. the outer-LF directed dependent Sigma-telescope demo;
 2. ordinary categorical bracket abstraction;
@@ -100,7 +106,8 @@ The root package already exposes sixteen direct-TypeScript demo commands:
 7. dependent displayed targets;
 8. displayed evaluation and displayed brackets;
 9. one genuine displayed dependency chain; and
-10. displayed-transfor higher action.
+10. displayed-transfor higher action; plus
+11. the narrow ordinary categorical text adapter.
 
 The demo wrappers are small. Their implementation modules already return
 deeply structured results and separate `run...Demo` from
@@ -115,6 +122,7 @@ The most representative current commands are:
 | `demo:categorical-bracket` | `λ x :^f A`, recursive pointwise application, diagonal, exchange, structural basis, explicit Core, and a wrong-category diagnostic | ordinary categorical bracket envelope |
 | `demo:categorical-displayed-chain` | `λ a :^fd A. λ b :^fd B(a)`, outer/inner/recursive occurrences, object and internalized-arrow observations, reindexing, and a wrong-base diagnostic | one genuine dependency edge; bounded depth |
 | `demo:categorical-displayed-nd-higher` | object action, whole-Hom action, and a higher cell `H[m]` through the existing `tdapp1_int_*_transfd` package | advanced direct consumer; not a general `:^nd` binder |
+| `demo:categorical-text` | `λ^f x. (H x) (K x)`, optional checked annotation, recursive silent application, exact explicit Core equivalence, whole-Hom expected routing, and a source-located diagnostic | ordinary `^f` only; experimental TypeScript spelling, not a general parser or final notation |
 
 Observed local `ts-node` wall times for individual runs were approximately
 23 seconds, 25 seconds, 41 seconds, and a variable 28–91 seconds
@@ -344,8 +352,8 @@ Exact local implementation checkpoint:
 | PRODUCT-DEMO-ORACLE-0A | complete; no new command selected | PRODUCT-DEMO-1B | Reuse the documented `check:conformance`, directed conformance, displayed-evaluation conformance, and bounded kernel commands. A new umbrella command would either duplicate them or misstate displayed-chain coverage; production remains Lambdapi-free |
 | PRODUCT-BROWSER-0A | complete; routed to dedicated browser plan | PRODUCT-DEMO-1B | The directed dependent closure is Node-free and Vite/Chromium-green; the full report reaches `node:crypto` through acquisition/audit modules. Frozen additive BROWSER-DIRECTED-1A and deferred categorical runtime-spec separation are recorded in [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md) |
 | PRODUCT-BROWSER-1 | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, fixed dependent-LF plus preserved minimal-Core views, Node-free/static project-subpath build, real-browser evidence, and no semantic/dependency delta |
-| PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); Parsimmon versus a tiny parser remains gated |
-| PRODUCT-SYNTAX-1 | contract approved under D-DTTLF-PRODUCT-SYNTAX-001; parser comparison complete; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; implementation active | SYNTAX-RESOLVE-0B plus separate review | Tiny dependency-free parser selected; parser, private located nodes, resolver, tests, and example land together |
+| PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); the measured comparison selected the tiny dependency-free parser |
+| PRODUCT-SYNTAX-1 | complete and final-green; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003; exact local checkpoint pending | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
 | PRODUCT-GRADUATE-1 | pending | required product rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
@@ -390,6 +398,12 @@ PRODUCT-SYNTAX-0A must answer these before selecting a parser library:
 7. Does Parsimmon remain the best small dependency, or would a tagged
    template or tiny hand-written parser provide a smaller browser and
    maintenance boundary?
+
+These audit questions preserve the informal `x :^mode A` notation in which
+they were originally posed. D-DTTLF-PRODUCT-SYNTAX-003 later corrected the
+experimental TypeScript text surface to intrinsic `λ^mode x` plus a separate
+optional `: A`. That correction is deliberately not a bulk rewrite or final
+standardization of Lambdapi/kernel development notation.
 
 Possible designs must be recorded even if one is selected:
 
@@ -563,3 +577,16 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   freezes H-DTTLF-PRODUCT-SYNTAX-02 / D-DTTLF-PRODUCT-SYNTAX-002 for one
   integrated parser/resolver/example slice. No production code is yet
   authorized.
+- **2026-07-29 — D-DTTLF-PRODUCT-SYNTAX-003 direct correction recorded.**
+  Before the syntax implementation checkpoint, the user separated intrinsic
+  abstraction capability (`λ^f`, `λ^n`, `λ^fd`, `λ^nd`) from the optional
+  `: domain/family` annotation. The ordinary text resolver now recovers an
+  omitted source from its required expected classifier and checks an explicit
+  source. Deferred modes remain fail-closed, and final TypeScript/Lambdapi
+  notation consolidation remains a later design gate.
+- **2026-07-29 — Corrected PRODUCT-SYNTAX-1 final-green.** Added the narrow
+  ordinary categorical text command and adapter through the existing typed
+  program. Thirteen focused tests, the actual demo, typecheck/lint, the
+  1,127-test aggregate, and bounded active Lambdapi check pass. No
+  dependency/lock, checker/evaluator/Core/action-table, browser, or Lambdapi
+  delta occurred; the exact local implementation checkpoint is pending.

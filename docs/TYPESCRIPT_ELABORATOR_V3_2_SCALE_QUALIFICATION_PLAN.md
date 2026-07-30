@@ -3345,8 +3345,18 @@ SYNTAX-PARSER-0C is complete and selects the dependency-free tiny parser from
 measured equivalent syntax/failure behavior and smaller/no-lock browser cost.
 The frozen H-DTTLF-PRODUCT-SYNTAX-02 /
 D-DTTLF-PRODUCT-SYNTAX-002 integrated parser/resolver/example is now
-separately approved with human supersession and active. No standalone second
-AST may land.
+separately approved with human supersession and active. Direct human
+correction H-DTTLF-PRODUCT-SYNTAX-03 /
+D-DTTLF-PRODUCT-SYNTAX-003 now requires intrinsic binder heads (`λ^f`,
+`λ^n`, `λ^fd`, `λ^nd`) and a separate optional `: annotation` supplied or
+checked by expected classifier information. Only ordinary `^f` lowering is in
+the active slice; parsing the other modes does not implement them, and final
+cross-environment notation consolidation remains deferred. No standalone
+second AST may land. The corrected SYNTAX-1A slice is now implemented and
+final-green with its exact local checkpoint pending: 13 focused tests, the
+actual command, typecheck/lint, the 1,127-test aggregate, and bounded active
+Lambdapi check pass with no dependency/lock, semantic-engine, browser, or
+Lambdapi delta.
 When those living plans route back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending
@@ -3973,3 +3983,21 @@ scope is affected.
   parser/private-located-node/resolver/test/example implementation. No
   production code, dependency, browser, semantic, or Lambdapi effect has
   occurred.
+- **2026-07-29 — D-DTTLF-PRODUCT-SYNTAX-003 direct human correction
+  recorded.** Before the active SYNTAX-1A implementation was checkpointed,
+  separated intrinsic categorical abstraction capability (`λ^f`, `λ^n`,
+  `λ^fd`, `λ^nd`) from the separately optional `: domain/family` annotation.
+  The first ordinary resolver recovers an omitted source from its required
+  expected functor classifier and checks an explicit source through the
+  existing comparison boundary. This changes no Core/checker/action semantics,
+  implements no deferred binder mode, and does not settle or bulk-rewrite
+  informal Lambdapi/kernel notation.
+- **2026-07-29 — Corrected SYNTAX-1A final-green.** The dependency-free private
+  parser and recursive resolver, root development export,
+  `demo:categorical-text`, 13 focused tests, and aggregate wiring landed as
+  one slice. Omitted and explicit source annotations compile to equal explicit
+  Core, neutral application reuses the existing action classifier, and
+  unsupported modes fail closed. The command, typecheck/lint, 1,127-test
+  aggregate, and bounded active Lambdapi check pass. No dependency/lock,
+  checker/evaluator/Core/action-table, browser, or Lambdapi delta occurred;
+  the exact local implementation checkpoint is pending.

@@ -170,6 +170,36 @@ The optional higher-action witness remains available as:
 ./scripts/pnpmw run demo:categorical-displayed-nd-higher
 ```
 
+## TypeScript categorical text adapter
+
+The root-only development entry now has a narrow, dependency-free text
+adapter for the demonstrated ordinary categorical profile. It accepts
+intrinsic functorial binders with either an expected source or a checked
+explicit annotation:
+
+```text
+λ^f x. (H x) (K x)
+λ^f x : A. F x y0
+G p
+```
+
+Whitespace application is recursively resolved through the existing typed
+`CoreCategoricalProgram`; the adapter does not own a second checker or an
+`fapp*`/`tapp*` action table. Run the source-located executable example with:
+
+```bash
+./scripts/pnpmw run demo:categorical-text
+```
+
+Only `^f` lowers in this first text profile. `^n`, `^fd`, and `^nd` are
+recognized but fail closed pending their reviewed mode-specific resolver
+contracts. The optional `: A` is recovered from or checked against the
+bidirectional expected classifier; the intrinsic mode is never inferred.
+This experimental TypeScript spelling does not yet standardize the informal
+binder/telescope notation used during Lambdapi kernel development, and it is
+not a Lambdapi-source parser or part of the frozen deployed MVP/browser
+profile.
+
 ## TypeScript browser demo
 
 The standalone browser fixture now exposes two client-side views:

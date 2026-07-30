@@ -405,21 +405,28 @@ recursively through the existing scoped LF builder and
 `CoreCategoricalProgram`, with an immutable typed host environment,
 expected-classifier guidance, and exact source spans. This is an input
 adapter, not another `RawExpr` type theory or checker. The historical
-Parsimmon implementation remains grammar evidence; Parsimmon versus a tiny
-parser is a later measured choice. No parser dependency or syntax
-implementation is yet selected. With the directed browser slice complete,
-the dedicated syntax plan now freezes the exact
+Parsimmon implementation remains grammar evidence. The completed disposable
+comparison selected the dependency-free tiny parser for this three-node
+profile: it matched Parsimmon's syntax/failure corpus, avoided package/type/
+lock changes, and emitted 856 bytes gzip versus 7,094 bytes. With the directed
+browser slice complete, the dedicated syntax plan freezes the exact
 H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001
 SYNTAX-RESOLVE-0B contract, now separately approved with human supersession.
-SYNTAX-PARSER-0C is now complete: both alternatives parsed the same corpus and
-browser-built, while the selected tiny parser avoids dependency/type/lock
-changes and emitted 856 bytes gzip versus Parsimmon's 7,094 bytes. The
-dedicated plan freezes H-DTTLF-PRODUCT-SYNTAX-02 /
+The dedicated plan also freezes H-DTTLF-PRODUCT-SYNTAX-02 /
 D-DTTLF-PRODUCT-SYNTAX-002 as the exact implementation proposal, now
-separately approved with human supersession. SYNTAX-1A is active: the parser,
-private located nodes, recursive resolver, tests, and executable example must
-land together as one editable-input slice. No unused second AST/resolver may
-be committed on its own.
+separately approved with human supersession. During the uncommitted
+implementation the user supplied H-DTTLF-PRODUCT-SYNTAX-03 /
+D-DTTLF-PRODUCT-SYNTAX-003 as a direct correction: capability is intrinsic
+(`λ^f`, `λ^n`, `λ^fd`, `λ^nd`) while `: A` is a separate optional annotation
+checked against bidirectional expected information. Corrected SYNTAX-1A is now
+implemented and final-green, with its exact local checkpoint pending: the
+private parser/resolver, public development export, command, example, and 13
+focused tests landed together; the 1,127-test aggregate and bounded active
+Lambdapi check pass. Only `^f` lowers in the first profile; other modes are
+lexically recognized and fail closed. No unused second AST/resolver, parser
+dependency, checker/action table, Core owner, browser entry, or Lambdapi
+change was added, and this experimental TypeScript spelling does not yet
+standardize informal Lambdapi/kernel telescope notation.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
