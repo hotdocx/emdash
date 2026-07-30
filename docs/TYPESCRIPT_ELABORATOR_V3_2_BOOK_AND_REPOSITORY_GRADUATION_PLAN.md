@@ -11,6 +11,14 @@ and the completed category/formal-presentation expansion plan
 [`REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`](../emdash2/reports/REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md)
 Status: complete reader-facing product graduation; bulk systematic-transfer
 qualification remains explicitly deferred to a future persistent goal.
+The user's later public-artifact direction is an additive continuation owned
+by
+[`EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md`](./EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md):
+it keeps this plan's checked book edition, adds the generated public book
+Markdown, replaces the temporary `docs/emdash3_2.pdf` book alias with a real
+overview article, retires audited legacy artifacts, and publishes the
+same-page landing/reviewer through GitHub Pages. This paragraph does not
+rewrite the completed checkpoint history below.
 Syntax parity is final-green through `SYNTAX-PARITY-1D1` at
 `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`. The exact zero-behavior
 `SYNTAX-PARITY-GRADUATE-1` proposal is checkpointed at
@@ -423,11 +431,12 @@ Current authority permits only bounded green local checkpoint commits in the
 dedicated goal branch/worktree after synchronized ledgers, exact staged-diff
 review, and `git diff --cached --check`.
 
-This route authorizes no push, merge, PR, deployment, publication, release,
-tag, rebase, amend, reset, history rewrite, branch/worktree removal, generated
-artifact cleanup, or unrelated mutation. Updating the tracked public PDF is a
-future separately reviewed repository change, not authorization to publish it
-remotely.
+This completed route itself authorized no push, merge, PR, deployment,
+publication, release, tag, rebase, amend, reset, history rewrite,
+branch/worktree removal, generated artifact cleanup, or unrelated mutation.
+The later direct user authorization and its exact limits are recorded only in
+the living
+[`EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md`](./EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md).
 
 ## Completed-Goal Recovery Prompt
 

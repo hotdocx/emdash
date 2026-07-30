@@ -776,6 +776,28 @@ scale plan's living launch prompt. The selected sequence is:
 8. graduate the current product goal while preserving SCALE-STRESS-3C,
    SCALE-BATCH-1, and SCALE-GRADUATE-1 for a future explicit goal.
 
+## Current Publication Continuation - 2026-07-30
+
+The completed reader-facing product is now followed by a separately
+authorized public-artifact goal:
+[`EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md`](./EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md).
+That living plan is the current continuation. It:
+
+- retains the checked 199-page book while adding a generated public Markdown
+  copy;
+- restores `docs/emdash3_2.{md,pdf}` to a new approximately 16-page overview
+  article rather than a second book copy;
+- retires only reference-audited obsolete `spec/`, legacy document, and v2
+  print paths with Git recovery recorded;
+- redesigns the existing browser fixture as a research-language landing page
+  with the reviewer on the same page; and
+- owns the explicitly authorized checkpoint, local fast-forward, upstream
+  push, GitHub Pages configuration, and live verification sequence.
+
+General scale qualification remains deferred and must not be folded into the
+publication goal. Recover the actual worktree and follow the publication
+plan's next dependency-ready row and persistent launch prompt.
+
 ## Purpose
 
 This document prepares the next fresh conversation to work from the Git root

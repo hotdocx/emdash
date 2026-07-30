@@ -1,8 +1,9 @@
 # Emdash print and book renderer
 
-The `print/` workspace renders two archival v2 article variants, the active
-v3.2 article workbench, and the generated *Functorial Type Theory* book with
-the same Markdown/KaTeX/diagram/Paged.js pipeline.
+The `print/` workspace renders the active v3.2 overview-article workbench and
+the generated *Functorial Type Theory* book with the same
+Markdown/KaTeX/diagram/Paged.js pipeline. Obsolete v2 paper snapshots remain
+recoverable through Git history rather than through live document routes.
 
 ## Reproducible setup
 
@@ -26,9 +27,7 @@ for browser render checks, but not for the root TypeScript or Lambdapi checks.
 
 The browser accepts these registered selectors:
 
-- `/` or `?paper=index` — full archival v2 article;
-- `?paper=index_0` or `?paper=0` — short archival v2 article;
-- `?paper=index_3_2` — active v3.2 article workbench;
+- `/`, `?paper=index`, or `?paper=index_3_2` — active v3.2 article workbench;
 - `?paper=emdash-book` or `?paper=book` — generated book.
 
 Absolute HTTP(S) URLs and `?paper=ls:key` remain explicit

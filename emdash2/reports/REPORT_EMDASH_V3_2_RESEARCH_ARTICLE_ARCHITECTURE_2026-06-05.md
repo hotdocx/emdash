@@ -1,7 +1,7 @@
 # EMDASH v3.2 Research Article Architecture
 
 Date: 2026-06-05
-Last updated: 2026-07-22
+Last updated: 2026-07-30
 
 Plan-ID: EMDASH-V3-2-RESEARCH-ARTICLE-2026-06-05
 Depends-On: EMDASH-V3-2-INDEX-READABILITY-2026-06-06, EMDASH-V3-2-NOTATION-REORG-2026-06-05
@@ -10,18 +10,42 @@ Side-Task-Ledger: none
 Infinity-Codex-Origin: pre-infinity-codex
 Infinity-Codex-Decision-Responses: none
 
-Status: completed article architecture and retained publication-decision
-ledger. The long v3.2 workbench implements the selected two-arc architecture;
-promotion to the default route, derivation of a new short paper, external
-submission, and release remain explicit human editorial decisions. Ongoing
-mechanical paper maintenance is owned by AME-5 of the autonomous maintenance
-plan.
+Status: completed article architecture and historical publication-decision
+ledger. The long v3.2 workbench implements the selected two-arc architecture.
+On 2026-07-30 the user made the previously deferred editorial decision to
+derive and publicly distribute a new approximately 16-page overview paper,
+retire the archival v2 print routes, and restore `docs/emdash3_2.{md,pdf}` to
+article ownership. The living implementation and publication boundary is now
+owned by
+[`../../docs/EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md`](../../docs/EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md).
+External venue submission and a versioned research release remain separate
+human decisions.
 
 The original 2026-06-05 design centered the article on synthetic arrow
 induction and computational composition. The 2026-07-01 update keeps that as
 the opening reader-facing theorem, then extends the article to cover the
 now-active profunctor, tensor/internal-hom, weighted-limit, duality,
 join-category, DefIso/comparison, and MathOps/Infinity-Codex developments.
+
+## 2026-07-30 Overview-Paper Continuation
+
+The new public paper is not a mechanical shortening of the long workbench or
+a concatenation of book sections. Its selected overview thesis joins:
+
+1. the active categorical/directive kernel and synthetic arrow-induction
+   computation;
+2. the outer dependent logical framework and explicit backend-neutral Core;
+3. usable ordinary, functorial, natural, displayed-functorial, and
+   displayed-natural binders through recursive typed contextual elaboration;
+   and
+4. the live external-reviewer artifact.
+
+The existing `PathOut`, `rho`, path-induction, and computational-composition
+arc remains the mathematical anchor. The recent TypeScript elaborator is a
+second representative computation and an artifact route, not a replacement
+authority for the Lambdapi kernel. The living publication plan owns the exact
+outline, evidence map, source rename/rewrite, page budget, generated
+distribution artifacts, and visual review.
 
 ## 2026-07-22 Source, Lifecycle, And Maintenance Boundary
 

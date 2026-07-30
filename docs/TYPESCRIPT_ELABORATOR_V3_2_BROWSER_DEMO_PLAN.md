@@ -18,7 +18,12 @@ correction now promotes the measured categorical/report/browser integration
 to the frozen exact gate in
 [`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md);
 that implementation is present and focused/browser-green with final
-aggregate/checkpoint in progress; static publication remains separately gated
+aggregate/checkpoint in progress. The user has since authorized the audited
+static publication continuation through
+[`EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md`](./EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md);
+that plan owns the landing-page redesign, Actions Pages workflow, remote
+configuration, push, and live verification without broadening this browser
+capability ledger.
 
 ## Purpose
 
@@ -441,7 +446,7 @@ it does not broaden this browser row retroactively.
 | BROWSER-CATEGORICAL-0A | complete measured audit | direct human product correction after BROWSER-DIRECTED-1A | Separate immutable selection-contract creation from Node acquisition hashing and qualify text plus the existing report |
 | BROWSER-CATEGORICAL-1A | implemented and focused/browser-green under D-DTTLF-PRODUCT-REVIEWER-001; final aggregate/checkpoint in progress | BROWSER-CATEGORICAL-0A and approved integrated proposal | One narrow reviewer browser entry and UI over the existing categorical text and report runners |
 | BROWSER-DISPLAYED-1A | complete for the fixed three-panel report only; editable displayed text routed to syntax-parity audit | browser-safe displayed closure plus separate review | Execute the already reviewed displayed-chain witness without widening its usability envelope |
-| BROWSER-STATIC-DEPLOY-0A | deferred; publication not authorized | BROWSER-DIRECTED-1A and an explicit deployment priority | Audit the existing repository CI/pages configuration and freeze an exact static artifact/workflow/domain proposal; no Node backend unless a measured client-side blocker exists |
+| BROWSER-STATIC-DEPLOY-0A | superseded by the authorized publication plan after the audit found no configured Pages site | BROWSER-DIRECTED-1A and direct 2026-07-30 human publication direction | Actions Pages build from `main`, same-page landing/reviewer, remote configuration, and live verification; no generated branch or Node backend unless a measured blocker invalidates the selected route |
 | BROWSER-GRADUATE-1 | complete only for the historical directed slice; integrated graduation remains gated | BROWSER-DIRECTED-1A | Exact directed capability and residual boundary; no longer the final reviewer product |
 
 ## Git Boundary
@@ -452,8 +457,11 @@ Existing authority permits bounded green local checkpoint commits only in
 the dedicated goal branch/worktree after exact staged-diff inspection and
 ledger synchronization.
 
-No push, merge, PR, release, publication, rebase, amend, reset, history
-rewrite, branch/worktree deletion, or unrelated cleanup is authorized.
+This historical browser plan itself authorized no push, merge, PR, release,
+publication, rebase, amend, reset, history rewrite, branch/worktree deletion,
+or unrelated cleanup. The later direct user authorization and exact
+publication procedure live only in
+[`EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md`](./EMDASH_V3_2_PUBLICATION_AND_ARTICLE_PLAN.md).
 
 ## Persistent `/goal` Launch Prompt
 

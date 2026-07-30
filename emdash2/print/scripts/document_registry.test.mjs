@@ -25,10 +25,11 @@ test('the live registry has explicit valid authorities and lifecycles', () => {
 
 test('an authored document owns its exact public Markdown source', () => {
   const registry = registryFixture();
-  registry.documents[0].source.authority = 'print/public/index_0.md';
+  const article = registry.documents.find((document) => document.kind === 'article');
+  article.source.authority = 'print/public/not-the-article.md';
   assert.throws(
     () => validateDocumentRegistry(registry, { authorityExists: everyAuthorityExists }),
-    /authored document authority must be print\/public\/index\.md/
+    /authored document authority must be print\/public\/index_3_2\.md/
   );
 });
 
