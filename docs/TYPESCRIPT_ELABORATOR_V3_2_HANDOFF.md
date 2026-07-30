@@ -697,7 +697,15 @@ chapter/appendix/end-matter start without finding a render defect. The root
 `book:promote` command now owns checked atomic promotion from the
 manifest-selected artifact; it does not create a second renderer. No
 multi-minute aggregate was repeated after the final release, and no remote
-publication occurred. `REPO-PRESENT-1C` is the next dependency-ready row.
+publication occurred.
+`REPO-PRESENT-1C` is now final-green with its bounded local checkpoint
+pending. The root README is a concise reader-first route through the
+mathematical thesis, canonical book, integrated browser reviewer, terminal
+demo, active Lambdapi authority, bounded TypeScript product, exact current
+limitations, and focused contributor guidance. Its six local links, five
+named package scripts, and executable bootstrap resolve; no unchanged
+TypeScript, browser, kernel, book, renderer, or repository aggregate was
+rerun. `PRODUCT-BOOK-GRADUATE-1` is the next dependency-ready row.
 The plan then updates the book as theorem-led mathematical prose rather than
 a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.
