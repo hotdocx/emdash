@@ -29,8 +29,8 @@ D003 review approves it exactly as proposed with human supersession; the
 bounded implementation is final-green at exact local checkpoint
 `ba34771074363f4c5b33814269b8822d4d2362bb`; `SYNTAX-PARITY-1B3` is now a
 focused-green zero-behavior-delta audit with a deeply frozen
-non-self-authorizing D004 proposal, whose local checkpoint is pending this
-synchronized tranche.
+non-self-authorizing D004 proposal checkpointed at
+`4eada97f9ee8fe284b70dea6c0548dfdb9754189`.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -751,7 +751,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B1 | **final-green at `9f663555a1edbedcb99e97f1271154ff36913f05`** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-03 / D-DTTLF-PRODUCT-SYNTAX-PARITY-003 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B2 proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15` | Authorizes only the frozen comma sibling group, ordered-family expected contract, exact `fibrePair`, and one reviewer preset |
 | SYNTAX-PARITY-1B2 | **final-green at `ba34771074363f4c5b33814269b8822d4d2362bb`; audit/proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15`** | approved D003 review | One comma sibling group, optional positional family annotations, ordered-family expected contract, existing `displayedContextLambda`/`fibrePair` routes, eighth reviewer preset, 64/64 proportional gate, production build, and real Chromium |
-| SYNTAX-PARITY-1B3 | **focused-green zero-behavior audit; D004 proposal checkpoint pending** | final-green 1B2 | Executable exact semicolon seam, `[1,1]`/`[1,2,1]` direct-shape evidence, grouped expected-family design, complete negative boundary, and non-self-authorizing proposal |
+| SYNTAX-PARITY-1B3 | **focused-green zero-behavior audit; D004 proposal at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`** | final-green 1B2 | Executable exact semicolon seam, `[1,1]`/`[1,2,1]` direct-shape evidence, grouped expected-family design, complete negative boundary, and non-self-authorizing proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-04 / D-DTTLF-PRODUCT-SYNTAX-PARITY-004 | pending separate exact review | checkpointed 1B3 audit/proposal | Would authorize only semicolon dependency levels for the two existing direct shapes and one mixed-telescope reviewer preset |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -839,8 +839,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   dependency levels, retained commas for siblings, selected only direct group
   sizes `[1,1]` and `[1,2,1]`, and proposed a grouped expected-family
   contract plus one reviewer preset. Five focused tests, typecheck, and lint
-  pass with zero behavior delta. The local audit/proposal checkpoint is
-  pending this synchronized tranche.
+  pass with zero behavior delta. Exact local audit/proposal checkpoint:
+  `4eada97f9ee8fe284b70dea6c0548dfdb9754189`.
 - **2026-07-30 — `SYNTAX-PARITY-1B2` implemented and final-green.** Added
   exactly one parenthesized comma sibling group, positional optional family
   annotations, the ordered-family expected contract, and the exact binary

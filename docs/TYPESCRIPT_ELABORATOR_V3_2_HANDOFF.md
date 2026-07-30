@@ -512,8 +512,9 @@ confirms that the existing direct method owns exactly `[1,1]` and
 commas within a sibling level, and freezes a non-self-authorizing D004
 proposal for one grouped expected-family contract and one mixed-telescope
 reviewer preset. Five focused tests, typecheck, and lint pass; the local
-audit/proposal checkpoint is pending this synchronized tranche. No parser
-behavior may change before a separate exact review.
+audit/proposal checkpoint is
+`4eada97f9ee8fe284b70dea6c0548dfdb9754189`. No parser behavior may change
+before a separate exact review.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
