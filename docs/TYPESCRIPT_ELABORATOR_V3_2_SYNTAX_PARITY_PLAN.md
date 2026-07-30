@@ -9,8 +9,10 @@ Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md),
 and
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
-Status: selected next product-facing audit after integrated-reviewer
-graduation; no syntax-parity implementation is yet authorized
+Status: `SYNTAX-PARITY-0A` inventory implemented and focused-green;
+`H-DTTLF-PRODUCT-SYNTAX-PARITY-01 /
+D-DTTLF-PRODUCT-SYNTAX-PARITY-001` proposed but not self-authorized;
+no syntax-parity runtime implementation is yet authorized
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -172,6 +174,88 @@ This list is orientation, not the parity inventory. The audit must locate the
 actual exported constructors, capability gates, expected classifier data,
 profiles, positive tests, and fail-closed boundaries from current code.
 
+## Completed `SYNTAX-PARITY-0A` Result
+
+The executable, deeply frozen audit now lives in
+`src/v3_2/categorical_text_parity_audit.ts`, with its focused witnesses in
+`tests/v3_2_categorical_text_parity_audit_tests.ts`. It classifies all **68**
+public `CoreCategoricalProgram` methods exactly once across **14**
+mathematical-capability rows:
+
+| Classification | Rows | Interpretation |
+| --- | ---: | --- |
+| already text-complete | 1 | Ordinary `lambda`/`^f` already has a checked text route. |
+| mechanical syntax route | 1 | The six ordinary structural constructors need only a deterministic structural spelling and direct routing. |
+| typed resolver seam | 9 | The direct mathematical operation exists; text needs a finite binding, expected-classifier, or structural-form contract. |
+| semantic capability absent | 1 | Arbitrary contexts and general coherence synthesis are not direct-TypeScript capabilities and therefore are not parser work. |
+| deliberately non-textual host behavior | 2 | Closed declaration construction and inspection/compilation remain host APIs rather than expression syntax. |
+
+The audit also proves the following boundary without changing runtime
+behavior:
+
+- the lexer/parser already accepts the alphabetic intrinsic modes `^n`,
+  `^fd`, and `^nd`;
+- each currently reaches the exact resolver-side
+  `UNSUPPORTED_BINDER_MODE` boundary;
+- the corresponding direct `dependentLambda`,
+  `displayedFunctorLambda`, and `displayedTransforLambda` operations execute
+  under their reviewed profiles;
+- recursive displayed-cell composition executes through the existing
+  `composeCells` owner; and
+- `CoreCategoricalProgram.apply` remains the one classifier-directed
+  application ladder. The text frontend does not acquire a second action
+  table.
+
+The 68-method inventory is intentionally broader than the first
+implementation tranche. It separates the already available single-binder
+semantics from later dependent-context and explicit-constructor presentation
+work rather than making “parity” an open-ended claim.
+
+## Proposed Gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-01`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-001` proposes
+`SYNTAX-PARITY-1A`, the smallest dependency-closed product slice:
+
+- enable intrinsic modes `n`, `fd`, and `nd`;
+- route only to `dependentLambda`, `displayedFunctorLambda`,
+  `displayedTransforLambda`, `composeCells`, and the existing `apply`;
+- add a `displayed-family` environment binding kind and expected result kinds
+  for dependent sections, displayed functors, and displayed
+  transformations;
+- recognize the fixed binary application spine
+  `composeCells left right` and route it to the existing direct method; and
+- preserve the direct finite factorization grammars and exact fail-closed
+  behavior.
+
+The exact positive witnesses are:
+
+```text
+λ^n  k : K. (FF k) (s k)
+λ^fd a : E. GG (FF a)
+λ^nd k : K. composeCells (theta k) (eta k)
+```
+
+The proposal must reject wrong annotations/profiles/endpoints,
+non-adjacent cell composition, pointwise data that is not internally
+factorable, and nested or multi-binder forms deferred to
+`SYNTAX-PARITY-1B`. Text and direct TypeScript must produce equal explicit
+Core and equal abstraction/factorization observations. Node and browser must
+use the same adapter.
+
+This proposal adds no mathematical owner, Core node, checker/evaluator
+branch, external coherence evidence, Lambdapi declaration/rule, or second
+semantic frontend. Its executable object reports zero semantic delta and is
+non-self-authorizing.
+
+After `1A`, the measured continuation is:
+
+1. `SYNTAX-PARITY-1B` — nested/dependent contexts and displayed/fibred
+   structural forms;
+2. `SYNTAX-PARITY-1C` — the remaining selected mathematical constructor
+   spellings; and
+3. `SYNTAX-PARITY-GRADUATE-1` — freeze the exact text/direct-TypeScript
+   parity envelope and route to the book/repository graduation plan.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -264,10 +348,12 @@ strings parse. For every promoted row it must demonstrate:
 
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
-| SYNTAX-PARITY-0A | selected next product-facing audit; dependency-ready after integrated-reviewer graduation | REVIEWER-INTEGRATE-1A and current direct TypeScript surface | Executable/deeply frozen API-to-text capability inventory, classification, exact equivalence/negative corpus, and bounded proposal |
-| H-DTTLF-PRODUCT-SYNTAX-PARITY-01 | pending exact proposal | SYNTAX-PARITY-0A | Separately review the smallest dependency-closed parity implementation; no automatic follow-on |
-| SYNTAX-PARITY-1A | gated | separate exact review | Implement only the reviewed grammar, typed resolver seams, direct-builder routes, tests, browser exposure, and documentation |
-| SYNTAX-PARITY-GRADUATE-1 | gated | SYNTAX-PARITY-1A | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
+| SYNTAX-PARITY-0A | **complete; focused-green** | REVIEWER-INTEGRATE-1A and current direct TypeScript surface | Executable/deeply frozen 68-method/14-capability inventory, classification, direct semantic witnesses, exact negative boundary, and bounded proposal |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-01 / D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | **proposed; not self-authorized** | SYNTAX-PARITY-0A | Separately review `SYNTAX-PARITY-1A`: the three single-binder modes plus existing application/cell-composition routing |
+| SYNTAX-PARITY-1A | gated | separate exact review | Implement only `^n`, `^fd`, `^nd`, the frozen binding/expected contracts, existing direct-builder routes, tests, browser exposure, and documentation |
+| SYNTAX-PARITY-1B | gated | `SYNTAX-PARITY-1A` plus separate exact review | Nested/dependent contexts and displayed/fibred structural forms |
+| SYNTAX-PARITY-1C | gated | `SYNTAX-PARITY-1B` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
+| SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
 
@@ -321,10 +407,12 @@ classifier-directed programs, and distinguish parsing, typed elaboration,
 and internal categorical factorization. Never guess an application action or
 promote arbitrary pointwise data to coherent categorical data.
 
-Begin with the executable SYNTAX-PARITY-0A inventory. Freeze a bounded exact
-proposal and obtain or record a separate review before changing syntax
-behavior. A missing direct semantic capability belongs in the relevant
-usability/kernel plan, not in parser heuristics.
+Recover the completed executable SYNTAX-PARITY-0A inventory and continue only
+the next separately reviewed row in its ledger. The frozen first proposal is
+H-DTTLF-PRODUCT-SYNTAX-PARITY-01 /
+D-DTTLF-PRODUCT-SYNTAX-PARITY-001; obtain or record its separate review
+before changing syntax behavior. A missing direct semantic capability belongs
+in the relevant usability/kernel plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -340,6 +428,13 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-0A` completed and first gate frozen.**
+  Classified all 68 public categorical-program methods exactly once in 14
+  executable capability rows. Confirmed that `^n`, `^fd`, and `^nd` already
+  parse and fail only at the semantic mode boundary, while their direct
+  internalized builders and recursive cell composition are green. Proposed
+  the bounded, non-self-authorizing `SYNTAX-PARITY-1A` modes-first slice and
+  separated later context/constructor parity into `1B` and `1C`.
 - **2026-07-30 — Book/repository graduation selected after syntax parity.**
   The current product goal now proceeds from exact text/direct-TypeScript
   parity to a capability-oriented, theorem-led book update and consolidated

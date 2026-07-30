@@ -58,6 +58,7 @@ import './v3_2_categorical_structural_transfer_tests';
 import './v3_2_categorical_dependent_transfer_tests';
 import './v3_2_categorical_program_tests';
 import './v3_2_categorical_text_tests';
+import './v3_2_categorical_text_parity_audit_tests';
 import './v3_2_categorical_dependent_program_tests';
 import './v3_2_categorical_dependent_eta_tests';
 import './v3_2_categorical_dependent_composition_tests';
