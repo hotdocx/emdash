@@ -29,7 +29,8 @@ D-DTTLF-PRODUCT-SYNTAX-003 separates intrinsic `λ^mode` capability from an
 optional checked `: annotation`, and the corrected SYNTAX-1A implementation
 is final-green at exact local checkpoint
 `7513cbe9e0d1439b5b1250982f40cede48e9a811`; PRODUCT-GRADUATE-1 is the
-dependency-ready bounded documentation/handoff row
+dependency-ready bounded documentation/handoff row, now approved exactly as
+proposed under D-DTTLF-PRODUCT-GRADUATE-001 with human supersession
 
 ## Human Direction And Purpose
 
@@ -356,7 +357,7 @@ Exact local implementation checkpoint:
 | PRODUCT-BROWSER-1 | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, fixed dependent-LF plus preserved minimal-Core views, Node-free/static project-subpath build, real-browser evidence, and no semantic/dependency delta |
 | PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); the measured comparison selected the tiny dependency-free parser |
 | PRODUCT-SYNTAX-1 | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003 | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
-| PRODUCT-GRADUATE-1 | proposed exactly as H-DTTLF-PRODUCT-GRADUATE-01 / D-DTTLF-PRODUCT-GRADUATE-001; not self-authorized | completed selected browser and syntax rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
+| PRODUCT-GRADUATE-1 | approved exactly as proposed under D-DTTLF-PRODUCT-GRADUATE-001 with human supersession; implementation active; proposal checkpoint `76e7e11` | completed selected browser and syntax rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
 
@@ -584,6 +585,11 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-PRODUCT-GRADUATE-001 recorded.** After no immediate
+  objection to checkpoint `76e7e11`, applied the user's standing unattended
+  delegation with human supersession to the exact documentation-only product
+  handoff. It authorizes no runtime, parser, browser, dependency, Lambdapi,
+  deployment, scale-result, or broader Git change.
 - **2026-07-29 — H-DTTLF-PRODUCT-GRADUATE-01 frozen.** With the selected
   external-review, directed-browser, and ordinary categorical-text rows
   final-green, proposed one documentation-only graduation that consolidates

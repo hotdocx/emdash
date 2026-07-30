@@ -3359,8 +3359,9 @@ active Lambdapi check pass with no dependency/lock, semantic-engine, browser,
 or Lambdapi delta.
 The product plan now freezes the documentation-only
 H-DTTLF-PRODUCT-GRADUATE-01 / D-DTTLF-PRODUCT-GRADUATE-001 proposal to
-consolidate the three runnable product lanes and their exact limitations.
-After its separate review and completion route back here, continue with
+consolidate the three runnable product lanes and their exact limitations; its
+separate exact review is now recorded with human supersession. After its
+completion routes back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
