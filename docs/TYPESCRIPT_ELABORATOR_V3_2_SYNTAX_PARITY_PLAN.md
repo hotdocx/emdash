@@ -11,8 +11,9 @@ and
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
 Status: `SYNTAX-PARITY-0A` inventory implemented and focused-green;
 `H-DTTLF-PRODUCT-SYNTAX-PARITY-01 /
-D-DTTLF-PRODUCT-SYNTAX-PARITY-001` proposed but not self-authorized;
-no syntax-parity runtime implementation is yet authorized
+D-DTTLF-PRODUCT-SYNTAX-PARITY-001` approved as proposed by a separate
+immutable unattended review with human supersession; `SYNTAX-PARITY-1A`
+is dependency-ready
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -245,7 +246,10 @@ use the same adapter.
 This proposal adds no mathematical owner, Core node, checker/evaluator
 branch, external coherence evidence, Lambdapi declaration/rule, or second
 semantic frontend. Its executable object reports zero semantic delta and is
-non-self-authorizing.
+non-self-authorizing. The separate immutable
+[`D-DTTLF-PRODUCT-SYNTAX-PARITY-001` review](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_D001_REVIEW.md)
+now approves the exact frozen scope under the user's standing unattended
+delegation, with any later explicit human decision superseding it.
 
 After `1A`, the measured continuation is:
 
@@ -349,8 +353,8 @@ strings parse. For every promoted row it must demonstrate:
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | SYNTAX-PARITY-0A | **complete; focused-green** | REVIEWER-INTEGRATE-1A and current direct TypeScript surface | Executable/deeply frozen 68-method/14-capability inventory, classification, direct semantic witnesses, exact negative boundary, and bounded proposal |
-| H-DTTLF-PRODUCT-SYNTAX-PARITY-01 / D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | **proposed; not self-authorized** | SYNTAX-PARITY-0A | Separately review `SYNTAX-PARITY-1A`: the three single-binder modes plus existing application/cell-composition routing |
-| SYNTAX-PARITY-1A | gated | separate exact review | Implement only `^n`, `^fd`, `^nd`, the frozen binding/expected contracts, existing direct-builder routes, tests, browser exposure, and documentation |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-01 / D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | **approved as proposed; immutable unattended review with human supersession** | SYNTAX-PARITY-0A and checkpoint `d73195b` | Review permits only the frozen `SYNTAX-PARITY-1A` three-mode/application/cell-composition scope |
+| SYNTAX-PARITY-1A | **dependency-ready** | approved D001 review | Implement only `^n`, `^fd`, `^nd`, the frozen binding/expected contracts, existing direct-builder routes, tests, browser exposure, and documentation |
 | SYNTAX-PARITY-1B | gated | `SYNTAX-PARITY-1A` plus separate exact review | Nested/dependent contexts and displayed/fibred structural forms |
 | SYNTAX-PARITY-1C | gated | `SYNTAX-PARITY-1B` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -408,11 +412,12 @@ and internal categorical factorization. Never guess an application action or
 promote arbitrary pointwise data to coherent categorical data.
 
 Recover the completed executable SYNTAX-PARITY-0A inventory and continue only
-the next separately reviewed row in its ledger. The frozen first proposal is
+the next separately reviewed row in its ledger. The exact
 H-DTTLF-PRODUCT-SYNTAX-PARITY-01 /
-D-DTTLF-PRODUCT-SYNTAX-PARITY-001; obtain or record its separate review
-before changing syntax behavior. A missing direct semantic capability belongs
-in the relevant usability/kernel plan, not in parser heuristics.
+D-DTTLF-PRODUCT-SYNTAX-PARITY-001 review is recorded with human
+supersession; implement only its frozen `SYNTAX-PARITY-1A` scope. A missing
+direct semantic capability belongs in the relevant usability/kernel plan,
+not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -428,6 +433,12 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — D001 separately approved under unattended delegation.**
+  After no immediate human objection to the checkpointed proposal, recorded
+  an immutable, human-supersedable review approving only the three existing
+  single-binder modes, the existing application ladder, and direct
+  `composeCells` routing. Nested/dependent contexts and remaining structural
+  syntax stay outside `SYNTAX-PARITY-1A`.
 - **2026-07-30 — `SYNTAX-PARITY-0A` completed and first gate frozen.**
   Classified all 68 public categorical-program methods exactly once in 14
   executable capability rows. Confirmed that `^n`, `^fd`, and `^nd` already
