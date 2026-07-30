@@ -15,37 +15,55 @@ In functorial type theory, category theory is not added later as a model of a
 previously specified, traditional term calculus. The explicit categorical
 calculus is already the computational core. Its objects include categories,
 iterated homs, functors, transfors, and directed families; its reductions
-express functoriality, naturality, induction, and universal properties. A
-friendlier end-user language may later elaborate into that core, and external
-models may interpret it, but neither layer defines the calculus retroactively.
+express functoriality, naturality, induction, and universal properties. The
+active Lambdapi v3.2 development authors and checks that calculus and remains
+the mathematical authority.
 
-The architecture is therefore:
+The canonical mathematical surface used by this book is deliberately more
+spacious than any one executable grammar. A renewed TypeScript product now
+implements a bounded route from readable categorical binders to explicit
+emdash Core and a small dependent logical framework. That route makes a
+reviewed fragment directly usable; it does not become a second categorical
+kernel or define the mathematics retroactively.
 
-| Layer | Role | Present status |
+The architecture therefore distinguishes these roles:
+
+| Layer or role | Responsibility | Present status |
 | --- | --- | --- |
-| computational categorical kernel | explicit classifiers, owners, rewrite rules, and proof-time comparisons accepted by [Lambdapi](#ref-lambdapi) | active and checked in the cited modules |
 | canonical mathematical surface | the notation and rule presentation used by this book | active for prose, comments, and examples; not a parser grammar |
-| optional elaborator | recovers implicit categories and endpoints, checks binder modes, and compiles readable notation to explicit owners | future interface |
+| scoped contextual elaboration | recursively interprets reviewed categorical variables, binders, neutral applications, and structural forms against typed expectations | active for the bounded direct-TypeScript and text profiles |
+| backend-neutral explicit emdash Core | records the selected logical and categorical owners without committing to one runtime backend | active TypeScript intermediate representation |
+| generic TypeScript dependent LF | checks Core terms, performs conversion and bounded reduction, and runs the reviewed proof-time rules | active for the recorded product boundary |
+| active Lambdapi v3.2 kernel | authors the categorical declarations, computation, and proof-time comparisons used as mathematical authority | active and checked in the cited modules; also the conformance oracle |
 | external semantic models | interpret a stated kernel fragment in mathematical categories or other structures | separate mathematical work; available only in selected examples |
 
 The operational direction is
 
 ```text
-mathematical surface
-        |
-        | optional future elaboration
-        v
-explicit categorical owner term  --->  Lambdapi checking and reduction
-        |
-        | separately proved interpretation
-        v
-external semantic model
+canonical mathematical surface (broader than implemented text)
+               |
+               | reviewed direct TypeScript / text subset
+               v
+scoped contextual elaboration
+               |
+               v
+backend-neutral explicit emdash Core
+               |
+               v
+generic TypeScript LF checker / conversion / bounded runtime
+               |
+               +---- optional deterministic Lambdapi emission/conformance
+
+active authored Lambdapi v3.2 kernel = mathematical authority
+external models                    = separate mathematical work
 ```
 
-The lower arrow is not part of parsing, and the upper arrow is not part of
-semantics. Keeping them separate is what lets us say exactly which claims are
-checked computation, which are mathematical presentation, and which remain
-research.
+The text adapter is not the checker, the TypeScript checker is not the active
+mathematical authority, and the implemented text subset is not the whole
+canonical surface. External interpretation is separate again. Keeping these
+roles distinct lets us say exactly which claims are checked computation,
+which are executable presentation, which are mathematical exposition, and
+which remain research.
 
 <a id="appendix-formal-presentation-g1"></a>
 
@@ -770,16 +788,16 @@ uniqueness package.
 ## G.5 Elaboration And Canonical Surface Syntax
 
 Readable notation is indispensable, but it need not be the foundational
-layer. A future elaborator should compile notation into the explicit owners
-described above:
+layer. The renewed TypeScript path compiles a reviewed subset into the
+explicit owners described above:
 
-| Stage | Responsibility | Status |
+| Stage | Implemented bounded profile | Retained boundary |
 | --- | --- | --- |
-| parse | build a scoped syntax tree from declared notation | future for the complete canonical surface |
-| elaborate | infer omitted categories, endpoints, variances, and implicit arguments; solve typed constraints | partial prototype evidence only |
-| select owner | choose the stable categorical constructor or application head required by the notation | design contract in the canonical-syntax report |
-| check | submit the explicit term to Lambdapi and accept only a typed result | active kernel/toolchain |
-| reduce | use the kernel's selected rewrite owners | active kernel/toolchain |
+| parse | located `^f`, `^n`, `^fd`, and `^nd` binders, neutral application, and reviewed constructors and contexts | not the complete book or Lambdapi grammar |
+| elaborate | typed expected classifiers route recursively through the existing contextual categorical program | no arbitrary pointwise-to-coherent synthesis |
+| select owner | reviewed operation families lower to internal categorical and structural owners | no whole-library owner-acquisition claim |
+| check and reduce | the generic TypeScript LF checks explicit Core, compares terms, and executes the bounded runtime | no global metatheory |
+| conform | optional deterministic Lambdapi emission and a bounded oracle compare selected results with the active kernel | no production Lambdapi dependency |
 
 Elaboration may recover information; it may not invent mathematics. If a
 pointwise family lacks arrow action, the elaborator must report missing
@@ -813,45 +831,96 @@ The source notation does not have to expose all seven parameters, but the
 result must typecheck as that operation or an explicitly documented
 equivalent owner.
 
-Binder modes express how variables may vary. A functorial variable carries
-ordinary action, a natural/index variable participates in a coherent family,
-and an object-only variable contributes no arrow action of its own. The
-book's settled notation uses forms such as $k:^{n}K$ for the natural/indexed
-role. A future grammar must specify scoping and mode inference precisely
-before the additional mode annotations become user syntax.
+### Executable Binders And Structural Lowering
 
-### What The Parent Prototype Establishes
+Binder modes express how variables may vary. The reviewed executable forms
+are
 
-The parent emdash repository contains an older TypeScript prototype. Its term
-data distinguish explicit and implicit applications and include category,
-functor, transfor, off-diagonal application, displayed-action, and binder-mode
-nodes. Its elaboration code demonstrates bidirectional checking, fresh
-implicit holes, typed constraints, and some mode validation. This is useful
-feasibility evidence: endpoint recovery for categorical operations can be
-treated as compilation rather than made part of every mathematical formula.
+```text
+λ^f  x : A. ...
+λ^n  k : K. ...
+λ^fd a : E. ...
+λ^nd k : K. ...
+```
 
-Its present parser, however, covers a small ASCII language of `Type`,
-`fun`, Pi arrows, application, lets, implicit braces, and holes. It does
-not parse the complete canonical categorical notation, and the prototype is
-not a production compiler from this book's surface to the active Lambdapi
-modules. Some of its semantic assumptions also predate the current v3.2
-owners.
+The mode belongs to the lambda. The classifier annotation after the variable
+may be omitted when the bidirectional expected classifier supplies it, but
+the mode is not inferred from that annotation. The mathematical telescope
+notation $k:^{n}K$ therefore records the same natural/indexed role as
+`λ^n k : K. ...` without pretending that mathematical declarations and
+executable binders are literally the same grammar. Ordinary object binding
+in the outer LF uses its ordinary dependent lambda.
 
-Consequently:
+For example, assume
 
-- the prototype is read-only historical and feasibility evidence;
-- no book theorem, source check, render, or release imports it;
-- its AST is not the normative surface grammar;
-- any renewed elaborator requires a separate RFC against the current
-  canonical syntax and current kernel owners.
+```text
+A, B, C : Cat
+E : Functor B (Functor_cat A C)
+```
+
+The reviewed expression
+
+```text
+λ^f x : A. λ^f y : B. E y x
+```
+
+has classifier `Functor A (Functor_cat B C)`. Neutral application first
+selects the action of `E` on `y` and then its action on `x`. Recursive
+abstraction lowers the result through the existing exchange/currying
+construction; a compact rendering of the selected structural term is
+
+```text
+fapp0
+  (Functor_cat B (Functor_cat A C))
+  (Functor_cat A (Functor_cat B C))
+  exchange-functor-abstraction
+  E
+```
+
+No external functoriality equation accompanies the source expression. The
+selected owner already carries object and arrow action, and the resulting
+explicit Core is checked by the same generic LF as other terms.
+
+Displayed contexts make the distinction between dependency and independence
+visible. The bounded mixed telescope
+
+```text
+λ^fd (a : A; b : B, c : C; d : D). fibrePair b c
+```
+
+has dependency levels `A; B,C; D`. A semicolon advances to a family over the
+preceding total context, while a comma groups independent siblings over the
+same prefix. The middle pair lowers through the transparent fibrewise product,
+displayed pairing, Sigma projections, and reindexing owners. Thus `b` and `c`
+may be paired, weakened, contracted, or exchanged fibrewise; no exchange of
+`a` across a classifier depending on `a` is implied. Object and base-arrow
+behavior remain internal to those owners rather than being supplied as
+external coherence evidence.
+
+### Historical Prototype And Retained Boundary
+
+The repository history contains an older TypeScript feasibility prototype
+with generic bidirectional checking, holes, unification, rewriting, and
+proof-state machinery. Those mechanisms informed the renewed work, but its
+stale category-specific layer is not an authority for v3.2. The renewed
+product instead targets backend-neutral explicit Core aligned with active
+owners and uses Lambdapi only as an optional conformance oracle.
+
+The current path is deliberately bounded. It does not parse every notation
+used in this book, lower arbitrary displayed telescope depth or variance,
+synthesize coherence from a pointwise function, or establish mechanical
+transfer of the whole Lambdapi library. These are explicit continuation
+boundaries, not hidden assumptions of the implemented examples.
 
 <!-- evidence:FORMAL-ELABORATION-BOUNDARY -->
 
 > **Formal status — research boundary.** Evidence
-> `FORMAL-ELABORATION-BOUNDARY`. The compilation stages above are a
-> concrete architecture, not a claim that an end-to-end current elaborator
-> exists. The active book depends only on the mathematical surface and the
-> checked Lambdapi sources.
+> `FORMAL-ELABORATION-BOUNDARY`. The direct-TypeScript and categorical-text
+> paths, explicit Core, generic checker/evaluator, and optional conformance
+> route are executable for the reviewed profile. A complete compiler for the
+> canonical surface, arbitrary displayed coherence, and whole-library
+> transfer are not claimed. The active Lambdapi sources remain the
+> mathematical authority.
 
 <a id="appendix-formal-presentation-g6"></a>
 
@@ -1025,8 +1094,8 @@ directed higher cells require their own theorem.
 > and semantic soundness remain unclaimed until separately proved.
 
 The resulting architecture is intentionally asymmetric. The categorical
-kernel can already compute without waiting for a traditional front end. A
-future elaborator can improve usability without changing the foundation, and
-future semantic models can justify larger fragments without becoming a
-second source language. That is the formal sense in which functorial type
-theory begins from categorical computation.
+kernel computes without depending on a traditional front end. The bounded
+elaborator improves usability without changing the foundation, and future
+semantic models may justify larger fragments without becoming a second
+source language. That is the formal sense in which functorial type theory
+begins from categorical computation.

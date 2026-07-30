@@ -217,7 +217,7 @@
       "FORMAL-ELABORATION-BOUNDARY",
       "FORMAL-METATHEORY-BOUNDARY"
     ],
-    "boundary": "the categorical kernel and representative rule families are checked; a complete surface-to-Lambdapi elaborator and global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness metatheorems are not claimed"
+    "boundary": "the active categorical kernel and representative rule families are checked; the renewed TypeScript product covers a bounded direct and text surface through explicit Core, while a complete canonical-surface compiler, arbitrary displayed coherence, whole-library transfer, and global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness metatheorems are not claimed"
   },
   "categoryTranslation": [
     {
@@ -312,7 +312,7 @@
   "formalLayers": [
     "computational categorical kernel",
     "canonical mathematical surface",
-    "optional future elaborator",
+    "bounded TypeScript elaborator and explicit Core",
     "external semantic models"
   ],
   "requiredProvenanceAdaptations": [

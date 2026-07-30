@@ -69,8 +69,9 @@ organizes functorial computation as a calculus of cuts. Chapters
 Yoneda, duality, structure identity, and saturation. Chapters
 [16](#chapter-16)–[17](#chapter-17) treat weighted limits and colimits before
 returning to directed geometry through join. [Appendix G](#appendix-formal-presentation)
-then states how the mathematical surface, checked categorical kernel, optional
-future elaborator, and external models fit together.
+then states how the mathematical surface, checked categorical kernel, bounded
+TypeScript elaborator through explicit Core, and external models fit together,
+with the Lambdapi kernel remaining the mathematical authority.
 
 The book is evidence-aware without being a source-code catalogue. Checked
 claims name their evidence in compact notes. Free mathematical development is

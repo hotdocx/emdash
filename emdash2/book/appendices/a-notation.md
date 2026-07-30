@@ -36,6 +36,26 @@ syntax.
 | $\operatorname{Cocone}_W(F)$ | the opposite-dual weighted-cocone profunctor | `WeightedCocone_prof F W` |
 | $A\star B$ | directed join with left-to-right cross arrows | `Join_cat A B` |
 
+The bounded executable text bridge uses four intrinsic categorical lambda
+modes:
+
+```text
+λ^f  x : A. ...
+λ^n  k : K. ...
+λ^fd a : E. ...
+λ^nd k : K. ...
+```
+
+The superscript belongs to the lambda: it specifies ordinary functorial,
+natural/indexed, displayed-functorial, or displayed-natural variation. The
+classifier annotation after the variable may be omitted when an expected
+classifier supplies it bidirectionally, but the binder mode itself is not
+inferred from that annotation. Thus the book's mathematical telescope
+declaration $k:^{n}K$ corresponds to binding with `λ^n k : K. ...`; the two
+notations have the same mode reading without being character-for-character
+surface syntax. Ordinary object binding in the outer logical framework uses
+its ordinary dependent lambda rather than a categorical `^o` mode.
+
 Composition is written in diagrammatic reading order as $g\circ f$: first
 $f$, then $g$. For the concrete model $\mathsf{BNat}$, this agrees with the
 implemented convention $g\circ f=g+f$, where Nat addition recurses in its
@@ -58,5 +78,8 @@ must not be confused with a directed hom-category. In particular, the objects
 of $H_x$ are arrows of $W$, whereas arrows of $H_x$ are directed
 2-cells between those arrows.
 
-> **Formal status — mathematical development.** No notation in this appendix
-> is automatically implemented parser syntax.
+> **Formal status — mathematical development with a checked executable
+> subset.** The four categorical binder spellings, neutral application, and
+> selected structural forms are implemented only for the reviewed profiles.
+> The rest of the appendix remains mathematical notation, not an assertion
+> that the complete book grammar is parsed.

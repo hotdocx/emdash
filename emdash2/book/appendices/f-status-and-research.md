@@ -12,7 +12,7 @@ claim-by-claim authority.
 | --- | --- | --- |
 | Equality-local type theory | Equality induction, path action, Sigma/Pi path interfaces, elementary inductives | No claim of a complete standalone HoTT implementation |
 | Directed categories | Iterated homs, identities, composition, functors, transfors, opposites, products | No complete weak omega-category metatheory or model theorem |
-| Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action | Whole-square laxity facade remains deferred where it would duplicate the internal owner |
+| Directed families | Fibres, transport, family morphisms, Sigma totals, Pi sections, displayed hom action, fixed-base fibrewise products, asymmetric pullback totalization, and constant-domain displayed evaluation | Arbitrary displayed telescope depth, mixed-domain evaluation, and exchange across genuine dependency remain open |
 | Cut and transfor calculus | Lower-star postcomposition, upper-star precomposition, off-diagonal `tapp1`, horizontal composition, selected universal beta/eta cuts | No unrestricted runtime associativity rewrite or claim that all higher coherence is judgmental |
 | Equivalence and univalence | `TypeEquiv`, groupoid univalence, truncated-universe univalence, native recursive omega-equivalence facade and one-way hom action | No full general object-equality/ordinary-isomorphism equivalence for arbitrary categories |
 | Induction | Nat and equality induction, fixed/varying-source `PathOut` induction, composition benchmark | No general equivalence with homotopy-initial categorical algebras |
@@ -27,7 +27,7 @@ claim-by-claim authority.
 | Structure identity and saturation | Truncation/evidence-property footholds and ordinary-isomorphism lift | Generic native structure identity and Rezk completion, including their higher universal properties, are research boundaries |
 | Weighted limits and Kan interfaces | Weighted representability, beta/eta comparison, right-adjoint preservation, terminal/conjoint specializations | Standard end formulas, pointwise Kan semantics, existence, and general dependent adjunctions are not globally packaged |
 | Weighted colimits and join | Opposite-dual colimit preservation, terminal/companion specializations, primitive join recursor and three beta observations | General coend semantics and join-as-collage mapping, hom-decomposition, opposite, and dependent-elimination theorems remain open |
-| Formal presentation | Checked categorical owners and representative rule families; explicit mathematical-to-Lambdapi correspondence | No complete surface parser/compiler and no claim that readable notation is a second kernel |
+| Formal presentation | Checked categorical owners; a bounded TypeScript outer LF, explicit Core, contextual elaborator, checker/runtime, and reviewed text subset | No compiler for the complete book surface, arbitrary displayed coherence, or whole-library transfer; readable notation is not a second kernel |
 | Metatheory and models | Bounded typechecking, subject-reduction checks performed by Lambdapi, focused diagnostics, and the concrete BNat model | No global confluence, normalization, canonicity, decidability, consistency, or semantic-soundness theorem for the full combined calculus |
 | Production artifact | Manifest assembly, provenance/evidence checks, local assets, bounded browser validation, and deterministic PDF export | External mathematical peer review and a non-draft public edition remain future release work |
 
@@ -93,11 +93,22 @@ weaker operational theorem, and interpretation in a suitable strict/lax
 omega-categorical model. The current executable artifact is evidence for
 specific interfaces, not a substitute for that theorem.
 
-The canonical mathematical surface should eventually elaborate to those
-interfaces, but that is a separate engineering project. The historical parent
-TypeScript parser remains read-only feasibility evidence and is neither an
-authority nor a dependency of this book. A renewed elaborator needs its own
-RFC against the current surface contract and stable kernel owners.
+The renewed TypeScript product now elaborates a bounded direct-TypeScript and
+categorical-text surface into backend-neutral explicit Core, then checks and
+reduces that Core with a small dependent logical framework. Its contextual
+categorical layer covers reviewed ordinary, natural, displayed-functorial,
+and displayed-natural binders, including one mixed dependent telescope. An
+optional deterministic Lambdapi path remains a conformance oracle; it is not
+a production dependency, and the active Lambdapi development remains the
+mathematical authority.
+
+This is a real executable bridge, but not completion of the canonical
+mathematical surface. Arbitrary displayed coherence, unrestricted telescope
+depth and variance, a compiler for the whole book notation, and systematic
+transfer of the remaining library are still engineering boundaries. The
+older TypeScript prototype remains historical feasibility evidence; its
+stale category-specific layer is neither an authority nor the architecture
+of the renewed product.
 
 On the engineering side, a physical split of `emdash3_2.lp` remains
 optional. It should begin only when a measured dependency or evidence-ownership

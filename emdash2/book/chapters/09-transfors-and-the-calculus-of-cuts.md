@@ -389,6 +389,61 @@ available.
 > the desired general architecture, not an assertion that arbitrary
 > object-level products in every $K$ are already implemented.
 
+### 9.4.4 Fibred Structural Cuts
+
+The same introduction/elimination pattern appears in a dependent categorical
+context. Let $B,C:K\vdash\mathsf{Cat}$ be independent families over one base,
+and let $P(B,C)$ be their fibrewise product. For displayed functors
+
+$$
+\Phi:E\Longrightarrow B,
+\qquad
+\Psi:E\Longrightarrow C,
+$$
+
+pairing introduces a map
+$\mathsf{pair}_d(\Phi,\Psi):E\Longrightarrow P(B,C)$, while the two displayed
+projections eliminate it. Their structural cuts are whole displayed-functor
+reductions:
+
+$$
+\mathsf{projL}_d\circ\mathsf{pair}_d(\Phi,\Psi)
+\rightsquigarrow\Phi,
+\qquad
+\mathsf{projR}_d\circ\mathsf{pair}_d(\Phi,\Psi)
+\rightsquigarrow\Psi.
+$$
+
+These equations say more than pointwise product beta. At an object $k:K$,
+pairing is the ordinary product pairing in the fibre. Over a base arrow
+$p:k\to l$, its action is the pair of the two displayed actions over the
+same $p$. Its canonical internalized cell at a fibre object $u$ is likewise
+componentwise:
+
+$$
+\mathsf{cell}\bigl(\mathsf{pair}_d(\Phi,\Psi),p,u\bigr)
+=
+\bigl(
+  \mathsf{cell}(\Phi,p,u),
+  \mathsf{cell}(\Psi,p,u)
+\bigr).
+$$
+
+Thus the elimination cuts remain valid while object action, base-arrow
+action, and the selected next-cell observation stay internally functorial.
+This is the structural calculus of independent siblings
+$k:K,b:B[k],c:C[k]$; it does not exchange a variable with another whose
+classifier depends on it.
+
+<!-- evidence:CAT-FIBREWISE-CONTEXT -->
+
+> **Formal status — checked.** Evidence `CAT-FIBREWISE-CONTEXT` covers the
+> fixed-base displayed projections and pairing, both whole
+> projection-after-pairing reductions, and their componentwise fibre,
+> base-arrow, internalized-cell, and selected higher observations. The
+> arbitrary-$K$ chosen-object-product interface of Examples 4 and 5 remains a
+> separate mathematical development.
+
 ## 9.5 Universal Cuts
 
 A universal property turns a family of maps into a chosen object together

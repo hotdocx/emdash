@@ -488,7 +488,7 @@ function checkExpansionContract(manifest, issues) {
   const expectedLayers = [
     'computational categorical kernel',
     'canonical mathematical surface',
-    'optional future elaborator',
+    'bounded TypeScript elaborator and explicit Core',
     'external semantic models',
   ];
   if (!Array.isArray(contract.formalLayers) ||

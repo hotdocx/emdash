@@ -363,6 +363,90 @@
         }
       ]
     },
+    "CAT-FIBREWISE-CONTEXT": {
+      "status": "checked",
+      "statement": "Fixed-base fibrewise products of displayed families have displayed projections and pairing whose fibre, base-arrow, internalized-cell, higher, and projection-after-pairing observations compute componentwise; swap and diagonal are derived from those owners.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Product_projL_funcd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Product_projR_funcd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Product_pair_funcd"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Product_projL_funcd_higher_check"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Product_projR_funcd_higher_check"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Product_pair_funcd_higher_check"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "The canonical internalized cell of displayed pairing is componentwise."
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Whole displayed universal-property betas."
+        }
+      ]
+    },
+    "CAT-BASE-CHANGE-TOTALIZATION": {
+      "status": "checked",
+      "statement": "Pullback totalization sends a base-changed dependent pair `(a,u)` to `(F[a],u)` and sends its total arrow by the functorial base action while retaining the fibre component.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "sigma_pullback_total_func"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Pullback totalization exposes exactly its base-changed dependent pair."
+        }
+      ]
+    },
+    "CAT-DISPLAYED-EVALUATION": {
+      "status": "checked",
+      "statement": "Constant-domain displayed evaluation projects fibrewise to ordinary functor evaluation and retains generic base/higher action, while displayed terminal weakening projects to the ordinary terminal functor.",
+      "owners": [
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Eval_funcd"
+        },
+        {
+          "file": "emdash3_2.lp",
+          "symbol": "Terminal_funcd"
+        }
+      ],
+      "reviewers": [
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "The stable displayed evaluator projects to ordinary product evaluation."
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "symbol": "Displayed_eval_higher_check"
+        },
+        {
+          "file": "emdash3_2_checks.lp",
+          "contains": "Displayed terminal weakening projects to the ordinary unique functor."
+        }
+      ]
+    },
     "CAT-REPRESENTABLE": {
       "status": "checked",
       "statement": "The fixed-source representable family has fibre Hom(x,y), and its source action is precomposition.",
@@ -2044,7 +2128,7 @@
     },
     "FORMAL-ELABORATION-BOUNDARY": {
       "status": "research-boundary",
-      "statement": "The canonical mathematical surface has no current production parser and end-to-end compiler to the active Lambdapi owners; the parent TypeScript prototype is read-only feasibility evidence and is absent from the book build graph.",
+      "statement": "The renewed TypeScript product implements a bounded direct-TypeScript and categorical-text path through scoped contextual elaboration, backend-neutral explicit Core, and a generic checker/evaluator, with optional Lambdapi conformance. A complete compiler for the book's canonical surface, arbitrary displayed coherence, and whole-library transfer are not claimed.",
       "owners": [],
       "reviewers": []
     },

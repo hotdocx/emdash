@@ -673,8 +673,19 @@ TypeScript construction, reports `exchange-functor-abstraction`, and is
 reachable through the root `reviewer:dev` command. Its focused 12/12 affected
 tests, root typecheck/lint, and browser fixture typecheck/build pass. No
 aggregate, kernel, parser/checker, Core-owner, or Lambdapi behavior changed.
-The next row is `BOOK-PROSE-1A`, editing only the ten frozen
-authored/structured book authorities before the separate artifact gate.
+`BOOK-PROSE-1A` is now final source-green with its local checkpoint pending.
+The exact ten authored/structured sources form the `0.3.0-dev` edition and
+add the reviewed fibrewise-context, base-change/evaluation, fibred-cut,
+binder-notation, TypeScript-architecture, and evidence narrative without
+turning the book into a developer ledger. Assembly, all 110 cited evidence
+claims, typography, 1,317 KaTeX spans, source contracts, and paper validation
+pass. A measured stale validator literal required the one-line D002
+correction proposed at
+`21b5ebdbb9d82ba8d9139319aaa2ae1f8f96f881` and separately approved with
+human supersession at
+`1dee8fe414b63973e5f848936ae6d3c9d2319b35`. No PDF, renderer build, kernel,
+TypeScript aggregate, or publication ran. `BOOK-ARTIFACT-1B` is the next row
+after the authored-edition checkpoint.
 The plan then updates the book as theorem-led mathematical prose rather than
 a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.

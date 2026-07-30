@@ -12,17 +12,26 @@ universals, duality, and join in Chapters [16](#chapter-16)–[17](#chapter-17).
 The [contents](#contents) and [glossary/index](#appendix-glossary) provide
 stable anchor-based navigation.
 
-Three reading paths make the dependencies explicit:
+Four reading paths make the dependencies explicit:
 
 | Reader | Main path | Consult when needed |
 | --- | --- | --- |
 | type theorist | Prologue; Chapters 1, 3–8, 10, and 15 | Chapters 2 and 9 for directed action; Appendix G for the formal presentation |
 | category theorist | Prologue; Chapters 2, 5, and 8–17 | Chapters 1, 3, 4, and 7 for equality, propositions, univalence, and height |
 | implementer | Chapters 1, 2, 6, 8, and 9; Appendices A, B, E, F, and G | the theorem chapters whose evidence route is being inspected |
+| external reviewer | Chapters 2.6, 8, and 9; then the integrated reviewer | Appendices A, B, F, and G for notation, evidence, status, and architecture |
 
 These are paths through one dependency graph, not separate foundations. In
 particular, the category-theory route still uses equality-local reasoning, and
 the type-theory route still needs directed functor action.
+
+For the executable-review path, run
+`./scripts/pnpmw run reviewer:dev` from the repository root. The client lets
+the reader edit a reviewed categorical expression, inspect its explicit Core
+and checked classifier, run the three-part research report, and open this
+book. Its text notation is a bounded executable subset. The mathematical
+notation used throughout the book is intentionally broader and should not be
+read as a complete parser grammar.
 
 Composition is written in categorical order:
 

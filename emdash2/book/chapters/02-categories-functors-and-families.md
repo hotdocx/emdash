@@ -319,6 +319,151 @@ a constant family is precisely a functorial choice varying over `K`.
 > evaluation. Some broader Sigma/Pi adjunctions and generic section-total
 > packaging remain future work; they are not prerequisites for Chapter 8.
 
+### 2.6.1 Fibrewise Contexts
+
+Totals make genuine dependence visible, but not every pair of declarations
+over a base depends on one another. Let
+$B,C:K\vdash\mathsf{Cat}$ be two families over the same category. Their
+fibrewise product is the transparent family
+
+$$
+P(B,C)[k]:=B[k]\times C[k],
+\qquad
+P(B,C)[p]:=B[p]\times C[p].
+$$
+
+The second formula uses the same base arrow $p$ in both components. It is the
+action required by a context of independent siblings
+
+$$
+k:K,\qquad b:B[k],\qquad c:C[k].
+$$
+
+This differs from a genuinely dependent context
+
+$$
+k:K,\qquad a:A[k],\qquad b:B[k,a].
+$$
+
+In the first context, $b$ and $c$ may be projected, paired, exchanged, or
+contracted while the common prefix $k$ is fixed. In the second, exchanging
+$a$ and $b$ without transporting the classifier of $b$ is generally
+ill-typed.
+
+The fixed-base structural maps are
+
+$$
+\begin{aligned}
+\mathsf{projL}_d(B,C)&:P(B,C)\Longrightarrow B,\\
+\mathsf{projR}_d(B,C)&:P(B,C)\Longrightarrow C,\\
+\mathsf{pair}_d(\Phi,\Psi)&:E\Longrightarrow P(B,C),
+\end{aligned}
+$$
+
+where $\Phi:E\Longrightarrow B$ and $\Psi:E\Longrightarrow C$. They satisfy
+the displayed product cuts
+
+$$
+\mathsf{projL}_d\circ\mathsf{pair}_d(\Phi,\Psi)
+\rightsquigarrow\Phi,
+\qquad
+\mathsf{projR}_d\circ\mathsf{pair}_d(\Phi,\Psi)
+\rightsquigarrow\Psi.
+$$
+
+Their fibre functors, base-arrow actions, and selected internalized higher
+cells compute componentwise. Exchange and contraction are consequently
+derived maps:
+
+$$
+\begin{aligned}
+\mathsf{swap}_d(B,C)
+  &:=\mathsf{pair}_d(\mathsf{projR}_d,\mathsf{projL}_d),\\
+\mathsf{diag}_d(B)
+  &:=\mathsf{pair}_d(\mathsf{id}_d,\mathsf{id}_d).
+\end{aligned}
+$$
+
+The family $P(B,C)$ is built from ordinary categorical product functoriality;
+it is not a new primitive family former. Reindexing a grouped context is
+presented canonically by reindexing its two families and rebuilding their
+fibrewise product.
+
+<!-- evidence:CAT-FIBREWISE-CONTEXT -->
+
+> **Formal status — checked.** Evidence `CAT-FIBREWISE-CONTEXT` covers the
+> transparent fibrewise family, its displayed projections and pairing,
+> componentwise object, arrow, and selected higher action, the two product
+> cuts, and the derived swap and diagonal. It does not license exchange
+> across a genuine dependency edge.
+
+### 2.6.2 Base Change And Evaluation
+
+A functor $F:A\vdash K$ can change the base of a family
+$D:K\vdash\mathsf{Cat}$. The pulled-back family $F^*D$ has fibre
+$(F^*D)[a]=D[F[a]]$. Its total category carries a canonical functor
+
+$$
+\mathsf{Tot}(F,D):
+\sum_{a:A}(F^*D)[a]\longrightarrow\sum_{k:K}D[k]
+$$
+
+with computations
+
+$$
+(a,u)\longmapsto(F[a],u),
+\qquad
+(p,\alpha)\longmapsto(F[p],\alpha).
+$$
+
+The base component is acted on by $F$, while the fibre component is retained.
+This is the asymmetric Grothendieck totalization of family reindexing. It is
+not a claim that arbitrary functors between total categories admit a
+computational pullback.
+
+The same fibrewise structure supports coherent evaluation. Fix an ordinary
+category $A$ and a family $B:K\vdash\mathsf{Cat}$, and write
+
+$$
+S(A,B)[k]:=\operatorname{Functor}(A,B[k]).
+$$
+
+Then
+
+$$
+\mathsf{Eval}_d(B):
+P\bigl(S(A,B),\mathsf{Const}_K(A)\bigr)\Longrightarrow B
+$$
+
+projects in each fibre to ordinary functor evaluation:
+
+$$
+\mathsf{Eval}_d(B)[k]=\mathsf{Eval}(A,B[k]).
+$$
+
+Weakening is supplied by the displayed terminal map
+
+$$
+\mathsf{Terminal}_d(E):
+E\Longrightarrow\mathsf{Const}_K(1).
+$$
+
+Composing it with a constant section yields a fixed argument. Pairing that
+argument with a varying functor and applying $\mathsf{Eval}_d$ therefore
+interprets application without asking the user to supply a separate
+naturality square. Base-arrow and higher action are inherited from the
+internal functorial calculus.
+
+<!-- evidence:CAT-BASE-CHANGE-TOTALIZATION -->
+<!-- evidence:CAT-DISPLAYED-EVALUATION -->
+
+> **Formal status — checked.** Evidence
+> `CAT-BASE-CHANGE-TOTALIZATION` covers the object and arrow action of
+> asymmetric pullback totalization. Evidence `CAT-DISPLAYED-EVALUATION`
+> covers constant-domain displayed evaluation, terminal weakening, and their
+> retained generic base and higher action. Arbitrary mixed-domain evaluation
+> remains outside this result.
+
 <a id="chapter-2-7"></a>
 
 ## 2.7 Representables And Variance
