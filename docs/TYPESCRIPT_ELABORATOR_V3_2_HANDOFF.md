@@ -581,8 +581,9 @@ zero-behavior 1C2B audit selects exactly `fullAction FF x y`,
 `internalHomAction FF GG` as routes to four existing typed first-class
 terms. It proves that `FF p u` remains an object while `cell FF p u` is an
 internalized Hom, and retains all subsequent action as generic `apply`.
-Its deeply frozen D007 proposal awaits separate exact review; 1C2B behavior
-and 1C3 remain unauthorized.
+Its deeply frozen D007 proposal is checkpointed at
+`d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9` and awaits separate exact
+review; 1C2B behavior and 1C3 remain unauthorized.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

@@ -48,8 +48,9 @@ D006 review now approves exactly that 1C2A proposal with human supersession;
 the bounded 1C2A implementation is final-green at exact local checkpoint
 `c1bd21eec9456a3600e22b1ef0dc8084958fd123`; the zero-behavior 1C2B
 whole/higher-action audit is focused-green with a deeply frozen
-non-self-authorizing D007 proposal awaiting its exact separate review; no
-1C2B or 1C3 behavior is authorized.
+non-self-authorizing D007 proposal checkpointed at
+`d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9` and awaiting its exact separate
+review; no 1C2B or 1C3 behavior is authorized.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1088,6 +1089,8 @@ expected-action table, external naturality evidence, parser dependency,
 Lambdapi declaration/rule/profile/input, browser preset, 1C3 result syntax,
 book prose, scale row, or publication. Its focused executable audit passes
 4/4; root typecheck and lint and the bounded active-kernel check pass.
+Exact local audit/proposal checkpoint:
+`d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`.
 
 The exact separate gate is:
 
@@ -1207,7 +1210,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C1 | **final-green at `be437f3a7d64a6a554578036f76621322d5626fc`** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality, recursive constructor/application spines, exact negatives, 71/71 affected/audit tests, and green browser packaging |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-06 / D-DTTLF-PRODUCT-SYNTAX-PARITY-006 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C2 audit/proposal at `20093b71e3802c3d2b7cbf20670862a58a71b653` | Authorizes only twelve frozen 1C2A displayed structural/comprehension term heads over existing typed methods |
 | SYNTAX-PARITY-1C2A | **final-green at `c1bd21eec9456a3600e22b1ef0dc8084958fd123`; audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Twelve mechanical displayed structural/comprehension heads, recursive term operands, checked family identifiers, exact direct equality/negatives, 82/82 text family, 8/8 reviewer, and green browser packaging |
-| SYNTAX-PARITY-1C2B | **focused-green zero-behavior audit; deeply frozen D007 proposal awaiting separate exact review** | final-green 1C2A | Four exact mathematical heads for existing whole/higher internalized actions; generic component/point and subsequent application retained; no behavior authorized yet |
+| SYNTAX-PARITY-1C2B | **focused-green zero-behavior audit and deeply frozen D007 proposal at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`; awaiting separate exact review** | final-green 1C2A | Four exact mathematical heads for existing whole/higher internalized actions; generic component/point and subsequent application retained; no behavior authorized yet |
 | SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
@@ -1298,7 +1301,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   selects only `fullAction`, `cell`, `naturality`, and
   `internalHomAction`. Four focused tests, typecheck/lint, and the bounded
   active-kernel check pass with zero behavior delta; implementation awaits a
-  separate exact review.
+  separate exact review. Exact audit/proposal checkpoint:
+  `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`.
 - **2026-07-30 — `SYNTAX-PARITY-1C2A` implemented and final-green.** Added
   only the twelve reviewed displayed structural/comprehension heads through
   existing typed program methods and one checked family-identifier helper.

@@ -3459,9 +3459,10 @@ green browser packaging. It adds no scale owner, profile, transfer input, or
 Lambdapi change. The 1C2A structural/comprehension syntax is likewise
 final-green at `c1bd21eec9456a3600e22b1ef0dc8084958fd123`. The following
 focused-green 1C2B zero-behavior audit selects four existing whole/higher
-internalized-action terms and awaits its exact separate D007 review. It adds
-no scale owner, profile, transfer input, or Lambdapi change. 1C2 remains
-product work, not resumed scale work.
+internalized-action terms, is checkpointed at
+`d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`, and awaits its exact separate
+D007 review. It adds no scale owner, profile, transfer input, or Lambdapi
+change. 1C2 remains product work, not resumed scale work.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
