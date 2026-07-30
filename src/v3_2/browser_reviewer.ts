@@ -28,10 +28,11 @@ import {
 } from './product_review_demo';
 
 export const CORE_BROWSER_REVIEWER_REVISION =
-    'SYNTAX-PARITY-1B3-BROWSER-REVIEWER-1' as const;
+    'BOOK-REVIEWER-BRIDGE-1A-BROWSER-REVIEWER-1' as const;
 
 export type CoreBrowserReviewerPresetId =
     | 'pointwise-application'
+    | 'nested-exchange'
     | 'fixed-inner-evaluation'
     | 'whole-hom-action'
     | 'indexed-section-composition'
@@ -46,7 +47,7 @@ export type CoreBrowserReviewerExpectedMode =
         readonly kind: 'ordinary-functor';
         readonly binderMode: 'f';
         readonly source: 'A';
-        readonly target: 'C';
+        readonly target: 'C' | 'Functor(B,C)';
     }
     | {
         readonly kind: 'term';
@@ -184,6 +185,24 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
             'A, B, C : Cat',
             'H : Functor A (Functor_cat B C)',
             'K : Functor A B'
+        ]
+    },
+    {
+        id: 'nested-exchange',
+        label: 'Nested functorial exchange',
+        source: 'λ^f x : A. λ^f y : B. E y x',
+        description:
+            'Nested functorial binders lower through the reviewed ' +
+            'exchange and currying construction.',
+        expectedMode: {
+            kind: 'ordinary-functor',
+            binderMode: 'f',
+            source: 'A',
+            target: 'Functor(B,C)'
+        },
+        assumptions: [
+            'A, B, C : Cat',
+            'E : Functor B (Functor_cat A C)'
         ]
     },
     {
@@ -364,14 +383,14 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
         'optional Node-side Lambdapi conformance oracle'
     ],
     supported: [
-        'nine categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'ten categorical text presets across ^f, ^n, ^fd, and ^nd',
         'edited categorical text with source diagnostics',
         'existing outer-LF, ordinary, and displayed three-panel report',
         'generated emdash book',
         'preserved minimal explicit-Core playground'
     ],
     deferred: [
-        'nested and arbitrary-depth categorical text',
+        'arbitrary-depth categorical text beyond the reviewed nested preset',
         'remaining displayed context and structural-constructor syntax',
         'arbitrary displayed telescope depth',
         'browser-side source acquisition',
@@ -436,6 +455,7 @@ const createFixture = (
 ): CoreBrowserReviewerFixture => {
     if (
         presetId === 'pointwise-application' ||
+        presetId === 'nested-exchange' ||
         presetId === 'fixed-inner-evaluation' ||
         presetId === 'whole-hom-action'
     ) {
@@ -444,8 +464,10 @@ const createFixture = (
         const B = program.category('review_B');
         const C = program.category('review_C');
         const functorsBC = program.functorCategory(B, C);
+        const functorsAC = program.functorCategory(A, C);
         const H = program.functor('review_H', A, functorsBC);
         const K = program.functor('review_K', A, B);
+        const E = program.functor('review_E', B, functorsAC);
         const F = program.functor('review_F', A, functorsBC);
         const G = program.functor('review_G', A, B);
         const y0 = program.object('review_y0', B);
@@ -460,21 +482,34 @@ const createFixture = (
                 categoryBinding('C', C),
                 termBinding('H', H),
                 termBinding('K', K),
+                termBinding('E', E),
                 termBinding('F', F),
                 termBinding('G', G),
                 termBinding('y0', y0),
                 boundaryBinding('pA', pA)
             ]),
-            expected: presetId === 'whole-hom-action'
-                ? {
-                    kind: 'term' as const,
-                    applicationShape: 'whole-hom-action' as const
-                }
-                : {
-                    kind: 'ordinary-functor' as const,
-                    source: A,
-                    target: C
-                }
+            expected:
+                presetId === 'whole-hom-action'
+                    ? {
+                        kind: 'term' as const,
+                        applicationShape: 'whole-hom-action' as const
+                    }
+                    : presetId === 'nested-exchange'
+                        ? {
+                            kind: 'ordinary-functor' as const,
+                            source: A,
+                            target: functorsBC,
+                            bodyExpected: {
+                                kind: 'ordinary-functor' as const,
+                                source: B,
+                                target: C
+                            }
+                        }
+                        : {
+                            kind: 'ordinary-functor' as const,
+                            source: A,
+                            target: C
+                        }
         });
     }
 

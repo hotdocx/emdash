@@ -38,6 +38,7 @@
     "demo:categorical-displayed-nd-higher": "node --require ts-node/register examples/v3_2_categorical_displayed_nd_higher_demo.ts",
     "demo:categorical-text": "node --require ts-node/register examples/v3_2_categorical_text_demo.ts",
     "demo:external-review": "node --require ts-node/register examples/v3_2_product_review_demo.ts",
+    "reviewer:dev": "./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite",
     "check:browser-reviewer": "./scripts/pnpmw run typecheck && ./scripts/pnpmw run lint && ./scripts/pnpmw --dir emdash-template --ignore-workspace run check",
     "check:browser-directed": "./scripts/pnpmw run typecheck && ./scripts/pnpmw run lint && ./scripts/pnpmw --dir emdash-template --ignore-workspace run check",
     "check:scale-inventory": "timeout 60s env EMDASH_RUN_LAMBDAPI_SCALE_PROBES=1 node --require ts-node/register --test tests/v3_2_lambdapi_export_inventory_tests.ts tests/v3_2_lf_transfer_acquisition_tests.ts",

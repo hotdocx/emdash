@@ -48,6 +48,7 @@ const directCompilation = (
 ): CoreCategoricalProgramCompilation => {
     switch (presetId) {
         case 'pointwise-application':
+        case 'nested-exchange':
         case 'fixed-inner-evaluation':
         case 'whole-hom-action': {
             const program = new CoreCategoricalProgram({
@@ -57,8 +58,10 @@ const directCompilation = (
             const B = program.category('review_B');
             const C = program.category('review_C');
             const functorsBC = program.functorCategory(B, C);
+            const functorsAC = program.functorCategory(A, C);
             const H = program.functor('review_H', A, functorsBC);
             const K = program.functor('review_K', A, B);
+            const E = program.functor('review_E', B, functorsAC);
             const F = program.functor('review_F', A, functorsBC);
             const G = program.functor('review_G', A, B);
             const y0 = program.object('review_y0', B);
@@ -73,6 +76,22 @@ const directCompilation = (
                     x => program.apply(
                         program.apply(H, x),
                         program.apply(K, x)
+                    )
+                ));
+            }
+            if (presetId === 'nested-exchange') {
+                return program.compile(program.lambda(
+                    'x',
+                    A,
+                    functorsBC,
+                    x => program.lambda(
+                        'y',
+                        B,
+                        C,
+                        y => program.apply(
+                            program.apply(E, y),
+                            x
+                        )
                     )
                 ));
             }
@@ -374,6 +393,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
             CORE_BROWSER_REVIEWER_PRESETS.map(preset => preset.id),
             [
                 'pointwise-application',
+                'nested-exchange',
                 'fixed-inner-evaluation',
                 'whole-hom-action',
                 'indexed-section-composition',
@@ -407,6 +427,18 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
             );
             assert.equal(result.productionLambdapiDependency, false);
             assertDeepFrozen(result);
+        }
+        const nested = runCoreBrowserReviewerText({
+            presetId: 'nested-exchange',
+            source: 'λ^f x : A. λ^f y : B. E y x'
+        });
+        assert.equal(nested.status, 'accepted');
+        if (nested.status === 'accepted') {
+            assert.ok(
+                nested.structuralPrerequisites.includes(
+                    'exchange-functor-abstraction'
+                )
+            );
         }
     });
 
@@ -452,7 +484,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
     it('publishes the exact deeply frozen capability boundary', () => {
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.revision,
-            'SYNTAX-PARITY-1B3-BROWSER-REVIEWER-1'
+            'BOOK-REVIEWER-BRIDGE-1A-BROWSER-REVIEWER-1'
         );
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
@@ -465,7 +497,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.ok(
             CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
-                'nine categorical text presets across ^f, ^n, ^fd, and ^nd'
+                'ten categorical text presets across ^f, ^n, ^fd, and ^nd'
             )
         );
         assert.ok(

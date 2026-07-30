@@ -13,8 +13,10 @@ Integrated implementation: green in the current reviewed tranche
 The TypeScript implementation now exposes one integrated external-reviewer
 workbench over the existing checker/evaluator architecture:
 
-1. an editable categorical expression view with nine presets:
+1. an editable categorical expression view with ten presets:
    - recursive pointwise application `λ^f x. (H x) (K x)`;
+   - nested functorial exchange
+     `λ^f x : A. λ^f y : B. E y x`;
    - fixed-inner evaluation `λ^f x. F x y0`;
    - expected-type-directed whole-Hom action `G pA`;
    - natural indexed composition `λ^n k : K. (FF k) (s k)`;
@@ -56,6 +58,7 @@ and exact boundary are in
 
 | Command | Input and result | Exact boundary |
 | --- | --- | --- |
+| `./scripts/pnpmw run reviewer:dev` | Starts the integrated reviewer locally with Vite | Client-side development server; no backend or deployment |
 | `./scripts/pnpmw run check:browser-reviewer` | Typechecks, lints, and builds the integrated static workbench | Primary reviewer product; deployment remains separate |
 | `./scripts/pnpmw run demo:external-review` | Fixed direct-TypeScript outer LF, ordinary categorical, and genuine displayed-chain report | Most complete semantic demonstration; not editable text |
 | `./scripts/pnpmw run demo:categorical-text` | The original ordinary CLI examples such as `λ^f x. (H x) (K x)` checked into explicit Core | The integrated browser additionally exposes reviewed `^n`, `^fd`, and `^nd` text presets |
@@ -67,7 +70,7 @@ and exact boundary are in
 Start the local reviewer workbench from the repository root:
 
 ```bash
-./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite
+./scripts/pnpmw run reviewer:dev
 ```
 
 Then open the URL printed by Vite. The intended review path is:
@@ -330,8 +333,8 @@ Current selected product evidence:
   `487ed014c210ab8426b27c40241b2de0f2f1dc4e` /
   `981730d` /
   `be437f3a7d64a6a554578036f76621322d5626fc`;
-- focused integrated reviewer test: eight checks, eight passes, zero
-  failures, including direct-TypeScript equality for all nine presets;
+- focused integrated reviewer coverage includes direct-TypeScript equality
+  for all ten presets;
 - focused independent-sibling implementation corpus: six checks, six passes,
   zero failures;
 - focused dependent-context text corpus: seven checks, seven passes, zero
