@@ -411,11 +411,14 @@ implementation is yet selected. With the directed browser slice complete,
 the dedicated syntax plan now freezes the exact
 H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001
 SYNTAX-RESOLVE-0B contract, now separately approved with human supersession.
-SYNTAX-PARSER-0C is the active disposable Parsimmon-versus-small-parser
-comparison, followed by a separate implementation review; the selected
-parser, located nodes, recursive resolver, tests, and executable example must
-land together as one editable-input slice. No unused second AST/resolver may
-be committed on its own.
+SYNTAX-PARSER-0C is now complete: both alternatives parsed the same corpus and
+browser-built, while the selected tiny parser avoids dependency/type/lock
+changes and emitted 856 bytes gzip versus Parsimmon's 7,094 bytes. The
+dedicated plan freezes H-DTTLF-PRODUCT-SYNTAX-02 /
+D-DTTLF-PRODUCT-SYNTAX-002 as the next exact implementation proposal. The
+parser, private located nodes, recursive resolver, tests, and executable
+example must land together as one editable-input slice. No unused second
+AST/resolver may be committed on its own.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark

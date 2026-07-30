@@ -3341,9 +3341,11 @@ publication, and parser/resolver implementation gated by their own rows. The
 next product boundary is the frozen
 H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001
 SYNTAX-RESOLVE-0B contract, now separately approved with human supersession.
-The active SYNTAX-PARSER-0C row authorizes only disposable parser comparison;
-parser selection and the integrated parser/resolver/example remain a separate
-review, and no standalone second AST may land.
+SYNTAX-PARSER-0C is complete and selects the dependency-free tiny parser from
+measured equivalent syntax/failure behavior and smaller/no-lock browser cost.
+The frozen H-DTTLF-PRODUCT-SYNTAX-02 /
+D-DTTLF-PRODUCT-SYNTAX-002 integrated parser/resolver/example remains a
+separate review, and no standalone second AST may land.
 When those living plans route back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending
@@ -3961,3 +3963,12 @@ scope is affected.
   executable example must land together after disposable parser comparison
   and a separate implementation review. No parser, dependency, code,
   browser, semantic, or Lambdapi effect is part of the proposal.
+- **2026-07-29 — SYNTAX-PARSER-0C completed.** Disposable Parsimmon and
+  dependency-free recursive-descent parsers produced equivalent parse and
+  failure positions and both browser-built. Selected the tiny parser for its
+  zero package/type/lock impact, 856-byte gzip bundle versus 7,094 bytes, and
+  direct diagnostic control. Froze H-DTTLF-PRODUCT-SYNTAX-02 /
+  D-DTTLF-PRODUCT-SYNTAX-002 for a single integrated
+  parser/private-located-node/resolver/test/example implementation. No
+  production code, dependency, browser, semantic, or Lambdapi effect has
+  occurred.

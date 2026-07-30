@@ -14,9 +14,10 @@ Status: active design subplan; SYNTAX-0A architecture audit complete;
 the selected browser-directed product slice is complete and
 SYNTAX-RESOLVE-0B is approved exactly as proposed under
 D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; SYNTAX-PARSER-0C is the
-active comparison row; no located tree or resolver may land as unused runtime
-infrastructure before the selected parser joins it in one separately reviewed
-user-visible vertical slice
+completed measurement; the dependency-free tiny parser is selected in the
+frozen H-DTTLF-PRODUCT-SYNTAX-02 implementation proposal, which remains gated
+behind D-DTTLF-PRODUCT-SYNTAX-002; no located tree or resolver may land as
+unused runtime infrastructure
 
 ## Purpose And Meaning Of Usability
 
@@ -553,6 +554,193 @@ failure diagnostics, and ease of binder-mode extension. Delete the losing
 spike before semantic checkpointing. Neither spike may implement typing, and
 neither may land without the resolver and user-visible adapter.
 
+## SYNTAX-PARSER-0C — Completed Comparison
+
+### Method
+
+Two disposable JavaScript parsers implemented the exact first-slice grammar
+outside the tracked worktree:
+
+- Parsimmon `1.18.1`, using the current documented `createLanguage`,
+  `node`, and `parse` APIs; and
+- one direct character cursor with recursive-descent lambda/application/atom
+  methods.
+
+Both received the same four valid inputs and eight invalid inputs. The valid
+corpus included Unicode and ASCII lambdas, multiline whitespace, nested
+open/open application, open/closed application, and a bare application. The
+invalid corpus covered empty input, missing binder/period/parenthesis,
+unsupported mode, trailing punctuation, and non-portable identifiers. Both
+produced the same left-associated summaries, valid one-based line/column
+ranges, and the same failure offsets. Neither prototype implemented name
+resolution or typing.
+
+Both were then bundled independently as browser ES modules with Vite
+`5.4.21`. Measurements are observations from this disposable run, not
+performance guarantees:
+
+| Measure | Parsimmon | Tiny local parser |
+| --- | ---: | ---: |
+| parser-only source | 1,657 bytes / 63 nonblank lines | 2,960 bytes / 112 nonblank lines |
+| Vite ES bundle | 24,615 bytes | 2,526 bytes |
+| gzip bundle | 7,094 bytes | 856 bytes |
+| 10,000 parses of the four-input corpus | 207.14 ms | 32.13 ms |
+| project runtime dependencies | `parsimmon` | none |
+| TypeScript support | separate `@types/parsimmon` or local declaration | native |
+
+The installed Parsimmon package itself contained five files / 56,063 bytes
+(approximately 80 KiB on disk) and no bundled `types` entry. Registry
+inspection found `parsimmon@1.18.1` and `@types/parsimmon@1.10.9` as the
+current packages. Both bundles were Node-builtin-free and browser-buildable.
+
+The timing difference is immaterial at human editor scale. The meaningful
+tradeoff is that Parsimmon expresses the grammar in roughly half the source,
+while the tiny parser avoids two package/lock concerns, produces an
+approximately eight-times-smaller gzip slice, and gives direct ownership of
+stable diagnostic codes and exact token spans. Parsimmon's `node` API is
+pleasant and remains a credible later choice if a substantially larger
+grammar makes combinators cheaper than local maintenance.
+
+Both disposable versions require one production correction: parenthesized
+nodes must explicitly extend their covered source range through the closing
+parenthesis while retaining the inner semantic node. The frozen
+implementation tests include that range and multiline end-exclusive
+positions.
+
+### Selection
+
+Select the tiny dependency-free lexer/recursive-descent parser for the first
+ordinary categorical slice. This is not a general policy against parser
+libraries. It is the lower-cost choice for the presently frozen three-node
+grammar, the static-browser product direction, and the requirement to expose
+stable source-located diagnostics without changing the lockfile.
+
+The entire temporary comparison directory and its generated package graph
+must be removed after these observations are recorded. No spike source is
+copied into production verbatim; production TypeScript is implemented under
+the exact proposal below.
+
+## SYNTAX-1A — Frozen Integrated Implementation Proposal
+
+### Decision gate
+
+`H-DTTLF-PRODUCT-SYNTAX-02 /
+D-DTTLF-PRODUCT-SYNTAX-002` proposes the following exact integrated slice.
+It is not self-authorizing merely because parser selection is complete.
+
+### Source and public API
+
+Add one Node-independent
+`src/v3_2/categorical_text.ts` module exporting:
+
+- `CORE_CATEGORICAL_TEXT_REVISION`;
+- `CoreCategoricalTextBinding`;
+- `CoreCategoricalTextExpected`;
+- `CoreCategoricalTextRequest`;
+- `CoreCategoricalTextErrorCode`;
+- `CoreCategoricalTextError`; and
+- `elaborateCoreCategoricalText`.
+
+The public request and result retain the SYNTAX-RESOLVE-0B contract. The
+located syntax union and parser class remain module-private so the repository
+does not acquire a second public term language. The implementation exports
+only the adapter's typed boundary and diagnostics.
+
+The implementation uses the existing portable identifier grammar
+`[A-Za-z][A-Za-z0-9_]*`. It accepts `λ` and `\`, recognizes a located binder
+mode token, and rejects every mode except `:^f` with a stable diagnostic.
+Whitespace application remains neutral and left-associated. Parentheses
+change association and extend source coverage but do not become a semantic
+node.
+
+The adapter:
+
+1. copies and validates the readonly host bindings into a request-local map;
+2. parses exactly one expression and consumes all input;
+3. resolves identifiers recursively, extending one lambda body with the
+   exact callback token returned by `program.lambda`;
+4. compares the annotation category with the expected source using
+   `program.compareCategories`, requiring `status: 'equal'`;
+5. calls only `program.lambda` and `program.apply` for semantic construction;
+6. forwards a term expectation's optional application shape only to the root
+   application node, never indiscriminately to nested applications; and
+7. wraps existing categorical failures without changing their code,
+   provenance, or cause.
+
+The initial resolver rejects a nested lambda with
+`UNSUPPORTED_NESTED_ABSTRACTION`; recursive expected-classifier trees remain
+a later exact design row. It also rejects categories in term positions and
+terms/boundaries in annotation positions before calling the program.
+
+The exact stable text-error code union is:
+
+```text
+UNEXPECTED_TOKEN
+UNEXPECTED_END
+INVALID_IDENTIFIER
+DUPLICATE_BINDING
+UNKNOWN_IDENTIFIER
+EXPECTED_CATEGORY
+EXPECTED_TERM
+EXPECTED_ARGUMENT
+MISSING_ABSTRACTION_EXPECTATION
+INCOMPATIBLE_ABSTRACTION_EXPECTATION
+UNSUPPORTED_BINDER_MODE
+UNSUPPORTED_NESTED_ABSTRACTION
+CATEGORICAL_REJECTION
+```
+
+Every error carries phase, code, one `SourceSpan`, detail, and optional
+underlying error. Positions are one-based and end-exclusive, including
+multiline input and zero-width parse failures at end of input.
+
+### Executable consumer and tests
+
+Add:
+
+- `examples/v3_2_categorical_text_demo.ts`;
+- package command `demo:categorical-text`;
+- `tests/v3_2_categorical_text_tests.ts`, wired into
+  `tests/main_tests.ts`; and
+- the new module in the root `src/v3_2/index.ts` development barrel.
+
+The example prints the source text, checked explicit Core, inferred type,
+structural prerequisites, equality with the direct TypeScript construction,
+and one source-located negative diagnostic. It covers at least:
+
+```text
+λ x :^f A. (H x) (K x)
+λ x :^f A. F x y0
+F p
+```
+
+Focused tests must additionally cover Unicode/ASCII equivalence, multiline
+and parenthesized spans, full-input consumption, zero/one/two binder uses,
+all frozen error codes that can arise in this slice, foreign terms, root-only
+expected-shape forwarding, exact explicit-Core equivalence, and the absence
+of Node builtin imports or project dependency/lock changes.
+
+### Exact non-effects
+
+The slice does not:
+
+- modify `CoreCategoricalProgram`, its contextual compiler, or application
+  table;
+- add a checker, Core node/owner, runtime/proof/unification rule, or semantic
+  profile;
+- add Parsimmon, `@types/parsimmon`, or any package/lock change;
+- support outer-LF or displayed/dependent text binders;
+- export the located syntax union;
+- enter `browser.ts`, `browser_directed.ts`, or the browser fixture;
+- add a GitHub Pages workflow, backend, worker, deployment, or publication;
+- change Lambdapi source or acquisition; or
+- claim general syntax, usability, browser, scale, or whole-transfer
+  graduation.
+
+After a separate approval, implementation may make one bounded green local
+checkpoint followed by a distinct ledger checkpoint under the existing Git
+authority. No broader Git operation is authorized.
+
 ## Proposed Sequence
 
 ```text
@@ -560,9 +748,10 @@ SYNTAX-0A architecture audit (complete)
   -> SYNTAX-RESOLVE-0B freeze parser-independent located nodes,
      environment, expected-classifier, and recursive resolver contract
   -> separate D-SYNTAX-001 review
-  -> SYNTAX-PARSER-0C compare Parsimmon and tiny-parser spikes
-  -> separate parser-selection review
-  -> SYNTAX-1A land selected parser + located nodes + resolver + example
+  -> SYNTAX-PARSER-0C compare Parsimmon and tiny-parser spikes (complete)
+  -> H-DTTLF-PRODUCT-SYNTAX-02 exact implementation proposal
+  -> separate D-DTTLF-PRODUCT-SYNTAX-002 review
+  -> SYNTAX-1A land tiny parser + located nodes + resolver + example
      together through existing APIs
   -> SYNTAX-BROWSER-1B optionally join it to a reviewed browser profile
   -> SYNTAX-GRADUATE-1 record the exact supported grammar/usability envelope
@@ -577,8 +766,8 @@ Node-independent, but a browser UI is a separate product boundary.
 | --- | --- | --- | --- |
 | SYNTAX-0A | complete | PRODUCT-DEMO-1B and current contextual programs | Historical parser audit, current semantic-seam inventory, resolver architecture, qualification matrix, and alternatives |
 | SYNTAX-RESOLVE-0B | approved exactly as proposed under D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; proposal checkpoint `5e33a58` | SYNTAX-0A and selected product priority | Deeply frozen parser-independent types/API/diagnostic/qualification contract; no standalone runtime AST |
-| SYNTAX-PARSER-0C | active | D-DTTLF-PRODUCT-SYNTAX-001 | Disposable Parsimmon versus tiny-parser measurement over identical syntax/span tests; no tracked losing spike |
-| SYNTAX-1A | gated | separate parser-selection/implementation review | Selected parser, located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example land as one user-visible slice |
+| SYNTAX-PARSER-0C | complete | D-DTTLF-PRODUCT-SYNTAX-001 | Parsimmon and tiny-parser parsed/rejected the same corpus; both browser-build; measurements above select the dependency-free tiny parser |
+| SYNTAX-1A | proposed as H-DTTLF-PRODUCT-SYNTAX-02 / D-DTTLF-PRODUCT-SYNTAX-002; implementation gated | separate parser-selection/implementation review | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example land as one user-visible slice |
 | SYNTAX-BROWSER-1B | deferred | reviewed parser and browser profile | Editable browser input without a second checker or server |
 | SYNTAX-GRADUATE-1 | pending | selected syntax rows | Exact grammar, binder/action matrix, diagnostics, performance observation, and deferrals |
 
@@ -661,6 +850,15 @@ broader grammar, semantic feature, dependency, browser, or Git effect.
 
 ## Change Log
 
+- **2026-07-29 — SYNTAX-PARSER-0C completed and SYNTAX-1A proposed.**
+  Disposable Parsimmon and direct recursive-descent parsers produced the same
+  syntax and failure offsets over the frozen corpus and both Vite-built for a
+  browser. Parsimmon used less source, while the tiny parser required no
+  dependencies or typings, emitted 856 bytes gzip versus 7,094 bytes, and
+  gives direct stable-diagnostic control. Selected the tiny parser for the
+  first slice and froze H-DTTLF-PRODUCT-SYNTAX-02 /
+  D-DTTLF-PRODUCT-SYNTAX-002 around one integrated parser/resolver/example
+  implementation. No production code or package change is yet authorized.
 - **2026-07-29 — D-DTTLF-PRODUCT-SYNTAX-001 recorded.** After no immediate
   objection to the exact checkpointed proposal, applied the user's standing
   unattended delegation with human supersession. The separate immutable

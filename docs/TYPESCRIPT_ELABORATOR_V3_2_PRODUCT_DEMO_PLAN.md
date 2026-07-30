@@ -21,7 +21,9 @@ product implementation, records its exact separate
 D-DTTLF-PRODUCT-BROWSER-001 review with human supersession, and now records
 that slice final-green; the dedicated user-syntax plan now freezes
 H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001 as the next exact
-proposal boundary
+contract, completes the disposable parser comparison, and freezes
+H-DTTLF-PRODUCT-SYNTAX-02 / D-DTTLF-PRODUCT-SYNTAX-002 as the next exact
+implementation proposal
 
 ## Human Direction And Purpose
 
@@ -183,7 +185,8 @@ PRODUCT-DEMO-0A inventory
   -> PRODUCT-SYNTAX-0A measured user-syntax audit
   -> BROWSER-DIRECTED-1A exact review/implementation (complete)
   -> SYNTAX-RESOLVE-0B exact parser-independent contract proposal
-  -> disposable parser comparison and separate implementation review
+  -> disposable parser comparison (complete; tiny parser selected)
+  -> H-DTTLF-PRODUCT-SYNTAX-02 / separate implementation review
   -> parser + located nodes + resolver + example as one vertical slice
   -> PRODUCT-GRADUATE-1
   -> return to SCALE-STRESS-3C / SCALE-BATCH-1 / SCALE-GRADUATE-1
@@ -342,7 +345,7 @@ Exact local implementation checkpoint:
 | PRODUCT-BROWSER-0A | complete; routed to dedicated browser plan | PRODUCT-DEMO-1B | The directed dependent closure is Node-free and Vite/Chromium-green; the full report reaches `node:crypto` through acquisition/audit modules. Frozen additive BROWSER-DIRECTED-1A and deferred categorical runtime-spec separation are recorded in [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md) |
 | PRODUCT-BROWSER-1 | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, fixed dependent-LF plus preserved minimal-Core views, Node-free/static project-subpath build, real-browser evidence, and no semantic/dependency delta |
 | PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); Parsimmon versus a tiny parser remains gated |
-| PRODUCT-SYNTAX-1 | contract approved under D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; parser comparison active; implementation still gated | SYNTAX-RESOLVE-0B plus separate review | Compare parser alternatives only; selected parser, located nodes, resolver, tests, and example must later land together |
+| PRODUCT-SYNTAX-1 | contract approved under D-DTTLF-PRODUCT-SYNTAX-001; parser comparison complete; H-DTTLF-PRODUCT-SYNTAX-02 / D-DTTLF-PRODUCT-SYNTAX-002 proposed; implementation gated | SYNTAX-RESOLVE-0B plus separate review | Tiny dependency-free parser selected; parser, private located nodes, resolver, tests, and example must land together |
 | PRODUCT-GRADUATE-1 | pending | required product rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
@@ -552,3 +555,11 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   parser, located nodes, resolver, tests, and example land together. No
   parser/dependency, code, browser, semantics, or Lambdapi change is part of
   this proposal.
+- **2026-07-29 — Parser comparison completed.** Disposable Parsimmon and
+  tiny recursive-descent parsers accepted/rejected the same frozen corpus and
+  both Vite-built. The tiny parser trades more local source for zero
+  dependency/typing/lock impact, an 856-byte gzip bundle rather than 7,094
+  bytes, and direct stable-diagnostic ownership. The dedicated syntax plan
+  freezes H-DTTLF-PRODUCT-SYNTAX-02 / D-DTTLF-PRODUCT-SYNTAX-002 for one
+  integrated parser/resolver/example slice. No production code is yet
+  authorized.
