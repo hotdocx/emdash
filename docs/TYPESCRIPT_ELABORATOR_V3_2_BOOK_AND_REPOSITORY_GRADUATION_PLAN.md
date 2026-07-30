@@ -21,9 +21,10 @@ implementation is final-green at
 `be437f3a7d64a6a554578036f76621322d5626fc`, while 1C2/1C3 and syntax
 graduation remain ahead; the focused-green zero-behavior 1C2 audit now
 separates twelve mechanical structural/comprehension heads from four
-whole/higher action constructors and awaits its exact D006 review; planning
-boundary only; no book prose, generated artifact, release, or public
-presentation change is yet authorized
+whole/higher action constructors, is checkpointed at
+`20093b783725ec80bbfbad96cf28e94001edc286`, and awaits its exact D006 review;
+planning boundary only; no book prose, generated artifact, release, or
+public presentation change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
