@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1B2-CATEGORICAL-TEXT-1' as const;
+    'SYNTAX-PARITY-1B3-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -74,6 +74,12 @@ export type CoreCategoricalTextExpected =
         readonly kind: 'displayed-context-functor';
         readonly sources:
             readonly CoreCategoricalDisplayedFamily[];
+        readonly target: CoreCategoricalDisplayedFamily;
+    }
+    | {
+        readonly kind: 'displayed-dependent-context-functor';
+        readonly sourceGroups:
+            readonly (readonly CoreCategoricalDisplayedFamily[])[];
         readonly target: CoreCategoricalDisplayedFamily;
     }
     | {
@@ -430,11 +436,13 @@ class CoreCategoricalTextParser {
         });
     }
 
-    private parseLambdaBindingGroup():
-    readonly LocatedLambdaBinding[] {
+    private parseLambdaBindingGroups():
+    readonly (readonly LocatedLambdaBinding[])[] {
         this.skipWhitespace();
         if (this.current() !== '(') {
-            return Object.freeze([this.parseLambdaBinding()]);
+            return Object.freeze([
+                Object.freeze([this.parseLambdaBinding()])
+            ]);
         }
 
         this.advance();
@@ -442,17 +450,18 @@ class CoreCategoricalTextParser {
         if (this.current() === ')') {
             this.failHere(
                 'UNEXPECTED_TOKEN',
-                'A displayed sibling group cannot be empty'
+                'A categorical binding group cannot be empty'
             );
         }
         if (this.atEnd()) {
             this.failHere(
                 'UNEXPECTED_END',
-                'Expected a displayed sibling binding'
+                'Expected a categorical binding'
             );
         }
 
-        const bindings: LocatedLambdaBinding[] = [];
+        const groups: (readonly LocatedLambdaBinding[])[] = [];
+        let bindings: LocatedLambdaBinding[] = [];
         const names = new Set<string>();
         while (true) {
             const binding = this.parseLambdaBinding();
@@ -469,18 +478,34 @@ class CoreCategoricalTextParser {
             this.skipWhitespace();
             if (this.current() === ')') {
                 this.advance();
+                groups.push(Object.freeze(bindings));
                 break;
             }
             if (this.current() === ';') {
-                this.failHere(
-                    'UNEXPECTED_TOKEN',
-                    'Semicolon dependency levels require the later ' +
-                        'SYNTAX-PARITY-1B3 profile'
-                );
+                this.advance();
+                groups.push(Object.freeze(bindings));
+                bindings = [];
+                this.skipWhitespace();
+                if (this.current() === ')' || this.current() === ';') {
+                    this.failHere(
+                        'UNEXPECTED_TOKEN',
+                        'A displayed dependency level cannot be empty'
+                    );
+                }
+                if (this.atEnd()) {
+                    this.failHere(
+                        'UNEXPECTED_END',
+                        'Expected a categorical binding after semicolon'
+                    );
+                }
+                continue;
             }
             this.expect(',');
             this.skipWhitespace();
-            if (this.current() === ')') {
+            if (
+                this.current() === ')' ||
+                this.current() === ';'
+            ) {
                 this.failHere(
                     'UNEXPECTED_TOKEN',
                     'A displayed sibling group cannot end with a comma'
@@ -494,15 +519,15 @@ class CoreCategoricalTextParser {
             }
         }
 
-        if (bindings.length < 2) {
+        if (groups.length === 1 && groups[0].length < 2) {
             this.fail(
                 'UNEXPECTED_TOKEN',
-                bindings[0].nameRange,
+                groups[0][0].nameRange,
                 'A parenthesized displayed sibling group requires at ' +
-                    'least two bindings'
+                    'least two bindings or a semicolon dependency level'
             );
         }
-        return Object.freeze(bindings);
+        return Object.freeze(groups);
     }
 
     private parseLambda(): LocatedLambda {
@@ -510,7 +535,7 @@ class CoreCategoricalTextParser {
         const start = this.point();
         this.advance();
         const mode = this.parseMode();
-        const bindingGroup = this.parseLambdaBindingGroup();
+        const bindingGroups = this.parseLambdaBindingGroups();
         this.skipWhitespace();
         this.expect('.');
         this.skipWhitespace();
@@ -523,7 +548,7 @@ class CoreCategoricalTextParser {
         const body = this.parseExpression();
         return Object.freeze({
             tag: 'lambda' as const,
-            bindingGroups: Object.freeze([bindingGroup]),
+            bindingGroups,
             mode: mode.value,
             modeRange: mode.range,
             body,
@@ -956,13 +981,24 @@ class CoreCategoricalTextResolver {
         environment: InternalEnvironment,
         expected: CoreCategoricalTextExpected
     ): CoreCategoricalTerm {
-        if (expression.bindingGroups.length !== 1) {
-            throw resolutionError(
-                'UNSUPPORTED_NESTED_ABSTRACTION',
-                this.sourceFile,
-                expression.range,
-                'Multiple dependency levels require the later ' +
-                    'SYNTAX-PARITY-1B3 profile'
+        if (expression.bindingGroups.length > 1) {
+            if (expression.mode !== 'fd') {
+                throw resolutionError(
+                    'UNSUPPORTED_BINDER_MODE',
+                    this.sourceFile,
+                    expression.modeRange,
+                    'Displayed dependency levels require binder mode ' +
+                        "'^fd'"
+                );
+            }
+            return this.resolveDisplayedDependentContextLambda(
+                expression,
+                environment,
+                this.requireExpected(
+                    expression,
+                    expected,
+                    'displayed-dependent-context-functor'
+                )
             );
         }
         const bindings = expression.bindingGroups[0];
@@ -1340,13 +1376,104 @@ class CoreCategoricalTextResolver {
         );
     }
 
+    private resolveDisplayedDependentContextLambda(
+        expression: LocatedLambda,
+        environment: InternalEnvironment,
+        expected: Extract<
+            CoreCategoricalTextExpected,
+            {
+                readonly kind:
+                    'displayed-dependent-context-functor';
+            }
+        >
+    ): CoreCategoricalTerm {
+        const groupSizes = expression.bindingGroups.map(
+            group => group.length
+        );
+        const supportedShape =
+            (
+                groupSizes.length === 2 &&
+                groupSizes[0] === 1 &&
+                groupSizes[1] === 1
+            ) ||
+            (
+                groupSizes.length === 3 &&
+                groupSizes[0] === 1 &&
+                groupSizes[1] === 2 &&
+                groupSizes[2] === 1
+            );
+        if (!supportedShape) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.range,
+                `Displayed dependent context has group sizes ` +
+                    `[${groupSizes.join(',')}]; the reviewed direct ` +
+                    'shapes are [1,1] and [1,2,1]'
+            );
+        }
+        if (
+            expected.sourceGroups.length !==
+                expression.bindingGroups.length ||
+            expression.bindingGroups.some((group, index) =>
+                expected.sourceGroups[index] === undefined ||
+                expected.sourceGroups[index].length !== group.length
+            )
+        ) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.range,
+                'Displayed dependency levels do not match the grouped ' +
+                    'expected source families'
+            );
+        }
+
+        expression.bindingGroups.forEach((group, groupIndex) =>
+            group.forEach((binding, bindingIndex) =>
+                this.requireDisplayedFamilyAnnotation(
+                    binding,
+                    environment,
+                    expected.sourceGroups[groupIndex][bindingIndex],
+                    `displayed dependency source ` +
+                        `${groupIndex + 1}.${bindingIndex + 1}`
+                )
+            )
+        );
+        const bindings = expression.bindingGroups.flat();
+        const sources = expected.sourceGroups.flat();
+        return invokeProgram(
+            this.sourceFile,
+            expression.range,
+            'Displayed dependent contextual abstraction was rejected',
+            () => this.program.displayedDependentContextLambda(
+                bindings.map((binding, index) => Object.freeze({
+                    name: binding.name,
+                    family: sources[index]
+                })),
+                expected.target,
+                tokens => this.resolveContextLambdaBody(
+                    expression,
+                    bindings,
+                    tokens,
+                    environment
+                ),
+                {
+                    source: this.lambdaSource(expression)
+                }
+            )
+        );
+    }
+
     private lambdaSource(
         expression: LocatedLambda
     ): CoreCategoricalSourceSite {
         const names = expression.bindingGroups
-            .flat()
-            .map(binding => binding.name)
-            .join(',');
+            .map(group => group
+                .map(binding => binding.name)
+                .join(',')
+            )
+            .join(';');
         return sourceSiteFor(
             this.sourceFile,
             expression.range,

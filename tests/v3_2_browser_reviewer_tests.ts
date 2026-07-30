@@ -172,6 +172,36 @@ const directCompilation = (
                 )
             ));
         }
+        case 'displayed-mixed-telescope': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>',
+                profile: 'fibred-displayed-chain-2a'
+            });
+            const K = program.category('review_K');
+            const A = program.displayedFamily('review_A', K);
+            const sigmaA = program.totalCategory(A);
+            const B = program.displayedFamily('review_B', sigmaA);
+            const C = program.displayedFamily('review_C', sigmaA);
+            const P = program.displayedProduct(B, C);
+            const sigmaP = program.totalCategory(P);
+            const D = program.displayedFamily('review_D', sigmaP);
+            const projectionP = program.sigmaProjection(P);
+            const liftedB = program.pullbackFamily(B, projectionP);
+            const liftedC = program.pullbackFamily(C, projectionP);
+            const target = program.displayedProduct(liftedB, liftedC);
+            return program.compile(
+                program.displayedDependentContextLambda(
+                    [
+                        { name: 'a', family: A },
+                        { name: 'b', family: B },
+                        { name: 'c', family: C },
+                        { name: 'd', family: D }
+                    ],
+                    target,
+                    ([, b, c]) => program.fibrePair(b, c)
+                )
+            );
+        }
         case 'displayed-transfor-composition': {
             const program = new CoreCategoricalProgram({
                 sourceFile: '<browser-reviewer-direct>',
@@ -350,6 +380,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
                 'displayed-functor-composition',
                 'displayed-functor-weakening',
                 'displayed-sibling-pairing',
+                'displayed-mixed-telescope',
                 'displayed-transfor-composition'
             ]
         );
@@ -421,7 +452,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
     it('publishes the exact deeply frozen capability boundary', () => {
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.revision,
-            'SYNTAX-PARITY-1B2-BROWSER-REVIEWER-1'
+            'SYNTAX-PARITY-1B3-BROWSER-REVIEWER-1'
         );
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
@@ -434,7 +465,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.ok(
             CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
-                'eight categorical text presets across ^f, ^n, ^fd, and ^nd'
+                'nine categorical text presets across ^f, ^n, ^fd, and ^nd'
             )
         );
         assert.ok(

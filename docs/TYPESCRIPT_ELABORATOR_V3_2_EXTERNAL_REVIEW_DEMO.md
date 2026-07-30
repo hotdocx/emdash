@@ -13,7 +13,7 @@ Integrated implementation: green in the current reviewed tranche
 The TypeScript implementation now exposes one integrated external-reviewer
 workbench over the existing checker/evaluator architecture:
 
-1. an editable categorical expression view with eight presets:
+1. an editable categorical expression view with nine presets:
    - recursive pointwise application `λ^f x. (H x) (K x)`;
    - fixed-inner evaluation `λ^f x. F x y0`;
    - expected-type-directed whole-Hom action `G pA`;
@@ -21,7 +21,9 @@ workbench over the existing checker/evaluator architecture:
    - displayed functor composition `λ^fd a : E. GG (FF a)`;
    - displayed weakening `λ^fd a : E. s (indexOf a)`;
    - independent displayed sibling pairing
-     `λ^fd (b : B, c : C). fibrePair (FF b) (GG c)`; and
+     `λ^fd (b : B, c : C). fibrePair (FF b) (GG c)`;
+   - a genuine mixed displayed telescope
+     `λ^fd (a : A; b : B, c : C; d : D). fibrePair b c`; and
    - coherent displayed component composition
      `λ^nd k : K. composeCells (theta k) (eta k)`;
 2. an explicitly started direct-TypeScript report across:
@@ -320,23 +322,34 @@ Current selected product evidence:
   `f53fd6885dd2fac0345bad5db257c7a66f86af15` /
   `084719023d27a8c2015f787125a577fc6532a769` /
   `ba34771074363f4c5b33814269b8822d4d2362bb`;
+- dependent-context audit/review/implementation:
+  `4eada97f9ee8fe284b70dea6c0548dfdb9754189` /
+  `e33d20f98e7db65f8d17c3542c37f341f5cf0748` /
+  exact implementation checkpoint pending;
 - focused integrated reviewer test: eight checks, eight passes, zero
-  failures, including direct-TypeScript equality for all eight presets;
+  failures, including direct-TypeScript equality for all nine presets;
 - focused independent-sibling implementation corpus: six checks, six passes,
   zero failures;
-- combined affected text/parity/structural/displayed-context/browser corpus
-  after 1B2: 64 checks, 64 passes, zero failures;
+- focused dependent-context text corpus: seven checks, seven passes, zero
+  failures;
+- combined corrected affected text/parity/structural/displayed-context/
+  browser corpus after 1B3: 75 checks, 75 passes, zero failures;
+- browser-safe/review-validating chain-2A transfer identity: six checks, six
+  passes, zero failures;
+- historical usability/fibred/displayed graduation records: 75 checks, 75
+  passes, zero failures across eight suites;
 - complete recovery TypeScript aggregate immediately before 1B2: 1,159
   tests, 1,108 active passes, 51 intentional skips, and zero failures; the
-  reviewed proportional 1B2 gate did not duplicate that unchanged aggregate;
-- Vite production build after 1B2: 140 modules, a 116.80 kB-gzip initial
-  script and a 160.54 kB-gzip lazy reviewer chunk; and
-- real Chromium execution of the displayed-sibling preset
-  `λ^fd (b : B, c : C). fibrePair (FF b) (GG c)`, producing an accepted
+  reviewed proportional 1B2/1B3 gates did not duplicate that unchanged
+  aggregate;
+- Vite production build after 1B3: 141 modules, a 116.82 kB-gzip initial
+  script and a 164.73 kB-gzip lazy reviewer chunk; and
+- real Chromium execution of the displayed-mixed-telescope preset
+  `λ^fd (a : A; b : B, c : C; d : D). fibrePair b c`, producing an accepted
   explicit-Core/checker result with zero console errors or warnings. Earlier
-  reviewer checkpoints separately exercised the displayed-natural preset,
-  source-located rejection, full three-panel report, emitted PDF link, and
-  minimal-Core checker. Real Chromium also accepts
+  reviewer checkpoints separately exercised the displayed-sibling and
+  displayed-natural presets, source-located rejection, full three-panel
+  report, emitted PDF link, and minimal-Core checker. Real Chromium also accepts
   `λ^fd a : E. s (indexOf a)` with zero console errors or warnings.
 
 ## Exact Boundary
@@ -347,13 +360,15 @@ This candidate demonstrates:
   computation;
 - recursively usable ordinary functorial variables/binders;
 - direct bounded displayed functor/transfor consumers;
-- independent displayed siblings and one genuine displayed dependency edge;
+- independent displayed siblings, one genuine displayed dependency edge, and
+  the reviewed `a; b,c; d` mixed displayed telescope;
 - structural weakening/reindexing, pairing, diagonal/swap composites, and
   checked object/internalized-arrow observations; and
 - bounded categorical text across `^f`, `^n`, `^fd`, and `^nd`, with
   recursive whitespace application, optional checked annotation, exact
-  diagnostics, whole-Hom expected routing, and typed recursive cell
-  composition plus contextual-index weakening;
+  diagnostics, whole-Hom expected routing, typed recursive cell composition,
+  contextual-index weakening, independent sibling groups, and the two exact
+  semicolon-dependent context shapes;
 - an integrated client-side reviewer with editable categorical text,
   explicit research report, generated book, and editable minimal-Core
   playground; and
@@ -364,12 +379,13 @@ It does not yet claim:
 - arbitrary displayed telescope depth;
 - arbitrary/general `^nd` coherence beyond component eta and finite typed
   vertical composition;
-- text lowering for displayed/dependent telescopes, remaining structural
-  constructors, nested lambdas, outer-LF terms, Pi, let, or holes;
+- text lowering beyond the exact `[1,1]` and `[1,2,1]` displayed/dependent
+  telescopes, remaining structural constructors, nested lambdas, outer-LF
+  terms, Pi, let, or holes;
 - final agreement between experimental TypeScript `λ^mode` syntax and
   informal Lambdapi/kernel notation;
 - full displayed/dependent categorical text parity beyond the reviewed
-  single-binder modes;
+  single-binder, sibling, and two bounded dependent-context shapes;
 - a GitHub Pages workflow, deployment, or publication;
 - systematic groupoidal-DTT closure;
 - complete transfer of the Lambdapi library;

@@ -569,6 +569,20 @@ remains non-blocking. Real Chromium selected and accepted both the exact
 displayed their backend-neutral explicit Core and inferred/expected types,
 and reported zero console errors or warnings.
 
+The later reviewed 1B2/1B3 continuations use that same reviewer for
+independent sibling pairing and the exact mixed displayed telescope
+
+```text
+λ^fd (a : A; b : B, c : C; d : D). fibrePair b c.
+```
+
+The final workbench has nine presets. The mixed preset routes through the
+same subject-checked chain-2A runtime as direct TypeScript; Node evidence
+separately revalidates the historical transfer ledgers and returns the same
+compilation. The 141-module production build and real Chromium are green,
+with zero console errors or warnings. This adds no browser-owned semantic
+path or scale capability.
+
 After exact syntax graduation, the selected route is
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md):
 a capability-delta audit, theorem-led book update, deterministic public book
@@ -594,6 +608,8 @@ it and a separate bounded review authorizes it.
 | SYNTAX-PARITY-1A | final-green at `2e7cc3c44802a5218858ca6747e7591d3bfc4859` | approved D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | Same reviewer exposes the three single-binder modes through existing typed program methods; focused 35/35 and aggregate 1,149/1,149 gates are green |
 | SYNTAX-PARITY-1B0 / D002 | focused-green audit at `be7000f`; exact proposal approved by immutable unattended review with human supersession | final-green 1A | Measured direct-green/text-unknown `indexOf` weakening seam and authorized only 1B1, separating 1B2/1B3 multi-binder contexts |
 | SYNTAX-PARITY-1B1 | final-green at `9f663555a1edbedcb99e97f1271154ff36913f05` | approved D002 review | Seventh weakening preset and exact `indexOf` text route through existing semantics; affected 39/39, production build, and Chromium gates green |
+| SYNTAX-PARITY-1B2 | final-green at `ba34771074363f4c5b33814269b8822d4d2362bb` | approved D003 review | Eighth independent-sibling preset, comma group, exact `fibrePair`, affected 64/64, production build, and Chromium |
+| SYNTAX-PARITY-1B3 | final-green in goal worktree; exact checkpoint pending | approved D004 review | Ninth mixed-telescope preset, exact semicolon/comma `[1,1]`/`[1,2,1]` routes, browser-safe checked chain-2A runtime, affected 75/75, production build, and Chromium |
 | BOOK-DELTA-0A | selected post-syntax successor | SYNTAX-PARITY-GRADUATE-1 | Capability-oriented book delta audit followed by theorem-led prose/artifact/repository graduation under its dedicated plan |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |
 

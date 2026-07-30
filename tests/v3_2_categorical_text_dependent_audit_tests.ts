@@ -11,8 +11,6 @@ import {
     CORE_CATEGORICAL_TEXT_DEPENDENT_AUDIT,
     CoreCategoricalProgram,
     CoreCategoricalTextDependentAuditError,
-    CoreCategoricalTextError,
-    elaborateCoreCategoricalText,
     validateCoreCategoricalTextDependentAudit
 } from '../src/v3_2';
 
@@ -76,51 +74,21 @@ const fixture = () => {
 };
 
 describe('SYNTAX-PARITY-1B3 dependent-context text audit', () => {
-    it('pins the exact current semicolon parsing seam', () => {
-        const data = fixture();
-        const environment = [
-            { name: 'A', kind: 'displayed-family' as const, value: data.A },
-            { name: 'B', kind: 'displayed-family' as const, value: data.B },
-            { name: 'C', kind: 'displayed-family' as const, value: data.C },
-            { name: 'D', kind: 'displayed-family' as const, value: data.D }
-        ];
-        for (const source of [
-            'λ^fd (a : A; b : B). a',
-            'λ^fd (a : A; b : B, c : C; d : D). fibrePair b c'
-        ]) {
-            assert.throws(
-                () => elaborateCoreCategoricalText(data.program, {
-                    source,
-                    sourceFile:
-                        'tests/fixtures/dependent-text-seam.emdash',
-                    environment,
-                    expected: {
-                        kind: 'displayed-context-functor',
-                        sources: [data.A, data.B],
-                        target: data.liftedA
-                    }
-                }),
-                error => {
-                    assert.equal(
-                        error instanceof CoreCategoricalTextError,
-                        true
-                    );
-                    if (!(error instanceof CoreCategoricalTextError)) {
-                        return false;
-                    }
-                    assert.equal(error.phase, 'parsing');
-                    assert.equal(error.code, 'UNEXPECTED_TOKEN');
-                    assert.deepEqual(error.span, {
-                        file:
-                            'tests/fixtures/dependent-text-seam.emdash',
-                        start: { line: 1, column: 12 },
-                        end: { line: 1, column: 13 }
-                    });
-                    assert.match(error.detail, /SYNTAX-PARITY-1B3/u);
-                    return true;
-                }
-            );
-        }
+    it('pins the exact pre-implementation semicolon parsing seam', () => {
+        const audit = CORE_CATEGORICAL_TEXT_DEPENDENT_AUDIT;
+        assert.equal(
+            audit.prerequisite.textRevision,
+            'SYNTAX-PARITY-1B2-CATEGORICAL-TEXT-1'
+        );
+        assert.deepEqual(audit.measuredSeam.currentTextFailure, {
+            phase: 'parsing',
+            code: 'UNEXPECTED_TOKEN',
+            startColumn: 12,
+            endColumn: 13,
+            detail:
+                'Semicolon dependency levels require the later ' +
+                'SYNTAX-PARITY-1B3 profile'
+        });
     });
 
     it('executes both existing direct dependent-context shapes', () => {

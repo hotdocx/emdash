@@ -84,8 +84,9 @@ import {
     compileCoreCategoricalDisplayedChainTransfer,
     coreCategoricalDisplayedChainCoreName
 } from './categorical_displayed_chain_transfer';
-import type {
-    CoreCategoricalDisplayedChain2aClosureCompilation
+import {
+    CoreCategoricalDisplayedChain2aClosureCompilation,
+    compileCoreCategoricalDisplayedChain2aClosureRuntime
 } from './categorical_displayed_chain_2a_closure_transfer';
 import type {
     CoreCategoricalDisplayedNdHigherTargetCompilation,
@@ -181,24 +182,6 @@ import {
 
 export const CORE_CATEGORICAL_PROGRAM_REVISION =
     'USABILITY-2A1-CATEGORICAL-PROGRAM-1' as const;
-
-/**
- * Load the separately reviewed DISPLAYED-CHAIN-2A closure only after this
- * program module has initialized. Its immutable review reaches older
- * graduation evidence that intentionally validates
- * `CORE_CATEGORICAL_PROGRAM_REVISION`; a static value import here would read
- * that revision through a circular dependency before initialization.
- */
-const compileCoreCategoricalDisplayedChain2aClosure = ():
-CoreCategoricalDisplayedChain2aClosureCompilation => {
-    const transfer = require(
-        './categorical_displayed_chain_2a_closure_transfer'
-    ) as typeof import(
-        './categorical_displayed_chain_2a_closure_transfer'
-    );
-    return transfer
-        .compileCoreCategoricalDisplayedChain2aClosureTransfer();
-};
 
 const displayedNdHigherTargetModule = () => require(
     './categorical_displayed_nd_higher_target_transfer'
@@ -1113,7 +1096,7 @@ export class CoreCategoricalProgram {
         this.dependent = this.displayedNdHigherEnabled
             ? compileCoreCategoricalDisplayedNdHigherTarget()
             : this.displayedChain2aEnabled
-            ? compileCoreCategoricalDisplayedChain2aClosure()
+            ? compileCoreCategoricalDisplayedChain2aClosureRuntime()
             : this.displayedChainEnabled
             ? compileCoreCategoricalDisplayedChainTransfer()
             : this.displayedEvaluationEnabled

@@ -28,7 +28,7 @@ import {
 } from './product_review_demo';
 
 export const CORE_BROWSER_REVIEWER_REVISION =
-    'SYNTAX-PARITY-1B2-BROWSER-REVIEWER-1' as const;
+    'SYNTAX-PARITY-1B3-BROWSER-REVIEWER-1' as const;
 
 export type CoreBrowserReviewerPresetId =
     | 'pointwise-application'
@@ -38,6 +38,7 @@ export type CoreBrowserReviewerPresetId =
     | 'displayed-functor-composition'
     | 'displayed-functor-weakening'
     | 'displayed-sibling-pairing'
+    | 'displayed-mixed-telescope'
     | 'displayed-transfor-composition';
 
 export type CoreBrowserReviewerExpectedMode =
@@ -68,6 +69,12 @@ export type CoreBrowserReviewerExpectedMode =
         readonly binderMode: 'fd';
         readonly sources: readonly ['B', 'C'];
         readonly target: 'Productd(D,Q)';
+    }
+    | {
+        readonly kind: 'displayed-dependent-context-functor';
+        readonly binderMode: 'fd';
+        readonly levels: 'A; B,C; D';
+        readonly target: 'Productd(B↑,C↑)';
     }
     | {
         readonly kind: 'displayed-transfor';
@@ -297,6 +304,28 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
         ]
     },
     {
+        id: 'displayed-mixed-telescope',
+        label: 'Displayed mixed telescope',
+        source:
+            'λ^fd (a : A; b : B, c : C; d : D). fibrePair b c',
+        description:
+            'Semicolons present two genuine dependency transitions while ' +
+            'the comma retains an independent middle sibling group; the ' +
+            'existing contextual compiler derives all family-base edges.',
+        expectedMode: {
+            kind: 'displayed-dependent-context-functor',
+            binderMode: 'fd',
+            levels: 'A; B,C; D',
+            target: 'Productd(B↑,C↑)'
+        },
+        assumptions: [
+            'K : Cat',
+            'A : Catd K',
+            'B, C : Catd (Sigma_cat A)',
+            'D : Catd (Sigma_cat (Productd B C))'
+        ]
+    },
+    {
         id: 'displayed-transfor-composition',
         label: 'Displayed natural composition',
         source:
@@ -335,14 +364,14 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
         'optional Node-side Lambdapi conformance oracle'
     ],
     supported: [
-        'eight categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'nine categorical text presets across ^f, ^n, ^fd, and ^nd',
         'edited categorical text with source diagnostics',
         'existing outer-LF, ordinary, and displayed three-panel report',
         'generated emdash book',
         'preserved minimal explicit-Core playground'
     ],
     deferred: [
-        'nested and dependency-level categorical text',
+        'nested and arbitrary-depth categorical text',
         'remaining displayed context and structural-constructor syntax',
         'arbitrary displayed telescope depth',
         'browser-side source acquisition',
@@ -557,6 +586,41 @@ const createFixture = (
             expected: {
                 kind: 'displayed-context-functor' as const,
                 sources: [B, C],
+                target
+            }
+        });
+    }
+
+    if (presetId === 'displayed-mixed-telescope') {
+        const program = new CoreCategoricalProgram({
+            sourceFile,
+            profile: 'fibred-displayed-chain-2a'
+        });
+        const K = program.category('review_K');
+        const A = program.displayedFamily('review_A', K);
+        const sigmaA = program.totalCategory(A);
+        const B = program.displayedFamily('review_B', sigmaA);
+        const C = program.displayedFamily('review_C', sigmaA);
+        const P = program.displayedProduct(B, C);
+        const sigmaP = program.totalCategory(P);
+        const D = program.displayedFamily('review_D', sigmaP);
+        const projectionP = program.sigmaProjection(P);
+        const liftedB = program.pullbackFamily(B, projectionP);
+        const liftedC = program.pullbackFamily(C, projectionP);
+        const target = program.displayedProduct(liftedB, liftedC);
+        return Object.freeze({
+            program,
+            environment: Object.freeze([
+                categoryBinding('K', K),
+                familyBinding('A', A),
+                familyBinding('B', B),
+                familyBinding('C', C),
+                familyBinding('D', D)
+            ]),
+            expected: {
+                kind:
+                    'displayed-dependent-context-functor' as const,
+                sourceGroups: [[A], [B, C], [D]],
                 target
             }
         });

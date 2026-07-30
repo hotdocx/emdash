@@ -14,9 +14,6 @@ import {
     compileCoreCategoricalDisplayedChainTransfer
 } from './categorical_displayed_chain_transfer';
 import {
-    validateCoreCategoricalDisplayedChain2aClosureReview
-} from './categorical_displayed_chain_2a_closure_review';
-import {
     CORE_DIRECTED_CONTINUATION_TRANSFER_LINKAGE,
     coreDirectedContinuationTransferSymbol
 } from './directed_continuation_transfer';
@@ -53,9 +50,6 @@ import {
 import {
     binderMode
 } from './kernel';
-import {
-    validateCoreLfScaleEngineReview
-} from './scale_engine_review';
 
 const MODULE_ID = 'emdash.emdash3_2';
 
@@ -1407,11 +1401,15 @@ export interface CoreCategoricalDisplayedChain2aClosureCompilation {
 let cachedCompilation:
     CoreCategoricalDisplayedChain2aClosureCompilation | undefined;
 
-export function compileCoreCategoricalDisplayedChain2aClosureTransfer():
+/**
+ * Compile the frozen, subject-checked closure without executing the
+ * Node-loaded D-017/scale review-ledger validator. Browser products consume
+ * this path; the ordinary transfer entry point below additionally revalidates
+ * those closure-specific ledgers.
+ */
+export function compileCoreCategoricalDisplayedChain2aClosureRuntime():
 CoreCategoricalDisplayedChain2aClosureCompilation {
     if (cachedCompilation !== undefined) return cachedCompilation;
-    validateCoreLfScaleEngineReview();
-    validateCoreCategoricalDisplayedChain2aClosureReview();
     const prerequisite =
         compileCoreCategoricalDisplayedChainTransfer();
     const initialCompiled = compileCoreLfDeclarations(
@@ -1469,4 +1467,27 @@ CoreCategoricalDisplayedChain2aClosureCompilation {
         composedRuntime: runtimeFragment.runtime
     });
     return cachedCompilation;
+}
+
+const validateHistoricalReviewLedgers = (): void => {
+    const engineReview = require(
+        './scale_engine_review'
+    ) as typeof import('./scale_engine_review');
+    const closureReview = require(
+        './categorical_displayed_chain_2a_closure_review'
+    ) as typeof import(
+        './categorical_displayed_chain_2a_closure_review'
+    );
+    engineReview.validateCoreLfScaleEngineReview();
+    closureReview.validateCoreCategoricalDisplayedChain2aClosureReview();
+};
+
+/**
+ * Node/evidence entry point: revalidate the historical authorization records
+ * before returning the same checked runtime compilation.
+ */
+export function compileCoreCategoricalDisplayedChain2aClosureTransfer():
+CoreCategoricalDisplayedChain2aClosureCompilation {
+    validateHistoricalReviewLedgers();
+    return compileCoreCategoricalDisplayedChain2aClosureRuntime();
 }

@@ -24,6 +24,7 @@ import {
     CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_MODULE,
     CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_POLICY,
     CORE_CATEGORICAL_DISPLAYED_CHAIN_TRANSFER_BOUNDARY,
+    compileCoreCategoricalDisplayedChain2aClosureRuntime,
     compileCoreCategoricalDisplayedChain2aClosureTransfer
 } from '../src/v3_2';
 
@@ -124,6 +125,32 @@ describe('DISPLAYED-CHAIN-2A isolated generic transfer closure', () => {
                 .validateEnvironment()
         );
     });
+
+    it('keeps product runtime compilation browser-safe and review-identical',
+        () => {
+            const programSource = readFileSync(
+                resolve(
+                    __dirname,
+                    '..',
+                    'src',
+                    'v3_2',
+                    'categorical_program.ts'
+                ),
+                'utf8'
+            );
+            assert.match(
+                programSource,
+                /compileCoreCategoricalDisplayedChain2aClosureRuntime/u
+            );
+            assert.doesNotMatch(
+                programSource,
+                /require\([\s\S]{0,120}categorical_displayed_chain_2a/u
+            );
+            assert.equal(
+                compileCoreCategoricalDisplayedChain2aClosureRuntime(),
+                compileCoreCategoricalDisplayedChain2aClosureTransfer()
+            );
+        });
 
     it('honors the selected generic budget without changing Core default',
         () => {

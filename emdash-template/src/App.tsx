@@ -74,6 +74,8 @@ const expectedModeLabel = (
     case 'displayed-context-functor':
       return `λ^${mode.binderMode} : (${mode.sources.join(', ')}) → ` +
         mode.target;
+    case 'displayed-dependent-context-functor':
+      return `λ^${mode.binderMode} : (${mode.levels}) → ${mode.target}`;
     case 'displayed-transfor':
       return `λ^${mode.binderMode} : ${mode.base}; ` +
         `${mode.source} ⇒ ${mode.target}`;

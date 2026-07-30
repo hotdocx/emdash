@@ -3424,13 +3424,16 @@ review approves only that exact scope with human supersession. The bounded
 64/64 affected gate, using only the existing contextual compiler and pairing
 owners; exact local checkpoint:
 `ba34771074363f4c5b33814269b8822d4d2362bb`. None of this changes or resumes
-a scale row. A new zero-behavior 1B3 audit confirms that exact
-semicolon-separated `[1,1]` and `[1,2,1]` text presentations can route to the
-existing genuine/mixed dependent-context method; its D004 proposal remains
-checkpointed at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`. A separate
-immutable unattended review approves only that exact product scope with human
-supersession; it adds no scale capability. After exact parity graduation,
-follow
+a scale row. The subsequent 1B3 audit and separate immutable unattended D004
+review select only exact semicolon-separated `[1,1]` and `[1,2,1]`
+presentations of the existing genuine/mixed dependent-context method; the
+proposal checkpoint remains
+`4eada97f9ee8fe284b70dea6c0548dfdb9754189`. That implementation is now
+final-green in the goal worktree with a ninth browser preset. Its browser-safe
+subject-checked runtime entry and Node historical-review entry return the same
+generic chain-2A transfer compilation. It changes no scale owner, rule,
+profile, transfer semantic input, or capability. `SYNTAX-PARITY-1C` is the
+next product audit/proposal row. After exact parity graduation, follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows
 are outside the current persistent goal and require a future explicit goal.
@@ -3485,6 +3488,16 @@ scope is affected.
 
 ## Change Log
 
+- **2026-07-30 — Dependent text parity final-green; scale remains
+  deferred.** SYNTAX-PARITY-1B3 presents only the two existing direct
+  dependent-context shapes, adds the ninth mixed-telescope reviewer preset,
+  and keeps arbitrary depth closed. Real-browser validation exposed and
+  corrected one Node-specific closure-loading seam by separating
+  browser-safe checked runtime compilation from Node historical-ledger
+  validation; both return the same generic transfer compilation. No owner,
+  rule, profile, transfer semantic input, or scale capability changed. 1C
+  remains the next product row; no stress, batch, or scale-graduation row
+  resumes.
 - **2026-07-30 — Bulk scale moved to a future persistent goal.** The user
   selected syntax parity followed by a capability-oriented, theorem-led
   book/repository graduation as the remainder of the current product goal.

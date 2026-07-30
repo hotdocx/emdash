@@ -304,7 +304,7 @@ describe('SYNTAX-PARITY-1B2 independent-sibling text', () => {
         );
     });
 
-    it('rejects malformed or dependency-level binder groups locally', () => {
+    it('rejects malformed groups and dependent sibling expectations', () => {
         const data = fixture();
         const cases: readonly [
             source: string,
@@ -320,10 +320,6 @@ describe('SYNTAX-PARITY-1B2 independent-sibling text', () => {
             ],
             [
                 'λ^fd (b : B,). FF b',
-                'UNEXPECTED_TOKEN'
-            ],
-            [
-                'λ^fd (b : B; c : C). fibrePair (FF b) (GG c)',
                 'UNEXPECTED_TOKEN'
             ],
             [
@@ -343,6 +339,14 @@ describe('SYNTAX-PARITY-1B2 independent-sibling text', () => {
             assert.equal(error.phase, 'parsing');
             assert.ok(error.span.end.column >= error.span.start.column);
         }
+        const dependent = captureTextError(
+            () => elaborate(
+                data,
+                'λ^fd (b : B; c : C). fibrePair (FF b) (GG c)'
+            ),
+            'INCOMPATIBLE_ABSTRACTION_EXPECTATION'
+        );
+        assert.equal(dependent.phase, 'resolution');
     });
 
     it('checks expected sources, annotations, modes, and bases', () => {

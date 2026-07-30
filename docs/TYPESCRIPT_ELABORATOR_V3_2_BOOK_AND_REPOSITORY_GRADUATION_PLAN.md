@@ -10,13 +10,12 @@ the completed book architecture plan
 and the completed category/formal-presentation expansion plan
 [`REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`](../emdash2/reports/REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md)
 Status: selected post-syntax product-graduation route; syntax parity is
-final-green through `SYNTAX-PARITY-1B2` at
-`ba34771074363f4c5b33814269b8822d4d2362bb`; the zero-behavior 1B3 audit is
-focused-green at `4eada97f9ee8fe284b70dea6c0548dfdb9754189` with a separate
-exact review now approved with human supersession and its bounded
-implementation dependency-ready, while 1C and exact syntax graduation remain
-ahead; planning boundary only; no book prose, generated artifact, release,
-or public presentation change is yet authorized
+final-green through `SYNTAX-PARITY-1B3` in the goal worktree; its audit is
+checkpointed at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`, its separate exact
+review is approved with human supersession, and its implementation checkpoint
+is pending; 1C and exact syntax graduation remain ahead; planning boundary
+only; no book prose, generated artifact, release, or public presentation
+change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
@@ -346,6 +345,11 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — Book route remains next after final-green dependent text.**
+  SYNTAX-PARITY-1B3 now gives the reviewer an executable genuine mixed
+  displayed telescope without changing the mathematical kernel. 1C and exact
+  syntax graduation remain prerequisites to BOOK-DELTA-0A; no book prose or
+  bulk scale row has started early.
 - **2026-07-30 — Post-syntax priority explicitly reaffirmed.** The user
   confirmed that book reconciliation, the stable public PDF, and the root
   repository presentation are the current goal's high-yield successor to

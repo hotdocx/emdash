@@ -31,7 +31,9 @@ bounded implementation is final-green at exact local checkpoint
 focused-green zero-behavior-delta audit with a deeply frozen
 non-self-authorizing D004 proposal checkpointed at
 `4eada97f9ee8fe284b70dea6c0548dfdb9754189`; a separate immutable unattended
-D004 review now approves it exactly as proposed with human supersession.
+D004 review now approves it exactly as proposed with human supersession; the
+bounded 1B3 implementation is final-green in the goal worktree and awaits
+only its exact local checkpoint.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -652,6 +654,71 @@ audit changes no runtime behavior. Its separate exact gate is:
 > coherence premise, Lambdapi change, scale work, book work, publication, or
 > wider Git authority?
 
+## `SYNTAX-PARITY-1B3` Implementation Result
+
+The implementation activates exactly the reviewed private presentation:
+
+- commas retain the 1B2 meaning of independent siblings within one level;
+- semicolons separate successive dependency levels;
+- only group sizes `[1,1]` and `[1,2,1]` reach typed dependent resolution;
+- one grouped expected-family contract checks every optional annotation
+  positionally;
+- resolution flattens the checked groups in source order and invokes the
+  existing `displayedDependentContextLambda` exactly once; and
+- every body continues through the existing recursive identifier,
+  `indexOf`, `fibrePair`, `composeCells`, and generic `apply` routes.
+
+Annotated and annotation-free forms compile to the same explicit Core as
+direct TypeScript. Permanent evidence covers every mixed-telescope slot,
+recursive application beneath a closed displayed functor, object action,
+internalized-arrow action, malformed levels, duplicate names, expected
+group/annotation/mode mismatch, predecessor profiles, wrong bases/targets,
+escaped bodies, and nested-abstraction rejection.
+
+The ninth reviewer preset exposed one packaging seam: the program's historical
+CommonJS lazy load for the already reviewed `fibred-displayed-chain-2a`
+closure was not executable in a browser. The correction does not duplicate or
+weaken the transfer:
+
+- `compileCoreCategoricalDisplayedChain2aClosureRuntime` compiles the same
+  frozen declarations and subject-checked nine-rule runtime without executing
+  the Node-loaded D-017/scale ledger validator;
+- the ordinary Node/evidence transfer entry point first revalidates the scale
+  engine and D-017 ledgers, then returns that identical cached compilation;
+  and
+- `CoreCategoricalProgram` statically consumes only the browser-safe checked
+  runtime entry point.
+
+Thus historical authorization validation remains a Node evidence concern,
+while the client product executes the reviewed mathematical data through the
+same generic checker/runtime. No owner, declaration, rule, profile, Core node,
+checker branch, evaluator branch, dependency planner, factorization case, or
+Lambdapi source changed.
+
+Final proportional evidence is green:
+
+- the focused dependent text corpus passes 7/7;
+- the corrected affected text/direct/reviewer corpus passes 75/75;
+- the browser-safe versus review-validating transfer identity corpus passes
+  6/6;
+- all eight historical usability/fibred/displayed graduation suites pass
+  75/75;
+- the integrated reviewer passes 8/8, including direct-TypeScript equality
+  for all nine presets and its Node-free browser closure;
+- root and fixture typecheck, root lint, and the production browser build
+  pass at 141 modules, 429.29 kB / 116.82 kB gzip initial JavaScript, and
+  745.30 kB / 164.73 kB gzip lazy reviewer JavaScript; and
+- real Chromium accepts
+  `λ^fd (a : A; b : B, c : C; d : D). fibrePair b c` with zero console
+  errors or warnings.
+
+The unchanged long direct `DISPLAYED-CHAIN-2A` semantic corpus was measured
+as unsuitable for this presentation-only proportional gate after remaining
+CPU-active beyond eleven minutes; the focused dependent text, transfer,
+historical graduation, reviewer, build, and real-browser gates cover the
+changed boundary. No live Lambdapi rerun is triggered because this slice
+changes no mathematical source or transferred semantic input.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -752,7 +819,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B1 | **final-green at `9f663555a1edbedcb99e97f1271154ff36913f05`** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-03 / D-DTTLF-PRODUCT-SYNTAX-PARITY-003 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B2 proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15` | Authorizes only the frozen comma sibling group, ordered-family expected contract, exact `fibrePair`, and one reviewer preset |
 | SYNTAX-PARITY-1B2 | **final-green at `ba34771074363f4c5b33814269b8822d4d2362bb`; audit/proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15`** | approved D003 review | One comma sibling group, optional positional family annotations, ordered-family expected contract, existing `displayedContextLambda`/`fibrePair` routes, eighth reviewer preset, 64/64 proportional gate, production build, and real Chromium |
-| SYNTAX-PARITY-1B3 | **dependency-ready implementation; focused-green audit/proposal at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`** | final-green 1B2 and approved D004 review | Implement only exact semicolon/comma `[1,1]`/`[1,2,1]` presentations, grouped expected families, existing dependent-context route, complete negatives, and one reviewer preset |
+| SYNTAX-PARITY-1B3 | **final-green in goal worktree; exact local checkpoint pending; audit/proposal at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`** | final-green 1B2 and approved D004 review | Exact semicolon/comma `[1,1]`/`[1,2,1]` presentations, grouped expected families, existing dependent-context route, complete negatives, browser-safe reviewed runtime split, ninth reviewer preset, production build, and real Chromium |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-04 / D-DTTLF-PRODUCT-SYNTAX-PARITY-004 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B3 audit/proposal | Authorizes only semicolon dependency levels for the two existing direct shapes and one mixed-telescope reviewer preset |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -810,14 +877,14 @@ and internal categorical factorization. Never guess an application action or
 promote arbitrary pointwise data to coherent categorical data.
 
 Recover the completed SYNTAX-PARITY-0A inventory and final-green
-SYNTAX-PARITY-1A, 1B1, and 1B2 implementations. Do not reimplement those
-rows. Recover the focused-green 1B3 zero-behavior audit and its exact
-checkpointed D004 proposal and its separate immutable human-supersedable
-approval. Implement only that scope. Commas remain independent siblings at
-one dependency level; semicolons present successive dependency levels only
-for exact direct group sizes `[1,1]` and `[1,2,1]`. A missing direct semantic
-capability belongs in the relevant usability/kernel plan, not in parser
-heuristics.
+SYNTAX-PARITY-1A, 1B1, 1B2, and 1B3 implementations. Do not reimplement those
+rows. Preserve commas as independent siblings at one dependency level and
+semicolons as successive dependency levels only for exact direct group sizes
+`[1,1]` and `[1,2,1]`. Continue with a zero-behavior `SYNTAX-PARITY-1C`
+inventory refinement and bounded proposal for the remaining selected
+mathematical constructors; do not add constructor behavior before its
+separate exact review. A missing direct semantic capability belongs in the
+relevant usability/kernel plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -833,6 +900,16 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1B3` implemented and final-green.** Added
+  exact semicolon dependency levels for only `[1,1]` and `[1,2,1]`, grouped
+  expected families, positional optional annotations, recursive existing-body
+  resolution, and the ninth mixed-telescope reviewer preset. Chromium exposed
+  and the implementation corrected one Node-only closure-loading seam by
+  separating checked browser runtime compilation from historical ledger
+  revalidation; both paths return the same compilation. Focused dependent,
+  transfer, historical graduation, reviewer, type/lint, production-build,
+  and real-Chromium gates are green. No mathematical or Lambdapi semantic
+  input changed. Exact local implementation checkpoint is pending.
 - **2026-07-30 — D004 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed dependent-context
   proposal, recorded an immutable, human-supersedable review authorizing only

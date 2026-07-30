@@ -505,18 +505,33 @@ annotated and annotation-free comma siblings resolve through the existing
 categorical semantic path. Eight browser presets, the 64/64 affected corpus,
 root/browser typecheck and lint, production build, and real Chromium sibling
 execution are green. Exact local implementation checkpoint:
-`ba34771074363f4c5b33814269b8822d4d2362bb`. Semicolon-dependent 1B3 remains
-closed for behavior, but its zero-behavior audit is now focused-green. It
-confirms that the existing direct method owns exactly `[1,1]` and
-`[1,2,1]` dependency-level shapes, selects semicolons between levels and
-commas within a sibling level, and freezes a non-self-authorizing D004
-proposal for one grouped expected-family contract and one mixed-telescope
-reviewer preset. Five focused tests, typecheck, and lint pass; the local
-audit/proposal checkpoint is
-`4eada97f9ee8fe284b70dea6c0548dfdb9754189`. A separate immutable unattended
-D004 review now approves that exact scope with human supersession; bounded
-1B3 implementation is dependency-ready. Arbitrary-depth/general dependent
-syntax remains closed.
+`ba34771074363f4c5b33814269b8822d4d2362bb`. The subsequent
+semicolon-dependent 1B3 audit confirmed that the existing direct method owns
+exactly `[1,1]` and `[1,2,1]` dependency-level shapes, selected semicolons
+between levels and commas within a sibling level, and froze a
+non-self-authorizing D004 proposal for one grouped expected-family contract
+and one mixed-telescope reviewer preset. Its local audit/proposal checkpoint
+is `4eada97f9ee8fe284b70dea6c0548dfdb9754189`; a separate immutable unattended
+D004 review approves that exact scope with human supersession.
+
+The bounded 1B3 implementation is now final-green in the goal worktree.
+Annotated and annotation-free genuine/mixed telescopes call the existing
+`displayedDependentContextLambda` once and recursively resolve every slot,
+`fibrePair`, closed application, and ordinary application through the same
+typed program. The ninth browser preset exposed a Node-only CommonJS load in
+the already reviewed chain-2A closure. The final correction separates
+browser-safe subject-checked runtime compilation from Node-side historical
+review-ledger revalidation; both return the same cached generic transfer
+compilation. The dependent text corpus passes 7/7, the corrected affected
+text/direct/reviewer corpus 75/75, the transfer identity corpus 6/6, the
+eight historical graduation suites 75/75, and the reviewer 8/8. Root/browser
+typecheck, lint, the 141-module production build, and real Chromium are
+green; Chromium accepts the mixed telescope with zero console errors or
+warnings. No owner, rule, profile, Core/checker/evaluator path, dependency
+planner, factorization case, transfer semantic input, or Lambdapi source
+changed. Exact implementation checkpoint is pending. Arbitrary-depth/general
+dependent syntax remains closed; 1C is the next zero-behavior constructor
+inventory/proposal row.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
