@@ -3413,7 +3413,11 @@ sibling/`fibrePair` and dependent/mixed telescope presentation separately
 gated as 1B2/1B3. The reviewed 1B1 implementation is final-green, exposes a
 seventh reviewer preset, and adds no scale owner, profile, transfer input, or
 Lambdapi change. Exact local checkpoint:
-`9f663555a1edbedcb99e97f1271154ff36913f05`. None changes or resumes a
+`9f663555a1edbedcb99e97f1271154ff36913f05`. The executable zero-delta 1B2
+audit now selects one parenthesized comma sibling group, exact `fibrePair`,
+and an expected ordered-family contract over the existing direct methods;
+semicolons and genuine dependencies remain separately gated as 1B3. Its
+deeply frozen D003 proposal awaits exact review. None changes or resumes a
 scale row. After exact parity graduation, follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows

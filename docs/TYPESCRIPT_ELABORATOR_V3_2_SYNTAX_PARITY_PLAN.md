@@ -20,7 +20,10 @@ is an executable, focused-green, zero-behavior-delta audit checkpointed at
 `SYNTAX-PARITY-1B1` proposal approved exactly as proposed by a separate
 immutable unattended review with human supersession; `SYNTAX-PARITY-1B1` is
 final-green and checkpointed at
-`9f663555a1edbedcb99e97f1271154ff36913f05`
+`9f663555a1edbedcb99e97f1271154ff36913f05`;
+`SYNTAX-PARITY-1B2` is now an executable, focused-green,
+zero-behavior-delta audit with a deeply frozen non-self-authorizing
+independent-sibling proposal awaiting its separate exact review.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -453,6 +456,101 @@ slice adds ten focused audit/implementation checks and reruns every affected
 text/browser suite rather than repeating the unchanged 15-minute semantic
 corpus.
 
+## `SYNTAX-PARITY-1B2` Independent-Sibling Audit And Proposed Gate
+
+The executable, deeply frozen audit in
+`src/v3_2/categorical_text_sibling_audit.ts` measures the next direct/text
+boundary:
+
+```text
+λ^fd (b : B, c : C). fibrePair (FF b) (GG c)
+```
+
+The corresponding direct TypeScript construction is already green:
+
+```text
+displayedContextLambda(
+  [{name: "b", family: B}, {name: "c", family: C}],
+  P(D,Q),
+  ([b,c]) => fibrePair(FF(b),GG(c))).
+```
+
+It selects `categorical.displayed-context-bracket`, records one
+shared-minimal-base sibling group, and lowers through the existing displayed
+left/right projections, generic displayed composition, and displayed pairing
+owner. The active kernel uses the transparent fibrewise product family and
+fixed-base universal-property owners; there is no `Product_catd` head to
+introduce. Object, base-arrow, internalized-arrow, and higher coherence remain
+inside those existing constructions.
+
+The present text failure is earlier and exact: the private parser expects one
+identifier after `λ^fd` and rejects the opening parenthesis at columns 6–7.
+This is therefore a multi-binding presentation seam, not a missing categorical
+construction.
+
+### Selected scalable notation
+
+The proposed separator semantics are:
+
+- commas bind independent siblings at one dependency level;
+- semicolons separate successive dependency levels, but remain rejected until
+  the separately gated `SYNTAX-PARITY-1B3` row.
+
+Thus the annotated and bidirectionally inferred forms are:
+
+```text
+λ^fd (b : B, c : C). fibrePair (FF b) (GG c)
+λ^fd (b, c). fibrePair (FF b) (GG c).
+```
+
+Nested unary syntax such as `λ^fd b. λ^fd c. ...` is not selected: it does not
+present the direct API's independent sibling block or its fibrewise-product
+context. A host-method-call spelling is also unnecessary. The text adapter
+must receive the ordered source families through immutable expected typing
+information; it must not decompose private Core provenance or guess a product
+presentation.
+
+### Proposed gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-03`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-003` proposes only
+`SYNTAX-PARITY-1B2`:
+
+- keep the private located language at three node kinds while generalizing
+  the lambda payload to immutable ordered binding groups;
+- treat existing unary binders as singleton groups;
+- parse exactly one parenthesized comma-separated group of at least two
+  portable names with independently optional annotations;
+- add one bidirectional `displayed-context-functor` expectation containing
+  the ordered source families and target family;
+- require the number and optional annotations to agree with that expectation;
+- invoke the existing `displayedContextLambda` once, extend one immutable
+  environment with all sibling tokens, and resolve the body recursively;
+- recognize only the exact binary `fibrePair left right` spine and call the
+  existing typed method;
+- keep all other application in the sole existing `apply` ladder; and
+- add one integrated-reviewer preset through the same browser-safe adapter.
+
+The direct program remains responsible for common-base, target-base,
+dependency-plan, active-slot, branch-family, and recursive-factorization
+checks. Exact negatives cover malformed/singleton/duplicate groups, expected
+arity and annotation mismatch, cross-base families, wrong expectation or
+mode, invalid `fibrePair` arity/scope/base, semicolon-dependent telescopes,
+nested abstraction, and unsupported bodies.
+
+The proposal adds no mathematical owner, `Product_catd`, Core node,
+categorical-program method, checker/evaluator branch, factorization case,
+runtime/proof rule, external coherence premise, Lambdapi change, parser
+dependency, or second semantic frontend. `SYNTAX-PARITY-1B3` remains a
+separate review even though the private group representation is deliberately
+compatible with adding semicolon-separated dependency levels later.
+
+The five focused executable audit tests pass, as do root typecheck and lint.
+The recovery baseline immediately before this zero-behavior-delta audit also
+passes all 1,159 TypeScript tests: 1,108 active passes, 51 intentional skips,
+and zero failures. No proportional Lambdapi check is triggered because the
+proposal changes no active source, transferred declaration/rule, Core owner,
+or semantic profile.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -551,7 +649,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B0 | **focused-green, zero behavior delta at `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`** | final-green `SYNTAX-PARITY-1A` | Executable contextual-index measurement, exact 1B1/1B2/1B3 split, and bounded non-self-authorizing proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | **approved as proposed; immutable unattended review with human supersession** | checkpointed `SYNTAX-PARITY-1B0` | Authorizes only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
 | SYNTAX-PARITY-1B1 | **final-green at `9f663555a1edbedcb99e97f1271154ff36913f05`** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
-| SYNTAX-PARITY-1B2 | gated | final-green 1B1 plus separate proposal/review | Independent displayed sibling binder presentation and `fibrePair` |
+| SYNTAX-PARITY-1B2 | **executable zero-behavior-delta audit and deeply frozen non-self-authorizing D003 proposal; focused-green; separate review pending** | final-green 1B1 | Selected comma sibling group, optional positional family annotations, one expected context contract, existing `displayedContextLambda`/`fibrePair` routes, exact direct evidence, alternatives, and negative boundary |
 | SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -608,14 +706,15 @@ classifier-directed programs, and distinguish parsing, typed elaboration,
 and internal categorical factorization. Never guess an application action or
 promote arbitrary pointwise data to coherent categorical data.
 
-Recover the completed SYNTAX-PARITY-0A inventory and final-green
-SYNTAX-PARITY-1A implementation. Continue only the next separately reviewed
-row in this ledger. The executable SYNTAX-PARITY-1B0 audit splits contextual
-index/weakening, independent sibling contexts, and genuine dependent/mixed
-telescopes into separate 1B1/1B2/1B3 rows. Do not implement its
-1B1 proposal beyond the exact human-supersedable D002 review. A missing
-direct semantic capability belongs in the relevant usability/kernel plan,
-not in parser heuristics.
+Recover the completed SYNTAX-PARITY-0A inventory, final-green
+SYNTAX-PARITY-1A, and final-green 1B1 implementation. Continue only the next
+separately reviewed row in this ledger. The executable 1B2 audit selects
+commas for one independent sibling level, reserves semicolons for the
+separately gated dependent/mixed 1B3 row, and freezes a non-self-authorizing
+D003 proposal over existing `displayedContextLambda`/`fibrePair` semantics.
+Do not implement it before its exact human-supersedable separate review. A
+missing direct semantic capability belongs in the relevant usability/kernel
+plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -631,6 +730,13 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1B2` sibling presentation audited.**
+  Executably confirmed that the mapped independent-sibling direct term is
+  already internally coherent and text currently fails only at the
+  parenthesized binder group. Selected commas for independent siblings,
+  reserved semicolons for 1B3 dependency levels, rejected nested-unary and
+  host-method spellings, and froze a bounded non-self-authorizing D003
+  proposal. The audit changes no parser/resolver or semantic behavior.
 - **2026-07-30 — `SYNTAX-PARITY-1B1` implemented and final-green.**
   Recognized only the exact unary `indexOf` spine through the existing typed
   method, retained one generic fixed-arity spine utility and one ordinary

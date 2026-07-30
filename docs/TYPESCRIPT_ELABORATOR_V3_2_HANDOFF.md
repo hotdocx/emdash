@@ -491,7 +491,11 @@ production build, and real Chromium weakening execution are green. No
 parser node, mathematical owner, Core/checker/runtime behavior, transfer
 input, or Lambdapi source changed. Exact local implementation checkpoint:
 `9f663555a1edbedcb99e97f1271154ff36913f05`. The next row remains the
-separately gated 1B2 independent-sibling/`fibrePair` presentation.
+separately gated 1B2 independent-sibling/`fibrePair` presentation. Its
+executable zero-behavior-delta audit now selects
+`λ^fd (b : B, c : C). fibrePair (FF b) (GG c)`, assigns commas to one
+independent dependency level, reserves semicolons for 1B3, and freezes a
+non-self-authorizing D003 proposal over only the existing direct methods.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
