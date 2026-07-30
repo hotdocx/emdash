@@ -545,7 +545,16 @@ constructors as 1C2 and category/displayed-family result constructors as 1C3;
 the latter must reuse the same parser/checker architecture rather than add a
 second frontend. Five focused tests, typecheck, and lint pass.
 A separate immutable D005 unattended review approves only those six heads
-with human supersession; `SYNTAX-PARITY-1C1` is dependency-ready.
+with human supersession. The bounded `SYNTAX-PARITY-1C1` implementation is
+now final-green in the goal worktree: `id`, `compose`, `pair`, `map`, `pi1`,
+and `pi2` call only the existing typed program methods; term operands recurse
+through the existing resolver, category operands remain checked identifiers,
+and subsequent application remains generic `apply`. Nested constructor
+sources are direct-equal. The corrected affected/audit corpus passes 71/71,
+the reviewer passes 8/8, typecheck/lint and the 141-module production build
+are green, and no browser preset, owner, profile, transfer input, or Lambdapi
+source changed. Exact local implementation checkpoint is pending; 1C2 is the
+next zero-behavior residual displayed/fibred constructor audit.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

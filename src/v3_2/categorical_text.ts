@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1B3-CATEGORICAL-TEXT-1' as const;
+    'SYNTAX-PARITY-1C1-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -774,6 +774,15 @@ class CoreCategoricalTextResolver {
                 return this.inspectTerm(binding, expression.range);
             }
             case 'application': {
+                const ordinaryStructural =
+                    this.resolveOrdinaryStructuralOperation(
+                        expression,
+                        environment,
+                        lambdaDepth
+                    );
+                if (ordinaryStructural !== undefined) {
+                    return ordinaryStructural;
+                }
                 const contextualIndex = this.fixedApplicationSpine(
                     expression,
                     'indexOf',
@@ -919,6 +928,169 @@ class CoreCategoricalTextResolver {
                 return exhaustive;
             }
         }
+    }
+
+    private resolveOrdinaryStructuralOperation(
+        expression: LocatedApplication,
+        environment: InternalEnvironment,
+        lambdaDepth: number
+    ): CoreCategoricalTerm | undefined {
+        const source = (detail: string): CoreCategoricalSourceSite =>
+            sourceSiteFor(
+                this.sourceFile,
+                expression.range,
+                detail
+            );
+        const resolveTerm = (
+            argument: LocatedExpression
+        ): CoreCategoricalTerm => this.resolveTerm(
+            argument,
+            environment,
+            undefined,
+            lambdaDepth
+        );
+
+        const identity = this.fixedApplicationSpine(
+            expression,
+            'id',
+            1
+        );
+        if (identity !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Ordinary identity functor was rejected',
+                () => this.program.identityFunctor(
+                    this.resolveCategoryArgument(
+                        identity[0],
+                        environment
+                    ),
+                    source('parsed ordinary identity functor')
+                )
+            );
+        }
+
+        const composition = this.fixedApplicationSpine(
+            expression,
+            'compose',
+            2
+        );
+        if (composition !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Ordinary functor composition was rejected',
+                () => this.program.composeFunctors(
+                    resolveTerm(composition[0]),
+                    resolveTerm(composition[1]),
+                    source('parsed ordinary functor composition')
+                )
+            );
+        }
+
+        const pair = this.fixedApplicationSpine(
+            expression,
+            'pair',
+            2
+        );
+        if (pair !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Ordinary functor pair was rejected',
+                () => this.program.functorPair(
+                    resolveTerm(pair[0]),
+                    resolveTerm(pair[1]),
+                    source('parsed ordinary functor pair')
+                )
+            );
+        }
+
+        const map = this.fixedApplicationSpine(
+            expression,
+            'map',
+            2
+        );
+        if (map !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Ordinary product map was rejected',
+                () => this.program.productMap(
+                    resolveTerm(map[0]),
+                    resolveTerm(map[1]),
+                    source('parsed ordinary product map')
+                )
+            );
+        }
+
+        for (const [head, side] of [
+            ['pi1', 'left'],
+            ['pi2', 'right']
+        ] as const) {
+            const projection = this.fixedApplicationSpine(
+                expression,
+                head,
+                2
+            );
+            if (projection === undefined) continue;
+            const left = this.resolveCategoryArgument(
+                projection[0],
+                environment
+            );
+            const right = this.resolveCategoryArgument(
+                projection[1],
+                environment
+            );
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                `Ordinary product ${side} projection was rejected`,
+                () => side === 'left'
+                    ? this.program.productLeftProjection(
+                        left,
+                        right,
+                        source(
+                            'parsed ordinary product left projection'
+                        )
+                    )
+                    : this.program.productRightProjection(
+                        left,
+                        right,
+                        source(
+                            'parsed ordinary product right projection'
+                        )
+                    )
+            );
+        }
+        return undefined;
+    }
+
+    private resolveCategoryArgument(
+        expression: LocatedExpression,
+        environment: InternalEnvironment
+    ): CoreCategoricalCategory {
+        if (expression.tag !== 'identifier') {
+            throw resolutionError(
+                'EXPECTED_CATEGORY',
+                this.sourceFile,
+                expression.range,
+                'This constructor position requires a checked category ' +
+                    'identifier; category-valued expressions belong to ' +
+                    'the separately gated SYNTAX-PARITY-1C3 row'
+            );
+        }
+        const binding = this.lookup(expression, environment);
+        if (binding.kind !== 'category') {
+            throw resolutionError(
+                'EXPECTED_CATEGORY',
+                this.sourceFile,
+                expression.range,
+                `Identifier '${expression.name}' denotes a ` +
+                    `${binding.kind}, not a category`
+            );
+        }
+        return binding.value;
     }
 
     private fixedApplicationSpine(

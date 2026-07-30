@@ -326,12 +326,20 @@ Current selected product evidence:
   `4eada97f9ee8fe284b70dea6c0548dfdb9754189` /
   `e33d20f98e7db65f8d17c3542c37f341f5cf0748` /
   `3dcf25ec008bb3d30723e3251c222e88acc216a3`;
+- constructor audit/review/implementation:
+  `487ed014c210ab8426b27c40241b2de0f2f1dc4e` /
+  `981730d` /
+  exact implementation checkpoint pending;
 - focused integrated reviewer test: eight checks, eight passes, zero
   failures, including direct-TypeScript equality for all nine presets;
 - focused independent-sibling implementation corpus: six checks, six passes,
   zero failures;
 - focused dependent-context text corpus: seven checks, seven passes, zero
   failures;
+- focused ordinary-constructor text corpus: six checks, six passes, zero
+  failures;
+- corrected affected text and complete syntax-audit corpus after 1C1:
+  71 checks, 71 passes, zero failures;
 - combined corrected affected text/parity/structural/displayed-context/
   browser corpus after 1B3: 75 checks, 75 passes, zero failures;
 - browser-safe/review-validating chain-2A transfer identity: six checks, six
@@ -342,8 +350,8 @@ Current selected product evidence:
   tests, 1,108 active passes, 51 intentional skips, and zero failures; the
   reviewed proportional 1B2/1B3 gates did not duplicate that unchanged
   aggregate;
-- Vite production build after 1B3: 141 modules, a 116.82 kB-gzip initial
-  script and a 164.73 kB-gzip lazy reviewer chunk; and
+- Vite production build after 1C1: 141 modules, a 116.82 kB-gzip initial
+  script and a 165.17 kB-gzip lazy reviewer chunk; and
 - real Chromium execution of the displayed-mixed-telescope preset
   `λ^fd (a : A; b : B, c : C; d : D). fibrePair b c`, producing an accepted
   explicit-Core/checker result with zero console errors or warnings. Earlier
@@ -369,6 +377,9 @@ This candidate demonstrates:
   diagnostics, whole-Hom expected routing, typed recursive cell composition,
   contextual-index weakening, independent sibling groups, and the two exact
   semicolon-dependent context shapes;
+- direct/text-equal ordinary structural heads `id`, `compose`, `pair`, `map`,
+  `pi1`, and `pi2`, including recursively nested constructors and subsequent
+  ordinary application;
 - an integrated client-side reviewer with editable categorical text,
   explicit research report, generated book, and editable minimal-Core
   playground; and

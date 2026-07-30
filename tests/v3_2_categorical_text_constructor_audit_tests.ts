@@ -9,11 +9,8 @@ import {
 } from 'node:test';
 import {
     CORE_CATEGORICAL_TEXT_CONSTRUCTOR_AUDIT,
-    CORE_CATEGORICAL_TEXT_REVISION,
     CoreCategoricalProgram,
     CoreCategoricalTextConstructorAuditError,
-    CoreCategoricalTextError,
-    elaborateCoreCategoricalText,
     validateCoreCategoricalTextConstructorAudit
 } from '../src/v3_2';
 
@@ -60,17 +57,6 @@ const fixture = () => {
     const G = program.functor('constructor_audit_G', B, C);
     const H = program.functor('constructor_audit_H', A, C);
     const P = program.functor('constructor_audit_P', X, Y);
-    const environment = [
-        { name: 'A', kind: 'category' as const, value: A },
-        { name: 'B', kind: 'category' as const, value: B },
-        { name: 'C', kind: 'category' as const, value: C },
-        { name: 'X', kind: 'category' as const, value: X },
-        { name: 'Y', kind: 'category' as const, value: Y },
-        { name: 'F', kind: 'term' as const, value: F },
-        { name: 'G', kind: 'term' as const, value: G },
-        { name: 'H', kind: 'term' as const, value: H },
-        { name: 'P', kind: 'term' as const, value: P }
-    ];
     return {
         program,
         A,
@@ -79,46 +65,26 @@ const fixture = () => {
         F,
         G,
         H,
-        P,
-        environment
+        P
     };
 };
 
 describe('SYNTAX-PARITY-1C0 constructor text audit', () => {
     it('pins the exact post-1B3 ordinary-constructor seam', () => {
-        const data = fixture();
+        const audit = CORE_CATEGORICAL_TEXT_CONSTRUCTOR_AUDIT;
         assert.equal(
-            CORE_CATEGORICAL_TEXT_REVISION,
+            audit.prerequisite.textRevision,
             'SYNTAX-PARITY-1B3-CATEGORICAL-TEXT-1'
         );
-        assert.throws(
-            () => elaborateCoreCategoricalText(data.program, {
+        assert.deepEqual(
+            audit.measuredTextSurface.exactOrdinaryFailure,
+            {
                 source: 'compose G F',
-                sourceFile:
-                    'tests/fixtures/' +
-                    'categorical-text-constructor-audit.emdash',
-                environment: data.environment,
-                expected: { kind: 'term' }
-            }),
-            error => {
-                assert.equal(
-                    error instanceof CoreCategoricalTextError,
-                    true
-                );
-                if (!(error instanceof CoreCategoricalTextError)) {
-                    return false;
-                }
-                assert.equal(error.phase, 'resolution');
-                assert.equal(error.code, 'UNKNOWN_IDENTIFIER');
-                assert.deepEqual(error.span.start, {
-                    line: 1,
-                    column: 1
-                });
-                assert.deepEqual(error.span.end, {
-                    line: 1,
-                    column: 8
-                });
-                return true;
+                phase: 'resolution',
+                code: 'UNKNOWN_IDENTIFIER',
+                identifier: 'compose',
+                startColumn: 1,
+                endColumn: 8
             }
         );
     });
