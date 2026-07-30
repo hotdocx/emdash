@@ -130,7 +130,7 @@ induction semantics, integrated batch deduplication, plus the outer-LF
 TYPE/KIND Π-formation boundary remain explicit later work before any newly
 promoted active stress profile or whole-transfer claim
 
-## Current Integration Boundary — 2026-07-29
+## Current Integration Boundary — 2026-07-30
 
 The long status above is cumulative history. The current operational
 conclusion is narrower and clearer:
@@ -429,6 +429,26 @@ dependency, checker/action table, Core owner, browser entry, or Lambdapi
 change was added, and this experimental TypeScript spelling does not yet
 standardize informal Lambdapi/kernel telescope notation.
 
+The documentation-only PRODUCT-GRADUATE-1 scope is implemented in the current
+working draft under D-DTTLF-PRODUCT-GRADUATE-001. Its command/capability
+matrix remains useful, but the user's later explicit clarification supersedes
+its route back to scale: the CLI report, browser, categorical text, and book
+are ingredients of one reviewer journey.
+
+The current dependency-ready product continuation is
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md).
+Its measured audit directly Vite-built and Chromium-ran the categorical text
+program and all three existing report candidates after a disposable
+substitution isolated the sole Node builtin to acquisition hashing. The
+selected architecture separates immutable selection-contract creation from
+Node-only source/export SHA-256 verification, adds one narrow lazy browser
+review entry, joins editable ordinary text and the existing report with the
+generated book, and preserves the minimal playground. The frozen
+H-DTTLF-PRODUCT-REVIEWER-01 proposal is non-self-authorizing and awaits its
+separate exact D-DTTLF-PRODUCT-REVIEWER-001 decision. No new scale semantic is
+needed by the present witness; a specifically required scale ingredient may
+move earlier only through its own measured bounded review.
+
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
 was slower than the recent serial focused baselines, so do not replace the
@@ -464,11 +484,14 @@ scale plan's living launch prompt. The selected sequence is:
    `ind_nat`/two-rule/`nat_elim` evidence;
 3. obtain or record the exact D-DTTLF-SCALE-INDUCTIVE-002 review and close
    only the frozen zero-new-engine SCALE-INDUCTIVE-1B2 continuation; and
-4. follow the product plan through its reviewed external-review demo and
-   measured parser/browser decision gates, then close the documentation-only
-   H-DTTLF-PRODUCT-GRADUATE-01 handoff, now separately approved under
-   D-DTTLF-PRODUCT-GRADUATE-001; then
-5. return through SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1.
+4. preserve the completed external-review CLI, directed browser, and
+   categorical text checkpoints plus the documentation-only capability
+   matrix;
+5. follow the integrated reviewer plan through its separate exact review,
+   browser/report/text/book implementation, and runnable graduation; then
+6. take the next product or specifically justified scale dependency routed by
+   the living ledgers, eventually including SCALE-STRESS-3C, SCALE-BATCH-1,
+   and SCALE-GRADUATE-1.
 
 ## Purpose
 
@@ -487,8 +510,9 @@ The exact implemented outer-LF and directed-DTT continuation is recorded by
 [`TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md).
 Forward systematic-transfer work is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md).
-The current external-review demo and measured product-boundary continuation
-is governed by
+The current integrated external-reviewer continuation is governed by
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md).
+Its CLI, browser, and syntax ingredient history is governed by
 [`TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md).
 The current product-facing dependent-demo and categorical-binder work is
 governed by
@@ -646,12 +670,15 @@ Read these in order before selecting a semantic target:
    dependent-demo and categorical-binder frontend critical path;
 9. `TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md` for the accepted
    binder/application judgments and exact structural-owner prerequisites;
-10. `TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md` for the retained
+10. `TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md` for the current
+   report/text/browser/book product continuation and selective
+   demo-driven-scale policy;
+11. `TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md` for the retained
    systematic-transfer implementation ledger, subordinate to the
    mathematical sources above;
-11. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the reviewed
+12. `TYPESCRIPT_ELABORATOR_V3_2_DTT_LF_CONTINUATION_PLAN.md` for the reviewed
    outer-LF/directed-profile implementation history;
-12. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
+13. `TYPESCRIPT_ELABORATOR_V3_2_MASTER_PLAN.md` for the completed exact-profile
     history.
 
 The root `src/` implementation predates the current kernel. Its generic

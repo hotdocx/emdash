@@ -722,7 +722,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-ACQUIRE-1B | deferred; prototype removed | SCALE-STRESS-3B0 plus a measured future acquisition need | Optional narrow fail-closed declaration adapter feeding the existing IR; the abandoned unexported canonical-symbol prototype is not architectural infrastructure and must not be recreated without a recorded cost/benefit trigger |
 | SCALE-STRESS-3B1 | deferred | usability graduation or an independently measured transfer priority; exact root/generated-owner boundary | Directly construct and compile the smallest typed root prerequisite and protected hom-action declaration closure through data/policy only, preserving protected exposition and opaque tactic theorems; no parser dependency |
 | SCALE-STRESS-3B2 | deferred | SCALE-STRESS-3B1 | Compile the evidence-property declaration closure against exact root/protected interfaces and check representative transparent bodies without activating a profile |
-| PRODUCT-FACING-CONTINUATION | active in the dedicated product/browser/syntax plans; PRODUCT-DEMO-1B final-green at `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`; ORACLE-0A, BROWSER-0A, SYNTAX-0A, and reviewed BROWSER-DIRECTED-1A final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | completed usability/displayed evidence and SCALE-INDUCTIVE-HYBRID-0A; independent of the pending inductive closeout review | The root-only three-panel report remains the full reviewed presentation. The additive browser entry now runs the outer dependent-LF witness and preserved minimal-Core playground in a Node-free portable static build; Chromium, strict Vite, and the 1,114-test aggregate pass. Categorical browser promotion remains behind runtime/acquisition separation. The parser-independent SYNTAX-RESOLVE-0B contract is next; no parser dependency, scale row, or transfer claim is closed |
+| PRODUCT-FACING-CONTINUATION | active in the dedicated integrated-reviewer plan; existing CLI, directed-browser, and ordinary-text ingredients are final-green; combined categorical/report Vite and Chromium audit complete; H-DTTLF-PRODUCT-REVIEWER-01 frozen | completed usability/displayed evidence and product ingredients; exact D-DTTLF-PRODUCT-REVIEWER-001 required | Join the unchanged three-panel report, editable ordinary categorical text, generated book, and minimal implementation evidence in one browser reviewer shell after separating immutable selection-contract creation from Node-only acquisition hashing. No new semantic or scale claim; an exact scale item may move earlier only for a measured reviewer prerequisite |
 | SCALE-STRESS-3C | pending | applicable inductive/import/runtime mechanisms | Qualify the multi-module `WalkingEnd_cat`/dependent-eliminator/higher-action/`BNat_cat` HIT slice and record its exact generated-owner and runtime/proof boundaries |
 | SCALE-BATCH-1 | pending | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
@@ -3337,8 +3337,9 @@ semantic or scale result. Its measured browser and user-syntax audits are
 complete and route to their dedicated living plans. Take only the selected
 additive directed-browser proposal after exact review; that slice is now
 complete and final-green. Keep categorical browser separation, static
-publication, and parser/resolver implementation gated by their own rows. The
-next product boundary is the frozen
+publication, and additional parser/resolver modes gated by their own rows.
+Preserve the completed ordinary categorical text slice. Its original product
+boundary was the frozen
 H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001
 SYNTAX-RESOLVE-0B contract, now separately approved with human supersession.
 SYNTAX-PARSER-0C is complete and selects the dependency-free tiny parser from
@@ -3357,14 +3358,23 @@ final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`: 13 focused tests,
 the actual command, typecheck/lint, the 1,127-test aggregate, and bounded
 active Lambdapi check pass with no dependency/lock, semantic-engine, browser,
 or Lambdapi delta.
-The product plan now freezes the documentation-only
+The product plan froze the documentation-only
 H-DTTLF-PRODUCT-GRADUATE-01 / D-DTTLF-PRODUCT-GRADUATE-001 proposal to
 consolidate the three runnable product lanes and their exact limitations; its
-separate exact review is now recorded with human supersession. After its
-completion routes back here, continue with
-SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
-substitute the pending
+separate exact review is recorded with human supersession. The
+documentation-only handoff is implemented in the current draft, but the
+user's later direct correction rejects separate documented lanes as the final
+reviewer product. The dependency-ready continuation is now the measured and
+frozen proposal in
+`docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`; scale remains
+the top-level architecture ledger but does not resume bulk order until that
+plan routes back. Do not silently substitute the pending
 SCALE-STRESS-1B profile or deferred parser/protected-module bulk rows.
+
+A reviewer witness may selectively promote one exact scale dependency ahead
+of bulk order when a measured mathematical story requires it and a separate
+bounded review approves it. This is not bulk scale authority. The current
+integrated outer-LF/ordinary/displayed witness requires no new scale semantic.
 
 Separate acquisition from semantic policy and runtime rewrites from
 proof-time unification. Fail closed on unsupported terms, patterns,
@@ -4006,3 +4016,20 @@ scope is affected.
   checker/evaluator/Core/action-table, browser, or Lambdapi delta occurred.
   Exact local implementation checkpoint:
   `7513cbe9e0d1439b5b1250982f40cede48e9a811`.
+- **2026-07-29 — PRODUCT-GRADUATE-1 documentation draft routed back
+  (historical; later superseded).** Under the
+  exact documentation-only D-DTTLF-PRODUCT-GRADUATE-001 review, consolidated
+  the selected direct-TypeScript, categorical-text, directed-browser, and
+  optional higher-action commands with their precise limitations. Verified
+  command/source paths and synchronized living navigation. No runtime,
+  dependency, browser, Lambdapi, or scale evidence changed. The exact local
+  draft proposed SCALE-STRESS-3C next. The direct human product correction on
+  2026-07-30 supersedes that route before the draft was checkpointed.
+- **2026-07-30 — Direct human product correction supersedes the route-back.**
+  The CLI report, categorical text, browser, and book are one intended
+  reviewer journey. A combined Vite/Chromium audit proves the existing text
+  and three-panel report can run client-side after a narrow
+  acquisition-contract/hash ownership correction. The dedicated integrated
+  reviewer plan is dependency-ready; scale bulk order is paused, while a
+  specifically required scale ingredient may be promoted only by a measured
+  separately reviewed proposal.

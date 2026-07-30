@@ -164,6 +164,16 @@ branch and does not change the frozen browser profile.
 
 The self-contained walkthrough and exact limitation boundary are in
 [`./docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md`](./docs/TYPESCRIPT_ELABORATOR_V3_2_EXTERNAL_REVIEW_DEMO.md).
+That handoff now also gives the exact command/capability matrix for the
+ordinary categorical text adapter and selected client-side directed browser,
+without implying that either contains the full direct-TypeScript displayed
+surface.
+The living
+[`integrated reviewer plan`](./docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md)
+records the corrected product objective: join this same report, editable
+categorical text, the generated emdash book, and the minimal implementation
+evidence in one client-side reviewer workbench. Its measured feasibility is
+complete; runtime implementation remains behind its separate exact review.
 The optional higher-action witness remains available as:
 
 ```bash

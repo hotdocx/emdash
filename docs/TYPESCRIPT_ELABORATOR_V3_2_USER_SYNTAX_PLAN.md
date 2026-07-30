@@ -21,7 +21,11 @@ H-DTTLF-PRODUCT-SYNTAX-03 / D-DTTLF-PRODUCT-SYNTAX-003 correction separates
 intrinsic `λ^mode` capability from an optional `: annotation`; no located tree
 or resolver landed as unused runtime infrastructure; SYNTAX-1A is implemented
 and final-green at exact local checkpoint
-`7513cbe9e0d1439b5b1250982f40cede48e9a811`
+`7513cbe9e0d1439b5b1250982f40cede48e9a811`; the user's later integrated
+product correction promotes browser joining of this exact ordinary syntax
+through
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md),
+while additional modes and final notation remain deferred
 
 ## Purpose And Meaning Of Usability
 
@@ -889,12 +893,14 @@ SYNTAX-0A architecture audit (complete)
      intrinsic λ^mode from optional : annotation
   -> SYNTAX-1A land tiny parser + located nodes + resolver + example
      together through existing APIs (complete and final-green)
-  -> SYNTAX-BROWSER-1B optionally join it to a reviewed browser profile
+  -> SYNTAX-BROWSER-1B join it to the frozen integrated reviewer proposal
   -> SYNTAX-GRADUATE-1 record the exact supported grammar/usability envelope
+     in the runnable integrated reviewer handoff
 ```
 
-Browser joining is deliberately later. The resolver and parser should be
-Node-independent, but a browser UI is a separate product boundary.
+Browser joining remains a separate reviewed product boundary, but it is now
+the dependency-ready continuation rather than an optional indefinite
+deferral. The resolver and parser remain Node-independent input adapters.
 
 ## Work Ledger
 
@@ -905,8 +911,8 @@ Node-independent, but a browser UI is a separate product boundary.
 | SYNTAX-PARSER-0C | complete | D-DTTLF-PRODUCT-SYNTAX-001 | Parsimmon and tiny-parser parsed/rejected the same corpus; both browser-build; measurements above select the dependency-free tiny parser |
 | SYNTAX-NOTATION-0D | complete as direct human correction D-DTTLF-PRODUCT-SYNTAX-003; synchronization active | approved D-DTTLF-PRODUCT-SYNTAX-002 implementation, before its runtime checkpoint | Intrinsic `λ^mode`, optional checked `: annotation`, expected-source recovery, mode-specific semantic gates, and deferred repository-wide notation consolidation |
 | SYNTAX-1A | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811` under D-DTTLF-PRODUCT-SYNTAX-002 as corrected by direct human D-DTTLF-PRODUCT-SYNTAX-003; proposal checkpoint `6766eba` | parser-selection/implementation review and SYNTAX-NOTATION-0D | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example landed as one user-visible slice |
-| SYNTAX-BROWSER-1B | deferred | reviewed parser and browser profile | Editable browser input without a second checker or server |
-| SYNTAX-GRADUATE-1 | pending | selected syntax rows | Exact grammar, binder/action matrix, diagnostics, performance observation, and deferrals |
+| SYNTAX-BROWSER-1B | gated on D-DTTLF-PRODUCT-REVIEWER-001 | reviewed parser plus measured browser profile | Editable ordinary categorical input in the integrated reviewer without a second checker or server |
+| SYNTAX-GRADUATE-1 | documentation scope complete; runnable product graduation gated on SYNTAX-BROWSER-1B | selected syntax rows | Exact grammar, intrinsic-mode/optional-annotation boundary, binder/action matrix, diagnostics, browser interaction, and deferrals |
 
 ## Feasibility Assessment
 
@@ -991,6 +997,19 @@ broader grammar, semantic feature, dependency, browser, or Git effect.
 
 ## Change Log
 
+- **2026-07-30 — SYNTAX-BROWSER-1B promoted into the integrated reviewer.**
+  The user's direct product clarification supersedes indefinite browser
+  deferral for the already final-green ordinary `^f` adapter. The measured
+  combined Vite/Chromium probe succeeds after isolating Node-only acquisition
+  hashing. The new proposal changes no grammar or semantic action; displayed
+  modes and final notation remain gated.
+- **2026-07-29 — SYNTAX-GRADUATE-1 completed through the product handoff.**
+  The approved documentation-only D-DTTLF-PRODUCT-GRADUATE-001 row exposes
+  the exact ordinary `^f` command and input examples, separates direct typed
+  displayed consumers from unsupported displayed text, records
+  `^n`/`^fd`/`^nd` as fail-closed, and preserves both browser joining and final
+  TypeScript/Lambdapi notation as deferred. No syntax or runtime behavior
+  changed.
 - **2026-07-29 — Corrected SYNTAX-1A implemented and final-green.** Added the
   dependency-free private located parser and recursive resolver, root export,
   `demo:categorical-text`, focused tests, aggregate wiring, and user-facing

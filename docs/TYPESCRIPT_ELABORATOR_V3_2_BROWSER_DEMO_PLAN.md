@@ -13,8 +13,11 @@ Status: active product subplan; measured BROWSER-0A audit complete;
 BROWSER-DIRECTED-1A is approved exactly as proposed under
 D-DTTLF-PRODUCT-BROWSER-001 with human supersession, implemented, and
 final-green at exact local checkpoint
-`7f696cea4b6a369e5db41c0d5e57e778b61fa10c`; categorical promotion and
-static publication remain separately gated
+`7f696cea4b6a369e5db41c0d5e57e778b61fa10c`; the user's later product
+correction now promotes the measured categorical/report/browser integration
+to the frozen exact gate in
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md);
+static publication remains separately gated
 
 ## Purpose
 
@@ -24,7 +27,8 @@ command-line programs. This plan adds a browser experience without treating
 packaging as new mathematical evidence and without weakening the deliberately
 narrow, frozen `emdash-v3.2-mvp-1` browser API.
 
-The browser work is split into two independently truthful products:
+The original staging split browser work into two independently truthful
+capability increments:
 
 1. an inexpensive outer-dependent-LF demonstration whose complete dependency
    graph is already browser-safe; and
@@ -36,6 +40,13 @@ This split is not a retreat from the categorical product goal. It prevents a
 Node packaging issue from being misdiagnosed as a categorical-kernel gap, and
 it makes a useful browser artifact available while the larger runtime
 boundary is corrected.
+
+The user has now clarified that those increments are ingredients rather than
+separate final products. The integrated reviewer plan supersedes the
+documentation-only route back to scale and joins the existing report,
+categorical text, generated book, and preserved minimal playground in one
+browser workbench after the measured runtime/acquisition dependency
+correction.
 
 The selected deployment model is a fully client-side static build, with
 `https://hotdocx.github.io/emdash/` as the likely eventual host. Sandpack
@@ -383,30 +394,39 @@ Lambdapi source/process, mathematical owner, runtime/proof/unification rule,
 checker/evaluator branch, contextual compiler case, backend, worker, remote
 workflow, publication, or scale/graduation claim.
 
-## BROWSER-CATEGORICAL-0A — Deferred Runtime-Boundary Refactor
+The later final-green `demo:categorical-text` adapter is intentionally absent
+from this already checkpointed browser entry and fixture. That statement
+remains true of BROWSER-DIRECTED-1A. The user's later direct product
+correction now selects the categorical runtime-boundary audit and integrated
+reviewer proposal without retroactively broadening D-DTTLF-PRODUCT-BROWSER-001
+or D-DTTLF-PRODUCT-GRADUATE-001.
 
-This row is architecture work, not a browser styling task. Before any
-categorical browser entry is proposed, it must:
+## BROWSER-CATEGORICAL-0A — Promoted Measured Runtime Boundary
 
-1. identify every runtime import from categorical program assembly into
-   acquisition, digest, source-text, audit, proposal, or review modules;
-2. extract only immutable declaration/rule/runtime specification data into
-   Node-independent modules;
-3. retain source hashes and active-Lambdapi comparisons in Node-only gates
-   that verify those exact specs;
-4. remove runtime `require` seams from the selected browser closure without
-   broad barrel imports;
-5. preserve a single `CoreCategoricalProgram` and one checker/evaluator;
-6. Vite-build and browser-run the ordinary bracket witness;
-7. measure bundle/startup cost; and
-8. freeze a separate exact proposal before exposing displayed dependency or
-   the combined product report.
+This row is architecture work, not a browser styling task. The later direct
+human product correction promotes it, and the completed audit plus exact
+proposal now live in
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md).
+That audit narrows the original questions:
 
-The ordinary bracket is the first categorical candidate because it exercises
-recursive variable occurrence, diagonal, exchange, evaluation, and
-object/arrow-aware application with less transfer closure than the displayed
-chain. Successful ordinary promotion will not automatically approve the
-displayed profile.
+1. the sole Node builtin is `node:crypto` in
+   `lf_transfer_acquisition.ts`;
+2. runtime representations need only immutable selection-contract creation,
+   while source/export hashing and parsing remain Node-only;
+3. a disposable boundary substitution Vite-built and Chromium-ran both the
+   categorical text adapter and all three existing product-report
+   candidates;
+4. no second categorical program, checker, or browser action table is
+   required; and
+5. the existing profile-gated circularity seams can remain internal only if
+   the selected narrow browser entry and actual build/runtime prove them
+   dormant and Node-free.
+
+The integrated proposal therefore selects a browser-safe acquisition-contract
+module, editable ordinary text, the unchanged fixed three-panel report
+(including its genuine displayed-chain evidence), the generated book, and a
+non-eager full-report action. Editable displayed syntax and broader profile
+exposure remain separately gated.
 
 ## Work Ledger
 
@@ -414,11 +434,11 @@ displayed profile.
 | --- | --- | --- | --- |
 | BROWSER-0A | complete | PRODUCT-DEMO-1B | Measured static closure, actual Vite success/failure, real-browser directed witness, and packaging diagnosis |
 | BROWSER-DIRECTED-1A | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | BROWSER-0A and D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, two-view fixture, focused safety tests, portable static production build, and real-browser evidence |
-| BROWSER-CATEGORICAL-0A | deferred; not selected by D-001 | BROWSER-DIRECTED-1A or independent priority | Separate immutable runtime specs from Node acquisition/audit evidence and qualify the ordinary bracket bundle |
-| BROWSER-CATEGORICAL-1A | gated | BROWSER-CATEGORICAL-0A plus separate review | Additive ordinary categorical browser entry and UI |
-| BROWSER-DISPLAYED-1A | gated | browser-safe displayed closure plus separate review | Displayed-chain browser witness without widening the claimed usability envelope |
+| BROWSER-CATEGORICAL-0A | active measured continuation; exact audit completed in the integrated reviewer plan | direct human product correction after BROWSER-DIRECTED-1A | Separate immutable selection-contract creation from Node acquisition hashing and qualify text plus the existing report |
+| BROWSER-CATEGORICAL-1A | gated on D-DTTLF-PRODUCT-REVIEWER-001 | BROWSER-CATEGORICAL-0A and frozen integrated proposal | One narrow reviewer browser entry and UI over the existing categorical text and report runners |
+| BROWSER-DISPLAYED-1A | included only through the existing fixed three-panel report in the proposed integrated reviewer; editable displayed text remains gated | browser-safe displayed closure plus separate review | Execute the already reviewed displayed-chain witness without widening its usability envelope |
 | BROWSER-STATIC-DEPLOY-0A | deferred; publication not authorized | BROWSER-DIRECTED-1A and an explicit deployment priority | Audit the existing repository CI/pages configuration and freeze an exact static artifact/workflow/domain proposal; no Node backend unless a measured client-side blocker exists |
-| BROWSER-GRADUATE-1 | complete for the selected directed slice; does not graduate categorical/deploy rows | BROWSER-DIRECTED-1A | Exact browser capability, package/runtime boundary, observed build, static-host feasibility, residual categorical/deployment gates, and product-plan handoff recorded above |
+| BROWSER-GRADUATE-1 | complete only for the historical directed slice; integrated graduation remains gated | BROWSER-DIRECTED-1A | Exact directed capability and residual boundary; no longer the final reviewer product |
 
 ## Git Boundary
 
@@ -435,7 +455,9 @@ rewrite, branch/worktree deletion, or unrelated cleanup is authorized.
 
 ```text
 Continue the next dependency-ready reviewed row routed by
-docs/TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md, while retaining
+docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md, while retaining
+docs/TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md as the browser
+capability/history ledger,
 docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md as the product ledger,
 docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md as the top-level
 architecture ledger, and docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md as the
@@ -460,6 +482,14 @@ browser, parser, semantic, publication, or Git effects.
 
 ## Change Log
 
+- **2026-07-30 — Categorical browser row promoted and narrowed.** The user
+  clarified that browser, text, CLI report, and book are one reviewer
+  product. Disposable direct imports isolated `node:crypto` acquisition
+  hashing as the only Node builtin; a substituted diagnostic build then ran
+  real categorical text and all three report candidates in Chromium. The
+  integrated reviewer plan owns the exact contract-layer correction and
+  browser implementation proposal; deployment and editable displayed text
+  remain gated.
 - **2026-07-29 — BROWSER-0A completed.** Measured the existing fixture and
   root continuation closures. The full product report fails a Vite build
   because categorical profile assembly reaches Node-only acquisition/digest

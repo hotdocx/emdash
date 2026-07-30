@@ -28,9 +28,11 @@ direct human correction H-DTTLF-PRODUCT-SYNTAX-03 /
 D-DTTLF-PRODUCT-SYNTAX-003 separates intrinsic `λ^mode` capability from an
 optional checked `: annotation`, and the corrected SYNTAX-1A implementation
 is final-green at exact local checkpoint
-`7513cbe9e0d1439b5b1250982f40cede48e9a811`; PRODUCT-GRADUATE-1 is the
-dependency-ready bounded documentation/handoff row, now approved exactly as
-proposed under D-DTTLF-PRODUCT-GRADUATE-001 with human supersession
+`7513cbe9e0d1439b5b1250982f40cede48e9a811`; the documentation-only
+PRODUCT-GRADUATE-1 scope is implemented in the working draft, but the user's
+later explicit product correction supersedes its route back to scale:
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md)
+now freezes H-DTTLF-PRODUCT-REVIEWER-01 as the next product boundary
 
 ## Human Direction And Purpose
 
@@ -48,6 +50,13 @@ whole-development transfer claim. Its purpose is to make the already checked
 outer dependent LF and categorical/directed-DTT usability envelope easy for
 an external reviewer to run, understand, and inspect before more
 architecture-qualification work is accumulated.
+
+The user subsequently clarified the intended product boundary: the
+external-review CLI, categorical text adapter, directed browser, and emdash
+book are ingredients of one external-reviewer journey, not separate lanes
+whose documentation alone completes the product. The dedicated integrated
+reviewer plan records that correction, its measured Vite/Chromium
+feasibility, and the exact next proposal.
 
 The intended meaning of *usability* remains substantive:
 
@@ -172,12 +181,13 @@ product decision, not restoration of an accidentally omitted dependency.
 
 | Work | Feasibility now | Direct user value | Architectural value | Recommended priority |
 | --- | --- | --- | --- | --- |
-| Curated external-review CLI and guide | high; mostly composition of green modules | high | medium; exposes actual boundaries | first |
-| Browser-boundary audit | high and bounded | medium | high for packaging decision | after CLI |
-| Browser implementation | likely medium; exact cost unknown until audit | high | medium | gated |
-| User-syntax/parser audit | high and bounded | medium | high for correct frontend boundary | after CLI |
-| User-facing parser implementation | medium; tokenization is easy, integration and mode-directed application are the real work | high | medium | gated |
-| SCALE-STRESS-3C WalkingEnd/HIT | medium and semantically diverse | low immediate | high | resume after product checkpoint |
+| Curated external-review CLI and guide | complete and final-green | high | medium; exposes actual boundaries | preserve |
+| Browser-boundary audit | complete | medium | high for packaging decision | preserve |
+| Selected directed browser | complete and final-green | high | medium | preserve; categorical browser remains gated |
+| User-syntax/parser audit | complete | medium | high for correct frontend boundary | preserve |
+| Ordinary `^f` text adapter | complete and final-green; displayed modes remain gated | high | medium | preserve |
+| Integrated reviewer browser | measured feasible; exact contract-layer/UI proposal frozen | very high | high; proves one real product boundary | immediate after separate review |
+| SCALE-STRESS-3C WalkingEnd/HIT | medium and semantically diverse | low immediate unless selected for a reviewer story | high | after integrated graduation or earlier only for an exact demo prerequisite |
 | SCALE-BATCH-1 | deterministic only after constituent mechanisms; labor-heavy | low immediate | high | later scale proof |
 | SCALE-GRADUATE-1 | cheap only after required evidence exists | medium | high | final scale row |
 
@@ -199,8 +209,13 @@ PRODUCT-DEMO-0A inventory
   -> disposable parser comparison (complete; tiny parser selected)
   -> H-DTTLF-PRODUCT-SYNTAX-02 / separate implementation review
   -> parser + located nodes + resolver + example as one vertical slice
-  -> PRODUCT-GRADUATE-1
-  -> return to SCALE-STRESS-3C / SCALE-BATCH-1 / SCALE-GRADUATE-1
+     (complete)
+  -> PRODUCT-GRADUATE-1 documentation scope (implemented draft)
+  -> REVIEWER-INTEGRATE-0A combined browser measurement (complete)
+  -> H-DTTLF-PRODUCT-REVIEWER-01 / separate exact review
+  -> REVIEWER-INTEGRATE-1A browser + report + text + book
+  -> REVIEWER-GRADUATE-1
+  -> select the next product or specifically justified scale dependency
 ```
 
 Browser and parser audits may run in either order after PRODUCT-DEMO-1B.
@@ -357,7 +372,9 @@ Exact local implementation checkpoint:
 | PRODUCT-BROWSER-1 | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, fixed dependent-LF plus preserved minimal-Core views, Node-free/static project-subpath build, real-browser evidence, and no semantic/dependency delta |
 | PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); the measured comparison selected the tiny dependency-free parser |
 | PRODUCT-SYNTAX-1 | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003 | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
-| PRODUCT-GRADUATE-1 | approved exactly as proposed under D-DTTLF-PRODUCT-GRADUATE-001 with human supersession; implementation active; proposal checkpoint `76e7e11` | completed selected browser and syntax rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
+| PRODUCT-GRADUATE-1 | exact documentation scope approved under D-DTTLF-PRODUCT-GRADUATE-001 and implemented in the current draft; its route-back claim is superseded by direct human product correction | completed selected browser and syntax rows | Historical capability matrix and non-claims; not integrated product graduation |
+| REVIEWER-INTEGRATE-0A | complete measured audit in the dedicated integrated-reviewer plan | existing CLI, browser, text, and book ingredients | Real Vite/Chromium proof that one browser can execute text plus all three report candidates after correcting the acquisition/hash dependency |
+| REVIEWER-INTEGRATE-1A | gated on D-DTTLF-PRODUCT-REVIEWER-001 | frozen H-DTTLF-PRODUCT-REVIEWER-01 | One browser reviewer workbench joining the existing report, editable categorical text, generated book, and minimal Core evidence |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
 
@@ -510,6 +527,39 @@ runtime-boundary refactor, dependency/lock change, checker/evaluator/Core/
 action-table change, Lambdapi source or process change, deployment/workflow/
 publication, scale result, or remote/broad Git operation.
 
+## PRODUCT-GRADUATE-1 Documentation Scope And Later Correction
+
+The approved documentation-only row is implemented in the current working
+draft:
+
+- the existing external-review guide is now the self-contained current product
+  handoff rather than a stale pre-parser snapshot;
+- its runnable matrix distinguishes the broad direct-TypeScript report,
+  bounded editable ordinary categorical text, selected client-side directed
+  browser, and optional higher-action witness;
+- executable `λ^f` examples match the final-green text demo/tests;
+- the displayed example is the actual direct
+  `displayedDependentContextLambda` input, while old `x :^mode A` notation is
+  explicitly historical shorthand;
+- browser and text plans agree that the categorical adapter is not in the
+  selected browser entry;
+- the exact checkpoints and 1,127-test aggregate counts are recorded; and
+- every named command and all seven linked source paths were verified against
+  the current package/worktree.
+
+That draft is a useful capability inventory, but the later direct human
+clarification rejects documentation of separate lanes as the final product
+boundary. The immutable D-DTTLF-PRODUCT-GRADUATE-001 review remains exact for
+the documentation it authorized; it does not veto the later correction.
+
+The dependency-ready product work is now
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md).
+Its completed measured audit shows that the existing text adapter and all
+three report candidates can execute in one client bundle after separating
+immutable selection-contract creation from Node-only acquisition hashing. It
+freezes a new exact review before runtime implementation. Scale does not
+resume merely because this older documentation scope is complete.
+
 ## Scale Relationship
 
 This plan changes priority, not truth:
@@ -526,6 +576,13 @@ This plan changes priority, not truth:
 
 The product demo may expose existing higher-action or induction evidence, but
 it cannot close those rows by presentation.
+
+The demo and scale plans are not silos. If the integrated reviewer story
+exposes a specific missing owner, rule, proof-time mechanism, or unification
+case, that exact scale dependency may be promoted ahead of bulk order after
+a measured need and separate bounded review. The first integrated witness
+already has outer-DTT, ordinary categorical, and genuinely displayed
+dependent evidence, so no new scale semantic is presently a prerequisite.
 
 ## Git And Persistent-Goal Boundary
 
@@ -545,7 +602,9 @@ authorized.
 
 ```text
 Kick off or continue the current dependency-ready work routed by
-docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md, with
+docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md, with
+docs/TYPESCRIPT_ELABORATOR_V3_2_PRODUCT_DEMO_PLAN.md retained as the product
+history/ingredient ledger and
 docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md retained as the
 top-level architecture-qualification ledger and
 docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md as the recovery entry point.
@@ -561,16 +620,21 @@ snapshot. Prioritize a truthful external-reviewer experience for the already
 implemented outer dependent LF and ordinary/displayed categorical usability
 envelope. Preserve the single existing checker/evaluator and backend-neutral
 explicit Core. Direct typed TypeScript remains a valid primary input.
-String parsing is an optional user-input adapter, not a second checker and
-not Lambdapi-source acquisition. Browser promotion requires its own measured
-boundary. Do not promote parser or browser implementation before the living
-plan's bounded audit and exact review select one.
+Treat the documentation-only PRODUCT-GRADUATE-1 scope as historical
+capability documentation rather than integrated product completion. Follow
+the measured browser/report/text/book composition and exact review in the
+integrated reviewer plan. The selected ordinary categorical text parser is
+only an input adapter, not a second checker or Lambdapi-source acquisition;
+further grammar remains optional and gated.
 
 Preserve completed usability, displayed-chain, higher-action, LF-sort, and
 inductive audit checkpoints. Preserve every pending decision as pending
 unless its exact separate review is obtained or validly recorded. A product
 demo does not close WalkingEnd/HIT, batch-transfer, or scale-graduation rows.
-Return to the scale ledger when the product plan routes back to it.
+Return to the scale ledger when the integrated reviewer plan routes back to
+it. A specific scale item may move earlier only when a measured reviewer
+concept requires that exact dependency and a separate bounded review
+authorizes it.
 
 For a narrowly frozen dependency-ready proposal, the user's standing
 delegation permits a separate immutable unattended approval only after no
@@ -585,6 +649,22 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — Product lanes corrected into one reviewer journey.** The
+  user clarified that the CLI report, browser, categorical text, and book are
+  ingredients of one external-reviewer product. The dedicated integrated
+  reviewer plan records a successful combined Vite/Chromium probe, the exact
+  acquisition/hash packaging boundary, a non-eager full-report design, and
+  H-DTTLF-PRODUCT-REVIEWER-01. The prior documentation-only review remains
+  historical evidence but no longer routes product work directly to scale.
+- **2026-07-29 — PRODUCT-GRADUATE-1 documentation draft completed
+  (historical; route later superseded).** Updated the existing
+  external-review guide into a command/capability/limitation handoff covering
+  the selected direct-TypeScript, categorical-text, and directed-browser
+  lanes. Verified four commands, seven source paths, exact text fixtures,
+  checkpoints, and aggregate counts; synchronized all living navigation.
+  Documentation only changed. Its proposed route to the scale ledger was
+  later superseded by the direct human integrated-product correction above;
+  the draft was not checkpointed as product graduation.
 - **2026-07-29 — D-DTTLF-PRODUCT-GRADUATE-001 recorded.** After no immediate
   objection to checkpoint `76e7e11`, applied the user's standing unattended
   delegation with human supersession to the exact documentation-only product
