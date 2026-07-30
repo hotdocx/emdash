@@ -65,6 +65,37 @@ Book sources live outside this workspace under `../book/`.
 The assembler also runs before development and production builds. Never edit
 the generated book file.
 
+## Article workflow
+
+The active article is authored once under `public/` and paired with the
+metadata, page budget, generated PDF, and distribution paths in
+`articles.json`.
+
+```bash
+./scripts/pnpmw run article:check
+./scripts/pnpmw run article:render
+./scripts/pnpmw run article:pdf
+./scripts/pnpmw run article:pdf:check
+./scripts/pnpmw run article:release
+./scripts/pnpmw run article:promote
+```
+
+- `article:check` validates the document and publication registries plus
+  embedded diagram specifications.
+- `article:render` performs the bounded browser, pagination, console, request,
+  overflow, and accessibility checks for only the active article.
+- `article:pdf` exports the selected two-column paper through the shared print
+  renderer and fixes deterministic metadata.
+- `article:pdf:check` verifies the manifest page budget, US Letter page size,
+  tag tree, required text, nonblank pages, and embedded fonts.
+- `article:release` runs those focused gates once in dependency order.
+- `article:promote` copies only an already checked article Markdown/PDF pair to
+  its registry-owned `docs/` distribution paths.
+
+The book and article keep distinct source and artifact owners. The root
+`publication:promote` command promotes both checked pairs without making one
+artifact a compatibility copy of the other.
+
 PDF production requires `qpdf`, `pdfinfo`, `pdftotext`, `pdffonts`, and
 `pdftoppm` on `PATH`. The latter four commands are supplied by Poppler. The
 versioned PDF under `../output/pdf/` and visual-review images under
@@ -136,6 +167,9 @@ same hash in published and local-link modes.
   cleanup.
 - `scripts/export_book_pdf.mjs` and `scripts/check_book_pdf.mjs` own the
   deterministic release artifact and its structural/text/font gates.
+- `scripts/article_manifest.mjs`, `scripts/export_article_pdf.mjs`, and
+  `scripts/check_article_pdf.mjs` own the active article's metadata,
+  pagination budget, and PDF gates.
 - `scripts/preview_runtime.mjs` owns the shared cleanup-safe preview server.
 
 ## Authoring notes

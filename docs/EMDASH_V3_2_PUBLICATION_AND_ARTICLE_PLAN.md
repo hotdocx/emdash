@@ -375,11 +375,11 @@ route fails for a measured repository constraint.
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | PUBLICATION-0A | complete | user direction | Git/reference/ownership audit, exact retirement inventory, artifact roles, Pages state |
-| PUBLICATION-PLAN-0B | complete; checkpoint in progress | PUBLICATION-0A | This living plan plus links from the prior article, book, browser, and handoff ledgers |
-| PUBLICATION-CLEAN-1A | complete and focused-green; checkpoint in progress | PUBLICATION-PLAN-0B | Ignore `.playwright-cli/`; remove exact audited `spec/`, legacy docs, and v2 print sources; update registry and references |
-| PUBLICATION-OWNERS-1B | in progress | PUBLICATION-CLEAN-1A | Separate book and article promotion owners; add full-book Markdown distribution; remove book-to-article compatibility copying |
+| PUBLICATION-PLAN-0B | complete at `72747ec791f648ede3f743052a5705a1e7c3c38f` | PUBLICATION-0A | This living plan plus links from the prior article, book, browser, and handoff ledgers |
+| PUBLICATION-CLEAN-1A | complete and focused-green at `72747ec791f648ede3f743052a5705a1e7c3c38f` | PUBLICATION-PLAN-0B | Ignore `.playwright-cli/`; remove exact audited `spec/`, legacy docs, and v2 print sources; update registry and references |
+| PUBLICATION-OWNERS-1B | implementation and focused contract checks complete; checkpoint in progress; real article artifact acceptance belongs to ARTICLE-ARTIFACT-1F | PUBLICATION-CLEAN-1A | Separate book and article promotion owners; add full-book Markdown distribution; remove book-to-article compatibility copying |
 | LANDING-REVIEWER-1C | pending | PUBLICATION-PLAN-0B | Responsive landing page and same-page reviewer using the frozen brief |
-| ARTICLE-THESIS-1D | pending | PUBLICATION-PLAN-0B | Freeze title, abstract promise, outline, evidence map, and page budget against active authorities |
+| ARTICLE-THESIS-1D | in progress; current workbench measured at 23 pages against the selected 14-18 page budget | PUBLICATION-PLAN-0B | Freeze title, abstract promise, outline, evidence map, and page budget against active authorities |
 | ARTICLE-PROSE-1E | pending | ARTICLE-THESIS-1D | Rewrite the active v3.2 workbench as the descriptive overview source and register it |
 | ARTICLE-ARTIFACT-1F | pending | PUBLICATION-OWNERS-1B, ARTICLE-PROSE-1E | Targeted validation, deterministic PDF, all-page visual QA, and promoted `docs/emdash3_2.{md,pdf}` |
 | PUBLICATION-CHECKPOINT-1G | pending | LANDING-REVIEWER-1C, ARTICLE-ARTIFACT-1F | Exact staged review, focused green gates, synchronized ledgers, bounded local checkpoint |
@@ -406,6 +406,24 @@ does not authorize mathematical changes.
   their path references as provenance, while Git retains the removed bytes.
   No TypeScript semantic, Lambdapi, book, article-render, browser-build, or
   repository aggregate gate was run.
+- **2026-07-30 - `PUBLICATION-OWNERS-1B` implementation and focused
+  contracts complete.** Replaced the book-only compatibility copier with an
+  atomic book artifact promoter that owns both
+  `docs/emdash-book.{md,pdf}` and no article path. The promoted Markdown is
+  byte-identical to the 427,754-byte manifest assembly with SHA-256
+  `e3293ceaf13cbfd4dc33278f4fca6a5e480bfcd506f061ca10728ff134b0f446`;
+  the already checked 199-page PDF retains SHA-256
+  `b34b7e430deacf4b91ce354c5e5eb3d2674ef08e93d3bcbd4ca7618ea37f41d7`.
+  Added one future-multiple-paper registry with safe source, generated-PDF,
+  distribution, metadata, required-text, and 14/16/18-page contracts, plus
+  focused export, structural check, and atomic promotion commands. All nine
+  registry/manifest tests, article diagram validation, script syntax checks,
+  and diff hygiene pass. A single targeted build/browser render reports the
+  current 8,293-word workbench at 23 two-column pages with no console, page,
+  request, or render error. This proves that the requested paper needs
+  substantive compression before the new article artifact can pass; it is
+  not a tooling blocker. No root TypeScript, Lambdapi, conformance, complete
+  print, or book render aggregate was run.
 
 ## Targeted Validation
 

@@ -22,7 +22,7 @@
         "all",
         "articles"
       ],
-      "layout": "single-column",
+      "layout": "two-column",
       "checks": {
         "validate": true,
         "render": true

@@ -36,6 +36,7 @@ Run from the repository root:
 ./scripts/pnpmw run book:pdf
 ./scripts/pnpmw run book:pdf:check
 ./scripts/pnpmw run book:release
+./scripts/pnpmw run book:promote
 ```
 
 From `emdash2/`, use the same root-owned commands through the wrapper:
@@ -60,6 +61,11 @@ Generated release artifacts live under `output/pdf/` and are ignored by Git.
 The release command paginates, exports, normalizes, and checks the manifest's
 PDF, then reports its checksum. Attach the artifact and checksum to a release
 rather than editing or committing the generated file as source.
+
+After a checked release, `book:promote` atomically copies the manifest PDF and
+assembled Markdown to `docs/emdash-book.pdf` and `docs/emdash-book.md`.
+Those tracked paths are distribution artifacts, not additional authoring
+sources.
 
 ## Authority
 

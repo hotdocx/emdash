@@ -65,7 +65,14 @@
     "book:pdf": "./scripts/pnpmw --dir emdash2/print book:pdf",
     "book:pdf:check": "./scripts/pnpmw --dir emdash2/print book:pdf:check",
     "book:release": "./scripts/pnpmw --dir emdash2/print book:release",
-    "book:promote": "./scripts/pnpmw run book:pdf:check && node scripts/promote-book-pdf.mjs"
+    "book:promote": "./scripts/pnpmw run book:assemble && ./scripts/pnpmw run book:pdf:check && node scripts/promote-book-artifacts.mjs",
+    "article:check": "./scripts/pnpmw --dir emdash2/print article:check",
+    "article:render": "./scripts/pnpmw --dir emdash2/print article:render",
+    "article:pdf": "./scripts/pnpmw --dir emdash2/print article:pdf",
+    "article:pdf:check": "./scripts/pnpmw --dir emdash2/print article:pdf:check",
+    "article:release": "./scripts/pnpmw --dir emdash2/print article:release",
+    "article:promote": "./scripts/pnpmw run article:pdf:check && node scripts/promote-article-artifacts.mjs emdash-v3-2-overview",
+    "publication:promote": "./scripts/pnpmw run book:promote && ./scripts/pnpmw run article:promote"
   },
   "keywords": [],
   "author": "",
