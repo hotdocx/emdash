@@ -10,9 +10,7 @@ import {
 import {
     CORE_CATEGORICAL_TEXT_SIBLING_AUDIT,
     CoreCategoricalProgram,
-    CoreCategoricalTextError,
     CoreCategoricalTextSiblingAuditError,
-    elaborateCoreCategoricalText,
     validateCoreCategoricalTextSiblingAudit
 } from '../src/v3_2';
 
@@ -68,44 +66,21 @@ const fixture = () => {
 };
 
 describe('SYNTAX-PARITY-1B2 independent-sibling text audit', () => {
-    it('pins the exact current parenthesized-binder parsing seam', () => {
-        const {
-            program,
-            B,
-            C,
-            D,
-            Q,
-            FF,
-            GG
-        } = fixture();
-        const target = program.displayedProduct(D, Q);
-        assert.throws(
-            () => elaborateCoreCategoricalText(program, {
-                source:
-                    'λ^fd (b : B, c : C). ' +
-                    'fibrePair (FF b) (GG c)',
-                environment: [
-                    { name: 'B', kind: 'displayed-family', value: B },
-                    { name: 'C', kind: 'displayed-family', value: C },
-                    { name: 'FF', kind: 'term', value: FF },
-                    { name: 'GG', kind: 'term', value: GG }
-                ],
-                expected: {
-                    kind: 'displayed-functor',
-                    source: B,
-                    target
-                }
-            }),
-            error => {
-                assert.equal(error instanceof CoreCategoricalTextError, true);
-                if (!(error instanceof CoreCategoricalTextError)) {
-                    return false;
-                }
-                assert.equal(error.phase, 'parsing');
-                assert.equal(error.code, 'UNEXPECTED_TOKEN');
-                assert.equal(error.span.start.column, 6);
-                assert.equal(error.span.end.column, 7);
-                return true;
+    it('pins the exact pre-implementation parenthesized-binder seam', () => {
+        assert.equal(
+            CORE_CATEGORICAL_TEXT_SIBLING_AUDIT
+                .prerequisite.textRevision,
+            'SYNTAX-PARITY-1B1-CATEGORICAL-TEXT-1'
+        );
+        assert.deepEqual(
+            CORE_CATEGORICAL_TEXT_SIBLING_AUDIT
+                .measuredSeam.currentTextFailure,
+            {
+                phase: 'parsing',
+                code: 'UNEXPECTED_TOKEN',
+                startColumn: 6,
+                endColumn: 7,
+                detail: "Expected an identifier, found '('"
             }
         );
     });

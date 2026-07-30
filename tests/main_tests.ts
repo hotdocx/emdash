@@ -63,6 +63,7 @@ import './v3_2_categorical_text_parity_tests';
 import './v3_2_categorical_text_structural_audit_tests';
 import './v3_2_categorical_text_structural_tests';
 import './v3_2_categorical_text_sibling_audit_tests';
+import './v3_2_categorical_text_sibling_tests';
 import './v3_2_categorical_dependent_program_tests';
 import './v3_2_categorical_dependent_eta_tests';
 import './v3_2_categorical_dependent_composition_tests';

@@ -147,6 +147,31 @@ const directCompilation = (
                 a => program.apply(s, program.indexOf(a))
             ));
         }
+        case 'displayed-sibling-pairing': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>',
+                profile: 'fibred-displayed-bracket-1'
+            });
+            const K = program.category('review_K');
+            const B = program.displayedFamily('review_B', K);
+            const C = program.displayedFamily('review_C', K);
+            const D = program.displayedFamily('review_D', K);
+            const Q = program.displayedFamily('review_Q', K);
+            const FF = program.displayedFunctor('review_FF', B, D);
+            const GG = program.displayedFunctor('review_GG', C, Q);
+            const target = program.displayedProduct(D, Q);
+            return program.compile(program.displayedContextLambda(
+                [
+                    { name: 'b', family: B },
+                    { name: 'c', family: C }
+                ],
+                target,
+                ([b, c]) => program.fibrePair(
+                    program.apply(FF, b),
+                    program.apply(GG, c)
+                )
+            ));
+        }
         case 'displayed-transfor-composition': {
             const program = new CoreCategoricalProgram({
                 sourceFile: '<browser-reviewer-direct>',
@@ -324,6 +349,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
                 'indexed-section-composition',
                 'displayed-functor-composition',
                 'displayed-functor-weakening',
+                'displayed-sibling-pairing',
                 'displayed-transfor-composition'
             ]
         );
@@ -395,7 +421,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
     it('publishes the exact deeply frozen capability boundary', () => {
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.revision,
-            'SYNTAX-PARITY-1B1-BROWSER-REVIEWER-1'
+            'SYNTAX-PARITY-1B2-BROWSER-REVIEWER-1'
         );
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
@@ -408,7 +434,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.ok(
             CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
-                'seven categorical text presets across ^f, ^n, ^fd, and ^nd'
+                'eight categorical text presets across ^f, ^n, ^fd, and ^nd'
             )
         );
         assert.ok(

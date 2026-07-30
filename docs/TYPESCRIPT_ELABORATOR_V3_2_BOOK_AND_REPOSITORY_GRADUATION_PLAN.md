@@ -9,9 +9,10 @@ the completed book architecture plan
 [`REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`](../emdash2/reports/REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md),
 and the completed category/formal-presentation expansion plan
 [`REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`](../emdash2/reports/REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md)
-Status: selected post-syntax product-graduation route; planning boundary only;
-no book prose, generated artifact, release, or public presentation change is
-yet authorized
+Status: selected post-syntax product-graduation route; syntax parity is
+final-green through `SYNTAX-PARITY-1B2`, while 1B3, 1C, and exact syntax
+graduation remain ahead; planning boundary only; no book prose, generated
+artifact, release, or public presentation change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal

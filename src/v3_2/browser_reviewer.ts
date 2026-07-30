@@ -1,7 +1,7 @@
 /**
  * Narrow browser entry for the integrated external-reviewer workbench.
  *
- * This composes the existing ordinary categorical text adapter and product
+ * This composes the existing categorical text adapter and product
  * report. It owns no parser, action table, checker, evaluator, Core node, or
  * mathematical rule.
  */
@@ -28,7 +28,7 @@ import {
 } from './product_review_demo';
 
 export const CORE_BROWSER_REVIEWER_REVISION =
-    'SYNTAX-PARITY-1B1-BROWSER-REVIEWER-1' as const;
+    'SYNTAX-PARITY-1B2-BROWSER-REVIEWER-1' as const;
 
 export type CoreBrowserReviewerPresetId =
     | 'pointwise-application'
@@ -37,6 +37,7 @@ export type CoreBrowserReviewerPresetId =
     | 'indexed-section-composition'
     | 'displayed-functor-composition'
     | 'displayed-functor-weakening'
+    | 'displayed-sibling-pairing'
     | 'displayed-transfor-composition';
 
 export type CoreBrowserReviewerExpectedMode =
@@ -61,6 +62,12 @@ export type CoreBrowserReviewerExpectedMode =
         readonly binderMode: 'fd';
         readonly source: 'E';
         readonly target: 'D' | 'Q';
+    }
+    | {
+        readonly kind: 'displayed-context-functor';
+        readonly binderMode: 'fd';
+        readonly sources: readonly ['B', 'C'];
+        readonly target: 'Productd(D,Q)';
     }
     | {
         readonly kind: 'displayed-transfor';
@@ -268,6 +275,28 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
         ]
     },
     {
+        id: 'displayed-sibling-pairing',
+        label: 'Displayed sibling pairing',
+        source:
+            'λ^fd (b : B, c : C). fibrePair (FF b) (GG c)',
+        description:
+            'One displayed binder group combines independent fibrewise ' +
+            'siblings through the existing contextual compiler and ' +
+            'internalized product pairing.',
+        expectedMode: {
+            kind: 'displayed-context-functor',
+            binderMode: 'fd',
+            sources: ['B', 'C'],
+            target: 'Productd(D,Q)'
+        },
+        assumptions: [
+            'K : Cat',
+            'B, C, D, Q : Catd K',
+            'FF : Functord B D',
+            'GG : Functord C Q'
+        ]
+    },
+    {
         id: 'displayed-transfor-composition',
         label: 'Displayed natural composition',
         source:
@@ -306,14 +335,14 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
         'optional Node-side Lambdapi conformance oracle'
     ],
     supported: [
-        'seven categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'eight categorical text presets across ^f, ^n, ^fd, and ^nd',
         'edited categorical text with source diagnostics',
         'existing outer-LF, ordinary, and displayed three-panel report',
         'generated emdash book',
         'preserved minimal explicit-Core playground'
     ],
     deferred: [
-        'nested and multi-binder categorical text',
+        'nested and dependency-level categorical text',
         'remaining displayed context and structural-constructor syntax',
         'arbitrary displayed telescope depth',
         'browser-side source acquisition',
@@ -497,6 +526,38 @@ const createFixture = (
                 kind: 'displayed-functor' as const,
                 source: E,
                 target: D
+            }
+        });
+    }
+
+    if (presetId === 'displayed-sibling-pairing') {
+        const program = new CoreCategoricalProgram({
+            sourceFile,
+            profile: 'fibred-displayed-bracket-1'
+        });
+        const K = program.category('review_K');
+        const B = program.displayedFamily('review_B', K);
+        const C = program.displayedFamily('review_C', K);
+        const D = program.displayedFamily('review_D', K);
+        const Q = program.displayedFamily('review_Q', K);
+        const FF = program.displayedFunctor('review_FF', B, D);
+        const GG = program.displayedFunctor('review_GG', C, Q);
+        const target = program.displayedProduct(D, Q);
+        return Object.freeze({
+            program,
+            environment: Object.freeze([
+                categoryBinding('K', K),
+                familyBinding('B', B),
+                familyBinding('C', C),
+                familyBinding('D', D),
+                familyBinding('Q', Q),
+                termBinding('FF', FF),
+                termBinding('GG', GG)
+            ]),
+            expected: {
+                kind: 'displayed-context-functor' as const,
+                sources: [B, C],
+                target
             }
         });
     }

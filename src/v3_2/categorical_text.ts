@@ -1,5 +1,5 @@
 /**
- * Narrow text adapter for the reviewed ordinary categorical syntax slice.
+ * Narrow text adapter for the reviewed categorical syntax slices.
  *
  * The located parser is deliberately private. Resolution constructs terms
  * only through the existing CoreCategoricalProgram and therefore owns no
@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1B1-CATEGORICAL-TEXT-1' as const;
+    'SYNTAX-PARITY-1B2-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -68,6 +68,12 @@ export type CoreCategoricalTextExpected =
     | {
         readonly kind: 'displayed-functor';
         readonly source: CoreCategoricalDisplayedFamily;
+        readonly target: CoreCategoricalDisplayedFamily;
+    }
+    | {
+        readonly kind: 'displayed-context-functor';
+        readonly sources:
+            readonly CoreCategoricalDisplayedFamily[];
         readonly target: CoreCategoricalDisplayedFamily;
     }
     | {
@@ -141,13 +147,18 @@ interface LocatedApplication {
     readonly range: TextRange;
 }
 
-interface LocatedLambda {
-    readonly tag: 'lambda';
+interface LocatedLambdaBinding {
     readonly name: string;
     readonly nameRange: TextRange;
+    readonly annotation?: LocatedIdentifier;
+}
+
+interface LocatedLambda {
+    readonly tag: 'lambda';
+    readonly bindingGroups:
+        readonly (readonly LocatedLambdaBinding[])[];
     readonly mode: string;
     readonly modeRange: TextRange;
-    readonly annotation?: LocatedIdentifier;
     readonly body: LocatedExpression;
     readonly range: TextRange;
 }
@@ -403,11 +414,7 @@ class CoreCategoricalTextParser {
         });
     }
 
-    private parseLambda(): LocatedLambda {
-        this.skipWhitespace();
-        const start = this.point();
-        this.advance();
-        const mode = this.parseMode();
+    private parseLambdaBinding(): LocatedLambdaBinding {
         const name = this.parseIdentifier();
         this.skipWhitespace();
         const annotation = this.current() === ':'
@@ -416,6 +423,94 @@ class CoreCategoricalTextParser {
                 return this.parseIdentifier();
             })()
             : undefined;
+        return Object.freeze({
+            name: name.name,
+            nameRange: name.range,
+            annotation
+        });
+    }
+
+    private parseLambdaBindingGroup():
+    readonly LocatedLambdaBinding[] {
+        this.skipWhitespace();
+        if (this.current() !== '(') {
+            return Object.freeze([this.parseLambdaBinding()]);
+        }
+
+        this.advance();
+        this.skipWhitespace();
+        if (this.current() === ')') {
+            this.failHere(
+                'UNEXPECTED_TOKEN',
+                'A displayed sibling group cannot be empty'
+            );
+        }
+        if (this.atEnd()) {
+            this.failHere(
+                'UNEXPECTED_END',
+                'Expected a displayed sibling binding'
+            );
+        }
+
+        const bindings: LocatedLambdaBinding[] = [];
+        const names = new Set<string>();
+        while (true) {
+            const binding = this.parseLambdaBinding();
+            if (names.has(binding.name)) {
+                this.fail(
+                    'DUPLICATE_BINDING',
+                    binding.nameRange,
+                    `Duplicate lambda binding '${binding.name}'`
+                );
+            }
+            names.add(binding.name);
+            bindings.push(binding);
+
+            this.skipWhitespace();
+            if (this.current() === ')') {
+                this.advance();
+                break;
+            }
+            if (this.current() === ';') {
+                this.failHere(
+                    'UNEXPECTED_TOKEN',
+                    'Semicolon dependency levels require the later ' +
+                        'SYNTAX-PARITY-1B3 profile'
+                );
+            }
+            this.expect(',');
+            this.skipWhitespace();
+            if (this.current() === ')') {
+                this.failHere(
+                    'UNEXPECTED_TOKEN',
+                    'A displayed sibling group cannot end with a comma'
+                );
+            }
+            if (this.atEnd()) {
+                this.failHere(
+                    'UNEXPECTED_END',
+                    'Expected a displayed sibling binding after comma'
+                );
+            }
+        }
+
+        if (bindings.length < 2) {
+            this.fail(
+                'UNEXPECTED_TOKEN',
+                bindings[0].nameRange,
+                'A parenthesized displayed sibling group requires at ' +
+                    'least two bindings'
+            );
+        }
+        return Object.freeze(bindings);
+    }
+
+    private parseLambda(): LocatedLambda {
+        this.skipWhitespace();
+        const start = this.point();
+        this.advance();
+        const mode = this.parseMode();
+        const bindingGroup = this.parseLambdaBindingGroup();
         this.skipWhitespace();
         this.expect('.');
         this.skipWhitespace();
@@ -428,11 +523,9 @@ class CoreCategoricalTextParser {
         const body = this.parseExpression();
         return Object.freeze({
             tag: 'lambda' as const,
-            name: name.name,
-            nameRange: name.range,
+            bindingGroups: Object.freeze([bindingGroup]),
             mode: mode.value,
             modeRange: mode.range,
-            annotation,
             body,
             range: textRange(start, body.range.end)
         });
@@ -682,6 +775,38 @@ class CoreCategoricalTextResolver {
                         )
                     );
                 }
+                const fibrePair = this.fixedApplicationSpine(
+                    expression,
+                    'fibrePair',
+                    2
+                );
+                if (fibrePair !== undefined) {
+                    const [leftExpression, rightExpression] = fibrePair;
+                    return invokeProgram(
+                        this.sourceFile,
+                        expression.range,
+                        'Displayed fibre pair was rejected',
+                        () => this.program.fibrePair(
+                            this.resolveTerm(
+                                leftExpression,
+                                environment,
+                                undefined,
+                                lambdaDepth
+                            ),
+                            this.resolveTerm(
+                                rightExpression,
+                                environment,
+                                undefined,
+                                lambdaDepth
+                            ),
+                            sourceSiteFor(
+                                this.sourceFile,
+                                expression.range,
+                                'parsed displayed fibre pair'
+                            )
+                        )
+                    );
+                }
                 const composition = this.fixedApplicationSpine(
                     expression,
                     'composeCells',
@@ -831,6 +956,37 @@ class CoreCategoricalTextResolver {
         environment: InternalEnvironment,
         expected: CoreCategoricalTextExpected
     ): CoreCategoricalTerm {
+        if (expression.bindingGroups.length !== 1) {
+            throw resolutionError(
+                'UNSUPPORTED_NESTED_ABSTRACTION',
+                this.sourceFile,
+                expression.range,
+                'Multiple dependency levels require the later ' +
+                    'SYNTAX-PARITY-1B3 profile'
+            );
+        }
+        const bindings = expression.bindingGroups[0];
+        if (bindings.length > 1) {
+            if (expression.mode !== 'fd') {
+                throw resolutionError(
+                    'UNSUPPORTED_BINDER_MODE',
+                    this.sourceFile,
+                    expression.modeRange,
+                    'Independent displayed sibling groups require binder ' +
+                        "mode '^fd'"
+                );
+            }
+            return this.resolveDisplayedContextLambda(
+                expression,
+                bindings,
+                environment,
+                this.requireExpected(
+                    expression,
+                    expected,
+                    'displayed-context-functor'
+                )
+            );
+        }
         switch (expression.mode) {
             case 'f':
                 return this.resolveOrdinaryLambda(
@@ -911,28 +1067,28 @@ class CoreCategoricalTextResolver {
     }
 
     private requireCategoryAnnotation(
-        expression: LocatedLambda,
+        binding: LocatedLambdaBinding,
         environment: InternalEnvironment,
         expected: CoreCategoricalCategory,
         role: string
     ): void {
-        if (expression.annotation === undefined) return;
+        if (binding.annotation === undefined) return;
         const annotationBinding = this.lookup(
-            expression.annotation,
+            binding.annotation,
             environment
         );
         if (annotationBinding.kind !== 'category') {
             throw resolutionError(
                 'EXPECTED_CATEGORY',
                 this.sourceFile,
-                expression.annotation.range,
-                `Binder annotation '${expression.annotation.name}' ` +
+                binding.annotation.range,
+                `Binder annotation '${binding.annotation.name}' ` +
                     'does not denote a category'
             );
         }
         const comparison = invokeProgram(
             this.sourceFile,
-            expression.annotation.range,
+            binding.annotation.range,
             `Binder ${role} category comparison was rejected`,
             () => this.program.compareCategories(
                 annotationBinding.value,
@@ -943,8 +1099,8 @@ class CoreCategoricalTextResolver {
             throw resolutionError(
                 'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
                 this.sourceFile,
-                expression.annotation.range,
-                `Binder category '${expression.annotation.name}' does not ` +
+                binding.annotation.range,
+                `Binder category '${binding.annotation.name}' does not ` +
                     `match the expected ${role} ` +
                     `(comparison: ${comparison.status})`
             );
@@ -952,27 +1108,28 @@ class CoreCategoricalTextResolver {
     }
 
     private requireDisplayedFamilyAnnotation(
-        expression: LocatedLambda,
+        binding: LocatedLambdaBinding,
         environment: InternalEnvironment,
-        expected: CoreCategoricalDisplayedFamily
+        expected: CoreCategoricalDisplayedFamily,
+        role = 'displayed-functor source'
     ): void {
-        if (expression.annotation === undefined) return;
+        if (binding.annotation === undefined) return;
         const annotationBinding = this.lookup(
-            expression.annotation,
+            binding.annotation,
             environment
         );
         if (annotationBinding.kind !== 'displayed-family') {
             throw resolutionError(
                 'EXPECTED_DISPLAYED_FAMILY',
                 this.sourceFile,
-                expression.annotation.range,
-                `Binder annotation '${expression.annotation.name}' does ` +
+                binding.annotation.range,
+                `Binder annotation '${binding.annotation.name}' does ` +
                     'not denote a displayed family'
             );
         }
         const comparison = invokeProgram(
             this.sourceFile,
-            expression.annotation.range,
+            binding.annotation.range,
             'Binder source-family comparison was rejected',
             () => this.program.compareDisplayedFamilies(
                 annotationBinding.value,
@@ -983,9 +1140,9 @@ class CoreCategoricalTextResolver {
             throw resolutionError(
                 'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
                 this.sourceFile,
-                expression.annotation.range,
-                `Binder family '${expression.annotation.name}' does not ` +
-                    'match the expected displayed-functor source ' +
+                binding.annotation.range,
+                `Binder family '${binding.annotation.name}' does not ` +
+                    `match the expected ${role} ` +
                     `(comparison: ${comparison.status})`
             );
         }
@@ -999,8 +1156,9 @@ class CoreCategoricalTextResolver {
             { readonly kind: 'ordinary-functor' }
         >
     ): CoreCategoricalTerm {
+        const binding = expression.bindingGroups[0][0];
         this.requireCategoryAnnotation(
-            expression,
+            binding,
             environment,
             expected.source,
             'functor source'
@@ -1010,11 +1168,12 @@ class CoreCategoricalTextResolver {
             expression.range,
             'Categorical abstraction was rejected',
             () => this.program.lambda(
-                expression.name,
+                binding.name,
                 expected.source,
                 expected.target,
                 token => this.resolveLambdaBody(
                     expression,
+                    binding,
                     token,
                     environment
                 ),
@@ -1033,8 +1192,9 @@ class CoreCategoricalTextResolver {
             { readonly kind: 'dependent-section' }
         >
     ): CoreCategoricalTerm {
+        const binding = expression.bindingGroups[0][0];
         this.requireCategoryAnnotation(
-            expression,
+            binding,
             environment,
             expected.base,
             'dependent-section base'
@@ -1044,10 +1204,11 @@ class CoreCategoricalTextResolver {
             expression.range,
             'Dependent categorical abstraction was rejected',
             () => this.program.dependentLambda(
-                expression.name,
+                binding.name,
                 expected.target,
                 token => this.resolveLambdaBody(
                     expression,
+                    binding,
                     token,
                     environment
                 ),
@@ -1066,8 +1227,9 @@ class CoreCategoricalTextResolver {
             { readonly kind: 'displayed-functor' }
         >
     ): CoreCategoricalTerm {
+        const binding = expression.bindingGroups[0][0];
         this.requireDisplayedFamilyAnnotation(
-            expression,
+            binding,
             environment,
             expected.source
         );
@@ -1076,11 +1238,12 @@ class CoreCategoricalTextResolver {
             expression.range,
             'Displayed-functor abstraction was rejected',
             () => this.program.displayedFunctorLambda(
-                expression.name,
+                binding.name,
                 expected.source,
                 expected.target,
                 token => this.resolveLambdaBody(
                     expression,
+                    binding,
                     token,
                     environment
                 ),
@@ -1099,8 +1262,9 @@ class CoreCategoricalTextResolver {
             { readonly kind: 'displayed-transfor' }
         >
     ): CoreCategoricalTerm {
+        const binding = expression.bindingGroups[0][0];
         this.requireCategoryAnnotation(
-            expression,
+            binding,
             environment,
             expected.base,
             'displayed-transfor base'
@@ -1110,12 +1274,63 @@ class CoreCategoricalTextResolver {
             expression.range,
             'Displayed-transfor abstraction was rejected',
             () => this.program.displayedTransforLambda(
-                expression.name,
+                binding.name,
                 expected.source,
                 expected.target,
                 token => this.resolveLambdaBody(
                     expression,
+                    binding,
                     token,
+                    environment
+                ),
+                {
+                    source: this.lambdaSource(expression)
+                }
+            )
+        );
+    }
+
+    private resolveDisplayedContextLambda(
+        expression: LocatedLambda,
+        bindings: readonly LocatedLambdaBinding[],
+        environment: InternalEnvironment,
+        expected: Extract<
+            CoreCategoricalTextExpected,
+            { readonly kind: 'displayed-context-functor' }
+        >
+    ): CoreCategoricalTerm {
+        if (bindings.length !== expected.sources.length) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.range,
+                `Displayed sibling group has ${bindings.length} bindings, ` +
+                    `but its expectation supplies ${expected.sources.length} ` +
+                    'source families'
+            );
+        }
+        bindings.forEach((binding, index) =>
+            this.requireDisplayedFamilyAnnotation(
+                binding,
+                environment,
+                expected.sources[index],
+                `displayed sibling source ${index + 1}`
+            )
+        );
+        return invokeProgram(
+            this.sourceFile,
+            expression.range,
+            'Displayed contextual abstraction was rejected',
+            () => this.program.displayedContextLambda(
+                bindings.map((binding, index) => Object.freeze({
+                    name: binding.name,
+                    family: expected.sources[index]
+                })),
+                expected.target,
+                tokens => this.resolveContextLambdaBody(
+                    expression,
+                    bindings,
+                    tokens,
                     environment
                 ),
                 {
@@ -1128,21 +1343,26 @@ class CoreCategoricalTextResolver {
     private lambdaSource(
         expression: LocatedLambda
     ): CoreCategoricalSourceSite {
+        const names = expression.bindingGroups
+            .flat()
+            .map(binding => binding.name)
+            .join(',');
         return sourceSiteFor(
             this.sourceFile,
             expression.range,
-            `parsed ^${expression.mode} abstraction ${expression.name}`
+            `parsed ^${expression.mode} abstraction ${names}`
         );
     }
 
     private resolveLambdaBody(
         expression: LocatedLambda,
+        binding: LocatedLambdaBinding,
         token: CoreCategoricalSlotToken,
         environment: InternalEnvironment
     ): CoreCategoricalTerm {
         const nested = new Map(environment);
-        nested.set(expression.name, Object.freeze({
-            name: expression.name,
+        nested.set(binding.name, Object.freeze({
+            name: binding.name,
             kind: 'term' as const,
             value: token,
             callbackLocal: true
@@ -1154,10 +1374,33 @@ class CoreCategoricalTextResolver {
             1
         );
     }
+
+    private resolveContextLambdaBody(
+        expression: LocatedLambda,
+        bindings: readonly LocatedLambdaBinding[],
+        tokens: readonly CoreCategoricalSlotToken[],
+        environment: InternalEnvironment
+    ): CoreCategoricalTerm {
+        const nested = new Map(environment);
+        bindings.forEach((binding, index) => {
+            nested.set(binding.name, Object.freeze({
+                name: binding.name,
+                kind: 'term' as const,
+                value: tokens[index],
+                callbackLocal: true
+            }));
+        });
+        return this.resolveTerm(
+            expression.body,
+            nested,
+            undefined,
+            1
+        );
+    }
 }
 
 /**
- * Parse and recursively resolve one reviewed ordinary categorical expression.
+ * Parse and recursively resolve one reviewed categorical expression.
  *
  * The returned value is an ordinary CoreCategoricalProgram term. Callers use
  * the existing `program.compile`, `inspect`, or `compare` operations exactly

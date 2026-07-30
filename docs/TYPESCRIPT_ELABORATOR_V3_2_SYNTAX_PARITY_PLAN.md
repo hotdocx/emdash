@@ -25,7 +25,9 @@ final-green and checkpointed at
 zero-behavior-delta audit with a deeply frozen non-self-authorizing
 independent-sibling proposal checkpointed at
 `f53fd6885dd2fac0345bad5db257c7a66f86af15`; a separate immutable unattended
-D003 review now approves it exactly as proposed with human supersession.
+D003 review approves it exactly as proposed with human supersession; the
+bounded implementation is final-green, with its local implementation
+checkpoint pending this synchronized tranche.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -657,7 +659,7 @@ strings parse. For every promoted row it must demonstrate:
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | **approved as proposed; immutable unattended review with human supersession** | checkpointed `SYNTAX-PARITY-1B0` | Authorizes only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
 | SYNTAX-PARITY-1B1 | **final-green at `9f663555a1edbedcb99e97f1271154ff36913f05`** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-03 / D-DTTLF-PRODUCT-SYNTAX-PARITY-003 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B2 proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15` | Authorizes only the frozen comma sibling group, ordered-family expected contract, exact `fibrePair`, and one reviewer preset |
-| SYNTAX-PARITY-1B2 | **dependency-ready implementation; audit focused-green at `f53fd6885dd2fac0345bad5db257c7a66f86af15`** | approved D003 review | Implement only the selected comma sibling group, optional positional family annotations, one expected context contract, and existing `displayedContextLambda`/`fibrePair` routes |
+| SYNTAX-PARITY-1B2 | **final-green; implementation checkpoint pending; audit/proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15`** | approved D003 review | One comma sibling group, optional positional family annotations, ordered-family expected contract, existing `displayedContextLambda`/`fibrePair` routes, eighth reviewer preset, 64/64 proportional gate, production build, and real Chromium |
 | SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -714,15 +716,16 @@ classifier-directed programs, and distinguish parsing, typed elaboration,
 and internal categorical factorization. Never guess an application action or
 promote arbitrary pointwise data to coherent categorical data.
 
-Recover the completed SYNTAX-PARITY-0A inventory, final-green
-SYNTAX-PARITY-1A, and final-green 1B1 implementation. Continue only the next
-separately reviewed row in this ledger. The executable 1B2 audit selects
-commas for one independent sibling level, reserves semicolons for the
-separately gated dependent/mixed 1B3 row, and freezes a non-self-authorizing
-D003 proposal over existing `displayedContextLambda`/`fibrePair` semantics.
-Its exact human-supersedable separate review now approves only that scope;
-implement it without entering 1B3. A missing direct semantic capability
-belongs in the relevant usability/kernel plan, not in parser heuristics.
+Recover the completed SYNTAX-PARITY-0A inventory and final-green
+SYNTAX-PARITY-1A, 1B1, and 1B2 implementations. Do not reimplement those
+rows. Continue only the next separately reviewed row in this ledger. For
+1B3, first perform a zero-behavior-delta executable audit of the existing
+direct genuine dependent/mixed telescope surface, freeze exact semicolon
+notation and recursive expected-family resolution or classify a real
+semantic absence, and obtain a separate review before changing behavior.
+Commas remain independent siblings at one dependency level. A missing direct
+semantic capability belongs in the relevant usability/kernel plan, not in
+parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -738,6 +741,21 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1B2` implemented and final-green.** Added
+  exactly one parenthesized comma sibling group, positional optional family
+  annotations, the ordered-family expected contract, and the exact binary
+  `fibrePair` spine. Resolution calls the existing
+  `displayedContextLambda` once and otherwise retains the sole typed `apply`
+  ladder. Annotated, annotation-free, direct-TypeScript, object, and
+  applicable internalized-arrow observations agree; malformed groups,
+  semicolon dependency levels, counts, annotations, bases, modes, scope,
+  arity, and recursive branch typing fail closed. The affected nine-suite
+  corpus passes 64/64, root/browser typecheck and lint pass, the 140-module
+  production build passes, and real Chromium accepts the eighth reviewer
+  preset with zero console errors or warnings. No Core owner, checker,
+  evaluator, runtime/proof rule, semantic profile, transfer input, or
+  Lambdapi source changed. The exact local implementation checkpoint is
+  pending this synchronized tranche.
 - **2026-07-30 — D003 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed sibling proposal,
   recorded an immutable, human-supersedable review authorizing only one comma

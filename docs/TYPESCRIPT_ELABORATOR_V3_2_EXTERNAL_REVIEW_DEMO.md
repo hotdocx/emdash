@@ -13,13 +13,15 @@ Integrated implementation: green in the current reviewed tranche
 The TypeScript implementation now exposes one integrated external-reviewer
 workbench over the existing checker/evaluator architecture:
 
-1. an editable categorical expression view with seven presets:
+1. an editable categorical expression view with eight presets:
    - recursive pointwise application `λ^f x. (H x) (K x)`;
    - fixed-inner evaluation `λ^f x. F x y0`;
    - expected-type-directed whole-Hom action `G pA`;
    - natural indexed composition `λ^n k : K. (FF k) (s k)`;
    - displayed functor composition `λ^fd a : E. GG (FF a)`;
-   - displayed weakening `λ^fd a : E. s (indexOf a)`; and
+   - displayed weakening `λ^fd a : E. s (indexOf a)`;
+   - independent displayed sibling pairing
+     `λ^fd (b : B, c : C). fibrePair (FF b) (GG c)`; and
    - coherent displayed component composition
      `λ^nd k : K. composeCells (theta k) (eta k)`;
 2. an explicitly started direct-TypeScript report across:
@@ -314,19 +316,24 @@ Current selected product evidence:
   `be7000f88b08c90d24bad8a1e113fe3241d8a8ca` /
   `e433b6a` /
   `9f663555a1edbedcb99e97f1271154ff36913f05`;
+- independent-sibling audit/review:
+  `f53fd6885dd2fac0345bad5db257c7a66f86af15` /
+  `084719023d27a8c2015f787125a577fc6532a769`;
 - focused integrated reviewer test: eight checks, eight passes, zero
-  failures, including direct-TypeScript equality for all seven presets;
-- focused syntax-parity corpus: eight checks, eight passes, zero failures;
-- combined affected text/parity/structural/browser corpus after 1B1:
-  39 checks, 39 passes, zero failures;
-- complete TypeScript aggregate after parity: 1,149 tests, 1,098 active
-  passes, 51 intentional skips, and zero failures;
-- Vite production build after 1B1: 140 modules, a 116.78 kB-gzip initial
-  script and a 159.77 kB-gzip lazy reviewer chunk; and
-- real Chromium execution of the displayed-natural preset
-  `λ^nd k : K. composeCells (theta k) (eta k)`, producing an accepted
-  explicit-Core/checker result with zero console errors or warnings. The
-  earlier integrated-reviewer checkpoint separately exercised the
+  failures, including direct-TypeScript equality for all eight presets;
+- focused independent-sibling implementation corpus: six checks, six passes,
+  zero failures;
+- combined affected text/parity/structural/displayed-context/browser corpus
+  after 1B2: 64 checks, 64 passes, zero failures;
+- complete recovery TypeScript aggregate immediately before 1B2: 1,159
+  tests, 1,108 active passes, 51 intentional skips, and zero failures; the
+  reviewed proportional 1B2 gate did not duplicate that unchanged aggregate;
+- Vite production build after 1B2: 140 modules, a 116.80 kB-gzip initial
+  script and a 160.54 kB-gzip lazy reviewer chunk; and
+- real Chromium execution of the displayed-sibling preset
+  `λ^fd (b : B, c : C). fibrePair (FF b) (GG c)`, producing an accepted
+  explicit-Core/checker result with zero console errors or warnings. Earlier
+  reviewer checkpoints separately exercised the displayed-natural preset,
   source-located rejection, full three-panel report, emitted PDF link, and
   minimal-Core checker. Real Chromium also accepts
   `λ^fd a : E. s (indexOf a)` with zero console errors or warnings.

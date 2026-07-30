@@ -3417,10 +3417,14 @@ Lambdapi change. Exact local checkpoint:
 audit now selects one parenthesized comma sibling group, exact `fibrePair`,
 and an expected ordered-family contract over the existing direct methods;
 semicolons and genuine dependencies remain separately gated as 1B3. Its
-deeply frozen D003 proposal awaits exact review at checkpoint
+deeply frozen D003 proposal is checkpointed at
 `f53fd6885dd2fac0345bad5db257c7a66f86af15`; a separate immutable unattended
-review now approves only that exact scope with human supersession. None
-changes or resumes a scale row. After exact parity graduation, follow
+review approves only that exact scope with human supersession. The bounded
+1B2 implementation is now final-green with an eighth reviewer preset and a
+64/64 affected gate, using only the existing contextual compiler and pairing
+owners; its local checkpoint is pending the synchronized product tranche.
+None of this changes or resumes a scale row. After exact parity graduation,
+follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows
 are outside the current persistent goal and require a future explicit goal.
