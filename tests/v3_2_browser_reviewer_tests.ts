@@ -131,6 +131,22 @@ const directCompilation = (
                 )
             ));
         }
+        case 'displayed-functor-weakening': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>',
+                profile: 'fibred-weaken-reindex-1'
+            });
+            const K = program.category('review_K');
+            const E = program.displayedFamily('review_E', K);
+            const D = program.displayedFamily('review_D', K);
+            const s = program.section('review_s', D);
+            return program.compile(program.displayedFunctorLambda(
+                'a',
+                E,
+                D,
+                a => program.apply(s, program.indexOf(a))
+            ));
+        }
         case 'displayed-transfor-composition': {
             const program = new CoreCategoricalProgram({
                 sourceFile: '<browser-reviewer-direct>',
@@ -307,6 +323,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
                 'whole-hom-action',
                 'indexed-section-composition',
                 'displayed-functor-composition',
+                'displayed-functor-weakening',
                 'displayed-transfor-composition'
             ]
         );
@@ -378,7 +395,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
     it('publishes the exact deeply frozen capability boundary', () => {
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.revision,
-            'SYNTAX-PARITY-1A-BROWSER-REVIEWER-1'
+            'SYNTAX-PARITY-1B1-BROWSER-REVIEWER-1'
         );
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
@@ -391,7 +408,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.ok(
             CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
-                'six categorical text presets across ^f, ^n, ^fd, and ^nd'
+                'seven categorical text presets across ^f, ^n, ^fd, and ^nd'
             )
         );
         assert.ok(

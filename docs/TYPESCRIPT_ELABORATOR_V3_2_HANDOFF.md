@@ -483,6 +483,15 @@ gated as 1B2/1B3. Exact audit/proposal checkpoint:
 ingredient may still move earlier only through its own measured bounded
 review.
 
+SYNTAX-PARITY-1B1 is now implemented and final-green. The exact unary
+`indexOf` application spine calls the existing typed method and enables
+`λ^fd a : E. s (indexOf a)` with direct/text explicit-Core equality. Seven
+browser presets, the combined 39/39 affected corpus, typecheck/lint,
+production build, and real Chromium weakening execution are green. No
+parser node, mathematical owner, Core/checker/runtime behavior, transfer
+input, or Lambdapi source changed. The next row remains the separately gated
+1B2 independent-sibling/`fibrePair` presentation.
+
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
 That plan audits the capability delta from the user-selected `8217aa3...`

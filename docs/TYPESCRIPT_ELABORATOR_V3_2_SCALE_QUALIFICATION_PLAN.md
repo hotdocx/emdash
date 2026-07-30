@@ -3410,7 +3410,9 @@ gates are green; exact local implementation checkpoint:
 displayed structural syntax remain product work. The zero-delta 1B0 audit
 now isolates textual `indexOf` weakening as 1B1 and keeps independent
 sibling/`fibrePair` and dependent/mixed telescope presentation separately
-gated as 1B2/1B3. None changes or resumes a scale row. After exact parity
+gated as 1B2/1B3. The reviewed 1B1 implementation is final-green, exposes a
+seventh reviewer preset, and adds no scale owner, profile, transfer input, or
+Lambdapi change. None changes or resumes a scale row. After exact parity
 graduation, follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows

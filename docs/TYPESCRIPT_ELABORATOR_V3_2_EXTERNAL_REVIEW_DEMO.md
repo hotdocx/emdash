@@ -13,12 +13,13 @@ Integrated implementation: green in the current reviewed tranche
 The TypeScript implementation now exposes one integrated external-reviewer
 workbench over the existing checker/evaluator architecture:
 
-1. an editable categorical expression view with six presets:
+1. an editable categorical expression view with seven presets:
    - recursive pointwise application `λ^f x. (H x) (K x)`;
-   - fixed-inner evaluation `λ^f x. F x y0`; and
+   - fixed-inner evaluation `λ^f x. F x y0`;
    - expected-type-directed whole-Hom action `G pA`;
    - natural indexed composition `λ^n k : K. (FF k) (s k)`;
-   - displayed functor composition `λ^fd a : E. GG (FF a)`; and
+   - displayed functor composition `λ^fd a : E. GG (FF a)`;
+   - displayed weakening `λ^fd a : E. s (indexOf a)`; and
    - coherent displayed component composition
      `λ^nd k : K. composeCells (theta k) (eta k)`;
 2. an explicitly started direct-TypeScript report across:
@@ -310,18 +311,21 @@ Current selected product evidence:
 - syntax-parity implementation:
   `2e7cc3c44802a5218858ca6747e7591d3bfc4859`;
 - focused integrated reviewer test: eight checks, eight passes, zero
-  failures, including direct-TypeScript equality for all six presets;
+  failures, including direct-TypeScript equality for all seven presets;
 - focused syntax-parity corpus: eight checks, eight passes, zero failures;
+- combined affected text/parity/structural/browser corpus after 1B1:
+  39 checks, 39 passes, zero failures;
 - complete TypeScript aggregate after parity: 1,149 tests, 1,098 active
   passes, 51 intentional skips, and zero failures;
-- Vite production build after syntax parity: 140 modules, a 116.78 kB-gzip
-  initial script and a 159.58 kB-gzip lazy reviewer chunk; and
+- Vite production build after 1B1: 140 modules, a 116.78 kB-gzip initial
+  script and a 159.77 kB-gzip lazy reviewer chunk; and
 - real Chromium execution of the displayed-natural preset
   `λ^nd k : K. composeCells (theta k) (eta k)`, producing an accepted
   explicit-Core/checker result with zero console errors or warnings. The
   earlier integrated-reviewer checkpoint separately exercised the
   source-located rejection, full three-panel report, emitted PDF link, and
-  minimal-Core checker.
+  minimal-Core checker. Real Chromium also accepts
+  `λ^fd a : E. s (indexOf a)` with zero console errors or warnings.
 
 ## Exact Boundary
 
@@ -337,7 +341,7 @@ This candidate demonstrates:
 - bounded categorical text across `^f`, `^n`, `^fd`, and `^nd`, with
   recursive whitespace application, optional checked annotation, exact
   diagnostics, whole-Hom expected routing, and typed recursive cell
-  composition;
+  composition plus contextual-index weakening;
 - an integrated client-side reviewer with editable categorical text,
   explicit research report, generated book, and editable minimal-Core
   playground; and
@@ -348,9 +352,8 @@ It does not yet claim:
 - arbitrary displayed telescope depth;
 - arbitrary/general `^nd` coherence beyond component eta and finite typed
   vertical composition;
-- text lowering for displayed/dependent telescopes, contextual `indexOf`
-  weakening, general structural constructors, nested lambdas, outer-LF
-  terms, Pi, let, or holes;
+- text lowering for displayed/dependent telescopes, remaining structural
+  constructors, nested lambdas, outer-LF terms, Pi, let, or holes;
 - final agreement between experimental TypeScript `λ^mode` syntax and
   informal Lambdapi/kernel notation;
 - full displayed/dependent categorical text parity beyond the reviewed

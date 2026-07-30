@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1A-CATEGORICAL-TEXT-1' as const;
+    'SYNTAX-PARITY-1B1-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -656,16 +656,48 @@ class CoreCategoricalTextResolver {
                 return this.inspectTerm(binding, expression.range);
             }
             case 'application': {
-                const composition = this.composeCellsSpine(expression);
+                const contextualIndex = this.fixedApplicationSpine(
+                    expression,
+                    'indexOf',
+                    1
+                );
+                if (contextualIndex !== undefined) {
+                    const [argument] = contextualIndex;
+                    return invokeProgram(
+                        this.sourceFile,
+                        expression.range,
+                        'Displayed contextual index was rejected',
+                        () => this.program.indexOf(
+                            this.resolveTerm(
+                                argument,
+                                environment,
+                                undefined,
+                                lambdaDepth
+                            ),
+                            sourceSiteFor(
+                                this.sourceFile,
+                                expression.range,
+                                'parsed displayed contextual index'
+                            )
+                        )
+                    );
+                }
+                const composition = this.fixedApplicationSpine(
+                    expression,
+                    'composeCells',
+                    2
+                );
                 if (composition !== undefined) {
+                    const [outerExpression, innerExpression] =
+                        composition;
                     const outer = this.resolveTerm(
-                        composition.outer,
+                        outerExpression,
                         environment,
                         undefined,
                         lambdaDepth
                     );
                     const inner = this.resolveTerm(
-                        composition.inner,
+                        innerExpression,
                         environment,
                         undefined,
                         lambdaDepth
@@ -739,23 +771,25 @@ class CoreCategoricalTextResolver {
         }
     }
 
-    private composeCellsSpine(
-        expression: LocatedApplication
-    ): {
-        readonly outer: LocatedExpression;
-        readonly inner: LocatedExpression;
-    } | undefined {
+    private fixedApplicationSpine(
+        expression: LocatedApplication,
+        headName: string,
+        arity: number
+    ): readonly LocatedExpression[] | undefined {
+        const arguments_: LocatedExpression[] = [];
+        let head: LocatedExpression = expression;
+        while (head.tag === 'application') {
+            arguments_.unshift(head.argument);
+            head = head.subject;
+        }
         if (
-            expression.subject.tag !== 'application' ||
-            expression.subject.subject.tag !== 'identifier' ||
-            expression.subject.subject.name !== 'composeCells'
+            head.tag !== 'identifier' ||
+            head.name !== headName ||
+            arguments_.length !== arity
         ) {
             return undefined;
         }
-        return Object.freeze({
-            outer: expression.subject.argument,
-            inner: expression.argument
-        });
+        return Object.freeze(arguments_);
     }
 
     private resolveArgument(

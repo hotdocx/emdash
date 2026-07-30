@@ -18,7 +18,8 @@ final-green and checkpointed at
 is an executable, focused-green, zero-behavior-delta audit checkpointed at
 `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`, with a bounded
 `SYNTAX-PARITY-1B1` proposal approved exactly as proposed by a separate
-immutable unattended review with human supersession
+immutable unattended review with human supersession; `SYNTAX-PARITY-1B1` is
+implemented and final-green, with exact local checkpoint staging in progress
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -313,14 +314,14 @@ implementation, the exact weakening body
 λ^fd a : E. s (indexOf a)
 ```
 
-was rechecked. Its direct TypeScript construction is green, but text cannot
-construct the contextual `indexOf(a)` operation from identifier/application
-syntax alone. The inventory already classifies `indexOf` with displayed and
-fibred structural constructors in `SYNTAX-PARITY-1B`; therefore `1A` does not
-silently add another operation spine. Closed reindexed functors may already
-be supplied as checked host terms and eta-expanded, but textual construction
-of reindexing/weakening remains a `1B` obligation. This is a presentation
-boundary, not a missing kernel owner or factorization algorithm.
+was rechecked. At the `1A` checkpoint its direct TypeScript construction was
+green, but text could not construct the contextual `indexOf(a)` operation
+from identifier/application syntax alone. The inventory already classified
+`indexOf` with displayed and fibred structural constructors in
+`SYNTAX-PARITY-1B`; therefore `1A` did not silently add another operation
+spine. This was a presentation boundary, not a missing kernel owner or
+factorization algorithm. The separately audited and reviewed `1B1`
+continuation below now closes exactly that seam.
 
 The implementation adds no mathematical owner, Core node,
 checker/evaluator branch, semantic profile, runtime/proof/unification rule,
@@ -401,6 +402,55 @@ focused audit tests pass, and typecheck/lint are green. The separate
 [`D-DTTLF-PRODUCT-SYNTAX-PARITY-002` review](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_D002_REVIEW.md)
 now approves only this exact scope under the user's standing unattended
 delegation, with any later explicit human decision superseding it.
+
+## `SYNTAX-PARITY-1B1` Implementation Result
+
+The implementation preserves the private three-node located tree and
+refactors only its resolver-side operation-spine inspection:
+
+- one generic fixed-arity application-spine helper now recognizes the
+  already reviewed `composeCells` binary head and the new `indexOf` unary
+  head;
+- `indexOf argument` resolves its argument recursively and calls the existing
+  `CoreCategoricalProgram.indexOf`;
+- active-slot, profile, and ownership checks remain solely in that typed
+  method; and
+- every non-reserved application still routes through the existing
+  `CoreCategoricalProgram.apply`.
+
+Both
+
+```text
+λ^fd a : E. s (indexOf a)
+λ^fd a. s (indexOf a)
+```
+
+compile to the same explicit Core and classifier evidence as direct
+TypeScript, select `categorical.displayed-functor-weakening`, and retain
+`section-pullback` plus `sigma-first-projection`. Exact negatives cover the
+unavailable profile, wrong target family, closed and foreign terms, and
+missing/extra arguments.
+
+The integrated reviewer now has a seventh `Displayed weakening` preset using
+the same adapter and checker. Its production build remains at 140 transformed
+modules; initial JavaScript is 429.10 kB / 116.78 kB gzip and the lazy
+reviewer is 724.67 kB / 159.77 kB gzip. Real Chromium accepts the exact
+weakening source and reports zero console errors or warnings.
+
+Final proportional validation is green:
+
+- the combined existing text, 1A parity, 1B0 audit, 1B1 implementation, and
+  browser-reviewer corpus passes 39/39;
+- root and fixture typecheck plus root lint pass;
+- the production browser build passes; and
+- no live Lambdapi rerun is triggered because no owner, transfer input,
+  profile, or Lambdapi source changed.
+
+The complete 1,149-test root aggregate immediately preceding this bounded
+resolver-only continuation remains the repository regression baseline. This
+slice adds ten focused audit/implementation checks and reruns every affected
+text/browser suite rather than repeating the unchanged 15-minute semantic
+corpus.
 
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
@@ -499,7 +549,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1A | **final-green at `2e7cc3c44802a5218858ca6747e7591d3bfc4859`** | approved D001 review | `^n`, `^fd`, `^nd`, immutable displayed-family/expected contracts, existing direct-builder routes, exact `composeCells`, six browser presets, negative boundaries, and 1,149-test aggregate |
 | SYNTAX-PARITY-1B0 | **focused-green, zero behavior delta at `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`** | final-green `SYNTAX-PARITY-1A` | Executable contextual-index measurement, exact 1B1/1B2/1B3 split, and bounded non-self-authorizing proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | **approved as proposed; immutable unattended review with human supersession** | checkpointed `SYNTAX-PARITY-1B0` | Authorizes only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
-| SYNTAX-PARITY-1B1 | **dependency-ready** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, and reviewer preset |
+| SYNTAX-PARITY-1B1 | **final-green; exact local checkpoint staging in progress** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
 | SYNTAX-PARITY-1B2 | gated | final-green 1B1 plus separate proposal/review | Independent displayed sibling binder presentation and `fibrePair` |
 | SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
@@ -580,6 +630,13 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1B1` implemented and final-green.**
+  Recognized only the exact unary `indexOf` spine through the existing typed
+  method, retained one generic fixed-arity spine utility and one ordinary
+  application ladder, proved direct/text weakening equality and exact
+  failures, and added the seventh reviewer preset. The 39-test proportional
+  corpus, typecheck/lint, production build, and Chromium exercise are green;
+  no Core/kernel/Lambdapi semantics changed.
 - **2026-07-30 — D002 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed proposal, recorded
   an immutable, human-supersedable review approving only the unary

@@ -8,12 +8,9 @@ import {
     it
 } from 'node:test';
 import {
-    CORE_CATEGORICAL_TEXT_REVISION,
     CORE_CATEGORICAL_TEXT_STRUCTURAL_AUDIT,
     CoreCategoricalProgram,
-    CoreCategoricalTextError,
     CoreCategoricalTextStructuralAuditError,
-    elaborateCoreCategoricalText,
     validateCoreCategoricalTextStructuralAudit
 } from '../src/v3_2';
 
@@ -60,60 +57,27 @@ const fixture = () => {
         K,
         E,
         D,
-        s,
-        environment: [
-            { name: 'K', kind: 'category' as const, value: K },
-            {
-                name: 'E',
-                kind: 'displayed-family' as const,
-                value: E
-            },
-            {
-                name: 'D',
-                kind: 'displayed-family' as const,
-                value: D
-            },
-            { name: 's', kind: 'term' as const, value: s }
-        ]
+        s
     };
 };
 
 describe('SYNTAX-PARITY-1B0 structural text audit', () => {
     it('pins the exact current contextual-index presentation seam', () => {
-        const {
-            program,
-            E,
-            D,
-            environment
-        } = fixture();
-        let captured: unknown;
-        try {
-            elaborateCoreCategoricalText(program, {
-                source: 'λ^fd a : E. s (indexOf a)',
-                sourceFile:
-                    'tests/fixtures/' +
-                    'categorical-text-structural-audit.emdash',
-                environment,
-                expected: {
-                    kind: 'displayed-functor',
-                    source: E,
-                    target: D
-                }
-            });
-        } catch (error: unknown) {
-            captured = error;
-        }
-        assert.equal(CORE_CATEGORICAL_TEXT_REVISION,
-            'SYNTAX-PARITY-1A-CATEGORICAL-TEXT-1');
-        assert.equal(captured instanceof CoreCategoricalTextError, true);
-        const diagnostic = captured as CoreCategoricalTextError;
-        assert.equal(diagnostic.code, 'UNKNOWN_IDENTIFIER');
-        assert.deepEqual(diagnostic.span, {
-            file:
-                'tests/fixtures/' +
-                'categorical-text-structural-audit.emdash',
-            start: { line: 1, column: 16 },
-            end: { line: 1, column: 23 }
+        const audit = CORE_CATEGORICAL_TEXT_STRUCTURAL_AUDIT;
+        assert.equal(
+            audit.prerequisite.textRevision,
+            'SYNTAX-PARITY-1A-CATEGORICAL-TEXT-1'
+        );
+        assert.equal(
+            audit.measuredSeam.exactSource,
+            'λ^fd a : E. s (indexOf a)'
+        );
+        assert.deepEqual(audit.measuredSeam.currentTextFailure, {
+            phase: 'resolution',
+            code: 'UNKNOWN_IDENTIFIER',
+            identifier: 'indexOf',
+            startColumn: 16,
+            endColumn: 23
         });
     });
 

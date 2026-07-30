@@ -28,7 +28,7 @@ import {
 } from './product_review_demo';
 
 export const CORE_BROWSER_REVIEWER_REVISION =
-    'SYNTAX-PARITY-1A-BROWSER-REVIEWER-1' as const;
+    'SYNTAX-PARITY-1B1-BROWSER-REVIEWER-1' as const;
 
 export type CoreBrowserReviewerPresetId =
     | 'pointwise-application'
@@ -36,6 +36,7 @@ export type CoreBrowserReviewerPresetId =
     | 'whole-hom-action'
     | 'indexed-section-composition'
     | 'displayed-functor-composition'
+    | 'displayed-functor-weakening'
     | 'displayed-transfor-composition';
 
 export type CoreBrowserReviewerExpectedMode =
@@ -59,7 +60,7 @@ export type CoreBrowserReviewerExpectedMode =
         readonly kind: 'displayed-functor';
         readonly binderMode: 'fd';
         readonly source: 'E';
-        readonly target: 'Q';
+        readonly target: 'D' | 'Q';
     }
     | {
         readonly kind: 'displayed-transfor';
@@ -247,6 +248,26 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
         ]
     },
     {
+        id: 'displayed-functor-weakening',
+        label: 'Displayed weakening',
+        source: 'λ^fd a : E. s (indexOf a)',
+        description:
+            'A displayed variable exposes its hidden base index through the ' +
+            'existing contextual operation, making section weakening ' +
+            'explicit and checked.',
+        expectedMode: {
+            kind: 'displayed-functor',
+            binderMode: 'fd',
+            source: 'E',
+            target: 'D'
+        },
+        assumptions: [
+            'K : Cat',
+            'E, D : Catd K',
+            's : Π k :^n K, D[k]'
+        ]
+    },
+    {
         id: 'displayed-transfor-composition',
         label: 'Displayed natural composition',
         source:
@@ -285,7 +306,7 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
         'optional Node-side Lambdapi conformance oracle'
     ],
     supported: [
-        'six categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'seven categorical text presets across ^f, ^n, ^fd, and ^nd',
         'edited categorical text with source diagnostics',
         'existing outer-LF, ordinary, and displayed three-panel report',
         'generated emdash book',
@@ -293,7 +314,7 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
     ],
     deferred: [
         'nested and multi-binder categorical text',
-        'displayed context and structural-constructor syntax',
+        'remaining displayed context and structural-constructor syntax',
         'arbitrary displayed telescope depth',
         'browser-side source acquisition',
         'production Lambdapi dependency',
@@ -451,6 +472,31 @@ const createFixture = (
                 kind: 'displayed-functor' as const,
                 source: E,
                 target: Q
+            }
+        });
+    }
+
+    if (presetId === 'displayed-functor-weakening') {
+        const program = new CoreCategoricalProgram({
+            sourceFile,
+            profile: 'fibred-weaken-reindex-1'
+        });
+        const K = program.category('review_K');
+        const E = program.displayedFamily('review_E', K);
+        const D = program.displayedFamily('review_D', K);
+        const s = program.section('review_s', D);
+        return Object.freeze({
+            program,
+            environment: Object.freeze([
+                categoryBinding('K', K),
+                familyBinding('E', E),
+                familyBinding('D', D),
+                termBinding('s', s)
+            ]),
+            expected: {
+                kind: 'displayed-functor' as const,
+                source: E,
+                target: D
             }
         });
     }
