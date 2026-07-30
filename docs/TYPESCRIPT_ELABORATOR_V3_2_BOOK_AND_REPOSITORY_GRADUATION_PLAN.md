@@ -9,7 +9,8 @@ the completed book architecture plan
 [`REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md`](../emdash2/reports/REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_ARCHITECTURE_PLAN_2026-07-20.md),
 and the completed category/formal-presentation expansion plan
 [`REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md`](../emdash2/reports/REPORT_EMDASH_V3_2_FUNCTORIAL_TYPE_THEORY_BOOK_CATEGORY_THEORY_AND_FORMAL_PRESENTATION_EXPANSION_PLAN_2026-07-20.md)
-Status: selected and dependency-ready post-syntax product-graduation route.
+Status: complete reader-facing product graduation; bulk systematic-transfer
+qualification remains explicitly deferred to a future persistent goal.
 Syntax parity is final-green through `SYNTAX-PARITY-1D1` at
 `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`. The exact zero-behavior
 `SYNTAX-PARITY-GRADUATE-1` proposal is checkpointed at
@@ -39,8 +40,9 @@ The exact zero-behavior `PRODUCT-BOOK-GRADUATE-1` proposal is frozen at
 `9abb57acd9095dd15c3289fec3e5d3e90289b6a0` and approved exactly as
 proposed by D-DTTLF-BOOK-REPOSITORY-003 at
 `c26d98f31f2afb7b592038a3bce7401e8ab1d044`.
-`PRODUCT-BOOK-GRADUATE-1` is final-green with its bounded local checkpoint
-pending. No remote release/publication or bulk scale change is included.
+`PRODUCT-BOOK-GRADUATE-1` is complete at exact local checkpoint
+`8c38186751b5499d2715c72c51f12f9c90ddcc6c`. No remote
+release/publication or bulk scale change is included.
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
@@ -266,7 +268,7 @@ by preparing the static artifact and README.
 | BOOK-ARTIFACT-1B | **complete at `f7baeb1e2e5828c8237767bb7d19ab5faccf8992`** | final-green authored edition and exact D001 approval | The single final release, exporter-only deterministic repeat, 199-page visual QA, and checked byte-for-byte promotion to both tracked public PDF paths are complete |
 | REPO-PRESENT-1C | **complete at `18fe2ea2d78c996a63d06bb38b2361c8e959eed9`** | validated book artifact and exact D001 review | The concise reader-first root README now joins the book, integrated reviewer, mathematical authority, exact limitations, focused contributor route, and compact related/historical links |
 | H-DTTLF-BOOK-REPOSITORY-GRADUATE-01 / D-DTTLF-BOOK-REPOSITORY-003 | **approved exactly as proposed at review checkpoint `c26d98f31f2afb7b592038a3bce7401e8ab1d044`; human supersession retained** | immutable proposal `9abb57acd9095dd15c3289fec3e5d3e90289b6a0` | Authorizes only the concise current external-review guide, exact checksum/commands/capabilities/non-claims, proportional evidence reuse, and future-scale handoff |
-| PRODUCT-BOOK-GRADUATE-1 | **final-green; bounded local checkpoint pending** | BOOK-PROSE-1A through REPO-PRESENT-1C and exact D003 review | The self-contained reader guide now matches the graduated reviewer, syntax, book, artifact, and README boundary without stale interim routing |
+| PRODUCT-BOOK-GRADUATE-1 | **complete at `8c38186751b5499d2715c72c51f12f9c90ddcc6c`** | BOOK-PROSE-1A through REPO-PRESENT-1C and exact D003 review | The self-contained reader guide now matches the graduated reviewer, syntax, book, artifact, and README boundary without stale interim routing |
 | FUTURE-SCALE-GOAL | deferred/out of scope for this persistent goal | later explicit user goal | Resume pending SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other preserved scale rows without implying they were completed here |
 
 ## Acceptance
@@ -468,9 +470,9 @@ exact authority.
   `b34b7e430deacf4b91ce354c5e5eb3d2674ef08e93d3bcbd4ca7618ea37f41d7`.
   Diff hygiene passes; no TypeScript, browser, kernel, conformance, book,
   renderer, or repository aggregate was rerun. The current reader-facing
-  product goal is final-green, while all preserved bulk scale rows remain
-  pending for a future explicit goal. The bounded local graduation
-  checkpoint is pending.
+  product goal is complete, while all preserved bulk scale rows remain
+  pending for a future explicit goal. Exact local graduation checkpoint:
+  `8c38186751b5499d2715c72c51f12f9c90ddcc6c`.
 - **2026-07-30 — `REPO-PRESENT-1C` final-green.** The root README is now a
   132-line reader-first introduction under the eight headings frozen by
   D001. It leads with the mathematical thesis and current research status,

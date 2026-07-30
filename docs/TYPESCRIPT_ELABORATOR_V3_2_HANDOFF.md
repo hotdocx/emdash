@@ -711,14 +711,15 @@ The exact zero-behavior reader-graduation proposal is frozen at
 `9abb57acd9095dd15c3289fec3e5d3e90289b6a0` and separately approved with
 human supersession by D-DTTLF-BOOK-REPOSITORY-003 at
 `c26d98f31f2afb7b592038a3bce7401e8ab1d044`.
-`PRODUCT-BOOK-GRADUATE-1` is final-green with its bounded local checkpoint
-pending. The self-contained external-review guide now matches the ten-preset
-reviewer, graduated categorical text envelope, direct-TypeScript report,
-`0.3.0-dev` book artifact, architecture/authority split, and exact
-limitations. Its six local links and seven named package commands resolve,
-and all three PDF paths match the recorded SHA-256. No unchanged aggregate
-was rerun. The current reader-facing product goal stops here; the preserved
-bulk scale rows require a future explicit persistent goal.
+`PRODUCT-BOOK-GRADUATE-1` is complete at exact local checkpoint
+`8c38186751b5499d2715c72c51f12f9c90ddcc6c`. The self-contained
+external-review guide now matches the ten-preset reviewer, graduated
+categorical text envelope, direct-TypeScript report, `0.3.0-dev` book
+artifact, architecture/authority split, and exact limitations. Its six local
+links and seven named package commands resolve, and all three PDF paths match
+the recorded SHA-256. No unchanged aggregate was rerun. The current
+reader-facing product goal stops here; the preserved bulk scale rows require
+a future explicit persistent goal.
 The plan then updates the book as theorem-led mathematical prose rather than
 a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.
@@ -1373,14 +1374,18 @@ authorization and recovery rules in
 `PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. Persistence alone does not authorize
 any Git mutation.
 
-## Start The Long-Running Implementation
+## Completed Reader Goal And Future Work
 
-Use the ready-to-paste **Persistent `/goal` Launch Prompt** at the end of
-`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`. Recover
-through this handoff and retain the scale plan as the complete future
-systematic-transfer ledger, but do not resume its bulk rows in the current
-product goal. The current path is integrated-reviewer checkpoint, syntax
-parity, then reader-facing book/repository graduation.
+The integrated reviewer, syntax parity, reader-facing book/repository route,
+and self-contained external-review handoff are complete at the exact
+checkpoints recorded above. Use the **Completed-Goal Recovery Prompt** in
+`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md` after an
+interruption; do not restart completed rows or rerun unchanged aggregates.
+
+The scale plan remains the complete future systematic-transfer ledger.
+Resume its pending bulk rows only under a future explicit persistent goal
+using that plan's then-current launch prompt and next dependency-ready
+reviewed row.
 
 The historical scale-led continuation routed the critical path through
 `TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`; the completed
