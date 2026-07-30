@@ -3338,7 +3338,11 @@ complete and route to their dedicated living plans. Take only the selected
 additive directed-browser proposal after exact review; that slice is now
 complete and final-green. Keep categorical browser separation, static
 publication, and parser/resolver implementation gated by their own rows. The
-next product boundary is the parser-independent SYNTAX-RESOLVE-0B contract.
+next product boundary is the frozen
+H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001
+SYNTAX-RESOLVE-0B contract. That proposal authorizes only disposable parser
+comparison; parser selection and the integrated parser/resolver/example
+remain a separate review, and no standalone second AST may land.
 When those living plans route back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending
@@ -3947,3 +3951,12 @@ scope is affected.
   pass. No categorical browser, parser/dependency, backend, publication,
   mathematical owner/rule, engine, or scale result changed. Exact green local
   checkpoint: `7f696cea4b6a369e5db41c0d5e57e778b61fa10c`.
+- **2026-07-29 — SYNTAX-RESOLVE-0B exact contract proposed.** Froze
+  H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001 around a narrow
+  ordinary categorical grammar, immutable typed environment, explicit
+  expected-classifier routing, recursive application resolution, exact
+  source spans, and equivalence with direct TypeScript witnesses. Corrected
+  sequencing so the selected parser, located nodes, resolver, tests, and
+  executable example must land together after disposable parser comparison
+  and a separate implementation review. No parser, dependency, code,
+  browser, semantic, or Lambdapi effect is part of the proposal.

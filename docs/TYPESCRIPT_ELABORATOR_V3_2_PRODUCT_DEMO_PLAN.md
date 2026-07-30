@@ -19,8 +19,9 @@ PRODUCT-DEMO-ORACLE-0A, PRODUCT-BROWSER-0A, and PRODUCT-SYNTAX-0A are
 complete; the dedicated browser plan freezes BROWSER-DIRECTED-1A as the next
 product implementation, records its exact separate
 D-DTTLF-PRODUCT-BROWSER-001 review with human supersession, and now records
-that slice final-green; the dedicated user-syntax plan's
-parser-independent resolver contract is the next proposal boundary
+that slice final-green; the dedicated user-syntax plan now freezes
+H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001 as the next exact
+proposal boundary
 
 ## Human Direction And Purpose
 
@@ -182,7 +183,8 @@ PRODUCT-DEMO-0A inventory
   -> PRODUCT-SYNTAX-0A measured user-syntax audit
   -> BROWSER-DIRECTED-1A exact review/implementation (complete)
   -> SYNTAX-RESOLVE-0B exact parser-independent contract proposal
-  -> separately decide whether to implement that resolver or return to scale
+  -> disposable parser comparison and separate implementation review
+  -> parser + located nodes + resolver + example as one vertical slice
   -> PRODUCT-GRADUATE-1
   -> return to SCALE-STRESS-3C / SCALE-BATCH-1 / SCALE-GRADUATE-1
 ```
@@ -340,7 +342,7 @@ Exact local implementation checkpoint:
 | PRODUCT-BROWSER-0A | complete; routed to dedicated browser plan | PRODUCT-DEMO-1B | The directed dependent closure is Node-free and Vite/Chromium-green; the full report reaches `node:crypto` through acquisition/audit modules. Frozen additive BROWSER-DIRECTED-1A and deferred categorical runtime-spec separation are recorded in [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md) |
 | PRODUCT-BROWSER-1 | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, fixed dependent-LF plus preserved minimal-Core views, Node-free/static project-subpath build, real-browser evidence, and no semantic/dependency delta |
 | PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); Parsimmon versus a tiny parser remains gated |
-| PRODUCT-SYNTAX-1 | next proposal boundary; implementation still gated | SYNTAX-RESOLVE-0B plus separate review | First freeze the parser-independent recursive-resolution API; implement only after its dedicated plan selects an exact scope |
+| PRODUCT-SYNTAX-1 | H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001 proposed; implementation still gated | SYNTAX-RESOLVE-0B plus separate review | Approve the exact contract and disposable comparison only; selected parser, located nodes, resolver, tests, and example must later land together |
 | PRODUCT-GRADUATE-1 | pending | required product rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
@@ -541,3 +543,12 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   parser, dependency, or semantic change was made. The parser-independent
   SYNTAX-RESOLVE-0B contract is the next proposal boundary. Exact green local
   checkpoint: `7f696cea4b6a369e5db41c0d5e57e778b61fa10c`.
+- **2026-07-29 — SYNTAX-RESOLVE-0B exact contract frozen.** The dedicated
+  syntax plan now proposes H-DTTLF-PRODUCT-SYNTAX-01 /
+  D-DTTLF-PRODUCT-SYNTAX-001 for a narrow ordinary categorical grammar,
+  request-local typed environment, explicit expected routing, recursive
+  application resolution, and exact spans. It also corrects the sequencing:
+  disposable parser comparison comes first, then a separately reviewed
+  parser, located nodes, resolver, tests, and example land together. No
+  parser/dependency, code, browser, semantics, or Lambdapi change is part of
+  this proposal.

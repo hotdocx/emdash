@@ -408,9 +408,13 @@ adapter, not another `RawExpr` type theory or checker. The historical
 Parsimmon implementation remains grammar evidence; Parsimmon versus a tiny
 parser is a later measured choice. No parser dependency or syntax
 implementation is yet selected. With the directed browser slice complete,
-the dedicated syntax plan routes next to a deeply frozen
-SYNTAX-RESOLVE-0B parser-independent API/diagnostic contract before any
-implementation or parser-library decision.
+the dedicated syntax plan now freezes the exact
+H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001
+SYNTAX-RESOLVE-0B contract. It requires a disposable Parsimmon-versus-small-
+parser comparison followed by a separate implementation review; the selected
+parser, located nodes, recursive resolver, tests, and executable example must
+land together as one editable-input slice. No unused second AST/resolver may
+be committed on its own.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark

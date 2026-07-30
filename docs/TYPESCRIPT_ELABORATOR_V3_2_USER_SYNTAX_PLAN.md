@@ -12,8 +12,10 @@ Supersedes: no typed TypeScript construction API, existing contextual
 compiler, checker, Core, parser/acquisition decision, or usability envelope
 Status: active design subplan; SYNTAX-0A architecture audit complete;
 the selected browser-directed product slice is complete and
-SYNTAX-RESOLVE-0B is the next proposal boundary; implementation remains gated
-behind a separate exact review
+SYNTAX-RESOLVE-0B is the next proposal boundary; the contract below freezes
+design and qualification requirements, but no located tree or resolver may
+land as unused runtime infrastructure before the selected parser joins it in
+one separately reviewed user-visible vertical slice
 
 ## Purpose And Meaning Of Usability
 
@@ -143,6 +145,26 @@ The located syntax layer may contain only source concepts:
 It may not contain Core owner IDs selected by a duplicate checker, inferred
 semantic classifiers, rewrite rules, metavariable solutions, or its own
 definitional equality.
+
+### Vertical-integration constraint
+
+The parser-independent contract is a planning and comparison boundary, not an
+instruction to commit a dormant second AST. The first semantic implementation
+must land these pieces together:
+
+```text
+editable source string
+  -> located lexical nodes
+  -> recursive resolution
+  -> existing CoreCategoricalProgram calls
+  -> a real CoreCategoricalTerm checked by the existing compiler
+```
+
+The located nodes may be tested directly while implementing that slice, but
+they must not first ship as an isolated public model with no text consumer.
+Likewise, a parser-only checkpoint must not return an apparently elaborated
+term. Direct typed TypeScript remains the semantic reference and supported
+API before, during, and after the text slice.
 
 ### Resolution is recursive but not a second type theory
 
@@ -297,6 +319,173 @@ The first implementation may select a smaller profile only if the omitted
 cases are explicitly staged and the implemented cases still exercise genuine
 recursive subexpression resolution.
 
+## SYNTAX-RESOLVE-0B — Frozen Contract Proposal
+
+### First vertical slice
+
+The first implementation is deliberately an **ordinary categorical** text
+adapter. It proves the disputed recursive-variable and silent-application
+architecture without claiming the outer-LF, displayed-telescope, or complete
+notation surface. Its grammar is:
+
+```text
+expression  ::= lambda | application
+lambda      ::= ("λ" | "\\") identifier ":^f" identifier "." expression
+application ::= atom atom*
+atom        ::= identifier | "(" expression ")"
+```
+
+Whitespace between atoms creates one neutral left-associated application
+spine. The parser never emits `fapp*`, `tapp*`, evaluation, pairing, weakening,
+contraction, or exchange owner names.
+
+This slice supports one outer `:^f` lambda per elaboration request and
+arbitrarily recursive identifier/application/parenthesis subexpressions in
+its body. A syntactically nested lambda is parsed, then rejected with an exact
+unsupported-expectation diagnostic until a recursive expected-classifier
+contract is separately frozen. This restriction does not prevent the first
+slice from qualifying:
+
+```text
+λ x :^f A. (H x) (K x)
+λ x :^f A. F x y0
+F p
+```
+
+where `p` may be a typed whole-Hom boundary. The first two expressions prove
+recursive open/open and open/closed occurrence lowering; the third proves
+that whitespace application is not hard-wired to object action.
+
+### Public adapter contract
+
+The implementation may refine TypeScript spelling during the separate
+implementation review, but it must preserve this semantic shape:
+
+```ts
+type CoreCategoricalTextBinding =
+    | { readonly name: string;
+        readonly kind: 'category';
+        readonly value: CoreCategoricalCategory }
+    | { readonly name: string;
+        readonly kind: 'term';
+        readonly value: CoreCategoricalTerm }
+    | { readonly name: string;
+        readonly kind: 'hom-boundary';
+        readonly value: CoreCategoricalHomBoundary };
+
+type CoreCategoricalTextExpected =
+    | { readonly kind: 'term';
+        readonly applicationShape?: CoreCategoricalExpectedShape }
+    | { readonly kind: 'ordinary-functor';
+        readonly source: CoreCategoricalCategory;
+        readonly target: CoreCategoricalCategory };
+
+interface CoreCategoricalTextRequest {
+    readonly source: string;
+    readonly sourceFile?: string;
+    readonly environment:
+        readonly CoreCategoricalTextBinding[];
+    readonly expected: CoreCategoricalTextExpected;
+}
+
+function elaborateCoreCategoricalText(
+    program: CoreCategoricalProgram,
+    request: CoreCategoricalTextRequest
+): CoreCategoricalTerm;
+```
+
+The adapter copies the readonly entry list into one request-local lexical
+environment, rejects duplicate names deterministically, and never mutates
+caller data or program state. Each value remains branded by its existing
+program; foreign values are rejected by the existing program methods.
+Callback extension binds the exact `CoreCategoricalSlotToken` supplied by
+`program.lambda`, never a fabricated variable or De Bruijn index.
+
+For a lambda request, the parsed annotation must resolve to the exact source
+category supplied by the `ordinary-functor` expectation; the expectation
+supplies the target category already required by `program.lambda`. Category
+agreement uses the existing program comparison/checking boundary, not label
+equality. A lambda under `kind: 'term'`, an application/identifier under an
+inapplicable functor expectation, or a nested lambda without a reviewed
+recursive expectation fails closed.
+
+For application, the resolver first resolves the subject and then every
+argument recursively. It calls `program.apply` once per argument, passing a
+Hom-boundary value as a boundary and all other admissible values as terms.
+The optional `applicationShape` is forwarded only where the request supplies
+it; no syntax or local lookup table guesses an `fapp*`/`tapp*` owner.
+
+### Located-node and diagnostic contract
+
+The internal located union has only `identifier`, `application`, and `lambda`
+nodes plus offsets and one normalized `SourceSpan`. Parentheses affect
+association and span coverage but do not become semantic nodes. Identifier
+and binder names follow the existing safe-identifier restriction.
+
+One exported `CoreCategoricalTextError` preserves:
+
+- phase: `parsing` or `resolution`;
+- stable code;
+- exact source span and source label;
+- a concise detail string; and
+- an optional underlying `CoreCategoricalProgramError` or frontend error.
+
+The frozen first-slice codes distinguish at least:
+
+- unexpected token/end and invalid identifier;
+- duplicate environment name;
+- unknown identifier;
+- expected category, term, or admissible application argument;
+- missing or incompatible abstraction expectation;
+- unsupported binder mode or nested abstraction; and
+- underlying categorical rejection.
+
+Line and column positions are one-based and end positions are exclusive. The
+resolver passes the originating node span into every `program.lambda` and
+`program.apply` call so downstream errors retain source location.
+
+### Executable acceptance matrix
+
+The implementation review must freeze concrete fixtures before code lands.
+At minimum, the green slice must prove:
+
+1. parsed `(H x) (K x)` is definitionally equal to the current direct
+   TypeScript pointwise witness and has the same explicit Core;
+2. parsed `F x y0` is equal to the direct nested-evaluation witness;
+3. parsed Hom-boundary application selects the same existing whole-action
+   path as direct `program.apply`;
+4. a binder used zero, once, and twice retains current weakening, identity,
+   and contraction evidence;
+5. unknown names, duplicate host names, category/term mismatch, malformed
+   input, nested lambda, and an unsupported/ambiguous action fail with exact
+   spans;
+6. no new checker, Core owner/node, runtime/proof rule, global registry, or
+   Lambdapi dependency exists;
+7. the module is Node-builtin-free and can enter a later additive browser
+   entry without a server; and
+8. the aggregate root TypeScript gate remains green.
+
+Displayed `:^fd`/`:^nd`, dependent telescopes, outer-LF text, let/Pi/holes,
+implicit arguments, recovery, editor services, and browser UI are explicit
+later rows. The current direct TypeScript demonstrations remain the
+qualification oracle for those rows.
+
+### Decision gate
+
+`H-DTTLF-PRODUCT-SYNTAX-01 /
+D-DTTLF-PRODUCT-SYNTAX-001` proposes only:
+
+1. this parser-independent contract;
+2. disposable, uncommitted comparison of Parsimmon and a tiny local parser
+   against the exact first-slice grammar and span cases; and
+3. a subsequent separately reviewed parser-selection/implementation
+   proposal in which parser, located nodes, resolver, tests, example, and
+   ledger land together.
+
+Approval does not select a parser, add a dependency, implement syntax, enter
+the browser, widen categorical semantics, or alter Lambdapi. Losing spike
+files must be outside the tracked tree or removed before any checkpoint.
+
 ## Parser Technology Alternatives
 
 ### Parsimmon
@@ -352,15 +541,16 @@ editable expression surface.
 
 ### Current recommendation
 
-Do not select the library before freezing the resolver contract. Then build
-two small parser-only spikes over the same located-node tests:
+Do not select the library before approving the resolver contract. Then build
+two disposable parser-only spikes over the same located-node tests:
 
 1. a Parsimmon grammar informed by the historical code; and
 2. a tiny lexer/Pratt or recursive-descent grammar.
 
-Measure source size, dependency/lock impact, span quality, browser build,
+Measure source size, dependency/lock impact, span quality, browser viability,
 failure diagnostics, and ease of binder-mode extension. Delete the losing
-spike before semantic checkpointing. Neither spike may implement typing.
+spike before semantic checkpointing. Neither spike may implement typing, and
+neither may land without the resolver and user-visible adapter.
 
 ## Proposed Sequence
 
@@ -371,7 +561,8 @@ SYNTAX-0A architecture audit (complete)
   -> separate D-SYNTAX-001 review
   -> SYNTAX-PARSER-0C compare Parsimmon and tiny-parser spikes
   -> separate parser-selection review
-  -> SYNTAX-1A implement the selected input adapter through existing APIs
+  -> SYNTAX-1A land selected parser + located nodes + resolver + example
+     together through existing APIs
   -> SYNTAX-BROWSER-1B optionally join it to a reviewed browser profile
   -> SYNTAX-GRADUATE-1 record the exact supported grammar/usability envelope
 ```
@@ -384,10 +575,9 @@ Node-independent, but a browser UI is a separate product boundary.
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | SYNTAX-0A | complete | PRODUCT-DEMO-1B and current contextual programs | Historical parser audit, current semantic-seam inventory, resolver architecture, qualification matrix, and alternatives |
-| SYNTAX-RESOLVE-0B | pending proposal | SYNTAX-0A and selected product priority | Deeply frozen parser-independent types/API/diagnostic contract with no semantic implementation |
-| SYNTAX-RESOLVE-1A | gated | separate review of 0B | Located-node environment and recursive resolver into existing LF/categorical programs, initially constructible directly in TypeScript |
-| SYNTAX-PARSER-0C | gated | resolver contract | Disposable Parsimmon versus tiny-parser measurement over identical syntax tests |
-| SYNTAX-PARSER-1A | gated | separate parser selection | Selected string parser feeding the same resolver |
+| SYNTAX-RESOLVE-0B | proposed as H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001 | SYNTAX-0A and selected product priority | Deeply frozen parser-independent types/API/diagnostic/qualification contract; no standalone runtime AST |
+| SYNTAX-PARSER-0C | gated | separate review of 0B | Disposable Parsimmon versus tiny-parser measurement over identical syntax/span tests; no tracked losing spike |
+| SYNTAX-1A | gated | separate parser-selection/implementation review | Selected parser, located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example land as one user-visible slice |
 | SYNTAX-BROWSER-1B | deferred | reviewed parser and browser profile | Editable browser input without a second checker or server |
 | SYNTAX-GRADUATE-1 | pending | selected syntax rows | Exact grammar, binder/action matrix, diagnostics, performance observation, and deferrals |
 
@@ -470,6 +660,17 @@ broader grammar, semantic feature, dependency, browser, or Git effect.
 
 ## Change Log
 
+- **2026-07-29 — SYNTAX-RESOLVE-0B frozen as
+  H-DTTLF-PRODUCT-SYNTAX-01.** Converted the audit into an exact ordinary
+  categorical first-slice contract: identifiers, parentheses, neutral
+  whitespace application, and one `:^f` abstraction; request-local typed
+  bindings; explicit expected routing; recursive resolution through the
+  existing program; exact spans; and direct-TypeScript equivalence tests.
+  Corrected the sequencing so a located tree/resolver cannot land as dormant
+  infrastructure: the selected parser, nodes, resolver, tests, and executable
+  example must enter together after a disposable parser comparison and a
+  separate implementation review. This proposal selects no parser or
+  dependency and changes no runtime behavior.
 - **2026-07-29 — SYNTAX-0A completed.** Compared the historical Parsimmon
   grammar with the active scoped LF builder and categorical contextual
   programs. Selected a parser-independent located syntax plus recursive
