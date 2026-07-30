@@ -19,9 +19,11 @@ review checkpoint is
 `38e0bc2b177773db0faba36e8aaafd12d5e50982`. `BOOK-DELTA-0A` is complete
 in
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md);
-`BOOK-NARRATIVE-0B` is the next dependency-ready row. No book prose,
-generated artifact, release, public presentation, or bulk scale change is
-yet authorized.
+`BOOK-NARRATIVE-0B` is complete in the frozen
+[`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md).
+H-DTTLF-BOOK-REPOSITORY-01 / D-DTTLF-BOOK-REPOSITORY-001 is the next
+separate review gate. No book prose, generated artifact, release, public
+presentation, or bulk scale change is yet authorized.
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
@@ -239,8 +241,8 @@ by preparing the static artifact and README.
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | BOOK-DELTA-0A | **complete at `9f3d744010d1bba210d1dcd1762df0afc35cf270`** | syntax-parity graduation and `8217aa3...` audit anchor | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md) classifies the mathematical, formal-presentation, evidence, workflow, developer-only, and future-boundary deltas without prose mutation |
-| BOOK-NARRATIVE-0B | **dependency-ready; selected next** | complete delta matrix and book authorities | Exact theorem-led running example, section-level edit map, status/evidence map, notation boundary, and bounded implementation proposal |
-| H-DTTLF-BOOK-REPOSITORY-01 | pending exact proposal | BOOK-NARRATIVE-0B | Separate review of exact authored sources, evidence/manifest effects, artifact ownership, README scope, and validation |
+| BOOK-NARRATIVE-0B | **complete; exact proposal frozen; checkpoint pending exact hash** | complete delta matrix and book authorities | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md) freezes two running examples, ten authored/structured book sources, three evidence claims, one reviewer preset, one PDF-promotion owner, README scope, non-claims, and proportional validation |
+| H-DTTLF-BOOK-REPOSITORY-01 / D-DTTLF-BOOK-REPOSITORY-001 | **dependency-ready separate review; no implementation authority yet** | frozen BOOK-NARRATIVE-0B proposal | Review the exact authored sources, evidence/manifest effects, one derived preset, artifact ownership, README scope, validation, and Git boundary |
 | BOOK-PROSE-1A | gated | exact separate review | Edit only reviewed authored book sources and structured evidence/architecture authorities; preserve theorem-led prose and formal-status discipline |
 | BOOK-ARTIFACT-1B | gated | BOOK-PROSE-1A and exact separate review | Run full book checks/render/release, visually inspect affected and repaginated pages, and deterministically promote the validated PDF to `docs/emdash-book.pdf` |
 | REPO-PRESENT-1C | gated | validated book artifact and exact separate review | Consolidate root README/public entry points around the book and integrated reviewer, with internal details routed to handoff/plans |
@@ -367,6 +369,16 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `BOOK-NARRATIVE-0B` proposal frozen.** The exact
+  [book/repository proposal](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md)
+  selects the existing nested exchange/currying witness and mixed displayed
+  context, ten authored/structured book files, three Lambdapi-backed evidence
+  claims, one derived browser preset, one root reviewer command, a
+  deterministic canonical/compatibility PDF promotion owner, a reader-first
+  README outline, exact non-claims, and proportional validation.
+  H-DTTLF-BOOK-REPOSITORY-01 / D-DTTLF-BOOK-REPOSITORY-001 is now the
+  dependency-ready separate review; no prose, product, artifact, or README
+  mutation has started.
 - **2026-07-30 — `BOOK-DELTA-0A` completed.** The dedicated
   [capability audit](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md)
   classifies the active fibred-context mathematics, renewed TypeScript
