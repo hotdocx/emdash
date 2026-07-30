@@ -3480,6 +3480,13 @@ Lambdapi, browser, or scale delta. Syntax graduation, not any deferred scale
 row, is next after exact local implementation checkpoint
 `126023e5ce8ab31f28730e1be508da11083084b4`.
 
+The subsequent syntax-graduation audit finds one direct-green presentation
+gap before graduation: nested ordinary `^f` exchange/currying is supported
+by the reviewed TypeScript program but rejected by text. It freezes only a
+recursive expected-classifier `SYNTAX-PARITY-1D1` correction. This adds no
+scale capability; the correction and final syntax graduation remain the
+product route, while every bulk scale row stays deferred.
+
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
 bounded review approves it. This is not bulk scale authority. The current

@@ -117,6 +117,7 @@ export * from './categorical_text_constructor_audit';
 export * from './categorical_text_displayed_constructor_audit';
 export * from './categorical_text_internal_action_audit';
 export * from './categorical_text_result_constructor_audit';
+export * from './categorical_text_graduation_audit';
 export * from './categorical_usability_graduation_proposal';
 export * from './categorical_usability_graduation_review';
 export * from './categorical_dependent_usability_proposal';

@@ -613,6 +613,18 @@ change occurred. `SYNTAX-PARITY-GRADUATE-1` is next after the bounded local
 implementation checkpoint
 `126023e5ce8ab31f28730e1be508da11083084b4`.
 
+The first graduation audit does not falsely graduate that state. It
+partitions the original 68 public methods into 47 mathematical-expression
+methods and 21 deliberate host declaration/context-fixture/observation
+methods, freezes the exact 37-head text envelope, and confirms that compound
+annotations are optional while arbitrary displayed contexts/coherence remain
+direct semantic boundaries. It also measures one real parser gap: the
+existing direct exchange/currying example supports
+`λ^f x : A. λ^f y : B. E y x`, but text rejects the inner binder. Its frozen
+D009 proposal selects only a recursive ordinary-functor `bodyExpected`
+contract over the existing dispatcher and program; no nested non-ordinary,
+semantic, browser, Lambdapi, book, or scale behavior is included.
+
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
 That plan audits the capability delta from the user-selected `8217aa3...`

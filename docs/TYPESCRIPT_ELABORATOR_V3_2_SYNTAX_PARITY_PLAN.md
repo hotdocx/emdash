@@ -56,7 +56,10 @@ the bounded 1C2B implementation is final-green at exact local checkpoint
 at `cfacee11affc6360a3b81021d0a51fd43071f50c`, its separate immutable D008
 review approves the exact frozen scope with human supersession, and the
 bounded implementation is final-green at exact local checkpoint
-`126023e5ce8ab31f28730e1be508da11083084b4`.
+`126023e5ce8ab31f28730e1be508da11083084b4`. The first graduation audit
+finds one remaining direct-green text gap—nested ordinary `^f`
+abstraction—and freezes the bounded `SYNTAX-PARITY-1D1` correction before
+graduation.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1315,6 +1318,86 @@ delta. The next dependency-ready product row is
 Exact local implementation checkpoint:
 `126023e5ce8ab31f28730e1be508da11083084b4`.
 
+## `SYNTAX-PARITY-GRADUATE-0A` Audit And `1D1` Correction Proposal
+
+The executable
+[`categorical_text_graduation_audit.ts`](../src/v3_2/categorical_text_graduation_audit.ts)
+reconciles the original complete 68-method inventory with the final-green
+post-1C3 adapter. The implemented bounded text envelope has:
+
+- one private three-node located expression tree and one checker/program
+  architecture;
+- four intrinsic binder modes, four immutable environment value kinds, and
+  nine checked result/expected kinds;
+- the reviewed independent-sibling and exact `[1,1]` / `[1,2,1]` dependent
+  context presentations;
+- one classifier-directed generic application route; and
+- 37 exact named mathematical operation heads.
+
+The public method boundary is now explicit. Twenty-one methods are
+deliberately host-side rather than missing expression grammar:
+
+- ten checked declaration/assumption constructors supply immutable names to
+  the text environment;
+- `groupedSequentialContext` and `groupedSequentialObject` construct host
+  fixtures and observations, while their reviewed mathematical binder
+  presentations are already the 1B2/1B3 text forms; and
+- nine inspection, compatibility, serialization, comparison, and compilation
+  operations consume an elaborated value and remain reviewer/API commands.
+
+The remaining 47 methods form the mathematical expression target, with
+`substituteFamily` normalized to the sole `pullback` spelling. Compound
+binder annotations are optional presentation sugar because bidirectional
+expected contracts already provide every reviewed binder classifier.
+Arbitrary displayed telescope depth and arbitrary pointwise coherence
+synthesis remain genuine limitations of the direct API itself, not parser
+gaps.
+
+The audit nevertheless prevents premature graduation. The reviewed direct
+TypeScript exchange/currying example already constructs:
+
+```text
+λ^f x : A. λ^f y : B. E y x
+```
+
+as a functor `A -> Functor(B,C)`, while the text adapter still fails at the
+inner lambda with `UNSUPPORTED_NESTED_ABSTRACTION`. This is a mathematical
+direct-TypeScript capability, not arbitrary JavaScript control flow and not
+a missing categorical owner. Syntax graduation is therefore gated by one
+small typed-resolver correction.
+
+### Proposed gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-09`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-009` proposes only
+`SYNTAX-PARITY-1D1`:
+
+- add an optional recursively typed `bodyExpected` field to the existing
+  ordinary-functor expectation;
+- when an ordinary lambda body is another lambda, resolve it through the
+  existing root-lambda dispatcher using that expected contract;
+- retain `CoreCategoricalProgram.lambda` as the authority that checks the
+  inner functor classifier against the outer target category;
+- allow finite ordinary nesting only to the depth explicitly described by
+  the expected tree; and
+- retain exact failures for a missing/stale body expectation, wrong inner
+  mode or annotation, incompatible inner target, foreign values, escaped
+  slots, and unsupported bracket bodies.
+
+The proposal adds no token, located node, grammar production, parser
+dependency, category-expression decomposition, inference heuristic,
+mathematical owner, program method, Core/checker/evaluator/runtime/proof rule,
+nested `^n`/`^fd`/`^nd` promise, arbitrary context/coherence synthesis,
+Lambdapi input, browser preset, book, scale row, or publication.
+
+The exact gate is:
+
+> Approve `H-DTTLF-PRODUCT-SYNTAX-PARITY-09 /
+> D-DTTLF-PRODUCT-SYNTAX-PARITY-009` as proposed: close only the measured
+> nested ordinary `^f` gap through a recursive checked `bodyExpected`
+> contract and the existing lambda dispatcher/program owner, preserving all
+> non-effects and leaving syntax graduation pending until that witness is
+> green?
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1426,7 +1509,9 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C2B | **final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; audit at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`** | final-green 1C2A and approved D007 review | Four exact mathematical heads for existing whole/higher internalized actions; recursive operands, generic continuations, exact distinct-boundary negatives, 5/5 implementation and 4/4 audit tests |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-08 / D-DTTLF-PRODUCT-SYNTAX-PARITY-008 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C3 proposal at `cfacee11affc6360a3b81021d0a51fd43071f50c` | Authorizes only twelve canonical result heads, two checked root-result kinds, and recursive typed category/family operands |
 | SYNTAX-PARITY-1C3 | **final-green at `126023e5ce8ab31f28730e1be508da11083084b4`; audit at `cfacee11affc6360a3b81021d0a51fd43071f50c`** | final-green 1C2 and approved D008 review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, 4/4 implementation plus 4/4 audit tests, and no new parser/checker/kernel semantics |
-| SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
+| SYNTAX-PARITY-GRADUATE-0A | **focused audit; graduation blocked by one measured direct-green parser gap** | final-green 1C3 | Exact 68-method host/expression partition, 37-head text envelope, semantic versus presentation residuals, and bounded non-self-authorizing 1D1 correction proposal |
+| SYNTAX-PARITY-1D1 | proposed; requires separate exact review | graduation audit | Recursive expected-classifier route for the reviewed nested ordinary `^f` exchange/currying witness only |
+| SYNTAX-PARITY-GRADUATE-1 | gated | final-green 1D1 plus exact graduation review | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
 
