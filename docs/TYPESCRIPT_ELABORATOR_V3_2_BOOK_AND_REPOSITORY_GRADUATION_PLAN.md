@@ -13,9 +13,10 @@ Status: selected post-syntax product-graduation route; syntax parity is
 final-green through `SYNTAX-PARITY-1B2` at
 `ba34771074363f4c5b33814269b8822d4d2362bb`; the zero-behavior 1B3 audit is
 focused-green at `4eada97f9ee8fe284b70dea6c0548dfdb9754189` with a separate
-exact review still pending, while 1C and exact syntax graduation remain
-ahead; planning boundary only; no book prose, generated artifact, release, or
-public presentation change is yet authorized
+exact review now approved with human supersession and its bounded
+implementation dependency-ready, while 1C and exact syntax graduation remain
+ahead; planning boundary only; no book prose, generated artifact, release,
+or public presentation change is yet authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal

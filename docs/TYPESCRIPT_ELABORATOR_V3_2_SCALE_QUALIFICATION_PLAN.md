@@ -3427,9 +3427,10 @@ owners; exact local checkpoint:
 a scale row. A new zero-behavior 1B3 audit confirms that exact
 semicolon-separated `[1,1]` and `[1,2,1]` text presentations can route to the
 existing genuine/mixed dependent-context method; its D004 proposal remains
-non-self-authorizing pending separate review at
-`4eada97f9ee8fe284b70dea6c0548dfdb9754189` and adds no scale capability.
-After exact parity graduation, follow
+checkpointed at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`. A separate
+immutable unattended review approves only that exact product scope with human
+supersession; it adds no scale capability. After exact parity graduation,
+follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows
 are outside the current persistent goal and require a future explicit goal.
