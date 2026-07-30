@@ -8,10 +8,10 @@ import {
     it
 } from 'node:test';
 import {
+    CORE_CATEGORICAL_TEXT_REVISION,
     CORE_CATEGORICAL_TEXT_GRADUATION_AUDIT,
     CORE_CATEGORICAL_TEXT_PARITY_AUDIT,
     CoreCategoricalProgram,
-    CoreCategoricalTextError,
     CoreCategoricalTextGraduationAuditError,
     elaborateCoreCategoricalText,
     validateCoreCategoricalTextGraduationAudit
@@ -71,7 +71,7 @@ describe('SYNTAX-PARITY-GRADUATE-0A audit', () => {
         );
     });
 
-    it('measures one direct-green nested ordinary text gap', () => {
+    it('anchors the measured pre-1D1 gap after its checked promotion', () => {
         const direct = program.lambda(
             'x',
             A,
@@ -88,25 +88,42 @@ describe('SYNTAX-PARITY-GRADUATE-0A audit', () => {
         );
         assert.equal(program.compile(direct).surfaceType.tag, 'functor');
 
-        assert.throws(
-            () => elaborateCoreCategoricalText(program, {
-                source: 'λ^f x : A. λ^f y : B. E y x',
-                sourceFile,
-                environment: [
-                    { name: 'A', kind: 'category', value: A },
-                    { name: 'B', kind: 'category', value: B },
-                    { name: 'E', kind: 'term', value: E }
-                ],
-                expected: {
+        const parsed = elaborateCoreCategoricalText(program, {
+            source: 'λ^f x : A. λ^f y : B. E y x',
+            sourceFile,
+            environment: [
+                { name: 'A', kind: 'category', value: A },
+                { name: 'B', kind: 'category', value: B },
+                { name: 'E', kind: 'term', value: E }
+            ],
+            expected: {
+                kind: 'ordinary-functor',
+                source: A,
+                target: functorsBC,
+                bodyExpected: {
                     kind: 'ordinary-functor',
-                    source: A,
-                    target: functorsBC
+                    source: B,
+                    target: C
                 }
-            }),
-            error =>
-                error instanceof CoreCategoricalTextError &&
-                error.code === 'UNSUPPORTED_NESTED_ABSTRACTION' &&
-                error.span.start.column === 12
+            }
+        });
+        assert.equal(
+            program.compare(parsed, direct, 60_000).status,
+            'equal'
+        );
+        assert.equal(
+            CORE_CATEGORICAL_TEXT_REVISION,
+            'SYNTAX-PARITY-1D1-CATEGORICAL-TEXT-1'
+        );
+        assert.equal(
+            CORE_CATEGORICAL_TEXT_GRADUATION_AUDIT
+                .prerequisite.textRevision,
+            'SYNTAX-PARITY-1C3-CATEGORICAL-TEXT-1'
+        );
+        assert.equal(
+            CORE_CATEGORICAL_TEXT_GRADUATION_AUDIT
+                .blockingGap.currentFailure.code,
+            'UNSUPPORTED_NESTED_ABSTRACTION'
         );
     });
 

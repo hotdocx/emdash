@@ -625,7 +625,15 @@ D009 proposal selects only a recursive ordinary-functor `bodyExpected`
 contract over the existing dispatcher and program; no nested non-ordinary,
 semantic, browser, Lambdapi, book, or scale behavior is included. A separate
 immutable D009 unattended review now approves exactly that scope with human
-supersession; `SYNTAX-PARITY-1D1` implementation is next.
+supersession. The bounded `SYNTAX-PARITY-1D1` correction is now
+focused-green: the reviewed exchange and a three-level recursive witness
+equal direct TypeScript, while missing/stale expectations, wrong
+modes/annotations/targets, foreign classifiers, and ill-typed bodies remain
+fail-closed through the existing resolver/program boundaries. The 4/4
+implementation corpus, 17/17 graduation-audit/base-text regressions, and
+typecheck/lint pass. No aggregate/browser rerun was performed because no
+corresponding boundary changed. The exact local implementation checkpoint is
+pending synchronized staged review; `SYNTAX-PARITY-GRADUATE-1` is next.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

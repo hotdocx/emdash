@@ -91,7 +91,7 @@ describe('SYNTAX-PARITY-1C3 result-constructor audit', () => {
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'SYNTAX-PARITY-1C3-CATEGORICAL-TEXT-1'
+            'SYNTAX-PARITY-1D1-CATEGORICAL-TEXT-1'
         );
         assert.deepEqual(
             CORE_CATEGORICAL_TEXT_RESULT_CONSTRUCTOR_AUDIT

@@ -3485,9 +3485,14 @@ gap before graduation: nested ordinary `^f` exchange/currying is supported
 by the reviewed TypeScript program but rejected by text. It freezes only a
 recursive expected-classifier `SYNTAX-PARITY-1D1` correction. This adds no
 scale capability. A separate immutable D009 unattended review approves only
-that scope with human supersession; its correction and final syntax
-graduation remain the product route, while every bulk scale row stays
-deferred.
+that scope with human supersession. The correction is now focused-green:
+two- and three-level ordinary nested abstractions route through the existing
+dispatcher/program owner only, their direct-TypeScript equivalents agree,
+the exact negative boundary remains closed, and typecheck/lint pass. No
+scale owner, profile, transfer input, Lambdapi source, or browser behavior
+changed. Its exact local checkpoint is pending synchronized staged review;
+final syntax graduation remains the product route, while every bulk scale
+row stays deferred.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate

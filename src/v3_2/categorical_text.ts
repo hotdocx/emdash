@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1C3-CATEGORICAL-TEXT-1' as const;
+    'SYNTAX-PARITY-1D1-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -50,16 +50,25 @@ export type CoreCategoricalTextBinding =
         readonly value: CoreCategoricalHomBoundary;
     };
 
+export interface CoreCategoricalTextOrdinaryFunctorExpected {
+    readonly kind: 'ordinary-functor';
+    readonly source: CoreCategoricalCategory;
+    readonly target: CoreCategoricalCategory;
+    /**
+     * Checked classifier for an immediately nested ordinary abstraction.
+     *
+     * The text resolver never decomposes `target` to synthesize this tree.
+     * Callers must supply every nested classifier explicitly.
+     */
+    readonly bodyExpected?: CoreCategoricalTextOrdinaryFunctorExpected;
+}
+
 export type CoreCategoricalTextTermExpected =
     | {
         readonly kind: 'term';
         readonly applicationShape?: CoreCategoricalExpectedShape;
     }
-    | {
-        readonly kind: 'ordinary-functor';
-        readonly source: CoreCategoricalCategory;
-        readonly target: CoreCategoricalCategory;
-    }
+    | CoreCategoricalTextOrdinaryFunctorExpected
     | {
         readonly kind: 'dependent-section';
         readonly base: CoreCategoricalCategory;
@@ -2151,7 +2160,8 @@ class CoreCategoricalTextResolver {
                     expression,
                     binding,
                     token,
-                    environment
+                    environment,
+                    expected.bodyExpected
                 ),
                 {
                     source: this.lambdaSource(expression)
@@ -2425,7 +2435,8 @@ class CoreCategoricalTextResolver {
         expression: LocatedLambda,
         binding: LocatedLambdaBinding,
         token: CoreCategoricalSlotToken,
-        environment: InternalEnvironment
+        environment: InternalEnvironment,
+        bodyExpected?: CoreCategoricalTextOrdinaryFunctorExpected
     ): CoreCategoricalTerm {
         const nested = new Map(environment);
         nested.set(binding.name, Object.freeze({
@@ -2434,6 +2445,30 @@ class CoreCategoricalTextResolver {
             value: token,
             callbackLocal: true
         }));
+        if (expression.body.tag === 'lambda') {
+            if (bodyExpected !== undefined) {
+                return this.resolveRootLambda(
+                    expression.body,
+                    nested,
+                    bodyExpected
+                );
+            }
+            return this.resolveTerm(
+                expression.body,
+                nested,
+                undefined,
+                1
+            );
+        }
+        if (bodyExpected !== undefined) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.body.range,
+                'An ordinary-functor bodyExpected contract requires an ' +
+                    'immediately nested abstraction'
+            );
+        }
         return this.resolveTerm(
             expression.body,
             nested,
