@@ -1157,6 +1157,103 @@ transfer input, Lambdapi source, browser preset, book, or scale behavior
 changed. Exact local implementation checkpoint:
 `afb1277a1517412e4cfcfc99d63a5259390b8ab9`.
 
+## `SYNTAX-PARITY-1C3` Result-Constructor Audit And Proposed Gate
+
+The executable
+[`categorical_text_result_constructor_audit.ts`](../src/v3_2/categorical_text_result_constructor_audit.ts)
+confirms that all selected category- and displayed-family-valued
+constructions are already direct-green. The residual inventory contains
+thirteen public methods but only twelve mathematical operations:
+`substituteFamily` is the existing alias of `pullbackFamily` and therefore
+receives no second spelling.
+
+The proposed surface heads are:
+
+```text
+displayed-family results
+  constantd K A
+  functord A B
+  sectionMotive G
+  sectionTarget G
+  productd B C
+  pullback B F
+
+category results
+  sectionCategory G k M
+  fibre B k
+  sigma B
+  transfd FF GG
+  functor A C
+  product A C
+```
+
+These are mathematical heads rather than exposed TypeScript method names.
+The `d` suffix follows the existing `pi1d`, `paird`, `composeTransfd`, and
+intrinsic displayed-binder vocabulary. `fibre`, `sigma`, `pullback`,
+`functor`, and `product` retain their standard categorical readings. Final
+notation consolidation with the book remains a later presentation decision;
+this row freezes only the reviewed text adapter contract.
+
+The measured implementation seam is one checked result extension over the
+same private located expression tree:
+
+- add root expectations `category` and `displayed-family` beside the existing
+  term and abstraction expectations;
+- select the existing term resolver or one of two small typed result
+  resolvers from that expectation;
+- resolve every category and displayed-family argument recursively, so an
+  identifier and a constructor expression are interchangeable in the same
+  typed position;
+- resolve every term argument through the existing term resolver and sole
+  classifier-directed `apply` ladder; and
+- call only the twelve corresponding existing
+  `CoreCategoricalProgram` methods.
+
+This unlocks composition with already reviewed term heads rather than merely
+adding root printers. For example:
+
+```text
+id (fibre (productd B C) k)
+sigma (productd (pullback B F) (pullback C F))
+```
+
+The first is a term whose category operand is recursively constructed. The
+second is a category whose family operands are recursively constructed. Both
+remain checked by the categorical program; the text layer does not infer an
+arbitrary family or manufacture coherence.
+
+### Proposed gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-08`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-008` proposes only
+`SYNTAX-PARITY-1C3`:
+
+- implement the twelve exact fixed-arity heads above;
+- add only the two checked non-term root-result expectations and typed return
+  contract;
+- make existing category/family constructor positions recursively accept
+  these same checked expressions;
+- preserve exact spans and fail closed on result-kind, arity, argument-kind,
+  foreign-value, base, endpoint, and unavailable-profile errors; and
+- prove direct/text equality for every head and for nested category/family
+  operands.
+
+The proposal adds no located node, grammar production, parser dependency,
+second AST/checker/resolver architecture, mathematical owner, program method,
+Core/checker/evaluator/runtime/proof rule, action table, external coherence
+evidence, compound binder-annotation grammar, arbitrary family inference,
+Lambdapi input, browser preset, book prose, scale row, publication, or wider
+Git authority.
+
+The exact gate is:
+
+> Approve `H-DTTLF-PRODUCT-SYNTAX-PARITY-08 /
+> D-DTTLF-PRODUCT-SYNTAX-PARITY-008` as proposed: add the twelve frozen
+> category/displayed-family result heads, two checked root-result
+> expectations, and recursive typed category/family operands over the one
+> existing located parser and `CoreCategoricalProgram`; retain one canonical
+> `pullback` spelling, the existing term/application resolver, all semantic
+> ownership, and every listed non-effect?
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1266,7 +1363,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C2A | **final-green at `c1bd21eec9456a3600e22b1ef0dc8084958fd123`; audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Twelve mechanical displayed structural/comprehension heads, recursive term operands, checked family identifiers, exact direct equality/negatives, 82/82 text family, 8/8 reviewer, and green browser packaging |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-07 / D-DTTLF-PRODUCT-SYNTAX-PARITY-007 | **approved as proposed at `f1fd8fa6c8039267fa0ae03955df8738d8048999`; immutable unattended review with human supersession** | checkpointed 1C2B audit/proposal at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9` | Authorizes only four frozen whole/higher internalized-action heads over existing typed methods, with all later application generic |
 | SYNTAX-PARITY-1C2B | **final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; audit at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`** | final-green 1C2A and approved D007 review | Four exact mathematical heads for existing whole/higher internalized actions; recursive operands, generic continuations, exact distinct-boundary negatives, 5/5 implementation and 4/4 audit tests |
-| SYNTAX-PARITY-1C3 | gated; next dependency-ready audit/proposal row | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
+| SYNTAX-PARITY-1C3 | **focused-green zero-behavior audit; frozen D008 proposal awaiting separate review** | final-green 1C2 plus a separate exact audit/review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, and no new parser/checker/kernel semantics |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |

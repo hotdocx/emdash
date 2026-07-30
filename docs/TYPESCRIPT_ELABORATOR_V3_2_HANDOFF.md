@@ -594,6 +594,15 @@ typecheck/lint pass with no semantic, Lambdapi, browser, book, or scale
 delta. A zero-behavior 1C3 category/displayed-family result audit is next;
 1C3 behavior remains unauthorized before separate exact review.
 
+That 1C3 audit now measures thirteen direct methods as twelve mathematical
+heads because `substituteFamily` is already an alias of `pullbackFamily`.
+Its frozen D008 proposal adds only `category` and `displayed-family` root
+expectations plus recursive checked constructor operands over the existing
+located parser and typed categorical program. Representative proposed
+expressions are `id (fibre (productd B C) k)` and
+`sigma (productd (pullback B F) (pullback C F))`. No behavior is authorized
+until the separate exact D008 review.
+
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
 That plan audits the capability delta from the user-selected `8217aa3...`
