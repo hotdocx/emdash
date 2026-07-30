@@ -3473,7 +3473,11 @@ The focused 1C3 audit is now checkpointed at
 methods to twelve mathematical heads, adds no behavior, and freezes only two
 checked result kinds plus recursive category/family operands. A separate
 immutable D008 unattended review approves that exact product scope with
-human supersession. Its implementation, not any deferred scale row, is next.
+human supersession. Its bounded implementation is now focused-green: twelve
+routes, recursive checked category/family operands, a real nested-program
+witness, the frozen audit, typecheck, and lint pass without a semantic,
+Lambdapi, browser, or scale delta. Syntax graduation, not any deferred scale
+row, is next after the local implementation checkpoint.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate

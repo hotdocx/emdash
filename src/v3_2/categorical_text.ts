@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1C2B-CATEGORICAL-TEXT-1' as const;
+    'SYNTAX-PARITY-1C3-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -50,7 +50,7 @@ export type CoreCategoricalTextBinding =
         readonly value: CoreCategoricalHomBoundary;
     };
 
-export type CoreCategoricalTextExpected =
+export type CoreCategoricalTextTermExpected =
     | {
         readonly kind: 'term';
         readonly applicationShape?: CoreCategoricalExpectedShape;
@@ -89,11 +89,31 @@ export type CoreCategoricalTextExpected =
         readonly target: CoreCategoricalTerm;
     };
 
-export interface CoreCategoricalTextRequest {
+export type CoreCategoricalTextResultExpected =
+    | {
+        readonly kind: 'category';
+    }
+    | {
+        readonly kind: 'displayed-family';
+    };
+
+export type CoreCategoricalTextExpected =
+    | CoreCategoricalTextTermExpected
+    | CoreCategoricalTextResultExpected;
+
+export type CoreCategoricalTextResult =
+    | CoreCategoricalTerm
+    | CoreCategoricalCategory
+    | CoreCategoricalDisplayedFamily;
+
+export interface CoreCategoricalTextRequest<
+    Expected extends CoreCategoricalTextExpected =
+        CoreCategoricalTextExpected
+> {
     readonly source: string;
     readonly sourceFile?: string;
     readonly environment: readonly CoreCategoricalTextBinding[];
-    readonly expected: CoreCategoricalTextExpected;
+    readonly expected: Expected;
 }
 
 export type CoreCategoricalTextErrorPhase =
@@ -689,7 +709,28 @@ class CoreCategoricalTextResolver {
         expression: LocatedExpression,
         environment: InternalEnvironment,
         expected: CoreCategoricalTextExpected
-    ): CoreCategoricalTerm {
+    ): CoreCategoricalTextResult {
+        if (expected.kind === 'category') {
+            return this.inspectCategory(
+                this.resolveCategoryArgument(
+                    expression,
+                    environment,
+                    0
+                ),
+                expression.range
+            );
+        }
+        if (expected.kind === 'displayed-family') {
+            return this.inspectDisplayedFamily(
+                this.resolveDisplayedFamilyArgument(
+                    expression,
+                    environment,
+                    0
+                ),
+                expression.range
+            );
+        }
+
         let term: CoreCategoricalTerm;
         if (expression.tag === 'lambda') {
             term = this.resolveRootLambda(
@@ -751,6 +792,32 @@ class CoreCategoricalTextResolver {
             );
         }
         return term.value;
+    }
+
+    private inspectCategory(
+        category: CoreCategoricalCategory,
+        range: TextRange
+    ): CoreCategoricalCategory {
+        invokeProgram(
+            this.sourceFile,
+            range,
+            'Category is foreign or invalid',
+            () => this.program.serializeCategory(category)
+        );
+        return category;
+    }
+
+    private inspectDisplayedFamily(
+        family: CoreCategoricalDisplayedFamily,
+        range: TextRange
+    ): CoreCategoricalDisplayedFamily {
+        invokeProgram(
+            this.sourceFile,
+            range,
+            'Displayed family is foreign or invalid',
+            () => this.program.compareDisplayedFamilies(family, family)
+        );
+        return family;
     }
 
     private resolveTerm(
@@ -1071,7 +1138,8 @@ class CoreCategoricalTextResolver {
         ): CoreCategoricalDisplayedFamily =>
             this.resolveDisplayedFamilyArgument(
                 argument,
-                environment
+                environment,
+                lambdaDepth
             );
 
         for (const [head, side] of [
@@ -1328,7 +1396,8 @@ class CoreCategoricalTextResolver {
                 () => this.program.identityFunctor(
                     this.resolveCategoryArgument(
                         identity[0],
-                        environment
+                        environment,
+                        lambdaDepth
                     ),
                     source('parsed ordinary identity functor')
                 )
@@ -1401,11 +1470,13 @@ class CoreCategoricalTextResolver {
             if (projection === undefined) continue;
             const left = this.resolveCategoryArgument(
                 projection[0],
-                environment
+                environment,
+                lambdaDepth
             );
             const right = this.resolveCategoryArgument(
                 projection[1],
-                environment
+                environment,
+                lambdaDepth
             );
             return invokeProgram(
                 this.sourceFile,
@@ -1433,56 +1504,358 @@ class CoreCategoricalTextResolver {
 
     private resolveCategoryArgument(
         expression: LocatedExpression,
-        environment: InternalEnvironment
+        environment: InternalEnvironment,
+        lambdaDepth = 0
     ): CoreCategoricalCategory {
-        if (expression.tag !== 'identifier') {
+        if (expression.tag === 'identifier') {
+            const binding = this.lookup(expression, environment);
+            if (binding.kind !== 'category') {
+                throw resolutionError(
+                    'EXPECTED_CATEGORY',
+                    this.sourceFile,
+                    expression.range,
+                    `Identifier '${expression.name}' denotes a ` +
+                        `${binding.kind}, not a category`
+                );
+            }
+            return this.inspectCategory(
+                binding.value,
+                expression.range
+            );
+        }
+
+        if (expression.tag === 'lambda') {
             throw resolutionError(
                 'EXPECTED_CATEGORY',
                 this.sourceFile,
                 expression.range,
-                'This constructor position requires a checked category ' +
-                    'identifier; category-valued expressions belong to ' +
-                    'the separately gated SYNTAX-PARITY-1C3 row'
+                'A categorical abstraction is a term, not a category-valued ' +
+                    'expression'
             );
         }
-        const binding = this.lookup(expression, environment);
-        if (binding.kind !== 'category') {
-            throw resolutionError(
-                'EXPECTED_CATEGORY',
+
+        const source = (detail: string): CoreCategoricalSourceSite =>
+            sourceSiteFor(
                 this.sourceFile,
                 expression.range,
-                `Identifier '${expression.name}' denotes a ` +
-                    `${binding.kind}, not a category`
+                detail
+            );
+        const resolveTerm = (
+            argument: LocatedExpression
+        ): CoreCategoricalTerm => this.resolveTerm(
+            argument,
+            environment,
+            undefined,
+            lambdaDepth
+        );
+        const resolveCategory = (
+            argument: LocatedExpression
+        ): CoreCategoricalCategory => this.resolveCategoryArgument(
+            argument,
+            environment,
+            lambdaDepth
+        );
+        const resolveFamily = (
+            argument: LocatedExpression
+        ): CoreCategoricalDisplayedFamily =>
+            this.resolveDisplayedFamilyArgument(
+                argument,
+                environment,
+                lambdaDepth
+            );
+
+        const sectionCategory = this.fixedApplicationSpine(
+            expression,
+            'sectionCategory',
+            3
+        );
+        if (sectionCategory !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Dependent section category was rejected',
+                () => this.program.dependentSectionCategoryAt(
+                    resolveTerm(sectionCategory[0]),
+                    resolveTerm(sectionCategory[1]),
+                    resolveTerm(sectionCategory[2]),
+                    source('parsed dependent section category')
+                )
             );
         }
-        return binding.value;
+
+        const fibre = this.fixedApplicationSpine(
+            expression,
+            'fibre',
+            2
+        );
+        if (fibre !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed fibre category was rejected',
+                () => this.program.fibre(
+                    resolveFamily(fibre[0]),
+                    resolveTerm(fibre[1]),
+                    source('parsed displayed fibre category')
+                )
+            );
+        }
+
+        const sigma = this.fixedApplicationSpine(
+            expression,
+            'sigma',
+            1
+        );
+        if (sigma !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Sigma total category was rejected',
+                () => this.program.totalCategory(
+                    resolveFamily(sigma[0]),
+                    source('parsed Sigma total category')
+                )
+            );
+        }
+
+        const transfd = this.fixedApplicationSpine(
+            expression,
+            'transfd',
+            2
+        );
+        if (transfd !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed transformation category was rejected',
+                () => this.program.displayedTransforCategory(
+                    resolveTerm(transfd[0]),
+                    resolveTerm(transfd[1]),
+                    source('parsed displayed transformation category')
+                )
+            );
+        }
+
+        const functor = this.fixedApplicationSpine(
+            expression,
+            'functor',
+            2
+        );
+        if (functor !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Ordinary functor category was rejected',
+                () => this.program.functorCategory(
+                    resolveCategory(functor[0]),
+                    resolveCategory(functor[1]),
+                    source('parsed ordinary functor category')
+                )
+            );
+        }
+
+        const product = this.fixedApplicationSpine(
+            expression,
+            'product',
+            2
+        );
+        if (product !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Ordinary product category was rejected',
+                () => this.program.productCategory(
+                    resolveCategory(product[0]),
+                    resolveCategory(product[1]),
+                    source('parsed ordinary product category')
+                )
+            );
+        }
+
+        throw resolutionError(
+            'EXPECTED_CATEGORY',
+            this.sourceFile,
+            expression.range,
+            'Expression does not denote a reviewed category-valued ' +
+                'constructor'
+        );
     }
 
     private resolveDisplayedFamilyArgument(
         expression: LocatedExpression,
-        environment: InternalEnvironment
+        environment: InternalEnvironment,
+        lambdaDepth = 0
     ): CoreCategoricalDisplayedFamily {
-        if (expression.tag !== 'identifier') {
+        if (expression.tag === 'identifier') {
+            const binding = this.lookup(expression, environment);
+            if (binding.kind !== 'displayed-family') {
+                throw resolutionError(
+                    'EXPECTED_DISPLAYED_FAMILY',
+                    this.sourceFile,
+                    expression.range,
+                    `Identifier '${expression.name}' denotes a ` +
+                        `${binding.kind}, not a displayed family`
+                );
+            }
+            return this.inspectDisplayedFamily(
+                binding.value,
+                expression.range
+            );
+        }
+
+        if (expression.tag === 'lambda') {
             throw resolutionError(
                 'EXPECTED_DISPLAYED_FAMILY',
                 this.sourceFile,
                 expression.range,
-                'This constructor position requires a checked displayed-' +
-                    'family identifier; family-valued expressions belong ' +
-                    'to the separately gated SYNTAX-PARITY-1C3 row'
+                'A categorical abstraction is a term, not a displayed-' +
+                    'family-valued expression'
             );
         }
-        const binding = this.lookup(expression, environment);
-        if (binding.kind !== 'displayed-family') {
-            throw resolutionError(
-                'EXPECTED_DISPLAYED_FAMILY',
+
+        const source = (detail: string): CoreCategoricalSourceSite =>
+            sourceSiteFor(
                 this.sourceFile,
                 expression.range,
-                `Identifier '${expression.name}' denotes a ` +
-                    `${binding.kind}, not a displayed family`
+                detail
+            );
+        const resolveTerm = (
+            argument: LocatedExpression
+        ): CoreCategoricalTerm => this.resolveTerm(
+            argument,
+            environment,
+            undefined,
+            lambdaDepth
+        );
+        const resolveCategory = (
+            argument: LocatedExpression
+        ): CoreCategoricalCategory => this.resolveCategoryArgument(
+            argument,
+            environment,
+            lambdaDepth
+        );
+        const resolveFamily = (
+            argument: LocatedExpression
+        ): CoreCategoricalDisplayedFamily =>
+            this.resolveDisplayedFamilyArgument(
+                argument,
+                environment,
+                lambdaDepth
+            );
+
+        const constant = this.fixedApplicationSpine(
+            expression,
+            'constantd',
+            2
+        );
+        if (constant !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Constant displayed family was rejected',
+                () => this.program.constantDisplayedFamily(
+                    resolveCategory(constant[0]),
+                    resolveCategory(constant[1]),
+                    source('parsed constant displayed family')
+                )
             );
         }
-        return binding.value;
+
+        const functor = this.fixedApplicationSpine(
+            expression,
+            'functord',
+            2
+        );
+        if (functor !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Stable displayed functor family was rejected',
+                () => this.program.displayedFunctorFamily(
+                    resolveCategory(functor[0]),
+                    resolveFamily(functor[1]),
+                    source('parsed stable displayed functor family')
+                )
+            );
+        }
+
+        const sectionMotive = this.fixedApplicationSpine(
+            expression,
+            'sectionMotive',
+            1
+        );
+        if (sectionMotive !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Dependent section motive was rejected',
+                () => this.program.dependentSectionMotive(
+                    resolveTerm(sectionMotive[0]),
+                    source('parsed dependent section motive')
+                )
+            );
+        }
+
+        const sectionTarget = this.fixedApplicationSpine(
+            expression,
+            'sectionTarget',
+            1
+        );
+        if (sectionTarget !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Dependent section target was rejected',
+                () => this.program.dependentSectionTarget(
+                    resolveTerm(sectionTarget[0]),
+                    source('parsed dependent section target')
+                )
+            );
+        }
+
+        const product = this.fixedApplicationSpine(
+            expression,
+            'productd',
+            2
+        );
+        if (product !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed product family was rejected',
+                () => this.program.displayedProduct(
+                    resolveFamily(product[0]),
+                    resolveFamily(product[1]),
+                    source('parsed displayed product family')
+                )
+            );
+        }
+
+        const pullback = this.fixedApplicationSpine(
+            expression,
+            'pullback',
+            2
+        );
+        if (pullback !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed-family pullback was rejected',
+                () => this.program.pullbackFamily(
+                    resolveFamily(pullback[0]),
+                    resolveTerm(pullback[1]),
+                    source('parsed displayed-family pullback')
+                )
+            );
+        }
+
+        throw resolutionError(
+            'EXPECTED_DISPLAYED_FAMILY',
+            this.sourceFile,
+            expression.range,
+            'Expression does not denote a reviewed displayed-family-valued ' +
+                'constructor'
+        );
     }
 
     private fixedApplicationSpine(
@@ -1543,7 +1916,7 @@ class CoreCategoricalTextResolver {
     private resolveRootLambda(
         expression: LocatedLambda,
         environment: InternalEnvironment,
-        expected: CoreCategoricalTextExpected
+        expected: CoreCategoricalTextTermExpected
     ): CoreCategoricalTerm {
         if (expression.bindingGroups.length > 1) {
             if (expression.mode !== 'fd') {
@@ -1641,14 +2014,17 @@ class CoreCategoricalTextResolver {
 
     private requireExpected<
         Kind extends Exclude<
-            CoreCategoricalTextExpected['kind'],
+            CoreCategoricalTextTermExpected['kind'],
             'term'
         >
     >(
         expression: LocatedLambda,
-        expected: CoreCategoricalTextExpected,
+        expected: CoreCategoricalTextTermExpected,
         kind: Kind
-    ): Extract<CoreCategoricalTextExpected, { readonly kind: Kind }> {
+    ): Extract<
+        CoreCategoricalTextTermExpected,
+        { readonly kind: Kind }
+    > {
         if (expected.kind !== kind) {
             throw resolutionError(
                 expected.kind === 'term'
@@ -1661,7 +2037,7 @@ class CoreCategoricalTextResolver {
             );
         }
         return expected as Extract<
-            CoreCategoricalTextExpected,
+            CoreCategoricalTextTermExpected,
             { readonly kind: Kind }
         >;
     }
@@ -2093,14 +2469,42 @@ class CoreCategoricalTextResolver {
 /**
  * Parse and recursively resolve one reviewed categorical expression.
  *
- * The returned value is an ordinary CoreCategoricalProgram term. Callers use
- * the existing `program.compile`, `inspect`, or `compare` operations exactly
- * as they do for direct TypeScript construction.
+ * The checked expected result selects a term, category, or displayed family.
+ * Callers use the existing program operations exactly as they do for direct
+ * TypeScript construction.
  */
 export function elaborateCoreCategoricalText(
     program: CoreCategoricalProgram,
+    request: CoreCategoricalTextRequest<
+        Extract<
+            CoreCategoricalTextResultExpected,
+            { readonly kind: 'category' }
+        >
+    >
+): CoreCategoricalCategory;
+export function elaborateCoreCategoricalText(
+    program: CoreCategoricalProgram,
+    request: CoreCategoricalTextRequest<
+        Extract<
+            CoreCategoricalTextResultExpected,
+            { readonly kind: 'displayed-family' }
+        >
+    >
+): CoreCategoricalDisplayedFamily;
+export function elaborateCoreCategoricalText(
+    program: CoreCategoricalProgram,
+    request: CoreCategoricalTextRequest<
+        CoreCategoricalTextTermExpected
+    >
+): CoreCategoricalTerm;
+export function elaborateCoreCategoricalText(
+    program: CoreCategoricalProgram,
     request: CoreCategoricalTextRequest
-): CoreCategoricalTerm {
+): CoreCategoricalTextResult;
+export function elaborateCoreCategoricalText(
+    program: CoreCategoricalProgram,
+    request: CoreCategoricalTextRequest
+): CoreCategoricalTextResult {
     const sourceFile = request.sourceFile ?? '<categorical-text>';
     const start = freezePoint(0, 1, 1);
     const environment = initialEnvironment(

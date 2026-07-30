@@ -14,7 +14,7 @@ import {
     CoreCategoricalTextBinding,
     CoreCategoricalTextError,
     CoreCategoricalTextErrorCode,
-    CoreCategoricalTextExpected,
+    CoreCategoricalTextTermExpected,
     elaborateCoreCategoricalText
 } from '../src/v3_2';
 
@@ -86,7 +86,7 @@ const fixture = () => {
             termBinding('HH', HH),
             termBinding('closed', closed)
         ]);
-    const edgeExpected: CoreCategoricalTextExpected = Object.freeze({
+    const edgeExpected: CoreCategoricalTextTermExpected = Object.freeze({
         kind: 'displayed-dependent-context-functor' as const,
         sourceGroups: Object.freeze([
             Object.freeze([A]),
@@ -94,7 +94,7 @@ const fixture = () => {
         ]),
         target: liftedA
     });
-    const mixedExpected: CoreCategoricalTextExpected = Object.freeze({
+    const mixedExpected: CoreCategoricalTextTermExpected = Object.freeze({
         kind: 'displayed-dependent-context-functor' as const,
         sourceGroups: Object.freeze([
             Object.freeze([A]),
@@ -134,7 +134,7 @@ const fixture = () => {
 const elaborate = (
     data: ReturnType<typeof fixture>,
     source: string,
-    expected: CoreCategoricalTextExpected,
+    expected: CoreCategoricalTextTermExpected,
     environment = data.environment
 ): CoreCategoricalTerm => elaborateCoreCategoricalText(
     data.program,

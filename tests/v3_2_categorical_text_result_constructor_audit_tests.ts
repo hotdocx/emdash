@@ -8,11 +8,10 @@ import {
     it
 } from 'node:test';
 import {
+    CORE_CATEGORICAL_TEXT_REVISION,
     CORE_CATEGORICAL_TEXT_RESULT_CONSTRUCTOR_AUDIT,
     CoreCategoricalProgram,
-    CoreCategoricalTextError,
     CoreCategoricalTextResultConstructorAuditError,
-    elaborateCoreCategoricalText,
     validateCoreCategoricalTextResultConstructorAudit
 } from '../src/v3_2';
 
@@ -84,34 +83,23 @@ describe('SYNTAX-PARITY-1C3 result-constructor audit', () => {
             );
     });
 
-    it('measures the current typed-result and recursive-argument seam', () => {
-        assert.throws(
-            () => elaborateCoreCategoricalText(data.program, {
-                source: 'fibre B k',
-                sourceFile,
-                environment: [
-                    { name: 'B', kind: 'displayed-family', value: data.B },
-                    { name: 'k', kind: 'term', value: data.k }
-                ],
-                expected: { kind: 'category' } as any
-            }),
-            error =>
-                error instanceof CoreCategoricalTextError &&
-                error.code === 'INCOMPATIBLE_ABSTRACTION_EXPECTATION'
+    it('anchors the pre-implementation audit after promotion', () => {
+        assert.equal(
+            CORE_CATEGORICAL_TEXT_RESULT_CONSTRUCTOR_AUDIT
+                .prerequisite.textRevision,
+            'SYNTAX-PARITY-1C2B-CATEGORICAL-TEXT-1'
         );
-        assert.throws(
-            () => elaborateCoreCategoricalText(data.program, {
-                source: 'id (fibre B k)',
-                sourceFile,
-                environment: [
-                    { name: 'B', kind: 'displayed-family', value: data.B },
-                    { name: 'k', kind: 'term', value: data.k }
-                ],
-                expected: { kind: 'term' }
-            }),
-            error =>
-                error instanceof CoreCategoricalTextError &&
-                error.code === 'EXPECTED_CATEGORY'
+        assert.equal(
+            CORE_CATEGORICAL_TEXT_REVISION,
+            'SYNTAX-PARITY-1C3-CATEGORICAL-TEXT-1'
+        );
+        assert.deepEqual(
+            CORE_CATEGORICAL_TEXT_RESULT_CONSTRUCTOR_AUDIT
+                .proposal.exactPositiveSources.slice(-2),
+            [
+                'id (fibre (productd B C) k)',
+                'sigma (productd (pullback B F) (pullback C F))'
+            ]
         );
     });
 

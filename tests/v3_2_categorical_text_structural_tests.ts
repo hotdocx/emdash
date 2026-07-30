@@ -19,7 +19,7 @@ import {
     CoreCategoricalTextBinding,
     CoreCategoricalTextError,
     CoreCategoricalTextErrorCode,
-    CoreCategoricalTextExpected,
+    CoreCategoricalTextTermExpected,
     elaborateCoreCategoricalText
 } from '../src/v3_2/categorical_text';
 
@@ -77,7 +77,7 @@ const elaborate = (
     program: CoreCategoricalProgram,
     environment: readonly CoreCategoricalTextBinding[],
     source: string,
-    expected: CoreCategoricalTextExpected
+    expected: CoreCategoricalTextTermExpected
 ): CoreCategoricalTerm => elaborateCoreCategoricalText(program, {
     source,
     sourceFile,

@@ -197,7 +197,7 @@ describe('SYNTAX-PARITY-1C2A displayed constructor text', () => {
         const data = fixture();
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'SYNTAX-PARITY-1C2A-CATEGORICAL-TEXT-1'
+            'SYNTAX-PARITY-1C3-CATEGORICAL-TEXT-1'
         );
         for (const [source, direct] of [
             [
@@ -296,7 +296,7 @@ describe('SYNTAX-PARITY-1C2A displayed constructor text', () => {
             );
         });
 
-    it('checks displayed-family positions as immutable identifiers', () => {
+    it('rejects non-family expressions in family positions', () => {
         const data = fixture();
         captureTextError(
             () => elaborate(data, 'pi1d K C'),

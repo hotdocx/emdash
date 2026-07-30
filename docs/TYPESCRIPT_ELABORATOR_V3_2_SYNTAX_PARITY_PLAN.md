@@ -52,8 +52,10 @@ non-self-authorizing D007 proposal checkpointed at
 `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`; a separate immutable D007
 unattended review approves it exactly as proposed with human supersession;
 the bounded 1C2B implementation is final-green at exact local checkpoint
-`afb1277a1517412e4cfcfc99d63a5259390b8ab9`, while 1C3 remains
-unauthorized.
+`afb1277a1517412e4cfcfc99d63a5259390b8ab9`; the 1C3 audit is checkpointed
+at `cfacee11affc6360a3b81021d0a51fd43071f50c`, its separate immutable D008
+review approves the exact frozen scope with human supersession, and the
+bounded implementation is focused-green pending its local checkpoint.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1261,6 +1263,55 @@ delegation, with any later explicit human decision superseding it. Reviewed
 proposal checkpoint:
 `cfacee11affc6360a3b81021d0a51fd43071f50c`.
 
+## `SYNTAX-PARITY-1C3` Implementation Result
+
+The one text adapter now has a checked three-way result contract:
+
+```text
+term | category | displayed-family
+```
+
+Term and abstraction expectations retain their previous precise return type.
+The two new result expectations select small recursive category and
+displayed-family resolvers over the same private located expression tree.
+They introduce no second parser, AST, checker, evaluator, or categorical
+action table.
+
+All twelve reviewed heads call only their existing typed
+`CoreCategoricalProgram` methods. Category and displayed-family operands now
+recurse through the corresponding result resolver; term operands still
+recurse through the existing term resolver. Consequently previously
+identifier-only constructor positions now admit checked expressions such as:
+
+```text
+functor A (fibre B k)
+id (fibre (productd B C) k)
+productd (pullback B F) (pullback C F)
+sigma (productd (pullback B F) (pullback C F))
+```
+
+Foreign values, wrong result kinds, wrong arity or argument kinds,
+incompatible bases/endpoints, invalid fibre points, and unavailable profiles
+remain delegated to exact resolver diagnostics or the categorical program.
+`substituteFamily` receives no duplicate spelling: `pullback` remains the
+sole text route to the existing pullback operation.
+
+The focused implementation corpus covers all twelve routes, recursive
+category/family construction, composition into an already reviewed term
+head, and complete boundary classes. It uses lightweight typed routing
+witnesses for the finite dispatch table and a real checked categorical
+program for root and nested integration; the mathematical methods themselves
+retain their existing dedicated semantic corpora. The implementation and
+frozen audit corpora pass 4/4 each, and root typecheck/lint pass. No aggregate
+or browser rerun was performed because no kernel, checker, browser entry,
+preset, or packaging boundary changed.
+
+There is no mathematical owner, program method, Core/checker/evaluator/
+runtime/proof rule, action table, external coherence evidence, semantic
+profile, transfer input, Lambdapi source, browser preset, book, or scale
+delta. The next dependency-ready product row is
+`SYNTAX-PARITY-GRADUATE-1`.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1371,7 +1422,7 @@ strings parse. For every promoted row it must demonstrate:
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-07 / D-DTTLF-PRODUCT-SYNTAX-PARITY-007 | **approved as proposed at `f1fd8fa6c8039267fa0ae03955df8738d8048999`; immutable unattended review with human supersession** | checkpointed 1C2B audit/proposal at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9` | Authorizes only four frozen whole/higher internalized-action heads over existing typed methods, with all later application generic |
 | SYNTAX-PARITY-1C2B | **final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; audit at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`** | final-green 1C2A and approved D007 review | Four exact mathematical heads for existing whole/higher internalized actions; recursive operands, generic continuations, exact distinct-boundary negatives, 5/5 implementation and 4/4 audit tests |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-08 / D-DTTLF-PRODUCT-SYNTAX-PARITY-008 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C3 proposal at `cfacee11affc6360a3b81021d0a51fd43071f50c` | Authorizes only twelve canonical result heads, two checked root-result kinds, and recursive typed category/family operands |
-| SYNTAX-PARITY-1C3 | **approved; implementation pending** | final-green 1C2 and approved D008 review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, and no new parser/checker/kernel semantics |
+| SYNTAX-PARITY-1C3 | **focused-green; local implementation checkpoint pending** | final-green 1C2 and approved D008 review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, 4/4 implementation plus 4/4 audit tests, and no new parser/checker/kernel semantics |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |

@@ -122,7 +122,7 @@ describe('SYNTAX-PARITY-1C1 ordinary constructor text', () => {
         const data = fixture();
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'SYNTAX-PARITY-1C2A-CATEGORICAL-TEXT-1'
+            'SYNTAX-PARITY-1C3-CATEGORICAL-TEXT-1'
         );
         for (const [source, direct] of [
             ['id A', data.program.identityFunctor(data.A)],
@@ -188,7 +188,7 @@ describe('SYNTAX-PARITY-1C1 ordinary constructor text', () => {
             );
         });
 
-    it('keeps category positions identifier-only and kind checked', () => {
+    it('rejects non-category expressions in category positions', () => {
         const data = fixture();
         captureTextError(
             () => elaborate(data, 'id F'),

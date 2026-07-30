@@ -18,7 +18,7 @@ import {
 import {
     CoreCategoricalTextBinding,
     CoreCategoricalTextError,
-    CoreCategoricalTextExpected,
+    CoreCategoricalTextTermExpected,
     elaborateCoreCategoricalText
 } from './categorical_text';
 import {
@@ -391,7 +391,7 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
 interface CoreBrowserReviewerFixture {
     readonly program: CoreCategoricalProgram;
     readonly environment: readonly CoreCategoricalTextBinding[];
-    readonly expected: CoreCategoricalTextExpected;
+    readonly expected: CoreCategoricalTextTermExpected;
 }
 
 const categoryBinding = (

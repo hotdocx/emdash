@@ -182,7 +182,7 @@ describe('SYNTAX-PARITY-1C2B internal-action audit', () => {
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'SYNTAX-PARITY-1C2B-CATEGORICAL-TEXT-1'
+            'SYNTAX-PARITY-1C3-CATEGORICAL-TEXT-1'
         );
         assert.deepEqual(
             CORE_CATEGORICAL_TEXT_INTERNAL_ACTION_AUDIT

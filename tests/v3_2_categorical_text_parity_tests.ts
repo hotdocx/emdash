@@ -19,7 +19,7 @@ import {
     CoreCategoricalTextBinding,
     CoreCategoricalTextError,
     CoreCategoricalTextErrorCode,
-    CoreCategoricalTextExpected,
+    CoreCategoricalTextTermExpected,
     elaborateCoreCategoricalText
 } from '../src/v3_2/categorical_text';
 
@@ -150,7 +150,7 @@ const data = fixture();
 
 const elaborate = (
     source: string,
-    expected: CoreCategoricalTextExpected,
+    expected: CoreCategoricalTextTermExpected,
     program = data.program,
     environment = data.environment
 ): CoreCategoricalTerm => elaborateCoreCategoricalText(program, {

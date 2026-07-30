@@ -604,7 +604,13 @@ expressions are `id (fibre (productd B C) k)` and
 until the separate exact D008 review. That immutable review now approves
 only the checkpointed twelve-head/two-result-kind scope under the user's
 standing unattended delegation, with human supersession; implementation is
-the next dependency-ready product row.
+now focused-green. One checked result contract returns terms, categories, or
+displayed families with precise static overloads; two small recursive result
+resolvers reuse the one located tree and existing typed program. All twelve
+routes and representative real nested expressions pass, as do the frozen
+audit, typecheck, and lint. No aggregate/browser rerun or semantic/kernel
+change occurred. `SYNTAX-PARITY-GRADUATE-1` is next after the bounded local
+implementation checkpoint.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
