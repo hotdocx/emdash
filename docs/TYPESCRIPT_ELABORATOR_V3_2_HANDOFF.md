@@ -449,8 +449,9 @@ proposed under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession after
 proposal checkpoint `f94d770`. REVIEWER-INTEGRATE-1A is implemented and
 focused/browser-green. D-DTTLF-PRODUCT-REVIEWER-002/003 corrected only the
 active export/count/ordinal pins and seven derivative expected-ordinal arrays;
-their proportional zero-failure gates are green and the bounded local
-checkpoint is ready. No new scale semantic is needed by the present witness.
+their proportional zero-failure gates are green at exact local checkpoint
+`18ca2547bb2f5795127a6589d0531bba87317f19`. No new scale semantic is needed
+by the present witness.
 
 The selected successor is
 [`TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md).

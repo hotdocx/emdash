@@ -10,7 +10,8 @@ and
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
 Status: approved implementation is present and focused/browser-green under
 D-DTTLF-PRODUCT-REVIEWER-001 with human supersession; all reviewed and
-proportional final gates are green and the bounded local checkpoint is ready
+proportional final gates are green at exact local checkpoint
+`18ca2547bb2f5795127a6589d0531bba87317f19`
 
 ## Human Correction And Product Intent
 
@@ -562,10 +563,10 @@ it and a separate bounded review authorizes it.
 | --- | --- | --- | --- |
 | REVIEWER-INTEGRATE-0A | complete measured audit | existing product/browser/text rows | Combined Vite and Chromium feasibility, exact Node boundary, bundle/runtime orientation, and selected architecture |
 | H-DTTLF-PRODUCT-REVIEWER-01 | approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession; proposal checkpoint `f94d770` | REVIEWER-INTEGRATE-0A | Exact runtime-contract split, browser entry, UI, book link, tests, and non-claims |
-| REVIEWER-INTEGRATE-1A | final-green under D-DTTLF-PRODUCT-REVIEWER-001; bounded checkpoint ready | exact review | Browser-safe contract split and narrow lazy reviewer workbench joining report, text, book, and minimal Core |
+| REVIEWER-INTEGRATE-1A | final-green under D-DTTLF-PRODUCT-REVIEWER-001 at `18ca2547bb2f5795127a6589d0531bba87317f19` | exact review | Browser-safe contract split and narrow lazy reviewer workbench joining report, text, book, and minimal Core |
 | H-DTTLF-PRODUCT-REVIEWER-CORRECTION-01 | complete and approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-002 | final active acquisition validation | Refresh only current export/count/ordinal evidence; preserve historical digest evidence and all semantics |
 | H-DTTLF-PRODUCT-REVIEWER-CORRECTION-02 | complete and approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-003; focused zero-failure correction gate green | D-DTTLF-PRODUCT-REVIEWER-002 plus exact seven failures | Refreshed only seven literal derivative expected-ordinal arrays; no test or behavior delta |
-| REVIEWER-GRADUATE-1 | final-green; bounded local checkpoint ready | REVIEWER-INTEGRATE-1A | Runnable reviewer path, observed bundle/runtime envelope, exact non-effects, and syntax-parity successor |
+| REVIEWER-GRADUATE-1 | final-green at `18ca2547bb2f5795127a6589d0531bba87317f19` | REVIEWER-INTEGRATE-1A | Runnable reviewer path, observed bundle/runtime envelope, exact non-effects, and syntax-parity successor |
 | SYNTAX-PARITY-0A | selected successor; dependency-ready after reviewer checkpoint | REVIEWER-GRADUATE-1 and direct TypeScript surface | Executable API-to-text inventory and bounded proposal, prioritizing `^n`, `^fd`, and `^nd`; no behavior before separate review |
 | BOOK-DELTA-0A | selected post-syntax successor | SYNTAX-PARITY-GRADUATE-1 | Capability-oriented book delta audit followed by theorem-led prose/artifact/repository graduation under its dedicated plan |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |

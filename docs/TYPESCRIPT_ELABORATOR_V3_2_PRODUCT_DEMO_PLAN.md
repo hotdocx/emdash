@@ -187,7 +187,7 @@ product decision, not restoration of an accidentally omitted dependency.
 | Selected directed browser | complete and final-green | high | medium | preserve; categorical browser remains gated |
 | User-syntax/parser audit | complete | medium | high for correct frontend boundary | preserve |
 | Ordinary `^f` text adapter | complete and final-green; displayed modes remain gated | high | medium | preserve |
-| Integrated reviewer browser | final-green; bounded checkpoint ready | very high | high; proves one real product boundary | preserve |
+| Integrated reviewer browser | final-green at `18ca2547bb2f5795127a6589d0531bba87317f19` | very high | high; proves one real product boundary | preserve |
 | Direct-TypeScript/text syntax parity | high-confidence bounded frontend work | very high | high; completes the usable reviewer input envelope | immediate after reviewer checkpoint |
 | Book and repository graduation | high after exact syntax boundary; editorial judgment required | very high | high; presents the research programme coherently | current goal after syntax parity |
 | SCALE-STRESS-3C WalkingEnd/HIT | medium and semantically diverse | low immediate unless selected for a reviewer story | high | future persistent goal or exact selected prerequisite |
@@ -218,7 +218,7 @@ PRODUCT-DEMO-0A inventory
   -> REVIEWER-INTEGRATE-0A combined browser measurement (complete)
   -> H-DTTLF-PRODUCT-REVIEWER-01 / separate exact review
   -> REVIEWER-INTEGRATE-1A browser + report + text + book
-     (final-green; bounded checkpoint ready)
+     (final-green at `18ca2547bb2f5795127a6589d0531bba87317f19`)
   -> REVIEWER-GRADUATE-1
   -> SYNTAX-PARITY-0A inventory mathematical target-API parity and freeze
      a ^n/^fd/^nd-first proposal
@@ -385,7 +385,7 @@ Exact local implementation checkpoint:
 | PRODUCT-SYNTAX-1 | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003 | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
 | PRODUCT-GRADUATE-1 | exact documentation scope approved under D-DTTLF-PRODUCT-GRADUATE-001 and implemented in the current draft; its route-back claim is superseded by direct human product correction | completed selected browser and syntax rows | Historical capability matrix and non-claims; not integrated product graduation |
 | REVIEWER-INTEGRATE-0A | complete measured audit in the dedicated integrated-reviewer plan | existing CLI, browser, text, and book ingredients | Real Vite/Chromium proof that one browser can execute text plus all three report candidates after correcting the acquisition/hash dependency |
-| REVIEWER-INTEGRATE-1A | final-green under D-DTTLF-PRODUCT-REVIEWER-001/002/003; bounded checkpoint ready | approved H-DTTLF-PRODUCT-REVIEWER-01 and exact corrections | One browser reviewer workbench joining the existing report, editable categorical text, generated book, and minimal Core evidence |
+| REVIEWER-INTEGRATE-1A | final-green under D-DTTLF-PRODUCT-REVIEWER-001/002/003 at `18ca2547bb2f5795127a6589d0531bba87317f19` | approved H-DTTLF-PRODUCT-REVIEWER-01 and exact corrections | One browser reviewer workbench joining the existing report, editable categorical text, generated book, and minimal Core evidence |
 | SYNTAX-PARITY-0A | selected successor; dependency-ready after reviewer checkpoint | integrated reviewer plus direct TypeScript construction surface | Inventory deterministic text parity with mathematical API capabilities, prioritizing `^n`, `^fd`, and `^nd`, then freeze a bounded separately reviewed proposal |
 | BOOK-REPOSITORY-GRADUATION | selected after syntax-parity graduation | exact text/direct-TypeScript boundary | Capability-delta audit, theorem-led book update, deterministic `docs/emdash-book.pdf`, consolidated root presentation, and current product-goal handoff |
 
@@ -685,8 +685,8 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   future goal rather than automatically resuming here.
 - **2026-07-30 — Integrated reviewer implemented and syntax parity selected.**
   The reviewed contract split and consolidated browser workbench are
-  final-green after the exact D002/D003 corrections, with its bounded
-  checkpoint ready. The user
+  final-green after the exact D002/D003 corrections at
+  `18ca2547bb2f5795127a6589d0531bba87317f19`. The user
   selected a dedicated post-reviewer audit of text parity with mathematical
   direct-TypeScript constructions, beginning with existing `^n`, `^fd`, and
   `^nd`, before deferred bulk scale. No heuristic action or coherence

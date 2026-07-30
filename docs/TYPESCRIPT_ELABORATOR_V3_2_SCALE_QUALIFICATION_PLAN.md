@@ -734,7 +734,7 @@ The architecture qualifies only when all of the following hold:
 | SCALE-ACQUIRE-1B | deferred; prototype removed | SCALE-STRESS-3B0 plus a measured future acquisition need | Optional narrow fail-closed declaration adapter feeding the existing IR; the abandoned unexported canonical-symbol prototype is not architectural infrastructure and must not be recreated without a recorded cost/benefit trigger |
 | SCALE-STRESS-3B1 | deferred | usability graduation or an independently measured transfer priority; exact root/generated-owner boundary | Directly construct and compile the smallest typed root prerequisite and protected hom-action declaration closure through data/policy only, preserving protected exposition and opaque tactic theorems; no parser dependency |
 | SCALE-STRESS-3B2 | deferred | SCALE-STRESS-3B1 | Compile the evidence-property declaration closure against exact root/protected interfaces and check representative transparent bodies without activating a profile |
-| PRODUCT-FACING-CONTINUATION | integrated reviewer final-green with checkpoint ready; syntax-parity and book/repository graduation selected | completed usability/displayed evidence and product ingredients | Preserve the consolidated report/text/book/minimal-Core browser, graduate text parity with existing direct-TypeScript mathematical constructions, then complete the theorem-led book/public-repository route. No new semantic or scale claim; an exact scale item may move earlier only for a measured reader-facing prerequisite |
+| PRODUCT-FACING-CONTINUATION | integrated reviewer final-green at `18ca2547bb2f5795127a6589d0531bba87317f19`; syntax-parity and book/repository graduation selected | completed usability/displayed evidence and product ingredients | Preserve the consolidated report/text/book/minimal-Core browser, graduate text parity with existing direct-TypeScript mathematical constructions, then complete the theorem-led book/public-repository route. No new semantic or scale claim; an exact scale item may move earlier only for a measured reader-facing prerequisite |
 | SCALE-STRESS-3C | pending; deferred to a future persistent goal | applicable inductive/import/runtime mechanisms | Qualify the multi-module `WalkingEnd_cat`/dependent-eliminator/higher-action/`BNat_cat` HIT slice and record its exact generated-owner and runtime/proof boundaries |
 | SCALE-BATCH-1 | pending; deferred to a future persistent goal | SCALE-RUNTIME-DEPS-1 and required stress mechanisms | Larger dependency-closed data/policy-only transfer batch with no engine changes |
 | SCALE-GRADUATE-1 | pending; deferred to a future persistent goal | all required stress rows and open engine/sort rows | Exact mechanical-transfer envelope, residual risks, generated-artifact policy, final qualification proposal |
@@ -3392,7 +3392,7 @@ documentation-only handoff is implemented in the current draft, but the
 user's later direct correction rejects separate documented lanes as the final
 reviewer product. The reviewed implementation in
 `docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md` is present and
-final-green with its bounded checkpoint ready. The user's direct priority
+final-green at `18ca2547bb2f5795127a6589d0531bba87317f19`. The user's direct priority
 then routes to
 `docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`: inventory text parity
 with mathematical constructions already exposed by direct TypeScript,
@@ -4048,8 +4048,8 @@ scope is affected.
 - **2026-07-30 — Integrated reviewer implemented; syntax parity selected
   before bulk scale.** The reviewed browser-safe acquisition-contract split,
   lazy report/text/book/minimal-Core workbench, and focused/browser evidence
-  are final-green after exact D002/D003 corrections, with the bounded
-  checkpoint ready. The user directly
+  are final-green after exact D002/D003 corrections at
+  `18ca2547bb2f5795127a6589d0531bba87317f19`. The user directly
   selected a dedicated API-to-text parity audit next, beginning with existing
   `^n`, `^fd`, and `^nd` mathematical capabilities. Parsing remains
   deterministic and separate from typed resolution/internal factorization;
