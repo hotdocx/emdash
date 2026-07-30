@@ -19,7 +19,8 @@ is an executable, focused-green, zero-behavior-delta audit checkpointed at
 `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`, with a bounded
 `SYNTAX-PARITY-1B1` proposal approved exactly as proposed by a separate
 immutable unattended review with human supersession; `SYNTAX-PARITY-1B1` is
-implemented and final-green, with exact local checkpoint staging in progress
+final-green and checkpointed at
+`9f663555a1edbedcb99e97f1271154ff36913f05`
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -549,7 +550,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1A | **final-green at `2e7cc3c44802a5218858ca6747e7591d3bfc4859`** | approved D001 review | `^n`, `^fd`, `^nd`, immutable displayed-family/expected contracts, existing direct-builder routes, exact `composeCells`, six browser presets, negative boundaries, and 1,149-test aggregate |
 | SYNTAX-PARITY-1B0 | **focused-green, zero behavior delta at `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`** | final-green `SYNTAX-PARITY-1A` | Executable contextual-index measurement, exact 1B1/1B2/1B3 split, and bounded non-self-authorizing proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | **approved as proposed; immutable unattended review with human supersession** | checkpointed `SYNTAX-PARITY-1B0` | Authorizes only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
-| SYNTAX-PARITY-1B1 | **final-green; exact local checkpoint staging in progress** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
+| SYNTAX-PARITY-1B1 | **final-green at `9f663555a1edbedcb99e97f1271154ff36913f05`** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
 | SYNTAX-PARITY-1B2 | gated | final-green 1B1 plus separate proposal/review | Independent displayed sibling binder presentation and `fibrePair` |
 | SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
@@ -636,7 +637,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   application ladder, proved direct/text weakening equality and exact
   failures, and added the seventh reviewer preset. The 39-test proportional
   corpus, typecheck/lint, production build, and Chromium exercise are green;
-  no Core/kernel/Lambdapi semantics changed.
+  no Core/kernel/Lambdapi semantics changed. Exact local implementation
+  checkpoint: `9f663555a1edbedcb99e97f1271154ff36913f05`.
 - **2026-07-30 — D002 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed proposal, recorded
   an immutable, human-supersedable review approving only the unary

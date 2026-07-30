@@ -489,8 +489,9 @@ SYNTAX-PARITY-1B1 is now implemented and final-green. The exact unary
 browser presets, the combined 39/39 affected corpus, typecheck/lint,
 production build, and real Chromium weakening execution are green. No
 parser node, mathematical owner, Core/checker/runtime behavior, transfer
-input, or Lambdapi source changed. The next row remains the separately gated
-1B2 independent-sibling/`fibrePair` presentation.
+input, or Lambdapi source changed. Exact local implementation checkpoint:
+`9f663555a1edbedcb99e97f1271154ff36913f05`. The next row remains the
+separately gated 1B2 independent-sibling/`fibrePair` presentation.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

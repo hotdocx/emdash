@@ -593,7 +593,7 @@ it and a separate bounded review authorizes it.
 | SYNTAX-PARITY-0A | complete at `d73195b`; D001 separately approved at `55161be` | REVIEWER-GRADUATE-1 and direct TypeScript surface | Executable 68-method/14-capability API-to-text inventory and bounded `^n`/`^fd`/`^nd` proposal |
 | SYNTAX-PARITY-1A | final-green at `2e7cc3c44802a5218858ca6747e7591d3bfc4859` | approved D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | Same reviewer exposes the three single-binder modes through existing typed program methods; focused 35/35 and aggregate 1,149/1,149 gates are green |
 | SYNTAX-PARITY-1B0 / D002 | focused-green audit at `be7000f`; exact proposal approved by immutable unattended review with human supersession | final-green 1A | Measured direct-green/text-unknown `indexOf` weakening seam and authorized only 1B1, separating 1B2/1B3 multi-binder contexts |
-| SYNTAX-PARITY-1B1 | final-green; exact local checkpoint staging in progress | approved D002 review | Seventh weakening preset and exact `indexOf` text route through existing semantics; affected 39/39, production build, and Chromium gates green |
+| SYNTAX-PARITY-1B1 | final-green at `9f663555a1edbedcb99e97f1271154ff36913f05` | approved D002 review | Seventh weakening preset and exact `indexOf` text route through existing semantics; affected 39/39, production build, and Chromium gates green |
 | BOOK-DELTA-0A | selected post-syntax successor | SYNTAX-PARITY-GRADUATE-1 | Capability-oriented book delta audit followed by theorem-led prose/artifact/repository graduation under its dedicated plan |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |
 

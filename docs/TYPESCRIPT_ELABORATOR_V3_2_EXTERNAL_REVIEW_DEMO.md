@@ -310,6 +310,10 @@ Current selected product evidence:
   `55161be`;
 - syntax-parity implementation:
   `2e7cc3c44802a5218858ca6747e7591d3bfc4859`;
+- contextual-index audit/review/implementation:
+  `be7000f88b08c90d24bad8a1e113fe3241d8a8ca` /
+  `e433b6a` /
+  `9f663555a1edbedcb99e97f1271154ff36913f05`;
 - focused integrated reviewer test: eight checks, eight passes, zero
   failures, including direct-TypeScript equality for all seven presets;
 - focused syntax-parity corpus: eight checks, eight passes, zero failures;
