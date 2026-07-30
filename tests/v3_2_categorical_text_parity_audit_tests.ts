@@ -11,9 +11,7 @@ import {
     CORE_CATEGORICAL_TEXT_PARITY_AUDIT,
     CORE_CATEGORICAL_TEXT_PARITY_METHOD_COVERAGE,
     CoreCategoricalProgram,
-    CoreCategoricalTextError,
     CoreCategoricalTextParityAuditError,
-    elaborateCoreCategoricalText,
     validateCoreCategoricalTextParityAudit
 } from '../src/v3_2';
 
@@ -64,39 +62,24 @@ describe('SYNTAX-PARITY-0A executable capability inventory', () => {
         });
     });
 
-    it('retains ^f as the only implemented mode while parsing later modes', () => {
-        const program = new CoreCategoricalProgram({
-            sourceFile: 'tests/fixtures/text-parity-audit.emdash'
-        });
-        const A = program.category('parity_A');
-        const B = program.category('parity_B');
-        const b = program.object('parity_b', B);
-        for (const mode of ['n', 'fd', 'nd']) {
-            assert.throws(
-                () => elaborateCoreCategoricalText(program, {
-                    source: `λ^${mode} x. b`,
-                    sourceFile:
-                        'tests/fixtures/text-parity-audit.emdash',
-                    environment: [
-                        {
-                            name: 'b',
-                            kind: 'term',
-                            value: b
-                        }
-                    ],
-                    expected: {
-                        kind: 'ordinary-functor',
-                        source: A,
-                        target: B
-                    }
-                }),
-                error =>
-                    error instanceof CoreCategoricalTextError &&
-                    error.code === 'UNSUPPORTED_BINDER_MODE' &&
-                    error.phase === 'resolution' &&
-                    error.span.start.line === 1
-            );
-        }
+    it('freezes the exact pre-implementation text boundary', () => {
+        const audit = CORE_CATEGORICAL_TEXT_PARITY_AUDIT;
+        assert.equal(
+            audit.prerequisite.textRevision,
+            'SYNTAX-1A-CATEGORICAL-TEXT-1'
+        );
+        assert.deepEqual(
+            audit.startingTextSurface.implementedModes,
+            ['f']
+        );
+        assert.equal(
+            audit.startingTextSurface.parserModeGrammar,
+            'alphabetic-mode-suffix'
+        );
+        assert.deepEqual(
+            audit.firstProposal.selectedModes,
+            ['n', 'fd', 'nd']
+        );
     });
 
     it('executes every direct semantic target selected by the first proposal',

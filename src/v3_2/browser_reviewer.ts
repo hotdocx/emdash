@@ -8,6 +8,7 @@
 
 import {
     CoreCategoricalCategory,
+    CoreCategoricalDisplayedFamily,
     CoreCategoricalProgram
 } from './categorical_program';
 import {
@@ -27,12 +28,15 @@ import {
 } from './product_review_demo';
 
 export const CORE_BROWSER_REVIEWER_REVISION =
-    'REVIEWER-INTEGRATE-1A-BROWSER-1' as const;
+    'SYNTAX-PARITY-1A-BROWSER-REVIEWER-1' as const;
 
 export type CoreBrowserReviewerPresetId =
     | 'pointwise-application'
     | 'fixed-inner-evaluation'
-    | 'whole-hom-action';
+    | 'whole-hom-action'
+    | 'indexed-section-composition'
+    | 'displayed-functor-composition'
+    | 'displayed-transfor-composition';
 
 export type CoreBrowserReviewerExpectedMode =
     | {
@@ -44,6 +48,25 @@ export type CoreBrowserReviewerExpectedMode =
     | {
         readonly kind: 'term';
         readonly applicationShape: 'whole-hom-action';
+    }
+    | {
+        readonly kind: 'dependent-section';
+        readonly binderMode: 'n';
+        readonly base: 'K';
+        readonly target: 'D';
+    }
+    | {
+        readonly kind: 'displayed-functor';
+        readonly binderMode: 'fd';
+        readonly source: 'E';
+        readonly target: 'Q';
+    }
+    | {
+        readonly kind: 'displayed-transfor';
+        readonly binderMode: 'nd';
+        readonly base: 'K';
+        readonly source: 'F0';
+        readonly target: 'F2';
     };
 
 export interface CoreBrowserReviewerPreset {
@@ -182,6 +205,69 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
             'G : Functor A B',
             'pA : Hom_cat A x0 x1'
         ]
+    },
+    {
+        id: 'indexed-section-composition',
+        label: 'Natural indexed composition',
+        source: 'λ^n k : K. (FF k) (s k)',
+        description:
+            'A natural base binder recursively composes a displayed ' +
+            'functor action with an indexed section.',
+        expectedMode: {
+            kind: 'dependent-section',
+            binderMode: 'n',
+            base: 'K',
+            target: 'D'
+        },
+        assumptions: [
+            'K : Cat',
+            'E, D : Catd K',
+            'FF : Functord E D',
+            's : Π k :^n K, E[k]'
+        ]
+    },
+    {
+        id: 'displayed-functor-composition',
+        label: 'Displayed functor composition',
+        source: 'λ^fd a : E. GG (FF a)',
+        description:
+            'A displayed functorial binder recursively factors a finite ' +
+            'composition through the existing internalized owner.',
+        expectedMode: {
+            kind: 'displayed-functor',
+            binderMode: 'fd',
+            source: 'E',
+            target: 'Q'
+        },
+        assumptions: [
+            'K : Cat',
+            'E, D, Q : Catd K',
+            'FF : Functord E D',
+            'GG : Functord D Q'
+        ]
+    },
+    {
+        id: 'displayed-transfor-composition',
+        label: 'Displayed natural composition',
+        source:
+            'λ^nd k : K. composeCells (theta k) (eta k)',
+        description:
+            'A displayed natural binder recursively factors typed component ' +
+            'composition into a genuine coherent outer transformation.',
+        expectedMode: {
+            kind: 'displayed-transfor',
+            binderMode: 'nd',
+            base: 'K',
+            source: 'F0',
+            target: 'F2'
+        },
+        assumptions: [
+            'K : Cat',
+            'E, D : Catd K',
+            'F0, F1, F2 : Functord E D',
+            'eta : Transfd F0 F1',
+            'theta : Transfd F1 F2'
+        ]
     }
 ]);
 
@@ -189,25 +275,25 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
     revision: CORE_BROWSER_REVIEWER_REVISION,
     candidate: 'emdash-v3.2-integrated-reviewer-1',
     construction: 'browser-input-adapter-over-existing-core',
-    initialView: 'ordinary-categorical-text',
+    initialView: 'categorical-text',
     fullReportExecution: 'explicit-user-action',
     pipeline: [
-        'ordinary categorical text',
+        'ordinary, natural, and displayed categorical text',
         'existing recursive contextual elaboration',
         'backend-neutral explicit emdash Core',
         'existing generic LF checker, evaluator, and runtime',
         'optional Node-side Lambdapi conformance oracle'
     ],
     supported: [
-        'three ordinary categorical text presets',
-        'edited ordinary categorical text with source diagnostics',
+        'six categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'edited categorical text with source diagnostics',
         'existing outer-LF, ordinary, and displayed three-panel report',
         'generated emdash book',
         'preserved minimal explicit-Core playground'
     ],
     deferred: [
-        'displayed categorical text syntax',
-        'additional binder modes',
+        'nested and multi-binder categorical text',
+        'displayed context and structural-constructor syntax',
         'arbitrary displayed telescope depth',
         'browser-side source acquisition',
         'production Lambdapi dependency',
@@ -225,9 +311,8 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
 
 interface CoreBrowserReviewerFixture {
     readonly program: CoreCategoricalProgram;
-    readonly A: CoreCategoricalCategory;
-    readonly C: CoreCategoricalCategory;
     readonly environment: readonly CoreCategoricalTextBinding[];
+    readonly expected: CoreCategoricalTextExpected;
 }
 
 const categoryBinding = (
@@ -248,6 +333,15 @@ const termBinding = (
     value
 });
 
+const familyBinding = (
+    name: string,
+    value: CoreCategoricalDisplayedFamily
+): CoreCategoricalTextBinding => Object.freeze({
+    name,
+    kind: 'displayed-family' as const,
+    value
+});
+
 const boundaryBinding = (
     name: string,
     value: CoreCategoricalHomBoundary
@@ -258,37 +352,147 @@ const boundaryBinding = (
 });
 
 const createFixture = (
-    sourceFile: string
+    sourceFile: string,
+    presetId: CoreBrowserReviewerPresetId
 ): CoreBrowserReviewerFixture => {
-    const program = new CoreCategoricalProgram({ sourceFile });
-    const A = program.category('review_A');
-    const B = program.category('review_B');
-    const C = program.category('review_C');
-    const functorsBC = program.functorCategory(B, C);
-    const H = program.functor('review_H', A, functorsBC);
-    const K = program.functor('review_K', A, B);
-    const F = program.functor('review_F', A, functorsBC);
-    const G = program.functor('review_G', A, B);
-    const y0 = program.object('review_y0', B);
-    const x0 = program.object('review_x0', A);
-    const x1 = program.object('review_x1', A);
-    const pA = program.homBoundary(A, x0, x1);
+    if (
+        presetId === 'pointwise-application' ||
+        presetId === 'fixed-inner-evaluation' ||
+        presetId === 'whole-hom-action'
+    ) {
+        const program = new CoreCategoricalProgram({ sourceFile });
+        const A = program.category('review_A');
+        const B = program.category('review_B');
+        const C = program.category('review_C');
+        const functorsBC = program.functorCategory(B, C);
+        const H = program.functor('review_H', A, functorsBC);
+        const K = program.functor('review_K', A, B);
+        const F = program.functor('review_F', A, functorsBC);
+        const G = program.functor('review_G', A, B);
+        const y0 = program.object('review_y0', B);
+        const x0 = program.object('review_x0', A);
+        const x1 = program.object('review_x1', A);
+        const pA = program.homBoundary(A, x0, x1);
+        return Object.freeze({
+            program,
+            environment: Object.freeze([
+                categoryBinding('A', A),
+                categoryBinding('B', B),
+                categoryBinding('C', C),
+                termBinding('H', H),
+                termBinding('K', K),
+                termBinding('F', F),
+                termBinding('G', G),
+                termBinding('y0', y0),
+                boundaryBinding('pA', pA)
+            ]),
+            expected: presetId === 'whole-hom-action'
+                ? {
+                    kind: 'term' as const,
+                    applicationShape: 'whole-hom-action' as const
+                }
+                : {
+                    kind: 'ordinary-functor' as const,
+                    source: A,
+                    target: C
+                }
+        });
+    }
 
+    if (presetId === 'indexed-section-composition') {
+        const program = new CoreCategoricalProgram({
+            sourceFile,
+            profile: 'usability-dependent-1a'
+        });
+        const K = program.category('review_K');
+        const E = program.displayedFamily('review_E', K);
+        const D = program.displayedFamily('review_D', K);
+        const FF = program.displayedFunctor('review_FF', E, D);
+        const s = program.section('review_s', E);
+        return Object.freeze({
+            program,
+            environment: Object.freeze([
+                categoryBinding('K', K),
+                familyBinding('E', E),
+                familyBinding('D', D),
+                termBinding('FF', FF),
+                termBinding('s', s)
+            ]),
+            expected: {
+                kind: 'dependent-section' as const,
+                base: K,
+                target: D
+            }
+        });
+    }
+
+    if (presetId === 'displayed-functor-composition') {
+        const program = new CoreCategoricalProgram({
+            sourceFile,
+            profile: 'fibred-binder-1'
+        });
+        const K = program.category('review_K');
+        const E = program.displayedFamily('review_E', K);
+        const D = program.displayedFamily('review_D', K);
+        const Q = program.displayedFamily('review_Q', K);
+        const FF = program.displayedFunctor('review_FF', E, D);
+        const GG = program.displayedFunctor('review_GG', D, Q);
+        return Object.freeze({
+            program,
+            environment: Object.freeze([
+                categoryBinding('K', K),
+                familyBinding('E', E),
+                familyBinding('D', D),
+                familyBinding('Q', Q),
+                termBinding('FF', FF),
+                termBinding('GG', GG)
+            ]),
+            expected: {
+                kind: 'displayed-functor' as const,
+                source: E,
+                target: Q
+            }
+        });
+    }
+
+    if (presetId !== 'displayed-transfor-composition') {
+        const exhaustive: never = presetId;
+        return exhaustive;
+    }
+    const program = new CoreCategoricalProgram({
+        sourceFile,
+        profile: 'fibred-transfd-1'
+    });
+    const K = program.category('review_K');
+    const E = program.displayedFamily('review_E', K);
+    const D = program.displayedFamily('review_D', K);
+    const F0 = program.displayedFunctor('review_F0', E, D);
+    const F1 = program.displayedFunctor('review_F1', E, D);
+    const F2 = program.displayedFunctor('review_F2', E, D);
+    const eta = program.displayedTransfor('review_eta', F0, F1);
+    const theta = program.displayedTransfor(
+        'review_theta',
+        F1,
+        F2
+    );
     return Object.freeze({
         program,
-        A,
-        C,
         environment: Object.freeze([
-            categoryBinding('A', A),
-            categoryBinding('B', B),
-            categoryBinding('C', C),
-            termBinding('H', H),
-            termBinding('K', K),
-            termBinding('F', F),
-            termBinding('G', G),
-            termBinding('y0', y0),
-            boundaryBinding('pA', pA)
-        ])
+            categoryBinding('K', K),
+            familyBinding('E', E),
+            familyBinding('D', D),
+            termBinding('F0', F0),
+            termBinding('F1', F1),
+            termBinding('F2', F2),
+            termBinding('eta', eta),
+            termBinding('theta', theta)
+        ]),
+        expected: {
+            kind: 'displayed-transfor' as const,
+            base: K,
+            source: F0,
+            target: F2
+        }
     });
 };
 
@@ -307,23 +511,8 @@ const findPreset = (
     return preset;
 };
 
-const textExpected = (
-    fixture: CoreBrowserReviewerFixture,
-    mode: CoreBrowserReviewerExpectedMode
-): CoreCategoricalTextExpected =>
-    mode.kind === 'ordinary-functor'
-        ? {
-            kind: mode.kind,
-            source: fixture.A,
-            target: fixture.C
-        }
-        : {
-            kind: mode.kind,
-            applicationShape: mode.applicationShape
-        };
-
 /**
- * Run one editable ordinary categorical expression through the existing text
+ * Run one editable categorical expression through the existing text
  * adapter and categorical program. Expected typing is fixed by the selected
  * reviewed preset; the source itself remains editable.
  */
@@ -338,7 +527,7 @@ export function runCoreBrowserReviewerText(
         source: request.source,
         sourceFile
     });
-    const fixture = createFixture(sourceFile);
+    const fixture = createFixture(sourceFile, preset.id);
 
     try {
         const term = elaborateCoreCategoricalText(
@@ -347,10 +536,7 @@ export function runCoreBrowserReviewerText(
                 source: request.source,
                 sourceFile,
                 environment: fixture.environment,
-                expected: textExpected(
-                    fixture,
-                    preset.expectedMode
-                )
+                expected: fixture.expected
             }
         );
         const compilation = fixture.program.compile(term);

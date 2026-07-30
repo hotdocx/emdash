@@ -9,9 +9,6 @@
 import {
     CoreCategoricalProgram
 } from './categorical_program';
-import {
-    CORE_CATEGORICAL_TEXT_REVISION
-} from './categorical_text';
 
 const deepFreeze = <T>(value: T): T => {
     if (
@@ -655,11 +652,11 @@ const rawAudit = {
     revision: 'SYNTAX-PARITY-0A-AUDIT-1',
     status: 'completed-zero-behavior-delta-audit',
     prerequisite: {
-        textRevision: CORE_CATEGORICAL_TEXT_REVISION,
+        textRevision: 'SYNTAX-1A-CATEGORICAL-TEXT-1',
         reviewerCheckpoint:
             '18ca2547bb2f5795127a6589d0531bba87317f19'
     },
-    currentTextSurface: {
+    startingTextSurface: {
         locatedNodes: [
             'identifier',
             'left-associated-application',
@@ -818,7 +815,7 @@ export const validateCoreCategoricalTextParityAudit = (
 ): void => {
     if (
         audit.prerequisite.textRevision !==
-            CORE_CATEGORICAL_TEXT_REVISION ||
+            'SYNTAX-1A-CATEGORICAL-TEXT-1' ||
         audit.prerequisite.reviewerCheckpoint !==
             '18ca2547bb2f5795127a6589d0531bba87317f19'
     ) {
@@ -900,8 +897,8 @@ export const validateCoreCategoricalTextParityAudit = (
 
     if (
         Object.values(audit.semanticDelta).some(value => value !== 0) ||
-        audit.currentTextSurface.implementedModes.length !== 1 ||
-        audit.currentTextSurface.implementedModes[0] !== 'f'
+        audit.startingTextSurface.implementedModes.length !== 1 ||
+        audit.startingTextSurface.implementedModes[0] !== 'f'
     ) {
         throw new CoreCategoricalTextParityAuditError(
             'TEXT_PARITY_BOUNDARY_DRIFT',

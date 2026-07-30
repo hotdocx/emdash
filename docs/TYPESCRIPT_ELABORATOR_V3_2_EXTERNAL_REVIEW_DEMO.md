@@ -2,7 +2,7 @@
 
 Date: 2026-07-30
 Candidate: `emdash-v3.2-integrated-reviewer-1`
-Inputs: direct typed TypeScript plus bounded ordinary categorical text
+Inputs: direct typed TypeScript plus bounded categorical text
 Production Lambdapi dependency: none
 Component runtime checkpoint:
 `7513cbe9e0d1439b5b1250982f40cede48e9a811`
@@ -13,10 +13,14 @@ Integrated implementation: green in the current reviewed tranche
 The TypeScript implementation now exposes one integrated external-reviewer
 workbench over the existing checker/evaluator architecture:
 
-1. an editable ordinary categorical expression view with three presets:
+1. an editable categorical expression view with six presets:
    - recursive pointwise application `λ^f x. (H x) (K x)`;
    - fixed-inner evaluation `λ^f x. F x y0`; and
    - expected-type-directed whole-Hom action `G pA`;
+   - natural indexed composition `λ^n k : K. (FF k) (s k)`;
+   - displayed functor composition `λ^fd a : E. GG (FF a)`; and
+   - coherent displayed component composition
+     `λ^nd k : K. composeCells (theta k) (eta k)`;
 2. an explicitly started direct-TypeScript report across:
    - an outer dependent logical framework with lambda, Pi, dependent
      Sigma-telescope data, type inference/checking, beta reduction, and
@@ -31,7 +35,7 @@ workbench over the existing checker/evaluator architecture:
    Vite as a fingerprinted static asset; and
 4. the preserved editable minimal-Core playground.
 
-Direct construction and parsed ordinary text both elaborate to backend-neutral
+Direct construction and parsed categorical text both elaborate to backend-neutral
 explicit emdash Core and run through the existing generic LF checker,
 evaluator, rewrite machinery, and categorical program. The text adapter owns
 no second action table or checker. None of these product lanes spawns
@@ -49,7 +53,7 @@ and exact boundary are in
 | --- | --- | --- |
 | `./scripts/pnpmw run check:browser-reviewer` | Typechecks, lints, and builds the integrated static workbench | Primary reviewer product; deployment remains separate |
 | `./scripts/pnpmw run demo:external-review` | Fixed direct-TypeScript outer LF, ordinary categorical, and genuine displayed-chain report | Most complete semantic demonstration; not editable text |
-| `./scripts/pnpmw run demo:categorical-text` | Editable strings such as `λ^f x. (H x) (K x)` checked into explicit Core | Ordinary `^f` only; no displayed/dependent text telescope |
+| `./scripts/pnpmw run demo:categorical-text` | The original ordinary CLI examples such as `λ^f x. (H x) (K x)` checked into explicit Core | The integrated browser additionally exposes reviewed `^n`, `^fd`, and `^nd` text presets |
 | `./scripts/pnpmw run check:browser-directed` | Exact compatibility alias of `check:browser-reviewer` | Historical command name only |
 | `./scripts/pnpmw run demo:categorical-displayed-nd-higher` | Optional direct-TypeScript object, whole-Hom, and higher-cell action | Advanced bounded witness; not a general `^nd` text binder |
 
@@ -118,7 +122,7 @@ maintain a separate mock semantic transcript.
 
 ## Run The Categorical Text Lane
 
-The additive ordinary categorical adapter accepts text plus an immutable
+The categorical adapter accepts text plus an immutable
 typed environment and an explicit expected classifier:
 
 ```bash
@@ -140,9 +144,19 @@ Both lower through the same existing `CoreCategoricalProgram.lambda` and
 construction. `G p` demonstrates that neutral whitespace application can use
 an expected whole-Hom action rather than being hard-wired to object action.
 
-The adapter recognizes intrinsic `^n`, `^fd`, and `^nd` mode tokens but rejects
-them before semantic construction. Their existing direct typed TypeScript
-consumers do not yet have text-resolver contracts.
+The same adapter now also accepts:
+
+```text
+λ^n  k : K. (FF k) (s k)
+λ^fd a : E. GG (FF a)
+λ^nd k : K. composeCells (theta k) (eta k)
+```
+
+The intrinsic binder mode is mandatory; the `: category/family` annotation
+is separately optional when the request's expected classifier supplies it.
+These forms route to the existing dependent-section, displayed-functor, and
+displayed-transformation builders. Pointwise data that cannot be internally
+factored into a genuine coherent outer construction remains rejected.
 
 ## Readable Input Examples
 
@@ -288,15 +302,24 @@ Current selected product evidence:
   `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`;
 - additive directed browser:
   `7f696cea4b6a369e5db41c0d5e57e778b61fa10c`;
-- ordinary categorical text adapter:
-  `7513cbe9e0d1439b5b1250982f40cede48e9a811`; and
+- original ordinary categorical text adapter:
+  `7513cbe9e0d1439b5b1250982f40cede48e9a811`;
+- syntax-parity audit/review:
+  `d73195b833d5afcb569898df110f392344d2deac` /
+  `55161be`; and
 - focused integrated reviewer test: eight checks, eight passes, zero
-  failures;
-- Vite production build: 140 modules, a 116.73 kB-gzip initial script and a
-  158.56 kB-gzip lazy reviewer chunk; and
-- real Chromium execution of an accepted edit, a source-located rejection,
-  the full three-panel report, the emitted PDF link, and the minimal-Core
-  checker, with zero console messages.
+  failures, including direct-TypeScript equality for all six presets;
+- focused syntax-parity corpus: eight checks, eight passes, zero failures;
+- complete TypeScript aggregate after parity: 1,149 tests, 1,098 active
+  passes, 51 intentional skips, and zero failures;
+- Vite production build after syntax parity: 140 modules, a 116.78 kB-gzip
+  initial script and a 159.58 kB-gzip lazy reviewer chunk; and
+- real Chromium execution of the displayed-natural preset
+  `λ^nd k : K. composeCells (theta k) (eta k)`, producing an accepted
+  explicit-Core/checker result with zero console errors or warnings. The
+  earlier integrated-reviewer checkpoint separately exercised the
+  source-located rejection, full three-panel report, emitted PDF link, and
+  minimal-Core checker.
 
 ## Exact Boundary
 
@@ -309,9 +332,10 @@ This candidate demonstrates:
 - independent displayed siblings and one genuine displayed dependency edge;
 - structural weakening/reindexing, pairing, diagonal/swap composites, and
   checked object/internalized-arrow observations; and
-- bounded ordinary categorical text with recursive whitespace application,
-  optional checked source annotation, exact diagnostics, and whole-Hom
-  expected routing;
+- bounded categorical text across `^f`, `^n`, `^fd`, and `^nd`, with
+  recursive whitespace application, optional checked annotation, exact
+  diagnostics, whole-Hom expected routing, and typed recursive cell
+  composition;
 - an integrated client-side reviewer with editable categorical text,
   explicit research report, generated book, and editable minimal-Core
   playground; and
@@ -320,13 +344,15 @@ This candidate demonstrates:
 It does not yet claim:
 
 - arbitrary displayed telescope depth;
-- a general `^nd` binder/coherence theorem;
-- text lowering for `^n`, `^fd`, `^nd`, displayed/dependent telescopes,
-  nested lambdas, outer-LF terms, Pi, let, or holes;
+- arbitrary/general `^nd` coherence beyond component eta and finite typed
+  vertical composition;
+- text lowering for displayed/dependent telescopes, contextual `indexOf`
+  weakening, general structural constructors, nested lambdas, outer-LF
+  terms, Pi, let, or holes;
 - final agreement between experimental TypeScript `λ^mode` syntax and
   informal Lambdapi/kernel notation;
-- displayed/dependent categorical text parity or additional text binder
-  modes;
+- full displayed/dependent categorical text parity beyond the reviewed
+  single-binder modes;
 - a GitHub Pages workflow, deployment, or publication;
 - systematic groupoidal-DTT closure;
 - complete transfer of the Lambdapi library;
@@ -341,11 +367,13 @@ and
 [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md).
 The historical Parsimmon parser remains baseline grammar evidence; the
 implemented adapter is dependency-free. The immediate product continuation
-is the dedicated
+remains the dedicated
 [`syntax-parity plan`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md):
-inventory parity with the mathematical constructions exposed by the
-implemented TypeScript API, starting with a measured `^n` / `^fd` / `^nd`
-routing audit. Parsing remains deterministic; typed resolution and internal
-factorization may fail closed without heuristic action or naturality
-synthesis. Bulk scale remains deferred; one exact scale dependency may move
-earlier only when a compelling reviewer witness measurably requires it.
+the modes-first `1A` route is implemented, while `1B` inventories
+context/telescope and displayed structural syntax and `1C` covers remaining
+selected mathematical constructors. Parsing remains deterministic; typed
+resolution and internal factorization may fail closed without heuristic
+action or naturality synthesis. After exact parity graduation, the product
+route proceeds to the theorem-led book and repository graduation plan. Bulk
+scale remains deferred; one exact scale dependency may move earlier only
+when a compelling reviewer witness measurably requires it.

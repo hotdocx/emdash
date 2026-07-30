@@ -46,47 +46,122 @@ const assertDeepFrozen = (value: unknown): void => {
 const directCompilation = (
     presetId: CoreBrowserReviewerPresetId
 ): CoreCategoricalProgramCompilation => {
-    const program = new CoreCategoricalProgram({
-        sourceFile: '<browser-reviewer-direct>'
-    });
-    const A = program.category('review_A');
-    const B = program.category('review_B');
-    const C = program.category('review_C');
-    const functorsBC = program.functorCategory(B, C);
-    const H = program.functor('review_H', A, functorsBC);
-    const K = program.functor('review_K', A, B);
-    const F = program.functor('review_F', A, functorsBC);
-    const G = program.functor('review_G', A, B);
-    const y0 = program.object('review_y0', B);
-    const x0 = program.object('review_x0', A);
-    const x1 = program.object('review_x1', A);
-    const pA = program.homBoundary(A, x0, x1);
-
     switch (presetId) {
         case 'pointwise-application':
-            return program.compile(program.lambda(
-                'x',
-                A,
-                C,
-                x => program.apply(
-                    program.apply(H, x),
-                    program.apply(K, x)
-                )
-            ));
         case 'fixed-inner-evaluation':
-            return program.compile(program.lambda(
-                'x',
-                A,
-                C,
-                x => program.apply(
-                    program.apply(F, x),
-                    y0
-                )
-            ));
-        case 'whole-hom-action':
+        case 'whole-hom-action': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>'
+            });
+            const A = program.category('review_A');
+            const B = program.category('review_B');
+            const C = program.category('review_C');
+            const functorsBC = program.functorCategory(B, C);
+            const H = program.functor('review_H', A, functorsBC);
+            const K = program.functor('review_K', A, B);
+            const F = program.functor('review_F', A, functorsBC);
+            const G = program.functor('review_G', A, B);
+            const y0 = program.object('review_y0', B);
+            const x0 = program.object('review_x0', A);
+            const x1 = program.object('review_x1', A);
+            const pA = program.homBoundary(A, x0, x1);
+            if (presetId === 'pointwise-application') {
+                return program.compile(program.lambda(
+                    'x',
+                    A,
+                    C,
+                    x => program.apply(
+                        program.apply(H, x),
+                        program.apply(K, x)
+                    )
+                ));
+            }
+            if (presetId === 'fixed-inner-evaluation') {
+                return program.compile(program.lambda(
+                    'x',
+                    A,
+                    C,
+                    x => program.apply(
+                        program.apply(F, x),
+                        y0
+                    )
+                ));
+            }
             return program.compile(program.apply(G, pA, {
                 expectedShape: 'whole-hom-action'
             }));
+        }
+        case 'indexed-section-composition': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>',
+                profile: 'usability-dependent-1a'
+            });
+            const K = program.category('review_K');
+            const E = program.displayedFamily('review_E', K);
+            const D = program.displayedFamily('review_D', K);
+            const FF = program.displayedFunctor('review_FF', E, D);
+            const s = program.section('review_s', E);
+            return program.compile(program.dependentLambda(
+                'k',
+                D,
+                k => program.apply(
+                    program.apply(FF, k),
+                    program.apply(s, k)
+                )
+            ));
+        }
+        case 'displayed-functor-composition': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>',
+                profile: 'fibred-binder-1'
+            });
+            const K = program.category('review_K');
+            const E = program.displayedFamily('review_E', K);
+            const D = program.displayedFamily('review_D', K);
+            const Q = program.displayedFamily('review_Q', K);
+            const FF = program.displayedFunctor('review_FF', E, D);
+            const GG = program.displayedFunctor('review_GG', D, Q);
+            return program.compile(program.displayedFunctorLambda(
+                'a',
+                E,
+                Q,
+                a => program.apply(
+                    GG,
+                    program.apply(FF, a)
+                )
+            ));
+        }
+        case 'displayed-transfor-composition': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>',
+                profile: 'fibred-transfd-1'
+            });
+            const K = program.category('review_K');
+            const E = program.displayedFamily('review_E', K);
+            const D = program.displayedFamily('review_D', K);
+            const F0 = program.displayedFunctor('review_F0', E, D);
+            const F1 = program.displayedFunctor('review_F1', E, D);
+            const F2 = program.displayedFunctor('review_F2', E, D);
+            const eta = program.displayedTransfor(
+                'review_eta',
+                F0,
+                F1
+            );
+            const theta = program.displayedTransfor(
+                'review_theta',
+                F1,
+                F2
+            );
+            return program.compile(program.displayedTransforLambda(
+                'k',
+                F0,
+                F2,
+                k => program.composeCells(
+                    program.apply(theta, k),
+                    program.apply(eta, k)
+                )
+            ));
+        }
         default: {
             const exhaustive: never = presetId;
             return exhaustive;
@@ -229,7 +304,10 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
             [
                 'pointwise-application',
                 'fixed-inner-evaluation',
-                'whole-hom-action'
+                'whole-hom-action',
+                'indexed-section-composition',
+                'displayed-functor-composition',
+                'displayed-transfor-composition'
             ]
         );
         for (const preset of CORE_BROWSER_REVIEWER_PRESETS) {
@@ -300,7 +378,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
     it('publishes the exact deeply frozen capability boundary', () => {
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.revision,
-            'REVIEWER-INTEGRATE-1A-BROWSER-1'
+            'SYNTAX-PARITY-1A-BROWSER-REVIEWER-1'
         );
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
@@ -313,7 +391,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.ok(
             CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
-                'existing outer-LF, ordinary, and displayed three-panel report'
+                'six categorical text presets across ^f, ^n, ^fd, and ^nd'
             )
         );
         assert.ok(

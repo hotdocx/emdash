@@ -61,9 +61,25 @@ console.log("Checked type:", emdash.serializeKernelExpression(checked.type));
 
 const expectedModeLabel = (
   mode: ReviewerExpectedMode
-): string => mode.kind === 'ordinary-functor'
-  ? `λ^${mode.binderMode} : ${mode.source} → ${mode.target}`
-  : `term (${mode.applicationShape})`;
+): string => {
+  switch (mode.kind) {
+    case 'ordinary-functor':
+      return `λ^${mode.binderMode} : ${mode.source} → ${mode.target}`;
+    case 'term':
+      return `term (${mode.applicationShape})`;
+    case 'dependent-section':
+      return `λ^${mode.binderMode} : ${mode.base} ⊢ ${mode.target}`;
+    case 'displayed-functor':
+      return `λ^${mode.binderMode} : ${mode.source} → ${mode.target}`;
+    case 'displayed-transfor':
+      return `λ^${mode.binderMode} : ${mode.base}; ` +
+        `${mode.source} ⇒ ${mode.target}`;
+    default: {
+      const exhaustive: never = mode;
+      return exhaustive;
+    }
+  }
+};
 
 const formatTextResult = (
   result: ReviewerTextResult

@@ -504,7 +504,7 @@ describe('SYNTAX-1A ordinary categorical text adapter', () => {
             }),
             'INCOMPATIBLE_ABSTRACTION_EXPECTATION'
         );
-        for (const mode of ['n', 'fd', 'nd']) {
+        for (const mode of ['o', 'future']) {
             captureTextError(
                 () => textLambda(data, `λ^${mode} x. x`),
                 'UNSUPPORTED_BINDER_MODE'

@@ -544,9 +544,30 @@ This means:
 - arbitrary pointwise data is never promoted to a coherent functor or
   transformation.
 
-The first syntax-parity row is an inventory/audit and proposal only. It
-authorizes no syntax behavior before a separate exact review. After exact
-syntax graduation, the selected route is
+The first syntax-parity inventory is complete, and its exact separately
+reviewed `SYNTAX-PARITY-1A` implementation now extends this same reviewer
+with three additional presets:
+
+```text
+λ^n  k : K. (FF k) (s k)
+λ^fd a : E. GG (FF a)
+λ^nd k : K. composeCells (theta k) (eta k)
+```
+
+Those inputs use the existing dependent-section, displayed-functor, and
+displayed-transformation builders and the existing application/cell
+composition paths. They do not add another checker, action table, or browser
+semantics. Nested/dependent contexts and general structural-constructor text
+remain later parity rows.
+
+The updated production build still transforms 140 modules. Its initial
+JavaScript is 429.10 kB / 116.78 kB gzip, its lazy reviewer chunk is
+723.61 kB / 159.58 kB gzip, and the existing informational chunk warning
+remains non-blocking. Real Chromium selected and accepted the exact `^nd`
+preset, displayed its backend-neutral explicit Core and inferred/expected
+types, and reported zero console errors or warnings.
+
+After exact syntax graduation, the selected route is
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md):
 a capability-delta audit, theorem-led book update, deterministic public book
 artifact, and consolidated repository introduction.
@@ -567,7 +588,8 @@ it and a separate bounded review authorizes it.
 | H-DTTLF-PRODUCT-REVIEWER-CORRECTION-01 | complete and approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-002 | final active acquisition validation | Refresh only current export/count/ordinal evidence; preserve historical digest evidence and all semantics |
 | H-DTTLF-PRODUCT-REVIEWER-CORRECTION-02 | complete and approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-003; focused zero-failure correction gate green | D-DTTLF-PRODUCT-REVIEWER-002 plus exact seven failures | Refreshed only seven literal derivative expected-ordinal arrays; no test or behavior delta |
 | REVIEWER-GRADUATE-1 | final-green at `18ca2547bb2f5795127a6589d0531bba87317f19` | REVIEWER-INTEGRATE-1A | Runnable reviewer path, observed bundle/runtime envelope, exact non-effects, and syntax-parity successor |
-| SYNTAX-PARITY-0A | selected successor; dependency-ready after reviewer checkpoint | REVIEWER-GRADUATE-1 and direct TypeScript surface | Executable API-to-text inventory and bounded proposal, prioritizing `^n`, `^fd`, and `^nd`; no behavior before separate review |
+| SYNTAX-PARITY-0A | complete at `d73195b`; D001 separately approved at `55161be` | REVIEWER-GRADUATE-1 and direct TypeScript surface | Executable 68-method/14-capability API-to-text inventory and bounded `^n`/`^fd`/`^nd` proposal |
+| SYNTAX-PARITY-1A | final-green; exact local checkpoint staging in progress | approved D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | Same reviewer exposes the three single-binder modes through existing typed program methods; focused 35/35 and aggregate 1,149/1,149 gates are green |
 | BOOK-DELTA-0A | selected post-syntax successor | SYNTAX-PARITY-GRADUATE-1 | Capability-oriented book delta audit followed by theorem-led prose/artifact/repository graduation under its dedicated plan |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |
 

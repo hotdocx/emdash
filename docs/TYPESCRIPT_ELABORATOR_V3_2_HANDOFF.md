@@ -455,14 +455,26 @@ by the present witness.
 
 The selected successor is
 [`TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md).
-Before deferred bulk scale, SYNTAX-PARITY-0A inventories the mathematical
-constructions exposed by direct typed TypeScript and maps them to
-deterministic text routes, prioritizing existing `^n`, `^fd`, and `^nd`
-capabilities. Parsing remains distinct from typed elaboration and internal
-categorical factorization: ambiguity fails closed, and arbitrary pointwise
-data is never promoted to coherent categorical data. A specifically required
-scale ingredient may still move earlier only through its own measured bounded
-review.
+Before deferred bulk scale, the completed SYNTAX-PARITY-0A audit inventories
+all 68 public categorical-program methods in 14 capability rows. Its exact
+D-DTTLF-PRODUCT-SYNTAX-PARITY-001 review is recorded at `55161be`.
+SYNTAX-PARITY-1A now implements the single-binder `^n`, `^fd`, and `^nd`
+routes, including recursive typed `composeCells`, through existing direct
+program methods. Focused text/direct equality, negative, browser-reviewer,
+typecheck, lint, and production-build gates are green; the complete
+TypeScript aggregate passes 1,149 tests (1,098 active passes, 51 intentional
+skips, zero failures). Parsing remains
+distinct from typed elaboration and internal categorical factorization:
+ambiguity fails closed, and arbitrary pointwise data is never promoted to
+coherent categorical data.
+
+The next syntax row is not bulk scale. SYNTAX-PARITY-1B must separately
+freeze/review nested or dependent contexts and displayed/fibred structural
+forms. In particular, direct
+`λ^fd a : E. s(indexOf(a))` is already semantically green, but textual
+`indexOf` construction is a measured `1B` presentation seam rather than a
+missing kernel owner. A specifically required scale ingredient may still
+move earlier only through its own measured bounded review.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
@@ -511,9 +523,9 @@ scale plan's living launch prompt. The selected sequence is:
    categorical text checkpoints plus the documentation-only capability
    matrix;
 5. checkpoint the final-green integrated reviewer;
-6. follow the syntax-parity plan through its direct-TypeScript capability
-   inventory and separately reviewed bounded implementation, beginning with
-   existing `^n`, `^fd`, and `^nd` routes;
+6. preserve the completed syntax-parity inventory/review and modes-first
+   `^n`, `^fd`, and `^nd` implementation, then separately freeze/review the
+   `1B` context/structural continuation;
 7. follow the book/repository graduation plan through its capability-delta
    audit, exact editorial review, validated public PDF, and concise root
    presentation; then

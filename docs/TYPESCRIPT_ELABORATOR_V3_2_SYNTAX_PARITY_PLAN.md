@@ -12,8 +12,8 @@ and
 Status: `SYNTAX-PARITY-0A` inventory implemented and focused-green;
 `H-DTTLF-PRODUCT-SYNTAX-PARITY-01 /
 D-DTTLF-PRODUCT-SYNTAX-PARITY-001` approved as proposed by a separate
-immutable unattended review with human supersession; `SYNTAX-PARITY-1A`
-is dependency-ready
+immutable unattended review with human supersession; `SYNTAX-PARITY-1A` is
+implemented and final-green, with exact local checkpoint staging in progress
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -260,6 +260,82 @@ After `1A`, the measured continuation is:
 3. `SYNTAX-PARITY-GRADUATE-1` — freeze the exact text/direct-TypeScript
    parity envelope and route to the book/repository graduation plan.
 
+## `SYNTAX-PARITY-1A` Implementation Result
+
+The modes-first implementation preserves the existing three-node private
+located tree. `categorical_text.ts` now:
+
+- accepts `displayed-family` entries in the immutable host environment;
+- distinguishes expected ordinary functors, dependent sections, displayed
+  functors, and displayed transformations;
+- dispatches intrinsic `^f`, `^n`, `^fd`, and `^nd` heads to the existing
+  direct typed builders;
+- checks optional category or displayed-family annotations against the
+  bidirectional expected contract;
+- retains `CoreCategoricalProgram.apply` as the only generic action selector;
+  and
+- recognizes exactly the fixed binary
+  `composeCells outer inner` application spine and calls the existing typed
+  cell-composition method.
+
+The implemented recursive text envelope is:
+
+| Mode | Implemented body evidence |
+| --- | --- |
+| `^n` | section eta and indexed-section application/composition |
+| `^fd` | displayed identity, eta, and finite nested displayed-functor composition |
+| `^nd` | displayed-component eta and finite recursive typed `composeCells` composition |
+
+Every exact positive source compiles to the same backend-neutral explicit
+Core, inferred/expected type, and abstraction rule as its direct TypeScript
+counterpart. Exact negatives cover wrong annotation kind, wrong
+category/family, wrong expected mode, unavailable profile, wrong endpoint,
+non-adjacent cell composition, non-internalizable pointwise data, nested
+abstraction, and unreviewed modes.
+
+The integrated browser reviewer now exposes six immutable presets: the
+original three ordinary/action examples plus the exact `^n`, `^fd`, and
+`^nd` witnesses. Each preset creates only its smallest existing reviewed
+program profile, and Node/browser both call the same text adapter.
+
+### Measured weakening boundary
+
+The audit's `qualified-weakening-reindexing` phrase described the upper bound
+of the existing direct `displayedFunctorLambda` factorer. During
+implementation, the exact weakening body
+
+```text
+λ^fd a : E. s (indexOf a)
+```
+
+was rechecked. Its direct TypeScript construction is green, but text cannot
+construct the contextual `indexOf(a)` operation from identifier/application
+syntax alone. The inventory already classifies `indexOf` with displayed and
+fibred structural constructors in `SYNTAX-PARITY-1B`; therefore `1A` does not
+silently add another operation spine. Closed reindexed functors may already
+be supplied as checked host terms and eta-expanded, but textual construction
+of reindexing/weakening remains a `1B` obligation. This is a presentation
+boundary, not a missing kernel owner or factorization algorithm.
+
+The implementation adds no mathematical owner, Core node,
+checker/evaluator branch, semantic profile, runtime/proof/unification rule,
+external coherence premise, parser dependency, or Lambdapi change.
+
+Final validation is green:
+
+- the focused text/inventory/parity/browser corpus passes 35/35;
+- root typecheck and lint pass;
+- the browser reviewer production build passes with 140 transformed modules;
+- real Chromium accepts the exact `^nd` preset and reports zero console
+  errors or warnings; and
+- the complete TypeScript aggregate passes 1,149 tests: 1,098 active passes,
+  51 intentional skips, and zero failures.
+
+No proportional live-Lambdapi rerun was triggered because this tranche
+changes no Lambdapi source, transferred declaration/rule, signature catalog,
+semantic profile, or Core owner; its terms continue through already reviewed
+owners and the existing checker.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -354,7 +430,7 @@ strings parse. For every promoted row it must demonstrate:
 | --- | --- | --- | --- |
 | SYNTAX-PARITY-0A | **complete; focused-green** | REVIEWER-INTEGRATE-1A and current direct TypeScript surface | Executable/deeply frozen 68-method/14-capability inventory, classification, direct semantic witnesses, exact negative boundary, and bounded proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-01 / D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | **approved as proposed; immutable unattended review with human supersession** | SYNTAX-PARITY-0A and checkpoint `d73195b` | Review permits only the frozen `SYNTAX-PARITY-1A` three-mode/application/cell-composition scope |
-| SYNTAX-PARITY-1A | **dependency-ready** | approved D001 review | Implement only `^n`, `^fd`, `^nd`, the frozen binding/expected contracts, existing direct-builder routes, tests, browser exposure, and documentation |
+| SYNTAX-PARITY-1A | **final-green; exact local checkpoint staging in progress** | approved D001 review | `^n`, `^fd`, `^nd`, immutable displayed-family/expected contracts, existing direct-builder routes, exact `composeCells`, six browser presets, negative boundaries, and 1,149-test aggregate |
 | SYNTAX-PARITY-1B | gated | `SYNTAX-PARITY-1A` plus separate exact review | Nested/dependent contexts and displayed/fibred structural forms |
 | SYNTAX-PARITY-1C | gated | `SYNTAX-PARITY-1B` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -433,6 +509,13 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1A` implemented.** Added the three reviewed
+  intrinsic-mode routes, displayed-family/expected contracts, exact
+  `composeCells` routing, direct/text equivalence and fail-closed evidence,
+  and three corresponding browser presets. Preserved the private located
+  tree, one application classifier, and all Core/kernel semantics. Measured
+  that textual `indexOf` weakening belongs to the already scheduled
+  structural/context row `1B`, rather than silently broadening `1A`.
 - **2026-07-30 — D001 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed proposal, recorded
   an immutable, human-supersedable review approving only the three existing

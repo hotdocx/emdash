@@ -12,6 +12,12 @@ and the completed category/formal-presentation expansion plan
 Status: selected post-syntax product-graduation route; planning boundary only;
 no book prose, generated artifact, release, or public presentation change is
 yet authorized
+Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
+the high-yield continuation after syntax parity: reconcile the mathematical
+book from the `8217aa3...` baseline without turning it into an internal
+technical report, deterministically refresh `docs/emdash-book.pdf`,
+consolidate the root repository introduction, and move remaining bulk scale
+qualification to a future persistent goal
 
 ## Objective
 
@@ -335,6 +341,11 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — Post-syntax priority explicitly reaffirmed.** The user
+  confirmed that book reconciliation, the stable public PDF, and the root
+  repository presentation are the current goal's high-yield successor to
+  syntax parity. Pending general scale qualification is preserved as future
+  work and must not be resumed implicitly during this goal.
 - **2026-07-30 — Reader-facing post-syntax graduation selected.** Recorded
   the user’s direction to update the book and repository presentation after
   syntax parity, keep the book mathematical rather than developer-facing,
