@@ -469,13 +469,15 @@ distinct from typed elaboration and internal categorical factorization:
 ambiguity fails closed, and arbitrary pointwise data is never promoted to
 coherent categorical data.
 
-The next syntax row is not bulk scale. SYNTAX-PARITY-1B must separately
-freeze/review nested or dependent contexts and displayed/fibred structural
-forms. In particular, direct
+The next syntax row is not bulk scale. The executable, zero-behavior-delta
+SYNTAX-PARITY-1B0 audit confirms that direct
 `λ^fd a : E. s(indexOf(a))` is already semantically green, but textual
-`indexOf` construction is a measured `1B` presentation seam rather than a
-missing kernel owner. A specifically required scale ingredient may still
-move earlier only through its own measured bounded review.
+`indexOf` construction is a measured presentation seam rather than a missing
+kernel owner. Its non-self-authorizing D002 proposal selects only the unary
+`indexOf`/weakening route and one reviewer preset. Independent sibling
+contexts/`fibrePair` and genuine dependent/mixed telescopes are separately
+gated as 1B2/1B3. A specifically required scale ingredient may still move
+earlier only through its own measured bounded review.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
@@ -525,8 +527,8 @@ scale plan's living launch prompt. The selected sequence is:
    matrix;
 5. checkpoint the final-green integrated reviewer;
 6. preserve the completed syntax-parity inventory/review and modes-first
-   `^n`, `^fd`, and `^nd` implementation, then separately freeze/review the
-   `1B` context/structural continuation;
+   `^n`, `^fd`, and `^nd` implementation, then follow the measured
+   1B1/1B2/1B3 structural/context sequence through separate reviews;
 7. follow the book/repository graduation plan through its capability-delta
    audit, exact editorial review, validated public PDF, and concise root
    presentation; then

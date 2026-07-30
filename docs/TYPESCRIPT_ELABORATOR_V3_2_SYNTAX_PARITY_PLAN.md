@@ -14,7 +14,9 @@ Status: `SYNTAX-PARITY-0A` inventory implemented and focused-green;
 D-DTTLF-PRODUCT-SYNTAX-PARITY-001` approved as proposed by a separate
 immutable unattended review with human supersession; `SYNTAX-PARITY-1A` is
 final-green and checkpointed at
-`2e7cc3c44802a5218858ca6747e7591d3bfc4859`
+`2e7cc3c44802a5218858ca6747e7591d3bfc4859`; `SYNTAX-PARITY-1B0`
+is an executable, focused-green, zero-behavior-delta audit with a bounded
+non-self-authorizing `SYNTAX-PARITY-1B1` proposal
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -337,6 +339,65 @@ changes no Lambdapi source, transferred declaration/rule, signature catalog,
 semantic profile, or Core owner; its terms continue through already reviewed
 owners and the existing checker.
 
+## `SYNTAX-PARITY-1B0` Structural Audit And Proposed Gate
+
+The executable, deeply frozen audit in
+`src/v3_2/categorical_text_structural_audit.ts` measures the smallest
+remaining displayed-structure seam:
+
+```text
+λ^fd a : E. s (indexOf a)
+```
+
+The direct TypeScript term is already green. It compiles through
+`displayedFunctorLambda`, `apply`, and `indexOf`, selects
+`categorical.displayed-functor-weakening`, and retains the internal
+`section-pullback` and `sigma-first-projection` owners. The text term fails
+only because `indexOf` is not yet a recognized operation head:
+
+```text
+UNKNOWN_IDENTIFIER at columns 16–23
+```
+
+This is therefore a presentation seam, not a missing dependent/category
+construction, factorization rule, or kernel feature.
+
+The audit splits the formerly broad `1B` row:
+
+1. `SYNTAX-PARITY-1B1` — contextual `indexOf` and displayed weakening;
+2. `SYNTAX-PARITY-1B2` — independent displayed sibling binders and
+   `fibrePair`; and
+3. `SYNTAX-PARITY-1B3` — bounded genuine dependent and mixed displayed
+   telescopes.
+
+This split prevents the deterministic unary operation route from being
+blocked on the genuinely design-sensitive multi-binder presentation.
+
+### Proposed gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-02`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-002` proposes only
+`SYNTAX-PARITY-1B1`:
+
+- retain the existing identifier/application/lambda located tree;
+- factor exact fixed-arity application-spine recognition so it is shared
+  with the existing `composeCells` route;
+- recognize the reserved unary spine `indexOf argument`;
+- route it to the existing `CoreCategoricalProgram.indexOf`;
+- delegate profile, scope, and active-slot validation to that typed method;
+- retain `CoreCategoricalProgram.apply` as the only ordinary application
+  path;
+- prove text/direct equality for the exact weakening witness;
+- preserve exact failures outside an active displayed slot, under an
+  unavailable profile, for wrong arity/closed/foreign arguments, and for
+  wrong expected families; and
+- add one integrated-reviewer preset using the same browser-safe text adapter.
+
+The proposal authorizes no parser node, mathematical owner, program method,
+Core/checker/runtime rule, coherence premise, Lambdapi change, multi-binder
+syntax, `fibrePair`, dependent telescope, or `1C` constructor. Its five
+focused audit tests pass, and typecheck/lint are green. It remains
+non-self-authorizing until a separate exact review is recorded.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -432,8 +493,12 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-0A | **complete; focused-green** | REVIEWER-INTEGRATE-1A and current direct TypeScript surface | Executable/deeply frozen 68-method/14-capability inventory, classification, direct semantic witnesses, exact negative boundary, and bounded proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-01 / D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | **approved as proposed; immutable unattended review with human supersession** | SYNTAX-PARITY-0A and checkpoint `d73195b` | Review permits only the frozen `SYNTAX-PARITY-1A` three-mode/application/cell-composition scope |
 | SYNTAX-PARITY-1A | **final-green at `2e7cc3c44802a5218858ca6747e7591d3bfc4859`** | approved D001 review | `^n`, `^fd`, `^nd`, immutable displayed-family/expected contracts, existing direct-builder routes, exact `composeCells`, six browser presets, negative boundaries, and 1,149-test aggregate |
-| SYNTAX-PARITY-1B | gated | `SYNTAX-PARITY-1A` plus separate exact review | Nested/dependent contexts and displayed/fibred structural forms |
-| SYNTAX-PARITY-1C | gated | `SYNTAX-PARITY-1B` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
+| SYNTAX-PARITY-1B0 | **implemented; focused-green, zero behavior delta** | final-green `SYNTAX-PARITY-1A` | Executable contextual-index measurement, exact 1B1/1B2/1B3 split, and bounded non-self-authorizing proposal |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | pending separate exact review | checkpointed `SYNTAX-PARITY-1B0` | May authorize only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
+| SYNTAX-PARITY-1B1 | gated | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, and reviewer preset |
+| SYNTAX-PARITY-1B2 | gated | final-green 1B1 plus separate proposal/review | Independent displayed sibling binder presentation and `fibrePair` |
+| SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
+| SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
@@ -488,13 +553,14 @@ classifier-directed programs, and distinguish parsing, typed elaboration,
 and internal categorical factorization. Never guess an application action or
 promote arbitrary pointwise data to coherent categorical data.
 
-Recover the completed executable SYNTAX-PARITY-0A inventory and continue only
-the next separately reviewed row in its ledger. The exact
-H-DTTLF-PRODUCT-SYNTAX-PARITY-01 /
-D-DTTLF-PRODUCT-SYNTAX-PARITY-001 review is recorded with human
-supersession; implement only its frozen `SYNTAX-PARITY-1A` scope. A missing
-direct semantic capability belongs in the relevant usability/kernel plan,
-not in parser heuristics.
+Recover the completed SYNTAX-PARITY-0A inventory and final-green
+SYNTAX-PARITY-1A implementation. Continue only the next separately reviewed
+row in this ledger. The executable SYNTAX-PARITY-1B0 audit splits contextual
+index/weakening, independent sibling contexts, and genuine dependent/mixed
+telescopes into separate 1B1/1B2/1B3 rows. Do not implement its
+non-self-authorizing 1B1 proposal before the exact D002 review is recorded.
+A missing direct semantic capability belongs in the relevant
+usability/kernel plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -510,6 +576,12 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1B0` measured and split.** Confirmed that
+  `λ^fd a : E. s (indexOf a)` is already semantically green and that text
+  fails only at the unrecognized `indexOf` head. Froze the narrow
+  non-self-authorizing 1B1 proposal and separated independent siblings and
+  genuine dependent/mixed telescopes into 1B2/1B3. Five focused tests,
+  typecheck, and lint pass; no behavior changed.
 - **2026-07-30 — `SYNTAX-PARITY-1A` final-green and checkpointed.** Added
   the three reviewed intrinsic-mode routes, displayed-family/expected
   contracts, exact `composeCells` routing, direct/text equivalence and
