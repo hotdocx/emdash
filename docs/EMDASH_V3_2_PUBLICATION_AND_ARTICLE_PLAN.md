@@ -2,9 +2,9 @@
 
 Date: 2026-07-30
 Plan-ID: EMDASH-V3.2-PUBLICATION-AND-ARTICLE
-Status: active living publication plan; repository cleanup, artifact ownership,
-landing/reviewer, overview article, and bounded publication checkpoint
-complete; local integration complete; deployment in progress
+Status: completed public-product tranche; repository cleanup, artifact
+ownership, landing/reviewer, overview article, integration, GitHub Pages
+deployment, and exact public-boundary graduation complete
 
 Depends-On:
 
@@ -435,8 +435,8 @@ route fails for a measured repository constraint.
 | ARTICLE-ARTIFACT-1F | complete and focused-green at `f547dd4f0b38aad7b2062b91faab777ed4584a9a`; 15 pages, 11 embedded fonts, all-page visual QA, exact public promotion | PUBLICATION-OWNERS-1B, ARTICLE-PROSE-1E | Targeted validation, deterministic PDF, all-page visual QA, and promoted `docs/emdash3_2.{md,pdf}` |
 | PUBLICATION-CHECKPOINT-1G | complete at `f547dd4f0b38aad7b2062b91faab777ed4584a9a` | LANDING-REVIEWER-1C, ARTICLE-ARTIFACT-1F | Exact staged review, focused green gates, synchronized ledgers, bounded local checkpoint |
 | PUBLICATION-INTEGRATE-1H | complete at integrated product head `0c973b329cf374df311884e4609f0ef731637eda` | PUBLICATION-CHECKPOINT-1G | Fetch, verify ancestry, fast-forward local `main`, and preserve worktree |
-| PUBLICATION-PAGES-1I | pending | PUBLICATION-INTEGRATE-1H | Push `main`, configure Actions Pages, monitor deployment, and verify the live reviewer/book/article routes |
-| PUBLICATION-GRADUATE-1J | pending | PUBLICATION-PAGES-1I | Freeze the exact public capability, recovery state, and remaining research boundaries |
+| PUBLICATION-PAGES-1I | complete; deployed product head `3d32b543e93556f6801c14900f916398c9112e4c` in successful Actions run `30578494103` | PUBLICATION-INTEGRATE-1H | Push `main`, configure Actions Pages, monitor deployment, and verify the live reviewer/book/article routes |
+| PUBLICATION-GRADUATE-1J | complete; exact public capability and remaining research boundaries frozen below | PUBLICATION-PAGES-1I | Freeze the exact public capability, recovery state, and remaining research boundaries |
 
 Rows may be split when a measured issue crosses an ownership boundary. The
 living plan must record the split before implementation. A formatting problem
@@ -526,6 +526,52 @@ does not authorize mathematical changes.
   side. Fast-forwarded `/home/user1/emdash1` from
   `e7c4928f56b7015cd70f4ec49b3a36caafbe5753` to the integrated product head
   without merge commit, reset, rebase, worktree removal, or branch deletion.
+- **2026-07-30 - `PUBLICATION-PAGES-1I` and
+  `PUBLICATION-GRADUATE-1J` complete.** Pushed `main` by fast-forward from
+  `5ffa59cd422ad6793dbadc91e472e88d5638baf6` to deployed product head
+  `3d32b543e93556f6801c14900f916398c9112e4c`, configured GitHub Pages with
+  `build_type: workflow`, and monitored exact Actions run
+  [`30578494103`](https://github.com/hotdocx/emdash/actions/runs/30578494103).
+  Both build and deploy jobs completed successfully. The run emitted
+  non-blocking platform annotations about legacy Node runtimes inside upstream
+  actions and a post-job Git cleanup command; every declared workflow step and
+  the overall run nevertheless concluded successfully, so these warnings do
+  not veto the deployed artifact. A real browser loaded
+  `https://hotdocx.github.io/emdash/` with HTTP 200, found the expected title,
+  headline, and same-page `#reviewer`, and observed no console, page, or
+  failed-request error. The live reviewer exposed all ten presets and
+  elaborated the displayed mixed telescope
+  `λ^fd (a : A; b : B, c : C; d : D). fibrePair b c` to explicit Core with
+  Sigma and structural owners. The live paper and book routes were distinct,
+  returned HTTP 200, and contained exactly 687,034 and 1,850,797 bytes.
+
+## Graduated Public Boundary
+
+The public product at <https://hotdocx.github.io/emdash/> now provides:
+
+1. an editorial landing page that presents Functorial Type Theory as an
+   executable research programme without a release or completion claim;
+2. one client-side reviewer with ten checked presets spanning `^f`, `^n`,
+   `^fd`, and `^nd`, editable categorical text, explicit Core, diagnostics,
+   evidence, and a minimal outer dependent-LF script;
+3. the 15-page overview article as a distinct checked PDF and Markdown
+   distribution artifact;
+4. the 199-page book as a distinct checked PDF and Markdown distribution
+   artifact; and
+5. routes to the active Lambdapi source and repository.
+
+The browser does not contain the whole Lambdapi development and is not a
+production Lambdapi backend. The text adapter remains bounded by the
+demonstrated mathematical API. Arbitrary displayed depth and variance,
+whole-library transfer graduation, complete categorical/groupoidal closure,
+and global metatheory remain future research. General scale qualification is
+still explicitly outside this completed publication goal.
+
+Recovery remains straightforward: the deployed product is the immutable
+commit above; the bounded article checkpoint is
+`f547dd4f0b38aad7b2062b91faab777ed4584a9a`; obsolete tracked artifacts remain
+recoverable from Git history; and neither the goal branch nor its worktree has
+been removed.
 
 ## Targeted Validation
 
