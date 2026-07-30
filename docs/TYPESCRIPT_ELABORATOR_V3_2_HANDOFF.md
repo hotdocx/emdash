@@ -656,6 +656,8 @@ scale limits. It selects the existing nested ordinary exchange/currying
 witness as the primary running example and the existing mixed displayed
 context as the necessary secondary witness. `BOOK-NARRATIVE-0B` is next: it
 must freeze the exact prose/evidence/product/artifact proposal before edits.
+Exact local audit checkpoint:
+`9f3d744010d1bba210d1dcd1762df0afc35cf270`.
 The plan then updates the book as theorem-led mathematical prose rather than
 a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.

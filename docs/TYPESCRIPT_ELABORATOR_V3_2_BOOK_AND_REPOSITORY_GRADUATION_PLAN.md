@@ -238,7 +238,7 @@ by preparing the static artifact and README.
 
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
-| BOOK-DELTA-0A | **complete; capability audit recorded; checkpoint pending exact hash** | syntax-parity graduation and `8217aa3...` audit anchor | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md) classifies the mathematical, formal-presentation, evidence, workflow, developer-only, and future-boundary deltas without prose mutation |
+| BOOK-DELTA-0A | **complete at `9f3d744010d1bba210d1dcd1762df0afc35cf270`** | syntax-parity graduation and `8217aa3...` audit anchor | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md) classifies the mathematical, formal-presentation, evidence, workflow, developer-only, and future-boundary deltas without prose mutation |
 | BOOK-NARRATIVE-0B | **dependency-ready; selected next** | complete delta matrix and book authorities | Exact theorem-led running example, section-level edit map, status/evidence map, notation boundary, and bounded implementation proposal |
 | H-DTTLF-BOOK-REPOSITORY-01 | pending exact proposal | BOOK-NARRATIVE-0B | Separate review of exact authored sources, evidence/manifest effects, artifact ownership, README scope, and validation |
 | BOOK-PROSE-1A | gated | exact separate review | Edit only reviewed authored book sources and structured evidence/architecture authorities; preserve theorem-led prose and formal-status discipline |
@@ -376,7 +376,8 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   example, recommends no evidence-checker expansion, and makes
   `BOOK-NARRATIVE-0B` dependency-ready without mutating book prose or product
   behavior. Proportional validation now explicitly reserves the expensive
-  aggregate render/release gate for the actual artifact boundary.
+  aggregate render/release gate for the actual artifact boundary. Exact local
+  audit checkpoint: `9f3d744010d1bba210d1dcd1762df0afc35cf270`.
 - **2026-07-30 — `BOOK-DELTA-0A` is dependency-ready.** Exact D010 syntax
   graduation is approved with human supersession after final-green 1D1. The
   current goal now enters the capability-oriented delta audit; no prose,
