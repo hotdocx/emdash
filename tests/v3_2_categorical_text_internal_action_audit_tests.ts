@@ -8,6 +8,7 @@ import {
     it
 } from 'node:test';
 import {
+    CORE_CATEGORICAL_TEXT_REVISION,
     CORE_CATEGORICAL_TEXT_INTERNAL_ACTION_AUDIT,
     CoreCategoricalProgram,
     CoreCategoricalTextBinding,
@@ -173,20 +174,28 @@ describe('SYNTAX-PARITY-1C2B internal-action audit', () => {
             );
         });
 
-    it('measures all four proposed names as absent today', () => {
-        for (const source of [
-            'fullAction FF x y',
-            'cell FF p u',
-            'naturality eta p u',
-            'internalHomAction FF GG'
-        ]) {
-            assert.throws(
-                () => elaborate(source),
-                error =>
-                    error instanceof CoreCategoricalTextError &&
-                    error.code === 'UNKNOWN_IDENTIFIER'
-            );
-        }
+    it('anchors the pre-implementation audit after promotion', () => {
+        assert.equal(
+            CORE_CATEGORICAL_TEXT_INTERNAL_ACTION_AUDIT
+                .prerequisite.textRevision,
+            'SYNTAX-PARITY-1C2A-CATEGORICAL-TEXT-1'
+        );
+        assert.equal(
+            CORE_CATEGORICAL_TEXT_REVISION,
+            'SYNTAX-PARITY-1C2B-CATEGORICAL-TEXT-1'
+        );
+        assert.deepEqual(
+            CORE_CATEGORICAL_TEXT_INTERNAL_ACTION_AUDIT
+                .proposal.exactPositiveSources,
+            [
+                'fullAction FF x y',
+                'fullAction FF x y p',
+                'cell FF p u',
+                'naturality eta p u',
+                'internalHomAction FF GG',
+                'internalHomAction FF GG eta'
+            ]
+        );
     });
 
     it('is deeply frozen, validates, and fails closed on drift', () => {

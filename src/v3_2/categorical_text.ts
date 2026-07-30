@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1C2A-CATEGORICAL-TEXT-1' as const;
+    'SYNTAX-PARITY-1C2B-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -774,6 +774,15 @@ class CoreCategoricalTextResolver {
                 return this.inspectTerm(binding, expression.range);
             }
             case 'application': {
+                const displayedInternalAction =
+                    this.resolveDisplayedInternalActionOperation(
+                        expression,
+                        environment,
+                        lambdaDepth
+                    );
+                if (displayedInternalAction !== undefined) {
+                    return displayedInternalAction;
+                }
                 const displayedStructural =
                     this.resolveDisplayedStructuralOperation(
                         expression,
@@ -937,6 +946,105 @@ class CoreCategoricalTextResolver {
                 return exhaustive;
             }
         }
+    }
+
+    private resolveDisplayedInternalActionOperation(
+        expression: LocatedApplication,
+        environment: InternalEnvironment,
+        lambdaDepth: number
+    ): CoreCategoricalTerm | undefined {
+        const source = (detail: string): CoreCategoricalSourceSite =>
+            sourceSiteFor(
+                this.sourceFile,
+                expression.range,
+                detail
+            );
+        const resolveTerm = (
+            argument: LocatedExpression
+        ): CoreCategoricalTerm => this.resolveTerm(
+            argument,
+            environment,
+            undefined,
+            lambdaDepth
+        );
+
+        const fullAction = this.fixedApplicationSpine(
+            expression,
+            'fullAction',
+            3
+        );
+        if (fullAction !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed full action was rejected',
+                () => this.program.displayedFunctorFullAction(
+                    resolveTerm(fullAction[0]),
+                    resolveTerm(fullAction[1]),
+                    resolveTerm(fullAction[2]),
+                    source('parsed displayed full action')
+                )
+            );
+        }
+
+        const internalCell = this.fixedApplicationSpine(
+            expression,
+            'cell',
+            3
+        );
+        if (internalCell !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed internal cell was rejected',
+                () => this.program.displayedFunctorInternalCell(
+                    resolveTerm(internalCell[0]),
+                    resolveTerm(internalCell[1]),
+                    resolveTerm(internalCell[2]),
+                    source('parsed displayed internal cell')
+                )
+            );
+        }
+
+        const naturality = this.fixedApplicationSpine(
+            expression,
+            'naturality',
+            3
+        );
+        if (naturality !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed naturality cell was rejected',
+                () => this.program.displayedTransforNaturality(
+                    resolveTerm(naturality[0]),
+                    resolveTerm(naturality[1]),
+                    resolveTerm(naturality[2]),
+                    source('parsed displayed naturality cell')
+                )
+            );
+        }
+
+        const internalHomAction = this.fixedApplicationSpine(
+            expression,
+            'internalHomAction',
+            2
+        );
+        if (internalHomAction !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed internal Hom action was rejected',
+                () =>
+                    this.program.displayedTransforInternalHomAction(
+                        resolveTerm(internalHomAction[0]),
+                        resolveTerm(internalHomAction[1]),
+                        source('parsed displayed internal Hom action')
+                    )
+            );
+        }
+
+        return undefined;
     }
 
     private resolveDisplayedStructuralOperation(

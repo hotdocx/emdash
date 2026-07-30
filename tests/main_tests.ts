@@ -70,6 +70,7 @@ import './v3_2_categorical_text_constructor_audit_tests';
 import './v3_2_categorical_text_displayed_constructor_audit_tests';
 import './v3_2_categorical_text_internal_action_audit_tests';
 import './v3_2_categorical_text_displayed_constructor_tests';
+import './v3_2_categorical_text_internal_action_tests';
 import './v3_2_categorical_text_constructor_tests';
 import './v3_2_categorical_dependent_program_tests';
 import './v3_2_categorical_dependent_eta_tests';
