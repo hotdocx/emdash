@@ -245,7 +245,7 @@ by preparing the static artifact and README.
 | --- | --- | --- | --- |
 | BOOK-DELTA-0A | **complete at `9f3d744010d1bba210d1dcd1762df0afc35cf270`** | syntax-parity graduation and `8217aa3...` audit anchor | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md) classifies the mathematical, formal-presentation, evidence, workflow, developer-only, and future-boundary deltas without prose mutation |
 | BOOK-NARRATIVE-0B | **complete; proposal checkpoint `3f5cfab9082c2f863304395658c9d54824c81f44`** | complete delta matrix and book authorities | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md) freezes two running examples, ten authored/structured book sources, three evidence claims, one reviewer preset, one PDF-promotion owner, README scope, non-claims, and proportional validation |
-| H-DTTLF-BOOK-REPOSITORY-01 / D-DTTLF-BOOK-REPOSITORY-001 | **approved exactly as proposed; separate review checkpoint pending exact hash; human supersession retained** | immutable proposal at `3f5cfab9082c2f863304395658c9d54824c81f44` | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md) approves only the exact authored sources, evidence/manifest effects, one derived preset, artifact ownership, README scope, validation, and Git boundary |
+| H-DTTLF-BOOK-REPOSITORY-01 / D-DTTLF-BOOK-REPOSITORY-001 | **approved exactly as proposed at review checkpoint `9a14695b401c696f9f55dc785689f2e4e49d7a5b`; human supersession retained** | immutable proposal at `3f5cfab9082c2f863304395658c9d54824c81f44` | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md) approves only the exact authored sources, evidence/manifest effects, one derived preset, artifact ownership, README scope, validation, and Git boundary |
 | BOOK-REVIEWER-BRIDGE-1A | **dependency-ready; selected next** | exact D001 approval | Add only the nested-exchange preset, direct-equality test, ten-preset handoff, and root `reviewer:dev` alias; no parser/checker/kernel change |
 | BOOK-PROSE-1A | gated on green reviewer bridge | exact D001 approval | Edit only reviewed authored book sources and structured evidence/architecture authorities; preserve theorem-led prose and formal-status discipline |
 | BOOK-ARTIFACT-1B | gated | BOOK-PROSE-1A and exact separate review | Run full book checks/render/release, visually inspect affected and repaginated pages, and deterministically promote the validated PDF to `docs/emdash-book.pdf` |
@@ -382,6 +382,8 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   discipline, notation, artifact ownership, public presentation,
   proportional validation, and Git authority. Under the standing unattended
   delegation with human supersession, it approves only that exact scope.
+  Exact local review checkpoint:
+  `9a14695b401c696f9f55dc785689f2e4e49d7a5b`.
   `BOOK-REVIEWER-BRIDGE-1A` is the next row.
 - **2026-07-30 — `BOOK-NARRATIVE-0B` proposal frozen.** The exact
   [book/repository proposal](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_PROPOSAL.md)

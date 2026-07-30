@@ -664,7 +664,8 @@ The separate
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md)
 approves H-DTTLF-BOOK-REPOSITORY-01 /
 D-DTTLF-BOOK-REPOSITORY-001 exactly as proposed under the standing
-unattended delegation with human supersession. The next row is the bounded
+unattended delegation with human supersession. Exact local review checkpoint:
+`9a14695b401c696f9f55dc785689f2e4e49d7a5b`. The next row is the bounded
 `BOOK-REVIEWER-BRIDGE-1A`: expose the already working nested exchange witness
 as one reviewer preset and root development command before editing the
 authored edition. No new parser/checker/kernel behavior, generated artifact,
