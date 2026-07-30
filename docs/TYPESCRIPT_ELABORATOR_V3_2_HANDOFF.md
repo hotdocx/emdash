@@ -497,7 +497,7 @@ executable zero-behavior-delta audit now selects
 independent dependency level, reserves semicolons for 1B3, and freezes a
 non-self-authorizing D003 proposal over only the existing direct methods.
 Exact local audit/proposal checkpoint:
-`f53fd68f91a4e7f9e401b851eaf03665d5509b87`.
+`f53fd6885dd2fac0345bad5db257c7a66f86af15`.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
