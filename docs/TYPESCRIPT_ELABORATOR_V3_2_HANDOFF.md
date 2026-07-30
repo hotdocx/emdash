@@ -504,9 +504,9 @@ annotated and annotation-free comma siblings resolve through the existing
 `displayedContextLambda` and exact binary `fibrePair` operations, with no new
 categorical semantic path. Eight browser presets, the 64/64 affected corpus,
 root/browser typecheck and lint, production build, and real Chromium sibling
-execution are green. The local implementation checkpoint is pending this
-synchronized tranche. Semicolon-dependent 1B3 remains closed until its own
-zero-behavior audit and separate review.
+execution are green. Exact local implementation checkpoint:
+`ba34771074363f4c5b33814269b8822d4d2362bb`. Semicolon-dependent 1B3 remains
+closed until its own zero-behavior audit and separate review.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

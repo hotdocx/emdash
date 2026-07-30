@@ -316,9 +316,10 @@ Current selected product evidence:
   `be7000f88b08c90d24bad8a1e113fe3241d8a8ca` /
   `e433b6a` /
   `9f663555a1edbedcb99e97f1271154ff36913f05`;
-- independent-sibling audit/review:
+- independent-sibling audit/review/implementation:
   `f53fd6885dd2fac0345bad5db257c7a66f86af15` /
-  `084719023d27a8c2015f787125a577fc6532a769`;
+  `084719023d27a8c2015f787125a577fc6532a769` /
+  `ba34771074363f4c5b33814269b8822d4d2362bb`;
 - focused integrated reviewer test: eight checks, eight passes, zero
   failures, including direct-TypeScript equality for all eight presets;
 - focused independent-sibling implementation corpus: six checks, six passes,

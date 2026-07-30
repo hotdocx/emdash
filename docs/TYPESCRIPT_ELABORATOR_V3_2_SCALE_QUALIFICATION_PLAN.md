@@ -3422,9 +3422,9 @@ deeply frozen D003 proposal is checkpointed at
 review approves only that exact scope with human supersession. The bounded
 1B2 implementation is now final-green with an eighth reviewer preset and a
 64/64 affected gate, using only the existing contextual compiler and pairing
-owners; its local checkpoint is pending the synchronized product tranche.
-None of this changes or resumes a scale row. After exact parity graduation,
-follow
+owners; exact local checkpoint:
+`ba34771074363f4c5b33814269b8822d4d2362bb`. None of this changes or resumes
+a scale row. After exact parity graduation, follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows
 are outside the current persistent goal and require a future explicit goal.
