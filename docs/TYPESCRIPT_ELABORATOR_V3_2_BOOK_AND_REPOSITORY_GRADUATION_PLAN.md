@@ -27,7 +27,8 @@ exactly as proposed by the separate immutable
 under the standing unattended delegation with human supersession.
 `BOOK-REVIEWER-BRIDGE-1A` is complete at exact local checkpoint
 `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`.
-`BOOK-PROSE-1A` is final source-green with its local checkpoint pending.
+`BOOK-PROSE-1A` is complete at exact local checkpoint
+`43870651aebaa48bc4af4bd838229cab979a924d`.
 `BOOK-ARTIFACT-1B` is the next row after that checkpoint. No generated
 artifact, remote release/publication, or bulk scale change is yet included.
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
@@ -251,8 +252,8 @@ by preparing the static artifact and README.
 | H-DTTLF-BOOK-REPOSITORY-01 / D-DTTLF-BOOK-REPOSITORY-001 | **approved exactly as proposed at review checkpoint `9a14695b401c696f9f55dc785689f2e4e49d7a5b`; human supersession retained** | immutable proposal at `3f5cfab9082c2f863304395658c9d54824c81f44` | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D001_REVIEW.md) approves only the exact authored sources, evidence/manifest effects, one derived preset, artifact ownership, README scope, validation, and Git boundary |
 | BOOK-REVIEWER-BRIDGE-1A | **complete at `93d20cfa12b6308a0e2ef9abe81f98dd8cbeceb0`** | exact D001 approval | The tenth `nested-exchange` preset exactly equals its direct TypeScript construction, exposes `exchange-functor-abstraction`, and has a root `reviewer:dev` alias; no parser/checker/kernel change |
 | H-DTTLF-BOOK-SOURCE-CONTRACT-01 / D-DTTLF-BOOK-REPOSITORY-002 | **approved exactly as proposed at review checkpoint `1dee8fe414b63973e5f848936ae6d3c9d2319b35`; human supersession retained** | measured stale validator literal and proposal `21b5ebdbb9d82ba8d9139319aaa2ae1f8f96f881` | Replace only the retired formal-layer literal in `check_book.mjs`; retain every other source/render contract |
-| BOOK-PROSE-1A | **final source-green; checkpoint pending** | exact D001/D002 approvals and green reviewer bridge | The ten authored/structured sources now present fibrewise contexts, base change/evaluation, fibred cuts, binder notation, the bounded TypeScript architecture, three new checked evidence claims, and exact retained boundaries as theorem-led prose |
-| BOOK-ARTIFACT-1B | **next after BOOK-PROSE-1A checkpoint** | final-green authored edition and exact D001 approval | Run the single final book release, one necessary repeat PDF generation, visual QA, and deterministic promotion to `docs/emdash-book.pdf` |
+| BOOK-PROSE-1A | **complete at `43870651aebaa48bc4af4bd838229cab979a924d`** | exact D001/D002 approvals and green reviewer bridge | The ten authored/structured sources now present fibrewise contexts, base change/evaluation, fibred cuts, binder notation, the bounded TypeScript architecture, three new checked evidence claims, and exact retained boundaries as theorem-led prose |
+| BOOK-ARTIFACT-1B | **dependency-ready; selected next** | final-green authored edition and exact D001 approval | Run the single final book release, one necessary repeat PDF generation, visual QA, and deterministic promotion to `docs/emdash-book.pdf` |
 | REPO-PRESENT-1C | gated | validated book artifact and exact separate review | Consolidate root README/public entry points around the book and integrated reviewer, with internal details routed to handoff/plans |
 | PRODUCT-BOOK-GRADUATE-1 | gated | BOOK-PROSE-1A through REPO-PRESENT-1C | Freeze exact reader-facing capabilities, commands, artifact checksum, limitations, and the future-scale handoff |
 | FUTURE-SCALE-GOAL | deferred/out of scope for this persistent goal | later explicit user goal | Resume pending SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other preserved scale rows without implying they were completed here |
@@ -393,7 +394,8 @@ history, delete branches/worktrees, or perform unrelated cleanup.
   `1dee8fe414b63973e5f848936ae6d3c9d2319b35` authorizes its one-line
   replacement; the failed and previously unreached stages then pass. No PDF,
   renderer build, kernel gate, TypeScript aggregate, or publication ran.
-  Local implementation checkpoint pending.
+  Exact local implementation checkpoint:
+  `43870651aebaa48bc4af4bd838229cab979a924d`.
 - **2026-07-30 — `BOOK-REVIEWER-BRIDGE-1A` completed.** The integrated
   reviewer now exposes the already graduated
   `λ^f x : A. λ^f y : B. E y x` witness as its tenth preset. Parsed text is

@@ -673,7 +673,8 @@ TypeScript construction, reports `exchange-functor-abstraction`, and is
 reachable through the root `reviewer:dev` command. Its focused 12/12 affected
 tests, root typecheck/lint, and browser fixture typecheck/build pass. No
 aggregate, kernel, parser/checker, Core-owner, or Lambdapi behavior changed.
-`BOOK-PROSE-1A` is now final source-green with its local checkpoint pending.
+`BOOK-PROSE-1A` is complete at exact local checkpoint
+`43870651aebaa48bc4af4bd838229cab979a924d`.
 The exact ten authored/structured sources form the `0.3.0-dev` edition and
 add the reviewed fibrewise-context, base-change/evaluation, fibred-cut,
 binder-notation, TypeScript-architecture, and evidence narrative without
