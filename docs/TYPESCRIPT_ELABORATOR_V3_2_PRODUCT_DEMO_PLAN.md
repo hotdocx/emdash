@@ -17,8 +17,10 @@ supersession; PRODUCT-DEMO-1B is implemented and final-green at exact local
 checkpoint `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc`;
 PRODUCT-DEMO-ORACLE-0A, PRODUCT-BROWSER-0A, and PRODUCT-SYNTAX-0A are
 complete; the dedicated browser plan freezes BROWSER-DIRECTED-1A as the next
-product implementation proposal, while the dedicated user-syntax plan retains
-its parser-independent resolver architecture as a later gated continuation
+product implementation and records its exact separate
+D-DTTLF-PRODUCT-BROWSER-001 review with human supersession, while the
+dedicated user-syntax plan retains its parser-independent resolver
+architecture as a later gated continuation
 
 ## Human Direction And Purpose
 
@@ -336,7 +338,7 @@ Exact local implementation checkpoint:
 | PRODUCT-DEMO-1B | complete and final-green at `f1cb532a88ccca84786aa1cd5ee7cb006b1ad5fc` | approved PRODUCT-DEMO-1A | Root-only three-panel report module, command, reviewer guide, tests, and synchronized navigation with zero semantic/browser/parser delta |
 | PRODUCT-DEMO-ORACLE-0A | complete; no new command selected | PRODUCT-DEMO-1B | Reuse the documented `check:conformance`, directed conformance, displayed-evaluation conformance, and bounded kernel commands. A new umbrella command would either duplicate them or misstate displayed-chain coverage; production remains Lambdapi-free |
 | PRODUCT-BROWSER-0A | complete; routed to dedicated browser plan | PRODUCT-DEMO-1B | The directed dependent closure is Node-free and Vite/Chromium-green; the full report reaches `node:crypto` through acquisition/audit modules. Frozen additive BROWSER-DIRECTED-1A and deferred categorical runtime-spec separation are recorded in [`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_DEMO_PLAN.md) |
-| PRODUCT-BROWSER-1 | next gated proposal | D-DTTLF-PRODUCT-BROWSER-001 | Implement only the additive directed browser entry and two-view fixture selected by the dedicated browser plan |
+| PRODUCT-BROWSER-1 | approved exact directed slice; next | D-DTTLF-PRODUCT-BROWSER-001 | Implement only the additive directed browser entry and two-view fixture selected by the dedicated browser plan |
 | PRODUCT-SYNTAX-0A | complete; routed to dedicated syntax plan | PRODUCT-DEMO-1B | The existing scoped LF/categorical programs remain the semantic boundary. A small located name-bearing tree, immutable typed environment, expected-classifier seam, recursive resolution, and exact spans are specified in [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md); Parsimmon versus a tiny parser remains gated |
 | PRODUCT-SYNTAX-1 | gated/deferred | approved syntax proposal | Implement only the selected user-facing syntax adapter; likely deserves a dedicated subplan |
 | PRODUCT-GRADUATE-1 | pending | required product rows | External-review handoff, exact runnable capability envelope, remaining product risks, and route back to scale qualification |

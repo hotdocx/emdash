@@ -10,7 +10,8 @@ and
 Supersedes: no mathematical profile, checker, Core owner/rule set, release
 profile, or user-syntax decision
 Status: active product subplan; measured BROWSER-0A audit complete;
-BROWSER-DIRECTED-1A exact proposal frozen and awaiting separate review
+BROWSER-DIRECTED-1A is approved exactly as proposed under
+D-DTTLF-PRODUCT-BROWSER-001 with human supersession and is next
 
 ## Purpose
 
@@ -209,6 +210,11 @@ opt-in and root-authority-aligned rather than part of
 Gate:
 `H-DTTLF-PRODUCT-BROWSER-01 / D-DTTLF-PRODUCT-BROWSER-001`
 
+Separate review:
+[`TYPESCRIPT_ELABORATOR_V3_2_BROWSER_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_BROWSER_D001_REVIEW.md),
+approved as proposed under the user's standing unattended delegation with
+human supersession after proposal checkpoint `2d0583e`.
+
 ### Proposed implementation
 
 1. Add `src/v3_2/browser_directed.ts` as an additive browser-safe entry. It
@@ -292,7 +298,7 @@ displayed profile.
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | BROWSER-0A | complete | PRODUCT-DEMO-1B | Measured static closure, actual Vite success/failure, real-browser directed witness, and packaging diagnosis |
-| BROWSER-DIRECTED-1A | proposal frozen; awaiting D-DTTLF-PRODUCT-BROWSER-001 | BROWSER-0A | Additive directed browser entry, two-view fixture, focused safety tests, production build, and real-browser evidence |
+| BROWSER-DIRECTED-1A | approved exactly as proposed under D-DTTLF-PRODUCT-BROWSER-001 with human supersession; next | BROWSER-0A | Additive directed browser entry, two-view fixture, focused safety tests, production build, and real-browser evidence |
 | BROWSER-CATEGORICAL-0A | deferred; not selected by D-001 | BROWSER-DIRECTED-1A or independent priority | Separate immutable runtime specs from Node acquisition/audit evidence and qualify the ordinary bracket bundle |
 | BROWSER-CATEGORICAL-1A | gated | BROWSER-CATEGORICAL-0A plus separate review | Additive ordinary categorical browser entry and UI |
 | BROWSER-DISPLAYED-1A | gated | browser-safe displayed closure plus separate review | Displayed-chain browser witness without widening the claimed usability envelope |
@@ -346,3 +352,9 @@ browser, parser, semantic, publication, or Git effects.
   layering issue, selected a cheap additive directed browser slice, and
   deferred categorical promotion to a dedicated runtime-spec separation
   audit.
+- **2026-07-29 — D-DTTLF-PRODUCT-BROWSER-001 recorded with human
+  supersession.** After no immediate objection to proposal checkpoint
+  `2d0583e`, the user's standing unattended delegation approved only the
+  additive directed-dependent entry, two-view fixture, focused Node-free
+  tests, production build, and browser smoke run. Categorical promotion,
+  parsing, dependencies, semantics, and broader Git effects remain closed.
