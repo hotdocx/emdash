@@ -3405,9 +3405,11 @@ recorded at `55161be`. The reviewed SYNTAX-PARITY-1A implementation routes
 direct TypeScript methods and exposes the same adapter in six browser
 presets. It adds no scale owner, transfer mechanism, Core/checker semantics,
 or Lambdapi change. Its focused 35/35 and aggregate 1,149/1,149 TypeScript
-gates are green. Nested/dependent contexts and displayed structural
-syntax, including the textual `indexOf` weakening seam, remain the separately
-gated SYNTAX-PARITY-1B product row. After exact parity graduation, follow
+gates are green; exact local implementation checkpoint:
+`2e7cc3c44802a5218858ca6747e7591d3bfc4859`. Nested/dependent contexts and
+displayed structural syntax, including the textual `indexOf` weakening seam,
+remain the separately gated SYNTAX-PARITY-1B product row. After exact parity
+graduation, follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows
 are outside the current persistent goal and require a future explicit goal.

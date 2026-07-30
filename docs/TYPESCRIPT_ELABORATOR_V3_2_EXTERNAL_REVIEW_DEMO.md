@@ -306,7 +306,9 @@ Current selected product evidence:
   `7513cbe9e0d1439b5b1250982f40cede48e9a811`;
 - syntax-parity audit/review:
   `d73195b833d5afcb569898df110f392344d2deac` /
-  `55161be`; and
+  `55161be`;
+- syntax-parity implementation:
+  `2e7cc3c44802a5218858ca6747e7591d3bfc4859`;
 - focused integrated reviewer test: eight checks, eight passes, zero
   failures, including direct-TypeScript equality for all six presets;
 - focused syntax-parity corpus: eight checks, eight passes, zero failures;

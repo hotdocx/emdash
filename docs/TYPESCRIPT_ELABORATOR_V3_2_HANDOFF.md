@@ -463,7 +463,8 @@ routes, including recursive typed `composeCells`, through existing direct
 program methods. Focused text/direct equality, negative, browser-reviewer,
 typecheck, lint, and production-build gates are green; the complete
 TypeScript aggregate passes 1,149 tests (1,098 active passes, 51 intentional
-skips, zero failures). Parsing remains
+skips, zero failures). Exact local implementation checkpoint:
+`2e7cc3c44802a5218858ca6747e7591d3bfc4859`. Parsing remains
 distinct from typed elaboration and internal categorical factorization:
 ambiguity fails closed, and arbitrary pointwise data is never promoted to
 coherent categorical data.

@@ -13,7 +13,8 @@ Status: `SYNTAX-PARITY-0A` inventory implemented and focused-green;
 `H-DTTLF-PRODUCT-SYNTAX-PARITY-01 /
 D-DTTLF-PRODUCT-SYNTAX-PARITY-001` approved as proposed by a separate
 immutable unattended review with human supersession; `SYNTAX-PARITY-1A` is
-implemented and final-green, with exact local checkpoint staging in progress
+final-green and checkpointed at
+`2e7cc3c44802a5218858ca6747e7591d3bfc4859`
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -430,7 +431,7 @@ strings parse. For every promoted row it must demonstrate:
 | --- | --- | --- | --- |
 | SYNTAX-PARITY-0A | **complete; focused-green** | REVIEWER-INTEGRATE-1A and current direct TypeScript surface | Executable/deeply frozen 68-method/14-capability inventory, classification, direct semantic witnesses, exact negative boundary, and bounded proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-01 / D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | **approved as proposed; immutable unattended review with human supersession** | SYNTAX-PARITY-0A and checkpoint `d73195b` | Review permits only the frozen `SYNTAX-PARITY-1A` three-mode/application/cell-composition scope |
-| SYNTAX-PARITY-1A | **final-green; exact local checkpoint staging in progress** | approved D001 review | `^n`, `^fd`, `^nd`, immutable displayed-family/expected contracts, existing direct-builder routes, exact `composeCells`, six browser presets, negative boundaries, and 1,149-test aggregate |
+| SYNTAX-PARITY-1A | **final-green at `2e7cc3c44802a5218858ca6747e7591d3bfc4859`** | approved D001 review | `^n`, `^fd`, `^nd`, immutable displayed-family/expected contracts, existing direct-builder routes, exact `composeCells`, six browser presets, negative boundaries, and 1,149-test aggregate |
 | SYNTAX-PARITY-1B | gated | `SYNTAX-PARITY-1A` plus separate exact review | Nested/dependent contexts and displayed/fibred structural forms |
 | SYNTAX-PARITY-1C | gated | `SYNTAX-PARITY-1B` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -509,13 +510,16 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
-- **2026-07-30 — `SYNTAX-PARITY-1A` implemented.** Added the three reviewed
-  intrinsic-mode routes, displayed-family/expected contracts, exact
-  `composeCells` routing, direct/text equivalence and fail-closed evidence,
-  and three corresponding browser presets. Preserved the private located
-  tree, one application classifier, and all Core/kernel semantics. Measured
-  that textual `indexOf` weakening belongs to the already scheduled
-  structural/context row `1B`, rather than silently broadening `1A`.
+- **2026-07-30 — `SYNTAX-PARITY-1A` final-green and checkpointed.** Added
+  the three reviewed intrinsic-mode routes, displayed-family/expected
+  contracts, exact `composeCells` routing, direct/text equivalence and
+  fail-closed evidence, and three corresponding browser presets. Preserved
+  the private located tree, one application classifier, and all Core/kernel
+  semantics. Measured that textual `indexOf` weakening belongs to the
+  already scheduled structural/context row `1B`, rather than silently
+  broadening `1A`. Focused 35/35, browser production/Chromium, and aggregate
+  1,149/1,149 gates are green. Exact local implementation checkpoint:
+  `2e7cc3c44802a5218858ca6747e7591d3bfc4859`.
 - **2026-07-30 — D001 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed proposal, recorded
   an immutable, human-supersedable review approving only the three existing
