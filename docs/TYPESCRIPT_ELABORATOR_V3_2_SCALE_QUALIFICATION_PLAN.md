@@ -3340,9 +3340,10 @@ complete and final-green. Keep categorical browser separation, static
 publication, and parser/resolver implementation gated by their own rows. The
 next product boundary is the frozen
 H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001
-SYNTAX-RESOLVE-0B contract. That proposal authorizes only disposable parser
-comparison; parser selection and the integrated parser/resolver/example
-remain a separate review, and no standalone second AST may land.
+SYNTAX-RESOLVE-0B contract, now separately approved with human supersession.
+The active SYNTAX-PARSER-0C row authorizes only disposable parser comparison;
+parser selection and the integrated parser/resolver/example remain a separate
+review, and no standalone second AST may land.
 When those living plans route back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending

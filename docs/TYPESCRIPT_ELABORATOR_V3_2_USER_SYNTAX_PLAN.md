@@ -12,10 +12,11 @@ Supersedes: no typed TypeScript construction API, existing contextual
 compiler, checker, Core, parser/acquisition decision, or usability envelope
 Status: active design subplan; SYNTAX-0A architecture audit complete;
 the selected browser-directed product slice is complete and
-SYNTAX-RESOLVE-0B is the next proposal boundary; the contract below freezes
-design and qualification requirements, but no located tree or resolver may
-land as unused runtime infrastructure before the selected parser joins it in
-one separately reviewed user-visible vertical slice
+SYNTAX-RESOLVE-0B is approved exactly as proposed under
+D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; SYNTAX-PARSER-0C is the
+active comparison row; no located tree or resolver may land as unused runtime
+infrastructure before the selected parser joins it in one separately reviewed
+user-visible vertical slice
 
 ## Purpose And Meaning Of Usability
 
@@ -575,8 +576,8 @@ Node-independent, but a browser UI is a separate product boundary.
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | SYNTAX-0A | complete | PRODUCT-DEMO-1B and current contextual programs | Historical parser audit, current semantic-seam inventory, resolver architecture, qualification matrix, and alternatives |
-| SYNTAX-RESOLVE-0B | proposed as H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001 | SYNTAX-0A and selected product priority | Deeply frozen parser-independent types/API/diagnostic/qualification contract; no standalone runtime AST |
-| SYNTAX-PARSER-0C | gated | separate review of 0B | Disposable Parsimmon versus tiny-parser measurement over identical syntax/span tests; no tracked losing spike |
+| SYNTAX-RESOLVE-0B | approved exactly as proposed under D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; proposal checkpoint `5e33a58` | SYNTAX-0A and selected product priority | Deeply frozen parser-independent types/API/diagnostic/qualification contract; no standalone runtime AST |
+| SYNTAX-PARSER-0C | active | D-DTTLF-PRODUCT-SYNTAX-001 | Disposable Parsimmon versus tiny-parser measurement over identical syntax/span tests; no tracked losing spike |
 | SYNTAX-1A | gated | separate parser-selection/implementation review | Selected parser, located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example land as one user-visible slice |
 | SYNTAX-BROWSER-1B | deferred | reviewed parser and browser profile | Editable browser input without a second checker or server |
 | SYNTAX-GRADUATE-1 | pending | selected syntax rows | Exact grammar, binder/action matrix, diagnostics, performance observation, and deferrals |
@@ -660,6 +661,12 @@ broader grammar, semantic feature, dependency, browser, or Git effect.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-PRODUCT-SYNTAX-001 recorded.** After no immediate
+  objection to the exact checkpointed proposal, applied the user's standing
+  unattended delegation with human supersession. The separate immutable
+  review authorizes only disposable parser comparison and a later frozen
+  implementation proposal; it selects no parser and adds no runtime code or
+  dependency.
 - **2026-07-29 — SYNTAX-RESOLVE-0B frozen as
   H-DTTLF-PRODUCT-SYNTAX-01.** Converted the audit into an exact ordinary
   categorical first-slice contract: identifiers, parentheses, neutral

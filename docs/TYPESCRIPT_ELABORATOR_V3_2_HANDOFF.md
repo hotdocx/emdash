@@ -410,8 +410,9 @@ parser is a later measured choice. No parser dependency or syntax
 implementation is yet selected. With the directed browser slice complete,
 the dedicated syntax plan now freezes the exact
 H-DTTLF-PRODUCT-SYNTAX-01 / D-DTTLF-PRODUCT-SYNTAX-001
-SYNTAX-RESOLVE-0B contract. It requires a disposable Parsimmon-versus-small-
-parser comparison followed by a separate implementation review; the selected
+SYNTAX-RESOLVE-0B contract, now separately approved with human supersession.
+SYNTAX-PARSER-0C is the active disposable Parsimmon-versus-small-parser
+comparison, followed by a separate implementation review; the selected
 parser, located nodes, recursive resolver, tests, and executable example must
 land together as one editable-input slice. No unused second AST/resolver may
 be committed on its own.
