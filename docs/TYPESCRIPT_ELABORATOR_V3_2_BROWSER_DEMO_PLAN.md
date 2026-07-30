@@ -12,8 +12,9 @@ profile, or user-syntax decision
 Status: active product subplan; measured BROWSER-0A audit complete;
 BROWSER-DIRECTED-1A is approved exactly as proposed under
 D-DTTLF-PRODUCT-BROWSER-001 with human supersession, implemented, and
-final-green; categorical promotion and static publication remain separately
-gated
+final-green at exact local checkpoint
+`7f696cea4b6a369e5db41c0d5e57e778b61fa10c`; categorical promotion and
+static publication remain separately gated
 
 ## Purpose
 
@@ -286,6 +287,9 @@ The row is complete only when:
 
 The approved additive slice is implemented.
 
+Exact local implementation checkpoint:
+`7f696cea4b6a369e5db41c0d5e57e778b61fa10c`.
+
 ### Product entry and boundary
 
 [`src/v3_2/browser_directed.ts`](../src/v3_2/browser_directed.ts):
@@ -409,7 +413,7 @@ displayed profile.
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | BROWSER-0A | complete | PRODUCT-DEMO-1B | Measured static closure, actual Vite success/failure, real-browser directed witness, and packaging diagnosis |
-| BROWSER-DIRECTED-1A | complete and final-green; local implementation checkpoint to be recorded immediately after this synchronized tranche | BROWSER-0A and D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, two-view fixture, focused safety tests, portable static production build, and real-browser evidence |
+| BROWSER-DIRECTED-1A | complete and final-green at `7f696cea4b6a369e5db41c0d5e57e778b61fa10c` | BROWSER-0A and D-DTTLF-PRODUCT-BROWSER-001 | Additive directed browser entry, two-view fixture, focused safety tests, portable static production build, and real-browser evidence |
 | BROWSER-CATEGORICAL-0A | deferred; not selected by D-001 | BROWSER-DIRECTED-1A or independent priority | Separate immutable runtime specs from Node acquisition/audit evidence and qualify the ordinary bracket bundle |
 | BROWSER-CATEGORICAL-1A | gated | BROWSER-CATEGORICAL-0A plus separate review | Additive ordinary categorical browser entry and UI |
 | BROWSER-DISPLAYED-1A | gated | browser-safe displayed closure plus separate review | Displayed-chain browser witness without widening the claimed usability envelope |
@@ -477,4 +481,5 @@ browser, parser, semantic, publication, or Git effects.
   the obsolete Sandpack-only public page. Five focused browser checks, six
   MIGRATE-2 checks, strict fixture build, real Chromium with a clean console,
   and the 1,114-test aggregate pass. No categorical browser, parser,
-  dependency, backend, semantics, or publication was added.
+  dependency, backend, semantics, or publication was added. Exact green local
+  checkpoint: `7f696cea4b6a369e5db41c0d5e57e778b61fa10c`.

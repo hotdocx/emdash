@@ -389,7 +389,8 @@ fixture preserves its editable minimal-Core view and adds the fixed dependent
 report. The actual combined React build transforms 75 modules and emits
 421.35 kB / 114.31 kB gzip JavaScript. Both views execute in Chromium with a
 clean console, the 1,114-test aggregate passes, and the entry's recursive
-local closure contains no Node builtin.
+local closure contains no Node builtin. Exact implementation checkpoint:
+`7f696cea4b6a369e5db41c0d5e57e778b61fa10c`.
 
 Sandpack is no longer a requirement following explicit human clarification.
 Vite emits relative assets for a fully client-side project-subpath target such
