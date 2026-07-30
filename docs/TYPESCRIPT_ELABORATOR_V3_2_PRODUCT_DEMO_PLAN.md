@@ -32,7 +32,8 @@ is final-green at exact local checkpoint
 PRODUCT-GRADUATE-1 scope is implemented in the working draft, but the user's
 later explicit product correction supersedes its route back to scale:
 [`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md)
-now freezes H-DTTLF-PRODUCT-REVIEWER-01 as the next product boundary
+now records H-DTTLF-PRODUCT-REVIEWER-01 separately approved exactly as
+proposed under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession
 
 ## Human Direction And Purpose
 
@@ -374,7 +375,7 @@ Exact local implementation checkpoint:
 | PRODUCT-SYNTAX-1 | complete and final-green at `7513cbe9e0d1439b5b1250982f40cede48e9a811`; contract approved under D-DTTLF-PRODUCT-SYNTAX-001; integrated slice approved under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; intrinsic-mode/optional-annotation correction recorded directly under D-DTTLF-PRODUCT-SYNTAX-003 | SYNTAX-RESOLVE-0B, parser review, and notation correction | Tiny dependency-free parser, private located nodes, recursive ordinary resolver, tests, command, and example landed together; other modes and final notation remain deferred |
 | PRODUCT-GRADUATE-1 | exact documentation scope approved under D-DTTLF-PRODUCT-GRADUATE-001 and implemented in the current draft; its route-back claim is superseded by direct human product correction | completed selected browser and syntax rows | Historical capability matrix and non-claims; not integrated product graduation |
 | REVIEWER-INTEGRATE-0A | complete measured audit in the dedicated integrated-reviewer plan | existing CLI, browser, text, and book ingredients | Real Vite/Chromium proof that one browser can execute text plus all three report candidates after correcting the acquisition/hash dependency |
-| REVIEWER-INTEGRATE-1A | gated on D-DTTLF-PRODUCT-REVIEWER-001 | frozen H-DTTLF-PRODUCT-REVIEWER-01 | One browser reviewer workbench joining the existing report, editable categorical text, generated book, and minimal Core evidence |
+| REVIEWER-INTEGRATE-1A | dependency-ready under D-DTTLF-PRODUCT-REVIEWER-001 | approved H-DTTLF-PRODUCT-REVIEWER-01 | One browser reviewer workbench joining the existing report, editable categorical text, generated book, and minimal Core evidence |
 
 ## PRODUCT-DEMO-ORACLE-0A Completion
 

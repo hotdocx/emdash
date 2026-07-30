@@ -8,8 +8,8 @@ Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md),
 and
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
-Status: active correction and frozen proposal; implementation requires the
-separate exact decision below
+Status: active correction and approved exact proposal; implementation is
+dependency-ready under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession
 
 ## Human Correction And Product Intent
 
@@ -257,7 +257,11 @@ mathematical story may justify a specific promotion.
 Decision:
 `D-DTTLF-PRODUCT-REVIEWER-001`
 
-Status: proposed, non-self-authorizing
+Separate review:
+[`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_D001_REVIEW.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_D001_REVIEW.md)
+
+Status: approved exactly as proposed under the user's standing unattended
+delegation with human supersession after proposal checkpoint `f94d770`
 
 ### Exact implementation
 
@@ -388,8 +392,8 @@ This proposal authorizes no:
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | REVIEWER-INTEGRATE-0A | complete measured audit | existing product/browser/text rows | Combined Vite and Chromium feasibility, exact Node boundary, bundle/runtime orientation, and selected architecture |
-| H-DTTLF-PRODUCT-REVIEWER-01 | frozen, non-self-authorizing proposal | REVIEWER-INTEGRATE-0A | Exact runtime-contract split, browser entry, UI, book link, tests, and non-claims |
-| REVIEWER-INTEGRATE-1A | gated on D-DTTLF-PRODUCT-REVIEWER-001 | exact review | Implement and validate the integrated reviewer workbench |
+| H-DTTLF-PRODUCT-REVIEWER-01 | approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession; proposal checkpoint `f94d770` | REVIEWER-INTEGRATE-0A | Exact runtime-contract split, browser entry, UI, book link, tests, and non-claims |
+| REVIEWER-INTEGRATE-1A | dependency-ready under D-DTTLF-PRODUCT-REVIEWER-001 | exact review | Implement and validate the integrated reviewer workbench |
 | REVIEWER-GRADUATE-1 | gated | REVIEWER-INTEGRATE-1A | Freeze the runnable reviewer path, performance observation, exact evidence envelope, and next product/scale priority |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |
 
@@ -439,6 +443,12 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — D-DTTLF-PRODUCT-REVIEWER-001 recorded.** After no immediate
+  human objection to checkpoint `f94d770`, applied the user's standing
+  unattended delegation with human supersession through a separate immutable
+  review. Only the exact contract-layer, narrow reviewer entry, UI/book,
+  tests, and documentation scope is authorized; no semantics, dependencies,
+  Lambdapi source, deployment, bulk scale, or broader Git action is approved.
 - **2026-07-30 — Integrated product intent corrected and measured.** Recorded
   the user's clarification that CLI, browser, text syntax, and book are one
   reviewer journey. A direct categorical browser probe isolated the single

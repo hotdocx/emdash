@@ -40,7 +40,7 @@ three-panel report, editable categorical text, the generated emdash book, and
 the minimal implementation evidence. The completed combined Vite/Chromium
 audit and frozen implementation proposal are in
 [`TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md).
-Until that separately reviewed slice lands, this document is the
+Until that separately approved slice lands, this document is the
 self-contained terminal/capability handoff rather than a claim that the
 reviewer journey is already integrated.
 

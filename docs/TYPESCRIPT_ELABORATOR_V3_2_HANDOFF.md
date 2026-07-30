@@ -444,10 +444,12 @@ selected architecture separates immutable selection-contract creation from
 Node-only source/export SHA-256 verification, adds one narrow lazy browser
 review entry, joins editable ordinary text and the existing report with the
 generated book, and preserves the minimal playground. The frozen
-H-DTTLF-PRODUCT-REVIEWER-01 proposal is non-self-authorizing and awaits its
-separate exact D-DTTLF-PRODUCT-REVIEWER-001 decision. No new scale semantic is
-needed by the present witness; a specifically required scale ingredient may
-move earlier only through its own measured bounded review.
+H-DTTLF-PRODUCT-REVIEWER-01 proposal is now separately approved exactly as
+proposed under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession after
+proposal checkpoint `f94d770`; REVIEWER-INTEGRATE-1A is dependency-ready. No
+new scale semantic is needed by the present witness; a specifically required
+scale ingredient may move earlier only through its own measured bounded
+review.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
