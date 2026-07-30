@@ -3456,7 +3456,12 @@ The bounded 1C1 implementation is final-green at
 `be437f3a7d64a6a554578036f76621322d5626fc` with all six ordinary heads,
 recursive constructor/application evidence, a 71/71 affected/audit gate, and
 green browser packaging. It adds no scale owner, profile, transfer input, or
-Lambdapi change. 1C2 remains a product audit, not resumed scale work.
+Lambdapi change. The 1C2A structural/comprehension syntax is likewise
+final-green at `c1bd21eec9456a3600e22b1ef0dc8084958fd123`. The following
+focused-green 1C2B zero-behavior audit selects four existing whole/higher
+internalized-action terms and awaits its exact separate D007 review. It adds
+no scale owner, profile, transfer input, or Lambdapi change. 1C2 remains
+product work, not resumed scale work.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate

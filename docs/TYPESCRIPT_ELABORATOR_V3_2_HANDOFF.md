@@ -575,8 +575,14 @@ Transfd composition and Sigma projection/application agree with direct
 TypeScript. The complete text family passes 82/82, the reviewer 8/8,
 typecheck/lint and browser packaging pass, and no semantic or Lambdapi input
 changed. Exact local implementation checkpoint:
-`c1bd21eec9456a3600e22b1ef0dc8084958fd123`. Auditing the four whole/higher
-1C2B action constructors is next; 1C2B behavior and 1C3 remain unauthorized.
+`c1bd21eec9456a3600e22b1ef0dc8084958fd123`. The subsequent focused-green
+zero-behavior 1C2B audit selects exactly `fullAction FF x y`,
+`cell FF p u`, `naturality eta p u`, and
+`internalHomAction FF GG` as routes to four existing typed first-class
+terms. It proves that `FF p u` remains an object while `cell FF p u` is an
+internalized Hom, and retains all subsequent action as generic `apply`.
+Its deeply frozen D007 proposal awaits separate exact review; 1C2B behavior
+and 1C3 remain unauthorized.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

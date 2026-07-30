@@ -46,8 +46,10 @@ mechanical constructor tranche checkpointed at
 `20093b71e3802c3d2b7cbf20670862a58a71b653`; a separate immutable unattended
 D006 review now approves exactly that 1C2A proposal with human supersession;
 the bounded 1C2A implementation is final-green at exact local checkpoint
-`c1bd21eec9456a3600e22b1ef0dc8084958fd123`; no 1C2B or 1C3 behavior is
-authorized.
+`c1bd21eec9456a3600e22b1ef0dc8084958fd123`; the zero-behavior 1C2B
+whole/higher-action audit is focused-green with a deeply frozen
+non-self-authorizing D007 proposal awaiting its exact separate review; no
+1C2B or 1C3 behavior is authorized.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1018,6 +1020,86 @@ branch, expected-action table, semantic profile, transfer input, or Lambdapi
 source changed. Exact local implementation checkpoint:
 `c1bd21eec9456a3600e22b1ef0dc8084958fd123`.
 
+## `SYNTAX-PARITY-1C2B` Whole/Higher Action Audit And Proposed Gate
+
+The executable
+[`categorical_text_internal_action_audit.ts`](../src/v3_2/categorical_text_internal_action_audit.ts)
+measures the four remaining 1C2 constructions against the active typed
+program and kernel ownership. All four direct constructions are already
+green, with classifiers:
+
+```text
+displayedFunctorFullAction          : functor
+displayedFunctorInternalCell        : hom
+displayedTransforNaturality         : hom
+displayedTransforInternalHomAction  : functor
+```
+
+They are not redundant aliases for existing whitespace application:
+
+- `FF p u` is an object-level transported application, whereas
+  `cell FF p u` is the `fdapp1_int_cell` internalized laxity arrow;
+- `eta p u` remains correctly rejected as component application, whereas
+  `naturality eta p u` constructs the existing transported internal cell;
+- the full off-diagonal action and the internal displayed-Hom action are
+  first-class functors, not point observations; and
+- after constructing either functor, application to `p`, `eta`, a checked
+  Hom boundary, or a later cell remains the existing recursive generic
+  `apply` route.
+
+The notation selection follows the mathematical role rather than exposing
+TypeScript method or kernel-owner names:
+
+```text
+fullAction FF x y
+fullAction FF x y p
+cell FF p u
+naturality eta p u
+internalHomAction FF GG
+internalHomAction FF GG eta
+```
+
+`cell FF p u` is the whitespace spelling of the canonical report notation
+`cell(FF,p,u)`. The other three names make the otherwise non-generic
+first-class construction explicit. `eta x` and `eta x u` retain their generic
+component and point readings, and `FF p u` retains its distinct object-level
+reading.
+
+### Proposed gate `H-DTTLF-PRODUCT-SYNTAX-PARITY-07`
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-007` proposes only
+`SYNTAX-PARITY-1C2B`:
+
+- recognize the four exact fixed-arity heads above in the existing private
+  located application tree;
+- recursively resolve every operand as a checked term;
+- call only the four existing typed `CoreCategoricalProgram` methods;
+- retain the program as sole classifier, endpoint, scope, profile, and
+  internal-coherence authority;
+- leave every subsequent application on the existing generic `apply` path
+  and expected-shape contract; and
+- prove direct/text explicit-Core and inferred-classifier equality plus exact
+  arity, classifier, base, fibre, endpoint, foreign-term, profile, and
+  retained-generic-route negatives.
+
+The proposal adds no parser node or grammar production, mathematical owner,
+program method, Core node, checker/evaluator/runtime/proof rule,
+expected-action table, external naturality evidence, parser dependency,
+Lambdapi declaration/rule/profile/input, browser preset, 1C3 result syntax,
+book prose, scale row, or publication. Its focused executable audit passes
+4/4; root typecheck and lint and the bounded active-kernel check pass.
+
+The exact separate gate is:
+
+> Approve `H-DTTLF-PRODUCT-SYNTAX-PARITY-07 /
+> D-DTTLF-PRODUCT-SYNTAX-PARITY-007` as proposed: implement only
+> `fullAction`, `cell`, `naturality`, and `internalHomAction` as exact
+> fixed-arity routes to the four existing typed whole/higher methods; retain
+> all subsequent application as generic `apply`, retain `eta x`, `eta x u`,
+> `eta p u`, and `FF p u` at their measured distinct boundaries, and leave
+> 1C3, all semantic/owner/Lambdapi/browser/book/scale changes, publication,
+> and wider Git authority outside this decision?
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1125,7 +1207,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C1 | **final-green at `be437f3a7d64a6a554578036f76621322d5626fc`** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality, recursive constructor/application spines, exact negatives, 71/71 affected/audit tests, and green browser packaging |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-06 / D-DTTLF-PRODUCT-SYNTAX-PARITY-006 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C2 audit/proposal at `20093b71e3802c3d2b7cbf20670862a58a71b653` | Authorizes only twelve frozen 1C2A displayed structural/comprehension term heads over existing typed methods |
 | SYNTAX-PARITY-1C2A | **final-green at `c1bd21eec9456a3600e22b1ef0dc8084958fd123`; audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Twelve mechanical displayed structural/comprehension heads, recursive term operands, checked family identifiers, exact direct equality/negatives, 82/82 text family, 8/8 reviewer, and green browser packaging |
-| SYNTAX-PARITY-1C2B | gated | final-green 1C2A plus a separate exact audit/review | Four whole/higher internalized action constructors; retain generic component/point application and audit exact notation/expected-shape relationships |
+| SYNTAX-PARITY-1C2B | **focused-green zero-behavior audit; deeply frozen D007 proposal awaiting separate exact review** | final-green 1C2A | Four exact mathematical heads for existing whole/higher internalized actions; generic component/point and subsequent application retained; no behavior authorized yet |
 | SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
@@ -1187,15 +1269,13 @@ SYNTAX-PARITY-1C0 residual-constructor audit, approved D005 review, and
 final-green 1C1 and 1C2A implementations. Do not reimplement those rows.
 Preserve commas as independent siblings at one dependency level and
 semicolons as successive dependency levels only for exact direct group sizes
-`[1,1]` and `[1,2,1]`. Recover and checkpoint the final-green 1C2A
-implementation if needed, retaining `eta x` and `eta x u` as generic
-whitespace application. Continue with a zero-behavior 1C2B notation,
-argument-kind, and redundant-route audit over only
-`displayedFunctorFullAction`, `displayedFunctorInternalCell`,
-`displayedTransforNaturality`, and
-`displayedTransforInternalHomAction`. Do not add 1C2B or 1C3 behavior before
-its applicable separate exact review. A missing direct semantic capability
-belongs in the relevant usability/kernel plan, not in parser heuristics.
+`[1,1]` and `[1,2,1]`. Recover the final-green 1C2A implementation and the
+focused-green, deeply frozen 1C2B audit/proposal. Retain `eta x` and `eta x u`
+as generic whitespace application, `eta p u` as rejected generic component
+application, and `FF p u` as the distinct object-level route. Do not add
+1C2B or 1C3 behavior before the applicable separate exact review. A missing
+direct semantic capability belongs in the relevant usability/kernel plan,
+not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -1211,6 +1291,14 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1C2B` audited and exact D007 proposal
+  frozen.** The four direct whole/higher constructions compile as
+  `functor, hom, hom, functor`. The audit distinguishes `cell FF p u` from
+  object-level `FF p u`, retains generic component/point application, and
+  selects only `fullAction`, `cell`, `naturality`, and
+  `internalHomAction`. Four focused tests, typecheck/lint, and the bounded
+  active-kernel check pass with zero behavior delta; implementation awaits a
+  separate exact review.
 - **2026-07-30 — `SYNTAX-PARITY-1C2A` implemented and final-green.** Added
   only the twelve reviewed displayed structural/comprehension heads through
   existing typed program methods and one checked family-identifier helper.
