@@ -8,8 +8,9 @@ Depends-On:
 [`TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_USER_SYNTAX_PLAN.md),
 and
 [`TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md)
-Status: active correction and approved exact proposal; implementation is
-dependency-ready under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession
+Status: approved implementation is present and focused/browser-green under
+D-DTTLF-PRODUCT-REVIEWER-001 with human supersession; final aggregate
+revalidation and local checkpoint are in progress
 
 ## Human Correction And Product Intent
 
@@ -387,14 +388,162 @@ This proposal authorizes no:
   rebase, amend, reset, history rewrite, branch/worktree deletion, or
   unrelated cleanup.
 
+## REVIEWER-INTEGRATE-1A Implementation Result
+
+The approved implementation is present in the goal worktree:
+
+- `lf_transfer_acquisition_contract.ts` now owns the browser-safe immutable
+  selection-contract types, validation, freezing, error identity, and
+  contract creator;
+- `lf_transfer_acquisition.ts` retains Node-only source/export acquisition,
+  canonical parsing, and SHA-256 verification while compatibly re-exporting
+  the contract API;
+- the six reviewed contract-data consumers import the browser-safe layer
+  directly;
+- `browser_reviewer.ts` exposes exactly three immutable ordinary text presets,
+  one typed text runner, the unchanged three-panel report runner/formatter,
+  and a deeply frozen capability boundary;
+- the Vite fixture presents editable categorical text by default, runs the
+  research report only after an explicit action, preserves the minimal-Core
+  playground, links the Vite-emitted book PDF, and states the exact boundary;
+  and
+- `check:browser-reviewer` is the product-facing fixture gate while
+  `check:browser-directed` remains the compatibility alias.
+
+The selected browser closure reaches the contract module but not the Node
+acquisition implementation. The error class is shared rather than duplicated,
+so Node acquisition and browser contract validation retain identity and
+behavior. The fixture's local TypeScript command disables only fixture-level
+style diagnostics that would otherwise be reimposed on the whole imported
+root research closure; root typecheck and lint remain mandatory.
+
+Measured production output:
+
+- 140 transformed modules;
+- generated book asset: 1,789.55 kB;
+- initial JavaScript: 428.80 kB / 116.73 kB gzip;
+- lazy reviewer chunk: 717.86 kB / 158.56 kB gzip; and
+- CSS: 5.67 kB / 2.13 kB gzip.
+
+The chunk-size warning is an observation, not an SLA failure. Real Chromium
+rendered the default page, accepted an edited ordinary term, rejected
+`λ^f x. K C` at the exact source span, kept the full report non-eager,
+ran all three report candidates after the explicit action, opened the
+fingerprinted book PDF, and ran the preserved minimal-Core example. The final
+browser console contained zero errors, warnings, or other messages.
+
+Focused acquisition, text, reviewer, browser, product, and release/migration
+contracts are green. The first aggregate baseline ran 1,135 tests and exposed
+only two stale fixture-README wording contracts; both have been corrected and
+their focused 11-test suite now passes. Bounded Lambdapi validation,
+conformance, browser production, and the active acquisition inventory are
+green. The final aggregate result and its exact mechanical correction are
+recorded below.
+
+No checker, evaluator, Core node, mathematical owner/rule, semantic profile,
+dependency, lockfile, Lambdapi source, deployment, or publication changed.
+
+## Final Validation Corrections
+
+The approved
+[`D-DTTLF-PRODUCT-REVIEWER-002`](./TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_D002_REVIEW.md)
+correction aligns the current canonical export digest, its one additional
+rule/clauses count, and all 48 reordered acquisition-command ordinals. Fresh
+live evidence now selects all 73 commands in all eight active core contracts
+exactly, and `check:scale-inventory` passes.
+
+The following final aggregate ran all 1,135 tests for 2,080,318 ms:
+
+```text
+pass 1077
+skip 51
+fail 7
+```
+
+Every failure is the literal stale expected-ordinal array in the first pinning
+test of one derivative representation suite. All remaining tests in those
+seven suites—including their declaration/runtime/proof compilation and
+execution—pass with the corrected contracts.
+
+### H-DTTLF-PRODUCT-REVIEWER-CORRECTION-02
+
+Proposed decision:
+`D-DTTLF-PRODUCT-REVIEWER-003`
+
+Status: frozen, bounded, non-self-authorizing correction addendum
+
+The correction may change only the literal expected ordinal arrays in:
+
+```text
+tests/v3_2_scale_stress_2_representation_tests.ts
+tests/v3_2_scale_stress_2b_representation_tests.ts
+tests/v3_2_scale_stress_2b2_representation_tests.ts
+tests/v3_2_scale_stress_2b3_representation_tests.ts
+tests/v3_2_scale_stress_3a1_representation_tests.ts
+tests/v3_2_scale_stress_3a2a_representation_tests.ts
+tests/v3_2_scale_stress_3a2b_representation_tests.ts
+```
+
+Each array must become exactly the already-measured active ordinal array
+reported by the failed assertion. No test assertion, test name, source
+contract, representation, policy, phase, compiler, or runtime behavior may
+otherwise change.
+
+Proportional post-correction validation is:
+
+1. the seven exact affected test files;
+2. root typecheck and lint;
+3. `check:scale-inventory`;
+4. `git diff --check`; and
+5. exact path-scoped staged review plus `git diff --cached --check`.
+
+The completed full aggregate already executed every other assertion after the
+current source/contract correction and isolated these seven data-only
+expectations. Repeating its 35-minute computation is therefore not required
+by this addendum. This is not a weakening of a test or a substitute for an
+unknown failure.
+
+This addendum authorizes no semantic, Lambdapi, product, parser, browser,
+dependency, lockfile, deployment, bulk-scale, or broader Git change.
+Implementation requires a separate exact review with human supersession.
+
+## Selected Successor — Syntax Parity Before Bulk Scale
+
+The user's direct clarification selects
+[`TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md)
+as the next product-facing plan after this checkpoint. Its first row inventories
+the mathematical construction surface already exposed by direct TypeScript
+and maps it to deterministic text routes, prioritizing `^n`, `^fd`, and
+`^nd`.
+
+This means:
+
+- grammar parsing remains deterministic;
+- syntactically valid input may still fail typed elaboration or internal
+  categorical factorization;
+- application selection is classifier/expected-type directed, never
+  heuristic;
+- existing callback APIs are scoped construction mechanisms rather than
+  arbitrary JavaScript syntax that text must reproduce; and
+- arbitrary pointwise data is never promoted to a coherent functor or
+  transformation.
+
+The first syntax-parity row is an inventory/audit and proposal only. It
+authorizes no syntax behavior before a separate exact review. Deferred bulk
+scale resumes only after the living product route graduates or a specifically
+measured reviewer dependency is separately promoted.
+
 ## Work Ledger
 
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
 | REVIEWER-INTEGRATE-0A | complete measured audit | existing product/browser/text rows | Combined Vite and Chromium feasibility, exact Node boundary, bundle/runtime orientation, and selected architecture |
 | H-DTTLF-PRODUCT-REVIEWER-01 | approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-001 with human supersession; proposal checkpoint `f94d770` | REVIEWER-INTEGRATE-0A | Exact runtime-contract split, browser entry, UI, book link, tests, and non-claims |
-| REVIEWER-INTEGRATE-1A | dependency-ready under D-DTTLF-PRODUCT-REVIEWER-001 | exact review | Implement and validate the integrated reviewer workbench |
-| REVIEWER-GRADUATE-1 | gated | REVIEWER-INTEGRATE-1A | Freeze the runnable reviewer path, performance observation, exact evidence envelope, and next product/scale priority |
+| REVIEWER-INTEGRATE-1A | implemented and focused/browser-green under D-DTTLF-PRODUCT-REVIEWER-001; final aggregate revalidation/checkpoint in progress | exact review | Browser-safe contract split and narrow lazy reviewer workbench joining report, text, book, and minimal Core |
+| H-DTTLF-PRODUCT-REVIEWER-CORRECTION-01 | complete and approved exactly as proposed under D-DTTLF-PRODUCT-REVIEWER-002 | final active acquisition validation | Refresh only current export/count/ordinal evidence; preserve historical digest evidence and all semantics |
+| H-DTTLF-PRODUCT-REVIEWER-CORRECTION-02 | exact non-self-authorizing addendum frozen after the 1,135-test aggregate | D-DTTLF-PRODUCT-REVIEWER-002 plus exact seven failures | Refresh seven literal derivative expected-ordinal arrays and rerun only proportional gates |
+| REVIEWER-GRADUATE-1 | implementation evidence frozen; final-green/checkpoint pending | REVIEWER-INTEGRATE-1A | Runnable reviewer path, observed bundle/runtime envelope, exact non-effects, and syntax-parity successor |
+| SYNTAX-PARITY-0A | selected successor; dependency-ready after reviewer checkpoint | REVIEWER-GRADUATE-1 and direct TypeScript surface | Executable API-to-text inventory and bounded proposal, prioritizing `^n`, `^fd`, and `^nd`; no behavior before separate review |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |
 
 ## Git And Persistent-Goal Boundary
@@ -412,7 +561,8 @@ amend, reset, history rewrite, branch/worktree removal, or unrelated cleanup.
 
 ```text
 Continue the dependency-ready work routed by
-docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md, with
+docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md and, after its
+green checkpoint, docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md, with
 docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md retained as the
 top-level architecture-qualification ledger and
 docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md as the recovery entry point.
@@ -423,11 +573,13 @@ staged and unstaged changes, branch ancestry, current authorities, and the
 decision/side-task ledgers. Follow root AGENTS.md and the nested emdash2 SOP
 for every Lambdapi action.
 
-The current product objective is one external-reviewer browser journey that
-joins the existing three-panel report, ordinary categorical text adapter,
-minimal browser evidence, and generated emdash book. Preserve one existing
-checker/evaluator, backend-neutral explicit Core, and direct typed TypeScript.
-Do not introduce another semantic frontend or copy a browser action table.
+Finish and preserve the external-reviewer browser journey joining the existing
+three-panel report, ordinary categorical text adapter, minimal browser
+evidence, and generated emdash book. Then inventory text parity with the
+mathematical direct-TypeScript construction surface, prioritizing existing
+`^n`, `^fd`, and `^nd` capabilities. Preserve one checker/evaluator,
+backend-neutral explicit Core, and direct typed TypeScript. Do not introduce
+another semantic frontend or copy a browser action table.
 
 Follow only separately reviewed exact implementation scopes. A compelling
 reviewer witness may promote one specifically identified scale dependency
@@ -443,6 +595,15 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — REVIEWER-INTEGRATE-1A implemented and successor selected.**
+  Added the browser-safe acquisition-contract boundary, narrow lazy reviewer
+  entry, consolidated Vite workbench, emitted book link, focused tests, and
+  product gate. Production and real-browser measurements satisfy the reviewed
+  path. The first aggregate found only two stale fixture-README contracts;
+  their focused correction is green and final revalidation is in progress.
+  The user's direct clarification selects a dedicated syntax-parity audit
+  against the mathematical direct-TypeScript surface before deferred bulk
+  scale.
 - **2026-07-30 — D-DTTLF-PRODUCT-REVIEWER-001 recorded.** After no immediate
   human objection to checkpoint `f94d770`, applied the user's standing
   unattended delegation with human supersession through a separate immutable
