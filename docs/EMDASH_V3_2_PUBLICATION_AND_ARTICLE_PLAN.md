@@ -3,8 +3,8 @@
 Date: 2026-07-30
 Plan-ID: EMDASH-V3.2-PUBLICATION-AND-ARTICLE
 Status: active living publication plan; repository cleanup, artifact ownership,
-landing/reviewer, and overview article complete; checkpoint, integration, and
-deployment in progress
+landing/reviewer, overview article, and bounded publication checkpoint
+complete; integration and deployment in progress
 
 Depends-On:
 
@@ -430,10 +430,10 @@ route fails for a measured repository constraint.
 | PUBLICATION-CLEAN-1A | complete and focused-green at `72747ec791f648ede3f743052a5705a1e7c3c38f` | PUBLICATION-PLAN-0B | Ignore `.playwright-cli/`; remove exact audited `spec/`, legacy docs, and v2 print sources; update registry and references |
 | PUBLICATION-OWNERS-1B | complete and focused-green at `fcf925af85cf078f4956a2208e220fd2dd078909`; real article artifact acceptance belongs to ARTICLE-ARTIFACT-1F | PUBLICATION-CLEAN-1A | Separate book and article promotion owners; add full-book Markdown distribution; remove book-to-article compatibility copying |
 | LANDING-REVIEWER-1C | complete and focused-green at `bb6ebee5cb63f950e71040a44be534d67530ed17` | PUBLICATION-PLAN-0B | Responsive landing page and same-page reviewer using the frozen brief |
-| ARTICLE-THESIS-1D | complete; the selected title, two-computation thesis, evidence boundary, and 14–18 page budget are realized | PUBLICATION-PLAN-0B | Freeze title, abstract promise, outline, evidence map, and page budget against active authorities |
-| ARTICLE-PROSE-1E | complete; 7,127-word descriptive source registered as `emdash-v3-2-overview` | ARTICLE-THESIS-1D | Rewrite the active v3.2 workbench as the descriptive overview source and register it |
-| ARTICLE-ARTIFACT-1F | complete and focused-green; 15 pages, 11 embedded fonts, all-page visual QA, exact public promotion | PUBLICATION-OWNERS-1B, ARTICLE-PROSE-1E | Targeted validation, deterministic PDF, all-page visual QA, and promoted `docs/emdash3_2.{md,pdf}` |
-| PUBLICATION-CHECKPOINT-1G | pending | LANDING-REVIEWER-1C, ARTICLE-ARTIFACT-1F | Exact staged review, focused green gates, synchronized ledgers, bounded local checkpoint |
+| ARTICLE-THESIS-1D | complete at `f547dd4f0b38aad7b2062b91faab777ed4584a9a`; the selected title, two-computation thesis, evidence boundary, and 14–18 page budget are realized | PUBLICATION-PLAN-0B | Freeze title, abstract promise, outline, evidence map, and page budget against active authorities |
+| ARTICLE-PROSE-1E | complete at `f547dd4f0b38aad7b2062b91faab777ed4584a9a`; 7,127-word descriptive source registered as `emdash-v3-2-overview` | ARTICLE-THESIS-1D | Rewrite the active v3.2 workbench as the descriptive overview source and register it |
+| ARTICLE-ARTIFACT-1F | complete and focused-green at `f547dd4f0b38aad7b2062b91faab777ed4584a9a`; 15 pages, 11 embedded fonts, all-page visual QA, exact public promotion | PUBLICATION-OWNERS-1B, ARTICLE-PROSE-1E | Targeted validation, deterministic PDF, all-page visual QA, and promoted `docs/emdash3_2.{md,pdf}` |
+| PUBLICATION-CHECKPOINT-1G | complete at `f547dd4f0b38aad7b2062b91faab777ed4584a9a` | LANDING-REVIEWER-1C, ARTICLE-ARTIFACT-1F | Exact staged review, focused green gates, synchronized ledgers, bounded local checkpoint |
 | PUBLICATION-INTEGRATE-1H | pending | PUBLICATION-CHECKPOINT-1G | Fetch, verify ancestry, fast-forward local `main`, and preserve worktree |
 | PUBLICATION-PAGES-1I | pending | PUBLICATION-INTEGRATE-1H | Push `main`, configure Actions Pages, monitor deployment, and verify the live reviewer/book/article routes |
 | PUBLICATION-GRADUATE-1J | pending | PUBLICATION-PAGES-1I | Freeze the exact public capability, recovery state, and remaining research boundaries |
@@ -492,8 +492,10 @@ does not authorize mathematical changes.
   graduation snapshot. At that checkpoint, paper and book deduplicated because
   the tracked `docs/emdash3_2.pdf` was still the old book alias; final
   distinct-link acceptance therefore belonged to `ARTICLE-ARTIFACT-1F`.
-- **2026-07-30 - `ARTICLE-THESIS-1D`, `ARTICLE-PROSE-1E`, and
-  `ARTICLE-ARTIFACT-1F` complete and focused-green.** Replaced the ambiguous
+- **2026-07-30 - `ARTICLE-THESIS-1D`, `ARTICLE-PROSE-1E`,
+  `ARTICLE-ARTIFACT-1F`, and `PUBLICATION-CHECKPOINT-1G` complete and
+  focused-green at
+  `f547dd4f0b38aad7b2062b91faab777ed4584a9a`.** Replaced the ambiguous
   8,293-word, 23-page workbench with the descriptively owned 7,127-word
   `emdash-v3-2-overview` article, while retaining `index_3_2` only as a route
   alias. The article is an independent academic narrative rather than an
