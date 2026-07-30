@@ -3344,8 +3344,9 @@ SYNTAX-RESOLVE-0B contract, now separately approved with human supersession.
 SYNTAX-PARSER-0C is complete and selects the dependency-free tiny parser from
 measured equivalent syntax/failure behavior and smaller/no-lock browser cost.
 The frozen H-DTTLF-PRODUCT-SYNTAX-02 /
-D-DTTLF-PRODUCT-SYNTAX-002 integrated parser/resolver/example remains a
-separate review, and no standalone second AST may land.
+D-DTTLF-PRODUCT-SYNTAX-002 integrated parser/resolver/example is now
+separately approved with human supersession and active. No standalone second
+AST may land.
 When those living plans route back here, continue with
 SCALE-STRESS-3C, SCALE-BATCH-1, and SCALE-GRADUATE-1. Do not silently
 substitute the pending

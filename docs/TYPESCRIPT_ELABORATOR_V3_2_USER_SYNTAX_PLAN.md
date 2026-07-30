@@ -15,8 +15,9 @@ the selected browser-directed product slice is complete and
 SYNTAX-RESOLVE-0B is approved exactly as proposed under
 D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; SYNTAX-PARSER-0C is the
 completed measurement; the dependency-free tiny parser is selected in the
-frozen H-DTTLF-PRODUCT-SYNTAX-02 implementation proposal, which remains gated
-behind D-DTTLF-PRODUCT-SYNTAX-002; no located tree or resolver may land as
+frozen H-DTTLF-PRODUCT-SYNTAX-02 implementation proposal, now approved
+exactly under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; SYNTAX-1A
+is the active implementation row and no located tree or resolver may land as
 unused runtime infrastructure
 
 ## Purpose And Meaning Of Usability
@@ -767,7 +768,7 @@ Node-independent, but a browser UI is a separate product boundary.
 | SYNTAX-0A | complete | PRODUCT-DEMO-1B and current contextual programs | Historical parser audit, current semantic-seam inventory, resolver architecture, qualification matrix, and alternatives |
 | SYNTAX-RESOLVE-0B | approved exactly as proposed under D-DTTLF-PRODUCT-SYNTAX-001 with human supersession; proposal checkpoint `5e33a58` | SYNTAX-0A and selected product priority | Deeply frozen parser-independent types/API/diagnostic/qualification contract; no standalone runtime AST |
 | SYNTAX-PARSER-0C | complete | D-DTTLF-PRODUCT-SYNTAX-001 | Parsimmon and tiny-parser parsed/rejected the same corpus; both browser-build; measurements above select the dependency-free tiny parser |
-| SYNTAX-1A | proposed as H-DTTLF-PRODUCT-SYNTAX-02 / D-DTTLF-PRODUCT-SYNTAX-002; implementation gated | separate parser-selection/implementation review | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example land as one user-visible slice |
+| SYNTAX-1A | approved exactly as proposed under D-DTTLF-PRODUCT-SYNTAX-002 with human supersession; implementation active; proposal checkpoint `6766eba` | separate parser-selection/implementation review | Tiny parser, private located-node implementation, immutable environment, recursive ordinary categorical resolver, tests, and executable example land as one user-visible slice |
 | SYNTAX-BROWSER-1B | deferred | reviewed parser and browser profile | Editable browser input without a second checker or server |
 | SYNTAX-GRADUATE-1 | pending | selected syntax rows | Exact grammar, binder/action matrix, diagnostics, performance observation, and deferrals |
 
@@ -850,6 +851,11 @@ broader grammar, semantic feature, dependency, browser, or Git effect.
 
 ## Change Log
 
+- **2026-07-29 — D-DTTLF-PRODUCT-SYNTAX-002 recorded.** After no immediate
+  objection to the exact checkpointed implementation proposal, applied the
+  user's standing unattended delegation with human supersession. The
+  separate immutable review authorizes only the integrated dependency-free
+  ordinary categorical text slice and its bounded green local checkpoints.
 - **2026-07-29 — SYNTAX-PARSER-0C completed and SYNTAX-1A proposed.**
   Disposable Parsimmon and direct recursive-descent parsers produced the same
   syntax and failure offsets over the frozen corpus and both Vite-built for a
