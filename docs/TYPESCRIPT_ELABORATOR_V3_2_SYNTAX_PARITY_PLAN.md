@@ -1254,6 +1254,13 @@ The exact gate is:
 > `pullback` spelling, the existing term/application resolver, all semantic
 > ownership, and every listed non-effect?
 
+The separate immutable
+[`D-DTTLF-PRODUCT-SYNTAX-PARITY-008` review](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_D008_REVIEW.md)
+approves only that exact frozen scope under the user's standing unattended
+delegation, with any later explicit human decision superseding it. Reviewed
+proposal checkpoint:
+`cfacee11affc6360a3b81021d0a51fd43071f50c`.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1363,7 +1370,8 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C2A | **final-green at `c1bd21eec9456a3600e22b1ef0dc8084958fd123`; audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Twelve mechanical displayed structural/comprehension heads, recursive term operands, checked family identifiers, exact direct equality/negatives, 82/82 text family, 8/8 reviewer, and green browser packaging |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-07 / D-DTTLF-PRODUCT-SYNTAX-PARITY-007 | **approved as proposed at `f1fd8fa6c8039267fa0ae03955df8738d8048999`; immutable unattended review with human supersession** | checkpointed 1C2B audit/proposal at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9` | Authorizes only four frozen whole/higher internalized-action heads over existing typed methods, with all later application generic |
 | SYNTAX-PARITY-1C2B | **final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; audit at `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`** | final-green 1C2A and approved D007 review | Four exact mathematical heads for existing whole/higher internalized actions; recursive operands, generic continuations, exact distinct-boundary negatives, 5/5 implementation and 4/4 audit tests |
-| SYNTAX-PARITY-1C3 | **focused-green zero-behavior audit; frozen D008 proposal awaiting separate review** | final-green 1C2 plus a separate exact audit/review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, and no new parser/checker/kernel semantics |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-08 / D-DTTLF-PRODUCT-SYNTAX-PARITY-008 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C3 proposal at `cfacee11affc6360a3b81021d0a51fd43071f50c` | Authorizes only twelve canonical result heads, two checked root-result kinds, and recursive typed category/family operands |
+| SYNTAX-PARITY-1C3 | **approved; implementation pending** | final-green 1C2 and approved D008 review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, and no new parser/checker/kernel semantics |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |

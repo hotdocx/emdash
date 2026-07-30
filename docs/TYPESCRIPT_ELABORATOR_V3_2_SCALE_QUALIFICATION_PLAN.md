@@ -3468,6 +3468,13 @@ is final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; the 1C3
 category/family-result audit is the next product row. Scale work remains
 deferred.
 
+The focused 1C3 audit is now checkpointed at
+`cfacee11affc6360a3b81021d0a51fd43071f50c`. It normalizes thirteen existing
+methods to twelve mathematical heads, adds no behavior, and freezes only two
+checked result kinds plus recursive category/family operands. A separate
+immutable D008 unattended review approves that exact product scope with
+human supersession. Its implementation, not any deferred scale row, is next.
+
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
 bounded review approves it. This is not bulk scale authority. The current

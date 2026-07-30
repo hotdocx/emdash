@@ -601,7 +601,10 @@ expectations plus recursive checked constructor operands over the existing
 located parser and typed categorical program. Representative proposed
 expressions are `id (fibre (productd B C) k)` and
 `sigma (productd (pullback B F) (pullback C F))`. No behavior is authorized
-until the separate exact D008 review.
+until the separate exact D008 review. That immutable review now approves
+only the checkpointed twelve-head/two-result-kind scope under the user's
+standing unattended delegation, with human supersession; implementation is
+the next dependency-ready product row.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
