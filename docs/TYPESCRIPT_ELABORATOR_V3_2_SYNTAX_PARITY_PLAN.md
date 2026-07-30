@@ -15,8 +15,9 @@ D-DTTLF-PRODUCT-SYNTAX-PARITY-001` approved as proposed by a separate
 immutable unattended review with human supersession; `SYNTAX-PARITY-1A` is
 final-green and checkpointed at
 `2e7cc3c44802a5218858ca6747e7591d3bfc4859`; `SYNTAX-PARITY-1B0`
-is an executable, focused-green, zero-behavior-delta audit with a bounded
-non-self-authorizing `SYNTAX-PARITY-1B1` proposal
+is an executable, focused-green, zero-behavior-delta audit checkpointed at
+`be7000f88b08c90d24bad8a1e113fe3241d8a8ca`, with a bounded
+non-self-authorizing `SYNTAX-PARITY-1B1` proposal awaiting D002 review
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -493,8 +494,8 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-0A | **complete; focused-green** | REVIEWER-INTEGRATE-1A and current direct TypeScript surface | Executable/deeply frozen 68-method/14-capability inventory, classification, direct semantic witnesses, exact negative boundary, and bounded proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-01 / D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | **approved as proposed; immutable unattended review with human supersession** | SYNTAX-PARITY-0A and checkpoint `d73195b` | Review permits only the frozen `SYNTAX-PARITY-1A` three-mode/application/cell-composition scope |
 | SYNTAX-PARITY-1A | **final-green at `2e7cc3c44802a5218858ca6747e7591d3bfc4859`** | approved D001 review | `^n`, `^fd`, `^nd`, immutable displayed-family/expected contracts, existing direct-builder routes, exact `composeCells`, six browser presets, negative boundaries, and 1,149-test aggregate |
-| SYNTAX-PARITY-1B0 | **implemented; focused-green, zero behavior delta** | final-green `SYNTAX-PARITY-1A` | Executable contextual-index measurement, exact 1B1/1B2/1B3 split, and bounded non-self-authorizing proposal |
-| H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | pending separate exact review | checkpointed `SYNTAX-PARITY-1B0` | May authorize only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
+| SYNTAX-PARITY-1B0 | **focused-green, zero behavior delta at `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`** | final-green `SYNTAX-PARITY-1A` | Executable contextual-index measurement, exact 1B1/1B2/1B3 split, and bounded non-self-authorizing proposal |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | **pending separate exact review** | checkpointed `SYNTAX-PARITY-1B0` | May authorize only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
 | SYNTAX-PARITY-1B1 | gated | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, and reviewer preset |
 | SYNTAX-PARITY-1B2 | gated | final-green 1B1 plus separate proposal/review | Independent displayed sibling binder presentation and `fibrePair` |
 | SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
@@ -581,7 +582,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   fails only at the unrecognized `indexOf` head. Froze the narrow
   non-self-authorizing 1B1 proposal and separated independent siblings and
   genuine dependent/mixed telescopes into 1B2/1B3. Five focused tests,
-  typecheck, and lint pass; no behavior changed.
+  typecheck, and lint pass; no behavior changed. Exact audit/proposal
+  checkpoint: `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`.
 - **2026-07-30 — `SYNTAX-PARITY-1A` final-green and checkpointed.** Added
   the three reviewed intrinsic-mode routes, displayed-family/expected
   contracts, exact `composeCells` routing, direct/text equivalence and

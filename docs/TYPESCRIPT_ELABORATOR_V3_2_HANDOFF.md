@@ -476,8 +476,10 @@ SYNTAX-PARITY-1B0 audit confirms that direct
 kernel owner. Its non-self-authorizing D002 proposal selects only the unary
 `indexOf`/weakening route and one reviewer preset. Independent sibling
 contexts/`fibrePair` and genuine dependent/mixed telescopes are separately
-gated as 1B2/1B3. A specifically required scale ingredient may still move
-earlier only through its own measured bounded review.
+gated as 1B2/1B3. Exact audit/proposal checkpoint:
+`be7000f88b08c90d24bad8a1e113fe3241d8a8ca`. A specifically required scale
+ingredient may still move earlier only through its own measured bounded
+review.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
