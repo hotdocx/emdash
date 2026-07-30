@@ -609,7 +609,7 @@ it and a separate bounded review authorizes it.
 | SYNTAX-PARITY-1B0 / D002 | focused-green audit at `be7000f`; exact proposal approved by immutable unattended review with human supersession | final-green 1A | Measured direct-green/text-unknown `indexOf` weakening seam and authorized only 1B1, separating 1B2/1B3 multi-binder contexts |
 | SYNTAX-PARITY-1B1 | final-green at `9f663555a1edbedcb99e97f1271154ff36913f05` | approved D002 review | Seventh weakening preset and exact `indexOf` text route through existing semantics; affected 39/39, production build, and Chromium gates green |
 | SYNTAX-PARITY-1B2 | final-green at `ba34771074363f4c5b33814269b8822d4d2362bb` | approved D003 review | Eighth independent-sibling preset, comma group, exact `fibrePair`, affected 64/64, production build, and Chromium |
-| SYNTAX-PARITY-1B3 | final-green in goal worktree; exact checkpoint pending | approved D004 review | Ninth mixed-telescope preset, exact semicolon/comma `[1,1]`/`[1,2,1]` routes, browser-safe checked chain-2A runtime, affected 75/75, production build, and Chromium |
+| SYNTAX-PARITY-1B3 | final-green at `3dcf25ec008bb3d30723e3251c222e88acc216a3` | approved D004 review | Ninth mixed-telescope preset, exact semicolon/comma `[1,1]`/`[1,2,1]` routes, browser-safe checked chain-2A runtime, affected 75/75, production build, and Chromium |
 | BOOK-DELTA-0A | selected post-syntax successor | SYNTAX-PARITY-GRADUATE-1 | Capability-oriented book delta audit followed by theorem-led prose/artifact/repository graduation under its dedicated plan |
 | SELECTIVE-DEMO-SCALE-* | conditional, none selected now | measured missing reviewer concept plus separate proposal | Promote only a named scale dependency required by a compelling witness |
 

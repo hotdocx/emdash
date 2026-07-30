@@ -32,8 +32,8 @@ focused-green zero-behavior-delta audit with a deeply frozen
 non-self-authorizing D004 proposal checkpointed at
 `4eada97f9ee8fe284b70dea6c0548dfdb9754189`; a separate immutable unattended
 D004 review now approves it exactly as proposed with human supersession; the
-bounded 1B3 implementation is final-green in the goal worktree and awaits
-only its exact local checkpoint.
+bounded 1B3 implementation is final-green at exact local checkpoint
+`3dcf25ec008bb3d30723e3251c222e88acc216a3`.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -819,7 +819,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B1 | **final-green at `9f663555a1edbedcb99e97f1271154ff36913f05`** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-03 / D-DTTLF-PRODUCT-SYNTAX-PARITY-003 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B2 proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15` | Authorizes only the frozen comma sibling group, ordered-family expected contract, exact `fibrePair`, and one reviewer preset |
 | SYNTAX-PARITY-1B2 | **final-green at `ba34771074363f4c5b33814269b8822d4d2362bb`; audit/proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15`** | approved D003 review | One comma sibling group, optional positional family annotations, ordered-family expected contract, existing `displayedContextLambda`/`fibrePair` routes, eighth reviewer preset, 64/64 proportional gate, production build, and real Chromium |
-| SYNTAX-PARITY-1B3 | **final-green in goal worktree; exact local checkpoint pending; audit/proposal at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`** | final-green 1B2 and approved D004 review | Exact semicolon/comma `[1,1]`/`[1,2,1]` presentations, grouped expected families, existing dependent-context route, complete negatives, browser-safe reviewed runtime split, ninth reviewer preset, production build, and real Chromium |
+| SYNTAX-PARITY-1B3 | **final-green at `3dcf25ec008bb3d30723e3251c222e88acc216a3`; audit/proposal at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`** | final-green 1B2 and approved D004 review | Exact semicolon/comma `[1,1]`/`[1,2,1]` presentations, grouped expected families, existing dependent-context route, complete negatives, browser-safe reviewed runtime split, ninth reviewer preset, production build, and real Chromium |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-04 / D-DTTLF-PRODUCT-SYNTAX-PARITY-004 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B3 audit/proposal | Authorizes only semicolon dependency levels for the two existing direct shapes and one mixed-telescope reviewer preset |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -909,7 +909,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   revalidation; both paths return the same compilation. Focused dependent,
   transfer, historical graduation, reviewer, type/lint, production-build,
   and real-Chromium gates are green. No mathematical or Lambdapi semantic
-  input changed. Exact local implementation checkpoint is pending.
+  input changed. Exact local implementation checkpoint:
+  `3dcf25ec008bb3d30723e3251c222e88acc216a3`.
 - **2026-07-30 — D004 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed dependent-context
   proposal, recorded an immutable, human-supersedable review authorizing only

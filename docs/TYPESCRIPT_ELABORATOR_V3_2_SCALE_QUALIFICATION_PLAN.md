@@ -3428,12 +3428,13 @@ a scale row. The subsequent 1B3 audit and separate immutable unattended D004
 review select only exact semicolon-separated `[1,1]` and `[1,2,1]`
 presentations of the existing genuine/mixed dependent-context method; the
 proposal checkpoint remains
-`4eada97f9ee8fe284b70dea6c0548dfdb9754189`. That implementation is now
-final-green in the goal worktree with a ninth browser preset. Its browser-safe
-subject-checked runtime entry and Node historical-review entry return the same
-generic chain-2A transfer compilation. It changes no scale owner, rule,
-profile, transfer semantic input, or capability. `SYNTAX-PARITY-1C` is the
-next product audit/proposal row. After exact parity graduation, follow
+`4eada97f9ee8fe284b70dea6c0548dfdb9754189`. That implementation is
+final-green at `3dcf25ec008bb3d30723e3251c222e88acc216a3` with a ninth browser
+preset. Its browser-safe subject-checked runtime entry and Node
+historical-review entry return the same generic chain-2A transfer compilation.
+It changes no scale owner, rule, profile, transfer semantic input, or
+capability. `SYNTAX-PARITY-1C` is the next product audit/proposal row. After
+exact parity graduation, follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows
 are outside the current persistent goal and require a future explicit goal.

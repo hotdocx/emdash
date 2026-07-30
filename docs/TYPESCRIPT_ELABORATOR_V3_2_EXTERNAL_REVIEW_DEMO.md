@@ -325,7 +325,7 @@ Current selected product evidence:
 - dependent-context audit/review/implementation:
   `4eada97f9ee8fe284b70dea6c0548dfdb9754189` /
   `e33d20f98e7db65f8d17c3542c37f341f5cf0748` /
-  exact implementation checkpoint pending;
+  `3dcf25ec008bb3d30723e3251c222e88acc216a3`;
 - focused integrated reviewer test: eight checks, eight passes, zero
   failures, including direct-TypeScript equality for all nine presets;
 - focused independent-sibling implementation corpus: six checks, six passes,

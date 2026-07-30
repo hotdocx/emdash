@@ -514,7 +514,8 @@ and one mixed-telescope reviewer preset. Its local audit/proposal checkpoint
 is `4eada97f9ee8fe284b70dea6c0548dfdb9754189`; a separate immutable unattended
 D004 review approves that exact scope with human supersession.
 
-The bounded 1B3 implementation is now final-green in the goal worktree.
+The bounded 1B3 implementation is final-green at exact local checkpoint
+`3dcf25ec008bb3d30723e3251c222e88acc216a3`.
 Annotated and annotation-free genuine/mixed telescopes call the existing
 `displayedDependentContextLambda` once and recursively resolve every slot,
 `fibrePair`, closed application, and ordinary application through the same
@@ -529,9 +530,8 @@ typecheck, lint, the 141-module production build, and real Chromium are
 green; Chromium accepts the mixed telescope with zero console errors or
 warnings. No owner, rule, profile, Core/checker/evaluator path, dependency
 planner, factorization case, transfer semantic input, or Lambdapi source
-changed. Exact implementation checkpoint is pending. Arbitrary-depth/general
-dependent syntax remains closed; 1C is the next zero-behavior constructor
-inventory/proposal row.
+changed. Arbitrary-depth/general dependent syntax remains closed; 1C is the
+next zero-behavior constructor inventory/proposal row.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
