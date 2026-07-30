@@ -496,6 +496,8 @@ executable zero-behavior-delta audit now selects
 `λ^fd (b : B, c : C). fibrePair (FF b) (GG c)`, assigns commas to one
 independent dependency level, reserves semicolons for 1B3, and freezes a
 non-self-authorizing D003 proposal over only the existing direct methods.
+Exact local audit/proposal checkpoint:
+`f53fd68f91a4e7f9e401b851eaf03665d5509b87`.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

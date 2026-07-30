@@ -23,7 +23,9 @@ final-green and checkpointed at
 `9f663555a1edbedcb99e97f1271154ff36913f05`;
 `SYNTAX-PARITY-1B2` is now an executable, focused-green,
 zero-behavior-delta audit with a deeply frozen non-self-authorizing
-independent-sibling proposal awaiting its separate exact review.
+independent-sibling proposal checkpointed at
+`f53fd68f91a4e7f9e401b851eaf03665d5509b87` and awaiting its separate exact
+review.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -649,7 +651,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B0 | **focused-green, zero behavior delta at `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`** | final-green `SYNTAX-PARITY-1A` | Executable contextual-index measurement, exact 1B1/1B2/1B3 split, and bounded non-self-authorizing proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | **approved as proposed; immutable unattended review with human supersession** | checkpointed `SYNTAX-PARITY-1B0` | Authorizes only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
 | SYNTAX-PARITY-1B1 | **final-green at `9f663555a1edbedcb99e97f1271154ff36913f05`** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
-| SYNTAX-PARITY-1B2 | **executable zero-behavior-delta audit and deeply frozen non-self-authorizing D003 proposal; focused-green; separate review pending** | final-green 1B1 | Selected comma sibling group, optional positional family annotations, one expected context contract, existing `displayedContextLambda`/`fibrePair` routes, exact direct evidence, alternatives, and negative boundary |
+| SYNTAX-PARITY-1B2 | **executable zero-behavior-delta audit and deeply frozen non-self-authorizing D003 proposal; focused-green at `f53fd68f91a4e7f9e401b851eaf03665d5509b87`; separate review pending** | final-green 1B1 | Selected comma sibling group, optional positional family annotations, one expected context contract, existing `displayedContextLambda`/`fibrePair` routes, exact direct evidence, alternatives, and negative boundary |
 | SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
@@ -736,7 +738,9 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   parenthesized binder group. Selected commas for independent siblings,
   reserved semicolons for 1B3 dependency levels, rejected nested-unary and
   host-method spellings, and froze a bounded non-self-authorizing D003
-  proposal. The audit changes no parser/resolver or semantic behavior.
+  proposal. The audit changes no parser/resolver or semantic behavior. Exact
+  local audit/proposal checkpoint:
+  `f53fd68f91a4e7f9e401b851eaf03665d5509b87`.
 - **2026-07-30 — `SYNTAX-PARITY-1B1` implemented and final-green.**
   Recognized only the exact unary `indexOf` spine through the existing typed
   method, retained one generic fixed-arity spine utility and one ordinary
