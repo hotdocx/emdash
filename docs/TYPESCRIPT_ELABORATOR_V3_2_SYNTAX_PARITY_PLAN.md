@@ -61,8 +61,9 @@ finds one remaining direct-green text gap—nested ordinary `^f`
 abstraction—and freezes the bounded `SYNTAX-PARITY-1D1` correction before
 graduation. A separate immutable D009 unattended review approves that exact
 scope with human supersession. The bounded 1D1 correction is now
-focused-green; its exact local checkpoint is pending the synchronized staged
-review. Final syntax graduation is next.
+focused-green at exact local checkpoint
+`59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`. Final syntax graduation is
+next.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -1458,7 +1459,8 @@ category-expression decomposition, inference heuristic, mathematical owner,
 program method, Core/checker/evaluator/runtime/proof rule, nested
 `^n`/`^fd`/`^nd` promise, arbitrary context/coherence synthesis, Lambdapi
 input, browser preset, book, or scale behavior. The exact local
-implementation checkpoint is pending the synchronized staged review.
+implementation checkpoint is
+`59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`.
 `SYNTAX-PARITY-GRADUATE-1` is now the next dependency-ready row.
 
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
@@ -1574,7 +1576,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C3 | **final-green at `126023e5ce8ab31f28730e1be508da11083084b4`; audit at `cfacee11affc6360a3b81021d0a51fd43071f50c`** | final-green 1C2 and approved D008 review | Twelve canonical category/displayed-family result heads for thirteen existing methods, two checked root result kinds, recursive typed operands, 4/4 implementation plus 4/4 audit tests, and no new parser/checker/kernel semantics |
 | SYNTAX-PARITY-GRADUATE-0A | **focused-green audit at `8d5671e5062910d9a1b52727db469fc582c9669c`; graduation blocked by one measured direct-green parser gap** | final-green 1C3 | Exact 68-method host/expression partition, 37-head text envelope, semantic versus presentation residuals, and bounded 1D1 correction proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-09 / D-DTTLF-PRODUCT-SYNTAX-PARITY-009 | **approved as proposed; immutable unattended review with human supersession** | checkpointed graduation audit/proposal | Authorizes only recursive ordinary-functor `bodyExpected` and the reviewed nested exchange/currying witness |
-| SYNTAX-PARITY-1D1 | **focused-green; exact implementation checkpoint pending staged review** | graduation audit and D009 review | Recursive expected-classifier route for the reviewed nested ordinary `^f` exchange/currying witness, three-level recursion, exact negative boundaries, 4/4 focused implementation plus 17/17 audit/base regressions, and green typecheck/lint |
+| SYNTAX-PARITY-1D1 | **final-green at `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`** | graduation audit and D009 review | Recursive expected-classifier route for the reviewed nested ordinary `^f` exchange/currying witness, three-level recursion, exact negative boundaries, 4/4 focused implementation plus 17/17 audit/base regressions, and green typecheck/lint |
 | SYNTAX-PARITY-GRADUATE-1 | **dependency-ready for exact graduation audit/review** | focused-green 1D1 plus exact graduation review | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
 | BOOK-DELTA-0A | selected successor after syntax graduation | SYNTAX-PARITY-GRADUATE-1 | Route to the book/repository plan’s capability-oriented delta audit; do not turn syntax implementation history into book prose |
@@ -1670,8 +1672,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   fail closed. The 4/4 implementation corpus, 17/17 audit/base regressions,
   and typecheck/lint pass with no Core, kernel, Lambdapi, browser, book, or
   scale delta. The long aggregate was not rerun because its boundary did not
-  change. Exact local implementation checkpoint pending synchronized staged
-  review.
+  change. Exact local implementation checkpoint:
+  `59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`.
 - **2026-07-30 — `SYNTAX-PARITY-1C2B` implemented and final-green.** Added
   only `fullAction`, `cell`, `naturality`, and `internalHomAction` through
   existing typed program methods. Operands recurse, all subsequent action is

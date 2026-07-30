@@ -3490,9 +3490,9 @@ two- and three-level ordinary nested abstractions route through the existing
 dispatcher/program owner only, their direct-TypeScript equivalents agree,
 the exact negative boundary remains closed, and typecheck/lint pass. No
 scale owner, profile, transfer input, Lambdapi source, or browser behavior
-changed. Its exact local checkpoint is pending synchronized staged review;
-final syntax graduation remains the product route, while every bulk scale
-row stays deferred.
+changed. Final syntax graduation remains the product route, while every bulk
+scale row stays deferred. Exact local implementation checkpoint:
+`59a5ebe9d11c51b62d64f9508b7cfde895b0c00c`.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
