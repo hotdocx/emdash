@@ -43,8 +43,9 @@ bounded 1C1 implementation is final-green at exact local checkpoint
 focused-green zero-behavior argument-kind and redundant-generic-route audit
 with a deeply frozen non-self-authorizing D006 proposal for its bounded 1C2A
 mechanical constructor tranche checkpointed at
-`20093b71e3802c3d2b7cbf20670862a58a71b653`; separate review remains required
-before any new displayed/fibred text behavior.
+`20093b71e3802c3d2b7cbf20670862a58a71b653`; a separate immutable unattended
+D006 review now approves exactly that 1C2A proposal with human supersession;
+no 1C2B or 1C3 behavior is authorized.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -957,6 +958,11 @@ The exact separate gate is:
 > owners/rules/profiles, Lambdapi changes, reviewer presets, book/scale work,
 > publication, and wider Git authority outside this decision?
 
+The separate immutable
+[`D-DTTLF-PRODUCT-SYNTAX-PARITY-006` review](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_D006_REVIEW.md)
+now approves only that exact frozen 1C2A scope under the user's standing
+unattended delegation, with any later explicit human decision superseding it.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1062,7 +1068,8 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1C0 | **focused-green zero-behavior audit at `487ed014c210ab8426b27c40241b2de0f2f1dc4e`** | final-green `SYNTAX-PARITY-1B3` | Executable residual constructor inventory, exact 1C1/1C2/1C3 split, six direct-green ordinary witnesses, and bounded non-self-authorizing D005 proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C0 audit/proposal | Authorizes only six ordinary structural term heads over existing typed methods |
 | SYNTAX-PARITY-1C1 | **final-green at `be437f3a7d64a6a554578036f76621322d5626fc`** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality, recursive constructor/application spines, exact negatives, 71/71 affected/audit tests, and green browser packaging |
-| SYNTAX-PARITY-1C2 | **focused-green zero-behavior audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`; bounded 1C2A D006 proposal awaiting separate review** | final-green 1C1 | Corrected generic component/point versus explicit higher-action inventory; freeze twelve mechanical displayed structural/comprehension heads while retaining four whole/higher action constructors for 1C2B |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-06 / D-DTTLF-PRODUCT-SYNTAX-PARITY-006 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C2 audit/proposal at `20093b71e3802c3d2b7cbf20670862a58a71b653` | Authorizes only twelve frozen 1C2A displayed structural/comprehension term heads over existing typed methods |
+| SYNTAX-PARITY-1C2 | **1C2A approved for implementation; zero-behavior audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Implement twelve mechanical displayed structural/comprehension heads while retaining generic component/point application and four whole/higher action constructors for separately gated 1C2B |
 | SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
@@ -1124,14 +1131,13 @@ SYNTAX-PARITY-1C0 residual-constructor audit, approved D005 review, and
 final-green 1C1 implementation. Do not reimplement those rows.
 Preserve commas as independent siblings at one dependency level and
 semicolons as successive dependency levels only for exact direct group sizes
-`[1,1]` and `[1,2,1]`. Recover the focused-green 1C2 audit and its bounded
-non-self-authorizing D006 proposal. It retains `eta x` and `eta x u` as
-generic whitespace application, selects only twelve mechanical 1C2A
-displayed structural/comprehension heads, and separately gates four
-whole/higher internalized action constructors as 1C2B. Do not add 1C2A,
-1C2B, or 1C3 behavior before its applicable separate exact review. A missing
-direct semantic capability belongs in the relevant usability/kernel plan,
-not in parser heuristics.
+`[1,1]` and `[1,2,1]`. Recover the focused-green 1C2 audit and separately
+approved D006 review. Implement only its twelve mechanical 1C2A displayed
+structural/comprehension heads. Retain `eta x` and `eta x u` as generic
+whitespace application and keep four whole/higher internalized action
+constructors separately gated as 1C2B. Do not add 1C2B or 1C3 behavior before
+its applicable separate exact review. A missing direct semantic capability
+belongs in the relevant usability/kernel plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -1147,6 +1153,13 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — D006 separately approved under unattended delegation.**
+  After no immediate human objection to the checkpointed 1C2A proposal,
+  recorded an immutable, human-supersedable review authorizing only the
+  twelve displayed structural/comprehension term heads. Generic
+  component/point application, all four 1C2B whole/higher action
+  constructors, 1C3 category/family results, browser, semantic, book, and
+  scale additions remain unchanged or withheld.
 - **2026-07-30 — `SYNTAX-PARITY-1C2` displayed constructors audited.**
   Executably confirmed that `eta x` and `eta x u` are already exact generic
   applications while `eta p u` is a distinct existing internalized
