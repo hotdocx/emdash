@@ -585,7 +585,14 @@ Its deeply frozen D007 proposal is checkpointed at
 `d8bb9d0408e0a0d8346dd2bcc75bfae2d1ef44b9`; a separate immutable D007
 unattended review approves that exact four-head scope at
 `f1fd8fa6c8039267fa0ae03955df8738d8048999` with human supersession. The
-bounded 1C2B implementation is dependency-ready; 1C3 remains unauthorized.
+bounded 1C2B implementation is now final-green at
+`afb1277a1517412e4cfcfc99d63a5259390b8ab9`: operands recurse through the
+existing resolver, first-class full/internal-Hom functors retain generic
+application, and object/cell plus component/naturality boundaries remain
+distinct. The focused 5/5 implementation and 4/4 audit corpora and
+typecheck/lint pass with no semantic, Lambdapi, browser, book, or scale
+delta. A zero-behavior 1C3 category/displayed-family result audit is next;
+1C3 behavior remains unauthorized before separate exact review.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

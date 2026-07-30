@@ -3464,7 +3464,9 @@ internalized-action terms, is checkpointed at
 D007 review approves only that scope at
 `f1fd8fa6c8039267fa0ae03955df8738d8048999`. It adds no scale owner,
 profile, transfer input, or Lambdapi change. The bounded 1C2B implementation
-is the dependency-ready product row; scale work remains deferred.
+is final-green at `afb1277a1517412e4cfcfc99d63a5259390b8ab9`; the 1C3
+category/family-result audit is the next product row. Scale work remains
+deferred.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
