@@ -506,7 +506,14 @@ categorical semantic path. Eight browser presets, the 64/64 affected corpus,
 root/browser typecheck and lint, production build, and real Chromium sibling
 execution are green. Exact local implementation checkpoint:
 `ba34771074363f4c5b33814269b8822d4d2362bb`. Semicolon-dependent 1B3 remains
-closed until its own zero-behavior audit and separate review.
+closed for behavior, but its zero-behavior audit is now focused-green. It
+confirms that the existing direct method owns exactly `[1,1]` and
+`[1,2,1]` dependency-level shapes, selects semicolons between levels and
+commas within a sibling level, and freezes a non-self-authorizing D004
+proposal for one grouped expected-family contract and one mixed-telescope
+reviewer preset. Five focused tests, typecheck, and lint pass; the local
+audit/proposal checkpoint is pending this synchronized tranche. No parser
+behavior may change before a separate exact review.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

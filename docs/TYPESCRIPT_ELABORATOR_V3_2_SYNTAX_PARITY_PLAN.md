@@ -27,7 +27,10 @@ independent-sibling proposal checkpointed at
 `f53fd6885dd2fac0345bad5db257c7a66f86af15`; a separate immutable unattended
 D003 review approves it exactly as proposed with human supersession; the
 bounded implementation is final-green at exact local checkpoint
-`ba34771074363f4c5b33814269b8822d4d2362bb`.
+`ba34771074363f4c5b33814269b8822d4d2362bb`; `SYNTAX-PARITY-1B3` is now a
+focused-green zero-behavior-delta audit with a deeply frozen
+non-self-authorizing D004 proposal, whose local checkpoint is pending this
+synchronized tranche.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -560,6 +563,94 @@ The separate
 now approves only this exact 1B2 scope under the user's standing unattended
 delegation, with any later explicit human decision superseding it.
 
+## `SYNTAX-PARITY-1B3` Dependent-Context Audit And Proposed Gate
+
+The executable, deeply frozen audit in
+`src/v3_2/categorical_text_dependent_audit.ts` measures the final selected
+context-presentation seam. The existing direct program already accepts
+exactly two dependent shapes:
+
+```text
+a : A; b : B
+a : A; b : B, c : C; d : D
+```
+
+The first is one genuine displayed dependency edge. The second is the
+reviewed three-level mixed telescope with independent middle siblings. Their
+direct rules are respectively
+`categorical.displayed-dependent-context-bracket` and
+`categorical.displayed-mixed-dependent-context-bracket`. Family bases and
+source order drive the existing dependency planner; the caller supplies no
+dependency flags. Object, internalized-arrow, reindexing, and recursive-body
+behavior are already owned by `displayedDependentContextLambda` and its
+Sigma/pullback/product/pairing prerequisites.
+
+The selected text forms are:
+
+```text
+λ^fd (a : A; b : B). a
+λ^fd (a : A; b : B, c : C; d : D). fibrePair b c
+
+λ^fd (a; b). a
+λ^fd (a; b, c; d). fibrePair b c
+```
+
+Commas retain their 1B2 meaning—independent siblings at one dependency
+level. Semicolons begin the next displayed dependency level. The parser
+currently reaches exactly the first semicolon and rejects it at columns
+12–13 with the intentionally installed 1B3 boundary. This is a presentation
+seam, not a missing dependent-context algorithm.
+
+Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-004` proposes only:
+
+- activate semicolon-separated immutable `bindingGroups` in the existing
+  private lambda payload, adding no located node kind;
+- require portable names unique across the complete telescope;
+- accept only the direct program's exact group sizes `[1,1]` and `[1,2,1]`;
+- add one `displayed-dependent-context-functor` expected contract containing
+  matching ordered source-family groups and one target family;
+- check optional annotations positionally; annotation omission uses the
+  expected families and does not synthesize or decompose family expressions;
+- flatten checked groups in source order and invoke the existing
+  `displayedDependentContextLambda` exactly once;
+- extend one immutable callback environment with all returned tokens and
+  resolve the body through the existing recursive `indexOf`, `fibrePair`,
+  `composeCells`, and generic `apply` routes; and
+- add one `displayed-mixed-telescope` reviewer preset through the same
+  browser-safe adapter and checker.
+
+The direct program remains responsible for profile availability, exact
+two/four-binding arity, family bases, dependency-plan derivation, target
+base, slot scope, body factorization, and internal categorical coherence.
+The text frontend neither asserts dependency flags nor promotes arbitrary
+pointwise data.
+
+Exact negatives cover empty or trailing dependency levels, duplicates across
+levels, wrong group counts/cardinalities, annotation kind/family mismatch,
+wrong mode or expected contract, predecessor profiles, wrong middle/deepest/
+target bases, reordered siblings, unsupported three-binding or deeper
+shapes, escaped/foreign slots, unsupported bodies, nested abstractions, and
+general dependent-family syntax.
+
+The proposal adds no mathematical owner, dependency planner, categorical
+program method, contextual factorization case, Core node, checker/evaluator
+branch, runtime/proof rule, semantic profile, transfer input, Lambdapi
+declaration/rule, external coherence premise, or second frontend. Arbitrary
+depth stays a real direct-capability boundary rather than parser work.
+
+The five focused executable audit tests, root typecheck, and lint pass. The
+audit changes no runtime behavior. Its separate exact gate is:
+
+> Approve `H-DTTLF-PRODUCT-SYNTAX-PARITY-04 /
+> D-DTTLF-PRODUCT-SYNTAX-PARITY-004` as proposed: implement only the
+> semicolon/comma presentation of the existing `[1,1]` and `[1,2,1]`
+> displayed dependent-context shapes, their grouped expected-family contract,
+> recursive existing-method resolution, complete negative partition, and one
+> mixed-telescope reviewer preset; add no arbitrary-depth/general
+> dependent-family syntax, new semantic owner/rule/profile, external
+> coherence premise, Lambdapi change, scale work, book work, publication, or
+> wider Git authority?
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -660,7 +751,8 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B1 | **final-green at `9f663555a1edbedcb99e97f1271154ff36913f05`** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, seventh reviewer preset, and 39/39 proportional gate |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-03 / D-DTTLF-PRODUCT-SYNTAX-PARITY-003 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B2 proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15` | Authorizes only the frozen comma sibling group, ordered-family expected contract, exact `fibrePair`, and one reviewer preset |
 | SYNTAX-PARITY-1B2 | **final-green at `ba34771074363f4c5b33814269b8822d4d2362bb`; audit/proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15`** | approved D003 review | One comma sibling group, optional positional family annotations, ordered-family expected contract, existing `displayedContextLambda`/`fibrePair` routes, eighth reviewer preset, 64/64 proportional gate, production build, and real Chromium |
-| SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
+| SYNTAX-PARITY-1B3 | **focused-green zero-behavior audit; D004 proposal checkpoint pending** | final-green 1B2 | Executable exact semicolon seam, `[1,1]`/`[1,2,1]` direct-shape evidence, grouped expected-family design, complete negative boundary, and non-self-authorizing proposal |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-04 / D-DTTLF-PRODUCT-SYNTAX-PARITY-004 | pending separate exact review | checkpointed 1B3 audit/proposal | Would authorize only semicolon dependency levels for the two existing direct shapes and one mixed-telescope reviewer preset |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
@@ -718,14 +810,13 @@ promote arbitrary pointwise data to coherent categorical data.
 
 Recover the completed SYNTAX-PARITY-0A inventory and final-green
 SYNTAX-PARITY-1A, 1B1, and 1B2 implementations. Do not reimplement those
-rows. Continue only the next separately reviewed row in this ledger. For
-1B3, first perform a zero-behavior-delta executable audit of the existing
-direct genuine dependent/mixed telescope surface, freeze exact semicolon
-notation and recursive expected-family resolution or classify a real
-semantic absence, and obtain a separate review before changing behavior.
-Commas remain independent siblings at one dependency level. A missing direct
-semantic capability belongs in the relevant usability/kernel plan, not in
-parser heuristics.
+rows. Recover the focused-green 1B3 zero-behavior audit and its exact
+checkpointed D004 proposal. Do not change parser behavior until a separate
+human or standing-delegation review approves that exact scope with human
+supersession. Commas remain independent siblings at one dependency level;
+semicolons present successive dependency levels only for exact direct group
+sizes `[1,1]` and `[1,2,1]`. A missing direct semantic capability belongs in
+the relevant usability/kernel plan, not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -741,6 +832,15 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1B3` dependent-context presentation
+  audited.** Executably confirmed that the direct two-level genuine edge and
+  `a; b,c; d` mixed telescope are already internally coherent, while text
+  fails exactly at the reserved semicolon. Froze semicolons as successive
+  dependency levels, retained commas for siblings, selected only direct group
+  sizes `[1,1]` and `[1,2,1]`, and proposed a grouped expected-family
+  contract plus one reviewer preset. Five focused tests, typecheck, and lint
+  pass with zero behavior delta. The local audit/proposal checkpoint is
+  pending this synchronized tranche.
 - **2026-07-30 — `SYNTAX-PARITY-1B2` implemented and final-green.** Added
   exactly one parenthesized comma sibling group, positional optional family
   annotations, the ordered-family expected contract, and the exact binary

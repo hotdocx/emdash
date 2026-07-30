@@ -3424,7 +3424,11 @@ review approves only that exact scope with human supersession. The bounded
 64/64 affected gate, using only the existing contextual compiler and pairing
 owners; exact local checkpoint:
 `ba34771074363f4c5b33814269b8822d4d2362bb`. None of this changes or resumes
-a scale row. After exact parity graduation, follow
+a scale row. A new zero-behavior 1B3 audit confirms that exact
+semicolon-separated `[1,1]` and `[1,2,1]` text presentations can route to the
+existing genuine/mixed dependent-context method; its D004 proposal remains
+non-self-authorizing pending separate review and adds no scale capability.
+After exact parity graduation, follow
 `docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`.
 Scale remains the top-level architecture/history ledger, but its bulk rows
 are outside the current persistent goal and require a future explicit goal.
