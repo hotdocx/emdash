@@ -35,8 +35,12 @@ The checked `0.3.0-dev` PDF is now the byte-identical canonical
 `docs/emdash-book.pdf` and compatibility `docs/emdash3_2.pdf` artifact.
 `REPO-PRESENT-1C` is complete at exact local checkpoint
 `18fe2ea2d78c996a63d06bb38b2361c8e959eed9`.
-`PRODUCT-BOOK-GRADUATE-1` is the next dependency-ready row. No remote
-release/publication or bulk scale change is included.
+The exact zero-behavior `PRODUCT-BOOK-GRADUATE-1` proposal is frozen at
+`9abb57acd9095dd15c3289fec3e5d3e90289b6a0` and approved exactly as
+proposed by D-DTTLF-BOOK-REPOSITORY-003 at
+`c26d98f31f2afb7b592038a3bce7401e8ab1d044`.
+`PRODUCT-BOOK-GRADUATE-1` is final-green with its bounded local checkpoint
+pending. No remote release/publication or bulk scale change is included.
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
@@ -261,7 +265,8 @@ by preparing the static artifact and README.
 | BOOK-PROSE-1A | **complete at `43870651aebaa48bc4af4bd838229cab979a924d`** | exact D001/D002 approvals and green reviewer bridge | The ten authored/structured sources now present fibrewise contexts, base change/evaluation, fibred cuts, binder notation, the bounded TypeScript architecture, three new checked evidence claims, and exact retained boundaries as theorem-led prose |
 | BOOK-ARTIFACT-1B | **complete at `f7baeb1e2e5828c8237767bb7d19ab5faccf8992`** | final-green authored edition and exact D001 approval | The single final release, exporter-only deterministic repeat, 199-page visual QA, and checked byte-for-byte promotion to both tracked public PDF paths are complete |
 | REPO-PRESENT-1C | **complete at `18fe2ea2d78c996a63d06bb38b2361c8e959eed9`** | validated book artifact and exact D001 review | The concise reader-first root README now joins the book, integrated reviewer, mathematical authority, exact limitations, focused contributor route, and compact related/historical links |
-| PRODUCT-BOOK-GRADUATE-1 | **dependency-ready; selected next** | BOOK-PROSE-1A through REPO-PRESENT-1C | Freeze exact reader-facing capabilities, commands, artifact checksum, limitations, and the future-scale handoff |
+| H-DTTLF-BOOK-REPOSITORY-GRADUATE-01 / D-DTTLF-BOOK-REPOSITORY-003 | **approved exactly as proposed at review checkpoint `c26d98f31f2afb7b592038a3bce7401e8ab1d044`; human supersession retained** | immutable proposal `9abb57acd9095dd15c3289fec3e5d3e90289b6a0` | Authorizes only the concise current external-review guide, exact checksum/commands/capabilities/non-claims, proportional evidence reuse, and future-scale handoff |
+| PRODUCT-BOOK-GRADUATE-1 | **final-green; bounded local checkpoint pending** | BOOK-PROSE-1A through REPO-PRESENT-1C and exact D003 review | The self-contained reader guide now matches the graduated reviewer, syntax, book, artifact, and README boundary without stale interim routing |
 | FUTURE-SCALE-GOAL | deferred/out of scope for this persistent goal | later explicit user goal | Resume pending SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other preserved scale rows without implying they were completed here |
 
 ## Acceptance
@@ -402,6 +407,12 @@ review; under the user's standing unattended delegation, that review may
 approve only this frozen scope with human supersession if no immediate human
 decision intervenes.
 
+The separate immutable
+[`D-DTTLF-BOOK-REPOSITORY-003` review](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_D003_REVIEW.md)
+approves exactly that scope with human supersession. Proposal checkpoint:
+`9abb57acd9095dd15c3289fec3e5d3e90289b6a0`; review checkpoint:
+`c26d98f31f2afb7b592038a3bce7401e8ab1d044`.
+
 ## Git And Persistent-Goal Boundary
 
 This plan inherits
@@ -416,46 +427,50 @@ artifact cleanup, or unrelated mutation. Updating the tracked public PDF is a
 future separately reviewed repository change, not authorization to publish it
 remotely.
 
-## Persistent `/goal` Launch Prompt
+## Completed-Goal Recovery Prompt
 
 ```text
-Continue the current reader-facing TypeScript emdash v3.2 product goal through
-the next dependency-ready reviewed row in
-docs/TYPESCRIPT_ELABORATOR_V3_2_INTEGRATED_REVIEWER_PLAN.md,
-docs/TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_PLAN.md, and
+Recover through docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md and
 docs/TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md.
-Use docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md for recovery and retain
-docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md as the preserved
-future architecture-qualification ledger, not as authority to resume bulk
-scale during this goal.
+The integrated reviewer, syntax parity, theorem-led book edition,
+deterministic public PDF, reader-first README, and external-review guide are
+complete for the recorded bounded product. Do not restart or revalidate
+those rows merely because a session was interrupted.
 
-Recover current code/tests, all worktrees and ancestry, staged and unstaged
-state, active root and nested authorities, and living decisions before
-acting. Follow the next reviewed row rather than a stale task snapshot.
+The remaining SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other
+bulk systematic-transfer rows are deliberately pending in
+docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md. Resume them only
+under a future explicit persistent goal, beginning with that plan's current
+living prompt and next dependency-ready reviewed row. Their deferral is not
+a claim that whole-library transfer is complete.
 
-Recover the completed integrated reviewer and exact approved syntax
-graduation; do not re-open or reimplement them. Begin with `BOOK-DELTA-0A`:
-audit capability deltas from 8217aa3... without mutating prose. Then update
-the book as theorem-led mathematical prose, not a developer report. Correct
-the formal-presentation boundary, use a small compelling running example,
-update compact evidence/status records, validate and visually review the
-generated edition, establish one deterministic owner for
-docs/emdash-book.pdf, and consolidate the root README around the book and
-integrated reviewer.
-
-Keep SCALE-STRESS-3C, SCALE-BATCH-1, SCALE-GRADUATE-1, and other bulk
-systematic-transfer rows pending for a future explicit goal. Promote only a
-specific missing dependency required by the selected reader-facing example,
-and only through a measured, separately reviewed bounded proposal.
-
-Existing Git authority permits only bounded green local checkpoints on the
-dedicated goal branch after synchronized ledgers and exact staged review. Do
-not push, merge, publish, deploy, release, tag, amend, rebase, reset, rewrite
-history, delete branches/worktrees, or perform unrelated cleanup.
+Before any future work, recover current code/tests, worktrees and ancestry,
+staged and unstaged state, root and nested authorities, and living decisions.
+Retain proportional validation and the checkpoint-only Git boundary. Do not
+push, merge, publish, deploy, release, tag, amend, rebase, reset, rewrite
+history, delete branches/worktrees, or perform unrelated cleanup without new
+exact authority.
 ```
 
 ## Change Log
 
+- **2026-07-30 — `PRODUCT-BOOK-GRADUATE-1` final-green under exact D003
+  review.** Replaced the stale mixed-phase external-review handoff with a
+  241-line self-contained reader guide. It now gives the canonical book
+  digest, five-step browser journey, ten exact presets, direct-TypeScript
+  three-panel report, graduated 37-head/four-mode text envelope, two
+  representative recursive examples, explicit pipeline/authority roles,
+  focused command matrix, and exact current non-claims. Superseded
+  pre-parity routing, checkpoint/test-count catalogues, and cold-start
+  anecdotes were removed. A focused contract check resolves all six local
+  links and seven named commands and verifies that the manifest-owned and
+  two public PDFs share SHA-256
+  `b34b7e430deacf4b91ce354c5e5eb3d2674ef08e93d3bcbd4ca7618ea37f41d7`.
+  Diff hygiene passes; no TypeScript, browser, kernel, conformance, book,
+  renderer, or repository aggregate was rerun. The current reader-facing
+  product goal is final-green, while all preserved bulk scale rows remain
+  pending for a future explicit goal. The bounded local graduation
+  checkpoint is pending.
 - **2026-07-30 — `REPO-PRESENT-1C` final-green.** The root README is now a
   132-line reader-first introduction under the eight headings frozen by
   D001. It leads with the mathematical thesis and current research status,

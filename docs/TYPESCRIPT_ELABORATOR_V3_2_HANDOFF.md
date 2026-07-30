@@ -706,7 +706,19 @@ demo, active Lambdapi authority, bounded TypeScript product, exact current
 limitations, and focused contributor guidance. Its six local links, five
 named package scripts, and executable bootstrap resolve; no unchanged
 TypeScript, browser, kernel, book, renderer, or repository aggregate was
-rerun. `PRODUCT-BOOK-GRADUATE-1` is the next dependency-ready row.
+rerun.
+The exact zero-behavior reader-graduation proposal is frozen at
+`9abb57acd9095dd15c3289fec3e5d3e90289b6a0` and separately approved with
+human supersession by D-DTTLF-BOOK-REPOSITORY-003 at
+`c26d98f31f2afb7b592038a3bce7401e8ab1d044`.
+`PRODUCT-BOOK-GRADUATE-1` is final-green with its bounded local checkpoint
+pending. The self-contained external-review guide now matches the ten-preset
+reviewer, graduated categorical text envelope, direct-TypeScript report,
+`0.3.0-dev` book artifact, architecture/authority split, and exact
+limitations. Its six local links and seven named package commands resolve,
+and all three PDF paths match the recorded SHA-256. No unchanged aggregate
+was rerun. The current reader-facing product goal stops here; the preserved
+bulk scale rows require a future explicit persistent goal.
 The plan then updates the book as theorem-led mathematical prose rather than
 a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.
