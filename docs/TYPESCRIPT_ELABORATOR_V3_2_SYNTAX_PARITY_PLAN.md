@@ -45,7 +45,8 @@ with a deeply frozen non-self-authorizing D006 proposal for its bounded 1C2A
 mechanical constructor tranche checkpointed at
 `20093b71e3802c3d2b7cbf20670862a58a71b653`; a separate immutable unattended
 D006 review now approves exactly that 1C2A proposal with human supersession;
-no 1C2B or 1C3 behavior is authorized.
+the bounded 1C2A implementation is final-green in the goal worktree; no 1C2B
+or 1C3 behavior is authorized.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -963,6 +964,58 @@ The separate immutable
 now approves only that exact frozen 1C2A scope under the user's standing
 unattended delegation, with any later explicit human decision superseding it.
 
+## `SYNTAX-PARITY-1C2A` Implementation Result
+
+The implementation adds one resolver-side displayed structural dispatcher
+over the existing private application tree:
+
+- `pi1d B C`, `pi2d B C`, `paird FF GG`, `swapd B C`, and `diagd B`
+  call the existing fibrewise displayed-product methods;
+- `sigmaProj E`, `sigmaPair E x u`, and
+  `sigmaArrow E u v p alpha` call the existing Sigma/comprehension methods;
+- `pullbackFunctord FF F`, `transport E p`, and `pullbackTotal F E`
+  call the existing displayed reindexing, transport, and totalization
+  methods; and
+- `composeTransfd theta eta` calls the existing coherent displayed
+  transformation composition method.
+
+Term operands recurse through the same term resolver. Displayed-family
+operands remain checked immutable family identifiers until 1C3. Every
+non-reserved application still uses the sole generic `apply` path. Thus both
+
+```text
+composeTransfd iota (composeTransfd theta eta)
+sigmaProj E (sigmaPair E x u)
+```
+
+compile exactly like their nested direct TypeScript counterparts.
+
+Permanent evidence covers all twelve explicit-Core and inferred-classifier
+equalities; nested constructor/application spines; family-versus-term kinds;
+identifier-only families; under/overapplication; foreign families; wrong
+displayed bases and pair sources; wrong dependent fibres and Sigma
+boundaries; wrong transport and pullback endpoints; wrong transformation
+composition endpoints; unavailable profiles; retained generic `eta x` and
+`eta x u`; and retained failure for the separately gated `eta p u`
+naturality route.
+
+The proportional gate is green:
+
+- the focused 1C2A implementation corpus passes 6/6;
+- the complete categorical-text family passes 82/82;
+- the unchanged integrated reviewer passes 8/8;
+- root typecheck and lint pass; and
+- the browser production check passes at 141 modules, 429.29 kB /
+  116.82 kB gzip initial JavaScript and 750.77 kB / 165.71 kB gzip lazy
+  reviewer JavaScript, with only the existing informational Vite chunk-size
+  warning.
+
+No browser preset or browser-specific implementation changed, so another
+fixed-preset Chromium run would add no changed-boundary evidence. No
+mathematical owner, categorical-program method, Core/checker/evaluator/runtime
+branch, expected-action table, semantic profile, transfer input, or Lambdapi
+source changed.
+
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
 After the integrated-reviewer checkpoint, inspect every public or
@@ -1069,7 +1122,8 @@ strings parse. For every promoted row it must demonstrate:
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C0 audit/proposal | Authorizes only six ordinary structural term heads over existing typed methods |
 | SYNTAX-PARITY-1C1 | **final-green at `be437f3a7d64a6a554578036f76621322d5626fc`** | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality, recursive constructor/application spines, exact negatives, 71/71 affected/audit tests, and green browser packaging |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-06 / D-DTTLF-PRODUCT-SYNTAX-PARITY-006 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1C2 audit/proposal at `20093b71e3802c3d2b7cbf20670862a58a71b653` | Authorizes only twelve frozen 1C2A displayed structural/comprehension term heads over existing typed methods |
-| SYNTAX-PARITY-1C2 | **1C2A approved for implementation; zero-behavior audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Implement twelve mechanical displayed structural/comprehension heads while retaining generic component/point application and four whole/higher action constructors for separately gated 1C2B |
+| SYNTAX-PARITY-1C2A | **final-green in the goal worktree; audit at `20093b71e3802c3d2b7cbf20670862a58a71b653`** | final-green 1C1 and approved D006 review | Twelve mechanical displayed structural/comprehension heads, recursive term operands, checked family identifiers, exact direct equality/negatives, 82/82 text family, 8/8 reviewer, and green browser packaging |
+| SYNTAX-PARITY-1C2B | gated | final-green 1C2A plus a separate exact audit/review | Four whole/higher internalized action constructors; retain generic component/point application and audit exact notation/expected-shape relationships |
 | SYNTAX-PARITY-1C3 | gated | final-green 1C2 plus a separate exact audit/review | Category and displayed-family result constructors over the same parser/checker architecture |
 | SYNTAX-PARITY-GRADUATE-1 | gated | completed reviewed parity rows | Freeze exact text/direct-TypeScript parity and residual semantic rather than parser gaps |
 | SELECTIVE-SYNTAX-SCALE-* | conditional, none selected | a measured parity row requiring one missing active owner plus separate review | Promote only a named dependency required by a compelling text/reviewer witness |
@@ -1128,14 +1182,16 @@ promote arbitrary pointwise data to coherent categorical data.
 Recover the completed SYNTAX-PARITY-0A inventory, final-green
 SYNTAX-PARITY-1A/1B implementations, focused-green zero-behavior
 SYNTAX-PARITY-1C0 residual-constructor audit, approved D005 review, and
-final-green 1C1 implementation. Do not reimplement those rows.
+final-green 1C1 and 1C2A implementations. Do not reimplement those rows.
 Preserve commas as independent siblings at one dependency level and
 semicolons as successive dependency levels only for exact direct group sizes
-`[1,1]` and `[1,2,1]`. Recover the focused-green 1C2 audit and separately
-approved D006 review. Implement only its twelve mechanical 1C2A displayed
-structural/comprehension heads. Retain `eta x` and `eta x u` as generic
-whitespace application and keep four whole/higher internalized action
-constructors separately gated as 1C2B. Do not add 1C2B or 1C3 behavior before
+`[1,1]` and `[1,2,1]`. Recover and checkpoint the final-green 1C2A
+implementation if needed, retaining `eta x` and `eta x u` as generic
+whitespace application. Continue with a zero-behavior 1C2B notation,
+argument-kind, and redundant-route audit over only
+`displayedFunctorFullAction`, `displayedFunctorInternalCell`,
+`displayedTransforNaturality`, and
+`displayedTransforInternalHomAction`. Do not add 1C2B or 1C3 behavior before
 its applicable separate exact review. A missing direct semantic capability
 belongs in the relevant usability/kernel plan, not in parser heuristics.
 
@@ -1153,6 +1209,13 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `SYNTAX-PARITY-1C2A` implemented and final-green.** Added
+  only the twelve reviewed displayed structural/comprehension heads through
+  existing typed program methods and one checked family-identifier helper.
+  Nested composition and Sigma projection/application are exact; generic
+  component/point and gated naturality boundaries are retained. The complete
+  text family passes 82/82, the reviewer 8/8, typecheck/lint and browser
+  production build pass, and no semantic or Lambdapi input changed.
 - **2026-07-30 — D006 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed 1C2A proposal,
   recorded an immutable, human-supersedable review authorizing only the

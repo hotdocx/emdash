@@ -9,7 +9,6 @@ import {
 } from 'node:test';
 import {
     CORE_CATEGORICAL_TEXT_DISPLAYED_CONSTRUCTOR_AUDIT,
-    CORE_CATEGORICAL_TEXT_REVISION,
     CoreCategoricalProgram,
     CoreCategoricalTextBinding,
     CoreCategoricalTextDisplayedConstructorAuditError,
@@ -228,7 +227,8 @@ describe('SYNTAX-PARITY-1C2 displayed-constructor audit', () => {
     it('keeps component and point observations on generic application',
         () => {
             assert.equal(
-                CORE_CATEGORICAL_TEXT_REVISION,
+                CORE_CATEGORICAL_TEXT_DISPLAYED_CONSTRUCTOR_AUDIT
+                    .prerequisite.textRevision,
                 'SYNTAX-PARITY-1C1-CATEGORICAL-TEXT-1'
             );
             const component = elaborate('eta x');
@@ -274,11 +274,10 @@ describe('SYNTAX-PARITY-1C2 displayed-constructor audit', () => {
                 ).surfaceType.tag,
                 'hom'
             );
-            assert.throws(
-                () => elaborate('sigmaPair E x u'),
-                error =>
-                    error instanceof CoreCategoricalTextError &&
-                    error.code === 'UNKNOWN_IDENTIFIER'
+            assert.deepEqual(
+                CORE_CATEGORICAL_TEXT_DISPLAYED_CONSTRUCTOR_AUDIT
+                    .proposal.exactPositiveSources.at(7),
+                'sigmaPair E x u'
             );
         });
 

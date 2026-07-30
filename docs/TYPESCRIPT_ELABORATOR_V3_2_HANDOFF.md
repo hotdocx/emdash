@@ -568,8 +568,15 @@ reviewed 1C2B notation decision. Five focused tests, root typecheck, and lint
 pass with zero behavior delta. Exact local audit/proposal checkpoint:
 `20093b71e3802c3d2b7cbf20670862a58a71b653`. A separate immutable D006
 unattended review now approves only the exact twelve-head 1C2A proposal with
-human supersession. Implementing that bounded presentation route is next;
-1C2B and 1C3 remain unauthorized.
+human supersession. That bounded presentation route is now final-green in
+the goal worktree: all twelve heads call only existing typed methods, term
+operands recurse, family operands remain checked identifiers, and nested
+Transfd composition and Sigma projection/application agree with direct
+TypeScript. The complete text family passes 82/82, the reviewer 8/8,
+typecheck/lint and browser packaging pass, and no semantic or Lambdapi input
+changed. Checkpointing the implementation and then auditing the four
+whole/higher 1C2B action constructors is next; 1C2B behavior and 1C3 remain
+unauthorized.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).

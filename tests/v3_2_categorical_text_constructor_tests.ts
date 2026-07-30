@@ -122,7 +122,7 @@ describe('SYNTAX-PARITY-1C1 ordinary constructor text', () => {
         const data = fixture();
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'SYNTAX-PARITY-1C1-CATEGORICAL-TEXT-1'
+            'SYNTAX-PARITY-1C2A-CATEGORICAL-TEXT-1'
         );
         for (const [source, direct] of [
             ['id A', data.program.identityFunctor(data.A)],

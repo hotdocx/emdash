@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1C1-CATEGORICAL-TEXT-1' as const;
+    'SYNTAX-PARITY-1C2A-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -774,6 +774,15 @@ class CoreCategoricalTextResolver {
                 return this.inspectTerm(binding, expression.range);
             }
             case 'application': {
+                const displayedStructural =
+                    this.resolveDisplayedStructuralOperation(
+                        expression,
+                        environment,
+                        lambdaDepth
+                    );
+                if (displayedStructural !== undefined) {
+                    return displayedStructural;
+                }
                 const ordinaryStructural =
                     this.resolveOrdinaryStructuralOperation(
                         expression,
@@ -928,6 +937,254 @@ class CoreCategoricalTextResolver {
                 return exhaustive;
             }
         }
+    }
+
+    private resolveDisplayedStructuralOperation(
+        expression: LocatedApplication,
+        environment: InternalEnvironment,
+        lambdaDepth: number
+    ): CoreCategoricalTerm | undefined {
+        const source = (detail: string): CoreCategoricalSourceSite =>
+            sourceSiteFor(
+                this.sourceFile,
+                expression.range,
+                detail
+            );
+        const resolveTerm = (
+            argument: LocatedExpression
+        ): CoreCategoricalTerm => this.resolveTerm(
+            argument,
+            environment,
+            undefined,
+            lambdaDepth
+        );
+        const resolveFamily = (
+            argument: LocatedExpression
+        ): CoreCategoricalDisplayedFamily =>
+            this.resolveDisplayedFamilyArgument(
+                argument,
+                environment
+            );
+
+        for (const [head, side] of [
+            ['pi1d', 'left'],
+            ['pi2d', 'right']
+        ] as const) {
+            const projection = this.fixedApplicationSpine(
+                expression,
+                head,
+                2
+            );
+            if (projection === undefined) continue;
+            const left = resolveFamily(projection[0]);
+            const right = resolveFamily(projection[1]);
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                `Displayed product ${side} projection was rejected`,
+                () => side === 'left'
+                    ? this.program.displayedProductLeftProjection(
+                        left,
+                        right,
+                        source(
+                            'parsed displayed product left projection'
+                        )
+                    )
+                    : this.program.displayedProductRightProjection(
+                        left,
+                        right,
+                        source(
+                            'parsed displayed product right projection'
+                        )
+                    )
+            );
+        }
+
+        const pair = this.fixedApplicationSpine(
+            expression,
+            'paird',
+            2
+        );
+        if (pair !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed functor pairing was rejected',
+                () => this.program.displayedProductPair(
+                    resolveTerm(pair[0]),
+                    resolveTerm(pair[1]),
+                    source('parsed displayed functor pairing')
+                )
+            );
+        }
+
+        const swap = this.fixedApplicationSpine(
+            expression,
+            'swapd',
+            2
+        );
+        if (swap !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed product exchange was rejected',
+                () => this.program.displayedProductSwap(
+                    resolveFamily(swap[0]),
+                    resolveFamily(swap[1]),
+                    source('parsed displayed product exchange')
+                )
+            );
+        }
+
+        const diagonal = this.fixedApplicationSpine(
+            expression,
+            'diagd',
+            1
+        );
+        if (diagonal !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed product contraction was rejected',
+                () => this.program.displayedProductDiagonal(
+                    resolveFamily(diagonal[0]),
+                    source('parsed displayed product contraction')
+                )
+            );
+        }
+
+        const sigmaProjection = this.fixedApplicationSpine(
+            expression,
+            'sigmaProj',
+            1
+        );
+        if (sigmaProjection !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Sigma projection was rejected',
+                () => this.program.sigmaProjection(
+                    resolveFamily(sigmaProjection[0]),
+                    source('parsed Sigma projection')
+                )
+            );
+        }
+
+        const pullbackFunctor = this.fixedApplicationSpine(
+            expression,
+            'pullbackFunctord',
+            2
+        );
+        if (pullbackFunctor !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed functor pullback was rejected',
+                () => this.program.pullbackDisplayedFunctor(
+                    resolveTerm(pullbackFunctor[0]),
+                    resolveTerm(pullbackFunctor[1]),
+                    source('parsed displayed functor pullback')
+                )
+            );
+        }
+
+        const sigmaPair = this.fixedApplicationSpine(
+            expression,
+            'sigmaPair',
+            3
+        );
+        if (sigmaPair !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Dependent pair was rejected',
+                () => this.program.dependentPair(
+                    resolveFamily(sigmaPair[0]),
+                    resolveTerm(sigmaPair[1]),
+                    resolveTerm(sigmaPair[2]),
+                    source('parsed dependent pair')
+                )
+            );
+        }
+
+        const transport = this.fixedApplicationSpine(
+            expression,
+            'transport',
+            2
+        );
+        if (transport !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed family transport was rejected',
+                () => this.program.familyTransport(
+                    resolveFamily(transport[0]),
+                    resolveTerm(transport[1]),
+                    source('parsed displayed family transport')
+                )
+            );
+        }
+
+        const sigmaArrow = this.fixedApplicationSpine(
+            expression,
+            'sigmaArrow',
+            5
+        );
+        if (sigmaArrow !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Sigma arrow was rejected',
+                () => this.program.sigmaArrow(
+                    resolveFamily(sigmaArrow[0]),
+                    resolveTerm(sigmaArrow[1]),
+                    resolveTerm(sigmaArrow[2]),
+                    resolveTerm(sigmaArrow[3]),
+                    resolveTerm(sigmaArrow[4]),
+                    source('parsed Sigma arrow')
+                )
+            );
+        }
+
+        const pullbackTotal = this.fixedApplicationSpine(
+            expression,
+            'pullbackTotal',
+            2
+        );
+        if (pullbackTotal !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Pullback totalization was rejected',
+                () => this.program.pullbackTotal(
+                    resolveTerm(pullbackTotal[0]),
+                    resolveFamily(pullbackTotal[1]),
+                    source('parsed pullback totalization')
+                )
+            );
+        }
+
+        const transfdComposition = this.fixedApplicationSpine(
+            expression,
+            'composeTransfd',
+            2
+        );
+        if (transfdComposition !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Displayed transformation composition was rejected',
+                () => this.program.composeDisplayedTransfor(
+                    resolveTerm(transfdComposition[0]),
+                    resolveTerm(transfdComposition[1]),
+                    source(
+                        'parsed displayed transformation composition'
+                    )
+                )
+            );
+        }
+
+        return undefined;
     }
 
     private resolveOrdinaryStructuralOperation(
@@ -1088,6 +1345,33 @@ class CoreCategoricalTextResolver {
                 expression.range,
                 `Identifier '${expression.name}' denotes a ` +
                     `${binding.kind}, not a category`
+            );
+        }
+        return binding.value;
+    }
+
+    private resolveDisplayedFamilyArgument(
+        expression: LocatedExpression,
+        environment: InternalEnvironment
+    ): CoreCategoricalDisplayedFamily {
+        if (expression.tag !== 'identifier') {
+            throw resolutionError(
+                'EXPECTED_DISPLAYED_FAMILY',
+                this.sourceFile,
+                expression.range,
+                'This constructor position requires a checked displayed-' +
+                    'family identifier; family-valued expressions belong ' +
+                    'to the separately gated SYNTAX-PARITY-1C3 row'
+            );
+        }
+        const binding = this.lookup(expression, environment);
+        if (binding.kind !== 'displayed-family') {
+            throw resolutionError(
+                'EXPECTED_DISPLAYED_FAMILY',
+                this.sourceFile,
+                expression.range,
+                `Identifier '${expression.name}' denotes a ` +
+                    `${binding.kind}, not a displayed family`
             );
         }
         return binding.value;
