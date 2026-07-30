@@ -16,15 +16,18 @@ Syntax parity is final-green through `SYNTAX-PARITY-1D1` at
 `be1eb6cf1e33c17c88615d243fae8a58d1d8cbba` and approved as proposed by a
 separate immutable D010 unattended review with human supersession. The exact
 review checkpoint is
-`38e0bc2b177773db0faba36e8aaafd12d5e50982`. `BOOK-DELTA-0A` is the next
-row; no book prose, generated artifact, release, public presentation, or
-bulk scale change is yet authorized
+`38e0bc2b177773db0faba36e8aaafd12d5e50982`. `BOOK-DELTA-0A` is complete
+in
+[`TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md);
+`BOOK-NARRATIVE-0B` is the next dependency-ready row. No book prose,
+generated artifact, release, public presentation, or bulk scale change is
+yet authorized.
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as
 the high-yield continuation after syntax parity: reconcile the mathematical
 book from the `8217aa3...` baseline without turning it into an internal
 technical report, deterministically refresh `docs/emdash-book.pdf`,
 consolidate the root repository introduction, and move remaining bulk scale
-qualification to a future persistent goal
+qualification to a future persistent goal.
 
 ## Objective
 
@@ -235,8 +238,8 @@ by preparing the static artifact and README.
 
 | Row | Status | Depends on | Deliverable |
 | --- | --- | --- | --- |
-| BOOK-DELTA-0A | **dependency-ready; selected next after approved SYNTAX-PARITY-GRADUATE-1** | syntax-parity graduation and `8217aa3...` audit anchor | Capability-oriented delta matrix with destinations, exclusions, evidence needs, and no prose mutation |
-| BOOK-NARRATIVE-0B | gated on BOOK-DELTA-0A | complete delta matrix and book authorities | Exact theorem-led running example, section-level edit map, status/evidence map, notation boundary, and bounded implementation proposal |
+| BOOK-DELTA-0A | **complete; capability audit recorded; checkpoint pending exact hash** | syntax-parity graduation and `8217aa3...` audit anchor | [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md) classifies the mathematical, formal-presentation, evidence, workflow, developer-only, and future-boundary deltas without prose mutation |
+| BOOK-NARRATIVE-0B | **dependency-ready; selected next** | complete delta matrix and book authorities | Exact theorem-led running example, section-level edit map, status/evidence map, notation boundary, and bounded implementation proposal |
 | H-DTTLF-BOOK-REPOSITORY-01 | pending exact proposal | BOOK-NARRATIVE-0B | Separate review of exact authored sources, evidence/manifest effects, artifact ownership, README scope, and validation |
 | BOOK-PROSE-1A | gated | exact separate review | Edit only reviewed authored book sources and structured evidence/architecture authorities; preserve theorem-led prose and formal-status discipline |
 | BOOK-ARTIFACT-1B | gated | BOOK-PROSE-1A and exact separate review | Run full book checks/render/release, visually inspect affected and repaginated pages, and deterministically promote the validated PDF to `docs/emdash-book.pdf` |
@@ -266,6 +269,26 @@ Reader-facing graduation requires:
   burying the mathematical introduction in internal status detail; and
 - no bulk-scale completion, deployment, publication, or global metatheory
   claim is introduced.
+
+### Proportional validation policy
+
+The acceptance gates above belong to the boundary they validate; they are not
+commands to rerun after every planning or editorial checkpoint.
+
+- Plan/audit-only changes require exact diff review and Markdown/diff hygiene,
+  not TypeScript, browser, kernel, or book-render aggregates.
+- A bounded TypeScript reviewer-preset change requires its focused corpus plus
+  TypeScript typecheck/lint; unchanged kernel/conformance boundaries retain
+  their recorded evidence.
+- Authored prose/evidence changes require the bounded book source, evidence,
+  and typography checks selected by the affected files.
+- The full book render/release, deterministic-PDF comparison, and visual
+  inspection run once at `BOOK-ARTIFACT-1B`, after the reviewed authored
+  edition is complete. They are rerun only if a later change can affect the
+  artifact.
+- Multi-minute repository aggregates are exceptional: use them only for an
+  actually changed covered boundary or the final reviewed release gate, not
+  for reassurance about unchanged code.
 
 ## Scale Relationship
 
@@ -344,6 +367,16 @@ history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — `BOOK-DELTA-0A` completed.** The dedicated
+  [capability audit](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md)
+  classifies the active fibred-context mathematics, renewed TypeScript
+  formal-presentation/product boundary, checked evidence additions, reviewer
+  workflow, developer-only exclusions, and future scale boundaries. It
+  selects a nested ordinary primary example and mixed displayed secondary
+  example, recommends no evidence-checker expansion, and makes
+  `BOOK-NARRATIVE-0B` dependency-ready without mutating book prose or product
+  behavior. Proportional validation now explicitly reserves the expensive
+  aggregate render/release gate for the actual artifact boundary.
 - **2026-07-30 — `BOOK-DELTA-0A` is dependency-ready.** Exact D010 syntax
   graduation is approved with human supersession after final-green 1D1. The
   current goal now enters the capability-oriented delta audit; no prose,

@@ -642,15 +642,27 @@ reuse of recorded aggregate/browser evidence, and routing to
 `BOOK-DELTA-0A`. A separate immutable D010 unattended review approves exactly
 that zero-behavior envelope with human supersession. Syntax parity is
 graduated at exact review checkpoint
-`38e0bc2b177773db0faba36e8aaafd12d5e50982`; `BOOK-DELTA-0A` is next.
+`38e0bc2b177773db0faba36e8aaafd12d5e50982`; its selected
+`BOOK-DELTA-0A` successor is now complete.
 
 After exact syntax graduation, the current product goal continues through
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md).
-That plan audits the capability delta from the user-selected `8217aa3...`
-anchor, updates the book as theorem-led mathematical prose rather than a
-developer report, validates one deterministic public
+Its `BOOK-DELTA-0A`
+[capability audit](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_DELTA_AUDIT.md) is now
+complete without book or product mutation. It classifies the post-anchor
+fibred-context mathematics, renewed TypeScript formal-presentation boundary,
+evidence additions, reader workflow, developer-only exclusions, and future
+scale limits. It selects the existing nested ordinary exchange/currying
+witness as the primary running example and the existing mixed displayed
+context as the necessary secondary witness. `BOOK-NARRATIVE-0B` is next: it
+must freeze the exact prose/evidence/product/artifact proposal before edits.
+The plan then updates the book as theorem-led mathematical prose rather than
+a developer report, validates one deterministic public
 `docs/emdash-book.pdf`, and consolidates the root repository introduction.
 The remaining bulk scale rows stay pending for a future persistent goal.
+Unchanged multi-minute aggregate gates are not rerun during planning:
+validation is proportional, with the full render/release gate reserved for
+the actual artifact boundary.
 
 Root-test parallelization is a measured, deferred side plan in
 `docs/TYPESCRIPT_TEST_PARALLELISM_PLAN.md`. A two-worker cache-heavy benchmark
