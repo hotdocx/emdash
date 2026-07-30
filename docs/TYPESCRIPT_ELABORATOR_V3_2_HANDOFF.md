@@ -474,7 +474,9 @@ SYNTAX-PARITY-1B0 audit confirms that direct
 `λ^fd a : E. s(indexOf(a))` is already semantically green, but textual
 `indexOf` construction is a measured presentation seam rather than a missing
 kernel owner. Its non-self-authorizing D002 proposal selects only the unary
-`indexOf`/weakening route and one reviewer preset. Independent sibling
+`indexOf`/weakening route and one reviewer preset; a separate immutable
+unattended review now approves that exact scope with human supersession.
+Independent sibling
 contexts/`fibrePair` and genuine dependent/mixed telescopes are separately
 gated as 1B2/1B3. Exact audit/proposal checkpoint:
 `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`. A specifically required scale

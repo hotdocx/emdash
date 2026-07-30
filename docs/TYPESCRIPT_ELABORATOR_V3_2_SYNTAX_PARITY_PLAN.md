@@ -17,7 +17,8 @@ final-green and checkpointed at
 `2e7cc3c44802a5218858ca6747e7591d3bfc4859`; `SYNTAX-PARITY-1B0`
 is an executable, focused-green, zero-behavior-delta audit checkpointed at
 `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`, with a bounded
-non-self-authorizing `SYNTAX-PARITY-1B1` proposal awaiting D002 review
+`SYNTAX-PARITY-1B1` proposal approved exactly as proposed by a separate
+immutable unattended review with human supersession
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -396,8 +397,10 @@ Decision `D-DTTLF-PRODUCT-SYNTAX-PARITY-002` proposes only
 The proposal authorizes no parser node, mathematical owner, program method,
 Core/checker/runtime rule, coherence premise, Lambdapi change, multi-binder
 syntax, `fibrePair`, dependent telescope, or `1C` constructor. Its five
-focused audit tests pass, and typecheck/lint are green. It remains
-non-self-authorizing until a separate exact review is recorded.
+focused audit tests pass, and typecheck/lint are green. The separate
+[`D-DTTLF-PRODUCT-SYNTAX-PARITY-002` review](./TYPESCRIPT_ELABORATOR_V3_2_SYNTAX_PARITY_D002_REVIEW.md)
+now approves only this exact scope under the user's standing unattended
+delegation, with any later explicit human decision superseding it.
 
 ## SYNTAX-PARITY-0A — Dependency-Ready Inventory And Design Audit
 
@@ -495,8 +498,8 @@ strings parse. For every promoted row it must demonstrate:
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-01 / D-DTTLF-PRODUCT-SYNTAX-PARITY-001 | **approved as proposed; immutable unattended review with human supersession** | SYNTAX-PARITY-0A and checkpoint `d73195b` | Review permits only the frozen `SYNTAX-PARITY-1A` three-mode/application/cell-composition scope |
 | SYNTAX-PARITY-1A | **final-green at `2e7cc3c44802a5218858ca6747e7591d3bfc4859`** | approved D001 review | `^n`, `^fd`, `^nd`, immutable displayed-family/expected contracts, existing direct-builder routes, exact `composeCells`, six browser presets, negative boundaries, and 1,149-test aggregate |
 | SYNTAX-PARITY-1B0 | **focused-green, zero behavior delta at `be7000f88b08c90d24bad8a1e113fe3241d8a8ca`** | final-green `SYNTAX-PARITY-1A` | Executable contextual-index measurement, exact 1B1/1B2/1B3 split, and bounded non-self-authorizing proposal |
-| H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | **pending separate exact review** | checkpointed `SYNTAX-PARITY-1B0` | May authorize only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
-| SYNTAX-PARITY-1B1 | gated | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, and reviewer preset |
+| H-DTTLF-PRODUCT-SYNTAX-PARITY-02 / D-DTTLF-PRODUCT-SYNTAX-PARITY-002 | **approved as proposed; immutable unattended review with human supersession** | checkpointed `SYNTAX-PARITY-1B0` | Authorizes only the frozen `indexOf`/weakening 1B1 route and one reviewer preset |
+| SYNTAX-PARITY-1B1 | **dependency-ready** | approved D002 review | Fixed unary `indexOf` spine through the existing typed method, exact text/direct weakening equality, negatives, and reviewer preset |
 | SYNTAX-PARITY-1B2 | gated | final-green 1B1 plus separate proposal/review | Independent displayed sibling binder presentation and `fibrePair` |
 | SYNTAX-PARITY-1B3 | gated | final-green 1B2 plus separate proposal/review | Bounded genuine dependent and mixed displayed telescope presentation |
 | SYNTAX-PARITY-1C | gated | final-green `SYNTAX-PARITY-1B3` plus separate exact review | Remaining selected mathematical constructor spellings and routes |
@@ -559,9 +562,9 @@ SYNTAX-PARITY-1A implementation. Continue only the next separately reviewed
 row in this ledger. The executable SYNTAX-PARITY-1B0 audit splits contextual
 index/weakening, independent sibling contexts, and genuine dependent/mixed
 telescopes into separate 1B1/1B2/1B3 rows. Do not implement its
-non-self-authorizing 1B1 proposal before the exact D002 review is recorded.
-A missing direct semantic capability belongs in the relevant
-usability/kernel plan, not in parser heuristics.
+1B1 proposal beyond the exact human-supersedable D002 review. A missing
+direct semantic capability belongs in the relevant usability/kernel plan,
+not in parser heuristics.
 
 After exact syntax graduation, route to the capability-delta and
 reader-narrative rows in the book/repository graduation plan. Keep bulk
@@ -577,6 +580,11 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-07-30 — D002 separately approved under unattended delegation.**
+  After no immediate human objection to the checkpointed proposal, recorded
+  an immutable, human-supersedable review approving only the unary
+  `indexOf`/weakening route and one reviewer preset. Multi-binder context and
+  remaining constructor syntax stay withheld.
 - **2026-07-30 — `SYNTAX-PARITY-1B0` measured and split.** Confirmed that
   `λ^fd a : E. s (indexOf a)` is already semantically green and that text
   fails only at the unrecognized `indexOf` head. Froze the narrow
