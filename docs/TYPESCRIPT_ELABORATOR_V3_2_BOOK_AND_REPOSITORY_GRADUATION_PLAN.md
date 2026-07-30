@@ -14,8 +14,8 @@ final-green through `SYNTAX-PARITY-1B3` at
 `3dcf25ec008bb3d30723e3251c222e88acc216a3`; its audit is checkpointed at
 `4eada97f9ee8fe284b70dea6c0548dfdb9754189` and its separate exact review is
 approved with human supersession; 1C and exact syntax graduation remain
-ahead, with the zero-behavior 1C0 residual-constructor audit focused-green in
-the goal worktree and its checkpoint pending; planning boundary only; no book
+ahead, with the zero-behavior 1C0 residual-constructor audit focused-green at
+`487ed014c210ab8426b27c40241b2de0f2f1dc4e`; planning boundary only; no book
 prose, generated artifact, release, or public presentation change is yet
 authorized
 Human-Direction: on 2026-07-30 the user explicitly confirmed this sequence as

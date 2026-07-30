@@ -533,9 +533,10 @@ planner, factorization case, transfer semantic input, or Lambdapi source
 changed. Arbitrary-depth/general dependent syntax remains closed; 1C is the
 next constructor-parity stage.
 
-Its first zero-behavior row, `SYNTAX-PARITY-1C0`, is focused-green in the goal
-worktree and awaits only its audit/proposal checkpoint. It confirms that the
-six ordinary structural term constructors are direct-green while
+Its first zero-behavior row, `SYNTAX-PARITY-1C0`, is focused-green at exact
+local audit/proposal checkpoint
+`487ed014c210ab8426b27c40241b2de0f2f1dc4e`. It confirms that the six
+ordinary structural term constructors are direct-green while
 `compose G F` fails text resolution exactly at the unknown `compose` head.
 It freezes `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` as the bounded
 non-self-authorizing D005 proposal, with no grammar node, semantic owner,

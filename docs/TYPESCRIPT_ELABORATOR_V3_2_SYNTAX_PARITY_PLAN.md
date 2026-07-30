@@ -35,8 +35,8 @@ D004 review now approves it exactly as proposed with human supersession; the
 bounded 1B3 implementation is final-green at exact local checkpoint
 `3dcf25ec008bb3d30723e3251c222e88acc216a3`; `SYNTAX-PARITY-1C0` is a
 focused-green zero-behavior-delta residual-constructor audit with a deeply
-frozen non-self-authorizing D005 proposal in the goal worktree; its exact
-local audit checkpoint is pending.
+frozen non-self-authorizing D005 proposal checkpointed at
+`487ed014c210ab8426b27c40241b2de0f2f1dc4e`.
 Selected-Successor:
 [`TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_BOOK_AND_REPOSITORY_GRADUATION_PLAN.md)
 
@@ -899,7 +899,7 @@ strings parse. For every promoted row it must demonstrate:
 | SYNTAX-PARITY-1B2 | **final-green at `ba34771074363f4c5b33814269b8822d4d2362bb`; audit/proposal at `f53fd6885dd2fac0345bad5db257c7a66f86af15`** | approved D003 review | One comma sibling group, optional positional family annotations, ordered-family expected contract, existing `displayedContextLambda`/`fibrePair` routes, eighth reviewer preset, 64/64 proportional gate, production build, and real Chromium |
 | SYNTAX-PARITY-1B3 | **final-green at `3dcf25ec008bb3d30723e3251c222e88acc216a3`; audit/proposal at `4eada97f9ee8fe284b70dea6c0548dfdb9754189`** | final-green 1B2 and approved D004 review | Exact semicolon/comma `[1,1]`/`[1,2,1]` presentations, grouped expected families, existing dependent-context route, complete negatives, browser-safe reviewed runtime split, ninth reviewer preset, production build, and real Chromium |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-04 / D-DTTLF-PRODUCT-SYNTAX-PARITY-004 | **approved as proposed; immutable unattended review with human supersession** | checkpointed 1B3 audit/proposal | Authorizes only semicolon dependency levels for the two existing direct shapes and one mixed-telescope reviewer preset |
-| SYNTAX-PARITY-1C0 | **focused-green zero-behavior audit in goal worktree; checkpoint pending** | final-green `SYNTAX-PARITY-1B3` | Executable residual constructor inventory, exact 1C1/1C2/1C3 split, six direct-green ordinary witnesses, and bounded non-self-authorizing D005 proposal |
+| SYNTAX-PARITY-1C0 | **focused-green zero-behavior audit at `487ed014c210ab8426b27c40241b2de0f2f1dc4e`** | final-green `SYNTAX-PARITY-1B3` | Executable residual constructor inventory, exact 1C1/1C2/1C3 split, six direct-green ordinary witnesses, and bounded non-self-authorizing D005 proposal |
 | H-DTTLF-PRODUCT-SYNTAX-PARITY-05 / D-DTTLF-PRODUCT-SYNTAX-PARITY-005 | pending separate exact review | checkpointed 1C0 audit/proposal | Would authorize only six ordinary structural term heads over existing typed methods |
 | SYNTAX-PARITY-1C1 | gated | checkpointed 1C0 and approved D005 review | `id`, `compose`, `pair`, `map`, `pi1`, and `pi2` with direct/text equality and exact negatives |
 | SYNTAX-PARITY-1C2 | gated | final-green 1C1 plus a separate exact audit/review | Remaining selected displayed/fibred term constructors with finite typed argument contracts |
@@ -991,7 +991,8 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
   green while text fails exactly at the unknown `compose` head. Froze a
   bounded non-self-authorizing D005 proposal with no browser preset or
   semantic delta. Five focused tests, typecheck, and lint pass; exact local
-  audit/proposal checkpoint is pending.
+  audit/proposal checkpoint:
+  `487ed014c210ab8426b27c40241b2de0f2f1dc4e`.
 - **2026-07-30 — `SYNTAX-PARITY-1B3` implemented and final-green.** Added
   exact semicolon dependency levels for only `[1,1]` and `[1,2,1]`, grouped
   expected families, positional optional annotations, recursive existing-body

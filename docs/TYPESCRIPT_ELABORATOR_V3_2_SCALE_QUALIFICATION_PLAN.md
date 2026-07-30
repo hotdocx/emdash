@@ -3446,7 +3446,8 @@ product row into 1C1 ordinary structural term heads, 1C2 displayed/fibred
 term constructors, and 1C3 category/family-result constructors. Its D005
 proposal selects only the six direct-green ordinary heads and explicitly adds
 no scale owner, profile, transfer input, Lambdapi change, or reviewer preset.
-Its exact local audit checkpoint is pending.
+Exact local audit/proposal checkpoint:
+`487ed014c210ab8426b27c40241b2de0f2f1dc4e`.
 
 A reviewer witness may selectively promote one exact scale dependency ahead
 of bulk order when a measured mathematical story requires it and a separate
