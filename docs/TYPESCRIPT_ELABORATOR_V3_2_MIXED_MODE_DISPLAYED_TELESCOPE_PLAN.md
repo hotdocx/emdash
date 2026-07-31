@@ -29,7 +29,9 @@ unattended delegation after proposal checkpoint
 `ddc78c250970f62c09d822a39a16502f41c75db1`; the
 `TEXT-PARITY-MIXED-1` audit is complete and its exact zero-semantic-delta
 proposal is frozen under H-DTTLF-USABILITY-TEXT-PARITY-MIXED-01 /
-D-DTTLF-USABILITY-028, pending a separate decision
+D-DTTLF-USABILITY-028 and approved as proposed through the standing
+unattended delegation after proposal checkpoint
+`9368c6eae4f46f12e5d5f5bffdebb370c032f5f8`; implementation is in progress
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -409,7 +411,7 @@ Also outside the first tranche:
 | `DISPLAYED-TELESCOPE-GENERIC-1` | complete and focused-green at checkpoint `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa` | mixed nested action plus current positive compiler | The mixed successor now derives arbitrary finite canonical sibling layers from literal family bases, validates their exact dependency plan, and folds existing product/projection and one-level Sigma/pullback lifting machinery. The four-layer `[A]; [B,C]; [D]; [E,F]` witness checks early/middle/final occurrences, pairing, an internal base-arrow cell, nested mixed factorization, and `homd_int`; predecessor profiles and their two/four-binding explicit Core remain exact. |
 | `DISPLAYED-MIXED-GRADUATE-1` | complete; D-DTTLF-USABILITY-027 approved as proposed after checkpoint `ddc78c250970f62c09d822a39a16502f41c75db1` | generic positive and mixed witnesses | Graduates arbitrary finite depth/width only for the canonical positive sibling-layer/Sigma normal form, together with the exact final canonical mixed classifier, nested eta, internal base-arrow cell, and `homd_int` consumer. Retains explicit performance, general-curry, arbitrary-variance, pullback-hidden-classifier, arbitrary-DAG, and unrestricted-`:^nd` non-claims. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
-| `TEXT-PARITY-MIXED-1` | exact proposal frozen under D-DTTLF-USABILITY-028; decision pending | semantic graduation | Remove only the obsolete fixed `[1,1]`/`[1,2,1]` text guard, verify comma/semicolon layers against internally derived generic abstraction evidence, and expose exact nested `λ^fd z. h z` eta through a typed expected contract. Retain one adapter/checker, fail closed outside the graduated mixed envelope, and defer browser-preset promotion. |
+| `TEXT-PARITY-MIXED-1` | approved as proposed under D-DTTLF-USABILITY-028 after checkpoint `9368c6eae4f46f12e5d5f5bffdebb370c032f5f8`; implementation in progress | semantic graduation | Remove only the obsolete fixed `[1,1]`/`[1,2,1]` text guard, verify comma/semicolon layers against internally derived generic abstraction evidence, and expose exact nested `λ^fd z. h z` eta through a typed expected contract. Retain one adapter/checker, fail closed outside the graduated mixed envelope, and defer browser-preset promotion. |
 | `DISPLAYED-ND-CONSUMERS-N` | future, consumer-led | concrete requested coherent bodies | Expand recursively supported `^nd` body constructors while preserving internal coherence ownership. |
 
 ## Frozen `MIXED-NEST-0A` Boundary
@@ -2313,3 +2315,11 @@ authority conflict, or an operation outside the stated Git boundary.
   remote Git operations remain outside it. The proposal is
   non-self-authorizing; the standing unattended delegation may record a
   separate approval after this checkpoint, with human supersession.
+- **2026-07-31 — D-DTTLF-USABILITY-028 approved as proposed.** The frozen
+  proposal was checkpointed independently at
+  `9368c6eae4f46f12e5d5f5bffdebb370c032f5f8`. With no immediate contrary
+  human response, the user's standing unattended delegation authorizes only
+  the exact resolver/text implementation above, with human supersession.
+  No semantic owner, categorical program method, Core/checker behavior,
+  browser promotion, general curry, unrestricted `:^nd`, or remote Git
+  operation is authorized.

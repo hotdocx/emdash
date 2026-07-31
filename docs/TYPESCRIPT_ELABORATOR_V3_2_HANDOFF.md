@@ -19,11 +19,13 @@
 > `homd_int`; the completed two/four-binding explicit Core remains unchanged.
 > `DISPLAYED-MIXED-GRADUATE-1` is now approved under
 > D-DTTLF-USABILITY-027 after its independent proposal checkpoint
-> `ddc78c250970f62c09d822a39a16502f41c75db1`. `TEXT-PARITY-MIXED-1` is next:
-> expose exactly the graduated mathematical API in the text adapter and fail
-> closed outside it. A general enriched curry remains a mathematically
-> plausible but separately unqualified extension, not a dependency of the
-> implemented finite fold.
+> `ddc78c250970f62c09d822a39a16502f41c75db1`. `TEXT-PARITY-MIXED-1` is
+> approved under D-DTTLF-USABILITY-028 after proposal checkpoint
+> `9368c6eae4f46f12e5d5f5bffdebb370c032f5f8` and is in progress: expose
+> exactly the graduated mathematical API in the text adapter and fail closed
+> outside it. A general enriched curry remains a mathematically plausible
+> but separately unqualified extension, not a dependency of the implemented
+> finite fold.
 
 Date: 2026-07-28
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
