@@ -9,6 +9,12 @@ H-DTTLF-USABILITY-FIBRED-GRADUATE/D-DTTLF-USABILITY-008 is approved under
 the user's delegated unattended authority, with a separate immutable review,
 human supersession, and no automatic successor authorization.
 
+The mixed-variance/arbitrary-depth continuation is now owned by
+[`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
+This plan remains authoritative for its completed bounded history; the
+successor corrects the earlier sequencing that treated general depth and
+variance too independently.
+
 This plan addresses the highest-priority withheld usability boundary:
 generalizing direct displayed-functor abstraction from a rigid one-slot body
 recognizer into a first-order contextual compiler. It does not resume

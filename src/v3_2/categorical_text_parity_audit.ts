@@ -129,14 +129,21 @@ const capabilities = [
     {
         id: 'derived-category-and-family-constructors',
         apiMethods: [
+            'oppositeCategory',
+            'displayedCategoryCategory',
             'constantDisplayedFamily',
+            'oppositeDisplayedFamily',
             'displayedFunctorFamily',
+            'mixedDisplayedFunctorFamily',
+            'mixedDisplayedHomFamily',
+            'mixedDisplayedTransforFamily',
             'dependentSectionMotive',
             'dependentSectionTarget',
             'dependentSectionCategoryAt',
             'displayedProduct',
             'fibre',
             'totalCategory',
+            'displayedFunctorCategory',
             'displayedTransforCategory',
             'functorCategory',
             'productCategory',
@@ -680,7 +687,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 68,
+        publicProgramMethods: 75,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,

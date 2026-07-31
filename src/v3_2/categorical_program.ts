@@ -95,6 +95,10 @@ import type {
 import type {
     CoreCategoricalDisplayedNdHigherFoundationSymbolId
 } from './categorical_displayed_nd_higher_foundation_transfer';
+import type {
+    CoreCategoricalMixedModeCompilation,
+    CoreCategoricalMixedModeSymbolId
+} from './categorical_mixed_mode_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -212,6 +216,19 @@ const displayedNdHigherFoundationCoreName = (
     displayedNdHigherFoundationModule()
         .coreCategoricalDisplayedNdHigherFoundationCoreName(id);
 
+const mixedModeModule = () => require(
+    './categorical_mixed_mode_transfer'
+) as typeof import('./categorical_mixed_mode_transfer');
+
+const compileCoreCategoricalMixedMode = ():
+CoreCategoricalMixedModeCompilation =>
+    mixedModeModule().compileCoreCategoricalMixedModeTransfer();
+
+const mixedModeCoreName = (
+    id: CoreCategoricalMixedModeSymbolId
+): string =>
+    mixedModeModule().coreCategoricalMixedModeCoreName(id);
+
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
 
@@ -253,6 +270,9 @@ export const CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_PROGRAM_REVISION =
     'DISPLAYED-ND-HIGHER-TARGET-1A-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
+    'MIXED-NEST-0A-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -425,6 +445,10 @@ export interface CoreCategoricalProgramOptions {
      * that lineage with the D-020 foundation, the three D-021 next-hom
      * owners and two projections, and two rich typed constructors; generic
      * `hom`, `homBoundary`, and `apply` still own the action ladder.
+     * The mixed-mode profile adds only the existing `Hom_catd` and
+     * `Transf_catd` signatures/four existing reductions plus typed classifier
+     * constructors. It qualifies the canonical nested target but does not
+     * yet claim recursive nested-abstraction lowering.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -441,7 +465,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-displayed-evaluation-1'
         | 'fibred-displayed-chain-1'
         | 'fibred-displayed-chain-2a'
-        | 'fibred-displayed-nd-higher-1';
+        | 'fibred-displayed-nd-higher-1'
+        | 'fibred-displayed-mixed-nest-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -480,6 +505,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_DISPLAYED_EVALUATION'
     | 'UNAVAILABLE_DISPLAYED_CHAIN'
     | 'UNAVAILABLE_DISPLAYED_ND_HIGHER'
+    | 'UNAVAILABLE_MIXED_MODE'
     | 'INVALID_DISPLAYED_CONTEXT'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
@@ -965,7 +991,8 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDisplayedEvaluationCompilation
         | CoreCategoricalDisplayedChainCompilation
         | CoreCategoricalDisplayedChain2aClosureCompilation
-        | CoreCategoricalDisplayedNdHigherTargetCompilation;
+        | CoreCategoricalDisplayedNdHigherTargetCompilation
+        | CoreCategoricalMixedModeCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -979,6 +1006,7 @@ export class CoreCategoricalProgram {
     private readonly displayedChainEnabled: boolean;
     private readonly displayedChain2aEnabled: boolean;
     private readonly displayedNdHigherEnabled: boolean;
+    private readonly mixedModeEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -987,8 +1015,11 @@ export class CoreCategoricalProgram {
             options.sourceFile ?? '<categorical-program>';
         const profile =
             options.profile ?? 'reviewed-usability-2a1';
+        const mixedModeProfile =
+            profile === 'fibred-displayed-mixed-nest-1';
         const displayedNdHigherProfile =
-            profile === 'fibred-displayed-nd-higher-1';
+            profile === 'fibred-displayed-nd-higher-1' ||
+            mixedModeProfile;
         const displayedChain2aProfile =
             profile === 'fibred-displayed-chain-2a' ||
             displayedNdHigherProfile;
@@ -1081,6 +1112,7 @@ export class CoreCategoricalProgram {
             displayedChain2aProfile;
         this.displayedChain2aEnabled = displayedChain2aProfile;
         this.displayedNdHigherEnabled = displayedNdHigherProfile;
+        this.mixedModeEnabled = mixedModeProfile;
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
@@ -1093,7 +1125,9 @@ export class CoreCategoricalProgram {
         if (this.displayedContextualEnabled) {
             validateCoreCategoricalDisplayedBracketContract();
         }
-        this.dependent = this.displayedNdHigherEnabled
+        this.dependent = this.mixedModeEnabled
+            ? compileCoreCategoricalMixedMode()
+            : this.displayedNdHigherEnabled
             ? compileCoreCategoricalDisplayedNdHigherTarget()
             : this.displayedChain2aEnabled
             ? compileCoreCategoricalDisplayedChain2aClosureRuntime()
@@ -1398,6 +1432,20 @@ export class CoreCategoricalProgram {
                 'Displayed next-hom internal action is available only in ' +
                     "the explicit 'fibred-displayed-nd-higher-1' root " +
                     'profile'
+            );
+        }
+    }
+
+    private requireMixedMode(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.mixedModeEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_MIXED_MODE',
+                nodeProvenance,
+                'Mixed-variance Hom_catd/Transf_catd classifiers are ' +
+                    'available only in the explicit ' +
+                    "'fibred-displayed-mixed-nest-1' root profile"
             );
         }
     }
@@ -1827,6 +1875,44 @@ export class CoreCategoricalProgram {
         );
     }
 
+    private mixedModeCall(
+        id: CoreCategoricalMixedModeSymbolId,
+        arguments_: readonly {
+            readonly plicity: Plicity;
+            readonly value: KernelExpression;
+        }[],
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                mixedModeCoreName(id),
+                nodeProvenance
+            ),
+            arguments_,
+            nodeProvenance
+        );
+    }
+
+    private oppositeDisplayedFamilyExpression(
+        family: InternalCoreCategoricalDisplayedFamily,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return this.displayedNdHigherFoundationCall(
+            'displayedOpposite',
+            [
+                {
+                    plicity: 'implicit',
+                    value: family.baseCategory.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: family.expression
+                }
+            ],
+            nodeProvenance
+        );
+    }
+
     private totalCategoryExpression(
         family: InternalCoreCategoricalDisplayedFamily,
         nodeProvenance: Provenance
@@ -2097,6 +2183,32 @@ export class CoreCategoricalProgram {
         });
     }
 
+    private requireDependentSectionTerm(
+        value: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): {
+        readonly expression: KernelExpression;
+        readonly category: KernelExpression;
+        readonly baseCategory: KernelExpression;
+        readonly family: KernelExpression;
+    } {
+        const inspection = this.builder.inspect(value);
+        if (inspection.type.tag !== 'dependent-section') {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_CATEGORY_OBJECT',
+                nodeProvenance,
+                `${detail} must be a dependent section`
+            );
+        }
+        return Object.freeze({
+            expression: this.builder.compile(value).term,
+            category: inspection.type.category,
+            baseCategory: inspection.type.baseCategory,
+            family: inspection.type.family
+        });
+    }
+
     private requireDisplayedFunctorTerm(
         value: CoreCategoricalTerm,
         nodeProvenance: Provenance,
@@ -2338,6 +2450,57 @@ export class CoreCategoricalProgram {
         );
     }
 
+    /**
+     * Construct the active opposite category `Op_cat K`.
+     */
+    oppositeCategory(
+        baseValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory {
+        const nodeProvenance = this.at(
+            'opposite category',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const base = this.requireCategory(
+            baseValue,
+            nodeProvenance
+        );
+        return this.makeCategory(
+            `Op(${base.label})`,
+            this.oppositeCategoryExpression(
+                base.expression,
+                nodeProvenance
+            )
+        );
+    }
+
+    /**
+     * Construct the category `Catd_cat K` of displayed categories over K.
+     */
+    displayedCategoryCategory(
+        baseValue: CoreCategoricalCategory,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory {
+        const nodeProvenance = this.at(
+            'displayed-category category',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const base = this.requireCategory(
+            baseValue,
+            nodeProvenance
+        );
+        return this.makeCategory(
+            `Catd(${base.label})`,
+            kernelApplication(
+                'displayed-category-category',
+                [{ value: base.expression }],
+                nodeProvenance
+            )
+        );
+    }
+
     displayedFamily(
         name: string,
         baseValue: CoreCategoricalCategory,
@@ -2364,6 +2527,35 @@ export class CoreCategoricalProgram {
             name,
             baseCategory,
             kernelFree(name, nodeProvenance)
+        );
+    }
+
+    /**
+     * Construct the pointwise opposite family `Op_catd E`.
+     *
+     * This reverses each fibre while retaining E's base. A family whose base
+     * itself varies negatively is instead declared over `Op_cat K`.
+     */
+    oppositeDisplayedFamily(
+        familyValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'pointwise opposite displayed family',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        return this.makeDisplayedFamily(
+            `Opd(${family.label})`,
+            family.baseCategory,
+            this.oppositeDisplayedFamilyExpression(
+                family,
+                nodeProvenance
+            )
         );
     }
 
@@ -2456,6 +2648,72 @@ export class CoreCategoricalProgram {
                     {
                         plicity: 'explicit',
                         value: contravariantConstant
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: target.expression
+                    }
+                ],
+                nodeProvenance
+            )
+        );
+    }
+
+    /**
+     * Construct a general mixed-variance family
+     * `Functor_catd(A,B)` for `A : Catd(Op K)` and `B : Catd K`.
+     */
+    mixedDisplayedFunctorFamily(
+        domainValue: CoreCategoricalDisplayedFamily,
+        targetValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'mixed-variance displayed functor family',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const domain = this.requireDisplayedFamily(
+            domainValue,
+            nodeProvenance
+        );
+        const target = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        const expectedDomainBase = this.oppositeCategoryExpression(
+            target.baseCategory.expression,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            domain.baseCategory.expression,
+            expectedDomainBase
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Mixed displayed functor source must be a displayed family ' +
+                    'over the opposite of the target base'
+            );
+        }
+        return this.makeDisplayedFamily(
+            `FunctorD(${domain.label},${target.label})`,
+            target.baseCategory,
+            kernelCall(
+                kernelFree(
+                    coreCategoricalDisplayedEvaluationCoreName(
+                        'stableFunctorFamily'
+                    ),
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: target.baseCategory.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: domain.expression
                     },
                     {
                         plicity: 'explicit',
@@ -4475,6 +4733,273 @@ export class CoreCategoricalProgram {
             baseCategory: family.baseCategory.expression,
             family: family.expression
         }, nodeProvenance);
+    }
+
+    /**
+     * Construct `Hom_catd(E,X,Y)` from a negative and positive section of E.
+     */
+    mixedDisplayedHomFamily(
+        familyValue: CoreCategoricalDisplayedFamily,
+        sourceSectionValue: CoreCategoricalTerm,
+        targetSectionValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'mixed displayed hom family',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const family = this.requireDisplayedFamily(
+            familyValue,
+            nodeProvenance
+        );
+        const sourceSection = this.requireDependentSectionTerm(
+            sourceSectionValue,
+            nodeProvenance,
+            'Mixed displayed hom source'
+        );
+        const targetSection = this.requireDependentSectionTerm(
+            targetSectionValue,
+            nodeProvenance,
+            'Mixed displayed hom target'
+        );
+        const expectedSourceFamily =
+            this.oppositeDisplayedFamilyExpression(
+                family,
+                nodeProvenance
+            );
+        if (
+            !kernelExpressionEquals(
+                sourceSection.baseCategory,
+                family.baseCategory.expression
+            ) ||
+            !kernelExpressionEquals(
+                sourceSection.family,
+                expectedSourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                targetSection.baseCategory,
+                family.baseCategory.expression
+            ) ||
+            !kernelExpressionEquals(
+                targetSection.family,
+                family.expression
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                'Hom_catd source must be a section of Op_catd(E), and ' +
+                    'target must be a section of E over the same base'
+            );
+        }
+        return this.makeDisplayedFamily(
+            `HomD(${family.label})`,
+            family.baseCategory,
+            this.mixedModeCall(
+                'displayedHomFamily',
+                [
+                    {
+                        plicity: 'implicit',
+                        value: family.baseCategory.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: family.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: sourceSection.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: targetSection.expression
+                    }
+                ],
+                nodeProvenance
+            )
+        );
+    }
+
+    /**
+     * Construct `Transf_catd(A,B,FF,GG)` explicitly.
+     *
+     * The public constructor is useful as the comparison target for the
+     * active `Hom_catd(Functor_catd(...))` runtime fold.
+     */
+    mixedDisplayedTransforFamily(
+        sourceFamilyValue: CoreCategoricalDisplayedFamily,
+        targetFamilyValue: CoreCategoricalDisplayedFamily,
+        sourceSectionValue: CoreCategoricalTerm,
+        targetSectionValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'mixed displayed transfor family',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const sourceFamily = this.requireDisplayedFamily(
+            sourceFamilyValue,
+            nodeProvenance
+        );
+        const targetFamily = this.requireDisplayedFamily(
+            targetFamilyValue,
+            nodeProvenance
+        );
+        const expectedSourceBase = this.oppositeCategoryExpression(
+            targetFamily.baseCategory.expression,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            sourceFamily.baseCategory.expression,
+            expectedSourceBase
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Transf_catd source family must be over the opposite of ' +
+                    'the target base'
+            );
+        }
+        const stableFamilyExpression = kernelCall(
+            kernelFree(
+                coreCategoricalDisplayedEvaluationCoreName(
+                    'stableFunctorFamily'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: targetFamily.baseCategory.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: sourceFamily.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: targetFamily.expression
+                }
+            ],
+            nodeProvenance
+        );
+        const stableFamily = this.makeDisplayedFamily(
+            'mixed-transfor-source',
+            targetFamily.baseCategory,
+            stableFamilyExpression
+        ) as InternalCoreCategoricalDisplayedFamily;
+        const sourceSection = this.requireDependentSectionTerm(
+            sourceSectionValue,
+            nodeProvenance,
+            'Mixed displayed transfor source'
+        );
+        const targetSection = this.requireDependentSectionTerm(
+            targetSectionValue,
+            nodeProvenance,
+            'Mixed displayed transfor target'
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceSection.baseCategory,
+                targetFamily.baseCategory.expression
+            ) ||
+            !kernelExpressionEquals(
+                sourceSection.family,
+                this.oppositeDisplayedFamilyExpression(
+                    stableFamily,
+                    nodeProvenance
+                )
+            ) ||
+            !kernelExpressionEquals(
+                targetSection.baseCategory,
+                targetFamily.baseCategory.expression
+            ) ||
+            !kernelExpressionEquals(
+                targetSection.family,
+                stableFamilyExpression
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_SOURCE_MISMATCH',
+                nodeProvenance,
+                'Transf_catd endpoints must be negative and positive ' +
+                    'sections of the same Functor_catd family'
+            );
+        }
+        return this.makeDisplayedFamily(
+            `TransfD(${sourceFamily.label},${targetFamily.label})`,
+            targetFamily.baseCategory,
+            this.mixedModeCall(
+                'displayedTransforFamily',
+                [
+                    {
+                        plicity: 'implicit',
+                        value: targetFamily.baseCategory.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: sourceFamily.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: targetFamily.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: sourceSection.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: targetSection.expression
+                    }
+                ],
+                nodeProvenance
+            )
+        );
+    }
+
+    /**
+     * Expose `Functord_cat(E,D)` as a rich category.
+     */
+    displayedFunctorCategory(
+        sourceValue: CoreCategoricalDisplayedFamily,
+        targetValue: CoreCategoricalDisplayedFamily,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory {
+        const nodeProvenance = this.at(
+            'displayed-functor category',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const sourceFamily = this.requireDisplayedFamily(
+            sourceValue,
+            nodeProvenance
+        );
+        const targetFamily = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            sourceFamily.baseCategory.expression,
+            targetFamily.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Displayed-functor category families must share a base'
+            );
+        }
+        return this.makeCategory(
+            `Functord(${sourceFamily.label},${targetFamily.label})`,
+            this.displayedFunctorCategoryExpression(
+                sourceFamily.baseCategory.expression,
+                sourceFamily.expression,
+                targetFamily.expression,
+                nodeProvenance
+            )
+        );
     }
 
     displayedFunctor(

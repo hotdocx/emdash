@@ -1,5 +1,22 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
+> **Current semantic continuation (2026-07-31):**
+> [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)
+> now owns the dependency-ready work. The completed displayed-bracket work
+> proved a bounded positive context envelope, but arbitrary finite depth
+> cannot be graduated independently of `Op_cat`/`Op_catd`,
+> `Functor_catd`, `Hom_catd`, `Transf_catd`, and internal `homd_int`
+> action. Follow the successor plan's dependency ledger; do not resume the
+> deferred bulk scale ledger or merely remove presentation arity checks.
+>
+> `MIXED-NEST-0A` is now implemented and focused-green: two existing opaque
+> mixed-family signatures and four existing runtime rules compile through the
+> generic engines; the isolated root profile constructs/checks the canonical
+> nested `Functord_cat`/`Hom_catd` classifier and observes the
+> `Hom_catd(Functor_catd(...)) -> Transf_catd(...)` fold. This qualifies the
+> classifier only. `MIXED-NEST-1A`, the first recursive nested-abstraction
+> lowering, is next.
+
 Date: 2026-07-28
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
 RELEASE-READY is complete, with mandatory conformance, final residual and
