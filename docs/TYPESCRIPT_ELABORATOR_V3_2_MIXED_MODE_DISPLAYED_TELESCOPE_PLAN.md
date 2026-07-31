@@ -9,7 +9,8 @@ architecture audit has measured a displayed-curry/introduction dependency at
 checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6`;
 the no-active-edit `MIXED-CURRY-0A` design/probe has rejected both ordinary
 fibrewise curry and a premature new primitive; `MIXED-NEST-ACTION-0B` is
-implemented and focused-green with its local checkpoint pending
+complete and focused-green at checkpoint
+`a31b8927910d32613c7d0fac1862317b08dbf920`
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -382,7 +383,7 @@ Also outside the first tranche:
 | `MIXED-NEST-0A` | complete and focused-green at checkpoint `77f79bf8e139d856965f41733d3aeff9ffefd9d1` | completed displayed-ND higher profile and approved architecture | Two existing opaque signatures and four existing runtime rules compile generically in isolated `fibred-displayed-mixed-nest-1`; seven typed constructors build/check the canonical nested classifier and prove its `Transf_catd` fold. The independent constant-`Cat` fold is deferred at its measured nested proof-conversion seam. Zero Lambdapi semantic delta. |
 | `MIXED-NEST-1A0` | read-only architecture audit complete at checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6` | green `MIXED-NEST-0A` | Establish that the existing ordinary `categorical-abstraction` node cannot type the canonical inner `Functord`, that the bounded `displayedFunctorLambda` cannot consume context-varying endpoint families, and that the active kernel names the nested classifier but has no selected general displayed-curry/introduction owner. Add no code or kernel semantics. |
 | `MIXED-CURRY-0A` | complete design result; no active-kernel or TypeScript semantic delta | complete `MIXED-NEST-1A0` audit | Ordinary fibrewise curry is ill-typed for a source over `K^op`. A well-typed two-sided total context exists for the plain `Functor_catd` case, but the canonical `Hom_catd(Const(Catd_cat Z),Ebar,Dbar)` target is one enrichment level higher and has no existing general curry. No transparent composite or justified smallest primitive is selected. |
-| `MIXED-NEST-ACTION-0B` | implemented and focused-green; checkpoint pending | complete `MIXED-CURRY-0A`; green displayed-ND foundation | Nine existing declarations and twelve exact source computations/projections close the dependency path for the direct `homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_` cascade. Two rich typed consumers expose `homd_int(FF)` and its terminal `homd_(FF,x,u,y,v)` family. Zero Lambdapi, intrinsic-owner, checker-branch, external-coherence, proof-fallback, nested-lowering, text, or browser delta. |
+| `MIXED-NEST-ACTION-0B` | complete and focused-green at checkpoint `a31b8927910d32613c7d0fac1862317b08dbf920` | complete `MIXED-CURRY-0A`; green displayed-ND foundation | Nine existing declarations and twelve exact source computations/projections close the dependency path for the direct `homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_` cascade. Two rich typed consumers expose `homd_int(FF)` and its terminal `homd_(FF,x,u,y,v)` family. Zero Lambdapi, intrinsic-owner, checker-branch, external-coherence, proof-fallback, nested-lowering, text, or browser delta. |
 | `MIXED-NEST-1A` | dependency-gated; ordinary curry is rejected | green `MIXED-NEST-ACTION-0B` plus a separately frozen recursive factorization IR | Add the first recursive nested displayed-abstraction IR/lowering selected by the expected `Functord_cat(...,Hom_catd(...))` classifier. Begin with eta/factorization of already-coherent internal terms; preserve callback-once locally nameless evidence and fail closed rather than synthesize pointwise coherence. |
 | `MIXED-NEST-ACTION-1B` | pending | green `MIXED-NEST-1A` | Exercise base-arrow action through the inner mixed classifier and one `homd_int`/next-Hom consumer. Add no constructor-specific generic functoriality/naturality rules. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
@@ -1063,9 +1064,9 @@ authority conflict, or an operation outside the stated Git boundary.
   exposes rich `displayedInternalHom` and
   `displayedInternalHomEndpointFamily` consumers, and focused tests exercise
   the first and final folds. This does not implement nested abstraction.
-  The exact local checkpoint remains pending staged review; the required
-  shared TypeScript gate and its unrelated baseline exception are recorded
-  below.
+  The bounded implementation checkpoint is
+  `a31b8927910d32613c7d0fac1862317b08dbf920`; the required shared TypeScript
+  gate and its unrelated baseline exception are recorded below.
 - **2026-07-31 — `MIXED-NEST-ACTION-0B` validation boundary measured.**
   The new five-test transfer/consumer suite passed; its initially redundant
   whole-environment revalidation was then removed because the generic
