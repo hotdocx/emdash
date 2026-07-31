@@ -14,8 +14,11 @@ its non-effects. `RECURSIVE-MIXED-REFLECT-1A` and
 implementation checkpoint is
 `12b4f97e57880ef32f36fd5e143465b4c853c055`. The structural graduation row
 requires the small public Hom-category closure now frozen below as
-D-DTTLF-USABILITY-030. That exact proposal is the next dependency-ready
-review, not an implicit broadening of the implemented profile.
+D-DTTLF-USABILITY-030. Its proposal-only checkpoint is
+`e41f44acb975f6d0a30ab6277c39ea2c25d12d36`; the separate review recorded in
+the decision ledger approves exactly that gate under the standing unattended
+delegation. `RECURSIVE-MIXED-HOM-CLOSURE-1C` is dependency-ready, not an
+implicit broadening of the implemented profile.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -510,7 +513,7 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-REFLECT-0A` | complete in plan checkpoint `6828225` | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
 | `RECURSIVE-MIXED-REFLECT-1A` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
-| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | exact proposal frozen below under D-DTTLF-USABILITY-030; awaiting separate review | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | Expose the already-owned generic Hom category through the direct program API and use one parameterized TypeScript loop to construct/check a finite parallel-cell and action tower rooted at recovered `Transfd_cat`. No new Core/kernel semantics. |
+| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | approved under D-DTTLF-USABILITY-030; implementation dependency-ready | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | Expose the already-owned generic Hom category through the direct program API and use one parameterized TypeScript loop to construct/check a finite parallel-cell and action tower rooted at recovered `Transfd_cat`. No new Core/kernel semantics. |
 | `RECURSIVE-MIXED-GRADUATE-1D` | pending green `HOM-CLOSURE-1C` | recursive normalization/reification plus parameterized public Hom/action closure | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. It does not silently promote text/browser syntax. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1E` | deferred until semantic graduation | `GRADUATE-1D` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
@@ -813,3 +816,10 @@ authority conflict, or an operation outside the stated Git boundary.
   runtime/proof rule, external coherence evidence, fixed-depth semantics,
   text syntax, or curry/product work. Separate review is pending under the
   standing unattended delegation.
+- **2026-07-31 — D-DTTLF-USABILITY-030 approved exactly as proposed.** The
+  proposal-only checkpoint is
+  `e41f44acb975f6d0a30ab6277c39ea2c25d12d36`. No immediate human correction
+  superseded it, so the standing unattended delegation records a separate
+  approval with human supersession. It authorizes only
+  `RECURSIVE-MIXED-HOM-CLOSURE-1C` and its focused tests; it grants no kernel,
+  text/browser, remote Git, or graduation authority.
