@@ -284,7 +284,7 @@ export const CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_PROGRAM_REVISION =
     'DISPLAYED-ND-HIGHER-TARGET-1A-CATEGORICAL-PROGRAM-1' as const;
 
 export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
-    'MIXED-NEST-ACTION-1B-CATEGORICAL-PROGRAM-1' as const;
+    'DISPLAYED-TELESCOPE-GENERIC-1-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -459,8 +459,9 @@ export interface CoreCategoricalProgramOptions {
      * `hom`, `homBoundary`, and `apply` still own the action ladder.
      * The mixed-mode profile adds only the existing `Hom_catd` and
      * `Transf_catd` signatures/four existing reductions plus typed classifier
-     * constructors. It qualifies the canonical nested target but does not
-     * yet claim recursive nested-abstraction lowering.
+     * constructors, recursive nested eta/action, and the reviewed arbitrary
+     * finite canonical sibling-layer telescope fold. It still does not claim
+     * unrestricted mixed classifiers or general `:^nd`.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -1182,6 +1183,8 @@ export class CoreCategoricalProgram {
                     this.displayedEvaluationEnabled,
                 displayedDependentContextualAbstraction:
                     this.displayedChainEnabled,
+                displayedGenericTelescope:
+                    this.mixedModeEnabled,
                 mixedNestedFactorization:
                     this.mixedModeEnabled
             }
@@ -6546,6 +6549,317 @@ export class CoreCategoricalProgram {
     }
 
     /**
+     * Derive and validate D-DTTLF-USABILITY-026's arbitrary finite
+     * canonical sibling layers. The caller supplies only source-ordered
+     * families; literal bases determine sibling blocks and Sigma
+     * transitions.
+     */
+    private displayedGenericDependentContextLambda(
+        bindingValues:
+            readonly CoreCategoricalDisplayedContextBinding[],
+        targetValue: CoreCategoricalDisplayedFamily,
+        body: (
+            tokens: readonly CoreCategoricalSlotToken[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        this.requireMixedMode(nodeProvenance);
+        if (bindingValues.length < 2) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'A dependent displayed telescope requires at least two ' +
+                    'bindings in at least two layers'
+            );
+        }
+        const names = new Set<string>();
+        const bindings = bindingValues.map((binding, offset) => {
+            if (names.has(binding.name)) {
+                throw new CoreCategoricalProgramError(
+                    'INVALID_DISPLAYED_CONTEXT',
+                    nodeProvenance,
+                    `Duplicate generic displayed telescope binding ` +
+                        `'${binding.name}'`
+                );
+            }
+            names.add(binding.name);
+            return Object.freeze({
+                position: offset + 1,
+                name: binding.name,
+                family: this.requireDisplayedFamily(
+                    binding.family,
+                    nodeProvenance
+                )
+            });
+        });
+
+        interface Layer {
+            readonly baseCategory:
+                InternalCoreCategoricalCategory;
+            readonly bindings: readonly typeof bindings[number][];
+            readonly productFamily: KernelExpression;
+        }
+        const productFamily = (
+            baseCategory: InternalCoreCategoricalCategory,
+            layerBindings: readonly typeof bindings[number][]
+        ): KernelExpression => {
+            let result = layerBindings[0].family.expression;
+            for (const binding of layerBindings.slice(1)) {
+                result = this.displayedProductExpression(
+                    baseCategory.expression,
+                    result,
+                    binding.family.expression,
+                    nodeProvenance
+                );
+            }
+            return result;
+        };
+        const totalOfLayer = (
+            layer: Layer
+        ): KernelExpression => kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1A_PRIMITIVE_NAMES['sigma-category'],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: layer.baseCategory.expression
+                },
+                {
+                    plicity: 'explicit',
+                    value: layer.productFamily
+                }
+            ],
+            nodeProvenance
+        );
+
+        const layers: Layer[] = [];
+        let currentBaseCategory =
+            bindings[0].family.baseCategory;
+        let currentBindings: typeof bindings[number][] = [];
+        for (const binding of bindings) {
+            if (kernelExpressionEquals(
+                binding.family.baseCategory.expression,
+                currentBaseCategory.expression
+            )) {
+                currentBindings.push(binding);
+                continue;
+            }
+            const currentLayer: Layer = {
+                baseCategory: currentBaseCategory,
+                bindings: Object.freeze([...currentBindings]),
+                productFamily: productFamily(
+                    currentBaseCategory,
+                    currentBindings
+                )
+            };
+            const expectedNextBase = totalOfLayer(currentLayer);
+            if (!kernelExpressionEquals(
+                binding.family.baseCategory.expression,
+                expectedNextBase
+            )) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    `Displayed binding '${binding.name}' must be based on ` +
+                        'the Sigma total of the preceding sibling layer'
+                );
+            }
+            layers.push(currentLayer);
+            currentBaseCategory =
+                binding.family.baseCategory;
+            currentBindings = [binding];
+        }
+        layers.push({
+            baseCategory: currentBaseCategory,
+            bindings: Object.freeze([...currentBindings]),
+            productFamily: productFamily(
+                currentBaseCategory,
+                currentBindings
+            )
+        });
+        if (layers.length < 2) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'One independent displayed sibling layer belongs to ' +
+                    'displayedContextLambda'
+            );
+        }
+
+        const finalLayer = layers[layers.length - 1];
+        const target = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            target.baseCategory.expression,
+            finalLayer.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Generic displayed telescope target must be based on the ' +
+                    'final sibling layer base'
+            );
+        }
+
+        const priorPositionsByBinding = new Map<
+            number,
+            readonly number[]
+        >();
+        const plannerSlots: Parameters<
+            typeof planCoreCategoricalContextDependencies
+        >[0]['slots'][number][] = [{
+            name: `${bindings[0].name}ContextBase`,
+            classifier:
+                coreCategoricalClosedContextClassifier(
+                    {
+                        tag: 'object',
+                        category:
+                            layers[0].baseCategory.expression
+                    },
+                    nodeProvenance
+                ),
+            provenance: nodeProvenance
+        }];
+        const siblingGroups: {
+            readonly positions: readonly number[];
+            readonly provenance: Provenance;
+        }[] = [];
+        const priorLayerPositions: number[] = [];
+        for (const layer of layers) {
+            const dependencies = Object.freeze([
+                0,
+                ...priorLayerPositions
+            ]);
+            for (const binding of layer.bindings) {
+                priorPositionsByBinding.set(
+                    binding.position,
+                    dependencies
+                );
+                plannerSlots.push({
+                    name: binding.name,
+                    classifier:
+                        coreCategoricalDisplayedContextClassifier(
+                            layer.baseCategory.expression,
+                            binding.family.expression,
+                            dependencies.map(position =>
+                                coreCategoricalContextSlotReference(
+                                    binding.position - position - 1,
+                                    nodeProvenance
+                                )
+                            ),
+                            {
+                                tag: 'indexed-object' as const,
+                                baseCategory:
+                                    layer.baseCategory.expression,
+                                family: binding.family.expression,
+                                index: binding.position - 1
+                            },
+                            nodeProvenance
+                        ),
+                    provenance: nodeProvenance
+                });
+            }
+            if (layer.bindings.length > 1) {
+                siblingGroups.push({
+                    positions:
+                        layer.bindings.map(binding =>
+                            binding.position
+                        ),
+                    provenance: nodeProvenance
+                });
+            }
+            priorLayerPositions.push(
+                ...layer.bindings.map(binding =>
+                    binding.position
+                )
+            );
+        }
+        const plan = planCoreCategoricalContextDependencies({
+            slots: plannerSlots,
+            siblingGroups: siblingGroups.length === 0
+                ? undefined
+                : siblingGroups
+        });
+        const expectedEdgeKeys = new Set<string>();
+        for (const binding of bindings) {
+            for (
+                const dependency of
+                priorPositionsByBinding.get(binding.position) ?? []
+            ) {
+                expectedEdgeKeys.add(
+                    `${dependency}:${binding.position}`
+                );
+            }
+        }
+        const actualEdgeKeys = new Set(
+            plan.dependencyEdges.map(edge =>
+                `${edge.dependencyPosition}:` +
+                    `${edge.dependentPosition}`
+            )
+        );
+        const expectedGroupKeys = siblingGroups.map(group =>
+            group.positions.join(',')
+        );
+        const actualGroupKeys = plan.groupedProducts.map(group =>
+            group.positions.join(',')
+        );
+        const chainsMatch = bindings.every(binding => {
+            const expected =
+                priorPositionsByBinding.get(binding.position) ?? [];
+            const node = plan.graph.nodes[binding.position];
+            return node !== undefined &&
+                node.directDependencies
+                    .map(dependency => dependency.position)
+                    .join(',') === expected.join(',');
+        });
+        if (
+            actualEdgeKeys.size !== expectedEdgeKeys.size ||
+            [...expectedEdgeKeys].some(key =>
+                !actualEdgeKeys.has(key)
+            ) ||
+            actualGroupKeys.join(';') !==
+                expectedGroupKeys.join(';') ||
+            plan.groupedProducts.some(group =>
+                group.relation !==
+                    'shared-minimal-base-siblings'
+            ) ||
+            !chainsMatch
+        ) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Dependency analysis did not establish the exact finite ' +
+                    'canonical sibling-layer telescope'
+            );
+        }
+
+        return this.builder.displayedDependentContextLambda(
+            bindings.map(binding => ({
+                name: binding.name,
+                family: binding.family.expression,
+                baseCategory:
+                    binding.family.baseCategory.expression
+            })),
+            layers[0].baseCategory.expression,
+            target.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
      * Validate and lower the frozen three-level mixed telescope selected by
      * DISPLAYED-CHAIN-2A. Dependency and sibling structure are derived from
      * the supplied family bases and source order; callers provide no flags.
@@ -6847,6 +7161,15 @@ export class CoreCategoricalProgram {
             options.source
         );
         this.requireDisplayedChain(nodeProvenance);
+        if (this.mixedModeEnabled) {
+            return this.displayedGenericDependentContextLambda(
+                bindingValues,
+                targetValue,
+                body,
+                options,
+                nodeProvenance
+            );
+        }
         if (bindingValues.length === 4) {
             return this.displayedMixedDependentContextLambda(
                 bindingValues,

@@ -414,6 +414,14 @@ interface CoreCategoricalAbstractionEvidenceBase {
     readonly provenance: Provenance;
 }
 
+export interface CoreCategoricalDisplayedTelescopeLayerEvidence {
+    readonly layerIndex: number;
+    readonly baseCategory: KernelExpression;
+    readonly bindingNames: readonly string[];
+    readonly sourceFamilies: readonly KernelExpression[];
+    readonly sourceFamily: KernelExpression;
+}
+
 export type CoreCategoricalAbstractionEvidence =
     | (
         CoreCategoricalAbstractionEvidenceBase & {
@@ -520,6 +528,27 @@ export type CoreCategoricalAbstractionEvidence =
     | (
         CoreCategoricalAbstractionEvidenceBase & {
             readonly rule:
+                'categorical.displayed-generic-dependent-context-bracket';
+            readonly variation: 'functorial';
+            readonly dependency: 'displayed';
+            readonly bindingNames: readonly string[];
+            readonly sourceFamilies: readonly KernelExpression[];
+            readonly liftedBindingFamilies:
+                readonly KernelExpression[];
+            readonly sourceFamily: KernelExpression;
+            readonly targetFamily: KernelExpression;
+            readonly contextRootCategory: KernelExpression;
+            readonly finalBaseCategory: KernelExpression;
+            readonly layers:
+                readonly CoreCategoricalDisplayedTelescopeLayerEvidence[];
+            readonly contextSize: number;
+            readonly contextRelation:
+                'arbitrary-finite-canonical-layer-fold';
+        }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
                 'categorical.mixed-nested-displayed-eta';
             readonly variation: 'functorial';
             readonly dependency: 'displayed';
@@ -613,6 +642,12 @@ export interface CoreCategoricalScopedBuilderOptions {
      * dependency edge `k : K; a : A[k]; b : B[(k,a)]`.
      */
     readonly displayedDependentContextualAbstraction?: boolean;
+    /**
+     * Enable D-DTTLF-USABILITY-026's arbitrary finite canonical sibling-layer
+     * fold. The flat binding list must carry literal family bases and must
+     * contain at least two Sigma-separated layers.
+     */
+    readonly displayedGenericTelescope?: boolean;
     /**
      * Enable only MIXED-NEST-1A's exact recursive eta/factorization for an
      * already-coherent object of the canonical mixed nested Hom family.
@@ -6974,6 +7009,477 @@ export class CoreCategoricalScopedBuilder {
     }
 
     /**
+     * D-DTTLF-USABILITY-026 arbitrary finite canonical layer fold.
+     *
+     * Consecutive families over one literal base form a sibling layer. Each
+     * following layer must be based on the Sigma total of the preceding
+     * layer's left-associated product. Every factor projection is then
+     * lifted through all later layers by the existing one-level helper.
+     */
+    private displayedGenericDependentContextLambda(
+        bindings: readonly {
+            readonly name: string;
+            readonly family: KernelExpression;
+            readonly baseCategory: KernelExpression;
+        }[],
+        contextRootCategory: KernelExpression,
+        targetFamily: KernelExpression,
+        bodyBuilder: (
+            tokens: readonly CoreCategoricalSlotToken[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions
+    ): CoreCategoricalTerm {
+        kernelAssertScoped(contextRootCategory);
+        kernelAssertScoped(targetFamily);
+        const nodeProvenance = this.nodeProvenance(
+            'displayed generic dependent contextual abstraction',
+            options.provenance
+        );
+        if (this.options.displayedGenericTelescope !== true) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Generic displayed telescope abstraction requires the ' +
+                    'reviewed DISPLAYED-TELESCOPE-GENERIC-1 capability'
+            );
+        }
+        if (bindings.length < 2) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Generic displayed dependent abstraction requires at ' +
+                    'least two bindings in at least two layers'
+            );
+        }
+        const names = new Set<string>();
+        for (const binding of bindings) {
+            assertSafeIdentifier(
+                binding.name,
+                'Generic displayed telescope binder hint'
+            );
+            kernelAssertScoped(binding.family);
+            kernelAssertScoped(binding.baseCategory);
+            if (names.has(binding.name)) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    `Duplicate generic displayed telescope binder ` +
+                        `'${binding.name}'`
+                );
+            }
+            names.add(binding.name);
+        }
+        if (!kernelExpressionEquals(
+            bindings[0].baseCategory,
+            contextRootCategory
+        )) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Generic displayed telescope root does not match the first ' +
+                    'family base'
+            );
+        }
+
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'functorial';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'displayed';
+        if (variation !== 'functorial' || dependency !== 'displayed') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Generic displayed telescope abstraction requires ' +
+                    'functorial variation and displayed dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                'Generic displayed telescope abstraction is covariant'
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Generic displayed telescope abstraction binds displayed ' +
+                    'objects'
+            );
+        }
+
+        interface Layer {
+            readonly baseCategory: KernelExpression;
+            readonly bindingIndices: readonly number[];
+            readonly tree: CoreCategoricalDisplayedFamilyTree;
+        }
+        const layers: Layer[] = [];
+        let currentBaseCategory = bindings[0].baseCategory;
+        let currentBindingIndices: number[] = [];
+        for (let index = 0; index < bindings.length; index += 1) {
+            const binding = bindings[index];
+            if (kernelExpressionEquals(
+                binding.baseCategory,
+                currentBaseCategory
+            )) {
+                currentBindingIndices.push(index);
+                continue;
+            }
+            const tree = this.displayedFamilyTree(
+                currentBindingIndices.map(bindingIndex => ({
+                    ordinal: bindingIndex,
+                    family: bindings[bindingIndex].family
+                })),
+                currentBaseCategory,
+                nodeProvenance
+            );
+            const expectedNextBase = kernelCall(
+                kernelFree(
+                    CORE_DIRECTED_1A_PRIMITIVE_NAMES[
+                        'sigma-category'
+                    ],
+                    nodeProvenance
+                ),
+                [
+                    {
+                        plicity: 'implicit',
+                        value: currentBaseCategory
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: tree.family
+                    }
+                ],
+                nodeProvenance
+            );
+            if (!kernelExpressionEquals(
+                binding.baseCategory,
+                expectedNextBase
+            )) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    `Displayed binding '${binding.name}' is not based on ` +
+                        'the Sigma total of the preceding sibling layer'
+                );
+            }
+            layers.push({
+                baseCategory: currentBaseCategory,
+                bindingIndices: Object.freeze([
+                    ...currentBindingIndices
+                ]),
+                tree
+            });
+            currentBaseCategory = binding.baseCategory;
+            currentBindingIndices = [index];
+        }
+        const finalTree = this.displayedFamilyTree(
+            currentBindingIndices.map(bindingIndex => ({
+                ordinal: bindingIndex,
+                family: bindings[bindingIndex].family
+            })),
+            currentBaseCategory,
+            nodeProvenance
+        );
+        layers.push({
+            baseCategory: currentBaseCategory,
+            bindingIndices: Object.freeze([
+                ...currentBindingIndices
+            ]),
+            tree: finalTree
+        });
+        if (layers.length < 2) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'One independent displayed sibling layer belongs to ' +
+                    'displayedContextLambda, not the dependent telescope'
+            );
+        }
+
+        const liftedCompilations = new Map<
+            number,
+            CoreCategoricalDisplayedContextualCompilation
+        >();
+        for (
+            let layerIndex = 0;
+            layerIndex < layers.length;
+            layerIndex += 1
+        ) {
+            const layer = layers[layerIndex];
+            const projections = this.displayedProjectionWiring(
+                layer.baseCategory,
+                layer.tree,
+                nodeProvenance
+            );
+            for (const bindingIndex of layer.bindingIndices) {
+                let compilation = projections.get(bindingIndex);
+                if (compilation === undefined) {
+                    throw new Error(
+                        'Generic displayed layer lost a factor projection'
+                    );
+                }
+                let liftBaseCategory = layer.baseCategory;
+                for (
+                    let nextLayerIndex = layerIndex + 1;
+                    nextLayerIndex < layers.length;
+                    nextLayerIndex += 1
+                ) {
+                    const nextLayer = layers[nextLayerIndex];
+                    compilation =
+                        this.liftDisplayedCompilationThroughNextFamily(
+                            liftBaseCategory,
+                            compilation,
+                            nextLayer.tree.family,
+                            nodeProvenance
+                        );
+                    liftBaseCategory = nextLayer.baseCategory;
+                }
+                liftedCompilations.set(bindingIndex, compilation);
+            }
+        }
+
+        const finalLayer = layers[layers.length - 1];
+        const finalBaseCategory = finalLayer.baseCategory;
+        const sourceFamily = finalLayer.tree.family;
+        const baseToken = this.slot(
+            `${bindings.map(binding => binding.name).join('')}ContextBase`,
+            finalBaseCategory,
+            nodeProvenance
+        );
+        const baseOrdinal = baseToken.node.tag === 'slot-token'
+            ? baseToken.node.ordinal
+            : -1;
+        const fibreTokens = bindings.map((binding, index) => {
+            const compilation = liftedCompilations.get(index);
+            if (compilation === undefined) {
+                throw new Error(
+                    'Generic displayed telescope lost a lifted binding'
+                );
+            }
+            return this.indexedObjectSlot(
+                binding.name,
+                finalBaseCategory,
+                compilation.targetFamily,
+                baseOrdinal,
+                nodeProvenance
+            );
+        });
+        const fibreOrdinals = fibreTokens.map(token =>
+            token.node.tag === 'slot-token'
+                ? token.node.ordinal
+                : -1
+        );
+        const outerScope = [...this.activeTokenOrdinals];
+        this.activeTokenOrdinals.unshift(baseOrdinal);
+        for (const ordinal of fibreOrdinals) {
+            this.activeTokenOrdinals.unshift(ordinal);
+        }
+        this.activeDisplayedBases.set(baseOrdinal, baseToken);
+        try {
+            // Evaluate exactly once; no callback is retained.
+            const body = this.requireTerm(
+                bodyBuilder(Object.freeze(
+                    fibreTokens.map(token =>
+                        token as CoreCategoricalSlotToken
+                    )
+                )),
+                nodeProvenance
+            );
+            const localOrdinals = new Set([
+                baseOrdinal,
+                ...fibreOrdinals
+            ]);
+            if (usageIntersects(body.usage, new Set(outerScope))) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'Generic displayed telescope abstraction does not ' +
+                        'capture an outer context'
+                );
+            }
+            if (
+                body.type.tag !== 'indexed-object' ||
+                body.type.indexOrdinal !== baseOrdinal ||
+                !kernelExpressionEquals(
+                    body.type.baseCategory,
+                    finalBaseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.family,
+                    targetFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Generic displayed telescope body is not an object of ' +
+                        'the target family over the final layer base'
+                );
+            }
+
+            const wiring: CoreCategoricalDisplayedWiring =
+                new Map(fibreOrdinals.map((ordinal, index) => {
+                    const compilation = liftedCompilations.get(index);
+                    if (compilation === undefined) {
+                        throw new Error(
+                            'Generic displayed telescope wiring lost a ' +
+                                'binding'
+                        );
+                    }
+                    return [ordinal, compilation] as const;
+                }));
+            const compilation = this.compileDisplayedContextual(
+                body,
+                baseOrdinal,
+                finalBaseCategory,
+                wiring,
+                localOrdinals,
+                nodeProvenance
+            );
+            if (
+                !kernelExpressionEquals(
+                    compilation.sourceFamily,
+                    sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    compilation.targetFamily,
+                    targetFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Generic displayed telescope compilation produced the ' +
+                        'wrong source or target family'
+                );
+            }
+
+            const resultExpression = compilation.term;
+            const resultType: CoreType = {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategory(
+                    finalBaseCategory,
+                    sourceFamily,
+                    targetFamily,
+                    nodeProvenance
+                ),
+                baseCategory: finalBaseCategory,
+                sourceFamily,
+                targetFamily
+            };
+            const resultNode: TemporaryCategoricalNode = {
+                tag: 'explicit-core-term',
+                term: resultExpression,
+                provenance: nodeProvenance
+            };
+            let remainingUsage = body.usage;
+            for (const ordinal of [
+                baseOrdinal,
+                ...fibreOrdinals
+            ]) {
+                remainingUsage = removeUsage(
+                    remainingUsage,
+                    ordinal
+                );
+            }
+            const closed = deepFreeze({
+                term: resultExpression,
+                type: copyCoreType(resultType),
+                sourceSpan: this.spanFor(nodeProvenance),
+                recovered: body.closed === undefined
+                    ? []
+                    : [...body.closed.recovered]
+            });
+            const provisional = this.makeTerm(
+                resultNode,
+                resultType,
+                remainingUsage,
+                closed,
+                body.abstractions
+            );
+            const bodyScope = [
+                ...[...fibreOrdinals].reverse(),
+                baseOrdinal,
+                ...outerScope
+            ];
+            const liftedBindingFamilies = bindings.map(
+                (_binding, index) => {
+                    const lifted = liftedCompilations.get(index);
+                    if (lifted === undefined) {
+                        throw new Error(
+                            'Generic displayed evidence lost a binding'
+                        );
+                    }
+                    return lifted.targetFamily;
+                }
+            );
+            const evidence = deepFreeze({
+                rule: (
+                    'categorical.displayed-generic-dependent-context-bracket'
+                ) as const,
+                name:
+                    bindings.map(binding => binding.name).join(','),
+                plicity,
+                variation: 'functorial' as const,
+                polarity: 'covariant' as const,
+                cellLevel: 'object' as const,
+                dependency: 'displayed' as const,
+                sourceCategory: finalBaseCategory,
+                bindingNames:
+                    bindings.map(binding => binding.name),
+                sourceFamilies:
+                    bindings.map(binding => binding.family),
+                liftedBindingFamilies,
+                sourceFamily,
+                targetFamily,
+                contextRootCategory,
+                finalBaseCategory,
+                layers: layers.map((layer, layerIndex) => ({
+                    layerIndex,
+                    baseCategory: layer.baseCategory,
+                    bindingNames: layer.bindingIndices.map(
+                        index => bindings[index].name
+                    ),
+                    sourceFamilies: layer.bindingIndices.map(
+                        index => bindings[index].family
+                    ),
+                    sourceFamily: layer.tree.family
+                })),
+                contextSize: bindings.length,
+                contextRelation: (
+                    'arbitrary-finite-canonical-layer-fold'
+                ) as const,
+                body: this.normalizeNode(body, bodyScope),
+                result: this.normalizeNode(provisional, outerScope),
+                structuralPrerequisites:
+                    compilation.structuralPrerequisites,
+                dependentPrerequisites:
+                    compilation.dependentPrerequisites,
+                provenance: nodeProvenance
+            });
+            return this.makeTerm(
+                resultNode,
+                resultType,
+                remainingUsage,
+                closed,
+                [...body.abstractions, evidence]
+            );
+        } finally {
+            this.activeDisplayedBases.delete(baseOrdinal);
+            for (
+                let index = 0;
+                index < fibreOrdinals.length + 1;
+                index += 1
+            ) {
+                this.activeTokenOrdinals.shift();
+            }
+        }
+    }
+
+    /**
      * Frozen DISPLAYED-CHAIN-2A stress:
      *
      *   k : K;
@@ -7403,6 +7909,7 @@ export class CoreCategoricalScopedBuilder {
         bindings: readonly {
             readonly name: string;
             readonly family: KernelExpression;
+            readonly baseCategory?: KernelExpression;
         }[],
         contextRootCategory: KernelExpression,
         targetFamily: KernelExpression,
@@ -7426,6 +7933,30 @@ export class CoreCategoricalScopedBuilder {
                 nodeProvenance,
                 'Displayed dependent contextual abstraction requires the ' +
                 'reviewed DISPLAYED-CHAIN-1A capability'
+            );
+        }
+        if (this.options.displayedGenericTelescope === true) {
+            const genericBindings = bindings.map(binding => {
+                if (binding.baseCategory === undefined) {
+                    this.fail(
+                        'CLASSIFIER_ARGUMENT_MISMATCH',
+                        nodeProvenance,
+                        'Generic displayed telescope lowering requires the ' +
+                            `literal base of '${binding.name}'`
+                    );
+                }
+                return {
+                    name: binding.name,
+                    family: binding.family,
+                    baseCategory: binding.baseCategory
+                };
+            });
+            return this.displayedGenericDependentContextLambda(
+                genericBindings,
+                contextRootCategory,
+                targetFamily,
+                bodyBuilder,
+                options
             );
         }
         if (bindings.length === 4) {
