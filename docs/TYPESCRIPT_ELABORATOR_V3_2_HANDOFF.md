@@ -9,10 +9,11 @@
 > action. Follow the successor plan's dependency ledger; do not resume the
 > deferred bulk scale ledger or merely remove presentation arity checks.
 >
-> `MIXED-NEST-0A` is now implemented and focused-green: two existing opaque
-> mixed-family signatures and four existing runtime rules compile through the
-> generic engines; the isolated root profile constructs/checks the canonical
-> nested `Functord_cat`/`Hom_catd` classifier and observes the
+> `MIXED-NEST-0A` is complete and focused-green at
+> `77f79bf8e139d856965f41733d3aeff9ffefd9d1`: two existing opaque mixed-family
+> signatures and four existing runtime rules compile through the generic
+> engines; the isolated root profile constructs/checks the canonical nested
+> `Functord_cat`/`Hom_catd` classifier and observes the
 > `Hom_catd(Functor_catd(...)) -> Transf_catd(...)` fold. This qualifies the
 > classifier only. `MIXED-NEST-1A`, the first recursive nested-abstraction
 > lowering, is next.

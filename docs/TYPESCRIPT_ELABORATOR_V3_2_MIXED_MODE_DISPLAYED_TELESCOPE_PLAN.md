@@ -2,8 +2,10 @@
 
 Date: 2026-07-31
 
-Status: living approved architecture; `MIXED-NEST-0A` is implemented and
-focused-green; `MIXED-NEST-1A` is the next dependency-ready slice
+Status: living approved architecture; `MIXED-NEST-0A` is complete and
+focused-green at checkpoint
+`77f79bf8e139d856965f41733d3aeff9ffefd9d1`; `MIXED-NEST-1A` is the next
+dependency-ready slice
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -373,7 +375,7 @@ Also outside the first tranche:
 
 | Slice | Status | Dependency | Exact purpose |
 | --- | --- | --- | --- |
-| `MIXED-NEST-0A` | implemented and focused-green; local checkpoint pending | completed displayed-ND higher profile and approved architecture | Two existing opaque signatures and four existing runtime rules compile generically in isolated `fibred-displayed-mixed-nest-1`; seven typed constructors build/check the canonical nested classifier and prove its `Transf_catd` fold. The independent constant-`Cat` fold is deferred at its measured nested proof-conversion seam. Zero Lambdapi semantic delta. |
+| `MIXED-NEST-0A` | complete and focused-green at checkpoint `77f79bf8e139d856965f41733d3aeff9ffefd9d1` | completed displayed-ND higher profile and approved architecture | Two existing opaque signatures and four existing runtime rules compile generically in isolated `fibred-displayed-mixed-nest-1`; seven typed constructors build/check the canonical nested classifier and prove its `Transf_catd` fold. The independent constant-`Cat` fold is deferred at its measured nested proof-conversion seam. Zero Lambdapi semantic delta. |
 | `MIXED-NEST-1A` | pending | green `MIXED-NEST-0A` | Add the first recursive nested `categorical-abstraction` lowering selected by the expected `Functord_cat(...,Hom_catd(...))` classifier. Preserve callback-once locally nameless evidence and fail closed outside the qualified shape. |
 | `MIXED-NEST-ACTION-1B` | pending | green `MIXED-NEST-1A` | Exercise base-arrow action through the inner mixed classifier and one `homd_int`/next-Hom consumer. Add no constructor-specific generic functoriality/naturality rules. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
@@ -439,7 +441,8 @@ an unchanged green checkpoint when the changed surface cannot affect it.
 
 ## `MIXED-NEST-0A` Implementation Result
 
-The first slice is implemented without an active-kernel edit.
+The first slice is implemented at checkpoint
+`77f79bf8e139d856965f41733d3aeff9ffefd9d1` without an active-kernel edit.
 
 The generic transfer adds:
 
@@ -604,4 +607,5 @@ authority conflict, or an operation outside the stated Git boundary.
   two-signature/four-rule generic closure, isolated profile, seven typed
   constructors, canonical nested classifier, and `Transf_catd` fold pass
   focused validation. The result deliberately leaves the recursive nested
-  abstraction node to `MIXED-NEST-1A`.
+  abstraction node to `MIXED-NEST-1A`. The bounded implementation checkpoint
+  is `77f79bf8e139d856965f41733d3aeff9ffefd9d1`.
