@@ -10,7 +10,9 @@ checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6`;
 the no-active-edit `MIXED-CURRY-0A` design/probe has rejected both ordinary
 fibrewise curry and a premature new primitive; `MIXED-NEST-ACTION-0B` is
 complete and focused-green at checkpoint
-`a31b8927910d32613c7d0fac1862317b08dbf920`
+`a31b8927910d32613c7d0fac1862317b08dbf920`; the next
+dependency-ready slice is the frozen exact-eta recursive factorization
+boundary `MIXED-NEST-IR-0C`
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -384,7 +386,8 @@ Also outside the first tranche:
 | `MIXED-NEST-1A0` | read-only architecture audit complete at checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6` | green `MIXED-NEST-0A` | Establish that the existing ordinary `categorical-abstraction` node cannot type the canonical inner `Functord`, that the bounded `displayedFunctorLambda` cannot consume context-varying endpoint families, and that the active kernel names the nested classifier but has no selected general displayed-curry/introduction owner. Add no code or kernel semantics. |
 | `MIXED-CURRY-0A` | complete design result; no active-kernel or TypeScript semantic delta | complete `MIXED-NEST-1A0` audit | Ordinary fibrewise curry is ill-typed for a source over `K^op`. A well-typed two-sided total context exists for the plain `Functor_catd` case, but the canonical `Hom_catd(Const(Catd_cat Z),Ebar,Dbar)` target is one enrichment level higher and has no existing general curry. No transparent composite or justified smallest primitive is selected. |
 | `MIXED-NEST-ACTION-0B` | complete and focused-green at checkpoint `a31b8927910d32613c7d0fac1862317b08dbf920` | complete `MIXED-CURRY-0A`; green displayed-ND foundation | Nine existing declarations and twelve exact source computations/projections close the dependency path for the direct `homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_` cascade. Two rich typed consumers expose `homd_int(FF)` and its terminal `homd_(FF,x,u,y,v)` family. Zero Lambdapi, intrinsic-owner, checker-branch, external-coherence, proof-fallback, nested-lowering, text, or browser delta. |
-| `MIXED-NEST-1A` | dependency-gated; ordinary curry is rejected | green `MIXED-NEST-ACTION-0B` plus a separately frozen recursive factorization IR | Add the first recursive nested displayed-abstraction IR/lowering selected by the expected `Functord_cat(...,Hom_catd(...))` classifier. Begin with eta/factorization of already-coherent internal terms; preserve callback-once locally nameless evidence and fail closed rather than synthesize pointwise coherence. |
+| `MIXED-NEST-IR-0C` | exact proposal frozen; delegated implementation approval recorded with human supersession | green `MIXED-NEST-ACTION-0B` and measured existing outer eta | Add one construction-only nested displayed-abstraction node and one construction-only nested application node. Recognize only an indexed object of the canonical `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` family, invoke the inner callback once, accept exact eta of that already-coherent object, and factor recursively back to it. Add no Core owner, computation, checker branch, or general curry. |
+| `MIXED-NEST-1A` | approved next implementation at the exact `MIXED-NEST-IR-0C` boundary | green `MIXED-NEST-IR-0C` proposal | Implement the first explicit nested `^fd` eta through the frozen recursive construction IR. Preserve outer contextual usage, eliminate only the hidden inner base/fibre slots, and fail closed for arbitrary pointwise bodies or noncanonical classifiers. |
 | `MIXED-NEST-ACTION-1B` | pending | green `MIXED-NEST-1A` | Exercise base-arrow action through the inner mixed classifier and one `homd_int`/next-Hom consumer. Add no constructor-specific generic functoriality/naturality rules. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
 | `DISPLAYED-MIXED-GRADUATE-1` | pending | generic positive and mixed witnesses | Freeze the exact arbitrary-finite-depth claim, negatives, performance boundary, and conformance evidence. Do not silently graduate unrestricted `^nd`. |
@@ -919,6 +922,131 @@ Under the user's standing unattended delegation, this bounded
 existing-authority transfer may proceed after exact staged review. Human
 supersession remains authoritative.
 
+## Frozen `MIXED-NEST-IR-0C` Recursive Factorization Boundary
+
+The post-action code audit and one bounded executable probe establish an
+important simplification. The outer coherent eta already works:
+
+```text
+H = Hom_catd
+      (Const_catd K (Catd_cat Z))
+      Ebar
+      Dbar
+
+nested : Functord_cat C H
+
+displayedContextLambda(c : C, H, nested[c])
+  ==> nested.
+```
+
+The TypeScript probe compiled the result as a checked `displayed-functor`
+whose explicit Core was exactly the original `nested` reference. Therefore:
+
+- the generic displayed contextual compiler already owns the outer
+  `λ^fd c. nested[c]` eta;
+- no new outer curry, product, Sigma, or contextual compiler is required for
+  that case; and
+- the missing usability datum is the explicit **inner** displayed
+  abstraction
+  `λ^fd e. nested[c](e)`, whose result remains the same coherent object of
+  `H[k]`.
+
+### Selected construction-only IR
+
+The first implementation adds only the following first-order construction
+forms:
+
+1. a nested source-object classifier carrying:
+   - outer base `K` and its locally nameless index;
+   - inner base `Z` and its locally nameless index;
+   - the constant classifier family
+     `Const_catd K (Catd_cat Z)`;
+   - negative source section `Ebar`;
+   - positive target section `Dbar`; and
+   - source versus target endpoint polarity;
+2. a typed nested displayed-application node recording the coherent
+   indexed subject, hidden inner base token, and inner fibre token; and
+3. a nested displayed-abstraction node recording the callback-once body and
+   the already-coherent subject to which eta factors.
+
+These forms are contextual frontend data only. They introduce no explicit
+Core owner and cannot escape an enclosing contextual abstraction.
+
+### Selected typed API shape
+
+The direct TypeScript witness has the shape:
+
+```ts
+displayedContextLambda([{ name: 'c', family: C }], H, ([c]) => {
+    const inner = apply(nested, c);
+    return nestedDisplayedFunctorLambda(
+        'e',
+        inner,
+        e => apply(inner, e)
+    );
+});
+```
+
+`nestedDisplayedFunctorLambda` derives the complete classifier from
+`inner`. It does not accept caller-supplied variance or naturality evidence.
+It is enabled only when:
+
+- `inner` is an open `indexed-object` at the active outer base;
+- its family has the exact stable shape
+  `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)`;
+- the constant family and `Catd_cat Z` indices match;
+- the callback returns the typed application of that same coherent `inner`
+  subject to the fresh inner fibre token; and
+- the hidden inner base and fibre tokens occur exactly in that eta
+  application.
+
+The callback is evaluated exactly once and discarded. Normalized evidence
+uses locally nameless indices and is deeply frozen.
+
+### Lowering
+
+The nested abstraction removes only its fresh inner base/fibre usage and
+retains the outer `k,c` usage of the factored subject. The displayed
+contextual compiler handles the new node by recursively compiling that
+subject through the already-working outer wiring. Consequently:
+
+```text
+λ^fd c. (λ^fd e. nested[c](e))
+```
+
+lowers to the same internal `nested` package. Its object, base-arrow, and
+higher behavior remain owned by `nested : Functord_cat C H`; the frontend
+does not reconstruct any of them pointwise.
+
+### Rejected cases
+
+The first slice fails closed for:
+
+- a family that is not the canonical `Hom_catd`/`Catd_cat` shape;
+- a different coherent subject in the body;
+- a constant, source token, pair, composition, or other pointwise body;
+- escaped or foreign inner tokens;
+- caller-selected variance;
+- an arbitrary contextual `Functord` body requiring the absent general
+  displayed curry; and
+- unrestricted nested `:^nd`.
+
+The construction IR is intentionally recursive, but this slice proves one
+explicit inner eta layer only. Iteration, constructor composition, arbitrary
+finite mixed depth, and action consumption remain subsequent measured
+tranches.
+
+The frozen gate is:
+
+```text
+H-DTTLF-USABILITY-MIXED-NEST-02 /
+D-DTTLF-USABILITY-024
+```
+
+Under the user's standing unattended delegation, this exact no-new-semantics
+implementation may proceed after the proposal checkpoint and exact staged
+review. Human supersession remains authoritative.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -1084,3 +1212,20 @@ authority conflict, or an operation outside the stated Git boundary.
   tests pass and exactly those two unchanged README assertions fail. No file
   in that release-document boundary belongs to this tranche, so no
   unrelated repair or aggregate rerun is folded into the checkpoint.
+- **2026-07-31 — existing outer nested eta measured.** A bounded executable
+  probe constructed the canonical
+  `H = Hom_catd(Const(Catd_cat Z),Ebar,Dbar)` family and
+  `nested : Functord_cat C H`, then compiled
+  `displayedContextLambda(c : C,H,nested[c])`. The checked explicit Core was
+  exactly the original `nested` reference. This rules out adding a duplicate
+  outer curry or compiler and localizes the missing IR to the explicit inner
+  displayed binder.
+- **2026-07-31 — `MIXED-NEST-IR-0C` frozen and delegated approval
+  recorded.** The exact first implementation is construction-only recursive
+  eta/factorization for an already-coherent indexed object of the canonical
+  `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` family. It introduces fresh
+  inner base/fibre tokens, records one typed nested application, evaluates
+  its callback once, and factors back to the same coherent subject. It adds
+  no Core owner, kernel rule, general curry, external coherence, parser, or
+  browser behavior. The user's standing unattended delegation authorizes
+  this bounded implementation with human supersession.
