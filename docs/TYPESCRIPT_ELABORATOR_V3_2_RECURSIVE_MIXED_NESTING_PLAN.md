@@ -23,7 +23,8 @@ measurement exposed a bounded-normalization and routine-test performance
 correction frozen separately as D-DTTLF-USABILITY-031 at
 `54c73a60d441b610e466aaba33ccd99e127f4192`. The decision ledger records its
 separate standing-delegation approval. D-030/D-031 are implemented and
-focused-green; their local implementation checkpoint is pending below.
+focused-green at
+`0180fd8cab2ddfbf4092e4c9a4eff565908c146f`.
 `RECURSIVE-MIXED-GRADUATE-1D` is now dependency-ready for its own exact
 structural-induction proposal, not silently approved by this implementation.
 
@@ -520,7 +521,7 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-REFLECT-0A` | complete in plan checkpoint `6828225` | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
 | `RECURSIVE-MIXED-REFLECT-1A` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
-| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | D-030/D-031 implemented and focused-green; local checkpoint pending | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | The direct program exposes the existing generic Hom category with one shared endpoint validator. Stable rich heads reify at zero steps; eight compact named levels and two checked mixed-root action levels pass. The 387-second four-action expansion remains a measured performance nonclaim. |
+| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | complete at `0180fd8cab2ddfbf4092e4c9a4eff565908c146f` | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | The direct program exposes the existing generic Hom category with one shared endpoint validator. Stable rich heads reify at zero steps; eight compact named levels and two checked mixed-root action levels pass. The 387-second four-action expansion remains a measured performance nonclaim. |
 | `RECURSIVE-MIXED-GRADUATE-1D` | dependency-ready for a separate exact proposal | green `HOM-CLOSURE-1C`; recursive normalization/reification and public Hom/action closure | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed and performance nonclaims. It does not silently promote text/browser syntax. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1E` | deferred until semantic graduation | `GRADUATE-1D` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
@@ -967,7 +968,8 @@ authority conflict, or an operation outside the stated Git boundary.
   `hom` endpoint validation; canonical rich heads are a zero-step reifier
   base case; all `79` public methods remain classified; and the eight-level
   named-cell plus two-level action witness passes final generic LF checking.
-  The local implementation checkpoint remains to be recorded.
+  The exact local implementation checkpoint is
+  `0180fd8cab2ddfbf4092e4c9a4eff565908c146f`.
 - **2026-07-31 — final aggregate presentation drift isolated.** One required
   roughly 31-minute `check:ts` passed every affected boundary and stopped on
   exactly three unchanged migration/release presentation assertions: the
