@@ -26,8 +26,10 @@ D-DTTLF-USABILITY-026; the implementation is focused-green at checkpoint
 H-DTTLF-USABILITY-DISPLAYED-MIXED-GRADUATE-01 /
 D-DTTLF-USABILITY-027 and approved as proposed through the standing
 unattended delegation after proposal checkpoint
-`ddc78c250970f62c09d822a39a16502f41c75db1`; `TEXT-PARITY-MIXED-1` is the
-next dependency-ready row
+`ddc78c250970f62c09d822a39a16502f41c75db1`; the
+`TEXT-PARITY-MIXED-1` audit is complete and its exact zero-semantic-delta
+proposal is frozen under H-DTTLF-USABILITY-TEXT-PARITY-MIXED-01 /
+D-DTTLF-USABILITY-028, pending a separate decision
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -407,7 +409,7 @@ Also outside the first tranche:
 | `DISPLAYED-TELESCOPE-GENERIC-1` | complete and focused-green at checkpoint `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa` | mixed nested action plus current positive compiler | The mixed successor now derives arbitrary finite canonical sibling layers from literal family bases, validates their exact dependency plan, and folds existing product/projection and one-level Sigma/pullback lifting machinery. The four-layer `[A]; [B,C]; [D]; [E,F]` witness checks early/middle/final occurrences, pairing, an internal base-arrow cell, nested mixed factorization, and `homd_int`; predecessor profiles and their two/four-binding explicit Core remain exact. |
 | `DISPLAYED-MIXED-GRADUATE-1` | complete; D-DTTLF-USABILITY-027 approved as proposed after checkpoint `ddc78c250970f62c09d822a39a16502f41c75db1` | generic positive and mixed witnesses | Graduates arbitrary finite depth/width only for the canonical positive sibling-layer/Sigma normal form, together with the exact final canonical mixed classifier, nested eta, internal base-arrow cell, and `homd_int` consumer. Retains explicit performance, general-curry, arbitrary-variance, pullback-hidden-classifier, arbitrary-DAG, and unrestricted-`:^nd` non-claims. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
-| `TEXT-PARITY-MIXED-1` | pending | semantic graduation | Bring the text adapter to parity with the graduated mathematical API and fail closed outside it. |
+| `TEXT-PARITY-MIXED-1` | exact proposal frozen under D-DTTLF-USABILITY-028; decision pending | semantic graduation | Remove only the obsolete fixed `[1,1]`/`[1,2,1]` text guard, verify comma/semicolon layers against internally derived generic abstraction evidence, and expose exact nested `λ^fd z. h z` eta through a typed expected contract. Retain one adapter/checker, fail closed outside the graduated mixed envelope, and defer browser-preset promotion. |
 | `DISPLAYED-ND-CONSUMERS-N` | future, consumer-led | concrete requested coherent bodies | Expand recursively supported `^nd` body constructors while preserving internal coherence ownership. |
 
 ## Frozen `MIXED-NEST-0A` Boundary
@@ -1852,6 +1854,178 @@ Approve as proposed to record the exact graduation above and make
 owner/rule, runtime behavior, parser implementation, browser promotion, or
 remote Git operation.
 
+## `TEXT-PARITY-MIXED-1` Frozen Implementation Proposal
+
+### Measured current seam
+
+The existing text adapter already contains the required general
+presentation machinery:
+
+- its private located lambda node stores an arbitrary nonempty sequence of
+  binding groups;
+- commas already mean siblings inside one group and semicolons already mean
+  successive displayed dependency layers;
+- the public
+  `displayed-dependent-context-functor` expected contract already carries an
+  arbitrary immutable `sourceGroups` array;
+- annotations are checked positionally against those expected families;
+- bindings are flattened in source order and passed to the existing
+  `displayedDependentContextLambda`;
+- body occurrences are resolved through the same recursive typed
+  application/constructor resolver; and
+- the selected `fibred-displayed-mixed-nest-1` program now derives arbitrary
+  finite canonical layers from family bases and lowers them through the
+  graduated generic fold.
+
+The finite-depth text limit is one explicit `supportedShape` branch in
+`resolveDisplayedDependentContextLambda`. It accepts only group sizes
+`[1,1]` and `[1,2,1]`. Removing that branch is mechanically feasible, but
+removing it alone would trust the punctuation more than the semantics. The
+program receives a flat binding sequence, so it could correctly infer
+siblings `[B,C]` even if text misleadingly wrote `b; c`.
+
+The nested mixed eta seam is also local. The parser already reads a nested
+lambda, and the program already owns
+`nestedDisplayedFunctorLambda(name, coherentSubject, body)`. The current
+context-body resolver deliberately sends every nested lambda to the
+unsupported path because it has no expected contract selecting this exact
+construction.
+
+No missing string parser, second surface AST, new bidirectional checker,
+generic curry, kernel rule, or caller-supplied coherence witness was found.
+
+### Selected implementation
+
+Implement exactly these changes in the existing adapter:
+
+1. remove the fixed `[1,1]`/`[1,2,1]` guard while retaining exact parsed
+   group-count/cardinality agreement with `expected.sourceGroups`;
+2. after the existing program method constructs the term, inspect its
+   internally generated
+   `categorical.displayed-generic-dependent-context-bracket` evidence and
+   require its layer `bindingNames` to equal the parsed comma/semicolon
+   groups exactly;
+3. reject a punctuation/derived-layer mismatch at the whole abstraction
+   span with `INCOMPATIBLE_ABSTRACTION_EXPECTATION`;
+4. add one optional typed context-body expectation whose sole value is
+   `mixed-nested-displayed-eta`;
+5. under that contract, accept only one annotation-free nested
+   `λ^fd z. h z`, where the final application argument is literally the
+   bound name;
+6. resolve `h` once in the outer contextual environment, then call the
+   existing `nestedDisplayedFunctorLambda`; resolve the eta body once with
+   the returned scoped token; and leave the program to validate the exact
+   canonical mixed classifier, inner source/target, usage, and
+   factorization;
+7. keep nested abstraction unsupported without that explicit contract and
+   reject different-subject, different-argument, annotated, multi-binding,
+   non-`^fd`, or pointwise bodies; and
+8. bump the public text-adapter revision to the
+   `TEXT-PARITY-MIXED-1` revision.
+
+The body expectation is route selection, analogous to the existing
+recursive ordinary `bodyExpected`; it is not naturality, variance,
+equality, or coherence evidence. All such facts remain internally derived
+and checked by existing emdash owners.
+
+The evidence comparison is a presentation postcondition, not a second
+dependency planner. The text layer does not recompute bases, Sigma totals,
+products, pullbacks, or action. It asks the already-authoritative program
+what canonical layers it derived and verifies that the user's punctuation
+describes those layers truthfully.
+
+### Exact positive corpus
+
+Reuse the existing mixed-profile test fixture so this tranche does not add
+another expensive profile initialization. Add:
+
+- the four-layer/two-sibling-block text term
+
+  ```text
+  λ^fd (a : A; b : B, c : C; d : D; e : E, f : F). fibrePair e f
+  ```
+
+  and its annotation-free form;
+- direct/text explicit-Core, classifier, generic-layer evidence, and
+  callback-scope agreement;
+- exact nested eta
+
+  ```text
+  λ^fd (a : A; b : B, c : C; d : D; e : E, f : F).
+    λ^fd z. nested (fibrePair e f) z
+  ```
+
+  under the explicit nested-eta body contract;
+- direct/text agreement with the existing construction-only
+  `nestedDisplayedFunctorLambda`; and
+- post-elaboration base-arrow transport, object application, and
+  `displayedInternalHom` consumption showing that the parsed result reaches
+  the same internally owned `homd_int` path.
+
+### Exact negative corpus
+
+Require focused rejection for:
+
+- text punctuation whose groups disagree with the program-derived canonical
+  layers, including splitting genuine siblings with a semicolon;
+- wrong expected group count/cardinality;
+- wrong next-family or final target base;
+- unsupported predecessor-profile depth;
+- nested lambda without the explicit nested-eta contract;
+- a nested body contract without an immediate nested lambda;
+- nested non-`^fd`, annotated, multi-binding, or non-eta syntax;
+- an eta over a noncanonical coherent subject; and
+- all existing malformed-group, duplicate-name, foreign-slot,
+  unsupported-contextual-body, and source-location regressions.
+
+### Validation and performance boundary
+
+During implementation:
+
+- run the extended existing mixed-profile focused file, reusing its one
+  program instance;
+- run the nearest dependent-text, nested-ordinary-text, and text-graduation
+  regressions;
+- run root typecheck, targeted/full lint, and `git diff --check`;
+- run one complete `check:ts` only after the shared text behavior is
+  otherwise green, as required by repository SOP; carry forward its result
+  and do not repeat it; and
+- do not run `check:all`, print/book, browser, or Lambdapi gates because this
+  slice changes no corresponding boundary.
+
+The existing known aggregate inventory/publication failures remain baseline
+evidence unless this exact tranche changes their files or assertions. This
+slice must not turn their cleanup into a parser dependency.
+
+### Explicit non-effects
+
+This proposal adds:
+
+- no new Core expression or owner;
+- no checker, evaluator, conversion, unification, or rewrite branch;
+- no new categorical program method;
+- no new dependency or variance algorithm;
+- no external naturality/functoriality/coherence premise;
+- no general ordinary, enriched, or displayed curry;
+- no arbitrary pointwise nested displayed abstraction;
+- no unrestricted `:^nd`;
+- no Lambdapi declaration or rule;
+- no generic Lambdapi parser or transfer route;
+- no second text AST, resolver, or checker;
+- no browser preset, UI, deployment, book, or README change; and
+- no push, merge, publication, or release authority.
+
+The exact gate is:
+
+```text
+H-DTTLF-USABILITY-TEXT-PARITY-MIXED-01 /
+D-DTTLF-USABILITY-028
+```
+
+Approve as proposed to implement only this bounded parity slice. The frozen
+proposal may be separately approved through the user's standing unattended
+delegation after its own checkpoint, with human supersession.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -2124,3 +2298,18 @@ authority conflict, or an operation outside the stated Git boundary.
   exact plan-level graduation with human supersession. This adds no semantic
   owner, runtime/checker behavior, parser route, browser behavior, or remote
   Git authority. `TEXT-PARITY-MIXED-1` is dependency-ready.
+- **2026-07-31 — `TEXT-PARITY-MIXED-1` audit isolates two resolver seams.**
+  Arbitrary group syntax and `sourceGroups` were already general; only a
+  fixed-shape guard blocks the graduated program. Safe removal requires
+  comparing punctuation to internally derived generic layer evidence. Exact
+  nested eta requires one explicit expected-contract route to the existing
+  `nestedDisplayedFunctorLambda`, not a new curry or checker.
+- **2026-07-31 — `TEXT-PARITY-MIXED-1` frozen.** The exact
+  H-DTTLF-USABILITY-TEXT-PARITY-MIXED-01 /
+  D-DTTLF-USABILITY-028 proposal selects arbitrary finite canonical group
+  routing, internal-evidence punctuation validation, and exact
+  construction-only nested eta. General curry, arbitrary pointwise bodies,
+  unrestricted `:^nd`, browser promotion, kernel/Core/checker semantics, and
+  remote Git operations remain outside it. The proposal is
+  non-self-authorizing; the standing unattended delegation may record a
+  separate approval after this checkpoint, with human supersession.
