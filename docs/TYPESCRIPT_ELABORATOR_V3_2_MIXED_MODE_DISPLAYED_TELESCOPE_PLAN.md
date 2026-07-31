@@ -7,8 +7,9 @@ focused-green at checkpoint
 `77f79bf8e139d856965f41733d3aeff9ffefd9d1`; the `MIXED-NEST-1A0`
 architecture audit has measured a displayed-curry/introduction dependency at
 checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6`;
-the no-active-edit `MIXED-CURRY-0A` design/probe slice is approved under the
-standing unattended delegation and in progress
+the no-active-edit `MIXED-CURRY-0A` design/probe has rejected both ordinary
+fibrewise curry and a premature new primitive; the next dependency-ready
+existing-authority slice is `MIXED-NEST-ACTION-0B`
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -380,8 +381,9 @@ Also outside the first tranche:
 | --- | --- | --- | --- |
 | `MIXED-NEST-0A` | complete and focused-green at checkpoint `77f79bf8e139d856965f41733d3aeff9ffefd9d1` | completed displayed-ND higher profile and approved architecture | Two existing opaque signatures and four existing runtime rules compile generically in isolated `fibred-displayed-mixed-nest-1`; seven typed constructors build/check the canonical nested classifier and prove its `Transf_catd` fold. The independent constant-`Cat` fold is deferred at its measured nested proof-conversion seam. Zero Lambdapi semantic delta. |
 | `MIXED-NEST-1A0` | read-only architecture audit complete at checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6` | green `MIXED-NEST-0A` | Establish that the existing ordinary `categorical-abstraction` node cannot type the canonical inner `Functord`, that the bounded `displayedFunctorLambda` cannot consume context-varying endpoint families, and that the active kernel names the nested classifier but has no selected general displayed-curry/introduction owner. Add no code or kernel semantics. |
-| `MIXED-CURRY-0A` | approved under the standing unattended delegation; no-active-edit design/probe in progress | complete `MIXED-NEST-1A0` audit | Determine whether the canonical introduction is a transparent composite of existing pullback/product/Sigma/evaluation/internal-hom owners or requires one new functor-level semantic owner. Freeze its typed uncurried input, coherent output, point projection, base-arrow action, higher-action inheritance, and negative non-collapse case before any active-kernel edit. |
-| `MIXED-NEST-1A` | dependency-gated; do not implement as an ordinary-curry shortcut | selected and separately approved `MIXED-CURRY` result | Add the first recursive nested displayed-abstraction IR/lowering selected by the expected `Functord_cat(...,Hom_catd(...))` classifier. Preserve callback-once locally nameless evidence and fail closed outside the qualified shape. |
+| `MIXED-CURRY-0A` | complete design result; no active-kernel or TypeScript semantic delta | complete `MIXED-NEST-1A0` audit | Ordinary fibrewise curry is ill-typed for a source over `K^op`. A well-typed two-sided total context exists for the plain `Functor_catd` case, but the canonical `Hom_catd(Const(Catd_cat Z),Ebar,Dbar)` target is one enrichment level higher and has no existing general curry. No transparent composite or justified smallest primitive is selected. |
+| `MIXED-NEST-ACTION-0B` | proposed next existing-authority slice | complete `MIXED-CURRY-0A`; green displayed-ND foundation | Transfer the direct `homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_` projection cascade needed to observe internal object/base-arrow structure. Add no Lambdapi owner or rule and do not claim nested abstraction. |
+| `MIXED-NEST-1A` | dependency-gated; ordinary curry is rejected | green `MIXED-NEST-ACTION-0B` plus a separately frozen recursive factorization IR | Add the first recursive nested displayed-abstraction IR/lowering selected by the expected `Functord_cat(...,Hom_catd(...))` classifier. Begin with eta/factorization of already-coherent internal terms; preserve callback-once locally nameless evidence and fail closed rather than synthesize pointwise coherence. |
 | `MIXED-NEST-ACTION-1B` | pending | green `MIXED-NEST-1A` | Exercise base-arrow action through the inner mixed classifier and one `homd_int`/next-Hom consumer. Add no constructor-specific generic functoriality/naturality rules. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
 | `DISPLAYED-MIXED-GRADUATE-1` | pending | generic positive and mixed witnesses | Freeze the exact arbitrary-finite-depth claim, negatives, performance boundary, and conformance evidence. Do not silently graduate unrestricted `^nd`. |
@@ -655,6 +657,203 @@ D-DTTLF-USABILITY-022`. It authorizes only this bounded design and temporary
 probe tranche. Any active mathematical owner/rule remains a later,
 separately reviewed decision.
 
+## `MIXED-CURRY-0A` Result And Architecture Correction
+
+The deeper owner-position audit rejects the assumption that one ordinary
+displayed curry is already latent in the fixed-base product closure.
+
+### 1. The naive uncurried input is not well-typed
+
+For the plain mixed family:
+
+```text
+A : Catd(Op_cat K)
+B C : Catd K
+Functor_catd(A,B)[k] = Functor(A[k^-],B[k]),
+```
+
+the desired curried output would be:
+
+```text
+Functord_cat C (Functor_catd A B).
+```
+
+An ordinary displayed-curry attempt would need an input resembling:
+
+```text
+Functord_cat (P(C,?A)) B,
+```
+
+where `?A : Catd K`. There is no canonical such `?A`. `Op_catd A` reverses
+the fibre categories but retains the base `Op_cat K`; it does not turn a
+family over `K^op` into a family over `K`. `Pullback_catd` can change a base
+only along an explicitly supplied functor, and arbitrary `K` has no canonical
+functor `K -> K^op`. Reusing `A` as a covariant sibling would therefore erase
+exactly the variance that `Functor_catd` owns.
+
+This is also the required negative non-collapse case:
+
+```text
+F[k] : Functor(A[k^-],B[k])
+a[k] : A[k^-]
+```
+
+does not define a covariantly natural `F[k](a[k])` for arbitrary varying
+`a`. Along `p : k -> k'`, `A` supplies `A[p] : A[k'] -> A[k]`, not the
+forward argument transport that ordinary displayed evaluation would require.
+The constant-domain `Eval_funcd` is sound precisely because this obstruction
+disappears for a constant `A`.
+
+### 2. Sequential totalization identifies a real two-sided context, but not
+the canonical curry
+
+At the plain Cat-valued level, existing owners type the following
+Grothendieck-style context without changing the active kernel:
+
+```text
+Aint
+  = Op_cat(Sigma_cat(Op_catd A))
+
+qA
+  = Op_func(Sigma_proj1_func(Op_catd A))
+  : Functor(Aint,K)
+
+M(C,A)
+  = Sigma_cat(Pullback_catd C qA)
+
+r
+  = qA o Sigma_proj1_func(Pullback_catd C qA)
+  : Functor(M(C,A),K).
+```
+
+Objects of `M(C,A)` have the expected shape `(k,a,c)`. Its arrows combine:
+
+- a base arrow `p : k -> k'`;
+- the contravariant source relation from `a` to `A[p](a')`; and
+- the covariant relation from `C[p](c)` to `c'`.
+
+Consequently:
+
+```text
+s : Obj(Pi_cat(Pullback_catd B r))
+```
+
+is a meaningful two-sided uncurried package for a prospective map:
+
+```text
+mixed-curry(s)
+  : Obj(Functord_cat C (Functor_catd A B)).
+```
+
+Its point equation would have the shape:
+
+```text
+mixed-curry(s)[k](c)(a)
+  = s[(k,a,c)].
+```
+
+The base-arrow action would come from the section action of `s` on the
+canonical mixed-total arrow, and higher action would remain under generic
+`piapp*`, `fapp*`, and `tapp*` owners.
+
+This is a useful design discovery, not an implementation authorization. The
+active kernel has no owner that maps the section on the left to the displayed
+functor on the right, nor a selected computational projection equating the
+two. Adding one would be a new mathematical closure operation, not a
+TypeScript transfer detail.
+
+### 3. The canonical nested telescope is one enrichment level higher
+
+The actual witness is:
+
+```text
+Functord_cat C
+  (Hom_catd
+    (Const_catd K (Catd_cat Z))
+    Ebar
+    Dbar).
+```
+
+Its inner fibre is:
+
+```text
+Hom_cat (Catd_cat Z) Ebar[k^-] Dbar[k]
+  = Functord_cat Ebar[k^-] Dbar[k],
+```
+
+not merely `Functor_cat A[k^-] B[k]` for Cat-valued `A` and `B`. The
+constant-`Cat` fold:
+
+```text
+Hom_catd(Const_catd K Cat_cat,X,Y)
+  -> Functor_catd(Op_func X,Y)
+```
+
+therefore does not apply to `Const_catd K (Catd_cat Z)`. A general curry here
+would require the corresponding Cat-enriched/tensored or recursively mixed
+context construction for the category `Catd_cat Z`, together with its
+object, base-arrow, and higher projections. Neither ordinary product curry,
+the constant-domain `Eval_funcd`, nor the one-way
+`sigma_functord_sec` bridge supplies that operation.
+
+### 4. Selected result
+
+`MIXED-CURRY-0A` therefore selects none of the three premature
+implementations:
+
+1. no ordinary product/displayed curry, because its input is ill-typed;
+2. no sequential-Sigma term mislabeled as the canonical enriched curry,
+   because the final introduction map is absent; and
+3. no new opaque primitive merely to make the TypeScript case pass.
+
+The long-term recursive architecture remains classifier-directed. A nested
+surface abstraction may factor an expression back to an already-coherent
+internal term—eta, composition, projection, pairing, evaluation, and later
+qualified owners—without accepting pointwise functions or external
+naturality equations. The first `MIXED-NEST-1A` implementation must begin
+with such recursive eta/factorization and fail closed outside the selected
+constructor algebra. A future general mixed-context/tensor-hom closure may
+broaden that algebra, but it is a separate mathematical plan rather than an
+implicit requirement of the TypeScript frontend.
+
+### 5. Dependency-ready action slice
+
+Before freezing the new contextual IR, TypeScript can close an existing
+authority gap needed by every later action witness. The active kernel already
+owns:
+
+```text
+homd_int(FF)[x]
+  -> homd_src_func(FF,x)
+
+homd_src_func(FF,x)[u]
+  -> homd_src_sec(FF,x,u)
+
+homd_src_sec(FF,x,u)[y]
+  -> homd_tgt_func(FF,x,u,y)
+
+homd_tgt_func(FF,x,u,y)[v]
+  -> homd_(FF,x,u,y,v).
+```
+
+The TypeScript displayed-ND foundation transfers `Homd_target_catd` and
+`homd_int`, but not this direct projection cascade. `MIXED-NEST-ACTION-0B`
+will transfer only the additional existing signatures and these four general
+projection rules, expose a typed direct consumer, and test at least the first
+and final projection. It will not add an active Lambdapi declaration, invent
+coherence, or claim that nested abstraction is complete.
+
+The frozen proposal gate is:
+
+```text
+H-DTTLF-USABILITY-MIXED-ACTION-01 /
+D-DTTLF-USABILITY-023
+```
+
+Under the user's standing unattended delegation, this bounded
+existing-authority transfer may proceed after exact staged review. Human
+supersession remains authoritative.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -775,3 +974,16 @@ authority conflict, or an operation outside the stated Git boundary.
   supersession, the user's standing unattended delegation authorizes its
   design and ignored temporary-probe scope. It does not authorize an active
   Lambdapi owner/rule or TypeScript lowering.
+- **2026-07-31 — `MIXED-CURRY-0A` rejects ordinary curry.** `Op_catd`
+  retains the opposite base, so the negative endpoint cannot be inserted as
+  a covariant fibrewise-product sibling. A well-typed two-sided total context
+  can be assembled for the plain Cat-valued `Functor_catd` case, but the
+  final curry map is not an active owner and the canonical
+  `Hom_catd(Const(Catd_cat Z),Ebar,Dbar)` target is one enrichment level
+  higher. No active kernel or TypeScript semantic edit is made.
+- **2026-07-31 — `MIXED-NEST-ACTION-0B` proposed and delegated approval
+  recorded.** The next executable slice transfers only the active
+  `homd_int` direct projection cascade and a typed consumer. It is a bounded
+  existing-authority closure with zero Lambdapi delta. Under the user's
+  standing unattended delegation it may proceed, subject to exact staged
+  review and human supersession.
