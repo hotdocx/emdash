@@ -18,7 +18,10 @@ D-DTTLF-USABILITY-030. Its proposal-only checkpoint is
 `e41f44acb975f6d0a30ab6277c39ea2c25d12d36`; the separate review recorded in
 the decision ledger approves exactly that gate under the standing unattended
 delegation. `RECURSIVE-MIXED-HOM-CLOSURE-1C` is dependency-ready, not an
-implicit broadening of the implemented profile.
+implicit broadening of the implemented profile. Initial implementation
+measurement exposed a bounded-normalization and routine-test performance
+correction now frozen separately as D-DTTLF-USABILITY-031; no graduation
+claim is made before that correction is reviewed and green.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -513,7 +516,7 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-REFLECT-0A` | complete in plan checkpoint `6828225` | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
 | `RECURSIVE-MIXED-REFLECT-1A` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
-| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | approved under D-DTTLF-USABILITY-030; implementation dependency-ready | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | Expose the already-owned generic Hom category through the direct program API and use one parameterized TypeScript loop to construct/check a finite parallel-cell and action tower rooted at recovered `Transfd_cat`. No new Core/kernel semantics. |
+| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | D-030 implementation measured; correction D-031 frozen below and awaiting separate review | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | Expose the already-owned generic Hom category through the direct program API. The initial four-level inlined-action test compiled before a counting assertion but took 387 seconds and expanded to 56 generic whole-Hom occurrences; D-031 separates compact arbitrary Hom formation from the known higher-action performance boundary. |
 | `RECURSIVE-MIXED-GRADUATE-1D` | pending green `HOM-CLOSURE-1C` | recursive normalization/reification plus parameterized public Hom/action closure | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. It does not silently promote text/browser syntax. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1E` | deferred until semantic graduation | `GRADUATE-1D` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
@@ -616,6 +619,59 @@ This proposal is independently checkpointable. Under the standing unattended
 delegation, if no immediate human correction supersedes it, a separate review
 may record exact D-DTTLF-USABILITY-030 approval and implement only this gate.
 
+## Frozen Measurement Correction
+
+### H-DTTLF-USABILITY-RECURSIVE-HOM-PERFORMANCE-CORRECTION-01 /
+### D-DTTLF-USABILITY-031
+
+Initial D-030 implementation produced two distinct measurements:
+
+1. before final checking, the category-object reifier exhausted its 512-step
+   budget by descending through an already-canonical outer `hom-category` and
+   its increasingly large endpoints; and
+2. after a local direct-head correction, the four-level mixed action term did
+   pass classifier normalization and final generic LF checking, reaching only
+   a post-compilation assertion. The run took about 387 seconds and serialized
+   56 repeated `functor-hom-full` occurrences rather than the naively expected
+   four, exposing expression expansion rather than a semantic failure.
+
+Approve this exact correction:
+
+1. In the existing classifier reifier, classify already-stable rich outer
+   heads—including backend-neutral `hom-category`/`transfor-category` and
+   already-exposed active rich heads—at zero normalization steps. Invoke
+   bounded descendant normalization only for a plain/opaque outer head. The
+   final generic checker remains mandatory.
+2. Retain `homCategory(C,x,y)` and the shared endpoint validator from D-030.
+3. Replace the routine four-level *inlined action* test with two deliberately
+   separated recursive witnesses in one bounded fixture:
+   - construct at least eight levels of named parallel cells through
+     `homCategory`/`hom`, and compile the final named cell; and
+   - construct and compile two successive generic whole-Hom action levels
+     rooted at `tdapp1_int_func_transfd`.
+4. Record the completed one-off four-level final-check run as performance
+   evidence, not a routine aggregate test. Do not claim efficient arbitrary
+   higher-action normalization or hide the expansion by increasing a global
+   budget.
+5. Classify the new public `homCategory` method in the existing text-parity
+   audit as a derived category constructor / later typed-resolver seam. Do not
+   add text grammar or routing in this tranche.
+
+The correction has these non-effects in addition to every D-030 non-effect:
+
+- no semantic reduction, comparison, proof, or classifier-recognition rule;
+- no memoization, term-sharing, evaluator-performance project, or budget
+  increase;
+- no weakening of final checking for the compact Hom tower or two-level
+  action witness; and
+- no claim that arbitrary finite expressibility implies practical constant or
+  polynomial normalization cost.
+
+This is a measurement-driven correction to uncommitted D-030 work. It is
+independently checkpointable; under the standing unattended delegation, a
+separate review may approve it if no immediate human correction supersedes
+the proposal.
+
 ## Validation And Checkpoint Policy
 
 For the plan-only checkpoint:
@@ -645,6 +701,13 @@ delta and use the nearest categorical program/mixed tests. A later aggregate
 is warranted only if the implementation changes shared behavior beyond the
 new constructor or if the stale release contract has independently been
 repaired.
+
+D-031 corrects the routine focused test to an eight-level compact named-cell
+tower plus two checked inlined action levels. The already-completed 387-second
+four-action measurement must not be repeated in `check:ts`. After focused
+work is green, run the single shared-TypeScript gate required by root SOP once
+for the final corrected tranche, carrying forward rather than repairing the
+two unrelated README/release failures.
 
 ### Measured D-029 implementation evidence (2026-07-31)
 
@@ -823,3 +886,16 @@ authority conflict, or an operation outside the stated Git boundary.
   approval with human supersession. It authorizes only
   `RECURSIVE-MIXED-HOM-CLOSURE-1C` and its focused tests; it grants no kernel,
   text/browser, remote Git, or graduation authority.
+- **2026-07-31 — D-030 measurement separated semantics from performance.**
+  The initial fixed 512-step failure came from normalizing descendants of an
+  already-canonical outer Hom head. Direct-head reification removed that
+  false budget dependency. A four-level final action term then passed generic
+  checking but required about 387 seconds and contained 56 repeated generic
+  whole-Hom occurrences; its final test failure was only the intentionally
+  reviewed count assertion (`56 !== 4`).
+- **2026-07-31 — D-DTTLF-USABILITY-031 frozen.** The correction preserves the
+  public Hom facade, makes stable rich heads a zero-step reifier base case,
+  checks an eight-level compact named-cell tower and two inlined action
+  levels, and records deeper action expansion as a performance nonclaim. It
+  adds no rule, budget, special higher checker, parser route, or mathematical
+  claim. Separate review is pending under the standing delegation.
