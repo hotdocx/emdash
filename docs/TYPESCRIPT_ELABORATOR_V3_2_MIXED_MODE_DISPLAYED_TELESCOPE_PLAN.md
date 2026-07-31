@@ -708,7 +708,7 @@ disappears for a constant `A`.
 the canonical curry
 
 At the plain Cat-valued level, existing owners type the following
-Grothendieck-style context without changing the active kernel:
+Grothendieck-style **candidate context** without changing the active kernel:
 
 ```text
 Aint
@@ -732,13 +732,14 @@ Objects of `M(C,A)` have the expected shape `(k,a,c)`. Its arrows combine:
 - the contravariant source relation from `a` to `A[p](a')`; and
 - the covariant relation from `C[p](c)` to `c'`.
 
-Consequently:
+Consequently, the following is a well-typed candidate input:
 
 ```text
 s : Obj(Pi_cat(Pullback_catd B r))
 ```
 
-is a meaningful two-sided uncurried package for a prospective map:
+It appears to contain the two-sided uncurried data required by a prospective
+map:
 
 ```text
 mixed-curry(s)
@@ -756,11 +757,16 @@ The base-arrow action would come from the section action of `s` on the
 canonical mixed-total arrow, and higher action would remain under generic
 `piapp*`, `fapp*`, and `tapp*` owners.
 
-This is a useful design discovery, not an implementation authorization. The
-active kernel has no owner that maps the section on the left to the displayed
-functor on the right, nor a selected computational projection equating the
-two. Adding one would be a new mathematical closure operation, not a
-TypeScript transfer detail.
+This is a useful design discovery, not yet an emdash theorem or an
+implementation authorization. The current audit has established that the
+context and candidate source/target types are meaningful; it has not proved
+the universal correspondence, its inverse, or all object/base-arrow/higher
+computations. The active kernel has no owner that maps the section on the
+left to the displayed functor on the right, nor a selected computational
+projection equating the two. Adding one would first require a mathematical
+qualification tranche. It would be a new closure operation, not a TypeScript
+transfer detail, but its present absence is not evidence of impossibility or
+inconsistency.
 
 ### 3. The canonical nested telescope is one enrichment level higher
 
@@ -792,9 +798,10 @@ Hom_catd(Const_catd K Cat_cat,X,Y)
 therefore does not apply to `Const_catd K (Catd_cat Z)`. A general curry here
 would require the corresponding Cat-enriched/tensored or recursively mixed
 context construction for the category `Catd_cat Z`, together with its
-object, base-arrow, and higher projections. Neither ordinary product curry,
-the constant-domain `Eval_funcd`, nor the one-way
-`sigma_functord_sec` bridge supplies that operation.
+object, base-arrow, and higher projections. Such a construction is
+mathematically plausible, but its exact type and laws have not yet been
+settled. Neither ordinary product curry, the constant-domain `Eval_funcd`,
+nor the one-way `sigma_functord_sec` bridge supplies it today.
 
 ### 4. Selected result
 
@@ -815,6 +822,16 @@ with such recursive eta/factorization and fail closed outside the selected
 constructor algebra. A future general mixed-context/tensor-hom closure may
 broaden that algebra, but it is a separate mathematical plan rather than an
 implicit requirement of the TypeScript frontend.
+
+This separates semantic feasibility from frontend feasibility:
+
+- qualifying a general two-sided or enriched curry is the non-mechanical
+  mathematical task;
+- once that owner and its computations exist, TypeScript construction-IR
+  lowering to it is expected to be systematic and comparatively mechanical;
+- before that qualification, recursive factorization is already sound and
+  mechanically extensible over each internally coherent constructor in the
+  selected algebra, but it must not claim arbitrary-body abstraction.
 
 ### 5. Dependency-ready action slice
 
