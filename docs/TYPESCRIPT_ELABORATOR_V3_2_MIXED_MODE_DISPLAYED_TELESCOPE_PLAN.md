@@ -21,8 +21,10 @@ existing-conversion result-classifier boundary at checkpoint
 and its exact finite canonical-layer fold is frozen under
 H-DTTLF-USABILITY-DISPLAYED-TELESCOPE-GENERIC-01 /
 D-DTTLF-USABILITY-026; the implementation is focused-green at checkpoint
-`6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa`; the next dependency-ready row is
-`DISPLAYED-MIXED-GRADUATE-1`
+`6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa`; the exact
+`DISPLAYED-MIXED-GRADUATE-1` boundary is now frozen under
+H-DTTLF-USABILITY-DISPLAYED-MIXED-GRADUATE-01 /
+D-DTTLF-USABILITY-027 and awaits its separate decision
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -400,7 +402,7 @@ Also outside the first tranche:
 | `MIXED-NEST-1A` | complete and focused-green at checkpoint `1142f723dc41ac336f420429af47d77e21c06fd4` | green `MIXED-NEST-IR-0C` proposal | The mixed profile now exposes the first explicit nested `^fd` eta through construction-only recursive IR. It preserves outer contextual usage, eliminates only the hidden inner base/fibre slots, compiles back to the same coherent subject, and fails closed for arbitrary pointwise bodies or noncanonical classifiers. Zero Core-owner, kernel, checker-rule, external-coherence, text, or browser delta. |
 | `MIXED-NEST-ACTION-1B` | complete and focused-green at checkpoint `b76baaf75ea332b977d403b6e11c975972466a45` | green `MIXED-NEST-1A` and measured no-edit conversion probes | Ordinary object application now refines only the exact canonical `Fibre_cat(Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar),y)` target. It preserves the same Core term, derives `Ebar[y^-]` and `Dbar[y]` internally, and checks it as a `Functord_cat` object through existing runtime conversion. Outer base-arrow transport and direct base-object evaluation both feed the refined inner package to `homd_int`. Zero coercion, cast API, owner, rule, or external-evidence delta. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | complete and focused-green at checkpoint `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa` | mixed nested action plus current positive compiler | The mixed successor now derives arbitrary finite canonical sibling layers from literal family bases, validates their exact dependency plan, and folds existing product/projection and one-level Sigma/pullback lifting machinery. The four-layer `[A]; [B,C]; [D]; [E,F]` witness checks early/middle/final occurrences, pairing, an internal base-arrow cell, nested mixed factorization, and `homd_int`; predecessor profiles and their two/four-binding explicit Core remain exact. |
-| `DISPLAYED-MIXED-GRADUATE-1` | pending | generic positive and mixed witnesses | Freeze the exact arbitrary-finite-depth claim, negatives, performance boundary, and conformance evidence. Do not silently graduate unrestricted `^nd`. |
+| `DISPLAYED-MIXED-GRADUATE-1` | exact graduation proposal frozen under D-DTTLF-USABILITY-027; decision pending | generic positive and mixed witnesses | Graduate arbitrary finite depth/width only for the canonical positive sibling-layer/Sigma normal form, together with the exact final canonical mixed classifier, nested eta, internal base-arrow cell, and `homd_int` consumer. Retain explicit performance, general-curry, arbitrary-variance, pullback-hidden-classifier, arbitrary-DAG, and unrestricted-`:^nd` non-claims. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
 | `TEXT-PARITY-MIXED-1` | pending | semantic graduation | Bring the text adapter to parity with the graduated mathematical API and fail closed outside it. |
 | `DISPLAYED-ND-CONSUMERS-N` | future, consumer-led | concrete requested coherent bodies | Expand recursively supported `^nd` body constructors while preserving internal coherence ownership. |
@@ -1699,6 +1701,154 @@ classifiers hidden behind pullbacks/equivalences, a general enriched curry,
 or unrestricted `:^nd`. `DISPLAYED-MIXED-GRADUATE-1` is now the next
 dependency-ready row.
 
+## `DISPLAYED-MIXED-GRADUATE-1` Frozen Graduation Boundary
+
+The post-implementation review finds no additional semantic owner or
+frontend algorithm between D-026 and the exact arbitrary-finite claim. The
+claim is justified parametrically:
+
+1. every nonempty finite sibling layer has a left-associated product tree
+   and one projection compilation for each factor;
+2. `liftDisplayedCompilationThroughNextFamily` maps any compilation over
+   layer `i` to the canonical pulled-back compilation over layer `i+1`;
+3. finite iteration carries every binding projection to the final base;
+4. the recursive contextual compiler consumes the resulting finite wiring
+   map without inspecting telescope arity; and
+5. the ordinary explicit-Core checker validates the resulting displayed
+   functor and its internal action package.
+
+The previous two-binding case exercises one lift. The previous four-binding
+case exercises products and up to two lifts. The D-026
+`[A]; [B,C]; [D]; [E,F]` witness crosses both former presentation
+boundaries, includes two sibling products, and exercises three successive
+Sigma transitions. The implementation loops over arrays; it contains no
+remaining selected-arity branch in the mixed successor.
+
+### Proposed exact graduation
+
+Approve the following statement:
+
+> In the `fibred-displayed-mixed-nest-1` TypeScript profile,
+> `displayedDependentContextLambda` supports arbitrary finite depth and
+> finite sibling width for the canonical positive displayed-context normal
+> form. Consecutive same-base families form a sibling layer; every next layer
+> is literally based on the Sigma total of the previous layer product; the
+> final layer is the abstraction source. Variables may occur recursively in
+> the already qualified typed contextual IR. Object/base-arrow/higher action
+> is supplied by internal emdash owners. At the final layer, the exact
+> canonical
+> `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` result supports the
+> qualified mixed classifier, nested displayed eta, `Transf_catd` conversion,
+> and `homd_int` consumer.
+
+This graduates a semantic/API architecture, not a string grammar, deployed
+browser profile, whole-library transfer workflow, or global metatheory.
+
+### Evidence retained by the graduation
+
+The positive evidence is:
+
+- arbitrary finite independent siblings through
+  `displayedFamilyTree`/`displayedProjectionWiring`;
+- arbitrary finite canonical layer iteration through the existing one-step
+  lift;
+- exact lowered-Core agreement with the completed two- and four-binding
+  paths;
+- a checked four-layer/two-sibling-block body containing early, middle, final,
+  and paired occurrences;
+- a checked internalized base-arrow cell at that depth;
+- a checked canonical mixed final target with explicit nested `^fd` eta;
+- base-arrow transport into an internally classified displayed functor; and
+- successful consumption of that inner package by `homd_int`.
+
+The negative evidence is:
+
+- wrong next-layer base rejection;
+- wrong final target-base rejection;
+- duplicate binding rejection;
+- one-layer dependent-constructor rejection;
+- predecessor-profile overreach rejection;
+- noncanonical mixed classifier rejection;
+- pointwise/different-subject nested-body rejection; and
+- no caller-provided dependency, variance, naturality, or coherence evidence.
+
+The authority evidence is:
+
+- the active Lambdapi v3.2 kernel remains the mathematical owner;
+- its bounded check is green;
+- the generic TypeScript LF checker validates the explicit Core without an
+  oracle or owner-specific branch;
+- the two/four predecessor profiles remain unchanged; and
+- the exact implementation and ledger checkpoints are recorded.
+
+### Explicit non-claims
+
+The graduation must not be read as any of:
+
+- arbitrary dependency DAG syntax without explicit weakening/reindexing to a
+  canonical current base;
+- exchange across a genuine dependency transition;
+- contravariant or otherwise arbitrary context-layer transitions;
+- recognition of a mixed classifier hidden behind arbitrary pullback,
+  opaque definition, equivalence, or normalization search;
+- arbitrary mixed classifiers at arbitrary earlier bindings;
+- a general two-sided, enriched, or displayed curry;
+- arbitrary pointwise nested `:^fd` body abstraction;
+- unrestricted general `:^nd` coherence or all higher-cell consumers;
+- groupoidal DTT closure;
+- a proof of normalization, confluence, canonicity, consistency, or semantic
+  soundness for the combined calculus;
+- whole-library mechanical Lambdapi transfer;
+- string-parser parity;
+- browser/deployed-profile promotion; or
+- a production-time or asymptotic performance guarantee.
+
+The plain Cat-valued two-sided curry remains mathematically plausible but
+absent as a selected active owner. The enriched curry needed for the full
+canonical nested Hom setting remains less settled. If later qualified, its
+TypeScript construction/lowering is expected to be systematic; neither is
+required by or silently simulated in this graduation.
+
+### Performance boundary
+
+The finite algorithm terminates structurally on the number of layers and
+bindings. That establishes mechanical semantic scalability, not efficient
+normalization of every expanded term.
+
+The checked four-layer witness is tractable but produces large explicit
+pullback/product terms. The focused suite and complete aggregate measurements
+show that current profile construction, serialization/checking, and the
+single-process test runner are expensive. No constant-time, polynomial-size,
+interactive-latency, or arbitrary-depth resource claim is made. DAG sharing,
+declaration reuse, caching, and test parallelism remain performance work
+separate from the sound layer-fold architecture.
+
+### Downstream text boundary
+
+After approval, `TEXT-PARITY-MIXED-1` may expose only this graduated
+mathematical API:
+
+- the existing `displayedDependentContextLambda` target semantics;
+- canonical finite layer inference from declared family bases;
+- already qualified recursive body forms;
+- the exact canonical mixed final target and nested eta forms; and
+- source-located failure for everything outside the graduated envelope.
+
+Text parity must not invent a generic curry or parse its way around failed
+internal factorization.
+
+The exact gate is:
+
+```text
+H-DTTLF-USABILITY-DISPLAYED-MIXED-GRADUATE-01 /
+D-DTTLF-USABILITY-027
+```
+
+Approve as proposed to record the exact graduation above and make
+`TEXT-PARITY-MIXED-1` dependency-ready. Approval authorizes no new semantic
+owner/rule, runtime behavior, parser implementation, browser promotion, or
+remote Git operation.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -1949,3 +2099,18 @@ authority conflict, or an operation outside the stated Git boundary.
   inventory/publication assertions; it is not rerun. The exact
   implementation checkpoint is
   `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa`.
+- **2026-07-31 — `DISPLAYED-MIXED-GRADUATE-1` audit finds no semantic
+  dependency.** Finite sibling projections plus repeated one-layer lifting
+  form a structural induction over canonical layer count. The beyond-arity
+  mixed witness checks the induction's internal action consumer. Graduation
+  therefore needs an exact claim/performance boundary, not another curry,
+  kernel owner, checker rule, or presentation special case.
+- **2026-07-31 — `DISPLAYED-MIXED-GRADUATE-1` frozen.** The exact
+  H-DTTLF-USABILITY-DISPLAYED-MIXED-GRADUATE-01 /
+  D-DTTLF-USABILITY-027 proposal graduates arbitrary finite canonical
+  positive layers plus the final canonical mixed classifier/action only.
+  General curry, arbitrary variance/DAGs, pullback-hidden classifiers,
+  unrestricted `:^nd`, metatheory, transfer, text, browser, and performance
+  claims remain withheld. The proposal is non-self-authorizing; the user's
+  standing unattended delegation may record a separate approval after its
+  checkpoint, with human supersession.
