@@ -16,8 +16,11 @@ boundary at checkpoint
 `1142f723dc41ac336f420429af47d77e21c06fd4`;
 `MIXED-NEST-ACTION-1B` is implemented and focused-green at its frozen
 existing-conversion result-classifier boundary at checkpoint
-`b76baaf75ea332b977d403b6e11c975972466a45`; the next dependency-ready row is
-`DISPLAYED-TELESCOPE-GENERIC-1`
+`b76baaf75ea332b977d403b6e11c975972466a45`;
+`DISPLAYED-TELESCOPE-GENERIC-1` has completed its no-edit architecture audit
+and its exact finite canonical-layer fold is frozen under
+H-DTTLF-USABILITY-DISPLAYED-TELESCOPE-GENERIC-01 /
+D-DTTLF-USABILITY-026
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -394,7 +397,7 @@ Also outside the first tranche:
 | `MIXED-NEST-IR-0C` | exact proposal frozen; delegated implementation approval recorded with human supersession | green `MIXED-NEST-ACTION-0B` and measured existing outer eta | Add one construction-only nested displayed-abstraction node and one construction-only nested application node. Recognize only an indexed object of the canonical `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` family, invoke the inner callback once, accept exact eta of that already-coherent object, and factor recursively back to it. Add no Core owner, computation, checker branch, or general curry. |
 | `MIXED-NEST-1A` | complete and focused-green at checkpoint `1142f723dc41ac336f420429af47d77e21c06fd4` | green `MIXED-NEST-IR-0C` proposal | The mixed profile now exposes the first explicit nested `^fd` eta through construction-only recursive IR. It preserves outer contextual usage, eliminates only the hidden inner base/fibre slots, compiles back to the same coherent subject, and fails closed for arbitrary pointwise bodies or noncanonical classifiers. Zero Core-owner, kernel, checker-rule, external-coherence, text, or browser delta. |
 | `MIXED-NEST-ACTION-1B` | complete and focused-green at checkpoint `b76baaf75ea332b977d403b6e11c975972466a45` | green `MIXED-NEST-1A` and measured no-edit conversion probes | Ordinary object application now refines only the exact canonical `Fibre_cat(Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar),y)` target. It preserves the same Core term, derives `Ebar[y^-]` and `Dbar[y]` internally, and checks it as a `Functord_cat` object through existing runtime conversion. Outer base-arrow transport and direct base-object evaluation both feed the refined inner package to `homd_int`. Zero coercion, cast API, owner, rule, or external-evidence delta. |
-| `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
+| `DISPLAYED-TELESCOPE-GENERIC-1` | exact proposal frozen under D-DTTLF-USABILITY-026; implementation pending | mixed nested action plus current positive compiler | Replace selected presentation arities in the mixed successor profile with a dependency-plan fold over arbitrary finite canonical sibling layers and Sigma transitions. Reuse the existing displayed product/projection and one-level lifting machinery, retain classifier-directed mixed result lowering, and preserve predecessor profiles exactly. |
 | `DISPLAYED-MIXED-GRADUATE-1` | pending | generic positive and mixed witnesses | Freeze the exact arbitrary-finite-depth claim, negatives, performance boundary, and conformance evidence. Do not silently graduate unrestricted `^nd`. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
 | `TEXT-PARITY-MIXED-1` | pending | semantic graduation | Bring the text adapter to parity with the graduated mathematical API and fail closed outside it. |
@@ -1347,6 +1350,226 @@ refinement, or unrestricted displayed coherence. The next dependency-ready
 work is the generic dependency-plan fold for arbitrary finite positive and
 qualified mixed telescope depth.
 
+## `DISPLAYED-TELESCOPE-GENERIC-1` Audit And Frozen Boundary
+
+The implementation audit finds no new semantic owner between the completed
+two-binding and four-binding presentations and arbitrary finite **canonical
+layered** depth. Those two implementations are instances of one recursion
+which is already present in the scoped builder:
+
+- `displayedFamilyTree` forms an arbitrary nonempty left-associated
+  fibrewise product and `displayedProjectionWiring` derives every factor
+  projection;
+- `liftDisplayedCompilationThroughNextFamily` carries any already compiled
+  displayed map through one later Sigma context by the existing
+  `sigma_functord_sec`, Sigma projection, pullback, and section-weakening
+  owners; and
+- `compileDisplayedContextual` recursively compiles supported typed
+  occurrences, pairing, application, evaluation, nested factorization, and
+  the other already qualified body nodes.
+
+The current two-binding path spells out one lift. The current
+`a; b,c; d` path spells out a product projection followed by one or two
+lifts. Repeating the same generic helper is therefore an orchestration fold,
+not a new curry, pointwise action synthesis, or mathematical closure.
+
+The active kernel check is green with the 60-second bounded timeout. No
+Lambdapi source, owner, rule, or unification clause changes in this slice.
+
+### Canonical finite layer grammar
+
+The qualified input is a nonempty sequence of nonempty sibling layers:
+
+```text
+L0 = A00, ..., A0m
+L1 = A10, ..., A1n
+...
+Lr = Ar0, ..., Arq
+```
+
+with `r >= 1`. Let:
+
+```text
+K0 = K
+Pi = Productd(Ai0,...,Aik)        -- left-associated when k > 0
+K(i+1) = Sigma_cat Ki Pi.
+```
+
+Every family in `Li` is literally based on `Ki`. The next layer is admitted
+only when its family base is exactly `K(i+1)`. The final layer `Lr` is not
+totalized: the abstraction is a displayed functor over `Kr`, from `Pr` to a
+target family also based on `Kr`.
+
+The existing flat `displayedDependentContextLambda` input determines these
+layers without caller flags:
+
+1. consecutive families with the current literal base form one independent
+   sibling layer;
+2. the first different base must equal the Sigma total of the current
+   layer's product; and
+3. any other base transition fails closed with
+   `DISPLAYED_BASE_MISMATCH`.
+
+This is the usual contextual-presentation discipline. A family which depends
+on only part of an earlier context must first be weakened or pulled back to
+the complete current base. Bindings in one layer may be exchanged, paired,
+or contracted through the already qualified fibrewise product structure.
+Bindings on opposite sides of a genuine dependency transition are not
+exchanged.
+
+This grammar contains the completed cases:
+
+```text
+[A]; [B]
+[A]; [B,C]; [D]
+```
+
+and extends them mechanically to such presentations as:
+
+```text
+[A,B]; [C]; [D,E,F]; [G,H].
+```
+
+It does not claim that every arbitrary dependency DAG has a canonical
+presentation without explicit weakening/reindexing. It claims arbitrary
+finite depth and finite sibling width for this dependency-plan normal form.
+
+### Dependency-plan validation
+
+The public program layer must still validate the semantic presentation before
+the scoped builder runs.
+
+For binding position `i` in layer `Lj`, its dependency evidence consists of:
+
+- the root context position `0`; and
+- every binding position in layers strictly before `Lj`;
+- never another position in `Lj`.
+
+The locally nameless reference from absolute dependency position `d` to the
+prefix of absolute binding position `i` is `i - d - 1`. Every multi-binding
+layer is submitted as one sibling group. The generic dependency planner must
+return exactly:
+
+- the root/prior-layer edge set just described;
+- one `shared-minimal-base-siblings` group for every layer of width greater
+  than one; and
+- the complete prior-layer dependency chain for every binding.
+
+The program rejects any mismatch. Callers cannot assert independence,
+dependency, variance, or exchange by supplying a boolean flag.
+
+### Generic lowering fold
+
+For each layer, the scoped builder:
+
+1. builds its left-associated displayed-family product tree;
+2. derives a displayed projection compilation for every binding in that
+   layer, using identity for a singleton;
+3. carries each projection through every strictly later layer by repeated
+   `liftDisplayedCompilationThroughNextFamily`;
+4. creates the callback's indexed tokens at the final base, classified by
+   those fully lifted target families;
+5. maps every token ordinal to its final lifted compilation;
+6. evaluates the callback exactly once and recursively compiles its body with
+   `compileDisplayedContextual`; and
+7. checks that the result is a displayed functor from the final layer product
+   to the requested target family.
+
+The same internal displayed owners determine object, base-arrow, and higher
+action. The fold does not manufacture arrow variables, pointwise functions,
+or external functoriality/naturality equations. Its normalized evidence uses
+arrays of layers, bindings, original families, lifted families, and
+locally-nameless body data rather than another fixed-arity tuple.
+
+For the exact two-binding and four-binding canonical presentations, the new
+mixed-profile path must emit the same explicit Core term as the completed
+predecessor paths. This is a regression requirement, not a compatibility
+alias: the older profiles retain their existing route, evidence rule, and
+arity boundary unchanged.
+
+### Mixed variance boundary
+
+The context-presentation fold itself is positive/covariant. This does not
+separate arbitrary depth from the mixed-variance requirement. The final layer
+may target the already qualified canonical classifier:
+
+```text
+Hom_catd
+  (Const_catd Kr (Catd_cat Z))
+  Ebar
+  Dbar.
+```
+
+Within that target, the negative endpoint, positive endpoint, base-arrow
+action, `Transf_catd` fold, nested `^fd` eta, and `homd_int` consumption remain
+owned by the completed classifier-directed mixed path. The generic telescope
+must host that path at arbitrary positive contextual depth and must preserve
+its unchanged Core/action package.
+
+This slice does **not** recognize a canonical mixed classifier after an
+arbitrary pullback or opaque equivalent presentation. It does not introduce
+general two-sided/enriched curry, unrestricted mixed classifiers at every
+earlier binding, contravariant context transitions, or general `:^nd`
+coherence. Those need a separately qualified internal constructor or a
+concrete consumer; syntactic normalization is not used to guess them.
+
+### Profile and API boundary
+
+Only the existing successor profile
+`fibred-displayed-mixed-nest-1` enables the generic fold. In that profile,
+`displayedDependentContextLambda` routes every canonical input with at least
+two layers through the generic implementation.
+
+The completed `fibred-displayed-chain-1`,
+`fibred-displayed-chain-2a`, and
+`fibred-displayed-nd-higher-1` profiles preserve their exact two/four-binding
+behavior and evidence. One independent sibling layer remains the job of
+`displayedContextLambda`; it is not silently reinterpreted as a dependent
+telescope.
+
+No new public construction method, string syntax, browser behavior, Core
+expression, checker/evaluator branch, transfer declaration, runtime rule,
+proof fallback, cast, or coherence datum is added.
+
+### Required evidence
+
+Focused evidence must establish:
+
+1. generic two-binding lowering is explicit-Core-identical to
+   DISPLAYED-CHAIN-1A;
+2. generic four-binding lowering is explicit-Core-identical to
+   DISPLAYED-CHAIN-2A;
+3. a telescope beyond the selected arities, with at least four layers and
+   more than one sibling block, compiles early-, middle-, and final-layer
+   occurrences plus recursive pairing;
+4. the beyond-arity result exposes a genuine displayed-functor classifier
+   and its existing internalized base-arrow/cell consumer checks;
+5. a canonical mixed target at the final layer still supports nested
+   factorization and the completed internally derived `homd_int` path;
+6. the callback executes exactly once and its generic layer/body evidence is
+   deeply frozen;
+7. wrong next bases, target-base drift, duplicate names, one-layer misuse,
+   and unsupported mixed shapes fail closed; and
+8. predecessor profiles continue rejecting presentations beyond their
+   completed boundary.
+
+Validation is proportional: new and affected displayed/mixed suites,
+typechecking, targeted lint, and one final `check:ts` because shared surface
+behavior changes. Recent green Lambdapi and unchanged cross-layer evidence is
+carried forward; the repository-wide aggregate is not a routine gate.
+
+The frozen gate is:
+
+```text
+H-DTTLF-USABILITY-DISPLAYED-TELESCOPE-GENERIC-01 /
+D-DTTLF-USABILITY-026
+```
+
+This is a bounded no-new-mathematics implementation inside the already
+approved arbitrary-finite/mixed continuation. Under the user's standing
+unattended delegation, it may proceed after the proposal checkpoint and
+exact staged review, with human supersession.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -1567,3 +1790,21 @@ authority conflict, or an operation outside the stated Git boundary.
   two unrelated stale README phrase assertions and is not rerun. The bounded
   implementation checkpoint is
   `b76baaf75ea332b977d403b6e11c975972466a45`.
+- **2026-07-31 — `DISPLAYED-TELESCOPE-GENERIC-1` audit found a finite
+  fold, not a missing curry.** The completed two-binding and four-binding
+  lowerers already use the arbitrary sibling-product/projection tree, the
+  recursive typed body compiler, and a reusable one-layer
+  `sigma_functord_sec`/pullback lifting helper. A canonical sequence of
+  nonempty sibling layers can repeat that helper to arbitrary finite depth
+  with existing internal object/base-arrow/higher action. The active
+  Lambdapi check is green and no new owner is indicated.
+- **2026-07-31 — `DISPLAYED-TELESCOPE-GENERIC-1` frozen and delegated
+  approval recorded.** D-DTTLF-USABILITY-026 selects only the literal
+  product/Sigma layer normal form, exact generic dependency-plan validation,
+  repeated existing-owner lifting, generic frozen evidence, and the existing
+  mixed successor profile. Predecessor profiles remain exact. Arbitrary
+  dependency DAGs without explicit weakening, pullback-hidden mixed
+  classifiers, general curry, unrestricted `:^nd`, text, browser, Core,
+  kernel, checker, and transfer deltas remain outside the slice. The user's
+  standing unattended delegation authorizes this bounded implementation
+  after the proposal checkpoint, with human supersession.
