@@ -24,7 +24,10 @@ D-DTTLF-USABILITY-026; the implementation is focused-green at checkpoint
 `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa`; the exact
 `DISPLAYED-MIXED-GRADUATE-1` boundary is now frozen under
 H-DTTLF-USABILITY-DISPLAYED-MIXED-GRADUATE-01 /
-D-DTTLF-USABILITY-027 and awaits its separate decision
+D-DTTLF-USABILITY-027 and approved as proposed through the standing
+unattended delegation after proposal checkpoint
+`ddc78c250970f62c09d822a39a16502f41c75db1`; `TEXT-PARITY-MIXED-1` is the
+next dependency-ready row
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -402,7 +405,7 @@ Also outside the first tranche:
 | `MIXED-NEST-1A` | complete and focused-green at checkpoint `1142f723dc41ac336f420429af47d77e21c06fd4` | green `MIXED-NEST-IR-0C` proposal | The mixed profile now exposes the first explicit nested `^fd` eta through construction-only recursive IR. It preserves outer contextual usage, eliminates only the hidden inner base/fibre slots, compiles back to the same coherent subject, and fails closed for arbitrary pointwise bodies or noncanonical classifiers. Zero Core-owner, kernel, checker-rule, external-coherence, text, or browser delta. |
 | `MIXED-NEST-ACTION-1B` | complete and focused-green at checkpoint `b76baaf75ea332b977d403b6e11c975972466a45` | green `MIXED-NEST-1A` and measured no-edit conversion probes | Ordinary object application now refines only the exact canonical `Fibre_cat(Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar),y)` target. It preserves the same Core term, derives `Ebar[y^-]` and `Dbar[y]` internally, and checks it as a `Functord_cat` object through existing runtime conversion. Outer base-arrow transport and direct base-object evaluation both feed the refined inner package to `homd_int`. Zero coercion, cast API, owner, rule, or external-evidence delta. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | complete and focused-green at checkpoint `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa` | mixed nested action plus current positive compiler | The mixed successor now derives arbitrary finite canonical sibling layers from literal family bases, validates their exact dependency plan, and folds existing product/projection and one-level Sigma/pullback lifting machinery. The four-layer `[A]; [B,C]; [D]; [E,F]` witness checks early/middle/final occurrences, pairing, an internal base-arrow cell, nested mixed factorization, and `homd_int`; predecessor profiles and their two/four-binding explicit Core remain exact. |
-| `DISPLAYED-MIXED-GRADUATE-1` | exact graduation proposal frozen under D-DTTLF-USABILITY-027; decision pending | generic positive and mixed witnesses | Graduate arbitrary finite depth/width only for the canonical positive sibling-layer/Sigma normal form, together with the exact final canonical mixed classifier, nested eta, internal base-arrow cell, and `homd_int` consumer. Retain explicit performance, general-curry, arbitrary-variance, pullback-hidden-classifier, arbitrary-DAG, and unrestricted-`:^nd` non-claims. |
+| `DISPLAYED-MIXED-GRADUATE-1` | complete; D-DTTLF-USABILITY-027 approved as proposed after checkpoint `ddc78c250970f62c09d822a39a16502f41c75db1` | generic positive and mixed witnesses | Graduates arbitrary finite depth/width only for the canonical positive sibling-layer/Sigma normal form, together with the exact final canonical mixed classifier, nested eta, internal base-arrow cell, and `homd_int` consumer. Retains explicit performance, general-curry, arbitrary-variance, pullback-hidden-classifier, arbitrary-DAG, and unrestricted-`:^nd` non-claims. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
 | `TEXT-PARITY-MIXED-1` | pending | semantic graduation | Bring the text adapter to parity with the graduated mathematical API and fail closed outside it. |
 | `DISPLAYED-ND-CONSUMERS-N` | future, consumer-led | concrete requested coherent bodies | Expand recursively supported `^nd` body constructors while preserving internal coherence ownership. |
@@ -2114,3 +2117,10 @@ authority conflict, or an operation outside the stated Git boundary.
   claims remain withheld. The proposal is non-self-authorizing; the user's
   standing unattended delegation may record a separate approval after its
   checkpoint, with human supersession.
+- **2026-07-31 — D-DTTLF-USABILITY-027 approved as proposed.** The frozen
+  proposal was checkpointed independently at
+  `ddc78c250970f62c09d822a39a16502f41c75db1`. With no immediate contrary
+  human response, the user's standing unattended delegation records the
+  exact plan-level graduation with human supersession. This adds no semantic
+  owner, runtime/checker behavior, parser route, browser behavior, or remote
+  Git authority. `TEXT-PARITY-MIXED-1` is dependency-ready.
