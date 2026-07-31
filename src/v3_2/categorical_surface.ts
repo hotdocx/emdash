@@ -58,6 +58,9 @@ import {
     coreCategoricalDisplayedChainCoreName
 } from './categorical_displayed_chain_transfer';
 import {
+    coreCategoricalDisplayedNdHigherFoundationCoreName
+} from './categorical_displayed_nd_higher_foundation_transfer';
+import {
     coreCategoricalMixedModeCoreName
 } from './categorical_mixed_mode_transfer';
 import {
@@ -1631,6 +1634,119 @@ export class CoreCategoricalScopedBuilder {
         };
     }
 
+    /**
+     * Refine the exact canonical mixed fibre:
+     *
+     *   Fibre_cat
+     *     (Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar))
+     *     y
+     *
+     * to `Functord_cat Z Ebar[y^-] Dbar[y]`.
+     *
+     * This changes only the construction-time classifier. The Core term is
+     * unchanged and the final checker must validate the existing runtime
+     * conversion.
+     */
+    private mixedNestedFibreDisplayedFunctorType(
+        category: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreType | undefined {
+        if (
+            this.options.mixedNestedFactorization !== true ||
+            category.tag !== 'application' ||
+            category.owner !== 'functor-object' ||
+            category.arguments.length !== 4 ||
+            category.arguments[0].plicity !== 'implicit' ||
+            category.arguments[1].plicity !== 'implicit' ||
+            category.arguments[2].plicity !== 'explicit' ||
+            category.arguments[3].plicity !== 'explicit' ||
+            !kernelExpressionEquals(
+                category.arguments[1].value,
+                this.categoryOfCategories(nodeProvenance)
+            )
+        ) {
+            return undefined;
+        }
+        const outerBaseCategory = category.arguments[0].value;
+        const family = category.arguments[2].value;
+        const point = category.arguments[3].value;
+        const shape = this.mixedNestedDisplayedFunctorShape(
+            family,
+            outerBaseCategory
+        );
+        if (shape === undefined) return undefined;
+
+        const oppositeClassifier = kernelCall(
+            kernelFree(
+                coreCategoricalDisplayedNdHigherFoundationCoreName(
+                    'displayedOpposite'
+                ),
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: outerBaseCategory
+                },
+                {
+                    plicity: 'explicit',
+                    value: shape.classifierFamily
+                }
+            ],
+            nodeProvenance
+        );
+        const sectionAt = (
+            sectionFamily: KernelExpression,
+            section: KernelExpression
+        ): KernelExpression => kernelCall(
+            kernelFree(
+                CORE_DIRECTED_1C_PRIMITIVE_NAMES[
+                    'section-object-evaluation'
+                ],
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: outerBaseCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: sectionFamily
+                },
+                {
+                    plicity: 'explicit',
+                    value: section
+                },
+                {
+                    plicity: 'explicit',
+                    value: point
+                }
+            ],
+            nodeProvenance
+        );
+        const sourceFamily = sectionAt(
+            oppositeClassifier,
+            shape.sourceSection
+        );
+        const targetFamily = sectionAt(
+            shape.classifierFamily,
+            shape.targetSection
+        );
+        return {
+            tag: 'displayed-functor',
+            category: this.displayedFunctorCategory(
+                shape.innerBaseCategory,
+                sourceFamily,
+                targetFamily,
+                nodeProvenance
+            ),
+            baseCategory: shape.innerBaseCategory,
+            sourceFamily,
+            targetFamily
+        };
+    }
+
     private displayedEvaluationFamilyShape(
         family: KernelExpression,
         baseCategory: KernelExpression,
@@ -1985,6 +2101,12 @@ export class CoreCategoricalScopedBuilder {
         nodeProvenance: Provenance,
         detail: string
     ): CoreType {
+        const mixedNestedType =
+            this.mixedNestedFibreDisplayedFunctorType(
+                category,
+                nodeProvenance
+            );
+        if (mixedNestedType !== undefined) return mixedNestedType;
         if (
             category.tag === 'call' &&
             category.callee.tag === 'reference' &&
@@ -4030,7 +4152,25 @@ export class CoreCategoricalScopedBuilder {
                 [subject, argument],
                 nodeProvenance
             );
-            type = closed.type;
+            const mixedNestedType =
+                selection.operation === 'functor.object' &&
+                subject.type.tag === 'functor'
+                    ? this.mixedNestedFibreDisplayedFunctorType(
+                        subject.type.targetCategory,
+                        nodeProvenance
+                    )
+                    : undefined;
+            if (mixedNestedType === undefined) {
+                type = closed.type;
+            } else {
+                type = mixedNestedType;
+                closed = deepFreeze({
+                    term: closed.term,
+                    type: copyCoreType(mixedNestedType),
+                    sourceSpan: closed.sourceSpan,
+                    recovered: [...closed.recovered]
+                });
+            }
         } else if (selection.operation === 'functor.object') {
             type = this.categoricalTypeForCategoryObject(
                 subject.type.targetCategory,

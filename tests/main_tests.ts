@@ -142,6 +142,7 @@ import './v3_2_categorical_mixed_mode_transfer_tests';
 import './v3_2_categorical_mixed_mode_tests';
 import './v3_2_categorical_mixed_action_transfer_tests';
 import './v3_2_categorical_mixed_nested_factorization_tests';
+import './v3_2_categorical_mixed_nested_action_tests';
 import './v3_2_categorical_usability_graduation_proposal_tests';
 import './v3_2_categorical_usability_graduation_review_tests';
 import './v3_2_categorical_dependent_usability_review_tests';
