@@ -29,8 +29,9 @@ focused-green at
 proposal frozen below as D-DTTLF-USABILITY-032 at
 `d125a3e530f3cca77b9bb91d538f6ffb85b709bc`. The separate review recorded in
 the decision ledger approves exactly that claim under the standing unattended
-delegation. `TEXT-PARITY-RECURSIVE-MIXED-1E` is dependency-ready for an audit;
-no parser behavior or public promotion is implied.
+delegation at `50c579e2b76252f4cffcb93d2c643ef8155c8288`.
+`TEXT-PARITY-RECURSIVE-MIXED-1E` is dependency-ready for an audit; no parser
+behavior or public promotion is implied.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -526,7 +527,7 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-REFLECT-1A` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
 | `RECURSIVE-MIXED-HOM-CLOSURE-1C` | complete at `0180fd8cab2ddfbf4092e4c9a4eff565908c146f` | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | The direct program exposes the existing generic Hom category with one shared endpoint validator. Stable rich heads reify at zero steps; eight compact named levels and two checked mixed-root action levels pass. The 387-second four-action expansion remains a measured performance nonclaim. |
-| `RECURSIVE-MIXED-GRADUATE-1D` | approved/completed under D-DTTLF-USABILITY-032; decision checkpoint pending below | green `HOM-CLOSURE-1C`; recursive normalization/reification and public Hom/action closure | Depth-generic finite named Hom nesting over the exact canonical mixed root/transferred grammar, plus generic internal action recursion, is graduated as an architecture claim. Variance, introduction, parser, metatheory, and performance nonclaims remain. |
+| `RECURSIVE-MIXED-GRADUATE-1D` | complete at `50c579e2b76252f4cffcb93d2c643ef8155c8288` under D-DTTLF-USABILITY-032 | green `HOM-CLOSURE-1C`; recursive normalization/reification and public Hom/action closure | Depth-generic finite named Hom nesting over the exact canonical mixed root/transferred grammar, plus generic internal action recursion, is graduated as an architecture claim. Variance, introduction, parser, metatheory, and performance nonclaims remain. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1E` | dependency-ready for a separate audit/proposal | approved `GRADUATE-1D`; existing typed-resolver parity audit | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics and no assumption that JavaScript callback control flow is textual syntax. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
 | `CURRY-PACKAGE-0A` | deferred independent audit | measured higher-action or mixed-introduction consumer | Audit ordinary curry/uncurry computation and adjunction coherence; do not infer primitive asymmetry from style. |
@@ -1086,4 +1087,5 @@ authority conflict, or an operation outside the stated Git boundary.
   superseded it, so the standing unattended delegation records a separate
   decision-only approval with human supersession. This completes only
   `RECURSIVE-MIXED-GRADUATE-1D`; it authorizes no code, parser, browser,
-  publication, kernel, performance, or broader semantic claim.
+  publication, kernel, performance, or broader semantic claim. The exact
+  decision checkpoint is `50c579e2b76252f4cffcb93d2c643ef8155c8288`.
