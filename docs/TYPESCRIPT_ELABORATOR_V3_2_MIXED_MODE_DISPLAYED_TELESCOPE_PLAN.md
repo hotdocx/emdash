@@ -10,9 +10,10 @@ checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6`;
 the no-active-edit `MIXED-CURRY-0A` design/probe has rejected both ordinary
 fibrewise curry and a premature new primitive; `MIXED-NEST-ACTION-0B` is
 complete and focused-green at checkpoint
-`a31b8927910d32613c7d0fac1862317b08dbf920`; the next
-dependency-ready slice is the frozen exact-eta recursive factorization
-boundary `MIXED-NEST-IR-0C`
+`a31b8927910d32613c7d0fac1862317b08dbf920`; `MIXED-NEST-1A` is implemented
+and focused-green at its frozen construction-only recursive factorization
+boundary, with the bounded implementation checkpoint pending; the next
+dependency-ready slice is `MIXED-NEST-ACTION-1B`
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -387,7 +388,7 @@ Also outside the first tranche:
 | `MIXED-CURRY-0A` | complete design result; no active-kernel or TypeScript semantic delta | complete `MIXED-NEST-1A0` audit | Ordinary fibrewise curry is ill-typed for a source over `K^op`. A well-typed two-sided total context exists for the plain `Functor_catd` case, but the canonical `Hom_catd(Const(Catd_cat Z),Ebar,Dbar)` target is one enrichment level higher and has no existing general curry. No transparent composite or justified smallest primitive is selected. |
 | `MIXED-NEST-ACTION-0B` | complete and focused-green at checkpoint `a31b8927910d32613c7d0fac1862317b08dbf920` | complete `MIXED-CURRY-0A`; green displayed-ND foundation | Nine existing declarations and twelve exact source computations/projections close the dependency path for the direct `homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_` cascade. Two rich typed consumers expose `homd_int(FF)` and its terminal `homd_(FF,x,u,y,v)` family. Zero Lambdapi, intrinsic-owner, checker-branch, external-coherence, proof-fallback, nested-lowering, text, or browser delta. |
 | `MIXED-NEST-IR-0C` | exact proposal frozen; delegated implementation approval recorded with human supersession | green `MIXED-NEST-ACTION-0B` and measured existing outer eta | Add one construction-only nested displayed-abstraction node and one construction-only nested application node. Recognize only an indexed object of the canonical `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` family, invoke the inner callback once, accept exact eta of that already-coherent object, and factor recursively back to it. Add no Core owner, computation, checker branch, or general curry. |
-| `MIXED-NEST-1A` | approved next implementation at the exact `MIXED-NEST-IR-0C` boundary | green `MIXED-NEST-IR-0C` proposal | Implement the first explicit nested `^fd` eta through the frozen recursive construction IR. Preserve outer contextual usage, eliminate only the hidden inner base/fibre slots, and fail closed for arbitrary pointwise bodies or noncanonical classifiers. |
+| `MIXED-NEST-1A` | implemented and focused-green; bounded checkpoint pending | green `MIXED-NEST-IR-0C` proposal | The mixed profile now exposes the first explicit nested `^fd` eta through construction-only recursive IR. It preserves outer contextual usage, eliminates only the hidden inner base/fibre slots, compiles back to the same coherent subject, and fails closed for arbitrary pointwise bodies or noncanonical classifiers. Zero Core-owner, kernel, checker-rule, external-coherence, text, or browser delta. |
 | `MIXED-NEST-ACTION-1B` | pending | green `MIXED-NEST-1A` | Exercise base-arrow action through the inner mixed classifier and one `homd_int`/next-Hom consumer. Add no constructor-specific generic functoriality/naturality rules. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
 | `DISPLAYED-MIXED-GRADUATE-1` | pending | generic positive and mixed witnesses | Freeze the exact arbitrary-finite-depth claim, negatives, performance boundary, and conformance evidence. Do not silently graduate unrestricted `^nd`. |
@@ -1047,6 +1048,77 @@ Under the user's standing unattended delegation, this exact no-new-semantics
 implementation may proceed after the proposal checkpoint and exact staged
 review. Human supersession remains authoritative.
 
+## `MIXED-NEST-1A` Implementation Result
+
+The frozen construction-only slice is implemented without adding the absent
+general displayed curry. The public mixed profile accepts the exact
+TypeScript construction:
+
+```text
+displayedContextLambda([{ name: 'c', family: C }], H, ([c]) => {
+    const inner = apply(nested, c);
+    return nestedDisplayedFunctorLambda(
+        'e',
+        inner,
+        e => apply(inner, e)
+    );
+});
+```
+
+where:
+
+```text
+H      = Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)
+nested : Functord_cat C H.
+```
+
+The scoped builder now has:
+
+- a construction-only `nested-indexed-object` classifier carrying both the
+  outer contextual index and hidden inner base index;
+- one `typed-nested-displayed-application` node that distinguishes the
+  negative source endpoint from the positive target endpoint;
+- one `nested-displayed-abstraction` node that eliminates only the hidden
+  inner base/fibre slots; and
+- the exact `categorical.mixed-nested-displayed-eta` evidence row, normalized
+  with locally nameless indices and deeply frozen.
+
+The callback is invoked exactly once. It must return the application of the
+same coherent `inner` subject to the fresh fibre token. The displayed
+contextual compiler recursively compiles that subject through the established
+outer wiring, so the checked explicit result is exactly:
+
+```text
+free nested
+```
+
+with inferred and expected Core types equal. This is the intended semantic
+result: `nested` already owns its object, base-arrow, and higher action. The
+frontend exposes one explicit inner eta without reconstructing those actions
+pointwise.
+
+Focused negatives reject a noncanonical target family, a pointwise body, a
+different coherent subject, escaped/foreign tokens, and use outside the mixed
+profile. The executable syntax-parity inventory records the new mathematical
+API method but does not claim text syntax for it.
+
+Validation is proportional to the shared TypeScript delta:
+
+- the new focused suite passes 5/5;
+- the existing mixed-profile and syntax-parity suites pass 9/9 together;
+- root typechecking and targeted lint pass;
+- `git diff --check` passes; and
+- the single required `./scripts/pnpmw run check:ts` completed workspace
+  validation, typechecking, and full lint, then reported only the same two
+  unrelated stale README phrase assertions already recorded for
+  `MIXED-NEST-ACTION-0B`.
+
+No aggregate rerun is required. `MIXED-NEST-1A` proves one explicit inner
+factorization layer. It does not yet prove iteration, arbitrary finite mixed
+depth, general displayed curry, unrestricted `:^nd`, or consumption of the
+factored package's internal base-arrow/higher action. Those are the measured
+dependencies of `MIXED-NEST-ACTION-1B` and later rows.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -1229,3 +1301,14 @@ authority conflict, or an operation outside the stated Git boundary.
   no Core owner, kernel rule, general curry, external coherence, parser, or
   browser behavior. The user's standing unattended delegation authorizes
   this bounded implementation with human supersession.
+- **2026-07-31 — `MIXED-NEST-1A` implemented and focused-green.** The mixed
+  profile now records both locally nameless indices and source/target
+  polarity for one explicit inner `^fd` eta, invokes its callback once, and
+  recursively lowers to the same already-coherent `Functord` subject. Five
+  focused tests cover exact output, frozen evidence, indices/polarity,
+  noncanonical targets, pointwise/different subjects, and the profile gate.
+  The existing mixed-profile and syntax-parity suites pass 9/9 together.
+  Root typechecking and lint pass. The single required shared TypeScript gate
+  again reaches only the same two unrelated stale README phrase assertions;
+  it is not rerun. The bounded implementation checkpoint is pending exact
+  staged review.

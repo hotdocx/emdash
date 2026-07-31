@@ -58,6 +58,9 @@ import {
     coreCategoricalDisplayedChainCoreName
 } from './categorical_displayed_chain_transfer';
 import {
+    coreCategoricalMixedModeCoreName
+} from './categorical_mixed_mode_transfer';
+import {
     CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
 } from './categorical_fibred_dependent_target_transfer';
 import {
@@ -186,11 +189,32 @@ export interface CoreCategoricalIndexedTransforClassifier {
     readonly index: number;
 }
 
+/**
+ * One fibre object of a source or target family inside the canonical nested
+ * `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` classifier.
+ *
+ * Both indices are locally nameless construction indices. No open endpoint
+ * family is serialized into Core; the active kernel sections retain its
+ * mixed variance.
+ */
+export interface CoreCategoricalNestedIndexedObjectClassifier {
+    readonly tag: 'nested-indexed-object';
+    readonly outerBaseCategory: KernelExpression;
+    readonly outerIndex: number;
+    readonly innerBaseCategory: KernelExpression;
+    readonly innerIndex: number;
+    readonly classifierFamily: KernelExpression;
+    readonly sourceSection: KernelExpression;
+    readonly targetSection: KernelExpression;
+    readonly endpoint: 'source' | 'target';
+}
+
 export type CoreCategoricalClassifier =
     | CoreType
     | CoreCategoricalIndexedObjectClassifier
     | CoreCategoricalIndexedFunctorClassifier
-    | CoreCategoricalIndexedTransforClassifier;
+    | CoreCategoricalIndexedTransforClassifier
+    | CoreCategoricalNestedIndexedObjectClassifier;
 
 export interface CoreCategoricalDependentContinuationApplicationJudgment {
     readonly id: 'indexed-fibre-functor.object';
@@ -338,6 +362,23 @@ export type CoreCategoricalContextualIr =
         readonly provenance: Provenance;
     }
     | {
+        readonly tag: 'typed-nested-displayed-application';
+        readonly subject: CoreCategoricalContextualIr;
+        readonly base: CoreCategoricalContextualIr;
+        readonly argument: CoreCategoricalContextualIr;
+        readonly type: CoreCategoricalNestedIndexedObjectClassifier;
+        readonly provenance: Provenance;
+    }
+    | {
+        readonly tag: 'nested-displayed-abstraction';
+        readonly name: string;
+        readonly innerBaseCategory: KernelExpression;
+        readonly subject: CoreCategoricalContextualIr;
+        readonly body: CoreCategoricalContextualIr;
+        readonly type: CoreCategoricalIndexedObjectClassifier;
+        readonly provenance: Provenance;
+    }
+    | {
         readonly tag: 'categorical-abstraction';
         readonly name: string;
         readonly sourceCategory: KernelExpression;
@@ -476,6 +517,19 @@ export type CoreCategoricalAbstractionEvidence =
     | (
         CoreCategoricalAbstractionEvidenceBase & {
             readonly rule:
+                'categorical.mixed-nested-displayed-eta';
+            readonly variation: 'functorial';
+            readonly dependency: 'displayed';
+            readonly outerBaseCategory: KernelExpression;
+            readonly innerBaseCategory: KernelExpression;
+            readonly classifierFamily: KernelExpression;
+            readonly sourceSection: KernelExpression;
+            readonly targetSection: KernelExpression;
+        }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
                 | 'categorical.displayed-transfor-eta'
                 | 'categorical.displayed-transfor-composition';
             readonly variation: 'natural';
@@ -556,6 +610,11 @@ export interface CoreCategoricalScopedBuilderOptions {
      * dependency edge `k : K; a : A[k]; b : B[(k,a)]`.
      */
     readonly displayedDependentContextualAbstraction?: boolean;
+    /**
+     * Enable only MIXED-NEST-1A's exact recursive eta/factorization for an
+     * already-coherent object of the canonical mixed nested Hom family.
+     */
+    readonly mixedNestedFactorization?: boolean;
 }
 
 export interface CoreCategoricalBinderOptions {
@@ -633,6 +692,23 @@ type TemporaryCategoricalNode =
         readonly provenance: Provenance;
     }
     | {
+        readonly tag: 'typed-nested-displayed-application';
+        readonly subject: InternalCoreCategoricalTerm;
+        readonly base: InternalCoreCategoricalTerm;
+        readonly argument: InternalCoreCategoricalTerm;
+        readonly provenance: Provenance;
+    }
+    | {
+        readonly tag: 'nested-displayed-abstraction';
+        readonly baseOrdinal: number;
+        readonly fibreOrdinal: number;
+        readonly name: string;
+        readonly innerBaseCategory: KernelExpression;
+        readonly subject: InternalCoreCategoricalTerm;
+        readonly body: InternalCoreCategoricalTerm;
+        readonly provenance: Provenance;
+    }
+    | {
         readonly tag: 'categorical-abstraction';
         readonly ordinal: number;
         readonly name: string;
@@ -704,11 +780,32 @@ interface InternalCoreCategoricalIndexedTransforClassifier {
     readonly indexOrdinal: number;
 }
 
+interface InternalCoreCategoricalNestedIndexedObjectClassifier {
+    readonly tag: 'nested-indexed-object';
+    readonly outerBaseCategory: KernelExpression;
+    readonly outerIndexOrdinal: number;
+    readonly innerBaseCategory: KernelExpression;
+    readonly innerIndexOrdinal: number;
+    readonly classifierFamily: KernelExpression;
+    readonly sourceSection: KernelExpression;
+    readonly targetSection: KernelExpression;
+    readonly endpoint: 'source' | 'target';
+}
+
 type InternalCoreCategoricalClassifier =
     | CoreType
     | InternalCoreCategoricalIndexedObjectClassifier
     | InternalCoreCategoricalIndexedFunctorClassifier
-    | InternalCoreCategoricalIndexedTransforClassifier;
+    | InternalCoreCategoricalIndexedTransforClassifier
+    | InternalCoreCategoricalNestedIndexedObjectClassifier;
+
+interface CoreCategoricalMixedNestedFunctorShape {
+    readonly outerBaseCategory: KernelExpression;
+    readonly innerBaseCategory: KernelExpression;
+    readonly classifierFamily: KernelExpression;
+    readonly sourceSection: KernelExpression;
+    readonly targetSection: KernelExpression;
+}
 
 interface InternalCoreCategoricalHomBoundary
 extends CoreCategoricalHomBoundary {
@@ -833,6 +930,19 @@ const copyInternalClassifier = (
             indexOrdinal: classifier.indexOrdinal
         };
     }
+    if (classifier.tag === 'nested-indexed-object') {
+        return {
+            tag: 'nested-indexed-object',
+            outerBaseCategory: classifier.outerBaseCategory,
+            outerIndexOrdinal: classifier.outerIndexOrdinal,
+            innerBaseCategory: classifier.innerBaseCategory,
+            innerIndexOrdinal: classifier.innerIndexOrdinal,
+            classifierFamily: classifier.classifierFamily,
+            sourceSection: classifier.sourceSection,
+            targetSection: classifier.targetSection,
+            endpoint: classifier.endpoint
+        };
+    }
     return copyCoreType(classifier);
 };
 
@@ -952,6 +1062,15 @@ const collectDependentPrerequisites = (
             case 'typed-pair':
                 visit(current.left);
                 visit(current.right);
+                return;
+            case 'typed-nested-displayed-application':
+                visit(current.subject);
+                visit(current.base);
+                visit(current.argument);
+                return;
+            case 'nested-displayed-abstraction':
+                visit(current.subject);
+                visit(current.body);
                 return;
             case 'categorical-abstraction':
                 visit(current.body);
@@ -1448,6 +1567,70 @@ export class CoreCategoricalScopedBuilder {
         );
     }
 
+    /**
+     * Recognize only the canonical nested displayed-functor classifier
+     *
+     *   Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar).
+     *
+     * The result carries internal owners, not pointwise endpoint families or
+     * external variance evidence.
+     */
+    private mixedNestedDisplayedFunctorShape(
+        family: KernelExpression,
+        outerBaseCategory: KernelExpression
+    ): CoreCategoricalMixedNestedFunctorShape | undefined {
+        if (
+            family.tag !== 'call' ||
+            family.callee.tag !== 'reference' ||
+            family.callee.namespace !== 'free' ||
+            family.callee.name !==
+                coreCategoricalMixedModeCoreName(
+                    'displayedHomFamily'
+                ) ||
+            family.arguments.length !== 4 ||
+            family.arguments[0].plicity !== 'implicit' ||
+            family.arguments[1].plicity !== 'explicit' ||
+            family.arguments[2].plicity !== 'explicit' ||
+            family.arguments[3].plicity !== 'explicit' ||
+            !kernelExpressionEquals(
+                family.arguments[0].value,
+                outerBaseCategory
+            )
+        ) {
+            return undefined;
+        }
+        const classifierFamily = family.arguments[1].value;
+        if (
+            classifierFamily.tag !== 'application' ||
+            classifierFamily.owner !== 'constant-displayed-family' ||
+            classifierFamily.arguments.length !== 2 ||
+            !kernelExpressionEquals(
+                classifierFamily.arguments[0].value,
+                outerBaseCategory
+            )
+        ) {
+            return undefined;
+        }
+        const displayedCategory =
+            classifierFamily.arguments[1].value;
+        if (
+            displayedCategory.tag !== 'application' ||
+            displayedCategory.owner !==
+                'displayed-category-category' ||
+            displayedCategory.arguments.length !== 1
+        ) {
+            return undefined;
+        }
+        return {
+            outerBaseCategory,
+            innerBaseCategory:
+                displayedCategory.arguments[0].value,
+            classifierFamily,
+            sourceSection: family.arguments[2].value,
+            targetSection: family.arguments[3].value
+        };
+    }
+
     private displayedEvaluationFamilyShape(
         family: KernelExpression,
         baseCategory: KernelExpression,
@@ -1778,7 +1961,8 @@ export class CoreCategoricalScopedBuilder {
         if (
             type.tag === 'indexed-object' ||
             type.tag === 'indexed-functor' ||
-            type.tag === 'indexed-transfor'
+            type.tag === 'indexed-transfor' ||
+            type.tag === 'nested-indexed-object'
         ) {
             return undefined;
         }
@@ -1882,6 +2066,40 @@ export class CoreCategoricalScopedBuilder {
                 baseCategory,
                 family,
                 indexOrdinal
+            },
+            [Object.freeze([ordinal, 1] as const)],
+            undefined,
+            [],
+            true
+        );
+    }
+
+    private nestedIndexedObjectSlot(
+        name: string,
+        shape: CoreCategoricalMixedNestedFunctorShape,
+        outerIndexOrdinal: number,
+        innerIndexOrdinal: number,
+        endpoint: 'source' | 'target',
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalTerm {
+        const ordinal = this.nextTokenOrdinal++;
+        return this.makeTerm(
+            {
+                tag: 'slot-token',
+                ordinal,
+                hint: name,
+                provenance: nodeProvenance
+            },
+            {
+                tag: 'nested-indexed-object',
+                outerBaseCategory: shape.outerBaseCategory,
+                outerIndexOrdinal,
+                innerBaseCategory: shape.innerBaseCategory,
+                innerIndexOrdinal,
+                classifierFamily: shape.classifierFamily,
+                sourceSection: shape.sourceSection,
+                targetSection: shape.targetSection,
+                endpoint
             },
             [Object.freeze([ordinal, 1] as const)],
             undefined,
@@ -2103,7 +2321,8 @@ export class CoreCategoricalScopedBuilder {
             if (
                 endpoint.type.tag === 'indexed-object' ||
                 endpoint.type.tag === 'indexed-functor' ||
-                endpoint.type.tag === 'indexed-transfor'
+                endpoint.type.tag === 'indexed-transfor' ||
+                endpoint.type.tag === 'nested-indexed-object'
             ) {
                 this.fail(
                     'CLASSIFIER_ARGUMENT_MISMATCH',
@@ -3241,6 +3460,127 @@ export class CoreCategoricalScopedBuilder {
         );
     }
 
+    private applyNestedDisplayedFunctor(
+        subject: InternalCoreCategoricalTerm,
+        argumentValue:
+            | CoreCategoricalTerm
+            | CoreCategoricalHomBoundary,
+        expectedShape: CoreCategoricalExpectedShape | undefined,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (
+            this.options.mixedNestedFactorization !== true ||
+            subject.type.tag !== 'indexed-object'
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Nested displayed application requires the reviewed ' +
+                    'MIXED-NEST-1A factorization capability'
+            );
+        }
+        if (
+            typeof argumentValue === 'object' &&
+            argumentValue !== null &&
+            (argumentValue as InternalCoreCategoricalHomBoundary)[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'A nested displayed functor expects its scoped fibre ' +
+                    'object, not a whole Hom boundary'
+            );
+        }
+        if (
+            expectedShape !== undefined &&
+            expectedShape !== 'object-value'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Nested displayed application cannot produce expected ` +
+                    `shape '${expectedShape}'`
+            );
+        }
+        const shape = this.mixedNestedDisplayedFunctorShape(
+            subject.type.family,
+            subject.type.baseCategory
+        );
+        const argument = this.requireTerm(
+            argumentValue as CoreCategoricalTerm,
+            nodeProvenance
+        );
+        if (
+            shape === undefined ||
+            argument.type.tag !== 'nested-indexed-object' ||
+            argument.type.endpoint !== 'source' ||
+            argument.type.outerIndexOrdinal !==
+                subject.type.indexOrdinal ||
+            !kernelExpressionEquals(
+                argument.type.outerBaseCategory,
+                subject.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                argument.type.innerBaseCategory,
+                shape.innerBaseCategory
+            ) ||
+            !kernelExpressionEquals(
+                argument.type.classifierFamily,
+                shape.classifierFamily
+            ) ||
+            !kernelExpressionEquals(
+                argument.type.sourceSection,
+                shape.sourceSection
+            ) ||
+            !kernelExpressionEquals(
+                argument.type.targetSection,
+                shape.targetSection
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Nested displayed subject and fibre token do not share the ' +
+                    'canonical Hom_catd classifier and contextual indices'
+            );
+        }
+        const base = this.activeDisplayedBases.get(
+            argument.type.innerIndexOrdinal
+        );
+        if (
+            base === undefined ||
+            base.node.tag !== 'slot-token' ||
+            base.node.ordinal !== argument.type.innerIndexOrdinal
+        ) {
+            this.fail(
+                'ESCAPED_SLOT',
+                nodeProvenance,
+                'Nested displayed application lost its hidden inner base'
+            );
+        }
+        return this.makeTerm(
+            {
+                tag: 'typed-nested-displayed-application',
+                subject,
+                base,
+                argument,
+                provenance: nodeProvenance
+            },
+            {
+                ...argument.type,
+                endpoint: 'target'
+            },
+            mergeUsage(subject.usage, base.usage, argument.usage),
+            undefined,
+            [
+                ...subject.abstractions,
+                ...argument.abstractions
+            ]
+        );
+    }
+
     private applyDisplayedEvaluation(
         subject: InternalCoreCategoricalTerm,
         argumentValue:
@@ -3436,6 +3776,27 @@ export class CoreCategoricalScopedBuilder {
                 );
                 return this.applyIndexedFibreFunctor(
                     this.requireTerm(indexedFunctor, nodeProvenance),
+                    argument,
+                    expectedShape,
+                    nodeProvenance
+                );
+            }
+        }
+        if (
+            subject.type.tag === 'indexed-object' &&
+            typeof argumentValue === 'object' &&
+            argumentValue !== null &&
+            (argumentValue as InternalCoreCategoricalHomBoundary)[
+                CORE_CATEGORICAL_BOUNDARY
+            ] !== true
+        ) {
+            const argument = this.requireTerm(
+                argumentValue as CoreCategoricalTerm,
+                nodeProvenance
+            );
+            if (argument.type.tag === 'nested-indexed-object') {
+                return this.applyNestedDisplayedFunctor(
+                    subject,
                     argument,
                     expectedShape,
                     nodeProvenance
@@ -3727,9 +4088,37 @@ export class CoreCategoricalScopedBuilder {
         if (
             classifier.tag !== 'indexed-object' &&
             classifier.tag !== 'indexed-functor' &&
-            classifier.tag !== 'indexed-transfor'
+            classifier.tag !== 'indexed-transfor' &&
+            classifier.tag !== 'nested-indexed-object'
         ) {
             return copyCoreType(classifier);
+        }
+        if (classifier.tag === 'nested-indexed-object') {
+            const outerIndex = scope.indexOf(
+                classifier.outerIndexOrdinal
+            );
+            const innerIndex = scope.indexOf(
+                classifier.innerIndexOrdinal
+            );
+            if (outerIndex < 0 || innerIndex < 0) {
+                this.fail(
+                    'ESCAPED_SLOT',
+                    nodeProvenance,
+                    'Nested indexed classifier refers to an escaped outer ' +
+                        'or inner base slot'
+                );
+            }
+            return {
+                tag: 'nested-indexed-object',
+                outerBaseCategory: classifier.outerBaseCategory,
+                outerIndex,
+                innerBaseCategory: classifier.innerBaseCategory,
+                innerIndex,
+                classifierFamily: classifier.classifierFamily,
+                sourceSection: classifier.sourceSection,
+                targetSection: classifier.targetSection,
+                endpoint: classifier.endpoint
+            };
         }
         const index = scope.indexOf(classifier.indexOrdinal);
         if (index < 0) {
@@ -3882,6 +4271,69 @@ export class CoreCategoricalScopedBuilder {
                     right: this.normalizeNode(
                         term.node.right,
                         scope
+                    ),
+                    type,
+                    provenance: term.node.provenance
+                });
+            }
+            case 'typed-nested-displayed-application': {
+                const type = this.normalizeClassifier(
+                    term.type,
+                    scope,
+                    term.node.provenance
+                );
+                if (type.tag !== 'nested-indexed-object') {
+                    throw new Error(
+                        'Typed nested displayed application lost its ' +
+                            'nested indexed-object classifier'
+                    );
+                }
+                return deepFreeze({
+                    tag: 'typed-nested-displayed-application',
+                    subject: this.normalizeNode(
+                        term.node.subject,
+                        scope
+                    ),
+                    base: this.normalizeNode(
+                        term.node.base,
+                        scope
+                    ),
+                    argument: this.normalizeNode(
+                        term.node.argument,
+                        scope
+                    ),
+                    type,
+                    provenance: term.node.provenance
+                });
+            }
+            case 'nested-displayed-abstraction': {
+                const type = this.normalizeClassifier(
+                    term.type,
+                    scope,
+                    term.node.provenance
+                );
+                if (type.tag !== 'indexed-object') {
+                    throw new Error(
+                        'Nested displayed abstraction lost its outer ' +
+                            'indexed-object classifier'
+                    );
+                }
+                return deepFreeze({
+                    tag: 'nested-displayed-abstraction',
+                    name: term.node.name,
+                    innerBaseCategory:
+                        term.node.innerBaseCategory,
+                    subject: this.normalizeNode(
+                        term.node.subject,
+                        scope
+                    ),
+                    body: this.normalizeNode(
+                        term.node.body,
+                        [
+                            term.node.fibreOrdinal,
+                            term.node.baseOrdinal,
+                            ...scope
+                        ]
                     ),
                     type,
                     provenance: term.node.provenance
@@ -4582,6 +5034,14 @@ export class CoreCategoricalScopedBuilder {
                     nodeProvenance,
                     'Typed fibre pairs lower only inside the reviewed ' +
                         'displayed contextual bracket'
+                );
+            case 'typed-nested-displayed-application':
+            case 'nested-displayed-abstraction':
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Mixed nested displayed syntax lowers only inside the ' +
+                        'reviewed displayed contextual bracket'
                 );
             case 'categorical-abstraction':
                 return this.compileNestedAbstractionContext(
@@ -5835,6 +6295,65 @@ export class CoreCategoricalScopedBuilder {
                 }
                 return paired;
             }
+            case 'nested-displayed-abstraction': {
+                if (
+                    this.options.mixedNestedFactorization !== true ||
+                    term.type.tag !== 'indexed-object' ||
+                    term.node.subject.type.tag !== 'indexed-object' ||
+                    term.type.indexOrdinal !== baseOrdinal ||
+                    term.node.subject.type.indexOrdinal !== baseOrdinal ||
+                    !kernelExpressionEquals(
+                        term.type.baseCategory,
+                        baseCategory
+                    ) ||
+                    !kernelExpressionEquals(
+                        term.node.subject.type.baseCategory,
+                        baseCategory
+                    ) ||
+                    !kernelExpressionEquals(
+                        term.type.family,
+                        term.node.subject.type.family
+                    ) ||
+                    this.mixedNestedDisplayedFunctorShape(
+                        term.type.family,
+                        baseCategory
+                    ) === undefined
+                ) {
+                    this.fail(
+                        'UNAVAILABLE_DISPLAYED_ACTION',
+                        term.node.provenance,
+                        'Nested displayed abstraction lost its canonical ' +
+                            'Hom_catd classifier or outer contextual index'
+                    );
+                }
+                const compilation = this.compileDisplayedContextual(
+                    term.node.subject,
+                    baseOrdinal,
+                    baseCategory,
+                    wiring,
+                    activeOrdinals,
+                    nodeProvenance
+                );
+                if (!kernelExpressionEquals(
+                    compilation.targetFamily,
+                    term.type.family
+                )) {
+                    this.fail(
+                        'CLASSIFIER_ARGUMENT_MISMATCH',
+                        term.node.provenance,
+                        'Factored nested displayed subject compiled to the ' +
+                            'wrong outer target family'
+                    );
+                }
+                return compilation;
+            }
+            case 'typed-nested-displayed-application':
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    term.node.provenance,
+                    'A nested displayed application must be eliminated by ' +
+                        'its enclosing exact-eta abstraction'
+                );
             case 'typed-cell-composition':
                 this.fail(
                     'UNAVAILABLE_DISPLAYED_ACTION',
@@ -7156,6 +7675,232 @@ export class CoreCategoricalScopedBuilder {
     }
 
     /**
+     * Exact recursive eta for one already-coherent inner displayed functor.
+     *
+     * The subject is an open object of
+     * `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` at an active outer
+     * index. The callback sees one fibre object over a fresh hidden `z : Z`.
+     * Only `subject(e)` is accepted; the result factors back to `subject`.
+     */
+    nestedDisplayedFunctorLambda(
+        name: string,
+        coherentSubjectValue: CoreCategoricalTerm,
+        bodyBuilder: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        assertSafeIdentifier(name, 'Nested displayed-functor binder hint');
+        const nodeProvenance = this.nodeProvenance(
+            `nested displayed-functor abstraction ${name}`,
+            options.provenance
+        );
+        if (this.options.mixedNestedFactorization !== true) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Nested displayed-functor eta requires the reviewed ' +
+                    'MIXED-NEST-1A capability'
+            );
+        }
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'functorial';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'displayed';
+        if (
+            variation !== 'functorial' ||
+            dependency !== 'displayed'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Nested displayed-functor binder '${name}' requires ` +
+                    'functorial variation and displayed dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                `Nested displayed-functor binder '${name}' derives its ` +
+                    'negative source from Hom_catd'
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'MIXED-NEST-1A abstracts one inner displayed object'
+            );
+        }
+
+        const subject = this.requireTerm(
+            coherentSubjectValue,
+            nodeProvenance
+        );
+        if (
+            subject.type.tag !== 'indexed-object' ||
+            subject.closed !== undefined ||
+            !this.activeTokenOrdinals.includes(
+                subject.type.indexOrdinal
+            ) ||
+            !this.activeDisplayedBases.has(
+                subject.type.indexOrdinal
+            )
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Nested displayed-functor eta requires an open indexed ' +
+                    'object at the active outer displayed base'
+            );
+        }
+        const shape = this.mixedNestedDisplayedFunctorShape(
+            subject.type.family,
+            subject.type.baseCategory
+        );
+        if (shape === undefined) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Nested displayed-functor eta requires exactly ' +
+                    'Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)'
+            );
+        }
+
+        const baseToken = this.slot(
+            `${name}NestedBase`,
+            shape.innerBaseCategory,
+            nodeProvenance
+        );
+        const baseOrdinal = baseToken.node.tag === 'slot-token'
+            ? baseToken.node.ordinal
+            : -1;
+        const fibreToken = this.nestedIndexedObjectSlot(
+            name,
+            shape,
+            subject.type.indexOrdinal,
+            baseOrdinal,
+            'source',
+            nodeProvenance
+        );
+        const fibreOrdinal =
+            fibreToken.node.tag === 'slot-token'
+                ? fibreToken.node.ordinal
+                : -1;
+        const outerScope = [...this.activeTokenOrdinals];
+        this.activeTokenOrdinals.unshift(baseOrdinal);
+        this.activeTokenOrdinals.unshift(fibreOrdinal);
+        this.activeDisplayedBases.set(baseOrdinal, baseToken);
+        try {
+            // Evaluate exactly once; no callback is retained.
+            const body = this.requireTerm(
+                bodyBuilder(
+                    fibreToken as CoreCategoricalSlotToken
+                ),
+                nodeProvenance
+            );
+            if (
+                body.node.tag !==
+                    'typed-nested-displayed-application' ||
+                body.node.subject !== subject ||
+                body.node.base !== baseToken ||
+                body.node.argument !== fibreToken ||
+                body.type.tag !== 'nested-indexed-object' ||
+                body.type.endpoint !== 'target' ||
+                body.type.outerIndexOrdinal !==
+                    subject.type.indexOrdinal ||
+                body.type.innerIndexOrdinal !== baseOrdinal ||
+                usageCount(body.usage, baseOrdinal) !== 1 ||
+                usageCount(body.usage, fibreOrdinal) !== 1
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'The first nested displayed binder accepts only exact ' +
+                        'eta of the same already-coherent inner subject'
+                );
+            }
+            const remainingUsage = removeUsage(
+                removeUsage(body.usage, fibreOrdinal),
+                baseOrdinal
+            );
+            if (
+                remainingUsage.length !== subject.usage.length ||
+                remainingUsage.some(([ordinal, count]) =>
+                    usageCount(subject.usage, ordinal) !== count
+                )
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'Nested displayed eta changed outer contextual usage'
+                );
+            }
+            const resultNode: TemporaryCategoricalNode = {
+                tag: 'nested-displayed-abstraction',
+                baseOrdinal,
+                fibreOrdinal,
+                name,
+                innerBaseCategory: shape.innerBaseCategory,
+                subject,
+                body,
+                provenance: nodeProvenance
+            };
+            const provisional = this.makeTerm(
+                resultNode,
+                subject.type,
+                remainingUsage,
+                undefined,
+                body.abstractions
+            );
+            const evidence = deepFreeze({
+                rule:
+                    'categorical.mixed-nested-displayed-eta' as const,
+                name,
+                plicity,
+                variation: 'functorial' as const,
+                polarity: 'covariant' as const,
+                cellLevel: 'object' as const,
+                dependency: 'displayed' as const,
+                sourceCategory: shape.innerBaseCategory,
+                outerBaseCategory: shape.outerBaseCategory,
+                innerBaseCategory: shape.innerBaseCategory,
+                classifierFamily: shape.classifierFamily,
+                sourceSection: shape.sourceSection,
+                targetSection: shape.targetSection,
+                body: this.normalizeNode(
+                    body,
+                    [
+                        fibreOrdinal,
+                        baseOrdinal,
+                        ...outerScope
+                    ]
+                ),
+                result: this.normalizeNode(
+                    provisional,
+                    outerScope
+                ),
+                structuralPrerequisites: Object.freeze([]),
+                dependentPrerequisites: Object.freeze([]),
+                provenance: nodeProvenance
+            });
+            return this.makeTerm(
+                resultNode,
+                subject.type,
+                remainingUsage,
+                undefined,
+                [...body.abstractions, evidence]
+            );
+        } finally {
+            this.activeDisplayedBases.delete(baseOrdinal);
+            this.activeTokenOrdinals.shift();
+            this.activeTokenOrdinals.shift();
+        }
+    }
+
+    /**
      * First direct displayed-functor abstraction.
      *
      * The callback sees only `a : E[k]`; the hidden base `k` is recovered
@@ -8192,6 +8937,7 @@ export class CoreCategoricalScopedBuilder {
                 body.type.tag === 'indexed-object' ||
                 body.type.tag === 'indexed-functor' ||
                 body.type.tag === 'indexed-transfor' ||
+                body.type.tag === 'nested-indexed-object' ||
                 !coreTypeEquals(body.type, expectedBodyType)
             ) {
                 this.fail(

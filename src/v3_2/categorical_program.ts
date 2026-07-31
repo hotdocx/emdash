@@ -284,7 +284,7 @@ export const CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_PROGRAM_REVISION =
     'DISPLAYED-ND-HIGHER-TARGET-1A-CATEGORICAL-PROGRAM-1' as const;
 
 export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
-    'MIXED-NEST-ACTION-0B-CATEGORICAL-PROGRAM-1' as const;
+    'MIXED-NEST-1A-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -1181,7 +1181,9 @@ export class CoreCategoricalProgram {
                 displayedEvaluation:
                     this.displayedEvaluationEnabled,
                 displayedDependentContextualAbstraction:
-                    this.displayedChainEnabled
+                    this.displayedChainEnabled,
+                mixedNestedFactorization:
+                    this.mixedModeEnabled
             }
         );
     }
@@ -3608,7 +3610,8 @@ export class CoreCategoricalProgram {
         if (
             pointInspection.type.tag === 'indexed-object' ||
             pointInspection.type.tag === 'indexed-functor' ||
-            pointInspection.type.tag === 'indexed-transfor'
+            pointInspection.type.tag === 'indexed-transfor' ||
+            pointInspection.type.tag === 'nested-indexed-object'
         ) {
             throw new CoreCategoricalProgramError(
                 'EXPECTED_CATEGORY_OBJECT',
@@ -6199,7 +6202,8 @@ export class CoreCategoricalProgram {
             if (
                 endpoint.type.tag === 'indexed-object' ||
                 endpoint.type.tag === 'indexed-functor' ||
-                endpoint.type.tag === 'indexed-transfor'
+                endpoint.type.tag === 'indexed-transfor' ||
+                endpoint.type.tag === 'nested-indexed-object'
             ) {
                 throw new CoreCategoricalProgramError(
                     'EXPECTED_CATEGORY_OBJECT',
@@ -7020,6 +7024,42 @@ export class CoreCategoricalProgram {
             ],
             contextRoot.expression,
             target.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
+     * Exact explicit inner `^fd` eta for an already-coherent contextual
+     * object of the canonical mixed nested Hom family.
+     *
+     * This is construction-only recursive factorization: it introduces no
+     * pointwise naturality data and lowers back to the supplied coherent
+     * subject inside the enclosing displayed context.
+     */
+    nestedDisplayedFunctorLambda(
+        name: string,
+        coherentSubject: CoreCategoricalTerm,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `nested displayed-functor abstraction ${name}`,
+            options.source
+        );
+        this.requireMixedMode(nodeProvenance);
+        return this.builder.nestedDisplayedFunctorLambda(
+            name,
+            coherentSubject,
             body,
             {
                 plicity: options.plicity,

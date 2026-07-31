@@ -501,7 +501,10 @@ const capabilities = [
     },
     {
         id: 'displayed-functorial-abstraction',
-        apiMethods: ['displayedFunctorLambda'],
+        apiMethods: [
+            'displayedFunctorLambda',
+            'nestedDisplayedFunctorLambda'
+        ],
         profile: 'fibred-binder-1 and descendants',
         classifierContract:
             'Expected source and target displayed families select ^fd.',
@@ -689,7 +692,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 77,
+        publicProgramMethods: 78,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,

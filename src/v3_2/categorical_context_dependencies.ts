@@ -308,6 +308,19 @@ const copyClassifier = (
             index: classifier.index
         };
     }
+    if (classifier.tag === 'nested-indexed-object') {
+        return {
+            tag: 'nested-indexed-object',
+            outerBaseCategory: classifier.outerBaseCategory,
+            outerIndex: classifier.outerIndex,
+            innerBaseCategory: classifier.innerBaseCategory,
+            innerIndex: classifier.innerIndex,
+            classifierFamily: classifier.classifierFamily,
+            sourceSection: classifier.sourceSection,
+            targetSection: classifier.targetSection,
+            endpoint: classifier.endpoint
+        };
+    }
     return copyCoreType(classifier);
 };
 
