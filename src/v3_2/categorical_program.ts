@@ -96,9 +96,12 @@ import type {
     CoreCategoricalDisplayedNdHigherFoundationSymbolId
 } from './categorical_displayed_nd_higher_foundation_transfer';
 import type {
-    CoreCategoricalMixedModeCompilation,
     CoreCategoricalMixedModeSymbolId
 } from './categorical_mixed_mode_transfer';
+import type {
+    CoreCategoricalMixedActionCompilation,
+    CoreCategoricalMixedActionSymbolId
+} from './categorical_mixed_action_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -220,14 +223,23 @@ const mixedModeModule = () => require(
     './categorical_mixed_mode_transfer'
 ) as typeof import('./categorical_mixed_mode_transfer');
 
-const compileCoreCategoricalMixedMode = ():
-CoreCategoricalMixedModeCompilation =>
-    mixedModeModule().compileCoreCategoricalMixedModeTransfer();
-
 const mixedModeCoreName = (
     id: CoreCategoricalMixedModeSymbolId
 ): string =>
     mixedModeModule().coreCategoricalMixedModeCoreName(id);
+
+const mixedActionModule = () => require(
+    './categorical_mixed_action_transfer'
+) as typeof import('./categorical_mixed_action_transfer');
+
+const compileCoreCategoricalMixedAction = ():
+CoreCategoricalMixedActionCompilation =>
+    mixedActionModule().compileCoreCategoricalMixedActionTransfer();
+
+const mixedActionCoreName = (
+    id: CoreCategoricalMixedActionSymbolId
+): string =>
+    mixedActionModule().coreCategoricalMixedActionCoreName(id);
 
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
@@ -272,7 +284,7 @@ export const CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_PROGRAM_REVISION =
     'DISPLAYED-ND-HIGHER-TARGET-1A-CATEGORICAL-PROGRAM-1' as const;
 
 export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
-    'MIXED-NEST-0A-CATEGORICAL-PROGRAM-1' as const;
+    'MIXED-NEST-ACTION-0B-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -992,7 +1004,7 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDisplayedChainCompilation
         | CoreCategoricalDisplayedChain2aClosureCompilation
         | CoreCategoricalDisplayedNdHigherTargetCompilation
-        | CoreCategoricalMixedModeCompilation;
+        | CoreCategoricalMixedActionCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -1126,7 +1138,7 @@ export class CoreCategoricalProgram {
             validateCoreCategoricalDisplayedBracketContract();
         }
         this.dependent = this.mixedModeEnabled
-            ? compileCoreCategoricalMixedMode()
+            ? compileCoreCategoricalMixedAction()
             : this.displayedNdHigherEnabled
             ? compileCoreCategoricalDisplayedNdHigherTarget()
             : this.displayedChain2aEnabled
@@ -1886,6 +1898,24 @@ export class CoreCategoricalProgram {
         return kernelCall(
             kernelFree(
                 mixedModeCoreName(id),
+                nodeProvenance
+            ),
+            arguments_,
+            nodeProvenance
+        );
+    }
+
+    private mixedActionCall(
+        id: CoreCategoricalMixedActionSymbolId,
+        arguments_: readonly {
+            readonly plicity: Plicity;
+            readonly value: KernelExpression;
+        }[],
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                mixedActionCoreName(id),
                 nodeProvenance
             ),
             arguments_,
@@ -5063,6 +5093,230 @@ export class CoreCategoricalProgram {
             sourceFamily: sourceFamily.expression,
             targetFamily: targetFamily.expression
         }, nodeProvenance);
+    }
+
+    /**
+     * Construct the active internal displayed-hom package
+     * `homd_int(FF) : Functord(Op_catd(E),Homd_target_catd(D))`.
+     *
+     * Its object and base-arrow action remain owned by the transferred
+     * `homd_int` projection ladder; this method supplies no pointwise
+     * function or external coherence evidence.
+     */
+    displayedInternalHom(
+        displayedFunctorValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'internal displayed hom',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const displayedFunctor = this.requireDisplayedFunctorTerm(
+            displayedFunctorValue,
+            nodeProvenance,
+            'Internal displayed-hom subject'
+        );
+        const base = displayedFunctor.baseCategory;
+        const oppositeTarget = this.displayedNdHigherFoundationCall(
+            'displayedOpposite',
+            [
+                { plicity: 'implicit', value: base },
+                {
+                    plicity: 'explicit',
+                    value: displayedFunctor.targetFamily
+                }
+            ],
+            nodeProvenance
+        );
+        const homTarget = this.displayedNdHigherFoundationCall(
+            'displayedHomTarget',
+            [
+                { plicity: 'implicit', value: base },
+                {
+                    plicity: 'explicit',
+                    value: displayedFunctor.sourceFamily
+                }
+            ],
+            nodeProvenance
+        );
+        const expression = this.displayedNdHigherFoundationCall(
+            'displayedInternalHom',
+            [
+                { plicity: 'implicit', value: base },
+                {
+                    plicity: 'implicit',
+                    value: displayedFunctor.sourceFamily
+                },
+                {
+                    plicity: 'implicit',
+                    value: displayedFunctor.targetFamily
+                },
+                {
+                    plicity: 'explicit',
+                    value: displayedFunctor.expression
+                }
+            ],
+            nodeProvenance
+        );
+        return this.makeTerm(
+            expression,
+            {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategoryExpression(
+                    base,
+                    oppositeTarget,
+                    homTarget,
+                    nodeProvenance
+                ),
+                baseCategory: base,
+                sourceFamily: oppositeTarget,
+                targetFamily: homTarget
+            },
+            nodeProvenance
+        );
+    }
+
+    /**
+     * Construct the endpoint family
+     * `homd_(FF,x,u,y,v) : Op(Hom_K(x,y)) -> Cat`.
+     *
+     * This is the direct typed consumer at the bottom of the transferred
+     * `homd_int` projection cascade.
+     */
+    displayedInternalHomEndpointFamily(
+        displayedFunctorValue: CoreCategoricalTerm,
+        sourcePointValue: CoreCategoricalTerm,
+        targetFibreObjectValue: CoreCategoricalTerm,
+        targetPointValue: CoreCategoricalTerm,
+        sourceFibreObjectValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalDisplayedFamily {
+        const nodeProvenance = this.at(
+            'internal displayed-hom endpoint family',
+            source
+        );
+        this.requireMixedMode(nodeProvenance);
+        const displayedFunctor = this.requireDisplayedFunctorTerm(
+            displayedFunctorValue,
+            nodeProvenance,
+            'Internal displayed-hom endpoint subject'
+        );
+        const sourcePoint = this.requireObjectTerm(
+            sourcePointValue,
+            nodeProvenance,
+            'Internal displayed-hom source point'
+        );
+        const targetPoint = this.requireObjectTerm(
+            targetPointValue,
+            nodeProvenance,
+            'Internal displayed-hom target point'
+        );
+        this.requireSameCategory(
+            sourcePoint.category,
+            displayedFunctor.baseCategory,
+            nodeProvenance,
+            'Internal displayed-hom source point'
+        );
+        this.requireSameCategory(
+            targetPoint.category,
+            displayedFunctor.baseCategory,
+            nodeProvenance,
+            'Internal displayed-hom target point'
+        );
+        const targetFibre = this.fibreCategoryOfExpression(
+            displayedFunctor.baseCategory,
+            displayedFunctor.targetFamily,
+            sourcePoint.expression,
+            nodeProvenance
+        );
+        const sourceFibre = this.fibreCategoryOfExpression(
+            displayedFunctor.baseCategory,
+            displayedFunctor.sourceFamily,
+            targetPoint.expression,
+            nodeProvenance
+        );
+        const targetFibreObject = this.requireObjectTerm(
+            targetFibreObjectValue,
+            nodeProvenance,
+            'Internal displayed-hom target-fibre endpoint'
+        );
+        const sourceFibreObject = this.requireObjectTerm(
+            sourceFibreObjectValue,
+            nodeProvenance,
+            'Internal displayed-hom source-fibre endpoint'
+        );
+        this.requireSameCategory(
+            targetFibreObject.category,
+            targetFibre,
+            nodeProvenance,
+            'Internal displayed-hom target-fibre endpoint'
+        );
+        this.requireSameCategory(
+            sourceFibreObject.category,
+            sourceFibre,
+            nodeProvenance,
+            'Internal displayed-hom source-fibre endpoint'
+        );
+        const homCategory = kernelApplication(
+            'hom-category',
+            [
+                { value: displayedFunctor.baseCategory },
+                { value: sourcePoint.expression },
+                { value: targetPoint.expression }
+            ],
+            nodeProvenance
+        );
+        const oppositeHom = this.oppositeCategoryExpression(
+            homCategory,
+            nodeProvenance
+        );
+        const base = this.requireCategory(
+            this.makeCategory('Op(Hom)', oppositeHom),
+            nodeProvenance
+        );
+        return this.makeDisplayedFamily(
+            'homd(endpoint)',
+            base,
+            this.mixedActionCall(
+                'displayedHomEndpoint',
+                [
+                    {
+                        plicity: 'implicit',
+                        value: displayedFunctor.baseCategory
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: displayedFunctor.sourceFamily
+                    },
+                    {
+                        plicity: 'implicit',
+                        value: displayedFunctor.targetFamily
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: displayedFunctor.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: sourcePoint.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: targetFibreObject.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: targetPoint.expression
+                    },
+                    {
+                        plicity: 'explicit',
+                        value: sourceFibreObject.expression
+                    }
+                ],
+                nodeProvenance
+            )
+        );
     }
 
     displayedTransfor(

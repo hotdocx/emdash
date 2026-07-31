@@ -233,6 +233,7 @@ const capabilities = [
             'displayedProductDiagonal',
             'displayedFunctorFullAction',
             'displayedFunctorInternalCell',
+            'displayedInternalHomEndpointFamily',
             'sigmaProjection',
             'pullbackDisplayedFunctor',
             'dependentPair',
@@ -324,6 +325,7 @@ const capabilities = [
             'displayedTransforComponent',
             'displayedTransforPoint',
             'displayedTransforNaturality',
+            'displayedInternalHom',
             'displayedTransforInternalHomAction'
         ],
         profile: 'subject/action-specific reviewed profile',
@@ -687,7 +689,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 75,
+        publicProgramMethods: 77,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,

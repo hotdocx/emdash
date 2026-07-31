@@ -8,8 +8,8 @@ focused-green at checkpoint
 architecture audit has measured a displayed-curry/introduction dependency at
 checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6`;
 the no-active-edit `MIXED-CURRY-0A` design/probe has rejected both ordinary
-fibrewise curry and a premature new primitive; the next dependency-ready
-existing-authority slice is `MIXED-NEST-ACTION-0B`
+fibrewise curry and a premature new primitive; `MIXED-NEST-ACTION-0B` is
+implemented and focused-green with its local checkpoint pending
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -382,7 +382,7 @@ Also outside the first tranche:
 | `MIXED-NEST-0A` | complete and focused-green at checkpoint `77f79bf8e139d856965f41733d3aeff9ffefd9d1` | completed displayed-ND higher profile and approved architecture | Two existing opaque signatures and four existing runtime rules compile generically in isolated `fibred-displayed-mixed-nest-1`; seven typed constructors build/check the canonical nested classifier and prove its `Transf_catd` fold. The independent constant-`Cat` fold is deferred at its measured nested proof-conversion seam. Zero Lambdapi semantic delta. |
 | `MIXED-NEST-1A0` | read-only architecture audit complete at checkpoint `5c8b79404ead2abc03c51f7e12a48de7cb752bb6` | green `MIXED-NEST-0A` | Establish that the existing ordinary `categorical-abstraction` node cannot type the canonical inner `Functord`, that the bounded `displayedFunctorLambda` cannot consume context-varying endpoint families, and that the active kernel names the nested classifier but has no selected general displayed-curry/introduction owner. Add no code or kernel semantics. |
 | `MIXED-CURRY-0A` | complete design result; no active-kernel or TypeScript semantic delta | complete `MIXED-NEST-1A0` audit | Ordinary fibrewise curry is ill-typed for a source over `K^op`. A well-typed two-sided total context exists for the plain `Functor_catd` case, but the canonical `Hom_catd(Const(Catd_cat Z),Ebar,Dbar)` target is one enrichment level higher and has no existing general curry. No transparent composite or justified smallest primitive is selected. |
-| `MIXED-NEST-ACTION-0B` | proposed next existing-authority slice | complete `MIXED-CURRY-0A`; green displayed-ND foundation | Transfer the direct `homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_` projection cascade needed to observe internal object/base-arrow structure. Add no Lambdapi owner or rule and do not claim nested abstraction. |
+| `MIXED-NEST-ACTION-0B` | implemented and focused-green; checkpoint pending | complete `MIXED-CURRY-0A`; green displayed-ND foundation | Nine existing declarations and twelve exact source computations/projections close the dependency path for the direct `homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_` cascade. Two rich typed consumers expose `homd_int(FF)` and its terminal `homd_(FF,x,u,y,v)` family. Zero Lambdapi, intrinsic-owner, checker-branch, external-coherence, proof-fallback, nested-lowering, text, or browser delta. |
 | `MIXED-NEST-1A` | dependency-gated; ordinary curry is rejected | green `MIXED-NEST-ACTION-0B` plus a separately frozen recursive factorization IR | Add the first recursive nested displayed-abstraction IR/lowering selected by the expected `Functord_cat(...,Hom_catd(...))` classifier. Begin with eta/factorization of already-coherent internal terms; preserve callback-once locally nameless evidence and fail closed rather than synthesize pointwise coherence. |
 | `MIXED-NEST-ACTION-1B` | pending | green `MIXED-NEST-1A` | Exercise base-arrow action through the inner mixed classifier and one `homd_int`/next-Hom consumer. Add no constructor-specific generic functoriality/naturality rules. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
@@ -854,11 +854,58 @@ homd_tgt_func(FF,x,u,y)[v]
 ```
 
 The TypeScript displayed-ND foundation transfers `Homd_target_catd` and
-`homd_int`, but not this direct projection cascade. `MIXED-NEST-ACTION-0B`
-will transfer only the additional existing signatures and these four general
-projection rules, expose a typed direct consumer, and test at least the first
-and final projection. It will not add an active Lambdapi declaration, invent
-coherence, or claim that nested abstraction is complete.
+`homd_int`, but not this direct projection cascade.
+
+Implementation measured the complete dependency closure rather than hiding
+it behind local mirrors or a derived shortcut:
+
+- nine declarations:
+  `hom_con`, `hom_`, `fib_cov_tapp0_func`, `homd_`,
+  `Functor_catd_fapp0_func`, `Homd_target_section_catd`,
+  `homd_src_func`, `homd_src_sec`, and `homd_tgt_func`;
+- the four direct `homd` projections above;
+- the two existing `Functor_catd_func` object projections;
+- the existing `Op_catd_func`, `Op_func`, `hom_int`, `hom_`, and generic
+  identity object projections needed to compute
+  `HomPresheaf_Z(x)[y]` internally to
+  `Functor_cat(Op_cat(Hom_cat Z x y),Cat_cat)`; and
+- the exact transparent
+  `Functor(A,B) ≔ Obj(Functor_cat(A,B))` classifier computation.
+
+`Fibre_cat` remains a transparent notation and is expanded to canonical
+`fapp0` in the transfer record rather than duplicated by a local alias.
+The inferred source and target arguments of the `Op_func` and `homd`
+projection patterns remain typed wildcards, matching the active kernel's
+stable-head discipline across opposite-category normalization.
+
+All twelve runtime entries typecheck directly through the generic transfer
+runtime. Once the complete source computation prefix was present, the earlier
+category-presentation proof fallback became unnecessary and was deliberately
+removed. No external oracle, proof-time exception, declaration-refinement
+feature, owner-specific checker/evaluator branch, or new mathematical rule is
+used.
+
+The root `fibred-displayed-mixed-nest-1` profile now exposes:
+
+```text
+displayedInternalHom(FF)
+  : Functord(Op_catd(E),Homd_target_catd(D))
+
+displayedInternalHomEndpointFamily(FF,x,u,y,v)
+  : Catd(Op_cat(Hom_cat K x y)).
+```
+
+The second constructor returns the direct internally coherent
+`homd_(FF,x,u,y,v)` family after checking
+`u : E[x]` and `v : D[y]`. The first and final runtime projections are
+exercised explicitly in the regression suite. These operations are recorded
+in the syntax-parity inventory as typed resolver seams; no text syntax is
+promoted in this slice.
+
+This completion does not provide the rejected general displayed curry, a
+recursive nested-abstraction IR, arbitrary-depth lowering, or unrestricted
+`:^nd`. It establishes that the existing internal object/base-arrow action
+package needed by those later designs is executable in TypeScript.
 
 The frozen proposal gate is:
 
@@ -1004,3 +1051,35 @@ authority conflict, or an operation outside the stated Git boundary.
   existing-authority closure with zero Lambdapi delta. Under the user's
   standing unattended delegation it may proceed, subject to exact staged
   review and human supersession.
+- **2026-07-31 — `MIXED-NEST-ACTION-0B` implemented and focused-green.**
+  The measured closure is nine existing declarations and twelve exact source
+  computation/projection rules. The initially expected four direct `homd`
+  folds also require the existing transparent/internal
+  `Functor`, `Functor_catd_func`, `Op_catd_func`, `Op_func`, `hom_int`,
+  `hom_`, and generic identity object computations; no derived shortcut or
+  local semantic mirror is installed. All entries compile through the
+  generic declaration/runtime engines with direct TypeScript subject
+  checking and no proof or external-oracle fallback. The mixed profile
+  exposes rich `displayedInternalHom` and
+  `displayedInternalHomEndpointFamily` consumers, and focused tests exercise
+  the first and final folds. This does not implement nested abstraction.
+  The exact local checkpoint remains pending staged review; the required
+  shared TypeScript gate and its unrelated baseline exception are recorded
+  below.
+- **2026-07-31 — `MIXED-NEST-ACTION-0B` validation boundary measured.**
+  The new five-test transfer/consumer suite passed; its initially redundant
+  whole-environment revalidation was then removed because the generic
+  compiler had already subject-checked every new declaration and rule.
+  Existing mixed-profile tests passed 3/3, the updated executable
+  syntax-parity inventory passed 6/6, targeted lint passed, and
+  `git diff --check` passed. The single required
+  `./scripts/pnpmw run check:ts` completed workspace validation, typechecking,
+  and full lint successfully. Its test phase reported only two unrelated
+  pre-existing failures: the clean committed `README.md` from the later
+  reader-first/reviewer publication commits no longer contains the obsolete
+  `emdash-v3.2-mvp-1` and `release-ready exact profile` phrases still pinned
+  by `v3_2_release_policy_tests.ts` and
+  `v3_2_release_completion_tests.ts`. A focused rerun confirmed 9/11 release
+  tests pass and exactly those two unchanged README assertions fail. No file
+  in that release-document boundary belongs to this tranche, so no
+  unrelated repair or aggregate rerun is folded into the checkpoint.
