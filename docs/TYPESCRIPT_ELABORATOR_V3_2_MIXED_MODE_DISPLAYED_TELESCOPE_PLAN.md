@@ -31,7 +31,9 @@ unattended delegation after proposal checkpoint
 proposal is frozen under H-DTTLF-USABILITY-TEXT-PARITY-MIXED-01 /
 D-DTTLF-USABILITY-028 and approved as proposed through the standing
 unattended delegation after proposal checkpoint
-`9368c6eae4f46f12e5d5f5bffdebb370c032f5f8`; implementation is in progress
+`9368c6eae4f46f12e5d5f5bffdebb370c032f5f8`; implementation is complete and
+focused-green at the exact frozen boundary, with its local implementation
+checkpoint pending ledger synchronization
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -411,7 +413,7 @@ Also outside the first tranche:
 | `DISPLAYED-TELESCOPE-GENERIC-1` | complete and focused-green at checkpoint `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa` | mixed nested action plus current positive compiler | The mixed successor now derives arbitrary finite canonical sibling layers from literal family bases, validates their exact dependency plan, and folds existing product/projection and one-level Sigma/pullback lifting machinery. The four-layer `[A]; [B,C]; [D]; [E,F]` witness checks early/middle/final occurrences, pairing, an internal base-arrow cell, nested mixed factorization, and `homd_int`; predecessor profiles and their two/four-binding explicit Core remain exact. |
 | `DISPLAYED-MIXED-GRADUATE-1` | complete; D-DTTLF-USABILITY-027 approved as proposed after checkpoint `ddc78c250970f62c09d822a39a16502f41c75db1` | generic positive and mixed witnesses | Graduates arbitrary finite depth/width only for the canonical positive sibling-layer/Sigma normal form, together with the exact final canonical mixed classifier, nested eta, internal base-arrow cell, and `homd_int` consumer. Retains explicit performance, general-curry, arbitrary-variance, pullback-hidden-classifier, arbitrary-DAG, and unrestricted-`:^nd` non-claims. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
-| `TEXT-PARITY-MIXED-1` | approved as proposed under D-DTTLF-USABILITY-028 after checkpoint `9368c6eae4f46f12e5d5f5bffdebb370c032f5f8`; implementation in progress | semantic graduation | Remove only the obsolete fixed `[1,1]`/`[1,2,1]` text guard, verify comma/semicolon layers against internally derived generic abstraction evidence, and expose exact nested `λ^fd z. h z` eta through a typed expected contract. Retain one adapter/checker, fail closed outside the graduated mixed envelope, and defer browser-preset promotion. |
+| `TEXT-PARITY-MIXED-1` | complete and focused-green under D-DTTLF-USABILITY-028; implementation checkpoint pending ledger synchronization | semantic graduation | The existing text adapter now accepts arbitrary finite canonical comma/semicolon groups only when they agree with internally derived generic abstraction evidence, and exposes exact nested `λ^fd z. h z` eta only through the typed `mixed-nested-displayed-eta` expected contract. It retains one adapter/checker, fails closed outside the graduated mixed envelope, and leaves browser-preset promotion deferred. |
 | `DISPLAYED-ND-CONSUMERS-N` | future, consumer-led | concrete requested coherent bodies | Expand recursively supported `^nd` body constructors while preserving internal coherence ownership. |
 
 ## Frozen `MIXED-NEST-0A` Boundary
@@ -2028,6 +2030,62 @@ Approve as proposed to implement only this bounded parity slice. The frozen
 proposal may be separately approved through the user's standing unattended
 delegation after its own checkpoint, with human supersession.
 
+## `TEXT-PARITY-MIXED-1` Implementation Result
+
+The implementation completes the frozen D-028 slice without changing the
+semantic kernel:
+
+- the public adapter revision is
+  `TEXT-PARITY-MIXED-1-CATEGORICAL-TEXT-1`;
+- the obsolete `[1,1]`/`[1,2,1]` presentation guard is removed;
+- arbitrary finite parsed groups still have to agree in count and
+  cardinality with the typed `sourceGroups` contract;
+- after the existing categorical program derives the canonical dependency
+  layers, the adapter compares their binding names with the user's
+  comma/semicolon presentation and rejects false sibling/dependency
+  punctuation;
+- the optional `mixed-nested-displayed-eta` body contract recognizes only
+  one immediate, annotation-free `λ^fd z. h z`;
+- `h` is resolved once in the outer environment and the same coherent Core
+  object is passed to the existing `nestedDisplayedFunctorLambda` and its
+  scoped-token application; and
+- shadowing, wrong mode, wrong argument, annotations, missing contracts,
+  missing immediate lambdas, noncanonical subjects, false layer
+  punctuation, and predecessor-profile overreach fail closed.
+
+The positive witness parses the four-layer/two-sibling-block telescope,
+compiles to exactly the same explicit Core and inferred type as its direct
+TypeScript construction, preserves generic layer and nested-eta evidence,
+performs internally owned base-arrow transport, and reaches the existing
+`homd_int` consumer. This is semantic text parity with the graduated
+mathematical API, not a general curry or arbitrary pointwise abstraction.
+
+Proportional validation is green:
+
+- the two new mixed-profile tests pass, including the deep nested
+  text/direct/`homd_int` witness and the complete new negative partition;
+- the dependent-text suite passes 7/7;
+- the nested-ordinary suite passes 4/4;
+- the selected non-stale graduation-audit cases pass 3/3;
+- root workspace checking, typechecking, targeted lint, full lint, and
+  whitespace checks pass; and
+- the one required `check:ts` run passed workspace checking, typechecking,
+  and lint, then retained only the four unrelated committed
+  inventory/publication assertion classes already present at the preceding
+  baseline: the stale 68-method text inventory, the broad migration
+  browser-reachability pattern, and the two obsolete README release
+  markers.
+
+The aggregate was not repeated. The deep positive focused body takes about
+80 seconds and the negative body about 41 seconds after the shared mixed
+profile is initialized; total single-process wall time remains dominated by
+roughly seven minutes of profile construction. This reinforces the existing
+performance boundary and does not weaken the semantic result.
+
+No browser preset, deployed profile, Lambdapi source, Core owner,
+runtime/checker behavior, general curry, unrestricted `:^nd`, or remote Git
+operation is part of this implementation.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -2075,11 +2133,12 @@ owners and dependencies first, use generic transfer/checking engines, and
 make any genuine Lambdapi delta a separate measured proposal under the
 nested SOP.
 
-Keep string parsing, browser promotion, groupoidal closure, bulk
-whole-library transfer, and unrestricted general :^nd outside this goal
-until their dependency rows become ready. Use proportional focused gates;
-do not repeat long aggregate validation for documentation-only or
-semantically irrelevant changes.
+Expose string syntax only through the exact dependency-ready semantic-parity
+row recorded above. Keep browser promotion, groupoidal closure, bulk
+whole-library transfer, unrestricted general :^nd, and any broader parser
+claim outside this goal until their dependency rows become ready. Use
+proportional focused gates; do not repeat long aggregate validation for
+documentation-only or semantically irrelevant changes.
 
 The user authorizes bounded local checkpoint commits in the existing
 goal/typescript-elaborator-v3.2 branch after a coherent tranche is green,
@@ -2323,3 +2382,20 @@ authority conflict, or an operation outside the stated Git boundary.
   No semantic owner, categorical program method, Core/checker behavior,
   browser promotion, general curry, unrestricted `:^nd`, or remote Git
   operation is authorized.
+- **2026-07-31 — `TEXT-PARITY-MIXED-1` implemented at the frozen
+  boundary.** The existing adapter accepts arbitrary finite canonical
+  sibling/dependency presentation only when it agrees with the program's
+  internally derived layer evidence. Its sole new nested route is exact
+  construction-time `λ^fd z. h z` eta under an explicit typed expected
+  contract, reusing the same coherent subject and the existing
+  `nestedDisplayedFunctorLambda`. The deep parsed term agrees with direct
+  TypeScript Core/type/evidence, transports along an internalized base
+  arrow, and is consumed by `homd_int`; the new negative partition fails
+  closed. Two new focused tests, the 7/7 dependent-text suite, 4/4
+  nested-ordinary suite, selected 3/3 graduation cases, workspace check,
+  typecheck, lint, and whitespace checks pass. The one required aggregate
+  was run once and retained only the four unrelated committed
+  inventory/publication assertion classes; it is not repeated. No
+  Lambdapi, Core owner, checker/runtime, browser, general-curry, or
+  unrestricted-`:^nd` delta occurred. The implementation checkpoint is
+  pending exact staged review.

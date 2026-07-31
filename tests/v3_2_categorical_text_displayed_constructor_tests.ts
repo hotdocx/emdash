@@ -197,7 +197,7 @@ describe('SYNTAX-PARITY-1C2A displayed constructor text', () => {
         const data = fixture();
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'SYNTAX-PARITY-1D1-CATEGORICAL-TEXT-1'
+            'TEXT-PARITY-MIXED-1-CATEGORICAL-TEXT-1'
         );
         for (const [source, direct] of [
             [

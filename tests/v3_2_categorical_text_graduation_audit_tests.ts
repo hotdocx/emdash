@@ -113,7 +113,7 @@ describe('SYNTAX-PARITY-GRADUATE-0A audit', () => {
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'SYNTAX-PARITY-1D1-CATEGORICAL-TEXT-1'
+            'TEXT-PARITY-MIXED-1-CATEGORICAL-TEXT-1'
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_GRADUATION_AUDIT

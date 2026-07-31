@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'SYNTAX-PARITY-1D1-CATEGORICAL-TEXT-1' as const;
+    'TEXT-PARITY-MIXED-1-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -63,6 +63,14 @@ export interface CoreCategoricalTextOrdinaryFunctorExpected {
     readonly bodyExpected?: CoreCategoricalTextOrdinaryFunctorExpected;
 }
 
+export interface CoreCategoricalTextMixedNestedEtaExpected {
+    /**
+     * Select only exact construction-time eta of an already-coherent object
+     * of the canonical mixed nested Hom family.
+     */
+    readonly kind: 'mixed-nested-displayed-eta';
+}
+
 export type CoreCategoricalTextTermExpected =
     | {
         readonly kind: 'term';
@@ -90,6 +98,13 @@ export type CoreCategoricalTextTermExpected =
         readonly sourceGroups:
             readonly (readonly CoreCategoricalDisplayedFamily[])[];
         readonly target: CoreCategoricalDisplayedFamily;
+        /**
+         * Explicit permission for one immediately nested eta-only `^fd`
+         * abstraction. The categorical program still derives and validates
+         * its classifier and internal action.
+         */
+        readonly bodyExpected?:
+            CoreCategoricalTextMixedNestedEtaExpected;
     }
     | {
         readonly kind: 'displayed-transfor';
@@ -2337,31 +2352,6 @@ class CoreCategoricalTextResolver {
             }
         >
     ): CoreCategoricalTerm {
-        const groupSizes = expression.bindingGroups.map(
-            group => group.length
-        );
-        const supportedShape =
-            (
-                groupSizes.length === 2 &&
-                groupSizes[0] === 1 &&
-                groupSizes[1] === 1
-            ) ||
-            (
-                groupSizes.length === 3 &&
-                groupSizes[0] === 1 &&
-                groupSizes[1] === 2 &&
-                groupSizes[2] === 1
-            );
-        if (!supportedShape) {
-            throw resolutionError(
-                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
-                this.sourceFile,
-                expression.range,
-                `Displayed dependent context has group sizes ` +
-                    `[${groupSizes.join(',')}]; the reviewed direct ` +
-                    'shapes are [1,1] and [1,2,1]'
-            );
-        }
         if (
             expected.sourceGroups.length !==
                 expression.bindingGroups.length ||
@@ -2392,7 +2382,7 @@ class CoreCategoricalTextResolver {
         );
         const bindings = expression.bindingGroups.flat();
         const sources = expected.sourceGroups.flat();
-        return invokeProgram(
+        const result = invokeProgram(
             this.sourceFile,
             expression.range,
             'Displayed dependent contextual abstraction was rejected',
@@ -2406,13 +2396,62 @@ class CoreCategoricalTextResolver {
                     expression,
                     bindings,
                     tokens,
-                    environment
+                    environment,
+                    expected.bodyExpected
                 ),
                 {
                     source: this.lambdaSource(expression)
                 }
             )
         );
+        this.requireGenericDisplayedLayerPresentation(
+            expression,
+            result
+        );
+        return result;
+    }
+
+    private requireGenericDisplayedLayerPresentation(
+        expression: LocatedLambda,
+        term: CoreCategoricalTerm
+    ): void {
+        const evidence = [...this.program.inspect(term).abstractions]
+            .reverse()
+            .find(candidate =>
+                candidate.rule ===
+                    'categorical.displayed-generic-dependent-context-bracket'
+            );
+        if (
+            evidence === undefined ||
+            evidence.rule !==
+                'categorical.displayed-generic-dependent-context-bracket'
+        ) {
+            return;
+        }
+        const presented = expression.bindingGroups.map(group =>
+            group.map(binding => binding.name)
+        );
+        const derived = evidence.layers.map(layer =>
+            [...layer.bindingNames]
+        );
+        const agrees =
+            presented.length === derived.length &&
+            presented.every((group, index) =>
+                group.length === derived[index]?.length &&
+                group.every((name, bindingIndex) =>
+                    name === derived[index]?.[bindingIndex]
+                )
+            );
+        if (!agrees) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.range,
+                'Displayed comma/semicolon groups do not match the ' +
+                    'canonical sibling/dependency layers derived from ' +
+                    'the expected family bases'
+            );
+        }
     }
 
     private lambdaSource(
@@ -2481,7 +2520,8 @@ class CoreCategoricalTextResolver {
         expression: LocatedLambda,
         bindings: readonly LocatedLambdaBinding[],
         tokens: readonly CoreCategoricalSlotToken[],
-        environment: InternalEnvironment
+        environment: InternalEnvironment,
+        bodyExpected?: CoreCategoricalTextMixedNestedEtaExpected
     ): CoreCategoricalTerm {
         const nested = new Map(environment);
         bindings.forEach((binding, index) => {
@@ -2492,11 +2532,120 @@ class CoreCategoricalTextResolver {
                 callbackLocal: true
             }));
         });
+        if (expression.body.tag === 'lambda') {
+            if (bodyExpected !== undefined) {
+                return this.resolveMixedNestedDisplayedEta(
+                    expression.body,
+                    nested
+                );
+            }
+            return this.resolveTerm(
+                expression.body,
+                nested,
+                undefined,
+                1
+            );
+        }
+        if (bodyExpected !== undefined) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.body.range,
+                'A mixed-nested-displayed-eta body contract requires an ' +
+                    'immediately nested abstraction'
+            );
+        }
         return this.resolveTerm(
             expression.body,
             nested,
             undefined,
             1
+        );
+    }
+
+    private resolveMixedNestedDisplayedEta(
+        expression: LocatedLambda,
+        environment: InternalEnvironment
+    ): CoreCategoricalTerm {
+        if (expression.mode !== 'fd') {
+            throw resolutionError(
+                'UNSUPPORTED_BINDER_MODE',
+                this.sourceFile,
+                expression.modeRange,
+                'Mixed nested displayed eta requires binder mode ^fd'
+            );
+        }
+        if (
+            expression.bindingGroups.length !== 1 ||
+            expression.bindingGroups[0].length !== 1
+        ) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.range,
+                'Mixed nested displayed eta requires exactly one binding'
+            );
+        }
+        const binding = expression.bindingGroups[0][0];
+        if (environment.has(binding.name)) {
+            throw resolutionError(
+                'DUPLICATE_BINDING',
+                this.sourceFile,
+                binding.nameRange,
+                `Mixed nested displayed binding '${binding.name}' ` +
+                    'cannot shadow an outer text binding'
+            );
+        }
+        if (binding.annotation !== undefined) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                binding.annotation.range,
+                'The mixed nested displayed source is derived from the ' +
+                    'coherent subject and cannot be text-annotated'
+            );
+        }
+        if (
+            expression.body.tag !== 'application' ||
+            expression.body.argument.tag !== 'identifier' ||
+            expression.body.argument.name !== binding.name
+        ) {
+            throw resolutionError(
+                'INCOMPATIBLE_ABSTRACTION_EXPECTATION',
+                this.sourceFile,
+                expression.body.range,
+                `Mixed nested displayed eta requires exact application ` +
+                    `of one coherent subject to '${binding.name}'`
+            );
+        }
+        const coherentSubject = this.resolveTerm(
+            expression.body.subject,
+            environment,
+            undefined,
+            1
+        );
+        return invokeProgram(
+            this.sourceFile,
+            expression.range,
+            'Mixed nested displayed eta was rejected',
+            () => this.program.nestedDisplayedFunctorLambda(
+                binding.name,
+                coherentSubject,
+                token => this.program.apply(
+                    coherentSubject,
+                    token,
+                    {
+                        source: sourceSiteFor(
+                            this.sourceFile,
+                            expression.body.range,
+                            'parsed mixed nested displayed eta application'
+                        )
+                    }
+                ),
+                {
+                    source: this.lambdaSource(expression)
+                }
+            )
         );
     }
 }

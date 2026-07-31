@@ -21,11 +21,17 @@
 > D-DTTLF-USABILITY-027 after its independent proposal checkpoint
 > `ddc78c250970f62c09d822a39a16502f41c75db1`. `TEXT-PARITY-MIXED-1` is
 > approved under D-DTTLF-USABILITY-028 after proposal checkpoint
-> `9368c6eae4f46f12e5d5f5bffdebb370c032f5f8` and is in progress: expose
-> exactly the graduated mathematical API in the text adapter and fail closed
-> outside it. A general enriched curry remains a mathematically plausible
-> but separately unqualified extension, not a dependency of the implemented
-> finite fold.
+> `9368c6eae4f46f12e5d5f5bffdebb370c032f5f8` and is now implemented at its
+> frozen zero-semantic-delta boundary. The adapter accepts arbitrary finite
+> comma/semicolon groups only when they match the program's internally
+> derived canonical layers, and exact nested `λ^fd z. h z` only under its
+> typed eta contract. Its deep text witness agrees with direct TypeScript
+> Core/type/evidence, transports along an internally owned base arrow, and
+> reaches `homd_int`; the complete new negative partition fails closed. The
+> local implementation checkpoint is pending final staged review. A general
+> enriched curry remains a mathematically plausible but separately
+> unqualified extension, not a dependency of the implemented finite fold or
+> its text parity.
 
 Date: 2026-07-28
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
