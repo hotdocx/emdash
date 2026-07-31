@@ -463,6 +463,37 @@ export type CoreLfComparisonResult =
     | CoreLfComparisonNotEqual
     | CoreLfComparisonStepLimit;
 
+interface CoreLfNormalizationBase {
+    readonly expression: KernelExpression;
+    readonly steps: number;
+    readonly trace: readonly CoreLfComparisonTraceEntry[];
+}
+
+export interface CoreLfNormalizationNormal
+extends CoreLfNormalizationBase {
+    readonly status: 'normal';
+}
+
+export interface CoreLfNormalizationStuck
+extends CoreLfNormalizationBase {
+    readonly status: 'stuck';
+    readonly reason: 'plicity-mismatch';
+    readonly expectedPlicity: Plicity;
+    readonly actualPlicity: Plicity;
+}
+
+export interface CoreLfNormalizationStepLimit
+extends CoreLfNormalizationBase {
+    readonly status: 'step-limit-exceeded';
+    readonly path: readonly string[];
+    readonly next: CoreLfCombinedNextStep;
+}
+
+export type CoreLfNormalizationResult =
+    | CoreLfNormalizationNormal
+    | CoreLfNormalizationStuck
+    | CoreLfNormalizationStepLimit;
+
 interface MutableCoreLfComparisonState {
     readonly environment: CoreLfDeclarationEnvironment;
     readonly session?: CoreElaborationSession;
@@ -877,6 +908,116 @@ const reduceOneCoreLfDescendantAt = (
         }
     }
 };
+
+const freezeNormalizationTrace = (
+    trace: readonly CoreLfComparisonTraceEntry[]
+): readonly CoreLfComparisonTraceEntry[] => Object.freeze(
+    trace.map(entry => Object.freeze({
+        ...entry,
+        path: freezePath(entry.path)
+    }))
+);
+
+/**
+ * Deterministically normalize an expression under one global operation
+ * budget. Each iteration normalizes the current head, then the first
+ * reducible descendant, and retries the parent head. This is the public
+ * one-expression counterpart of the existing comparison fallback; it adds
+ * no reduction rule and never invokes proof-time unification.
+ */
+export function coreLfCombinedNormalize(
+    environment: CoreLfDeclarationEnvironment,
+    expression: KernelExpression,
+    stepLimit: number,
+    session?: CoreElaborationSession,
+    catalogRuntime?: CoreLfCatalogRuntime,
+    stopWhen?: (expression: KernelExpression) => boolean
+): CoreLfNormalizationResult {
+    if (!Number.isSafeInteger(stepLimit) || stepLimit < 0) {
+        throw new CoreLfEvaluationError(
+            'INVALID_STEP_LIMIT',
+            expression.provenance,
+            `Combined Core LF normalization step limit must be a ` +
+                `nonnegative safe integer; received ${stepLimit}`
+        );
+    }
+    assertCompatibleSession(environment, session);
+
+    const state: MutableCoreLfComparisonState = {
+        environment,
+        session,
+        catalogRuntime,
+        stepLimit,
+        trace: []
+    };
+    const rootPath = ['$'];
+    let current = expression;
+
+    while (true) {
+        const head = comparisonWeakHeadAt(
+            current,
+            'left',
+            rootPath,
+            state
+        );
+        if (head.status === 'step-limit-exceeded') {
+            return Object.freeze({
+                status: 'step-limit-exceeded' as const,
+                expression: head.expression,
+                steps: state.trace.length,
+                trace: freezeNormalizationTrace(state.trace),
+                path: head.path,
+                next: head.next
+            });
+        }
+        if (head.status === 'plicity-stuck') {
+            return Object.freeze({
+                status: 'stuck' as const,
+                expression: head.expression,
+                steps: state.trace.length,
+                trace: freezeNormalizationTrace(state.trace),
+                reason: 'plicity-mismatch' as const,
+                expectedPlicity: head.expectedPlicity,
+                actualPlicity: head.actualPlicity
+            });
+        }
+        current = head.expression;
+        if (stopWhen?.(current) === true) {
+            return Object.freeze({
+                status: 'normal' as const,
+                expression: current,
+                steps: state.trace.length,
+                trace: freezeNormalizationTrace(state.trace)
+            });
+        }
+
+        const descendant = reduceOneCoreLfDescendantAt(
+            current,
+            'left',
+            rootPath,
+            state
+        );
+        if (descendant.status === 'step-limit-exceeded') {
+            return Object.freeze({
+                status: 'step-limit-exceeded' as const,
+                expression: descendant.expression,
+                steps: state.trace.length,
+                trace: freezeNormalizationTrace(state.trace),
+                path: descendant.path,
+                next: descendant.next
+            });
+        }
+        if (descendant.status === 'unchanged') {
+            return Object.freeze({
+                status: 'normal' as const,
+                expression: current,
+                steps: state.trace.length,
+                trace: freezeNormalizationTrace(state.trace)
+            });
+        }
+        current = descendant.expression;
+    }
+}
 
 const retryCoreLfComparisonAfterDescendants = (
     left: KernelExpression,

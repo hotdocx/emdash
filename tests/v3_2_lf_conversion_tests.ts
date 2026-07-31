@@ -17,6 +17,7 @@ import {
     KernelExpression,
     binderMode,
     checkLambdapiProbe,
+    coreLfCombinedNormalize,
     coreLfCombinedWeakHead,
     coreLfDefinitionalCompare,
     createCoreLfChecker,
@@ -493,6 +494,115 @@ describe('TypeScript v3.2 DTTLF LF-1C combined conversion', () => {
             }
         );
     });
+
+    it('normalizes descendants and retries their parent under one budget',
+        () => {
+            let environment = CoreLfDeclarationEnvironment.empty();
+            environment = environment.extend({
+                name: 'lf_normalize_alias',
+                type: categoryUniverse(29),
+                mode: explicitFunctorial,
+                provenance: because(29, 'LF normalizer nested alias'),
+                body: kernelApplication(
+                    'category-of-categories',
+                    [],
+                    because(29, 'LF normalizer alias body')
+                ),
+                transparency: 'transparent'
+            });
+            const parentRedex = kernelApplication(
+                'object-classifier',
+                [{
+                    value: kernelApplication(
+                        'category-of-categories',
+                        [],
+                        because(29, 'LF normalizer parent argument')
+                    )
+                }],
+                because(29, 'LF normalizer parent redex')
+            );
+            const expected = categoryUniverse(29);
+            const runtime: CoreLfCatalogRuntime = Object.freeze({
+                revision: 'LF-NORMALIZE-PARENT-1',
+                ruleIds: Object.freeze(['fixture.normalize-parent']),
+                rewriteHead(expression) {
+                    if (!kernelExpressionEquals(expression, parentRedex)) {
+                        return Object.freeze({
+                            status: 'irreducible',
+                            expression
+                        });
+                    }
+                    return Object.freeze({
+                        status: 'rewritten',
+                        ruleId: 'fixture.normalize-parent',
+                        ruleIndex: 0,
+                        before: expression,
+                        after: expected,
+                        match: Object.freeze({
+                            ruleId: 'fixture.normalize-parent',
+                            bindings: Object.freeze([])
+                        })
+                    });
+                }
+            });
+            const input = kernelApplication(
+                'object-classifier',
+                [{ value: free('lf_normalize_alias', 29) }],
+                because(29, 'LF normalizer input')
+            );
+
+            const normalized = coreLfCombinedNormalize(
+                environment,
+                input,
+                2,
+                undefined,
+                runtime
+            );
+            assert.equal(normalized.status, 'normal');
+            assert.equal(normalized.steps, 2);
+            assert.equal(
+                kernelExpressionEquals(
+                    normalized.expression,
+                    expected
+                ),
+                true
+            );
+            assert.deepEqual(
+                normalized.trace.map(entry => ({
+                    kind: entry.reduction.kind,
+                    path: entry.path
+                })),
+                [
+                    {
+                        kind: 'delta',
+                        path: [
+                            '$',
+                            'application:object-classifier:argument:0'
+                        ]
+                    },
+                    { kind: 'runtime', path: ['$'] }
+                ]
+            );
+
+            const exhausted = coreLfCombinedNormalize(
+                environment,
+                input,
+                1,
+                undefined,
+                runtime
+            );
+            assert.equal(exhausted.status, 'step-limit-exceeded');
+            assert.deepEqual(
+                exhausted.status === 'step-limit-exceeded'
+                    ? exhausted.next
+                    : undefined,
+                {
+                    kind: 'runtime',
+                    ruleId: 'fixture.normalize-parent',
+                    ruleIndex: 0
+                }
+            );
+        });
 
     it('counts solved-meta zonking in the same budget as transparent delta', () => {
         let environment = CoreLfDeclarationEnvironment.empty();

@@ -143,6 +143,7 @@ import './v3_2_categorical_mixed_mode_tests';
 import './v3_2_categorical_mixed_action_transfer_tests';
 import './v3_2_categorical_mixed_nested_factorization_tests';
 import './v3_2_categorical_mixed_nested_action_tests';
+import './v3_2_categorical_recursive_mixed_nesting_tests';
 import './v3_2_categorical_displayed_telescope_generic_tests';
 import './v3_2_categorical_usability_graduation_proposal_tests';
 import './v3_2_categorical_usability_graduation_review_tests';

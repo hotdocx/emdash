@@ -24,6 +24,9 @@ import {
     CoreCategoricalTermInspection
 } from './categorical_surface';
 import {
+    createCoreCategoricalCategoryObjectReifier
+} from './categorical_classifier_reifier';
+import {
     CORE_CATEGORICAL_DEPENDENT_PREREQUISITES,
     CoreCategoricalDependentCompilation,
     compileCoreCategoricalDependentTransfer,
@@ -1166,9 +1169,33 @@ export class CoreCategoricalProgram {
                 ? compileCoreCategoricalDependentCompositionTransfer()
                 : compileCoreCategoricalDependentTransfer();
         this.environment = this.dependent.compiled.environment;
+        const classifierRuntime = 'composedRuntime' in this.dependent
+            ? this.dependent.composedRuntime
+            : this.dependent.structural.composedRuntime;
+        const classifierReifier = this.mixedModeEnabled
+            ? createCoreCategoricalCategoryObjectReifier({
+                environment: this.environment,
+                runtime: classifierRuntime,
+                formerNames: {
+                    oppositeCategory:
+                        CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
+                            .oppositeCategory,
+                    displayedFunctorCategory:
+                        CORE_DIRECTED_1A_PRIMITIVE_NAMES[
+                            'displayed-functor-category'
+                        ],
+                    displayedTransforCategory:
+                        coreCategoricalFibredTransfdCoreName(
+                            'displayed-transformation-category'
+                        )
+                },
+                stepLimit: 512
+            })
+            : undefined;
         this.builder = new CoreCategoricalScopedBuilder(
             this.at('categorical program'),
             {
+                categoryObjectReifier: classifierReifier,
                 dependentSectionComposition:
                     profile !== 'reviewed-usability-2a1',
                 displayedFunctorAbstraction:

@@ -11,6 +11,14 @@
 > package audits. Follow the successor's dependency ledger and keep general
 > mixed curry, new kernel owners, and unrestricted proof-rule inference
 > outside the active tranche.
+> D-DTTLF-USABILITY-029 is now implemented and focused-green: the mixed
+> profile uses bounded generic descendant normalization plus parent retry to
+> recover canonical displayed-functor/displayed-transfor views of unchanged
+> terms, and the existing `Nested_transfd_telescope_catd` representative
+> reaches internal base-arrow, higher-component, and next-hom action. Its
+> local checkpoint is pending in the successor ledger; the next semantic row
+> is the separate exact structural-graduation review, not text promotion or
+> mixed curry.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)

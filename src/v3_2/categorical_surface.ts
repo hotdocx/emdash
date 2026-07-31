@@ -79,6 +79,9 @@ import {
     CORE_CATEGORICAL_SURFACE_SPECIFICATION,
     selectCoreCategoricalApplication
 } from './categorical_surface_spec';
+import type {
+    CoreCategoricalCategoryObjectReifier
+} from './categorical_classifier_reifier';
 import {
     CORE_DIRECTED_1A_PRIMITIVE_NAMES
 } from './directed_1a';
@@ -607,6 +610,13 @@ export type CoreCategoricalDependentApplicationPrerequisiteId =
     | CoreCategoricalDependentCompositionPrerequisiteId;
 
 export interface CoreCategoricalScopedBuilderOptions {
+    /**
+     * Optional reviewed runtime-backed canonical category-object reifier.
+     * It changes only construction-time type metadata; final generic Core LF
+     * checking remains mandatory and the elaborated term is never changed.
+     */
+    readonly categoryObjectReifier?:
+        CoreCategoricalCategoryObjectReifier;
     /**
      * Enable only the approved D-003 section-composition continuation. The
      * default preserves the reviewed USABILITY-2A1 eta-only envelope.
@@ -1670,22 +1680,47 @@ export class CoreCategoricalScopedBuilder {
     }
 
     /**
-     * Refine the exact canonical mixed fibre:
-     *
-     *   Fibre_cat
-     *     (Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar))
-     *     y
-     *
-     * to `Functord_cat Z Ebar[y^-] Dbar[y]`.
-     *
-     * This changes only the construction-time classifier. The Core term is
-     * unchanged and the final checker must validate the existing runtime
-     * conversion.
+     * Recover a rich view of a category-valued result through the optional
+     * reviewed runtime reifier. The result term is unchanged and the final
+     * checker must validate the same active runtime conversion. Direct
+     * builders without that capability retain only the former exact fallback.
      */
-    private mixedNestedFibreDisplayedFunctorType(
+    private mixedNestedFibreRichType(
         category: KernelExpression,
-        nodeProvenance: Provenance
+        nodeProvenance: Provenance,
+        detail = 'mixed nested category-object result'
     ): CoreType | undefined {
+        const reifier = this.options.categoryObjectReifier;
+        if (reifier !== undefined) {
+            const result = reifier.reify(
+                category,
+                nodeProvenance,
+                detail
+            );
+            if (result.status === 'step-limit-exceeded') {
+                this.fail(
+                    'INVALID_TERM',
+                    nodeProvenance,
+                    `Canonical classifier normalization exceeded its ` +
+                        `${reifier.stepLimit}-step bound`
+                );
+            }
+            if (result.status === 'stuck') {
+                this.fail(
+                    'INVALID_TERM',
+                    nodeProvenance,
+                    'Canonical classifier normalization became stuck on ' +
+                        result.reason
+                );
+            }
+            if (result.canonicalHead !== 'plain-object') {
+                return result.type;
+            }
+        }
+
+        // Preserve the exact pre-REFLECT-1A construction-only fallback for
+        // direct builders that have no reviewed runtime capability. The
+        // mixed program profile uses the runtime path above.
         if (
             this.options.mixedNestedFactorization !== true ||
             category.tag !== 'application' ||
@@ -2137,9 +2172,10 @@ export class CoreCategoricalScopedBuilder {
         detail: string
     ): CoreType {
         const mixedNestedType =
-            this.mixedNestedFibreDisplayedFunctorType(
+            this.mixedNestedFibreRichType(
                 category,
-                nodeProvenance
+                nodeProvenance,
+                detail
             );
         if (mixedNestedType !== undefined) return mixedNestedType;
         if (
@@ -2849,10 +2885,11 @@ export class CoreCategoricalScopedBuilder {
             point,
             nodeProvenance
         );
-        const resultType: CoreType = {
-            tag: 'object',
-            category: fibre
-        };
+        const resultType = this.categoricalTypeForCategoryObject(
+            fibre,
+            nodeProvenance,
+            'closed dependent-section object result'
+        );
         const result = kernelCall(
             kernelFree(
                 CORE_DIRECTED_1C_PRIMITIVE_NAMES[
@@ -4190,9 +4227,10 @@ export class CoreCategoricalScopedBuilder {
             const mixedNestedType =
                 selection.operation === 'functor.object' &&
                 subject.type.tag === 'functor'
-                    ? this.mixedNestedFibreDisplayedFunctorType(
+                    ? this.mixedNestedFibreRichType(
                         subject.type.targetCategory,
-                        nodeProvenance
+                        nodeProvenance,
+                        'closed categorical object application result'
                     )
                     : undefined;
             if (mixedNestedType === undefined) {

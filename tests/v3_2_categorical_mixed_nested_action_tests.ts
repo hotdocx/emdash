@@ -212,7 +212,7 @@ describe('MIXED-NEST-ACTION-1B mixed inner action', () => {
         );
     });
 
-    it('does not refine a Hom_catd over a non-Catd constant fibre',
+    it('retains generic Hom for a non-Catd constant fibre',
     () => {
         const emdash = new CoreCategoricalProgram({
             profile: 'fibred-displayed-mixed-nest-1'
@@ -255,7 +255,7 @@ describe('MIXED-NEST-ACTION-1B mixed inner action', () => {
 
         assert.equal(
             emdash.compile(inner).surfaceType.tag,
-            'object'
+            'hom'
         );
         assert.throws(
             () => emdash.displayedInternalHom(inner),

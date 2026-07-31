@@ -2,14 +2,18 @@
 
 Date: 2026-07-31
 
-Status: approved living successor; the architecture and first bounded
+Status: active living successor; the architecture and first bounded
 implementation gate are frozen below under
 H-DTTLF-USABILITY-RECURSIVE-MIXED-NESTING-01 /
 D-DTTLF-USABILITY-029. The proposal-only checkpoint is `6828225`. The user
 approved the consolidated direction, asked that implementation continue, and
 has granted a standing unattended approval delegation with human
 supersession. The separate review recorded below approves exactly D-029 and
-its non-effects; implementation is dependency-ready.
+its non-effects. `RECURSIVE-MIXED-REFLECT-1A` and
+`RECURSIVE-MIXED-TRANSFD-1B` are implemented and focused-green; their local
+implementation checkpoint is pending below. The structural graduation row is
+therefore the next dependency-ready review, not an implicit broadening of the
+implemented profile.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -479,10 +483,10 @@ equivalence, arbitrary variance DAGs, or general introduction.
 
 | Row | Status | Dependencies | Exact scope |
 | --- | --- | --- | --- |
-| `RECURSIVE-MIXED-REFLECT-0A` | architecture frozen in this plan | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
-| `RECURSIVE-MIXED-REFLECT-1A` | approved under D-DTTLF-USABILITY-029; implementation dependency-ready | approved `REFLECT-0A` | Pass the existing environment/composed runtime into the mixed scoped builder; weak-head normalize category-object targets; reify exact canonical `Functord_cat` and `Transfd_cat` views recursively; retain generic views and final checking. No kernel/transfer/proof-rule delta. |
-| `RECURSIVE-MIXED-TRANSFD-1B` | approved as the first consumer in the same bounded tranche | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Add direct TypeScript evidence for object projection, internal outer arrow action, rich displayed-transfor endpoints, component/`tdapp*`, and one next-hom/further-hom consumer. |
-| `RECURSIVE-MIXED-GRADUATE-1C` | pending evidence | green `TRANSFD-1B` plus a further iterated hom | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. |
+| `RECURSIVE-MIXED-REFLECT-0A` | complete in plan checkpoint `6828225` | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
+| `RECURSIVE-MIXED-REFLECT-1A` | implemented and focused-green; local checkpoint pending | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
+| `RECURSIVE-MIXED-TRANSFD-1B` | implemented and focused-green; local checkpoint pending | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
+| `RECURSIVE-MIXED-GRADUATE-1C` | dependency-ready for a separate exact proposal | green `TRANSFD-1B` plus completed next-hom evidence | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. This row must decide whether the current representative and recursive algorithm suffice or whether one additional constructed iteration is required; it does not silently promote text/browser syntax. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1D` | deferred until semantic graduation | `GRADUATE-1C` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
 | `CURRY-PACKAGE-0A` | deferred independent audit | measured higher-action or mixed-introduction consumer | Audit ordinary curry/uncurry computation and adjunction coherence; do not infer primitive asymmetry from style. |
@@ -553,6 +557,51 @@ For `REFLECT-1A`/`TRANSFD-1B`:
 - carry forward the unchanged bounded Lambdapi authority evidence rather than
   rerunning `check:all`; and
 - stage only the coherent implementation, tests, and synchronized plan.
+
+### Measured D-029 implementation evidence (2026-07-31)
+
+The implementation uses a new bounded one-expression normalization entry
+point in the existing generic conversion engine. Measurement corrected the
+initial weak-head-only design in two reusable ways:
+
+1. a parent `Hom_cat` fold can become reducible only after its classifier
+   child delta/runtime-reduces, so normalization must reduce one descendant
+   and retry the parent under the same global step budget; and
+2. canonical opposite classifiers occur both as the backend-neutral
+   `opposite-category` owner and as the transferred free `Op_cat` facade, so
+   the reifier recognizes both without adding a rule or changing the term.
+
+The early-stop predicate preserves the first canonical
+`Functord_cat`/`Transfd_cat` head rather than over-normalizing away the rich
+endpoint data. Reification remains construction-time metadata only. The
+generic checker checks the unchanged explicit Core term, and the generic
+runtime still owns every object/base-arrow/component/next-hom computation.
+
+Validation evidence:
+
+- `workspace:check`, root typecheck, and root lint pass;
+- the generic descendant-normalize/parent-retry test passes, including exact
+  shared-budget exhaustion evidence;
+- the prior mixed nested action regression passes `3/3`, including the
+  existing `homd_int` consumer and a generic-Hom negative that still rejects
+  displayed internal-Hom elimination;
+- the new D-029 aggregate coverage passes direct and outer-base-arrow
+  `Nested_transfd_telescope_catd` projection, canonical endpoint recovery,
+  component/point/higher action, `tdapp1_int` next-hom action, no-cast, and
+  unsupported-classifier cases; and
+- exactly one required `check:ts` was run. It exercised the changed tests
+  successfully, then exited nonzero only on two already-committed public
+  README assertions in `v3_2_release_policy_tests.ts` and
+  `v3_2_release_completion_tests.ts`. Targeted owning-test reruns reproduce
+  one stale README assertion in each file, while `git diff HEAD -- README.md`
+  and both owning tests is empty. This unrelated publication-contract drift
+  is recorded rather than repaired or used to trigger another long aggregate
+  in this semantic tranche.
+
+No Lambdapi owner, rule, source, transfer inventory, runtime inventory, or
+proof-rule inventory changed. The recent unchanged authority evidence is
+therefore carried forward; neither `check:all` nor a redundant kernel run was
+started.
 
 The user authorizes bounded local checkpoint commits in the existing
 `goal/typescript-elaborator-v3.2` worktree after each coherent green tranche.
@@ -653,3 +702,16 @@ authority conflict, or an operation outside the stated Git boundary.
   `RECURSIVE-MIXED-REFLECT-1A` and its first
   `RECURSIVE-MIXED-TRANSFD-1B` consumer, preserving every frozen non-effect;
   it adds no remote Git or kernel authority.
+- **2026-07-31 — D-DTTLF-USABILITY-029 implemented and focused-green.** A
+  runtime-backed immutable classifier reifier now uses generic bounded
+  descendant normalization plus parent retry, recognizes both canonical
+  opposite representations, and recovers unchanged-term displayed-functor
+  and displayed-transfor views. The `Nested_transfd_telescope_catd`
+  representative reaches internal base-arrow, component/higher, and
+  next-hom/`tdapp1_int` action without a cast or external coherence evidence.
+  The local implementation checkpoint remains to be recorded.
+- **2026-07-31 — aggregate baseline drift isolated.** The one required
+  `check:ts` reached only two stale committed README/release assertions after
+  affected tests passed. The owning files are unchanged by D-029 and targeted
+  reruns reproduce the drift. It is not silently fixed, and no second long
+  aggregate is warranted for this tranche.
