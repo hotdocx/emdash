@@ -16,9 +16,10 @@
 > recover canonical displayed-functor/displayed-transfor views of unchanged
 > terms, and the existing `Nested_transfd_telescope_catd` representative
 > reaches internal base-arrow, higher-component, and next-hom action. Its
-> local checkpoint is pending in the successor ledger; the next semantic row
-> is the separate exact structural-graduation review, not text promotion or
-> mixed curry.
+> exact local checkpoint is
+> `12b4f97e57880ef32f36fd5e143465b4c853c055`; the next semantic row is the
+> separate exact structural-graduation review, not text promotion or mixed
+> curry.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)

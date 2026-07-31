@@ -11,9 +11,10 @@ has granted a standing unattended approval delegation with human
 supersession. The separate review recorded below approves exactly D-029 and
 its non-effects. `RECURSIVE-MIXED-REFLECT-1A` and
 `RECURSIVE-MIXED-TRANSFD-1B` are implemented and focused-green; their local
-implementation checkpoint is pending below. The structural graduation row is
-therefore the next dependency-ready review, not an implicit broadening of the
-implemented profile.
+implementation checkpoint is
+`12b4f97e57880ef32f36fd5e143465b4c853c055`. The structural graduation row
+is therefore the next dependency-ready review, not an implicit broadening of
+the implemented profile.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -484,8 +485,8 @@ equivalence, arbitrary variance DAGs, or general introduction.
 | Row | Status | Dependencies | Exact scope |
 | --- | --- | --- | --- |
 | `RECURSIVE-MIXED-REFLECT-0A` | complete in plan checkpoint `6828225` | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
-| `RECURSIVE-MIXED-REFLECT-1A` | implemented and focused-green; local checkpoint pending | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
-| `RECURSIVE-MIXED-TRANSFD-1B` | implemented and focused-green; local checkpoint pending | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
+| `RECURSIVE-MIXED-REFLECT-1A` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
+| `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
 | `RECURSIVE-MIXED-GRADUATE-1C` | dependency-ready for a separate exact proposal | green `TRANSFD-1B` plus completed next-hom evidence | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. This row must decide whether the current representative and recursive algorithm suffice or whether one additional constructed iteration is required; it does not silently promote text/browser syntax. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1D` | deferred until semantic graduation | `GRADUATE-1C` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
@@ -709,7 +710,8 @@ authority conflict, or an operation outside the stated Git boundary.
   and displayed-transfor views. The `Nested_transfd_telescope_catd`
   representative reaches internal base-arrow, component/higher, and
   next-hom/`tdapp1_int` action without a cast or external coherence evidence.
-  The local implementation checkpoint remains to be recorded.
+  The exact local implementation checkpoint is
+  `12b4f97e57880ef32f36fd5e143465b4c853c055`.
 - **2026-07-31 — aggregate baseline drift isolated.** The one required
   `check:ts` reached only two stale committed README/release assertions after
   affected tests passed. The owning files are unchanged by D-029 and targeted
