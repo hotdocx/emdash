@@ -1,5 +1,11 @@
 # TypeScript Elaborator v3.2 Mixed-Mode Displayed Telescope Plan
 
+> **Successor (2026-07-31):** recursive classifier recovery and the
+> `Nested_transfd_telescope_catd` continuation now live in
+> [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
+> This file remains the immutable completion authority for the canonical
+> positive-layer, final mixed classifier, and text-parity envelope.
+
 Date: 2026-07-31
 
 Status: living approved architecture; `MIXED-NEST-0A` is complete and

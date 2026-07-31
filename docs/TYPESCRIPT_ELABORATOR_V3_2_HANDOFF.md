@@ -1,9 +1,20 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
 > **Current semantic continuation (2026-07-31):**
+> [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md)
+> owns the dependency-ready work. The completed mixed-mode telescope plan
+> proved the bounded positive context envelope, its exact final mixed
+> classifier, and text parity; the recursive successor now
+> targets runtime-normalized canonical classifier reification beginning with
+> the existing `Nested_transfd_telescope_catd` enrichment level. It also
+> records the separate non-blocking `Product_catd` facade and curry/uncurry
+> package audits. Follow the successor's dependency ledger and keep general
+> mixed curry, new kernel owners, and unrestricted proof-rule inference
+> outside the active tranche.
+>
+> The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)
-> owns the dependency-ready work. The completed displayed-bracket work
-> proved the bounded positive context envelope; the successor has now
+> has already
 > qualified the canonical `Functor_catd`/`Hom_catd`/`Transf_catd` classifier,
 > recursive nested eta, internally derived `homd_int` consumption, and an
 > arbitrary finite canonical sibling-layer/Sigma fold. Follow that plan's
