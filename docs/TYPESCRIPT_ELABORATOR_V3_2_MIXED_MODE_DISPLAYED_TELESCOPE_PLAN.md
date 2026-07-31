@@ -4,8 +4,10 @@ Date: 2026-07-31
 
 Status: living approved architecture; `MIXED-NEST-0A` is complete and
 focused-green at checkpoint
-`77f79bf8e139d856965f41733d3aeff9ffefd9d1`; `MIXED-NEST-1A` is the next
-dependency-ready slice
+`77f79bf8e139d856965f41733d3aeff9ffefd9d1`; the `MIXED-NEST-1A0`
+architecture audit has measured a displayed-curry/introduction dependency;
+the no-active-edit `MIXED-CURRY-0A` design/probe slice is approved under the
+standing unattended delegation and in progress
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -376,7 +378,9 @@ Also outside the first tranche:
 | Slice | Status | Dependency | Exact purpose |
 | --- | --- | --- | --- |
 | `MIXED-NEST-0A` | complete and focused-green at checkpoint `77f79bf8e139d856965f41733d3aeff9ffefd9d1` | completed displayed-ND higher profile and approved architecture | Two existing opaque signatures and four existing runtime rules compile generically in isolated `fibred-displayed-mixed-nest-1`; seven typed constructors build/check the canonical nested classifier and prove its `Transf_catd` fold. The independent constant-`Cat` fold is deferred at its measured nested proof-conversion seam. Zero Lambdapi semantic delta. |
-| `MIXED-NEST-1A` | pending | green `MIXED-NEST-0A` | Add the first recursive nested `categorical-abstraction` lowering selected by the expected `Functord_cat(...,Hom_catd(...))` classifier. Preserve callback-once locally nameless evidence and fail closed outside the qualified shape. |
+| `MIXED-NEST-1A0` | read-only architecture audit complete; checkpoint pending | green `MIXED-NEST-0A` | Establish that the existing ordinary `categorical-abstraction` node cannot type the canonical inner `Functord`, that the bounded `displayedFunctorLambda` cannot consume context-varying endpoint families, and that the active kernel names the nested classifier but has no selected general displayed-curry/introduction owner. Add no code or kernel semantics. |
+| `MIXED-CURRY-0A` | approved under the standing unattended delegation; no-active-edit design/probe in progress | complete `MIXED-NEST-1A0` audit | Determine whether the canonical introduction is a transparent composite of existing pullback/product/Sigma/evaluation/internal-hom owners or requires one new functor-level semantic owner. Freeze its typed uncurried input, coherent output, point projection, base-arrow action, higher-action inheritance, and negative non-collapse case before any active-kernel edit. |
+| `MIXED-NEST-1A` | dependency-gated; do not implement as an ordinary-curry shortcut | selected and separately approved `MIXED-CURRY` result | Add the first recursive nested displayed-abstraction IR/lowering selected by the expected `Functord_cat(...,Hom_catd(...))` classifier. Preserve callback-once locally nameless evidence and fail closed outside the qualified shape. |
 | `MIXED-NEST-ACTION-1B` | pending | green `MIXED-NEST-1A` | Exercise base-arrow action through the inner mixed classifier and one `homd_int`/next-Hom consumer. Add no constructor-specific generic functoriality/naturality rules. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
 | `DISPLAYED-MIXED-GRADUATE-1` | pending | generic positive and mixed witnesses | Freeze the exact arbitrary-finite-depth claim, negatives, performance boundary, and conformance evidence. Do not silently graduate unrestricted `^nd`. |
@@ -508,6 +512,148 @@ does not contain the older `release-ready exact profile` phrase. Neither file
 is changed by this tranche. The failure is recorded as baseline evidence and
 the long aggregate is not repeated here.
 
+## `MIXED-NEST-1A0` Architecture Audit
+
+The post-`MIXED-NEST-0A` source audit corrects the original wording of the
+next row. The existing rejected `categorical-abstraction` node is the
+ordinary `^f` node:
+
+```text
+lambda^f x : A. body : Functor_cat A B.
+```
+
+It is recursively lowered by ordinary product/curry structure. It cannot be
+reused as the canonical inner abstraction:
+
+```text
+z :^n Z ; E[k^-;z] |- D[k;z],
+```
+
+whose result is a displayed functor, hence an object of:
+
+```text
+Functord_cat (E[k^-]) (D[k])
+  = Hom_cat (Catd_cat Z) (E[k^-]) (D[k]).
+```
+
+Treating that result as an ordinary `Functor_cat` object would lose the
+displayed base-arrow/fibre-arrow action and would violate the internalization
+rule.
+
+The existing `displayedFunctorLambda` is also not already the missing
+solution. It:
+
+- receives closed `KernelExpression` source and target families over one
+  fixed base;
+- hides one base token and one fibre token;
+- lowers only identity, eta, finite closed displayed-functor composition, and
+  the qualified section weakening; and
+- returns a closed `Functord_cat E D` term.
+
+Inside the canonical outer context, however, `Ebar[k^-]` and `Dbar[k]` are
+context-indexed objects of `Catd_cat Z`, not closed
+`CoreCategoricalDisplayedFamily` handles. The current IR has no sound route
+that feeds those open endpoint objects into `displayedFunctorLambda` while
+also synthesizing their dependence on the outer fibre variable.
+
+The active Lambdapi kernel establishes the type but not a general
+introduction law:
+
+- `Nested_telescope_catd` is the transparent
+  `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` classifier;
+- `Nested_telescope_cat` is the corresponding
+  `Functord_cat C (...)` category;
+- `Hom_catd` supplies the mixed-variance family and fibre projection;
+- `Functor_catd_func` internalizes formation of the mixed functor family;
+- `Eval_funcd` supplies only the documented constant-domain evaluation
+  direction; and
+- `homd_int` supplies one important already-coherent internal-hom consumer.
+
+There is no selected general displayed-curry/introduction owner in the
+active source that converts an open inner displayed abstraction into an
+inhabitant of `Nested_telescope_cat`. The Foundations explicitly leave
+arbitrary mixed-domain evaluation and general contravariant occurrence
+lowering open. A TypeScript-only case would therefore have to do one of the
+following unsound or unscalable things:
+
+1. reinterpret an ordinary functor as a displayed functor;
+2. accept pointwise object functions plus external naturality evidence;
+3. fabricate the missing base-arrow action;
+4. hide an unreviewed coercion between contextual endpoint terms and closed
+   family handles; or
+5. recognize only eta of an already coherent term and mislabel it general
+   nested abstraction.
+
+All five are rejected.
+
+### Architectural consequence
+
+The broad architecture remains valid, but its next dependency is now
+measured precisely:
+
+> The classifier-directed abstraction algebra needs a displayed
+> curry/introduction operation before the contextual compiler can soundly
+> accept the canonical nested abstraction node.
+
+This is not evidence that `Hom_catd`, `Functor_catd`, or the existing
+displayed kernel is inconsistent. It is a closure/usability operation not
+yet selected by the kernel library. The next design must first decide whether
+that operation is:
+
+- a transparent composite of existing pullback, fibrewise product, Sigma,
+  evaluation, ordinary/internal Hom, and generic action owners;
+- a sequential-totalization/external-product construction whose intermediate
+  family is worth naming; or
+- one smallest new functor-level semantic owner with projection rules.
+
+The preference order is exactly the SOP order: derive a semantic composite
+first; add a stable primitive only after a concrete consumer and an
+owner-position probe show that the composite cannot expose the required
+computation.
+
+### Frozen `MIXED-CURRY-0A` design/probe boundary
+
+`MIXED-CURRY-0A` may:
+
+- inventory and type-check the existing ingredients in ignored temporary
+  probes;
+- formulate the canonical uncurried input and curried output at the
+  `Catd_cat`/`Hom_catd` level;
+- compare direct displayed curry, sequential totalization, and repeated
+  pullback/Sigma presentations;
+- test a transparent candidate at its intended owner position in a temporary
+  full-file copy;
+- require one point projection and one base-arrow consumer;
+- require the result to remain iterable through generic `fapp*`/`tapp*` and a
+  later `homd_int` consumer; and
+- produce a separate exact implementation proposal.
+
+It may not:
+
+- edit `emdash3_2.lp` or `emdash3_2_checks.lp`;
+- add a TypeScript nested-abstraction case;
+- select a primitive merely because it is easier to transfer;
+- add external coherence equations;
+- claim arbitrary nested depth; or
+- authorize the eventual active-kernel implementation.
+
+The design result must state:
+
+1. the complete type of the uncurried input;
+2. the complete type of the curried output;
+3. how negative endpoint variation is owned;
+4. the point/object projection;
+5. the base-arrow action route;
+6. how higher action remains under generic owners;
+7. a negative case that must not collapse; and
+8. whether the implementation is transparent-derived or genuinely primitive.
+
+The proposed gate is
+`H-DTTLF-USABILITY-MIXED-CURRY-01 /
+D-DTTLF-USABILITY-022`. It authorizes only this bounded design and temporary
+probe tranche. Any active mathematical owner/rule remains a later,
+separately reviewed decision.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -609,3 +755,21 @@ authority conflict, or an operation outside the stated Git boundary.
   focused validation. The result deliberately leaves the recursive nested
   abstraction node to `MIXED-NEST-1A`. The bounded implementation checkpoint
   is `77f79bf8e139d856965f41733d3aeff9ffefd9d1`.
+- **2026-07-31 — `MIXED-NEST-1A0` measured an introduction dependency.**
+  The rejected ordinary `categorical-abstraction` node produces
+  `Functor_cat`, whereas the canonical inner term is an object of
+  `Functord_cat`. The existing direct displayed lambda accepts closed endpoint
+  families and cannot soundly consume `Ebar[k^-]`/`Dbar[k]` as open family
+  handles. The active kernel names the complete nested classifier but has no
+  selected general displayed-curry/introduction owner. No TypeScript shortcut
+  is implemented.
+- **2026-07-31 — `MIXED-CURRY-0A` proposed.** The next bounded tranche is a
+  no-active-edit design and owner-position probe comparing a transparent
+  existing-owner composite, sequential totalization, and one smallest
+  functor-level semantic owner. It must freeze object, base-arrow, and higher
+  action before any active kernel or TypeScript implementation.
+- **2026-07-31 — `MIXED-CURRY-0A` delegated approval recorded.** After the
+  frozen bounded proposal was presented with no immediate human
+  supersession, the user's standing unattended delegation authorizes its
+  design and ignored temporary-probe scope. It does not authorize an active
+  Lambdapi owner/rule or TypeScript lowering.

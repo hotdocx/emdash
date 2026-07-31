@@ -15,8 +15,12 @@
 > engines; the isolated root profile constructs/checks the canonical nested
 > `Functord_cat`/`Hom_catd` classifier and observes the
 > `Hom_catd(Functor_catd(...)) -> Transf_catd(...)` fold. This qualifies the
-> classifier only. `MIXED-NEST-1A`, the first recursive nested-abstraction
-> lowering, is next.
+> classifier only. The subsequent `MIXED-NEST-1A0` audit established that the
+> canonical inner term needs a displayed-curry/introduction operation not
+> supplied by the ordinary abstraction node or current closed-endpoint
+> displayed lambda. `MIXED-CURRY-0A`, a no-active-edit design/owner-position
+> probe, is next; do not add a TypeScript shortcut or infer authority for a
+> new kernel owner.
 
 Date: 2026-07-28
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
