@@ -18,8 +18,11 @@
 > reaches internal base-arrow, higher-component, and next-hom action. Its
 > exact local checkpoint is
 > `12b4f97e57880ef32f36fd5e143465b4c853c055`; the next semantic row is the
-> separate exact structural-graduation review, not text promotion or mixed
-> curry.
+> separately frozen D-DTTLF-USABILITY-030 generic Hom-category public closure
+> and parameterized action tower. The audit found no semantic/kernel gap, but
+> did find that the direct program API lacks the already-owned general
+> `Hom_cat C x y` category constructor. Structural graduation follows that
+> bounded closure; text promotion and mixed curry remain later rows.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)

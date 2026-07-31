@@ -13,8 +13,9 @@ its non-effects. `RECURSIVE-MIXED-REFLECT-1A` and
 `RECURSIVE-MIXED-TRANSFD-1B` are implemented and focused-green; their local
 implementation checkpoint is
 `12b4f97e57880ef32f36fd5e143465b4c853c055`. The structural graduation row
-is therefore the next dependency-ready review, not an implicit broadening of
-the implemented profile.
+requires the small public Hom-category closure now frozen below as
+D-DTTLF-USABILITY-030. That exact proposal is the next dependency-ready
+review, not an implicit broadening of the implemented profile.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -432,12 +433,14 @@ reification capability into that builder. It contains:
 
 - the exact compiled declaration environment;
 - the exact composed reviewed runtime;
-- an explicit weak-head step limit; and
+- an explicit combined-normalization step limit; and
 - no proof-rule search API.
 
-The builder uses `coreLfCombinedWeakHead`, which already interleaves bounded
-beta, transparent delta, and reviewed runtime reduction. Direct standalone
-builders without this capability retain their existing behavior.
+The builder uses the measured `coreLfCombinedNormalize` path, which performs
+bounded beta, transparent delta, and reviewed runtime reduction at the head,
+then reduces the first available descendant and retries the parent under the
+same global budget. Direct standalone builders without this capability retain
+their existing behavior.
 
 ### Recursive canonical views
 
@@ -460,10 +463,9 @@ or stuck reduction fails closed with a source-located diagnostic when rich
 classification is required; it must not fall back to proof search or an
 external oracle.
 
-### Structural induction claim
+### Candidate structural induction and the measured public closure gap
 
-Arbitrary finite qualified nesting is earned from the recursive algorithm,
-not from a large fixed-depth example. The proof argument is:
+The recursive algorithm supplies the semantic induction step:
 
 1. the base category formers already have rich reifiers;
 2. `Hom_catd` fibre computation exposes an ordinary `Hom_cat` at the current
@@ -474,11 +476,32 @@ not from a large fixed-depth example. The proof argument is:
 5. generic application/hom action consumes the result without new
    pointwise evidence.
 
-Tests must include at least the existing displayed-functor level, the
-`Nested_transfd_telescope_catd` level, one further hom level, and a negative
-unknown head. This graduates only the exact constructor grammar whose heads
-and reductions were transferred. It does not claim arbitrary semantic
-equivalence, arbitrary variance DAGs, or general introduction.
+D-029 now tests the displayed-functor level, the
+`Nested_transfd_telescope_catd` level, one further hom action, and a negative
+unknown head. A post-implementation audit nevertheless found one small but
+real end-user/API closure gap: `CoreCategoricalProgram` exposes specialized
+category constructors such as `displayedTransforCategory` and the generic
+`hom` arrow assumption, but it does not expose the already-existing generic
+`Hom_cat C x y` category constructor. Consequently the generic engines can
+recurse through iterated homs, while a direct TypeScript user cannot yet
+construct an arbitrary finite parallel-cell tower without leaving the
+reviewed program API or relying on a specialized category facade.
+
+This is not missing mathematics, variance evidence, a checker case, or a
+kernel owner. The backend-neutral Core already has `hom-category`,
+`coreTypeObjectCategory` recursively forms the category of every hom object,
+and generic whole-Hom functor application already supplies the action step.
+The remaining graduation prerequisite is therefore a small surface closure:
+expose `homCategory(C,x,y)` with the same endpoint validation as `hom`, and
+stress a parameterized tower rooted in the recovered `Transfd_cat` object and
+its existing internal action. Once that closes, arbitrary finite *qualified*
+nesting follows by structural recursion in the implementation, rather than
+by extrapolating from one specialized next-hom call.
+
+The eventual graduation remains restricted to the exact constructor grammar
+whose heads and reductions were transferred. It does not claim arbitrary
+semantic equivalence, arbitrary variance DAGs, general `:^nd` introduction,
+pullback-hidden classifiers, or mixed curry.
 
 ## Work Ledger
 
@@ -487,8 +510,9 @@ equivalence, arbitrary variance DAGs, or general introduction.
 | `RECURSIVE-MIXED-REFLECT-0A` | complete in plan checkpoint `6828225` | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
 | `RECURSIVE-MIXED-REFLECT-1A` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
-| `RECURSIVE-MIXED-GRADUATE-1C` | dependency-ready for a separate exact proposal | green `TRANSFD-1B` plus completed next-hom evidence | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. This row must decide whether the current representative and recursive algorithm suffice or whether one additional constructed iteration is required; it does not silently promote text/browser syntax. |
-| `TEXT-PARITY-RECURSIVE-MIXED-1D` | deferred until semantic graduation | `GRADUATE-1C` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
+| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | exact proposal frozen below under D-DTTLF-USABILITY-030; awaiting separate review | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | Expose the already-owned generic Hom category through the direct program API and use one parameterized TypeScript loop to construct/check a finite parallel-cell and action tower rooted at recovered `Transfd_cat`. No new Core/kernel semantics. |
+| `RECURSIVE-MIXED-GRADUATE-1D` | pending green `HOM-CLOSURE-1C` | recursive normalization/reification plus parameterized public Hom/action closure | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. It does not silently promote text/browser syntax. |
+| `TEXT-PARITY-RECURSIVE-MIXED-1E` | deferred until semantic graduation | `GRADUATE-1D` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
 | `CURRY-PACKAGE-0A` | deferred independent audit | measured higher-action or mixed-introduction consumer | Audit ordinary curry/uncurry computation and adjunction coherence; do not infer primitive asymmetry from style. |
 | `MIXED-CURRY-1` | deferred mathematical/kernel work | recursive nesting graduation and two-sided context design | Lambdapi-first explicit mixed curry functor with object/base-arrow/higher action and laws. Separate owner-position proposal required. |
@@ -540,6 +564,55 @@ checkpointed separately and receives no immediate human supersession, a
 separate review may record exact D-DTTLF-USABILITY-029 approval and begin
 implementation. Human correction always supersedes that review.
 
+## Frozen Second Gate
+
+### H-DTTLF-USABILITY-RECURSIVE-HOM-CLOSURE-01 /
+### D-DTTLF-USABILITY-030
+
+Approve the following bounded TypeScript-only public closure and stress test:
+
+1. Add `CoreCategoricalProgram.homCategory(C, x, y)`, implemented solely with
+   the existing backend-neutral `hom-category` Core owner.
+2. Validate both endpoints through the existing recursive
+   `coreTypeObjectCategory`/`coreObjectCategoryEquals` path, rejecting open
+   indexed endpoints and wrong-category endpoints at the supplied source.
+   Factor or reuse the current `hom` endpoint check where doing so keeps one
+   clear implementation; do not add a second checker.
+3. Extend the D-029 fixture with a parameterized finite tower rooted at the
+   recovered `Nested_transfd_telescope_catd` result. At every iteration:
+   form the current Hom category, declare two parallel cells with `hom`, form
+   the generic whole-Hom action from the current internally owned functor,
+   apply that action to a cell, and feed the resulting functor/category into
+   the next iteration.
+4. Exercise at least four iterations in one shared program and compile the
+   final cell image. Assert recursive `hom` classification, stable source
+   categories, ordinary generic action, and absence of a new special
+   higher-cell node/checker.
+5. Add focused wrong-endpoint and cross-program negatives for the new public
+   category constructor.
+6. If this bounded closure is green, prepare—but do not silently broaden—the
+   exact `RECURSIVE-MIXED-GRADUATE-1D` structural-induction decision.
+
+The gate explicitly has these non-effects:
+
+- no Lambdapi source, owner, definition, rewrite, or `unif_rule` change;
+- no transfer declaration or runtime/proof-rule inventory change;
+- no new LF, category, Hom, cell, functor-action, variance, or coherence
+  semantics;
+- no special fixed-depth AST node, switch branch, checker, evaluator, or
+  hard-coded four-level implementation—the depth belongs only to the test;
+- no general `:^nd` binder introduction, arbitrary mixed-variance DAG,
+  pullback-hidden-classifier inference, or external naturality evidence;
+- no curry/uncurry, `Product_catd`, terminal-unitor, or kernel redesign;
+- no string parser, text parity, browser/public-profile, book, or release
+  promotion; and
+- no bulk transfer, push, merge, publication, cleanup, or destructive Git
+  operation.
+
+This proposal is independently checkpointable. Under the standing unattended
+delegation, if no immediate human correction supersedes it, a separate review
+may record exact D-DTTLF-USABILITY-030 approval and implement only this gate.
+
 ## Validation And Checkpoint Policy
 
 For the plan-only checkpoint:
@@ -558,6 +631,17 @@ For `REFLECT-1A`/`TRANSFD-1B`:
 - carry forward the unchanged bounded Lambdapi authority evidence rather than
   rerunning `check:all`; and
 - stage only the coherent implementation, tests, and synchronized plan.
+
+For `HOM-CLOSURE-1C`, run only the new focused closure/negative tests plus
+root typecheck and lint during implementation. Because the public program API
+changes, one `check:ts` is normally required at its coherent checkpoint;
+however, the immediately preceding D-029 aggregate already measured two
+unchanged public-document baseline failures. Do not launch another long
+aggregate merely to reproduce those failures. First compare the exact source
+delta and use the nearest categorical program/mixed tests. A later aggregate
+is warranted only if the implementation changes shared behavior beyond the
+new constructor or if the stale release contract has independently been
+repaired.
 
 ### Measured D-029 implementation evidence (2026-07-31)
 
@@ -717,3 +801,15 @@ authority conflict, or an operation outside the stated Git boundary.
   affected tests passed. The owning files are unchanged by D-029 and targeted
   reruns reproduce the drift. It is not silently fixed, and no second long
   aggregate is warranted for this tranche.
+- **2026-07-31 — post-D-029 graduation audit found one public closure gap.**
+  Generic Core, recursive object categories, and whole-Hom action already
+  support iterated homs, but `CoreCategoricalProgram` exposes no general
+  `homCategory(C,x,y)` constructor. The specialized next-hom witness therefore
+  does not yet establish arbitrary finite construction through the reviewed
+  end-user TypeScript API.
+- **2026-07-31 — D-DTTLF-USABILITY-030 frozen.** The bounded correction adds
+  only the public facade for the existing backend-neutral `hom-category` and
+  a parameterized mixed-root action tower. It adds no mathematical owner,
+  runtime/proof rule, external coherence evidence, fixed-depth semantics,
+  text syntax, or curry/product work. Separate review is pending under the
+  standing unattended delegation.
