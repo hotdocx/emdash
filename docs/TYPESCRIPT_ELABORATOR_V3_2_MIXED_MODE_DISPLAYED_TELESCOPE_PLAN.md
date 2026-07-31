@@ -14,7 +14,8 @@ complete and focused-green at checkpoint
 and focused-green at its frozen construction-only recursive factorization
 boundary at checkpoint
 `1142f723dc41ac336f420429af47d77e21c06fd4`; the next dependency-ready slice
-is `MIXED-NEST-ACTION-1B`
+is the frozen existing-conversion result-classifier refinement
+`MIXED-NEST-ACTION-1B`
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -390,7 +391,7 @@ Also outside the first tranche:
 | `MIXED-NEST-ACTION-0B` | complete and focused-green at checkpoint `a31b8927910d32613c7d0fac1862317b08dbf920` | complete `MIXED-CURRY-0A`; green displayed-ND foundation | Nine existing declarations and twelve exact source computations/projections close the dependency path for the direct `homd_int -> homd_src_func -> homd_src_sec -> homd_tgt_func -> homd_` cascade. Two rich typed consumers expose `homd_int(FF)` and its terminal `homd_(FF,x,u,y,v)` family. Zero Lambdapi, intrinsic-owner, checker-branch, external-coherence, proof-fallback, nested-lowering, text, or browser delta. |
 | `MIXED-NEST-IR-0C` | exact proposal frozen; delegated implementation approval recorded with human supersession | green `MIXED-NEST-ACTION-0B` and measured existing outer eta | Add one construction-only nested displayed-abstraction node and one construction-only nested application node. Recognize only an indexed object of the canonical `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` family, invoke the inner callback once, accept exact eta of that already-coherent object, and factor recursively back to it. Add no Core owner, computation, checker branch, or general curry. |
 | `MIXED-NEST-1A` | complete and focused-green at checkpoint `1142f723dc41ac336f420429af47d77e21c06fd4` | green `MIXED-NEST-IR-0C` proposal | The mixed profile now exposes the first explicit nested `^fd` eta through construction-only recursive IR. It preserves outer contextual usage, eliminates only the hidden inner base/fibre slots, compiles back to the same coherent subject, and fails closed for arbitrary pointwise bodies or noncanonical classifiers. Zero Core-owner, kernel, checker-rule, external-coherence, text, or browser delta. |
-| `MIXED-NEST-ACTION-1B` | pending | green `MIXED-NEST-1A` | Exercise base-arrow action through the inner mixed classifier and one `homd_int`/next-Hom consumer. Add no constructor-specific generic functoriality/naturality rules. |
+| `MIXED-NEST-ACTION-1B` | exact existing-conversion proposal frozen; delegated implementation approval recorded with human supersession | green `MIXED-NEST-1A` and measured no-edit conversion probes | Refine only the result of ordinary object application whose target category has the exact canonical `Fibre_cat(Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar),y)` shape. Preserve the same Core term, derive `Ebar[y^-]` and `Dbar[y]` internally, and check it as a `Functord_cat` object through existing runtime conversion. Then exercise outer base-arrow transport and pass the refined inner package to `homd_int`. Add no coercion term, cast API, owner, rule, or external evidence. |
 | `DISPLAYED-TELESCOPE-GENERIC-1` | pending | mixed nested action plus current positive compiler | Replace selected presentation arities with a dependency-plan fold over arbitrary finite products/Sigma/pullbacks while retaining explicit classifier-directed result lowering. |
 | `DISPLAYED-MIXED-GRADUATE-1` | pending | generic positive and mixed witnesses | Freeze the exact arbitrary-finite-depth claim, negatives, performance boundary, and conformance evidence. Do not silently graduate unrestricted `^nd`. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
@@ -1120,6 +1121,141 @@ depth, general displayed curry, unrestricted `:^nd`, or consumption of the
 factored package's internal base-arrow/higher action. Those are the measured
 dependencies of `MIXED-NEST-ACTION-1B` and later rows.
 
+## `MIXED-NEST-ACTION-1B` Audit And Frozen Boundary
+
+Two no-edit probes distinguish the already-working outer package from the
+missing nested consumer.
+
+First:
+
+```text
+displayedInternalHom(factored)
+```
+
+already checks. This applies `homd_int` to:
+
+```text
+factored : Functord_cat C H
+```
+
+and therefore consumes the outer displayed functor. It does not prove that
+an object produced inside the mixed family `H` is recognized as the inner
+displayed functor that `H[y]` denotes.
+
+The stronger probe forms:
+
+```text
+p       : Hom K x y
+c       : C[x]
+move    = apply(factored,p) : Functor(C[x],H[y])
+inner   = apply(move,c)     : Obj(H[y])
+```
+
+where:
+
+```text
+H = Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar).
+```
+
+The existing Core checker accepts `move`. It infers `inner` at:
+
+```text
+Obj(Fibre_cat H y).
+```
+
+The active runtime then supplies the exact conversion chain:
+
+```text
+Fibre_cat(Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar),y)
+  -> Hom_cat
+       (Fibre_cat(Const_catd K (Catd_cat Z),y))
+       (Ebar[y^-])
+       (Dbar[y])
+  -> Hom_cat (Catd_cat Z) (Ebar[y^-]) (Dbar[y])
+  -> Functord_cat Z (Ebar[y^-]) (Dbar[y]).
+```
+
+The current surface retains only the generic classifier:
+
+```text
+inner : object(Fibre_cat H y),
+```
+
+so `displayedInternalHom(inner)` rejects early with
+`EXPECTED_DISPLAYED_FUNCTOR`. This is a frontend result-classifier gap, not a
+missing action, curry, or kernel theorem.
+
+A bounded no-edit probe reclassified the same Core term with the derived
+displayed-functor classifier. The existing Core checker accepted the
+definitionally convertible expected type, and `displayedInternalHom` accepted
+the result. No coercion term or new rewrite was needed. Syntactic inferred and
+expected types need not be identical; checked definitional conversion is the
+relevant boundary.
+
+### Exact implementation
+
+`MIXED-NEST-ACTION-1B` may:
+
+- recognize only a `functor-object` result category whose family has the exact
+  canonical mixed shape already recognized by `MIXED-NEST-1A`;
+- require the constant classifier
+  `Const_catd K (Catd_cat Z)`;
+- derive the negative and positive endpoint families by the existing internal
+  section projections `Ebar[y^-]` and `Dbar[y]`;
+- classify the unchanged application term as:
+
+  ```text
+  displayed-functor
+    (base Z)
+    (source Ebar[y^-])
+    (target Dbar[y]);
+  ```
+
+- let the ordinary final Core checker validate the conversion through the
+  existing runtime;
+- expose that refinement automatically from the typed application result,
+  with no user cast or caller-supplied endpoint families;
+- compile one outer base-arrow transport through the factored package; and
+- pass the transported inner result to the existing `homd_int` typed consumer.
+
+It must not:
+
+- add a Core expression, coercion, cast, proof, or mirror;
+- add or change a Lambdapi owner, runtime rule, or unification rule;
+- infer a displayed-functor classifier for an arbitrary object category;
+- normalize and guess arbitrary category heads;
+- accept a noncanonical `Hom_catd`, a constant fibre other than
+  `Catd_cat Z`, or caller-supplied variance/coherence data;
+- reconstruct object or arrow action pointwise;
+- add a new public convenience method, text syntax, or browser behavior; or
+- claim general displayed curry, arbitrary mixed depth, or unrestricted
+  `:^nd`.
+
+Focused evidence must show:
+
+1. the exact nested eta still lowers to the original coherent `nested`;
+2. outer base-arrow application compiles through the existing displayed
+   transport owner;
+3. applying that transport to `c : C[x]` has the internally derived
+   `displayed-functor` classifier over `Z`;
+4. the unchanged Core term checks against the derived `Functord_cat` type by
+   existing conversion;
+5. `displayedInternalHom(inner)` compiles through the existing `homd_int`
+   owner; and
+6. noncanonical target families retain the generic `object` classifier and
+   fail closed at the displayed consumer.
+
+The frozen gate is:
+
+```text
+H-DTTLF-USABILITY-MIXED-NEST-ACTION-01 /
+D-DTTLF-USABILITY-025
+```
+
+This is an existing-authority, no-new-semantics correction. Under the user's
+standing unattended delegation, it may proceed after the proposal checkpoint
+and exact staged review, with human supersession.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -1313,3 +1449,18 @@ authority conflict, or an operation outside the stated Git boundary.
   again reaches only the same two unrelated stale README phrase assertions;
   it is not rerun. The bounded implementation checkpoint is
   `1142f723dc41ac336f420429af47d77e21c06fd4`.
+- **2026-07-31 — `MIXED-NEST-ACTION-1B` gap measured.** Applying the
+  factored nested package over `p : x -> y` and then `c : C[x]` produces the
+  correct Core term at `Obj(Fibre_cat H y)`, but the TypeScript surface keeps
+  only the generic `object` tag. Consequently the existing `homd_int`
+  consumer rejects before Core conversion. A no-coercion probe gave that
+  same term the internally derived
+  `Functord_cat Z Ebar[y^-] Dbar[y]` classifier; the existing checker accepted
+  the definitional conversion and `homd_int` then checked.
+- **2026-07-31 — `MIXED-NEST-ACTION-1B` frozen and delegated approval
+  recorded.** The implementation is limited to automatic classifier
+  refinement for the exact canonical `Fibre_cat(Hom_catd(Const_catd
+  K (Catd_cat Z),Ebar,Dbar),y)` result shape. It preserves the Core term and
+  derives endpoints internally. It adds no cast, owner, rule, external
+  coherence, text, or browser behavior. The user's standing unattended
+  delegation authorizes this bounded implementation with human supersession.
