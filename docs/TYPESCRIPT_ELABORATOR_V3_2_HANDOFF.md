@@ -29,11 +29,12 @@
 > zero-step base case and separates a compact eight-level named-cell check
 > from a two-level action check. D-030/D-031 are now implemented and
 > focused-green at `0180fd8cab2ddfbf4092e4c9a4eff565908c146f`; the separate
-> D-DTTLF-USABILITY-032 structural-graduation proposal is now frozen for
-> separate review. It claims only depth-generic finite named Hom closure over
-> the exact canonical mixed root and transferred grammar, with explicit
-> variance, introduction, parser, and performance nonclaims. Text promotion,
-> evaluator optimization, and mixed curry remain later rows.
+> D-DTTLF-USABILITY-032 structural graduation is now separately
+> reviewed-approved. It claims only depth-generic finite named Hom closure
+> over the exact canonical mixed root and transferred grammar, with explicit
+> variance, introduction, parser, and performance nonclaims. The text-parity
+> audit is now dependency-ready; evaluator optimization and mixed curry remain
+> later rows.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)
