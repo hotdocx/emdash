@@ -33,8 +33,11 @@ delegation at `50c579e2b76252f4cffcb93d2c643ef8155c8288`.
 The `TEXT-PARITY-RECURSIVE-MIXED-1E` audit is now complete and its exact
 mechanical route is frozen below as
 H-DTTLF-USABILITY-TEXT-PARITY-RECURSIVE-MIXED-01 /
-D-DTTLF-USABILITY-033. Approval and implementation remain separate; no
-binder, semantic, browser-preset, or public-promotion change is implied.
+D-DTTLF-USABILITY-033 at proposal checkpoint
+`83cc2c09defadc0f2b5379cfe990c6d1764b1429`. The separate review recorded in
+the decision ledger approves exactly that gate under the standing unattended
+delegation. Implementation is dependency-ready; no binder, semantic,
+browser-preset, or public-promotion change is implied.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -531,7 +534,7 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
 | `RECURSIVE-MIXED-HOM-CLOSURE-1C` | complete at `0180fd8cab2ddfbf4092e4c9a4eff565908c146f` | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | The direct program exposes the existing generic Hom category with one shared endpoint validator. Stable rich heads reify at zero steps; eight compact named levels and two checked mixed-root action levels pass. The 387-second four-action expansion remains a measured performance nonclaim. |
 | `RECURSIVE-MIXED-GRADUATE-1D` | complete at `50c579e2b76252f4cffcb93d2c643ef8155c8288` under D-DTTLF-USABILITY-032 | green `HOM-CLOSURE-1C`; recursive normalization/reification and public Hom/action closure | Depth-generic finite named Hom nesting over the exact canonical mixed root/transferred grammar, plus generic internal action recursion, is graduated as an architecture claim. Variance, introduction, parser, metatheory, and performance nonclaims remain. |
-| `TEXT-PARITY-RECURSIVE-MIXED-1E` | audit complete; exact proposal frozen under D-DTTLF-USABILITY-033; decision pending | approved `GRADUATE-1D`; existing typed-resolver parity audit | Add only the recursive category-position spelling `hom C x y` as a direct route to the existing checked `homCategory(C,x,y)` method. Reuse the one located application tree and recursive category resolver; do not broaden binders, factorization, or semantic claims. |
+| `TEXT-PARITY-RECURSIVE-MIXED-1E` | exact D-DTTLF-USABILITY-033 reviewed-approved; implementation dependency-ready | approved `GRADUATE-1D`; existing typed-resolver parity audit | Add only the recursive category-position spelling `hom C x y` as a direct route to the existing checked `homCategory(C,x,y)` method. Reuse the one located application tree and recursive category resolver; do not broaden binders, factorization, or semantic claims. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
 | `CURRY-PACKAGE-0A` | deferred independent audit | measured higher-action or mixed-introduction consumer | Audit ordinary curry/uncurry computation and adjunction coherence; do not infer primitive asymmetry from style. |
 | `MIXED-CURRY-1` | deferred mathematical/kernel work | recursive nesting graduation and two-sided context design | Lambdapi-first explicit mixed curry functor with object/base-arrow/higher action and laws. Separate owner-position proposal required. |
@@ -888,11 +891,12 @@ presentation assertions. This one deterministic adapter branch does not
 warrant repeating that long aggregate, browser build, `check:all`, or kernel
 oracle unless focused evidence reveals a boundary change beyond this gate.
 
-This proposal is independently checkpointable and non-self-authorizing.
-Under the standing unattended delegation, if no immediate human correction
-supersedes its checkpoint, a separate review may approve exactly
-D-DTTLF-USABILITY-033 and only then begin implementation. Human correction
-always supersedes that review.
+This proposal was independently checkpointed at
+`83cc2c09defadc0f2b5379cfe990c6d1764b1429`. No immediate human correction
+superseded it. The separate review recorded in the decision ledger therefore
+approves exactly D-DTTLF-USABILITY-033 under the standing unattended
+delegation, with human supersession. Implementation may now begin within this
+gate.
 
 ## Validation And Checkpoint Policy
 
@@ -1213,5 +1217,12 @@ authority conflict, or an operation outside the stated Git boundary.
   architecture. The only missing route is exact `hom C x y` dispatch to the
   now-public checked `homCategory(C,x,y)` method. The proposal retains all
   binder, factorization, semantic, browser/publication, kernel, and remote-Git
-  non-effects and awaits a separate standing-delegation review with human
-  supersession.
+  non-effects. Its exact proposal checkpoint is
+  `83cc2c09defadc0f2b5379cfe990c6d1764b1429`.
+- **2026-07-31 — D-DTTLF-USABILITY-033 approved exactly as proposed.** No
+  immediate human correction superseded the isolated proposal, so the
+  standing unattended delegation records a separate review with human
+  supersession. It authorizes only the `hom C x y` typed-resolver route,
+  adapter revision synchronization, focused direct/text recursive evidence,
+  and listed negatives. It grants no binder, semantic, kernel, browser/public,
+  remote-Git, or cleanup authority.

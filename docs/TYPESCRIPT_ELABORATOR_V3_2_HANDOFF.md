@@ -37,9 +37,11 @@
 > is now complete. It finds exactly one mechanical route: add `hom C x y` to
 > the existing recursive category resolver as a direct call to the checked
 > `homCategory(C,x,y)` method. The exact non-self-authorizing proposal is
-> frozen as D-DTTLF-USABILITY-033 in the successor plan; binder semantics,
-> browser/public promotion, evaluator optimization, and mixed curry remain
-> outside that gate.
+> frozen at `83cc2c09defadc0f2b5379cfe990c6d1764b1429` and separately
+> reviewed-approved as D-DTTLF-USABILITY-033 under the standing unattended
+> delegation. Its bounded implementation is dependency-ready; binder
+> semantics, browser/public promotion, evaluator optimization, and mixed
+> curry remain outside that gate.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)
