@@ -33,8 +33,13 @@
 > reviewed-approved at `50c579e2b76252f4cffcb93d2c643ef8155c8288`. It
 > claims only depth-generic finite named Hom closure over the exact canonical
 > mixed root and transferred grammar, with explicit variance, introduction,
-> parser, and performance nonclaims. The text-parity audit is now
-> dependency-ready; evaluator optimization and mixed curry remain later rows.
+> parser, and performance nonclaims. The dependency-ready text-parity audit
+> is now complete. It finds exactly one mechanical route: add `hom C x y` to
+> the existing recursive category resolver as a direct call to the checked
+> `homCategory(C,x,y)` method. The exact non-self-authorizing proposal is
+> frozen as D-DTTLF-USABILITY-033 in the successor plan; binder semantics,
+> browser/public promotion, evaluator optimization, and mixed curry remain
+> outside that gate.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)
