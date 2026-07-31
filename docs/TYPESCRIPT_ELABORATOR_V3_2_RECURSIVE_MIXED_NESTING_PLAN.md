@@ -2,13 +2,14 @@
 
 Date: 2026-07-31
 
-Status: proposed living successor; the architecture and first bounded
+Status: approved living successor; the architecture and first bounded
 implementation gate are frozen below under
 H-DTTLF-USABILITY-RECURSIVE-MIXED-NESTING-01 /
-D-DTTLF-USABILITY-029. The user approved the consolidated direction and
-asked that implementation continue. A separate approval/review checkpoint
-must still preserve the exact gate and its non-effects before behavior is
-changed.
+D-DTTLF-USABILITY-029. The proposal-only checkpoint is `6828225`. The user
+approved the consolidated direction, asked that implementation continue, and
+has granted a standing unattended approval delegation with human
+supersession. The separate review recorded below approves exactly D-029 and
+its non-effects; implementation is dependency-ready.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -479,8 +480,8 @@ equivalence, arbitrary variance DAGs, or general introduction.
 | Row | Status | Dependencies | Exact scope |
 | --- | --- | --- | --- |
 | `RECURSIVE-MIXED-REFLECT-0A` | architecture frozen in this plan | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
-| `RECURSIVE-MIXED-REFLECT-1A` | proposed under D-DTTLF-USABILITY-029 | approved `REFLECT-0A` | Pass the existing environment/composed runtime into the mixed scoped builder; weak-head normalize category-object targets; reify exact canonical `Functord_cat` and `Transfd_cat` views recursively; retain generic views and final checking. No kernel/transfer/proof-rule delta. |
-| `RECURSIVE-MIXED-TRANSFD-1B` | proposed as the first consumer in the same bounded tranche | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Add direct TypeScript evidence for object projection, internal outer arrow action, rich displayed-transfor endpoints, component/`tdapp*`, and one next-hom/further-hom consumer. |
+| `RECURSIVE-MIXED-REFLECT-1A` | approved under D-DTTLF-USABILITY-029; implementation dependency-ready | approved `REFLECT-0A` | Pass the existing environment/composed runtime into the mixed scoped builder; weak-head normalize category-object targets; reify exact canonical `Functord_cat` and `Transfd_cat` views recursively; retain generic views and final checking. No kernel/transfer/proof-rule delta. |
+| `RECURSIVE-MIXED-TRANSFD-1B` | approved as the first consumer in the same bounded tranche | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Add direct TypeScript evidence for object projection, internal outer arrow action, rich displayed-transfor endpoints, component/`tdapp*`, and one next-hom/further-hom consumer. |
 | `RECURSIVE-MIXED-GRADUATE-1C` | pending evidence | green `TRANSFD-1B` plus a further iterated hom | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1D` | deferred until semantic graduation | `GRADUATE-1C` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
@@ -645,3 +646,10 @@ authority conflict, or an operation outside the stated Git boundary.
   gate is the TypeScript-only runtime-backed reifier plus
   `Nested_transfd_telescope_catd` consumer above. It is non-self-authorizing
   until separately reviewed/checkpointed under the standing delegation.
+- **2026-07-31 — D-DTTLF-USABILITY-029 approved exactly as proposed.** The
+  proposal-only plan was independently checkpointed at `6828225`. The user's
+  explicit direction to continue plus standing unattended delegation records
+  a separate approval with human supersession. This authorizes only
+  `RECURSIVE-MIXED-REFLECT-1A` and its first
+  `RECURSIVE-MIXED-TRANSFD-1B` consumer, preserving every frozen non-effect;
+  it adds no remote Git or kernel authority.
