@@ -20,8 +20,10 @@ the decision ledger approves exactly that gate under the standing unattended
 delegation. `RECURSIVE-MIXED-HOM-CLOSURE-1C` is dependency-ready, not an
 implicit broadening of the implemented profile. Initial implementation
 measurement exposed a bounded-normalization and routine-test performance
-correction now frozen separately as D-DTTLF-USABILITY-031; no graduation
-claim is made before that correction is reviewed and green.
+correction frozen separately as D-DTTLF-USABILITY-031 at
+`54c73a60d441b610e466aaba33ccd99e127f4192`. The decision ledger records its
+separate standing-delegation approval; no graduation claim is made before the
+correction is green.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -516,7 +518,7 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-REFLECT-0A` | complete in plan checkpoint `6828225` | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
 | `RECURSIVE-MIXED-REFLECT-1A` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
-| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | D-030 implementation measured; correction D-031 frozen below and awaiting separate review | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | Expose the already-owned generic Hom category through the direct program API. The initial four-level inlined-action test compiled before a counting assertion but took 387 seconds and expanded to 56 generic whole-Hom occurrences; D-031 separates compact arbitrary Hom formation from the known higher-action performance boundary. |
+| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | D-030 implementation measured; correction D-031 separately approved and implementation in progress | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | Expose the already-owned generic Hom category through the direct program API. The initial four-level inlined-action test compiled before a counting assertion but took 387 seconds and expanded to 56 generic whole-Hom occurrences; D-031 separates compact arbitrary Hom formation from the known higher-action performance boundary. |
 | `RECURSIVE-MIXED-GRADUATE-1D` | pending green `HOM-CLOSURE-1C` | recursive normalization/reification plus parameterized public Hom/action closure | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. It does not silently promote text/browser syntax. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1E` | deferred until semantic graduation | `GRADUATE-1D` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
@@ -899,3 +901,10 @@ authority conflict, or an operation outside the stated Git boundary.
   levels, and records deeper action expansion as a performance nonclaim. It
   adds no rule, budget, special higher checker, parser route, or mathematical
   claim. Separate review is pending under the standing delegation.
+- **2026-07-31 — D-DTTLF-USABILITY-031 approved exactly as proposed.** The
+  proposal-only checkpoint is
+  `54c73a60d441b610e466aaba33ccd99e127f4192`. No immediate human correction
+  superseded it, so the standing unattended delegation records a separate
+  approval with human supersession. Only the zero-step stable-head base case,
+  compact eight-level tower, two-level checked action witness, parity-audit
+  classification, and recorded performance nonclaim are authorized.

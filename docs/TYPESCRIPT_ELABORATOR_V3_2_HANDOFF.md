@@ -25,10 +25,10 @@
 > `Hom_cat C x y` category constructor. Structural graduation follows that
 > bounded closure. Initial implementation also measured a false reifier-budget
 > dependency and real inlined higher-action expansion; the separately frozen
-> D-DTTLF-USABILITY-031 correction makes stable Hom heads a zero-step base
-> case and separates a compact eight-level named-cell check from a two-level
-> action check. Text promotion, evaluator optimization, and mixed curry remain
-> later rows.
+> reviewed-approved D-DTTLF-USABILITY-031 correction makes stable Hom heads a
+> zero-step base case and separates a compact eight-level named-cell check
+> from a two-level action check. Text promotion, evaluator optimization, and
+> mixed curry remain later rows.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)
