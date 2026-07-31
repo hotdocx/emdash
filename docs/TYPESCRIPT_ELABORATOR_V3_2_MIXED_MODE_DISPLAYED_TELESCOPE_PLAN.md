@@ -20,7 +20,9 @@ existing-conversion result-classifier boundary at checkpoint
 `DISPLAYED-TELESCOPE-GENERIC-1` has completed its no-edit architecture audit
 and its exact finite canonical-layer fold is frozen under
 H-DTTLF-USABILITY-DISPLAYED-TELESCOPE-GENERIC-01 /
-D-DTTLF-USABILITY-026
+D-DTTLF-USABILITY-026; the implementation is focused-green at checkpoint
+`6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa`; the next dependency-ready row is
+`DISPLAYED-MIXED-GRADUATE-1`
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -397,7 +399,7 @@ Also outside the first tranche:
 | `MIXED-NEST-IR-0C` | exact proposal frozen; delegated implementation approval recorded with human supersession | green `MIXED-NEST-ACTION-0B` and measured existing outer eta | Add one construction-only nested displayed-abstraction node and one construction-only nested application node. Recognize only an indexed object of the canonical `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` family, invoke the inner callback once, accept exact eta of that already-coherent object, and factor recursively back to it. Add no Core owner, computation, checker branch, or general curry. |
 | `MIXED-NEST-1A` | complete and focused-green at checkpoint `1142f723dc41ac336f420429af47d77e21c06fd4` | green `MIXED-NEST-IR-0C` proposal | The mixed profile now exposes the first explicit nested `^fd` eta through construction-only recursive IR. It preserves outer contextual usage, eliminates only the hidden inner base/fibre slots, compiles back to the same coherent subject, and fails closed for arbitrary pointwise bodies or noncanonical classifiers. Zero Core-owner, kernel, checker-rule, external-coherence, text, or browser delta. |
 | `MIXED-NEST-ACTION-1B` | complete and focused-green at checkpoint `b76baaf75ea332b977d403b6e11c975972466a45` | green `MIXED-NEST-1A` and measured no-edit conversion probes | Ordinary object application now refines only the exact canonical `Fibre_cat(Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar),y)` target. It preserves the same Core term, derives `Ebar[y^-]` and `Dbar[y]` internally, and checks it as a `Functord_cat` object through existing runtime conversion. Outer base-arrow transport and direct base-object evaluation both feed the refined inner package to `homd_int`. Zero coercion, cast API, owner, rule, or external-evidence delta. |
-| `DISPLAYED-TELESCOPE-GENERIC-1` | exact proposal frozen under D-DTTLF-USABILITY-026; implementation pending | mixed nested action plus current positive compiler | Replace selected presentation arities in the mixed successor profile with a dependency-plan fold over arbitrary finite canonical sibling layers and Sigma transitions. Reuse the existing displayed product/projection and one-level lifting machinery, retain classifier-directed mixed result lowering, and preserve predecessor profiles exactly. |
+| `DISPLAYED-TELESCOPE-GENERIC-1` | complete and focused-green at checkpoint `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa` | mixed nested action plus current positive compiler | The mixed successor now derives arbitrary finite canonical sibling layers from literal family bases, validates their exact dependency plan, and folds existing product/projection and one-level Sigma/pullback lifting machinery. The four-layer `[A]; [B,C]; [D]; [E,F]` witness checks early/middle/final occurrences, pairing, an internal base-arrow cell, nested mixed factorization, and `homd_int`; predecessor profiles and their two/four-binding explicit Core remain exact. |
 | `DISPLAYED-MIXED-GRADUATE-1` | pending | generic positive and mixed witnesses | Freeze the exact arbitrary-finite-depth claim, negatives, performance boundary, and conformance evidence. Do not silently graduate unrestricted `^nd`. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
 | `TEXT-PARITY-MIXED-1` | pending | semantic graduation | Bring the text adapter to parity with the graduated mathematical API and fail closed outside it. |
@@ -1570,6 +1572,133 @@ approved arbitrary-finite/mixed continuation. Under the user's standing
 unattended delegation, it may proceed after the proposal checkpoint and
 exact staged review, with human supersession.
 
+## `DISPLAYED-TELESCOPE-GENERIC-1` Implementation Result
+
+The D-026 fold is implemented in the existing
+`fibred-displayed-mixed-nest-1` profile. The public API remains
+`displayedDependentContextLambda`; no second telescope constructor or caller
+layer annotations were added.
+
+The program now:
+
+1. checks family ownership and duplicate names;
+2. partitions the flat source-ordered bindings into consecutive literal-base
+   sibling layers;
+3. requires every base transition to be the Sigma total of the previous
+   layer's left-associated product;
+4. requires the target at the final layer base;
+5. constructs locally nameless root/prior-layer dependency evidence;
+6. submits every non-singleton layer as an independent sibling group; and
+7. rejects the presentation unless the generic dependency planner returns the
+   exact edge, chain, and sibling-group partition.
+
+The scoped builder receives those same literal bases and independently
+rechecks the canonical layer partition. For every binding it obtains the
+factor projection from its own layer product and repeatedly applies the
+existing one-level lifting helper through all later layer products. The
+callback then sees all bindings as indexed objects at the final base with
+their fully lifted families. The existing recursive contextual compiler
+lowers the body from the final layer product to the target.
+
+The new normalized evidence rule is:
+
+```text
+categorical.displayed-generic-dependent-context-bracket
+```
+
+It records arbitrary arrays of layer bases, sibling names, original families,
+layer products, fully lifted binding families, and the locally nameless body.
+The callback executes exactly once and the complete evidence tree is deeply
+frozen.
+
+The executable stress telescope is:
+
+```text
+[A]; [B,C]; [D]; [E,F].
+```
+
+It demonstrates:
+
+- early `a`, middle `d`, and final `e,f` occurrences;
+- recursive final-layer pairing;
+- an internally checked base-arrow cell from the early projection;
+- a final canonical
+  `Hom_catd(Const_catd(Sigma(D),Catd_cat Z),Ebar,Dbar)` target;
+- nested `^fd` eta inside that target; and
+- outer base-arrow transport whose derived inner displayed functor is
+  consumed by the existing `homd_int`.
+
+The generic two-binding and four-binding routes serialize to the same lowered
+explicit Core as the completed DISPLAYED-CHAIN-1A and DISPLAYED-CHAIN-2A
+routes. Those predecessor profiles still take their old paths and still
+reject the six-binding presentation.
+
+Negative evidence rejects:
+
+- a next family not based on the preceding layer total;
+- a target at the wrong base;
+- duplicate names;
+- using the dependent constructor for one sibling layer; and
+- predecessor-profile arity overreach.
+
+Measured semantic deltas are:
+
+- zero Lambdapi declarations, definitions, runtime rules, unification rules,
+  or warning interactions;
+- zero explicit Core owners or expression forms;
+- zero checker, evaluator, transfer, proof, coercion, or external-oracle
+  branches;
+- zero public program methods, text syntax, or browser behavior; and
+- one generic dependency-plan/lowering path plus its finite-layer evidence
+  shape.
+
+Validation is:
+
+- the dedicated generic suite passes 6/6;
+- the two predecessor and two mixed nested/action suites pass 22/22;
+- root typechecking, targeted lint, full lint, workspace validation, and
+  `git diff --check` pass;
+- the bounded active Lambdapi check passes with no source change; and
+- the one required `check:ts` reaches 1,256 tests: 1,201 pass, 51 are
+  intentionally skipped, and four unrelated frozen-document/inventory
+  assertions fail.
+
+The four aggregate failures are exact baseline drift outside D-026:
+
+1. the unchanged text-graduation audit still asserts that its unchanged
+   parity inventory contains 68 methods, while that committed inventory now
+   contains 78;
+2. the unchanged migration-readiness test's broad retired-API regex matches
+   current standalone reviewer fixture prose/source;
+3. the unchanged release-policy test expects the retired
+   `emdash-v3.2-mvp-1` README phrase; and
+4. the unchanged release-completion test expects the retired
+   `release-ready exact profile` README phrase.
+
+The parity-audit source and all three publication/fixture boundaries are
+unchanged from the D-026 baseline. The hour-long aggregate is not rerun.
+
+The focused generic suite reports about 62.5 seconds of test-body work and
+about 216.7 seconds wall time including two isolated profile constructions.
+The complete buffered `check:ts` run reports about 3,693 seconds. This is a
+measured validation-runner/performance boundary, not a semantic failure.
+Further runner parallelism/caching remains in the existing deferred
+test-parallelism plan; it is not folded into this usability tranche.
+
+The exact implementation checkpoint is:
+
+```text
+6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa
+```
+
+This completes arbitrary finite depth and finite sibling width for the
+canonical positive layer normal form, including one canonical mixed target
+at the final layer. It still does not graduate arbitrary dependency DAGs
+without explicit weakening, arbitrary variance transitions, mixed
+classifiers hidden behind pullbacks/equivalences, a general enriched curry,
+or unrestricted `:^nd`. `DISPLAYED-MIXED-GRADUATE-1` is now the next
+dependency-ready row.
+
 ## Git And Approval Boundary
 
 Work in the existing dedicated
@@ -1808,3 +1937,15 @@ authority conflict, or an operation outside the stated Git boundary.
   kernel, checker, and transfer deltas remain outside the slice. The user's
   standing unattended delegation authorizes this bounded implementation
   after the proposal checkpoint, with human supersession.
+- **2026-07-31 — `DISPLAYED-TELESCOPE-GENERIC-1` implemented and
+  focused-green.** The mixed successor derives arbitrary finite canonical
+  sibling layers, validates their exact locally nameless dependency plan,
+  and repeatedly lifts existing layer projections through later Sigma
+  products. The four-layer/two-sibling-block witness compiles ordinary
+  occurrences, pairing, an internal base-arrow cell, nested mixed eta, and
+  `homd_int`. The dedicated suite passes 6/6 and the nearest predecessor and
+  mixed suites pass 22/22. Typechecking and lint pass. The one required
+  aggregate reaches 1,201 passes and only four unrelated committed
+  inventory/publication assertions; it is not rerun. The exact
+  implementation checkpoint is
+  `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa`.

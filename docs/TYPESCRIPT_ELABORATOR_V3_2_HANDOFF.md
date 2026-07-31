@@ -2,25 +2,24 @@
 
 > **Current semantic continuation (2026-07-31):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)
-> now owns the dependency-ready work. The completed displayed-bracket work
-> proved a bounded positive context envelope, but arbitrary finite depth
-> cannot be graduated independently of `Op_cat`/`Op_catd`,
-> `Functor_catd`, `Hom_catd`, `Transf_catd`, and internal `homd_int`
-> action. Follow the successor plan's dependency ledger; do not resume the
-> deferred bulk scale ledger or merely remove presentation arity checks.
+> owns the dependency-ready work. The completed displayed-bracket work
+> proved the bounded positive context envelope; the successor has now
+> qualified the canonical `Functor_catd`/`Hom_catd`/`Transf_catd` classifier,
+> recursive nested eta, internally derived `homd_int` consumption, and an
+> arbitrary finite canonical sibling-layer/Sigma fold. Follow that plan's
+> dependency ledger; do not resume the deferred bulk scale ledger or broaden
+> the finite layer normal form into unrestricted variance/coherence.
 >
-> `MIXED-NEST-0A` is complete and focused-green at
-> `77f79bf8e139d856965f41733d3aeff9ffefd9d1`: two existing opaque mixed-family
-> signatures and four existing runtime rules compile through the generic
-> engines; the isolated root profile constructs/checks the canonical nested
-> `Functord_cat`/`Hom_catd` classifier and observes the
-> `Hom_catd(Functor_catd(...)) -> Transf_catd(...)` fold. This qualifies the
-> classifier only. The subsequent `MIXED-NEST-1A0` audit established that the
-> canonical inner term needs a displayed-curry/introduction operation not
-> supplied by the ordinary abstraction node or current closed-endpoint
-> displayed lambda. `MIXED-CURRY-0A`, a no-active-edit design/owner-position
-> probe, is next; do not add a TypeScript shortcut or infer authority for a
-> new kernel owner.
+> `DISPLAYED-TELESCOPE-GENERIC-1` is focused-green at
+> `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa`. The mixed successor infers
+> layers from literal family bases, validates the exact dependency graph, and
+> repeatedly lifts existing product projections through later Sigma
+> contexts. Its four-layer witness includes two sibling blocks, an
+> internalized base-arrow cell, a canonical mixed final target, and
+> `homd_int`; the completed two/four-binding explicit Core remains unchanged.
+> `DISPLAYED-MIXED-GRADUATE-1` is next. A general enriched curry remains a
+> mathematically plausible but separately unqualified extension, not a
+> dependency of the implemented finite fold.
 
 Date: 2026-07-28
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;
