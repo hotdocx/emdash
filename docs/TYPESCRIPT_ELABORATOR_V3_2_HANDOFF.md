@@ -28,10 +28,10 @@
 > typed eta contract. Its deep text witness agrees with direct TypeScript
 > Core/type/evidence, transports along an internally owned base arrow, and
 > reaches `homd_int`; the complete new negative partition fails closed. The
-> local implementation checkpoint is pending final staged review. A general
-> enriched curry remains a mathematically plausible but separately
-> unqualified extension, not a dependency of the implemented finite fold or
-> its text parity.
+> exact local implementation checkpoint is
+> `cf05f79e7e6149add04567c217a4417b95cb93e0`. A general enriched curry
+> remains a mathematically plausible but separately unqualified extension,
+> not a dependency of the implemented finite fold or its text parity.
 
 Date: 2026-07-28
 Status: the exact `emdash-v3.2-mvp-1` TypeScript runtime profile is graduated;

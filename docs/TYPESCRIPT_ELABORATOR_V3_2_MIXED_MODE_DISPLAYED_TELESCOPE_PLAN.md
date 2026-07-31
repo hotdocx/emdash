@@ -32,8 +32,8 @@ proposal is frozen under H-DTTLF-USABILITY-TEXT-PARITY-MIXED-01 /
 D-DTTLF-USABILITY-028 and approved as proposed through the standing
 unattended delegation after proposal checkpoint
 `9368c6eae4f46f12e5d5f5bffdebb370c032f5f8`; implementation is complete and
-focused-green at the exact frozen boundary, with its local implementation
-checkpoint pending ledger synchronization
+focused-green at the exact frozen boundary at checkpoint
+`cf05f79e7e6149add04567c217a4417b95cb93e0`
 
 This is the dedicated successor to the completed bounded work recorded in
 [`TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_DISPLAYED_BRACKET_PLAN.md).
@@ -413,7 +413,7 @@ Also outside the first tranche:
 | `DISPLAYED-TELESCOPE-GENERIC-1` | complete and focused-green at checkpoint `6fa6f2ebdafe8f4bc8e80136a4aadcd3e9ae43fa` | mixed nested action plus current positive compiler | The mixed successor now derives arbitrary finite canonical sibling layers from literal family bases, validates their exact dependency plan, and folds existing product/projection and one-level Sigma/pullback lifting machinery. The four-layer `[A]; [B,C]; [D]; [E,F]` witness checks early/middle/final occurrences, pairing, an internal base-arrow cell, nested mixed factorization, and `homd_int`; predecessor profiles and their two/four-binding explicit Core remain exact. |
 | `DISPLAYED-MIXED-GRADUATE-1` | complete; D-DTTLF-USABILITY-027 approved as proposed after checkpoint `ddc78c250970f62c09d822a39a16502f41c75db1` | generic positive and mixed witnesses | Graduates arbitrary finite depth/width only for the canonical positive sibling-layer/Sigma normal form, together with the exact final canonical mixed classifier, nested eta, internal base-arrow cell, and `homd_int` consumer. Retains explicit performance, general-curry, arbitrary-variance, pullback-hidden-classifier, arbitrary-DAG, and unrestricted-`:^nd` non-claims. |
 | `MIXED-CONST-FOLD-0B` | deferred; not on the usability critical path | a concrete consumer or generic proof-conversion qualification | Transfer the active constant-`Cat` Hom fold only through a generic proof-aware nested conversion path. Do not add mirrors, coercions, owner-specific checker logic, or an external oracle. |
-| `TEXT-PARITY-MIXED-1` | complete and focused-green under D-DTTLF-USABILITY-028; implementation checkpoint pending ledger synchronization | semantic graduation | The existing text adapter now accepts arbitrary finite canonical comma/semicolon groups only when they agree with internally derived generic abstraction evidence, and exposes exact nested `λ^fd z. h z` eta only through the typed `mixed-nested-displayed-eta` expected contract. It retains one adapter/checker, fails closed outside the graduated mixed envelope, and leaves browser-preset promotion deferred. |
+| `TEXT-PARITY-MIXED-1` | complete and focused-green under D-DTTLF-USABILITY-028 at checkpoint `cf05f79e7e6149add04567c217a4417b95cb93e0` | semantic graduation | The existing text adapter now accepts arbitrary finite canonical comma/semicolon groups only when they agree with internally derived generic abstraction evidence, and exposes exact nested `λ^fd z. h z` eta only through the typed `mixed-nested-displayed-eta` expected contract. It retains one adapter/checker, fails closed outside the graduated mixed envelope, and leaves browser-preset promotion deferred. |
 | `DISPLAYED-ND-CONSUMERS-N` | future, consumer-led | concrete requested coherent bodies | Expand recursively supported `^nd` body constructors while preserving internal coherence ownership. |
 
 ## Frozen `MIXED-NEST-0A` Boundary
@@ -2397,5 +2397,5 @@ authority conflict, or an operation outside the stated Git boundary.
   was run once and retained only the four unrelated committed
   inventory/publication assertion classes; it is not repeated. No
   Lambdapi, Core owner, checker/runtime, browser, general-curry, or
-  unrestricted-`:^nd` delta occurred. The implementation checkpoint is
-  pending exact staged review.
+  unrestricted-`:^nd` delta occurred. The exact local implementation
+  checkpoint is `cf05f79e7e6149add04567c217a4417b95cb93e0`.
