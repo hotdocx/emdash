@@ -22,8 +22,10 @@ implicit broadening of the implemented profile. Initial implementation
 measurement exposed a bounded-normalization and routine-test performance
 correction frozen separately as D-DTTLF-USABILITY-031 at
 `54c73a60d441b610e466aaba33ccd99e127f4192`. The decision ledger records its
-separate standing-delegation approval; no graduation claim is made before the
-correction is green.
+separate standing-delegation approval. D-030/D-031 are implemented and
+focused-green; their local implementation checkpoint is pending below.
+`RECURSIVE-MIXED-GRADUATE-1D` is now dependency-ready for its own exact
+structural-induction proposal, not silently approved by this implementation.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -518,8 +520,8 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-REFLECT-0A` | complete in plan checkpoint `6828225` | completed mixed-mode profile and D-028 text parity | Replace the one-off conceptual shape rule with the bounded runtime-normalize-and-reify design; inventory exact existing heads/rules and freeze negatives. No behavior change. |
 | `RECURSIVE-MIXED-REFLECT-1A` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | approved `REFLECT-0A` | The mixed program supplies its existing declaration environment/composed runtime to an immutable reifier. One global bounded combined normalizer reduces the head, reduces the first reducible descendant, and retries the parent; canonical `Functord_cat`/`Transfd_cat` and transferred `Op_cat` views become rich types. Generic views and final checking remain mandatory. No kernel/transfer/proof-rule delta. |
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
-| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | D-030 implementation measured; correction D-031 separately approved and implementation in progress | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | Expose the already-owned generic Hom category through the direct program API. The initial four-level inlined-action test compiled before a counting assertion but took 387 seconds and expanded to 56 generic whole-Hom occurrences; D-031 separates compact arbitrary Hom formation from the known higher-action performance boundary. |
-| `RECURSIVE-MIXED-GRADUATE-1D` | pending green `HOM-CLOSURE-1C` | recursive normalization/reification plus parameterized public Hom/action closure | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed nonclaims. It does not silently promote text/browser syntax. |
+| `RECURSIVE-MIXED-HOM-CLOSURE-1C` | D-030/D-031 implemented and focused-green; local checkpoint pending | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | The direct program exposes the existing generic Hom category with one shared endpoint validator. Stable rich heads reify at zero steps; eight compact named levels and two checked mixed-root action levels pass. The 387-second four-action expansion remains a measured performance nonclaim. |
+| `RECURSIVE-MIXED-GRADUATE-1D` | dependency-ready for a separate exact proposal | green `HOM-CLOSURE-1C`; recursive normalization/reification and public Hom/action closure | Record the structural-induction boundary for arbitrary finite nesting over the exact transferred grammar; retain fail-closed and performance nonclaims. It does not silently promote text/browser syntax. |
 | `TEXT-PARITY-RECURSIVE-MIXED-1E` | deferred until semantic graduation | `GRADUATE-1D` | Mechanically route only the newly graduated semantic constructors through the existing text adapter. No parser-led semantics. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
 | `CURRY-PACKAGE-0A` | deferred independent audit | measured higher-action or mixed-introduction consumer | Audit ordinary curry/uncurry computation and adjunction coherence; do not infer primitive asymmetry from style. |
@@ -708,8 +710,8 @@ D-031 corrects the routine focused test to an eight-level compact named-cell
 tower plus two checked inlined action levels. The already-completed 387-second
 four-action measurement must not be repeated in `check:ts`. After focused
 work is green, run the single shared-TypeScript gate required by root SOP once
-for the final corrected tranche, carrying forward rather than repairing the
-two unrelated README/release failures.
+for the final corrected tranche, carrying forward rather than repairing
+unrelated committed presentation-contract failures.
 
 ### Measured D-029 implementation evidence (2026-07-31)
 
@@ -755,6 +757,58 @@ No Lambdapi owner, rule, source, transfer inventory, runtime inventory, or
 proof-rule inventory changed. The recent unchanged authority evidence is
 therefore carried forward; neither `check:all` nor a redundant kernel run was
 started.
+
+### Measured D-030/D-031 implementation evidence (2026-07-31)
+
+The direct TypeScript program now exposes
+`homCategory(C, x, y)` through the existing backend-neutral `hom-category`
+owner. `homCategory` and `hom` share one closed-endpoint validator based on
+recursive `coreTypeObjectCategory`; no parallel checker or higher-cell node
+was added. The runtime-backed category-object reifier now treats an already
+stable rich outer head as a zero-step base case, so an iterated Hom does not
+spend its normalization budget traversing endpoint terms. Plain/opaque heads
+still use the bounded combined normalizer and final generic checking remains
+unchanged.
+
+Focused evidence:
+
+- root typecheck, lint, and `workspace:check` pass;
+- the nearest ordinary categorical program suite passes `8/8`;
+- the text-parity audit classifies all `79` public program methods exactly
+  once and passes `6/6`; `homCategory` is a later typed-resolver seam, not a
+  newly implemented parser route;
+- the wrong-category and cross-program Hom negatives pass on the lightweight
+  base profile in about `0.8s` of test time; and
+- the mixed-root witness checks eight named parallel-cell levels and two
+  recursively inlined whole-Hom action levels. Its final named cell and final
+  action image both pass the generic LF checker with `hom` classifiers. The
+  focused witness passes `1/1` in about `213s`.
+
+The earlier four-inlined-action measurement remains important negative
+performance evidence: after the zero-step base-case correction it passed
+classifier normalization and final checking, reached only its final counting
+assertion, serialized `56` generic `functor-hom-full` occurrences, and took
+about `387s`. It is not part of routine tests and no global budget was raised.
+
+Exactly one final `check:ts` was run for the shared API/reifier tranche. It
+passed workspace, typecheck, lint, and every changed semantic/API test, then
+exited nonzero on exactly three already-committed presentation assertions:
+
+1. `v3_2_migration_readiness_tests.ts` rejects the ordinary prose word
+   `elaborate` in `emdash-template/src/App.tsx` as if it were the retired API;
+2. `v3_2_release_policy_tests.ts` requires `README.md` to name the historical
+   exact deployed-profile token; and
+3. `v3_2_release_completion_tests.ts` requires the retired phrase
+   `release-ready exact profile` in `README.md`.
+
+Targeted owning-test reruns reproduce those three failures, while
+`v3_2_migration_inventory_tests.ts` passes `6/6` and
+`git diff HEAD -- README.md emdash-template/src/App.tsx` plus all three owning
+test files is empty. The roughly 31-minute aggregate was not rerun and those
+presentation contracts were not repaired inside this semantic checkpoint.
+
+No Lambdapi source, mathematical owner/rule, transfer/runtime/proof inventory,
+text grammar/route, browser API, public profile, or release artifact changed.
 
 The user authorizes bounded local checkpoint commits in the existing
 `goal/typescript-elaborator-v3.2` worktree after each coherent green tranche.
@@ -908,3 +962,15 @@ authority conflict, or an operation outside the stated Git boundary.
   approval with human supersession. Only the zero-step stable-head base case,
   compact eight-level tower, two-level checked action witness, parity-audit
   classification, and recorded performance nonclaim are authorized.
+- **2026-07-31 — D-030/D-031 implemented and focused-green.** The direct
+  program has a generic existing-owner `homCategory` facade shared with
+  `hom` endpoint validation; canonical rich heads are a zero-step reifier
+  base case; all `79` public methods remain classified; and the eight-level
+  named-cell plus two-level action witness passes final generic LF checking.
+  The local implementation checkpoint remains to be recorded.
+- **2026-07-31 — final aggregate presentation drift isolated.** One required
+  roughly 31-minute `check:ts` passed every affected boundary and stopped on
+  exactly three unchanged migration/release presentation assertions: the
+  prose word `elaborate` and two retired README phrases. The target and owning
+  test files are unchanged by this tranche. No aggregate rerun or unrelated
+  presentation repair is warranted here.

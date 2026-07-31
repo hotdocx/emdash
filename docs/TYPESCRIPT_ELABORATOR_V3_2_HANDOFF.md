@@ -27,8 +27,10 @@
 > dependency and real inlined higher-action expansion; the separately frozen
 > reviewed-approved D-DTTLF-USABILITY-031 correction makes stable Hom heads a
 > zero-step base case and separates a compact eight-level named-cell check
-> from a two-level action check. Text promotion, evaluator optimization, and
-> mixed curry remain later rows.
+> from a two-level action check. D-030/D-031 are now implemented and
+> focused-green with their local checkpoint pending in the successor ledger;
+> the separate structural-graduation proposal is dependency-ready. Text
+> promotion, evaluator optimization, and mixed curry remain later rows.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)

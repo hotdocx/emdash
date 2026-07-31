@@ -219,6 +219,28 @@ export function createCoreCategoricalCategoryObjectReifier(
             provenance: Provenance,
             detail: string
         ): CoreCategoricalClassifierReificationResult {
+            // Stable backend-neutral category formers and already exposed
+            // active rich heads need no normalization. In particular, an
+            // iterated Hom category must not spend the bounded budget walking
+            // increasingly large endpoint terms merely to rediscover its
+            // unchanged outer classifier.
+            const direct = reifyCanonicalCategory(
+                category,
+                formerNames,
+                provenance.span,
+                detail
+            );
+            if (direct.canonicalHead !== 'plain-object') {
+                return Object.freeze({
+                    status: 'reified' as const,
+                    originalCategory: category,
+                    normalizedCategory: category,
+                    steps: 0,
+                    trace: Object.freeze([]),
+                    ...direct
+                });
+            }
+
             const normalized = coreLfCombinedNormalize(
                 options.environment,
                 category,

@@ -1,5 +1,5 @@
 /**
- * D-DTTLF-USABILITY-029 runtime-backed recursive mixed classifier evidence.
+ * D-DTTLF-USABILITY-029/030/031 recursive mixed classifier and Hom closure.
  */
 
 import assert from 'node:assert/strict';
@@ -8,7 +8,9 @@ import {
     it
 } from 'node:test';
 import {
+    CoreCategoricalFrontendError,
     CoreCategoricalProgram,
+    CoreCategoricalProgramError,
     kernelExpressionEquals
 } from '../src/v3_2';
 
@@ -84,7 +86,7 @@ const fixture = (suffix: string) => {
     };
 };
 
-describe('D-029 recursive mixed classifier reification', () => {
+describe('D-029/D-030/D-031 recursive mixed classifier and Hom closure', () => {
     it('recovers Nested_transfd at direct and internal base-arrow results',
         () => {
             const {
@@ -272,4 +274,116 @@ describe('D-029 recursive mixed classifier reification', () => {
             assert.equal(compiled.surfaceType.tag, 'hom');
             assert.doesNotMatch(compiled.explicitCore, /coerc|cast/u);
         });
+
+    it('checks eight named Hom levels and two mixed-root action levels',
+        () => {
+            const {
+                emdash,
+                FFbar,
+                GGbar,
+                y,
+                direct
+            } = fixture('hom_tower');
+            const FF = emdash.apply(FFbar, y);
+            const GG = emdash.apply(GGbar, y);
+            const theta = emdash.displayedTransfor(
+                'recursive_hom_tower_theta',
+                FF,
+                GG
+            );
+            let category = emdash.displayedTransforCategory(FF, GG);
+            let left = direct;
+            let right = theta;
+            let action = emdash.displayedTransforInternalHomAction(
+                FF,
+                GG
+            );
+            let finalImage = direct;
+
+            for (let depth = 0; depth < 8; depth += 1) {
+                const homCategory = emdash.homCategory(
+                    category,
+                    left,
+                    right
+                );
+                const alpha = emdash.hom(
+                    `recursive_hom_tower_alpha_${depth}`,
+                    category,
+                    left,
+                    right
+                );
+                const beta = emdash.hom(
+                    `recursive_hom_tower_beta_${depth}`,
+                    category,
+                    left,
+                    right
+                );
+                if (depth < 2) {
+                    const wholeHomAction = emdash.apply(
+                        action,
+                        emdash.homBoundary(category, left, right),
+                        { expectedShape: 'whole-hom-action' }
+                    );
+                    finalImage = emdash.apply(wholeHomAction, alpha, {
+                        expectedShape: 'object-value'
+                    });
+                    action = wholeHomAction;
+                }
+                category = homCategory;
+                left = alpha;
+                right = beta;
+            }
+
+            const namedCellCompilation = emdash.compile(left);
+            const actionCompilation = emdash.compile(finalImage);
+            assert.equal(namedCellCompilation.surfaceType.tag, 'hom');
+            assert.equal(actionCompilation.surfaceType.tag, 'hom');
+            assert.ok(
+                (emdash.serializeCategory(category)
+                    .match(/hom-category/gu)?.length ?? 0) >= 8
+            );
+            assert.ok(
+                (actionCompilation.explicitCore
+                    .match(/owner "functor-hom-full"/gu)?.length ?? 0) >= 2
+            );
+            assert.match(
+                actionCompilation.explicitCore,
+                /owner "functor-object"/u
+            );
+            assert.equal(
+                emdash.inspect(finalImage).ir.tag,
+                'typed-application'
+            );
+        });
+
+    it('rejects wrong-category and cross-program Hom endpoints', () => {
+        const emdash = new CoreCategoricalProgram();
+        const A = emdash.category('recursive_hom_negative_A');
+        const B = emdash.category('recursive_hom_negative_B');
+        const x = emdash.object('recursive_hom_negative_x', A);
+        const y = emdash.object('recursive_hom_negative_y', A);
+        const z = emdash.object('recursive_hom_negative_z', B);
+
+        assert.throws(
+            () => emdash.homCategory(A, x, z),
+            error =>
+                error instanceof CoreCategoricalProgramError &&
+                error.code === 'EXPECTED_CATEGORY_OBJECT'
+        );
+
+        const other = new CoreCategoricalProgram();
+        const C = other.category('recursive_hom_negative_C');
+        const foreign = other.object(
+            'recursive_hom_negative_foreign',
+            C
+        );
+        assert.throws(
+            () => emdash.homCategory(A, x, foreign),
+            error =>
+                error instanceof CoreCategoricalFrontendError &&
+                error.code === 'FOREIGN_TERM'
+        );
+
+        assert.doesNotThrow(() => emdash.homCategory(A, x, y));
 });
+    });

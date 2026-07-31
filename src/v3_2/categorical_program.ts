@@ -6209,6 +6209,98 @@ export class CoreCategoricalProgram {
         }, nodeProvenance);
     }
 
+    private closedHomEndpointExpressions(
+        category: InternalCoreCategoricalCategory,
+        sourceObject: CoreCategoricalTerm,
+        targetObject: CoreCategoricalTerm,
+        nodeProvenance: Provenance,
+        detail: string
+    ): readonly [KernelExpression, KernelExpression] {
+        const endpointValues = [sourceObject, targetObject] as const;
+        for (const endpointValue of endpointValues) {
+            const endpoint = this.builder.inspect(endpointValue);
+            if (
+                endpoint.type.tag === 'indexed-object' ||
+                endpoint.type.tag === 'indexed-functor' ||
+                endpoint.type.tag === 'indexed-transfor' ||
+                endpoint.type.tag === 'nested-indexed-object'
+            ) {
+                throw new CoreCategoricalProgramError(
+                    'EXPECTED_CATEGORY_OBJECT',
+                    nodeProvenance,
+                    `${detail} has an open indexed endpoint`
+                );
+            }
+            const endpointCategory = coreTypeObjectCategory(
+                endpoint.type,
+                nodeProvenance.span as SourceSpan,
+                `${detail} endpoint category`
+            );
+            if (
+                endpointCategory === undefined ||
+                !coreObjectCategoryEquals(
+                    endpointCategory,
+                    category.expression
+                )
+            ) {
+                throw new CoreCategoricalProgramError(
+                    'EXPECTED_CATEGORY_OBJECT',
+                    nodeProvenance,
+                    `${detail} has an endpoint outside category ` +
+                        `'${category.label}'`
+                );
+            }
+        }
+        return Object.freeze([
+            this.builder.compile(sourceObject).term,
+            this.builder.compile(targetObject).term
+        ]);
+    }
+
+    /**
+     * Construct the existing generic Hom category `Hom_cat C x y`.
+     *
+     * This is a public facade for the backend-neutral Core owner, not a new
+     * category former or higher-cell checker. Because hom objects recursively
+     * expose their own object category, the same method closes arbitrary
+     * finite parallel-cell towers.
+     */
+    homCategory(
+        categoryValue: CoreCategoricalCategory,
+        sourceObject: CoreCategoricalTerm,
+        targetObject: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory {
+        const nodeProvenance = this.at(
+            'ordinary Hom category',
+            source
+        );
+        const category = this.requireCategory(
+            categoryValue,
+            nodeProvenance
+        );
+        const [sourceExpression, targetExpression] =
+            this.closedHomEndpointExpressions(
+                category,
+                sourceObject,
+                targetObject,
+                nodeProvenance,
+                'Hom category'
+            );
+        return this.makeCategory(
+            `Hom(${category.label})`,
+            kernelApplication(
+                'hom-category',
+                [
+                    { value: category.expression },
+                    { value: sourceExpression },
+                    { value: targetExpression }
+                ],
+                nodeProvenance
+            )
+        );
+    }
+
     hom(
         name: string,
         categoryValue: CoreCategoricalCategory,
@@ -6224,48 +6316,19 @@ export class CoreCategoricalProgram {
             categoryValue,
             nodeProvenance
         );
-        const endpoints = [
-            this.builder.inspect(sourceObject),
-            this.builder.inspect(targetObject)
-        ];
-        for (const endpoint of endpoints) {
-            if (
-                endpoint.type.tag === 'indexed-object' ||
-                endpoint.type.tag === 'indexed-functor' ||
-                endpoint.type.tag === 'indexed-transfor' ||
-                endpoint.type.tag === 'nested-indexed-object'
-            ) {
-                throw new CoreCategoricalProgramError(
-                    'EXPECTED_CATEGORY_OBJECT',
-                    nodeProvenance,
-                    `Arrow assumption '${name}' has an open indexed endpoint`
-                );
-            }
-            const endpointCategory = coreTypeObjectCategory(
-                endpoint.type,
-                nodeProvenance.span as SourceSpan,
-                `endpoint of arrow assumption ${name}`
+        const [sourceExpression, targetExpression] =
+            this.closedHomEndpointExpressions(
+                category,
+                sourceObject,
+                targetObject,
+                nodeProvenance,
+                `Arrow assumption '${name}'`
             );
-            if (
-                endpointCategory === undefined ||
-                !coreObjectCategoryEquals(
-                    endpointCategory,
-                    category.expression
-                )
-            ) {
-                throw new CoreCategoricalProgramError(
-                    'EXPECTED_CATEGORY_OBJECT',
-                    nodeProvenance,
-                    `Arrow assumption '${name}' has an endpoint outside ` +
-                    `category '${category.label}'`
-                );
-            }
-        }
         return this.assume(name, {
             tag: 'hom',
             category: category.expression,
-            sourceObject: this.builder.compile(sourceObject).term,
-            targetObject: this.builder.compile(targetObject).term
+            sourceObject: sourceExpression,
+            targetObject: targetExpression
         }, nodeProvenance);
     }
 

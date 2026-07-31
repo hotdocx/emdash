@@ -146,6 +146,7 @@ const capabilities = [
             'displayedFunctorCategory',
             'displayedTransforCategory',
             'functorCategory',
+            'homCategory',
             'productCategory',
             'pullbackFamily',
             'substituteFamily'
@@ -158,7 +159,7 @@ const capabilities = [
             'No new variable, but displayed-family results require a typed ' +
             'text value kind beyond the current category/term union.',
         dependencyAndVariance:
-            'Includes ordinary products/functor categories, displayed ' +
+            'Includes ordinary products/functor/Hom categories, displayed ' +
             'pullback, mixed variance, and dependent-section targets.',
         actionOwnership:
             'Each direct method delegates to the existing internalized ' +
@@ -166,8 +167,9 @@ const capabilities = [
         recursiveBodyGrammar:
             'finite constructor argument list over recursively resolved names',
         proposedText:
-            'Functor(A,B), Product(A,B), E[x], Sigma(E), Productd(E,D), ' +
-            'and pullback(E,F); final notation remains separately reviewable.',
+            'Functor(A,B), Hom(C,x,y), Product(A,B), E[x], Sigma(E), ' +
+            'Productd(E,D), and pullback(E,F); final notation remains ' +
+            'separately reviewable.',
         locatedSyntax: 'requires-structural-form',
         classification: 'typed-resolver-seam',
         positive: {
@@ -692,7 +694,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 78,
+        publicProgramMethods: 79,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,
