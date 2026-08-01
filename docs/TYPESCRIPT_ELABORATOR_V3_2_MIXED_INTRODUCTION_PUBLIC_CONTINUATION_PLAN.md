@@ -6,8 +6,11 @@ Status: active living successor; the completed recursive-mixed semantic and
 text-parity tranche is inherited without reopening its history. The first
 bounded public synchronization gate is frozen below as
 H-DTTLF-USABILITY-RECURSIVE-MIXED-PUBLIC-01 /
-D-DTTLF-USABILITY-034. Its separate approval and implementation checkpoints
-remain to be recorded. After the public slice is green and deployed, the next
+D-DTTLF-USABILITY-034 at proposal checkpoint
+`c702c8a353caeb7eb3bbb5fba1552b8dcb3e2f08`. The separate review recorded
+below approves exactly that gate under the standing unattended delegation,
+with human supersession. Implementation is dependency-ready. After the
+public slice is green and deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -239,7 +242,7 @@ It deliberately avoids:
 | Row | Status | Dependencies | Exact deliverable |
 | --- | --- | --- | --- |
 | `PUBLIC-HOM-AUDIT-0A` | complete in this plan; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract, select the existing `fibred-transfd-1` fixture, reject the slow mixed-nest fixture, and freeze truthful public wording. |
-| `PUBLIC-HOM-PRESET-1A` | exact proposal frozen under D-DTTLF-USABILITY-034; separate approval pending | `PUBLIC-HOM-AUDIT-0A` | Add one recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
+| `PUBLIC-HOM-PRESET-1A` | exact D-DTTLF-USABILITY-034 reviewed-approved; implementation dependency-ready | `PUBLIC-HOM-AUDIT-0A` | Add one recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
 | `PUBLIC-HOM-VALIDATE-1B` | blocked on green `PRESET-1A` | `PUBLIC-HOM-PRESET-1A` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | blocked on green `VALIDATE-1B` | clean goal checkpoint; fetched ancestry; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
@@ -294,10 +297,12 @@ Approve the following bounded public synchronization:
     preset, executable result, overview article, and book routes.
 
 The user approved this direction and instructed implementation to continue.
-Under the standing unattended delegation, after the exact proposal receives
-its own checkpoint and no immediate human correction supersedes it, a
-separate review may approve precisely D-DTTLF-USABILITY-034 with human
-supersession.
+The exact proposal was checkpointed at
+`c702c8a353caeb7eb3bbb5fba1552b8dcb3e2f08`. No immediate human correction
+superseded it, so the separate review recorded in the decision ledger
+approves precisely D-DTTLF-USABILITY-034 under the standing unattended
+delegation, with human supersession. Implementation may now begin within the
+frozen gate.
 
 ### Explicit non-effects
 
@@ -443,5 +448,12 @@ removal, or unrelated cleanup is authorized.
   recursive-Hom preset, direct equality, truthful public wording,
   proportional browser validation, clean fast-forward integration, non-force
   `main` push, and exact Pages verification. It adds no mathematical or
-  frontend semantic capability. Separate checkpoint and approval remain
-  pending under the standing unattended delegation.
+  frontend semantic capability. Its proposal checkpoint is
+  `c702c8a353caeb7eb3bbb5fba1552b8dcb3e2f08`.
+- **2026-08-01 — D-DTTLF-USABILITY-034 approved exactly as proposed.** No
+  immediate human correction superseded the isolated proposal. The standing
+  unattended delegation therefore records a separate review with human
+  supersession. It authorizes only the exact preset/public-copy/validation
+  slice and its guarded fast-forward `main` push plus Pages verification; all
+  mathematical, parser/checker, force/history-rewrite, and unrelated remote
+  effects remain excluded.

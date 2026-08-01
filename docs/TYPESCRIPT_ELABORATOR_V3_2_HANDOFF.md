@@ -5,6 +5,10 @@
 > owns the next work: first synchronize the completed recursive-Hom
 > capability with the deployed reviewer and truthful public boundary, then
 > conduct the Lambdapi-first variance-correct mixed-introduction audit. The
+> exact public slice is frozen at
+> `c702c8a353caeb7eb3bbb5fba1552b8dcb3e2f08` and reviewed-approved under
+> D-DTTLF-USABILITY-034 with human supersession. Its implementation is
+> dependency-ready. The
 > completed
 > mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
