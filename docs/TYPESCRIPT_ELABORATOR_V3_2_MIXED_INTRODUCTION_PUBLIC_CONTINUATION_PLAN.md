@@ -499,6 +499,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` | read-only reassessment complete; zero semantic delta; expected-classifier-directed context audit selected | bounded-green D-052; depth-eight live direct probe; durable owner/action checks; current fixed-context and existing `lambda^nd` source audit | The constant-middle node is structurally depth-generic: depth 8 emits 8 owners and matching evidence with no curry. Object, inner-arrow, base-arrow, internal-cell, and next-base-cell action remain internally owned. The next limitation is the fixed `k;c;a` context, but a larger solution must distinguish independent product/Sigma structure from genuine variance-sensitive nesting rather than flatten arbitrary polarities into one slot list. |
 | `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` | read-only architecture audit complete; zero semantic delta; canonical negative `Functor_catd` tower selected first | completed `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N`; arbitrary finite positive telescope machinery; recursive canonical mixed-classifier reifier; bounded direct `lambda^nd` eta/composition; green depth-two Lambdapi target-lift probe | The first scalable larger context is `k;c;a1;...;an` with right-associated expected family `Functor_catd(A1,...Functor_catd(An,B))`. Existing constructor target action iterates through the tower and composes with the outer coherent subject without curry or a new owner. Independent sibling/product contexts and general polarity alternation remain distinct later axes. |
 | `DIRECT-MIXED-NEGATIVE-TOWER-1P` | implemented and in-scope green at `ef3ce5c4de381b044dc3bbffd55cb35bcfd2faf7` under D-DTTLF-USABILITY-053 | completed `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O`; proposal `db49240fc77f308131636181e76021858cd99829`; separate review under standing unattended delegation | The new direct TypeScript API right-folds arbitrary finite negative inner families through existing `Functor_catd`, recognizes exact coherent eta/bound identity, and recursively lifts finite closed target maps through the existing target action. Depth 2/6, depth-3 identity, and six target-action lifts into `Hom_catd` are generically checked. One-inner behavior is unchanged; no kernel/transfer owner, curry, total-context section, parser route, or unrestricted-context claim was added. |
+| `DIRECT-MIXED-TOWER-GRADUATE-0Q` | read-only successor audit complete; zero semantic delta; arbitrary-level source action selected | implemented D-053 tower; arbitrary positive sibling-layer compiler; existing `Hom_catd`/`Transf_catd`, `homd_int`, and displayed-`:^nd` evidence; bounded current-kernel check | The tower is genuinely depth-recursive but presently supports only eta/identity and closed target maps. Independent positive sibling depth/width is already separately generic, and mixed classifier formation/elimination plus higher action are already internalized. The first missing operation that directly stress-tests variance at arbitrary depth is a finite contravariant source chain at any tower layer, lifted through its enclosing prefix by the existing target action. |
+| `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` | exact TypeScript-only D-DTTLF-USABILITY-054 proposal frozen; separate review required | completed `DIRECT-MIXED-TOWER-GRADUATE-0Q`; final-green one-inner D-045/D-046 source action; implemented D-053 target lift | Generalize the tower factorer to `F[c](L1(a1))...(Ln(an))`, with a finite closed coherent source chain independently at every layer. Compile deepest-outward by reusing the existing mixed source action at the affected layer and the existing target lift through its prefix. Add no kernel/transfer owner, curry, total section, sibling integration, pair/weakening/constant-middle case, or new `:^nd` constructor. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -4813,6 +4815,211 @@ which first representative most directly improves end-user variable use,
 and freeze at most one smallest semantic gate. It must make no semantic,
 kernel, transfer, parser/browser, publication, or remote Git edit.
 
+## `DIRECT-MIXED-TOWER-GRADUATE-0Q` audit result
+
+This audit is complete with zero active semantic delta. It confirms that the
+direct expected-classifier architecture should be extended, not replaced,
+and distinguishes three different meanings of “more general context”.
+
+### Axis A: body algebra through the negative tower
+
+The implemented tower is structurally recursive in its context depth, but its
+body factorer is intentionally smaller than the one-inner factorer. The
+one-inner direct binder already recognizes:
+
+```text
+leaf | source-map | target-map | pair
+     | weakening/section-root | qualified-constant-middle
+```
+
+whereas `mixedDisplayedFunctorTowerLambda` currently recognizes only exact
+coherent eta, bound-outer identity, and finite closed target maps. Its focused
+negative matrix deliberately rejects source mapping, pairing, weakening,
+constant-middle application, and nested transformation introduction. Thus
+the remaining restriction is not a hidden fixed-depth table; it is the
+smaller recursive body algebra selected by D-053.
+
+The first missing constructor has an exact generic implementation. Suppose
+the bound layer is `Ai`, an already-coherent subject expects `Ri`, and a
+finite source chain supplies:
+
+```text
+Li : Functord Ai Ri
+```
+
+over `Op K`. The existing mixed source action maps:
+
+```text
+Functor_catd(Ri,S) ->_K Functor_catd(Ai,S).
+```
+
+At a non-outermost layer this whole displayed functor is lifted through every
+preceding `Functor_catd` by the same existing covariant target action already
+used by D-053. Processing affected layers deepest-outward keeps the suffix
+classifier current; processing each layer's finite chain in reverse recovers
+the exact bound family. No pointwise function, external naturality square, or
+new action law is synthesized.
+
+This is mechanically scalable. For a mapper at zero-based layer `i`, one
+existing source-action occurrence is followed by exactly `i` existing target
+action lifts. Multiple layers and multiple maps per layer are therefore loops
+over arrays, not an arity/polarity case table. The final explicit Core is a
+composition of already-coherent displayed functors and remains checked by the
+unchanged generic LF checker.
+
+### Axis B: independent sibling blocks
+
+Independent siblings are important, but their architecture is not presently
+missing. `displayedGenericDependentContextLambda` already groups arbitrary
+finite canonical same-base layers with the transparent fibrewise product,
+derives their projections, and repeatedly lifts those projections through
+later Sigma layers. Its durable witness covers arbitrary positive depth and
+width, object use, internal base-arrow action, a canonical mixed final
+classifier, and a `homd_int` consumer.
+
+Combining a sibling block with the negative tower remains real work: the
+direct tower would need to consume product projection wiring rather than
+pretend that independent variables are curried unary arguments. But this is
+an integration of two existing direct compilers, not evidence for a new
+`Product_catd` primitive, total-context surface, or redesign. It is larger
+than the first variance recursion and does not provide as direct a test of
+the tower's negative action.
+
+### Axis C: `Hom_catd`/`Transf_catd` and `lambda^nd`
+
+The active kernel and TypeScript profile already contain the semantic
+foundation:
+
+- `Hom_catd` and `Transf_catd` formation, their fibre projections, and the
+  `Hom_catd(Functor_catd(...)) -> Transf_catd(...)` runtime fold;
+- recursive rich classifier reification for nested Hom/transfor targets;
+- `homd_int` and its dependent projection ladder;
+- `tdapp1_int_*` object, whole-Hom, and higher-cell action; and
+- a direct `displayedTransforLambda`/`lambda^nd` fragment that factors
+  coherent eta leaves and arbitrary finite typed vertical compositions back
+  to genuine outer `Transfd` terms.
+
+Consequently the issue is not missing object/arrow internalization. A tower
+layer may already be classified by an oriented nested `Hom_catd` or
+`Transf_catd`, and a tower target may already retain those rich heads.
+Classifier alternation, however, is distinct from synthesizing an arbitrary
+coherent `lambda^nd` body. New `:^nd` introductions must still be added
+constructor by constructor—identity, whiskering, or another concrete
+coherence-owning operation—because arbitrary pointwise component data does
+not determine base-arrow naturality. That remains feasible and
+consumer-led, but no concrete missing `:^nd` consumer outranks the measured
+tower source-action gap in this audit.
+
+### Selection and feasibility assessment
+
+`DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` is selected as the next bounded slice.
+It is the smallest continuation that materially tests arbitrary-depth
+variance, uses only already-active and already-transferred owners, and
+produces a reusable prefix-lifting pattern for later pair, weakening, and
+constant-middle constructors. It also directly answers the concern that the
+tower might be only an eta-shaped encoding.
+
+The broader original usability goal remains feasible but is not yet fully
+graduated. The evidence now supports all of the following without a redesign:
+
+1. arbitrary finite canonical positive sibling/Sigma layers;
+2. arbitrary finite canonical negative `Functor_catd` depth;
+3. internal object, base-arrow, higher-cell, Hom, transfor, and dependent-hom
+   owners; and
+4. syntax-directed recursive factorization for increasingly rich direct
+   functor and displayed-transfor bodies.
+
+Still unproved are their unrestricted combination, arbitrary dependency DAGs,
+all meaningful polarity alternations, and general pointwise-to-coherent
+`lambda^nd` synthesis. The architecture is therefore increasingly validated
+and mechanically extensible along measured axes, but the final “variables may
+occur anywhere ordinary DTT permits” graduation claim remains future work.
+Nothing found by 0Q motivates returning to mixed curry, exposing a total
+context section, or redesigning the kernel from scratch.
+
+Validation was deliberately proportional. The bounded current-kernel check
+`EMDASH_TYPECHECK_TIMEOUT=60s make -C emdash2 check` passed. A redundant
+four-file TypeScript confirmation was cancelled after approximately 232
+seconds while all four files were still in startup and zero assertions had
+completed; it supplies no pass/fail evidence. The exact D-053 focused green
+results remain the current source-behavior evidence because this audit changed
+no source or tests. No aggregate was run.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-TOWER-SOURCE-ACTION-01 /
+## D-DTTLF-USABILITY-054
+
+Approve the following exact TypeScript-only recursive source-action slice:
+
+1. Keep `mixedDisplayedFunctorTowerLambda` as the single public tower method
+   and keep `mixedDisplayedFunctorLambda` unchanged. Extend only the tower
+   factorization/compilation grammar and advance the direct-program revision
+   to `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R-CATEGORICAL-PROGRAM-1`.
+2. For every inner layer independently, accept the exact existing one-inner
+   source-argument grammar `ai | L(source-argument)`, where each `L` is an
+   already-coherent closed displayed functor over literal `Op K`. Require the
+   chain to begin at the bound family and end at the family expected by the
+   corresponding subject application. Do not infer or coerce orientation.
+3. Generalize both direct tower leaves:
+   `F[k](c)(arg1)...(argn)` and `c(arg1)...(argn)`. Derive one exact root
+   source family and finite source chain per layer while retaining token
+   order, locally nameless scope, and one occurrence of each bound inner
+   token. Malformed, crossed, omitted, duplicated, or foreign arguments must
+   remain rejected.
+4. Compile affected layers deepest-outward. At layer `i`, apply the existing
+   mixed `Functor_catd` source action for every mapper in reverse chain order,
+   then lift that whole displayed functor through the `i` enclosing prefix
+   layers with the existing tower target-action helper. Compose each lifted
+   action after the already-compiled coherent child. Use loops/recursion over
+   arrays; add no depth switch, owner-name table, pointwise function, or
+   external coherence payload.
+5. Retain finite closed covariant target maps outside the generalized leaf.
+   Source actions must finish first at the exact nested source classifier;
+   target maps then use the unchanged deepest-outward target lift. Require the
+   final compiled family to equal the requested tower family exactly.
+6. Add no Lambdapi declaration, rule, unification clause, transfer
+   declaration/runtime/proof entry, Core intrinsic, checker/evaluator case,
+   cast, coercion, proof search, curry, total-context section, or
+   user-supplied naturality/functoriality evidence. Existing
+   `Functor_catd_func`, `Functor_catd_fapp0_func`, generic composition, and
+   their transferred action rules remain the only semantic owners.
+7. Extend deeply frozen tower evidence with per-layer root source families,
+   per-layer source-chain lengths, total source-action count, and total
+   prefix-lift count. Preserve dynamic depth/context, occurrence, target-map,
+   normalized body/result, and actual-prerequisite evidence. Do not claim
+   pair, weakening, sibling, arbitrary-polarity, or general-`:^nd` coverage.
+8. Add focused positives at depth three for a source chain independently at
+   the outermost, middle, and deepest inner layer; simultaneous nonempty
+   chains at multiple layers; a bound-outer root with source action; and
+   source actions followed by target maps into an existing rich `Hom_catd` or
+   `Transf_catd` target. Add one generated depth-six case. Assert exact source
+   and prefix-lift counts, generic LF checking, callback-once behavior, and
+   absence of curry/total-context/cast/coercion/equation markers.
+9. Add focused negatives for a wrong `K`/`Op K` orientation, nonclosed mapper,
+   incompatible adjacent chain families, a mapper used at the wrong layer,
+   cross-layer or repeated tokens, an unfinished root family, and a wrong
+   final target. Preserve the existing rejections for pair, weakening,
+   section roots, constant-middle application, siblings, and nested
+   transformation introduction.
+10. Preserve all existing one-inner behavior and current tower eta/identity/
+    target-map behavior. Run the new focused suite plus the nearest one-inner,
+    tower, nested-classifier, and source-action regressions; then workspace
+    check, root typecheck, lint, and whitespace hygiene.
+11. Because the shared categorical frontend/program behavior changes, run one
+    complete `check:ts` only after the bounded tranche is otherwise green.
+    Do not repeat it. If unrelated canonical-export digest drift remains,
+    record it without silently changing transfer pins in this tranche.
+12. Synchronize this living plan and the handoff, stage only the exact
+    TypeScript/test/document delta, and create rollback-safe local
+    checkpoints. Do not push, merge, rebase, reset, amend, clean unrelated
+    paths, remove worktrees, publish, integrate sibling/product contexts,
+    lift pair/weakening/section/constant-middle constructors, add a new
+    `lambda^nd` constructor, or resume bulk scale in this gate.
+
+This proposal requires a separate immutable review before semantic
+implementation. The standing unattended delegation may authorize it only
+after the proposal checkpoint is inspected, with immediate human
+supersession.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -5101,15 +5308,23 @@ compatibility, typecheck/lint, and single aggregate evidence exactly as
 recorded; do not rerun the aggregate or repair the unrelated canonical-export
 digest drift in this tranche.
 
-Proceed next with the read-only `DIRECT-MIXED-TOWER-GRADUATE-0Q`
-reassessment. Compare (a) lifting already-supported one-inner body
-constructors through finite towers, (b) independent sibling blocks through
-the existing product/Sigma context architecture, and (c) true
-`Hom_catd`/`Transf_catd` polarity alternation plus general `lambda^nd`.
-Inventory active owners and existing TypeScript consumers, retain the direct
-binder as fundamental, and freeze at most one smallest high-yield semantic
-gate. Make no semantic, kernel, transfer, parser/browser, publication, or
-remote Git edit during the audit.
+Treat `DIRECT-MIXED-TOWER-GRADUATE-0Q` as complete with zero semantic delta.
+It confirms that independent positive sibling depth/width is already generic,
+that `Hom_catd`/`Transf_catd` formation and higher action are internally
+available, and that the first measured arbitrary-depth variance gap is source
+action at an arbitrary negative tower layer.
+
+Treat H-DTTLF-USABILITY-DIRECT-MIXED-TOWER-SOURCE-ACTION-01 /
+D-DTTLF-USABILITY-054 as an exact frozen TypeScript-only proposal. Conduct a
+separate immutable review before implementation. Verify that finite per-layer
+source chains can be compiled deepest-outward using only the existing mixed
+source action plus target-action prefix lifting, and preserve all stated
+negative boundaries. Under the standing unattended delegation, implementation
+may proceed only after that clean proposal checkpoint and separate review,
+with immediate human supersession. Add no kernel/transfer owner, curry, total
+section, sibling integration, pair/weakening/constant-middle lift, new
+`lambda^nd` constructor, parser/browser/publication, or remote Git effect in
+this gate.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -5128,6 +5343,24 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — `DIRECT-MIXED-TOWER-GRADUATE-0Q` completed read-only and
+  D-DTTLF-USABILITY-054 frozen for separate review.** Source inspection
+  confirms that D-053's context depth is array-recursive while its body
+  grammar intentionally omits the richer one-inner constructors. The already
+  transferred mixed source action returns a whole iterable functor, and the
+  existing tower target lift can carry that action through every enclosing
+  prefix. The selected next slice therefore accepts a finite source chain
+  independently at every negative layer and compiles layers
+  deepest-outward. Independent positive sibling layers are already generic;
+  their mixed integration remains separate. `Hom_catd`/`Transf_catd`,
+  `homd_int`, displayed higher action, and bounded `lambda^nd` eta/composition
+  are already internalized; new coherent `:^nd` bodies remain
+  constructor-led. The bounded active-kernel check passed. A redundant
+  four-file TypeScript confirmation was cancelled after about 232 seconds
+  with zero assertions completed and supplies no evidence; the unchanged
+  D-053 focused results are carried forward. No semantic, kernel, transfer,
+  parser/browser, publication, or remote effect occurred. Separate review is
+  required before implementation.
 - **2026-08-01 — D-DTTLF-USABILITY-053 implemented and checkpointed.**
   Checkpoint `ef3ce5c4de381b044dc3bbffd55cb35bcfd2faf7` adds the direct
   arbitrary-finite negative-inner tower API, one reusable classifier fold,

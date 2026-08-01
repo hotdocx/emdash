@@ -258,13 +258,20 @@
 > `Hom_catd` are generically checked; the unchanged one-inner suite is 11/11
 > green. The mechanically affected parity audit is 10/10 green, while the
 > sole non-repeated aggregate retains three unrelated canonical-export digest
-> failures after its four in-scope method-count pins were corrected. The next
-> dependency-ready operation is the read-only
-> `DIRECT-MIXED-TOWER-GRADUATE-0Q` comparison of tower body coverage,
-> independent product/Sigma siblings, and true `Hom_catd`/`Transf_catd` plus
-> `lambda^nd` alternation. Source maps, pairs, weakening, constant-middle
-> lifting, sibling contexts, general polarity, and `lambda^nd` broadening
-> remain unimplemented until that audit selects a separate gate.
+> failures after its four in-scope method-count pins were corrected.
+> `DIRECT-MIXED-TOWER-GRADUATE-0Q` is now complete with zero semantic delta.
+> It finds that independent positive sibling depth/width already has a generic
+> product/Sigma compiler and that `Hom_catd`/`Transf_catd`, `homd_int`, and
+> displayed higher action are internally available. The first measured
+> arbitrary-depth variance gap is instead finite contravariant source action
+> at an arbitrary negative tower layer. The exact TypeScript-only
+> `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` /
+> D-DTTLF-USABILITY-054 proposal is frozen for separate review. It compiles
+> per-layer source chains deepest-outward using the existing source action and
+> target-action prefix lift; it adds no kernel/transfer owner, curry, total
+> section, sibling integration, pair/weakening/constant-middle lift, or new
+> `lambda^nd` constructor. Source maps remain absent from active tower behavior
+> until that separate review approves the proposal.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
