@@ -496,7 +496,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-SECTION-ROOT-1K` | implemented and final-green at `e337f1b1a3a61a861a714fa9d06035a1949beec9` under D-DTTLF-USABILITY-051 | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050; proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141`; separate review under standing unattended delegation | The bounded runtime reifier recognizes the already-transferred ordinary `Functor_cat` head after the active `Functor_catd` fibre rule. The unchanged open section application receives a canonical indexed-functor construction view. Recursive `S[k](a)` and `b[k]` roots lower through `Terminal_funcd`, with direct inner weakening only for `b[k]`; target maps and nested pairs consume both. No kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd` was added. |
 | `DIRECT-MIXED-SECTION-GRADUATE-1L` | read-only reassessment complete; zero active semantic delta; constant-middle application selected | final-green D-051; fundamental direct-binder invariant; completed three-binder structural roots; live frontend failure; type-aware owner search; bounded append and owner-position probes | The direct three-binder grammar now has all four ordinary variable-occurrence classes. Its first missing *application* constructor is the variance-valid constant-middle case. A one-owner/three-rule displayed lift of existing `Functor_comp_pair_func` is quiet-green, warning-neutral, strict-audit clean, and iterable through base/higher action. Larger contexts and mixed `:^nd` remain broader successors. |
 | `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` | implemented and bounded-green; kernel checkpoint `dd8d4c29166f57312da0b7be7e87d72497b91922`; TypeScript checkpoint `74b3c8211b87b120e2fe4482cac097042e22e634` under D-DTTLF-USABILITY-052 | completed `DIRECT-MIXED-SECTION-GRADUATE-1L`; proposal checkpoint `cd279e770ab416b22119400f9a26f436e62c36a9`; separate review; one kernel CI; focused 12/12 TypeScript evidence plus workspace/typecheck/lint/whitespace gates | One `Functor_comp_pair_funcd` owner with point/full/capped projections and its minimal ordinary composition prerequisite are active. The recursive direct-body algebra lowers finite qualified constant-middle applications by pairing already-coherent branches and postcomposing that owner. Direct nested introduction remains fundamental; no curry, total-context section, general-middle collapse, larger-context, or unrestricted-`:^nd` claim is included. The sole post-tranche `check:ts` was launched but its terminal summary was lost with the interrupted Codex session and was not rerun. |
-| `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` | dependency-ready read-only reassessment; zero semantic delta authorized | bounded-green D-052; fundamental direct-binder invariant; recursive constant-middle body algebra; user clarification that curry/hybrid lowering is not fundamental | Audit the extended direct algebra and its internal object/base-arrow/higher-action route; stress finite constant-middle iteration and rank larger mixed telescopes against mixed transformation/`lambda^nd` work. Freeze any semantic successor separately. Product facade and mixed/contextual curry remain optional auxiliary designs, not prerequisites. |
+| `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` | read-only reassessment complete; zero semantic delta; expected-classifier-directed context audit selected | bounded-green D-052; depth-eight live direct probe; durable owner/action checks; current fixed-context and existing `lambda^nd` source audit | The constant-middle node is structurally depth-generic: depth 8 emits 8 owners and matching evidence with no curry. Object, inner-arrow, base-arrow, internal-cell, and next-base-cell action remain internally owned. The next limitation is the fixed `k;c;a` context, but a larger solution must distinguish independent product/Sigma structure from genuine variance-sensitive nesting rather than flatten arbitrary polarities into one slot list. |
+| `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` | dependency-ready read-only architecture audit; zero semantic delta authorized | completed `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N`; arbitrary finite positive telescope machinery; recursive canonical mixed-classifier reifier; bounded direct `lambda^nd` eta/composition | Derive a scalable direct-context normal form from expected `Functord`/`Functor_catd`/`Hom_catd`/`Transf_catd` classifier structure. Reuse product/Sigma projection wiring for independent siblings and preserve explicit variance transitions for genuine nesting. Probe representative larger terms and freeze a separate implementation gate; add no curry, total-context section, external coherence, or semantic owner during this audit. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -4350,14 +4351,134 @@ Codex terminal session was unexpectedly interrupted and its final summary was
 not recoverable; no second multi-minute aggregate was run. This ledger does
 not invent aggregate counts or call that missing observation green.
 
-The next dependency-ready action is the zero-delta
-`DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` reassessment. It must verify the
-extended direct algebra and internal object/base-arrow/higher-action route,
-stress finite iteration, and rank larger mixed telescopes against mixed
-transformation/`lambda^nd` introduction. It may freeze a separate successor,
-but it may not edit semantics. Product-facade and mixed/contextual-curry work
-remain auxiliary possibilities that can be compared later; neither is a
-prerequisite for direct nested introduction.
+The immediate post-implementation action was the zero-delta
+`DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` reassessment now recorded below.
+Product-facade and mixed/contextual-curry work remain auxiliary possibilities
+that can be compared later; neither is a prerequisite for direct nested
+introduction.
+
+## `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` audit result
+
+This reassessment changes no source, test, kernel, transfer, parser, browser,
+or public artifact. It confirms that the D-052 result is recursive body
+algebra inside the fundamental direct binder, not a disguised curry or a
+fixed whole-expression case.
+
+### Measured finite-depth result
+
+A single live TypeScript probe used the final D-052 direct profile to build an
+eight-link chain
+
+```text
+lambda^n k. lambda^f c. lambda^f a.
+  G8[c](G7[c](... G1[c](F[c](a)) ...))
+```
+
+with eight distinct ordinary constant middle categories. It compiled as a
+`displayed-functor` with no production Lambdapi dependency. The recorded
+factorization count was 8, the explicit Core contained exactly 8
+`Functor_comp_pair_funcd` occurrences, outer/inner usage counts were 9/1, and
+no `mixed_curry`, `mix_uncurried_family`, total-context, cast, or coercion
+marker occurred. The process took 362,196 ms, almost entirely in construction
+of the already-known large direct profile. The factorization loop itself did
+not expose a depth-dependent failure. This is finite-depth expressibility
+evidence, not an interactive-performance claim.
+
+The implementation explains the measurement structurally. A
+`constant-middle-application` owns one child of the same factorization type,
+compiles that child first, pairs it with one closed coherent subject, and
+increments its count once. There is no selected-depth branch. Its constant
+probe also avoids refactoring an ordinary target chain twice, so this
+recognition path is linear in the qualified constant-middle chain depth even
+though the surrounding explicit LF profile remains expensive to construct.
+
+### Internal action audit
+
+No new naturality or functoriality witness is hidden in the frontend. The
+active owner has:
+
+- a point projection to ordinary `Functor_comp_pair_func`;
+- a full base action that precomposes the already-owned target
+  `Functor_catd(A,B)` action with the point composition functor;
+- a capped base-arrow action given by the corresponding whole composite; and
+- no constructor-specific `fdapp1_int_cell`, identity, composition,
+  naturality, rigid-Hom, or `Unit_prof` rule.
+
+The durable Lambdapi checks cover the direct object and inner-arrow
+computations, the whole capped base-arrow functor, generic
+`fdapp1_int_cell`, and a genuine next cell between base arrows. The generic
+TypeScript transfer checker validates all point/full/capped rule subjects,
+and the focused runtime check follows the ordinary point facade through its
+object and arrow action. Thus object, inner-arrow, base-arrow, internal-cell,
+and next-base-cell behavior is carried by internal emdash owners at every
+tested level. D-052 did not cap the construction at objects and did not add
+external coherence evidence.
+
+### The remaining architectural limit
+
+The direct *body* grammar is now recursive over coherent leaves, source maps,
+target maps, pairs, structural roots, and qualified constant-middle
+applications. Its enclosing mixed context is still fixed in source code to
+exactly
+
+```text
+k :^n K; c :^f C[k]; a :^f A[k^-].
+```
+
+The builder allocates exactly those three ordinals, records `contextSize: 3`,
+and passes exactly one positive outer and one negative inner ordinal to the
+factorer. That—not body depth or a missing arrow action—is the next measured
+generality boundary.
+
+A correction is required to the earlier shorthand “arbitrary sequence of
+positive and negative slots.” Such a sequence cannot safely be flattened
+without consulting its expected classifiers. Independent same-base siblings
+belong to the existing product/Sigma contextual normal form and its structural
+projection wiring. Genuine nested variance instead belongs to canonical
+`Functord`, `Functor_catd`, `Hom_catd`, and `Transf_catd` heads, whose source
+orientation and action determine which next binder is meaningful. Treating
+both cases as one untyped polarity list would risk accepting an ill-kinded
+sequence or silently requiring a curry equivalence.
+
+The scalable direction is therefore expected-classifier-directed:
+
+1. recursively inspect the already-reified canonical expected classifier;
+2. introduce the binder mode and orientation owned by that classifier;
+3. use the existing finite product/Sigma wiring only for an independent
+   sibling block;
+4. carry a context environment mapping locally nameless slots to their
+   internal structural projections;
+5. invoke the existing recursive direct-body combinator algebra at the
+   resulting target; and
+6. fail closed for unknown, merely equivalent, or insufficiently internalized
+   classifier presentations.
+
+This is still direct binder introduction. It does not route the source syntax
+through a total-context section or make the auxiliary curry packages
+foundational.
+
+### Successor priority
+
+Larger direct mixed contexts rank ahead of unrestricted mixed transformation
+introduction. The reason is not that `lambda^nd` is unimportant: the current
+frontend already has a useful internally checked `lambda^nd` fragment for
+coherent eta leaves and arbitrary finite recursive vertical composition, and
+its base-arrow naturality cell is owned by the kernel. Extending it to
+arbitrary pointwise bodies would require a new constructor-by-constructor
+coherence algebra and possibly new internal owners. By contrast, the direct
+functor body algebra is now substantially richer, while its surrounding
+three-slot context is visibly hard-coded and can draw on the completed
+arbitrary-finite positive telescope and recursive mixed-classifier machinery.
+
+The next dependency-ready row is therefore the zero-delta
+`DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` audit. It must inventory the canonical
+expected classifier ladder, distinguish sibling packing from true variance
+transitions, probe at least one representative larger context through
+existing owners, and freeze a separate implementation proposal. It must not
+edit semantics or claim arbitrary contexts merely from one witness. General
+`lambda^nd` constructor coverage ranks immediately after that architecture
+decision. Product facade, contextual/mixed curry promotion, text/browser
+parity, and remote effects remain deferred.
 
 ## Validation And Checkpoint Policy
 
@@ -4620,16 +4741,27 @@ The sole post-tranche `check:ts` terminal summary was lost during the
 unexpected session interruption and was not rerun; do not fabricate counts or
 repeat that multi-minute aggregate merely for reassurance.
 
-Treat `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` as the next dependency-ready
-read-only action. Reassess the extended direct algebra, its internally owned
-object/base-arrow/higher-action route, finite constant-middle iteration, and
-the priority ordering between larger mixed telescopes and mixed
-transformation/`lambda^nd` introduction. Synchronize findings and freeze any
-semantic successor as a separate reviewable gate before editing code. Direct
-introduction remains fundamental. Larger contexts, mixed transformation
-introduction, unrestricted `:^nd`, general positive/negative family collapse,
-curry promotion, and remote Git effects remain excluded from this read-only
-row.
+Treat `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` as read-only complete with
+zero semantic delta. Its live depth-eight probe emits exactly eight
+`Functor_comp_pair_funcd` owners and matching factorization evidence, with no
+curry/hybrid marker. Carry forward the durable object, inner-arrow,
+base-arrow, internal-cell, and next-base-cell action evidence. The measured
+remaining cap is the hard-coded `k;c;a` context, not recursive body depth or
+missing coherence action.
+
+Treat `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` as the next dependency-ready
+read-only action. Derive the larger direct-context normal form from canonical
+expected `Functord`/`Functor_catd`/`Hom_catd`/`Transf_catd` structure. Keep
+independent product/Sigma sibling wiring distinct from genuine
+variance-sensitive nesting, probe representative larger contexts through
+existing internal owners, and freeze a separate implementation gate before
+editing semantics. Do not flatten arbitrary positive/negative slot lists,
+silently require curry, or infer an arbitrary-context claim from one witness.
+General mixed transformation/`lambda^nd` body algebra ranks after this audit;
+the existing eta/recursive vertical-composition fragment remains valid.
+Direct introduction remains fundamental. Semantic context edits,
+unrestricted `:^nd`, general family collapse, curry promotion, and remote Git
+effects remain excluded from this read-only row.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -4648,6 +4780,24 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` completed
+  read-only and selects an expected-classifier-directed context audit.** A
+  live depth-eight direct term compiled with exactly eight
+  `Functor_comp_pair_funcd` occurrences, factorization count 8, outer/inner
+  occurrence counts 9/1, no production Lambdapi dependency, and no
+  curry/total-context/cast/coercion marker. Durable kernel checks plus generic
+  TypeScript rule checking confirm internally owned object, inner-arrow,
+  base-arrow, `fdapp1_int_cell`, and next-base-cell action. Source inspection
+  isolates the next cap: `mixedDisplayedFunctorLambda` allocates exactly the
+  `k;c;a` ordinals and records `contextSize: 3`, while its body factorer is
+  recursive. Larger contexts therefore rank ahead of general `lambda^nd`, but
+  must be derived from expected canonical classifier heads: independent
+  siblings use existing product/Sigma wiring, whereas true nesting follows
+  `Functord`/`Functor_catd`/`Hom_catd`/`Transf_catd` variance. The next
+  dependency-ready row is the zero-delta
+  `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` audit. The existing direct
+  `lambda^nd` eta/recursive-composition fragment remains valid and ranks
+  second; no semantic edit is authorized yet.
 - **2026-08-01 — D-DTTLF-USABILITY-052 implemented without changing the
   direct-binder architecture.** Active-kernel checkpoint
   `dd8d4c29166f57312da0b7be7e87d72497b91922` owns

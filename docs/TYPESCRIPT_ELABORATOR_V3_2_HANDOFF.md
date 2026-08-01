@@ -226,12 +226,26 @@
 > one kernel CI, warning comparison, and strict audit are green. The sole
 > post-tranche `check:ts` was launched after those gates, but its final terminal
 > summary was lost during the unexpected Codex interruption; it was not rerun
-> and no aggregate result is claimed. The next dependency-ready action is the
-> read-only `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` reassessment of the
-> extended direct algebra, internal object/base-arrow/higher action, finite
-> iteration, and successor priority. It authorizes no semantic edit. General
+> and no aggregate result is claimed. Its immediate read-only successor was
+> `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N`, now completed below. General
 > middle-family collapse, larger contexts, unrestricted variance,
 > `lambda^nd`, and curry/product-facade promotion remain separate.
+> `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` is now read-only complete with
+> zero semantic delta. A live depth-eight direct term compiled with exactly
+> eight `Functor_comp_pair_funcd` occurrences and matching factorization
+> evidence, outer/inner usage 9/1, no production Lambdapi dependency, and no
+> curry/total-context/cast/coercion marker. The active owner and durable
+> checks retain object, inner-arrow, whole base-arrow, generic internal-cell,
+> and next-base-cell action through existing kernel owners. The measured cap
+> is instead the frontend's fixed `k;c;a` context and `contextSize: 3`.
+> The next dependency-ready row is the zero-delta
+> `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` audit. It must derive larger direct
+> contexts from canonical expected `Functord`/`Functor_catd`/`Hom_catd`/
+> `Transf_catd` structure, keeping independent product/Sigma sibling wiring
+> distinct from genuine variance-sensitive nesting. It may probe and freeze a
+> separate implementation gate, but may not edit semantics. General
+> `lambda^nd` body algebra ranks second because the existing direct eta and
+> recursive vertical-composition fragment is already internally coherent.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
