@@ -20,11 +20,16 @@ const A = emdash.displayedFamily(
     'Demo_A',
     emdash.oppositeCategory(K)
 );
+const APrime = emdash.displayedFamily(
+    'Demo_A_prime',
+    emdash.oppositeCategory(K)
+);
 const B = emdash.displayedFamily('Demo_B', K);
 const D = emdash.displayedFamily('Demo_D', K);
 const functorFamily = emdash.mixedDisplayedFunctorFamily(A, B);
 const F = emdash.displayedFunctor('Demo_F', C, functorFamily);
 const G = emdash.displayedFunctor('Demo_G', B, D);
+const L = emdash.displayedFunctor('Demo_L', APrime, A);
 
 const directIdentity = emdash.mixedDisplayedFunctorLambda(
     { name: 'h', family: functorFamily },
@@ -47,25 +52,49 @@ const mapped = emdash.mixedDisplayedFunctorLambda(
         emdash.apply(emdash.apply(F, c), a)
     )
 );
+const sourceMapped = emdash.mixedDisplayedFunctorLambda(
+    { name: 'c', family: C },
+    { name: 'aPrime', family: APrime },
+    D,
+    (c, aPrime) => emdash.apply(
+        G,
+        emdash.apply(
+            emdash.apply(F, c),
+            emdash.apply(L, aPrime)
+        )
+    )
+);
 const directIdentityCompilation = emdash.compile(directIdentity);
 const etaCompilation = emdash.compile(eta);
 const mappedCompilation = emdash.compile(mapped);
+const sourceMappedCompilation = emdash.compile(sourceMapped);
 const evidence = emdash.inspect(mapped).abstractions.find(candidate =>
     candidate.rule ===
+        'categorical.direct-mixed-displayed-functor'
+);
+const sourceEvidence = emdash.inspect(sourceMapped).abstractions.find(
+    candidate => candidate.rule ===
         'categorical.direct-mixed-displayed-functor'
 );
 
 console.log(JSON.stringify({
     surface:
         'lambda^n k. lambda^f c. lambda^f a. G[k](F[k](c)(a))',
+    sourceSurface:
+        'lambda^n k. lambda^f c. lambda^f a\'. ' +
+        'G[k](F[k](c)(L[k](a\')))',
     fundamentalIdentitySurface:
         'lambda^n k. lambda^f h. lambda^f a. h(a)',
     resultType: 'Functord C (Functor_catd A D)',
     fundamentalIdentityCore: directIdentityCompilation.explicitCore,
     etaCore: etaCompilation.explicitCore,
     mappedCore: mappedCompilation.explicitCore,
+    sourceMappedCore: sourceMappedCompilation.explicitCore,
+    sourceChainLength: sourceEvidence?.sourceChainLength,
+    sourceThenTargetChainLength: sourceEvidence?.targetChainLength,
     targetChainLength: evidence?.targetChainLength,
     locallyNamelessBindings: evidence?.bindingNames,
     noContextualCurry:
-        !mappedCompilation.explicitCore.includes('mixed_curry')
+        !mappedCompilation.explicitCore.includes('mixed_curry') &&
+        !sourceMappedCompilation.explicitCore.includes('mixed_curry')
 }, null, 2));

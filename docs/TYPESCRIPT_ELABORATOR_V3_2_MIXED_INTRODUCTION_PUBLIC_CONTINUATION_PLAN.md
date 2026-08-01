@@ -150,6 +150,14 @@ remains iterable. Its exact scope-base versus family-domain orientation and
 bounded TypeScript continuation are frozen below as
 H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-ACTION-01 /
 D-DTTLF-USABILITY-045. No source-side kernel edit is authorized by D-044.
+The D-045 implementation and its D-DTTLF-USABILITY-046 acquisition correction
+are now final-green in the current coherent tranche. One active existing-owner
+projection returns the whole source composite; one pre-existing opposite-Hom
+rule completes its zero-declaration TypeScript transfer. The direct binder
+supports finite source recursion followed by finite target recursion without
+importing or invoking either curry package. The next dependency-ready work is
+the read-only `DIRECT-MIXED-SOURCE-GRADUATE-1F` reassessment below, not a
+mixed-curry promotion.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -419,8 +427,9 @@ It deliberately avoids:
 | `MIXED-VARIANCE-GRADUATE-1E` | read-only stress audit complete; split into the two bounded rows below before graduation | final-green D-043 at `2c53291da9a8f74e9102434235f504721f53d34a`; representative direct recursive binder, inner action and full base-action formation | The public binder remains fundamental. The audit found one TypeScript classifier-view correction for identity/positive nesting and one separate orientation-aware source-action closure. It did not find a need for public curry. |
 | `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | implemented and final-green at `ff868fbc2a7d4f92b66312e458cb5fca67f63470` under D-DTTLF-USABILITY-044 | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | The canonical indexed-functor now retains its exact indexed-object family; direct `c(a)` lowers through existing `id_funcd`; and recursively nested positive canonical targets elaborate through the same factorer. No kernel rule, runtime declaration, curry dependency, or broad convertibility case was added. |
 | `MIXED-SOURCE-ACTION-0E2` | complete; selected one-rule owner-position candidate quiet-green, zero warning delta, strict-audit clean, and finite-chain positive | final-green D-044; preliminary three-rule and selected one-rule full-file probes; active `Functor_catd_func` and ordinary composition owners | Distinguish shared scope base `K` from family-domain orientation `K` versus `Op K`. Reject the capped three-rule precomposition route; select one existing-owner rule returning whole `comp_cat_fapp0`, with object/arrow and two-map checks. |
-| `DIRECT-MIXED-SOURCE-ACTION-1E2` | separately reviewed-approved from proposal `9c37e5e21c8f2246c11ab92236923ab044e02ca5`; implementation dependency-ready under D-DTTLF-USABILITY-045 | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; selected owner-position probe; separate review under standing unattended delegation | Add exactly one active existing-owner rule and one zero-declaration generic runtime rule. Model scope base separately from source/target family domains in construction metadata, and extend the direct factorer with finite `L(source-argument)` recursion over exact `Op K` source maps. Add no curry dependency or external coherence evidence. |
-| `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | separately reviewed-approved from proposal `9246adee5c5201d713b7fc2a271121c8380b0b2a`; implementation dependency-ready under D-DTTLF-USABILITY-046 | approved D-045 implementation; TypeScript subject-check failure at the exact `Functor_catd_func` source-arrow argument; active `Hom_cat(Op A,X,Y)` computation | Transfer exactly the omitted pre-existing opposite-Hom reversal before the D-045 source projection. The corrected TypeScript fragment remains zero-declaration and generic, with one prerequisite rule plus the one new active source projection; it adds no kernel rule, checker case, curry dependency, or external oracle. |
+| `DIRECT-MIXED-SOURCE-ACTION-1E2` | final-green in the current coherent tranche under D-DTTLF-USABILITY-045; exact checkpoint recorded by the following ledger synchronization | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; proposal `9c37e5e21c8f2246c11ab92236923ab044e02ca5`; separate review | One active existing-owner rule and one zero-declaration generic transfer return whole `comp_cat_fapp0`; exact scope/family orientation and finite `L(source-argument)` recursion are implemented. Object and arrow action remain generic and iterable; no curry dependency or external coherence evidence is present. |
+| `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | final-green in the same coherent tranche under D-DTTLF-USABILITY-046; exact checkpoint recorded by the following ledger synchronization | implemented D-045; proposal `9246adee5c5201d713b7fc2a271121c8380b0b2a`; measured subject-check failure; active opposite-Hom computation | The omitted pre-existing opposite-Hom reversal is transferred before the D-045 source projection. The corrected fragment is zero-declaration and generic: one prerequisite rule plus one new mathematical projection, with no checker case, curry dependency, or external oracle. |
+| `DIRECT-MIXED-SOURCE-GRADUATE-1F` | next dependency-ready read-only audit | final-green D-045/D-046; direct source/target recursion; user's direct-binder invariant | Freeze the exact demonstrated direct grammar, stress representative nested `Functor_catd`/`Hom_catd`/`Transf_catd` uses, and classify each remaining rejection as a surface-factorization gap or a genuinely missing internal owner. Preserve direct `lambda^n/lambda^f/lambda^f` introduction as fundamental; authorize no semantic, curry, text, or browser edit during the audit. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2666,6 +2675,71 @@ the user's standing unattended-review delegation, and absent an immediate
 human correction, this approves only the five numbered D-046 items with
 immediate human supersession.
 
+## D-045/D-046 Implementation Result And Next Read-only Audit
+
+The corrected implementation is final-green in the current coherent tranche.
+Its public source form remains the direct nested binder:
+
+```text
+lambda^n k. lambda^f c. lambda^f a. t
+  : Functord C (Functor_catd A B).
+```
+
+The implemented recursive body grammar is exactly:
+
+```text
+source-argument ::= a | L(source-argument)
+mixed-root      ::= c(source-argument) | F[c](source-argument)
+mixed-body      ::= mixed-root | G(mixed-body)
+```
+
+Each closed source map `L` is a `Functord` over exact `Op K`; each closed
+target map `G` is a `Functord` over exact `K`. Source maps lower in reverse
+spine order through the existing contravariant action of
+`Functor_catd_func`; target maps lower in forward spine order through the
+existing covariant action. Both routes compose whole displayed functors, so
+generic `fapp*`/`tapp*` continues to own object, arrow, base-arrow, and higher
+action. No pointwise naturality equation, external coherence witness, Core
+coercion, or curry call is emitted.
+
+The TypeScript runtime fragment has zero declarations and two rules: the
+pre-existing generic opposite-Hom endpoint reversal required by D-046, then
+the one new D-045 source projection. Both pass generic TypeScript subject
+checking. The active Lambdapi delta remains exactly one rule at the existing
+`Functor_catd_func` action and zero symbols. Five durable checks cover the
+whole composite, object action, arrow action, a two-source chain, and
+opposite-base non-collapse. The warning inventory is unchanged at 1,238 total
+warnings (1,079 critical pairs and 159 replaceable variables), and the strict
+LHS audit has zero unreviewed clauses. Catalog, TOC, health, all 41 bounded
+kernel/example checks, and the inexpensive recovered CI tail are green.
+
+Focused TypeScript transfer, direct-binder, demo, typecheck, and lint evidence
+is green. The one required `check:ts` completed all 1,284 tests with 1,221
+passes, 51 skips, and twelve failures sharing only the mechanically stale
+active-source digest after the authorized kernel edit. Every active
+`emdash3_2.lp` acquisition pin was updated from `c190da66...` to the measured
+`c09f503a...` digest, exactly following the preceding D-043 correction
+pattern. The exact affected-file rerun plus the new runtime test is green at
+81 pass/3 skip; typecheck and lint remain green. Per the repository SOP, the
+unchanged 27-minute aggregate is not repeated merely to re-execute its 1,221
+already-passing tests.
+
+This settles the immediate source-action implementation, not unrestricted
+categorical lambda synthesis. `DIRECT-MIXED-SOURCE-GRADUATE-1F` is therefore
+the next dependency-ready read-only audit. It must:
+
+1. treat direct nested binders—not total-context sections or curry—as the
+   fundamental user introduction;
+2. inventory the exact accepted direct grammar and representative rejected
+   nested `Functor_catd`, `Hom_catd`, and `Transf_catd` terms;
+3. verify that both object-level and arrow/higher action remain internalized;
+4. distinguish a missing recursive surface factorization from a genuinely
+   missing kernel owner before proposing either kind of edit;
+5. retain D-040/D-042 as isolated auxiliary evidence that may be useful
+   independently but is never a binder prerequisite; and
+6. freeze a separate proposal before semantic, text-parity, browser, product,
+   or public-promotion work.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -2775,8 +2849,22 @@ three-rule `hom_precomp_along_fapp0` route is rejected. Treat
 H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-ACTION-01 /
 D-DTTLF-USABILITY-045 as separately reviewed-approved from proposal
 `9c37e5e21c8f2246c11ab92236923ab044e02ca5` under the standing unattended
-delegation. Implement only its exact twelve-item direct source-recursion
-boundary. Never add external naturality or coherence evidence.
+delegation, and D-DTTLF-USABILITY-046 as separately reviewed-approved from
+proposal `9246adee5c5201d713b7fc2a271121c8380b0b2a`. Treat both as
+implemented/final-green at the exact checkpoint recorded in the Decision
+Ledger. The direct grammar admits finite `a | L(source)` recursion before its
+finite target chain, with one existing opposite-Hom prerequisite and one new
+source projection in the zero-declaration TypeScript fragment. Carry forward
+the focused, TypeScript aggregate-plus-pin-correction, and Lambdapi CI
+evidence; do not repeat unchanged long gates. Never add external naturality or
+coherence evidence, and never make D-040/D-042 a prerequisite for direct
+binder introduction.
+
+Continue next with the read-only `DIRECT-MIXED-SOURCE-GRADUATE-1F` audit.
+Preserve the fundamental form
+`lambda^n k. lambda^f c. lambda^f a. t`; classify remaining direct-expression
+failures before proposing code, and freeze a separate gate before any
+semantic, curry, text, browser, product, or publication change.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -2795,6 +2883,21 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-045/D-046 implementation final-green in
+  the current coherent tranche.** The direct binder now factors finite
+  contravariant source spines followed by finite covariant target spines. One
+  active existing-owner projection returns whole `comp_cat_fapp0`; its
+  zero-declaration TypeScript transfer also imports the pre-existing generic
+  opposite-Hom reversal exposed by subject checking. Both runtime rules are
+  generically subject-checked, object and arrow action compute, two source
+  maps remain iterable, and no curry package is imported or invoked. The
+  Lambdapi warning inventory remains 1,079/159, strict LHS audit is clean, all
+  41 kernel/example checks and the recovered CI tail are green, and catalog,
+  TOC, and health are current. The sole `check:ts` had twelve stale digest-pin
+  failures after 1,221 passes/51 skips; the exact mechanical pin refresh and
+  affected-file rerun are green at 81 pass/3 skip, with typecheck and lint
+  green. The direct binder remains fundamental. The next row is the read-only
+  `DIRECT-MIXED-SOURCE-GRADUATE-1F` reassessment, not curry promotion.
 - **2026-08-01 — D-DTTLF-USABILITY-046 approved exactly as proposed.** A
   separate review of proposal checkpoint
   `9246adee5c5201d713b7fc2a271121c8380b0b2a` confirms that the first

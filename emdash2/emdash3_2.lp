@@ -13297,6 +13297,32 @@ rule @fapp0
       (@tapp0_fapp0 $K Cat_cat $B $D $k $G)
       $H;
 
+// Contravariant source-family action projected at k and consumed by H remains
+// a whole functor: H o L[k]. Generic ordinary action then owns both its object
+// and hom projections, so iterated source maps require no capped point rule.
+rule @fapp0
+      _ _
+      (@tapp0_fapp0
+        $K Cat_cat _ _ $k
+        (@tapp0_fapp0
+          (Catd_cat $K)
+          (Catd_cat $K)
+          (@Functor_catd_fapp0_func $K $A)
+          (@Functor_catd_fapp0_func $K $A')
+          $B
+          (@fapp1_fapp0
+            (Op_cat (Catd_cat (Op_cat $K)))
+            (Functor_cat (Catd_cat $K) (Catd_cat $K))
+            (@Functor_catd_func $K)
+            $A $A' $L)))
+      $H
+  ↪ @comp_cat_fapp0
+      (Fibre_cat $A' $k)
+      (Fibre_cat $A $k)
+      (Fibre_cat $B $k)
+      $H
+      (@tapp0_fapp0 (Op_cat $K) Cat_cat $A' $A $k $L);
+
 // Mixed-variance hom family for two sections of a displayed family.
 //
 // Surface/formula:

@@ -13557,6 +13557,188 @@ assertnot [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) ⊢
   @Functor_catd K A B ≡ B;
 
 // -------------------------------------------------------------------------------------------------
+// Direct mixed source-family action
+// catalog-area: Direct mixed source-family action
+// -------------------------------------------------------------------------------------------------
+
+// Check-only source action assembled from the existing constructor action.
+symbol direct_mixed_pre_funcd_check
+  [K : Cat]
+  [A' A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  (L : τ (Functord A' A))
+  : τ (Functord
+      (@Functor_catd K A B)
+      (@Functor_catd K A' B))
+≔ @tapp0_fapp0
+    (Catd_cat K)
+    (Catd_cat K)
+    (@Functor_catd_fapp0_func K A)
+    (@Functor_catd_fapp0_func K A')
+    B
+    (@fapp1_fapp0
+      (Op_cat (Catd_cat (Op_cat K)))
+      (Functor_cat (Catd_cat K) (Catd_cat K))
+      (@Functor_catd_func K)
+      A A' L);
+
+// The constructor source action projects to the whole ordinary composite.
+assert [K : Cat]
+  (A' A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (L : τ (Functord A' A))
+  (k : τ (Obj K))
+  (H : τ (Functor (Fibre_cat A k) (Fibre_cat B k))) ⊢
+  @fapp0
+    (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+    (Functor_cat (Fibre_cat A' k) (Fibre_cat B k))
+    (@tapp0_fapp0
+      K Cat_cat
+      (@Functor_catd K A B)
+      (@Functor_catd K A' B)
+      k
+      (@direct_mixed_pre_funcd_check K A' A B L))
+    H
+  ≡ @comp_cat_fapp0
+      (Fibre_cat A' k)
+      (Fibre_cat A k)
+      (Fibre_cat B k)
+      H
+      (@tapp0_fapp0 (Op_cat K) Cat_cat A' A k L);
+
+// Its object action is ordinary composition H(L[k](a')).
+assert [K : Cat]
+  (A' A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (L : τ (Functord A' A))
+  (k : τ (Obj K))
+  (H : τ (Functor (Fibre_cat A k) (Fibre_cat B k)))
+  (a' : τ (Obj (Fibre_cat A' k))) ⊢
+  @fapp0
+    (Fibre_cat A' k)
+    (Fibre_cat B k)
+    (@fapp0
+      (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+      (Functor_cat (Fibre_cat A' k) (Fibre_cat B k))
+      (@tapp0_fapp0
+        K Cat_cat
+        (@Functor_catd K A B)
+        (@Functor_catd K A' B)
+        k
+        (@direct_mixed_pre_funcd_check K A' A B L))
+      H)
+    a'
+  ≡ @fapp0
+      (Fibre_cat A k)
+      (Fibre_cat B k)
+      H
+      (@fapp0
+        (Fibre_cat A' k)
+        (Fibre_cat A k)
+        (@tapp0_fapp0 (Op_cat K) Cat_cat A' A k L)
+        a');
+
+// Generic ordinary hom action supplies the inner-arrow computation.
+assert [K : Cat]
+  (A' A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (L : τ (Functord A' A))
+  (k : τ (Obj K))
+  (H : τ (Functor (Fibre_cat A k) (Fibre_cat B k)))
+  (a' a'' : τ (Obj (Fibre_cat A' k)))
+  (alpha : τ (Hom (Fibre_cat A' k) a' a'')) ⊢
+  @fapp1_fapp0
+    (Fibre_cat A' k)
+    (Fibre_cat B k)
+    (@fapp0
+      (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+      (Functor_cat (Fibre_cat A' k) (Fibre_cat B k))
+      (@tapp0_fapp0
+        K Cat_cat
+        (@Functor_catd K A B)
+        (@Functor_catd K A' B)
+        k
+        (@direct_mixed_pre_funcd_check K A' A B L))
+      H)
+    a' a'' alpha
+  ≡ @fapp1_fapp0
+      (Fibre_cat A k)
+      (Fibre_cat B k)
+      H
+      (@fapp0
+        (Fibre_cat A' k)
+        (Fibre_cat A k)
+        (@tapp0_fapp0 (Op_cat K) Cat_cat A' A k L)
+        a')
+      (@fapp0
+        (Fibre_cat A' k)
+        (Fibre_cat A k)
+        (@tapp0_fapp0 (Op_cat K) Cat_cat A' A k L)
+        a'')
+      (@fapp1_fapp0
+        (Fibre_cat A' k)
+        (Fibre_cat A k)
+        (@tapp0_fapp0 (Op_cat K) Cat_cat A' A k L)
+        a' a'' alpha);
+
+// Two source maps iterate through generic displayed composition.
+symbol direct_mixed_pre2_funcd_check
+  [K : Cat]
+  [A0 A1 A2 : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  (L1 : τ (Functord A0 A1))
+  (L2 : τ (Functord A1 A2))
+  : τ (Functord
+      (@Functor_catd K A2 B)
+      (@Functor_catd K A0 B))
+≔ @comp_fapp0
+    (Catd_cat K)
+    (@Functor_catd K A2 B)
+    (@Functor_catd K A1 B)
+    (@Functor_catd K A0 B)
+    (@direct_mixed_pre_funcd_check K A0 A1 B L1)
+    (@direct_mixed_pre_funcd_check K A1 A2 B L2);
+
+assert [K : Cat]
+  (A0 A1 A2 : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (L1 : τ (Functord A0 A1))
+  (L2 : τ (Functord A1 A2))
+  (k : τ (Obj K))
+  (H : τ (Functor (Fibre_cat A2 k) (Fibre_cat B k)))
+  (a0 : τ (Obj (Fibre_cat A0 k))) ⊢
+  @fapp0
+    (Fibre_cat A0 k)
+    (Fibre_cat B k)
+    (@fapp0
+      (Functor_cat (Fibre_cat A2 k) (Fibre_cat B k))
+      (Functor_cat (Fibre_cat A0 k) (Fibre_cat B k))
+      (@tapp0_fapp0
+        K Cat_cat
+        (@Functor_catd K A2 B)
+        (@Functor_catd K A0 B)
+        k
+        (@direct_mixed_pre2_funcd_check K A0 A1 A2 B L1 L2))
+      H)
+    a0
+  ≡ @fapp0
+      (Fibre_cat A2 k)
+      (Fibre_cat B k)
+      H
+      (@fapp0
+        (Fibre_cat A1 k)
+        (Fibre_cat A2 k)
+        (@tapp0_fapp0 (Op_cat K) Cat_cat A1 A2 k L2)
+        (@fapp0
+          (Fibre_cat A0 k)
+          (Fibre_cat A1 k)
+          (@tapp0_fapp0 (Op_cat K) Cat_cat A0 A1 k L1)
+          a0));
+
+// Source variance does not collapse the base category with its opposite.
+assertnot [K : Cat] (A : τ (Catd (Op_cat K))) ⊢ Op_cat K ≡ K;
+
+// -------------------------------------------------------------------------------------------------
 // Mixed displayed curry
 // catalog-area: Mixed displayed curry
 // -------------------------------------------------------------------------------------------------

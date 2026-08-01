@@ -326,6 +326,104 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
         assert.equal(twoCompiled.productionLambdapiDependency, false);
     });
 
+    it('recursively maps finite contravariant sources before target maps',
+    () => {
+        const { emdash, opK, C, A, B, D, F, G } =
+            fixture('source_mapped');
+        const APrime = emdash.displayedFamily(
+            'direct_mixed_source_mapped_A_prime',
+            opK
+        );
+        const ADoublePrime = emdash.displayedFamily(
+            'direct_mixed_source_mapped_A_double_prime',
+            opK
+        );
+        const L = emdash.displayedFunctor(
+            'direct_mixed_source_mapped_L',
+            APrime,
+            A
+        );
+        const M = emdash.displayedFunctor(
+            'direct_mixed_source_mapped_M',
+            ADoublePrime,
+            APrime
+        );
+        const boundFamily = emdash.mixedDisplayedFunctorFamily(A, B);
+        const boundIdentity = emdash.mixedDisplayedFunctorLambda(
+            { name: 'h', family: boundFamily },
+            { name: 'aPrime', family: APrime },
+            B,
+            (h, aPrime) => emdash.apply(
+                h,
+                emdash.apply(L, aPrime)
+            )
+        );
+        const eta = emdash.mixedDisplayedFunctorLambda(
+            { name: 'c', family: C },
+            { name: 'aPrime', family: APrime },
+            B,
+            (c, aPrime) => emdash.apply(
+                emdash.apply(F, c),
+                emdash.apply(L, aPrime)
+            )
+        );
+        const twoSources = emdash.mixedDisplayedFunctorLambda(
+            { name: 'c2', family: C },
+            { name: 'aDoublePrime', family: ADoublePrime },
+            B,
+            (c, aDoublePrime) => emdash.apply(
+                emdash.apply(F, c),
+                emdash.apply(L, emdash.apply(M, aDoublePrime))
+            )
+        );
+        const sourceThenTarget = emdash.mixedDisplayedFunctorLambda(
+            { name: 'c3', family: C },
+            { name: 'aPrime2', family: APrime },
+            D,
+            (c, aPrime) => emdash.apply(
+                G,
+                emdash.apply(
+                    emdash.apply(F, c),
+                    emdash.apply(L, aPrime)
+                )
+            )
+        );
+        const boundCompilation = emdash.compile(boundIdentity);
+        const etaCompilation = emdash.compile(eta);
+        const twoCompilation = emdash.compile(twoSources);
+        const mixedCompilation = emdash.compile(sourceThenTarget);
+        const evidence = (term: typeof eta) =>
+            emdash.inspect(term).abstractions.find(candidate =>
+                candidate.rule ===
+                    'categorical.direct-mixed-displayed-functor'
+            );
+
+        assert.match(boundCompilation.explicitCore, /displayed-identity/u);
+        assert.match(
+            boundCompilation.explicitCore,
+            /Functor_catd_func/u
+        );
+        assert.doesNotMatch(boundCompilation.explicitCore, /mixed_curry/u);
+        assert.match(etaCompilation.explicitCore, /generic-category-composition/u);
+        assert.match(twoCompilation.explicitCore, /generic-category-composition/u);
+        assert.match(mixedCompilation.explicitCore, /generic-category-composition/u);
+        assert.equal(evidence(eta)?.sourceChainLength, 1);
+        assert.equal(evidence(twoSources)?.sourceChainLength, 2);
+        assert.equal(evidence(sourceThenTarget)?.sourceChainLength, 1);
+        assert.equal(evidence(sourceThenTarget)?.targetChainLength, 1);
+        assert.deepEqual(evidence(twoSources)?.bindingNames, [
+            'c2Base',
+            'c2',
+            'aDoublePrime'
+        ]);
+        assert.deepEqual(evidence(twoSources)?.bindingModes, [
+            'natural',
+            'functorial',
+            'functorial'
+        ]);
+        assertDeepFrozen(emdash.inspect(twoSources));
+    });
+
     it('fails closed for wrong variance, noncanonical and unsupported bodies',
     () => {
         const { emdash, K, opK, C, A, B, D, F } =
@@ -369,10 +467,21 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
                 error.code === 'CLASSIFIER_ARGUMENT_MISMATCH'
         );
 
-        const sourceMap = emdash.displayedFunctor(
-            'direct_mixed_negative_source_map',
-            otherA,
-            A
+        const unrelatedK = emdash.category(
+            'direct_mixed_negative_unrelated_K'
+        );
+        const unrelatedSource = emdash.displayedFamily(
+            'direct_mixed_negative_unrelated_source',
+            emdash.oppositeCategory(unrelatedK)
+        );
+        const unrelatedTarget = emdash.displayedFamily(
+            'direct_mixed_negative_unrelated_target',
+            emdash.oppositeCategory(unrelatedK)
+        );
+        const unrelatedMap = emdash.displayedFunctor(
+            'direct_mixed_negative_unrelated_map',
+            unrelatedSource,
+            unrelatedTarget
         );
         assert.throws(
             () => emdash.mixedDisplayedFunctorLambda(
@@ -381,12 +490,17 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
                 B,
                 (c, a) => emdash.apply(
                     emdash.apply(F, c),
-                    emdash.apply(sourceMap, a)
+                    emdash.apply(unrelatedMap, a)
                 )
             ),
             (error: unknown) =>
-                error instanceof CoreCategoricalFrontendError &&
-                error.code === 'CLASSIFIER_ARGUMENT_MISMATCH'
+                (
+                    error instanceof CoreCategoricalFrontendError &&
+                    error.code === 'CLASSIFIER_ARGUMENT_MISMATCH'
+                ) || (
+                    error instanceof CoreCategoricalProgramError &&
+                    error.code === 'DISPLAYED_BASE_MISMATCH'
+                )
         );
 
         const noncanonical = emdash.displayedFunctor(

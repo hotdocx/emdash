@@ -106,8 +106,8 @@ import type {
     CoreCategoricalMixedActionSymbolId
 } from './categorical_mixed_action_transfer';
 import type {
-    CoreCategoricalDirectMixedIntroductionCompilation
-} from './categorical_direct_mixed_introduction_transfer';
+    CoreCategoricalDirectMixedSourceActionCompilation
+} from './categorical_direct_mixed_source_action_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -248,15 +248,15 @@ const mixedActionCoreName = (
 ): string =>
     mixedActionModule().coreCategoricalMixedActionCoreName(id);
 
-const directMixedIntroductionModule = () =>
+const directMixedSourceActionModule = () =>
     optionalProfileModule<typeof import(
-        './categorical_direct_mixed_introduction_transfer'
-    )>('./categorical_direct_mixed_introduction_transfer');
+        './categorical_direct_mixed_source_action_transfer'
+    )>('./categorical_direct_mixed_source_action_transfer');
 
-const compileCoreCategoricalDirectMixedIntroduction = ():
-CoreCategoricalDirectMixedIntroductionCompilation =>
-    directMixedIntroductionModule()
-        .compileCoreCategoricalDirectMixedIntroductionTransfer();
+const compileCoreCategoricalDirectMixedSourceAction = ():
+CoreCategoricalDirectMixedSourceActionCompilation =>
+    directMixedSourceActionModule()
+        .compileCoreCategoricalDirectMixedSourceActionTransfer();
 
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
@@ -1031,7 +1031,7 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDisplayedChain2aClosureCompilation
         | CoreCategoricalDisplayedNdHigherTargetCompilation
         | CoreCategoricalMixedActionCompilation
-        | CoreCategoricalDirectMixedIntroductionCompilation;
+        | CoreCategoricalDirectMixedSourceActionCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -1171,7 +1171,7 @@ export class CoreCategoricalProgram {
             validateCoreCategoricalDisplayedBracketContract();
         }
         this.dependent = this.directMixedIntroductionEnabled
-            ? compileCoreCategoricalDirectMixedIntroduction()
+            ? compileCoreCategoricalDirectMixedSourceAction()
             : this.mixedModeEnabled
             ? compileCoreCategoricalMixedAction()
             : this.displayedNdHigherEnabled
@@ -1248,6 +1248,10 @@ export class CoreCategoricalProgram {
                 directMixedIntroduction:
                     this.directMixedIntroductionEnabled
                         ? Object.freeze({
+                            mixedFunctorFamilyCoreName:
+                                displayedNdHigherFoundationCoreName(
+                                    'mixedFunctorFamily'
+                                ),
                             mixedFunctorFamilyPartialCoreName:
                                 mixedActionCoreName(
                                     'mixedFunctorFamilyPartial'

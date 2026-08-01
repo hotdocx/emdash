@@ -53,7 +53,7 @@ export const CORE_CATEGORICAL_DEPENDENT_TRANSFER_REVISION =
     'USABILITY-2A0-CLOSED-DISPLAYED-APPLICATION-1' as const;
 
 export const CORE_CATEGORICAL_DEPENDENT_SOURCE_SHA256 =
-    'sha256:c190da66e017d8156e9b8e894c7c9b7122df3d4ccad21b1712b7ed51b995a515';
+    'sha256:c09f503aff20cb3f9f5b59fcb1dbb4339bdfa853b48931ebd0dcce9b827ef29f';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
