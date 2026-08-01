@@ -84,9 +84,8 @@
 > product-distribution construction between
 > `P(Functor_catd A B,Functor_catd A D)` and
 > `Functor_catd A (P(B,D))`. The bounded TypeScript-only
-> `DIRECT-MIXED-NESTED-CONVERSION-1F1` gate under D-DTTLF-USABILITY-047 has
-> proposal checkpoint `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`,
-> which was separately
+> `DIRECT-MIXED-NESTED-CONVERSION-1F1` gate under D-DTTLF-USABILITY-047 had
+> proposal checkpoint `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc` and was separately
 > reviewed-approved under the standing unattended delegation and is now
 > final-green at `4845f44c11914f142be357d115ebdde92a33d039`. One generic
 > structural-fast-path plus active-runtime conversion service owns the four
@@ -122,7 +121,7 @@
 > external coherence evidence. Focused transfer/direct/source-action tests
 > are 2/2, 10/10, and 4/4; the single required `check:ts` is green at 1,238
 > pass/51 skip/0 fail out of 1,289 tests. Its coherent TypeScript checkpoint
-> is recorded by the immediately following ledger-only commit. The next
+> is `d5ea9f5d3d296835608eec8f963f7fa5657f0005`. The next
 > dependency-ready action is the read-only
 > `DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment; do not promote curry,
 > product-facade, unrestricted variance, text/browser, or publication work
