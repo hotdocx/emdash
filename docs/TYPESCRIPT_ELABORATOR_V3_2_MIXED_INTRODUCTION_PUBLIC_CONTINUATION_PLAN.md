@@ -495,7 +495,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` | read-only audit complete; zero semantic delta; one TypeScript-only section-root successor selected | final-green `DIRECT-MIXED-WEAKENING-1J`; direct-binder invariant; measured callback/factorer probes and transfer inventory | `S[k](a)` is blocked first by an overly generic open-section classifier view; `b[k]` reaches and is rejected by the recursive factorer. Both derive through existing section, `Terminal_funcd`, direct weakening, and composition. Ordinary-weakening projection acquisition is unnecessary for elaboration and remains only an optional deeper-normalization concern. The constant-middle varying case still lacks an internal displayed composition lift. |
 | `DIRECT-MIXED-SECTION-ROOT-1K` | implemented and final-green at `e337f1b1a3a61a861a714fa9d06035a1949beec9` under D-DTTLF-USABILITY-051 | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050; proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141`; separate review under standing unattended delegation | The bounded runtime reifier recognizes the already-transferred ordinary `Functor_cat` head after the active `Functor_catd` fibre rule. The unchanged open section application receives a canonical indexed-functor construction view. Recursive `S[k](a)` and `b[k]` roots lower through `Terminal_funcd`, with direct inner weakening only for `b[k]`; target maps and nested pairs consume both. No kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd` was added. |
 | `DIRECT-MIXED-SECTION-GRADUATE-1L` | read-only reassessment complete; zero active semantic delta; constant-middle application selected | final-green D-051; fundamental direct-binder invariant; completed three-binder structural roots; live frontend failure; type-aware owner search; bounded append and owner-position probes | The direct three-binder grammar now has all four ordinary variable-occurrence classes. Its first missing *application* constructor is the variance-valid constant-middle case. A one-owner/three-rule displayed lift of existing `Functor_comp_pair_func` is quiet-green, warning-neutral, strict-audit clean, and iterable through base/higher action. Larger contexts and mixed `:^nd` remain broader successors. |
-| `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` | exact D-DTTLF-USABILITY-052 proposal separately reviewed-approved from checkpoint `cd279e770ab416b22119400f9a26f436e62c36a9`; implementation dependency-ready | completed `DIRECT-MIXED-SECTION-GRADUATE-1L`; final-green D-051; active `Unit_prof`, `Functor_catd`, `Product_pair_funcd`, and ordinary `Functor_comp_pair_func` owners; standing unattended delegation with human supersession | Add one `Functor_comp_pair_funcd` owner with point/full/capped projections, a minimal exact ordinary-composition transfer prerequisite, and one recursive constant-middle application node. Compile by pairing already-coherent branches and postcomposing the new owner. Direct nested introduction remains fundamental; no curry, total-context section, general-middle collapse, larger-context, or unrestricted-`:^nd` claim is included. |
+| `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` | implemented and bounded-green; kernel checkpoint `dd8d4c29166f57312da0b7be7e87d72497b91922`; TypeScript checkpoint `74b3c8211b87b120e2fe4482cac097042e22e634` under D-DTTLF-USABILITY-052 | completed `DIRECT-MIXED-SECTION-GRADUATE-1L`; proposal checkpoint `cd279e770ab416b22119400f9a26f436e62c36a9`; separate review; one kernel CI; focused 12/12 TypeScript evidence plus workspace/typecheck/lint/whitespace gates | One `Functor_comp_pair_funcd` owner with point/full/capped projections and its minimal ordinary composition prerequisite are active. The recursive direct-body algebra lowers finite qualified constant-middle applications by pairing already-coherent branches and postcomposing that owner. Direct nested introduction remains fundamental; no curry, total-context section, general-middle collapse, larger-context, or unrestricted-`:^nd` claim is included. The sole post-tranche `check:ts` was launched but its terminal summary was lost with the interrupted Codex session and was not rerun. |
+| `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` | dependency-ready read-only reassessment; zero semantic delta authorized | bounded-green D-052; fundamental direct-binder invariant; recursive constant-middle body algebra; user clarification that curry/hybrid lowering is not fundamental | Audit the extended direct algebra and its internal object/base-arrow/higher-action route; stress finite constant-middle iteration and rank larger mixed telescopes against mixed transformation/`lambda^nd` work. Freeze any semantic successor separately. Product facade and mixed/contextual curry remain optional auxiliary designs, not prerequisites. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -4289,6 +4290,75 @@ authorization does not include larger mixed contexts, arbitrary middle
 families, transformation introduction, unrestricted `lambda^nd`, curry
 promotion, text/browser work, remote Git effects, or unrelated cleanup.
 
+### D-DTTLF-USABILITY-052 implementation result
+
+The bounded semantic tranche is implemented at active-kernel checkpoint
+`dd8d4c29166f57312da0b7be7e87d72497b91922` and coherent TypeScript
+checkpoint `74b3c8211b87b120e2fe4482cac097042e22e634`. This result does not
+change the introduction architecture. The fundamental end-user construction
+remains
+
+```text
+lambda^n k. lambda^f c. lambda^f a. t
+```
+
+and the new work extends only the recursively compiled algebra of `t`. In
+particular, a qualified body such as
+
+```text
+G[c](F[c](a))
+```
+
+is represented by a `constant-middle-application` factor whose child is
+recursively compiled. The compiler pairs that already-coherent child with the
+closed coherent subject `G` through existing displayed pairing and
+postcomposes `Functor_comp_pair_funcd`. It creates no total-context section,
+curry term, hybrid fallback, pointwise-function payload, cast, coercion, or
+external naturality equation. The node is recursive, so finite chains of
+qualified constant middles use the same construction rather than a fixed
+depth case.
+
+The construction-only constant-family reorientation is equally narrow. It
+accepts only the same locally nameless base slot and the same exact fibre
+category `X` between `Const_catd(K,X)` and the source presentation
+`Const_catd(Op K,X)`. The Core term is unchanged and the final generic LF
+checker remains authoritative. Arbitrary middle-family equality, heuristic
+proof search, and general opposite-base conversion continue to fail closed.
+
+The generic transfer contains opaque `comp_prod_func`, the checked transparent
+`Functor_comp_pair_func`, the new opaque/injective
+`Functor_comp_pair_funcd`, and four runtime rules in total. The imported
+ordinary point rule is deliberately the `Cat_cat` specialization required by
+the transparent facade and is oriented to already-checked
+`comp_cat_fapp0`. A raw generic presentation was well-typed as a rule but did
+not expose downstream object/arrow computation in the current TypeScript
+runtime; a fully generic facade presentation was not type-preserving at the
+ambient classifier. This bounded checked presentation is therefore a
+computational transfer seam, not a new kernel equality, manual per-case
+unification table, or evidence that the direct binder needs curry.
+
+Focused TypeScript evidence is 12 pass and 0 fail: four generic
+declaration/runtime-transfer checks and eight direct-surface checks. It covers
+one constant middle, a two-level chain, composition around existing
+source/target/pair children, object and inner-arrow computation, immutable
+occurrence evidence, and the exact negative orientation/coherence cases. The
+factorer avoids recursively probing an ordinary target chain twice, keeping
+this new recognition path linear in the qualified chain depth. Workspace
+contract, typecheck, lint, and `git diff --check` are green. The one required
+post-tranche `check:ts` was started only after those gates were green, but the
+Codex terminal session was unexpectedly interrupted and its final summary was
+not recoverable; no second multi-minute aggregate was run. This ledger does
+not invent aggregate counts or call that missing observation green.
+
+The next dependency-ready action is the zero-delta
+`DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` reassessment. It must verify the
+extended direct algebra and internal object/base-arrow/higher-action route,
+stress finite iteration, and rank larger mixed telescopes against mixed
+transformation/`lambda^nd` introduction. It may freeze a separate successor,
+but it may not edit semantics. Product-facade and mixed/contextual-curry work
+remain auxiliary possibilities that can be compared later; neither is a
+prerequisite for direct nested introduction.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -4538,14 +4608,28 @@ next-cell iterability. It reuses the existing target `Functor_catd`/rigid-Hom/
 Treat `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` /
 D-DTTLF-USABILITY-052 as separately reviewed-approved from immutable proposal
 checkpoint `cd279e770ab416b22119400f9a26f436e62c36a9` under the standing
-unattended delegation with immediate human supersession. Implement only its
-eleven numbered items: one new displayed composition owner/three rules, the
-minimal exact ordinary-composition transfer prerequisite, qualified
-constant-family construction view, and recursive constant-middle application
-case. Direct introduction remains fundamental.
-Larger contexts, mixed transformation introduction, unrestricted `:^nd`,
-general positive/negative family collapse, curry promotion, and remote Git
-effects remain excluded.
+unattended delegation with immediate human supersession, and now as
+implemented/bounded-green. Its active-kernel checkpoint is
+`dd8d4c29166f57312da0b7be7e87d72497b91922`; its coherent TypeScript
+checkpoint is `74b3c8211b87b120e2fe4482cac097042e22e634`. The recursive direct
+body algebra now lowers finite qualified constant-middle applications through
+existing displayed pairing plus `Functor_comp_pair_funcd`; it does not use
+curry or a total-context section. Carry forward the focused 12/12,
+workspace/typecheck/lint/whitespace, kernel CI, warning, and audit evidence.
+The sole post-tranche `check:ts` terminal summary was lost during the
+unexpected session interruption and was not rerun; do not fabricate counts or
+repeat that multi-minute aggregate merely for reassurance.
+
+Treat `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` as the next dependency-ready
+read-only action. Reassess the extended direct algebra, its internally owned
+object/base-arrow/higher-action route, finite constant-middle iteration, and
+the priority ordering between larger mixed telescopes and mixed
+transformation/`lambda^nd` introduction. Synchronize findings and freeze any
+semantic successor as a separate reviewable gate before editing code. Direct
+introduction remains fundamental. Larger contexts, mixed transformation
+introduction, unrestricted `:^nd`, general positive/negative family collapse,
+curry promotion, and remote Git effects remain excluded from this read-only
+row.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -4564,6 +4648,22 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-052 implemented without changing the
+  direct-binder architecture.** Active-kernel checkpoint
+  `dd8d4c29166f57312da0b7be7e87d72497b91922` owns
+  `Functor_comp_pair_funcd` and its point/full/capped action. TypeScript
+  checkpoint `74b3c8211b87b120e2fe4482cac097042e22e634` generically transfers
+  the exact prerequisite and owner, adds a recursive
+  `constant-middle-application` factor, and checks finite qualified chains
+  such as `G[c](F[c](a))`. Compilation pairs coherent branches and
+  postcomposes the new owner; it emits no curry, total-context section,
+  coercion, external equation, or pointwise-function evidence. Focused
+  evidence is 12/12, with workspace/typecheck/lint/whitespace and one kernel
+  CI green. The sole post-tranche `check:ts` was launched but its final
+  terminal summary was lost during the unexpected session interruption; it
+  was not rerun and no aggregate result is claimed. The next row is the
+  read-only `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` reassessment; any
+  semantic successor requires a separately frozen gate.
 - **2026-08-01 — D-DTTLF-USABILITY-052 approved exactly as proposed.** A
   separate review of immutable proposal checkpoint
   `cd279e770ab416b22119400f9a26f436e62c36a9` confirms that the active kernel

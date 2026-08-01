@@ -211,10 +211,27 @@
 > `cd279e770ab416b22119400f9a26f436e62c36a9` and is separately
 > reviewed-approved under the standing unattended delegation. The review
 > confirms the exact constant-family conversion, absent displayed composition
-> lift, and minimal ordinary-composition transfer prerequisite. Implementation
-> is dependency-ready. It keeps direct nested introduction fundamental and
-> explicitly excludes curry, total-context sections, general middle-family
-> collapse, larger contexts, unrestricted variance, and `lambda^nd`.
+> lift, and minimal ordinary-composition transfer prerequisite. It is now
+> implemented/bounded-green: active-kernel checkpoint
+> `dd8d4c29166f57312da0b7be7e87d72497b91922` owns
+> `Functor_comp_pair_funcd` and its point/full/capped action; coherent
+> TypeScript checkpoint `74b3c8211b87b120e2fe4482cac097042e22e634`
+> generically transfers that owner and exact ordinary prerequisite. The direct
+> body factorer recursively lowers finite qualified constant-middle terms such
+> as `G[k](c)(F[k](c)(a))` through existing displayed pairing followed by the
+> new owner. The fundamental introduction remains
+> `lambda^n k. lambda^f c. lambda^f a. t`: no curry, hybrid total-context
+> lowering, cast, coercion, or external naturality evidence is involved.
+> Focused TypeScript evidence is 12/12, and workspace/typecheck/lint/whitespace,
+> one kernel CI, warning comparison, and strict audit are green. The sole
+> post-tranche `check:ts` was launched after those gates, but its final terminal
+> summary was lost during the unexpected Codex interruption; it was not rerun
+> and no aggregate result is claimed. The next dependency-ready action is the
+> read-only `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N` reassessment of the
+> extended direct algebra, internal object/base-arrow/higher action, finite
+> iteration, and successor priority. It authorizes no semantic edit. General
+> middle-family collapse, larger contexts, unrestricted variance,
+> `lambda^nd`, and curry/product-facade promotion remain separate.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
