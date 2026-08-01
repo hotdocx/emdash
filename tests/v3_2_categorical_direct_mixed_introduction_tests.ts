@@ -72,6 +72,61 @@ const fixture = (suffix: string) => {
 };
 
 describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
+    it('lowers the fundamental bound-outer application to identity', () => {
+        const { emdash, A, B, D, G } = fixture('bound_identity');
+        const C = emdash.mixedDisplayedFunctorFamily(A, B);
+        const result = emdash.mixedDisplayedFunctorLambda(
+            { name: 'c', family: C },
+            { name: 'a', family: A },
+            B,
+            (c, a) => emdash.apply(c, a)
+        );
+        const mapped = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cMapped', family: C },
+            { name: 'aMapped', family: A },
+            D,
+            (c, a) => emdash.apply(G, emdash.apply(c, a))
+        );
+        const compiled = emdash.compile(result);
+        const mappedCompiled = emdash.compile(mapped);
+        const inspection = emdash.inspect(result);
+        const evidence = inspection.abstractions.find(candidate =>
+            candidate.rule ===
+                'categorical.direct-mixed-displayed-functor'
+        );
+
+        assert.match(compiled.explicitCore, /displayed-identity/u);
+        assert.doesNotMatch(compiled.explicitCore, /mixed_curry/u);
+        assert.equal(evidence?.rootKind, 'bound-outer-identity');
+        assert.equal(evidence?.targetChainLength, 0);
+        assert.deepEqual(evidence?.dependentPrerequisites, [
+            'stable-functor-family',
+            'displayed-identity'
+        ]);
+        assert.equal(evidence?.body.tag, 'typed-application');
+        if (
+            evidence?.body.tag !== 'typed-application' ||
+            evidence.body.subject.type.tag !== 'indexed-functor'
+        ) {
+            assert.fail('Missing enriched bound-outer functor view');
+        }
+        assert.ok(
+            evidence.body.subject.type.underlyingObjectFamily
+        );
+        assert.match(
+            mappedCompiled.explicitCore,
+            /generic-category-composition/u
+        );
+        assert.equal(
+            emdash.inspect(mapped).abstractions.find(candidate =>
+                candidate.rule ===
+                    'categorical.direct-mixed-displayed-functor'
+            )?.rootKind,
+            'bound-outer-identity'
+        );
+        assertDeepFrozen(inspection);
+    });
+
     it('lowers exact nested eta directly to F with three scoped binders',
     () => {
         const { emdash, C, A, B, F } = fixture('eta');
@@ -147,6 +202,73 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
             }
         }
         assertDeepFrozen(inspection);
+    });
+
+    it('retains object membership through a nested positive target', () => {
+        const { emdash, K, opK, C, A, D } = fixture('nested_target');
+        const X = emdash.displayedFamily(
+            'direct_mixed_nested_target_X',
+            opK
+        );
+        const Y = emdash.displayedFamily(
+            'direct_mixed_nested_target_Y',
+            K
+        );
+        const nestedTarget = emdash.mixedDisplayedFunctorFamily(X, Y);
+        const outerTarget = emdash.mixedDisplayedFunctorFamily(
+            A,
+            nestedTarget
+        );
+        const F = emdash.displayedFunctor(
+            'direct_mixed_nested_target_F_nested',
+            C,
+            outerTarget
+        );
+        const G = emdash.displayedFunctor(
+            'direct_mixed_nested_target_G_nested',
+            nestedTarget,
+            D
+        );
+        const eta = emdash.mixedDisplayedFunctorLambda(
+            { name: 'c', family: C },
+            { name: 'a', family: A },
+            nestedTarget,
+            (c, a) => emdash.apply(emdash.apply(F, c), a)
+        );
+        const mapped = emdash.mixedDisplayedFunctorLambda(
+            { name: 'c2', family: C },
+            { name: 'a2', family: A },
+            D,
+            (c, a) => emdash.apply(
+                G,
+                emdash.apply(emdash.apply(F, c), a)
+            )
+        );
+        const etaCompiled = emdash.compile(eta);
+        const mappedCompiled = emdash.compile(mapped);
+        const etaEvidence = emdash.inspect(eta).abstractions.find(
+            candidate => candidate.rule ===
+                'categorical.direct-mixed-displayed-functor'
+        );
+
+        assert.equal(
+            etaCompiled.explicitCore,
+            '(free "direct_mixed_nested_target_F_nested")'
+        );
+        assert.equal(
+            etaEvidence?.rootKind,
+            'closed-coherent-subject'
+        );
+        assert.equal(etaEvidence?.body.type.tag, 'indexed-functor');
+        if (etaEvidence?.body.type.tag !== 'indexed-functor') {
+            assert.fail('Missing nested positive indexed-functor result');
+        }
+        assert.ok(etaEvidence.body.type.underlyingObjectFamily);
+        assert.match(
+            mappedCompiled.explicitCore,
+            /generic-category-composition/u
+        );
+        assert.doesNotMatch(mappedCompiled.explicitCore, /mixed_curry/u);
     });
 
     it('recursively maps one and two coherent target functors', () => {
@@ -241,6 +363,26 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
                 { name: 'a', family: otherA },
                 B,
                 (c, a) => emdash.apply(emdash.apply(F, c), a)
+            ),
+            (error: unknown) =>
+                error instanceof CoreCategoricalFrontendError &&
+                error.code === 'CLASSIFIER_ARGUMENT_MISMATCH'
+        );
+
+        const sourceMap = emdash.displayedFunctor(
+            'direct_mixed_negative_source_map',
+            otherA,
+            A
+        );
+        assert.throws(
+            () => emdash.mixedDisplayedFunctorLambda(
+                { name: 'cSource', family: C },
+                { name: 'aSource', family: otherA },
+                B,
+                (c, a) => emdash.apply(
+                    emdash.apply(F, c),
+                    emdash.apply(sourceMap, a)
+                )
             ),
             (error: unknown) =>
                 error instanceof CoreCategoricalFrontendError &&

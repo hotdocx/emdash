@@ -42,12 +42,15 @@
 > classifier-view correction and a later orientation-aware source-action
 > audit. H-DTTLF-USABILITY-DIRECT-MIXED-CLASSIFIER-CORRECTION-01 /
 > D-DTTLF-USABILITY-044 is separately reviewed-approved from proposal
-> checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`:
-> retain the exact indexed-object view of canonical fibre functors, compile
-> direct `c(a)` as existing `id_funcd`, and support nested positive canonical
-> targets without a kernel/runtime/curry change. Contravariant source mapping
-> remains separately deferred until its exact existing-owner and `K`/`Op K`
-> classifier-orientation closure is reviewed. The completed
+> checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` and is now
+> implemented/final-green: it retains the exact indexed-object view of
+> canonical fibre functors, compiles direct `c(a)` as existing `id_funcd`, and
+> supports nested positive canonical targets without a kernel/runtime/curry
+> change. Its single `check:ts` is green at 1,228 pass/51 skip. The next row is
+> only a bounded read-only `MIXED-SOURCE-ACTION-0E2` owner-position and
+> classifier-orientation audit. Contravariant source mapping remains outside
+> D-044 until its exact existing-owner and `K`/`Op K` closure is separately
+> frozen and reviewed. The completed
 > mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

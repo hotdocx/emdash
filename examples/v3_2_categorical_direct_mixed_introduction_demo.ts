@@ -26,6 +26,12 @@ const functorFamily = emdash.mixedDisplayedFunctorFamily(A, B);
 const F = emdash.displayedFunctor('Demo_F', C, functorFamily);
 const G = emdash.displayedFunctor('Demo_G', B, D);
 
+const directIdentity = emdash.mixedDisplayedFunctorLambda(
+    { name: 'h', family: functorFamily },
+    { name: 'a0', family: A },
+    B,
+    (h, a) => emdash.apply(h, a)
+);
 const eta = emdash.mixedDisplayedFunctorLambda(
     { name: 'c', family: C },
     { name: 'a', family: A },
@@ -41,6 +47,7 @@ const mapped = emdash.mixedDisplayedFunctorLambda(
         emdash.apply(emdash.apply(F, c), a)
     )
 );
+const directIdentityCompilation = emdash.compile(directIdentity);
 const etaCompilation = emdash.compile(eta);
 const mappedCompilation = emdash.compile(mapped);
 const evidence = emdash.inspect(mapped).abstractions.find(candidate =>
@@ -51,7 +58,10 @@ const evidence = emdash.inspect(mapped).abstractions.find(candidate =>
 console.log(JSON.stringify({
     surface:
         'lambda^n k. lambda^f c. lambda^f a. G[k](F[k](c)(a))',
+    fundamentalIdentitySurface:
+        'lambda^n k. lambda^f h. lambda^f a. h(a)',
     resultType: 'Functord C (Functor_catd A D)',
+    fundamentalIdentityCore: directIdentityCompilation.explicitCore,
     etaCore: etaCompilation.explicitCore,
     mappedCore: mappedCompilation.explicitCore,
     targetChainLength: evidence?.targetChainLength,

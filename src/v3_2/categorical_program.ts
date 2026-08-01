@@ -483,7 +483,7 @@ export interface CoreCategoricalProgramOptions {
      * finite canonical sibling-layer telescope fold. It still does not claim
      * unrestricted mixed classifiers or general `:^nd`.
      * The direct-mixed-introduction profile adds only the recursive
-     * `F[c](a) | G(mixed-body)` binder and has no contextual-curry
+     * `c(a) | F[c](a) | G(mixed-body)` binder and has no contextual-curry
      * dependency.
      */
     readonly profile?:
@@ -7546,8 +7546,9 @@ export class CoreCategoricalProgram {
      *     : Functord C (Functor_catd A B).
      *
      * The hidden natural base is scoped by the builder. The callback is
-     * evaluated once and must match `F[c](a) | G(mixed-body)`; no curry API
-     * or pointwise coherence payload is involved.
+     * evaluated once and must match
+     * `c(a) | F[c](a) | G(mixed-body)`; no curry API or pointwise coherence
+     * payload is involved.
      */
     mixedDisplayedFunctorLambda(
         outerBindingValue: CoreCategoricalDisplayedContextBinding,

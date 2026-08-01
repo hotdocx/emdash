@@ -129,16 +129,16 @@ the earlier curry packages remain isolated auxiliary evidence. After the
 checkpoint, `MIXED-VARIANCE-GRADUATE-1E` is dependency-ready only for a
 bounded read-only stress audit and separately frozen proposal.
 
-That audit has now found a TypeScript representation gap before any new
+That audit found a TypeScript representation gap before any new
 kernel requirement. A contextual value can simultaneously be an object of a
 displayed family and, when that family is the exact canonical
-`Functor_catd(K,A,B)`, a fibre functor from `A[k]` to `B[k]`. The current
-construction classifier replaces the object view with the richer functor
-view. Consequently the fundamental direct term `c(a)` is rejected even when
-`C` is the canonical `Functor_catd(A,B)`, and an eta result is rejected when
-its target family is itself another canonical `Functor_catd`. This is not a
-missing curry and must not be repaired by one. The bounded TypeScript-only
-correction is frozen below as
+`Functor_catd(K,A,B)`, a fibre functor from `A[k]` to `B[k]`. Before D-044,
+the construction classifier replaced the object view with the richer functor
+view. Consequently the fundamental direct term `c(a)` was rejected even when
+`C` was the canonical `Functor_catd(A,B)`, and an eta result was rejected when
+its target family was itself another canonical `Functor_catd`. This was not a
+missing curry and was not repaired by one. The bounded TypeScript-only
+correction below is now separately reviewed and final-green as
 H-DTTLF-USABILITY-DIRECT-MIXED-CLASSIFIER-CORRECTION-01 /
 D-DTTLF-USABILITY-044. Source-side contravariant mapping is feasible through
 the existing `Functor_catd_func` and `hom_precomp_along_fapp0` owners, but its
@@ -412,8 +412,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-INTRODUCTION-0C` | complete; direct no-curry eta/mapped-body routes audited; ignored owner-position probes quiet-green with zero warning delta | final-green D-040 and auxiliary D-042; current recursive contextual elaborator; user's direct-introduction clarification | The fundamental direct recursive introduction `lambda^n k. lambda^f c. lambda^f a. t` does not require a surface or compiler-mandatory curry. Exact eta bypasses curry; recursive covariant target application factors through `Functor_catd(A,-)` action. One missing existing-owner fibre projection is isolated below. |
 | `DIRECT-MIXED-INTRODUCTION-1D` | final-green at `2c53291da9a8f74e9102434235f504721f53d34a` under D-DTTLF-USABILITY-043 | completed `DIRECT-MIXED-INTRODUCTION-0C`; proposal `291213d04269a230be0a3b2b7fc7b8bef81e81c9`; separate review under standing unattended delegation | Exactly one existing-owner runtime projection is active and generically transferred with zero declarations. The opt-in direct TypeScript binder handles exact eta plus finite recursive covariant target application and neither transfers nor invokes D-040/D-042. |
 | `MIXED-VARIANCE-GRADUATE-1E` | read-only stress audit complete; split into the two bounded rows below before graduation | final-green D-043 at `2c53291da9a8f74e9102434235f504721f53d34a`; representative direct recursive binder, inner action and full base-action formation | The public binder remains fundamental. The audit found one TypeScript classifier-view correction for identity/positive nesting and one separate orientation-aware source-action closure. It did not find a need for public curry. |
-| `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | separately reviewed-approved under D-DTTLF-USABILITY-044; implementation dependency-ready | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | Preserve an exact underlying indexed-object family when a value also has the canonical indexed-functor view; lower direct `c(a)` through existing `id_funcd`; and admit recursively nested positive canonical targets. Add no kernel rule, runtime declaration, curry dependency, or broad convertibility case. |
-| `MIXED-SOURCE-ACTION-0E2` | deferred until D-044 is resolved; preliminary append-only probe is green, but owner-position and orientation audits remain required | completed stress audit; active `Functor_catd_func` and `hom_precomp_along_fapp0` owners | Distinguish shared scope base `K` from a displayed family's domain/orientation `K` versus `Op K`; audit the exact source projection plus Cat-valued precomposition object/arrow projections before freezing any semantic edit. Do not use per-case equality hacks or expose curry. |
+| `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | implemented and final-green under D-DTTLF-USABILITY-044; exact coherent checkpoint recorded by the follow-up ledger commit | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | The canonical indexed-functor now retains its exact indexed-object family; direct `c(a)` lowers through existing `id_funcd`; and recursively nested positive canonical targets elaborate through the same factorer. No kernel rule, runtime declaration, curry dependency, or broad convertibility case was added. |
+| `MIXED-SOURCE-ACTION-0E2` | next dependency-ready only for a bounded read-only owner-position/orientation audit and separately frozen proposal | final-green D-044; preliminary append-only probe is green; active `Functor_catd_func` and `hom_precomp_along_fapp0` owners | Distinguish shared scope base `K` from a displayed family's domain/orientation `K` versus `Op K`; audit the exact source projection plus Cat-valued precomposition object/arrow projections before freezing any semantic edit. Do not use per-case equality hacks or expose curry. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2354,6 +2354,65 @@ user's standing unattended-review delegation, this approves implementation
 of only the nine numbered D-044 items, with immediate human supersession. The
 later `MIXED-SOURCE-ACTION-0E2` audit and final graduation remain independent.
 
+### D-DTTLF-USABILITY-044 implementation result
+
+The bounded classifier correction is final-green. It retains one optional
+`underlyingObjectFamily` on the construction-only `indexed-functor`
+classifier. That field is populated only from exact canonical
+`Functor_catd(K,A,B)` recognition and is copied into immutable inspection
+evidence. One central `indexedObjectView` recovers the shared family/base/index
+view; it emits no term and participates in no Core conversion.
+
+The direct mixed binder requests that richer view only for its outer scoped
+token. Indexed fibre application also preserves the target's exact underlying
+family when that target is another canonical `Functor_catd`. The recursive
+factorer now has two iterable roots:
+
+```text
+c(a)       -> id_funcd(Functor_catd A B)
+F[c](a)    -> F
+```
+
+and retains the existing recursive `G(mixed-body)` step. The bound-outer root
+records zero explicit hidden-base occurrences, while a closed `F` root records
+one; each mapped target layer contributes one further base occurrence. This
+keeps the locally nameless usage check exact rather than weakening it. Frozen
+evidence distinguishes `bound-outer-identity` from
+`closed-coherent-subject` and records only the prerequisites actually used.
+
+Focused evidence covers the fundamental identity, target mapping after that
+identity, exact closed-subject eta, a target family that is itself a canonical
+`Functor_catd`, and recursive mapping out of that nested target. The runnable
+direct demo now reports
+
+```text
+lambda^n k. lambda^f h. lambda^f a. h(a)
+```
+
+with Core headed by the existing `emdash.categorical.displayed-identity`,
+while the original eta remains exactly `F` and the mapped case remains generic
+displayed composition with `noContextualCurry: true`.
+
+The measured `F[c](L(a))` source case remains fail-closed. No `K = Op K`
+exception was added: an orientation-aware classifier and the existing-owner
+source-action closure remain the next separate audit. Likewise the active
+Lambdapi kernel, runtime transfers, acquisition digests, Core syntax, generic
+checker/evaluator, text parser, browser, and curry packages are unchanged.
+
+Validation is green:
+
+- source and test `git diff --check` hygiene;
+- root typecheck and full lint;
+- the direct mixed demo;
+- focused identity and nested-positive behavioral runs; and
+- the single required `check:ts`, including workspace validation, with 1,279
+  tests total, 1,228 passing, 51 skipped, and zero failing in
+  962,757 milliseconds.
+
+Per SOP, that aggregate is carried forward and is not repeated after this
+ledger-only synchronization. The implementation checkpoint is recorded by
+the immediately following documentation commit.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -2449,14 +2508,17 @@ confirms the direct nested binder as fundamental and splits the next work into
 `MIXED-SOURCE-ACTION-0E2`. Treat D-DTTLF-USABILITY-044 as separately
 reviewed-approved from proposal checkpoint
 `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` under the standing unattended
-delegation. That first correction is TypeScript-only:
-retain the exact underlying object-family view of a canonical indexed
-functor, lower bound-outer `c(a)` through existing `id_funcd`, and preserve
-that object view through recursively nested positive canonical targets. Add
-no kernel/runtime/curry change. Keep source-side contravariant mapping,
-scope-base/family-domain orientation, and its measured existing-owner
-three-rule closure outside D-044 and behind a later frozen gate. Never add
-external naturality or coherence evidence.
+delegation, and now as implemented/final-green. It retains the exact
+underlying object-family view of a canonical indexed functor, lowers
+bound-outer `c(a)` through existing `id_funcd`, and preserves that object view
+through recursively nested positive canonical targets. Carry forward its
+focused demo/tests, typecheck/lint, and single 1,279-test `check:ts`; do not
+repeat that aggregate. Continue with `MIXED-SOURCE-ACTION-0E2` only as a
+bounded read-only owner-position and classifier-orientation audit, then freeze
+a separate proposal before any semantic edit. Keep source-side
+contravariant mapping and its measured existing-owner three-rule closure
+outside D-044 until that review. Never add external naturality or coherence
+evidence.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -2475,6 +2537,21 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-044 implementation final-green.** The
+  canonical indexed-functor classifier now retains its exact underlying
+  indexed-object family, and one construction-only view helper lets direct
+  mixed application/factorization consume either view without adding a Core
+  coercion or conversion rule. The fundamental
+  `lambda^n k. lambda^f c. lambda^f a. c(a)` lowers to existing `id_funcd`;
+  closed-subject eta remains exactly `F`; both roots compose with finite
+  target maps; and a canonical `Functor_catd` target can itself remain nested.
+  The measured contravariant source case stays rejected. The active kernel,
+  transfers, generic checker/evaluator, curry packages, text, and browser are
+  unchanged. Focused behavior, demo, typecheck, and lint are green. The sole
+  `check:ts` passed workspace validation with 1,228 pass, 51 skip, and zero
+  fail out of 1,279 tests in 962,757 milliseconds; it is not repeated for
+  ledger synchronization. The exact implementation checkpoint is recorded
+  by the immediately following documentation commit.
 - **2026-08-01 — D-DTTLF-USABILITY-044 approved exactly as proposed.** A
   separate review of proposal checkpoint
   `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` confirms that existing
