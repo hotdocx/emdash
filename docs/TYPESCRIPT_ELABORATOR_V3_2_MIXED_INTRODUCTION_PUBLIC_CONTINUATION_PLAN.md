@@ -44,8 +44,11 @@ with HTTP 200. The Lambdapi-first `MIXED-INTRODUCTION-0A` audit is now
 probe-complete with zero active-kernel delta. It found one bounded generic
 action foundation before the mixed-curry owner. The exact foundation gate is
 frozen below as H-DTTLF-USABILITY-MIXED-ACTION-FOUNDATION-01 /
-D-DTTLF-USABILITY-038; no active-kernel edit is authorized until its separate
-review is checkpointed.
+D-DTTLF-USABILITY-038 at proposal checkpoint
+`b91c201ed45e15b65b87cca0d6649b5fb45e1b68`. The separate review recorded
+below approves exactly that four-rule foundation under the standing
+unattended delegation, with immediate human supersession. No mixed-curry
+owner is authorized by D-038.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -305,7 +308,7 @@ It deliberately avoids:
 | `PUBLIC-HOM-VALIDATE-1B` | final-green; evidence recorded below | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No repeated long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | complete at public checkpoint `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; Pages run `30680155372` successful and live smoke green | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, four-rule generic prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
-| `MIXED-ACTION-FOUNDATION-1A` | frozen under D-DTTLF-USABILITY-038; separate review pending | completed `MIXED-INTRODUCTION-0A` | Promote exactly four generic action/projection rules at their existing owners, with focused positive and non-collapse checks. Add no mixed-curry symbol. |
+| `MIXED-ACTION-FOUNDATION-1A` | approved under D-DTTLF-USABILITY-038; implementation dependency-ready | completed `MIXED-INTRODUCTION-0A`; proposal `b91c201ed45e15b65b87cca0d6649b5fb45e1b68` | Promote exactly four generic action/projection rules at their existing owners, with focused positive and non-collapse checks. Add no mixed-curry symbol. |
 | `MIXED-CURRY-1B` | decision-blocked on green `MIXED-ACTION-FOUNDATION-1A` and a separately frozen D-039 gate | measured mixed-curry owner/projection probe | Implement one exact Lambdapi-first mixed-curry functor, its stable displayed-functor discriminator, point/A-arrow/C-arrow/base-arrow projection ladder, and qualified laws. |
 | `MIXED-INTRODUCTION-TS-1C` | blocked on green `MIXED-CURRY-1B` and transfer qualification | active owner/rules and conformance evidence | Transfer the owner mechanically and extend the contextual compiler with one genuinely non-eta mixed body. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
@@ -849,8 +852,11 @@ Approve exactly this prerequisite slice:
 
 The user has granted standing unattended approval for bounded proposed slices
 under the checkpoint SOP, with immediate human supersession. This proposal
-must nevertheless be checkpointed and reviewed separately before active
-semantic edits.
+was checkpointed at `b91c201ed45e15b65b87cca0d6649b5fb45e1b68` and then
+reviewed against the active owners, green bounded probes, retained negative
+cases, and the nested SOP. No immediate human correction superseded it, so
+the separate decision below approves exactly D-038. Active edits may now
+begin within that boundary.
 
 ## Validation And Checkpoint Policy
 
@@ -1064,4 +1070,14 @@ removal, or unrelated cleanup is authorized.
   projection of rigid `Hom_fapp0`, and the narrow opposite-source identity
   projection-order bridge. It explicitly excludes every mixed-curry symbol,
   product/coercion rule, TypeScript or public change, and broader variance or
-  metatheory claim.
+  metatheory claim. Its proposal checkpoint is
+  `b91c201ed45e15b65b87cca0d6649b5fb45e1b68`.
+- **2026-08-01 — D-DTTLF-USABILITY-038 approved exactly as proposed.** A
+  separate review found each rule at an existing generic owner, confirmed the
+  combined bounded prerequisite and full mixed-curry type probes green, and
+  retained the opposite-Hom and product-collapse negatives. No immediate
+  human correction superseded the isolated proposal. The standing unattended
+  delegation therefore authorizes only the four-rule active-kernel foundation
+  plus its focused SOP validation, with immediate human supersession. It does
+  not authorize the probe-only mixed-curry ladder or any TypeScript/public
+  change.
