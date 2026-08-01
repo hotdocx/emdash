@@ -63,7 +63,9 @@ consumer, full kernel/check pass, strict LHS audit, warning comparison,
 catalog/health refresh, and one complete Lambdapi CI are green. A coherent
 implementation checkpoint is
 `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; D-040 may now be frozen for a
-separate review.
+separate review. H-DTTLF-USABILITY-MIXED-CURRY-01 /
+D-DTTLF-USABILITY-040 below freezes that exact next package. Its proposal
+checkpoint is pending; no mixed-curry implementation is yet authorized.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -324,7 +326,7 @@ It deliberately avoids:
 | `PUBLIC-HOM-INTEGRATE-1C` | complete at public checkpoint `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; Pages run `30680155372` successful and live smoke green | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
 | `MIXED-ACTION-FOUNDATION-1A` | final-green at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137` | completed `MIXED-INTRODUCTION-0A`; approved D-039; Unit-prof/full-action probes and active-kernel CI | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
-| `MIXED-CURRY-1B` | decision-blocked on green corrected `MIXED-ACTION-FOUNDATION-1A` and a separately frozen D-040 gate | measured mixed-curry owner/projection probe | Implement one exact Lambdapi-first mixed-curry functor, its stable displayed-functor discriminator, point/A-arrow/C-arrow/base-arrow projection ladder, and qualified laws. |
+| `MIXED-CURRY-1B` | D-040 proposal frozen; separate review required before implementation | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; active-consumer probe | Implement one exact Lambdapi-first mixed-curry operation package: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. Add no Hom-action duplicate. |
 | `MIXED-INTRODUCTION-TS-1C` | blocked on green `MIXED-CURRY-1B` and transfer qualification | active owner/rules and conformance evidence | Transfer the owner mechanically and extend the contextual compiler with one genuinely non-eta mixed body. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
@@ -1085,6 +1087,143 @@ This completes only `MIXED-ACTION-FOUNDATION-1A`. It neither introduces nor
 authorizes mixed curry. The next semantic operation is to freeze and separately
 review D-040 against this active foundation.
 
+## Frozen Mixed-Curry Gate
+
+### H-DTTLF-USABILITY-MIXED-CURRY-01 /
+### D-DTTLF-USABILITY-040
+
+The existing `Unit_prof` package is **not** the missing curry owner.
+`Unit_prof X` classifies the already-owned uncurried two-ended Hom action and
+projects through `Hom_tele_func`, `Hom_func`, and `Hom_fapp0`. It does not map a
+section over the variance-correct total context to a displayed functor in
+`Functord_cat C (Functor_catd A B)`. D-040 therefore reuses `Unit_prof`
+indirectly through the active `Functor_catd` action and adds no Hom or
+profunctor operation.
+
+Approve exactly this bounded Lambdapi-first package:
+
+1. Add one coherent `17f. Variance-correct mixed displayed curry` section
+   after the generic section-pullback/internal-Pi action. This is the first
+   active owner position where `Sigma_cat`, `Pullback_catd`, `Pi_cat`,
+   `Functor_catd`, `Functord_cat`, `piapp1_fapp0`, and `fdapp1_int_cell` are all
+   available.
+2. Add exactly eleven transparent, non-injective context/arrow aliases. They
+   abbreviate existing owners and establish no new conversion equation beyond
+   unfolding their definitions:
+
+   | Alias | Exact meaning |
+   | --- | --- |
+   | `mix_neg_total(A)` | `Op_cat(@Sigma_cat (Op_cat K) (@Op_catd (Op_cat K) A))` |
+   | `mix_neg_base_func(A)` | `Op_func(@Sigma_proj1_func (Op_cat K) (@Op_catd (Op_cat K) A)) : mix_neg_total(A) -> K` |
+   | `mix_context_family(A,C)` | `Pullback_catd C mix_neg_base_func(A)` |
+   | `mix_context_cat(A,C)` | `Sigma_cat(mix_context_family(A,C))` |
+   | `mix_context_base_func(A,C)` | `mix_neg_base_func(A) o Sigma_proj1_func(mix_context_family(A,C))` |
+   | `mix_uncurried_family(A,B,C)` | `Pullback_catd B mix_context_base_func(A,C)` |
+   | `mix_uncurried_cat(A,B,C)` | `Pi_cat(mix_uncurried_family(A,B,C))` |
+   | `mix_curried_cat(A,B,C)` | `Functord_cat C (Functor_catd A B)` |
+   | `mix_neg_arrow(p,a,a',alpha)` | the existing `sigma_arrow` in the opposite total, with `alpha : a -> A[p](a')` |
+   | `mix_context_arrow(p,alpha,beta)` | the existing outer `sigma_arrow`, with `beta : C[p](c) -> c'` |
+   | `mix_context_base_arrow(p,a',c)` | `mix_context_arrow` with identities at the transported negative and positive endpoints |
+
+   Here and below `K : Cat`, `A : Catd(Op K)`, and `B,C : Catd K`. Do not add
+   the probe-only `mix_neg_fibre_intro_func`; the product non-collapse check can
+   state that expression directly.
+3. Add exactly one operation package with four stable heads:
+
+   ```text
+   constant mixed_curry_func(A,B,C)
+     : Functor(mix_uncurried_cat(A,B,C), mix_curried_cat(A,B,C))
+
+   injective mixed_curry_funcd(s)
+     : Functord C (Functor_catd A B)
+
+   injective mixed_curry_fibre_func(s,k)
+     : Functor(C[k], Functor_cat(A[k],B[k]))
+
+   injective mixed_curry_at_func(s,k,c)
+     : Functor(A[k],B[k]).
+   ```
+
+   These are one mathematical operation plus three staged projection
+   discriminators, not four unrelated curry constructions. The
+   `mixed_curry_funcd(s)` head is required by the measured subject-reduction
+   boundary of the internal base-cell projection. None is a mirror of
+   `Unit_prof`, `Hom_tele_func`, `Hom_func`, or `Hom_fapp0`.
+4. Add exactly seven computation projections:
+
+   ```text
+   mixed_curry_func(A,B,C)[s]
+     -> mixed_curry_funcd(s)
+
+   mixed_curry_funcd(s)[k]
+     -> mixed_curry_fibre_func(s,k)
+
+   mixed_curry_fibre_func(s,k)[c]
+     -> mixed_curry_at_func(s,k,c)
+
+   mixed_curry_at_func(s,k,c)[a]
+     -> piapp0(s,((k,a),c))
+   ```
+
+   The remaining three projections are action rules:
+
+   - action of `mixed_curry_at_func(s,k,c)` on
+     `alpha : a -> a'` is `piapp1_fapp0(s,-)` on
+     `mix_context_arrow(id_k,alpha,id_c)`;
+   - the component at `a` of the `C[k]`-arrow action on
+     `beta : c -> c'` is `piapp1_fapp0(s,-)` on
+     `mix_context_arrow(id_k,id_a,beta)`; and
+   - the component at `a'` of
+     `fdapp1_int_cell(mixed_curry_funcd(s),p,c)` is
+     `piapp1_fapp0(s,-)` on `mix_context_base_arrow(p,a',c)`.
+
+   Use the exact typed endpoints specified by the aliases above. The ignored
+   green `typescript_mixed_introduction_active_consumer.lp` probe is
+   measurement evidence, not an additional authority. Do not replace an
+   internally typed arrow by an external naturality/functoriality equation.
+5. Add no transformation-specific or higher-cell curry symbol/rule. The one
+   `mixed_curry_func` already maps section transformations through generic
+   `fapp1_func`/`fapp1_fapp0`; subsequent components use the existing
+   `Transfd_cat`/internal-Hom machinery. The active full/capped
+   `Functor_catd` projections continue to route endpoint action through the
+   ambient ladder owned by `Unit_prof`.
+6. Focused active checks must cover:
+
+   - both total projections recovering the same base arrow `p`;
+   - `C` and `B` pullback transports reducing to their ordinary displayed
+     transports;
+   - the curried object having type `Functord C (Functor_catd A B)`;
+   - its fibre and point functors and the triple-point beta
+     `mixed_curry(s)[k][c][a] = s[((k,a),c)]`;
+   - the exact negative-`A`, positive-`C`, and two-sided base-arrow action
+     formulas above;
+   - generic transformation and next-Hom action of the single curry functor;
+     and
+   - fail-closed negatives for `Op_cat K != K`, reversed negative transport,
+     and the absence of a global Sigma/pullback-to-product collapse.
+7. Follow the complete nested Lambdapi SOP: make an exact owner-position probe,
+   keep every exploratory typecheck within 60 seconds, compare warning
+   inventories as diagnostic/non-veto evidence, run strict LHS audit, refresh
+   the catalog and health report, and run one complete `make ci` before the
+   semantic checkpoint. Carry that aggregate forward across later
+   documentation-only synchronization.
+8. Stop and freeze a correcting proposal rather than broadening this gate if
+   the owner-position implementation requires a whole-family coercion,
+   external coherence witness, new Hom/profunctor action, product facade,
+   unrestricted polarity rule, or a stable head beyond the four measured
+   heads. If an existing active owner transparently defines the whole curry
+   map, supersede the primitive package rather than duplicating it.
+9. Add no inverse mixed `uncurry`, equivalence/adjunction, beta/eta
+   isomorphism, arbitrary variance DAG, unrestricted `:^nd`, enriched
+   `Catd_cat Z` target, `homd_int` lift, product facade, TypeScript transfer,
+   parser, browser, book, or public claim in this slice.
+
+The gate is intentionally a qualified introduction primitive, not a claim of
+cartesian closure for every displayed/variance-sensitive context. Its purpose
+is to establish one non-eta, internally coherent mixed binder body while
+preserving the existing `Unit_prof` ownership and all current non-collapse
+boundaries.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -1354,3 +1493,11 @@ removal, or unrelated cleanup is authorized.
   TypeScript, parser, browser, or publication change was included. The exact
   coherent checkpoint is
   `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`.
+- **2026-08-01 — D-DTTLF-USABILITY-040 frozen for separate review.** The exact
+  next package is one mixed-curry functor, three stable projected heads,
+  eleven transparent context/arrow aliases, and seven projection rules. It
+  uses `piapp1_fapp0`, `fdapp1_int_cell`, generic functor action, and the
+  existing `Unit_prof` ambient-Hom ladder; it adds no competing Hom action.
+  Inverse curry, unrestricted variance, product facade, TypeScript/public
+  work, and external coherence remain excluded. The proposal checkpoint is
+  recorded after commit; implementation requires a separate review.
