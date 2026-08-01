@@ -43,7 +43,9 @@
 > audit. H-DTTLF-USABILITY-DIRECT-MIXED-CLASSIFIER-CORRECTION-01 /
 > D-DTTLF-USABILITY-044 is separately reviewed-approved from proposal
 > checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` and is now
-> implemented/final-green: it retains the exact indexed-object view of
+> implemented/final-green at
+> `ff868fbc2a7d4f92b66312e458cb5fca67f63470`: it retains the exact
+> indexed-object view of
 > canonical fibre functors, compiles direct `c(a)` as existing `id_funcd`, and
 > supports nested positive canonical targets without a kernel/runtime/curry
 > change. Its single `check:ts` is green at 1,228 pass/51 skip. The next row is

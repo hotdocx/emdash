@@ -412,7 +412,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-INTRODUCTION-0C` | complete; direct no-curry eta/mapped-body routes audited; ignored owner-position probes quiet-green with zero warning delta | final-green D-040 and auxiliary D-042; current recursive contextual elaborator; user's direct-introduction clarification | The fundamental direct recursive introduction `lambda^n k. lambda^f c. lambda^f a. t` does not require a surface or compiler-mandatory curry. Exact eta bypasses curry; recursive covariant target application factors through `Functor_catd(A,-)` action. One missing existing-owner fibre projection is isolated below. |
 | `DIRECT-MIXED-INTRODUCTION-1D` | final-green at `2c53291da9a8f74e9102434235f504721f53d34a` under D-DTTLF-USABILITY-043 | completed `DIRECT-MIXED-INTRODUCTION-0C`; proposal `291213d04269a230be0a3b2b7fc7b8bef81e81c9`; separate review under standing unattended delegation | Exactly one existing-owner runtime projection is active and generically transferred with zero declarations. The opt-in direct TypeScript binder handles exact eta plus finite recursive covariant target application and neither transfers nor invokes D-040/D-042. |
 | `MIXED-VARIANCE-GRADUATE-1E` | read-only stress audit complete; split into the two bounded rows below before graduation | final-green D-043 at `2c53291da9a8f74e9102434235f504721f53d34a`; representative direct recursive binder, inner action and full base-action formation | The public binder remains fundamental. The audit found one TypeScript classifier-view correction for identity/positive nesting and one separate orientation-aware source-action closure. It did not find a need for public curry. |
-| `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | implemented and final-green under D-DTTLF-USABILITY-044; exact coherent checkpoint recorded by the follow-up ledger commit | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | The canonical indexed-functor now retains its exact indexed-object family; direct `c(a)` lowers through existing `id_funcd`; and recursively nested positive canonical targets elaborate through the same factorer. No kernel rule, runtime declaration, curry dependency, or broad convertibility case was added. |
+| `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | implemented and final-green at `ff868fbc2a7d4f92b66312e458cb5fca67f63470` under D-DTTLF-USABILITY-044 | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | The canonical indexed-functor now retains its exact indexed-object family; direct `c(a)` lowers through existing `id_funcd`; and recursively nested positive canonical targets elaborate through the same factorer. No kernel rule, runtime declaration, curry dependency, or broad convertibility case was added. |
 | `MIXED-SOURCE-ACTION-0E2` | next dependency-ready only for a bounded read-only owner-position/orientation audit and separately frozen proposal | final-green D-044; preliminary append-only probe is green; active `Functor_catd_func` and `hom_precomp_along_fapp0` owners | Distinguish shared scope base `K` from a displayed family's domain/orientation `K` versus `Op K`; audit the exact source projection plus Cat-valued precomposition object/arrow projections before freezing any semantic edit. Do not use per-case equality hacks or expose curry. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -2410,8 +2410,8 @@ Validation is green:
   962,757 milliseconds.
 
 Per SOP, that aggregate is carried forward and is not repeated after this
-ledger-only synchronization. The implementation checkpoint is recorded by
-the immediately following documentation commit.
+ledger-only synchronization. The exact implementation checkpoint is
+`ff868fbc2a7d4f92b66312e458cb5fca67f63470`.
 
 ## Validation And Checkpoint Policy
 
@@ -2508,7 +2508,8 @@ confirms the direct nested binder as fundamental and splits the next work into
 `MIXED-SOURCE-ACTION-0E2`. Treat D-DTTLF-USABILITY-044 as separately
 reviewed-approved from proposal checkpoint
 `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` under the standing unattended
-delegation, and now as implemented/final-green. It retains the exact
+delegation, and now as implemented/final-green at
+`ff868fbc2a7d4f92b66312e458cb5fca67f63470`. It retains the exact
 underlying object-family view of a canonical indexed functor, lowers
 bound-outer `c(a)` through existing `id_funcd`, and preserves that object view
 through recursively nested positive canonical targets. Carry forward its
@@ -2537,7 +2538,8 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
-- **2026-08-01 — D-DTTLF-USABILITY-044 implementation final-green.** The
+- **2026-08-01 — D-DTTLF-USABILITY-044 implementation final-green at
+  `ff868fbc2a7d4f92b66312e458cb5fca67f63470`.** The
   canonical indexed-functor classifier now retains its exact underlying
   indexed-object family, and one construction-only view helper lets direct
   mixed application/factorization consume either view without adding a Core
@@ -2550,8 +2552,7 @@ removal, or unrelated cleanup is authorized.
   unchanged. Focused behavior, demo, typecheck, and lint are green. The sole
   `check:ts` passed workspace validation with 1,228 pass, 51 skip, and zero
   fail out of 1,279 tests in 962,757 milliseconds; it is not repeated for
-  ledger synchronization. The exact implementation checkpoint is recorded
-  by the immediately following documentation commit.
+  ledger synchronization.
 - **2026-08-01 — D-DTTLF-USABILITY-044 approved exactly as proposed.** A
   separate review of proposal checkpoint
   `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` confirms that existing
