@@ -1,12 +1,13 @@
 /*
-  Reviewer for CommRing-valued presheaves and invertibility support.
+  Reviewer for CommRing-valued presheaves and their invertibility sieve.
 
   The final zero-ring example constructs unit evidence on every restricted
-  section, so this exercises the computational predicate rather than merely
-  checking its classifier.
+  section and consumes it through ordinary-sieve membership, so this exercises
+  the whole computational assembly rather than merely checking classifiers.
 */
 
 require open emdash.emdash3_2_commutative_algebra_presheaves;
+require open emdash.emdash3_2_sites;
 
 // The classifier is intentionally a transparent functor category.
 assert (K : Cat) ⊢
@@ -158,6 +159,124 @@ assert [K : Cat]
       (@comp_fapp0 K W V U f g));
 
 /*
+  Whole-sieve assembly.
+
+  The carrier functor selects a full path-map hom action.  Its application is
+  computational through that full action; the direct capped action remains a
+  deliberate negative boundary.
+*/
+assert (R : τ CommRing) ⊢
+  @fapp0 CommRing_cat Grpd_cat comm_ring_carrier_func R
+  ≡ @comm_ring_carrier R;
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  (@fapp0
+    (Path_cat (@CommRingHom R S))
+    (Path_cat (@Function_grpd
+      (@comm_ring_carrier R)
+      (@comm_ring_carrier S)))
+    (@fapp1_func CommRing_cat Grpd_cat
+      comm_ring_carrier_func R S)
+    h) x
+  ≡ @comm_ring_hom_apply R S h x;
+
+assertnot [R S : τ CommRing]
+  (h : τ (@CommRingHom R S)) ⊢
+  @fapp1_fapp0 CommRing_cat Grpd_cat
+    comm_ring_carrier_func R S h
+  ≡ @comm_ring_hom_function R S h;
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @Fibre_cat
+    (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+    comm_ring_unit_evidence_total_catd
+    (Struct_sigma R x)
+  ≡ Path_cat (@CommRingUnitEvidence R x);
+
+// The represented-family variance bridge is proof-time only.
+assert [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @eq_refl
+    (Functor (Op_cat K) Cat_cat)
+    (@hom_ (Op_cat K) (Op_cat K)
+      (@id Cat_cat (Op_cat K)) U)
+  : τ (@=
+      (Functor (Op_cat K) Cat_cat)
+      (@hom_ (Op_cat K) (Op_cat K)
+        (@id Cat_cat (Op_cat K)) U)
+      (@hom_con K U K (@id Cat_cat K)));
+
+assertnot [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @hom_ (Op_cat K) (Op_cat K)
+    (@id Cat_cat (Op_cat K)) U
+  ≡ @hom_con K U K (@id Cat_cat K);
+
+// Literal restriction totals compute to the value ring and restricted section.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  sigma_Fst
+    (@fapp0
+      (@Into_restr_cat K U)
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+      (@comm_ring_psh_restriction_total_func K O U s)
+      (Struct_sigma V f))
+  ≡ @comm_ring_psh_value K O V;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  sigma_Snd
+    (@fapp0
+      (@Into_restr_cat K U)
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+      (@comm_ring_psh_restriction_total_func K O U s)
+      (Struct_sigma V f))
+  ≡ @comm_ring_psh_restrict K O V U f s;
+
+// Higher and ordinary membership preserve the arrowwise predicate literally.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @Fibre_cat
+    (@Into_restr_cat K U)
+    (@comm_ring_psh_invertibility_higher_sieve K O U s)
+    (Struct_sigma V f)
+  ≡ Path_cat (@CommRingPshInvertibleAlong K O U s V f);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_invertibility_sieve K O U s
+  : τ (@Sieve K U);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @SieveMembership
+    K U
+    (@comm_ring_psh_invertibility_sieve K O U s)
+    (Struct_sigma V f)
+  ≡ @CommRingPshInvertibleAlong K O U s V f;
+
+/*
   Concrete zero-ring model.
 
   The constant presheaf has a generic CommRing_cat identity as every
@@ -204,6 +323,13 @@ symbol zero_comm_ring_psh_invertible_along
     (@zero_comm_ring_psh_restrict_path K V U f)
     zero_comm_ring_tt_unit;
 
+symbol zero_comm_ring_psh_invertibility_sieve
+  [K : Cat]
+  (U : τ (Obj K))
+  : τ (@Sieve K U)
+≔ @comm_ring_psh_invertibility_sieve
+    K (@zero_comm_ring_psh K) U tt;
+
 assert (K : Cat) (U : τ (Obj K)) ⊢
   @comm_ring_psh_value K (@zero_comm_ring_psh K) U
   ≡ zero_comm_ring;
@@ -214,3 +340,13 @@ assert [K : Cat]
   @zero_comm_ring_psh_invertible_along K V U f
   : τ (@CommRingPshInvertibleAlong
       K (@zero_comm_ring_psh K) U tt V f);
+
+// The same concrete witness inhabits membership in the assembled sieve.
+assert [K : Cat]
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @zero_comm_ring_psh_invertible_along K V U f
+  : τ (@SieveMembership
+      K U
+      (@zero_comm_ring_psh_invertibility_sieve K U)
+      (Struct_sigma V f));

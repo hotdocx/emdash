@@ -32,8 +32,9 @@ the universal-property-first one-element localization extension is
 `emdash3_2_commutative_algebra_localization.lp`;
 the universal-property iterated/product-localization comparison extension is
 `emdash3_2_commutative_algebra_localization_comparison.lp`;
-the CommRing-valued-presheaf, restriction, and arrowwise-invertibility
-extension is `emdash3_2_commutative_algebra_presheaves.lp`;
+the CommRing-valued-presheaf, restriction, arrowwise-invertibility, and
+ordinary-invertibility-sieve extension is
+`emdash3_2_commutative_algebra_presheaves.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
@@ -69,8 +70,10 @@ Use the following order:
    proposition/sethood proofs, transparent explicit-map observations,
    consumer-justified pointwise extensionality, the `CommRing_cat` facade, and
    the narrowly selected stable pointwise identity/composition comparisons;
-   it deliberately declares no carrier functor, localization, finite-family,
-   power, or polynomial package;
+   its whole-sieve consumer selects the full-action carrier functor and
+   Path-valued carrier family without a competing direct capped-action rule;
+   it deliberately declares no localization, finite-family, power, or
+   polynomial package;
 10. `emdash3_2_commutative_algebra_finite.lp` for finite ring sums/dot
     products, structured-map preservation, retained unimodular coefficient
     presentations, and algebraic Zariski-cover presentation data; it
@@ -85,9 +88,10 @@ Use the following order:
 12. `emdash3_2_commutative_algebra_localization.lp` for proposition-valued
    unit evidence, unit path transport and structured-map preservation,
    pointwise factor triangles, contractible-factorization localization
-   packages, and named transparent observations; it deliberately declares no
-   concrete fractions, iterated comparison, finite-family, power, polynomial,
-   or Zariski interface;
+   packages, the Path-valued unit-evidence family over total ring elements,
+   and named transparent observations; it deliberately declares no concrete
+   fractions, iterated comparison, finite-family, power, polynomial, or
+   Zariski interface;
 13. `emdash3_2_commutative_algebra_localization_comparison.lp` for unit
     multiplication lemmas, the selected stable pointwise ring-map composite
     consumer, two-stage localization packages, and canonical forward/reverse
@@ -98,8 +102,11 @@ Use the following order:
 14. `emdash3_2_commutative_algebra_presheaves.lp` for the transparent
    CommRing-valued presheaf classifier, actual structured restriction maps,
    pointwise identity/composition paths, and proposition-valued arrowwise
-   invertibility support closed under restriction; it deliberately declares no
-   whole sieve, carrier functor, topology, sheaf, or ringed-site package;
+   invertibility support closed under restriction; it assembles the
+   Path-valued higher support and ordinary invertibility sieve through the
+   carrier/unit families and one shaped proof-time variance comparison while
+   preserving literal-arrow membership computation. It deliberately declares
+   no topology, sheaf, or ringed-site package;
 15. `emdash3_2_sites.lp` for ordinary-sieve membership, the canonical maximal
    sieve, proposition-valued sieve coverages, Grothendieck topology laws, and
    the direct chaotic-topology model; it declares no `Omega`, generated

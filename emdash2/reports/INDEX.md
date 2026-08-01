@@ -29,9 +29,10 @@ retains carrier sethood, and supplies the one-element zero ring.
 `emdash3_2_commutative_algebra_category.lp` is its downstream structured-map
 layer: it proves morphism laws proposition-valued and morphisms set-valued,
 proves consumer-justified pointwise extensionality, then exposes
-`CommRing_cat` without a carrier functor. Localization and empty-variable
-polynomial consumers select rigid pointwise composition and identity
-comparisons while leaving generic whole arrows as runtime owners.
+`CommRing_cat`. Localization and empty-variable polynomial consumers select
+rigid pointwise composition and identity comparisons; the whole-sieve consumer
+selects the full-action carrier functor and Path-valued carrier family without
+a direct capped-action beta. Generic whole arrows remain runtime owners.
 `emdash3_2_commutative_algebra_finite.lp` is the rule-free finite algebraic
 cover-presentation layer: it supplies finite sums and dot products,
 coefficient-bearing unimodularity data, algebraic Zariski cover
@@ -53,13 +54,15 @@ rule-free overlap layer: it packages localization first at `f` and then at the
 image of `g`, and constructs canonical forward/reverse factors against
 localization at `f*g`, without equality of chosen packages or comparison
 inverse laws.
-`emdash3_2_commutative_algebra_presheaves.lp` is the rule-free PSSS-08a layer:
-it transparently presents functors from `K^op` to `CommRing_cat`, exposes
+`emdash3_2_commutative_algebra_presheaves.lp` is the PSSS-08a/08b layer: it
+transparently presents functors from `K^op` to `CommRing_cat`, exposes
 structured restriction and carrier application, supplies explicit pointwise
 identity/composition paths, and proves the unit-support predicate along an
-arrow proposition-valued and closed under further restriction. It does not
-yet assemble the full ordinary invertibility sieve, add a carrier functor, or
-claim topology, sheafhood, or a ringed site.
+arrow proposition-valued and closed under further restriction. It then
+assembles the support as a Path-valued higher sieve and an ordinary sieve with
+literal-arrow membership computation. One shaped proof-time comparison joins
+the two rigid represented-family variance presentations; it claims no
+topology, sheafhood, or ringed site.
 The former D0/D1/decoder compatibility module and its seven self-only reviewer
 examples are retired. Unsuffixed omega-equivalence names now denote only the
 native equality-valued API; no compatibility aliases remain.

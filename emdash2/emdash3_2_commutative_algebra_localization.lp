@@ -5,8 +5,10 @@
   structure map that inverts one selected element, and contractible
   factorization through that map. Factor triangles are stated pointwise on
   carrier functions, so the interface does not require projected computation
-  for opaque generic CommRing_cat identities or composites. No fraction,
-  exponent, finite-family, power, or polynomial representation is selected.
+  for opaque generic CommRing_cat identities or composites.  A reusable
+  displayed family over the total category of ring elements exposes unit
+  evidence as Path_cat-valued fibres. No fraction, exponent, finite-family,
+  power, or polynomial representation is selected.
 */
 
 require open emdash.emdash3_2_commutative_algebra_category;
@@ -445,6 +447,24 @@ symbol comm_ring_hom_preserves_unit
           (@comm_ring_one R)
           (@comm_ring_unit_law R x u))
         (@comm_ring_hom_one_law R S h)));
+
+/*
+  Universal unit-evidence family over total ring elements.
+
+  A literal element package `(R,x)` has fibre
+  `Path_cat(CommRingUnitEvidence(R,x))`.  Full displayed action is retained by
+  the existing Catd calculus; preservation by a structured ring map above and
+  proposition-valued fibres justify that action semantically.  The inferred
+  source/target slots remain anonymous because an explicit compound Sigma
+  source causes avoidable rule-analysis work and is not a discriminator.
+*/
+injective symbol comm_ring_unit_evidence_total_catd
+  : τ (Catd (@Sigma_cat CommRing_cat comm_ring_carrier_catd));
+
+rule @fapp0 _ _
+      comm_ring_unit_evidence_total_catd
+      (Struct_sigma $R $x)
+  ↪ Path_cat (@CommRingUnitEvidence $R $x);
 
 // Pointwise agreement of a candidate factor with the original ring map.
 symbol CommRingLocalizationAgreement

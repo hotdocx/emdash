@@ -2121,7 +2121,10 @@ the authorized local PSSS-08a checkpoint.
 
 #### PSSS-08b — Assemble the ordinary invertibility sieve
 
-Status: proposed after PSSS-08a; separate action/coherence gate.
+Status: green through focused and maintained source, central-diagnostic, and
+reviewer aggregates, exact warning comparison, strict audits, catalog,
+health, and full integration CI on 2026-08-01; included in the authorized
+local PSSS-08b checkpoint.
 
 Package the arrowwise predicate as an actual `Sieve(K,U)` only after its
 `Path_cat` fibres and action over the full `Into_restr_cat(K,U)` have an
@@ -2141,6 +2144,145 @@ Whichever route wins must make membership at a literal arrow reduce to
 `CommRingUnitEvidence(O(V),O[f](s))`, retain proposition-valued fibres, and
 reuse the PSSS-08a restriction computation. A type-correct sieve whose
 membership is opaque fails the computational acceptance criterion.
+
+The bounded probes select the reusable carrier-family route, with an
+important owner qualification. A direct capped rule
+
+```text
+fapp1_fapp0(comm_ring_carrier_func,h) -> comm_ring_hom_function(h)
+```
+
+causes rule analysis to exceed the 20/30-second bounds, both alone and beside
+the full action. It would also compete at exactly the generic functor-action
+boundary that PSSS-06b deliberately preserved. Those candidates are rejected;
+their records are
+`logs/probes/psss08b_carrier_functor_capped_only-20260801-160749.log` and
+`logs/probes/psss08b_carrier_functor-20260801-160647.log`.
+
+The selected `comm_ring_carrier_func : CommRing_cat -> Grpd_cat` instead has
+only these projections:
+
+```text
+comm_ring_carrier_func[R] = comm_ring_carrier(R)
+
+fapp1_func(comm_ring_carrier_func,R,S)
+  = path_map_func(
+      CommRingHom(R,S),
+      Function(|R|,|S|),
+      h |-> comm_ring_hom_function(h)).
+```
+
+Capping that **full** action by the existing `path_map_func` projection gives
+the structured map's carrier function, and applying the result gives
+`comm_ring_hom_apply(h,x)`. There is no duplicate direct capped beta. The
+transparent composite
+
+```text
+comm_ring_carrier_catd
+  = Path_cat_func ∘ comm_ring_carrier_func
+```
+
+is therefore a Path-valued family with fibre `Path_cat(|R|)`, while retaining
+the full action needed by `fib_cov_tapp0_func`. This closes the PSSS-06b
+consumer gate without changing generic identity/composition normal forms.
+
+Unit evidence is organized once over the universal total category of ring
+elements:
+
+```text
+comm_ring_unit_evidence_total_catd
+  : Catd(Sigma_cat(CommRing_cat,comm_ring_carrier_catd))
+
+Fibre[(R,x)] = Path_cat(CommRingUnitEvidence(R,x)).
+```
+
+This is a reusable family owner, not an opaque sieve-specific family with
+local identity/composition laws. Its full action is retained by the generic
+Catd calculus; `comm_ring_hom_preserves_unit` supplies the semantic map on
+objects of each Path fibre, and `comm_ring_unit_evidence_is_prop` makes those
+fibres subterminal. Only the literal Sigma-constructor fibre is selected as a
+runtime rule. Its inferred source and target slots must remain `_ _`: the
+otherwise equivalent explicit compound-Sigma slots exceed the 30-second
+rule-analysis bound. A separate attempted primitive component rule for a
+displayed unit functor also exceeded that bound and is rejected.
+
+For `O : CommRingPsh(K)` the carrier family is the ordinary pullback
+
+```text
+comm_ring_psh_carrier_catd(O)
+  = Pullback_catd(comm_ring_carrier_catd,O).
+```
+
+The restriction-total map for `s : |O(U)|` is assembled entirely from
+existing owners:
+
+```text
+Into_restr_cat(K,U)
+  -- Sigma_map(fib_cov_transf(s)) --> Sigma_{V:K^op} |O(V)|
+  -- sigma_pullback_total_func -->  Sigma_{R:CommRing_cat} |R|,
+
+(V,f) |-> (V,O[f](s)) |-> (O(V),O[f](s)).
+```
+
+There is one genuine proof-time variance boundary. `fib_cov_transf` over
+`K^op` exposes the rigid source `hom_(K^op,id,U)`, whereas `yoneda_psh` and
+`Into_restr_cat` retain the public rigid presentation `hom_con(K,U,id)`. The
+candidate adds one shaped downstream unification rule between exactly those
+two heads. A typed `eq_refl` diagnostic proves that it fires, while an
+`assertnot` proves that the heads are not runtime-convertible. No broad
+covariant/contravariant representable collapse is selected.
+
+The higher support is then the ordinary family pullback
+
+```text
+comm_ring_psh_invertibility_higher_sieve(O,U,s)
+  = Pullback_catd(
+      comm_ring_unit_evidence_total_catd,
+      comm_ring_psh_restriction_total_func(O,U,s)).
+```
+
+At a literal restriction arrow `(V,f)`, its fibre and object classifier reduce
+respectively to
+
+```text
+Path_cat(CommRingPshInvertibleAlong(O,s,f))
+CommRingPshInvertibleAlong(O,s,f)
+  = CommRingUnitEvidence(O(V),O[f](s)).
+```
+
+The ordinary-sieve witness cannot destruct a generic encoded Sigma object by
+writing `Struct_sigma(sigma_Fst(q),sigma_Snd(q))`, because package eta remains
+intentionally absent. It instead uses the existing `sigma_ind`; the
+constructor branch applies `path_cat_is_subterminal` to the PSSS-08a
+proposition theorem. `sieve_intro` packages the resulting
+`comm_ring_psh_invertibility_sieve`. The maintained zero-ring presheaf
+supplies a nonempty end-to-end consumer: its explicit unit witness at every
+arrow inhabits `SieveMembership` in the assembled sieve by computation.
+
+The complete focused candidate is recorded by
+`tmp/probes/psss08b_carrier_functor_full_only.lp`. Its final quiet run is
+`logs/probes/psss08b_carrier_functor_full_only-20260801-161815.log`; the
+warning-enabled run
+`logs/probes/psss08b_carrier_functor_full_only-20260801-161842.log` inherits
+exactly `1179 = 1020 + 159`, with no probe-specific warning location. The
+owning-position promoted-source log is
+`logs/probes/emdash3_2_commutative_algebra_presheaves-20260801-163403.log`;
+it inherits the same exact inventory and has no changed-module warning
+location. The category, localization, presheaf, and kernel strict audits have
+zero unreviewed candidates. Focused checks, maintained `make check`, and the
+complete `make examples` suite are green. The strict catalog contains 1,893
+checks across 75 areas, including 19 PSSS-08b diagnostics, with zero legacy or
+unclassified checks. Health passes all 63 source/example targets in 437.026
+seconds at source snapshot
+`sha256:5a969bf2de9ebccd9ff02739dae4964f5314312e1199eb7fba9983ba21c294e3`;
+the promoted presheaf source takes 12.843 seconds and the 25-check extended
+reviewer takes 14.071 seconds. Full integration CI passes all 63 Lambdapi
+targets in 355.987 seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+The tranche is included in the authorized local PSSS-08b checkpoint. Topology,
+sheafhood, ringed sites, localization over the support, and any rigid
+`CommRingPsh_cat` migration remain later consumer gates.
 
 #### PSSS-08c — Ringed sites, sheaves, and locality
 
@@ -2487,6 +2629,26 @@ consumer demonstrates that nontransitive unification requires it.
   it an `InvSieve` until a full `Into_restr_cat` action with proposition-valued
   fibres is assembled through active owners; membership opacity or ad hoc
   identity/composition rules would fail the computational criterion.
+- **PSSS-D-055:** let PSSS-08b select the reusable CommRing carrier functor,
+  but expose ring-map action only at the full `fapp1_func` owner through
+  `path_map_func`. Reject the measured direct capped rule, retain generic
+  identity/composition owners, and derive point application by capping the
+  full action through existing projections.
+- **PSSS-D-056:** represent universal unit support as one Path-valued Catd over
+  the total category of ring elements. Select only its literal
+  Sigma-constructor fibre, keep inferred source/target slots anonymous, and
+  retain generic Catd action; add no sieve-local identity, composition, or
+  action rule.
+- **PSSS-D-057:** cross the `fib_cov_transf`/Yoneda source mismatch with one
+  downstream proof-time comparison between the shaped rigid heads
+  `hom_(K^op,id,U)` and `hom_con(K,U,id)`. Require both a typed-`eq_refl`
+  firing check and a negative runtime-conversion check; do not collapse the
+  generic represented-family variances.
+- **PSSS-D-058:** assemble the restriction total from `fib_cov_transf`,
+  `sigma_map_func`, and `sigma_pullback_total_func`, then obtain higher support
+  by family pullback. Use `sigma_ind` and the existing proposition theorem to
+  package the ordinary sieve without Sigma eta. Require literal-arrow
+  membership computation and a nonempty zero-ring `SieveMembership` consumer.
 
 ## 19. Side-Task Ledger
 
@@ -2508,7 +2670,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-07c | Finite/unimodular families and finite sums | Green through full integration CI; locally checkpointed | Relative radical/basic-open and geometric consumers remain gated |
 | PSSS-07d | Polynomial algebra universal property | Green through full integration CI; locally checkpointed | Positive-variable representation remains consumer-gated |
 | PSSS-08a | CommRing-valued presheaves and arrowwise invertibility support | Green through full integration CI; locally checkpointed | PSSS-08b remains separately gated |
-| PSSS-08b | Whole ordinary invertibility-sieve assembly | Proposed | PSSS-08a plus owner-aligned `Into_restr_cat` action/coherence |
+| PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
 | PSSS-08c | Ringed sites, selected sheaves, and locality | Proposed | PSSS-08b and PSSS-05b |
 | PSSS-09 | Zariski coverage | Proposed | PSSS-07c and PSSS-08b |
 | PSSS-10 | Slice sites and affine-basic-open comparison | Proposed | PSSS-09 |
@@ -2664,3 +2826,34 @@ PSSS-08a is successful when:
    comparison, strict audits, catalog/health synchronization, current-
    authority prose, and full integration CI are green before the authorized
    local checkpoint.
+
+PSSS-08b is successful when:
+
+1. `comm_ring_carrier_func` computes to the carrier at objects and exposes its
+   full hom action through `path_map_func`, while a negative check retains the
+   absence of direct capped carrier-action computation;
+2. `comm_ring_carrier_catd` has literal fibre `Path_cat(|R|)`, and capping its
+   full action through `fib_cov_tapp0_func` computes to
+   `comm_ring_hom_apply(h,x)`;
+3. the universal total-element unit family has literal fibre
+   `Path_cat(CommRingUnitEvidence(R,x))`, retains generic Catd action, and adds
+   no local identity/composition/action rule beyond its constructor fibre;
+4. the presheaf carrier pullback and restriction-total map are assembled from
+   existing pullback/Sigma/fibre-covariance owners, with both projections at a
+   literal `(V,f)` computing to `O(V)` and `O[f](s)`;
+5. the only new variance bridge is the shaped proof-time comparison between
+   `hom_(K^op,id,U)` and `hom_con(K,U,id)`, tested both positively by typed
+   `eq_refl` and negatively for runtime conversion;
+6. the higher-sieve fibre at `(V,f)` reduces to
+   `Path_cat(CommRingPshInvertibleAlong(O,s,f))`, and `SieveMembership` in the
+   packaged ordinary sieve reduces to the PSSS-08a arrowwise predicate;
+7. ordinary-sieve evidence is derived by `sigma_ind` plus the existing
+   proposition theorem, without introducing encoded-Sigma package eta;
+8. the constant zero-ring presheaf supplies a maintained witness inhabiting
+   membership in the assembled sieve at every arrow;
+9. no topology, sheaf, ringed-site, localization-over-support theorem, or
+   rigid `CommRingPsh_cat` migration is claimed in this tranche; and
+10. focused probes/checks, maintained reviewer and central diagnostics, exact
+    warning comparison, strict audits, catalog/health synchronization,
+    current-authority prose, and full integration CI are green before the
+    authorized local checkpoint.

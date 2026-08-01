@@ -10,13 +10,30 @@
 
   For a section s in O(U), `CommRingPshInvertibleAlong(O,s,f)` says that the
   restriction O(f)(s) is a unit.  It is proposition-valued and is closed under
-  further restriction.  This is the computational predicate underlying the
-  future invertibility sieve D(s), but this module does not yet assemble a
-  `HigherSieve`, claim sheafhood, or select a Grothendieck topology.
+  further restriction.  The carrier and unit-evidence families assemble this
+  predicate into both a Cat-valued higher sieve and an ordinary sieve while
+  preserving literal-arrow membership computation.  This module does not
+  claim sheafhood or select a Grothendieck topology.
 */
 
 require open emdash.emdash3_2_presheaves;
+require open emdash.emdash3_2_sieves;
 require open emdash.emdash3_2_commutative_algebra_localization;
+
+/*
+  Proof-time represented-family comparison for the restriction total.
+
+  `fib_cov_transf` over K^op exposes the rigid covariant represented head
+  `hom_(K^op,id,U)`, while the public Yoneda/Into presentation retains the
+  rigid contravariant head `hom_con(K,U,id)`.  They denote the same family at
+  this shaped opposite/identity boundary.  Runtime keeps both heads distinct;
+  this narrow comparison only lets the generic Sigma totalization elaborate.
+*/
+unif_rule
+  @hom_ (Op_cat $K) (Op_cat $K)
+    (@id Cat_cat (Op_cat $K)) $U
+  ≡ @hom_con $K $U $K (@id Cat_cat $K)
+  ↪ [ tt ≡ tt ];
 
 // Transparent category of CommRing-valued presheaves on K.
 symbol CommRingPsh_cat (K : Cat) : Cat
@@ -215,7 +232,7 @@ symbol comm_ring_psh_restrict_comp_path
       (@comm_ring_psh_restriction_hom K O V U f))
     (@comm_ring_psh_restriction_comp_pointwise_path K O W V U f g);
 
-// Semantic membership predicate for the future invertibility sieve D(s).
+// Semantic membership predicate underlying the invertibility sieve D(s).
 symbol CommRingPshInvertibleAlong
   [K : Cat]
   (O : τ (@CommRingPsh K))
@@ -280,3 +297,123 @@ symbol comm_ring_psh_invertible_along_restrict
     (@comm_ring_psh_restrict_comp_path K O W V U f g s)
     (@comm_ring_psh_invertible_along_restrict_nested
       K O W V U f g s u);
+
+// Pull the reusable Path_cat-valued carrier family back along O.
+symbol comm_ring_psh_carrier_catd
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  : τ (Catd (Op_cat K))
+≔ @Pullback_catd
+    (Op_cat K) CommRing_cat
+    comm_ring_carrier_catd O;
+
+/*
+  Total restriction map for a section s over U.
+
+  A literal restriction arrow `(V,f)` is first sent by Sigma totalization to
+  `(V,O[f](s))`, then by the canonical pullback-total map to the universal ring
+  element `(O(V),O[f](s))`.  Both projections compute through existing owners.
+*/
+symbol comm_ring_psh_restriction_total_func
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  : τ (Functor
+      (@Into_restr_cat K U)
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd))
+≔ @comp_cat_fapp0
+    (@Into_restr_cat K U)
+    (@Sigma_cat
+      (Op_cat K)
+      (@comm_ring_psh_carrier_catd K O))
+    (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+    (@sigma_pullback_total_func
+      (Op_cat K)
+      CommRing_cat
+      O
+      comm_ring_carrier_catd)
+    (@sigma_map_func
+      (Op_cat K)
+      (@yoneda_psh K U)
+      (@comm_ring_psh_carrier_catd K O)
+      (@fib_cov_transf
+        (Op_cat K)
+        (@comm_ring_psh_carrier_catd K O)
+        U s));
+
+/*
+  The whole higher invertibility sieve is the pullback of universal unit
+  evidence along the total restriction map.  Hence a literal `(V,f)` fibre
+  reduces to `Path_cat(CommRingPshInvertibleAlong(O,s,f))`.
+*/
+symbol comm_ring_psh_invertibility_higher_sieve
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  : τ (@HigherSieve K U)
+≔ @Pullback_catd
+    (@Into_restr_cat K U)
+    (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+    comm_ring_unit_evidence_total_catd
+    (@comm_ring_psh_restriction_total_func K O U s);
+
+/*
+  Pointwise subterminality of the higher sieve.  `sigma_ind` is required
+  because generic encoded Sigma objects have no package eta; the constructor
+  branch sees the literal domain and restriction arrow needed by the existing
+  proposition theorem.
+*/
+symbol comm_ring_psh_invertibility_ordinary_evidence
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  : τ (@IsOrdinarySieve K U
+      (@comm_ring_psh_invertibility_higher_sieve K O U s))
+≔ λ q : τ (Obj (@Into_restr_cat K U)),
+    @sigma_ind
+      (Obj K)
+      (λ V : τ (Obj K),
+        Obj
+          (@Fibre_cat
+            (Op_cat K)
+            (@yoneda_psh K U)
+            V))
+      (λ r : @τΣ_
+          (Obj K)
+          (λ V : τ (Obj K),
+            Obj
+              (@Fibre_cat
+                (Op_cat K)
+                (@yoneda_psh K U)
+                V)),
+        IsSubterminalCat
+          (@Fibre_cat
+            (@Into_restr_cat K U)
+            (@comm_ring_psh_invertibility_higher_sieve K O U s)
+            r))
+      (λ V : τ (Obj K),
+        λ f : τ (Obj
+            (@Fibre_cat
+              (Op_cat K)
+              (@yoneda_psh K U)
+              V)),
+          @path_cat_is_subterminal
+            (@CommRingPshInvertibleAlong K O U s V f)
+            (@comm_ring_psh_invertible_along_is_prop
+              K O U s V f))
+      q;
+
+// Ordinary invertibility sieve D(s), retaining its subterminality evidence.
+symbol comm_ring_psh_invertibility_sieve
+  [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  : τ (@Sieve K U)
+≔ @sieve_intro
+    K U
+    (@comm_ring_psh_invertibility_higher_sieve K O U s)
+    (@comm_ring_psh_invertibility_ordinary_evidence K O U s);

@@ -5,7 +5,9 @@
   the category facade leaves whole arrows at the generic category owners.
   Pointwise equality extends to full structured-map equality without eta. A
   downstream localization-overlap consumer selects one stable pointwise
-  composition comparison; a carrier functor remains a later layer.
+  composition comparison.  The whole invertibility-sieve consumer selects a
+  carrier functor whose full hom action is inherited through path-map owners;
+  no competing capped carrier-action rule is installed.
 */
 
 require open emdash.emdash3_2_commutative_algebra;
@@ -565,9 +567,33 @@ symbol comm_ring_cat_is_one_cat
 
 
 /*
-  A full carrier functor is deliberately absent. The transparent projection of
-  a generic CommRing_cat identity/composite still does not compute pointwise.
-  The selected rigid composition comparison above is the only pointwise cut
-  view: forcing the behavior through broad sigma_Fst(id/comp_fapp0) clauses
-  creates an outer-eliminator/inner-cut performance and overlap hazard.
+  Carrier action selected by the whole invertibility-sieve consumer.
+
+  The full hom action is a path-map functor on structured ring maps.  Its
+  ordinary object projection therefore exposes the supplied carrier function
+  through the existing `path_map_func` owner.  There is deliberately no
+  direct `fapp1_fapp0` clause: downstream displayed covariance first retains
+  the iterable full action and only then caps it at a map.  Generic
+  CommRing_cat identity/composition remain whole-arrow runtime owners.
 */
+injective symbol comm_ring_carrier_func
+  : τ (Functor CommRing_cat Grpd_cat);
+
+rule @fapp0 CommRing_cat Grpd_cat comm_ring_carrier_func $R
+  ↪ @comm_ring_carrier $R;
+
+rule @fapp1_func CommRing_cat Grpd_cat comm_ring_carrier_func $R $S
+  ↪ @path_map_func
+      (@CommRingHom $R $S)
+      (@Function_grpd
+        (@comm_ring_carrier $R)
+        (@comm_ring_carrier $S))
+      (λ h : τ (@CommRingHom $R $S),
+        @comm_ring_hom_function $R $S h);
+
+// Transparent Path_cat-valued family of carrier elements over CommRing_cat.
+symbol comm_ring_carrier_catd
+  : τ (Catd CommRing_cat)
+≔ @comp_cat_fapp0
+    CommRing_cat Grpd_cat Cat_cat
+    Path_cat_func comm_ring_carrier_func;

@@ -20634,3 +20634,199 @@ assert [K : Cat]
   : τ (@CommRingPshInvertibleAlong K O U s W
       (@comp_fapp0 K W V U f g));
 /* End of the PSSS-08a CommRing-presheaf diagnostics. */
+
+// catalog-area: CommRing-valued presheaf invertibility sieve
+// The selected carrier functor exposes ring carriers at objects.
+assert (R : τ CommRing) ⊢
+  @fapp0 CommRing_cat Grpd_cat comm_ring_carrier_func R
+  ≡ @comm_ring_carrier R;
+
+// Its full hom action retains the iterable path-map functor.
+assert [R S : τ CommRing] ⊢
+  @fapp1_func CommRing_cat Grpd_cat comm_ring_carrier_func R S
+  ≡ @path_map_func
+      (@CommRingHom R S)
+      (@Function_grpd
+        (@comm_ring_carrier R)
+        (@comm_ring_carrier S))
+      (λ h : τ (@CommRingHom R S),
+        @comm_ring_hom_function R S h);
+
+// No competing direct capped carrier-action beta is selected.
+assertnot [R S : τ CommRing]
+  (h : τ (@CommRingHom R S)) ⊢
+  @fapp1_fapp0 CommRing_cat Grpd_cat
+    comm_ring_carrier_func R S h
+  ≡ @comm_ring_hom_function R S h;
+
+// Capping the selected full action uses the existing path-map projection.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S)) ⊢
+  @fapp0
+    (Path_cat (@CommRingHom R S))
+    (Path_cat (@Function_grpd
+      (@comm_ring_carrier R)
+      (@comm_ring_carrier S)))
+    (@fapp1_func CommRing_cat Grpd_cat
+      comm_ring_carrier_func R S)
+    h
+  ≡ @comm_ring_hom_function R S h;
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  (@fapp0
+    (Path_cat (@CommRingHom R S))
+    (Path_cat (@Function_grpd
+      (@comm_ring_carrier R)
+      (@comm_ring_carrier S)))
+    (@fapp1_func CommRing_cat Grpd_cat
+      comm_ring_carrier_func R S)
+    h) x
+  ≡ @comm_ring_hom_apply R S h x;
+
+assert (R : τ CommRing) ⊢
+  @Fibre_cat CommRing_cat comm_ring_carrier_catd R
+  ≡ Path_cat (@comm_ring_carrier R);
+
+// Literal total ring elements expose Path_cat-valued unit evidence.
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @Fibre_cat
+    (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+    comm_ring_unit_evidence_total_catd
+    (Struct_sigma R x)
+  ≡ Path_cat (@CommRingUnitEvidence R x);
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  Obj
+    (@Fibre_cat
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+      comm_ring_unit_evidence_total_catd
+      (Struct_sigma R x))
+  ≡ @CommRingUnitEvidence R x;
+
+// Displayed covariance reaches the structured map's actual carrier action.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @fapp0
+    (Path_cat (@CommRingHom R S))
+    (Path_cat (@comm_ring_carrier S))
+    (@fib_cov_tapp0_func
+      CommRing_cat comm_ring_carrier_catd R S x)
+    h
+  ≡ @comm_ring_hom_apply R S h x;
+
+// The shaped represented-family comparison fires only during elaboration.
+assert [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @eq_refl
+    (Functor (Op_cat K) Cat_cat)
+    (@hom_ (Op_cat K) (Op_cat K)
+      (@id Cat_cat (Op_cat K)) U)
+  : τ (@=
+      (Functor (Op_cat K) Cat_cat)
+      (@hom_ (Op_cat K) (Op_cat K)
+        (@id Cat_cat (Op_cat K)) U)
+      (@hom_con K U K (@id Cat_cat K)));
+
+assertnot [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @hom_ (Op_cat K) (Op_cat K)
+    (@id Cat_cat (Op_cat K)) U
+  ≡ @hom_con K U K (@id Cat_cat K);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (V : τ (Obj K)) ⊢
+  @Fibre_cat
+    (Op_cat K)
+    (@comm_ring_psh_carrier_catd K O)
+    V
+  ≡ Path_cat
+      (@comm_ring_carrier (@comm_ring_psh_value K O V));
+
+// The total map computes both the ring and restricted-section projections.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  sigma_Fst
+    (@fapp0
+      (@Into_restr_cat K U)
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+      (@comm_ring_psh_restriction_total_func K O U s)
+      (Struct_sigma V f))
+  ≡ @comm_ring_psh_value K O V;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  sigma_Snd
+    (@fapp0
+      (@Into_restr_cat K U)
+      (@Sigma_cat CommRing_cat comm_ring_carrier_catd)
+      (@comm_ring_psh_restriction_total_func K O U s)
+      (Struct_sigma V f))
+  ≡ @comm_ring_psh_restrict K O V U f s;
+
+// Literal higher-sieve fibres and ordinary membership retain computation.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @Fibre_cat
+    (@Into_restr_cat K U)
+    (@comm_ring_psh_invertibility_higher_sieve K O U s)
+    (Struct_sigma V f)
+  ≡ Path_cat (@CommRingPshInvertibleAlong K O U s V f);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  Obj
+    (@Fibre_cat
+      (@Into_restr_cat K U)
+      (@comm_ring_psh_invertibility_higher_sieve K O U s)
+      (Struct_sigma V f))
+  ≡ @CommRingPshInvertibleAlong K O U s V f;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_invertibility_ordinary_evidence K O U s
+  : τ (@IsOrdinarySieve K U
+      (@comm_ring_psh_invertibility_higher_sieve K O U s));
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_invertibility_sieve K O U s
+  : τ (@Sieve K U);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  [V : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @SieveMembership
+    K U
+    (@comm_ring_psh_invertibility_sieve K O U s)
+    (Struct_sigma V f)
+  ≡ @CommRingPshInvertibleAlong K O U s V f;
+/* End of the PSSS-08b invertibility-sieve diagnostics. */
