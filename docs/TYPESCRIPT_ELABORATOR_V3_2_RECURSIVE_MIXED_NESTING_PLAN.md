@@ -36,8 +36,10 @@ H-DTTLF-USABILITY-TEXT-PARITY-RECURSIVE-MIXED-01 /
 D-DTTLF-USABILITY-033 at proposal checkpoint
 `83cc2c09defadc0f2b5379cfe990c6d1764b1429`. The separate review recorded in
 the decision ledger approves exactly that gate under the standing unattended
-delegation. Implementation is dependency-ready; no binder, semantic,
-browser-preset, or public-promotion change is implied.
+delegation at `106fb06c7379d081c971a79c6829a7a3708fc4aa`. The bounded
+implementation is now focused-green and awaits only its exact local
+checkpoint/hash record. No binder, semantic, browser-preset, or
+public-promotion change is implied.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -534,7 +536,7 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
 | `RECURSIVE-MIXED-HOM-CLOSURE-1C` | complete at `0180fd8cab2ddfbf4092e4c9a4eff565908c146f` | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | The direct program exposes the existing generic Hom category with one shared endpoint validator. Stable rich heads reify at zero steps; eight compact named levels and two checked mixed-root action levels pass. The 387-second four-action expansion remains a measured performance nonclaim. |
 | `RECURSIVE-MIXED-GRADUATE-1D` | complete at `50c579e2b76252f4cffcb93d2c643ef8155c8288` under D-DTTLF-USABILITY-032 | green `HOM-CLOSURE-1C`; recursive normalization/reification and public Hom/action closure | Depth-generic finite named Hom nesting over the exact canonical mixed root/transferred grammar, plus generic internal action recursion, is graduated as an architecture claim. Variance, introduction, parser, metatheory, and performance nonclaims remain. |
-| `TEXT-PARITY-RECURSIVE-MIXED-1E` | exact D-DTTLF-USABILITY-033 reviewed-approved; implementation dependency-ready | approved `GRADUATE-1D`; existing typed-resolver parity audit | Add only the recursive category-position spelling `hom C x y` as a direct route to the existing checked `homCategory(C,x,y)` method. Reuse the one located application tree and recursive category resolver; do not broaden binders, factorization, or semantic claims. |
+| `TEXT-PARITY-RECURSIVE-MIXED-1E` | implemented and focused-green under D-DTTLF-USABILITY-033; local checkpoint pending | approved `GRADUATE-1D`; existing typed-resolver parity audit | The existing recursive category resolver now routes exact `hom C x y` to checked `homCategory(C,x,y)`. Ordinary and two-level canonical-mixed direct/text equality plus exact negatives pass; no binder, factorization, or semantic claim changed. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
 | `CURRY-PACKAGE-0A` | deferred independent audit | measured higher-action or mixed-introduction consumer | Audit ordinary curry/uncurry computation and adjunction coherence; do not infer primitive asymmetry from style. |
 | `MIXED-CURRY-1` | deferred mathematical/kernel work | recursive nesting graduation and two-sided context design | Lambdapi-first explicit mixed curry functor with object/base-arrow/higher action and laws. Separate owner-position proposal required. |
@@ -898,6 +900,67 @@ approves exactly D-DTTLF-USABILITY-033 under the standing unattended
 delegation, with human supersession. Implementation may now begin within this
 gate.
 
+## `TEXT-PARITY-RECURSIVE-MIXED-1E` Implementation Result
+
+The approved correction is implemented without changing the parser's located
+node union, expected-classifier contracts, categorical program, explicit
+Core, checker, evaluator, runtime, or kernel.
+
+The one existing recursive category resolver now recognizes:
+
+```text
+hom C x y
+```
+
+as an exact three-argument application spine. It recursively resolves `C` as
+a category, resolves `x` and `y` as terms, and invokes only
+`CoreCategoricalProgram.homCategory(C,x,y)` with the located source site.
+Consequently the same branch handles finite recursive input such as:
+
+```text
+hom (hom (fibre Nested k) theta eta) alpha beta
+```
+
+There is no mixed-specific parser or resolver case. The first `hom` result is
+simply fed back through the already-recursive category position of the second
+one. The named endpoints in the canonical mixed-fibre witness are declared by
+the host program in exactly that category; the adapter neither inserts a
+coercion nor assumes definitional equality between different category
+presentations.
+
+The public adapter revision is now:
+
+```text
+TEXT-PARITY-RECURSIVE-MIXED-1-CATEGORICAL-TEXT-1
+```
+
+Only tests that intentionally pin the current public adapter contract were
+synchronized. Historical proposal prerequisites and completed-plan revision
+records remain unchanged.
+
+Proportional validation is green:
+
+- the new D-033 corpus passes `5/5`, covering exact typed routing, ordinary
+  direct/text equality, two recursive named Hom levels over the canonical
+  mixed fibre, arity/kind/endpoint/foreign negatives, and the revision pin;
+- the result-constructor implementation/audit suites pass `8/8`;
+- the ordinary base text corpus passes `13/13` under the repository's normal
+  public-index initialization order;
+- root TypeScript typecheck and lint pass; and
+- the earlier D-031 recursive semantic evidence is carried forward because
+  no categorical program, reifier, runtime, or checker source changed.
+
+The first isolated direct-module base-test invocation encountered the
+repository's pre-existing circular-initialization graduation sentinel. The
+same corpus passes under normal public-index initialization, so no product
+source or historical graduation proposal was changed to accommodate that
+test-harness ordering artifact.
+
+No long aggregate, browser build, `check:all`, or Lambdapi oracle was rerun.
+This tranche changes only one deterministic adapter dispatch and its public
+revision pin; the recent aggregate and D-031 semantic evidence cover every
+unchanged lower boundary.
+
 ## Validation And Checkpoint Policy
 
 For the plan-only checkpoint:
@@ -1225,4 +1288,13 @@ authority conflict, or an operation outside the stated Git boundary.
   supersession. It authorizes only the `hom C x y` typed-resolver route,
   adapter revision synchronization, focused direct/text recursive evidence,
   and listed negatives. It grants no binder, semantic, kernel, browser/public,
-  remote-Git, or cleanup authority.
+  remote-Git, or cleanup authority. The exact decision checkpoint is
+  `106fb06c7379d081c971a79c6829a7a3708fc4aa`.
+- **2026-07-31 — D-DTTLF-USABILITY-033 implemented and focused-green.** The
+  one recursive category resolver now routes exact `hom C x y` through the
+  existing checked `homCategory` method. The `5/5` new corpus, `8/8` nearest
+  result-constructor corpus, `13/13` ordinary text corpus, typecheck, and lint
+  pass. Recursive mixed direct/text equality uses two named Hom levels over
+  the canonical mixed fibre without a coercion or new semantics. No aggregate,
+  browser, kernel, binder, or public-promotion boundary changed; the local
+  implementation checkpoint will be recorded after the coherent commit.

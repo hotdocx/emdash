@@ -39,9 +39,13 @@
 > `homCategory(C,x,y)` method. The exact non-self-authorizing proposal is
 > frozen at `83cc2c09defadc0f2b5379cfe990c6d1764b1429` and separately
 > reviewed-approved as D-DTTLF-USABILITY-033 under the standing unattended
-> delegation. Its bounded implementation is dependency-ready; binder
-> semantics, browser/public promotion, evaluator optimization, and mixed
-> curry remain outside that gate.
+> delegation at `106fb06c7379d081c971a79c6829a7a3708fc4aa`. Its bounded
+> implementation is focused-green: exact `hom C x y` and recursively nested
+> category positions call only the existing checked `homCategory` method;
+> ordinary and canonical mixed-fibre direct/text equality plus negative
+> boundaries pass. The local implementation checkpoint is pending its exact
+> hash record. Binder semantics, browser/public promotion, evaluator
+> optimization, and mixed curry remain outside that gate.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)

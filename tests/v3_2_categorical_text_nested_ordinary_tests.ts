@@ -145,7 +145,7 @@ describe('SYNTAX-PARITY-1D1 nested ordinary text', () => {
 
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'TEXT-PARITY-MIXED-1-CATEGORICAL-TEXT-1'
+            'TEXT-PARITY-RECURSIVE-MIXED-1-CATEGORICAL-TEXT-1'
         );
         assertDirectEquality(
             data,

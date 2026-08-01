@@ -91,7 +91,7 @@ describe('SYNTAX-PARITY-1C3 result-constructor audit', () => {
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'TEXT-PARITY-MIXED-1-CATEGORICAL-TEXT-1'
+            'TEXT-PARITY-RECURSIVE-MIXED-1-CATEGORICAL-TEXT-1'
         );
         assert.deepEqual(
             CORE_CATEGORICAL_TEXT_RESULT_CONSTRUCTOR_AUDIT

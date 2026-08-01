@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'TEXT-PARITY-MIXED-1-CATEGORICAL-TEXT-1' as const;
+    'TEXT-PARITY-RECURSIVE-MIXED-1-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -1656,6 +1656,25 @@ class CoreCategoricalTextResolver {
                     resolveTerm(transfd[0]),
                     resolveTerm(transfd[1]),
                     source('parsed displayed transformation category')
+                )
+            );
+        }
+
+        const hom = this.fixedApplicationSpine(
+            expression,
+            'hom',
+            3
+        );
+        if (hom !== undefined) {
+            return invokeProgram(
+                this.sourceFile,
+                expression.range,
+                'Ordinary Hom category was rejected',
+                () => this.program.homCategory(
+                    resolveCategory(hom[0]),
+                    resolveTerm(hom[1]),
+                    resolveTerm(hom[2]),
+                    source('parsed ordinary Hom category')
                 )
             );
         }
