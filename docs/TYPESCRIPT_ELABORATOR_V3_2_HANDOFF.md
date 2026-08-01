@@ -8,8 +8,9 @@
 > TypeScript implementation: its exact-section-leaf transfer remains
 > historical acquisition evidence, not the recursive binder architecture.
 > `CONTEXTUAL-CURRY-0B` is owner-position complete. The exact hybrid
-> `CONTEXTUAL-CURRY-1A` proposal is frozen as D-DTTLF-USABILITY-042 and awaits
-> separate review before active-kernel edits. It adds a reusable positive
+> `CONTEXTUAL-CURRY-1A` proposal is frozen and separately reviewed-approved as
+> D-DTTLF-USABILITY-042; its exact Lambdapi implementation is dependency-ready.
+> It adds a reusable positive
 > Sigma curry and negative-family curry, selects the stable family normal
 > form, and retains D-040's names, signatures, operation heads, and rules as
 > the checked specialized facade; only the stated transparent family-alias
