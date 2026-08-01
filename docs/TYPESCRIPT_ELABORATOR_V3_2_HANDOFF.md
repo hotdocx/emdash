@@ -36,9 +36,17 @@
 > `lambda^n k. lambda^f c. lambda^f a. t : Functord_cat C (Functor_catd A B)`;
 > eta returns `F`, and finite covariant target maps use the existing internal
 > action plus generic displayed composition. It explicitly neither transfers
-> nor invokes D-040/D-042. After its checkpoint, the next dependency-ready row
-> is a bounded read-only `MIXED-VARIANCE-GRADUATE-1E` stress audit and separate
-> proposal, not another semantic edit. The completed
+> nor invokes D-040/D-042. The subsequent bounded
+> `MIXED-VARIANCE-GRADUATE-1E` stress audit found no reason to replace this
+> direct binder with curry. It split the next work into a TypeScript-only
+> classifier-view correction and a later orientation-aware source-action
+> audit. H-DTTLF-USABILITY-DIRECT-MIXED-CLASSIFIER-CORRECTION-01 /
+> D-DTTLF-USABILITY-044 is frozen in the living plan for separate review:
+> retain the exact indexed-object view of canonical fibre functors, compile
+> direct `c(a)` as existing `id_funcd`, and support nested positive canonical
+> targets without a kernel/runtime/curry change. Contravariant source mapping
+> remains separately deferred until its exact existing-owner and `K`/`Op K`
+> classifier-orientation closure is reviewed. The completed
 > mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
