@@ -371,7 +371,7 @@ It deliberately avoids:
 | `MIXED-CURRY-1B` | final-green at `bed022fdab970109163da8415726a5bcc1ab5a89` | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; approved D-040; exact owner-position and active CI evidence | Exactly one Lambdapi-first mixed-curry operation package is active: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. It adds no Hom-action duplicate and leaves `Unit_prof` unchanged. |
 | `MIXED-INTRODUCTION-TS-1C` | D-041 approved historically, then human-superseded before implementation; paused | final-green `MIXED-CURRY-1B` at `bed022fdab970109163da8415726a5bcc1ab5a89`; D-041 proposal `249895de44c005dd64a00bbca13f5d7fb6b1097c`; later contextual-binder clarification | Preserve the measured transfer closure, but do not implement its exact-section-leaf frontend as the claimed binder architecture. Re-audit it only after the reusable contextual curry basis is selected. |
 | `CONTEXTUAL-CURRY-0B` | complete; ignored owner-position candidate quiet-green, warning-measured, and strict-audit clean | final-green D-039/D-040; user clarification on direct recursive binders and hybrid retention | Surface syntax is separated from total-context section semantics. The audit qualifies positive Sigma curry, negative-family curry, their factorized point/action route, the stable family normal form, generic next-Hom formation, and the exact positive-identity normal-form seam. |
-| `CONTEXTUAL-CURRY-1A` | exact proposal frozen below under D-DTTLF-USABILITY-042; decision pending | completed `CONTEXTUAL-CURRY-0B` | Promote exactly the measured eight-declaration/twelve-rule reusable basis and one existing alias-body migration. Retain D-040 unchanged as a checked specialized facade; add no factorized primitive, broad identity collapse, TypeScript, or unrestricted-variance claim. |
+| `CONTEXTUAL-CURRY-1A` | exact proposal frozen below under D-DTTLF-USABILITY-042; decision pending | completed `CONTEXTUAL-CURRY-0B` | Promote exactly the measured eight-declaration/twelve-rule reusable basis and one existing alias-body migration. Retain D-040's names, signatures, operation heads, and rules as a checked specialized facade; add no factorized primitive, broad identity collapse, TypeScript, or unrestricted-variance claim. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative recursive-binder and full-action evidence | `CONTEXTUAL-CURRY-1A`; corrected TypeScript successor to D-041 | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -1789,10 +1789,12 @@ Approve exactly this bounded Lambdapi-first hybrid package:
 
    Do not add an active `factorized_mixed_curry` symbol. Consumers compose the
    two operations with ordinary `comp_cat_fapp0`.
-5. Preserve every D-040 declaration and rule. D-040 remains the checked
-   specialized facade/witness. Do not rewrite it into the factorized
-   composite, delete it, or add a global bridge between whole-context identity
-   and `mix_neg_arrow(id,id)` in this tranche.
+5. Preserve every D-040 name and signature, all four operation/projection
+   heads, and all seven rules. The only D-040-inherited semantic-body change
+   is the `mix_uncurried_family` migration explicitly authorized in item 2.
+   D-040 remains the checked specialized facade/witness. Do not rewrite its
+   operation into the factorized composite, delete it, or add a global bridge
+   between whole-context identity and `mix_neg_arrow(id,id)` in this tranche.
 6. Add durable checks for:
 
    - positive Sigma point, fibre-arrow, and base-arrow computation;
@@ -2209,7 +2211,9 @@ removal, or unrelated cleanup is authorized.
   gate adds three positive declarations/five rules, five negative
   declarations/seven rules, and migrates only the transparent
   `mix_uncurried_family` body to its stable Sigma-projection-pullback form. It
-  retains D-040 unchanged and excludes an active composite head, broad
+  retains D-040's names, signatures, operation heads, and rules (apart from
+  the explicitly selected family-alias body migration) and excludes an active
+  composite head, broad
   identity/pullback collapse, TypeScript, parser, browser, publication,
   unrestricted variance, and new higher computation. Implementation requires
   a separate review.

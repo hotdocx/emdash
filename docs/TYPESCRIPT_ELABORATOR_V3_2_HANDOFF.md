@@ -11,7 +11,9 @@
 > `CONTEXTUAL-CURRY-1A` proposal is frozen as D-DTTLF-USABILITY-042 and awaits
 > separate review before active-kernel edits. It adds a reusable positive
 > Sigma curry and negative-family curry, selects the stable family normal
-> form, and retains D-040 unchanged as the checked specialized facade. The
+> form, and retains D-040's names, signatures, operation heads, and rules as
+> the checked specialized facade; only the stated transparent family-alias
+> body migrates. The
 > end-user target remains recursive
 > `lambda^n k. lambda^f c. lambda^f a. t`; a total-context section may be an
 > internal compilation form but is not a required user argument. The
