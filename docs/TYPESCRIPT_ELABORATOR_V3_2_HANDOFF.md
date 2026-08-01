@@ -133,8 +133,11 @@
 > varying application, larger contexts, and unrestricted `:^nd` also remain
 > open. The next dependency-ready row is the read-only
 > `DIRECT-MIXED-STRUCTURAL-BASIS-0I` owner/variance audit frozen as
-> D-DTTLF-USABILITY-049. It must search and probe internal owners before any
-> semantic edit and must not make total-context curry a binder prerequisite.
+> D-DTTLF-USABILITY-049 at proposal checkpoint
+> `8d055469cc5e5178940cf887598ae9d289c6117e` and separately approved only
+> as a read-only audit under the standing unattended delegation. It must
+> search and probe internal owners before any semantic edit and must not make
+> total-context curry a binder prerequisite.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

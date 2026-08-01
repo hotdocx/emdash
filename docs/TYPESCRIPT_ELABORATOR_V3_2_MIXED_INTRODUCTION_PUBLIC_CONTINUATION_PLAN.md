@@ -190,6 +190,10 @@ factorer. The first measured missing ordinary-DTT case is inner weakening,
 `lambda^n k. lambda^f c. lambda^f a. H[c]`, which remains a durable
 fail-closed negative. The next row is therefore a Lambdapi-first read-only
 structural-basis audit, not curry promotion and not another depth witness.
+Its exact D-DTTLF-USABILITY-049 proposal checkpoint is
+`8d055469cc5e5178940cf887598ae9d289c6117e`; the separate review recorded
+below approves only that read-only audit under the standing unattended
+delegation, with immediate human supersession.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -467,7 +471,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` | read-only audit complete; one-owner direct-binder continuation selected | final-green D-047; measured non-conversion between product-of-mixed-functors and mixed-functor-into-product; active product and mixed-action owners | No existing active owner supplies the required global comparison. One `Functor_catd_product_funcd` distributor with point/full/capped projections is owner-position, quiet-green, strict-audit clean, and zero-warning-delta; its direct pair consumer computes on objects and inner arrows and retains internal base/higher action. No curry or `Product_catd` facade is involved. |
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | implemented and final-green at `d5ea9f5d3d296835608eec8f963f7fa5657f0005` under D-DTTLF-USABILITY-048; kernel checkpoint `d9f298ce2c3194adda8f68bd4654e484b33bfac4` | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Exactly one distributor and three projection rules are active and generically transferred. The existing direct factorization tree recursively lowers `typed-pair`, combines branches with existing `Product_pair_funcd`, and composes the distributor. Direct introduction remains fundamental; curry, facade, text/browser, and unrestricted-variance claims remain excluded. |
 | `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | read-only reassessment complete; no semantic delta | final-green D-048 and the user's renewed direct-binder invariant | Graduates arbitrary finite depth only for the recursive `leaf | source-map | target-map | pair` body algebra, alongside the predecessor's qualified finite Hom towers. Direct introduction is fundamental and curry-free. General structural constructor coverage, context arity, variance-valid varying application, and `:^nd` introduction remain separate. |
-| `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | dependency-ready read-only owner/variance audit; exact gate frozen below as D-DTTLF-USABILITY-049 | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; ordinary-DTT weakening counterexample; direct-binder invariant | Inventory both/outer-only/inner-only/neither occurrence cases and varying application against existing internal owners. Probe only genuinely absent owners at their active source position, including the candidate mixed weakening `B -> Functor_catd A B`; require object, base-arrow, and higher action. Select at most one later semantic gate without making curry a surface or compiler prerequisite. |
+| `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | approved read-only owner/variance audit under D-DTTLF-USABILITY-049; dependency-ready | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; proposal checkpoint `8d055469cc5e5178940cf887598ae9d289c6117e`; separate review under standing unattended delegation | Inventory both/outer-only/inner-only/neither occurrence cases and varying application against existing internal owners. Probe only genuinely absent owners at their active source position, including the candidate mixed weakening `B -> Functor_catd A B`; require object, base-arrow, and higher action. Select at most one later semantic gate without making curry a surface or compiler prerequisite. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3397,6 +3401,29 @@ This audit does not approve `Const_func_funcd` or any other new owner. It
 exists to prevent both an ad hoc frontend case and the opposite mistake of
 treating the auxiliary mixed-curry package as the only possible foundation.
 
+### Separate D-DTTLF-USABILITY-049 review result
+
+Proposal checkpoint
+`8d055469cc5e5178940cf887598ae9d289c6117e` is approved exactly as a
+read-only audit. The checkpoint changes only this living plan and the
+handoff; `src/`, `tests/`, the Lambdapi workspace, README, browser, and public
+artifacts have zero delta. Its ten items preserve the direct-binder
+invariant, require existing-authority search and owner-position evidence,
+and explicitly withhold every active semantic edit.
+
+The review independently confirms the motivating boundary in current code:
+the factorization is recursive rather than depth-enumerated, but every leaf
+uses both the outer and inner ordinals; target maps require a closed displayed
+mapper; and the durable outer-only body remains fail-closed. Lexical active-
+kernel search finds ordinary weakening and displayed terminal/section
+ingredients but no exact named `B -> Functor_catd A B` owner. That absence is
+a probe question, not authority to add the candidate.
+
+No immediate human correction superseded the frozen checkpoint. Under the
+standing unattended delegation, with immediate human supersession, only the
+read-only searches, bounded temporary probes, owner/derivation matrix, and at
+most one separately frozen successor proposal may proceed.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -3559,8 +3586,9 @@ general structural completeness: inner/outer/constant weakening, qualified
 two-varying application, larger mixed contexts, and unrestricted `:^nd`
 introduction remain open.
 
-The next dependency-ready row is the read-only
-`DIRECT-MIXED-STRUCTURAL-BASIS-0I` audit frozen as D-DTTLF-USABILITY-049.
+The next dependency-ready row is the separately reviewed read-only
+`DIRECT-MIXED-STRUCTURAL-BASIS-0I` audit frozen as D-DTTLF-USABILITY-049 at
+`8d055469cc5e5178940cf887598ae9d289c6117e`.
 Inventory occurrence cases and existing owners, probe only genuinely absent
 owners at their active source position, require internal object/base/higher
 action, and freeze at most one later semantic gate. Preserve direct
@@ -3583,6 +3611,21 @@ removal, or unrelated cleanup is authorized.
 ```
 
 ## Decision Ledger
+
+- **2026-08-01 — D-DTTLF-USABILITY-049 approved exactly as a read-only
+  audit.** Separate review of proposal checkpoint
+  `8d055469cc5e5178940cf887598ae9d289c6117e` confirms a two-document-only
+  delta, the recursive-depth versus structural-coverage distinction, and the
+  exact weakening counterexample. It authorizes owner/variance inventory and
+  bounded temporary probes only; no `Const_func_funcd`, curry promotion,
+  TypeScript case, or active semantic edit is approved.
+- **2026-08-01 — `DIRECT-MIXED-PRODUCT-GRADUATE-1H` complete and D-049
+  frozen.** D-048 establishes depth-generic recursion for
+  `leaf | source-map | target-map | pair`, not general mixed structural
+  completeness. The direct nested binder remains fundamental. Inner/outer/
+  constant weakening, qualified two-varying application, larger contexts,
+  and unrestricted `:^nd` remain open. The exact next read-only audit is
+  checkpointed at `8d055469cc5e5178940cf887598ae9d289c6117e`.
 
 - **2026-08-01 — D-DTTLF-USABILITY-048 implementation final-green at
   `d5ea9f5d3d296835608eec8f963f7fa5657f0005`.** Kernel checkpoint
