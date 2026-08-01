@@ -2,28 +2,28 @@
 
 > **Current semantic continuation (2026-07-31):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md)
-> owns the dependency-ready work. The completed mixed-mode telescope plan
+> records the latest completed semantic continuation. The completed
+> mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
-> classifier, and text parity; the recursive successor now
-> targets runtime-normalized canonical classifier reification beginning with
+> classifier, and text parity; the recursive successor completed
+> runtime-normalized canonical classifier reification beginning with
 > the existing `Nested_transfd_telescope_catd` enrichment level. It also
 > records the separate non-blocking `Product_catd` facade and curry/uncurry
-> package audits. Follow the successor's dependency ledger and keep general
+> package audits. Its scoped dependency ledger is now closed; keep general
 > mixed curry, new kernel owners, and unrestricted proof-rule inference
-> outside the active tranche.
+> outside this completed tranche.
 > D-DTTLF-USABILITY-029 is now implemented and focused-green: the mixed
 > profile uses bounded generic descendant normalization plus parent retry to
 > recover canonical displayed-functor/displayed-transfor views of unchanged
 > terms, and the existing `Nested_transfd_telescope_catd` representative
 > reaches internal base-arrow, higher-component, and next-hom action. Its
 > exact local checkpoint is
-> `12b4f97e57880ef32f36fd5e143465b4c853c055`; the next semantic row is the
-> separately frozen and reviewed-approved D-DTTLF-USABILITY-030 generic
-> Hom-category public closure and parameterized action tower. The audit found
-> no semantic/kernel gap, but
-> did find that the direct program API lacks the already-owned general
-> `Hom_cat C x y` category constructor. Structural graduation follows that
-> bounded closure. Initial implementation also measured a false reifier-budget
+> `12b4f97e57880ef32f36fd5e143465b4c853c055`. The subsequent
+> D-DTTLF-USABILITY-030 row added the generic Hom-category public closure and
+> parameterized action tower. Its audit found no semantic/kernel gap, but did
+> find that the direct program API had lacked the already-owned general
+> `Hom_cat C x y` category constructor. Initial implementation also measured
+> a false reifier-budget
 > dependency and real inlined higher-action expansion; the separately frozen
 > reviewed-approved D-DTTLF-USABILITY-031 correction makes stable Hom heads a
 > zero-step base case and separates a compact eight-level named-cell check
@@ -33,8 +33,8 @@
 > reviewed-approved at `50c579e2b76252f4cffcb93d2c643ef8155c8288`. It
 > claims only depth-generic finite named Hom closure over the exact canonical
 > mixed root and transferred grammar, with explicit variance, introduction,
-> parser, and performance nonclaims. The dependency-ready text-parity audit
-> is now complete. It finds exactly one mechanical route: add `hom C x y` to
+> parser, and performance nonclaims. The subsequent text-parity audit found
+> exactly one mechanical route: add `hom C x y` to
 > the existing recursive category resolver as a direct call to the checked
 > `homCategory(C,x,y)` method. The exact non-self-authorizing proposal is
 > frozen at `83cc2c09defadc0f2b5379cfe990c6d1764b1429` and separately
@@ -43,9 +43,12 @@
 > implementation is focused-green: exact `hom C x y` and recursively nested
 > category positions call only the existing checked `homCategory` method;
 > ordinary and canonical mixed-fibre direct/text equality plus negative
-> boundaries pass. The local implementation checkpoint is pending its exact
-> hash record. Binder semantics, browser/public promotion, evaluator
-> optimization, and mixed curry remain outside that gate.
+> boundaries pass. The exact local implementation checkpoint is
+> `70ff35d05c0fb7f2e4ea71e9a7b6e41ba95ece32`. This completes the scoped
+> recursive-mixed successor; it has no remaining dependency-ready row.
+> Binder semantics beyond the exact envelope, unrestricted variance,
+> browser/public promotion, evaluator optimization, product-facade work, and
+> mixed curry remain separate future objectives.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)

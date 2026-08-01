@@ -2,7 +2,7 @@
 
 Date: 2026-07-31
 
-Status: active living successor; the architecture and first bounded
+Status: scoped successor complete; the architecture and first bounded
 implementation gate are frozen below under
 H-DTTLF-USABILITY-RECURSIVE-MIXED-NESTING-01 /
 D-DTTLF-USABILITY-029. The proposal-only checkpoint is `6828225`. The user
@@ -13,12 +13,12 @@ its non-effects. `RECURSIVE-MIXED-REFLECT-1A` and
 `RECURSIVE-MIXED-TRANSFD-1B` are implemented and focused-green; their local
 implementation checkpoint is
 `12b4f97e57880ef32f36fd5e143465b4c853c055`. The structural graduation row
-requires the small public Hom-category closure now frozen below as
+required the small public Hom-category closure frozen below as
 D-DTTLF-USABILITY-030. Its proposal-only checkpoint is
 `e41f44acb975f6d0a30ab6277c39ea2c25d12d36`; the separate review recorded in
 the decision ledger approves exactly that gate under the standing unattended
-delegation. `RECURSIVE-MIXED-HOM-CLOSURE-1C` is dependency-ready, not an
-implicit broadening of the implemented profile. Initial implementation
+delegation. That closure is implemented without broadening the profile.
+Initial implementation
 measurement exposed a bounded-normalization and routine-test performance
 correction frozen separately as D-DTTLF-USABILITY-031 at
 `54c73a60d441b610e466aaba33ccd99e127f4192`. The decision ledger records its
@@ -37,9 +37,11 @@ D-DTTLF-USABILITY-033 at proposal checkpoint
 `83cc2c09defadc0f2b5379cfe990c6d1764b1429`. The separate review recorded in
 the decision ledger approves exactly that gate under the standing unattended
 delegation at `106fb06c7379d081c971a79c6829a7a3708fc4aa`. The bounded
-implementation is now focused-green and awaits only its exact local
-checkpoint/hash record. No binder, semantic, browser-preset, or
-public-promotion change is implied.
+implementation is focused-green at
+`70ff35d05c0fb7f2e4ea71e9a7b6e41ba95ece32`. The recursive-mixed semantic
+and text-parity rows are complete. Product-facade, curry, unrestricted
+variance/introduction, browser/public promotion, and scale work remain
+separate future objectives rather than unfinished rows of this scoped plan.
 
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
@@ -536,7 +538,7 @@ pullback-hidden classifiers, or mixed curry.
 | `RECURSIVE-MIXED-TRANSFD-1B` | complete at `12b4f97e57880ef32f36fd5e143465b4c853c055` | `REFLECT-1A`; active `Nested_transfd_telescope_catd` owners | Direct and internally transported results recover exact displayed-transfor endpoints; component, point, naturality/higher-cell, internal-Hom object action, whole-Hom action, and `tdapp1_int` next-hom evidence pass. No cast/coercion is emitted. |
 | `RECURSIVE-MIXED-HOM-CLOSURE-1C` | complete at `0180fd8cab2ddfbf4092e4c9a4eff565908c146f` | green `TRANSFD-1B`; existing generic `hom-category`, `hom`, `homBoundary`, and whole-Hom action | The direct program exposes the existing generic Hom category with one shared endpoint validator. Stable rich heads reify at zero steps; eight compact named levels and two checked mixed-root action levels pass. The 387-second four-action expansion remains a measured performance nonclaim. |
 | `RECURSIVE-MIXED-GRADUATE-1D` | complete at `50c579e2b76252f4cffcb93d2c643ef8155c8288` under D-DTTLF-USABILITY-032 | green `HOM-CLOSURE-1C`; recursive normalization/reification and public Hom/action closure | Depth-generic finite named Hom nesting over the exact canonical mixed root/transferred grammar, plus generic internal action recursion, is graduated as an architecture claim. Variance, introduction, parser, metatheory, and performance nonclaims remain. |
-| `TEXT-PARITY-RECURSIVE-MIXED-1E` | implemented and focused-green under D-DTTLF-USABILITY-033; local checkpoint pending | approved `GRADUATE-1D`; existing typed-resolver parity audit | The existing recursive category resolver now routes exact `hom C x y` to checked `homCategory(C,x,y)`. Ordinary and two-level canonical-mixed direct/text equality plus exact negatives pass; no binder, factorization, or semantic claim changed. |
+| `TEXT-PARITY-RECURSIVE-MIXED-1E` | complete at `70ff35d05c0fb7f2e4ea71e9a7b6e41ba95ece32` under D-DTTLF-USABILITY-033 | approved `GRADUATE-1D`; existing typed-resolver parity audit | The existing recursive category resolver now routes exact `hom C x y` to checked `homCategory(C,x,y)`. Ordinary and two-level canonical-mixed direct/text equality plus exact negatives pass; no binder, factorization, or semantic claim changed. |
 | `PRODUCT-FACADE-0A` | deferred independent read-only audit | a concrete maintainability priority after nesting | Compare repeated composite, consistently adopted transparent alias, and stable primitive. No active kernel edit without a new gate. |
 | `CURRY-PACKAGE-0A` | deferred independent audit | measured higher-action or mixed-introduction consumer | Audit ordinary curry/uncurry computation and adjunction coherence; do not infer primitive asymmetry from style. |
 | `MIXED-CURRY-1` | deferred mathematical/kernel work | recursive nesting graduation and two-sided context design | Lambdapi-first explicit mixed curry functor with object/base-arrow/higher action and laws. Separate owner-position proposal required. |
@@ -961,6 +963,12 @@ This tranche changes only one deterministic adapter dispatch and its public
 revision pin; the recent aggregate and D-031 semantic evidence cover every
 unchanged lower boundary.
 
+The exact local implementation checkpoint is
+`70ff35d05c0fb7f2e4ea71e9a7b6e41ba95ece32`. This completes the scoped
+recursive-mixed successor. Its independent product-facade and curry audit
+notes remain available for a future explicitly activated objective; they do
+not keep this goal artificially open.
+
 ## Validation And Checkpoint Policy
 
 For the plan-only checkpoint:
@@ -1297,4 +1305,11 @@ authority conflict, or an operation outside the stated Git boundary.
   pass. Recursive mixed direct/text equality uses two named Hom levels over
   the canonical mixed fibre without a coercion or new semantics. No aggregate,
   browser, kernel, binder, or public-promotion boundary changed; the local
-  implementation checkpoint will be recorded after the coherent commit.
+  implementation checkpoint is
+  `70ff35d05c0fb7f2e4ea71e9a7b6e41ba95ece32`.
+- **2026-07-31 — scoped recursive-mixed successor complete.** D-032
+  graduates exactly depth-generic finite named Hom closure over the canonical
+  mixed grammar, and D-033 exposes that closure through the existing text
+  adapter. No dependency-ready row remains. Product facade, curry,
+  unrestricted variance/introduction, browser/public promotion, and bulk
+  scale remain separate future objectives with their recorded nonclaims.
