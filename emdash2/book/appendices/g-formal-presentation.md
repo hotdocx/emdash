@@ -532,7 +532,7 @@ The current organization is:
 | `emdash3_2_presheaves.lp` | Cat-valued presheaf facade, restriction, Yoneda, slices, and Cat-valued higher sieves |
 | `emdash3_2_sieves.lp` | native subterminal categories, ordinary-sieve property packages, and pullback preservation; no `Omega` or topology |
 | `emdash3_2_sites.lp` | ordinary-sieve membership, maximal sieve, direct Grothendieck topology laws, and chaotic model; no `Omega`, generated saturation, or sheafification |
-| `emdash3_2_finite_families.lp` | Nat-indexed right-associated finite families, pointwise map, and sethood; no `Fin`, list/Sum/inductive interface, or package eta |
+| `emdash3_2_finite_families.lp` | Nat-indexed right-associated finite families, pointwise map, dependent pointwise evidence, and sethood; no `Fin`, list/Sum/inductive interface, or package eta |
 | `emdash3_2_commutative_algebra.lp` | set-carrier commutative-ring operation/law packages and the one-element zero-ring model; no morphism category, localization, or polynomials |
 | `emdash3_2_commutative_algebra_category.lp` | structured ring morphisms, property/sethood/extensionality proofs, `CommRing_cat`, stable pointwise identity/composition comparisons, and the full-action Path-valued carrier functor |
 | `emdash3_2_commutative_algebra_finite.lp` | finite sums/dot products, structured-map preservation, and retained unimodular/Zariski-cover presentations; no `Spec`, localization family, topology, powers/radicals, fractions, or polynomials |
@@ -540,6 +540,7 @@ The current organization is:
 | `emdash3_2_commutative_algebra_localization.lp` | proposition-valued unit evidence, its total-element Path family, and universal-property localization at one element; no fraction, finite-family, polynomial, or Zariski representation |
 | `emdash3_2_commutative_algebra_localization_comparison.lp` | unit algebra and universal-property comparison of localization at `f*g` with localization first at `f`, then at the image of `g`; no package equality or inverse laws |
 | `emdash3_2_commutative_algebra_presheaves.lp` | CommRing-valued presheaves, computational restriction, arrowwise unit support, and its higher/ordinary invertibility sieve; no topology, sheaf, or ringed-site package |
+| `emdash3_2_commutative_algebra_zariski.lp` | selected localization families, affine basic-open arrows, elementwise universal-property base change, and pulled-back sieve membership; no global choice, proposition-valued topology, subcanonicity, `Spec`, or scheme |
 | `emdash3_2_eq1_hom_action.lp` | derived native equality-valued next-hom and groupoidality layer |
 | `emdash3_2_eq1_evidence_property.lp` | evidence-property and finite-height consequences |
 | `emdash3_2_nat_arithmetic.lp` | reusable Nat operations and sethood |

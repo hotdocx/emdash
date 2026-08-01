@@ -2294,15 +2294,182 @@ Status: proposed after PSSS-08b and the independent PSSS-05b descent gate.
 - compare localization over `D(f)` with descent only after the chosen sheaf
   interface has a nonvacuous model.
 
-### Phase PSSS-09 — Zariski coverage
+### Phase PSSS-09 — Presented Zariski covers, stability, and topology gate
 
-Status: proposed after PSSS-07c and PSSS-08b; it need not wait for the
-independent PSSS-08c sheaf/descent package.
+PSSS-07c and PSSS-08b now close the algebraic-presentation and ordinary-sieve
+prerequisites.  The phase does not need the independent PSSS-08c
+sheaf/descent package in order to construct chosen basic-open cover data, but
+subcanonicity does need a genuine sheaf/descent interface and must not be
+claimed early.
 
-- localization-generated cover family;
-- pullback stability;
-- subcanonicity/representable sheaf diagnostic at the selected scope;
-- polynomial-algebra examples remain consumers, not topology owners.
+The active equality layer has truncation **properties** but no selected
+propositional-truncation reflector.  Consequently, a type saying that there
+exists a finite unimodular presentation, selected localization packages, and
+selected containment witnesses is not automatically a proposition.  Such a
+type is useful computational presentation data, but it cannot honestly be
+installed directly as `SieveCoverage`, `Covers`, or a `GrothTopology` field.
+PSSS-09 is therefore split into the following independently reviewable gates.
+
+#### PSSS-09a — Presented basic-open family and one-generator base change
+
+Status: implemented rule-free and green through focused, maintained aggregate,
+warning, strict-audit, catalog, 65-target health, and full integration CI;
+ready for the authorized local checkpoint.
+
+Add the consumer-justified dependent finite fold
+
+```text
+FiniteFamilyAll(P, [], ())             = Unit
+FiniteFamilyAll(P, x :: xs, (u,us))    = P(x) x FiniteFamilyAll(P,xs,us)
+```
+
+as a transparent `nat_elim` definition in the finite-family owner.  This is
+not a new inductive/list/`Fin` interface and adds no rewrite or unification
+rule.  It supplies the selected localization-family classifier
+
+```text
+CommRingLocalizationFamily(R,n,f)
+  = FiniteFamilyAll(lambda f_i. CommRingLocalizationAt(R,f_i), n, f)
+
+CommRingZariskiCoverFamily(R)
+  = Sigma cover : CommRingZariskiCoverPresentation(R),
+      CommRingLocalizationFamily(R, length(cover), generators(cover)).
+```
+
+The package retains the algebraic unimodularity presentation and one chosen
+universal-property localization package for every generator.  It does not
+postulate a global choice of localizations or identify two chosen packages.
+The singleton `[1]` constructor therefore accepts a chosen localization at
+`1`; a canonical general localization-at-`1` model remains a separately
+consumer-gated theorem.
+
+For a chosen localization `ell : Loc_R(f)`, expose its affine basic-open arrow
+as the literal restriction-total object
+
+```text
+(R[1/f]_ell, iota_ell) : Into_restr_cat(Op(CommRing_cat),R).
+```
+
+For `h : R -> S`, a source choice `ell : Loc_R(f)`, and a target choice
+`m : Loc_S(h(f))`, the composite `R -> S -> S[1/h(f)]` inverts `f`.
+The universal property of `ell` therefore produces the canonical factor
+
+```text
+R[1/f]_ell -> S[1/h(f)]_m
+```
+
+together with its pointwise triangle.  Ring-map extensionality turns that
+triangle into the fibre path required by the existing Sigma-arrow
+constructor, so the two basic-open arrows are related inside
+`Into_restr_cat(Op(CommRing_cat),R)`.
+
+The generic sieve layer should expose the already-present action rather than
+reimplement it:
+
+```text
+into_restr_postcompose_func(p)
+  = arrow_into_catd(K)[p]
+
+into_restr_postcompose(p,f)
+  = into_restr_postcompose_func(p)[f]
+
+sieve_pullback_membership(p,R,f)
+  : SieveMembership(R, into_restr_postcompose(p,f))
+ -> SieveMembership(p^*R,f).
+```
+
+The last map is definitionally the identity after unfolding ordinary-sieve
+pullback and family pullback.  A constructor-level helper may lift an explicit
+equality between another composite-arrow presentation and the stable
+postcomposition point to a directed arrow in the restriction total.  The
+Zariski consumer then transports membership along two explicit arrows:
+
+1. from the source localization arrow to the pointwise base-change composite;
+2. from that pointwise composite to the canonical postcomposition object used
+   by sieve pullback.
+
+The comparison path deliberately stages the existing opposite
+post/precomposition bridge, ordinary raw-composition view, and selected
+`comm_ring_hom_comp_pointwise_path`.  The complete probe needs **no new
+rewrite or unification rule**; runtime ownership remains with Sigma action,
+Catd transport, localization factorization, and the selected pointwise
+ring-map projection.  This is the computational observation required by
+PSSS-D-049: membership in the pulled-back sieve is an actual returned term,
+not merely a formation claim.
+
+The successful ignored candidate is
+`tmp/probes/psss09a_zariski_cover_family.lp`, with final quiet log
+`logs/probes/psss09a_zariski_cover_family-20260801-173830.log`.  The smaller
+generic observation probe is
+`tmp/probes/psss09_sieve_pullback_membership.lp`, with quiet log
+`logs/probes/psss09_sieve_pullback_membership-20260801-172817.log`.
+
+The promoted implementation is the separate 892-line, 27-symbol,
+rule-free `emdash3_2_commutative_algebra_zariski.lp` module plus transparent
+generic observations in the finite-family, presheaf, and site owners.  Its
+246-line reviewer contains 15 assertions.  Besides abstract formation and
+projection tests, the reviewer verifies that the pointwise base-change
+composite applies on carriers as the target localization map applied to
+`h(x)`, retains the intentional negative conversion boundary between that
+pointwise composite and the canonical slice postcomposition object, crosses
+the boundary by the named theorem path, and returns actual pulled-back sieve
+membership.  Importing the existing zero-ring localization reviewer supplies
+a closed nonempty witness of that final membership rather than an assumed
+placeholder.
+
+Focused quiet logs are
+`logs/probes/emdash3_2_commutative_algebra_zariski-20260801-174246.log`,
+`logs/probes/commutative_ring_zariski_basic_opens-20260801-174650.log`, and
+`logs/probes/emdash3_2_checks-20260801-174809.log`; maintained `make check` and
+the complete reviewer suite pass.  Warning-enabled owner and reviewer logs
+ending in `20260801-180311` inherit exactly `1179 = 1020 + 159`, with no
+changed-module warning location.  The strict audit reports zero unreviewed
+clauses and the unchanged 52 annotated slots across 32 intentional clauses.
+Twelve central diagnostics raise the fresh catalog to 1,905 checks across 76
+mapped areas with zero unclassified entries.  Health passes all 65
+source/example targets in 555.881 summed check-seconds at source snapshot
+`sha256:a2b313bcfec0123f399364fd395b5e533917767ef14d16b12da768da81a3a6a8`.
+Full integration CI passes all 65 Lambdapi targets in 597.453 summed
+check-seconds, followed by 39 Python tests, five document-registry tests,
+shell/source/header/reference checks, book evidence/typography/KaTeX/assembly
+checks, the strict kernel audit, and fresh strict catalog verification.
+No global localization choice, propositional coverage, topology,
+subcanonicity, `Spec`, or scheme is smuggled into this result.
+
+#### PSSS-09b — Finite containment and selected family base change
+
+Status: proposed immediately after PSSS-09a.
+
+- define recursive explicit evidence that every chosen basic-open arrow of a
+  presented family belongs to an ordinary sieve;
+- base-change the algebraic presentation with
+  `comm_ring_zariski_cover_map`, while accepting a selected target
+  localization family rather than invoking global choice;
+- assemble the elementwise PSSS-09a factors and membership maps recursively;
+- retain domains, arrows, factors, triangles, and membership terms as
+  inspectable computational data; and
+- test the nonempty singleton `[1]` presentation with supplied localization
+  packages before adding more finite/combinatorial examples.
+
+This is selected base-change data for a cover-family presentation.  It is not
+yet a proposition-valued coverage and does not claim presentation
+independence, permutation invariance, or free saturation.
+
+#### PSSS-09c — Proposition-valued Zariski coverage and topology
+
+Status: research gate after PSSS-09b and an explicit
+presentation-independence/truncation or supplied-topology decision.
+
+- choose an honest route from presented covers to a proposition-valued
+  `SieveCoverage`, or supply the Zariski topology directly with proofs of the
+  three active Grothendieck laws;
+- do not disguise chosen coefficient/localization/containment data as a
+  proposition;
+- keep generic free saturation behind the existing closure/quotient/
+  higher-inductive gate;
+- prove subcanonicity only after PSSS-05b supplies a nonvacuous selected
+  descent/sheaf interface; and
+- keep polynomial-algebra examples as consumers, never topology owners.
 
 ### Phase PSSS-10 — Slice sites and affine charts
 
@@ -2649,6 +2816,29 @@ consumer demonstrates that nontransitive unification requires it.
   by family pullback. Use `sigma_ind` and the existing proposition theorem to
   package the ordinary sieve without Sigma eta. Require literal-arrow
   membership computation and a nonempty zero-ring `SieveMembership` consumer.
+- **PSSS-D-059:** split geometric Zariski work into chosen computational cover
+  presentations and a later proposition-valued topology.  Because the active
+  library has no propositional-truncation reflector, retained coefficients,
+  localization packages, and containment witnesses may not be passed off as
+  `Covers` evidence.  Generic saturation remains a closure/quotient/HIT gate.
+- **PSSS-D-060:** represent a finite basic-open cover by the existing
+  unimodular presentation plus a dependent finite family of selected
+  universal-property localization packages.  Base change accepts the target
+  selected localizations explicitly and derives comparison factors from the
+  source universal properties; do not add a global localization-choice axiom
+  or identify chosen localization packages.
+- **PSSS-D-061:** expose restriction-arrow postcomposition and pulled-back
+  sieve membership as transparent views of the existing
+  `arrow_into_catd`/Catd action.  Cross pointwise ring-composite presentation
+  differences by named theorem paths and ordinary Catd transport.  The first
+  complete Zariski base-change membership consumer is rule-free, so promote no
+  Zariski-specific rewrite or unification rule.
+- **PSSS-D-062:** interpret PSSS-09 pullback stability first as inspectable
+  selected family data: factors, pointwise triangles, Sigma arrows, and
+  returned sieve-membership terms.  Defer subcanonicity until the independent
+  descent/sheaf gate is real; a representable-sheaf assertion without that
+  consumer would be only a typechecking placeholder, not the computational
+  scheme objective.
 
 ## 19. Side-Task Ledger
 
@@ -2672,8 +2862,10 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08a | CommRing-valued presheaves and arrowwise invertibility support | Green through full integration CI; locally checkpointed | PSSS-08b remains separately gated |
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
 | PSSS-08c | Ringed sites, selected sheaves, and locality | Proposed | PSSS-08b and PSSS-05b |
-| PSSS-09 | Zariski coverage | Proposed | PSSS-07c and PSSS-08b |
-| PSSS-10 | Slice sites and affine-basic-open comparison | Proposed | PSSS-09 |
+| PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; authorized local checkpoint ready | PSSS-07c and PSSS-08b |
+| PSSS-09b | Finite containment and selected family base-change assembly | Proposed | PSSS-09a |
+| PSSS-09c | Proposition-valued Zariski coverage, topology, and subcanonicity | Research gate | PSSS-09b plus truncation/presentation-independence or supplied-topology decision; PSSS-05b for subcanonicity |
+| PSSS-10 | Slice sites and affine-basic-open comparison | Proposed | PSSS-09c at the selected scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Functor-of-points/qcqs comparison | Research boundary | PSSS-11 and representability audit |
 

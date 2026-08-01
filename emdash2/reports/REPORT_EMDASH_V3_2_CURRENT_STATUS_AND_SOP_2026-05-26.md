@@ -44,9 +44,10 @@ detailed probe evidence.
   importing the walking-HIT surface.
 - `emdash3_2_finite_families.lp`: one-way reusable Nat/Sigma finite-family
   layer. It owns the right-associated length-indexed classifier,
-  nil/cons/head/tail and singleton/pair observations, pointwise map, and
-  sethood. It declares no `Fin`, lookup, list/Sum/inductive interface,
-  append, permutation quotient, rule, unifier, or package eta.
+  nil/cons/head/tail and singleton/pair observations, pointwise map, dependent
+  pointwise evidence, and sethood. It declares no `Fin`, lookup,
+  list/Sum/inductive interface, append, permutation quotient, rule, unifier,
+  or package eta.
 - `emdash3_2_commutative_algebra.lp`: one-way set-carrier commutative-ring
   object module. It separates operation data from eight sufficient law
   fields, exposes readable carrier/operation/law projections, and constructs
@@ -95,6 +96,13 @@ detailed probe evidence.
   shaped proof-time represented-family comparison crosses the variance
   presentation boundary without runtime collapse. It declares no topology,
   sheaf, or ringed-site package.
+- `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
+  affine-Zariski layer. It retains a selected localization package for each
+  generator of an algebraic cover presentation, exposes chosen basic-open
+  arrows, and derives elementwise base-change factors, pointwise triangles,
+  Sigma arrows, and returned pulled-back sieve membership. It makes no global
+  localization choice and declares no propositional coverage/topology,
+  subcanonicity, `Spec`, or scheme.
 - `emdash3_2_walking_end_hit.lp`: one-way opaque one-dimensional walking-
   endomorphism directed-HIT module. It owns the opaque category/base/loop,
   explicit dimension evidence, contextual `Functord` eliminator, derived
@@ -1955,6 +1963,41 @@ followed by 39 Python tests, five document-registry tests, shell/source/header/
 reference checks, book evidence/typography/KaTeX/assembly checks, strict
 kernel audit, and fresh strict catalog verification. The tranche is included
 in the authorized local PSSS-08b checkpoint.
+
+PSSS-09a now adds the separate rule-free
+`emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
+retains its finite unimodular generators together with a dependent finite
+family of explicitly selected universal-property localization packages; no
+global localization choice is postulated.  Every selected localization is an
+actual arrow in the affine restriction total.  Given `h : R -> S` and chosen
+localizations at `f` and `h(f)`, the source universal property constructs the
+base-change factor, its pointwise triangle, the corresponding Sigma arrow,
+and ultimately a returned membership term in the pulled-back ordinary sieve.
+The carrier application of the pointwise composite computes to the target
+localization map applied to `h(x)`.  Its intentional runtime distinction from
+the canonical slice-postcomposition object is crossed by named theorem paths
+and Catd transport rather than a new rewrite or unification rule.
+
+The promoted source has 892 lines and 27 symbols, with zero rules and zero
+unification rules.  The 246-line reviewer has 15 assertions and includes a
+closed zero-ring localization witness for the final pullback-membership term;
+12 central diagnostics occupy a dedicated catalog area.  Focused source,
+reviewer, central, maintained `make check`, and complete example-suite gates
+pass.  Warning-enabled owner and reviewer probes inherit exactly
+`1179 = 1020 + 159`, with no changed-module warning location; the strict LHS
+audit has zero unreviewed clauses and the unchanged 52 annotated slots across
+32 intentional clauses.  The fresh strict catalog has 1,905 checks across 76
+areas and zero unclassified entries.  Health passes all 65 source/example
+targets in 555.881 summed check-seconds at source snapshot
+`sha256:a2b313bcfec0123f399364fd395b5e533917767ef14d16b12da768da81a3a6a8`.
+Full integration CI passes all 65 Lambdapi targets in 597.453 summed
+check-seconds, followed by 39 Python tests, five document-registry tests,
+shell/source/header/reference checks, book evidence/typography/KaTeX/assembly
+checks, the strict kernel audit, and fresh strict catalog verification.  The
+tranche is ready for its authorized local checkpoint.  Finite family-wide
+containment/base-change assembly is PSSS-09b.  Proposition-valued coverage,
+generated topology, subcanonicity, `Spec`, and schemes remain honest later
+gates; chosen coefficient/localization data is not treated as a proposition.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.

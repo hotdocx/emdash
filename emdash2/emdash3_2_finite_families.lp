@@ -49,6 +49,74 @@ symbol finite_family_tail
   : τ (@FiniteFamily A n)
 ≔ sigma_Snd xs;
 
+/*
+  Pointwise dependent evidence over a finite family.
+
+  `FiniteFamilyAll(P,n,xs)` is Unit at length zero and the right-associated
+  product `P(head(xs)) x All(P,tail(xs))` at a visible successor.  It reuses
+  the same Nat-recursive representation as `FiniteFamily`; it is not a new
+  list/Fin/inductive interface and introduces no rule or unification clause.
+*/
+symbol FiniteFamilyAll
+  [A : Grpd]
+  (P : τ A → Grpd)
+  (n : τ Nat_grpd)
+  (xs : τ (@FiniteFamily A n))
+  : Grpd
+≔ (@nat_elim
+    (λ n0 : τ Nat_grpd,
+      @Function_grpd (@FiniteFamily A n0) Grpd_grpd)
+    (λ _ : τ (@FiniteFamily A zero), Unit_grpd)
+    (λ n0 : τ Nat_grpd,
+      λ rec : τ (@Function_grpd
+        (@FiniteFamily A n0)
+        Grpd_grpd),
+      λ ys : τ (@FiniteFamily A (succ n0)),
+        @Product_grpd
+          (P (@finite_family_head A n0 ys))
+          (rec (@finite_family_tail A n0 ys)))
+    n) xs;
+
+symbol finite_family_all_nil
+  [A : Grpd]
+  [P : τ A → Grpd]
+  : τ (@FiniteFamilyAll A P zero (@finite_family_nil A))
+≔ tt;
+
+symbol finite_family_all_cons
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [n : τ Nat_grpd]
+  [x : τ A]
+  [xs : τ (@FiniteFamily A n)]
+  (head : τ (P x))
+  (tail : τ (@FiniteFamilyAll A P n xs))
+  : τ (@FiniteFamilyAll
+      A P (succ n) (@finite_family_cons A n x xs))
+≔ @Product_pair_grpd
+    (P x)
+    (@FiniteFamilyAll A P n xs)
+    head tail;
+
+symbol finite_family_all_head
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [n : τ Nat_grpd]
+  [xs : τ (@FiniteFamily A (succ n))]
+  (all : τ (@FiniteFamilyAll A P (succ n) xs))
+  : τ (P (@finite_family_head A n xs))
+≔ sigma_Fst all;
+
+symbol finite_family_all_tail
+  [A : Grpd]
+  [P : τ A → Grpd]
+  [n : τ Nat_grpd]
+  [xs : τ (@FiniteFamily A (succ n))]
+  (all : τ (@FiniteFamilyAll A P (succ n) xs))
+  : τ (@FiniteFamilyAll
+      A P n (@finite_family_tail A n xs))
+≔ sigma_Snd all;
+
 symbol finite_family_singleton
   [A : Grpd]
   (x : τ A)

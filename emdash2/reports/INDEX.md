@@ -21,8 +21,9 @@ on 2026-07-20 pending a future consumer-led redesign; there is no active Sum
 module or compatibility facade.
 `emdash3_2_finite_families.lp` owns the rule-free Nat-indexed,
 right-associated constant-family Sigma used by finite algebraic consumers,
-with constructors, projections, mapping, and sethood but no `Fin`, lookup,
-append, list facade, or general inductive declaration mechanism.
+with constructors, projections, mapping, dependent pointwise evidence, and
+sethood but no `Fin`, lookup, append, list facade, or general inductive
+declaration mechanism.
 `emdash3_2_commutative_algebra.lp` is the downstream rule-free set-carrier
 commutative-ring object layer: it separates operation data from law evidence,
 retains carrier sethood, and supplies the one-element zero ring.
@@ -63,6 +64,14 @@ assembles the support as a Path-valued higher sieve and an ordinary sieve with
 literal-arrow membership computation. One shaped proof-time comparison joins
 the two rigid represented-family variance presentations; it claims no
 topology, sheafhood, or ringed site.
+`emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a layer:
+it combines an algebraic unimodular presentation with a dependent family of
+selected universal-property localization packages, exposes each chosen
+localization as an affine restriction-total arrow, and derives elementwise
+base-change factors, triangles, Sigma arrows, and actual pulled-back
+ordinary-sieve membership. It makes no global localization choice and claims
+no propositional coverage, generated topology, subcanonicity, `Spec`, or
+scheme.
 The former D0/D1/decoder compatibility module and its seven self-only reviewer
 examples are retired. Unsuffixed omega-equivalence names now denote only the
 native equality-valued API; no compatibility aliases remain.
@@ -457,7 +466,26 @@ remain deferred.
   generic coverage saturation, sheafification, relative basic-open covers,
   powers/radicals, fractions, concrete positive-variable polynomial
   representations, geometric Zariski topology, and schemes remain explicitly
-  gated.
+  gated.  `PSSS-08a/08b` subsequently promotes the transparent
+  CommRing-valued-presheaf layer, restriction/unit support, and its assembled
+  ordinary invertibility sieve with literal-arrow membership computation.
+  `PSSS-09a` now promotes the separate 892-line, 27-symbol, rule-free Zariski
+  layer: a finite unimodular presentation carries a dependent family of
+  selected localization packages, each package yields an affine
+  restriction-total arrow, and one-generator base change returns a factor,
+  pointwise triangle, Sigma arrow, and actual pulled-back sieve membership.
+  The 246-line reviewer has 15 assertions, including a closed zero-ring
+  membership witness; 12 central checks bring the catalog to 1,905 checks
+  across 76 areas with zero unclassified entries.  Owner warnings remain
+  `1179 = 1020 + 159`, the strict audit has zero unreviewed clauses, and all
+  65 health targets pass in 555.881 summed check-seconds at source snapshot
+  `sha256:a2b313bcfec0123f399364fd395b5e533917767ef14d16b12da768da81a3a6a8`.
+  Full integration CI passes all 65 Lambdapi targets in 597.453 summed
+  check-seconds followed by the complete repository/book/audit/catalog tail;
+  the authorized local checkpoint is ready.  Finite family-wide containment/
+  base change is PSSS-09b; proposition-valued topology and subcanonicity
+  remain PSSS-09c rather than treating chosen presentation data as a
+  proposition.
 - `../../docs/RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md`:
   active isolated TypeScript outer-LF usability plan for an
   unparameterized, nonrecursive, single-constructor dependent structure with

@@ -1445,6 +1445,17 @@ family consumer needs generic Sigma sethood and no independent product
 identity or comparison rule. This representation introduces no `Fin`, lookup,
 list append, permutation quotient, or new inductive declaration.
 
+The same Nat recursion also defines dependent pointwise evidence:
+
+```text
+FiniteFamilyAll(P, [], ())          = Unit
+FiniteFamilyAll(P, x::xs, (u,us))   = P(x) x FiniteFamilyAll(P,xs,us).
+```
+
+Its nil/cons and head/tail observations preserve the alignment between each
+element and its evidence. This is a transparent fold over the selected tuple
+representation, not another inductive family or a hidden lookup operation.
+
 For a commutative ring `R`, the selected ordered folds are
 
 ```text
@@ -1494,6 +1505,64 @@ coverage, or a Grothendieck topology. A cover of a relative basic open
 `D(s)` additionally needs radical data such as
 `s^N = sum_i a_i*f_i`; powers and that relative interface remain downstream
 consumer gates.
+
+### Presented Affine Basic Opens And Elementwise Base Change
+
+The downstream Zariski module supplies geometric presentation data without
+prematurely asserting a topology.  A selected localization family is
+
+```text
+CommRingLocalizationFamily(R,n,f)
+  = FiniteFamilyAll(lambda f_i. CommRingLocalizationAt(R,f_i),n,f),
+
+CommRingZariskiCoverFamily(R)
+  = Sigma cover : CommRingZariskiCoverPresentation(R),
+      CommRingLocalizationFamily(R,length(cover),generators(cover)).
+```
+
+Thus every generator retains a chosen universal-property localization. The
+package makes no global choice and does not identify different chosen
+localizations. In particular, the `[1]` family constructor accepts a selected
+localization at `1` as input.
+
+For `ell : CommRingLocalizationAt(R,f)`, the affine basic-open arrow is the
+literal restriction-total object
+
+```text
+(R[1/f]_ell, iota_ell)
+  : Into_restr_cat(Op(CommRing_cat),R).
+```
+
+Given `h : R -> S` and a target choice `m : Loc_S(h(f))`, the pointwise
+composite `R -> S -> S[1/h(f)]_m` sends `f` to a unit. The universal property
+of `ell` supplies a factor
+
+```text
+R[1/f]_ell -> S[1/h(f)]_m
+```
+
+and a pointwise triangle. Ring-map extensionality makes the triangle a path of
+structured maps; the existing Sigma-arrow constructor then realizes the
+comparison inside `Into_restr_cat(Op(CommRing_cat),R)`.
+
+For an ordinary sieve `Q` containing the source basic-open arrow, Catd
+transport along that Sigma arrow gives membership at the pointwise composite.
+A theorem-level comparison moves from the pointwise composite to the stable
+postcomposition object selected by `arrow_into_catd`; the transparent generic
+observation `sieve_pullback_membership` finally returns membership of the
+target basic open in `h^*Q`. The carrier action of the pointwise composite
+computes literally as `x |-> iota_m(h(x))`.
+
+No new rewrite or unification rule is needed. Runtime computation remains
+owned by finite Nat recursion, the selected pointwise ring-map projection,
+localization factorization, Sigma action, and Catd transport. The variance
+crossings are named equality paths through existing post/precomposition
+owners. This is selected elementwise base-change data, not yet a
+proposition-valued coverage: the active library has no propositional-
+truncation reflector that could erase coefficient, localization, and
+containment choices honestly. Finite containment assembly, generated or
+supplied Zariski topology, subcanonicity, `Spec`, and schemes remain later
+gates.
 
 ### Polynomial Algebras By Universal Property
 
@@ -3277,10 +3346,16 @@ kernel and one-way library vocabulary.
 | forward/reverse localization comparison maps | `comm_ring_iterated_localization_comparison_forward_map` / `comm_ring_iterated_localization_comparison_reverse_map` |
 | Nat-indexed finite families | `FiniteFamily A n` / `finite_family_nil` / `finite_family_cons` |
 | finite-family pointwise map and sethood | `finite_family_map` / `finite_family_is_set` |
+| dependent evidence over a finite family | `FiniteFamilyAll P n xs` / `finite_family_all_cons` |
 | selected finite ring sum and dot product | `comm_ring_finite_sum` / `comm_ring_finite_dot` |
 | retained unit-ideal coefficient data | `CommRingUnimodularPresentation` / `comm_ring_unimodular_intro` |
 | finite affine Zariski-cover presentation | `CommRingZariskiCoverPresentation` / `comm_ring_zariski_cover_map` |
 | singleton and binary cover presentations | `comm_ring_unit_zariski_cover` / `comm_ring_binary_zariski_cover` |
+| selected localization family over generators | `CommRingLocalizationFamily R n generators` |
+| presented finite basic-open cover family | `CommRingZariskiCoverFamily R` |
+| chosen affine basic-open arrow | `comm_ring_basic_open_arrow localization` |
+| basic-open base-change factor and triangle | `comm_ring_basic_open_base_change_factor_map` / `comm_ring_basic_open_base_change_triangle` |
+| elementwise basic-open pullback membership | `comm_ring_basic_open_pullback_membership` |
 | polynomial extension factor | `CommRingPolynomialFactor iota vars h valuation` |
 | polynomial-algebra universal property | `IsCommRingPolynomialAlgebra R X P iota vars` |
 | chosen polynomial algebra | `CommRingPolynomialAlgebra R X` / `comm_ring_polynomial_target` |

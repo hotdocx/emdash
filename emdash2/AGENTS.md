@@ -35,6 +35,8 @@ the universal-property iterated/product-localization comparison extension is
 the CommRing-valued-presheaf, restriction, arrowwise-invertibility, and
 ordinary-invertibility-sieve extension is
 `emdash3_2_commutative_algebra_presheaves.lp`;
+the presented finite basic-open Zariski-cover and elementwise base-change
+extension is `emdash3_2_commutative_algebra_zariski.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
@@ -59,7 +61,8 @@ Use the following order:
 6. `emdash3_2_nat_arithmetic.lp` for reusable Nat addition, associativity,
    Unit/Empty proposition evidence, and Nat sethood;
 7. `emdash3_2_finite_families.lp` for Nat-indexed right-associated finite
-   families, constructors/projections, pointwise map, and retained sethood;
+   families, constructors/projections, pointwise map, dependent pointwise
+   evidence, and retained sethood;
    it deliberately declares no `Fin`, lookup, list/Sum/inductive interface,
    append, permutation quotient, or package eta;
 8. `emdash3_2_commutative_algebra.lp` for set-carrier commutative-ring
@@ -111,17 +114,23 @@ Use the following order:
    sieve, proposition-valued sieve coverages, Grothendieck topology laws, and
    the direct chaotic-topology model; it declares no `Omega`, generated
    coverage saturation, sheafification, or descent;
-16. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+16. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
+   of universal-property localizations, presented affine basic-open arrows,
+   elementwise localization base-change factors and triangles, and returned
+   ordinary-sieve pullback membership. It is rule-free and deliberately
+   declares no global localization choice, propositional truncation,
+   generated coverage/topology, subcanonicity, `Spec`, or scheme;
+17. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
    directed negative results;
-17. `emdash3_2_checks.lp` for executable regression statements;
-18. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+18. `emdash3_2_checks.lp` for executable regression statements;
+19. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-19. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-20. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+20. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+21. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-21. `reports/INDEX.md` for task-specific plans and decision records.
-22. `book/book.json` and `book/evidence.json` for book source
+22. `reports/INDEX.md` for task-specific plans and decision records.
+23. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

@@ -63,6 +63,29 @@ symbol sieve_membership_is_prop
     ((@sieve_subterminal K U R) f);
 
 /*
+  Membership observation for ordinary-sieve pullback.
+
+  Pullback reuses the existing higher-sieve/Catd action, so membership at an
+  arrow f into V is exactly old membership at its canonical postcomposition
+  image into U.  The implementation is definitionally the identity; the name
+  exposes that computation without package eta or a second sieve rule.
+*/
+symbol sieve_pullback_membership
+  [K : Cat]
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (R : τ (@Sieve K U))
+  (f : τ (Obj (@Into_restr_cat K V)))
+  (member : τ (@SieveMembership
+      K U R
+      (@into_restr_postcompose K V U p f)))
+  : τ (@SieveMembership
+      K V
+      (@sieve_pullback K V U p R)
+      f)
+≔ member;
+
+/*
   Maximal ordinary sieve.
 
   The constant literal path category on Unit is a canonical subterminal true

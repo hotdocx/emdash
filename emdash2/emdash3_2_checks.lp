@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_zariski;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -20830,3 +20830,195 @@ assert [K : Cat]
     (Struct_sigma V f)
   ≡ @CommRingPshInvertibleAlong K O U s V f;
 /* End of the PSSS-08b invertibility-sieve diagnostics. */
+
+// catalog-area: Presented affine Zariski basic opens and base change
+// Dependent finite evidence computes on visible family constructors.
+assert [A : Grpd]
+  (P : τ A → Grpd)
+  (n : τ Nat_grpd)
+  (x : τ A)
+  (xs : τ (@FiniteFamily A n)) ⊢
+  @FiniteFamilyAll
+    A P (succ n) (@finite_family_cons A n x xs)
+  ≡ @Product_grpd (P x) (@FiniteFamilyAll A P n xs);
+
+assert [A : Grpd]
+  [P : τ A → Grpd]
+  [n : τ Nat_grpd]
+  [x : τ A]
+  [xs : τ (@FiniteFamily A n)]
+  (head : τ (P x))
+  (tail : τ (@FiniteFamilyAll A P n xs)) ⊢
+  @finite_family_all_head
+    A P n (@finite_family_cons A n x xs)
+    (@finite_family_all_cons A P n x xs head tail)
+  ≡ head;
+
+// Ordinary-sieve pullback exposes membership at canonical postcomposition.
+assert [K : Cat]
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (Q : τ (@Sieve K U))
+  (f : τ (Obj (@Into_restr_cat K V)))
+  (member : τ (@SieveMembership
+      K U Q (@into_restr_postcompose K V U p f))) ⊢
+  @sieve_pullback_membership K V U p Q f member
+  : τ (@SieveMembership
+      K V (@sieve_pullback K V U p Q) f);
+
+assert (R : τ CommRing)
+  (localization : τ (@CommRingLocalizationAt R (@comm_ring_one R))) ⊢
+  @comm_ring_zariski_cover_family_length
+    R (@comm_ring_unit_zariski_cover_family R localization)
+  ≡ succ zero;
+
+// A chosen localization computes to its affine domain and structural map.
+assert [R : τ CommRing]
+  [f : τ (@comm_ring_carrier R)]
+  (localization : τ (@CommRingLocalizationAt R f)) ⊢
+  @into_restr_domain
+    (Op_cat CommRing_cat) R
+    (@comm_ring_basic_open_arrow R f localization)
+  ≡ @comm_ring_localization_target R f localization;
+
+assert [R : τ CommRing]
+  [f : τ (@comm_ring_carrier R)]
+  (localization : τ (@CommRingLocalizationAt R f)) ⊢
+  @into_restr_arrow
+    (Op_cat CommRing_cat) R
+    (@comm_ring_basic_open_arrow R f localization)
+  ≡ @comm_ring_localization_map R f localization;
+
+// Base-change composition has a literal carrier-action normal form.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f)))
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply
+    R
+    (@comm_ring_localization_target
+      S
+      (@comm_ring_hom_apply R S h f)
+      target_localization)
+    (@comm_ring_basic_open_base_change_composite
+      R S h f target_localization)
+    x
+  ≡ @comm_ring_hom_apply
+      S
+      (@comm_ring_localization_target
+        S
+        (@comm_ring_hom_apply R S h f)
+        target_localization)
+      (@comm_ring_localization_map
+        S
+        (@comm_ring_hom_apply R S h f)
+        target_localization)
+      (@comm_ring_hom_apply R S h x);
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (source_localization : τ (@CommRingLocalizationAt R f))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f))) ⊢
+  @comm_ring_basic_open_base_change_factor_map
+    R S h f source_localization target_localization
+  : τ (@CommRingHom
+      (@comm_ring_localization_target R f source_localization)
+      (@comm_ring_localization_target
+        S
+        (@comm_ring_hom_apply R S h f)
+        target_localization));
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (source_localization : τ (@CommRingLocalizationAt R f))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f))) ⊢
+  @comm_ring_basic_open_base_change_triangle
+    R S h f source_localization target_localization
+  : τ (@=
+      (@CommRingHom
+        R
+        (@comm_ring_localization_target
+          S
+          (@comm_ring_hom_apply R S h f)
+          target_localization))
+      (@comm_ring_hom_comp
+        R
+        (@comm_ring_localization_target R f source_localization)
+        (@comm_ring_localization_target
+          S
+          (@comm_ring_hom_apply R S h f)
+          target_localization)
+        (@comm_ring_basic_open_base_change_factor_map
+          R S h f source_localization target_localization)
+        (@comm_ring_localization_map R f source_localization))
+      (@comm_ring_basic_open_base_change_composite
+        R S h f target_localization));
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (source_localization : τ (@CommRingLocalizationAt R f))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f))) ⊢
+  @comm_ring_basic_open_base_change_into_arrow
+    R S h f source_localization target_localization
+  : τ (Hom
+      (@Into_restr_cat (Op_cat CommRing_cat) R)
+      (@comm_ring_basic_open_arrow R f source_localization)
+      (Struct_sigma
+        (@comm_ring_localization_target
+          S
+          (@comm_ring_hom_apply R S h f)
+          target_localization)
+        (@comm_ring_basic_open_base_change_composite
+          R S h f target_localization)));
+
+// Pointwise composition and canonical slice action meet only propositionally.
+assertnot [R S T : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (g : τ (@CommRingHom S T)) ⊢
+  @into_restr_postcompose
+    (Op_cat CommRing_cat)
+    S R h
+    (Struct_sigma T g)
+  ≡ @Struct_sigma
+      (Obj CommRing_cat)
+      (λ L : τ (Obj CommRing_cat),
+        Obj (@Fibre_cat
+          CommRing_cat
+          (@yoneda_psh (Op_cat CommRing_cat) R)
+          L))
+      T
+      (@comm_ring_hom_comp_pointwise R S T g h);
+
+// Elementwise localization-generated membership is stable under pullback.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [f : τ (@comm_ring_carrier R)]
+  (source_localization : τ (@CommRingLocalizationAt R f))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h f)))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  (member : τ (@SieveMembership
+      (Op_cat CommRing_cat)
+      R Q
+      (@comm_ring_basic_open_arrow R f source_localization))) ⊢
+  @comm_ring_basic_open_pullback_membership
+    R S h f source_localization target_localization Q member
+  : τ (@SieveMembership
+      (Op_cat CommRing_cat)
+      S
+      (@sieve_pullback
+        (Op_cat CommRing_cat)
+        S R h Q)
+      (@comm_ring_basic_open_arrow
+        S
+        (@comm_ring_hom_apply R S h f)
+        target_localization));
+/* End of the PSSS-09a presented basic-open diagnostics. */

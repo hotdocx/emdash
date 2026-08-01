@@ -530,12 +530,12 @@ head. For `f : V -> U`, `O[f]` is contravariant and
 read as adding carrier rewrites for generic `CommRing_cat` identity or
 composition.
 
-`D_O(s;f)` currently names the proposition that `f^*_O(s)` has explicit unit
-evidence. It is closed under further restriction, but it is not yet packaged
-as a term of `Sieve(K,U)`. Reserve `InvSieve_O(s)` or `D_O(s)` without the
-arrow argument until the full `Into_restr_cat` action and ordinary-sieve
-package are promoted. A sheaf, topology, or locally ringed structure is not
-implicit in `O : CRingPsh(K)`.
+`D_O(s;f)` names the proposition that `f^*_O(s)` has explicit unit
+evidence. The whole ordinary sieve is now
+`comm_ring_psh_invertibility_sieve(K,O,U,s)`, so comments may write
+`InvSieve_O(s)` or `D_O(s)` for that package and retain `D_O(s;f)` for its
+literal-arrow membership classifier. A sheaf, topology, or locally ringed
+structure is not implicit in `O : CRingPsh(K)`.
 
 For the separately promoted finite-family layer, comments and examples may
 write
@@ -543,20 +543,31 @@ write
 ```text
 []                       : FinFam(A,0)
 x :: xs                  : FinFam(A,succ n)
+All_P(xs)                : dependent evidence P(x_i) for every x_i
 sum_R(xs)                : |R|
 dot_R(a,f)               : |R|
 Unimod_R(f; a, p)        : chosen data p : dot_R(a,f) = 1
 ZarCover_R(n; f; a, p)   : finite algebraic cover presentation
+LocFam_R(f; ell)         : selected localization ell_i at every f_i
+ZarFamily_R(c; ell)      : algebraic cover c plus selected localizations
+D_R(f;ell)               : affine arrow (R[1/f]_ell,iota_ell) into R
+h^*member                : membership of D_S(h(f);m) in h^*Q
 ```
 
 The literal owners are `FiniteFamily`, `finite_family_nil/cons`,
-`comm_ring_finite_sum`, `comm_ring_finite_dot`,
+`FiniteFamilyAll`, `comm_ring_finite_sum`, `comm_ring_finite_dot`,
 `CommRingUnimodularPresentation`, and
-`CommRingZariskiCoverPresentation`. The semicolon-separated cover notation
-retains the coefficient family and equation; it must not be read as a
-propositionally truncated existence statement. `ZarCover` names only the
-algebraic unit-ideal presentation for future basic opens, not an already
-constructed `Spec`, localization family, sieve coverage, or topology.
+`CommRingZariskiCoverPresentation`. Presented geometric data additionally use
+`CommRingLocalizationFamily`, `CommRingZariskiCoverFamily`,
+`comm_ring_basic_open_arrow`, and
+`comm_ring_basic_open_pullback_membership`. The semicolon-separated cover
+notation retains the coefficient family and equation; it must not be read as
+a propositionally truncated existence statement. `ZarCover` alone names the
+algebraic unit-ideal presentation; `ZarFamily` additionally retains selected
+universal-property localization packages. Neither spelling denotes an
+already constructed `Spec`, proposition-valued sieve coverage, or topology.
+The base-change membership operation also requires explicit source and target
+localization choices; no global localization choice is implicit.
 
 For the universal-property polynomial layer, comments and examples may write
 
@@ -578,10 +589,10 @@ free-algebra universal property. It does not select monomials, coefficient
 syntax, quotients, or a concrete positive-variable representation. The
 reviewer equation `R[Empty] = R` is the current executable model.
 
-No carrier functor, concrete fraction syntax, comparison equivalence,
-relative radical/power interface, positive-variable polynomial representation,
-`Spec`, or Zariski topology is implied. Those names remain reserved for their
-separately gated layers.
+No concrete fraction syntax, comparison equivalence, relative radical/power
+interface, positive-variable polynomial representation, `Spec`, or
+proposition-valued Zariski topology is implied. Those names remain reserved
+for their separately gated layers.
 
 No string-parser grammar is selected by this section. It records canonical
 comments, examples, and direct TypeScript-AST intent only.

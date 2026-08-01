@@ -172,3 +172,84 @@ symbol higher_sieve_pullback
     (@HigherSieve_cat K V)
     (@HigherSieve_pullback_func K V U p)
     S;
+
+/*
+  Postcomposition in the restriction-oriented arrow total.
+
+  This is the same `arrow_into_catd` action already used by higher-sieve
+  pullback.  Naming the functor and its object action exposes the canonical
+  arrow image to ordinary-sieve membership consumers without defining a
+  second slice/sieve action.
+*/
+symbol into_restr_postcompose_func
+  [K : Cat]
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  : τ (Functor
+      (@Into_restr_cat K V)
+      (@Into_restr_cat K U))
+≔ @fapp1_fapp0 K Cat_cat (@arrow_into_catd K) V U p;
+
+symbol into_restr_postcompose
+  [K : Cat]
+  [V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (f : τ (Obj (@Into_restr_cat K V)))
+  : τ (Obj (@Into_restr_cat K U))
+≔ @fapp0
+    (@Into_restr_cat K V)
+    (@Into_restr_cat K U)
+    (@into_restr_postcompose_func K V U p)
+    f;
+
+/*
+  Constructor-level comparison with another composite-arrow presentation.
+
+  For f : W -> V and p : V -> U, the canonical image of `(W,f)` retains the
+  stable represented postcomposition point.  An explicit equality from
+  another arrow g : W -> U to that point gives a directed arrow from `(W,g)`
+  to the canonical image.  This is theorem-level transport through the
+  existing Sigma and core-inclusion owners; it adds no computation rule.
+*/
+symbol into_restr_postcompose_constructor_arrow
+  [K : Cat]
+  [W V U : τ (Obj K)]
+  (p : τ (Hom K V U))
+  (f : τ (Hom K W V))
+  (g : τ (Hom K W U))
+  (q : τ (@=
+      (Hom K W U)
+      g
+      (@hom_postcomp_fapp0
+        K K (@id_func K)
+        W V U p f)))
+  : τ (Hom
+      (@Into_restr_cat K U)
+      (@Struct_sigma
+        (Obj (Op_cat K))
+        (λ X : τ (Obj (Op_cat K)),
+          Obj (@Fibre_cat (Op_cat K) (@yoneda_psh K U) X))
+        W g)
+      (@into_restr_postcompose
+        K V U p
+        (@Struct_sigma
+          (Obj (Op_cat K))
+          (λ X : τ (Obj (Op_cat K)),
+            Obj (@Fibre_cat (Op_cat K) (@yoneda_psh K V) X))
+          W f)))
+≔ @sigma_arrow
+    (Op_cat K)
+    (@yoneda_psh K U)
+    W W
+    g
+    (@hom_postcomp_fapp0
+      K K (@id_func K)
+      W V U p f)
+    (@id (Op_cat K) W)
+    (@path_to_hom
+      (@Fibre_cat (Op_cat K) (@yoneda_psh K U) W)
+      g
+      (@hom_postcomp_fapp0
+        K K (@id_func K)
+        W V U p f)
+      q);
