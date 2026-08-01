@@ -494,7 +494,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-WEAKENING-1J` | final-green; kernel checkpoint `c1890373ab93aa155336187e72b6c421c74b7e81`; TypeScript checkpoint `d4ed2d5ecf743cd5c33f8204a13f04331034c3d1` | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; corrected proposal `e8f6a88645fb09646c62841ad1d9e11236b73948`; separate approval; one kernel CI; focused transfer/direct/runtime/demo evidence; one green 1,293-test TypeScript aggregate | One direct `Functor_catd_const_funcd` owner with point/full/capped action is active. The generic TypeScript transfer acquires the pre-existing `hom_postcomp_func` signature and the new owner/rules. The recursive direct binder accepts outer-only `H[c]`, target maps, and mixed eta/weakening pairs with explicit outer/inner occurrence counts. Curry remains auxiliary and unused. |
 | `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` | read-only audit complete; zero semantic delta; one TypeScript-only section-root successor selected | final-green `DIRECT-MIXED-WEAKENING-1J`; direct-binder invariant; measured callback/factorer probes and transfer inventory | `S[k](a)` is blocked first by an overly generic open-section classifier view; `b[k]` reaches and is rejected by the recursive factorer. Both derive through existing section, `Terminal_funcd`, direct weakening, and composition. Ordinary-weakening projection acquisition is unnecessary for elaboration and remains only an optional deeper-normalization concern. The constant-middle varying case still lacks an internal displayed composition lift. |
 | `DIRECT-MIXED-SECTION-ROOT-1K` | implemented and final-green at `e337f1b1a3a61a861a714fa9d06035a1949beec9` under D-DTTLF-USABILITY-051 | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050; proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141`; separate review under standing unattended delegation | The bounded runtime reifier recognizes the already-transferred ordinary `Functor_cat` head after the active `Functor_catd` fibre rule. The unchanged open section application receives a canonical indexed-functor construction view. Recursive `S[k](a)` and `b[k]` roots lower through `Terminal_funcd`, with direct inner weakening only for `b[k]`; target maps and nested pairs consume both. No kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd` was added. |
-| `DIRECT-MIXED-SECTION-GRADUATE-1L` | dependency-ready read-only reassessment | final-green D-051; fundamental direct-binder invariant; completed three-binder structural roots | Recompute the remaining usability matrix from actual post-D-051 behavior. Distinguish the measured constant-middle varying-composition gap from larger direct contexts, transformation introduction, and unrestricted `:^nd`; select at most one bounded semantic successor without assuming curry or total-context sections. |
+| `DIRECT-MIXED-SECTION-GRADUATE-1L` | read-only reassessment complete; zero active semantic delta; constant-middle application selected | final-green D-051; fundamental direct-binder invariant; completed three-binder structural roots; live frontend failure; type-aware owner search; bounded append and owner-position probes | The direct three-binder grammar now has all four ordinary variable-occurrence classes. Its first missing *application* constructor is the variance-valid constant-middle case. A one-owner/three-rule displayed lift of existing `Functor_comp_pair_func` is quiet-green, warning-neutral, strict-audit clean, and iterable through base/higher action. Larger contexts and mixed `:^nd` remain broader successors. |
+| `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` | exact proposal frozen below as D-DTTLF-USABILITY-052; separate review required | completed `DIRECT-MIXED-SECTION-GRADUATE-1L`; final-green D-051; active `Unit_prof`, `Functor_catd`, `Product_pair_funcd`, and ordinary `Functor_comp_pair_func` owners | Add one `Functor_comp_pair_funcd` owner with point/full/capped projections, a minimal exact ordinary-composition transfer prerequisite, and one recursive constant-middle application node. Compile by pairing already-coherent branches and postcomposing the new owner. Direct nested introduction remains fundamental; no curry, total-context section, general-middle collapse, larger-context, or unrestricted-`:^nd` claim is included. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3943,8 +3944,309 @@ This closes the ordinary weakening rows for the current direct three-binder
 mixed telescope. It does not claim constant-middle varying composition,
 larger or arbitrary contexts, arbitrary variance, transformation
 introduction, unrestricted `lambda^nd`, parser/browser parity, or curry
-graduation. `DIRECT-MIXED-SECTION-GRADUATE-1L` is the next dependency-ready
-read-only reassessment.
+graduation. The dependency-ready `DIRECT-MIXED-SECTION-GRADUATE-1L`
+reassessment is completed below.
+
+## Direct Mixed Section Graduation And Constant-Middle Application Audit
+
+### Governing correction: direct introduction is fundamental
+
+The user's renewed clarification is an architectural invariant, not merely a
+notation preference. The primary introduction remains:
+
+```text
+lambda^n k. lambda^f c. lambda^f a. body
+  : Functord_cat C (Functor_catd A B).
+```
+
+The user does not provide a section over a materialized total context and does
+not invoke a curry operation. The compiler recursively abstracts occurrences
+of the bound variables into already-internal emdash owners. D-040 and D-042
+remain separately labelled auxiliary semantic experiments; they neither
+define this binder nor constrain its implementation. An internal
+transposition could still be selected for a future constructor if a later
+owner audit proves it is the natural implementation, but it may never become
+a user-visible prerequisite or an assumed explanation of the direct binder.
+
+This is the same distinction as ordinary bracket abstraction. Surface lambda
+introduction can be fundamental even though its compiler needs an internal
+basis of identity, weakening, pairing, action, and application combinators.
+The question after D-051 is therefore which internal constructor is missing
+from that basis, not whether to route the binder back through mixed curry.
+
+### Post-D-051 usability matrix
+
+For the current exact telescope
+
+```text
+k :^n K;
+c :^f C[k];
+a :^f A[k^-],
+
+A : Catd(Op K), C,B : Catd K,
+```
+
+all four ordinary variable-occurrence classes are now represented by one
+recursive direct factorer:
+
+| Occurrences of `c,a` | Representative body | Current lowering |
+| --- | --- | --- |
+| both | `F[k](c)(a)` or `c(a)` | exact coherent root or displayed identity |
+| outer only | `H[k](c)` | `Functor_catd_const_funcd(A,B) o H` |
+| inner only | `S[k](a)` | `S o Terminal_funcd(C)` |
+| neither | `b[k]` | `Functor_catd_const_funcd(A,B) o b o Terminal_funcd(C)` |
+
+Finite contravariant source maps, finite covariant target maps, and recursive
+pairs already compose around those roots. Pairing supplies contraction and
+independent sibling structure. Consequently, the current fixed telescope is
+not missing another ordinary weakening case, and the depth-generic
+`leaf | source-map | target-map | pair` algebra has no fixed body-tree depth
+cap.
+
+The remaining questions are of different kinds:
+
+1. a new application constructor in which two subexpressions vary with `c`;
+2. a generic API/compiler for larger mixed binder telescopes;
+3. mixed transformation introduction and general `lambda^nd`; and
+4. unrestricted polarity alternation or noncanonical classifier views.
+
+Conflating these as “arbitrary bodies” would hide both the variance condition
+on application and the larger architectural scope of generic telescopes and
+transformation introduction.
+
+### Why arbitrary varying application is ill-kinded
+
+The tempting expression
+
+```text
+G[k](c)(F[k](c)(a))
+```
+
+does not have one general same-family formulation. If `F[k](c)(a)` lies in a
+family `X[k]`, then `F` uses `X` positively as a target over `K`, while `G`
+would have to use that same `X` negatively as a `Functor_catd` source over
+`Op K`. There is no canonical identification of an arbitrary
+`X : Catd K` with a family over `Op K`, and adding one would erase the
+variance carried by `Functor_catd`.
+
+The exact constant-middle specialization is well-kinded. For an ordinary
+category `X`:
+
+```text
+F : Functord C (Functor_catd A (Const_catd K X))
+G : Functord C (Functor_catd (Const_catd (Op K) X) B).
+```
+
+Both constant families have fibre `X`, while retaining their correct base
+orientations. The direct body
+
+```text
+lambda^n k. lambda^f c. lambda^f a.
+  G[k](c)(F[k](c)(a))
+```
+
+is therefore meaningful. Chains of this constructor are meaningful whenever
+each successive intermediate category is likewise constant. This is a
+variance-qualified application combinator, not a same-spelling collapse of
+positive and negative families.
+
+### Existing-owner and live-frontend measurements
+
+Lexical and type-aware searches find the ordinary transparent owner:
+
+```text
+Functor_comp_pair_func(A,X,B)
+  : Functor(
+      Product_cat(Functor_cat(A,X),Functor_cat(X,B)),
+      Functor_cat(A,B)).
+```
+
+The active kernel also already owns:
+
+- the `Functor_catd` negative/positive base action, whose capped projection is
+  the rigid `Hom_func` action already exposed through `Unit_prof`;
+- `Product_pair_funcd` for pairing two coherent displayed functors with one
+  shared source;
+- generic displayed composition;
+- the transparent fibrewise product family; and
+- the ordinary `comp_prod_func` implementation behind
+  `Functor_comp_pair_func`.
+
+No search result provides the missing displayed lift from
+
+```text
+P(
+  Functor_catd(A,Const_catd(K,X)),
+  Functor_catd(Const_catd(Op K,X),B))
+```
+
+to `Functor_catd(A,B)`. `Unit_prof` already owns the endpoint action of the
+target mixed functor family, but it does not itself turn a pair of varying
+functors into their composite. Conversely, neither mixed curry nor a
+total-context section supplies this pointwise composition map.
+
+A single live TypeScript probe constructs the exact constant-middle
+expression with the final-green direct profile. It fails before recursive
+factorization with `CLASSIFIER_ARGUMENT_MISMATCH`: the result of `F[c](a)` is
+viewed as an object of `Const_catd(K,X)`, while `G[c]` correctly requests an
+object of `Const_catd(Op K,X)`. Both classifiers reduce to `X` at the same
+locally nameless base object, but the construction layer has no qualified
+constant-family reorientation view. This is a measured, narrow frontend seam;
+it is not permission for a general `K = Op K` conversion or a coercion node.
+
+### Owner-position result
+
+The smallest active-kernel candidate is one stable displayed functor:
+
+```text
+Functor_comp_pair_funcd(A,X,B)
+  : Functord(
+      P(
+        Functor_catd(A,Const_catd(K,X)),
+        Functor_catd(Const_catd(Op K,X),B)),
+      Functor_catd(A,B)).
+```
+
+It has exactly three projections:
+
+1. at `k`, the whole ordinary `Functor_comp_pair_func(A[k],X,B[k])`;
+2. at base endpoints `x,y`, the whole target `Functor_catd(A,B)` action,
+   precomposed with the ordinary composition functor at `x`; and
+3. at `p : x -> y`, the corresponding capped target-action composite.
+
+The full and capped rules deliberately reuse the target mixed-family action.
+Thus negative transport in `A`, positive transport in `B`, and the next base
+cell continue through the existing `fapp*`/`tapp*`, rigid `Hom_*`, and
+`Unit_prof` architecture. No pointwise naturality equation, separate Hom
+action, or constructor-specific identity/composition law is introduced. The
+capped result remains a whole functor, while the full result remains iterable
+at a genuine cell between base arrows.
+
+The append probe and the owning-position full-file candidate both pass their
+bounded quiet checks. The owner-position candidate demonstrates:
+
+- direct construction by `Functor_comp_pair_funcd o
+  Product_pair_funcd(F,G)`;
+- object computation to `G[c](F[c](a))`;
+- inner-arrow computation through ordinary composite-functor action;
+- a whole capped base-arrow result;
+- a genuine next-base-cell consumer of the full action; and
+- non-collapse of the product source family with the mixed target family.
+
+Warning comparison is exactly unchanged at 1,079 unjoinable critical pairs
+and 159 replaceable pattern variables. Strict LHS audit remains zero
+unreviewed candidates, with the existing 53 annotations across 33 intentional
+clauses. The candidate adds no warning and requires no inferred-slot guard.
+
+Two implementation presentations were considered. A source-leg action can
+compose the source-family transport with the point component at `y`; the
+selected target-leg action instead precomposes the existing target-family
+transport with the point component at `x`. The latter matches the active
+displayed-projection convention and, crucially, delegates both variance
+directions to the already-selected `Functor_catd`/`Unit_prof` action. The
+source-leg formula remains a possible comparison theorem, not a second
+runtime owner.
+
+### Priority and feasibility assessment
+
+This constant-middle constructor is the smallest high-yield successor because
+it extends the direct body algebra with genuine application of two varying
+subexpressions. It is recursive and can iterate through finite chains of
+constant intermediate categories. It does not solve larger binder-context
+arity, but neither does it hard-code one final whole-body example.
+
+A larger direct-telescope compiler remains feasible and important. It should
+generalize the current locally nameless context and classifier-directed
+factorization rather than expose total contexts or curry. It is nevertheless
+a broader API/IR design tranche: it must represent an arbitrary sequence of
+positive and negative family slots and select the applicable structural and
+application combinators at every recursive step. Mixed transformation
+introduction is broader again because its body algebra must synthesize the
+internally coherent `Transf_catd` object and its higher action. Neither should
+be silently bundled into this one-owner application closure.
+
+The measured result therefore strengthens, rather than weakens, the direct
+architecture. The binder is fundamental; the compiler is accumulating a
+small internally owned combinator basis. Mixed curry remains auxiliary.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-CONSTANT-MIDDLE-01 /
+## D-DTTLF-USABILITY-052
+
+Approve the following exact bounded constant-middle application slice:
+
+1. Add exactly one active Lambdapi owner,
+   `Functor_comp_pair_funcd`, immediately after the existing
+   `Functor_catd_product_funcd` package. Its source is the transparent
+   fibrewise product of
+   `Functor_catd(A,Const_catd(K,X))` and
+   `Functor_catd(Const_catd(Op K,X),B)`; its target is
+   `Functor_catd(A,B)`. Add no new family/classifier alias or
+   `Product_catd` head.
+2. Add exactly three runtime projections: point to the whole existing
+   `Functor_comp_pair_func`; full base action to the audited target-family
+   action precomposed with the point functor at `x`; and capped base action to
+   the corresponding composite at `p`. Add no constructor-specific identity,
+   composition, ordinary naturality, `fdapp1_int_cell`, or `Unit_prof` rule.
+3. Add durable Lambdapi checks for the owner point, direct paired consumer,
+   object and inner-arrow computation, capped base-arrow whole-functor type,
+   full-action next-cell iterability, generic internal displayed cell, and
+   source/target non-collapse. Retain arbitrary nonconstant middle families as
+   unrepresented rather than adding a positive/negative family equality.
+4. Follow the nested Lambdapi SOP for this one-owner semantic delta: promote
+   the owning-position candidate, run bounded checks, warning comparison,
+   strict LHS audit, and synchronize the exact affected catalog, TOC, health,
+   current-status report, Foundations, and canonical-syntax explanation.
+   Run one kernel CI only after the bounded tranche is otherwise green.
+5. Add one generic TypeScript transfer fragment after the final-green direct
+   weakening profile. Acquire only the exact pre-existing ordinary
+   composition prerequisite needed for useful point computation:
+   opaque `comp_prod_func`, transparent `Functor_comp_pair_func`, and the one
+   `fapp0(comp_prod_func,pair)` object beta. Then transfer the new owner and
+   its three rules. Keep the unneeded ordinary `comp_prod_fapp1_*` projection
+   family outside this gate and record that bounded normalization boundary.
+   Add no intrinsic Core form or owner-specific checker/evaluator branch.
+6. In indexed fibre-functor application, add one construction-only
+   reorientation when and only when the argument family is
+   `Const_catd(K,X)`, the requested source is
+   `Const_catd(Op K,X)`, the fibre category `X` and locally nameless base slot
+   are identical, and the direct mixed profile is active. Preserve the
+   unchanged Core term; insert no cast, coercion, equality witness, general
+   opposite-base conversion, or proof-rule search. The final generic LF
+   checker remains authoritative.
+7. Extend the recursive direct factorization algebra with one
+   `constant-middle-application` node. Recursively factor its argument child
+   to `Const_catd(K,X)` and recognize its subject only as an already-coherent
+   closed `G : Functord C
+   (Functor_catd(Const_catd(Op K,X),B))` applied to the exact same bound outer
+   token. Compile by `Product_pair_funcd(child,G)` followed by
+   `Functor_comp_pair_funcd`. Compute occurrence counts compositionally and
+   permit finite iteration when each successive middle is constant; do not
+   add a whole-body recognizer.
+8. Add focused TypeScript tests for one direct
+   `G[c](F[c](a))` body, a two-level constant-middle chain, composition around
+   an existing source/target/pair child where well-kinded, object and inner
+   `a`-arrow computation through the minimal ordinary composition transfer,
+   immutable occurrence/factorization evidence, and final generic subject
+   checking. Assert absence of mixed curry, total-context sections, casts,
+   coercions, external equations, and pointwise-function payloads.
+9. Add focused failures for an arbitrary nonconstant middle, unequal constant
+   fibres, wrong opposite orientation, different/foreign outer token, open or
+   noncoherent subject, and an unsupported larger mixed context. Preserve all
+   existing fail-closed cases.
+10. During implementation run only the focused new/nearest tests, root
+    typecheck, and lint. Run one `check:ts` only after the shared source tranche
+    is otherwise green, as required by the repository SOP, and do not repeat
+    it. Do not run `check:all`, browser, print, or book aggregates.
+11. Synchronize the living plan, handoff, and affected kernel reports; stage
+    only the exact kernel/check/report/TypeScript/test/document delta; and make
+    rollback-safe local checkpoints. Preserve unrelated ignored experiments.
+    Do not push, merge, rebase, reset, amend, clean, remove worktrees, publish,
+    begin text/browser parity, promote mixed curry, or start the larger-context
+    or unrestricted-`lambda^nd` successors.
+
+This gate adds one variance-qualified direct application constructor. It does
+not claim arbitrary term abstraction, arbitrary context arity, arbitrary
+variance, mixed transformation introduction, or a general curry theorem.
 
 ## Validation And Checkpoint Policy
 
@@ -4181,13 +4483,27 @@ graph, implement constant-middle composition, arbitrary contexts,
 unrestricted variance or `:^nd`, curry promotion, text/browser parity, or
 remote Git effects as an unreviewed continuation.
 
-Treat `DIRECT-MIXED-SECTION-GRADUATE-1L` as the next dependency-ready
-read-only reassessment. Recompute the remaining usability matrix from actual
-post-D-051 behavior, distinguish constant-middle varying composition from
-larger contexts, transformation introduction, and unrestricted `:^nd`, and
-freeze at most one bounded successor before any semantic edit. Never infer a
-curry or total-context-section prerequisite for the fundamental direct form
-`lambda^n k. lambda^f c. lambda^f a. t`.
+Treat `DIRECT-MIXED-SECTION-GRADUATE-1L` as read-only complete with zero
+active semantic delta. The post-D-051 matrix closes all four ordinary
+occurrence classes for the current direct telescope and identifies
+constant-middle application as the first missing body constructor. The live
+frontend rejects it only at the qualified constant-family orientation seam.
+The selected `Functor_comp_pair_funcd` owner-position candidate has one owner,
+three point/full/capped rules, unchanged 1,079/159 warnings, zero strict-audit
+findings, object/inner-arrow computation, whole base-arrow action, and genuine
+next-cell iterability. It reuses the existing target `Functor_catd`/rigid-Hom/
+`Unit_prof` action and is not curry.
+
+Treat `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` /
+D-DTTLF-USABILITY-052 as an exact frozen proposal awaiting separate review.
+Do not edit kernel or TypeScript semantics until that review. If approved,
+implement only its eleven numbered items: one new displayed composition
+owner/three rules, the minimal exact ordinary-composition transfer
+prerequisite, qualified constant-family construction view, and recursive
+constant-middle application case. Direct introduction remains fundamental.
+Larger contexts, mixed transformation introduction, unrestricted `:^nd`,
+general positive/negative family collapse, curry promotion, and remote Git
+effects remain excluded.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -4206,6 +4522,23 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-052 frozen for separate review.** The
+  post-D-051 audit confirms that direct
+  `lambda^n k. lambda^f c. lambda^f a. body` introduction is fundamental and
+  now covers all four ordinary occurrence classes. The next missing recursive
+  body constructor is the variance-valid constant-middle application
+  `G[c](F[c](a))`. The active kernel has ordinary
+  `Functor_comp_pair_func`, mixed endpoint action through the existing
+  `Functor_catd`/`Unit_prof` ladder, and displayed pairing, but no displayed
+  composition lift. One `Functor_comp_pair_funcd` owner with three
+  point/full/capped rules is owner-position quiet-green, warning-neutral at
+  1,079/159, strict-audit clean, computes object and inner-arrow action, and
+  remains iterable at a genuine next base cell. The exact eleven-item gate
+  above adds that owner, a minimal exact ordinary-composition transfer,
+  qualified constant-family reorientation, and a recursive application node.
+  It excludes curry, total-context sections, general middle-family collapse,
+  larger contexts, mixed `lambda^nd`, and remote Git effects. Implementation
+  requires a separate review.
 - **2026-08-01 — D-DTTLF-USABILITY-051 implemented and final-green.**
   Semantic checkpoint `e337f1b1a3a61a861a714fa9d06035a1949beec9`
   adds the generic transferred-`Functor_cat` reifier view and the two direct

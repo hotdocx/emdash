@@ -192,9 +192,25 @@
 > the single required TypeScript aggregate is green at 1,246 pass, 51 skip,
 > and 0 fail out of 1,297 tests. No kernel/transfer rule, curry route,
 > total-context section, cast, coercion, or external equation was added.
-> `DIRECT-MIXED-SECTION-GRADUATE-1L` is the next dependency-ready read-only
-> reassessment; constant-middle varying composition, larger contexts,
-> unrestricted variance, and `lambda^nd` remain separate.
+> `DIRECT-MIXED-SECTION-GRADUATE-1L` is now read-only complete. The current
+> direct three-binder grammar covers all four ordinary occurrence classes;
+> its first missing application constructor is the variance-valid
+> constant-middle term `G[k](c)(F[k](c)(a))`. A live TypeScript probe fails
+> only because the construction view distinguishes `Const_catd(K,X)` from
+> the correctly opposite-based `Const_catd(Op K,X)`. The active kernel has
+> ordinary `Functor_comp_pair_func`, displayed pairing, and internally owned
+> mixed endpoint action through `Functor_catd`/rigid `Hom`/`Unit_prof`, but no
+> displayed composition lift. The selected one-owner/three-rule
+> `Functor_comp_pair_funcd` candidate is owning-position quiet-green,
+> warning-neutral at 1,079/159, strict-audit clean, computes object and inner
+> arrow action, preserves a whole capped base action, and remains iterable at
+> a next base cell. The exact
+> `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` proposal is frozen as
+> H-DTTLF-USABILITY-DIRECT-MIXED-CONSTANT-MIDDLE-01 /
+> D-DTTLF-USABILITY-052 and awaits separate review. It keeps direct nested
+> introduction fundamental and explicitly excludes curry, total-context
+> sections, general middle-family collapse, larger contexts, unrestricted
+> variance, and `lambda^nd`.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
