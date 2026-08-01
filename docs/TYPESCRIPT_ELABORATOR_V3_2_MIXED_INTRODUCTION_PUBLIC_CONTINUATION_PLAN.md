@@ -77,6 +77,16 @@ refresh, and one complete Lambdapi CI are green. Its coherent checkpoint is
 `bed022fdab970109163da8415726a5bcc1ab5a89`; no TypeScript or public promotion
 is included in that checkpoint.
 
+The subsequent read-only TypeScript audit found a finite transfer closure,
+not another mathematical gap. Five existing active signatures and ten
+existing active projection rules precede the fifteen-declaration/seven-rule
+D-040 package in the selected TypeScript runtime. The first useful consumer
+can be one callback-based, immutable contextual case for
+`λ^fd c. λ^f a. s[((k,a),c)]`; it needs no second RawExpr, checker,
+external coherence witness, or kernel edit. The exact bounded continuation is
+frozen below as H-DTTLF-USABILITY-MIXED-INTRODUCTION-TS-01 /
+D-DTTLF-USABILITY-041. Its proposal checkpoint is pending a separate review.
+
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
 That predecessor completed:
@@ -337,7 +347,7 @@ It deliberately avoids:
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
 | `MIXED-ACTION-FOUNDATION-1A` | final-green at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137` | completed `MIXED-INTRODUCTION-0A`; approved D-039; Unit-prof/full-action probes and active-kernel CI | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
 | `MIXED-CURRY-1B` | final-green at `bed022fdab970109163da8415726a5bcc1ab5a89` | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; approved D-040; exact owner-position and active CI evidence | Exactly one Lambdapi-first mixed-curry operation package is active: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. It adds no Hom-action duplicate and leaves `Unit_prof` unchanged. |
-| `MIXED-INTRODUCTION-TS-1C` | next proposal dependency-ready after the exact `MIXED-CURRY-1B` checkpoint; implementation not yet authorized | active owner/rules and conformance evidence | Freeze a separate mechanical-transfer gate, then transfer the owner and extend the contextual compiler with one genuinely non-eta mixed body only after that separate review. |
+| `MIXED-INTRODUCTION-TS-1C` | D-041 frozen for separate review; proposal checkpoint pending | final-green `MIXED-CURRY-1B` at `bed022fdab970109163da8415726a5bcc1ab5a89`; measured 5-signature/17-rule prerequisite-plus-owner closure; focused mixed-profile baseline | Transfer the exact existing-owner closure generically, add one opt-in root profile, and extend immutable contextual IR with exactly the non-eta `λ^fd c. λ^f a. s[((k,a),c)]` body. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -809,7 +819,7 @@ The first TypeScript consumer after kernel transfer should factor the
 non-eta body
 
 ```text
-lambda^fd c. lambda^f a. s[((k,a),c)]
+λ^fd c. λ^f a. s[((k,a),c)]
 ```
 
 from a section `s : U(A,B,C)`. It uses both variables and constructs the
@@ -1319,6 +1329,193 @@ Final validation is green:
 That complete aggregate is final checkpoint evidence and must be carried
 forward across the documentation-only hash synchronization rather than rerun.
 
+## TypeScript Mixed-Curry Transfer Audit
+
+The final-green D-040 kernel package does not drop directly into the current
+`fibred-displayed-mixed-nest-1` runtime because several older active owners
+used by its types and action projections have never had a TypeScript consumer.
+This is a bounded dependency-closure fact, not evidence that the active kernel
+or `Unit_prof` ownership is insufficient.
+
+The existing mixed-action TypeScript compilation already provides the generic
+LF declaration/runtime compilers, source-ordered composition, `Op_catd`,
+`Functor_catd`, `Sigma_cat`, `Pullback_catd`, `sigma_arrow`, `Pi_cat`,
+`Functord_cat`, `fdapp1_int_cell`, and the ordinary `fapp*`/`tapp*` owners. The
+remaining exact signature closure is:
+
+1. `op`;
+2. `Hom_tele_func`;
+3. `Hom_func`;
+4. `Hom_fapp0`; and
+5. `piapp1_fapp0`.
+
+The first four are the existing internal opposite and rigid ambient Hom
+ladder. The fifth is the existing capped section action used on D-040
+right-hand sides. `piapp1_fapp0` needs only its normalized checked signature
+in this closure; its larger transparent body is not needed to type or execute
+the selected projections. Likewise, source occurrences of the transparent
+readability aliases `Fibre_cat` and `catd_transport_func` may be represented by
+their canonical `fapp0` and `fapp1_fapp0` bodies, as existing categorical
+transfer modules already do. No shadow declaration or refinement facility is
+required.
+
+Ten pre-curry runtime clauses are then needed:
+
+- the two existing projections of `op`;
+- the two existing `Hom_tele_func -> Hom_func -> Hom_fapp0` projections; and
+- the six final-green D-039 projections: opposite-source identity,
+  Cat-consumed `Hom_fapp0`, full/capped `Op_catd`, and full/capped
+  `Functor_catd`.
+
+The D-040 package itself contributes exactly fifteen declarations—eleven
+transparent aliases and four operation/projection heads—and seven runtime
+rules. The complete new fragment is therefore twenty declarations and
+seventeen runtime rules, of which only the final fifteen/seven are new kernel
+owners/rules. Every entry fits the existing generic transfer IR and compiler;
+no intrinsic Core form or owner-specific checker/evaluator path is indicated.
+
+The first TypeScript consumer should expose binder usability rather than only
+a raw global call. The exact qualified term is:
+
+```text
+lambda^fd c. lambda^f a. s[((k,a),c)]
+```
+
+for `A : Catd(Op K)`, `B,C : Catd K`, and
+`s : Pi_cat(mix_uncurried_family A B C)`. This is non-eta with respect to the
+resulting displayed functor: the input is a section on the variance-correct
+mixed total context, not an already-coherent object of
+`Functord_cat C (Functor_catd A B)`. The kernel's `mixed_curry_func` is the
+internal coherence owner that makes the factorization sound.
+
+The frontend can represent this case without a second surface language. Add
+one negative indexed-object classifier and one typed mixed-section-application
+node to the existing immutable contextual IR. A callback receives the outer
+positive `c` and inner negative-family fibre object `a`; an explicit
+`mixedSectionApplication(s,a,c)` constructs the typed body node. The enclosing
+`mixedCurryLambda` recursively normalizes that node, verifies the exact
+section/family/slot relationship, and lowers the whole abstraction to the
+single checked `mixed_curry_func[s]` Core term. This is one new case in the
+existing typed recursive compiler, not a string parser, whole-body JavaScript
+recognizer, or pointwise function plus external naturality equation.
+
+The case is deliberately narrower than ultimate binder usability. Arbitrary
+negative-slot application, nested mixed expressions around the section leaf,
+multiple polarity alternations, general mixed DAGs, unrestricted `:^nd`, and
+text parity remain fail-closed until representative evidence qualifies their
+recursive cases. The new IR node is shaped so those cases can be added as
+ordinary recursive alternatives rather than by replacing this architecture.
+
+Feasibility is high and deterministic. The existing workspace contract and
+both closest mixed-action/factorization test files are green. Their cold
+profile initialization took roughly four minutes each even when run in
+parallel; implementation should therefore use an isolated transfer test in
+the inner loop and run the combined profile boundary only once before its
+checkpoint.
+
+## Frozen TypeScript Mixed-Curry Gate
+
+### H-DTTLF-USABILITY-MIXED-INTRODUCTION-TS-01 /
+### D-DTTLF-USABILITY-041
+
+Approve exactly this bounded TypeScript continuation:
+
+1. Add one `categorical_mixed_curry_transfer.ts` fragment pinned to active
+   `emdash3_2.lp` digest
+   `sha256:4ba081a35193a18d33f3648a2b29412c82ce1dea585219403202d7f78d5269d6`.
+   Compose it after the existing mixed-action compilation; do not duplicate or
+   mutate that prerequisite.
+2. Compile exactly twenty declarations with the generic declaration engine:
+
+   - the five measured existing signatures `op`, `Hom_tele_func`, `Hom_func`,
+     `Hom_fapp0`, and `piapp1_fapp0`;
+   - the eleven transparent D-040 `mix_*` aliases as checked transparent
+     definitions; and
+   - `mixed_curry_func`, `mixed_curry_funcd`,
+     `mixed_curry_fibre_func`, and `mixed_curry_at_func` with the same
+     opacity/rigidity as the active source.
+
+   Import `piapp1_fapp0` as the normalized opaque checked signature selected
+   by this runtime closure. Represent `Fibre_cat` and `catd_transport_func`
+   occurrences by their active transparent bodies. Add no local mirror,
+   declaration-refinement mechanism, or alternate owner.
+3. Compile exactly seventeen source-ordered runtime rules with the generic
+   runtime compiler: two `op` projections, two rigid-Hom ladder projections,
+   the six D-039 rules, and the seven D-040 rules. Reuse prerequisite linkage
+   for every other owner. Do not transfer `Unit_prof` merely to duplicate its
+   already represented `Hom_tele_func`/`Hom_func` result; retain Lambdapi
+   conformance evidence for that ownership boundary.
+4. Add no intrinsic Core form, generic checker/unifier/evaluator branch,
+   proof rule, external equation, whole-family coercion, product facade,
+   inverse curry, or kernel edit. The boundary object must record zero for all
+   such deltas and identify all entries as generic-transfer entries.
+5. Add one opt-in root profile, `fibred-displayed-mixed-curry-1`, extending
+   `fibred-displayed-mixed-nest-1`. Load its transfer module through the
+   existing optional-profile boundary so default and browser-safe profiles do
+   not acquire a static Node-only dependency. Do not change any existing
+   profile's semantics.
+6. Add exactly three root/surface constructors:
+
+   - `mixedUncurriedFamily(A,B,C)` constructs the checked pulled-back target
+     family over the mixed context and validates `A : Catd(Op K)`,
+     `B,C : Catd K`;
+   - `mixedSectionApplication(s,a,c)` is valid only inside the active mixed
+     curry callback and constructs one immutable typed contextual node; and
+   - `mixedCurryLambda({c:C},{a:A},B,s,body)` evaluates `body` once with
+     callback order `[c,a]`, verifies the exact typed occurrence graph, and
+     lowers `mixedSectionApplication(s,a,c)` to
+     `fapp0(mixed_curry_func(A,B,C),s)`.
+
+   Add one `mixed-indexed-object` classifier, one
+   `typed-mixed-section-application` IR node, and one
+   `categorical.mixed-curry-introduction` evidence case. Record the positive
+   and negative family polarities and locally nameless slot indices. Do not
+   retain the callback or serialize open contextual slots into Core.
+7. The positive demonstration must compile the direct TypeScript expression
+
+   ```ts
+   program.mixedCurryLambda(
+       { name: 'c', family: C },
+       { name: 'a', family: A },
+       B,
+       s,
+       ([c, a]) => program.mixedSectionApplication(s, a, c)
+   )
+   ```
+
+   to the checked `mixed_curry_func[s]` term, recover surface type
+   `Functord C (Functor_catd A B)`, and compute its `k/c/a` point plus the
+   negative-`A`, positive-`C`, and shared-base-arrow observations through the
+   transferred runtime. Generic transformation/next-Hom action must remain
+   owned by existing `apply`/Hom machinery.
+8. Focused tests must deep-freeze the module, policy, linkage, contextual IR,
+   and evidence; subject-check all twenty declarations and seventeen rules;
+   verify declaration/rule counts and source provenance; compare direct
+   TypeScript/Core results; and fail closed for the legacy profile, wrong
+   base polarity, mismatched `B`/`C`, wrong section family, swapped or foreign
+   slots, escaped slots, a different section leaf, and arbitrary pointwise or
+   nested bodies.
+9. Keep the TypeScript kernel under its recorded oracle boundary. Add one
+   deterministic emitted-Lambdapi judgment for the exact point/action witness
+   and run its bounded active-kernel oracle once. During implementation use
+   focused transfer/frontend tests, root typecheck, and lint. Because the
+   public barrel and shared categorical program/surface change, run exactly
+   one complete `./scripts/pnpmw run check:ts` after the bounded tranche is
+   otherwise green. Carry forward the fresh D-040 Lambdapi CI; do not run
+   `check:all`, book/print/browser aggregates, or another Lambdapi CI.
+10. Stop and freeze a correcting proposal rather than broadening this gate if
+    generic transfer requires another semantic declaration, an owner-specific
+    checker branch, external coherence evidence, a second Hom action, a whole
+    family conversion, or more than the exact contextual node/classifier
+    above. A canonical-expression spelling correction or measured dependency
+    link is allowed only if it preserves the exact twenty/seventeen inventory
+    and is documented before checkpointing.
+
+This gate establishes one real mixed binder introduction and its mechanical
+TypeScript transfer. It does not graduate arbitrary mixed variance, general
+negative-variable use, text syntax, browser/public exposure, a product facade,
+inverse curry, or whole-library scale.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -1381,8 +1578,12 @@ D-040 as final-green at
 `bed022fdab970109163da8415726a5bcc1ab5a89`: exactly eleven aliases, one curry
 functor plus three staged heads, and seven rules. Preserve that bounded
 kernel/check/report/ledger checkpoint, carry forward its complete green
-aggregate, and freeze a separate TypeScript transfer proposal before
-implementation. Preserve the measured two-sided context,
+aggregate. Treat D-041 as frozen for separate review with its proposal
+checkpoint pending in this ledger. Do not implement it until that isolated
+proposal has been checkpointed and reviewed. If approved, preserve its exact
+five-prerequisite-signature, twenty-total-declaration, seventeen-rule, one
+profile, one classifier, one contextual-node, and three-constructor boundary.
+Preserve the measured two-sided context,
 negative-A/positive-C polarity, canonical Hom classifier seam, stable
 `Functor_catd` head, Sigma/pullback non-collapse, and the existing
 `Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0` ownership. Prefer generic
@@ -1623,3 +1824,14 @@ removal, or unrelated cleanup is authorized.
   corrected to match canonical `fapp0` classifiers rather than adding another
   stable head. No TypeScript, parser, browser, public, product-facade, inverse,
   or unrestricted-variance work is included.
+- **2026-08-01 — D-DTTLF-USABILITY-041 frozen for separate review.** The
+  read-only TypeScript audit found exactly five previously untransferred
+  existing signatures and ten pre-curry runtime clauses before the D-040
+  fifteen-declaration/seven-rule package. The proposed generic fragment
+  therefore contains twenty declarations and seventeen rules. Its only
+  frontend addition is one opt-in profile and the immutable contextual case
+  for `λ^fd c. λ^f a. s[((k,a),c)]`, represented by one negative
+  indexed classifier and one typed section-application node. It explicitly
+  retains `Unit_prof` ownership and excludes new kernel semantics, intrinsic
+  Core/checker cases, general mixed variance, text/browser/public work, and
+  whole-library scale. Its proposal checkpoint is pending a separate review.
