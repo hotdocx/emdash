@@ -246,16 +246,25 @@
 > and a bounded 6.4-second Lambdapi probe checks that the existing covariant
 > target action lifts through depth two and composes after an arbitrary outer
 > coherent subject without curry or a new owner. The exact TypeScript-only
-> `DIRECT-MIXED-NEGATIVE-TOWER-1P` / D-DTTLF-USABILITY-053 proposal at
-> `db49240fc77f308131636181e76021858cd99829` is now separately
-> reviewed-approved under the standing unattended delegation and is
-> implementation-ready. It adds an arbitrary-finite tower API only for
-> coherent eta/bound identity and finite closed target maps, using one
-> reusable outward target-lift helper. Source maps, pairs, weakening,
-> constant-middle lifting, sibling contexts, general polarity, and
-> `lambda^nd` broadening remain excluded. General `lambda^nd` body algebra
-> still ranks second because the existing direct eta and recursive vertical-
-> composition fragment is internally coherent.
+> `DIRECT-MIXED-NEGATIVE-TOWER-1P` / D-DTTLF-USABILITY-053 is now implemented
+> and checkpointed at `ef3ce5c4de381b044dc3bbffd55cb35bcfd2faf7`.
+> `mixedDisplayedFunctorTowerLambda` directly scopes one positive outer value
+> and an arbitrary finite ordered negative-inner array, right-folds the exact
+> existing `Functor_catd` classifier, and recognizes coherent eta/bound
+> identity plus finite closed target maps. Each target map is lifted from the
+> deepest family outward through the existing internal target action; no
+> curry, total-context section, new owner, cast, or external coherence data is
+> used. Depth 2/6, depth-3 identity, and six target-action lifts into
+> `Hom_catd` are generically checked; the unchanged one-inner suite is 11/11
+> green. The mechanically affected parity audit is 10/10 green, while the
+> sole non-repeated aggregate retains three unrelated canonical-export digest
+> failures after its four in-scope method-count pins were corrected. The next
+> dependency-ready operation is the read-only
+> `DIRECT-MIXED-TOWER-GRADUATE-0Q` comparison of tower body coverage,
+> independent product/Sigma siblings, and true `Hom_catd`/`Transf_catd` plus
+> `lambda^nd` alternation. Source maps, pairs, weakening, constant-middle
+> lifting, sibling contexts, general polarity, and `lambda^nd` broadening
+> remain unimplemented until that audit selects a separate gate.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
