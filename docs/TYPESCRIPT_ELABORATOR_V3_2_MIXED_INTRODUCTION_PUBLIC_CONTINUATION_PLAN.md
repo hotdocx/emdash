@@ -23,8 +23,13 @@ D-DTTLF-USABILITY-036 below freezes the smallest semantic-neutral bundling
 repair before publication. Its proposal checkpoint is
 `e76fae5d8ceff84acb3548cf2330e0e300450425`; the separate review recorded
 below approves exactly that repair under the standing unattended delegation,
-with human supersession. Implementation is dependency-ready. After the
-corrected public slice is green and deployed, the next
+with human supersession. The four-loader repair is Node-green, but a fresh
+browser reload proved that a second static path remained through
+`categorical_surface.ts`; the D-036 stop condition therefore applies.
+H-DTTLF-USABILITY-PUBLIC-BROWSER-CONTRACT-CORRECTION-01 /
+D-DTTLF-USABILITY-037 below freezes the complete browser-safe Core-name
+contract split before publication. After the corrected public slice is green
+and deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -282,8 +287,9 @@ It deliberately avoids:
 | --- | --- | --- | --- |
 | `PUBLIC-HOM-AUDIT-0A` | complete, then measurement-corrected by D-DTTLF-USABILITY-035; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract; reject both the slow mixed-nest fixture and the unavailable Transfd/profile combination; select the default-profile functor-category recursive-Hom witness; freeze truthful public wording. |
 | `PUBLIC-HOM-PRESET-1A` | corrected implementation focused-green; real-browser smoke exposed separate runtime cycle | `PUBLIC-HOM-AUDIT-0A`; approved D-034/D-035 | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
-| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | exact D-DTTLF-USABILITY-036 reviewed-approved and implementation dependency-ready | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
-| `PUBLIC-HOM-VALIDATE-1B` | blocked on green browser-runtime correction | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
+| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | D-DTTLF-USABILITY-036 implemented; Node higher-profile regression green; browser still red through a second static path | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
+| `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | exact D-DTTLF-USABILITY-037 frozen for separate review | implemented D-036; measured remaining surface-to-transfer import path | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
+| `PUBLIC-HOM-VALIDATE-1B` | blocked on green browser-contract correction | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | blocked on green `VALIDATE-1B` | clean goal checkpoint; fetched ancestry; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
 | `MIXED-CURRY-1A` | decision-blocked on `MIXED-INTRODUCTION-0A` | separately frozen owner/signature/rule proposal | Implement one exact Lambdapi-first mixed-curry functor with internal object/base-arrow action and qualified laws. |
@@ -470,6 +476,60 @@ only D-DTTLF-USABILITY-036 under the user's standing unattended delegation,
 with human supersession. Implementation may continue within this measured
 runtime-correction gate.
 
+The D-036 implementation passed root typecheck/lint and a qualified
+displayed-next-Hom Node regression in 60.16 seconds. A rebuilt browser still
+failed with the same initialization error. Static import analysis then found
+the remaining path:
+
+```text
+browser_reviewer
+  -> categorical_surface
+  -> displayed-next-Hom foundation transfer / mixed-mode transfer
+  -> historical audit and proposal closure
+  -> categorical_program
+```
+
+Ignoring exactly those two surface-to-transfer edges leaves no static path
+from the reviewer entry to the categorical usability proposal. D-036 remains
+useful and green for the program's four intended optional loaders, but it is
+not sufficient by itself.
+
+## Frozen Browser Core-Name Contract Correction
+
+### H-DTTLF-USABILITY-PUBLIC-BROWSER-CONTRACT-CORRECTION-01 /
+### D-DTTLF-USABILITY-037
+
+Approve this exact completion of the browser-runtime repair:
+
+1. Add two dependency-free immutable contract modules:
+   - one owning every displayed-next-Hom foundation Core name and its existing
+     symbol-id lookup; and
+   - one owning both mixed-mode classifier Core names and their existing
+     symbol-id lookup.
+2. Preserve every current Core name exactly, including the reused
+   `emdash_v3_2_scale_stress_3a2a_id` identity name and the established
+   generated prefixes for the remaining names.
+3. Make the two full transfer modules consume and re-export their respective
+   contract values/types/functions. Their linkage construction must derive
+   declaration Core names from the contract rather than maintain a second
+   literal mapping. Existing public imports remain source-compatible.
+4. Change only the two `categorical_surface.ts` imports to read the lookup
+   functions from the pure contracts. The surface remains an internal-owner
+   consumer; it gains no transfer, audit, or external-coherence logic.
+5. Retain the D-036 optional module loader for the four qualified full
+   transfer modules. Do not add a barrel preload, duplicate a revision,
+   weaken validation, move audit data into the browser, or create a
+   browser-specific semantic implementation.
+6. Validate the linkage/contract identity, root typecheck/lint, the focused
+   eleven-preset text/direct suite, the qualified Node higher-profile test,
+   one production build, and a fresh real-browser execution. A remaining
+   cycle is again a stop signal.
+
+This is a dependency-architecture correction, not a new LF or categorical
+feature. It adds no mathematical owner, declaration/rule, Core node,
+parser/checker/evaluator branch, profile capability, or public claim. The
+D-034/D-035 publication boundary remains unchanged.
+
 ## Mixed-Introduction Audit Contract
 
 After the public slice is deployed, `MIXED-INTRODUCTION-0A` must start with
@@ -553,9 +613,10 @@ docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md, and emdash2/AGENTS.md whenever
 the active Lambdapi workspace is involved.
 
 First complete the bounded recursive-Hom public synchronization exactly as
-corrected by D-DTTLF-USABILITY-035 and D-DTTLF-USABILITY-036: use the existing
-browser reviewer and the default-profile functor-category recursive-Hom
-witness; keep optional Node profile modules lazy across browser bundling; add no
+corrected by D-DTTLF-USABILITY-035 through D-DTTLF-USABILITY-037: use the
+existing browser reviewer and the default-profile functor-category
+recursive-Hom witness; keep optional Node profile modules lazy and import
+their Core names only from dependency-free contracts in browser code; add no
 semantic/checker/parser architecture, keep the qualified finite-Hom claim
 distinct from general mixed introduction and arbitrary variance, validate
 proportionally, checkpoint, fast-forward/push main only after fresh ancestry
@@ -644,3 +705,14 @@ removal, or unrelated cleanup is authorized.
   loader repair and its stated validation, with human supersession. It does
   not authorize a semantic/profile change, duplicated browser implementation,
   broader public claim, or unrelated remote effect.
+- **2026-08-01 — D-DTTLF-USABILITY-036 is Node-green but browser-incomplete.**
+  The optional loader preserved the qualified higher-profile path, whose
+  focused regression passed in 60.16 seconds, but the rebuilt browser retained
+  the same cycle through two value imports in `categorical_surface.ts`.
+  Removing exactly those graph edges eliminates the remaining static path to
+  the historical categorical graduation proposal.
+- **2026-08-01 — D-DTTLF-USABILITY-037 frozen for separate review.** The exact
+  gate makes dependency-free contracts the sole source of the two affected
+  Core-name families, has the full transfer modules consume/re-export those
+  contracts, and redirects only the surface lookups. It forbids mirrors,
+  preloads, audit weakening, or browser-specific semantics.
