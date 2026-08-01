@@ -31,8 +31,8 @@
 > unattended delegation. It authorizes one zero-owner rule, zero-declaration
 > generic transfer,
 > and a direct TypeScript exact-eta/finite-target-chain factorer. That slice is
-> now implementation- and validation-complete, with its exact local checkpoint
-> still to be recorded. The opt-in binder is the direct TypeScript analogue of
+> final-green at `2c53291da9a8f74e9102434235f504721f53d34a`. The opt-in
+> binder is the direct TypeScript analogue of
 > `lambda^n k. lambda^f c. lambda^f a. t : Functord_cat C (Functor_catd A B)`;
 > eta returns `F`, and finite covariant target maps use the existing internal
 > action plus generic displayed composition. It explicitly neither transfers
