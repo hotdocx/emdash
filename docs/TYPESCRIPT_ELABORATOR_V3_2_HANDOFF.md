@@ -2,13 +2,17 @@
 
 > **Current semantic continuation (2026-08-01):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
-> owns the next work: first synchronize the completed recursive-Hom
-> capability with the deployed reviewer and truthful public boundary, then
-> conduct the Lambdapi-first variance-correct mixed-introduction audit. The
-> exact public slice is frozen at
-> `c702c8a353caeb7eb3bbb5fba1552b8dcb3e2f08` and reviewed-approved under
-> D-DTTLF-USABILITY-034 with human supersession. Its implementation is
-> dependency-ready. The
+> owns the next work. Recursive-Hom public synchronization is deployed at
+> `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
+> mixed-curry witness are final-green. The user superseded D-041 before its
+> TypeScript implementation: its exact-section-leaf transfer remains
+> historical acquisition evidence, not the recursive binder architecture.
+> Continue `CONTEXTUAL-CURRY-0B`, which qualifies positive Sigma curry,
+> reusable negative-family curry, their factorized mixed route, the canonical
+> family normal form, and the full-action boundary while retaining D-040 as a
+> possible stable facade. The end-user target is recursive
+> `lambda^n k. lambda^f c. lambda^f a. t`; a total-context section may be an
+> internal compilation form but is not a required user argument. The
 > completed
 > mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed

@@ -88,7 +88,26 @@ frozen below as H-DTTLF-USABILITY-MIXED-INTRODUCTION-TS-01 /
 D-DTTLF-USABILITY-041. Its proposal checkpoint is
 `249895de44c005dd64a00bbca13f5d7fb6b1097c`. The separate review recorded
 below approves exactly that gate under the standing unattended delegation,
-with immediate human supersession.
+with immediate human supersession. That approval was subsequently superseded
+before implementation by the user's architecture clarification: a genuine
+surface binder should accept a recursive body such as
+`lambda^n k. lambda^f c. lambda^f a. t`, rather than require the user to
+supply an already-coherent section over the complete mixed total context.
+The D-041 transfer inventory remains valid historical acquisition evidence,
+but its one-leaf frontend is no longer dependency-ready and no TypeScript file
+from that gate has been retained.
+
+The active continuation is now `CONTEXTUAL-CURRY-0B`. It treats D-040 as a
+final-green specialized witness and possible stable facade, not as discarded
+work and not yet as the general abstraction architecture. Preliminary bounded
+probes establish a compositional candidate: an opaque semantic identity in
+the existing `Pi(Sigma,-)`/`Functord` comparison supplies positive Sigma
+curry, and a separately formed negative-Sigma displayed curry supplies the
+variance-sensitive step. Their composition has the same `k/c/a` point as the
+specialized mixed operation. The current long pullback family does not join
+the stable Sigma-projection-pullback presentation, so the canonical family
+normal form and full action/next-Hom boundary must be selected in an exact
+owner-position proposal before another active-kernel or TypeScript edit.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -350,8 +369,10 @@ It deliberately avoids:
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
 | `MIXED-ACTION-FOUNDATION-1A` | final-green at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137` | completed `MIXED-INTRODUCTION-0A`; approved D-039; Unit-prof/full-action probes and active-kernel CI | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
 | `MIXED-CURRY-1B` | final-green at `bed022fdab970109163da8415726a5bcc1ab5a89` | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; approved D-040; exact owner-position and active CI evidence | Exactly one Lambdapi-first mixed-curry operation package is active: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. It adds no Hom-action duplicate and leaves `Unit_prof` unchanged. |
-| `MIXED-INTRODUCTION-TS-1C` | D-041 approved; implementation dependency-ready | final-green `MIXED-CURRY-1B` at `bed022fdab970109163da8415726a5bcc1ab5a89`; D-041 proposal `249895de44c005dd64a00bbca13f5d7fb6b1097c`; measured 5-signature/17-rule prerequisite-plus-owner closure; focused mixed-profile baseline | Transfer the exact existing-owner closure generically, add one opt-in root profile, and extend immutable contextual IR with exactly the non-eta `λ^fd c. λ^f a. s[((k,a),c)]` body. |
-| `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
+| `MIXED-INTRODUCTION-TS-1C` | D-041 approved historically, then human-superseded before implementation; paused | final-green `MIXED-CURRY-1B` at `bed022fdab970109163da8415726a5bcc1ab5a89`; D-041 proposal `249895de44c005dd64a00bbca13f5d7fb6b1097c`; later contextual-binder clarification | Preserve the measured transfer closure, but do not implement its exact-section-leaf frontend as the claimed binder architecture. Re-audit it only after the reusable contextual curry basis is selected. |
+| `CONTEXTUAL-CURRY-0B` | in progress; three ignored bounded probes green; zero tracked semantic delta | final-green D-039/D-040; user clarification on direct recursive binders and hybrid retention | Separate surface binder syntax from the internal total-context section semantics; qualify positive Sigma curry, negative-family curry, their factorized mixed point/action route, the stable family normal form, and the exact higher-action nonclaim. |
+| `CONTEXTUAL-CURRY-1A` | pending exact owner-position proposal and separate review | completed `CONTEXTUAL-CURRY-0B` | Promote only the smallest reusable curry basis justified by owner-position, warning, positive-consumer, and non-collapse evidence; retain D-040 as a checked facade/witness until a forward derived migration is independently justified. |
+| `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative recursive-binder and full-action evidence | `CONTEXTUAL-CURRY-1A`; corrected TypeScript successor to D-041 | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -1532,7 +1553,168 @@ without extending the generic checker or supplying external coherence.
 No immediate human correction superseded the isolated proposal. Under the
 user's standing unattended delegation, with immediate human supersession,
 D-041 is approved exactly as proposed and implementation may begin within
-this boundary.
+this boundary. The later human clarification below supersedes that last
+implementation-readiness sentence without rewriting the immutable proposal or
+review history.
+
+## Post-D-041 Contextual Binder Correction
+
+### Surface binders versus total-context sections
+
+The intended end-user term is naturally written as a nested binder:
+
+```text
+lambda^n k. lambda^f c. lambda^f a. t
+  : Functord_cat C (Functor_catd A B).
+```
+
+Equivalently, a surface may hide the shared base binder and write the outer
+displayed abstraction as `lambda^fd c. lambda^f a. t`. Capability belongs to
+the binder (`lambda^n`, `lambda^f`, or `lambda^fd`); an optional classifier
+annotation is a separate bidirectional input. The user need not first produce
+a section named `s` over the whole `((k,a),c)` context and need not supply an
+external naturality square.
+
+There is nevertheless no contradiction between this syntax and section-based
+lowering. In the categorical semantics of ordinary dependent type theory, an
+open term in `Gamma,x:A` is represented over the context extension
+`Sigma_Gamma A`, and dependent lambda introduction is the transpose/right
+adjoint that returns a term in `Gamma`. Ordinary DTT syntax hides that
+context-extension machinery. Emdash may likewise use a section over a
+Sigma/pullback total as one internal compilation form while presenting normal
+recursive binders to the user.
+
+What is not sufficient is to expose that internal form as the only accepted
+surface body. The frozen D-041 case
+
+```text
+lambda^fd c. lambda^f a. s[((k,a),c)]
+```
+
+starts with `s`, which already carries coherence for the complete telescope.
+It therefore demonstrates a useful transposition between two coherent
+presentations, but does not by itself demonstrate recursive abstraction of an
+arbitrary supported body `t`. A genuine binder compiler must recursively
+factor variable occurrences through internally owned identity, composition,
+evaluation, structural, reindexing, and contextual-curry operations. It may
+compile the intermediate body to a section; that section is compiler output,
+not a required user argument.
+
+This distinction also explains why an outer Lambdapi lambda is not already
+the missing implementation. `Functord_cat` is a stable inner categorical
+classifier, not an LF Pi type that unfolds into pointwise data. A true
+`lambda^n` surface form must lower to an internal owner or a composition of
+internal owners whose object, arrow, and higher action is carried by the
+kernel. Merely returning a pointwise LF function would reintroduce the
+external-coherence design that this project rejects.
+
+### Why D-040 remains useful
+
+D-040 is not reverted. It is a final-green, internally formulated operation
+with all of the following reusable evidence:
+
+- the negative `A : Catd(Op K)` and positive `C,B : Catd K` polarity;
+- the opposite-Sigma total and its projection to the shared base;
+- canonical mixed arrows carrying both endpoint transports internally;
+- point, negative-fibre, positive-fibre, and shared-base-arrow equations; and
+- interaction with the existing
+  `Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0` action ladder.
+
+It may remain a stable optimized facade or regression witness. The correction
+is only that its all-in-one operation and exact-section-leaf consumer are not
+yet the general recursive binder architecture. A later forward migration may
+define that facade by reusable contextual operations, or retain a measured
+stable fold to it; no history rewrite or premature deletion is required.
+
+### `CONTEXTUAL-CURRY-0B` bounded audit
+
+Three ignored probes currently establish the following preliminary facts:
+
+1. The active proof-time comparison
+
+   ```text
+   Pi_cat(Sigma_cat R, Sigma_proj1_pullback_catd R D)
+     =proof-time Functord_cat R D
+   ```
+
+   is enough to type a general positive Sigma curry as the identity functor on
+   the source presentation. Keeping that semantic definition opaque preserves
+   a runtime discriminator. Its stable object/fibre projections, point beta,
+   fibre-arrow action, and base-arrow cell all typecheck through existing
+   `piapp1_fapp0`, `sigma_arrow`, and `sigma_transport_arrow` owners.
+2. For the negative total
+
+   ```text
+   N_A = Op_cat(Sigma_cat(Op_cat K, Op_catd A)),
+   q_A : N_A -> K,
+   ```
+
+   a reusable variance-sensitive operation can be formed:
+
+   ```text
+   Functord_cat(N_A, q_A^*X, q_A^*Y)
+     -> Functord_cat(K, X, Functor_catd(A,Y)).
+   ```
+
+   Its `k/x/a` point, negative-`A` action, positive-`X` component, and shared
+   base-arrow component typecheck using only internally owned mixed arrows and
+   `fdapp1_int_cell`.
+3. Composing those two operations computes the factorized mixed `k/c/a`
+   point to the original section point. This gives a recursive semantic basis
+   for the specialized D-040 result rather than another unrelated Hom action.
+4. The current transparent family
+
+   ```text
+   Pullback_catd B (q_A o Sigma_proj1_func(q_A^*C))
+   ```
+
+   is neither runtime-convertible nor proof-time-joinable with the stable
+   factorized presentation
+
+   ```text
+   Sigma_proj1_pullback_catd(q_A^*C, q_A^*B).
+   ```
+
+   The factorized presentation immediately activates the existing
+   Pi/Sigma-to-`Functord_cat` comparison. This is a canonical-normal-form seam,
+   not a mathematical contradiction; it must be selected deliberately rather
+   than hidden behind a broad pullback-associativity rule.
+
+These probes establish formation and selected point/arrow computation. They
+do not yet establish a full owner-position interaction inventory, arbitrary
+higher-cell normalization, general `Pi_F`, beta/eta equivalence, arbitrary
+polarity alternation, or a complete recursive surface compiler. In
+particular, `sigma_intro_tapp0_func` still lacks its general arrow-action rule;
+that previously measured `+10/+1` interaction closure is not silently promoted
+by this audit. Generic `fapp1_func` keeps every produced functor structurally
+iterable, but a separately selected owner is still needed wherever a concrete
+higher-action beta must normalize.
+
+### Selected next gate shape
+
+Before any active-kernel or TypeScript edit, finish one owner-position
+candidate that compares:
+
+- the general opaque semantic positive Sigma curry;
+- the general negative-Sigma displayed curry;
+- their composition over the stable factorized family;
+- the retained D-040 specialized facade; and
+- full-action formation plus at least one representative next-Hom consumer.
+
+The candidate must reject any need for an external equation, second Hom
+action, broad pullback-associativity rule, `Product_catd`, or arbitrary
+pointwise-function-to-functor coercion. It must also state whether the current
+`mix_uncurried_family` body should move forward to the stable factorized normal
+form or whether a narrow explicit adapter is required. Only after quiet and
+warning-enabled owner-position evidence may `CONTEXTUAL-CURRY-1A` freeze an
+exact declaration/rule inventory for separate review.
+
+The corrected TypeScript successor must then elaborate a recursively supported
+body under scoped `k/c/a` tokens. It may retain a specialized
+`mixedSectionApplication` leaf as one recursive case, but must not present
+that leaf as the whole abstraction algorithm. String syntax, browser/public
+promotion, unrestricted body syntax, and general variance graduation remain
+later gates.
 
 ## Validation And Checkpoint Policy
 
@@ -1596,11 +1778,22 @@ D-040 as final-green at
 `bed022fdab970109163da8415726a5bcc1ab5a89`: exactly eleven aliases, one curry
 functor plus three staged heads, and seven rules. Preserve that bounded
 kernel/check/report/ledger checkpoint, carry forward its complete green
-aggregate. Treat D-041 at proposal checkpoint
-`249895de44c005dd64a00bbca13f5d7fb6b1097c` as separately reviewed and
-approved. Implement only its exact five-prerequisite-signature,
-twenty-total-declaration, seventeen-rule, one-profile, one-classifier,
-one-contextual-node, and three-constructor boundary.
+aggregate. Retain D-040 as a specialized checked facade/witness while the
+reusable contextual basis is qualified; do not revert or silently broaden it.
+Treat D-041 at proposal checkpoint
+`249895de44c005dd64a00bbca13f5d7fb6b1097c` as separately reviewed historical
+transfer evidence but human-superseded before implementation. Do not implement
+its exact-section-leaf frontend or create its proposed TypeScript module.
+
+Continue `CONTEXTUAL-CURRY-0B`: finish the owner-position comparison of a
+general opaque positive Sigma curry, a reusable negative-Sigma displayed
+curry, their factorized composition, and the retained specialized facade.
+Keep the end-user objective as recursive
+`lambda^n k. lambda^f c. lambda^f a. t`; a section over the total context may
+be an internal compilation form but is not a required user argument. Freeze a
+separate exact `CONTEXTUAL-CURRY-1A` gate before active semantic edits, and
+require a representative full-action/next-Hom consumer plus the canonical
+pullback-family normal-form decision.
 Preserve the measured two-sided context,
 negative-A/positive-C polarity, canonical Hom classifier seam, stable
 `Functor_catd` head, Sigma/pullback non-collapse, and the existing
@@ -1608,9 +1801,10 @@ negative-A/positive-C polarity, canonical Hom classifier seam, stable
 Hom action for transformations and higher cells; never add external
 naturality or coherence evidence.
 
-Keep PRODUCT-FACADE-0A conditional on a measured obstruction and treat the
-completed CURRY-PACKAGE-0A as supporting evidence unless a concrete later gap
-reopens it.
+Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
+ordinary-curry audit remains supporting evidence, while the concrete
+contextual-curry gap is now an active bounded audit rather than authority for
+a broad `Pi_F` or curry/uncurry redesign.
 Do not add an injective Product_catd head, claim unrestricted variance, resume
 bulk scale, or broaden groupoidal/metatheory claims without a separately
 frozen gate.
@@ -1865,3 +2059,23 @@ removal, or unrelated cleanup is authorized.
   immediate human correction superseded the proposal, so the standing
   unattended delegation authorizes only this bounded generic transfer,
   opt-in profile, and contextual consumer, with immediate human supersession.
+- **2026-08-01 — the user superseded D-041 before implementation.** The exact
+  transfer inventory remains useful, but the proposed surface starts from an
+  already-coherent section `s` over the whole mixed total. The user clarified
+  that the intended interface is a recursively elaborated binder such as
+  `lambda^n k. lambda^f c. lambda^f a. t`; ordinary DTT likewise hides its
+  total-context/section semantics from the surface. No D-041 TypeScript file
+  or partial implementation is retained. This correction does not reject or
+  revert D-040 and explicitly permits a hybrid specialized facade plus a
+  reusable contextual basis.
+- **2026-08-01 — `CONTEXTUAL-CURRY-0B` preliminary probes are green.** A
+  positive Sigma curry defined as the opaque semantic identity across the
+  existing Pi/Sigma proof-time comparison typechecks through point,
+  fibre-arrow, and base-arrow projections. A reusable negative-Sigma curry
+  typechecks through point, negative-family action, positive-family action,
+  and shared-base action. Their factorized composite reaches the expected
+  section point. The current long pullback family does not join the stable
+  Sigma-projection-pullback normal form, while the factorized form immediately
+  exercises the existing comparison. These are ignored bounded probes, not
+  owner-position promotion evidence; the tracked semantic tree remains
+  unchanged.
