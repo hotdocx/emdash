@@ -430,7 +430,8 @@ It deliberately avoids:
 | `MIXED-SOURCE-ACTION-0E2` | complete; selected one-rule owner-position candidate quiet-green, zero warning delta, strict-audit clean, and finite-chain positive | final-green D-044; preliminary three-rule and selected one-rule full-file probes; active `Functor_catd_func` and ordinary composition owners | Distinguish shared scope base `K` from family-domain orientation `K` versus `Op K`. Reject the capped three-rule precomposition route; select one existing-owner rule returning whole `comp_cat_fapp0`, with object/arrow and two-map checks. |
 | `DIRECT-MIXED-SOURCE-ACTION-1E2` | final-green at `a1f7aa5601b55fc4925a6dcefec699fb6038e67a` under D-DTTLF-USABILITY-045 | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; proposal `9c37e5e21c8f2246c11ab92236923ab044e02ca5`; separate review | One active existing-owner rule and one zero-declaration generic transfer return whole `comp_cat_fapp0`; exact scope/family orientation and finite `L(source-argument)` recursion are implemented. Object and arrow action remain generic and iterable; no curry dependency or external coherence evidence is present. |
 | `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | final-green at `a1f7aa5601b55fc4925a6dcefec699fb6038e67a` under D-DTTLF-USABILITY-046 | implemented D-045; proposal `9246adee5c5201d713b7fc2a271121c8380b0b2a`; measured subject-check failure; active opposite-Hom computation | The omitted pre-existing opposite-Hom reversal is transferred before the D-045 source projection. The corrected fragment is zero-declaration and generic: one prerequisite rule plus one new mathematical projection, with no checker case, curry dependency, or external oracle. |
-| `DIRECT-MIXED-SOURCE-GRADUATE-1F` | next dependency-ready read-only audit | final-green D-045/D-046; direct source/target recursion; user's direct-binder invariant | Freeze the exact demonstrated direct grammar, stress representative nested `Functor_catd`/`Hom_catd`/`Transf_catd` uses, and classify each remaining rejection as a surface-factorization gap or a genuinely missing internal owner. Preserve direct `lambda^n/lambda^f/lambda^f` introduction as fundamental; authorize no semantic, curry, text, or browser edit during the audit. |
+| `DIRECT-MIXED-SOURCE-GRADUATE-1F` | read-only audit complete; split before graduation | final-green D-045/D-046; direct source/target recursion; user's direct-binder invariant | Nested `Functor_catd`/`Hom_catd`/`Transf_catd` classifiers and simultaneous source/target spines work through the direct binder. The audit found one generic frontend category-conversion seam and one genuinely missing product-distribution construction; it found no curry prerequisite. |
+| `DIRECT-MIXED-NESTED-CONVERSION-1F1` | exact proposal frozen under D-DTTLF-USABILITY-047; decision pending | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; active opposite-involution computation | Replace four mixed-constructor structural base comparisons by one generic fast-path-plus-kernel-conversion service and add durable natural nested-source plus Hom/Transf-target direct-binder witnesses. Emit no coercion and change no kernel owner or direct grammar. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2742,6 +2743,134 @@ the next dependency-ready read-only audit. It must:
 6. freeze a separate proposal before semantic, text-parity, browser, product,
    or public-promotion work.
 
+## `DIRECT-MIXED-SOURCE-GRADUATE-1F` read-only audit result
+
+The audit confirms the user's architectural invariant. The fundamental
+introduction remains the direct nested binder
+
+```text
+lambda^n k. lambda^f c. lambda^f a. body
+  : Functord C (Functor_catd A B),
+```
+
+not a total-context section followed by curry. D-040 and D-042 remain
+rollback-safe auxiliary constructions and are neither imported nor invoked by
+the direct frontend.
+
+### Demonstrated direct envelope
+
+Read-only TypeScript probes establish all of the following with the current
+final-green implementation:
+
+1. exact bound-variable evaluation and closed-functor eta;
+2. finite contravariant source spines `L_n(...L_1(a))`;
+3. finite covariant target spines `G_m(...G_1(body))`;
+4. simultaneous nonempty source and target spines;
+5. recursively nested positive `Functor_catd` classifiers;
+6. `Hom_catd` and `Transf_catd` families in the target position; and
+7. a source family whose own classifier is a nested `Functor_catd`, followed
+   by a target map into a `Transf_catd` family.
+
+Compilation succeeds without curry, a cast, or external coherence evidence.
+The result is always a whole displayed functor. The active
+`Functor_catd_func`, `comp_cat_fapp0`, and generic `fapp*`/`tapp*` owners
+therefore retain object, inner-arrow, base-arrow, and higher action. The
+frontend does not bind a separate arrow variable: the one `lambda^f a`
+variable varies functorially and the internal owners determine both its
+object and arrow action.
+
+### Classified remaining boundaries
+
+The audit separates three different kinds of non-claim.
+
+**Generic frontend conversion seam.** To form a nested negative classifier
+over `Op K`, the mathematical source family may naturally be based over `K`,
+because its constructor expects `Op(Op K)` and the active kernel computes
+`Op(Op K)` to `K`. The emitted Core and generic checker accept this. Several
+public construction checks nevertheless use raw structural equality and
+reject `K` versus the unreduced syntax `Op(Op K)`. Spelling the base as the
+literal `Op(Op K)` makes the same nested direct term compile. This is not a
+missing categorical construction and must not be repaired by a hard-coded
+`K = Op(Op K)` exception. It is a generic frontend failure to consult the
+already-transferred definitional equality.
+
+**Bounded recursive factorization.** The present body grammar recognizes
+unary source and target application spines. Other recursively meaningful
+surface nodes may need additional factorization cases, but each must first be
+checked against the internal owner required to abstract its object and arrow
+action. A parser case alone is not evidence of categorical coherence.
+
+**Genuine product-distribution gap.** A direct pair body would require the
+displayed-family comparison
+
+```text
+P(Functor_catd A B, Functor_catd A D)
+  ?= Functor_catd A (P(B,D)).
+```
+
+The active TypeScript runtime comparison returns `not-equal` after reducing
+the available product/uncurry rules. `Product_pair_funcd` internally owns
+pairing into the left-hand family and the ordinary kernel computes
+`Functor_cat X (Product_cat B D)` componentwise, but there is no current
+displayed owner transporting that pair into the right-hand mixed classifier.
+Therefore general fibre-pair/contraction bodies are not merely a missing
+recursive switch case. They need a later owner-position design for the
+pointwise product-distribution construction (or another existing construction
+found by a further audit). This is independent of a `Product_catd` naming
+facade and supplies no reason to require mixed curry.
+
+The read-only gate is complete. It does not authorize a product-distribution
+owner, product facade, curry promotion, text syntax, browser change, or a
+claim of unrestricted variance/`:^nd`.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-NESTED-CONVERSION-01 /
+## D-DTTLF-USABILITY-047
+
+Approve the following bounded TypeScript correction and durable graduation
+evidence. This proposal preserves direct nested introduction as fundamental.
+
+1. Add one private category-expression compatibility service in
+   `CoreCategoricalProgram`. It must first use exact structural equality and,
+   only on a miss, call the existing generic LF definitional comparison with
+   the active composed runtime. It must contain no constructor name, opposite
+   special case, proof-rule shortcut, or external oracle.
+2. Use that service only for the four mixed base relationships exposed by the
+   audit: the source base of `mixedDisplayedFunctorFamily`, the source base of
+   `mixedDisplayedTransforFamily`, and the outer/target plus
+   inner/opposite-base checks of `mixedDisplayedFunctorLambda`.
+3. Preserve the original category and family expressions in emitted Core.
+   The service authorizes no cast or coercion; the generic LF checker remains
+   responsible for the final emitted term. Unrelated bases must remain a
+   fail-closed `DISPLAYED_BASE_MISMATCH`.
+4. Add a durable direct-binder positive whose negative input is itself a
+   `Functor_catd` constructed from a family over natural `K`, relying on the
+   existing `Op(Op K) -> K` computation instead of a literal doubled-opposite
+   spelling.
+5. Add durable direct eta/mapped witnesses with `Hom_catd` and `Transf_catd`
+   target families and retain a representative simultaneous nonempty
+   source/target spine. Assert that the compiled result is a checked whole
+   displayed functor, contains no curry/coercion, and retains immutable direct
+   abstraction evidence.
+6. Keep the exact recursive grammar and lowering unchanged. Add no pair,
+   contraction, exchange, arbitrary-DAG, new binder mode, or unrestricted
+   `:^nd` case.
+7. Make no Lambdapi, runtime-transfer, declaration, intrinsic Core,
+   checker-branch, public text, browser, product-facade, curry, bulk-scale, or
+   publication change.
+8. Validate with the focused direct-mixed tests, root typecheck and lint, then
+   one `check:ts` because shared construction behavior changes. Carry forward
+   the final-green Lambdapi evidence because no kernel source or transfer
+   fragment changes. Do not run `check:all`, Lambdapi CI, browser, print, or
+   book gates.
+9. Synchronize the work/decision ledgers and handoff, stage only the bounded
+   TypeScript/tests/documents, and make one local green checkpoint. Do not
+   push, merge, rewrite history, remove worktrees, or clean the unrelated
+   untracked mixed-variance experiment.
+
+This gate deliberately does not solve the product-distribution gap. That
+construction remains separately reviewable after the direct nested
+conversion evidence is green.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -2863,11 +2992,17 @@ evidence; do not repeat unchanged long gates. Never add external naturality or
 coherence evidence, and never make D-040/D-042 a prerequisite for direct
 binder introduction.
 
-Continue next with the read-only `DIRECT-MIXED-SOURCE-GRADUATE-1F` audit.
-Preserve the fundamental form
-`lambda^n k. lambda^f c. lambda^f a. t`; classify remaining direct-expression
-failures before proposing code, and freeze a separate gate before any
-semantic, curry, text, browser, product, or publication change.
+Treat the read-only `DIRECT-MIXED-SOURCE-GRADUATE-1F` audit as complete. It
+confirms nested `Functor_catd`/`Hom_catd`/`Transf_catd` direct terms and
+simultaneous source/target spines, classifies structural `K` versus
+`Op(Op K)` rejection as a generic frontend conversion seam, and classifies
+mixed pointwise pairing as a genuinely missing product-distribution
+construction. Preserve the fundamental form
+`lambda^n k. lambda^f c. lambda^f a. t` and never route it through curry.
+Continue next with the separately frozen
+`DIRECT-MIXED-NESTED-CONVERSION-1F1` / D-DTTLF-USABILITY-047 proposal. Add no
+product-distribution owner, pair case, curry dependency, text/browser change,
+or publication work under that gate.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete

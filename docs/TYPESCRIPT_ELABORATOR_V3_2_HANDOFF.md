@@ -75,9 +75,18 @@
 > not import or invoke D-040/D-042. The one complete TypeScript aggregate
 > found only twelve mechanically stale active-source digest pins; its other
 > 1,221 tests passed and 51 skipped, and the exact affected rerun is green at
-> 81 pass/3 skip. The next dependency-ready row is the read-only
-> `DIRECT-MIXED-SOURCE-GRADUATE-1F` reassessment; it must preserve direct
-> nested binders as fundamental and may not make curry/hybrid a prerequisite.
+> 81 pass/3 skip. The subsequent
+> `DIRECT-MIXED-SOURCE-GRADUATE-1F` read-only reassessment is complete. It
+> confirms direct nested binders across nested `Functor_catd`, `Hom_catd`,
+> and `Transf_catd` classifiers plus simultaneous source/target spines; it
+> found no curry prerequisite. It separates a generic frontend conversion
+> seam (`K` versus the kernel-convertible `Op(Op K)`) from a genuine missing
+> product-distribution construction between
+> `P(Functor_catd A B,Functor_catd A D)` and
+> `Functor_catd A (P(B,D))`. The next dependency-ready row is the bounded
+> TypeScript-only `DIRECT-MIXED-NESTED-CONVERSION-1F1` proposal under
+> D-DTTLF-USABILITY-047. It adds no coercion, kernel owner, pair case, or
+> curry dependency.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
