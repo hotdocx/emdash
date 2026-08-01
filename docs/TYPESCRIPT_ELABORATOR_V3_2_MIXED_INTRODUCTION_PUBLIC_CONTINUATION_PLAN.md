@@ -52,8 +52,11 @@ identified the existing `Unit_prof` full/capped action ladder before any
 active semantic checkpoint. The four-rule experiment was withdrawn
 uncommitted. H-DTTLF-USABILITY-MIXED-ACTION-UNIT-PROF-CORRECTION-01 /
 D-DTTLF-USABILITY-039 below freezes the corrected six-rule, zero-new-owner
-foundation for separate review. No mixed-curry owner is authorized by either
-gate.
+foundation at proposal checkpoint
+`260b2caddf51be266beb5d503ad02b90e640197c`. The separate review recorded
+below approves exactly that correction under the standing unattended
+delegation, with immediate human supersession. No mixed-curry owner is
+authorized by either gate.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -313,7 +316,7 @@ It deliberately avoids:
 | `PUBLIC-HOM-VALIDATE-1B` | final-green; evidence recorded below | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No repeated long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | complete at public checkpoint `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; Pages run `30680155372` successful and live smoke green | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
-| `MIXED-ACTION-FOUNDATION-1A` | D-038 superseded before active checkpoint; corrected D-039 frozen for separate review | completed `MIXED-INTRODUCTION-0A`; D-038 proposal `b91c201ed45e15b65b87cca0d6649b5fb45e1b68`; Unit-prof/full-action probes | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
+| `MIXED-ACTION-FOUNDATION-1A` | corrected D-039 approved; implementation dependency-ready | completed `MIXED-INTRODUCTION-0A`; D-039 proposal `260b2caddf51be266beb5d503ad02b90e640197c`; Unit-prof/full-action probes | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
 | `MIXED-CURRY-1B` | decision-blocked on green corrected `MIXED-ACTION-FOUNDATION-1A` and a separately frozen D-040 gate | measured mixed-curry owner/projection probe | Implement one exact Lambdapi-first mixed-curry functor, its stable displayed-functor discriminator, point/A-arrow/C-arrow/base-arrow projection ladder, and qualified laws. |
 | `MIXED-INTRODUCTION-TS-1C` | blocked on green `MIXED-CURRY-1B` and transfer qualification | active owner/rules and conformance evidence | Transfer the owner mechanically and extend the contextual compiler with one genuinely non-eta mixed body. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
@@ -1018,6 +1021,16 @@ The corrected gate is intentionally larger by two projection rules and
 smaller in conceptual ownership: it adds zero owners and makes the existing
 full/capped `Unit_prof` architecture explicit.
 
+The proposal was checkpointed at
+`260b2caddf51be266beb5d503ad02b90e640197c`. A separate review rechecked the
+active `Unit_prof`/ambient-Hom owner ladder, the full-file six-rule probe, the
+semantic diagonal-restriction comparison and non-conversion, the warning
+delta, the strict LHS audit, and the clean tracked worktree. No immediate
+human correction superseded that isolated checkpoint. Under the user's
+standing unattended delegation, with immediate human supersession, D-039 is
+approved exactly as proposed and active implementation may begin within its
+zero-new-owner boundary.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -1268,3 +1281,14 @@ removal, or unrelated cleanup is authorized.
   no owner, whole-family comparison, coercion, product facade, mixed curry,
   TypeScript/public change, or broad variance claim. D-040 is reserved for a
   later exact mixed-curry proposal after this corrected foundation is green.
+  Its proposal checkpoint is
+  `260b2caddf51be266beb5d503ad02b90e640197c`.
+- **2026-08-01 — D-DTTLF-USABILITY-039 approved exactly as proposed.** A
+  separate review confirmed that the six-rule candidate introduces zero
+  owners, its capped mixed-family route is exactly the existing
+  `Unit_prof Cat_cat` projection, and its two full routes preserve higher
+  action through existing `op` and `Hom_tele_func`. No immediate human
+  correction superseded the isolated proposal. The standing unattended
+  delegation therefore authorizes only the six projections and their focused
+  Lambdapi SOP validation, with immediate human supersession; mixed curry and
+  every TypeScript/public change remain excluded.
