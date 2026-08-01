@@ -87,8 +87,17 @@
 > TypeScript-only `DIRECT-MIXED-NESTED-CONVERSION-1F1` gate under
 > D-DTTLF-USABILITY-047. Its proposal checkpoint
 > `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc` is separately
-> reviewed-approved under the standing unattended delegation. It adds no
-> coercion, kernel owner, pair case, or curry dependency.
+> reviewed-approved under the standing unattended delegation and is now
+> final-green at `4845f44c11914f142be357d115ebdde92a33d039`. One generic
+> structural-fast-path plus active-runtime conversion service owns the four
+> mixed base checks. Natural nested `Functor_catd`/`Transf_catd` sources,
+> Hom/Transf targets, exact eta, and a simultaneous source/target spine are
+> green without a coercion, kernel/runtime owner, grammar change, pair case,
+> or curry dependency. Its focused suite is 8 pass/0 fail; its one required
+> `check:ts` is green at 1,234 pass/51 skip/0 fail out of 1,285 tests. The
+> next dependency-ready row is the read-only
+> `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` owner audit. It must search the active
+> kernel first and freeze a separate gate before any semantic edit.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

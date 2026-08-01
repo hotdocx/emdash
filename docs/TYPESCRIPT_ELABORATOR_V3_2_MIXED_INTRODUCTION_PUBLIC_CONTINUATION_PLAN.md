@@ -431,7 +431,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-SOURCE-ACTION-1E2` | final-green at `a1f7aa5601b55fc4925a6dcefec699fb6038e67a` under D-DTTLF-USABILITY-045 | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; proposal `9c37e5e21c8f2246c11ab92236923ab044e02ca5`; separate review | One active existing-owner rule and one zero-declaration generic transfer return whole `comp_cat_fapp0`; exact scope/family orientation and finite `L(source-argument)` recursion are implemented. Object and arrow action remain generic and iterable; no curry dependency or external coherence evidence is present. |
 | `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | final-green at `a1f7aa5601b55fc4925a6dcefec699fb6038e67a` under D-DTTLF-USABILITY-046 | implemented D-045; proposal `9246adee5c5201d713b7fc2a271121c8380b0b2a`; measured subject-check failure; active opposite-Hom computation | The omitted pre-existing opposite-Hom reversal is transferred before the D-045 source projection. The corrected fragment is zero-declaration and generic: one prerequisite rule plus one new mathematical projection, with no checker case, curry dependency, or external oracle. |
 | `DIRECT-MIXED-SOURCE-GRADUATE-1F` | read-only audit complete; split before graduation | final-green D-045/D-046; direct source/target recursion; user's direct-binder invariant | Nested `Functor_catd`/`Hom_catd`/`Transf_catd` classifiers and simultaneous source/target spines work through the direct binder. The audit found one generic frontend category-conversion seam and one genuinely missing product-distribution construction; it found no curry prerequisite. |
-| `DIRECT-MIXED-NESTED-CONVERSION-1F1` | approved under D-DTTLF-USABILITY-047; implementation dependency-ready | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; proposal `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`; separate review under standing unattended delegation | Replace four mixed-constructor structural base comparisons by one generic fast-path-plus-kernel-conversion service and add durable natural nested-source plus Hom/Transf-target direct-binder witnesses. Emit no coercion and change no kernel owner or direct grammar. |
+| `DIRECT-MIXED-NESTED-CONVERSION-1F1` | final-green at `4845f44c11914f142be357d115ebdde92a33d039` under D-DTTLF-USABILITY-047 | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; proposal `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`; separate review under standing unattended delegation | One generic fast-path-plus-kernel-conversion service now owns four mixed base checks. Natural nested negative `Functor_catd`/`Transf_catd`, Hom/Transf targets, and simultaneous source/target spines are checked without coercion, curry, kernel, runtime, or grammar changes. |
+| `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` | next dependency-ready read-only owner audit | final-green D-047; measured non-conversion between product-of-mixed-functors and mixed-functor-into-product | Search existing active owners first, then determine the minimum internal pointwise product-distribution construction needed for direct `fibrePair`/contraction bodies. Require whole displayed-functor object, arrow, base-arrow, and higher action; authorize no semantic edit during the audit and do not conflate it with the `Product_catd` facade or curry. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2896,6 +2897,54 @@ only the nine numbered D-047 items, with immediate human supersession. Curry,
 pairing, text/browser parity, kernel changes, and broader variance remain
 outside this gate.
 
+### D-DTTLF-USABILITY-047 implementation result
+
+The bounded implementation is final-green at
+`4845f44c11914f142be357d115ebdde92a33d039`.
+
+`CoreCategoricalProgram` now has one private
+`categoryExpressionsDefinitionallyEqual` service. It takes the exact
+structural fast path and otherwise delegates to the generic LF definitional
+comparison under the already-composed active runtime. The four approved mixed
+base relationships call this service. No category, family, or term expression
+is rewritten, wrapped, or coerced; the normal generic LF checker still checks
+the emitted Core.
+
+The direct-binder suite now constructs a negative family
+`Functor_catd(P,Q) : Catd(Op K)` from natural `P : Catd K` and
+`Q : Catd(Op K)`, without spelling `P` over a literal `Op(Op K)`. It repeats
+the same natural presentation through `Transf_catd(P,Q,mu,nu)`, then checks:
+
+```text
+lambda^n k. lambda^f c. lambda^f nested. F[c](nested)
+
+lambda^n k. lambda^f c. lambda^f nested'.
+  G(F[c](L(nested')))
+```
+
+with `Hom_catd` and `Transf_catd` target families. Exact eta returns the
+original closed displayed functor. The mixed mapped witness records one
+source and one target step, compiles to a whole displayed functor, and emits
+generic composition with no `mixed_curry`, cast, or coercion. The existing
+unrelated-base negatives remain green.
+
+Focused validation is green at 8 pass/0 fail. Standalone typecheck and lint
+are green. The one required shared-behavior `check:ts` is green at 1,285
+tests: 1,234 pass, 51 skip, and 0 fail, after workspace validation, typecheck,
+and lint. It took approximately 23.5 minutes; this evidence is carried forward
+and must not be rerun for ledger synchronization. No Lambdapi source or
+transfer fragment changed, so the final-green D-045/D-046 kernel evidence is
+unchanged and was not repeated.
+
+This result qualifies generic finite nesting of the currently exposed mixed
+classifier constructors under the direct binder; it does not make arbitrary
+body syntax coherent. In particular, the measured product-distribution gap
+still blocks a sound general `fibrePair`/contraction factorization. The next
+dependency-ready row is therefore the read-only
+`DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` owner audit. It must search existing
+owners before proposing a new one and must not treat curry or a
+`Product_catd` naming facade as prerequisites.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -3025,11 +3074,19 @@ mixed pointwise pairing as a genuinely missing product-distribution
 construction. Preserve the fundamental form
 `lambda^n k. lambda^f c. lambda^f a. t` and never route it through curry.
 Treat `DIRECT-MIXED-NESTED-CONVERSION-1F1` / D-DTTLF-USABILITY-047 as
-separately reviewed-approved from proposal checkpoint
-`4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc` under the standing unattended
-delegation, and implement only its nine numbered items. Add no
-product-distribution owner, pair case, curry dependency, text/browser change,
-or publication work under that gate.
+final-green at `4845f44c11914f142be357d115ebdde92a33d039`. One generic
+category-expression conversion service fixes four mixed base checks; natural
+nested `Functor_catd`/`Transf_catd` sources, Hom/Transf targets, and a
+simultaneous source/target spine are checked without coercion or curry. Carry
+forward its focused 8-pass suite and its one green 1,285-test `check:ts`; do
+not repeat the long aggregate for unchanged boundaries.
+
+Continue next with the read-only `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`
+owner audit. Search active kernel constructions before proposing a new owner;
+require internal whole-functor object/arrow/base-arrow/higher action; and
+freeze a separate gate before any semantic edit. Do not conflate this
+pointwise distribution question with a `Product_catd` naming facade, curry,
+text/browser work, or publication.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -3048,6 +3105,17 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-047 implementation final-green at
+  `4845f44c11914f142be357d115ebdde92a33d039`.** One generic
+  structural-fast-path plus active-runtime conversion service now owns the
+  four approved mixed base checks. Natural `K` versus `Op(Op K)` nested
+  `Functor_catd` and `Transf_catd` formation, Hom/Transf direct targets, exact
+  eta, and one-source/one-target recursion are green without changing emitted
+  Core, the direct grammar, kernel/runtime owners, or curry isolation. Focused
+  validation is 8 pass/0 fail; the required `check:ts` is green at 1,234
+  pass/51 skip/0 fail out of 1,285 tests. The next row is the read-only
+  `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` owner audit; no pair case or new owner
+  is authorized yet.
 - **2026-08-01 — D-DTTLF-USABILITY-047 approved exactly as proposed.** The
   separately frozen proposal checkpoint is
   `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`. Review confirms that natural
