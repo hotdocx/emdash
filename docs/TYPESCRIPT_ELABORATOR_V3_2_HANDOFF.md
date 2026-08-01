@@ -7,19 +7,22 @@
 > mixed-curry witness are final-green. The user superseded D-041 before its
 > TypeScript implementation: its exact-section-leaf transfer remains
 > historical acquisition evidence, not the recursive binder architecture.
-> `CONTEXTUAL-CURRY-0B` is owner-position complete. The exact hybrid
-> `CONTEXTUAL-CURRY-1A` proposal is frozen and separately reviewed-approved as
-> D-DTTLF-USABILITY-042; its exact Lambdapi implementation is dependency-ready.
+> `CONTEXTUAL-CURRY-0B` is owner-position complete. The exact auxiliary
+> `CONTEXTUAL-CURRY-1A` proposal is separately reviewed-approved as
+> D-DTTLF-USABILITY-042 and its exact Lambdapi implementation is final-green in
+> the current contextual-curry checkpoint.
 > It adds a reusable positive
 > Sigma curry and negative-family curry, selects the stable family normal
 > form, and retains D-040's names, signatures, operation heads, and rules as
 > the checked specialized facade; only the stated transparent family-alias
-> body migrates. The
-> end-user target remains recursive
+> body migrates. This is a rollback-safe auxiliary semantic experiment, not a
+> prerequisite or surface definition of binder introduction. The fundamental end-user
+> target remains direct recursive
 > `lambda^n k. lambda^f c. lambda^f a. t`; a total-context section may be an
-> internal compilation form but is not a required user argument. The
-> completed
-> mixed-mode telescope plan
+> internal compilation form but is not a required user argument. Once this
+> `DIRECT-MIXED-INTRODUCTION-0C` is now dependency-ready and independently
+> audits whether the existing recursive elaborator should retain, bypass, or
+> combine these owners. The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
 > runtime-normalized canonical classifier reification beginning with

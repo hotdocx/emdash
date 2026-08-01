@@ -13417,6 +13417,10 @@ symbol mixed_check_eta : τ (Hom
   (@mix_uncurried_cat mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
   mixed_check_s
   mixed_check_t);
+symbol mixed_check_theta : τ (Hom
+  (@mix_uncurried_cat mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+  mixed_check_s
+  mixed_check_t);
 symbol mixed_check_k : τ (Obj mixed_check_K);
 symbol mixed_check_x : τ (Obj mixed_check_K);
 symbol mixed_check_y : τ (Obj mixed_check_K);
@@ -13457,6 +13461,555 @@ symbol mixed_check_beta : τ (Hom
       mixed_check_K mixed_check_C mixed_check_x mixed_check_y mixed_check_p)
     mixed_check_c)
   mixed_check_c');
+
+// Reusable positive Sigma curry: object, fibre, point, fibre-arrow, and
+// base-arrow projections stay entirely inside the section-action calculus.
+assert [K : Cat] (R D : τ (Catd K))
+  (s : τ (Obj (@Pi_cat
+    (@Sigma_cat K R)
+    (@Sigma_proj1_pullback_catd K R D)))) ⊢
+  @fapp0
+    (@Pi_cat (@Sigma_cat K R) (@Sigma_proj1_pullback_catd K R D))
+    (@Functord_cat K R D)
+    (@sigma_functord_curry_func K R D)
+    s
+  ≡ @sigma_functord_curry_sec K R D s;
+
+assert [K : Cat] (R D : τ (Catd K))
+  (s : τ (Obj (@Pi_cat
+    (@Sigma_cat K R)
+    (@Sigma_proj1_pullback_catd K R D))))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0 K Cat_cat R D k
+    (@sigma_functord_curry_sec K R D s)
+  ≡ @sigma_functord_curry_fibre_func K R D s k;
+
+assert [K : Cat] (R D : τ (Catd K))
+  (s : τ (Obj (@Pi_cat
+    (@Sigma_cat K R)
+    (@Sigma_proj1_pullback_catd K R D))))
+  (k : τ (Obj K)) (r : τ (Obj (Fibre_cat R k))) ⊢
+  @fapp0
+    (Fibre_cat R k)
+    (Fibre_cat D k)
+    (@sigma_functord_curry_fibre_func K R D s k)
+    r
+  ≡ @piapp0
+      (@Sigma_cat K R)
+      (@Sigma_proj1_pullback_catd K R D)
+      s
+      (Struct_sigma k r);
+
+assert [K : Cat] (R D : τ (Catd K))
+  (s : τ (Obj (@Pi_cat
+    (@Sigma_cat K R)
+    (@Sigma_proj1_pullback_catd K R D))))
+  (k : τ (Obj K))
+  (r r' : τ (Obj (Fibre_cat R k)))
+  (alpha : τ (Hom (Fibre_cat R k) r r')) ⊢
+  @fapp1_fapp0
+    (Fibre_cat R k)
+    (Fibre_cat D k)
+    (@sigma_functord_curry_fibre_func K R D s k)
+    r r' alpha
+  ≡ @piapp1_fapp0
+      (@Sigma_cat K R)
+      (@Sigma_proj1_pullback_catd K R D)
+      s
+      (Struct_sigma k r)
+      (Struct_sigma k r')
+      (@sigma_arrow K R k k r r' (@id K k) alpha);
+
+assert [K : Cat] (R D : τ (Catd K))
+  (s : τ (Obj (@Pi_cat
+    (@Sigma_cat K R)
+    (@Sigma_proj1_pullback_catd K R D))))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (r : τ (Obj (Fibre_cat R x))) ⊢
+  @fdapp1_int_cell K R D
+    (@sigma_functord_curry_sec K R D s)
+    x y p r
+  ≡ @piapp1_fapp0
+      (@Sigma_cat K R)
+      (@Sigma_proj1_pullback_catd K R D)
+      s
+      (Struct_sigma x r)
+      (Struct_sigma
+        y
+        (@fapp0
+          (Fibre_cat R x)
+          (Fibre_cat R y)
+          (@catd_transport_func K R x y p)
+          r))
+      (@sigma_transport_arrow K R x y p r);
+
+// Reusable negative-family curry: staged projections expose its internally
+// owned negative, positive, and shared-base actions.
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (X Y : τ (Catd K))
+  (H : τ (Functord
+    (@mix_context_family K A X)
+    (@mix_context_family K A Y))) ⊢
+  @fapp0
+    (@Functord_cat
+      (@mix_neg_total K A)
+      (@mix_context_family K A X)
+      (@mix_context_family K A Y))
+    (@Functord_cat K X (@Functor_catd K A Y))
+    (@neg_sigma_functord_curry_func K A X Y)
+    H
+  ≡ @neg_sigma_functord_curry_funcd K A X Y H;
+
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (X Y : τ (Catd K))
+  (H : τ (Functord
+    (@mix_context_family K A X)
+    (@mix_context_family K A Y)))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0 K Cat_cat X (@Functor_catd K A Y) k
+    (@neg_sigma_functord_curry_funcd K A X Y H)
+  ≡ @neg_sigma_functord_curry_fibre_func K A X Y H k;
+
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (X Y : τ (Catd K))
+  (H : τ (Functord
+    (@mix_context_family K A X)
+    (@mix_context_family K A Y)))
+  (k : τ (Obj K)) (x : τ (Obj (Fibre_cat X k))) ⊢
+  @fapp0
+    (Fibre_cat X k)
+    (Functor_cat (Fibre_cat A k) (Fibre_cat Y k))
+    (@neg_sigma_functord_curry_fibre_func K A X Y H k)
+    x
+  ≡ @neg_sigma_functord_curry_at_func K A X Y H k x;
+
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (X Y : τ (Catd K))
+  (H : τ (Functord
+    (@mix_context_family K A X)
+    (@mix_context_family K A Y)))
+  (k : τ (Obj K)) (x : τ (Obj (Fibre_cat X k)))
+  (a : τ (Obj (Fibre_cat A k))) ⊢
+  @fapp0
+    (Fibre_cat A k)
+    (Fibre_cat Y k)
+    (@neg_sigma_functord_curry_at_func K A X Y H k x)
+    a
+  ≡ @fapp0
+      (Fibre_cat X k)
+      (Fibre_cat Y k)
+      (@tapp0_fapp0
+        (@mix_neg_total K A)
+        Cat_cat
+        (@mix_context_family K A X)
+        (@mix_context_family K A Y)
+        (Struct_sigma k a)
+        H)
+      x;
+
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (X Y : τ (Catd K))
+  (H : τ (Functord
+    (@mix_context_family K A X)
+    (@mix_context_family K A Y)))
+  (k : τ (Obj K)) (x : τ (Obj (Fibre_cat X k)))
+  (a a' : τ (Obj (Fibre_cat A k)))
+  (alpha : τ (Hom (Fibre_cat A k) a a')) ⊢
+  @fapp1_fapp0
+    (Fibre_cat A k)
+    (Fibre_cat Y k)
+    (@neg_sigma_functord_curry_at_func K A X Y H k x)
+    a a' alpha
+  ≡ @fdapp1_int_cell
+      (@mix_neg_total K A)
+      (@mix_context_family K A X)
+      (@mix_context_family K A Y)
+      H
+      (Struct_sigma k a)
+      (Struct_sigma k a')
+      (@mix_neg_arrow K A k k (@id K k) a a' alpha)
+      x;
+
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (X Y : τ (Catd K))
+  (H : τ (Functord
+    (@mix_context_family K A X)
+    (@mix_context_family K A Y)))
+  (k : τ (Obj K)) (x x' : τ (Obj (Fibre_cat X k)))
+  (beta : τ (Hom (Fibre_cat X k) x x'))
+  (a : τ (Obj (Fibre_cat A k))) ⊢
+  @tapp0_fapp0
+    (Fibre_cat A k)
+    (Fibre_cat Y k)
+    _ _ a
+    (@fapp1_fapp0
+      (Fibre_cat X k)
+      (Functor_cat (Fibre_cat A k) (Fibre_cat Y k))
+      (@neg_sigma_functord_curry_fibre_func K A X Y H k)
+      x x' beta)
+  ≡ @fapp1_fapp0
+      (Fibre_cat X k)
+      (Fibre_cat Y k)
+      (@tapp0_fapp0
+        (@mix_neg_total K A)
+        Cat_cat
+        (@mix_context_family K A X)
+        (@mix_context_family K A Y)
+        (Struct_sigma k a)
+        H)
+      x x' beta;
+
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (X Y : τ (Catd K))
+  (H : τ (Functord
+    (@mix_context_family K A X)
+    (@mix_context_family K A Y)))
+  (k k' : τ (Obj K)) (p : τ (Hom K k k'))
+  (x : τ (Obj (Fibre_cat X k)))
+  (a' : τ (Obj (Fibre_cat A k'))) ⊢
+  @tapp0_fapp0
+    (Fibre_cat A k')
+    (Fibre_cat Y k')
+    _ _ a'
+    (@fdapp1_int_cell
+      K X (@Functor_catd K A Y)
+      (@neg_sigma_functord_curry_funcd K A X Y H)
+      k k' p x)
+  ≡ @fdapp1_int_cell
+      (@mix_neg_total K A)
+      (@mix_context_family K A X)
+      (@mix_context_family K A Y)
+      H
+      (Struct_sigma
+        k
+        (@fapp0
+          (Fibre_cat A k')
+          (Fibre_cat A k)
+          (@catd_transport_func (Op_cat K) A k' k p)
+          a'))
+      (Struct_sigma k' a')
+      (@mix_neg_base_arrow K A k k' p a')
+      x;
+
+// Check-only factorization: positive Sigma curry followed by reusable
+// negative-family curry. There is intentionally no active composite owner.
+symbol contextual_factorized_mixed_curry_func_check
+  [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  : τ (Functor
+      (@mix_uncurried_cat K A B C)
+      (@mix_curried_cat K A B C))
+≔ @comp_cat_fapp0
+    (@mix_uncurried_cat K A B C)
+    (@Functord_cat
+      (@mix_neg_total K A)
+      (@mix_context_family K A C)
+      (@mix_context_family K A B))
+    (@mix_curried_cat K A B C)
+    (@neg_sigma_functord_curry_func K A C B)
+    (@sigma_functord_curry_func
+      (@mix_neg_total K A)
+      (@mix_context_family K A C)
+      (@mix_context_family K A B));
+
+// Rejected shortcut: proof-time comparison makes this composition typeable,
+// but it does not turn the stable positive-curry head into runtime section
+// data for D-040.
+symbol contextual_facade_after_positive_func_check
+  [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  : τ (Functor
+      (@mix_uncurried_cat K A B C)
+      (@mix_curried_cat K A B C))
+≔ @comp_cat_fapp0
+    (@mix_uncurried_cat K A B C)
+    (@Functord_cat
+      (@mix_neg_total K A)
+      (@mix_context_family K A C)
+      (@mix_context_family K A B))
+    (@mix_curried_cat K A B C)
+    (@mixed_curry_func K A B C)
+    (@sigma_functord_curry_func
+      (@mix_neg_total K A)
+      (@mix_context_family K A C)
+      (@mix_context_family K A B));
+
+// The reusable factorization and D-040 agree on the selected triple point.
+assert ⊢
+  @fapp0
+    (Fibre_cat mixed_check_A mixed_check_x)
+    (Fibre_cat mixed_check_B mixed_check_x)
+    (@fapp0
+      (Fibre_cat mixed_check_C mixed_check_x)
+      (Functor_cat
+        (Fibre_cat mixed_check_A mixed_check_x)
+        (Fibre_cat mixed_check_B mixed_check_x))
+      (@tapp0_fapp0
+        mixed_check_K
+        Cat_cat
+        mixed_check_C
+        (@Functor_catd mixed_check_K mixed_check_A mixed_check_B)
+        mixed_check_x
+        (@fapp0
+          (@mix_uncurried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@mix_curried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@contextual_factorized_mixed_curry_func_check
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          mixed_check_s))
+      mixed_check_c)
+    mixed_check_a
+  ≡ @fapp0
+      (Fibre_cat mixed_check_A mixed_check_x)
+      (Fibre_cat mixed_check_B mixed_check_x)
+      (@mixed_curry_at_func
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C
+        mixed_check_s mixed_check_x mixed_check_c)
+      mixed_check_a;
+
+// The direct facade-after-positive shortcut is typeable but not a runtime
+// replacement for the reusable negative leg.
+assertnot ⊢
+  @fapp0
+    (Fibre_cat mixed_check_A mixed_check_x)
+    (Fibre_cat mixed_check_B mixed_check_x)
+    (@fapp0
+      (Fibre_cat mixed_check_C mixed_check_x)
+      (Functor_cat
+        (Fibre_cat mixed_check_A mixed_check_x)
+        (Fibre_cat mixed_check_B mixed_check_x))
+      (@tapp0_fapp0
+        mixed_check_K
+        Cat_cat
+        mixed_check_C
+        (@Functor_catd mixed_check_K mixed_check_A mixed_check_B)
+        mixed_check_x
+        (@fapp0
+          (@mix_uncurried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@mix_curried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@contextual_facade_after_positive_func_check
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          mixed_check_s))
+      mixed_check_c)
+    mixed_check_a
+  ≡ @fapp0
+      (Fibre_cat mixed_check_A mixed_check_x)
+      (Fibre_cat mixed_check_B mixed_check_x)
+      (@mixed_curry_at_func
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C
+        mixed_check_s mixed_check_x mixed_check_c)
+      mixed_check_a;
+
+// The ordinary action tower keeps the check-only composite iterable.
+assert ⊢
+  @fapp1_func
+    (@mix_uncurried_cat
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (@mix_curried_cat
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (@contextual_factorized_mixed_curry_func_check
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    mixed_check_s mixed_check_t
+  : τ (Functor
+      (Hom_cat
+        (@mix_uncurried_cat
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        mixed_check_s mixed_check_t)
+      (Hom_cat
+        (@mix_curried_cat
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        (@fapp0
+          (@mix_uncurried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@mix_curried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@contextual_factorized_mixed_curry_func_check
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          mixed_check_s)
+        (@fapp0
+          (@mix_uncurried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@mix_curried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@contextual_factorized_mixed_curry_func_check
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          mixed_check_t)));
+
+assert ⊢
+  @fapp1_func
+    (Hom_cat
+      (@mix_uncurried_cat
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      mixed_check_s mixed_check_t)
+    (Hom_cat
+      (@mix_curried_cat
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      (@fapp0
+        (@mix_uncurried_cat
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        (@mix_curried_cat
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        (@contextual_factorized_mixed_curry_func_check
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        mixed_check_s)
+      (@fapp0
+        (@mix_uncurried_cat
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        (@mix_curried_cat
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        (@contextual_factorized_mixed_curry_func_check
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        mixed_check_t))
+    (@fapp1_func
+      (@mix_uncurried_cat
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      (@mix_curried_cat
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      (@contextual_factorized_mixed_curry_func_check
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      mixed_check_s mixed_check_t)
+    mixed_check_eta mixed_check_theta
+  : τ (Functor
+      (Hom_cat
+        (Hom_cat
+          (@mix_uncurried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          mixed_check_s mixed_check_t)
+        mixed_check_eta mixed_check_theta)
+      (Hom_cat
+        (Hom_cat
+          (@mix_curried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@fapp0
+            (@mix_uncurried_cat
+              mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+            (@mix_curried_cat
+              mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+            (@contextual_factorized_mixed_curry_func_check
+              mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+            mixed_check_s)
+          (@fapp0
+            (@mix_uncurried_cat
+              mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+            (@mix_curried_cat
+              mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+            (@contextual_factorized_mixed_curry_func_check
+              mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+            mixed_check_t))
+        (@fapp1_fapp0
+          (@mix_uncurried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@mix_curried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@contextual_factorized_mixed_curry_func_check
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          mixed_check_s mixed_check_t mixed_check_eta)
+        (@fapp1_fapp0
+          (@mix_uncurried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@mix_curried_cat
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          (@contextual_factorized_mixed_curry_func_check
+            mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+          mixed_check_s mixed_check_t mixed_check_theta)));
+
+// The factorized and specialized presentations agree on negative-A action.
+assert ⊢
+  @fapp1_fapp0
+    (Fibre_cat mixed_check_A mixed_check_x)
+    (Fibre_cat mixed_check_B mixed_check_x)
+    (@neg_sigma_functord_curry_at_func
+      mixed_check_K mixed_check_A mixed_check_C mixed_check_B
+      (@sigma_functord_curry_sec
+        (@mix_neg_total mixed_check_K mixed_check_A)
+        (@mix_context_family mixed_check_K mixed_check_A mixed_check_C)
+        (@mix_context_family mixed_check_K mixed_check_A mixed_check_B)
+        mixed_check_s)
+      mixed_check_x mixed_check_c)
+    mixed_check_a mixed_check_a_same mixed_check_alpha_same
+  ≡ @fapp1_fapp0
+      (Fibre_cat mixed_check_A mixed_check_x)
+      (Fibre_cat mixed_check_B mixed_check_x)
+      (@mixed_curry_at_func
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C
+        mixed_check_s mixed_check_x mixed_check_c)
+      mixed_check_a mixed_check_a_same mixed_check_alpha_same;
+
+// Positive-C action retains two deliberate identity presentations: whole
+// negative-total identity for the reusable basis, structured mixed identity
+// for D-040. Do not erase this measured non-conversion globally.
+assertnot ⊢
+  @tapp0_fapp0
+    (Fibre_cat mixed_check_A mixed_check_x)
+    (Fibre_cat mixed_check_B mixed_check_x)
+    _ _ mixed_check_a
+    (@fapp1_fapp0
+      (Fibre_cat mixed_check_C mixed_check_x)
+      (Functor_cat
+        (Fibre_cat mixed_check_A mixed_check_x)
+        (Fibre_cat mixed_check_B mixed_check_x))
+      (@neg_sigma_functord_curry_fibre_func
+        mixed_check_K mixed_check_A mixed_check_C mixed_check_B
+        (@sigma_functord_curry_sec
+          (@mix_neg_total mixed_check_K mixed_check_A)
+          (@mix_context_family mixed_check_K mixed_check_A mixed_check_C)
+          (@mix_context_family mixed_check_K mixed_check_A mixed_check_B)
+          mixed_check_s)
+        mixed_check_x)
+      mixed_check_c mixed_check_c_same mixed_check_beta_same)
+  ≡ @tapp0_fapp0
+      (Fibre_cat mixed_check_A mixed_check_x)
+      (Fibre_cat mixed_check_B mixed_check_x)
+      _ _ mixed_check_a
+      (@fapp1_fapp0
+        (Fibre_cat mixed_check_C mixed_check_x)
+        (Functor_cat
+          (Fibre_cat mixed_check_A mixed_check_x)
+          (Fibre_cat mixed_check_B mixed_check_x))
+        (@mixed_curry_fibre_func
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C
+          mixed_check_s mixed_check_x)
+        mixed_check_c mixed_check_c_same mixed_check_beta_same);
+
+// Shared-base action agrees at the selected transported negative endpoint.
+assert ⊢
+  @tapp0_fapp0
+    (Fibre_cat mixed_check_A mixed_check_y)
+    (Fibre_cat mixed_check_B mixed_check_y)
+    _ _ mixed_check_a'
+    (@fdapp1_int_cell
+      mixed_check_K
+      mixed_check_C
+      (@Functor_catd mixed_check_K mixed_check_A mixed_check_B)
+      (@neg_sigma_functord_curry_funcd
+        mixed_check_K mixed_check_A mixed_check_C mixed_check_B
+        (@sigma_functord_curry_sec
+          (@mix_neg_total mixed_check_K mixed_check_A)
+          (@mix_context_family mixed_check_K mixed_check_A mixed_check_C)
+          (@mix_context_family mixed_check_K mixed_check_A mixed_check_B)
+          mixed_check_s))
+      mixed_check_x mixed_check_y mixed_check_p mixed_check_c)
+  ≡ @tapp0_fapp0
+      (Fibre_cat mixed_check_A mixed_check_y)
+      (Fibre_cat mixed_check_B mixed_check_y)
+      _ _ mixed_check_a'
+      (@fdapp1_int_cell
+        mixed_check_K
+        mixed_check_C
+        (@Functor_catd mixed_check_K mixed_check_A mixed_check_B)
+        (@mixed_curry_funcd
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C
+          mixed_check_s)
+        mixed_check_x mixed_check_y mixed_check_p mixed_check_c);
+
+// The selected stable family normal form retains the original B fibre.
+assert ⊢
+  @Fibre_cat
+    (@mix_context_cat mixed_check_K mixed_check_A mixed_check_C)
+    (@mix_uncurried_family
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (Struct_sigma
+      (Struct_sigma mixed_check_x mixed_check_a)
+      mixed_check_c)
+  ≡ @Fibre_cat mixed_check_K mixed_check_B mixed_check_x;
 
 // The negative and positive totals recover one shared base arrow internally.
 assert ⊢

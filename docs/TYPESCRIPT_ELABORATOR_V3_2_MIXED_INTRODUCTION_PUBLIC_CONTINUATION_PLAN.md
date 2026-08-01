@@ -99,7 +99,8 @@ from that gate has been retained.
 
 `CONTEXTUAL-CURRY-0B` is now owner-position complete. It treats D-040 as a
 final-green specialized witness and stable facade, not as discarded work and
-not as the whole recursive abstraction architecture. The selected hybrid uses
+not as the whole recursive abstraction architecture. The bounded auxiliary
+experiment uses
 an opaque semantic identity in the existing `Pi(Sigma,-)`/`Functord`
 comparison for positive Sigma curry and a separately formed negative-Sigma
 displayed curry for the variance-sensitive step. Their composition computes
@@ -107,10 +108,12 @@ the same `k/c/a` point as D-040 and retains generic full/next-Hom action. The
 stable Sigma-projection-pullback family presentation is selected explicitly.
 The exact bounded promotion is frozen below as
 H-DTTLF-USABILITY-CONTEXTUAL-CURRY-01 / D-DTTLF-USABILITY-042; decision and
-implementation remain separate. Its corrected immutable proposal checkpoint
+implementation were kept separate. Its corrected immutable proposal checkpoint
 is `2f54eef57d2cfa9a454909b5d8adc6858ecdb30c`; the separate review recorded
 below approves exactly that gate under the standing unattended delegation,
-with immediate human supersession. Active implementation is dependency-ready.
+with immediate human supersession. The exact implementation is final-green in
+the current contextual-curry checkpoint and remains auxiliary to direct binder
+introduction.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -373,9 +376,10 @@ It deliberately avoids:
 | `MIXED-ACTION-FOUNDATION-1A` | final-green at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137` | completed `MIXED-INTRODUCTION-0A`; approved D-039; Unit-prof/full-action probes and active-kernel CI | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
 | `MIXED-CURRY-1B` | final-green at `bed022fdab970109163da8415726a5bcc1ab5a89` | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; approved D-040; exact owner-position and active CI evidence | Exactly one Lambdapi-first mixed-curry operation package is active: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. It adds no Hom-action duplicate and leaves `Unit_prof` unchanged. |
 | `MIXED-INTRODUCTION-TS-1C` | D-041 approved historically, then human-superseded before implementation; paused | final-green `MIXED-CURRY-1B` at `bed022fdab970109163da8415726a5bcc1ab5a89`; D-041 proposal `249895de44c005dd64a00bbca13f5d7fb6b1097c`; later contextual-binder clarification | Preserve the measured transfer closure, but do not implement its exact-section-leaf frontend as the claimed binder architecture. Re-audit it only after the reusable contextual curry basis is selected. |
-| `CONTEXTUAL-CURRY-0B` | complete; ignored owner-position candidate quiet-green, warning-measured, and strict-audit clean | final-green D-039/D-040; user clarification on direct recursive binders and hybrid retention | Surface syntax is separated from total-context section semantics. The audit qualifies positive Sigma curry, negative-family curry, their factorized point/action route, the stable family normal form, generic next-Hom formation, and the exact positive-identity normal-form seam. |
-| `CONTEXTUAL-CURRY-1A` | reviewed-approved under D-DTTLF-USABILITY-042; active implementation dependency-ready | completed `CONTEXTUAL-CURRY-0B`; corrected proposal `2f54eef57d2cfa9a454909b5d8adc6858ecdb30c` | Promote exactly the measured eight-declaration/twelve-rule reusable basis and one existing alias-body migration. Retain D-040's names, signatures, operation heads, and rules as a checked specialized facade; add no factorized primitive, broad identity collapse, TypeScript, or unrestricted-variance claim. |
-| `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative recursive-binder and full-action evidence | `CONTEXTUAL-CURRY-1A`; corrected TypeScript successor to D-041 | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
+| `CONTEXTUAL-CURRY-0B` | complete; ignored owner-position candidate quiet-green, warning-measured, and strict-audit clean | final-green D-039/D-040; user clarification on direct recursive binders and rollback-safe auxiliary retention | Surface syntax is separated from total-context section semantics. The audit qualifies positive Sigma curry, negative-family curry, their factorized point/action route, the stable family normal form, generic next-Hom formation, and the exact positive-identity normal-form seam. |
+| `CONTEXTUAL-CURRY-1A` | final-green in the current D-042 implementation checkpoint | completed `CONTEXTUAL-CURRY-0B`; corrected proposal `2f54eef57d2cfa9a454909b5d8adc6858ecdb30c`; separate review | Exactly eight declarations, twelve rules, one existing alias-body migration, and twenty durable checks are active. D-040 remains the checked specialized facade. This is rollback-safe auxiliary evidence, not a direct-binder prerequisite or surface API. |
+| `DIRECT-MIXED-INTRODUCTION-0C` | dependency-ready read-only architecture audit; independent of whether D-042 is retained | final-green D-040 and auxiliary D-042; current recursive contextual elaborator; user's direct-introduction clarification | Audit the fundamental direct recursive introduction `lambda^n k. lambda^f c. lambda^f a. t` without assuming a surface curry API or making the D-042 package a prerequisite. Existing total-section and curry owners are optional internal routes to compare, not the required architecture. |
+| `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative direct recursive-binder and full-action evidence | corrected TypeScript successor to the direct-introduction audit | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -1725,7 +1729,7 @@ beta must normalize.
 ### H-DTTLF-USABILITY-CONTEXTUAL-CURRY-01 /
 ### D-DTTLF-USABILITY-042
 
-Approve exactly this bounded Lambdapi-first hybrid package:
+Approve exactly this bounded Lambdapi-first auxiliary package:
 
 1. Immediately before the retained D-040 mixed package, add the general
    positive Sigma curry
@@ -1823,14 +1827,49 @@ Approve exactly this bounded Lambdapi-first hybrid package:
    action, concrete new higher beta, TypeScript, parser, browser, publication,
    unrestricted variance, or metatheory claim.
 
-This gate supplies the reusable semantic operations needed by a recursive
-surface compiler; it does not itself claim that compiler. After it is
-implemented and checkpointed, freeze a separate corrected TypeScript gate. It
-must recursively elaborate supported bodies under scoped `k/c/a` tokens. It
-may retain `mixedSectionApplication` as one leaf and may use a total-context
-section as compiler output, but neither may be presented as the entire binder
-algorithm. String syntax, browser/public promotion, unrestricted body syntax,
-and variance graduation remain later gates.
+This gate supplies reusable semantic operations that a recursive surface
+compiler may use; it is neither necessary to, nor the fundamental definition
+of, direct binder introduction. After this rollback-safe side experiment is
+implemented and checkpointed, `DIRECT-MIXED-INTRODUCTION-0C` must independently
+audit the fundamental scoped introduction
+
+```text
+lambda^n k. lambda^f c. lambda^f a. t
+  : Functord_cat C (Functor_catd A B).
+```
+
+That audit must begin from the existing recursive contextual elaborator and
+compare all measured internal routes: direct contextual lowering, a
+compiler-generated total-context section, the auxiliary D-042 owners, or a
+combination of them. It must not assume that the direct binder calls or exposes
+a curry operation. `mixedSectionApplication` may remain one leaf and a
+total-context section may remain one internal compilation form, but neither is
+the whole binder algorithm or a required user argument. String syntax,
+browser/public promotion, unrestricted body syntax, and variance graduation
+remain later gates.
+
+### D-042 implementation result
+
+The exact approved package is final-green in the current implementation
+checkpoint:
+
+- the active kernel delta is exactly eight declarations, twelve rules, and the
+  one authorized `mix_uncurried_family` transparent-body migration;
+- the diagnostics add twenty checks, taking the catalog from 1,749 to 1,769
+  checks and the mixed-curry section from 14 to 34;
+- the quiet kernel/check target, warning summary, strict LHS audit, TOC,
+  catalog, and health snapshot are green;
+- the warning inventory is 1,079 unjoinable critical pairs and 159 replaceable
+  pattern variables, the measured `+7/+0` classified delta;
+- the strict audit reports zero unreviewed clauses, with 53 annotated slots in
+  33 intentional clauses; and
+- one complete `make ci` passes all 41 Lambdapi files/examples, 39 repository
+  script tests, document/source checks, and catalog freshness.
+
+No TypeScript, parser, browser, public API, external coherence evidence,
+factorized primitive, broad identity collapse, or unrestricted-variance claim
+was added. This evidence closes only the auxiliary experiment. The next live
+row is the independent `DIRECT-MIXED-INTRODUCTION-0C` audit.
 
 ## Validation And Checkpoint Policy
 
@@ -1906,15 +1945,21 @@ H-DTTLF-USABILITY-CONTEXTUAL-CURRY-01 / D-DTTLF-USABILITY-042, separately
 reviewed-approved at corrected proposal checkpoint
 `2f54eef57d2cfa9a454909b5d8adc6858ecdb30c`. Implement only that exact active
 kernel/check package and nested-SOP validation.
-The proposed hybrid keeps a general opaque positive Sigma curry, a reusable
-negative-Sigma displayed curry, their ordinary factorized composition, and
-the retained D-040 specialized facade.
-Keep the end-user objective as recursive
+This package is a bounded, rollback-safe auxiliary semantic experiment: it
+keeps a general opaque positive Sigma curry, a reusable negative-Sigma
+displayed curry, their ordinary factorized composition, and the retained
+D-040 specialized facade. It is not a prerequisite, surface API, or definition
+of binder introduction. Keep the end-user objective as direct recursive
 `lambda^n k. lambda^f c. lambda^f a. t`; a section over the total context may
 be an internal compilation form but is not a required user argument. Review
 the frozen `CONTEXTUAL-CURRY-1A` gate separately before active semantic edits;
 do not broaden its representative full-action/next-Hom consumer or canonical
 family normal-form decision.
+After the bounded D-042 implementation settles, continue with
+`DIRECT-MIXED-INTRODUCTION-0C`: independently audit the existing recursive
+contextual elaborator and do not assume that a direct binder must call or
+expose either curry owner. The corrected consumer may retain, bypass, or
+combine the auxiliary owners according to measured recursive behavior.
 Preserve the measured two-sided context,
 negative-A/positive-C polarity, canonical Hom classifier seam, stable
 `Functor_catd` head, Sigma/pullback non-collapse, and the existing
@@ -1939,6 +1984,25 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-042 implementation final-green as an
+  auxiliary experiment.** The active delta is the approved eight declarations,
+  twelve rules, one transparent family-body migration, and twenty checks.
+  Quiet checks, the measured 1,079/159 warning inventory, strict 0/53/33 LHS
+  audit, fresh 1,769-check catalog and health report, source TOC, and one
+  complete 41-file CI are green. D-040 remains intact apart from the approved
+  family-alias body migration. This checkpoint neither makes D-042 a binder
+  prerequisite nor selects a surface curry/hybrid architecture;
+  `DIRECT-MIXED-INTRODUCTION-0C` is the next independent row.
+- **2026-08-01 — direct introduction remains fundamental; hybrid is only an
+  optional implementation experiment.** The user's mention of a hybrid was a
+  possibility, not a requirement. The primary end-user construction is direct
+  recursive
+  `lambda^n k. lambda^f c. lambda^f a. t : Functord_cat C (Functor_catd A B)`
+  and must not require an explicit curry or whole-context section argument.
+  The already approved D-042 package may be completed and checkpointed as
+  rollback-safe semantic evidence. Its successor audit may retain, bypass, or
+  backtrack that package according to the independently measured recursive
+  direct-introduction algorithm.
 - **2026-08-01 — successor ordering approved.** The user agrees to a small
   public/browser synchronization followed by qualified mixed
   curry/introduction with staged variance. Product-facade work remains
@@ -2200,12 +2264,14 @@ removal, or unrelated cleanup is authorized.
   exercises the existing comparison. These are ignored bounded probes, not
   owner-position promotion evidence; the tracked semantic tree remains
   unchanged.
-- **2026-08-01 — the user selected hybrid retention.** The reusable
-  contextual basis must not discard the final-green D-040 work. A specialized
-  facade, a compositional basis, and internal total-section lowering may
-  coexist when their exact computational boundaries are explicit.
+- **2026-08-01 — D-040 retention did not select a binder architecture.** The
+  reusable contextual experiment must not silently discard final-green D-040.
+  A specialized facade, a compositional basis, and internal total-section
+  lowering may coexist when their exact computational boundaries are explicit;
+  this coexistence is rollback-safe evidence, not a requirement that direct
+  recursive binders expose or depend on a hybrid/curry API.
 - **2026-08-01 — `CONTEXTUAL-CURRY-0B` owner-position audit complete.** The
-  eight-declaration/twelve-rule hybrid candidate is quiet-green, has a clean
+  eight-declaration/twelve-rule auxiliary candidate is quiet-green, has a clean
   strict LHS audit, and reports 1,079/159 warnings (`+7/+0`). Stable family
   fibre/transport, factorized point, negative/base action agreement, full
   action, next-Hom formation, and variance negatives pass. The positive
