@@ -1160,7 +1160,7 @@ describe('SCALE-0D reviewed ten-rule runtime migration', () => {
         assert.equal(
             CORE_DIRECTED_CONTINUATION_RUNTIME_TRANSFER_MODULE
                 .sourceSha256,
-            'sha256:c09f503aff20cb3f9f5b59fcb1dbb4339bdfa853b48931ebd0dcce9b827ef29f'
+            'sha256:4d5791fc95c158308b87c970b622da35c2dd0ec64bd32b7f535679a95eba195a'
         );
         assert.equal(
             CORE_DIRECTED_CONTINUATION_RUNTIME_TRANSFER_MODULE

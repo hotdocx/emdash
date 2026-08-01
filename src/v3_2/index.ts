@@ -113,6 +113,7 @@ export * from './categorical_mixed_mode_transfer';
 export * from './categorical_mixed_action_transfer';
 export * from './categorical_direct_mixed_introduction_transfer';
 export * from './categorical_direct_mixed_source_action_transfer';
+export * from './categorical_direct_mixed_product_distribution_transfer';
 export * from './product_review_demo';
 export * from './categorical_text_parity_audit';
 export * from './categorical_text_structural_audit';

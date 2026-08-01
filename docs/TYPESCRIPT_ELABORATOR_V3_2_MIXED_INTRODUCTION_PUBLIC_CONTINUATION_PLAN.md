@@ -156,9 +156,24 @@ are now final-green at
 projection returns the whole source composite; one pre-existing opposite-Hom
 rule completes its zero-declaration TypeScript transfer. The direct binder
 supports finite source recursion followed by finite target recursion without
-importing or invoking either curry package. The next dependency-ready work is
-the read-only `DIRECT-MIXED-SOURCE-GRADUATE-1F` reassessment below, not a
-mixed-curry promotion.
+importing or invoking either curry package. That made the then-next
+dependency-ready work the read-only `DIRECT-MIXED-SOURCE-GRADUATE-1F`
+reassessment below, not a mixed-curry promotion.
+
+That reassessment and its D-047 conversion correction are now complete. The
+subsequent D-DTTLF-USABILITY-048 implementation is final-green in the
+validated goal worktree. The active kernel adds exactly one
+`Functor_catd_product_funcd` owner with its point/full/capped projections at
+kernel checkpoint `d9f298ce2c3194adda8f68bd4654e484b33bfac4`. The generic
+TypeScript transfer adds one declaration and three runtime rules, while the
+existing direct binder recursively factors `typed-pair` bodies through
+existing `Product_pair_funcd` and the new distributor. The fundamental
+meaning remains
+`lambda^n k. lambda^f c. lambda^f a. t : Functord_cat C (Functor_catd A B)`;
+no curry, total-context section, external coherence witness, cast, or second
+AST is involved. A generated depth-seven pair tree is green, so the
+implementation contains no fixed pair-depth table. The next row is a
+read-only graduation reassessment before any further semantic gate.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -190,8 +205,9 @@ different stages:
 
 1. expose the already-checked qualified recursive Hom capability honestly in
    the existing public browser reviewer and README; then
-2. make variance-correct mixed curry/introduction the next substantive
-   mathematical and TypeScript usability objective.
+2. make variance-correct direct mixed introduction the next substantive
+   mathematical and TypeScript usability objective, retaining curry packages
+   only as separately qualified auxiliary constructions.
 
 The first stage is product synchronization, not new mathematics. The second
 stage is new mathematical capability and must begin Lambdapi-first.
@@ -433,7 +449,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-SOURCE-GRADUATE-1F` | read-only audit complete; split before graduation | final-green D-045/D-046; direct source/target recursion; user's direct-binder invariant | Nested `Functor_catd`/`Hom_catd`/`Transf_catd` classifiers and simultaneous source/target spines work through the direct binder. The audit found one generic frontend category-conversion seam and one genuinely missing product-distribution construction; it found no curry prerequisite. |
 | `DIRECT-MIXED-NESTED-CONVERSION-1F1` | final-green at `4845f44c11914f142be357d115ebdde92a33d039` under D-DTTLF-USABILITY-047 | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; proposal `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`; separate review under standing unattended delegation | One generic fast-path-plus-kernel-conversion service now owns four mixed base checks. Natural nested negative `Functor_catd`/`Transf_catd`, Hom/Transf targets, and simultaneous source/target spines are checked without coercion, curry, kernel, runtime, or grammar changes. |
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` | read-only audit complete; one-owner direct-binder continuation selected | final-green D-047; measured non-conversion between product-of-mixed-functors and mixed-functor-into-product; active product and mixed-action owners | No existing active owner supplies the required global comparison. One `Functor_catd_product_funcd` distributor with point/full/capped projections is owner-position, quiet-green, strict-audit clean, and zero-warning-delta; its direct pair consumer computes on objects and inner arrows and retains internal base/higher action. No curry or `Product_catd` facade is involved. |
-| `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | approved exactly as proposed under D-DTTLF-USABILITY-048; implementation dependency-ready | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Promote exactly one distributor and three projection rules, transfer them generically, and extend the existing direct factorization tree with recursive `typed-pair`. Lower branches recursively, combine them with existing `Product_pair_funcd`, then compose the distributor. Preserve the direct binder as fundamental and retain all curry, facade, text/browser, and unrestricted-variance nonclaims. |
+| `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | implemented and final-green under D-DTTLF-USABILITY-048; kernel checkpoint `d9f298ce2c3194adda8f68bd4654e484b33bfac4`; coherent TypeScript checkpoint pending the immediately following ledger-only record | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Exactly one distributor and three projection rules are active and generically transferred. The existing direct factorization tree recursively lowers `typed-pair`, combines branches with existing `Product_pair_funcd`, and composes the distributor. Direct introduction remains fundamental; curry, facade, text/browser, and unrestricted-variance claims remain excluded. |
+| `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | dependency-ready read-only reassessment; no semantic edit authorized | final-green D-048 and the user's renewed direct-binder invariant | Reassess the now-demonstrated recursive leaf/target/source/pair grammar against arbitrary meaningful nested `Functor_catd`/`Hom_catd`/`Transf_catd` expressions. Distinguish a measured remaining direct-introduction or variance gap from optional curry/product-facade work, and freeze any next semantic gate separately. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3150,9 +3167,10 @@ product-facade, curry, text/browser, or arbitrary-variance objectives.
 Proposal checkpoint
 `799f3219d9af58ad3b949ec212ef46748a0d7e2f` is approved exactly as frozen.
 The checkpoint is documentation-only and descends from final-green D-047.
-The active kernel still has no `Functor_catd_product_funcd`; the ignored
-owner-position candidate has exactly one such declaration and exactly the
-three proposed point/full/capped rules. Its bounded full check, explicit
+At review time the active kernel still had no
+`Functor_catd_product_funcd`; the ignored owner-position candidate had exactly
+one such declaration and exactly the three proposed point/full/capped rules.
+Its bounded full check, explicit
 object/inner-arrow/direct-consumer checks, genuine higher-cell consumer,
 1,238-warning zero-delta comparison, and strict zero-unreviewed-clause audit
 are green.
@@ -3170,6 +3188,62 @@ supersession, implementation is authorized only for the twelve numbered
 D-048 items. The product facade, inverse/global equality, curry packages,
 text/browser/public work, unrestricted variance, and all remote Git effects
 remain excluded.
+
+## D-DTTLF-USABILITY-048 Implementation Evidence
+
+The bounded implementation preserves the direct-binder architecture rather
+than introducing a curry-based or hybrid prerequisite:
+
+- the active Lambdapi kernel contains exactly one new injective owner,
+  `Functor_catd_product_funcd`, and exactly its three point/full/capped
+  projections;
+- the owner and its durable object, inner-arrow, base-arrow, higher-cell,
+  direct-consumer, and non-collapse checks are checkpointed at
+  `d9f298ce2c3194adda8f68bd4654e484b33bfac4`;
+- the nested kernel workflow is green once: bounded owner-position evidence,
+  `make check`, unchanged 1,079 critical-pair and 159 replaceable-symbol
+  warning inventories, strict LHS audit, synchronized catalog/health, and CI
+  across 41 files. These gates are carried forward and must not be repeated
+  for ledger synchronization;
+- the TypeScript declaration/runtime transfer uses the generic LF engines for
+  one declaration and three rules. Every rule has
+  `typescript-checked` subject validation, with zero intrinsic Core owners,
+  owner-specific checker/evaluator branches, external oracle, or external
+  coherence evidence;
+- the existing `mixedDisplayedFunctorLambda` entry remains the direct form of
+  `lambda^n k. lambda^f c. lambda^f a. body`. Its recursive representation is
+  now `leaf | target-map | pair`; each leaf retains the existing finite
+  contravariant source recursion, and pair branches recurse through the same
+  algorithm rather than a duplicated case table;
+- a pair first combines two already-internal whole displayed functors through
+  existing `Product_pair_funcd`, then composes
+  `Functor_catd_product_funcd`. It never asks the user for a total-context
+  section, curry package, pointwise function, naturality square, or equality
+  witness;
+- the occurrence accounting is derived from recursive leaf/action metrics.
+  Distinct branches, repeated-leaf contraction, a target map after pairing,
+  source/target maps inside branches, and a generated depth-seven pair tree
+  all elaborate and check; and
+- the generic checker accepts the resulting whole displayed functor against
+  the requested surface classifier using active definitional conversion. In
+  particular, the serialized inferred `Hom(Catd K,C,T)` presentation and the
+  serialized expected `Obj(Functord C T)` presentation need not be textually
+  identical. No frontend switch hard-codes that conversion and no coercion is
+  emitted.
+
+Focused validation is green at 2/2 generic distributor-transfer tests, 10/10
+direct-binder tests, and 4/4 unchanged source-action tests. Root typecheck and
+lint are green. The one required `check:ts` is green at 1,238 pass, 51 skip,
+0 fail out of 1,289 tests across 197 suites. It ran once; documentation-only
+synchronization does not justify another aggregate.
+
+This proves recursive direct product-valued bodies for the qualified grammar,
+not unrestricted categorical lambda synthesis. General variance,
+unrestricted `:^nd`, arbitrary dependency DAGs, inverse/global product-family
+comparison, `Product_catd` facade work, curry promotion, text/browser parity,
+and publication remain separate. The next dependency-ready action is the
+read-only `DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment; any semantic
+continuation needs its own frozen and reviewed gate.
 
 ## Validation And Checkpoint Policy
 
@@ -3308,17 +3382,30 @@ forward its focused 8-pass suite and its one green 1,285-test `check:ts`; do
 not repeat the long aggregate for unchanged boundaries.
 
 Treat `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` as read-only complete. The active
-kernel has product pairing and mixed action but no global map from
+kernel previously had product pairing and mixed action but no global map from
 `P(Functor_catd A B,Functor_catd A C)` to
 `Functor_catd A P(B,C)`. The selected one-owner/three-rule distributor is
 owner-position quiet-green, strict-audit clean, and zero-warning-delta; its
 direct pair consumer computes on objects and inner arrows and retains
 internal base/higher action. Treat D-DTTLF-USABILITY-048 as a frozen exact
 proposal at `799f3219d9af58ad3b949ec212ef46748a0d7e2f`, separately
-reviewed-approved under the standing unattended delegation. Continue with its
-exact one-owner/three-rule generic transfer and recursive `typed-pair`
-implementation. It is not curry, a `Product_catd` facade, text/browser work,
-or publication.
+reviewed-approved under the standing unattended delegation and now
+implemented/final-green. Its active kernel checkpoint is
+`d9f298ce2c3194adda8f68bd4654e484b33bfac4`; the coherent TypeScript
+checkpoint is recorded by the immediately following ledger-only commit. The
+generic transfer contains one declaration and three TypeScript-checked rules;
+the direct factorer recursively lowers distinct, contracted, mapped, and
+depth-seven `typed-pair` trees through existing `Product_pair_funcd` plus the
+distributor. The binder remains fundamentally direct and neither invokes nor
+falls back to curry. Carry forward the single kernel CI and 1,289-test
+TypeScript aggregate; do not repeat either for reassurance.
+
+The next dependency-ready row is the read-only
+`DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment. Measure the remaining direct
+introduction/variance envelope against nested `Functor_catd`, `Hom_catd`, and
+`Transf_catd`; distinguish any concrete gap from optional curry or product
+facade work. Make no semantic edit until an exact successor gate is frozen
+and separately reviewed.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -3337,6 +3424,29 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-048 implementation final-green; coherent
+  TypeScript checkpoint pending the immediately following ledger-only
+  record.** Kernel checkpoint
+  `d9f298ce2c3194adda8f68bd4654e484b33bfac4` promotes exactly one
+  `Functor_catd_product_funcd` owner and three point/full/capped rules, with
+  the required checks, unchanged 1,079/159 warnings, strict audit,
+  catalog/health synchronization, and one green 41-file CI. The generic
+  TypeScript transfer checks one declaration and three rules without an
+  intrinsic owner or external oracle. The unchanged public binder recursively
+  handles distinct pairs, contraction, maps outside/inside pair branches, and
+  a generated depth-seven tree through `Product_pair_funcd` plus the
+  distributor. Focused transfer/direct/source-action suites are 2/2, 10/10,
+  and 4/4; typecheck/lint are green; the single `check:ts` is 1,238 pass,
+  51 skip, 0 fail out of 1,289 tests. Curry remains auxiliary and unused.
+- **2026-08-01 — direct introduction reconfirmed as the architecture
+  invariant.** The user's possible “hybrid” description was an idea, not a
+  requirement. The fundamental construction is
+  `lambda^n k. lambda^f c. lambda^f a. t : Functord_cat C (Functor_catd A B)`
+  and requires no curry. D-048 is retained because recursive product-valued
+  bodies need an internal distributor after pairing already-compiled direct
+  branches; it is not an alternative binder-introduction mechanism. The next
+  action is therefore a read-only graduation reassessment, not curry
+  promotion.
 - **2026-08-01 — D-DTTLF-USABILITY-048 approved exactly as proposed.** The
   separate review found proposal checkpoint
   `799f3219d9af58ad3b949ec212ef46748a0d7e2f` clean and documentation-only,

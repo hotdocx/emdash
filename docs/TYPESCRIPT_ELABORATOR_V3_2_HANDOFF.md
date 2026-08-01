@@ -80,13 +80,13 @@
 > confirms direct nested binders across nested `Functor_catd`, `Hom_catd`,
 > and `Transf_catd` classifiers plus simultaneous source/target spines; it
 > found no curry prerequisite. It separates a generic frontend conversion
-> seam (`K` versus the kernel-convertible `Op(Op K)`) from a genuine missing
+> seam (`K` versus the kernel-convertible `Op(Op K)`) from the then-missing
 > product-distribution construction between
 > `P(Functor_catd A B,Functor_catd A D)` and
-> `Functor_catd A (P(B,D))`. The next dependency-ready row is the bounded
-> TypeScript-only `DIRECT-MIXED-NESTED-CONVERSION-1F1` gate under
-> D-DTTLF-USABILITY-047. Its proposal checkpoint
-> `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc` is separately
+> `Functor_catd A (P(B,D))`. The bounded TypeScript-only
+> `DIRECT-MIXED-NESTED-CONVERSION-1F1` gate under D-DTTLF-USABILITY-047 has
+> proposal checkpoint `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`,
+> which was separately
 > reviewed-approved under the standing unattended delegation and is now
 > final-green at `4845f44c11914f142be357d115ebdde92a33d039`. One generic
 > structural-fast-path plus active-runtime conversion service owns the four
@@ -96,20 +96,37 @@
 > or curry dependency. Its focused suite is 8 pass/0 fail; its one required
 > `check:ts` is green at 1,234 pass/51 skip/0 fail out of 1,285 tests. The
 > subsequent `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` read-only audit is now
-> complete. The active kernel has no existing global comparison from
+> complete. At audit time the active kernel had no existing global comparison
+> from
 > `P(Functor_catd A B,Functor_catd A C)` to
 > `Functor_catd A P(B,C)`. The selected explicit forward distributor has one
 > owner and three point/full/capped projections; its owner-position probe is
 > bounded-green, strict-audit clean, and zero-warning-delta at 1,079/159. Its
 > direct consumer composes existing `Product_pair_funcd`, computes on objects
 > and inner arrows, and retains internal base/higher action. The exact
-> `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` continuation is frozen as
+> `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` continuation was frozen as
 > D-DTTLF-USABILITY-048 at proposal checkpoint
 > `799f3219d9af58ad3b949ec212ef46748a0d7e2f` and is separately
 > reviewed-approved under the standing unattended delegation. Its exact
 > implementation recursively lowers the already-existing `typed-pair` node
 > under the fundamental direct binder; it is neither curry nor a
 > `Product_catd` facade.
+> That implementation is now final-green. Kernel checkpoint
+> `d9f298ce2c3194adda8f68bd4654e484b33bfac4` contains exactly the one
+> `Functor_catd_product_funcd` owner, three projections, durable checks, and
+> synchronized kernel reports. The generic TypeScript transfer checks one
+> declaration/three rules, and the direct binder recursively handles
+> distinct pairs, contraction, maps after and inside pairs, and a generated
+> depth-seven tree through existing `Product_pair_funcd` plus the
+> distributor. It emits no curry, cast, coercion, total-context section, or
+> external coherence evidence. Focused transfer/direct/source-action tests
+> are 2/2, 10/10, and 4/4; the single required `check:ts` is green at 1,238
+> pass/51 skip/0 fail out of 1,289 tests. Its coherent TypeScript checkpoint
+> is recorded by the immediately following ledger-only commit. The next
+> dependency-ready action is the read-only
+> `DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment; do not promote curry,
+> product-facade, unrestricted variance, text/browser, or publication work
+> without a separately frozen and reviewed gate.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

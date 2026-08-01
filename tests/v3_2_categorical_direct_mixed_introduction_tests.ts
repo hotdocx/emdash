@@ -11,7 +11,10 @@ import {
     CoreCategoricalFrontendError,
     CoreCategoricalProgram,
     CoreCategoricalProgramError,
-    coreCategoricalMixedActionCoreName
+    coreCategoricalDirectMixedProductDistributionCoreName,
+    coreCategoricalFibredStructureCoreName,
+    coreCategoricalMixedActionCoreName,
+    serializeCoreExpression
 } from '../src/v3_2';
 
 const assertDeepFrozen = (value: unknown): void => {
@@ -605,6 +608,183 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
         assertDeepFrozen(emdash.inspect(twoSources));
     });
 
+    it('recursively compiles distinct, contracted and mapped fibre pairs',
+    () => {
+        const { emdash, C, A, B, D, E, F } = fixture('product');
+        const AD = emdash.mixedDisplayedFunctorFamily(A, D);
+        const F2 = emdash.displayedFunctor(
+            'direct_mixed_product_F2',
+            C,
+            AD
+        );
+        const productBD = emdash.displayedProduct(B, D);
+        const productBB = emdash.displayedProduct(B, B);
+        const consumePair = emdash.displayedFunctor(
+            'direct_mixed_product_consume_pair',
+            productBD,
+            E
+        );
+        const distinct = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cDistinct', family: C },
+            { name: 'aDistinct', family: A },
+            productBD,
+            (c, a) => emdash.fibrePair(
+                emdash.apply(emdash.apply(F, c), a),
+                emdash.apply(emdash.apply(F2, c), a)
+            )
+        );
+        const contracted = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cContract', family: C },
+            { name: 'aContract', family: A },
+            productBB,
+            (c, a) => {
+                const leaf = emdash.apply(emdash.apply(F, c), a);
+                return emdash.fibrePair(leaf, leaf);
+            }
+        );
+        const mapped = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cMappedPair', family: C },
+            { name: 'aMappedPair', family: A },
+            E,
+            (c, a) => emdash.apply(
+                consumePair,
+                emdash.fibrePair(
+                    emdash.apply(emdash.apply(F, c), a),
+                    emdash.apply(emdash.apply(F2, c), a)
+                )
+            )
+        );
+        const distinctCompiled = emdash.compile(distinct);
+        const contractedCompiled = emdash.compile(contracted);
+        const mappedCompiled = emdash.compile(mapped);
+        const pairName = coreCategoricalFibredStructureCoreName(
+            'displayed-product-pair'
+        );
+        const distributorName =
+            coreCategoricalDirectMixedProductDistributionCoreName(
+                'distributor'
+            );
+        const evidence = emdash.inspect(distinct).abstractions.find(
+            candidate => candidate.rule ===
+                'categorical.direct-mixed-displayed-functor'
+        );
+        const mappedEvidence = emdash.inspect(mapped).abstractions.find(
+            candidate => candidate.rule ===
+                'categorical.direct-mixed-displayed-functor'
+        );
+
+        for (const compiled of [
+            distinctCompiled,
+            contractedCompiled,
+            mappedCompiled
+        ]) {
+            const rawCore = serializeCoreExpression(
+                compiled.explicitTerm
+            );
+            assert.equal(
+                compiled.surfaceType.tag,
+                'displayed-functor'
+            );
+            assert.match(rawCore, new RegExp(pairName, 'u'));
+            assert.match(
+                rawCore,
+                new RegExp(distributorName, 'u')
+            );
+            assert.doesNotMatch(
+                compiled.explicitCore,
+                /mixed_curry|coerc|cast/u
+            );
+        }
+        assert.equal(evidence?.rootKind, 'recursive-pair');
+        assert.equal(evidence?.leafCount, 2);
+        assert.equal(evidence?.pairNodeCount, 1);
+        assert.equal(evidence?.pairDepth, 1);
+        assert.deepEqual(evidence?.dependentPrerequisites, [
+            'stable-functor-family',
+            'internal-product-functor',
+            'displayed-product-pair',
+            'mixed-functor-product-distributor',
+            'generic-category-composition',
+            'displayed-hom-classifier-reduction'
+        ]);
+        assert.equal(mappedEvidence?.targetChainLength, 1);
+        assertDeepFrozen(emdash.inspect(distinct));
+        assertDeepFrozen(emdash.inspect(mapped));
+    });
+
+    it('recurses through source/target maps and generated deep pair trees',
+    () => {
+        const { emdash, opK, C, A, B, D, F, G } =
+            fixture('deep_product');
+        const APrime = emdash.displayedFamily(
+            'direct_mixed_deep_product_A_prime',
+            opK
+        );
+        const L = emdash.displayedFunctor(
+            'direct_mixed_deep_product_L',
+            APrime,
+            A
+        );
+        const mappedProduct = emdash.displayedProduct(B, D);
+        const mappedBranches = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cBranches', family: C },
+            { name: 'aBranches', family: APrime },
+            mappedProduct,
+            (c, a) => {
+                const sourceMapped = emdash.apply(
+                    emdash.apply(F, c),
+                    emdash.apply(L, a)
+                );
+                return emdash.fibrePair(
+                    sourceMapped,
+                    emdash.apply(G, sourceMapped)
+                );
+            }
+        );
+
+        const depth = 7;
+        let deepTarget = B;
+        for (let index = 0; index < depth; index += 1) {
+            deepTarget = emdash.displayedProduct(deepTarget, B);
+        }
+        const deep = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cDeep', family: C },
+            { name: 'aDeep', family: A },
+            deepTarget,
+            (c, a) => {
+                const leaf = emdash.apply(emdash.apply(F, c), a);
+                let tree = leaf;
+                for (let index = 0; index < depth; index += 1) {
+                    tree = emdash.fibrePair(tree, leaf);
+                }
+                return tree;
+            }
+        );
+        const mappedCompiled = emdash.compile(mappedBranches);
+        const deepCompiled = emdash.compile(deep);
+        const mappedEvidence = emdash.inspect(mappedBranches)
+            .abstractions.find(candidate => candidate.rule ===
+                'categorical.direct-mixed-displayed-functor');
+        const deepEvidence = emdash.inspect(deep).abstractions.find(
+            candidate => candidate.rule ===
+                'categorical.direct-mixed-displayed-functor'
+        );
+
+        assert.equal(mappedCompiled.surfaceType.tag, 'displayed-functor');
+        assert.equal(deepCompiled.surfaceType.tag, 'displayed-functor');
+        assert.equal(mappedEvidence?.leafCount, 2);
+        assert.equal(mappedEvidence?.sourceChainLength, 2);
+        assert.equal(mappedEvidence?.targetChainLength, 1);
+        assert.equal(deepEvidence?.leafCount, depth + 1);
+        assert.equal(deepEvidence?.pairNodeCount, depth);
+        assert.equal(deepEvidence?.pairDepth, depth);
+        assert.doesNotMatch(
+            deepCompiled.explicitCore,
+            /mixed_curry|coerc|cast/u
+        );
+        assertDeepFrozen(emdash.inspect(deep));
+    });
+
     it('fails closed for wrong variance, noncanonical and unsupported bodies',
     () => {
         const { emdash, K, opK, C, A, B, D, F } =
@@ -695,33 +875,6 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
                 { name: 'a', family: A },
                 B,
                 (c, _a) => emdash.apply(noncanonical, c)
-            ),
-            (error: unknown) =>
-                error instanceof CoreCategoricalFrontendError &&
-                error.code === 'UNAVAILABLE_DISPLAYED_ACTION'
-        );
-
-        const product = emdash.displayedProduct(B, B);
-        const consumePair = emdash.displayedFunctor(
-            'direct_mixed_negative_consume_pair',
-            product,
-            D
-        );
-        assert.throws(
-            () => emdash.mixedDisplayedFunctorLambda(
-                { name: 'c', family: C },
-                { name: 'a', family: A },
-                D,
-                (c, a) => {
-                    const leaf = emdash.apply(
-                        emdash.apply(F, c),
-                        a
-                    );
-                    return emdash.apply(
-                        consumePair,
-                        emdash.fibrePair(leaf, leaf)
-                    );
-                }
             ),
             (error: unknown) =>
                 error instanceof CoreCategoricalFrontendError &&

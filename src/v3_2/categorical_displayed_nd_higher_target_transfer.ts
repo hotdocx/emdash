@@ -55,7 +55,7 @@ import {
 const MODULE_ID = 'emdash.emdash3_2';
 const SOURCE_SHA256 =
     'sha256:' +
-    'c09f503aff20cb3f9f5b59fcb1dbb4339bdfa853b48931ebd0dcce9b827ef29f';
+    '4d5791fc95c158308b87c970b622da35c2dd0ec64bd32b7f535679a95eba195a';
 
 export const
 CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_TARGET_TRANSFER_REVISION =

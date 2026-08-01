@@ -18,7 +18,7 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:c09f503aff20cb3f9f5b59fcb1dbb4339bdfa853b48931ebd0dcce9b827ef29f',
+            'sha256:4d5791fc95c158308b87c970b622da35c2dd0ec64bd32b7f535679a95eba195a',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
@@ -99,7 +99,7 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:c09f503aff20cb3f9f5b59fcb1dbb4339bdfa853b48931ebd0dcce9b827ef29f',
+            'sha256:4d5791fc95c158308b87c970b622da35c2dd0ec64bd32b7f535679a95eba195a',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
@@ -287,7 +287,7 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:c09f503aff20cb3f9f5b59fcb1dbb4339bdfa853b48931ebd0dcce9b827ef29f',
+            'sha256:4d5791fc95c158308b87c970b622da35c2dd0ec64bd32b7f535679a95eba195a',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
@@ -390,7 +390,7 @@ CoreLfCanonicalSelectionContract =
         moduleId: 'emdash.emdash3_2',
         authorityPath: 'emdash2/emdash3_2.lp',
         sourceSha256:
-            'sha256:c09f503aff20cb3f9f5b59fcb1dbb4339bdfa853b48931ebd0dcce9b827ef29f',
+            'sha256:4d5791fc95c158308b87c970b622da35c2dd0ec64bd32b7f535679a95eba195a',
         canonicalExport: {
             exporterVersion: '3.0.0-90-gdb4f780',
             sha256:
