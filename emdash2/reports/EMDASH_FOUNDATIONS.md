@@ -1456,6 +1456,21 @@ Its nil/cons and head/tail observations preserve the alignment between each
 element and its evidence. This is a transparent fold over the selected tuple
 representation, not another inductive family or a hidden lookup operation.
 
+The downstream finite-containment consumer also needs evidence indexed by an
+already-selected evidence family:
+
+```text
+FiniteFamilyAllOver(P,Q,[],(),()) = Unit
+FiniteFamilyAllOver(P,Q,x::xs,px::ps,qx::qs)
+  = Q(x,px) x FiniteFamilyAllOver(P,Q,xs,ps,qs).
+```
+
+Its generic map accepts both source and target `FiniteFamilyAll` witnesses
+explicitly and maps every `Q(x,px)` to `Q'(f(x),py)`. It therefore does not
+choose dependent target data and does not identify different choices. This
+is still transparent Nat/Sigma recursion, with no new inductive family or
+rewrite owner.
+
 For a commutative ring `R`, the selected ordered folds are
 
 ```text
@@ -1560,9 +1575,34 @@ crossings are named equality paths through existing post/precomposition
 owners. This is selected elementwise base-change data, not yet a
 proposition-valued coverage: the active library has no propositional-
 truncation reflector that could erase coefficient, localization, and
-containment choices honestly. Finite containment assembly, generated or
-supplied Zariski topology, subcanonicity, `Spec`, and schemes remain later
-gates.
+containment choices honestly.
+
+The bounded finite-containment layer now defines
+
+```text
+BasicOpenMembers_R(n,f,ell,Q)
+  = FiniteFamilyAllOver(
+      lambda f_i. Loc_R(f_i),
+      lambda f_i ell_i. SieveMembership(Q,D_R(f_i;ell_i)),
+      n,f,ell).
+```
+
+`comm_ring_zariski_cover_family_map(h,c,m)` maps the algebraic presentation
+and accepts the entire target localization family `m` explicitly.
+`comm_ring_unit_basic_open_family_pullback_membership` is the maintained
+nonempty singleton consumer: it applies the elementwise theorem to the head
+and the generic nil/cons recursion to return actual membership for the mapped
+singleton. Arbitrary-length recursion remains owned by
+`finite_family_all_over_map`.
+
+The fully expanded specialization of that recursive map to ordinary-sieve
+membership, and even a convenience specialized head projection, exceed the
+60-second Lambdapi elaboration budget. A diagnostic rigid membership facade
+did not improve this and is rejected. The active API therefore keeps
+membership transparent, promotes no new rule, and treats only those expanded
+convenience spellings as a performance gate. Generated or supplied Zariski
+topology, propositionally reflected coverhood, subcanonicity, `Spec`, and
+schemes remain later gates.
 
 ### Polynomial Algebras By Universal Property
 

@@ -25,23 +25,20 @@ as
 recovery index
 `/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-01_019fbb03cc64/INDEX.md`
 
-Status: active living implementation architecture. `PSSS-00` is complete.
-`PSSS-01`, `PSSS-02`, bounded `PSSS-03a`, direct-topology `PSSS-04a`,
-`PSSS-06a`, `PSSS-06b`, and `PSSS-07a` through `PSSS-07d` are green and
-included in the authorized local foundation checkpoint. `PSSS-03b` remains
-the named `Omega` research gate. `PSSS-05a` retains a green anchored-descent
-research probe and nonempty assumption-explicit API consumer, but no promoted
-source or derived nonempty semantic model; its later rigid-adapter promotion
-trial was rejected and removed. Carrier-functor action, localization inverse
-laws, geometric cover interpretation, and positive-variable polynomial
-representation remain separately consumer-gated. The synchronized catalog
-contains 1,860 checks across 73 areas. Health passes all 61 targets in 314.231
-seconds at source snapshot
-`sha256:35a1d735feeea679e12e62b3bc14690783758c0da59ed1e8f20522f898f075df`.
-After the PSSS-05a adapter removal, the final combined checkpoint gate passes
-all 61 Lambdapi targets in 342.266 seconds, followed by 39 Python tests, five
-registry tests, all source/header/reference and book checks, the strict kernel
-audit, and fresh strict catalog verification
+Status: active living implementation architecture. `PSSS-00` through the
+selected `PSSS-09a` affine-basic-open tranche are locally checkpointed at
+`5fc6f79`; `PSSS-09b` is in progress. `PSSS-03b` remains the named `Omega`
+research gate. `PSSS-05a` retains a green anchored-descent research probe and
+nonempty assumption-explicit API consumer, but no promoted source or derived
+nonempty semantic model; its later rigid-adapter promotion trial was rejected
+and removed. `PSSS-09b` is being split at a measured Lambdapi elaboration
+boundary between generic finite evidence recursion and its full
+sieve-membership specialization. Proposition-valued generated coverage,
+propositional truncation, sheafification, localization inverse laws, and
+positive-variable polynomial representation remain separately
+consumer-gated. The latest checkpointed integration evidence is recorded in
+the PSSS-09a phase below; every later metric remains provisional until its
+own bounded tranche is synchronized and checkpointed.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -150,6 +147,11 @@ The review inspected:
   affine/scheme sections of `cartierSolution16.lp.txt` and the relevant
   profunctor/context infrastructure of `cartierSolution13.lp`;
 - the local review of Max Zeuner; and
+- Kevin Quirin and Nicolas Tabareau, *Lawvere-Tierney sheafification in
+  Homotopy Type Theory*, using layout extraction plus visual inspection of PDF
+  pages 14--15, 17--18, and 20 for truncated modalities, the
+  Lawvere--Tierney topology boundary, the h-level-indexed sheaf condition, and
+  the two-stage separation/sheafification construction; and
 - visually rendered PDF pages containing Zeuner's Definition 3.4,
   Corollary 3.21, Definition 4.22, Theorem 5.22, the Zariski coverage, and the
   affine-cover record.
@@ -2438,7 +2440,13 @@ subcanonicity, `Spec`, or scheme is smuggled into this result.
 
 #### PSSS-09b — Finite containment and selected family base change
 
-Status: proposed immediately after PSSS-09a.
+Status: `PSSS-09b1` is implemented rule-free and green through focused,
+maintained aggregate, reviewer, warning, strict-audit, catalog, synchronized
+66-target health, and full integration CI gates; it is ready for its
+authorized local checkpoint. A bounded full specialization to the expanded
+ordinary-sieve membership family exposes a Lambdapi elaboration performance gate, so
+the convenience layer remains `PSSS-09b2` rather than being forced through a
+new rigid runtime head.
 
 - define recursive explicit evidence that every chosen basic-open arrow of a
   presented family belongs to an ordinary sieve;
@@ -2455,6 +2463,112 @@ This is selected base-change data for a cover-family presentation.  It is not
 yet a proposition-valued coverage and does not claim presentation
 independence, permutation invariance, or free saturation.
 
+##### PSSS-09b1 — Finite containment and bounded computational consumer
+
+Promote a rule-free generic evidence-over-evidence fold:
+
+```text
+FiniteFamilyAllOver(P,Q,[],(),()) = Unit
+FiniteFamilyAllOver(P,Q,x::xs,px::ps,qx::qs)
+  = Q(x,px) x FiniteFamilyAllOver(P,Q,xs,ps,qs).
+```
+
+Its generic map accepts source evidence and independently selected target
+evidence, plus an elementwise map
+`Q(x,px) -> Q'(f(x),py)`. Consequently it never chooses target localization
+packages and never identifies two choices. Specialize the classifier—not a
+new runtime rule—to the explicit membership of every selected basic-open
+arrow in `Q`. Package the base-changed algebraic presentation with an
+explicit target localization family. Exercise the recursive API and the
+PSSS-09a elementwise theorem on the closed zero-ring singleton using ordinary
+constructors if the fully abstract specialized wrapper exceeds the bounded
+elaboration budget.
+
+The generic recursion and its source-owner check are green. The named
+containment classifier, mapped cover family, and pointwise pullback step are
+also green when checked without the full specialization. The successful
+ignored logs are
+`logs/probes/psss09b_finite_family_all_over-20260801-183808.log`,
+`logs/probes/emdash3_2_finite_families-20260801-184003.log`,
+`logs/probes/psss09b_zariski_family_all_over-20260801-184234.log`, and
+`logs/probes/psss09b_zariski_family_named-20260801-184618.log`.
+
+The promoted bounded shape is now concrete. The finite-family owner has 385
+lines and 21 rule-free symbols, including `FiniteFamilyAllOver`, its
+nil/cons/head/tail generic observations, the step-independent
+`FiniteFamilyAllOverMap` classifier, and `finite_family_all_over_map`.
+The Zariski owner has 1,059 lines and 33 rule-free symbols. Its six PSSS-09b1
+additions are `comm_ring_zariski_cover_family_map`,
+`CommRingBasicOpenFamilyMembership`, its nil/cons constructors,
+`CommRingZariskiCoverFamilyMembership`, and the bounded
+`comm_ring_unit_basic_open_family_pullback_membership` consumer. No
+specialized membership projection, recursive owner, rewrite, or unification
+rule is promoted.
+
+The separate 115-line reviewer contains six assertions: generic successor
+computation, generic recursive-map formation, both mapped-cover projections,
+whole-family containment formation, and the closed zero-ring singleton. The
+last result is literal `CommRingBasicOpenFamilyMembership` in the pulled-back
+maximal sieve and is assembled from the existing elementwise theorem plus
+ordinary nil/cons constructors. Focused final quiet logs are
+`logs/probes/emdash3_2_finite_families-20260801-191731.log`,
+`logs/probes/emdash3_2_commutative_algebra_zariski-20260801-191731.log`,
+`logs/probes/commutative_ring_zariski_finite_containment-20260801-191524.log`,
+and `logs/probes/emdash3_2_checks-20260801-191731.log`; maintained
+`make check` and the complete reviewer suite pass.
+
+Warning-enabled owner and reviewer logs
+`logs/probes/emdash3_2_commutative_algebra_zariski-20260801-192940.log` and
+`logs/probes/commutative_ring_zariski_finite_containment-20260801-193110.log`
+inherit exactly `1179 = 1020 + 159`, with no warning at either changed owner
+or reviewer. The strict inferred-slot audit remains at zero unreviewed
+clauses and 52 annotated slots across 32 intentional clauses. Six new central
+diagnostics raise the fresh catalog to 1,911 checks across 77 mapped areas
+with zero unclassified entries. Health passes all 66 source/example targets
+in 638.261 summed check-seconds at source snapshot
+`sha256:271c634e06aaa3ab038b1733f053b4647464e4b5ad623b751c3839e6ca157154`.
+Full integration CI independently passes all 66 Lambdapi targets in 627.693
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book
+evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
+strict catalog verification.
+
+##### PSSS-09b2 — Full specialized recursion usability/performance gate
+
+The direct expanded `nat_elim`, the generic-map application with fully
+expanded `SieveMembership`, and a named transparent-membership variant each
+exceeded the 60-second probe budget after their imports, despite the generic
+recursion and elementwise theorem checking independently. A diagnostic rigid
+`PSSS09BasicOpenMembershipRigid` head with a rewrite to `SieveMembership`
+also timed out. It is rejected: membership is a semantic definition, the
+candidate created no justified runtime normal form, and rigidity did not
+solve the measured problem.
+
+The later direct-singleton bisection adds a second precise boundary. The
+explicit generator/localization-family result is green in
+`logs/probes/psss09b_zariski_family_singleton_direct-20260801-190352.log`,
+whereas forcing the same constructor term through the exact mapped
+`CommRingZariskiCoverFamilyMembership` wrapper times out in
+`logs/probes/psss09b_zariski_family_singleton_direct-20260801-190215.log`.
+A specialized membership-head observation likewise exceeds the reviewer
+budget and was removed. These are elaboration/convenience failures: mapped
+cover construction, containment formation, generic recursion, and returned
+singleton membership all remain checked independently.
+
+Revisit the full wrapper only with one of the following positive pieces of
+evidence:
+
+- a smaller canonical endpoint that avoids repeated normalization without
+  changing runtime ownership;
+- an elaborator/Core improvement that typechecks the transparent
+  specialization within the bounded budget; or
+- a downstream non-singleton consumer for which the generic function plus
+  constructors is materially unusable.
+
+Do not solve this performance gate with an injective facade, an ad hoc
+membership beta rule, or a Zariski-specific recursion duplicating the generic
+finite owner.
+
 #### PSSS-09c — Proposition-valued Zariski coverage and topology
 
 Status: research gate after PSSS-09b and an explicit
@@ -2470,6 +2584,91 @@ presentation-independence/truncation or supplied-topology decision.
 - prove subcanonicity only after PSSS-05b supplies a nonvacuous selected
   descent/sheaf interface; and
 - keep polynomial-algebra examples as consumers, never topology owners.
+
+The research gate is deliberately decomposed so that “truncation is absent”
+does not become a false blocker for all later geometry.
+
+##### PSSS-09c0 — Compare honest coverhood interfaces
+
+Maintain four distinct layers:
+
+1. a **selected computational presentation** retaining generators,
+   coefficients, localizations, containment arrows, and base-change terms;
+2. a **higher sieve/descent presentation** whose Cat- or groupoid-valued
+   fibres may carry computational compatibility data and are not silently
+   called ordinary cover propositions;
+3. an **ordinary Grothendieck coverage/topology**, whose coverhood remains in
+   `PropU_grpd`; and
+4. a later **sheafification modality/reflector**, stratified by value h-level
+   and not implied merely by having a site.
+
+There are three honest routes from the first layer to the third:
+
+- **supplied topology:** accept a `GrothTopology` and prove that each selected
+  Zariski presentation covers in it; this requires no internal truncation
+  constructor;
+- **extensional direct predicate:** define coverhood by an independently
+  proposition-valued universal/radical condition and prove that retained
+  presentations imply it; this can avoid a generic truncator but may discard
+  witness computation, so the presentation remains a separate API; or
+- **propositional reflection:** map the type of presentations into its honest
+  propositional truncation and prove the Grothendieck laws there.
+
+The exceptional alternative of proving the whole presentation type itself a
+proposition is not expected for arbitrary coefficient and localization
+choices; it requires an actual uniqueness/contractibility theorem and must
+not be assumed.
+
+##### PSSS-09cT — Consumer-gated propositional-truncation HIT
+
+If the selected coverage route needs propositional reflection, add a separate
+foundational sub-plan and module for a genuine propositional-truncation
+operator. Its minimum acceptance contract is:
+
+- a classifier `merely(A)` together with retained evidence that it is a
+  proposition;
+- an introduction map `A -> merely(A)`;
+- an eliminator into proposition-valued targets with its intended
+  constructor beta computation;
+- explicit universe and substitution/naturality behavior sufficient for the
+  first generated-coverage consumer; and
+- a negative audit showing that no global witness equality, proof-erasure
+  rewrite, or unrelated type collapse has been installed.
+
+Whether this is represented by the existing directed-HIT infrastructure, a
+new ordinary HIT module, or a logically supplied reflector is itself a
+reviewed design choice. A rewrite or `unif_rule` that merely identifies
+presentation witnesses is not propositional truncation. Generic saturation
+of a coverage may require a further inductive/HIT closure beyond this
+reflector and remains `PSSS-09cG`.
+
+##### PSSS-09cG / PSSS-09cZ — Generated versus supplied topology
+
+`PSSS-09cG` studies free pullback/transitivity saturation only after
+`PSSS-09c0` and any required truncation/HIT gate. `PSSS-09cZ` is the parallel
+bounded route that supplies the Zariski topology directly and proves the
+selected basic-open presentations cover. Either can unblock ordinary site
+consumers; neither supersedes the computational presentation layer.
+
+##### Later h-level-stratified sheafification gate
+
+The Tabareau paper is baseline evidence, not the selected implementation.
+Its relevant architecture starts with a left-exact modality on `HProp`, lifts
+the construction inductively to `HSet` and higher truncated types, defines an
+`(n+1)`-sheaf using dense proposition-valued subobjects plus `n`-level
+separation, and constructs sheafification in separate “make separated” and
+“make sheaf” steps. This supports keeping proposition-level topology,
+set-/Cat-/groupoid-valued sheaves, and a sheafification reflector separate.
+It also exposes universe, coherence, and non-finitely-truncated limitations,
+so it must not be transplanted wholesale as the scheme interface.
+
+For emdash, the computational Cartier/Zeuner acceptance criterion remains
+primary: `D : O ->` sieve must expose restriction and invertibility membership
+through active functor/Catd owners; selected descent/glue must retain
+executable restrict/glue observations; and affine basic-open base change and
+chart overlaps must compute on carrier elements. Proposition-valued
+sheafhood and a reflector are theorem/interface layers around those data, not
+replacements for them.
 
 ### Phase PSSS-10 — Slice sites and affine charts
 
@@ -2528,6 +2727,13 @@ consumer demonstrates that nontransitive unification requires it.
   complete infinity-stack implementation without a coherence audit.
 - **Topology/modality conflation:** a site does not automatically provide a
   computational sheafification adjunction.
+- **Truncation overreach:** selected covers and higher descent data do not
+  require propositional truncation merely to exist. Conversely, retained
+  witness data are not ordinary cover propositions without reflection,
+  uniqueness, or a separately proposition-valued definition.
+- **Proof erasure by computation:** no rewrite or unifier may stand in for a
+  propositional-truncation eliminator or identify arbitrary presentation
+  witnesses.
 - **Algebra leakage:** polynomial syntax and finite-sum implementation do not
   become topology owners.
 - **Rewrite duplication:** Yoneda, restriction, Sigma totalization, `DefIso`,
@@ -2839,6 +3045,29 @@ consumer demonstrates that nontransitive unification requires it.
   descent/sheaf gate is real; a representable-sheaf assertion without that
   consumer would be only a typechecking placeholder, not the computational
   scheme objective.
+- **PSSS-D-063:** separate selected computational cover data, higher
+  sieve/descent data, ordinary proposition-valued topology, and h-level-
+  stratified sheafification. Truncation is a gate only for a route that
+  reflects witness-bearing presentations into ordinary cover propositions;
+  it is not a prerequisite for PSSS-09b or for a directly supplied topology.
+- **PSSS-D-064:** treat Tabareau's proposition-first left-exact-modality ladder
+  as later sheafification evidence rather than the Zariski-generation owner.
+  Preserve computational `D : O ->` sieve membership, selected glue, and
+  chart calculations as independent acceptance criteria.
+- **PSSS-D-065:** if generated coverhood needs `merely`, schedule a genuine
+  propositional-truncation HIT/reflector with proposition evidence,
+  introduction, elimination, beta computation, universe behavior, and
+  negative non-collapse tests. Do not simulate it by a rewrite, unifier, or
+  blanket proof irrelevance.
+- **PSSS-D-066:** reject the ignored rigid basic-open-membership performance
+  probe. It introduced an unjustified runtime head, did not make the full
+  specialization pass within 60 seconds, and is not promoted. Keep
+  `SieveMembership` transparent at this boundary.
+- **PSSS-D-067:** split PSSS-09b at the measured elaboration boundary. Promote
+  the generic evidence-over-evidence recursion, transparent containment,
+  selected mapped family, pointwise theorem, and closed singleton consumer;
+  keep a convenience wrapper for the fully expanded recursive
+  sieve-membership specialization behind a performance/usability gate.
 
 ## 19. Side-Task Ledger
 
@@ -2863,8 +3092,13 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
 | PSSS-08c | Ringed sites, selected sheaves, and locality | Proposed | PSSS-08b and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; authorized local checkpoint ready | PSSS-07c and PSSS-08b |
-| PSSS-09b | Finite containment and selected family base-change assembly | Proposed | PSSS-09a |
-| PSSS-09c | Proposition-valued Zariski coverage, topology, and subcanonicity | Research gate | PSSS-09b plus truncation/presentation-independence or supplied-topology decision; PSSS-05b for subcanonicity |
+| PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; authorized local checkpoint ready | PSSS-09a |
+| PSSS-09b2 | Full transparent sieve-membership recursion specialization usability | Performance/research gate; rigid workaround rejected | PSSS-09b1 plus a real non-singleton consumer or bounded elaborator improvement |
+| PSSS-09c0 | Compare supplied, extensional-direct, and propositionally reflected Zariski coverhood | Research gate | PSSS-09b1; PSSS-09b2 only if its convenience API is consumed |
+| PSSS-09cT | Genuine propositional-truncation HIT/reflector | Conditional sub-plan | PSSS-09c0 selects the reflection route and specifies first consumer |
+| PSSS-09cG | Generated coverage saturation | Higher-inductive/research gate | PSSS-09c0 plus any selected closure/truncation prerequisites |
+| PSSS-09cZ | Directly supplied Zariski topology and presentation-cover theorem | Parallel proposed route | PSSS-09b1 and three Grothendieck-law proofs |
+| PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ; PSSS-05b for subcanonicity |
 | PSSS-10 | Slice sites and affine-basic-open comparison | Proposed | PSSS-09c at the selected scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Functor-of-points/qcqs comparison | Research boundary | PSSS-11 and representability audit |
@@ -3049,3 +3283,31 @@ PSSS-08b is successful when:
     warning comparison, strict audits, catalog/health synchronization,
     current-authority prose, and full integration CI are green before the
     authorized local checkpoint.
+
+PSSS-09b1 is successful when:
+
+1. `FiniteFamilyAllOver(P,Q,n,xs,ps)` computes by the existing Nat/Sigma
+   owners and stores `Q(x_i,p_i)` aligned with every selected `p_i : P(x_i)`;
+2. `finite_family_all_over_map` recursively accepts distinct source and target
+   evidence families plus an elementwise step, without choosing or equating
+   target evidence;
+3. `CommRingBasicOpenFamilyMembership` transparently specializes that
+   classifier to literal `SieveMembership` at each selected basic-open arrow,
+   with no rigid facade or local computation rule;
+4. `comm_ring_zariski_cover_family_map` uses
+   `comm_ring_zariski_cover_map` for the algebraic presentation and accepts
+   the complete target localization family explicitly;
+5. the existing PSSS-09a elementwise theorem supplies every head step, while
+   arbitrary-length recursion remains with the generic finite owner;
+6. the maintained zero-ring singleton returns actual pulled-back family
+   membership through nil/cons computation, not merely a formation or assumed
+   coverhood claim;
+7. expanded specialized recursion and projection spellings that exceed the
+   bounded elaboration budget remain a named PSSS-09b2 usability gate and do
+   not justify a new rewrite, unifier, or injective membership head;
+8. no proposition-valued coverage, global localization choice, presentation
+   independence, generated topology, subcanonicity, `Spec`, or scheme is
+   claimed; and
+9. focused probes/checks, maintained reviewers, exact warning comparison,
+   strict audit, catalog/health synchronization, current-authority prose, and
+   full integration CI are green before the authorized local checkpoint.

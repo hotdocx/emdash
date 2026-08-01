@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1905
-- Mapped areas: 76
+- Total checks: 1911
+- Mapped areas: 77
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -95,6 +95,7 @@ stable mathematical-area scopes rather than source locations.
 | CommRing-valued presheaves and invertibility support | 14 |
 | CommRing-valued presheaf invertibility sieve | 19 |
 | Presented affine Zariski basic opens and base change | 12 |
+| Finite selected Zariski containment and base change | 6 |
 
 ## Section Details
 
@@ -2382,3 +2383,14 @@ stable mathematical-area scopes rather than source locations.
 | 1903 | 20963 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
 | 1904 | 20983 | `assertnot [R S T : τ CommRing] (h : τ (@CommRingHom R S)) (g : τ (@CommRingHom S T)) ⊢ @into_restr_postcompose (Op_c ...` |
 | 1905 | 21001 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
+
+### Finite selected Zariski containment and base change
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1906 | 21028 | `assert [A : Grpd] (P : τ A → Grpd) (Q : Π x : τ A, τ (P x) → Grpd) (n : τ Nat_grpd) (x : τ A) (xs : τ (@FiniteFamily ...` |
+| 1907 | 21045 | `assert [A B : Grpd] (map : τ (@Function_grpd A B)) [P : τ A → Grpd] [P2 : τ B → Grpd] [Q : Π x : τ A, τ (P x) → Grpd ...` |
+| 1908 | 21062 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (family : τ (@CommRingZariskiCoverFamily R)) (target_localizati ...` |
+| 1909 | 21079 | `assert [R : τ CommRing] (n : τ Nat_grpd) (generators : τ (@FiniteFamily (@comm_ring_carrier R) n)) (localizations : ...` |
+| 1910 | 21088 | `assert [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) (Q : τ (@Sieve (Op_cat CommRing_cat) R)) ⊢ @Com ...` |
+| 1911 | 21095 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (source_localization : τ (@CommRingLocalizationAt R (@comm_ring ...` |

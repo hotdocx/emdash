@@ -35,8 +35,9 @@ the universal-property iterated/product-localization comparison extension is
 the CommRing-valued-presheaf, restriction, arrowwise-invertibility, and
 ordinary-invertibility-sieve extension is
 `emdash3_2_commutative_algebra_presheaves.lp`;
-the presented finite basic-open Zariski-cover and elementwise base-change
-extension is `emdash3_2_commutative_algebra_zariski.lp`;
+the presented finite basic-open Zariski-cover, selected containment, and
+bounded family base-change extension is
+`emdash3_2_commutative_algebra_zariski.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
@@ -62,7 +63,8 @@ Use the following order:
    Unit/Empty proposition evidence, and Nat sethood;
 7. `emdash3_2_finite_families.lp` for Nat-indexed right-associated finite
    families, constructors/projections, pointwise map, dependent pointwise
-   evidence, and retained sethood;
+   evidence, evidence over already-selected dependent evidence, its generic
+   pointwise map, and retained sethood;
    it deliberately declares no `Fin`, lookup, list/Sum/inductive interface,
    append, permutation quotient, or package eta;
 8. `emdash3_2_commutative_algebra.lp` for set-carrier commutative-ring
@@ -117,9 +119,12 @@ Use the following order:
 16. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
    of universal-property localizations, presented affine basic-open arrows,
    elementwise localization base-change factors and triangles, and returned
-   ordinary-sieve pullback membership. It is rule-free and deliberately
-   declares no global localization choice, propositional truncation,
-   generated coverage/topology, subcanonicity, `Spec`, or scheme;
+   ordinary-sieve pullback membership. It also retains explicit containment
+   for every selected basic open, accepts a mapped presentation's target
+   localization family, and exercises bounded singleton assembly through the
+   generic finite owner. It is rule-free and deliberately declares no global
+   localization choice, specialized rigid membership facade, propositional
+   truncation, generated coverage/topology, subcanonicity, `Spec`, or scheme;
 17. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
    directed negative results;

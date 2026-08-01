@@ -5,7 +5,9 @@
   presentation with selected universal-property localization packages.  For
   one generator it derives the base-change factor, its pointwise triangle, the
   corresponding arrow in the affine restriction total, and actual membership
-  in the pulled-back ordinary sieve.
+  in the pulled-back ordinary sieve.  Finite containment retains one such
+  membership term per selected localization, and a mapped cover family accepts
+  all target localizations explicitly.
 
   These are inspectable computational presentation data.  The module declares
   no global choice of localizations, propositional truncation, generated
@@ -191,6 +193,33 @@ symbol comm_ring_unit_zariski_cover_family
       R (@comm_ring_one R) localization);
 
 /*
+  Selected base change of a presented cover family.
+
+  The algebraic presentation maps pointwise along h.  Target localization
+  packages are supplied explicitly at the mapped generators; this definition
+  neither invokes global choice nor identifies different localization choices.
+*/
+symbol comm_ring_zariski_cover_family_map
+  [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (family : τ (@CommRingZariskiCoverFamily R))
+  (target_localizations : τ (@CommRingLocalizationFamily
+      S
+      (@comm_ring_zariski_cover_family_length R family)
+      (@finite_family_map
+        (@comm_ring_carrier R)
+        (@comm_ring_carrier S)
+        (@comm_ring_hom_function R S h)
+        (@comm_ring_zariski_cover_family_length R family)
+        (@comm_ring_zariski_cover_family_generators R family))))
+  : τ (@CommRingZariskiCoverFamily S)
+≔ @comm_ring_zariski_cover_family_intro
+    S
+    (@comm_ring_zariski_cover_map
+      R S h (@comm_ring_zariski_cover_family_presentation R family))
+    target_localizations;
+
+/*
   Two theorem-level affine variance comparisons.
 
   The first path is used by the Sigma-arrow triangle: opposite-category
@@ -332,6 +361,98 @@ symbol comm_ring_basic_open_arrow
 ≔ Struct_sigma
     (@comm_ring_localization_target R f localization)
     (@comm_ring_localization_map R f localization);
+
+/*
+  Explicit containment of every selected basic-open arrow in one sieve.
+
+  This transparent specialization of `FiniteFamilyAllOver` retains one
+  literal `SieveMembership` term for each generator/localization pair.  It is
+  computational presentation data, not propositionally truncated coverhood.
+*/
+symbol CommRingBasicOpenFamilyMembership
+  (R : τ CommRing)
+  (n : τ Nat_grpd)
+  (generators : τ (@FiniteFamily (@comm_ring_carrier R) n))
+  (localizations : τ (@CommRingLocalizationFamily R n generators))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  : Grpd
+≔ @FiniteFamilyAllOver
+    (@comm_ring_carrier R)
+    (λ f : τ (@comm_ring_carrier R),
+      @CommRingLocalizationAt R f)
+    (λ f : τ (@comm_ring_carrier R),
+      λ localization : τ (@CommRingLocalizationAt R f),
+        @SieveMembership
+          (Op_cat CommRing_cat)
+          R Q
+          (@comm_ring_basic_open_arrow R f localization))
+    n generators localizations;
+
+symbol comm_ring_basic_open_family_membership_nil
+  (R : τ CommRing)
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  : τ (@CommRingBasicOpenFamilyMembership
+      R zero
+      (@finite_family_nil (@comm_ring_carrier R))
+      (@comm_ring_localization_family_nil R)
+      Q)
+≔ @finite_family_all_over_nil
+    (@comm_ring_carrier R)
+    (λ f : τ (@comm_ring_carrier R),
+      @CommRingLocalizationAt R f)
+    (λ f : τ (@comm_ring_carrier R),
+      λ localization : τ (@CommRingLocalizationAt R f),
+        @SieveMembership
+          (Op_cat CommRing_cat)
+          R Q
+          (@comm_ring_basic_open_arrow R f localization));
+
+symbol comm_ring_basic_open_family_membership_cons
+  [R : τ CommRing]
+  [n : τ Nat_grpd]
+  [f : τ (@comm_ring_carrier R)]
+  [generators : τ (@FiniteFamily (@comm_ring_carrier R) n)]
+  [localization : τ (@CommRingLocalizationAt R f)]
+  [localizations : τ (@CommRingLocalizationFamily R n generators)]
+  [Q : τ (@Sieve (Op_cat CommRing_cat) R)]
+  (head : τ (@SieveMembership
+      (Op_cat CommRing_cat)
+      R Q
+      (@comm_ring_basic_open_arrow R f localization)))
+  (tail : τ (@CommRingBasicOpenFamilyMembership
+      R n generators localizations Q))
+  : τ (@CommRingBasicOpenFamilyMembership
+      R
+      (succ n)
+      (@finite_family_cons
+        (@comm_ring_carrier R) n f generators)
+      (@comm_ring_localization_family_cons
+        R n f generators localization localizations)
+      Q)
+≔ @finite_family_all_over_cons
+    (@comm_ring_carrier R)
+    (λ x : τ (@comm_ring_carrier R),
+      @CommRingLocalizationAt R x)
+    (λ x : τ (@comm_ring_carrier R),
+      λ localization0 : τ (@CommRingLocalizationAt R x),
+        @SieveMembership
+          (Op_cat CommRing_cat)
+          R Q
+          (@comm_ring_basic_open_arrow R x localization0))
+    n f generators localization localizations head tail;
+
+// Containment for a complete selected Zariski cover-family presentation.
+symbol CommRingZariskiCoverFamilyMembership
+  [R : τ CommRing]
+  (family : τ (@CommRingZariskiCoverFamily R))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  : Grpd
+≔ @CommRingBasicOpenFamilyMembership
+    R
+    (@comm_ring_zariski_cover_family_length R family)
+    (@comm_ring_zariski_cover_family_generators R family)
+    (@comm_ring_zariski_cover_family_localizations R family)
+    Q;
 
 /*
   Elementwise base change of a chosen basic open.
@@ -890,3 +1011,49 @@ symbol comm_ring_basic_open_pullback_membership
       target_localization)
     (@comm_ring_basic_open_membership_at_postcompose
       R S h f source_localization target_localization Q member);
+
+/*
+  Closed-shape recursive assembly for the nonempty unit cover.
+
+  The generic `finite_family_all_over_map` owns arbitrary-length recursion.
+  This one-successor observation deliberately exposes the bounded consumer
+  without adding a Zariski-specific recursive owner or forcing normalization
+  through the larger mapped-cover wrapper.
+*/
+symbol comm_ring_unit_basic_open_family_pullback_membership
+  [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (source_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_one R)))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h (@comm_ring_one R))))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  (member : τ (@SieveMembership
+      (Op_cat CommRing_cat)
+      R Q
+      (@comm_ring_basic_open_arrow
+        R (@comm_ring_one R) source_localization)))
+  : τ (@CommRingBasicOpenFamilyMembership
+      S
+      (succ zero)
+      (@finite_family_singleton
+        (@comm_ring_carrier S)
+        (@comm_ring_hom_apply R S h (@comm_ring_one R)))
+      (@comm_ring_localization_family_singleton
+        S
+        (@comm_ring_hom_apply R S h (@comm_ring_one R))
+        target_localization)
+      (@sieve_pullback (Op_cat CommRing_cat) S R h Q))
+≔ @comm_ring_basic_open_family_membership_cons
+    S zero
+    (@comm_ring_hom_apply R S h (@comm_ring_one R))
+    (@finite_family_nil (@comm_ring_carrier S))
+    target_localization
+    (@comm_ring_localization_family_nil S)
+    (@sieve_pullback (Op_cat CommRing_cat) S R h Q)
+    (@comm_ring_basic_open_pullback_membership
+      R S h
+      (@comm_ring_one R)
+      source_localization target_localization Q member)
+    (@comm_ring_basic_open_family_membership_nil
+      S (@sieve_pullback (Op_cat CommRing_cat) S R h Q));

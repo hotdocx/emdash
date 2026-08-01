@@ -1999,6 +1999,37 @@ containment/base-change assembly is PSSS-09b.  Proposition-valued coverage,
 generated topology, subcanonicity, `Spec`, and schemes remain honest later
 gates; chosen coefficient/localization data is not treated as a proposition.
 
+PSSS-09b1 extends the same rule-free module with selected finite containment
+and bounded family base change. The reusable finite-family owner now has
+`FiniteFamilyAllOver`: a Nat-recursive family of `Q(x,p)` evidence over an
+already-selected `FiniteFamilyAll(P)` witness, plus a generic pointwise map
+that accepts source and target evidence families independently. The Zariski
+specialization retains one literal `SieveMembership` term per chosen
+generator/localization, maps the algebraic cover presentation while accepting
+all target localization packages explicitly, and provides a closed zero-ring
+singleton whose returned pullback membership is computational data.
+
+The active delta adds no rewrite or unification rule. Direct specialization
+of the full generic recursion and a specialized head projection to the
+expanded ordinary-sieve membership family exceed the 60-second elaboration
+budget. A diagnostic injective membership facade with a beta rule also timed
+out and is rejected under the stable-head SOP. Arbitrary-length recursion
+stays with `finite_family_all_over_map`; the promoted bounded consumer uses
+its ordinary nil/cons observations and the existing elementwise pullback
+theorem. The expanded convenience wrapper remains a performance/usability
+gate rather than a semantic blocker or justification for rigidity.
+
+The fresh strict catalog has 1,911 checks across 77 mapped areas and zero
+unclassified entries. Health passes all 66 source/example targets in 638.261
+summed check-seconds at source snapshot
+`sha256:271c634e06aaa3ab038b1733f053b4647464e4b5ad623b751c3839e6ca157154`.
+Full integration CI independently passes all 66 Lambdapi targets in 627.693
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book
+evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
+strict catalog verification. PSSS-09b1 is ready for its authorized local
+checkpoint.
+
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.
 
@@ -3145,6 +3176,10 @@ The following remain explicit future work rather than hidden assumptions:
 - dependent elimination and semantic collage construction for primitive join;
 - sheaf, ringed-site, and localization-over-support packages downstream of
   the assembled CommRing-presheaf invertibility sieve;
+- proposition-valued Zariski coverage through either a supplied topology, an
+  independently extensional predicate, or a genuine propositional-truncation
+  reflector; generated saturation and h-level-stratified sheafification remain
+  separate gates from selected computational cover/containment data;
 - specialized higher `fapp1*` projections of `Hom_tele_func` beyond current
   demand;
 - raw unreified-path observer computation, reverse pointwise-to-coherent-core

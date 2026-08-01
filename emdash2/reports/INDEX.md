@@ -22,8 +22,9 @@ module or compatibility facade.
 `emdash3_2_finite_families.lp` owns the rule-free Nat-indexed,
 right-associated constant-family Sigma used by finite algebraic consumers,
 with constructors, projections, mapping, dependent pointwise evidence, and
-sethood but no `Fin`, lookup, append, list facade, or general inductive
-declaration mechanism.
+dependent evidence over independently selected evidence families, together
+with its generic pointwise map and sethood but no `Fin`, lookup, append, list
+facade, or general inductive declaration mechanism.
 `emdash3_2_commutative_algebra.lp` is the downstream rule-free set-carrier
 commutative-ring object layer: it separates operation data from law evidence,
 retains carrier sethood, and supplies the one-element zero ring.
@@ -64,14 +65,20 @@ assembles the support as a Path-valued higher sieve and an ordinary sieve with
 literal-arrow membership computation. One shaped proof-time comparison joins
 the two rigid represented-family variance presentations; it claims no
 topology, sheafhood, or ringed site.
-`emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a layer:
+`emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a/09b1
+layer:
 it combines an algebraic unimodular presentation with a dependent family of
 selected universal-property localization packages, exposes each chosen
 localization as an affine restriction-total arrow, and derives elementwise
 base-change factors, triangles, Sigma arrows, and actual pulled-back
-ordinary-sieve membership. It makes no global localization choice and claims
-no propositional coverage, generated topology, subcanonicity, `Spec`, or
-scheme.
+ordinary-sieve membership. It now also retains one literal membership term per
+selected generator/localization, maps the algebraic cover while accepting the
+target localization family explicitly, and exercises a closed singleton
+assembly through the generic finite recursion. It makes no global
+localization choice, rigid membership facade, propositional coverage,
+generated topology, subcanonicity, `Spec`, or scheme. The fully expanded
+specialized projection/recursive convenience wrapper remains a measured
+elaboration-performance gate, not a reason for a new runtime rule.
 The former D0/D1/decoder compatibility module and its seven self-only reviewer
 examples are retired. Unsuffixed omega-equivalence names now denote only the
 native equality-valued API; no compatibility aliases remain.

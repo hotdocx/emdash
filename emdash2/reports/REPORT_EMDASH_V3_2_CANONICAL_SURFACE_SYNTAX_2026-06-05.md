@@ -544,6 +544,7 @@ write
 []                       : FinFam(A,0)
 x :: xs                  : FinFam(A,succ n)
 All_P(xs)                : dependent evidence P(x_i) for every x_i
+AllOver_Q(xs;ps)         : evidence Q(x_i,p_i) over selected p_i : P(x_i)
 sum_R(xs)                : |R|
 dot_R(a,f)               : |R|
 Unimod_R(f; a, p)        : chosen data p : dot_R(a,f) = 1
@@ -551,15 +552,20 @@ ZarCover_R(n; f; a, p)   : finite algebraic cover presentation
 LocFam_R(f; ell)         : selected localization ell_i at every f_i
 ZarFamily_R(c; ell)      : algebraic cover c plus selected localizations
 D_R(f;ell)               : affine arrow (R[1/f]_ell,iota_ell) into R
+Members_Q(c;ell)         : each selected D_R(f_i;ell_i) belongs to Q
+h_*ZarFamily(c;m)        : mapped cover with supplied target localizations m
 h^*member                : membership of D_S(h(f);m) in h^*Q
 ```
 
 The literal owners are `FiniteFamily`, `finite_family_nil/cons`,
-`FiniteFamilyAll`, `comm_ring_finite_sum`, `comm_ring_finite_dot`,
+`FiniteFamilyAll`, `FiniteFamilyAllOver`,
+`finite_family_all_over_map`, `comm_ring_finite_sum`, `comm_ring_finite_dot`,
 `CommRingUnimodularPresentation`, and
 `CommRingZariskiCoverPresentation`. Presented geometric data additionally use
 `CommRingLocalizationFamily`, `CommRingZariskiCoverFamily`,
-`comm_ring_basic_open_arrow`, and
+`CommRingBasicOpenFamilyMembership`,
+`CommRingZariskiCoverFamilyMembership`,
+`comm_ring_zariski_cover_family_map`, `comm_ring_basic_open_arrow`, and
 `comm_ring_basic_open_pullback_membership`. The semicolon-separated cover
 notation retains the coefficient family and equation; it must not be read as
 a propositionally truncated existence statement. `ZarCover` alone names the
@@ -567,7 +573,11 @@ algebraic unit-ideal presentation; `ZarFamily` additionally retains selected
 universal-property localization packages. Neither spelling denotes an
 already constructed `Spec`, proposition-valued sieve coverage, or topology.
 The base-change membership operation also requires explicit source and target
-localization choices; no global localization choice is implicit.
+localization choices; no global localization choice is implicit. The generic
+finite map owns arbitrary-length recursion. A specialized expanded Zariski
+projection/recursion spelling is not canonical while it exceeds the bounded
+elaboration budget; comments should use the generic owner plus the named
+elementwise step rather than inventing a rigid membership head.
 
 For the universal-property polynomial layer, comments and examples may write
 

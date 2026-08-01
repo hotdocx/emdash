@@ -21022,3 +21022,99 @@ assert [R S : τ CommRing]
         (@comm_ring_hom_apply R S h f)
         target_localization));
 /* End of the PSSS-09a presented basic-open diagnostics. */
+
+// catalog-area: Finite selected Zariski containment and base change
+// Dependent evidence over selected evidence computes by Nat/Sigma recursion.
+assert [A : Grpd]
+  (P : τ A → Grpd)
+  (Q : Π x : τ A, τ (P x) → Grpd)
+  (n : τ Nat_grpd)
+  (x : τ A)
+  (xs : τ (@FiniteFamily A n))
+  (px : τ (P x))
+  (evidence : τ (@FiniteFamilyAll A P n xs)) ⊢
+  @FiniteFamilyAllOver
+    A P Q
+    (succ n)
+    (@finite_family_cons A n x xs)
+    (@finite_family_all_cons A P n x xs px evidence)
+  ≡ @Product_grpd
+      (Q x px)
+      (@FiniteFamilyAllOver A P Q n xs evidence);
+
+assert [A B : Grpd]
+  (map : τ (@Function_grpd A B))
+  [P : τ A → Grpd]
+  [P2 : τ B → Grpd]
+  [Q : Π x : τ A, τ (P x) → Grpd]
+  [Q2 : Π y : τ B, τ (P2 y) → Grpd]
+  (step : Π x : τ A,
+    Π px : τ (P x),
+    Π py : τ (P2 (map x)),
+      τ (Q x px) → τ (Q2 (map x) py))
+  (n : τ Nat_grpd) ⊢
+  @finite_family_all_over_map
+    A B map P P2 Q Q2 step n
+  : τ (@FiniteFamilyAllOverMap
+      A B map P P2 Q Q2 n);
+
+// Cover base change retains the mapped algebra and explicit target choices.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (family : τ (@CommRingZariskiCoverFamily R))
+  (target_localizations : τ (@CommRingLocalizationFamily
+      S
+      (@comm_ring_zariski_cover_family_length R family)
+      (@finite_family_map
+        (@comm_ring_carrier R)
+        (@comm_ring_carrier S)
+        (@comm_ring_hom_function R S h)
+        (@comm_ring_zariski_cover_family_length R family)
+        (@comm_ring_zariski_cover_family_generators R family)))) ⊢
+  @comm_ring_zariski_cover_family_map
+    R S h family target_localizations
+  : τ (@CommRingZariskiCoverFamily S);
+
+// Finite containment retains literal membership at every selected basic open.
+assert [R : τ CommRing]
+  (n : τ Nat_grpd)
+  (generators : τ (@FiniteFamily (@comm_ring_carrier R) n))
+  (localizations : τ (@CommRingLocalizationFamily R n generators))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R)) ⊢
+  @CommRingBasicOpenFamilyMembership
+    R n generators localizations Q
+  : Grpd;
+
+assert [R : τ CommRing]
+  (family : τ (@CommRingZariskiCoverFamily R))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R)) ⊢
+  @CommRingZariskiCoverFamilyMembership R family Q
+  : Grpd;
+
+// The bounded nonempty consumer assembles returned pullback membership.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  (source_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_one R)))
+  (target_localization : τ (@CommRingLocalizationAt
+      S (@comm_ring_hom_apply R S h (@comm_ring_one R))))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  (member : τ (@SieveMembership
+      (Op_cat CommRing_cat)
+      R Q
+      (@comm_ring_basic_open_arrow
+        R (@comm_ring_one R) source_localization))) ⊢
+  @comm_ring_unit_basic_open_family_pullback_membership
+    R S h source_localization target_localization Q member
+  : τ (@CommRingBasicOpenFamilyMembership
+      S
+      (succ zero)
+      (@finite_family_singleton
+        (@comm_ring_carrier S)
+        (@comm_ring_hom_apply R S h (@comm_ring_one R)))
+      (@comm_ring_localization_family_singleton
+        S
+        (@comm_ring_hom_apply R S h (@comm_ring_one R))
+        target_localization)
+      (@sieve_pullback (Op_cat CommRing_cat) S R h Q));
+/* End of the PSSS-09b1 finite-containment diagnostics. */
