@@ -90,7 +90,7 @@ describe('DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M binder', () => {
 
         assert.equal(
             CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION,
-            'DIRECT-MIXED-CONSTANT-MIDDLE-1M-CATEGORICAL-PROGRAM-1'
+            'DIRECT-MIXED-NEGATIVE-TOWER-1P-CATEGORICAL-PROGRAM-1'
         );
         assert.match(
             core,

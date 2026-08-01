@@ -330,7 +330,7 @@ export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
     'DISPLAYED-TELESCOPE-GENERIC-1-CATEGORICAL-PROGRAM-1' as const;
 
 export const CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION =
-    'DIRECT-MIXED-CONSTANT-MIDDLE-1M-CATEGORICAL-PROGRAM-1' as const;
+    'DIRECT-MIXED-NEGATIVE-TOWER-1P-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -7689,6 +7689,112 @@ export class CoreCategoricalProgram {
             outerSource.baseCategory.expression,
             outerSource.expression,
             innerSource.expression,
+            target.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
+     * Direct finite-tower analogue of
+     *
+     *   lambda^n k. lambda^f c.
+     *     lambda^f a1. ... lambda^f an. body.
+     *
+     * Every inner family is based over `Op K`; the result is a whole
+     * displayed functor into the right-associated existing `Functor_catd`
+     * tower. This remains direct binder introduction, not contextual curry.
+     */
+    mixedDisplayedFunctorTowerLambda(
+        outerBindingValue: CoreCategoricalDisplayedContextBinding,
+        innerBindingValues:
+            readonly CoreCategoricalDisplayedContextBinding[],
+        targetValue: CoreCategoricalDisplayedFamily,
+        body: (
+            outerToken: CoreCategoricalSlotToken,
+            innerTokens: readonly CoreCategoricalSlotToken[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'direct recursive mixed tower abstraction',
+            options.source
+        );
+        this.requireDirectMixedIntroduction(nodeProvenance);
+        if (innerBindingValues.length < 2) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Direct mixed tower abstraction requires at least two ' +
+                    'negative inner bindings'
+            );
+        }
+        const bindingNames = [
+            outerBindingValue.name,
+            ...innerBindingValues.map(binding => binding.name)
+        ];
+        if (new Set(bindingNames).size !== bindingNames.length) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Direct mixed tower bindings require distinct names'
+            );
+        }
+        const outerSource = this.requireDisplayedFamily(
+            outerBindingValue.family,
+            nodeProvenance
+        );
+        const innerSources = innerBindingValues.map(binding =>
+            this.requireDisplayedFamily(
+                binding.family,
+                nodeProvenance
+            )
+        );
+        const target = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (!this.categoryExpressionsDefinitionallyEqual(
+            target.baseCategory.expression,
+            outerSource.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Direct mixed tower outer source and target must share ' +
+                    'their base'
+            );
+        }
+        const expectedInnerBase = this.oppositeCategoryExpression(
+            outerSource.baseCategory.expression,
+            nodeProvenance
+        );
+        innerSources.forEach(innerSource => {
+            if (!this.categoryExpressionsDefinitionallyEqual(
+                innerSource.baseCategory.expression,
+                expectedInnerBase
+            )) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    'Every direct mixed tower inner source must be based ' +
+                        'over the opposite of the outer base'
+                );
+            }
+        });
+        return this.builder.mixedDisplayedFunctorTowerLambda(
+            outerBindingValue.name,
+            innerBindingValues.map(binding => binding.name),
+            outerSource.baseCategory.expression,
+            outerSource.expression,
+            innerSources.map(source => source.expression),
             target.expression,
             body,
             {

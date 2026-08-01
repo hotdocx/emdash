@@ -506,7 +506,8 @@ const capabilities = [
         apiMethods: [
             'displayedFunctorLambda',
             'nestedDisplayedFunctorLambda',
-            'mixedDisplayedFunctorLambda'
+            'mixedDisplayedFunctorLambda',
+            'mixedDisplayedFunctorTowerLambda'
         ],
         profile:
             'fibred-binder-1 and descendants; direct mixed introduction ' +
@@ -515,14 +516,16 @@ const capabilities = [
             'Expected source and target displayed families select ^fd.',
         scopedBindings:
             'One displayed object slot with a hidden base slot owned by the ' +
-            'contextual compiler.',
+            'contextual compiler; the direct tower method retains one ' +
+            'positive outer slot and a finite negative inner array.',
         dependencyAndVariance: 'functorial variation, displayed dependency',
         actionOwnership:
             'Existing displayed identity and generic comp_fapp0 at Catd_cat.',
         recursiveBodyGrammar:
             'identity, eta, finite nested application composition, and ' +
             'qualified weakening/reindexing; the direct mixed profile adds ' +
-            'F[c](a) | G(mixed-body)',
+            'F[c](a) | G(mixed-body), and its tower method adds exact ' +
+            'F[c](a1)...(an) eta plus closed target maps',
         proposedText:
             'λ^fd a [: E]. a; λ^fd a. GG (FF a)',
         locatedSyntax: 'requires-typed-expected-contract',
@@ -698,7 +701,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 80,
+        publicProgramMethods: 81,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,

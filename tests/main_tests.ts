@@ -148,6 +148,7 @@ import './v3_2_categorical_direct_mixed_weakening_transfer_tests';
 import './v3_2_categorical_direct_mixed_constant_middle_tests';
 import './v3_2_categorical_direct_mixed_constant_middle_transfer_tests';
 import './v3_2_categorical_direct_mixed_introduction_tests';
+import './v3_2_categorical_direct_mixed_tower_tests';
 import './v3_2_categorical_direct_mixed_section_root_tests';
 import './v3_2_categorical_mixed_nested_factorization_tests';
 import './v3_2_categorical_mixed_nested_action_tests';

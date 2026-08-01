@@ -618,6 +618,36 @@ export type CoreCategoricalAbstractionEvidence =
     | (
         CoreCategoricalAbstractionEvidenceBase & {
             readonly rule:
+                'categorical.direct-mixed-displayed-functor-tower';
+            readonly variation: 'functorial';
+            readonly dependency: 'displayed';
+            readonly bindingNames: readonly string[];
+            readonly bindingModes:
+                readonly ('natural' | 'functorial')[];
+            readonly outerSourceFamily: KernelExpression;
+            readonly innerSourceFamilies:
+                readonly KernelExpression[];
+            readonly initialTargetFamily: KernelExpression;
+            readonly targetFamily: KernelExpression;
+            readonly expectedTowerFamily: KernelExpression;
+            readonly resultFamily: KernelExpression;
+            readonly rootKind:
+                | 'closed-coherent-subject'
+                | 'bound-outer-identity';
+            readonly towerDepth: number;
+            readonly outerUsageCount: number;
+            readonly innerUsageCounts: readonly number[];
+            readonly baseUsageCount: number;
+            readonly targetChainLength: number;
+            readonly targetLiftCount: number;
+            readonly contextSize: number;
+            readonly contextRelation:
+                'natural-base-positive-outer-negative-functor-tower';
+        }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
                 | 'categorical.displayed-transfor-eta'
                 | 'categorical.displayed-transfor-composition';
             readonly variation: 'natural';
@@ -1016,6 +1046,41 @@ interface CoreCategoricalCompiledDirectMixedFactorization {
     ][];
     readonly rootSourceFamilies: readonly KernelExpression[];
     readonly initialTargetFamilies: readonly KernelExpression[];
+}
+
+interface CoreCategoricalDirectMixedTowerLeafFactorization {
+    readonly tag: 'leaf';
+    readonly rootExpression: KernelExpression;
+    readonly rootRecovered: ElaboratedSurfaceTerm['recovered'];
+    readonly rootKind:
+        | 'closed-coherent-subject'
+        | 'bound-outer-identity';
+    readonly initialTargetFamily: KernelExpression;
+    readonly targetFamily: KernelExpression;
+    readonly baseUsageCount: 0 | 1;
+}
+
+interface CoreCategoricalDirectMixedTowerTargetFactorization {
+    readonly tag: 'target-map';
+    readonly child: CoreCategoricalDirectMixedTowerFactorization;
+    readonly mapper: InternalCoreCategoricalTerm;
+    readonly targetFamily: KernelExpression;
+}
+
+type CoreCategoricalDirectMixedTowerFactorization =
+    | CoreCategoricalDirectMixedTowerLeafFactorization
+    | CoreCategoricalDirectMixedTowerTargetFactorization;
+
+interface CoreCategoricalCompiledDirectMixedTowerFactorization {
+    readonly compilation: CoreCategoricalDisplayedContextualCompilation;
+    readonly recovered: ElaboratedSurfaceTerm['recovered'];
+    readonly rootKind:
+        CoreCategoricalDirectMixedTowerLeafFactorization['rootKind'];
+    readonly initialTargetFamily: KernelExpression;
+    readonly outerUsageCount: 1;
+    readonly innerUsageCounts: readonly number[];
+    readonly baseUsageCount: number;
+    readonly targetChainLength: number;
 }
 
 interface InternalCoreCategoricalHomBoundary
@@ -2027,6 +2092,89 @@ export class CoreCategoricalScopedBuilder {
             ],
             nodeProvenance
         );
+    }
+
+    /**
+     * Build the exact right-associated classifier
+     *
+     *   Functor_catd(A1, ... Functor_catd(An, B) ...).
+     *
+     * This is construction metadata around the existing kernel owner. It
+     * adds neither a new classifier nor a curry/total-context presentation.
+     */
+    private directMixedTowerFamily(
+        baseCategory: KernelExpression,
+        innerSourceFamilies: readonly KernelExpression[],
+        targetFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return innerSourceFamilies.reduceRight(
+            (currentTarget, sourceFamily) =>
+                this.mixedFunctorFamily(
+                    baseCategory,
+                    sourceFamily,
+                    currentTarget,
+                    nodeProvenance
+                ),
+            targetFamily
+        );
+    }
+
+    /**
+     * Lift one already-coherent `G : Functord B D` through every enclosing
+     * negative `Functor_catd` layer, deepest first. Each step is the existing
+     * covariant target action `Functor_catd_fapp0_func`; no pointwise action
+     * or external coherence evidence is reconstructed here.
+     */
+    private liftDirectMixedTargetActionThroughTower(
+        baseCategory: KernelExpression,
+        innerSourceFamilies: readonly KernelExpression[],
+        sourceTargetFamily: KernelExpression,
+        targetTargetFamily: KernelExpression,
+        displayedFunctor: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalDisplayedContextualCompilation {
+        let term = displayedFunctor;
+        let sourceFamily = sourceTargetFamily;
+        let targetFamily = targetTargetFamily;
+        for (
+            let index = innerSourceFamilies.length - 1;
+            index >= 0;
+            index -= 1
+        ) {
+            const innerSourceFamily = innerSourceFamilies[index];
+            term = this.mixedTargetAction(
+                baseCategory,
+                innerSourceFamily,
+                sourceFamily,
+                targetFamily,
+                term,
+                nodeProvenance
+            );
+            sourceFamily = this.mixedFunctorFamily(
+                baseCategory,
+                innerSourceFamily,
+                sourceFamily,
+                nodeProvenance
+            );
+            targetFamily = this.mixedFunctorFamily(
+                baseCategory,
+                innerSourceFamily,
+                targetFamily,
+                nodeProvenance
+            );
+        }
+        return {
+            term,
+            sourceFamily,
+            targetFamily,
+            identity: false,
+            structuralPrerequisites: Object.freeze([]),
+            dependentPrerequisites: Object.freeze([
+                'stable-functor-family',
+                'mixed-functor-target-action'
+            ])
+        };
     }
 
     private mixedSourceAction(
@@ -7988,6 +8136,503 @@ export class CoreCategoricalScopedBuilder {
         };
     }
 
+    /**
+     * Recognize a direct finite negative-inner application spine. The
+     * accepted leaves are exactly
+     *
+     *   F[k](c)(a1)...(an)
+     *   c(a1)...(an)
+     *
+     * and finite closed covariant target maps around either leaf. The
+     * application spine itself supplies the object-level view; its existing
+     * `indexed-functor` classifiers retain the internally owned arrow action.
+     */
+    private directMixedTowerFactorization(
+        term: InternalCoreCategoricalTerm,
+        outerOrdinal: number,
+        innerOrdinals: readonly number[],
+        baseOrdinal: number,
+        baseCategory: KernelExpression,
+        outerSourceFamily: KernelExpression,
+        innerSourceFamilies: readonly KernelExpression[]
+    ): CoreCategoricalDirectMixedTowerFactorization | undefined {
+        const oppositeBase = this.oppositeCategory(
+            baseCategory,
+            term.node.provenance
+        );
+        const initialTargetObject = indexedObjectView(term.type);
+        if (
+            initialTargetObject !== undefined &&
+            initialTargetObject.indexOrdinal === baseOrdinal &&
+            kernelExpressionEquals(
+                initialTargetObject.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                initialTargetObject.familyBaseCategory,
+                baseCategory
+            )
+        ) {
+            const initialTargetFamily = initialTargetObject.family;
+            const suffixFamilies: KernelExpression[] = new Array(
+                innerSourceFamilies.length + 1
+            );
+            suffixFamilies[innerSourceFamilies.length] =
+                initialTargetFamily;
+            for (
+                let index = innerSourceFamilies.length - 1;
+                index >= 0;
+                index -= 1
+            ) {
+                suffixFamilies[index] = this.mixedFunctorFamily(
+                    baseCategory,
+                    innerSourceFamilies[index],
+                    suffixFamilies[index + 1],
+                    term.node.provenance
+                );
+            }
+
+            let current = term;
+            let validSpine = true;
+            for (
+                let index = innerSourceFamilies.length - 1;
+                index >= 0;
+                index -= 1
+            ) {
+                const currentObject = indexedObjectView(current.type);
+                if (
+                    current.node.tag !== 'typed-application' ||
+                    current.node.judgment.target !==
+                        'indexed-fibre-functor-object' ||
+                    current.node.argument[
+                        CORE_CATEGORICAL_BOUNDARY
+                    ] === true ||
+                    currentObject === undefined ||
+                    currentObject.indexOrdinal !== baseOrdinal ||
+                    !kernelExpressionEquals(
+                        currentObject.baseCategory,
+                        baseCategory
+                    ) ||
+                    !kernelExpressionEquals(
+                        currentObject.familyBaseCategory,
+                        baseCategory
+                    ) ||
+                    !kernelExpressionEquals(
+                        currentObject.family,
+                        suffixFamilies[index + 1]
+                    )
+                ) {
+                    validSpine = false;
+                    break;
+                }
+                const argument = current.node.argument as
+                    InternalCoreCategoricalTerm;
+                const argumentObject = indexedObjectView(argument.type);
+                const subject = current.node.subject;
+                if (
+                    argument.node.tag !== 'slot-token' ||
+                    argument.node.ordinal !== innerOrdinals[index] ||
+                    argumentObject === undefined ||
+                    argumentObject.indexOrdinal !== baseOrdinal ||
+                    !kernelExpressionEquals(
+                        argumentObject.baseCategory,
+                        baseCategory
+                    ) ||
+                    !kernelExpressionEquals(
+                        argumentObject.familyBaseCategory,
+                        oppositeBase
+                    ) ||
+                    !kernelExpressionEquals(
+                        argumentObject.family,
+                        innerSourceFamilies[index]
+                    ) ||
+                    subject.type.tag !== 'indexed-functor' ||
+                    subject.type.indexOrdinal !== baseOrdinal ||
+                    !kernelExpressionEquals(
+                        subject.type.baseCategory,
+                        baseCategory
+                    ) ||
+                    !kernelExpressionEquals(
+                        indexedFunctorSourceBase(subject.type),
+                        oppositeBase
+                    ) ||
+                    !kernelExpressionEquals(
+                        indexedFunctorTargetBase(subject.type),
+                        baseCategory
+                    ) ||
+                    !kernelExpressionEquals(
+                        subject.type.sourceFamily,
+                        innerSourceFamilies[index]
+                    ) ||
+                    !kernelExpressionEquals(
+                        subject.type.targetFamily,
+                        suffixFamilies[index + 1]
+                    ) ||
+                    subject.type.underlyingObjectFamily === undefined ||
+                    !kernelExpressionEquals(
+                        subject.type.underlyingObjectFamily,
+                        suffixFamilies[index]
+                    )
+                ) {
+                    validSpine = false;
+                    break;
+                }
+                current = subject;
+            }
+
+            if (validSpine) {
+                const expectedTowerFamily = suffixFamilies[0];
+                if (
+                    current.node.tag === 'slot-token' &&
+                    current.node.ordinal === outerOrdinal &&
+                    current.type.tag === 'indexed-functor' &&
+                    current.type.indexOrdinal === baseOrdinal &&
+                    current.type.underlyingObjectFamily !== undefined &&
+                    kernelExpressionEquals(
+                        current.type.baseCategory,
+                        baseCategory
+                    ) &&
+                    kernelExpressionEquals(
+                        current.type.underlyingObjectFamily,
+                        outerSourceFamily
+                    ) &&
+                    kernelExpressionEquals(
+                        outerSourceFamily,
+                        expectedTowerFamily
+                    )
+                ) {
+                    const identity = this.displayedIdentityCompilation(
+                        baseCategory,
+                        outerSourceFamily,
+                        term.node.provenance
+                    );
+                    return Object.freeze({
+                        tag: 'leaf' as const,
+                        rootExpression: identity.term,
+                        rootRecovered: Object.freeze([]),
+                        rootKind: 'bound-outer-identity' as const,
+                        initialTargetFamily,
+                        targetFamily: initialTargetFamily,
+                        baseUsageCount: 0 as const
+                    });
+                }
+
+                if (
+                    current.node.tag === 'typed-application' &&
+                    current.node.judgment.target ===
+                        'indexed-fibre-functor-object' &&
+                    current.node.argument[
+                        CORE_CATEGORICAL_BOUNDARY
+                    ] !== true
+                ) {
+                    const outerArgument = current.node.argument as
+                        InternalCoreCategoricalTerm;
+                    const outerObject = indexedObjectView(
+                        outerArgument.type
+                    );
+                    const projected = current.node.subject;
+                    if (
+                        outerArgument.node.tag === 'slot-token' &&
+                        outerArgument.node.ordinal === outerOrdinal &&
+                        outerObject !== undefined &&
+                        outerObject.indexOrdinal === baseOrdinal &&
+                        kernelExpressionEquals(
+                            outerObject.baseCategory,
+                            baseCategory
+                        ) &&
+                        kernelExpressionEquals(
+                            outerObject.familyBaseCategory,
+                            baseCategory
+                        ) &&
+                        kernelExpressionEquals(
+                            outerObject.family,
+                            outerSourceFamily
+                        ) &&
+                        projected.type.tag === 'indexed-functor' &&
+                        projected.type.indexOrdinal === baseOrdinal &&
+                        projected.node.tag === 'typed-application' &&
+                        projected.node.judgment.target ===
+                            'displayed-functor-fibre' &&
+                        projected.node.argument[
+                            CORE_CATEGORICAL_BOUNDARY
+                        ] !== true
+                    ) {
+                        const base = projected.node.argument as
+                            InternalCoreCategoricalTerm;
+                        const subject = projected.node.subject;
+                        if (
+                            base.node.tag === 'slot-token' &&
+                            base.node.ordinal === baseOrdinal &&
+                            subject.type.tag === 'displayed-functor' &&
+                            subject.closed !== undefined &&
+                            subject.usage.length === 0 &&
+                            kernelExpressionEquals(
+                                subject.type.baseCategory,
+                                baseCategory
+                            ) &&
+                            kernelExpressionEquals(
+                                subject.type.sourceFamily,
+                                outerSourceFamily
+                            ) &&
+                            kernelExpressionEquals(
+                                subject.type.targetFamily,
+                                expectedTowerFamily
+                            )
+                        ) {
+                            return Object.freeze({
+                                tag: 'leaf' as const,
+                                rootExpression: subject.closed.term,
+                                rootRecovered: Object.freeze([
+                                    ...subject.closed.recovered
+                                ]),
+                                rootKind:
+                                    'closed-coherent-subject' as const,
+                                initialTargetFamily,
+                                targetFamily: initialTargetFamily,
+                                baseUsageCount: 1 as const
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        // Recursive closed covariant target map `G[k](tower-body)`.
+        if (
+            term.node.tag !== 'typed-application' ||
+            term.node.judgment.target !==
+                'indexed-fibre-functor-object' ||
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] === true
+        ) {
+            return undefined;
+        }
+        const argument = term.node.argument as
+            InternalCoreCategoricalTerm;
+        const appliedFunctor = term.node.subject;
+        const termObject = indexedObjectView(term.type);
+        if (
+            termObject === undefined ||
+            appliedFunctor.type.tag !== 'indexed-functor' ||
+            appliedFunctor.type.indexOrdinal !== baseOrdinal ||
+            !kernelExpressionEquals(
+                appliedFunctor.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                indexedFunctorSourceBase(appliedFunctor.type),
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                indexedFunctorTargetBase(appliedFunctor.type),
+                baseCategory
+            ) ||
+            appliedFunctor.node.tag !== 'typed-application' ||
+            appliedFunctor.node.judgment.target !==
+                'displayed-functor-fibre' ||
+            appliedFunctor.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            return undefined;
+        }
+        const base = appliedFunctor.node.argument as
+            InternalCoreCategoricalTerm;
+        const mapper = appliedFunctor.node.subject;
+        if (
+            base.node.tag !== 'slot-token' ||
+            base.node.ordinal !== baseOrdinal ||
+            mapper.type.tag !== 'displayed-functor' ||
+            mapper.closed === undefined ||
+            mapper.usage.length !== 0 ||
+            !kernelExpressionEquals(
+                mapper.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                mapper.type.sourceFamily,
+                appliedFunctor.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                mapper.type.targetFamily,
+                appliedFunctor.type.targetFamily
+            )
+        ) {
+            return undefined;
+        }
+        const child = this.directMixedTowerFactorization(
+            argument,
+            outerOrdinal,
+            innerOrdinals,
+            baseOrdinal,
+            baseCategory,
+            outerSourceFamily,
+            innerSourceFamilies
+        );
+        const argumentObject = indexedObjectView(argument.type);
+        if (
+            child === undefined ||
+            argumentObject === undefined ||
+            argumentObject.indexOrdinal !== baseOrdinal ||
+            !kernelExpressionEquals(
+                argumentObject.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                argumentObject.familyBaseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                argumentObject.family,
+                child.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                mapper.type.sourceFamily,
+                child.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                termObject.family,
+                mapper.type.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                termObject.familyBaseCategory,
+                baseCategory
+            )
+        ) {
+            return undefined;
+        }
+        return Object.freeze({
+            tag: 'target-map' as const,
+            child,
+            mapper,
+            targetFamily: mapper.type.targetFamily
+        });
+    }
+
+    private compileDirectMixedTowerFactorization(
+        factorization: CoreCategoricalDirectMixedTowerFactorization,
+        baseCategory: KernelExpression,
+        outerSourceFamily: KernelExpression,
+        innerSourceFamilies: readonly KernelExpression[],
+        nodeProvenance: Provenance
+    ): CoreCategoricalCompiledDirectMixedTowerFactorization {
+        if (factorization.tag === 'leaf') {
+            const expectedTowerFamily = this.directMixedTowerFamily(
+                baseCategory,
+                innerSourceFamilies,
+                factorization.initialTargetFamily,
+                nodeProvenance
+            );
+            if (factorization.rootKind === 'bound-outer-identity') {
+                if (!kernelExpressionEquals(
+                    outerSourceFamily,
+                    expectedTowerFamily
+                )) {
+                    this.fail(
+                        'CLASSIFIER_ARGUMENT_MISMATCH',
+                        nodeProvenance,
+                        'Direct mixed tower identity has unequal source ' +
+                            'and target families'
+                    );
+                }
+            }
+            return {
+                compilation: {
+                    term: factorization.rootExpression,
+                    sourceFamily: outerSourceFamily,
+                    targetFamily: expectedTowerFamily,
+                    identity:
+                        factorization.rootKind ===
+                            'bound-outer-identity',
+                    structuralPrerequisites: Object.freeze([]),
+                    dependentPrerequisites: Object.freeze([
+                        'stable-functor-family',
+                        ...(factorization.rootKind ===
+                            'bound-outer-identity'
+                            ? ['displayed-identity' as const]
+                            : [])
+                    ])
+                },
+                recovered: factorization.rootRecovered,
+                rootKind: factorization.rootKind,
+                initialTargetFamily:
+                    factorization.initialTargetFamily,
+                outerUsageCount: 1,
+                innerUsageCounts: Object.freeze(
+                    innerSourceFamilies.map(() => 1)
+                ),
+                baseUsageCount: factorization.baseUsageCount,
+                targetChainLength: 0
+            };
+        }
+
+        const child = this.compileDirectMixedTowerFactorization(
+            factorization.child,
+            baseCategory,
+            outerSourceFamily,
+            innerSourceFamilies,
+            nodeProvenance
+        );
+        const mapper = factorization.mapper;
+        if (
+            mapper.type.tag !== 'displayed-functor' ||
+            mapper.closed === undefined ||
+            mapper.usage.length !== 0 ||
+            !kernelExpressionEquals(
+                mapper.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                mapper.type.sourceFamily,
+                factorization.child.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                mapper.type.targetFamily,
+                factorization.targetFamily
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed tower target map has incompatible adjacent ' +
+                    'families'
+            );
+        }
+        const action = this.liftDirectMixedTargetActionThroughTower(
+            baseCategory,
+            innerSourceFamilies,
+            factorization.child.targetFamily,
+            factorization.targetFamily,
+            mapper.closed.term,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            action.sourceFamily,
+            child.compilation.targetFamily
+        )) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed tower target lift produced the wrong source ' +
+                    'classifier'
+            );
+        }
+        return {
+            ...child,
+            compilation: this.composeDisplayedCompilations(
+                baseCategory,
+                action,
+                child.compilation,
+                nodeProvenance
+            ),
+            recovered: Object.freeze([
+                ...child.recovered,
+                ...mapper.closed.recovered
+            ]),
+            baseUsageCount: child.baseUsageCount + 1,
+            targetChainLength: child.targetChainLength + 1
+        };
+    }
+
     private directDisplayedFunctorChain(
         term: InternalCoreCategoricalTerm,
         fibreOrdinal: number,
@@ -11474,6 +12119,383 @@ export class CoreCategoricalScopedBuilder {
             this.activeTokenOrdinals.shift();
             this.activeTokenOrdinals.shift();
             this.activeTokenOrdinals.shift();
+        }
+    }
+
+    /**
+     * Direct arbitrary-finite negative-inner introduction
+     *
+     *   lambda^n k. lambda^f c.
+     *     lambda^f a1. ... lambda^f an. body
+     *       : Functord C
+     *           (Functor_catd A1 (... (Functor_catd An B))).
+     *
+     * This is the same fundamental nested-binder presentation as the
+     * one-inner API. It does not construct or consume a total-context
+     * section and it never invokes curry.
+     */
+    mixedDisplayedFunctorTowerLambda(
+        outerName: string,
+        innerNames: readonly string[],
+        baseCategory: KernelExpression,
+        outerSourceFamily: KernelExpression,
+        innerSourceFamilies: readonly KernelExpression[],
+        targetFamily: KernelExpression,
+        bodyBuilder: (
+            outerToken: CoreCategoricalSlotToken,
+            innerTokens: readonly CoreCategoricalSlotToken[]
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        assertSafeIdentifier(
+            outerName,
+            'Direct mixed tower outer binder hint'
+        );
+        innerNames.forEach(name => assertSafeIdentifier(
+            name,
+            'Direct mixed tower inner binder hint'
+        ));
+        kernelAssertScoped(baseCategory);
+        kernelAssertScoped(outerSourceFamily);
+        innerSourceFamilies.forEach(family =>
+            kernelAssertScoped(family)
+        );
+        kernelAssertScoped(targetFamily);
+        const nodeProvenance = this.nodeProvenance(
+            `direct mixed tower abstraction ${outerName}`,
+            options.provenance
+        );
+        if (this.options.directMixedIntroduction === undefined) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Direct mixed tower abstraction requires the reviewed ' +
+                    'DIRECT-MIXED-NEGATIVE-TOWER-1P capability'
+            );
+        }
+        if (
+            innerNames.length < 2 ||
+            innerNames.length !== innerSourceFamilies.length
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed tower abstraction requires at least two ' +
+                    'named inner families'
+            );
+        }
+        const bindingNames = [outerName, ...innerNames];
+        if (new Set(bindingNames).size !== bindingNames.length) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed tower binders require distinct hints'
+            );
+        }
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'functorial';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'displayed';
+        if (
+            variation !== 'functorial' ||
+            dependency !== 'displayed'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed tower fibre binders require functorial ' +
+                    'variation and displayed dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                'The direct mixed tower target recursion is covariant'
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed tower introduction abstracts object-level ' +
+                    'inputs'
+            );
+        }
+
+        const baseName = `${outerName}Base`;
+        const baseToken = this.slot(
+            baseName,
+            baseCategory,
+            nodeProvenance
+        );
+        const baseOrdinal = baseToken.node.tag === 'slot-token'
+            ? baseToken.node.ordinal
+            : -1;
+        const outerToken = this.indexedObjectSlot(
+            outerName,
+            baseCategory,
+            outerSourceFamily,
+            baseOrdinal,
+            nodeProvenance,
+            true
+        );
+        const outerOrdinal = outerToken.node.tag === 'slot-token'
+            ? outerToken.node.ordinal
+            : -1;
+        const oppositeBase = this.oppositeCategory(
+            baseCategory,
+            nodeProvenance
+        );
+        const innerTokens = innerNames.map((name, index) =>
+            this.indexedObjectSlot(
+                name,
+                baseCategory,
+                innerSourceFamilies[index],
+                baseOrdinal,
+                nodeProvenance,
+                false,
+                oppositeBase
+            )
+        );
+        const innerOrdinals = innerTokens.map(token =>
+            token.node.tag === 'slot-token'
+                ? token.node.ordinal
+                : -1
+        );
+        const frozenInnerTokens = Object.freeze(
+            innerTokens.map(token =>
+                token as CoreCategoricalSlotToken
+            )
+        );
+        const outerScope = [...this.activeTokenOrdinals];
+        this.activeTokenOrdinals.unshift(baseOrdinal);
+        this.activeTokenOrdinals.unshift(outerOrdinal);
+        innerOrdinals.forEach(ordinal =>
+            this.activeTokenOrdinals.unshift(ordinal)
+        );
+        this.activeDisplayedBases.set(baseOrdinal, baseToken);
+        try {
+            // Evaluate exactly once; no callback survives elaboration.
+            const body = this.requireTerm(
+                bodyBuilder(
+                    outerToken as CoreCategoricalSlotToken,
+                    frozenInnerTokens
+                ),
+                nodeProvenance
+            );
+            const bodyObject = indexedObjectView(body.type);
+            if (
+                bodyObject === undefined ||
+                bodyObject.indexOrdinal !== baseOrdinal ||
+                !kernelExpressionEquals(
+                    bodyObject.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    bodyObject.familyBaseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    bodyObject.family,
+                    targetFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Direct mixed tower body is not an object of the ' +
+                        'requested target family'
+                );
+            }
+            const factorization = this.directMixedTowerFactorization(
+                body,
+                outerOrdinal,
+                innerOrdinals,
+                baseOrdinal,
+                baseCategory,
+                outerSourceFamily,
+                innerSourceFamilies
+            );
+            const localOrdinals = new Set([
+                baseOrdinal,
+                outerOrdinal,
+                ...innerOrdinals
+            ]);
+            if (
+                factorization === undefined ||
+                !kernelExpressionEquals(
+                    factorization.targetFamily,
+                    targetFamily
+                ) ||
+                body.usage.some(([ordinal]) =>
+                    !localOrdinals.has(ordinal)
+                )
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'The direct mixed tower binder accepts only exact ' +
+                        'closed eta, exact bound-outer identity, and finite ' +
+                        'closed covariant target maps'
+                );
+            }
+            const compiled =
+                this.compileDirectMixedTowerFactorization(
+                    factorization,
+                    baseCategory,
+                    outerSourceFamily,
+                    innerSourceFamilies,
+                    nodeProvenance
+                );
+            if (
+                usageCount(body.usage, outerOrdinal) !==
+                    compiled.outerUsageCount ||
+                innerOrdinals.some((ordinal, index) =>
+                    usageCount(body.usage, ordinal) !==
+                        compiled.innerUsageCounts[index]
+                ) ||
+                usageCount(body.usage, baseOrdinal) !==
+                    compiled.baseUsageCount
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'Direct mixed tower occurrence counts do not match ' +
+                        'the internally factorized application spine'
+                );
+            }
+            const expectedTowerFamily =
+                this.directMixedTowerFamily(
+                    baseCategory,
+                    innerSourceFamilies,
+                    targetFamily,
+                    nodeProvenance
+                );
+            if (!kernelExpressionEquals(
+                compiled.compilation.targetFamily,
+                expectedTowerFamily
+            )) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Direct mixed tower compiler produced the wrong ' +
+                        'nested target family'
+                );
+            }
+            const resultExpression = compiled.compilation.term;
+            const resultType: CoreType = {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategory(
+                    baseCategory,
+                    outerSourceFamily,
+                    expectedTowerFamily,
+                    nodeProvenance
+                ),
+                baseCategory,
+                sourceFamily: outerSourceFamily,
+                targetFamily: expectedTowerFamily
+            };
+            const resultNode: TemporaryCategoricalNode = {
+                tag: 'explicit-core-term',
+                term: resultExpression,
+                provenance: nodeProvenance
+            };
+            let remainingUsage = body.usage;
+            innerOrdinals.forEach(ordinal => {
+                remainingUsage = removeUsage(
+                    remainingUsage,
+                    ordinal
+                );
+            });
+            remainingUsage = removeUsage(
+                removeUsage(remainingUsage, outerOrdinal),
+                baseOrdinal
+            );
+            const closed = deepFreeze({
+                term: resultExpression,
+                type: copyCoreType(resultType),
+                sourceSpan: this.spanFor(nodeProvenance),
+                recovered: compiled.recovered
+            });
+            const provisional = this.makeTerm(
+                resultNode,
+                resultType,
+                remainingUsage,
+                closed,
+                body.abstractions
+            );
+            const normalizedScope = [
+                ...[...innerOrdinals].reverse(),
+                outerOrdinal,
+                baseOrdinal,
+                ...outerScope
+            ];
+            const evidence = deepFreeze({
+                rule: (
+                    'categorical.direct-mixed-displayed-functor-tower'
+                ) as const,
+                name: outerName,
+                plicity,
+                variation: 'functorial' as const,
+                polarity: 'covariant' as const,
+                cellLevel: 'object' as const,
+                dependency: 'displayed' as const,
+                sourceCategory: baseCategory,
+                bindingNames: [
+                    baseName,
+                    outerName,
+                    ...innerNames
+                ],
+                bindingModes: [
+                    'natural' as const,
+                    'functorial' as const,
+                    ...innerNames.map(() => 'functorial' as const)
+                ],
+                outerSourceFamily,
+                innerSourceFamilies: [...innerSourceFamilies],
+                initialTargetFamily: compiled.initialTargetFamily,
+                targetFamily,
+                expectedTowerFamily,
+                resultFamily: expectedTowerFamily,
+                rootKind: compiled.rootKind,
+                towerDepth: innerSourceFamilies.length,
+                outerUsageCount: compiled.outerUsageCount,
+                innerUsageCounts: [...compiled.innerUsageCounts],
+                baseUsageCount: compiled.baseUsageCount,
+                targetChainLength: compiled.targetChainLength,
+                targetLiftCount:
+                    compiled.targetChainLength *
+                    innerSourceFamilies.length,
+                contextSize: innerSourceFamilies.length + 2,
+                contextRelation: (
+                    'natural-base-positive-outer-negative-functor-tower'
+                ) as const,
+                body: this.normalizeNode(body, normalizedScope),
+                result: this.normalizeNode(provisional, outerScope),
+                structuralPrerequisites:
+                    compiled.compilation.structuralPrerequisites,
+                dependentPrerequisites:
+                    compiled.compilation.dependentPrerequisites,
+                provenance: nodeProvenance
+            });
+            return this.makeTerm(
+                resultNode,
+                resultType,
+                remainingUsage,
+                closed,
+                [...body.abstractions, evidence]
+            );
+        } finally {
+            this.activeDisplayedBases.delete(baseOrdinal);
+            for (
+                let index = 0;
+                index < innerOrdinals.length + 2;
+                index += 1
+            ) {
+                this.activeTokenOrdinals.shift();
+            }
         }
     }
 

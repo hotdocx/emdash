@@ -32,7 +32,7 @@ describe('DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G transfer', () => {
     it('pins exactly one owner and three active projection rules', () => {
         assert.equal(
             CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION,
-            'DIRECT-MIXED-CONSTANT-MIDDLE-1M-' +
+            'DIRECT-MIXED-NEGATIVE-TOWER-1P-' +
                 'CATEGORICAL-PROGRAM-1'
         );
         assert.deepEqual(

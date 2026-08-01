@@ -50,8 +50,8 @@ describe('SYNTAX-PARITY-0A executable capability inventory', () => {
             capability => capability.apiMethods
         );
         assert.equal(CORE_CATEGORICAL_TEXT_PARITY_METHOD_COVERAGE, true);
-        assert.equal(methods.length, 80);
-        assert.equal(new Set(methods).size, 80);
+        assert.equal(methods.length, 81);
+        assert.equal(new Set(methods).size, 81);
         assert.equal(audit.capabilities.length, 14);
         assert.deepEqual(audit.measuredCoverage.classificationRows, {
             alreadyTextComplete: 1,
