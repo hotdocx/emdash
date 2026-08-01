@@ -254,6 +254,17 @@ remain deferred.
 
 ## Current Plans
 
+- `../../docs/ADJUNCTION_USABILITY_V3_2_PLAN.md`:
+  completed isolated cross-layer adjunction-usability plan. Its implemented
+  first tranche is a focused/live-conformance-green direct-TypeScript
+  outer-LF trusted `assumeAdjunction` macro that expands to one canonical
+  `Adjunction(F,G)` witness and two proof-time unit/counit agreements without
+  adding a parser or trusted-Core macro node. A second focused/live-green
+  facade accepts a whole counit and coherent forward `ProfMap`, then reuses
+  the existing selected Hom-profunctor comparison with proof-time agreement.
+  The completed owner audit justifies no Lambdapi edit or parallel
+  full-functor classifier; runtime mate projection and the faithful
+  object-only `G^o` triangular junction/adjunction remain consumer-gated.
 - `../../docs/TYPESCRIPT_ELABORATOR_V3_2_SCALE_QUALIFICATION_PLAN.md`:
   active living cross-layer plan for stress-testing a systematic,
   data/policy-driven transfer architecture against representative groupoidal,

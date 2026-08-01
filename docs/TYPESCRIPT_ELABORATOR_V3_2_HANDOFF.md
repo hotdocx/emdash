@@ -1,5 +1,19 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
+> **Completed isolated adjunction-usability result (2026-07-31):**
+> [`ADJUNCTION_USABILITY_V3_2_PLAN.md`](./ADJUNCTION_USABILITY_V3_2_PLAN.md)
+> owns the isolated direct-TypeScript outer-LF `assumeAdjunction` macro and
+> the evidence-gated Došen triangular-presentation investigation. Its
+> rectangular macro and full-functor counit/transpose facade are implemented
+> and focused/live-conformance green. The Hom-profunctor mate-owner audit
+> resolved that the facade needs no Lambdapi change; runtime component
+> exposure remains consumer-gated. It is
+> orthogonal to the current mixed-introduction continuation, adds no string
+> parser, trusted-Core macro node, parallel adjunction classifier, or kernel
+> rule. Its final aggregate has only the independently reproduced baseline
+> 68-vs-79 syntax-inventory failure; the uncommitted dedicated worktree
+> remains isolated from this handoff's mixed-introduction continuation.
+
 > **Current semantic continuation (2026-08-01):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
 > owns the next work: first synchronize the completed recursive-Hom
