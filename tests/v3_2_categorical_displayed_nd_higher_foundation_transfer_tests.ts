@@ -18,13 +18,17 @@ import {
 } from 'node:test';
 import {
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_BOUNDARY,
+    CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_CORE_NAMES,
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_DEPENDENCY_CORRECTION,
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_RUNTIME_MODULE,
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_RUNTIME_POLICY,
+    CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_SYMBOLS,
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_LINKAGE,
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE,
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_POLICY,
-    compileCoreCategoricalDisplayedNdHigherFoundationTransfer
+    CoreCategoricalDisplayedNdHigherFoundationSymbolId,
+    compileCoreCategoricalDisplayedNdHigherFoundationTransfer,
+    coreCategoricalDisplayedNdHigherFoundationCoreName
 } from '../src/v3_2';
 
 const activeKernelPath = resolve(
@@ -176,6 +180,30 @@ describe('DISPLAYED-ND-HIGHER-FOUNDATION-1A generic transfer', () => {
                     ? identity.coreName
                     : undefined,
                 'emdash_v3_2_scale_stress_3a2a_id'
+            );
+
+            for (const id of Object.keys(
+                CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_CORE_NAMES
+            ) as CoreCategoricalDisplayedNdHigherFoundationSymbolId[]) {
+                const symbol =
+                    CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_SYMBOLS[id];
+                const link = links.find(candidate =>
+                    candidate.symbol.moduleId === symbol.moduleId &&
+                    candidate.symbol.name === symbol.name
+                );
+                assert.equal(
+                    link?.kind === 'free-declaration'
+                        ? link.coreName
+                        : undefined,
+                    CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_CORE_NAMES[id]
+                );
+                assert.equal(
+                    coreCategoricalDisplayedNdHigherFoundationCoreName(id),
+                    CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_CORE_NAMES[id]
+                );
+            }
+            assertDeepFrozen(
+                CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_CORE_NAMES
             );
         });
 

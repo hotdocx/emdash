@@ -19,6 +19,11 @@ import {
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_AUDIT
 } from './categorical_displayed_nd_higher_audit';
 import {
+    CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_CORE_NAMES,
+    CoreCategoricalDisplayedNdHigherFoundationSymbolId,
+    coreCategoricalDisplayedNdHigherFoundationCoreName
+} from './categorical_displayed_nd_higher_foundation_contract';
+import {
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_REVIEW,
     validateCoreCategoricalDisplayedNdHigherReview
 } from './categorical_displayed_nd_higher_review';
@@ -65,6 +70,14 @@ import {
 import {
     CORE_LF_SCALE_STRESS_3A2A_MODULE
 } from './scale_stress_3a2a_representation';
+
+export {
+    CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_CORE_NAMES,
+    coreCategoricalDisplayedNdHigherFoundationCoreName
+};
+export type {
+    CoreCategoricalDisplayedNdHigherFoundationSymbolId
+};
 
 const MODULE_ID = 'emdash.emdash3_2';
 
@@ -1317,42 +1330,31 @@ CoreLfTransferDeclarationLinkage =
                     order: foundationExternalSymbols.length + index,
                     symbol: declaration.symbol,
                     kind: 'free-declaration' as const,
-                    coreName:
-                        declaration.symbol.name === 'id'
-                            ? CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_AUDIT
-                                .dependencyBoundary
-                                .reusablePriorRepresentation.coreName
-                            : 'emdash_v3_2_displayed_nd_higher_foundation_' +
-                                declaration.symbol.name,
+                    coreName: (() => {
+                        const entry = Object.entries(
+                            CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_SYMBOLS
+                        ).find(([, symbol_]) =>
+                            symbol_.moduleId ===
+                                declaration.symbol.moduleId &&
+                            symbol_.name === declaration.symbol.name
+                        );
+                        if (entry === undefined) {
+                            throw new Error(
+                                'Displayed higher foundation declaration ' +
+                                `'${declaration.symbol.name}' has no Core ` +
+                                'name contract entry'
+                            );
+                        }
+                        return coreCategoricalDisplayedNdHigherFoundationCoreName(
+                            entry[0] as
+                                CoreCategoricalDisplayedNdHigherFoundationSymbolId
+                        );
+                    })(),
                     backendName: declaration.symbol.name
                 }))
             ]
         }
     );
-
-export type CoreCategoricalDisplayedNdHigherFoundationSymbolId =
-    keyof typeof
-        CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_SYMBOLS;
-
-export function coreCategoricalDisplayedNdHigherFoundationCoreName(
-    id: CoreCategoricalDisplayedNdHigherFoundationSymbolId
-): string {
-    const target =
-        CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_SYMBOLS[id];
-    const link =
-        CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_LINKAGE
-            .entries.find(candidate =>
-                candidate.symbol.moduleId === target.moduleId &&
-                candidate.symbol.name === target.name
-            );
-    if (link === undefined || link.kind !== 'free-declaration') {
-        throw new Error(
-            `Displayed higher foundation declaration '${id}' has no ` +
-            'free Core declaration'
-        );
-    }
-    return link.coreName;
-}
 
 export const
 CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_BOUNDARY =

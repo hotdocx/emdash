@@ -124,17 +124,35 @@ describe('TypeScript v3.2 RELEASE-1B release policy', () => {
         ];
 
         for (const artifact of artifacts) {
-            assert.match(
-                readRepositoryFile(artifact),
-                /emdash-v3\.2-mvp-1/,
-                `${artifact} must name the exact deployed profile`
-            );
+            const contents = readRepositoryFile(artifact);
+            if (artifact === 'README.md') {
+                assert.match(
+                    contents,
+                    /https:\/\/hotdocx\.github\.io\/emdash\//,
+                    'README.md must route to the deployed reviewer'
+                );
+                assert.match(
+                    contents,
+                    /qualified depth-generic finite\s+Hom-category recursion/,
+                    'README.md must state the current public boundary'
+                );
+            } else {
+                assert.match(
+                    contents,
+                    /emdash-v3\.2-mvp-1/,
+                    `${artifact} must name the exact deployed profile`
+                );
+            }
         }
 
         const rootReadme = readRepositoryFile('README.md');
-        assert.match(rootReadme, /check:conformance/);
-        assert.match(rootReadme, /authoritative\s+deployed runtime/);
-        assert.match(rootReadme, /no production Lambdapi dependency/);
+        assert.match(rootReadme, /live integrated reviewer/);
+        assert.match(rootReadme, /wholly\s+client-side/);
+        assert.match(
+            rootReadme,
+            /does not require a Lambdapi process/
+        );
+        assert.match(rootReadme, /fails closed outside them/);
 
         const handoff = readRepositoryFile(
             'docs/TYPESCRIPT_ELABORATOR_V3_2_HANDOFF.md'

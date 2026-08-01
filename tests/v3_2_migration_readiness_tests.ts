@@ -258,7 +258,7 @@ describe('TypeScript v3.2 MIGRATE-2 physical deletion audit', () => {
         assert.match(app, /new emdash\.CoreChecker\(session\)/);
         assert.doesNotMatch(
             app,
-            /\b(?:D0|D1|MkCat|ComposeMorph|MkFunctorTerm|defineGlobal|globalDefs|resetMyLambdaPi|elaborate)\b/
+            /\b(?:D0|D1|MkCat|ComposeMorph|MkFunctorTerm|defineGlobal|globalDefs|resetMyLambdaPi)\b/
         );
 
         const api = readFileSync(

@@ -178,7 +178,18 @@ describe('TypeScript v3.2 RELEASE-1C completion', () => {
             'EMDASH_TYPECHECK_TIMEOUT=60s ' +
                 './scripts/pnpmw run check:all'
         );
-        assert.match(rootReadme, /release-ready exact profile/i);
+        assert.match(
+            rootReadme,
+            /checked development draft and a working,\s+bounded product/i
+        );
+        assert.match(
+            rootReadme,
+            /not a finished foundation, complete proof assistant/i
+        );
+        assert.match(
+            rootReadme,
+            /https:\/\/hotdocx\.github\.io\/emdash\//
+        );
         assert.match(handoff, /RELEASE-READY is complete/);
         assert.equal(
             Object.prototype.hasOwnProperty.call(

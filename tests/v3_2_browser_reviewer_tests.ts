@@ -221,6 +221,26 @@ const directCompilation = (
                 )
             );
         }
+        case 'recursive-hom-functor': {
+            const program = new CoreCategoricalProgram({
+                sourceFile: '<browser-reviewer-direct>'
+            });
+            const A = program.category('review_A');
+            const B = program.category('review_B');
+            const functors = program.functorCategory(A, B);
+            const F = program.object('review_F', functors);
+            const G = program.object('review_G', functors);
+            const cells = program.homCategory(
+                functors,
+                F,
+                G
+            );
+            const alpha = program.object('review_alpha', cells);
+            const beta = program.object('review_beta', cells);
+            return program.compile(program.identityFunctor(
+                program.homCategory(cells, alpha, beta)
+            ));
+        }
         case 'displayed-transfor-composition': {
             const program = new CoreCategoricalProgram({
                 sourceFile: '<browser-reviewer-direct>',
@@ -401,6 +421,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
                 'displayed-functor-weakening',
                 'displayed-sibling-pairing',
                 'displayed-mixed-telescope',
+                'recursive-hom-functor',
                 'displayed-transfor-composition'
             ]
         );
@@ -438,6 +459,19 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
                 nested.structuralPrerequisites.includes(
                     'exchange-functor-abstraction'
                 )
+            );
+        }
+
+        const recursiveHom = runCoreBrowserReviewerText({
+            presetId: 'recursive-hom-functor',
+            source:
+                'id (hom (hom (functor A B) F G) alpha F)'
+        });
+        assert.equal(recursiveHom.status, 'rejected');
+        if (recursiveHom.status === 'rejected') {
+            assert.equal(
+                recursiveHom.diagnostic.code,
+                'CATEGORICAL_REJECTION'
             );
         }
     });
@@ -484,7 +518,7 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
     it('publishes the exact deeply frozen capability boundary', () => {
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.revision,
-            'BOOK-REVIEWER-BRIDGE-1A-BROWSER-REVIEWER-1'
+            'RECURSIVE-HOM-PUBLIC-1A-BROWSER-REVIEWER-1'
         );
         assert.equal(
             CORE_BROWSER_REVIEWER_BOUNDARY.fullReportExecution,
@@ -497,7 +531,17 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         );
         assert.ok(
             CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
-                'ten categorical text presets across ^f, ^n, ^fd, and ^nd'
+                'eleven categorical text presets across ^f, ^n, ^fd, and ^nd'
+            )
+        );
+        assert.ok(
+            CORE_BROWSER_REVIEWER_BOUNDARY.supported.includes(
+                'qualified depth-generic finite Hom-category recursion'
+            )
+        );
+        assert.ok(
+            CORE_BROWSER_REVIEWER_BOUNDARY.deferred.includes(
+                'arbitrary mixed introduction and unsupported variance DAGs'
             )
         );
         assert.ok(
@@ -589,6 +633,11 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
             'emdash-template/src/App.tsx',
             'utf8'
         );
+        const rootReadme = readFileSync('README.md', 'utf8');
+        const fixtureReadme = readFileSync(
+            'emdash-template/README.md',
+            'utf8'
+        );
         const rootPackage = JSON.parse(
             readFileSync('package.json', 'utf8')
         ) as { readonly scripts: Readonly<Record<string, string>> };
@@ -613,6 +662,15 @@ describe('REVIEWER-INTEGRATE-1A integrated browser entry', () => {
         assert.match(app, /Run full research report/u);
         assert.match(app, /Open the emdash book/u);
         assert.match(app, /Minimal Core playground/u);
+        assert.match(
+            app,
+            /<strong>11<\/strong><span>reviewed examples<\/span>/u
+        );
+        assert.match(app, /qualified finite/u);
+        assert.match(rootReadme, /depth-generic finite/u);
+        assert.match(rootReadme, /general mixed\s+introduction\/curry/u);
+        assert.match(fixtureReadme, /eleven editable/u);
+        assert.match(fixtureReadme, /unsupported variance DAGs/u);
         assert.equal(
             rootPackage.scripts['check:browser-directed'],
             rootPackage.scripts['check:browser-reviewer']

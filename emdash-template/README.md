@@ -82,15 +82,17 @@ Actions route. No generated `gh-pages` branch or committed `dist/` is needed.
 
 The current browser demonstrates:
 
-- ten editable categorical examples across `^f`, `^n`, `^fd`, and `^nd`,
+- eleven editable categorical examples across `^f`, `^n`, `^fd`, and `^nd`,
   with expected-type-directed action selection and source diagnostics;
+- qualified depth-generic finite Hom-category recursion over reviewed
+  categorical roots;
 - the unchanged outer dependent-LF, ordinary binder, and displayed-chain
   report;
 - the overview paper and generated book assets; and
 - the frozen minimal Core checker example.
 
-It does not provide arbitrary-depth categorical text beyond the reviewed
-nested presets, the remaining displayed structural-constructor syntax,
-arbitrary displayed telescope depth, browser-side source acquisition,
+It does not provide arbitrary mixed introduction, unsupported variance DAGs,
+displayed contexts outside the qualified canonical grammar, the remaining
+displayed structural-constructor syntax, browser-side source acquisition,
 systematic groupoidal closure, or whole-library transfer graduation. Direct
 typed TypeScript remains the most complete construction surface.

@@ -25,6 +25,11 @@ import {
     compileCoreCategoricalDisplayedNdHigherTargetTransfer
 } from './categorical_displayed_nd_higher_target_transfer';
 import {
+    CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES,
+    CoreCategoricalMixedModeSymbolId,
+    coreCategoricalMixedModeCoreName
+} from './categorical_mixed_mode_contract';
+import {
     CORE_DIRECTED_CONTINUATION_TRANSFER_LINKAGE,
     coreDirectedContinuationTransferSymbol
 } from './directed_continuation_transfer';
@@ -61,6 +66,14 @@ import {
 import {
     binderMode
 } from './kernel';
+
+export {
+    CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES,
+    coreCategoricalMixedModeCoreName
+};
+export type {
+    CoreCategoricalMixedModeSymbolId
+};
 
 const MODULE_ID = 'emdash.emdash3_2';
 
@@ -517,8 +530,23 @@ const dependencyLink = (
 
 const mixedCoreName = (
     target: CoreLfQualifiedSymbol
-): string =>
-    `emdash_v3_2_mixed_nest_0a_${target.name}`;
+): string => {
+    const entry = Object.entries(
+        CORE_CATEGORICAL_MIXED_MODE_SYMBOLS
+    ).find(([, symbol_]) =>
+        symbol_.moduleId === target.moduleId &&
+        symbol_.name === target.name
+    );
+    if (entry === undefined) {
+        throw new Error(
+            `Mixed-mode declaration '${target.name}' has no Core name ` +
+            'contract entry'
+        );
+    }
+    return coreCategoricalMixedModeCoreName(
+        entry[0] as CoreCategoricalMixedModeSymbolId
+    );
+};
 
 export const CORE_CATEGORICAL_MIXED_MODE_TRANSFER_LINKAGE:
 CoreLfTransferDeclarationLinkage =
@@ -815,21 +843,6 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
         }))
     }
 );
-
-export const CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES =
-Object.freeze({
-    displayedHomFamily: mixedCoreName(displayedHomFamily),
-    displayedTransforFamily: mixedCoreName(displayedTransforFamily)
-});
-
-export type CoreCategoricalMixedModeSymbolId =
-    keyof typeof CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES;
-
-export function coreCategoricalMixedModeCoreName(
-    id: CoreCategoricalMixedModeSymbolId
-): string {
-    return CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES[id];
-}
 
 export const CORE_CATEGORICAL_MIXED_MODE_TRANSFER_BOUNDARY =
 Object.freeze({

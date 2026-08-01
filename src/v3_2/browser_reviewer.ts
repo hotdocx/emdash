@@ -28,7 +28,7 @@ import {
 } from './product_review_demo';
 
 export const CORE_BROWSER_REVIEWER_REVISION =
-    'BOOK-REVIEWER-BRIDGE-1A-BROWSER-REVIEWER-1' as const;
+    'RECURSIVE-HOM-PUBLIC-1A-BROWSER-REVIEWER-1' as const;
 
 export type CoreBrowserReviewerPresetId =
     | 'pointwise-application'
@@ -40,6 +40,7 @@ export type CoreBrowserReviewerPresetId =
     | 'displayed-functor-weakening'
     | 'displayed-sibling-pairing'
     | 'displayed-mixed-telescope'
+    | 'recursive-hom-functor'
     | 'displayed-transfor-composition';
 
 export type CoreBrowserReviewerExpectedMode =
@@ -51,7 +52,13 @@ export type CoreBrowserReviewerExpectedMode =
     }
     | {
         readonly kind: 'term';
+        readonly description: 'whole Hom action';
         readonly applicationShape: 'whole-hom-action';
+    }
+    | {
+        readonly kind: 'term';
+        readonly description:
+            'identity functor on a recursive functor-category Hom';
     }
     | {
         readonly kind: 'dependent-section';
@@ -232,6 +239,7 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
             'same neutral application syntax.',
         expectedMode: {
             kind: 'term',
+            description: 'whole Hom action',
             applicationShape: 'whole-hom-action'
         },
         assumptions: [
@@ -345,6 +353,27 @@ readonly CoreBrowserReviewerPreset[] = deepFreeze([
         ]
     },
     {
+        id: 'recursive-hom-functor',
+        label: 'Recursive Hom over functors',
+        source:
+            'id (hom (hom (functor A B) F G) alpha beta)',
+        description:
+            'Starting from the category of functors, two recursive ' +
+            'Hom-category levels are consumed by the ordinary ' +
+            'identity-functor constructor through the same checked ' +
+            'category resolver.',
+        expectedMode: {
+            kind: 'term',
+            description:
+                'identity functor on a recursive functor-category Hom'
+        },
+        assumptions: [
+            'A, B : Cat',
+            'F, G : Obj(Functor_cat A B)',
+            'alpha, beta : Hom_(Functor_cat A B)(F,G)'
+        ]
+    },
+    {
         id: 'displayed-transfor-composition',
         label: 'Displayed natural composition',
         source:
@@ -383,16 +412,17 @@ export const CORE_BROWSER_REVIEWER_BOUNDARY = deepFreeze({
         'optional Node-side Lambdapi conformance oracle'
     ],
     supported: [
-        'ten categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'eleven categorical text presets across ^f, ^n, ^fd, and ^nd',
+        'qualified depth-generic finite Hom-category recursion',
         'edited categorical text with source diagnostics',
         'existing outer-LF, ordinary, and displayed three-panel report',
         'generated emdash book',
         'preserved minimal explicit-Core playground'
     ],
     deferred: [
-        'arbitrary-depth categorical text beyond the reviewed nested preset',
         'remaining displayed context and structural-constructor syntax',
-        'arbitrary displayed telescope depth',
+        'arbitrary mixed introduction and unsupported variance DAGs',
+        'displayed contexts outside the qualified canonical grammar',
         'browser-side source acquisition',
         'production Lambdapi dependency',
         'systematic groupoidal closure',
@@ -657,6 +687,32 @@ const createFixture = (
                     'displayed-dependent-context-functor' as const,
                 sourceGroups: [[A], [B, C], [D]],
                 target
+            }
+        });
+    }
+
+    if (presetId === 'recursive-hom-functor') {
+        const program = new CoreCategoricalProgram({ sourceFile });
+        const A = program.category('review_A');
+        const B = program.category('review_B');
+        const functors = program.functorCategory(A, B);
+        const F = program.object('review_F', functors);
+        const G = program.object('review_G', functors);
+        const transformations = program.homCategory(functors, F, G);
+        const alpha = program.object('review_alpha', transformations);
+        const beta = program.object('review_beta', transformations);
+        return Object.freeze({
+            program,
+            environment: Object.freeze([
+                categoryBinding('A', A),
+                categoryBinding('B', B),
+                termBinding('F', F),
+                termBinding('G', G),
+                termBinding('alpha', alpha),
+                termBinding('beta', beta)
+            ]),
+            expected: {
+                kind: 'term' as const
             }
         });
     }

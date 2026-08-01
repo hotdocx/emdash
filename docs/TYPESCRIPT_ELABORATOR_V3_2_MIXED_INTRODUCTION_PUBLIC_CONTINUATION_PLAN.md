@@ -31,8 +31,11 @@ D-DTTLF-USABILITY-037 below freezes the complete browser-safe Core-name
 contract split before publication. Its proposal checkpoint is
 `45b62ab145e1d0c90cbfe97ca725e2ad4900e3e8`; the separate review recorded
 below approves exactly that split under the standing unattended delegation,
-with human supersession. Implementation is dependency-ready. After the
-corrected public slice is green and deployed, the next
+with human supersession. The corrected preset, optional-loader repair,
+Core-name contract split, proportional tests/build, and real-browser smoke are
+final-green; the coherent implementation checkpoint is pending below. Clean
+fast-forward publication is the next dependency-ready operation. After the
+corrected public slice is deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -289,11 +292,11 @@ It deliberately avoids:
 | Row | Status | Dependencies | Exact deliverable |
 | --- | --- | --- | --- |
 | `PUBLIC-HOM-AUDIT-0A` | complete, then measurement-corrected by D-DTTLF-USABILITY-035; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract; reject both the slow mixed-nest fixture and the unavailable Transfd/profile combination; select the default-profile functor-category recursive-Hom witness; freeze truthful public wording. |
-| `PUBLIC-HOM-PRESET-1A` | corrected implementation focused-green; real-browser smoke exposed separate runtime cycle | `PUBLIC-HOM-AUDIT-0A`; approved D-034/D-035 | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
-| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | D-DTTLF-USABILITY-036 implemented; Node higher-profile regression green; browser still red through a second static path | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
-| `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | exact D-DTTLF-USABILITY-037 reviewed-approved and implementation dependency-ready | implemented D-036; measured remaining surface-to-transfer import path | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
-| `PUBLIC-HOM-VALIDATE-1B` | blocked on green browser-contract correction | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
-| `PUBLIC-HOM-INTEGRATE-1C` | blocked on green `VALIDATE-1B` | clean goal checkpoint; fetched ancestry; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
+| `PUBLIC-HOM-PRESET-1A` | final-green; checkpoint pending | `PUBLIC-HOM-AUDIT-0A`; approved D-034/D-035 | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
+| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | final-green with D-037 completion; checkpoint pending | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
+| `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | final-green; checkpoint pending | implemented D-036; approved D-037 | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
+| `PUBLIC-HOM-VALIDATE-1B` | final-green; evidence recorded below | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No repeated long repository aggregate. |
+| `PUBLIC-HOM-INTEGRATE-1C` | dependency-ready after coherent implementation checkpoint and fresh fetch/ancestry checks | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
 | `MIXED-CURRY-1A` | decision-blocked on `MIXED-INTRODUCTION-0A` | separately frozen owner/signature/rule proposal | Implement one exact Lambdapi-first mixed-curry functor with internal object/base-arrow action and qualified laws. |
 | `MIXED-INTRODUCTION-TS-1B` | blocked on green `MIXED-CURRY-1A` and transfer qualification | active owner/rules and conformance evidence | Transfer the owner mechanically and extend the contextual compiler with one genuinely non-eta mixed body. |
@@ -540,6 +543,38 @@ only D-DTTLF-USABILITY-037 under the user's standing unattended delegation,
 with human supersession. Implementation may continue within this contract
 correction.
 
+## Public Slice Validation Evidence
+
+The completed local slice records:
+
+- root `typecheck` and `lint`: green after the final source and test edits;
+- exact contract/linkage identity for all thirteen displayed-next-Hom
+  foundation names and both mixed-mode classifier names: 2/2 green and deeply
+  frozen;
+- qualified displayed-next-Hom Node regression after the optional-loader and
+  contract split: green, 50.14 seconds in the final parallel run;
+- exact browser-reviewer text/direct equality, boundary, lazy-shell, and
+  public-copy tests: 3/3 green across all eleven presets, 69.21 seconds in the
+  final parallel run;
+- standalone production build: green, 144 modules and 2.13 seconds; the lazy
+  reviewer chunk fell from 951.20 kB / 210.43 kB gzip before the dependency
+  cut to 793.83 kB / 173.72 kB gzip afterward; the existing greater-than-500
+  kB advisory remains a non-veto warning;
+- real local Chromium fallback smoke (the in-app browser was unavailable):
+  the landing page loads eleven presets, the recursive functor-category Hom
+  source executes to `ACCEPTED`, the qualified public boundary is visible,
+  and both overview-paper and book requests return HTTP 200;
+- one required `check:ts` aggregate was run after the shared program/surface
+  change. All implementation/semantic suites reached completion; three stale
+  public-policy assertions rejected the already-approved polished README and
+  common verb “elaborate”. Those assertions were updated to the current live
+  reviewer/bounded-product contract and their exact three focused tests are
+  green. Only tests changed afterward, so under the repository's proportional
+  validation SOP the 23-minute unchanged semantic aggregate was not repeated.
+
+No Lambdapi source or active mathematical owner changed, so no kernel gate is
+owned by this public/runtime dependency tranche.
+
 ## Mixed-Introduction Audit Contract
 
 After the public slice is deployed, `MIXED-INTRODUCTION-0A` must start with
@@ -732,3 +767,20 @@ removal, or unrelated cleanup is authorized.
   unattended delegation therefore authorizes only the two dependency-free
   contracts, their transfer-owned linkage/re-export integration, the two
   surface import redirects, and stated validation, with human supersession.
+- **2026-08-01 — corrected public/runtime slice final-green locally.** The
+  default-profile functor-category recursive-Hom preset is text/direct equal
+  and executes to `ACCEPTED` in Chromium. Two dependency-free Core-name
+  contracts eliminate the browser-to-audit proposal cycle while remaining the
+  sole source of transfer linkage names. The qualified Node higher-profile
+  route remains green, and the browser reviewer chunk is approximately 17%
+  smaller uncompressed.
+- **2026-08-01 — aggregate policy drift corrected proportionally.** The one
+  required `check:ts` run completed the semantic corpus and found only three
+  stale test assertions that demanded internal release jargon in polished
+  public copy or banned the ordinary verb “elaborate”. Their exact focused
+  replacements are green; no source behavior changed afterward, so the
+  23-minute aggregate is not repeated merely for test-contract wording.
+- **2026-08-01 — `PUBLIC-HOM-INTEGRATE-1C` is dependency-ready after the
+  implementation checkpoint.** Publication remains limited to a freshly
+  validated clean fast-forward of `main`, a non-force push, monitoring the
+  exact Pages run, and verifying the live reviewer plus paper/book routes.

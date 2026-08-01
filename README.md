@@ -81,9 +81,10 @@ external naturality evidence when no internal construction owns it.
   arbitrary Lambdapi source. It accepts the reviewed mathematical
   constructions and fails closed outside them.
 - Displayed contexts demonstrate independent fibrewise siblings, genuine
-  dependency, and a bounded mixed telescope. Arbitrary depth, variance,
-  exchange across dependency, and unrestricted displayed coherence remain
-  open.
+  dependency, a canonical mixed telescope, and qualified depth-generic finite
+  Hom-category recursion. Arbitrary variance DAGs, general mixed
+  introduction/curry, exchange across dependency, and unrestricted displayed
+  coherence remain open.
 - The remaining Lambdapi library has not been proven mechanically
   transferable as one batch. Bulk transfer qualification is deliberately
   deferred to a future goal.

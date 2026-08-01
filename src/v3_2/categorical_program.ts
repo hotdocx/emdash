@@ -193,17 +193,18 @@ import {
 export const CORE_CATEGORICAL_PROGRAM_REVISION =
     'USABILITY-2A1-CATEGORICAL-PROGRAM-1' as const;
 
-const displayedNdHigherTargetModule = () => require(
-    './categorical_displayed_nd_higher_target_transfer'
-) as typeof import(
-    './categorical_displayed_nd_higher_target_transfer'
-);
+const optionalProfileModule = <Module>(specifier: string): Module =>
+    require(specifier) as Module;
 
-const displayedNdHigherFoundationModule = () => require(
-    './categorical_displayed_nd_higher_foundation_transfer'
-) as typeof import(
-    './categorical_displayed_nd_higher_foundation_transfer'
-);
+const displayedNdHigherTargetModule = () =>
+    optionalProfileModule<typeof import(
+        './categorical_displayed_nd_higher_target_transfer'
+    )>('./categorical_displayed_nd_higher_target_transfer');
+
+const displayedNdHigherFoundationModule = () =>
+    optionalProfileModule<typeof import(
+        './categorical_displayed_nd_higher_foundation_transfer'
+    )>('./categorical_displayed_nd_higher_foundation_transfer');
 
 const compileCoreCategoricalDisplayedNdHigherTarget = ():
 CoreCategoricalDisplayedNdHigherTargetCompilation =>
@@ -222,18 +223,18 @@ const displayedNdHigherFoundationCoreName = (
     displayedNdHigherFoundationModule()
         .coreCategoricalDisplayedNdHigherFoundationCoreName(id);
 
-const mixedModeModule = () => require(
+const mixedModeModule = () => optionalProfileModule<typeof import(
     './categorical_mixed_mode_transfer'
-) as typeof import('./categorical_mixed_mode_transfer');
+)>('./categorical_mixed_mode_transfer');
 
 const mixedModeCoreName = (
     id: CoreCategoricalMixedModeSymbolId
 ): string =>
     mixedModeModule().coreCategoricalMixedModeCoreName(id);
 
-const mixedActionModule = () => require(
+const mixedActionModule = () => optionalProfileModule<typeof import(
     './categorical_mixed_action_transfer'
-) as typeof import('./categorical_mixed_action_transfer');
+)>('./categorical_mixed_action_transfer');
 
 const compileCoreCategoricalMixedAction = ():
 CoreCategoricalMixedActionCompilation =>

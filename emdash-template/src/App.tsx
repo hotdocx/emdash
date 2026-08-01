@@ -66,7 +66,7 @@ const expectedModeLabel = (
     case 'ordinary-functor':
       return `λ^${mode.binderMode} : ${mode.source} → ${mode.target}`;
     case 'term':
-      return `term (${mode.applicationShape})`;
+      return `term — ${mode.description}`;
     case 'dependent-section':
       return `λ^${mode.binderMode} : ${mode.base} ⊢ ${mode.target}`;
     case 'displayed-functor':
@@ -340,7 +340,7 @@ function App() {
         </section>
 
         <section className="proof-strip" aria-label="Reviewer facts">
-          <div><strong>10</strong><span>reviewed examples</span></div>
+          <div><strong>11</strong><span>reviewed examples</span></div>
           <div><strong>4</strong><span>binder modes</span></div>
           <div><strong>3</strong><span>evidence panels</span></div>
           <div><strong>199</strong><span>book pages</span></div>
@@ -690,9 +690,11 @@ function App() {
             <p>
               Emdash demonstrates a working outer dependent LF, an autonomous
               directed categorical kernel, explicit Core, and a bounded
-              recursive binder frontend. It does not yet claim arbitrary
-              displayed depth, complete whole-library transfer, full
-              groupoidal closure, or a finished generic proof assistant.
+              recursive binder frontend, including qualified finite
+              Hom-category recursion. It does not yet claim arbitrary
+              variance, general mixed introduction, complete whole-library
+              transfer, full groupoidal closure, or a finished generic proof
+              assistant.
             </p>
           </div>
         </section>

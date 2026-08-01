@@ -59,10 +59,10 @@ import {
 } from './categorical_displayed_chain_transfer';
 import {
     coreCategoricalDisplayedNdHigherFoundationCoreName
-} from './categorical_displayed_nd_higher_foundation_transfer';
+} from './categorical_displayed_nd_higher_foundation_contract';
 import {
     coreCategoricalMixedModeCoreName
-} from './categorical_mixed_mode_transfer';
+} from './categorical_mixed_mode_contract';
 import {
     CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
 } from './categorical_fibred_dependent_target_transfer';

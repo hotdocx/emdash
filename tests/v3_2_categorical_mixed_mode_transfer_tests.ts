@@ -17,13 +17,18 @@ import {
     it
 } from 'node:test';
 import {
+    CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES,
     CORE_CATEGORICAL_MIXED_MODE_RUNTIME_MODULE,
     CORE_CATEGORICAL_MIXED_MODE_RUNTIME_POLICY,
     CORE_CATEGORICAL_MIXED_MODE_SOURCE_SHA256,
+    CORE_CATEGORICAL_MIXED_MODE_SYMBOLS,
     CORE_CATEGORICAL_MIXED_MODE_TRANSFER_BOUNDARY,
+    CORE_CATEGORICAL_MIXED_MODE_TRANSFER_LINKAGE,
     CORE_CATEGORICAL_MIXED_MODE_TRANSFER_MODULE,
     CORE_CATEGORICAL_MIXED_MODE_TRANSFER_POLICY,
-    compileCoreCategoricalMixedModeTransfer
+    CoreCategoricalMixedModeSymbolId,
+    compileCoreCategoricalMixedModeTransfer,
+    coreCategoricalMixedModeCoreName
 } from '../src/v3_2';
 
 const activeKernelPath = resolve(
@@ -80,6 +85,31 @@ describe('MIXED-NEST-0A generic transfer', () => {
         assertDeepFrozen(
             CORE_CATEGORICAL_MIXED_MODE_TRANSFER_BOUNDARY
         );
+    });
+
+    it('uses one immutable Core-name contract for transfer linkage', () => {
+        for (const id of Object.keys(
+            CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES
+        ) as CoreCategoricalMixedModeSymbolId[]) {
+            const symbol = CORE_CATEGORICAL_MIXED_MODE_SYMBOLS[id];
+            const link =
+                CORE_CATEGORICAL_MIXED_MODE_TRANSFER_LINKAGE.entries
+                    .find(candidate =>
+                        candidate.symbol.moduleId === symbol.moduleId &&
+                        candidate.symbol.name === symbol.name
+                    );
+            assert.equal(
+                link?.kind === 'free-declaration'
+                    ? link.coreName
+                    : undefined,
+                CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES[id]
+            );
+            assert.equal(
+                coreCategoricalMixedModeCoreName(id),
+                CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES[id]
+            );
+        }
+        assertDeepFrozen(CORE_CATEGORICAL_MIXED_MODE_CORE_NAMES);
     });
 
     it('pins active source bytes and owner/rule positions', () => {
