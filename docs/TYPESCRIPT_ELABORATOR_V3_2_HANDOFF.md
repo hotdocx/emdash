@@ -156,7 +156,9 @@
 > `Functor_catd_const_funcd` owner and three point/full/capped rules pass the
 > required durable object/inner/base/higher checks, unchanged 1,079/159
 > warnings, strict audit, synchronized reports, and one CI. The TypeScript
-> implementation is final-green. Its single required `check:ts` passes
+> implementation is final-green at
+> `d4ed2d5ecf743cd5c33f8204a13f04331034c3d1`. Its single required
+> `check:ts` passes
 > 1,242/1,293 tests with 51 intentional skips, zero failures, and measured
 > duration 1,848,097.87 ms; do not repeat it for document synchronization.
 > It generically transfers pre-existing `hom_postcomp_func`, the new direct

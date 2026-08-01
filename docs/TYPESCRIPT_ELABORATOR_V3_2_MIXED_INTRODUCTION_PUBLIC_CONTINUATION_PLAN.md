@@ -491,7 +491,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | implemented and final-green at `d5ea9f5d3d296835608eec8f963f7fa5657f0005` under D-DTTLF-USABILITY-048; kernel checkpoint `d9f298ce2c3194adda8f68bd4654e484b33bfac4` | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Exactly one distributor and three projection rules are active and generically transferred. The existing direct factorization tree recursively lowers `typed-pair`, combines branches with existing `Product_pair_funcd`, and composes the distributor. Direct introduction remains fundamental; curry, facade, text/browser, and unrestricted-variance claims remain excluded. |
 | `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | read-only reassessment complete; no semantic delta | final-green D-048 and the user's renewed direct-binder invariant | Graduates arbitrary finite depth only for the recursive `leaf | source-map | target-map | pair` body algebra, alongside the predecessor's qualified finite Hom towers. Direct introduction is fundamental and curry-free. General structural constructor coverage, context arity, variance-valid varying application, and `:^nd` introduction remain separate. |
 | `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | complete; zero active semantic delta; direct weakening selected | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; approved D-DTTLF-USABILITY-049; owner-position/direct-versus-curry probes | The occurrence matrix distinguishes structural weakening from variance-valid varying application. `Functor_catd_const_funcd` is quiet-green with point/full/capped and higher action; terminal/section composition derives the other unused-variable cases. Curry remains auxiliary. |
-| `DIRECT-MIXED-WEAKENING-1J` | final-green; kernel checkpoint `c1890373ab93aa155336187e72b6c421c74b7e81`; TypeScript checkpoint pending this ledger synchronization | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; corrected proposal `e8f6a88645fb09646c62841ad1d9e11236b73948`; separate approval; one kernel CI; focused transfer/direct/runtime/demo evidence; one green 1,293-test TypeScript aggregate | One direct `Functor_catd_const_funcd` owner with point/full/capped action is active. The generic TypeScript transfer acquires the pre-existing `hom_postcomp_func` signature and the new owner/rules. The recursive direct binder accepts outer-only `H[c]`, target maps, and mixed eta/weakening pairs with explicit outer/inner occurrence counts. Curry remains auxiliary and unused. |
+| `DIRECT-MIXED-WEAKENING-1J` | final-green; kernel checkpoint `c1890373ab93aa155336187e72b6c421c74b7e81`; TypeScript checkpoint `d4ed2d5ecf743cd5c33f8204a13f04331034c3d1` | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; corrected proposal `e8f6a88645fb09646c62841ad1d9e11236b73948`; separate approval; one kernel CI; focused transfer/direct/runtime/demo evidence; one green 1,293-test TypeScript aggregate | One direct `Functor_catd_const_funcd` owner with point/full/capped action is active. The generic TypeScript transfer acquires the pre-existing `hom_postcomp_func` signature and the new owner/rules. The recursive direct binder accepts outer-only `H[c]`, target maps, and mixed eta/weakening pairs with explicit outer/inner occurrence counts. Curry remains auxiliary and unused. |
 | `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` | next read-only audit after final D-050 checkpoint; zero semantic delta until separately frozen | final-green `DIRECT-MIXED-WEAKENING-1J`; direct-binder invariant; measured `Const_func_func` downstream runtime-transfer boundary | Reassess the next highest-yield direct structural forms (`S[k](a)`, fully constant bodies, and the qualified constant-middle varying case), inventory whether ordinary weakening projection acquisition is needed for TypeScript-only downstream normalization, and select at most one bounded successor. Do not route direct introduction through curry or broaden to arbitrary contexts/variance/`:^nd`. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -3901,7 +3901,8 @@ D-DTTLF-USABILITY-050 at
 `e8f6a88645fb09646c62841ad1d9e11236b73948` as implemented and final-green.
 Its single required `check:ts` passes 1,242/1,293 tests with 51 intentional
 skips and zero failures in 1,848,097.87 ms; do not repeat it. The
-active-kernel checkpoint is
+TypeScript checkpoint is
+`d4ed2d5ecf743cd5c33f8204a13f04331034c3d1`; the active-kernel checkpoint is
 `c1890373ab93aa155336187e72b6c421c74b7e81`. It adds exactly one primary
 `Functor_catd_const_funcd` owner and three point/full/capped rules. Its one
 kernel CI, unchanged 1,079/159 warning inventory, strict-LHS audit, and
@@ -3969,8 +3970,9 @@ removal, or unrelated cleanup is authorized.
   final-green.** Kernel checkpoint
   `c1890373ab93aa155336187e72b6c421c74b7e81` contains exactly the direct
   weakening owner, three projection rules, durable point/inner/base/higher
-  checks, and synchronized reports after one green CI. The TypeScript tranche
-  generically checks the approved two signatures and three rules and extends
+  checks, and synchronized reports after one green CI. TypeScript checkpoint
+  `d4ed2d5ecf743cd5c33f8204a13f04331034c3d1` generically checks the approved
+  two signatures and three rules and extends
   the direct recursive binder with `H[c]`, `G(H[c])`, and mixed
   eta/weakening pairs. Evidence distinguishes one outer use from zero inner
   uses; the runnable demo emits direct weakening plus generic composition and
