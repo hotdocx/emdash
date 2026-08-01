@@ -181,10 +181,20 @@
 > section, `Terminal_funcd`, direct weakening, and composition owners. The
 > TypeScript-only `DIRECT-MIXED-SECTION-ROOT-1K` successor is separately
 > reviewed-approved under D-DTTLF-USABILITY-051 from proposal checkpoint
-> `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141` and is dependency-ready. It
-> adds no kernel/transfer
-> semantics and keeps constant-middle varying composition, larger contexts,
-> unrestricted variance, and `lambda^nd` separate.
+> `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141` and is now implemented and
+> final-green at `e337f1b1a3a61a861a714fa9d06035a1949beec9`. The active
+> runtime reduces a `Functor_catd` fibre to the already-transferred ordinary
+> `Functor_cat` head; the bounded generic classifier reifier now retains that
+> functor view without changing the section-application term. Recursive
+> `S[k](a)` and `b[k]` roots lower through section/terminal composition, with
+> direct inner weakening only for `b[k]`, and target-map/pair recursion
+> consumes both. Focused evidence is 4/4 new plus 16/16 nearest regressions;
+> the single required TypeScript aggregate is green at 1,246 pass, 51 skip,
+> and 0 fail out of 1,297 tests. No kernel/transfer rule, curry route,
+> total-context section, cast, coercion, or external equation was added.
+> `DIRECT-MIXED-SECTION-GRADUATE-1L` is the next dependency-ready read-only
+> reassessment; constant-middle varying composition, larger contexts,
+> unrestricted variance, and `lambda^nd` remain separate.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

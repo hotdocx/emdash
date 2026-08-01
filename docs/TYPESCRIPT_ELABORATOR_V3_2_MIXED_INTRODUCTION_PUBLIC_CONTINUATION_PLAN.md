@@ -493,7 +493,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | complete; zero active semantic delta; direct weakening selected | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; approved D-DTTLF-USABILITY-049; owner-position/direct-versus-curry probes | The occurrence matrix distinguishes structural weakening from variance-valid varying application. `Functor_catd_const_funcd` is quiet-green with point/full/capped and higher action; terminal/section composition derives the other unused-variable cases. Curry remains auxiliary. |
 | `DIRECT-MIXED-WEAKENING-1J` | final-green; kernel checkpoint `c1890373ab93aa155336187e72b6c421c74b7e81`; TypeScript checkpoint `d4ed2d5ecf743cd5c33f8204a13f04331034c3d1` | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; corrected proposal `e8f6a88645fb09646c62841ad1d9e11236b73948`; separate approval; one kernel CI; focused transfer/direct/runtime/demo evidence; one green 1,293-test TypeScript aggregate | One direct `Functor_catd_const_funcd` owner with point/full/capped action is active. The generic TypeScript transfer acquires the pre-existing `hom_postcomp_func` signature and the new owner/rules. The recursive direct binder accepts outer-only `H[c]`, target maps, and mixed eta/weakening pairs with explicit outer/inner occurrence counts. Curry remains auxiliary and unused. |
 | `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` | read-only audit complete; zero semantic delta; one TypeScript-only section-root successor selected | final-green `DIRECT-MIXED-WEAKENING-1J`; direct-binder invariant; measured callback/factorer probes and transfer inventory | `S[k](a)` is blocked first by an overly generic open-section classifier view; `b[k]` reaches and is rejected by the recursive factorer. Both derive through existing section, `Terminal_funcd`, direct weakening, and composition. Ordinary-weakening projection acquisition is unnecessary for elaboration and remains only an optional deeper-normalization concern. The constant-middle varying case still lacks an internal displayed composition lift. |
-| `DIRECT-MIXED-SECTION-ROOT-1K` | approved under D-DTTLF-USABILITY-051; implementation dependency-ready | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050; proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141`; separate review under standing unattended delegation | Add one canonical runtime-validated open-section classifier view and two recursively consumable section-root leaves for `S[k](a)` and `b[k]`. Reuse `Terminal_funcd`, `Functor_catd_const_funcd`, and generic displayed composition. Add no kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd`. |
+| `DIRECT-MIXED-SECTION-ROOT-1K` | implemented and final-green at `e337f1b1a3a61a861a714fa9d06035a1949beec9` under D-DTTLF-USABILITY-051 | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050; proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141`; separate review under standing unattended delegation | The bounded runtime reifier recognizes the already-transferred ordinary `Functor_cat` head after the active `Functor_catd` fibre rule. The unchanged open section application receives a canonical indexed-functor construction view. Recursive `S[k](a)` and `b[k]` roots lower through `Terminal_funcd`, with direct inner weakening only for `b[k]`; target maps and nested pairs consume both. No kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd` was added. |
+| `DIRECT-MIXED-SECTION-GRADUATE-1L` | dependency-ready read-only reassessment | final-green D-051; fundamental direct-binder invariant; completed three-binder structural roots | Recompute the remaining usability matrix from actual post-D-051 behavior. Distinguish the measured constant-middle varying-composition gap from larger direct contexts, transformation introduction, and unrestricted `:^nd`; select at most one bounded semantic successor without assuming curry or total-context sections. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3883,6 +3884,68 @@ standing unattended delegation, with immediate human supersession,
 implementation is authorized only for the ten numbered TypeScript-only
 D-051 items.
 
+### `DIRECT-MIXED-SECTION-ROOT-1K` implementation result
+
+D-DTTLF-USABILITY-051 is implemented and final-green at semantic checkpoint
+`e337f1b1a3a61a861a714fa9d06035a1949beec9`.
+
+The interrupted first implementation exposed one representation seam, not a
+kernel or mathematical gap. The active runtime reduced
+
+```text
+fapp0 K Cat_cat (Functor_catd A B) k
+```
+
+in one step to the already-transferred generic call
+`Functor_cat (A[k]) (B[k])`. The bounded category-object reifier recognized
+backend-neutral and displayed classifier heads, but not that transferred
+ordinary `Functor_cat` spelling, and therefore returned a plain-object view.
+The correction adds the existing `Functor_cat` name to the reifier's generic
+former-name configuration and stopping predicate. It reifies that stable head
+as the existing functor Core type. This is not a binder-local convertibility
+table or an owner-specific evaluator branch: the active runtime still owns the
+only reduction, the section-application term is unchanged, and the final
+generic LF checker validates that same term and conversion.
+
+Open application of a closed coherent section at the exact hidden base now
+exposes an indexed-functor construction view only when the section family is
+the canonical active `Functor_catd A B`. Wrong families, closed indices,
+foreign slots, and arbitrary section-valued classifiers remain fail-closed.
+The recursive direct factorer has two new leaves:
+
+```text
+S[k](a):  S o Terminal_funcd(C)
+
+b[k]:     Functor_catd_const_funcd(A,B)
+             o b
+             o Terminal_funcd(C).
+```
+
+The former records zero outer uses, one inner use, and one hidden-base use;
+the latter records zero outer uses, zero inner uses, and one hidden-base use.
+Both pass through the existing recursive target-map and pair algebra. The
+focused witness includes a nested three-leaf pair containing `S[k](a)`,
+`b[k]`, and an existing eta leaf. No curry package, total-context section,
+cast, coercion, external equation, new intrinsic Core node, Lambdapi edit,
+transfer declaration, or runtime rule was introduced.
+
+Measured validation:
+
+- root typecheck and lint are green;
+- the new section-root suite is 4 pass / 0 fail;
+- the nearest direct-introduction, product-transfer, and weakening-transfer
+  suites are 16 pass / 0 fail; and
+- the single required `check:ts` is green at 1,246 pass / 51 intentional
+  skips / 0 fail out of 1,297 tests, in 1,897,012.20 ms. Do not repeat this
+  aggregate for documentation synchronization or unchanged successors.
+
+This closes the ordinary weakening rows for the current direct three-binder
+mixed telescope. It does not claim constant-middle varying composition,
+larger or arbitrary contexts, arbitrary variance, transformation
+introduction, unrestricted `lambda^nd`, parser/browser parity, or curry
+graduation. `DIRECT-MIXED-SECTION-GRADUATE-1L` is the next dependency-ready
+read-only reassessment.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -4103,12 +4166,28 @@ section/terminal/direct-weakening/composition owners. Treat
 `DIRECT-MIXED-SECTION-ROOT-1K` / D-DTTLF-USABILITY-051 as separately
 reviewed-approved from proposal checkpoint
 `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141` under the standing unattended
-delegation. Its TypeScript-only ten-item scope is the next dependency-ready
-implementation. Preserve direct introduction as the surface/compiler
-invariant. Do not acquire ordinary-weakening projections, change the kernel
-or transfer graph, implement constant-middle composition, arbitrary
-contexts, unrestricted variance or `:^nd`, curry promotion, text/browser
-parity, or remote Git effects in that tranche.
+delegation and as implemented/final-green at
+`e337f1b1a3a61a861a714fa9d06035a1949beec9`. The active runtime performs the
+one-step `Functor_catd` fibre reduction; the shared bounded reifier now
+recognizes its already-transferred ordinary `Functor_cat` result. The direct
+recursive factorer lowers `S[k](a)` and `b[k]` by section/terminal composition,
+using direct inner weakening only for `b[k]`, and recursively consumes both
+through target maps and nested pairs. Its focused evidence is 4/4 plus 16/16
+nearest regressions; its single required `check:ts` is green at 1,246 pass,
+51 intentional skips, and zero failures out of 1,297 tests. Do not repeat that
+aggregate. Preserve direct introduction as the surface/compiler invariant.
+Do not acquire ordinary-weakening projections, change the kernel or transfer
+graph, implement constant-middle composition, arbitrary contexts,
+unrestricted variance or `:^nd`, curry promotion, text/browser parity, or
+remote Git effects as an unreviewed continuation.
+
+Treat `DIRECT-MIXED-SECTION-GRADUATE-1L` as the next dependency-ready
+read-only reassessment. Recompute the remaining usability matrix from actual
+post-D-051 behavior, distinguish constant-middle varying composition from
+larger contexts, transformation introduction, and unrestricted `:^nd`, and
+freeze at most one bounded successor before any semantic edit. Never infer a
+curry or total-context-section prerequisite for the fundamental direct form
+`lambda^n k. lambda^f c. lambda^f a. t`.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -4127,6 +4206,15 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-051 implemented and final-green.**
+  Semantic checkpoint `e337f1b1a3a61a861a714fa9d06035a1949beec9`
+  adds the generic transferred-`Functor_cat` reifier view and the two direct
+  recursive section roots. The active runtime remains the sole owner of the
+  `Functor_catd` fibre conversion; no kernel, transfer, curry, or external
+  coherence change occurred. Focused evidence is 4/4 new and 16/16 nearest
+  regressions. The single required `check:ts` is green at 1,246 pass, 51 skip,
+  and 0 fail out of 1,297 tests. The next row is the read-only
+  `DIRECT-MIXED-SECTION-GRADUATE-1L` reassessment.
 - **2026-08-01 — D-DTTLF-USABILITY-051 approved exactly as proposed.**
   Proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141` is a clean
   documentation-only descendant of final-green D-050. Separate review
