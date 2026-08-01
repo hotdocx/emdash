@@ -47,8 +47,13 @@ frozen below as H-DTTLF-USABILITY-MIXED-ACTION-FOUNDATION-01 /
 D-DTTLF-USABILITY-038 at proposal checkpoint
 `b91c201ed45e15b65b87cca0d6649b5fb45e1b68`. The separate review recorded
 below approves exactly that four-rule foundation under the standing
-unattended delegation, with immediate human supersession. No mixed-curry
-owner is authorized by D-038.
+unattended delegation, with immediate human supersession. The user then
+identified the existing `Unit_prof` full/capped action ladder before any
+active semantic checkpoint. The four-rule experiment was withdrawn
+uncommitted. H-DTTLF-USABILITY-MIXED-ACTION-UNIT-PROF-CORRECTION-01 /
+D-DTTLF-USABILITY-039 below freezes the corrected six-rule, zero-new-owner
+foundation for separate review. No mixed-curry owner is authorized by either
+gate.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -307,9 +312,9 @@ It deliberately avoids:
 | `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | final-green at `d08f2de65336dbe393864bc520fc8486ea365f99` | implemented D-036; approved D-037 | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
 | `PUBLIC-HOM-VALIDATE-1B` | final-green; evidence recorded below | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No repeated long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | complete at public checkpoint `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; Pages run `30680155372` successful and live smoke green | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
-| `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, four-rule generic prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
-| `MIXED-ACTION-FOUNDATION-1A` | approved under D-DTTLF-USABILITY-038; implementation dependency-ready | completed `MIXED-INTRODUCTION-0A`; proposal `b91c201ed45e15b65b87cca0d6649b5fb45e1b68` | Promote exactly four generic action/projection rules at their existing owners, with focused positive and non-collapse checks. Add no mixed-curry symbol. |
-| `MIXED-CURRY-1B` | decision-blocked on green `MIXED-ACTION-FOUNDATION-1A` and a separately frozen D-039 gate | measured mixed-curry owner/projection probe | Implement one exact Lambdapi-first mixed-curry functor, its stable displayed-functor discriminator, point/A-arrow/C-arrow/base-arrow projection ladder, and qualified laws. |
+| `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
+| `MIXED-ACTION-FOUNDATION-1A` | D-038 superseded before active checkpoint; corrected D-039 frozen for separate review | completed `MIXED-INTRODUCTION-0A`; D-038 proposal `b91c201ed45e15b65b87cca0d6649b5fb45e1b68`; Unit-prof/full-action probes | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
+| `MIXED-CURRY-1B` | decision-blocked on green corrected `MIXED-ACTION-FOUNDATION-1A` and a separately frozen D-040 gate | measured mixed-curry owner/projection probe | Implement one exact Lambdapi-first mixed-curry functor, its stable displayed-functor discriminator, point/A-arrow/C-arrow/base-arrow projection ladder, and qualified laws. |
 | `MIXED-INTRODUCTION-TS-1C` | blocked on green `MIXED-CURRY-1B` and transfer qualification | active owner/rules and conformance evidence | Transfer the owner mechanically and extend the contextual compiler with one genuinely non-eta mixed body. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
@@ -688,30 +693,61 @@ surface operation:
 - `Functord_cat`, `fdapp1_int_cell`, and generic `fapp*`/`tapp*` own the
   displayed base-arrow cell, transformation action, and subsequent Hom
   action; and
-- `Hom_func`/`Hom_fapp0` own precomposition in `A` and postcomposition in
-  `B`.
+- `Unit_prof X : Prof X X` owns the uncurried two-ended hom profunctor;
+  its existing full and capped projections reduce respectively to
+  `Hom_tele_func` and `Hom_func`; and
+- `Hom_tele_func`/`Hom_func`/`Hom_fapp0` are deliberately the reusable
+  ambient-category full/capped/point ladder, formerly hidden behind the
+  profunctor-specific package. They own precomposition in `A` and
+  postcomposition in `B` without creating a second mixed action.
 
-Four existing-owner projections are nevertheless missing from the active
-runtime normal forms:
+Six existing-owner projections are missing from the active runtime normal
+forms selected by the corrected audit:
 
-1. capped base action of `Op_catd` to `Op_func` of the underlying family
+1. full base action of `Op_catd`, obtained by composing the underlying
+   `fapp1_func` with the internal opposite functor's full action;
+2. capped base action of `Op_catd` to `Op_func` of the underlying family
    action;
-2. capped base action of `Functor_catd A B` to the rigid two-endpoint
-   `Hom_func`, with negative `A` action and positive `B` action;
-3. Cat-specialized point projection of rigid `Hom_fapp0` to the nested
-   application `f(h(g(x)))`; and
-4. one opposite-source identity projection-order bridge, because
+3. full base action of `Functor_catd A B`, obtained by pairing the negative
+   and positive full endpoint actions and composing with `Hom_tele_func`;
+4. capped base action of `Functor_catd A B` to `Hom_func`, with negative `A`
+   action and positive `B` action;
+5. Cat-specialized point projection of `Hom_fapp0` to the nested application
+   `f(h(g(x)))`; and
+6. one opposite-source identity projection-order bridge, because
    `id_(Op K)` has canonically reduced to `id_K` before the generic strictness
    rule can recognize it.
 
 These are generic action projections, not curry-specific coherence rules.
-All four typecheck together in the bounded prerequisite probe and make the
-readable `alpha : a -> A[p](a')` context compute without a coercion.
+All six typecheck together at full-file owner positions and make the readable
+`alpha : a -> A[p](a')` context compute without a coercion. The two full
+rules preserve iteration over higher base cells; their capped rules are the
+required projection-order joins.
+
+The user's `Unit_prof` observation was decisive in checking ownership. The
+transparent semantic family
+
+```text
+Pullback_catd
+  (Hom_prof_along A B)
+  (id_K,id_K)
+```
+
+has the same fibre and capped base action as `Functor_catd A B`; its action
+reduces through the existing `Unit_prof -> Hom_tele_func -> Hom_func` ladder.
+However, a bounded negative confirms that this long diagonal-restriction
+composite is not definitionally the stable `Functor_catd` head. Replacing the
+head, adding a broad whole-family rewrite/unification rule, or introducing a
+second action owner would all be wider and less stable changes. The selected
+six rules are projection bridges from the existing stable head into the
+existing action ladder. An explicit check equates the capped
+`Functor_catd` action with `Unit_prof Cat_cat` applied to the paired endpoints
+and paired base arrow.
 
 The opposite seam also exposed an important non-solution. `Hom` is a stable
 classifier, so a term classified under `Hom(Op X)` is not silently retyped as
 a reversed `Hom X`. The successful probe uses the canonical
-`Obj(Hom_cat(...))` form at that seam. D-038 therefore adds no generic
+`Obj(Hom_cat(...))` form at that seam. The corrected gate therefore adds no generic
 `Hom(Op X)` coercion, reversal rule, or unification shortcut.
 
 ### Qualified mixed-curry owner after the foundation
@@ -733,7 +769,7 @@ owner ladder:
 The stable `mixed_curry_funcd(s)` head is not a checked mirror. Removing it
 made the base-cell projection fail subject reduction because the required
 target classifier was no longer recoverable at the rule boundary. It is a
-genuine stable object/discriminator for a later D-039 proposal. The full
+genuine stable object/discriminator for a later D-040 proposal. The full
 probe also confirms that transformations between sections are mapped by the
 ordinary generic `fapp1_func`/`fapp1_fapp0` action of the one curry functor;
 no second transformation-specific curry or external coherence calculus is
@@ -858,6 +894,130 @@ cases, and the nested SOP. No immediate human correction superseded it, so
 the separate decision below approves exactly D-038. Active edits may now
 begin within that boundary.
 
+## Human-Superseding `Unit_prof` Review And Corrected Gate
+
+The user immediately challenged the D-038 description because the active
+kernel already has
+
+```text
+Unit_prof(X) : Prof(X,X)
+```
+
+and both of its relevant projections:
+
+```text
+fapp1_func(Unit_prof X,(x,y),(x',y'))
+  -> Hom_tele_func_X(x,x',y,y')
+
+fapp1_fapp0(Unit_prof X,(x,y),(x',y'),(g,f))
+  -> Hom_func_X(g,f).
+```
+
+That observation supersedes the unattended D-038 approval before any active
+semantic checkpoint. The uncommitted four-rule kernel/check experiment was
+removed, leaving the tracked worktree clean. The historical D-038 commits are
+retained as backtracking evidence; they do not authorize promotion after this
+correction.
+
+The deeper review confirms that D-038 did **not** invent a second Hom-action
+owner: section 5d deliberately extracted `Hom_tele_func`, `Hom_func`, and
+`Hom_fapp0` as the ambient-category action formerly hidden in the
+profunctor-specific package, and section 18d routes `Unit_prof` through that
+same ladder. But D-038 described only capped actions. That is too narrow for
+the scalable internalized design: the corresponding full actions should be
+exposed at the same time so action on higher base cells remains available.
+
+The corrected six-rule owner-position probe establishes:
+
+- all six rules and the complete mixed-curry type consumer check in under the
+  60-second bound;
+- the full `Functor_catd` route is the `Hom_tele_func` action on the paired
+  negative/positive full endpoint actions;
+- the capped route converts exactly to the already existing capped
+  `Unit_prof Cat_cat` action at paired endpoints and paired base arrow;
+- a transparent diagonal pullback of `Hom_prof_along A B` has the expected
+  fibres and capped action, but is not convertible to the stable
+  `Functor_catd A B` head;
+- the analogous full `Prof_reindex` projection also remains under its stable
+  ladder rather than definitionally becoming the direct `Hom_tele_func`
+  composite, so a broad whole-family collapse is not selected;
+- the warning-enabled full-file probe has 1,068 unjoinable-critical-pair
+  diagnostics versus the 1,020 active baseline and the same 159 replaceable
+  variables. The two full-action rules add no further warning delta beyond
+  the measured four-rule candidate; and
+- strict LHS audit is green after documenting the one intentional `Op_cat`
+  source discriminator.
+
+### H-DTTLF-USABILITY-MIXED-ACTION-UNIT-PROF-CORRECTION-01 /
+### D-DTTLF-USABILITY-039
+
+Approve this exact correction to D-038:
+
+1. Add no new Hom, profunctor, mixed-action, opposite, or family owner. Keep
+   `Unit_prof`, `Hom_tele_func`, `Hom_func`, `Hom_fapp0`, `op`, `Op_func`,
+   `Op_catd`, and `Functor_catd` as the existing owners.
+2. Add the full `Op_catd` projection
+
+   ```text
+   fapp1_func(Op_catd E;x,y)
+     -> fapp1_func(op;E[x],E[y]) o fapp1_func(E;x,y).
+   ```
+
+   Its result remains a functor out of `Hom_K(x,y)` and therefore retains
+   higher base-cell action.
+3. Add the capped projection-order join
+
+   ```text
+   fapp1_fapp0(Op_catd E,p)
+     -> Op_func(fapp1_fapp0(E,p)).
+   ```
+4. Add the full `Functor_catd` projection
+
+   ```text
+   fapp1_func(Functor_catd A B;x,y)
+     -> Hom_tele_func_Cat(A[x],A[y],B[x],B[y])
+          o <fapp1_func(A;y,x), fapp1_func(B;x,y)>.
+   ```
+
+   The pair is the existing product-valued-functor `Struct_sigma` normal form.
+   The negative endpoint reverses `x,y`; the positive endpoint does not.
+5. Add its capped projection-order join
+
+   ```text
+   fapp1_fapp0(Functor_catd A B,p)
+     -> Hom_func_Cat(A[p],B[p]).
+   ```
+
+   Require a focused assertion that this is definitionally the existing
+   `fapp1_fapp0(Unit_prof Cat_cat, (A[x],B[x]), (A[y],B[y]),
+   (A[p],B[p]))` projection. `Hom_func` is the selected runtime rung of that
+   owner, not a competing primitive.
+6. Retain D-038's Cat-specialized point projection
+
+   ```text
+   fapp0(Hom_fapp0(g,f,h),x') -> f(h(g(x')))
+   ```
+
+   only under `A = Cat_cat`. Standalone `Hom_fapp0` remains the rigid
+   `Unit_prof`-compatible point normal form; this rule computes only after the
+   resulting functor is consumed at an object.
+7. Retain D-038's narrow opposite-source identity projection-order bridge.
+   Keep its `Op_cat` source discriminator and LHS-audit annotation. Add no
+   broad opposite identity, `Hom(Op X)` reversal, or category collapse.
+8. Focused checks must cover both full and capped reduction orders, exact
+   `Unit_prof` agreement, the Cat-level point formula, the opposite identity
+   join, and the existing `Op K != K` and Sigma/pullback-product negatives.
+9. Follow the complete nested Lambdapi SOP and record warnings as diagnostic
+   interactions. Add no mixed-curry owner, whole-family rewrite/unification
+   rule, transparent `Functor_catd` replacement, product facade, TypeScript,
+   parser, browser, book, or public change.
+10. Only after this corrected foundation is green and checkpointed may the
+    plan freeze D-040 for the measured mixed-curry owner/projection ladder.
+
+The corrected gate is intentionally larger by two projection rules and
+smaller in conceptual ownership: it adds zero owners and makes the existing
+full/capped `Unit_prof` architecture explicit.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -915,13 +1075,16 @@ aggregate or redeploy it merely for reassurance.
 
 Treat MIXED-INTRODUCTION-0A as probe-complete with zero active-kernel delta.
 Continue from the next dependency-ready Work Ledger row. The immediate gate is
-D-DTTLF-USABILITY-038: exactly four generic action/projection rules at their
-existing owners, no mixed-curry symbol. Preserve the measured two-sided
-context, negative-A/positive-C polarity, canonical Hom classifier seam, and
-Sigma/pullback non-collapse. After a green synchronized foundation checkpoint,
-freeze and separately review D-039 before promoting the stable mixed-curry
-owner/projection ladder. Prefer generic Hom action for transformations and
-higher cells; never add external naturality or coherence evidence.
+D-DTTLF-USABILITY-039, which human-supersedes D-038 before active promotion:
+exactly six full/capped/point projection rules into the existing `op` and
+`Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0` action ladders, with zero
+new owner and no mixed-curry symbol. Preserve the measured two-sided context,
+negative-A/positive-C polarity, canonical Hom classifier seam, stable
+`Functor_catd` head, and Sigma/pullback non-collapse. After a green
+synchronized foundation checkpoint, freeze and separately review D-040 before
+promoting the stable mixed-curry owner/projection ladder. Prefer generic Hom
+action for transformations and higher cells; never add external naturality or
+coherence evidence.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction and treat the
 completed CURRY-PACKAGE-0A as supporting evidence unless a concrete later gap
@@ -1081,3 +1244,27 @@ removal, or unrelated cleanup is authorized.
   plus its focused SOP validation, with immediate human supersession. It does
   not authorize the probe-only mixed-curry ladder or any TypeScript/public
   change.
+- **2026-08-01 — the user superseded D-DTTLF-USABILITY-038 before active
+  promotion.** The user identified `Unit_prof` and quoted its existing
+  `fapp1_func -> Hom_tele_func` and `fapp1_fapp0 -> Hom_func` projections.
+  The four-rule active/check experiment had not been checkpointed and was
+  removed with `apply_patch`; the tracked worktree returned clean. The D-038
+  proposal/review commits remain historical evidence, not current semantic
+  authorization.
+- **2026-08-01 — `Unit_prof` ownership and full-action audit complete.** The
+  diagonal restriction of `Hom_prof_along A B` has the same fibres and capped
+  action as `Functor_catd A B`, but the whole families are intentionally not
+  convertible. A six-rule full-file owner-position candidate reuses
+  `op`, `Hom_tele_func`, `Hom_func`, and `Hom_fapp0`; its capped mixed-family
+  action is definitionally the existing `Unit_prof Cat_cat` projection. The
+  full/capped owner probe, complete mixed-curry type probe, and strict LHS
+  audit are green. Warning diagnostics remain 1,068 critical pairs and 159
+  replaceable variables, so the two newly explicit full-action rules add no
+  warning delta beyond the earlier capped candidate.
+- **2026-08-01 — D-DTTLF-USABILITY-039 frozen for separate review.** The
+  human-superseding correction adds exactly full and capped action projections
+  for `Op_catd` and `Functor_catd`, the Cat-specialized consumed-point
+  projection of `Hom_fapp0`, and the narrow opposite-identity bridge. It adds
+  no owner, whole-family comparison, coercion, product facade, mixed curry,
+  TypeScript/public change, or broad variance claim. D-040 is reserved for a
+  later exact mixed-curry proposal after this corrected foundation is green.
