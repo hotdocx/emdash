@@ -175,7 +175,14 @@
 > is a transfer-coverage input to the next read-only
 > `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` audit, alongside `S[k](a)`, fully
 > constant bodies, and the qualified constant-middle varying case. No such
-> semantic successor is yet authorized.
+> semantic successor is yet authorized. That read-only audit is now complete:
+> `S[k](a)` first exposes an overly generic open-section classifier view,
+> while `b[k]` reaches the recursive factorer; both derive through existing
+> section, `Terminal_funcd`, direct weakening, and composition owners. The
+> TypeScript-only `DIRECT-MIXED-SECTION-ROOT-1K` successor is frozen under
+> D-DTTLF-USABILITY-051 for separate review. It adds no kernel/transfer
+> semantics and keeps constant-middle varying composition, larger contexts,
+> unrestricted variance, and `lambda^nd` separate.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

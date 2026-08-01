@@ -492,7 +492,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | read-only reassessment complete; no semantic delta | final-green D-048 and the user's renewed direct-binder invariant | Graduates arbitrary finite depth only for the recursive `leaf | source-map | target-map | pair` body algebra, alongside the predecessor's qualified finite Hom towers. Direct introduction is fundamental and curry-free. General structural constructor coverage, context arity, variance-valid varying application, and `:^nd` introduction remain separate. |
 | `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | complete; zero active semantic delta; direct weakening selected | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; approved D-DTTLF-USABILITY-049; owner-position/direct-versus-curry probes | The occurrence matrix distinguishes structural weakening from variance-valid varying application. `Functor_catd_const_funcd` is quiet-green with point/full/capped and higher action; terminal/section composition derives the other unused-variable cases. Curry remains auxiliary. |
 | `DIRECT-MIXED-WEAKENING-1J` | final-green; kernel checkpoint `c1890373ab93aa155336187e72b6c421c74b7e81`; TypeScript checkpoint `d4ed2d5ecf743cd5c33f8204a13f04331034c3d1` | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; corrected proposal `e8f6a88645fb09646c62841ad1d9e11236b73948`; separate approval; one kernel CI; focused transfer/direct/runtime/demo evidence; one green 1,293-test TypeScript aggregate | One direct `Functor_catd_const_funcd` owner with point/full/capped action is active. The generic TypeScript transfer acquires the pre-existing `hom_postcomp_func` signature and the new owner/rules. The recursive direct binder accepts outer-only `H[c]`, target maps, and mixed eta/weakening pairs with explicit outer/inner occurrence counts. Curry remains auxiliary and unused. |
-| `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` | next read-only audit after final D-050 checkpoint; zero semantic delta until separately frozen | final-green `DIRECT-MIXED-WEAKENING-1J`; direct-binder invariant; measured `Const_func_func` downstream runtime-transfer boundary | Reassess the next highest-yield direct structural forms (`S[k](a)`, fully constant bodies, and the qualified constant-middle varying case), inventory whether ordinary weakening projection acquisition is needed for TypeScript-only downstream normalization, and select at most one bounded successor. Do not route direct introduction through curry or broaden to arbitrary contexts/variance/`:^nd`. |
+| `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` | read-only audit complete; zero semantic delta; one TypeScript-only section-root successor selected | final-green `DIRECT-MIXED-WEAKENING-1J`; direct-binder invariant; measured callback/factorer probes and transfer inventory | `S[k](a)` is blocked first by an overly generic open-section classifier view; `b[k]` reaches and is rejected by the recursive factorer. Both derive through existing section, `Terminal_funcd`, direct weakening, and composition. Ordinary-weakening projection acquisition is unnecessary for elaboration and remains only an optional deeper-normalization concern. The constant-middle varying case still lacks an internal displayed composition lift. |
+| `DIRECT-MIXED-SECTION-ROOT-1K` | proposal frozen under D-DTTLF-USABILITY-051; decision pending | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050 | Add one canonical runtime-validated open-section classifier view and two recursively consumable section-root leaves for `S[k](a)` and `b[k]`. Reuse `Terminal_funcd`, `Functor_catd_const_funcd`, and generic displayed composition. Add no kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd`. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3726,6 +3727,138 @@ effect remain excluded.
 No immediate human correction superseded the corrected checkpoint. Under the
 standing unattended delegation, with immediate human supersession,
 implementation is authorized only for the twelve numbered D-050 items.
+
+## `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` read-only audit result
+
+The D-050 completion leaves direct nested introduction—not curry or a hybrid
+section-first API—as the fundamental architecture:
+
+```text
+lambda^n k. lambda^f c. lambda^f a. body
+  : Functord_cat C (Functor_catd A B).
+```
+
+The next audit distinguishes a surface classifier-view gap from a recursive
+factorization gap. A bounded live TypeScript probe gives these exact results:
+
+- `S[k](a)`, for `S : Pi_cat(Functor_catd A B)`, is rejected before the
+  factorer with `CLASSIFIER_ARGUMENT_MISMATCH`: open dependent-section
+  application currently promises only `dependent-object`, so it cannot expose
+  the already-determined fibre-functor classifier;
+- `b[k]`, for `b : Pi_cat B`, constructs successfully as an indexed object and
+  reaches the direct factorer, which rejects it with
+  `UNAVAILABLE_DISPLAYED_ACTION` because no zero-local section-root leaf is
+  present.
+
+This is not evidence for a second AST, external coherence, or manual
+proof-time unification inside a switch. The first result term is still the
+ordinary `piapp0(S,k)`. Its classifier is the fibre of the canonical active
+`Functor_catd A B` family, and the existing bounded category-object reifier
+can validate that this fibre normalizes to the expected ordinary functor
+category. The frontend then retains an indexed-functor *view* of the unchanged
+term so ordinary recursive application can continue; the final generic LF
+checker still validates the emitted Core.
+
+Both semantic abstractions already exist without a new kernel owner. Let
+`1_K = Terminal_catd K`:
+
+```text
+S : 1_K -> Functor_catd A B
+Terminal_funcd(C) : C -> 1_K
+
+S o Terminal_funcd(C) : C -> Functor_catd A B
+```
+
+and, for a coherent section `b : 1_K -> B`:
+
+```text
+Functor_catd_const_funcd(A,B) o b o Terminal_funcd(C)
+  : C -> Functor_catd A B.
+```
+
+Thus `S[k](a)` is outer weakening of an already-coherent functor-valued
+section, while `b[k]` is simultaneous outer/inner weakening of a value-valued
+section. They share a section-root compilation basis and differ only by
+whether direct inner weakening is needed. Existing target-map and pair nodes
+can consume either root recursively.
+
+The measured `Const_func_func` transfer boundary does not block this
+elaboration. Its signature is already in the prerequisite environment and
+D-050's direct weakening owner is fully checked. Importing the three ordinary
+weakening projection rules would only make the TypeScript runtime normalize
+farther after projecting the new term; it is unnecessary for construction,
+classification, or final generic checking and must not be smuggled into this
+successor.
+
+The qualified constant-middle varying expression remains separate. The
+kernel has ordinary `Functor_comp_pair_func`, but lexical and type-aware
+search still finds no internally displayed lift from the paired mixed-family
+inputs to `Functor_catd A B`. It would need its own owner-position audit of
+object, base-arrow, and higher action. Neither section-root factoring nor
+curry solves that variance-sensitive construction.
+
+The smallest next step is consequently a TypeScript-only section-root
+closure. It generalizes the direct recursive factorer by internally owned
+structural derivations and classifier reification; it does not change the
+kernel or pretend that arbitrary categorical lambda synthesis is complete.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-SECTION-ROOT-01 /
+## D-DTTLF-USABILITY-051
+
+Approve the following bounded successor:
+
+1. Make no Lambdapi, transfer-declaration, or runtime-rule change. Reuse the
+   final-green D-050 profile and its existing `Terminal_funcd`, section,
+   `Functor_catd_const_funcd`, and generic displayed-composition owners.
+2. In open dependent-section application, recognize only a section whose
+   family is the canonical active `Functor_catd A B` over the current mixed
+   base. Validate its fibre classifier through the existing bounded
+   category-object reifier, retain the unchanged section-application term,
+   and expose the corresponding indexed-functor construction view. Accept
+   `fibre-functor` expectation for exactly that validated case. Add no
+   coercion, cast, equality witness, local convertibility table, or
+   owner-specific checker/evaluator branch.
+3. Add one recursive section-functor root for `S[k](a)`. Compile it as the
+   already-coherent section `S` precomposed with `Terminal_funcd(C)`. Record
+   zero outer uses, one inner use, and one hidden-base use. Do not invoke a
+   curry package or materialize a total-context section.
+4. Add one recursive section-value root for `b[k]`. Compile it by composing
+   `Functor_catd_const_funcd(A,B)` after `b`, then precomposing with
+   `Terminal_funcd(C)`. Record zero outer uses, zero inner uses, and one
+   hidden-base use. This is the same section-root basis with direct inner
+   weakening, not a new whole-body special case.
+5. Let the existing recursive target-map and pair cases consume both roots.
+   Generalize leaf occurrence metadata so counts are explicit per root rather
+   than inferred from leaf count or a growing conditional. Keep escaped-slot,
+   shared-base, opposite-family, target-family, and closed-subject checks
+   unchanged or stronger.
+6. Keep fail-closed behavior for an open/noncoherent section subject, wrong
+   family/base, foreign index, arbitrary section-valued classifier,
+   constant-middle two-varying application, larger mixed contexts, and
+   unrestricted `lambda^nd`.
+7. Add focused tests for direct `S[k](a)`, direct `b[k]`, a target map over
+   each, and a recursive pair mixing them with an existing eta/weakening
+   branch. Assert the exact occurrence evidence, use of terminal/direct
+   weakening only where appropriate, final generic subject checking, and the
+   absence of mixed curry, total-context arguments, casts, coercions, and
+   external equations.
+8. Do not acquire the downstream `Const_func_func` projection family in this
+   gate. Record its current TypeScript normalization boundary in the tests;
+   the active Lambdapi checks remain the conformance evidence for deeper
+   object/arrow computation.
+9. Run only the focused new/direct tests, root typecheck, and lint during
+   implementation, followed by one `check:ts` because shared surface
+   behavior changes. Carry forward the final-green kernel evidence and do not
+   run Lambdapi CI, `check:all`, browser, print, or book aggregates.
+10. Synchronize the living ledger and handoff, stage only the bounded
+    TypeScript/tests/docs delta, and make rollback-safe local checkpoints.
+    Do not push, merge, rebase, reset, amend, clean temporary experiments,
+    remove worktrees, publish, or begin text/browser parity.
+
+This gate would close the two remaining ordinary weakening rows for the
+current three-binder mixed telescope. It would not close the independently
+measured constant-middle composition, arbitrary context/variance, or
+transformation-introduction questions.
 
 ## Validation And Checkpoint Policy
 
