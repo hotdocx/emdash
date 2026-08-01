@@ -9,8 +9,12 @@ H-DTTLF-USABILITY-RECURSIVE-MIXED-PUBLIC-01 /
 D-DTTLF-USABILITY-034 at proposal checkpoint
 `c702c8a353caeb7eb3bbb5fba1552b8dcb3e2f08`. The separate review recorded
 below approves exactly that gate under the standing unattended delegation,
-with human supersession. Implementation is dependency-ready. After the
-public slice is green and deployed, the next
+with human supersession. Implementation then measured one false fixture
+premise: `displayedTransforCategory` is not exported by
+`fibred-transfd-1`. H-DTTLF-USABILITY-RECURSIVE-MIXED-PUBLIC-CORRECTION-01 /
+D-DTTLF-USABILITY-035 below freezes the exact lightweight correction without
+weakening a profile or changing semantics. After the corrected public slice
+is green and deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -173,7 +177,8 @@ The pre-edit audit records:
   `CoreCategoricalProgram`, explicit Core, checker, evaluator, and runtime;
 - the browser owns no second parser, action table, checker, or categorical
   semantics;
-- `fibred-transfd-1` is already a browser-qualified fixture profile;
+- `fibred-transfd-1` is already a browser-qualified fixture profile, but its
+  exact exported surface does **not** include `displayedTransforCategory`;
 - the existing `displayed-transfor-composition` preset already constructs
   `Transfd_cat` endpoints under that profile;
 - the new `hom C x y` category route is Node-independent and recursively
@@ -189,9 +194,9 @@ The pre-edit audit records:
 
 ## Browser Preset Design
 
-The public witness should use the already-qualified `fibred-transfd-1`
-profile and two recursive Hom levels over a displayed-transformation
-category.
+The initially approved public witness would have used the already-qualified
+`fibred-transfd-1` profile and two recursive Hom levels over a
+displayed-transformation category.
 
 Host fixture:
 
@@ -218,7 +223,7 @@ const higherCells = homCategory(cells,alpha,beta)
 identityFunctor(higherCells)
 ```
 
-This expression demonstrates all of the intended public claim:
+This expression would have demonstrated all of the intended public claim:
 
 1. `transfd F0 F1` reaches the existing internalized displayed-transformation
    category;
@@ -228,6 +233,30 @@ This expression demonstrates all of the intended public claim:
    operand; and
 5. the resulting term compiles through the same explicit Core and generic LF
    checker as direct TypeScript.
+
+Focused implementation disproved the fixture-profile premise:
+`displayedTransforCategory` is guarded by
+`fibred-displayed-nd-higher-1`, while `fibred-transfd-1` fails closed with
+`UNAVAILABLE_DISPLAYED_ND_HIGHER`. The semantically valid higher profile took
+72.67 seconds cold on the current host, which is inappropriate for an
+interactive browser preset. No profile weakening or local conversion is
+justified.
+
+The corrected public witness therefore uses the default profile and the
+already checked category expression:
+
+```text
+id (hom (hom (functor A B) F G) alpha beta)
+```
+
+Here `F` and `G` are objects of `Functor_cat A B`, while `alpha` and `beta`
+are objects of `Hom_cat (Functor_cat A B) F G`. This still exercises the same
+depth-generic recursive `hom` resolver twice, with a nontrivial
+functor-category root. Its exact direct TypeScript compilation succeeds in
+under fifteen seconds cold including process/module initialization on the
+current host. It deliberately does not advertise the stronger displayed
+Transfd root in the browser; that root remains covered by completed semantic
+TypeScript evidence under its qualified profile.
 
 It deliberately avoids:
 
@@ -241,8 +270,8 @@ It deliberately avoids:
 
 | Row | Status | Dependencies | Exact deliverable |
 | --- | --- | --- | --- |
-| `PUBLIC-HOM-AUDIT-0A` | complete in this plan; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract, select the existing `fibred-transfd-1` fixture, reject the slow mixed-nest fixture, and freeze truthful public wording. |
-| `PUBLIC-HOM-PRESET-1A` | exact D-DTTLF-USABILITY-034 reviewed-approved; implementation dependency-ready | `PUBLIC-HOM-AUDIT-0A` | Add one recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
+| `PUBLIC-HOM-AUDIT-0A` | complete, then measurement-corrected by D-DTTLF-USABILITY-035; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract; reject both the slow mixed-nest fixture and the unavailable Transfd/profile combination; select the default-profile functor-category recursive-Hom witness; freeze truthful public wording. |
+| `PUBLIC-HOM-PRESET-1A` | D-DTTLF-USABILITY-034 approved; exact D-DTTLF-USABILITY-035 correction frozen for separate review | `PUBLIC-HOM-AUDIT-0A` | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
 | `PUBLIC-HOM-VALIDATE-1B` | blocked on green `PRESET-1A` | `PUBLIC-HOM-PRESET-1A` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | blocked on green `VALIDATE-1B` | clean goal checkpoint; fetched ancestry; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
@@ -324,6 +353,44 @@ The authorized remote effect is limited to pushing the validated
 fast-forward `main` and the existing Pages workflow's resulting deployment.
 No release tag, package publication, PR creation, or other remote mutation is
 authorized.
+
+## Frozen Measurement Correction
+
+### H-DTTLF-USABILITY-RECURSIVE-MIXED-PUBLIC-CORRECTION-01 /
+### D-DTTLF-USABILITY-035
+
+Approve the following exact correction to D-DTTLF-USABILITY-034:
+
+1. Replace only the `recursive-hom-transfd` preset/fixture with a
+   `recursive-hom-functor` preset using the default profile and source:
+
+   ```text
+   id (hom (hom (functor A B) F G) alpha beta)
+   ```
+
+2. Declare `A` and `B` as categories, `F` and `G` as typed objects of
+   `Functor_cat A B`, and `alpha` and `beta` as typed objects of
+   `Hom_cat (Functor_cat A B) F G`. Use only the existing `functorCategory`,
+   `object`, `homCategory`, and `identityFunctor` program operations.
+3. Require exact text/direct compilation equality as before. Retain the
+   eleven-preset count, reviewer revision bump, public capability wording,
+   validation gate, checkpoint, clean fast-forward push, and Pages
+   verification frozen by D-DTTLF-USABILITY-034.
+4. Record the negative evidence explicitly: do not expose
+   `displayedTransforCategory` from `fibred-transfd-1`, do not load the
+   measured 72.67-second `fibred-displayed-nd-higher-1` profile in the
+   interactive reviewer, and do not add a coercion, conversion exception,
+   declaration mirror, or browser-only semantic path.
+5. Interpret the public claim narrowly: the preset demonstrates qualified
+   finite recursive Hom/category formation over an explicit functor-category
+   root. The richer displayed Transfd root remains semantic TypeScript
+   evidence, not this browser witness. General mixed introduction/curry and
+   arbitrary variance remain open.
+
+All explicit non-effects and Git/publication boundaries of
+D-DTTLF-USABILITY-034 remain in force. This correction changes neither the
+kernel nor the TypeScript semantic architecture; it repairs only an invalid
+fixture-profile assumption discovered by fail-closed validation.
 
 ## Mixed-Introduction Audit Contract
 
@@ -408,7 +475,8 @@ docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md, and emdash2/AGENTS.md whenever
 the active Lambdapi workspace is involved.
 
 First complete the bounded recursive-Hom public synchronization exactly as
-frozen: use the existing browser reviewer and fibred-transfd-1 profile, add no
+corrected by D-DTTLF-USABILITY-035: use the existing browser reviewer and the
+default-profile functor-category recursive-Hom witness, add no
 semantic/checker/parser architecture, keep the qualified finite-Hom claim
 distinct from general mixed introduction and arbitrary variance, validate
 proportionally, checkpoint, fast-forward/push main only after fresh ancestry
@@ -457,3 +525,16 @@ removal, or unrelated cleanup is authorized.
   slice and its guarded fast-forward `main` push plus Pages verification; all
   mathematical, parser/checker, force/history-rewrite, and unrelated remote
   effects remain excluded.
+- **2026-08-01 — D-DTTLF-USABILITY-034 implementation exposed a fail-closed
+  profile mismatch.** `fibred-transfd-1` does not export
+  `displayedTransforCategory`; the correct
+  `fibred-displayed-nd-higher-1` profile compiled the Transfd-root witness but
+  took 72.67 seconds cold. The default-profile functor-category-root witness
+  compiled successfully in under fifteen seconds cold including process and
+  module initialization. The implementation did not weaken either profile.
+- **2026-08-01 — D-DTTLF-USABILITY-035 frozen for separate review.** The
+  correction replaces only the invalid Transfd browser fixture with
+  `id (hom (hom (functor A B) F G) alpha beta)`, preserves exact text/direct
+  equality and every D-034 public/validation/Git boundary, and leaves the
+  stronger displayed root as qualified semantic evidence rather than an
+  interactive preset claim.
