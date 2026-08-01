@@ -41,7 +41,8 @@
 > direct binder with curry. It split the next work into a TypeScript-only
 > classifier-view correction and a later orientation-aware source-action
 > audit. H-DTTLF-USABILITY-DIRECT-MIXED-CLASSIFIER-CORRECTION-01 /
-> D-DTTLF-USABILITY-044 is frozen in the living plan for separate review:
+> D-DTTLF-USABILITY-044 is separately reviewed-approved from proposal
+> checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`:
 > retain the exact indexed-object view of canonical fibre functors, compile
 > direct `c(a)` as existing `id_funcd`, and support nested positive canonical
 > targets without a kernel/runtime/curry change. Contravariant source mapping

@@ -412,7 +412,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-INTRODUCTION-0C` | complete; direct no-curry eta/mapped-body routes audited; ignored owner-position probes quiet-green with zero warning delta | final-green D-040 and auxiliary D-042; current recursive contextual elaborator; user's direct-introduction clarification | The fundamental direct recursive introduction `lambda^n k. lambda^f c. lambda^f a. t` does not require a surface or compiler-mandatory curry. Exact eta bypasses curry; recursive covariant target application factors through `Functor_catd(A,-)` action. One missing existing-owner fibre projection is isolated below. |
 | `DIRECT-MIXED-INTRODUCTION-1D` | final-green at `2c53291da9a8f74e9102434235f504721f53d34a` under D-DTTLF-USABILITY-043 | completed `DIRECT-MIXED-INTRODUCTION-0C`; proposal `291213d04269a230be0a3b2b7fc7b8bef81e81c9`; separate review under standing unattended delegation | Exactly one existing-owner runtime projection is active and generically transferred with zero declarations. The opt-in direct TypeScript binder handles exact eta plus finite recursive covariant target application and neither transfers nor invokes D-040/D-042. |
 | `MIXED-VARIANCE-GRADUATE-1E` | read-only stress audit complete; split into the two bounded rows below before graduation | final-green D-043 at `2c53291da9a8f74e9102434235f504721f53d34a`; representative direct recursive binder, inner action and full base-action formation | The public binder remains fundamental. The audit found one TypeScript classifier-view correction for identity/positive nesting and one separate orientation-aware source-action closure. It did not find a need for public curry. |
-| `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | frozen below as H-DTTLF-USABILITY-DIRECT-MIXED-CLASSIFIER-CORRECTION-01 / D-DTTLF-USABILITY-044; separate review required | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; final-green D-043 | Preserve an exact underlying indexed-object family when a value also has the canonical indexed-functor view; lower direct `c(a)` through existing `id_funcd`; and admit recursively nested positive canonical targets. Add no kernel rule, runtime declaration, curry dependency, or broad convertibility case. |
+| `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | separately reviewed-approved under D-DTTLF-USABILITY-044; implementation dependency-ready | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | Preserve an exact underlying indexed-object family when a value also has the canonical indexed-functor view; lower direct `c(a)` through existing `id_funcd`; and admit recursively nested positive canonical targets. Add no kernel rule, runtime declaration, curry dependency, or broad convertibility case. |
 | `MIXED-SOURCE-ACTION-0E2` | deferred until D-044 is resolved; preliminary append-only probe is green, but owner-position and orientation audits remain required | completed stress audit; active `Functor_catd_func` and `hom_precomp_along_fapp0` owners | Distinguish shared scope base `K` from a displayed family's domain/orientation `K` versus `Op K`; audit the exact source projection plus Cat-valued precomposition object/arrow projections before freezing any semantic edit. Do not use per-case equality hacks or expose curry. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -2335,8 +2335,24 @@ Approve the following bounded TypeScript-only correction:
    naturality evidence, curry import/call, text syntax, browser promotion,
    product facade, or unrestricted-variance claim.
 
-Implementation requires a separate review of this checkpoint. The later
-`MIXED-SOURCE-ACTION-0E2` audit and final graduation remain independent.
+### Separate D-DTTLF-USABILITY-044 review result
+
+The proposal checkpoint
+`2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` is approved exactly as frozen.
+Independent inspection confirms that `id_funcd` is already declared,
+transferred, and exposed through `displayedIdentityCompilation`; the direct
+profile already carries that prerequisite. The optional underlying-family
+view is construction metadata and requires no new Core term, checker rule,
+kernel equation, or runtime declaration. Exact `Functor_catd` recognition
+provides the enriched view, while the generic Core checker remains the final
+typing and conversion authority. The proposal also retains the measured
+source-orientation failure, so it cannot silently grow into arbitrary
+contravariance.
+
+No immediate human correction superseded the frozen checkpoint. Under the
+user's standing unattended-review delegation, this approves implementation
+of only the nine numbered D-044 items, with immediate human supersession. The
+later `MIXED-SOURCE-ACTION-0E2` audit and final graduation remain independent.
 
 ## Validation And Checkpoint Policy
 
@@ -2430,8 +2446,10 @@ for reassurance.
 Treat the `MIXED-VARIANCE-GRADUATE-1E` read-only stress audit as complete. It
 confirms the direct nested binder as fundamental and splits the next work into
 `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` and the later
-`MIXED-SOURCE-ACTION-0E2`. Review the frozen D-DTTLF-USABILITY-044 proposal
-separately before implementation. That first correction is TypeScript-only:
+`MIXED-SOURCE-ACTION-0E2`. Treat D-DTTLF-USABILITY-044 as separately
+reviewed-approved from proposal checkpoint
+`2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` under the standing unattended
+delegation. That first correction is TypeScript-only:
 retain the exact underlying object-family view of a canonical indexed
 functor, lower bound-outer `c(a)` through existing `id_funcd`, and preserve
 that object view through recursively nested positive canonical targets. Add
@@ -2457,6 +2475,16 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-044 approved exactly as proposed.** A
+  separate review of proposal checkpoint
+  `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3` confirms that existing
+  `id_funcd` is already transferred and available to the direct profile, and
+  that retaining an exact underlying object-family view is construction
+  metadata rather than a new conversion rule. The generic LF checker remains
+  authoritative. The bounded correction changes no kernel/runtime owner and
+  preserves the source-orientation failure. With no immediate human
+  supersession, the standing unattended delegation authorizes only the nine
+  frozen D-044 items; source action and graduation require later gates.
 - **2026-08-01 — D-DTTLF-USABILITY-044 frozen for separate review.** The
   bounded variance stress audit confirms that direct
   `lambda^n k. lambda^f c. lambda^f a. t` introduction remains fundamental;
