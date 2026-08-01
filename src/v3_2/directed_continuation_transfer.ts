@@ -682,7 +682,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
     fragmentId: 'reviewed-directed-continuation-signatures',
     authorityPath: 'emdash2/emdash3_2.lp',
     sourceSha256:
-        'sha256:4d8473837cbdd031ad4af4e9f41e9330243fff4929db4860919a81228804de82',
+        'sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe',
     canonicalExport: {
         exporterVersion: '3.0.0-90-gdb4f780',
         sha256:

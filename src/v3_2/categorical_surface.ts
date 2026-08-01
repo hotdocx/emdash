@@ -609,6 +609,7 @@ export type CoreCategoricalAbstractionEvidence =
             readonly targetChainLength: number;
             readonly pairNodeCount: number;
             readonly pairDepth: number;
+            readonly constantMiddleApplicationCount: number;
             readonly contextSize: 3;
             readonly contextRelation:
                 'natural-base-then-two-functorial-fibre-binders';
@@ -662,6 +663,7 @@ export type CoreCategoricalDependentApplicationPrerequisiteId =
     | 'mixed-functor-source-action'
     | 'mixed-functor-product-distributor'
     | 'mixed-functor-weakening'
+    | 'mixed-functor-constant-middle-composition'
     | CoreCategoricalDependentPrerequisiteId
     | CoreCategoricalDependentCompositionPrerequisiteId;
 
@@ -730,6 +732,7 @@ export interface CoreCategoricalScopedBuilderOptions {
         readonly mixedFunctorFamilyPartialCoreName: string;
         readonly mixedProductDistributorCoreName: string;
         readonly mixedConstantWeakeningCoreName: string;
+        readonly mixedConstantMiddleCompositionCoreName: string;
     };
 }
 
@@ -933,6 +936,11 @@ interface CoreCategoricalMixedFunctorFamilyShape {
     readonly targetFamily: KernelExpression;
 }
 
+interface CoreCategoricalConstantDisplayedFamilyShape {
+    readonly baseCategory: KernelExpression;
+    readonly fibreCategory: KernelExpression;
+}
+
 interface CoreCategoricalDirectMixedLeafFactorization {
     readonly tag: 'leaf';
     readonly rootExpression: KernelExpression;
@@ -966,6 +974,14 @@ interface CoreCategoricalDirectMixedPairFactorization {
     readonly targetFamily: KernelExpression;
 }
 
+interface CoreCategoricalDirectMixedConstantMiddleFactorization {
+    readonly tag: 'constant-middle-application';
+    readonly child: CoreCategoricalDirectMixedFactorization;
+    readonly subject: InternalCoreCategoricalTerm;
+    readonly middleCategory: KernelExpression;
+    readonly targetFamily: KernelExpression;
+}
+
 interface CoreCategoricalDirectMixedSectionApplication {
     readonly section: InternalCoreCategoricalTerm;
     readonly closed: ElaboratedSurfaceTerm;
@@ -975,7 +991,8 @@ interface CoreCategoricalDirectMixedSectionApplication {
 type CoreCategoricalDirectMixedFactorization =
     | CoreCategoricalDirectMixedLeafFactorization
     | CoreCategoricalDirectMixedTargetFactorization
-    | CoreCategoricalDirectMixedPairFactorization;
+    | CoreCategoricalDirectMixedPairFactorization
+    | CoreCategoricalDirectMixedConstantMiddleFactorization;
 
 interface CoreCategoricalDirectMixedSourceFactorization {
     readonly rootSourceFamily: KernelExpression;
@@ -993,6 +1010,7 @@ interface CoreCategoricalCompiledDirectMixedFactorization {
     readonly targetChainLength: number;
     readonly pairNodeCount: number;
     readonly pairDepth: number;
+    readonly constantMiddleApplicationCount: number;
     readonly rootKinds: readonly CoreCategoricalDirectMixedLeafFactorization[
         'rootKind'
     ][];
@@ -1822,6 +1840,73 @@ export class CoreCategoricalScopedBuilder {
             ],
             nodeProvenance
         );
+    }
+
+    private constantDisplayedFamilyShape(
+        family: KernelExpression
+    ): CoreCategoricalConstantDisplayedFamilyShape | undefined {
+        if (
+            family.tag !== 'application' ||
+            family.owner !== 'constant-displayed-family' ||
+            family.arguments.length !== 2
+        ) {
+            return undefined;
+        }
+        return {
+            baseCategory: family.arguments[0].value,
+            fibreCategory: family.arguments[1].value
+        };
+    }
+
+    /**
+     * Admit exactly the constant-family orientation used by the internal
+     * mixed composition owner. `Const(K,X)[k]` and `Const(Op K,X)[k]` both
+     * compute to the same category `X`; this construction-time view changes
+     * no Core term and is unavailable outside the direct mixed profile.
+     */
+    private directMixedConstantFamilyReorientation(
+        argument:
+            InternalCoreCategoricalIndexedObjectView,
+        subject:
+            InternalCoreCategoricalIndexedFunctorClassifier
+    ): boolean {
+        if (this.options.directMixedIntroduction === undefined) {
+            return false;
+        }
+        const baseCategory = subject.baseCategory;
+        const oppositeBase = this.oppositeCategory(
+            baseCategory,
+            subject.sourceFamily.provenance
+        );
+        const argumentShape = this.constantDisplayedFamilyShape(
+            argument.family
+        );
+        const sourceShape = this.constantDisplayedFamilyShape(
+            subject.sourceFamily
+        );
+        return argumentShape !== undefined &&
+            sourceShape !== undefined &&
+            kernelExpressionEquals(argument.baseCategory, baseCategory) &&
+            kernelExpressionEquals(
+                argument.familyBaseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                indexedFunctorSourceBase(subject),
+                oppositeBase
+            ) &&
+            kernelExpressionEquals(
+                argumentShape.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                sourceShape.baseCategory,
+                oppositeBase
+            ) &&
+            kernelExpressionEquals(
+                argumentShape.fibreCategory,
+                sourceShape.fibreCategory
+            );
     }
 
     private oppositeCategory(
@@ -4196,6 +4281,22 @@ export class CoreCategoricalScopedBuilder {
             nodeProvenance
         );
         const argumentObject = indexedObjectView(argument.type);
+        const exactFamilyMatch =
+            argumentObject !== undefined &&
+            kernelExpressionEquals(
+                argumentObject.familyBaseCategory,
+                indexedFunctorSourceBase(subject.type)
+            ) &&
+            kernelExpressionEquals(
+                argumentObject.family,
+                subject.type.sourceFamily
+            );
+        const constantFamilyReorientation =
+            argumentObject !== undefined &&
+            this.directMixedConstantFamilyReorientation(
+                argumentObject,
+                subject.type
+            );
         if (
             argumentObject === undefined ||
             argumentObject.indexOrdinal !==
@@ -4204,14 +4305,7 @@ export class CoreCategoricalScopedBuilder {
                 argumentObject.baseCategory,
                 subject.type.baseCategory
             ) ||
-            !kernelExpressionEquals(
-                argumentObject.familyBaseCategory,
-                indexedFunctorSourceBase(subject.type)
-            ) ||
-            !kernelExpressionEquals(
-                argumentObject.family,
-                subject.type.sourceFamily
-            )
+            (!exactFamilyMatch && !constantFamilyReorientation)
         ) {
             this.fail(
                 'CLASSIFIER_ARGUMENT_MISMATCH',
@@ -6925,6 +7019,208 @@ export class CoreCategoricalScopedBuilder {
             }
         }
 
+        // Qualified constant-middle application:
+        //
+        //   G[c](mixed-body)
+        //
+        // where the recursive child lands in Const(K,X) and the already-
+        // coherent closed G consumes Const(Op K,X). The two fibres compute
+        // to the same X, while the displayed composition owner retains the
+        // required opposite orientation internally. This is an application
+        // constructor inside the direct binder, not a curry route.
+        const constantMiddleArgument = indexedObjectView(argument.type);
+        const argumentConstantShape = constantMiddleArgument === undefined
+            ? undefined
+            : this.constantDisplayedFamilyShape(
+                constantMiddleArgument.family
+            );
+        const subjectConstantShape =
+            appliedFunctor.type.tag === 'indexed-functor'
+                ? this.constantDisplayedFamilyShape(
+                    appliedFunctor.type.sourceFamily
+                )
+                : undefined;
+        const constantMiddleCandidate =
+            constantMiddleArgument !== undefined &&
+            argumentConstantShape !== undefined &&
+            subjectConstantShape !== undefined &&
+            appliedFunctor.type.tag === 'indexed-functor' &&
+            kernelExpressionEquals(
+                indexedFunctorSourceBase(appliedFunctor.type),
+                oppositeBase
+            ) &&
+            kernelExpressionEquals(
+                constantMiddleArgument.familyBaseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                argumentConstantShape.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                subjectConstantShape.baseCategory,
+                oppositeBase
+            ) &&
+            kernelExpressionEquals(
+                argumentConstantShape.fibreCategory,
+                subjectConstantShape.fibreCategory
+            );
+        const constantMiddleChild = constantMiddleCandidate
+            ? this.directMixedFactorization(
+                argument,
+                outerOrdinal,
+                innerOrdinal,
+                baseOrdinal,
+                baseCategory,
+                outerSourceFamily,
+                innerSourceFamily
+            )
+            : undefined;
+        if (
+            constantMiddleChild !== undefined &&
+            constantMiddleArgument !== undefined &&
+            argumentConstantShape !== undefined &&
+            subjectConstantShape !== undefined &&
+            appliedFunctor.type.tag === 'indexed-functor' &&
+            appliedFunctor.type.indexOrdinal === baseOrdinal &&
+            kernelExpressionEquals(
+                appliedFunctor.type.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                indexedFunctorSourceBase(appliedFunctor.type),
+                oppositeBase
+            ) &&
+            kernelExpressionEquals(
+                indexedFunctorTargetBase(appliedFunctor.type),
+                baseCategory
+            ) &&
+            appliedFunctor.node.tag === 'typed-application' &&
+            appliedFunctor.node.judgment.target ===
+                'indexed-fibre-functor-object' &&
+            appliedFunctor.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] !== true &&
+            constantMiddleArgument.indexOrdinal === baseOrdinal &&
+            kernelExpressionEquals(
+                constantMiddleArgument.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                constantMiddleArgument.familyBaseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                argumentConstantShape.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                subjectConstantShape.baseCategory,
+                oppositeBase
+            ) &&
+            kernelExpressionEquals(
+                argumentConstantShape.fibreCategory,
+                subjectConstantShape.fibreCategory
+            ) &&
+            kernelExpressionEquals(
+                constantMiddleChild.targetFamily,
+                constantMiddleArgument.family
+            )
+        ) {
+            const outerArgument = appliedFunctor.node.argument as
+                InternalCoreCategoricalTerm;
+            const outerObject = indexedObjectView(outerArgument.type);
+            const projectedOuterFunctor = appliedFunctor.node.subject;
+            if (
+                outerArgument.node.tag === 'slot-token' &&
+                outerArgument.node.ordinal === outerOrdinal &&
+                outerObject !== undefined &&
+                outerObject.indexOrdinal === baseOrdinal &&
+                kernelExpressionEquals(
+                    outerObject.baseCategory,
+                    baseCategory
+                ) &&
+                kernelExpressionEquals(
+                    outerObject.familyBaseCategory,
+                    baseCategory
+                ) &&
+                kernelExpressionEquals(
+                    outerObject.family,
+                    outerSourceFamily
+                ) &&
+                projectedOuterFunctor.type.tag === 'indexed-functor' &&
+                projectedOuterFunctor.type.indexOrdinal === baseOrdinal &&
+                projectedOuterFunctor.node.tag === 'typed-application' &&
+                projectedOuterFunctor.node.judgment.target ===
+                    'displayed-functor-fibre' &&
+                projectedOuterFunctor.node.argument[
+                    CORE_CATEGORICAL_BOUNDARY
+                ] !== true
+            ) {
+                const base = projectedOuterFunctor.node.argument as
+                    InternalCoreCategoricalTerm;
+                const subject = projectedOuterFunctor.node.subject;
+                const shape = subject.type.tag === 'displayed-functor'
+                    ? this.mixedFunctorFamilyShape(
+                        subject.type.targetFamily,
+                        baseCategory
+                    )
+                    : undefined;
+                if (
+                    base.node.tag === 'slot-token' &&
+                    base.node.ordinal === baseOrdinal &&
+                    subject.type.tag === 'displayed-functor' &&
+                    subject.closed !== undefined &&
+                    subject.usage.length === 0 &&
+                    kernelExpressionEquals(
+                        subject.type.baseCategory,
+                        baseCategory
+                    ) &&
+                    kernelExpressionEquals(
+                        subject.type.sourceFamily,
+                        outerSourceFamily
+                    ) &&
+                    shape !== undefined &&
+                    kernelExpressionEquals(
+                        shape.sourceFamily,
+                        appliedFunctor.type.sourceFamily
+                    ) &&
+                    kernelExpressionEquals(
+                        shape.targetFamily,
+                        appliedFunctor.type.targetFamily
+                    ) &&
+                    appliedFunctor.type.underlyingObjectFamily !== undefined &&
+                    kernelExpressionEquals(
+                        appliedFunctor.type.underlyingObjectFamily,
+                        subject.type.targetFamily
+                    ) &&
+                    termObject !== undefined &&
+                    termObject.indexOrdinal === baseOrdinal &&
+                    kernelExpressionEquals(
+                        termObject.baseCategory,
+                        baseCategory
+                    ) &&
+                    kernelExpressionEquals(
+                        termObject.familyBaseCategory,
+                        baseCategory
+                    ) &&
+                    kernelExpressionEquals(
+                        termObject.family,
+                        shape.targetFamily
+                    )
+                ) {
+                    return Object.freeze({
+                        tag: 'constant-middle-application' as const,
+                        child: constantMiddleChild,
+                        subject,
+                        middleCategory:
+                            argumentConstantShape.fibreCategory,
+                        targetFamily: shape.targetFamily
+                    });
+                }
+            }
+        }
+
         // Recursive target mapping: G[k](mixed-body).
         if (
             termObject === undefined ||
@@ -7085,6 +7381,53 @@ export class CoreCategoricalScopedBuilder {
             structuralPrerequisites: Object.freeze([]),
             dependentPrerequisites: Object.freeze([
                 'displayed-terminal'
+            ])
+        };
+    }
+
+    private directMixedConstantMiddleCompositionCompilation(
+        baseCategory: KernelExpression,
+        middleCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        sourceProductFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalDisplayedContextualCompilation {
+        const capability = this.options.directMixedIntroduction;
+        if (capability === undefined) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Direct constant-middle application requires the reviewed ' +
+                    'internal composition owner'
+            );
+        }
+        return {
+            term: kernelCall(
+                kernelFree(
+                    capability.mixedConstantMiddleCompositionCoreName,
+                    nodeProvenance
+                ),
+                [
+                    { plicity: 'implicit', value: baseCategory },
+                    { plicity: 'implicit', value: middleCategory },
+                    { plicity: 'implicit', value: sourceFamily },
+                    { plicity: 'implicit', value: targetFamily }
+                ],
+                nodeProvenance
+            ),
+            sourceFamily: sourceProductFamily,
+            targetFamily: this.mixedFunctorFamily(
+                baseCategory,
+                sourceFamily,
+                targetFamily,
+                nodeProvenance
+            ),
+            identity: false,
+            structuralPrerequisites: Object.freeze([]),
+            dependentPrerequisites: Object.freeze([
+                'stable-functor-family',
+                'mixed-functor-constant-middle-composition'
             ])
         };
     }
@@ -7321,6 +7664,7 @@ export class CoreCategoricalScopedBuilder {
                 targetChainLength: 0,
                 pairNodeCount: 0,
                 pairDepth: 0,
+                constantMiddleApplicationCount: 0,
                 rootKinds: Object.freeze([factorization.rootKind]),
                 rootSourceFamilies: Object.freeze([
                     factorization.rootSourceFamily
@@ -7328,6 +7672,132 @@ export class CoreCategoricalScopedBuilder {
                 initialTargetFamilies: Object.freeze([
                     factorization.initialTargetFamily
                 ])
+            };
+        }
+
+        if (factorization.tag === 'constant-middle-application') {
+            const child = this.compileDirectMixedFactorization(
+                factorization.child,
+                baseCategory,
+                outerSourceFamily,
+                innerSourceFamily,
+                nodeProvenance
+            );
+            const subject = factorization.subject;
+            const childShape = this.mixedFunctorFamilyShape(
+                child.compilation.targetFamily,
+                baseCategory
+            );
+            const subjectShape = subject.type.tag === 'displayed-functor'
+                ? this.mixedFunctorFamilyShape(
+                    subject.type.targetFamily,
+                    baseCategory
+                )
+                : undefined;
+            const childConstant = childShape === undefined
+                ? undefined
+                : this.constantDisplayedFamilyShape(
+                    childShape.targetFamily
+                );
+            const subjectConstant = subjectShape === undefined
+                ? undefined
+                : this.constantDisplayedFamilyShape(
+                    subjectShape.sourceFamily
+                );
+            const oppositeBase = this.oppositeCategory(
+                baseCategory,
+                nodeProvenance
+            );
+            if (
+                subject.type.tag !== 'displayed-functor' ||
+                subject.closed === undefined ||
+                subject.usage.length !== 0 ||
+                childShape === undefined ||
+                subjectShape === undefined ||
+                childConstant === undefined ||
+                subjectConstant === undefined ||
+                !kernelExpressionEquals(
+                    childShape.sourceFamily,
+                    innerSourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    childConstant.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    subjectConstant.baseCategory,
+                    oppositeBase
+                ) ||
+                !kernelExpressionEquals(
+                    childConstant.fibreCategory,
+                    factorization.middleCategory
+                ) ||
+                !kernelExpressionEquals(
+                    subjectConstant.fibreCategory,
+                    factorization.middleCategory
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.sourceFamily,
+                    outerSourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    subjectShape.targetFamily,
+                    factorization.targetFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Direct constant-middle application has incompatible ' +
+                        'outer, middle, or target families'
+                );
+            }
+            const coherentSubject:
+                CoreCategoricalDisplayedContextualCompilation = {
+                    term: subject.closed.term,
+                    sourceFamily: outerSourceFamily,
+                    targetFamily: subject.type.targetFamily,
+                    identity: false,
+                    structuralPrerequisites: Object.freeze([]),
+                    dependentPrerequisites: Object.freeze([
+                        'stable-functor-family'
+                    ])
+                };
+            const paired = this.pairDisplayedCompilations(
+                baseCategory,
+                child.compilation,
+                coherentSubject,
+                nodeProvenance
+            );
+            const composition =
+                this.directMixedConstantMiddleCompositionCompilation(
+                    baseCategory,
+                    factorization.middleCategory,
+                    innerSourceFamily,
+                    factorization.targetFamily,
+                    paired.targetFamily,
+                    nodeProvenance
+                );
+            return {
+                ...child,
+                compilation: this.composeDisplayedCompilations(
+                    baseCategory,
+                    composition,
+                    paired,
+                    nodeProvenance
+                ),
+                recovered: Object.freeze([
+                    ...child.recovered,
+                    ...subject.closed.recovered
+                ]),
+                outerUsageCount: child.outerUsageCount + 1,
+                baseUsageCount: child.baseUsageCount + 1,
+                constantMiddleApplicationCount:
+                    child.constantMiddleApplicationCount + 1
             };
         }
 
@@ -7500,6 +7970,9 @@ export class CoreCategoricalScopedBuilder {
             pairNodeCount:
                 left.pairNodeCount + right.pairNodeCount + 1,
             pairDepth: Math.max(left.pairDepth, right.pairDepth) + 1,
+            constantMiddleApplicationCount:
+                left.constantMiddleApplicationCount +
+                right.constantMiddleApplicationCount,
             rootKinds: Object.freeze([
                 ...left.rootKinds,
                 ...right.rootKinds
@@ -10826,7 +11299,8 @@ export class CoreCategoricalScopedBuilder {
                     'The direct mixed binder accepts only recursive pairs, ' +
                         'finite closed source chains inside c(source) or ' +
                         'F[c](source), direct H[c], canonical S[k](a) or ' +
-                        'b[k] section roots, and ' +
+                        'b[k] section roots, qualified constant-middle ' +
+                        'applications, and ' +
                         'finite closed target maps'
                 );
             }
@@ -10961,6 +11435,9 @@ export class CoreCategoricalScopedBuilder {
                 pairNodeCount:
                     compiledFactorization.pairNodeCount,
                 pairDepth: compiledFactorization.pairDepth,
+                constantMiddleApplicationCount:
+                    compiledFactorization
+                        .constantMiddleApplicationCount,
                 contextSize: 3 as const,
                 contextRelation:
                     'natural-base-then-two-functorial-fibre-binders' as const,

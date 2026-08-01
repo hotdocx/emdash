@@ -106,8 +106,8 @@ import type {
     CoreCategoricalMixedActionSymbolId
 } from './categorical_mixed_action_transfer';
 import type {
-    CoreCategoricalDirectMixedWeakeningCompilation
-} from './categorical_direct_mixed_weakening_transfer';
+    CoreCategoricalDirectMixedConstantMiddleCompilation
+} from './categorical_direct_mixed_constant_middle_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -264,14 +264,25 @@ const directMixedWeakeningModule = () =>
         './categorical_direct_mixed_weakening_transfer'
     )>('./categorical_direct_mixed_weakening_transfer');
 
-const compileCoreCategoricalDirectMixedWeakening = ():
-CoreCategoricalDirectMixedWeakeningCompilation =>
-    directMixedWeakeningModule()
-        .compileCoreCategoricalDirectMixedWeakeningTransfer();
-
 const directMixedConstantWeakeningCoreName = (): string =>
     directMixedWeakeningModule()
         .coreCategoricalDirectMixedWeakeningCoreName('weakening');
+
+const directMixedConstantMiddleModule = () =>
+    optionalProfileModule<typeof import(
+        './categorical_direct_mixed_constant_middle_transfer'
+    )>('./categorical_direct_mixed_constant_middle_transfer');
+
+const compileCoreCategoricalDirectMixedConstantMiddle = ():
+CoreCategoricalDirectMixedConstantMiddleCompilation =>
+    directMixedConstantMiddleModule()
+        .compileCoreCategoricalDirectMixedConstantMiddleTransfer();
+
+const directMixedConstantMiddleCompositionCoreName = (): string =>
+    directMixedConstantMiddleModule()
+        .coreCategoricalDirectMixedConstantMiddleCoreName(
+            'displayedComposition'
+        );
 
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
@@ -319,7 +330,7 @@ export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
     'DISPLAYED-TELESCOPE-GENERIC-1-CATEGORICAL-PROGRAM-1' as const;
 
 export const CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION =
-    'DIRECT-MIXED-SECTION-ROOT-1K-CATEGORICAL-PROGRAM-1' as const;
+    'DIRECT-MIXED-CONSTANT-MIDDLE-1M-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -498,8 +509,9 @@ export interface CoreCategoricalProgramOptions {
      * finite canonical sibling-layer telescope fold. It still does not claim
      * unrestricted mixed classifiers or general `:^nd`.
      * The direct-mixed-introduction profile adds only the recursive
-     * `c(a) | F[c](a) | G(mixed-body)` binder and has no contextual-curry
-     * dependency.
+     * `c(a) | F[c](a) | G(mixed-body)` binder plus the qualified constant-
+     * middle application `G[c](mixed-body)` and has no contextual-curry
+     * dependency. Direct nested binders remain the introduction form.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -1046,7 +1058,7 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDisplayedChain2aClosureCompilation
         | CoreCategoricalDisplayedNdHigherTargetCompilation
         | CoreCategoricalMixedActionCompilation
-        | CoreCategoricalDirectMixedWeakeningCompilation;
+        | CoreCategoricalDirectMixedConstantMiddleCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -1186,7 +1198,7 @@ export class CoreCategoricalProgram {
             validateCoreCategoricalDisplayedBracketContract();
         }
         this.dependent = this.directMixedIntroductionEnabled
-            ? compileCoreCategoricalDirectMixedWeakening()
+            ? compileCoreCategoricalDirectMixedConstantMiddle()
             : this.mixedModeEnabled
             ? compileCoreCategoricalMixedAction()
             : this.displayedNdHigherEnabled
@@ -1279,7 +1291,9 @@ export class CoreCategoricalProgram {
                             mixedProductDistributorCoreName:
                                 directMixedProductDistributorCoreName(),
                             mixedConstantWeakeningCoreName:
-                                directMixedConstantWeakeningCoreName()
+                                directMixedConstantWeakeningCoreName(),
+                            mixedConstantMiddleCompositionCoreName:
+                                directMixedConstantMiddleCompositionCoreName()
                         })
                         : undefined
             }
