@@ -420,6 +420,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | implemented and final-green at `ff868fbc2a7d4f92b66312e458cb5fca67f63470` under D-DTTLF-USABILITY-044 | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | The canonical indexed-functor now retains its exact indexed-object family; direct `c(a)` lowers through existing `id_funcd`; and recursively nested positive canonical targets elaborate through the same factorer. No kernel rule, runtime declaration, curry dependency, or broad convertibility case was added. |
 | `MIXED-SOURCE-ACTION-0E2` | complete; selected one-rule owner-position candidate quiet-green, zero warning delta, strict-audit clean, and finite-chain positive | final-green D-044; preliminary three-rule and selected one-rule full-file probes; active `Functor_catd_func` and ordinary composition owners | Distinguish shared scope base `K` from family-domain orientation `K` versus `Op K`. Reject the capped three-rule precomposition route; select one existing-owner rule returning whole `comp_cat_fapp0`, with object/arrow and two-map checks. |
 | `DIRECT-MIXED-SOURCE-ACTION-1E2` | separately reviewed-approved from proposal `9c37e5e21c8f2246c11ab92236923ab044e02ca5`; implementation dependency-ready under D-DTTLF-USABILITY-045 | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; selected owner-position probe; separate review under standing unattended delegation | Add exactly one active existing-owner rule and one zero-declaration generic runtime rule. Model scope base separately from source/target family domains in construction metadata, and extend the direct factorer with finite `L(source-argument)` recursion over exact `Op K` source maps. Add no curry dependency or external coherence evidence. |
+| `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | correction proposal frozen; separate review required | approved D-045 implementation; TypeScript subject-check failure at the exact `Functor_catd_func` source-arrow argument; active `Hom_cat(Op A,X,Y)` computation | Transfer exactly the omitted pre-existing opposite-Hom reversal before the D-045 source projection. The corrected TypeScript fragment remains zero-declaration and generic, with one prerequisite rule plus the one new active source projection; it adds no kernel rule, checker case, curry dependency, or external oracle. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2578,6 +2579,73 @@ lambda^n k. lambda^f c. lambda^f a. t
 The previously implemented curry packages remain isolated auxiliary
 experiments. Their existence neither motivates nor gates this direct
 source-recursive introduction.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-01 /
+## D-DTTLF-USABILITY-046
+
+Approve the following correction to the TypeScript transfer boundary of
+D-045. The direct binder, selected Lambdapi rule, recursive grammar, and all
+D-045 non-effects remain unchanged.
+
+### Measured failure
+
+The new D-045 Lambdapi projection and its durable checks are quiet-green, but
+the generic TypeScript runtime compiler rejects the transferred LHS at the
+captured source map `L`. The action of
+`Functor_catd_func(K)` expects
+
+```text
+L : Hom(Op(Catd(Op K)), A, A'),
+```
+
+whereas the source syntax records the equivalent canonical classifier
+
+```text
+L : Functord(A', A).
+```
+
+The prerequisite TypeScript runtime already transfers opposite involution,
+`Obj(Op A) -> Obj(A)`, and `Hom(Catd K,E,D) -> Functord_cat(E,D)`, but it does
+not transfer the earlier active generic computation
+
+```text
+Hom_cat(Op A, X, Y) -> Hom_cat(A, Y, X).
+```
+
+Consequently the Core checker correctly fails closed instead of silently
+assuming the missing conversion. This is an acquisition omission exposed by
+the first contravariant consumer, not a kernel inconsistency, missing curry,
+or need for an owner-specific checker exception.
+
+### Corrected exact boundary
+
+1. In the zero-declaration D-045 runtime continuation, transfer exactly the
+   existing active `Hom_cat(Op A,X,Y)` endpoint-reversal rule before the
+   approved source-composition projection. Give it its own provenance and
+   generic `hom-category` owner; do not reproduce the computation in the
+   checker.
+2. Keep the active Lambdapi delta exactly D-045's one selected
+   `Functor_catd_func` projection. The opposite-Hom rule already exists in the
+   active kernel and therefore adds zero Lambdapi owners and zero Lambdapi
+   rules.
+3. Record the TypeScript fragment truthfully as zero declarations, two local
+   runtime rules, one pre-existing prerequisite computation, and one new
+   mathematical projection. Both rules must pass ordinary TypeScript subject
+   checking; add no external-oracle exception.
+4. Add focused transfer evidence that the prerequisite reverses endpoints,
+   does not collapse `Op A` to `A`, and enables the D-045 source projection to
+   normalize to the whole composite. Retain the D-045 object, arrow, and
+   two-source-map behavioral requirements.
+5. Preserve every remaining D-045 boundary: construction-only exact
+   `K`/`Op K` orientation, finite recursive source factoring, direct
+   `lambda^n/lambda^f/lambda^f` introduction, no D-040/D-042 dependency, no
+   external coherence evidence, and no text/browser/curry/product/bulk-scale
+   work.
+
+This correction is intentionally the smallest systematic repair. Declaring
+`L` with an ad hoc alternate Core type, bypassing subject checking, or adding
+a special convertibility branch would hide the missing active computation and
+make later contravariant consumers less mechanical.
 
 ## Validation And Checkpoint Policy
 
