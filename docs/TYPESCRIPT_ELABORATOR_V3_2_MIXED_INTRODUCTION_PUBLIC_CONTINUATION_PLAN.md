@@ -431,7 +431,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-SOURCE-ACTION-1E2` | final-green at `a1f7aa5601b55fc4925a6dcefec699fb6038e67a` under D-DTTLF-USABILITY-045 | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; proposal `9c37e5e21c8f2246c11ab92236923ab044e02ca5`; separate review | One active existing-owner rule and one zero-declaration generic transfer return whole `comp_cat_fapp0`; exact scope/family orientation and finite `L(source-argument)` recursion are implemented. Object and arrow action remain generic and iterable; no curry dependency or external coherence evidence is present. |
 | `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | final-green at `a1f7aa5601b55fc4925a6dcefec699fb6038e67a` under D-DTTLF-USABILITY-046 | implemented D-045; proposal `9246adee5c5201d713b7fc2a271121c8380b0b2a`; measured subject-check failure; active opposite-Hom computation | The omitted pre-existing opposite-Hom reversal is transferred before the D-045 source projection. The corrected fragment is zero-declaration and generic: one prerequisite rule plus one new mathematical projection, with no checker case, curry dependency, or external oracle. |
 | `DIRECT-MIXED-SOURCE-GRADUATE-1F` | read-only audit complete; split before graduation | final-green D-045/D-046; direct source/target recursion; user's direct-binder invariant | Nested `Functor_catd`/`Hom_catd`/`Transf_catd` classifiers and simultaneous source/target spines work through the direct binder. The audit found one generic frontend category-conversion seam and one genuinely missing product-distribution construction; it found no curry prerequisite. |
-| `DIRECT-MIXED-NESTED-CONVERSION-1F1` | exact proposal frozen under D-DTTLF-USABILITY-047; decision pending | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; active opposite-involution computation | Replace four mixed-constructor structural base comparisons by one generic fast-path-plus-kernel-conversion service and add durable natural nested-source plus Hom/Transf-target direct-binder witnesses. Emit no coercion and change no kernel owner or direct grammar. |
+| `DIRECT-MIXED-NESTED-CONVERSION-1F1` | approved under D-DTTLF-USABILITY-047; implementation dependency-ready | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; proposal `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`; separate review under standing unattended delegation | Replace four mixed-constructor structural base comparisons by one generic fast-path-plus-kernel-conversion service and add durable natural nested-source plus Hom/Transf-target direct-binder witnesses. Emit no coercion and change no kernel owner or direct grammar. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2871,6 +2871,31 @@ This gate deliberately does not solve the product-distribution gap. That
 construction remains separately reviewable after the direct nested
 conversion evidence is green.
 
+### Separate D-DTTLF-USABILITY-047 review result
+
+The proposal checkpoint
+`4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc` is approved exactly as frozen.
+Independent review confirms that `Op_cat(Op_cat K) -> K` is already an active
+runtime computation transferred into the direct profile. The current emitted
+nested classifier passes the generic LF checker when the doubled opposite is
+spelled literally; only the earlier construction-time structural comparison
+rejects its natural `K` presentation. A generic definitional comparison after
+an exact-equality fast path therefore removes a frontend false negative
+without asserting a new equality, selecting a constructor-specific case, or
+emitting a coercion.
+
+The same review confirms that this correction does not authorize the measured
+product-distribution gap. The existing `Product_pair_funcd` target and the
+desired mixed-functor-into-product target are not definitionally equal in the
+active runtime. Adding a pair factorization case under D-047 would therefore
+be unsound or incomplete.
+
+No immediate human correction superseded the frozen checkpoint. Under the
+user's standing unattended-review delegation, implementation is approved for
+only the nine numbered D-047 items, with immediate human supersession. Curry,
+pairing, text/browser parity, kernel changes, and broader variance remain
+outside this gate.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -2999,8 +3024,10 @@ simultaneous source/target spines, classifies structural `K` versus
 mixed pointwise pairing as a genuinely missing product-distribution
 construction. Preserve the fundamental form
 `lambda^n k. lambda^f c. lambda^f a. t` and never route it through curry.
-Continue next with the separately frozen
-`DIRECT-MIXED-NESTED-CONVERSION-1F1` / D-DTTLF-USABILITY-047 proposal. Add no
+Treat `DIRECT-MIXED-NESTED-CONVERSION-1F1` / D-DTTLF-USABILITY-047 as
+separately reviewed-approved from proposal checkpoint
+`4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc` under the standing unattended
+delegation, and implement only its nine numbered items. Add no
 product-distribution owner, pair case, curry dependency, text/browser change,
 or publication work under that gate.
 
@@ -3021,6 +3048,18 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-047 approved exactly as proposed.** The
+  separately frozen proposal checkpoint is
+  `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`. Review confirms that natural
+  nested negative `Functor_catd` formation is blocked only by a raw
+  construction-time comparison of `K` with the kernel-convertible
+  `Op(Op K)`. The approved correction is one generic structural-fast-path
+  plus active-runtime definitional comparison used at four mixed base checks,
+  with unchanged emitted Core and generic checker authority. The measured
+  product-distribution non-conversion, pair bodies, curry, kernel/runtime,
+  text/browser, and broader-variance work remain excluded. No immediate human
+  correction superseded the proposal; the standing unattended-review
+  delegation authorizes only its nine numbered items.
 - **2026-08-01 — D-DTTLF-USABILITY-045/D-046 implementation final-green at
   `a1f7aa5601b55fc4925a6dcefec699fb6038e67a`.** The direct binder now factors
   finite contravariant source spines followed by finite covariant target

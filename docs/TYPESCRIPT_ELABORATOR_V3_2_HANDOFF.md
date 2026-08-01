@@ -84,9 +84,11 @@
 > product-distribution construction between
 > `P(Functor_catd A B,Functor_catd A D)` and
 > `Functor_catd A (P(B,D))`. The next dependency-ready row is the bounded
-> TypeScript-only `DIRECT-MIXED-NESTED-CONVERSION-1F1` proposal under
-> D-DTTLF-USABILITY-047. It adds no coercion, kernel owner, pair case, or
-> curry dependency.
+> TypeScript-only `DIRECT-MIXED-NESTED-CONVERSION-1F1` gate under
+> D-DTTLF-USABILITY-047. Its proposal checkpoint
+> `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc` is separately
+> reviewed-approved under the standing unattended delegation. It adds no
+> coercion, kernel owner, pair case, or curry dependency.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
