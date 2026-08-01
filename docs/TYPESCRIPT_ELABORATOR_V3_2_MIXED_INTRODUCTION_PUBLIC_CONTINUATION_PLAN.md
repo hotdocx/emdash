@@ -420,7 +420,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | implemented and final-green at `ff868fbc2a7d4f92b66312e458cb5fca67f63470` under D-DTTLF-USABILITY-044 | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | The canonical indexed-functor now retains its exact indexed-object family; direct `c(a)` lowers through existing `id_funcd`; and recursively nested positive canonical targets elaborate through the same factorer. No kernel rule, runtime declaration, curry dependency, or broad convertibility case was added. |
 | `MIXED-SOURCE-ACTION-0E2` | complete; selected one-rule owner-position candidate quiet-green, zero warning delta, strict-audit clean, and finite-chain positive | final-green D-044; preliminary three-rule and selected one-rule full-file probes; active `Functor_catd_func` and ordinary composition owners | Distinguish shared scope base `K` from family-domain orientation `K` versus `Op K`. Reject the capped three-rule precomposition route; select one existing-owner rule returning whole `comp_cat_fapp0`, with object/arrow and two-map checks. |
 | `DIRECT-MIXED-SOURCE-ACTION-1E2` | separately reviewed-approved from proposal `9c37e5e21c8f2246c11ab92236923ab044e02ca5`; implementation dependency-ready under D-DTTLF-USABILITY-045 | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; selected owner-position probe; separate review under standing unattended delegation | Add exactly one active existing-owner rule and one zero-declaration generic runtime rule. Model scope base separately from source/target family domains in construction metadata, and extend the direct factorer with finite `L(source-argument)` recursion over exact `Op K` source maps. Add no curry dependency or external coherence evidence. |
-| `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | correction proposal frozen; separate review required | approved D-045 implementation; TypeScript subject-check failure at the exact `Functor_catd_func` source-arrow argument; active `Hom_cat(Op A,X,Y)` computation | Transfer exactly the omitted pre-existing opposite-Hom reversal before the D-045 source projection. The corrected TypeScript fragment remains zero-declaration and generic, with one prerequisite rule plus the one new active source projection; it adds no kernel rule, checker case, curry dependency, or external oracle. |
+| `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | separately reviewed-approved from proposal `9246adee5c5201d713b7fc2a271121c8380b0b2a`; implementation dependency-ready under D-DTTLF-USABILITY-046 | approved D-045 implementation; TypeScript subject-check failure at the exact `Functor_catd_func` source-arrow argument; active `Hom_cat(Op A,X,Y)` computation | Transfer exactly the omitted pre-existing opposite-Hom reversal before the D-045 source projection. The corrected TypeScript fragment remains zero-declaration and generic, with one prerequisite rule plus the one new active source projection; it adds no kernel rule, checker case, curry dependency, or external oracle. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2647,6 +2647,25 @@ This correction is intentionally the smallest systematic repair. Declaring
 a special convertibility branch would hide the missing active computation and
 make later contravariant consumers less mechanical.
 
+### Separate D-DTTLF-USABILITY-046 review result
+
+The proposal checkpoint
+`9246adee5c5201d713b7fc2a271121c8380b0b2a` is approved exactly as frozen.
+Independent inspection confirms that `Hom_cat(Op A,X,Y) -> Hom_cat(A,Y,X)`
+is an active generic computation at the ordinary opposite-category owner,
+while the selected TypeScript prerequisite chain contains only opposite
+object reduction and opposite involution. The observed Core error occurs at
+the exact source-map occurrence expected from that omission. Importing this
+one pre-existing rule is therefore preferable to changing the captured
+source-map classifier, weakening subject checking, or adding an intrinsic
+conversion case.
+
+The correction changes no public syntax and no Lambdapi semantics. It keeps
+the direct nested binder fundamental and leaves D-040/D-042 isolated. Under
+the user's standing unattended-review delegation, and absent an immediate
+human correction, this approves only the five numbered D-046 items with
+immediate human supersession.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -2776,6 +2795,15 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-046 approved exactly as proposed.** A
+  separate review of proposal checkpoint
+  `9246adee5c5201d713b7fc2a271121c8380b0b2a` confirms that the first
+  contravariant TypeScript consumer exposed one omitted active generic
+  prerequisite: `Hom_cat(Op A,X,Y) -> Hom_cat(A,Y,X)`. Transfer it before the
+  approved D-045 projection, retain ordinary subject checking, and record the
+  zero-declaration fragment as one existing prerequisite rule plus one new
+  mathematical projection. This adds no Lambdapi rule, checker exception,
+  curry dependency, or public syntax.
 - **2026-08-01 — D-DTTLF-USABILITY-045 approved exactly as proposed.** A
   separate review of proposal checkpoint
   `9c37e5e21c8f2246c11ab92236923ab044e02ca5` confirms that the active kernel
