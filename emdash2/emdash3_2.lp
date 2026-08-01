@@ -15403,6 +15403,62 @@ rule @fapp1_func $B (Functor_cat $A $B) (@Const_func_func $A $B) $x $y
 rule @fapp1_fapp0 $B (Functor_cat $A $B) (@Const_func_func $A $B) $x $y $p
   ↪ @Const_transf $A $B $x $y $p;
 
+// Direct displayed weakening for a mixed functor source slot.
+//
+// Surface/formula:
+//   Functor_catd_const_funcd(A,B) : B ⊢_K Functor_catd(A,B)
+//   Functor_catd_const_funcd(A,B)[k] = Const_func_func(A[k],B[k]).
+//
+// This is the primary structural owner. Product/curry presentations are
+// comparison forms rather than prerequisites of the direct binder.
+injective symbol Functor_catd_const_funcd [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  : τ (Functord B (@Functor_catd K A B));
+
+// Point component is ordinary functorial weakening in the fibre.
+rule @tapp0_fapp0
+      $K Cat_cat _ _ $k
+      (@Functor_catd_const_funcd $K $A $B)
+  ↪ @Const_func_func
+      (Fibre_cat $A $k)
+      (Fibre_cat $B $k);
+
+// Full base action maps B[p] to postcomposition by the fibrewise constant-
+// functor embedding at the target endpoint. The result remains a whole
+// functor over Hom_K(x,y), so higher base cells remain iterable.
+rule @tapp1_func
+      $K Cat_cat _ _ $x $y
+      (@Functor_catd_const_funcd $K $A $B)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $K $x $y)
+      (Functor_cat (Fibre_cat $B $x) (Fibre_cat $B $y))
+      (Functor_cat
+        (Fibre_cat $B $x)
+        (Functor_cat (Fibre_cat $A $y) (Fibre_cat $B $y)))
+      (@comp_cat_cov_func
+        (Fibre_cat $B $x)
+        (Fibre_cat $B $y)
+        (Functor_cat (Fibre_cat $A $y) (Fibre_cat $B $y))
+        (@Const_func_func
+          (Fibre_cat $A $y)
+          (Fibre_cat $B $y)))
+      (@fapp1_func $K Cat_cat $B $x $y);
+
+// Capped base action is the corresponding composite at p.
+rule @tapp1_fapp0
+      $K Cat_cat _ _ $x $y
+      (@Functor_catd_const_funcd $K $A $B)
+      $p
+  ↪ @comp_cat_fapp0
+      (Fibre_cat $B $x)
+      (Fibre_cat $B $y)
+      (Functor_cat (Fibre_cat $A $y) (Fibre_cat $B $y))
+      (@Const_func_func
+        (Fibre_cat $A $y)
+        (Fibre_cat $B $y))
+      (@fapp1_fapp0 $K Cat_cat $B $x $y $p);
+
 // Exchange of two ordinary functor arguments.
 //
 // Surface/formula:

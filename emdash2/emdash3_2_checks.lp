@@ -12886,6 +12886,160 @@ assert [A B : Cat] (x y : τ (Obj B)) (p : τ (Hom B x y))
       q
     ≡ p;
 
+// Direct displayed weakening projects to the whole ordinary weakening
+// functor, rather than an object-only constant.
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K Cat_cat B (@Functor_catd K A B) k
+      (@Functor_catd_const_funcd K A B)
+    ≡ @Const_func_func (Fibre_cat A k) (Fibre_cat B k);
+
+// The resulting constant fibre functor sends every inner arrow to the
+// identity of its selected target object.
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (k : τ (Obj K))
+  (b : τ (Obj (Fibre_cat B k)))
+  (a a' : τ (Obj (Fibre_cat A k)))
+  (q : τ (Hom (Fibre_cat A k) a a')) ⊢
+  @fapp1_fapp0
+      (Fibre_cat A k)
+      (Fibre_cat B k)
+      (@fapp0
+        (Fibre_cat B k)
+        (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+        (@tapp0_fapp0
+          K Cat_cat B (@Functor_catd K A B) k
+          (@Functor_catd_const_funcd K A B))
+        b)
+      a a' q
+    ≡ @id (Fibre_cat B k) b;
+
+// Capped base action transports the selected B-object and remains constant
+// in the negative A argument.
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (b : τ (Obj (Fibre_cat B x)))
+  (a : τ (Obj (Fibre_cat A y))) ⊢
+  @fapp0
+      (Fibre_cat A y)
+      (Fibre_cat B y)
+      (@fapp0
+        (Fibre_cat B x)
+        (Functor_cat (Fibre_cat A y) (Fibre_cat B y))
+        (@tapp1_fapp0
+          K Cat_cat B (@Functor_catd K A B) x y
+          (@Functor_catd_const_funcd K A B) p)
+        b)
+      a
+    ≡ @fapp0
+        (Fibre_cat B x)
+        (Fibre_cat B y)
+        (@fapp1_fapp0 K Cat_cat B x y p)
+        b;
+
+// Full base action remains a functor over Hom_K(x,y), so a genuine next
+// base cell is handled by generic functor action.
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (x y : τ (Obj K))
+  (p p' : τ (Hom K x y))
+  (theta : τ (Hom (Hom_cat K x y) p p')) ⊢
+  @fapp1_fapp0
+      (Hom_cat K x y)
+      (Functor_cat
+        (Fibre_cat B x)
+        (Functor_cat (Fibre_cat A y) (Fibre_cat B y)))
+      (@tapp1_func
+        K Cat_cat B (@Functor_catd K A B) x y
+        (@Functor_catd_const_funcd K A B))
+      p p' theta
+    ≡ @fapp1_fapp0
+        (Hom_cat K x y)
+        (Functor_cat
+          (Fibre_cat B x)
+          (Functor_cat (Fibre_cat A y) (Fibre_cat B y)))
+        (@comp_cat_fapp0
+          (Hom_cat K x y)
+          (Functor_cat (Fibre_cat B x) (Fibre_cat B y))
+          (Functor_cat
+            (Fibre_cat B x)
+            (Functor_cat (Fibre_cat A y) (Fibre_cat B y)))
+          (@comp_cat_cov_func
+            (Fibre_cat B x)
+            (Fibre_cat B y)
+            (Functor_cat (Fibre_cat A y) (Fibre_cat B y))
+            (@Const_func_func (Fibre_cat A y) (Fibre_cat B y)))
+          (@fapp1_func K Cat_cat B x y))
+        p p' theta;
+
+// The generic internal displayed-action consumer is well typed without a
+// constructor-specific fdapp1_int_cell rule.
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y))
+  (b : τ (Obj (Fibre_cat B x))) ⊢
+  @fdapp1_int_cell
+      K B (@Functor_catd K A B)
+      (@Functor_catd_const_funcd K A B)
+      x y p b
+    ≡ @fdapp1_int_cell
+        K B (@Functor_catd K A B)
+        (@Functor_catd_const_funcd K A B)
+        x y p b;
+
+// Direct H[c] lowering composes the structural owner after an arbitrary
+// already-coherent displayed map H : C -> B.
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  (H : τ (Functord C B))
+  (k : τ (Obj K))
+  (c : τ (Obj (Fibre_cat C k)))
+  (a : τ (Obj (Fibre_cat A k))) ⊢
+  @fapp0
+      (Fibre_cat A k)
+      (Fibre_cat B k)
+      (@fapp0
+        (Fibre_cat C k)
+        (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+        (@tapp0_fapp0
+          K Cat_cat C (@Functor_catd K A B) k
+          (@comp_fapp0
+            (@Catd_cat K)
+            C B (@Functor_catd K A B)
+            (@Functor_catd_const_funcd K A B)
+            H))
+        c)
+      a
+    ≡ @fapp0
+        (Fibre_cat C k)
+        (Fibre_cat B k)
+        (@tapp0_fapp0 K Cat_cat C B k H)
+        c;
+
+// The direct structural normal form is intentionally not collapsed to the
+// auxiliary negative-Sigma curry presentation.
+assertnot [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K)) ⊢
+  @Functor_catd_const_funcd K A B
+    ≡ @neg_sigma_functord_curry_funcd
+        K A B B
+        (@id_funcd
+          (@mix_neg_total K A)
+          (@mix_context_family K A B));
+
 assert [A B C : Cat] (H : τ (Functor A (Functor_cat B C))) ⊢
   @fapp0
       (Functor_cat A (Functor_cat B C))
