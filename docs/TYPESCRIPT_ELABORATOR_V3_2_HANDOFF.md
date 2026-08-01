@@ -95,9 +95,18 @@
 > green without a coercion, kernel/runtime owner, grammar change, pair case,
 > or curry dependency. Its focused suite is 8 pass/0 fail; its one required
 > `check:ts` is green at 1,234 pass/51 skip/0 fail out of 1,285 tests. The
-> next dependency-ready row is the read-only
-> `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` owner audit. It must search the active
-> kernel first and freeze a separate gate before any semantic edit.
+> subsequent `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` read-only audit is now
+> complete. The active kernel has no existing global comparison from
+> `P(Functor_catd A B,Functor_catd A C)` to
+> `Functor_catd A P(B,C)`. The selected explicit forward distributor has one
+> owner and three point/full/capped projections; its owner-position probe is
+> bounded-green, strict-audit clean, and zero-warning-delta at 1,079/159. Its
+> direct consumer composes existing `Product_pair_funcd`, computes on objects
+> and inner arrows, and retains internal base/higher action. The exact
+> `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` continuation is frozen as
+> D-DTTLF-USABILITY-048 and requires a separate review before semantic edits.
+> It recursively lowers the already-existing `typed-pair` node under the
+> fundamental direct binder; it is neither curry nor a `Product_catd` facade.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

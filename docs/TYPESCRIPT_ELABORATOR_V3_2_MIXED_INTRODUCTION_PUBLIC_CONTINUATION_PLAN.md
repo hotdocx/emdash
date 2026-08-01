@@ -432,7 +432,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-SOURCE-OP-HOM-CORRECTION-1E3` | final-green at `a1f7aa5601b55fc4925a6dcefec699fb6038e67a` under D-DTTLF-USABILITY-046 | implemented D-045; proposal `9246adee5c5201d713b7fc2a271121c8380b0b2a`; measured subject-check failure; active opposite-Hom computation | The omitted pre-existing opposite-Hom reversal is transferred before the D-045 source projection. The corrected fragment is zero-declaration and generic: one prerequisite rule plus one new mathematical projection, with no checker case, curry dependency, or external oracle. |
 | `DIRECT-MIXED-SOURCE-GRADUATE-1F` | read-only audit complete; split before graduation | final-green D-045/D-046; direct source/target recursion; user's direct-binder invariant | Nested `Functor_catd`/`Hom_catd`/`Transf_catd` classifiers and simultaneous source/target spines work through the direct binder. The audit found one generic frontend category-conversion seam and one genuinely missing product-distribution construction; it found no curry prerequisite. |
 | `DIRECT-MIXED-NESTED-CONVERSION-1F1` | final-green at `4845f44c11914f142be357d115ebdde92a33d039` under D-DTTLF-USABILITY-047 | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; proposal `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`; separate review under standing unattended delegation | One generic fast-path-plus-kernel-conversion service now owns four mixed base checks. Natural nested negative `Functor_catd`/`Transf_catd`, Hom/Transf targets, and simultaneous source/target spines are checked without coercion, curry, kernel, runtime, or grammar changes. |
-| `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` | next dependency-ready read-only owner audit | final-green D-047; measured non-conversion between product-of-mixed-functors and mixed-functor-into-product | Search existing active owners first, then determine the minimum internal pointwise product-distribution construction needed for direct `fibrePair`/contraction bodies. Require whole displayed-functor object, arrow, base-arrow, and higher action; authorize no semantic edit during the audit and do not conflate it with the `Product_catd` facade or curry. |
+| `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` | read-only audit complete; one-owner direct-binder continuation selected | final-green D-047; measured non-conversion between product-of-mixed-functors and mixed-functor-into-product; active product and mixed-action owners | No existing active owner supplies the required global comparison. One `Functor_catd_product_funcd` distributor with point/full/capped projections is owner-position, quiet-green, strict-audit clean, and zero-warning-delta; its direct pair consumer computes on objects and inner arrows and retains internal base/higher action. No curry or `Product_catd` facade is involved. |
+| `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | exact proposal frozen under D-DTTLF-USABILITY-048; separate review required | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047 | Promote exactly one distributor and three projection rules, transfer them generically, and extend the existing direct factorization tree with recursive `typed-pair`. Lower branches recursively, combine them with existing `Product_pair_funcd`, then compose the distributor. Preserve the direct binder as fundamental and retain all curry, facade, text/browser, and unrestricted-variance nonclaims. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2945,6 +2946,205 @@ dependency-ready row is therefore the read-only
 owners before proposing a new one and must not treat curry or a
 `Product_catd` naming facade as prerequisites.
 
+## `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` read-only audit result
+
+The audit preserves the user's governing architectural invariant:
+
+```text
+lambda^n k. lambda^f c. lambda^f a. body
+  : Functord C (Functor_catd A B)
+```
+
+is the fundamental introduction form. Neither a total-context section nor a
+curry operation is a prerequisite. The existing D-040/D-042 curry packages
+remain isolated auxiliary experiments and are not consulted by the selected
+pair route.
+
+### Existing-authority search
+
+The active v3.2 kernel already owns all but one part of recursive direct
+pairing:
+
+- the transparent fibre product
+  `P(B,C) = uncurry(Product_cat_func)(Product_pair(B,C))`;
+- `Product_pair_funcd`, `Product_projL_funcd`, and
+  `Product_projR_funcd` with point, full base, capped base, and internal-cell
+  computation;
+- ordinary normalization
+  `Functor_cat X (Product_cat B C) ->
+  Product_cat (Functor_cat X B) (Functor_cat X C)`;
+- `Functor_catd`, both its source and target actions, and its
+  `Unit_prof`-owned mixed Hom action; and
+- generic `comp_catd_fapp0`, `fapp*`, and `tapp*` iteration.
+
+No active symbol, transparent definition, rewrite, or proof-time comparison
+was found for the remaining global displayed-family map
+
+```text
+P(Functor_catd A B, Functor_catd A C)
+  -> Functor_catd A (P(B,C)).
+```
+
+A runtime definitional comparison of those two family classifiers remains
+`not-equal` after all available reductions. Therefore a direct `fibrePair`
+body cannot soundly lower by adding only a frontend switch case or by silently
+retyping `Product_pair_funcd`. Conversely, a broad family equality or
+unification rule is unnecessary: the direct consumer needs only the explicit
+forward map.
+
+### Selected internal owner
+
+An ignored full-file copy placed one candidate at the existing
+`Functor_catd` owner position:
+
+```text
+Functor_catd_product_funcd
+  : Functord
+      (P(Functor_catd A B, Functor_catd A C))
+      (Functor_catd A (P(B,C))).
+```
+
+It has exactly three projections:
+
+1. at `k`, its ordinary functor component is the identity on the shared
+   product normal form
+   `Functor(A[k],B[k]) x Functor(A[k],C[k])`;
+2. its full base-arrow action is the existing whole action of the source
+   product family; and
+3. its capped base-arrow action is the corresponding existing source-family
+   transport.
+
+The owner is sufficiently internalized. The full projection remains a functor
+over `Hom_K(x,y)`, so applying it to a genuine next base cell produces the
+expected transformation through generic `fapp1_fapp0`. No object-only map,
+external naturality equation, coherence payload, or capped terminal value is
+introduced.
+
+The owner-position source plus focused consumers pass a bounded full
+Lambdapi check. The strict inferred-slot audit reports zero unreviewed
+clauses. Its warning inventory is exactly unchanged from the active baseline:
+1,238 total warnings, comprising 1,079 critical pairs and 159 replaceable
+pattern variables. Warnings remain diagnostic rather than a veto.
+
+The concrete direct consumer
+
+```text
+comp_catd_fapp0
+  Functor_catd_product_funcd
+  (Product_pair_funcd left right)
+```
+
+typechecks and computes componentwise on `c`/`a` objects and inner arrows.
+Its internal `fdapp1_int_cell` type is available at a base arrow, its full
+action remains iterable at a higher base cell, and negative checks preserve
+both product branches rather than collapsing the product target to either
+projection.
+
+### Direct recursive lowering consequence
+
+The selected frontend design is a recursive factorization tree, not a
+special-case curry:
+
+```text
+mixed-body ::= leaf
+             | G(mixed-body)
+             | fibrePair(mixed-body, mixed-body)
+```
+
+where each leaf retains the already-qualified finite contravariant source
+spine. Each pair branch is recursively lowered to a whole displayed functor
+
+```text
+C -> Functor_catd A B
+C -> Functor_catd A D.
+```
+
+Existing `Product_pair_funcd` combines them into
+`C -> P(Functor_catd A B,Functor_catd A D)`, and the selected distributor is
+then composed to obtain `C -> Functor_catd A P(B,D)`. Existing target-action
+recursion may consume that result, so the formerly rejected representative
+
+```text
+G(fibrePair(F[c](a), F[c](a)))
+```
+
+becomes a normal direct-binder case. Repeated occurrence is contraction in
+the existing typed contextual IR; it is not an external diagonal proof.
+Because pair nodes recurse, nesting depth is not enumerated in the algorithm.
+
+This result does not establish arbitrary surface syntax, arbitrary DAG
+sharing, exchange across a dependency edge, unrestricted variance, or general
+`:^nd` introduction. It also does not select a `Product_catd` naming facade,
+an inverse distributor, a global product equality, or any curry API.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-PRODUCT-DISTRIBUTION-01 /
+## D-DTTLF-USABILITY-048
+
+Approve the following exact bounded continuation:
+
+1. Add exactly one active Lambdapi owner,
+   `Functor_catd_product_funcd`, at the audited `Functor_catd` owner position.
+   Its signature is exactly the forward displayed map from
+   `P(Functor_catd A B,Functor_catd A C)` to
+   `Functor_catd A P(B,C)`.
+2. Add exactly three computation rules: point `tapp0_fapp0`, full
+   `tapp1_func`, and capped `tapp1_fapp0`. The point is the identity at the
+   existing ordinary product normal form; the two action rules select the
+   existing whole/capped source-product action. Add no constructor-specific
+   identity, composition, or naturality rule.
+3. Add durable Lambdapi checks for the owner point, full and capped action;
+   its genuine higher-cell iteration; the composed direct-pair consumer on
+   objects and inner arrows; an internal base-arrow cell; and product/mixed
+   non-collapse. Reuse the existing check-only transparent-product alias;
+   add no `Product_catd` kernel facade.
+4. Transfer exactly the new one-symbol/three-rule package through the generic
+   declaration/runtime compilers after the final-green D-045/D-046 fragment.
+   Add no intrinsic Core node, owner-specific checker/evaluator branch,
+   external oracle, or external coherence evidence.
+5. Extend the existing direct mixed factorization representation
+   recursively for the already-existing `typed-pair` node. Recursively lower
+   both branches, require their common literal outer source and mixed source
+   family, combine them through existing `Product_pair_funcd`, and compose
+   the new distributor. Preserve the current source-spine and target-map
+   cases as recursive children rather than duplicating their algorithms.
+6. Keep the public entry point and binder interpretation unchanged:
+   `mixedDisplayedFunctorLambda` remains the TypeScript form of
+   `lambda^n k. lambda^f c. lambda^f a. body`. Do not expose a section, curry,
+   coherence argument, pair-specific binder, or second AST.
+7. Replace the exact previous pair/consumer negative with positive durable
+   cases for distinct pairing, repeated-leaf contraction, target mapping
+   after a pair, source/target maps inside pair branches, and a generated
+   nested pair tree deep enough to show that the implementation contains no
+   fixed pair-depth table. Retain unrelated malformed-family, polarity,
+   escaped-slot, and unavailable-profile negatives.
+8. Assert that every positive emits a generically checked whole displayed
+   functor, contains `Product_pair_funcd` plus
+   `Functor_catd_product_funcd`, contains no `mixed_curry`, cast, coercion, or
+   external equation, and retains object, inner-arrow, base-arrow, and higher
+   action through the internal owners.
+9. Synchronize only the mechanically stale active `emdash3_2.lp` digest pins
+   exposed by the authorized kernel edit. Do not reinterpret a digest update
+   as a new transfer or scale claim.
+10. Follow the nested Lambdapi SOP once for the promoted kernel/check tranche:
+    bounded focused checks, `make check`, warning comparison, strict LHS
+    audit, catalog/TOC/health synchronization, and one `make ci` before its
+    checkpoint. Carry the already measured owner-position evidence forward;
+    do not repeat probes for reassurance.
+11. Validate TypeScript with the focused transfer/direct-binder tests,
+    typecheck, and lint, then one `check:ts` because a shared runtime/profile
+    and factorization behavior change. Do not run `check:all`, browser,
+    publication, print, or book gates, and do not repeat the aggregate after
+    documentation-only synchronization.
+12. Synchronize the work/decision ledgers and handoff, stage only the bounded
+    kernel/check/catalog/health, transfer/surface/tests, mechanical digest,
+    and document files, and make local rollback-safe checkpoints. Preserve
+    unrelated ignored experiments. Do not push, merge, rebase, reset, amend,
+    remove branches/worktrees, or publish.
+
+This proposal implements one recursive direct-body constructor. It does not
+graduate unrestricted categorical lambda synthesis or authorize the separate
+product-facade, curry, text/browser, or arbitrary-variance objectives.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -3081,12 +3281,16 @@ simultaneous source/target spine are checked without coercion or curry. Carry
 forward its focused 8-pass suite and its one green 1,285-test `check:ts`; do
 not repeat the long aggregate for unchanged boundaries.
 
-Continue next with the read-only `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`
-owner audit. Search active kernel constructions before proposing a new owner;
-require internal whole-functor object/arrow/base-arrow/higher action; and
-freeze a separate gate before any semantic edit. Do not conflate this
-pointwise distribution question with a `Product_catd` naming facade, curry,
-text/browser work, or publication.
+Treat `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` as read-only complete. The active
+kernel has product pairing and mixed action but no global map from
+`P(Functor_catd A B,Functor_catd A C)` to
+`Functor_catd A P(B,C)`. The selected one-owner/three-rule distributor is
+owner-position quiet-green, strict-audit clean, and zero-warning-delta; its
+direct pair consumer computes on objects and inner arrows and retains
+internal base/higher action. Treat D-DTTLF-USABILITY-048 as a frozen exact
+proposal requiring a separate review before semantic edits. It extends the
+direct factorization tree with recursive `typed-pair`; it is not curry, a
+`Product_catd` facade, text/browser work, or publication.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -3105,6 +3309,25 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-048 frozen for separate review.** The
+  exact proposal promotes one `Functor_catd_product_funcd` owner and only its
+  point/full/capped projections, transfers that one-declaration/three-rule
+  package generically, and recursively lowers the existing `typed-pair` node
+  under the fundamental direct binder through existing
+  `Product_pair_funcd` plus generic displayed composition. It explicitly
+  excludes curry, a `Product_catd` facade, global family equality, inverse
+  distribution, external coherence, text/browser/public work, and
+  unrestricted variance. Semantic implementation requires a separate review.
+- **2026-08-01 — `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` read-only audit
+  complete.** Existing-owner search found the transparent fibre product,
+  point/full/capped `Product_pair_funcd`, ordinary product normalization,
+  both `Functor_catd` actions, and generic higher action, but no global
+  forward map between the product-of-mixed-functors and
+  mixed-functor-into-product families. The selected one-owner/three-rule
+  candidate and direct consumer are bounded-green on objects and inner
+  arrows, retain internal base/higher action, are strict-LHS clean, and add
+  zero warnings to the 1,079/159 inventory. This evidence supplies no curry
+  or product-facade prerequisite.
 - **2026-08-01 — D-DTTLF-USABILITY-047 implementation final-green at
   `4845f44c11914f142be357d115ebdde92a33d039`.** One generic
   structural-fast-path plus active-runtime conversion service now owns the
