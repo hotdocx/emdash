@@ -13265,6 +13265,130 @@ assert [K A : Cat]
         p
         alpha;
 
+// -------------------------------------------------------------------------------------------------
+// Mixed-action foundation
+// catalog-area: Mixed action foundation
+// -------------------------------------------------------------------------------------------------
+
+assert [K : Cat] (E : τ (Catd K)) (x y : τ (Obj K)) ⊢
+  @fapp1_func K Cat_cat (@Op_catd K E) x y
+  ≡ @comp_cat_fapp0
+      (Hom_cat K x y)
+      (Functor_cat (Fibre_cat E x) (Fibre_cat E y))
+      (Functor_cat (Op_cat (Fibre_cat E x)) (Op_cat (Fibre_cat E y)))
+      (@fapp1_func Cat_cat Cat_cat op (Fibre_cat E x) (Fibre_cat E y))
+      (@fapp1_func K Cat_cat E x y);
+
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢
+  @fapp1_fapp0 K Cat_cat (@Op_catd K E) x y p
+    ≡ @Op_func
+        (Fibre_cat E x)
+        (Fibre_cat E y)
+        (@fapp1_fapp0 K Cat_cat E x y p);
+
+// Full-action projection and direct capped action join at p.
+assert [K : Cat] (E : τ (Catd K))
+  (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢
+  @fapp0
+    (Hom_cat K x y)
+    (Functor_cat
+      (Fibre_cat (@Op_catd K E) x)
+      (Fibre_cat (@Op_catd K E) y))
+    (@fapp1_func K Cat_cat (@Op_catd K E) x y)
+    p
+  ≡ @Op_func
+      (Fibre_cat E x)
+      (Fibre_cat E y)
+      (@fapp1_fapp0 K Cat_cat E x y p);
+
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K))
+  (x y : τ (Obj K)) ⊢
+  @fapp1_func K Cat_cat (@Functor_catd K A B) x y
+  ≡ @comp_cat_fapp0
+      (Hom_cat K x y)
+      (Product_cat
+        (Functor_cat (Fibre_cat A y) (Fibre_cat A x))
+        (Functor_cat (Fibre_cat B x) (Fibre_cat B y)))
+      (Functor_cat
+        (Functor_cat (Fibre_cat A x) (Fibre_cat B x))
+        (Functor_cat (Fibre_cat A y) (Fibre_cat B y)))
+      (@Hom_tele_func
+        Cat_cat
+        (Fibre_cat A x)
+        (Fibre_cat A y)
+        (Fibre_cat B x)
+        (Fibre_cat B y))
+      (Struct_sigma
+        (@fapp1_func (Op_cat K) Cat_cat A y x)
+        (@fapp1_func K Cat_cat B x y));
+
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K))
+  (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢
+  @fapp1_fapp0 K Cat_cat (@Functor_catd K A B) x y p
+    ≡ @Hom_func
+        Cat_cat
+        (Fibre_cat A x)
+        (Fibre_cat A y)
+        (Fibre_cat B x)
+        (Fibre_cat B y)
+        (@fapp1_fapp0 (Op_cat K) Cat_cat A y x p)
+        (@fapp1_fapp0 K Cat_cat B x y p);
+
+// The capped mixed-family route is Unit_prof(Cat)'s existing projection.
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K))
+  (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢
+  @fapp1_fapp0 K Cat_cat (@Functor_catd K A B) x y p
+  ≡ @fapp1_fapp0
+      (Product_cat (Op_cat Cat_cat) Cat_cat)
+      Cat_cat
+      (@Unit_prof Cat_cat)
+      (Struct_sigma (Fibre_cat A x) (Fibre_cat B x))
+      (Struct_sigma (Fibre_cat A y) (Fibre_cat B y))
+      (Struct_sigma
+        (@fapp1_fapp0 (Op_cat K) Cat_cat A y x p)
+        (@fapp1_fapp0 K Cat_cat B x y p));
+
+// Full-action projection and direct capped action join at p.
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K))
+  (x y : τ (Obj K)) (p : τ (Hom K x y)) ⊢
+  @fapp0
+    (Hom_cat K x y)
+    (Functor_cat
+      (Fibre_cat (@Functor_catd K A B) x)
+      (Fibre_cat (@Functor_catd K A B) y))
+    (@fapp1_func K Cat_cat (@Functor_catd K A B) x y)
+    p
+  ≡ @Hom_func
+      Cat_cat
+      (Fibre_cat A x)
+      (Fibre_cat A y)
+      (Fibre_cat B x)
+      (Fibre_cat B y)
+      (@fapp1_fapp0 (Op_cat K) Cat_cat A y x p)
+      (@fapp1_fapp0 K Cat_cat B x y p);
+
+// Consuming the rigid Cat-valued Hom action computes f(h(g(x'))).
+assert [X X' Y Y' : Cat]
+  (g : τ (Functor X' X))
+  (f : τ (Functor Y Y'))
+  (h : τ (Functor X Y))
+  (x' : τ (Obj X')) ⊢
+  @fapp0 X' Y' (@Hom_fapp0 Cat_cat X X' Y Y' g f h) x'
+    ≡ @fapp0 Y Y' f (@fapp0 X Y h (@fapp0 X' X g x'));
+
+// Both identity projection orders join after id_(K^op) canonicalizes to id_K.
+assert [K D : Cat]
+  (F : τ (Functor (Op_cat K) D))
+  (x : τ (Obj K)) ⊢
+  @fapp1_fapp0 (Op_cat K) D F x x (@id K x)
+    ≡ @id D (@fapp0 (Op_cat K) D F x);
+
+assertnot [K : Cat] ⊢ Op_cat K ≡ K;
+
+// The following formation checks return to the general diagnostic inventory.
+// catalog-area: auto
+
 assert [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) (k : τ (Obj K)) ⊢
   Fibre_cat (Functor_catd A B) k
     ≡ Functor_cat (Fibre_cat A k) (Fibre_cat B k);

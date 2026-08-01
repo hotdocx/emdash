@@ -56,7 +56,12 @@ foundation at proposal checkpoint
 `260b2caddf51be266beb5d503ad02b90e640197c`. The separate review recorded
 below approves exactly that correction under the standing unattended
 delegation, with immediate human supersession. No mixed-curry owner is
-authorized by either gate.
+authorized by either gate. The corrected foundation is now final-green in the
+active kernel: exactly six existing-owner projection rules, nine positive
+checks plus the retained non-collapse check, and zero new symbols. Its focused
+consumer, full kernel/check pass, strict LHS audit, warning comparison,
+catalog/health refresh, and one complete Lambdapi CI are green. A coherent
+implementation checkpoint remains to be recorded before D-040 is frozen.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -316,7 +321,7 @@ It deliberately avoids:
 | `PUBLIC-HOM-VALIDATE-1B` | final-green; evidence recorded below | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No repeated long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | complete at public checkpoint `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; Pages run `30680155372` successful and live smoke green | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
-| `MIXED-ACTION-FOUNDATION-1A` | corrected D-039 approved; implementation dependency-ready | completed `MIXED-INTRODUCTION-0A`; D-039 proposal `260b2caddf51be266beb5d503ad02b90e640197c`; Unit-prof/full-action probes | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
+| `MIXED-ACTION-FOUNDATION-1A` | final-green; coherent implementation checkpoint pending | completed `MIXED-INTRODUCTION-0A`; approved D-039; Unit-prof/full-action probes and active-kernel CI | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
 | `MIXED-CURRY-1B` | decision-blocked on green corrected `MIXED-ACTION-FOUNDATION-1A` and a separately frozen D-040 gate | measured mixed-curry owner/projection probe | Implement one exact Lambdapi-first mixed-curry functor, its stable displayed-functor discriminator, point/A-arrow/C-arrow/base-arrow projection ladder, and qualified laws. |
 | `MIXED-INTRODUCTION-TS-1C` | blocked on green `MIXED-CURRY-1B` and transfer qualification | active owner/rules and conformance evidence | Transfer the owner mechanically and extend the contextual compiler with one genuinely non-eta mixed body. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
@@ -1031,6 +1036,53 @@ standing unattended delegation, with immediate human supersession, D-039 is
 approved exactly as proposed and active implementation may begin within its
 zero-new-owner boundary.
 
+## D-DTTLF-USABILITY-039 Implementation Evidence
+
+The active implementation promotes exactly the six approved projections and
+adds no symbol:
+
+- full and capped `Op_catd` base action reuse `op`, `fapp1_func`, and
+  `Op_func`; the full result remains a functor out of `Hom_K(x,y)`;
+- full and capped `Functor_catd` base action reuse `Hom_tele_func` and
+  `Hom_func`, with the domain endpoint contravariant and the codomain endpoint
+  covariant;
+- the Cat-specialized consumed-point rule computes the existing rigid
+  `Hom_fapp0(g,f,h)` at `x'` as `f(h(g(x')))` without changing the standalone
+  `Hom_fapp0` normal form; and
+- the narrow opposite-source identity bridge retains the measured `Op_cat`
+  discriminator and its explicit strict-LHS-audit annotation.
+
+Nine positive checks and the existing `Op_cat K != K` non-collapse check cover
+both full/capped projection orders, exact capped agreement with
+`Unit_prof Cat_cat`, the Cat-valued consumed point, and the opposite identity
+join. An ignored active-consumer probe imports these six rules from the real
+kernel rather than redeclaring them and checks the complete measured
+mixed-curry type consumer within the 60-second bound. The semantic pullback
+probe continues to show why no whole-family `Functor_catd` collapse was added.
+
+The final evidence is:
+
+- `make check`: green;
+- warning comparison: 1,227 total diagnostics, comprising 1,068 unjoinable
+  critical pairs and the unchanged 159 replaceable variables; this is the
+  reviewed `+48 / +0` interaction delta from the 1,020 / 159 active baseline,
+  and the two full-action rules add no further delta beyond the four-rule
+  candidate;
+- strict rule-LHS audit: zero unreviewed reconstructible slots, with 53
+  annotated slots across 33 intentional clauses;
+- generated check catalog and health report: synchronized and green across all
+  41 kernel/example files; source metrics are 19,814 lines, 765 symbols, 632
+  rules, and 61 unification rules in `emdash3_2.lp`, plus 1,550 assertions in
+  `emdash3_2_checks.lp`; and
+- one complete `make ci`: green, including the 41-file parallel Lambdapi pass,
+  39 repository-script unit tests, document/source checks, strict LHS audit,
+  and strict catalog freshness. This aggregate is final checkpoint evidence
+  and must not be repeated after documentation-only synchronization.
+
+This completes only `MIXED-ACTION-FOUNDATION-1A`. It neither introduces nor
+authorizes mixed curry. The next semantic operation is to freeze and separately
+review D-040 against this active foundation.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -1086,18 +1138,17 @@ Treat the bounded recursive-Hom public synchronization as complete at
 `30680155372`. Preserve that checked/deployed boundary; do not repeat its long
 aggregate or redeploy it merely for reassurance.
 
-Treat MIXED-INTRODUCTION-0A as probe-complete with zero active-kernel delta.
-Continue from the next dependency-ready Work Ledger row. The immediate gate is
-D-DTTLF-USABILITY-039, which human-supersedes D-038 before active promotion:
-exactly six full/capped/point projection rules into the existing `op` and
-`Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0` action ladders, with zero
-new owner and no mixed-curry symbol. Preserve the measured two-sided context,
+Treat MIXED-INTRODUCTION-0A as probe-complete and D-039 as the corrected
+six-rule, zero-new-owner action foundation. Recover whether its final-green
+implementation and synchronized checkpoint have both been recorded; if not,
+finish only that exact recovery without repeating an unchanged aggregate.
+Then freeze and separately review D-040 before promoting the stable
+mixed-curry owner/projection ladder. Preserve the measured two-sided context,
 negative-A/positive-C polarity, canonical Hom classifier seam, stable
-`Functor_catd` head, and Sigma/pullback non-collapse. After a green
-synchronized foundation checkpoint, freeze and separately review D-040 before
-promoting the stable mixed-curry owner/projection ladder. Prefer generic Hom
-action for transformations and higher cells; never add external naturality or
-coherence evidence.
+`Functor_catd` head, Sigma/pullback non-collapse, and the existing
+`Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0` ownership. Prefer generic
+Hom action for transformations and higher cells; never add external
+naturality or coherence evidence.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction and treat the
 completed CURRY-PACKAGE-0A as supporting evidence unless a concrete later gap
@@ -1292,3 +1343,12 @@ removal, or unrelated cleanup is authorized.
   delegation therefore authorizes only the six projections and their focused
   Lambdapi SOP validation, with immediate human supersession; mixed curry and
   every TypeScript/public change remain excluded.
+- **2026-08-01 — D-DTTLF-USABILITY-039 implementation final-green.** Exactly
+  six projection rules and zero symbols were promoted at the existing
+  `op`/ambient-Hom/`Unit_prof` owners. Nine positive checks plus the retained
+  `Op_cat K != K` negative are green. The active-consumer probe, `make check`,
+  warning comparison at 1,068 critical pairs / 159 replaceable variables,
+  strict LHS audit, synchronized catalog and 41-file health report, and one
+  complete `make ci` all pass. No mixed-curry owner, whole-family collapse,
+  TypeScript, parser, browser, or publication change was included. The exact
+  coherent checkpoint is recorded in the Work Ledger after commit.

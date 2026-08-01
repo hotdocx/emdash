@@ -3347,6 +3347,14 @@ rule fapp0 (fapp1_func $F_AB) $f ↪ fapp1_fapp0 $F_AB $f;
 rule @fapp1_fapp0 $A $B $F $X $X (@id $A $X)
   ↪ @id $B (@fapp0 $A $B $F $X);
 
+// Projection-order bridge for the canonicalized identity of an opposite
+// source category: id_(K^op) has already reduced to id_K.
+// lhs-audit: keep 1 -- Op_cat is the measured source discriminator after the
+// identity argument loses its literal opposite-category owner.
+rule @fapp1_fapp0
+      (Op_cat $K) $D $F $x $x (@id $K $x)
+  ↪ @id $D (@fapp0 (Op_cat $K) $D $F $x);
+
 // Strict composition cut: `F[g] o F[f] -> F[g o f]`.
 rule @comp_fapp0
       $B
@@ -8849,6 +8857,16 @@ rule fapp0 (@Hom_tele_func $A $x $x' $y $y') (Struct_sigma $g $f)
 rule fapp0 (@Hom_func $A $x $x' $y $y' $g $f) $h
   ↪ @Hom_fapp0 $A $x $x' $y $y' $g $f $h;
 
+// Cat-specialized consumed-point projection of the rigid two-endpoint Hom
+// action. The standalone Hom_fapp0 head remains Unit_prof's point normal form.
+rule @fapp0 _ _
+      (@Hom_fapp0 Cat_cat $X $X' $Y $Y' $g $f $h) $x'
+  ↪ @fapp0
+      $Y $Y' $f
+      (@fapp0
+        $X $Y $h
+        (@fapp0 $X' $X $g $x'));
+
 // The primitive Unit_prof projection keeps the Hom action rigid at runtime.
 // Its two factorizations through one-slot pre/postcomposition remain available
 // during typed elaboration without choosing either factorization as the
@@ -12103,6 +12121,31 @@ rule @Pullback_catd $K Cat_cat op $E
 rule @fapp0 $K Cat_cat (@Op_catd $K $E) $k
   ↪ Op_cat (@fapp0 $K Cat_cat $E $k);
 
+// Full base action maps the underlying family action through the internal
+// opposite functor, retaining action on higher base cells.
+rule @fapp1_func
+      $K Cat_cat (@Op_catd $K $E) $x $y
+  ↪ @comp_cat_fapp0
+      (Hom_cat $K $x $y)
+      (Functor_cat (Fibre_cat $E $x) (Fibre_cat $E $y))
+      (Functor_cat
+        (Op_cat (Fibre_cat $E $x))
+        (Op_cat (Fibre_cat $E $y)))
+      (@fapp1_func
+        Cat_cat Cat_cat op
+        (Fibre_cat $E $x)
+        (Fibre_cat $E $y))
+      (@fapp1_func $K Cat_cat $E $x $y);
+
+// Capped base-arrow action of pointwise opposite is the opposite of the
+// underlying displayed-family action.
+rule @fapp1_fapp0
+      $K Cat_cat (@Op_catd $K $E) $x $y $p
+  ↪ @Op_func
+      (Fibre_cat $E $x)
+      (Fibre_cat $E $y)
+      (@fapp1_fapp0 $K Cat_cat $E $x $y $p);
+
 // Pointwise opposite is involutive: (E^op)^op ↪ E.
 rule @Op_catd $K (@Op_catd $K $E) ↪ $E;
 // Opposite of a constant family is the constant family at A^op.
@@ -13149,6 +13192,41 @@ injective symbol Functor_catd [K : Cat]
 // Fibre projection: Functor_catd(A,B)[k] ↪ (A[k] ⊢ B[k]).
 rule @fapp0 $K Cat_cat (@Functor_catd $K $A $B) $k
   ↪ Functor_cat (Fibre_cat $A $k) (Fibre_cat $B $k);
+
+// Full base action pairs the negative and positive endpoint actions and then
+// applies the ambient Hom telescope used by Unit_prof's full projection.
+rule @fapp1_func
+      $K Cat_cat (@Functor_catd $K $A $B) $x $y
+  ↪ @comp_cat_fapp0
+      (Hom_cat $K $x $y)
+      (Product_cat
+        (Functor_cat (Fibre_cat $A $y) (Fibre_cat $A $x))
+        (Functor_cat (Fibre_cat $B $x) (Fibre_cat $B $y)))
+      (Functor_cat
+        (Functor_cat (Fibre_cat $A $x) (Fibre_cat $B $x))
+        (Functor_cat (Fibre_cat $A $y) (Fibre_cat $B $y)))
+      (@Hom_tele_func
+        Cat_cat
+        (Fibre_cat $A $x)
+        (Fibre_cat $A $y)
+        (Fibre_cat $B $x)
+        (Fibre_cat $B $y))
+      (Struct_sigma
+        (@fapp1_func (Op_cat $K) Cat_cat $A $y $x)
+        (@fapp1_func $K Cat_cat $B $x $y));
+
+// Capped base action is exactly Unit_prof(Cat)'s existing Hom_func
+// projection at the paired negative/positive endpoint actions.
+rule @fapp1_fapp0
+      $K Cat_cat (@Functor_catd $K $A $B) $x $y $p
+  ↪ @Hom_func
+      Cat_cat
+      (Fibre_cat $A $x)
+      (Fibre_cat $A $y)
+      (Fibre_cat $B $x)
+      (Fibre_cat $B $y)
+      (@fapp1_fapp0 (Op_cat $K) Cat_cat $A $y $x $p)
+      (@fapp1_fapp0 $K Cat_cat $B $x $y $p);
 
 // Coherent evaluation for a constant-domain displayed functor family.
 //
