@@ -74,8 +74,8 @@ the existing `Unit_prof` full/capped action projections unchanged and uses
 them indirectly through the active `Functor_catd` action. Exact owner-position
 and active checks, warning comparison, strict LHS audit, catalog/TOC/health
 refresh, and one complete Lambdapi CI are green. Its coherent checkpoint is
-pending below; no TypeScript or public promotion is included in that
-checkpoint.
+`bed022fdab970109163da8415726a5bcc1ab5a89`; no TypeScript or public promotion
+is included in that checkpoint.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -336,7 +336,7 @@ It deliberately avoids:
 | `PUBLIC-HOM-INTEGRATE-1C` | complete at public checkpoint `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; Pages run `30680155372` successful and live smoke green | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
 | `MIXED-ACTION-FOUNDATION-1A` | final-green at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137` | completed `MIXED-INTRODUCTION-0A`; approved D-039; Unit-prof/full-action probes and active-kernel CI | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
-| `MIXED-CURRY-1B` | final-green; coherent checkpoint pending | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; approved D-040; exact owner-position and active CI evidence | Exactly one Lambdapi-first mixed-curry operation package is active: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. It adds no Hom-action duplicate and leaves `Unit_prof` unchanged. |
+| `MIXED-CURRY-1B` | final-green at `bed022fdab970109163da8415726a5bcc1ab5a89` | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; approved D-040; exact owner-position and active CI evidence | Exactly one Lambdapi-first mixed-curry operation package is active: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. It adds no Hom-action duplicate and leaves `Unit_prof` unchanged. |
 | `MIXED-INTRODUCTION-TS-1C` | next proposal dependency-ready after the exact `MIXED-CURRY-1B` checkpoint; implementation not yet authorized | active owner/rules and conformance evidence | Freeze a separate mechanical-transfer gate, then transfer the owner and extend the contextual compiler with one genuinely non-eta mixed body only after that separate review. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
@@ -1377,13 +1377,14 @@ aggregate or redeploy it merely for reassurance.
 Treat MIXED-INTRODUCTION-0A as probe-complete and D-039 as final-green at
 `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`: the corrected six-rule,
 zero-new-owner action foundation. Do not repeat its unchanged aggregate. Treat
-D-040 as final-green with its coherent checkpoint pending in this ledger:
-exactly eleven aliases, one curry functor plus three staged heads, and seven
-rules. Checkpoint only that bounded kernel/check/report/ledger tranche, carry
-forward its complete green aggregate, and then freeze a separate TypeScript
-transfer proposal before implementation. Preserve the measured two-sided
-context, negative-A/positive-C polarity, canonical Hom classifier seam,
-stable `Functor_catd` head, Sigma/pullback non-collapse, and the existing
+D-040 as final-green at
+`bed022fdab970109163da8415726a5bcc1ab5a89`: exactly eleven aliases, one curry
+functor plus three staged heads, and seven rules. Preserve that bounded
+kernel/check/report/ledger checkpoint, carry forward its complete green
+aggregate, and freeze a separate TypeScript transfer proposal before
+implementation. Preserve the measured two-sided context,
+negative-A/positive-C polarity, canonical Hom classifier seam, stable
+`Functor_catd` head, Sigma/pullback non-collapse, and the existing
 `Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0` ownership. Prefer generic
 Hom action for transformations and higher cells; never add external
 naturality or coherence evidence.
@@ -1609,10 +1610,11 @@ removal, or unrelated cleanup is authorized.
   action. No immediate human correction superseded the proposal, so the
   standing unattended delegation authorizes only this measured package and
   its nested-SOP validation, with immediate human supersession.
-- **2026-08-01 — D-DTTLF-USABILITY-040 implementation final-green; coherent
-  checkpoint pending.** Exactly eleven transparent context/arrow aliases, one
-  mixed-curry functor, three staged projection heads, and seven rules were
-  implemented at section `17f`. The existing `Unit_prof` full/capped
+- **2026-08-01 — D-DTTLF-USABILITY-040 implementation final-green.** Exactly
+  eleven transparent context/arrow aliases, one mixed-curry functor, three
+  staged projection heads, and seven rules were implemented at section `17f`
+  and checkpointed at `bed022fdab970109163da8415726a5bcc1ab5a89`. The
+  existing `Unit_prof` full/capped
   projections remain unchanged and continue to own uncurried Hom action. The
   focused owner-position probes, active kernel/check suite, all object and
   action consumers, variance/non-collapse negatives, strict LHS audit,
