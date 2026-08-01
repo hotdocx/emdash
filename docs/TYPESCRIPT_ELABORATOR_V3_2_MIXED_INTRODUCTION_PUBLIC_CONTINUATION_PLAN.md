@@ -141,10 +141,15 @@ missing curry and was not repaired by one. The bounded TypeScript-only
 correction below is now separately reviewed and final-green as
 H-DTTLF-USABILITY-DIRECT-MIXED-CLASSIFIER-CORRECTION-01 /
 D-DTTLF-USABILITY-044. Source-side contravariant mapping is feasible through
-the existing `Functor_catd_func` and `hom_precomp_along_fapp0` owners, but its
-scope-base versus family-domain orientation and exact three-rule
-owner-position closure remain a separate Lambdapi-first audit. No source-side
-kernel edit is authorized by D-044.
+the existing `Functor_catd_func` action. The completed owner-position audit
+found that the preliminary three-rule route through
+`hom_precomp_along_fapp0` was needlessly point-level: one rule at the existing
+constructor-action projection can return the whole ordinary composite
+`H o L[k]`, after which generic `fapp*` owns both object and arrow action and
+remains iterable. Its exact scope-base versus family-domain orientation and
+bounded TypeScript continuation are frozen below as
+H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-ACTION-01 /
+D-DTTLF-USABILITY-045. No source-side kernel edit is authorized by D-044.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -413,7 +418,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-INTRODUCTION-1D` | final-green at `2c53291da9a8f74e9102434235f504721f53d34a` under D-DTTLF-USABILITY-043 | completed `DIRECT-MIXED-INTRODUCTION-0C`; proposal `291213d04269a230be0a3b2b7fc7b8bef81e81c9`; separate review under standing unattended delegation | Exactly one existing-owner runtime projection is active and generically transferred with zero declarations. The opt-in direct TypeScript binder handles exact eta plus finite recursive covariant target application and neither transfers nor invokes D-040/D-042. |
 | `MIXED-VARIANCE-GRADUATE-1E` | read-only stress audit complete; split into the two bounded rows below before graduation | final-green D-043 at `2c53291da9a8f74e9102434235f504721f53d34a`; representative direct recursive binder, inner action and full base-action formation | The public binder remains fundamental. The audit found one TypeScript classifier-view correction for identity/positive nesting and one separate orientation-aware source-action closure. It did not find a need for public curry. |
 | `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | implemented and final-green at `ff868fbc2a7d4f92b66312e458cb5fca67f63470` under D-DTTLF-USABILITY-044 | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | The canonical indexed-functor now retains its exact indexed-object family; direct `c(a)` lowers through existing `id_funcd`; and recursively nested positive canonical targets elaborate through the same factorer. No kernel rule, runtime declaration, curry dependency, or broad convertibility case was added. |
-| `MIXED-SOURCE-ACTION-0E2` | next dependency-ready only for a bounded read-only owner-position/orientation audit and separately frozen proposal | final-green D-044; preliminary append-only probe is green; active `Functor_catd_func` and `hom_precomp_along_fapp0` owners | Distinguish shared scope base `K` from a displayed family's domain/orientation `K` versus `Op K`; audit the exact source projection plus Cat-valued precomposition object/arrow projections before freezing any semantic edit. Do not use per-case equality hacks or expose curry. |
+| `MIXED-SOURCE-ACTION-0E2` | complete; selected one-rule owner-position candidate quiet-green, zero warning delta, strict-audit clean, and finite-chain positive | final-green D-044; preliminary three-rule and selected one-rule full-file probes; active `Functor_catd_func` and ordinary composition owners | Distinguish shared scope base `K` from family-domain orientation `K` versus `Op K`. Reject the capped three-rule precomposition route; select one existing-owner rule returning whole `comp_cat_fapp0`, with object/arrow and two-map checks. |
+| `DIRECT-MIXED-SOURCE-ACTION-1E2` | frozen below under D-DTTLF-USABILITY-045; separate review required before implementation | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; selected owner-position probe | Add exactly one active existing-owner rule and one zero-declaration generic runtime rule. Model scope base separately from source/target family domains in construction metadata, and extend the direct factorer with finite `L(source-argument)` recursion over exact `Op K` source maps. Add no curry dependency or external coherence evidence. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2413,6 +2419,140 @@ Per SOP, that aggregate is carried forward and is not repeated after this
 ledger-only synchronization. The exact implementation checkpoint is
 `ff868fbc2a7d4f92b66312e458cb5fca67f63470`.
 
+## H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-ACTION-01 /
+## D-DTTLF-USABILITY-045
+
+Approve the following bounded source-action continuation for the fundamental
+direct binder. This gate does not introduce, expose, or require mixed curry.
+
+### Read-only audit result and selected semantics
+
+Let
+
+```text
+A' A : Catd(Op K)
+B    : Catd(K)
+L    : Functord A' A.
+```
+
+The existing internal action of `Functor_catd_func(K)` is contravariant in
+its first family argument. It therefore already forms a displayed functor
+
+```text
+pre_L : Functord (Functor_catd A B) (Functor_catd A' B).
+```
+
+The only missing runtime projection is its fibre action after a functor
+`H : A[k] -> B[k]` is consumed. The selected owner-position rule returns the
+whole existing ordinary composite
+
+```text
+pre_L[k](H)  -->  comp_cat_fapp0 H L[k]
+```
+
+rather than a capped point. Generic ordinary `fapp0` and `fapp1_fapp0` then
+compute `H(L[k](a'))` and its inner-arrow action. This is the internalized
+object-and-arrow formulation required by the kernel SOP; no external
+naturality square, pointwise function, or equality witness is supplied.
+
+The full-file owner-position candidate is quiet-green. Its warning inventory
+is exactly the active baseline, 1,238 total = 1,079 critical pairs + 159
+replaceable variables, so the selected rule has zero warning delta. The
+strict LHS audit has zero unreviewed reconstructible slots. Whole-functor,
+object-action, arrow-action, explicit `Op K` non-collapse, and a two-source-map
+composition probe are green.
+
+A preliminary three-rule alternative also typechecked: the same constructor
+projection plus Cat-valued object/arrow projections through
+`hom_precomp_along_fapp0`. It added six critical-pair warnings and prematurely
+selected a point-level precomposition presentation. It is rejected by this
+gate. No `hom_precomp_along_fapp0` rule is promoted.
+
+### Exact implementation boundary
+
+1. Add exactly the selected one runtime rule at the existing
+   `Functor_catd_func` action/projection area of `emdash3_2.lp`. Add no symbol,
+   classifier, curry, precomposition owner, or unification rule.
+2. Add durable checks in `emdash3_2_checks.lp` for the whole functor, object
+   action, inner-arrow action, a composable two-map source chain, and the
+   retained `Op K` versus `K` non-collapse. Check-only readable aliases do not
+   become runtime owners.
+3. Transfer the one rule through a new zero-declaration generic runtime
+   fragment layered after the final-green direct-introduction fragment. Reuse
+   the already transferred `Functor_catd_func`,
+   `Functor_catd_fapp0_func`, `comp_cat_fapp0`, and generic `fapp*`/`tapp*`
+   owners. Add no intrinsic Core form or owner-specific checker/evaluator
+   case.
+4. In construction-only TypeScript classifier metadata, distinguish the
+   shared hidden scope base from the actual domain of each displayed-family
+   endpoint. In particular, a negative source family records domain `Op K`
+   while its locally nameless index still denotes the shared `k : Obj K`.
+   Preserve positive `K` domains and mixed `Functor_catd` source/target
+   domains separately.
+5. Re-view the same hidden locally nameless base token at the family domain
+   only when that domain is exactly the scope base `K` or exactly
+   `Op K`. This is a construction-time typed view justified by the active
+   `Obj(Op K)` computation; it emits no Core coercion, asserts no category
+   equality, and cannot be used to equate arbitrary bases.
+6. Extend open displayed-functor application to preserve the shared scope base
+   while checking source and target family domains explicitly. Indexed fibre
+   application must match both the source family and its domain, and its
+   result must retain the target family domain. Existing same-base behavior
+   remains the default.
+7. Extend the direct factorer with the recursive grammar
+
+   ```text
+   source-argument ::= a | L(source-argument)
+   mixed-root      ::= c(source-argument) | F[c](source-argument)
+   mixed-body      ::= mixed-root | G(mixed-body)
+   ```
+
+   where each `L` is a closed coherent displayed functor over exact `Op K`
+   with adjacent source/target families, and each `G` is the already-supported
+   closed coherent covariant target map over `K`. Accept any finite source
+   chain representable by this recursive grammar; do not cap it at one map.
+8. Lower source maps in reverse chain order through the existing internal
+   action and generic displayed composition, then lower the existing target
+   chain in forward order. Thus both `c(L(a))` and `F[c](L(a))` are direct
+   binder bodies, and two composable source maps remain iterable as a whole
+   functor. Exact bound-outer identity still starts from `id_funcd`; exact
+   closed-subject eta still starts from `F`.
+9. Preserve exact locally nameless accounting: one use each of `c` and `a`;
+   zero hidden-base uses for the identity root or one for the closed `F` root;
+   plus one hidden-base use per source map and per target map. Record immutable
+   source-chain length, root source family, existing root kind, and target
+   chain length in inspection evidence.
+10. Add focused TypeScript positives for bound identity and closed eta with
+    one source map, a two-source-map recursion, object and arrow runtime
+    computation, and coexistence with a positive target map. Retain negatives
+    for wrong orientation, noncanonical or open maps, mismatched adjacent
+    families, duplicated/unused scoped tokens, unrelated bases, and
+    unsupported body forms. Update the direct demo with one source-recursive
+    example if it remains compact.
+11. Follow the nested Lambdapi SOP once: bounded active check, warning
+    comparison, strict LHS audit, catalog/TOC/health synchronization, and one
+    complete Lambdapi CI at the coherent kernel boundary. For TypeScript, run
+    focused tests, the demo, typecheck, and lint during implementation, then
+    exactly one `check:ts` because shared surface/runtime behavior changes.
+    Carry both aggregate results forward; do not run `check:all`, browser,
+    print, book, or publication gates.
+12. Add no D-040/D-042 import or invocation, public curry/hybrid surface,
+    external coherence evidence, broad `K = Op K` exception, arbitrary
+    variance inference, unrestricted `:^nd`, text syntax, browser promotion,
+    product facade, parser work, or bulk transfer work. Those require later
+    separately frozen gates.
+
+This gate advances the user's fundamental public reading directly:
+
+```text
+lambda^n k. lambda^f c. lambda^f a. t
+  : Functord C (Functor_catd A B).
+```
+
+The previously implemented curry packages remain isolated auxiliary
+experiments. Their existence neither motivates nor gates this direct
+source-recursive introduction.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -2514,12 +2654,15 @@ underlying object-family view of a canonical indexed functor, lowers
 bound-outer `c(a)` through existing `id_funcd`, and preserves that object view
 through recursively nested positive canonical targets. Carry forward its
 focused demo/tests, typecheck/lint, and single 1,279-test `check:ts`; do not
-repeat that aggregate. Continue with `MIXED-SOURCE-ACTION-0E2` only as a
-bounded read-only owner-position and classifier-orientation audit, then freeze
-a separate proposal before any semantic edit. Keep source-side
-contravariant mapping and its measured existing-owner three-rule closure
-outside D-044 until that review. Never add external naturality or coherence
-evidence.
+repeat that aggregate. Treat `MIXED-SOURCE-ACTION-0E2` as read-only complete:
+the selected owner-position formulation is one existing-owner rule returning
+whole `comp_cat_fapp0`, is quiet-green with zero warning delta, computes
+object and arrow action, and iterates through two source maps. The preliminary
+three-rule `hom_precomp_along_fapp0` route is rejected. Treat
+H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-ACTION-01 /
+D-DTTLF-USABILITY-045 as frozen for a separate review; do not edit active
+semantics until that review approves the exact twelve-item boundary. Never
+add external naturality or coherence evidence.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -2538,6 +2681,18 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-045 frozen for separate review.** The
+  completed `MIXED-SOURCE-ACTION-0E2` audit replaces its preliminary
+  three-rule point/precomposition sketch with one existing-owner projection
+  returning whole `comp_cat_fapp0 H L[k]`. The owner-position candidate is
+  quiet-green at the unchanged 1,079/159 warning inventory, strict-LHS clean,
+  and green through whole-functor, object, inner-arrow, non-collapse, and
+  two-source-map checks. The proposed TypeScript continuation distinguishes
+  hidden scope base from endpoint family domains and recursively factors
+  `a | L(source-argument)` before the already-supported positive target chain.
+  It adds no owner, declaration, curry dependency, external coherence
+  evidence, broad opposite equality, text/browser work, or unrestricted
+  variance claim. Active implementation requires a separate review.
 - **2026-08-01 — D-DTTLF-USABILITY-044 implementation final-green at
   `ff868fbc2a7d4f92b66312e458cb5fca67f63470`.** The
   canonical indexed-functor classifier now retains its exact underlying

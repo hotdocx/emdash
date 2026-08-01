@@ -48,11 +48,20 @@
 > indexed-object view of
 > canonical fibre functors, compiles direct `c(a)` as existing `id_funcd`, and
 > supports nested positive canonical targets without a kernel/runtime/curry
-> change. Its single `check:ts` is green at 1,228 pass/51 skip. The next row is
-> only a bounded read-only `MIXED-SOURCE-ACTION-0E2` owner-position and
-> classifier-orientation audit. Contravariant source mapping remains outside
-> D-044 until its exact existing-owner and `K`/`Op K` closure is separately
-> frozen and reviewed. The completed
+> change. Its single `check:ts` is green at 1,228 pass/51 skip.
+> `MIXED-SOURCE-ACTION-0E2` is now read-only complete. The selected
+> owner-position formulation adds only one projection at the existing
+> `Functor_catd_func` action and returns the whole ordinary composite
+> `H o L[k]`; generic action supplies object/arrow computation and a two-map
+> source chain remains iterable. The candidate is quiet-green, strict-audit
+> clean, and has zero warning delta. The preliminary three-rule capped
+> precomposition alternative is rejected. The exact direct-binder
+> continuation is frozen as
+> H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-ACTION-01 /
+> D-DTTLF-USABILITY-045 and requires a separate review before active semantic
+> edits. It models shared scope base `K` separately from family domains `K`
+> and `Op K`, extends the recursive direct grammar with finite
+> `L(source-argument)`, and neither exposes nor depends on curry. The completed
 > mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
