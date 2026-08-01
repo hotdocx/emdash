@@ -173,7 +173,23 @@ meaning remains
 no curry, total-context section, external coherence witness, cast, or second
 AST is involved. A generated depth-seven pair tree is green, so the
 implementation contains no fixed pair-depth table. The next row is a
-read-only graduation reassessment before any further semantic gate.
+read-only graduation reassessment before any further semantic gate. Its
+coherent TypeScript checkpoint is
+`d5ea9f5d3d296835608eec8f963f7fa5657f0005`.
+
+That `DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment is now complete. It
+confirms that the direct binder itself—not total-context curry—is the
+fundamental introduction form, and that the implemented
+leaf/source-map/target-map/pair algebra has no fixed finite depth. It also
+finds that “general mixed introduction” is no longer accurately described as
+one missing curry operation. The remaining usability boundary is structural
+constructor coverage: weakening/constant bodies, variance-valid application
+of two varying subexpressions, larger contextual environments, and general
+displayed transformation introduction are not all handled by the current
+factorer. The first measured missing ordinary-DTT case is inner weakening,
+`lambda^n k. lambda^f c. lambda^f a. H[c]`, which remains a durable
+fail-closed negative. The next row is therefore a Lambdapi-first read-only
+structural-basis audit, not curry promotion and not another depth witness.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -450,7 +466,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-NESTED-CONVERSION-1F1` | final-green at `4845f44c11914f142be357d115ebdde92a33d039` under D-DTTLF-USABILITY-047 | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; proposal `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`; separate review under standing unattended delegation | One generic fast-path-plus-kernel-conversion service now owns four mixed base checks. Natural nested negative `Functor_catd`/`Transf_catd`, Hom/Transf targets, and simultaneous source/target spines are checked without coercion, curry, kernel, runtime, or grammar changes. |
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` | read-only audit complete; one-owner direct-binder continuation selected | final-green D-047; measured non-conversion between product-of-mixed-functors and mixed-functor-into-product; active product and mixed-action owners | No existing active owner supplies the required global comparison. One `Functor_catd_product_funcd` distributor with point/full/capped projections is owner-position, quiet-green, strict-audit clean, and zero-warning-delta; its direct pair consumer computes on objects and inner arrows and retains internal base/higher action. No curry or `Product_catd` facade is involved. |
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | implemented and final-green at `d5ea9f5d3d296835608eec8f963f7fa5657f0005` under D-DTTLF-USABILITY-048; kernel checkpoint `d9f298ce2c3194adda8f68bd4654e484b33bfac4` | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Exactly one distributor and three projection rules are active and generically transferred. The existing direct factorization tree recursively lowers `typed-pair`, combines branches with existing `Product_pair_funcd`, and composes the distributor. Direct introduction remains fundamental; curry, facade, text/browser, and unrestricted-variance claims remain excluded. |
-| `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | dependency-ready read-only reassessment; no semantic edit authorized | final-green D-048 and the user's renewed direct-binder invariant | Reassess the now-demonstrated recursive leaf/target/source/pair grammar against arbitrary meaningful nested `Functor_catd`/`Hom_catd`/`Transf_catd` expressions. Distinguish a measured remaining direct-introduction or variance gap from optional curry/product-facade work, and freeze any next semantic gate separately. |
+| `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | read-only reassessment complete; no semantic delta | final-green D-048 and the user's renewed direct-binder invariant | Graduates arbitrary finite depth only for the recursive `leaf | source-map | target-map | pair` body algebra, alongside the predecessor's qualified finite Hom towers. Direct introduction is fundamental and curry-free. General structural constructor coverage, context arity, variance-valid varying application, and `:^nd` introduction remain separate. |
+| `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | dependency-ready read-only owner/variance audit; exact gate frozen below as D-DTTLF-USABILITY-049 | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; ordinary-DTT weakening counterexample; direct-binder invariant | Inventory both/outer-only/inner-only/neither occurrence cases and varying application against existing internal owners. Probe only genuinely absent owners at their active source position, including the candidate mixed weakening `B -> Functor_catd A B`; require object, base-arrow, and higher action. Select at most one later semantic gate without making curry a surface or compiler prerequisite. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3241,9 +3258,144 @@ This proves recursive direct product-valued bodies for the qualified grammar,
 not unrestricted categorical lambda synthesis. General variance,
 unrestricted `:^nd`, arbitrary dependency DAGs, inverse/global product-family
 comparison, `Product_catd` facade work, curry promotion, text/browser parity,
-and publication remain separate. The next dependency-ready action is the
-read-only `DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment; any semantic
-continuation needs its own frozen and reviewed gate.
+and publication remain separate. At the D-048 checkpoint, the next action was
+the read-only `DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment recorded below;
+any semantic continuation still needs its own frozen and reviewed gate.
+
+## `DIRECT-MIXED-PRODUCT-GRADUATE-1H` Read-Only Reassessment
+
+The reassessment separates four questions that the earlier phrase
+“arbitrary nesting” had conflated:
+
+1. **Classifier nesting.** The completed recursive-mixed predecessor already
+   implements depth-generic finite `Hom_cat` towers rooted at the qualified
+   canonical `Functor_catd`/`Transf_catd` grammar.
+2. **Direct-body depth.** D-DTTLF-USABILITY-048 implements a genuinely
+   recursive `leaf | source-map | target-map | pair` factorization. The
+   depth-seven test is a witness of the recursive algorithm, not its bound.
+3. **Context shape.** `mixedDisplayedFunctorLambda` still presents one hidden
+   natural base, one positive outer displayed object, and one negative inner
+   displayed object. It is not yet a general mixed telescope compiler.
+4. **Constructor coverage.** A recursive algorithm can still be incomplete
+   when it has no case for a mathematically meaningful internally owned
+   constructor. D-048 added product pairing; it did not make arbitrary
+   pointwise syntax coherent.
+
+The fundamental positive is already direct:
+
+```text
+C = Functor_catd A B
+
+lambda^n k. lambda^f c. lambda^f a. c(a)
+  : Functord_cat C (Functor_catd A B)
+```
+
+It lowers to the displayed identity on `Functor_catd A B`. Likewise
+`F[c](a)` returns the already coherent `F`, and finite closed source maps,
+closed target maps, and recursively nested pairs lower through their
+internal action owners. None of those paths imports, invokes, or falls back
+to `mixed_curry_func`, a total-context section, or external coherence data.
+
+The current direct factorer is therefore a sound syntax-directed inverse for
+one algebra of coherent constructions, but not yet a complete structural
+bracket compiler. The measured missing cases include:
+
+- **inner weakening:** `lambda^n k. lambda^f c. lambda^f a. H[c]`, where `a`
+  is unused. The existing durable “noncanonical” negative exercises exactly
+  this occurrence shape. The active kernel has ordinary `Const_func_func`,
+  displayed terminal weakening, constant sections, and generic displayed
+  composition, but lexical/owner search finds no exact internally projected
+  map `B -> Functor_catd A B`;
+- **outer weakening:** a coherent `F[a]` independent of `c`, and the fully
+  constant case. These may be compositional through the existing
+  `Terminal_funcd`/section route, but the current factorer neither recognizes
+  nor checks that derivation;
+- **two varying subexpressions:** an expression schematically like
+  `G[c](F[c](a))` is not the implemented closed target-map case. Moreover its
+  intermediate family occurs positively for `F` and negatively for `G`, so
+  it is not well-kinded for arbitrary same-spelling directed families. A
+  later case must first select a variance-valid constant, opposite, or
+  explicitly related middle family and an internal owner; and
+- **larger environments and transformation introduction:** multiple
+  independent/dependent outer inputs and unrestricted `:^nd` bodies need
+  their own typed contextual compilation rules. Neither follows from adding
+  another recursive depth test.
+
+This corrects the earlier umbrella statement that a “general mixed curry” is
+the sole remaining introduction gap. The already-active mixed-curry package
+is valid auxiliary evidence and may offer one derivation from a coherent
+total-context section. It is not the public binder, is not required by the
+direct compiler, and is not promoted by this reassessment. A future internal
+construction may be mathematically related to currying without forcing the
+surface or compiler architecture to route direct binders through that
+package.
+
+The architecture is consequently settled at the recursion boundary but not
+yet graduated for ordinary-DTT-like structural completeness. The next work
+must audit a reusable internal structural basis, beginning with weakening,
+rather than accumulate body-shape switches or revive the superseded
+section-first frontend.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-STRUCTURAL-BASIS-01 /
+## D-DTTLF-USABILITY-049
+
+Approve the following exact read-only audit before any further semantic
+mixed-introduction edit:
+
+1. Freeze a typed occurrence/constructor matrix for the direct binder with
+   both local values used, only the outer value used, only the inner value
+   used, neither used, recursively paired results, fixed source/target maps,
+   two varying subexpressions, and a nested displayed-transformation result.
+2. For every row, determine well-kindedness from the actual polarities
+   `A : Catd(Op K)` and `B,C : Catd K`. Reject a superficially ordinary
+   composition example when its intermediate displayed family would have to
+   be both covariant and contravariant without an active comparison.
+3. Search the active kernel before proposing a primitive. Inventory at least
+   `Const_func_func`, `Terminal_funcd`, constant-section and section-pullback
+   constructions, `Product_pair_funcd`, `Functor_catd_func`, `Unit_prof`,
+   generic displayed composition, and the auxiliary mixed-curry package.
+4. Probe any genuinely missing construction only in a temporary full-file
+   copy at its intended owner position. The first candidate is the internally
+   natural mixed weakening map
+
+   ```text
+   B -> Functor_catd A B,
+   ```
+
+   whose fibre is ordinary `Const_func_func(A[k],B[k])`. Compare a direct
+   owner, a transparent definition from existing owners, and an auxiliary
+   curry-derived presentation; do not preselect one for stylistic symmetry.
+5. A viable candidate must account for object projection, full and capped
+   base-arrow action, and one genuine higher-cell consumer. Opaque or
+   point-only action may be recorded as a bounded alternative but cannot
+   silently support a full usability claim. External naturality equations,
+   equality witnesses, casts, and frontend-owned action remain forbidden.
+6. Audit outer-only and fully constant bodies for derivation through existing
+   terminal/section owners before proposing another symbol. Audit one
+   variance-valid representative of two-varying application; do not claim an
+   unrestricted composition family.
+7. Preserve the public architecture invariant:
+   `lambda^n k. lambda^f c. lambda^f a. body` is direct introduction. A
+   chosen implementation may reuse any semantically correct internal owner,
+   but the audit must not require the user to supply a total-context section
+   or expose curry/coherence arguments.
+8. End with an exact owner/derivation matrix and freeze at most one smallest
+   dependency-ready semantic gate. Keep alternative direct, compositional,
+   and curry-related implementations documented when more than one remains
+   viable.
+9. Make no active Lambdapi, TypeScript, transfer, parser, browser, README,
+   book, or publication edit. Validation is limited to lexical/type-aware
+   search, owner-position probes bounded to 60 seconds, warning comparison
+   for a viable rule candidate, and document diff hygiene. Do not run
+   `make check`, Lambdapi CI, `check:ts`, `check:all`, browser, print, or book
+   aggregates.
+10. Preserve unrelated temporary experiments and make only a local
+    rollback-safe proposal checkpoint. Do not push, merge, rebase, reset,
+    amend, clean, remove worktrees, or publish.
+
+This audit does not approve `Const_func_funcd` or any other new owner. It
+exists to prevent both an ad hoc frontend case and the opposite mistake of
+treating the auxiliary mixed-curry package as the only possible foundation.
 
 ## Validation And Checkpoint Policy
 
@@ -3400,12 +3552,20 @@ distributor. The binder remains fundamentally direct and neither invokes nor
 falls back to curry. Carry forward the single kernel CI and 1,289-test
 TypeScript aggregate; do not repeat either for reassurance.
 
+Treat `DIRECT-MIXED-PRODUCT-GRADUATE-1H` as read-only complete. The direct
+`leaf | source-map | target-map | pair` grammar is depth-generic, and the
+fundamental nested binder remains curry-free. Do not broaden that result to
+general structural completeness: inner/outer/constant weakening, qualified
+two-varying application, larger mixed contexts, and unrestricted `:^nd`
+introduction remain open.
+
 The next dependency-ready row is the read-only
-`DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment. Measure the remaining direct
-introduction/variance envelope against nested `Functor_catd`, `Hom_catd`, and
-`Transf_catd`; distinguish any concrete gap from optional curry or product
-facade work. Make no semantic edit until an exact successor gate is frozen
-and separately reviewed.
+`DIRECT-MIXED-STRUCTURAL-BASIS-0I` audit frozen as D-DTTLF-USABILITY-049.
+Inventory occurrence cases and existing owners, probe only genuinely absent
+owners at their active source position, require internal object/base/higher
+action, and freeze at most one later semantic gate. Preserve direct
+introduction as the surface/compiler invariant and do not preselect either a
+new primitive or the auxiliary curry route.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete

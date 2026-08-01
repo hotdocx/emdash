@@ -126,6 +126,15 @@
 > `DIRECT-MIXED-PRODUCT-GRADUATE-1H` reassessment; do not promote curry,
 > product-facade, unrestricted variance, text/browser, or publication work
 > without a separately frozen and reviewed gate.
+> That reassessment is now complete and finds no fixed-depth defect in the
+> recursive direct-body algebra. It distinguishes that result from general
+> structural completeness: the first measured missing ordinary-DTT case is
+> inner weakening, `lambda^n k. lambda^f c. lambda^f a. H[c]`; qualified
+> varying application, larger contexts, and unrestricted `:^nd` also remain
+> open. The next dependency-ready row is the read-only
+> `DIRECT-MIXED-STRUCTURAL-BASIS-0I` owner/variance audit frozen as
+> D-DTTLF-USABILITY-049. It must search and probe internal owners before any
+> semantic edit and must not make total-context curry a binder prerequisite.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
