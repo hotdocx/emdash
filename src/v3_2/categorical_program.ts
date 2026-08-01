@@ -2474,6 +2474,35 @@ export class CoreCategoricalProgram {
         }
     }
 
+    /**
+     * Compare category expressions through the active LF runtime.
+     *
+     * Construction metadata normally shares an exact expression, so retain
+     * the allocation-free structural fast path. Nested variance can instead
+     * expose an unreduced but definitionally equal category such as
+     * `Op_cat (Op_cat K)`. In that case the same generic conversion engine
+     * used by the final checker is authoritative; no constructor-specific
+     * equation or Core coercion is introduced here.
+     */
+    private categoryExpressionsDefinitionallyEqual(
+        left: KernelExpression,
+        right: KernelExpression,
+        stepLimit = 512
+    ): boolean {
+        if (kernelExpressionEquals(left, right)) return true;
+        const runtime = 'composedRuntime' in this.dependent
+            ? this.dependent.composedRuntime
+            : this.dependent.structural.composedRuntime;
+        return coreLfDefinitionalCompare(
+            this.environment,
+            left,
+            right,
+            stepLimit,
+            undefined,
+            runtime
+        ).status === 'equal';
+    }
+
     private convertObjectToCategory(
         value: CoreCategoricalTerm,
         expectedCategory: KernelExpression,
@@ -2805,7 +2834,7 @@ export class CoreCategoricalProgram {
             target.baseCategory.expression,
             nodeProvenance
         );
-        if (!kernelExpressionEquals(
+        if (!this.categoryExpressionsDefinitionallyEqual(
             domain.baseCategory.expression,
             expectedDomainBase
         )) {
@@ -4972,7 +5001,7 @@ export class CoreCategoricalProgram {
             targetFamily.baseCategory.expression,
             nodeProvenance
         );
-        if (!kernelExpressionEquals(
+        if (!this.categoryExpressionsDefinitionallyEqual(
             sourceFamily.baseCategory.expression,
             expectedSourceBase
         )) {
@@ -7590,7 +7619,7 @@ export class CoreCategoricalProgram {
             targetValue,
             nodeProvenance
         );
-        if (!kernelExpressionEquals(
+        if (!this.categoryExpressionsDefinitionallyEqual(
             target.baseCategory.expression,
             outerSource.baseCategory.expression
         )) {
@@ -7604,7 +7633,7 @@ export class CoreCategoricalProgram {
             outerSource.baseCategory.expression,
             nodeProvenance
         );
-        if (!kernelExpressionEquals(
+        if (!this.categoryExpressionsDefinitionallyEqual(
             innerSource.baseCategory.expression,
             expectedInnerBase
         )) {

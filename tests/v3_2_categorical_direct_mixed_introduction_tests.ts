@@ -271,6 +271,187 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
         assert.doesNotMatch(mappedCompiled.explicitCore, /mixed_curry/u);
     });
 
+    it('uses kernel conversion for natural nested mixed classifiers', () => {
+        const { emdash, K, opK, C } = fixture('nested_conversion');
+
+        // These domain families intentionally use natural K rather than a
+        // literal Op(Op(K)). The active opposite-involution computation is
+        // authoritative for both nested mixed constructors.
+        const P = emdash.displayedFamily(
+            'direct_mixed_nested_conversion_P',
+            K
+        );
+        const Q = emdash.displayedFamily(
+            'direct_mixed_nested_conversion_Q',
+            opK
+        );
+        const PPrime = emdash.displayedFamily(
+            'direct_mixed_nested_conversion_P_prime',
+            K
+        );
+        const QPrime = emdash.displayedFamily(
+            'direct_mixed_nested_conversion_Q_prime',
+            opK
+        );
+        const nestedSource = emdash.mixedDisplayedFunctorFamily(P, Q);
+        const nestedSourcePrime =
+            emdash.mixedDisplayedFunctorFamily(PPrime, QPrime);
+        const L = emdash.displayedFunctor(
+            'direct_mixed_nested_conversion_L',
+            nestedSourcePrime,
+            nestedSource
+        );
+
+        const homCarrier = emdash.displayedFamily(
+            'direct_mixed_nested_conversion_hom_carrier',
+            K
+        );
+        const x = emdash.section(
+            'direct_mixed_nested_conversion_x',
+            emdash.oppositeDisplayedFamily(homCarrier)
+        );
+        const y = emdash.section(
+            'direct_mixed_nested_conversion_y',
+            homCarrier
+        );
+        const homTarget = emdash.mixedDisplayedHomFamily(
+            homCarrier,
+            x,
+            y
+        );
+
+        const targetA = emdash.displayedFamily(
+            'direct_mixed_nested_conversion_target_A',
+            opK
+        );
+        const targetB = emdash.displayedFamily(
+            'direct_mixed_nested_conversion_target_B',
+            K
+        );
+        const functorTarget = emdash.mixedDisplayedFunctorFamily(
+            targetA,
+            targetB
+        );
+        const alpha = emdash.section(
+            'direct_mixed_nested_conversion_alpha',
+            emdash.oppositeDisplayedFamily(functorTarget)
+        );
+        const beta = emdash.section(
+            'direct_mixed_nested_conversion_beta',
+            functorTarget
+        );
+        const transforTarget = emdash.mixedDisplayedTransforFamily(
+            targetA,
+            targetB,
+            alpha,
+            beta
+        );
+
+        // Exercise the same conversion seam in Transf_catd at base Op(K).
+        const functorOverOp =
+            emdash.mixedDisplayedFunctorFamily(P, Q);
+        const mu = emdash.section(
+            'direct_mixed_nested_conversion_mu',
+            emdash.oppositeDisplayedFamily(functorOverOp)
+        );
+        const nu = emdash.section(
+            'direct_mixed_nested_conversion_nu',
+            functorOverOp
+        );
+        const transforOverOp = emdash.mixedDisplayedTransforFamily(
+            P,
+            Q,
+            mu,
+            nu
+        );
+
+        const nestedTarget = emdash.mixedDisplayedFunctorFamily(
+            nestedSource,
+            homTarget
+        );
+        const nestedF = emdash.displayedFunctor(
+            'direct_mixed_nested_conversion_nested_F',
+            C,
+            nestedTarget
+        );
+        const targetG = emdash.displayedFunctor(
+            'direct_mixed_nested_conversion_target_G',
+            homTarget,
+            transforTarget
+        );
+        const transforSourceTarget =
+            emdash.mixedDisplayedFunctorFamily(
+                transforOverOp,
+                homTarget
+            );
+        const transforH = emdash.displayedFunctor(
+            'direct_mixed_nested_conversion_transfor_H',
+            C,
+            transforSourceTarget
+        );
+
+        const eta = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cEta', family: C },
+            { name: 'nested', family: nestedSource },
+            homTarget,
+            (c, nested) => emdash.apply(
+                emdash.apply(nestedF, c),
+                nested
+            )
+        );
+        const mapped = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cMapped', family: C },
+            { name: 'nestedPrime', family: nestedSourcePrime },
+            transforTarget,
+            (c, nestedPrime) => emdash.apply(
+                targetG,
+                emdash.apply(
+                    emdash.apply(nestedF, c),
+                    emdash.apply(L, nestedPrime)
+                )
+            )
+        );
+        const transforSourceEta = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cTransfor', family: C },
+            { name: 'etaCell', family: transforOverOp },
+            homTarget,
+            (c, etaCell) => emdash.apply(
+                emdash.apply(transforH, c),
+                etaCell
+            )
+        );
+
+        const etaCompiled = emdash.compile(eta);
+        const mappedCompiled = emdash.compile(mapped);
+        const transforSourceCompiled = emdash.compile(transforSourceEta);
+        const evidence = emdash.inspect(mapped).abstractions.find(
+            candidate => candidate.rule ===
+                'categorical.direct-mixed-displayed-functor'
+        );
+
+        assert.equal(
+            etaCompiled.explicitCore,
+            '(free "direct_mixed_nested_conversion_nested_F")'
+        );
+        assert.equal(
+            transforSourceCompiled.explicitCore,
+            '(free "direct_mixed_nested_conversion_transfor_H")'
+        );
+        assert.equal(mappedCompiled.surfaceType.tag, 'displayed-functor');
+        assert.match(
+            mappedCompiled.explicitCore,
+            /generic-category-composition/u
+        );
+        assert.match(mappedCompiled.explicitExpectedType, /Transf_catd/u);
+        assert.doesNotMatch(
+            mappedCompiled.explicitCore,
+            /mixed_curry|coerc|cast/u
+        );
+        assert.equal(evidence?.sourceChainLength, 1);
+        assert.equal(evidence?.targetChainLength, 1);
+        assertDeepFrozen(emdash.inspect(mapped));
+    });
+
     it('recursively maps one and two coherent target functors', () => {
         const { emdash, C, A, D, E, F, G, H } =
             fixture('mapped');
