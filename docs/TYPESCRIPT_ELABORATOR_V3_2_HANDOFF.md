@@ -238,14 +238,21 @@
 > checks retain object, inner-arrow, whole base-arrow, generic internal-cell,
 > and next-base-cell action through existing kernel owners. The measured cap
 > is instead the frontend's fixed `k;c;a` context and `contextSize: 3`.
-> The next dependency-ready row is the zero-delta
-> `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` audit. It must derive larger direct
-> contexts from canonical expected `Functord`/`Functor_catd`/`Hom_catd`/
-> `Transf_catd` structure, keeping independent product/Sigma sibling wiring
-> distinct from genuine variance-sensitive nesting. It may probe and freeze a
-> separate implementation gate, but may not edit semantics. General
-> `lambda^nd` body algebra ranks second because the existing direct eta and
-> recursive vertical-composition fragment is already internally coherent.
+> `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` is now read-only complete. It keeps
+> independent product/Sigma siblings distinct from genuine variance-sensitive
+> nesting and selects the first canonical larger-context axis:
+> `Functor_catd(A1,...Functor_catd(An,B))` for negative inner families over
+> `Op K`. Existing nested-target refinement preserves the next open functor,
+> and a bounded 6.4-second Lambdapi probe checks that the existing covariant
+> target action lifts through depth two and composes after an arbitrary outer
+> coherent subject without curry or a new owner. The exact TypeScript-only
+> `DIRECT-MIXED-NEGATIVE-TOWER-1P` / D-DTTLF-USABILITY-053 proposal is frozen
+> for separate review. It adds an arbitrary-finite tower API only for coherent
+> eta/bound identity and finite closed target maps. Source maps, pairs,
+> weakening, constant-middle lifting, sibling contexts, general polarity, and
+> `lambda^nd` broadening remain excluded. General `lambda^nd` body algebra
+> still ranks second because the existing direct eta and recursive vertical-
+> composition fragment is internally coherent.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
