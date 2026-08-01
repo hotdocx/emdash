@@ -493,7 +493,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | complete; zero active semantic delta; direct weakening selected | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; approved D-DTTLF-USABILITY-049; owner-position/direct-versus-curry probes | The occurrence matrix distinguishes structural weakening from variance-valid varying application. `Functor_catd_const_funcd` is quiet-green with point/full/capped and higher action; terminal/section composition derives the other unused-variable cases. Curry remains auxiliary. |
 | `DIRECT-MIXED-WEAKENING-1J` | final-green; kernel checkpoint `c1890373ab93aa155336187e72b6c421c74b7e81`; TypeScript checkpoint `d4ed2d5ecf743cd5c33f8204a13f04331034c3d1` | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; corrected proposal `e8f6a88645fb09646c62841ad1d9e11236b73948`; separate approval; one kernel CI; focused transfer/direct/runtime/demo evidence; one green 1,293-test TypeScript aggregate | One direct `Functor_catd_const_funcd` owner with point/full/capped action is active. The generic TypeScript transfer acquires the pre-existing `hom_postcomp_func` signature and the new owner/rules. The recursive direct binder accepts outer-only `H[c]`, target maps, and mixed eta/weakening pairs with explicit outer/inner occurrence counts. Curry remains auxiliary and unused. |
 | `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` | read-only audit complete; zero semantic delta; one TypeScript-only section-root successor selected | final-green `DIRECT-MIXED-WEAKENING-1J`; direct-binder invariant; measured callback/factorer probes and transfer inventory | `S[k](a)` is blocked first by an overly generic open-section classifier view; `b[k]` reaches and is rejected by the recursive factorer. Both derive through existing section, `Terminal_funcd`, direct weakening, and composition. Ordinary-weakening projection acquisition is unnecessary for elaboration and remains only an optional deeper-normalization concern. The constant-middle varying case still lacks an internal displayed composition lift. |
-| `DIRECT-MIXED-SECTION-ROOT-1K` | proposal frozen under D-DTTLF-USABILITY-051; decision pending | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050 | Add one canonical runtime-validated open-section classifier view and two recursively consumable section-root leaves for `S[k](a)` and `b[k]`. Reuse `Terminal_funcd`, `Functor_catd_const_funcd`, and generic displayed composition. Add no kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd`. |
+| `DIRECT-MIXED-SECTION-ROOT-1K` | approved under D-DTTLF-USABILITY-051; implementation dependency-ready | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050; proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141`; separate review under standing unattended delegation | Add one canonical runtime-validated open-section classifier view and two recursively consumable section-root leaves for `S[k](a)` and `b[k]`. Reuse `Terminal_funcd`, `Functor_catd_const_funcd`, and generic displayed composition. Add no kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd`. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3860,6 +3860,29 @@ current three-binder mixed telescope. It would not close the independently
 measured constant-middle composition, arbitrary context/variance, or
 transformation-introduction questions.
 
+### Separate D-DTTLF-USABILITY-051 review result
+
+Proposal checkpoint
+`51c1c4ba60b4e6858d38a714c5b5bcb3ba176141` is approved exactly as frozen.
+The checkpoint changes only this living plan and the handoff and descends
+cleanly from final-green D-050. Separate review confirms that the active
+runtime already contains the `Functor_catd` fibre-classifier reduction used
+by the bounded category-object reifier, and that `Terminal_funcd`, dependent
+sections, direct weakening, and generic displayed composition are already in
+the selected TypeScript profile. No Lambdapi or transfer acquisition is
+needed.
+
+The review also confirms both retained boundaries. The ordinary
+`Const_func_func` projection rules are unnecessary for elaborating or checking
+the proposed section-root terms and remain excluded. The kernel has ordinary
+`Functor_comp_pair_func` but no displayed lift of it, so the
+constant-middle two-varying case cannot be folded into D-051 by analogy.
+
+No immediate human correction superseded the frozen proposal. Under the
+standing unattended delegation, with immediate human supersession,
+implementation is authorized only for the ten numbered TypeScript-only
+D-051 items.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -4073,14 +4096,19 @@ capped base-arrow action, whole full action, and a higher-cell application are
 tested; complete TypeScript-only downstream normalization is an input to the
 next read-only audit, not evidence against the direct owner or binder.
 
-The next dependency-ready row after the final D-050 checkpoint is the
-zero-semantic-delta `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` audit. Reassess
-`S[k](a)`, fully constant bodies, the qualified constant-middle two-varying
-case, and the measured ordinary-weakening runtime-transfer boundary before
-freezing at most one successor. Preserve direct introduction as the
-surface/compiler invariant. Do not implement arbitrary contexts,
-unrestricted variance or `:^nd`, curry promotion, text/browser parity, or
-remote Git effects during that audit.
+Treat `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` as read-only complete. It found
+that `S[k](a)` needs one runtime-validated open-section classifier view while
+`b[k]` needs one zero-local recursive root; both lower through already-active
+section/terminal/direct-weakening/composition owners. Treat
+`DIRECT-MIXED-SECTION-ROOT-1K` / D-DTTLF-USABILITY-051 as separately
+reviewed-approved from proposal checkpoint
+`51c1c4ba60b4e6858d38a714c5b5bcb3ba176141` under the standing unattended
+delegation. Its TypeScript-only ten-item scope is the next dependency-ready
+implementation. Preserve direct introduction as the surface/compiler
+invariant. Do not acquire ordinary-weakening projections, change the kernel
+or transfer graph, implement constant-middle composition, arbitrary
+contexts, unrestricted variance or `:^nd`, curry promotion, text/browser
+parity, or remote Git effects in that tranche.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -4099,6 +4127,15 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-051 approved exactly as proposed.**
+  Proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141` is a clean
+  documentation-only descendant of final-green D-050. Separate review
+  confirms that the required section, terminal, direct-weakening,
+  composition, and canonical fibre-reification owners are already present.
+  Under the standing unattended delegation, only the ten-item TypeScript-only
+  section-root closure is authorized; constant-middle composition, ordinary
+  weakening runtime acquisition, kernel/transfer edits, curry, broader
+  contexts/variance, and remote effects remain excluded.
 - **2026-08-01 — D-DTTLF-USABILITY-050 kernel and TypeScript implementation
   final-green.** Kernel checkpoint
   `c1890373ab93aa155336187e72b6c421c74b7e81` contains exactly the direct

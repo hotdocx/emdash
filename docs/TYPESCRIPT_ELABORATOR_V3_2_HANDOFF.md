@@ -179,8 +179,10 @@
 > `S[k](a)` first exposes an overly generic open-section classifier view,
 > while `b[k]` reaches the recursive factorer; both derive through existing
 > section, `Terminal_funcd`, direct weakening, and composition owners. The
-> TypeScript-only `DIRECT-MIXED-SECTION-ROOT-1K` successor is frozen under
-> D-DTTLF-USABILITY-051 for separate review. It adds no kernel/transfer
+> TypeScript-only `DIRECT-MIXED-SECTION-ROOT-1K` successor is separately
+> reviewed-approved under D-DTTLF-USABILITY-051 from proposal checkpoint
+> `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141` and is dependency-ready. It
+> adds no kernel/transfer
 > semantics and keeps constant-middle varying composition, larger contexts,
 > unrestricted variance, and `lambda^nd` separate.
 > The completed mixed-mode telescope plan
