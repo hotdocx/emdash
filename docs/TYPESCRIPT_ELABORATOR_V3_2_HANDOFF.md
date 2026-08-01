@@ -131,13 +131,23 @@
 > structural completeness: the first measured missing ordinary-DTT case is
 > inner weakening, `lambda^n k. lambda^f c. lambda^f a. H[c]`; qualified
 > varying application, larger contexts, and unrestricted `:^nd` also remain
-> open. The next dependency-ready row is the read-only
-> `DIRECT-MIXED-STRUCTURAL-BASIS-0I` owner/variance audit frozen as
-> D-DTTLF-USABILITY-049 at proposal checkpoint
-> `8d055469cc5e5178940cf887598ae9d289c6117e` and separately approved only
-> as a read-only audit under the standing unattended delegation. It must
-> search and probe internal owners before any semantic edit and must not make
-> total-context curry a binder prerequisite.
+> open. The separately approved read-only
+> `DIRECT-MIXED-STRUCTURAL-BASIS-0I` / D-DTTLF-USABILITY-049 audit is now
+> complete with zero active semantic delta. Its occurrence matrix finds one
+> first structural gap: direct `H[c]` needs
+> `Functor_catd_const_funcd : B -> Functor_catd A B`. The owner-position
+> point/full/capped candidate is quiet-green at object, inner-arrow,
+> base-arrow, genuine higher-cell, and generic internal-action consumers,
+> with unchanged 1,079/159 warnings and zero strict-audit findings. Existing
+> section plus `Terminal_funcd` composition derives the outer-only and fully
+> constant semantic cases. An exact negative-Sigma-curry alias typechecks but
+> does not produce the selected whole-fibre/arrow normal forms; it remains
+> auxiliary. The next proposed row is `DIRECT-MIXED-WEAKENING-1J`, frozen as
+> H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
+> D-DTTLF-USABILITY-050. Decision is pending; no active kernel, TypeScript,
+> transfer, or test edit is yet authorized by that proposal. Direct nested
+> introduction remains fundamental and does not require curry or a hybrid
+> total-context route.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

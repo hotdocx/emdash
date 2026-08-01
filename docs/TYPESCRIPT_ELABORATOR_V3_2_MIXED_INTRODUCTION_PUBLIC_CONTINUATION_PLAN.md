@@ -195,6 +195,18 @@ Its exact D-DTTLF-USABILITY-049 proposal checkpoint is
 below approves only that read-only audit under the standing unattended
 delegation, with immediate human supersession.
 
+That audit is now complete with zero active semantic delta. It confirms the
+direct nested binder as the fundamental construction and selects displayed
+structural weakening—not curry—as the smallest missing owner. An owner-position
+`Functor_catd_const_funcd` candidate is quiet-green at its object, inner-arrow,
+full/capped base-arrow, genuine higher-cell, and generic internal-action
+consumers; it adds zero warnings and zero strict-LHS findings. Existing
+terminal/section composition already derives the other unused-variable cases.
+The exact next vertical slice is frozen below as
+H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
+D-DTTLF-USABILITY-050. It is a proposal only; no active kernel, TypeScript,
+transfer, or test file has yet changed under that decision.
+
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
 That predecessor completed:
@@ -471,7 +483,8 @@ It deliberately avoids:
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` | read-only audit complete; one-owner direct-binder continuation selected | final-green D-047; measured non-conversion between product-of-mixed-functors and mixed-functor-into-product; active product and mixed-action owners | No existing active owner supplies the required global comparison. One `Functor_catd_product_funcd` distributor with point/full/capped projections is owner-position, quiet-green, strict-audit clean, and zero-warning-delta; its direct pair consumer computes on objects and inner arrows and retains internal base/higher action. No curry or `Product_catd` facade is involved. |
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | implemented and final-green at `d5ea9f5d3d296835608eec8f963f7fa5657f0005` under D-DTTLF-USABILITY-048; kernel checkpoint `d9f298ce2c3194adda8f68bd4654e484b33bfac4` | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Exactly one distributor and three projection rules are active and generically transferred. The existing direct factorization tree recursively lowers `typed-pair`, combines branches with existing `Product_pair_funcd`, and composes the distributor. Direct introduction remains fundamental; curry, facade, text/browser, and unrestricted-variance claims remain excluded. |
 | `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | read-only reassessment complete; no semantic delta | final-green D-048 and the user's renewed direct-binder invariant | Graduates arbitrary finite depth only for the recursive `leaf | source-map | target-map | pair` body algebra, alongside the predecessor's qualified finite Hom towers. Direct introduction is fundamental and curry-free. General structural constructor coverage, context arity, variance-valid varying application, and `:^nd` introduction remain separate. |
-| `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | approved read-only owner/variance audit under D-DTTLF-USABILITY-049; dependency-ready | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; proposal checkpoint `8d055469cc5e5178940cf887598ae9d289c6117e`; separate review under standing unattended delegation | Inventory both/outer-only/inner-only/neither occurrence cases and varying application against existing internal owners. Probe only genuinely absent owners at their active source position, including the candidate mixed weakening `B -> Functor_catd A B`; require object, base-arrow, and higher action. Select at most one later semantic gate without making curry a surface or compiler prerequisite. |
+| `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | complete; zero active semantic delta; direct weakening selected | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; approved D-DTTLF-USABILITY-049; owner-position/direct-versus-curry probes | The occurrence matrix distinguishes structural weakening from variance-valid varying application. `Functor_catd_const_funcd` is quiet-green with point/full/capped and higher action; terminal/section composition derives the other unused-variable cases. Curry remains auxiliary. |
+| `DIRECT-MIXED-WEAKENING-1J` | D-049 audit complete; exact D-DTTLF-USABILITY-050 proposal frozen; decision pending | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; active structural-logic report; quiet-green owner-position candidate with zero warning/audit delta | Promote one direct `Functor_catd_const_funcd` owner with point/full/capped action, transfer it generically, and add the recursive outer-value-only leaf `H[c]`. Keep terminal-derived outer weakening/constant bodies and qualified two-varying composition as separately measured later frontend/semantic rows. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3424,6 +3437,244 @@ standing unattended delegation, with immediate human supersession, only the
 read-only searches, bounded temporary probes, owner/derivation matrix, and at
 most one separately frozen successor proposal may proceed.
 
+## `DIRECT-MIXED-STRUCTURAL-BASIS-0I` audit result
+
+The audit confirms the user's governing correction more strongly than the
+earlier possible “hybrid” language did:
+
+```text
+lambda^n k. lambda^f c. lambda^f a. body
+  : Functord_cat C (Functor_catd A B)
+```
+
+is itself the fundamental introduction form. A total-context section and a
+curry operation are neither user inputs nor semantic prerequisites of that
+binder. The active curry packages remain valid auxiliary constructions and
+comparison evidence; they do not determine the direct compiler architecture.
+
+### Typed occurrence and constructor matrix
+
+Write `A : Catd(Op K)` and `B,C : Catd K`. “Outer” below means the positive
+local `c : C[k]`; “inner” means the negative-family local `a : A[k]`.
+
+| Body shape | Occurrence class | Variance/well-kindedness | Internal status |
+| --- | --- | --- | --- |
+| `F[c](a)` or the bound identity `c(a)` | both locals | well-kinded when `F : Functord C (Functor_catd A B)` | final-green direct eta/identity leaf |
+| `H[c]` | outer only; inner weakening | well-kinded for `H : Functord C B` | first genuine gap: needs `B -> Functor_catd A B` |
+| `S[k](a)` | inner only; outer weakening | well-kinded when `S` is a coherent section of `Functor_catd A B` | derives by precomposing `S` with existing `Terminal_funcd(C)`; frontend factoring remains absent |
+| `b[k]` | neither local | well-kinded when `b` is a coherent section of `B` | derive `b`, then direct inner weakening, then `Terminal_funcd(C)`; frontend factoring remains absent |
+| `fibrePair(left,right)` | recursive occurrences, including contraction | well-kinded branchwise | final-green recursive `Product_pair_funcd` plus `Functor_catd_product_funcd` |
+| fixed source/target maps around a child | preserves child occurrences | well-kinded only at the recorded opposite/covariant orientations | final-green recursive source and target action |
+| arbitrary `G[c](F[c](a))` | both varying subexpressions | not well-kinded in general: the middle family is positive for `F` and negative for `G` | reject rather than invent a same-spelling variance collapse |
+| `G[c](F[c](a))` through a constant middle category `X` | both varying subexpressions | well-kinded with `F : C -> Functor_catd(A,const_K X)` and `G : C -> Functor_catd(const_(K^op) X,B)` | feasible later case; no active displayed lift of `Functor_comp_pair_func` was found |
+| a value in a target `Transf_catd(...)` | any supported occurrence class | well-kinded because `Transf_catd(...) : Catd K` is an ordinary target-family instance | existing generic owners carry its internal action; synthesizing a fresh unrestricted `lambda^nd` body remains separate |
+
+This matrix separates three things previously conflated as “general mixed
+introduction”: recursively deep syntax, ordinary structural occurrence rules,
+and variance-specific application constructors. D-048 solved recursive depth
+for its algebra. The present first missing structural rule is weakening.
+Pointwise composition of two varying terms is a later constructor with its own
+variance condition, not evidence that the binder needs curry.
+
+### Existing-owner and derivation audit
+
+The active kernel already provides:
+
+- ordinary `Const_func_func`, including ordinary object and arrow action;
+- `Terminal_funcd`, constant sections, section pullback, and generic displayed
+  composition;
+- `Product_pair_funcd` and the final-green direct product distributor;
+- both `Functor_catd` family actions and its `Unit_prof`-owned mixed action;
+- the generic `fapp*`/`tapp*`/`fdapp1_int_cell` action ladder; and
+- the isolated D-040/D-042 curry packages.
+
+Lexical search and a bounded type-aware `type >= Functor_catd` search find no
+existing direct map
+
+```text
+B -> Functor_catd A B.
+```
+
+A second type-aware product/functor-family search finds only `Eval_funcd` and
+the already-active product distributor, not the constant-middle pointwise
+composition lift described in the matrix. No new composition owner is selected
+by this audit.
+
+The outer-only and fully constant derivations were checked in the temporary
+full-file probe, not merely inferred on paper. For a coherent section
+`S : 1_K -> Functor_catd A B`, generic displayed composition gives
+
+```text
+S o Terminal_funcd(C) : C -> Functor_catd A B.
+```
+
+For `b : 1_K -> B`, composing the selected direct weakening after `b`, then
+precomposing with `Terminal_funcd(C)`, gives the neither-local case. These
+facts rule out additional kernel primitives for those two rows; they do not
+claim that the current direct TypeScript factorer already recognizes their
+surface terms.
+
+### Owner-position direct weakening probe
+
+The active structural-logic report had already anticipated the primary map:
+
+```text
+Functor_catd_const_funcd(A,B)
+  : Functord B (Functor_catd A B)
+
+Functor_catd_const_funcd(A,B)[k]
+  = Const_func_func(A[k],B[k]).
+```
+
+An untracked full-file copy places exactly that injective owner immediately
+after ordinary `Const_func_func`, with three rules:
+
+1. the point projection is the whole ordinary `Const_func_func`;
+2. full base action composes the whole `B` action over `Hom_K(x,y)` with
+   covariant postcomposition by the target-fibre constant-functor embedding;
+3. capped base action is the corresponding whole composite at `p : x -> y`.
+
+The candidate does not manually attach a naturality square. At a base arrow,
+the negative action of `A` disappears for the mathematically correct internal
+reason: precomposing a constant functor remains constant. Target transport is
+the existing `B[p]`. The full rule returns a functor over `Hom_K(x,y)`, so a
+genuine `theta : Hom(Hom_K(x,y),p,p')` consumes it through generic
+`fapp1_fapp0`; it is not capped at an object or first arrow. Generic
+`fdapp1_int_cell` also forms without a new constructor-specific cell rule.
+
+The temporary assertions check:
+
+- the whole fibre functor and its object value;
+- inner-arrow action reducing to the identity at the selected `b`;
+- capped base action reducing pointwise to `B[p](b)`;
+- genuine next-cell action of the full base functor;
+- internal displayed-action formation; and
+- the composed `H[c]`, outer-weakened section, and fully constant derivations.
+
+The bounded quiet full-file check is green. Warning comparison is exactly the
+active baseline—1,079 unjoinable critical pairs and 159 replaceable pattern
+variables—and no warning mentions the candidate. The strict inferred-slot
+audit reports zero unreviewed clauses, retaining the existing 53 annotations
+across 33 intentional clauses.
+
+### Transparent/curry comparison
+
+Mathematical existence alone does not force a new opaque principle. The audit
+therefore also checked the exact transparent alias
+
+```text
+neg_sigma_functord_curry_funcd
+  (id_funcd(mix_context_family(A,B)))
+  : Functord B (Functor_catd A B).
+```
+
+That auxiliary D-042-derived term typechecks and computes after complete
+`k/b/a` application. It therefore remains a legitimate comparison
+presentation. It does **not** normalize at the whole fibre-functor level to
+`Const_func_func`, and its inner-arrow action does not normalize to the
+ordinary constant identity action. Making it the primary implementation would
+replace a direct structural normal form with the larger negative-Sigma curry
+action and make an optional later package foundational.
+
+No non-curry transparent derivation from the earlier active owners was found.
+The selected direct owner is consequently not a new outer-LF semantic
+principle; it is a stable computational owner for the already-valid displayed
+structural map. This is the same policy used by the active ordinary
+`sym_func_func`/`diag_func_func` layer: product/curry presentations may be
+comparison theorems, but are not the primary binder normal form.
+
+### Audit conclusion
+
+The architecture is feasible and remains direct. One small structural owner
+closes the first ordinary-DTT occurrence gap, and existing generic composition
+then lifts it through arbitrary already-coherent shapes. The audit does not
+select mixed curry, a total-context frontend, `Product_catd`, a global family
+equality, external coherence, or a second AST.
+
+The next exact gate intentionally implements only `H[c]` and its recursive
+pair/target-map consumers. The already-derived `S[k](a)` and `b[k]` cases need
+a later frontend factoring gate, not another kernel symbol. Constant-middle
+two-varying composition, displayed exchange/contraction owners, larger mixed
+contexts, and unrestricted `lambda^nd` remain separately measured work.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
+## D-DTTLF-USABILITY-050
+
+Approve the following exact bounded direct-weakening vertical slice:
+
+1. Add exactly one active Lambdapi owner,
+   `Functor_catd_const_funcd`, immediately after ordinary
+   `Const_func_func`, with the audited signature
+   `Functord B (Functor_catd A B)` for `A : Catd(Op K)` and `B : Catd K`.
+   Treat it as the primary direct structural owner, not as an alias for either
+   curry package.
+2. Add exactly three runtime rules: point `tapp0_fapp0` to the whole
+   `Const_func_func(A[k],B[k])`, full `tapp1_func` to the audited whole
+   target-transport/postcomposition functor, and capped `tapp1_fapp0` to its
+   value at `p`. Add no constructor-specific identity, composition,
+   naturality, or `fdapp1_int_cell` rule.
+3. Add durable Lambdapi checks for whole point and object computation,
+   inner-arrow identity action, capped base transport, genuine higher-cell
+   iteration of the full action, generic internal displayed-action formation,
+   the composed `H[c]` consumer, and relevant non-collapse. Keep the
+   curry-derived presentation as comparison evidence rather than an active
+   bridge or equality rule.
+4. Transfer exactly the one declaration and three runtime rules through the
+   generic LF declaration/runtime compilers after the final-green D-048
+   profile. Reuse the already-transferred `Const_func_func`,
+   `comp_cat_cov_func`, `Functor_catd`, generic action, fibre, Hom, and
+   composition owners. Add no intrinsic Core node and no owner-specific
+   checker/evaluator branch.
+5. Extend the existing recursive direct factorization with one structural
+   leaf for
+
+   ```text
+   H[c]
+   ```
+
+   where `H : Functord C B` is closed and coherent, the bound outer token is
+   used exactly once, and the bound inner token is unused. Lower it by
+   composing `Functor_catd_const_funcd(A,B)` after `H`. Do not manufacture a
+   total-context section or invoke D-040/D-042.
+6. Let existing recursive target-map and pair cases consume the new leaf, so
+   `G(H[c])` and pairs mixing `H[c]` with an eta branch use the same algorithm.
+   Do not add a body-depth table, a whole-body recognizer, or duplicated
+   source/target/pair lowering.
+7. Keep the public API and interpretation unchanged:
+   `mixedDisplayedFunctorLambda` remains the TypeScript presentation of
+   `lambda^n k. lambda^f c. lambda^f a. body`. Update its immutable occurrence
+   evidence to record the qualified zero inner-use case without weakening
+   escaped-token, base, family, or polarity checks.
+8. Add focused TypeScript tests and a runnable assertion for direct `H[c]`, a
+   target-mapped weakening, and a recursively paired eta/weakening body. Check
+   emitted Core for the direct weakening plus generic composition and for the
+   absence of `mixed_curry`, factorized curry, total-context section, cast,
+   coercion, or external equation. Exercise object, inner-arrow, base-arrow,
+   and higher-action behavior through the generic transferred runtime.
+9. Retain `S[k](a)`, fully constant bodies, the qualified constant-middle
+   two-varying application, arbitrary larger contexts, and unrestricted
+   `lambda^nd` as fail-closed or unexposed cases. This gate records their
+   semantic feasibility but does not silently implement them.
+10. Synchronize only mechanically stale active-kernel digest pins exposed by
+    the authorized semantic edit. Do not reinterpret digest synchronization
+    as a transfer-scale or parser/browser claim.
+11. Follow the nested Lambdapi SOP once for the promoted kernel/check tranche:
+    bounded focused checks, `make check`, warning comparison, strict LHS
+    audit, catalog/TOC/health synchronization, and one `make ci`. For
+    TypeScript run focused transfer/direct-binder tests, typecheck, lint, and
+    one `check:ts` because shared runtime/profile and surface behavior change.
+    Carry that evidence forward; do not run `check:all` or repeat an unchanged
+    aggregate for documentation synchronization.
+12. Synchronize the work/decision ledgers and handoff, stage only the bounded
+    kernel/check/catalog/health, transfer/surface/tests, mechanical digest,
+    and document files, and make local rollback-safe checkpoints. Preserve
+    unrelated ignored experiments. Do not push, merge, rebase, reset, amend,
+    remove branches/worktrees, publish, or begin text/browser parity.
+
+This proposal adds the first missing direct structural constructor. It does
+not make curry a prerequisite and does not graduate arbitrary categorical
+lambda synthesis, general variance, arbitrary contexts, or `:^nd` coherence.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -3586,14 +3837,20 @@ general structural completeness: inner/outer/constant weakening, qualified
 two-varying application, larger mixed contexts, and unrestricted `:^nd`
 introduction remain open.
 
-The next dependency-ready row is the separately reviewed read-only
-`DIRECT-MIXED-STRUCTURAL-BASIS-0I` audit frozen as D-DTTLF-USABILITY-049 at
-`8d055469cc5e5178940cf887598ae9d289c6117e`.
-Inventory occurrence cases and existing owners, probe only genuinely absent
-owners at their active source position, require internal object/base/higher
-action, and freeze at most one later semantic gate. Preserve direct
-introduction as the surface/compiler invariant and do not preselect either a
-new primitive or the auxiliary curry route.
+Treat the separately reviewed `DIRECT-MIXED-STRUCTURAL-BASIS-0I` /
+D-DTTLF-USABILITY-049 audit as complete with zero active semantic delta. Its
+matrix, existing-owner search, direct owner-position probe, terminal/section
+derivations, constant-middle variance qualification, and auxiliary
+negative-Sigma-curry comparison are frozen above.
+
+The next dependency-ready row is `DIRECT-MIXED-WEAKENING-1J`, but only after
+separate review of H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
+D-DTTLF-USABILITY-050. Preserve direct nested introduction as the
+surface/compiler invariant. The proposed slice promotes one
+`Functor_catd_const_funcd` point/full/capped package and the recursive `H[c]`
+leaf; it does not authorize the terminal-derived outer/constant frontend,
+constant-middle varying composition, arbitrary contexts, unrestricted
+`:^nd`, curry promotion, text/browser parity, or remote Git effects.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -3612,6 +3869,21 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — `DIRECT-MIXED-STRUCTURAL-BASIS-0I` audit complete and
+  D-DTTLF-USABILITY-050 frozen.** The direct-binder occurrence matrix finds
+  one first structural gap: `H[c]` needs
+  `Functor_catd_const_funcd : B -> Functor_catd A B`. Its owner-position
+  point/full/capped candidate is quiet-green at object, inner-arrow,
+  base-arrow, genuine higher-cell, and internal-action consumers, with the
+  unchanged 1,079/159 warning inventory and zero strict-audit findings.
+  Existing `Terminal_funcd`/section composition derives the outer-only and
+  fully constant semantic cases. Arbitrary two-varying application remains
+  ill-kinded; the constant-middle specialization is feasible but lacks a
+  separate displayed composition lift. An exact negative-Sigma-curry alias
+  typechecks and reaches complete points but does not provide the selected
+  whole-fibre/arrow normal forms, so curry remains auxiliary. D-050 proposes
+  one direct owner/three rules, generic transfer, and only the recursive
+  `H[c]` frontend leaf; decision is pending.
 - **2026-08-01 — D-DTTLF-USABILITY-049 approved exactly as a read-only
   audit.** Separate review of proposal checkpoint
   `8d055469cc5e5178940cf887598ae9d289c6117e` confirms a two-document-only
