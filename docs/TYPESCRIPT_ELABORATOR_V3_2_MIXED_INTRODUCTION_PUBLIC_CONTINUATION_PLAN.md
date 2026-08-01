@@ -377,9 +377,10 @@ It deliberately avoids:
 | `MIXED-CURRY-1B` | final-green at `bed022fdab970109163da8415726a5bcc1ab5a89` | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; approved D-040; exact owner-position and active CI evidence | Exactly one Lambdapi-first mixed-curry operation package is active: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. It adds no Hom-action duplicate and leaves `Unit_prof` unchanged. |
 | `MIXED-INTRODUCTION-TS-1C` | D-041 approved historically, then human-superseded before implementation; paused | final-green `MIXED-CURRY-1B` at `bed022fdab970109163da8415726a5bcc1ab5a89`; D-041 proposal `249895de44c005dd64a00bbca13f5d7fb6b1097c`; later contextual-binder clarification | Preserve the measured transfer closure, but do not implement its exact-section-leaf frontend as the claimed binder architecture. Re-audit it only after the reusable contextual curry basis is selected. |
 | `CONTEXTUAL-CURRY-0B` | complete; ignored owner-position candidate quiet-green, warning-measured, and strict-audit clean | final-green D-039/D-040; user clarification on direct recursive binders and rollback-safe auxiliary retention | Surface syntax is separated from total-context section semantics. The audit qualifies positive Sigma curry, negative-family curry, their factorized point/action route, the stable family normal form, generic next-Hom formation, and the exact positive-identity normal-form seam. |
-| `CONTEXTUAL-CURRY-1A` | final-green in the current D-042 implementation checkpoint | completed `CONTEXTUAL-CURRY-0B`; corrected proposal `2f54eef57d2cfa9a454909b5d8adc6858ecdb30c`; separate review | Exactly eight declarations, twelve rules, one existing alias-body migration, and twenty durable checks are active. D-040 remains the checked specialized facade. This is rollback-safe auxiliary evidence, not a direct-binder prerequisite or surface API. |
-| `DIRECT-MIXED-INTRODUCTION-0C` | dependency-ready read-only architecture audit; independent of whether D-042 is retained | final-green D-040 and auxiliary D-042; current recursive contextual elaborator; user's direct-introduction clarification | Audit the fundamental direct recursive introduction `lambda^n k. lambda^f c. lambda^f a. t` without assuming a surface curry API or making the D-042 package a prerequisite. Existing total-section and curry owners are optional internal routes to compare, not the required architecture. |
-| `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative direct recursive-binder and full-action evidence | corrected TypeScript successor to the direct-introduction audit | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
+| `CONTEXTUAL-CURRY-1A` | final-green at `b6f803e37ec9c1a4241ab95c45a4fc8a8d992a89` | completed `CONTEXTUAL-CURRY-0B`; corrected proposal `2f54eef57d2cfa9a454909b5d8adc6858ecdb30c`; separate review | Exactly eight declarations, twelve rules, one existing alias-body migration, and twenty durable checks are active. D-040 remains the checked specialized facade. This is rollback-safe auxiliary evidence, not a direct-binder prerequisite or surface API. |
+| `DIRECT-MIXED-INTRODUCTION-0C` | complete; direct no-curry eta/mapped-body routes audited; ignored owner-position probes quiet-green with zero warning delta | final-green D-040 and auxiliary D-042; current recursive contextual elaborator; user's direct-introduction clarification | The fundamental direct recursive introduction `lambda^n k. lambda^f c. lambda^f a. t` does not require a surface or compiler-mandatory curry. Exact eta bypasses curry; recursive covariant target application factors through `Functor_catd(A,-)` action. One missing existing-owner fibre projection is isolated below. |
+| `DIRECT-MIXED-INTRODUCTION-1D` | proposed under D-DTTLF-USABILITY-043; implementation requires separate review | completed `DIRECT-MIXED-INTRODUCTION-0C`; one-rule zero-warning-delta candidate; existing mixed-action and recursive contextual infrastructure | Add exactly one existing-owner runtime projection, transfer it generically, and expose direct typed TypeScript binders for exact eta plus finite recursive covariant target application. Transfer or invocation of D-040/D-042 is forbidden in this gate. |
+| `MIXED-VARIANCE-GRADUATE-1E` | blocked on representative direct recursive-binder and full-action evidence | corrected TypeScript successor to `DIRECT-MIXED-INTRODUCTION-1D` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -1871,6 +1872,227 @@ factorized primitive, broad identity collapse, or unrestricted-variance claim
 was added. This evidence closes only the auxiliary experiment. The next live
 row is the independent `DIRECT-MIXED-INTRODUCTION-0C` audit.
 
+## Direct Mixed Introduction Audit And Corrected Architecture
+
+The user's intended introduction is fundamental surface syntax:
+
+```text
+lambda^n k. lambda^f c. lambda^f a. t
+  : Functord_cat C (Functor_catd A B),
+
+A : Catd(Op K),  B,C : Catd K.
+```
+
+An end user must not supply a total-context section, invoke `mixed_curry`, or
+choose between a curry and non-curry API. The auxiliary D-040/D-042 packages
+remain independently useful semantic experiments and rollback evidence, but
+they do not define this surface binder and are not prerequisites of its first
+direct implementation.
+
+This statement is compatible with the mathematical fact that a future body
+grammar may internally factor some branches through a transposition owner.
+The architectural requirement is that contextual elaboration is recursive and
+classifier-directed, and that any such internal route is selected by the
+compiler rather than exposed as an end-user distinction. The present gate
+proves a stronger first fact: two representative branches need no curry route
+at all.
+
+### Existing direct evidence
+
+The active TypeScript surface already has the relevant implementation shape:
+
+- `displayedFunctorLambda` recursively factors identity, eta, and finite
+  closed displayed-functor chains;
+- `displayedContextLambda` recursively compiles slots, pairs, supported
+  evaluation, and closed displayed-functor application;
+- the mixed profile preserves `Functor_catd(A,B)` as a stable internal
+  classifier with negative `A` and positive `B` action owned by the kernel;
+  and
+- `nestedDisplayedFunctorLambda` proves an exact-eta branch can eliminate
+  nested binder syntax back to an already coherent subject without any curry.
+
+The last item is presently specialized to the canonical `Hom_catd` family.
+It is evidence for the factoring method, not sufficient general syntax for
+`Functor_catd(A,B)`.
+
+For a general coherent
+
+```text
+F : Functord_cat C (Functor_catd A B),
+G : Functord_cat B D,
+```
+
+the existing constructor action gives a direct recursive lowering:
+
+```text
+post_A(G)
+  = fapp1_fapp0(Functor_catd_fapp0_func(A),G)
+  : Functord_cat(Functor_catd A B,Functor_catd A D),
+
+post_A(G) o F
+  : Functord_cat C (Functor_catd A D).
+```
+
+This is the internally coherent meaning of
+
+```text
+lambda^n k. lambda^f c. lambda^f a. G[k](F[k](c)(a)).
+```
+
+It composes two already coherent constructions. No pointwise function is
+promoted, and no external naturality square is requested.
+
+### Measured projection gap
+
+The unmodified active kernel accepts `post_A(G)` and its composition with
+`F`. Its generic action is therefore already sound and iterable. A focused
+negative probe also shows that, before the candidate rule, projecting
+`post_A(G)` at `k` and consuming a fibre functor `H` does not compute to
+ordinary fibrewise postcomposition. This is a runtime projection gap, not an
+introduction or coherence gap.
+
+Two owner-position full-file candidates were compared:
+
+1. project `post_A(G)[k]` to the whole `hom_postcomp_func`; or
+2. wait until it consumes `H` and project the result to the already active
+   `hom_postcomp_fapp0` head.
+
+Both candidates pass the complete quiet kernel file and preserve the current
+warning inventory exactly at 1,079 unjoinable critical pairs and 159
+replaceable pattern variables. The second is selected because it is narrower
+and its owner is already present in the TypeScript transfer closure. Although
+the rule consumes `H`, it does **not** cap computation at an element: for
+`A[k],B[k],D[k] : Cat`, `hom_postcomp_fapp0(...,G[k],H)` is itself the whole
+functor `G[k] o H`. Existing generic `fapp0` and `fapp1_fapp0` then compute its
+object and arrow action. The owner-position probe confirms both
+
+```text
+(post_A(G) o F)[k](c)(a)
+  = G[k](F[k](c)(a))
+```
+
+and the corresponding action on `alpha : a -> a'`. Thus this candidate does
+not introduce the non-iterability problem of a raw point-only head.
+
+### TypeScript factoring design
+
+The corrected direct API will bind the positive outer fibre object `c` and
+negative-family fibre object `a` as scoped construction tokens. Applying
+`F : Functord C (Functor_catd A B)` first to `c` is classifier-refined to an
+indexed fibre functor `A[k] -> B[k]`, because its target has the canonical
+kernel-owned `Functor_catd(A,B)` head. This is not a local convertibility
+engine or an externally supplied coherence proof: the refinement recognizes
+one stable active owner and the final generic checker validates the emitted
+explicit Core.
+
+The first recursive grammar is deliberately small but structural:
+
+```text
+mixed-body ::= F[c](a)
+             | G(mixed-body)
+```
+
+where `F` and each `G` are closed, already coherent displayed functors with
+matching families. The factorer:
+
+1. returns `F` for the exact eta leaf;
+2. recursively factors the child of `G(child)`;
+3. maps the resulting mixed family through
+   `Functor_catd_fapp0_func(A)`; and
+4. composes the coherent results in `Catd_cat K`.
+
+Arbitrary finite target chains therefore use one algorithm and one canonical
+internal action. Unsupported leaves fail closed. A later gate may add
+independent source-side/contravariant cases, total-section leaves, or other
+internally factorable constructors; none is silently claimed by this first
+slice.
+
+## H-DTTLF-USABILITY-DIRECT-MIXED-INTRODUCTION-01 /
+## D-DTTLF-USABILITY-043
+
+Approve the following bounded direct-introduction vertical slice:
+
+1. Add exactly one active Lambdapi runtime rule at the existing
+   `Functor_catd_fapp0_func` constructor-action owner:
+
+   ```text
+   fapp0(
+     tapp0_fapp0(
+       fapp1_fapp0(Functor_catd_fapp0_func(A),B,D,G),k),
+     H)
+   ->
+   hom_postcomp_fapp0(id_Cat,A[k],B[k],D[k],G[k],H).
+   ```
+
+   Preserve inferred endpoints as wildcards where the owner-position probe
+   measured them as recoverable. Add no symbol, new action owner, family
+   equality, curry rule, or point-only beta.
+2. Add durable Lambdapi checks for the produced displayed functor, its fibre
+   functor result, triple-point beta, inner-arrow action, and one generic
+   base-arrow/full-action formation. Retain the relevant opposite-family and
+   whole-family non-collapse checks.
+3. Transfer the one new rule through a dedicated generic runtime fragment
+   layered after the existing mixed-action compilation. Reuse the already
+   transferred `Functor_catd_fapp0_func`, `hom_postcomp_fapp0`, generic
+   `fapp*`/`tapp*`, identity, fibre, and composition owners. Add zero
+   declarations, zero intrinsic Core cases, zero checker/evaluator branches,
+   and no D-040/D-042 transfer.
+4. Add one opt-in root profile for this direct slice and one typed API of the
+   following semantic shape (the exact TypeScript parameter grouping may be
+   adjusted mechanically without changing the contract):
+
+   ```text
+   mixedDisplayedFunctorLambda(
+     c : C,
+     a : A,
+     B,
+     (c,a) => body)
+     : Functord C (Functor_catd A B).
+   ```
+
+   The base `k` remains a hidden scoped natural index, as in the existing
+   displayed binders. Record immutable locally nameless evidence for all three
+   conceptual binders `k,c,a`; do not retain callbacks.
+5. Refine an open indexed application result to `indexed-functor` only when
+   its target family has the exact canonical `Functor_catd(K,A,B)` owner.
+   Route ordinary `apply` through that refined classifier, so the callback can
+   write the direct TypeScript analogue of `F[c](a)` rather than an ad hoc
+   mixed-application helper.
+6. Implement exactly the recursive grammar `F[c](a) | G(mixed-body)`. Exact
+   eta lowers to `F`. Each recursive target application lowers through
+   `Functor_catd_fapp0_func(A)` action followed by generic composition in
+   `Catd_cat K`. Require closed coherent `F/G`, exact family matching, one
+   occurrence of each scoped `c/a` in the eta leaf, and canonical base-index
+   sharing. Fail closed otherwise.
+7. Add focused tests and a runnable direct-TypeScript demo for:
+
+   - exact eta with no curry name in emitted Core;
+   - one mapped body `G(F[c](a))`;
+   - a finite chain `H(G(F[c](a)))`, proving genuine recursion rather than a
+     whole-body recognizer;
+   - executable object and inner-arrow computation through the transferred
+     projection;
+   - immutable locally nameless binder evidence; and
+   - wrong base, wrong negative family, unused/duplicated scoped token,
+     noncanonical classifier, and unsupported body failures.
+8. Follow the nested Lambdapi SOP for the one-rule semantic delta: use the
+   owner-position candidate, bounded quiet check, warning comparison, strict
+   LHS audit, catalog/TOC/health synchronization, and one CI. For TypeScript,
+   run focused tests, typecheck, lint, and one `check:ts` because shared
+   surface/program/runtime behavior changes. Do not run `check:all`, browser,
+   print, book, publication, or an unchanged second aggregate.
+9. Add no direct or hidden call to `mixed_curry_func`, the D-042 factorized
+   curry basis, or a compiler-generated total-context section in this gate.
+   Add no text syntax, browser/public promotion, arbitrary pointwise lambda,
+   source-side/contravariant mapping, arbitrary polarity alternation,
+   unrestricted `:^nd`, product facade, inverse curry, or whole-library scale
+   claim.
+
+This gate establishes a real direct recursive binder branch. It does not
+claim that every future body can avoid every internal transposition owner;
+that broader question remains constructor-by-constructor and must never be
+made an end-user syntax distinction.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -1940,26 +2162,23 @@ Treat D-041 at proposal checkpoint
 transfer evidence but human-superseded before implementation. Do not implement
 its exact-section-leaf frontend or create its proposed TypeScript module.
 
-Treat `CONTEXTUAL-CURRY-0B` as owner-position complete. The exact next gate is
-H-DTTLF-USABILITY-CONTEXTUAL-CURRY-01 / D-DTTLF-USABILITY-042, separately
-reviewed-approved at corrected proposal checkpoint
-`2f54eef57d2cfa9a454909b5d8adc6858ecdb30c`. Implement only that exact active
-kernel/check package and nested-SOP validation.
-This package is a bounded, rollback-safe auxiliary semantic experiment: it
-keeps a general opaque positive Sigma curry, a reusable negative-Sigma
-displayed curry, their ordinary factorized composition, and the retained
-D-040 specialized facade. It is not a prerequisite, surface API, or definition
-of binder introduction. Keep the end-user objective as direct recursive
-`lambda^n k. lambda^f c. lambda^f a. t`; a section over the total context may
-be an internal compilation form but is not a required user argument. Review
-the frozen `CONTEXTUAL-CURRY-1A` gate separately before active semantic edits;
-do not broaden its representative full-action/next-Hom consumer or canonical
-family normal-form decision.
-After the bounded D-042 implementation settles, continue with
-`DIRECT-MIXED-INTRODUCTION-0C`: independently audit the existing recursive
-contextual elaborator and do not assume that a direct binder must call or
-expose either curry owner. The corrected consumer may retain, bypass, or
-combine the auxiliary owners according to measured recursive behavior.
+Treat `CONTEXTUAL-CURRY-1A` as final-green at
+`b6f803e37ec9c1a4241ab95c45a4fc8a8d992a89`. It is a bounded,
+rollback-safe auxiliary semantic experiment: a general opaque positive Sigma
+curry, reusable negative-Sigma displayed curry, their ordinary factorized
+composition, and the retained D-040 specialized facade. It is not a
+prerequisite, surface API, or definition of binder introduction. Carry forward
+its complete green evidence and do not repeat its aggregate.
+
+Treat `DIRECT-MIXED-INTRODUCTION-0C` as audit-complete. The fundamental
+end-user construction remains direct recursive
+`lambda^n k. lambda^f c. lambda^f a. t`; exact eta and recursive covariant
+target mapping have now been measured without a curry or total-section route.
+The exact next gate is H-DTTLF-USABILITY-DIRECT-MIXED-INTRODUCTION-01 /
+D-DTTLF-USABILITY-043 frozen in this plan. Review it separately before active
+kernel or TypeScript semantic edits. If approved, implement only its one
+existing-owner projection and direct eta/finite-target-chain TypeScript
+factorer. Do not transfer or invoke D-040/D-042 in that frontend.
 Preserve the measured two-sided context,
 negative-A/positive-C polarity, canonical Hom classifier seam, stable
 `Functor_catd` head, Sigma/pullback non-collapse, and the existing
@@ -1984,13 +2203,35 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-043 frozen for separate review.** The
+  direct-introduction audit proves exact eta and the recursive mapped body
+  `lambda^n k. lambda^f c. lambda^f a. G[k](F[k](c)(a))` without D-040,
+  D-042, or a total-context section. The only measured runtime gap is one
+  fibre projection of the existing `Functor_catd_fapp0_func` action. Two
+  owner-position candidates are quiet-green and warning-neutral at 1,079/159;
+  the selected narrower rule returns the existing whole-functor
+  `hom_postcomp_fapp0` head after consuming `H`. The exact proposed vertical
+  slice is one zero-owner rule, zero-declaration generic transfer, canonical
+  indexed-functor refinement, and direct eta/finite target-chain TypeScript
+  factoring. Implementation requires a separate review.
+- **2026-08-01 — `DIRECT-MIXED-INTRODUCTION-0C` audit complete.** The
+  unmodified kernel accepts the coherent constructor action and its
+  composition with `F`; before the candidate, its concrete fibre application
+  deliberately remains non-convertible to ordinary postcomposition. The
+  selected one-rule full-file candidate computes both
+  `G[k](F[k](c)(a))` and its action on `a -> a'`, preserves generic base/higher
+  action, adds no warning, and introduces no curry call or owner. This settles
+  feasibility for the first genuinely recursive direct grammar, not
+  unrestricted bodies or variance.
 - **2026-08-01 — D-DTTLF-USABILITY-042 implementation final-green as an
   auxiliary experiment.** The active delta is the approved eight declarations,
   twelve rules, one transparent family-body migration, and twenty checks.
   Quiet checks, the measured 1,079/159 warning inventory, strict 0/53/33 LHS
   audit, fresh 1,769-check catalog and health report, source TOC, and one
-  complete 41-file CI are green. D-040 remains intact apart from the approved
-  family-alias body migration. This checkpoint neither makes D-042 a binder
+  complete 41-file CI are green. The exact checkpoint is
+  `b6f803e37ec9c1a4241ab95c45a4fc8a8d992a89`. D-040 remains intact apart
+  from the approved family-alias body migration. This checkpoint neither
+  makes D-042 a binder
   prerequisite nor selects a surface curry/hybrid architecture;
   `DIRECT-MIXED-INTRODUCTION-0C` is the next independent row.
 - **2026-08-01 — direct introduction remains fundamental; hybrid is only an
