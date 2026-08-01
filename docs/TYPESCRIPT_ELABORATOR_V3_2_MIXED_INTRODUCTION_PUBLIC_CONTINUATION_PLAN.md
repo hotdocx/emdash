@@ -33,9 +33,10 @@ contract split before publication. Its proposal checkpoint is
 below approves exactly that split under the standing unattended delegation,
 with human supersession. The corrected preset, optional-loader repair,
 Core-name contract split, proportional tests/build, and real-browser smoke are
-final-green; the coherent implementation checkpoint is pending below. Clean
-fast-forward publication is the next dependency-ready operation. After the
-corrected public slice is deployed, the next
+final-green at coherent implementation checkpoint
+`d08f2de65336dbe393864bc520fc8486ea365f99`. Clean fast-forward publication
+is the next dependency-ready operation. After the corrected public slice is
+deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -292,9 +293,9 @@ It deliberately avoids:
 | Row | Status | Dependencies | Exact deliverable |
 | --- | --- | --- | --- |
 | `PUBLIC-HOM-AUDIT-0A` | complete, then measurement-corrected by D-DTTLF-USABILITY-035; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract; reject both the slow mixed-nest fixture and the unavailable Transfd/profile combination; select the default-profile functor-category recursive-Hom witness; freeze truthful public wording. |
-| `PUBLIC-HOM-PRESET-1A` | final-green; checkpoint pending | `PUBLIC-HOM-AUDIT-0A`; approved D-034/D-035 | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
-| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | final-green with D-037 completion; checkpoint pending | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
-| `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | final-green; checkpoint pending | implemented D-036; approved D-037 | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
+| `PUBLIC-HOM-PRESET-1A` | final-green at `d08f2de65336dbe393864bc520fc8486ea365f99` | `PUBLIC-HOM-AUDIT-0A`; approved D-034/D-035 | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
+| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | final-green with D-037 completion at `d08f2de65336dbe393864bc520fc8486ea365f99` | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
+| `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | final-green at `d08f2de65336dbe393864bc520fc8486ea365f99` | implemented D-036; approved D-037 | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
 | `PUBLIC-HOM-VALIDATE-1B` | final-green; evidence recorded below | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No repeated long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | dependency-ready after coherent implementation checkpoint and fresh fetch/ancestry checks | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
@@ -773,7 +774,8 @@ removal, or unrelated cleanup is authorized.
   contracts eliminate the browser-to-audit proposal cycle while remaining the
   sole source of transfer linkage names. The qualified Node higher-profile
   route remains green, and the browser reviewer chunk is approximately 17%
-  smaller uncompressed.
+  smaller uncompressed. The coherent implementation checkpoint is
+  `d08f2de65336dbe393864bc520fc8486ea365f99`.
 - **2026-08-01 — aggregate policy drift corrected proportionally.** The one
   required `check:ts` run completed the semantic corpus and found only three
   stale test assertions that demanded internal release jargon in polished
