@@ -246,10 +246,13 @@
 > and a bounded 6.4-second Lambdapi probe checks that the existing covariant
 > target action lifts through depth two and composes after an arbitrary outer
 > coherent subject without curry or a new owner. The exact TypeScript-only
-> `DIRECT-MIXED-NEGATIVE-TOWER-1P` / D-DTTLF-USABILITY-053 proposal is frozen
-> for separate review. It adds an arbitrary-finite tower API only for coherent
-> eta/bound identity and finite closed target maps. Source maps, pairs,
-> weakening, constant-middle lifting, sibling contexts, general polarity, and
+> `DIRECT-MIXED-NEGATIVE-TOWER-1P` / D-DTTLF-USABILITY-053 proposal at
+> `db49240fc77f308131636181e76021858cd99829` is now separately
+> reviewed-approved under the standing unattended delegation and is
+> implementation-ready. It adds an arbitrary-finite tower API only for
+> coherent eta/bound identity and finite closed target maps, using one
+> reusable outward target-lift helper. Source maps, pairs, weakening,
+> constant-middle lifting, sibling contexts, general polarity, and
 > `lambda^nd` broadening remain excluded. General `lambda^nd` body algebra
 > still ranks second because the existing direct eta and recursive vertical-
 > composition fragment is internally coherent.
