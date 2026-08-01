@@ -63,7 +63,8 @@
 > family domains `K` and `Op K`, extends the recursive direct grammar with
 > finite `L(source-argument)`, and neither exposes nor depends on curry. The
 > D-045 implementation and its D-DTTLF-USABILITY-046 opposite-Hom acquisition
-> correction are now final-green in the current coherent tranche. The active
+> correction are now final-green at
+> `a1f7aa5601b55fc4925a6dcefec699fb6038e67a`. The active
 > kernel adds one projection at the existing `Functor_catd_func` action; the
 > TypeScript runtime imports that projection plus the pre-existing generic
 > `Hom_cat(Op A,X,Y) -> Hom_cat(A,Y,X)` computation with zero declarations.
@@ -77,8 +78,7 @@
 > 81 pass/3 skip. The next dependency-ready row is the read-only
 > `DIRECT-MIXED-SOURCE-GRADUATE-1F` reassessment; it must preserve direct
 > nested binders as fundamental and may not make curry/hybrid a prerequisite.
-> The exact implementation checkpoint is recorded in the living plan's
-> decision ledger. The completed mixed-mode telescope plan
+> The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
 > runtime-normalized canonical classifier reification beginning with
