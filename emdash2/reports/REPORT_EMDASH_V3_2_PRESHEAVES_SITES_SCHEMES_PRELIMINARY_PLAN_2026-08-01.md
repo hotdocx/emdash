@@ -690,14 +690,19 @@ It is not part of the first site or scheme implementation tranche.
 
 ## 12. Standard-Library Module Layout
 
-Keep `emdash3_2.lp` unchanged for the first experiment. Follow the existing
-one-way module precedent:
+Keep mathematical site/algebra/scheme structures in one-way standard-library
+modules. The first presheaf experiments left `emdash3_2.lp` unchanged; the
+later PSSS-08a consumer justified only the generic theorem view
+`fapp1_id_path` beside the kernel's existing functor-action identity rule.
+That proof view adds no runtime rule and is reusable beyond presheaves. The
+current and planned module spine is:
 
 ```text
 emdash3_2_presheaves.lp
 emdash3_2_sieves.lp
 emdash3_2_sites.lp
 emdash3_2_commutative_algebra.lp
+emdash3_2_commutative_algebra_presheaves.lp
 emdash3_2_ringed_sites.lp
 emdash3_2_schemes.lp
 ```
@@ -715,7 +720,13 @@ kernel -> native equality evidence
 sieves + reusable Unit proposition evidence
   -> sites
 
-kernel + algebra
+kernel + presheaves + structured algebra + localization units
+  -> commutative-algebra presheaves
+
+sieves + commutative-algebra presheaves
+  -> invertibility-sieve assembly
+
+sites + invertibility sieves + selected sheaf/descent layer
   -> ringed sites
   -> schemes
 ```
@@ -2002,18 +2013,149 @@ Concrete fractions, powers, monomials, quotient syntax, positive-variable
 polynomial representations, and a general inductive declaration remain
 outside this tranche.
 
-### Phase PSSS-08 — Ringed sites and invertibility sieves
+### Phase PSSS-08 — Ring-valued presheaves, invertibility, and ringed sites
 
-Status: proposed after PSSS-05b through PSSS-07.
+This phase is now split so that the computational algebraic predicate does not
+wait for the independently blocked sheaf/descent package.
 
-- ring-valued presheaf/sheaf;
-- semantic `InvSieve`;
-- selected `D` comparison;
-- localization-over-`D(f)` descent comparison.
+#### PSSS-08a — Ring-valued presheaves and arrowwise invertibility
+
+Status: implementation candidate green through maintained aggregates, warning
+comparison, strict audits, catalog, health, and full integration CI on
+2026-08-01; included in the authorized local PSSS-08a checkpoint.
+
+The selected classifier is the transparent formula
+
+```text
+CommRingPsh_cat(K) = Functor_cat(Op_cat(K), CommRing_cat)
+CommRingPsh(K)     = Obj(CommRingPsh_cat(K)).
+```
+
+There is no new rigid `Psh_cat`-style owner in this tranche. The distinction is
+consumer- and representation-driven. Cat-valued `Psh_cat(K)` mediates a real
+boundary between the public presheaf category and the active directed-family
+representation `Catd_cat(Op(K))`; its rigid head preserves a recognizable
+public owner and recoverable base while its selected `Obj`/`Hom` projections
+compute through `Catd` and its narrow unifier controls the reducible opposite.
+The ring-valued classifier currently has one selected representation, the
+ordinary functor category itself, and every current consumer carries `K`
+explicitly. A second head would therefore have no demonstrated inversion or
+representation-independence consumer at this boundary. This does not forbid a
+future normal-form migration: if whole-sieve or ringed-site assembly needs a
+stable `CommRingPsh_cat` head, base recovery, or a second family
+representation, it may justify a rigid facade with explicit projections and a
+narrow comparison under the full audit.
+
+For `O : CommRingPsh(K)`, `f : V -> U`, and `s : |O(U)|`, the computational
+observations are
+
+```text
+comm_ring_psh_value(O,U)          = O[U]
+comm_ring_psh_restriction_hom(O,f)= O[f] : O(U) ->_CRing O(V)
+comm_ring_psh_restrict(O,f,s)     = O[f](s).
+```
+
+The last equation is a transparent definition applying the actual structured
+ring map. Generic `CommRing_cat` identity and composition still do not reduce
+on carrier elements. PSSS-08a therefore observes the two laws by explicit
+paths through the already selected pointwise ring-map comparisons:
+
+```text
+comm_ring_psh_restrict_id_path:
+  O[id_U](s) = s
+
+comm_ring_psh_restrict_comp_path:
+  O[f ∘ g](s) = O[g](O[f](s)).
+```
+
+The identity probe exposed an owner-order boundary. `id(Op(K))` normalizes to
+`id(K)` before a freshly formed `fapp1_fapp0` term can match the literal
+generic action-on-identity redex. Composition already had the abstract theorem
+`fapp1_comp_path`, which survives such specialization; identity did not. The
+minimal repair is the analogous rule-free kernel theorem `fapp1_id_path`,
+proved by reflexivity while its source category remains abstract. It records
+the existing strict rule and adds no presheaf-specific rewrite.
+
+The semantic support predicate is
+
+```text
+CommRingPshInvertibleAlong(O,s,f)
+  = CommRingUnitEvidence(O(V), O[f](s)).
+```
+
+It is proposition-valued by the existing unit-evidence theorem. If it holds at
+`f : V -> U`, structured-map preservation first produces unit evidence for
+the nested restriction along `g : W -> V`; the composite-restriction path then
+transports that evidence to the direct arrow `f ∘ g`. This is the precise
+one-cell downward-closure computation needed by the future support sieve.
+
+The lower-layer status of this consumer also corrects symbol ownership:
+`comm_ring_unit_transport_forward/backward` and
+`comm_ring_hom_preserves_unit` move unchanged from the iterated-localization
+comparison module to the base localization/unit module. They are generic
+operations on the unit classifier, now consumed independently by both
+iterated localization and presheaves. In particular, the inverse selected by
+`comm_ring_hom_preserves_unit(h,u)` reduces to `h(u^-1)`.
+
+The maintained reviewer uses the constant zero-ring presheaf. Every
+restriction is the generic structured identity; the selected identity path
+computes its carrier action on `tt`, and explicit zero-ring unit evidence then
+transports to every arrow. Thus the tranche has a nonempty executable model,
+not only formation checks. The candidate source has 14 transparent/theorem
+symbols and no rewrite or unification rule; the reviewer has 17 checks,
+including the two intentional negative generic carrier-computation boundaries.
+The green exploratory record is
+`logs/probes/psss08a_comm_ring_presheaf_invertibility-20260801-151336.log`.
+Maintained `make check` and `make examples` pass. The warning-enabled source
+log `logs/probes/emdash3_2_commutative_algebra_presheaves-20260801-153254.log`
+inherits exactly `1179 = 1020 + 159`; the new module, moved unit owners, and
+kernel strict audits have zero unreviewed candidates. The strict catalog is
+green at 1,874 checks across 74 areas with no unclassified checks. Health
+passes all 63 source/example targets in 410.967 seconds at source snapshot
+`sha256:63b1c75554b4360f042aabc955243ddc96bad42a9df1848be3fd42c61cd40b03`.
+Full integration CI passes all 63 Lambdapi targets in 548.573 seconds,
+followed by 39 Python tests, 5 document-registry tests, shell/source/header/
+reference lints, book evidence/typography/KaTeX/assembly checks, strict kernel
+audit, and fresh strict catalog verification. The candidate is included in
+the authorized local PSSS-08a checkpoint.
+
+#### PSSS-08b — Assemble the ordinary invertibility sieve
+
+Status: proposed after PSSS-08a; separate action/coherence gate.
+
+Package the arrowwise predicate as an actual `Sieve(K,U)` only after its
+`Path_cat` fibres and action over the full `Into_restr_cat(K,U)` have an
+owner-aligned construction. The PSSS-08a composite theorem supplies ordinary
+one-cell downward closure, but it does not yet supply all equality/higher-arrow
+action and coherence required by the active `HigherSieve`/`Catd` carrier. Do
+not fill that gap by declaring an opaque primitive family with ad hoc identity
+and composition rules.
+
+This is the concrete consumer gate for either:
+
+- a reusable, safely owner-aligned `CommRing_cat` carrier/element functor; or
+- a narrower semantic family constructor whose action is already inherited
+  from existing Sigma, path, and functor owners.
+
+Whichever route wins must make membership at a literal arrow reduce to
+`CommRingUnitEvidence(O(V),O[f](s))`, retain proposition-valued fibres, and
+reuse the PSSS-08a restriction computation. A type-correct sieve whose
+membership is opaque fails the computational acceptance criterion.
+
+#### PSSS-08c — Ringed sites, sheaves, and locality
+
+Status: proposed after PSSS-08b and the independent PSSS-05b descent gate.
+
+- package a CommRing-valued presheaf together with the selected sheaf datum;
+- relate the semantic invertibility sieve to the selected/locality structure;
+- formulate the selected `D` comparison; and
+- compare localization over `D(f)` with descent only after the chosen sheaf
+  interface has a nonvacuous model.
 
 ### Phase PSSS-09 — Zariski coverage
 
-Status: proposed after PSSS-08.
+Status: proposed after PSSS-07c and PSSS-08b; it need not wait for the
+independent PSSS-08c sheaf/descent package.
 
 - localization-generated cover family;
 - pullback stability;
@@ -2311,6 +2453,40 @@ consumer demonstrates that nontransitive unification requires it.
   sieve, localization comparison on carrier elements, or chart-overlap
   composition—and must keep theorem-level equalities explicit where runtime
   computation is neither owned nor justified.
+- **PSSS-D-050:** split PSSS-08 into arrowwise ring-presheaf invertibility,
+  whole ordinary-sieve assembly, and ringed-site/sheaf packaging. The first
+  layer depends only on presheaves and structured algebra; the last remains
+  gated by PSSS-05b. This lets computational `O[f](s)` and unit support advance
+  without falsely claiming descent or blocking Zariski coverage on sheafhood.
+- **PSSS-D-051:** define `CommRingPsh_cat(K)` transparently as
+  `Functor_cat(Op_cat(K),CommRing_cat)` at the current consumer boundary.
+  Unlike rigid `Psh_cat`, which mediates public presheaves versus the distinct
+  `Catd_cat(Op(K))` representation and needs controlled base recovery, the
+  current ring-valued API has one representation and no head-inversion
+  consumer. Expose values, structured restriction maps, and carrier
+  application by definitions; keep generic whole ring-map
+  identity/composition opaque and cross them only by the consumer-selected
+  pointwise paths. Reconsider a rigid facade only if PSSS-08b/08c supplies a
+  concrete stable-head, base-recovery, or representation-independence need;
+  treat that as an audited normal-form migration, not a cosmetic rename.
+- **PSSS-D-052:** add the generic rule-free theorem `fapp1_id_path` beside the
+  kernel's existing strict functor-action identity rule. Its abstract source
+  retains a proof across specialization to `Op_cat(K)`, where opposite
+  identity normalizes before the literal action redex can reform. This is a
+  theorem view of an existing owner, not a presheaf rewrite or new runtime
+  identity calculus.
+- **PSSS-D-053:** move unit path transport and structured-map preservation of
+  units from the iterated-localization comparison module to the base
+  localization/unit module. Their bodies and names are unchanged; the move
+  corrects ownership now that both iterated localization and ring-valued
+  presheaves are independent consumers. Preserve the explicit mapped-inverse
+  computation.
+- **PSSS-D-054:** promote only the arrowwise semantic support in PSSS-08a.
+  Its maintained zero-ring model proves support at every arrow, and its
+  composite restriction theorem proves one-cell downward closure. Do not call
+  it an `InvSieve` until a full `Into_restr_cat` action with proposition-valued
+  fibres is assembled through active owners; membership opacity or ad hoc
+  identity/composition rules would fail the computational criterion.
 
 ## 19. Side-Task Ledger
 
@@ -2331,8 +2507,10 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-07b | Iterated-localization comparison | Green through full integration CI; locally checkpointed | Inverse laws remain consumer-gated |
 | PSSS-07c | Finite/unimodular families and finite sums | Green through full integration CI; locally checkpointed | Relative radical/basic-open and geometric consumers remain gated |
 | PSSS-07d | Polynomial algebra universal property | Green through full integration CI; locally checkpointed | Positive-variable representation remains consumer-gated |
-| PSSS-08 | Ringed sites and invertibility sieve | Proposed | PSSS-05b and PSSS-07 |
-| PSSS-09 | Zariski coverage | Proposed | PSSS-08 |
+| PSSS-08a | CommRing-valued presheaves and arrowwise invertibility support | Green through full integration CI; locally checkpointed | PSSS-08b remains separately gated |
+| PSSS-08b | Whole ordinary invertibility-sieve assembly | Proposed | PSSS-08a plus owner-aligned `Into_restr_cat` action/coherence |
+| PSSS-08c | Ringed sites, selected sheaves, and locality | Proposed | PSSS-08b and PSSS-05b |
+| PSSS-09 | Zariski coverage | Proposed | PSSS-07c and PSSS-08b |
 | PSSS-10 | Slice sites and affine-basic-open comparison | Proposed | PSSS-09 |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Functor-of-points/qcqs comparison | Research boundary | PSSS-11 and representability audit |
@@ -2453,8 +2631,36 @@ PSSS-06b is successful when:
    package eta or broad outer-projection/inner-cut rule is added, and a
    negative check records that the generic identity projection is not falsely
    advertised as pointwise computation;
-6. the carrier functor remains outside the tranche unless a ring-valued
-   presheaf consumer supplies a stable action normal form; and
+6. the carrier functor remains outside the tranche until a whole-family
+   consumer supplies stable object, arrow, identity, composition, and higher
+   action data; PSSS-08a's element-level paths alone do not meet that gate; and
 7. focused source and reviewer checks, warning comparison, strict audit,
    catalog/health synchronization, current-authority prose, and full
    integration CI are green before any separately authorized checkpoint.
+
+PSSS-08a is successful when:
+
+1. `CommRingPsh_cat(K)` is the transparent ordinary functor category
+   `Functor_cat(Op_cat(K),CommRing_cat)`, with no notation-only rigid facade;
+2. value, structured restriction map, and section restriction expose the
+   literal functor object/arrow action and `comm_ring_hom_apply`;
+3. opposite-source identity and composition are observed through typed paths
+   to the selected pointwise ring-map heads, while generic whole-arrow carrier
+   applications remain explicit negative computations;
+4. the generic identity boundary is solved by the reusable rule-free
+   `fapp1_id_path`, not by a presheaf-specific rewrite;
+5. `CommRingPshInvertibleAlong(O,s,f)` unfolds to unit evidence for `O[f](s)`,
+   is proved proposition-valued, and transports under a further restriction
+   to the direct composite arrow;
+6. unit transport and preservation live with the base unit/localization
+   classifier, and the mapped inverse visibly reduces to the image of the
+   supplied inverse;
+7. the constant zero-ring presheaf supplies a maintained nonempty consumer in
+   which every arrow has invertibility evidence;
+8. no `HigherSieve`, `Sieve`, topology, sheaf, carrier functor, localization-
+   over-support theorem, rewrite rule, or unification rule is claimed in this
+   tranche; and
+9. focused probes/checks, reviewer and central diagnostics, exact warning
+   comparison, strict audits, catalog/health synchronization, current-
+   authority prose, and full integration CI are green before the authorized
+   local checkpoint.

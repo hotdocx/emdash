@@ -366,6 +366,86 @@ symbol comm_ring_unit_evidence_is_prop
     λ v : τ (@CommRingUnitEvidence R x),
       @comm_ring_unit_equality_is_contr R x u v;
 
+/*
+  Functorial unit evidence.
+
+  Path transport and preservation by a structured ring homomorphism belong
+  with the semantic unit classifier itself.  They are used both by iterated
+  localization and by the ring-valued-presheaf invertibility predicate.  The
+  explicit inverse selected by `comm_ring_hom_preserves_unit` computes to the
+  image of the input inverse; no category-composition rule is involved.
+*/
+symbol comm_ring_unit_transport_forward
+  [R : τ CommRing]
+  [x y : τ (@comm_ring_carrier R)]
+  (p : τ (@= (@comm_ring_carrier R) x y))
+  (u : τ (@CommRingUnitEvidence R x))
+  : τ (@CommRingUnitEvidence R y)
+≔ @ind_eq
+    (@comm_ring_carrier R)
+    y x
+    (@eq_sym (@comm_ring_carrier R) x y p)
+    (λ z : τ (@comm_ring_carrier R), @CommRingUnitEvidence R z)
+    u;
+
+symbol comm_ring_unit_transport_backward
+  [R : τ CommRing]
+  [x y : τ (@comm_ring_carrier R)]
+  (p : τ (@= (@comm_ring_carrier R) x y))
+  (u : τ (@CommRingUnitEvidence R y))
+  : τ (@CommRingUnitEvidence R x)
+≔ @ind_eq
+    (@comm_ring_carrier R)
+    x y p
+    (λ z : τ (@comm_ring_carrier R), @CommRingUnitEvidence R z)
+    u;
+
+symbol comm_ring_hom_preserves_unit
+  [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [x : τ (@comm_ring_carrier R)]
+  (u : τ (@CommRingUnitEvidence R x))
+  : τ (@CommRingUnitEvidence S
+      (@comm_ring_hom_apply R S h x))
+≔ @comm_ring_unit_intro
+    S
+    (@comm_ring_hom_apply R S h x)
+    (@comm_ring_hom_apply R S h
+      (@comm_ring_unit_inverse R x u))
+    (@eq_trans
+      (@comm_ring_carrier S)
+      (@comm_ring_mul S
+        (@comm_ring_hom_apply R S h x)
+        (@comm_ring_hom_apply R S h
+          (@comm_ring_unit_inverse R x u)))
+      (@comm_ring_hom_apply R S h
+        (@comm_ring_mul R x (@comm_ring_unit_inverse R x u)))
+      (@comm_ring_one S)
+      (@eq_sym
+        (@comm_ring_carrier S)
+        (@comm_ring_hom_apply R S h
+          (@comm_ring_mul R x (@comm_ring_unit_inverse R x u)))
+        (@comm_ring_mul S
+          (@comm_ring_hom_apply R S h x)
+          (@comm_ring_hom_apply R S h
+            (@comm_ring_unit_inverse R x u)))
+        ((@comm_ring_hom_mul_law R S h)
+          x (@comm_ring_unit_inverse R x u)))
+      (@eq_trans
+        (@comm_ring_carrier S)
+        (@comm_ring_hom_apply R S h
+          (@comm_ring_mul R x (@comm_ring_unit_inverse R x u)))
+        (@comm_ring_hom_apply R S h (@comm_ring_one R))
+        (@comm_ring_one S)
+        (@eq_ap
+          (@comm_ring_carrier R)
+          (@comm_ring_carrier S)
+          (@comm_ring_hom_function R S h)
+          (@comm_ring_mul R x (@comm_ring_unit_inverse R x u))
+          (@comm_ring_one R)
+          (@comm_ring_unit_law R x u))
+        (@comm_ring_hom_one_law R S h)));
+
 // Pointwise agreement of a candidate factor with the original ring map.
 symbol CommRingLocalizationAgreement
   [R L S : τ CommRing]

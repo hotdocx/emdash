@@ -462,6 +462,12 @@ R[1/f]_ell                 := comm_ring_localization_target(R,f,ell)
 iota_ell                   := comm_ring_localization_map(R,f,ell)
 IterLoc_R(f,g)             := CommRingIteratedLocalizationAt(R,f,g)
 CompLoc_R(f,g,m,p)         := CommRingIteratedLocalizationComparison(m,p).
+
+O : CRingPsh(K)            := O : CommRingPsh(K)
+O(U)                       := comm_ring_psh_value(O,U)
+O[f]                       := comm_ring_psh_restriction_hom(O,f)
+f^*_O(s)                   := comm_ring_psh_restrict(O,f,s)
+D_O(s;f)                   := CommRingPshInvertibleAlong(O,s,f)
 ```
 
 Subscripts may be omitted only when the ring is unambiguous.  The carrier is
@@ -515,6 +521,21 @@ map sends `f*g` to a unit. For
 `p : Loc_R(f*g)`, `CompLoc_R(f,g,m,p)` retains canonical forward and reverse
 factors with pointwise triangles. No notation in this section claims that the
 two maps are inverse or that the chosen targets are equal.
+
+`CRingPsh(K)` is only comment/example notation for the transparent category
+`Functor_cat(Op_cat(K),CommRing_cat)`; it does not denote a new rigid kernel
+head. For `f : V -> U`, `O[f]` is contravariant and
+`f^*_O(s) : |O(V)|`. The library supplies explicit paths
+`id^*_O(s)=s` and `(f∘g)^*_O(s)=g^*_O(f^*_O(s))`; this notation must not be
+read as adding carrier rewrites for generic `CommRing_cat` identity or
+composition.
+
+`D_O(s;f)` currently names the proposition that `f^*_O(s)` has explicit unit
+evidence. It is closed under further restriction, but it is not yet packaged
+as a term of `Sieve(K,U)`. Reserve `InvSieve_O(s)` or `D_O(s)` without the
+arrow argument until the full `Into_restr_cat` action and ordinary-sieve
+package are promoted. A sheaf, topology, or locally ringed structure is not
+implicit in `O : CRingPsh(K)`.
 
 For the separately promoted finite-family layer, comments and examples may
 write

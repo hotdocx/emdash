@@ -1244,8 +1244,10 @@ There is not yet a carrier functor from `CommRing_cat` to `Grpd_cat`.
 and computes their stable point observations separately; a direct carrier
 action rule would otherwise create a competing runtime presentation at the
 generic functoriality owner. The two selected identity/composition heads are
-not yet a functor action. A ring-valued-presheaf consumer must still select the
-full action boundary before a carrier functor is promoted.
+not themselves a functor action. The first ring-valued-presheaf consumer now
+selects element-level identity/composition paths through those heads, but it
+does not supply the complete object/arrow/higher action needed by a carrier
+functor. Whole invertibility-sieve assembly remains the next concrete gate.
 
 ### Universal-Property Localization At One Element
 
@@ -1267,6 +1269,14 @@ The carrier is a set, so the resulting inverse path is contractible. The
 dependent path between the two multiplication-law witnesses is likewise an
 equality between proofs in a proposition-valued carrier equality. The Sigma
 path view therefore makes the whole unit-witness identity space contractible.
+
+Unit evidence transports along an element path and is preserved by every
+structured ring map. If `u^-1` is the inverse stored by `u`, the preserved
+witness stores `h(u^-1)` as the inverse of `h(x)`; multiplication and one
+preservation prove its law. This is computational data, not merely a
+proposition that some inverse exists. These generic operations live with the
+unit classifier because both localization comparison and ring-valued
+presheaves consume them.
 
 For a structure map `iota : R -> L` and a target map `h : R -> S`, the
 factorization classifier is
@@ -1348,6 +1358,73 @@ maps. Nested contractible-factor uniqueness can supply those laws when a
 basic-open equivalence consumer actually needs them. The separately selected
 stable identity comparison is now justified by the empty-variable polynomial
 algebra model, not by an unneeded comparison inverse law.
+
+### CommRing-Valued Presheaves And Invertibility Support
+
+A commutative-ring-valued presheaf uses the direct ordinary functor
+presentation
+
+```text
+CommRingPsh_cat(K) = Functor_cat(Op_cat(K), CommRing_cat)
+CommRingPsh(K)     = Obj(CommRingPsh_cat(K)).
+```
+
+This classifier is a transparent definition rather than a rigid facade at the
+current boundary. Cat-valued `Psh_cat(K)` has a useful separate head because
+it mediates the public presheaf category and the distinct active
+`Catd_cat(Op(K))` representation, with controlled recovery of the base. Here
+the ordinary functor category is the sole selected representation, and current
+consumers retain `K` explicitly. A later whole-sieve or ringed-site consumer
+could justify an audited rigid-facade migration if it needs stable head
+recognition, base recovery, or representation independence. For
+`O : CommRingPsh(K)`, `f : V -> U`, and `s : |O(U)|`, the current observations are
+
+```text
+comm_ring_psh_value(O,U)           = O[U]
+comm_ring_psh_restriction_hom(O,f) = O[f] : O(U) -> O(V)
+comm_ring_psh_restrict(O,f,s)      = O[f](s).
+```
+
+The last term applies the actual retained carrier function of the structured
+ring map, so an explicit restriction map remains computational. Generic
+identity and composition in `CommRing_cat` still do not reduce on carrier
+elements. The library instead proves
+
+```text
+O[id_U](s)     = s
+O[f ∘ g](s) = O[g](O[f](s))
+```
+
+through the selected pointwise identity/composition maps. The generic
+`fapp1_id_path` theorem is important here: after specializing to `Op_cat(K)`,
+opposite identity has already normalized to the identity of `K`, so a direct
+fresh action term no longer presents the literal identity redex. Proving the
+generic theorem while its source is abstract retains exactly the existing
+strict functor law without installing a presheaf-specific rule.
+
+The semantic support of a section is currently exposed arrowwise:
+
+```text
+CommRingPshInvertibleAlong(O,s,f)
+  = CommRingUnitEvidence(O(V), O[f](s)).
+```
+
+It is a proposition because explicit unit evidence is a proposition. If the
+predicate holds for `f : V -> U` and `g : W -> V`, preservation of units by
+`O[g]` gives a unit witness for the nested restriction; the composite path
+transports it to `O[f ∘ g](s)`. Thus the expected downward-closure
+calculation is present at ordinary arrows.
+
+The maintained zero-ring model makes this nonvacuous. The constant
+`zero_comm_ring` presheaf has generic structured identities as restrictions;
+the pointwise identity path evaluates each restriction on `tt`, and the
+explicit zero-ring unit witness transports to every arrow.
+
+This is not yet an ordinary `Sieve(K,U)`. Such a package must also assemble
+the `Path_cat` fibres and their full action over `Into_restr_cat(K,U)`,
+including equality/higher-arrow coherence, through active owners. No carrier
+functor, ad hoc family rules, topology, sheafhood, or ringed-site package is
+implied by the arrowwise predicate.
 
 ### Finite Families And Unimodular Cover Presentations
 

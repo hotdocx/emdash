@@ -60,14 +60,18 @@ mathematical reading is in
   classifier. It selects no monomial/coefficient/quotient syntax or concrete
   positive-variable representation; the reviewer proves `R[Empty] = R`.
 - `emdash3_2_commutative_algebra_localization.lp` owns proposition-valued unit
-  evidence and localization at one element by contractible pointwise
-  factorization. It selects no concrete fractions, finite families,
-  polynomials, or Zariski presentation.
-- `emdash3_2_commutative_algebra_localization_comparison.lp` owns unit algebra
-  and the universal-property comparison between localization at `f*g` and
+  evidence, unit transport/preservation, and localization at one element by
+  contractible pointwise factorization. It selects no concrete fractions,
+  finite families, polynomials, or Zariski presentation.
+- `emdash3_2_commutative_algebra_localization_comparison.lp` owns product-unit
+  algebra and the universal-property comparison between localization at `f*g` and
   localization first at `f`, then at the image of `g`. It retains canonical
   maps and pointwise triangles, but no equality of chosen packages or inverse
   law for the comparison maps.
+- `emdash3_2_commutative_algebra_presheaves.lp` transparently presents
+  CommRing-valued presheaves, their actual structured restriction maps,
+  pointwise identity/composition paths, and proposition-valued invertibility
+  support along arrows. It does not yet assemble a whole sieve or ringed site.
 - `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
   encode/decode, Nat comparison, and directed negative results.
 - `emdash3_2_checks.lp` and `examples/` contain executable
@@ -107,6 +111,9 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_localization_comparison.lp` — stable
   pointwise ring-map composition plus universal-property iterated/product-
   localization comparison data, without fractions or package equality;
+- `emdash3_2_commutative_algebra_presheaves.lp` — transparent ring-valued
+  presheaves, computational restriction, and arrowwise unit support, without
+  a carrier functor, whole sieve, topology, or sheaf package;
 - `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
   action and groupoidality;
 - `emdash3_2_eq1_evidence_property.lp` — evidence-property,

@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1860
-- Mapped areas: 73
+- Total checks: 1874
+- Mapped areas: 74
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -92,6 +92,7 @@ stable mathematical-area scopes rather than source locations.
 | Iterated commutative-ring localization comparison | 12 |
 | Finite commutative-ring cover presentations | 22 |
 | Polynomial-algebra universal property | 18 |
+| CommRing-valued presheaves and invertibility support | 14 |
 
 ## Section Details
 
@@ -2319,3 +2320,22 @@ stable mathematical-area scopes rather than source locations.
 | 1858 | 20460 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
 | 1859 | 20471 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
 | 1860 | 20483 | `assertnot (R : τ CommRing) (X : Grpd) (polynomial : τ (@CommRingPolynomialAlgebra R X)) ⊢ polynomial ≡ @comm_ring_po ...` |
+
+### CommRing-valued presheaves and invertibility support
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1861 | 20497 | `assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢ @fapp1_id_path A B F X : τ (@= (Hom B (@fapp0 A B F X) (@ ...` |
+| 1862 | 20507 | `assert (K : Cat) ⊢ @CommRingPsh_cat K ≡ @Functor_cat (Op_cat K) CommRing_cat;` |
+| 1863 | 20511 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) ⊢ @comm_ring_psh_value K O U ≡ @fapp0 (Op_cat K) CommRing_ ...` |
+| 1864 | 20517 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) ⊢ @comm_ring_psh_restriction_hom K O ...` |
+| 1865 | 20524 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
+| 1866 | 20536 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_restr ...` |
+| 1867 | 20546 | `assertnot [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_re ...` |
+| 1868 | 20553 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) ⊢ @comm_ring_p ...` |
+| 1869 | 20571 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@CommR ...` |
+| 1870 | 20585 | `assertnot [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@Co ...` |
+| 1871 | 20597 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [x : τ (@comm_ring_carrier R)] (u : τ (@CommRingUnitEvidence R ...` |
+| 1872 | 20608 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
+| 1873 | 20618 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
+| 1874 | 20626 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@CommR ...` |

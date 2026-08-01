@@ -3347,6 +3347,26 @@ rule fapp0 (fapp1_func $F_AB) $f ↪ fapp1_fapp0 $F_AB $f;
 rule @fapp1_fapp0 $A $B $F $X $X (@id $A $X)
   ↪ @id $B (@fapp0 $A $B $F $X);
 
+/*
+  Typed equality view of the generic strict identity cut.
+
+  Besides documenting the rule, the abstract theorem preserves its proof
+  across later specialization to a source such as `Op_cat(K)`, whose identity
+  normalizes to the identity of K before a newly formed action term can expose
+  the literal generic redex again.  It adds no second runtime computation.
+*/
+symbol fapp1_id_path
+  [A B : Cat]
+  (F : τ (Functor A B))
+  (X : τ (Obj A))
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F X))
+      (@fapp1_fapp0 A B F X X (@id A X))
+      (@id B (@fapp0 A B F X)))
+≔ @eq_refl
+    (Hom B (@fapp0 A B F X) (@fapp0 A B F X))
+    (@id B (@fapp0 A B F X));
+
 // Strict composition cut: `F[g] o F[f] -> F[g o f]`.
 rule @comp_fapp0
       $B

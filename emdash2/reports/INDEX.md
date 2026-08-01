@@ -44,14 +44,22 @@ structured extensions of every base map and valuation. It selects no
 monomial/coefficient/quotient syntax or concrete positive-variable
 representation; the reviewer proves the generic equation `R[Empty]=R`.
 `emdash3_2_commutative_algebra_localization.lp` is the next rule-free layer:
-it proves explicit unit evidence proposition-valued and packages localization
-at one element by contractible pointwise factorization, without selecting
-fractions, finite families, polynomials, or a Zariski presentation.
+it proves explicit unit evidence proposition-valued, owns its path transport
+and preservation by structured maps, and packages localization at one element
+by contractible pointwise factorization, without selecting fractions, finite
+families, polynomials, or a Zariski presentation.
 `emdash3_2_commutative_algebra_localization_comparison.lp` is the following
 rule-free overlap layer: it packages localization first at `f` and then at the
 image of `g`, and constructs canonical forward/reverse factors against
 localization at `f*g`, without equality of chosen packages or comparison
 inverse laws.
+`emdash3_2_commutative_algebra_presheaves.lp` is the rule-free PSSS-08a layer:
+it transparently presents functors from `K^op` to `CommRing_cat`, exposes
+structured restriction and carrier application, supplies explicit pointwise
+identity/composition paths, and proves the unit-support predicate along an
+arrow proposition-valued and closed under further restriction. It does not
+yet assemble the full ordinary invertibility sieve, add a carrier functor, or
+claim topology, sheafhood, or a ringed site.
 The former D0/D1/decoder compatibility module and its seven self-only reviewer
 examples are retired. Unsuffixed omega-equivalence names now denote only the
 native equality-valued API; no compatibility aliases remain.

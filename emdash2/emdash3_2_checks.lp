@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -20491,3 +20491,146 @@ assertnot (R : τ CommRing)
       (@comm_ring_polynomial_variables R X polynomial)
       (@comm_ring_polynomial_property R X polynomial);
 /* End of the PSSS-07d polynomial-algebra diagnostics. */
+
+// catalog-area: CommRing-valued presheaves and invertibility support
+// The generic typed identity view is stable under later source specialization.
+assert [A B : Cat]
+  (F : τ (Functor A B))
+  (X : τ (Obj A)) ⊢
+  @fapp1_id_path A B F X
+  : τ (@=
+      (Hom B (@fapp0 A B F X) (@fapp0 A B F X))
+      (@fapp1_fapp0 A B F X X (@id A X))
+      (@id B (@fapp0 A B F X)));
+
+// CommRing-valued presheaves are a transparent functor category.
+assert (K : Cat) ⊢
+  @CommRingPsh_cat K
+  ≡ @Functor_cat (Op_cat K) CommRing_cat;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K)) ⊢
+  @comm_ring_psh_value K O U
+  ≡ @fapp0 (Op_cat K) CommRing_cat O U;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U)) ⊢
+  @comm_ring_psh_restriction_hom K O V U f
+  ≡ @fapp1_fapp0 (Op_cat K) CommRing_cat O U V f;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict K O V U f s
+  ≡ @comm_ring_hom_apply
+      (@comm_ring_psh_value K O U)
+      (@comm_ring_psh_value K O V)
+      (@comm_ring_psh_restriction_hom K O V U f)
+      s;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict_id_path K O U s
+  : τ (@= (@CommRingPshSection K O U)
+      (@comm_ring_psh_restrict K O U U (@id K U) s)
+      s);
+
+// Whole CommRing_cat identity stays opaque at the carrier boundary.
+assertnot [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict K O U U (@id K U) s
+  ≡ s;
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [W V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V)) ⊢
+  @comm_ring_psh_restriction_comp_pointwise_path K O W V U f g
+  : τ (@= (@CommRingHom
+      (@comm_ring_psh_value K O U)
+      (@comm_ring_psh_value K O W))
+      (@comm_ring_psh_restriction_hom K O W U
+        (@comp_fapp0 K W V U f g))
+      (@comm_ring_hom_comp_pointwise
+        (@comm_ring_psh_value K O U)
+        (@comm_ring_psh_value K O V)
+        (@comm_ring_psh_value K O W)
+        (@comm_ring_psh_restriction_hom K O W V g)
+        (@comm_ring_psh_restriction_hom K O V U f)));
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [W V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict_comp_path K O W V U f g s
+  : τ (@= (@CommRingPshSection K O W)
+      (@comm_ring_psh_restrict K O W U
+        (@comp_fapp0 K W V U f g) s)
+      (@comm_ring_psh_restrict K O W V g
+        (@comm_ring_psh_restrict K O V U f s)));
+
+// Whole CommRing_cat composition likewise stays opaque on carrier elements.
+assertnot [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [W V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_restrict K O W U
+    (@comp_fapp0 K W V U f g) s
+  ≡ @comm_ring_psh_restrict K O W V g
+      (@comm_ring_psh_restrict K O V U f s);
+
+// Unit preservation has a concrete mapped-inverse normal form.
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S))
+  [x : τ (@comm_ring_carrier R)]
+  (u : τ (@CommRingUnitEvidence R x)) ⊢
+  @comm_ring_unit_inverse
+    S
+    (@comm_ring_hom_apply R S h x)
+    (@comm_ring_hom_preserves_unit R S h x u)
+  ≡ @comm_ring_hom_apply R S h
+      (@comm_ring_unit_inverse R x u);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @CommRingPshInvertibleAlong K O U s V f
+  ≡ @CommRingUnitEvidence
+      (@comm_ring_psh_value K O V)
+      (@comm_ring_psh_restrict K O V U f s);
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (s : τ (@CommRingPshSection K O U)) ⊢
+  @comm_ring_psh_invertible_along_is_prop K O U s V f
+  : τ (IsPropGrpd (@CommRingPshInvertibleAlong K O U s V f));
+
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [W V U : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (s : τ (@CommRingPshSection K O U))
+  (u : τ (@CommRingPshInvertibleAlong K O U s V f)) ⊢
+  @comm_ring_psh_invertible_along_restrict K O W V U f g s u
+  : τ (@CommRingPshInvertibleAlong K O U s W
+      (@comp_fapp0 K W V U f g));
+/* End of the PSSS-08a CommRing-presheaf diagnostics. */

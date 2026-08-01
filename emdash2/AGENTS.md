@@ -32,6 +32,8 @@ the universal-property-first one-element localization extension is
 `emdash3_2_commutative_algebra_localization.lp`;
 the universal-property iterated/product-localization comparison extension is
 `emdash3_2_commutative_algebra_localization_comparison.lp`;
+the CommRing-valued-presheaf, restriction, and arrowwise-invertibility
+extension is `emdash3_2_commutative_algebra_presheaves.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
@@ -81,32 +83,38 @@ Use the following order:
    representation, finite-index facade, runtime rule, unifier, or package
    eta;
 12. `emdash3_2_commutative_algebra_localization.lp` for proposition-valued
-   unit evidence, pointwise factor triangles, contractible-factorization
-   localization packages, and named transparent observations; it deliberately
-   declares no concrete fractions, iterated comparison, finite-family, power,
-   polynomial, or Zariski interface;
+   unit evidence, unit path transport and structured-map preservation,
+   pointwise factor triangles, contractible-factorization localization
+   packages, and named transparent observations; it deliberately declares no
+   concrete fractions, iterated comparison, finite-family, power, polynomial,
+   or Zariski interface;
 13. `emdash3_2_commutative_algebra_localization_comparison.lp` for unit
-    transport/multiplication lemmas, the selected stable pointwise ring-map
-    composite consumer, two-stage localization packages, and canonical
-    forward/reverse comparison factors with pointwise triangles; it
+    multiplication lemmas, the selected stable pointwise ring-map composite
+    consumer, two-stage localization packages, and canonical forward/reverse
+    comparison factors with pointwise triangles; it
     deliberately declares no fraction syntax, equality of chosen localization
     packages, comparison inverse laws, finite-family, polynomial, or Zariski
     interface;
-14. `emdash3_2_sites.lp` for ordinary-sieve membership, the canonical maximal
+14. `emdash3_2_commutative_algebra_presheaves.lp` for the transparent
+   CommRing-valued presheaf classifier, actual structured restriction maps,
+   pointwise identity/composition paths, and proposition-valued arrowwise
+   invertibility support closed under restriction; it deliberately declares no
+   whole sieve, carrier functor, topology, sheaf, or ringed-site package;
+15. `emdash3_2_sites.lp` for ordinary-sieve membership, the canonical maximal
    sieve, proposition-valued sieve coverages, Grothendieck topology laws, and
    the direct chaotic-topology model; it declares no `Omega`, generated
    coverage saturation, sheafification, or descent;
-15. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+16. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
    directed negative results;
-16. `emdash3_2_checks.lp` for executable regression statements;
-17. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+17. `emdash3_2_checks.lp` for executable regression statements;
+18. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-18. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-19. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+19. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+20. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-20. `reports/INDEX.md` for task-specific plans and decision records.
-21. `book/book.json` and `book/evidence.json` for book source
+21. `reports/INDEX.md` for task-specific plans and decision records.
+22. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
