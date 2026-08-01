@@ -495,7 +495,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` | read-only audit complete; zero semantic delta; one TypeScript-only section-root successor selected | final-green `DIRECT-MIXED-WEAKENING-1J`; direct-binder invariant; measured callback/factorer probes and transfer inventory | `S[k](a)` is blocked first by an overly generic open-section classifier view; `b[k]` reaches and is rejected by the recursive factorer. Both derive through existing section, `Terminal_funcd`, direct weakening, and composition. Ordinary-weakening projection acquisition is unnecessary for elaboration and remains only an optional deeper-normalization concern. The constant-middle varying case still lacks an internal displayed composition lift. |
 | `DIRECT-MIXED-SECTION-ROOT-1K` | implemented and final-green at `e337f1b1a3a61a861a714fa9d06035a1949beec9` under D-DTTLF-USABILITY-051 | completed `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K`; final-green D-050; proposal checkpoint `51c1c4ba60b4e6858d38a714c5b5bcb3ba176141`; separate review under standing unattended delegation | The bounded runtime reifier recognizes the already-transferred ordinary `Functor_cat` head after the active `Functor_catd` fibre rule. The unchanged open section application receives a canonical indexed-functor construction view. Recursive `S[k](a)` and `b[k]` roots lower through `Terminal_funcd`, with direct inner weakening only for `b[k]`; target maps and nested pairs consume both. No kernel/transfer owner or rule, curry route, second AST, constant-middle composition, arbitrary context, or unrestricted `:^nd` was added. |
 | `DIRECT-MIXED-SECTION-GRADUATE-1L` | read-only reassessment complete; zero active semantic delta; constant-middle application selected | final-green D-051; fundamental direct-binder invariant; completed three-binder structural roots; live frontend failure; type-aware owner search; bounded append and owner-position probes | The direct three-binder grammar now has all four ordinary variable-occurrence classes. Its first missing *application* constructor is the variance-valid constant-middle case. A one-owner/three-rule displayed lift of existing `Functor_comp_pair_func` is quiet-green, warning-neutral, strict-audit clean, and iterable through base/higher action. Larger contexts and mixed `:^nd` remain broader successors. |
-| `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` | exact proposal frozen below as D-DTTLF-USABILITY-052; separate review required | completed `DIRECT-MIXED-SECTION-GRADUATE-1L`; final-green D-051; active `Unit_prof`, `Functor_catd`, `Product_pair_funcd`, and ordinary `Functor_comp_pair_func` owners | Add one `Functor_comp_pair_funcd` owner with point/full/capped projections, a minimal exact ordinary-composition transfer prerequisite, and one recursive constant-middle application node. Compile by pairing already-coherent branches and postcomposing the new owner. Direct nested introduction remains fundamental; no curry, total-context section, general-middle collapse, larger-context, or unrestricted-`:^nd` claim is included. |
+| `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` | exact D-DTTLF-USABILITY-052 proposal separately reviewed-approved from checkpoint `cd279e770ab416b22119400f9a26f436e62c36a9`; implementation dependency-ready | completed `DIRECT-MIXED-SECTION-GRADUATE-1L`; final-green D-051; active `Unit_prof`, `Functor_catd`, `Product_pair_funcd`, and ordinary `Functor_comp_pair_func` owners; standing unattended delegation with human supersession | Add one `Functor_comp_pair_funcd` owner with point/full/capped projections, a minimal exact ordinary-composition transfer prerequisite, and one recursive constant-middle application node. Compile by pairing already-coherent branches and postcomposing the new owner. Direct nested introduction remains fundamental; no curry, total-context section, general-middle collapse, larger-context, or unrestricted-`:^nd` claim is included. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -4248,6 +4248,47 @@ This gate adds one variance-qualified direct application constructor. It does
 not claim arbitrary term abstraction, arbitrary context arity, arbitrary
 variance, mixed transformation introduction, or a general curry theorem.
 
+### Separate D-DTTLF-USABILITY-052 review result
+
+Proposal checkpoint `cd279e770ab416b22119400f9a26f436e62c36a9` is a clean
+documentation-only descendant of final-green D-051. Its staged inventory was
+exactly this living plan and the handoff; the two unrelated untracked
+experiment directories remained unmodified and excluded.
+
+Separate review confirms the proposal's three boundary facts:
+
+1. The active-kernel type-aware search returns ordinary
+   `Functor_comp_pair_func`, `Functor_catd_product_funcd`, direct weakening,
+   and the auxiliary curry packages, but no displayed lift of ordinary
+   composition. The new owner is therefore not a duplicate of an existing
+   construction.
+2. A focused conversion probe accepts the same unchanged object first at
+   `Fibre_cat(Const_catd(K,X),k)` and then at
+   `Fibre_cat(Const_catd(Op K,X),k)`. Both reduce to `X`; the qualified
+   frontend view in item 6 requires no coercion, equality witness, or
+   proof-rule search.
+3. The current direct TypeScript transfer graph already contains
+   `comp_cat_con_func`, displayed pairing, constants, mixed-family action, and
+   generic composition, while both `comp_prod_func` and
+   `Functor_comp_pair_func` are genuinely absent. The exact two-declaration/
+   one-rule ordinary prerequisite in item 5 is therefore neither redundant
+   nor an implicit bulk acquisition.
+
+The owning-position candidate remains bounded-green with object, inner-arrow,
+base-arrow, and next-cell consumers; warning comparison is unchanged at
+1,079/159 and strict audit remains 0/53/33. Its full/capped rules delegate to
+the target `Functor_catd` action, so the existing rigid `Hom`/`Unit_prof`
+owner remains authoritative. No rule is added to `Unit_prof`, and neither
+D-040 nor D-042 appears in the proposed TypeScript dependency graph or direct
+lowering.
+
+No immediate human correction superseded the immutable proposal. Under the
+standing unattended delegation, with immediate human supersession,
+implementation is authorized only for the eleven numbered D-052 items. The
+authorization does not include larger mixed contexts, arbitrary middle
+families, transformation introduction, unrestricted `lambda^nd`, curry
+promotion, text/browser work, remote Git effects, or unrelated cleanup.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -4495,12 +4536,13 @@ next-cell iterability. It reuses the existing target `Functor_catd`/rigid-Hom/
 `Unit_prof` action and is not curry.
 
 Treat `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` /
-D-DTTLF-USABILITY-052 as an exact frozen proposal awaiting separate review.
-Do not edit kernel or TypeScript semantics until that review. If approved,
-implement only its eleven numbered items: one new displayed composition
-owner/three rules, the minimal exact ordinary-composition transfer
-prerequisite, qualified constant-family construction view, and recursive
-constant-middle application case. Direct introduction remains fundamental.
+D-DTTLF-USABILITY-052 as separately reviewed-approved from immutable proposal
+checkpoint `cd279e770ab416b22119400f9a26f436e62c36a9` under the standing
+unattended delegation with immediate human supersession. Implement only its
+eleven numbered items: one new displayed composition owner/three rules, the
+minimal exact ordinary-composition transfer prerequisite, qualified
+constant-family construction view, and recursive constant-middle application
+case. Direct introduction remains fundamental.
 Larger contexts, mixed transformation introduction, unrestricted `:^nd`,
 general positive/negative family collapse, curry promotion, and remote Git
 effects remain excluded.
@@ -4522,6 +4564,21 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-052 approved exactly as proposed.** A
+  separate review of immutable proposal checkpoint
+  `cd279e770ab416b22119400f9a26f436e62c36a9` confirms that the active kernel
+  has no displayed lift of ordinary functor composition; the qualified
+  constant-family orientation is definitional at the fibre; and the direct
+  transfer graph lacks exactly the selected ordinary `comp_prod_func`/
+  `Functor_comp_pair_func` prerequisite while already containing the other
+  owners. The one-owner/three-rule candidate remains quiet-green,
+  warning-neutral, strict-audit clean, and internally iterable through the
+  existing target `Functor_catd`/rigid-Hom/`Unit_prof` action. No immediate
+  human correction superseded the frozen proposal. Under the standing
+  unattended delegation, only its eleven numbered items are authorized, with
+  immediate human supersession; curry, total-context sections, arbitrary
+  middle/context/variance, mixed `lambda^nd`, text/browser, remote effects,
+  and unrelated cleanup remain excluded.
 - **2026-08-01 — D-DTTLF-USABILITY-052 frozen for separate review.** The
   post-D-051 audit confirms that direct
   `lambda^n k. lambda^f c. lambda^f a. body` introduction is fundamental and

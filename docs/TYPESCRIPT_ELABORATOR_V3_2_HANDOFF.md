@@ -207,10 +207,14 @@
 > a next base cell. The exact
 > `DIRECT-MIXED-CONSTANT-MIDDLE-COMPOSITION-1M` proposal is frozen as
 > H-DTTLF-USABILITY-DIRECT-MIXED-CONSTANT-MIDDLE-01 /
-> D-DTTLF-USABILITY-052 and awaits separate review. It keeps direct nested
-> introduction fundamental and explicitly excludes curry, total-context
-> sections, general middle-family collapse, larger contexts, unrestricted
-> variance, and `lambda^nd`.
+> D-DTTLF-USABILITY-052 at
+> `cd279e770ab416b22119400f9a26f436e62c36a9` and is separately
+> reviewed-approved under the standing unattended delegation. The review
+> confirms the exact constant-family conversion, absent displayed composition
+> lift, and minimal ordinary-composition transfer prerequisite. Implementation
+> is dependency-ready. It keeps direct nested introduction fundamental and
+> explicitly excludes curry, total-context sections, general middle-family
+> collapse, larger contexts, unrestricted variance, and `lambda^nd`.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
