@@ -28,8 +28,11 @@ browser reload proved that a second static path remained through
 `categorical_surface.ts`; the D-036 stop condition therefore applies.
 H-DTTLF-USABILITY-PUBLIC-BROWSER-CONTRACT-CORRECTION-01 /
 D-DTTLF-USABILITY-037 below freezes the complete browser-safe Core-name
-contract split before publication. After the corrected public slice is green
-and deployed, the next
+contract split before publication. Its proposal checkpoint is
+`45b62ab145e1d0c90cbfe97ca725e2ad4900e3e8`; the separate review recorded
+below approves exactly that split under the standing unattended delegation,
+with human supersession. Implementation is dependency-ready. After the
+corrected public slice is green and deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -288,7 +291,7 @@ It deliberately avoids:
 | `PUBLIC-HOM-AUDIT-0A` | complete, then measurement-corrected by D-DTTLF-USABILITY-035; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract; reject both the slow mixed-nest fixture and the unavailable Transfd/profile combination; select the default-profile functor-category recursive-Hom witness; freeze truthful public wording. |
 | `PUBLIC-HOM-PRESET-1A` | corrected implementation focused-green; real-browser smoke exposed separate runtime cycle | `PUBLIC-HOM-AUDIT-0A`; approved D-034/D-035 | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
 | `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | D-DTTLF-USABILITY-036 implemented; Node higher-profile regression green; browser still red through a second static path | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
-| `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | exact D-DTTLF-USABILITY-037 frozen for separate review | implemented D-036; measured remaining surface-to-transfer import path | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
+| `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | exact D-DTTLF-USABILITY-037 reviewed-approved and implementation dependency-ready | implemented D-036; measured remaining surface-to-transfer import path | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
 | `PUBLIC-HOM-VALIDATE-1B` | blocked on green browser-contract correction | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | blocked on green `VALIDATE-1B` | clean goal checkpoint; fetched ancestry; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
@@ -530,6 +533,13 @@ feature. It adds no mathematical owner, declaration/rule, Core node,
 parser/checker/evaluator branch, profile capability, or public claim. The
 D-034/D-035 publication boundary remains unchanged.
 
+The exact proposal was checkpointed at
+`45b62ab145e1d0c90cbfe97ca725e2ad4900e3e8`. No immediate human correction
+superseded it. The separate review in the decision ledger therefore approves
+only D-DTTLF-USABILITY-037 under the user's standing unattended delegation,
+with human supersession. Implementation may continue within this contract
+correction.
+
 ## Mixed-Introduction Audit Contract
 
 After the public slice is deployed, `MIXED-INTRODUCTION-0A` must start with
@@ -715,4 +725,10 @@ removal, or unrelated cleanup is authorized.
   gate makes dependency-free contracts the sole source of the two affected
   Core-name families, has the full transfer modules consume/re-export those
   contracts, and redirects only the surface lookups. It forbids mirrors,
-  preloads, audit weakening, or browser-specific semantics.
+  preloads, audit weakening, or browser-specific semantics. Its proposal
+  checkpoint is `45b62ab145e1d0c90cbfe97ca725e2ad4900e3e8`.
+- **2026-08-01 — D-DTTLF-USABILITY-037 approved exactly as proposed.** No
+  immediate human correction superseded the isolated proposal. The standing
+  unattended delegation therefore authorizes only the two dependency-free
+  contracts, their transfer-owned linkage/re-export integration, the two
+  surface import redirects, and stated validation, with human supersession.
