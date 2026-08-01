@@ -14244,6 +14244,283 @@ assertnot [K : Cat]
     ≡ @Functor_catd K A B;
 
 // -------------------------------------------------------------------------------------------------
+// Direct mixed constant-middle composition
+// catalog-area: Direct mixed constant-middle composition
+// -------------------------------------------------------------------------------------------------
+
+// Transparent source family of the variance-qualified composition owner.
+symbol direct_mixed_comp_source_check
+  [K X : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  : τ (Catd K)
+≔ @Product_catd_transparent_check
+    K
+    (@Functor_catd K A (@Const_catd K X))
+    (@Functor_catd K (@Const_catd (Op_cat K) X) B);
+
+// Direct consumer: pair two coherent varying functors, then compose them.
+symbol direct_mixed_comp_pair_funcd_check
+  [K X : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  (FF : τ (Functord
+    E
+    (@Functor_catd K A (@Const_catd K X))))
+  (GG : τ (Functord
+    E
+    (@Functor_catd K (@Const_catd (Op_cat K) X) B)))
+  : τ (Functord E (@Functor_catd K A B))
+≔ @comp_catd_fapp0
+    K
+    E
+    (@direct_mixed_comp_source_check K X A B)
+    (@Functor_catd K A B)
+    (@Functor_comp_pair_funcd K X A B)
+    (@Product_pair_funcd
+      K
+      E
+      (@Functor_catd K A (@Const_catd K X))
+      (@Functor_catd K (@Const_catd (Op_cat K) X) B)
+      FF
+      GG);
+
+// The point component is the existing ordinary functor-composition owner.
+assert [K X : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+    K Cat_cat
+    (@direct_mixed_comp_source_check K X A B)
+    (@Functor_catd K A B)
+    k
+    (@Functor_comp_pair_funcd K X A B)
+  ≡ @Functor_comp_pair_func
+      (Fibre_cat A k)
+      X
+      (Fibre_cat B k);
+
+// Positive and negative constant-family fibres share only their ordinary
+// category X; this is the exact frontend construction-view conversion.
+assert [K X : Cat]
+  (k : τ (Obj K))
+  (u : τ (Obj (Fibre_cat (@Const_catd K X) k))) ⊢
+  u : τ (Obj (Fibre_cat (@Const_catd (Op_cat K) X) k));
+
+symbol direct_mixed_comp_left_check
+  [K X : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  (FF : τ (Functord
+    E
+    (@Functor_catd K A (@Const_catd K X))))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k)))
+  : τ (Functor (Fibre_cat A k) X)
+≔ @fapp0
+    (Fibre_cat E k)
+    (Functor_cat (Fibre_cat A k) X)
+    (@tapp0_fapp0
+      K Cat_cat E
+      (@Functor_catd K A (@Const_catd K X))
+      k FF)
+    e;
+
+symbol direct_mixed_comp_right_check
+  [K X : Cat]
+  [E : τ (Catd K)]
+  [B : τ (Catd K)]
+  (GG : τ (Functord
+    E
+    (@Functor_catd K (@Const_catd (Op_cat K) X) B)))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k)))
+  : τ (Functor X (Fibre_cat B k))
+≔ @fapp0
+    (Fibre_cat E k)
+    (Functor_cat X (Fibre_cat B k))
+    (@tapp0_fapp0
+      K Cat_cat E
+      (@Functor_catd K (@Const_catd (Op_cat K) X) B)
+      k GG)
+    e;
+
+// Direct body computation: G[k](e)(F[k](e)(a)).
+assert [K X : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  (FF : τ (Functord
+    E
+    (@Functor_catd K A (@Const_catd K X))))
+  (GG : τ (Functord
+    E
+    (@Functor_catd K (@Const_catd (Op_cat K) X) B)))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k)))
+  (a : τ (Obj (Fibre_cat A k))) ⊢
+  @fapp0
+    (Fibre_cat A k)
+    (Fibre_cat B k)
+    (@fapp0
+      (Fibre_cat E k)
+      (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+      (@tapp0_fapp0
+        K Cat_cat E (@Functor_catd K A B) k
+        (@direct_mixed_comp_pair_funcd_check K X E A B FF GG))
+      e)
+    a
+  ≡ @fapp0
+      X
+      (Fibre_cat B k)
+      (@direct_mixed_comp_right_check K X E B GG k e)
+      (@fapp0
+        (Fibre_cat A k)
+        X
+        (@direct_mixed_comp_left_check K X E A FF k e)
+        a);
+
+// Inner-arrow computation remains ordinary composite-functor action.
+assert [K X : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  (FF : τ (Functord
+    E
+    (@Functor_catd K A (@Const_catd K X))))
+  (GG : τ (Functord
+    E
+    (@Functor_catd K (@Const_catd (Op_cat K) X) B)))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k)))
+  [a a' : τ (Obj (Fibre_cat A k))]
+  (alpha : τ (Hom (Fibre_cat A k) a a')) ⊢
+  @fapp1_fapp0
+    (Fibre_cat A k)
+    (Fibre_cat B k)
+    (@fapp0
+      (Fibre_cat E k)
+      (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+      (@tapp0_fapp0
+        K Cat_cat E (@Functor_catd K A B) k
+        (@direct_mixed_comp_pair_funcd_check K X E A B FF GG))
+      e)
+    a a' alpha
+  ≡ @fapp1_fapp0
+      X
+      (Fibre_cat B k)
+      (@direct_mixed_comp_right_check K X E B GG k e)
+      (@fapp0
+        (Fibre_cat A k)
+        X
+        (@direct_mixed_comp_left_check K X E A FF k e)
+        a)
+      (@fapp0
+        (Fibre_cat A k)
+        X
+        (@direct_mixed_comp_left_check K X E A FF k e)
+        a')
+      (@fapp1_fapp0
+        (Fibre_cat A k)
+        X
+        (@direct_mixed_comp_left_check K X E A FF k e)
+        a a' alpha);
+
+// The capped base action remains a whole functor.
+assert [K X : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y)) ⊢
+  @tapp1_fapp0
+    K Cat_cat
+    (@direct_mixed_comp_source_check K X A B)
+    (@Functor_catd K A B)
+    x y
+    (@Functor_comp_pair_funcd K X A B)
+    p
+  : τ (Functor
+      (Fibre_cat (@direct_mixed_comp_source_check K X A B) x)
+      (Fibre_cat (@Functor_catd K A B) y));
+
+// The composed consumer has the generic internally owned base-arrow cell.
+assert [K X : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  (FF : τ (Functord
+    E
+    (@Functor_catd K A (@Const_catd K X))))
+  (GG : τ (Functord
+    E
+    (@Functor_catd K (@Const_catd (Op_cat K) X) B)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (e : τ (Obj (Fibre_cat E x))) ⊢
+  @fdapp1_int_cell
+    K E (@Functor_catd K A B)
+    (@direct_mixed_comp_pair_funcd_check K X E A B FF GG)
+    x y p e
+  : τ (Hom
+      (Fibre_cat (@Functor_catd K A B) y)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat (@Functor_catd K A B) y)
+        (@functord_transport_lhs_func
+          K E (@Functor_catd K A B)
+          (@direct_mixed_comp_pair_funcd_check K X E A B FF GG)
+          x y p)
+        e)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat (@Functor_catd K A B) y)
+        (@functord_transport_rhs_func
+          K E (@Functor_catd K A B)
+          (@direct_mixed_comp_pair_funcd_check K X E A B FF GG)
+          x y p)
+        e));
+
+// The owner's full action remains iterable at a genuine next base cell.
+symbol direct_mixed_comp_higher_check
+  [K X : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  [x y : τ (Obj K)]
+  [p q : τ (Hom K x y)]
+  (theta : τ (Hom (Hom_cat K x y) p q))
+  : τ (Transf
+      (@tapp1_fapp0
+        K Cat_cat
+        (@direct_mixed_comp_source_check K X A B)
+        (@Functor_catd K A B)
+        x y (@Functor_comp_pair_funcd K X A B) p)
+      (@tapp1_fapp0
+        K Cat_cat
+        (@direct_mixed_comp_source_check K X A B)
+        (@Functor_catd K A B)
+        x y (@Functor_comp_pair_funcd K X A B) q))
+≔ @fapp1_fapp0
+    (Hom_cat K x y)
+    (Functor_cat
+      (Fibre_cat (@direct_mixed_comp_source_check K X A B) x)
+      (Fibre_cat (@Functor_catd K A B) y))
+    (@tapp1_func
+      K Cat_cat
+      (@direct_mixed_comp_source_check K X A B)
+      (@Functor_catd K A B)
+      x y (@Functor_comp_pair_funcd K X A B))
+    p q theta;
+
+// The product source is not identified with the mixed target family.
+assertnot [K X : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B : τ (Catd K)) ⊢
+  @direct_mixed_comp_source_check K X A B
+    ≡ @Functor_catd K A B;
+
+// -------------------------------------------------------------------------------------------------
 // Mixed displayed curry
 // catalog-area: Mixed displayed curry
 // -------------------------------------------------------------------------------------------------

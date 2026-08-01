@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-07-23
+Last consolidated: 2026-08-01
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -1823,6 +1823,45 @@ implied.
 `Functor_catd`, `Hom_catd`, and `Transf_catd` are mixed-variance family
 constructors. Pointwise formulas do not replace their required base-arrow
 actions.
+
+The active constant-middle composition owner is the variance-qualified
+displayed lift of ordinary functor composition. For `A : Catd(Op K)`,
+`B : Catd K`, and an ordinary category `X`, it has the form
+
+```text
+Functor_comp_pair_funcd(A;X;B)
+  : Functord(
+      P(Functor_catd(A,Const_catd(K,X)),
+        Functor_catd(Const_catd(Op K,X),B)),
+      Functor_catd(A,B)).
+```
+
+At `k`, it maps a pair `(F,G)` to the existing ordinary composite
+`Functor_comp_pair_func(F,G)`. Its full and capped base actions reuse the
+target `Functor_catd(A,B)` action and remain whole functors, so the generic
+`fdapp1_int_cell` and next-hom action can observe them. The rigid mixed
+endpoint action remains owned by `Functor_catd` and ultimately by
+`Unit_prof`; this package adds no duplicate identity, composition,
+naturality, or `Unit_prof` rule.
+
+The ordinary middle `X` is essential. The positive family
+`Const_catd(K,X)` and negative family `Const_catd(Op K,X)` have the same
+fibre `X`, but a general family over `K` cannot also be used as a family over
+`Op K`. Accordingly this owner is a direct application/composition
+combinator for bodies such as `G[k](c)(F[k](c)(a))`, not a mixed-curry
+principle or a collapse of positive and negative classifiers. Nested binder
+introduction remains the direct construction
+`lambda^n k. lambda^f c. lambda^f a. t`; neither a total-context section nor
+the auxiliary curry packages are prerequisites.
+
+The durable diagnostic area contains seven checks covering the owner point,
+constant-family fibre conversion, direct paired object and inner-arrow
+computation, capped base action, generic internal cell/next-cell iteration,
+and source/target non-collapse. Warning comparison remains exactly 1,079
+critical pairs and 159 replaceable pattern variables, strict LHS audit is
+zero/53/33, the catalog contains 1,801 classified checks across 69 areas with
+zero unclassified checks, and the one semantic-promotion CI passes all 41
+kernel/example targets and repository-integrity gates.
 
 The constant-domain displayed-evaluation closure is now active. For
 `A : Cat`, `B : Catd K`, and

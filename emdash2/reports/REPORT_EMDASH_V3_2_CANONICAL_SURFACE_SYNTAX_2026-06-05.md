@@ -1,7 +1,7 @@
 # emdash v3.2 Canonical Surface Syntax
 
 Date: 2026-06-05
-Last reviewed: 2026-07-27
+Last reviewed: 2026-08-01
 
 Status: current notation authority for v3.2 comments, examples, and future
 surface-syntax/parser planning.
@@ -495,6 +495,26 @@ It is constructed with `displayedDependentContextLambda` in the root-only
 the typed family bases; explicit `apply` and `fibrePair` nodes remain valid
 direct-TypeScript syntax. This is not a string-parser grammar or a claim of
 arbitrary `:^nd` telescope depth.
+
+Constant-middle direct application may be written:
+
+```text
+F : C ⊢_K Functor_catd(A,Const_catd(K,X))
+G : C ⊢_K Functor_catd(Const_catd(Op K,X),B)
+
+lambda^n k. lambda^f c. lambda^f a. G[k](c)(F[k](c)(a))
+  : Functord_cat C (Functor_catd A B).
+```
+
+The explicit kernel owner is `Functor_comp_pair_funcd`: pair `F` and `G`
+over their common displayed source and apply that owner. The two occurrences
+of `X` use opposite constant-family bases because `Functor_catd` is
+contravariant in its source and covariant in its target; their fibres are
+definitionally the same ordinary category. This notation is qualified to a
+constant middle. It neither coerces a general positive family into a negative
+one nor denotes mixed curry. The nested binders themselves remain the
+fundamental introduction form, and the generic `fapp`/`tapp` calculus owns
+the resulting object, arrow, base-arrow, and higher action.
 
 ## Transformations
 

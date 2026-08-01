@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-28
+Date: 2026-08-01
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
@@ -50,6 +50,17 @@ and bounded TypeScript consumer; Foundations records the componentwise
 mathematical action; and the canonical-syntax report records the exact
 root-only `a; b,c; d` telescope. Arbitrary depth and general `:^nd` coherence
 remain deferred.
+
+The 2026-08-01 constant-middle direct-application closure adds the single
+`Functor_comp_pair_funcd` owner and its point/full/capped projections. It
+composes a varying `A[k] -> X` functor with a varying `X -> B[k]` functor,
+while reusing the existing internal `Functor_catd`/`Unit_prof` action for
+base arrows and higher cells. The current-status report records the owner and
+coherence boundary, Foundations gives its variance-qualified mathematical
+reading, and the canonical-syntax report records the corresponding direct
+nested-binder body. This is an application combinator, not mixed curry or a
+total-context-section prerequisite; a nonconstant middle remains outside the
+active construction.
 
 ## Recently Completed Plan Ledgers
 

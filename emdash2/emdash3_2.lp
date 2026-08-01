@@ -13403,6 +13403,106 @@ rule @tapp1_fapp0
       $y
       $p;
 
+// Constant-middle pointwise composition of two mixed functor families.
+//
+//   compd(A;X;B)
+//     : P(Functor_catd(A,const_K X),
+//         Functor_catd(const_(K^op) X,B))
+//         ⊢_K Functor_catd(A,B).
+//
+// The constant middle is the exact variance condition under which both
+// varying inputs compose. The point component is ordinary functor
+// composition; the target mixed-family action owns base and higher action.
+injective symbol Functor_comp_pair_funcd [K X : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  : τ (Functord
+      (@comp_cat_fapp0
+        K
+        (Product_cat Cat_cat Cat_cat)
+        Cat_cat
+        (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+        (Struct_sigma
+          (@Functor_catd K A (@Const_catd K X))
+          (@Functor_catd K (@Const_catd (Op_cat K) X) B)))
+      (@Functor_catd K A B));
+
+// Point component is ordinary composition of the pair of fibre functors.
+rule @tapp0_fapp0
+      $K Cat_cat _ _ $k
+      (@Functor_comp_pair_funcd $K $X $A $B)
+  ↪ @Functor_comp_pair_func
+      (Fibre_cat $A $k)
+      $X
+      (Fibre_cat $B $k);
+
+// Full base action keeps the target Functor_catd action whole, then
+// precomposes it with the ordinary fibrewise composition functor at x.
+rule @tapp1_func
+      $K Cat_cat _ _ $x $y
+      (@Functor_comp_pair_funcd $K $X $A $B)
+  ↪ @comp_cat_fapp0
+      (Hom_cat $K $x $y)
+      (Functor_cat
+        (Fibre_cat (@Functor_catd $K $A $B) $x)
+        (Fibre_cat (@Functor_catd $K $A $B) $y))
+      (Functor_cat
+        (Fibre_cat
+          (@comp_cat_fapp0
+            $K
+            (Product_cat Cat_cat Cat_cat)
+            Cat_cat
+            (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+            (Struct_sigma
+              (@Functor_catd $K $A (@Const_catd $K $X))
+              (@Functor_catd $K (@Const_catd (Op_cat $K) $X) $B)))
+          $x)
+        (Fibre_cat (@Functor_catd $K $A $B) $y))
+      (@comp_cat_con_func
+        (Fibre_cat
+          (@comp_cat_fapp0
+            $K
+            (Product_cat Cat_cat Cat_cat)
+            Cat_cat
+            (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+            (Struct_sigma
+              (@Functor_catd $K $A (@Const_catd $K $X))
+              (@Functor_catd $K (@Const_catd (Op_cat $K) $X) $B)))
+          $x)
+        (Fibre_cat (@Functor_catd $K $A $B) $x)
+        (Fibre_cat (@Functor_catd $K $A $B) $y)
+        (@Functor_comp_pair_func
+          (Fibre_cat $A $x)
+          $X
+          (Fibre_cat $B $x)))
+      (@fapp1_func
+        $K Cat_cat (@Functor_catd $K $A $B) $x $y);
+
+// Capped base action is the corresponding target-action composite at p.
+rule @tapp1_fapp0
+      $K Cat_cat _ _ $x $y
+      (@Functor_comp_pair_funcd $K $X $A $B)
+      $p
+  ↪ @comp_cat_fapp0
+      (Fibre_cat
+        (@comp_cat_fapp0
+          $K
+          (Product_cat Cat_cat Cat_cat)
+          Cat_cat
+          (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+          (Struct_sigma
+            (@Functor_catd $K $A (@Const_catd $K $X))
+            (@Functor_catd $K (@Const_catd (Op_cat $K) $X) $B)))
+        $x)
+      (Fibre_cat (@Functor_catd $K $A $B) $x)
+      (Fibre_cat (@Functor_catd $K $A $B) $y)
+      (@fapp1_fapp0
+        $K Cat_cat (@Functor_catd $K $A $B) $x $y $p)
+      (@Functor_comp_pair_func
+        (Fibre_cat $A $x)
+        $X
+        (Fibre_cat $B $x));
+
 // Mixed-variance hom family for two sections of a displayed family.
 //
 // Surface/formula:

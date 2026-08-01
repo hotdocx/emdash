@@ -1529,6 +1529,40 @@ recursive constant-domain displayed application. Arbitrary mixed-domain
 evaluation, general contravariant occurrence lowering, and abstraction
 across a genuine dependent telescope edge remain separate problems.
 
+A complementary constant-*middle* construction composes two varying
+functors. If
+
+```text
+F : A[k] -> X
+G : X -> B[k],
+```
+
+where `X` is an ordinary category independent of `k`, then
+
+```text
+comp_d(A;X;B)
+  : P(Functor_catd(A,Const_catd(K,X)),
+      Functor_catd(Const_catd(Op K,X),B))
+      ->_K Functor_catd(A,B)
+comp_d(A;X;B)[k](F,G) = G o F.
+```
+
+The two constant-family spellings encode the two variances, but both fibres
+reduce to `X`. The displayed owner retains the whole base-arrow action by
+delegating to the already-internalized target `Functor_catd` action; its
+object, inner-arrow, base-arrow, and next-cell behavior therefore does not
+require externally supplied naturality equations. This is the internal
+application combinator needed to elaborate a direct nested-binder body such
+as `G[k](c)(F[k](c)(a))`. It is not a curry theorem and does not replace the
+fundamental direct introduction
+`lambda^n k. lambda^f c. lambda^f a. t`.
+
+There is intentionally no corresponding construction for an arbitrary
+middle family `M`: the first input would require `M : Catd K`, while the
+second requires a negative family over `Op K`. Relating those presentations
+needs additional mathematical structure, not an elaborator cast or an
+unchecked equality.
+
 ## 11. Basic Sigma/Pi Operations And Adjunction Shadows
 
 The active v3.2 implementation includes an ordinary functor adjunction
