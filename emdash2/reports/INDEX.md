@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-07-28
+Date: 2026-08-01
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
@@ -254,6 +254,19 @@ remain deferred.
 
 ## Current Plans
 
+- `REPORT_EMDASH_V3_2_PRESHEAVES_SITES_SCHEMES_PRELIMINARY_PLAN_2026-08-01.md`:
+  active living Lambdapi-first standard-library architecture for Cat-valued
+  presheaves, ordinary versus higher sieves, coverage/topology/modality
+  separation, descent/sheaves, commutative algebra and localization, ringed
+  sites, affine charts, schemes, and the later functor-of-points comparison.
+  Its completed `PSSS-00` review includes a bounded green type probe showing
+  that a rigid `Psh_cat` facade, opposite reindexing, contravariant Yoneda,
+  Sigma-built slices, the higher-sieve classifier, and maximal higher sieves
+  compose from existing v3.2 owners without a kernel edit. The authorized
+  implementation line begins with the bounded `PSSS-01` presheaf facade;
+  ordinary `Omega`, generic
+  coverage saturation, sheafification, algebra, Zariski topology, and schemes
+  remain explicitly gated.
 - `../../docs/RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md`:
   active isolated TypeScript outer-LF usability plan for an
   unparameterized, nonrecursive, single-constructor dependent structure with

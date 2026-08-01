@@ -6,6 +6,21 @@ Status: implemented, validated, and locally checkpointed
 
 Plan-ID: `RECORD-STRUCTURE-USABILITY-V3.2`
 
+Depends-On: completed adjunction outer-LF macro architecture at `dd8a82e` and
+the active TypeScript v3.2 LF transfer/checker/runtime infrastructure
+
+Supersedes: no active plan; narrows the earlier tentative ordinary-inductive
+macro idea to a nonrecursive single-constructor structure declaration
+
+Side-Task-Ledger: Section 8, rows `RECORD-PLAN-0` through `RECORD-FINAL-5`
+
+Infinity-Codex-Origin: session
+`019fbb03-cc64-7cf2-be18-24c35b0dfab0`, archived structure review response
+`019fbbcc-1657-7521-b1ca-e968717e670b`
+
+Infinity-Codex-Decision-Responses: the same session's recovery index at
+`emdash2/tmp/ai-responses/sessions/2026-08-01_019fbb03cc64/INDEX.md`
+
 Parent checkpoint:
 `dd8a82e77ef68960a1ba44e98c6235a9c5a3f3ff`
 (`feat: add outer LF adjunction declarations`)

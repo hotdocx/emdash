@@ -6,6 +6,21 @@ Status: implemented, validated, and locally checkpointed
 
 Plan-ID: `ADJUNCTION-USABILITY-V3.2`
 
+Depends-On: active v3.2 `Adjunction`, `DefIso`, Hom-profunctor comparison, and
+the TypeScript outer-LF transfer/checker/runtime infrastructure
+
+Supersedes: no active plan; replaces only tentative direct kernel-alias and
+premature faithful object-only triangular implementation ideas
+
+Side-Task-Ledger: Section 8, rows `ADJ-PLAN-0` through `ADJ-FINAL-4`
+
+Infinity-Codex-Origin: session
+`019fbb03-cc64-7cf2-be18-24c35b0dfab0`, archived design response
+`019fbb0c-13af-7e83-81af-e6c58ad75cd5`
+
+Infinity-Codex-Decision-Responses: archived response
+`emdash2/tmp/ai-responses/sessions/2026-08-01_019fbb03cc64/responses/0001_2026-08-01T02-23-04Z_019fbb0c-13af-7e83-81af-e6c58ad75cd5.md`
+
 Baseline: `cea2605ca4fe6a3023b46c26c5997956cc4e9f03`
 (`docs: record recursive Hom Pages deployment`)
 
