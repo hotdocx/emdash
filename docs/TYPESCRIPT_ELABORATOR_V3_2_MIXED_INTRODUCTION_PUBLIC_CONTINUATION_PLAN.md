@@ -65,7 +65,9 @@ implementation checkpoint is
 `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; D-040 may now be frozen for a
 separate review. H-DTTLF-USABILITY-MIXED-CURRY-01 /
 D-DTTLF-USABILITY-040 below freezes that exact next package. Its proposal
-checkpoint is pending; no mixed-curry implementation is yet authorized.
+checkpoint is `d3c71fc735fb84e1818f128e9b5bb6750a69e4f0`. The separate review
+recorded below approves exactly that gate under the standing unattended
+delegation, with immediate human supersession.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -326,7 +328,7 @@ It deliberately avoids:
 | `PUBLIC-HOM-INTEGRATE-1C` | complete at public checkpoint `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; Pages run `30680155372` successful and live smoke green | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
 | `MIXED-ACTION-FOUNDATION-1A` | final-green at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137` | completed `MIXED-INTRODUCTION-0A`; approved D-039; Unit-prof/full-action probes and active-kernel CI | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
-| `MIXED-CURRY-1B` | D-040 proposal frozen; separate review required before implementation | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; active-consumer probe | Implement one exact Lambdapi-first mixed-curry operation package: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. Add no Hom-action duplicate. |
+| `MIXED-CURRY-1B` | D-040 approved; implementation dependency-ready | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; D-040 proposal `d3c71fc735fb84e1818f128e9b5bb6750a69e4f0`; active-consumer probe | Implement one exact Lambdapi-first mixed-curry operation package: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. Add no Hom-action duplicate. |
 | `MIXED-INTRODUCTION-TS-1C` | blocked on green `MIXED-CURRY-1B` and transfer qualification | active owner/rules and conformance evidence | Transfer the owner mechanically and extend the contextual compiler with one genuinely non-eta mixed body. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
@@ -1224,6 +1226,17 @@ is to establish one non-eta, internally coherent mixed binder body while
 preserving the existing `Unit_prof` ownership and all current non-collapse
 boundaries.
 
+The proposal was checkpointed at
+`d3c71fc735fb84e1818f128e9b5bb6750a69e4f0`. A separate review verified that
+the checkpoint changes only this living plan; the final-green D-039 checkpoint
+is its ancestor; the eleven/four/seven inventory exactly matches the green
+active-consumer probe; none of the proposed names already exists in the active
+kernel; ordinary `curry_func_func` has only the ordinary-product source; and
+`Unit_prof` owns action rather than section transposition. No immediate human
+correction superseded the isolated proposal. Under the user's standing
+unattended delegation, with immediate human supersession, D-040 is approved
+exactly as proposed and active implementation may begin within this boundary.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -1281,9 +1294,12 @@ aggregate or redeploy it merely for reassurance.
 
 Treat MIXED-INTRODUCTION-0A as probe-complete and D-039 as final-green at
 `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`: the corrected six-rule,
-zero-new-owner action foundation. Do not repeat its unchanged aggregate. Freeze
-and separately review D-040 before promoting the stable mixed-curry
-owner/projection ladder. Preserve the measured two-sided context,
+zero-new-owner action foundation. Do not repeat its unchanged aggregate. Treat
+D-040 at proposal checkpoint
+`d3c71fc735fb84e1818f128e9b5bb6750a69e4f0` as separately approved and
+implement only the exact eleven-alias/four-head/seven-rule mixed-curry package.
+If an enumerated stop condition is met, freeze a correcting proposal instead
+of broadening it. Preserve the measured two-sided context,
 negative-A/positive-C polarity, canonical Hom classifier seam, stable
 `Functor_catd` head, Sigma/pullback non-collapse, and the existing
 `Unit_prof -> Hom_tele_func -> Hom_func -> Hom_fapp0` ownership. Prefer generic
@@ -1500,4 +1516,14 @@ removal, or unrelated cleanup is authorized.
   existing `Unit_prof` ambient-Hom ladder; it adds no competing Hom action.
   Inverse curry, unrestricted variance, product facade, TypeScript/public
   work, and external coherence remain excluded. The proposal checkpoint is
-  recorded after commit; implementation requires a separate review.
+  `d3c71fc735fb84e1818f128e9b5bb6750a69e4f0`; implementation requires a
+  separate review.
+- **2026-08-01 — D-DTTLF-USABILITY-040 approved exactly as proposed.** The
+  separate review found the proposal-only checkpoint clean and descended from
+  the final-green D-039 kernel. Its inventory is exactly eleven transparent
+  aliases, one curry functor plus three staged projected heads, and seven
+  rules. Existing ordinary curry cannot transpose this Sigma/pullback section
+  context, while `Unit_prof` already owns and continues to supply the Hom
+  action. No immediate human correction superseded the proposal, so the
+  standing unattended delegation authorizes only this measured package and
+  its nested-SOP validation, with immediate human supersession.
