@@ -34,12 +34,15 @@ below approves exactly that split under the standing unattended delegation,
 with human supersession. The corrected preset, optional-loader repair,
 Core-name contract split, proportional tests/build, and real-browser smoke are
 final-green at coherent implementation checkpoint
-`d08f2de65336dbe393864bc520fc8486ea365f99`. Clean fast-forward publication
-is the next dependency-ready operation. After the corrected public slice is
-deployed, the next
-substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
-audit. No mixed-curry owner or kernel rule is authorized before that audit
-freezes a separate exact gate.
+`d08f2de65336dbe393864bc520fc8486ea365f99`. The synchronized ledger/public
+checkpoint is `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; it was cleanly fast-forwarded
+to local `main`, pushed without force, and deployed successfully by GitHub
+Pages run `30680155372`. The live reviewer exposes eleven presets, executes
+the recursive functor-category Hom source to `ACCEPTED`, retains the qualified
+research boundary, and serves both the overview paper and development book
+with HTTP 200. The next substantive row is therefore the Lambdapi-first,
+zero-kernel-delta mixed-introduction audit. No mixed-curry owner or kernel
+rule is authorized before that audit freezes a separate exact gate.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -297,8 +300,8 @@ It deliberately avoids:
 | `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | final-green with D-037 completion at `d08f2de65336dbe393864bc520fc8486ea365f99` | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
 | `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | final-green at `d08f2de65336dbe393864bc520fc8486ea365f99` | implemented D-036; approved D-037 | Extract two pure Core-name contracts, make transfer linkage consume/re-export them, and point the categorical surface at those contracts; retain one source of truth and no audit mirror. |
 | `PUBLIC-HOM-VALIDATE-1B` | final-green; evidence recorded below | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A`; `PUBLIC-BROWSER-CONTRACT-CORRECTION-1B` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No repeated long repository aggregate. |
-| `PUBLIC-HOM-INTEGRATE-1C` | dependency-ready after coherent implementation checkpoint and fresh fetch/ancestry checks | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
-| `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
+| `PUBLIC-HOM-INTEGRATE-1C` | complete at public checkpoint `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; Pages run `30680155372` successful and live smoke green | green `VALIDATE-1B`; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
+| `MIXED-INTRODUCTION-0A` | dependency-ready; next substantive row; read-only/Lambdapi-probe audit | completed and deployed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
 | `MIXED-CURRY-1A` | decision-blocked on `MIXED-INTRODUCTION-0A` | separately frozen owner/signature/rule proposal | Implement one exact Lambdapi-first mixed-curry functor with internal object/base-arrow action and qualified laws. |
 | `MIXED-INTRODUCTION-TS-1B` | blocked on green `MIXED-CURRY-1A` and transfer qualification | active owner/rules and conformance evidence | Transfer the owner mechanically and extend the contextual compiler with one genuinely non-eta mixed body. |
 | `MIXED-VARIANCE-GRADUATE-1C` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1B` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
@@ -658,17 +661,12 @@ the next dependency-ready row on every continuation. Follow root AGENTS.md,
 docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md, and emdash2/AGENTS.md whenever
 the active Lambdapi workspace is involved.
 
-First complete the bounded recursive-Hom public synchronization exactly as
-corrected by D-DTTLF-USABILITY-035 through D-DTTLF-USABILITY-037: use the
-existing browser reviewer and the default-profile functor-category
-recursive-Hom witness; keep optional Node profile modules lazy and import
-their Core names only from dependency-free contracts in browser code; add no
-semantic/checker/parser architecture, keep the qualified finite-Hom claim
-distinct from general mixed introduction and arbitrary variance, validate
-proportionally, checkpoint, fast-forward/push main only after fresh ancestry
-checks, and verify the exact Pages deployment.
+Treat the bounded recursive-Hom public synchronization as complete at
+`9c4ed3612e6b7888a2e05a9dfca4090aac04b575` and successful Pages run
+`30680155372`. Preserve that checked/deployed boundary; do not repeat its long
+aggregate or redeploy it merely for reassurance.
 
-Then begin MIXED-INTRODUCTION-0A as a Lambdapi-first read-only/probe audit.
+Begin MIXED-INTRODUCTION-0A as a Lambdapi-first read-only/probe audit.
 Find the exact variance-correct two-sided context, existing owners, missing
 actions/laws, representative non-eta positive body, and fail-closed negative
 bodies. Freeze a separate owner-position proposal before any kernel or
@@ -786,3 +784,15 @@ removal, or unrelated cleanup is authorized.
   implementation checkpoint.** Publication remains limited to a freshly
   validated clean fast-forward of `main`, a non-force push, monitoring the
   exact Pages run, and verifying the live reviewer plus paper/book routes.
+- **2026-08-01 — `PUBLIC-HOM-INTEGRATE-1C` complete and live.** Fetched
+  `origin/main` was an ancestor of both local `main` and the clean reviewed
+  goal checkpoint. Local `main` fast-forwarded without a merge commit to
+  `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`, and that exact commit was pushed
+  without force. GitHub Pages run `30680155372` completed successfully. An
+  isolated Chromium smoke against `https://hotdocx.github.io/emdash/`
+  observed eleven presets, selected **Recursive Hom over functors**, and
+  executed `id (hom (hom (functor A B) F G) alpha beta)` to `ACCEPTED`; the
+  qualified finite-Hom versus mixed-introduction/variance boundary remained
+  visible. The deployed overview paper and development book both returned
+  HTTP 200. The in-app browser controller was unavailable, so the approved
+  isolated Playwright fallback supplied the real-browser evidence.
