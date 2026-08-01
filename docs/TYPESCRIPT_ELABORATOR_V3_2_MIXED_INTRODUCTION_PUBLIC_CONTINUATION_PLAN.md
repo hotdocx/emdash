@@ -433,7 +433,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-SOURCE-GRADUATE-1F` | read-only audit complete; split before graduation | final-green D-045/D-046; direct source/target recursion; user's direct-binder invariant | Nested `Functor_catd`/`Hom_catd`/`Transf_catd` classifiers and simultaneous source/target spines work through the direct binder. The audit found one generic frontend category-conversion seam and one genuinely missing product-distribution construction; it found no curry prerequisite. |
 | `DIRECT-MIXED-NESTED-CONVERSION-1F1` | final-green at `4845f44c11914f142be357d115ebdde92a33d039` under D-DTTLF-USABILITY-047 | completed `DIRECT-MIXED-SOURCE-GRADUATE-1F`; proposal `4ab3cf0f19bea8592c07fe9ebc59297b1377e7bc`; separate review under standing unattended delegation | One generic fast-path-plus-kernel-conversion service now owns four mixed base checks. Natural nested negative `Functor_catd`/`Transf_catd`, Hom/Transf targets, and simultaneous source/target spines are checked without coercion, curry, kernel, runtime, or grammar changes. |
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G` | read-only audit complete; one-owner direct-binder continuation selected | final-green D-047; measured non-conversion between product-of-mixed-functors and mixed-functor-into-product; active product and mixed-action owners | No existing active owner supplies the required global comparison. One `Functor_catd_product_funcd` distributor with point/full/capped projections is owner-position, quiet-green, strict-audit clean, and zero-warning-delta; its direct pair consumer computes on objects and inner arrows and retains internal base/higher action. No curry or `Product_catd` facade is involved. |
-| `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | exact proposal frozen under D-DTTLF-USABILITY-048; separate review required | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047 | Promote exactly one distributor and three projection rules, transfer them generically, and extend the existing direct factorization tree with recursive `typed-pair`. Lower branches recursively, combine them with existing `Product_pair_funcd`, then compose the distributor. Preserve the direct binder as fundamental and retain all curry, facade, text/browser, and unrestricted-variance nonclaims. |
+| `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | approved exactly as proposed under D-DTTLF-USABILITY-048; implementation dependency-ready | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Promote exactly one distributor and three projection rules, transfer them generically, and extend the existing direct factorization tree with recursive `typed-pair`. Lower branches recursively, combine them with existing `Product_pair_funcd`, then compose the distributor. Preserve the direct binder as fundamental and retain all curry, facade, text/browser, and unrestricted-variance nonclaims. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3145,6 +3145,32 @@ This proposal implements one recursive direct-body constructor. It does not
 graduate unrestricted categorical lambda synthesis or authorize the separate
 product-facade, curry, text/browser, or arbitrary-variance objectives.
 
+### Separate D-DTTLF-USABILITY-048 review result
+
+Proposal checkpoint
+`799f3219d9af58ad3b949ec212ef46748a0d7e2f` is approved exactly as frozen.
+The checkpoint is documentation-only and descends from final-green D-047.
+The active kernel still has no `Functor_catd_product_funcd`; the ignored
+owner-position candidate has exactly one such declaration and exactly the
+three proposed point/full/capped rules. Its bounded full check, explicit
+object/inner-arrow/direct-consumer checks, genuine higher-cell consumer,
+1,238-warning zero-delta comparison, and strict zero-unreviewed-clause audit
+are green.
+
+The review also confirms that the TypeScript change extends the already
+recursive typed contextual IR. `fibrePair` already records a `typed-pair`
+whose usage is the merge of its two branches, and
+`Product_pair_funcd` is already generically transferred. The missing map is
+therefore exactly the audited distributor; no total-context section, curry,
+new parser/AST layer, or external coherence argument is required.
+
+No immediate human correction superseded the frozen checkpoint. Under the
+user's standing unattended-review delegation, with immediate human
+supersession, implementation is authorized only for the twelve numbered
+D-048 items. The product facade, inverse/global equality, curry packages,
+text/browser/public work, unrestricted variance, and all remote Git effects
+remain excluded.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -3288,9 +3314,11 @@ kernel has product pairing and mixed action but no global map from
 owner-position quiet-green, strict-audit clean, and zero-warning-delta; its
 direct pair consumer computes on objects and inner arrows and retains
 internal base/higher action. Treat D-DTTLF-USABILITY-048 as a frozen exact
-proposal requiring a separate review before semantic edits. It extends the
-direct factorization tree with recursive `typed-pair`; it is not curry, a
-`Product_catd` facade, text/browser work, or publication.
+proposal at `799f3219d9af58ad3b949ec212ef46748a0d7e2f`, separately
+reviewed-approved under the standing unattended delegation. Continue with its
+exact one-owner/three-rule generic transfer and recursive `typed-pair`
+implementation. It is not curry, a `Product_catd` facade, text/browser work,
+or publication.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -3309,6 +3337,16 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-048 approved exactly as proposed.** The
+  separate review found proposal checkpoint
+  `799f3219d9af58ad3b949ec212ef46748a0d7e2f` clean and documentation-only,
+  independently confirmed the active owner is absent, and matched the
+  ignored candidate to the exact one-declaration/three-rule inventory. The
+  bounded full check, direct object/arrow consumer, higher-cell consumer,
+  unchanged 1,079/159 warning inventory, and strict LHS audit are green. No
+  immediate human correction superseded the proposal, so the standing
+  unattended delegation authorizes only its twelve items, with immediate
+  human supersession.
 - **2026-08-01 — D-DTTLF-USABILITY-048 frozen for separate review.** The
   exact proposal promotes one `Functor_catd_product_funcd` owner and only its
   point/full/capped projections, transfers that one-declaration/three-rule

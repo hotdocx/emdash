@@ -104,9 +104,12 @@
 > direct consumer composes existing `Product_pair_funcd`, computes on objects
 > and inner arrows, and retains internal base/higher action. The exact
 > `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` continuation is frozen as
-> D-DTTLF-USABILITY-048 and requires a separate review before semantic edits.
-> It recursively lowers the already-existing `typed-pair` node under the
-> fundamental direct binder; it is neither curry nor a `Product_catd` facade.
+> D-DTTLF-USABILITY-048 at proposal checkpoint
+> `799f3219d9af58ad3b949ec212ef46748a0d7e2f` and is separately
+> reviewed-approved under the standing unattended delegation. Its exact
+> implementation recursively lowers the already-existing `typed-pair` node
+> under the fundamental direct binder; it is neither curry nor a
+> `Product_catd` facade.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
