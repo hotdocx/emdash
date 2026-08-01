@@ -13739,6 +13739,357 @@ assert [K : Cat]
 assertnot [K : Cat] (A : τ (Catd (Op_cat K))) ⊢ Op_cat K ≡ K;
 
 // -------------------------------------------------------------------------------------------------
+// Direct mixed pointwise product distribution
+// catalog-area: Direct mixed pointwise product distribution
+// -------------------------------------------------------------------------------------------------
+
+// The exact consumer required by a direct pair body: pair the recursively
+// compiled branches, then distribute their common mixed source over the
+// transparent product target.
+symbol direct_mixed_product_pair_funcd_check
+  [K : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  (FF : τ (Functord E (@Functor_catd K A B)))
+  (GG : τ (Functord E (@Functor_catd K A C)))
+  : τ (Functord
+      E
+      (@Functor_catd K A (@Product_catd_transparent_check K B C)))
+≔ @comp_catd_fapp0
+    K
+    E
+    (@Product_catd_transparent_check
+      K
+      (@Functor_catd K A B)
+      (@Functor_catd K A C))
+    (@Functor_catd K A (@Product_catd_transparent_check K B C))
+    (@Functor_catd_product_funcd K A B C)
+    (@Product_pair_funcd
+      K
+      E
+      (@Functor_catd K A B)
+      (@Functor_catd K A C)
+      FF
+      GG);
+
+// Point distribution is the identity on the ordinary product normal form.
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @tapp0_fapp0
+      K
+      Cat_cat
+      (@Product_catd_transparent_check
+        K
+        (@Functor_catd K A B)
+        (@Functor_catd K A C))
+      (@Functor_catd K A (@Product_catd_transparent_check K B C))
+      k
+      (@Functor_catd_product_funcd K A B C)
+    ≡ @id_func
+        (Product_cat
+          (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+          (Functor_cat (Fibre_cat A k) (Fibre_cat C k)));
+
+// Full and capped base action remain the existing source-product action.
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  (x y : τ (Obj K)) ⊢
+  @tapp1_func
+      K
+      Cat_cat
+      (@Product_catd_transparent_check
+        K
+        (@Functor_catd K A B)
+        (@Functor_catd K A C))
+      (@Functor_catd K A (@Product_catd_transparent_check K B C))
+      x y
+      (@Functor_catd_product_funcd K A B C)
+    ≡ @fapp1_func
+        K
+        Cat_cat
+        (@Product_catd_transparent_check
+          K
+          (@Functor_catd K A B)
+          (@Functor_catd K A C))
+        x y;
+
+assert [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  (x y : τ (Obj K))
+  (p : τ (Hom K x y)) ⊢
+  @tapp1_fapp0
+      K
+      Cat_cat
+      (@Product_catd_transparent_check
+        K
+        (@Functor_catd K A B)
+        (@Functor_catd K A C))
+      (@Functor_catd K A (@Product_catd_transparent_check K B C))
+      x y
+      (@Functor_catd_product_funcd K A B C)
+      p
+    ≡ @fapp1_fapp0
+        K
+        Cat_cat
+        (@Product_catd_transparent_check
+          K
+          (@Functor_catd K A B)
+          (@Functor_catd K A C))
+        x y p;
+
+// Direct c/a object evaluation computes componentwise after distribution.
+assert [K : Cat]
+  (E : τ (Catd K))
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  (FF : τ (Functord E (@Functor_catd K A B)))
+  (GG : τ (Functord E (@Functor_catd K A C)))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k)))
+  (a : τ (Obj (Fibre_cat A k))) ⊢
+  @fapp0
+      (Fibre_cat A k)
+      (Fibre_cat (@Product_catd_transparent_check K B C) k)
+      (@fapp0
+        (Fibre_cat E k)
+        (Fibre_cat
+          (@Functor_catd K A (@Product_catd_transparent_check K B C))
+          k)
+        (@tapp0_fapp0
+          K Cat_cat
+          E
+          (@Functor_catd K A (@Product_catd_transparent_check K B C))
+          k
+          (@direct_mixed_product_pair_funcd_check K E A B C FF GG))
+        e)
+      a
+    ≡ @Product_pair
+        (Fibre_cat B k)
+        (Fibre_cat C k)
+        (@fapp0
+          (Fibre_cat A k)
+          (Fibre_cat B k)
+          (@fapp0
+            (Fibre_cat E k)
+            (Fibre_cat (@Functor_catd K A B) k)
+            (@tapp0_fapp0 K Cat_cat E (@Functor_catd K A B) k FF)
+            e)
+          a)
+        (@fapp0
+          (Fibre_cat A k)
+          (Fibre_cat C k)
+          (@fapp0
+            (Fibre_cat E k)
+            (Fibre_cat (@Functor_catd K A C) k)
+            (@tapp0_fapp0 K Cat_cat E (@Functor_catd K A C) k GG)
+            e)
+          a);
+
+symbol direct_mixed_product_pair_left_check
+  [K : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  [B : τ (Catd K)]
+  (FF : τ (Functord E (@Functor_catd K A B)))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k)))
+  : τ (Functor (Fibre_cat A k) (Fibre_cat B k))
+≔ @fapp0
+    (Fibre_cat E k)
+    (Fibre_cat (@Functor_catd K A B) k)
+    (@tapp0_fapp0 K Cat_cat E (@Functor_catd K A B) k FF)
+    e;
+
+symbol direct_mixed_product_pair_right_check
+  [K : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  [C : τ (Catd K)]
+  (GG : τ (Functord E (@Functor_catd K A C)))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k)))
+  : τ (Functor (Fibre_cat A k) (Fibre_cat C k))
+≔ @fapp0
+    (Fibre_cat E k)
+    (Fibre_cat (@Functor_catd K A C) k)
+    (@tapp0_fapp0 K Cat_cat E (@Functor_catd K A C) k GG)
+    e;
+
+// Direct inner-arrow evaluation is componentwise; no external naturality
+// evidence is introduced by pairing.
+assert [K : Cat]
+  (E : τ (Catd K))
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  (FF : τ (Functord E (@Functor_catd K A B)))
+  (GG : τ (Functord E (@Functor_catd K A C)))
+  (k : τ (Obj K))
+  (e : τ (Obj (Fibre_cat E k)))
+  (a a' : τ (Obj (Fibre_cat A k)))
+  (alpha : τ (Hom (Fibre_cat A k) a a')) ⊢
+  @fapp1_fapp0
+      (Fibre_cat A k)
+      (Fibre_cat (@Product_catd_transparent_check K B C) k)
+      (@fapp0
+        (Fibre_cat E k)
+        (Fibre_cat
+          (@Functor_catd K A (@Product_catd_transparent_check K B C))
+          k)
+        (@tapp0_fapp0
+          K Cat_cat
+          E
+          (@Functor_catd K A (@Product_catd_transparent_check K B C))
+          k
+          (@direct_mixed_product_pair_funcd_check K E A B C FF GG))
+        e)
+      a a' alpha
+    ≡ @Product_pair
+        (Hom_cat
+          (Fibre_cat B k)
+          (@fapp0
+            (Fibre_cat A k)
+            (Fibre_cat B k)
+            (@direct_mixed_product_pair_left_check K E A B FF k e)
+            a)
+          (@fapp0
+            (Fibre_cat A k)
+            (Fibre_cat B k)
+            (@direct_mixed_product_pair_left_check K E A B FF k e)
+            a'))
+        (Hom_cat
+          (Fibre_cat C k)
+          (@fapp0
+            (Fibre_cat A k)
+            (Fibre_cat C k)
+            (@direct_mixed_product_pair_right_check K E A C GG k e)
+            a)
+          (@fapp0
+            (Fibre_cat A k)
+            (Fibre_cat C k)
+            (@direct_mixed_product_pair_right_check K E A C GG k e)
+            a'))
+        (@fapp1_fapp0
+          (Fibre_cat A k)
+          (Fibre_cat B k)
+          (@direct_mixed_product_pair_left_check K E A B FF k e)
+          a a' alpha)
+        (@fapp1_fapp0
+          (Fibre_cat A k)
+          (Fibre_cat C k)
+          (@direct_mixed_product_pair_right_check K E A C GG k e)
+          a a' alpha);
+
+// The composed result has the generic internal base-arrow cell.
+assert [K : Cat]
+  [E : τ (Catd K)]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  (FF : τ (Functord E (@Functor_catd K A B)))
+  (GG : τ (Functord E (@Functor_catd K A C)))
+  [x y : τ (Obj K)]
+  (p : τ (Hom K x y))
+  (e : τ (Obj (Fibre_cat E x))) ⊢
+  @fdapp1_int_cell
+    K
+    E
+    (@Functor_catd K A (@Product_catd_transparent_check K B C))
+    (@direct_mixed_product_pair_funcd_check K E A B C FF GG)
+    x y p e
+  : τ (Hom
+      (Fibre_cat
+        (@Functor_catd K A (@Product_catd_transparent_check K B C))
+        y)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat
+          (@Functor_catd K A (@Product_catd_transparent_check K B C))
+          y)
+        (@functord_transport_lhs_func
+          K E
+          (@Functor_catd K A (@Product_catd_transparent_check K B C))
+          (@direct_mixed_product_pair_funcd_check K E A B C FF GG)
+          x y p)
+        e)
+      (@fapp0
+        (Fibre_cat E x)
+        (Fibre_cat
+          (@Functor_catd K A (@Product_catd_transparent_check K B C))
+          y)
+        (@functord_transport_rhs_func
+          K E
+          (@Functor_catd K A (@Product_catd_transparent_check K B C))
+          (@direct_mixed_product_pair_funcd_check K E A B C FF GG)
+          x y p)
+        e));
+
+// The full action remains iterable at a genuine next base cell.
+symbol direct_mixed_product_higher_check
+  [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  [x y : τ (Obj K)]
+  [p q : τ (Hom K x y)]
+  (alpha : τ (Hom (Hom_cat K x y) p q))
+  : τ (Transf
+      (@tapp1_fapp0
+        K Cat_cat
+        (@Product_catd_transparent_check
+          K
+          (@Functor_catd K A B)
+          (@Functor_catd K A C))
+        (@Functor_catd K A (@Product_catd_transparent_check K B C))
+        x y
+        (@Functor_catd_product_funcd K A B C)
+        p)
+      (@tapp1_fapp0
+        K Cat_cat
+        (@Product_catd_transparent_check
+          K
+          (@Functor_catd K A B)
+          (@Functor_catd K A C))
+        (@Functor_catd K A (@Product_catd_transparent_check K B C))
+        x y
+        (@Functor_catd_product_funcd K A B C)
+        q))
+≔ @fapp1_fapp0
+    (Hom_cat K x y)
+    (Functor_cat
+      (Fibre_cat
+        (@Product_catd_transparent_check
+          K
+          (@Functor_catd K A B)
+          (@Functor_catd K A C))
+        x)
+      (Fibre_cat
+        (@Functor_catd K A (@Product_catd_transparent_check K B C))
+        y))
+    (@tapp1_func
+      K Cat_cat
+      (@Product_catd_transparent_check
+        K
+        (@Functor_catd K A B)
+        (@Functor_catd K A C))
+      (@Functor_catd K A (@Product_catd_transparent_check K B C))
+      x y
+      (@Functor_catd_product_funcd K A B C))
+    p q alpha;
+
+// Distribution preserves both product branches rather than identifying the
+// target with either projection.
+assertnot [K : Cat] (B C : τ (Catd K)) ⊢
+  @Product_catd_transparent_check K B C ≡ B;
+
+assertnot [K : Cat]
+  (A : τ (Catd (Op_cat K))) (B C : τ (Catd K)) ⊢
+  @Functor_catd K A (@Product_catd_transparent_check K B C)
+    ≡ @Functor_catd K A B;
+
+// -------------------------------------------------------------------------------------------------
 // Mixed displayed curry
 // catalog-area: Mixed displayed curry
 // -------------------------------------------------------------------------------------------------

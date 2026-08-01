@@ -13323,6 +13323,86 @@ rule @fapp0
       $H
       (@tapp0_fapp0 (Op_cat $K) Cat_cat $A' $A $k $L);
 
+// Pointwise distribution of a pair of mixed functors into a product target.
+//
+//   dist(A;B,C)
+//     : P(Functor_catd(A,B),Functor_catd(A,C))
+//         ⊢_K Functor_catd(A,P(B,C)).
+//
+// Its fibre component is the identity at the ordinary product normal form
+// Fun(A[k],B[k]) × Fun(A[k],C[k]). The source-family action owns the
+// selected whole base action, so generic fapp1 remains iterable at higher
+// cells.
+injective symbol Functor_catd_product_funcd [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  : τ (Functord
+      (@comp_cat_fapp0
+        K
+        (Product_cat Cat_cat Cat_cat)
+        Cat_cat
+        (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+        (Struct_sigma
+          (@Functor_catd K A B)
+          (@Functor_catd K A C)))
+      (@Functor_catd
+        K
+        A
+        (@comp_cat_fapp0
+          K
+          (Product_cat Cat_cat Cat_cat)
+          Cat_cat
+          (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+          (Struct_sigma B C))));
+
+// Point component: ordinary product-valued functor normalization makes the
+// source and target categories definitionally identical.
+rule @tapp0_fapp0
+      $K Cat_cat _ _ $k
+      (@Functor_catd_product_funcd $K $A $B $C)
+  ↪ @id_func
+      (Product_cat
+        (Functor_cat (Fibre_cat $A $k) (Fibre_cat $B $k))
+        (Functor_cat (Fibre_cat $A $k) (Fibre_cat $C $k)));
+
+// Full base action remains the whole action of the product source family.
+rule @tapp1_func
+      $K Cat_cat _ _ $x $y
+      (@Functor_catd_product_funcd $K $A $B $C)
+  ↪ @fapp1_func
+      $K
+      Cat_cat
+      (@comp_cat_fapp0
+        $K
+        (Product_cat Cat_cat Cat_cat)
+        Cat_cat
+        (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+        (Struct_sigma
+          (@Functor_catd $K $A $B)
+          (@Functor_catd $K $A $C)))
+      $x
+      $y;
+
+// Capped base action selects the corresponding product-family transport.
+rule @tapp1_fapp0
+      $K Cat_cat _ _ $x $y
+      (@Functor_catd_product_funcd $K $A $B $C)
+      $p
+  ↪ @fapp1_fapp0
+      $K
+      Cat_cat
+      (@comp_cat_fapp0
+        $K
+        (Product_cat Cat_cat Cat_cat)
+        Cat_cat
+        (@uncurry_func Cat_cat Cat_cat Cat_cat Product_cat_func)
+        (Struct_sigma
+          (@Functor_catd $K $A $B)
+          (@Functor_catd $K $A $C)))
+      $x
+      $y
+      $p;
+
 // Mixed-variance hom family for two sections of a displayed family.
 //
 // Surface/formula:
