@@ -13,8 +13,11 @@ with human supersession. Implementation then measured one false fixture
 premise: `displayedTransforCategory` is not exported by
 `fibred-transfd-1`. H-DTTLF-USABILITY-RECURSIVE-MIXED-PUBLIC-CORRECTION-01 /
 D-DTTLF-USABILITY-035 below freezes the exact lightweight correction without
-weakening a profile or changing semantics. After the corrected public slice
-is green and deployed, the next
+weakening a profile or changing semantics. Its proposal checkpoint is
+`cf8522a3029d3dd064f24d70466499a49e774878`; the separate review recorded
+below approves exactly that correction under the standing unattended
+delegation, with human supersession. Implementation is dependency-ready.
+After the corrected public slice is green and deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -271,7 +274,7 @@ It deliberately avoids:
 | Row | Status | Dependencies | Exact deliverable |
 | --- | --- | --- | --- |
 | `PUBLIC-HOM-AUDIT-0A` | complete, then measurement-corrected by D-DTTLF-USABILITY-035; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract; reject both the slow mixed-nest fixture and the unavailable Transfd/profile combination; select the default-profile functor-category recursive-Hom witness; freeze truthful public wording. |
-| `PUBLIC-HOM-PRESET-1A` | D-DTTLF-USABILITY-034 approved; exact D-DTTLF-USABILITY-035 correction frozen for separate review | `PUBLIC-HOM-AUDIT-0A` | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
+| `PUBLIC-HOM-PRESET-1A` | D-DTTLF-USABILITY-034 approved; exact D-DTTLF-USABILITY-035 correction reviewed-approved and implementation dependency-ready | `PUBLIC-HOM-AUDIT-0A` | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
 | `PUBLIC-HOM-VALIDATE-1B` | blocked on green `PRESET-1A` | `PUBLIC-HOM-PRESET-1A` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | blocked on green `VALIDATE-1B` | clean goal checkpoint; fetched ancestry; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
@@ -391,6 +394,13 @@ All explicit non-effects and Git/publication boundaries of
 D-DTTLF-USABILITY-034 remain in force. This correction changes neither the
 kernel nor the TypeScript semantic architecture; it repairs only an invalid
 fixture-profile assumption discovered by fail-closed validation.
+
+The exact correction proposal was checkpointed at
+`cf8522a3029d3dd064f24d70466499a49e774878`. No immediate human correction
+superseded it. The separate review in the decision ledger therefore approves
+only D-DTTLF-USABILITY-035 under the user's standing unattended delegation,
+with human supersession. Implementation may continue within the corrected
+gate.
 
 ## Mixed-Introduction Audit Contract
 
@@ -537,4 +547,12 @@ removal, or unrelated cleanup is authorized.
   `id (hom (hom (functor A B) F G) alpha beta)`, preserves exact text/direct
   equality and every D-034 public/validation/Git boundary, and leaves the
   stronger displayed root as qualified semantic evidence rather than an
-  interactive preset claim.
+  interactive preset claim. Its proposal checkpoint is
+  `cf8522a3029d3dd064f24d70466499a49e774878`.
+- **2026-08-01 — D-DTTLF-USABILITY-035 approved exactly as proposed.** No
+  immediate human correction superseded the isolated correction proposal.
+  The standing unattended delegation therefore authorizes only the corrected
+  default-profile fixture and the already approved public/validation/Git
+  scope, with human supersession. It does not authorize a profile weakening,
+  semantic change, broader public claim, force/history rewrite, or unrelated
+  remote effect.
