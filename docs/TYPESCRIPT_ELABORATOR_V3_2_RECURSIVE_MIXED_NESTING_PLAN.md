@@ -43,6 +43,12 @@ and text-parity rows are complete. Product-facade, curry, unrestricted
 variance/introduction, browser/public promotion, and scale work remain
 separate future objectives rather than unfinished rows of this scoped plan.
 
+Successor: public synchronization of the completed recursive-Hom result and
+the subsequent variance-correct mixed-introduction audit are owned by
+[`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md).
+That successor does not reopen this plan's completed semantic or text-parity
+history.
+
 This is the dedicated successor to the completed bounded work in
 [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md).
 It does not rewrite that plan's completion history. That predecessor

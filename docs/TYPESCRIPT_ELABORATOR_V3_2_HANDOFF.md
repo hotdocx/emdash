@@ -1,8 +1,11 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-> **Current semantic continuation (2026-07-31):**
-> [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md)
-> records the latest completed semantic continuation. The completed
+> **Current semantic continuation (2026-08-01):**
+> [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
+> owns the next work: first synchronize the completed recursive-Hom
+> capability with the deployed reviewer and truthful public boundary, then
+> conduct the Lambdapi-first variance-correct mixed-introduction audit. The
+> completed
 > mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
@@ -49,6 +52,11 @@
 > Binder semantics beyond the exact envelope, unrestricted variance,
 > browser/public promotion, evaluator optimization, product-facade work, and
 > mixed curry remain separate future objectives.
+> The completed recursive implementation and its exact decisions remain in
+> [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
+> The successor keeps the product facade conditional, treats ordinary curry
+> coherence as supporting evidence, and authorizes no mixed-curry owner before
+> a separate Lambdapi owner-position proposal.
 >
 > The predecessor
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_MODE_DISPLAYED_TELESCOPE_PLAN.md)
