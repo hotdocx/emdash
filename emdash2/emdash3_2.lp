@@ -90,6 +90,7 @@
       17c. Ordinary functor structural logic
       17d. Generic ordinary functor hom-action
       17e. Section pullback and internal Pi action
+      17f. Variance-correct mixed displayed curry
     18. Cat-valued profunctors
       18a. Fixed-endpoint profunctor category and vertical maps
       18b. Opposite profunctors and fixed-endpoint duality
@@ -15844,6 +15845,341 @@ rule @fdapp1_int_cell
       (@fapp1_fapp0 $K (Op_cat Cat_cat) $G $x $y $p)
       $E;
 
+
+// 17f. Variance-correct mixed displayed curry
+//
+// This qualified package keeps the existing Unit_prof/Hom action architecture
+// and adds only the missing variance-correct section transposition.
+
+symbol mix_neg_total [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  : Cat
+≔ Op_cat
+    (@Sigma_cat
+      (Op_cat K)
+      (@Op_catd (Op_cat K) A));
+
+symbol mix_neg_base_func [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  : τ (Functor (@mix_neg_total K A) K)
+≔ @Op_func
+    (@Sigma_cat
+      (Op_cat K)
+      (@Op_catd (Op_cat K) A))
+    (Op_cat K)
+    (@Sigma_proj1_func
+      (Op_cat K)
+      (@Op_catd (Op_cat K) A));
+
+symbol mix_context_family [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (C : τ (Catd K))
+  : τ (Catd (@mix_neg_total K A))
+≔ @Pullback_catd
+    (@mix_neg_total K A)
+    K
+    C
+    (@mix_neg_base_func K A);
+
+symbol mix_context_cat [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (C : τ (Catd K))
+  : Cat
+≔ @Sigma_cat
+    (@mix_neg_total K A)
+    (@mix_context_family K A C);
+
+symbol mix_context_base_func [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (C : τ (Catd K))
+  : τ (Functor (@mix_context_cat K A C) K)
+≔ @comp_cat_fapp0
+    (@mix_context_cat K A C)
+    (@mix_neg_total K A)
+    K
+    (@mix_neg_base_func K A)
+    (@Sigma_proj1_func
+      (@mix_neg_total K A)
+      (@mix_context_family K A C));
+
+symbol mix_uncurried_family [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  : τ (Catd (@mix_context_cat K A C))
+≔ @Pullback_catd
+    (@mix_context_cat K A C)
+    K
+    B
+    (@mix_context_base_func K A C);
+
+// Canonical negative part of a mixed arrow over p:k->k'.  The A-component is
+// contravariant: alpha : a -> A[p](a').  Pointwise opposite plus total
+// opposite packages it as an arrow (k,a) -> (k',a') without an external
+// variance witness.
+symbol mix_neg_arrow [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [k k' : τ (Obj K)]
+  (p : τ (Hom K k k'))
+  (a : τ (Obj (Fibre_cat A k)))
+  (a' : τ (Obj (Fibre_cat A k')))
+  (alpha : τ (Obj (Hom_cat
+      (Fibre_cat A k)
+      a
+      (@fapp0
+        (Fibre_cat A k')
+        (Fibre_cat A k)
+        (@catd_transport_func (Op_cat K) A k' k p)
+        a'))))
+  : τ (Obj (Hom_cat
+      (@mix_neg_total K A)
+      (Struct_sigma k a)
+      (Struct_sigma k' a')))
+≔ @sigma_arrow
+    (Op_cat K)
+    (@Op_catd (Op_cat K) A)
+    k'
+    k
+    a'
+    a
+    p
+    alpha;
+
+symbol mix_context_arrow [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [C : τ (Catd K)]
+  [k k' : τ (Obj K)]
+  (p : τ (Hom K k k'))
+  (a : τ (Obj (Fibre_cat A k)))
+  (a' : τ (Obj (Fibre_cat A k')))
+  (alpha : τ (Obj (Hom_cat
+      (Fibre_cat A k)
+      a
+      (@fapp0
+        (Fibre_cat A k')
+        (Fibre_cat A k)
+        (@catd_transport_func (Op_cat K) A k' k p)
+        a'))))
+  (c : τ (Obj (Fibre_cat C k)))
+  (c' : τ (Obj (Fibre_cat C k')))
+  (beta : τ (Hom
+      (Fibre_cat C k')
+      (@fapp0
+        (Fibre_cat C k)
+        (Fibre_cat C k')
+        (@catd_transport_func K C k k' p)
+        c)
+      c'))
+  : τ (Hom
+      (@mix_context_cat K A C)
+      (Struct_sigma (Struct_sigma k a) c)
+      (Struct_sigma (Struct_sigma k' a') c'))
+≔ @sigma_arrow
+    (@mix_neg_total K A)
+    (@mix_context_family K A C)
+    (Struct_sigma k a)
+    (Struct_sigma k' a')
+    c
+    c'
+    (@mix_neg_arrow K A k k' p a a' alpha)
+    beta;
+
+// Canonical base-laxity arrow: both fibre components are identities at the
+// internally transported endpoints, while p remains the shared base arrow.
+symbol mix_context_base_arrow [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [C : τ (Catd K)]
+  [k k' : τ (Obj K)]
+  (p : τ (Hom K k k'))
+  (a' : τ (Obj (Fibre_cat A k')))
+  (c : τ (Obj (Fibre_cat C k)))
+  : τ (Obj (Hom_cat
+      (@mix_context_cat K A C)
+      (Struct_sigma
+        (Struct_sigma
+          k
+          (@fapp0
+            (Fibre_cat A k')
+            (Fibre_cat A k)
+            (@catd_transport_func (Op_cat K) A k' k p)
+            a'))
+        c)
+      (Struct_sigma
+        (Struct_sigma k' a')
+        (@fapp0
+          (Fibre_cat C k)
+          (Fibre_cat C k')
+          (@catd_transport_func K C k k' p)
+          c))))
+≔ @mix_context_arrow
+    K A C k k' p
+    (@fapp0
+      (Fibre_cat A k')
+      (Fibre_cat A k)
+      (@catd_transport_func (Op_cat K) A k' k p)
+      a')
+    a'
+    (@id
+      (Fibre_cat A k)
+      (@fapp0
+        (Fibre_cat A k')
+        (Fibre_cat A k)
+        (@catd_transport_func (Op_cat K) A k' k p)
+        a'))
+    c
+    (@fapp0
+      (Fibre_cat C k)
+      (Fibre_cat C k')
+      (@catd_transport_func K C k k' p)
+      c)
+    (@id
+      (Fibre_cat C k')
+      (@fapp0
+        (Fibre_cat C k)
+        (Fibre_cat C k')
+        (@catd_transport_func K C k k' p)
+        c));
+
+symbol mix_uncurried_cat [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  : Cat
+≔ @Pi_cat
+    (@mix_context_cat K A C)
+    (@mix_uncurried_family K A B C);
+
+symbol mix_curried_cat [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (B C : τ (Catd K))
+  : Cat
+≔ @Functord_cat K C (@Functor_catd K A B);
+
+// Qualified mixed curry from sections over ((k,a),c) to displayed functors
+// c |-> (a |-> s[((k,a),c)]).  Unit_prof continues to own the ambient
+// two-ended Hom action used by Functor_catd; this is only section transposition.
+constant symbol mixed_curry_func [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  : τ (Functor
+      (@mix_uncurried_cat K A B C)
+      (@mix_curried_cat K A B C));
+
+injective symbol mixed_curry_funcd [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  (s : τ (Obj (@mix_uncurried_cat K A B C)))
+  : τ (Functord C (@Functor_catd K A B));
+
+rule @fapp0 _ _
+      (@mixed_curry_func $K $A $B $C) $s
+  ↪ @mixed_curry_funcd $K $A $B $C $s;
+
+injective symbol mixed_curry_fibre_func [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  (s : τ (Obj (@mix_uncurried_cat K A B C)))
+  (k : τ (Obj K))
+  : τ (Functor
+      (Fibre_cat C k)
+      (Functor_cat (Fibre_cat A k) (Fibre_cat B k)));
+
+rule @tapp0_fapp0
+      $K Cat_cat _ _ $k
+      (@mixed_curry_funcd $K $A $B $C $s)
+  ↪ @mixed_curry_fibre_func $K $A $B $C $s $k;
+
+injective symbol mixed_curry_at_func [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C : τ (Catd K)]
+  (s : τ (Obj (@mix_uncurried_cat K A B C)))
+  (k : τ (Obj K))
+  (c : τ (Obj (Fibre_cat C k)))
+  : τ (Functor (Fibre_cat A k) (Fibre_cat B k));
+
+rule @fapp0 _ _
+      (@mixed_curry_fibre_func $K $A $B $C $s $k) $c
+  ↪ @mixed_curry_at_func $K $A $B $C $s $k $c;
+
+// Triple-point beta.
+rule @fapp0 _ _
+      (@mixed_curry_at_func $K $A $B $C $s $k $c) $a
+  ↪ @piapp0
+      (@mix_context_cat $K $A $C)
+      (@mix_uncurried_family $K $A $B $C)
+      $s
+      (Struct_sigma (Struct_sigma $k $a) $c);
+
+// Negative-fibre arrow action is the original section action on the canonical
+// identity-base mixed arrow.  The warning inventory records its expected
+// overlap with generic strict identity action rather than adding a broad
+// identity collapse.
+rule @fapp1_fapp0 _ _
+      (@mixed_curry_at_func $K $A $B $C $s $k $c)
+      $a $a' $alpha
+  ↪ @piapp1_fapp0
+      (@mix_context_cat $K $A $C)
+      (@mix_uncurried_family $K $A $B $C)
+      $s
+      (Struct_sigma (Struct_sigma $k $a) $c)
+      (Struct_sigma (Struct_sigma $k $a') $c)
+      (@mix_context_arrow
+        $K $A $C $k $k (@id $K $k)
+        $a $a' $alpha
+        $c $c (@id (Fibre_cat $C $k) $c));
+
+// Positive-fibre arrow action is a transfor; this rule projects its component
+// at a.  The fapp0 forms on the LHS are the measured runtime normal forms of
+// the three Fibre_cat classifiers, so both projection orders actually join.
+rule @tapp0_fapp0
+      _ _ _ _ $a
+      (@fapp1_fapp0
+        (@fapp0 $K Cat_cat $C $k)
+        (Functor_cat
+          (@fapp0 (Op_cat $K) Cat_cat $A $k)
+          (@fapp0 $K Cat_cat $B $k))
+        (@mixed_curry_fibre_func $K $A $B $C $s $k)
+        $c $c' $beta)
+  ↪ @piapp1_fapp0
+      (@mix_context_cat $K $A $C)
+      (@mix_uncurried_family $K $A $B $C)
+      $s
+      (Struct_sigma (Struct_sigma $k $a) $c)
+      (Struct_sigma (Struct_sigma $k $a) $c')
+      (@mix_context_arrow
+        $K $A $C $k $k (@id $K $k)
+        $a $a (@id (Fibre_cat $A $k) $a)
+        $c $c' $beta);
+
+// Base-arrow laxity is a genuine transfor; its component at a' is the section
+// action on the canonical two-sided transported arrow.
+rule @tapp0_fapp0
+      _ _ _ _ $a'
+      (@fdapp1_int_cell
+        $K
+        $C
+        (@Functor_catd $K $A $B)
+        (@mixed_curry_funcd $K $A $B $C $s)
+        $k $k' $p $c)
+  ↪ @piapp1_fapp0
+      (@mix_context_cat $K $A $C)
+      (@mix_uncurried_family $K $A $B $C)
+      $s
+      (Struct_sigma
+        (Struct_sigma
+          $k
+          (@fapp0
+            (Fibre_cat $A $k')
+            (Fibre_cat $A $k)
+            (@catd_transport_func (Op_cat $K) $A $k' $k $p)
+            $a'))
+        $c)
+      (Struct_sigma
+        (Struct_sigma $k' $a')
+        (@fapp0
+          (Fibre_cat $C $k)
+          (Fibre_cat $C $k')
+          (@catd_transport_func $K $C $k $k' $p)
+          $c))
+      (@mix_context_base_arrow $K $A $C $k $k' $p $a' $c);
 
 // -------------------------------------------------------------------------------------------------
 // 18. Cat-valued profunctors

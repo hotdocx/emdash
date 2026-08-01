@@ -13386,6 +13386,356 @@ assert [K D : Cat]
 
 assertnot [K : Cat] ⊢ Op_cat K ≡ K;
 
+// -------------------------------------------------------------------------------------------------
+// Mixed displayed curry
+// catalog-area: Mixed displayed curry
+// -------------------------------------------------------------------------------------------------
+
+// Check-only fixed-fibre embedding used to state the retained product
+// non-collapse boundary without adding it to the active kernel API.
+symbol mixed_neg_fibre_intro_func_check [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (k : τ (Obj K))
+  : τ (Functor (Fibre_cat A k) (@mix_neg_total K A))
+≔ @Op_func
+    (Fibre_cat (@Op_catd (Op_cat K) A) k)
+    (@Sigma_cat (Op_cat K) (@Op_catd (Op_cat K) A))
+    (@sigma_intro_tapp0_func
+      (Op_cat K)
+      (@Op_catd (Op_cat K) A)
+      k);
+
+symbol mixed_check_K : Cat;
+symbol mixed_check_A : τ (Catd (Op_cat mixed_check_K));
+symbol mixed_check_B : τ (Catd mixed_check_K);
+symbol mixed_check_C : τ (Catd mixed_check_K);
+symbol mixed_check_s : τ (Obj
+  (@mix_uncurried_cat mixed_check_K mixed_check_A mixed_check_B mixed_check_C));
+symbol mixed_check_t : τ (Obj
+  (@mix_uncurried_cat mixed_check_K mixed_check_A mixed_check_B mixed_check_C));
+symbol mixed_check_eta : τ (Hom
+  (@mix_uncurried_cat mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+  mixed_check_s
+  mixed_check_t);
+symbol mixed_check_k : τ (Obj mixed_check_K);
+symbol mixed_check_x : τ (Obj mixed_check_K);
+symbol mixed_check_y : τ (Obj mixed_check_K);
+symbol mixed_check_p : τ (Hom mixed_check_K mixed_check_x mixed_check_y);
+symbol mixed_check_a : τ (Obj (Fibre_cat mixed_check_A mixed_check_x));
+symbol mixed_check_a_same : τ (Obj (Fibre_cat mixed_check_A mixed_check_x));
+symbol mixed_check_a' : τ (Obj (Fibre_cat mixed_check_A mixed_check_y));
+symbol mixed_check_alpha_same : τ (Hom
+  (Fibre_cat mixed_check_A mixed_check_x)
+  mixed_check_a
+  mixed_check_a_same);
+symbol mixed_check_alpha : τ (Obj (Hom_cat
+  (Fibre_cat mixed_check_A mixed_check_x)
+  mixed_check_a
+  (@fapp0
+    (Fibre_cat mixed_check_A mixed_check_y)
+    (Fibre_cat mixed_check_A mixed_check_x)
+    (@catd_transport_func
+      (Op_cat mixed_check_K)
+      mixed_check_A
+      mixed_check_y
+      mixed_check_x
+      mixed_check_p)
+    mixed_check_a')));
+symbol mixed_check_c : τ (Obj (Fibre_cat mixed_check_C mixed_check_x));
+symbol mixed_check_c_same : τ (Obj (Fibre_cat mixed_check_C mixed_check_x));
+symbol mixed_check_c' : τ (Obj (Fibre_cat mixed_check_C mixed_check_y));
+symbol mixed_check_beta_same : τ (Hom
+  (Fibre_cat mixed_check_C mixed_check_x)
+  mixed_check_c
+  mixed_check_c_same);
+symbol mixed_check_beta : τ (Hom
+  (Fibre_cat mixed_check_C mixed_check_y)
+  (@fapp0
+    (Fibre_cat mixed_check_C mixed_check_x)
+    (Fibre_cat mixed_check_C mixed_check_y)
+    (@catd_transport_func
+      mixed_check_K mixed_check_C mixed_check_x mixed_check_y mixed_check_p)
+    mixed_check_c)
+  mixed_check_c');
+
+// The negative and positive totals recover one shared base arrow internally.
+assert ⊢
+  @fapp1_fapp0
+    (@mix_neg_total mixed_check_K mixed_check_A)
+    mixed_check_K
+    (@mix_neg_base_func mixed_check_K mixed_check_A)
+    (Struct_sigma mixed_check_x mixed_check_a)
+    (Struct_sigma mixed_check_y mixed_check_a')
+    (@mix_neg_arrow
+      mixed_check_K mixed_check_A
+      mixed_check_x mixed_check_y mixed_check_p
+      mixed_check_a mixed_check_a' mixed_check_alpha)
+  ≡ mixed_check_p;
+
+assert ⊢
+  @catd_transport_func
+    (@mix_neg_total mixed_check_K mixed_check_A)
+    (@mix_context_family mixed_check_K mixed_check_A mixed_check_C)
+    (Struct_sigma mixed_check_x mixed_check_a)
+    (Struct_sigma mixed_check_y mixed_check_a')
+    (@mix_neg_arrow
+      mixed_check_K mixed_check_A
+      mixed_check_x mixed_check_y mixed_check_p
+      mixed_check_a mixed_check_a' mixed_check_alpha)
+  ≡ @catd_transport_func
+      mixed_check_K mixed_check_C
+      mixed_check_x mixed_check_y mixed_check_p;
+
+assert ⊢
+  @fapp1_fapp0
+    (@mix_context_cat mixed_check_K mixed_check_A mixed_check_C)
+    mixed_check_K
+    (@mix_context_base_func mixed_check_K mixed_check_A mixed_check_C)
+    (Struct_sigma (Struct_sigma mixed_check_x mixed_check_a) mixed_check_c)
+    (Struct_sigma (Struct_sigma mixed_check_y mixed_check_a') mixed_check_c')
+    (@mix_context_arrow
+      mixed_check_K mixed_check_A mixed_check_C
+      mixed_check_x mixed_check_y mixed_check_p
+      mixed_check_a mixed_check_a' mixed_check_alpha
+      mixed_check_c mixed_check_c' mixed_check_beta)
+  ≡ mixed_check_p;
+
+assert ⊢
+  @catd_transport_func
+    (@mix_context_cat mixed_check_K mixed_check_A mixed_check_C)
+    (@mix_uncurried_family
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (Struct_sigma (Struct_sigma mixed_check_x mixed_check_a) mixed_check_c)
+    (Struct_sigma (Struct_sigma mixed_check_y mixed_check_a') mixed_check_c')
+    (@mix_context_arrow
+      mixed_check_K mixed_check_A mixed_check_C
+      mixed_check_x mixed_check_y mixed_check_p
+      mixed_check_a mixed_check_a' mixed_check_alpha
+      mixed_check_c mixed_check_c' mixed_check_beta)
+  ≡ @catd_transport_func
+      mixed_check_K mixed_check_B
+      mixed_check_x mixed_check_y mixed_check_p;
+
+// The curried object and its two point projections have the intended internal
+// classifiers.
+assert ⊢
+  @fapp0
+    (@mix_uncurried_cat
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (@mix_curried_cat
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (@mixed_curry_func
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    mixed_check_s
+  ≡ @mixed_curry_funcd
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C mixed_check_s;
+
+assert ⊢
+  @tapp0_fapp0
+    mixed_check_K
+    Cat_cat
+    mixed_check_C
+    (@Functor_catd mixed_check_K mixed_check_A mixed_check_B)
+    mixed_check_k
+    (@mixed_curry_funcd
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C mixed_check_s)
+  : τ (Functor
+      (Fibre_cat mixed_check_C mixed_check_k)
+      (Functor_cat
+        (Fibre_cat mixed_check_A mixed_check_k)
+        (Fibre_cat mixed_check_B mixed_check_k)));
+
+// Triple-point beta.
+assert ⊢
+  @fapp0
+    (Fibre_cat mixed_check_A mixed_check_x)
+    (Fibre_cat mixed_check_B mixed_check_x)
+    (@mixed_curry_at_func
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C
+      mixed_check_s mixed_check_x mixed_check_c)
+    mixed_check_a
+  ≡ @piapp0
+      (@mix_context_cat mixed_check_K mixed_check_A mixed_check_C)
+      (@mix_uncurried_family
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      mixed_check_s
+      (Struct_sigma
+        (Struct_sigma mixed_check_x mixed_check_a)
+        mixed_check_c);
+
+// Negative-A action uses the canonical identity-base mixed arrow.
+assert ⊢
+  @fapp1_fapp0
+    (Fibre_cat mixed_check_A mixed_check_x)
+    (Fibre_cat mixed_check_B mixed_check_x)
+    (@mixed_curry_at_func
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C
+      mixed_check_s mixed_check_x mixed_check_c)
+    mixed_check_a
+    mixed_check_a_same
+    mixed_check_alpha_same
+  ≡ @piapp1_fapp0
+      (@mix_context_cat mixed_check_K mixed_check_A mixed_check_C)
+      (@mix_uncurried_family
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      mixed_check_s
+      (Struct_sigma
+        (Struct_sigma mixed_check_x mixed_check_a)
+        mixed_check_c)
+      (Struct_sigma
+        (Struct_sigma mixed_check_x mixed_check_a_same)
+        mixed_check_c)
+      (@mix_context_arrow
+        mixed_check_K mixed_check_A mixed_check_C
+        mixed_check_x mixed_check_x (@id mixed_check_K mixed_check_x)
+        mixed_check_a mixed_check_a_same mixed_check_alpha_same
+        mixed_check_c mixed_check_c
+        (@id (Fibre_cat mixed_check_C mixed_check_x) mixed_check_c));
+
+// Positive-C action is a transfor whose component at a is the corresponding
+// section action.
+assert ⊢
+  @tapp0_fapp0
+    (Fibre_cat mixed_check_A mixed_check_x)
+    (Fibre_cat mixed_check_B mixed_check_x)
+    _
+    _
+    mixed_check_a
+    (@fapp1_fapp0
+      (Fibre_cat mixed_check_C mixed_check_x)
+      (Functor_cat
+        (Fibre_cat mixed_check_A mixed_check_x)
+        (Fibre_cat mixed_check_B mixed_check_x))
+      (@mixed_curry_fibre_func
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C
+        mixed_check_s mixed_check_x)
+      mixed_check_c mixed_check_c_same mixed_check_beta_same)
+  ≡ @piapp1_fapp0
+      (@mix_context_cat mixed_check_K mixed_check_A mixed_check_C)
+      (@mix_uncurried_family
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      mixed_check_s
+      (Struct_sigma
+        (Struct_sigma mixed_check_x mixed_check_a)
+        mixed_check_c)
+      (Struct_sigma
+        (Struct_sigma mixed_check_x mixed_check_a)
+        mixed_check_c_same)
+      (@mix_context_arrow
+        mixed_check_K mixed_check_A mixed_check_C
+        mixed_check_x mixed_check_x (@id mixed_check_K mixed_check_x)
+        mixed_check_a mixed_check_a
+        (@id (Fibre_cat mixed_check_A mixed_check_x) mixed_check_a)
+        mixed_check_c mixed_check_c_same mixed_check_beta_same);
+
+// The displayed base-arrow cell is the original section action on the
+// canonical two-sided transported arrow.
+assert ⊢
+  @tapp0_fapp0
+    (Fibre_cat mixed_check_A mixed_check_y)
+    (Fibre_cat mixed_check_B mixed_check_y)
+    _
+    _
+    mixed_check_a'
+    (@fdapp1_int_cell
+      mixed_check_K
+      mixed_check_C
+      (@Functor_catd mixed_check_K mixed_check_A mixed_check_B)
+      (@mixed_curry_funcd
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C mixed_check_s)
+      mixed_check_x mixed_check_y mixed_check_p mixed_check_c)
+  ≡ @piapp1_fapp0
+      (@mix_context_cat mixed_check_K mixed_check_A mixed_check_C)
+      (@mix_uncurried_family
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      mixed_check_s
+      (Struct_sigma
+        (Struct_sigma
+          mixed_check_x
+          (@fapp0
+            (Fibre_cat mixed_check_A mixed_check_y)
+            (Fibre_cat mixed_check_A mixed_check_x)
+            (@catd_transport_func
+              (Op_cat mixed_check_K)
+              mixed_check_A
+              mixed_check_y
+              mixed_check_x
+              mixed_check_p)
+            mixed_check_a'))
+        mixed_check_c)
+      (Struct_sigma
+        (Struct_sigma mixed_check_y mixed_check_a')
+        (@fapp0
+          (Fibre_cat mixed_check_C mixed_check_x)
+          (Fibre_cat mixed_check_C mixed_check_y)
+          (@catd_transport_func
+            mixed_check_K mixed_check_C
+            mixed_check_x mixed_check_y mixed_check_p)
+          mixed_check_c))
+      (@mix_context_base_arrow
+        mixed_check_K mixed_check_A mixed_check_C
+        mixed_check_x mixed_check_y mixed_check_p
+        mixed_check_a' mixed_check_c);
+
+// The one curry functor owns transformation and next-Hom action generically.
+assert ⊢
+  @fapp1_func
+    (@mix_uncurried_cat
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (@mix_curried_cat
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (@mixed_curry_func
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    mixed_check_s mixed_check_t
+  : τ (Functor
+      (Hom_cat
+        (@mix_uncurried_cat
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        mixed_check_s mixed_check_t)
+      (Hom_cat
+        (@mix_curried_cat
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+        (@mixed_curry_funcd
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C mixed_check_s)
+        (@mixed_curry_funcd
+          mixed_check_K mixed_check_A mixed_check_B mixed_check_C mixed_check_t)));
+
+assert ⊢
+  @fapp1_fapp0
+    (@mix_uncurried_cat
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (@mix_curried_cat
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    (@mixed_curry_func
+      mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+    mixed_check_s mixed_check_t mixed_check_eta
+  : τ (Hom
+      (@mix_curried_cat
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C)
+      (@mixed_curry_funcd
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C mixed_check_s)
+      (@mixed_curry_funcd
+        mixed_check_K mixed_check_A mixed_check_B mixed_check_C mixed_check_t));
+
+// Variance and totalization remain fail-closed outside the qualified package.
+assertnot [K : Cat] (A : τ (Catd (Op_cat K)))
+  (k k' : τ (Obj K)) ⊢
+  Functor_cat (Fibre_cat A k') (Fibre_cat A k)
+  ≡ Functor_cat (Fibre_cat A k) (Fibre_cat A k');
+
+assertnot [K : Cat]
+  (A : τ (Catd (Op_cat K)))
+  (C : τ (Catd K))
+  (k : τ (Obj K)) ⊢
+  @Sigma_cat
+    (Fibre_cat A k)
+    (@Pullback_catd
+      (Fibre_cat A k)
+      (@mix_neg_total K A)
+      (@mix_context_family K A C)
+      (@mixed_neg_fibre_intro_func_check K A k))
+  ≡ @Product_cat (Fibre_cat A k) (Fibre_cat C k);
+
 // The following formation checks return to the general diagnostic inventory.
 // catalog-area: auto
 
