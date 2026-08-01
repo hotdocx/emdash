@@ -500,7 +500,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O` | read-only architecture audit complete; zero semantic delta; canonical negative `Functor_catd` tower selected first | completed `DIRECT-MIXED-CONSTANT-MIDDLE-GRADUATE-1N`; arbitrary finite positive telescope machinery; recursive canonical mixed-classifier reifier; bounded direct `lambda^nd` eta/composition; green depth-two Lambdapi target-lift probe | The first scalable larger context is `k;c;a1;...;an` with right-associated expected family `Functor_catd(A1,...Functor_catd(An,B))`. Existing constructor target action iterates through the tower and composes with the outer coherent subject without curry or a new owner. Independent sibling/product contexts and general polarity alternation remain distinct later axes. |
 | `DIRECT-MIXED-NEGATIVE-TOWER-1P` | implemented and in-scope green at `ef3ce5c4de381b044dc3bbffd55cb35bcfd2faf7` under D-DTTLF-USABILITY-053 | completed `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O`; proposal `db49240fc77f308131636181e76021858cd99829`; separate review under standing unattended delegation | The new direct TypeScript API right-folds arbitrary finite negative inner families through existing `Functor_catd`, recognizes exact coherent eta/bound identity, and recursively lifts finite closed target maps through the existing target action. Depth 2/6, depth-3 identity, and six target-action lifts into `Hom_catd` are generically checked. One-inner behavior is unchanged; no kernel/transfer owner, curry, total-context section, parser route, or unrestricted-context claim was added. |
 | `DIRECT-MIXED-TOWER-GRADUATE-0Q` | read-only successor audit complete; zero semantic delta; arbitrary-level source action selected | implemented D-053 tower; arbitrary positive sibling-layer compiler; existing `Hom_catd`/`Transf_catd`, `homd_int`, and displayed-`:^nd` evidence; bounded current-kernel check | The tower is genuinely depth-recursive but presently supports only eta/identity and closed target maps. Independent positive sibling depth/width is already separately generic, and mixed classifier formation/elimination plus higher action are already internalized. The first missing operation that directly stress-tests variance at arbitrary depth is a finite contravariant source chain at any tower layer, lifted through its enclosing prefix by the existing target action. |
-| `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` | exact TypeScript-only D-DTTLF-USABILITY-054 proposal frozen; separate review required | completed `DIRECT-MIXED-TOWER-GRADUATE-0Q`; final-green one-inner D-045/D-046 source action; implemented D-053 target lift | Generalize the tower factorer to `F[c](L1(a1))...(Ln(an))`, with a finite closed coherent source chain independently at every layer. Compile deepest-outward by reusing the existing mixed source action at the affected layer and the existing target lift through its prefix. Add no kernel/transfer owner, curry, total section, sibling integration, pair/weakening/constant-middle case, or new `:^nd` constructor. |
+| `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` | approved exactly as proposed under D-DTTLF-USABILITY-054; implementation dependency-ready | completed `DIRECT-MIXED-TOWER-GRADUATE-0Q`; immutable proposal `107798b09081212007d4d1db80213eecc1495517`; separate review under standing unattended delegation | Generalize the tower factorer to `F[c](L1(a1))...(Ln(an))`, with a finite closed coherent source chain independently at every layer. Compile deepest-outward by reusing the existing mixed source action at the affected layer and the existing target lift through its prefix. Add no kernel/transfer owner, curry, total section, sibling integration, pair/weakening/constant-middle case, or new `:^nd` constructor. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -5020,6 +5020,41 @@ implementation. The standing unattended delegation may authorize it only
 after the proposal checkpoint is inspected, with immediate human
 supersession.
 
+### Separate D-DTTLF-USABILITY-054 review result
+
+The proposal-only checkpoint
+`107798b09081212007d4d1db80213eecc1495517` is clean, whitespace-valid, and
+contains only this living-plan/handoff audit. A separate source review confirms
+the proposal's three semantic premises:
+
+1. `directMixedSourceFactorization` already recognizes the exact recursive
+   `a | L(argument)` grammar. It begins at one specified bound ordinal,
+   requires every mapper to be closed and displayed over literal `Op K`, and
+   checks every adjacent source/target family structurally. Reusing it once
+   per argument therefore neither guesses variance nor permits a token from a
+   different layer.
+2. `mixedSourceAction` already constructs the whole internally coherent
+   contravariant `Functor_catd` action, rather than a pointwise object map.
+   `liftDirectMixedTargetActionThroughTower` accepts any such whole displayed
+   functor and lifts it through a finite prefix using the existing covariant
+   target action. At layer `i`, one source action followed by exactly `i`
+   prefix lifts consequently has the classifier needed to compose after the
+   current tower result.
+3. Deepest-outward processing is type-directed. Deeper actions first replace
+   the relevant suffix by its bound family while all enclosing prefix families
+   remain at their root families; the next outer action then sees that updated
+   suffix. Reversing each local mapper chain is the already-checked one-inner
+   direction from the argument's root family back to its bound family.
+
+The existing one-inner source-action tests and tower target-lift tests cover
+the two semantic operations separately. This review adds no behavioral claim
+that only their composition can establish, so the exact depth-three/depth-six
+positive and negative matrix remains mandatory in implementation. No new
+kernel/transfer owner, curry, total section, coercion, external coherence
+evidence, or declaration refinement is needed. No immediate human correction
+superseded the frozen proposal. Under the standing unattended delegation,
+D-DTTLF-USABILITY-054 is approved exactly as its twelve items state.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -5315,16 +5350,14 @@ available, and that the first measured arbitrary-depth variance gap is source
 action at an arbitrary negative tower layer.
 
 Treat H-DTTLF-USABILITY-DIRECT-MIXED-TOWER-SOURCE-ACTION-01 /
-D-DTTLF-USABILITY-054 as an exact frozen TypeScript-only proposal. Conduct a
-separate immutable review before implementation. Verify that finite per-layer
-source chains can be compiled deepest-outward using only the existing mixed
-source action plus target-action prefix lifting, and preserve all stated
-negative boundaries. Under the standing unattended delegation, implementation
-may proceed only after that clean proposal checkpoint and separate review,
-with immediate human supersession. Add no kernel/transfer owner, curry, total
-section, sibling integration, pair/weakening/constant-middle lift, new
-`lambda^nd` constructor, parser/browser/publication, or remote Git effect in
-this gate.
+D-DTTLF-USABILITY-054 as approved exactly as proposed after separate review of
+immutable checkpoint `107798b09081212007d4d1db80213eecc1495517`. Implement
+only its twelve TypeScript/test/document items. Compile finite per-layer source
+chains deepest-outward using only the existing mixed source action plus
+target-action prefix lifting, and preserve every stated negative boundary.
+Add no kernel/transfer owner, curry, total section, sibling integration,
+pair/weakening/constant-middle lift, new `lambda^nd` constructor,
+parser/browser/publication, or remote Git effect in this gate.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -5343,6 +5376,22 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-054 approved exactly as proposed.** A
+  separate review of immutable proposal checkpoint
+  `107798b09081212007d4d1db80213eecc1495517` confirms that the existing
+  recursive source factorer enforces one bound ordinal, literal `Op K`,
+  closure, and exact adjacent families; the existing source action produces a
+  whole internally coherent displayed functor; and the existing tower target
+  helper lifts that functor through an arbitrary finite prefix. Processing
+  layers deepest-outward and each local chain in reverse gives exact
+  composable classifiers without a depth table, coercion, pointwise map, new
+  owner, or curry. Existing tests establish the two operations separately;
+  their composition still requires the proposal's focused depth-three and
+  depth-six matrix. No immediate human correction superseded the proposal.
+  Under the standing unattended delegation, only its twelve
+  TypeScript/test/document items are authorized; all kernel/transfer, sibling,
+  pair/weakening/constant-middle, new-`:^nd`, parser/browser, publication,
+  remote, and unrelated effects remain excluded.
 - **2026-08-01 — `DIRECT-MIXED-TOWER-GRADUATE-0Q` completed read-only and
   D-DTTLF-USABILITY-054 frozen for separate review.** Source inspection
   confirms that D-053's context depth is array-recursive while its body

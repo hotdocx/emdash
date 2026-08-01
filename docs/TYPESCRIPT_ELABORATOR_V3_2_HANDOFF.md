@@ -266,12 +266,14 @@
 > arbitrary-depth variance gap is instead finite contravariant source action
 > at an arbitrary negative tower layer. The exact TypeScript-only
 > `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` /
-> D-DTTLF-USABILITY-054 proposal is frozen for separate review. It compiles
-> per-layer source chains deepest-outward using the existing source action and
-> target-action prefix lift; it adds no kernel/transfer owner, curry, total
-> section, sibling integration, pair/weakening/constant-middle lift, or new
-> `lambda^nd` constructor. Source maps remain absent from active tower behavior
-> until that separate review approves the proposal.
+> D-DTTLF-USABILITY-054 proposal is approved exactly as proposed after a
+> separate review of immutable checkpoint
+> `107798b09081212007d4d1db80213eecc1495517`. The implementation-ready slice
+> compiles per-layer source chains deepest-outward using the existing source
+> action and target-action prefix lift; it adds no kernel/transfer owner,
+> curry, total section, sibling integration, pair/weakening/constant-middle
+> lift, or new `lambda^nd` constructor. Source maps remain absent from active
+> tower behavior until that bounded slice is implemented and checked.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
