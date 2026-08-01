@@ -30,6 +30,7 @@ export const CORE_CATEGORICAL_CLASSIFIER_REIFIER_REVISION =
 
 export interface CoreCategoricalClassifierFormerNames {
     readonly oppositeCategory: string;
+    readonly functorCategory: string;
     readonly displayedFunctorCategory: string;
     readonly displayedTransforCategory: string;
 }
@@ -147,6 +148,22 @@ const reifyCanonicalCategory = (
         }
     }
 
+    const functor = referenceCall(
+        category,
+        formerNames.functorCategory,
+        2
+    );
+    if (functor !== undefined) {
+        return Object.freeze({
+            canonicalHead: 'generic-rich' as const,
+            type: Object.freeze({
+                tag: 'functor' as const,
+                sourceCategory: functor[0],
+                targetCategory: functor[1]
+            })
+        });
+    }
+
     const displayedFunctor = referenceCall(
         category,
         formerNames.displayedFunctorCategory,
@@ -248,6 +265,11 @@ export function createCoreCategoricalCategoryObjectReifier(
                 undefined,
                 options.runtime,
                 expression =>
+                    referenceCall(
+                        expression,
+                        formerNames.functorCategory,
+                        2
+                    ) !== undefined ||
                     referenceCall(
                         expression,
                         formerNames.displayedFunctorCategory,

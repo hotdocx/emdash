@@ -319,7 +319,7 @@ export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
     'DISPLAYED-TELESCOPE-GENERIC-1-CATEGORICAL-PROGRAM-1' as const;
 
 export const CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION =
-    'DIRECT-MIXED-WEAKENING-1J-CATEGORICAL-PROGRAM-1' as const;
+    'DIRECT-MIXED-SECTION-ROOT-1K-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -1226,6 +1226,11 @@ export class CoreCategoricalProgram {
                     oppositeCategory:
                         CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CORE_NAMES
                             .oppositeCategory,
+                    functorCategory:
+                        coreCategoricalStructuralSymbolCoreName(
+                            CORE_CATEGORICAL_STRUCTURAL_SYMBOLS
+                                .functorCategory
+                        ),
                     displayedFunctorCategory:
                         CORE_DIRECTED_1A_PRIMITIVE_NAMES[
                             'displayed-functor-category'
@@ -7599,8 +7604,9 @@ export class CoreCategoricalProgram {
      *
      * The hidden natural base is scoped by the builder. The callback is
      * evaluated once and must match
-     * `c(a) | F[c](a) | G(mixed-body)`; no curry API or pointwise coherence
-     * payload is involved.
+     * the reviewed recursive direct-body grammar, including canonical
+     * `H[c]`, `S[k](a)`, and `b[k]` structural roots; no curry API or
+     * pointwise coherence payload is involved.
      */
     mixedDisplayedFunctorLambda(
         outerBindingValue: CoreCategoricalDisplayedContextBinding,
