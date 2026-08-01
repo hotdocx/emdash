@@ -144,10 +144,16 @@
 > does not produce the selected whole-fibre/arrow normal forms; it remains
 > auxiliary. The next proposed row is `DIRECT-MIXED-WEAKENING-1J`, frozen as
 > H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
-> D-DTTLF-USABILITY-050. Decision is pending; no active kernel, TypeScript,
-> transfer, or test edit is yet authorized by that proposal. Direct nested
-> introduction remains fundamental and does not require curry or a hybrid
-> total-context route.
+> D-DTTLF-USABILITY-050. Its initial proposal correctly selected the direct
+> owner but overstated the current transfer closure; separate review measured
+> that the profile has capped `hom_postcomp_fapp0`, not the whole
+> `hom_postcomp_func` signature used by the full-action normal form. The exact
+> corrected proposal at `e8f6a88645fb09646c62841ad1d9e11236b73948`
+> acquires that one pre-existing signature plus the new owner/three rules and
+> is separately reviewed-approved under the standing unattended delegation.
+> Implementation is dependency-ready, but no active kernel, TypeScript,
+> transfer, or test edit has yet occurred. Direct nested introduction remains
+> fundamental and does not require curry or a hybrid total-context route.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

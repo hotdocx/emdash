@@ -204,8 +204,15 @@ consumers; it adds zero warnings and zero strict-LHS findings. Existing
 terminal/section composition already derives the other unused-variable cases.
 The exact next vertical slice is frozen below as
 H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
-D-DTTLF-USABILITY-050. It is a proposal only; no active kernel, TypeScript,
-transfer, or test file has yet changed under that decision.
+D-DTTLF-USABILITY-050. The initial proposal checkpoint
+`8a051777630d3acfa5de4ee2f34f1865894cccc5` was corrected before approval
+after review measured one missing TypeScript acquisition signature. The exact
+corrected proposal checkpoint is
+`e8f6a88645fb09646c62841ad1d9e11236b73948`; the separate review below
+approves only that corrected gate under the standing unattended delegation,
+with immediate human supersession. Implementation is dependency-ready; no
+active kernel, TypeScript, transfer, or test file has yet changed under that
+decision.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -484,7 +491,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | implemented and final-green at `d5ea9f5d3d296835608eec8f963f7fa5657f0005` under D-DTTLF-USABILITY-048; kernel checkpoint `d9f298ce2c3194adda8f68bd4654e484b33bfac4` | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Exactly one distributor and three projection rules are active and generically transferred. The existing direct factorization tree recursively lowers `typed-pair`, combines branches with existing `Product_pair_funcd`, and composes the distributor. Direct introduction remains fundamental; curry, facade, text/browser, and unrestricted-variance claims remain excluded. |
 | `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | read-only reassessment complete; no semantic delta | final-green D-048 and the user's renewed direct-binder invariant | Graduates arbitrary finite depth only for the recursive `leaf | source-map | target-map | pair` body algebra, alongside the predecessor's qualified finite Hom towers. Direct introduction is fundamental and curry-free. General structural constructor coverage, context arity, variance-valid varying application, and `:^nd` introduction remain separate. |
 | `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | complete; zero active semantic delta; direct weakening selected | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; approved D-DTTLF-USABILITY-049; owner-position/direct-versus-curry probes | The occurrence matrix distinguishes structural weakening from variance-valid varying application. `Functor_catd_const_funcd` is quiet-green with point/full/capped and higher action; terminal/section composition derives the other unused-variable cases. Curry remains auxiliary. |
-| `DIRECT-MIXED-WEAKENING-1J` | D-049 audit complete; corrected exact D-DTTLF-USABILITY-050 proposal frozen; decision pending | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; active structural-logic report; quiet-green owner-position candidate; measured one-signature TypeScript acquisition prerequisite | Promote one direct `Functor_catd_const_funcd` owner with point/full/capped action, acquire the pre-existing generic `hom_postcomp_func` signature needed by its full-action normal form, and add the recursive outer-value-only leaf `H[c]`. Keep terminal-derived outer weakening/constant bodies and qualified two-varying composition as separately measured later frontend/semantic rows. |
+| `DIRECT-MIXED-WEAKENING-1J` | corrected D-DTTLF-USABILITY-050 separately reviewed-approved; implementation dependency-ready | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; corrected proposal `e8f6a88645fb09646c62841ad1d9e11236b73948`; quiet-green owner-position candidate; measured one-signature TypeScript acquisition prerequisite | Promote one direct `Functor_catd_const_funcd` owner with point/full/capped action, acquire the pre-existing generic `hom_postcomp_func` signature needed by its full-action normal form, and add the recursive outer-value-only leaf `H[c]`. Keep terminal-derived outer weakening/constant bodies and qualified two-varying composition as separately measured later frontend/semantic rows. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3684,6 +3691,41 @@ This proposal adds the first missing direct structural constructor. It does
 not make curry a prerequisite and does not graduate arbitrary categorical
 lambda synthesis, general variance, arbitrary contexts, or `:^nd` coherence.
 
+### Separate D-DTTLF-USABILITY-050 review result
+
+Corrected proposal checkpoint
+`e8f6a88645fb09646c62841ad1d9e11236b73948` is approved exactly as frozen.
+The preceding proposal checkpoint
+`8a051777630d3acfa5de4ee2f34f1865894cccc5` correctly selected the direct
+mathematical owner but overstated the existing TypeScript acquisition closure:
+the active profile transfers `hom_postcomp_fapp0`, not the whole
+`hom_postcomp_func` needed by the candidate full-action RHS. The correction
+acquires exactly that one pre-existing opaque signature and compiles the
+transparent `comp_cat_cov_func` occurrence to its exact defining
+`hom_postcomp_func` specialization. It neither adds a second mathematical
+owner nor imports the unrelated higher-beta family.
+
+Review of the corrected two commits confirms a documentation-only delta. The
+active kernel, checks, TypeScript source, tests, browser, README, and public
+artifacts remain unchanged. The owner-position candidate still has exactly one
+new direct owner and three point/full/capped rules; its bounded full-file,
+object/arrow/base/higher consumers, zero-warning-delta comparison, and strict
+audit remain green. The exact `H[c]` negative already exists in the direct
+binder suite, and the recursive target-map/pair representation can consume a
+new leaf without another AST or body-depth table.
+
+The gate preserves the user's invariant: direct
+`lambda^n k. lambda^f c. lambda^f a. body` is fundamental. Neither the new
+frontend leaf nor its emitted Core invokes D-040/D-042, asks for a
+total-context section, or carries external naturality evidence. Existing
+section/terminal derivations, constant-middle varying composition, larger
+contexts, unrestricted `lambda^nd`, text/browser parity, and every remote Git
+effect remain excluded.
+
+No immediate human correction superseded the corrected checkpoint. Under the
+standing unattended delegation, with immediate human supersession,
+implementation is authorized only for the twelve numbered D-050 items.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -3852,14 +3894,18 @@ matrix, existing-owner search, direct owner-position probe, terminal/section
 derivations, constant-middle variance qualification, and auxiliary
 negative-Sigma-curry comparison are frozen above.
 
-The next dependency-ready row is `DIRECT-MIXED-WEAKENING-1J`, but only after
-separate review of H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
-D-DTTLF-USABILITY-050. Preserve direct nested introduction as the
-surface/compiler invariant. The proposed slice promotes one
-`Functor_catd_const_funcd` point/full/capped package and the recursive `H[c]`
-leaf; it does not authorize the terminal-derived outer/constant frontend,
-constant-middle varying composition, arbitrary contexts, unrestricted
-`:^nd`, curry promotion, text/browser parity, or remote Git effects.
+The next dependency-ready row is the separately reviewed-approved
+`DIRECT-MIXED-WEAKENING-1J` under corrected
+H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
+D-DTTLF-USABILITY-050 at
+`e8f6a88645fb09646c62841ad1d9e11236b73948`. Preserve direct nested
+introduction as the surface/compiler invariant. Implement exactly one
+`Functor_catd_const_funcd` point/full/capped package, the one measured
+pre-existing `hom_postcomp_func` TypeScript signature prerequisite, and the
+recursive `H[c]` leaf. Do not implement the terminal-derived outer/constant
+frontend, constant-middle varying composition, arbitrary contexts,
+unrestricted `:^nd`, curry promotion, text/browser parity, or remote Git
+effects.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -3878,6 +3924,16 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — corrected D-DTTLF-USABILITY-050 approved exactly.** Review
+  caught and corrected one acquisition premise before approval: the active
+  TypeScript profile has `hom_postcomp_fapp0` but not the whole
+  `hom_postcomp_func` signature required by the direct weakening full-action
+  normal form. Corrected proposal checkpoint
+  `e8f6a88645fb09646c62841ad1d9e11236b73948` authorizes exactly that one
+  pre-existing prerequisite signature, one new direct owner, three new rules,
+  and the recursive `H[c]` leaf. The implementation remains curry-free and
+  excludes all broader frontend, variance, `:^nd`, parser/browser, and remote
+  Git work.
 - **2026-08-01 — `DIRECT-MIXED-STRUCTURAL-BASIS-0I` audit complete and
   D-DTTLF-USABILITY-050 frozen.** The direct-binder occurrence matrix finds
   one first structural gap: `H[c]` needs
