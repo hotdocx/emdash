@@ -565,6 +565,27 @@ export type CoreCategoricalAbstractionEvidence =
     | (
         CoreCategoricalAbstractionEvidenceBase & {
             readonly rule:
+                'categorical.direct-mixed-displayed-functor';
+            readonly variation: 'functorial';
+            readonly dependency: 'displayed';
+            readonly bindingNames:
+                readonly [string, string, string];
+            readonly bindingModes:
+                readonly ['natural', 'functorial', 'functorial'];
+            readonly outerSourceFamily: KernelExpression;
+            readonly innerSourceFamily: KernelExpression;
+            readonly initialTargetFamily: KernelExpression;
+            readonly targetFamily: KernelExpression;
+            readonly resultFamily: KernelExpression;
+            readonly targetChainLength: number;
+            readonly contextSize: 3;
+            readonly contextRelation:
+                'natural-base-then-two-functorial-fibre-binders';
+        }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
                 | 'categorical.displayed-transfor-eta'
                 | 'categorical.displayed-transfor-composition';
             readonly variation: 'natural';
@@ -606,6 +627,7 @@ export type CoreCategoricalDependentApplicationPrerequisiteId =
     | 'displayed-terminal'
     | 'constant-section-functor'
     | 'sigma-functord-section'
+    | 'mixed-functor-target-action'
     | CoreCategoricalDependentPrerequisiteId
     | CoreCategoricalDependentCompositionPrerequisiteId;
 
@@ -663,6 +685,15 @@ export interface CoreCategoricalScopedBuilderOptions {
      * already-coherent object of the canonical mixed nested Hom family.
      */
     readonly mixedNestedFactorization?: boolean;
+    /**
+     * Enable D-DTTLF-USABILITY-043's direct recursive mixed introduction.
+     * The injected Core name is the already transferred
+     * `Functor_catd_fapp0_func`; this surface does not import its transfer
+     * audit graph or any contextual-curry module.
+     */
+    readonly directMixedIntroduction?: {
+        readonly mixedFunctorFamilyPartialCoreName: string;
+    };
 }
 
 export interface CoreCategoricalBinderOptions {
@@ -853,6 +884,18 @@ interface CoreCategoricalMixedNestedFunctorShape {
     readonly classifierFamily: KernelExpression;
     readonly sourceSection: KernelExpression;
     readonly targetSection: KernelExpression;
+}
+
+interface CoreCategoricalMixedFunctorFamilyShape {
+    readonly sourceFamily: KernelExpression;
+    readonly targetFamily: KernelExpression;
+}
+
+interface CoreCategoricalDirectMixedFactorization {
+    readonly subject: InternalCoreCategoricalTerm;
+    readonly initialTargetFamily: KernelExpression;
+    readonly targetFamily: KernelExpression;
+    readonly targetChain: readonly InternalCoreCategoricalTerm[];
 }
 
 interface InternalCoreCategoricalHomBoundary
@@ -1611,6 +1654,108 @@ export class CoreCategoricalScopedBuilder {
                 plicity: 'explicit',
                 value: category
             }],
+            nodeProvenance
+        );
+    }
+
+    /**
+     * Recognize only the canonical internal mixed family
+     * `Functor_catd(K,A,B)`.  This is a construction-time rich view of the
+     * same kernel classifier, not a coercion or a pointwise naturality claim.
+     */
+    private mixedFunctorFamilyShape(
+        family: KernelExpression,
+        baseCategory: KernelExpression
+    ): CoreCategoricalMixedFunctorFamilyShape | undefined {
+        if (
+            family.tag !== 'call' ||
+            family.callee.tag !== 'reference' ||
+            family.callee.namespace !== 'free' ||
+            family.callee.name !==
+                coreCategoricalDisplayedEvaluationCoreName(
+                    'stableFunctorFamily'
+                ) ||
+            family.arguments.length !== 3 ||
+            family.arguments[0].plicity !== 'implicit' ||
+            family.arguments[1].plicity !== 'explicit' ||
+            family.arguments[2].plicity !== 'explicit' ||
+            !kernelExpressionEquals(
+                family.arguments[0].value,
+                baseCategory
+            )
+        ) {
+            return undefined;
+        }
+        return {
+            sourceFamily: family.arguments[1].value,
+            targetFamily: family.arguments[2].value
+        };
+    }
+
+    private mixedFunctorFamily(
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelCall(
+            kernelFree(
+                coreCategoricalDisplayedEvaluationCoreName(
+                    'stableFunctorFamily'
+                ),
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: baseCategory },
+                { plicity: 'explicit', value: sourceFamily },
+                { plicity: 'explicit', value: targetFamily }
+            ],
+            nodeProvenance
+        );
+    }
+
+    private mixedTargetAction(
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        sourceTargetFamily: KernelExpression,
+        targetTargetFamily: KernelExpression,
+        displayedFunctor: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        const capability = this.options.directMixedIntroduction;
+        if (capability === undefined) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Mixed target-family action requires the reviewed direct ' +
+                    'mixed-introduction capability'
+            );
+        }
+        const displayedCategories = this.displayedCategoryCategory(
+            baseCategory,
+            nodeProvenance
+        );
+        const partialConstructor = kernelCall(
+            kernelFree(
+                capability.mixedFunctorFamilyPartialCoreName,
+                nodeProvenance
+            ),
+            [
+                { plicity: 'implicit', value: baseCategory },
+                { plicity: 'explicit', value: sourceFamily }
+            ],
+            nodeProvenance
+        );
+        return kernelApplication(
+            'functor-hom-capped',
+            [
+                { value: displayedCategories },
+                { value: displayedCategories },
+                { value: partialConstructor },
+                { value: sourceTargetFamily },
+                { value: targetTargetFamily },
+                { value: displayedFunctor }
+            ],
             nodeProvenance
         );
     }
@@ -3630,6 +3775,28 @@ export class CoreCategoricalScopedBuilder {
                 nodeProvenance
             );
         }
+        const mixedTarget =
+            this.options.directMixedIntroduction === undefined
+                ? undefined
+                : this.mixedFunctorFamilyShape(
+                    subject.type.targetFamily,
+                    subject.type.baseCategory
+                );
+        const resultType: InternalCoreCategoricalClassifier =
+            mixedTarget === undefined
+                ? {
+                    tag: 'indexed-object',
+                    baseCategory: subject.type.baseCategory,
+                    family: subject.type.targetFamily,
+                    indexOrdinal: subject.type.indexOrdinal
+                }
+                : {
+                    tag: 'indexed-functor',
+                    baseCategory: subject.type.baseCategory,
+                    sourceFamily: mixedTarget.sourceFamily,
+                    targetFamily: mixedTarget.targetFamily,
+                    indexOrdinal: subject.type.indexOrdinal
+                };
         return this.makeTerm(
             {
                 tag: 'typed-application',
@@ -3639,12 +3806,7 @@ export class CoreCategoricalScopedBuilder {
                 argument,
                 provenance: nodeProvenance
             },
-            {
-                tag: 'indexed-object',
-                baseCategory: subject.type.baseCategory,
-                family: subject.type.targetFamily,
-                indexOrdinal: subject.type.indexOrdinal
-            },
+            resultType,
             mergeUsage(subject.usage, argument.usage),
             undefined,
             [
@@ -5489,6 +5651,226 @@ export class CoreCategoricalScopedBuilder {
             closed,
             [...body.abstractions, evidence]
         );
+    }
+
+    /**
+     * Factor the direct mixed body grammar
+     *
+     *   F[c](a) | G(mixed-body)
+     *
+     * back to its already-coherent `F` plus a finite covariant target chain.
+     * No pointwise function or external naturality witness is accepted.
+     */
+    private directMixedFactorization(
+        term: InternalCoreCategoricalTerm,
+        outerOrdinal: number,
+        innerOrdinal: number,
+        baseOrdinal: number,
+        baseCategory: KernelExpression,
+        outerSourceFamily: KernelExpression,
+        innerSourceFamily: KernelExpression
+    ): CoreCategoricalDirectMixedFactorization | undefined {
+        if (
+            term.node.tag !== 'typed-application' ||
+            term.node.judgment.target !==
+                'indexed-fibre-functor-object' ||
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] === true
+        ) {
+            return undefined;
+        }
+        const argument = term.node.argument as
+            InternalCoreCategoricalTerm;
+        const appliedFunctor = term.node.subject;
+
+        // Exact eta leaf: F[k](c)(a).
+        if (
+            argument.node.tag === 'slot-token' &&
+            argument.node.ordinal === innerOrdinal &&
+            argument.type.tag === 'indexed-object' &&
+            argument.type.indexOrdinal === baseOrdinal &&
+            kernelExpressionEquals(
+                argument.type.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                argument.type.family,
+                innerSourceFamily
+            ) &&
+            appliedFunctor.type.tag === 'indexed-functor' &&
+            appliedFunctor.type.indexOrdinal === baseOrdinal &&
+            kernelExpressionEquals(
+                appliedFunctor.type.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                appliedFunctor.type.sourceFamily,
+                innerSourceFamily
+            ) &&
+            appliedFunctor.node.tag === 'typed-application' &&
+            appliedFunctor.node.judgment.target ===
+                'indexed-fibre-functor-object' &&
+            appliedFunctor.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] !== true
+        ) {
+            const outerArgument = appliedFunctor.node.argument as
+                InternalCoreCategoricalTerm;
+            const projectedOuterFunctor =
+                appliedFunctor.node.subject;
+            if (
+                outerArgument.node.tag === 'slot-token' &&
+                outerArgument.node.ordinal === outerOrdinal &&
+                outerArgument.type.tag === 'indexed-object' &&
+                outerArgument.type.indexOrdinal === baseOrdinal &&
+                kernelExpressionEquals(
+                    outerArgument.type.baseCategory,
+                    baseCategory
+                ) &&
+                kernelExpressionEquals(
+                    outerArgument.type.family,
+                    outerSourceFamily
+                ) &&
+                projectedOuterFunctor.type.tag === 'indexed-functor' &&
+                projectedOuterFunctor.type.indexOrdinal === baseOrdinal &&
+                projectedOuterFunctor.node.tag ===
+                    'typed-application' &&
+                projectedOuterFunctor.node.judgment.target ===
+                    'displayed-functor-fibre' &&
+                projectedOuterFunctor.node.argument[
+                    CORE_CATEGORICAL_BOUNDARY
+                ] !== true
+            ) {
+                const base = projectedOuterFunctor.node.argument as
+                    InternalCoreCategoricalTerm;
+                const subject = projectedOuterFunctor.node.subject;
+                const shape = subject.type.tag === 'displayed-functor'
+                    ? this.mixedFunctorFamilyShape(
+                        subject.type.targetFamily,
+                        baseCategory
+                    )
+                    : undefined;
+                if (
+                    base.node.tag === 'slot-token' &&
+                    base.node.ordinal === baseOrdinal &&
+                    subject.type.tag === 'displayed-functor' &&
+                    subject.closed !== undefined &&
+                    subject.usage.length === 0 &&
+                    kernelExpressionEquals(
+                        subject.type.baseCategory,
+                        baseCategory
+                    ) &&
+                    kernelExpressionEquals(
+                        subject.type.sourceFamily,
+                        outerSourceFamily
+                    ) &&
+                    shape !== undefined &&
+                    kernelExpressionEquals(
+                        shape.sourceFamily,
+                        innerSourceFamily
+                    ) &&
+                    kernelExpressionEquals(
+                        shape.targetFamily,
+                        appliedFunctor.type.targetFamily
+                    ) &&
+                    term.type.tag === 'indexed-object' &&
+                    term.type.indexOrdinal === baseOrdinal &&
+                    kernelExpressionEquals(
+                        term.type.baseCategory,
+                        baseCategory
+                    ) &&
+                    kernelExpressionEquals(
+                        term.type.family,
+                        shape.targetFamily
+                    )
+                ) {
+                    return Object.freeze({
+                        subject,
+                        initialTargetFamily: shape.targetFamily,
+                        targetFamily: shape.targetFamily,
+                        targetChain: Object.freeze([])
+                    });
+                }
+            }
+        }
+
+        // Recursive target mapping: G[k](mixed-body).
+        if (
+            term.type.tag !== 'indexed-object' ||
+            appliedFunctor.type.tag !== 'indexed-functor' ||
+            appliedFunctor.type.indexOrdinal !== baseOrdinal ||
+            !kernelExpressionEquals(
+                appliedFunctor.type.baseCategory,
+                baseCategory
+            ) ||
+            appliedFunctor.node.tag !== 'typed-application' ||
+            appliedFunctor.node.judgment.target !==
+                'displayed-functor-fibre' ||
+            appliedFunctor.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] === true
+        ) {
+            return undefined;
+        }
+        const base = appliedFunctor.node.argument as
+            InternalCoreCategoricalTerm;
+        const mapper = appliedFunctor.node.subject;
+        if (
+            base.node.tag !== 'slot-token' ||
+            base.node.ordinal !== baseOrdinal ||
+            mapper.type.tag !== 'displayed-functor' ||
+            mapper.closed === undefined ||
+            mapper.usage.length !== 0 ||
+            !kernelExpressionEquals(
+                mapper.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                mapper.type.sourceFamily,
+                appliedFunctor.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                mapper.type.targetFamily,
+                appliedFunctor.type.targetFamily
+            )
+        ) {
+            return undefined;
+        }
+        const prefix = this.directMixedFactorization(
+            argument,
+            outerOrdinal,
+            innerOrdinal,
+            baseOrdinal,
+            baseCategory,
+            outerSourceFamily,
+            innerSourceFamily
+        );
+        if (
+            prefix === undefined ||
+            argument.type.tag !== 'indexed-object' ||
+            !kernelExpressionEquals(
+                argument.type.family,
+                prefix.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                mapper.type.sourceFamily,
+                prefix.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                term.type.family,
+                mapper.type.targetFamily
+            )
+        ) {
+            return undefined;
+        }
+        return Object.freeze({
+            subject: prefix.subject,
+            initialTargetFamily: prefix.initialTargetFamily,
+            targetFamily: mapper.type.targetFamily,
+            targetChain: Object.freeze([
+                ...prefix.targetChain,
+                mapper
+            ])
+        });
     }
 
     private directDisplayedFunctorChain(
@@ -8604,6 +8986,379 @@ export class CoreCategoricalScopedBuilder {
             );
         } finally {
             this.activeDisplayedBases.delete(baseOrdinal);
+            this.activeTokenOrdinals.shift();
+            this.activeTokenOrdinals.shift();
+        }
+    }
+
+    /**
+     * Direct recursive introduction for
+     *
+     *   lambda^n k. lambda^f c. lambda^f a. body
+     *     : Functord C (Functor_catd A B).
+     *
+     * The callback is accepted only when `body` is generated by the exact
+     * recursive grammar `F[c](a) | G(mixed-body)`.  Eta returns `F`
+     * directly; each mapped layer uses the internal target action of
+     * `Functor_catd(A,-)` and generic composition.  Contextual curry is not
+     * consulted or emitted.
+     */
+    mixedDisplayedFunctorLambda(
+        outerName: string,
+        innerName: string,
+        baseCategory: KernelExpression,
+        outerSourceFamily: KernelExpression,
+        innerSourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        bodyBuilder: (
+            outerToken: CoreCategoricalSlotToken,
+            innerToken: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        assertSafeIdentifier(
+            outerName,
+            'Direct mixed outer binder hint'
+        );
+        assertSafeIdentifier(
+            innerName,
+            'Direct mixed inner binder hint'
+        );
+        kernelAssertScoped(baseCategory);
+        kernelAssertScoped(outerSourceFamily);
+        kernelAssertScoped(innerSourceFamily);
+        kernelAssertScoped(targetFamily);
+        const nodeProvenance = this.nodeProvenance(
+            `direct mixed abstraction ${outerName}, ${innerName}`,
+            options.provenance
+        );
+        if (this.options.directMixedIntroduction === undefined) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Direct mixed abstraction requires the reviewed ' +
+                    'DIRECT-MIXED-INTRODUCTION-1D capability'
+            );
+        }
+        if (outerName === innerName) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed outer and inner binders require distinct hints'
+            );
+        }
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'functorial';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'displayed';
+        if (
+            variation !== 'functorial' ||
+            dependency !== 'displayed'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed fibre binders require functorial variation ' +
+                    'and displayed dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                'The direct mixed target-recursion slice is covariant'
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Direct mixed introduction abstracts object-level inputs'
+            );
+        }
+
+        const baseName = `${outerName}Base`;
+        const baseToken = this.slot(
+            baseName,
+            baseCategory,
+            nodeProvenance
+        );
+        const baseOrdinal = baseToken.node.tag === 'slot-token'
+            ? baseToken.node.ordinal
+            : -1;
+        const outerToken = this.indexedObjectSlot(
+            outerName,
+            baseCategory,
+            outerSourceFamily,
+            baseOrdinal,
+            nodeProvenance
+        );
+        const outerOrdinal = outerToken.node.tag === 'slot-token'
+            ? outerToken.node.ordinal
+            : -1;
+        const innerToken = this.indexedObjectSlot(
+            innerName,
+            baseCategory,
+            innerSourceFamily,
+            baseOrdinal,
+            nodeProvenance
+        );
+        const innerOrdinal = innerToken.node.tag === 'slot-token'
+            ? innerToken.node.ordinal
+            : -1;
+        const outerScope = [...this.activeTokenOrdinals];
+        this.activeTokenOrdinals.unshift(baseOrdinal);
+        this.activeTokenOrdinals.unshift(outerOrdinal);
+        this.activeTokenOrdinals.unshift(innerOrdinal);
+        this.activeDisplayedBases.set(baseOrdinal, baseToken);
+        try {
+            // Evaluate exactly once; no callback is retained.
+            const body = this.requireTerm(
+                bodyBuilder(
+                    outerToken as CoreCategoricalSlotToken,
+                    innerToken as CoreCategoricalSlotToken
+                ),
+                nodeProvenance
+            );
+            if (
+                body.type.tag !== 'indexed-object' ||
+                body.type.indexOrdinal !== baseOrdinal ||
+                !kernelExpressionEquals(
+                    body.type.baseCategory,
+                    baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.family,
+                    targetFamily
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Direct mixed body is not an object of the requested ' +
+                        'target family over the shared hidden base'
+                );
+            }
+            const factorization = this.directMixedFactorization(
+                body,
+                outerOrdinal,
+                innerOrdinal,
+                baseOrdinal,
+                baseCategory,
+                outerSourceFamily,
+                innerSourceFamily
+            );
+            if (
+                factorization === undefined ||
+                !kernelExpressionEquals(
+                    factorization.targetFamily,
+                    targetFamily
+                ) ||
+                usageCount(body.usage, outerOrdinal) !== 1 ||
+                usageCount(body.usage, innerOrdinal) !== 1 ||
+                usageCount(body.usage, baseOrdinal) !==
+                    factorization.targetChain.length + 1 ||
+                body.usage.some(([ordinal]) =>
+                    ordinal !== outerOrdinal &&
+                    ordinal !== innerOrdinal &&
+                    ordinal !== baseOrdinal
+                )
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'The direct mixed binder accepts only F[c](a) followed ' +
+                        'by a finite chain of closed coherent target ' +
+                        'displayed functors'
+                );
+            }
+
+            let currentTarget =
+                factorization.initialTargetFamily;
+            let resultFamily = this.mixedFunctorFamily(
+                baseCategory,
+                innerSourceFamily,
+                currentTarget,
+                nodeProvenance
+            );
+            let resultExpression =
+                (factorization.subject.closed as
+                    ElaboratedSurfaceTerm).term;
+            for (const mapper of factorization.targetChain) {
+                if (
+                    mapper.type.tag !== 'displayed-functor' ||
+                    mapper.closed === undefined ||
+                    !kernelExpressionEquals(
+                        mapper.type.sourceFamily,
+                        currentTarget
+                    )
+                ) {
+                    this.fail(
+                        'CLASSIFIER_ARGUMENT_MISMATCH',
+                        nodeProvenance,
+                        'Direct mixed target chain has incompatible ' +
+                            'adjacent families'
+                    );
+                }
+                const nextTarget = mapper.type.targetFamily;
+                const nextResultFamily = this.mixedFunctorFamily(
+                    baseCategory,
+                    innerSourceFamily,
+                    nextTarget,
+                    nodeProvenance
+                );
+                const targetAction = this.mixedTargetAction(
+                    baseCategory,
+                    innerSourceFamily,
+                    currentTarget,
+                    nextTarget,
+                    mapper.closed.term,
+                    nodeProvenance
+                );
+                resultExpression = this.dependentCompositionCall(
+                    [
+                        {
+                            plicity: 'implicit',
+                            value: this.displayedCategoryCategory(
+                                baseCategory,
+                                nodeProvenance
+                            )
+                        },
+                        {
+                            plicity: 'implicit',
+                            value: outerSourceFamily
+                        },
+                        {
+                            plicity: 'implicit',
+                            value: resultFamily
+                        },
+                        {
+                            plicity: 'implicit',
+                            value: nextResultFamily
+                        },
+                        {
+                            plicity: 'explicit',
+                            value: targetAction
+                        },
+                        {
+                            plicity: 'explicit',
+                            value: resultExpression
+                        }
+                    ],
+                    nodeProvenance
+                );
+                currentTarget = nextTarget;
+                resultFamily = nextResultFamily;
+            }
+
+            const resultType: CoreType = {
+                tag: 'displayed-functor',
+                category: this.displayedFunctorCategory(
+                    baseCategory,
+                    outerSourceFamily,
+                    resultFamily,
+                    nodeProvenance
+                ),
+                baseCategory,
+                sourceFamily: outerSourceFamily,
+                targetFamily: resultFamily
+            };
+            const resultNode: TemporaryCategoricalNode = {
+                tag: 'explicit-core-term',
+                term: resultExpression,
+                provenance: nodeProvenance
+            };
+            const remainingUsage = removeUsage(
+                removeUsage(
+                    removeUsage(body.usage, innerOrdinal),
+                    outerOrdinal
+                ),
+                baseOrdinal
+            );
+            const recovered = [
+                factorization.subject,
+                ...factorization.targetChain
+            ].flatMap(term =>
+                term.closed === undefined
+                    ? []
+                    : [...term.closed.recovered]
+            );
+            const closed = deepFreeze({
+                term: resultExpression,
+                type: copyCoreType(resultType),
+                sourceSpan: this.spanFor(nodeProvenance),
+                recovered
+            });
+            const provisional = this.makeTerm(
+                resultNode,
+                resultType,
+                remainingUsage,
+                closed,
+                body.abstractions
+            );
+            const evidence = deepFreeze({
+                rule:
+                    'categorical.direct-mixed-displayed-functor' as const,
+                name: outerName,
+                plicity,
+                variation: 'functorial' as const,
+                polarity: 'covariant' as const,
+                cellLevel: 'object' as const,
+                dependency: 'displayed' as const,
+                sourceCategory: baseCategory,
+                bindingNames: [
+                    baseName,
+                    outerName,
+                    innerName
+                ] as const,
+                bindingModes: [
+                    'natural',
+                    'functorial',
+                    'functorial'
+                ] as const,
+                outerSourceFamily,
+                innerSourceFamily,
+                initialTargetFamily:
+                    factorization.initialTargetFamily,
+                targetFamily,
+                resultFamily,
+                targetChainLength:
+                    factorization.targetChain.length,
+                contextSize: 3 as const,
+                contextRelation:
+                    'natural-base-then-two-functorial-fibre-binders' as const,
+                body: this.normalizeNode(
+                    body,
+                    [
+                        innerOrdinal,
+                        outerOrdinal,
+                        baseOrdinal,
+                        ...outerScope
+                    ]
+                ),
+                result: this.normalizeNode(
+                    provisional,
+                    outerScope
+                ),
+                structuralPrerequisites: Object.freeze([]),
+                dependentPrerequisites: Object.freeze([
+                    'stable-functor-family' as const,
+                    'mixed-functor-target-action' as const,
+                    'generic-category-composition' as const
+                ]),
+                provenance: nodeProvenance
+            });
+            return this.makeTerm(
+                resultNode,
+                resultType,
+                remainingUsage,
+                closed,
+                [...body.abstractions, evidence]
+            );
+        } finally {
+            this.activeDisplayedBases.delete(baseOrdinal);
+            this.activeTokenOrdinals.shift();
             this.activeTokenOrdinals.shift();
             this.activeTokenOrdinals.shift();
         }

@@ -13387,6 +13387,176 @@ assert [K D : Cat]
 assertnot [K : Cat] ⊢ Op_cat K ≡ K;
 
 // -------------------------------------------------------------------------------------------------
+// Direct recursive mixed displayed introduction
+// catalog-area: Direct recursive mixed displayed introduction
+// -------------------------------------------------------------------------------------------------
+
+// Check-only direct postmap assembled from the existing constructor action.
+symbol direct_mixed_post_funcd_check
+  [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B D : τ (Catd K)]
+  (G : τ (Functord B D))
+  : τ (Functord (@Functor_catd K A B) (@Functor_catd K A D))
+≔ @fapp1_fapp0
+    (@Catd_cat K)
+    (@Catd_cat K)
+    (@Functor_catd_fapp0_func K A)
+    B D G;
+
+// Check-only recursively mapped binder result:
+//   lambda^n k. lambda^f c. lambda^f a. G[k](F[k](c)(a)).
+symbol direct_mixed_nested_funcd_check
+  [K : Cat]
+  [A : τ (Catd (Op_cat K))]
+  [B C D : τ (Catd K)]
+  (F : τ (Functord C (@Functor_catd K A B)))
+  (G : τ (Functord B D))
+  : τ (Functord C (@Functor_catd K A D))
+≔ @comp_fapp0
+    (@Catd_cat K)
+    C
+    (@Functor_catd K A B)
+    (@Functor_catd K A D)
+    (@direct_mixed_post_funcd_check K A B D G)
+    F;
+
+// The projected constructor action returns the existing whole-functor
+// postcomposition head, not a raw object-level result.
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (B D : τ (Catd K))
+  (G : τ (Functord B D)) (k : τ (Obj K))
+  (H : τ (Functor (Fibre_cat A k) (Fibre_cat B k))) ⊢
+  @fapp0
+    (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+    (Functor_cat (Fibre_cat A k) (Fibre_cat D k))
+    (@tapp0_fapp0
+      K Cat_cat
+      (@Functor_catd K A B)
+      (@Functor_catd K A D)
+      k
+      (@direct_mixed_post_funcd_check K A B D G))
+    H
+  ≡ @hom_postcomp_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Fibre_cat A k) (Fibre_cat B k) (Fibre_cat D k)
+      (@tapp0_fapp0 K Cat_cat B D k G)
+      H;
+
+// Triple-point beta for the direct recursive binder branch.
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (B C D : τ (Catd K))
+  (F : τ (Functord C (@Functor_catd K A B)))
+  (G : τ (Functord B D))
+  (k : τ (Obj K)) (c : τ (Obj (Fibre_cat C k)))
+  (a : τ (Obj (Fibre_cat A k))) ⊢
+  @fapp0
+    (Fibre_cat A k)
+    (Fibre_cat D k)
+    (@fapp0
+      (Fibre_cat C k)
+      (Functor_cat (Fibre_cat A k) (Fibre_cat D k))
+      (@tapp0_fapp0
+        K Cat_cat C (@Functor_catd K A D) k
+        (@direct_mixed_nested_funcd_check K A B C D F G))
+      c)
+    a
+  ≡ @fapp0
+      (Fibre_cat B k)
+      (Fibre_cat D k)
+      (@tapp0_fapp0 K Cat_cat B D k G)
+      (@fapp0
+        (Fibre_cat A k)
+        (Fibre_cat B k)
+        (@fapp0
+          (Fibre_cat C k)
+          (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+          (@tapp0_fapp0 K Cat_cat C (@Functor_catd K A B) k F)
+          c)
+        a);
+
+// Inner-arrow action stays under generic functorial action after factoring.
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (B C D : τ (Catd K))
+  (F : τ (Functord C (@Functor_catd K A B)))
+  (G : τ (Functord B D))
+  (k : τ (Obj K)) (c : τ (Obj (Fibre_cat C k)))
+  (a a' : τ (Obj (Fibre_cat A k)))
+  (alpha : τ (Hom (Fibre_cat A k) a a')) ⊢
+  @fapp1_fapp0
+    (Fibre_cat A k)
+    (Fibre_cat D k)
+    (@fapp0
+      (Fibre_cat C k)
+      (Functor_cat (Fibre_cat A k) (Fibre_cat D k))
+      (@tapp0_fapp0
+        K Cat_cat C (@Functor_catd K A D) k
+        (@direct_mixed_nested_funcd_check K A B C D F G))
+      c)
+    a a' alpha
+  ≡ @fapp1_fapp0
+      (Fibre_cat B k)
+      (Fibre_cat D k)
+      (@tapp0_fapp0 K Cat_cat B D k G)
+      (@fapp0
+        (Fibre_cat A k)
+        (Fibre_cat B k)
+        (@fapp0
+          (Fibre_cat C k)
+          (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+          (@tapp0_fapp0 K Cat_cat C (@Functor_catd K A B) k F)
+          c)
+        a)
+      (@fapp0
+        (Fibre_cat A k)
+        (Fibre_cat B k)
+        (@fapp0
+          (Fibre_cat C k)
+          (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+          (@tapp0_fapp0 K Cat_cat C (@Functor_catd K A B) k F)
+          c)
+        a')
+      (@fapp1_fapp0
+        (Fibre_cat A k)
+        (Fibre_cat B k)
+        (@fapp0
+          (Fibre_cat C k)
+          (Functor_cat (Fibre_cat A k) (Fibre_cat B k))
+          (@tapp0_fapp0 K Cat_cat C (@Functor_catd K A B) k F)
+          c)
+        a a' alpha);
+
+// The produced value retains the generic internal base-arrow cell.
+assert [K : Cat] (A : τ (Catd (Op_cat K))) (B C D : τ (Catd K))
+  (F : τ (Functord C (@Functor_catd K A B)))
+  (G : τ (Functord B D))
+  (x y : τ (Obj K)) (p : τ (Hom K x y))
+  (c : τ (Obj (Fibre_cat C x))) ⊢
+  @fdapp1_int_cell
+    K C (@Functor_catd K A D)
+    (@direct_mixed_nested_funcd_check K A B C D F G)
+    x y p c
+  : τ (Hom
+      (Fibre_cat (@Functor_catd K A D) y)
+      (@fapp0
+        (Fibre_cat C x)
+        (Fibre_cat (@Functor_catd K A D) y)
+        (@functord_transport_lhs_func
+          K C (@Functor_catd K A D)
+          (@direct_mixed_nested_funcd_check K A B C D F G)
+          x y p)
+        c)
+      (@fapp0
+        (Fibre_cat C x)
+        (Fibre_cat (@Functor_catd K A D) y)
+        (@functord_transport_rhs_func
+          K C (@Functor_catd K A D)
+          (@direct_mixed_nested_funcd_check K A B C D F G)
+          x y p)
+        c));
+
+// The direct route does not collapse the mixed classifier to its target.
+assertnot [K : Cat] (A : τ (Catd (Op_cat K))) (B : τ (Catd K)) ⊢
+  @Functor_catd K A B ≡ B;
+
+// -------------------------------------------------------------------------------------------------
 // Mixed displayed curry
 // catalog-area: Mixed displayed curry
 // -------------------------------------------------------------------------------------------------

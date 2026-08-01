@@ -62,7 +62,7 @@ export const CORE_CATEGORICAL_STRUCTURAL_TRANSFER_REVISION =
     'USABILITY-1C-CATEGORICAL-STRUCTURAL-SIGNATURES-1' as const;
 
 export const CORE_CATEGORICAL_STRUCTURAL_SOURCE_SHA256 =
-    'sha256:ccda94c638af8d4fa7ce122967dcc30159c713846eedd53cee0df83123b48a11';
+    'sha256:c190da66e017d8156e9b8e894c7c9b7122df3d4ccad21b1712b7ed51b995a515';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');

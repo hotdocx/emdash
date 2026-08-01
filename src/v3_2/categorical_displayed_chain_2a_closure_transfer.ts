@@ -59,7 +59,7 @@ CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_REVISION =
 
 export const
 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_SOURCE_SHA256 =
-    'sha256:ccda94c638af8d4fa7ce122967dcc30159c713846eedd53cee0df83123b48a11';
+    'sha256:c190da66e017d8156e9b8e894c7c9b7122df3d4ccad21b1712b7ed51b995a515';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');

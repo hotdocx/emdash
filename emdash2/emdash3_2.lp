@@ -13276,6 +13276,27 @@ rule @fapp0 _ _
 rule @fapp0 _ _ (@Functor_catd_fapp0_func $K $A) $B
   ↪ @Functor_catd $K $A $B;
 
+// Covariant target-family action projected at k and consumed by H remains a
+// whole functor: G[k] o H.  The existing Cat-valued postcomposition owner
+// then supplies object and hom action through generic fapp0/fapp1.
+rule @fapp0
+      _ _
+      (@tapp0_fapp0
+        $K Cat_cat _ _ $k
+        (@fapp1_fapp0
+          (Catd_cat $K)
+          (Catd_cat $K)
+          (@Functor_catd_fapp0_func $K $A)
+          $B $D $G))
+      $H
+  ↪ @hom_postcomp_fapp0
+      Cat_cat Cat_cat (@id Cat_cat Cat_cat)
+      (Fibre_cat $A $k)
+      (Fibre_cat $B $k)
+      (Fibre_cat $D $k)
+      (@tapp0_fapp0 $K Cat_cat $B $D $k $G)
+      $H;
+
 // Mixed-variance hom family for two sections of a displayed family.
 //
 // Surface/formula:

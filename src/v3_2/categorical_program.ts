@@ -105,6 +105,9 @@ import type {
     CoreCategoricalMixedActionCompilation,
     CoreCategoricalMixedActionSymbolId
 } from './categorical_mixed_action_transfer';
+import type {
+    CoreCategoricalDirectMixedIntroductionCompilation
+} from './categorical_direct_mixed_introduction_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -245,6 +248,16 @@ const mixedActionCoreName = (
 ): string =>
     mixedActionModule().coreCategoricalMixedActionCoreName(id);
 
+const directMixedIntroductionModule = () =>
+    optionalProfileModule<typeof import(
+        './categorical_direct_mixed_introduction_transfer'
+    )>('./categorical_direct_mixed_introduction_transfer');
+
+const compileCoreCategoricalDirectMixedIntroduction = ():
+CoreCategoricalDirectMixedIntroductionCompilation =>
+    directMixedIntroductionModule()
+        .compileCoreCategoricalDirectMixedIntroductionTransfer();
+
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
 
@@ -289,6 +302,9 @@ export const CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_PROGRAM_REVISION =
 
 export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
     'DISPLAYED-TELESCOPE-GENERIC-1-CATEGORICAL-PROGRAM-1' as const;
+
+export const CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION =
+    'DIRECT-MIXED-INTRODUCTION-1D-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -466,6 +482,9 @@ export interface CoreCategoricalProgramOptions {
      * constructors, recursive nested eta/action, and the reviewed arbitrary
      * finite canonical sibling-layer telescope fold. It still does not claim
      * unrestricted mixed classifiers or general `:^nd`.
+     * The direct-mixed-introduction profile adds only the recursive
+     * `F[c](a) | G(mixed-body)` binder and has no contextual-curry
+     * dependency.
      */
     readonly profile?:
         | 'reviewed-usability-2a1'
@@ -483,7 +502,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-displayed-chain-1'
         | 'fibred-displayed-chain-2a'
         | 'fibred-displayed-nd-higher-1'
-        | 'fibred-displayed-mixed-nest-1';
+        | 'fibred-displayed-mixed-nest-1'
+        | 'fibred-direct-mixed-introduction-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -523,6 +543,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_DISPLAYED_CHAIN'
     | 'UNAVAILABLE_DISPLAYED_ND_HIGHER'
     | 'UNAVAILABLE_MIXED_MODE'
+    | 'UNAVAILABLE_DIRECT_MIXED_INTRODUCTION'
     | 'INVALID_DISPLAYED_CONTEXT'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
@@ -1009,7 +1030,8 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDisplayedChainCompilation
         | CoreCategoricalDisplayedChain2aClosureCompilation
         | CoreCategoricalDisplayedNdHigherTargetCompilation
-        | CoreCategoricalMixedActionCompilation;
+        | CoreCategoricalMixedActionCompilation
+        | CoreCategoricalDirectMixedIntroductionCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -1024,6 +1046,7 @@ export class CoreCategoricalProgram {
     private readonly displayedChain2aEnabled: boolean;
     private readonly displayedNdHigherEnabled: boolean;
     private readonly mixedModeEnabled: boolean;
+    private readonly directMixedIntroductionEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -1032,8 +1055,11 @@ export class CoreCategoricalProgram {
             options.sourceFile ?? '<categorical-program>';
         const profile =
             options.profile ?? 'reviewed-usability-2a1';
+        const directMixedIntroductionProfile =
+            profile === 'fibred-direct-mixed-introduction-1';
         const mixedModeProfile =
-            profile === 'fibred-displayed-mixed-nest-1';
+            profile === 'fibred-displayed-mixed-nest-1' ||
+            directMixedIntroductionProfile;
         const displayedNdHigherProfile =
             profile === 'fibred-displayed-nd-higher-1' ||
             mixedModeProfile;
@@ -1130,6 +1156,8 @@ export class CoreCategoricalProgram {
         this.displayedChain2aEnabled = displayedChain2aProfile;
         this.displayedNdHigherEnabled = displayedNdHigherProfile;
         this.mixedModeEnabled = mixedModeProfile;
+        this.directMixedIntroductionEnabled =
+            directMixedIntroductionProfile;
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
@@ -1142,7 +1170,9 @@ export class CoreCategoricalProgram {
         if (this.displayedContextualEnabled) {
             validateCoreCategoricalDisplayedBracketContract();
         }
-        this.dependent = this.mixedModeEnabled
+        this.dependent = this.directMixedIntroductionEnabled
+            ? compileCoreCategoricalDirectMixedIntroduction()
+            : this.mixedModeEnabled
             ? compileCoreCategoricalMixedAction()
             : this.displayedNdHigherEnabled
             ? compileCoreCategoricalDisplayedNdHigherTarget()
@@ -1214,7 +1244,16 @@ export class CoreCategoricalProgram {
                 displayedGenericTelescope:
                     this.mixedModeEnabled,
                 mixedNestedFactorization:
-                    this.mixedModeEnabled
+                    this.mixedModeEnabled,
+                directMixedIntroduction:
+                    this.directMixedIntroductionEnabled
+                        ? Object.freeze({
+                            mixedFunctorFamilyPartialCoreName:
+                                mixedActionCoreName(
+                                    'mixedFunctorFamilyPartial'
+                                )
+                        })
+                        : undefined
             }
         );
     }
@@ -1491,6 +1530,20 @@ export class CoreCategoricalProgram {
                 'Mixed-variance Hom_catd/Transf_catd classifiers are ' +
                     'available only in the explicit ' +
                     "'fibred-displayed-mixed-nest-1' root profile"
+            );
+        }
+    }
+
+    private requireDirectMixedIntroduction(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.directMixedIntroductionEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_DIRECT_MIXED_INTRODUCTION',
+                nodeProvenance,
+                'Direct recursive mixed abstraction is available only in ' +
+                    "the explicit 'fibred-direct-mixed-introduction-1' " +
+                    'root profile'
             );
         }
     }
@@ -7474,6 +7527,96 @@ export class CoreCategoricalProgram {
         return this.builder.nestedDisplayedFunctorLambda(
             name,
             coherentSubject,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
+     * Direct TypeScript analogue of
+     *
+     *   lambda^n k. lambda^f c. lambda^f a. body
+     *     : Functord C (Functor_catd A B).
+     *
+     * The hidden natural base is scoped by the builder. The callback is
+     * evaluated once and must match `F[c](a) | G(mixed-body)`; no curry API
+     * or pointwise coherence payload is involved.
+     */
+    mixedDisplayedFunctorLambda(
+        outerBindingValue: CoreCategoricalDisplayedContextBinding,
+        innerBindingValue: CoreCategoricalDisplayedContextBinding,
+        targetValue: CoreCategoricalDisplayedFamily,
+        body: (
+            outerToken: CoreCategoricalSlotToken,
+            innerToken: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'direct recursive mixed abstraction',
+            options.source
+        );
+        this.requireDirectMixedIntroduction(nodeProvenance);
+        if (
+            outerBindingValue.name === innerBindingValue.name
+        ) {
+            throw new CoreCategoricalProgramError(
+                'INVALID_DISPLAYED_CONTEXT',
+                nodeProvenance,
+                'Direct mixed outer and inner bindings require distinct names'
+            );
+        }
+        const outerSource = this.requireDisplayedFamily(
+            outerBindingValue.family,
+            nodeProvenance
+        );
+        const innerSource = this.requireDisplayedFamily(
+            innerBindingValue.family,
+            nodeProvenance
+        );
+        const target = this.requireDisplayedFamily(
+            targetValue,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            target.baseCategory.expression,
+            outerSource.baseCategory.expression
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Direct mixed outer source and target must share their base'
+            );
+        }
+        const expectedInnerBase = this.oppositeCategoryExpression(
+            outerSource.baseCategory.expression,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            innerSource.baseCategory.expression,
+            expectedInnerBase
+        )) {
+            throw new CoreCategoricalProgramError(
+                'DISPLAYED_BASE_MISMATCH',
+                nodeProvenance,
+                'Direct mixed inner source must be based over the opposite ' +
+                    'of the outer base'
+            );
+        }
+        return this.builder.mixedDisplayedFunctorLambda(
+            outerBindingValue.name,
+            innerBindingValue.name,
+            outerSource.baseCategory.expression,
+            outerSource.expression,
+            innerSource.expression,
+            target.expression,
             body,
             {
                 plicity: options.plicity,

@@ -505,9 +505,12 @@ const capabilities = [
         id: 'displayed-functorial-abstraction',
         apiMethods: [
             'displayedFunctorLambda',
-            'nestedDisplayedFunctorLambda'
+            'nestedDisplayedFunctorLambda',
+            'mixedDisplayedFunctorLambda'
         ],
-        profile: 'fibred-binder-1 and descendants',
+        profile:
+            'fibred-binder-1 and descendants; direct mixed introduction ' +
+            'remains an opt-in later profile',
         classifierContract:
             'Expected source and target displayed families select ^fd.',
         scopedBindings:
@@ -518,7 +521,8 @@ const capabilities = [
             'Existing displayed identity and generic comp_fapp0 at Catd_cat.',
         recursiveBodyGrammar:
             'identity, eta, finite nested application composition, and ' +
-            'qualified weakening/reindexing',
+            'qualified weakening/reindexing; the direct mixed profile adds ' +
+            'F[c](a) | G(mixed-body)',
         proposedText:
             'λ^fd a [: E]. a; λ^fd a. GG (FF a)',
         locatedSyntax: 'requires-typed-expected-contract',
@@ -694,7 +698,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 79,
+        publicProgramMethods: 80,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,

@@ -36,6 +36,7 @@
     "demo:categorical-displayed-evaluation": "node --require ts-node/register examples/v3_2_categorical_displayed_evaluation_demo.ts",
     "demo:categorical-displayed-chain": "node --require ts-node/register examples/v3_2_categorical_displayed_chain_demo.ts",
     "demo:categorical-displayed-nd-higher": "node --require ts-node/register examples/v3_2_categorical_displayed_nd_higher_demo.ts",
+    "demo:categorical-direct-mixed-introduction": "node --require ts-node/register examples/v3_2_categorical_direct_mixed_introduction_demo.ts",
     "demo:categorical-text": "node --require ts-node/register examples/v3_2_categorical_text_demo.ts",
     "demo:external-review": "node --require ts-node/register examples/v3_2_product_review_demo.ts",
     "reviewer:dev": "./scripts/pnpmw --dir emdash-template --ignore-workspace exec vite",

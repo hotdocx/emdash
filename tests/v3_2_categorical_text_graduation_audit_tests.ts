@@ -43,27 +43,46 @@ const functorsAC = program.functorCategory(A, C);
 const E = program.functor('graduate_E', B, functorsAC);
 
 describe('SYNTAX-PARITY-GRADUATE-0A audit', () => {
-    it('partitions the original 68-method surface exactly', () => {
+    it('retains the 68-method historical partition and accounts for later APIs',
+        () => {
         const audit = CORE_CATEGORICAL_TEXT_GRADUATION_AUDIT;
-        const originalMethods =
+        const currentMethods =
             CORE_CATEGORICAL_TEXT_PARITY_AUDIT.capabilities.flatMap(
                 capability => capability.apiMethods
             );
         const host = Object.values(
             audit.publicMethodClassification.deliberatelyHostSide
         ).flat();
-        const originalSet = new Set<string>(originalMethods);
+        const currentSet = new Set<string>(currentMethods);
         const hostSet = new Set<string>(host);
-        assert.equal(originalMethods.length, 68);
-        assert.equal(originalSet.size, 68);
+        assert.equal(currentMethods.length, 80);
+        assert.equal(currentSet.size, 80);
+        assert.equal(
+            audit.publicMethodClassification.originalAuditMethodCount,
+            68
+        );
         assert.equal(host.length, 21);
         assert.equal(hostSet.size, 21);
         host.forEach(method =>
-            assert.equal(originalSet.has(method), true)
+            assert.equal(currentSet.has(method), true)
         );
         assert.equal(
-            originalMethods.filter(method => !hostSet.has(method)).length,
+            audit.publicMethodClassification
+                .mathematicalExpressionMethodCount,
             47
+        );
+        assert.equal(
+            audit.publicMethodClassification
+                .deliberatelyHostSideMethodCount +
+            audit.publicMethodClassification
+                .mathematicalExpressionMethodCount,
+            audit.publicMethodClassification.originalAuditMethodCount
+        );
+        assert.equal(
+            currentMethods.filter(method => !hostSet.has(method)).length -
+                audit.publicMethodClassification
+                    .mathematicalExpressionMethodCount,
+            12
         );
         assert.equal(
             audit.currentTextEnvelope.operationHeads.length,

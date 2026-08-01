@@ -30,8 +30,15 @@
 > checkpoint `291213d04269a230be0a3b2b7fc7b8bef81e81c9` under the standing
 > unattended delegation. It authorizes one zero-owner rule, zero-declaration
 > generic transfer,
-> and a direct TypeScript exact-eta/finite-target-chain factorer. It explicitly
-> forbids transferring or invoking D-040/D-042 in that frontend. The completed
+> and a direct TypeScript exact-eta/finite-target-chain factorer. That slice is
+> now implementation- and validation-complete, with its exact local checkpoint
+> still to be recorded. The opt-in binder is the direct TypeScript analogue of
+> `lambda^n k. lambda^f c. lambda^f a. t : Functord_cat C (Functor_catd A B)`;
+> eta returns `F`, and finite covariant target maps use the existing internal
+> action plus generic displayed composition. It explicitly neither transfers
+> nor invokes D-040/D-042. After its checkpoint, the next dependency-ready row
+> is a bounded read-only `MIXED-VARIANCE-GRADUATE-1E` stress audit and separate
+> proposal, not another semantic edit. The completed
 > mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
