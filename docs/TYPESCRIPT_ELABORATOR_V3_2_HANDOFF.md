@@ -26,8 +26,10 @@
 > measured runtime gap; its full-file candidate is quiet-green, computes both
 > object and inner-arrow action, and has zero warning delta at 1,079/159.
 > H-DTTLF-USABILITY-DIRECT-MIXED-INTRODUCTION-01 /
-> D-DTTLF-USABILITY-043 is frozen in the living continuation plan for separate
-> review. It proposes one zero-owner rule, zero-declaration generic transfer,
+> D-DTTLF-USABILITY-043 is separately reviewed-approved from proposal
+> checkpoint `291213d04269a230be0a3b2b7fc7b8bef81e81c9` under the standing
+> unattended delegation. It authorizes one zero-owner rule, zero-declaration
+> generic transfer,
 > and a direct TypeScript exact-eta/finite-target-chain factorer. It explicitly
 > forbids transferring or invoking D-040/D-042 in that frontend. The completed
 > mixed-mode telescope plan

@@ -379,7 +379,7 @@ It deliberately avoids:
 | `CONTEXTUAL-CURRY-0B` | complete; ignored owner-position candidate quiet-green, warning-measured, and strict-audit clean | final-green D-039/D-040; user clarification on direct recursive binders and rollback-safe auxiliary retention | Surface syntax is separated from total-context section semantics. The audit qualifies positive Sigma curry, negative-family curry, their factorized point/action route, the stable family normal form, generic next-Hom formation, and the exact positive-identity normal-form seam. |
 | `CONTEXTUAL-CURRY-1A` | final-green at `b6f803e37ec9c1a4241ab95c45a4fc8a8d992a89` | completed `CONTEXTUAL-CURRY-0B`; corrected proposal `2f54eef57d2cfa9a454909b5d8adc6858ecdb30c`; separate review | Exactly eight declarations, twelve rules, one existing alias-body migration, and twenty durable checks are active. D-040 remains the checked specialized facade. This is rollback-safe auxiliary evidence, not a direct-binder prerequisite or surface API. |
 | `DIRECT-MIXED-INTRODUCTION-0C` | complete; direct no-curry eta/mapped-body routes audited; ignored owner-position probes quiet-green with zero warning delta | final-green D-040 and auxiliary D-042; current recursive contextual elaborator; user's direct-introduction clarification | The fundamental direct recursive introduction `lambda^n k. lambda^f c. lambda^f a. t` does not require a surface or compiler-mandatory curry. Exact eta bypasses curry; recursive covariant target application factors through `Functor_catd(A,-)` action. One missing existing-owner fibre projection is isolated below. |
-| `DIRECT-MIXED-INTRODUCTION-1D` | proposed under D-DTTLF-USABILITY-043; implementation requires separate review | completed `DIRECT-MIXED-INTRODUCTION-0C`; one-rule zero-warning-delta candidate; existing mixed-action and recursive contextual infrastructure | Add exactly one existing-owner runtime projection, transfer it generically, and expose direct typed TypeScript binders for exact eta plus finite recursive covariant target application. Transfer or invocation of D-040/D-042 is forbidden in this gate. |
+| `DIRECT-MIXED-INTRODUCTION-1D` | approved under D-DTTLF-USABILITY-043; implementation dependency-ready | completed `DIRECT-MIXED-INTRODUCTION-0C`; proposal `291213d04269a230be0a3b2b7fc7b8bef81e81c9`; separate review under standing unattended delegation | Add exactly one existing-owner runtime projection, transfer it generically, and expose direct typed TypeScript binders for exact eta plus finite recursive covariant target application. Transfer or invocation of D-040/D-042 is forbidden in this gate. |
 | `MIXED-VARIANCE-GRADUATE-1E` | blocked on representative direct recursive-binder and full-action evidence | corrected TypeScript successor to `DIRECT-MIXED-INTRODUCTION-1D` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -2203,6 +2203,18 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-043 approved exactly as proposed.** A
+  separate review of proposal checkpoint
+  `291213d04269a230be0a3b2b7fc7b8bef81e81c9` confirmed that the selected
+  rule is at the existing `Functor_catd_fapp0_func` action projection, returns
+  the already transferred whole-functor `hom_postcomp_fapp0` head, and needs
+  no new declaration or intrinsic engine case. It independently retained the
+  direct no-curry eta/mapped-body architecture and all stated non-effects. No
+  immediate human correction superseded the isolated proposal, so the user's
+  standing unattended delegation authorizes only this exact one-rule and
+  direct eta/finite-target-chain vertical slice, with immediate human
+  supersession. It does not authorize D-040/D-042 transfer, total-section
+  lowering, broader variance, text/browser work, or remote Git effects.
 - **2026-08-01 — D-DTTLF-USABILITY-043 frozen for separate review.** The
   direct-introduction audit proves exact eta and the recursive mapped body
   `lambda^n k. lambda^f c. lambda^f a. G[k](F[k](c)(a))` without D-040,
