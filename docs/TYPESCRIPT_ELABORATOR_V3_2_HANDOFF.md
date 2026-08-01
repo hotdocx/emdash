@@ -7,10 +7,12 @@
 > mixed-curry witness are final-green. The user superseded D-041 before its
 > TypeScript implementation: its exact-section-leaf transfer remains
 > historical acquisition evidence, not the recursive binder architecture.
-> Continue `CONTEXTUAL-CURRY-0B`, which qualifies positive Sigma curry,
-> reusable negative-family curry, their factorized mixed route, the canonical
-> family normal form, and the full-action boundary while retaining D-040 as a
-> possible stable facade. The end-user target is recursive
+> `CONTEXTUAL-CURRY-0B` is owner-position complete. The exact hybrid
+> `CONTEXTUAL-CURRY-1A` proposal is frozen as D-DTTLF-USABILITY-042 and awaits
+> separate review before active-kernel edits. It adds a reusable positive
+> Sigma curry and negative-family curry, selects the stable family normal
+> form, and retains D-040 unchanged as the checked specialized facade. The
+> end-user target remains recursive
 > `lambda^n k. lambda^f c. lambda^f a. t`; a total-context section may be an
 > internal compilation form but is not a required user argument. The
 > completed
