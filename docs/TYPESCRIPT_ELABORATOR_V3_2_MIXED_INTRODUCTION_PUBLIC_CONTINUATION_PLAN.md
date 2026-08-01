@@ -20,8 +20,11 @@ delegation, with human supersession. The corrected preset is focused-green,
 but the required real-browser smoke then exposed a pre-existing optional
 profile import cycle. H-DTTLF-USABILITY-PUBLIC-BROWSER-RUNTIME-CORRECTION-01 /
 D-DTTLF-USABILITY-036 below freezes the smallest semantic-neutral bundling
-repair before publication. After the corrected public slice is green and
-deployed, the next
+repair before publication. Its proposal checkpoint is
+`e76fae5d8ceff84acb3548cf2330e0e300450425`; the separate review recorded
+below approves exactly that repair under the standing unattended delegation,
+with human supersession. Implementation is dependency-ready. After the
+corrected public slice is green and deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -279,7 +282,7 @@ It deliberately avoids:
 | --- | --- | --- | --- |
 | `PUBLIC-HOM-AUDIT-0A` | complete, then measurement-corrected by D-DTTLF-USABILITY-035; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract; reject both the slow mixed-nest fixture and the unavailable Transfd/profile combination; select the default-profile functor-category recursive-Hom witness; freeze truthful public wording. |
 | `PUBLIC-HOM-PRESET-1A` | corrected implementation focused-green; real-browser smoke exposed separate runtime cycle | `PUBLIC-HOM-AUDIT-0A`; approved D-034/D-035 | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
-| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | exact D-DTTLF-USABILITY-036 frozen for separate review | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
+| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | exact D-DTTLF-USABILITY-036 reviewed-approved and implementation dependency-ready | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
 | `PUBLIC-HOM-VALIDATE-1B` | blocked on green browser-runtime correction | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | blocked on green `VALIDATE-1B` | clean goal checkpoint; fetched ancestry; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
@@ -460,6 +463,13 @@ declaration, runtime/proof rule, parser/checker/evaluator branch, profile
 capability, mathematical claim, or new remote effect. All D-034/D-035 Git and
 publication boundaries remain in force.
 
+The exact proposal was checkpointed at
+`e76fae5d8ceff84acb3548cf2330e0e300450425`. No immediate human correction
+superseded it. The separate review in the decision ledger therefore approves
+only D-DTTLF-USABILITY-036 under the user's standing unattended delegation,
+with human supersession. Implementation may continue within this measured
+runtime-correction gate.
+
 ## Mixed-Introduction Audit Contract
 
 After the public slice is deployed, `MIXED-INTRODUCTION-0A` must start with
@@ -626,4 +636,11 @@ removal, or unrelated cleanup is authorized.
   gate preserves synchronous Node profile loading while making four optional
   module targets opaque to static browser bundling. It requires both a real
   browser execution and a qualified Node-profile regression and forbids
-  preloads, mirrors, duplicated semantics, or profile weakening.
+  preloads, mirrors, duplicated semantics, or profile weakening. Its proposal
+  checkpoint is `e76fae5d8ceff84acb3548cf2330e0e300450425`.
+- **2026-08-01 — D-DTTLF-USABILITY-036 approved exactly as proposed.** No
+  immediate human correction superseded the isolated proposal. The standing
+  unattended delegation therefore authorizes only the four-target optional
+  loader repair and its stated validation, with human supersession. It does
+  not authorize a semantic/profile change, duplicated browser implementation,
+  broader public claim, or unrelated remote effect.
