@@ -16,8 +16,12 @@ D-DTTLF-USABILITY-035 below freezes the exact lightweight correction without
 weakening a profile or changing semantics. Its proposal checkpoint is
 `cf8522a3029d3dd064f24d70466499a49e774878`; the separate review recorded
 below approves exactly that correction under the standing unattended
-delegation, with human supersession. Implementation is dependency-ready.
-After the corrected public slice is green and deployed, the next
+delegation, with human supersession. The corrected preset is focused-green,
+but the required real-browser smoke then exposed a pre-existing optional
+profile import cycle. H-DTTLF-USABILITY-PUBLIC-BROWSER-RUNTIME-CORRECTION-01 /
+D-DTTLF-USABILITY-036 below freezes the smallest semantic-neutral bundling
+repair before publication. After the corrected public slice is green and
+deployed, the next
 substantive row is a Lambdapi-first, zero-kernel-delta mixed-introduction
 audit. No mixed-curry owner or kernel rule is authorized before that audit
 freezes a separate exact gate.
@@ -274,8 +278,9 @@ It deliberately avoids:
 | Row | Status | Dependencies | Exact deliverable |
 | --- | --- | --- | --- |
 | `PUBLIC-HOM-AUDIT-0A` | complete, then measurement-corrected by D-DTTLF-USABILITY-035; zero behavior delta | completed D-032/D-033; deployed reviewer | Measure the reviewer/result contract; reject both the slow mixed-nest fixture and the unavailable Transfd/profile combination; select the default-profile functor-category recursive-Hom witness; freeze truthful public wording. |
-| `PUBLIC-HOM-PRESET-1A` | D-DTTLF-USABILITY-034 approved; exact D-DTTLF-USABILITY-035 correction reviewed-approved and implementation dependency-ready | `PUBLIC-HOM-AUDIT-0A` | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
-| `PUBLIC-HOM-VALIDATE-1B` | blocked on green `PRESET-1A` | `PUBLIC-HOM-PRESET-1A` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
+| `PUBLIC-HOM-PRESET-1A` | corrected implementation focused-green; real-browser smoke exposed separate runtime cycle | `PUBLIC-HOM-AUDIT-0A`; approved D-034/D-035 | Add one corrected recursive-Hom preset and direct counterpart; synchronize reviewer revision/boundary, README, and landing copy without semantic changes. |
+| `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | exact D-DTTLF-USABILITY-036 frozen for separate review | focused-green `PUBLIC-HOM-PRESET-1A`; measured browser failure | Preserve the existing synchronous optional-profile boundary while hiding four literal Node-only profile `require` targets from static browser bundling; verify the browser reviewer and the Node higher-profile path. |
+| `PUBLIC-HOM-VALIDATE-1B` | blocked on green browser-runtime correction | `PUBLIC-HOM-PRESET-1A`; `PUBLIC-BROWSER-RUNTIME-CORRECTION-1A` | Focused reviewer tests, root typecheck/lint, standalone production build, and real local browser smoke. No long repository aggregate. |
 | `PUBLIC-HOM-INTEGRATE-1C` | blocked on green `VALIDATE-1B` | clean goal checkpoint; fetched ancestry; user publication authorization | Fast-forward local `main`, push `main` without force, monitor the exact Pages run, and verify the live preset plus paper/book routes. |
 | `MIXED-INTRODUCTION-0A` | dependency-ready only after public integration; read-only/Lambdapi-probe audit | completed public slice; active kernel/SOP | Inventory exact two-sided context, variance, existing curry/evaluation/action owners, missing laws, representative positive/negative terms, and owner-position alternatives. No active kernel edit. |
 | `MIXED-CURRY-1A` | decision-blocked on `MIXED-INTRODUCTION-0A` | separately frozen owner/signature/rule proposal | Implement one exact Lambdapi-first mixed-curry functor with internal object/base-arrow action and qualified laws. |
@@ -402,6 +407,59 @@ only D-DTTLF-USABILITY-035 under the user's standing unattended delegation,
 with human supersession. Implementation may continue within the corrected
 gate.
 
+## Frozen Browser Runtime Correction
+
+### H-DTTLF-USABILITY-PUBLIC-BROWSER-RUNTIME-CORRECTION-01 /
+### D-DTTLF-USABILITY-036
+
+The required local browser smoke loaded the landing page but disabled the
+reviewer with:
+
+```text
+Cannot access 'CORE_CATEGORICAL_PROGRAM_REVISION' before initialization
+```
+
+The measured import path begins at `browser_reviewer.ts`, enters
+`categorical_program.ts`, and then follows a statically bundled literal
+`require` for the optional displayed-next-Hom profile through its historical
+audit/review/proposal closure back to `categorical_program.ts`. Node's intended
+lazy CommonJS execution avoids that path for ordinary profiles; Vite can see
+the literal target and includes the closure eagerly. This defect postdates the
+previous green browser checkpoint and is independent of recursive-Hom
+resolution.
+
+Approve this exact semantic-neutral repair:
+
+1. In `categorical_program.ts`, introduce one private generic synchronous
+   optional-profile loader whose `require` receives a runtime `string`
+   argument rather than a module literal.
+2. Route exactly the four existing optional profile module functions through
+   it:
+   - displayed-next-Hom target transfer;
+   - displayed-next-Hom foundation transfer;
+   - mixed-mode transfer; and
+   - mixed-action transfer.
+3. Preserve every profile guard, module specifier, return type, compilation
+   call, Core name, error, and Node execution path. Do not make an optional
+   profile silently available in the browser, introduce asynchronous program
+   construction, split semantic implementations, or weaken any audit.
+4. Validate with:
+   - root typecheck and lint;
+   - the exact focused eleven-preset text/direct reviewer test;
+   - a focused Node displayed-next-Hom profile test proving the optional
+     loader still reaches its qualified module;
+   - one standalone production build; and
+   - a fresh real-browser execution of the corrected preset, including the
+     public boundary and paper/book links.
+5. Treat any remaining browser cycle as a stop and redesign signal. Do not
+   add module-order preloads, duplicate constants, audit mirrors, or a
+   browser-only checker workaround.
+
+This gate changes module acquisition only. It adds no Core owner, transfer
+declaration, runtime/proof rule, parser/checker/evaluator branch, profile
+capability, mathematical claim, or new remote effect. All D-034/D-035 Git and
+publication boundaries remain in force.
+
 ## Mixed-Introduction Audit Contract
 
 After the public slice is deployed, `MIXED-INTRODUCTION-0A` must start with
@@ -485,8 +543,9 @@ docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md, and emdash2/AGENTS.md whenever
 the active Lambdapi workspace is involved.
 
 First complete the bounded recursive-Hom public synchronization exactly as
-corrected by D-DTTLF-USABILITY-035: use the existing browser reviewer and the
-default-profile functor-category recursive-Hom witness, add no
+corrected by D-DTTLF-USABILITY-035 and D-DTTLF-USABILITY-036: use the existing
+browser reviewer and the default-profile functor-category recursive-Hom
+witness; keep optional Node profile modules lazy across browser bundling; add no
 semantic/checker/parser architecture, keep the qualified finite-Hom claim
 distinct from general mixed introduction and arbitrary variance, validate
 proportionally, checkpoint, fast-forward/push main only after fresh ancestry
@@ -556,3 +615,15 @@ removal, or unrelated cleanup is authorized.
   scope, with human supersession. It does not authorize a profile weakening,
   semantic change, broader public claim, force/history rewrite, or unrelated
   remote effect.
+- **2026-08-01 — real-browser validation exposed an optional-profile import
+  cycle.** The page and static public copy render, but the reviewer lazy chunk
+  fails before enabling its controls because Vite eagerly follows a literal
+  optional-profile `require` through historical audit/proposal modules back to
+  `CORE_CATEGORICAL_PROGRAM_REVISION`. Node focused tests pass when the public
+  barrel pre-establishes module order, so that preload is evidence, not an
+  acceptable browser solution.
+- **2026-08-01 — D-DTTLF-USABILITY-036 frozen for separate review.** The exact
+  gate preserves synchronous Node profile loading while making four optional
+  module targets opaque to static browser bundling. It requires both a real
+  browser execution and a qualified Node-profile regression and forbids
+  preloads, mirrors, duplicated semantics, or profile weakening.
