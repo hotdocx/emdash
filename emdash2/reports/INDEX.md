@@ -254,6 +254,19 @@ remain deferred.
 
 ## Current Plans
 
+- `../../docs/RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md`:
+  active isolated TypeScript outer-LF usability plan for an
+  unparameterized, nonrecursive, single-constructor dependent structure with
+  named primitive projections and field-ordered subject-reducing beta rules.
+  It reuses the completed adjunction macro architecture while keeping the
+  macro private to the host layer and emitting only ordinary declarations and
+  runtime rules. Record eta, decoded classifiers, eliminators, parameters,
+  native-inductive attachment, recursion/positivity, parser work, browser
+  promotion, and Lambdapi source changes remain separate gated rows. An
+  ordinary general-inductive declaration macro is explicitly postponed: the
+  intended future declaration problem is higher inductive categories/types,
+  such as the walking endomorphism, and requires a separate dimensional and
+  coherence-aware design.
 - `../../docs/ADJUNCTION_USABILITY_V3_2_PLAN.md`:
   completed isolated cross-layer adjunction-usability plan. Its implemented
   first tranche is a focused/live-conformance-green direct-TypeScript

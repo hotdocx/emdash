@@ -2,7 +2,7 @@
 
 Date: 2026-07-31 (America/Toronto)
 
-Status: implemented and validated; uncommitted handoff-ready result
+Status: implemented, validated, and locally checkpointed
 
 Plan-ID: `ADJUNCTION-USABILITY-V3.2`
 
@@ -18,10 +18,12 @@ rectangular adjunction declaration, then investigate the smallest coherent
 full-functor counit/transpose bridge toward Došen-style triangular
 presentations. A faithful object-only `G^o` classifier remains consumer-gated.
 
-Checkpoint authorization: branch/worktree creation and implementation are
-authorized. Local checkpoint commits are not yet authorized. Push, merge,
-publication, history rewriting, branch/worktree removal, and cleanup are not
-authorized.
+Checkpoint record: after the final reviewed diff, the user explicitly
+authorized the local checkpoint. Commit
+`dd8a82e77ef68960a1ba44e98c6235a9c5a3f3ff`
+(`feat: add outer LF adjunction declarations`) contains the exact seven-file
+result. No push, merge, publication, history rewriting, branch/worktree
+removal, or cleanup was authorized or performed.
 
 Recovery evidence: the review that selected this plan is archived as
 `infinity-codex:019fbb03-cc64-7cf2-be18-24c35b0dfab0:019fbb0c-13af-7e83-81af-e6c58ad75cd5`
@@ -544,7 +546,8 @@ this table and the decision ledger; they are not silently bypassed.
 | D-ADJ-016 | deferred promotion | Direct transparent-formula RHS comparisons do not fire, while rigid forward and inverse fibre heads do. Do not add point/higher projection registrations or runtime mate rules until a consumer requires canonical projection computation and justifies the full two-direction owner-position audit. |
 | D-ADJ-017 | accepted trust semantics | `assumeAdjunctionFromCounitTranspose` validates the shapes of a full counit and coherent `ProfMap`, then assumes the ordinary adjunction witness. It is not a checker for Došen's triangular laws and must not be described as constructing an adjunction from proofs. |
 | D-ADJ-018 | accepted final aggregate exception | The post-ADJ-TS-2C `check:ts` passed workspace validation, typecheck, and lint, then completed 1,283 tests in about 32.6 minutes: 1,230 passed, 52 intentionally skipped, and only the untouched categorical-text graduation audit failed with the same `79 !== 68` baseline defect. No adjunction test failed, and the failure path/values are identical to D-ADJ-012's clean-baseline reproduction. |
-| D-ADJ-019 | completed handoff | The dedicated worktree remains at baseline HEAD with only the reviewed unstaged/untracked task diff and an empty index. No commit, push, merge, kernel source, generated PDF render, or other worktree was changed. |
+| D-ADJ-019 | superseded by checkpoint | The original handoff accurately recorded the reviewed unstaged/untracked diff before the user authorized a local commit. D-ADJ-020 records the subsequent state. |
+| D-ADJ-020 | completed checkpoint | The exact reviewed seven-file result is committed locally as `dd8a82e77ef68960a1ba44e98c6235a9c5a3f3ff` (`feat: add outer LF adjunction declarations`). The adjunction worktree is clean. No push, merge, kernel source change, publication, cleanup, or other worktree mutation occurred. |
 
 ## 10. Focused Acceptance Corpus
 

@@ -1,5 +1,22 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
+> **Active isolated record/structure-usability goal (2026-08-01):**
+> [`RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md`](./RECORD_STRUCTURE_USABILITY_V3_2_PLAN.md)
+> owns a direct-TypeScript outer-LF macro for an unparameterized,
+> nonrecursive, single-constructor dependent structure with named primitive
+> projections and field-ordered subject-reducing beta rules. It reuses the
+> adjunction macro's host-declaration/resolved-global/atomic-expansion pattern
+> but adds no string parser, trusted-Core node, record eta, eliminator,
+> recursion, positivity claim, general inductive facade, browser profile, or
+> Lambdapi kernel change. Parameterized records, attachment to an existing
+> native-inductive carrier are separate consumer/review-gated rows. An
+> ordinary Lambdapi-like inductive macro is explicitly postponed: the intended
+> future consumer is a higher inductive category/type such as the walking
+> endomorphism, requiring dimensional constructors, endpoints, contextual
+> eliminators, computation, truncation, and coherence as a separate design.
+> Work is isolated at the adjunction checkpoint `dd8a82e` in
+> `/home/user1/emdash1-record-structure-usability`.
+>
 > **Completed isolated adjunction-usability result (2026-07-31):**
 > [`ADJUNCTION_USABILITY_V3_2_PLAN.md`](./ADJUNCTION_USABILITY_V3_2_PLAN.md)
 > owns the isolated direct-TypeScript outer-LF `assumeAdjunction` macro and
@@ -11,8 +28,10 @@
 > orthogonal to the current mixed-introduction continuation, adds no string
 > parser, trusted-Core macro node, parallel adjunction classifier, or kernel
 > rule. Its final aggregate has only the independently reproduced baseline
-> 68-vs-79 syntax-inventory failure; the uncommitted dedicated worktree
-> remains isolated from this handoff's mixed-introduction continuation.
+> 68-vs-79 syntax-inventory failure. The exact result is locally checkpointed
+> at `dd8a82e77ef68960a1ba44e98c6235a9c5a3f3ff`; no push or merge was
+> performed, and its dedicated worktree remains isolated from this handoff's
+> mixed-introduction continuation.
 
 > **Current semantic continuation (2026-08-01):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
