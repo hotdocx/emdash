@@ -419,7 +419,7 @@ It deliberately avoids:
 | `MIXED-VARIANCE-GRADUATE-1E` | read-only stress audit complete; split into the two bounded rows below before graduation | final-green D-043 at `2c53291da9a8f74e9102434235f504721f53d34a`; representative direct recursive binder, inner action and full base-action formation | The public binder remains fundamental. The audit found one TypeScript classifier-view correction for identity/positive nesting and one separate orientation-aware source-action closure. It did not find a need for public curry. |
 | `DIRECT-MIXED-CLASSIFIER-VIEW-1E1` | implemented and final-green at `ff868fbc2a7d4f92b66312e458cb5fca67f63470` under D-DTTLF-USABILITY-044 | completed `MIXED-VARIANCE-GRADUATE-1E` stress audit; proposal checkpoint `2ebc76d1fda17d9237193d5d7e76b2a0e2bc85d3`; separate review under standing unattended delegation | The canonical indexed-functor now retains its exact indexed-object family; direct `c(a)` lowers through existing `id_funcd`; and recursively nested positive canonical targets elaborate through the same factorer. No kernel rule, runtime declaration, curry dependency, or broad convertibility case was added. |
 | `MIXED-SOURCE-ACTION-0E2` | complete; selected one-rule owner-position candidate quiet-green, zero warning delta, strict-audit clean, and finite-chain positive | final-green D-044; preliminary three-rule and selected one-rule full-file probes; active `Functor_catd_func` and ordinary composition owners | Distinguish shared scope base `K` from family-domain orientation `K` versus `Op K`. Reject the capped three-rule precomposition route; select one existing-owner rule returning whole `comp_cat_fapp0`, with object/arrow and two-map checks. |
-| `DIRECT-MIXED-SOURCE-ACTION-1E2` | frozen below under D-DTTLF-USABILITY-045; separate review required before implementation | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; selected owner-position probe | Add exactly one active existing-owner rule and one zero-declaration generic runtime rule. Model scope base separately from source/target family domains in construction metadata, and extend the direct factorer with finite `L(source-argument)` recursion over exact `Op K` source maps. Add no curry dependency or external coherence evidence. |
+| `DIRECT-MIXED-SOURCE-ACTION-1E2` | separately reviewed-approved from proposal `9c37e5e21c8f2246c11ab92236923ab044e02ca5`; implementation dependency-ready under D-DTTLF-USABILITY-045 | completed `MIXED-SOURCE-ACTION-0E2`; final-green D-044; selected owner-position probe; separate review under standing unattended delegation | Add exactly one active existing-owner rule and one zero-declaration generic runtime rule. Model scope base separately from source/target family domains in construction metadata, and extend the direct factorer with finite `L(source-argument)` recursion over exact `Op K` source maps. Add no curry dependency or external coherence evidence. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -2542,6 +2542,32 @@ gate. No `hom_precomp_along_fapp0` rule is promoted.
     product facade, parser work, or bulk transfer work. Those require later
     separately frozen gates.
 
+### Separate D-DTTLF-USABILITY-045 review result
+
+The proposal checkpoint
+`9c37e5e21c8f2246c11ab92236923ab044e02ca5` is approved exactly as frozen.
+Independent inspection confirms that the active kernel already owns
+`Functor_catd_func`, its partial application, displayed action, ordinary
+`comp_cat_fapp0`, and the defining computation `Obj(Op K) -> Obj K`. The
+selected owner-position rule is therefore a missing projection of existing
+internal action, not a new source-variance axiom or a pointwise naturality
+witness. Returning a whole functor is also the scalable choice: generic
+ordinary action computes its objects and arrows, while a second source map
+composes without another constructor-specific rung.
+
+The TypeScript orientation fields are construction metadata for an already
+typed shared index. They distinguish scope from displayed-family domain and
+remain fail-closed outside exact `K`/`Op K`; the generic Core LF checker stays
+authoritative for the emitted expression. The proposed recursive source
+grammar extends the already-fundamental direct binder and neither imports nor
+invokes D-040/D-042.
+
+No immediate human correction superseded the frozen checkpoint. Under the
+user's standing unattended-review delegation, this approves implementation of
+only the twelve numbered D-045 items, with immediate human supersession.
+Text/browser parity, graduation, broader variance/introduction, and any later
+curry reassessment remain independent.
+
 This gate advances the user's fundamental public reading directly:
 
 ```text
@@ -2660,9 +2686,10 @@ whole `comp_cat_fapp0`, is quiet-green with zero warning delta, computes
 object and arrow action, and iterates through two source maps. The preliminary
 three-rule `hom_precomp_along_fapp0` route is rejected. Treat
 H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-ACTION-01 /
-D-DTTLF-USABILITY-045 as frozen for a separate review; do not edit active
-semantics until that review approves the exact twelve-item boundary. Never
-add external naturality or coherence evidence.
+D-DTTLF-USABILITY-045 as separately reviewed-approved from proposal
+`9c37e5e21c8f2246c11ab92236923ab044e02ca5` under the standing unattended
+delegation. Implement only its exact twelve-item direct source-recursion
+boundary. Never add external naturality or coherence evidence.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -2681,6 +2708,16 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-045 approved exactly as proposed.** A
+  separate review of proposal checkpoint
+  `9c37e5e21c8f2246c11ab92236923ab044e02ca5` confirms that the active kernel
+  already owns every semantic ingredient, including `Obj(Op K) -> Obj K`, and
+  that the selected one-rule projection returns an iterable whole functor with
+  generic object/arrow action. Scope/family-domain orientation remains
+  construction metadata and exact `K`/`Op K`, not a Core equality or external
+  coherence witness. No immediate human correction superseded the proposal;
+  the standing unattended delegation authorizes only its twelve items, with
+  immediate human supersession.
 - **2026-08-01 — D-DTTLF-USABILITY-045 frozen for separate review.** The
   completed `MIXED-SOURCE-ACTION-0E2` audit replaces its preliminary
   three-rule point/precomposition sketch with one existing-owner projection

@@ -56,13 +56,13 @@
 > source chain remains iterable. The candidate is quiet-green, strict-audit
 > clean, and has zero warning delta. The preliminary three-rule capped
 > precomposition alternative is rejected. The exact direct-binder
-> continuation is frozen as
+> continuation is separately reviewed-approved from proposal
+> `9c37e5e21c8f2246c11ab92236923ab044e02ca5` as
 > H-DTTLF-USABILITY-DIRECT-MIXED-SOURCE-ACTION-01 /
-> D-DTTLF-USABILITY-045 and requires a separate review before active semantic
-> edits. It models shared scope base `K` separately from family domains `K`
-> and `Op K`, extends the recursive direct grammar with finite
-> `L(source-argument)`, and neither exposes nor depends on curry. The completed
-> mixed-mode telescope plan
+> D-DTTLF-USABILITY-045. It models shared scope base `K` separately from
+> family domains `K` and `Op K`, extends the recursive direct grammar with
+> finite `L(source-argument)`, and neither exposes nor depends on curry. The
+> completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
 > runtime-normalized canonical classifier reification beginning with
