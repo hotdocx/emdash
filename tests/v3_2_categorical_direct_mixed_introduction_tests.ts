@@ -12,6 +12,7 @@ import {
     CoreCategoricalProgram,
     CoreCategoricalProgramError,
     coreCategoricalDirectMixedProductDistributionCoreName,
+    coreCategoricalDirectMixedWeakeningCoreName,
     coreCategoricalFibredStructureCoreName,
     coreCategoricalMixedActionCoreName,
     serializeCoreExpression
@@ -785,7 +786,95 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
         assertDeepFrozen(emdash.inspect(deep));
     });
 
-    it('fails closed for wrong variance, noncanonical and unsupported bodies',
+    it('directly weakens an unused inner binder and recurses above it', () => {
+        const { emdash, C, A, B, D, F, G } = fixture('weakening');
+        const H = emdash.displayedFunctor(
+            'direct_mixed_weakening_outer_H',
+            C,
+            B
+        );
+        const product = emdash.displayedProduct(B, B);
+        const direct = emdash.mixedDisplayedFunctorLambda(
+            { name: 'c', family: C },
+            { name: 'a', family: A },
+            B,
+            (c, _a) => emdash.apply(H, c)
+        );
+        const mapped = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cMapped', family: C },
+            { name: 'aMapped', family: A },
+            D,
+            (c, _a) => emdash.apply(G, emdash.apply(H, c))
+        );
+        const paired = emdash.mixedDisplayedFunctorLambda(
+            { name: 'cPair', family: C },
+            { name: 'aPair', family: A },
+            product,
+            (c, a) => emdash.fibrePair(
+                emdash.apply(H, c),
+                emdash.apply(emdash.apply(F, c), a)
+            )
+        );
+        const directCompiled = emdash.compile(direct);
+        const mappedCompiled = emdash.compile(mapped);
+        const pairedCompiled = emdash.compile(paired);
+        const directEvidence = emdash.inspect(direct).abstractions.find(
+            candidate => candidate.rule ===
+                'categorical.direct-mixed-displayed-functor'
+        );
+        const pairEvidence = emdash.inspect(paired).abstractions.find(
+            candidate => candidate.rule ===
+                'categorical.direct-mixed-displayed-functor'
+        );
+        const weakeningName = coreCategoricalDirectMixedWeakeningCoreName(
+            'weakening'
+        );
+
+        assert.equal(directEvidence?.rootKind, 'outer-value-weakening');
+        assert.equal(directEvidence?.leafCount, 1);
+        assert.equal(directEvidence?.outerUsageCount, 1);
+        assert.equal(directEvidence?.innerUsageCount, 0);
+        assert.deepEqual(directEvidence?.dependentPrerequisites, [
+            'stable-functor-family',
+            'mixed-functor-weakening',
+            'generic-category-composition',
+            'displayed-hom-classifier-reduction'
+        ]);
+        assert.match(
+            directCompiled.explicitCore,
+            new RegExp(weakeningName, 'u')
+        );
+        assert.match(
+            mappedCompiled.explicitCore,
+            new RegExp(weakeningName, 'u')
+        );
+        assert.equal(pairEvidence?.rootKind, 'recursive-pair');
+        assert.equal(pairEvidence?.leafCount, 2);
+        assert.equal(pairEvidence?.outerUsageCount, 2);
+        assert.equal(pairEvidence?.innerUsageCount, 1);
+        assert.match(
+            pairedCompiled.explicitCore,
+            new RegExp(weakeningName, 'u')
+        );
+        assert.match(
+            pairedCompiled.explicitCore,
+            new RegExp(
+                coreCategoricalDirectMixedProductDistributionCoreName(
+                    'distributor'
+                ),
+                'u'
+            )
+        );
+        assert.doesNotMatch(
+            `${directCompiled.explicitCore}\n` +
+                `${mappedCompiled.explicitCore}\n` +
+                pairedCompiled.explicitCore,
+            /mixed_curry|mix_uncurried_family|coerc|cast/u
+        );
+        assertDeepFrozen(emdash.inspect(paired));
+    });
+
+    it('fails closed for wrong variance and unsupported bodies',
     () => {
         const { emdash, K, opK, C, A, B, D, F } =
             fixture('negative');
@@ -862,23 +951,6 @@ describe('DIRECT-MIXED-INTRODUCTION-1D direct binder', () => {
                     error instanceof CoreCategoricalProgramError &&
                     error.code === 'DISPLAYED_BASE_MISMATCH'
                 )
-        );
-
-        const noncanonical = emdash.displayedFunctor(
-            'direct_mixed_negative_noncanonical',
-            C,
-            B
-        );
-        assert.throws(
-            () => emdash.mixedDisplayedFunctorLambda(
-                { name: 'c', family: C },
-                { name: 'a', family: A },
-                B,
-                (c, _a) => emdash.apply(noncanonical, c)
-            ),
-            (error: unknown) =>
-                error instanceof CoreCategoricalFrontendError &&
-                error.code === 'UNAVAILABLE_DISPLAYED_ACTION'
         );
 
         assert.throws(

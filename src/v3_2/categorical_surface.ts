@@ -593,12 +593,15 @@ export type CoreCategoricalAbstractionEvidence =
             readonly rootKind:
                 | 'closed-coherent-subject'
                 | 'bound-outer-identity'
+                | 'outer-value-weakening'
                 | 'recursive-pair';
             readonly rootSourceFamilies:
                 readonly KernelExpression[];
             readonly initialTargetFamilies:
                 readonly KernelExpression[];
             readonly leafCount: number;
+            readonly outerUsageCount: number;
+            readonly innerUsageCount: number;
             readonly sourceChainLength: number;
             readonly targetChainLength: number;
             readonly pairNodeCount: number;
@@ -655,6 +658,7 @@ export type CoreCategoricalDependentApplicationPrerequisiteId =
     | 'mixed-functor-target-action'
     | 'mixed-functor-source-action'
     | 'mixed-functor-product-distributor'
+    | 'mixed-functor-weakening'
     | CoreCategoricalDependentPrerequisiteId
     | CoreCategoricalDependentCompositionPrerequisiteId;
 
@@ -722,6 +726,7 @@ export interface CoreCategoricalScopedBuilderOptions {
         readonly mixedFunctorFamilyCoreName: string;
         readonly mixedFunctorFamilyPartialCoreName: string;
         readonly mixedProductDistributorCoreName: string;
+        readonly mixedConstantWeakeningCoreName: string;
     };
 }
 
@@ -931,7 +936,8 @@ interface CoreCategoricalDirectMixedLeafFactorization {
     readonly rootRecovered: ElaboratedSurfaceTerm['recovered'];
     readonly rootKind:
         | 'closed-coherent-subject'
-        | 'bound-outer-identity';
+        | 'bound-outer-identity'
+        | 'outer-value-weakening';
     readonly rootBaseUsageCount: 0 | 1;
     readonly rootSourceFamily: KernelExpression;
     readonly sourceChain: readonly InternalCoreCategoricalTerm[];
@@ -967,6 +973,8 @@ interface CoreCategoricalCompiledDirectMixedFactorization {
     readonly compilation: CoreCategoricalDisplayedContextualCompilation;
     readonly recovered: ElaboratedSurfaceTerm['recovered'];
     readonly leafCount: number;
+    readonly outerUsageCount: number;
+    readonly innerUsageCount: number;
     readonly baseUsageCount: number;
     readonly sourceChainLength: number;
     readonly targetChainLength: number;
@@ -6349,6 +6357,105 @@ export class CoreCategoricalScopedBuilder {
             term.node.provenance
         );
 
+        // Direct outer-value weakening leaf: H[c], with H : C -> B.
+        // The inner `a : A` is structurally unused; compilation composes the
+        // coherent H with Functor_catd_const_funcd(A,B). This is a direct
+        // nested-binder rule, not a total-context section or curry route.
+        const outerArgumentObject = indexedObjectView(argument.type);
+        if (
+            argument.node.tag === 'slot-token' &&
+            argument.node.ordinal === outerOrdinal &&
+            outerArgumentObject !== undefined &&
+            outerArgumentObject.indexOrdinal === baseOrdinal &&
+            kernelExpressionEquals(
+                outerArgumentObject.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                outerArgumentObject.familyBaseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                outerArgumentObject.family,
+                outerSourceFamily
+            ) &&
+            appliedFunctor.type.tag === 'indexed-functor' &&
+            appliedFunctor.type.indexOrdinal === baseOrdinal &&
+            kernelExpressionEquals(
+                appliedFunctor.type.baseCategory,
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                indexedFunctorSourceBase(appliedFunctor.type),
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                indexedFunctorTargetBase(appliedFunctor.type),
+                baseCategory
+            ) &&
+            kernelExpressionEquals(
+                appliedFunctor.type.sourceFamily,
+                outerSourceFamily
+            ) &&
+            appliedFunctor.node.tag === 'typed-application' &&
+            appliedFunctor.node.judgment.target ===
+                'displayed-functor-fibre' &&
+            appliedFunctor.node.argument[
+                CORE_CATEGORICAL_BOUNDARY
+            ] !== true
+        ) {
+            const base = appliedFunctor.node.argument as
+                InternalCoreCategoricalTerm;
+            const subject = appliedFunctor.node.subject;
+            if (
+                base.node.tag === 'slot-token' &&
+                base.node.ordinal === baseOrdinal &&
+                subject.type.tag === 'displayed-functor' &&
+                subject.closed !== undefined &&
+                subject.usage.length === 0 &&
+                kernelExpressionEquals(
+                    subject.type.baseCategory,
+                    baseCategory
+                ) &&
+                kernelExpressionEquals(
+                    subject.type.sourceFamily,
+                    outerSourceFamily
+                ) &&
+                kernelExpressionEquals(
+                    subject.type.targetFamily,
+                    appliedFunctor.type.targetFamily
+                ) &&
+                termObject !== undefined &&
+                termObject.indexOrdinal === baseOrdinal &&
+                kernelExpressionEquals(
+                    termObject.baseCategory,
+                    baseCategory
+                ) &&
+                kernelExpressionEquals(
+                    termObject.familyBaseCategory,
+                    baseCategory
+                ) &&
+                kernelExpressionEquals(
+                    termObject.family,
+                    subject.type.targetFamily
+                )
+            ) {
+                return Object.freeze({
+                    tag: 'leaf' as const,
+                    rootExpression: subject.closed.term,
+                    rootRecovered: Object.freeze([
+                        ...subject.closed.recovered
+                    ]),
+                    rootKind: 'outer-value-weakening' as const,
+                    rootBaseUsageCount: 1 as const,
+                    rootSourceFamily: innerSourceFamily,
+                    sourceChain: Object.freeze([]),
+                    initialTargetFamily: subject.type.targetFamily,
+                    targetFamily: subject.type.targetFamily
+                });
+            }
+        }
+
         // Exact bound-outer identity leaf: c(a), with
         // C = Functor_catd(A,B).
         const outerShape = this.mixedFunctorFamilyShape(
@@ -6687,7 +6794,69 @@ export class CoreCategoricalScopedBuilder {
                 nodeProvenance
             );
             let compilation:
-                CoreCategoricalDisplayedContextualCompilation = {
+                CoreCategoricalDisplayedContextualCompilation;
+            if (factorization.rootKind === 'outer-value-weakening') {
+                const capability = this.options.directMixedIntroduction;
+                if (
+                    capability === undefined ||
+                    factorization.sourceChain.length !== 0
+                ) {
+                    this.fail(
+                        'UNAVAILABLE_DISPLAYED_ACTION',
+                        nodeProvenance,
+                        'Direct mixed outer-value weakening requires the ' +
+                            'reviewed weakening owner and no inner source ' +
+                            'chain'
+                    );
+                }
+                const root: CoreCategoricalDisplayedContextualCompilation = {
+                    term: factorization.rootExpression,
+                    sourceFamily: outerSourceFamily,
+                    targetFamily: currentTarget,
+                    identity: false,
+                    structuralPrerequisites: Object.freeze([]),
+                    dependentPrerequisites: Object.freeze([])
+                };
+                const weakening:
+                    CoreCategoricalDisplayedContextualCompilation = {
+                        term: kernelCall(
+                            kernelFree(
+                                capability.mixedConstantWeakeningCoreName,
+                                nodeProvenance
+                            ),
+                            [
+                                {
+                                    plicity: 'implicit',
+                                    value: baseCategory
+                                },
+                                {
+                                    plicity: 'implicit',
+                                    value: currentSource
+                                },
+                                {
+                                    plicity: 'implicit',
+                                    value: currentTarget
+                                }
+                            ],
+                            nodeProvenance
+                        ),
+                        sourceFamily: currentTarget,
+                        targetFamily: resultFamily,
+                        identity: false,
+                        structuralPrerequisites: Object.freeze([]),
+                        dependentPrerequisites: Object.freeze([
+                            'stable-functor-family',
+                            'mixed-functor-weakening'
+                        ])
+                    };
+                compilation = this.composeDisplayedCompilations(
+                    baseCategory,
+                    weakening,
+                    root,
+                    nodeProvenance
+                );
+            } else {
+                compilation = {
                     term: factorization.rootExpression,
                     sourceFamily: outerSourceFamily,
                     targetFamily: resultFamily,
@@ -6705,6 +6874,7 @@ export class CoreCategoricalScopedBuilder {
                             : [])
                     ])
                 };
+            }
             if (
                 factorization.rootKind === 'bound-outer-identity' &&
                 !kernelExpressionEquals(
@@ -6798,6 +6968,11 @@ export class CoreCategoricalScopedBuilder {
                     )
                 ]),
                 leafCount: 1,
+                outerUsageCount: 1,
+                innerUsageCount: factorization.rootKind ===
+                    'outer-value-weakening'
+                    ? 0
+                    : 1,
                 baseUsageCount:
                     factorization.rootBaseUsageCount +
                     factorization.sourceChain.length,
@@ -6971,6 +7146,10 @@ export class CoreCategoricalScopedBuilder {
                 ...right.recovered
             ]),
             leafCount: left.leafCount + right.leafCount,
+            outerUsageCount:
+                left.outerUsageCount + right.outerUsageCount,
+            innerUsageCount:
+                left.innerUsageCount + right.innerUsageCount,
             baseUsageCount:
                 left.baseUsageCount + right.baseUsageCount,
             sourceChainLength:
@@ -10122,9 +10301,10 @@ export class CoreCategoricalScopedBuilder {
      * The callback is accepted only when `body` is generated by the exact
      * recursive grammar
      * `source ::= a | L(source)`,
-     * `body ::= c(source) | F[c](source) | G(body) | (body, body)`.
+     * `body ::= c(source) | F[c](source) | H[c] | G(body) | (body, body)`.
      * Bound-outer identity
      * returns `id_funcd(Functor_catd(A,B))`; eta returns `F` directly;
+     * `H[c]` composes direct displayed weakening after `H`;
      * source and target chains use the two internal actions of
      * `Functor_catd(-,-)` plus generic composition. Pairs use the existing
      * internal displayed pairing and product distributor. Contextual curry is
@@ -10301,7 +10481,8 @@ export class CoreCategoricalScopedBuilder {
                     nodeProvenance,
                     'The direct mixed binder accepts only recursive pairs, ' +
                         'finite closed source chains inside c(source) or ' +
-                        'F[c](source), and finite closed target maps'
+                        'F[c](source), direct outer-only H[c] leaves, and ' +
+                        'finite closed target maps'
                 );
             }
             const compiledFactorization =
@@ -10314,9 +10495,9 @@ export class CoreCategoricalScopedBuilder {
                 );
             if (
                 usageCount(body.usage, outerOrdinal) !==
-                    compiledFactorization.leafCount ||
+                    compiledFactorization.outerUsageCount ||
                 usageCount(body.usage, innerOrdinal) !==
-                    compiledFactorization.leafCount ||
+                    compiledFactorization.innerUsageCount ||
                 usageCount(body.usage, baseOrdinal) !==
                     compiledFactorization.baseUsageCount
             ) {
@@ -10424,6 +10605,10 @@ export class CoreCategoricalScopedBuilder {
                     ? compiledFactorization.rootKinds[0]
                     : 'recursive-pair' as const,
                 leafCount: compiledFactorization.leafCount,
+                outerUsageCount:
+                    compiledFactorization.outerUsageCount,
+                innerUsageCount:
+                    compiledFactorization.innerUsageCount,
                 sourceChainLength:
                     compiledFactorization.sourceChainLength,
                 targetChainLength:

@@ -142,7 +142,7 @@
 > section plus `Terminal_funcd` composition derives the outer-only and fully
 > constant semantic cases. An exact negative-Sigma-curry alias typechecks but
 > does not produce the selected whole-fibre/arrow normal forms; it remains
-> auxiliary. The next proposed row is `DIRECT-MIXED-WEAKENING-1J`, frozen as
+> auxiliary. `DIRECT-MIXED-WEAKENING-1J` was frozen as
 > H-DTTLF-USABILITY-DIRECT-MIXED-WEAKENING-01 /
 > D-DTTLF-USABILITY-050. Its initial proposal correctly selected the direct
 > owner but overstated the current transfer closure; separate review measured
@@ -151,9 +151,29 @@
 > corrected proposal at `e8f6a88645fb09646c62841ad1d9e11236b73948`
 > acquires that one pre-existing signature plus the new owner/three rules and
 > is separately reviewed-approved under the standing unattended delegation.
-> Implementation is dependency-ready, but no active kernel, TypeScript,
-> transfer, or test edit has yet occurred. Direct nested introduction remains
-> fundamental and does not require curry or a hybrid total-context route.
+> Its active-kernel implementation is final-green at
+> `c1890373ab93aa155336187e72b6c421c74b7e81`: one
+> `Functor_catd_const_funcd` owner and three point/full/capped rules pass the
+> required durable object/inner/base/higher checks, unchanged 1,079/159
+> warnings, strict audit, synchronized reports, and one CI. The TypeScript
+> implementation is final-green. Its single required `check:ts` passes
+> 1,242/1,293 tests with 51 intentional skips, zero failures, and measured
+> duration 1,848,097.87 ms; do not repeat it for document synchronization.
+> It generically transfers pre-existing `hom_postcomp_func`, the new direct
+> owner, and exactly three rules; all rule subjects are TypeScript-checked.
+> The recursive binder now lowers `H[c]`, `G(H[c])`, and pairs mixing `H[c]`
+> with eta by composing direct weakening after `H`, while evidence records
+> one outer use and zero inner uses. The runnable demo verifies
+> `lambda^n k. lambda^f c. lambda^f a. H[k](c)` and emits no curry, total
+> section, cast, coercion, or external equation. Direct nested introduction
+> remains fundamental and does not require curry or a hybrid total-context
+> route. The point rule reaches stable `Const_func_func`; that owner's own
+> downstream projection rules remain absent from this TypeScript profile even
+> though the active Lambdapi kernel computes them. Their possible acquisition
+> is a transfer-coverage input to the next read-only
+> `DIRECT-MIXED-STRUCTURAL-SUCCESSOR-0K` audit, alongside `S[k](a)`, fully
+> constant bodies, and the qualified constant-middle varying case. No such
+> semantic successor is yet authorized.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

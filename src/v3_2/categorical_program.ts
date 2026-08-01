@@ -106,8 +106,8 @@ import type {
     CoreCategoricalMixedActionSymbolId
 } from './categorical_mixed_action_transfer';
 import type {
-    CoreCategoricalDirectMixedProductDistributionCompilation
-} from './categorical_direct_mixed_product_distribution_transfer';
+    CoreCategoricalDirectMixedWeakeningCompilation
+} from './categorical_direct_mixed_weakening_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -253,16 +253,25 @@ const directMixedProductDistributionModule = () =>
         './categorical_direct_mixed_product_distribution_transfer'
     )>('./categorical_direct_mixed_product_distribution_transfer');
 
-const compileCoreCategoricalDirectMixedProductDistribution = ():
-CoreCategoricalDirectMixedProductDistributionCompilation =>
-    directMixedProductDistributionModule()
-        .compileCoreCategoricalDirectMixedProductDistributionTransfer();
-
 const directMixedProductDistributorCoreName = (): string =>
     directMixedProductDistributionModule()
         .coreCategoricalDirectMixedProductDistributionCoreName(
             'distributor'
         );
+
+const directMixedWeakeningModule = () =>
+    optionalProfileModule<typeof import(
+        './categorical_direct_mixed_weakening_transfer'
+    )>('./categorical_direct_mixed_weakening_transfer');
+
+const compileCoreCategoricalDirectMixedWeakening = ():
+CoreCategoricalDirectMixedWeakeningCompilation =>
+    directMixedWeakeningModule()
+        .compileCoreCategoricalDirectMixedWeakeningTransfer();
+
+const directMixedConstantWeakeningCoreName = (): string =>
+    directMixedWeakeningModule()
+        .coreCategoricalDirectMixedWeakeningCoreName('weakening');
 
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
@@ -310,7 +319,7 @@ export const CORE_CATEGORICAL_MIXED_MODE_PROGRAM_REVISION =
     'DISPLAYED-TELESCOPE-GENERIC-1-CATEGORICAL-PROGRAM-1' as const;
 
 export const CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION =
-    'DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G-CATEGORICAL-PROGRAM-1' as const;
+    'DIRECT-MIXED-WEAKENING-1J-CATEGORICAL-PROGRAM-1' as const;
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
@@ -1037,7 +1046,7 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDisplayedChain2aClosureCompilation
         | CoreCategoricalDisplayedNdHigherTargetCompilation
         | CoreCategoricalMixedActionCompilation
-        | CoreCategoricalDirectMixedProductDistributionCompilation;
+        | CoreCategoricalDirectMixedWeakeningCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -1177,7 +1186,7 @@ export class CoreCategoricalProgram {
             validateCoreCategoricalDisplayedBracketContract();
         }
         this.dependent = this.directMixedIntroductionEnabled
-            ? compileCoreCategoricalDirectMixedProductDistribution()
+            ? compileCoreCategoricalDirectMixedWeakening()
             : this.mixedModeEnabled
             ? compileCoreCategoricalMixedAction()
             : this.displayedNdHigherEnabled
@@ -1263,7 +1272,9 @@ export class CoreCategoricalProgram {
                                     'mixedFunctorFamilyPartial'
                                 ),
                             mixedProductDistributorCoreName:
-                                directMixedProductDistributorCoreName()
+                                directMixedProductDistributorCoreName(),
+                            mixedConstantWeakeningCoreName:
+                                directMixedConstantWeakeningCoreName()
                         })
                         : undefined
             }

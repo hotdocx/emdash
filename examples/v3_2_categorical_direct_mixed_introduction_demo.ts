@@ -6,8 +6,10 @@
  *   ./scripts/pnpmw run demo:categorical-direct-mixed-introduction
  */
 
+import assert from 'node:assert/strict';
 import {
-    CoreCategoricalProgram
+    CoreCategoricalProgram,
+    coreCategoricalDirectMixedWeakeningCoreName
 } from '../src/v3_2';
 
 const emdash = new CoreCategoricalProgram({
@@ -30,6 +32,7 @@ const functorFamily = emdash.mixedDisplayedFunctorFamily(A, B);
 const F = emdash.displayedFunctor('Demo_F', C, functorFamily);
 const G = emdash.displayedFunctor('Demo_G', B, D);
 const L = emdash.displayedFunctor('Demo_L', APrime, A);
+const H = emdash.displayedFunctor('Demo_H', C, B);
 
 const directIdentity = emdash.mixedDisplayedFunctorLambda(
     { name: 'h', family: functorFamily },
@@ -64,10 +67,26 @@ const sourceMapped = emdash.mixedDisplayedFunctorLambda(
         )
     )
 );
+const innerWeakened = emdash.mixedDisplayedFunctorLambda(
+    { name: 'cWeak', family: C },
+    { name: 'aUnused', family: A },
+    B,
+    (c, _a) => emdash.apply(H, c)
+);
+const mappedInnerWeakened = emdash.mixedDisplayedFunctorLambda(
+    { name: 'cWeakMapped', family: C },
+    { name: 'aUnusedMapped', family: A },
+    D,
+    (c, _a) => emdash.apply(G, emdash.apply(H, c))
+);
 const directIdentityCompilation = emdash.compile(directIdentity);
 const etaCompilation = emdash.compile(eta);
 const mappedCompilation = emdash.compile(mapped);
 const sourceMappedCompilation = emdash.compile(sourceMapped);
+const innerWeakenedCompilation = emdash.compile(innerWeakened);
+const mappedInnerWeakenedCompilation = emdash.compile(
+    mappedInnerWeakened
+);
 const evidence = emdash.inspect(mapped).abstractions.find(candidate =>
     candidate.rule ===
         'categorical.direct-mixed-displayed-functor'
@@ -75,6 +94,24 @@ const evidence = emdash.inspect(mapped).abstractions.find(candidate =>
 const sourceEvidence = emdash.inspect(sourceMapped).abstractions.find(
     candidate => candidate.rule ===
         'categorical.direct-mixed-displayed-functor'
+);
+const weakeningEvidence = emdash.inspect(innerWeakened).abstractions.find(
+    candidate => candidate.rule ===
+        'categorical.direct-mixed-displayed-functor'
+);
+const weakeningCoreName = coreCategoricalDirectMixedWeakeningCoreName(
+    'weakening'
+);
+
+assert.match(innerWeakenedCompilation.explicitCore, new RegExp(
+    weakeningCoreName,
+    'u'
+));
+assert.equal(weakeningEvidence?.rootKind, 'outer-value-weakening');
+assert.equal(weakeningEvidence?.innerUsageCount, 0);
+assert.doesNotMatch(
+    mappedInnerWeakenedCompilation.explicitCore,
+    /mixed_curry|mix_uncurried_family|coerc|cast/u
 );
 
 console.log(JSON.stringify({
@@ -85,16 +122,27 @@ console.log(JSON.stringify({
         'G[k](F[k](c)(L[k](a\')))',
     fundamentalIdentitySurface:
         'lambda^n k. lambda^f h. lambda^f a. h(a)',
+    innerWeakeningSurface:
+        'lambda^n k. lambda^f c. lambda^f a. H[k](c)',
     resultType: 'Functord C (Functor_catd A D)',
     fundamentalIdentityCore: directIdentityCompilation.explicitCore,
     etaCore: etaCompilation.explicitCore,
     mappedCore: mappedCompilation.explicitCore,
     sourceMappedCore: sourceMappedCompilation.explicitCore,
+    innerWeakenedCore: innerWeakenedCompilation.explicitCore,
+    mappedInnerWeakenedCore:
+        mappedInnerWeakenedCompilation.explicitCore,
+    innerWeakeningRootKind: weakeningEvidence?.rootKind,
+    innerWeakeningOuterUses: weakeningEvidence?.outerUsageCount,
+    innerWeakeningInnerUses: weakeningEvidence?.innerUsageCount,
     sourceChainLength: sourceEvidence?.sourceChainLength,
     sourceThenTargetChainLength: sourceEvidence?.targetChainLength,
     targetChainLength: evidence?.targetChainLength,
     locallyNamelessBindings: evidence?.bindingNames,
     noContextualCurry:
         !mappedCompilation.explicitCore.includes('mixed_curry') &&
-        !sourceMappedCompilation.explicitCore.includes('mixed_curry')
+        !sourceMappedCompilation.explicitCore.includes('mixed_curry') &&
+        !mappedInnerWeakenedCompilation.explicitCore.includes(
+            'mixed_curry'
+        )
 }, null, 2));
