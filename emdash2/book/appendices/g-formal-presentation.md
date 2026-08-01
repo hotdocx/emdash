@@ -529,6 +529,16 @@ The current organization is:
 | Module | Formal role |
 | --- | --- |
 | `emdash3_2.lp` | active categorical kernel and universal-construction owners |
+| `emdash3_2_presheaves.lp` | Cat-valued presheaf facade, restriction, Yoneda, slices, and Cat-valued higher sieves |
+| `emdash3_2_sieves.lp` | native subterminal categories, ordinary-sieve property packages, and pullback preservation; no `Omega` or topology |
+| `emdash3_2_sites.lp` | ordinary-sieve membership, maximal sieve, direct Grothendieck topology laws, and chaotic model; no `Omega`, generated saturation, or sheafification |
+| `emdash3_2_finite_families.lp` | Nat-indexed right-associated finite families, pointwise map, and sethood; no `Fin`, list/Sum/inductive interface, or package eta |
+| `emdash3_2_commutative_algebra.lp` | set-carrier commutative-ring operation/law packages and the one-element zero-ring model; no morphism category, localization, or polynomials |
+| `emdash3_2_commutative_algebra_category.lp` | structured ring morphisms, property/sethood/extensionality proofs, `CommRing_cat`, and stable pointwise identity/composition comparisons; no carrier functor |
+| `emdash3_2_commutative_algebra_finite.lp` | finite sums/dot products, structured-map preservation, and retained unimodular/Zariski-cover presentations; no `Spec`, localization family, topology, powers/radicals, fractions, or polynomials |
+| `emdash3_2_commutative_algebra_polynomial.lp` | free commutative `R`-algebras on a variable classifier by contractible structured extension; no monomial/coefficient/quotient syntax or positive-variable representation |
+| `emdash3_2_commutative_algebra_localization.lp` | proposition-valued unit evidence and universal-property localization at one element; no fraction, finite-family, polynomial, or Zariski representation |
+| `emdash3_2_commutative_algebra_localization_comparison.lp` | unit algebra and universal-property comparison of localization at `f*g` with localization first at `f`, then at the image of `g`; no package equality or inverse laws |
 | `emdash3_2_eq1_hom_action.lp` | derived native equality-valued next-hom and groupoidality layer |
 | `emdash3_2_eq1_evidence_property.lp` | evidence-property and finite-height consequences |
 | `emdash3_2_nat_arithmetic.lp` | reusable Nat operations and sethood |

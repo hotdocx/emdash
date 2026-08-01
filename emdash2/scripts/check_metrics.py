@@ -18,10 +18,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CORE_CHECK_FILES = [
     Path("emdash3_2.lp"),
+    Path("emdash3_2_presheaves.lp"),
     Path("emdash3_2_nat_arithmetic.lp"),
+    Path("emdash3_2_finite_families.lp"),
+    Path("emdash3_2_commutative_algebra.lp"),
+    Path("emdash3_2_commutative_algebra_category.lp"),
+    Path("emdash3_2_commutative_algebra_finite.lp"),
+    Path("emdash3_2_commutative_algebra_polynomial.lp"),
+    Path("emdash3_2_commutative_algebra_localization.lp"),
+    Path("emdash3_2_commutative_algebra_localization_comparison.lp"),
     Path("emdash3_2_walking_end_hit.lp"),
     Path("emdash3_2_eq1_hom_action.lp"),
     Path("emdash3_2_eq1_evidence_property.lp"),
+    Path("emdash3_2_sieves.lp"),
+    Path("emdash3_2_sites.lp"),
     Path("emdash3_2_checks.lp"),
 ]
 EXAMPLES_DIR = ROOT / "examples"

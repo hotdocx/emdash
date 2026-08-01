@@ -8,10 +8,30 @@ categorical structures.
 
 The active kernel is `emdash3_2.lp`. The one-way derived native equality-valued
 hom-action/groupoidality extension is `emdash3_2_eq1_hom_action.lp`;
+the Cat-valued presheaf, Yoneda, slice, and higher-sieve library is
+`emdash3_2_presheaves.lp`;
+the native subterminal-category and ordinary-sieve specialization is
+`emdash3_2_sieves.lp`;
+the direct ordinary-sieve Grothendieck-topology library is
+`emdash3_2_sites.lp`;
 the transparent native equality-valued evidence-property and finite-dimension truncation
 extension is `emdash3_2_eq1_evidence_property.lp`;
 the reusable Nat arithmetic/sethood extension is
 `emdash3_2_nat_arithmetic.lp`;
+the reusable Nat-indexed finite-family extension is
+`emdash3_2_finite_families.lp`;
+the set-carrier commutative-ring object extension is
+`emdash3_2_commutative_algebra.lp`;
+the structured commutative-ring morphism/category extension is
+`emdash3_2_commutative_algebra_category.lp`;
+the finite-sum/unimodular/Zariski-cover-presentation extension is
+`emdash3_2_commutative_algebra_finite.lp`;
+the universal-property polynomial-algebra extension is
+`emdash3_2_commutative_algebra_polynomial.lp`;
+the universal-property-first one-element localization extension is
+`emdash3_2_commutative_algebra_localization.lp`;
+the universal-property iterated/product-localization comparison extension is
+`emdash3_2_commutative_algebra_localization_comparison.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
@@ -21,25 +41,72 @@ executable diagnostics live in `emdash3_2_checks.lp`.
 Use the following order:
 
 1. `emdash3_2.lp` for active kernel definitions and computation;
-2. `emdash3_2_eq1_hom_action.lp` for the transparent derived native
+2. `emdash3_2_presheaves.lp` for the rigid Cat-valued presheaf facade,
+   restriction along opposite functors, transparent Yoneda and slice
+   presentations, and explicitly Cat-valued higher sieves;
+3. `emdash3_2_eq1_hom_action.lp` for the transparent derived native
    equality-valued
    next-hom and groupoidality layer;
-3. `emdash3_2_eq1_evidence_property.lp` for transparent native equality-valued
+4. `emdash3_2_eq1_evidence_property.lp` for transparent native equality-valued
    evidence-property, retract-truncation, and finite-`NCat` object-truncation
    theorems;
-4. `emdash3_2_nat_arithmetic.lp` for reusable Nat addition, associativity,
+5. `emdash3_2_sieves.lp` for native subterminal categories, ordinary sieves
+   as the pointwise-subterminal specialization of higher sieves, and ordinary
+   pullback; it deliberately does not declare `Omega` or topology;
+6. `emdash3_2_nat_arithmetic.lp` for reusable Nat addition, associativity,
    Unit/Empty proposition evidence, and Nat sethood;
-5. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+7. `emdash3_2_finite_families.lp` for Nat-indexed right-associated finite
+   families, constructors/projections, pointwise map, and retained sethood;
+   it deliberately declares no `Fin`, lookup, list/Sum/inductive interface,
+   append, permutation quotient, or package eta;
+8. `emdash3_2_commutative_algebra.lp` for set-carrier commutative-ring
+   operations and laws, readable projections, and the one-element zero-ring
+   model; this object module deliberately declares no morphism/category,
+   localization, finite-family, power, or polynomial interface;
+9. `emdash3_2_commutative_algebra_category.lp` for structured ring morphisms,
+   proposition/sethood proofs, transparent explicit-map observations,
+   consumer-justified pointwise extensionality, the `CommRing_cat` facade, and
+   the narrowly selected stable pointwise identity/composition comparisons;
+   it deliberately declares no carrier functor, localization, finite-family,
+   power, or polynomial package;
+10. `emdash3_2_commutative_algebra_finite.lp` for finite ring sums/dot
+    products, structured-map preservation, retained unimodular coefficient
+    presentations, and algebraic Zariski-cover presentation data; it
+    deliberately declares no `Spec`, localization family, coverage/topology,
+    power/radical, fraction, polynomial, quotient, or mere-existence claim;
+11. `emdash3_2_commutative_algebra_polynomial.lp` for free commutative
+   `R`-algebras on a variable classifier, expressed by contractible
+   structured extensions of base maps and valuations; it deliberately
+   declares no monomial/coefficient/quotient syntax, positive-variable
+   representation, finite-index facade, runtime rule, unifier, or package
+   eta;
+12. `emdash3_2_commutative_algebra_localization.lp` for proposition-valued
+   unit evidence, pointwise factor triangles, contractible-factorization
+   localization packages, and named transparent observations; it deliberately
+   declares no concrete fractions, iterated comparison, finite-family, power,
+   polynomial, or Zariski interface;
+13. `emdash3_2_commutative_algebra_localization_comparison.lp` for unit
+    transport/multiplication lemmas, the selected stable pointwise ring-map
+    composite consumer, two-stage localization packages, and canonical
+    forward/reverse comparison factors with pointwise triangles; it
+    deliberately declares no fraction syntax, equality of chosen localization
+    packages, comparison inverse laws, finite-family, polynomial, or Zariski
+    interface;
+14. `emdash3_2_sites.lp` for ordinary-sieve membership, the canonical maximal
+   sieve, proposition-valued sieve coverages, Grothendieck topology laws, and
+   the direct chaotic-topology model; it declares no `Omega`, generated
+   coverage saturation, sheafification, or descent;
+15. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
    directed negative results;
-6. `emdash3_2_checks.lp` for executable regression statements;
-7. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+16. `emdash3_2_checks.lp` for executable regression statements;
+17. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-8. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-9. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+18. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+19. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-10. `reports/INDEX.md` for task-specific plans and decision records.
-11. `book/book.json` and `book/evidence.json` for book source
+20. `reports/INDEX.md` for task-specific plans and decision records.
+21. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

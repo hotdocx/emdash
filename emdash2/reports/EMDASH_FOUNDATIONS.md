@@ -982,6 +982,499 @@ E^op[k] = E[k]^op
 F^*E[a] = E[F[a]]
 ```
 
+### Cat-Valued Presheaf Facade
+
+The one-way presheaf library packages the contravariant specialization of a
+directed family without adding another family calculus:
+
+```text
+Psh_cat(K) = Catd_cat(K^op)
+Psh(K)     = Obj(Psh_cat(K)).
+```
+
+The displayed equation describes the mathematical presentation, not a runtime
+rewrite between category heads. `Psh_cat(K)` is rigid and remains visible at
+runtime. Its object and hom projections compute to the existing directed-
+family hierarchy on `K^op`, while one narrow proof-time comparison relates it
+directly to `Catd_cat(K^op)`. In particular, a typed reflexivity proof can use
+the comparison, but a bare conversion does not erase the facade.
+
+For an ordinary functor `F : A -> B`, presheaf restriction is the already
+existing family pullback along the opposite functor:
+
+```text
+Psh_pullback_func(F) : Psh_cat(B) -> Psh_cat(A)
+Psh_pullback_func(F)[P]
+  = Pullback_catd(P,Op_func(F)).
+```
+
+The object action computes through `Pullback_catd_func`. The action on
+presheaf maps is the generic functor action of that same functor; the library
+does not restate identity, composition, or naturality. The current facade is
+Cat-valued. Ordinary Set-valued presheaves will be a later discrete-fibre
+specialization, and an arbitrary Cat-valued presheaf is not called a stack
+without separately selected descent data.
+
+The same library names the contravariant Yoneda functor without installing a
+second action theory:
+
+```text
+yoneda_psh_func(K) : K -> Psh_cat(K)
+yoneda_psh(U)[V]   = Hom_K(V,U).
+```
+
+It is transparently `hom_con_int(id_K)`, so an arrow `p : V -> U` acts by the
+existing represented-target postcomposition owner. In particular, its
+component at `W` computes to postcomposition by `p` in `K`.
+
+For later site constructions the direction of the arrow category is kept
+explicit:
+
+```text
+Into_restr_cat(U) = Sigma_(V : K^op) Hom_K(V,U)
+Slice_cat(U)      = Op_cat(Into_restr_cat(U)).
+```
+
+The first category points in the restriction direction; its opposite is the
+conventional slice `K/U`. A Cat-valued higher sieve is then a directed family
+on the restriction category:
+
+```text
+HigherSieveClassifier(K)[U] = Catd_cat(Into_restr_cat(U))
+HigherSieve_cat(U)           = Fibre_cat(HigherSieveClassifier(K),U)
+maximal_higher_sieve(U)      = Terminal_catd(Into_restr_cat(U)).
+```
+
+Equivalently, it is a Cat-valued presheaf on `Slice_cat(U)`. In the formal
+presentation these two descriptions each compare at proof time with the
+stable intermediary `Catd_cat(Into_restr_cat(U))`; they do not directly
+runtime-collapse, and no extra unification rule is added merely to chain the
+comparisons. Restriction of a higher sieve is the existing Catd pullback along
+the Sigma-total map, and the maximal higher sieve is stable under it.
+
+This higher notion is deliberately not an ordinary sieve. The downstream
+one-way sieve module now selects ordinary sieves by native pointwise
+subterminality:
+
+```text
+IsSubterminalCat(C)
+  = Sigma obj_prop : IsPropGrpd(Obj(C)), IsGroupoidalCat(C)
+IsOrdinarySieve(S)
+  = Pi f : Obj(Into_restr_cat(U)),
+      IsSubterminalCat(Fibre_cat(S,f))
+Sieve(U)
+  = Sigma S : HigherSieve(U), IsOrdinarySieve(S).
+```
+
+Proposition-valued objects alone would be too weak: a one-object directed
+category may retain nontrivial endomorphisms. Native `IsGroupoidalCat` says
+that every retained categorical cell comes from object equality. The selected
+pair therefore derives the existing exact `IsDiscreteCat` contract, while a
+literal `Path_cat(A)` for proposition-valued `A` supplies a canonical
+subterminal example.
+
+Both retained evidence layers are themselves propositions. Nevertheless,
+ordinary-sieve pullback keeps the Sigma evidence explicitly. It reuses the
+existing higher-sieve/Catd pullback action and selects the old witness at each
+postcomposed arrow; no new action rule is needed. Consequently pullback along
+an identity has the correct mathematical value but does not judgmentally
+reduce the reconstructed package to the original package.
+
+The public name `Sieve` now belongs to this ordinary property subtype. The
+name `Omega` remains reserved and unbound: a true classifier still needs
+setness of `Sieve(U)` plus an owner-aligned contravariant family assembly.
+Neither topology nor descent follows merely from forming ordinary sieves.
+
+### Direct Grothendieck Topologies On Ordinary Sieves
+
+The downstream sites module defines membership without adding a Boolean
+classifier. An object of `Into_restr_cat(U)` is a pair `(V,f)` with
+`f : V -> U`, and
+
+```text
+SieveMembership(R,(V,f)) = Obj(R(V,f)).
+```
+
+This classifier is proposition-valued because `R(V,f)` is a native
+subterminal category. The maximal ordinary sieve is the constant family at
+the literal path category `Path_cat(Unit_grpd)`. It is pointwise true, and its
+pullback computes to the maximal sieve on the source through ordinary
+constant-family pullback. This presentation intentionally does not identify
+`Path_cat(Unit_grpd)` with `Terminal_cat`; consequently its underlying higher
+sieve does not definitionally equal `maximal_higher_sieve`.
+
+A direct sieve coverage is first-class proposition-valued data:
+
+```text
+SieveCoverage(K)
+  = Pi U : Obj(K), Sieve(U) -> PropU_grpd
+Covers(J,R)
+  = trunc_grpd_carrier(J(U,R)).
+```
+
+The `PropU_grpd` evidence projection proves each `Covers(J,R)` a proposition.
+The selected Grothendieck topology laws are exactly:
+
+```text
+maximal:  Covers(J,maximal_sieve(U))
+stable:   Covers(J,R) -> Covers(J,p^*R)
+local:    Covers(J,R)
+       -> (forall f in R, Covers(J,f^*S))
+       -> Covers(J,S).
+```
+
+Here “`f in R`” is `SieveMembership(R,f)`, and every pullback is the existing
+ordinary-sieve pullback. `GrothTopology(K)` retains the selected coverage and
+these three laws, with named projections for each observation. The chaotic
+topology sends every sieve to the true Unit proposition; all three laws then
+compute to `tt`, giving a direct model on every category and in particular on
+`Terminal_cat`.
+
+This is a direct topology presentation, not a cover-family generator. The
+library still has no `Omega`, free coverage saturation, sheafification,
+descent, or assertion that every concrete family coverage automatically
+generates a topology.
+
+### Set-Carrier Commutative-Ring Objects
+
+The first algebra layer packages a commutative ring over an explicitly
+set-valued carrier.  Its operation data are separate from its law evidence:
+
+```text
+CommRingOps(A) = (0, 1, add, neg, mul)
+
+IsCommRing(A,ops)
+  = AddAssoc x AddComm x AddZero x AddInv
+      x MulAssoc x MulComm x MulOne x LeftDistrib
+
+CommRingStructure(A)
+  = Sigma ops : CommRingOps(A), IsCommRing(A,ops)
+
+CommRing
+  = Sigma A : SetU_grpd,
+      CommRingStructure(trunc_grpd_carrier(A)).
+```
+
+The retained additive unit and inverse laws are right-handed, as are the
+multiplicative unit law and the selected left-distributivity orientation.
+Commutativity derives their omitted mirror equations, so storing both sides
+would duplicate evidence rather than strengthen the algebraic structure.
+Nothing requires `0` and `1` to be distinct; the one-element zero ring is a
+checked inhabitant.
+
+For `R : CommRing`, `comm_ring_carrier R` is its decoded carrier,
+`comm_ring_carrier_is_set R` retains sethood, and the named operations
+`comm_ring_zero`, `comm_ring_one`, `comm_ring_add`, `comm_ring_neg`, and
+`comm_ring_mul` are transparent observations of the operation package.  The
+eight `comm_ring_*_law` projections expose the corresponding equality
+witnesses.  Constructors and observations reduce through the existing Sigma,
+function, and equality owners; this module adds no rewrite or unification
+rule.
+
+The concrete `zero_comm_ring` uses `Unit_grpd`.  Because an open Unit variable
+does not judgmentally eta-reduce to `tt`, its open additive-zero and
+multiplicative-one laws use the existing contraction witness rather than an
+invalid reflexivity proof.  This object layer deliberately declares no
+morphism/category, carrier functor, exponentiation, localization, finite
+family, or polynomial interface.  The first two of those are considered in a
+separate downstream module so the rule-free object package remains reusable.
+
+### Structured Commutative-Ring Morphisms
+
+For commutative rings `R` and `S`, a structured morphism retains an ordinary
+carrier function and five preservation witnesses:
+
+```text
+CommRingHomLaws(R,S,f)
+  = PreservesZero(f)
+      x PreservesOne(f)
+      x PreservesAdd(f)
+      x PreservesNeg(f)
+      x PreservesMul(f)
+
+CommRingHom(R,S)
+  = Sigma f : (|R| -> |S|), CommRingHomLaws(R,S,f).
+```
+
+Negation and zero preservation are stored explicitly. They are derivable in
+ordinary algebra from smaller sets of axioms, but retaining them avoids making
+the first morphism API depend on a not-yet-selected cancellation theorem
+library. `comm_ring_hom_intro` constructs a map;
+`comm_ring_hom_function`, `comm_ring_hom_laws`, and the five named
+`comm_ring_hom_*_law` observations expose its fields.
+`comm_ring_hom_apply(h,x)` is the transparent application of the retained
+function and computes on explicit constructors.
+
+Pointwise equality of those retained functions extends to equality of the
+full structured maps. `comm_ring_hom_ext` first uses `PiFunext` on carrier
+functions, then fills the dependent law path from proposition-valued
+`CommRingHomLaws`. This is a theorem about Sigma packages, not a global
+package-eta reduction.
+
+Every preservation classifier is proposition-valued because its equations
+live in the set-valued target carrier. Dependent-Pi and dependent-Sigma
+truncation closure therefore prove `CommRingHomLaws(R,S,f)` a proposition and
+`CommRingHom(R,S)` a set. The ordinary category facade is then:
+
+```text
+Obj(CommRing_cat) = CommRing
+Hom_cat(CommRing_cat,R,S) = Path_cat(CommRingHom(R,S)).
+```
+
+The sethood theorem makes `CommRing_cat` a checked `OneCat`. Whole identities
+and composites remain the generic `id` and `comp_fapp0` category owners;
+`comm_ring_hom_id` and `comm_ring_hom_comp` are readable aliases. The library
+does not reconstruct those opaque whole arrows as Sigma packages: retained
+proof fields have no judgmental package eta, so doing so would compete with
+the generic category unit rules. Consequently, application of an explicitly
+constructed map computes, while `comm_ring_hom_apply(comm_ring_hom_id(R),x)`
+is deliberately not advertised as a runtime reduction to `x`.
+
+Two later consumers select rigid pointwise comparisons without changing those
+whole-arrow owners. Iterated localization selects
+`comm_ring_hom_comp_pointwise(g,f)`, whose carrier projection computes to
+`x |-> g(f(x))`. The empty-variable polynomial-algebra model selects
+`comm_ring_hom_id_pointwise(R)`, whose carrier projection computes to
+`x |-> x`. Each rigid head compares with its generic category arrow only at
+proof time. Generic identity and composite applications remain deliberately
+non-computational.
+
+There is not yet a carrier functor from `CommRing_cat` to `Grpd_cat`.
+`Grpd_cat` compares whole identity/composition functions only at proof time
+and computes their stable point observations separately; a direct carrier
+action rule would otherwise create a competing runtime presentation at the
+generic functoriality owner. The two selected identity/composition heads are
+not yet a functor action. A ring-valued-presheaf consumer must still select the
+full action boundary before a carrier functor is promoted.
+
+### Universal-Property Localization At One Element
+
+For `x : |R|`, explicit unit evidence is
+
+```text
+CommRingUnitEvidence(R,x)
+  = Sigma inverse : |R|, x * inverse = 1.
+```
+
+This evidence is proposition-valued. If `y` and `z` are two selected
+inverses, commutative-monoid laws give
+
+```text
+y = y*1 = y*(x*z) = (y*x)*z = (x*y)*z = 1*z = z.
+```
+
+The carrier is a set, so the resulting inverse path is contractible. The
+dependent path between the two multiplication-law witnesses is likewise an
+equality between proofs in a proposition-valued carrier equality. The Sigma
+path view therefore makes the whole unit-witness identity space contractible.
+
+For a structure map `iota : R -> L` and a target map `h : R -> S`, the
+factorization classifier is
+
+```text
+CommRingLocalizationFactor(iota,h)
+  = Sigma factor : CommRingHom(L,S),
+      Pi a : |R|, factor(iota(a)) = h(a).
+```
+
+The triangle is pointwise on carrier applications. This is intentional:
+whole `CommRing_cat` identity and composition arrows retain generic category
+owners, and their carrier projections do not have extra runtime equations.
+The universal property does not require such projected computation.
+
+Localization at `f : |R|` is then expressed by
+
+```text
+IsCommRingLocalizationAt(R,f,L,iota)
+  = UnitEvidence_L(iota(f))
+      x Pi S h,
+          UnitEvidence_S(h(f)) ->
+            IsContr(CommRingLocalizationFactor(iota,h))
+
+CommRingLocalizationAt(R,f)
+  = Sigma L : CommRing,
+      Sigma iota : CommRingHom(R,L),
+        IsCommRingLocalizationAt(R,f,L,iota).
+```
+
+Named constructors and projections expose the chosen target, structure map,
+unit, and contractible factorization evidence. The module introduces no
+rewrite or unification rule and no eta reduction for opaque chosen
+localizations. A concrete reviewer proves that localizing the one-element
+zero ring at its unique element yields the zero ring itself: Unit
+contractibility supplies every factor triangle, `comm_ring_hom_ext` supplies
+uniqueness of structured factors, and proposition-valued triangle evidence
+completes the dependent Sigma path.
+
+This is a representation-independent interface. Concrete fractions,
+finite/unimodular families, powers, concrete polynomial representations, and
+Zariski constructions remain separately consumer-gated layers.
+
+### Iterated Localization And The Product Comparison
+
+For `f,g : |R|`, the selected two-stage package is
+
+```text
+CommRingIteratedLocalizationAt(R,f,g)
+  = Sigma Lf : CommRingLocalizationAt(R,f),
+      CommRingLocalizationAt(target(Lf), map(Lf)(g)).
+```
+
+Its structure map is the stable pointwise composite of the two chosen maps.
+The first-stage image of `f` remains a unit after applying the second map, and
+the second stage makes the first-stage image of `g` a unit. Products of units
+are units, so the composite sends `f*g` to a unit after transport across the
+structured-map multiplication law.
+
+Conversely, a localization map at `f*g` sends both `f` and `g` to units. If
+`x*y` has inverse `u`, then `y*u` is an inverse for `x`, while `x*u` is an
+inverse for `y` (with commutativity used for the latter equation). These
+explicit witnesses let the map factor through localization at `f`; its factor
+triangle transports the unit evidence for `g` to the intermediate map, which
+then factors through the second localization.
+
+Thus the universal properties supply two comparison factors:
+
+```text
+R[1/(f*g)]  ->  R[1/f][1/g]
+R[1/f][1/g] ->  R[1/(f*g)].
+```
+
+Each factor retains a pointwise triangle over the original map from `R`.
+`CommRingIteratedLocalizationComparison` packages these forward and reverse
+factors with named map/agreement projections. It does not identify the two
+chosen localization packages and does not yet store inverse laws for the two
+maps. Nested contractible-factor uniqueness can supply those laws when a
+basic-open equivalence consumer actually needs them. The separately selected
+stable identity comparison is now justified by the empty-variable polynomial
+algebra model, not by an unneeded comparison inverse law.
+
+### Finite Families And Unimodular Cover Presentations
+
+A finite homogeneous family uses only the existing natural-number and Sigma
+calculus:
+
+```text
+FiniteFamily(A,0)       = Unit
+FiniteFamily(A,succ n)  = Sigma(x : A), FiniteFamily(A,n).
+```
+
+Thus a visible successor family is a head followed by a shorter tail, and a
+visible zero family is the terminal record. `finite_family_map` acts
+pointwise by Nat recursion. If `A` is a set, repeated Sigma truncation closure
+proves `FiniteFamily(A,n)` a set. The successor is intentionally the literal
+constant-family Sigma rather than the rigid `Product_grpd` head: the finite-
+family consumer needs generic Sigma sethood and no independent product
+identity or comparison rule. This representation introduces no `Fin`, lookup,
+list append, permutation quotient, or new inductive declaration.
+
+For a commutative ring `R`, the selected ordered folds are
+
+```text
+sum_R([])          = 0
+sum_R(x :: xs)     = x + sum_R(xs)
+
+dot_R([],[])       = 0
+dot_R(a::as,f::fs) = a*f + dot_R(as,fs).
+```
+
+The ring laws can later compare alternative parenthesizations; computation
+has only this right-associated owner. Nat induction proves that every
+structured map `h : R -> S` preserves both folds. These are theorem-level
+paths assembled from the stored zero, addition, multiplication, and unit
+preservation fields, not new rewrite rules.
+
+A finite family `f=(f_i)` is supplied as Zariski generating data together
+with explicit coefficients:
+
+```text
+CommRingUnimodularPresentation(R,n,f)
+  = Sigma(a : FiniteFamily(|R|,n)), dot_R(a,f) = 1.
+
+CommRingZariskiCoverPresentation(R)
+  = Sigma(n : Nat),
+      Sigma(f : FiniteFamily(|R|,n)),
+        CommRingUnimodularPresentation(R,n,f).
+```
+
+The first classifier is intentionally presentation data rather than a mere
+existence proposition: different coefficient choices need not coincide, and
+no propositional-truncation reflector has been selected. It is nevertheless
+set-valued because coefficient families are sets and the equation fibre is a
+property. The complete cover presentation is set-valued as well.
+
+Applying `h` pointwise to generators and coefficients preserves the dot
+equation and transports `1` through `h(1)=1`. Therefore
+`comm_ring_zariski_cover_map` constructs a presentation over `S`. The derived
+singleton `[1]` is a nonempty presentation over every ring; the binary helper
+accepts the familiar correct unit-ideal equation `a*f+b*g=1`. For an affine
+scheme, this is exactly the algebraic criterion that the basic opens
+`D(f_i)` cover the whole spectrum.
+
+This module stops before geometric interpretation. It does not yet build the
+chosen localization maps `R -> R[1/f_i]`, `Spec`, basic-open objects, a sieve
+coverage, or a Grothendieck topology. A cover of a relative basic open
+`D(s)` additionally needs radical data such as
+`s^N = sum_i a_i*f_i`; powers and that relative interface remain downstream
+consumer gates.
+
+### Polynomial Algebras By Universal Property
+
+For a base ring `R` and a variable classifier `X`, candidate polynomial data
+are a commutative ring `P`, a structured base map, and a variable map:
+
+```text
+iota : CommRingHom(R,P)
+vars : X -> |P|.
+```
+
+For another ring `S`, a base map `h : CommRingHom(R,S)`, and a valuation
+`v : X -> |S|`, an extension is
+
+```text
+CommRingPolynomialFactor(iota,vars,h,v)
+  = Sigma k : CommRingHom(P,S),
+      (Pi r : |R|, k(iota(r)) = h(r))
+      x
+      (Pi x : X, k(vars(x)) = v(x)).
+```
+
+The classifier `IsCommRingPolynomialAlgebra(R,X,P,iota,vars)` requires this
+extension space to be contractible for every `S`, `h`, and `v`.
+`CommRingPolynomialAlgebra(R,X)` packages a chosen `P`, `iota`, `vars`, and
+that universal property. This is precisely the free commutative `R`-algebra
+interface: existence provides evaluation at every valuation, while
+contractibility provides uniqueness together with both displayed triangles.
+
+Both agreement fields are proposition-valued because their equations live in
+the set-valued carrier of `S`; their dependent Sigma is therefore a property.
+Consequently a path between two structured extension maps lifts uniquely to a
+path between complete factor packages. The module uses this theorem-level
+transport but adds no runtime rule, unification rule, or package eta.
+
+The variable classifier is intentionally independent of `FiniteFamily`.
+Finite families own ordered tuples, finite folds, and retained cover
+presentations; polynomial freeness is naturally parameterized by the
+classifier of variables itself. Since every valuation lands in a set-valued
+ring carrier, paths in `X` are respected automatically. No `Fin`, list,
+monomial, coefficient, quotient, or new inductive interface is selected.
+
+The reviewer proves the generic zero-variable equation
+
+```text
+R[Empty] = R.
+```
+
+The base map is `comm_ring_hom_id_pointwise(R)`, the variable map is empty,
+and the centre extension of `h : R -> S` is `h` itself. Its base agreement is
+reflexive and its variable agreement follows by empty elimination. A
+competitor's base triangle gives pointwise equality with `h`;
+`comm_ring_hom_ext` and proposition-valued agreement transport complete the
+contractibility proof. This is an executable model for every base ring, but
+it does not pretend to be a concrete positive-variable representation. Such
+a representation may later inhabit the same universal interface without
+changing it.
+
 Two independent families over the same base have a fibrewise product without
 introducing a new primitive family former:
 
@@ -2645,8 +3138,8 @@ application.
 
 ## 18. Implementation Glossary
 
-This table maps the mathematical notation above to the current `emdash3_2.lp`
-vocabulary.
+This table maps the mathematical notation above to the current active v3.2
+kernel and one-way library vocabulary.
 
 | Mathematical notation | Current implementation name |
 | --- | --- |
@@ -2669,6 +3162,51 @@ vocabulary.
 | restricted Core-inclusion κ square | `core_incl_transf_kappa F` |
 | `PathLift(h) o κₗ` (with judgmental-identity `κᵣ` omitted) | `path_lift_non_strict_spiral S p s h` |
 | `Catd(K)` | `Catd_cat K` / `Catd K` |
+| Cat-valued presheaves on `K` | `Psh_cat K` / `Psh K` |
+| presheaf restriction `F^*` | `Psh_pullback_func F` |
+| contravariant Yoneda functor/object | `yoneda_psh_func K` / `yoneda_psh U` |
+| restriction-oriented arrows into `U` | `Into_restr_cat U` |
+| conventional slice `K/U` | `Slice_cat U` |
+| Cat-valued higher sieves on `U` | `HigherSieve_cat U` / `HigherSieve U` |
+| maximal Cat-valued higher sieve | `maximal_higher_sieve U` |
+| native subterminal category | `IsSubterminalCat C` |
+| pointwise ordinary-sieve property | `IsOrdinarySieve S` |
+| ordinary sieves on `U` | `Sieve U` |
+| ordinary-sieve pullback along `p` | `sieve_pullback p` / `sieve_pullback_function p` |
+| membership of `(V,f)` in `R` | `SieveMembership R (V,f)` |
+| maximal ordinary sieve | `maximal_sieve U` |
+| proposition-valued sieve coverage | `SieveCoverage K` / `Covers J R` |
+| Grothendieck topology laws/package | `IsGrothTopology J` / `GrothTopology K` |
+| chaotic topology | `chaotic_groth_topology K` |
+| set-carrier commutative rings | `CommRing` |
+| carrier and retained sethood of `R` | `comm_ring_carrier R` / `comm_ring_carrier_is_set R` |
+| operation/law packages on `A` | `CommRingOps A` / `IsCommRing A ops` |
+| ring operations `0`, `1`, `+`, unary `-`, `*` | `comm_ring_zero`, `comm_ring_one`, `comm_ring_add`, `comm_ring_neg`, `comm_ring_mul` |
+| one-element zero ring | `zero_comm_ring` |
+| structured ring morphisms `R -> S` | `CommRingHom R S` |
+| carrier function/application of `h` | `comm_ring_hom_function h` / `comm_ring_hom_apply h x` |
+| ring-morphism preservation evidence | `CommRingHomLaws` / `comm_ring_hom_zero_law` through `comm_ring_hom_mul_law` |
+| ordinary category of commutative rings | `CommRing_cat` |
+| pointwise equality/extensionality of ring maps | `CommRingHomPointwisePath` / `comm_ring_hom_ext` |
+| explicit unit evidence and inverse | `CommRingUnitEvidence R x` / `comm_ring_unit_inverse` |
+| proposition-valued unit theorem | `comm_ring_unit_evidence_is_prop R x` |
+| factor through a localization map | `CommRingLocalizationFactor iota h` |
+| localization property/package at `f` | `IsCommRingLocalizationAt R f L iota` / `CommRingLocalizationAt R f` |
+| chosen localization target/map | `comm_ring_localization_target` / `comm_ring_localization_map` |
+| stable pointwise structured-map identity | `comm_ring_hom_id_pointwise R` |
+| stable pointwise structured-map composite | `comm_ring_hom_comp_pointwise g f` |
+| localization first at `f`, then at the image of `g` | `CommRingIteratedLocalizationAt R f g` |
+| comparison with localization at `f*g` | `CommRingIteratedLocalizationComparison` / `comm_ring_iterated_localization_comparison` |
+| forward/reverse localization comparison maps | `comm_ring_iterated_localization_comparison_forward_map` / `comm_ring_iterated_localization_comparison_reverse_map` |
+| Nat-indexed finite families | `FiniteFamily A n` / `finite_family_nil` / `finite_family_cons` |
+| finite-family pointwise map and sethood | `finite_family_map` / `finite_family_is_set` |
+| selected finite ring sum and dot product | `comm_ring_finite_sum` / `comm_ring_finite_dot` |
+| retained unit-ideal coefficient data | `CommRingUnimodularPresentation` / `comm_ring_unimodular_intro` |
+| finite affine Zariski-cover presentation | `CommRingZariskiCoverPresentation` / `comm_ring_zariski_cover_map` |
+| singleton and binary cover presentations | `comm_ring_unit_zariski_cover` / `comm_ring_binary_zariski_cover` |
+| polynomial extension factor | `CommRingPolynomialFactor iota vars h valuation` |
+| polynomial-algebra universal property | `IsCommRingPolynomialAlgebra R X P iota vars` |
+| chosen polynomial algebra | `CommRingPolynomialAlgebra R X` / `comm_ring_polynomial_target` |
 | `E[k]` | `Fibre_cat E k` |
 | `F^*E` | `Pullback_catd E F` |
 | `Const_K(A)` | `Const_catd K A` |

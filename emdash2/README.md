@@ -29,6 +29,45 @@ mathematical reading is in
 ## Where to start
 
 - `emdash3_2.lp` is the active kernel and computation authority.
+- `emdash3_2_presheaves.lp` owns the rigid Cat-valued presheaf facade,
+  restriction along ordinary functors, transparent Yoneda and slice
+  presentations, and Cat-valued higher sieves.
+- `emdash3_2_sieves.lp` owns native subterminal categories, ordinary sieves
+  as pointwise-subterminal higher sieves, and ordinary pullback. It does not
+  itself declare `Omega` or topology.
+- `emdash3_2_sites.lp` owns ordinary-sieve membership, the maximal sieve,
+  proposition-valued sieve coverages, the three Grothendieck topology laws,
+  and the direct chaotic-topology model. It does not add `Omega`, free
+  coverage saturation, sheafification, or descent.
+- `emdash3_2_finite_families.lp` owns Nat-indexed right-associated finite
+  families, their constructors/projections, pointwise map, and sethood. It
+  introduces no `Fin`, list/Sum/inductive interface, or package eta.
+- `emdash3_2_commutative_algebra.lp` owns set-carrier commutative-ring
+  operation and law packages, readable observations, and the concrete
+  one-element zero ring.
+- `emdash3_2_commutative_algebra_category.lp` owns structured ring morphisms,
+  their preservation/sethood theorems, transparent explicit-map observations,
+  pointwise structured-map extensionality, `CommRing_cat`, and the selected
+  stable identity/composition comparisons. A carrier functor remains a later
+  consumer-gated layer.
+- `emdash3_2_commutative_algebra_finite.lp` owns finite ring sums and dot
+  products, their structured-map preservation theorems, retained unimodular
+  coefficient data, and algebraic finite Zariski-cover presentations. It does
+  not yet declare `Spec`, basic opens, localization families, topology,
+  powers/radicals, fractions, polynomials, or quotients.
+- `emdash3_2_commutative_algebra_polynomial.lp` owns polynomial algebras by
+  their universal property as free commutative `R`-algebras on a variable
+  classifier. It selects no monomial/coefficient/quotient syntax or concrete
+  positive-variable representation; the reviewer proves `R[Empty] = R`.
+- `emdash3_2_commutative_algebra_localization.lp` owns proposition-valued unit
+  evidence and localization at one element by contractible pointwise
+  factorization. It selects no concrete fractions, finite families,
+  polynomials, or Zariski presentation.
+- `emdash3_2_commutative_algebra_localization_comparison.lp` owns unit algebra
+  and the universal-property comparison between localization at `f*g` and
+  localization first at `f`, then at the image of `g`. It retains canonical
+  maps and pointwise triangles, but no equality of chosen packages or inverse
+  law for the comparison maps.
 - `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
   encode/decode, Nat comparison, and directed negative results.
 - `emdash3_2_checks.lp` and `examples/` contain executable
@@ -43,6 +82,31 @@ mathematical reading is in
 
 The active one-way library extensions are:
 
+- `emdash3_2_presheaves.lp` — Cat-valued presheaves, opposite-functor
+  restriction, Yoneda, slices, and Cat-valued higher sieves;
+- `emdash3_2_sieves.lp` — native subterminal categories, ordinary-sieve
+  property packages, and pullback preservation;
+- `emdash3_2_sites.lp` — direct ordinary-sieve Grothendieck topologies and the
+  chaotic model, separate from generated coverages and sheafification;
+- `emdash3_2_finite_families.lp` — reusable Nat/Sigma finite families,
+  pointwise mapping, and sethood without a new inductive former;
+- `emdash3_2_commutative_algebra.lp` — set-carrier commutative-ring objects,
+  their operation/law projections, and the one-element zero-ring model;
+- `emdash3_2_commutative_algebra_category.lp` — structured ring morphisms,
+  morphism sethood/extensionality, the ordinary `CommRing_cat` facade, and
+  stable pointwise identity/composition comparisons, without a carrier
+  functor;
+- `emdash3_2_commutative_algebra_finite.lp` — finite sums/dot products and
+  base-change-stable unimodular/Zariski-cover presentation data, separate from
+  topology and polynomial syntax;
+- `emdash3_2_commutative_algebra_polynomial.lp` — contractible-extension
+  universal properties for free commutative `R`-algebras on variables,
+  separate from concrete polynomial syntax and from topology;
+- `emdash3_2_commutative_algebra_localization.lp` — explicit units and
+  universal-property localization at one element, without fraction syntax;
+- `emdash3_2_commutative_algebra_localization_comparison.lp` — stable
+  pointwise ring-map composition plus universal-property iterated/product-
+  localization comparison data, without fractions or package equality;
 - `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
   action and groupoidality;
 - `emdash3_2_eq1_evidence_property.lp` — evidence-property,

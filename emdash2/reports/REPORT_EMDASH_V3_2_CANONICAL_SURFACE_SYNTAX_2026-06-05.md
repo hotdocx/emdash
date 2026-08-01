@@ -335,6 +335,236 @@ Do not make an Agda-style parenthesized binder-arrow form the primary section
 syntax. The `Π` spelling should visibly signal the terminal-shape section
 category.
 
+## Cat-Valued Presheaves
+
+Canonical comment/formula notation:
+
+```text
+Psh_cat(K) = K^op ⊢ Cat
+P :^n Psh(K)
+F^* : Psh_cat(B) ⊢ Psh_cat(A)
+F^*(P) = Pullback_catd(P,Op_func(F)).
+y_K : K ⊢ Psh_cat(K)
+y_K(U)[V] = Hom_K(V,U)
+Into^-_K(U) = Sigma_(V : K^op) Hom_K(V,U)
+K/U = Op_cat(Into^-_K(U)).
+```
+
+Kernel meanings:
+
+```text
+Psh_cat K
+Psh K
+Psh_pullback_func F
+yoneda_psh_func K
+yoneda_psh U
+Into_restr_cat U
+Slice_cat U
+```
+
+`Psh_cat(K)` is the category expression; `Psh(K)` is its decoded object/type
+classifier. The equality with `K^op ⊢ Cat` is proof-time presentation
+comparison plus explicit runtime object/hom projections, not a runtime
+category-head rewrite. This notation currently means Cat-valued presheaves.
+Do not use `Psh` or `stack` to silently claim pointwise discreteness or a
+descent condition.
+
+`Into^-_K(U)` is explicitly restriction-oriented; `K/U` is the conventional
+slice and has the opposite direction. Cat-valued higher sieves use:
+
+```text
+HigherSieveClassifier(K)[U]
+  = Catd_cat(Into^-_K(U))
+  =proof-time Psh_cat(K/U)
+maximal_higher_sieve(U) = Terminal_catd(Into^-_K(U)).
+```
+
+Kernel names are `HigherSieveClassifier K`, `HigherSieve_cat U`,
+`HigherSieve U`, and `maximal_higher_sieve U`. The displayed second equality
+uses the common proof-time `Catd_cat(Into_restr_cat U)` presentation; it is
+not a direct runtime conversion. Write `higher sieve` or `Cat-valued higher
+sieve` for this object.
+
+The downstream ordinary specialization uses:
+
+```text
+Subterminal(C)
+  := IsPropGrpd(Obj(C)) and IsGroupoidalCat(C)
+OrdinarySieve(S)
+  := forall f : Into^-_K(U), Subterminal(S[f])
+Sieve_K(U)
+  := { S : HigherSieve_K(U) | OrdinarySieve(S) }
+p^*(R) := sieve_pullback(p,R).
+```
+
+Kernel names are `IsSubterminalCat C`, `IsOrdinarySieve S`, `Sieve U`, and
+`sieve_pullback p R`. In prose, unqualified “sieve” means this ordinary
+pointwise-subterminal package; say “higher sieve” explicitly for arbitrary
+Cat-valued data. Do not write `Omega_K` as though it were active: the name
+`Omega` remains reserved until sieve setness and contravariant family assembly
+are checked. Pullback along an identity is not advertised as definitional
+package eta because it reconstructs retained proposition evidence.
+
+Direct sieve-topology notation is:
+
+```text
+f ∈ R                    := SieveMembership(R,f)
+⊤_U                      := maximal_sieve(U)
+J ⊩ R                    := Covers(J,R)
+p^*R                     := sieve_pullback(p,R)
+Topology(K)              := GrothTopology(K)
+J_chaotic                := chaotic_groth_topology(K).
+```
+
+`f` denotes the full restriction-total pair `(V,f : V -> U)` where necessary;
+do not suppress its domain when the local-character formula would become
+ambiguous. The three checked topology laws may be written:
+
+```text
+J ⊩ ⊤_U
+J ⊩ R -> J ⊩ p^*R
+J ⊩ R -> (forall f ∈ R, J ⊩ f^*S) -> J ⊩ S.
+```
+
+Kernel names are `SieveCoverage K`, `Covers J R`, `GrothMaximal J`,
+`GrothStable J`, `SieveLocalityPremise J R S`, `GrothLocal J`,
+`IsGrothTopology J`, and `GrothTopology K`. Use
+`groth_topology_cover_predicate`, `groth_topology_maximal`,
+`groth_topology_pullback`, and `groth_topology_local_character` for named
+package observations. “Coverage” here means a direct proposition-valued
+predicate on sieves; a syntax/API for generating cover families is not yet
+selected. `Omega`, free saturation, sheafification, and descent remain
+separate names and gates.
+
+Set-carrier commutative-ring notation is:
+
+```text
+R : CommRing
+|R|                      := comm_ring_carrier(R)
+0_R                      := comm_ring_zero(R)
+1_R                      := comm_ring_one(R)
+x +_R y                  := comm_ring_add(R,x,y)
+-_R x                    := comm_ring_neg(R,x)
+x *_R y                  := comm_ring_mul(R,x,y).
+
+h : R ->_CRing S         := h : CommRingHom(R,S)
+|h|                      := comm_ring_hom_function(R,S,h)
+h(x)                     := comm_ring_hom_apply(R,S,h,x)
+id^CRing_R               := comm_ring_hom_id(R)
+id^pw_R                  := comm_ring_hom_id_pointwise(R)
+g ∘_CRing f              := comm_ring_hom_comp(g,f).
+g ∘_pw f                 := comm_ring_hom_comp_pointwise(g,f)
+
+u : Unit_R(x)              := u : CommRingUnitEvidence(R,x)
+u^-1                       := comm_ring_unit_inverse(R,x,u)
+Loc_R(f)                   := CommRingLocalizationAt(R,f)
+R[1/f]_ell                 := comm_ring_localization_target(R,f,ell)
+iota_ell                   := comm_ring_localization_map(R,f,ell)
+IterLoc_R(f,g)             := CommRingIteratedLocalizationAt(R,f,g)
+CompLoc_R(f,g,m,p)         := CommRingIteratedLocalizationComparison(m,p).
+```
+
+Subscripts may be omitted only when the ring is unambiguous.  The carrier is
+not a bare meta-level `Type`: `comm_ring_carrier_package R` retains its
+`SetU_grpd` package, and `comm_ring_carrier_is_set R` exposes its sethood
+evidence.  Kernel constructors are `comm_ring_ops_intro`,
+`comm_ring_laws_intro`, `comm_ring_structure_intro`, and `comm_ring_intro`;
+the eight readable law projections are named `comm_ring_add_assoc_law`
+through `comm_ring_left_distrib_law`.  `zero_comm_ring` denotes the checked
+one-element zero ring, so notation must not suggest an implicit `0 != 1`
+axiom.
+
+Structured-map constructors use `comm_ring_hom_intro` and
+`comm_ring_hom_laws_intro`. The retained witnesses have readable projections
+`comm_ring_hom_zero_law`, `comm_ring_hom_one_law`,
+`comm_ring_hom_add_law`, `comm_ring_hom_neg_law`, and
+`comm_ring_hom_mul_law`. `CommRing_cat` is active with objects `CommRing` and
+homs `Path_cat(CommRingHom(R,S))`; its whole identity/composition arrows retain
+the generic category owners. Thus `h(x)` computes for explicit constructors,
+but this notation must not imply an extra runtime equation reducing
+`comm_ring_hom_apply(comm_ring_hom_id(R),x)` to `x`.
+
+The selected `id^pw_R` notation is the rigid pointwise identity comparison
+used by the empty-variable polynomial model. Its carrier application computes
+to `x`, and `comm_ring_hom_id_pointwise_path` compares it at proof time with
+`id^CRing_R`. Do not silently replace generic whole-arrow identity by this
+pointwise view.
+
+The selected `g ∘_pw f` notation is reserved for the rigid pointwise
+composition comparison used by iterated localization. Its carrier application
+computes to `g(f(x))`, and `comm_ring_hom_comp_pointwise_path` compares it at
+proof time with `g ∘_CRing f`. Do not silently replace generic whole-arrow
+composition by this pointwise view in comments or future surface elaboration.
+
+`CommRingHomPointwisePath h k` is the canonical premise for
+`comm_ring_hom_ext`; notation `h = k by ext x` may be used in prose only when
+the displayed pointwise path is clear. `comm_ring_unit_evidence_is_prop`
+records that explicit inverse evidence is a property.
+
+For `ell : Loc_R(f)`, `R[1/f]_ell` and `iota_ell` always retain the chosen
+package subscript. The library does not install a global canonical term named
+`R[1/f]`, nor does it identify two chosen packages judgmentally. A factor
+through `iota` is a term of `CommRingLocalizationFactor(iota,h)`, whose second
+field is the pointwise triangle `k(iota(x)) = h(x)`. The localization property
+states that this factor classifier is contractible whenever `h(f)` has
+explicit unit evidence.
+
+For `m : IterLoc_R(f,g)`, the first stage is a chosen localization at `f` and
+the second is a chosen localization at the image of `g`; its stable composite
+map sends `f*g` to a unit. For
+`p : Loc_R(f*g)`, `CompLoc_R(f,g,m,p)` retains canonical forward and reverse
+factors with pointwise triangles. No notation in this section claims that the
+two maps are inverse or that the chosen targets are equal.
+
+For the separately promoted finite-family layer, comments and examples may
+write
+
+```text
+[]                       : FinFam(A,0)
+x :: xs                  : FinFam(A,succ n)
+sum_R(xs)                : |R|
+dot_R(a,f)               : |R|
+Unimod_R(f; a, p)        : chosen data p : dot_R(a,f) = 1
+ZarCover_R(n; f; a, p)   : finite algebraic cover presentation
+```
+
+The literal owners are `FiniteFamily`, `finite_family_nil/cons`,
+`comm_ring_finite_sum`, `comm_ring_finite_dot`,
+`CommRingUnimodularPresentation`, and
+`CommRingZariskiCoverPresentation`. The semicolon-separated cover notation
+retains the coefficient family and equation; it must not be read as a
+propositionally truncated existence statement. `ZarCover` names only the
+algebraic unit-ideal presentation for future basic opens, not an already
+constructed `Spec`, localization family, sieve coverage, or topology.
+
+For the universal-property polynomial layer, comments and examples may write
+
+```text
+PolyAlg_R(X)             : chosen free commutative R-algebra package
+R[X]_p                   : target ring of p : PolyAlg_R(X)
+iota_p                   : R ->_CRing R[X]_p
+var_p(x)                 : |R[X]_p|
+Ext_p(h,v)               : contractible extension classifier
+```
+
+The literal owners are `CommRingPolynomialAlgebra`,
+`comm_ring_polynomial_target`, `comm_ring_polynomial_base_map`,
+`comm_ring_polynomial_variables`, and `CommRingPolynomialFactor`. The package
+subscript `p` is mandatory: the library does not install a global chosen term
+named `R[X]`. `Ext_p(h,v)` retains both pointwise equations
+`k(iota_p(r)) = h(r)` and `k(var_p(x)) = v(x)`. The notation records only the
+free-algebra universal property. It does not select monomials, coefficient
+syntax, quotients, or a concrete positive-variable representation. The
+reviewer equation `R[Empty] = R` is the current executable model.
+
+No carrier functor, concrete fraction syntax, comparison equivalence,
+relative radical/power interface, positive-variable polynomial representation,
+`Spec`, or Zariski topology is implied. Those names remain reserved for their
+separately gated layers.
+
+No string-parser grammar is selected by this section. It records canonical
+comments, examples, and direct TypeScript-AST intent only.
+
 ## Mixed-Variance Displayed Functor Families
 
 Canonical functor-category-flavoured form:
