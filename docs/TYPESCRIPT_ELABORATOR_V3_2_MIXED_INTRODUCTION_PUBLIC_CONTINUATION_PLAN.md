@@ -85,7 +85,10 @@ can be one callback-based, immutable contextual case for
 `λ^fd c. λ^f a. s[((k,a),c)]`; it needs no second RawExpr, checker,
 external coherence witness, or kernel edit. The exact bounded continuation is
 frozen below as H-DTTLF-USABILITY-MIXED-INTRODUCTION-TS-01 /
-D-DTTLF-USABILITY-041. Its proposal checkpoint is pending a separate review.
+D-DTTLF-USABILITY-041. Its proposal checkpoint is
+`249895de44c005dd64a00bbca13f5d7fb6b1097c`. The separate review recorded
+below approves exactly that gate under the standing unattended delegation,
+with immediate human supersession.
 
 This is the living successor to
 [`TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_RECURSIVE_MIXED_NESTING_PLAN.md).
@@ -347,7 +350,7 @@ It deliberately avoids:
 | `MIXED-INTRODUCTION-0A` | complete; ignored full-file probes green; zero active-kernel delta | completed and deployed public slice; active kernel/SOP | The exact two-sided context, polarity, internal action route, corrected six-rule zero-owner prerequisite, stable curry discriminator, positive consumer, and negative/non-collapse cases are frozen below. |
 | `MIXED-ACTION-FOUNDATION-1A` | final-green at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137` | completed `MIXED-INTRODUCTION-0A`; approved D-039; Unit-prof/full-action probes and active-kernel CI | Promote exactly six existing-owner projections: full/capped `Op_catd`, full/capped `Functor_catd`, Cat-point `Hom_fapp0`, and the narrow opposite-identity bridge. Add no action or curry symbol. |
 | `MIXED-CURRY-1B` | final-green at `bed022fdab970109163da8415726a5bcc1ab5a89` | final-green `MIXED-ACTION-FOUNDATION-1A` at `7a8159df80eb15b63b85ca0f6cbb4f88d32bd137`; approved D-040; exact owner-position and active CI evidence | Exactly one Lambdapi-first mixed-curry operation package is active: one functor, three stable projected heads, eleven transparent context/arrow aliases, and seven projection rules. It adds no Hom-action duplicate and leaves `Unit_prof` unchanged. |
-| `MIXED-INTRODUCTION-TS-1C` | D-041 frozen for separate review; proposal checkpoint pending | final-green `MIXED-CURRY-1B` at `bed022fdab970109163da8415726a5bcc1ab5a89`; measured 5-signature/17-rule prerequisite-plus-owner closure; focused mixed-profile baseline | Transfer the exact existing-owner closure generically, add one opt-in root profile, and extend immutable contextual IR with exactly the non-eta `λ^fd c. λ^f a. s[((k,a),c)]` body. |
+| `MIXED-INTRODUCTION-TS-1C` | D-041 approved; implementation dependency-ready | final-green `MIXED-CURRY-1B` at `bed022fdab970109163da8415726a5bcc1ab5a89`; D-041 proposal `249895de44c005dd64a00bbca13f5d7fb6b1097c`; measured 5-signature/17-rule prerequisite-plus-owner closure; focused mixed-profile baseline | Transfer the exact existing-owner closure generically, add one opt-in root profile, and extend immutable contextual IR with exactly the non-eta `λ^fd c. λ^f a. s[((k,a),c)]` body. |
 | `MIXED-VARIANCE-GRADUATE-1D` | blocked on representative TS/kernel evidence | `MIXED-INTRODUCTION-TS-1C` | Stress supported polarity alternations, freeze exact recursive coverage and negatives, and avoid an “unrestricted variance” overclaim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -1516,6 +1519,21 @@ TypeScript transfer. It does not graduate arbitrary mixed variance, general
 negative-variable use, text syntax, browser/public exposure, a product facade,
 inverse curry, or whole-library scale.
 
+The proposal was checkpointed at
+`249895de44c005dd64a00bbca13f5d7fb6b1097c`. A separate review verified that
+the checkpoint changes only this living plan and descends from final-green
+D-040; all five prerequisite signatures are absent from the current mixed
+transfer linkage while already present in the active kernel; the active
+source delta is exactly six D-039 plus seven D-040 rules; the remaining four
+rules are the pre-existing `op` and rigid-Hom projections; and the
+twenty/seventeen inventory therefore closes without another mathematical
+owner. The callback design records polarity and scoped occurrence evidence
+without extending the generic checker or supplying external coherence.
+No immediate human correction superseded the isolated proposal. Under the
+user's standing unattended delegation, with immediate human supersession,
+D-041 is approved exactly as proposed and implementation may begin within
+this boundary.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -1578,11 +1596,11 @@ D-040 as final-green at
 `bed022fdab970109163da8415726a5bcc1ab5a89`: exactly eleven aliases, one curry
 functor plus three staged heads, and seven rules. Preserve that bounded
 kernel/check/report/ledger checkpoint, carry forward its complete green
-aggregate. Treat D-041 as frozen for separate review with its proposal
-checkpoint pending in this ledger. Do not implement it until that isolated
-proposal has been checkpointed and reviewed. If approved, preserve its exact
-five-prerequisite-signature, twenty-total-declaration, seventeen-rule, one
-profile, one classifier, one contextual-node, and three-constructor boundary.
+aggregate. Treat D-041 at proposal checkpoint
+`249895de44c005dd64a00bbca13f5d7fb6b1097c` as separately reviewed and
+approved. Implement only its exact five-prerequisite-signature,
+twenty-total-declaration, seventeen-rule, one-profile, one-classifier,
+one-contextual-node, and three-constructor boundary.
 Preserve the measured two-sided context,
 negative-A/positive-C polarity, canonical Hom classifier seam, stable
 `Functor_catd` head, Sigma/pullback non-collapse, and the existing
@@ -1834,4 +1852,16 @@ removal, or unrelated cleanup is authorized.
   indexed classifier and one typed section-application node. It explicitly
   retains `Unit_prof` ownership and excludes new kernel semantics, intrinsic
   Core/checker cases, general mixed variance, text/browser/public work, and
-  whole-library scale. Its proposal checkpoint is pending a separate review.
+  whole-library scale. Its proposal checkpoint is
+  `249895de44c005dd64a00bbca13f5d7fb6b1097c`; implementation requires a
+  separate review.
+- **2026-08-01 — D-DTTLF-USABILITY-041 approved exactly as proposed.** The
+  separate review found the proposal-only checkpoint clean and descended from
+  final-green D-040. It independently confirmed all five signatures are
+  absent from the present mixed transfer linkage, the active source deltas are
+  exactly six D-039 and seven D-040 rules, and the other four selected clauses
+  are the existing `op`/rigid-Hom projections. The exact twenty-declaration,
+  seventeen-rule closure therefore needs no new mathematical owner. No
+  immediate human correction superseded the proposal, so the standing
+  unattended delegation authorizes only this bounded generic transfer,
+  opt-in profile, and contextual consumer, with immediate human supersession.
