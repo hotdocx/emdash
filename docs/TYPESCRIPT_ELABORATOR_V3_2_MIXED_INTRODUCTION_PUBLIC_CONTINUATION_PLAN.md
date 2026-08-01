@@ -484,7 +484,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-PRODUCT-DISTRIBUTION-1G` | implemented and final-green at `d5ea9f5d3d296835608eec8f963f7fa5657f0005` under D-DTTLF-USABILITY-048; kernel checkpoint `d9f298ce2c3194adda8f68bd4654e484b33bfac4` | completed `DIRECT-MIXED-PRODUCT-DISTRIBUTION-0G`; final-green D-047; proposal checkpoint `799f3219d9af58ad3b949ec212ef46748a0d7e2f`; separate review under standing unattended delegation | Exactly one distributor and three projection rules are active and generically transferred. The existing direct factorization tree recursively lowers `typed-pair`, combines branches with existing `Product_pair_funcd`, and composes the distributor. Direct introduction remains fundamental; curry, facade, text/browser, and unrestricted-variance claims remain excluded. |
 | `DIRECT-MIXED-PRODUCT-GRADUATE-1H` | read-only reassessment complete; no semantic delta | final-green D-048 and the user's renewed direct-binder invariant | Graduates arbitrary finite depth only for the recursive `leaf | source-map | target-map | pair` body algebra, alongside the predecessor's qualified finite Hom towers. Direct introduction is fundamental and curry-free. General structural constructor coverage, context arity, variance-valid varying application, and `:^nd` introduction remain separate. |
 | `DIRECT-MIXED-STRUCTURAL-BASIS-0I` | complete; zero active semantic delta; direct weakening selected | completed `DIRECT-MIXED-PRODUCT-GRADUATE-1H`; approved D-DTTLF-USABILITY-049; owner-position/direct-versus-curry probes | The occurrence matrix distinguishes structural weakening from variance-valid varying application. `Functor_catd_const_funcd` is quiet-green with point/full/capped and higher action; terminal/section composition derives the other unused-variable cases. Curry remains auxiliary. |
-| `DIRECT-MIXED-WEAKENING-1J` | D-049 audit complete; exact D-DTTLF-USABILITY-050 proposal frozen; decision pending | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; active structural-logic report; quiet-green owner-position candidate with zero warning/audit delta | Promote one direct `Functor_catd_const_funcd` owner with point/full/capped action, transfer it generically, and add the recursive outer-value-only leaf `H[c]`. Keep terminal-derived outer weakening/constant bodies and qualified two-varying composition as separately measured later frontend/semantic rows. |
+| `DIRECT-MIXED-WEAKENING-1J` | D-049 audit complete; corrected exact D-DTTLF-USABILITY-050 proposal frozen; decision pending | completed `DIRECT-MIXED-STRUCTURAL-BASIS-0I`; active structural-logic report; quiet-green owner-position candidate; measured one-signature TypeScript acquisition prerequisite | Promote one direct `Functor_catd_const_funcd` owner with point/full/capped action, acquire the pre-existing generic `hom_postcomp_func` signature needed by its full-action normal form, and add the recursive outer-value-only leaf `H[c]`. Keep terminal-derived outer weakening/constant bodies and qualified two-varying composition as separately measured later frontend/semantic rows. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -3619,12 +3619,18 @@ Approve the following exact bounded direct-weakening vertical slice:
    the composed `H[c]` consumer, and relevant non-collapse. Keep the
    curry-derived presentation as comparison evidence rather than an active
    bridge or equality rule.
-4. Transfer exactly the one declaration and three runtime rules through the
+4. Transfer exactly two declarations and three runtime rules through the
    generic LF declaration/runtime compilers after the final-green D-048
-   profile. Reuse the already-transferred `Const_func_func`,
-   `comp_cat_cov_func`, `Functor_catd`, generic action, fibre, Hom, and
-   composition owners. Add no intrinsic Core node and no owner-specific
-   checker/evaluator branch.
+   profile. The declarations are the one new
+   `Functor_catd_const_funcd` owner and the pre-existing generic
+   `hom_postcomp_func` signature required by the full-action RHS. The active
+   kernel writes that RHS through transparent `comp_cat_cov_func`; compile its
+   exact defining presentation directly as the corresponding
+   `hom_postcomp_func` specialization at `Cat_cat` and the identity family.
+   Do not invent or transfer a second `comp_cat_cov_func` owner. Reuse the
+   already-transferred `Const_func_func`, `Functor_catd`, generic action,
+   fibre, Hom, identity, and composition owners. Add no intrinsic Core node
+   and no owner-specific checker/evaluator branch.
 5. Extend the existing recursive direct factorization with one structural
    leaf for
 
@@ -3649,8 +3655,11 @@ Approve the following exact bounded direct-weakening vertical slice:
    target-mapped weakening, and a recursively paired eta/weakening body. Check
    emitted Core for the direct weakening plus generic composition and for the
    absence of `mixed_curry`, factorized curry, total-context section, cast,
-   coercion, or external equation. Exercise object, inner-arrow, base-arrow,
-   and higher-action behavior through the generic transferred runtime.
+   coercion, or external equation. Exercise object and inner-arrow
+   computation, capped base-arrow computation, and full-action higher-cell
+   formation/iterability through the generic transferred runtime. This gate
+   does not acquire the broader `hom_postcomp_func` higher-beta family merely
+   to normalize that final well-typed cell further.
 9. Retain `S[k](a)`, fully constant bodies, the qualified constant-middle
    two-varying application, arbitrary larger contexts, and unrestricted
    `lambda^nd` as fail-closed or unexposed cases. This gate records their
@@ -3882,8 +3891,9 @@ removal, or unrelated cleanup is authorized.
   separate displayed composition lift. An exact negative-Sigma-curry alias
   typechecks and reaches complete points but does not provide the selected
   whole-fibre/arrow normal forms, so curry remains auxiliary. D-050 proposes
-  one direct owner/three rules, generic transfer, and only the recursive
-  `H[c]` frontend leaf; decision is pending.
+  one direct owner/three rules, the measured one-signature generic
+  postcomposition prerequisite, and only the recursive `H[c]` frontend leaf;
+  decision is pending.
 - **2026-08-01 — D-DTTLF-USABILITY-049 approved exactly as a read-only
   audit.** Separate review of proposal checkpoint
   `8d055469cc5e5178940cf887598ae9d289c6117e` confirms a two-document-only
