@@ -2689,7 +2689,8 @@ tooling/tests, document registry, source/report/reference lints, book checks,
 strict audit, and strict catalog—is green. Two earlier traversals under
 concurrent elaborator `check:ts` load timed out on different unchanged large
 targets; the uncontended traversal passes without raising the 60-second bound
-or changing unrelated source. The authorized local checkpoint is pending.
+or changing unrelated source. The tranche is included in local checkpoint
+`4436a23`.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

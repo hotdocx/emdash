@@ -4269,7 +4269,7 @@ consumer demonstrates the need.
 
 Status: rule-free source and dedicated reviewer synchronized-green through
 exact warnings, strict audit/catalog, 96-target health, and the
-nonduplicative integration remainder; authorized local checkpoint pending.
+nonduplicative integration remainder; included in local checkpoint `4436a23`.
 
 The next bridge joins PSSS-10c directly to the overlap computation already
 used by PSSS-10a/PSSS-10b.  For `f,g:R` and a test ring `S`, use the explicit
@@ -5066,7 +5066,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative integration remainder green; locally checkpointed at `837cfeb` | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
 | PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Rule-free complementary-idempotent atlas source/reviewer/central checks, exact warnings, strict 1,987-check catalog, synchronized 92-target health, and nonduplicative integration remainder green; locally checkpointed at `db91ddf` | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
 | PSSS-10c | Affine Yoneda functor of points and localization representation of semantic basic opens | Rule-free implementation synchronized-green through exact warnings, strict 1,987-check catalog, 94-target health, and nonduplicative integration remainder; locally checkpointed at `154069d`; no univalence or whole-presheaf equality promoted | Shared identity CommRing presheaf, ordinary sieve membership, and universal-property localization |
-| PSSS-10c1 | Pointwise basic-open intersection and representation by localization at `f*g` | Rule-free source/reviewer synchronized-green through exact warnings, strict 1,987-check catalog, 96-target health, and nonduplicative integration remainder; authorized checkpoint pending | PSSS-10c plus product-unit and structured-map multiplication laws |
+| PSSS-10c1 | Pointwise basic-open intersection and representation by localization at `f*g` | Rule-free source/reviewer synchronized-green through exact warnings, strict 1,987-check catalog, 96-target health, and nonduplicative integration remainder; local checkpoint `4436a23` | PSSS-10c plus product-unit and structured-map multiplication laws |
 | PSSS-10d | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | Concrete downstream consumer plus selected PSSS-09c/PSSS-08c1 scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |

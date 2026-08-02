@@ -226,8 +226,8 @@ audit are green. The strict catalog remains at 1,987 checks across 89 areas;
 synchronized health passes all 96 registered targets in 788.439 summed
 check-seconds at source snapshot
 `sha256:8491ed696767a463bb3f3aebe6ea0adfab402432bd04aae0c0efc23d00e1974e`,
-and the nonduplicative integration remainder is green. The authorized local
-checkpoint is pending.
+and the nonduplicative integration remainder is green. The tranche is
+included in local checkpoint `4436a23`.
 The living plan now distinguishes construction of sheafification from the
 MVP-feasible PSSS-05c supplied reflector capability. A site or scheme may
 carry a topology- and value-category-indexed primitive sheaf classifier,
