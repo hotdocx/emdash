@@ -7928,9 +7928,12 @@ sole `Transfd` gate. Its read-only checkpoint is
 reviewed-approved from immutable proposal checkpoint
 `57c811fd9ab992abffa6b2388aed06dec3dae19d` under the standing unattended
 delegation, with immediate human supersession. Implement only its thirteen
-numbered items. Add no kernel/runtime owner, Core/checker case, second parser,
-classifier decomposition heuristic, external coherence evidence, curry,
-browser/public preset, or scale behavior.
+numbered items plus the dedicated plan's separately reviewed exact
+D-DTTLF-USABILITY-068 public-method-inventory correction. That correction may
+touch only the existing parity-audit row and its exact method-count test; it
+adds no text behavior. Add no kernel/runtime owner, Core/checker case, second
+parser, classifier decomposition heuristic, external coherence evidence,
+curry, browser/public preset, or scale behavior.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete

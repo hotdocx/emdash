@@ -20,7 +20,8 @@ The exact `CONTEXTUAL-ND-TELESCOPE-1AL` / D-DTTLF-USABILITY-067 proposal below
 is separately reviewed-approved from immutable proposal checkpoint
 `57c811fd9ab992abffa6b2388aed06dec3dae19d` under the user's standing
 unattended delegation, with immediate human supersession. Implementation is
-dependency-ready at exactly its thirteen numbered items.
+dependency-ready at exactly its thirteen numbered items, subject to the exact
+D-DTTLF-USABILITY-068 audit-inventory file-list correction below.
 
 ## Objective
 
@@ -377,6 +378,41 @@ Explicit non-effects of D-067:
   and
 - no claim that the diagnostic all-six-pair stress is performance-graduated.
 
+## Frozen Text-Parity Inventory Correction
+
+### H-DTTLF-USABILITY-CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-01 /
+### D-DTTLF-USABILITY-068
+
+The first implementation typecheck found one exact mechanical consumer omitted
+from D-067 item 11. Adding a public `CoreCategoricalProgram` method is
+deliberately exhaustive: `categorical_text_parity_audit.ts` fails typechecking
+until every method is classified. This is not a request for text syntax.
+
+Approval authorizes exactly:
+
+1. Add `src/v3_2/categorical_text_parity_audit.ts` to the D-067 writable file
+   boundary.
+2. Add `displayedTransforDependentContextLambda` to the existing
+   `displayed-natural-abstraction-and-composition` capability row. Update only
+   that row's profile, scoped-binding, body-grammar, proposed-text, positive,
+   and negative prose as needed to distinguish implemented direct semantic
+   capability from deferred text parity. Keep its classification
+   `typed-resolver-seam` and its first implementation row
+   `SYNTAX-PARITY-1A`; add no parser/resolver behavior.
+3. Add `tests/v3_2_categorical_text_parity_audit_tests.ts` to the writable test
+   boundary and update only its exact public-method count from 83 to 84 plus
+   any assertion needed to prove the new method occurs exactly once in that
+   existing capability row. Do not change the capability-row count or
+   classification counts.
+4. Run the focused parity-audit test with the D-067 focused validation; do not
+   add a test-runner import or repeat the aggregate.
+5. Make no other production, test, parser, text revision, expected-contract,
+   browser, kernel, Core, checker, runtime, package, or public-claim change.
+
+D-067 implementation remains paused until this exact correction has a separate
+immutable review. All D-067 semantic and non-effect boundaries remain
+unchanged.
+
 ## Alternatives Assessed By The Audit
 
 The audit compared, rather than assumed, these implementation shapes:
@@ -413,7 +449,8 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | final-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` | D-065/D-066 | Single-fibre compact text exactly matches eta, identity, recursive composition, and both whiskering orientations; historical base-component text remains unchanged. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero behavior delta | final-green 1AI | Graduates only the exact single-fibre direct/text envelope and identifies canonical multi-variable context abstraction—not parser or classifier-head behavior—as the first remaining usability gap. |
 | `CONTEXTUAL-ND-TELESCOPE-0AK` | read-only complete; zero behavior delta | completed 0AJ; generic displayed context fold; single-fibre point factorer | Select one shared normal form, coherent accessors applied to one terminal slot, and contextual endpoint reuse of the existing recursive object compiler. Independent siblings, genuine dependency, and finite mixed layers require no new owner or coherence algorithm. |
-| `CONTEXTUAL-ND-TELESCOPE-1AL` | D-DTTLF-USABILITY-067 separately reviewed-approved; implementation dependency-ready | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; immutable review | Factor one reusable normal form, add one synthesis-capable direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
+| `CONTEXTUAL-ND-TELESCOPE-1AL` | D-DTTLF-USABILITY-067 separately reviewed-approved; implementation started then paused at exact D-068 file-list correction | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; immutable review | Factor one reusable normal form, add one synthesis-capable direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
+| `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | D-DTTLF-USABILITY-068 frozen pending separate review; zero semantic delta | first D-067 typecheck; exhaustive public-method inventory | Classify the new direct method in the existing semantic capability row and update the exact focused method-count assertion. Add no text behavior. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-0AK` Audit Contract
 
@@ -497,7 +534,8 @@ single-fibre factorer as sole coherence gate. Treat D-DTTLF-USABILITY-067 as
 separately reviewed-approved from immutable proposal checkpoint
 `57c811fd9ab992abffa6b2388aed06dec3dae19d` under the standing unattended
 delegation, with immediate human supersession. Implement only its thirteen
-numbered items. Preserve direct recursive binders and internal
+numbered items plus the separately reviewed exact D-068 inventory correction.
+Preserve direct recursive binders and internal
 object/arrow/higher action; add no curry, total-context section, cast,
 external coherence, parser/browser behavior, or kernel owner.
 
@@ -507,6 +545,13 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-068 inventory correction frozen.** The
+  first implementation typecheck proves that the exhaustive public-method
+  inventory and its focused count test are mechanically affected by D-067's
+  new public method. The five-item correction adds only those two files,
+  classifies the method in the existing displayed-natural semantic row, and
+  keeps parser/resolver behavior unchanged. D-067 implementation pauses until
+  a separate immutable review.
 - **2026-08-02 — D-DTTLF-USABILITY-067 separately reviewed-approved.** The
   immutable review of proposal checkpoint
   `57c811fd9ab992abffa6b2388aed06dec3dae19d` confirms that the new method
