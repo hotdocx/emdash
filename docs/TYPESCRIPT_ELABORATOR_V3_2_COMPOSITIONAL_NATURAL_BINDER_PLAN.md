@@ -473,6 +473,233 @@ single root `check:ts` only after the bounded tranche is otherwise green.
 Recent kernel/browser/print/book evidence is carried forward. No kernel CI,
 browser, print, book, or repository aggregate is authorized.
 
+## `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` Audit Result
+
+The audit selects a **shared scoped contextual engine with literal typed
+nesting and thin facade-specific result wrappers**. This is a hybrid only at
+the presentation boundary: the body is compiled once by construction from
+internal owners, while expanded and compact syntax retain their distinct
+active category heads.
+
+### Kernel result
+
+No mathematical owner is missing. The active kernel supplies both canonical
+comparisons and their runtime object projections:
+
+```text
+Transf_cat K Cat_cat E D
+  =proof-time Functord_cat E D
+
+Obj(Functord_cat E D)
+  -> Obj(Transf_cat K Cat_cat E D)
+
+Hom_cat (Transf_cat K Cat_cat E D) FF GG
+  =proof-time Transfd_cat E D FF GG
+
+Obj(Transfd_cat E D FF GG)
+  -> Obj(Hom_cat (Transf_cat K Cat_cat E D) FF GG).
+```
+
+Consequently the two introduction pairs are semantically feasible without a
+cast, curry, total-context section, or external coherence field:
+
+```text
+lambda^n k. lambda^f a. body(k,a)
+  : Transf_cat K Cat_cat E D
+
+lambda^fd a. body(a)
+  : Functord_cat E D
+
+lambda^n k. lambda^n a. body(k,a)
+  : Hom_cat (Transf_cat K Cat_cat E D) FF GG
+
+lambda^nd a. body(a)
+  : Transfd_cat E D FF GG.
+```
+
+The inner `lambda^f a` is exactly the arrow in `Cat_cat` required by the
+outer first-hom component: `Hom_cat Cat_cat E[k] D[k]` computes to
+`Functor_cat E[k] D[k]`. At the second hom, the inner `lambda^n a` is the
+fibre natural transformation between `FF[k]` and `GG[k]`; the joint outer
+compiler must retain its base action rather than accepting an arbitrary
+pointwise family.
+
+### TypeScript result
+
+Literal composition of the current public methods is not yet possible:
+
+- `CoreCategoricalCategory` carries a closed `KernelExpression`; it has no
+  scoped representation for the open fibre `E[k]`;
+- public `fibre(E,k)` deliberately rejects an open contextual token;
+- `categoricalLambda` therefore accepts only fixed ordinary categories; and
+- the first `transforLambda` deliberately rejects capture of an already-active
+  outer slot.
+
+Those are representation boundaries, not semantic counterexamples. The
+compact `displayedFunctorLambda` and `displayedTransforContextLambda` already
+create the required hidden two-token contexts and recursively recover whole
+coherent owners. The correct refactor seam is therefore their scoped
+body-factorization logic, not their final rich classifier.
+
+The selected internal architecture has three layers:
+
+1. a construction-only scoped fibre-category descriptor containing the active
+   base ordinal, base category, and displayed family;
+2. one shared recursive two-token factorer per mathematical binder level,
+   eliminating every locally nameless token before explicit Core; and
+3. thin wrappers retaining either the expanded ordinary facade or the compact
+   displayed facade.
+
+The intended convergence after both expanded levels graduate is therefore:
+
+```text
+shared scoped functorial compiler(k,a,body)
+  -> expanded wrapper : Transf_cat K Cat_cat E D
+  -> compact wrapper  : Functord_cat E D
+
+shared scoped natural-component compiler(k,a,body)
+  -> expanded wrapper : Hom_cat (Transf_cat K Cat_cat E D) FF GG
+  -> compact wrapper  : Transfd_cat E D FF GG.
+```
+
+“Reuse” means that both wrappers invoke the same internal recursive
+factorization and emit the same Core term. It does not require the compact API
+to invoke the public expanded callback method literally: the compact API must
+still hide `k`, record displayed-binder inspection evidence, and retain the
+stable displayed facade required by downstream projections. Existing compact
+factorers remain rollback evidence until same-Core, same-action parity is
+proved before delegation or replacement.
+
+The descriptor is not a `KernelExpression`, cannot be assumed as a closed
+category, cannot escape its callback, and cannot reach the generic checker.
+This avoids a placeholder free variable or frontend cast while allowing the
+typed TypeScript AST to mirror literal nested binders.
+
+### Disposable facade probe
+
+One bounded no-file TypeScript probe used the existing
+`compositional-natural-binder-1` profile. It compiled compact eta witnesses,
+then rechecked their **unchanged terms** under the expanded rich types:
+
+- compact `:^fd` as rich `transfor` at
+  `Transf_cat K Cat_cat E D`; and
+- compact `:^nd` as rich `hom` at
+  `Hom_cat (Transf_cat K Cat_cat E D) FF GG`.
+
+Both generic checks succeeded and both expanded terms were byte-for-byte the
+same explicit Core as their compact terms. The serialized inferred and
+expected types remained different presentations, as required. The existing
+second-hom compatibility additionally reported runtime category
+`not-equal`, proof-time `solved`, and runtime object classifiers `equal`.
+The probe took about seven minutes in the maximal profile and must not be
+repeated; it replaces, rather than motivates, another aggregate run.
+
+### Alternative disposition
+
+- **Literal current-method composition without scoped classifiers:** rejected;
+  it cannot represent `E[k]` and would force a fake closed expression.
+- **Only a combined convenience callback:** rejected as the final
+  architecture; it would preserve the integrated implementation rather than
+  make direct recursive binders fundamental.
+- **A fully general open-category calculus immediately:** deferred; the first
+  consumer needs only fibre categories owned by a displayed family at the
+  active natural token.
+- **Selected hybrid:** expose literal typed nesting for the qualified fibre
+  case, share the compact recursive factorer, and retain expanded/compact
+  classifier facades separately.
+
+## Frozen `COMPOSITIONAL-FD-EXPANDED-1C` Proposal
+
+Gate: `H-DTTLF-USABILITY-COMPOSITIONAL-FD-EXPANDED-01`
+
+Decision: `D-DTTLF-USABILITY-076` pending independent review
+
+### Exact typed surface
+
+Under the existing explicit continuation profile, add the qualified literal
+typed composition:
+
+```typescript
+emdash.transforLambda('k', E, D, k =>
+    emdash.lambda(
+        'a',
+        emdash.fibre(E, k),
+        emdash.fibre(D, k),
+        a => body(k, a)
+    )
+)
+```
+
+Its surface result is an ordinary `transfor` with category
+`Transf_cat K Cat_cat E D`. The existing compact call remains:
+
+```typescript
+emdash.displayedFunctorLambda('a', E, D, a => body(a))
+```
+
+with surface result `displayed-functor` at `Functord_cat E D`.
+
+Implement this by:
+
+1. overloading `fibre` for an active `CoreCategoricalSlotToken` to return one
+   construction-only scoped fibre category;
+2. routing `lambda` over two compatible scoped fibre categories to one
+   contextual functorial abstraction;
+3. allowing `transforLambda` parallel displayed-family endpoints as the exact
+   `K -> Cat_cat` outer classifier; and
+4. extracting the existing compact `:^fd` identity/eta/finite-chain/qualified-
+   weakening factorization into one shared internal helper, with separate
+   expanded `transfor` and compact `displayed-functor` wrappers.
+
+The expanded wrapper may recover the ordinary facade only after the shared
+factorer has produced a closed coherent displayed functor. It may not accept a
+point functor merely because its endpoints look like `E[k]` and `D[k]`.
+
+### Required evidence
+
+Focused tests must establish:
+
+1. expanded eta has surface type `transfor`, generic-checks, and emits exactly
+   the same Core term as compact `:^fd` eta;
+2. expanded identity and a two-step displayed-functor chain use the same
+   shared factorer and agree with their compact counterparts;
+3. applying the expanded result at a closed base object exposes the expected
+   fibre functor, whose object and arrow action agree with the compact result;
+4. the outer ordinary naturality action is observable through existing
+   `tapp1*`/generic Hom action, without an external square;
+5. callback evaluation is once, inspections are deeply frozen, and open fibre
+   descriptors/tokens cannot escape or cross program instances;
+6. mismatched families, mismatched base ordinals, a non-fibre scoped category,
+   and an arbitrary unfactored body fail closed; and
+7. existing compact `displayedFunctorLambda`, root ordinary
+   `transforLambda`, and compact `displayedTransforContextLambda` behavior is
+   unchanged.
+
+### Files, validation, and non-effects
+
+Behavior edits are limited to:
+
+- `src/v3_2/categorical_surface.ts`;
+- `src/v3_2/categorical_program.ts`;
+- one focused
+  `tests/v3_2_categorical_compositional_fd_expanded_tests.ts`;
+- `tests/main_tests.ts` only if discovery requires it; and
+- this plan and the handoff.
+
+Run the focused new test, the nearest compact `:^fd` and ordinary-natural
+tests, workspace check, typecheck, changed-file lint, and exact diff hygiene.
+Because the shared scoped frontend changes, run one root `check:ts` only after
+the bounded tranche is otherwise green, carrying forward already recorded
+unrelated digest/README failures and never repeating it for the same boundary.
+No kernel CI, browser, print, book, or repository aggregate is authorized.
+
+This slice adds no explicit Core node, generic checker branch, runtime or
+proof rule, transfer declaration, Lambdapi edit/owner, placeholder open
+`KernelExpression`, curry, cast, coercion, total-context section, external
+coherence payload, text syntax, browser behavior, or second-hom expanded
+`lambda^n k. lambda^n a` implementation. The second-hom bridge is the
+dependency-ready semantic successor if this first-hom architecture is green.
+
 ## Read-Only `COMPOSITIONAL-NATURAL-BINDER-0A` Audit
 
 This row changes no behavior. It must:
@@ -552,7 +779,9 @@ Any later implementation proposal must include at least:
 | `COMPOSITIONAL-NATURAL-BINDER-0A` | complete; read-only | final-green 1AP; user-approved architectural direction | Existing semantic ladder and rich Core are sufficient; exact gap is open ordinary-component lowering. `Pi_cat(Transf_catd)` remains distinct from `Transfd_cat`. |
 | `COMPOSITIONAL-NATURAL-BINDER-1B` | final-focused-green at `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d` | completed 0A; D-074 and D-075 | Rich `transfor` assumptions and reusable root `transforLambda` pass eta, identity, recursive composition, both whiskers, arbitrary-arrow rejection, scope/callback/immutability, closed elimination, generic checking, and compact-`:^nd` preservation. The first slice deliberately rejects an outer contextual capture. |
 | `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` | final-focused-green at `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d` | focused 1B failure; D-075; existing `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func` | Imports exactly two existing classifier-exact action signatures and uses them for pre/postwhiskering. Adds zero rules, kernel owners, Core nodes, checker branches, or external coherence fields. |
-| `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | dependency-ready read-only successor after checkpoint | completed 1B/1B2 | Compare canonical expanded `Transf_cat`/iterated-Hom presentations with compact `Functord_cat`/`Transfd_cat` for both `:^fd` and `:^nd`; select one shared contextual architecture and freeze exact body/classifier/variance non-claims before text or browser promotion. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
+| `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
+| `COMPOSITIONAL-FD-EXPANDED-1C` | exact proposal frozen; D-076 review pending | completed 0C; existing first-hom runtime bridge | Add construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))`; share the existing `:^fd` factorer and preserve exact Core while retaining the ordinary `Transf_cat` facade. |
+| `COMPOSITIONAL-ND-EXPANDED-1D` | deferred successor | green 1C | Reuse the same architecture at the second hom for expanded `lambda^n k. lambda^n a` and compact `:^nd`; do not implement before first-hom parity is proven. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
 
 ## Explicit Non-Claims
@@ -624,16 +853,18 @@ composition of reusable public `:^n` constructors. Do not assume
 
 Treat `COMPOSITIONAL-NATURAL-BINDER-1B` and its classifier-exact D-075
 correction as final-focused-green after their rollback-safe semantic
-checkpoint. Continue with read-only
-`COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C`. Compare the canonical expanded
-`Transf_cat`/iterated-Hom route with compact `Functord_cat`/`Transfd_cat` for
-both `:^fd` and `:^nd`; do not conflate that route with mixed
-`Functor_catd`/`Transf_catd`. Natural transformation bodies must be recursively
-constructed from internal owners and fail closed without them. Keep the
-existing compact factorers unchanged until exact parity supports a later
-delegation decision. Preserve object, arrow, base-arrow, and higher action;
-add no curry, cast, total-context section, external coherence, new kernel
-owner, text/browser behavior, or scale work without a separate reviewed gate.
+checkpoint. Treat read-only
+`COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` as complete: both compact Core terms
+recheck unchanged under the canonical expanded facades, and the selected
+architecture is one shared scoped contextual factorer with thin
+presentation-specific wrappers. Continue only after independent review of the
+frozen `COMPOSITIONAL-FD-EXPANDED-1C` proposal. Natural transformation bodies
+must be recursively constructed from internal owners and fail closed without
+them. Keep the existing compact factorers as rollback evidence until exact
+same-Core/action parity supports delegation. Preserve object, arrow,
+base-arrow, and higher action; add no curry, cast, total-context section,
+external coherence, new kernel owner, text/browser behavior, or scale work
+without a separate reviewed gate.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -641,6 +872,19 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — H-DTTLF-USABILITY-COMPOSITIONAL-FD-EXPANDED-01 proposal
+  frozen.** The completed 0C audit selects a construction-only scoped fibre
+  descriptor, one shared recursive `:^fd` factorer, and thin expanded/compact
+  wrappers. The exact first slice exposes literal typed
+  `lambda^n k. lambda^f a` composition and retains `Transf_cat`; it does not
+  implement the second-hom bridge or refactor compact `:^nd`.
+- **2026-08-02 — 0C expanded/compact facade probe complete.** Compact `:^fd`
+  and `:^nd` eta witnesses both generic-check unchanged under respectively the
+  ordinary `Transf_cat` and iterated-Hom rich types, with byte-identical Core.
+  Category presentations remain distinct; the existing second-hom probe stays
+  runtime non-equal, proof-time solved, and object-runtime equal. This proves
+  the final convergence can share factorization while preserving facade
+  identity and rules out a cast or new kernel owner.
 - **2026-08-02 — D-DTTLF-USABILITY-075 approved and implemented.** A separate
   immutable review at `36668e00b722ece632353f9636fb8bb083b1db5c` approves
   exactly the two existing classifier-exact action signatures. The final

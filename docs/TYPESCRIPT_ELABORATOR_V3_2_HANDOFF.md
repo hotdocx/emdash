@@ -18,19 +18,26 @@
 > exact rollback-safe semantic checkpoint is
 > `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d`.
 >
-> The next row is the read-only
-> `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` comparison. Preserve two
-> distinctions. First, explicit `lambda^n k. lambda^f a` and compact
-> `lambda^fd a` retain the proof-time-comparable `Transf_cat` and
-> `Functord_cat` facades; explicit `lambda^n k. lambda^n a` and compact
-> `lambda^nd a` similarly retain the iterated-Hom and `Transfd_cat` facades.
-> Second, those canonical covariant comparisons are not sections of the
-> mixed-variance `Functor_catd`/`Transf_catd` families. Audit both `:^fd` and
-> `:^nd` before selecting literal public-method composition, a shared scoped
-> contextual engine with thin facade-specific wrappers, or a hybrid. The
-> current public ordinary-natural bracket remains root-only, and the compact
-> factorers remain sound rollback evidence until exact object/arrow/higher
-> action parity supports a later refactor.
+> `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` is now read-only complete. A
+> bounded generic-checker probe rechecked the unchanged compact `:^fd` and
+> `:^nd` Core terms under respectively the expanded ordinary `Transf_cat` and
+> iterated-Hom types. Both checks pass with byte-identical terms while the
+> category presentations remain distinct. The selected architecture is one
+> shared scoped contextual factorer with thin expanded/compact wrappers; the
+> compact wrapper need not literally invoke the public expanded callback API,
+> but it should ultimately reuse the same body compiler and Core result.
+>
+> The exact next proposal is `COMPOSITIONAL-FD-EXPANDED-1C`, pending
+> D-DTTLF-USABILITY-076 review. It adds a construction-only open-fibre
+> descriptor and literal typed
+> `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))`, reusing the existing
+> compact `:^fd` identity/eta/chain/qualified-weakening factorer and retaining
+> the ordinary `Transf_cat` facade. It adds no Core/kernel owner, cast, curry,
+> external coherence, text/browser behavior, or second-hom implementation.
+> Expanded `lambda^n k. lambda^n a` is the immediate separately reviewed
+> successor after first-hom same-Core/action parity. Keep both canonical
+> covariant comparisons distinct from mixed-variance
+> `Functor_catd`/`Transf_catd` sections.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
