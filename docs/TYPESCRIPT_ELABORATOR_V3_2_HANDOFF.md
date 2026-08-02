@@ -188,7 +188,14 @@
 > D-DTTLF-USABILITY-072 count correction. It is separately reviewed-approved
 > from immutable proposal checkpoint
 > `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091` under the standing unattended
-> delegation, with immediate human supersession; browser interaction resumes.
+> delegation, with immediate human supersession. Browser interaction, the
+> rebuilt fixture, and console checks pass. The sole required root aggregate
+> then completes after 52.2 minutes and reports only the already-authorized
+> browser source-contract assertion for the removed literal eleven. Exact
+> search finds the standalone fixture README still says eleven editable
+> presets. The dedicated plan freezes D-DTTLF-USABILITY-073 for exactly those
+> two expectations and that one additional Markdown file; implementation
+> pauses pending separate review and the aggregate must not be repeated.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

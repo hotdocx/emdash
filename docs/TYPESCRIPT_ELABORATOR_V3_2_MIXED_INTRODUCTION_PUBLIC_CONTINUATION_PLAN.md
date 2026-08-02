@@ -7974,6 +7974,13 @@ all twelve options render; the dedicated plan freezes D-DTTLF-USABILITY-072
 for one same-file derived count. It is separately reviewed-approved from
 immutable proposal checkpoint `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091`
 under the standing unattended delegation, with immediate human supersession.
+The rebuilt fixture and real-browser smoke are green. The sole required root
+aggregate completes after 52.2 minutes and reports only the browser source-
+contract assertion for the literal eleven removed by D-072. Exact search also
+finds `emdash-template/README.md` still says eleven editable presets. The
+dedicated plan freezes D-DTTLF-USABILITY-073 for only those two expectations
+and that one additional Markdown file; implementation pauses pending separate
+review, and the aggregate must not be repeated.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7992,6 +7999,12 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-073 reviewer-contract correction frozen.** The sole D-070
+  aggregate completes all execution after 52.2 minutes and reports only one
+  stale literal-eleven source assertion. Exact search finds the matching
+  standalone fixture-README inventory drift. The dedicated correction permits
+  only those two expectation updates plus that one Markdown file and forbids
+  an aggregate rerun.
 - **2026-08-02 — D-072 separately reviewed-approved.** The immutable review
   of proposal checkpoint `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091`
   approves only the derived reviewer count in the already authorized UI file.
