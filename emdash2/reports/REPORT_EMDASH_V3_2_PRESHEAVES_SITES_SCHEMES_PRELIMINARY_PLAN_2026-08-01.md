@@ -93,10 +93,11 @@ localization for every supplied idempotent `e^2=e`: the target is the
 computing subtype `eR={x | e*x=x}` and the structure map is `x |-> e*x`.
 Focused and maintained source/reviewer/central checks, exact warning
 comparison, strict audit, the fresh 1,959-check catalog, synchronized
-82-target health, and full integration CI are green; the local checkpoint is
-pending. A product-ring construction with the closed idempotent `(1,0)`, its
-affine-basic-open restriction consumer, and the matching/descent connection
-remain open, so the genuinely nondegenerate gate is not yet claimed closed.
+82-target health, and full integration CI are green, and the tranche is
+locally checkpointed at `1211e06`. A product-ring construction with the closed
+idempotent `(1,0)`, its affine-basic-open restriction consumer, and the
+matching/descent connection remain open, so the genuinely nondegenerate gate
+is not yet claimed closed.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -3029,8 +3030,8 @@ Status: focused and maintained source/reviewer/central checks, exact warning
 comparison, strict audit, the fresh 1,959-check catalog, and synchronized
 82-target health are green. Full integration CI independently passes all 82
 Lambdapi targets in 591.033 summed check-seconds, followed by the complete
-repository integration tail. The local checkpoint is pending in this living
-entry.
+repository integration tail. The implementation and synchronized authority
+prose are locally checkpointed at `1211e06`.
 
 The first explicit potentially nondegenerate localization representation is
 selected at an idempotent rather than by prematurely introducing fractions or
@@ -4125,7 +4126,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
 | PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; zero-localization/empty-open tranche checkpointed at `7013915`; rule-free whole algebraic overlap equivalence green through the fresh 1,953-check catalog, 80-target health, and full CI and checkpointed at `362922d`; concrete nondegenerate model and matching/descent connection remain open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
-| PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; checkpoint pending; product-ring `(1,0)` instance and affine restriction consumer remain required before calling the model genuinely nondegenerate | PSSS-07a localization API, zero-localization algebra lemmas, then product-ring consumer |
+| PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; locally checkpointed at `1211e06`; product-ring `(1,0)` instance and affine restriction consumer remain required before calling the model genuinely nondegenerate | PSSS-07a localization API, zero-localization algebra lemmas, then product-ring consumer |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

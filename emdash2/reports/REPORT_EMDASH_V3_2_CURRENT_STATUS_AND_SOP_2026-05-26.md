@@ -2367,12 +2367,12 @@ Full integration CI independently passes all 82 Lambdapi targets in 591.033
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, the strict kernel audit, and fresh strict catalog
-verification. The local checkpoint remains pending at this entry. The
-representation can be genuinely nondegenerate for a nontrivial idempotent,
-but this tranche does not itself construct one. A product ring with the
-witnessed idempotent `(1,0)` and its affine-basic-open restriction consumer
-remain the next bounded gate; general fraction models, matching/sheaf
-descent, `Spec`, and schemes remain downstream.
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `1211e06`. The representation can be genuinely nondegenerate
+for a nontrivial idempotent, but this tranche does not itself construct one. A
+product ring with the witnessed idempotent `(1,0)` and its affine-basic-open
+restriction consumer remain the next bounded gate; general fraction models,
+matching/sheaf descent, `Spec`, and schemes remain downstream.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
