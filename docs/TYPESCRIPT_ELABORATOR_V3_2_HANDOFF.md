@@ -33,12 +33,20 @@
 > semantic-comparison, and non-collapse matrix. Its final late probe is
 > strict-LHS clean and reports 1,097/159 warnings (`+18/+0`), while the large
 > literal opposite/positive `Unit_prof` expression remains proof-time rather
-> than the runtime normal form. The next dependency-ready operation is the
-> exact kernel-only `HOM-CATD-ACTION-NORMAL-FORM-1AD` proposal under
+> than the runtime normal form. The exact kernel-only
+> `HOM-CATD-ACTION-NORMAL-FORM-1AD` proposal under
 > H-DTTLF-USABILITY-HOM-CATD-ACTION-NORMAL-FORM-01 /
 > D-DTTLF-USABILITY-062. It is separately reviewed-approved from immutable
 > proposal checkpoint `68367439e4f4167c46f177ecc3d2dc8740cbe69c` under the
-> standing unattended delegation and is implementation dependency-ready.
+> standing unattended delegation and is now being implemented. Its three
+> owners, eleven runtime rules, prerequisites, and all non-semantic focused
+> assertions typecheck. The originally frozen literal-`Unit_prof`
+> unification pattern normalizes before proof-rule matching; its exact
+> kernel-produced normal form retains existing `tapp0_fapp0`,
+> `tapp1_fapp0`, and `fdapp1_int_cell` ownership and passes a real proof-time
+> composition witness without changing the measured 1,097/159 warning
+> inventory. D-DTTLF-USABILITY-063 freezes the exact replace-one-rule,
+> replace-one-test correction; it adds no owner, rule, or scope.
 > TypeScript transfer follows only through a separate read-only boundary
 > audit. `Transf_catd_func`, curry, external coherence, and binder special
 > cases remain deferred.

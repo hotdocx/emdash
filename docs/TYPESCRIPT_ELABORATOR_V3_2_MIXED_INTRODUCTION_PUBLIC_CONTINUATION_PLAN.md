@@ -514,7 +514,7 @@ It deliberately avoids:
 | `CONTEXTUAL-ND-HORIZONTAL-IDENTITY-NORMALIZATION-FOUNDATION-1ZC` | implemented and final-green at `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c` under D-DTTLF-USABILITY-061 | final-green D-059/D-060; immutable proposal `46eadbfaa919237076a25d3f84ffe54f59ef3a25`; exact point/full/capped runtime witnesses | The transfer preserves Lambdapi's inferred endpoint slots, leaves inferred transparent-pair category slots wildcarded, and acquires exactly three pre-existing generic identity-action rules. `fibred-transfd-1` is eight declarations/seventeen local rules. No kernel mathematics, declaration, owner, Core/checker case, or wider `:^nd` behavior was added. |
 | `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` | read-only audit complete; zero semantic delta; generic `Hom_catd` action-normal-form successor selected | final-green D-058 through D-061; existing fixed `Transf_catd` family; contextual fixed-target probe; recursive-mixed object/base/higher evidence; three bounded owner-position probes | A literal fixed `Transf_catd` target already composes parametrically with contextual `lambda^nd`: the result is definitionally the source `Transfd`, and its higher cell uses the existing internal owner. The family is a genuine `Catd`, but active `Hom_catd`/`Transf_catd` expose only fibre computation, so their specific base action remains opaque. A late `Unit_prof`-based generic `Hom_catd` composite typechecks and `Transf_catd` needs only specialization, not `Transf_catd_func`; however, the first runtime orientation adds twenty critical-pair diagnostics and does not join with identity. Select normal-form qualification before promotion. |
 | `HOM-CATD-ACTION-NORMAL-FORM-0AC` | read-only architecture/owner audit complete; zero active semantic delta; rigid full/capped/point ladder selected | completed `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB`; successful late `Unit_prof` semantic composite; bounded two-head and three-head owner-position probes | The semantic composite remains the correct mathematical comparison but is rejected as the runtime normal form. A two-head full/capped variant fails point-composition conversion. A three-head rigid ladder typechecks after `Unit_prof`, preserves iterable full/capped functors, closes capped and consumed-point identity/composition, joins both existing specialization folds, and keeps the large literal opposite/positive `Unit_prof` factorization proof-time. The final probe is strict-LHS clean and reports 1,097/159 warnings (`+18/+0`), two fewer unjoinable diagnostics than the rejected semantic orientation. |
-| `HOM-CATD-ACTION-NORMAL-FORM-1AD` | separately reviewed-approved under D-DTTLF-USABILITY-062; implementation dependency-ready | completed `HOM-CATD-ACTION-NORMAL-FORM-0AC`; immutable proposal checkpoint `68367439e4f4167c46f177ecc3d2dc8740cbe69c`; separate review under standing unattended delegation | Add exactly three generic `Hom_catd` action heads, eleven runtime rules, and one proof-time semantic comparison at the late `Unit_prof` owner position. Preserve `Transf_catd` as specialization and `Functor_catd` as the constant-Cat fold. Add focused kernel assertions and synchronized kernel reports only. Do not alter TypeScript, parser/browser behavior, curry, or introduce `Transf_catd_func`. |
+| `HOM-CATD-ACTION-NORMAL-FORM-1AD` | implementation in progress under D-DTTLF-USABILITY-062; exact proof-rule test exposed D-DTTLF-USABILITY-063 normalization correction | completed `HOM-CATD-ACTION-NORMAL-FORM-0AC`; immutable proposal checkpoint `68367439e4f4167c46f177ecc3d2dc8740cbe69c`; separate D-062 review; bounded exact-normal-form probes | Three generic `Hom_catd` action heads and eleven runtime rules typecheck with every prerequisite. The literal `Unit_prof` comparison is mathematically typed but normalizes before proof-rule matching; its exact internal normal form uses existing `tapp0_fapp0`, `tapp1_fapp0`, and `fdapp1_int_cell` owners and passes an actual proof-time composition witness at the same 1,097/159 warning inventory. D-063 replaces, rather than adds to, the one approved proof rule and changes no owner/rule count or scope. |
 | `HOM-CATD-ACTION-TRANSFER-0AE` | deferred read-only transfer-boundary audit; dependency on final-green D-DTTLF-USABILITY-062 | future active three-head kernel normal form; current mixed-mode transfer; absent active `Unit_prof`/rigid-Hom semantic closure | After the kernel gate, audit the smallest TypeScript transfer closure separately. In particular, do not silently import the unrelated profunctor scale profile merely to reproduce the proof-time semantic bridge. Distinguish opaque stable action heads and runtime joins from the optional deeper `Unit_prof` evaluator, require one concrete contextual consumer, and freeze at most one transfer proposal. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
@@ -7012,6 +7012,54 @@ direct-semantic runtime variants. Under the user's standing unattended-
 approval delegation, H-DTTLF-USABILITY-HOM-CATD-ACTION-NORMAL-FORM-01 /
 D-DTTLF-USABILITY-062 is approved exactly as proposed, with immediate human
 supersession. No TypeScript transfer is approved by this decision.
+
+## D-DTTLF-USABILITY-063 normalization correction proposal
+
+Implementation of D-DTTLF-USABILITY-062 confirms the three-head runtime
+ladder but exposes one precise proof-rule presentation error in the frozen
+proposal. The literal opposite/positive `Unit_prof` composite is well typed
+at the rigid point's result. It is not, however, a stable unification-rule
+pattern: Lambdapi reduces its `fapp1_fapp0`/`fapp0` spine before matching the
+proof rule. A judgmental `assert lhs ≡ rhs` also cannot test a proof-time
+rule by design. The first guessed direct `Hom_fapp0` spelling is not an
+acceptable replacement because it erases the opposite-fibre distinction and
+is not independently typable.
+
+Normalizing the already-typechecked literal composite produces the exact
+internal form. It retains the transported fibre action, obtains the negative
+and positive section endpoints through existing `tapp0_fapp0` and
+`tapp1_fapp0`, and obtains both section arrows through existing
+`fdapp1_int_cell`. Thus both object and arrow behavior remain internal to the
+active kernel; no external naturality equation or new coherence owner is
+introduced. A bounded full-file probe with this exact normal form makes a
+composition of the semantic-side and rigid-side identity arrows typecheck,
+which exercises the proof-time rule rather than judgmental conversion. The
+same probe remains warning-green at 1,097 unjoinable and 159 replaceable-
+pattern diagnostics.
+
+Approve this exact no-scope-expansion correction:
+
+1. Replace, rather than supplement, D-062's single proof-time rule. Keep the
+   rigid `Hom_catd_fapp1_fapp0_point` left side, but use the exact normalized
+   internal `Hom_fapp0` right side generated from the reviewed `Unit_prof`
+   composite. Its endpoint and section-action arguments must retain the
+   existing `tapp0_fapp0`, `tapp1_fapp0`, and `fdapp1_int_cell` owners.
+2. Replace the invalid judgmental semantic-equality assertion with one typed
+   composition witness: compose an identity at the inline literal
+   `Unit_prof` semantic term with an identity at the rigid point. The
+   composition's inferred middle object must be discharged by the one
+   proof-time rule. Retain the other D-062 projection, identity, composition,
+   specialization, and non-collapse assertions unchanged.
+3. Preserve exactly three new owners, eleven runtime rules, and one
+   proof-time rule. Add no semantic facade, second comparison, cast,
+   `Transf_catd_func`, TypeScript transfer, parser/browser behavior, curry,
+   external equation, or wider `:^nd` case.
+4. Preserve D-062's proportional validation and checkpoint policy. In
+   particular, do not repeat `check:ts` or `check:all`.
+
+This correction changes the operational spelling of the already-approved
+semantic comparison, not its mathematics or public normal form. It is
+rollback-safe and immediately supersedable by the user.
 
 ## Validation And Checkpoint Policy
 
