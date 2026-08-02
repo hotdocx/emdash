@@ -41,9 +41,11 @@
 > standing unattended delegation. D-DTTLF-USABILITY-063's exact
 > replace-one-rule correction is separately reviewed-approved from immutable
 > checkpoint `11e38021d09a7663e044cdf169b85e1162614f6a`. The combined slice
-> is implemented and final-green: exactly three action owners, eleven runtime
-> joins, one proof-time comparison, and twelve focused assertions pass the
-> active kernel and 41-target CI. The proof rule retains the kernel-produced
+> is implemented and final-green at
+> `0d6c892d36b4826942a9e253c2e1b6be81b921e9`: exactly three action owners,
+> eleven runtime joins, one proof-time comparison, and twelve focused
+> assertions pass the active kernel and 41-target CI. The proof rule retains
+> the kernel-produced
 > `tapp0_fapp0`, `tapp1_fapp0`, and `fdapp1_int_cell` normal form, and both its
 > active composition consumer and independent typed-`eq_refl` probe pass.
 > Warning and strict-LHS inventories are the qualified 1,097/159 and 0/53/33;

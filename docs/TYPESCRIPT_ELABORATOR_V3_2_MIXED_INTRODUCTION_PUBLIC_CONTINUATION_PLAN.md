@@ -514,7 +514,7 @@ It deliberately avoids:
 | `CONTEXTUAL-ND-HORIZONTAL-IDENTITY-NORMALIZATION-FOUNDATION-1ZC` | implemented and final-green at `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c` under D-DTTLF-USABILITY-061 | final-green D-059/D-060; immutable proposal `46eadbfaa919237076a25d3f84ffe54f59ef3a25`; exact point/full/capped runtime witnesses | The transfer preserves Lambdapi's inferred endpoint slots, leaves inferred transparent-pair category slots wildcarded, and acquires exactly three pre-existing generic identity-action rules. `fibred-transfd-1` is eight declarations/seventeen local rules. No kernel mathematics, declaration, owner, Core/checker case, or wider `:^nd` behavior was added. |
 | `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` | read-only audit complete; zero semantic delta; generic `Hom_catd` action-normal-form successor selected | final-green D-058 through D-061; existing fixed `Transf_catd` family; contextual fixed-target probe; recursive-mixed object/base/higher evidence; three bounded owner-position probes | A literal fixed `Transf_catd` target already composes parametrically with contextual `lambda^nd`: the result is definitionally the source `Transfd`, and its higher cell uses the existing internal owner. The family is a genuine `Catd`, but active `Hom_catd`/`Transf_catd` expose only fibre computation, so their specific base action remains opaque. A late `Unit_prof`-based generic `Hom_catd` composite typechecks and `Transf_catd` needs only specialization, not `Transf_catd_func`; however, the first runtime orientation adds twenty critical-pair diagnostics and does not join with identity. Select normal-form qualification before promotion. |
 | `HOM-CATD-ACTION-NORMAL-FORM-0AC` | read-only architecture/owner audit complete; zero active semantic delta; rigid full/capped/point ladder selected | completed `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB`; successful late `Unit_prof` semantic composite; bounded two-head and three-head owner-position probes | The semantic composite remains the correct mathematical comparison but is rejected as the runtime normal form. A two-head full/capped variant fails point-composition conversion. A three-head rigid ladder typechecks after `Unit_prof`, preserves iterable full/capped functors, closes capped and consumed-point identity/composition, joins both existing specialization folds, and keeps the large literal opposite/positive `Unit_prof` factorization proof-time. The final probe is strict-LHS clean and reports 1,097/159 warnings (`+18/+0`), two fewer unjoinable diagnostics than the rejected semantic orientation. |
-| `HOM-CATD-ACTION-NORMAL-FORM-1AD` | implemented and final-green under D-DTTLF-USABILITY-062 plus approved D-DTTLF-USABILITY-063; semantic checkpoint pending hash synchronization | completed `HOM-CATD-ACTION-NORMAL-FORM-0AC`; immutable D-062 proposal `68367439e4f4167c46f177ecc3d2dc8740cbe69c`; immutable D-063 correction `11e38021d09a7663e044cdf169b85e1162614f6a`; exact-normal-form and typed-unification probes | Active Lambdapi now owns exactly three generic `Hom_catd` action heads, eleven runtime joins, and one proof-time comparison using the exact internally generated `tapp0_fapp0`/`tapp1_fapp0`/`fdapp1_int_cell` normal form. Twelve focused assertions cover projection, identity, composition, both specialization folds, actual proof-time use, and non-collapse. `make check`, 1,097/159 warning inventory, strict LHS 0/53/33, synchronized catalog/health, and the 41-target kernel CI pass. No TypeScript or public behavior changed. |
+| `HOM-CATD-ACTION-NORMAL-FORM-1AD` | implemented and final-green at `0d6c892d36b4826942a9e253c2e1b6be81b921e9` under D-DTTLF-USABILITY-062 plus approved D-DTTLF-USABILITY-063 | completed `HOM-CATD-ACTION-NORMAL-FORM-0AC`; immutable D-062 proposal `68367439e4f4167c46f177ecc3d2dc8740cbe69c`; immutable D-063 correction `11e38021d09a7663e044cdf169b85e1162614f6a`; exact-normal-form and typed-unification probes | Active Lambdapi now owns exactly three generic `Hom_catd` action heads, eleven runtime joins, and one proof-time comparison using the exact internally generated `tapp0_fapp0`/`tapp1_fapp0`/`fdapp1_int_cell` normal form. Twelve focused assertions cover projection, identity, composition, both specialization folds, actual proof-time use, and non-collapse. `make check`, 1,097/159 warning inventory, strict LHS 0/53/33, synchronized catalog/health, and the 41-target kernel CI pass. No TypeScript or public behavior changed. |
 | `HOM-CATD-ACTION-TRANSFER-0AE` | next dependency-ready read-only transfer-boundary audit | final-green D-DTTLF-USABILITY-062/063 kernel normal form; current mixed-mode transfer; absent active rigid-Hom transfer closure | Audit the smallest TypeScript transfer closure separately. In particular, do not silently import the unrelated profunctor scale profile merely to reproduce the proof-time semantic bridge. Distinguish opaque stable action heads and runtime joins from the optional deeper semantic evaluator, require one concrete contextual consumer, and freeze at most one transfer proposal. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
@@ -7071,8 +7071,9 @@ exactly as proposed, with immediate human supersession.
 
 ## D-DTTLF-USABILITY-062/063 implementation result
 
-`HOM-CATD-ACTION-NORMAL-FORM-1AD` is implemented and final-green. The active
-kernel adds exactly the qualified three-stage ladder:
+`HOM-CATD-ACTION-NORMAL-FORM-1AD` is implemented and final-green at
+`0d6c892d36b4826942a9e253c2e1b6be81b921e9`. The active kernel adds exactly
+the qualified three-stage ladder:
 
 ```text
 Hom_catd_fapp1_func
@@ -7584,10 +7585,11 @@ D-DTTLF-USABILITY-062 proposal at
 under the standing unattended delegation, with immediate human supersession.
 Also treat D-DTTLF-USABILITY-063's exact normalization correction at
 `11e38021d09a7663e044cdf169b85e1162614f6a` as separately reviewed-approved.
-The combined implementation is final-green: three late owners, eleven
-runtime rules, one exact internal proof-time comparison, twelve focused
-assertions, 1,097/159 warnings, strict LHS 0/53/33, synchronized catalog and
-health, and one complete 41-target kernel CI. Add no TypeScript transfer,
+The combined implementation is final-green at
+`0d6c892d36b4826942a9e253c2e1b6be81b921e9`: three late owners, eleven runtime
+rules, one exact internal proof-time comparison, twelve focused assertions,
+1,097/159 warnings, strict LHS 0/53/33, synchronized catalog and health, and
+one complete 41-target kernel CI. Add no TypeScript transfer,
 parser/browser behavior, `Transf_catd_func`, curry, external equation, or
 broader claim. Route next only to the read-only
 `HOM-CATD-ACTION-TRANSFER-0AE` audit; do not silently import the deferred
@@ -7615,9 +7617,10 @@ removal, or unrelated cleanup is authorized.
   ladder, eleven runtime joins, and one exact internal proof-time semantic
   comparison. Twelve focused checks, active `make check`, warning inventory
   1,097/159, strict LHS 0/53/33, synchronized catalog/health, and the complete
-  41-target kernel CI pass. No TypeScript or public behavior changed. The
-  bounded semantic checkpoint hash remains to be synchronized; the sole next
-  operation is the read-only `HOM-CATD-ACTION-TRANSFER-0AE` audit.
+  41-target kernel CI pass at semantic checkpoint
+  `0d6c892d36b4826942a9e253c2e1b6be81b921e9`. No TypeScript or public
+  behavior changed. The sole next operation is the read-only
+  `HOM-CATD-ACTION-TRANSFER-0AE` audit.
 - **2026-08-02 — D-DTTLF-USABILITY-063 approved exactly as proposed.** A
   separate review of immutable correction checkpoint
   `11e38021d09a7663e044cdf169b85e1162614f6a` confirms the replace-one-rule,
