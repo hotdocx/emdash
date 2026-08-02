@@ -350,8 +350,14 @@
 > `Pi_cat(Transf_catd ...)` section remains pointwise data. The exact
 > `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` /
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 /
-> D-DTTLF-USABILITY-057 proposal is frozen in the living plan with decision
-> pending. It adds no behavior until separately reviewed.
+> D-DTTLF-USABILITY-057 proposal at
+> `a16514c00c3e7d4c16f86c5d91fbd59f202b4a0d` is separately
+> reviewed-approved under the standing unattended delegation, with immediate
+> human supersession. Its exact dependency-correct identity transfer,
+> construction-only `identityCell(endpoint)`, shared finite endpoint
+> factorization, evidence, and focused tests are now implementation-ready.
+> Whiskering/action, arbitrary pointwise coherence, parser/browser work, new
+> kernel mathematics, and unrestricted `:^nd` remain outside D-057.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
