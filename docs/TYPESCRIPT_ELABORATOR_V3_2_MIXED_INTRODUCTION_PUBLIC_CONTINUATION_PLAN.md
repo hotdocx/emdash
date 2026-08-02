@@ -7946,10 +7946,16 @@ only its twelve numbered items. Its implementation is final-green at
 typed canonical-telescope method and preserves direct/text equality, the
 existing body algebra, deep layer presentation, annotations, and fail-closed
 behavior. Run the dedicated plan's read-only
-`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` audit next. Add no
-kernel/runtime owner, Core/checker case, second parser, classifier
-decomposition heuristic, external coherence evidence, curry, browser/public
-preset, or scale behavior without a separately frozen proposal.
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` audit as complete. It
+measures the current mixed-profile public route at 148.31 seconds cold versus
+27.83 seconds for the existing chain-2A closure, and freezes exactly
+`CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` / D-DTTLF-USABILITY-070 pending
+separate review. That proposal decouples only this transformation-telescope
+capability, reuses chain-2A unchanged, and then adds one reviewer preset and a
+truthful README boundary. Add no kernel/runtime owner, Core/checker case,
+second parser, classifier decomposition heuristic, external coherence
+evidence, curry, broader browser/public behavior, or scale behavior outside
+that proposal.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7968,6 +7974,15 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — 0AO product audit selects a chain-2A reviewer route.** The
+  grouped contextual `:^nd` term is semantically ready for public review, but
+  the current method's mixed-profile guard imposes a measured 148.31-second
+  cold path. Its emitted construction uses only the existing chain-2A/transfd
+  closure, whose cold constructor measures 27.83 seconds. The dedicated plan
+  freezes D-070 pending separate review: one capability decoupling, no new
+  runtime or mixed classifier, one genuine-dependent browser preset, and a
+  corrected README boundary. Bulk scale and publication remain outside that
+  proposal.
 - **2026-08-02 — Contextual grouped `:^nd` text parity final-green; 0AO
   selected.** D-069 is implemented at
   `ba488f5a542bf5dce8fe78162a75663c313dcb26`. One source-group-only expected

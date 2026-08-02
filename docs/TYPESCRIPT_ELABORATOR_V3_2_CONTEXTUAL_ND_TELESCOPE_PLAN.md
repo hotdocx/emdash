@@ -35,8 +35,9 @@ checkpoint `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` under the standing unatten
 delegation, with immediate human supersession. Its implementation is
 final-green at rollback-safe semantic checkpoint
 `ba488f5a542bf5dce8fe78162a75663c313dcb26`.
-`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` is the next
-dependency-ready read-only row.
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` is read-only complete. It
+selects the exact `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` /
+D-DTTLF-USABILITY-070 proposal below, pending separate review.
 
 ## Objective
 
@@ -467,7 +468,8 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | final-green; implementation folded into 1AL | first D-067 typecheck; exhaustive public-method inventory | The new method occurs exactly once in the existing displayed-natural capability row; the inventory is 84 methods in 14 unchanged rows and adds no text behavior. |
 | `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` | read-only complete; zero behavior delta | final-green 1AL; prior alternating Hom/Transf and mixed-target evidence | The finite canonical semantic envelope is coherent and classifier-head-agnostic. Grouped text grammar already exists; the missing seam is one expected-contract/resolver route, not a mixed-variance construction. |
 | `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | final-green at `ba488f5a542bf5dce8fe78162a75663c313dcb26` | completed 0AM; final-green typed method; D-069 proposal `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2`; immutable review | One grouped displayed-transformation expected contract now routes comma/semicolon `^nd` syntax to the existing typed API. Independent and dependent direct/text equality, the full body algebra, four canonical layers, optional annotations, frozen evidence, and the fail-closed matrix are focused-green without a second parser or semantic factorer. |
-| `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` | dependency-ready; read-only | final-green 1AN plus public reviewer and syntax-parity plans | Freeze the exact end-user envelope now implemented and select at most one next product slice from truthful reviewer/browser promotion or one executable remaining semantic counterexample. Do not resume bulk scale by default. |
+| `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` | read-only complete; zero behavior delta | final-green 1AN plus public reviewer and syntax-parity plans | The semantic/text envelope graduates. A cold reviewer-shaped probe succeeds but measures 148.31 seconds on the unnecessarily broad mixed profile versus 27.83 seconds for the existing chain-2A closure, selecting profile decoupling before public promotion. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | frozen pending separate review | completed 0AO | Decouple contextual `:^nd` telescope availability from mixed-classifier capability while reusing the exact chain-2A runtime, then add one genuine-dependent reviewer preset and truthful README boundary. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
 
@@ -700,6 +702,141 @@ Lambdapi behavior, tests, browser assets, README/book prose, packages, runners,
 deployment, or publication. It must not rerun the long aggregate, the full
 telescope corpus, kernel CI, browser build, print, or book gates.
 
+## `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` Result
+
+The final-green semantic/text envelope graduates. Direct TypeScript and text
+share one checked typed method for arbitrary finite canonical sibling/Sigma
+layers, with eta, identity, recursive vertical composition, fixed-head pre-
+and postwhiskering, and internal point/base-arrow/higher action. This remains
+strictly narrower than arbitrary dependency DAGs, exchange across dependency,
+unrestricted variance, or unrestricted point-arrow synthesis.
+
+The current reviewer has generic preset plumbing, one displayed-dependent
+`^fd` telescope, and one compact `^nd` transformation preset. Its only missing
+semantic witness is a grouped genuine-dependent `^nd` preset. A minimal
+reviewer-shaped probe of
+
+```text
+λ^nd (a : A; b : B). eta (fibrePair a b)
+```
+
+succeeds as one whole `displayed-transfor` with exact layers `[['a'], ['b']]`.
+It exposes a product concern rather than a mathematical gap: the current
+program method unnecessarily calls the mixed-mode profile guard. Cold
+measurements on this host were:
+
+| Profile/probe | Wall time | Peak RSS |
+| --- | ---: | ---: |
+| full `fibred-displayed-mixed-nest-1` witness | 148.31 s | 883,640 KiB |
+| existing `fibred-displayed-nd-higher-1` constructor | 47.16 s | 787,744 KiB |
+| existing `fibred-displayed-chain-2a` constructor | 27.83 s | 748,112 KiB |
+| TypeScript module import without a program | 11.54 s | 675,796 KiB |
+
+Source inspection explains the delta. The contextual transformation method
+uses the shared canonical-context normal form and the already-enabled
+displayed-transformation factorer. Its emitted product/Sigma/pullback and
+horizontal-action owners are inherited by chain-2A through the existing
+transfd closure. It does not call the mixed classifier reifier or construct
+`Op_catd`, `Hom_catd`, or `Transf_catd`. The broad mixed profile is therefore
+a capability coupling, not a semantic prerequisite.
+
+The selected correction gives this one transformation-telescope method its
+own builder capability flag, enabled from the existing chain-2A lineage. It
+does not enable the generic displayed-functor telescope on chain-2A and does
+not expose any mixed-classifier constructor there. The reviewer can then use
+the same cached runtime already owned by its displayed mixed-telescope preset.
+This is both the smallest truthful public route and a cleaner architectural
+boundary; no new runtime fragment, owner, rule, Core node, or checker case is
+needed.
+
+## Frozen `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` Proposal
+
+### H-DTTLF-USABILITY-CONTEXTUAL-ND-TELESCOPE-REVIEWER-01 /
+### D-DTTLF-USABILITY-070
+
+Approval authorizes exactly:
+
+1. Add one private scoped-builder capability named
+   `displayedTransforGenericTelescope`. Use it only as the availability guard
+   of `displayedTransforDependentContextLambda`; retain the independent
+   `displayedGenericTelescope` guard for displayed-functor telescopes.
+2. Enable that capability for the existing `fibred-displayed-chain-2a`
+   lineage and its descendants. At the public program seam, require chain-2A
+   rather than mixed mode for this one method. Do not enable mixed classifier
+   reification, `Op_catd`, `Hom_catd`, `Transf_catd`, mixed nested
+   factorization, or direct mixed introduction in the chain-2A profile.
+3. Reuse `compileCoreCategoricalDisplayedChain2aClosureRuntime()` unchanged.
+   Add no profile, transfer module, declaration, runtime rule, checker case,
+   Core node, or kernel edit. The emitted term must remain exactly the same as
+   the final-green mixed-profile term.
+4. Update the existing generic telescope corpus to prove the same grouped
+   `^nd` direct/text witness under chain-2A, preserve arbitrary finite
+   canonical depth under the mixed descendant, and move the predecessor
+   failure to an actual pre-chain-2A profile. Update only truthful capability-
+   profile prose; keep the 84-method, fourteen-row, and classification totals.
+5. Add one browser reviewer preset ID
+   `displayed-dependent-transformation`, labelled "Dependent natural
+   telescope", with source
+   `λ^nd (a : A; b : B). eta (fibrePair a b)` and an expected-mode variant
+   that records intrinsic `nd` plus levels `A; B`.
+6. Build that preset from `fibred-displayed-chain-2a`: `A : Catd K`,
+   `B : Catd (Sigma_cat A)`, the existing lifted-`A`/`B` fibrewise product,
+   two displayed-functor endpoints, and one displayed transformation. Its text
+   expectation supplies only `[[A], [B]]`.
+7. Extend the existing browser-reviewer direct oracle with the same direct
+   contextual method. Require exact explicit Core, inferred/expected type,
+   prerequisites, immutable result, and source-located rejection parity.
+8. Advance `CORE_BROWSER_REVIEWER_REVISION` once, update the preset inventory
+   from eleven to twelve, and replace the obsolete deferred claim about
+   remaining canonical displayed contexts with the narrower actual boundary.
+   The generic UI already renders presets and must not gain another parser,
+   checker, worker, or semantic route.
+9. Update `README.md` so the public description states that arbitrary finite
+   depth is supported only in the canonical sibling/Sigma normal form and
+   names the genuine-dependent displayed-natural browser witness. Retain the
+   explicit arbitrary-DAG, exchange, variance, coherence, and whole-transfer
+   non-claims.
+10. Edit only:
+
+    - `src/v3_2/categorical_surface.ts`;
+    - `src/v3_2/categorical_program.ts`;
+    - `src/v3_2/categorical_text_parity_audit.ts`;
+    - `src/v3_2/browser_reviewer.ts`;
+    - `tests/v3_2_categorical_displayed_telescope_generic_tests.ts`;
+    - `tests/v3_2_browser_reviewer_tests.ts`;
+    - `README.md`;
+    - this plan, the handoff, and the mixed-continuation ledger; and
+    - one immutable D-070 review artifact before implementation.
+
+    Any additional production or test file requires a frozen correction.
+11. Validate with typecheck, lint, whitespace hygiene, one name-filtered
+    chain-2A contextual-text test, one name-filtered new reviewer-preset test,
+    the reviewer production build, and one real-browser smoke of the new
+    preset. Because shared program/builder behavior changes, run exactly one
+    complete `check:ts` after focused gates are green; do not run `check:all`,
+    kernel CI, the full telescope corpus, print, or book gates.
+12. Measure cold and warm real-browser execution of the new preset against the
+    existing displayed mixed-telescope preset. Stop for a correction if it
+    unexpectedly compiles the mixed runtime, produces a different Core under
+    the two profiles, or materially regresses the existing chain-2A cold path.
+    Record latency as product evidence, not as a machine-independent theorem.
+13. Synchronize the three living ledgers and make rollback-safe local semantic
+    and ledger checkpoints. Do not push, merge, rebase, amend, reset, publish,
+    deploy, remove worktrees, or clean unrelated paths in this slice. Public
+    integration remains a separately reviewed operation after the product
+    checkpoint is green.
+
+Explicit non-effects:
+
+- no new mathematical construction, owner, rewrite/unification rule, runtime
+  closure, classifier reifier, Core/checker/evaluator branch, or external
+  coherence evidence;
+- no generic displayed-functor-profile promotion, arbitrary dependency DAG,
+  exchange, unrestricted variance/body synthesis, curry, product facade, or
+  groupoidal/whole-transfer claim; and
+- no second text/parser/UI path, worker architecture, book change, deployment,
+  publication, or external Git mutation.
+
 ## Explicit Non-Claims
 
 This plan does not yet claim or authorize:
@@ -763,11 +900,15 @@ delegation, with immediate human supersession. Its implementation is
 final-green at `ba488f5a542bf5dce8fe78162a75663c313dcb26`: grouped `^nd`
 syntax delegates to the final-green typed method and has focused direct/text,
 body-algebra, deep-presentation, annotation, and fail-closed evidence. Run
-`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` next as a read-only
-product audit. Preserve direct recursive binders and internal
-object/arrow/higher action; add no curry, total-context section, cast,
-external coherence, second parser, browser behavior, or kernel owner without
-a separately frozen proposal.
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` as read-only complete. Its
+successful reviewer-shaped witness exposes only an unnecessarily broad mixed-
+profile guard: cold mixed initialization measured 148.31 seconds versus 27.83
+seconds for the existing chain-2A closure. It freezes exactly
+`CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` / D-DTTLF-USABILITY-070, pending
+separate review. Do not implement it before that review. Preserve direct
+recursive binders and internal object/arrow/higher action; add no curry,
+total-context section, cast, external coherence, second parser, broad mixed
+profile, browser behavior, or kernel owner outside the frozen proposal.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -775,6 +916,17 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — 0AO product audit complete; D-070 frozen pending separate
+  review.** The final-green grouped contextual `:^nd` input succeeds as a
+  reviewer-shaped two-level genuine dependency, but cold construction under
+  `fibred-displayed-mixed-nest-1` takes 148.31 seconds and 883,640 KiB on this
+  host. Existing chain-2A takes 27.83 seconds and already owns the exact
+  product/Sigma/pullback/transfd runtime used by the emitted term. Source
+  inspection finds that the mixed guard supplies no classifier operation to
+  this method. The thirteen-item D-070 proposal therefore separates the
+  transformation-telescope capability from generic `:^fd`/mixed classifiers,
+  reuses chain-2A unchanged, adds one genuine-dependent reviewer preset, and
+  corrects the README boundary. It authorizes no behavior pending review.
 - **2026-08-02 — D-069 implementation final-green at
   `ba488f5a542bf5dce8fe78162a75663c313dcb26`; 0AO selected.** Grouped
   comma/semicolon `^nd` syntax now supplies only ordered source families and
