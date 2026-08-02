@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_zariski;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -21118,3 +21118,43 @@ assert [R S : τ CommRing]
         target_localization)
       (@sieve_pullback (Op_cat CommRing_cat) S R h Q));
 /* End of the PSSS-09b1 finite-containment diagnostics. */
+
+// catalog-area: Supplied Zariski-compatible topology
+// Compatibility is proposition-valued while presentations remain explicit.
+assert [T : τ (@GrothTopology (Op_cat CommRing_cat))]
+  [R : τ CommRing]
+  (family : τ (@CommRingZariskiCoverFamily R)) ⊢
+  @comm_ring_zariski_presentation_covers_is_prop T R family
+  : τ (IsPropGrpd (@CommRingZariskiPresentationCovers T R family));
+
+assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] ⊢
+  @is_comm_ring_zariski_compatible_topology_is_prop T
+  : τ (IsPropGrpd (@IsCommRingZariskiCompatibleTopology T));
+
+// Package projections compute through the ordinary Sigma owners.
+assert [T : τ (@GrothTopology (Op_cat CommRing_cat))]
+  (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢
+  @comm_ring_zariski_compatible_topology_topology
+    (@comm_ring_zariski_compatible_topology_intro T compatible)
+  ≡ T;
+
+assert [T : τ (@GrothTopology (Op_cat CommRing_cat))]
+  (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢
+  @comm_ring_zariski_compatible_topology_compatible
+    (@comm_ring_zariski_compatible_topology_intro T compatible)
+  ≡ compatible;
+
+// The direct chaotic model is nonempty and its cover consumer computes.
+assert ⊢
+  chaotic_comm_ring_zariski_compatible_topology
+  : τ CommRingZariskiCompatibleTopology;
+
+assert [R : τ CommRing]
+  (family : τ (@CommRingZariskiCoverFamily R))
+  (Q : τ (@Sieve (Op_cat CommRing_cat) R))
+  (members : τ (@CommRingZariskiCoverFamilyMembership R family Q)) ⊢
+  @comm_ring_zariski_compatible_topology_covers
+    chaotic_comm_ring_zariski_compatible_topology
+    R family Q members
+  ≡ tt;
+/* End of the PSSS-09cZ1 supplied-topology diagnostics. */

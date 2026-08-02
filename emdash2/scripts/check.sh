@@ -38,7 +38,7 @@ check_file() {
 
 files=("$@")
 if [[ ${#files[@]} -eq 0 ]]; then
-  files=(emdash3_2.lp emdash3_2_presheaves.lp emdash3_2_nat_arithmetic.lp emdash3_2_finite_families.lp emdash3_2_commutative_algebra.lp emdash3_2_commutative_algebra_category.lp emdash3_2_commutative_algebra_finite.lp emdash3_2_commutative_algebra_polynomial.lp emdash3_2_commutative_algebra_localization.lp emdash3_2_commutative_algebra_localization_comparison.lp emdash3_2_commutative_algebra_presheaves.lp emdash3_2_walking_end_hit.lp emdash3_2_eq1_hom_action.lp emdash3_2_eq1_evidence_property.lp emdash3_2_sieves.lp emdash3_2_sites.lp emdash3_2_commutative_algebra_zariski.lp emdash3_2_checks.lp)
+  files=(emdash3_2.lp emdash3_2_presheaves.lp emdash3_2_nat_arithmetic.lp emdash3_2_finite_families.lp emdash3_2_commutative_algebra.lp emdash3_2_commutative_algebra_category.lp emdash3_2_commutative_algebra_finite.lp emdash3_2_commutative_algebra_polynomial.lp emdash3_2_commutative_algebra_localization.lp emdash3_2_commutative_algebra_localization_comparison.lp emdash3_2_commutative_algebra_presheaves.lp emdash3_2_walking_end_hit.lp emdash3_2_eq1_hom_action.lp emdash3_2_eq1_evidence_property.lp emdash3_2_sieves.lp emdash3_2_sites.lp emdash3_2_commutative_algebra_zariski.lp emdash3_2_commutative_algebra_zariski_topology.lp emdash3_2_checks.lp)
 fi
 
 for file in "${files[@]}"; do

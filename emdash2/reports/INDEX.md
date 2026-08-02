@@ -79,6 +79,14 @@ localization choice, rigid membership facade, propositional coverage,
 generated topology, subcanonicity, `Spec`, or scheme. The fully expanded
 specialized projection/recursive convenience wrapper remains a measured
 elaboration-performance gate, not a reason for a new runtime rule.
+`emdash3_2_commutative_algebra_zariski_topology.lp` is the rule-free
+PSSS-09cZ1 supplied-topology boundary. It packages an already lawful topology
+on `Op_cat CommRing_cat` with the proposition-valued property that every sieve
+containing each basic-open arrow of a selected finite Zariski presentation
+covers. Presentation, localization, and membership terms stay explicit; the
+module neither constructs a least/generated topology nor adds truncation,
+sheafification, subcanonicity, `Spec`, or schemes. Its chaotic instance is a
+nonempty feasibility model, not the intended exact Zariski topology.
 The former D0/D1/decoder compatibility module and its seven self-only reviewer
 examples are retired. Unsuffixed omega-equivalence names now denote only the
 native equality-valued API; no compatibility aliases remain.

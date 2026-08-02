@@ -2027,8 +2027,39 @@ Full integration CI independently passes all 66 Lambdapi targets in 627.693
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book
 evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
-strict catalog verification. PSSS-09b1 is ready for its authorized local
+strict catalog verification. PSSS-09b1 is included in local commit
+`c8a81b9`.
+
+PSSS-09cZ1 is the bounded supplied-topology boundary. The rule-free
+`emdash3_2_commutative_algebra_zariski_topology.lp` candidate defines the
+property that every sieve containing all basic-open arrows of a selected
+finite Zariski family covers in an already lawful topology on
+`Op_cat CommRing_cat`. Both presentation coverhood and whole-topology
+compatibility have explicit `IsPropGrpd` witnesses, while generators,
+coefficients, localizations, and membership evidence remain untruncated. Its
+consumer maps family containment to `groth_topology_covers`; the chaotic
+instance is a checked nonempty feasibility model, not an exact or least
+Zariski topology. The 144-line owner has 11 symbols and no rules; the 56-line
+reviewer has eight assertions. Focused and maintained checks pass. Warning-
+enabled owner and reviewer probes inherit exactly `1179 = 1020 + 159`, with
+no changed-module warning; the strict audit remains at zero unreviewed clauses
+and 52 annotated slots across 32 intentional clauses. Six central diagnostics
+raise the catalog to 1,917 checks across 78 mapped areas with zero unclassified
+entries. Health passes all 68 source/example targets in 530.846 summed
+check-seconds at source snapshot
+`sha256:fabcd518cd2f529dbfd79485577412999aa477db290fe4af61465c97bfca242e`.
+Full integration CI independently passes all 68 Lambdapi targets in 384.425
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book
+evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
+strict catalog verification. PSSS-09cZ1 is ready for its authorized local
 checkpoint.
+
+The next topology/sheaf tranche remains subordinate to the computational
+Cartier path: it must consume or expose executable restriction,
+invertibility, selected glue, localization, overlap, or chart evaluation
+needed by affine `Spec` and scheme examples. Generated topology, truncation,
+or sheafification work that lacks such a consumer stays a research side gate.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.

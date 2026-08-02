@@ -25,20 +25,21 @@ as
 recovery index
 `/home/user1/emdash1/emdash2/tmp/ai-responses/sessions/2026-08-01_019fbb03cc64/INDEX.md`
 
-Status: active living implementation architecture. `PSSS-00` through the
-selected `PSSS-09a` affine-basic-open tranche are locally checkpointed at
-`5fc6f79`; `PSSS-09b` is in progress. `PSSS-03b` remains the named `Omega`
+Status: active living implementation architecture. `PSSS-00` through
+`PSSS-09a` are locally checkpointed, and the rule-free `PSSS-09b1` finite-
+containment tranche is checkpointed at `c8a81b9`. `PSSS-09cZ1` is the active
+supplied-topology compatibility tranche. `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
 nonempty semantic model; its later rigid-adapter promotion trial was rejected
-and removed. `PSSS-09b` is being split at a measured Lambdapi elaboration
-boundary between generic finite evidence recursion and its full
-sieve-membership specialization. Proposition-valued generated coverage,
+and removed. `PSSS-09b2` remains a measured Lambdapi elaboration-performance
+gate for the fully expanded sieve-membership specialization. Proposition-
+valued generated coverage,
 propositional truncation, sheafification, localization inverse laws, and
 positive-variable polynomial representation remain separately
 consumer-gated. The latest checkpointed integration evidence is recorded in
-the PSSS-09a phase below; every later metric remains provisional until its
-own bounded tranche is synchronized and checkpointed.
+the PSSS-09b1 phase below; every PSSS-09cZ1 metric remains provisional until
+that bounded tranche is synchronized and checkpointed.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -2442,11 +2443,11 @@ subcanonicity, `Spec`, or scheme is smuggled into this result.
 
 Status: `PSSS-09b1` is implemented rule-free and green through focused,
 maintained aggregate, reviewer, warning, strict-audit, catalog, synchronized
-66-target health, and full integration CI gates; it is ready for its
-authorized local checkpoint. A bounded full specialization to the expanded
-ordinary-sieve membership family exposes a Lambdapi elaboration performance gate, so
-the convenience layer remains `PSSS-09b2` rather than being forced through a
-new rigid runtime head.
+66-target health, and full integration CI gates; it is included in `c8a81b9`.
+A bounded full specialization to the expanded ordinary-sieve membership
+family exposes a Lambdapi elaboration performance gate, so the convenience
+layer remains `PSSS-09b2` rather than being forced through a new rigid runtime
+head.
 
 - define recursive explicit evidence that every chosen basic-open arrow of a
   presented family belongs to an ordinary sieve;
@@ -2649,6 +2650,59 @@ reflector and remains `PSSS-09cG`.
 bounded route that supplies the Zariski topology directly and proves the
 selected basic-open presentations cover. Either can unblock ordinary site
 consumers; neither supersedes the computational presentation layer.
+
+##### PSSS-09cZ1 — Supplied-topology compatibility interface
+
+Status: rule-free implementation candidate green through focused and
+maintained owner/reviewer/central checks, exact warning comparison, strict
+audit, catalog, synchronized 68-target health, and full integration CI; it is
+ready for its authorized local checkpoint.
+
+The selected boundary does not pretend to synthesize a topology. Given
+`T : GrothTopology(Op(CommRing_cat))`, define
+
+```text
+PresentationCovers_T(R,c)
+  = Pi Q : Sieve(R), Members_Q(c) -> Covers_T(Q),
+
+IsZariskiCompatible(T)
+  = Pi R c, PresentationCovers_T(R,c).
+```
+
+The candidate module
+`emdash3_2_commutative_algebra_zariski_topology.lp` packages `T` with this
+compatibility proof and exposes one consumer from explicit family containment
+to topology coverhood. Dependent-Pi closure proves both classifiers
+proposition-valued without truncating the presentation data. The chaotic
+topology supplies a closed nonempty model and beta computation, but it is
+only a feasibility witness: it generally contains more covers and establishes
+neither leastness nor subcanonicity.
+
+The promoted candidate has 144 lines, 11 symbols, zero rules, and zero
+unification rules. The 56-line reviewer has eight assertions, while six
+central diagnostics raise the strict catalog to 1,917 checks across 78 mapped
+areas with zero unclassified entries. Quiet owner, reviewer, and central logs
+are `logs/probes/emdash3_2_commutative_algebra_zariski_topology-20260801-200456.log`,
+`logs/probes/commutative_ring_zariski_compatible_topology-20260801-200456.log`,
+and `logs/probes/emdash3_2_checks-20260801-200456.log`. Warning-enabled owner
+and reviewer logs at timestamp `20260801-200826` inherit exactly
+`1179 = 1020 + 159`, with no changed-module warning. Maintained `make check`
+and the complete reviewer suite pass; the strict LHS audit remains at zero
+unreviewed clauses and 52 annotated slots across 32 intentional clauses.
+Health passes all 68 source/example targets in 530.846 summed check-seconds at
+source snapshot
+`sha256:fabcd518cd2f529dbfd79485577412999aa477db290fe4af61465c97bfca242e`.
+Full integration CI independently passes all 68 Lambdapi targets in 384.425
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book
+evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
+strict catalog verification.
+
+This tranche answers the immediate “can topology proceed without
+truncation?” question positively for a supplied topology. `PSSS-09cZ2` still
+needs an intended non-chaotic topology input or a downstream sheaf consumer;
+`PSSS-09cG` still owns least/generated saturation and any reflection/HIT it
+actually requires.
 
 ##### Later h-level-stratified sheafification gate
 
@@ -3068,6 +3122,18 @@ consumer demonstrates that nontransitive unification requires it.
   selected mapped family, pointwise theorem, and closed singleton consumer;
   keep a convenience wrapper for the fully expanded recursive
   sieve-membership specialization behind a performance/usability gate.
+- **PSSS-D-068:** select a bounded supplied-topology compatibility interface
+  as PSSS-09cZ1. A lawful topology admits the selected Zariski basis when every
+  sieve containing all arrows of every retained presentation covers. Prove
+  this interface proposition-valued while keeping presentation evidence
+  explicit. The chaotic instance proves nonemptiness only and must not be
+  called the exact or least Zariski topology.
+- **PSSS-D-069:** keep every post-topology promotion on the computational
+  Cartier/Zeuner path. A tranche must expose or consume executable
+  restriction, invertibility, selected glue, localization, overlap, or chart
+  evaluation needed by `Spec` and scheme examples. Abstract generated-
+  topology, truncation, or sheafification work remains a research side gate
+  until such a consumer demonstrates that it is required.
 
 ## 19. Side-Task Ledger
 
@@ -3091,14 +3157,15 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08a | CommRing-valued presheaves and arrowwise invertibility support | Green through full integration CI; locally checkpointed | PSSS-08b remains separately gated |
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
 | PSSS-08c | Ringed sites, selected sheaves, and locality | Proposed | PSSS-08b and PSSS-05b |
-| PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; authorized local checkpoint ready | PSSS-07c and PSSS-08b |
-| PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; authorized local checkpoint ready | PSSS-09a |
+| PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
+| PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
 | PSSS-09b2 | Full transparent sieve-membership recursion specialization usability | Performance/research gate; rigid workaround rejected | PSSS-09b1 plus a real non-singleton consumer or bounded elaborator improvement |
 | PSSS-09c0 | Compare supplied, extensional-direct, and propositionally reflected Zariski coverhood | Research gate | PSSS-09b1; PSSS-09b2 only if its convenience API is consumed |
 | PSSS-09cT | Genuine propositional-truncation HIT/reflector | Conditional sub-plan | PSSS-09c0 selects the reflection route and specifies first consumer |
 | PSSS-09cG | Generated coverage saturation | Higher-inductive/research gate | PSSS-09c0 plus any selected closure/truncation prerequisites |
-| PSSS-09cZ | Directly supplied Zariski topology and presentation-cover theorem | Parallel proposed route | PSSS-09b1 and three Grothendieck-law proofs |
-| PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ; PSSS-05b for subcanonicity |
+| PSSS-09cZ1 | Supplied lawful topology plus proposition-valued Zariski-basis compatibility | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 68-target health, and full CI; authorized local checkpoint ready | PSSS-09b1 and `GrothTopology` |
+| PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
+| PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ2; PSSS-05b for subcanonicity |
 | PSSS-10 | Slice sites and affine-basic-open comparison | Proposed | PSSS-09c at the selected scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Functor-of-points/qcqs comparison | Research boundary | PSSS-11 and representability audit |
@@ -3311,3 +3378,27 @@ PSSS-09b1 is successful when:
 9. focused probes/checks, maintained reviewers, exact warning comparison,
    strict audit, catalog/health synchronization, current-authority prose, and
    full integration CI are green before the authorized local checkpoint.
+
+PSSS-09cZ1 is successful when:
+
+1. `CommRingZariskiPresentationCovers(T,R,c)` means that every ordinary sieve
+   `Q` containing all basic-open arrows retained by `c` covers in `T`;
+2. `IsCommRingZariskiCompatibleTopology(T)` quantifies that property over all
+   rings and selected presentations without choosing or identifying any
+   presentation/localization data;
+3. both classifiers carry checked `IsPropGrpd` evidence derived from
+   dependent-Pi closure and the existing `covers_is_prop` owner;
+4. `CommRingZariskiCompatibleTopology` retains the supplied lawful topology
+   and compatibility witness through ordinary Sigma projections, with no new
+   rewrite or unification rule;
+5. its cover consumer maps actual `CommRingZariskiCoverFamilyMembership` data
+   to actual `groth_topology_covers` evidence;
+6. the chaotic package supplies a nonempty beta-computing model but is
+   documented and tested only as a feasibility model, never as the least or
+   intended exact Zariski topology;
+7. generated saturation, a truncation HIT, presentation independence,
+   subcanonicity, sheafification, `Spec`, and schemes remain separately gated;
+   and
+8. focused owner/reviewer/central checks, warning comparison, strict audits,
+   catalog/health synchronization, current-authority prose, and full
+   integration CI are green before any authorized local checkpoint.

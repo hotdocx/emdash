@@ -1604,6 +1604,27 @@ convenience spellings as a performance gate. Generated or supplied Zariski
 topology, propositionally reflected coverhood, subcanonicity, `Spec`, and
 schemes remain later gates.
 
+The first supplied-topology boundary can nevertheless be stated without any
+truncation constructor. For an already lawful topology `T` on
+`CommRing^op`, define
+
+```text
+PresentationCovers_T(c)
+  = forall Q : Sieve(R), BasicOpenMembers_R(c,Q) -> Covers_T(Q),
+
+IsZariskiCompatible(T)
+  = forall R c, PresentationCovers_T(c).
+```
+
+Both classifiers are proposition-valued by dependent-Pi closure and the
+existing proposition evidence for `Covers_T(Q)`. The package
+`CommRingZariskiCompatibleTopology` retains `T` and this compatibility proof;
+its consumer maps explicit family-containment terms to coverhood. It does not
+truncate `c`, choose localizations, or construct the least topology generated
+by these presentations. The checked chaotic instance establishes nonempty
+feasibility only: it is generally finer than the intended Zariski topology
+and proves neither exactness nor subcanonicity.
+
 ### Polynomial Algebras By Universal Property
 
 For a base ring `R` and a variable classifier `X`, candidate polynomial data

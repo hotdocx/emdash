@@ -555,6 +555,8 @@ D_R(f;ell)               : affine arrow (R[1/f]_ell,iota_ell) into R
 Members_Q(c;ell)         : each selected D_R(f_i;ell_i) belongs to Q
 h_*ZarFamily(c;m)        : mapped cover with supplied target localizations m
 h^*member                : membership of D_S(h(f);m) in h^*Q
+ZarPresentationCovers_T(c): every sieve containing c covers in supplied T
+ZarCompatible(T)         : T admits every selected finite Zariski presentation
 ```
 
 The literal owners are `FiniteFamily`, `finite_family_nil/cons`,
@@ -566,7 +568,10 @@ The literal owners are `FiniteFamily`, `finite_family_nil/cons`,
 `CommRingBasicOpenFamilyMembership`,
 `CommRingZariskiCoverFamilyMembership`,
 `comm_ring_zariski_cover_family_map`, `comm_ring_basic_open_arrow`, and
-`comm_ring_basic_open_pullback_membership`. The semicolon-separated cover
+`comm_ring_basic_open_pullback_membership`. The supplied-topology boundary
+additionally uses `CommRingZariskiPresentationCovers`,
+`IsCommRingZariskiCompatibleTopology`, and
+`CommRingZariskiCompatibleTopology`. The semicolon-separated cover
 notation retains the coefficient family and equation; it must not be read as
 a propositionally truncated existence statement. `ZarCover` alone names the
 algebraic unit-ideal presentation; `ZarFamily` additionally retains selected
@@ -578,6 +583,9 @@ finite map owns arbitrary-length recursion. A specialized expanded Zariski
 projection/recursion spelling is not canonical while it exceeds the bounded
 elaboration budget; comments should use the generic owner plus the named
 elementwise step rather than inventing a rigid membership head.
+`ZarCompatible(T)` says only that `T` contains the selected Zariski cover
+basis; it does not denote the least generated topology. The maintained
+chaotic instance is a feasibility model, not canonical `Zar` syntax.
 
 For the universal-property polynomial layer, comments and examples may write
 

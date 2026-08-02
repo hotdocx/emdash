@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1911
-- Mapped areas: 77
+- Total checks: 1917
+- Mapped areas: 78
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -96,6 +96,7 @@ stable mathematical-area scopes rather than source locations.
 | CommRing-valued presheaf invertibility sieve | 19 |
 | Presented affine Zariski basic opens and base change | 12 |
 | Finite selected Zariski containment and base change | 6 |
+| Supplied Zariski-compatible topology | 6 |
 
 ## Section Details
 
@@ -2394,3 +2395,14 @@ stable mathematical-area scopes rather than source locations.
 | 1909 | 21079 | `assert [R : τ CommRing] (n : τ Nat_grpd) (generators : τ (@FiniteFamily (@comm_ring_carrier R) n)) (localizations : ...` |
 | 1910 | 21088 | `assert [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) (Q : τ (@Sieve (Op_cat CommRing_cat) R)) ⊢ @Com ...` |
 | 1911 | 21095 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (source_localization : τ (@CommRingLocalizationAt R (@comm_ring ...` |
+
+### Supplied Zariski-compatible topology
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1912 | 21124 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) ...` |
+| 1913 | 21130 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] ⊢ @is_comm_ring_zariski_compatible_topology_is_prop T : τ (IsP ...` |
+| 1914 | 21135 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢ @c ...` |
+| 1915 | 21141 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢ @c ...` |
+| 1916 | 21148 | `assert ⊢ chaotic_comm_ring_zariski_compatible_topology : τ CommRingZariskiCompatibleTopology;` |
+| 1917 | 21152 | `assert [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) (Q : τ (@Sieve (Op_cat CommRing_cat) R)) (membe ...` |
