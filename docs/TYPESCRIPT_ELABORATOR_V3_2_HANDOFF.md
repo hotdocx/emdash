@@ -418,6 +418,22 @@
 > removes three unreachable classifier mirrors, compiles the eight-declaration/
 > fourteen-local-rule `fibred-transfd-1` closure, and changes no kernel
 > mathematics or D-058 usability scope. D-060 is implementation-ready.
+> Resuming the D-058 frontend then constructed both whole whiskers and fired
+> the displayed horizontal projection, but the first point oracle measured a
+> final exact-transfer normalization dependency. The three ordinary
+> horizontal-action transfer LHSs reconstructed endpoints that active
+> Lambdapi leaves inferred; the derived transparent-pair beta repeated inferred
+> constructor categories; and the early runtime closure lacked three existing
+> generic identity-action clauses used by the two identity-specialized
+> whiskers. The exact
+> `CONTEXTUAL-ND-HORIZONTAL-IDENTITY-NORMALIZATION-FOUNDATION-1ZC` /
+> H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-ACTION-CORRECTION-01 /
+> D-DTTLF-USABILITY-061 proposal is frozen in the living continuation plan and
+> decision-pending. Its bounded unstaged witness makes both point equations
+> equal without a Lambdapi edit, declaration, owner, Core/checker case,
+> external coherence, or wider `:^nd` claim. Do not retain or checkpoint that
+> semantic correction until the documentation-only proposal receives a
+> separate review.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
