@@ -627,6 +627,8 @@ export type CoreCategoricalAbstractionEvidence =
             readonly outerSourceFamily: KernelExpression;
             readonly innerSourceFamilies:
                 readonly KernelExpression[];
+            readonly rootSourceFamilies:
+                readonly KernelExpression[];
             readonly initialTargetFamily: KernelExpression;
             readonly targetFamily: KernelExpression;
             readonly expectedTowerFamily: KernelExpression;
@@ -638,6 +640,9 @@ export type CoreCategoricalAbstractionEvidence =
             readonly outerUsageCount: number;
             readonly innerUsageCounts: readonly number[];
             readonly baseUsageCount: number;
+            readonly sourceChainLengths: readonly number[];
+            readonly sourceActionCount: number;
+            readonly sourcePrefixLiftCount: number;
             readonly targetChainLength: number;
             readonly targetLiftCount: number;
             readonly contextSize: number;
@@ -1057,6 +1062,9 @@ interface CoreCategoricalDirectMixedTowerLeafFactorization {
         | 'bound-outer-identity';
     readonly initialTargetFamily: KernelExpression;
     readonly targetFamily: KernelExpression;
+    readonly rootSourceFamilies: readonly KernelExpression[];
+    readonly sourceChains:
+        readonly (readonly InternalCoreCategoricalTerm[])[];
     readonly baseUsageCount: 0 | 1;
 }
 
@@ -1080,6 +1088,10 @@ interface CoreCategoricalCompiledDirectMixedTowerFactorization {
     readonly outerUsageCount: 1;
     readonly innerUsageCounts: readonly number[];
     readonly baseUsageCount: number;
+    readonly rootSourceFamilies: readonly KernelExpression[];
+    readonly sourceChainLengths: readonly number[];
+    readonly sourceActionCount: number;
+    readonly sourcePrefixLiftCount: number;
     readonly targetChainLength: number;
 }
 
@@ -8140,11 +8152,12 @@ export class CoreCategoricalScopedBuilder {
      * Recognize a direct finite negative-inner application spine. The
      * accepted leaves are exactly
      *
-     *   F[k](c)(a1)...(an)
-     *   c(a1)...(an)
+     *   F[k](c)(source1(a1))...(sourceN(an))
+     *   c(source1(a1))...(sourceN(an))
      *
-     * and finite closed covariant target maps around either leaf. The
-     * application spine itself supplies the object-level view; its existing
+     * where every source argument is a finite closed contravariant chain, and
+     * finite closed covariant target maps around either leaf. The application
+     * spine itself supplies the object-level view; its existing
      * `indexed-functor` classifiers retain the internally owned arrow action.
      */
     private directMixedTowerFactorization(
@@ -8174,25 +8187,15 @@ export class CoreCategoricalScopedBuilder {
             )
         ) {
             const initialTargetFamily = initialTargetObject.family;
-            const suffixFamilies: KernelExpression[] = new Array(
-                innerSourceFamilies.length + 1
+            const rootSourceFamilies: KernelExpression[] = new Array(
+                innerSourceFamilies.length
             );
-            suffixFamilies[innerSourceFamilies.length] =
-                initialTargetFamily;
-            for (
-                let index = innerSourceFamilies.length - 1;
-                index >= 0;
-                index -= 1
-            ) {
-                suffixFamilies[index] = this.mixedFunctorFamily(
-                    baseCategory,
-                    innerSourceFamilies[index],
-                    suffixFamilies[index + 1],
-                    term.node.provenance
+            const sourceChains:
+                (readonly InternalCoreCategoricalTerm[])[] = new Array(
+                    innerSourceFamilies.length
                 );
-            }
-
             let current = term;
+            let suffixFamily = initialTargetFamily;
             let validSpine = true;
             for (
                 let index = innerSourceFamilies.length - 1;
@@ -8219,7 +8222,7 @@ export class CoreCategoricalScopedBuilder {
                     ) ||
                     !kernelExpressionEquals(
                         currentObject.family,
-                        suffixFamilies[index + 1]
+                        suffixFamily
                     )
                 ) {
                     validSpine = false;
@@ -8229,9 +8232,27 @@ export class CoreCategoricalScopedBuilder {
                     InternalCoreCategoricalTerm;
                 const argumentObject = indexedObjectView(argument.type);
                 const subject = current.node.subject;
+                const sourceFactorization =
+                    this.directMixedSourceFactorization(
+                        argument,
+                        innerOrdinals[index],
+                        baseOrdinal,
+                        baseCategory,
+                        innerSourceFamilies[index]
+                    );
+                if (sourceFactorization === undefined) {
+                    validSpine = false;
+                    break;
+                }
+                const rootSourceFamily =
+                    sourceFactorization.rootSourceFamily;
+                const layerFamily = this.mixedFunctorFamily(
+                    baseCategory,
+                    rootSourceFamily,
+                    suffixFamily,
+                    term.node.provenance
+                );
                 if (
-                    argument.node.tag !== 'slot-token' ||
-                    argument.node.ordinal !== innerOrdinals[index] ||
                     argumentObject === undefined ||
                     argumentObject.indexOrdinal !== baseOrdinal ||
                     !kernelExpressionEquals(
@@ -8244,7 +8265,7 @@ export class CoreCategoricalScopedBuilder {
                     ) ||
                     !kernelExpressionEquals(
                         argumentObject.family,
-                        innerSourceFamilies[index]
+                        rootSourceFamily
                     ) ||
                     subject.type.tag !== 'indexed-functor' ||
                     subject.type.indexOrdinal !== baseOrdinal ||
@@ -8262,26 +8283,35 @@ export class CoreCategoricalScopedBuilder {
                     ) ||
                     !kernelExpressionEquals(
                         subject.type.sourceFamily,
-                        innerSourceFamilies[index]
+                        rootSourceFamily
                     ) ||
                     !kernelExpressionEquals(
                         subject.type.targetFamily,
-                        suffixFamilies[index + 1]
+                        suffixFamily
                     ) ||
                     subject.type.underlyingObjectFamily === undefined ||
                     !kernelExpressionEquals(
                         subject.type.underlyingObjectFamily,
-                        suffixFamilies[index]
+                        layerFamily
                     )
                 ) {
                     validSpine = false;
                     break;
                 }
+                rootSourceFamilies[index] = rootSourceFamily;
+                sourceChains[index] = sourceFactorization.sourceChain;
+                suffixFamily = layerFamily;
                 current = subject;
             }
 
             if (validSpine) {
-                const expectedTowerFamily = suffixFamilies[0];
+                const expectedTowerFamily = suffixFamily;
+                const frozenRootSourceFamilies = Object.freeze([
+                    ...rootSourceFamilies
+                ]);
+                const frozenSourceChains = Object.freeze(
+                    sourceChains.map(chain => Object.freeze([...chain]))
+                );
                 if (
                     current.node.tag === 'slot-token' &&
                     current.node.ordinal === outerOrdinal &&
@@ -8313,6 +8343,9 @@ export class CoreCategoricalScopedBuilder {
                         rootKind: 'bound-outer-identity' as const,
                         initialTargetFamily,
                         targetFamily: initialTargetFamily,
+                        rootSourceFamilies:
+                            frozenRootSourceFamilies,
+                        sourceChains: frozenSourceChains,
                         baseUsageCount: 0 as const
                     });
                 }
@@ -8389,6 +8422,9 @@ export class CoreCategoricalScopedBuilder {
                                     'closed-coherent-subject' as const,
                                 initialTargetFamily,
                                 targetFamily: initialTargetFamily,
+                                rootSourceFamilies:
+                                    frozenRootSourceFamilies,
+                                sourceChains: frozenSourceChains,
                                 baseUsageCount: 1 as const
                             });
                         }
@@ -8516,16 +8552,16 @@ export class CoreCategoricalScopedBuilder {
         nodeProvenance: Provenance
     ): CoreCategoricalCompiledDirectMixedTowerFactorization {
         if (factorization.tag === 'leaf') {
-            const expectedTowerFamily = this.directMixedTowerFamily(
+            const rootTowerFamily = this.directMixedTowerFamily(
                 baseCategory,
-                innerSourceFamilies,
+                factorization.rootSourceFamilies,
                 factorization.initialTargetFamily,
                 nodeProvenance
             );
             if (factorization.rootKind === 'bound-outer-identity') {
                 if (!kernelExpressionEquals(
                     outerSourceFamily,
-                    expectedTowerFamily
+                    rootTowerFamily
                 )) {
                     this.fail(
                         'CLASSIFIER_ARGUMENT_MISMATCH',
@@ -8535,11 +8571,11 @@ export class CoreCategoricalScopedBuilder {
                     );
                 }
             }
-            return {
-                compilation: {
+            let compilation:
+                CoreCategoricalDisplayedContextualCompilation = {
                     term: factorization.rootExpression,
                     sourceFamily: outerSourceFamily,
-                    targetFamily: expectedTowerFamily,
+                    targetFamily: rootTowerFamily,
                     identity:
                         factorization.rootKind ===
                             'bound-outer-identity',
@@ -8551,8 +8587,160 @@ export class CoreCategoricalScopedBuilder {
                             ? ['displayed-identity' as const]
                             : [])
                     ])
-                },
-                recovered: factorization.rootRecovered,
+                };
+            const currentSourceFamilies = [
+                ...factorization.rootSourceFamilies
+            ];
+            const recovered = [...factorization.rootRecovered];
+            let sourceActionCount = 0;
+            let sourcePrefixLiftCount = 0;
+            for (
+                let index = currentSourceFamilies.length - 1;
+                index >= 0;
+                index -= 1
+            ) {
+                const suffixFamily = this.directMixedTowerFamily(
+                    baseCategory,
+                    currentSourceFamilies.slice(index + 1),
+                    factorization.initialTargetFamily,
+                    nodeProvenance
+                );
+                for (
+                    const mapper of [
+                        ...factorization.sourceChains[index]
+                    ].reverse()
+                ) {
+                    const currentSourceFamily =
+                        currentSourceFamilies[index];
+                    if (
+                        mapper.type.tag !== 'displayed-functor' ||
+                        mapper.closed === undefined ||
+                        mapper.usage.length !== 0 ||
+                        !kernelExpressionEquals(
+                            mapper.type.baseCategory,
+                            this.oppositeCategory(
+                                baseCategory,
+                                nodeProvenance
+                            )
+                        ) ||
+                        !kernelExpressionEquals(
+                            mapper.type.targetFamily,
+                            currentSourceFamily
+                        )
+                    ) {
+                        this.fail(
+                            'CLASSIFIER_ARGUMENT_MISMATCH',
+                            nodeProvenance,
+                            'Direct mixed tower source chain has an ' +
+                                'incompatible adjacent family or orientation'
+                        );
+                    }
+                    const nextSourceFamily = mapper.type.sourceFamily;
+                    const localSourceFamily = this.mixedFunctorFamily(
+                        baseCategory,
+                        currentSourceFamily,
+                        suffixFamily,
+                        nodeProvenance
+                    );
+                    const localTargetFamily = this.mixedFunctorFamily(
+                        baseCategory,
+                        nextSourceFamily,
+                        suffixFamily,
+                        nodeProvenance
+                    );
+                    const localAction:
+                        CoreCategoricalDisplayedContextualCompilation = {
+                            term: this.mixedSourceAction(
+                                baseCategory,
+                                nextSourceFamily,
+                                currentSourceFamily,
+                                suffixFamily,
+                                mapper.closed.term,
+                                nodeProvenance
+                            ),
+                            sourceFamily: localSourceFamily,
+                            targetFamily: localTargetFamily,
+                            identity: false,
+                            structuralPrerequisites: Object.freeze([]),
+                            dependentPrerequisites: Object.freeze([
+                                'stable-functor-family',
+                                'mixed-functor-source-action'
+                            ])
+                        };
+                    let liftedAction = localAction;
+                    if (index > 0) {
+                        const lifted =
+                            this.liftDirectMixedTargetActionThroughTower(
+                                baseCategory,
+                                currentSourceFamilies.slice(0, index),
+                                localSourceFamily,
+                                localTargetFamily,
+                                localAction.term,
+                                nodeProvenance
+                            );
+                        liftedAction = {
+                            ...lifted,
+                            dependentPrerequisites:
+                                mergeDependentPrerequisites(
+                                    localAction.dependentPrerequisites,
+                                    lifted.dependentPrerequisites
+                                )
+                        };
+                    }
+                    if (!kernelExpressionEquals(
+                        liftedAction.sourceFamily,
+                        compilation.targetFamily
+                    )) {
+                        this.fail(
+                            'CLASSIFIER_ARGUMENT_MISMATCH',
+                            nodeProvenance,
+                            'Direct mixed tower source lift produced the ' +
+                                'wrong source classifier'
+                        );
+                    }
+                    compilation = this.composeDisplayedCompilations(
+                        baseCategory,
+                        liftedAction,
+                        compilation,
+                        nodeProvenance
+                    );
+                    currentSourceFamilies[index] = nextSourceFamily;
+                    recovered.push(...mapper.closed.recovered);
+                    sourceActionCount += 1;
+                    sourcePrefixLiftCount += index;
+                }
+                if (!kernelExpressionEquals(
+                    currentSourceFamilies[index],
+                    innerSourceFamilies[index]
+                )) {
+                    this.fail(
+                        'CLASSIFIER_ARGUMENT_MISMATCH',
+                        nodeProvenance,
+                        'Direct mixed tower source chain does not end at ' +
+                            'its bound inner source family'
+                    );
+                }
+            }
+            const expectedTowerFamily = this.directMixedTowerFamily(
+                baseCategory,
+                innerSourceFamilies,
+                factorization.initialTargetFamily,
+                nodeProvenance
+            );
+            if (!kernelExpressionEquals(
+                compilation.targetFamily,
+                expectedTowerFamily
+            )) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Direct mixed tower source actions produced the wrong ' +
+                        'bound tower classifier'
+                );
+            }
+            return {
+                compilation,
+                recovered: Object.freeze(recovered),
                 rootKind: factorization.rootKind,
                 initialTargetFamily:
                     factorization.initialTargetFamily,
@@ -8560,7 +8748,15 @@ export class CoreCategoricalScopedBuilder {
                 innerUsageCounts: Object.freeze(
                     innerSourceFamilies.map(() => 1)
                 ),
-                baseUsageCount: factorization.baseUsageCount,
+                baseUsageCount:
+                    factorization.baseUsageCount + sourceActionCount,
+                rootSourceFamilies:
+                    factorization.rootSourceFamilies,
+                sourceChainLengths: Object.freeze(
+                    factorization.sourceChains.map(chain => chain.length)
+                ),
+                sourceActionCount,
+                sourcePrefixLiftCount,
                 targetChainLength: 0
             };
         }
@@ -12337,8 +12533,9 @@ export class CoreCategoricalScopedBuilder {
                     'UNAVAILABLE_DISPLAYED_ACTION',
                     nodeProvenance,
                     'The direct mixed tower binder accepts only exact ' +
-                        'closed eta, exact bound-outer identity, and finite ' +
-                        'closed covariant target maps'
+                        'closed eta, exact bound-outer identity, finite ' +
+                        'closed per-layer source chains, and finite closed ' +
+                        'covariant target maps'
                 );
             }
             const compiled =
@@ -12455,6 +12652,9 @@ export class CoreCategoricalScopedBuilder {
                 ],
                 outerSourceFamily,
                 innerSourceFamilies: [...innerSourceFamilies],
+                rootSourceFamilies: [
+                    ...compiled.rootSourceFamilies
+                ],
                 initialTargetFamily: compiled.initialTargetFamily,
                 targetFamily,
                 expectedTowerFamily,
@@ -12464,6 +12664,12 @@ export class CoreCategoricalScopedBuilder {
                 outerUsageCount: compiled.outerUsageCount,
                 innerUsageCounts: [...compiled.innerUsageCounts],
                 baseUsageCount: compiled.baseUsageCount,
+                sourceChainLengths: [
+                    ...compiled.sourceChainLengths
+                ],
+                sourceActionCount: compiled.sourceActionCount,
+                sourcePrefixLiftCount:
+                    compiled.sourcePrefixLiftCount,
                 targetChainLength: compiled.targetChainLength,
                 targetLiftCount:
                     compiled.targetChainLength *

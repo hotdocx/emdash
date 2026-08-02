@@ -1,5 +1,5 @@
 /**
- * D-DTTLF-USABILITY-053 direct arbitrary-finite negative-inner towers.
+ * D-DTTLF-USABILITY-054 direct arbitrary-finite tower source action.
  */
 
 import assert from 'node:assert/strict';
@@ -80,7 +80,7 @@ const towerEvidence = (term: CoreCategoricalTerm) =>
             'categorical.direct-mixed-displayed-functor-tower'
     );
 
-describe('DIRECT-MIXED-NEGATIVE-TOWER-1P direct binder', () => {
+describe('DIRECT-MIXED-TOWER-SOURCE-ACTION-1R direct binder', () => {
     it('lowers depth-two eta directly to the coherent subject', () => {
         const inners = innerFamilies('eta2_', 2);
         const expected = towerFamily(emdash, inners, B);
@@ -111,7 +111,8 @@ describe('DIRECT-MIXED-NEGATIVE-TOWER-1P direct binder', () => {
         assert.equal(calls, 1);
         assert.equal(
             CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION,
-            'DIRECT-MIXED-NEGATIVE-TOWER-1P-CATEGORICAL-PROGRAM-1'
+            'DIRECT-MIXED-TOWER-SOURCE-ACTION-1R-' +
+                'CATEGORICAL-PROGRAM-1'
         );
         assert.equal(receivedFrozenTokens, true);
         assert.equal(
@@ -128,6 +129,9 @@ describe('DIRECT-MIXED-NEGATIVE-TOWER-1P direct binder', () => {
         assert.deepEqual(evidence?.innerUsageCounts, [1, 1]);
         assert.equal(evidence?.outerUsageCount, 1);
         assert.equal(evidence?.baseUsageCount, 1);
+        assert.deepEqual(evidence?.sourceChainLengths, [0, 0]);
+        assert.equal(evidence?.sourceActionCount, 0);
+        assert.equal(evidence?.sourcePrefixLiftCount, 0);
         assert.equal(evidence?.targetChainLength, 0);
         assert.doesNotMatch(
             compiled.explicitCore,
@@ -196,6 +200,8 @@ describe('DIRECT-MIXED-NEGATIVE-TOWER-1P direct binder', () => {
         assert.equal(evidence?.rootKind, 'bound-outer-identity');
         assert.equal(evidence?.towerDepth, 3);
         assert.equal(evidence?.baseUsageCount, 0);
+        assert.deepEqual(evidence?.sourceChainLengths, [0, 0, 0]);
+        assert.equal(evidence?.sourceActionCount, 0);
         assert.deepEqual(evidence?.innerUsageCounts, [1, 1, 1]);
         assert.deepEqual(evidence?.dependentPrerequisites, [
             'stable-functor-family',
@@ -280,6 +286,305 @@ describe('DIRECT-MIXED-NEGATIVE-TOWER-1P direct binder', () => {
             compiled.explicitCore,
             /mixed_curry|total.context|coerc|cast|equation/u
         );
+        assert.equal(compiled.productionLambdapiDependency, false);
+        assertDeepFrozen(emdash.inspect(result));
+    });
+
+    it('maps a source chain independently at every depth-three layer', () => {
+        for (let mappedIndex = 0; mappedIndex < 3; mappedIndex += 1) {
+            const prefix = `source_position_${mappedIndex}`;
+            const bound = innerFamilies(`${prefix}_bound_`, 3);
+            const roots = [...bound];
+            roots[mappedIndex] = emdash.displayedFamily(
+                `direct_mixed_tower_${prefix}_root`,
+                opK
+            );
+            const mapper = emdash.displayedFunctor(
+                `direct_mixed_tower_${prefix}_mapper`,
+                bound[mappedIndex],
+                roots[mappedIndex]
+            );
+            const F = emdash.displayedFunctor(
+                `direct_mixed_tower_${prefix}_F`,
+                C,
+                towerFamily(emdash, roots, B)
+            );
+            let calls = 0;
+            const result = emdash.mixedDisplayedFunctorTowerLambda(
+                { name: `${prefix}c`, family: C },
+                bindings(prefix, bound),
+                B,
+                (outer, tokens) => {
+                    calls += 1;
+                    const argumentsWithSource: CoreCategoricalTerm[] = [
+                        ...tokens
+                    ];
+                    argumentsWithSource[mappedIndex] = emdash.apply(
+                        mapper,
+                        tokens[mappedIndex]
+                    );
+                    return applySpine(
+                        emdash,
+                        emdash.apply(F, outer),
+                        argumentsWithSource
+                    );
+                }
+            );
+            const compiled = emdash.compile(result);
+            const evidence = towerEvidence(result);
+
+            assert.equal(calls, 1);
+            assert.equal(compiled.surfaceType.tag, 'displayed-functor');
+            assert.deepEqual(
+                evidence?.sourceChainLengths,
+                [0, 0, 0].map((value, index) =>
+                    index === mappedIndex ? 1 : value
+                )
+            );
+            assert.equal(evidence?.rootSourceFamilies.length, 3);
+            assert.equal(evidence?.sourceActionCount, 1);
+            assert.equal(
+                evidence?.sourcePrefixLiftCount,
+                mappedIndex
+            );
+            assert.equal(evidence?.baseUsageCount, 2);
+            assert.match(compiled.explicitCore, /Functor_catd_func/u);
+            assert.doesNotMatch(
+                compiled.explicitCore,
+                /mixed_curry|total.context|coerc|cast|equation/u
+            );
+            assert.equal(compiled.productionLambdapiDependency, false);
+            assertDeepFrozen(emdash.inspect(result));
+        }
+    });
+
+    it('composes simultaneous finite source chains deepest-outward', () => {
+        const bound = innerFamilies('source_multi_bound_', 3);
+        const middle0 = emdash.displayedFamily(
+            'direct_mixed_tower_source_multi_middle0',
+            opK
+        );
+        const roots = innerFamilies('source_multi_root_', 3);
+        const first0 = emdash.displayedFunctor(
+            'direct_mixed_tower_source_multi_first0',
+            bound[0],
+            middle0
+        );
+        const second0 = emdash.displayedFunctor(
+            'direct_mixed_tower_source_multi_second0',
+            middle0,
+            roots[0]
+        );
+        const mapper1 = emdash.displayedFunctor(
+            'direct_mixed_tower_source_multi_mapper1',
+            bound[1],
+            roots[1]
+        );
+        const mapper2 = emdash.displayedFunctor(
+            'direct_mixed_tower_source_multi_mapper2',
+            bound[2],
+            roots[2]
+        );
+        const F = emdash.displayedFunctor(
+            'direct_mixed_tower_source_multi_F',
+            C,
+            towerFamily(emdash, roots, B)
+        );
+        const result = emdash.mixedDisplayedFunctorTowerLambda(
+            { name: 'sourceMultic', family: C },
+            bindings('sourceMulti', bound),
+            B,
+            (outer, tokens) => applySpine(
+                emdash,
+                emdash.apply(F, outer),
+                [
+                    emdash.apply(
+                        second0,
+                        emdash.apply(first0, tokens[0])
+                    ),
+                    emdash.apply(mapper1, tokens[1]),
+                    emdash.apply(mapper2, tokens[2])
+                ]
+            )
+        );
+        const compiled = emdash.compile(result);
+        const evidence = towerEvidence(result);
+
+        assert.deepEqual(evidence?.sourceChainLengths, [2, 1, 1]);
+        assert.equal(evidence?.sourceActionCount, 4);
+        assert.equal(evidence?.sourcePrefixLiftCount, 3);
+        assert.equal(evidence?.baseUsageCount, 5);
+        assert.equal(
+            countOccurrences(compiled.explicitCore, 'Functor_catd_func'),
+            4
+        );
+        assert.equal(
+            countOccurrences(compiled.explicitCore, 'functor-hom-capped'),
+            7
+        );
+        assert.equal(compiled.surfaceType.tag, 'displayed-functor');
+        assertDeepFrozen(emdash.inspect(result));
+    });
+
+    it('maps a bound-outer root without exposing a total context', () => {
+        const bound = innerFamilies('source_identity_bound_', 3);
+        const roots = [...bound];
+        roots[1] = emdash.displayedFamily(
+            'direct_mixed_tower_source_identity_root',
+            opK
+        );
+        const mapper = emdash.displayedFunctor(
+            'direct_mixed_tower_source_identity_mapper',
+            bound[1],
+            roots[1]
+        );
+        const rootTower = towerFamily(emdash, roots, B);
+        const result = emdash.mixedDisplayedFunctorTowerLambda(
+            { name: 'sourceIdentityc', family: rootTower },
+            bindings('sourceIdentity', bound),
+            B,
+            (outer, tokens) => applySpine(
+                emdash,
+                outer,
+                [
+                    tokens[0],
+                    emdash.apply(mapper, tokens[1]),
+                    tokens[2]
+                ]
+            )
+        );
+        const compiled = emdash.compile(result);
+        const evidence = towerEvidence(result);
+
+        assert.equal(evidence?.rootKind, 'bound-outer-identity');
+        assert.equal(evidence?.sourceActionCount, 1);
+        assert.equal(evidence?.sourcePrefixLiftCount, 1);
+        assert.equal(evidence?.baseUsageCount, 1);
+        assert.match(compiled.explicitCore, /Functor_catd_func/u);
+        assert.doesNotMatch(
+            compiled.explicitCore,
+            /mixed_curry|total.context|coerc|cast|equation/u
+        );
+        assertDeepFrozen(emdash.inspect(result));
+    });
+
+    it('finishes source actions before target maps into a rich Hom family',
+    () => {
+        const bound = innerFamilies('source_rich_bound_', 3);
+        const roots = [...bound];
+        roots[1] = emdash.displayedFamily(
+            'direct_mixed_tower_source_rich_root',
+            opK
+        );
+        const mapper = emdash.displayedFunctor(
+            'direct_mixed_tower_source_rich_mapper',
+            bound[1],
+            roots[1]
+        );
+        const F = emdash.displayedFunctor(
+            'direct_mixed_tower_source_rich_F',
+            C,
+            towerFamily(emdash, roots, B)
+        );
+        const G = emdash.displayedFunctor(
+            'direct_mixed_tower_source_rich_G',
+            B,
+            D
+        );
+        const carrier = emdash.displayedFamily(
+            'direct_mixed_tower_source_rich_carrier',
+            K
+        );
+        const source = emdash.section(
+            'direct_mixed_tower_source_rich_source',
+            emdash.oppositeDisplayedFamily(carrier)
+        );
+        const target = emdash.section(
+            'direct_mixed_tower_source_rich_target',
+            carrier
+        );
+        const richTarget = emdash.mixedDisplayedHomFamily(
+            carrier,
+            source,
+            target
+        );
+        const H = emdash.displayedFunctor(
+            'direct_mixed_tower_source_rich_H',
+            D,
+            richTarget
+        );
+        const result = emdash.mixedDisplayedFunctorTowerLambda(
+            { name: 'sourceRichc', family: C },
+            bindings('sourceRich', bound),
+            richTarget,
+            (outer, tokens) => {
+                const leaf = applySpine(
+                    emdash,
+                    emdash.apply(F, outer),
+                    [
+                        tokens[0],
+                        emdash.apply(mapper, tokens[1]),
+                        tokens[2]
+                    ]
+                );
+                return emdash.apply(H, emdash.apply(G, leaf));
+            }
+        );
+        const compiled = emdash.compile(result);
+        const evidence = towerEvidence(result);
+
+        assert.equal(evidence?.sourceActionCount, 1);
+        assert.equal(evidence?.sourcePrefixLiftCount, 1);
+        assert.equal(evidence?.targetChainLength, 2);
+        assert.equal(evidence?.targetLiftCount, 6);
+        assert.match(compiled.explicitExpectedType, /Hom_catd/u);
+        assert.equal(compiled.surfaceType.tag, 'displayed-functor');
+        assert.doesNotMatch(
+            compiled.explicitCore,
+            /mixed_curry|total.context|coerc|cast|equation/u
+        );
+        assertDeepFrozen(emdash.inspect(result));
+    });
+
+    it('uses the same source-action recursion at generated depth six', () => {
+        const depth = 6;
+        const bound = innerFamilies('source_depth6_bound_', depth);
+        const roots = innerFamilies('source_depth6_root_', depth);
+        const mappers = bound.map((family, index) =>
+            emdash.displayedFunctor(
+                `direct_mixed_tower_source_depth6_mapper${index}`,
+                family,
+                roots[index]
+            )
+        );
+        const F = emdash.displayedFunctor(
+            'direct_mixed_tower_source_depth6_F',
+            C,
+            towerFamily(emdash, roots, B)
+        );
+        const result = emdash.mixedDisplayedFunctorTowerLambda(
+            { name: 'sourceDepth6c', family: C },
+            bindings('sourceDepth6', bound),
+            B,
+            (outer, tokens) => applySpine(
+                emdash,
+                emdash.apply(F, outer),
+                tokens.map((token, index) =>
+                    emdash.apply(mappers[index], token)
+                )
+            )
+        );
+        const compiled = emdash.compile(result);
+        const evidence = towerEvidence(result);
+
+        assert.deepEqual(
+            evidence?.sourceChainLengths,
+            Array.from({ length: depth }, () => 1)
+        );
+        assert.equal(evidence?.sourceActionCount, depth);
+        assert.equal(evidence?.sourcePrefixLiftCount, 15);
+        assert.equal(evidence?.baseUsageCount, depth + 1);
+        assert.equal(compiled.surfaceType.tag, 'displayed-functor');
         assert.equal(compiled.productionLambdapiDependency, false);
         assertDeepFrozen(emdash.inspect(result));
     });
@@ -433,34 +738,137 @@ describe('DIRECT-MIXED-NEGATIVE-TOWER-1P direct binder', () => {
                 error.code === 'UNAVAILABLE_DISPLAYED_ACTION'
         );
 
-        const sourceFamilies = innerFamilies('source_', 3);
-        const sourcePrime = emdash.displayedFamily(
-            'direct_mixed_tower_source_prime',
+        const sourceRoot = emdash.displayedFamily(
+            'direct_mixed_tower_negative_source_root',
             opK
         );
         const sourceMap = emdash.displayedFunctor(
-            'direct_mixed_tower_source_map',
-            sourcePrime,
-            sourceFamilies[0]
+            'direct_mixed_tower_negative_source_map',
+            inners[0],
+            sourceRoot
         );
-        const sourceTower = towerFamily(emdash, sourceFamilies, B);
         const sourceF = emdash.displayedFunctor(
-            'direct_mixed_tower_source_F',
+            'direct_mixed_tower_negative_source_F',
             C,
-            sourceTower
+            towerFamily(
+                emdash,
+                [sourceRoot, ...inners.slice(1)],
+                B
+            )
+        );
+        const nonclosedSourceMap = Object.freeze({
+            ...sourceMap,
+            closed: undefined,
+            usage: Object.freeze([])
+        }) as unknown as CoreCategoricalTerm;
+        assertRejected(() => direct('nonclosedSource', (outer, tokens) =>
+            applySpine(
+                emdash,
+                emdash.apply(sourceF, outer),
+                [
+                    emdash.apply(nonclosedSourceMap, tokens[0]),
+                    ...tokens.slice(1)
+                ]
+            )
+        ));
+
+        const wrongOrientationSource = emdash.displayedFamily(
+            'direct_mixed_tower_negative_wrong_orientation_source',
+            K
+        );
+        const wrongOrientationTarget = emdash.displayedFamily(
+            'direct_mixed_tower_negative_wrong_orientation_target',
+            K
+        );
+        const wrongOrientationMap = emdash.displayedFunctor(
+            'direct_mixed_tower_negative_wrong_orientation_map',
+            wrongOrientationSource,
+            wrongOrientationTarget
+        );
+        assertRejected(() => direct('wrongOrientation', (outer, tokens) =>
+            applySpine(
+                emdash,
+                emdash.apply(F, outer),
+                [
+                    emdash.apply(wrongOrientationMap, tokens[0]),
+                    ...tokens.slice(1)
+                ]
+            )
+        ));
+
+        const chainMiddle = emdash.displayedFamily(
+            'direct_mixed_tower_negative_chain_middle',
+            opK
+        );
+        const chainOther = emdash.displayedFamily(
+            'direct_mixed_tower_negative_chain_other',
+            opK
+        );
+        const chainFirst = emdash.displayedFunctor(
+            'direct_mixed_tower_negative_chain_first',
+            inners[0],
+            chainMiddle
+        );
+        const chainBroken = emdash.displayedFunctor(
+            'direct_mixed_tower_negative_chain_broken',
+            chainOther,
+            sourceRoot
+        );
+        assertRejected(() => direct('brokenChain', (outer, tokens) =>
+            applySpine(
+                emdash,
+                emdash.apply(sourceF, outer),
+                [
+                    emdash.apply(
+                        chainBroken,
+                        emdash.apply(chainFirst, tokens[0])
+                    ),
+                    ...tokens.slice(1)
+                ]
+            )
+        ));
+        assertRejected(() => direct('unfinishedChain', (outer, tokens) =>
+            applySpine(
+                emdash,
+                emdash.apply(sourceF, outer),
+                [
+                    emdash.apply(chainFirst, tokens[0]),
+                    ...tokens.slice(1)
+                ]
+            )
+        ));
+
+        const shared = emdash.displayedFamily(
+            'direct_mixed_tower_negative_shared',
+            opK
+        );
+        const sharedRoot = emdash.displayedFamily(
+            'direct_mixed_tower_negative_shared_root',
+            opK
+        );
+        const sharedMapper = emdash.displayedFunctor(
+            'direct_mixed_tower_negative_shared_mapper',
+            shared,
+            sharedRoot
+        );
+        const sharedF = emdash.displayedFunctor(
+            'direct_mixed_tower_negative_shared_F',
+            C,
+            towerFamily(emdash, [sharedRoot, shared, inners[2]], B)
         );
         assertRejected(() =>
             emdash.mixedDisplayedFunctorTowerLambda(
-                { name: 'sourcec', family: C },
-                [
-                    { name: 'sourcea0', family: sourcePrime },
-                    ...bindings('source', sourceFamilies.slice(1))
-                ],
+                { name: 'wrongLayerc', family: C },
+                bindings('wrongLayer', [shared, shared, inners[2]]),
                 B,
                 (outer, tokens) => applySpine(
                     emdash,
-                    emdash.apply(sourceF, outer),
-                    [emdash.apply(sourceMap, tokens[0]), ...tokens.slice(1)]
+                    emdash.apply(sharedF, outer),
+                    [
+                        emdash.apply(sharedMapper, tokens[1]),
+                        tokens[0],
+                        tokens[2]
+                    ]
                 )
             )
         );
