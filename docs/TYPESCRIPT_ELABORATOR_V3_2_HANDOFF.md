@@ -106,8 +106,9 @@
 > expected-contract kind selects the existing compact program method and one
 > fixed `identityCell` head delegates to the existing operation; neutral
 > application, `composeCells`, the direct factorer, and the historical route
-> remain unchanged. The semantic checkpoint is pending in the synchronized
-> commit; read-only `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` is next.
+> remain unchanged. Exact semantic checkpoint:
+> `dabe9d9827462b76a493c1dd34cc658e137f22d5`. Read-only
+> `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` is next.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
