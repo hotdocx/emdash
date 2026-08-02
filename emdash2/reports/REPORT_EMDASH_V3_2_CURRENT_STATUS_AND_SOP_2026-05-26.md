@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-01
+Last consolidated: 2026-08-02
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -1672,6 +1672,25 @@ Cat-valued horizontal action is expressed through the generic
 ladder. Remaining `comp_cat_cov_*` / `comp_cat_con_*` names are transparent
 readability or Cat-only projection surfaces where they expose transfor
 structure; they do not own a duplicate functor law.
+
+The same generic owner, specialized at `Catd_cat K`, also owns fixed-head
+pre- and postwhiskering of displayed transformations. Given closed displayed
+functors `L`, `F`, `G`, and `H`, and `eta : Transfd(F,G)`, the two inputs
+`(eta,id_H)` and `(id_L,eta)` construct the whole transformations `H eta` and
+`eta L`. Their fibre component is exposed by one evaluator beta at the
+existing `tdapp0_fapp0` and `comp_prod_fapp1_fapp0` heads; it reduces to the
+ordinary horizontal action in the fibre. This rule adds no symbol or second
+action owner. `tdapp1_int_cell` continues to observe the whole result and
+therefore retains its base-arrow and higher-cell action internally. The
+identity-specialized full, capped, and base action clauses used by the
+TypeScript runtime are pre-existing generic Lambdapi rules, not new
+constructor-specific coherence.
+
+This closure supports the bounded contextual surface bodies
+`lambda^nd a. H(eta[a])` and `lambda^nd a. eta[L[a]]`. It does not construct a
+classifier whose endpoints themselves vary over another context, and it does
+not add the currently absent `Transf_catd_func`. Such a constructor remains a
+consumer-led question rather than a prerequisite for fixed-head whiskering.
 
 ### Sections 8–10: directed Cat-valued families, Sigma/Pi, and mixed variance
 

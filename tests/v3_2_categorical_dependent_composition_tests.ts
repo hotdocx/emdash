@@ -97,6 +97,7 @@ describe(
                 CORE_CATEGORICAL_DEPENDENT_COMPOSITION_RUNTIME_MODULE
                     .runtimeRules.map(rule => rule.id),
                 [
+                    'categorical.displayed-hom-category.reduce',
                     'categorical.displayed-hom-classifier.reduce',
                     'categorical.section-object-classifier.reduce'
                 ]
@@ -104,7 +105,7 @@ describe(
             assert.deepEqual(
                 CORE_CATEGORICAL_DEPENDENT_COMPOSITION_RUNTIME_MODULE
                     .runtimeRules.map(rule => rule.sourceOwner.name),
-                ['Hom', 'Obj']
+                ['Hom_cat', 'Hom', 'Obj']
             );
             assert.equal(
                 CORE_CATEGORICAL_DEPENDENT_COMPOSITION_TRANSFER_MODULE
@@ -158,9 +159,16 @@ describe(
             assert.deepEqual(
                 compiled.runtime.ruleIds,
                 [
+                    'categorical.displayed-hom-category.reduce',
                     'categorical.displayed-hom-classifier.reduce',
                     'categorical.section-object-classifier.reduce'
                 ]
+            );
+            assert.equal(
+                compiled.composedRuntime.ruleIds.filter(id =>
+                    id === 'categorical.displayed-hom-category.reduce'
+                ).length,
+                1
             );
         });
 

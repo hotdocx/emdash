@@ -66,6 +66,16 @@ describe('DISPLAYED-CHAIN-2A isolated generic transfer closure', () => {
         );
         assert.deepEqual(
             [
+                boundary.localExistingDeclarationCount,
+                boundary.relocatedExistingDeclarationCount,
+                boundary.localContinuationRuntimeRuleCount,
+                boundary.inheritedContinuationRuntimeRuleCount,
+                boundary.totalContinuationRuntimeRuleCount
+            ],
+            [0, 3, 4, 5, 9]
+        );
+        assert.deepEqual(
+            [
                 boundary.activeMathematicalSymbolDelta,
                 boundary.activeRuntimeRuleDelta,
                 boundary.activeProofRuleDelta
@@ -77,43 +87,34 @@ describe('DISPLAYED-CHAIN-2A isolated generic transfer closure', () => {
         assertDeepFrozen(boundary);
     });
 
-    it('checks exactly three declarations and nine runtime subjects', () => {
+    it('checks four local rules and inherits the relocated five', () => {
         const compilation =
             compileCoreCategoricalDisplayedChain2aClosureTransfer();
         const boundary =
             CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_BOUNDARY;
-        assert.deepEqual(
-            compilation.compiled.declarations.map(declaration => ({
-                name: declaration.symbol.name,
-                status: declaration.status,
-                hasBody: declaration.body !== undefined
-            })),
-            [
-                {
-                    name: 'sigma_Fst',
-                    status: 'installed-opaque',
-                    hasBody: false
-                },
-                {
-                    name: 'sigma_Snd',
-                    status: 'installed-opaque',
-                    hasBody: false
-                },
-                {
-                    name: 'Product_grpd',
-                    status: 'installed-opaque',
-                    hasBody: false
-                }
-            ]
-        );
+        assert.deepEqual(compilation.compiled.declarations, []);
         assert.deepEqual(
             compilation.runtime.ruleIds,
             [
-                ...boundary.exactExistingRuntimeRuleIds,
-                ...boundary.derivedRuntimeRuleIds,
+                ...boundary.localExactExistingRuntimeRuleIds,
                 ...boundary.newRuntimeRuleIds
             ]
         );
+        for (const id of [
+            ...boundary.relocatedGenericProductRuntimeRuleIds,
+            ...boundary.derivedRuntimeRuleIds
+        ]) {
+            assert.equal(
+                compilation.runtime.ruleIds.includes(id),
+                false
+            );
+            assert.equal(
+                compilation.composedRuntime.ruleIds.filter(candidate =>
+                    candidate === id
+                ).length,
+                1
+            );
+        }
         assert.equal(
             compilation.runtime.rules.every(rule =>
                 rule.subjectValidation.kind === 'typescript-checked'
@@ -201,7 +202,7 @@ describe('DISPLAYED-CHAIN-2A isolated generic transfer closure', () => {
                 false
             );
             assert.equal(
-                compilation.composedRuntime.ruleIds.slice(-9)
+                compilation.composedRuntime.ruleIds.slice(-4)
                     .every(id => id.includes(
                         'categorical.displayed-chain-2a.'
                     )),
@@ -214,21 +215,17 @@ describe('DISPLAYED-CHAIN-2A isolated generic transfer closure', () => {
             assert.equal(
                 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_MODULE
                     .declarations.length,
-                3
+                0
             );
             assert.equal(
                 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_RUNTIME_MODULE
                     .runtimeRules.length,
-                9
+                4
             );
             assert.deepEqual(
                 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_POLICY
                     .entries.map(entry => entry.policy),
-                [
-                    'opaque-signature',
-                    'opaque-signature',
-                    'opaque-signature'
-                ]
+                []
             );
             assert.equal(
                 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_RUNTIME_POLICY

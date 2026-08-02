@@ -11,7 +11,9 @@
  * existing stable owners needed to expose that composite, transfers the
  * already-active prerequisite computations through the generic declaration
  * and runtime compilers, and adds exactly the two rules approved by
- * D-DTTLF-USABILITY-004.
+ * D-DTTLF-USABILITY-004. D-DTTLF-USABILITY-059 places the existing generic
+ * product object/Hom foundation here at its earliest exact consumer; that
+ * dependency correction changes no active kernel declaration or rule.
  *
  * Some prerequisite rules below are explicit delta-specializations of
  * transparent source definitions (`comp_cat_fapp0`, `Product_pair`, and
@@ -78,16 +80,20 @@ import {
 const MODULE_ID = 'emdash.emdash3_2';
 
 export const CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_REVISION =
-    'FIBRED-PRODUCT-1A-TRANSPARENT-PRODUCT-1' as const;
+    'FIBRED-PRODUCT-1A-TRANSPARENT-PRODUCT-D061-1' as const;
 
 /* Updated mechanically after the active kernel tranche is frozen. */
 export const CORE_CATEGORICAL_FIBRED_PRODUCT_SOURCE_SHA256 =
-    'sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe';
+    'sha256:bdb04532ce79e15f202025dc39babfda202567a54e15d59c03031fc8eee0531a';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
+const groupoid =
+    coreDirectedContinuationTransferSymbol('groupoid-universe');
 const decodeOwner =
     coreDirectedContinuationTransferSymbol('decode');
+const decodedDependentPair =
+    coreDirectedContinuationTransferSymbol('decoded-dependent-pair');
 const objectClassifier =
     coreDirectedContinuationTransferSymbol('object-classifier');
 const functorClassifier =
@@ -122,6 +128,12 @@ const {
 
 export const CORE_CATEGORICAL_FIBRED_PRODUCT_SYMBOLS =
 Object.freeze({
+    sigmaFirst:
+        coreLfQualifiedSymbol(MODULE_ID, 'sigma_Fst'),
+    sigmaSecond:
+        coreLfQualifiedSymbol(MODULE_ID, 'sigma_Snd'),
+    productGroupoid:
+        coreLfQualifiedSymbol(MODULE_ID, 'Product_grpd'),
     postcompositionAction:
         coreLfQualifiedSymbol(MODULE_ID, 'hom_postcomp_fapp0'),
     internalProductFunctor:
@@ -141,6 +153,9 @@ Object.freeze({
 });
 
 const {
+    sigmaFirst,
+    sigmaSecond,
+    productGroupoid,
     postcompositionAction,
     internalProductFunctor,
     partialProductFunctor,
@@ -277,6 +292,80 @@ const objectType = (
 ): CoreLfTransferBuilderExpression =>
     decode(builder, objectClassifierAt(builder, base));
 
+const groupoidFamilyType = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    builder.pi(
+        'x',
+        decode(builder, base),
+        _x => builder.global(groupoid),
+        explicitMode
+    );
+
+const applyFamily = (
+    builder: CoreLfTransferScopedBuilder,
+    family: CoreLfTransferBuilderExpression,
+    value: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    call(builder, family, [{ plicity: 'explicit', value }]);
+
+const decodedPairAt = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression,
+    family: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, decodedDependentPair, [
+        { plicity: 'implicit', value: base },
+        { plicity: 'explicit', value: family }
+    ]);
+
+const sigmaFirstAt = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression,
+    family: CoreLfTransferBuilderExpression,
+    pair_: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, sigmaFirst, [
+        { plicity: 'implicit', value: base },
+        { plicity: 'implicit', value: family },
+        { plicity: 'explicit', value: pair_ }
+    ]);
+
+const sigmaSecondAt = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression,
+    family: CoreLfTransferBuilderExpression,
+    pair_: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, sigmaSecond, [
+        { plicity: 'implicit', value: base },
+        { plicity: 'implicit', value: family },
+        { plicity: 'explicit', value: pair_ }
+    ]);
+
+const constantGroupoidFamily = (
+    builder: CoreLfTransferScopedBuilder,
+    left: CoreLfTransferBuilderExpression,
+    right: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    builder.lam(
+        'ignored',
+        decode(builder, left),
+        _ignored => right,
+        explicitMode
+    );
+
+const productGroupoidAt = (
+    builder: CoreLfTransferScopedBuilder,
+    left: CoreLfTransferBuilderExpression,
+    right: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, productGroupoid, [
+        { plicity: 'explicit', value: left },
+        { plicity: 'explicit', value: right }
+    ]);
+
 const functorType = (
     builder: CoreLfTransferScopedBuilder,
     source: CoreLfTransferBuilderExpression,
@@ -370,6 +459,35 @@ const productCategoryAt = (
         { plicity: 'explicit', value: left },
         { plicity: 'explicit', value: right }
     ]);
+
+const productObjectComponents = (
+    builder: CoreLfTransferScopedBuilder,
+    leftCategory: CoreLfTransferBuilderExpression,
+    rightCategory: CoreLfTransferBuilderExpression,
+    pair_: CoreLfTransferBuilderExpression
+) => {
+    const leftClassifier = objectClassifierAt(builder, leftCategory);
+    const rightClassifier = objectClassifierAt(builder, rightCategory);
+    const family = constantGroupoidFamily(
+        builder,
+        leftClassifier,
+        rightClassifier
+    );
+    return {
+        first: sigmaFirstAt(
+            builder,
+            leftClassifier,
+            family,
+            pair_
+        ),
+        second: sigmaSecondAt(
+            builder,
+            leftClassifier,
+            family,
+            pair_
+        )
+    };
+};
 
 const fapp0 = (
     builder: CoreLfTransferScopedBuilder,
@@ -719,6 +837,65 @@ const postcompositionActionType = (): CoreLfTransferExpression => {
     ));
 };
 
+const sigmaFirstType = (): CoreLfTransferExpression => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.pi(
+        'a',
+        builder.global(groupoid),
+        a => builder.pi(
+            'P',
+            groupoidFamilyType(builder, a),
+            P => builder.pi(
+                's',
+                decodedPairAt(builder, a, P),
+                _s => decode(builder, a),
+                explicitMode
+            ),
+            implicitMode
+        ),
+        implicitMode
+    ));
+};
+
+const sigmaSecondType = (): CoreLfTransferExpression => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.pi(
+        'a',
+        builder.global(groupoid),
+        a => builder.pi(
+            'P',
+            groupoidFamilyType(builder, a),
+            P => builder.pi(
+                's',
+                decodedPairAt(builder, a, P),
+                s => decode(builder, applyFamily(
+                    builder,
+                    P,
+                    sigmaFirstAt(builder, a, P, s)
+                )),
+                explicitMode
+            ),
+            implicitMode
+        ),
+        implicitMode
+    ));
+};
+
+const productGroupoidType = (): CoreLfTransferExpression => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.pi(
+        'A',
+        builder.global(groupoid),
+        _A => builder.pi(
+            'B',
+            builder.global(groupoid),
+            _B => builder.global(groupoid),
+            explicitMode
+        ),
+        explicitMode
+    ));
+};
+
 const declarations: readonly CoreLfTransferDeclaration[] = [
     {
         order: 0,
@@ -770,6 +947,30 @@ const declarations: readonly CoreLfTransferDeclaration[] = [
         provenance: source(
             'symbol hom_postcomp_fapp0 [A B : Cat]'
         )
+    },
+    {
+        order: 5,
+        symbol: sigmaFirst,
+        type: sigmaFirstType(),
+        body: coreLfTransferAbsentBody(),
+        modifiers: publicModifiers('injective', 'opaque'),
+        provenance: source('injective symbol sigma_Fst [a P]')
+    },
+    {
+        order: 6,
+        symbol: sigmaSecond,
+        type: sigmaSecondType(),
+        body: coreLfTransferAbsentBody(),
+        modifiers: publicModifiers('injective', 'opaque'),
+        provenance: source('injective symbol sigma_Snd [a P]')
+    },
+    {
+        order: 7,
+        symbol: productGroupoid,
+        type: productGroupoidType(),
+        body: coreLfTransferAbsentBody(),
+        modifiers: publicModifiers('injective', 'opaque'),
+        provenance: source('injective symbol Product_grpd')
     }
 ];
 
@@ -783,7 +984,9 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
     dependencies: [],
     externalSymbols: [
         category,
+        groupoid,
         decodeOwner,
+        decodedDependentPair,
         objectClassifier,
         functorClassifier,
         homClassifier,
@@ -805,7 +1008,7 @@ export const CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_POLICY:
 CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_MODULE,
     {
-        revision: 'FIBRED-PRODUCT-1A-SIGNATURE-POLICY-1',
+        revision: 'FIBRED-PRODUCT-1A-SIGNATURE-POLICY-D061-1',
         moduleRevision:
             CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_MODULE.revision,
         entries: declarations.map((declaration, order) => ({
@@ -863,7 +1066,7 @@ CoreLfTransferDeclarationLinkage =
     createCoreLfTransferDeclarationLinkage(
         CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_MODULE,
         {
-            revision: 'FIBRED-PRODUCT-1A-SIGNATURE-LINKAGE-1',
+            revision: 'FIBRED-PRODUCT-1A-SIGNATURE-LINKAGE-D061-1',
             moduleRevision:
                 CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_MODULE
                     .revision,
@@ -2547,6 +2750,194 @@ const sharedBaseProductActionRule =
     };
 };
 
+const productGroupoidDecodeRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const A = builder.capture('A');
+    const B = builder.capture('B');
+    return {
+        order: 25,
+        id: 'categorical.fibred-product.product-groupoid-decode',
+        groupId: 'categorical.fibred-product.product-groupoid',
+        clauseOrder: 0,
+        sourceOwner: decodeOwner,
+        variables: [
+            {
+                name: 'A',
+                type: builder.template(builder.global(groupoid))
+            },
+            {
+                name: 'B',
+                type: builder.template(builder.global(groupoid))
+            }
+        ],
+        left: builder.pattern(decode(
+            builder,
+            productGroupoidAt(builder, A, B)
+        )),
+        right: builder.template(decodedPairAt(
+            builder,
+            A,
+            constantGroupoidFamily(builder, A, B)
+        )),
+        provenance: source('rule τ (Product_grpd $A $B)')
+    };
+};
+
+const productObjectRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const A = builder.capture('A');
+    const B = builder.capture('B');
+    return {
+        order: 26,
+        id: 'categorical.fibred-product.product-object',
+        groupId: 'categorical.fibred-product.product-object',
+        clauseOrder: 0,
+        sourceOwner: objectClassifier,
+        variables: [
+            {
+                name: 'A',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'B',
+                type: builder.template(builder.global(category))
+            }
+        ],
+        left: builder.pattern(objectClassifierAt(
+            builder,
+            productCategoryAt(builder, A, B)
+        )),
+        right: builder.template(productGroupoidAt(
+            builder,
+            objectClassifierAt(builder, A),
+            objectClassifierAt(builder, B)
+        )),
+        provenance: source('rule Obj (Product_cat $A $B)')
+    };
+};
+
+const genericProductHomRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const A = builder.capture('A');
+    const B = builder.capture('B');
+    const p = builder.capture('p');
+    const q = builder.capture('q');
+    const product = productCategoryAt(builder, A, B);
+    const pComponents = productObjectComponents(builder, A, B, p);
+    const qComponents = productObjectComponents(builder, A, B, q);
+    return {
+        order: 27,
+        id: 'categorical.fibred-product.product.general-hom',
+        groupId: 'categorical.fibred-product.product-hom',
+        clauseOrder: 0,
+        sourceOwner: homCategory,
+        variables: [
+            {
+                name: 'A',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'B',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'p',
+                type: builder.template(objectType(builder, product))
+            },
+            {
+                name: 'q',
+                type: builder.template(objectType(builder, product))
+            }
+        ],
+        left: builder.pattern(homCategoryAt(builder, product, p, q)),
+        right: builder.template(productCategoryAt(
+            builder,
+            homCategoryAt(
+                builder,
+                A,
+                pComponents.first,
+                qComponents.first
+            ),
+            homCategoryAt(
+                builder,
+                B,
+                pComponents.second,
+                qComponents.second
+            )
+        )),
+        provenance: source(
+            'rule Hom_cat (Product_cat $A $B) $p $q'
+        )
+    };
+};
+
+/**
+ * Derived Core beta for the active transparent Product_pair definition.
+ * This is the stable transfer image of Product_pair = Struct_sigma followed
+ * by the generic sigma projection beta; it adds no product projection owner.
+ */
+const productPairProjectionBetaRule = (
+    side: 'left' | 'right',
+    order: number
+): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const A = builder.capture('A');
+    const B = builder.capture('B');
+    const x = builder.capture('x');
+    const y = builder.capture('y');
+    const leftClassifier = objectClassifierAt(builder, A);
+    const family = constantGroupoidFamily(
+        builder,
+        leftClassifier,
+        objectClassifierAt(builder, B)
+    );
+    const pair_ = pair(
+        builder,
+        builder.wildcard(A),
+        builder.wildcard(B),
+        x,
+        y
+    );
+    return {
+        order,
+        id: `categorical.fibred-product.product-pair-${side}.delta-beta`,
+        groupId: 'categorical.fibred-product.product-pair-projection',
+        clauseOrder: side === 'left' ? 0 : 1,
+        sourceOwner: side === 'left' ? sigmaFirst : sigmaSecond,
+        variables: [
+            {
+                name: 'A',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'B',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'x',
+                type: builder.template(objectType(builder, A))
+            },
+            {
+                name: 'y',
+                type: builder.template(objectType(builder, B))
+            }
+        ],
+        left: builder.pattern(
+            side === 'left'
+                ? sigmaFirstAt(builder, leftClassifier, family, pair_)
+                : sigmaSecondAt(builder, leftClassifier, family, pair_)
+        ),
+        right: builder.template(side === 'left' ? x : y),
+        provenance: source(
+            `derived active transparent Product_pair plus ` +
+                `sigma_${side === 'left' ? 'Fst' : 'Snd'} beta`
+        )
+    };
+};
+
 const runtimeRules = Object.freeze([
     compositionObjectRule(),
     compositionArrowRule(),
@@ -2572,12 +2963,17 @@ const runtimeRules = Object.freeze([
     postcompositionArrowRule(),
     postcompositionIdentityArrowNormalizationRule(),
     uncurryObjectNormalizationRule(),
-    sharedBaseProductActionRule()
+    sharedBaseProductActionRule(),
+    productGroupoidDecodeRule(),
+    productObjectRule(),
+    genericProductHomRule(),
+    productPairProjectionBetaRule('left', 28),
+    productPairProjectionBetaRule('right', 29)
 ]);
 
 export const CORE_CATEGORICAL_FIBRED_PRODUCT_RUNTIME_MODULE:
 CoreLfModuleSpec = createCoreLfModuleSpec({
-    revision: 'FIBRED-PRODUCT-1A-RUNTIME-1',
+    revision: 'FIBRED-PRODUCT-1A-RUNTIME-D061-1',
     moduleId: MODULE_ID,
     fragmentId: 'fibred-product-1a-runtime',
     authorityPath: 'emdash2/emdash3_2.lp',
@@ -2585,7 +2981,9 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
     dependencies: [],
     externalSymbols: [
         category,
+        groupoid,
         decodeOwner,
+        decodedDependentPair,
         objectClassifier,
         functorClassifier,
         homClassifier,
@@ -2608,7 +3006,10 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
         internalProductFunctor,
         partialProductFunctor,
         productLeftAction,
-        fixedRightProductMap
+        fixedRightProductMap,
+        sigmaFirst,
+        sigmaSecond,
+        productGroupoid
     ].map(symbol => ({
         symbol,
         availability: 'earlier-fragment' as const
@@ -2624,6 +3025,17 @@ const newRuleIds = Object.freeze([
     'categorical.fibred-product.shared-base-arrow'
 ] as const);
 
+const relocatedGenericProductRuleIds = Object.freeze([
+    'categorical.fibred-product.product-groupoid-decode',
+    'categorical.fibred-product.product-object',
+    'categorical.fibred-product.product.general-hom'
+] as const);
+
+const relocatedProductPairBetaRuleIds = Object.freeze([
+    'categorical.fibred-product.product-pair-left.delta-beta',
+    'categorical.fibred-product.product-pair-right.delta-beta'
+] as const);
+
 const normalFormSpecializationRuleIds = Object.freeze([
     'categorical.identity-functor.arrow.delta',
     'categorical.evaluation.arrow.cat-normalize',
@@ -2635,7 +3047,7 @@ export const CORE_CATEGORICAL_FIBRED_PRODUCT_RUNTIME_POLICY:
 CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_FIBRED_PRODUCT_RUNTIME_MODULE,
     {
-        revision: 'FIBRED-PRODUCT-1A-RUNTIME-POLICY-1',
+        revision: 'FIBRED-PRODUCT-1A-RUNTIME-POLICY-D061-1',
         moduleRevision:
             CORE_CATEGORICAL_FIBRED_PRODUCT_RUNTIME_MODULE.revision,
         entries: runtimeRules.map(rule => ({
@@ -2650,6 +3062,14 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
             ).includes(rule.id)
                 ? 'Exact rule newly approved and active under ' +
                     'D-DTTLF-USABILITY-004'
+                : (
+                    relocatedProductPairBetaRuleIds as
+                    readonly string[]
+                ).includes(rule.id)
+                    ? 'Checked Core image of transparent Product_pair ' +
+                        'followed by existing Sigma projection beta; ' +
+                        'relocated under D-DTTLF-USABILITY-060 and made ' +
+                        'inferred-slot exact under D-DTTLF-USABILITY-061'
                 : (
                     normalFormSpecializationRuleIds as
                     readonly string[]
@@ -2676,6 +3096,12 @@ Object.freeze({
     declarationNames: Object.freeze(
         declarations.map(declaration => declaration.symbol.name)
     ),
+    relocatedExistingDeclarationNames: Object.freeze([
+        sigmaFirst.name,
+        sigmaSecond.name,
+        productGroupoid.name
+    ]),
+    relocatedExistingDeclarationCount: 3,
     prerequisiteRuntimeRuleCount:
         runtimeRules.length - newRuleIds.length,
     newRuntimeRuleCount: newRuleIds.length,
@@ -2685,9 +3111,22 @@ Object.freeze({
         normalFormSpecializationRuleIds.length,
     normalFormSpecializationRuleIds,
     runtimeRuleIds: Object.freeze(runtimeRules.map(rule => rule.id)),
+    relocatedGenericProductRuleIds,
+    relocatedGenericProductRuleCount:
+        relocatedGenericProductRuleIds.length,
+    relocatedProductPairBetaRuleIds,
+    relocatedProductPairBetaRuleCount:
+        relocatedProductPairBetaRuleIds.length,
+    transferLayerCorrectionDecisions: Object.freeze([
+        'D-DTTLF-USABILITY-059',
+        'D-DTTLF-USABILITY-060',
+        'D-DTTLF-USABILITY-061'
+    ]),
+    transferLayerCorrectionDecision: 'D-DTTLF-USABILITY-061',
+    activeMathematicalDeltaForLayerCorrection: 0,
     allEntriesUseGenericTransferEngines: true,
     allLocalRuntimeRulesSubjectChecked: true,
-    wildcardOrNewPatternShapeRequired: false,
+    wildcardOrNewPatternShapeRequired: true,
     warningsAreDiagnosticNotSelectionVetoes: true,
     necessityAudit: Object.freeze({
         reusedExistingConstructions: Object.freeze([
@@ -2791,6 +3230,9 @@ CoreCategoricalFibredProductCompilation {
 }
 
 export type CoreCategoricalFibredProductSymbolId =
+    | 'sigma-first'
+    | 'sigma-second'
+    | 'product-groupoid'
     | 'postcomposition-action'
     | 'internal-product-functor'
     | 'partial-product-functor'
@@ -2802,6 +3244,9 @@ Readonly<Record<
     CoreCategoricalFibredProductSymbolId,
     CoreLfQualifiedSymbol
 >> = Object.freeze({
+    'sigma-first': sigmaFirst,
+    'sigma-second': sigmaSecond,
+    'product-groupoid': productGroupoid,
     'postcomposition-action': postcompositionAction,
     'internal-product-functor': internalProductFunctor,
     'partial-product-functor': partialProductFunctor,

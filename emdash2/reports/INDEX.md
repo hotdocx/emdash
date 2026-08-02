@@ -1,6 +1,6 @@
 # EMDASH Reports Index
 
-Date: 2026-08-01
+Date: 2026-08-02
 
 Use this file as the first stop for report discovery. `emdash3_2.lp` remains
 the active kernel authority; `emdash3_2_eq1_hom_action.lp` is its one-way
@@ -61,6 +61,20 @@ reading, and the canonical-syntax report records the corresponding direct
 nested-binder body. This is an application combinator, not mixed curry or a
 total-context-section prerequisite; a nonconstant middle remains outside the
 active construction.
+
+The 2026-08-02 contextual displayed-natural whiskering closure adds no
+semantic owner and one evaluator beta at the existing `tdapp0_fapp0` and
+`comp_prod_fapp1_fapp0` heads. Specializing generic horizontal action to
+`Catd_cat K` constructs whole fixed-head pre- and postwhiskered `Transfd`
+terms; the new beta exposes their ordinary fibre component, while existing
+displayed internal action retains base-arrow and higher-cell behavior. The
+associated TypeScript transfer imports three pre-existing generic
+identity-action rules and the surface recursively factors the exact bodies
+`lambda^nd a. H(eta[a])` and `lambda^nd a. eta[L[a]]`. The living decision and
+validation ledger is
+`../../docs/TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`.
+Varying `Transf_catd` classifiers and unrestricted `lambda^nd` synthesis
+remain separate consumer-led work.
 
 ## Recently Completed Plan Ledgers
 

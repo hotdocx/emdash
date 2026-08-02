@@ -805,6 +805,10 @@ for (const [
     [
         'higher-cell',
         'emdash.categorical.displayed-transfor-higher-cell'
+    ],
+    [
+        'horizontal-composition-action',
+        'emdash.categorical.displayed-transfor-horizontal-action'
     ]
 ] as const) {
     categoricalLabels[

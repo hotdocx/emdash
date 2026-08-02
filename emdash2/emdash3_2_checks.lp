@@ -16079,6 +16079,78 @@ assert [K : Cat] (E D : τ (Catd K)) (FF GG : τ (Functord E D))
   fapp0 (@tdapp0_func K E D FF GG z) ϵ
     ≡ @tdapp0_fapp0 K E D FF GG z ϵ;
 
+// Generic displayed horizontal action projects to the existing ordinary
+// horizontal-action owner in each fibre. This one assertion covers arbitrary
+// paired cells; fixed pre/postwhiskering are its identity-slot instances.
+assert [K : Cat]
+  [W X Z : τ (Catd K)]
+  (FG FG' : τ (Obj
+    (Product_cat
+      (@Functord_cat K W X)
+      (@Functord_cat K X Z))))
+  (theta : τ (Hom
+    (Product_cat
+      (@Functord_cat K W X)
+      (@Functord_cat K X Z))
+    FG
+    FG'))
+  (k : τ (Obj K)) ⊢
+  @tdapp0_fapp0
+      K W Z
+      (@comp_fapp0
+        (@Catd_cat K)
+        W X Z
+        (sigma_Snd FG)
+        (sigma_Fst FG))
+      (@comp_fapp0
+        (@Catd_cat K)
+        W X Z
+        (sigma_Snd FG')
+        (sigma_Fst FG'))
+      k
+      (@comp_prod_fapp1_fapp0
+        (@Catd_cat K)
+        W X Z
+        FG FG' theta)
+  ≡ @comp_prod_fapp1_fapp0
+      Cat_cat
+      (Fibre_cat W k)
+      (Fibre_cat X k)
+      (Fibre_cat Z k)
+      (@Product_pair
+        (Functor_cat (Fibre_cat W k) (Fibre_cat X k))
+        (Functor_cat (Fibre_cat X k) (Fibre_cat Z k))
+        (@Fibre_func K W X (sigma_Fst FG) k)
+        (@Fibre_func K X Z (sigma_Snd FG) k))
+      (@Product_pair
+        (Functor_cat (Fibre_cat W k) (Fibre_cat X k))
+        (Functor_cat (Fibre_cat X k) (Fibre_cat Z k))
+        (@Fibre_func K W X (sigma_Fst FG') k)
+        (@Fibre_func K X Z (sigma_Snd FG') k))
+      (@Product_pair
+        (@Transf_cat
+          (Fibre_cat W k)
+          (Fibre_cat X k)
+          (@Fibre_func K W X (sigma_Fst FG) k)
+          (@Fibre_func K W X (sigma_Fst FG') k))
+        (@Transf_cat
+          (Fibre_cat X k)
+          (Fibre_cat Z k)
+          (@Fibre_func K X Z (sigma_Snd FG) k)
+          (@Fibre_func K X Z (sigma_Snd FG') k))
+        (@tdapp0_fapp0
+          K W X
+          (sigma_Fst FG)
+          (sigma_Fst FG')
+          k
+          (sigma_Fst theta))
+        (@tdapp0_fapp0
+          K X Z
+          (sigma_Snd FG)
+          (sigma_Snd FG')
+          k
+          (sigma_Snd theta)));
+
 // Displayed component identities join through both stable category
 // presentations and the generic identity owner.
 assert [K : Cat] (E D : τ (Catd K)) (FF : τ (Functord E D))

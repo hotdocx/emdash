@@ -122,7 +122,10 @@ describe(
                     'Product_cat_fapp0_func',
                     'Product_cat_fapp1_fapp0_functord',
                     'Product_cat_fapp1_tapp0_func',
-                    'hom_postcomp_fapp0'
+                    'hom_postcomp_fapp0',
+                    'sigma_Fst',
+                    'sigma_Snd',
+                    'Product_grpd'
                 ]
             );
             assert.deepEqual(
@@ -130,6 +133,9 @@ describe(
                     CORE_CATEGORICAL_FIBRED_PRODUCT_SYMBOLS
                 ).map(symbol => symbol.name),
                 [
+                    'sigma_Fst',
+                    'sigma_Snd',
+                    'Product_grpd',
                     'hom_postcomp_fapp0',
                     'Product_cat_func',
                     'Product_cat_fapp0_func',
@@ -173,7 +179,7 @@ describe(
             assert.equal(
                 CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
                     .prerequisiteRuntimeRuleCount,
-                23
+                28
             );
             assert.equal(
                 CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
@@ -183,7 +189,26 @@ describe(
             assert.equal(
                 CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
                     .runtimeRuleCount,
-                25
+                30
+            );
+            assert.deepEqual(
+                CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
+                    .relocatedGenericProductRuleIds,
+                [
+                    'categorical.fibred-product.product-groupoid-decode',
+                    'categorical.fibred-product.product-object',
+                    'categorical.fibred-product.product.general-hom'
+                ]
+            );
+            assert.deepEqual(
+                CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
+                    .relocatedProductPairBetaRuleIds,
+                [
+                    'categorical.fibred-product.' +
+                        'product-pair-left.delta-beta',
+                    'categorical.fibred-product.' +
+                        'product-pair-right.delta-beta'
+                ]
             );
             assert.deepEqual(
                 CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
@@ -200,7 +225,7 @@ describe(
             assert.equal(
                 CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
                     .wildcardOrNewPatternShapeRequired,
-                false
+                true
             );
             assert.equal(
                 CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
@@ -210,17 +235,30 @@ describe(
 
             const compiled =
                 compileCoreCategoricalFibredProductTransfer();
-            assert.equal(compiled.compiled.declarations.length, 5);
-            assert.equal(compiled.runtime.rules.length, 25);
+            assert.equal(compiled.compiled.declarations.length, 8);
+            assert.equal(compiled.runtime.rules.length, 30);
             assert.deepEqual(
                 compiled.runtime.rules.map(rule =>
                     rule.subjectValidation.kind
                 ),
                 Array.from(
-                    { length: 25 },
+                    { length: 30 },
                     () => 'typescript-checked'
                 )
             );
+            for (const id of [
+                ...CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
+                    .relocatedGenericProductRuleIds,
+                ...CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_BOUNDARY
+                    .relocatedProductPairBetaRuleIds
+            ]) {
+                assert.equal(
+                    compiled.composedRuntime.ruleIds.filter(candidate =>
+                        candidate === id
+                    ).length,
+                    1
+                );
+            }
         });
 
         it('pins source bytes and both approved active rules', () => {

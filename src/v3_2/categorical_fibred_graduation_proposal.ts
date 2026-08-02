@@ -173,8 +173,8 @@ const rawProposal = {
         rows: [
             {
                 id: 'fibred-product',
-                declarationSlots: 5,
-                runtimeRuleSlots: 25,
+                declarationSlots: 8,
+                runtimeRuleSlots: 30,
                 proofRuleSlots: 0,
                 newMathematicalOwners: 0,
                 newMathematicalRuntimeRules: 2,
@@ -209,11 +209,11 @@ const rawProposal = {
             },
             {
                 id: 'displayed-transfor',
-                declarationSlots: 7,
-                runtimeRuleSlots: 10,
+                declarationSlots: 8,
+                runtimeRuleSlots: 17,
                 proofRuleSlots: 1,
                 newMathematicalOwners: 0,
-                newMathematicalRuntimeRules: 0,
+                newMathematicalRuntimeRules: 1,
                 genericEnginesOnly: true
             },
             {
@@ -228,7 +228,7 @@ const rawProposal = {
             {
                 id: 'dependent-target',
                 declarationSlots: 10,
-                runtimeRuleSlots: 10,
+                runtimeRuleSlots: 9,
                 proofRuleSlots: 1,
                 newMathematicalOwners: 0,
                 newMathematicalRuntimeRules: 0,
@@ -237,11 +237,11 @@ const rawProposal = {
         ],
         cumulativeSliceCounts: {
             representativeSlices: 7,
-            declarationSlots: 37,
-            runtimeRuleSlots: 72,
+            declarationSlots: 41,
+            runtimeRuleSlots: 83,
             proofRuleSlots: 3,
             newMathematicalOwners: 4,
-            newMathematicalRuntimeRules: 15
+            newMathematicalRuntimeRules: 16
         },
         genericMechanismsExercised: [
             'opaque-signatures',
@@ -547,15 +547,15 @@ export function validateCoreCategoricalFibredGraduationProposal(
         proposal.transferEvidence.cumulativeSliceCounts
             .representativeSlices !== 7 ||
         proposal.transferEvidence.cumulativeSliceCounts
-            .declarationSlots !== 37 ||
+            .declarationSlots !== 41 ||
         proposal.transferEvidence.cumulativeSliceCounts
-            .runtimeRuleSlots !== 72 ||
+            .runtimeRuleSlots !== 83 ||
         proposal.transferEvidence.cumulativeSliceCounts
             .proofRuleSlots !== 3 ||
         proposal.transferEvidence.cumulativeSliceCounts
             .newMathematicalOwners !== 4 ||
         proposal.transferEvidence.cumulativeSliceCounts
-            .newMathematicalRuntimeRules !== 15 ||
+            .newMathematicalRuntimeRules !== 16 ||
         proposal.transferEvidence.rows.some(
             row => !row.genericEnginesOnly
         ) ||

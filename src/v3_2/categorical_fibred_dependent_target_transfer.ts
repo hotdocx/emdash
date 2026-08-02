@@ -73,7 +73,7 @@ import {
 
 export const
 CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_TRANSFER_REVISION =
-    'FIBRED-DEPENDENT-TARGET-1-EXISTING-AUTHORITY-TRANSFER-1' as const;
+    'FIBRED-DEPENDENT-TARGET-1-EXISTING-AUTHORITY-TRANSFER-D060-1' as const;
 
 const MODULE_ID = 'emdash.emdash3_2';
 const symbol = (name: string): CoreLfQualifiedSymbol =>
@@ -754,54 +754,6 @@ const internalFunctorCategorySecondRule =
     };
 };
 
-const displayedHomCategoryRule =
-(): CoreLfTransferRuntimeRule => {
-    const builder = new CoreLfTransferScopedBuilder();
-    const K = builder.capture('K');
-    const E = builder.capture('E');
-    const D = builder.capture('D');
-    const catd = globalCall(builder, displayedCategoryCategory, [{
-        plicity: 'explicit',
-        value: K
-    }]);
-    return {
-        order: 0,
-        id: 'categorical.dependent-target.displayed-hom-category',
-        groupId:
-            'categorical.dependent-target.displayed-hom-category',
-        clauseOrder: 0,
-        sourceOwner: homCategory,
-        variables: [
-            {
-                name: 'K',
-                type: builder.template(builder.global(category))
-            },
-            {
-                name: 'E',
-                type: builder.template(displayedFamilyType(builder, K))
-            },
-            {
-                name: 'D',
-                type: builder.template(displayedFamilyType(builder, K))
-            }
-        ],
-        left: builder.pattern(homCategoryAt(builder, catd, E, D)),
-        right: builder.template(globalCall(
-            builder,
-            displayedFunctorCategory,
-            [
-                { plicity: 'implicit', value: K },
-                { plicity: 'explicit', value: E },
-                { plicity: 'explicit', value: D }
-            ]
-        )),
-        provenance: source(
-            'rule Hom_cat (@Catd_cat $K) $E $D ' +
-                '↪ @Functord_cat $K $E $D'
-        )
-    };
-};
-
 const sectionFunctorObjectRule =
 (): CoreLfTransferRuntimeRule => {
     const builder = new CoreLfTransferScopedBuilder();
@@ -888,7 +840,6 @@ Object.freeze([
     internalFunctorCategorySecondRule(),
     originalRuntime('stress.internal-pi.constant-pullback'),
     sectionFunctorObjectRule(),
-    displayedHomCategoryRule(),
     originalRuntime('stress.internal-pi.package-component'),
     originalRuntime('stress.internal-pi.pullback-fold'),
     originalRuntime('stress.internal-pi.pullback-component')
@@ -901,7 +852,7 @@ const runtimeModuleFor = (
     suffix: string,
     rules: readonly CoreLfTransferRuntimeRule[]
 ): CoreLfModuleSpec => createCoreLfModuleSpec({
-    revision: `FIBRED-DEPENDENT-TARGET-1-${suffix}-1`,
+    revision: `FIBRED-DEPENDENT-TARGET-1-${suffix}-D060-1`,
     moduleId: MODULE_ID,
     fragmentId:
         `fibred-dependent-target-1-${suffix.toLowerCase()}`,
@@ -947,7 +898,7 @@ export const
 CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_PREREQUISITE_RUNTIME_MODULE =
     runtimeModuleFor(
         'PREREQUISITE-RUNTIME',
-        runtimeRules.slice(0, 7)
+        runtimeRules.slice(0, 6)
     );
 
 export const
@@ -960,7 +911,7 @@ export const
 CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CONSUMER_RUNTIME_MODULE =
     runtimeModuleFor(
         'CONSUMER-RUNTIME',
-        runtimeRules.slice(7)
+        runtimeRules.slice(6)
     );
 
 export const
@@ -1078,9 +1029,13 @@ Object.freeze({
     proofRuleIds: Object.freeze([proofRule.id]),
     declarationCount: declarations.length,
     runtimeRuleCount: runtimeRules.length,
-    prerequisiteRuntimeRuleCount: 7,
+    prerequisiteRuntimeRuleCount: 6,
     consumerRuntimeRuleCount: 3,
-    directlyCheckedRuntimeRuleCount: 8,
+    inheritedRuntimeRuleIds: Object.freeze([
+        'categorical.displayed-hom-category.reduce'
+    ]),
+    inheritedRuntimeRuleCount: 1,
+    directlyCheckedRuntimeRuleCount: 7,
     proofCheckedRuntimeRuleCount: 2,
     proofCheckedRuntimeRuleIds: Object.freeze([
         'categorical.dependent-target.package-component',

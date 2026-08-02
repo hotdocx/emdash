@@ -847,6 +847,25 @@ generic product-composition owners `comp_prod_fapp1_func` and
 former compatibility-only `comp_cat_cov_*` and `comp_cat_con_*` heads are no
 longer active kernel owners.
 
+That construction is polymorphic in its ambient category. At
+`A = Catd_cat(K)` it gives horizontal action on displayed transformations:
+
+```text
+(eta,id_H) |-> H eta
+(id_L,eta) |-> eta L.
+```
+
+These are whole `Transfd` objects, not pointwise arrows supplemented by an
+external naturality square. Projecting at `k : K` computes to the corresponding
+ordinary horizontal action in the fibre, while the original whole term still
+supplies base-arrow and higher-cell behavior through the displayed internal
+action. Thus the contextual readings `lambda^nd a. H(eta[a])` and
+`lambda^nd a. eta[L[a]]` reuse one already-internalized action owner. The
+additional kernel clause is only the missing component evaluator beta; it does
+not introduce a new classifier or a second coherence calculus. A future
+construction in which the complete `Transf_catd` classifier itself varies is
+a different problem and is not implied by this fixed-head case.
+
 ### Hom-Actions And Controlled Associativity
 
 The represented hom-actions are meant to compute with composition before a

@@ -101,7 +101,7 @@ export const CORE_CATEGORICAL_DISPLAYED_CHAIN_TRANSFER_REVISION =
     'DISPLAYED-CHAIN-1A-GENERIC-TRANSFER-1' as const;
 
 export const CORE_CATEGORICAL_DISPLAYED_CHAIN_SOURCE_SHA256 =
-    'sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe';
+    'sha256:bdb04532ce79e15f202025dc39babfda202567a54e15d59c03031fc8eee0531a';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');

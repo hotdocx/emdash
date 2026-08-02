@@ -2,10 +2,12 @@
  * DISPLAYED-CHAIN-2A isolated generic transfer closure.
  *
  * This continuation preserves the completed DISPLAYED-CHAIN-1A fragment and
- * adds exactly three existing signatures, six exact existing computations,
- * two narrow checked Product_pair projection normal forms, and the one
- * D-017-approved componentwise fdapp1_int_cell rule. Every declaration and
- * rule goes through the generic LF compilers.
+ * reuses three existing signatures and three generic product computations
+ * relocated to FIBRED-PRODUCT-1A by D-059, reuses the two checked
+ * Product_pair projection normal forms relocated there by D-060, then adds
+ * the remaining three exact existing computations and the one D-017-approved
+ * componentwise fdapp1_int_cell rule. Every declaration and rule goes through
+ * the generic LF compilers.
  */
 
 import {
@@ -13,6 +15,10 @@ import {
     CoreCategoricalDisplayedChainCompilation,
     compileCoreCategoricalDisplayedChainTransfer
 } from './categorical_displayed_chain_transfer';
+import {
+    CORE_CATEGORICAL_FIBRED_PRODUCT_SYMBOLS,
+    CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_LINKAGE
+} from './categorical_fibred_product_transfer';
 import {
     CORE_DIRECTED_CONTINUATION_TRANSFER_LINKAGE,
     coreDirectedContinuationTransferSymbol
@@ -22,12 +28,10 @@ import {
     CoreLfQualifiedSymbol,
     CoreLfTransferBuilderExpression,
     CoreLfTransferDeclaration,
-    CoreLfTransferExpression,
     CoreLfTransferPolicyOverlay,
     CoreLfTransferRuntimeRule,
     CoreLfTransferScopedBuilder,
     coreLfQualifiedSymbol,
-    coreLfTransferAbsentBody,
     createCoreLfModuleSpec,
     createCoreLfTransferPolicyOverlay
 } from './lf_transfer';
@@ -55,16 +59,14 @@ const MODULE_ID = 'emdash.emdash3_2';
 
 export const
 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_REVISION =
-    'DISPLAYED-CHAIN-2A-CLOSURE-GENERIC-TRANSFER-1' as const;
+    'DISPLAYED-CHAIN-2A-CLOSURE-GENERIC-TRANSFER-D061-1' as const;
 
 export const
 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_SOURCE_SHA256 =
-    'sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe';
+    'sha256:bdb04532ce79e15f202025dc39babfda202567a54e15d59c03031fc8eee0531a';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
-const groupoid =
-    coreDirectedContinuationTransferSymbol('groupoid-universe');
 const decodeOwner =
     coreDirectedContinuationTransferSymbol('decode');
 const objectClassifier =
@@ -85,15 +87,14 @@ const displayedFunctorCategory =
     );
 const functorObject =
     coreDirectedContinuationTransferSymbol('functor-object');
-const decodedDependentPair =
-    coreDirectedContinuationTransferSymbol('decoded-dependent-pair');
-
 const symbol = (name: string): CoreLfQualifiedSymbol =>
     coreLfQualifiedSymbol(MODULE_ID, name);
 
-const sigmaFirst = symbol('sigma_Fst');
-const sigmaSecond = symbol('sigma_Snd');
-const productGroupoid = symbol('Product_grpd');
+const {
+    sigmaFirst,
+    sigmaSecond,
+    productGroupoid
+} = CORE_CATEGORICAL_FIBRED_PRODUCT_SYMBOLS;
 const functorCategory = symbol('Functor_cat');
 const functorComposition = symbol('comp_cat_fapp0');
 const productCategory = symbol('Product_cat');
@@ -178,37 +179,6 @@ const homCategoryAt = (
         { plicity: 'explicit', value: target }
     ]);
 
-const groupoidFamilyType = (
-    builder: CoreLfTransferScopedBuilder,
-    base: CoreLfTransferBuilderExpression
-): CoreLfTransferBuilderExpression =>
-    builder.pi(
-        'x',
-        decode(builder, base),
-        _x => builder.global(groupoid),
-        explicitMode
-    );
-
-const applyFamily = (
-    builder: CoreLfTransferScopedBuilder,
-    family: CoreLfTransferBuilderExpression,
-    value: CoreLfTransferBuilderExpression
-): CoreLfTransferBuilderExpression =>
-    call(builder, family, [{
-        plicity: 'explicit',
-        value
-    }]);
-
-const decodedPairAt = (
-    builder: CoreLfTransferScopedBuilder,
-    base: CoreLfTransferBuilderExpression,
-    family: CoreLfTransferBuilderExpression
-): CoreLfTransferBuilderExpression =>
-    globalCall(builder, decodedDependentPair, [
-        { plicity: 'implicit', value: base },
-        { plicity: 'explicit', value: family }
-    ]);
-
 const sigmaFirstAt = (
     builder: CoreLfTransferScopedBuilder,
     base: CoreLfTransferBuilderExpression,
@@ -244,16 +214,6 @@ const constantGroupoidFamily = (
         _x => right,
         explicitMode
     );
-
-const productGroupoidAt = (
-    builder: CoreLfTransferScopedBuilder,
-    left: CoreLfTransferBuilderExpression,
-    right: CoreLfTransferBuilderExpression
-): CoreLfTransferBuilderExpression =>
-    globalCall(builder, productGroupoid, [
-        { plicity: 'explicit', value: left },
-        { plicity: 'explicit', value: right }
-    ]);
 
 const productCategoryAt = (
     builder: CoreLfTransferScopedBuilder,
@@ -546,103 +506,13 @@ const source = (sourceFragment: string) => ({
     sourceFragment
 });
 
-const modifiers = () => ({
-    visibility: 'public' as const,
-    rigidity: 'injective' as const,
-    sourceOpacity: 'opaque' as const
-});
-
-const sigmaFirstType = (): CoreLfTransferExpression => {
-    const builder = new CoreLfTransferScopedBuilder();
-    return builder.term(builder.pi(
-        'a',
-        builder.global(groupoid),
-        a => builder.pi(
-            'P',
-            groupoidFamilyType(builder, a),
-            P => builder.pi(
-                's',
-                decodedPairAt(builder, a, P),
-                _s => decode(builder, a),
-                explicitMode
-            ),
-            implicitMode
-        ),
-        implicitMode
-    ));
-};
-
-const sigmaSecondType = (): CoreLfTransferExpression => {
-    const builder = new CoreLfTransferScopedBuilder();
-    return builder.term(builder.pi(
-        'a',
-        builder.global(groupoid),
-        a => builder.pi(
-            'P',
-            groupoidFamilyType(builder, a),
-            P => builder.pi(
-                's',
-                decodedPairAt(builder, a, P),
-                s => decode(builder, applyFamily(
-                    builder,
-                    P,
-                    sigmaFirstAt(builder, a, P, s)
-                )),
-                explicitMode
-            ),
-            implicitMode
-        ),
-        implicitMode
-    ));
-};
-
-const productGroupoidType = (): CoreLfTransferExpression => {
-    const builder = new CoreLfTransferScopedBuilder();
-    return builder.term(builder.pi(
-        'A',
-        builder.global(groupoid),
-        _A => builder.pi(
-            'B',
-            builder.global(groupoid),
-            _B => builder.global(groupoid),
-            explicitMode
-        ),
-        explicitMode
-    ));
-};
-
 const declarations:
-readonly CoreLfTransferDeclaration[] = Object.freeze([
-    Object.freeze({
-        order: 0,
-        symbol: sigmaFirst,
-        type: sigmaFirstType(),
-        body: coreLfTransferAbsentBody(),
-        modifiers: modifiers(),
-        provenance: source('injective symbol sigma_Fst [a P]')
-    }),
-    Object.freeze({
-        order: 1,
-        symbol: sigmaSecond,
-        type: sigmaSecondType(),
-        body: coreLfTransferAbsentBody(),
-        modifiers: modifiers(),
-        provenance: source('injective symbol sigma_Snd [a P]')
-    }),
-    Object.freeze({
-        order: 2,
-        symbol: productGroupoid,
-        type: productGroupoidType(),
-        body: coreLfTransferAbsentBody(),
-        modifiers: modifiers(),
-        provenance: source('injective symbol Product_grpd')
-    })
-]);
+readonly CoreLfTransferDeclaration[] = Object.freeze([]);
 
 const signatureExternalSymbols = Object.freeze([
-    groupoid,
-    decodeOwner,
-    decodedDependentPair
+    sigmaFirst,
+    sigmaSecond,
+    productGroupoid
 ]);
 
 export const
@@ -672,26 +542,17 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_MODULE,
     {
         revision:
-            'DISPLAYED-CHAIN-2A-CLOSURE-SIGNATURE-POLICY-1',
+            'DISPLAYED-CHAIN-2A-CLOSURE-SIGNATURE-POLICY-D061-1',
         moduleRevision:
             CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_MODULE
                 .revision,
-        entries: declarations.map(declaration => ({
-            order: declaration.order,
-            target: {
-                kind: 'declaration' as const,
-                symbol: declaration.symbol
-            },
-            policy: 'opaque-signature' as const,
-            evidence:
-                'Exact existing active signature approved by ' +
-                'D-DTTLF-USABILITY-017'
-        }))
+        entries: []
     }
 );
 
 const prerequisiteLinks = [
     ...CORE_CATEGORICAL_DISPLAYED_CHAIN_TRANSFER_LINKAGE.entries,
+    ...CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_LINKAGE.entries,
     ...CORE_DIRECTED_CONTINUATION_TRANSFER_LINKAGE.entries
 ];
 
@@ -729,95 +590,15 @@ CoreLfTransferDeclarationLinkage =
         CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_MODULE,
         {
             revision:
-                'DISPLAYED-CHAIN-2A-CLOSURE-SIGNATURE-LINKAGE-1',
+                'DISPLAYED-CHAIN-2A-CLOSURE-SIGNATURE-LINKAGE-D061-1',
             moduleRevision:
                 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_TRANSFER_MODULE
                     .revision,
             entries: [
-                ...signatureExternalSymbols.map(dependencyLink),
-                ...declarations.map((declaration, index) => ({
-                    order: signatureExternalSymbols.length + index,
-                    symbol: declaration.symbol,
-                    kind: 'free-declaration' as const,
-                    coreName:
-                        `emdash_v3_2_displayed_chain_2a_` +
-                        declaration.symbol.name,
-                    backendName: declaration.symbol.name
-                }))
+                ...signatureExternalSymbols.map(dependencyLink)
             ]
         }
     );
-
-const productGroupoidDecodeRule =
-(): CoreLfTransferRuntimeRule => {
-    const builder = new CoreLfTransferScopedBuilder();
-    const A = builder.capture('A');
-    const B = builder.capture('B');
-    return {
-        order: 0,
-        id:
-            'categorical.displayed-chain-2a.' +
-            'product-groupoid-decode',
-        groupId:
-            'categorical.displayed-chain-2a.product-groupoid',
-        clauseOrder: 0,
-        sourceOwner: decodeOwner,
-        variables: [
-            {
-                name: 'A',
-                type: builder.template(builder.global(groupoid))
-            },
-            {
-                name: 'B',
-                type: builder.template(builder.global(groupoid))
-            }
-        ],
-        left: builder.pattern(decode(
-            builder,
-            productGroupoidAt(builder, A, B)
-        )),
-        right: builder.template(decodedPairAt(
-            builder,
-            A,
-            constantGroupoidFamily(builder, A, B)
-        )),
-        provenance: source('rule τ (Product_grpd $A $B)')
-    };
-};
-
-const productObjectRule =
-(): CoreLfTransferRuntimeRule => {
-    const builder = new CoreLfTransferScopedBuilder();
-    const A = builder.capture('A');
-    const B = builder.capture('B');
-    return {
-        order: 1,
-        id: 'categorical.displayed-chain-2a.product-object',
-        groupId: 'categorical.displayed-chain-2a.product-object',
-        clauseOrder: 0,
-        sourceOwner: objectClassifier,
-        variables: [
-            {
-                name: 'A',
-                type: builder.template(builder.global(category))
-            },
-            {
-                name: 'B',
-                type: builder.template(builder.global(category))
-            }
-        ],
-        left: builder.pattern(objectClassifierAt(
-            builder,
-            productCategoryAt(builder, A, B)
-        )),
-        right: builder.template(productGroupoidAt(
-            builder,
-            objectClassifierAt(builder, A),
-            objectClassifierAt(builder, B)
-        )),
-        provenance: source('rule Obj (Product_cat $A $B)')
-    };
-};
 
 const productProjectionObjectRule = (
     side: 'left' | 'right',
@@ -869,62 +650,6 @@ const productProjectionObjectRule = (
     };
 };
 
-const productHomRule =
-(): CoreLfTransferRuntimeRule => {
-    const builder = new CoreLfTransferScopedBuilder();
-    const A = builder.capture('A');
-    const B = builder.capture('B');
-    const p = builder.capture('p');
-    const q = builder.capture('q');
-    const product = productCategoryAt(builder, A, B);
-    const pComponents = productObjectComponents(builder, A, B, p);
-    const qComponents = productObjectComponents(builder, A, B, q);
-    return {
-        order: 4,
-        id: 'categorical.displayed-chain-2a.product.general-hom',
-        groupId: 'categorical.displayed-chain-2a.product-hom',
-        clauseOrder: 0,
-        sourceOwner: homCategory,
-        variables: [
-            {
-                name: 'A',
-                type: builder.template(builder.global(category))
-            },
-            {
-                name: 'B',
-                type: builder.template(builder.global(category))
-            },
-            {
-                name: 'p',
-                type: builder.template(objectType(builder, product))
-            },
-            {
-                name: 'q',
-                type: builder.template(objectType(builder, product))
-            }
-        ],
-        left: builder.pattern(homCategoryAt(builder, product, p, q)),
-        right: builder.template(productCategoryAt(
-            builder,
-            homCategoryAt(
-                builder,
-                A,
-                pComponents.first,
-                qComponents.first
-            ),
-            homCategoryAt(
-                builder,
-                B,
-                pComponents.second,
-                qComponents.second
-            )
-        )),
-        provenance: source(
-            'rule Hom_cat (Product_cat $A $B) $p $q'
-        )
-    };
-};
-
 const productMapObjectRule =
 (): CoreLfTransferRuntimeRule => {
     const builder = new CoreLfTransferScopedBuilder();
@@ -940,7 +665,7 @@ const productMapObjectRule =
         productCategoryAt(builder, Aprime, Bprime);
     const components = productObjectComponents(builder, A, B, ab);
     return {
-        order: 5,
+        order: 2,
         id: 'categorical.displayed-chain-2a.product-map.object',
         groupId: 'categorical.displayed-chain-2a.product-map',
         clauseOrder: 0,
@@ -1015,62 +740,6 @@ const productMapObjectRule =
         provenance: source(
             'rule @fapp0 _ _ ' +
                 "(@Product_map_func $A $A' $B $B' $F $G) $ab"
-        )
-    };
-};
-
-const productPairProjectionBetaRule = (
-    side: 'left' | 'right',
-    order: number
-): CoreLfTransferRuntimeRule => {
-    const builder = new CoreLfTransferScopedBuilder();
-    const A = builder.capture('A');
-    const B = builder.capture('B');
-    const x = builder.capture('x');
-    const y = builder.capture('y');
-    const leftClassifier = objectClassifierAt(builder, A);
-    const family = constantGroupoidFamily(
-        builder,
-        leftClassifier,
-        objectClassifierAt(builder, B)
-    );
-    const pair = productPairAt(builder, A, B, x, y);
-    return {
-        order,
-        id:
-            `categorical.displayed-chain-2a.product-pair-${side}.` +
-            'delta-beta',
-        groupId:
-            'categorical.displayed-chain-2a.product-pair-projection',
-        clauseOrder: side === 'left' ? 0 : 1,
-        sourceOwner: side === 'left' ? sigmaFirst : sigmaSecond,
-        variables: [
-            {
-                name: 'A',
-                type: builder.template(builder.global(category))
-            },
-            {
-                name: 'B',
-                type: builder.template(builder.global(category))
-            },
-            {
-                name: 'x',
-                type: builder.template(objectType(builder, A))
-            },
-            {
-                name: 'y',
-                type: builder.template(objectType(builder, B))
-            }
-        ],
-        left: builder.pattern(
-            side === 'left'
-                ? sigmaFirstAt(builder, leftClassifier, family, pair)
-                : sigmaSecondAt(builder, leftClassifier, family, pair)
-        ),
-        right: builder.template(side === 'left' ? x : y),
-        provenance: source(
-            `derived active transparent Product_pair plus ` +
-                `sigma_${side === 'left' ? 'Fst' : 'Snd'} beta`
         )
     };
 };
@@ -1152,7 +821,7 @@ const displayedProductPairInternalCellRule =
     const leftComponent = component(B, FF);
     const rightComponent = component(C, GG);
     return {
-        order: 8,
+        order: 5,
         id:
             'categorical.displayed-chain-2a.' +
             'displayed-product-pair-internal-cell',
@@ -1254,20 +923,14 @@ const displayedProductPairInternalCellRule =
 
 const runtimeRules:
 readonly CoreLfTransferRuntimeRule[] = Object.freeze([
-    productGroupoidDecodeRule(),
-    productObjectRule(),
-    productProjectionObjectRule('left', 2),
-    productProjectionObjectRule('right', 3),
-    productHomRule(),
+    productProjectionObjectRule('left', 0),
+    productProjectionObjectRule('right', 1),
     productMapObjectRule(),
-    productPairProjectionBetaRule('left', 6),
-    productPairProjectionBetaRule('right', 7),
     displayedProductPairInternalCellRule()
-]);
+].map((rule, order) => Object.freeze({ ...rule, order })));
 
 const runtimeExternalSymbols = Object.freeze([
     category,
-    groupoid,
     decodeOwner,
     objectClassifier,
     functorClassifier,
@@ -1277,10 +940,8 @@ const runtimeExternalSymbols = Object.freeze([
     displayedCategoryCategory,
     displayedFunctorCategory,
     functorObject,
-    decodedDependentPair,
     sigmaFirst,
     sigmaSecond,
-    productGroupoid,
     functorCategory,
     functorComposition,
     productCategory,
@@ -1299,7 +960,7 @@ const runtimeExternalSymbols = Object.freeze([
 export const
 CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_RUNTIME_MODULE:
 CoreLfModuleSpec = createCoreLfModuleSpec({
-    revision: 'DISPLAYED-CHAIN-2A-CLOSURE-RUNTIME-1',
+    revision: 'DISPLAYED-CHAIN-2A-CLOSURE-RUNTIME-D061-1',
     moduleId: MODULE_ID,
     fragmentId: 'displayed-chain-2a-closure-runtime',
     authorityPath: 'emdash2/emdash3_2.lp',
@@ -1321,7 +982,8 @@ CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_RUNTIME_POLICY:
 CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_RUNTIME_MODULE,
     {
-        revision: 'DISPLAYED-CHAIN-2A-CLOSURE-RUNTIME-POLICY-1',
+        revision:
+            'DISPLAYED-CHAIN-2A-CLOSURE-RUNTIME-POLICY-D061-1',
         moduleRevision:
             CORE_CATEGORICAL_DISPLAYED_CHAIN_2A_CLOSURE_RUNTIME_MODULE
                 .revision,
@@ -1340,17 +1002,25 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
 );
 
 const exactExistingRuntimeRuleIds = Object.freeze([
-    'categorical.displayed-chain-2a.product-groupoid-decode',
-    'categorical.displayed-chain-2a.product-object',
+    'categorical.fibred-product.product-groupoid-decode',
+    'categorical.fibred-product.product-object',
+    'categorical.fibred-product.product.general-hom',
     'categorical.displayed-chain-2a.product-left-projection.object',
     'categorical.displayed-chain-2a.product-right-projection.object',
-    'categorical.displayed-chain-2a.product.general-hom',
     'categorical.displayed-chain-2a.product-map.object'
 ]);
 
+const relocatedGenericProductRuntimeRuleIds = Object.freeze(
+    exactExistingRuntimeRuleIds.slice(0, 3)
+);
+
+const localExactExistingRuntimeRuleIds = Object.freeze(
+    exactExistingRuntimeRuleIds.slice(3)
+);
+
 const derivedRuntimeRuleIds = Object.freeze([
-    'categorical.displayed-chain-2a.product-pair-left.delta-beta',
-    'categorical.displayed-chain-2a.product-pair-right.delta-beta'
+    'categorical.fibred-product.product-pair-left.delta-beta',
+    'categorical.fibred-product.product-pair-right.delta-beta'
 ]);
 
 const newRuntimeRuleIds = Object.freeze([
@@ -1365,9 +1035,18 @@ Object.freeze({
     reviewRevision:
         'DISPLAYED-CHAIN-2A-CLOSURE-0A-REVIEWED-1',
     existingDeclarationNames: Object.freeze(
-        declarations.map(declaration => declaration.symbol.name)
+        signatureExternalSymbols.map(symbol_ => symbol_.name)
     ),
-    existingDeclarationCount: declarations.length,
+    existingDeclarationCount: signatureExternalSymbols.length,
+    localExistingDeclarationCount: declarations.length,
+    relocatedExistingDeclarationCount:
+        signatureExternalSymbols.length,
+    transferLayerCorrectionDecisions: Object.freeze([
+        'D-DTTLF-USABILITY-059',
+        'D-DTTLF-USABILITY-060',
+        'D-DTTLF-USABILITY-061'
+    ]),
+    transferLayerCorrectionDecision: 'D-DTTLF-USABILITY-061',
     exactExistingRuntimeRuleIds,
     exactExistingRuntimeRuleCount:
         exactExistingRuntimeRuleIds.length,
@@ -1375,7 +1054,20 @@ Object.freeze({
     derivedRuntimeRuleCount: derivedRuntimeRuleIds.length,
     newRuntimeRuleIds,
     newRuntimeRuleCount: newRuntimeRuleIds.length,
-    totalContinuationRuntimeRuleCount: runtimeRules.length,
+    relocatedGenericProductRuntimeRuleIds,
+    relocatedGenericProductRuntimeRuleCount:
+        relocatedGenericProductRuntimeRuleIds.length,
+    localExactExistingRuntimeRuleIds,
+    localExactExistingRuntimeRuleCount:
+        localExactExistingRuntimeRuleIds.length,
+    localContinuationRuntimeRuleCount: runtimeRules.length,
+    inheritedContinuationRuntimeRuleCount:
+        relocatedGenericProductRuntimeRuleIds.length +
+        derivedRuntimeRuleIds.length,
+    totalContinuationRuntimeRuleCount:
+        exactExistingRuntimeRuleIds.length +
+        derivedRuntimeRuleIds.length +
+        newRuntimeRuleIds.length,
     continuationComparisonStepLimit: 512,
     defaultCoreComparisonStepLimit: 256,
     activeMathematicalSymbolDelta: 0,

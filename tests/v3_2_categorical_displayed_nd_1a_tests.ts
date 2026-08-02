@@ -483,16 +483,16 @@ describe('DISPLAYED-ND-1A recursive displayed coherence', () => {
         );
     });
 
-    it('inherits D-057 transfer without a kernel owner or browser promotion',
+    it('inherits the D-061 transfer closure without a new owner or browser promotion',
         () => {
         const transfer =
             compileCoreCategoricalFibredTransfdTransfer();
         assert.equal(
             CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_BOUNDARY
                 .declarationCount,
-            7
+            8
         );
-        assert.equal(transfer.runtime.rules.length, 10);
+        assert.equal(transfer.runtime.rules.length, 17);
         assert.equal(
             CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_BOUNDARY
                 .newMathematicalOwnerCount,

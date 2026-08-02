@@ -181,7 +181,7 @@ describe('TypeScript v3.2 DISPLAYED-EVAL-0B authority audit', () => {
         assert.match(evidence.warningDelta.interpretation, /not-an-/u);
     });
 
-    it('retains the old mismatch measurement after installing the repair', () => {
+    it('retains the historical mismatch and confirms its D-060 closure', () => {
         const program = new CoreCategoricalProgram({
             sourceFile: 'displayed-eval-0b-profile-test.ts',
             profile: 'fibred-dependent-target-1'
@@ -209,10 +209,17 @@ describe('TypeScript v3.2 DISPLAYED-EVAL-0B authority audit', () => {
 
         const measurement =
             measureCoreCategoricalDisplayedEvaluationProfileJoin();
-        assert.equal(measurement.prerequisiteRuntime, 'not-equal');
+        assert.equal(measurement.prerequisiteRuntime, 'equal');
         assert.equal(measurement.composedRuntime, 'equal');
-        assert.ok(
-            measurement.composedSteps > measurement.prerequisiteSteps
+        assert.equal(
+            CORE_CATEGORICAL_DISPLAYED_EVALUATION_AUDIT
+                .profileMismatch.oldRuntimeComparison,
+            'not-equal'
+        );
+        assert.equal(
+            CORE_CATEGORICAL_DISPLAYED_EVALUATION_AUDIT
+                .profileMismatch.closedByDecision,
+            'D-DTTLF-USABILITY-060'
         );
     });
 

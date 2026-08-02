@@ -508,10 +508,11 @@ It deliberately avoids:
 | `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` | read-only successor audit complete; zero semantic delta; generic point identity selected | implemented D-055 eta and D-056 recursive composition; active `id`/`id_transfd`, displayed component-identity rules, and internal base-arrow action; existing finite displayed-functor endpoint factorer | Identity is the smallest missing constructor and also tests a mixed `Functor_catd` fibre without introducing mixed coherence. Select one generic `identityCell(endpoint)` construction, finite factorable endpoint recovery, and relocation of the already-reviewed `id` signature to the earliest `Transfd` transfer layer. Whiskering needs a new indexed-Hom action node and orientation audit. A `Pi_cat(Transf_catd ...)` section remains pointwise data, not an outer-coherence constructor. |
 | `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` | implemented and in-scope green at `64684f090499debebc64f752a063979f3c2f61e3` under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 / D-DTTLF-USABILITY-057 | completed `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W`; immutable proposal `a16514c00c3e7d4c16f86c5d91fbd59f202b4a0d`; separate review under standing unattended delegation; 7/7 focused identity tests, 50/50 nearest semantic regressions, 17 pass/1 skip transfer-audit matrix, and 22/22 corrected descendant assertions | The exact existing generic `id` declaration is relocated/relinked without duplication; three existing point-component clauses close at `fibred-transfd-1` and two internal-cell folds close at displayed-chain. One construction-only `identityCell(endpoint)` and a shared recursive finite endpoint factorer recover genuine generic identity at `Functord_cat`, including finite chains and a parametric mixed `Functor_catd` fibre. No kernel mathematics, whiskering, arbitrary point coherence, parser/browser route, or unrestricted `:^nd` was added. |
 | `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` | read-only audit complete; zero active semantic delta; fixed-head pre/post whiskering selected | implemented D-055 eta, D-056 recursive composition, and D-057 identity; active `comp_prod_fapp1_fapp0`, ordinary Cat projection ladder, `tdapp0_fapp0`, and `tdapp1_int_cell`; bounded owner-position probes | Fixed-head pre/post whiskering is already constructed internally by generic horizontal action at `Catd_cat K`; it does not require `Transf_catd_func`. One missing existing-owner `tdapp0_fapp0` projection was isolated, warning-measured, and made strict-LHS-clean by leaving inferred endpoints as `_`. A genuinely varying `Transf_catd` constructor remains a separate audit. |
-| `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 / D-DTTLF-USABILITY-058; implementation paused at a measured exact-transfer dependency | completed `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y`; immutable proposal `a910f183672cb39a83ee6f69b57e95f2519df880`; separate review under standing unattended delegation; bounded kernel/SOP gates green; `comp_prod_fapp1_fapp0` exact signature currently reaches `sigma_Fst`/`sigma_Snd` before their TypeScript transfer layer | Add one warning-neutral existing-owner fibre projection, transfer the existing generic horizontal-action signature plus its new displayed and three existing ordinary projection rules, and recursively lower `lambda^nd a. H(eta[a])` and `lambda^nd a. eta[L[a]]` through `(eta,id_H)` and `(id_L,eta)`. Check fibre object/arrow and internal base/higher action; add no new owner, external equation, curry/section route, varying `Transf_catd` constructor, parser/browser behavior, or unrestricted `:^nd`. Resume unchanged after the bounded D-059 dependency correction. |
-| `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 / D-DTTLF-USABILITY-059; implementation dependency-ready | approved D-058 implementation experiment; exact active `comp_prod_fapp1_fapp0` signature; immutable proposal `62a8017f04af215696811a608be18d7c2dc5668e`; separate review under standing unattended delegation | Relocate and relink exactly those three existing declarations and three existing generic rules to the earlier fibred-product transfer boundary, then make displayed-chain-2A consume them without duplication. Change no kernel mathematics and add no mirror signature, new Core case, product facade, or external coherence. Resume D-058 unchanged after focused dependency/descendant checks. |
-| `CONTEXTUAL-ND-HORIZONTAL-NORMALIZATION-FOUNDATION-1ZB` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-NORMALIZATION-CORRECTION-01 / D-DTTLF-USABILITY-060; implementation dependency-ready | approved D-059 implementation experiment; immutable proposal `2631fcd7f0cc278feff1639dc8afbb25fa5c06ee`; exact generic Hom trace; direct 8-declaration/14-local-rule `fibred-transfd-1` compilation; separate review under standing unattended delegation | Relocate the exact `Hom_cat(Catd_cat)` category rule to dependent-composition and the two transparent-`Product_pair` projection betas to fibred-product; make later fragments inherit them; remove three measured-unreachable classifier mirrors. Add zero kernel mathematics and resume D-058 unchanged after focused uniqueness/descendant checks. |
-| `CONTEXTUAL-ND-HORIZONTAL-IDENTITY-NORMALIZATION-FOUNDATION-1ZC` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-ACTION-CORRECTION-01 / D-DTTLF-USABILITY-061; implementation dependency-ready | approved D-058 frontend experiment after D-059/D-060; immutable proposal `46eadbfaa919237076a25d3f84ffe54f59ef3a25`; exact point-normalization traces; active Lambdapi identity-action clauses; separate review under standing unattended delegation | Preserve the active Lambdapi `_` endpoint slots in the three ordinary horizontal-action transfer LHSs, leave inferred `Product_pair` category slots wildcarded in the derived transparent-pair beta, and acquire exactly three existing generic identity-action rules. Add no kernel mathematics, declaration, owner, Core/checker case, or wider `:^nd` claim. Resume D-058 after focused identity-specialized point/full/capped checks. |
+| `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` | implemented and final-green; semantic checkpoint pending under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 / D-DTTLF-USABILITY-058 | completed `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y`; immutable proposal `a910f183672cb39a83ee6f69b57e95f2519df880`; final-green D-059/D-060/D-061 prerequisites; focused frontend/runtime evidence; one kernel CI; one qualified TypeScript aggregate | One warning-neutral existing-owner fibre projection is active; the generic horizontal-action signature and projection ladder are transferred; and the recursive surface lowers `lambda^nd a. H(eta[a])` and `lambda^nd a. eta[L[a]]` through `(eta,id_H)` and `(id_L,eta)`. Fibre object/arrow and internal base/higher action remain kernel-owned. No new owner, external equation, curry/section route, varying `Transf_catd` constructor, parser/browser behavior, or unrestricted `:^nd` was added. |
+| `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` | implemented and final-green under D-DTTLF-USABILITY-059; checkpoint pending with D-058 | approved D-058 implementation experiment; exact active `comp_prod_fapp1_fapp0` signature; immutable proposal `62a8017f04af215696811a608be18d7c2dc5668e`; separate review under standing unattended delegation | Exactly three existing generic product declarations and three existing rules now live at the earlier fibred-product transfer boundary, and displayed-chain-2A reuses them without duplication. No kernel mathematics, mirror signature, Core case, product facade, or external coherence was added. |
+| `CONTEXTUAL-ND-HORIZONTAL-NORMALIZATION-FOUNDATION-1ZB` | implemented and final-green under D-DTTLF-USABILITY-060; checkpoint pending with D-058 | final-green D-059; immutable proposal `2631fcd7f0cc278feff1639dc8afbb25fa5c06ee`; exact generic Hom trace and descendant checks | The exact `Hom_cat(Catd_cat)` category rule now lives at dependent-composition and two existing transparent-`Product_pair` betas live at fibred-product; later fragments inherit them and three unreachable mirrors are absent. The earlier displayed-evaluation audit now records that D-060 intentionally closes its historical prerequisite/composed mismatch. |
+| `CONTEXTUAL-ND-HORIZONTAL-IDENTITY-NORMALIZATION-FOUNDATION-1ZC` | implemented and final-green under D-DTTLF-USABILITY-061; checkpoint pending with D-058 | final-green D-059/D-060; immutable proposal `46eadbfaa919237076a25d3f84ffe54f59ef3a25`; exact point/full/capped runtime witnesses | The transfer preserves Lambdapi's inferred endpoint slots, leaves inferred transparent-pair category slots wildcarded, and acquires exactly three pre-existing generic identity-action rules. `fibred-transfd-1` is eight declarations/seventeen local rules. No kernel mathematics, declaration, owner, Core/checker case, or wider `:^nd` behavior was added. |
+| `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` | dependency-ready read-only audit; zero semantic delta authorized | final-green D-058 through D-061; existing fixed `Transf_catd` family, `Functor_catd_func`, generic Hom/action, and contextual `:^nd` recursion | Distinguish three questions with concrete consumers: using a fixed `Transf_catd` as an ordinary target family, exposing its own base-action computation, and making the complete classifier vary through a possible `Transf_catd_func`. Stress one representative recursive transformation-valued tower at object/fibre/base/higher levels, search existing owners first, and freeze at most one smallest successor. Add no behavior during the audit and do not promote a new package merely by analogy. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -6642,6 +6643,65 @@ No immediate human correction superseded the immutable proposal. Under the
 standing unattended delegation, D-DTTLF-USABILITY-061 is therefore approved
 exactly as proposed, with immediate human supersession.
 
+## D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 implementation result
+
+The combined contextual-whiskering tranche is implemented and final-green;
+its coherent semantic checkpoint is pending. The result is deliberately much
+smaller mathematically than its transfer diff:
+
+- active Lambdapi gains exactly one evaluator beta at the existing
+  `tdapp0_fapp0` and `comp_prod_fapp1_fapp0` heads. It projects a whole
+  displayed horizontal action to the corresponding ordinary fibre action and
+  introduces no symbol, classifier, or coherence owner;
+- D-059 relocates three existing generic product declarations and three
+  existing rules to the earliest dependency-safe transfer layer;
+- D-060 relocates the existing `Hom_cat(Catd_cat) -> Functord_cat` category
+  rule and two transparent-`Product_pair` betas. The historical
+  DISPLAYED-EVAL-0B prerequisite mismatch is consequently closed rather than
+  artificially preserved;
+- D-061 preserves inferred Lambdapi LHS slots and imports exactly three
+  pre-existing generic identity-action clauses. The resulting
+  `fibred-transfd-1` closure contains eight declarations and seventeen local
+  rules, and cumulative graduation inventory is eighty-three rules; and
+- the construction-only TypeScript surface recursively recognizes fixed-head
+  pre- and postwhiskering, including finite coherent mapped chains, and
+  factors them to `comp_prod_fapp1_fapp0 (Catd_cat K)` via `(eta,id_H)` and
+  `(id_L,eta)`. No intrinsic Core/checker/evaluator case was added.
+
+The complete action route remains internal. `tdapp0_fapp0` exposes the fibre
+component; ordinary `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0` supply
+point/full/capped action; and `tdapp1_int_cell` continues to own base-arrow and
+higher-cell behavior of the whole `Transfd`. Neither pointwise naturality
+evidence nor an externally supplied equation is accepted.
+
+Validation is complete and proportional:
+
+- the new contextual-whiskering suite is 4/4 and the exact transfer suite is
+  4/4, including whole, fibre, full, capped, base, and higher observations;
+- the corrected descendant/evaluation pair is 16/16, and the wider focused
+  matrix is green apart from deliberately bounded/cancelled aggregate-only
+  files that subsequently ran in the complete corpus;
+- workspace, typecheck, lint, focused runtime comparison, active-kernel check,
+  warning comparison at 1,079/159, strict LHS audit at 0/53/33, synchronized
+  catalog/health, and the complete 41-target kernel CI all pass;
+- the sole required `check:ts` ran 1,344 tests. Before two local historical
+  assertions were corrected it reported 1,288 pass, 51 skip, and five fail.
+  The two tranche-local failures were the D-060-closed audit mismatch and the
+  descendant count before D-061's three imported rules; their focused rerun is
+  16/16. The effective corrected boundary is therefore 1,290 pass, 51 skip,
+  and only the same three canonical-export digest pins already recorded before
+  this tranche. The approximately 44-minute aggregate must not be repeated for
+  documentation or checkpoint synchronization.
+
+This advances `:^nd` from eta, recursive vertical composition, and identity to
+fixed-head whiskering. It does not yet graduate arbitrary transformation-valued
+body synthesis, computation of every `Transf_catd` action, a varying
+`Transf_catd` constructor package, unrestricted context polarity, parser/
+browser parity, or unrestricted `:^nd`. The next dependency-ready operation
+is the zero-delta `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` audit. It
+must distinguish fixed-family use, fixed-family action computation, and a
+genuinely varying classifier before selecting at most one successor.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -7017,8 +7077,8 @@ H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 /
 D-DTTLF-USABILITY-058 proposal at
 `a910f183672cb39a83ee6f69b57e95f2519df880` as separately
 reviewed-approved under the standing unattended delegation, with immediate
-human supersession. Implement all and only its fifteen numbered items.
-Preserve internal object-,
+human supersession. Treat all fifteen numbered items as implemented and
+final-green with the coherent semantic checkpoint pending. Preserve internal object-,
 fibre-arrow-, base-arrow-, and higher-action ownership; strict rewrite-LHS
 discipline; and the explicit non-claims concerning varying `Transf_catd`,
 external coherence, curry/sections, parser/browser work, and unrestricted
@@ -7027,19 +7087,19 @@ external coherence, curry/sections, parser/browser work, and unrestricted
 The first exact-transfer compilation measured a dependency-order obstruction:
 `comp_prod_fapp1_fapp0` reaches the existing generic `sigma_Fst`/`sigma_Snd`
 and product object/Hom closure before the later displayed-chain-2A fragment
-that currently transfers them. Keep the D-058 semantic experiment unstaged.
+that transferred them at the time of diagnosis. D-059 now closes that
+obstruction.
 Treat the exact
 `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` /
 H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 /
 D-DTTLF-USABILITY-059 proposal at
 `62a8017f04af215696811a608be18d7c2dc5668e` as separately
 reviewed-approved under the standing unattended delegation, with immediate
-human supersession. Implement all and only its twelve numbered items: move
-only the three existing generic product declarations and three existing
-generic product rules to the earlier fibred-product transfer boundary, make
-displayed-chain-2A reuse them, prove uniqueness and descendant stability, and
-then resume D-058 unchanged. Add no kernel mathematics, local signature
-mirror, product facade, Core special case, or external coherence data.
+human supersession. Treat its twelve numbered items as implemented and
+final-green: exactly three existing generic product declarations and three
+existing rules live at the earlier fibred-product transfer boundary, and
+displayed-chain-2A reuses them. No kernel mathematics, local signature mirror,
+product facade, Core special case, or external coherence data was added.
 
 The D-059 implementation experiment then proved that those six relocations are
 necessary but insufficient: generic product-Hom/object normalization fires and
@@ -7049,13 +7109,14 @@ H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-NORMALIZATION-CORRECTION-01 /
 D-DTTLF-USABILITY-060 proposal at
 `2631fcd7f0cc278feff1639dc8afbb25fa5c06ee` as separately
 reviewed-approved under the standing unattended delegation, with immediate
-human supersession. Implement all and only its eleven numbered items: move the
-exact `Hom_cat(Catd_cat)` category rule to dependent-composition and the two
-existing transparent-pair projection betas to fibred-product, remove the three
-measured-unreachable classifier mirrors, prove uniqueness/descendant
-stability, and resume D-058 unchanged. Add no kernel mathematics, broad
+human supersession. Treat its eleven numbered items as implemented and
+final-green: the exact `Hom_cat(Catd_cat)` category rule lives at
+dependent-composition, the two existing transparent-pair projection betas
+live at fibred-product, and the three measured-unreachable classifier mirrors
+are absent. The historical displayed-evaluation mismatch is recorded as
+closed by this intentional relocation. No kernel mathematics, broad
 transparent-definition importer, checker special case, product facade, or
-external coherence evidence.
+external coherence evidence was added.
 
 The resumed D-058 frontend then constructed both whole whiskers, but its point
 oracle exposed one final exact-transfer dependency: three ordinary horizontal
@@ -7067,11 +7128,26 @@ H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-ACTION-CORRECTION-01 /
 D-DTTLF-USABILITY-061 proposal at
 `46eadbfaa919237076a25d3f84ffe54f59ef3a25` as separately reviewed-approved
 under the standing unattended delegation, with immediate human supersession.
-Implement all and only its eleven numbered items: change only the listed
-inferred transfer slots, acquire only the three active identity-action clauses,
-prove both fixed-head point equations and full/capped routing, synchronize the
-exact inventories, and resume D-058. Add no kernel mathematics, declaration,
-Core/checker case, product coercion, external coherence, or wider `:^nd` claim.
+Treat its eleven numbered items as implemented and final-green. Only the
+listed inferred transfer slots changed, exactly three active identity-action
+clauses were acquired, both fixed-head point equations and full/capped routing
+are checked, and exact inventories are synchronized. No kernel mathematics,
+declaration, Core/checker case, product coercion, external coherence, or wider
+`:^nd` behavior was added.
+
+Carry forward the D-058--D-061 focused evidence, one complete 41-target kernel
+CI, and the sole 1,344-test TypeScript aggregate exactly as recorded in the
+implementation result. Its two tranche-local historical assertions are
+focused-green after correction; only the same three canonical-export digest
+pins remain. Do not repeat that approximately 44-minute aggregate.
+
+The next dependency-ready operation is the read-only
+`DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` audit. Distinguish use of a
+fixed `Transf_catd` target, computation of that fixed family's base action,
+and a genuinely varying classifier package. Search existing owners and test a
+representative transformation-valued tower before freezing at most one
+successor. Add no semantic behavior during the audit and do not introduce
+`Transf_catd_func` merely by analogy.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7090,6 +7166,19 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
+  implementation final-green; coherent checkpoint pending.** One existing-
+  owner Lambdapi fibre evaluator beta, exact transfer dependency relocations,
+  three pre-existing identity-action imports, and recursive fixed-head
+  pre/postwhiskering now form one checked tranche. Whole `Transfd` terms retain
+  internal fibre, base-arrow, and higher-cell action. Focused suites,
+  typecheck/lint, warning and strict-LHS audits, synchronized catalog/health,
+  and one 41-target kernel CI pass. The sole 1,344-test TypeScript aggregate
+  found two local historical assertions and the same three canonical-export
+  digest pins. Correcting only the former is 16/16 focused-green, qualifying
+  an effective 1,290 pass/51 skip/three known-pin boundary without repeating
+  the approximately 44-minute aggregate. The next row is the zero-delta
+  `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` audit.
 - **2026-08-02 — D-DTTLF-USABILITY-061 approved exactly as proposed.** A
   separate review of immutable proposal checkpoint
   `46eadbfaa919237076a25d3f84ffe54f59ef3a25` confirms that all three selected

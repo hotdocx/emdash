@@ -9,7 +9,7 @@
 
 export const
 CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CONTRACT_REVISION =
-    'FIBRED-DEPENDENT-TARGET-1-CONTRACT-1' as const;
+    'FIBRED-DEPENDENT-TARGET-1-CONTRACT-D060-1' as const;
 
 const deepFreeze = <T>(value: T): T => {
     if (
@@ -33,7 +33,8 @@ deepFreeze({
     decisions: Object.freeze([
         'D-DTTLF-USABILITY-007',
         'D-DTTLF-USABILITY-007A',
-        'D-DTTLF-USABILITY-007B'
+        'D-DTTLF-USABILITY-007B',
+        'D-DTTLF-USABILITY-060'
     ]),
     status: 'frozen-existing-authority-contract',
     transfer: {
@@ -55,8 +56,10 @@ deepFreeze({
             'categorical.dependent-target.functor-category-first-object',
             'categorical.dependent-target.functor-category-second-object',
             'categorical.dependent-target.constant-pullback',
-            'categorical.dependent-target.section-functor-object',
-            'categorical.dependent-target.displayed-hom-category'
+            'categorical.dependent-target.section-functor-object'
+        ],
+        inheritedRuntimeRules: [
+            'categorical.displayed-hom-category.reduce'
         ],
         consumerRuntimeRules: [
             'categorical.dependent-target.package-component',
@@ -73,7 +76,6 @@ deepFreeze({
             'categorical.dependent-target.functor-category-second-object',
             'categorical.dependent-target.constant-pullback',
             'categorical.dependent-target.section-functor-object',
-            'categorical.dependent-target.displayed-hom-category',
             'categorical.dependent-target.pullback-fold'
         ],
         proofCheckedRuntimeRules: [
@@ -81,7 +83,8 @@ deepFreeze({
             'categorical.dependent-target.pullback-component'
         ],
         declarationCount: 10,
-        runtimeRuleCount: 10,
+        runtimeRuleCount: 9,
+        inheritedRuntimeRuleCount: 1,
         proofRuleCount: 1,
         typedPatternWildcardRules: [
             'categorical.dependent-target.section-functor-object'
@@ -151,7 +154,11 @@ validateCoreCategoricalFibredDependentTargetContract(): void {
         contract.row !== 'FIBRED-DEPENDENT-TARGET-1' ||
         contract.status !== 'frozen-existing-authority-contract' ||
         transfer.declarations.length !== transfer.declarationCount ||
-        transfer.prerequisiteRuntimeRules.length !== 7 ||
+        transfer.prerequisiteRuntimeRules.length !== 6 ||
+        transfer.inheritedRuntimeRules.join(',') !==
+            'categorical.displayed-hom-category.reduce' ||
+        transfer.inheritedRuntimeRules.length !==
+            transfer.inheritedRuntimeRuleCount ||
         transfer.consumerRuntimeRules.length !== 3 ||
         transfer.prerequisiteRuntimeRules.length +
             transfer.consumerRuntimeRules.length !==
@@ -159,7 +166,7 @@ validateCoreCategoricalFibredDependentTargetContract(): void {
         transfer.proofRules.length !== transfer.proofRuleCount ||
         transfer.typedPatternWildcardRules.join(',') !==
             'categorical.dependent-target.section-functor-object' ||
-        transfer.directlyCheckedRuntimeRules.length !== 8 ||
+        transfer.directlyCheckedRuntimeRules.length !== 7 ||
         transfer.proofCheckedRuntimeRules.join(',') !==
             'categorical.dependent-target.package-component,' +
             'categorical.dependent-target.pullback-component' ||

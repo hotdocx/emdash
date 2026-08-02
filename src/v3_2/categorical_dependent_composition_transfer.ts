@@ -59,10 +59,10 @@ import {
 const MODULE_ID = 'emdash.emdash3_2';
 
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_TRANSFER_REVISION =
-    'USABILITY-DEPENDENT-1A-SECTION-COMPOSITION-TRANSFER-1' as const;
+    'USABILITY-DEPENDENT-1A-SECTION-COMPOSITION-TRANSFER-D060-1' as const;
 
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_SOURCE_SHA256 =
-    'sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe';
+    'sha256:bdb04532ce79e15f202025dc39babfda202567a54e15d59c03031fc8eee0531a';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
@@ -72,6 +72,8 @@ const objectClassifier =
     coreDirectedContinuationTransferSymbol('object-classifier');
 const homClassifier =
     coreDirectedContinuationTransferSymbol('hom-classifier');
+const homCategory =
+    coreDirectedContinuationTransferSymbol('hom-category');
 const displayedCategoryCategory =
     coreDirectedContinuationTransferSymbol(
         'displayed-category-category'
@@ -197,6 +199,18 @@ const homType = (
             { plicity: 'explicit', value: target }
         ])
     );
+
+const homCategoryAt = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression,
+    source: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, homCategory, [
+        { plicity: 'explicit', value: base },
+        { plicity: 'explicit', value: source },
+        { plicity: 'explicit', value: target }
+    ]);
 
 const displayedFamilyType = (
     builder: CoreLfTransferScopedBuilder,
@@ -390,12 +404,60 @@ CoreLfTransferDeclarationLinkage =
         }
     );
 
+/** Exact category-level transfer of the active first displayed Hom rule. */
+const displayedHomCategoryRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const K = builder.capture('K');
+    const E = builder.capture('E');
+    const D = builder.capture('D');
+    const catd = globalCall(
+        builder,
+        displayedCategoryCategory,
+        [{ plicity: 'explicit', value: K }]
+    );
+    return {
+        order: 0,
+        id: 'categorical.displayed-hom-category.reduce',
+        groupId: 'categorical.displayed-hom-category',
+        clauseOrder: 0,
+        sourceOwner: homCategory,
+        variables: [
+            {
+                name: 'K',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'E',
+                type: builder.template(displayedFamilyType(builder, K))
+            },
+            {
+                name: 'D',
+                type: builder.template(displayedFamilyType(builder, K))
+            }
+        ],
+        left: builder.pattern(homCategoryAt(builder, catd, E, D)),
+        right: builder.template(globalCall(
+            builder,
+            displayedFunctorCategory,
+            [
+                { plicity: 'implicit', value: K },
+                { plicity: 'explicit', value: E },
+                { plicity: 'explicit', value: D }
+            ]
+        )),
+        provenance: source(
+            'rule Hom_cat (@Catd_cat $K) $E $D ' +
+            '↪ @Functord_cat $K $E $D'
+        )
+    };
+};
+
 /**
  * Core's stable `hom-classifier` denotes Lambdapi
- * `Hom = Obj(Hom_cat ...)`. The active `Hom_cat(Catd_cat)` rule therefore
- * induces this classifier rule. Installing it at `Hom`, rather than beneath
- * an outer `decode`, keeps the transferred conversion reusable and lets the
- * generic congruence engine derive decoded equality.
+ * `Hom = Obj(Hom_cat ...)`. The exact category rule above therefore also
+ * induces this stable classifier image for earlier consumers that do not yet
+ * carry the generic transparent-Hom transfer.
  */
 const displayedHomClassifierRule =
 (): CoreLfTransferRuntimeRule => {
@@ -418,7 +480,7 @@ const displayedHomClassifierRule =
         ]
     );
     return {
-        order: 0,
+        order: 1,
         id: 'categorical.displayed-hom-classifier.reduce',
         groupId: 'categorical.displayed-hom-classifier',
         clauseOrder: 0,
@@ -495,7 +557,7 @@ const sectionObjectClassifierRule =
         ]
     );
     return {
-        order: 1,
+        order: 2,
         id: 'categorical.section-object-classifier.reduce',
         groupId: 'categorical.section-object-classifier',
         clauseOrder: 0,
@@ -532,6 +594,7 @@ const sectionObjectClassifierRule =
 };
 
 const runtimeRules = Object.freeze([
+    displayedHomCategoryRule(),
     displayedHomClassifierRule(),
     sectionObjectClassifierRule()
 ]);
@@ -539,7 +602,7 @@ const runtimeRules = Object.freeze([
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_RUNTIME_MODULE:
 CoreLfModuleSpec = createCoreLfModuleSpec({
     revision:
-        'USABILITY-DEPENDENT-1A-SECTION-COMPOSITION-RUNTIME-1',
+        'USABILITY-DEPENDENT-1A-SECTION-COMPOSITION-RUNTIME-D060-1',
     moduleId: MODULE_ID,
     fragmentId: 'usability-dependent-1a-section-composition-runtime',
     authorityPath: 'emdash2/emdash3_2.lp',
@@ -551,6 +614,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
         decodeOwner,
         objectClassifier,
         homClassifier,
+        homCategory,
         displayedCategoryCategory,
         constantDisplayedFamily,
         sectionCategory,
@@ -571,7 +635,8 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_DEPENDENT_COMPOSITION_RUNTIME_MODULE,
     {
         revision:
-            'USABILITY-DEPENDENT-1A-SECTION-COMPOSITION-RUNTIME-POLICY-1',
+            'USABILITY-DEPENDENT-1A-SECTION-COMPOSITION-' +
+            'RUNTIME-POLICY-D060-1',
         moduleRevision:
             CORE_CATEGORICAL_DEPENDENT_COMPOSITION_RUNTIME_MODULE
                 .revision,
@@ -599,6 +664,11 @@ Object.freeze({
         genericComposition.name
     ]),
     runtimeRuleIds: Object.freeze(runtimeRules.map(rule => rule.id)),
+    relocatedRuntimeRuleIds: Object.freeze([
+        'categorical.displayed-hom-category.reduce'
+    ]),
+    transferLayerCorrectionDecision: 'D-DTTLF-USABILITY-060',
+    activeMathematicalDeltaForLayerCorrection: 0,
     allEntriesUseGenericTransferEngines: true,
     classifierRulesAreInstalledAtStableCoreHeads: true,
     newIntrinsicCoreOwners: 0,

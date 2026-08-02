@@ -688,7 +688,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
     fragmentId: 'reviewed-directed-continuation-runtime',
     authorityPath: 'emdash2/emdash3_2.lp',
     sourceSha256:
-        'sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe',
+        'sha256:bdb04532ce79e15f202025dc39babfda202567a54e15d59c03031fc8eee0531a',
     canonicalExport: {
         exporterVersion: '3.0.0-90-gdb4f780',
         sha256:

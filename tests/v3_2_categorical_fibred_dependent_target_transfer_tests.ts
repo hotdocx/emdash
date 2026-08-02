@@ -65,7 +65,7 @@ const wildcardWitnesses = (
 describe(
     'FIBRED-DEPENDENT-TARGET-1 existing-authority transfer',
     () => {
-        it('freezes the exact ten/ten/one no-new-mathematics contract', () => {
+        it('freezes the exact ten/nine/one no-new-mathematics contract', () => {
             validateCoreCategoricalFibredDependentTargetContract();
             assertDeepFrozen(
                 CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_CONTRACT
@@ -84,7 +84,12 @@ describe(
             assert.equal(
                 CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_TRANSFER_BOUNDARY
                     .runtimeRuleCount,
-                10
+                9
+            );
+            assert.deepEqual(
+                CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_TRANSFER_BOUNDARY
+                    .inheritedRuntimeRuleIds,
+                ['categorical.displayed-hom-category.reduce']
             );
             assert.equal(
                 CORE_CATEGORICAL_FIBRED_DEPENDENT_TARGET_TRANSFER_BOUNDARY
@@ -119,7 +124,7 @@ describe(
             assertDeepFrozen(rule);
         });
 
-        it('checks eight runtime subjects directly and exactly two by proof', () => {
+        it('checks seven local runtime subjects directly and two by proof', () => {
             const compilation =
                 compileCoreCategoricalFibredDependentTargetTransfer();
             assert.deepEqual(
@@ -187,7 +192,7 @@ describe(
                 compilation.consumerRuntimeFragment.localProgram.rules;
             assert.deepEqual(
                 prerequisite.map(rule => rule.subjectValidation.kind),
-                Array.from({ length: 7 }, () => 'typescript-checked')
+                Array.from({ length: 6 }, () => 'typescript-checked')
             );
             assert.deepEqual(
                 consumer.map(rule => rule.subjectValidation.kind),
@@ -242,6 +247,22 @@ describe(
                 compilation.composedRuntime.ruleIds.includes(
                     'categorical.dependent-target.' +
                         'category-presentation'
+                ),
+                false
+            );
+            assert.equal(
+                compilation.composedRuntime.ruleIds.filter(id =>
+                    id === 'categorical.displayed-hom-category.reduce'
+                ).length,
+                1
+            );
+            assert.equal(
+                [
+                    ...prerequisite,
+                    ...consumer
+                ].some(rule =>
+                    rule.id ===
+                        'categorical.displayed-hom-category.reduce'
                 ),
                 false
             );

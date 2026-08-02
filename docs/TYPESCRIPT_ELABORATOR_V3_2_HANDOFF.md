@@ -1,8 +1,26 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-> **Current semantic continuation (2026-08-01):**
+> **Current semantic continuation (2026-08-02):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
-> owns the next work. Recursive-Hom public synchronization is deployed at
+> owns the next work. D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
+> implemented and final-green with their coherent semantic checkpoint pending.
+> Contextual `:^nd` now covers eta, recursive vertical composition, generic
+> identity, and fixed-head pre/postwhiskering. The whiskers reuse
+> `comp_prod_fapp1_fapp0 (Catd_cat K)`; active Lambdapi adds only its missing
+> fibre evaluator beta, while existing `tdapp1_int_cell` retains base-arrow and
+> higher-cell action. Exact transfer-boundary relocations and three
+> pre-existing identity-action imports make the early closure eight
+> declarations/seventeen local rules. Focused suites, typecheck/lint, warning
+> and strict-LHS audits, synchronized catalog/health, and one complete
+> 41-target kernel CI pass. The sole 1,344-test TypeScript aggregate qualifies
+> to an effective 1,290 pass/51 skip with only three previously recorded
+> canonical-export digest pins after two local historical assertions passed
+> their 16/16 focused correction. Do not repeat that approximately 44-minute
+> aggregate. The next dependency-ready operation is the read-only
+> `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` audit, which must
+> distinguish fixed `Transf_catd` use, computation of its base action, and a
+> genuinely varying classifier before selecting at most one semantic slice.
+> Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
 > TypeScript implementation: its exact-section-leaf transfer remains
@@ -386,21 +404,18 @@
 > arbitrary varying `Transf_catd`, external coherence, parser/browser work,
 > and unrestricted `:^nd` remain explicit non-claims.
 > Its first exact TypeScript compilation measured one dependency-order issue,
-> not a semantic failure: the active `comp_prod_fapp1_fapp0` signature reaches
-> `sigma_Fst`/`sigma_Snd` and the generic product object/Hom closure, which are
-> already transferred only in the later displayed-chain-2A fragment. D-058 is
-> therefore paused with its kernel/SOP evidence preserved. The exact
+> not a semantic failure: the active `comp_prod_fapp1_fapp0` signature reached
+> `sigma_Fst`/`sigma_Snd` and generic product object/Hom closure only at the
+> later displayed-chain-2A boundary. The exact
 > `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` /
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 /
 > D-DTTLF-USABILITY-059 proposal at
 > `62a8017f04af215696811a608be18d7c2dc5668e` is separately
-> reviewed-approved under the standing unattended delegation. It relocates and
-> relinks only three existing declarations and three existing generic rules to
-> the earlier fibred-product boundary, makes 2A reuse them, and then resumes
-> D-058 unchanged. It adds no kernel mathematics, mirror signature, product
-> facade, Core special case, or external coherence evidence. All declaration
-> prerequisites occur below the selected boundary, so this correction creates
-> no dependency cycle and is now implementation-ready.
+> reviewed-approved under the standing unattended delegation and implemented/
+> final-green. It relocates and relinks only three existing declarations and
+> three existing generic rules to the earlier fibred-product boundary and makes
+> 2A reuse them. It adds no kernel mathematics, mirror signature, product
+> facade, Core special case, or external coherence evidence.
 > The bounded D-059 implementation experiment then measured one narrower
 > normalization dependency. Generic product-Hom and product-object rules do
 > fire, but their result contains `sigma_Fst`/`sigma_Snd` of literal
@@ -416,8 +431,10 @@
 > experimental witness relocates those three
 > existing computations to their earlier semantic transfer boundaries,
 > removes three unreachable classifier mirrors, compiles the eight-declaration/
-> fourteen-local-rule `fibred-transfd-1` closure, and changes no kernel
-> mathematics or D-058 usability scope. D-060 is implementation-ready.
+> fourteen-local-rule intermediate `fibred-transfd-1` closure, and changes no
+> kernel mathematics or D-058 usability scope. D-060 is implemented/final-
+> green; its earlier rule boundary intentionally closes the historical
+> DISPLAYED-EVAL-0B prerequisite/composed runtime mismatch.
 > Resuming the D-058 frontend then constructed both whole whiskers and fired
 > the displayed horizontal projection, but the first point oracle measured a
 > final exact-transfer normalization dependency. The three ordinary
@@ -430,11 +447,12 @@
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-ACTION-CORRECTION-01 /
 > D-DTTLF-USABILITY-061 proposal at
 > `46eadbfaa919237076a25d3f84ffe54f59ef3a25` is separately reviewed-approved
-> under the standing unattended delegation. Its bounded witness makes both
-> point equations equal without a Lambdapi edit, declaration, owner,
-> Core/checker case, external coherence, or wider `:^nd` claim. Implement only
-> its exact inferred-slot and three-rule acquisition correction, then resume
-> D-058.
+> under the standing unattended delegation and implemented/final-green. Its
+> exact inferred-slot correction plus three pre-existing identity-action rules
+> makes both point equations equal without another Lambdapi edit, declaration,
+> owner, Core/checker case, external coherence, or wider `:^nd` claim. The
+> resulting early closure is eight declarations/seventeen local rules, and
+> D-058 is now implemented/final-green with its coherent checkpoint pending.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

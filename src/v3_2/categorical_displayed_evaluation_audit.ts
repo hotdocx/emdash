@@ -8,7 +8,8 @@
  * - a real mixed-variance obstruction for a fully varying source family;
  * - a feasible constant-domain displayed evaluator;
  * - the separate structural weakening needed by a fixed argument; and
- * - a pre-existing dependent-profile runtime-wiring defect.
+ * - a historical dependent-profile runtime-wiring defect, now closed by the
+ *   D-060 dependency-boundary correction.
  *
  * No Lambdapi/Core owner, runtime rule, frontend case, or profile repair is
  * installed here.
@@ -52,7 +53,7 @@ const sameData = (left: unknown, right: unknown): boolean =>
     JSON.stringify(left) === JSON.stringify(right);
 
 const rawAudit = {
-    revision: 'DISPLAYED-EVAL-0B-AUDIT-1',
+    revision: 'DISPLAYED-EVAL-0B-AUDIT-2-D060-CLOSURE',
     status: 'completed-read-only-authority-audit',
     row: 'DISPLAYED-EVAL-0B',
     prerequisite: {
@@ -207,6 +208,7 @@ const rawAudit = {
         observedError: 'TYPE_MISMATCH',
         oldRuntimeComparison: 'not-equal',
         composedRuntimeComparison: 'equal',
+        currentPrerequisiteRuntimeComparison: 'equal',
         exactCause:
             'the-transfer-installs-transparent-Hom-as-Obj(Hom_cat)-and-' +
             'compiles-Hom_cat(Catd)-to-Functord_cat-but-returns-the-' +
@@ -216,6 +218,10 @@ const rawAudit = {
             'consumerRuntimeFragment.runtime-as-neighboring-transfer-' +
             'stages-do',
         classification: 'transfer-runtime-wiring-only',
+        closedByDecision: 'D-DTTLF-USABILITY-060',
+        closure:
+            'Hom_cat(Catd_cat)-to-Functord_cat-now-lives-at-the-' +
+            'dependency-safe-dependent-composition-boundary',
         categoricalSemanticFailure: false,
         recursiveBracketFailure: false,
         repairImplementedByThisAudit: false
@@ -276,12 +282,14 @@ export const CORE_CATEGORICAL_DISPLAYED_EVALUATION_AUDIT =
     deepFreeze(rawAudit);
 
 /**
- * Reproduce the exact classifier join that distinguishes the stale runtime
- * wiring from the fully composed dependent-target runtime.
+ * Confirm that the historical classifier join is now available at both the
+ * corrected prerequisite boundary and the fully composed dependent-target
+ * runtime. The frozen audit record retains the former `not-equal` result as
+ * dated evidence; D-060 deliberately moved its exact rule earlier.
  */
 export function measureCoreCategoricalDisplayedEvaluationProfileJoin():
 Readonly<{
-    prerequisiteRuntime: 'not-equal';
+    prerequisiteRuntime: 'equal';
     composedRuntime: 'equal';
     prerequisiteSteps: number;
     composedSteps: number;
@@ -345,13 +353,13 @@ Readonly<{
         compilation.composedRuntime
     );
     if (
-        prerequisite.status !== 'not-equal' ||
+        prerequisite.status !== 'equal' ||
         composed.status !== 'equal'
     ) {
         throw new CoreCategoricalDisplayedEvaluationAuditError(
             'DISPLAYED_EVALUATION_AUDIT_EVIDENCE_DRIFT',
-            'The dependent-target classifier join no longer reproduces ' +
-                'the audited prerequisite/composed runtime distinction'
+            'The dependent-target classifier join is not available at ' +
+                'both the corrected prerequisite and composed runtimes'
         );
     }
     return deepFreeze({
@@ -378,7 +386,7 @@ export function validateCoreCategoricalDisplayedEvaluationAudit(
     if (
         CORE_CATEGORICAL_DISPLAYED_LIFTING_REVIEW.revision !==
             audit.prerequisite.reviewRevision ||
-        audit.revision !== 'DISPLAYED-EVAL-0B-AUDIT-1' ||
+        audit.revision !== 'DISPLAYED-EVAL-0B-AUDIT-2-D060-CLOSURE' ||
         audit.status !== 'completed-read-only-authority-audit' ||
         audit.row !== 'DISPLAYED-EVAL-0B'
     ) {
@@ -395,6 +403,10 @@ export function validateCoreCategoricalDisplayedEvaluationAudit(
             .universeNaturalEvaluation.sufficientForSelectedStableFrontend ||
         audit.profileMismatch.classification !==
             'transfer-runtime-wiring-only' ||
+        audit.profileMismatch.closedByDecision !==
+            'D-DTTLF-USABILITY-060' ||
+        audit.profileMismatch.currentPrerequisiteRuntimeComparison !==
+            'equal' ||
         audit.profileMismatch.categoricalSemanticFailure ||
         audit.profileMismatch.recursiveBracketFailure ||
         audit.ownerPositionEvidence.warningDelta

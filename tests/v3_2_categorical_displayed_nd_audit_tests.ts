@@ -211,7 +211,8 @@ describe('DISPLAYED-ND-0A coherence and higher-action audit', () => {
                 'id',
                 'functord_transport_lhs_func',
                 'functord_transport_rhs_func',
-                'tdapp1_int_cell'
+                'tdapp1_int_cell',
+                'comp_prod_fapp1_fapp0'
             ]
         );
     });

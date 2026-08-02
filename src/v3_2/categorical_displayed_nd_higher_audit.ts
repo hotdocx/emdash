@@ -761,8 +761,8 @@ export function validateCoreCategoricalDisplayedNdHigherAudit(
     }
 
     if (
-        audit.prerequisite.currentTransfdDeclarationCount !== 7 ||
-        audit.prerequisite.currentTransfdRuntimeRuleCount !== 10 ||
+        audit.prerequisite.currentTransfdDeclarationCount !== 8 ||
+        audit.prerequisite.currentTransfdRuntimeRuleCount !== 17 ||
         audit.dependencyBoundary.initialEnvironment !==
             'completed-displayed-chain-2a-closure-environment' ||
         !sameData(

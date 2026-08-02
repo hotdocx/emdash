@@ -1,11 +1,12 @@
 /**
  * FIBRED-TRANSFD-1 transfer closure for direct displayed transformations.
  *
- * This module selects seven exact active v3.2 declarations, ten existing
- * runtime rules, and the direct second-hom proof rule. It introduces no new
- * mathematical owner or equation. The three declarations already reviewed by
- * SCALE-STRESS-2B3 retain their reviewed Core names; the additional transport
- * and higher-cell signatures are checked through the same generic engines.
+ * This module selects eight exact active v3.2 declarations, sixteen existing
+ * runtime rules, one D-058 projection rule, and the direct second-hom proof
+ * rule. It introduces no new mathematical owner. The three declarations
+ * already reviewed by SCALE-STRESS-2B3 retain their reviewed Core names; the
+ * additional transport, higher-cell, and horizontal-action signatures are
+ * checked through the same generic engines.
  */
 
 import {
@@ -28,6 +29,9 @@ import {
 import {
     CORE_CATEGORICAL_FIBRED_STRUCTURE_TRANSFER_LINKAGE
 } from './categorical_fibred_structure_transfer';
+import {
+    CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_LINKAGE
+} from './categorical_fibred_product_transfer';
 import {
     CORE_CATEGORICAL_STRUCTURAL_SYMBOLS,
     CORE_CATEGORICAL_STRUCTURAL_TRANSFER_LINKAGE
@@ -105,10 +109,10 @@ import {
 const MODULE_ID = 'emdash.emdash3_2';
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_REVISION =
-    'FIBRED-TRANSFD-1-DIRECT-NEXT-HOM-TRANSFER-D057-1' as const;
+    'FIBRED-TRANSFD-1-DIRECT-NEXT-HOM-TRANSFER-D061-1' as const;
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_SOURCE_SHA256 =
-    'sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe';
+    'sha256:bdb04532ce79e15f202025dc39babfda202567a54e15d59c03031fc8eee0531a';
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
@@ -148,15 +152,27 @@ const displayedFunctorCategory =
     );
 const functorObject =
     coreDirectedContinuationTransferSymbol('functor-object');
+const functorHomFull =
+    coreDirectedContinuationTransferSymbol('functor-hom-full');
 const functorHomCapped =
     coreDirectedContinuationTransferSymbol('functor-hom-capped');
 const transforComponentCapped =
     coreDirectedContinuationTransferSymbol(
         'transfor-component-capped'
     );
+const transforHomFull =
+    coreDirectedContinuationTransferSymbol('transfor-hom-full');
+const transforHomCapped =
+    coreDirectedContinuationTransferSymbol('transfor-hom-capped');
 const {
-    functorCategory
+    functorCategory,
+    productCategory,
+    productPair
 } = CORE_CATEGORICAL_STRUCTURAL_SYMBOLS;
+const symbol = (name: string): CoreLfQualifiedSymbol =>
+    coreLfQualifiedSymbol(MODULE_ID, name);
+const sigmaFirst = symbol('sigma_Fst');
+const sigmaSecond = symbol('sigma_Snd');
 const {
     terminalCategory,
     genericComposition
@@ -207,14 +223,17 @@ Object.freeze({
             'functord_transport_rhs_func'
         ),
     higherCell:
-        coreLfQualifiedSymbol(MODULE_ID, 'tdapp1_int_cell')
+        coreLfQualifiedSymbol(MODULE_ID, 'tdapp1_int_cell'),
+    horizontalCompositionAction:
+        coreLfQualifiedSymbol(MODULE_ID, 'comp_prod_fapp1_fapp0')
 });
 
 const {
     identityArrow: genericIdentity,
     transportLhs,
     transportRhs,
-    higherCell
+    higherCell,
+    horizontalCompositionAction
 } = CORE_CATEGORICAL_FIBRED_TRANSFD_SYMBOLS;
 
 const implicitMode = binderMode('implicit', 'functorial');
@@ -307,6 +326,15 @@ const displayedFamilyType = (
         plicity: 'explicit',
         value: base
     }]));
+
+const displayedCategoryAt = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, displayedCategoryCategory, [{
+        plicity: 'explicit',
+        value: base
+    }]);
 
 const displayedFunctorCategoryAt = (
     builder: CoreLfTransferScopedBuilder,
@@ -477,6 +505,40 @@ const transportAt = (
         { plicity: 'explicit', value: arrow }
     ]);
 
+const functorHomFullAt = (
+    builder: CoreLfTransferScopedBuilder,
+    source: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression,
+    functor: CoreLfTransferBuilderExpression,
+    sourceObject: CoreLfTransferBuilderExpression,
+    targetObject: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, functorHomFull, [
+        { plicity: 'implicit', value: source },
+        { plicity: 'implicit', value: target },
+        { plicity: 'explicit', value: functor },
+        { plicity: 'implicit', value: sourceObject },
+        { plicity: 'implicit', value: targetObject }
+    ]);
+
+const functorHomCappedAt = (
+    builder: CoreLfTransferScopedBuilder,
+    source: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression,
+    functor: CoreLfTransferBuilderExpression,
+    sourceObject: CoreLfTransferBuilderExpression,
+    targetObject: CoreLfTransferBuilderExpression,
+    arrow: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, functorHomCapped, [
+        { plicity: 'implicit', value: source },
+        { plicity: 'implicit', value: target },
+        { plicity: 'explicit', value: functor },
+        { plicity: 'implicit', value: sourceObject },
+        { plicity: 'implicit', value: targetObject },
+        { plicity: 'explicit', value: arrow }
+    ]);
+
 const displayedComponentAt = (
     builder: CoreLfTransferScopedBuilder,
     base: CoreLfTransferBuilderExpression,
@@ -507,6 +569,140 @@ const homCategoryAt = (
         { plicity: 'explicit', value: base },
         { plicity: 'explicit', value: source },
         { plicity: 'explicit', value: target }
+    ]);
+
+const functorCategoryAt = (
+    builder: CoreLfTransferScopedBuilder,
+    source: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, functorCategory, [
+        { plicity: 'explicit', value: source },
+        { plicity: 'explicit', value: target }
+    ]);
+
+const productCategoryAt = (
+    builder: CoreLfTransferScopedBuilder,
+    left: CoreLfTransferBuilderExpression,
+    right: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, productCategory, [
+        { plicity: 'explicit', value: left },
+        { plicity: 'explicit', value: right }
+    ]);
+
+const pairAt = (
+    builder: CoreLfTransferScopedBuilder,
+    leftCategory: CoreLfTransferBuilderExpression,
+    rightCategory: CoreLfTransferBuilderExpression,
+    left: CoreLfTransferBuilderExpression,
+    right: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, productPair, [
+        { plicity: 'implicit', value: leftCategory },
+        { plicity: 'implicit', value: rightCategory },
+        { plicity: 'explicit', value: left },
+        { plicity: 'explicit', value: right }
+    ]);
+
+const constantGroupoidFamily = (
+    builder: CoreLfTransferScopedBuilder,
+    left: CoreLfTransferBuilderExpression,
+    right: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    builder.lam(
+        'ignored',
+        decode(builder, left),
+        _ignored => right,
+        explicitMode
+    );
+
+const productObjectComponents = (
+    builder: CoreLfTransferScopedBuilder,
+    leftCategory: CoreLfTransferBuilderExpression,
+    rightCategory: CoreLfTransferBuilderExpression,
+    pair: CoreLfTransferBuilderExpression
+) => {
+    const left = objectClassifierAt(builder, leftCategory);
+    const family = constantGroupoidFamily(
+        builder,
+        left,
+        objectClassifierAt(builder, rightCategory)
+    );
+    return {
+        first: globalCall(builder, sigmaFirst, [
+            { plicity: 'implicit', value: left },
+            { plicity: 'implicit', value: family },
+            { plicity: 'explicit', value: pair }
+        ]),
+        second: globalCall(builder, sigmaSecond, [
+            { plicity: 'implicit', value: left },
+            { plicity: 'implicit', value: family },
+            { plicity: 'explicit', value: pair }
+        ])
+    };
+};
+
+const transforHomFullAt = (
+    builder: CoreLfTransferScopedBuilder,
+    source: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression,
+    sourceFunctor: CoreLfTransferBuilderExpression,
+    targetFunctor: CoreLfTransferBuilderExpression,
+    sourceObject: CoreLfTransferBuilderExpression,
+    targetObject: CoreLfTransferBuilderExpression,
+    transfor: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, transforHomFull, [
+        { plicity: 'implicit', value: source },
+        { plicity: 'implicit', value: target },
+        { plicity: 'implicit', value: sourceFunctor },
+        { plicity: 'implicit', value: targetFunctor },
+        { plicity: 'implicit', value: sourceObject },
+        { plicity: 'implicit', value: targetObject },
+        { plicity: 'explicit', value: transfor }
+    ]);
+
+const transforHomCappedAt = (
+    builder: CoreLfTransferScopedBuilder,
+    source: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression,
+    sourceFunctor: CoreLfTransferBuilderExpression,
+    targetFunctor: CoreLfTransferBuilderExpression,
+    sourceObject: CoreLfTransferBuilderExpression,
+    targetObject: CoreLfTransferBuilderExpression,
+    transfor: CoreLfTransferBuilderExpression,
+    arrow: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, transforHomCapped, [
+        { plicity: 'implicit', value: source },
+        { plicity: 'implicit', value: target },
+        { plicity: 'implicit', value: sourceFunctor },
+        { plicity: 'implicit', value: targetFunctor },
+        { plicity: 'implicit', value: sourceObject },
+        { plicity: 'implicit', value: targetObject },
+        { plicity: 'explicit', value: transfor },
+        { plicity: 'explicit', value: arrow }
+    ]);
+
+const horizontalCompositionActionAt = (
+    builder: CoreLfTransferScopedBuilder,
+    ambient: CoreLfTransferBuilderExpression,
+    source: CoreLfTransferBuilderExpression,
+    middle: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression,
+    sourcePair: CoreLfTransferBuilderExpression,
+    targetPair: CoreLfTransferBuilderExpression,
+    cellPair: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, horizontalCompositionAction, [
+        { plicity: 'implicit', value: ambient },
+        { plicity: 'implicit', value: source },
+        { plicity: 'implicit', value: middle },
+        { plicity: 'implicit', value: target },
+        { plicity: 'implicit', value: sourcePair },
+        { plicity: 'implicit', value: targetPair },
+        { plicity: 'explicit', value: cellPair }
     ]);
 
 const sectionCategoryAt = (
@@ -1092,6 +1288,100 @@ const higherCellType = (): CoreLfTransferExpression => {
     ));
 };
 
+const horizontalCompositionActionType =
+(): CoreLfTransferExpression => {
+    const builder = new CoreLfTransferScopedBuilder();
+    return builder.term(builder.pi(
+        'A',
+        builder.global(category),
+        A => builder.pi(
+            'W',
+            objectType(builder, A),
+            W => builder.pi(
+                'X',
+                objectType(builder, A),
+                X => builder.pi(
+                    'Z',
+                    objectType(builder, A),
+                    Z => {
+                        const leftHom = homCategoryAt(
+                            builder,
+                            A,
+                            W,
+                            X
+                        );
+                        const rightHom = homCategoryAt(
+                            builder,
+                            A,
+                            X,
+                            Z
+                        );
+                        const pairCategory = productCategoryAt(
+                            builder,
+                            leftHom,
+                            rightHom
+                        );
+                        const composite = (
+                            pair: CoreLfTransferBuilderExpression
+                        ): CoreLfTransferBuilderExpression => {
+                            const components = productObjectComponents(
+                                builder,
+                                leftHom,
+                                rightHom,
+                                pair
+                            );
+                            return composeAt(
+                                builder,
+                                A,
+                                W,
+                                X,
+                                Z,
+                                components.second,
+                                components.first
+                            );
+                        };
+                        return builder.pi(
+                            'pg',
+                            objectType(builder, pairCategory),
+                            pg => builder.pi(
+                                'pgPrime',
+                                objectType(builder, pairCategory),
+                                pgPrime => builder.pi(
+                                    'alpha',
+                                    homType(
+                                        builder,
+                                        pairCategory,
+                                        pg,
+                                        pgPrime
+                                    ),
+                                    _alpha => homType(
+                                        builder,
+                                        homCategoryAt(
+                                            builder,
+                                            A,
+                                            W,
+                                            Z
+                                        ),
+                                        composite(pg),
+                                        composite(pgPrime)
+                                    ),
+                                    explicitMode
+                                ),
+                                implicitMode
+                            ),
+                            implicitMode
+                        );
+                    },
+                    implicitMode
+                ),
+                implicitMode
+            ),
+            implicitMode
+        ),
+        implicitMode
+    ));
+};
+
 const declarations: readonly CoreLfTransferDeclaration[] = Object.freeze([
     {
         order: 0,
@@ -1166,6 +1456,16 @@ const declarations: readonly CoreLfTransferDeclaration[] = Object.freeze([
             'symbol tdapp1_int_cell [K : Cat] [E D : τ (Catd K)]',
             1174
         )
+    },
+    {
+        order: 7,
+        symbol: horizontalCompositionAction,
+        type: horizontalCompositionActionType(),
+        body: coreLfTransferAbsentBody(),
+        modifiers: publicModifiers('ordinary', 'opaque'),
+        provenance: source(
+            'symbol comp_prod_fapp1_fapp0 [A : Cat]'
+        )
     }
 ]);
 
@@ -1176,12 +1476,16 @@ const declarationExternalSymbols = Object.freeze([
     objectClassifier,
     functorClassifier,
     homClassifier,
+    homCategory,
     transforClassifier,
     categoryOfCategories,
     displayedCategoryCategory,
     displayedFunctorCategory,
     functorObject,
     functorHomCapped,
+    productCategory,
+    sigmaFirst,
+    sigmaSecond,
     displayedFamilyClassifier,
     fibreFunctor,
     genericComposition
@@ -1209,7 +1513,7 @@ export const CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_POLICY:
 CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE,
     {
-        revision: 'FIBRED-TRANSFD-1-SIGNATURE-POLICY-D057-1',
+        revision: 'FIBRED-TRANSFD-1-SIGNATURE-POLICY-D061-1',
         moduleRevision:
             CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE.revision,
         entries: declarations.map((declaration, order) => ({
@@ -1230,6 +1534,9 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
                 declaration.symbol.name === genericIdentity.name
                 ? 'Exact identity declaration reused from reviewed ' +
                     'SCALE-STRESS-3A2A evidence'
+                : declaration.symbol === horizontalCompositionAction
+                    ? 'Exact pre-existing generic horizontal-action ' +
+                        'signature acquired for D-DTTLF-USABILITY-058'
                 : declaration.order < 3
                     ? 'Exact declaration reused from reviewed ' +
                         'SCALE-STRESS-2B3 evidence'
@@ -1240,6 +1547,7 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
 
 const earlierLinks = [
     ...CORE_CATEGORICAL_FIBRED_STRUCTURE_TRANSFER_LINKAGE.entries,
+    ...CORE_CATEGORICAL_FIBRED_PRODUCT_TRANSFER_LINKAGE.entries,
     ...CORE_CATEGORICAL_DEPENDENT_COMPOSITION_TRANSFER_LINKAGE.entries,
     ...CORE_CATEGORICAL_DEPENDENT_TRANSFER_LINKAGE.entries,
     ...CORE_CATEGORICAL_STRUCTURAL_TRANSFER_LINKAGE.entries,
@@ -1304,7 +1612,7 @@ CoreLfTransferDeclarationLinkage =
     createCoreLfTransferDeclarationLinkage(
         CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE,
         {
-            revision: 'FIBRED-TRANSFD-1-SIGNATURE-LINKAGE-D057-1',
+            revision: 'FIBRED-TRANSFD-1-SIGNATURE-LINKAGE-D061-1',
             moduleRevision:
                 CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE
                     .revision,
@@ -1977,6 +2285,831 @@ const displayedComponentIdentityRule = (
     };
 };
 
+const horizontalPairContext = (
+    builder: CoreLfTransferScopedBuilder,
+    ambient: CoreLfTransferBuilderExpression,
+    source: CoreLfTransferBuilderExpression,
+    middle: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression,
+    sourcePair: CoreLfTransferBuilderExpression,
+    targetPair: CoreLfTransferBuilderExpression
+) => {
+    const leftHom = homCategoryAt(
+        builder,
+        ambient,
+        source,
+        middle
+    );
+    const rightHom = homCategoryAt(
+        builder,
+        ambient,
+        middle,
+        target
+    );
+    const pairCategory = productCategoryAt(
+        builder,
+        leftHom,
+        rightHom
+    );
+    const sourceComponents = productObjectComponents(
+        builder,
+        leftHom,
+        rightHom,
+        sourcePair
+    );
+    const targetComponents = productObjectComponents(
+        builder,
+        leftHom,
+        rightHom,
+        targetPair
+    );
+    return {
+        leftHom,
+        rightHom,
+        pairCategory,
+        sourceComponents,
+        targetComponents,
+        leftCellCategory: homCategoryAt(
+            builder,
+            leftHom,
+            sourceComponents.first,
+            targetComponents.first
+        ),
+        rightCellCategory: homCategoryAt(
+            builder,
+            rightHom,
+            sourceComponents.second,
+            targetComponents.second
+        ),
+        sourceComposite: composeAt(
+            builder,
+            ambient,
+            source,
+            middle,
+            target,
+            sourceComponents.second,
+            sourceComponents.first
+        ),
+        targetComposite: composeAt(
+            builder,
+            ambient,
+            source,
+            middle,
+            target,
+            targetComponents.second,
+            targetComponents.first
+        )
+    };
+};
+
+const displayedHorizontalComponentRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const K = builder.capture('K');
+    const W = builder.capture('W');
+    const X = builder.capture('X');
+    const Z = builder.capture('Z');
+    const FG = builder.capture('FG');
+    const FGPrime = builder.capture('FGPrime');
+    const theta = builder.capture('theta');
+    const k = builder.capture('k');
+    const ambient = displayedCategoryAt(builder, K);
+    const context = horizontalPairContext(
+        builder,
+        ambient,
+        W,
+        X,
+        Z,
+        FG,
+        FGPrime
+    );
+    const thetaComponents = productObjectComponents(
+        builder,
+        context.leftCellCategory,
+        context.rightCellCategory,
+        theta
+    );
+    const fibreW = fibreCategoryAt(builder, K, W, k);
+    const fibreX = fibreCategoryAt(builder, K, X, k);
+    const fibreZ = fibreCategoryAt(builder, K, Z, k);
+    const leftFibreFunctors = functorCategoryAt(
+        builder,
+        fibreW,
+        fibreX
+    );
+    const rightFibreFunctors = functorCategoryAt(
+        builder,
+        fibreX,
+        fibreZ
+    );
+    const sourceLeft = fibreFunctorAt(
+        builder,
+        K,
+        W,
+        X,
+        context.sourceComponents.first,
+        k
+    );
+    const sourceRight = fibreFunctorAt(
+        builder,
+        K,
+        X,
+        Z,
+        context.sourceComponents.second,
+        k
+    );
+    const targetLeft = fibreFunctorAt(
+        builder,
+        K,
+        W,
+        X,
+        context.targetComponents.first,
+        k
+    );
+    const targetRight = fibreFunctorAt(
+        builder,
+        K,
+        X,
+        Z,
+        context.targetComponents.second,
+        k
+    );
+    const leftFibreCells = transforCategoryAt(
+        builder,
+        fibreW,
+        fibreX,
+        sourceLeft,
+        targetLeft
+    );
+    const rightFibreCells = transforCategoryAt(
+        builder,
+        fibreX,
+        fibreZ,
+        sourceRight,
+        targetRight
+    );
+    const wholeAction = horizontalCompositionActionAt(
+        builder,
+        ambient,
+        W,
+        X,
+        Z,
+        FG,
+        FGPrime,
+        theta
+    );
+    return {
+        order: 10,
+        id: 'categorical.transfd.horizontal-component',
+        groupId: 'categorical.transfd.horizontal-action',
+        clauseOrder: 0,
+        sourceOwner: displayedComponent,
+        variables: [
+            { name: 'K', type: builder.template(builder.global(category)) },
+            {
+                name: 'W',
+                type: builder.template(displayedFamilyType(builder, K))
+            },
+            {
+                name: 'X',
+                type: builder.template(displayedFamilyType(builder, K))
+            },
+            {
+                name: 'Z',
+                type: builder.template(displayedFamilyType(builder, K))
+            },
+            {
+                name: 'FG',
+                type: builder.template(objectType(
+                    builder,
+                    context.pairCategory
+                ))
+            },
+            {
+                name: 'FGPrime',
+                type: builder.template(objectType(
+                    builder,
+                    context.pairCategory
+                ))
+            },
+            {
+                name: 'theta',
+                type: builder.template(homType(
+                    builder,
+                    context.pairCategory,
+                    FG,
+                    FGPrime
+                ))
+            },
+            { name: 'k', type: builder.template(objectType(builder, K)) }
+        ],
+        left: builder.pattern(displayedComponentAt(
+            builder,
+            K,
+            W,
+            Z,
+            builder.wildcard(context.sourceComposite),
+            builder.wildcard(context.targetComposite),
+            k,
+            wholeAction
+        )),
+        right: builder.template(horizontalCompositionActionAt(
+            builder,
+            builder.global(categoryOfCategories),
+            fibreW,
+            fibreX,
+            fibreZ,
+            pairAt(
+                builder,
+                leftFibreFunctors,
+                rightFibreFunctors,
+                sourceLeft,
+                sourceRight
+            ),
+            pairAt(
+                builder,
+                leftFibreFunctors,
+                rightFibreFunctors,
+                targetLeft,
+                targetRight
+            ),
+            pairAt(
+                builder,
+                leftFibreCells,
+                rightFibreCells,
+                displayedComponentAt(
+                    builder,
+                    K,
+                    W,
+                    X,
+                    context.sourceComponents.first,
+                    context.targetComponents.first,
+                    k,
+                    thetaComponents.first
+                ),
+                displayedComponentAt(
+                    builder,
+                    K,
+                    X,
+                    Z,
+                    context.sourceComponents.second,
+                    context.targetComponents.second,
+                    k,
+                    thetaComponents.second
+                )
+            )
+        )),
+        provenance: source(
+            'rule @tdapp0_fapp0 $K $W $Z _ _ $k ' +
+                '(@comp_prod_fapp1_fapp0 (@Catd_cat $K) ...)'
+        )
+    };
+};
+
+const ordinaryHorizontalContext = (
+    builder: CoreLfTransferScopedBuilder,
+    X: CoreLfTransferBuilderExpression,
+    Y: CoreLfTransferBuilderExpression,
+    Z: CoreLfTransferBuilderExpression,
+    FG: CoreLfTransferBuilderExpression,
+    FGPrime: CoreLfTransferBuilderExpression,
+    theta: CoreLfTransferBuilderExpression
+) => {
+    const ambient = builder.global(categoryOfCategories);
+    const context = horizontalPairContext(
+        builder,
+        ambient,
+        X,
+        Y,
+        Z,
+        FG,
+        FGPrime
+    );
+    return {
+        ...context,
+        ambient,
+        thetaComponents: productObjectComponents(
+            builder,
+            context.leftCellCategory,
+            context.rightCellCategory,
+            theta
+        ),
+        wholeAction: horizontalCompositionActionAt(
+            builder,
+            ambient,
+            X,
+            Y,
+            Z,
+            FG,
+            FGPrime,
+            theta
+        )
+    };
+};
+
+const ordinaryHorizontalPointRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const X = builder.capture('X');
+    const Y = builder.capture('Y');
+    const Z = builder.capture('Z');
+    const FG = builder.capture('FG');
+    const FGPrime = builder.capture('FGPrime');
+    const theta = builder.capture('theta');
+    const i = builder.capture('i');
+    const context = ordinaryHorizontalContext(
+        builder,
+        X,
+        Y,
+        Z,
+        FG,
+        FGPrime,
+        theta
+    );
+    const sourceLeftAtI = fapp0At(
+        builder,
+        X,
+        Y,
+        context.sourceComponents.first,
+        i
+    );
+    const targetLeftAtI = fapp0At(
+        builder,
+        X,
+        Y,
+        context.targetComponents.first,
+        i
+    );
+    return {
+        order: 11,
+        id: 'categorical.transfd.horizontal-point',
+        groupId: 'categorical.transfd.horizontal-action',
+        clauseOrder: 1,
+        sourceOwner: transforComponentCapped,
+        variables: [
+            { name: 'X', type: builder.template(builder.global(category)) },
+            { name: 'Y', type: builder.template(builder.global(category)) },
+            { name: 'Z', type: builder.template(builder.global(category)) },
+            {
+                name: 'FG',
+                type: builder.template(objectType(
+                    builder,
+                    context.pairCategory
+                ))
+            },
+            {
+                name: 'FGPrime',
+                type: builder.template(objectType(
+                    builder,
+                    context.pairCategory
+                ))
+            },
+            {
+                name: 'theta',
+                type: builder.template(homType(
+                    builder,
+                    context.pairCategory,
+                    FG,
+                    FGPrime
+                ))
+            },
+            { name: 'i', type: builder.template(objectType(builder, X)) }
+        ],
+        left: builder.pattern(transforComponentAt(
+            builder,
+            X,
+            Z,
+            builder.wildcard(context.sourceComposite),
+            builder.wildcard(context.targetComposite),
+            i,
+            context.wholeAction
+        )),
+        right: builder.template(transforHomCappedAt(
+            builder,
+            Y,
+            Z,
+            context.sourceComponents.second,
+            context.targetComponents.second,
+            sourceLeftAtI,
+            targetLeftAtI,
+            context.thetaComponents.second,
+            transforComponentAt(
+                builder,
+                X,
+                Y,
+                context.sourceComponents.first,
+                context.targetComponents.first,
+                i,
+                context.thetaComponents.first
+            )
+        )),
+        provenance: source(
+            'rule @tapp0_fapp0 _ _ _ _ $i ' +
+                '(@comp_prod_fapp1_fapp0 Cat_cat ...)'
+        )
+    };
+};
+
+const ordinaryHorizontalFullRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const X = builder.capture('X');
+    const Y = builder.capture('Y');
+    const Z = builder.capture('Z');
+    const FG = builder.capture('FG');
+    const FGPrime = builder.capture('FGPrime');
+    const theta = builder.capture('theta');
+    const i = builder.capture('i');
+    const j = builder.capture('j');
+    const context = ordinaryHorizontalContext(
+        builder,
+        X,
+        Y,
+        Z,
+        FG,
+        FGPrime,
+        theta
+    );
+    const sourceLeftAtI = fapp0At(
+        builder,
+        X,
+        Y,
+        context.sourceComponents.first,
+        i
+    );
+    const targetLeftAtJ = fapp0At(
+        builder,
+        X,
+        Y,
+        context.targetComponents.first,
+        j
+    );
+    const sourceTargetAtI = fapp0At(
+        builder,
+        Y,
+        Z,
+        context.sourceComponents.second,
+        sourceLeftAtI
+    );
+    const targetTargetAtJ = fapp0At(
+        builder,
+        Y,
+        Z,
+        context.targetComponents.second,
+        targetLeftAtJ
+    );
+    return {
+        order: 12,
+        id: 'categorical.transfd.horizontal-full-action',
+        groupId: 'categorical.transfd.horizontal-action',
+        clauseOrder: 2,
+        sourceOwner: transforHomFull,
+        variables: [
+            { name: 'X', type: builder.template(builder.global(category)) },
+            { name: 'Y', type: builder.template(builder.global(category)) },
+            { name: 'Z', type: builder.template(builder.global(category)) },
+            {
+                name: 'FG',
+                type: builder.template(objectType(
+                    builder,
+                    context.pairCategory
+                ))
+            },
+            {
+                name: 'FGPrime',
+                type: builder.template(objectType(
+                    builder,
+                    context.pairCategory
+                ))
+            },
+            {
+                name: 'theta',
+                type: builder.template(homType(
+                    builder,
+                    context.pairCategory,
+                    FG,
+                    FGPrime
+                ))
+            },
+            { name: 'i', type: builder.template(objectType(builder, X)) },
+            { name: 'j', type: builder.template(objectType(builder, X)) }
+        ],
+        left: builder.pattern(transforHomFullAt(
+            builder,
+            X,
+            Z,
+            builder.wildcard(context.sourceComposite),
+            builder.wildcard(context.targetComposite),
+            i,
+            j,
+            context.wholeAction
+        )),
+        right: builder.template(composeAt(
+            builder,
+            context.ambient,
+            homCategoryAt(builder, X, i, j),
+            homCategoryAt(builder, Y, sourceLeftAtI, targetLeftAtJ),
+            homCategoryAt(
+                builder,
+                Z,
+                sourceTargetAtI,
+                targetTargetAtJ
+            ),
+            transforHomFullAt(
+                builder,
+                Y,
+                Z,
+                context.sourceComponents.second,
+                context.targetComponents.second,
+                sourceLeftAtI,
+                targetLeftAtJ,
+                context.thetaComponents.second
+            ),
+            transforHomFullAt(
+                builder,
+                X,
+                Y,
+                context.sourceComponents.first,
+                context.targetComponents.first,
+                i,
+                j,
+                context.thetaComponents.first
+            )
+        )),
+        provenance: source(
+            'rule @tapp1_func _ _ _ _ $i $j ' +
+                '(@comp_prod_fapp1_fapp0 Cat_cat ...)'
+        )
+    };
+};
+
+const ordinaryHorizontalCappedRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const X = builder.capture('X');
+    const Y = builder.capture('Y');
+    const Z = builder.capture('Z');
+    const FG = builder.capture('FG');
+    const FGPrime = builder.capture('FGPrime');
+    const theta = builder.capture('theta');
+    const i = builder.capture('i');
+    const j = builder.capture('j');
+    const p = builder.capture('p');
+    const context = ordinaryHorizontalContext(
+        builder,
+        X,
+        Y,
+        Z,
+        FG,
+        FGPrime,
+        theta
+    );
+    const sourceLeftAtI = fapp0At(
+        builder,
+        X,
+        Y,
+        context.sourceComponents.first,
+        i
+    );
+    const targetLeftAtJ = fapp0At(
+        builder,
+        X,
+        Y,
+        context.targetComponents.first,
+        j
+    );
+    return {
+        order: 13,
+        id: 'categorical.transfd.horizontal-capped-action',
+        groupId: 'categorical.transfd.horizontal-action',
+        clauseOrder: 3,
+        sourceOwner: transforHomCapped,
+        variables: [
+            { name: 'X', type: builder.template(builder.global(category)) },
+            { name: 'Y', type: builder.template(builder.global(category)) },
+            { name: 'Z', type: builder.template(builder.global(category)) },
+            {
+                name: 'FG',
+                type: builder.template(objectType(
+                    builder,
+                    context.pairCategory
+                ))
+            },
+            {
+                name: 'FGPrime',
+                type: builder.template(objectType(
+                    builder,
+                    context.pairCategory
+                ))
+            },
+            {
+                name: 'theta',
+                type: builder.template(homType(
+                    builder,
+                    context.pairCategory,
+                    FG,
+                    FGPrime
+                ))
+            },
+            { name: 'i', type: builder.template(objectType(builder, X)) },
+            { name: 'j', type: builder.template(objectType(builder, X)) },
+            {
+                name: 'p',
+                type: builder.template(homType(builder, X, i, j))
+            }
+        ],
+        left: builder.pattern(transforHomCappedAt(
+            builder,
+            X,
+            Z,
+            builder.wildcard(context.sourceComposite),
+            builder.wildcard(context.targetComposite),
+            i,
+            j,
+            context.wholeAction,
+            p
+        )),
+        right: builder.template(transforHomCappedAt(
+            builder,
+            Y,
+            Z,
+            context.sourceComponents.second,
+            context.targetComponents.second,
+            sourceLeftAtI,
+            targetLeftAtJ,
+            context.thetaComponents.second,
+            transforHomCappedAt(
+                builder,
+                X,
+                Y,
+                context.sourceComponents.first,
+                context.targetComponents.first,
+                i,
+                j,
+                context.thetaComponents.first,
+                p
+            )
+        )),
+        provenance: source(
+            'rule @tapp1_fapp0 _ _ _ _ $i $j ' +
+                '(@comp_prod_fapp1_fapp0 Cat_cat ...) $p'
+        )
+    };
+};
+
+const genericFullIdentityActionRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const A = builder.capture('A');
+    const B = builder.capture('B');
+    const F = builder.capture('F');
+    const X = builder.capture('X');
+    const Y = builder.capture('Y');
+    const functors = functorCategoryAt(builder, A, B);
+    return {
+        order: 14,
+        id: 'categorical.transfd.identity-full-action',
+        groupId: 'categorical.transfd.identity-action',
+        clauseOrder: 0,
+        sourceOwner: transforHomFull,
+        variables: [
+            { name: 'A', type: builder.template(builder.global(category)) },
+            { name: 'B', type: builder.template(builder.global(category)) },
+            { name: 'F', type: builder.template(functorType(builder, A, B)) },
+            { name: 'X', type: builder.template(objectType(builder, A)) },
+            { name: 'Y', type: builder.template(objectType(builder, A)) }
+        ],
+        left: builder.pattern(transforHomFullAt(
+            builder,
+            A,
+            B,
+            F,
+            F,
+            X,
+            Y,
+            identityAt(builder, functors, F)
+        )),
+        right: builder.template(functorHomFullAt(
+            builder,
+            A,
+            B,
+            F,
+            X,
+            Y
+        )),
+        provenance: source(
+            'rule @tapp1_func $A $B $F $F $X $Y ' +
+                '(@id (Functor_cat $A $B) $F) ↪ ' +
+                '@fapp1_func $A $B $F $X $Y'
+        )
+    };
+};
+
+const genericCappedIdentityActionRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const A = builder.capture('A');
+    const B = builder.capture('B');
+    const F = builder.capture('F');
+    const X = builder.capture('X');
+    const Y = builder.capture('Y');
+    const p = builder.capture('p');
+    const functors = functorCategoryAt(builder, A, B);
+    return {
+        order: 15,
+        id: 'categorical.transfd.identity-capped-action',
+        groupId: 'categorical.transfd.identity-action',
+        clauseOrder: 1,
+        sourceOwner: transforHomCapped,
+        variables: [
+            { name: 'A', type: builder.template(builder.global(category)) },
+            { name: 'B', type: builder.template(builder.global(category)) },
+            { name: 'F', type: builder.template(functorType(builder, A, B)) },
+            { name: 'X', type: builder.template(objectType(builder, A)) },
+            { name: 'Y', type: builder.template(objectType(builder, A)) },
+            { name: 'p', type: builder.template(homType(builder, A, X, Y)) }
+        ],
+        left: builder.pattern(transforHomCappedAt(
+            builder,
+            A,
+            B,
+            F,
+            F,
+            X,
+            Y,
+            identityAt(builder, functors, F),
+            p
+        )),
+        right: builder.template(functorHomCappedAt(
+            builder,
+            A,
+            B,
+            F,
+            X,
+            Y,
+            p
+        )),
+        provenance: source(
+            'rule @tapp1_fapp0 $A $B $F $F $X $Y ' +
+                '(@id (Functor_cat $A $B) $F) $p ↪ ' +
+                '@fapp1_fapp0 $A $B $F $X $Y $p'
+        )
+    };
+};
+
+const genericIdentityBaseActionRule =
+(): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const A = builder.capture('A');
+    const B = builder.capture('B');
+    const F = builder.capture('F');
+    const G = builder.capture('G');
+    const X = builder.capture('X');
+    const epsilon = builder.capture('epsilon');
+    return {
+        order: 16,
+        id: 'categorical.transfd.identity-base-action',
+        groupId: 'categorical.transfd.identity-action',
+        clauseOrder: 2,
+        sourceOwner: transforHomCapped,
+        variables: [
+            { name: 'A', type: builder.template(builder.global(category)) },
+            { name: 'B', type: builder.template(builder.global(category)) },
+            { name: 'F', type: builder.template(functorType(builder, A, B)) },
+            { name: 'G', type: builder.template(functorType(builder, A, B)) },
+            { name: 'X', type: builder.template(objectType(builder, A)) },
+            {
+                name: 'epsilon',
+                type: builder.template(transforType(builder, A, B, F, G))
+            }
+        ],
+        left: builder.pattern(transforHomCappedAt(
+            builder,
+            A,
+            B,
+            F,
+            G,
+            X,
+            X,
+            epsilon,
+            identityAt(builder, A, X)
+        )),
+        right: builder.template(transforComponentAt(
+            builder,
+            A,
+            B,
+            F,
+            G,
+            X,
+            epsilon
+        )),
+        provenance: source(
+            'rule @tapp1_fapp0 $A $B $F $G $X $X $epsilon ' +
+                '(@id $A $X) ↪ @tapp0_fapp0 $A $B $F $G $X $epsilon'
+        )
+    };
+};
+
 const runtimeRules = Object.freeze([
     homDisplayedFunctorRule(),
     transfdObjectBridgeRule(),
@@ -1987,29 +3120,40 @@ const runtimeRules = Object.freeze([
     displayedComponentCompositionRule('ordinary', 6),
     genericComponentIdentityRule(7),
     displayedComponentIdentityRule('direct', 8),
-    displayedComponentIdentityRule('ordinary', 9)
+    displayedComponentIdentityRule('ordinary', 9),
+    displayedHorizontalComponentRule(),
+    ordinaryHorizontalPointRule(),
+    ordinaryHorizontalFullRule(),
+    ordinaryHorizontalCappedRule(),
+    genericFullIdentityActionRule(),
+    genericCappedIdentityActionRule(),
+    genericIdentityBaseActionRule()
 ]);
 
 const runtimeExternalSymbols = Object.freeze([
     ...declarationExternalSymbols,
-    homCategory,
     transforCategory,
+    functorHomFull,
     constantDisplayedFamily,
     sectionCategory,
     sigmaCategory,
     functorCategory,
+    productPair,
     genericIdentity,
     transforComponentCapped,
+    transforHomFull,
+    transforHomCapped,
     terminalCategory,
     sigmaProjectionPullback,
     displayedTransformationCategory,
     displayedTransformationClassifier,
-    displayedComponent
+    displayedComponent,
+    horizontalCompositionAction
 ]);
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_RUNTIME_MODULE:
 CoreLfModuleSpec = createCoreLfModuleSpec({
-    revision: 'FIBRED-TRANSFD-1-RUNTIME-D057-1',
+    revision: 'FIBRED-TRANSFD-1-RUNTIME-D061-1',
     moduleId: MODULE_ID,
     fragmentId: 'fibred-transfd-1-runtime',
     authorityPath: 'emdash2/emdash3_2.lp',
@@ -2029,7 +3173,7 @@ export const CORE_CATEGORICAL_FIBRED_TRANSFD_RUNTIME_POLICY:
 CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_FIBRED_TRANSFD_RUNTIME_MODULE,
     {
-        revision: 'FIBRED-TRANSFD-1-RUNTIME-POLICY-D057-1',
+        revision: 'FIBRED-TRANSFD-1-RUNTIME-POLICY-D061-1',
         moduleRevision:
             CORE_CATEGORICAL_FIBRED_TRANSFD_RUNTIME_MODULE.revision,
         entries: runtimeRules.map(rule => ({
@@ -2039,8 +3183,21 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
                 id: rule.id
             },
             policy: 'runtime-rewrite' as const,
-            evidence:
-                'Exact existing active v3.2 displayed-transfor closure'
+            evidence: rule.id ===
+                'categorical.transfd.horizontal-component'
+                ? 'Exact D-DTTLF-USABILITY-058 active fibre projection'
+                : rule.id.startsWith(
+                    'categorical.transfd.horizontal-'
+                )
+                    ? 'Exact pre-existing generic Cat horizontal-action ' +
+                        'projection'
+                    : rule.id.startsWith(
+                        'categorical.transfd.identity-'
+                    )
+                        ? 'Exact pre-existing generic identity-action ' +
+                            'projection acquired under ' +
+                            'D-DTTLF-USABILITY-061'
+                    : 'Exact existing active v3.2 displayed-transfor closure'
         }))
     }
 );
@@ -2229,7 +3386,10 @@ Object.freeze({
     transportRhs:
         'emdash_v3_2_fibred_transfd_1_' + transportRhs.name,
     higherCell:
-        'emdash_v3_2_fibred_transfd_1_' + higherCell.name
+        'emdash_v3_2_fibred_transfd_1_' + higherCell.name,
+    horizontalCompositionAction:
+        'emdash_v3_2_fibred_transfd_1_' +
+            horizontalCompositionAction.name
 });
 
 export type CoreCategoricalFibredTransfdSymbolId =
@@ -2239,7 +3399,8 @@ export type CoreCategoricalFibredTransfdSymbolId =
     | 'identity-arrow'
     | 'transport-lhs'
     | 'transport-rhs'
-    | 'higher-cell';
+    | 'higher-cell'
+    | 'horizontal-composition-action';
 
 const coreNameById:
 Readonly<Record<
@@ -2261,7 +3422,10 @@ Readonly<Record<
     'transport-rhs':
         CORE_CATEGORICAL_FIBRED_TRANSFD_CORE_NAMES.transportRhs,
     'higher-cell':
-        CORE_CATEGORICAL_FIBRED_TRANSFD_CORE_NAMES.higherCell
+        CORE_CATEGORICAL_FIBRED_TRANSFD_CORE_NAMES.higherCell,
+    'horizontal-composition-action':
+        CORE_CATEGORICAL_FIBRED_TRANSFD_CORE_NAMES
+            .horizontalCompositionAction
 });
 
 export function coreCategoricalFibredTransfdCoreName(
@@ -2383,7 +3547,8 @@ export function coreCategoricalFibredTransfdClassifiers(
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_BOUNDARY =
 Object.freeze({
-    status: 'root-only-existing-authority-displayed-transfor-closure',
+    status:
+        'root-only-existing-authority-displayed-transfor-horizontal-action',
     contractRevision:
         CORE_CATEGORICAL_FIBRED_TRANSFD_CONTRACT.revision,
     declarationNames: Object.freeze(
@@ -2395,13 +3560,24 @@ Object.freeze({
         'tdapp0_fapp0'
     ]),
     reusedScaleStress3a2aDeclarationNames: Object.freeze(['id']),
+    acquiredPreExistingDeclarationNames: Object.freeze([
+        'comp_prod_fapp1_fapp0'
+    ]),
     declarationCount: declarations.length,
     runtimeRuleIds: Object.freeze(runtimeRules.map(rule => rule.id)),
     runtimeRuleCount: runtimeRules.length,
     proofRuleIds: Object.freeze([proofRule.id]),
     proofRuleCount: 1,
     newMathematicalOwnerCount: 0,
-    newMathematicalRuntimeRuleCount: 0,
+    newMathematicalRuntimeRuleCount: 1,
+    acquiredPreExistingHorizontalActionRuleCount: 3,
+    acquiredPreExistingIdentityActionRuleCount: 3,
+    transferLayerCorrectionDecisions: Object.freeze([
+        'D-DTTLF-USABILITY-059',
+        'D-DTTLF-USABILITY-060',
+        'D-DTTLF-USABILITY-061'
+    ]),
+    transferLayerCorrectionDecision: 'D-DTTLF-USABILITY-061',
     newMathematicalProofRuleCount: 0,
     directOrdinaryRuntimeCategoryCollapseInstalled: false,
     directOrdinaryObjectClassifierBridgeInstalled: true,

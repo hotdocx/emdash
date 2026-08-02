@@ -89,7 +89,7 @@ describe('DISPLAYED-ND-HIGHER-1B dependency-first audit', () => {
                     prerequisite.currentTransfdRuntimeRuleCount,
                     prerequisite.semanticImplementationAuthorized
                 ],
-                [7, 10, false]
+                [8, 17, false]
             );
         });
 

@@ -14134,6 +14134,55 @@ with @tdapp0_fapp0
       (@tdapp0_fapp0 $K $E $D $GG $HH $z $eta)
       (@tdapp0_fapp0 $K $E $D $FF $GG $z $epsilon);
 
+// A displayed component of generic horizontal action in `Catd_cat K`
+// projects to the ordinary horizontal action in the fibre at `k`. The whole
+// displayed transfor, including its base-arrow/higher action, remains owned by
+// `comp_prod_fapp1_fapp0`; this is evaluator beta, not a second action owner.
+// Keep the reconstructible source/target displayed functors inferred on the
+// LHS: the product endpoints are the semantic discriminator.
+rule @tdapp0_fapp0
+      $K $W $Z _ _ $k
+      (@comp_prod_fapp1_fapp0
+        (@Catd_cat $K) $W $X $Z $FG $FG' $theta)
+  ↪ @comp_prod_fapp1_fapp0
+      Cat_cat
+      (Fibre_cat $W $k)
+      (Fibre_cat $X $k)
+      (Fibre_cat $Z $k)
+      (@Product_pair
+        (Functor_cat (Fibre_cat $W $k) (Fibre_cat $X $k))
+        (Functor_cat (Fibre_cat $X $k) (Fibre_cat $Z $k))
+        (@Fibre_func $K $W $X (sigma_Fst $FG) $k)
+        (@Fibre_func $K $X $Z (sigma_Snd $FG) $k))
+      (@Product_pair
+        (Functor_cat (Fibre_cat $W $k) (Fibre_cat $X $k))
+        (Functor_cat (Fibre_cat $X $k) (Fibre_cat $Z $k))
+        (@Fibre_func $K $W $X (sigma_Fst $FG') $k)
+        (@Fibre_func $K $X $Z (sigma_Snd $FG') $k))
+      (@Product_pair
+        (@Transf_cat
+          (Fibre_cat $W $k)
+          (Fibre_cat $X $k)
+          (@Fibre_func $K $W $X (sigma_Fst $FG) $k)
+          (@Fibre_func $K $W $X (sigma_Fst $FG') $k))
+        (@Transf_cat
+          (Fibre_cat $X $k)
+          (Fibre_cat $Z $k)
+          (@Fibre_func $K $X $Z (sigma_Snd $FG) $k)
+          (@Fibre_func $K $X $Z (sigma_Snd $FG') $k))
+        (@tdapp0_fapp0
+          $K $W $X
+          (sigma_Fst $FG)
+          (sigma_Fst $FG')
+          $k
+          (sigma_Fst $theta))
+        (@tdapp0_fapp0
+          $K $X $Z
+          (sigma_Snd $FG)
+          (sigma_Snd $FG')
+          $k
+          (sigma_Snd $theta)));
+
 // Projection-order join for pre/right naturality when the source functor is
 // Cat-valued component evaluation. The generic `fapp1_fapp0` component has
 // already projected to `tdapp0_fapp0` on the right cut.
