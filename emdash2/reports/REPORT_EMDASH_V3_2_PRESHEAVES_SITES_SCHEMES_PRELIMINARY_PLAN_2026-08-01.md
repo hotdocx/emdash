@@ -103,9 +103,9 @@ affine consumer. Focused source/reviewer/central checks and exact warning
 comparisons are green: `(1,0)` is constructively neither zero nor one in
 `F2 x F2`, and its affine restriction computes as `(x,y) |-> (x,0)`. The
 maintained aggregates, strict audit, fresh 1,968-check catalog, synchronized
-86-target health, and full integration CI are green; only the local checkpoint
-remains pending for this active bounded tranche. Whole matching/descent remains
-the next semantic gate and is not implied by this closed algebraic computation.
+86-target health, and full integration CI are green, and the tranche is locally
+checkpointed at `e68b6b9`. Whole matching/descent remains the next semantic
+gate and is not implied by this closed algebraic computation.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -3111,20 +3111,21 @@ localization.
 
 ##### PSSS-08c0H — Product rings and a closed split-idempotent basic open
 
-Status: active promotion candidate. The three rule-free sources, one reviewer,
-and nine central diagnostics are focused-green. Warning-enabled checks of each
-new source and the reviewer inherit exactly `1179 = 1020 + 159`, with no
-candidate-owned warning location. Maintained aggregates and the strict audit
-are green; the fresh catalog contains 1,968 checks across 86 mapped areas with
-zero unclassified entries. Health passes all 86 source/example targets in
+Status: checkpointed-green at `e68b6b9`. The three rule-free sources, one
+reviewer, and nine central diagnostics are focused-green. Warning-enabled
+checks of each new source and the reviewer inherit exactly
+`1179 = 1020 + 159`, with no candidate-owned warning location. Maintained
+aggregates and the strict audit are green; the fresh catalog contains 1,968
+checks across 86 mapped areas with zero unclassified entries. Health passes
+all 86 source/example targets in
 419.730 summed check-seconds at source snapshot
 `sha256:49e571bee9c63afac0e25120e5271816feece3eb969fb0ed17c0893772e4b024`.
 Full integration CI independently passes all 86 Lambdapi targets in 450.152
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, the strict kernel audit, and fresh strict catalog
-verification. Only the local checkpoint remains before this status becomes
-checkpointed-green.
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `e68b6b9`.
 
 The reusable product module constructs
 
@@ -4235,9 +4236,9 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
-| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; zero-localization/empty-open tranche checkpointed at `7013915`; whole algebraic overlap checkpointed at `362922d`; PSSS-08c0H now supplies the full-green closed nondegenerate model; whole matching/descent connection remains open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
-| PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; locally checkpointed at `1211e06`; its requested product-ring consumer is now the downstream PSSS-08c0H candidate | PSSS-07a localization API and zero-localization algebra lemmas |
-| PSSS-08c0H | Product rings, closed `F2`, and split-idempotent affine restriction | Full-green rule-free candidate through focused and maintained checks, exact warning comparison, strict audit, fresh 1,968-check catalog, synchronized 86-target health, and full integration CI; local checkpoint pending | PSSS-08c0G, `CommRing_cat` structured-map extensionality, and PSSS-09a affine-arrow API |
+| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; zero-localization/empty-open tranche checkpointed at `7013915`; whole algebraic overlap checkpointed at `362922d`; PSSS-08c0H now supplies the checkpointed-green closed nondegenerate model; whole matching/descent connection remains open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; locally checkpointed at `1211e06`; its requested product-ring consumer is the checkpointed downstream PSSS-08c0H tranche | PSSS-07a localization API and zero-localization algebra lemmas |
+| PSSS-08c0H | Product rings, closed `F2`, and split-idempotent affine restriction | Rule-free implementation green through focused and maintained checks, exact warning comparison, strict audit, fresh 1,968-check catalog, synchronized 86-target health, and full integration CI; locally checkpointed at `e68b6b9` | PSSS-08c0G, `CommRing_cat` structured-map extensionality, and PSSS-09a affine-arrow API |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

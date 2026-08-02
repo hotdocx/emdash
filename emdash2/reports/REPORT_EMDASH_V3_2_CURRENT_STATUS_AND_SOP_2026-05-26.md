@@ -2427,7 +2427,8 @@ full integration CI independently passes the same 86 targets in 450.152
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, the strict kernel audit, and fresh strict catalog
-verification. Only the local checkpoint remains pending.
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `e68b6b9`.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
