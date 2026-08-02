@@ -11,7 +11,7 @@ Depends-On:
 and
 [`TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md`](./TYPESCRIPT_ELABORATOR_V3_2_CATEGORICAL_BINDER_RFC.md)
 
-Status: active semantic successor; compact single-fibre `:^nd` text parity is
+Status: completed scoped predecessor; compact single-fibre `:^nd` text parity is
 final-green at checkpoint `dabe9d9827462b76a493c1dd34cc658e137f22d5`;
 `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` and
 `CONTEXTUAL-ND-TELESCOPE-0AK` are read-only complete with zero behavior delta.
@@ -60,7 +60,10 @@ presets. D-DTTLF-USABILITY-073 below freezes the exact two-expectation/one-doc
 correction. It is separately reviewed-approved from immutable proposal
 checkpoint `cbc02584f827ac373be592a4a10581c10987ea0c` under the standing
 unattended delegation, with immediate human supersession; implementation may
-resume without repeating the aggregate.
+resume without repeating the aggregate. The combined D-070--D-073
+semantic/product implementation is final-green at rollback-safe checkpoint
+`607a026f88bc6d3b9f305ecb21f6630ce7c94950`. Its semantic successor is
+[`TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md).
 
 ## Objective
 
@@ -492,10 +495,10 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` | read-only complete; zero behavior delta | final-green 1AL; prior alternating Hom/Transf and mixed-target evidence | The finite canonical semantic envelope is coherent and classifier-head-agnostic. Grouped text grammar already exists; the missing seam is one expected-contract/resolver route, not a mixed-variance construction. |
 | `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | final-green at `ba488f5a542bf5dce8fe78162a75663c313dcb26` | completed 0AM; final-green typed method; D-069 proposal `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2`; immutable review | One grouped displayed-transformation expected contract now routes comma/semicolon `^nd` syntax to the existing typed API. Independent and dependent direct/text equality, the full body algebra, four canonical layers, optional annotations, frozen evidence, and the fail-closed matrix are focused-green without a second parser or semantic factorer. |
 | `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` | read-only complete; zero behavior delta | final-green 1AN plus public reviewer and syntax-parity plans | The semantic/text envelope graduates. A cold reviewer-shaped probe succeeds but measures 148.31 seconds on the unnecessarily broad mixed profile versus 27.83 seconds for the existing chain-2A closure, selecting profile decoupling before public promotion. |
-| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | D-DTTLF-USABILITY-070 separately reviewed-approved; implementation dependency-ready | completed 0AO; proposal `41ddef0bad65f5766634c61c994f06f581f79cd0`; immutable review | Decouple contextual `:^nd` telescope availability from mixed-classifier capability while reusing the exact chain-2A runtime, then add one genuine-dependent reviewer preset and truthful README boundary. |
-| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` | D-DTTLF-USABILITY-071 separately reviewed-approved; implementation resumes | first D-070 browser-fixture typecheck; proposal `fcf082be07ad44b877c1b622fb4acc4293cdc84c`; immutable review | Add exactly one exhaustive label case in the existing generic UI for the new expected-mode variant. No UI flow, semantics, or preset behavior changes. |
-| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-COUNT-CORRECTION-1AP2` | D-DTTLF-USABILITY-072 separately reviewed-approved; implementation resumes | first real-browser D-070 snapshot; proposal `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091`; immutable review | Replace the stale literal eleven with the actual preset-array length in the existing fact strip. No layout or behavior change. |
-| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-CONTRACT-CORRECTION-1AP3` | D-DTTLF-USABILITY-073 separately reviewed-approved; implementation resumes | sole required D-070 root aggregate; exact active-source search; proposal `cbc02584f827ac373be592a4a10581c10987ea0c`; immutable review | Update the already-authorized browser source contract for the derived count and add only the standalone fixture README so its preset inventory says twelve. No runtime, UI, semantic, or aggregate rerun. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | final-green at `607a026f88bc6d3b9f305ecb21f6630ce7c94950` | completed 0AO; D-070 proposal/review; D-071--D-073 exact corrections | Contextual `:^nd` availability is decoupled from mixed classifiers through unchanged chain-2A; the twelfth genuine-dependent reviewer preset and truthful repository/fixture boundaries are production/browser green. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` | final-green; folded into 1AP | first D-070 browser-fixture typecheck; D-071 proposal/review | One exhaustive label case presents the new expected mode. No UI flow or semantics changed. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-COUNT-CORRECTION-1AP2` | final-green; folded into 1AP | first real-browser D-070 snapshot; D-072 proposal/review | The fact strip derives twelve from the immutable preset array. No layout or behavior changed. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-CONTRACT-CORRECTION-1AP3` | final-green; folded into 1AP | sole D-070 aggregate; D-073 proposal/review | The focused source contract and fixture README agree with the derived twelve-preset inventory; the 52-minute aggregate is not repeated. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
 
@@ -1003,12 +1006,34 @@ internal object/arrow/higher action; add no curry, total-context section,
 cast, external coherence, second parser, broad mixed profile, browser
 behavior, or kernel owner outside the frozen proposal.
 
+Treat the combined D-070--D-073 implementation as final-green at
+`607a026f88bc6d3b9f305ecb21f6630ce7c94950`. Carry forward the focused
+Core/reviewer tests, root typecheck/lint, production build, real-browser
+acceptance and zero-error console, and the measured cold/warm product evidence.
+The sole root aggregate ran 52.2 minutes and reported only D-072's stale
+literal-eleven source assertion; D-073 corrects it with focused 1/1 evidence.
+Do not repeat that aggregate. Continue from
+`docs/TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md`, whose
+first row is read-only and preserves this plan's factorers as rollback
+evidence.
+
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-070--D-073 reviewer route final-green at
+  `607a026f88bc6d3b9f305ecb21f6630ce7c94950`; compositional-natural successor
+  selected.** The chain-2A and mixed profiles emit exact equal Core; the new
+  preset is accepted in a real browser with zero console diagnostics; the
+  fixture builds 147 modules; and the browser measures approximately
+  38.1s/3.9s cold/warm versus 19.6s/0.24s for the existing mixed-telescope
+  preset on this host. The sole 52.2-minute aggregate reports only the stale
+  D-072 source assertion, corrected by D-073's focused 1/1 test plus green
+  typecheck/lint. The user identifies reusable ordinary-natural abstraction as
+  the next semantic priority; the dedicated successor begins with a read-only
+  audit and does not reopen this completion history.
 - **2026-08-02 — D-DTTLF-USABILITY-073 separately reviewed-approved.** The
   immutable review of proposal checkpoint
   `cbc02584f827ac373be592a4a10581c10987ea0c` confirms that the aggregate

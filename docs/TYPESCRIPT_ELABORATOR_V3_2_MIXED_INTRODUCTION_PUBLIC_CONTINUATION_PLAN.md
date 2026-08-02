@@ -7983,6 +7983,17 @@ and that one additional Markdown file. It is separately reviewed-approved from
 immutable proposal checkpoint `cbc02584f827ac373be592a4a10581c10987ea0c`
 under the standing unattended delegation, with immediate human supersession;
 implementation resumes, and the aggregate must not be repeated.
+The combined D-070--D-073 implementation is final-green at
+`607a026f88bc6d3b9f305ecb21f6630ce7c94950`. Carry forward its focused
+Core/reviewer equality, typecheck/lint, production build, real-browser
+acceptance, zero-error console, and measured cold/warm evidence. Treat the
+sole 52.2-minute aggregate as effective all-but-one stale source assertion;
+D-073's focused 1/1 correction closes that assertion and the aggregate must
+not be repeated. Continue semantic work from
+`docs/TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md`: the
+user selects reusable ordinary-natural abstraction, followed by an exact
+compact-versus-expanded displayed comparison, as the next priority. Its first
+row is read-only and adds no behavior.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -8001,6 +8012,13 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — contextual reviewer final-green; compositional-natural
+  successor selected.** D-070--D-073 are checkpointed at
+  `607a026f88bc6d3b9f305ecb21f6630ce7c94950`. The product and effective test
+  boundary is green without a second aggregate. The next dedicated plan audits
+  whether a reusable ordinary `lambda^n` transformation bracket can become
+  the compositional inner layer of compact `lambda^nd`, while preserving exact
+  classifier distinctions and internal higher action.
 - **2026-08-02 — D-073 separately reviewed-approved.** The immutable review
   of proposal checkpoint `cbc02584f827ac373be592a4a10581c10987ea0c`
   approves only the two stale source expectations and one fixture-README

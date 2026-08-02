@@ -1,9 +1,9 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
 > **Current continuation (2026-08-02):**
-> [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md)
-> owns the next work. Its semantic predecessor is
-> [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md).
+> [`TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md)
+> owns the next work. Its final-green semantic predecessor is
+> [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md).
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
@@ -199,6 +199,22 @@
 > `cbc02584f827ac373be592a4a10581c10987ea0c` under the standing unattended
 > delegation, with immediate human supersession; implementation resumes and
 > the aggregate must not be repeated.
+> The combined D-070--D-073 implementation is final-green at rollback-safe
+> semantic/product checkpoint
+> `607a026f88bc6d3b9f305ecb21f6630ce7c94950`. Direct typed and grouped text
+> canonical finite `:^nd` telescopes now feed the lean chain-2A reviewer route;
+> the twelfth genuine-dependent preset is accepted in a real browser, the
+> production fixture builds, and the browser console is clean. Cold/warm
+> measurements are approximately 38.1s/3.9s for the new preset and
+> 19.6s/0.24s for the existing mixed-telescope preset on this host. The sole
+> root aggregate ran 52.2 minutes and reported only D-072's stale
+> literal-eleven source assertion; D-073's focused 1/1 correction plus green
+> typecheck/lint closes that effective boundary. Do not repeat it.
+> The successor records the clarified remaining architecture gap: compact
+> `lambda^nd a` already creates and tracks the expanded natural telescope
+> `k :^n K; a :^n E[k]`, but no reusable standalone ordinary-natural
+> `lambda^n a` transformation bracket exists. Its first row is a read-only
+> owner/API/classifier/action audit; no refactor is authorized yet.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
