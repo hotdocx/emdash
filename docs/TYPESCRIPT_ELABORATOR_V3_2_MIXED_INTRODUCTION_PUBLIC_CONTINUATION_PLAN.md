@@ -7931,7 +7931,9 @@ delegation, with immediate human supersession. Implement only its thirteen
 numbered items plus the dedicated plan's separately reviewed exact
 D-DTTLF-USABILITY-068 public-method-inventory correction. That correction may
 touch only the existing parity-audit row and its exact method-count test; it
-adds no text behavior. Add no kernel/runtime owner, Core/checker case, second
+is separately reviewed-approved from immutable checkpoint
+`dc104610c3cb8bbaf665382afe23802c12db41a2` with immediate human supersession
+and adds no text behavior. Add no kernel/runtime owner, Core/checker case, second
 parser, classifier decomposition heuristic, external coherence evidence,
 curry, browser/public preset, or scale behavior.
 

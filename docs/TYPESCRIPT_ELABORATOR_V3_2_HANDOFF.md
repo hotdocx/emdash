@@ -131,8 +131,10 @@
 > implementation began, and the first typecheck found the exhaustive
 > public-method parity inventory plus its focused count test mechanically
 > affected. The dedicated plan freezes D-DTTLF-USABILITY-068 for only those
-> two files and no parser behavior. D-067 pauses pending that correction's
-> separate immutable review.
+> two files and no parser behavior. D-068 is separately reviewed-approved from
+> immutable correction checkpoint
+> `dc104610c3cb8bbaf665382afe23802c12db41a2` under the standing unattended
+> delegation, with immediate human supersession. D-067 implementation resumes.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

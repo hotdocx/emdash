@@ -21,7 +21,10 @@ is separately reviewed-approved from immutable proposal checkpoint
 `57c811fd9ab992abffa6b2388aed06dec3dae19d` under the user's standing
 unattended delegation, with immediate human supersession. Implementation is
 dependency-ready at exactly its thirteen numbered items, subject to the exact
-D-DTTLF-USABILITY-068 audit-inventory file-list correction below.
+D-DTTLF-USABILITY-068 audit-inventory file-list correction below. D-068 is
+separately reviewed-approved from immutable checkpoint
+`dc104610c3cb8bbaf665382afe23802c12db41a2` under the standing unattended
+delegation, with immediate human supersession; implementation may resume.
 
 ## Objective
 
@@ -409,9 +412,8 @@ Approval authorizes exactly:
 5. Make no other production, test, parser, text revision, expected-contract,
    browser, kernel, Core, checker, runtime, package, or public-claim change.
 
-D-067 implementation remains paused until this exact correction has a separate
-immutable review. All D-067 semantic and non-effect boundaries remain
-unchanged.
+D-067 implementation may resume after the separate immutable review recorded
+below. All D-067 semantic and non-effect boundaries remain unchanged.
 
 ## Alternatives Assessed By The Audit
 
@@ -449,8 +451,8 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | final-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` | D-065/D-066 | Single-fibre compact text exactly matches eta, identity, recursive composition, and both whiskering orientations; historical base-component text remains unchanged. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero behavior delta | final-green 1AI | Graduates only the exact single-fibre direct/text envelope and identifies canonical multi-variable context abstraction—not parser or classifier-head behavior—as the first remaining usability gap. |
 | `CONTEXTUAL-ND-TELESCOPE-0AK` | read-only complete; zero behavior delta | completed 0AJ; generic displayed context fold; single-fibre point factorer | Select one shared normal form, coherent accessors applied to one terminal slot, and contextual endpoint reuse of the existing recursive object compiler. Independent siblings, genuine dependency, and finite mixed layers require no new owner or coherence algorithm. |
-| `CONTEXTUAL-ND-TELESCOPE-1AL` | D-DTTLF-USABILITY-067 separately reviewed-approved; implementation started then paused at exact D-068 file-list correction | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; immutable review | Factor one reusable normal form, add one synthesis-capable direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
-| `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | D-DTTLF-USABILITY-068 frozen pending separate review; zero semantic delta | first D-067 typecheck; exhaustive public-method inventory | Classify the new direct method in the existing semantic capability row and update the exact focused method-count assertion. Add no text behavior. |
+| `CONTEXTUAL-ND-TELESCOPE-1AL` | D-DTTLF-USABILITY-067 and exact D-068 correction separately reviewed-approved; implementation resumed | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; D-067 proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; D-068 correction `dc104610c3cb8bbaf665382afe23802c12db41a2`; immutable reviews | Factor one reusable normal form, add one synthesis-capable direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
+| `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | D-DTTLF-USABILITY-068 separately reviewed-approved; implementation folded into 1AL | first D-067 typecheck; exhaustive public-method inventory | Classify the new direct method in the existing semantic capability row and update the exact focused method-count assertion. Add no text behavior. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-0AK` Audit Contract
 
@@ -545,6 +547,13 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-068 separately reviewed-approved.** The
+  immutable review of correction checkpoint
+  `dc104610c3cb8bbaf665382afe23802c12db41a2` confirms that exactly one existing
+  semantic capability row and its exact count test are mechanically affected.
+  Classification totals, row count, text revision, parser/resolver behavior,
+  and every D-067 non-effect remain unchanged. Implementation may resume under
+  the standing unattended delegation with immediate human supersession.
 - **2026-08-02 — D-DTTLF-USABILITY-068 inventory correction frozen.** The
   first implementation typecheck proves that the exhaustive public-method
   inventory and its focused count test are mechanically affected by D-067's
