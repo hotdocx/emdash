@@ -174,6 +174,23 @@ Its focused and central checks, exact inherited-warning audit, strict rule
 audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative
 integration remainder are green; the implementation and authority prose are
 locally checkpointed at `837cfeb`.
+`emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
+concrete atlas consumer. In every product ring it uses the already-selected
+finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their
+orthogonality, selects the existing zero localization for the overlap, and
+constructs actual internal arrows from that overlap into both affine charts.
+The coordinate presheaf restricts along those arrows by whole structured maps
+to the zero ring; the closed `F2 x F2` instance therefore supplies a
+non-endpoint two-chart atlas with computationally empty overlap. This is an
+atlas/glue presentation, not a universal gluing theorem, sheafhood, a locally
+ringed space, or a general scheme record. An attempted specialized recursive
+chart-family facade exceeded the bounded elaboration budget, so the existing
+`CommRingZariskiCoverFamily` remains authoritative and concrete chart
+observations are exposed directly.
+Its source/reviewer/central checks, exact inherited-warning comparison, strict
+1,987-check catalog, synchronized 92-target health, and nonduplicative
+integration remainder are green; the bounded tranche is ready for its
+authorized local checkpoint.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

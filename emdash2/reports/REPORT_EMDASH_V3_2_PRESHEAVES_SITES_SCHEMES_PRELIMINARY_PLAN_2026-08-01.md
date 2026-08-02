@@ -164,6 +164,23 @@ and unrestricted functor extensionality remain off the main line until such a
 consumer actually requires them. The implementation and synchronized
 authority prose are locally checkpointed at `837cfeb`.
 
+`PSSS-10b` now selects the first finite atlas consumer. The rule-free
+`emdash3_2_commutative_algebra_affine_atlas.lp` module reuses the existing
+`CommRingZariskiCoverFamily` for the complementary idempotents `(1,0)` and
+`(0,1)` in every product ring, derives their orthogonal `D(0)` overlap, and
+constructs internal arrows from that overlap into both charts. Coordinate
+restriction computes to whole structured maps into `zero_comm_ring`; the
+closed `F2 x F2` instance is a non-endpoint two-chart atlas/glue presentation.
+This deliberately does not claim a universal gluing theorem, sheafhood,
+locally ringed structure, or a general scheme record. A generic finite
+tabulation helper is feasible, but the fully specialized recursive affine
+chart-family facade and its split consumer both exceeded the bounded
+elaboration budget, so that convenience layer is rejected rather than
+supported by a rigid head or local rule. Focused source, reviewer, and central
+checks, exact inherited warnings, strict audit/catalog, synchronized 92-target
+health, and the nonduplicative integration remainder are green. The tranche is
+ready for its authorized local checkpoint.
+
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
 Worktree: `/home/user1/emdash1-presheaves-sites-schemes`
@@ -3863,8 +3880,8 @@ replacements for them.
 ### Phase PSSS-10 — Slice sites and affine charts
 
 Status: PSSS-10a computational big-slice implementation is green and locally
-checkpointed at `837cfeb`; small-site/topology and atlas layers remain later
-gates.
+checkpointed at `837cfeb`; PSSS-10b has a synchronized-green concrete
+two-chart atlas implementation ready for its authorized local checkpoint.
 
 ##### PSSS-10a — Big affine slice and computing overlap
 
@@ -3936,16 +3953,84 @@ selected sheaf datum, or additional descent interface is immediately needed.
 
 ##### PSSS-10b — Minimal supplied cover and computational affine atlas
 
-Status: next MVP gate after checkpointed PSSS-10a.
+Status: synchronized-green concrete complementary-idempotent atlas; local
+checkpoint pending.
 
-- consume the existing finite unimodular presentation and selected
-  localization family rather than require a least generated topology;
-- package the whole affine chart, selected basic-open charts, and their
-  internally carried restriction/overlap arrows;
-- retain a computing coordinate-ring observation and one concrete
-  non-endpoint chart/gluing consumer; and
-- state separately any proposition-valued coverhood or sheaf/descent evidence
-  actually required by that consumer.
+The source of truth is the existing `CommRingZariskiCoverFamily`, not a new
+atlas record. For every `R x S`, the generators
+
+```text
+e  = (1,0),
+e' = (0,1)
+```
+
+are idempotent, have `e+e'=1`, and use the already-constructed fixed-image
+localizations. Unit coefficients therefore give the existing binary
+unimodular presentation together with an explicitly selected dependent pair
+of localization packages. This consumes PSSS-09 data without requiring the
+least generated topology, presentation truncation, or a global localization
+choice.
+
+Orthogonality `e*e'=0` makes the selected chart intersection the existing
+computational empty basic open `D(0)`. Its coordinate ring is
+`zero_comm_ring`. The canonical whole structured maps from each chart ring to
+the zero ring satisfy their triangles over `R x S`; the generic
+`affine_spec_chart_arrow`/Sigma owner lifts those triangles to actual internal
+geometric arrows
+
+```text
+D(0) -> D(e),
+D(0) -> D(e').
+```
+
+Restriction of `affine_spec_coordinate_psh(R x S)` along these arrows computes
+to the same whole CommRing maps. Thus chart objects, chart arrows, coordinate
+values, and restrictions are all represented internally; no external
+naturality square, object-only action, new functoriality rule, rewrite, or
+unification clause is introduced.
+
+The closed specialization to `F2 x F2` makes the product of the two generators
+reduce literally to zero. It is the first finite, non-endpoint computational
+atlas/glue presentation. Here “glue” means that the selected charts and their
+empty overlap are explicit and computing. It does not mean that a colimit or
+universal gluing theorem, a sheaf/descent equivalence, a locally ringed space,
+or a general scheme record has already been constructed.
+
+The representation audit rejected one tempting convenience API. The generic
+`FiniteFamilyAllOver` tabulation probe succeeds in 5.48 seconds
+(`logs/probes/psss10b_finite_all_over_tabulate-20260802-101819.log`), but the
+fully specialized dependent affine-chart family timed out twice at 60 seconds
+(`logs/probes/psss10b_affine_chart_family-20260802-101512.log` and
+`logs/probes/psss10b_affine_chart_family-20260802-101636.log`), and its split
+consumer also timed out
+(`logs/probes/psss10b_affine_chart_family_consumer-20260802-101855.log`). This
+matches the retained PSSS-09b2 specialization-performance boundary. No rigid
+facade, ad hoc rule, or duplicated family record is promoted. The concrete
+binary cover and atlas probes are green at timestamps `20260802-102216` and
+`20260802-102438`. The warning-enabled promoted source and reviewer logs at
+timestamps `20260802-103818` and `20260802-103846` each inherit exactly
+`1179 = 1020 + 159` warnings and have zero changed-file locations.
+
+The promoted rule-free source contains 402 lines and 20 symbols. Its focused
+check passes in 25.35 seconds at
+`logs/probes/emdash3_2_commutative_algebra_affine_atlas-20260802-102935.log`.
+The 135-line reviewer has 13 assertions and passes in 23.13 seconds at
+`logs/probes/commutative_ring_affine_atlas-20260802-103134.log`; six central
+diagnostics pass with the full central target in 29.08 seconds at
+`logs/probes/emdash3_2_checks-20260802-103305.log`. The final warning, strict
+catalog, health, and proportional integration evidence is green. The
+strict rule audit has zero unreviewed clauses; the catalog has 1,987 checks
+across 89 areas with zero legacy or unclassified entries. Synchronized health
+passes all 92 registered targets in 663.006 summed check-seconds at source
+snapshot
+`sha256:6ff71dd1ca9dae89e444926ebaab28710a89fddbe8d24484d1a245ec114eb152`;
+the new source/reviewer take 9.006 and 9.287 seconds there, while the central
+target takes 32.644 seconds. To honor the explicit no-redundant-long-aggregate
+constraint, the fresh health traversal is followed by the nonduplicative CI
+remainder rather than a second traversal: the snapshot check, 39 Python tests,
+five registry tests, shell/source/report/reference checks, strict audit and
+catalog, and book evidence/typography/KaTeX/assembly checks are all green.
+The bounded tranche is ready for its authorized local checkpoint.
 
 Induced small-slice topology, `Spec(R)/D(f)` versus `Spec(R[1/f])` as an
 equivalence of ringed sites, subcanonicity, and general sheafification remain
@@ -4547,6 +4632,22 @@ consumer demonstrates that nontransitive unification requires it.
   a selected small Zariski site or complete scheme. The next MVP gate is a
   supplied finite cover/atlas plus concrete gluing, not generated topology,
   general sheafification, or unrestricted functor equality.
+- **PSSS-D-095:** keep `CommRingZariskiCoverFamily` authoritative for finite
+  generators and their selected localization packages. Generic dependent
+  finite tabulation is viable, but the fully specialized recursive affine
+  chart-family facade and its concrete split consumer both cross the
+  60-second Lambdapi target boundary. Do not add a parallel record, rigid
+  workaround, rewrite, or unifier merely to mask that presentation cost;
+  expose directly the concrete chart observations required by an executable
+  consumer.
+- **PSSS-D-096:** select complementary idempotents in `R x S` as the first
+  computational affine-atlas consumer. Their selected fixed-image
+  localizations form an existing binary Zariski-cover family, their product
+  is zero, and the overlap is therefore the existing computing zero
+  localization. Construct both overlap-to-chart arrows internally and make
+  the coordinate restrictions compute to whole structured maps. Describe the
+  result as an atlas/glue presentation only: no universal colimit/gluing
+  theorem, sheaf, locally ringed space, or general scheme record is implied.
 
 ## 19. Side-Task Ledger
 
@@ -4589,7 +4690,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ2; PSSS-05b for subcanonicity |
 | PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative integration remainder green; locally checkpointed at `837cfeb` | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
-| PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Next MVP gate | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
+| PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Rule-free complementary-idempotent atlas source/reviewer/central checks, exact warnings, strict 1,987-check catalog, synchronized 92-target health, and nonduplicative integration remainder green; local checkpoint pending | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
 | PSSS-10c | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | PSSS-10b consumer plus selected PSSS-09c/PSSS-08c1 scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Functor-of-points/qcqs comparison | Research boundary | PSSS-11 and representability audit |
@@ -4947,4 +5048,35 @@ PSSS-10a is successful when:
 9. focused owner/reviewer/central checks, strict audit, catalog/health
    synchronization, current-authority prose, and the proportional integration
    gate selected by the active SOP are green before the authorized local
+   checkpoint.
+
+PSSS-10b is successful when:
+
+1. the existing `CommRingZariskiCoverFamily` remains the sole authority for
+   the finite generators, unimodular evidence, and explicitly selected
+   localization packages, with no duplicate affine-chart-family record or
+   global localization choice;
+2. the complementary idempotents `(1,0)` and `(0,1)` in every `R x S` inhabit
+   that selected binary cover and their product is proved equal to zero;
+3. both selected fixed-image localizations become internal objects of
+   `AffineSpecBigSlice_cat(R x S)`, while their overlap uses the existing
+   computing zero localization;
+4. whole structured triangles construct genuine internal arrows from the
+   overlap chart into each selected chart, and the coordinate presheaf
+   restricts along both arrows to the whole maps into `zero_comm_ring`;
+5. the closed `F2 x F2` instance makes the product of its two non-endpoint
+   generators reduce literally to zero and exposes a computing empty-overlap
+   atlas;
+6. the result is described precisely as an atlas/glue presentation, with no
+   claim of a universal gluing theorem, colimit, sheaf descent, locally ringed
+   structure, or general scheme record;
+7. the measured specialized recursive chart-family timeout remains a
+   performance/usability boundary and does not justify a rigid facade, ad hoc
+   rule, or duplicated family representation;
+8. all object and arrow action remains at existing functor, Sigma, CommRing,
+   and localization owners, with no external naturality field, object-only
+   substitute, rewrite, or unification rule; and
+9. focused source/reviewer/central checks, exact warning comparison, strict
+   audit, catalog/health synchronization, authority prose, and the
+   proportional integration gate are green before the authorized local
    checkpoint.

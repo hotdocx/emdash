@@ -66,6 +66,9 @@ the split-idempotent localization and closed affine-basic-open extension is
 the computational affine big-slice, coordinate-presheaf, and internal
 basic-open-overlap extension is
 `emdash3_2_commutative_algebra_affine_spec.lp`;
+the complementary-idempotent binary-cover and computational empty-overlap
+affine-atlas extension is
+`emdash3_2_commutative_algebra_affine_atlas.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
@@ -246,17 +249,25 @@ Use the following order:
     module is rule-free and deliberately does not identify the big slice with
     a selected small Zariski site or claim topology, sheafhood, locally ringed
     structure, or a complete scheme;
-30. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+30. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
+    complementary-idempotent atlas of every product ring `R x S`. It retains
+    the existing selected binary Zariski-cover family, constructs both
+    internal affine chart arrows from the orthogonal overlap, and makes their
+    coordinate restrictions compute to whole maps into the zero ring. Its
+    closed `F2 x F2` instance is a concrete non-endpoint atlas/glue
+    presentation, not a universal gluing theorem, sheaf, locally ringed space,
+    or general scheme record;
+31. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-31. `emdash3_2_checks.lp` for executable regression statements;
-32. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+32. `emdash3_2_checks.lp` for executable regression statements;
+33. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-33. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-34. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+34. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+35. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-35. `reports/INDEX.md` for task-specific plans and decision records.
-36. `book/book.json` and `book/evidence.json` for book source
+36. `reports/INDEX.md` for task-specific plans and decision records.
+37. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

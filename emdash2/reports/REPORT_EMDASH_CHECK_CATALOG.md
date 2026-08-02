@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1981
-- Mapped areas: 88
+- Total checks: 1987
+- Mapped areas: 89
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -107,6 +107,7 @@ stable mathematical-area scopes rather than source locations.
 | Localization matching restriction | 5 |
 | Localization glue | 5 |
 | Computational affine Spec slice | 6 |
+| Complementary-idempotent affine atlas | 6 |
 
 ## Section Details
 
@@ -2530,3 +2531,14 @@ stable mathematical-area scopes rather than source locations.
 | 1979 | 22059 | `assert [R : τ CommRing] [f g : τ (@comm_ring_carrier R)] (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
 | 1980 | 22077 | `assert [R : τ CommRing] [f g : τ (@comm_ring_carrier R)] (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
 | 1981 | 22097 | `assert [R : τ CommRing] [f g : τ (@comm_ring_carrier R)] (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
+
+### Complementary-idempotent affine atlas
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1982 | 22113 | `assert (R S : τ CommRing) ⊢ @comm_ring_zariski_cover_family_length (@comm_ring_product R S) (@comm_ring_product_spli ...` |
+| 1983 | 22120 | `assert (R S : τ CommRing) ⊢ @comm_ring_product_split_cosplit_product_zero_path R S : τ (@= (@comm_ring_carrier (@com ...` |
+| 1984 | 22130 | `assert (R S : τ CommRing) ⊢ @comm_ring_psh_value (@AffineSpecBigSlice_cat (@comm_ring_product R S)) (@affine_spec_co ...` |
+| 1985 | 22138 | `assert (R S : τ CommRing) ⊢ @comm_ring_psh_restriction_hom (@AffineSpecBigSlice_cat (@comm_ring_product R S)) (@affi ...` |
+| 1986 | 22151 | `assert (R S : τ CommRing) ⊢ @comm_ring_psh_restriction_hom (@AffineSpecBigSlice_cat (@comm_ring_product R S)) (@affi ...` |
+| 1987 | 22165 | `assert ⊢ @comm_ring_mul f2_split_comm_ring f2_split_idempotent f2_split_cosplit_idempotent ≡ @comm_ring_zero f2_spli ...` |

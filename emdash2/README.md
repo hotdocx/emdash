@@ -118,6 +118,12 @@ mathematical reading is in
   arrows in both directions. Coordinate restriction computes to the existing
   whole comparison maps. This is not yet a small Zariski site, sheaf, locally
   ringed space, or complete scheme.
+- `emdash3_2_commutative_algebra_affine_atlas.lp` builds an explicit binary
+  cover of `Spec(R x S)` from the complementary idempotents `(1,0)` and
+  `(0,1)`. Their overlap computes as `D(0)`, and the two internal chart arrows
+  restrict coordinate rings by whole maps to the zero ring. The closed
+  `F2 x F2` case is a concrete atlas/glue presentation, not yet a sheaf or a
+  general scheme object.
 - `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
   encode/decode, Nat comparison, and directed negative results.
 - `emdash3_2_checks.lp` and `examples/` contain executable
@@ -192,6 +198,9 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_affine_spec.lp` — rule-free computational
   big-affine-slice facade with coordinate presheaf, charts, and two-sided
   product/iterated-localization overlap restrictions;
+- `emdash3_2_commutative_algebra_affine_atlas.lp` — rule-free selected
+  complementary-idempotent two-chart atlas with a computing zero overlap and
+  whole coordinate restrictions;
 - `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
   action and groupoidality;
 - `emdash3_2_eq1_evidence_property.lp` — evidence-property,

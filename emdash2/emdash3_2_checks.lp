@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec emdash.emdash3_2_commutative_algebra_affine_atlas;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -22107,3 +22107,65 @@ assert [R : τ CommRing]
         R (@comm_ring_mul R f g) product_localization)
       (@comm_ring_iterated_localization_target R f g iterated));
 /* End of the PSSS-10a computational affine-Spec diagnostics. */
+
+// catalog-area: Complementary-idempotent affine atlas
+// The selected cover retains both generators and localization packages.
+assert (R S : τ CommRing) ⊢
+  @comm_ring_zariski_cover_family_length
+    (@comm_ring_product R S)
+    (@comm_ring_product_split_cosplit_zariski_cover_family R S)
+  ≡ succ (succ zero);
+
+// Orthogonality supplies the computationally empty overlap.
+assert (R S : τ CommRing) ⊢
+  @comm_ring_product_split_cosplit_product_zero_path R S
+  : τ (@=
+      (@comm_ring_carrier (@comm_ring_product R S))
+      (@comm_ring_mul
+        (@comm_ring_product R S)
+        (@comm_ring_product_split_idempotent R S)
+        (@comm_ring_product_cosplit_idempotent R S))
+      (@comm_ring_zero (@comm_ring_product R S)));
+
+assert (R S : τ CommRing) ⊢
+  @comm_ring_psh_value
+    (@AffineSpecBigSlice_cat (@comm_ring_product R S))
+    (@affine_spec_coordinate_psh (@comm_ring_product R S))
+    (@affine_spec_product_split_cosplit_overlap_chart R S)
+  ≡ zero_comm_ring;
+
+// Both internally carried overlap arrows expose whole CommRing restrictions.
+assert (R S : τ CommRing) ⊢
+  @comm_ring_psh_restriction_hom
+    (@AffineSpecBigSlice_cat (@comm_ring_product R S))
+    (@affine_spec_coordinate_psh (@comm_ring_product R S))
+    (@affine_spec_product_split_cosplit_overlap_chart R S)
+    (@affine_spec_product_split_chart R S)
+    (@affine_spec_product_split_overlap_chart_arrow R S)
+  ≡ @comm_ring_hom_to_zero
+      (@comm_ring_localization_target
+        (@comm_ring_product R S)
+        (@comm_ring_product_split_idempotent R S)
+        (@comm_ring_product_split_localization R S));
+
+assert (R S : τ CommRing) ⊢
+  @comm_ring_psh_restriction_hom
+    (@AffineSpecBigSlice_cat (@comm_ring_product R S))
+    (@affine_spec_coordinate_psh (@comm_ring_product R S))
+    (@affine_spec_product_split_cosplit_overlap_chart R S)
+    (@affine_spec_product_cosplit_chart R S)
+    (@affine_spec_product_cosplit_overlap_chart_arrow R S)
+  ≡ @comm_ring_hom_to_zero
+      (@comm_ring_localization_target
+        (@comm_ring_product R S)
+        (@comm_ring_product_cosplit_idempotent R S)
+        (@comm_ring_product_cosplit_localization R S));
+
+// The closed F2 x F2 chart product reduces literally to zero.
+assert ⊢
+  @comm_ring_mul
+    f2_split_comm_ring
+    f2_split_idempotent
+    f2_split_cosplit_idempotent
+  ≡ @comm_ring_zero f2_split_comm_ring;
+/* End of the PSSS-10b complementary-idempotent atlas diagnostics. */

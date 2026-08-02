@@ -180,6 +180,13 @@ detailed probe evidence.
   Coordinate restriction computes through the generic Sigma projection to
   the existing whole ring maps. This is not yet a small Zariski site, sheaf,
   locally ringed space, or complete scheme.
+- `emdash3_2_commutative_algebra_affine_atlas.lp`: one-way rule-free concrete
+  atlas layer. Complementary idempotents in `R x S` retain their selected
+  binary Zariski-cover family, and their orthogonal overlap is represented by
+  the computing zero localization. Internal affine chart arrows expose whole
+  coordinate restrictions to the zero ring. The closed `F2 x F2` consumer is
+  an atlas/glue presentation, not a sheaf theorem, locally ringed space, or
+  general scheme record.
 - `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
   affine-Zariski layer. It retains a selected localization package for each
   generator of an algebraic cover presentation, exposes chosen basic-open
@@ -2527,6 +2534,46 @@ warning-enabled changed targets inherit exactly `1179 = 1020 + 159` warnings
 with zero changed-file locations. The strict audit and the nonduplicative
 integration remainder are green, and the implementation plus authority prose
 are locally checkpointed at `837cfeb`.
+
+PSSS-10b adds the concrete complementary-idempotent atlas in
+`emdash3_2_commutative_algebra_affine_atlas.lp`. For every `R x S`, the
+existing algebraic binary-cover constructor records `(1,0)` and `(0,1)` with
+unit coefficients, while the existing dependent localization family records
+their two fixed-image localization packages. No second chart-family record or
+global localization choice is introduced. Orthogonality proves that the
+chart intersection is `D(0)`; the existing zero localization makes its
+coordinate ring compute to `zero_comm_ring`. Two structured triangles lift
+to actual arrows of `AffineSpecBigSlice_cat(R x S)`, and restriction of the
+coordinate presheaf along them computes to the whole structured maps from
+each chart ring to the zero ring. Generic functor and Sigma owners carry
+arrow action and naturality internally.
+
+The closed `F2 x F2` specialization makes the product of the two generators
+reduce literally to zero, supplying the first finite non-endpoint affine
+atlas/glue presentation. This phrase is intentionally narrower than a
+universal gluing theorem: the tranche does not construct a colimit, sheaf,
+locally ringed space, or general scheme record. A generic finite-family
+tabulation probe is viable, but specializing a recursive chart-family facade
+to the full dependent affine chart data exceeded the 60-second target budget
+in both producer and split-consumer probes. That convenience facade is not
+promoted; `CommRingZariskiCoverFamily` remains the presentation authority and
+concrete chart/overlap observations are exposed only where consumed. The
+whole-functor equality/univalence boundary from PSSS-08c0J remains optional
+and does not enter this construction.
+
+The PSSS-10b source has 402 lines and 20 symbols with no rewrite or
+unification rules; its 135-line reviewer has 13 assertions and the central
+suite adds six diagnostics. Both warning-enabled changed targets inherit
+exactly `1179 = 1020 + 159` warnings with zero changed-file locations. The
+strict audit remains at zero unreviewed clauses, and the strict catalog has
+1,987 checks across 89 areas with no legacy or unclassified entries.
+Synchronized health passes all 92 registered targets in 663.006 summed
+check-seconds at source snapshot
+`sha256:6ff71dd1ca9dae89e444926ebaab28710a89fddbe8d24484d1a245ec114eb152`;
+the new source and reviewer take 9.006 and 9.287 seconds there. The fresh
+health traversal is followed by the nonduplicative CI remainder rather than
+another long traversal; snapshot/tooling/test/document/book/audit/catalog
+gates are green. The tranche is ready for its authorized local checkpoint.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

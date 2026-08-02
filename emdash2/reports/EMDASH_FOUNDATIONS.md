@@ -1798,6 +1798,50 @@ coverhood, induced slice topology, sheaf descent, subcanonicity, and general
 sheafification remain independent theorem/interface layers to add only when
 that consumer requires them.
 
+### Complementary-Idempotent Affine Atlas
+
+The first finite atlas consumer uses product rings rather than postulating a
+general chart-family abstraction. In `R x S`, let
+
+```text
+e  = (1,0),
+e' = (0,1).
+```
+
+Both are idempotent, `e+e'=1`, and `e*e'=0`. The existing fixed-image
+localizations at `e` and `e'`, together with unit coefficients, therefore
+inhabit the existing `CommRingZariskiCoverFamily(R x S)`. That package remains
+the source of truth for the finite presentation and its selected localization
+data; there is no parallel record of charts and no global choice operation.
+
+The two charts are the internal affine-slice objects `D(e)` and `D(e')`.
+Their overlap is selected as the already-computing `D(0)`, whose coordinate
+ring is `zero_comm_ring`. The canonical point maps into the zero ring satisfy
+the required triangles over `R x S`, so the generic Sigma-arrow constructor
+produces genuine geometric arrows
+
+```text
+D(0) -> D(e),
+D(0) -> D(e').
+```
+
+The coordinate presheaf restricts along these arrows to the corresponding
+whole structured ring maps from the chart rings to the zero ring. Thus both
+object values and arrow action remain internal and computational at existing
+functor, Sigma, localization, and CommRing owners; no external naturality
+square is added. In the closed `F2 x F2` instance, `e*e'` reduces literally
+to zero, giving a concrete non-endpoint two-chart affine atlas with empty
+overlap.
+
+This is an atlas/glue *presentation*, not yet a universal gluing theorem or a
+scheme object. It does not construct a colimit, prove sheaf descent, package a
+locally ringed space, or supply a general affine-atlas record. A recursive
+facade tabulating every dependent affine chart from an arbitrary finite cover
+was tested but crossed the bounded elaboration-performance threshold; the
+existing cover family plus directly consumed chart observations is the
+smaller and more stable interface. The optional whole-functor
+extensionality/univalence boundary is unrelated to this computation.
+
 ### Finite Families And Unimodular Cover Presentations
 
 A finite homogeneous family uses only the existing natural-number and Sigma
