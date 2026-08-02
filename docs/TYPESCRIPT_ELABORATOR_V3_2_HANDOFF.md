@@ -325,11 +325,21 @@
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-COMPOSITION-01 /
 > D-DTTLF-USABILITY-056 proposal at
 > `ff170aa0ab8ec18e829a95689800032401c18f23` is separately reviewed-approved
-> under the standing unattended delegation. It adds no
+> under the standing unattended delegation and is now implemented/in-scope
+> green with its semantic checkpoint pending. The existing `composeCells`
+> node now accepts a separate homogeneous indexed point-Hom branch; the point
+> factorer recursively recovers each D-055 leaf and composes the resulting
+> closed `Transfd` owners through existing generic composition. It adds no
 > public method, Core/LF case, kernel/transfer owner, parser/browser behavior,
-> or unrestricted-`:^nd` claim. Its exact homogeneous point-composition,
-> recursive closed-owner recovery, evidence, focused tests, and proportional
-> gates are now the dependency-ready implementation.
+> identity, whiskering, or unrestricted-`:^nd` claim. Its focused suite is
+> 6/6 and the combined nearest run is 37/37; workspace, typecheck, lint, and
+> whitespace checks pass. Its sole aggregate reports 1,278 pass/51 skip and
+> only the same three unrelated digest-pin failures, exactly six passes above
+> D-055. Do not repeat that approximately 39.9-minute aggregate. After the
+> semantic checkpoint, the next dependency-ready operation is the read-only
+> `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` audit of point identity,
+> orientation-aware whiskering/action, and one representative mixed
+> constructor.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

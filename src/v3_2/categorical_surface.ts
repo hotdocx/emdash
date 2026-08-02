@@ -424,7 +424,9 @@ export type CoreCategoricalContextualIr =
         readonly tag: 'typed-cell-composition';
         readonly outer: CoreCategoricalContextualIr;
         readonly inner: CoreCategoricalContextualIr;
-        readonly type: CoreCategoricalIndexedTransforClassifier;
+        readonly type:
+            | CoreCategoricalIndexedTransforClassifier
+            | CoreCategoricalIndexedHomClassifier;
         readonly provenance: Provenance;
     }
     | {
@@ -731,6 +733,25 @@ export type CoreCategoricalAbstractionEvidence =
             readonly targetFunctor: KernelExpression;
             readonly baseUsageCount: 1;
             readonly fibreUsageCount: 1;
+            readonly contextSize: 2;
+            readonly contextRelation:
+                'natural-base-then-natural-fibre-binder';
+        }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
+                'categorical.displayed-transfor-context-composition';
+            readonly variation: 'natural';
+            readonly dependency: 'displayed';
+            readonly bindingNames: readonly [string, string];
+            readonly bindingModes: readonly ['natural', 'natural'];
+            readonly sourceFamily: KernelExpression;
+            readonly targetFamily: KernelExpression;
+            readonly sourceFunctor: KernelExpression;
+            readonly targetFunctor: KernelExpression;
+            readonly baseUsageCount: number;
+            readonly fibreUsageCount: number;
             readonly contextSize: 2;
             readonly contextRelation:
                 'natural-base-then-natural-fibre-binder';
@@ -3205,10 +3226,11 @@ export class CoreCategoricalScopedBuilder {
     /**
      * Compose two typed categorical cells inside one contextual callback.
      *
-     * DISPLAYED-ND-1A deliberately accepts only `indexed-transfor` first.
-     * The generic node records typed recursive syntax; the enclosing
-     * displayed-transfor abstraction is responsible for factoring it into
-     * a genuine coherence-carrying outer term.
+     * The homogeneous operands may be whole-fibre `indexed-transfor`
+     * components or D-056 point-level `indexed-hom` components. The generic
+     * node records typed recursive syntax; the enclosing displayed-transfor
+     * abstraction is responsible for factoring it into a genuine
+     * coherence-carrying outer term.
      */
     composeCells(
         outerValue: CoreCategoricalTerm,
@@ -3235,33 +3257,95 @@ export class CoreCategoricalScopedBuilder {
             innerValue,
             nodeProvenance
         );
+        let resultType: InternalCoreCategoricalClassifier;
         if (
-            outer.type.tag !== 'indexed-transfor' ||
-            inner.type.tag !== 'indexed-transfor' ||
-            outer.type.indexOrdinal !== inner.type.indexOrdinal ||
-            !kernelExpressionEquals(
-                outer.type.baseCategory,
-                inner.type.baseCategory
-            ) ||
-            !kernelExpressionEquals(
-                outer.type.sourceFamily,
-                inner.type.sourceFamily
-            ) ||
-            !kernelExpressionEquals(
-                outer.type.targetFamily,
-                inner.type.targetFamily
-            ) ||
-            !kernelExpressionEquals(
-                inner.type.targetFunctor,
-                outer.type.sourceFunctor
-            )
+            outer.type.tag === 'indexed-transfor' &&
+            inner.type.tag === 'indexed-transfor'
         ) {
+            if (
+                outer.type.indexOrdinal !== inner.type.indexOrdinal ||
+                !kernelExpressionEquals(
+                    outer.type.baseCategory,
+                    inner.type.baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    outer.type.sourceFamily,
+                    inner.type.sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    outer.type.targetFamily,
+                    inner.type.targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    inner.type.targetFunctor,
+                    outer.type.sourceFunctor
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Typed whole-fibre cell composition requires the same ' +
+                        'contextual base and families with adjacent endpoints'
+                );
+            }
+            resultType = {
+                tag: 'indexed-transfor',
+                baseCategory: inner.type.baseCategory,
+                sourceFamily: inner.type.sourceFamily,
+                targetFamily: inner.type.targetFamily,
+                sourceFunctor: inner.type.sourceFunctor,
+                targetFunctor: outer.type.targetFunctor,
+                indexOrdinal: inner.type.indexOrdinal
+            };
+        } else if (
+            outer.type.tag === 'indexed-hom' &&
+            inner.type.tag === 'indexed-hom'
+        ) {
+            if (
+                outer.type.baseIndexOrdinal !==
+                    inner.type.baseIndexOrdinal ||
+                outer.type.fibreIndexOrdinal !==
+                    inner.type.fibreIndexOrdinal ||
+                !kernelExpressionEquals(
+                    outer.type.baseCategory,
+                    inner.type.baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    outer.type.sourceFamily,
+                    inner.type.sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    outer.type.targetFamily,
+                    inner.type.targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    inner.type.targetFunctor,
+                    outer.type.sourceFunctor
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Typed point-cell composition requires the same base ' +
+                        'and fibre slots and families with adjacent endpoints'
+                );
+            }
+            resultType = {
+                tag: 'indexed-hom',
+                baseCategory: inner.type.baseCategory,
+                sourceFamily: inner.type.sourceFamily,
+                targetFamily: inner.type.targetFamily,
+                sourceFunctor: inner.type.sourceFunctor,
+                targetFunctor: outer.type.targetFunctor,
+                baseIndexOrdinal: inner.type.baseIndexOrdinal,
+                fibreIndexOrdinal: inner.type.fibreIndexOrdinal
+            };
+        } else {
             this.fail(
                 'CLASSIFIER_ARGUMENT_MISMATCH',
                 nodeProvenance,
-                'Typed cell composition requires indexed transformations ' +
-                    'at the same contextual base and families with adjacent ' +
-                    'endpoints'
+                'Typed cell composition requires two homogeneous whole-' +
+                    'fibre transformations or two homogeneous point Homs'
             );
         }
         return this.makeTerm(
@@ -3271,15 +3355,7 @@ export class CoreCategoricalScopedBuilder {
                 inner,
                 provenance: nodeProvenance
             },
-            {
-                tag: 'indexed-transfor',
-                baseCategory: inner.type.baseCategory,
-                sourceFamily: inner.type.sourceFamily,
-                targetFamily: inner.type.targetFamily,
-                sourceFunctor: inner.type.sourceFunctor,
-                targetFunctor: outer.type.targetFunctor,
-                indexOrdinal: inner.type.indexOrdinal
-            },
+            resultType,
             mergeUsage(outer.usage, inner.usage),
             undefined,
             [...outer.abstractions, ...inner.abstractions]
@@ -5690,9 +5766,12 @@ export class CoreCategoricalScopedBuilder {
                     scope,
                     term.node.provenance
                 );
-                if (type.tag !== 'indexed-transfor') {
+                if (
+                    type.tag !== 'indexed-transfor' &&
+                    type.tag !== 'indexed-hom'
+                ) {
                     throw new Error(
-                        'Typed cell composition lost its indexed-transfor ' +
+                        'Typed cell composition lost its indexed cell ' +
                             'classifier'
                     );
                 }
@@ -13378,9 +13457,112 @@ export class CoreCategoricalScopedBuilder {
         }
     }
 
+    /** Compose two recovered coherence-owning displayed transformations. */
+    private composeRecoveredDisplayedTransfors(
+        outer: InternalCoreCategoricalTerm,
+        inner: InternalCoreCategoricalTerm,
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalTerm | undefined {
+        if (
+            outer.type.tag !== 'displayed-transfor' ||
+            inner.type.tag !== 'displayed-transfor' ||
+            outer.closed === undefined ||
+            inner.closed === undefined ||
+            !kernelExpressionEquals(
+                outer.type.baseCategory,
+                inner.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                outer.type.sourceFamily,
+                inner.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                outer.type.targetFamily,
+                inner.type.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                inner.type.targetFunctor,
+                outer.type.sourceFunctor
+            )
+        ) {
+            return undefined;
+        }
+        const resultExpression = this.dependentCompositionCall(
+            [
+                {
+                    plicity: 'implicit',
+                    value: this.displayedFunctorCategory(
+                        inner.type.baseCategory,
+                        inner.type.sourceFamily,
+                        inner.type.targetFamily,
+                        nodeProvenance
+                    )
+                },
+                {
+                    plicity: 'implicit',
+                    value: inner.type.sourceFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: inner.type.targetFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: outer.type.targetFunctor
+                },
+                {
+                    plicity: 'explicit',
+                    value: outer.closed.term
+                },
+                {
+                    plicity: 'explicit',
+                    value: inner.closed.term
+                }
+            ],
+            nodeProvenance
+        );
+        const resultType: CoreType = {
+            tag: 'displayed-transfor',
+            category: this.displayedTransforCategory(
+                inner.type.baseCategory,
+                inner.type.sourceFamily,
+                inner.type.targetFamily,
+                inner.type.sourceFunctor,
+                outer.type.targetFunctor,
+                nodeProvenance
+            ),
+            baseCategory: inner.type.baseCategory,
+            sourceFamily: inner.type.sourceFamily,
+            targetFamily: inner.type.targetFamily,
+            sourceFunctor: inner.type.sourceFunctor,
+            targetFunctor: outer.type.targetFunctor
+        };
+        const resultNode: TemporaryCategoricalNode = {
+            tag: 'explicit-core-term',
+            term: resultExpression,
+            provenance: nodeProvenance
+        };
+        const closed = deepFreeze({
+            term: resultExpression,
+            type: copyCoreType(resultType),
+            sourceSpan: this.spanFor(nodeProvenance),
+            recovered: [
+                ...outer.closed.recovered,
+                ...inner.closed.recovered
+            ]
+        });
+        return this.makeTerm(
+            resultNode,
+            resultType,
+            mergeUsage(outer.usage, inner.usage),
+            closed,
+            [...outer.abstractions, ...inner.abstractions]
+        );
+    }
+
     /**
-     * Recover one exact point component through its whole fibre component and
-     * then through the existing outer displayed-transfor factorer.
+     * Recover an exact recursive point component through whole fibre
+     * components and then through the existing outer factorer.
      */
     private factorDisplayedTransforPoint(
         term: InternalCoreCategoricalTerm,
@@ -13390,61 +13572,134 @@ export class CoreCategoricalScopedBuilder {
         if (
             term.type.tag !== 'indexed-hom' ||
             term.type.baseIndexOrdinal !== baseOrdinal ||
-            term.type.fibreIndexOrdinal !== fibreOrdinal ||
-            term.node.tag !== 'typed-application' ||
-            term.node.judgment.target !==
-                'indexed-fibre-transfor-point' ||
-            term.node.argument[CORE_CATEGORICAL_BOUNDARY] === true
+            term.type.fibreIndexOrdinal !== fibreOrdinal
         ) {
             return undefined;
         }
-        const subject = term.node.subject;
-        const argument = term.node.argument as
-            InternalCoreCategoricalTerm;
+
         if (
-            subject.type.tag !== 'indexed-transfor' ||
-            subject.type.indexOrdinal !== baseOrdinal ||
-            argument.node.tag !== 'slot-token' ||
-            argument.node.ordinal !== fibreOrdinal ||
-            usageCount(term.usage, baseOrdinal) !== 1 ||
-            usageCount(term.usage, fibreOrdinal) !== 1 ||
+            term.node.tag === 'typed-application' &&
+            term.node.judgment.target ===
+                'indexed-fibre-transfor-point' &&
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] !== true
+        ) {
+            const subject = term.node.subject;
+            const argument = term.node.argument as
+                InternalCoreCategoricalTerm;
+            if (
+                subject.type.tag !== 'indexed-transfor' ||
+                subject.type.indexOrdinal !== baseOrdinal ||
+                argument.node.tag !== 'slot-token' ||
+                argument.node.ordinal !== fibreOrdinal ||
+                usageCount(term.usage, baseOrdinal) !== 1 ||
+                usageCount(term.usage, fibreOrdinal) !== 1 ||
+                !kernelExpressionEquals(
+                    subject.type.baseCategory,
+                    term.type.baseCategory
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.sourceFamily,
+                    term.type.sourceFamily
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.targetFamily,
+                    term.type.targetFamily
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.sourceFunctor,
+                    term.type.sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    subject.type.targetFunctor,
+                    term.type.targetFunctor
+                )
+            ) {
+                return undefined;
+            }
+            return this.factorDisplayedTransforComponent(
+                subject,
+                baseOrdinal
+            );
+        }
+
+        if (term.node.tag !== 'typed-cell-composition') {
+            return undefined;
+        }
+        const outerPoint = term.node.outer;
+        const innerPoint = term.node.inner;
+        const outer = this.factorDisplayedTransforPoint(
+            outerPoint,
+            baseOrdinal,
+            fibreOrdinal
+        );
+        const inner = this.factorDisplayedTransforPoint(
+            innerPoint,
+            baseOrdinal,
+            fibreOrdinal
+        );
+        if (
+            outer === undefined ||
+            inner === undefined ||
+            outerPoint.type.tag !== 'indexed-hom' ||
+            innerPoint.type.tag !== 'indexed-hom' ||
             !kernelExpressionEquals(
-                subject.type.baseCategory,
-                term.type.baseCategory
+                outerPoint.type.baseCategory,
+                innerPoint.type.baseCategory
             ) ||
             !kernelExpressionEquals(
-                subject.type.sourceFamily,
-                term.type.sourceFamily
+                outerPoint.type.sourceFamily,
+                innerPoint.type.sourceFamily
             ) ||
             !kernelExpressionEquals(
-                subject.type.targetFamily,
-                term.type.targetFamily
+                outerPoint.type.targetFamily,
+                innerPoint.type.targetFamily
             ) ||
             !kernelExpressionEquals(
-                subject.type.sourceFunctor,
-                term.type.sourceFunctor
+                innerPoint.type.targetFunctor,
+                outerPoint.type.sourceFunctor
             ) ||
             !kernelExpressionEquals(
-                subject.type.targetFunctor,
-                term.type.targetFunctor
-            )
+                term.type.baseCategory,
+                innerPoint.type.baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                term.type.sourceFamily,
+                innerPoint.type.sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                term.type.targetFamily,
+                innerPoint.type.targetFamily
+            ) ||
+            !kernelExpressionEquals(
+                term.type.sourceFunctor,
+                innerPoint.type.sourceFunctor
+            ) ||
+            !kernelExpressionEquals(
+                term.type.targetFunctor,
+                outerPoint.type.targetFunctor
+            ) ||
+            usageCount(outer.usage, baseOrdinal) !== 0 ||
+            usageCount(outer.usage, fibreOrdinal) !== 0 ||
+            usageCount(inner.usage, baseOrdinal) !== 0 ||
+            usageCount(inner.usage, fibreOrdinal) !== 0
         ) {
             return undefined;
         }
-        return this.factorDisplayedTransforComponent(
-            subject,
-            baseOrdinal
+        return this.composeRecoveredDisplayedTransfors(
+            outer,
+            inner,
+            term.node.provenance
         );
     }
 
     /**
-     * Direct compact `lambda^nd a : E. body(a)` contextual abstraction.
+     * Direct single displayed binder `lambda^nd a : E. body(a)`.
      *
-     * The callback sees only `a : E[k]`. The hidden telescope is
-     * `k :^n K; a :^n E[k]`. D-055 accepts only the exact point component
-     * `eta[a]` of an already-coherent closed displayed transformation and
-     * recovers that outer `eta`; arbitrary point arrows cannot acquire
-     * naturality through this method.
+     * The callback sees only `a : E[k]`; the elaborator creates and tracks
+     * the base in the expanded telescope `k :^n K; a :^n E[k]`. D-055/056
+     * accept exact point components and their typed recursive vertical
+     * compositions, recovering closed outer transformations. Arbitrary point
+     * arrows cannot acquire naturality through this method.
      */
     displayedTransforContextLambda(
         name: string,
@@ -13504,7 +13759,8 @@ export class CoreCategoricalScopedBuilder {
             this.fail(
                 'CLASSIFIER_ARGUMENT_MISMATCH',
                 nodeProvenance,
-                'D-055 abstracts one natural fibre-object input'
+                'The direct displayed-natural binder abstracts one natural ' +
+                    'fibre-object input'
             );
         }
 
@@ -13607,8 +13863,9 @@ export class CoreCategoricalScopedBuilder {
                 this.fail(
                     'UNAVAILABLE_DISPLAYED_ACTION',
                     nodeProvenance,
-                    'D-055 accepts only a point component of an ' +
-                        'already-coherent closed displayed transformation'
+                    'The direct displayed-natural binder accepts point ' +
+                        'components of already-coherent transformations ' +
+                        'and their typed recursive vertical compositions'
                 );
             }
             const bodyIr = this.normalizeNode(
@@ -13619,9 +13876,7 @@ export class CoreCategoricalScopedBuilder {
                 factored,
                 outerScope
             );
-            const evidence = deepFreeze({
-                rule:
-                    'categorical.displayed-transfor-context-eta' as const,
+            const evidenceBase = {
                 name,
                 plicity,
                 variation: 'natural' as const,
@@ -13637,8 +13892,6 @@ export class CoreCategoricalScopedBuilder {
                 targetFamily,
                 sourceFunctor,
                 targetFunctor,
-                baseUsageCount: 1 as const,
-                fibreUsageCount: 1 as const,
                 contextSize: 2 as const,
                 contextRelation:
                     'natural-base-then-natural-fibre-binder' as const,
@@ -13648,7 +13901,26 @@ export class CoreCategoricalScopedBuilder {
                 dependentPrerequisites:
                     collectDependentPrerequisites(bodyIr),
                 provenance: nodeProvenance
-            });
+            };
+            const evidence: CoreCategoricalAbstractionEvidence =
+                body.node.tag === 'typed-cell-composition'
+                    ? deepFreeze({
+                        ...evidenceBase,
+                        rule:
+                            'categorical.displayed-transfor-context-composition' as const,
+                        baseUsageCount:
+                            usageCount(body.usage, baseOrdinal),
+                        fibreUsageCount:
+                            usageCount(body.usage, fibreOrdinal)
+                    })
+                    : deepFreeze({
+                        ...evidenceBase,
+                        rule: (
+                            'categorical.displayed-transfor-context-eta'
+                        ) as const,
+                        baseUsageCount: 1 as const,
+                        fibreUsageCount: 1 as const
+                    });
             const closed = deepFreeze({
                 term: factored.closed.term,
                 type: copyCoreType(factored.type),
@@ -13792,77 +14064,10 @@ export class CoreCategoricalScopedBuilder {
             return undefined;
         }
 
-        const nodeProvenance = term.node.provenance;
-        const resultExpression = this.dependentCompositionCall(
-            [
-                {
-                    plicity: 'implicit',
-                    value: this.displayedFunctorCategory(
-                        inner.type.baseCategory,
-                        inner.type.sourceFamily,
-                        inner.type.targetFamily,
-                        nodeProvenance
-                    )
-                },
-                {
-                    plicity: 'implicit',
-                    value: inner.type.sourceFunctor
-                },
-                {
-                    plicity: 'implicit',
-                    value: inner.type.targetFunctor
-                },
-                {
-                    plicity: 'implicit',
-                    value: outer.type.targetFunctor
-                },
-                {
-                    plicity: 'explicit',
-                    value: outer.closed.term
-                },
-                {
-                    plicity: 'explicit',
-                    value: inner.closed.term
-                }
-            ],
-            nodeProvenance
-        );
-        const resultType: CoreType = {
-            tag: 'displayed-transfor',
-            category: this.displayedTransforCategory(
-                inner.type.baseCategory,
-                inner.type.sourceFamily,
-                inner.type.targetFamily,
-                inner.type.sourceFunctor,
-                outer.type.targetFunctor,
-                nodeProvenance
-            ),
-            baseCategory: inner.type.baseCategory,
-            sourceFamily: inner.type.sourceFamily,
-            targetFamily: inner.type.targetFamily,
-            sourceFunctor: inner.type.sourceFunctor,
-            targetFunctor: outer.type.targetFunctor
-        };
-        const resultNode: TemporaryCategoricalNode = {
-            tag: 'explicit-core-term',
-            term: resultExpression,
-            provenance: nodeProvenance
-        };
-        const closed = deepFreeze({
-            term: resultExpression,
-            type: copyCoreType(resultType),
-            sourceSpan: this.spanFor(nodeProvenance),
-            recovered: [
-                ...outer.closed.recovered,
-                ...inner.closed.recovered
-            ]
-        });
-        return this.makeTerm(
-            resultNode,
-            resultType,
-            mergeUsage(outer.usage, inner.usage),
-            closed,
-            [...outer.abstractions, ...inner.abstractions]
+        return this.composeRecoveredDisplayedTransfors(
+            outer,
+            inner,
+            term.node.provenance
         );
     }
 

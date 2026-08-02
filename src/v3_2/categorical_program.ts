@@ -5727,9 +5727,9 @@ export class CoreCategoricalProgram {
 
     /**
      * Compose two compatible typed cells inside a scoped categorical
-     * callback. DISPLAYED-ND-1A initially accepts only indexed displayed
-     * transformations; the enclosing `displayedTransforLambda` recursively
-     * factors the result into a genuine coherent outer transformation.
+     * callback. Whole-fibre and point-level displayed cells remain separate
+     * homogeneous branches; their enclosing abstraction recursively factors
+     * the result into a genuine coherent outer transformation.
      */
     composeCells(
         outerValue: CoreCategoricalTerm,
@@ -8096,11 +8096,12 @@ export class CoreCategoricalProgram {
     }
 
     /**
-     * Direct compact `lambda^nd a : E. body(a)` abstraction.
+     * Direct single displayed binder `lambda^nd a : E. body(a)`.
      *
-     * The callback sees the natural fibre object `a`; the natural base `k`
-     * remains hidden. D-055 accepts only the exact point-eta body of an
-     * already-coherent displayed transformation.
+     * The callback sees the natural fibre object `a`; the elaborator creates
+     * and tracks the determined natural base `k`. D-055/056 accept exact
+     * point eta and typed recursive point composition of already-coherent
+     * displayed transformations.
      */
     displayedTransforContextLambda(
         name: string,

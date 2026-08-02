@@ -504,7 +504,8 @@ It deliberately avoids:
 | `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` | read-only architecture audit complete; zero semantic delta; direct point-eta successor selected | completed D-054 arbitrary-level source action; existing `displayedTransforLambda` eta/composition; active `Transfd_cat`, `Transf_catd`, `homd_int`, and `tdapp1_int_*` owners | `:^nd`, like `:^fd`, is fundamentally a direct nested contextual binder. Its single displayed-binder API infers and internally tracks `k :^n K`, exposes `a :^n E[k]`, and factors supported point-arrow syntax back to a genuine `Transfd` owner in two recursive stages. The present API factors only whole fibre transformations. `Transf_catd`/Pi and Sigma-total views remain semantic comparisons, not a required curry route. The first missing slice is TypeScript-only point eta. |
 | `DIRECT-CONTEXTUAL-ND-ETA-1T` | implemented and in-scope green at `dd12ae56002ebad5b820db6106e68dc5a60b50ae` under D-DTTLF-USABILITY-055 | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; immutable proposal `36e1c8dba16a8a206ace58628ba47703a2b74374`; separate review under standing unattended delegation; 7/7 focused and 31/31 combined regressions; workspace/typecheck/lint; sole aggregate 1,272 pass/51 skip/same three unrelated digest-pin failures | One opt-in single displayed-binder `displayedTransforContextLambda`, one construction-only indexed point-Hom/application route, and one eta point factor recover the already-coherent closed `eta`. The result preserves internal object/fibre-arrow/base-arrow/higher action. No kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim was added. |
 | `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` | read-only successor audit complete; zero semantic delta; pointwise vertical composition selected | implemented D-055 point eta; retained whole-fibre recursive composition; existing generic `composeCells`, `id_transfd`, action, and whiskering-related owners; bounded active-kernel check | The single displayed binder has expanded telescope `k :^n K; a :^n E[k]`; TypeScript merely tracks `k` internally. Current `composeCells` fails exactly because it accepts `indexed-transfor`, not the new `indexed-hom`. Its typed composition tree, recursive whole-owner factorer, and generic `Functord_cat` composition are otherwise reusable. Identity needs a new point-identity construction route; whiskering needs a wider orientation audit. The smallest successor is therefore recursive pointwise vertical composition. |
-| `DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` | separately reviewed-approved under D-DTTLF-USABILITY-056; implementation dependency-ready | completed `DIRECT-CONTEXTUAL-ND-GRADUATE-0U`; implemented D-055 point eta; immutable proposal `ff170aa0ab8ec18e829a95689800032401c18f23`; separate review under standing unattended delegation | Extend the existing construction-only `composeCells` node homogeneously to exact indexed point-Homs, recursively recover each point leaf to a closed `Transfd`, and compose those recovered owners through existing generic category composition. Preserve the whole-fibre branch. Add one contextual-composition evidence rule and focused exact/nested/action/non-collapse checks. Add no method, Core/LF case, kernel/transfer owner, identity, whiskering, parser/browser route, or unrestricted-`:^nd` claim. |
+| `DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` | implemented and in-scope green under D-DTTLF-USABILITY-056; semantic checkpoint pending | completed `DIRECT-CONTEXTUAL-ND-GRADUATE-0U`; immutable proposal `ff170aa0ab8ec18e829a95689800032401c18f23`; separate review under standing unattended delegation; 6/6 focused and 37/37 combined regressions; workspace/typecheck/lint; sole aggregate 1,278 pass/51 skip/same three unrelated digest-pin failures | `composeCells` now has a homogeneous construction-only indexed point-Hom branch. The recursive point factorer recovers each D-055 leaf and composes the resulting closed `Transfd` owners through existing generic composition. The whole-fibre branch remains green. One contextual-composition evidence rule records the point tree and usage counts. No method, Core/LF case, kernel/transfer owner, identity, whiskering, parser/browser route, or unrestricted-`:^nd` claim was added. |
+| `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` | next dependency-ready read-only successor audit after the D-056 checkpoint | implemented D-055 eta and D-056 recursive composition; active `id_transfd`; existing displayed/ordinary action and variance owners | Reassess the next single displayed-natural body constructor. Compare exact point identity with orientation-aware whiskering/action and one representative mixed constructor. Select at most one smallest user-relevant successor, audit existing owners and typed construction seams first, and add no behavior during the audit. Do not claim unrestricted `:^nd` or begin parser parity yet. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -5643,6 +5644,67 @@ TypeScript/test/document scope is authorized; identity, whiskering,
 parser/browser promotion, bulk transfer, remote effects, and unrelated work
 remain excluded.
 
+### D-DTTLF-USABILITY-056 implementation result
+
+The exact approved slice is implemented and in-scope green, with its semantic
+checkpoint pending. The existing `composeCells` method now has two explicit
+homogeneous construction levels:
+
+- the unchanged whole-fibre `indexed-transfor` branch; and
+- one new point `indexed-hom` branch requiring identical base/fibre indices,
+  base category, displayed families, and adjacent whole-functor endpoints.
+
+Mixed levels still fail closed. Both branches reuse the same recursive
+`typed-cell-composition` IR node, whose normalized classifier distinguishes
+the level. No new public method or intrinsic Core node was introduced.
+
+The point factorer now recursively visits that tree. Every leaf must still be
+the D-055 application of a closed coherent transformation to the exact scoped
+fibre token. Recovered leaf owners are composed with a small shared helper
+using the existing generic category-composition owner at
+`Functord_cat E D`. The helper is also used by the pre-existing whole-fibre
+factorer, so both routes construct the same closed normal form rather than
+duplicating owner-specific evaluation. The construction-only indexed Homs
+and point-composition tree disappear before explicit Core checking.
+
+The new
+`categorical.displayed-transfor-context-composition` evidence records the
+deeply frozen point tree, the two natural binder modes, and measured base and
+fibre occurrence counts. The D-055 eta evidence remains unchanged at one use
+of each token. Binary composition records 2/2 uses; nested three-leaf
+composition records 3/3.
+
+Focused evidence is 6/6 green and covers:
+
+- exact binary recovery after one callback;
+- nested recursive point composition;
+- equality with the corresponding `composeDisplayedTransfor` owners;
+- point observation plus internally owned base-arrow/higher action;
+- unchanged whole-fibre recursive composition; and
+- non-adjacent endpoints, non-point terms, wrong families, and unavailable
+  profiles.
+
+The new, D-055, whole-fibre `:^nd`, fibred-`Transfd`, and nearest text-audit
+run is 37/37 green. Workspace, typecheck, lint, and whitespace gates pass.
+The sole required `check:ts` run reports 1,332 tests: 1,278 pass, 51
+intentional skips, and three failures. All three are the unchanged
+canonical-export digest pin
+`sha256:4d8473837cbdd031ad4af4e9f41e9330243fff4929db4860919a81228804de82`
+versus current live digest
+`sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe`
+in the same representation, runtime, and acquisition tests recorded before
+D-055. The six-pass increase is exactly the new focused module. Duration was
+2,394,601.30 ms (about 39.9 minutes); the aggregate was not repeated and no
+digest pin was changed.
+
+No kernel symbol/rule, transfer declaration, LF checker/evaluator behavior,
+manual convertibility case, identity constructor, whiskering/action syntax,
+parser/text route, reviewer/browser behavior, or external coherence datum was
+added. The next operation after the semantic checkpoint is the read-only
+`DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` audit. It must compare exact
+point identity, orientation-aware whiskering/action, and one representative
+mixed constructor and freeze at most one successor without changing behavior.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -5981,10 +6043,19 @@ the smallest recursive successor. Treat
 H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-COMPOSITION-01 /
 D-DTTLF-USABILITY-056 as separately reviewed-approved from immutable proposal
 checkpoint `ff170aa0ab8ec18e829a95689800032401c18f23` under the standing
-unattended delegation. Implement only its exact homogeneous indexed-Hom
-composition, recursive closed-owner recovery, evidence, focused tests, and
-proportional validation. Do not add point identity, whiskering,
-parser/browser behavior, a kernel/transfer owner, or unrestricted `:^nd`.
+unattended delegation. Treat its exact homogeneous indexed-Hom composition,
+recursive closed-owner recovery, and evidence as implemented/in-scope green
+with its semantic checkpoint pending. Carry forward the 6/6 focused, 37/37
+combined, workspace/typecheck/lint/whitespace, and sole aggregate evidence
+exactly as recorded. Do not repeat the aggregate or repair its three unrelated
+digest pins.
+
+After the D-056 semantic checkpoint, run the read-only
+`DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` audit. Compare point identity,
+orientation-aware whiskering/action, and one representative mixed constructor;
+freeze at most one smallest user-relevant successor. Do not add behavior,
+parser/browser work, a kernel/transfer owner, or unrestricted `:^nd` during
+the audit.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -6003,6 +6074,21 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-056 implemented and in-scope green;
+  semantic checkpoint pending.** `composeCells` now admits a separate
+  homogeneous `indexed-hom` branch with exact two-index/family/endpoint
+  checks. The recursive point factorer accepts only D-055 leaves, recovers
+  their closed `Transfd` owners, and composes those through the same shared
+  generic owner used by the retained whole-fibre branch. New deeply frozen
+  evidence records binary and nested point trees with measured occurrence
+  counts. Focused evidence is 6/6, the combined nearest run is 37/37, and
+  workspace/typecheck/lint/whitespace gates pass. The sole aggregate reports
+  1,278 pass, 51 skip, and the same three unrelated canonical-export digest
+  failures out of 1,332 tests in 2,394,601.30 ms; its six-pass increase is
+  exactly the new module. It was not repeated. No method, Core/LF case,
+  kernel/transfer owner, identity, whiskering, parser/browser behavior, or
+  external coherence datum was added. The next operation after checkpointing
+  is the read-only `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` audit.
 - **2026-08-01 — D-DTTLF-USABILITY-056 approved exactly as proposed.** A
   separate review of immutable proposal checkpoint
   `ff170aa0ab8ec18e829a95689800032401c18f23` confirms that exact indices,
