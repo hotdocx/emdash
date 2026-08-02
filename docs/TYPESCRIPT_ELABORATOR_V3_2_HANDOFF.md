@@ -61,8 +61,11 @@
 > specializations require an additional TypeScript classifier-conversion
 > closure and remain deferred together with the proof-time semantic evaluator.
 > H-DTTLF-USABILITY-HOM-CATD-ACTION-TRANSFER-01 /
-> D-DTTLF-USABILITY-064 is frozen in the living continuation plan as the sole
-> next decision: exactly three opaque signatures and nine runtime clauses,
+> D-DTTLF-USABILITY-064 is separately reviewed-approved from immutable
+> proposal checkpoint `7eed444db933dfccb9f880520c65f408c5916a55`
+> under the standing unattended delegation, with immediate human
+> supersession. `HOM-CATD-ACTION-TRANSFER-1AF` is the sole dependency-ready
+> implementation: exactly three opaque signatures and nine runtime clauses,
 > one focused contextual consumer, and no kernel, Core/checker, binder,
 > parser/browser, curry, external-coherence, or broader scale delta.
 > `Transf_catd_func` and broader graduation remain deferred.
