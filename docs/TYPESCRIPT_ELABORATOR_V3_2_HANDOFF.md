@@ -152,8 +152,18 @@
 > new parser, AST, or semantic factorer. D-069 is separately reviewed-approved
 > from immutable proposal checkpoint
 > `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` under the standing unattended
-> delegation, with immediate human supersession; implementation is
-> dependency-ready at exactly its twelve numbered items.
+> delegation, with immediate human supersession. Its implementation is
+> final-green at `ba488f5a542bf5dce8fe78162a75663c313dcb26`: grouped comma/semicolon
+> `^nd` syntax routes to the existing typed method and agrees with direct Core
+> and inferred types for independent siblings and genuine dependency. The
+> existing identity/composition/pre/post body algebra, four canonical layers,
+> optional annotations, frozen evidence, and the fail-closed matrix are
+> focused-green. Typecheck, lint, parity 6/6, the grouped cases 4/4, and nine
+> exact revision pins pass without an aggregate or kernel rerun. The next
+> dependency-ready action is the dedicated plan's read-only
+> `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` product audit; it must
+> select at most one truthful reviewer/public promotion or one measured
+> semantic counterexample, not bulk scale by default.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

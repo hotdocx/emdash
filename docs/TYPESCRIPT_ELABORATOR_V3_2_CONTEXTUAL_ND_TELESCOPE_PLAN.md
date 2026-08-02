@@ -32,8 +32,11 @@ behavior delta. It selects the exact
 `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` / D-DTTLF-USABILITY-069 proposal
 below. D-069 is separately reviewed-approved from immutable proposal
 checkpoint `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` under the standing unattended
-delegation, with immediate human supersession; implementation is
-dependency-ready at exactly its twelve numbered items.
+delegation, with immediate human supersession. Its implementation is
+final-green at rollback-safe semantic checkpoint
+`ba488f5a542bf5dce8fe78162a75663c313dcb26`.
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` is the next
+dependency-ready read-only row.
 
 ## Objective
 
@@ -463,7 +466,8 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-1AL` | final-green at `01848adf70acbb49e2f6dbbe35b8fef90b517915` | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; D-067 proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; D-068 correction `dc104610c3cb8bbaf665382afe23802c12db41a2`; immutable reviews | One shared normal form now feeds a synthesis-capable direct dependent-context transformation method and the existing contextual endpoint/factorer seam. Independent siblings, genuine dependency, four-layer/six-binding access, identity, composition, both whiskerings, point/higher action, frozen evidence, and the fail-closed matrix are executable. Text/browser promotion remains later. |
 | `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | final-green; implementation folded into 1AL | first D-067 typecheck; exhaustive public-method inventory | The new method occurs exactly once in the existing displayed-natural capability row; the inventory is 84 methods in 14 unchanged rows and adds no text behavior. |
 | `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` | read-only complete; zero behavior delta | final-green 1AL; prior alternating Hom/Transf and mixed-target evidence | The finite canonical semantic envelope is coherent and classifier-head-agnostic. Grouped text grammar already exists; the missing seam is one expected-contract/resolver route, not a mixed-variance construction. |
-| `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | D-DTTLF-USABILITY-069 separately reviewed-approved; implementation dependency-ready | completed 0AM; final-green typed method; proposal `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2`; immutable review | Add one grouped displayed-transformation expected contract and resolver route to the existing typed API, preserve the body algebra and fail-closed boundary, bump the text revision, and prove direct/text parity without a second parser or semantic factorer. |
+| `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | final-green at `ba488f5a542bf5dce8fe78162a75663c313dcb26` | completed 0AM; final-green typed method; D-069 proposal `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2`; immutable review | One grouped displayed-transformation expected contract now routes comma/semicolon `^nd` syntax to the existing typed API. Independent and dependent direct/text equality, the full body algebra, four canonical layers, optional annotations, frozen evidence, and the fail-closed matrix are focused-green without a second parser or semantic factorer. |
+| `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` | dependency-ready; read-only | final-green 1AN plus public reviewer and syntax-parity plans | Freeze the exact end-user envelope now implemented and select at most one next product slice from truthful reviewer/browser promotion or one executable remaining semantic counterexample. Do not resume bulk scale by default. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
 
@@ -663,6 +667,39 @@ probes. It may not edit TypeScript behavior, tests, parser/browser artifacts,
 Lambdapi, public claims, packages, or runners, and it must not rerun the long
 aggregate or the already-measured telescope corpus.
 
+## `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` Audit Contract
+
+This is the next dependency-ready row. It is read-only and must:
+
+1. Reconcile the final-green D-069 implementation against all twelve frozen
+   items and record the exact typed/text envelope now shared by direct
+   TypeScript and grouped `^nd` input.
+2. Distinguish arbitrary finite depth in the canonical sibling/Sigma normal
+   form from arbitrary dependency DAGs, exchange across dependency,
+   unrestricted variance, and unrestricted body synthesis.
+3. Confirm that text elaboration delegates endpoint synthesis, factorization,
+   object action, and base-arrow/higher action to the existing typed method
+   and kernel-owned constructions. No external naturality payload may enter
+   the graduated claim.
+4. Audit the current reviewer/browser preset, README boundary, and public text
+   adapter against the newly implemented envelope. Determine the smallest
+   truthful user-facing promotion that demonstrates a nontrivial grouped
+   displayed-natural telescope without changing semantics.
+5. Reconcile the remaining semantic non-claims against executable examples.
+   Select semantic work only if one concrete useful term fails for a measured
+   missing internal owner or recursive factorization case; do not select a
+   category merely because unrestricted coverage remains open.
+6. Select and freeze at most one exact next product proposal. Prefer bounded
+   reviewer/browser/public promotion when the existing implementation already
+   supports a compelling demonstration; keep whole-library scale work
+   deferred unless that demonstration needs one exact transfer dependency.
+
+The audit may edit the three living ledgers and inspect current public assets.
+It may use bounded disposable ignored probes but may not change TypeScript or
+Lambdapi behavior, tests, browser assets, README/book prose, packages, runners,
+deployment, or publication. It must not rerun the long aggregate, the full
+telescope corpus, kernel CI, browser build, print, or book gates.
+
 ## Explicit Non-Claims
 
 This plan does not yet claim or authorize:
@@ -674,8 +711,9 @@ This plan does not yet claim or authorize:
 - general displayed curry, a `Product_catd` facade, or new product
   definitional equalities;
 - unrestricted `:^nd` or ordinary-DTT-like occurrence completeness;
-- text syntax, browser presets, README/book changes, deployment, publication,
-  bulk scale resumption, or whole-library transfer graduation; or
+- unrestricted text syntax, browser-preset/README/book promotion, deployment,
+  publication, bulk scale resumption, or whole-library transfer graduation;
+  or
 - push, merge, rebase, amend, reset, worktree removal, or unrelated cleanup.
 
 ## Validation And Checkpoint Policy
@@ -721,10 +759,15 @@ delta. It finds no concrete mixed-variance blocker and freezes exactly
 `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` / D-DTTLF-USABILITY-069. Treat it as
 separately reviewed-approved from immutable proposal checkpoint
 `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` under the standing unattended
-delegation, with immediate human supersession. Implement only its twelve
-numbered items. Preserve direct recursive binders and internal
+delegation, with immediate human supersession. Its implementation is
+final-green at `ba488f5a542bf5dce8fe78162a75663c313dcb26`: grouped `^nd`
+syntax delegates to the final-green typed method and has focused direct/text,
+body-algebra, deep-presentation, annotation, and fail-closed evidence. Run
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` next as a read-only
+product audit. Preserve direct recursive binders and internal
 object/arrow/higher action; add no curry, total-context section, cast,
-external coherence, parser/browser behavior, or kernel owner.
+external coherence, second parser, browser behavior, or kernel owner without
+a separately frozen proposal.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -732,6 +775,20 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-069 implementation final-green at
+  `ba488f5a542bf5dce8fe78162a75663c313dcb26`; 0AO selected.** Grouped
+  comma/semicolon `^nd` syntax now supplies only ordered source families and
+  delegates to `displayedTransforDependentContextLambda`. Direct and text
+  Core/type outputs agree for independent siblings and a genuine dependency;
+  identity, recursive composition, and both whiskering orientations agree;
+  a four-layer/six-binding witness preserves the exact internal layer
+  presentation without serializing its enormous Core; optional annotations
+  work; and wrong expectation, group shape, annotation, mode, predecessor
+  profile, and arbitrary body fail closed. Typecheck, lint, whitespace
+  hygiene, the 6/6 parity inventory, the 4/4 name-filtered telescope cases,
+  and exactly nine revision pins are green. No aggregate, kernel, browser,
+  print, or book gate was rerun. The next row is the read-only 0AO product
+  graduation audit.
 - **2026-08-02 — D-DTTLF-USABILITY-069 separately reviewed-approved.** The
   immutable review of proposal checkpoint
   `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` confirms that grouped grammar,

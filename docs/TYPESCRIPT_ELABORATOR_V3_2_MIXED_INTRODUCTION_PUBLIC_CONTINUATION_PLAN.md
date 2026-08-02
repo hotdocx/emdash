@@ -7941,9 +7941,15 @@ exactly `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` /
 D-DTTLF-USABILITY-069. Treat it as separately reviewed-approved from immutable
 proposal checkpoint `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` under the
 standing unattended delegation, with immediate human supersession. Implement
-only its twelve numbered items. Add no kernel/runtime owner, Core/checker case, second
-parser, classifier decomposition heuristic, external coherence evidence,
-curry, browser/public preset, or scale behavior.
+only its twelve numbered items. Its implementation is final-green at
+`ba488f5a542bf5dce8fe78162a75663c313dcb26`: grouped `^nd` text reuses the
+typed canonical-telescope method and preserves direct/text equality, the
+existing body algebra, deep layer presentation, annotations, and fail-closed
+behavior. Run the dedicated plan's read-only
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` audit next. Add no
+kernel/runtime owner, Core/checker case, second parser, classifier
+decomposition heuristic, external coherence evidence, curry, browser/public
+preset, or scale behavior without a separately frozen proposal.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7962,6 +7968,16 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — Contextual grouped `:^nd` text parity final-green; 0AO
+  selected.** D-069 is implemented at
+  `ba488f5a542bf5dce8fe78162a75663c313dcb26`. One source-group-only expected
+  contract routes existing comma/semicolon syntax to the final-green typed
+  telescope method; no parser grammar, semantic factorer, Core/checker case,
+  or kernel owner was added. Focused independent/dependent equality, recursive
+  cell bodies, four canonical layers, annotation, and rejection evidence is
+  green. Continue with the dedicated plan's read-only 0AO audit, which must
+  prefer a bounded truthful reviewer/public promotion unless one executable
+  semantic counterexample establishes a higher-priority prerequisite.
 - **2026-08-02 — `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` complete
   read-only; compact contextual text parity selected.** A disposable fixed
   alternating `Transf -> Hom -> Transf -> Hom` classifier accepts direct
