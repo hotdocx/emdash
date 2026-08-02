@@ -294,8 +294,8 @@
 > D-DTTLF-USABILITY-055 is separately reviewed-approved from immutable
 > proposal checkpoint `36e1c8dba16a8a206ace58628ba47703a2b74374` under the
 > standing unattended delegation and is now implemented/in-scope green at
-> `dd12ae56002ebad5b820db6106e68dc5a60b50ae`. It adds only a compact
-> contextual method,
+> `dd12ae56002ebad5b820db6106e68dc5a60b50ae`. It adds only a single
+> displayed-binder contextual method,
 > a construction-only
 > indexed point-Hom/application view, and the eta point leaf
 > `lambda^nd a. eta[a] -> eta`; it adds no kernel/transfer owner, generic
@@ -312,6 +312,20 @@
 > `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` audit of the first recursive point-body
 > constructor; it may freeze at most one successor and may not broaden
 > behavior itself.
+> That audit is now complete with zero semantic delta and clarifies the API
+> terminology: `lambda^nd a : E. t` is one displayed binder whose expanded
+> telescope is `k :^n K; a :^n E[k]`. TypeScript creates/tracks `k`
+> internally because `E : Catd K` determines it; base naturality is not
+> omitted. A live point-composition probe fails only at the deliberately
+> whole-fibre-only `composeCells` branch. Existing recursive typed-cell IR,
+> closed-owner factorization, and generic composition at `Functord_cat`
+> otherwise supply the required route. Identity needs a new point-identity
+> construction seam and whiskering needs a broader orientation audit, so the
+> exact TypeScript-only `DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` /
+> H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-COMPOSITION-01 /
+> D-DTTLF-USABILITY-056 proposal is frozen for separate review. It adds no
+> public method, Core/LF case, kernel/transfer owner, parser/browser behavior,
+> or unrestricted-`:^nd` claim. Do not implement it before that review.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

@@ -501,9 +501,10 @@ It deliberately avoids:
 | `DIRECT-MIXED-NEGATIVE-TOWER-1P` | implemented and in-scope green at `ef3ce5c4de381b044dc3bbffd55cb35bcfd2faf7` under D-DTTLF-USABILITY-053 | completed `DIRECT-MIXED-CONTEXT-ARCHITECTURE-0O`; proposal `db49240fc77f308131636181e76021858cd99829`; separate review under standing unattended delegation | The new direct TypeScript API right-folds arbitrary finite negative inner families through existing `Functor_catd`, recognizes exact coherent eta/bound identity, and recursively lifts finite closed target maps through the existing target action. Depth 2/6, depth-3 identity, and six target-action lifts into `Hom_catd` are generically checked. One-inner behavior is unchanged; no kernel/transfer owner, curry, total-context section, parser route, or unrestricted-context claim was added. |
 | `DIRECT-MIXED-TOWER-GRADUATE-0Q` | read-only successor audit complete; zero semantic delta; arbitrary-level source action selected | implemented D-053 tower; arbitrary positive sibling-layer compiler; existing `Hom_catd`/`Transf_catd`, `homd_int`, and displayed-`:^nd` evidence; bounded current-kernel check | The tower is genuinely depth-recursive but presently supports only eta/identity and closed target maps. Independent positive sibling depth/width is already separately generic, and mixed classifier formation/elimination plus higher action are already internalized. The first missing operation that directly stress-tests variance at arbitrary depth is a finite contravariant source chain at any tower layer, lifted through its enclosing prefix by the existing target action. |
 | `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` | implemented and in-scope green at `390d9f4561576885d5d55588402479db877028ff` under D-DTTLF-USABILITY-054 | completed `DIRECT-MIXED-TOWER-GRADUATE-0Q`; immutable proposal `107798b09081212007d4d1db80213eecc1495517`; separate review under standing unattended delegation | The tower factorer now accepts `F[c](L1(a1))...(Ln(an))`, with a finite closed coherent source chain independently at every layer. It compiles deepest-outward by reusing the existing mixed source action and target lift through the current prefix. Depth-three positions, simultaneous chains, bound-outer identity, rich `Hom_catd`, and generated depth six are checked without a kernel/transfer owner, curry, total section, sibling integration, pair/weakening/constant-middle case, or new `:^nd` constructor. |
-| `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` | read-only architecture audit complete; zero semantic delta; direct point-eta successor selected | completed D-054 arbitrary-level source action; existing `displayedTransforLambda` eta/composition; active `Transfd_cat`, `Transf_catd`, `homd_int`, and `tdapp1_int_*` owners | `:^nd`, like `:^fd`, is fundamentally a direct nested contextual binder. Its compact callback should hide `k :^n K`, expose `a :^n E[k]`, and factor supported point-arrow syntax back to a genuine `Transfd` owner in two recursive stages. The present API factors only whole fibre transformations. `Transf_catd`/Pi and Sigma-total views remain semantic comparisons, not a required curry route. The first missing slice is TypeScript-only point eta. |
-| `DIRECT-CONTEXTUAL-ND-ETA-1T` | implemented and in-scope green at `dd12ae56002ebad5b820db6106e68dc5a60b50ae` under D-DTTLF-USABILITY-055 | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; immutable proposal `36e1c8dba16a8a206ace58628ba47703a2b74374`; separate review under standing unattended delegation; 7/7 focused and 31/31 combined regressions; workspace/typecheck/lint; sole aggregate 1,272 pass/51 skip/same three unrelated digest-pin failures | One opt-in compact `displayedTransforContextLambda`, one construction-only indexed point-Hom/application route, and one eta point factor recover the already-coherent closed `eta`. The result preserves internal object/fibre-arrow/base-arrow/higher action. No kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim was added. |
-| `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` | next dependency-ready read-only successor audit | implemented D-055 compact point eta; retained whole-fibre recursive composition; existing generic `composeCells` and displayed identity owners | Stress the two-stage point-to-fibre-to-outer factorization and select at most one first recursive point-body constructor. Compare exact pointwise vertical composition with identity and whiskering; prefer reuse of existing typed application/composition nodes and whole-owner recovery. Add no semantic behavior during the audit and do not claim unrestricted `:^nd`. |
+| `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` | read-only architecture audit complete; zero semantic delta; direct point-eta successor selected | completed D-054 arbitrary-level source action; existing `displayedTransforLambda` eta/composition; active `Transfd_cat`, `Transf_catd`, `homd_int`, and `tdapp1_int_*` owners | `:^nd`, like `:^fd`, is fundamentally a direct nested contextual binder. Its single displayed-binder API infers and internally tracks `k :^n K`, exposes `a :^n E[k]`, and factors supported point-arrow syntax back to a genuine `Transfd` owner in two recursive stages. The present API factors only whole fibre transformations. `Transf_catd`/Pi and Sigma-total views remain semantic comparisons, not a required curry route. The first missing slice is TypeScript-only point eta. |
+| `DIRECT-CONTEXTUAL-ND-ETA-1T` | implemented and in-scope green at `dd12ae56002ebad5b820db6106e68dc5a60b50ae` under D-DTTLF-USABILITY-055 | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; immutable proposal `36e1c8dba16a8a206ace58628ba47703a2b74374`; separate review under standing unattended delegation; 7/7 focused and 31/31 combined regressions; workspace/typecheck/lint; sole aggregate 1,272 pass/51 skip/same three unrelated digest-pin failures | One opt-in single displayed-binder `displayedTransforContextLambda`, one construction-only indexed point-Hom/application route, and one eta point factor recover the already-coherent closed `eta`. The result preserves internal object/fibre-arrow/base-arrow/higher action. No kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim was added. |
+| `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` | read-only successor audit complete; zero semantic delta; pointwise vertical composition selected | implemented D-055 point eta; retained whole-fibre recursive composition; existing generic `composeCells`, `id_transfd`, action, and whiskering-related owners; bounded active-kernel check | The single displayed binder has expanded telescope `k :^n K; a :^n E[k]`; TypeScript merely tracks `k` internally. Current `composeCells` fails exactly because it accepts `indexed-transfor`, not the new `indexed-hom`. Its typed composition tree, recursive whole-owner factorer, and generic `Functord_cat` composition are otherwise reusable. Identity needs a new point-identity construction route; whiskering needs a wider orientation audit. The smallest successor is therefore recursive pointwise vertical composition. |
+| `DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` | frozen as H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-COMPOSITION-01 / D-DTTLF-USABILITY-056; decision pending | completed `DIRECT-CONTEXTUAL-ND-GRADUATE-0U`; implemented D-055 point eta; existing typed-cell composition node and generic displayed composition owner | Extend the existing construction-only `composeCells` node homogeneously to exact indexed point-Homs, recursively recover each point leaf to a closed `Transfd`, and compose those recovered owners through existing generic category composition. Preserve the whole-fibre branch. Add one contextual-composition evidence rule and focused exact/nested/action/non-collapse checks. Add no method, Core/LF case, kernel/transfer owner, identity, whiskering, parser/browser route, or unrestricted-`:^nd` claim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -5158,7 +5159,7 @@ transfer, parser/browser, publication, or remote Git edit.
 
 The user's analogy with the accepted direct `:^fd` construction is the right
 architectural starting point, with one important mode change. The existing
-displayed-functor abstraction has the hidden contextual telescope
+displayed-functor abstraction has the expanded contextual telescope
 
 ```text
 k :^n K; a :^f E[k] |- body(k,a) : D[k]
@@ -5175,11 +5176,14 @@ k :^n K; a :^n E[k]
 
 and factor supported point-arrow syntax to a genuine
 `eta : Transfd_cat FF GG`. Thus the approximate expansion
-`lambda^n k. lambda^n a. body(k,a)` is the direct contextual presentation of
-compact `lambda^nd a : E. body(a)`. This notation describes the frontend
-telescope and its internally typed factorization; it does not claim that a
-raw pair of ordinary Lambdapi lambdas alone is definitionally identical to
-the stable `Transfd_cat` head.
+`lambda^n k. lambda^n a. body(k,a)` displays the contextual telescope of the
+single displayed binder `lambda^nd a : E. body(a)`. There is no separate
+"compact" binder semantics. Because `E : Catd K` determines `K`, the current
+TypeScript callback exposes `a` while the elaborator creates and tracks `k`
+internally. This is an elaboration/API choice, not an omission of base
+naturality. The notation describes the frontend telescope and its internally
+typed factorization; it does not claim that a raw pair of ordinary Lambdapi
+lambdas alone is definitionally identical to the stable `Transfd_cat` head.
 
 This is the exact sense in which the earlier direct-functor solution
 `lambda^n k. lambda^f c. lambda^f a. body` generalizes. The solution is not a
@@ -5237,8 +5241,8 @@ rule, transfer declaration, or TypeScript behavior.
 
 ### Exact current TypeScript boundary
 
-The current `displayedTransforLambda` is sound but is not yet the compact
-direct contextual binder above. Its callback sees only
+The current `displayedTransforLambda` is sound but is not yet the single
+displayed binder above. Its callback sees only
 `k : Obj K`; its body classifier is one whole indexed fibre transformation
 between `FF[k]` and `GG[k]`. It recursively recognizes:
 
@@ -5250,7 +5254,7 @@ theta[k] after eta[k]
 and factors those nodes back to genuine closed outer `Transfd` owners. This
 is valuable stage-two factorization. It must remain compatible, but its
 provisional surface reading `lambda^nd k. eta[k]` should not be mistaken for
-the final compact binder over a dependent fibre variable.
+the single displayed binder over a dependent fibre variable.
 
 The missing direct path is stage one:
 
@@ -5399,8 +5403,8 @@ The review confirms:
   frontend seam rather than duplicate kernel mathematics.
 
 The review also confirms that retaining the old whole-fibre method while
-adding a separately named compact contextual method avoids silently changing
-existing TypeScript or text callers. Surface notation consolidation remains
+adding a separately named single displayed-binder method avoids silently
+changing existing TypeScript or text callers. Surface notation consolidation remains
 a later parser-parity task. No immediate human correction superseded the
 proposal, so only D-055's TypeScript/test/document scope is authorized.
 
@@ -5451,6 +5455,156 @@ next operation is the read-only
 `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` audit. It must compare pointwise vertical
 composition, identity, and whiskering and freeze at most one smallest
 constructor-led successor; it may not broaden behavior itself.
+
+## `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` audit result
+
+This audit is complete with zero semantic delta. It also clarifies the
+terminology used by D-055. `lambda^nd a : E. t` is one displayed/natural
+binder, not a distinct "compact" binder. Since `E : Catd K` determines the
+base category, its expanded contextual telescope is
+
+```text
+k :^n K; a :^n E[k]
+```
+
+The TypeScript method exposes `a` to the callback and creates/tracks `k`
+internally. Calling the base variable "hidden" describes only this callback
+API and local elaboration state. It does not erase the base binder or its
+naturality: successful factorization returns a genuine closed `Transfd`, and
+the active internal owners still supply fibre-arrow, base-arrow, whole-Hom,
+and higher-cell action. The same distinction applies to the single
+displayed/functorial binder `lambda^fd a : E. t`, whose expanded telescope is
+`k :^n K; a :^f E[k]`. Earlier formulas such as
+`lambda^n k. lambda^f c. lambda^f a. t` displayed a longer mixed telescope;
+they did not select a competing binder architecture.
+
+### Measured current seam
+
+D-055 supplies the exact point leaf
+
+```text
+lambda^nd a. eta[a]
+```
+
+as a construction-only `indexed-hom` application that factors first to the
+whole fibre component `eta[k]` and then to the already-coherent outer `eta`.
+The pre-existing `composeCells` construction uses a generic
+`typed-cell-composition` tree, but its checked input branch deliberately
+accepts only `indexed-transfor`. A live probe of
+
+```text
+lambda^nd a. theta[a] after eta[a]
+```
+
+therefore fails at exactly that boundary with
+`CLASSIFIER_ARGUMENT_MISMATCH`: typed cell composition currently requires
+indexed transformations. The failure is not in Core, the LF checker, the
+kernel's displayed composition, or naturality synthesis.
+
+The remaining machinery already has the right scalable shape:
+
+1. Each `indexed-hom` point leaf records the same base index, fibre index,
+   source/target displayed families, and whole displayed-functor endpoints.
+   Those fields are sufficient to check adjacency of `eta : FF => GG` and
+   `theta : GG => HH` before a point composition node is formed.
+2. The existing `typed-cell-composition` IR is recursive and classifier-led;
+   it need not be duplicated for the point level.
+3. The existing whole-fibre factorer recursively maps the same tree to closed
+   outer transformations and composes them with generic category composition
+   at `Functord_cat E D`.
+4. The active kernel already projects that outer composition pointwise and
+   retains its object, fibre-arrow, base-arrow, and higher-cell behavior.
+   The bounded active-kernel check is green. No new displayed composition
+   owner or rule is indicated.
+
+### Successor comparison
+
+Pointwise vertical composition is the smallest next recursive constructor.
+It reuses an existing public method, construction node, endpoint discipline,
+outer factorization, and semantic owner. The extension is homogeneous:
+`composeCells` accepts either two whole-fibre `indexed-transfor` values or two
+point `indexed-hom` values, never a mixture.
+
+Identity is semantically available through `id_transfd` and generic identity,
+but the TypeScript construction layer has no indexed point-identity term from
+which to recover that owner. Promoting it first would require an additional
+surface construction/API decision rather than stress the recursion already
+introduced by D-055.
+
+Whiskering and functor action are also kernel-owned, but recognizing their
+point syntax requires a broader orientation-sensitive application audit:
+source versus target action, displayed functor endpoints, and interaction with
+the existing variance resolver. It is valuable after composition, but it is
+not the smallest first proof of the two-stage recursive point factorer.
+
+The architecture remains feasible and fail-closed. The selected successor
+accepts only a recursive tree whose leaves individually recover closed
+coherence-owning transformations. It does not infer naturality from arbitrary
+point arrows and does not require curry, a total-context section, a new owner,
+or manual hard-coded convertibility.
+
+## H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-COMPOSITION-01 /
+## D-DTTLF-USABILITY-056
+
+Status: proposed; decision pending. This gate is the exact TypeScript-only
+`DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` proof slice.
+
+1. Preserve `displayedTransforContextLambda` as the single displayed-binder
+   API with expanded telescope `k :^n K; a :^n E[k]`. The callback continues
+   to receive only `a`; the elaborator continues to create and track `k`
+   internally. Do not add a second binder semantics or a curry route.
+2. Extend the existing construction-only `composeCells` method with one
+   homogeneous `indexed-hom` branch. Require both operands to have the same
+   base and fibre indices, base category, source/target displayed families,
+   and adjacent whole-functor endpoints. Preserve the existing
+   `indexed-transfor` branch unchanged and reject mixed levels.
+3. Reuse the existing `typed-cell-composition` IR node. Its result classifier
+   is `indexed-hom` from the inner source functor to the outer target functor.
+   Add no intrinsic Core term/type former and no generic LF checker/evaluator
+   case.
+4. Make the point factorer recursive over that exact composition node. Every
+   leaf must remain the D-055 point application of an already-coherent closed
+   displayed transformation at the same two scoped indices. Recursively
+   recover the leaf owners and compose them through the existing generic
+   category-composition owner at `Functord_cat E D`.
+5. Share or extract only the smallest internal closed-displayed-composition
+   helper needed to keep the whole-fibre and point factorers consistent. Do
+   not introduce an owner-specific evaluator path, external naturality data,
+   manual unification, or a classifier mirror that can escape construction.
+6. Extend abstraction evidence with exactly one
+   `categorical.displayed-transfor-context-composition` rule. Record the
+   normalized recursive point tree and measured base/fibre occurrence counts;
+   retain the existing eta rule and its deeply frozen shape unchanged.
+7. Add focused tests for exact binary and nested point composition, equality
+   with `composeDisplayedTransfor`, callback-once behavior, normalized
+   construction evidence, closed point observation, internal base-arrow and
+   higher-action observation, and unchanged whole-fibre recursive
+   composition.
+8. Add negative tests for non-adjacent endpoints, different base/fibre slots
+   or displayed families where constructible, mixed whole-fibre/point levels,
+   arbitrary point data, escaped/foreign tokens, and unavailable profiles.
+   The factorer must fail closed.
+9. Add no public method, kernel symbol/rule, transfer declaration, parser/text
+   route, CLI/reviewer/browser behavior, curry/section path, point identity,
+   whiskering, arbitrary point abstraction, or unrestricted-`:^nd` claim.
+   Method-count inventory changes are therefore not expected.
+10. Run the new focused suite plus D-055, existing whole-fibre `:^nd`, and
+    nearest text-inventory regressions; then run workspace check, typecheck,
+    lint, and whitespace checks. Because shared categorical surface behavior
+    changes, run one `check:ts` after focused gates are green. Carry forward
+    the known canonical-export digest-pin failures if unchanged; do not rerun
+    the aggregate or repair those pins in this tranche.
+11. Synchronize this ledger and the handoff, stage only the exact
+    TypeScript/test/document slice, and create a rollback-safe local semantic
+    checkpoint followed by a docs-only closure checkpoint. Preserve unrelated
+    work and make no push, merge, publication, cleanup, or remote change.
+
+This proposal is deliberately non-self-authorizing. Under the standing
+unattended delegation it may be approved only by a separate review of an
+immutable proposal checkpoint, with immediate human supersession. That review
+must confirm the homogeneous-level checks, construction-only lifetime,
+recursive recovery of closed owners, unchanged whole-fibre branch, and absence
+of new kernel mathematics or external coherence evidence.
 
 ## Validation And Checkpoint Policy
 
@@ -5780,11 +5934,18 @@ kernel/transfer owner, generic checker/evaluator case, external naturality
 data, curry/section route, pointwise identity/composition, parser/browser/
 publication change, or unrestricted-`:^nd` claim.
 
-Run the read-only
-`DIRECT-CONTEXTUAL-ND-GRADUATE-0U` successor audit. Compare pointwise vertical
-composition, identity, and whiskering against existing typed construction and
-whole-owner factorization. Freeze at most one smallest constructor-led
-proposal. Do not edit semantic behavior during the audit.
+Treat `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` as read-only complete with zero
+semantic delta. Its terminology clarification distinguishes the single
+displayed binder `lambda^nd a : E. t` from its expanded telescope
+`k :^n K; a :^n E[k]`; the TypeScript callback's internally tracked base is
+not missing naturality. The audit selects pointwise vertical composition as
+the smallest recursive successor. Treat
+`DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` /
+H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-COMPOSITION-01 /
+D-DTTLF-USABILITY-056 as frozen and decision-pending. Review the immutable
+proposal separately before any implementation. Do not add point identity,
+whiskering, parser/browser behavior, a kernel/transfer owner, or unrestricted
+`:^nd` as part of that review.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -5803,8 +5964,21 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` completed read-only and
+  D-DTTLF-USABILITY-056 frozen for separate review.** The terminology is now
+  explicit: `lambda^nd a : E. t` is one displayed binder with expanded
+  telescope `k :^n K; a :^n E[k]`; TypeScript tracks the determined base
+  internally rather than dropping it. A live pointwise-composition probe
+  fails exactly because `composeCells` accepts only the existing
+  `indexed-transfor` level. The recursive typed-cell IR, whole-owner factorer,
+  generic `Functord_cat` composition, and active point/base/higher projection
+  laws are already present, and the bounded kernel check is green. Identity
+  requires a new point-identity construction seam; whiskering requires a
+  wider orientation audit. D-056 therefore freezes only homogeneous
+  `indexed-hom` composition plus recursive closed-owner recovery, evidence,
+  and focused tests. No semantic behavior changed during this audit.
 - **2026-08-01 — D-DTTLF-USABILITY-055 implemented and in-scope green at
-  `dd12ae56002ebad5b820db6106e68dc5a60b50ae`.** The compact
+  `dd12ae56002ebad5b820db6106e68dc5a60b50ae`.** The single displayed-binder
   `displayedTransforContextLambda` hides the base token, exposes one natural
   fibre token, and recognizes exactly the eta point application of an
   already-coherent closed displayed transformation. The new normalized
