@@ -7965,8 +7965,10 @@ Core parity and focused reviewer preset each pass 1/1. The first fixture
 production check found only the existing exhaustive expected-mode label switch
 mechanically affected. The dedicated plan freezes
 `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` /
-D-DTTLF-USABILITY-071 pending separate review and pauses before editing the
-additional UI file.
+D-DTTLF-USABILITY-071. It is separately reviewed-approved from immutable
+proposal checkpoint `fcf082be07ad44b877c1b622fb4acc4293cdc84c` under the
+standing unattended delegation, with immediate human supersession. D-070 may
+resume with exactly one additional UI label case.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7985,6 +7987,11 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-071 separately reviewed-approved.** The immutable review
+  of proposal checkpoint `fcf082be07ad44b877c1b622fb4acc4293cdc84c`
+  confirms the exact one-file/one-presenter-case correction. Under the
+  standing unattended delegation, with immediate human supersession, D-070
+  may resume without broadening UI or semantics.
 - **2026-08-02 — D-071 UI-label correction frozen.** D-070's first browser-
   fixture typecheck reaches the existing generic preset UI and finds its
   exhaustive expected-mode label switch missing the new contextual-`:^nd`

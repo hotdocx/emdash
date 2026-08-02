@@ -44,7 +44,10 @@ implementation began at exactly its thirteen numbered items. The first
 browser-fixture typecheck found one exhaustive expected-mode presentation
 switch mechanically affected. The exact D-DTTLF-USABILITY-071 file-list
 correction below is frozen pending separate review; D-070 implementation is
-paused before editing that additional file.
+separately reviewed-approved from immutable proposal checkpoint
+`fcf082be07ad44b877c1b622fb4acc4293cdc84c` under the standing unattended
+delegation, with immediate human supersession. D-070 implementation may resume
+with exactly the one additional label case.
 
 ## Objective
 
@@ -477,7 +480,7 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | final-green at `ba488f5a542bf5dce8fe78162a75663c313dcb26` | completed 0AM; final-green typed method; D-069 proposal `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2`; immutable review | One grouped displayed-transformation expected contract now routes comma/semicolon `^nd` syntax to the existing typed API. Independent and dependent direct/text equality, the full body algebra, four canonical layers, optional annotations, frozen evidence, and the fail-closed matrix are focused-green without a second parser or semantic factorer. |
 | `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` | read-only complete; zero behavior delta | final-green 1AN plus public reviewer and syntax-parity plans | The semantic/text envelope graduates. A cold reviewer-shaped probe succeeds but measures 148.31 seconds on the unnecessarily broad mixed profile versus 27.83 seconds for the existing chain-2A closure, selecting profile decoupling before public promotion. |
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | D-DTTLF-USABILITY-070 separately reviewed-approved; implementation dependency-ready | completed 0AO; proposal `41ddef0bad65f5766634c61c994f06f581f79cd0`; immutable review | Decouple contextual `:^nd` telescope availability from mixed-classifier capability while reusing the exact chain-2A runtime, then add one genuine-dependent reviewer preset and truthful README boundary. |
-| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` | frozen pending separate review | first D-070 browser-fixture typecheck | Add exactly one exhaustive label case in the existing generic UI for the new expected-mode variant. No UI flow, semantics, or preset behavior changes. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` | D-DTTLF-USABILITY-071 separately reviewed-approved; implementation resumes | first D-070 browser-fixture typecheck; proposal `fcf082be07ad44b877c1b622fb4acc4293cdc84c`; immutable review | Add exactly one exhaustive label case in the existing generic UI for the new expected-mode variant. No UI flow, semantics, or preset behavior changes. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
 
@@ -949,6 +952,12 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-071 separately reviewed-approved.** The
+  immutable review of proposal checkpoint
+  `fcf082be07ad44b877c1b622fb4acc4293cdc84c` confirms that the browser fixture
+  failure is exactly one compiler-enforced expected-mode presenter case. Under
+  the standing unattended delegation, with immediate human supersession, the
+  one-file/one-case correction is dependency-ready and D-070 may resume.
 - **2026-08-02 — D-071 reviewer-label correction frozen pending separate
   review.** The first D-070 browser-fixture typecheck is green through the
   semantic/browser module and fails only because the existing exhaustive

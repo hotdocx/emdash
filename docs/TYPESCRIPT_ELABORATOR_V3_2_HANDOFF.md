@@ -179,8 +179,10 @@
 > fixture production check found exactly one exhaustive UI label switch
 > mechanically affected. The dedicated plan freezes
 > `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` /
-> D-DTTLF-USABILITY-071 pending separate review; implementation is paused
-> before editing `emdash-template/src/App.tsx`.
+> D-DTTLF-USABILITY-071. It is separately reviewed-approved from immutable
+> proposal checkpoint `fcf082be07ad44b877c1b622fb4acc4293cdc84c` under the
+> standing unattended delegation, with immediate human supersession. D-070
+> may resume with exactly one `emdash-template/src/App.tsx` label case.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
