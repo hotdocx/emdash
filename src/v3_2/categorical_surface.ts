@@ -574,7 +574,8 @@ export type CoreCategoricalAbstractionEvidence =
                 | 'categorical.ordinary-transfor-eta'
                 | 'categorical.ordinary-transfor-identity'
                 | 'categorical.ordinary-transfor-composition'
-                | 'categorical.ordinary-transfor-whiskering';
+                | 'categorical.ordinary-transfor-whiskering'
+                | 'categorical.ordinary-transfor-contextual-functor';
             readonly variation: 'natural';
             readonly dependency: 'ordinary';
             readonly targetCategory: KernelExpression;
@@ -1163,6 +1164,15 @@ interface InternalCoreCategoricalTerm extends CoreCategoricalTerm {
         readonly section: InternalCoreCategoricalTerm;
         readonly basePoint: InternalCoreCategoricalTerm;
     };
+    /**
+     * Closed displayed functor recovered by an open-fibre `lambda^f` nested
+     * directly inside an ordinary `lambda^n`. The component wrapper is
+     * construction-only; the recovered owner is the same term used by the
+     * compact `lambda^fd` presentation.
+     */
+    readonly contextualDisplayedFunctor?: {
+        readonly factored: InternalCoreCategoricalTerm;
+    };
 }
 
 interface InternalCoreCategoricalTermMetadata {
@@ -1172,6 +1182,9 @@ interface InternalCoreCategoricalTermMetadata {
     readonly displayedWeakeningFibre?: {
         readonly section: InternalCoreCategoricalTerm;
         readonly basePoint: InternalCoreCategoricalTerm;
+    };
+    readonly contextualDisplayedFunctor?: {
+        readonly factored: InternalCoreCategoricalTerm;
     };
 }
 
@@ -1249,6 +1262,21 @@ interface CoreCategoricalDirectDisplayedEndpointShape {
 interface CoreCategoricalOrdinaryNaturalContext {
     readonly ordinal: number;
     readonly sourceCategory: KernelExpression;
+    readonly targetCategory: KernelExpression;
+    readonly sourceFunctor: KernelExpression;
+    readonly targetFunctor: KernelExpression;
+}
+
+interface CoreCategoricalDisplayedFunctorFactorization {
+    readonly rule:
+        | 'categorical.displayed-functor-identity'
+        | 'categorical.displayed-functor-eta'
+        | 'categorical.displayed-functor-composition'
+        | 'categorical.displayed-functor-weakening';
+    readonly chainLength: number;
+    readonly result: InternalCoreCategoricalTerm;
+    readonly dependentPrerequisites:
+        readonly CoreCategoricalDependentApplicationPrerequisiteId[];
 }
 
 interface CoreCategoricalDirectDisplayedEndpointCompilation
@@ -2031,6 +2059,14 @@ export class CoreCategoricalScopedBuilder {
                             metadata.displayedWeakeningFibre.section,
                         basePoint:
                             metadata.displayedWeakeningFibre.basePoint
+                    })
+                }),
+            ...(metadata.contextualDisplayedFunctor === undefined
+                ? {}
+                : {
+                    contextualDisplayedFunctor: Object.freeze({
+                        factored:
+                            metadata.contextualDisplayedFunctor.factored
                     })
                 })
         };
@@ -5156,6 +5192,42 @@ export class CoreCategoricalScopedBuilder {
                 nodeProvenance,
                 'Ordinary transfor component index belongs to the wrong ' +
                 'source category'
+            );
+        }
+        if (
+            argument.closed !== undefined &&
+            subject.contextualDisplayedFunctor !== undefined
+        ) {
+            const factored =
+                subject.contextualDisplayedFunctor.factored;
+            if (
+                factored.type.tag !== 'displayed-functor' ||
+                factored.closed === undefined ||
+                !kernelExpressionEquals(
+                    factored.type.baseCategory,
+                    subject.type.sourceCategory
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFamily,
+                    subject.type.sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFamily,
+                    subject.type.targetFunctor
+                )
+            ) {
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Expanded displayed-functor component lost its shared ' +
+                        'factorization owner'
+                );
+            }
+            return this.applyDisplayedFunctor(
+                factored,
+                argument,
+                'fibre-functor',
+                nodeProvenance
             );
         }
         if (argument.closed === undefined) {
@@ -14417,6 +14489,174 @@ export class CoreCategoricalScopedBuilder {
         }
     }
 
+    /** Shared recursive body compiler for compact and expanded `:^fd`. */
+    private factorDisplayedFunctorBody(
+        name: string,
+        body: InternalCoreCategoricalTerm,
+        fibreOrdinal: number,
+        baseOrdinal: number,
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        nodeProvenance: Provenance
+    ): CoreCategoricalDisplayedFunctorFactorization {
+        if (
+            body.type.tag !== 'indexed-object' ||
+            body.type.indexOrdinal !== baseOrdinal ||
+            !kernelExpressionEquals(
+                body.type.baseCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                body.type.family,
+                targetFamily
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Displayed-functor abstraction '${name}' body is not an ` +
+                    'object of the target family over its active base'
+            );
+        }
+        const weakeningSection =
+            this.displayedSectionWeakeningBody(
+                body,
+                fibreOrdinal,
+                baseOrdinal,
+                baseCategory,
+                targetFamily
+            );
+        let chain: readonly InternalCoreCategoricalTerm[] = [];
+        let endpointCompilation:
+            CoreCategoricalDirectDisplayedEndpointCompilation |
+            undefined;
+        if (weakeningSection === undefined) {
+            endpointCompilation =
+                this.compileDirectDisplayedFunctorEndpoint(
+                    body,
+                    nodeProvenance
+                );
+            const candidate = this.directDisplayedFunctorChain(
+                body,
+                fibreOrdinal,
+                baseOrdinal,
+                baseCategory,
+                sourceFamily
+            );
+            if (
+                candidate === undefined ||
+                endpointCompilation === undefined ||
+                !kernelExpressionEquals(
+                    endpointCompilation.targetFamily,
+                    targetFamily
+                )
+            ) {
+                this.fail(
+                    'UNAVAILABLE_DISPLAYED_ACTION',
+                    nodeProvenance,
+                    'The displayed binder accepts identity, eta, a ' +
+                        'finite closed displayed-functor chain, or the ' +
+                        'exact qualified section weakening'
+                );
+            }
+            chain = candidate;
+        }
+
+        let rule:
+            CoreCategoricalDisplayedFunctorFactorization['rule'];
+        let resultExpression: KernelExpression;
+        const prerequisites:
+            CoreCategoricalDependentApplicationPrerequisiteId[] = [
+                'sigma-projection-pullback',
+                'sigma-pi-uncurrying-proof'
+            ];
+        if (weakeningSection !== undefined) {
+            rule = 'categorical.displayed-functor-weakening';
+            prerequisites.push(
+                'sigma-first-projection',
+                'section-pullback-functor',
+                'constant-displayed-family-object'
+            );
+            resultExpression = this.lowerDisplayedSectionWeakening(
+                weakeningSection,
+                baseCategory,
+                sourceFamily,
+                targetFamily,
+                nodeProvenance
+            );
+        } else {
+            if (endpointCompilation === undefined) {
+                throw new Error(
+                    'Displayed endpoint compilation disappeared'
+                );
+            }
+            rule = chain.length === 0
+                ? 'categorical.displayed-functor-identity'
+                : chain.length === 1
+                    ? 'categorical.displayed-functor-eta'
+                    : 'categorical.displayed-functor-composition';
+            prerequisites.push(
+                ...endpointCompilation.dependentPrerequisites
+            );
+            resultExpression = endpointCompilation.expression;
+        }
+
+        const resultType: CoreType = {
+            tag: 'displayed-functor',
+            category: this.displayedFunctorCategory(
+                baseCategory,
+                sourceFamily,
+                targetFamily,
+                nodeProvenance
+            ),
+            baseCategory,
+            sourceFamily,
+            targetFamily
+        };
+        const resultNode: TemporaryCategoricalNode = {
+            tag: 'explicit-core-term',
+            term: resultExpression,
+            provenance: nodeProvenance
+        };
+        const remainingUsage = removeUsage(
+            removeUsage(body.usage, fibreOrdinal),
+            baseOrdinal
+        );
+        const recovered = weakeningSection === undefined &&
+            endpointCompilation !== undefined
+            ? [...endpointCompilation.recovered]
+            : [...(weakeningSection as InternalCoreCategoricalTerm)
+                .closed!.recovered];
+        const closed = deepFreeze({
+            term: resultExpression,
+            type: copyCoreType(resultType),
+            sourceSpan: this.spanFor(nodeProvenance),
+            recovered
+        });
+        const result = this.makeTerm(
+            resultNode,
+            resultType,
+            remainingUsage,
+            closed,
+            body.abstractions,
+            false,
+            weakeningSection === undefined
+                ? {}
+                : {
+                    displayedSectionWeakening: {
+                        section: weakeningSection
+                    }
+                }
+        );
+        return {
+            rule,
+            chainLength: chain.length,
+            result,
+            dependentPrerequisites: Object.freeze(prerequisites)
+        };
+    }
+
     /**
      * First direct displayed-functor abstraction.
      *
@@ -14512,155 +14752,19 @@ export class CoreCategoricalScopedBuilder {
                 ),
                 nodeProvenance
             );
-            if (
-                body.type.tag !== 'indexed-object' ||
-                body.type.indexOrdinal !== baseOrdinal ||
-                !kernelExpressionEquals(
-                    body.type.baseCategory,
-                    baseCategory
-                ) ||
-                !kernelExpressionEquals(
-                    body.type.family,
-                    targetFamily
-                )
-            ) {
-                this.fail(
-                    'CLASSIFIER_ARGUMENT_MISMATCH',
-                    nodeProvenance,
-                    `Displayed-functor abstraction '${name}' body is not an ` +
-                    'object of the target family over its hidden base'
-                );
-            }
-            const weakeningSection =
-                this.displayedSectionWeakeningBody(
-                    body,
-                    fibreOrdinal,
-                    baseOrdinal,
-                    baseCategory,
-                    targetFamily
-                );
-            let chain:
-                readonly InternalCoreCategoricalTerm[] = [];
-            let endpointCompilation:
-                CoreCategoricalDirectDisplayedEndpointCompilation |
-                undefined;
-            if (weakeningSection === undefined) {
-                endpointCompilation =
-                    this.compileDirectDisplayedFunctorEndpoint(
-                        body,
-                        nodeProvenance
-                    );
-                const candidate = this.directDisplayedFunctorChain(
-                    body,
-                    fibreOrdinal,
-                    baseOrdinal,
-                    baseCategory,
-                    sourceFamily
-                );
-                if (
-                    candidate === undefined ||
-                    endpointCompilation === undefined ||
-                    !kernelExpressionEquals(
-                        endpointCompilation.targetFamily,
-                        targetFamily
-                    )
-                ) {
-                    this.fail(
-                        'UNAVAILABLE_DISPLAYED_ACTION',
-                        nodeProvenance,
-                        'The displayed binder accepts identity, eta, a ' +
-                            'finite closed displayed-functor chain, or the ' +
-                            'exact qualified section weakening'
-                    );
-                }
-                chain = candidate;
-            }
-
-            let rule:
-                | 'categorical.displayed-functor-identity'
-                | 'categorical.displayed-functor-eta'
-                | 'categorical.displayed-functor-composition'
-                | 'categorical.displayed-functor-weakening';
-            let resultExpression: KernelExpression;
-            const prerequisites:
-                CoreCategoricalDependentApplicationPrerequisiteId[] = [
-                    'sigma-projection-pullback',
-                    'sigma-pi-uncurrying-proof'
-                ];
-            if (weakeningSection !== undefined) {
-                rule = 'categorical.displayed-functor-weakening';
-                prerequisites.push(
-                    'sigma-first-projection',
-                    'section-pullback-functor',
-                    'constant-displayed-family-object'
-                );
-                resultExpression =
-                    this.lowerDisplayedSectionWeakening(
-                        weakeningSection,
-                        baseCategory,
-                        sourceFamily,
-                        targetFamily,
-                        nodeProvenance
-                    );
-            } else {
-                if (endpointCompilation === undefined) {
-                    throw new Error(
-                        'Displayed endpoint compilation disappeared'
-                    );
-                }
-                rule = chain.length === 0
-                    ? 'categorical.displayed-functor-identity'
-                    : chain.length === 1
-                        ? 'categorical.displayed-functor-eta'
-                        : 'categorical.displayed-functor-composition';
-                prerequisites.push(
-                    ...endpointCompilation.dependentPrerequisites
-                );
-                resultExpression = endpointCompilation.expression;
-            }
-
-            const resultType: CoreType = {
-                tag: 'displayed-functor',
-                category: this.displayedFunctorCategory(
-                    baseCategory,
-                    sourceFamily,
-                    targetFamily,
-                    nodeProvenance
-                ),
+            const factorization = this.factorDisplayedFunctorBody(
+                name,
+                body,
+                fibreOrdinal,
+                baseOrdinal,
                 baseCategory,
                 sourceFamily,
-                targetFamily
-            };
-            const resultNode: TemporaryCategoricalNode = {
-                tag: 'explicit-core-term',
-                term: resultExpression,
-                provenance: nodeProvenance
-            };
-            const remainingUsage = removeUsage(
-                removeUsage(body.usage, fibreOrdinal),
-                baseOrdinal
+                targetFamily,
+                nodeProvenance
             );
-            const closed = deepFreeze({
-                term: resultExpression,
-                type: copyCoreType(resultType),
-                sourceSpan: this.spanFor(nodeProvenance),
-                recovered:
-                    weakeningSection === undefined &&
-                    endpointCompilation !== undefined
-                        ? [...endpointCompilation.recovered]
-                        : [...(weakeningSection as
-                            InternalCoreCategoricalTerm)
-                            .closed!.recovered]
-            });
-            const provisional = this.makeTerm(
-                resultNode,
-                resultType,
-                remainingUsage,
-                closed,
-                body.abstractions
-            );
+            const provisional = factorization.result;
             const evidence = deepFreeze({
-                rule,
+                rule: factorization.rule,
                 name,
                 plicity,
                 variation: 'functorial' as const,
@@ -14670,7 +14774,7 @@ export class CoreCategoricalScopedBuilder {
                 sourceCategory: baseCategory,
                 sourceFamily,
                 targetFamily,
-                chainLength: chain.length,
+                chainLength: factorization.chainLength,
                 body: this.normalizeNode(
                     body,
                     [
@@ -14685,27 +14789,277 @@ export class CoreCategoricalScopedBuilder {
                 ),
                 structuralPrerequisites: Object.freeze([]),
                 dependentPrerequisites:
-                    Object.freeze(prerequisites),
+                    factorization.dependentPrerequisites,
                 provenance: nodeProvenance
             });
             return this.makeTerm(
-                resultNode,
-                resultType,
-                remainingUsage,
-                closed,
+                provisional.node,
+                provisional.type,
+                provisional.usage,
+                provisional.closed,
                 [...body.abstractions, evidence],
                 false,
-                weakeningSection === undefined
+                provisional.displayedSectionWeakening === undefined
                     ? {}
                     : {
                         displayedSectionWeakening: {
-                            section: weakeningSection
+                            section:
+                                provisional.displayedSectionWeakening
+                                    .section
                         }
                     }
             );
         } finally {
             this.activeDisplayedBases.delete(baseOrdinal);
             this.activeTokenOrdinals.shift();
+            this.activeTokenOrdinals.shift();
+        }
+    }
+
+    /**
+     * Open-fibre `lambda^f` nested in the active ordinary `lambda^n`.
+     *
+     * This is a construction-only bridge. It shares the compact `:^fd` body
+     * factorer, then presents the recovered whole displayed functor as the
+     * component of `Transf_cat K Cat_cat E D` at the active base token.
+     */
+    contextualDisplayedFunctorLambda(
+        name: string,
+        baseCategory: KernelExpression,
+        sourceFamily: KernelExpression,
+        targetFamily: KernelExpression,
+        baseTokenValue: CoreCategoricalSlotToken,
+        bodyBuilder: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        assertSafeIdentifier(name, 'Contextual displayed-functor hint');
+        kernelAssertScoped(baseCategory);
+        kernelAssertScoped(sourceFamily);
+        kernelAssertScoped(targetFamily);
+        const nodeProvenance = this.nodeProvenance(
+            `contextual displayed-functor abstraction ${name}`,
+            options.provenance
+        );
+        if (
+            this.options.displayedFunctorAbstraction !== true ||
+            this.options.ordinaryNaturalAbstraction !== true
+        ) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Expanded lambda^n/lambda^f composition requires both ' +
+                    'reviewed ordinary-natural and displayed-functor ' +
+                    'abstraction capabilities'
+            );
+        }
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'functorial';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'displayed';
+        if (
+            variation !== 'functorial' ||
+            dependency !== 'displayed'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Contextual displayed-functor binder '${name}' requires ` +
+                    'functorial variation and displayed dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                `Contextual displayed-functor binder '${name}' is ` +
+                    'covariant'
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Expanded lambda^n/lambda^f abstracts one fibre object'
+            );
+        }
+
+        const baseToken = this.requireTerm(
+            baseTokenValue,
+            nodeProvenance
+        );
+        if (
+            baseToken.node.tag !== 'slot-token' ||
+            baseToken.type.tag !== 'object' ||
+            !kernelExpressionEquals(
+                baseToken.type.category,
+                baseCategory
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Scoped fibre categories require the active base-object ' +
+                    'slot of their displayed family'
+            );
+        }
+        const baseOrdinal = baseToken.node.ordinal;
+        const context = this.activeOrdinaryNaturalContexts.find(candidate =>
+            candidate.ordinal === baseOrdinal
+        );
+        if (
+            context === undefined ||
+            this.activeTokenOrdinals[0] !== baseOrdinal ||
+            !kernelExpressionEquals(
+                context.sourceCategory,
+                baseCategory
+            ) ||
+            !kernelExpressionEquals(
+                context.targetCategory,
+                this.categoryOfCategories(nodeProvenance)
+            ) ||
+            !kernelExpressionEquals(
+                context.sourceFunctor,
+                sourceFamily
+            ) ||
+            !kernelExpressionEquals(
+                context.targetFunctor,
+                targetFamily
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Open fibre abstraction must be nested immediately under ' +
+                    'the matching Transf_cat K Cat_cat E D binder'
+            );
+        }
+
+        const fibreToken = this.indexedObjectSlot(
+            name,
+            baseCategory,
+            sourceFamily,
+            baseOrdinal,
+            nodeProvenance
+        );
+        const fibreOrdinal = fibreToken.node.tag === 'slot-token'
+            ? fibreToken.node.ordinal
+            : -1;
+        const outerScope = this.activeTokenOrdinals.slice(1);
+        const previousBase = this.activeDisplayedBases.get(baseOrdinal);
+        if (previousBase !== undefined && previousBase !== baseToken) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Active displayed base is owned by a different token'
+            );
+        }
+        this.activeTokenOrdinals.unshift(fibreOrdinal);
+        this.activeDisplayedBases.set(baseOrdinal, baseToken);
+        try {
+            // Evaluate exactly once; no callback is retained.
+            const body = this.requireTerm(
+                bodyBuilder(
+                    fibreToken as CoreCategoricalSlotToken
+                ),
+                nodeProvenance
+            );
+            const factorization = this.factorDisplayedFunctorBody(
+                name,
+                body,
+                fibreOrdinal,
+                baseOrdinal,
+                baseCategory,
+                sourceFamily,
+                targetFamily,
+                nodeProvenance
+            );
+            const provisional = factorization.result;
+            if (provisional.closed === undefined) {
+                throw new Error(
+                    'Contextual displayed factorization lost explicit Core'
+                );
+            }
+            const displayedEvidence = deepFreeze({
+                rule: factorization.rule,
+                name,
+                plicity,
+                variation: 'functorial' as const,
+                polarity: 'covariant' as const,
+                cellLevel: 'object' as const,
+                dependency: 'displayed' as const,
+                sourceCategory: baseCategory,
+                sourceFamily,
+                targetFamily,
+                chainLength: factorization.chainLength,
+                body: this.normalizeNode(
+                    body,
+                    [fibreOrdinal, baseOrdinal, ...outerScope]
+                ),
+                result: this.normalizeNode(
+                    provisional,
+                    outerScope
+                ),
+                structuralPrerequisites: Object.freeze([]),
+                dependentPrerequisites:
+                    factorization.dependentPrerequisites,
+                provenance: nodeProvenance
+            });
+            const factored = this.makeTerm(
+                provisional.node,
+                provisional.type,
+                provisional.usage,
+                provisional.closed,
+                [...body.abstractions, displayedEvidence],
+                false,
+                provisional.displayedSectionWeakening === undefined
+                    ? {}
+                    : {
+                        displayedSectionWeakening: {
+                            section:
+                                provisional.displayedSectionWeakening
+                                    .section
+                        }
+                    }
+            );
+            const componentType:
+                InternalCoreCategoricalOrdinaryNaturalComponentClassifier = {
+                    tag: 'ordinary-natural-component',
+                    sourceCategory: context.sourceCategory,
+                    targetCategory: context.targetCategory,
+                    sourceFunctor: context.sourceFunctor,
+                    targetFunctor: context.targetFunctor,
+                    indexOrdinal: baseOrdinal
+                };
+            return this.makeTerm(
+                {
+                    tag: 'explicit-core-term',
+                    term: provisional.closed.term,
+                    provenance: nodeProvenance
+                },
+                componentType,
+                mergeUsage(
+                    factored.usage,
+                    [[baseOrdinal, 1]]
+                ),
+                undefined,
+                factored.abstractions,
+                false,
+                {
+                    contextualDisplayedFunctor: { factored }
+                }
+            );
+        } finally {
+            if (previousBase === undefined) {
+                this.activeDisplayedBases.delete(baseOrdinal);
+            } else {
+                this.activeDisplayedBases.set(
+                    baseOrdinal,
+                    previousBase
+                );
+            }
             this.activeTokenOrdinals.shift();
         }
     }
@@ -14718,7 +15072,9 @@ export class CoreCategoricalScopedBuilder {
         targetFunctor: KernelExpression,
         expression: KernelExpression,
         recovered: ElaboratedSurfaceTerm['recovered'],
-        nodeProvenance: Provenance
+        nodeProvenance: Provenance,
+        abstractions:
+            readonly CoreCategoricalAbstractionEvidence[] = []
     ): InternalCoreCategoricalTerm {
         const resultType: CoreType = {
             tag: 'transfor',
@@ -14741,7 +15097,8 @@ export class CoreCategoricalScopedBuilder {
             },
             resultType,
             [],
-            closed
+            closed,
+            abstractions
         );
     }
 
@@ -15065,7 +15422,39 @@ export class CoreCategoricalScopedBuilder {
         }
         const nodeProvenance = term.node.provenance;
         let result: InternalCoreCategoricalTerm | undefined;
-        if (
+        if (term.contextualDisplayedFunctor !== undefined) {
+            const factored =
+                term.contextualDisplayedFunctor.factored;
+            if (
+                factored.type.tag !== 'displayed-functor' ||
+                factored.closed === undefined ||
+                factored.usage.length !== 0 ||
+                !kernelExpressionEquals(
+                    factored.type.baseCategory,
+                    term.type.sourceCategory
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFamily,
+                    term.type.sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFamily,
+                    term.type.targetFunctor
+                )
+            ) {
+                return undefined;
+            }
+            result = this.recoveredOrdinaryTransfor(
+                term.type.sourceCategory,
+                term.type.targetCategory,
+                term.type.sourceFunctor,
+                term.type.targetFunctor,
+                factored.closed.term,
+                factored.closed.recovered,
+                nodeProvenance,
+                factored.abstractions
+            );
+        } else if (
             term.node.tag === 'typed-application' &&
             term.node.judgment.target === 'transfor-component-capped' &&
             term.node.argument[CORE_CATEGORICAL_BOUNDARY] !== true
@@ -16863,7 +17252,10 @@ export class CoreCategoricalScopedBuilder {
             : -1;
         const context: CoreCategoricalOrdinaryNaturalContext = {
             ordinal,
-            sourceCategory
+            sourceCategory,
+            targetCategory,
+            sourceFunctor,
+            targetFunctor
         };
         this.activeTokenOrdinals.unshift(ordinal);
         this.activeOrdinaryNaturalContexts.unshift(context);
@@ -16955,8 +17347,11 @@ export class CoreCategoricalScopedBuilder {
                 | 'categorical.ordinary-transfor-eta'
                 | 'categorical.ordinary-transfor-identity'
                 | 'categorical.ordinary-transfor-composition'
-                | 'categorical.ordinary-transfor-whiskering' =
-                body.node.tag === 'typed-cell-identity'
+                | 'categorical.ordinary-transfor-whiskering'
+                | 'categorical.ordinary-transfor-contextual-functor' =
+                body.contextualDisplayedFunctor !== undefined
+                    ? 'categorical.ordinary-transfor-contextual-functor'
+                    : body.node.tag === 'typed-cell-identity'
                     ? 'categorical.ordinary-transfor-identity'
                     : body.node.tag === 'typed-cell-composition'
                         ? 'categorical.ordinary-transfor-composition'
@@ -17005,7 +17400,16 @@ export class CoreCategoricalScopedBuilder {
                 factored.type,
                 factored.usage,
                 closed,
-                [...factored.abstractions, evidence]
+                [...factored.abstractions, evidence],
+                false,
+                body.contextualDisplayedFunctor === undefined
+                    ? {}
+                    : {
+                        contextualDisplayedFunctor: {
+                            factored:
+                                body.contextualDisplayedFunctor.factored
+                        }
+                    }
             );
         } finally {
             const activeContext =

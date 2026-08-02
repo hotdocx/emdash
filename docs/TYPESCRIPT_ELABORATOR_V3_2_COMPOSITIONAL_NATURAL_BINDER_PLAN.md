@@ -31,6 +31,10 @@ existing active owners, rejects arbitrary point arrows, and leaves compact
 The expanded first-hom proposal was frozen at
 `5929b2962ea6fe3465047556f9992bab4a827971` and independently approved under
 [`D-DTTLF-USABILITY-076`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D076_REVIEW.md).
+Its implementation is final-focused-green and ready for a rollback-safe
+semantic checkpoint. Literal typed `lambda^n k. lambda^f a` now shares the
+compact `:^fd` recursive factorer and emits byte-identical Core while retaining
+the ordinary `Transf_cat` facade.
 
 ## Objective
 
@@ -706,6 +710,43 @@ coherence payload, text syntax, browser behavior, or second-hom expanded
 `lambda^n k. lambda^n a` implementation. The second-hom bridge is the
 dependency-ready semantic successor if this first-hom architecture is green.
 
+## `COMPOSITIONAL-FD-EXPANDED-1C` Implementation Result
+
+The reviewed architecture is implemented without a kernel or explicit-Core
+delta:
+
+1. `fibre(E,k)` returns a branded construction-only scoped fibre category
+   when `k` is an active ordinary-natural token. The descriptor contains no
+   `KernelExpression`, cannot compile as a closed category, and fails after
+   its callback or across program instances.
+2. `lambda(a,E[k],D[k],body)` creates the fibre token and delegates identity,
+   eta, finite chain, and qualified weakening to the exact helper now shared
+   with compact `displayedFunctorLambda`.
+3. `transforLambda(k,E,D,...)` retains the expanded
+   `Transf_cat K Cat_cat E D` rich type and the shared factorization metadata,
+   while its explicit term is byte-identical to compact `Functord_cat E D`.
+4. Closed component elimination refines the `Hom_cat Cat_cat` result to the
+   expected fibre functor, so object and fibre-arrow action remain iterable.
+   The existing outer `tapp1` action is observed through the byte-identical
+   compact displayed-functor owner. The separately reserved general ordinary-
+   transfor Hom-boundary API is not widened in this slice.
+
+The focused matrix is effectively five of five green. The first full focused
+run passed eta/Core parity, identity/chain parity, all negative cases, and
+root/compact preservation; it exposed only a misplaced wrapper-metadata
+argument in the action group. After the local correction, the formerly
+failing closed fibre object/arrow/base-arrow action group passed in isolation.
+No semantic group was rerun for reassurance.
+
+Workspace validation, root typecheck, complete changed-file lint, and exact
+diff hygiene pass. The mandated root `check:ts` was run exactly once: its
+workspace, typecheck, and lint phases pass, and the new behavior reaches the
+root runner without a feature failure. The aggregate remains non-green only
+on unrelated stale active-kernel digest/source-position and declaration-count
+pins plus the already recorded README line-wrap assertion. Those contracts
+are outside this semantic tranche, and the aggregate must not be repeated for
+this unchanged boundary.
+
 ## Read-Only `COMPOSITIONAL-NATURAL-BINDER-0A` Audit
 
 This row changes no behavior. It must:
@@ -786,8 +827,8 @@ Any later implementation proposal must include at least:
 | `COMPOSITIONAL-NATURAL-BINDER-1B` | final-focused-green at `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d` | completed 0A; D-074 and D-075 | Rich `transfor` assumptions and reusable root `transforLambda` pass eta, identity, recursive composition, both whiskers, arbitrary-arrow rejection, scope/callback/immutability, closed elimination, generic checking, and compact-`:^nd` preservation. The first slice deliberately rejects an outer contextual capture. |
 | `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` | final-focused-green at `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d` | focused 1B failure; D-075; existing `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func` | Imports exactly two existing classifier-exact action signatures and uses them for pre/postwhiskering. Adds zero rules, kernel owners, Core nodes, checker branches, or external coherence fields. |
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
-| `COMPOSITIONAL-FD-EXPANDED-1C` | independently reviewed-approved; implementation dependency-ready | completed 0C; D-076; existing first-hom runtime bridge | Add construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))`; share the existing `:^fd` factorer and preserve exact Core while retaining the ordinary `Transf_cat` facade. |
-| `COMPOSITIONAL-ND-EXPANDED-1D` | deferred successor | green 1C | Reuse the same architecture at the second hom for expanded `lambda^n k. lambda^n a` and compact `:^nd`; do not implement before first-hom parity is proven. |
+| `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green; semantic checkpoint pending | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
+| `COMPOSITIONAL-ND-EXPANDED-1D` | dependency-ready read-only audit/proposal | green 1C | Reuse the architecture at the second hom for expanded `lambda^n k. lambda^n a` and compact `:^nd`; freeze and independently review an exact behavior slice before implementation. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
 
 ## Explicit Non-Claims
@@ -864,8 +905,10 @@ checkpoint. Treat read-only
 recheck unchanged under the canonical expanded facades, and the selected
 architecture is one shared scoped contextual factorer with thin
 presentation-specific wrappers. Treat the independently approved
-`COMPOSITIONAL-FD-EXPANDED-1C` proposal as the dependency-ready slice. Natural
-transformation bodies
+`COMPOSITIONAL-FD-EXPANDED-1C` proposal as final-focused-green after its
+rollback-safe semantic checkpoint. Continue with only the read-only
+`COMPOSITIONAL-ND-EXPANDED-1D` audit/proposal; do not implement the second-hom
+bridge before a separate review. Natural transformation bodies
 must be recursively constructed from internal owners and fail closed without
 them. Keep the existing compact factorers as rollback evidence until exact
 same-Core/action parity supports delegation. Preserve object, arrow,
@@ -879,6 +922,14 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — COMPOSITIONAL-FD-EXPANDED-1C final-focused-green.** Literal
+  typed `lambda^n k. lambda^f a` uses callback-scoped fibre categories and the
+  extracted compact `:^fd` factorer. Eta, identity, and finite chains emit
+  byte-identical Core under distinct facades; closed fibre object/arrow action,
+  internal base-arrow ownership, scope rejection, negative factorization, and
+  predecessor preservation pass. Static gates pass. The sole root aggregate
+  remains non-green only on unrelated stale kernel pins/counts and the known
+  README line-wrap assertion and must not be repeated.
 - **2026-08-02 — D-DTTLF-USABILITY-076 approved.** A separate review of exact
   proposal checkpoint `5929b2962ea6fe3465047556f9992bab4a827971` confirms
   that the scoped fibre descriptor adds no LF semantics and cannot escape as a

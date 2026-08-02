@@ -353,6 +353,8 @@ export const CORE_CATEGORICAL_DIRECT_MIXED_INTRODUCTION_PROGRAM_REVISION =
 
 const CORE_CATEGORICAL_CATEGORY =
     Symbol('CoreCategoricalProgramCategory');
+const CORE_CATEGORICAL_SCOPED_FIBRE_CATEGORY =
+    Symbol('CoreCategoricalProgramScopedFibreCategory');
 const CORE_CATEGORICAL_DISPLAYED_FAMILY =
     Symbol('CoreCategoricalProgramDisplayedFamily');
 const CORE_CATEGORICAL_GROUPED_SEQUENTIAL_CONTEXT =
@@ -367,6 +369,24 @@ interface InternalCoreCategoricalCategory
 extends CoreCategoricalCategory {
     readonly programIdentity: symbol;
     readonly expression: KernelExpression;
+}
+
+/**
+ * Callback-scoped fibre category `E[k]`.
+ *
+ * It is construction metadata, not a closed category or Kernel expression.
+ * Only a qualified nested categorical abstraction may eliminate it.
+ */
+export interface CoreCategoricalScopedFibreCategory {
+    readonly [CORE_CATEGORICAL_SCOPED_FIBRE_CATEGORY]: true;
+    readonly label: string;
+}
+
+interface InternalCoreCategoricalScopedFibreCategory
+extends CoreCategoricalScopedFibreCategory {
+    readonly programIdentity: symbol;
+    readonly family: InternalCoreCategoricalDisplayedFamily;
+    readonly baseToken: CoreCategoricalSlotToken;
 }
 
 export interface CoreCategoricalDisplayedFamily {
@@ -1403,16 +1423,63 @@ export class CoreCategoricalProgram {
         });
     }
 
+    private isScopedFibreCategory(
+        value: unknown
+    ): value is CoreCategoricalScopedFibreCategory {
+        return typeof value === 'object' &&
+            value !== null &&
+            (value as CoreCategoricalScopedFibreCategory)[
+                CORE_CATEGORICAL_SCOPED_FIBRE_CATEGORY
+            ] === true;
+    }
+
+    private requireScopedFibreCategory(
+        value: CoreCategoricalScopedFibreCategory,
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalScopedFibreCategory {
+        if (
+            !this.isScopedFibreCategory(value) ||
+            (value as InternalCoreCategoricalScopedFibreCategory)
+                .programIdentity !== this.programIdentity
+        ) {
+            throw new CoreCategoricalProgramError(
+                'FOREIGN_CATEGORY',
+                nodeProvenance,
+                'Scoped fibre category belongs to another program'
+            );
+        }
+        return value as InternalCoreCategoricalScopedFibreCategory;
+    }
+
+    private makeScopedFibreCategory(
+        family: InternalCoreCategoricalDisplayedFamily,
+        baseToken: CoreCategoricalSlotToken
+    ): CoreCategoricalScopedFibreCategory {
+        return Object.freeze({
+            [CORE_CATEGORICAL_SCOPED_FIBRE_CATEGORY]: true as const,
+            programIdentity: this.programIdentity,
+            label: `${family.label}[context]`,
+            family,
+            baseToken
+        });
+    }
+
+    private isDisplayedFamily(
+        value: unknown
+    ): value is CoreCategoricalDisplayedFamily {
+        return typeof value === 'object' &&
+            value !== null &&
+            (value as CoreCategoricalDisplayedFamily)[
+                CORE_CATEGORICAL_DISPLAYED_FAMILY
+            ] === true;
+    }
+
     private requireDisplayedFamily(
         value: CoreCategoricalDisplayedFamily,
         nodeProvenance: Provenance
     ): InternalCoreCategoricalDisplayedFamily {
         if (
-            typeof value !== 'object' ||
-            value === null ||
-            (value as InternalCoreCategoricalDisplayedFamily)[
-                CORE_CATEGORICAL_DISPLAYED_FAMILY
-            ] !== true ||
+            !this.isDisplayedFamily(value) ||
             (value as InternalCoreCategoricalDisplayedFamily)
                 .programIdentity !== this.programIdentity
         ) {
@@ -3814,9 +3881,21 @@ export class CoreCategoricalProgram {
 
     fibre(
         familyValue: CoreCategoricalDisplayedFamily,
+        point: CoreCategoricalSlotToken,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalScopedFibreCategory;
+
+    fibre(
+        familyValue: CoreCategoricalDisplayedFamily,
         point: CoreCategoricalTerm,
         source?: CoreCategoricalSourceSite
-    ): CoreCategoricalCategory {
+    ): CoreCategoricalCategory;
+
+    fibre(
+        familyValue: CoreCategoricalDisplayedFamily,
+        point: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalCategory | CoreCategoricalScopedFibreCategory {
         const nodeProvenance = this.at(
             'displayed fibre category',
             source
@@ -3826,6 +3905,27 @@ export class CoreCategoricalProgram {
             nodeProvenance
         );
         const pointInspection = this.builder.inspect(point);
+        if (pointInspection.ir.tag === 'slot-reference') {
+            if (
+                pointInspection.type.tag !== 'object' ||
+                !coreObjectCategoryEquals(
+                    pointInspection.type.category,
+                    family.baseCategory.expression
+                )
+            ) {
+                throw new CoreCategoricalProgramError(
+                    'EXPECTED_CATEGORY_OBJECT',
+                    nodeProvenance,
+                    `Scoped fibre point for displayed family ` +
+                        `'${family.label}' is not an object of base ` +
+                        `category '${family.baseCategory.label}'`
+                );
+            }
+            return this.makeScopedFibreCategory(
+                family,
+                point as CoreCategoricalSlotToken
+            );
+        }
         if (
             pointInspection.type.tag === 'indexed-object' ||
             pointInspection.type.tag === 'indexed-functor' ||
@@ -6648,8 +6748,32 @@ export class CoreCategoricalProgram {
 
     lambda(
         name: string,
+        sourceValue: CoreCategoricalScopedFibreCategory,
+        targetValue: CoreCategoricalScopedFibreCategory,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options?: CoreCategoricalLambdaOptions
+    ): CoreCategoricalTerm;
+
+    lambda(
+        name: string,
         sourceValue: CoreCategoricalCategory,
         targetValue: CoreCategoricalCategory,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options?: CoreCategoricalLambdaOptions
+    ): CoreCategoricalTerm;
+
+    lambda(
+        name: string,
+        sourceValue:
+            | CoreCategoricalCategory
+            | CoreCategoricalScopedFibreCategory,
+        targetValue:
+            | CoreCategoricalCategory
+            | CoreCategoricalScopedFibreCategory,
         body: (
             token: CoreCategoricalSlotToken
         ) => CoreCategoricalTerm,
@@ -6659,6 +6783,60 @@ export class CoreCategoricalProgram {
             `categorical abstraction ${name}`,
             options.source
         );
+        const sourceIsScoped =
+            this.isScopedFibreCategory(sourceValue);
+        const targetIsScoped =
+            this.isScopedFibreCategory(targetValue);
+        if (sourceIsScoped || targetIsScoped) {
+            if (!sourceIsScoped || !targetIsScoped) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    'Contextual categorical abstraction requires both ' +
+                        'source and target to be scoped fibre categories'
+                );
+            }
+            this.requireFibredBinder(nodeProvenance);
+            this.requireOrdinaryNatural(nodeProvenance);
+            const sourceCategory = this.requireScopedFibreCategory(
+                sourceValue,
+                nodeProvenance
+            );
+            const targetCategory = this.requireScopedFibreCategory(
+                targetValue,
+                nodeProvenance
+            );
+            if (
+                sourceCategory.baseToken !== targetCategory.baseToken ||
+                !kernelExpressionEquals(
+                    sourceCategory.family.baseCategory.expression,
+                    targetCategory.family.baseCategory.expression
+                )
+            ) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    'Contextual categorical abstraction requires source ' +
+                        'and target fibres at the same active base token'
+                );
+            }
+            return this.builder.contextualDisplayedFunctorLambda(
+                name,
+                sourceCategory.family.baseCategory.expression,
+                sourceCategory.family.expression,
+                targetCategory.family.expression,
+                sourceCategory.baseToken,
+                body,
+                {
+                    plicity: options.plicity,
+                    variation: options.variation,
+                    polarity: options.polarity,
+                    cellLevel: options.cellLevel,
+                    dependency: options.dependency,
+                    provenance: nodeProvenance
+                }
+            );
+        }
         const sourceCategory = this.requireCategory(
             sourceValue,
             nodeProvenance
@@ -6689,8 +6867,32 @@ export class CoreCategoricalProgram {
      */
     transforLambda(
         name: string,
+        sourceFunctorValue: CoreCategoricalDisplayedFamily,
+        targetFunctorValue: CoreCategoricalDisplayedFamily,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options?: CoreCategoricalLambdaOptions
+    ): CoreCategoricalTerm;
+
+    transforLambda(
+        name: string,
         sourceFunctorValue: CoreCategoricalTerm,
         targetFunctorValue: CoreCategoricalTerm,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options?: CoreCategoricalLambdaOptions
+    ): CoreCategoricalTerm;
+
+    transforLambda(
+        name: string,
+        sourceFunctorValue:
+            | CoreCategoricalTerm
+            | CoreCategoricalDisplayedFamily,
+        targetFunctorValue:
+            | CoreCategoricalTerm
+            | CoreCategoricalDisplayedFamily,
         body: (
             token: CoreCategoricalSlotToken
         ) => CoreCategoricalTerm,
@@ -6701,6 +6903,56 @@ export class CoreCategoricalProgram {
             options.source
         );
         this.requireOrdinaryNatural(nodeProvenance);
+        const sourceIsDisplayed =
+            this.isDisplayedFamily(sourceFunctorValue);
+        const targetIsDisplayed =
+            this.isDisplayedFamily(targetFunctorValue);
+        if (sourceIsDisplayed || targetIsDisplayed) {
+            if (!sourceIsDisplayed || !targetIsDisplayed) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    `Ordinary natural abstraction '${name}' requires ` +
+                        'two ordinary functors or two displayed families'
+                );
+            }
+            this.requireFibredBinder(nodeProvenance);
+            const sourceFamily = this.requireDisplayedFamily(
+                sourceFunctorValue,
+                nodeProvenance
+            );
+            const targetFamily = this.requireDisplayedFamily(
+                targetFunctorValue,
+                nodeProvenance
+            );
+            if (!kernelExpressionEquals(
+                sourceFamily.baseCategory.expression,
+                targetFamily.baseCategory.expression
+            )) {
+                throw new CoreCategoricalProgramError(
+                    'DISPLAYED_BASE_MISMATCH',
+                    nodeProvenance,
+                    `Ordinary natural abstraction '${name}' requires ` +
+                        'displayed families over one base category'
+                );
+            }
+            return this.builder.transforLambda(
+                name,
+                sourceFamily.baseCategory.expression,
+                this.categoryOfCategoriesExpression(nodeProvenance),
+                sourceFamily.expression,
+                targetFamily.expression,
+                body,
+                {
+                    plicity: options.plicity,
+                    variation: options.variation,
+                    polarity: options.polarity,
+                    cellLevel: options.cellLevel,
+                    dependency: options.dependency,
+                    provenance: nodeProvenance
+                }
+            );
+        }
         const sourceFunctor = this.requireFunctorTerm(
             sourceFunctorValue,
             nodeProvenance,

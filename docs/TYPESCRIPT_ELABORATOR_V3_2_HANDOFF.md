@@ -27,19 +27,27 @@
 > compact wrapper need not literally invoke the public expanded callback API,
 > but it should ultimately reuse the same body compiler and Core result.
 >
-> The exact next slice is `COMPOSITIONAL-FD-EXPANDED-1C`, independently
-> approved under
+> `COMPOSITIONAL-FD-EXPANDED-1C` is implemented and final-focused-green under
 > [`D-DTTLF-USABILITY-076`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D076_REVIEW.md)
 > from immutable proposal checkpoint
-> `5929b2962ea6fe3465047556f9992bab4a827971`. It adds a construction-only
-> open-fibre
-> descriptor and literal typed
+> `5929b2962ea6fe3465047556f9992bab4a827971`. A construction-only open-fibre
+> descriptor now enables literal typed
 > `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))`, reusing the existing
 > compact `:^fd` identity/eta/chain/qualified-weakening factorer and retaining
-> the ordinary `Transf_cat` facade. It adds no Core/kernel owner, cast, curry,
-> external coherence, text/browser behavior, or second-hom implementation.
-> Expanded `lambda^n k. lambda^n a` is the immediate separately reviewed
-> successor after first-hom same-Core/action parity. Keep both canonical
+> the ordinary `Transf_cat` facade. Eta, identity, and finite chains have
+> byte-identical compact/expanded Core; closed component elimination exposes
+> fibre object and arrow action, while the existing compact owner witnesses
+> the same internal base-arrow action. The effective focused matrix is 5/5,
+> and workspace/typecheck/lint/diff hygiene pass. The single root aggregate
+> was run once and remains non-green only on unrelated stale kernel digest,
+> source-position/count pins, and the known README line-wrap assertion. Do not
+> repeat it for this boundary. This slice adds no Core/kernel owner, cast,
+> curry, external coherence, text/browser behavior, or second-hom behavior.
+>
+> The exact next row is the read-only
+> `COMPOSITIONAL-ND-EXPANDED-1D` audit/proposal. It must determine and freeze
+> the analogous shared-factorer bridge for literal
+> `lambda^n k. lambda^n a` before any second-hom implementation. Keep both canonical
 > covariant comparisons distinct from mixed-variance
 > `Functor_catd`/`Transf_catd` sections.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
