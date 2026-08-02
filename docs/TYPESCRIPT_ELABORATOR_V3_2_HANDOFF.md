@@ -428,12 +428,13 @@
 > whiskers. The exact
 > `CONTEXTUAL-ND-HORIZONTAL-IDENTITY-NORMALIZATION-FOUNDATION-1ZC` /
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-ACTION-CORRECTION-01 /
-> D-DTTLF-USABILITY-061 proposal is frozen in the living continuation plan and
-> decision-pending. Its bounded unstaged witness makes both point equations
-> equal without a Lambdapi edit, declaration, owner, Core/checker case,
-> external coherence, or wider `:^nd` claim. Do not retain or checkpoint that
-> semantic correction until the documentation-only proposal receives a
-> separate review.
+> D-DTTLF-USABILITY-061 proposal at
+> `46eadbfaa919237076a25d3f84ffe54f59ef3a25` is separately reviewed-approved
+> under the standing unattended delegation. Its bounded witness makes both
+> point equations equal without a Lambdapi edit, declaration, owner,
+> Core/checker case, external coherence, or wider `:^nd` claim. Implement only
+> its exact inferred-slot and three-rule acquisition correction, then resume
+> D-058.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
