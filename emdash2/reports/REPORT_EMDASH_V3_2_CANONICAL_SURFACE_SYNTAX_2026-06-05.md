@@ -463,6 +463,7 @@ iota_ell                   := comm_ring_localization_map(R,f,ell)
 unit(1_R)                  := comm_ring_one_unit(R)
 idLoc_R(f,u)               := comm_ring_unit_identity_localization(R,f,u)
 idLoc_R(1_R)               := comm_ring_identity_localization_at_one(R)
+zeroLoc_R                  := comm_ring_zero_localization(R)
 IterLoc_R(f,g)             := CommRingIteratedLocalizationAt(R,f,g)
 CompLoc_R(f,g,m,p)         := CommRingIteratedLocalizationComparison(m,p).
 

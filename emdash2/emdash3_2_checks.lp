@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -20044,6 +20044,54 @@ assert (R : τ CommRing)
     x
   ≡ x;
 /* End of the PSSS-08c0F unit-localization diagnostics. */
+
+// catalog-area: Localization at zero in the zero ring
+// Multiplication by zero is derived from distributivity and additive inverses.
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_mul_zero_right R x
+  : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R x (@comm_ring_zero R))
+      (@comm_ring_zero R));
+
+// Invertible zero constructively forces zero=one in the target.
+assert (R : τ CommRing)
+  (unit : τ (@CommRingUnitEvidence R (@comm_ring_zero R))) ⊢
+  @comm_ring_zero_unit_zero_one R unit
+  : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_zero R)
+      (@comm_ring_one R));
+
+// Every admissible structured map has a contractible factorization through 0.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S))
+  (zero_one : τ (@= (@comm_ring_carrier S)
+      (@comm_ring_zero S)
+      (@comm_ring_one S))) ⊢
+  @comm_ring_zero_localization_factor_is_contr R S h zero_one
+  : τ (IsContr (@CommRingLocalizationFactor
+      R zero_comm_ring S (@comm_ring_hom_to_zero R) h));
+
+// The selected universal-property localization at zero is always available.
+assert (R : τ CommRing) ⊢
+  @comm_ring_zero_localization R
+  : τ (@CommRingLocalizationAt R (@comm_ring_zero R));
+
+// Its target and carrier action compute to the zero ring and its unique point.
+assert (R : τ CommRing) ⊢
+  @comm_ring_localization_target
+    R (@comm_ring_zero R) (@comm_ring_zero_localization R)
+  ≡ zero_comm_ring;
+
+assert (R : τ CommRing)
+  (x : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_hom_apply
+    R zero_comm_ring
+    (@comm_ring_localization_map
+      R (@comm_ring_zero R) (@comm_ring_zero_localization R))
+    x
+  ≡ tt;
+/* End of the PSSS-08c0F zero-localization diagnostics. */
 
 // catalog-area: Iterated commutative-ring localization comparison
 // Stable structured composition exposes its selected carrier action.

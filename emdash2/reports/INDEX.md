@@ -58,6 +58,13 @@ full localization universal property by constructing the factorization space
 and proving it contractible. It supplies canonical unit evidence for one and
 a selected computing localization `R[1/1] = R`, without fractions, topology,
 `Spec`, or schemes.
+`emdash3_2_commutative_algebra_localization_zero.lp` is the following
+rule-free PSSS-08c0F empty-basic-open layer. It derives multiplication and
+negation at zero from the retained ring laws, constructs structured maps to
+the zero ring and back from any ring with `0=1`, and proves that the zero ring
+has the full universal property of `R[1/0]`. It is a degenerate but genuinely
+computing non-identity-shaped localization, not the still-required
+nondegenerate localization or affine-overlap model.
 `emdash3_2_commutative_algebra_localization_comparison.lp` is the following
 rule-free overlap layer: it packages localization first at `f` and then at the
 image of `g`, and constructs canonical forward/reverse factors against

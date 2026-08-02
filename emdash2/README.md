@@ -66,6 +66,9 @@ mathematical reading is in
 - `emdash3_2_commutative_algebra_localization_unit.lp` constructs the
   pointwise identity as the universal localization of any already invertible
   element. In particular, localization at one computes to the original ring.
+- `emdash3_2_commutative_algebra_localization_zero.lp` derives multiplication
+  and negation at zero, proves that invertible zero forces a contractible
+  carrier, and constructs the computing universal localization `R[1/0]=0`.
 - `emdash3_2_commutative_algebra_localization_comparison.lp` owns product-unit
   algebra and the universal-property comparison between localization at `f*g` and
   localization first at `f`, then at the image of `g`. It retains canonical
@@ -125,6 +128,9 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_localization_unit.lp` — the rule-free
   identity localization of an already-unit element and the canonical
   localization at one for every ring;
+- `emdash3_2_commutative_algebra_localization_zero.lp` — the rule-free
+  universal localization at zero in the zero ring, providing the
+  computational empty-basic-open case without fraction syntax;
 - `emdash3_2_commutative_algebra_localization_comparison.lp` — stable
   pointwise ring-map composition plus universal-property iterated/product-
   localization comparison data, without fractions or package equality;

@@ -77,8 +77,11 @@ native whole witness. The first parametric algebra model is promoted in the
 rule-free identity-localization-at-a-unit module. Focused and maintained
 aggregates, the fresh 1,942-check catalog, and synchronized 76-target health
 are green. Full integration CI is also green, and the tranche is locally
-checkpointed at `4b93619`. A genuinely nontrivial localization and overlap
-remain open.
+checkpointed at `4b93619`. A rule-free `R[1/0]=0` empty-basic-open candidate
+is now green through maintained aggregates, the fresh 1,948-check catalog,
+synchronized 78-target health, and full integration CI; its local checkpoint
+follows the final exact staged-diff audit. A genuinely nondegenerate
+localization and overlap remain open.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2898,6 +2901,49 @@ checkpointed at `4b93619`. This is a genuine parametric identity-localization
 model, but not yet the required nontrivial localization or an
 `OmegaEquivAlong` model of matching descent.
 
+The next representation-free endpoint is localization at zero. The candidate
+`emdash3_2_commutative_algebra_localization_zero.lp` first derives the
+elementary laws
+
+```text
+x*0=0,   0*x=0,   -0=0
+```
+
+from the retained ring axioms. If `0` is a unit, its unit law and `0*x=0`
+give `0=1`; multiplication by that equality then contracts every carrier
+element to zero. This supplies the unique structured map from the zero ring
+to any admissible target. Together with the unique point map `R->0`,
+structured-map extensionality, and the property-valued agreement fibre, it
+proves the complete factorization classifier contractible and constructs
+
+```text
+comm_ring_zero_localization(R) : Loc_R(0)
+target(comm_ring_zero_localization(R)) = zero_comm_ring
+map(comm_ring_zero_localization(R))(x) = tt.
+```
+
+The candidate has 504 lines, twenty-one symbols, zero rules, and zero
+unification rules. Its 124-line reviewer has sixteen assertions. Focused
+source, reviewer, and central checks pass. The warning-enabled research probe
+inherits exactly `1179 = 1020 + 159`; because the candidate is rule-free it
+introduces no warning location. Maintained `make check` and the complete
+reviewer suite pass. Six central diagnostics raise the fresh strict catalog to
+1,948 checks across 83 mapped areas with zero unclassified entries. Health
+passes all 78 source/example targets in 510.118 summed check-seconds at source
+snapshot
+`sha256:b7b459ffd7f1e003cfca1bda95097fe44b3f592e5aea0c9cbb9b46c6dfba5ee2`.
+Full integration CI independently passes all 78 Lambdapi targets in 528.561
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The local checkpoint follows the final exact staged-diff audit.
+
+This is the computational empty-basic-open case and a non-identity-shaped
+localization of an arbitrary source ring, but it is algebraically degenerate.
+It therefore does not discharge the planned nondegenerate localization or
+first affine-overlap gates, and it supplies no matching `OmegaEquivAlong`,
+topology, `Spec`, or scheme claim.
+
 The third audit is the first affine overlap calculation. It must compare the
 existing universal-property localizations
 
@@ -3893,6 +3939,13 @@ consumer demonstrates that nontransitive unification requires it.
   ring. This closes only the parametric identity-localization stage; it does
   not discharge the genuinely nontrivial localization, matching-equivalence,
   or first-overlap gates.
+- **PSSS-D-086:** retain localization at zero as the next separate rule-free
+  standard-library layer. Derive zero multiplication and negation from the
+  existing ring laws, derive carrier contraction from invertible zero, and
+  prove `R[1/0]=zero_comm_ring` by the full contractible-factorization
+  interface. Treat it as the computational empty-basic-open endpoint, not as
+  closure of the nondegenerate localization, matching-equivalence, or overlap
+  gates.
 
 ## 19. Side-Task Ledger
 
@@ -3919,7 +3972,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
-| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and parametric identity-localization tranche green through full CI and locally checkpointed at `4b93619`; nontrivial model and overlap remain open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; rule-free zero-localization/empty-open tranche green through 78-target health and full CI with local checkpoint following the final staged audit; nondegenerate model and overlap remain open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

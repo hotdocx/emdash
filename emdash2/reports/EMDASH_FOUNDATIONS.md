@@ -1343,6 +1343,33 @@ This closes only the identity-localization stage of the computational-scheme
 audit. A genuinely nontrivial localization representation and its first
 iterated/basic-open overlap remain required.
 
+The next rule-free layer computes the opposite degenerate endpoint. The ring
+axioms first derive
+
+```text
+x * 0 = 0,
+0 * x = 0,
+-0 = 0.
+```
+
+Consequently explicit unit evidence for zero gives `0=1`, after which every
+carrier element equals zero. The unique point map from `R` to the zero ring
+therefore satisfies the full localization universal property:
+
+```text
+comm_ring_zero_localization(R) : Loc_R(0)
+target(comm_ring_zero_localization(R)) = zero_comm_ring
+map(comm_ring_zero_localization(R))(x) = tt.
+```
+
+An admissible map `h:R->S` sends zero to an invertible element; transport along
+its zero-preservation path makes `0_S` invertible and hence proves `0_S=1_S`.
+That path constructs the unique structured factor `zero_comm_ring -> S`, and
+structured-map extensionality plus the proposition-valued agreement fibre
+makes the complete factorization Sigma contractible. This is the
+computational empty-basic-open case. It is not yet a nondegenerate fraction
+model or the required first affine overlap.
+
 This is a representation-independent interface. Concrete fractions,
 finite/unimodular families, powers, concrete polynomial representations, and
 Zariski constructions remain separately consumer-gated layers.
@@ -3592,6 +3619,8 @@ kernel and one-way library vocabulary.
 | chosen localization target/map | `comm_ring_localization_target` / `comm_ring_localization_map` |
 | identity localization of an already-unit element | `comm_ring_unit_identity_localization R f unit` |
 | canonical computing localization at one | `comm_ring_identity_localization_at_one R` |
+| canonical computing localization at zero | `comm_ring_zero_localization R` |
+| structured point map to the zero ring | `comm_ring_hom_to_zero R` |
 | stable pointwise structured-map identity | `comm_ring_hom_id_pointwise R` |
 | stable pointwise structured-map composite | `comm_ring_hom_comp_pointwise g f` |
 | localization first at `f`, then at the image of `g` | `CommRingIteratedLocalizationAt R f g` |

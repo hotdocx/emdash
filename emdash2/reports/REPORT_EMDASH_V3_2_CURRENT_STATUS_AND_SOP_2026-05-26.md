@@ -87,6 +87,12 @@ detailed probe evidence.
   element. In particular, every ring has a selected localization at one whose
   target and carrier action compute to that ring and the identity. It adds no
   fraction representation, topology, `Spec`, or scheme.
+- `emdash3_2_commutative_algebra_localization_zero.lp`: one-way rule-free
+  empty-basic-open layer. It derives multiplication and negation at zero,
+  proves that invertible zero forces `0=1` and contracts the carrier, and
+  constructs the zero ring as the universal localization `R[1/0]`. This is a
+  degenerate but computing non-identity-shaped model, not a nondegenerate
+  fraction, presheaf, topology, overlap, `Spec`, or scheme interface.
 - `emdash3_2_commutative_algebra_localization_comparison.lp`: one-way rule-free
   overlap layer. It derives unit multiplication/factor extraction, packages
   localization first at `f` and then at the image of `g`, and constructs
@@ -2251,6 +2257,31 @@ verification. The implementation and synchronized authority prose are locally
 checkpointed at `4b93619`. This does not yet provide a genuinely nontrivial
 localization, native matching equivalence model, first overlap, `Spec`, or
 scheme.
+
+The subsequent PSSS-08c0F empty-open candidate is the 504-line, 21-symbol
+rule-free `emdash3_2_commutative_algebra_localization_zero.lp` module. It
+derives `x*0=0`, `0*x=0`, and `-0=0`; transports admissible unit evidence to
+zero in the target; proves that invertible zero forces `0=1` and hence every
+carrier element equals zero; and uses the resulting structured point map to
+prove the complete localization-factor Sigma contractible. Thus every ring
+has a selected universal-property localization `R[1/0]` whose target is the
+zero ring and whose carrier action computes to `tt`. Its 124-line reviewer has
+sixteen assertions. Focused source, reviewer, and central checks pass; the
+warning-enabled research probe inherits exactly `1179 = 1020 + 159` with no
+candidate rule or unifier. Maintained `make check` and the complete reviewer
+suite pass. Six central diagnostics raise the fresh strict catalog to 1,948
+checks across 83 mapped areas with zero unclassified entries. Health passes
+all 78 source/example targets in 510.118 summed check-seconds at source
+snapshot
+`sha256:b7b459ffd7f1e003cfca1bda95097fe44b3f592e5aea0c9cbb9b46c6dfba5ee2`.
+Full integration CI independently passes all 78 Lambdapi targets in 528.561
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The local checkpoint follows the final exact staged-diff audit.
+This provides the computational empty-basic-open endpoint but deliberately
+does not close the nondegenerate localization, native matching-equivalence,
+or affine-overlap gates.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

@@ -27,6 +27,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),
     Path("emdash3_2_commutative_algebra_localization_unit.lp"),
+    Path("emdash3_2_commutative_algebra_localization_zero.lp"),
     Path("emdash3_2_commutative_algebra_localization_comparison.lp"),
     Path("emdash3_2_commutative_algebra_presheaves.lp"),
     Path("emdash3_2_walking_end_hit.lp"),

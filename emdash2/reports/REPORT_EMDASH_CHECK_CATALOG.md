@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1942
-- Mapped areas: 82
+- Total checks: 1948
+- Mapped areas: 83
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -90,6 +90,7 @@ stable mathematical-area scopes rather than source locations.
 | Structured commutative-ring morphisms and category | 11 |
 | Universal-property commutative-ring localization | 12 |
 | Identity localization at a unit | 5 |
+| Localization at zero in the zero ring | 6 |
 | Iterated commutative-ring localization comparison | 12 |
 | Finite commutative-ring cover presentations | 22 |
 | Polynomial-algebra universal property | 18 |
@@ -2272,186 +2273,197 @@ stable mathematical-area scopes rather than source locations.
 | 1812 | 20033 | `assert (R : τ CommRing) ⊢ @comm_ring_localization_target R (@comm_ring_one R) (@comm_ring_identity_localization_at_o ...` |
 | 1813 | 20038 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @comm_ring_hom_apply R R (@comm_ring_localization_map R (@c ...` |
 
+### Localization at zero in the zero ring
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1814 | 20050 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @comm_ring_mul_zero_right R x : τ (@= (@comm_ring_carrier R ...` |
+| 1815 | 20058 | `assert (R : τ CommRing) (unit : τ (@CommRingUnitEvidence R (@comm_ring_zero R))) ⊢ @comm_ring_zero_unit_zero_one R u ...` |
+| 1816 | 20066 | `assert (R S : τ CommRing) (h : τ (@CommRingHom R S)) (zero_one : τ (@= (@comm_ring_carrier S) (@comm_ring_zero S) (@ ...` |
+| 1817 | 20076 | `assert (R : τ CommRing) ⊢ @comm_ring_zero_localization R : τ (@CommRingLocalizationAt R (@comm_ring_zero R));` |
+| 1818 | 20081 | `assert (R : τ CommRing) ⊢ @comm_ring_localization_target R (@comm_ring_zero R) (@comm_ring_zero_localization R) ≡ ze ...` |
+| 1819 | 20086 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @comm_ring_hom_apply R zero_comm_ring (@comm_ring_localizat ...` |
+
 ### Iterated commutative-ring localization comparison
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1814 | 20050 | `assert (R S T : τ CommRing) (g : τ (@CommRingHom S T)) (f : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) ⊢ @ ...` |
-| 1815 | 20060 | `assert (R S T : τ CommRing) (g : τ (@CommRingHom S T)) (f : τ (@CommRingHom R S)) ⊢ @comm_ring_hom_comp_pointwise_pa ...` |
-| 1816 | 20069 | `assertnot (R S T : τ CommRing) (g : τ (@CommRingHom S T)) (f : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) ...` |
-| 1817 | 20078 | `assert (R S : τ CommRing) (h : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) (u : τ (@CommRingUnitEvidence R ...` |
-| 1818 | 20086 | `assert (R : τ CommRing) (x y : τ (@comm_ring_carrier R)) (u : τ (@CommRingUnitEvidence R x)) (v : τ (@CommRingUnitEv ...` |
-| 1819 | 20093 | `assert (R : τ CommRing) (x y : τ (@comm_ring_carrier R)) (u : τ (@CommRingUnitEvidence R (@comm_ring_mul R x y))) ⊢ ...` |
-| 1820 | 20099 | `assert (R : τ CommRing) (x y : τ (@comm_ring_carrier R)) (u : τ (@CommRingUnitEvidence R (@comm_ring_mul R x y))) ⊢ ...` |
-| 1821 | 20106 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) ⊢ @CommRingIteratedLocalizationAt R f g : Grpd;` |
-| 1822 | 20111 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) (iterated : τ (@CommRingIteratedLocalizationAt R f g)) ⊢ @c ...` |
-| 1823 | 20124 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
-| 1824 | 20134 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
-| 1825 | 20146 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
+| 1820 | 20098 | `assert (R S T : τ CommRing) (g : τ (@CommRingHom S T)) (f : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) ⊢ @ ...` |
+| 1821 | 20108 | `assert (R S T : τ CommRing) (g : τ (@CommRingHom S T)) (f : τ (@CommRingHom R S)) ⊢ @comm_ring_hom_comp_pointwise_pa ...` |
+| 1822 | 20117 | `assertnot (R S T : τ CommRing) (g : τ (@CommRingHom S T)) (f : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) ...` |
+| 1823 | 20126 | `assert (R S : τ CommRing) (h : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) (u : τ (@CommRingUnitEvidence R ...` |
+| 1824 | 20134 | `assert (R : τ CommRing) (x y : τ (@comm_ring_carrier R)) (u : τ (@CommRingUnitEvidence R x)) (v : τ (@CommRingUnitEv ...` |
+| 1825 | 20141 | `assert (R : τ CommRing) (x y : τ (@comm_ring_carrier R)) (u : τ (@CommRingUnitEvidence R (@comm_ring_mul R x y))) ⊢ ...` |
+| 1826 | 20147 | `assert (R : τ CommRing) (x y : τ (@comm_ring_carrier R)) (u : τ (@CommRingUnitEvidence R (@comm_ring_mul R x y))) ⊢ ...` |
+| 1827 | 20154 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) ⊢ @CommRingIteratedLocalizationAt R f g : Grpd;` |
+| 1828 | 20159 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) (iterated : τ (@CommRingIteratedLocalizationAt R f g)) ⊢ @c ...` |
+| 1829 | 20172 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
+| 1830 | 20182 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
+| 1831 | 20194 | `assert (R : τ CommRing) (f g : τ (@comm_ring_carrier R)) (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
 
 ### Finite commutative-ring cover presentations
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1826 | 20161 | `assert [A : Grpd] ⊢ @FiniteFamily A zero ≡ Unit_grpd;` |
-| 1827 | 20163 | `assert [A : Grpd] (n : τ Nat_grpd) ⊢ @FiniteFamily A (succ n) ≡ @Σ_ A (λ _ : τ A, @FiniteFamily A n);` |
-| 1828 | 20167 | `assertnot [A : Grpd] (n : τ Nat_grpd) ⊢ @FiniteFamily A (succ n) ≡ @Product_grpd A (@FiniteFamily A n);` |
-| 1829 | 20171 | `assertnot [A : Grpd] (xs : τ (@FiniteFamily A zero)) ⊢ xs ≡ @finite_family_nil A;` |
-| 1830 | 20175 | `assert [A B : Grpd] (f : τ (@Function_grpd A B)) (n : τ Nat_grpd) (x : τ A) (xs : τ (@FiniteFamily A n)) ⊢ @finite_f ...` |
-| 1831 | 20185 | `assert (R : τ CommRing) ⊢ @comm_ring_finite_sum R zero (@finite_family_nil (@comm_ring_carrier R)) ≡ @comm_ring_zero R;` |
-| 1832 | 20189 | `assert (R : τ CommRing) (n : τ Nat_grpd) (x : τ (@comm_ring_carrier R)) (xs : τ (@FiniteFamily (@comm_ring_carrier R ...` |
-| 1833 | 20197 | `assert (R : τ CommRing) (n : τ Nat_grpd) (a f : τ (@comm_ring_carrier R)) (as0 fs0 : τ (@FiniteFamily (@comm_ring_ca ...` |
-| 1834 | 20208 | `assert (A : Grpd) (A_is_set : τ (IsSetGrpd A)) (n : τ Nat_grpd) ⊢ @finite_family_is_set A A_is_set n : τ (IsSetGrpd ...` |
-| 1835 | 20214 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (n : τ Nat_grpd) (xs : τ (@FiniteFamily (@comm_ring_carrier R) ...` |
-| 1836 | 20229 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (n : τ Nat_grpd) (as0 fs0 : τ (@FiniteFamily (@comm_ring_carrie ...` |
-| 1837 | 20249 | `assert [R : τ CommRing] (n : τ Nat_grpd) (generators : τ (@FiniteFamily (@comm_ring_carrier R) n)) ⊢ @comm_ring_unim ...` |
-| 1838 | 20255 | `assert (R : τ CommRing) ⊢ @comm_ring_zariski_cover_is_set R : τ (IsSetGrpd (@CommRingZariskiCoverPresentation R));` |
-| 1839 | 20259 | `assert (R : τ CommRing) ⊢ @comm_ring_zariski_cover_length R (@comm_ring_unit_zariski_cover R) ≡ succ zero;` |
-| 1840 | 20263 | `assert (R : τ CommRing) ⊢ @comm_ring_zariski_cover_generators R (@comm_ring_unit_zariski_cover R) ≡ @finite_family_s ...` |
-| 1841 | 20269 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢ @comm_ring_ ...` |
-| 1842 | 20275 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢ @comm_ring_ ...` |
-| 1843 | 20282 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢ @comm_ring_ ...` |
-| 1844 | 20295 | `assert (R : τ CommRing) ⊢ @comm_ring_unimodular_coefficients R (succ zero) (@finite_family_singleton (@comm_ring_car ...` |
-| 1845 | 20307 | `assert (R : τ CommRing) ⊢ @comm_ring_unimodular_law R (succ zero) (@finite_family_singleton (@comm_ring_carrier R) ( ...` |
-| 1846 | 20327 | `assert (R : τ CommRing) ⊢ @comm_ring_zariski_cover_unimodular R (@comm_ring_unit_zariski_cover R) : τ (@CommRingUnim ...` |
-| 1847 | 20339 | `assert [R : τ CommRing] (f g a b : τ (@comm_ring_carrier R)) (law : τ (@= (@comm_ring_carrier R) (@comm_ring_add R ( ...` |
+| 1832 | 20209 | `assert [A : Grpd] ⊢ @FiniteFamily A zero ≡ Unit_grpd;` |
+| 1833 | 20211 | `assert [A : Grpd] (n : τ Nat_grpd) ⊢ @FiniteFamily A (succ n) ≡ @Σ_ A (λ _ : τ A, @FiniteFamily A n);` |
+| 1834 | 20215 | `assertnot [A : Grpd] (n : τ Nat_grpd) ⊢ @FiniteFamily A (succ n) ≡ @Product_grpd A (@FiniteFamily A n);` |
+| 1835 | 20219 | `assertnot [A : Grpd] (xs : τ (@FiniteFamily A zero)) ⊢ xs ≡ @finite_family_nil A;` |
+| 1836 | 20223 | `assert [A B : Grpd] (f : τ (@Function_grpd A B)) (n : τ Nat_grpd) (x : τ A) (xs : τ (@FiniteFamily A n)) ⊢ @finite_f ...` |
+| 1837 | 20233 | `assert (R : τ CommRing) ⊢ @comm_ring_finite_sum R zero (@finite_family_nil (@comm_ring_carrier R)) ≡ @comm_ring_zero R;` |
+| 1838 | 20237 | `assert (R : τ CommRing) (n : τ Nat_grpd) (x : τ (@comm_ring_carrier R)) (xs : τ (@FiniteFamily (@comm_ring_carrier R ...` |
+| 1839 | 20245 | `assert (R : τ CommRing) (n : τ Nat_grpd) (a f : τ (@comm_ring_carrier R)) (as0 fs0 : τ (@FiniteFamily (@comm_ring_ca ...` |
+| 1840 | 20256 | `assert (A : Grpd) (A_is_set : τ (IsSetGrpd A)) (n : τ Nat_grpd) ⊢ @finite_family_is_set A A_is_set n : τ (IsSetGrpd ...` |
+| 1841 | 20262 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (n : τ Nat_grpd) (xs : τ (@FiniteFamily (@comm_ring_carrier R) ...` |
+| 1842 | 20277 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (n : τ Nat_grpd) (as0 fs0 : τ (@FiniteFamily (@comm_ring_carrie ...` |
+| 1843 | 20297 | `assert [R : τ CommRing] (n : τ Nat_grpd) (generators : τ (@FiniteFamily (@comm_ring_carrier R) n)) ⊢ @comm_ring_unim ...` |
+| 1844 | 20303 | `assert (R : τ CommRing) ⊢ @comm_ring_zariski_cover_is_set R : τ (IsSetGrpd (@CommRingZariskiCoverPresentation R));` |
+| 1845 | 20307 | `assert (R : τ CommRing) ⊢ @comm_ring_zariski_cover_length R (@comm_ring_unit_zariski_cover R) ≡ succ zero;` |
+| 1846 | 20311 | `assert (R : τ CommRing) ⊢ @comm_ring_zariski_cover_generators R (@comm_ring_unit_zariski_cover R) ≡ @finite_family_s ...` |
+| 1847 | 20317 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢ @comm_ring_ ...` |
+| 1848 | 20323 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢ @comm_ring_ ...` |
+| 1849 | 20330 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (cover : τ (@CommRingZariskiCoverPresentation R)) ⊢ @comm_ring_ ...` |
+| 1850 | 20343 | `assert (R : τ CommRing) ⊢ @comm_ring_unimodular_coefficients R (succ zero) (@finite_family_singleton (@comm_ring_car ...` |
+| 1851 | 20355 | `assert (R : τ CommRing) ⊢ @comm_ring_unimodular_law R (succ zero) (@finite_family_singleton (@comm_ring_carrier R) ( ...` |
+| 1852 | 20375 | `assert (R : τ CommRing) ⊢ @comm_ring_zariski_cover_unimodular R (@comm_ring_unit_zariski_cover R) : τ (@CommRingUnim ...` |
+| 1853 | 20387 | `assert [R : τ CommRing] (f g a b : τ (@comm_ring_carrier R)) (law : τ (@= (@comm_ring_carrier R) (@comm_ring_add R ( ...` |
 
 ### Polynomial-algebra universal property
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1848 | 20352 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @comm_ring_hom_apply R R (@comm_ring_hom_id_pointwise R) x ≡ x;` |
-| 1849 | 20357 | `assert (R : τ CommRing) ⊢ @comm_ring_hom_id_pointwise_path R : τ (@= (@CommRingHom R R) (@comm_ring_hom_id R) (@comm ...` |
-| 1850 | 20364 | `assertnot (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @comm_ring_hom_apply R R (@comm_ring_hom_id R) x ≡ x;` |
-| 1851 | 20369 | `assert (R P S : τ CommRing) (base_map : τ (@CommRingHom R P)) (factor : τ (@CommRingHom P S)) (h : τ (@CommRingHom R ...` |
-| 1852 | 20376 | `assert (R P S : τ CommRing) (base_map : τ (@CommRingHom R P)) (factor : τ (@CommRingHom P S)) (h : τ (@CommRingHom R ...` |
-| 1853 | 20385 | `assert (X : Grpd) (P S : τ CommRing) (variables : τ (@Function_grpd X (@comm_ring_carrier P))) (factor : τ (@CommRin ...` |
-| 1854 | 20393 | `assert (X : Grpd) (P S : τ CommRing) (variables : τ (@Function_grpd X (@comm_ring_carrier P))) (factor : τ (@CommRin ...` |
-| 1855 | 20404 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
-| 1856 | 20416 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
-| 1857 | 20425 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
-| 1858 | 20440 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
-| 1859 | 20456 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
-| 1860 | 20472 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
-| 1861 | 20479 | `assert (R : τ CommRing) (X : Grpd) ⊢ @CommRingPolynomialAlgebra R X : Grpd;` |
-| 1862 | 20484 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
-| 1863 | 20495 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
-| 1864 | 20506 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
-| 1865 | 20518 | `assertnot (R : τ CommRing) (X : Grpd) (polynomial : τ (@CommRingPolynomialAlgebra R X)) ⊢ polynomial ≡ @comm_ring_po ...` |
+| 1854 | 20400 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @comm_ring_hom_apply R R (@comm_ring_hom_id_pointwise R) x ≡ x;` |
+| 1855 | 20405 | `assert (R : τ CommRing) ⊢ @comm_ring_hom_id_pointwise_path R : τ (@= (@CommRingHom R R) (@comm_ring_hom_id R) (@comm ...` |
+| 1856 | 20412 | `assertnot (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @comm_ring_hom_apply R R (@comm_ring_hom_id R) x ≡ x;` |
+| 1857 | 20417 | `assert (R P S : τ CommRing) (base_map : τ (@CommRingHom R P)) (factor : τ (@CommRingHom P S)) (h : τ (@CommRingHom R ...` |
+| 1858 | 20424 | `assert (R P S : τ CommRing) (base_map : τ (@CommRingHom R P)) (factor : τ (@CommRingHom P S)) (h : τ (@CommRingHom R ...` |
+| 1859 | 20433 | `assert (X : Grpd) (P S : τ CommRing) (variables : τ (@Function_grpd X (@comm_ring_carrier P))) (factor : τ (@CommRin ...` |
+| 1860 | 20441 | `assert (X : Grpd) (P S : τ CommRing) (variables : τ (@Function_grpd X (@comm_ring_carrier P))) (factor : τ (@CommRin ...` |
+| 1861 | 20452 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
+| 1862 | 20464 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
+| 1863 | 20473 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
+| 1864 | 20488 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
+| 1865 | 20504 | `assert (R P S : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_rin ...` |
+| 1866 | 20520 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
+| 1867 | 20527 | `assert (R : τ CommRing) (X : Grpd) ⊢ @CommRingPolynomialAlgebra R X : Grpd;` |
+| 1868 | 20532 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
+| 1869 | 20543 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
+| 1870 | 20554 | `assert (R P : τ CommRing) (X : Grpd) (base_map : τ (@CommRingHom R P)) (variables : τ (@Function_grpd X (@comm_ring_ ...` |
+| 1871 | 20566 | `assertnot (R : τ CommRing) (X : Grpd) (polynomial : τ (@CommRingPolynomialAlgebra R X)) ⊢ polynomial ≡ @comm_ring_po ...` |
 
 ### CommRing-valued presheaves and invertibility support
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1866 | 20532 | `assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢ @fapp1_id_path A B F X : τ (@= (Hom B (@fapp0 A B F X) (@ ...` |
-| 1867 | 20542 | `assert (K : Cat) ⊢ @CommRingPsh_cat K ≡ @Functor_cat (Op_cat K) CommRing_cat;` |
-| 1868 | 20546 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) ⊢ @comm_ring_psh_value K O U ≡ @fapp0 (Op_cat K) CommRing_ ...` |
-| 1869 | 20552 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) ⊢ @comm_ring_psh_restriction_hom K O ...` |
-| 1870 | 20559 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
-| 1871 | 20571 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_restr ...` |
-| 1872 | 20581 | `assertnot [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_re ...` |
-| 1873 | 20588 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) ⊢ @comm_ring_p ...` |
-| 1874 | 20606 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@CommR ...` |
-| 1875 | 20620 | `assertnot [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@Co ...` |
-| 1876 | 20632 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [x : τ (@comm_ring_carrier R)] (u : τ (@CommRingUnitEvidence R ...` |
-| 1877 | 20643 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
-| 1878 | 20653 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
-| 1879 | 20661 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@CommR ...` |
+| 1872 | 20580 | `assert [A B : Cat] (F : τ (Functor A B)) (X : τ (Obj A)) ⊢ @fapp1_id_path A B F X : τ (@= (Hom B (@fapp0 A B F X) (@ ...` |
+| 1873 | 20590 | `assert (K : Cat) ⊢ @CommRingPsh_cat K ≡ @Functor_cat (Op_cat K) CommRing_cat;` |
+| 1874 | 20594 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) ⊢ @comm_ring_psh_value K O U ≡ @fapp0 (Op_cat K) CommRing_ ...` |
+| 1875 | 20600 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) ⊢ @comm_ring_psh_restriction_hom K O ...` |
+| 1876 | 20607 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
+| 1877 | 20619 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_restr ...` |
+| 1878 | 20629 | `assertnot [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_re ...` |
+| 1879 | 20636 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) ⊢ @comm_ring_p ...` |
+| 1880 | 20654 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@CommR ...` |
+| 1881 | 20668 | `assertnot [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@Co ...` |
+| 1882 | 20680 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [x : τ (@comm_ring_carrier R)] (u : τ (@CommRingUnitEvidence R ...` |
+| 1883 | 20691 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
+| 1884 | 20701 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (f : τ (Hom K V U)) (s : τ (@CommRingPshSection K O U)) ...` |
+| 1885 | 20709 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [W V U : τ (Obj K)] (f : τ (Hom K V U)) (g : τ (Hom K W V)) (s : τ (@CommR ...` |
 
 ### CommRing-valued presheaf invertibility sieve
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1880 | 20675 | `assert (R : τ CommRing) ⊢ @fapp0 CommRing_cat Grpd_cat comm_ring_carrier_func R ≡ @comm_ring_carrier R;` |
-| 1881 | 20680 | `assert [R S : τ CommRing] ⊢ @fapp1_func CommRing_cat Grpd_cat comm_ring_carrier_func R S ≡ @path_map_func (@CommRing ...` |
-| 1882 | 20691 | `assertnot [R S : τ CommRing] (h : τ (@CommRingHom R S)) ⊢ @fapp1_fapp0 CommRing_cat Grpd_cat comm_ring_carrier_func ...` |
-| 1883 | 20698 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) ⊢ @fapp0 (Path_cat (@CommRingHom R S)) (Path_cat (@Function_grp ...` |
-| 1884 | 20710 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) ⊢ (@fapp0 (Path_cat (@CommRingHo ...` |
-| 1885 | 20723 | `assert (R : τ CommRing) ⊢ @Fibre_cat CommRing_cat comm_ring_carrier_catd R ≡ Path_cat (@comm_ring_carrier R);` |
-| 1886 | 20728 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @Fibre_cat (@Sigma_cat CommRing_cat comm_ring_carrier_catd) ...` |
-| 1887 | 20736 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ Obj (@Fibre_cat (@Sigma_cat CommRing_cat comm_ring_carrier_ ...` |
-| 1888 | 20746 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) ⊢ @fapp0 (Path_cat (@CommRingHom ...` |
-| 1889 | 20758 | `assert [K : Cat] (U : τ (Obj K)) ⊢ @eq_refl (Functor (Op_cat K) Cat_cat) (@hom_ (Op_cat K) (Op_cat K) (@id Cat_cat ( ...` |
-| 1890 | 20770 | `assertnot [K : Cat] (U : τ (Obj K)) ⊢ @hom_ (Op_cat K) (Op_cat K) (@id Cat_cat (Op_cat K)) U ≡ @hom_con K U K (@id C ...` |
-| 1891 | 20776 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (V : τ (Obj K)) ⊢ @Fibre_cat (Op_cat K) (@comm_ring_psh_carrier_catd K O) ...` |
-| 1892 | 20787 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
-| 1893 | 20801 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
-| 1894 | 20816 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
-| 1895 | 20828 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
-| 1896 | 20841 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_inver ...` |
-| 1897 | 20849 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_inver ...` |
-| 1898 | 20856 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
+| 1886 | 20723 | `assert (R : τ CommRing) ⊢ @fapp0 CommRing_cat Grpd_cat comm_ring_carrier_func R ≡ @comm_ring_carrier R;` |
+| 1887 | 20728 | `assert [R S : τ CommRing] ⊢ @fapp1_func CommRing_cat Grpd_cat comm_ring_carrier_func R S ≡ @path_map_func (@CommRing ...` |
+| 1888 | 20739 | `assertnot [R S : τ CommRing] (h : τ (@CommRingHom R S)) ⊢ @fapp1_fapp0 CommRing_cat Grpd_cat comm_ring_carrier_func ...` |
+| 1889 | 20746 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) ⊢ @fapp0 (Path_cat (@CommRingHom R S)) (Path_cat (@Function_grp ...` |
+| 1890 | 20758 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) ⊢ (@fapp0 (Path_cat (@CommRingHo ...` |
+| 1891 | 20771 | `assert (R : τ CommRing) ⊢ @Fibre_cat CommRing_cat comm_ring_carrier_catd R ≡ Path_cat (@comm_ring_carrier R);` |
+| 1892 | 20776 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ @Fibre_cat (@Sigma_cat CommRing_cat comm_ring_carrier_catd) ...` |
+| 1893 | 20784 | `assert (R : τ CommRing) (x : τ (@comm_ring_carrier R)) ⊢ Obj (@Fibre_cat (@Sigma_cat CommRing_cat comm_ring_carrier_ ...` |
+| 1894 | 20794 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (x : τ (@comm_ring_carrier R)) ⊢ @fapp0 (Path_cat (@CommRingHom ...` |
+| 1895 | 20806 | `assert [K : Cat] (U : τ (Obj K)) ⊢ @eq_refl (Functor (Op_cat K) Cat_cat) (@hom_ (Op_cat K) (Op_cat K) (@id Cat_cat ( ...` |
+| 1896 | 20818 | `assertnot [K : Cat] (U : τ (Obj K)) ⊢ @hom_ (Op_cat K) (Op_cat K) (@id Cat_cat (Op_cat K)) U ≡ @hom_con K U K (@id C ...` |
+| 1897 | 20824 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (V : τ (Obj K)) ⊢ @Fibre_cat (Op_cat K) (@comm_ring_psh_carrier_catd K O) ...` |
+| 1898 | 20835 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
+| 1899 | 20849 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
+| 1900 | 20864 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
+| 1901 | 20876 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
+| 1902 | 20889 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_inver ...` |
+| 1903 | 20897 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @comm_ring_psh_inver ...` |
+| 1904 | 20904 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) [V : τ (Obj K)] (f : τ ...` |
 
 ### Presented affine Zariski basic opens and base change
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1899 | 20871 | `assert [A : Grpd] (P : τ A → Grpd) (n : τ Nat_grpd) (x : τ A) (xs : τ (@FiniteFamily A n)) ⊢ @FiniteFamilyAll A P (s ...` |
-| 1900 | 20880 | `assert [A : Grpd] [P : τ A → Grpd] [n : τ Nat_grpd] [x : τ A] [xs : τ (@FiniteFamily A n)] (head : τ (P x)) (tail : ...` |
-| 1901 | 20893 | `assert [K : Cat] [V U : τ (Obj K)] (p : τ (Hom K V U)) (Q : τ (@Sieve K U)) (f : τ (Obj (@Into_restr_cat K V))) (mem ...` |
-| 1902 | 20904 | `assert (R : τ CommRing) (localization : τ (@CommRingLocalizationAt R (@comm_ring_one R))) ⊢ @comm_ring_zariski_cover ...` |
-| 1903 | 20911 | `assert [R : τ CommRing] [f : τ (@comm_ring_carrier R)] (localization : τ (@CommRingLocalizationAt R f)) ⊢ @into_rest ...` |
-| 1904 | 20919 | `assert [R : τ CommRing] [f : τ (@comm_ring_carrier R)] (localization : τ (@CommRingLocalizationAt R f)) ⊢ @into_rest ...` |
-| 1905 | 20928 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (target_localization : τ (@CommR ...` |
-| 1906 | 20955 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
-| 1907 | 20970 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
-| 1908 | 20998 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
-| 1909 | 21018 | `assertnot [R S T : τ CommRing] (h : τ (@CommRingHom R S)) (g : τ (@CommRingHom S T)) ⊢ @into_restr_postcompose (Op_c ...` |
-| 1910 | 21036 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
+| 1905 | 20919 | `assert [A : Grpd] (P : τ A → Grpd) (n : τ Nat_grpd) (x : τ A) (xs : τ (@FiniteFamily A n)) ⊢ @FiniteFamilyAll A P (s ...` |
+| 1906 | 20928 | `assert [A : Grpd] [P : τ A → Grpd] [n : τ Nat_grpd] [x : τ A] [xs : τ (@FiniteFamily A n)] (head : τ (P x)) (tail : ...` |
+| 1907 | 20941 | `assert [K : Cat] [V U : τ (Obj K)] (p : τ (Hom K V U)) (Q : τ (@Sieve K U)) (f : τ (Obj (@Into_restr_cat K V))) (mem ...` |
+| 1908 | 20952 | `assert (R : τ CommRing) (localization : τ (@CommRingLocalizationAt R (@comm_ring_one R))) ⊢ @comm_ring_zariski_cover ...` |
+| 1909 | 20959 | `assert [R : τ CommRing] [f : τ (@comm_ring_carrier R)] (localization : τ (@CommRingLocalizationAt R f)) ⊢ @into_rest ...` |
+| 1910 | 20967 | `assert [R : τ CommRing] [f : τ (@comm_ring_carrier R)] (localization : τ (@CommRingLocalizationAt R f)) ⊢ @into_rest ...` |
+| 1911 | 20976 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (target_localization : τ (@CommR ...` |
+| 1912 | 21003 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
+| 1913 | 21018 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
+| 1914 | 21046 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
+| 1915 | 21066 | `assertnot [R S T : τ CommRing] (h : τ (@CommRingHom R S)) (g : τ (@CommRingHom S T)) ⊢ @into_restr_postcompose (Op_c ...` |
+| 1916 | 21084 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) [f : τ (@comm_ring_carrier R)] (source_localization : τ (@CommR ...` |
 
 ### Finite selected Zariski containment and base change
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1911 | 21063 | `assert [A : Grpd] (P : τ A → Grpd) (Q : Π x : τ A, τ (P x) → Grpd) (n : τ Nat_grpd) (x : τ A) (xs : τ (@FiniteFamily ...` |
-| 1912 | 21080 | `assert [A B : Grpd] (map : τ (@Function_grpd A B)) [P : τ A → Grpd] [P2 : τ B → Grpd] [Q : Π x : τ A, τ (P x) → Grpd ...` |
-| 1913 | 21097 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (family : τ (@CommRingZariskiCoverFamily R)) (target_localizati ...` |
-| 1914 | 21114 | `assert [R : τ CommRing] (n : τ Nat_grpd) (generators : τ (@FiniteFamily (@comm_ring_carrier R) n)) (localizations : ...` |
-| 1915 | 21123 | `assert [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) (Q : τ (@Sieve (Op_cat CommRing_cat) R)) ⊢ @Com ...` |
-| 1916 | 21130 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (source_localization : τ (@CommRingLocalizationAt R (@comm_ring ...` |
+| 1917 | 21111 | `assert [A : Grpd] (P : τ A → Grpd) (Q : Π x : τ A, τ (P x) → Grpd) (n : τ Nat_grpd) (x : τ A) (xs : τ (@FiniteFamily ...` |
+| 1918 | 21128 | `assert [A B : Grpd] (map : τ (@Function_grpd A B)) [P : τ A → Grpd] [P2 : τ B → Grpd] [Q : Π x : τ A, τ (P x) → Grpd ...` |
+| 1919 | 21145 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (family : τ (@CommRingZariskiCoverFamily R)) (target_localizati ...` |
+| 1920 | 21162 | `assert [R : τ CommRing] (n : τ Nat_grpd) (generators : τ (@FiniteFamily (@comm_ring_carrier R) n)) (localizations : ...` |
+| 1921 | 21171 | `assert [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) (Q : τ (@Sieve (Op_cat CommRing_cat) R)) ⊢ @Com ...` |
+| 1922 | 21178 | `assert [R S : τ CommRing] (h : τ (@CommRingHom R S)) (source_localization : τ (@CommRingLocalizationAt R (@comm_ring ...` |
 
 ### Supplied Zariski-compatible topology
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1917 | 21159 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) ...` |
-| 1918 | 21165 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] ⊢ @is_comm_ring_zariski_compatible_topology_is_prop T : τ (IsP ...` |
-| 1919 | 21170 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢ @c ...` |
-| 1920 | 21176 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢ @c ...` |
-| 1921 | 21183 | `assert ⊢ chaotic_comm_ring_zariski_compatible_topology : τ CommRingZariskiCompatibleTopology;` |
-| 1922 | 21187 | `assert [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) (Q : τ (@Sieve (Op_cat CommRing_cat) R)) (membe ...` |
+| 1923 | 21207 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) ...` |
+| 1924 | 21213 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] ⊢ @is_comm_ring_zariski_compatible_topology_is_prop T : τ (IsP ...` |
+| 1925 | 21218 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢ @c ...` |
+| 1926 | 21224 | `assert [T : τ (@GrothTopology (Op_cat CommRing_cat))] (compatible : τ (@IsCommRingZariskiCompatibleTopology T)) ⊢ @c ...` |
+| 1927 | 21231 | `assert ⊢ chaotic_comm_ring_zariski_compatible_topology : τ CommRingZariskiCompatibleTopology;` |
+| 1928 | 21235 | `assert [R : τ CommRing] (family : τ (@CommRingZariskiCoverFamily R)) (Q : τ (@Sieve (Op_cat CommRing_cat) R)) (membe ...` |
 
 ### Invertibility-cover locality and localization factors
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1923 | 21199 | `assert [K : Cat] (T : τ (@GrothTopology K)) (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O ...` |
-| 1924 | 21208 | `assert [K : Cat] (T : τ (@GrothTopology K)) (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O ...` |
-| 1925 | 21216 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @chaotic_comm_ring_p ...` |
-| 1926 | 21224 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1927 | 21241 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1928 | 21273 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U V : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (f : τ (Hom K V U)) ...` |
-| 1929 | 21290 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U V : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
-| 1930 | 21316 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1931 | 21347 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1932 | 21366 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1929 | 21247 | `assert [K : Cat] (T : τ (@GrothTopology K)) (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O ...` |
+| 1930 | 21256 | `assert [K : Cat] (T : τ (@GrothTopology K)) (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O ...` |
+| 1931 | 21264 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) ⊢ @chaotic_comm_ring_p ...` |
+| 1932 | 21272 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1933 | 21289 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1934 | 21321 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U V : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (f : τ (Hom K V U)) ...` |
+| 1935 | 21338 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U V : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
+| 1936 | 21364 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1937 | 21395 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1938 | 21414 | `assert [K : Cat] (O : τ (@CommRingPsh K)) (U : τ (Obj K)) (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
 
 ### Localization matching restriction
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1933 | 21402 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (f : τ (Hom K V U)) ...` |
-| 1934 | 21418 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
-| 1935 | 21447 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1936 | 21468 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
-| 1937 | 21503 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1939 | 21450 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (f : τ (Hom K V U)) ...` |
+| 1940 | 21466 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
+| 1941 | 21495 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1942 | 21516 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
+| 1943 | 21551 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
 
 ### Localization glue
 
 | # | Check line | Statement |
 | ---: | ---: | --- |
-| 1938 | 21535 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1939 | 21547 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1940 | 21567 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1941 | 21589 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
-| 1942 | 21608 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
+| 1944 | 21583 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1945 | 21595 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1946 | 21615 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1947 | 21637 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1948 | 21656 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
