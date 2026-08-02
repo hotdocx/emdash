@@ -170,6 +170,10 @@ CommRing_cat`; no new naturality field, rewrite rule, functor equality, or
 univalence principle is introduced. The facade is explicitly not yet a
 selected small Zariski site, a sheaf, a locally ringed space, or a complete
 scheme.
+Its focused and central checks, exact inherited-warning audit, strict rule
+audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative
+integration remainder are green; the implementation and authority prose are
+locally checkpointed at `837cfeb`.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

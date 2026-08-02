@@ -2517,6 +2517,17 @@ not yet the small Zariski site or the claimed scheme object; the next MVP gate
 is a minimal supplied-cover/atlas package and a concrete chart-gluing
 consumer.
 
+The PSSS-10a source has 242 lines and eleven symbols with no rewrite or
+unification rules; its 154-line reviewer has ten assertions and the central
+suite adds six diagnostics. The strict catalog contains 1,981 checks across
+88 areas with no legacy or unclassified entries. Synchronized health passes
+all 90 registered targets in 712.925 summed check-seconds; the source,
+reviewer, and central checks take 8.438, 24.270, and 28.157 seconds. Both
+warning-enabled changed targets inherit exactly `1179 = 1020 + 159` warnings
+with zero changed-file locations. The strict audit and the nonduplicative
+integration remainder are green, and the implementation plus authority prose
+are locally checkpointed at `837cfeb`.
+
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
 retains its finite unimodular generators together with a dependent finite

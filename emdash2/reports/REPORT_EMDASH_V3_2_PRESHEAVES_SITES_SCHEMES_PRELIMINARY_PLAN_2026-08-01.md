@@ -129,10 +129,10 @@ and removed. `PSSS-09b2` remains a measured Lambdapi elaboration-performance
 gate for the fully expanded sieve-membership specialization. Proposition-
 valued generated coverage, propositional truncation, sheafification, whole
 categorical descent equivalence, and positive-variable polynomial
-representation remain separately consumer-gated. The latest checkpointed
-integration evidence is recorded in
-the PSSS-09cZ1 phase below; every subsequent metric remains provisional until
-its own bounded tranche is synchronized and checkpointed.
+representation remain separately consumer-gated. The latest synchronized
+integration evidence is recorded in the checkpointed PSSS-10a phase below;
+later metrics remain provisional until their own bounded tranche is
+synchronized and checkpointed.
 
 `PSSS-08c0J` is now a completed bounded research audit, not a new foundations
 programme. Existing `PiFunext`, `PathLift`, and the core-inclusion comparison
@@ -161,7 +161,8 @@ strict audit, catalog, documentation lints, and synchronized 90-target health
 are green. The next MVP gate is a minimal supplied cover/atlas and a concrete
 chart-gluing consumer; general generated topology, truncation, sheafification,
 and unrestricted functor extensionality remain off the main line until such a
-consumer actually requires them.
+consumer actually requires them. The implementation and synchronized
+authority prose are locally checkpointed at `837cfeb`.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -3861,8 +3862,9 @@ replacements for them.
 
 ### Phase PSSS-10 — Slice sites and affine charts
 
-Status: PSSS-10a computational big-slice candidate promoted and focused-green;
-small-site/topology and atlas layers remain later gates.
+Status: PSSS-10a computational big-slice implementation is green and locally
+checkpointed at `837cfeb`; small-site/topology and atlas layers remain later
+gates.
 
 ##### PSSS-10a — Big affine slice and computing overlap
 
@@ -3920,8 +3922,8 @@ The source takes 8.438 seconds, its reviewer 24.270 seconds, and the central
 diagnostics 28.157 seconds, all below the 60-second target bound. A cold
 pre-registration `make check` traversal reached the central-target timeout,
 but the focused central check and the complete synchronized health run both
-subsequently passed; it is not repeated as reassurance. The authorized local
-checkpoint remains the completion action for this tranche.
+subsequently passed; it is not repeated as reassurance. The implementation
+checkpoint is `837cfeb`.
 
 This boundary is useful precisely because it advances the computational
 scheme outline without pretending to have solved topology or sheafification.
@@ -4586,7 +4588,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09cZ1 | Supplied lawful topology plus proposition-valued Zariski-basis compatibility | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 68-target health, and full CI; locally checkpointed at `d808c29` | PSSS-09b1 and `GrothTopology` |
 | PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ2; PSSS-05b for subcanonicity |
-| PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, and synchronized 90-target health green; checkpoint pending | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
+| PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative integration remainder green; locally checkpointed at `837cfeb` | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
 | PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Next MVP gate | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
 | PSSS-10c | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | PSSS-10b consumer plus selected PSSS-09c/PSSS-08c1 scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
