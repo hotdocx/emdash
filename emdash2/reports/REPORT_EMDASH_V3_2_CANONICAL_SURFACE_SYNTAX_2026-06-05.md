@@ -663,6 +663,29 @@ elementwise step rather than inventing a rigid membership head.
 basis; it does not denote the least generated topology. The maintained
 chaotic instance is a feasibility model, not canonical `Zar` syntax.
 
+For the separately promoted direct big-affine topology, comments and examples
+may write
+
+```text
+AffBig(R)                 : conventional big affine slice over Spec(R)
+Chart_R(h)                : literal chart h : R -> S
+ChartLoc_R(h;ell)         : whole arrow Spec(S[1/f]_ell) -> Chart_R(h)
+BigZarGen(R)              : witness-rich finite chart-cover generators
+BigZar(R)                 : least topology on AffBig(R) accepting BigZarGen(R)
+family ⊆ Q => covers(Q)   : selected-family inclusion in BigZar(R)
+BigZar(R) <= T            : leastness against an accepting topology T
+```
+
+The literal owners are `AffineSpecBigSlice_cat`, `affine_spec_chart`,
+`affine_spec_chart_localization_arrow`,
+`AffineSpecBigZariskiGenerators`, `affine_spec_big_zariski_topology`,
+`affine_spec_big_zariski_topology_covers`, and
+`affine_spec_big_zariski_topology_least`. `ChartLoc` is a whole internal
+slice arrow and coordinate restriction along it computes to the selected
+whole localization map. `BigZar` names the promoted big-site topology; it
+does not identify that site with the small poset of opens, construct a
+reflector/sheafification, or denote a complete scheme.
+
 For the universal-property polynomial layer, comments and examples may write
 
 ```text
@@ -683,10 +706,11 @@ free-algebra universal property. It does not select monomials, coefficient
 syntax, quotients, or a concrete positive-variable representation. The
 reviewer equation `R[Empty] = R` is the current executable model.
 
-No concrete fraction syntax, comparison equivalence, relative radical/power
-interface, positive-variable polynomial representation, `Spec`, or
-proposition-valued Zariski topology is implied. Those names remain reserved
-for their separately gated layers.
+No concrete fraction syntax, relative radical/power interface,
+positive-variable polynomial representation, small-site Zariski topology, or
+complete scheme is implied. The direct big-affine topology is named only by
+the `BigZar` block above; its sheaf and scheme consumers remain separately
+gated.
 
 No string-parser grammar is selected by this section. It records canonical
 comments, examples, and direct TypeScript-AST intent only.

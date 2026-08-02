@@ -70,6 +70,8 @@ the split-idempotent localization and closed affine-basic-open extension is
 the computational affine big-slice, coordinate-presheaf, and internal
 basic-open-overlap extension is
 `emdash3_2_commutative_algebra_affine_spec.lp`;
+the direct internally generated big-affine Zariski-topology extension is
+`emdash3_2_commutative_algebra_affine_zariski.lp`;
 the affine Yoneda functor-of-points, semantic basic-open, and
 localization-representability extension is
 `emdash3_2_commutative_algebra_affine_points.lp`;
@@ -268,7 +270,17 @@ Use the following order:
     module is rule-free and deliberately does not identify the big slice with
     a selected small Zariski site or claim topology, sheafhood, locally ringed
     structure, or a complete scheme;
-31. `emdash3_2_commutative_algebra_affine_points.lp` for the rule-free affine
+31. `emdash3_2_commutative_algebra_affine_zariski.lp` for the rule-free
+    internally generated Zariski topology on the big affine slice. It lifts
+    each selected localization in a finite Zariski presentation to a whole
+    chart arrow, retains literal family containment as witness-rich generator
+    data, and applies the generic intersection owner to obtain a lawful least
+    topology with computing generator inclusion and leastness. Its exact
+    opposite-precomposition endpoint makes the chart triangle reflexive and
+    coordinate restriction computes to the existing whole localization map.
+    It adds no Sigma eta, external naturality/triangle field, coverhood rule,
+    localization choice, sheafification, small-site comparison, or scheme;
+32. `emdash3_2_commutative_algebra_affine_points.lp` for the rule-free affine
     Yoneda functor of points, the already-internal semantic basic-open sieve
     `D(f)`, and the constructive `TypeEquiv` between its points at each test
     ring and maps out of a selected localization `R[1/f]`. Both inverse laws
@@ -277,14 +289,14 @@ Use the following order:
     sides retain their object/arrow action at generic owners; the module adds
     no external naturality field, whole-presheaf equality, univalence
     principle, topology, sheafhood, or general scheme;
-32. `emdash3_2_commutative_algebra_affine_intersections.lp` for the rule-free
+33. `emdash3_2_commutative_algebra_affine_intersections.lp` for the rule-free
     pointwise equivalence between `D(f*g)` and the explicit intersection of
     `D(f)` and `D(g)`, together with its selected two-step representation by
     localization at `f*g`. It exposes executable forward/inverse maps and
     both component laws while the existing sieve and presheaf owners retain
     whole action; it adds no external naturality, whole-presheaf equality,
     univalence principle, topology, sheafhood, or general scheme;
-33. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
+34. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
     complementary-idempotent atlas of every product ring `R x S`. It retains
     the existing selected binary Zariski-cover family, constructs both
     internal affine chart arrows from the orthogonal overlap, and makes their
@@ -292,7 +304,7 @@ Use the following order:
     closed `F2 x F2` instance is a concrete non-endpoint atlas/glue
     presentation, not a universal gluing theorem, sheaf, locally ringed space,
     or general scheme record;
-34. `emdash3_2_ringed_sites.lp` for an assumption-explicit, rule-free
+35. `emdash3_2_ringed_sites.lp` for an assumption-explicit, rule-free
     topology- and value-category-indexed sheaf classifier, supplied whole
     inclusion/reflector adjunction, fixed-counit `OmegaEquivAlong` reflector
     evidence, and its derived whole internal mate/glue operations. It also
@@ -302,17 +314,17 @@ Use the following order:
     a chosen reflector. The module does not
     construct canonical sheafification, generated saturation, descent or left
     exactness, assert a local-ring condition, or define a scheme;
-35. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+36. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-36. `emdash3_2_checks.lp` for executable regression statements;
-37. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+37. `emdash3_2_checks.lp` for executable regression statements;
+38. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-38. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-39. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+39. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+40. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-40. `reports/INDEX.md` for task-specific plans and decision records.
-41. `book/book.json` and `book/evidence.json` for book source
+41. `reports/INDEX.md` for task-specific plans and decision records.
+42. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

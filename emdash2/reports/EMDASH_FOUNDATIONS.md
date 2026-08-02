@@ -1830,12 +1830,74 @@ univalence principle is added. The split idempotent in `F2 x F2` supplies a
 closed non-endpoint basic-open chart.
 
 This big slice is a computational precursor, not the selected small Zariski
-site and not yet a locally ringed space or complete scheme. The next MVP layer
-is a supplied finite basic-open cover/atlas with computing chart restriction
-and overlap data plus a concrete gluing consumer. Proposition-valued
-coverhood, induced slice topology, sheaf descent, subcanonicity, and general
-sheafification remain independent theorem/interface layers to add only when
-that consumer requires them.
+site and not yet a locally ringed space or complete scheme. The finite
+basic-open atlas, chart restriction, and overlap computations are separate
+downstream consumers. The direct topology on this same big slice is supplied
+by the next layer; sheaf descent, subcanonicity, comparison with the small
+site, and canonical sheafification remain independent theorem/interface
+layers.
+
+### Direct Big-Affine Zariski Topology
+
+Fix a base ring `R` and a literal chart `h : R -> S`. For a selected
+localization package `ell : CommRingLocalizationAt(S,f)`, the exact internal
+base map of the localized chart is the existing opposite-precomposition
+endpoint
+
+```text
+R --h--> S --iota_ell--> S[1/f]_ell.
+```
+
+Using this endpoint, `affine_spec_chart_localization_arrow` is a whole arrow
+
+```text
+Spec(S[1/f]_ell) -> Spec(S)
+```
+
+inside `AffineSpecBigSlice_cat(R)`. Its slice triangle is reflexive by
+construction, and applying the whole coordinate presheaf computes to the
+existing structured localization map `iota_ell : S -> S[1/f]_ell`. No
+external commutative triangle, point-only restriction field, or
+constructor-specific naturality law is stored.
+
+For a selected finite Zariski family on `S`,
+`AffineSpecChartZariskiCoverFamilyMembership` says that each of these whole
+localization-chart arrows belongs to a sieve `Q` on the literal chart. The
+arbitrary-object generator
+
+```text
+AffineSpecBigZariskiGenerators(R)
+  : SieveGeneratorFamily(AffineSpecBigSlice_cat(R))
+```
+
+uses one outer `sigma_ind` to expose the retained coordinate ring and
+structure map of a general slice object. This eliminator is semantically
+important: encoded Sigma packages have no global eta rule, so rebuilding an
+arbitrary chart from projections is not assumed convertible to the original
+object. The branch then retains a selected
+`CommRingZariskiCoverFamily(S)` together with literal containment of all its
+lifted arrows in `Q`.
+
+Applying the generic intersection construction gives
+
+```text
+affine_spec_big_zariski_topology(R)
+  : GrothTopology(AffineSpecBigSlice_cat(R)).
+```
+
+Every selected finite chart family covers, and
+`affine_spec_big_zariski_topology_least` maps its coverhood into any other
+topology accepting the same generators. The presentation witnesses remain
+available; only generated coverhood is proposition-valued. This is the least
+topology in the public inclusion order, without a cover-derivation syntax,
+decision procedure, truncation/HIT, coverhood rewrite, or global localization
+choice.
+
+The construction is the selected topology route for the first computational
+affine MVP. It does not identify the big affine site with the small site of
+opens, prove subcanonicity, construct sheafification, or package a scheme.
+Those are later consumers of this topology and of the already-computing chart,
+restriction, overlap, and Cartier-locality maps.
 
 ### Complementary-Idempotent Affine Atlas
 
@@ -3927,6 +3989,11 @@ kernel and one-way library vocabulary.
 | singleton and binary cover presentations | `comm_ring_unit_zariski_cover` / `comm_ring_binary_zariski_cover` |
 | selected localization family over generators | `CommRingLocalizationFamily R n generators` |
 | presented finite basic-open cover family | `CommRingZariskiCoverFamily R` |
+| big affine slice and coordinate presheaf | `AffineSpecBigSlice_cat R` / `affine_spec_coordinate_psh R` |
+| localized chart as a whole big-slice arrow | `affine_spec_chart_localization_arrow h localization` |
+| big-affine Zariski generator family | `AffineSpecBigZariskiGenerators R` |
+| least generated big-affine Zariski topology | `affine_spec_big_zariski_topology R` |
+| selected-family coverhood and leastness | `affine_spec_big_zariski_topology_covers` / `affine_spec_big_zariski_topology_least` |
 | chosen affine basic-open arrow | `comm_ring_basic_open_arrow localization` |
 | basic-open base-change factor and triangle | `comm_ring_basic_open_base_change_factor_map` / `comm_ring_basic_open_base_change_triangle` |
 | elementwise basic-open pullback membership | `comm_ring_basic_open_pullback_membership` |

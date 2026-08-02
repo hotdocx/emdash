@@ -193,6 +193,26 @@ Its focused and central checks, exact inherited-warning audit, strict rule
 audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative
 integration remainder are green; the implementation and authority prose are
 locally checkpointed at `837cfeb`.
+`emdash3_2_commutative_algebra_affine_zariski.lp` is the rule-free
+PSSS-10dG direct big-site topology. For every literal chart `R -> S`, a
+selected localization becomes a whole arrow in
+`AffineSpecBigSlice_cat(R)`; its exact opposite-precomposition structure
+map makes the slice triangle reflexive, and coordinate restriction computes
+to the selected whole localization map. One outer `sigma_ind` exposes an
+arbitrary retained chart, and selected finite-family containment supplies the
+witness-rich generator family. The generic intersection owner then gives the
+least lawful topology accepting those generators, with explicit selected-
+cover inclusion and leastness. The module adds no Sigma eta, external
+naturality/triangle field, topology rule, localization choice,
+sheafification, small-site identification, or scheme. Its focused
+source/reviewer checks, exact inherited-warning comparison, strict audit, and
+tooling/catalog registration are green. Exact health passes all 102 targets;
+the new source/reviewer pass from source in 24.042/23.915 seconds at
+check-content snapshot
+`sha256:01c61b02268c84c0c334b3fa3f0012c26f68ce52def9959e44a940a1bc7b300c`.
+Two unchanged near-timeout aggregates passed same-limit source retries; no
+object priming was used. The local implementation checkpoint remains to be
+recorded.
 `emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
 concrete atlas consumer. In every product ring it uses the already-selected
 finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their
@@ -289,20 +309,25 @@ health passes all 100 exact-content targets at
 the synchronized generic tranche is included in local checkpoint `d826526`.
 A HIT remains conditional on a consumer needing induction over generation
 steps or executable cover normal forms.
-The affine audit has now instantiated this generic internal
-construction with whole lifted chart presentations. Split rule-free probes
-construct every literal localization chart arrow internally, eliminate an
-arbitrary slice package once with `sigma_ind`, retain selected finite-family
-containment as witness-rich generators, and derive a least lawful topology
-directly on `AffineSpecBigSlice_cat(R)`. Quiet checks and an exact inherited
-`1020 + 159` warning comparison are green; affine promotion follows the
-generic checkpoint and its own maintained performance/SOP audit.
-The affine layer now likewise has promotion-shaped source and nine-observation
-reviewer candidates. It chooses the exact existing opposite-precomposition
-endpoint as the localized chart structure map, making the triangle reflexive;
-generic coordinate-presheaf projection still computes to the supplied whole
-localization map. This avoids exposing a protected helper or duplicating its
-extensionality proof.
+The affine specialization is now promoted as the rule-free
+`emdash3_2_commutative_algebra_affine_zariski.lp`. It constructs every
+literal localization chart arrow internally, eliminates an arbitrary slice
+package once with `sigma_ind`, retains selected finite-family containment as
+witness-rich generators, and derives a least lawful topology directly on
+`AffineSpecBigSlice_cat(R)`. The exact existing
+opposite-precomposition endpoint is the localized chart structure map, making
+the triangle reflexive; generic coordinate-presheaf projection still computes
+to the supplied whole localization map. This avoids exposing a protected
+helper, duplicating its extensionality proof, or adding an external triangle
+field. The 178-line source has seven symbols and no rules or unifiers; its
+120-line reviewer has nine assertions. Focused quiet checks, exact inherited
+`1020 + 159` warning comparisons with no changed-file warning, strict audit,
+and catalog/tooling registration are green. Synchronized health passes all
+102 exact-content targets at
+`sha256:01c61b02268c84c0c334b3fa3f0012c26f68ce52def9959e44a940a1bc7b300c`;
+the new source/reviewer pass from source in 24.042/23.915 seconds. Two
+unchanged near-timeout aggregates passed same-limit source retries, and no
+object priming was used. The local implementation checkpoint remains.
 The first affine target remains explicitly the big affine site over `R`, not
 the small site of open subsets: the internally generated big-Zariski topology,
 reflective structure sheaf, whole comparison with the computing coordinate

@@ -198,6 +198,17 @@ detailed probe evidence.
   Coordinate restriction computes through the generic Sigma projection to
   the existing whole ring maps. This is not yet a small Zariski site, sheaf,
   locally ringed space, or complete scheme.
+- `emdash3_2_commutative_algebra_affine_zariski.lp`: one-way rule-free
+  generated-topology specialization on the big affine slice. For every
+  literal chart `R -> S`, it lifts each selected localization in a finite
+  Zariski presentation to a whole slice arrow, retains containment of those
+  arrows as witness-rich generator data, and applies the generic
+  impredicative-intersection owner. The resulting topology is lawful and least
+  among topologies accepting those generators. Its exact internal composite
+  endpoint makes the chart triangle reflexive, and coordinate restriction
+  computes to the existing whole localization map. It introduces no Sigma
+  eta, external naturality or triangle field, coverhood rule, localization
+  choice, sheafification, small-site comparison, or scheme.
 - `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
   functor-of-points/basic-open layer. The existing Yoneda presheaf represents
   `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and
@@ -2801,11 +2812,40 @@ evidence/typography/KaTeX/assembly checks, the strict kernel audit, and fresh
 strict catalog verification. PSSS-09cZ1 is included in local commit
 `d808c29`.
 
-The next topology/sheaf tranche remains subordinate to the computational
-Cartier path: it must consume or expose executable restriction,
-invertibility, selected glue, localization, overlap, or chart evaluation
-needed by affine `Spec` and scheme examples. Generated topology, truncation,
-or sheafification work that lacks such a consumer stays a research side gate.
+PSSS-09cGI now supplies the generic generated-topology boundary internally.
+`GeneratedSieveCover(G,U,R)` quantifies over every Grothendieck topology
+accepting the witness-rich generator family `G`; dependent-Pi proposition
+closure makes this intersection proposition-valued without truncating the
+presentation witnesses. The three topology laws hold pointwise, while
+generator inclusion and leastness compute by application. The rule-free
+source and nine-assertion reviewer are synchronized through exact inherited
+warnings, strict audit/catalog, and 100-target exact-content health in local
+checkpoint `d826526`. A truncation/HIT remains conditional on a consumer
+needing induction over cover derivations or executable cover normal forms.
+
+PSSS-10dG is the direct affine consumer of that generic owner.
+`emdash3_2_commutative_algebra_affine_zariski.lp` constructs a selected
+localization chart as a whole arrow of
+`AffineSpecBigSlice_cat(R)`. The target structure map is exactly the
+existing opposite-precomposition composite `R -> S -> S[1/f]`, so its
+triangle proof is reflexive and coordinate restriction computes to the
+supplied whole localization map. One outer `sigma_ind` exposes an arbitrary
+big-slice chart without adding package eta; selected finite-family containment
+then supplies the witness-rich generators. The promoted 178-line source has
+seven symbols and no rules or unifiers, and its 120-line reviewer has nine
+assertions. Focused quiet checks and warning-enabled checks are green with the
+exact inherited `1179 = 1020 + 159` inventory and no changed-file warning;
+the strict audit/catalog and exact 102-target health are green. The latter
+uses source-metrics snapshot
+`sha256:8e19f00c96f37c16449d5f851107a9ca5b722f47657b2d01b224692504b1ab7e`
+and check-content snapshot
+`sha256:01c61b02268c84c0c334b3fa3f0012c26f68ce52def9959e44a940a1bc7b300c`.
+The new source and reviewer passed from source in 24.042 and 23.915 seconds.
+The unchanged central aggregate and affine-glue reviewer reached the cold
+source limit once and then passed same-limit source retries in 54.587 and
+44.889 seconds. No object priming was used. This is the intended big-affine
+Zariski topology for the computational MVP, not the small site and not yet a
+sheaf or scheme.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.
@@ -3963,14 +4003,15 @@ The following remain explicit future work rather than hidden assumptions:
 - a fully internalized general coend/coinserter semantics for profunctor tensor;
 - general tensor associativity/coherence and complete co-Yoneda equivalences;
 - dependent elimination and semantic collage construction for primitive join;
-- sheaf, ringed-site, and localization-over-support packages downstream of
-  the assembled CommRing-presheaf invertibility sieve;
-- proposition-valued Zariski coverage through either a supplied topology, an
-  independently extensional predicate, or a genuine propositional-truncation
-  reflector; generated saturation and h-level-stratified construction of
-  sheafification remain separate gates from selected computational
-  cover/containment data, while a supplied reflector/adjunction may be carried
-  explicitly without claiming such a construction;
+- a canonical or descent-characterized sheafification construction,
+  left-exactness/locality theorems, and locally ringed scheme packaging
+  downstream of the supplied reflective-sheafification capability and the
+  assembled CommRing-presheaf localization interfaces;
+- an inductive/HIT presentation of generated topology with derivation
+  induction or executable cover normal forms. The active impredicative
+  intersection already supplies proposition-valued least generated topology,
+  including the direct big-affine Zariski specialization, without truncating
+  witness-rich presentations;
 - specialized higher `fapp1*` projections of `Hom_tele_func` beyond current
   demand;
 - raw unreified-path observer computation, reverse pointwise-to-coherent-core

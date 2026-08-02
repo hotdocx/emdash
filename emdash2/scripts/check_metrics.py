@@ -50,6 +50,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_zariski_topology.lp"),
     Path("emdash3_2_commutative_algebra_localization_split.lp"),
     Path("emdash3_2_commutative_algebra_affine_spec.lp"),
+    Path("emdash3_2_commutative_algebra_affine_zariski.lp"),
     Path("emdash3_2_commutative_algebra_affine_points.lp"),
     Path("emdash3_2_commutative_algebra_affine_intersections.lp"),
     Path("emdash3_2_commutative_algebra_affine_atlas.lp"),
