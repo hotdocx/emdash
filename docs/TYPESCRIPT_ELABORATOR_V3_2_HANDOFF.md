@@ -3,7 +3,8 @@
 > **Current semantic continuation (2026-08-02):**
 > [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
 > owns the next work. D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
-> implemented and final-green with their coherent semantic checkpoint pending.
+> implemented and final-green at coherent semantic checkpoint
+> `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
 > Contextual `:^nd` now covers eta, recursive vertical composition, generic
 > identity, and fixed-head pre/postwhiskering. The whiskers reuse
 > `comp_prod_fapp1_fapp0 (Catd_cat K)`; active Lambdapi adds only its missing
@@ -452,7 +453,8 @@
 > makes both point equations equal without another Lambdapi edit, declaration,
 > owner, Core/checker case, external coherence, or wider `:^nd` claim. The
 > resulting early closure is eight declarations/seventeen local rules, and
-> D-058 is now implemented/final-green with its coherent checkpoint pending.
+> D-058 is now implemented/final-green at coherent checkpoint
+> `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
