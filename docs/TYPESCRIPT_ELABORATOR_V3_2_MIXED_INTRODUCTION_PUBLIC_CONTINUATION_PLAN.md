@@ -7979,8 +7979,10 @@ aggregate completes after 52.2 minutes and reports only the browser source-
 contract assertion for the literal eleven removed by D-072. Exact search also
 finds `emdash-template/README.md` still says eleven editable presets. The
 dedicated plan freezes D-DTTLF-USABILITY-073 for only those two expectations
-and that one additional Markdown file; implementation pauses pending separate
-review, and the aggregate must not be repeated.
+and that one additional Markdown file. It is separately reviewed-approved from
+immutable proposal checkpoint `cbc02584f827ac373be592a4a10581c10987ea0c`
+under the standing unattended delegation, with immediate human supersession;
+implementation resumes, and the aggregate must not be repeated.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7999,6 +8001,11 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-073 separately reviewed-approved.** The immutable review
+  of proposal checkpoint `cbc02584f827ac373be592a4a10581c10987ea0c`
+  approves only the two stale source expectations and one fixture-README
+  inventory phrase. Implementation resumes under immediate human
+  supersession; the completed aggregate must not be repeated.
 - **2026-08-02 — D-073 reviewer-contract correction frozen.** The sole D-070
   aggregate completes all execution after 52.2 minutes and reports only one
   stale literal-eleven source assertion. Exact search finds the matching

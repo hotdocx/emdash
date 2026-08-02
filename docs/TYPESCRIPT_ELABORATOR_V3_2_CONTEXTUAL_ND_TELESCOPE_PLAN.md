@@ -57,7 +57,10 @@ aggregate then completed after 52.2 minutes and reported only one stale
 browser-source assertion: it still requires the removed literal eleven. Exact
 search also found the standalone fixture README still promises eleven editable
 presets. D-DTTLF-USABILITY-073 below freezes the exact two-expectation/one-doc
-correction; implementation pauses pending separate review.
+correction. It is separately reviewed-approved from immutable proposal
+checkpoint `cbc02584f827ac373be592a4a10581c10987ea0c` under the standing
+unattended delegation, with immediate human supersession; implementation may
+resume without repeating the aggregate.
 
 ## Objective
 
@@ -492,7 +495,7 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | D-DTTLF-USABILITY-070 separately reviewed-approved; implementation dependency-ready | completed 0AO; proposal `41ddef0bad65f5766634c61c994f06f581f79cd0`; immutable review | Decouple contextual `:^nd` telescope availability from mixed-classifier capability while reusing the exact chain-2A runtime, then add one genuine-dependent reviewer preset and truthful README boundary. |
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` | D-DTTLF-USABILITY-071 separately reviewed-approved; implementation resumes | first D-070 browser-fixture typecheck; proposal `fcf082be07ad44b877c1b622fb4acc4293cdc84c`; immutable review | Add exactly one exhaustive label case in the existing generic UI for the new expected-mode variant. No UI flow, semantics, or preset behavior changes. |
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-COUNT-CORRECTION-1AP2` | D-DTTLF-USABILITY-072 separately reviewed-approved; implementation resumes | first real-browser D-070 snapshot; proposal `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091`; immutable review | Replace the stale literal eleven with the actual preset-array length in the existing fact strip. No layout or behavior change. |
-| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-CONTRACT-CORRECTION-1AP3` | frozen pending separate review | sole required D-070 root aggregate; exact active-source search | Update the already-authorized browser source contract for the derived count and add only the standalone fixture README so its preset inventory says twelve. No runtime, UI, semantic, or aggregate rerun. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-CONTRACT-CORRECTION-1AP3` | D-DTTLF-USABILITY-073 separately reviewed-approved; implementation resumes | sole required D-070 root aggregate; exact active-source search; proposal `cbc02584f827ac373be592a4a10581c10987ea0c`; immutable review | Update the already-authorized browser source contract for the derived count and add only the standalone fixture README so its preset inventory says twelve. No runtime, UI, semantic, or aggregate rerun. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
 
@@ -1006,6 +1009,13 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-073 separately reviewed-approved.** The
+  immutable review of proposal checkpoint
+  `cbc02584f827ac373be592a4a10581c10987ea0c` confirms that the aggregate
+  failure is one stale source-contract assertion and the additional fixture
+  README change is one matching inventory correction. Under the standing
+  unattended delegation, with immediate human supersession, implementation
+  may resume without repeating the aggregate.
 - **2026-08-02 — D-073 reviewer-contract correction frozen pending separate
   review.** The sole D-070 aggregate completed after 52.2 minutes and reported
   only the source-contract assertion for the literal eleven removed by D-072.

@@ -194,8 +194,11 @@
 > browser source-contract assertion for the removed literal eleven. Exact
 > search finds the standalone fixture README still says eleven editable
 > presets. The dedicated plan freezes D-DTTLF-USABILITY-073 for exactly those
-> two expectations and that one additional Markdown file; implementation
-> pauses pending separate review and the aggregate must not be repeated.
+> two expectations and that one additional Markdown file. It is separately
+> reviewed-approved from immutable proposal checkpoint
+> `cbc02584f827ac373be592a4a10581c10987ea0c` under the standing unattended
+> delegation, with immediate human supersession; implementation resumes and
+> the aggregate must not be repeated.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
