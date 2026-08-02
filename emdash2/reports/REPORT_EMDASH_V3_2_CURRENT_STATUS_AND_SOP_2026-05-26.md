@@ -163,6 +163,15 @@ detailed probe evidence.
   family is stored. The sieve `D(s)` need not cover, so this is not ordinary
   sheaf descent or a native `OmegaEquivAlong`/whole internal equivalence;
   generated topology, `Spec`, and schemes remain downstream.
+- `emdash3_2_commutative_algebra_affine_glue.lp`: one-way rule-free derived
+  affine consumer. For the identity CommRing presheaf on
+  `Op_cat CommRing_cat`, it evaluates coherent matching sections at the
+  localization-map support centre. Contractible factor uniqueness derives
+  the left component law, while the universal factor to each support member
+  supplies a whole Sigma arrow whose internal Pi-section action derives the
+  Cartier component law. The complete selected-glue package is constructed
+  for every chosen affine localization, including the closed split-idempotent
+  model; equality of whole functors and ordinary sheaf descent remain open.
 - `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
   affine-Zariski layer. It retains a selected localization package for each
   generator of an algebraic cover presentation, exposes chosen basic-open
@@ -2429,6 +2438,53 @@ tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, the strict kernel audit, and fresh strict catalog
 verification. The implementation and synchronized authority prose are locally
 checkpointed at `e68b6b9`.
+
+PSSS-08c0I now exercises that closed localization against the full internal
+matching layer. On `K=Op_cat CommRing_cat`, the identity functor is the affine
+CommRing-valued presheaf. Every selected localization `i:R->L` supplies a
+canonical member `(L,i)` of `D(s)`, and section evaluation there is a genuine
+glue functor. The selected centre factor is propositionally the whole
+structured identity by localization-factor contractibility, giving
+`glue(restrict(x))=x`.
+
+For any support member `(V,h,member)`, the universal factor `k:L->V` and its
+whole structured triangle form a Sigma arrow from the centre to that member.
+The sieve-evidence component is selected from the retained subterminal fibre.
+Applying the matching section's `piapp1_fapp0` action along this arrow gives
+the Cartier equation `k(glue(m))=m(V,h,member)` inside the Pi family; two
+Sigma eliminations extend it to every encoded support object. No external
+naturality square, object-only functor input, or affine-specific runtime rule
+is introduced.
+
+Nested elimination required the normalized proof-time form of the existing
+Yoneda represented-family comparison. It remains in the owning presheaf
+module, is exercised by typed reflexivity, remains explicitly non-convertible
+at runtime, and leaves the owning warning closure unchanged at 1,020
+pre-existing warnings. The new 852-line affine module has eighteen symbols
+and no rewrite/unification rules; its 135-line reviewer includes a closed
+`F2 x F2` package check. Focused source/reviewer/central checks and the strict
+audit are green. Maintained source and reviewer aggregates also pass. Seven
+central diagnostics raise the fresh strict catalog to 1,975 checks across 87
+mapped areas with zero legacy or unclassified entries. Health passes all 88
+registered source/example targets in 476.967 summed check-seconds at source
+snapshot
+`sha256:2edc4569b7b62a6f1600dc622d91857765343944141f4c94ff1f9638d75bdf9d`;
+the new source takes 46.527 seconds and its reviewer 25.946 seconds. Full
+integration CI independently passes all 88 Lambdapi targets in 546.923 summed
+check-seconds, followed by 39 Python tests, five document-registry tests,
+shell/source/header/reference checks, book evidence/typography/KaTeX/assembly
+checks, the strict kernel audit, and fresh strict catalog verification. Local
+checkpoint evidence remains pending until the active tranche closes.
+
+This result establishes that the provisional componentwise glue interface is
+constructively meaningful and sufficient for the intended Cartier
+computation on a non-endpoint affine open. It does not yet prove equality of
+the whole restriction/glue composites. The remaining whole-internal gate is
+to assemble the universal-factor centre data into reusable internal
+section/functor structure and derive the two functor paths required by
+`OmegaEquivAlong Cat_cat`, or to record the exact missing extensionality
+owner. That work must preserve internal action and must not replace the gap by
+external naturality fields or an ad hoc equality rule.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

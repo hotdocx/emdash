@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -19629,6 +19629,11 @@ assert [A : Grpd] (h : τ (IsPropGrpd A)) ⊢
   @path_cat_is_subterminal A h
   : τ (IsSubterminalCat (Path_cat A));
 
+assert [C : Cat] (h : τ (IsSubterminalCat C))
+  (x y : τ (Obj C)) ⊢
+  @subterminal_cat_arrow C h x y
+  : τ (Hom C x y);
+
 assert [C : Cat] (h : τ (IsSubterminalCat C)) ⊢
   @subterminal_cat_is_discrete C h
   : τ (IsDiscreteCat C);
@@ -20251,6 +20256,48 @@ assert (x y : τ Bool_grpd) ⊢
       (@Product_pair_grpd Bool_grpd Bool_grpd x y))
   ≡ @Product_pair_grpd Bool_grpd Bool_grpd x false;
 /* End of the PSSS-08c0H split-idempotent affine diagnostics. */
+
+// catalog-area: Computational affine Cartier glue
+// The affine structure presheaf computes to the original ring and map.
+assert (R : τ CommRing) ⊢
+  @comm_ring_psh_value
+    (Op_cat CommRing_cat)
+    affine_comm_ring_psh
+    R
+  ≡ R;
+
+assert [R S : τ CommRing]
+  (h : τ (@CommRingHom R S)) ⊢
+  @comm_ring_psh_restriction_hom
+    (Op_cat CommRing_cat)
+    affine_comm_ring_psh
+    S R h
+  ≡ h;
+
+// Every selected affine localization constructively supplies the full
+// componentwise Cartier-glue package.
+assert [R : τ CommRing]
+  [s : τ (@comm_ring_carrier R)]
+  (localization : τ (@CommRingLocalizationAt R s)) ⊢
+  @affine_localization_matching_glue R s localization
+  : τ (@CommRingPshLocalizationGlue
+      (Op_cat CommRing_cat)
+      affine_comm_ring_psh
+      R s localization);
+
+// The closed non-endpoint split localization reaches that complete package.
+assert ⊢
+  @affine_localization_matching_glue
+    f2_split_comm_ring
+    f2_split_idempotent
+    f2_split_idempotent_localization
+  : τ (@CommRingPshLocalizationGlue
+      (Op_cat CommRing_cat)
+      affine_comm_ring_psh
+      f2_split_comm_ring
+      f2_split_idempotent
+      f2_split_idempotent_localization);
+/* End of the PSSS-08c0I affine Cartier-glue diagnostics. */
 
 // catalog-area: Iterated commutative-ring localization comparison
 // Stable structured composition exposes its selected carrier action.
@@ -21093,6 +21140,32 @@ assertnot [K : Cat]
   @hom_ (Op_cat K) (Op_cat K)
     (@id Cat_cat (Op_cat K)) U
   ≡ @hom_con K U K (@id Cat_cat K);
+
+// Owner-position probe for the normalized companion: typed reflexivity must
+// invoke proof-time unification after Op(Op(K)) has reduced to K.
+assert [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @eq_refl
+    (Functor K Cat_cat)
+    (@hom_ K K (@id Cat_cat K) U)
+  : τ (@=
+      (Functor K Cat_cat)
+      (@hom_ K K (@id Cat_cat K) U)
+      (@hom_con
+        (Op_cat K)
+        U
+        (Op_cat K)
+        (@id Cat_cat (Op_cat K))));
+
+// The proof-time bridge deliberately installs no runtime conversion.
+assertnot [K : Cat]
+  (U : τ (Obj K)) ⊢
+  @hom_ K K (@id Cat_cat K) U
+  ≡ @hom_con
+      (Op_cat K)
+      U
+      (Op_cat K)
+      (@id Cat_cat (Op_cat K));
 
 assert [K : Cat]
   (O : τ (@CommRingPsh K))

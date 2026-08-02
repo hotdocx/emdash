@@ -51,6 +51,20 @@ symbol is_subterminal_cat_groupoidal
   : τ (@IsGroupoidalCat C)
 ≔ sigma_Snd h;
 
+// Subterminality canonically selects an arrow between any two objects.
+// Object-propositionality supplies the equality; the generic path owner turns
+// it into a directed arrow without inspecting a concrete Path_cat model.
+symbol subterminal_cat_arrow
+  [C : Cat]
+  (h : τ (@IsSubterminalCat C))
+  (x y : τ (Obj C))
+  : τ (Hom C x y)
+≔ @path_to_hom
+    C x y
+    (@is_contr_center
+      (@= (Obj C) x y)
+      ((@is_subterminal_cat_obj_prop C h) x y));
+
 // Every subterminal category satisfies the existing exact discrete contract.
 symbol subterminal_cat_is_discrete
   [C : Cat]

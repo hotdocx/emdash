@@ -53,6 +53,8 @@ the localization-element to coherent matching-family extension is
 `emdash3_2_commutative_algebra_matching.lp`;
 the selected computational localization-glue extension is
 `emdash3_2_commutative_algebra_glue.lp`;
+the derived affine identity-presheaf Cartier-glue extension is
+`emdash3_2_commutative_algebra_affine_glue.lp`;
 the presented finite basic-open Zariski-cover, selected containment, and
 bounded family base-change extension is
 `emdash3_2_commutative_algebra_zariski.lp`;
@@ -200,7 +202,17 @@ Use the following order:
    sheaf/descent claim or a native `OmegaEquivAlong`/whole internal
    equivalence; the stricter computational `DefIso` is absent too. It
    deliberately declares no generated topology, `Spec`, or scheme;
-25. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
+25. `emdash3_2_commutative_algebra_affine_glue.lp` for the identity
+   CommRing-valued presheaf on `Op_cat CommRing_cat` and the derived affine
+   Cartier glue attached to every chosen localization. Evaluation at the
+   localization-map support centre is a genuine functor; localization-factor
+   contractibility supplies the left component law, and internal Pi-section
+   action along universal-factor arrows supplies the right component law.
+   The module is rule-free and carries no external naturality equations. It
+   does not promote those component laws to equality of whole functors or
+   claim `OmegaEquivAlong Cat_cat`, covering-sieve descent, sheafhood,
+   topology, `Spec`, or schemes;
+26. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
    of universal-property localizations, presented affine basic-open arrows,
    elementwise localization base-change factors and triangles, and returned
    ordinary-sieve pullback membership. It also retains explicit containment
@@ -209,12 +221,12 @@ Use the following order:
    generic finite owner. It is rule-free and deliberately declares no global
    localization choice, specialized rigid membership facade, propositional
    truncation, generated coverage/topology, subcanonicity, `Spec`, or scheme;
-26. `emdash3_2_commutative_algebra_localization_split.lp` for the generic
+27. `emdash3_2_commutative_algebra_localization_split.lp` for the generic
     product idempotent `(1,0)`, its fixed-image localization and affine arrow,
     and the closed `F2 x F2` witness that the idempotent is neither endpoint.
     Its restriction computes as `(x,y) |-> (x,0)`; it is rule-free and claims
     no matching equivalence, sheafhood, topology, `Spec`, or scheme;
-27. `emdash3_2_commutative_algebra_zariski_topology.lp` for the rule-free
+28. `emdash3_2_commutative_algebra_zariski_topology.lp` for the rule-free
    property and package saying that every sieve containing a selected finite
    Zariski basic-open presentation covers in an already supplied topology on
    `Op_cat CommRing_cat`. It retains presentation and membership data, proves
@@ -222,17 +234,17 @@ Use the following order:
    as a feasibility model; it does not construct the least/generated Zariski
    topology, choose localizations, or declare truncation, sheafification,
    subcanonicity, `Spec`, or schemes;
-28. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+29. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
    directed negative results;
-29. `emdash3_2_checks.lp` for executable regression statements;
-30. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+30. `emdash3_2_checks.lp` for executable regression statements;
+31. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
    for current architecture and development SOP;
-31. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-32. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+32. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+33. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
    for comment/example notation;
-33. `reports/INDEX.md` for task-specific plans and decision records.
-34. `book/book.json` and `book/evidence.json` for book source
+34. `reports/INDEX.md` for task-specific plans and decision records.
+35. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

@@ -106,6 +106,12 @@ mathematical reading is in
   component observations. It is the rule-free Cartier/basic-open
   locality interface, not ordinary sheaf descent over a covering sieve or a
   native `OmegaEquivAlong`/whole internal equivalence.
+- `emdash3_2_commutative_algebra_affine_glue.lp` derives that selected glue
+  for the identity structure presheaf on `CommRing_cat^op`. Evaluation at the
+  localization-map support centre gives the glue functor, and internal
+  Pi-section action along universal localization factors proves component
+  recovery. It remains componentwise Cartier locality, not whole functor
+  equality or ordinary sheaf descent.
 - `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
   encode/decode, Nat comparison, and directed negative results.
 - `emdash3_2_checks.lp` and `examples/` contain executable
@@ -174,6 +180,9 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_glue.lp` — selected functorial glue plus
   `glue(restrict(x))=x` and literal component recovery, without a whole
   internal equivalence, sheafhood, `Spec`, or scheme;
+- `emdash3_2_commutative_algebra_affine_glue.lp` — rule-free construction of
+  that selected glue for every chosen affine localization of the identity
+  CommRing presheaf, including internally derived Cartier component recovery;
 - `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
   action and groupoidality;
 - `emdash3_2_eq1_evidence_property.lp` — evidence-property,

@@ -105,7 +105,22 @@ comparisons are green: `(1,0)` is constructively neither zero nor one in
 maintained aggregates, strict audit, fresh 1,968-check catalog, synchronized
 86-target health, and full integration CI are green, and the tranche is locally
 checkpointed at `e68b6b9`. Whole matching/descent remains the next semantic
-gate and is not implied by this closed algebraic computation.
+gate and is not implied by this closed algebraic computation. `PSSS-08c0I`
+now supplies the direct affine matching consumer: the identity CommRing
+presheaf evaluates matching sections at the localization-map support centre;
+factor contractibility derives its left law, and internal Pi-section action
+along universal-factor Sigma arrows derives Cartier component recovery for
+all encoded support elements. The rule-free source and closed split-idempotent
+reviewer are green through focused and maintained source/reviewer/central
+checks. Its normalized Yoneda proof-time prerequisite has an owner-position
+typed-reflexivity positive, a runtime non-conversion negative, and an unchanged
+1,020-warning owning closure. The strict 1,975-check catalog across 87 mapped
+areas, zero-unreviewed-clause audit, and synchronized 88-target health are
+green. Full integration CI independently passes all 88 targets and the
+downstream repository gates. Only checkpoint evidence remains provisional
+until this active tranche completes. This materially closes the affine
+componentwise-glue construction, but equality of whole composite functors and
+native `OmegaEquivAlong Cat_cat` remain the next PSSS-08c0F semantic gate.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -3200,20 +3215,135 @@ reviewer has nineteen assertions. The fresh health report records the product,
 16.068 seconds respectively. These metrics establish a bounded implementation
 cost; they do not weaken the remaining semantic gate.
 
-Only after these audits should the plan decide whether PSSS-08c0E is:
+##### PSSS-08c0I — Derived affine Cartier glue at the localization centre
 
-1. the right explicit classifier of a Cartier-local ring-valued presheaf;
-2. a theorem derivable for a constructed affine structure sheaf;
-3. a useful but insufficient observation requiring a whole comparison; or
-4. the wrong indexing/presentation and therefore to be replaced by a new
-   correcting checkpoint.
+Status: implementation green through focused and maintained
+source/reviewer/central checks, exact warning comparison, strict audit, the
+fresh 1,975-check catalog, and synchronized 88-target health on 2026-08-02;
+full integration CI is also green, and the authorized local checkpoint remains
+pending.
 
-This gate may expose a missing algebraic representation or extensionality
-owner. Such a finding is a named prerequisite, not permission to add an ad hoc
-rewrite, assume a nontrivial localization model, or drift into general
-generated-topology/sheafification work. Its output must be a checked
-nontrivial computation or a precise negative/design result synchronized into
-this ledger.
+The PSSS-08c0H algebraic consumer determines the first honest affine
+specialization. Put
+
+```text
+K = Op_cat CommRing_cat,
+O = affine_comm_ring_psh = id_func CommRing_cat.
+```
+
+Then `Op_cat(K)` reduces to `CommRing_cat`, so `O` is a genuine
+CommRing-valued presheaf on `K`; its value at `R` is `R`, and its restriction
+along an arrow `h:R->V` is the same whole structured map `h`. For any selected
+localization
+
+```text
+i : R -> L = R[1/s],
+```
+
+the supplied inverse of `i(s)` gives a literal member of `D(s)`. Hence
+`(L,i,member)` is a canonical object of the support-elements category. The
+new rule-free module
+`emdash3_2_commutative_algebra_affine_glue.lp` defines
+
+```text
+affine_localization_matching_glue_func
+  : Matching_affine(s) -> Path_cat(|L|)
+```
+
+as the existing section-evaluation functor `piapp0_func` at that canonical
+centre. This is a whole ordinary functor: its arrow action, identity, and
+composition remain owned by the generic functor/Pi hierarchy.
+
+The left component law is derived rather than supplied. The identity map on
+`L` is a competing factor of `i` through itself. Contractibility of the
+localization-factor Sigma identifies the universally selected centre factor
+with that identity factor; projection gives equality of whole
+`CommRingHom(L,L)` maps, and carrier application gives
+
+```text
+glue(restrict(x)) = x.
+```
+
+For a literal support member `(V,h,member)`, the universal property selects
+`k:L->V` with `k ∘ i = h`. The proof stages the represented-presheaf
+transport through the existing opposite-composition and pointwise
+structured-map comparisons, then builds a Sigma arrow
+
+```text
+(L,i,member_i) -> (V,h,member)
+```
+
+in the support-elements category. The dependent evidence arrow is selected
+from the already retained subterminal sieve fibre; the reusable
+`subterminal_cat_arrow` theorem exposes this without inspecting a concrete
+`Path_cat` proposition model. Applying the matching section's existing
+`piapp1_fapp0` action to the whole Sigma arrow yields exactly
+
+```text
+k(glue(m)) = m(V,h,member).
+```
+
+Thus the Cartier equation is internal section action, not an external
+naturality or cone-commutativity field. Two ordinary `sigma_ind` eliminations
+extend the literal equation to every encoded support object and construct the
+complete existing `CommRingPshLocalizationGlue` package for every selected
+affine localization. The closed split idempotent in `F2 x F2` inhabits that
+whole selected package, so the result is no longer merely an assumed or
+zero/identity-only glue model.
+
+Nested Sigma elimination exposed one legitimate proof-time presentation gap.
+The public restriction total stores arrows through
+`hom_con(Op_cat(K),...)`, while the algebra consumer sees the already
+normalized `hom_(K,...)` head after `Op_cat(Op_cat(K))` reduces to `K`. The
+existing shaped Yoneda unification rule covered the pre-normalized form only.
+Its owning presheaf module now has the exact normalized companion
+
+```text
+hom_(K,id,K;U) == hom_con(Op(K),U,id_Op(K))
+```
+
+at proof time. A typed `eq_refl` owner-position diagnostic exercises the
+unifier; an `assertnot` retains absence of runtime conversion. The owning
+warning closure remains exactly 1,020 pre-existing critical-pair warnings,
+with no candidate-owned warning location. This is not a new semantic
+identification and adds no runtime rewrite.
+
+This tranche resolves the four-way question after PSSS-08c0H as follows:
+PSSS-08c0E is a useful computational interface whose fields are constructively
+derivable for the affine identity presheaf and arbitrary selected
+localizations, including a closed non-endpoint localization. It is still
+insufficient as the final semantic descent interface because its inverse laws
+are object/component paths, not equality of whole composite functors.
+
+The next whole-internal audit must not throw away the successful construction.
+Its most concrete route is to ask whether the universal-factor arrows assemble
+into an internal contraction/centre transformation of the support-elements
+diagram and whether the resulting section arrows can be promoted, through a
+reusable Path-valued Pi/functor extensionality or groupoidality theorem, to the
+two whole functor paths required by
+`OmegaEquivAlong Cat_cat`. The current kernel has evaluation and internal
+arrow action, but no generic theorem identifying arbitrary pointwise functor
+data with equality of whole functors. Any missing closure/extensionality owner
+is a named prerequisite; it is not permission for external naturality fields,
+an ad hoc equality axiom, a broad rewrite, or drift into generated topology
+before the affine descent boundary is settled.
+
+The promoted affine module has 852 lines and eighteen symbols, with zero
+rewrite or unification rules; its 135-line reviewer has six assertions. Seven
+central diagnostics raise the fresh strict catalog from 1,968 to 1,975 checks
+and from 86 to 87 mapped areas, with zero legacy or unclassified entries.
+Focused and maintained checks, the exact unchanged 1,020-warning owning
+comparison, and the strict inferred-slot audit with zero unreviewed clauses
+are green. Health passes all 88 registered source/example targets in 476.967
+summed check-seconds at source snapshot
+`sha256:2edc4569b7b62a6f1600dc622d91857765343944141f4c94ff1f9638d75bdf9d`;
+the new source takes 46.527 seconds and its reviewer 25.946 seconds. These are
+bounded validation costs, not new runtime computation. Full integration CI
+independently passes all 88 Lambdapi targets in 546.923 summed check-seconds,
+followed by 39 Python tests, five document-registry tests, shell/source/header/
+reference checks, book evidence/typography/KaTeX/assembly checks, the strict
+kernel audit, and fresh strict catalog verification. The authorized local
+checkpoint remains pending at this synchronization.
 
 ##### PSSS-08c1 — Ringed sites, selected sheaves, and localization descent
 
@@ -4210,6 +4340,25 @@ consumer demonstrates that nontransitive unification requires it.
   computation. Do not infer a Cartier matching equivalence, sheaf descent,
   topology, `Spec`, or scheme from that algebraic result; the next consumer
   must connect the closed model to whole `OmegaEquivAlong Cat_cat` evidence.
+- **PSSS-D-090:** select the identity CommRing presheaf on
+  `Op_cat CommRing_cat` as the first affine structure-presheaf consumer. For
+  every chosen localization, derive glue by evaluating coherent matching
+  sections at the localization-map member of `D(s)`. Derive the left law by
+  localization-factor contractibility and the Cartier component law by
+  internal Pi-section action along the universal-factor Sigma arrow. Promote
+  the result as a separate rule-free affine-glue module and exercise the
+  entire selected package at the closed split-idempotent model; do not request
+  glue, naturality, or cone equations as new external input.
+- **PSSS-D-091:** retain the normalized companion of the existing shaped
+  Yoneda comparison at its presheaf owner because nested Sigma elimination
+  sees `hom_(K,id,U)` only after `Op(Op(K))` has normalized, while the public
+  arrow total retains `hom_con(Op(K),U,id)`. Keep it proof-time only, require a
+  typed-reflexivity positive diagnostic, a runtime non-conversion negative,
+  and an unchanged warning comparison. This closes presentation usability,
+  not whole functor extensionality. The remaining PSSS-08c0F gate is to derive
+  or explicitly require the whole cancellation paths of
+  `OmegaEquivAlong Cat_cat` through reusable internal structure, never an ad
+  hoc equality axiom or external naturality family.
 
 ## 19. Side-Task Ledger
 
@@ -4239,6 +4388,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; zero-localization/empty-open tranche checkpointed at `7013915`; whole algebraic overlap checkpointed at `362922d`; PSSS-08c0H now supplies the checkpointed-green closed nondegenerate model; whole matching/descent connection remains open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
 | PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; locally checkpointed at `1211e06`; its requested product-ring consumer is the checkpointed downstream PSSS-08c0H tranche | PSSS-07a localization API and zero-localization algebra lemmas |
 | PSSS-08c0H | Product rings, closed `F2`, and split-idempotent affine restriction | Rule-free implementation green through focused and maintained checks, exact warning comparison, strict audit, fresh 1,968-check catalog, synchronized 86-target health, and full integration CI; locally checkpointed at `e68b6b9` | PSSS-08c0G, `CommRing_cat` structured-map extensionality, and PSSS-09a affine-arrow API |
+| PSSS-08c0I | Derived affine Cartier glue for the identity CommRing presheaf, including the closed split-idempotent consumer | Green through focused/aggregate/warning/audit/catalog, synchronized 88-target health, and full CI; checkpoint pending | PSSS-08c0E, PSSS-08c0H, internal Pi-section action, and the normalized Yoneda proof-time comparison |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
@@ -4490,6 +4640,41 @@ PSSS-08c0E is successful when:
 8. focused owner/reviewer/central checks, exact warning comparison, strict
    audits, catalog/health synchronization, current-authority prose, and full
    integration CI are green before the authorized local checkpoint.
+
+PSSS-08c0I is successful when:
+
+1. the affine CommRing-valued presheaf on `Op_cat CommRing_cat` is the
+   transparent identity functor, so values and whole structured restrictions
+   compute through existing functor and `CommRing_cat` owners;
+2. every selected localization map, together with its retained inverted-unit
+   evidence, constructs a literal centre of the invertibility-support elements
+   category;
+3. affine glue is the existing `piapp0_func` evaluation functor at that
+   centre, retaining generic arrow action rather than adding object-only glue
+   or external naturality data;
+4. localization-factor contractibility identifies the selected centre factor
+   with the whole structured identity map and derives
+   `glue(restrict(x))=x` by carrier application;
+5. for every literal support member, the selected universal factor and its
+   whole structured triangle construct an actual Sigma arrow from the centre,
+   and `piapp1_fapp0` along that arrow derives the Cartier equation internally;
+6. nested Sigma elimination extends literal component recovery to every
+   encoded support element and constructs the complete existing
+   `CommRingPshLocalizationGlue` package for arbitrary selected affine
+   localizations;
+7. the closed non-endpoint split localization in `F2 x F2` inhabits that
+   package, establishing a genuine computational consumer rather than an
+   assumed, zero-only, or identity-only model;
+8. the normalized companion of the shaped Yoneda proof-time comparison is
+   retained at its owning presheaf source, exercised by typed `eq_refl`, kept
+   non-convertible at runtime, and introduces no warning delta;
+9. the module remains free of rewrite/unification rules and external
+   functoriality/naturality equations; it claims componentwise Cartier
+   locality only, not whole functor equality, `OmegaEquivAlong Cat_cat`,
+   ordinary sheaf descent, a topology, `Spec`, or a scheme; and
+10. focused source/reviewer/central checks, exact warning comparison, strict
+    audit, catalog/health synchronization, current-authority prose, and full
+    integration CI are green before the authorized local checkpoint.
 
 PSSS-09b1 is successful when:
 

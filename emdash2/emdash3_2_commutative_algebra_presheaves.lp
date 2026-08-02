@@ -35,6 +35,20 @@ unif_rule
   ≡ @hom_con $K $U $K (@id Cat_cat $K)
   ↪ [ tt ≡ tt ];
 
+/*
+  Normalized companion of the same shaped comparison.
+
+  A nested consumer can expose the covariant side only after
+  `Op_cat(Op_cat(K))` has reduced to `K`, while retaining the public
+  contravariant head over `Op_cat(K)`.  This proof-time rule covers exactly
+  that normal form.  It does not orient either represented family as the
+  other's runtime representation.
+*/
+unif_rule
+  @hom_ $K $K (@id Cat_cat $K) $U
+  ≡ @hom_con (Op_cat $K) $U (Op_cat $K) (@id Cat_cat (Op_cat $K))
+  ↪ [ tt ≡ tt ];
+
 // Transparent category of CommRing-valued presheaves on K.
 symbol CommRingPsh_cat (K : Cat) : Cat
 ≔ @Functor_cat (Op_cat K) CommRing_cat;

@@ -144,6 +144,21 @@ covering, so this is not ordinary sheaf descent. A whole categorical
 `OmegaEquivAlong`/internal equivalence, generated topology, `Spec`, and
 schemes remain separate gates. The implementation and synchronized authority
 prose are locally checkpointed at `eb0c5b6`.
+`emdash3_2_commutative_algebra_affine_glue.lp` is the PSSS-08c0I derived
+affine consumer. For the identity CommRing-valued presheaf on
+`Op_cat CommRing_cat`, it evaluates matching sections at the chosen
+localization-map support centre, derives the left law from contractible factor
+uniqueness, and derives literal and arbitrary-element Cartier component
+recovery from internal Pi-section action along universal-factor arrows. The
+module is rule-free; its one prerequisite adjustment is a normalized
+proof-time companion of the existing Yoneda represented-family comparison.
+The closed split-idempotent localization inhabits the complete selected-glue
+package. Focused and maintained aggregates, exact warning comparison, strict
+audit, the fresh 1,975-check catalog, and synchronized 88-target health are
+green; full integration CI independently passes all 88 targets, and only the
+local checkpoint remains pending. Equality of whole functors,
+`OmegaEquivAlong Cat_cat`, covering-sieve descent, sheafhood, `Spec`, and
+schemes remain open gates.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section
