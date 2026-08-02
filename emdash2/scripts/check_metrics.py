@@ -52,6 +52,13 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_affine_atlas.lp"),
     Path("emdash3_2_checks.lp"),
 ]
+# Run the two consistently near-timeout aggregate targets before sustained
+# sequential checking can make their measurements load/thermal sensitive.
+# Results remain reported in CORE_CHECK_FILES order.
+CHECK_PRIORITY_FILES = [
+    Path("emdash3_2_checks.lp"),
+    Path("emdash3_2_commutative_algebra_affine_glue.lp"),
+]
 EXAMPLES_DIR = ROOT / "examples"
 HEALTH_REPORT = ROOT / "reports" / "REPORT_EMDASH_HEALTH.md"
 SOURCE_METRICS_SNAPSHOT_RE = re.compile(
@@ -194,19 +201,25 @@ def report_snapshot_issue(expected: str, report: str) -> str | None:
     return None
 
 
+def check_execution_order(files: list[Path]) -> list[Path]:
+    prioritized = [path for path in CHECK_PRIORITY_FILES if path in files]
+    return [*prioritized, *(path for path in files if path not in prioritized)]
+
+
 def run_checks(files: list[Path], timeout_value: str) -> tuple[list[CheckResult], int]:
-    results: list[CheckResult] = []
+    results_by_file: dict[str, CheckResult] = {}
     overall = 0
-    for rel in files:
+    for rel in check_execution_order(files):
         cmd = lambdapi_check_command(rel)
         rc, output, duration = run_command(cmd, timeout_value)
-        results.append(CheckResult(str(rel), rc, duration))
+        results_by_file[str(rel)] = CheckResult(str(rel), rc, duration)
         print(f"{rel}: exit {rc}, {duration:.3f}s")
         if rc != 0:
             overall = rc
             tail = "\n".join(output.splitlines()[-40:])
             print(tail, file=sys.stderr)
             break
+    results = [results_by_file[str(path)] for path in files if str(path) in results_by_file]
     return results, overall
 
 

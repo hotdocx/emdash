@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import unittest
+from pathlib import Path
 
 from scripts.check_metrics import (
+    check_execution_order,
     format_report,
     report_snapshot_issue,
     report_source_metrics_snapshot,
@@ -11,6 +13,25 @@ from scripts.check_metrics import (
 
 
 class CheckMetricsTests(unittest.TestCase):
+    def test_near_timeout_checks_run_first_without_reordering_report_inputs(self) -> None:
+        files = [
+            Path("emdash3_2.lp"),
+            Path("emdash3_2_commutative_algebra_affine_glue.lp"),
+            Path("emdash3_2_checks.lp"),
+            Path("examples/example.lp"),
+        ]
+        original = list(files)
+        self.assertEqual(
+            check_execution_order(files),
+            [
+                Path("emdash3_2_checks.lp"),
+                Path("emdash3_2_commutative_algebra_affine_glue.lp"),
+                Path("emdash3_2.lp"),
+                Path("examples/example.lp"),
+            ],
+        )
+        self.assertEqual(files, original)
+
     def test_snapshot_changes_with_reported_source_metrics(self) -> None:
         before = {"emdash3_2.lp": {"lines": 10, "sections": {"0. Core": 10}}}
         after = {"emdash3_2.lp": {"lines": 11, "sections": {"0. Core": 11}}}
