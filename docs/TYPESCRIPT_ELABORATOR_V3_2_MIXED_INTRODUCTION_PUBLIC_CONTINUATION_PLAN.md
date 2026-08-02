@@ -515,7 +515,8 @@ It deliberately avoids:
 | `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` | read-only audit complete; zero semantic delta; generic `Hom_catd` action-normal-form successor selected | final-green D-058 through D-061; existing fixed `Transf_catd` family; contextual fixed-target probe; recursive-mixed object/base/higher evidence; three bounded owner-position probes | A literal fixed `Transf_catd` target already composes parametrically with contextual `lambda^nd`: the result is definitionally the source `Transfd`, and its higher cell uses the existing internal owner. The family is a genuine `Catd`, but active `Hom_catd`/`Transf_catd` expose only fibre computation, so their specific base action remains opaque. A late `Unit_prof`-based generic `Hom_catd` composite typechecks and `Transf_catd` needs only specialization, not `Transf_catd_func`; however, the first runtime orientation adds twenty critical-pair diagnostics and does not join with identity. Select normal-form qualification before promotion. |
 | `HOM-CATD-ACTION-NORMAL-FORM-0AC` | read-only architecture/owner audit complete; zero active semantic delta; rigid full/capped/point ladder selected | completed `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB`; successful late `Unit_prof` semantic composite; bounded two-head and three-head owner-position probes | The semantic composite remains the correct mathematical comparison but is rejected as the runtime normal form. A two-head full/capped variant fails point-composition conversion. A three-head rigid ladder typechecks after `Unit_prof`, preserves iterable full/capped functors, closes capped and consumed-point identity/composition, joins both existing specialization folds, and keeps the large literal opposite/positive `Unit_prof` factorization proof-time. The final probe is strict-LHS clean and reports 1,097/159 warnings (`+18/+0`), two fewer unjoinable diagnostics than the rejected semantic orientation. |
 | `HOM-CATD-ACTION-NORMAL-FORM-1AD` | implemented and final-green at `0d6c892d36b4826942a9e253c2e1b6be81b921e9` under D-DTTLF-USABILITY-062 plus approved D-DTTLF-USABILITY-063 | completed `HOM-CATD-ACTION-NORMAL-FORM-0AC`; immutable D-062 proposal `68367439e4f4167c46f177ecc3d2dc8740cbe69c`; immutable D-063 correction `11e38021d09a7663e044cdf169b85e1162614f6a`; exact-normal-form and typed-unification probes | Active Lambdapi now owns exactly three generic `Hom_catd` action heads, eleven runtime joins, and one proof-time comparison using the exact internally generated `tapp0_fapp0`/`tapp1_fapp0`/`fdapp1_int_cell` normal form. Twelve focused assertions cover projection, identity, composition, both specialization folds, actual proof-time use, and non-collapse. `make check`, 1,097/159 warning inventory, strict LHS 0/53/33, synchronized catalog/health, and the 41-target kernel CI pass. No TypeScript or public behavior changed. |
-| `HOM-CATD-ACTION-TRANSFER-0AE` | next dependency-ready read-only transfer-boundary audit | final-green D-DTTLF-USABILITY-062/063 kernel normal form; current mixed-mode transfer; absent active rigid-Hom transfer closure | Audit the smallest TypeScript transfer closure separately. In particular, do not silently import the unrelated profunctor scale profile merely to reproduce the proof-time semantic bridge. Distinguish opaque stable action heads and runtime joins from the optional deeper semantic evaluator, require one concrete contextual consumer, and freeze at most one transfer proposal. |
+| `HOM-CATD-ACTION-TRANSFER-0AE` | read-only transfer-boundary audit complete; three-owner/nine-rule runtime-only successor selected | final-green D-DTTLF-USABILITY-062/063 kernel normal form; current mixed-mode transfer; disposable generic compiler and contextual-consumer probes | Three opaque signatures plus nine runtime rules subject-check over the existing 95-declaration mixed-mode environment with no profunctor closure. A fixed `Transf_catd` target remains definitionally stable through contextual `lambda^nd`; its capped base action and consumed point reduce through the new stable heads, while an arbitrary base endomorphism does not collapse. The two constant-`Cat` specializations require an additional classifier-conversion closure and the deep `Unit_prof` comparison is proof-time, so neither belongs in the smallest useful profile. |
+| `HOM-CATD-ACTION-TRANSFER-1AF` | exact proposal frozen below under H-DTTLF-USABILITY-HOM-CATD-ACTION-TRANSFER-01 / D-DTTLF-USABILITY-064; decision pending | completed `HOM-CATD-ACTION-TRANSFER-0AE`; final-green kernel D-062/063; current mixed-mode transfer | Add one separate generic transfer fragment containing exactly the three existing action signatures and nine qualified runtime rules, plus a focused fixed-`Transf_catd` contextual consumer. Add no proof rule, `Unit_prof`/profunctor profile, constant-`Cat` specialization, kernel edit, Core/checker case, binder branch, parser/browser behavior, or broader graduation claim. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -7118,6 +7119,151 @@ smallest useful TypeScript closure and one contextual consumer before any
 transfer proposal; it may not silently import the deferred profunctor/scale
 profile.
 
+## `HOM-CATD-ACTION-TRANSFER-0AE` result
+
+This read-only audit is complete with zero tracked behavior delta. It measured
+the active D-062/063 owners against the current TypeScript mixed-mode
+environment instead of assuming that every rule adjacent in Lambdapi belongs
+in one TypeScript runtime profile.
+
+### The smallest useful closure is three signatures and nine rules
+
+A disposable transfer fragment starts from the current 95-declaration
+`compileCoreCategoricalMixedModeTransfer()` environment and installs exactly
+these opaque existing-authority signatures:
+
+```text
+Hom_catd_fapp1_func
+Hom_catd_fapp1_fapp0
+Hom_catd_fapp1_fapp0_point
+```
+
+The generic declaration compiler installs all three as opaque signatures. The
+generic runtime compiler then subject-checks all nine selected clauses against
+its earlier compiled prefix:
+
+```text
+capped identity
+capped composition
+consumed-point composition
+Transf_catd full specialization
+Transf_catd capped specialization
+generic Hom_catd full route
+generic Hom_catd capped route
+full-to-capped projection
+capped-to-point projection
+```
+
+The composed experimental runtime has 134 rules and no imported `Unit_prof`,
+`Prof`, `Hom_func`, or `Hom_fapp0` declaration. Thus stable opaque action
+heads plus the runtime laws needed to expose and iterate them form a closed
+first TypeScript profile. The proof-time semantic comparison remains in the
+Lambdapi conformance authority; it is not needed to execute the stable runtime
+normal form.
+
+### The concrete contextual consumer is direct and non-collapsing
+
+The consumer reuses the existing direct construction:
+
+```text
+T = Transf_catd(A,B,alpha,beta) : Catd K
+P,Q : Functord E T
+eta : Transfd P Q
+lambda^nd a. eta[a]
+```
+
+The abstraction still compares `equal` with `eta` and compiles as a genuine
+`displayed-transfor`; no new frontend branch is involved. Applying the base
+action of the literal target `T` reduces through the selected
+`Transf_catd`-capped specialization, and consuming a fibre transformation
+then reduces through the capped-to-point projection. Reapplying runtime
+reduction to the resulting capped action at an arbitrary base arrow is
+irreducible, so the transfer does not collapse arbitrary endomorphisms to
+identity. The rule compiler independently checks the identity and both
+composition laws.
+
+The first point-projection probe also corrected a fidelity detail in the
+experimental encoding: the active Lambdapi rule spells `fapp0` without
+explicit inferred source and target categories. The TypeScript rule must
+therefore retain wildcarded, type-annotated inferred slots rather than
+hard-code those arguments. With that correction the rule both subject-checks
+and reduces the contextual point consumer.
+
+### Why two active runtime rules remain outside this first profile
+
+Adding the two constant-`Cat` specialization rules to the same candidate is
+not dependency-closed. The generic runtime checker rejects the first one with
+a type-preservation mismatch between its section-object view and the
+`Functor` classifier expected by `Op_func`. This is not a kernel
+inconsistency: Lambdapi has the wider conversion environment, while the
+current TypeScript mixed-mode profile intentionally carries only its reviewed
+closure.
+
+The first contextual consumer does not use those rules. Importing an
+additional classifier-conversion package merely to reproduce the
+constant-`Cat` optimization would make this transfer larger and would conflate
+an optional specialization with the generic action foundation. The two rules
+remain a measured later transfer closure. Likewise, importing the profunctor
+scale profile solely for the proof-time `Unit_prof` comparison would add no
+runtime capability to this consumer.
+
+The selected result is therefore three opaque signatures plus nine runtime
+rules. It transfers the iterable generic/`Transf_catd` action normal form
+without claiming all neighboring Lambdapi clauses, without a second semantic
+implementation, and without external coherence evidence.
+
+## H-DTTLF-USABILITY-HOM-CATD-ACTION-TRANSFER-01 /
+## D-DTTLF-USABILITY-064
+
+Status: proposed; decision pending. Approve the following exact bounded
+TypeScript transfer slice:
+
+1. Add `src/v3_2/categorical_hom_catd_action_transfer.ts` as a separate
+   successor to `categorical_mixed_mode_transfer.ts`. Use only the generic
+   declaration/runtime compilers and the current active-kernel provenance.
+2. Import exactly the three existing opaque signatures
+   `Hom_catd_fapp1_func`, `Hom_catd_fapp1_fapp0`, and
+   `Hom_catd_fapp1_fapp0_point`. Give them one immutable Core-name mapping and
+   no transparent mirror body.
+3. Import exactly the nine runtime clauses qualified above: capped identity
+   and composition, consumed-point composition, full/capped `Transf_catd`
+   specialization, full/capped generic `Hom_catd` routes, and the two
+   projection steps. Preserve wildcarded inferred source/target slots on the
+   `fapp0` projection rules.
+4. Do not import the two constant-`Cat` specialization clauses in this slice.
+   Record their measured classifier-conversion prerequisite as deferred; do
+   not weaken the checker or add a cast to make them pass.
+5. Do not import the proof-time `Unit_prof` comparison. Add no `Unit_prof`,
+   `Prof`, `Hom_func`, `Hom_fapp0`, or other deferred scale-profile owner or
+   rule.
+6. Add focused tests that pin the three/nine boundary, generic subject
+   validation, immutable policy/linkage, exact active owner/rule positions,
+   capped identity/composition and point composition, and arbitrary-arrow
+   non-collapse.
+7. In the same focused suite, construct the existing fixed-`Transf_catd`
+   direct contextual witness. Require `lambda^nd a. eta[a]` to remain equal
+   to its source `Transfd`, then require the literal target's capped base
+   action and consumed point to reduce through the transferred stable heads.
+8. Export only the transfer API through the existing TypeScript barrel. Add
+   no categorical-program profile, surface method, intrinsic Core/checker
+   case, parser/browser route, public demo, or new binder rule.
+9. Run the focused new and nearest mixed-mode/contextual suites, workspace
+   check, typecheck, and lint. Because the public barrel and root test runner
+   change, run one complete `check:ts` before the semantic checkpoint; carry
+   forward the existing kernel CI and do not rerun Lambdapi, browser, book,
+   print, or repository-wide aggregates for this TypeScript-only slice.
+10. Synchronize this ledger and the handoff, then create a bounded local
+    checkpoint. This gate authorizes no push, merge, rebase, amend, reset,
+    publication, worktree removal, unrelated cleanup, or broader usability/
+    scale graduation.
+
+Acceptance requires all three declarations and all nine local rules to be
+generically TypeScript-checked, the contextual capped/point route to compute,
+the identity/composition/non-collapse matrix to pass, and zero dependency on
+the omitted constant-`Cat`, proof-time, or profunctor closures. Any required
+cast, external equation, owner-specific checker branch, or extra semantic
+owner stops the slice and reopens the proposal.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -7591,9 +7737,21 @@ rules, one exact internal proof-time comparison, twelve focused assertions,
 1,097/159 warnings, strict LHS 0/53/33, synchronized catalog and health, and
 one complete 41-target kernel CI. Add no TypeScript transfer,
 parser/browser behavior, `Transf_catd_func`, curry, external equation, or
-broader claim. Route next only to the read-only
-`HOM-CATD-ACTION-TRANSFER-0AE` audit; do not silently import the deferred
-profunctor scale profile.
+broader claim.
+
+Treat the read-only `HOM-CATD-ACTION-TRANSFER-0AE` audit as complete. Its
+disposable generic probe qualifies exactly three opaque signatures and nine
+runtime clauses over the existing mixed-mode environment. The fixed
+`Transf_catd` contextual consumer remains equal to its source `Transfd`, and
+its capped action plus consumed point compute without `Unit_prof` or the
+profunctor scale profile. The two constant-`Cat` specializations expose a
+separate classifier-conversion dependency and remain deferred together with
+the proof-time semantic evaluator. The sole next operation is a separate
+review of H-DTTLF-USABILITY-HOM-CATD-ACTION-TRANSFER-01 /
+D-DTTLF-USABILITY-064. If approved under the standing unattended delegation,
+implement only `HOM-CATD-ACTION-TRANSFER-1AF`'s exact three-signature,
+nine-rule transfer and focused contextual consumer; do not broaden it merely
+to reproduce neighboring Lambdapi clauses.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete

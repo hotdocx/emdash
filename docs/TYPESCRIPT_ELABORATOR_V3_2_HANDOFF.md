@@ -50,9 +50,22 @@
 > active composition consumer and independent typed-`eq_refl` probe pass.
 > Warning and strict-LHS inventories are the qualified 1,097/159 and 0/53/33;
 > catalog and health reports are synchronized. No TypeScript or public
-> behavior changed. The next dependency-ready operation is the read-only
-> `HOM-CATD-ACTION-TRANSFER-0AE` audit; `Transf_catd_func`, curry, external
-> coherence, binder special cases, and broader scale import remain deferred.
+> behavior changed. `HOM-CATD-ACTION-TRANSFER-0AE` is now read-only complete.
+> A disposable generic compiler probe installs the three existing opaque
+> action signatures and subject-checks a minimal nine-rule runtime closure
+> over the current mixed-mode environment without importing `Unit_prof` or
+> the profunctor scale profile. The existing fixed-`Transf_catd` contextual
+> witness remains equal to its source `Transfd`; its capped base action and
+> consumed point reduce through the transferred stable heads, while an
+> arbitrary base endomorphism does not collapse. The two constant-`Cat`
+> specializations require an additional TypeScript classifier-conversion
+> closure and remain deferred together with the proof-time semantic evaluator.
+> H-DTTLF-USABILITY-HOM-CATD-ACTION-TRANSFER-01 /
+> D-DTTLF-USABILITY-064 is frozen in the living continuation plan as the sole
+> next decision: exactly three opaque signatures and nine runtime clauses,
+> one focused contextual consumer, and no kernel, Core/checker, binder,
+> parser/browser, curry, external-coherence, or broader scale delta.
+> `Transf_catd_func` and broader graduation remain deferred.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
