@@ -516,7 +516,8 @@ It deliberately avoids:
 | `HOM-CATD-ACTION-NORMAL-FORM-0AC` | read-only architecture/owner audit complete; zero active semantic delta; rigid full/capped/point ladder selected | completed `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB`; successful late `Unit_prof` semantic composite; bounded two-head and three-head owner-position probes | The semantic composite remains the correct mathematical comparison but is rejected as the runtime normal form. A two-head full/capped variant fails point-composition conversion. A three-head rigid ladder typechecks after `Unit_prof`, preserves iterable full/capped functors, closes capped and consumed-point identity/composition, joins both existing specialization folds, and keeps the large literal opposite/positive `Unit_prof` factorization proof-time. The final probe is strict-LHS clean and reports 1,097/159 warnings (`+18/+0`), two fewer unjoinable diagnostics than the rejected semantic orientation. |
 | `HOM-CATD-ACTION-NORMAL-FORM-1AD` | implemented and final-green at `0d6c892d36b4826942a9e253c2e1b6be81b921e9` under D-DTTLF-USABILITY-062 plus approved D-DTTLF-USABILITY-063 | completed `HOM-CATD-ACTION-NORMAL-FORM-0AC`; immutable D-062 proposal `68367439e4f4167c46f177ecc3d2dc8740cbe69c`; immutable D-063 correction `11e38021d09a7663e044cdf169b85e1162614f6a`; exact-normal-form and typed-unification probes | Active Lambdapi now owns exactly three generic `Hom_catd` action heads, eleven runtime joins, and one proof-time comparison using the exact internally generated `tapp0_fapp0`/`tapp1_fapp0`/`fdapp1_int_cell` normal form. Twelve focused assertions cover projection, identity, composition, both specialization folds, actual proof-time use, and non-collapse. `make check`, 1,097/159 warning inventory, strict LHS 0/53/33, synchronized catalog/health, and the 41-target kernel CI pass. No TypeScript or public behavior changed. |
 | `HOM-CATD-ACTION-TRANSFER-0AE` | read-only transfer-boundary audit complete; three-owner/nine-rule runtime-only successor selected | final-green D-DTTLF-USABILITY-062/063 kernel normal form; current mixed-mode transfer; disposable generic compiler and contextual-consumer probes | Three opaque signatures plus nine runtime rules subject-check over the existing 95-declaration mixed-mode environment with no profunctor closure. A fixed `Transf_catd` target remains definitionally stable through contextual `lambda^nd`; its capped base action and consumed point reduce through the new stable heads, while an arbitrary base endomorphism does not collapse. The two constant-`Cat` specializations require an additional classifier-conversion closure and the deep `Unit_prof` comparison is proof-time, so neither belongs in the smallest useful profile. |
-| `HOM-CATD-ACTION-TRANSFER-1AF` | separately reviewed-approved under D-DTTLF-USABILITY-064 from immutable proposal `7eed444db933dfccb9f880520c65f408c5916a55`; implementation dependency-ready | completed `HOM-CATD-ACTION-TRANSFER-0AE`; final-green kernel D-062/063; current mixed-mode transfer; standing unattended review with immediate human supersession | Add one separate generic transfer fragment containing exactly the three existing action signatures and nine qualified runtime rules, plus a focused fixed-`Transf_catd` contextual consumer. Add no proof rule, `Unit_prof`/profunctor profile, constant-`Cat` specialization, kernel edit, Core/checker case, binder branch, parser/browser behavior, or broader graduation claim. |
+| `HOM-CATD-ACTION-TRANSFER-1AF` | implemented and focused-green at `0787b6de98883a60992d2f4068131780fdd5478b` under D-DTTLF-USABILITY-064 | completed `HOM-CATD-ACTION-TRANSFER-0AE`; final-green kernel D-062/063; immutable proposal `7eed444db933dfccb9f880520c65f408c5916a55`; separate review; 6/6 focused and 8/8 nearest regressions; one qualified root aggregate | One separate generic transfer fragment installs exactly three opaque existing-authority signatures and nine runtime rules. Capped identity/composition, point composition, non-collapse, and the fixed-`Transf_catd` contextual consumer compute through generic engines. The 1,350-test aggregate has 1,285 pass/51 skip and fourteen whole-file digest-only failures after the approved kernel edit, for effective 1,299 pass/51 skip. No proof rule, profunctor closure, constant-`Cat` specialization, kernel/Core/checker/binder/parser/browser delta, or broader graduation claim was added. |
+| `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` | dependency-ready read-only graduation audit; zero semantic delta authorized | final-green D-062 through D-064; direct recursive `:^nd` constructors; existing `Hom_catd`/`Transf_catd` fibre and higher-action evidence | Stress the transferred action through representative recursive `Transf_catd`/`Hom_catd` body towers and distinguish coverage derivable from current generic action from a concrete need for `Transf_catd_func`. Select at most one bounded semantic successor. Add no owner, rule, frontend branch, parser/browser behavior, curry/facade, or scale claim during the audit. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -7291,7 +7292,51 @@ The review confirms:
 No hidden kernel, parser/browser, publication, scale, or Git-integration scope
 is present. D-DTTLF-USABILITY-064 is therefore approved exactly as proposed
 under the user's standing unattended delegation, with immediate human
-supersession. `HOM-CATD-ACTION-TRANSFER-1AF` is dependency-ready.
+supersession.
+
+### `HOM-CATD-ACTION-TRANSFER-1AF` implementation result
+
+The approved TypeScript transfer is implemented at semantic checkpoint
+`0787b6de98883a60992d2f4068131780fdd5478b`. The new
+`categorical_hom_catd_action_transfer.ts` fragment reuses only the generic
+declaration and runtime compilers over the existing mixed-mode prerequisite.
+Its immutable boundary contains exactly the three opaque action signatures
+and nine runtime clauses selected above. The two constant-`Cat` clauses, the
+proof-time `Unit_prof` comparison, and every profunctor declaration remain
+absent.
+
+The focused suite passes 6/6. It pins active authority and the immutable
+three/nine policy/linkage boundary, validates all three declarations and all
+nine rule subjects generically, executes capped identity and composition plus
+consumed-point composition, preserves an arbitrary base arrow, and checks the
+fixed-`Transf_catd` consumer:
+
+```text
+lambda^nd a. eta[a]
+```
+
+The abstraction remains definitionally equal to `eta`; the literal target's
+capped base action reduces by the transferred `Transf_catd` specialization,
+and consuming a fibre object reduces through the capped-to-point projection.
+The nearest mixed-mode subject check and complete D-055 contextual suite pass
+8/8. Workspace, typecheck, lint, and whitespace gates pass.
+
+The one required root `check:ts` was run exactly once because the public
+barrel and root test runner changed. It finished in 2,597,654 ms with 1,350
+tests: 1,285 pass, 51 skip, and fourteen failures. Every failure is a
+whole-file SHA provenance assertion made stale by the already-approved active
+kernel transition from earlier source snapshots to
+`sha256:ef3e77ccc1750d2d7fd5f15df80953679e62f69433ad03eed1615d430c8e2f44`;
+there is no behavioral, typechecking, runtime, binder, or new-suite failure.
+The qualified result is therefore effective 1,299 pass/51 skip. Per the
+repository SOP and the user's explicit cost boundary, do not repeat this
+aggregate for unchanged boundaries.
+
+No kernel or public-product behavior changed. The disposable untracked probe
+was removed after its exact logic had been promoted into the production
+module and focused suite; unrelated Lambdapi experiment directories remain
+untouched. `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` is now the sole selected
+successor and is read-only first.
 
 ## Validation And Checkpoint Policy
 
@@ -7779,10 +7824,24 @@ the proof-time semantic evaluator. The separate review of
 H-DTTLF-USABILITY-HOM-CATD-ACTION-TRANSFER-01 /
 D-DTTLF-USABILITY-064 is complete from immutable proposal checkpoint
 `7eed444db933dfccb9f880520c65f408c5916a55` under the standing unattended
-delegation, with immediate human supersession. Implement only
-`HOM-CATD-ACTION-TRANSFER-1AF`'s exact three-signature, nine-rule transfer and
-focused contextual consumer; do not broaden it merely to reproduce
-neighboring Lambdapi clauses.
+delegation, with immediate human supersession. Treat
+`HOM-CATD-ACTION-TRANSFER-1AF` as implemented and focused-green at
+`0787b6de98883a60992d2f4068131780fdd5478b`: exactly three opaque signatures,
+nine generically checked runtime rules, and the fixed-`Transf_catd`
+contextual consumer. Carry forward its 6/6 focused and 8/8 nearest regression
+results. Also carry forward the one qualified 1,350-test root aggregate as
+effective 1,299 pass/51 skip; its fourteen failures are whole-file digest
+pins made stale by the approved active-kernel edit. Do not rerun that
+approximately 43-minute aggregate for unchanged boundaries.
+
+Make `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` the sole dependency-ready slice.
+It is read-only first: stress representative recursive `Hom_catd` and
+`Transf_catd` body towers through the transferred action, determine which
+coverage derives from existing owners, and isolate at most one concrete need
+for `Transf_catd_func` or another active-kernel construction. Freeze and
+separately review any semantic proposal before implementation. Do not edit
+kernel or TypeScript behavior during the audit, and do not broaden merely to
+reproduce neighboring Lambdapi clauses.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7801,6 +7860,18 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — `HOM-CATD-ACTION-TRANSFER-1AF` implemented and
+  focused-green.** Semantic checkpoint
+  `0787b6de98883a60992d2f4068131780fdd5478b` adds exactly the approved three
+  opaque existing-authority action signatures, nine generically checked
+  runtime clauses, and one focused fixed-`Transf_catd` contextual consumer.
+  Focused evidence passes 6/6 and nearest mixed-mode/contextual regressions
+  pass 8/8; workspace, typecheck, lint, and whitespace checks pass. The sole
+  root aggregate reports 1,285 pass/51 skip plus fourteen whole-file digest
+  assertions stale after the approved kernel edit, for effective 1,299
+  pass/51 skip. No behavioral failure or extra semantic dependency appears,
+  and the aggregate must not be repeated for unchanged boundaries.
+  `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` is the next read-only audit.
 - **2026-08-02 — `HOM-CATD-ACTION-TRANSFER-0AE` complete;
   D-DTTLF-USABILITY-064 approved.** The disposable generic compiler probe
   installs the three existing rigid action heads and subject-checks the exact

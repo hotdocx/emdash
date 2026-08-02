@@ -64,11 +64,20 @@
 > D-DTTLF-USABILITY-064 is separately reviewed-approved from immutable
 > proposal checkpoint `7eed444db933dfccb9f880520c65f408c5916a55`
 > under the standing unattended delegation, with immediate human
-> supersession. `HOM-CATD-ACTION-TRANSFER-1AF` is the sole dependency-ready
-> implementation: exactly three opaque signatures and nine runtime clauses,
-> one focused contextual consumer, and no kernel, Core/checker, binder,
-> parser/browser, curry, external-coherence, or broader scale delta.
-> `Transf_catd_func` and broader graduation remain deferred.
+> supersession. `HOM-CATD-ACTION-TRANSFER-1AF` is implemented and
+> focused-green at `0787b6de98883a60992d2f4068131780fdd5478b`: exactly three
+> opaque signatures and nine generically checked runtime clauses. Its 6/6
+> focused suite covers policy/linkage, source authority, subject checking,
+> identity/composition, non-collapse, and the fixed-`Transf_catd` contextual
+> consumer; nearest regressions pass 8/8. The sole 1,350-test root aggregate
+> is effective 1,299 pass/51 skip: all fourteen nominal failures are
+> whole-file digest pins made stale by the approved kernel edit. Do not rerun
+> that approximately 43-minute aggregate for unchanged boundaries.
+> `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` is now the sole dependency-ready
+> read-only audit. It must stress recursive `Hom_catd`/`Transf_catd` body
+> towers through the transferred action and isolate at most one concrete
+> remaining construction; `Transf_catd_func` and broader graduation remain
+> deferred until that evidence exists.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
