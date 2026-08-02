@@ -2139,6 +2139,8 @@ Full integration CI independently passes all 72 Lambdapi targets in 528.584
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, strict kernel audit, and fresh strict catalog verification.
+The tranche is included in the authorized local PSSS-08c0D checkpoint
+`28cd0fc`.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

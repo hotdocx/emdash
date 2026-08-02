@@ -49,8 +49,8 @@ the matching section whose literal component applies the selected universal
 factor. Focused owner, reviewer, and central checks, exact warning comparison,
 strict audits, maintained aggregates, the 1,932-check catalog, synchronized
 72-target health, and full integration CI are green. Final prose is
-synchronized and the tranche is ready for the authorized local checkpoint.
-It supplies only the restriction direction, not an inverse/glue or descent
+synchronized and the tranche is locally checkpointed at `28cd0fc`. It
+supplies only the restriction direction, not an inverse/glue or descent
 equivalence.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
@@ -2508,8 +2508,7 @@ demonstrates a concrete need.
 
 Status: implementation green through focused checks, exact warning
 comparison, strict audits, maintained aggregates, catalog/health
-synchronization, and full integration CI; ready for the authorized local
-checkpoint.
+synchronization, and full integration CI; locally checkpointed at `28cd0fc`.
 
 The first direct consumer of the internal cone is the restriction half of the
 historical Cartier locality equation. Pull the selected Path-valued ring
@@ -2613,6 +2612,8 @@ Full integration CI independently passes all 72 Lambdapi targets in 528.584
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, strict kernel audit, and fresh strict catalog verification.
+The tranche is included in the authorized local PSSS-08c0D checkpoint
+`28cd0fc`.
 
 This tranche deliberately stops before an inverse. A future `glue` direction
 must be justified by a concrete selected descent/basic-open/affine consumer,
@@ -3540,7 +3541,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
 | PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 70-target health, and full CI; locally checkpointed at `9db8307` | PSSS-08b, PSSS-07a, and PSSS-04a |
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
-| PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; ready for authorized local checkpoint | PSSS-08c0C |
+| PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0D and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
