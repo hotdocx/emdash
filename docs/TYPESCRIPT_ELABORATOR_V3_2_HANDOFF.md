@@ -94,8 +94,12 @@
 > `CONTEXTUAL-ND-TEXT-PARITY-1AI` / D-DTTLF-USABILITY-065 two-seam proposal is
 > separately reviewed-approved from immutable checkpoint
 > `a4ee654d8e025df6962ea92f219819430852f51a` under the standing unattended
-> delegation, with immediate human supersession. The bounded implementation is
-> dependency-ready.
+> delegation, with immediate human supersession. Before behavior edits, exact
+> search found nine existing revision-pin tests required by D-065 item 7 but
+> omitted from its exact file list. The dedicated plan freezes the
+> zero-behavior D-DTTLF-USABILITY-066 correction authorizing only those nine
+> literal replacements. D-065 is paused until a separate immutable D-066
+> review; no code has changed.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

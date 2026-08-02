@@ -18,7 +18,13 @@ under H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
 D-DTTLF-USABILITY-065 is separately reviewed-approved from immutable proposal
 checkpoint `a4ee654d8e025df6962ea92f219819430852f51a` under the standing
 unattended delegation, with immediate human supersession. The bounded
-implementation is dependency-ready.
+implementation audit then found one proposal-bookkeeping omission before any
+behavior edit: nine existing tests pin the categorical-text revision literal,
+while D-065 item 7 requires synchronizing them and its exact file list omitted
+them. The zero-behavior
+`CONTEXTUAL-ND-TEXT-REVISION-CORRECTION-1AI1` proposal below is frozen under
+D-DTTLF-USABILITY-066 and awaits separate review; D-065 implementation is
+paused until that correction is approved.
 
 ## Objective
 
@@ -134,7 +140,8 @@ Core, checker, evaluator, or mathematical-construction gap.
 |---|---|---|---|
 | `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` | complete read-only; zero semantic delta | final-green D-062 through D-064 | Fixed alternating Hom/Transf targets and their generic action work; no `Transf_catd_func` consumer was found. |
 | `CONTEXTUAL-ND-TEXT-PARITY-0AH` | executable read-only audit complete; zero behavior delta | completed 0AG; graduated historical syntax parity; direct D-055 through D-058; one disposable focused probe | Neutral application already handles compact eta and both whiskers, `composeCells` already recurses, and the direct factorer remains the coherence gate. Current text fails at exactly the expected-contract/family-annotation distinction (`EXPECTED_CATEGORY`) and absent `identityCell` resolver head (`UNKNOWN_IDENTIFIER`). The historical base-component route remains green. |
-| `CONTEXTUAL-ND-TEXT-PARITY-1AI` | separately reviewed-approved under D-DTTLF-USABILITY-065; implementation dependency-ready | completed 0AH; immutable proposal checkpoint `a4ee654d8e025df6962ea92f219819430852f51a`; separate D-065 review | Add one expected-contract kind selecting the existing compact program method and one fixed `identityCell` resolver head; preserve the old route and every semantic boundary. Add focused direct/text equivalence and negatives in the existing parity corpus. |
+| `CONTEXTUAL-ND-TEXT-PARITY-1AI` | separately reviewed-approved under D-DTTLF-USABILITY-065; paused before implementation on exact revision-pin file-list correction | completed 0AH; immutable proposal checkpoint `a4ee654d8e025df6962ea92f219819430852f51a`; separate D-065 review | Add one expected-contract kind selecting the existing compact program method and one fixed `identityCell` resolver head; preserve the old route and every semantic boundary. Add focused direct/text equivalence and negatives in the existing parity corpus. Resume only after D-066 resolves the proposal's contradictory revision-pin boundary. |
+| `CONTEXTUAL-ND-TEXT-REVISION-CORRECTION-1AI1` | exact zero-behavior correction frozen under D-DTTLF-USABILITY-066; decision pending | approved D-065 item 7; executable inventory of all `CORE_CATEGORICAL_TEXT_REVISION` assertions | Authorize only replacing the old revision literal in the nine already-existing pin assertions omitted from D-065's file list. Change no imports, test logic, behavior, runner, or validation boundary. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | deferred read-only graduation | green conditional 1AI | Re-audit the exact direct/text envelope and select the next semantic or reader-facing continuation without claiming unrestricted `:^nd`. |
 
 ## `CONTEXTUAL-ND-TEXT-PARITY-0AH` Audit Contract
@@ -278,6 +285,60 @@ The decision question is:
 > `composeCells`, and the existing direct factorer for all semantics, and add
 > only the exact focused parity/negative evidence above?
 
+## Frozen Revision-Pin File-List Correction
+
+### H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-REVISION-CORRECTION-01 /
+### D-DTTLF-USABILITY-066
+
+The pre-implementation search required by D-065 found nine existing tests
+whose sole relevant assertion is:
+
+```text
+CORE_CATEGORICAL_TEXT_REVISION
+  === TEXT-PARITY-RECURSIVE-MIXED-1-CATEGORICAL-TEXT-1.
+```
+
+D-065 item 7 already requires changing the production constant and
+synchronizing exact revision assertions, but the proposal's later “exact
+implementation file boundary” omitted these nine files. That contradiction
+must be corrected before implementation.
+
+Approve exactly this zero-behavior correction:
+
+1. Add these nine existing files to D-065's mechanical synchronization
+   boundary:
+
+   ```text
+   tests/v3_2_categorical_displayed_telescope_generic_tests.ts
+   tests/v3_2_categorical_text_constructor_tests.ts
+   tests/v3_2_categorical_text_displayed_constructor_tests.ts
+   tests/v3_2_categorical_text_graduation_audit_tests.ts
+   tests/v3_2_categorical_text_internal_action_audit_tests.ts
+   tests/v3_2_categorical_text_internal_action_tests.ts
+   tests/v3_2_categorical_text_nested_ordinary_tests.ts
+   tests/v3_2_categorical_text_recursive_mixed_tests.ts
+   tests/v3_2_categorical_text_result_constructor_audit_tests.ts
+   ```
+2. In each file, replace only the old expected revision string with
+   `CONTEXTUAL-ND-TEXT-PARITY-1AI-CATEGORICAL-TEXT-1`.
+3. Change no import, assertion structure, test logic, fixture, snapshot,
+   runtime expectation, or root-runner wiring.
+4. Validate the synchronization by an exact repository search proving that no
+   assertion retains the superseded revision, plus the D-065 focused suite,
+   root typecheck/lint, and whitespace. Do not run nine expensive suites merely
+   to re-evaluate an exact string replacement, and do not run the long
+   aggregate.
+5. Resume D-065 unchanged after a separate immutable review. This correction
+   authorizes no additional resolver, syntax, semantic, parser/browser,
+   package, documentation-product, or Git scope.
+
+The decision question is:
+
+> Approve H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-REVISION-CORRECTION-01 /
+> D-DTTLF-USABILITY-066 as proposed: correct D-065's exact file list by
+> authorizing only the nine mechanical revision-literal replacements above,
+> then resume the otherwise unchanged compact contextual text implementation?
+
 ## Explicit Non-Goals
 
 This plan does not authorize:
@@ -331,8 +392,11 @@ Treat the exact `CONTEXTUAL-ND-TEXT-PARITY-1AI` /
 H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
 D-DTTLF-USABILITY-065 proposal as separately reviewed-approved from immutable
 checkpoint `a4ee654d8e025df6962ea92f219819430852f51a` under the standing
-unattended delegation, with immediate human supersession. Implement only its
-two adapter seams and exact focused evidence.
+unattended delegation, with immediate human supersession. Treat the exact
+zero-behavior D-DTTLF-USABILITY-066 revision-pin file-list correction as frozen
+but decision-pending. Create a separate immutable review before changing code;
+if approved under the standing delegation, implement D-065 plus only those
+nine exact literal synchronizations.
 Preserve internal object-, arrow-, base-arrow-, and higher-action ownership and
 fail closed outside the direct semantic envelope.
 
@@ -343,6 +407,12 @@ unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-065 implementation paused; D-066 file-list correction
+  frozen.** Before editing behavior, exact search found nine existing tests
+  pinning the revision whose update D-065 item 7 requires. D-065's exact file
+  boundary omitted them. The correction authorizes only replacing those nine
+  string literals and explicitly forbids test-logic or behavior changes. It is
+  decision-pending until separate immutable review.
 - **2026-08-02 — D-DTTLF-USABILITY-065 approved exactly as proposed.** A
   separate immutable review of proposal checkpoint
   `a4ee654d8e025df6962ea92f219819430852f51a` confirms that the delta is one
