@@ -180,6 +180,13 @@ detailed probe evidence.
   Coordinate restriction computes through the generic Sigma projection to
   the existing whole ring maps. This is not yet a small Zariski site, sheaf,
   locally ringed space, or complete scheme.
+- `emdash3_2_commutative_algebra_affine_points.lp`: one-way rule-free affine
+  functor-of-points/basic-open layer. The existing Yoneda presheaf represents
+  `Spec(R)`, the semantic identity-presheaf invertibility sieve is `D(f)`, and
+  localization contractibility constructs a `TypeEquiv` between maps
+  `R[1/f]->S` and `D(f)`-points at every test ring. Both presheaf actions stay
+  at generic owners; there is no external naturality family, whole-presheaf
+  equality, univalence principle, topology, sheafhood, or general scheme.
 - `emdash3_2_commutative_algebra_affine_atlas.lp`: one-way rule-free concrete
   atlas layer. Complementary idempotents in `R x S` retain their selected
   binary Zariski-cover family, and their orthogonal overlap is represented by
@@ -2575,6 +2582,68 @@ health traversal is followed by the nonduplicative CI remainder rather than
 another long traversal; snapshot/tooling/test/document/book/audit/catalog
 gates are green. The implementation and synchronized authority prose are
 locally checkpointed at `db91ddf`.
+
+PSSS-10c adds the direct affine functor-of-points/basic-open bridge in
+`emdash3_2_commutative_algebra_affine_points.lp`. For each ring `R`,
+`affine_spec_functor_of_points(R)` is transparently the existing Yoneda
+presheaf on `Op_cat CommRing_cat`; its value at `S` is the whole structured-map
+classifier `CommRingHom(R,S)`. The basic open `D(f)` is not a new predicate or
+rigid facade: it is the existing ordinary invertibility sieve of the shared
+identity CommRing-valued presheaf. Its point classifier computes to the Sigma
+of `h:R->S` with actual proposition-valued unit evidence for `h(f)`.
+
+For a selected universal-property localization `i:R->R[1/f]`, precomposition
+constructs a `D(f)`-point from every map `R[1/f]->S`. Conversely,
+factorization contractibility selects the inverse map. CommRing extensionality
+turns its pointwise agreement into equality of whole structured maps;
+proposition-valued unit evidence supplies the dependent path required for the
+Sigma point; and contractible-factor uniqueness proves the other inverse law.
+The two laws assemble directly into
+
+```text
+TypeEquiv(CommRingHom(R[1/f],S), AffineSpecBasicOpenPoint(R,f,S)).
+```
+
+This construction does not invoke univalence: it produces explicit
+equivalence data rather than reflecting equivalence into equality. It is
+componentwise in the test ring `S`, while the Yoneda presheaf and semantic
+sieve already retain their full object/arrow actions internally. A whole
+natural equivalence of presheaves remains a possible downstream theorem, not
+an external naturality field or an MVP prerequisite. Generated topology,
+sheafhood, subcanonicity, locally ringed structure, and a general scheme remain
+separate gates.
+
+The shared transparent identity-presheaf definition moves from the affine
+glue consumer to the earlier CommRing-presheaf owner, so both glue and
+functor-of-points use one semantic definition. The new 558-line source has 17
+symbols and no rewrite or unification rules. Its 209-line reviewer has 15
+assertions, including a closed split-idempotent `F2 x F2` instance. Focused
+checks of the owner relocation, the existing affine-glue consumer, the new
+source, and the reviewer pass within the 60-second target bound. The source
+imports only the CommRing-presheaf and ordinary-site vocabulary it actually
+uses; removing an unnecessary affine-slice/Zariski/overlap dependency reduced
+its focused time from 25.67 to 4.45 seconds and its reviewer to 6.33 seconds
+without changing any public declaration. A trial
+extension of the already-large central monolith by this import and six
+diagnostics reached the 60-second bound without a semantic error; the central
+delta was therefore removed rather than increasing the timeout or adding a
+rigid shortcut. The dedicated reviewer is the executable diagnostic owner for
+this tranche.
+
+Warning-enabled owner and reviewer checks inherit exactly
+`1179 = 1020 + 159`, with no warning located in a changed file. The strict
+rule audit remains at zero unreviewed clauses, and the unchanged strict
+catalog has 1,987 checks across 89 areas with no legacy or unclassified
+entries. Synchronized health passes all 94 registered source/example targets
+in 793.592 summed check-seconds at source snapshot
+`sha256:8d3a5bf7c64f453b11276bbef473c0f88ae7a32faea271d153e8a83ba4171530`.
+There the new source takes 4.599 seconds, its reviewer takes 17.733 seconds,
+and the unchanged central diagnostics take 31.689 seconds. The fresh health
+traversal is followed only by the nonduplicative CI remainder: snapshot,
+tooling, 39 Python tests, five document-registry tests, shell/source/report/
+reference checks, book evidence/typography/KaTeX/assembly checks, the strict
+rule audit, and the strict catalog are green. The authorized local
+implementation checkpoint is pending.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

@@ -24,11 +24,6 @@
 
 require open emdash.emdash3_2_commutative_algebra_glue;
 
-// The affine CommRing-valued presheaf on CommRing_cat^op is identity.
-symbol affine_comm_ring_psh
-  : τ (@CommRingPsh (Op_cat CommRing_cat))
-≔ @id_func CommRing_cat;
-
 // The localization map sends s to a unit and therefore lies in D(s).
 symbol affine_localization_support_member
   [R : τ CommRing]

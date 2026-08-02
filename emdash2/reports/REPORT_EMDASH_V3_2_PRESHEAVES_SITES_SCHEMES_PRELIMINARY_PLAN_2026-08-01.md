@@ -819,10 +819,16 @@ view, not the foundational definition, until a consumer proves it necessary.
 
 ### 11.3 Functor of points
 
-Once `Spec` and a category of locally ringed sites exist, the functor of points
-is represented by existing contravariant hom/profunctor infrastructure. In
-particular, `hom_con`, `Conjoint_prof`, and `Hom_prof_along` already express
-the required variance. Do not add a bespoke functor-of-points action owner.
+The affine functor of points is available before a category of locally ringed
+sites: `Spec(R)(S)=CommRingHom(R,S)` is exactly the existing Yoneda presheaf on
+`Op_cat CommRing_cat`. PSSS-10c uses that representation and proves that a
+selected localization represents the semantic basic open at every test ring.
+Do not add a bespoke functor-of-points action owner.
+
+Once `Spec` and a category of locally ringed sites exist, the broader scheme
+functor of points should still be represented by existing contravariant
+hom/profunctor infrastructure. In particular, `hom_con`, `Conjoint_prof`, and
+`Hom_prof_along` already express the required variance.
 
 A Zeuner-style equivalence should be scoped to its intended qcqs/spectral
 subcategories. The later hybrid theorem can compare:
@@ -847,6 +853,9 @@ emdash3_2_sieves.lp
 emdash3_2_sites.lp
 emdash3_2_commutative_algebra.lp
 emdash3_2_commutative_algebra_presheaves.lp
+emdash3_2_commutative_algebra_affine_spec.lp
+emdash3_2_commutative_algebra_affine_points.lp
+emdash3_2_commutative_algebra_affine_atlas.lp
 emdash3_2_ringed_sites.lp
 emdash3_2_schemes.lp
 ```
@@ -866,6 +875,9 @@ sieves + reusable Unit proposition evidence
 
 kernel + presheaves + structured algebra + localization units
   -> commutative-algebra presheaves
+
+commutative-algebra presheaves + universal-property localization + Yoneda
+  -> affine functor of points and represented basic opens
 
 sieves + commutative-algebra presheaves
   -> invertibility-sieve assembly
@@ -3882,7 +3894,9 @@ replacements for them.
 
 Status: PSSS-10a computational big-slice implementation is green and locally
 checkpointed at `837cfeb`; PSSS-10b is synchronized-green and locally
-checkpointed at `db91ddf`.
+checkpointed at `db91ddf`; PSSS-10c affine functor-of-points/basic-open
+representability is synchronized-green and awaiting its authorized local
+implementation checkpoint.
 
 ##### PSSS-10a — Big affine slice and computing overlap
 
@@ -4035,8 +4049,154 @@ The implementation checkpoint is `db91ddf`.
 
 Induced small-slice topology, `Spec(R)/D(f)` versus `Spec(R[1/f])` as an
 equivalence of ringed sites, subcanonicity, and general sheafification remain
-later PSSS-10c/PSSS-08c1 work rather than prerequisites smuggled into this
+later PSSS-10d/PSSS-08c1 work rather than prerequisites smuggled into this
 MVP tranche.
+
+##### PSSS-10c — Affine functor of points and represented basic opens
+
+Status: rule-free implementation synchronized-green through focused checks,
+exact warning comparison, strict audit, catalog, 94-target health, and the
+nonduplicative integration remainder; authorized local checkpoint pending.
+
+This tranche is the explicit return gate from the optional whole-functor
+equality audit to the computational-schemes MVP. It does not attempt to turn
+the Cartier restriction/glue component laws into equality of composite
+functors. That strengthening may require a scoped functor-extensionality or
+univalence principle, but neither is needed to express the standard
+functor-of-points meaning of an affine or to show that a selected localization
+represents a basic open.
+
+For each commutative ring `R`, define transparently
+
+```text
+affine_spec_functor_of_points(R)
+  = yoneda_psh(Op_cat CommRing_cat,R).
+```
+
+Its value at a test ring `S` computes to `CommRingHom(R,S)`. This is a whole
+presheaf, not an object-level family: the existing Yoneda, represented-hom,
+and generic functor owners already carry restriction along test-ring maps and
+all arrow action/naturality. No bespoke `Spec` action owner is added.
+
+The semantic basic open at `f:R` is likewise reused rather than re-encoded:
+
+```text
+affine_spec_basic_open_sieve(R,f)
+  = comm_ring_psh_invertibility_sieve(
+      Op_cat CommRing_cat,
+      affine_comm_ring_psh,
+      R,
+      f),
+
+AffineSpecBasicOpenPoint(R,f,S)
+  = Sigma(h : CommRingHom(R,S),
+          CommRingUnitEvidence(S,h(f))).
+```
+
+The transparent identity presheaf `affine_comm_ring_psh` moves from the late
+affine-glue consumer to the earlier CommRing-presheaf module. This is an owner
+relocation, not a new facade or normal-form migration: its body remains
+`id_func CommRing_cat`, affine glue keeps consuming the same symbol, and the
+new functor-of-points module shares it. No rule or unification clause is
+needed.
+
+Given selected universal-property localization data
+
+```text
+i : R -> R[1/f],
+```
+
+precomposition sends `k:R[1/f]->S` to the basic-open point whose map is
+`k o i`; preservation of the distinguished unit supplies its evidence field.
+Conversely, the localization universal property makes the factorization type
+contractible for every `(h,unit)` and hence selects a lift
+`R[1/f]->S`. The two inverse laws are constructive:
+
+1. the selected factor triangle is upgraded by `comm_ring_hom_ext` to
+   equality of whole structured maps, and proposition-valued unit evidence
+   supplies the required dependent `PathOver`, giving equality of the Sigma
+   basic-open points; and
+2. any supplied `k` is itself a competing localization factor, so
+   contractibility identifies its whole structured map with the selected
+   lift.
+
+They assemble through the existing `EquivByInverse` interface into
+
+```text
+affine_spec_basic_open_point_type_equiv(localization,S)
+  : TypeEquiv(CommRingHom(R[1/f],S),
+              AffineSpecBasicOpenPoint(R,f,S)).
+```
+
+This theorem uses no univalence. It constructs an explicit `TypeEquiv` rather
+than converting equivalence into identity. The theorem is componentwise in
+`S`, but both endpoints already retain their internal functorial actions. A
+whole natural equivalence of presheaves would be a legitimate later theorem
+only if a concrete consumer needs it; this tranche does not simulate it with
+external naturality equations, an ad hoc functor-equality rule, or an
+object-only substitute.
+
+The result is also an independent mathematical check on the historical
+`cartierSolution16.lp.txt` direction. The old file remains experimental
+requirements evidence, not semantic authority. What is retained here is the
+standard universal-property statement that `D(f)` is represented by
+`R[1/f]`, expressed using current whole CommRing maps and internally acting
+presheaves. That is directly useful to a computational scheme presentation:
+basic-open membership remains executable Sigma data, and the localization
+map/lift/triangles compute through existing owners. It does not by itself
+validate the old global sheafification or scheme folds.
+
+The promoted candidate has 558 lines, 17 symbols, zero rewrite rules, and
+zero unification rules. Its 209-line reviewer has 15 assertions, including a
+closed split-idempotent `F2 x F2` representability witness. Focused quiet
+checks pass for the relocated presheaf owner, the unchanged affine-glue
+consumer, the new source, and the reviewer. An initial candidate imported the
+full affine-slice module even though none of its chart, Zariski-family, or
+overlap declarations were consumed. Narrowing the actual dependency to the
+CommRing-presheaf and ordinary-site owners leaves every public term unchanged
+and reduces the new source/reviewer focused checks to 4.45/6.33 seconds. A
+trial import plus six diagnostics in the already
+large `emdash3_2_checks.lp` target crossed the 60-second target bound without
+reporting a semantic error. That trial delta was removed: the plan does not
+raise the bound, add a rigid shortcut, or rerun a long aggregate merely for
+reassurance. The registered source and the dedicated 15-assertion reviewer
+are the durable executable boundary for this tranche.
+
+Warning-enabled owner and reviewer checks inherit exactly
+`1179 = 1020 + 159`, with no warning located in either changed file. The
+strict rule audit retains zero unreviewed clauses and 52 annotated slots
+across 32 intentional clauses. Because the new diagnostics live in their
+dedicated reviewer rather than the central monolith, the strict catalog is
+unchanged at 1,987 checks across 89 areas with zero legacy or unclassified
+entries. Synchronized health passes all 94 registered source/example targets
+in 793.592 summed check-seconds at source snapshot
+`sha256:8d3a5bf7c64f453b11276bbef473c0f88ae7a32faea271d153e8a83ba4171530`.
+The new source takes 4.599 seconds, its reviewer 17.733 seconds, and the
+unchanged central diagnostics 31.689 seconds there. Following that single
+fresh health traversal, the nonduplicative CI remainder is green: the report
+snapshot, Python syntax, hook JSON, 39 Python tests, five document-registry
+tests, shell syntax, whitespace, source TOC, active references, report
+headers, book evidence/typography/KaTeX/assembly, strict rule audit, and
+strict catalog all pass. The authorized local implementation checkpoint is
+pending.
+
+Generated/least Zariski topology, propositional reflection, subcanonicity,
+ordinary sheafhood, sheafification, locally ringed spaces, and a general
+scheme record remain separate gates. The next MVP consumer should use this
+representability result together with the existing computing chart/atlas
+data; it should not reopen those broad foundations unless that concrete
+consumer demonstrates the need.
+
+##### PSSS-10d — Induced small-slice topology and ringed-site comparison
+
+Status: proposed later, not a prerequisite for the current computational MVP.
+
+This retains the former PSSS-10c research scope: induced topology on a
+selected small affine slice, comparison of `Spec(R)/D(f)` with
+`Spec(R[1/f])` at the ringed-site level, subcanonicity, and any general
+sheafification input. It depends on an actual consumer plus the separately
+selected PSSS-09c/PSSS-08c1 topology/sheaf boundary; the componentwise
+representability theorem above does not silently solve it.
 
 ### Phase PSSS-11 — Scheme atlases
 
@@ -4047,10 +4207,12 @@ Status: proposed after PSSS-10.
 - evaluate whether an optimized coinductive slice interface has a genuine
   remaining consumer.
 
-### Phase PSSS-12 — Functor-of-points comparison
+### Phase PSSS-12 — Broader functor-of-points comparison
 
 Status: later research boundary.
 
+- PSSS-10c already supplies the local affine Yoneda/basic-open
+  representability needed by the MVP;
 - derive variance through existing hom/profunctor owners;
 - formulate the qcqs/spectral comparison at the correct subcategory;
 - only then assess a Zeuner-style adjoint equivalence.
@@ -4692,9 +4854,10 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ2; PSSS-05b for subcanonicity |
 | PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative integration remainder green; locally checkpointed at `837cfeb` | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
 | PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Rule-free complementary-idempotent atlas source/reviewer/central checks, exact warnings, strict 1,987-check catalog, synchronized 92-target health, and nonduplicative integration remainder green; locally checkpointed at `db91ddf` | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
-| PSSS-10c | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | PSSS-10b consumer plus selected PSSS-09c/PSSS-08c1 scope |
+| PSSS-10c | Affine Yoneda functor of points and localization representation of semantic basic opens | Rule-free implementation synchronized-green through exact warnings, strict 1,987-check catalog, 94-target health, and nonduplicative integration remainder; authorized local checkpoint pending; no univalence or whole-presheaf equality promoted | Shared identity CommRing presheaf, ordinary sieve membership, and universal-property localization |
+| PSSS-10d | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | Concrete downstream consumer plus selected PSSS-09c/PSSS-08c1 scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
-| PSSS-12 | Functor-of-points/qcqs comparison | Research boundary | PSSS-11 and representability audit |
+| PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches
 
@@ -5043,7 +5206,7 @@ PSSS-10a is successful when:
    functor equality, or univalence principle;
 7. the closed split-idempotent localization supplies a non-endpoint selected
    chart, while small-site topology, sheafhood, locally ringed structure, and
-   a complete scheme remain explicit PSSS-10b/PSSS-10c gates;
+   a complete scheme remain explicit PSSS-10b/PSSS-10d gates;
 8. the module stays rule-free and contains no duplicated functoriality,
    naturality, identity, or composition rule; and
 9. focused owner/reviewer/central checks, strict audit, catalog/health
@@ -5081,3 +5244,40 @@ PSSS-10b is successful when:
    audit, catalog/health synchronization, authority prose, and the
    proportional integration gate are green before the authorized local
    checkpoint.
+
+PSSS-10c is successful when:
+
+1. `affine_spec_functor_of_points(R)` transparently reuses
+   `yoneda_psh(Op_cat CommRing_cat,R)`, so its `S`-points compute to whole
+   structured maps `R->S` and all test-ring arrow action stays at the generic
+   Yoneda/functor owners;
+2. `affine_spec_basic_open_sieve(R,f)` is the existing semantic
+   identity-presheaf invertibility sieve, and its point classifier computes
+   to `Sigma(h:R->S, UnitEvidence(h(f)))` without a duplicate predicate,
+   rigid membership facade, or new runtime rule;
+3. the transparent identity CommRing presheaf has one shared semantic owner
+   upstream of both affine glue and affine points, with its body unchanged and
+   both consumers checked after the relocation;
+4. precomposition with a selected localization map constructs the forward
+   basic-open point and localization factorization constructs the inverse;
+5. the factor triangle is promoted to equality of whole CommRing maps,
+   proposition-valued unit evidence provides the dependent Sigma path, and
+   contractible-factor uniqueness proves both inverse laws;
+6. those laws assemble through the existing `EquivByInverse`/`TypeEquiv`
+   interfaces, with a closed split-idempotent consumer and no univalence
+   principle or equivalence-to-equality reflection;
+7. the componentwise theorem is described honestly: both endpoints already
+   carry internal object/arrow action, but no whole natural equivalence is
+   claimed or simulated by external naturality fields, object-only data, or
+   an ad hoc equality rule;
+8. generated topology, subcanonicity, sheafhood, sheafification, locally
+   ringed structure, and a general scheme remain explicit PSSS-10d/PSSS-08c1
+   gates, while the result directly serves the computational scheme MVP;
+9. the central-monolith timeout is retained as a measured performance
+   boundary, not addressed by increasing the target limit or introducing a
+   rigid shortcut; the registered source and dedicated reviewer provide the
+   durable diagnostics; and
+10. focused changed-consumer checks, exact warning comparison, strict audit,
+    catalog/health synchronization, authority prose, and the proportional
+    nonduplicative integration remainder are green before the authorized
+    local checkpoint.

@@ -191,6 +191,25 @@ Its source/reviewer/central checks, exact inherited-warning comparison, strict
 1,987-check catalog, synchronized 92-target health, and nonduplicative
 integration remainder are green; the implementation and synchronized
 authority prose are locally checkpointed at `db91ddf`.
+`emdash3_2_commutative_algebra_affine_points.lp` is the rule-free PSSS-10c
+functor-of-points/basic-open bridge. It presents `Spec(R)` by the existing
+Yoneda presheaf on `Op_cat CommRing_cat`, identifies the semantic basic-open
+fibre at a test ring `S` with maps `h:R->S` for which `h(f)` is a unit, and
+uses the universal property of a selected localization to construct a
+`TypeEquiv(CommRingHom(R[1/f],S),D(f)(S))`. Both inverse laws are derived from
+contractible factorization, whole structured-map extensionality, and
+proposition-valued unit evidence. The Yoneda and sieve sides already carry
+their object and arrow action internally; no external naturality family,
+whole-presheaf equality, univalence principle, topology, sheafhood, or general
+scheme is asserted. The promoted source, shared identity-presheaf owner, and
+reviewer are focused-green. Warning-enabled changed targets inherit exactly
+`1179 = 1020 + 159` warnings with no changed-file location, the strict audit
+has zero unreviewed clauses, and the unchanged strict catalog has 1,987 checks
+across 89 areas. Synchronized health passes all 94 registered targets in
+793.592 summed check-seconds at source snapshot
+`sha256:8d3a5bf7c64f453b11276bbef473c0f88ae7a32faea271d153e8a83ba4171530`;
+the nonduplicative CI remainder is also green. The authorized local
+implementation checkpoint is pending.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

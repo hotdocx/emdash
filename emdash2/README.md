@@ -95,7 +95,8 @@ mathematical reading is in
   CommRing-valued presheaves, their actual structured restriction maps,
   pointwise identity/composition paths, and proposition-valued invertibility
   support along arrows. It assembles that support as a higher and ordinary
-  sieve with literal membership computation, but no ringed site.
+  sieve with literal membership computation and owns the shared transparent
+  affine identity presheaf, but no ringed site.
 - `emdash3_2_commutative_algebra_locality.lp` packages selected localization
   factors over all elements of the invertibility sieve as one internal cone.
 - `emdash3_2_commutative_algebra_matching.lp` sends localization elements and
@@ -118,6 +119,12 @@ mathematical reading is in
   arrows in both directions. Coordinate restriction computes to the existing
   whole comparison maps. This is not yet a small Zariski site, sheaf, locally
   ringed space, or complete scheme.
+- `emdash3_2_commutative_algebra_affine_points.lp` presents `Spec(R)` by the
+  existing Yoneda presheaf, reuses the semantic invertibility sieve as
+  `D(f)`, and constructively identifies its points at each test ring with
+  maps out of a selected localization. The resulting `TypeEquiv` needs no
+  univalence or external naturality data; it is not yet a whole natural
+  equivalence, topology, sheaf, or general scheme.
 - `emdash3_2_commutative_algebra_affine_atlas.lp` builds an explicit binary
   cover of `Spec(R x S)` from the complementary idempotents `(1,0)` and
   `(0,1)`. Their overlap computes as `D(0)`, and the two internal chart arrows
@@ -198,6 +205,9 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_affine_spec.lp` — rule-free computational
   big-affine-slice facade with coordinate presheaf, charts, and two-sided
   product/iterated-localization overlap restrictions;
+- `emdash3_2_commutative_algebra_affine_points.lp` — rule-free affine Yoneda
+  functor of points, semantic basic-open points, and localization
+  representability as a constructive `TypeEquiv` at every test ring;
 - `emdash3_2_commutative_algebra_affine_atlas.lp` — rule-free selected
   complementary-idempotent two-chart atlas with a computing zero overlap and
   whole coordinate restrictions;

@@ -66,6 +66,9 @@ the split-idempotent localization and closed affine-basic-open extension is
 the computational affine big-slice, coordinate-presheaf, and internal
 basic-open-overlap extension is
 `emdash3_2_commutative_algebra_affine_spec.lp`;
+the affine Yoneda functor-of-points, semantic basic-open, and
+localization-representability extension is
+`emdash3_2_commutative_algebra_affine_points.lp`;
 the complementary-idempotent binary-cover and computational empty-overlap
 affine-atlas extension is
 `emdash3_2_commutative_algebra_affine_atlas.lp`;
@@ -173,8 +176,10 @@ Use the following order:
    invertibility support closed under restriction; it assembles the
    Path-valued higher support and ordinary invertibility sieve through the
    carrier/unit families and one shaped proof-time variance comparison while
-   preserving literal-arrow membership computation. It deliberately declares
-   no topology, sheaf, or ringed-site package;
+   preserving literal-arrow membership computation. It also owns the shared
+   transparent affine identity presheaf consumed by affine glue and affine
+   points. It deliberately declares no topology, sheaf, or ringed-site
+   package;
 21. `emdash3_2_sites.lp` for ordinary-sieve membership, the canonical maximal
    sieve, proposition-valued sieve coverages, Grothendieck topology laws, and
    the direct chaotic-topology model; it declares no `Omega`, generated
@@ -249,7 +254,16 @@ Use the following order:
     module is rule-free and deliberately does not identify the big slice with
     a selected small Zariski site or claim topology, sheafhood, locally ringed
     structure, or a complete scheme;
-30. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
+30. `emdash3_2_commutative_algebra_affine_points.lp` for the rule-free affine
+    Yoneda functor of points, the already-internal semantic basic-open sieve
+    `D(f)`, and the constructive `TypeEquiv` between its points at each test
+    ring and maps out of a selected localization `R[1/f]`. Both inverse laws
+    come from the localization universal property, whole CommRing-map
+    extensionality, and proposition-valued unit evidence. The Yoneda and sieve
+    sides retain their object/arrow action at generic owners; the module adds
+    no external naturality field, whole-presheaf equality, univalence
+    principle, topology, sheafhood, or general scheme;
+31. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
     complementary-idempotent atlas of every product ring `R x S`. It retains
     the existing selected binary Zariski-cover family, constructs both
     internal affine chart arrows from the orthogonal overlap, and makes their
@@ -257,17 +271,17 @@ Use the following order:
     closed `F2 x F2` instance is a concrete non-endpoint atlas/glue
     presentation, not a universal gluing theorem, sheaf, locally ringed space,
     or general scheme record;
-31. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+32. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-32. `emdash3_2_checks.lp` for executable regression statements;
-33. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+33. `emdash3_2_checks.lp` for executable regression statements;
+34. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-34. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-35. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+35. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+36. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-36. `reports/INDEX.md` for task-specific plans and decision records.
-37. `book/book.json` and `book/evidence.json` for book source
+37. `reports/INDEX.md` for task-specific plans and decision records.
+38. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

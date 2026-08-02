@@ -1842,6 +1842,54 @@ existing cover family plus directly consumed chart observations is the
 smaller and more stable interface. The optional whole-functor
 extensionality/univalence boundary is unrelated to this computation.
 
+### Affine Functor Of Points And Represented Basic Opens
+
+The scheme-facing functor of points does not require a new primitive `Spec`
+head. For a commutative ring `R`, use the existing Yoneda construction
+
+```text
+affine_spec_functor_of_points(R)
+  = yoneda_psh(Op(CommRing_cat),R).
+```
+
+At a test ring `S`, its fibre computes to the whole structured-map classifier
+`CommRingHom(R,S)`. This is not an object-only assignment: Yoneda already
+supplies restriction along every map of test rings, and generic functor/hom
+owners carry the corresponding arrow action and naturality.
+
+For `f:R`, the semantic basic open is the existing invertibility sieve of the
+shared identity CommRing-valued presheaf. Its `S`-points compute as
+
+```text
+D(f)(S) = Sigma(h : CommRingHom(R,S), UnitEvidence_S(h(f))).
+```
+
+Given a selected localization `i:R->R[1/f]`, precomposition sends a map
+`k:R[1/f]->S` to the point `(k o i, k(i(f)) is a unit)`. Conversely, the
+localization universal property selects a factor for every point of `D(f)(S)`.
+Contractibility of the factorization classifier identifies a selected factor
+with any supplied `k`; CommRing-map extensionality proves the whole-map
+triangle, and proposition-valued unit evidence supplies the dependent Sigma
+path in the other direction. These data construct directly
+
+```text
+TypeEquiv(CommRingHom(R[1/f],S), D(f)(S)).
+```
+
+No univalence principle is used: the equivalence is explicit data, not a
+reflection of equivalence into equality. It is componentwise in the test ring
+`S`, but both compared objects already retain their whole functorial action
+internally. A natural equivalence of presheaves would additionally require
+assembling the components with the relevant internal transformation data; it
+is not silently replaced by external naturality fields or an ad hoc equality
+rule. Generated topology, sheafhood, subcanonicity, locally ringed structure,
+and a general scheme record remain separate gates.
+
+This is the first direct functor-of-points bridge back to the computational
+scheme MVP: basic-open membership is executable data and localization is shown
+to represent it constructively. The later qcqs/spectral or Zeuner-style
+comparison remains a different, substantially broader research problem.
+
 ### Finite Families And Unimodular Cover Presentations
 
 A finite homogeneous family uses only the existing natural-number and Sigma
@@ -3840,6 +3888,10 @@ kernel and one-way library vocabulary.
 | chosen affine basic-open arrow | `comm_ring_basic_open_arrow localization` |
 | basic-open base-change factor and triangle | `comm_ring_basic_open_base_change_factor_map` / `comm_ring_basic_open_base_change_triangle` |
 | elementwise basic-open pullback membership | `comm_ring_basic_open_pullback_membership` |
+| affine Yoneda functor of points | `affine_spec_functor_of_points R` |
+| affine point classifier at a test ring | `AffineSpecPoint R S` |
+| semantic basic-open point classifier | `AffineSpecBasicOpenPoint R f S` |
+| represented-basic-open equivalence | `affine_spec_basic_open_point_type_equiv localization S` |
 | polynomial extension factor | `CommRingPolynomialFactor iota vars h valuation` |
 | polynomial-algebra universal property | `IsCommRingPolynomialAlgebra R X P iota vars` |
 | chosen polynomial algebra | `CommRingPolynomialAlgebra R X` / `comm_ring_polynomial_target` |

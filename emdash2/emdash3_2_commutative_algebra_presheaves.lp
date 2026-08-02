@@ -12,8 +12,10 @@
   restriction O(f)(s) is a unit.  It is proposition-valued and is closed under
   further restriction.  The carrier and unit-evidence families assemble this
   predicate into both a Cat-valued higher sieve and an ordinary sieve while
-  preserving literal-arrow membership computation.  This module does not
-  claim sheafhood or select a Grothendieck topology.
+  preserving literal-arrow membership computation.  The canonical affine
+  identity presheaf on CommRing_cat^op is named here so later glue and
+  functor-of-points consumers share one owner.  This module does not claim
+  sheafhood or select a Grothendieck topology.
 */
 
 require open emdash.emdash3_2_presheaves;
@@ -56,6 +58,13 @@ symbol CommRingPsh_cat (K : Cat) : Cat
 // Object classifier of CommRing-valued presheaves.
 symbol CommRingPsh (K : Cat) : Grpd
 ≔ Obj (@CommRingPsh_cat K);
+
+// The affine CommRing-valued presheaf on CommRing_cat^op is identity.
+// This shared transparent owner is consumed by both support/glue and
+// functor-of-points modules; it adds no second functoriality calculus.
+symbol affine_comm_ring_psh
+  : τ (@CommRingPsh (Op_cat CommRing_cat))
+≔ @id_func CommRing_cat;
 
 // Ring of values O(U).
 symbol comm_ring_psh_value
