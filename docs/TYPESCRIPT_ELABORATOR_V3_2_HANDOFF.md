@@ -336,10 +336,22 @@
 > whitespace checks pass. Its sole aggregate reports 1,278 pass/51 skip and
 > only the same three unrelated digest-pin failures, exactly six passes above
 > D-055. Do not repeat that approximately 39.9-minute aggregate. The next
-> dependency-ready operation is the read-only
-> `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` audit of point identity,
-> orientation-aware whiskering/action, and one representative mixed
-> constructor.
+> `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` is now read-only complete
+> with zero semantic delta. It selects generic point identity, not an
+> `id_transfd` shortcut: one `identityCell(endpoint)` construction should
+> reuse the existing finite displayed-functor endpoint factorer and recover
+> generic `id` at `Functord_cat`. The exact `id` signature currently appears
+> only in the later D-019 transfer foundation, so the proposal relocates and
+> relinks that same reviewed declaration to the earliest `Transfd` layer
+> rather than duplicating it. It also selects the existing generic and
+> displayed point-identity component clauses. A mixed `Functor_catd` fibre is
+> a parametric identity test, not a new mixed-coherence rule. Whiskering still
+> requires an orientation-aware indexed-Hom action node, while an arbitrary
+> `Pi_cat(Transf_catd ...)` section remains pointwise data. The exact
+> `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` /
+> H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 /
+> D-DTTLF-USABILITY-057 proposal is frozen in the living plan with decision
+> pending. It adds no behavior until separately reviewed.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

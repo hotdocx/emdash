@@ -505,7 +505,8 @@ It deliberately avoids:
 | `DIRECT-CONTEXTUAL-ND-ETA-1T` | implemented and in-scope green at `dd12ae56002ebad5b820db6106e68dc5a60b50ae` under D-DTTLF-USABILITY-055 | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; immutable proposal `36e1c8dba16a8a206ace58628ba47703a2b74374`; separate review under standing unattended delegation; 7/7 focused and 31/31 combined regressions; workspace/typecheck/lint; sole aggregate 1,272 pass/51 skip/same three unrelated digest-pin failures | One opt-in single displayed-binder `displayedTransforContextLambda`, one construction-only indexed point-Hom/application route, and one eta point factor recover the already-coherent closed `eta`. The result preserves internal object/fibre-arrow/base-arrow/higher action. No kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim was added. |
 | `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` | read-only successor audit complete; zero semantic delta; pointwise vertical composition selected | implemented D-055 point eta; retained whole-fibre recursive composition; existing generic `composeCells`, `id_transfd`, action, and whiskering-related owners; bounded active-kernel check | The single displayed binder has expanded telescope `k :^n K; a :^n E[k]`; TypeScript merely tracks `k` internally. Current `composeCells` fails exactly because it accepts `indexed-transfor`, not the new `indexed-hom`. Its typed composition tree, recursive whole-owner factorer, and generic `Functord_cat` composition are otherwise reusable. Identity needs a new point-identity construction route; whiskering needs a wider orientation audit. The smallest successor is therefore recursive pointwise vertical composition. |
 | `DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` | implemented and in-scope green at `e125bb9aa2c734c6bee01f3eccfa28cfa1cdebc4` under D-DTTLF-USABILITY-056 | completed `DIRECT-CONTEXTUAL-ND-GRADUATE-0U`; immutable proposal `ff170aa0ab8ec18e829a95689800032401c18f23`; separate review under standing unattended delegation; 6/6 focused and 37/37 combined regressions; workspace/typecheck/lint; sole aggregate 1,278 pass/51 skip/same three unrelated digest-pin failures | `composeCells` now has a homogeneous construction-only indexed point-Hom branch. The recursive point factorer recovers each D-055 leaf and composes the resulting closed `Transfd` owners through existing generic composition. The whole-fibre branch remains green. One contextual-composition evidence rule records the point tree and usage counts. No method, Core/LF case, kernel/transfer owner, identity, whiskering, parser/browser route, or unrestricted-`:^nd` claim was added. |
-| `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` | next dependency-ready read-only successor audit | implemented D-055 eta and D-056 recursive composition; active `id_transfd`; existing displayed/ordinary action and variance owners | Reassess the next single displayed-natural body constructor. Compare exact point identity with orientation-aware whiskering/action and one representative mixed constructor. Select at most one smallest user-relevant successor, audit existing owners and typed construction seams first, and add no behavior during the audit. Do not claim unrestricted `:^nd` or begin parser parity yet. |
+| `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` | read-only successor audit complete; zero semantic delta; generic point identity selected | implemented D-055 eta and D-056 recursive composition; active `id`/`id_transfd`, displayed component-identity rules, and internal base-arrow action; existing finite displayed-functor endpoint factorer | Identity is the smallest missing constructor and also tests a mixed `Functor_catd` fibre without introducing mixed coherence. Select one generic `identityCell(endpoint)` construction, finite factorable endpoint recovery, and relocation of the already-reviewed `id` signature to the earliest `Transfd` transfer layer. Whiskering needs a new indexed-Hom action node and orientation audit. A `Pi_cat(Transf_catd ...)` section remains pointwise data, not an outer-coherence constructor. |
+| `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` | exact non-self-authorizing proposal frozen under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 / D-DTTLF-USABILITY-057; decision pending | completed `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W`; exact prior `id` representation in the later D-019 foundation; existing `directDisplayedFunctorChain`; active identity component and base-cell folds | Promote/relink one existing `id` signature without duplication, transfer exactly the generic and displayed point-identity component clauses, add one generic construction-only identity node/method for a closed displayed functor or a finite factorable indexed endpoint, and recover the outer `id` at `Functord_cat`. Check bare, finite-chain, composition-adjacent, mixed-family, point-computation, and internal base-arrow cases. Add no kernel mathematics, whiskering, arbitrary point coherence, parser/browser route, or unrestricted `:^nd`. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -5705,6 +5706,224 @@ added. The next operation is the read-only
 point identity, orientation-aware whiskering/action, and one representative
 mixed constructor and freeze at most one successor without changing behavior.
 
+## `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` audit result
+
+This audit is complete with zero semantic delta. It compared the three
+requested successor classes against the current construction IR, generic LF
+environment, transfer layering, active Lambdapi owners, and representative
+mixed classifiers. It selects generic point identity as the next bounded
+constructor.
+
+### Point identity is mathematically complete but absent from the surface
+
+The active kernel already has the exact outer owner and all relevant semantic
+projections:
+
+```text
+id(F) : Transfd_cat(F,F)
+id(F)[k] = id(F[k])
+id(F)[k][a] = id(F[k][a])
+```
+
+Here the first line is generic `id` at `Functord_cat E D`; the readable
+`id_transfd F` is its transparent alias. The active checks also prove that
+`tdapp1_int_cell(id(F),p,a)` folds to the identity-specialized internal
+displayed cell `fdapp1_int_cell(F,p,a)`. Thus identity needs no new kernel
+owner, no external naturality evidence, and no new LF checker rule.
+
+The missing layer is construction. `CoreCategoricalProgram` exposes
+`identityFunctor`, which constructs `id_func`, but no categorical arrow/cell
+identity. A bounded live inventory reports `identityCell` as absent. The
+existing contextual point factorer recognizes eta applications and recursive
+composition only, so users cannot yet write the typed-AST counterpart of:
+
+```text
+lambda^nd a. id(F[a])
+```
+
+The correct successor is not a special `id_transfd` escape hatch. The
+construction should be one generic `identityCell(endpoint)` operation:
+
+- on a closed displayed functor `F`, it constructs generic `id` at
+  `Functord_cat` and returns a rich closed `displayed-transfor`;
+- on an open indexed endpoint, it records a construction-only
+  `typed-cell-identity` node and an exact `indexed-hom` classifier; and
+- the enclosing direct `:^nd` binder factors that endpoint back to a closed
+  displayed functor and constructs the same outer generic identity.
+
+The existing `directDisplayedFunctorChain` already recognizes a bare bound
+fibre object, one eta application, and arbitrary finite closed
+displayed-functor chains. Sharing its factor/compile result lets identity work
+for `id(a)`, `id(F[a])`, and `id(H[F[a]])` without hard-coded depth or a
+second body recognizer. Its recovered closed displayed functor supplies the
+whole-functor endpoints stored in `indexed-hom`, so existing `composeCells`
+adjacency checks continue to work when identity is nested inside a recursive
+point composition.
+
+### The transfer gap is a layering issue, not new semantics
+
+The exact opaque signature of generic category identity `id` is already
+reviewed and compiled under the later D-019 displayed-next-hom foundation,
+using the stable Core name
+`emdash_v3_2_scale_stress_3a2a_id`. The earlier `fibred-transfd-1` environment
+does not contain that declaration. Duplicating it locally would make the
+later descendant redeclare one qualified symbol; requiring the later profile
+for elementary identity would make capability layering reflect historical
+transfer order rather than mathematical dependency.
+
+The selected correction therefore promotes/relinks that exact existing
+signature to the earliest `Transfd` transfer layer and changes the D-019
+implementation to consume the same earlier-fragment declaration. The Core
+name, backend name, type, opacity, and active authority remain unchanged. The
+total descendant environment still contains one `id` declaration, never two.
+This is a monotone dependency correction, not declaration refinement and not
+a new LF feature.
+
+The TypeScript runtime also lacks the active identity component computations.
+The smallest point-computation closure at the earliest `fibred-transfd-1`
+layer is exactly three existing Lambdapi clauses:
+
+1. generic `tapp0_fapp0` maps an identity transfor to an identity arrow;
+2. direct `tdapp0_fapp0` maps identity at `Functord_cat` to the identity
+   transformation of the fibre functor; and
+3. the proof-time-comparable ordinary `Transf_cat` presentation reaches that
+   same fibre identity through its own typed clause.
+
+No owner-specific evaluator branch is needed: all three clauses pass through
+the generic transfer/runtime engine. The already-transferred
+`tdapp1_int_cell` remains the internal base-arrow observation in the earliest
+profile. The later displayed-chain profile already owns `fdapp1_int_cell`, and
+its imports already close every dependency of the two existing direct/ordinary
+`tdapp1_int_cell(id) -> fdapp1_int_cell` clauses. Those two clauses therefore
+belong in that later layer as the exact internal-cell normal-form closure. The
+selected transfer delta is five existing clauses in total, split at the
+earliest dependency-correct layers; none is a new kernel rule.
+
+### Whiskering is feasible but is a larger next action constructor
+
+A bounded live probe of a body shaped like `H(eta[a])` fails at the intended
+construction boundary with `UNAVAILABLE_DISPLAYED_ACTION`. The current
+`applyIndexedFibreFunctor` accepts indexed objects, not `indexed-hom` arrows.
+Supporting this syntax requires a typed indexed-Hom action node and an exact
+choice among covariant target action, contravariant source action, and their
+endpoint orientations. The active kernel owns the corresponding functorial
+actions, so this is not evidence of missing naturality; it is a broader
+surface/factorization audit than identity.
+
+Whiskering remains the leading successor after identity. It must not be
+implemented by treating a pointwise mapped arrow as coherent without
+recovering the existing outer action owner.
+
+### Mixed classifiers do not require a separate identity architecture
+
+The point-identity algorithm is parametric in its root displayed family. In
+particular, taking that family to be `Functor_catd A B` makes the bound fibre
+object itself a functor and makes `id(a)` a transformation in the mixed
+functor fibre. The same bare-root/finite-chain factorer then produces identity
+at the outer `Functord_cat`; no mixed curry, variance collapse, or new
+classifier is involved. This representative mixed case belongs in the
+identity tests.
+
+By contrast, an arbitrary section of
+`Pi_cat (Transf_catd A B FF GG)` is still only a pointwise-data presentation.
+It is not definitionally an outer `Transfd` and cannot become one without a
+separately reviewed coherence bridge. It is therefore not selected as the
+next body constructor.
+
+The resulting architecture remains direct, recursive, and fail-closed:
+identity endpoints must factor to a closed existing displayed functor; generic
+identity then owns all coherence. Arbitrary indexed objects or arrows do not
+acquire coherence merely because their point types happen to match.
+
+## H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 /
+## D-DTTLF-USABILITY-057
+
+Status: proposed; decision pending. This gate is the exact
+`DIRECT-CONTEXTUAL-ND-IDENTITY-1X` slice.
+
+1. Preserve `displayedTransforContextLambda` as the single direct displayed-
+   natural binder with expanded telescope `k :^n K; a :^n E[k]`. Add no
+   second binder semantics, total-context section, or curry route.
+2. Promote/relink the already-reviewed opaque `id` signature from the D-019
+   local foundation declaration set to the earliest `fibred-transfd-1`
+   declaration environment. Preserve its exact qualified symbol, type,
+   opacity, backend name, and Core name
+   `emdash_v3_2_scale_stress_3a2a_id`. Make the later D-019 implementation
+   consume that earlier-fragment link and update its exact boundary evidence;
+   never duplicate or refine the declaration. This changes the local
+   `fibred-transfd-1` declaration count from six to seven and the later D-019
+   local declaration count from thirteen to twelve, while retaining exactly
+   one `id` declaration in every descendant environment.
+3. Transfer exactly five active identity clauses through the generic runtime
+   engine: generic `tapp0_fapp0(id)` plus the direct/ordinary
+   `tdapp0_fapp0(id)` clauses at `fibred-transfd-1`, and the direct/ordinary
+   `tdapp1_int_cell(id) -> fdapp1_int_cell` clauses at the existing
+   displayed-chain layer. This changes the first layer's local runtime count
+   from seven to ten and the displayed-chain layer's local runtime count by
+   exactly two. Add no Lambdapi rule and no intrinsic or owner-specific
+   TypeScript evaluator case.
+4. Add one public typed-AST method `identityCell(endpoint)`. Its approved
+   closed branch accepts a closed displayed functor and returns generic `id`
+   with a rich `displayed-transfor` classifier. Its approved open branch
+   accepts only an active indexed endpoint that the existing finite direct
+   displayed-functor grammar can factor. Reject other closed/open classifiers.
+5. Add exactly one construction-only `typed-cell-identity` node. Its
+   `indexed-hom` type records the inferred base/fibre indices, root source
+   family, final target family, and the same recovered whole displayed
+   functor as both endpoints. The node cannot reach explicit Core or the LF
+   checker.
+6. Extract/share the minimum finite endpoint factor/compile helper from
+   `directDisplayedFunctorChain`. Support the already-accepted bare root and
+   arbitrary finite closed displayed-functor chains. Do not add a second
+   recognizer, hard-coded depth, cast, classifier mirror, or manual
+   convertibility case.
+7. Extend the contextual point factorer with the identity node. Revalidate its
+   exact indices, endpoint factorization, and zero residual local usage, then
+   construct generic `id` at the recovered `Functord_cat`. Preserve D-055 eta
+   and D-056 recursive composition; identity nodes must compose through their
+   exact `indexed-hom` endpoints without a special composition branch.
+8. Add exactly one
+   `categorical.displayed-transfor-context-identity` evidence rule for a root
+   identity body. Normalize and deeply freeze the endpoint/identity node,
+   finite chain length, two natural binding modes, and measured base/fibre
+   occurrences. A composition containing identity remains the existing
+   contextual-composition evidence with nested identity IR.
+9. Add focused positive tests for closed displayed identity; `id(a)`,
+   `id(F[a])`, and a generated finite chain; left/right identity inside point
+   composition; callback-once/frozen evidence; point computation to ordinary
+   fibre identity; and a well-typed internally owned base-arrow cell.
+10. Add one representative mixed-family test with root
+    `Functor_catd A B`, demonstrating identity of the bound functor object
+    through the same factorer. This test authorizes no new mixed constructor,
+    curry, or variance rule.
+11. Add focused negatives for a non-factorable endpoint, wrong/foreign or
+    escaped slots, incompatible composition endpoints, closed non-displayed
+    classifiers, and unavailable profiles. Preserve fail-closed arbitrary
+    pointwise data.
+12. Add no new kernel symbol/rule, external coherence field, whiskering or
+    indexed-Hom action, arbitrary `Transf_catd`-section promotion,
+    parser/text/CLI/reviewer/browser behavior, product facade, bulk transfer,
+    groupoidal claim, or unrestricted `:^nd` claim.
+13. Run the new focused suite plus D-055/D-056, displayed-functor binder,
+    fibred-`Transfd`, displayed-chain/higher, direct-mixed, and text-inventory
+    regressions; then workspace check, typecheck, lint, and whitespace checks.
+    Because shared transfer/runtime and categorical-surface behavior change,
+    run one `check:ts` only after the bounded tranche is otherwise green.
+    Carry forward unchanged digest-pin failures and never repeat the aggregate
+    for documentation-only closure.
+14. Synchronize this ledger and the handoff, stage only the exact
+    transfer/surface/test/document slice, and create rollback-safe local
+    checkpoints. Preserve unrelated work and make no push, merge,
+    publication, worktree removal, or cleanup change.
+
+This proposal is deliberately non-self-authorizing. Under the standing
+unattended delegation it may be approved only by a separate review of an
+immutable proposal checkpoint, with immediate human supersession. That review
+must verify that generic `id` is relocated rather than duplicated, the
+identity node remains construction-only, finite endpoint recovery reuses the
+existing algorithm, mixed-family evidence is parametric rather than a new
+coherence rule, and all object/base/higher behavior remains internally owned.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -6050,12 +6269,20 @@ combined, workspace/typecheck/lint/whitespace, and sole aggregate evidence
 exactly as recorded. Do not repeat the aggregate or repair its three unrelated
 digest pins.
 
-Run the read-only
-`DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` audit. Compare point identity,
-orientation-aware whiskering/action, and one representative mixed constructor;
-freeze at most one smallest user-relevant successor. Do not add behavior,
-parser/browser work, a kernel/transfer owner, or unrestricted `:^nd` during
-the audit.
+Treat `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` as read-only complete
+with zero semantic delta. It selects generic point identity as the smallest
+user-relevant successor: the active kernel already owns identity and all
+object/fibre/base-action projections; the missing work is a generic
+`identityCell(endpoint)` construction, finite endpoint factorization, and
+dependency-correct transfer of the already-existing identity declaration and
+five existing computation clauses. First checkpoint the exact
+`DIRECT-CONTEXTUAL-ND-IDENTITY-1X` /
+H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 /
+D-DTTLF-USABILITY-057 proposal, then conduct a separate review of that
+immutable checkpoint. Add no semantic behavior before that review. Keep
+orientation-aware indexed-Hom whiskering/action as the leading successor and
+keep arbitrary pointwise `Transf_catd` sections, parser/browser work, new
+kernel mathematics, and unrestricted `:^nd` outside D-057.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -6074,6 +6301,20 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` completed
+  read-only and D-DTTLF-USABILITY-057 frozen for separate review.** Generic
+  point identity is the smallest missing recursive body constructor. The
+  active kernel already supplies generic `id`, its transparent `id_transfd`
+  presentation, point components, and internally owned base-arrow cells. The
+  proposal therefore relocates/relinks the exact previously reviewed `id`
+  declaration to the earliest dependency-correct `Transfd` layer, transfers
+  exactly five existing identity clauses through the generic runtime engine,
+  and adds one generic `identityCell(endpoint)` construction with finite
+  endpoint factorization. A mixed `Functor_catd` fibre is a parametric test,
+  not a new coherence rule. Whiskering requires a new orientation-aware
+  indexed-Hom action node and remains the leading successor. No semantic
+  behavior changed during this audit; D-057 remains decision-pending until a
+  separate review of its immutable proposal checkpoint.
 - **2026-08-01 — D-DTTLF-USABILITY-056 implemented and in-scope green at
   `e125bb9aa2c734c6bee01f3eccfa28cfa1cdebc4`.** `composeCells` now admits a separate
   homogeneous `indexed-hom` branch with exact two-index/family/endpoint
