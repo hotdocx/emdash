@@ -27,7 +27,8 @@ reviewed-approved under D-DTTLF-USABILITY-066 from immutable proposal
 checkpoint `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a`; D-065 implementation is
 implemented and focused-green at semantic checkpoint
 `dabe9d9827462b76a493c1dd34cc658e137f22d5`; the read-only 0AJ graduation
-audit is the next dependency-ready row.
+audit is complete with zero behavior delta. The active semantic successor is
+[`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md).
 
 ## Objective
 
@@ -145,7 +146,7 @@ Core, checker, evaluator, or mathematical-construction gap.
 | `CONTEXTUAL-ND-TEXT-PARITY-0AH` | executable read-only audit complete; zero behavior delta | completed 0AG; graduated historical syntax parity; direct D-055 through D-058; one disposable focused probe | Neutral application already handles compact eta and both whiskers, `composeCells` already recurses, and the direct factorer remains the coherence gate. Current text fails at exactly the expected-contract/family-annotation distinction (`EXPECTED_CATEGORY`) and absent `identityCell` resolver head (`UNKNOWN_IDENTIFIER`). The historical base-component route remains green. |
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | implemented and focused-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` under D-DTTLF-USABILITY-065 | completed 0AH; immutable proposal checkpoint `a4ee654d8e025df6962ea92f219819430852f51a`; separate D-065 review; approved D-066 correction; 14/14 affected parity and 24/24 nearest direct regressions | One expected-contract kind selects the existing compact program method and one fixed `identityCell` resolver head delegates to the existing program operation. Eta and both whiskers remain neutral applications, composition remains `composeCells`, and the direct factorer remains the sole coherence gate. Historical `^nd` is unchanged. |
 | `CONTEXTUAL-ND-TEXT-REVISION-CORRECTION-1AI1` | implemented with zero behavior delta at `dabe9d9827462b76a493c1dd34cc658e137f22d5` under D-DTTLF-USABILITY-066 | approved D-065 item 7; immutable proposal checkpoint `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a`; separate D-066 review; exact revision search | Only the old revision literal changed in the nine already-existing pin assertions omitted from D-065's file list. No import, test logic, behavior, runner, or validation boundary changed. |
-| `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | dependency-ready read-only graduation | final-green conditional 1AI/1AI1 | Re-audit the exact direct/text envelope and select the next semantic or reader-facing continuation without claiming unrestricted `:^nd`. |
+| `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero behavior delta; canonical contextual-telescope successor selected | final-green 1AI/1AI1 | The single-fibre direct/text envelope is exact. The first remaining usability gap is multiple individually exposed variables over canonical sibling/dependency layers, not parser or target-classifier behavior. The dedicated successor owns the read-only architecture audit. |
 
 ## `CONTEXTUAL-ND-TEXT-PARITY-0AH` Audit Contract
 
@@ -376,6 +377,25 @@ The implementation does not graduate unrestricted `:^nd`, arbitrary
 point-arrow synthesis, or a varying four-parameter `Transf_catd` classifier.
 Those remain semantic coverage questions rather than text-parser work.
 
+## `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` Result
+
+The read-only graduation audit is complete with zero behavior delta. It
+graduates the exact single-fibre direct/text envelope and no more. Inspection
+of the direct point factorer confirms that target classifier heads are generic
+but contextual scope is exactly one hidden base plus one fibre ordinal.
+Inspection of the displayed-functor context compiler confirms that canonical
+finite sibling/dependency layers already own the required product, Sigma,
+pullback, projection, and weakening semantics, but do not expose a reusable
+context normal form to the transformation factorer.
+
+The next productive task is therefore semantic, not lexical: determine how a
+compact `:^nd` binder can expose every variable of those canonical telescopes
+while retaining internally coherent accessors and the existing whole-`Transfd`
+factorization gate. Browser/audit presentation synchronization is valid but
+downstream. The dedicated
+[`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md)
+owns the dependency-ready read-only 0AK audit.
+
 ## Explicit Non-Goals
 
 This plan does not authorize:
@@ -429,9 +449,9 @@ Treat D-DTTLF-USABILITY-065 and its zero-behavior D-DTTLF-USABILITY-066
 file-list correction as implemented and focused-green at their exact reviewed
 boundaries. Preserve their 14/14 affected parity, 24/24 nearest direct,
 typecheck/lint, exact revision-search, and whitespace evidence; do not repeat
-the unchanged long aggregate. Execute
-`CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` read-only first and select at most one
-next semantic or reader-facing continuation from current evidence.
+the unchanged long aggregate. Treat 0AJ as read-only complete and continue
+from
+`docs/TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`.
 Preserve internal object-, arrow-, base-arrow-, and higher-action ownership and
 fail closed outside the direct semantic envelope.
 
@@ -442,6 +462,12 @@ unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — 0AJ read-only graduation complete.** Single-fibre compact
+  direct/text parity is exact and classifier-target generic. The remaining
+  first-order usability gap is multiple individually exposed variables over
+  the existing canonical sibling/dependency context fold. The dedicated
+  telescope plan compares context-normal-form, multi-ordinal, and recursive-
+  layer candidates read-only before any behavior proposal.
 - **2026-08-02 — D-065/D-066 implementation final-green.** The text adapter
   adds one compact expected-contract route and one fixed `identityCell` head,
   while reusing neutral application, `composeCells`, and the existing direct

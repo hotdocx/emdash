@@ -108,7 +108,12 @@
 > application, `composeCells`, the direct factorer, and the historical route
 > remain unchanged. Exact semantic checkpoint:
 > `dabe9d9827462b76a493c1dd34cc658e137f22d5`. Read-only
-> `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` is next.
+> `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` is complete with zero behavior
+> delta. It finds that text is no longer the limiting layer: the next semantic
+> usability gap is multiple individually exposed variables over canonical
+> sibling/dependency telescopes. Continue from
+> [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md),
+> whose 0AK architecture audit is dependency-ready and read-only.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
