@@ -69,6 +69,9 @@ basic-open-overlap extension is
 the affine Yoneda functor-of-points, semantic basic-open, and
 localization-representability extension is
 `emdash3_2_commutative_algebra_affine_points.lp`;
+the pointwise affine-basic-open intersection and selected localization
+representation extension is
+`emdash3_2_commutative_algebra_affine_intersections.lp`;
 the complementary-idempotent binary-cover and computational empty-overlap
 affine-atlas extension is
 `emdash3_2_commutative_algebra_affine_atlas.lp`;
@@ -263,7 +266,14 @@ Use the following order:
     sides retain their object/arrow action at generic owners; the module adds
     no external naturality field, whole-presheaf equality, univalence
     principle, topology, sheafhood, or general scheme;
-31. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
+31. `emdash3_2_commutative_algebra_affine_intersections.lp` for the rule-free
+    pointwise equivalence between `D(f*g)` and the explicit intersection of
+    `D(f)` and `D(g)`, together with its selected two-step representation by
+    localization at `f*g`. It exposes executable forward/inverse maps and
+    both component laws while the existing sieve and presheaf owners retain
+    whole action; it adds no external naturality, whole-presheaf equality,
+    univalence principle, topology, sheafhood, or general scheme;
+32. `emdash3_2_commutative_algebra_affine_atlas.lp` for the rule-free
     complementary-idempotent atlas of every product ring `R x S`. It retains
     the existing selected binary Zariski-cover family, constructs both
     internal affine chart arrows from the orthogonal overlap, and makes their
@@ -271,17 +281,17 @@ Use the following order:
     closed `F2 x F2` instance is a concrete non-endpoint atlas/glue
     presentation, not a universal gluing theorem, sheaf, locally ringed space,
     or general scheme record;
-32. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+33. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-33. `emdash3_2_checks.lp` for executable regression statements;
-34. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+34. `emdash3_2_checks.lp` for executable regression statements;
+35. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-35. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-36. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+36. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+37. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-37. `reports/INDEX.md` for task-specific plans and decision records.
-38. `book/book.json` and `book/evidence.json` for book source
+38. `reports/INDEX.md` for task-specific plans and decision records.
+39. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

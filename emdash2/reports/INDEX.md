@@ -210,6 +210,34 @@ across 89 areas. Synchronized health passes all 94 registered targets in
 `sha256:8d3a5bf7c64f453b11276bbef473c0f88ae7a32faea271d153e8a83ba4171530`;
 the nonduplicative CI remainder is also green. The authorized local
 implementation checkpoint is `154069d`.
+`emdash3_2_commutative_algebra_affine_intersections.lp` is the rule-free
+PSSS-10c1 bridge from represented basic-open points to computational affine
+overlaps.  It proves at each test ring that `D(f*g)` is equivalent to the
+explicit intersection of `D(f)` and `D(g)` by structured-map multiplication,
+product-unit operations, proposition-valued evidence, and the existing
+same-base Sigma equivalence.  A selected localization at `f*g` represents the
+intersection through a transparent two-`TypeEquiv` chain with executable
+forward/inverse maps and both laws.  This selected representation avoids a
+measured whole-package normalization timeout at the public sieve-membership
+alias; it adds no rigid facade, rule, unifier, external naturality, whole-
+presheaf equality, univalence, topology, or sheafification.  Its focused
+source/reviewer checks, exact inherited-warning comparison, and strict rule
+audit are green. The strict catalog remains at 1,987 checks across 89 areas;
+synchronized health passes all 96 registered targets in 788.439 summed
+check-seconds at source snapshot
+`sha256:8491ed696767a463bb3f3aebe6ea0adfab402432bd04aae0c0efc23d00e1974e`,
+and the nonduplicative integration remainder is green. The authorized local
+checkpoint is pending.
+The living plan now distinguishes construction of sheafification from the
+MVP-feasible PSSS-05c supplied reflector capability. A site or scheme may
+carry a topology- and value-category-indexed primitive sheaf classifier,
+whole sheafification/inclusion functors, and their existing `Adjunction`
+evidence without claiming a double-plus/generated-topology construction or
+waiting for its PSSS-05b descent characterization; concrete structure-sheaf
+restriction/localization/glue computation remains a separate requirement. An
+ignored focused probe validates this topology-/value-indexed representation,
+whole unit/counit typing, and exact inherited warning footprint; promotion
+still awaits a concrete consumer.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

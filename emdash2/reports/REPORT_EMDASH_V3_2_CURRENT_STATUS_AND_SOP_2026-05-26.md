@@ -2257,8 +2257,10 @@ successor to the historical Cartier `mod_loc_elim` behavior and is intended
 to feed a mandatory independent matching/section semantics audit, nontrivial
 localization model, and first affine overlap calculation before it is allowed
 to orient `Spec`. The historical source is experimental consumer evidence,
-not semantic authority. Abstract generated-topology or sheafification work
-remains off this critical path. The maintained source, reviewer, and
+not semantic authority. Abstract generated-topology or construction-of-
+sheafification work remains off this critical path; a supplied whole
+sheafification reflector/adjunction remains a feasible separate MVP
+capability. The maintained source, reviewer, and
 central focused checks pass; warning-enabled source and reviewer checks
 inherit exactly `1179 = 1020 + 159`, with no warning located in either new
 file, and strict audits remain unchanged. Maintained `make check` and the
@@ -2644,6 +2646,50 @@ tooling, 39 Python tests, five document-registry tests, shell/source/report/
 reference checks, book evidence/typography/KaTeX/assembly checks, the strict
 rule audit, and the strict catalog are green. The authorized local
 implementation checkpoint is `154069d`.
+
+PSSS-10c1 adds the rule-free represented-basic-open-intersection bridge in
+`emdash3_2_commutative_algebra_affine_intersections.lp`.  At a test ring `S`,
+its explicit intersection point is a whole structured map `h:R->S` together
+with the transparent Sigma pair of unit evidence for `h(f)` and `h(g)`.
+Transport along the CommRing homomorphism multiplication law and the existing
+product-unit maps gives functions in both directions between unit evidence
+for `h(f*g)` and that pair.  Since both classifiers are propositions, the
+map is proved equivalent directly by contractibility of its homotopy fibres;
+the same-base Sigma equivalence then yields the pointwise
+
+```text
+D(f*g)(S) ~= D(f)(S) intersect D(g)(S).
+```
+
+For a selected localization at `f*g`, the public PSSS-10c representation and
+the explicit intersection equivalence are retained as a transparent
+two-`TypeEquiv` capability.  Their forward and inverse maps compose on the
+decoded point carriers, and both composite laws are derived from the two
+component equivalence laws.  This is the selected executable representation
+normal form: coercing the whole public `TypeEquiv` package through the
+sieve-membership alias, or eagerly constructing its generic composite,
+exceeds the 60-second elaboration boundary without a semantic error.  No
+timeout increase, rigid facade, rewrite, unifier, or duplicate predicate is
+introduced.
+
+The 521-line source has 15 symbols and zero rewrite or unification rules.  Its
+195-line reviewer has 12 assertions, including the closed `F2 x F2`
+complementary-idempotent atlas: the generators multiply definitionally to
+zero, so the selected zero localization represents their computationally
+empty intersection.  Focused quiet source and reviewer checks pass, and
+warning-enabled checks inherit exactly `1179 = 1020 + 159` warnings with no
+changed-file location.  The strict LHS audit remains at zero unreviewed
+clauses and 52 annotated slots across 32 intentional clauses. The strict
+catalog remains at 1,987 checks across 89 areas. Synchronized health passes
+all 96 registered targets in 788.439 summed check-seconds at source snapshot
+`sha256:8491ed696767a463bb3f3aebe6ea0adfab402432bd04aae0c0efc23d00e1974e`;
+the new source/reviewer take 4.595/28.261 seconds and central diagnostics pass
+at 57.730 seconds. The nonduplicative integration remainder—snapshot,
+tooling/tests, document registry, source/report/reference lints, book checks,
+strict audit, and strict catalog—is green. Two earlier traversals under
+concurrent elaborator `check:ts` load timed out on different unchanged large
+targets; the uncontended traversal passes without raising the 60-second bound
+or changing unrelated source. The authorized local checkpoint is pending.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
@@ -3902,8 +3948,10 @@ The following remain explicit future work rather than hidden assumptions:
   the assembled CommRing-presheaf invertibility sieve;
 - proposition-valued Zariski coverage through either a supplied topology, an
   independently extensional predicate, or a genuine propositional-truncation
-  reflector; generated saturation and h-level-stratified sheafification remain
-  separate gates from selected computational cover/containment data;
+  reflector; generated saturation and h-level-stratified construction of
+  sheafification remain separate gates from selected computational
+  cover/containment data, while a supplied reflector/adjunction may be carried
+  explicitly without claiming such a construction;
 - specialized higher `fapp1*` projections of `Hom_tele_func` beyond current
   demand;
 - raw unreified-path observer computation, reverse pointwise-to-coherent-core

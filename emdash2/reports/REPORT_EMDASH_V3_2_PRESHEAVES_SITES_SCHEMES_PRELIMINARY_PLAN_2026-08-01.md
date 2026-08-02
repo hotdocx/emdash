@@ -127,9 +127,12 @@ nonempty assumption-explicit API consumer, but no promoted source or derived
 nonempty semantic model; its later rigid-adapter promotion trial was rejected
 and removed. `PSSS-09b2` remains a measured Lambdapi elaboration-performance
 gate for the fully expanded sieve-membership specialization. Proposition-
-valued generated coverage, propositional truncation, sheafification, whole
-categorical descent equivalence, and positive-variable polynomial
-representation remain separately consumer-gated. The latest synchronized
+valued generated coverage, propositional truncation, construction of a
+canonical sheafification from topology, whole categorical descent
+equivalence, and positive-variable polynomial representation remain
+separately consumer-gated. A supplied/primitive sheafification reflector is
+the distinct PSSS-05c capability below and may be used by the scheme MVP
+without constructing double-plus or generated saturation. The latest synchronized
 integration evidence is recorded in the checkpointed PSSS-10a phase below;
 later metrics remain provisional until their own bounded tranche is
 synchronized and checkpointed.
@@ -159,9 +162,10 @@ precursor, not yet a selected small Zariski site, sheaf, locally ringed space,
 or complete scheme. Focused/central checks, exact inherited-warning audit,
 strict audit, catalog, documentation lints, and synchronized 90-target health
 are green. The next MVP gate is a minimal supplied cover/atlas and a concrete
-chart-gluing consumer; general generated topology, truncation, sheafification,
-and unrestricted functor extensionality remain off the main line until such a
-consumer actually requires them. The implementation and synchronized
+chart-gluing consumer; general generated topology, truncation, construction
+of sheafification, and unrestricted functor extensionality remain off the main
+line until such a consumer actually requires them. This does not exclude a
+supplied PSSS-05c sheafification reflector. The implementation and synchronized
 authority prose are locally checkpointed at `837cfeb`.
 
 `PSSS-10b` now selects the first finite atlas consumer. The rule-free
@@ -678,7 +682,28 @@ a_J |- include
 
 using the active `Adjunction` relation. Left exactness is a separate field or
 property. This replaces the historical global `mod_smod` fold and its ad hoc
-glue cancellation rule.
+glue cancellation rule. The displayed formula is the Cat-valued
+specialization; PSSS-05c retains the historical value-category parameter by
+replacing `Psh_cat(K)` with `Functor_cat(Op_cat(K),V)`.
+
+There are two sharply different implementation obligations:
+
+1. a **supplied or primitive reflector capability** may take `Sheaf_cat(J)`,
+   `include`, `a_J`, and their adjunction as selected data indexed by the
+   topology; and
+2. a **construction theorem** derives such data from `J`, for example by a
+   double-plus, modality, colimit, or higher-inductive construction.
+
+Only the second obligation is a broad sheafification research programme. The
+first is a feasible MVP interface and is the faithful v3.2 analogue of the
+historical `mod_smod`/`smod_mod`/`eta_smod_transf`/`glue` cluster. It must be
+packaged rather than silently inferred from every site: the bare topology does
+not manufacture a reflector. Generic naturality and triangle computation
+belong to the existing functor/transformation/`Adjunction` owners. Any
+stronger reflection computation, such as reducing sheafification of an
+included sheaf, must be an explicit selected computational observation or
+`DefIso`-style capability with its own consumer and SOP audit, not an ad hoc
+global fold.
 
 ## 8. Descent And Sheaves
 
@@ -1485,7 +1510,53 @@ validates one nonvacuous discrete or Cat-valued site.
   object evidence;
 - keep the forgetful functor and its higher action separately consumer-gated;
   and
-- do not assume a sheafification reflector or generated coverage saturation.
+- do not infer a sheafification reflector or generated coverage saturation
+  merely from the topology. PSSS-05c may supply the reflector separately.
+
+### Phase PSSS-05c — Supplied sheafification reflector capability
+
+Status: focused representation probe green; selected as an MVP-feasible
+interface that may precede the PSSS-05b descent characterization;
+construction from an arbitrary topology remains separately consumer-gated.
+
+- preserve the historical target-category parameter: the supplied sheaf
+  classifier is indexed by `K`, `J`, and a value category `V`, with underlying
+  presheaves in `Functor_cat(Op_cat(K),V)`; in particular `V=CommRing_cat`
+  serves structure sheaves directly;
+- retain `J` at a rigid classifier or topology-indexed evidence boundary. A
+  transparent record whose body erases `J` would not actually say that the
+  supplied category is the sheaf category for that topology;
+- package a selected
+  `a_J : Functor_cat(Op_cat(K),V) -> Sheaf_cat(J,V)` and forgetful inclusion as
+  actual whole functors;
+- package `Adjunction(a_J,include)` so that unit, counit, ordinary naturality,
+  and triangle computation remain at the existing generic owners;
+- expose a stricter reflection computation on already-sheaf objects only when
+  selected data (`DefIso`, an equivalent internal comparison, or a measured
+  declaration-backed observation) justifies it;
+- permit a site or scheme presentation to assume this package as primitive
+  logical-framework data, without claiming that every `GrothTopology` has
+  been equipped with one; and
+- keep concrete structure-sheaf restriction, localization, and glue
+  computation in the concrete algebra/sheaf owners. Abstract sheafification
+  does not replace the computational Cartier acceptance criterion. A later
+  PSSS-05b theorem may identify or compare this supplied classifier with its
+  descent-characterized sheaves; that comparison is not required merely to
+  consume the primitive MVP capability.
+
+The ignored probe
+`tmp/probes/psss05c_supplied_sheafification.lp` validates the representation:
+an injective `Sheaf_cat(K,T,V)` retains the topology and value category, while
+a transparent Sigma capability packages whole inclusion/sheafification
+functors and `Adjunction(sheafify,include)`. The existing adjunction
+projections type the whole unit and counit transformations without a local
+action, naturality, triangle, rewrite, or unification rule. Quiet and
+warning-enabled checks pass at logs timestamped `20260802-142305` and
+`20260802-142323`; the
+latter inherits exactly `1179 = 1020 + 159` warnings and has no warning in the
+probe file. This is feasibility evidence, not yet a promoted source: a
+concrete structure-sheaf or scheme consumer must select the public naming,
+reflection strength, and required computations.
 
 ### Phase PSSS-06a — Set-carrier commutative-ring objects
 
@@ -3870,7 +3941,7 @@ needs an intended non-chaotic topology input or a downstream sheaf consumer;
 `PSSS-09cG` still owns least/generated saturation and any reflection/HIT it
 actually requires.
 
-##### Later h-level-stratified sheafification gate
+##### Later h-level-stratified sheafification-construction gate
 
 The Tabareau paper is baseline evidence, not the selected implementation.
 Its relevant architecture starts with a left-exact modality on `HProp`, lifts
@@ -3881,6 +3952,13 @@ separation, and constructs sheafification in separate “make separated” and
 set-/Cat-/groupoid-valued sheaves, and a sheafification reflector separate.
 It also exposes universe, coherence, and non-finitely-truncated limitations,
 so it must not be transplanted wholesale as the scheme interface.
+
+This gate concerns deriving a reflector and its laws. It does not prohibit
+the PSSS-05c MVP from accepting a reflector/adjunction as supplied primitive
+data, just as the historical experiment accepted `mod_smod`. Conversely,
+postulating that capability does not establish a canonical double-plus
+construction, least generated topology, or left exactness unless those are
+separately supplied or proved.
 
 For emdash, the computational Cartier/Zeuner acceptance criterion remains
 primary: `D : O ->` sieve must expose restriction and invertibility membership
@@ -4187,6 +4265,104 @@ representability result together with the existing computing chart/atlas
 data; it should not reopen those broad foundations unless that concrete
 consumer demonstrates the need.
 
+##### PSSS-10c1 — Represented intersections of two basic opens
+
+Status: rule-free source and dedicated reviewer synchronized-green through
+exact warnings, strict audit/catalog, 96-target health, and the
+nonduplicative integration remainder; authorized local checkpoint pending.
+
+The next bridge joins PSSS-10c directly to the overlap computation already
+used by PSSS-10a/PSSS-10b.  For `f,g:R` and a test ring `S`, use the explicit
+point classifier
+
+```text
+AffineSpecBasicOpenIntersectionPoint(R,f,g,S)
+  = Sigma(h : CommRingHom(R,S),
+      UnitEvidence(h(f)) x UnitEvidence(h(g))).
+```
+
+The existing structured-map multiplication law transports unit evidence at
+`h(f*g)` to unit evidence at `h(f)*h(g)`.  The existing constructive facts
+that a product is a unit exactly when both factors are units give maps in
+both directions.  Because both evidence fibres are propositions, every
+homotopy fibre of either map is directly contractible; this produces the
+fibrewise `TypeEquiv` without expanding the general half-adjoint/quasi-inverse
+construction.  The existing same-base Sigma equivalence lifts it at the
+explicit point normal form to
+
+```text
+AffineSpecBasicOpenPoint(R,f*g,S)
+  ~= AffineSpecBasicOpenIntersectionPoint(R,f,g,S).
+```
+
+For any selected localization at `f*g`, the implementation retains the
+PSSS-10c public representation equivalence and the new explicit-Sigma
+intersection equivalence as a transparent two-capability chain.  Its selected
+forward and inverse maps compose on decoded point carriers, and both
+composite laws are derived from the two existing `TypeEquiv` laws.  Thus
+`R[1/(f*g)]` represents the intersection computationally without asking the
+checker to normalize an entire equivalence package through the public
+sieve-membership alias.  This is the functor-of-points counterpart of the
+already-internal product/iterated-localization chart overlap and connects
+executable point membership, localization, and chart overlap before any
+general scheme record is introduced.
+
+The probe history records two useful rejected presentations.  Treating the
+stable `Product_grpd` head as definitionally the constant-family Sigma for
+proposition evidence failed, so the selected unit pair is transparently the
+Sigma product it actually uses; no global Product truncation shortcut was
+added.  A full quasi-inverse candidate and later a one-line coercion of the
+public PSSS-10c `TypeEquiv` to its explicit-Sigma endpoint each exceeded the
+60-second bound without a type error.  The proposition-specialized point
+equivalence succeeds at
+`logs/probes/psss10c1_prop_equiv_optimized-20260802-133114.log`; the selected
+two-step representation with executable maps and laws succeeds at
+`logs/probes/psss10c1_opt_represented_intersection-20260802-133936.log`.
+The rejected full/coercion logs include timestamps `20260802-131211`,
+`20260802-132247`, and `20260802-133544`; neither a raised timeout nor a rigid
+facade, rewrite, or unifier was retained.
+
+The promoted `emdash3_2_commutative_algebra_affine_intersections.lp` source
+has 521 lines, 15 symbols, and zero rewrite or unification rules.  Its
+195-line reviewer has 12 assertions and closes the bridge on the existing
+`F2 x F2` complementary-idempotent atlas: the two generators multiply
+definitionally to zero, so the selected zero localization represents their
+computationally empty intersection.  Focused quiet logs are
+`logs/probes/emdash3_2_commutative_algebra_affine_intersections-20260802-134051.log`
+and
+`logs/probes/commutative_ring_affine_intersections-20260802-134225.log`.
+Warning-enabled logs at timestamps `20260802-134334` and `20260802-134358`
+inherit exactly `1179 = 1020 + 159`, with no changed-file warning.  The strict
+rule audit retains zero unreviewed clauses and 52 annotated slots across 32
+intentional clauses. The strict catalog remains at 1,987 checks across 89
+areas with zero legacy or unclassified entries. Synchronized health passes
+all 96 registered source/example targets in 788.439 summed check-seconds at
+source snapshot
+`sha256:8491ed696767a463bb3f3aebe6ea0adfab402432bd04aae0c0efc23d00e1974e`.
+The new source and reviewer take 4.595 and 28.261 seconds; the unchanged
+central target passes at 57.730 seconds.
+
+Two earlier health attempts overlapped the concurrent elaborator worktree's
+long `check:ts` process and timed out on different unchanged near-boundary
+targets (`emdash3_2_checks.lp` and the affine-glue source). The final
+uncontended traversal passes both under the unchanged 60-second bound; no
+timeout increase, source workaround, or aggregate repetition is retained.
+The fresh health traversal is followed by the nonduplicative CI remainder:
+snapshot verification, 39 Python tests, five document-registry tests,
+Python/JSON/shell checks, source/report/reference lints, book
+evidence/typography/KaTeX/assembly checks, strict rule audit, and strict
+catalog verification are all green.
+
+The first implementation boundary remains deliberately componentwise in the
+test ring `S`.  The two basic opens themselves are existing whole internal
+sieves and the represented affine is an existing whole Yoneda presheaf, so
+their arrow actions are not replaced by object-only data.  The new theorem
+must nevertheless not be described as a whole natural equivalence or a
+general internal sieve-intersection owner until such an interface is actually
+constructed and consumed.  No external naturality fields, functor equality,
+univalence, generated topology, sheafification, rigid facade, rewrite rule,
+or unification rule belongs in this tranche.
+
 ##### PSSS-10d — Induced small-slice topology and ringed-site comparison
 
 Status: proposed later, not a prerequisite for the current computational MVP.
@@ -4248,7 +4424,8 @@ consumer demonstrates that nontransitive unification requires it.
 - **Strict versus weak descent:** Cat-valued descent is not advertised as a
   complete infinity-stack implementation without a coherence audit.
 - **Topology/modality conflation:** a site does not automatically provide a
-  computational sheafification adjunction.
+  computational sheafification adjunction. An MVP may accept one as an
+  explicit PSSS-05c capability without claiming to construct it.
 - **Truncation overreach:** selected covers and higher descent data do not
   require propositional truncation merely to exist. Conversely, retained
   witness data are not ordinary cover propositions without reflection,
@@ -4811,6 +4988,39 @@ consumer demonstrates that nontransitive unification requires it.
   the coordinate restrictions compute to whole structured maps. Describe the
   result as an atlas/glue presentation only: no universal colimit/gluing
   theorem, sheaf, locally ringed space, or general scheme record is implied.
+- **PSSS-D-097:** retain the PSSS-10c componentwise `TypeEquiv` as the selected
+  affine basic-open representation boundary.  It uses whole structured maps,
+  internal sieve membership, and localization contractibility, but neither
+  invokes univalence nor pretends to prove equality of whole presheaves.  Its
+  checkpointed result is sufficient for the next computational overlap
+  consumer.
+- **PSSS-D-098:** select the pointwise identity
+  `D(f*g)(S) ~= D(f)(S) intersect D(g)(S)` as PSSS-10c1.  Derive it from the
+  existing CommRing homomorphism multiplication law and product-unit
+  constructions, use proposition-valued fibres rather than a repeatedly
+  expanded general quasi-inverse, and lift it through the existing same-base
+  Sigma equivalence.  Treat this as an
+  honest bridge between already-internal endpoints, not as authorization for
+  an object-only replacement, a new global sieve-intersection owner, external
+  naturality, functor equality, or univalence.
+- **PSSS-D-099:** retain localization representability and the explicit
+  basic-open-intersection equivalence as a transparent two-`TypeEquiv` chain.
+  Expose its composed forward/inverse maps and prove their two laws from the
+  component equivalence laws.  Do not force a single `TypeEquiv` package
+  across the measured public sieve-membership normalization boundary: both a
+  direct package coercion and the full composite exceed 60 seconds without a
+  semantic error.  This is a performance-aware representation choice, not a
+  weakening to object-only data or permission for a rigid shortcut.
+- **PSSS-D-100:** distinguish construction of sheafification from a supplied
+  sheafification capability. The scheme MVP may accept whole
+  `a_J`/`include` functors and `Adjunction(a_J,include)` as primitive data,
+  faithfully refining the historical `mod_smod` interface, without deriving
+  double-plus, generated saturation, or left exactness. PSSS-05c may expose a
+  topology- and value-category-indexed primitive sheaf classifier before
+  PSSS-05b; PSSS-05b later owns its descent characterization or comparison.
+  Concrete restriction/localization/glue computation remains mandatory at
+  the structure-sheaf owners, and any definitional reflection observation
+  needs its own consumer and SOP audit.
 
 ## 19. Side-Task Ledger
 
@@ -4825,6 +5035,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-04b | Cover-family presentations and generated topology | Proposed | Nontrivial finite/combinatorial or algebraic coverage consumer; higher-inductive gate for generic saturation |
 | PSSS-05a | Canonical sieve-descent diagram and anchored restriction agreement | Research probes green; rigid-adapter promotion trial rejected and removed | Terminal-map uniqueness/contractibility or another derived nonempty semantic consumer, then source/SOP gate |
 | PSSS-05b | Sheaf object package and natural-map category | Proposed | PSSS-05a semantic and SOP gate |
+| PSSS-05c | Supplied topology-/value-indexed sheaf classifier and whole reflector/adjunction capability | Focused representation and exact-warning probes green; may precede PSSS-05b, construction theorem deferred | Concrete scheme or structure-sheaf consumer before promotion |
 | PSSS-06a | Set-carrier commutative-ring operations, laws, package, and zero-ring model | Green through full integration CI; locally checkpointed | PSSS-06b consumer gate closed |
 | PSSS-06b | Ring morphisms, `CommRing_cat`, and transparent explicit-map carrier observation | Green through full integration CI; locally checkpointed | Carrier functor separately consumer-gated |
 | PSSS-07a | One-element localization universal property and zero-ring model | Green through full integration CI; locally checkpointed | Later PSSS-07 consumers remain gated |
@@ -4855,6 +5066,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative integration remainder green; locally checkpointed at `837cfeb` | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
 | PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Rule-free complementary-idempotent atlas source/reviewer/central checks, exact warnings, strict 1,987-check catalog, synchronized 92-target health, and nonduplicative integration remainder green; locally checkpointed at `db91ddf` | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
 | PSSS-10c | Affine Yoneda functor of points and localization representation of semantic basic opens | Rule-free implementation synchronized-green through exact warnings, strict 1,987-check catalog, 94-target health, and nonduplicative integration remainder; locally checkpointed at `154069d`; no univalence or whole-presheaf equality promoted | Shared identity CommRing presheaf, ordinary sieve membership, and universal-property localization |
+| PSSS-10c1 | Pointwise basic-open intersection and representation by localization at `f*g` | Rule-free source/reviewer synchronized-green through exact warnings, strict 1,987-check catalog, 96-target health, and nonduplicative integration remainder; authorized checkpoint pending | PSSS-10c plus product-unit and structured-map multiplication laws |
 | PSSS-10d | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | Concrete downstream consumer plus selected PSSS-09c/PSSS-08c1 scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
@@ -5281,3 +5493,32 @@ PSSS-10c is successful when:
     catalog/health synchronization, authority prose, and the proportional
     nonduplicative integration remainder are green before the authorized
     local checkpoint.
+
+PSSS-10c1 is successful when:
+
+1. its intersection-point classifier is transparently a structured map
+   `h:R->S` together with the product of the two existing unit-evidence
+   fibres, rather than a duplicate primitive membership predicate;
+2. unit evidence at `h(f*g)` is converted to and from paired evidence at
+   `h(f)` and `h(g)` using the existing homomorphism multiplication law,
+   transport, and product-unit constructions;
+3. proposition-valued unit evidence gives direct contractible-fibre
+   equivalence evidence and the existing same-base Sigma theorem lifts the
+   fibre equivalence to explicit points;
+4. PSSS-10c representation and the new point equivalence form a transparent
+   two-capability chain for any selected localization at `f*g`, with
+   executable composed forward/inverse maps and both composite laws, while
+   the measured whole-package normalization timeout remains explicit;
+5. the result is connected in prose and a focused reviewer to the existing
+   product/iterated-localization chart overlap, while no equality of chosen
+   localization packages is asserted;
+6. the componentwise scope is explicit: existing whole sieves/presheaves keep
+   their internal actions, but no whole natural equivalence, general
+   sieve-intersection owner, or object-only substitute is claimed;
+7. no external naturality field, univalence principle, generated topology,
+   sheafification, rigid facade, rewrite rule, or unification rule is added;
+   and
+8. focused source/reviewer checks and the proportional SOP synchronization
+   are green before an authorized local checkpoint, with the recent long
+   aggregate evidence reused until this becomes a substantial promoted
+   boundary.
