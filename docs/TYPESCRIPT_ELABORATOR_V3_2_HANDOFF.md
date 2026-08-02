@@ -370,12 +370,20 @@
 > approximately 44-minute aggregate was not repeated: three D-057-local stale
 > assertions were corrected focused-green, leaving only the same three
 > unrelated canonical-export digest pins, for an effective corrected boundary
-> of 1,285 pass/51 skip. The dependency-ready operation is the read-only
-> `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` audit of covariant target and
-> contravariant source orientation through existing internal action owners.
-> It may freeze at most one exact successor and may not change behavior.
-> Whiskering/action, arbitrary pointwise coherence, parser/browser work, new
-> kernel mathematics, and unrestricted `:^nd` remain outside D-057.
+> of 1,285 pass/51 skip. The former dependency-ready
+> `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` audit is now read-only complete
+> with zero active semantic delta. It distinguishes fixed-head whiskering from
+> a varying `Transf_catd` classifier: the former is already constructed by
+> `comp_prod_fapp1_fapp0 (Catd_cat K)`, while the latter remains a separate
+> deferred architecture audit. One missing generic `tdapp0_fapp0` fibre
+> projection is strict-LHS-clean and warning-neutral. The exact
+> `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` /
+> H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 /
+> D-DTTLF-USABILITY-058 proposal is frozen in the living plan and awaits an
+> immutable checkpoint plus separate review. It covers symmetric finite pre-
+> and postwhiskering with internal fibre object/arrow and base/higher action;
+> arbitrary varying `Transf_catd`, external coherence, parser/browser work,
+> and unrestricted `:^nd` remain explicit non-claims.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed

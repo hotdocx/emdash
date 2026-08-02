@@ -507,7 +507,9 @@ It deliberately avoids:
 | `DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` | implemented and in-scope green at `e125bb9aa2c734c6bee01f3eccfa28cfa1cdebc4` under D-DTTLF-USABILITY-056 | completed `DIRECT-CONTEXTUAL-ND-GRADUATE-0U`; immutable proposal `ff170aa0ab8ec18e829a95689800032401c18f23`; separate review under standing unattended delegation; 6/6 focused and 37/37 combined regressions; workspace/typecheck/lint; sole aggregate 1,278 pass/51 skip/same three unrelated digest-pin failures | `composeCells` now has a homogeneous construction-only indexed point-Hom branch. The recursive point factorer recovers each D-055 leaf and composes the resulting closed `Transfd` owners through existing generic composition. The whole-fibre branch remains green. One contextual-composition evidence rule records the point tree and usage counts. No method, Core/LF case, kernel/transfer owner, identity, whiskering, parser/browser route, or unrestricted-`:^nd` claim was added. |
 | `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W` | read-only successor audit complete; zero semantic delta; generic point identity selected | implemented D-055 eta and D-056 recursive composition; active `id`/`id_transfd`, displayed component-identity rules, and internal base-arrow action; existing finite displayed-functor endpoint factorer | Identity is the smallest missing constructor and also tests a mixed `Functor_catd` fibre without introducing mixed coherence. Select one generic `identityCell(endpoint)` construction, finite factorable endpoint recovery, and relocation of the already-reviewed `id` signature to the earliest `Transfd` transfer layer. Whiskering needs a new indexed-Hom action node and orientation audit. A `Pi_cat(Transf_catd ...)` section remains pointwise data, not an outer-coherence constructor. |
 | `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` | implemented and in-scope green at `64684f090499debebc64f752a063979f3c2f61e3` under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 / D-DTTLF-USABILITY-057 | completed `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W`; immutable proposal `a16514c00c3e7d4c16f86c5d91fbd59f202b4a0d`; separate review under standing unattended delegation; 7/7 focused identity tests, 50/50 nearest semantic regressions, 17 pass/1 skip transfer-audit matrix, and 22/22 corrected descendant assertions | The exact existing generic `id` declaration is relocated/relinked without duplication; three existing point-component clauses close at `fibred-transfd-1` and two internal-cell folds close at displayed-chain. One construction-only `identityCell(endpoint)` and a shared recursive finite endpoint factorer recover genuine generic identity at `Functord_cat`, including finite chains and a parametric mixed `Functor_catd` fibre. No kernel mathematics, whiskering, arbitrary point coherence, parser/browser route, or unrestricted `:^nd` was added. |
-| `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` | dependency-ready read-only audit; zero semantic delta required | implemented D-055 eta, D-056 recursive composition, and D-057 identity; active `Functor_catd`/`Transf_catd`, `Unit_prof`, Hom action, and indexed-Hom infrastructure | Compare covariant target action, contravariant source action, and their exact orientation through the existing internal owners. Probe representative mapped eta/identity and source-side cases, then freeze at most one exact whiskering/action successor. Add no semantic behavior, new owner, curry/section route, external coherence evidence, parser/browser behavior, or unrestricted `:^nd` during the audit. |
+| `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` | read-only audit complete; zero active semantic delta; fixed-head pre/post whiskering selected | implemented D-055 eta, D-056 recursive composition, and D-057 identity; active `comp_prod_fapp1_fapp0`, ordinary Cat projection ladder, `tdapp0_fapp0`, and `tdapp1_int_cell`; bounded owner-position probes | Fixed-head pre/post whiskering is already constructed internally by generic horizontal action at `Catd_cat K`; it does not require `Transf_catd_func`. One missing existing-owner `tdapp0_fapp0` projection was isolated, warning-measured, and made strict-LHS-clean by leaving inferred endpoints as `_`. A genuinely varying `Transf_catd` constructor remains a separate audit. |
+| `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` | exact proposal frozen under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 / D-DTTLF-USABILITY-058; decision pending | completed `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y`; immutable proposal checkpoint to be recorded; separate review required | Add one warning-neutral existing-owner fibre projection, transfer the existing generic horizontal-action signature plus its new displayed and three existing ordinary projection rules, and recursively lower `lambda^nd a. H(eta[a])` and `lambda^nd a. eta[L[a]]` through `(eta,id_H)` and `(id_L,eta)`. Check fibre object/arrow and internal base/higher action; add no new owner, external equation, curry/section route, varying `Transf_catd` constructor, parser/browser behavior, or unrestricted `:^nd`. |
+| `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -6006,10 +6008,205 @@ closure or for the following read-only audit.
 
 D-057 adds no Lambdapi mathematics, owner-specific evaluator case,
 whiskering/action, arbitrary pointwise-coherence promotion, text/parser/
-browser behavior, or unrestricted `:^nd` claim. The next dependency-ready
-operation is `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y`: a read-only,
-orientation-aware audit of the existing indexed-Hom action and whiskering
-owners that may freeze at most one exact semantic successor.
+browser behavior, or unrestricted `:^nd` claim. Its former dependency-ready
+successor, `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y`, is now complete as the
+read-only orientation audit recorded below; D-058 is the resulting separately
+reviewed semantic proposal.
+
+## DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y result
+
+The action audit closes one ambiguity raised by the transformation-tower
+review. There are two different problems, and the next implementation must not
+conflate them:
+
+1. **Fixed-head whiskering.** Given closed displayed functors
+   `L : Functord C E`, `F,G : Functord E D`,
+   `H : Functord D Q`, and `eta : Transfd F G`, construct
+
+   ```text
+   H eta : Transfd (H o F) (H o G)
+   eta L : Transfd (F o L) (G o L).
+   ```
+
+   The active generic owner `comp_prod_fapp1_fapp0`, specialized to the
+   ambient category `Catd_cat K`, already constructs both results from
+   `(eta,id_H)` and `(id_L,eta)`. It returns a whole `Transfd`; no external
+   naturality equation, cast, total-context section, or mixed curry is
+   involved.
+
+2. **A varying transformation classifier.** A future expression in which
+   `A`, `B`, `FF`, and `GG` themselves vary over another context may need an
+   internal action package analogous to `Functor_catd_func`. The active kernel
+   has no `Transf_catd_func`. That absence does not block fixed-head
+   whiskering and is recorded separately as
+   `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA`; it may be promoted only after a
+   concrete varying-classifier consumer demonstrates the need.
+
+This distinction answers the `Functor_catd*` analogy without weakening it.
+`Functor_catd_func` was needed to make the *classifier constructor itself*
+vary functorially. D-058 instead uses a transformation already internalized as
+an arrow of `Catd_cat K` and applies the ordinary categorical composition
+action there.
+
+### Internal owner and action route
+
+The complete route is internal:
+
+- `comp_prod_fapp1_fapp0 (Catd_cat K)` constructs the whole displayed
+  transformation between the two composite displayed functors;
+- `tdapp0_fapp0` projects that transformation at `k`;
+- the existing ordinary `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`
+  clauses for `comp_prod_fapp1_fapp0 Cat_cat` determine respectively its
+  fibre object component, full off-diagonal arrow action, and capped arrow
+  action; and
+- `tdapp1_int_cell` accepts the resulting whole `Transfd` and therefore keeps
+  base-arrow and higher-cell semantics inside the kernel. The implementation
+  must test this route; it must not replace it with an externally supplied
+  square or equation.
+
+The only measured gap is the generic fibre projection from the first bullet
+to the second. The selected rule is at the existing `tdapp0_fapp0` and
+`comp_prod_fapp1_fapp0` owners and introduces no symbol:
+
+```lambdapi
+rule @tdapp0_fapp0
+      $K $W $Z _ _ $k
+      (@comp_prod_fapp1_fapp0
+        (@Catd_cat $K) $W $X $Z $FG $FG' $theta)
+  ↪ @comp_prod_fapp1_fapp0
+      Cat_cat
+      (Fibre_cat $W $k)
+      (Fibre_cat $X $k)
+      (Fibre_cat $Z $k)
+      (@Product_pair
+        (Functor_cat (Fibre_cat $W $k) (Fibre_cat $X $k))
+        (Functor_cat (Fibre_cat $X $k) (Fibre_cat $Z $k))
+        (@Fibre_func $K $W $X (sigma_Fst $FG) $k)
+        (@Fibre_func $K $X $Z (sigma_Snd $FG) $k))
+      (@Product_pair
+        (Functor_cat (Fibre_cat $W $k) (Fibre_cat $X $k))
+        (Functor_cat (Fibre_cat $X $k) (Fibre_cat $Z $k))
+        (@Fibre_func $K $W $X (sigma_Fst $FG') $k)
+        (@Fibre_func $K $X $Z (sigma_Snd $FG') $k))
+      (@Product_pair
+        (@Transf_cat
+          (Fibre_cat $W $k)
+          (Fibre_cat $X $k)
+          (@Fibre_func $K $W $X (sigma_Fst $FG) $k)
+          (@Fibre_func $K $W $X (sigma_Fst $FG') $k))
+        (@Transf_cat
+          (Fibre_cat $X $k)
+          (Fibre_cat $Z $k)
+          (@Fibre_func $K $X $Z (sigma_Snd $FG) $k)
+          (@Fibre_func $K $X $Z (sigma_Snd $FG') $k))
+        (@tdapp0_fapp0
+          $K $W $X
+          (sigma_Fst $FG)
+          (sigma_Fst $FG')
+          $k
+          (sigma_Fst $theta))
+        (@tdapp0_fapp0
+          $K $X $Z
+          (sigma_Snd $FG)
+          (sigma_Snd $FG')
+          $k
+          (sigma_Snd $theta)));
+```
+
+The `_` endpoint slots on the left are deliberate SOP requirements. An
+earlier probe reconstructed those terms, and
+`scripts/audit_rule_lhs.py --strict` correctly rejected slots 4 and 5 as
+reconstructible. The inferred form above reports zero reconstructible slots
+and also joins the specialized postwhiskering reduction that the reconstructed
+form obscured.
+
+### Bounded audit evidence
+
+The ignored owner-position probes establish all of the following without an
+active semantic edit:
+
+- both `(eta,id_H)` and `(id_L,eta)` applications of
+  `comp_prod_fapp1_fapp0 (Catd_cat K)` typecheck as whole `Transfd` terms;
+- before the candidate rule, their `tdapp0_fapp0` projections remain opaque;
+- with the one candidate rule, the generic projection and specialized pre- and
+  postwhiskering point betas all check;
+- the strict LHS audit reports zero reconstructible slots; and
+- warning-enabled checking retains exactly 1,079 unjoinable critical pairs
+  and 159 replaceable variables, a delta of `+0/+0`.
+
+Durable evidence is in
+`emdash2/logs/probes/contextual-nd-whisker-audit-20260802-020017.log`,
+`emdash2/logs/probes/contextual-nd-whisker-rule-audit-20260802-020558.log`,
+and
+`emdash2/logs/probes/contextual-nd-whisker-rule-audit-20260802-020641.log`.
+The disposable probe sources are not product artifacts and should be removed
+after this proposal records their result.
+
+## H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 /
+## D-DTTLF-USABILITY-058 proposal
+
+Decision requested: approve `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` with exactly
+this scope:
+
+1. Add the one generic `tdapp0_fapp0` projection above to active
+   `emdash2/emdash3_2.lp`, after the capped displayed-component owner is
+   available. Add no declaration or second rewrite.
+2. Follow the nested Lambdapi SOP: preserve the inferred LHS endpoints, run a
+   bounded owner-position check, strict LHS audit, warning comparison, catalog
+   and health synchronization, and exactly one proportional kernel CI at the
+   semantic checkpoint.
+3. Through the generic TypeScript LF transfer engines, acquire exactly one
+   pre-existing declaration, `comp_prod_fapp1_fapp0`; the new displayed fibre
+   projection; and the three pre-existing ordinary Cat projections owned by
+   `tapp0_fapp0`, `tapp1_func`, and `tapp1_fapp0`. Do not relocate or duplicate
+   `comp_prod_func`, and add no intrinsic Core/checker/evaluator case.
+4. Add one construction-only indexed-fibre-functor arrow application. A
+   closed displayed functor may act on an `indexed-hom` only when base,
+   source/target families, endpoints, and scope usage agree exactly. The node
+   must disappear during contextual factorization.
+5. Generalize indexed fibre-transformation application from the exact bare
+   slot to the existing finite factorable displayed-functor endpoint grammar.
+   Reject non-factorable, open, wrongly oriented, or family-mismatched terms.
+6. Extend the recursive point factorer with two symmetric internal cases:
+   postwhiskering lowers `H(eta[a])` through `(eta,id_H)`, while
+   prewhiskering lowers `eta[L[a]]` through `(id_L,eta)`, both using
+   `comp_prod_fapp1_fapp0 (Catd_cat K)`.
+7. Reuse the existing finite endpoint factorer, generic identity constructor,
+   and recursive vertical-composition factorer. Support arbitrary finite
+   closed `H` and `L` chains within this grammar; do not cap the
+   implementation at one mapper.
+8. Add focused positive tests for eta, identity, and recursive vertical
+   composition under both pre- and postwhiskering, including finite mapper
+   chains.
+9. Check point beta against the existing ordinary Cat horizontal-action
+   projection and check fibre full/capped arrow action through the existing
+   `tapp1_func`/`tapp1_fapp0` clauses.
+10. Check that the recovered whole term is a genuine `Transfd` and remains a
+    valid input to `tdapp1_int_cell`, demonstrating internally owned base-arrow
+    and higher action rather than external naturality data.
+11. Add negative tests for base, family, endpoint, orientation, open-subject,
+    and non-factorable-argument mismatches. All failures remain closed and
+    structured.
+12. Preserve D-055 eta, D-056 recursive vertical composition, D-057 identity,
+    whole-fibre `displayedTransforLambda`, and all direct mixed tower behavior.
+13. Add no `Transf_catd_func`, mixed-curry symbol, total-context section,
+    cast, classifier mirror, external equation/coherence witness, public
+    parser/browser route, or owner-specific LF semantic case.
+14. Claim only fixed-head finite pre/post whiskering inside the direct
+    contextual `:^nd` grammar. Arbitrary varying `Transf_catd` construction,
+    general two-nonidentity horizontal composition, unrestricted pointwise
+    arrows, arbitrary variance, and unrestricted `:^nd` remain open.
+15. During implementation run focused tests, workspace/typecheck/lint, the
+    transfer-audit matrix, and one root `check:ts` only after the bounded
+    tranche is otherwise green. Do not repeat the long aggregate after local
+    corrections, and do not repair unrelated canonical-export digest pins.
+
+This gate is deliberately one coherent symmetric operation, not two ad hoc
+features: pre- and postwhiskering are the two identity-specialized uses of the
+same existing generic horizontal-action owner. The proposal is decision-pending
+until separately reviewed. Under the standing unattended delegation, a later
+turn may record approval only after this proposal is checkpointed immutably
+and no immediate human correction supersedes it.
 
 ## Validation And Checkpoint Policy
 
@@ -6372,15 +6569,26 @@ descendant, workspace/typecheck/lint/whitespace, and sole aggregate evidence
 exactly as recorded. Do not repeat the aggregate or repair its three unrelated
 digest pins in this continuation.
 
-Proceed with `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` as a read-only,
-zero-semantic-delta audit. Compare the exact covariant target and
-contravariant source orientations of the active indexed-Hom, `Functor_catd`,
-`Transf_catd`, `Unit_prof`, and Hom-action owners and their existing
-TypeScript consumers. Use bounded probes where necessary and freeze at most
-one exact successor for separately reviewed implementation. During this audit
-add no kernel/TypeScript behavior, new owner, curry or total-context section,
-cast, external coherence evidence, parser/browser route, arbitrary pointwise
-`Transf_catd` promotion, or unrestricted `:^nd` claim.
+Treat `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` as read-only complete with zero
+active semantic delta. Its bounded probes distinguish fixed-head whiskering
+from a varying `Transf_catd` classifier. The existing
+`comp_prod_fapp1_fapp0 (Catd_cat K)` internally constructs both pre- and
+postwhiskered whole `Transfd` terms; one missing generic `tdapp0_fapp0` fibre
+projection is warning-neutral and strict-LHS-clean when its reconstructible
+endpoint slots remain inferred. Keep `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA`
+deferred unless a concrete varying-classifier consumer demonstrates a need.
+
+Treat the exact `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` /
+H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 /
+D-DTTLF-USABILITY-058 proposal above as frozen but decision-pending. Checkpoint
+it immutably, conduct a separate review under the standing unattended
+delegation with immediate human supersession, and implement only if that review
+approves all and only its fifteen numbered items. Until approval, add no
+kernel/TypeScript behavior. In every case preserve internal object-,
+fibre-arrow-, base-arrow-, and higher-action ownership; strict rewrite-LHS
+discipline; and the explicit non-claims concerning varying `Transf_catd`,
+external coherence, curry/sections, parser/browser work, and unrestricted
+`:^nd`.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -6399,6 +6607,19 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` completed
+  read-only and D-DTTLF-USABILITY-058 frozen for separate review.** Fixed-head
+  pre/post whiskering is already the generic horizontal action
+  `comp_prod_fapp1_fapp0` at `Catd_cat K`, so it needs no
+  `Transf_catd_func`, curry, section, or external coherence evidence. The
+  audit isolates one missing existing-owner fibre projection. Its inferred
+  LHS is strict-audit clean, its generic and specialized pre/post betas check,
+  and its warning inventory is unchanged at 1,079/159. The proposed
+  TypeScript continuation transfers the existing whole-action owner and
+  object/arrow projection ladder, then recursively factors finite mapped eta,
+  identity, and composition terms. A truly varying `Transf_catd` constructor
+  remains a separate deferred audit. No active behavior changed; D-058 is
+  decision-pending until review of an immutable proposal checkpoint.
 - **2026-08-02 — D-DTTLF-USABILITY-057 implemented and in-scope green at
   `64684f090499debebc64f752a063979f3c2f61e3`.** The exact existing generic
   `id` declaration is relocated/relinked without duplication; the three early
