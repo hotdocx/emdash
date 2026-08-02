@@ -330,6 +330,46 @@ No new Core node, checker branch, runtime rule, declaration-refinement
 facility, kernel owner, cast, coercion, curry, or external coherence payload is
 authorized.
 
+## Frozen `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` Proposal
+
+Gate: `H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-ACTION-CORRECTION-01`
+
+Decision: `D-DTTLF-USABILITY-075`
+
+The first focused generic-checker run accepts eta, identity, recursive
+composition, arbitrary-arrow rejection, scope hygiene, and the predecessor
+compact `:^nd` eta route. It rejects the generic prewhiskering expression with
+a `Hom`-classifier versus `Transf`-classifier endpoint mismatch. Exact source
+inspection identifies a transfer-presentation gap rather than missing
+mathematics:
+
+- Lambdapi defines `comp_cat_con_func` and the corresponding generic Hom
+  action transparently, so its action can normalize to canonical
+  `comp_cat_fapp0` endpoints there;
+- the TypeScript transfer intentionally imports `comp_cat_con_func` as an
+  opaque signature, so generic `fapp1_fapp0` retains opaque
+  `fapp0(comp_cat_con_func(...), ...)` endpoints; and
+- the active kernel already owns classifier-exact action functors
+  `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func`, whose target
+  `Transf_cat` endpoints are stated directly with `comp_cat_fapp0`.
+
+Correct only the two whiskering branches by importing those two existing
+owners as opaque checked signatures and applying them through generic object
+application. Eta, identity, composition, and compact `:^nd` remain unchanged.
+The correction adds:
+
+1. one signatures-only transfer fragment with exactly the two active owners;
+2. no runtime or proof rule, transparent-definition mirror, checker branch,
+   Core node, new Lambdapi owner, or kernel edit; and
+3. focused declaration-boundary assertions plus generic checker acceptance of
+   both canonical whiskering endpoints.
+
+This correction supersedes only the D-074 implementation detail saying that
+the first TypeScript slice emits generic Hom action of the opaque facades. It
+does not weaken the architectural result: both branches still reconstruct
+internally coherent active-kernel transformations without an external
+naturality payload.
+
 ### Files and tests
 
 Behavior edits are limited to:
@@ -432,7 +472,8 @@ Any later implementation proposal must include at least:
 |---|---|---|---|
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | final-green at `607a026f88bc6d3b9f305ecb21f6630ce7c94950` | D-070 through D-073 | Typed canonical finite `:^nd`, grouped text, lean chain-2A reviewer preset, production/browser evidence, and effective aggregate qualification. |
 | `COMPOSITIONAL-NATURAL-BINDER-0A` | complete; read-only | final-green 1AP; user-approved architectural direction | Existing semantic ladder and rich Core are sufficient; exact gap is open ordinary-component lowering. `Pi_cat(Transf_catd)` remains distinct from `Transfd_cat`. |
-| `COMPOSITIONAL-NATURAL-BINDER-1B` | dependency-ready; approved by D-DTTLF-USABILITY-074 | completed 0A; proposal `7104ca8cc8c9c46187093ba2051dd80917cc31a3` | Add rich `transfor` assumptions and one reusable ordinary `transforLambda` with recursive eta/identity/composition/pre/postwhiskering. Preserve compact `:^nd` unchanged. |
+| `COMPOSITIONAL-NATURAL-BINDER-1B` | implementation focused-green except classifier-exact whiskering correction | completed 0A; D-074 | Rich `transfor` assumptions and reusable `transforLambda` pass eta, identity, composition, rejection, hygiene, and compact-`:^nd` focused cases. Generic action through an opaque facade does not check at canonical whiskering endpoints. |
+| `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` | dependency-ready; frozen for D-DTTLF-USABILITY-075 | focused 1B failure; existing `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func` | Import exactly two existing classifier-exact action signatures and use them for pre/postwhiskering. Add no rules or kernel semantics. |
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | pending final-green 1B | completed 1B | Decide the exact introduction-recursion claim and remaining classifier/body/variance non-claims before text or browser promotion. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
 
@@ -486,8 +527,9 @@ introduction. Distinguish semantic expansion of compact `:^nd` from actual
 composition of reusable public `:^n` constructors. Do not assume
 `Transfd_cat` equals a section of `Transf_catd`.
 
-Implement frozen `COMPOSITIONAL-NATURAL-BINDER-1B` exactly as approved by
-D-DTTLF-USABILITY-074. Natural
+Complete frozen `COMPOSITIONAL-NATURAL-BINDER-1B` as approved by
+D-DTTLF-USABILITY-074 together with the narrow classifier-exact action
+correction reviewed under D-DTTLF-USABILITY-075. Natural
 transformation bodies must be recursively constructed from internal owners and
 fail closed without them. Keep the existing compact `:^nd` factorer unchanged
 until exact parity supports a later delegation decision. Preserve object,
@@ -501,6 +543,13 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-ACTION-CORRECTION-01
+  proposal frozen.** The first focused checker run passes four of five test
+  groups and isolates the remaining failure to generic Hom action through an
+  opaquely imported composition facade. The active kernel already provides
+  the classifier-exact `comp_cat_con_fapp1_func` and
+  `comp_cat_cov_fapp1_func`; D-075 proposes importing only those two opaque
+  signatures, with no rules or semantic delta.
 - **2026-08-02 — D-DTTLF-USABILITY-074 approved.** A separate review of
   proposal checkpoint `7104ca8cc8c9c46187093ba2051dd80917cc31a3` confirms
   that the construction-only classifier adds no LF semantics and that all five
