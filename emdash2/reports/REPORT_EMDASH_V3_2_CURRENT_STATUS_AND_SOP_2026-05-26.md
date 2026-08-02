@@ -2315,7 +2315,8 @@ Full integration CI independently passes all 80 Lambdapi targets in 647.194
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, the strict kernel audit, and fresh strict catalog
-verification. Final checkpoint recording remains pending.
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `362922d`.
 
 This result is representation-independent: it needs only the localization
 universal properties and neither assumes nor exposes fractions. It identifies
