@@ -266,14 +266,25 @@
 > arbitrary-depth variance gap is instead finite contravariant source action
 > at an arbitrary negative tower layer. The exact TypeScript-only
 > `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` /
-> D-DTTLF-USABILITY-054 proposal is approved exactly as proposed after a
-> separate review of immutable checkpoint
-> `107798b09081212007d4d1db80213eecc1495517`. The implementation-ready slice
-> compiles per-layer source chains deepest-outward using the existing source
-> action and target-action prefix lift; it adds no kernel/transfer owner,
-> curry, total section, sibling integration, pair/weakening/constant-middle
-> lift, or new `lambda^nd` constructor. Source maps remain absent from active
-> tower behavior until that bounded slice is implemented and checked.
+> D-DTTLF-USABILITY-054 is now implemented and checkpointed at
+> `390d9f4561576885d5d55588402479db877028ff`. Per-layer source chains compile
+> deepest-outward using the existing source action and target-action prefix
+> lift. Depth-three positions, simultaneous chains, bound-outer identity,
+> rich `Hom_catd`, and generated depth six are 10/10 green; unchanged
+> one-inner/nested compatibility is 16/16 green. Workspace, typecheck, lint,
+> and whitespace gates pass. The sole approximately 49-minute aggregate
+> reported 1,265 pass, 51 skip, and only the three previously recorded
+> unrelated canonical-export digest failures; it was not repeated. No
+> kernel/transfer owner, curry, total section, sibling integration,
+> pair/weakening/constant-middle lift, or new `lambda^nd` constructor was
+> added.
+> The next dependency-ready operation is the read-only
+> `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` audit. It treats `:^nd`, like `:^fd`,
+> as a fundamental direct nested contextual binder. It must derive the exact
+> typed telescope and select one concrete missing coherence-owning body
+> constructor from active `Transfd`/`Transf_catd`, `homd_int`, and
+> `tdapp1_int_*` authority; it must not route through curry or external
+> naturality evidence.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
