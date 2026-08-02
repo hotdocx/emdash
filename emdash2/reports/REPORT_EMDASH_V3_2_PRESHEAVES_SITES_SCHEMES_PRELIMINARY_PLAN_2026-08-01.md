@@ -32,8 +32,8 @@ compatibility tranche `PSSS-09cZ1` is checkpointed at `d808c29`. The selected
 next Cartier-style consumer is the rule-free `PSSS-08c0` bridge from
 invertibility-sieve membership to a universal localization factor; its focused
 and maintained source/reviewer/central checks, warning comparison, audit,
-catalog, 70-target health, and full integration CI are green; it is ready for
-its authorized local checkpoint under PSSS-D-069/PSSS-D-070.
+catalog, 70-target health, and full integration CI are green, and it is locally
+checkpointed at `9db8307` under PSSS-D-069/PSSS-D-070.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2301,10 +2301,10 @@ gated sheaf/descent comparison.
 
 ##### PSSS-08c0 — Invertibility cover and memberwise localization factor
 
-Status: rule-free implementation candidate green through focused and
+Status: rule-free implementation green through focused and
 maintained source/reviewer/central checks, exact warning comparison, strict
-audit, catalog, 70-target health, and full integration CI; ready for its
-authorized local checkpoint.
+audit, catalog, 70-target health, and full integration CI; locally checkpointed
+at `9db8307`.
 
 The historical `mod_loc` interface combined two distinct facts about a section
 `s : O(U)`: its support `D(s)` consists of arrows where `s` restricts to a
@@ -3262,7 +3262,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-07d | Polynomial algebra universal property | Green through full integration CI; locally checkpointed | Positive-variable representation remains consumer-gated |
 | PSSS-08a | CommRing-valued presheaves and arrowwise invertibility support | Green through full integration CI; locally checkpointed | PSSS-08b remains separately gated |
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
-| PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free candidate; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; ready for authorized local checkpoint | PSSS-08b, PSSS-07a, and PSSS-04a |
+| PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 70-target health, and full CI; locally checkpointed at `9db8307` | PSSS-08b, PSSS-07a, and PSSS-04a |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | PSSS-08c0 coherence and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
