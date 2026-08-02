@@ -38,6 +38,16 @@ detailed probe evidence.
   sieve coverages, maximality/pullback/local-character laws, named topology
   projections, and the chaotic topology. It declares no `Omega`, generated
   coverage saturation, sheafification, or descent.
+- `emdash3_2_ringed_sites.lp`: downstream one-way, rule-free supplied
+  reflective-sheafification layer. A rigid topology- and value-category-indexed
+  sheaf classifier is paired with a transparent capability carrying whole
+  inclusion and reflector functors, their adjunction, and fixed-counit
+  `OmegaEquivAlong` evidence. Generic adjunction owners derive whole internal
+  mate/glue maps. Its `ReflectiveCommRingedSite` specialization exposes the
+  selected structure sheaf as a whole CommRing-valued presheaf through the
+  inclusion. It does not construct canonical sheafification, generated
+  saturation, descent or left exactness, impose a local-ring condition, or
+  define a scheme.
 - `emdash3_2_nat_arithmetic.lp`: one-way reusable Nat arithmetic/sethood
   module. It owns `nat_add`, the canonical `NatSucc_func`, the associativity
   theorem, the Unit/Empty proposition witnesses, and `nat_is_set` without

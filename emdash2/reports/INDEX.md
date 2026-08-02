@@ -10,6 +10,17 @@ ordinary-sieve specialization without `Omega` or topology.
 `emdash3_2_sites.lp` is the direct ordinary-sieve Grothendieck-topology layer,
 with membership, maximal sieve, the three topology laws, and the chaotic
 model, but no `Omega`, generated saturation, sheafification, or descent.
+`emdash3_2_ringed_sites.lp` is the rule-free supplied-reflector layer. It
+retains a rigid `Sheaf_cat(K,T,V)`, packages whole inclusion/sheafification
+functors and their generic adjunction, and requires fixed-forward
+`OmegaEquivAlong` evidence at the actual counit components. The generic
+adjunction hom-profunctor comparison derives whole internal glue/unglue and
+both cancellation laws. Its first consumer packages a reflective
+commutative-ringed site and exposes the included structure sheaf as a whole
+CommRing-valued presheaf; the qualifier records that an ordinary ringed site
+need not carry a chosen reflector.
+It constructs no canonical sheafification, double-plus, generated topology,
+descent theorem, left exactness, local-ring condition, or scheme.
 `emdash3_2_eq1_hom_action.lp` is the kernel's one-way
 derived native equality-valued hom-action/groupoidality extension, and
 `emdash3_2_eq1_evidence_property.lp` is the downstream transparent
@@ -228,16 +239,67 @@ check-seconds at source snapshot
 `sha256:8491ed696767a463bb3f3aebe6ea0adfab402432bd04aae0c0efc23d00e1974e`,
 and the nonduplicative integration remainder is green. The tranche is
 included in local checkpoint `4436a23`.
-The living plan now distinguishes construction of sheafification from the
-MVP-feasible PSSS-05c supplied reflector capability. A site or scheme may
-carry a topology- and value-category-indexed primitive sheaf classifier,
-whole sheafification/inclusion functors, and their existing `Adjunction`
-evidence without claiming a double-plus/generated-topology construction or
-waiting for its PSSS-05b descent characterization; concrete structure-sheaf
-restriction/localization/glue computation remains a separate requirement. An
-ignored focused probe validates this topology-/value-indexed representation,
-whole unit/counit typing, and exact inherited warning footprint; promotion
-still awaits a concrete consumer.
+The living plan distinguishes construction of sheafification from the
+MVP-feasible PSSS-05c supplied reflector capability. The promoted candidate
+does not stop at a bare adjunction: it requires that every actual counit
+component is an internal equivalence, which captures the valid fixed-sheaf
+content of the historical primitive `mod_smod`. Its CommRinged-site consumer
+closes the earlier promotion gate, while concrete affine
+restriction/localization/glue computation remains a separate requirement.
+Focused source/reviewer checks, the exact inherited warning inventory, strict
+rule audit/catalog checks, and synchronized exact-content health are green.
+The health report covers all 98 registered targets at
+`sha256:4065c00eddb9e3a9de8c0e8fede09e1fb2b88c8a2bb7b7f8c1aaafa18e975742`;
+97 exact exit-zero results were resumed and the final unchanged affine-glue
+reviewer was checked from source against freshly typechecked, current-source
+Lambdapi objects. No timeout, assertion, rule, or semantic interface was
+weakened. The nonduplicative report/tooling gates are also green, so the
+authorized local PSSS-05c checkpoint is the only remaining step.
+The next scheme-facing layer should relate the included structure sheaf to
+the existing computing affine coordinate presheaf by a whole `DefIso`; no
+double-plus/generated-topology construction or PSSS-05b descent
+characterization is required merely to consume the supplied capability. An
+affine MVP nevertheless needs an intended Zariski topology and selected-cover
+compatibility; the chaotic model is not substituted for it. The initial
+fallback allowed that topology to be supplied. A primitive
+`generated_topology` is another viable assumption-explicit route
+provided its public capability includes generator inclusion and leastness;
+without those laws it is only an arbitrarily supplied topology under a new
+name. The primitive may be indexed directly by witness-rich cover
+presentations: inclusion maps every retained presentation witness into the
+topology's proposition-valued coverhood, and leastness compares against every
+topology accepting all those witnesses. This does not identify presentations
+or require truncation merely to state the capability. Internally constructing
+that primitive does not in fact require saturation/HIT machinery for the
+universal-property interface: an ignored rule-free probe defines generated
+coverhood as coverhood in every topology accepting the generators, proves the
+intersection proposition-valued, inherits all topology laws pointwise, and
+derives inclusion and leastness. Its quiet and warning checks are green with
+the exact inherited `1020 + 159` footprint. A HIT remains conditional on a
+consumer needing induction over generation steps or executable cover normal
+forms. The affine audit has now instantiated this generic internal
+construction with whole lifted chart presentations. Split rule-free probes
+construct every literal localization chart arrow internally, eliminate an
+arbitrary slice package once with `sigma_ind`, retain selected finite-family
+containment as witness-rich generators, and derive a least lawful topology
+directly on `AffineSpecBigSlice_cat(R)`. Quiet checks and an exact inherited
+`1020 + 159` warning comparison are green; promotion follows the pending
+reflector checkpoint and a maintained performance/SOP audit.
+The generic layer has also been refactored into ignored promotion-shaped
+sites-only source and seven-assertion reviewer candidates with final public
+names. Both are quiet-green; the source candidate inherits exactly the
+official `1020 + 159` warning inventory and adds no warning location.
+The affine layer now likewise has promotion-shaped source and nine-observation
+reviewer candidates. It chooses the exact existing opposite-precomposition
+endpoint as the localized chart structure map, making the triangle reflexive;
+generic coordinate-presheaf projection still computes to the supplied whole
+localization map. This avoids exposing a protected helper or duplicating its
+extensionality proof.
+The first affine target remains explicitly the big affine site over `R`, not
+the small site of open subsets: the internally generated big-Zariski topology,
+reflective structure sheaf, whole comparison with the computing coordinate
+presheaf, and localization-locality data can form the computational MVP,
+while a small-site comparison remains separate.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

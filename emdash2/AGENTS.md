@@ -14,6 +14,8 @@ the native subterminal-category and ordinary-sieve specialization is
 `emdash3_2_sieves.lp`;
 the direct ordinary-sieve Grothendieck-topology library is
 `emdash3_2_sites.lp`;
+the supplied reflective-sheafification and commutative-ringed-site library is
+`emdash3_2_ringed_sites.lp`;
 the transparent native equality-valued evidence-property and finite-dimension truncation
 extension is `emdash3_2_eq1_evidence_property.lp`;
 the reusable Nat arithmetic/sethood extension is
@@ -281,17 +283,27 @@ Use the following order:
     closed `F2 x F2` instance is a concrete non-endpoint atlas/glue
     presentation, not a universal gluing theorem, sheaf, locally ringed space,
     or general scheme record;
-33. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+33. `emdash3_2_ringed_sites.lp` for an assumption-explicit, rule-free
+    topology- and value-category-indexed sheaf classifier, supplied whole
+    inclusion/reflector adjunction, fixed-counit `OmegaEquivAlong` reflector
+    evidence, and its derived whole internal mate/glue operations. It also
+    packages a reflective commutative-ringed site and exposes its structure
+    sheaf as a whole CommRing-valued presheaf through the supplied inclusion.
+    The stronger name is intentional: an ordinary ringed site need not carry
+    a chosen reflector. The module does not
+    construct canonical sheafification, generated saturation, descent or left
+    exactness, assert a local-ring condition, or define a scheme;
+34. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
     endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
     directed negative results;
-34. `emdash3_2_checks.lp` for executable regression statements;
-35. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+35. `emdash3_2_checks.lp` for executable regression statements;
+36. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
     for current architecture and development SOP;
-36. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-37. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+37. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+38. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
     for comment/example notation;
-38. `reports/INDEX.md` for task-specific plans and decision records.
-39. `book/book.json` and `book/evidence.json` for book source
+39. `reports/INDEX.md` for task-specific plans and decision records.
+40. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 
