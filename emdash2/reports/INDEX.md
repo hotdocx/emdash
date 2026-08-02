@@ -211,8 +211,8 @@ the new source/reviewer pass from source in 24.042/23.915 seconds at
 check-content snapshot
 `sha256:01c61b02268c84c0c334b3fa3f0012c26f68ce52def9959e44a940a1bc7b300c`.
 Two unchanged near-timeout aggregates passed same-limit source retries; no
-object priming was used. The local implementation checkpoint remains to be
-recorded.
+object priming was used. The synchronized implementation is included in local
+checkpoint `a30f6dc`.
 `emdash3_2_commutative_algebra_affine_atlas.lp` is the rule-free PSSS-10b
 concrete atlas consumer. In every product ring it uses the already-selected
 finite Zariski-cover package for `(1,0)` and `(0,1)`, derives their
@@ -327,7 +327,8 @@ and catalog/tooling registration are green. Synchronized health passes all
 `sha256:01c61b02268c84c0c334b3fa3f0012c26f68ce52def9959e44a940a1bc7b300c`;
 the new source/reviewer pass from source in 24.042/23.915 seconds. Two
 unchanged near-timeout aggregates passed same-limit source retries, and no
-object priming was used. The local implementation checkpoint remains.
+object priming was used. The synchronized implementation is included in local
+checkpoint `a30f6dc`.
 The first affine target remains explicitly the big affine site over `R`, not
 the small site of open subsets: the internally generated big-Zariski topology,
 reflective structure sheaf, whole comparison with the computing coordinate

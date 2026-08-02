@@ -2845,7 +2845,8 @@ The unchanged central aggregate and affine-glue reviewer reached the cold
 source limit once and then passed same-limit source retries in 54.587 and
 44.889 seconds. No object priming was used. This is the intended big-affine
 Zariski topology for the computational MVP, not the small site and not yet a
-sheaf or scheme.
+sheaf or scheme. The synchronized implementation is included in local
+checkpoint `a30f6dc`.
 
 `emdash3_2.lp` contains no executable `assert` commands. Diagnostics live in
 `emdash3_2_checks.lp`; reviewer-facing milestones live in `examples/`.

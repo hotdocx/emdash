@@ -228,9 +228,10 @@ localization families become whole chart-arrow generators on
 `AffineSpecBigSlice_cat(R)`, and the generic intersection supplies the
 intended least big-Zariski topology. Focused quiet checks, exact inherited
 warnings, strict audit, catalog/tooling registration, and exact 102-target
-health are green; the local checkpoint remains. The next semantic step is
-therefore the affine structure-sheaf comparison and first concrete scheme
-record, not construction of general sheafification or generated topology.
+health are green, and the synchronized implementation is checkpointed at
+`a30f6dc`. The active semantic step is therefore the affine structure-sheaf
+comparison and first concrete scheme record, not construction of general
+sheafification or generated topology.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -4701,7 +4702,8 @@ or unification rule belongs in this tranche.
 Status: promoted as a rule-free source/reviewer pair. Focused quiet checks,
 the exact inherited-warning comparison, strict rule audit, catalog, script
 registration, authority synchronization, and exact 102-target health are
-green; the final local checkpoint remains.
+green. The synchronized implementation is checkpointed at `a30f6dc`;
+PSSS-11 is now the active scheme-facing gate.
 
 For a literal chart `h : R -> S` and selected localization of `f : S`, the
 selected promotion candidate constructs the whole arrow
@@ -5577,7 +5579,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-03a | Native subterminal categories, ordinary-sieve package, and pullback | Green; locally checkpointed | PSSS-03b and PSSS-04a remain separately gated |
 | PSSS-03b | Set-valued `Omega` family facade | Research gate | Sieve setness plus owner-aligned family assembly |
 | PSSS-04a | Direct ordinary-sieve Grothendieck topology and chaotic model | Green; locally checkpointed | PSSS-05a consumer gate |
-| PSSS-04b | Cover-family presentations and generated topology | Generic witness-rich impredicative intersection checkpointed; direct affine big-Zariski source/reviewer synchronized through exact 102-target health, local checkpoint pending | Final checkpoint; HIT only for derivation induction or normalization |
+| PSSS-04b | Cover-family presentations and generated topology | Generic witness-rich impredicative intersection and direct affine big-Zariski specialization checkpointed; the latter is `a30f6dc` | PSSS-11 consumer; HIT only for derivation induction or normalization |
 | PSSS-05a | Canonical sieve-descent diagram and anchored restriction agreement | Research probes green; rigid-adapter promotion trial rejected and removed | Terminal-map uniqueness/contractibility or another derived nonempty semantic consumer, then source/SOP gate |
 | PSSS-05b | Sheaf object package and natural-map category | Proposed | PSSS-05a semantic and SOP gate |
 | PSSS-05c | Supplied topology-/value-indexed sheaf classifier and whole reflector/adjunction capability | Rule-free source/reviewer green through focused checks, exact warnings, strict audit/catalog, exact-content 98-target health, and nonduplicative final gates; local checkpoint `647b6cc` | Concrete `ReflectiveCommRingedSite` consumer closes the promotion gate; affine whole-presheaf presentation next |
@@ -5608,14 +5610,14 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09cGI | Internal generated-topology construction | Rule-free generic source and nine-assertion reviewer green through focused/exact-warning/audit/catalog and synchronized 100-target health; local checkpoint `d826526` | PSSS-05c checkpoint and internal intersection construction; direct affine specialization remains PSSS-10dG |
 | PSSS-09cZ1 | Supplied lawful topology plus proposition-valued Zariski-basis compatibility | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 68-target health, and full CI; locally checkpointed at `d808c29` | PSSS-09b1 and `GrothTopology` |
 | PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
-| PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Internal generic generation checkpointed and direct affine instantiation synchronized through exact health; local checkpoint and subcanonicity remain separate gates | Promoted PSSS-09cGI/PSSS-10dG; PSSS-05b for subcanonicity |
+| PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Internal generic generation and direct affine instantiation checkpointed; subcanonicity remains a separate gate | Promoted PSSS-09cGI/PSSS-10dG; PSSS-05b for subcanonicity |
 | PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative integration remainder green; locally checkpointed at `837cfeb` | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
 | PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Rule-free complementary-idempotent atlas source/reviewer/central checks, exact warnings, strict 1,987-check catalog, synchronized 92-target health, and nonduplicative integration remainder green; locally checkpointed at `db91ddf` | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
 | PSSS-10c | Affine Yoneda functor of points and localization representation of semantic basic opens | Rule-free implementation synchronized-green through exact warnings, strict 1,987-check catalog, 94-target health, and nonduplicative integration remainder; locally checkpointed at `154069d`; no univalence or whole-presheaf equality promoted | Shared identity CommRing presheaf, ordinary sieve membership, and universal-property localization |
 | PSSS-10c1 | Pointwise basic-open intersection and representation by localization at `f*g` | Rule-free source/reviewer synchronized-green through exact warnings, strict 1,987-check catalog, 96-target health, and nonduplicative integration remainder; local checkpoint `4436a23` | PSSS-10c plus product-unit and structured-map multiplication laws |
-| PSSS-10dG | Direct internally generated big-affine Zariski topology | Promoted 178-line/7-symbol rule-free source and 120-line/9-assertion reviewer; focused and exact inherited `1020 + 159` warnings, strict audit/catalog, tooling/authority sync, and exact 102-target health green; local checkpoint pending | Generic PSSS-09cGI intersection plus selected finite localization families and exact-endpoint affine chart arrows |
+| PSSS-10dG | Direct internally generated big-affine Zariski topology | Promoted 178-line/7-symbol rule-free source and 120-line/9-assertion reviewer; focused and exact inherited `1020 + 159` warnings, strict audit/catalog, tooling/authority sync, and exact 102-target health green; local checkpoint `a30f6dc` | Generic PSSS-09cGI intersection plus selected finite localization families and exact-endpoint affine chart arrows |
 | PSSS-10dS | Small-site topology and ringed-site comparison | Proposed later; not required by direct big-site MVP | Concrete small-site consumer plus PSSS-10dG/PSSS-08c1 comparison scope |
-| PSSS-11 | Scheme atlas | Proposed: internally generated affine-Zariski site, whole structure-presheaf `DefIso`, narrow locality field, then concrete records/examples | Promoted PSSS-10dG plus checkpointed PSSS-05c |
+| PSSS-11 | Scheme atlas | Active: internally generated affine-Zariski site, whole structure-presheaf `DefIso`, narrow locality field, then concrete records/examples | Checkpointed PSSS-10dG plus checkpointed PSSS-05c |
 | PSSS-12 | Broader functor-of-points/qcqs comparison | Research boundary; local affine/basic-open representability is already PSSS-10c | PSSS-11 and any additional representability audit |
 
 ## 20. Success Criteria For The Foundation Tranches
