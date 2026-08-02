@@ -17,10 +17,20 @@
 > to an effective 1,290 pass/51 skip with only three previously recorded
 > canonical-export digest pins after two local historical assertions passed
 > their 16/16 focused correction. Do not repeat that approximately 44-minute
-> aggregate. The next dependency-ready operation is the read-only
-> `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` audit, which must
-> distinguish fixed `Transf_catd` use, computation of its base action, and a
-> genuinely varying classifier before selecting at most one semantic slice.
+> aggregate. `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` is now
+> read-only complete. A literal fixed `Transf_catd` target composes unchanged
+> with contextual `lambda^nd`, compares equal to its source `Transfd`, and
+> retains the existing internal higher-cell owner. The remaining gap is
+> narrower: active `Hom_catd`/`Transf_catd` compute their fibres but not their
+> specific base action. A bounded late probe constructs that action from
+> existing transport, section action, and `Unit_prof`; direct `Transf_catd`
+> action is only the `Functor_catd` specialization. The first semantic-runtime
+> orientation adds twenty unjoinable diagnostics and fails identity
+> conversion, so it was not promoted. The next dependency-ready operation is
+> the zero-delta `HOM-CATD-ACTION-NORMAL-FORM-0AC` audit, selecting between a
+> semantic composite plus justified joins and a rigid generic full/capped/
+> point projection ladder. `Transf_catd_func`, curry, external coherence, and
+> binder special cases remain deferred.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

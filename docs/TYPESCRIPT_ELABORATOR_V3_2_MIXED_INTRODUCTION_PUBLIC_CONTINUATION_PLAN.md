@@ -512,7 +512,8 @@ It deliberately avoids:
 | `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` | implemented and final-green at `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c` under D-DTTLF-USABILITY-059 | approved D-058 implementation experiment; exact active `comp_prod_fapp1_fapp0` signature; immutable proposal `62a8017f04af215696811a608be18d7c2dc5668e`; separate review under standing unattended delegation | Exactly three existing generic product declarations and three existing rules now live at the earlier fibred-product transfer boundary, and displayed-chain-2A reuses them without duplication. No kernel mathematics, mirror signature, Core case, product facade, or external coherence was added. |
 | `CONTEXTUAL-ND-HORIZONTAL-NORMALIZATION-FOUNDATION-1ZB` | implemented and final-green at `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c` under D-DTTLF-USABILITY-060 | final-green D-059; immutable proposal `2631fcd7f0cc278feff1639dc8afbb25fa5c06ee`; exact generic Hom trace and descendant checks | The exact `Hom_cat(Catd_cat)` category rule now lives at dependent-composition and two existing transparent-`Product_pair` betas live at fibred-product; later fragments inherit them and three unreachable mirrors are absent. The earlier displayed-evaluation audit now records that D-060 intentionally closes its historical prerequisite/composed mismatch. |
 | `CONTEXTUAL-ND-HORIZONTAL-IDENTITY-NORMALIZATION-FOUNDATION-1ZC` | implemented and final-green at `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c` under D-DTTLF-USABILITY-061 | final-green D-059/D-060; immutable proposal `46eadbfaa919237076a25d3f84ffe54f59ef3a25`; exact point/full/capped runtime witnesses | The transfer preserves Lambdapi's inferred endpoint slots, leaves inferred transparent-pair category slots wildcarded, and acquires exactly three pre-existing generic identity-action rules. `fibred-transfd-1` is eight declarations/seventeen local rules. No kernel mathematics, declaration, owner, Core/checker case, or wider `:^nd` behavior was added. |
-| `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` | dependency-ready read-only audit; zero semantic delta authorized | final-green D-058 through D-061; existing fixed `Transf_catd` family, `Functor_catd_func`, generic Hom/action, and contextual `:^nd` recursion | Distinguish three questions with concrete consumers: using a fixed `Transf_catd` as an ordinary target family, exposing its own base-action computation, and making the complete classifier vary through a possible `Transf_catd_func`. Stress one representative recursive transformation-valued tower at object/fibre/base/higher levels, search existing owners first, and freeze at most one smallest successor. Add no behavior during the audit and do not promote a new package merely by analogy. |
+| `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` | read-only audit complete; zero semantic delta; generic `Hom_catd` action-normal-form successor selected | final-green D-058 through D-061; existing fixed `Transf_catd` family; contextual fixed-target probe; recursive-mixed object/base/higher evidence; three bounded owner-position probes | A literal fixed `Transf_catd` target already composes parametrically with contextual `lambda^nd`: the result is definitionally the source `Transfd`, and its higher cell uses the existing internal owner. The family is a genuine `Catd`, but active `Hom_catd`/`Transf_catd` expose only fibre computation, so their specific base action remains opaque. A late `Unit_prof`-based generic `Hom_catd` composite typechecks and `Transf_catd` needs only specialization, not `Transf_catd_func`; however, the first runtime orientation adds twenty critical-pair diagnostics and does not join with identity. Select normal-form qualification before promotion. |
+| `HOM-CATD-ACTION-NORMAL-FORM-0AC` | dependency-ready read-only architecture/owner audit; zero semantic delta authorized | completed `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB`; successful late `Unit_prof` semantic composite; measured identity and overlap boundary | Compare the successful semantic composite with a rigid generic `Hom_catd` full/capped/point projection ladder. Require literal negative/positive endpoint pairing through `Unit_prof`, iterable full action, identity/composition joins, the `Hom_catd(Const Cat)`/`Functor_catd` fold, the `Hom_catd(Functor_catd)`/`Transf_catd` fold, strict-LHS and warning measurements, and one non-collapse case. Freeze at most one smallest implementation gate. Add no `Transf_catd_func`, curry, external equation, binder special case, parser route, or active behavior during this audit. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -6698,9 +6699,140 @@ fixed-head whiskering. It does not yet graduate arbitrary transformation-valued
 body synthesis, computation of every `Transf_catd` action, a varying
 `Transf_catd` constructor package, unrestricted context polarity, parser/
 browser parity, or unrestricted `:^nd`. The next dependency-ready operation
-is the zero-delta `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` audit. It
-must distinguish fixed-family use, fixed-family action computation, and a
-genuinely varying classifier before selecting at most one successor.
+at that checkpoint was the zero-delta
+`DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` audit. Its completed result
+and selected successor are recorded immediately below.
+
+## DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB result
+
+This read-only audit is complete with zero active semantic delta. It separates
+three questions that earlier discussion had sometimes grouped together.
+
+### Fixed `Transf_catd` use already works
+
+The concrete TypeScript witness constructs:
+
+```text
+T = Transf_catd(A,B,alpha,beta) : Catd K
+P,Q : Functord E T
+eta : Transfd P Q
+lambda^nd a. eta[a]
+```
+
+using the `fibred-displayed-mixed-nest-1` profile. The contextual abstraction
+compares `equal` with `eta`, compiles as `displayed-transfor`, and its
+base-arrow observation compiles as a `hom` headed by the existing
+`displayed-transfor-higher-cell` owner with literal target family `T`. The
+contextual result has no residual free-token usage. Existing recursive-mixed
+tests independently cover direct and transported transformation-valued
+results, component projection, point projection, and higher naturality.
+
+Consequently, a fixed `Transf_catd` target is already a parametric consumer of
+the direct contextual binder. No `Transf_catd`-specific frontend branch,
+curry, section encoding, or external naturality evidence is needed.
+
+### Internal action exists, but its specific computation is opaque
+
+`Transf_catd(A,B,FF,GG)` is declared at type `Catd K`; therefore it is already
+a genuine internal functor and the generic `fapp*` calculus supplies an
+internally owned action. This is soundly different from asking the user for an
+external square. The current active kernel nevertheless exposes only:
+
+```text
+fapp0(Transf_catd(A,B,FF,GG),k)
+  -> Transf_cat(FF[k^-],GG[k]).
+```
+
+There is no active `fapp1_func` or `fapp1_fapp0` computation headed by
+`Transf_catd`. The same is true of generic `Hom_catd`: it has a fibre rule but
+no transparent base-action rule. By contrast, `Functor_catd` already has
+full and capped mixed endpoint action through `Hom_tele_func`/`Hom_func`.
+
+Thus the remaining issue is not whether the recursive binder can target a
+transformation family. It is whether the kernel should expose the canonical
+base action of `Hom_catd`, and hence of its `Transf_catd` specialization, as a
+stable runtime normal form.
+
+### Existing owners suffice semantically
+
+Three bounded full-file owner-position probes establish the construction
+boundary:
+
+1. Placing the action beside the early `Hom_catd` declaration fails because
+   the required internal section-arrow owner `piapp1_fapp0` is declared later.
+   This is a dependency-order result, not a mathematical failure.
+2. A late composite that feeds the negative section arrow directly to
+   `Hom_func` fails elaboration at the literal `Op(E[y])`/`E[y]` boundary.
+   Erasing that distinction would violate the variance discipline.
+3. Keeping the endpoint pair literal and applying `Unit_prof(E[y])` succeeds.
+   The capped action first maps a fibre hom through `E[p]`, then applies the
+   rigid two-endpoint Hom action to the pair
+   `(X[p] : Op(E[y]), Y[p] : E[y])`. The whole probe, including generic
+   `Hom_catd` full/capped projections and `Transf_catd` specialization, checks
+   in under the 60-second bound with warnings disabled and enabled.
+
+The resulting ownership equation is:
+
+```text
+Hom_catd-action(E,X,Y,p)
+  = Unit_prof(E[y])[X[p],Y[p]] o fapp1(E[p],X[x],Y[x])
+
+Transf_catd-action(A,B,FF,GG,p)
+  = Hom_catd-action(Functor_catd(A,B),FF,GG,p).
+```
+
+This validates the user's `Unit_prof` observation and rejects a new
+`mix_uncurried_family`, `Transf_catd_func`, or isolated mixed-curry owner as a
+prerequisite for the fixed-family action.
+
+### Why the successful probe is not yet promotable
+
+The first semantic-composite runtime orientation increases the warning
+inventory from 1,079 to 1,099 unjoinable critical pairs while leaving the 159
+replaceable-pattern diagnostics unchanged. The twenty new interactions are
+concentrated at:
+
+- the generic `Hom_catd` full/capped projections;
+- generic identity/composition action;
+- `Hom_catd(Const_catd K Cat_cat,...) -> Functor_catd(...)`; and
+- `Hom_catd(Functor_catd A B,...) -> Transf_catd(...)`.
+
+A focused comparison of the semantic capped composite at `id_K` with the
+identity functor does not yet convert. Warnings are diagnostic rather than a
+veto, but this failed identity join means the successful typechecking formula
+must not be promoted unchanged.
+
+The likely normal-form correction is a rigid generic `Hom_catd` projection
+ladder—full action, capped action, and consumed point—whose public capped/point
+owners are related to the successful `Unit_prof` composite and whose exact
+identity/composition folds join the global action calculus. This mirrors the
+already-promoted `Hom_tele_func -> Hom_func -> Hom_fapp0` architecture. It must
+be compared with retaining the semantic composite plus narrowly justified
+joins; the audit must select one, not combine both casually.
+
+### Selected successor and feasibility conclusion
+
+`HOM-CATD-ACTION-NORMAL-FORM-0AC` is the sole selected successor. It is a
+read-only owner/normal-form audit before any implementation gate. It must:
+
+1. keep the negative endpoint literally opposite until `Unit_prof` consumes
+   the pair;
+2. preserve a whole functor at the full and capped stages so higher action is
+   iterable;
+3. close or deliberately proof-time-qualify identity and composition;
+4. test both existing `Hom_catd` specialization rewrites and a generic
+   non-collapse case;
+5. measure owner position, strict LHSs, warning deltas, and both reduction
+   orders; and
+6. freeze at most one smallest implementation proposal.
+
+The audit adds no active behavior. It leaves a genuinely varying complete
+classifier (`Transf_catd_func`) deferred until a concrete consumer needs it.
+The overall architecture remains feasible: fixed transformation-valued
+recursive binders work today, and the missing transparent action has a
+typechecked internal construction from existing owners. The remaining risk is
+normal-form engineering and coverage, not a discovered impossibility or a
+need to redesign the outer LF or direct binder.
 
 ## Validation And Checkpoint Policy
 
@@ -7141,13 +7273,27 @@ implementation result. Its two tranche-local historical assertions are
 focused-green after correction; only the same three canonical-export digest
 pins remain. Do not repeat that approximately 44-minute aggregate.
 
+Treat `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` as read-only complete.
+Carry forward its concrete fixed-target result: contextual `lambda^nd` is
+definitionally equal to the source `Transfd` and its higher observation uses
+the existing internal cell owner. Also carry forward its exact residual
+boundary: active `Hom_catd`/`Transf_catd` action is internally typed but its
+specific base computation is opaque. The successful late owner-position
+probe transports the hom through `E[p]` and then lets `Unit_prof(E[y])`
+consume the literal negative/positive section-arrow pair; `Transf_catd` is
+only its `Functor_catd` specialization. The direct semantic-composite runtime
+orientation is not promotable unchanged: it adds twenty unjoinable diagnostics
+and fails the focused identity join.
+
 The next dependency-ready operation is the read-only
-`DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB` audit. Distinguish use of a
-fixed `Transf_catd` target, computation of that fixed family's base action,
-and a genuinely varying classifier package. Search existing owners and test a
-representative transformation-valued tower before freezing at most one
-successor. Add no semantic behavior during the audit and do not introduce
-`Transf_catd_func` merely by analogy.
+`HOM-CATD-ACTION-NORMAL-FORM-0AC` audit. Compare the successful semantic
+composite with a rigid generic full/capped/point `Hom_catd` projection ladder.
+Require iterable full action, identity/composition joins, both existing
+`Hom_catd` specialization folds, a generic non-collapse witness, owner-position
+and strict-LHS checks, and warning/reduction-order measurements. Freeze at most
+one smallest implementation gate. Add no active behavior during the audit and
+do not introduce `Transf_catd_func`, curry, an external equation, or a binder
+special case merely by analogy.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7166,6 +7312,19 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — `DIRECT-CONTEXTUAL-ND-TRANSF-ACTION-GRADUATE-0AB`
+  completed read-only; `HOM-CATD-ACTION-NORMAL-FORM-0AC` selected.** A concrete
+  fixed `Transf_catd` target composes unchanged with contextual `lambda^nd`,
+  compares equal with its source `Transfd`, and exposes its higher cell through
+  the existing internal owner. Active `Hom_catd`/`Transf_catd` nevertheless
+  compute only their fibres. Three bounded owner-position probes show that the
+  specific base action is feasible through existing owners: transport the
+  hom through `E[p]`, then apply `Unit_prof(E[y])` to the literal negative and
+  positive section arrows; specialize the generic result for `Transf_catd`.
+  The successful semantic composite is not yet a selected runtime form: it
+  adds twenty unjoinable diagnostics and its identity comparison fails.
+  Therefore no active behavior changed, `Transf_catd_func` remains deferred,
+  and the sole next row is a rigid-versus-semantic normal-form audit.
 - **2026-08-02 — D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
   final-green at `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.** One existing-
   owner Lambdapi fibre evaluator beta, exact transfer dependency relocations,
