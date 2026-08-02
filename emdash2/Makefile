@@ -66,7 +66,7 @@ book-release:
 > ../scripts/pnpmw --dir emdash2/print run book:release
 
 health:
-> python3 scripts/check_metrics.py --update-log --write-report
+> python3 scripts/check_metrics.py --resume --update-log --write-report
 
 watch:
 > EMDASH_TYPECHECK_TIMEOUT=$(EMDASH_TYPECHECK_TIMEOUT) python3 scripts/watch_typecheck.py --log logs/typecheck.log
