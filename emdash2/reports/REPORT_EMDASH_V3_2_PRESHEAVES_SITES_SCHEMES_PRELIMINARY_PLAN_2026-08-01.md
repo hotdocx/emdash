@@ -79,9 +79,9 @@ aggregates, the fresh 1,942-check catalog, and synchronized 76-target health
 are green. Full integration CI is also green, and the tranche is locally
 checkpointed at `4b93619`. A rule-free `R[1/0]=0` empty-basic-open candidate
 is now green through maintained aggregates, the fresh 1,948-check catalog,
-synchronized 78-target health, and full integration CI; its local checkpoint
-follows the final exact staged-diff audit. A genuinely nondegenerate
-localization and overlap remain open.
+synchronized 78-target health, and full integration CI, and is locally
+checkpointed at `7013915`. A genuinely nondegenerate localization and overlap
+remain open.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2936,7 +2936,8 @@ Full integration CI independently passes all 78 Lambdapi targets in 528.561
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, the strict kernel audit, and fresh strict catalog
-verification. The local checkpoint follows the final exact staged-diff audit.
+verification. The implementation and synchronized authority prose are locally
+checkpointed at `7013915`.
 
 This is the computational empty-basic-open case and a non-identity-shaped
 localization of an arbitrary source ring, but it is algebraically degenerate.
@@ -3972,7 +3973,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
-| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; rule-free zero-localization/empty-open tranche green through 78-target health and full CI with local checkpoint following the final staged audit; nondegenerate model and overlap remain open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; rule-free zero-localization/empty-open tranche green through 78-target health and full CI and checkpointed at `7013915`; nondegenerate model and overlap remain open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
