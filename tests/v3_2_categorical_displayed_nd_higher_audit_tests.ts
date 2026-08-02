@@ -89,7 +89,7 @@ describe('DISPLAYED-ND-HIGHER-1B dependency-first audit', () => {
                     prerequisite.currentTransfdRuntimeRuleCount,
                     prerequisite.semanticImplementationAuthorized
                 ],
-                [6, 7, false]
+                [7, 10, false]
             );
         });
 
@@ -158,7 +158,7 @@ describe('DISPLAYED-ND-HIGHER-1B dependency-first audit', () => {
         );
     });
 
-    it('confirms selected owners are active and absent from the current transfer',
+    it('confirms only relocated id is present in the current transfer',
         () => {
             const source = readFileSync(
                 resolve(repositoryRoot, 'emdash2/emdash3_2.lp'),
@@ -180,7 +180,7 @@ describe('DISPLAYED-ND-HIGHER-1B dependency-first audit', () => {
                         CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_BOUNDARY
                             .declarationNames as readonly string[]
                     ).includes(name),
-                    false
+                    name === 'id'
                 );
             }
             assert.match(

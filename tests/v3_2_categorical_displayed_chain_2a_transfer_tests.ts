@@ -181,14 +181,18 @@ describe('DISPLAYED-CHAIN-2A isolated generic transfer closure', () => {
             );
         });
 
-    it('keeps the predecessor profile and transfer fragment unchanged',
+    it('inherits the predecessor runtime without adding 2a rules to it',
         () => {
             const compilation =
                 compileCoreCategoricalDisplayedChain2aClosureTransfer();
             assert.deepEqual(
                 compilation.prerequisite.runtime.ruleIds,
-                CORE_CATEGORICAL_DISPLAYED_CHAIN_TRANSFER_BOUNDARY
-                    .newRuntimeRuleIds
+                [
+                    ...CORE_CATEGORICAL_DISPLAYED_CHAIN_TRANSFER_BOUNDARY
+                        .newRuntimeRuleIds,
+                    ...CORE_CATEGORICAL_DISPLAYED_CHAIN_TRANSFER_BOUNDARY
+                        .transferredExistingIdentityRuntimeRuleIds
+                ]
             );
             assert.equal(
                 compilation.prerequisite.runtime.ruleIds.some(id =>

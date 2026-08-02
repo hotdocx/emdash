@@ -483,15 +483,16 @@ describe('DISPLAYED-ND-1A recursive displayed coherence', () => {
         );
     });
 
-    it('adds no transfer entry, kernel owner, or browser promotion', () => {
+    it('inherits D-057 transfer without a kernel owner or browser promotion',
+        () => {
         const transfer =
             compileCoreCategoricalFibredTransfdTransfer();
         assert.equal(
             CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_BOUNDARY
                 .declarationCount,
-            6
+            7
         );
-        assert.equal(transfer.runtime.rules.length, 7);
+        assert.equal(transfer.runtime.rules.length, 10);
         assert.equal(
             CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_BOUNDARY
                 .newMathematicalOwnerCount,
@@ -500,7 +501,7 @@ describe('DISPLAYED-ND-1A recursive displayed coherence', () => {
         const browser = readFileSync('src/v3_2/browser.ts', 'utf8');
         assert.doesNotMatch(
             browser,
-            /composeCells|typed-cell-composition/u
+            /composeCells|identityCell|typed-cell-(?:composition|identity)/u
         );
     });
 });

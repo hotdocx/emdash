@@ -5748,6 +5748,25 @@ export class CoreCategoricalProgram {
         );
     }
 
+    /**
+     * Generic identity of a closed displayed functor or of one finite
+     * factorable endpoint inside the active contextual `:^nd` callback.
+     */
+    identityCell(
+        endpointValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            'typed categorical cell identity',
+            source
+        );
+        this.requireFibredTransfd(nodeProvenance);
+        return this.builder.identityCell(
+            endpointValue,
+            nodeProvenance
+        );
+    }
+
     composeDisplayedTransfor(
         outerValue: CoreCategoricalTerm,
         innerValue: CoreCategoricalTerm,

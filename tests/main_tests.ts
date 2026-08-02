@@ -136,6 +136,7 @@ import './v3_2_categorical_displayed_nd_review_tests';
 import './v3_2_categorical_displayed_nd_1a_tests';
 import './v3_2_categorical_direct_contextual_nd_eta_tests';
 import './v3_2_categorical_direct_contextual_nd_composition_tests';
+import './v3_2_categorical_direct_contextual_nd_identity_tests';
 import './v3_2_categorical_displayed_nd_higher_audit_tests';
 import './v3_2_categorical_displayed_nd_higher_review_tests';
 import './v3_2_categorical_displayed_nd_higher_foundation_transfer_tests';

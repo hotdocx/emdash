@@ -224,12 +224,24 @@ describe('DISPLAYED-CHAIN-1A generic transfer', () => {
             ]
         );
         assert.deepEqual(
+            boundary.transferredExistingIdentityRuntimeRuleIds,
+            [
+                'categorical.displayed-chain.' +
+                    'internal-cell-identity.direct',
+                'categorical.displayed-chain.' +
+                    'internal-cell-identity.ordinary'
+            ]
+        );
+        assert.deepEqual(
             compilation.prerequisiteRuntimeFragment.localProgram.ruleIds,
             boundary.existingPrerequisiteRuntimeRuleIds
         );
         assert.deepEqual(
             compilation.runtime.ruleIds,
-            boundary.newRuntimeRuleIds
+            [
+                ...boundary.newRuntimeRuleIds,
+                ...boundary.transferredExistingIdentityRuntimeRuleIds
+            ]
         );
         assert.equal(
             compilation.prerequisiteRuntimeFragment.localProgram.rules
@@ -244,7 +256,7 @@ describe('DISPLAYED-CHAIN-1A generic transfer', () => {
             ),
             true
         );
-        assert.equal(compilation.composedRuntime.ruleIds.length, 97);
+        assert.equal(compilation.composedRuntime.ruleIds.length, 102);
         assert.equal(
             compilation.composedRuntime.ruleIds.some(ruleId =>
                 /diagnostic/u.test(ruleId)
@@ -315,7 +327,7 @@ describe('DISPLAYED-CHAIN-1A generic transfer', () => {
         assert.equal(
             CORE_CATEGORICAL_DISPLAYED_CHAIN_RUNTIME_MODULE
                 .runtimeRules.length,
-            6
+            8
         );
         assertDeepFrozen(
             CORE_CATEGORICAL_DISPLAYED_CHAIN_PREREQUISITE_MODULE

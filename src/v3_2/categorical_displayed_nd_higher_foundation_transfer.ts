@@ -16,6 +16,9 @@ import {
     compileCoreCategoricalDisplayedChain2aClosureTransfer
 } from './categorical_displayed_chain_2a_closure_transfer';
 import {
+    CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_LINKAGE
+} from './categorical_fibred_transfd_transfer';
+import {
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_AUDIT
 } from './categorical_displayed_nd_higher_audit';
 import {
@@ -83,7 +86,7 @@ const MODULE_ID = 'emdash.emdash3_2';
 
 export const
 CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_REVISION =
-    'DISPLAYED-ND-HIGHER-FOUNDATION-1A-GENERIC-TRANSFER-1' as const;
+    'DISPLAYED-ND-HIGHER-FOUNDATION-1A-GENERIC-TRANSFER-D057-1' as const;
 
 const category =
     coreDirectedContinuationTransferSymbol('category-universe');
@@ -914,7 +917,7 @@ const displayedInternalHomType =
     ));
 };
 
-const declarations:
+const reviewedFoundationDeclarations:
 readonly CoreLfTransferDeclaration[] = Object.freeze([
     Object.freeze({
         ...priorIdentityDeclaration,
@@ -1059,6 +1062,19 @@ readonly CoreLfTransferDeclaration[] = Object.freeze([
     })
 ]);
 
+const declarations: readonly CoreLfTransferDeclaration[] =
+Object.freeze(
+    reviewedFoundationDeclarations
+        .filter(declaration =>
+            declaration.symbol.moduleId !== identityArrow.moduleId ||
+            declaration.symbol.name !== identityArrow.name
+        )
+        .map((declaration, order) => Object.freeze({
+            ...declaration,
+            order
+        }))
+);
+
 const foundationExternalSymbols = Object.freeze([
     category,
     decodeOwner,
@@ -1076,7 +1092,8 @@ const foundationExternalSymbols = Object.freeze([
     functorCategory,
     functorEvaluation,
     functorComposition,
-    sectionCategoryFunctor
+    sectionCategoryFunctor,
+    identityArrow
 ]);
 
 export const
@@ -1242,7 +1259,7 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE,
     {
         revision:
-            'DISPLAYED-ND-HIGHER-FOUNDATION-1A-POLICY-1',
+            'DISPLAYED-ND-HIGHER-FOUNDATION-1A-POLICY-D057-1',
         moduleRevision:
             CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE
                 .revision,
@@ -1285,6 +1302,32 @@ const externalLink = (
     target: CoreLfQualifiedSymbol,
     order: number
 ): CoreLfTransferDeclarationLink => {
+    if (
+        target.moduleId === identityArrow.moduleId &&
+        target.name === identityArrow.name
+    ) {
+        const identityLink =
+            CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_LINKAGE.entries.find(
+                entry =>
+                    entry.symbol.moduleId === target.moduleId &&
+                    entry.symbol.name === target.name
+            );
+        if (
+            identityLink === undefined ||
+            identityLink.kind !== 'free-declaration' ||
+            identityLink.coreName !==
+                'emdash_v3_2_scale_stress_3a2a_id'
+        ) {
+            throw new Error(
+                'D-057 identity relocation is absent from fibred-transfd'
+            );
+        }
+        return Object.freeze({
+            ...identityLink,
+            order,
+            symbol: target
+        });
+    }
     const core = auditedCoreOwnerLinks.find(entry =>
         entry.symbol === target.name
     );
@@ -1320,7 +1363,7 @@ CoreLfTransferDeclarationLinkage =
         CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE,
         {
             revision:
-                'DISPLAYED-ND-HIGHER-FOUNDATION-1A-LINKAGE-1',
+                'DISPLAYED-ND-HIGHER-FOUNDATION-1A-LINKAGE-D057-1',
             moduleRevision:
                 CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE
                     .revision,
@@ -1365,11 +1408,25 @@ Object.freeze({
         declarations.map(declaration => declaration.symbol.name)
     ),
     declarationCount: declarations.length,
+    reviewedDeclarationCount:
+        reviewedFoundationDeclarations.length,
+    relocatedEarlierDeclarationNames: Object.freeze(['id']),
+    relocatedEarlierDeclarationCount: 1,
     checkedTransparentDefinitionCount:
-        reviewedPolicies.filter(entry =>
+        CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_POLICY
+            .entries.filter(entry =>
             entry.policy === 'checked-transparent-definition'
         ).length,
     opaqueSignatureCount:
+        CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_POLICY
+            .entries.filter(entry =>
+            entry.policy === 'opaque-signature'
+        ).length,
+    reviewedCheckedTransparentDefinitionCount:
+        reviewedPolicies.filter(entry =>
+            entry.policy === 'checked-transparent-definition'
+        ).length,
+    reviewedOpaqueSignatureCount:
         reviewedPolicies.filter(entry =>
             entry.policy === 'opaque-signature'
         ).length,

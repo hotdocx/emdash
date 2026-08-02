@@ -548,6 +548,7 @@ const capabilities = [
         apiMethods: [
             'displayedTransforContextLambda',
             'displayedTransforLambda',
+            'identityCell',
             'composeCells',
             'composeDisplayedTransfor'
         ],
@@ -564,8 +565,9 @@ const capabilities = [
             'Existing displayed component owner and generic category ' +
             'composition at Functord_cat.',
         recursiveBodyGrammar:
-            'compact point eta, plus retained whole-fibre component eta and ' +
-            'finite recursive typed-cell composition only',
+            'compact point eta and finite factorable point identity, plus ' +
+            'retained whole-fibre component eta and finite recursive ' +
+            'typed-cell composition',
         proposedText:
             'λ^nd a [: E]. eta a; retained λ^nd k [: K]. eta k; ' +
             'λ^nd k. ' +
@@ -706,7 +708,7 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 82,
+        publicProgramMethods: 83,
         capabilityRows: 14,
         classificationRows: {
             alreadyTextComplete: 1,

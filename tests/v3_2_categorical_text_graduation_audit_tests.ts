@@ -55,8 +55,8 @@ describe('SYNTAX-PARITY-GRADUATE-0A audit', () => {
         ).flat();
         const currentSet = new Set<string>(currentMethods);
         const hostSet = new Set<string>(host);
-        assert.equal(currentMethods.length, 82);
-        assert.equal(currentSet.size, 82);
+        assert.equal(currentMethods.length, 83);
+        assert.equal(currentSet.size, 83);
         assert.equal(
             audit.publicMethodClassification.originalAuditMethodCount,
             68
@@ -82,7 +82,7 @@ describe('SYNTAX-PARITY-GRADUATE-0A audit', () => {
             currentMethods.filter(method => !hostSet.has(method)).length -
                 audit.publicMethodClassification
                     .mathematicalExpressionMethodCount,
-            14
+            15
         );
         assert.equal(
             audit.currentTextEnvelope.operationHeads.length,

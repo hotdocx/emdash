@@ -44,6 +44,7 @@ import {
     CORE_CATEGORICAL_FIBRED_STRUCTURE_TRANSFER_LINKAGE
 } from './categorical_fibred_structure_transfer';
 import {
+    CORE_CATEGORICAL_FIBRED_TRANSFD_SYMBOLS,
     CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_LINKAGE
 } from './categorical_fibred_transfd_transfer';
 import {
@@ -130,6 +131,8 @@ const transforComponentCapped =
     coreDirectedContinuationTransferSymbol(
         'transfor-component-capped'
     );
+const transforCategory =
+    coreDirectedContinuationTransferSymbol('transfor-category');
 const sigmaCategory =
     coreDirectedContinuationTransferSymbol('sigma-category');
 const dependentPair =
@@ -163,6 +166,10 @@ const sigmaProjectionPullback =
 const sectionPullbackFunctor = symbol('section_pullback_func');
 const sectionPullbackSection = symbol('section_pullback_sec');
 const sectionObject = symbol('piapp0');
+const {
+    identityArrow,
+    higherCell: displayedTransformationInternalCell
+} = CORE_CATEGORICAL_FIBRED_TRANSFD_SYMBOLS;
 
 export const
 CORE_CATEGORICAL_DISPLAYED_CHAIN_PREREQUISITE_SYMBOLS =
@@ -300,6 +307,30 @@ const displayedFunctorType = (
         builder,
         displayedFunctorCategoryAt(builder, base, source, target)
     );
+
+const transforCategoryAt = (
+    builder: CoreLfTransferScopedBuilder,
+    source: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression,
+    sourceFunctor: CoreLfTransferBuilderExpression,
+    targetFunctor: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, transforCategory, [
+        { plicity: 'implicit', value: source },
+        { plicity: 'implicit', value: target },
+        { plicity: 'explicit', value: sourceFunctor },
+        { plicity: 'explicit', value: targetFunctor }
+    ]);
+
+const identityAt = (
+    builder: CoreLfTransferScopedBuilder,
+    category_: CoreLfTransferBuilderExpression,
+    object: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, identityArrow, [
+        { plicity: 'explicit', value: category_ },
+        { plicity: 'explicit', value: object }
+    ]);
 
 const constantFamily = (
     builder: CoreLfTransferScopedBuilder,
@@ -609,6 +640,32 @@ const displayedInternalCellAt = (
         { plicity: 'implicit', value: sourceFamily },
         { plicity: 'implicit', value: targetFamily },
         { plicity: 'explicit', value: displayedFunctor_ },
+        { plicity: 'implicit', value: sourcePoint },
+        { plicity: 'implicit', value: targetPoint },
+        { plicity: 'explicit', value: baseArrow },
+        { plicity: 'explicit', value: sourceValue }
+    ]);
+
+const displayedTransformationInternalCellAt = (
+    builder: CoreLfTransferScopedBuilder,
+    base: CoreLfTransferBuilderExpression,
+    sourceFamily: CoreLfTransferBuilderExpression,
+    targetFamily: CoreLfTransferBuilderExpression,
+    sourceFunctor: CoreLfTransferBuilderExpression,
+    targetFunctor: CoreLfTransferBuilderExpression,
+    transformation: CoreLfTransferBuilderExpression,
+    sourcePoint: CoreLfTransferBuilderExpression,
+    targetPoint: CoreLfTransferBuilderExpression,
+    baseArrow: CoreLfTransferBuilderExpression,
+    sourceValue: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, displayedTransformationInternalCell, [
+        { plicity: 'implicit', value: base },
+        { plicity: 'implicit', value: sourceFamily },
+        { plicity: 'implicit', value: targetFamily },
+        { plicity: 'implicit', value: sourceFunctor },
+        { plicity: 'implicit', value: targetFunctor },
+        { plicity: 'explicit', value: transformation },
         { plicity: 'implicit', value: sourcePoint },
         { plicity: 'implicit', value: targetPoint },
         { plicity: 'explicit', value: baseArrow },
@@ -1845,6 +1902,7 @@ const semanticExternalSymbols = Object.freeze([
     functorObject,
     functorHomCapped,
     transforComponentCapped,
+    transforCategory,
     sigmaCategory,
     dependentPair,
     constantDisplayedFamily,
@@ -1860,6 +1918,8 @@ const semanticExternalSymbols = Object.freeze([
     sectionPullbackFunctor,
     sectionPullbackSection,
     sectionObject,
+    identityArrow,
+    displayedTransformationInternalCell,
     ...existingDeclarations.map(declaration =>
         declaration.symbol
     )
@@ -2513,6 +2573,110 @@ const sectionPullbackDirectArrowRule =
     };
 };
 
+const displayedInternalCellIdentityRule = (
+    presentation: 'direct' | 'ordinary',
+    order: number
+): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const K = builder.capture('K');
+    const E = builder.capture('E');
+    const D = builder.capture('D');
+    const FF = builder.capture('FF');
+    const x = builder.capture('x');
+    const y = builder.capture('y');
+    const p = builder.capture('p');
+    const u = builder.capture('u');
+    const direct = displayedFunctorCategoryAt(builder, K, E, D);
+    const ordinary = transforCategoryAt(
+        builder,
+        K,
+        builder.global(categoryOfCategories),
+        E,
+        D
+    );
+    return {
+        order,
+        id:
+            `categorical.displayed-chain.internal-cell-identity.${presentation}`,
+        groupId: 'categorical.displayed-chain.internal-cell-identity',
+        clauseOrder: presentation === 'direct' ? 0 : 1,
+        sourceOwner: displayedTransformationInternalCell,
+        variables: [
+            {
+                name: 'K',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'E',
+                type: builder.template(displayedFamilyType(builder, K))
+            },
+            {
+                name: 'D',
+                type: builder.template(displayedFamilyType(builder, K))
+            },
+            {
+                name: 'FF',
+                type: builder.template(
+                    displayedFunctorType(builder, K, E, D)
+                )
+            },
+            {
+                name: 'x',
+                type: builder.template(objectType(builder, K))
+            },
+            {
+                name: 'y',
+                type: builder.template(objectType(builder, K))
+            },
+            {
+                name: 'p',
+                type: builder.template(homType(builder, K, x, y))
+            },
+            {
+                name: 'u',
+                type: builder.template(
+                    objectType(builder, fibre(builder, K, E, x))
+                )
+            }
+        ],
+        left: builder.pattern(displayedTransformationInternalCellAt(
+            builder,
+            K,
+            E,
+            D,
+            FF,
+            FF,
+            identityAt(
+                builder,
+                presentation === 'direct' ? direct : ordinary,
+                FF
+            ),
+            x,
+            y,
+            p,
+            u
+        )),
+        right: builder.template(displayedInternalCellAt(
+            builder,
+            K,
+            E,
+            D,
+            FF,
+            x,
+            y,
+            p,
+            u
+        )),
+        provenance: source(
+            'rule @tdapp1_int_cell $K $E $D $FF $FF ' +
+                `(@id (@${presentation === 'direct'
+                    ? 'Functord_cat'
+                    : 'Transf_cat'} ...) $FF) $x $y $p $u ↪ ` +
+                '@fdapp1_int_cell $K $E $D $FF $x $y $p $u'
+        )
+    };
+};
+
 const semanticRuntimeRules = Object.freeze([
     projectionStructuredArrowRule(),
     projectionPullbackStructuredArrowRule(),
@@ -2522,9 +2686,19 @@ const semanticRuntimeRules = Object.freeze([
     sectionPullbackDirectArrowRule()
 ]);
 
+const existingIdentityRuntimeRules = Object.freeze([
+    displayedInternalCellIdentityRule('direct', 6),
+    displayedInternalCellIdentityRule('ordinary', 7)
+]);
+
+const localRuntimeRules = Object.freeze([
+    ...semanticRuntimeRules,
+    ...existingIdentityRuntimeRules
+]);
+
 export const CORE_CATEGORICAL_DISPLAYED_CHAIN_RUNTIME_MODULE:
 CoreLfModuleSpec = createCoreLfModuleSpec({
-    revision: 'DISPLAYED-CHAIN-1A-RUNTIME-1',
+    revision: 'DISPLAYED-CHAIN-1A-RUNTIME-D057-1',
     moduleId: MODULE_ID,
     fragmentId: 'displayed-chain-1a-runtime',
     authorityPath: 'emdash2/emdash3_2.lp',
@@ -2541,7 +2715,7 @@ CoreLfModuleSpec = createCoreLfModuleSpec({
     })),
     declarations: [],
     inductives: [],
-    runtimeRules: semanticRuntimeRules,
+    runtimeRules: localRuntimeRules,
     proofRules: []
 });
 
@@ -2549,19 +2723,21 @@ export const CORE_CATEGORICAL_DISPLAYED_CHAIN_RUNTIME_POLICY:
 CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_DISPLAYED_CHAIN_RUNTIME_MODULE,
     {
-        revision: 'DISPLAYED-CHAIN-1A-RUNTIME-POLICY-1',
+        revision: 'DISPLAYED-CHAIN-1A-RUNTIME-POLICY-D057-1',
         moduleRevision:
             CORE_CATEGORICAL_DISPLAYED_CHAIN_RUNTIME_MODULE.revision,
-        entries: semanticRuntimeRules.map(rule => ({
+        entries: localRuntimeRules.map(rule => ({
             order: rule.order,
             target: {
                 kind: 'runtime-rule' as const,
                 id: rule.id
             },
             policy: 'runtime-rewrite' as const,
-            evidence:
-                'Exact owner-position-tested runtime rule approved by ' +
-                'D-DTTLF-USABILITY-012'
+            evidence: existingIdentityRuntimeRules.includes(rule)
+                ? 'Exact active identity internal-cell fold approved by ' +
+                    'D-DTTLF-USABILITY-057'
+                : 'Exact owner-position-tested runtime rule approved by ' +
+                    'D-DTTLF-USABILITY-012'
         }))
     }
 );
@@ -2625,6 +2801,12 @@ Object.freeze({
     newRuntimeRuleIds: Object.freeze(
         semanticRuntimeRules.map(rule => rule.id)
     ),
+    transferredExistingIdentityRuntimeRuleIds: Object.freeze(
+        existingIdentityRuntimeRules.map(rule => rule.id)
+    ),
+    transferredExistingIdentityRuntimeRuleCount:
+        existingIdentityRuntimeRules.length,
+    localRuntimeRuleCount: localRuntimeRules.length,
     existingPrerequisiteDeclarationCount:
         prerequisiteDeclarations.length,
     ambientPrerequisiteDeclarationCount:

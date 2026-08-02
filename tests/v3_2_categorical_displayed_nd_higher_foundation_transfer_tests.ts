@@ -39,7 +39,6 @@ const activeKernelPath = resolve(
 );
 
 const expectedDeclarations = [
-    'id',
     'comp_catd_fapp0',
     'Op_func',
     'Op_catd_func',
@@ -55,7 +54,6 @@ const expectedDeclarations = [
 ] as const;
 
 const expectedPolicies = [
-    'opaque-signature',
     'checked-transparent-definition',
     'opaque-signature',
     'opaque-signature',
@@ -120,7 +118,7 @@ describe('DISPLAYED-ND-HIGHER-FOUNDATION-1A generic transfer', () => {
         assertDeepFrozen(correction);
     });
 
-    it('pins the active source and exact thirteen-declaration policy', () => {
+    it('pins the active source and exact relocated declaration policy', () => {
         const source = readFileSync(activeKernelPath, 'utf8');
         assert.equal(
             CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE
@@ -282,7 +280,24 @@ describe('DISPLAYED-ND-HIGHER-FOUNDATION-1A generic transfer', () => {
                     boundary.targetOwnersIncluded,
                     boundary.targetProjectionRulesIncluded
                 ],
-                [13, 5, 8, 1, 0, 0, 0, 0, 0, false, false]
+                [12, 5, 7, 1, 0, 0, 0, 0, 0, false, false]
+            );
+            assert.deepEqual(
+                [
+                    boundary.reviewedDeclarationCount,
+                    boundary.reviewedCheckedTransparentDefinitionCount,
+                    boundary.reviewedOpaqueSignatureCount,
+                    boundary.relocatedEarlierDeclarationNames
+                ],
+                [13, 5, 8, ['id']]
+            );
+            assert.deepEqual(
+                [
+                    boundary.reviewedDeclarationCount,
+                    boundary.relocatedEarlierDeclarationCount,
+                    boundary.relocatedEarlierDeclarationNames
+                ],
+                [13, 1, ['id']]
             );
             assert.equal(
                 CORE_CATEGORICAL_DISPLAYED_ND_HIGHER_FOUNDATION_TRANSFER_MODULE

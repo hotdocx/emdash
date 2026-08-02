@@ -1,7 +1,7 @@
 /**
  * FIBRED-TRANSFD-1 transfer closure for direct displayed transformations.
  *
- * This module selects six exact active v3.2 declarations, seven existing
+ * This module selects seven exact active v3.2 declarations, ten existing
  * runtime rules, and the direct second-hom proof rule. It introduces no new
  * mathematical owner or equation. The three declarations already reviewed by
  * SCALE-STRESS-2B3 retain their reviewed Core names; the additional transport
@@ -94,13 +94,18 @@ import {
     CORE_LF_SCALE_STRESS_2B3_SYMBOLS
 } from './scale_stress_2b3_representation';
 import {
+    CORE_LF_SCALE_STRESS_3A2A_LINKAGE,
+    CORE_LF_SCALE_STRESS_3A2A_MODULE,
+    CORE_LF_SCALE_STRESS_3A2A_SYMBOLS
+} from './scale_stress_3a2a_representation';
+import {
     validateCoreLfScaleEngineReview
 } from './scale_engine_review';
 
 const MODULE_ID = 'emdash.emdash3_2';
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_REVISION =
-    'FIBRED-TRANSFD-1-DIRECT-NEXT-HOM-TRANSFER-1' as const;
+    'FIBRED-TRANSFD-1-DIRECT-NEXT-HOM-TRANSFER-D057-1' as const;
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_SOURCE_SHA256 =
     'sha256:7fe3f4c706bea0f9fc0ae9c11865a2c464abc4aa9df1ab434d08710dbaf360fe';
@@ -145,6 +150,10 @@ const functorObject =
     coreDirectedContinuationTransferSymbol('functor-object');
 const functorHomCapped =
     coreDirectedContinuationTransferSymbol('functor-hom-capped');
+const transforComponentCapped =
+    coreDirectedContinuationTransferSymbol(
+        'transfor-component-capped'
+    );
 const {
     functorCategory
 } = CORE_CATEGORICAL_STRUCTURAL_SYMBOLS;
@@ -165,12 +174,28 @@ const {
     displayedTransformationClassifier,
     displayedComponent
 } = CORE_LF_SCALE_STRESS_2B3_SYMBOLS;
+const {
+    identityArrow
+} = CORE_LF_SCALE_STRESS_3A2A_SYMBOLS;
+
+const priorIdentityDeclaration =
+    CORE_LF_SCALE_STRESS_3A2A_MODULE.declarations.find(declaration =>
+        declaration.symbol.moduleId === identityArrow.moduleId &&
+        declaration.symbol.name === identityArrow.name
+    );
+
+if (priorIdentityDeclaration === undefined) {
+    throw new Error(
+        'SCALE-STRESS-3A2A no longer exposes the exact id declaration'
+    );
+}
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_SYMBOLS =
 Object.freeze({
     displayedTransformationCategory,
     displayedTransformationClassifier,
     displayedComponent,
+    identityArrow,
     transportLhs:
         coreLfQualifiedSymbol(
             MODULE_ID,
@@ -186,6 +211,7 @@ Object.freeze({
 });
 
 const {
+    identityArrow: genericIdentity,
     transportLhs,
     transportRhs,
     higherCell
@@ -400,6 +426,34 @@ const fapp0At = (
         { plicity: 'implicit', value: source },
         { plicity: 'implicit', value: target },
         { plicity: 'explicit', value: functor },
+        { plicity: 'explicit', value: object }
+    ]);
+
+const transforComponentAt = (
+    builder: CoreLfTransferScopedBuilder,
+    source: CoreLfTransferBuilderExpression,
+    target: CoreLfTransferBuilderExpression,
+    sourceFunctor: CoreLfTransferBuilderExpression,
+    targetFunctor: CoreLfTransferBuilderExpression,
+    object: CoreLfTransferBuilderExpression,
+    transformation: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, transforComponentCapped, [
+        { plicity: 'implicit', value: source },
+        { plicity: 'implicit', value: target },
+        { plicity: 'implicit', value: sourceFunctor },
+        { plicity: 'implicit', value: targetFunctor },
+        { plicity: 'explicit', value: object },
+        { plicity: 'explicit', value: transformation }
+    ]);
+
+const identityAt = (
+    builder: CoreLfTransferScopedBuilder,
+    category_: CoreLfTransferBuilderExpression,
+    object: CoreLfTransferBuilderExpression
+): CoreLfTransferBuilderExpression =>
+    globalCall(builder, genericIdentity, [
+        { plicity: 'explicit', value: category_ },
         { plicity: 'explicit', value: object }
     ]);
 
@@ -1075,7 +1129,11 @@ const declarations: readonly CoreLfTransferDeclaration[] = Object.freeze([
         )
     },
     {
-        order: 3,
+        ...priorIdentityDeclaration,
+        order: 3
+    },
+    {
+        order: 4,
         symbol: transportLhs,
         type: transportType(transportLhs),
         body: coreLfTransferExplicitBody(transportBody('lhs')),
@@ -1087,7 +1145,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = Object.freeze([
         )
     },
     {
-        order: 4,
+        order: 5,
         symbol: transportRhs,
         type: transportType(transportRhs),
         body: coreLfTransferExplicitBody(transportBody('rhs')),
@@ -1099,7 +1157,7 @@ const declarations: readonly CoreLfTransferDeclaration[] = Object.freeze([
         )
     },
     {
-        order: 5,
+        order: 6,
         symbol: higherCell,
         type: higherCellType(),
         body: coreLfTransferAbsentBody(),
@@ -1151,7 +1209,7 @@ export const CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_POLICY:
 CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE,
     {
-        revision: 'FIBRED-TRANSFD-1-SIGNATURE-POLICY-1',
+        revision: 'FIBRED-TRANSFD-1-SIGNATURE-POLICY-D057-1',
         moduleRevision:
             CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE.revision,
         entries: declarations.map((declaration, order) => ({
@@ -1167,10 +1225,15 @@ CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
                     || declaration.symbol === transportRhs
                     ? 'checked-transparent-definition' as const
                     : 'opaque-signature' as const,
-            evidence: declaration.order < 3
-                ? 'Exact declaration reused from reviewed ' +
-                    'SCALE-STRESS-2B3 evidence'
-                : 'Exact active v3.2 higher-cell prerequisite signature'
+            evidence:
+                declaration.symbol.moduleId === genericIdentity.moduleId &&
+                declaration.symbol.name === genericIdentity.name
+                ? 'Exact identity declaration reused from reviewed ' +
+                    'SCALE-STRESS-3A2A evidence'
+                : declaration.order < 3
+                    ? 'Exact declaration reused from reviewed ' +
+                        'SCALE-STRESS-2B3 evidence'
+                    : 'Exact active v3.2 higher-cell prerequisite signature'
         }))
     }
 );
@@ -1222,12 +1285,26 @@ const reusedCoreName = (
     return link.coreName;
 };
 
+const reusedIdentityCoreName = (): string => {
+    const link = CORE_LF_SCALE_STRESS_3A2A_LINKAGE.entries.find(
+        candidate =>
+            candidate.symbol.moduleId === genericIdentity.moduleId &&
+            candidate.symbol.name === genericIdentity.name
+    );
+    if (link === undefined || link.kind !== 'free-declaration') {
+        throw new Error(
+            'FIBRED-TRANSFD-1 has no reviewed 3A2A Core name for id'
+        );
+    }
+    return link.coreName;
+};
+
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_LINKAGE:
 CoreLfTransferDeclarationLinkage =
     createCoreLfTransferDeclarationLinkage(
         CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE,
         {
-            revision: 'FIBRED-TRANSFD-1-SIGNATURE-LINKAGE-1',
+            revision: 'FIBRED-TRANSFD-1-SIGNATURE-LINKAGE-D057-1',
             moduleRevision:
                 CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_MODULE
                     .revision,
@@ -1238,10 +1315,15 @@ CoreLfTransferDeclarationLinkage =
                         declarationExternalSymbols.length + index,
                     symbol: declaration.symbol,
                     kind: 'free-declaration' as const,
-                    coreName: declaration.order < 3
-                        ? reusedCoreName(declaration.symbol)
-                        : `emdash_v3_2_fibred_transfd_1_` +
-                            declaration.symbol.name,
+                    coreName:
+                        declaration.symbol.moduleId ===
+                            genericIdentity.moduleId &&
+                        declaration.symbol.name === genericIdentity.name
+                            ? reusedIdentityCoreName()
+                            : declaration.order < 3
+                                ? reusedCoreName(declaration.symbol)
+                                : `emdash_v3_2_fibred_transfd_1_` +
+                                    declaration.symbol.name,
                     backendName: declaration.symbol.name
                 }))
             ]
@@ -1752,6 +1834,149 @@ const displayedComponentCompositionRule = (
     };
 };
 
+const genericComponentIdentityRule = (
+    order: number
+): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const A = builder.capture('A');
+    const B = builder.capture('B');
+    const F = builder.capture('F');
+    const Y = builder.capture('Y');
+    const functors = globalCall(builder, functorCategory, [
+        { plicity: 'explicit', value: A },
+        { plicity: 'explicit', value: B }
+    ]);
+    return {
+        order,
+        id: 'categorical.transfd.generic-component-identity',
+        groupId: 'categorical.transfd.component-identity',
+        clauseOrder: 0,
+        sourceOwner: transforComponentCapped,
+        variables: [
+            {
+                name: 'A',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'B',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'F',
+                type: builder.template(functorType(builder, A, B))
+            },
+            {
+                name: 'Y',
+                type: builder.template(objectType(builder, A))
+            }
+        ],
+        left: builder.pattern(transforComponentAt(
+            builder,
+            A,
+            B,
+            F,
+            F,
+            Y,
+            identityAt(builder, functors, F)
+        )),
+        right: builder.template(identityAt(
+            builder,
+            B,
+            fapp0At(builder, A, B, F, Y)
+        )),
+        provenance: source(
+            'rule @tapp0_fapp0 $A $B $F $F $Y ' +
+                '(@id (Functor_cat $A $B) $F) ↪ ' +
+                '@id $B (@fapp0 $A $B $F $Y)'
+        )
+    };
+};
+
+const displayedComponentIdentityRule = (
+    presentation: 'direct' | 'ordinary',
+    order: number
+): CoreLfTransferRuntimeRule => {
+    const builder = new CoreLfTransferScopedBuilder();
+    const K = builder.capture('K');
+    const E = builder.capture('E');
+    const D = builder.capture('D');
+    const FF = builder.capture('FF');
+    const z = builder.capture('z');
+    const direct = displayedFunctorCategoryAt(builder, K, E, D);
+    const ordinary = transforCategoryAt(
+        builder,
+        K,
+        builder.global(categoryOfCategories),
+        E,
+        D
+    );
+    const fibreE = fibreCategoryAt(builder, K, E, z);
+    const fibreD = fibreCategoryAt(builder, K, D, z);
+    const fibreFunctors = globalCall(builder, functorCategory, [
+        { plicity: 'explicit', value: fibreE },
+        { plicity: 'explicit', value: fibreD }
+    ]);
+    return {
+        order,
+        id:
+            `categorical.transfd.displayed-component-identity.${presentation}`,
+        groupId: 'categorical.transfd.displayed-component-identity',
+        clauseOrder: presentation === 'direct' ? 0 : 1,
+        sourceOwner: displayedComponent,
+        variables: [
+            {
+                name: 'K',
+                type: builder.template(builder.global(category))
+            },
+            {
+                name: 'E',
+                type: builder.template(displayedFamilyType(builder, K))
+            },
+            {
+                name: 'D',
+                type: builder.template(displayedFamilyType(builder, K))
+            },
+            {
+                name: 'FF',
+                type: builder.template(
+                    displayedFunctorType(builder, K, E, D)
+                )
+            },
+            {
+                name: 'z',
+                type: builder.template(objectType(builder, K))
+            }
+        ],
+        left: builder.pattern(displayedComponentAt(
+            builder,
+            K,
+            E,
+            D,
+            FF,
+            FF,
+            z,
+            identityAt(
+                builder,
+                presentation === 'direct' ? direct : ordinary,
+                FF
+            )
+        )),
+        right: builder.template(identityAt(
+            builder,
+            fibreFunctors,
+            fibreFunctorAt(builder, K, E, D, FF, z)
+        )),
+        provenance: source(
+            'rule @tdapp0_fapp0 $K $E $D $FF $FF $z ' +
+                `(@id (@${presentation === 'direct'
+                    ? 'Functord_cat'
+                    : 'Transf_cat'} ...) $FF) ↪ ` +
+                '@id (Functor_cat (Fibre_cat $E $z) ' +
+                '(Fibre_cat $D $z)) (@Fibre_func $K $E $D $FF $z)'
+        )
+    };
+};
+
 const runtimeRules = Object.freeze([
     homDisplayedFunctorRule(),
     transfdObjectBridgeRule(),
@@ -1759,7 +1984,10 @@ const runtimeRules = Object.freeze([
     sigmaPiObjectJoinRule(),
     sigmaPiNextHomRule(),
     displayedComponentCompositionRule('direct', 5),
-    displayedComponentCompositionRule('ordinary', 6)
+    displayedComponentCompositionRule('ordinary', 6),
+    genericComponentIdentityRule(7),
+    displayedComponentIdentityRule('direct', 8),
+    displayedComponentIdentityRule('ordinary', 9)
 ]);
 
 const runtimeExternalSymbols = Object.freeze([
@@ -1770,6 +1998,8 @@ const runtimeExternalSymbols = Object.freeze([
     sectionCategory,
     sigmaCategory,
     functorCategory,
+    genericIdentity,
+    transforComponentCapped,
     terminalCategory,
     sigmaProjectionPullback,
     displayedTransformationCategory,
@@ -1779,7 +2009,7 @@ const runtimeExternalSymbols = Object.freeze([
 
 export const CORE_CATEGORICAL_FIBRED_TRANSFD_RUNTIME_MODULE:
 CoreLfModuleSpec = createCoreLfModuleSpec({
-    revision: 'FIBRED-TRANSFD-1-RUNTIME-1',
+    revision: 'FIBRED-TRANSFD-1-RUNTIME-D057-1',
     moduleId: MODULE_ID,
     fragmentId: 'fibred-transfd-1-runtime',
     authorityPath: 'emdash2/emdash3_2.lp',
@@ -1799,7 +2029,7 @@ export const CORE_CATEGORICAL_FIBRED_TRANSFD_RUNTIME_POLICY:
 CoreLfTransferPolicyOverlay = createCoreLfTransferPolicyOverlay(
     CORE_CATEGORICAL_FIBRED_TRANSFD_RUNTIME_MODULE,
     {
-        revision: 'FIBRED-TRANSFD-1-RUNTIME-POLICY-1',
+        revision: 'FIBRED-TRANSFD-1-RUNTIME-POLICY-D057-1',
         moduleRevision:
             CORE_CATEGORICAL_FIBRED_TRANSFD_RUNTIME_MODULE.revision,
         entries: runtimeRules.map(rule => ({
@@ -1993,6 +2223,7 @@ Object.freeze({
     displayedTransformationClassifier:
         reusedCoreName(displayedTransformationClassifier),
     displayedComponent: reusedCoreName(displayedComponent),
+    identityArrow: reusedIdentityCoreName(),
     transportLhs:
         'emdash_v3_2_fibred_transfd_1_' + transportLhs.name,
     transportRhs:
@@ -2005,6 +2236,7 @@ export type CoreCategoricalFibredTransfdSymbolId =
     | 'displayed-transformation-category'
     | 'displayed-transformation-classifier'
     | 'displayed-component'
+    | 'identity-arrow'
     | 'transport-lhs'
     | 'transport-rhs'
     | 'higher-cell';
@@ -2022,6 +2254,8 @@ Readonly<Record<
             .displayedTransformationClassifier,
     'displayed-component':
         CORE_CATEGORICAL_FIBRED_TRANSFD_CORE_NAMES.displayedComponent,
+    'identity-arrow':
+        CORE_CATEGORICAL_FIBRED_TRANSFD_CORE_NAMES.identityArrow,
     'transport-lhs':
         CORE_CATEGORICAL_FIBRED_TRANSFD_CORE_NAMES.transportLhs,
     'transport-rhs':
@@ -2160,6 +2394,7 @@ Object.freeze({
         'Transfd',
         'tdapp0_fapp0'
     ]),
+    reusedScaleStress3a2aDeclarationNames: Object.freeze(['id']),
     declarationCount: declarations.length,
     runtimeRuleIds: Object.freeze(runtimeRules.map(rule => rule.id)),
     runtimeRuleCount: runtimeRules.length,

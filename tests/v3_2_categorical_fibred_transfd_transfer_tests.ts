@@ -16,7 +16,7 @@ import {
 } from '../src/v3_2';
 
 describe('FIBRED-TRANSFD-1 existing-authority transfer', () => {
-    it('checks six declarations, seven runtime rules, and one proof rule', () => {
+    it('checks seven declarations, ten runtime rules, and one proof rule', () => {
         const compilation =
             compileCoreCategoricalFibredTransfdTransfer();
         assert.deepEqual(
@@ -26,6 +26,7 @@ describe('FIBRED-TRANSFD-1 existing-authority transfer', () => {
                 'Transfd_cat',
                 'Transfd',
                 'tdapp0_fapp0',
+                'id',
                 'functord_transport_lhs_func',
                 'functord_transport_rhs_func',
                 'tdapp1_int_cell'
@@ -34,9 +35,19 @@ describe('FIBRED-TRANSFD-1 existing-authority transfer', () => {
         assert.equal(
             CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_BOUNDARY
                 .declarationCount,
-            6
+            7
         );
-        assert.equal(compilation.runtime.rules.length, 7);
+        assert.equal(compilation.runtime.rules.length, 10);
+        assert.deepEqual(
+            compilation.runtime.ruleIds.slice(-3),
+            [
+                'categorical.transfd.generic-component-identity',
+                'categorical.transfd.' +
+                    'displayed-component-identity.direct',
+                'categorical.transfd.' +
+                    'displayed-component-identity.ordinary'
+            ]
+        );
         assert.equal(
             compilation.runtime.rules.every(rule =>
                 rule.subjectValidation.kind === 'typescript-checked'
@@ -81,6 +92,15 @@ describe('FIBRED-TRANSFD-1 existing-authority transfer', () => {
             }
             assert.equal(transferred.coreName, reviewed.coreName);
         }
+        const identity =
+            CORE_CATEGORICAL_FIBRED_TRANSFD_TRANSFER_LINKAGE
+                .entries.find(entry => entry.symbol.name === 'id');
+        assert.equal(
+            identity?.kind === 'free-declaration'
+                ? identity.coreName
+                : undefined,
+            'emdash_v3_2_scale_stress_3a2a_id'
+        );
     });
 
     it('preserves runtime presentations while solving proof/object bridges', () => {
