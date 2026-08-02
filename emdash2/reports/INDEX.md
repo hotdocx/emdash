@@ -253,8 +253,8 @@ The health report covers all 98 registered targets at
 97 exact exit-zero results were resumed and the final unchanged affine-glue
 reviewer was checked from source against freshly typechecked, current-source
 Lambdapi objects. No timeout, assertion, rule, or semantic interface was
-weakened. The nonduplicative report/tooling gates are also green, so the
-authorized local PSSS-05c checkpoint is the only remaining step.
+weakened. The nonduplicative report/tooling gates are also green, and the
+synchronized tranche is included in authorized local checkpoint `647b6cc`.
 The next scheme-facing layer should relate the included structure sheaf to
 the existing computing affine coordinate presheaf by a whole `DefIso`; no
 double-plus/generated-topology construction or PSSS-05b descent

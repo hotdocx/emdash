@@ -1667,8 +1667,8 @@ snapshot
 `sha256:da12a581eaf6aa307b0f011ebec43aec53fc1f1cf6861a653917b175c5e91bf6`,
 and the exact-content snapshot above. No timeout, assertion, rule, or semantic
 interface was weakened. The nonduplicative report/tooling gates are also
-green; promotion is synchronized and awaits only the authorized local
-checkpoint.
+green. The synchronized tranche is included in authorized local checkpoint
+`647b6cc`.
 
 ### Phase PSSS-06a — Set-carrier commutative-ring objects
 
@@ -5479,7 +5479,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-04b | Cover-family presentations and generated topology | Generic witness-rich impredicative-intersection and direct affine big-Zariski probes green; promotion pending | Source/reviewer split plus maintained performance/SOP gates; HIT only for derivation induction or normalization |
 | PSSS-05a | Canonical sieve-descent diagram and anchored restriction agreement | Research probes green; rigid-adapter promotion trial rejected and removed | Terminal-map uniqueness/contractibility or another derived nonempty semantic consumer, then source/SOP gate |
 | PSSS-05b | Sheaf object package and natural-map category | Proposed | PSSS-05a semantic and SOP gate |
-| PSSS-05c | Supplied topology-/value-indexed sheaf classifier and whole reflector/adjunction capability | Rule-free promoted source/reviewer; focused checks, exact warnings, strict audit/catalog, exact-content 98-target health, and nonduplicative final gates green; checkpoint pending | Concrete `ReflectiveCommRingedSite` consumer closes the promotion gate; affine whole-presheaf presentation next |
+| PSSS-05c | Supplied topology-/value-indexed sheaf classifier and whole reflector/adjunction capability | Rule-free source/reviewer green through focused checks, exact warnings, strict audit/catalog, exact-content 98-target health, and nonduplicative final gates; local checkpoint `647b6cc` | Concrete `ReflectiveCommRingedSite` consumer closes the promotion gate; affine whole-presheaf presentation next |
 | PSSS-06a | Set-carrier commutative-ring operations, laws, package, and zero-ring model | Green through full integration CI; locally checkpointed | PSSS-06b consumer gate closed |
 | PSSS-06b | Ring morphisms, `CommRing_cat`, and transparent explicit-map carrier observation | Green through full integration CI; locally checkpointed | Carrier functor separately consumer-gated |
 | PSSS-07a | One-element localization universal property and zero-ring model | Green through full integration CI; locally checkpointed | Later PSSS-07 consumers remain gated |
