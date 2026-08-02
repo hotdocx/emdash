@@ -48,9 +48,13 @@
 >
 > The exact next row is the read-only
 > `COMPOSITIONAL-ND-EXPANDED-1D` audit/proposal. That audit is now complete and
-> its exact proposal is frozen under
-> `H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01`, pending separate
-> `D-DTTLF-USABILITY-077` review. Applying closed displayed functors at the
+> its exact proposal is frozen at
+> `f176d08b9aa831b05241ef301475379d78e32939` under
+> `H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01` and independently approved
+> by
+> [`D-DTTLF-USABILITY-077`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D077_REVIEW.md).
+> Its bounded implementation is dependency-ready. Applying closed displayed
+> functors at the
 > active base already produces the required open `indexed-functor` endpoints;
 > the proposed literal `lambda^n k. lambda^n a` bridge therefore wraps the
 > exact compact point factorer and retains an ordinary iterated-Hom facade,

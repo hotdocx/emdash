@@ -39,9 +39,10 @@ the ordinary `Transf_cat` facade.
 The read-only `COMPOSITIONAL-ND-EXPANDED-1D` audit is complete. It finds no
 missing kernel owner and selects the existing open `indexed-functor` view plus
 the compact point factorer as the second-hom seam. The exact bounded proposal
-below is frozen under
-`H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01`; implementation remains
-behind a separate `D-DTTLF-USABILITY-077` review.
+below is frozen at `f176d08b9aa831b05241ef301475379d78e32939` under
+`H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01` and independently approved by
+[`D-DTTLF-USABILITY-077`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D077_REVIEW.md).
+Its bounded implementation is dependency-ready.
 
 ## Objective
 
@@ -903,8 +904,10 @@ callbacks literally.
 
 Gate: `H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01`
 
-Decision: `D-DTTLF-USABILITY-077` pending a separate review of the immutable
-proposal checkpoint.
+Decision:
+[`D-DTTLF-USABILITY-077`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D077_REVIEW.md)
+approved from immutable proposal checkpoint
+`f176d08b9aa831b05241ef301475379d78e32939`.
 
 ### Exact typed surface
 
@@ -1020,7 +1023,7 @@ synthesis, text syntax, browser behavior, or scale work.
 | `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` | final-focused-green at `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d` | focused 1B failure; D-075; existing `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func` | Imports exactly two existing classifier-exact action signatures and uses them for pre/postwhiskering. Adds zero rules, kernel owners, Core nodes, checker branches, or external coherence fields. |
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
 | `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green at `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1` | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
-| `COMPOSITIONAL-ND-EXPANDED-1D` | exact proposal frozen; D-077 review pending | green 1C; completed second-hom audit | Reuse the existing open `indexed-functor` endpoints and compact point factorer for literal expanded `lambda^n k. lambda^n a`; retain the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
+| `COMPOSITIONAL-ND-EXPANDED-1D` | independently approved; implementation dependency-ready | green 1C; completed audit; D-077 | Reuse the existing open `indexed-functor` endpoints and compact point factorer for literal expanded `lambda^n k. lambda^n a`; retain the ordinary iterated-Hom facade, byte-identical compact Core, and internally owned component/base/higher action. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
 
 ## Explicit Non-Claims
@@ -1100,9 +1103,10 @@ presentation-specific wrappers. Treat the independently approved
 `COMPOSITIONAL-FD-EXPANDED-1C` proposal as final-focused-green after its
 rollback-safe semantic checkpoint
 `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1`. Treat the read-only
-`COMPOSITIONAL-ND-EXPANDED-1D` audit as complete and its exact proposal as
-frozen; do not implement the second-hom bridge before a separate D-077 review.
-Natural transformation bodies
+`COMPOSITIONAL-ND-EXPANDED-1D` audit as complete and its exact proposal at
+`f176d08b9aa831b05241ef301475379d78e32939` as independently approved under
+D-077. Implement only that bounded second-hom bridge. Natural transformation
+bodies
 must be recursively constructed from internal owners and fail closed without
 them. Keep the existing compact factorers as rollback evidence until exact
 same-Core/action parity supports delegation. Preserve object, arrow,
@@ -1115,6 +1119,15 @@ unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
 remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
+
+- **2026-08-02 — D-DTTLF-USABILITY-077 approved.** A separate review of exact
+  proposal checkpoint `f176d08b9aa831b05241ef301475379d78e32939` confirms
+  that the existing open `indexed-functor` view is callback-scoped and cannot
+  masquerade as a closed kernel functor. The private inner wrapper may be
+  created only after the compact point factorer recovers a coherent `Transfd`
+  owner; the expanded outer wrapper retains the ordinary iterated-Hom facade
+  and delegates component/higher action to that same owner. No Core/kernel
+  semantics, coercion, or external coherence is approved.
 
 - **2026-08-02 — H-DTTLF-USABILITY-COMPOSITIONAL-ND-EXPANDED-01 proposal
   frozen.** The read-only second-hom audit finds that applying `FF` and `GG`
