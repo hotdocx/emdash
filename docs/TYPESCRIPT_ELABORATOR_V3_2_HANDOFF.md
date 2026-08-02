@@ -1,8 +1,10 @@
 # TypeScript Elaborator For Emdash v3.2 — Start Here
 
-> **Current semantic continuation (2026-08-02):**
-> [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md)
-> owns the next work. D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
+> **Current continuation (2026-08-02):**
+> [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md)
+> owns the next work. Its semantic predecessor is
+> [`TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_MIXED_INTRODUCTION_PUBLIC_CONTINUATION_PLAN.md).
+> D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.
 > Contextual `:^nd` now covers eta, recursive vertical composition, generic
@@ -73,11 +75,22 @@
 > is effective 1,299 pass/51 skip: all fourteen nominal failures are
 > whole-file digest pins made stale by the approved kernel edit. Do not rerun
 > that approximately 43-minute aggregate for unchanged boundaries.
-> `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` is now the sole dependency-ready
-> read-only audit. It must stress recursive `Hom_catd`/`Transf_catd` body
-> towers through the transferred action and isolate at most one concrete
-> remaining construction; `Transf_catd_func` and broader graduation remain
-> deferred until that evidence exists.
+> `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` is now read-only complete with zero
+> semantic delta. A disposable fixed
+> `Transf_catd -> Hom_catd -> Transf_catd -> Hom_catd` target accepts direct
+> contextual eta, generic identity, recursive vertical composition, and both
+> whiskering orientations. The transferred generic/specialized action reduces
+> and consumes a fibre object at all four heads. Therefore fixed recursive
+> targets need no `Transf_catd_func`; a genuinely four-parameter-varying
+> classifier remains deferred until a concrete higher dependent-classifier
+> consumer exists. The active syntax continuation is now
+> [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md).
+> Its sole dependency-ready `CONTEXTUAL-ND-TEXT-PARITY-0AH` row is read-only
+> first: preserve the historical base-component `^nd` route while auditing one
+> expected-contract-directed route to the compact fibre-object contextual
+> binder, including eta, `identityCell`, recursive `composeCells`, both
+> whiskers, and a fixed alternating classifier. No behavior is authorized
+> before a separately frozen and reviewed proposal.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

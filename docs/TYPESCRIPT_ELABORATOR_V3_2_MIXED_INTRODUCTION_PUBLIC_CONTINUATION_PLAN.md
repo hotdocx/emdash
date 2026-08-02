@@ -517,7 +517,8 @@ It deliberately avoids:
 | `HOM-CATD-ACTION-NORMAL-FORM-1AD` | implemented and final-green at `0d6c892d36b4826942a9e253c2e1b6be81b921e9` under D-DTTLF-USABILITY-062 plus approved D-DTTLF-USABILITY-063 | completed `HOM-CATD-ACTION-NORMAL-FORM-0AC`; immutable D-062 proposal `68367439e4f4167c46f177ecc3d2dc8740cbe69c`; immutable D-063 correction `11e38021d09a7663e044cdf169b85e1162614f6a`; exact-normal-form and typed-unification probes | Active Lambdapi now owns exactly three generic `Hom_catd` action heads, eleven runtime joins, and one proof-time comparison using the exact internally generated `tapp0_fapp0`/`tapp1_fapp0`/`fdapp1_int_cell` normal form. Twelve focused assertions cover projection, identity, composition, both specialization folds, actual proof-time use, and non-collapse. `make check`, 1,097/159 warning inventory, strict LHS 0/53/33, synchronized catalog/health, and the 41-target kernel CI pass. No TypeScript or public behavior changed. |
 | `HOM-CATD-ACTION-TRANSFER-0AE` | read-only transfer-boundary audit complete; three-owner/nine-rule runtime-only successor selected | final-green D-DTTLF-USABILITY-062/063 kernel normal form; current mixed-mode transfer; disposable generic compiler and contextual-consumer probes | Three opaque signatures plus nine runtime rules subject-check over the existing 95-declaration mixed-mode environment with no profunctor closure. A fixed `Transf_catd` target remains definitionally stable through contextual `lambda^nd`; its capped base action and consumed point reduce through the new stable heads, while an arbitrary base endomorphism does not collapse. The two constant-`Cat` specializations require an additional classifier-conversion closure and the deep `Unit_prof` comparison is proof-time, so neither belongs in the smallest useful profile. |
 | `HOM-CATD-ACTION-TRANSFER-1AF` | implemented and focused-green at `0787b6de98883a60992d2f4068131780fdd5478b` under D-DTTLF-USABILITY-064 | completed `HOM-CATD-ACTION-TRANSFER-0AE`; final-green kernel D-062/063; immutable proposal `7eed444db933dfccb9f880520c65f408c5916a55`; separate review; 6/6 focused and 8/8 nearest regressions; one qualified root aggregate | One separate generic transfer fragment installs exactly three opaque existing-authority signatures and nine runtime rules. Capped identity/composition, point composition, non-collapse, and the fixed-`Transf_catd` contextual consumer compute through generic engines. The 1,350-test aggregate has 1,285 pass/51 skip and fourteen whole-file digest-only failures after the approved kernel edit, for effective 1,299 pass/51 skip. No proof rule, profunctor closure, constant-`Cat` specialization, kernel/Core/checker/binder/parser/browser delta, or broader graduation claim was added. |
-| `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` | dependency-ready read-only graduation audit; zero semantic delta authorized | final-green D-062 through D-064; direct recursive `:^nd` constructors; existing `Hom_catd`/`Transf_catd` fibre and higher-action evidence | Stress the transferred action through representative recursive `Transf_catd`/`Hom_catd` body towers and distinguish coverage derivable from current generic action from a concrete need for `Transf_catd_func`. Select at most one bounded semantic successor. Add no owner, rule, frontend branch, parser/browser behavior, curry/facade, or scale claim during the audit. |
+| `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` | read-only graduation audit complete; zero semantic delta; no `Transf_catd_func` consumer found | final-green D-062 through D-064; direct recursive `:^nd` constructors; disposable alternating `Transf`/`Hom` classifier probe | A fixed `Transf -> Hom -> Transf -> Hom` target accepts contextual eta, generic identity, recursive composition, and both whiskering orientations. The transferred runtime specializes or generically reduces every classifier head and consumes its capped action at a fibre object. This coverage is target-generic and needs no new owner. A four-parameter-varying `Transf_catd` belongs to a broader dependent-classifier API for which the current surface has no concrete consumer; retain it as deferred rather than promoting by analogy. |
+| `CONTEXTUAL-ND-TEXT-PARITY-0AH` | dependency-ready read-only syntax audit; zero semantic delta authorized | completed `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG`; graduated historical syntax-parity plan; direct compact `displayedTransforContextLambda` | Inventory the exact deterministic adapter gap between the older base-component `^nd` route and compact fibre-object contextual `^nd`. Preserve the old route, infer no classifier by decomposition, and measure eta, `identityCell`, recursive `composeCells`, pre/postwhiskering, and fixed alternating classifiers. Freeze at most one bounded expected-contract/resolver proposal before behavior changes. Add no kernel/runtime owner, Core/checker case, second parser, external coherence evidence, curry, browser/public preset, or scale claim during the audit. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -7336,7 +7337,75 @@ No kernel or public-product behavior changed. The disposable untracked probe
 was removed after its exact logic had been promoted into the production
 module and focused suite; unrelated Lambdapi experiment directories remain
 untouched. `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` is now the sole selected
-successor and is read-only first.
+successor and is read-only first. The following result records its subsequent
+completion; this sentence is retained as the D-064 implementation handoff.
+
+## `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` Result
+
+The graduation audit is complete with zero semantic delta. It inspected the
+recursive `displayedTransforContextLambda` point factorer rather than inferring
+coverage from neighboring declarations. That factorer is target-family
+generic and recursively recognizes exactly the already-reviewed construction
+tree:
+
+```text
+eta | identity(endpoint) | compose(outer,inner)
+    | postmap(H,cell) | premap(cell,L)
+```
+
+A disposable TypeScript witness then used the public constructors to form the
+fixed alternating classifier
+
+```text
+T0 = Transf_catd(A0,B0,alpha0,beta0)
+H0 = Hom_catd(T0,x0,y0)
+T1 = Transf_catd(A1,H0,alpha1,beta1)
+D  = Hom_catd(T1,x1,y1).
+```
+
+For displayed functors `P,Q,R : E -> D`, all of the following compiled to
+whole internally coherent `Transfd` terms:
+
+```text
+lambda^nd a. eta[a]
+lambda^nd a. id(P[a])
+lambda^nd a. theta[a] o eta[a]
+lambda^nd a. M(eta[a])
+lambda^nd a. eta[L[a]].
+```
+
+Eta and identity compare with their closed owners; recursive composition
+compares with generic whole-`Transfd` composition; and both whiskering cases
+retain the existing generic horizontal-action evidence. The transferred
+runtime was also exercised independently at all four alternating heads. Each
+`Transf_catd` head used the existing specialization and each `Hom_catd` head
+used the generic rule; all four returned the same stable capped action owner,
+whose consumption at a fibre object reduced through the transferred point
+projection. The probe was deleted after recording these results, and the two
+pre-existing unrelated temporary directories were untouched.
+
+This evidence rules out adding `Transf_catd_func` merely to make fixed or
+recursively nested classifiers work. A genuinely different construction
+would let `A`, `B`, `FF`, and `GG` themselves vary in another outer context.
+The current public family constructors accept checked closed classifier
+values, and no current direct-binder body or end-user example requires that
+higher dependent-classifier API. `homd_int` remains the active internalized
+dependent-Hom construction, but it is not silently reinterpreted as a generic
+four-parameter constructor functor. Therefore
+`TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` remains deferred pending a concrete
+consumer and its exact variance/action type.
+
+The first measured user-facing gap is instead deterministic text parity. The
+graduated parser's existing `^nd` expected contract calls
+`displayedTransforLambda`: its callback binds the explicit base object and an
+optional annotation denotes the base category. The newer compact direct API
+calls `displayedTransforContextLambda`: it internally tracks that base object,
+exposes the fibre object, and accepts the five constructor forms above. Those
+routes are both meaningful and must not be conflated. The dedicated
+[`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md)
+now owns the read-only `CONTEXTUAL-ND-TEXT-PARITY-0AH` audit. No parser,
+resolver, expected contract, browser, or semantic behavior changed in this
+graduation checkpoint.
 
 ## Validation And Checkpoint Policy
 
@@ -7834,14 +7903,28 @@ effective 1,299 pass/51 skip; its fourteen failures are whole-file digest
 pins made stale by the approved active-kernel edit. Do not rerun that
 approximately 43-minute aggregate for unchanged boundaries.
 
-Make `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` the sole dependency-ready slice.
-It is read-only first: stress representative recursive `Hom_catd` and
-`Transf_catd` body towers through the transferred action, determine which
-coverage derives from existing owners, and isolate at most one concrete need
-for `Transf_catd_func` or another active-kernel construction. Freeze and
-separately review any semantic proposal before implementation. Do not edit
-kernel or TypeScript behavior during the audit, and do not broaden merely to
-reproduce neighboring Lambdapi clauses.
+Treat `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` as read-only complete with zero
+semantic delta. Its disposable alternating
+`Transf_catd -> Hom_catd -> Transf_catd -> Hom_catd` target accepts direct
+contextual eta, identity, recursive composition, and both whiskering
+orientations. The transferred generic/specialized capped action and consumed
+point reduce at every head. Therefore keep `Transf_catd_func` deferred: the
+current direct surface has no concrete consumer whose four classifier
+parameters vary in another context, and fixed or recursively nested targets
+do not need it.
+
+Continue from
+`docs/TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md` and make
+`CONTEXTUAL-ND-TEXT-PARITY-0AH` the sole dependency-ready slice. It is
+read-only first: inventory the deterministic distinction between the older
+base-component `^nd` route through `displayedTransforLambda` and the newer
+compact fibre-object route through `displayedTransforContextLambda`; measure
+eta, `identityCell`, recursive `composeCells`, pre/postwhiskering, and one
+fixed alternating classifier target. Preserve the old route and freeze and
+separately review at most one bounded expected-contract/resolver proposal
+before implementation. Add no kernel/runtime owner, Core/checker case,
+second parser, classifier decomposition heuristic, external coherence
+evidence, curry, browser/public preset, or scale behavior during the audit.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7860,6 +7943,19 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` complete
+  read-only; compact contextual text parity selected.** A disposable fixed
+  alternating `Transf -> Hom -> Transf -> Hom` classifier accepts direct
+  contextual eta, identity, recursive composition, and both whiskering
+  orientations. The transferred runtime specializes or generically reduces
+  the capped action at all four heads and consumes each at a fibre object.
+  This demonstrates that fixed recursive classifier depth is already generic
+  and supplies no consumer for `Transf_catd_func`; the genuinely different
+  four-parameter-varying classifier remains deferred. The first concrete
+  end-user gap is instead the parser distinction between its historical
+  base-component `^nd` route and the compact fibre-object contextual binder.
+  No active behavior changed. `CONTEXTUAL-ND-TEXT-PARITY-0AH` is the next
+  read-only audit under the dedicated continuation plan.
 - **2026-08-02 — `HOM-CATD-ACTION-TRANSFER-1AF` implemented and
   focused-green.** Semantic checkpoint
   `0787b6de98883a60992d2f4068131780fdd5478b` adds exactly the approved three
