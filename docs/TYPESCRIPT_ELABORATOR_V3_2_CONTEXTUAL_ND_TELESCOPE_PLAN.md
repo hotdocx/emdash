@@ -50,7 +50,9 @@ delegation, with immediate human supersession. D-070 implementation may resume
 with exactly the one additional label case. The first real-browser snapshot
 then found the landing-page fact strip still hard-codes eleven presets.
 D-DTTLF-USABILITY-072 below freezes the exact same-file count correction;
-interaction pauses before editing it.
+it is separately reviewed-approved from immutable proposal checkpoint
+`fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091` under the standing unattended
+delegation, with immediate human supersession. Interaction may resume.
 
 ## Objective
 
@@ -484,7 +486,7 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-GRADUATE-0AO` | read-only complete; zero behavior delta | final-green 1AN plus public reviewer and syntax-parity plans | The semantic/text envelope graduates. A cold reviewer-shaped probe succeeds but measures 148.31 seconds on the unnecessarily broad mixed profile versus 27.83 seconds for the existing chain-2A closure, selecting profile decoupling before public promotion. |
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | D-DTTLF-USABILITY-070 separately reviewed-approved; implementation dependency-ready | completed 0AO; proposal `41ddef0bad65f5766634c61c994f06f581f79cd0`; immutable review | Decouple contextual `:^nd` telescope availability from mixed-classifier capability while reusing the exact chain-2A runtime, then add one genuine-dependent reviewer preset and truthful README boundary. |
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` | D-DTTLF-USABILITY-071 separately reviewed-approved; implementation resumes | first D-070 browser-fixture typecheck; proposal `fcf082be07ad44b877c1b622fb4acc4293cdc84c`; immutable review | Add exactly one exhaustive label case in the existing generic UI for the new expected-mode variant. No UI flow, semantics, or preset behavior changes. |
-| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-COUNT-CORRECTION-1AP2` | frozen pending separate review | first real-browser D-070 snapshot | Replace the stale literal eleven with the actual preset-array length in the existing fact strip. No layout or behavior change. |
+| `CONTEXTUAL-ND-TELESCOPE-REVIEWER-COUNT-CORRECTION-1AP2` | D-DTTLF-USABILITY-072 separately reviewed-approved; implementation resumes | first real-browser D-070 snapshot; proposal `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091`; immutable review | Replace the stale literal eleven with the actual preset-array length in the existing fact strip. No layout or behavior change. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
 
@@ -970,6 +972,12 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-072 separately reviewed-approved.** The
+  immutable review of proposal checkpoint
+  `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091` confirms that the browser
+  selector's twelve options and fact-strip eleven are one presentation drift.
+  Under the standing unattended delegation, with immediate human
+  supersession, the same-file derived-count correction is dependency-ready.
 - **2026-08-02 — D-072 reviewer-count correction frozen pending separate
   review.** The first real-browser D-070 snapshot exposes all twelve options
   but the landing fact strip retains a literal eleven. The three-item

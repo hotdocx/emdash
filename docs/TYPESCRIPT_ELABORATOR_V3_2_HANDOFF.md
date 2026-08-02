@@ -185,7 +185,10 @@
 > may resume with exactly one `emdash-template/src/App.tsx` label case. The
 > first real-browser snapshot then found the fact strip's literal eleven stale
 > while all twelve options render. The dedicated plan freezes the same-file
-> D-DTTLF-USABILITY-072 count correction pending separate review.
+> D-DTTLF-USABILITY-072 count correction. It is separately reviewed-approved
+> from immutable proposal checkpoint
+> `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091` under the standing unattended
+> delegation, with immediate human supersession; browser interaction resumes.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

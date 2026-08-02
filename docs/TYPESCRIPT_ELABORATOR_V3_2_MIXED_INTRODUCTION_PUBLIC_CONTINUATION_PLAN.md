@@ -7971,7 +7971,9 @@ standing unattended delegation, with immediate human supersession. D-070 may
 resume with exactly one additional UI label case. The first real-browser
 snapshot then found only the landing fact strip's literal eleven stale while
 all twelve options render; the dedicated plan freezes D-DTTLF-USABILITY-072
-for one same-file derived count pending separate review.
+for one same-file derived count. It is separately reviewed-approved from
+immutable proposal checkpoint `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091`
+under the standing unattended delegation, with immediate human supersession.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -7990,6 +7992,10 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-072 separately reviewed-approved.** The immutable review
+  of proposal checkpoint `fd5bd80b662be6dcb2c828a5b2abe7fc6ccb0091`
+  approves only the derived reviewer count in the already authorized UI file.
+  Browser validation may resume under immediate human supersession.
 - **2026-08-02 — D-072 reviewer-count correction frozen.** The first real-
   browser snapshot renders all twelve presets but exposes one stale literal
   eleven in the fact strip. The dedicated correction permits only deriving
