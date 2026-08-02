@@ -379,8 +379,9 @@
 > projection is strict-LHS-clean and warning-neutral. The exact
 > `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` /
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 /
-> D-DTTLF-USABILITY-058 proposal is frozen in the living plan and awaits an
-> immutable checkpoint plus separate review. It covers symmetric finite pre-
+> D-DTTLF-USABILITY-058 proposal at
+> `a910f183672cb39a83ee6f69b57e95f2519df880` is separately
+> reviewed-approved under the standing unattended delegation. It covers symmetric finite pre-
 > and postwhiskering with internal fibre object/arrow and base/higher action;
 > arbitrary varying `Transf_catd`, external coherence, parser/browser work,
 > and unrestricted `:^nd` remain explicit non-claims.
