@@ -509,7 +509,7 @@ It deliberately avoids:
 | `DIRECT-CONTEXTUAL-ND-IDENTITY-1X` | implemented and in-scope green at `64684f090499debebc64f752a063979f3c2f61e3` under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-IDENTITY-01 / D-DTTLF-USABILITY-057 | completed `DIRECT-CONTEXTUAL-ND-CONSTRUCTOR-GRADUATE-0W`; immutable proposal `a16514c00c3e7d4c16f86c5d91fbd59f202b4a0d`; separate review under standing unattended delegation; 7/7 focused identity tests, 50/50 nearest semantic regressions, 17 pass/1 skip transfer-audit matrix, and 22/22 corrected descendant assertions | The exact existing generic `id` declaration is relocated/relinked without duplication; three existing point-component clauses close at `fibred-transfd-1` and two internal-cell folds close at displayed-chain. One construction-only `identityCell(endpoint)` and a shared recursive finite endpoint factorer recover genuine generic identity at `Functord_cat`, including finite chains and a parametric mixed `Functor_catd` fibre. No kernel mathematics, whiskering, arbitrary point coherence, parser/browser route, or unrestricted `:^nd` was added. |
 | `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y` | read-only audit complete; zero active semantic delta; fixed-head pre/post whiskering selected | implemented D-055 eta, D-056 recursive composition, and D-057 identity; active `comp_prod_fapp1_fapp0`, ordinary Cat projection ladder, `tdapp0_fapp0`, and `tdapp1_int_cell`; bounded owner-position probes | Fixed-head pre/post whiskering is already constructed internally by generic horizontal action at `Catd_cat K`; it does not require `Transf_catd_func`. One missing existing-owner `tdapp0_fapp0` projection was isolated, warning-measured, and made strict-LHS-clean by leaving inferred endpoints as `_`. A genuinely varying `Transf_catd` constructor remains a separate audit. |
 | `DIRECT-CONTEXTUAL-ND-WHISKERING-1Z` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-WHISKERING-01 / D-DTTLF-USABILITY-058; implementation paused at a measured exact-transfer dependency | completed `DIRECT-CONTEXTUAL-ND-ACTION-GRADUATE-0Y`; immutable proposal `a910f183672cb39a83ee6f69b57e95f2519df880`; separate review under standing unattended delegation; bounded kernel/SOP gates green; `comp_prod_fapp1_fapp0` exact signature currently reaches `sigma_Fst`/`sigma_Snd` before their TypeScript transfer layer | Add one warning-neutral existing-owner fibre projection, transfer the existing generic horizontal-action signature plus its new displayed and three existing ordinary projection rules, and recursively lower `lambda^nd a. H(eta[a])` and `lambda^nd a. eta[L[a]]` through `(eta,id_H)` and `(id_L,eta)`. Check fibre object/arrow and internal base/higher action; add no new owner, external equation, curry/section route, varying `Transf_catd` constructor, parser/browser behavior, or unrestricted `:^nd`. Resume unchanged after the bounded D-059 dependency correction. |
-| `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` | correction proposal frozen under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 / D-DTTLF-USABILITY-059; decision pending | approved D-058 implementation experiment; exact active `comp_prod_fapp1_fapp0` signature; existing later displayed-chain-2A transfer of `sigma_Fst`, `sigma_Snd`, `Product_grpd`, and generic product decode/object/Hom rules | Relocate and relink exactly those three existing declarations and three existing generic rules to the earlier fibred-product transfer boundary, then make displayed-chain-2A consume them without duplication. Change no kernel mathematics and add no mirror signature, new Core case, product facade, or external coherence. Resume D-058 unchanged after focused dependency/descendant checks. |
+| `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` | separately reviewed-approved under H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 / D-DTTLF-USABILITY-059; implementation dependency-ready | approved D-058 implementation experiment; exact active `comp_prod_fapp1_fapp0` signature; immutable proposal `62a8017f04af215696811a608be18d7c2dc5668e`; separate review under standing unattended delegation | Relocate and relink exactly those three existing declarations and three existing generic rules to the earlier fibred-product transfer boundary, then make displayed-chain-2A consume them without duplication. Change no kernel mathematics and add no mirror signature, new Core case, product facade, or external coherence. Resume D-058 unchanged after focused dependency/descendant checks. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -6328,6 +6328,42 @@ proposal is decision-pending until separately reviewed. Under the standing
 unattended delegation, a later turn may record approval only after this text is
 checkpointed immutably and no immediate human correction supersedes it.
 
+## D-DTTLF-USABILITY-059 separate review
+
+The immutable proposal checkpoint is
+`62a8017f04af215696811a608be18d7c2dc5668e`. A separate read-only review
+approves all and only its twelve numbered items:
+
+- the checkpoint changes only the living continuation plan and handoff while
+  the D-058 kernel and TypeScript experiment remains unstaged;
+- `sigma_Fst`, `sigma_Snd`, `Product_grpd`, product-groupoid decode,
+  product-object formation, and generic product-Hom formation are exact
+  existing active owners and computations, not inferred replacements;
+- the required groupoid/decode/dependent-pair and ordinary structural owners
+  already occur below `FIBRED-PRODUCT-1A`, so the relocation creates no
+  dependency cycle;
+- fibred structure, `fibred-transfd-1`, and displayed-chain all descend from
+  the fibred-product boundary. The later 2A fragment can therefore link the
+  earlier declarations and inherit the earlier runtime clauses without
+  duplicating them;
+- projection-object, product-map, pair-beta, and displayed internal-cell
+  behavior is genuinely later behavior and remains in 2A;
+- exact compilation fails first at the absent `sigma_Fst` link. Supplying the
+  six approved existing dependencies closes the exact signature and ordinary
+  object/Hom projection prerequisites without a mirror;
+- identifier and contract changes required by relocation are transfer
+  metadata changes only. They must preserve exactly one declaration link and
+  one runtime rule per source owner and be checked in descendants; and
+- because D-059 changes no active Lambdapi declaration or rule, it requires no
+  new owner-position or warning experiment. D-058's new projection remains
+  subject to the already-recorded strict-LHS, warning, catalog, health, and CI
+  gates, including internal fibre/base/higher action.
+
+The selected correction is smaller and more faithful than either rejected
+alternative. No immediate human correction superseded the immutable proposal.
+Under the standing unattended delegation, D-DTTLF-USABILITY-059 is therefore
+approved exactly as proposed.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -6714,15 +6750,18 @@ The first exact-transfer compilation measured a dependency-order obstruction:
 `comp_prod_fapp1_fapp0` reaches the existing generic `sigma_Fst`/`sigma_Snd`
 and product object/Hom closure before the later displayed-chain-2A fragment
 that currently transfers them. Keep the D-058 semantic experiment unstaged.
-Freeze and separately review
+Treat the exact
 `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` /
 H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 /
-D-DTTLF-USABILITY-059. If approved, move only the three existing generic
-product declarations and three existing generic product rules to the earlier
-fibred-product transfer boundary, make displayed-chain-2A reuse them, prove
-uniqueness and descendant stability, and then resume D-058 unchanged. Add no
-kernel mathematics, local signature mirror, product facade, Core special case,
-or external coherence data.
+D-DTTLF-USABILITY-059 proposal at
+`62a8017f04af215696811a608be18d7c2dc5668e` as separately
+reviewed-approved under the standing unattended delegation, with immediate
+human supersession. Implement all and only its twelve numbered items: move
+only the three existing generic product declarations and three existing
+generic product rules to the earlier fibred-product transfer boundary, make
+displayed-chain-2A reuse them, prove uniqueness and descendant stability, and
+then resume D-058 unchanged. Add no kernel mathematics, local signature
+mirror, product facade, Core special case, or external coherence data.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -6741,6 +6780,18 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-059 approved exactly as proposed.** A
+  separate review of immutable proposal checkpoint
+  `62a8017f04af215696811a608be18d7c2dc5668e` confirms that its three
+  declarations and three generic rules are existing active product
+  foundations whose dependencies all occur below `FIBRED-PRODUCT-1A`.
+  Relocation creates no cycle; fibred structure, `fibred-transfd-1`, and
+  displayed-chain already descend from that boundary. The later 2A-only
+  projection, mapping, beta, and internal-cell behavior remains later. Exact
+  links and rule ownership must be unique, and D-058 resumes unchanged after
+  focused descendant checks. No immediate human correction superseded the
+  checkpoint; under the standing unattended delegation only the twelve exact
+  D-059 items are authorized.
 - **2026-08-02 — D-DTTLF-USABILITY-059 correction frozen for separate
   review.** Exact compilation of the active `comp_prod_fapp1_fapp0` signature
   stops at `sigma_Fst`: the generic product projection/decode/object/Hom

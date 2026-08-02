@@ -392,12 +392,15 @@
 > therefore paused with its kernel/SOP evidence preserved. The exact
 > `CONTEXTUAL-ND-HORIZONTAL-PRODUCT-FOUNDATION-1ZA` /
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-PRODUCT-CORRECTION-01 /
-> D-DTTLF-USABILITY-059 proposal relocates and relinks only three existing
-> declarations and three existing generic rules to the earlier fibred-product
-> boundary, makes 2A reuse them, and then resumes D-058 unchanged. It adds no
-> kernel mathematics, mirror signature, product facade, Core special case, or
-> external coherence evidence. The proposal is frozen and decision-pending
-> until separately reviewed.
+> D-DTTLF-USABILITY-059 proposal at
+> `62a8017f04af215696811a608be18d7c2dc5668e` is separately
+> reviewed-approved under the standing unattended delegation. It relocates and
+> relinks only three existing declarations and three existing generic rules to
+> the earlier fibred-product boundary, makes 2A reuse them, and then resumes
+> D-058 unchanged. It adds no kernel mathematics, mirror signature, product
+> facade, Core special case, or external coherence evidence. All declaration
+> prerequisites occur below the selected boundary, so this correction creates
+> no dependency cycle and is now implementation-ready.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
