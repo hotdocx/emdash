@@ -93,12 +93,26 @@ detailed probe evidence.
   constructs the zero ring as the universal localization `R[1/0]`. This is a
   degenerate but computing non-identity-shaped model, not a nondegenerate
   fraction, presheaf, topology, overlap, `Spec`, or scheme interface.
+- `emdash3_2_commutative_algebra_localization_idempotent.lp`: one-way
+  rule-free fixed-image layer. For `e^2=e`, it constructs the set-valued ring
+  `eR={x:R | e*x=x}`, makes its zero/one/addition/negation/multiplication
+  compute through the subtype, and proves that `x |-> e*x` has the full
+  localization universal property. The selected factor applies the original
+  map to the retained underlying fixed point. This is quotient-free and may
+  be nondegenerate for a supplied nontrivial idempotent, but a closed product-
+  ring instance, affine restriction consumer, `Spec`, and schemes remain
+  downstream.
 - `emdash3_2_commutative_algebra_localization_comparison.lp`: one-way rule-free
   overlap layer. It derives unit multiplication/factor extraction, packages
   localization first at `f` and then at the image of `g`, and constructs
   canonical forward/reverse factors against localization at `f*g`. It asserts
   neither equality of chosen localization packages nor inverse laws for the
   comparison maps.
+- `emdash3_2_commutative_algebra_localization_overlap.lp`: one-way rule-free
+  whole-comparison layer. Contractible localization-factor uniqueness proves
+  both cancellation paths for the product/iterated comparison and packages
+  the forward map as `OmegaEquivAlong CommRing_cat` and `OmegaEquiv
+  CommRing_cat`, without fraction syntax or package equality.
 - `emdash3_2_commutative_algebra_presheaves.lp`: one-way CommRing-presheaf
   layer. It exposes transparent values, structured
   restriction maps, carrier application, explicit pointwise
@@ -2325,6 +2339,40 @@ equality. It therefore closes the first whole algebraic overlap theorem, but
 does not yet construct a concrete genuinely nondegenerate localization model,
 identify Cartier matching objects with ordinary covering-sieve descent, or
 construct `Spec`, structure sheaves, or schemes.
+
+PSSS-08c0G adds the first explicit potentially nondegenerate representation.
+For a supplied idempotent `e^2=e`, the rule-free
+`emdash3_2_commutative_algebra_localization_idempotent.lp` module constructs
+the set-valued fixed-image ring `eR={x:R | e*x=x}` with one equal to `e` and
+all five operations inherited computationally from `R`. The structured
+scaling map sends `x` to `e*x`. If `h:R->S` makes `h(e)` invertible, then the
+preserved idempotence and the elementary invertible-idempotent calculation
+force `h(e)=1`; the selected factor sends a fixed point to its underlying
+element followed by `h`. Its triangle computes, and every competing factor is
+identified first pointwise, then as a whole structured map, then as a complete
+factor Sigma using the proposition-valued agreement fibre. Thus the selected
+package has the full existing `CommRingLocalizationAt R e` universal
+property, with no fraction/quotient syntax, external naturality field,
+rewrite rule, or unification rule.
+
+Focused source, reviewer, and central diagnostics plus the maintained
+`make check` and `make examples` aggregates are green. Warning-enabled source
+and reviewer checks each inherit exactly `1179 = 1020 + 159` warnings, with no
+warning located in either new file; the strict LHS audit remains at zero
+unreviewed clauses. The generated catalog contains 1,959 checks in 85 mapped
+areas with zero legacy or unclassified entries. Health passes all 82
+source/example targets in 637.936 summed check-seconds at source snapshot
+`sha256:b87e97a3c6a6b62e06dfd5d0c3421c73d2af627baab7c370d9bc14c4d6e9857b`.
+Full integration CI independently passes all 82 Lambdapi targets in 591.033
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. The local checkpoint remains pending at this entry. The
+representation can be genuinely nondegenerate for a nontrivial idempotent,
+but this tranche does not itself construct one. A product ring with the
+witnessed idempotent `(1,0)` and its affine-basic-open restriction consumer
+remain the next bounded gate; general fraction models, matching/sheaf
+descent, `Spec`, and schemes remain downstream.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

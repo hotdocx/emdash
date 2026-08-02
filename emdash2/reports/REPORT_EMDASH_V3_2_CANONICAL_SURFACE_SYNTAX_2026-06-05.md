@@ -464,6 +464,8 @@ unit(1_R)                  := comm_ring_one_unit(R)
 idLoc_R(f,u)               := comm_ring_unit_identity_localization(R,f,u)
 idLoc_R(1_R)               := comm_ring_identity_localization_at_one(R)
 zeroLoc_R                  := comm_ring_zero_localization(R)
+eR                         := comm_ring_idempotent_image(R,e,e2)
+idemLoc_R(e,e2)            := comm_ring_idempotent_image_localization(R,e,e2)
 IterLoc_R(f,g)             := CommRingIteratedLocalizationAt(R,f,g)
 CompLoc_R(f,g,m,p)         := CommRingIteratedLocalizationComparison(m,p)
 OverlapAlong_R(f,g,m,p,c)  := comm_ring_iterated_localization_comparison_omega_equiv_along(c)
@@ -520,6 +522,13 @@ through `iota` is a term of `CommRingLocalizationFactor(iota,h)`, whose second
 field is the pointwise triangle `k(iota(x)) = h(x)`. The localization property
 states that this factor classifier is contractible whenever `h(f)` has
 explicit unit evidence.
+
+For a supplied path `e2 : e*_R e = e`, `eR` denotes the fixed-image ring
+whose elements retain `(x,e*x=x)`, and `idemLoc_R(e,e2)` denotes its selected
+localization package. Its structure-map observation is
+`element(iota_e(x)) = e*x`. This notation does not assert that `e` is
+nontrivial or that every localization is a fixed-image localization; a closed
+nontrivial instance requires the separately gated product-ring consumer.
 
 For `m : IterLoc_R(f,g)`, the first stage is a chosen localization at `f` and
 the second is a chosen localization at the image of `g`; its stable composite

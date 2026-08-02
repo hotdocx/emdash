@@ -88,8 +88,15 @@ maps between `R[1/(f*g)]` and `R[1/f][1/g]` are inverse as whole
 maintained source/reviewer/central checks, exact warning comparison, strict
 audit, the fresh 1,953-check catalog, and synchronized 80-target health are
 green. Full integration CI is also green, and the tranche is locally
-checkpointed at `362922d`. A concrete genuinely nondegenerate localization
-model and the matching/descent connection remain open.
+checkpointed at `362922d`. PSSS-08c0G now has a rule-free fixed-image
+localization for every supplied idempotent `e^2=e`: the target is the
+computing subtype `eR={x | e*x=x}` and the structure map is `x |-> e*x`.
+Focused and maintained source/reviewer/central checks, exact warning
+comparison, strict audit, the fresh 1,959-check catalog, synchronized
+82-target health, and full integration CI are green; the local checkpoint is
+pending. A product-ring construction with the closed idempotent `(1,0)`, its
+affine-basic-open restriction consumer, and the matching/descent connection
+remain open, so the genuinely nondegenerate gate is not yet claimed closed.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -3016,6 +3023,83 @@ a matching-object/sheaf-descent equivalence, or a cocycle consumer for three
 affine charts. Those remain distinct gates. Functoriality and naturality stay
 with the existing internal category/functor owners throughout.
 
+##### PSSS-08c0G — Fixed-image localization at an idempotent
+
+Status: focused and maintained source/reviewer/central checks, exact warning
+comparison, strict audit, the fresh 1,959-check catalog, and synchronized
+82-target health are green. Full integration CI independently passes all 82
+Lambdapi targets in 591.033 summed check-seconds, followed by the complete
+repository integration tail. The local checkpoint is pending in this living
+entry.
+
+The first explicit potentially nondegenerate localization representation is
+selected at an idempotent rather than by prematurely introducing fractions or
+a quotient. Given `e:|R|` and `e2:e*e=e`, define
+
+```text
+eR = Sigma x : |R|, e*x=x.
+```
+
+This is a genuine set-valued carrier: the base is the retained set carrier of
+`R`, and each equation fibre is proposition-valued. The module constructs
+the complete commutative-ring structure internally. Its zero, addition,
+negation, and multiplication retain the corresponding underlying operation
+of `R`; its one is `e`. Closure uses only derived ring equations. In
+particular, multiplication by `e` preserves negation, fixed points are closed
+under multiplication, and the right unit law in `eR` is the fixed-point path
+`x*e=e*x=x`. Equality of fixed-image elements is built from equality of their
+underlying elements plus the uniquely determined dependent proof path; no
+subtype eta or proof-erasure rule is installed.
+
+The structure map is the executable scaling operation
+
+```text
+iota_e : R -> eR
+iota_e(x) = (e*x, e*(e*x)=e*x).
+```
+
+Its five structured-map laws are ordinary derived equations in `R`. The only
+slightly nonlocal one is multiplicativity,
+`e*(x*y)=(e*x)*(e*y)`, obtained by associativity, commutativity, and `e2`.
+All target operation observations and the underlying action of `iota_e`
+therefore reduce through transparent Sigma/ring-map definitions. The module
+adds zero rewrite rules and zero unification rules.
+
+For an admissible `h:R->S`, preservation makes `h(e)` idempotent. If `h(e)`
+is also a unit with inverse `u`, then
+
+```text
+h(e)
+  = h(e)*1
+  = h(e)*(h(e)*u)
+  = (h(e)*h(e))*u
+  = h(e)*u
+  = 1.
+```
+
+The selected factor `eR->S` can therefore simply apply `h` to the retained
+underlying element. Its pointwise triangle computes as
+`h(e*x)=h(e)*h(x)=h(x)`. For uniqueness, scaling the underlying element of a
+fixed point returns the same subtype element; a competitor's triangle then
+identifies its carrier function pointwise with the selected factor.
+`comm_ring_hom_ext` gives equality of the whole structured maps, and the
+already proposition-valued localization-agreement fibre completes equality
+of factor Sigmas. Hence the selected package inhabits the existing full
+`CommRingLocalizationAt R e` interface rather than a weaker bespoke notion.
+
+This result is computational and quotient-free, but the word “nondegenerate”
+must remain qualified. The construction specializes to the existing identity
+and zero endpoints when `e=1` and `e=0`; this module does not yet exhibit a
+closed ring with a nontrivial idempotent. The next bounded consumer is a
+rule-free product commutative ring `R x S`, followed by the witnessed
+idempotent `(1,0)`. That instance should demonstrate that the fixed-image
+target and scaling map are not merely the old endpoint models, and should be
+fed into the existing affine basic-open/restriction API. Only that closed
+consumer may mark the concrete genuinely nondegenerate part of PSSS-08c0F
+complete. A general fraction or quotient representation remains
+consumer-gated; the idempotent model is not asserted to represent arbitrary
+localization.
+
 Only after these audits should the plan decide whether PSSS-08c0E is:
 
 1. the right explicit classifier of a Cartier-local ring-valued presheaf;
@@ -4041,6 +4125,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
 | PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; zero-localization/empty-open tranche checkpointed at `7013915`; rule-free whole algebraic overlap equivalence green through the fresh 1,953-check catalog, 80-target health, and full CI and checkpointed at `362922d`; concrete nondegenerate model and matching/descent connection remain open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; checkpoint pending; product-ring `(1,0)` instance and affine restriction consumer remain required before calling the model genuinely nondegenerate | PSSS-07a localization API, zero-localization algebra lemmas, then product-ring consumer |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

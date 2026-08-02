@@ -65,6 +65,15 @@ the zero ring and back from any ring with `0=1`, and proves that the zero ring
 has the full universal property of `R[1/0]`. It is a degenerate but genuinely
 computing non-identity-shaped localization, not the still-required
 nondegenerate localization or affine-overlap model.
+`emdash3_2_commutative_algebra_localization_idempotent.lp` is the rule-free
+PSSS-08c0G fixed-image layer. For `e^2=e`, it constructs the set-valued ring
+`eR={x:R | e*x=x}` with unit `e`, the computing scaling map `x |-> e*x`, and
+the full contractible-factorization proof that this map localizes `R` at
+`e`. Its selected factor applies the original map to the retained underlying
+element. The construction is quotient-free and can be nondegenerate for a
+nontrivial idempotent, but it does not itself construct a product ring or a
+closed nontrivial idempotent; that instantiation and its affine-basic-open
+consumer remain open.
 `emdash3_2_commutative_algebra_localization_comparison.lp` is the following
 rule-free overlap layer: it packages localization first at `f` and then at the
 image of `g`, and constructs canonical forward/reverse factors against
@@ -126,7 +135,9 @@ The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section
 audit, a native `OmegaEquivAlong Cat_cat`/internal-comparison audit, and a
-concrete nontrivial localization model. The whole algebraic
+concrete nontrivial localization model. The fixed-image construction now
+supplies a computing parametric representation for every idempotent, while a
+closed nontrivial product-ring instance remains required. The whole algebraic
 iterated-localization overlap equivalence is now implemented downstream of
 the comparison layer, but its connection to matching/sheaf descent and an
 actual affine consumer remains open; that evidence may retain, strengthen,

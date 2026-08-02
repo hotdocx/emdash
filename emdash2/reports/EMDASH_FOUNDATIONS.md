@@ -1340,9 +1340,9 @@ R[1/1] = R.
 ```
 
 This closes only the identity-localization stage of the computational-scheme
-audit. A genuinely nontrivial localization representation remains required;
-the representation-independent iterated/basic-open overlap theorem is now a
-separate downstream layer.
+audit. The fixed-image construction below supplies the next potentially
+nontrivial representation; the representation-independent iterated/basic-
+open overlap theorem is a separate downstream layer.
 
 The next rule-free layer computes the opposite degenerate endpoint. The ring
 axioms first derive
@@ -1370,6 +1370,53 @@ structured-map extensionality plus the proposition-valued agreement fibre
 makes the complete factorization Sigma contractible. This is the
 computational empty-basic-open case. It is not yet a nondegenerate fraction
 model, and by itself it does not establish the general affine-overlap law.
+
+The next rule-free model handles every supplied multiplicative idempotent
+`e^2=e` without fractions or quotients. Its carrier is the fixed image
+
+```text
+eR = Sigma x : |R|, e*x=x,
+```
+
+which is a set because `|R|` is a set and each fixed-point equation is a
+proposition. It inherits zero, addition, negation, and multiplication from
+`R`; its multiplicative unit is `e`. Equality of fixed-image elements is
+therefore controlled by equality of their underlying elements, with the
+equation fibre filled uniquely. The scaling map
+
+```text
+iota_e : R -> eR,
+iota_e(x) = e*x
+```
+
+is a structured ring map. Idempotence supplies closure and multiplicativity;
+the latter is the ordinary calculation `(e*x)*(e*y)=e*(x*y)`.
+
+If `h:R->S` makes `h(e)` a unit, structured-map preservation makes `h(e)`
+idempotent as well. An invertible idempotent equals one: for inverse `u`,
+
+```text
+a = a*1 = a*(a*u) = (a*a)*u = a*u = 1.
+```
+
+Consequently the selected factor sends `(x,e*x=x)` to `h(x)`. Its triangle
+computes from `h(e*x)=h(e)*h(x)=h(x)`. For uniqueness, every fixed point `x`
+is literally recovered propositionally by scaling its underlying element;
+the competing factor triangle and structured-map extensionality then identify
+the whole factor map, and the proposition-valued agreement fibre identifies
+the complete factor package. Thus
+
+```text
+comm_ring_idempotent_image_localization(R,e,e2) : Loc_R(e)
+target(...) = eR
+element(map(...)(x)) = e*x.
+```
+
+This is an explicit computing localization representation and is genuinely
+nondegenerate whenever `R` comes with a nontrivial idempotent. The current
+module does not itself exhibit such an `R`: a product-ring construction and
+its idempotent `(1,0)` are the next closed consumer. It also makes no claim
+that arbitrary localizations admit this fixed-image representation.
 
 This is a representation-independent interface. Concrete fractions,
 finite/unimodular families, powers, concrete polynomial representations, and

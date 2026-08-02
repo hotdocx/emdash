@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -20092,6 +20092,71 @@ assert (R : τ CommRing)
     x
   ≡ tt;
 /* End of the PSSS-08c0F zero-localization diagnostics. */
+
+// catalog-area: Localization at an idempotent through its fixed image
+// The fixed-point subtype remains a set and inherits a computing ring.
+assert (R : τ CommRing)
+  (e : τ (@comm_ring_carrier R)) ⊢
+  @comm_ring_idempotent_image_carrier_is_set R e
+  : τ (IsSetGrpd (@CommRingIdempotentImageCarrier R e));
+
+assert (R : τ CommRing)
+  (e : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e)) ⊢
+  @comm_ring_idempotent_image_element R e
+    (@comm_ring_one (@comm_ring_idempotent_image R e idempotent))
+  ≡ e;
+
+// Its structure map is the executable scaling operation x |-> e*x.
+assert (R : τ CommRing)
+  (e x : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e)) ⊢
+  @comm_ring_idempotent_image_element R e
+    (@comm_ring_hom_apply
+      R
+      (@comm_ring_idempotent_image R e idempotent)
+      (@comm_ring_idempotent_image_localization_map R e idempotent)
+      x)
+  ≡ @comm_ring_mul R e x;
+
+// Invertibility of the mapped idempotent selects a contractible factor space.
+assert (R S : τ CommRing)
+  (h : τ (@CommRingHom R S))
+  (e : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e))
+  (unit : τ (@CommRingUnitEvidence S
+      (@comm_ring_hom_apply R S h e))) ⊢
+  @comm_ring_idempotent_image_factor_is_contr
+    R e idempotent S h unit
+  : τ (IsContr (@CommRingLocalizationFactor
+      R
+      (@comm_ring_idempotent_image R e idempotent)
+      S
+      (@comm_ring_idempotent_image_localization_map R e idempotent)
+      h));
+
+// The selected package computes to the fixed-image target and scaling map.
+assert (R : τ CommRing)
+  (e : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e)) ⊢
+  @comm_ring_localization_target
+    R e
+    (@comm_ring_idempotent_image_localization R e idempotent)
+  ≡ @comm_ring_idempotent_image R e idempotent;
+
+assert (R : τ CommRing)
+  (e : τ (@comm_ring_carrier R))
+  (idempotent : τ (@= (@comm_ring_carrier R)
+      (@comm_ring_mul R e e) e)) ⊢
+  @comm_ring_localization_map
+    R e
+    (@comm_ring_idempotent_image_localization R e idempotent)
+  ≡ @comm_ring_idempotent_image_localization_map R e idempotent;
+/* End of the PSSS-08c0G idempotent-localization diagnostics. */
 
 // catalog-area: Iterated commutative-ring localization comparison
 // Stable structured composition exposes its selected carrier action.
