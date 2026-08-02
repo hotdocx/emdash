@@ -910,6 +910,7 @@ current and planned module spine is:
 emdash3_2_presheaves.lp
 emdash3_2_sieves.lp
 emdash3_2_sites.lp
+emdash3_2_generated_topologies.lp
 emdash3_2_commutative_algebra.lp
 emdash3_2_commutative_algebra_presheaves.lp
 emdash3_2_commutative_algebra_affine_spec.lp
@@ -931,6 +932,9 @@ kernel -> native equality evidence
 
 sieves + reusable Unit proposition evidence
   -> sites
+
+sites
+  -> witness-rich internally generated topologies
 
 kernel + presheaves + structured algebra + localization units
   -> commutative-algebra presheaves
@@ -4098,9 +4102,11 @@ would require more than this opaque capability.
 
 ##### PSSS-09cGI — Internal intersection construction
 
-Status: a rule-free ignored full-import probe is quiet- and exact-warning
-green. The earlier expectation that internal generation necessarily requires
-a saturation HIT is therefore superseded for the universal-property
+Status: the rule-free generic source and nine-assertion reviewer are promoted.
+Focused checks, exact full-import warning comparison, strict audit/catalog,
+and synchronized 100-target health are green; the local checkpoint is
+pending. The earlier expectation that internal generation necessarily
+requires a saturation HIT is therefore superseded for the universal-property
 interface.
 
 There is a direct internal construction available in the present logical
@@ -4153,7 +4159,7 @@ whole chart arrows and selected localization families. The generic probe is
 strong evidence, not yet permission to mix that new source boundary into the
 pending PSSS-05c reflector checkpoint.
 
-The promotion-shaped ignored candidates now make that split concrete.
+The promotion-shaped ignored candidates made that split concrete.
 `tmp/probes/psss09cgi_generated_topologies_source_candidate.lp` imports only
 `emdash3_2_sites.lp` and uses the proposed public names
 `SieveGeneratorFamily`, `GrothTopologyAcceptsGenerators`, `GrothTopologyLe`,
@@ -4168,8 +4174,35 @@ the official warning summarizer reports exactly the inherited
 `1179 = 1020 + 159` warnings and no candidate location. The seven-assertion
 `tmp/probes/psss09cgi_generated_topologies_reviewer_candidate.lp` passes at
 `logs/probes/psss09cgi_generated_topologies_reviewer_candidate-20260802-165117.log`.
-These files remain ignored preparation until the PSSS-05c checkpoint is
-closed.
+
+The active promotion is `emdash3_2_generated_topologies.lp`, immediately
+downstream of `emdash3_2_sites.lp`, with
+`examples/generated_grothendieck_topologies.lp` as its dedicated reviewer.
+The semantic body is unchanged from the selected source candidate. The
+reviewer additionally checks the two computational observations needed by
+consumers: generator inclusion reduces to application of the accepting
+topology's witness, and leastness reduces to evaluation of the generated
+cover at that topology. Focused quiet checks are green. Full-import warning
+logs
+`logs/probes/emdash3_2_generated_topologies-20260802-182426.log` and
+`logs/probes/generated_grothendieck_topologies-20260802-182437.log` each
+contain exactly the inherited `1179 = 1020 + 159` warnings and no changed-file
+location. The module has no rewrite or unification rule, and the strict LHS
+audit remains at zero unreviewed clauses.
+
+The exact-content health set now contains 100 targets at
+`sha256:70228c029d8c2844ae9d1259cfd056ba855481f39c53c66f074d408b5e33b25d`
+and source-metrics snapshot
+`sha256:dc70a4459f55935f0a8a1fb0d8238eb2c315c1f31582a59fbf55c29df9ab4b24`.
+All 100 pass in 205.358 summed check-seconds. The first pass exposed a
+Lambdapi object-cache false-negative boundary: 98 targets, including both new
+files, passed, while the unchanged `grpd_eq1_type_equiv_bridge` and
+`pi_funext` reviewers failed immediately only when loading generated `.lpo`
+dependencies. After deleting the 24 disposable build objects, the resumable
+runner checked just those two targets from source in 9.730 and 11.911 seconds,
+and both passed. Consequently `.lpo` priming is not treated as a generally
+transparent health optimization; an object-backed failure must be retried
+from source before it is classified as semantic.
 
 ##### PSSS-09cZ1 — Supplied-topology compatibility interface
 
@@ -5465,6 +5498,20 @@ consumer demonstrates that nontransitive unification requires it.
   then reflexive, avoiding both access to the protected pointwise helper and a
   duplicated extensionality proof, while generic Sigma projection still makes
   coordinate restriction compute to the supplied whole localization map.
+- **PSSS-D-110:** promote the witness-rich impredicative-intersection
+  construction as `emdash3_2_generated_topologies.lp`, one way downstream of
+  direct sites and independently of the affine specialization. Retain the
+  generator type rather than truncating it, package only the already-proved
+  proposition-valued intersection as coverage, and make generator inclusion
+  and leastness compute by application. Inductive derivations, normalization,
+  a decision procedure, and a truncation/HIT remain consumer-gated.
+- **PSSS-D-111:** do not treat generated Lambdapi `.lpo` objects as a
+  transparent replacement for source-mode aggregate validation. The
+  PSSS-09cGI health pass found two unchanged equality reviewers that fail only
+  against object-loaded dependencies and pass immediately after the objects
+  are removed. Resumable health may retain exit-zero evidence, but every
+  object-backed failure must be retried from source before semantic diagnosis;
+  object priming is not part of the maintained health contract.
 
 ## 19. Side-Task Ledger
 
@@ -5504,7 +5551,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09c0 | Compare supplied, extensional-direct, and propositionally reflected Zariski coverhood | Research gate | PSSS-09b1; PSSS-09b2 only if its convenience API is consumed |
 | PSSS-09cT | Genuine propositional-truncation HIT/reflector | Conditional sub-plan; not required by the internal intersection construction | A consumer requires retained-generation induction/normalization or another genuinely truncated quotient |
 | PSSS-09cGP | Primitive generated-topology capability with generator inclusion and leastness | Coverage-indexed rule-free representation/warning probe green; witness-rich presentation-indexed refinement selected for the affine audit; promotion remains consumer-gated | Concrete affine presentation relation or honest base coverage plus consumer |
-| PSSS-09cGI | Internal generated-topology construction | Promotion-shaped sites-only source/reviewer plus direct affine witness-family probes quiet- and exact-warning green; promotion pending | PSSS-05c checkpoint followed by maintained source/reviewer performance/SOP gates |
+| PSSS-09cGI | Internal generated-topology construction | Rule-free generic source and nine-assertion reviewer promoted; focused/exact-warning/audit/catalog and synchronized 100-target health green; checkpoint pending | PSSS-05c checkpoint and internal intersection construction; direct affine specialization remains PSSS-10dG |
 | PSSS-09cZ1 | Supplied lawful topology plus proposition-valued Zariski-basis compatibility | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 68-target health, and full CI; locally checkpointed at `d808c29` | PSSS-09b1 and `GrothTopology` |
 | PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Internal generic generation and direct affine instantiation are probe-green; promotion and subcanonicity remain separate gates | Promoted PSSS-09cGI/PSSS-10dG or one of PSSS-09cGP/PSSS-09cZ2; PSSS-05b for subcanonicity |

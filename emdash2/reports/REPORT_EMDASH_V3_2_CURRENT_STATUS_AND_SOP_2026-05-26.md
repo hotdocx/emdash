@@ -38,6 +38,14 @@ detailed probe evidence.
   sieve coverages, maximality/pullback/local-character laws, named topology
   projections, and the chaotic topology. It declares no `Omega`, generated
   coverage saturation, sheafification, or descent.
+- `emdash3_2_generated_topologies.lp`: downstream one-way, rule-free
+  generated-topology layer. Type-valued sieve generators retain their
+  presentation witnesses, while generated coverhood is the
+  proposition-valued intersection of every Grothendieck topology accepting
+  them. Maximality, pullback stability, and local character are inherited
+  pointwise; generator inclusion and leastness compute by application. The
+  module provides no inductive cover derivations, truncation/HIT, decision
+  procedure, affine specialization, sheafification, or scheme.
 - `emdash3_2_ringed_sites.lp`: downstream one-way, rule-free supplied
   reflective-sheafification layer. A rigid topology- and value-category-indexed
   sheaf classifier is paired with a transparent capability carrying whole

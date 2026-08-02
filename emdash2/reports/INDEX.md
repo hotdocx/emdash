@@ -10,6 +10,14 @@ ordinary-sieve specialization without `Omega` or topology.
 `emdash3_2_sites.lp` is the direct ordinary-sieve Grothendieck-topology layer,
 with membership, maximal sieve, the three topology laws, and the chaotic
 model, but no `Omega`, generated saturation, sheafification, or descent.
+`emdash3_2_generated_topologies.lp` is the rule-free universal-property
+generated-topology layer immediately downstream of sites. Type-valued sieve
+generators retain presentation witnesses; generated coverhood is the
+proposition-valued intersection of all Grothendieck topologies accepting
+them. The three topology laws hold pointwise, while generator inclusion and
+leastness compute by application. This is an internal Church-style least
+topology, not an inductive derivation syntax, truncation/HIT, coverhood
+normalizer, affine specialization, sheafification, or scheme.
 `emdash3_2_ringed_sites.lp` is the rule-free supplied-reflector layer. It
 retains a rigid `Sheaf_cat(K,T,V)`, packages whole inclusion/sheafification
 functors and their generic adjunction, and requires fixed-forward
@@ -269,26 +277,25 @@ name. The primitive may be indexed directly by witness-rich cover
 presentations: inclusion maps every retained presentation witness into the
 topology's proposition-valued coverhood, and leastness compares against every
 topology accepting all those witnesses. This does not identify presentations
-or require truncation merely to state the capability. Internally constructing
-that primitive does not in fact require saturation/HIT machinery for the
-universal-property interface: an ignored rule-free probe defines generated
-coverhood as coverhood in every topology accepting the generators, proves the
-intersection proposition-valued, inherits all topology laws pointwise, and
-derives inclusion and leastness. Its quiet and warning checks are green with
-the exact inherited `1020 + 159` footprint. A HIT remains conditional on a
-consumer needing induction over generation steps or executable cover normal
-forms. The affine audit has now instantiated this generic internal
+or require truncation merely to state the capability. The promoted rule-free
+`emdash3_2_generated_topologies.lp` now constructs that capability internally:
+generated coverhood is coverhood in every topology accepting the generators,
+the intersection is proposition-valued, all topology laws hold pointwise, and
+inclusion/leastness compute by application. Its nine-assertion reviewer checks
+both computation laws. Focused checks and the exact inherited `1020 + 159`
+warning footprint are green, with no changed-file warning. Synchronized
+health passes all 100 exact-content targets at
+`sha256:70228c029d8c2844ae9d1259cfd056ba855481f39c53c66f074d408b5e33b25d`;
+the local checkpoint remains pending. A HIT remains conditional on a consumer
+needing induction over generation steps or executable cover normal forms.
+The affine audit has now instantiated this generic internal
 construction with whole lifted chart presentations. Split rule-free probes
 construct every literal localization chart arrow internally, eliminate an
 arbitrary slice package once with `sigma_ind`, retain selected finite-family
 containment as witness-rich generators, and derive a least lawful topology
 directly on `AffineSpecBigSlice_cat(R)`. Quiet checks and an exact inherited
-`1020 + 159` warning comparison are green; promotion follows the pending
-reflector checkpoint and a maintained performance/SOP audit.
-The generic layer has also been refactored into ignored promotion-shaped
-sites-only source and seven-assertion reviewer candidates with final public
-names. Both are quiet-green; the source candidate inherits exactly the
-official `1020 + 159` warning inventory and adds no warning location.
+`1020 + 159` warning comparison are green; affine promotion follows the
+generic checkpoint and its own maintained performance/SOP audit.
 The affine layer now likewise has promotion-shaped source and nine-observation
 reviewer candidates. It chooses the exact existing opposite-precomposition
 endpoint as the localized chart structure map, making the triangle reflexive;

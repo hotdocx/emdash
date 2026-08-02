@@ -1131,9 +1131,48 @@ compute to `tt`, giving a direct model on every category and in particular on
 `Terminal_cat`.
 
 This is a direct topology presentation, not a cover-family generator. The
-library still has no `Omega`, free coverage saturation, sheafification,
-descent, or assertion that every concrete family coverage automatically
-generates a topology.
+sites module itself has no `Omega`, free saturation, sheafification, descent,
+or assertion that every concrete family coverage automatically generates a
+topology. The separate downstream generated-topology module supplies the
+universal-property construction described next.
+
+### Internally Generated Grothendieck Topologies
+
+A generator family may retain arbitrary presentation witnesses rather than
+first erasing them into a proposition:
+
+```text
+SieveGeneratorFamily(K)
+  = Pi U : Obj(K), Sieve(U) -> Grpd.
+```
+
+A topology `T` accepts `G` when every `g : G(U,R)` produces a covering
+witness for `R` in `T`. Generated coverhood is the impredicative intersection
+
+```text
+GeneratedSieveCover(G,U,R)
+  = Pi T : GrothTopology(K),
+      GrothTopologyAcceptsGenerators(G,T)
+      -> groth_topology_covers(T,R).
+```
+
+Every target coverhood is proposition-valued, so the existing dependent-Pi
+proposition theorem makes this whole intersection proposition-valued without
+truncating `G`. Maximality, pullback stability, and local character are
+inherited by applying the corresponding law in every accepting topology.
+The resulting `generated_groth_topology(G)` accepts every generator and is
+below every other accepting topology under pointwise inclusion of cover
+predicates. Both observations compute: inclusion applies the competing
+topology's acceptance witness, and leastness evaluates a generated-cover
+witness at that topology. The chaotic topology is a closed accepting upper
+bound, so the intersection is nonvacuous.
+
+This is a Church-/intersection-style least topology, not an inductive syntax
+of cover-generation steps. It deliberately provides no induction principle,
+normal form, or decision procedure for arbitrary coverhood. A future
+truncated/HIT presentation is justified only if a consumer needs those
+additional interfaces; it is not required for the universal property or the
+computational affine-site MVP.
 
 ### Set-Carrier Commutative-Ring Objects
 
@@ -3849,6 +3888,9 @@ kernel and one-way library vocabulary.
 | proposition-valued sieve coverage | `SieveCoverage K` / `Covers J R` |
 | Grothendieck topology laws/package | `IsGrothTopology J` / `GrothTopology K` |
 | chaotic topology | `chaotic_groth_topology K` |
+| witness-rich sieve generators | `SieveGeneratorFamily K` |
+| topology acceptance / cover inclusion | `GrothTopologyAcceptsGenerators G T` / `GrothTopologyLe T U` |
+| generated coverhood and least topology | `GeneratedSieveCover G U R` / `generated_groth_topology G` |
 | set-carrier commutative rings | `CommRing` |
 | carrier and retained sethood of `R` | `comm_ring_carrier R` / `comm_ring_carrier_is_set R` |
 | operation/law packages on `A` | `CommRingOps A` / `IsCommRing A ops` |
