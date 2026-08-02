@@ -293,8 +293,9 @@
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-ETA-01 /
 > D-DTTLF-USABILITY-055 is separately reviewed-approved from immutable
 > proposal checkpoint `36e1c8dba16a8a206ace58628ba47703a2b74374` under the
-> standing unattended delegation and is now implemented/in-scope green with
-> its semantic checkpoint pending. It adds only a compact contextual method,
+> standing unattended delegation and is now implemented/in-scope green at
+> `dd12ae56002ebad5b820db6106e68dc5a60b50ae`. It adds only a compact
+> contextual method,
 > a construction-only
 > indexed point-Hom/application view, and the eta point leaf
 > `lambda^nd a. eta[a] -> eta`; it adds no kernel/transfer owner, generic
@@ -306,8 +307,8 @@
 > whitespace checks pass. The sole required aggregate adds exactly the seven
 > new passes and retains only the same three unrelated canonical-export digest
 > failures at 1,272 pass/51 skip. Do not repeat that approximately 44-minute
-> aggregate or repair the transfer pins in this tranche. After the semantic
-> checkpoint, the dependency-ready operation is the read-only
+> aggregate or repair the transfer pins in this tranche. The dependency-ready
+> operation is the read-only
 > `DIRECT-CONTEXTUAL-ND-GRADUATE-0U` audit of the first recursive point-body
 > constructor; it may freeze at most one successor and may not broaden
 > behavior itself.
