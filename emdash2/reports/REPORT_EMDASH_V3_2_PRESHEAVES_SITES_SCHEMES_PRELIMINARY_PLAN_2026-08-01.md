@@ -134,6 +134,35 @@ integration evidence is recorded in
 the PSSS-09cZ1 phase below; every subsequent metric remains provisional until
 its own bounded tranche is synchronized and checkpointed.
 
+`PSSS-08c0J` is now a completed bounded research audit, not a new foundations
+programme. Existing `PiFunext`, `PathLift`, and the core-inclusion comparison
+derive a whole internal left cancellation transformation. They do not turn
+that transformation into identity-type equality of functor objects, which is
+the stronger input required by `OmegaEquivAlong Cat_cat`; that reflection is
+a functor-extensionality/univalence boundary. On the right, coherent matching
+sections are internal `Pi_cat` objects rather than decoded functions accepted
+by the existing `PiFunext`, so the exact missing reusable owner is a
+Path-valued coherent-section extensionality/initial-centre comparison. Focused
+positive and expected-negative probes retain that conclusion. No source,
+axiom, runtime rule, or external naturality field was promoted, and this
+optional strengthening is no longer an MVP prerequisite.
+
+The main line has therefore returned to computational schemes as `PSSS-10a`.
+The rule-free `emdash3_2_commutative_algebra_affine_spec.lp` implementation exposes
+the conventional big affine slice, its computing coordinate-ring presheaf,
+arbitrary internally carried affine chart arrows, selected basic-open and
+iterated-localization charts, and overlap arrows in both directions.
+Coordinate restriction computes to the already-proved whole comparison maps,
+whose `OmegaEquiv CommRing_cat` is reused. The closed split-idempotent model
+supplies a non-endpoint chart. This is deliberately a big-slice computational
+precursor, not yet a selected small Zariski site, sheaf, locally ringed space,
+or complete scheme. Focused/central checks, exact inherited-warning audit,
+strict audit, catalog, documentation lints, and synchronized 90-target health
+are green. The next MVP gate is a minimal supplied cover/atlas and a concrete
+chart-gluing consumer; general generated topology, truncation, sheafification,
+and unrestricted functor extensionality remain off the main line until such a
+consumer actually requires them.
+
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
 Worktree: `/home/user1/emdash1-presheaves-sites-schemes`
@@ -3344,6 +3373,52 @@ reference checks, book evidence/typography/KaTeX/assembly checks, the strict
 kernel audit, and fresh strict catalog verification. The implementation and
 synchronized authority prose are locally checkpointed at `4ed74b0`.
 
+##### PSSS-08c0J — Bounded whole-comparison audit and scheme-MVP return gate
+
+Status: completed bounded research audit after checkpointed PSSS-08c0I; no
+kernel or standard-library source promoted.
+
+The positive result is narrower but genuinely internal. Given a functor into
+a Path category and equality of its object function with the identity,
+`PiFunext` gives equality of the decoded object functions, `PathLift` maps that
+path to a whole functor path at the PathLift presentation, and
+`core_incl_transf_kappa_left` supplies the natural comparison from the
+original functor composite. The generic probe
+`tmp/probes/psss08c0j_path_lift_left_cancellation.lp` constructs the resulting
+whole transformation without an external naturality family; the affine
+instantiation in
+`tmp/probes/psss08c0j_affine_left_instantiation.lp` applies it to the derived
+Cartier left component law. The green logs are respectively
+`logs/probes/psss08c0j_path_lift_left_cancellation-20260802-091621.log` and
+`logs/probes/psss08c0j_affine_left_instantiation-20260802-091710.log`.
+
+That transformation is not identity-type equality of the two whole functor
+objects. `OmegaEquivAlong Cat_cat` requests precisely such paths. Reflecting a
+natural comparison or categorical equivalence to a functor-object path is an
+extensionality/univalence principle, so it is neither silently available nor
+appropriate as a scheme-MVP prerequisite. The right side exposes an earlier
+boundary: matching sections are objects of the internal coherent `Pi_cat`,
+whereas the current `PiFunext` eliminates decoded dependent functions from
+`Pi_grpd`. The expected-negative probe
+`tmp/probes/psss08c0j_section_funext_missing.lp` is rejected with exactly that
+`Pi_grpd` versus internal-section mismatch; its retained log is
+`logs/probes/psss08c0j_section_funext_missing-20260802-092005.log`.
+
+The smallest future prerequisite is therefore a reusable Path-valued
+coherent-section extensionality/initial-centre comparison. Only a future
+consumer insisting on identity-type equality of whole functors would
+additionally justify a carefully scoped functor-extensionality or univalence
+principle. Neither is postulated here. Component equations remain component
+equations, the successfully derived internal transformations remain useful,
+and no broad equality rule, new unifier, external naturality square, or
+object-only substitute is installed.
+
+Validation was intentionally proportional: all three focused probes obeyed
+the 60-second Lambdapi bound, including the expected-negative result. The
+checkpointed PSSS-08c0I full-CI evidence continues to cover unchanged layers;
+the research conclusion alone does not trigger another long aggregate. This
+closes PSSS-08c0J and returns the main line to PSSS-10a.
+
 ##### PSSS-08c1 — Ringed sites, selected sheaves, and localization descent
 
 Status: proposed after checkpointing PSSS-08c0E, closing PSSS-08c0F, and
@@ -3786,11 +3861,94 @@ replacements for them.
 
 ### Phase PSSS-10 — Slice sites and affine charts
 
-Status: proposed after PSSS-09.
+Status: PSSS-10a computational big-slice candidate promoted and focused-green;
+small-site/topology and atlas layers remain later gates.
 
-- induced slice topology and ringed pullback;
-- `Spec(R)/D(f)` versus `Spec(R[1/f])` computational comparison;
-- one overlap/iterated-localization example.
+##### PSSS-10a — Big affine slice and computing overlap
+
+The first scheme-facing object is intentionally smaller than a scheme record
+and larger than a small Zariski site. For every commutative ring `R`,
+`AffineSpecBigSlice_cat(R)` is definitionally
+`Slice_cat(Op_cat CommRing_cat,R)`: objects are structured maps `R -> S`, and
+arrows have the conventional geometric direction. On the opposite slice,
+these objects are the existing Sigma total of the represented presheaf.
+Consequently `affine_spec_coordinate_psh(R)` is the generic
+`Sigma_proj1_func`, not a new primitive structure presheaf. Its values are
+whole commutative rings, its restrictions are whole structured maps, and the
+generic functor owners carry both object and arrow action.
+
+`affine_spec_chart` names an arbitrary `R`-algebra chart. A whole structured
+triangle `R -> S -> T` feeds `affine_spec_chart_arrow` and becomes the internal
+geometric arrow `Spec(T) -> Spec(S)` through `sigma_arrow`; no external
+naturality family is stored. The selected whole chart is the identity
+R-algebra, and the selected `D(f)` chart routes through the existing
+`comm_ring_basic_open_arrow` instead of duplicating its semantic body.
+
+For the first executable overlap, the existing universal-property
+construction supplies `R[1/(f*g)]` and `R[1/f][1/g]` together with canonical
+forward/reverse structured maps and their pointwise triangles over `R`.
+`affine_spec_chart_triangle_from_pointwise` uses existing CommRing
+extensionality and the selected opposite-precomposition comparison to stage
+those triangles at the Sigma fibre. The two maps then lift to internal chart
+arrows in opposite geometric directions. Restriction of the coordinate
+presheaf computes to the corresponding whole structured maps, and
+`affine_spec_overlap_coordinate_omega_equiv` transparently re-exposes their
+already-proved `OmegaEquiv CommRing_cat`. It does not claim equality of chosen
+localization packages or equality of whole functors.
+
+The source contains no rewrite or unification rule. The focused source and
+reviewer logs are
+`logs/probes/emdash3_2_commutative_algebra_affine_spec-20260802-094259.log`
+and `logs/probes/commutative_ring_affine_spec-20260802-094426.log`. Earlier
+architecture probes separately established the big-slice/value computation
+and both overlap directions at timestamps `20260802-092906`,
+`20260802-093353`, and `20260802-094047`. The reviewer includes the closed
+non-endpoint split-idempotent basic-open chart. The warning-enabled source and
+reviewer logs at timestamps `20260802-095406` and `20260802-095420` inherit
+exactly `1179 = 1020 + 159` warnings and have zero changed-file locations.
+The strict rule audit remains at zero unreviewed clauses; source TOC, current
+report headers, active references, and diff whitespace are green.
+
+The promoted source has 242 lines and 11 symbols, with zero rewrite or
+unification rules. Its 154-line reviewer has ten assertions, and six central
+diagnostics raise the strict catalog to 1,981 checks across 88 mapped areas
+with zero legacy or unclassified entries. Synchronized health passes all 90
+registered source/example targets in 712.925 summed check-seconds at source
+snapshot
+`sha256:6a3b083dc38c324d1a05b66dbe3156158ea7989119737a0b280d41b3ee82cd2f`.
+The source takes 8.438 seconds, its reviewer 24.270 seconds, and the central
+diagnostics 28.157 seconds, all below the 60-second target bound. A cold
+pre-registration `make check` traversal reached the central-target timeout,
+but the focused central check and the complete synchronized health run both
+subsequently passed; it is not repeated as reassurance. The authorized local
+checkpoint remains the completion action for this tranche.
+
+This boundary is useful precisely because it advances the computational
+scheme outline without pretending to have solved topology or sheafification.
+It is not a selected small site, it does not yet say which charts cover, and
+it is not a locally ringed space or a complete scheme. The next main-line
+consumer is PSSS-10b: a minimal supplied finite basic-open cover/atlas whose
+chart restrictions and overlap maps compute, followed by one concrete gluing
+example. Only that consumer may decide whether an induced slice topology,
+selected sheaf datum, or additional descent interface is immediately needed.
+
+##### PSSS-10b — Minimal supplied cover and computational affine atlas
+
+Status: next MVP gate after checkpointed PSSS-10a.
+
+- consume the existing finite unimodular presentation and selected
+  localization family rather than require a least generated topology;
+- package the whole affine chart, selected basic-open charts, and their
+  internally carried restriction/overlap arrows;
+- retain a computing coordinate-ring observation and one concrete
+  non-endpoint chart/gluing consumer; and
+- state separately any proposition-valued coverhood or sheaf/descent evidence
+  actually required by that consumer.
+
+Induced small-slice topology, `Spec(R)/D(f)` versus `Spec(R[1/f])` as an
+equivalence of ringed sites, subcanonicity, and general sheafification remain
+later PSSS-10c/PSSS-08c1 work rather than prerequisites smuggled into this
+MVP tranche.
 
 ### Phase PSSS-11 — Scheme atlases
 
@@ -4358,6 +4516,35 @@ consumer demonstrates that nontransitive unification requires it.
   or explicitly require the whole cancellation paths of
   `OmegaEquivAlong Cat_cat` through reusable internal structure, never an ad
   hoc equality axiom or external naturality family.
+- **PSSS-D-092:** bound the post-PSSS-08c0I whole-comparison investigation as
+  PSSS-08c0J. Promote a theorem only when existing internal owners derive the
+  whole laws; otherwise preserve the exact typed missing-owner result and
+  return to a computational scheme MVP built from affine `Spec`, computing
+  basic-open restrictions/overlaps, a minimally sufficient supplied-cover
+  interface, and a concrete gluing example. Do not let generic functor
+  extensionality, generated topology, truncation, or sheafification become an
+  unbounded prerequisite. Reuse recent full-CI evidence for unchanged layers
+  and apply only proportional focused validation unless a later cross-layer
+  promotion strictly requires the long aggregate.
+- **PSSS-D-093:** close PSSS-08c0J at the exact extensionality boundary. Retain
+  the internally derived whole left cancellation transformation, but do not
+  relabel it as identity-type equality of functor objects. Record that the
+  right matching objects live in coherent `Pi_cat`, outside decoded
+  `PiFunext`, and name Path-valued section extensionality/initial-centre
+  comparison as the smallest future prerequisite. Treat reflection from
+  natural equivalence or transformation to functor equality as an optional
+  univalence principle, not as a computational-schemes prerequisite. Add no
+  external naturality fields, broad equality rule, or unification shortcut.
+- **PSSS-D-094:** select the conventional big affine slice as the first
+  scheme-facing computational facade. Define it transparently from the
+  existing slice/Sigma presentation, make its coordinate presheaf the generic
+  Sigma first projection, and lift structured triangles to internal chart
+  arrows. Route basic opens through the existing Zariski arrow and route the
+  product/iterated overlap through the existing comparison maps and
+  `OmegaEquiv CommRing_cat`. Explicitly distinguish this big-slice facade from
+  a selected small Zariski site or complete scheme. The next MVP gate is a
+  supplied finite cover/atlas plus concrete gluing, not generated topology,
+  general sheafification, or unrestricted functor equality.
 
 ## 19. Side-Task Ledger
 
@@ -4388,6 +4575,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; locally checkpointed at `1211e06`; its requested product-ring consumer is the checkpointed downstream PSSS-08c0H tranche | PSSS-07a localization API and zero-localization algebra lemmas |
 | PSSS-08c0H | Product rings, closed `F2`, and split-idempotent affine restriction | Rule-free implementation green through focused and maintained checks, exact warning comparison, strict audit, fresh 1,968-check catalog, synchronized 86-target health, and full integration CI; locally checkpointed at `e68b6b9` | PSSS-08c0G, `CommRing_cat` structured-map extensionality, and PSSS-09a affine-arrow API |
 | PSSS-08c0I | Derived affine Cartier glue for the identity CommRing presheaf, including the closed split-idempotent consumer | Green through focused/aggregate/warning/audit/catalog, synchronized 88-target health, and full CI; locally checkpointed at `4ed74b0` | PSSS-08c0E, PSSS-08c0H, internal Pi-section action, and the normalized Yoneda proof-time comparison |
+| PSSS-08c0J | Bounded whole-comparison audit followed by an explicit return to the computational scheme MVP | Complete research audit; whole left transformation derived, coherent-section/functor equality boundary recorded, no source or univalence principle promoted | PSSS-08c0I and existing Path/Pi/functor owners |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
@@ -4398,7 +4586,9 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09cZ1 | Supplied lawful topology plus proposition-valued Zariski-basis compatibility | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 68-target health, and full CI; locally checkpointed at `d808c29` | PSSS-09b1 and `GrothTopology` |
 | PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ2; PSSS-05b for subcanonicity |
-| PSSS-10 | Slice sites and affine-basic-open comparison | Proposed | PSSS-09c at the selected scope |
+| PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, and synchronized 90-target health green; checkpoint pending | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
+| PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Next MVP gate | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
+| PSSS-10c | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | PSSS-10b consumer plus selected PSSS-09c/PSSS-08c1 scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Functor-of-points/qcqs comparison | Research boundary | PSSS-11 and representability audit |
 
@@ -4726,3 +4916,33 @@ PSSS-09cZ1 is successful when:
 8. focused owner/reviewer/central checks, warning comparison, strict audits,
    catalog/health synchronization, current-authority prose, and full
    integration CI are green before any authorized local checkpoint.
+
+PSSS-10a is successful when:
+
+1. `AffineSpecBigSlice_cat(R)` is the transparent conventional geometric
+   slice `Slice_cat(Op_cat CommRing_cat,R)`, with no primitive competing
+   category owner or claim that it is the small Zariski site;
+2. its CommRing-valued coordinate presheaf is the existing Sigma first
+   projection, so values, whole structured restrictions, and arrow action
+   remain with generic functor/Sigma owners;
+3. an arbitrary structured triangle `R -> S -> T` constructs an internal
+   chart arrow `Spec(T) -> Spec(S)` rather than storing an external naturality
+   family or only its object endpoints;
+4. the whole chart computes to `R`, and a selected basic-open chart routes
+   through `comm_ring_basic_open_arrow` and computes to the chosen
+   localization target;
+5. the canonical product/iterated-localization maps lift to chart arrows in
+   both geometric directions, and coordinate restriction along each computes
+   to the corresponding whole structured map;
+6. the coordinate overlap reuses the existing whole
+   `OmegaEquiv CommRing_cat`, with no new cancellation axiom, package equality,
+   functor equality, or univalence principle;
+7. the closed split-idempotent localization supplies a non-endpoint selected
+   chart, while small-site topology, sheafhood, locally ringed structure, and
+   a complete scheme remain explicit PSSS-10b/PSSS-10c gates;
+8. the module stays rule-free and contains no duplicated functoriality,
+   naturality, identity, or composition rule; and
+9. focused owner/reviewer/central checks, strict audit, catalog/health
+   synchronization, current-authority prose, and the proportional integration
+   gate selected by the active SOP are green before the authorized local
+   checkpoint.

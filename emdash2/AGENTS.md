@@ -63,6 +63,9 @@ Zariski presentations is
 `emdash3_2_commutative_algebra_zariski_topology.lp`;
 the split-idempotent localization and closed affine-basic-open extension is
 `emdash3_2_commutative_algebra_localization_split.lp`;
+the computational affine big-slice, coordinate-presheaf, and internal
+basic-open-overlap extension is
+`emdash3_2_commutative_algebra_affine_spec.lp`;
 the selected walking-endomorphism directed-HIT/`BNat` extension is
 `emdash3_2_walking_end_hit.lp`;
 executable diagnostics live in `emdash3_2_checks.lp`.
@@ -234,17 +237,26 @@ Use the following order:
    as a feasibility model; it does not construct the least/generated Zariski
    topology, choose localizations, or declare truncation, sheafification,
    subcanonicity, `Spec`, or schemes;
-29. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
-   endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
-   directed negative results;
-30. `emdash3_2_checks.lp` for executable regression statements;
-31. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
-   for current architecture and development SOP;
-32. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
-33. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
-   for comment/example notation;
-34. `reports/INDEX.md` for task-specific plans and decision records.
-35. `book/book.json` and `book/evidence.json` for book source
+29. `emdash3_2_commutative_algebra_affine_spec.lp` for the conventional big
+    affine slice over `Spec(R)`, its CommRing-valued coordinate presheaf,
+    generic internally carried chart arrows, selected localization and
+    iterated-localization charts, and the two geometric overlap directions.
+    Coordinate restriction computes to the existing whole structured ring
+    maps, whose inverse laws remain at the localization-overlap owner. The
+    module is rule-free and deliberately does not identify the big slice with
+    a selected small Zariski site or claim topology, sheafhood, locally ringed
+    structure, or a complete scheme;
+30. `emdash3_2_walking_end_hit.lp` for the selected concrete walking-
+    endomorphism directed-HIT/`BNat` model, eliminator, comparison, and
+    directed negative results;
+31. `emdash3_2_checks.lp` for executable regression statements;
+32. `reports/REPORT_EMDASH_V3_2_CURRENT_STATUS_AND_SOP_2026-05-26.md`
+    for current architecture and development SOP;
+33. `reports/EMDASH_FOUNDATIONS.md` for the mathematical reading;
+34. `reports/REPORT_EMDASH_V3_2_CANONICAL_SURFACE_SYNTAX_2026-06-05.md`
+    for comment/example notation;
+35. `reports/INDEX.md` for task-specific plans and decision records.
+36. `book/book.json` and `book/evidence.json` for book source
    order and prose-to-check traceability; book prose never outranks active
    Lambdapi sources.
 

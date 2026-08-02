@@ -46,6 +46,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_zariski.lp"),
     Path("emdash3_2_commutative_algebra_zariski_topology.lp"),
     Path("emdash3_2_commutative_algebra_localization_split.lp"),
+    Path("emdash3_2_commutative_algebra_affine_spec.lp"),
     Path("emdash3_2_checks.lp"),
 ]
 EXAMPLES_DIR = ROOT / "examples"

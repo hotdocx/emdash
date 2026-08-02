@@ -159,6 +159,17 @@ green; full integration CI independently passes all 88 targets, and the
 implementation is locally checkpointed at `4ed74b0`. Equality of whole
 functors, `OmegaEquivAlong Cat_cat`, covering-sieve descent, sheafhood, `Spec`,
 and schemes remain open gates.
+`emdash3_2_commutative_algebra_affine_spec.lp` is the rule-free PSSS-10a
+scheme-facing computational slice. It presents the conventional big affine
+slice over `Spec(R)` as the opposite of the existing restriction-oriented
+R-algebra total, equips it with the Sigma-projection coordinate presheaf, and
+lifts the product/iterated-localization comparison maps to internal chart
+arrows in both geometric directions. Coordinate restriction computes to the
+same whole structured maps and reuses their existing `OmegaEquiv
+CommRing_cat`; no new naturality field, rewrite rule, functor equality, or
+univalence principle is introduced. The facade is explicitly not yet a
+selected small Zariski site, a sheaf, a locally ringed space, or a complete
+scheme.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

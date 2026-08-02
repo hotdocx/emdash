@@ -1743,23 +1743,60 @@ The interface does not yet assert whole functor cancellation or a native
 `OmegaEquivAlong`; the stricter computational `DefIso` is absent too. Such a
 strengthening requires a consumer that needs full
 categorical inverse data rather than the current functorial glue and
-computational component observations. Ordinary sheaf descent, `Spec`, basic-open
-overlap comparison, and schemes remain downstream constructions. In
-particular, the historical Cartier experiment does not prove that this
-matching category is the intended section object on a basic open. Before the
-selected glue interface is used to define `Spec`, the living plan requires an
-independent comparison with natural maps out of `D(s)`, an audit of whether
-the component paths assemble into inverse transfors between the two composite
-functors and identities—principally as an
-`OmegaEquivAlong Cat_cat` witness for restriction—a nontrivial localization
-model, and a checked connection from the now-available algebraic
-iterated-localization overlap equivalence to matching/sheaf descent. The
-result may validate, strengthen, derive, or replace the present explicit
-classifier.
-Componentwise funext is construction evidence; it is not a substitute for a
-whole internal comparison when a scheme consumer needs one. `DefIso` is a
-separate strict-computation notion and is not the default category-equivalence
-target here.
+computational component observations. The bounded whole-comparison audit
+derives a genuine internal left cancellation transformation through
+`PiFunext`, `PathLift`, and the existing core-inclusion comparison. Turning
+that transformation into identity-type equality of whole functor objects—the
+input demanded by `OmegaEquivAlong Cat_cat`—is instead a functor-
+extensionality/univalence principle. On the right, coherent matching sections
+are internal `Pi_cat` objects, not decoded functions handled by the existing
+`PiFunext`; Path-valued section extensionality remains a named optional
+prerequisite. Neither boundary is hidden by an external naturality family or
+an equality rule, and neither is required merely to expose computing affine
+charts. `DefIso` remains a separate strict-computation notion.
+
+### Computational Big Affine Spec Slice
+
+The first scheme-facing facade is the conventional big affine slice
+
+```text
+AffineSpecBigSlice_cat(R) = Slice_cat(Op(CommRing_cat),R).
+```
+
+Its objects are structured maps `R -> S`, while arrows point geometrically
+from `Spec(T)` to `Spec(S)`. The opposite slice is definitionally the existing
+Sigma total of the represented presheaf, so the coordinate-ring presheaf is
+simply
+
+```text
+affine_spec_coordinate_psh(R)
+  = Sigma_proj1_func(CommRing_cat, yoneda_psh(Op(CommRing_cat),R)).
+```
+
+This is a whole CommRing-valued functor, not an object-only assignment. At the
+identity chart its value computes to `R`; at a selected basic-open chart
+`D(f)` it computes to the chosen localization target `R[1/f]`. A commuting
+structured triangle `R -> S -> T` constructs an actual internal slice arrow
+`Spec(T) -> Spec(S)` through the generic Sigma-arrow owner, and coordinate
+restriction along it computes to the supplied whole structured map `S -> T`.
+
+For the first overlap, the universal-property comparison between
+`R[1/(f*g)]` and `R[1/f][1/g]` already supplies forward and reverse structured
+maps, their triangles over `R`, and whole cancellation paths. The affine Spec
+facade lifts the two maps to geometric chart arrows in opposite directions.
+The coordinate presheaf restricts along them to exactly those maps and reuses
+their existing `OmegaEquiv CommRing_cat`. No fraction representation,
+localization-package equality, new naturality data, functor equality, or
+univalence principle is added. The split idempotent in `F2 x F2` supplies a
+closed non-endpoint basic-open chart.
+
+This big slice is a computational precursor, not the selected small Zariski
+site and not yet a locally ringed space or complete scheme. The next MVP layer
+is a supplied finite basic-open cover/atlas with computing chart restriction
+and overlap data plus a concrete gluing consumer. Proposition-valued
+coverhood, induced slice topology, sheaf descent, subcanonicity, and general
+sheafification remain independent theorem/interface layers to add only when
+that consumer requires them.
 
 ### Finite Families And Unimodular Cover Presentations
 

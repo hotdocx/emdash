@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_affine_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split emdash.emdash3_2_commutative_algebra_affine_spec;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -22031,3 +22031,79 @@ assert [K : Cat]
         matching
         (@comm_ring_psh_invertibility_element K O U s V f member)));
 /* End of the PSSS-08c0E localization-glue diagnostics. */
+
+// catalog-area: Computational affine Spec slice
+// Coordinate rings are an actual presheaf on the conventional big slice.
+assert (R : τ CommRing) ⊢
+  @affine_spec_coordinate_psh R
+  : τ (@CommRingPsh (@AffineSpecBigSlice_cat R));
+
+// The whole and selected basic-open chart values compute at the Sigma owner.
+assert (R : τ CommRing) ⊢
+  @comm_ring_psh_value
+    (@AffineSpecBigSlice_cat R)
+    (@affine_spec_coordinate_psh R)
+    (@affine_spec_whole_chart R)
+  ≡ R;
+
+assert [R : τ CommRing]
+  [f : τ (@comm_ring_carrier R)]
+  (localization : τ (@CommRingLocalizationAt R f)) ⊢
+  @comm_ring_psh_value
+    (@AffineSpecBigSlice_cat R)
+    (@affine_spec_coordinate_psh R)
+    (@affine_spec_basic_open_chart R f localization)
+  ≡ @comm_ring_localization_target R f localization;
+
+// Both geometric overlap arrows retain their whole coordinate-ring maps.
+assert [R : τ CommRing]
+  [f g : τ (@comm_ring_carrier R)]
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @comm_ring_psh_restriction_hom
+    (@AffineSpecBigSlice_cat R)
+    (@affine_spec_coordinate_psh R)
+    (@affine_spec_iterated_basic_open_chart R f g iterated)
+    (@affine_spec_basic_open_chart
+      R (@comm_ring_mul R f g) product_localization)
+    (@affine_spec_overlap_forward_chart_arrow
+      R f g iterated product_localization)
+  ≡ @comm_ring_iterated_localization_comparison_forward_map
+      R f g iterated product_localization
+      (@comm_ring_iterated_localization_comparison
+        R f g iterated product_localization);
+
+assert [R : τ CommRing]
+  [f g : τ (@comm_ring_carrier R)]
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @comm_ring_psh_restriction_hom
+    (@AffineSpecBigSlice_cat R)
+    (@affine_spec_coordinate_psh R)
+    (@affine_spec_basic_open_chart
+      R (@comm_ring_mul R f g) product_localization)
+    (@affine_spec_iterated_basic_open_chart R f g iterated)
+    (@affine_spec_overlap_reverse_chart_arrow
+      R f g iterated product_localization)
+  ≡ @comm_ring_iterated_localization_comparison_reverse_map
+      R f g iterated product_localization
+      (@comm_ring_iterated_localization_comparison
+        R f g iterated product_localization);
+
+// The scheme-facing overlap facade preserves the native whole CommRing
+// equivalence; it does not assert equality of functors or invoke univalence.
+assert [R : τ CommRing]
+  [f g : τ (@comm_ring_carrier R)]
+  (iterated : τ (@CommRingIteratedLocalizationAt R f g))
+  (product_localization : τ (@CommRingLocalizationAt
+      R (@comm_ring_mul R f g))) ⊢
+  @affine_spec_overlap_coordinate_omega_equiv
+    R f g iterated product_localization
+  : τ (@OmegaEquiv
+      CommRing_cat
+      (@comm_ring_localization_target
+        R (@comm_ring_mul R f g) product_localization)
+      (@comm_ring_iterated_localization_target R f g iterated));
+/* End of the PSSS-10a computational affine-Spec diagnostics. */

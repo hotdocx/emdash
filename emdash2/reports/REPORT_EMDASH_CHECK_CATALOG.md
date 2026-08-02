@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1975
-- Mapped areas: 87
+- Total checks: 1981
+- Mapped areas: 88
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -106,6 +106,7 @@ stable mathematical-area scopes rather than source locations.
 | Invertibility-cover locality and localization factors | 10 |
 | Localization matching restriction | 5 |
 | Localization glue | 5 |
+| Computational affine Spec slice | 6 |
 
 ## Section Details
 
@@ -2518,3 +2519,14 @@ stable mathematical-area scopes rather than source locations.
 | 1973 | 21961 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
 | 1974 | 21983 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
 | 1975 | 22002 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
+
+### Computational affine Spec slice
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1976 | 22037 | `assert (R : τ CommRing) ⊢ @affine_spec_coordinate_psh R : τ (@CommRingPsh (@AffineSpecBigSlice_cat R));` |
+| 1977 | 22042 | `assert (R : τ CommRing) ⊢ @comm_ring_psh_value (@AffineSpecBigSlice_cat R) (@affine_spec_coordinate_psh R) (@affine_ ...` |
+| 1978 | 22049 | `assert [R : τ CommRing] [f : τ (@comm_ring_carrier R)] (localization : τ (@CommRingLocalizationAt R f)) ⊢ @comm_ring ...` |
+| 1979 | 22059 | `assert [R : τ CommRing] [f g : τ (@comm_ring_carrier R)] (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
+| 1980 | 22077 | `assert [R : τ CommRing] [f g : τ (@comm_ring_carrier R)] (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |
+| 1981 | 22097 | `assert [R : τ CommRing] [f g : τ (@comm_ring_carrier R)] (iterated : τ (@CommRingIteratedLocalizationAt R f g)) (pro ...` |

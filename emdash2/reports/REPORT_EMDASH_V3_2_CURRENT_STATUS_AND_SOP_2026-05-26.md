@@ -172,6 +172,14 @@ detailed probe evidence.
   Cartier component law. The complete selected-glue package is constructed
   for every chosen affine localization, including the closed split-idempotent
   model; equality of whole functors and ordinary sheaf descent remain open.
+- `emdash3_2_commutative_algebra_affine_spec.lp`: one-way rule-free
+  computational affine-chart facade. It exposes the conventional big slice
+  over `Spec(R)`, its CommRing-valued coordinate presheaf, arbitrary
+  structured charts and internal chart arrows, selected basic opens, and the
+  product/iterated-localization overlap in both geometric directions.
+  Coordinate restriction computes through the generic Sigma projection to
+  the existing whole ring maps. This is not yet a small Zariski site, sheaf,
+  locally ringed space, or complete scheme.
 - `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
   affine-Zariski layer. It retains a selected localization package for each
   generator of an algebraic cover presentation, exposes chosen basic-open
@@ -2480,12 +2488,34 @@ implementation and synchronized authority prose are locally checkpointed at
 This result establishes that the provisional componentwise glue interface is
 constructively meaningful and sufficient for the intended Cartier
 computation on a non-endpoint affine open. It does not yet prove equality of
-the whole restriction/glue composites. The remaining whole-internal gate is
-to assemble the universal-factor centre data into reusable internal
-section/functor structure and derive the two functor paths required by
-`OmegaEquivAlong Cat_cat`, or to record the exact missing extensionality
-owner. That work must preserve internal action and must not replace the gap by
-external naturality fields or an ad hoc equality rule.
+the whole restriction/glue composites. The bounded PSSS-08c0J audit derives a
+whole internal left cancellation *transformation*: ordinary `PiFunext`,
+`PathLift`, and the existing core-inclusion comparison carry the pointwise
+left law without external naturality. It also establishes the exact remaining
+boundary. `OmegaEquivAlong Cat_cat` asks for identity-type equality of whole
+functor objects, so reflecting that transformation to equality is a functor-
+extensionality/univalence principle. On the right, coherent matching sections
+are objects of an internal `Pi_cat`, not decoded functions accepted by the
+existing `PiFunext`; a Path-valued section-extensionality/initial-centre owner
+is absent. No broad equality rule or univalence axiom is added, and this
+optional strengthening is no longer a prerequisite for the computational
+scheme MVP.
+
+PSSS-10a therefore returns directly to that MVP in
+`emdash3_2_commutative_algebra_affine_spec.lp`. For every ring `R`,
+`AffineSpecBigSlice_cat(R)` is the conventional geometric opposite of the
+existing restriction-oriented total of maps `R -> S`. Its coordinate
+presheaf is the first Sigma projection, so values and restriction maps remain
+whole structured CommRing data with generic object/arrow action. A structured
+triangle produces an internal slice arrow. In particular, the canonical maps
+between `R[1/(f*g)]` and `R[1/f][1/g]` lift to chart arrows in both directions,
+and coordinate restriction computes to those same maps. Their existing
+`OmegaEquiv CommRing_cat` is re-exposed without functor equality or
+univalence. The closed split-idempotent localization supplies a non-endpoint
+basic-open chart. This is deliberately a big-affine computational precursor,
+not yet the small Zariski site or the claimed scheme object; the next MVP gate
+is a minimal supplied-cover/atlas package and a concrete chart-gluing
+consumer.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

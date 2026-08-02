@@ -112,6 +112,12 @@ mathematical reading is in
   Pi-section action along universal localization factors proves component
   recovery. It remains componentwise Cartier locality, not whole functor
   equality or ordinary sheaf descent.
+- `emdash3_2_commutative_algebra_affine_spec.lp` exposes the conventional big
+  affine slice over `Spec(R)`, its computing coordinate-ring presheaf,
+  selected basic-open and iterated-localization charts, and internal overlap
+  arrows in both directions. Coordinate restriction computes to the existing
+  whole comparison maps. This is not yet a small Zariski site, sheaf, locally
+  ringed space, or complete scheme.
 - `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
   encode/decode, Nat comparison, and directed negative results.
 - `emdash3_2_checks.lp` and `examples/` contain executable
@@ -183,6 +189,9 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_affine_glue.lp` — rule-free construction of
   that selected glue for every chosen affine localization of the identity
   CommRing presheaf, including internally derived Cartier component recovery;
+- `emdash3_2_commutative_algebra_affine_spec.lp` — rule-free computational
+  big-affine-slice facade with coordinate presheaf, charts, and two-sided
+  product/iterated-localization overlap restrictions;
 - `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
   action and groupoidality;
 - `emdash3_2_eq1_evidence_property.lp` — evidence-property,
