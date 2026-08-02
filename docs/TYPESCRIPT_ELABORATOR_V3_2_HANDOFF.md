@@ -36,9 +36,12 @@
 > than the runtime normal form. The next dependency-ready operation is the
 > exact kernel-only `HOM-CATD-ACTION-NORMAL-FORM-1AD` proposal under
 > H-DTTLF-USABILITY-HOM-CATD-ACTION-NORMAL-FORM-01 /
-> D-DTTLF-USABILITY-062. TypeScript transfer follows only through a separate
-> read-only boundary audit. `Transf_catd_func`, curry, external coherence, and
-> binder special cases remain deferred.
+> D-DTTLF-USABILITY-062. It is separately reviewed-approved from immutable
+> proposal checkpoint `68367439e4f4167c46f177ecc3d2dc8740cbe69c` under the
+> standing unattended delegation and is implementation dependency-ready.
+> TypeScript transfer follows only through a separate read-only boundary
+> audit. `Transf_catd_func`, curry, external coherence, and binder special
+> cases remain deferred.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
