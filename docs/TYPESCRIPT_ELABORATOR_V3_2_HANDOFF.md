@@ -182,7 +182,10 @@
 > D-DTTLF-USABILITY-071. It is separately reviewed-approved from immutable
 > proposal checkpoint `fcf082be07ad44b877c1b622fb4acc4293cdc84c` under the
 > standing unattended delegation, with immediate human supersession. D-070
-> may resume with exactly one `emdash-template/src/App.tsx` label case.
+> may resume with exactly one `emdash-template/src/App.tsx` label case. The
+> first real-browser snapshot then found the fact strip's literal eleven stale
+> while all twelve options render. The dedicated plan freezes the same-file
+> D-DTTLF-USABILITY-072 count correction pending separate review.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
