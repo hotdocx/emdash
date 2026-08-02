@@ -110,6 +110,7 @@ export * from './categorical_displayed_nd_higher_foundation_transfer';
 export * from './categorical_displayed_nd_higher_target_transfer';
 export * from './categorical_displayed_nd_higher_demo';
 export * from './categorical_mixed_mode_transfer';
+export * from './categorical_hom_catd_action_transfer';
 export * from './categorical_mixed_action_transfer';
 export * from './categorical_direct_mixed_introduction_transfer';
 export * from './categorical_direct_mixed_source_action_transfer';
