@@ -401,6 +401,21 @@
 > facade, Core special case, or external coherence evidence. All declaration
 > prerequisites occur below the selected boundary, so this correction creates
 > no dependency cycle and is now implementation-ready.
+> The bounded D-059 implementation experiment then measured one narrower
+> normalization dependency. Generic product-Hom and product-object rules do
+> fire, but their result contains `sigma_Fst`/`sigma_Snd` of literal
+> `Product_pair` endpoints before the two transparent-pair betas currently
+> transferred only in displayed-chain-2A. It also exposed the exact
+> category-level `Hom_cat(Catd_cat) ↪ Functord_cat` rule as a reusable earlier
+> dependency. The exact
+> `CONTEXTUAL-ND-HORIZONTAL-NORMALIZATION-FOUNDATION-1ZB` /
+> H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-NORMALIZATION-CORRECTION-01 /
+> D-DTTLF-USABILITY-060 proposal is now frozen and decision-pending in the
+> living continuation plan. Its experimental witness relocates those three
+> existing computations to their earlier semantic transfer boundaries,
+> removes three unreachable classifier mirrors, compiles the eight-declaration/
+> fourteen-local-rule `fibred-transfd-1` closure, and changes no kernel
+> mathematics or D-058 usability scope.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
