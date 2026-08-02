@@ -26,10 +26,18 @@
 > existing transport, section action, and `Unit_prof`; direct `Transf_catd`
 > action is only the `Functor_catd` specialization. The first semantic-runtime
 > orientation adds twenty unjoinable diagnostics and fails identity
-> conversion, so it was not promoted. The next dependency-ready operation is
-> the zero-delta `HOM-CATD-ACTION-NORMAL-FORM-0AC` audit, selecting between a
-> semantic composite plus justified joins and a rigid generic full/capped/
-> point projection ladder. `Transf_catd_func`, curry, external coherence, and
+> conversion, so it was not promoted. `HOM-CATD-ACTION-NORMAL-FORM-0AC` is now
+> read-only complete. A smaller full/capped-only ladder still fails consumed
+> point composition; the selected rigid full/capped/point ladder closes the
+> complete focused projection, identity, composition, specialization,
+> semantic-comparison, and non-collapse matrix. Its final late probe is
+> strict-LHS clean and reports 1,097/159 warnings (`+18/+0`), while the large
+> literal opposite/positive `Unit_prof` expression remains proof-time rather
+> than the runtime normal form. The next dependency-ready operation is the
+> exact kernel-only `HOM-CATD-ACTION-NORMAL-FORM-1AD` proposal under
+> H-DTTLF-USABILITY-HOM-CATD-ACTION-NORMAL-FORM-01 /
+> D-DTTLF-USABILITY-062. TypeScript transfer follows only through a separate
+> read-only boundary audit. `Transf_catd_func`, curry, external coherence, and
 > binder special cases remain deferred.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
