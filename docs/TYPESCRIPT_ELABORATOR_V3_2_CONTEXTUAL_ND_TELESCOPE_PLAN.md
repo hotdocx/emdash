@@ -15,10 +15,9 @@ Status: active semantic successor; compact single-fibre `:^nd` text parity is
 final-green at checkpoint `dabe9d9827462b76a493c1dd34cc658e137f22d5`;
 `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` and
 `CONTEXTUAL-ND-TELESCOPE-0AK` are read-only complete with zero behavior delta.
-The audit selects one shared canonical-context normal form with coherent
-accessors and one terminal contextual slot. Freezing the exact
-`CONTEXTUAL-ND-TELESCOPE-1AL` proposal is dependency-ready; no semantic change
-is authorized yet.
+The audit checkpoint is `7eacf68ded54424fdac36339833b0df50d978451`.
+The exact `CONTEXTUAL-ND-TELESCOPE-1AL` / D-DTTLF-USABILITY-067 proposal below
+is frozen pending separate review; no semantic change is authorized yet.
 
 ## Objective
 
@@ -253,6 +252,128 @@ fold. Naive nested unary `lambda^nd` remains semantically mismatched: a
 completed inner binder is a whole transformation rather than the next outer
 point body.
 
+## Frozen `CONTEXTUAL-ND-TELESCOPE-1AL` Proposal
+
+### H-DTTLF-USABILITY-CONTEXTUAL-ND-TELESCOPE-01 /
+### D-DTTLF-USABILITY-067
+
+Approval authorizes exactly the following TypeScript-only semantic slice:
+
+1. In `src/v3_2/categorical_surface.ts`, extract the existing canonical
+   sibling-layer/Sigma/accessor loop from
+   `displayedGenericDependentContextLambda` into one private immutable normal
+   form. It must contain the root base, layers, final base, terminal source
+   family, and one lifted contextual compilation for every binding. The
+   existing displayed-functor method must consume this helper without changing
+   its emitted Core, evidence, errors, or availability boundary.
+2. Generalize that private normal form to represent one independent sibling
+   layer as well as two or more dependent layers. Preserve the existing
+   displayed-functor API rule that routes a single sibling layer through
+   `displayedContextLambda`; only the new transformation API may consume the
+   general one-layer form.
+3. Add one public direct program method with this semantic shape:
+
+   ```ts
+   displayedTransforDependentContextLambda(
+     bindings,
+     body: (variables: readonly CoreCategoricalTerm[]) =>
+       CoreCategoricalTerm,
+     options?
+   ): CoreCategoricalTerm
+   ```
+
+   It requires at least two source-ordered canonical bindings and the existing
+   mixed displayed profile. It evaluates the callback exactly once. Its result
+   endpoints are synthesized from the typed point body and then checked again
+   against the recovered whole transformation; callers need not separately
+   duplicate contextual endpoint functors.
+4. The builder creates exactly one hidden final-base slot and one terminal-
+   family fibre slot. For every written binding, it reifies the corresponding
+   normal-form accessor as a closed displayed functor and passes its
+   application to that terminal slot as the friendly callback value. The
+   callback receives no raw component function, equality, naturality square,
+   retained closure, or total-context section.
+5. Keep the existing direct endpoint-chain path unchanged as the fast path.
+   While the new callback is active, add one scoped contextual fallback that
+   compiles a supported composite endpoint through the existing
+   `compileDisplayedContextual` recursion with identity wiring for the one
+   terminal slot. Record whether the recovered endpoint is identity and carry
+   its structural/dependent prerequisites; do not encode a synthetic chain or
+   add a finite expression-shape table.
+6. Route the compiled endpoint through the existing
+   `factorDisplayedTransforPoint`. Eta, generic identity, typed recursive
+   vertical composition, and fixed-head pre/postwhiskering must remain the
+   complete accepted body algebra. The contextual fallback may broaden their
+   endpoint expressions only to constructions already accepted by the
+   displayed-context compiler, including variables, closed displayed-functor
+   application, fibre pairing, and already-qualified displayed evaluation or
+   nested forms.
+7. Do not add a second transformation factorer. Local base/fibre usage is
+   discharged only by the normal-form accessors and the existing factorer;
+   the recovered result must be a closed whole `displayed-transfor` over the
+   terminal source family. Arbitrary indexed point arrows remain rejected.
+8. Add one frozen abstraction-evidence variant for the new telescope binder.
+   It records source-ordered binding names, lifted binding families, canonical
+   layers, terminal source family, recovered source/target family and
+   functors, the underlying eta/identity/composition/whiskering rule, and
+   merged structural/dependent prerequisites. It is metadata about explicit
+   Core, not new Core or kernel evidence.
+9. Preserve exact fail-closed diagnostics for duplicate names, noncanonical
+   layer bases, incompatible callback families, wrong variation/dependency,
+   noncovariant polarity, non-object cell level, escaped/foreign values,
+   predecessor-profile use, and nonfactorable arbitrary point arrows. A
+   failed callback must unwind every active base, slot, and contextual
+   endpoint registration in `finally` blocks.
+10. Add focused durable tests to the already registered
+    `tests/v3_2_categorical_displayed_telescope_generic_tests.ts`; do not add
+    or edit the root test runner. Cover:
+
+    - independent siblings with a paired eta endpoint;
+    - a genuine `a : A; b : B[a]` endpoint using both friendly variables;
+    - generic identity, recursive composition, and both whiskering
+      orientations over contextual endpoints;
+    - one four-layer/six-binding witness using an early accessor and the final
+      sibling pair, without requiring the diagnostic all-six synthetic pair;
+    - a point component, an internal base-arrow/higher-naturality observation,
+      callback-once behavior, frozen layer evidence, and explicit Core
+      containing the existing product/Sigma/pullback owners; and
+    - the exact negative matrix from item 9 plus unchanged compact unary and
+      displayed-functor telescope behavior.
+
+11. Edit only:
+
+    - `src/v3_2/categorical_surface.ts`;
+    - `src/v3_2/categorical_program.ts`;
+    - `tests/v3_2_categorical_displayed_telescope_generic_tests.ts`;
+    - this plan, the handoff, and the mixed-continuation ledger; and
+    - one immutable D-067 review artifact before implementation.
+
+    Any additional production or test file requires a frozen correction.
+12. Run the affected telescope test file once, the nearest compact contextual
+    `:^nd` regression in the same process where practical, root TypeScript
+    typecheck and lint, exact revision/search checks, and whitespace hygiene.
+    Do not run the approximately forty-four-minute aggregate: this slice
+    changes no generic LF/checker/runtime, package, public barrel, root test
+    runner, kernel, parser, or browser boundary. Carry forward the qualified
+    aggregate and kernel evidence recorded by the predecessor plans.
+13. Synchronize this plan, the handoff, and the mixed-continuation ledger, then
+    create one rollback-safe local semantic checkpoint and one ledger
+    checkpoint. Do not push, merge, rebase, amend, reset, publish, deploy,
+    remove worktrees, or clean unrelated paths.
+
+Explicit non-effects of D-067:
+
+- no Lambdapi declaration, rewrite, unification rule, proof-time comparison,
+  catalog, health, or warning change;
+- no Core node, generic LF/checker/evaluator/runtime rule, second AST, parser,
+  browser preset, README/book claim, or deployment;
+- no curry, total-context section, cast, external coherence payload,
+  `Product_catd` facade, `Transf_catd_func`, or new mixed classifier;
+- no arbitrary dependency DAG, exchange across a dependency, unrestricted
+  variance, arbitrary point-arrow synthesis, or unrestricted `:^nd` claim;
+  and
+- no claim that the diagnostic all-six-pair stress is performance-graduated.
+
 ## Alternatives Assessed By The Audit
 
 The audit compared, rather than assumed, these implementation shapes:
@@ -289,7 +410,7 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | final-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` | D-065/D-066 | Single-fibre compact text exactly matches eta, identity, recursive composition, and both whiskering orientations; historical base-component text remains unchanged. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero behavior delta | final-green 1AI | Graduates only the exact single-fibre direct/text envelope and identifies canonical multi-variable context abstraction—not parser or classifier-head behavior—as the first remaining usability gap. |
 | `CONTEXTUAL-ND-TELESCOPE-0AK` | read-only complete; zero behavior delta | completed 0AJ; generic displayed context fold; single-fibre point factorer | Select one shared normal form, coherent accessors applied to one terminal slot, and contextual endpoint reuse of the existing recursive object compiler. Independent siblings, genuine dependency, and finite mixed layers require no new owner or coherence algorithm. |
-| `CONTEXTUAL-ND-TELESCOPE-1AL` | exact proposal freeze dependency-ready; implementation withheld pending separate review | completed 0AK | Factor one reusable normal form, add one direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
+| `CONTEXTUAL-ND-TELESCOPE-1AL` | D-DTTLF-USABILITY-067 frozen pending separate review; implementation withheld | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451` | Factor one reusable normal form, add one synthesis-capable direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-0AK` Audit Contract
 
@@ -364,15 +485,16 @@ current dependency-ready row on every continuation.
 
 Treat compact single-fibre direct/text `:^nd` parity as final-green at
 `dabe9d9827462b76a493c1dd34cc658e137f22d5`, 0AJ as read-only complete, and
-`CONTEXTUAL-ND-TELESCOPE-0AK` as read-only complete with zero behavior delta.
-Its selected architecture is one shared canonical-context normal form,
+`CONTEXTUAL-ND-TELESCOPE-0AK` as read-only complete at
+`7eacf68ded54424fdac36339833b0df50d978451` with zero behavior delta. Its
+selected architecture is one shared canonical-context normal form,
 coherent accessors applied to one terminal contextual slot, recursive endpoint
 compilation through the existing displayed-context compiler, and the existing
-single-fibre factorer as sole coherence gate. Freeze and separately review
-the exact `CONTEXTUAL-ND-TELESCOPE-1AL` proposal before behavior changes.
-Preserve direct recursive binders and internal object/arrow/higher action; add
-no curry, total-context section, cast, external coherence, parser/browser
-behavior, or kernel owner.
+single-fibre factorer as sole coherence gate. Treat D-DTTLF-USABILITY-067 as
+frozen pending a separate immutable review. After review, implement only its
+thirteen numbered items. Preserve direct recursive binders and internal
+object/arrow/higher action; add no curry, total-context section, cast, external
+coherence, parser/browser behavior, or kernel owner.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -380,6 +502,14 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-067 frozen pending separate review.** The
+  exact TypeScript-only gate extracts one shared canonical normal form, exposes
+  its coherent accessors through one terminal slot, adds one synthesis-capable
+  direct telescope binder, and reuses the existing contextual object compiler
+  only as the endpoint seam for the existing point factorer. Its exact file,
+  test, validation, failure, performance, and non-effect boundaries are the
+  thirteen numbered items above. No behavior is authorized before a separate
+  immutable review.
 - **2026-08-02 — 0AK read-only architecture audit complete; shared normal
   form selected.** Independent product projections, a genuine Sigma/pullback
   prefix accessor, and the existing finite-generic layer fold all feed one

@@ -120,8 +120,12 @@
 > factorer as the sole `Transfd` gate. Independent siblings and a genuine
 > Sigma/pullback chain are executable; the existing four-layer/six-binding
 > corpus establishes finite-generic accessor lifting and internal base/higher
-> action. Freezing the exact 1AL behavior proposal is dependency-ready; no
-> semantic change is yet authorized.
+> action. Its exact audit checkpoint is
+> `7eacf68ded54424fdac36339833b0df50d978451`. The dedicated plan now freezes
+> `CONTEXTUAL-ND-TELESCOPE-1AL` / D-DTTLF-USABILITY-067: one shared normal
+> form, one synthesis-capable direct telescope binder, and one scoped
+> contextual endpoint seam feeding the existing factorer. It is pending a
+> separate immutable review; no semantic change is yet authorized.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

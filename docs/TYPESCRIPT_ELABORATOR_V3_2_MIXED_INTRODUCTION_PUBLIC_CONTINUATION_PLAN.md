@@ -7922,10 +7922,13 @@ read-only complete with zero behavior delta. The selected successor factors
 one shared canonical-context normal form, applies its coherent accessors to
 one terminal contextual slot, reuses the existing recursive displayed-context
 compiler for composite endpoints, and leaves the unary point factorer as the
-sole `Transfd` gate. Freeze and separately review the exact 1AL proposal before
-behavior changes. Add no kernel/runtime owner, Core/checker case, second
-parser, classifier decomposition heuristic, external coherence evidence,
-curry, browser/public preset, or scale behavior.
+sole `Transfd` gate. Its read-only checkpoint is
+`7eacf68ded54424fdac36339833b0df50d978451`. Treat the dedicated plan's exact
+`CONTEXTUAL-ND-TELESCOPE-1AL` / D-DTTLF-USABILITY-067 proposal as frozen
+pending separate immutable review; no behavior is authorized before that
+review. Add no kernel/runtime owner, Core/checker case, second parser,
+classifier decomposition heuristic, external coherence evidence, curry,
+browser/public preset, or scale behavior.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
