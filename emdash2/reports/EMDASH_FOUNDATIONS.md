@@ -1445,13 +1445,51 @@ factor(ell,f,m) : O(U)[1/s]_ell -> O(V)
 factor(ell,f,m)(ell(x)) = O[f](x).
 ```
 
-The second line is retained as a pointwise path on carrier elements. In the
-closed constant zero-ring model, the selected factor at the terminal support
-member reduces to the actual presheaf restriction map. These memberwise
-factors are the computational front of the historical Cartier comparison
-`lim_{V in D(s)} O(V) = O(U)[1/s]`; the current module does not yet prove their
-naturality, assemble the full cone, identify it as a limit, or claim sheafhood
-or a ringed-site package.
+The second line is retained as a pointwise path on carrier elements. The
+category
+
+```text
+Elem(D_O(s)) = Sigma_cat(sieve_higher(D_O(s)))
+```
+
+has literal objects `(V,f,m)`. Its two Sigma projections give a functor
+`dom:Elem(D_O(s))->Op(K)`, and `O o dom` is the CommRing-valued value diagram.
+The selected factors are packaged as the internal cone
+
+```text
+factorCone(ell) : Const(O(U)[1/s]_ell) => O o dom
+factorCone(ell)[(V,f,m)] = factor(ell,f,m).
+```
+
+The cone is an ordinary `Transf`, so its full off-diagonal action and
+naturality are inherited from the generic `tapp1` calculus. Downstream
+consumers do not carry an external family of commutative squares. In the
+closed constant zero-ring model, the literal cone component reduces to the
+actual presheaf restriction map.
+
+This typed owner is supported by the universal-property proof rather than an
+independent naturality axiom: factorization is contractible, ordinary-sieve
+membership fibres are subterminal, and `CommRing_cat` homs are equality
+categories on a set of structured maps. The restriction comparison below is
+the explicit construction audit; the remaining proof-fibre/higher coherence
+is propositionally unique and is packaged by the primitive `Transf` boundary.
+
+There is also a theorem-level construction audit. If `g:W->V`, the unit
+witness at `f` restricts to one at `f o g`. Mapping the factor triangle by
+`O[g]` and composing with presheaf functoriality makes
+`O[g] o factor(ell,f,m)` another localization factor over `O[f o g]`.
+Contractibility of that factorization space therefore supplies
+
+```text
+factor(ell,f o g,g^*m) = O[g] o factor(ell,f,m).
+```
+
+This external equation validates the literal component presentation; it is
+not a second public naturality field. The internal cone is the computational
+front of the historical Cartier comparison
+`lim_{V in D(s)} O(V) = O(U)[1/s]`. The current module does not yet identify
+that cone as a limit, compare it with selected descent, or claim sheafhood or
+a ringed-site package.
 
 ### Finite Families And Unimodular Cover Presentations
 

@@ -96,12 +96,17 @@ detailed probe evidence.
   shaped proof-time represented-family comparison crosses the variance
   presentation boundary without runtime collapse. It declares no topology,
   sheaf, or ringed-site package.
-- `emdash3_2_commutative_algebra_locality.lp`: one-way rule-free locality
+- `emdash3_2_commutative_algebra_locality.lp`: one-way locality
   bridge. It views the existing semantic invertibility sieve as a cover in a
   supplied topology and uses literal membership plus a chosen localization to
   select the universal structured factor into each presheaf value, retaining
-  the pointwise factor triangle. It declares no natural cone, descent limit,
-  sheaf, ringed-site package, generated topology, `Spec`, or scheme.
+  the pointwise factor triangle. PSSS-08c0C packages those factors as one
+  internal ordinary transformation over the category of support elements;
+  its single component rule exposes the selected factor and generic `tapp1`
+  owns naturality. Contractible-factor uniqueness separately derives the
+  objectwise restriction equation as a construction audit. It claims no
+  limiting/descent comparison, sheaf, ringed-site package, generated topology,
+  `Spec`, or scheme.
 - `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
   affine-Zariski layer. It retains a selected localization package for each
   generator of an algebraic cover presentation, exposes chosen basic-open
@@ -1993,9 +1998,10 @@ and exposes the carrier triangle `factor(ell,f,m)(ell(x)) = O[f](x)`. The
 maintained zero-ring reviewer is a closed executable consumer: its selected
 factor at the terminal support member reduces to the actual restriction map
 of the constant presheaf. This is the pointwise front of the historical
-Cartier condition `lim_{V in D(s)} O(V) = O(U)[1/s]`; naturality of these
-factors, full cone assembly, the limiting/descent equivalence, and sheaf/ringed
-site packaging remain explicit next gates.
+Cartier condition `lim_{V in D(s)} O(V) = O(U)[1/s]`. At the PSSS-08c0
+checkpoint, internal cone assembly, the limiting/descent equivalence, and
+sheaf/ringed-site packaging remained explicit next gates; PSSS-08c0C below
+closes the first of those gates without crossing the latter two.
 
 The candidate owner has 176 lines, seven symbols, zero rules, and zero
 unification rules. Its 145-line reviewer has eight assertions. Focused quiet
@@ -2017,6 +2023,55 @@ tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, strict kernel audit, and fresh strict catalog verification.
 The tranche is included in the authorized local PSSS-08c0 checkpoint
 `9db8307`.
+
+PSSS-08c0C closes internal localization-cone assembly. It forms
+`Elem(D_O(s))` as the Sigma total of the invertibility sieve, composes its two
+existing Sigma projections with `O`, and obtains the diagram
+`(V,f,m) |-> O(V)`. One injective transformation owner has type
+
+```text
+factorCone(ell) : Const(O(U)[1/s]_ell) => O o dom
+```
+
+and its sole component rule computes at the literal element `(V,f,m)` to the
+PSSS-08c0 selected universal factor. The ordinary `Transf` classifier provides
+the full off-diagonal action; generic `tapp1` cut elimination, rather than a
+new family of external squares, owns naturality.
+
+The theorem-level construction audit remains useful. For `f:V->U`, `g:W->V`,
+and `m:f in D_O(s)`, mapping the factor triangle at `f` by `O[g]`, followed by
+the existing presheaf composition path, packages
+`O[g] o factor(ell,f,m)` as a competing factor over `O[f o g]`. Existing
+contractibility then gives
+
+```text
+factor(ell,f o g,g^*m) = O[g] o factor(ell,f,m).
+```
+
+This equality validates the exposed literal components; downstream descent
+uses the internal cone and does not retain the equality as an extra
+naturality field. The maintained candidate now has 537 lines, fifteen
+transparent symbols, one injective transformation owner, one component rule,
+and zero unification rules. Its 341-line reviewer has fifteen assertions,
+including a closed computation from the literal cone component to the actual
+zero-presheaf restriction. Ten central diagnostics cover the PSSS-08c0/08c0C
+area. Focused owner, reviewer, and central quiet logs end in `220202`, `220227`,
+and `220335`. Warning-enabled maintained owner and reviewer logs end in
+`220948` and each inherits exactly `1179 = 1020 + 159`, with no warning at the
+changed owner or reviewer. Strict audit reports zero unreviewed locality
+clauses and the unchanged kernel total of 52 annotated slots across 32
+intentional clauses. Maintained `make check` and the complete reviewer suite
+pass. Five new central diagnostics raise the fresh strict catalog to 1,927
+checks across 79 mapped areas with zero unclassified entries. Health passes
+all 70 source/example targets in 653.252 summed check-seconds at source
+snapshot
+`sha256:28a8c142d1a0f469349b6af5204ae0270e55a3cb6343c116b3458e8727e1c2e5`.
+Full integration CI independently passes all 70 Lambdapi targets in 534.210
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+Neither a limiting/descent equivalence nor sheafhood, `Spec`, or a scheme is
+claimed.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

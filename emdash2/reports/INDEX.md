@@ -65,14 +65,19 @@ assembles the support as a Path-valued higher sieve and an ordinary sieve with
 literal-arrow membership computation. One shaped proof-time comparison joins
 the two rigid represented-family variance presentations; it claims no
 topology, sheafhood, or ringed site.
-`emdash3_2_commutative_algebra_locality.lp` is the rule-free PSSS-08c0 bridge
-from that semantic support to topology and localization. It names coverhood
-of `D(s)` in a supplied topology and, for each literal member `f:V->U`, uses a
+`emdash3_2_commutative_algebra_locality.lp` is the PSSS-08c0/08c0C bridge from
+that semantic support to topology and localization. It names coverhood of
+`D(s)` in a supplied topology and, for each literal member `f:V->U`, uses a
 chosen localization of `O(U)` at `s` to select the universal structured factor
-into `O(V)` with its pointwise triangle. The zero-ring reviewer checks that
-this factor reduces to the actual constant-presheaf restriction. Natural cone
-coherence, the limiting/descent comparison, sheafhood, ringed sites, generated
-topology, `Spec`, and schemes remain separate gates.
+into `O(V)` with its pointwise triangle. It then forms the category of support
+elements and packages all factors as one internal ordinary transformation
+from the constant localization ring to the induced CommRing-valued diagram.
+Its single component rule computes at `(V,f,m)` to the selected factor; generic
+`tapp1` owns naturality. Contractible-factor uniqueness separately proves the
+objectwise restriction equation as a construction audit. The zero-ring
+reviewer checks that the literal cone component reduces to the actual
+constant-presheaf restriction. The limiting/descent comparison, sheafhood,
+ringed sites, generated topology, `Spec`, and schemes remain separate gates.
 `emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a/09b1
 layer:
 it combines an algebraic unimodular presentation with a dependent family of

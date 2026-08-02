@@ -121,13 +121,17 @@ Use the following order:
    sieve, proposition-valued sieve coverages, Grothendieck topology laws, and
    the direct chaotic-topology model; it declares no `Omega`, generated
    coverage saturation, sheafification, or descent;
-16. `emdash3_2_commutative_algebra_locality.lp` for the rule-free coverhood
-   view of the already-computing semantic invertibility sieve and the
-   universal-property localization factor selected at each literal support
-   member. It exposes pointwise factor triangles and a closed zero-ring
-   computation, but deliberately declares no natural localization cone,
-   descent limit, sheaf, ringed-site package, generated topology, `Spec`, or
-   scheme;
+16. `emdash3_2_commutative_algebra_locality.lp` for the coverhood view of the
+   already-computing semantic invertibility sieve and the universal-property
+   localization factor selected at each literal support member. It packages
+   the factors as one internal ordinary transformation from the constant
+   localization ring to the CommRing-valued diagram over the support's
+   elements category; its one component rule exposes the selected factor, and
+   generic `tapp1` owns naturality. Contractible-factor uniqueness separately
+   derives the objectwise restriction equation as construction evidence. It
+   has a closed zero-ring computation but deliberately claims no limiting
+   cone/descent equivalence, sheaf, ringed-site package, generated topology,
+   `Spec`, or scheme;
 17. `emdash3_2_commutative_algebra_zariski.lp` for selected finite families
    of universal-property localizations, presented affine basic-open arrows,
    elementwise localization base-change factors and triangles, and returned

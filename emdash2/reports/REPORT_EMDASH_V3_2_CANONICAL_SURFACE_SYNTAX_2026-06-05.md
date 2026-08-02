@@ -540,8 +540,17 @@ may write `Cover_T(D_O(s))` for
 `ell : Loc_{O(U)}(s)` and an actual member `m : D_O(s;f)`,
 `factor_O(ell;f,m) : O(U)[1/s]_ell -> O(V)` denotes
 `comm_ring_psh_localization_factor_map_at_member`; its canonical observation
-is `factor_O(ell;f,m)(ell(x)) = f^*_O(x)`. This does not imply natural cone
-coherence, a limiting/descent theorem, a sheaf, or a locally ringed structure.
+is `factor_O(ell;f,m)(ell(x)) = f^*_O(x)`. Comments may write
+`Elem(D_O(s))` for `CommRingPshInvertibilityElements_cat(O,U,s)` and
+`factorCone_O(ell) : Const(O(U)[1/s]_ell) => O o dom` for
+`comm_ring_psh_localization_factor_cone`; its literal component is
+`factorCone_O(ell)[(V,f,m)] = factor_O(ell;f,m)`. This is a genuine internal
+ordinary transformation, so generic `tapp1`—not an external square field—owns
+naturality. For `g:W->V`, comments may still write the derived construction
+audit
+`factor_O(ell;f o g,g^*m) = g^*_O o factor_O(ell;f,m)`. None of this yet
+identifies the cone as a limit or implies a descent theorem, sheaf, or locally
+ringed structure.
 
 For the separately promoted finite-family layer, comments and examples may
 write

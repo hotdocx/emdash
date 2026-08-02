@@ -21233,4 +21233,131 @@ assert [K : Cat]
             (@comm_ring_psh_value K O U) s localization)
           x))
       (@comm_ring_psh_restrict K O V U f x));
-/* End of the PSSS-08c0 locality-factor diagnostics. */
+
+// The internal value diagram reaches O(V) at the readable sieve element.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U V : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @fapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    CommRing_cat
+    (@comm_ring_psh_invertibility_value_diagram K O U s)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+  ≡ @comm_ring_psh_value K O V;
+
+// The internal cone component is the selected universal localization factor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U V : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  (f : τ (Hom K V U))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @tapp0_fapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    CommRing_cat
+    (@Const_func
+      (@CommRingPshInvertibilityElements_cat K O U s)
+      CommRing_cat
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))
+    (@comm_ring_psh_invertibility_value_diagram K O U s)
+    (@comm_ring_psh_invertibility_element K O U s V f member)
+    (@comm_ring_psh_localization_factor_cone K O U s localization)
+  ≡ @comm_ring_psh_localization_factor_map_at_member
+      K O U s localization V f member;
+
+// Every total-category arrow has one internal off-diagonal cone component.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  [U : τ (Obj K)]
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  [x y : τ (Obj (@CommRingPshInvertibilityElements_cat K O U s))]
+  (a : τ (Hom (@CommRingPshInvertibilityElements_cat K O U s) x y)) ⊢
+  @tapp1_fapp0
+    (@CommRingPshInvertibilityElements_cat K O U s)
+    CommRing_cat
+    (@Const_func
+      (@CommRingPshInvertibilityElements_cat K O U s)
+      CommRing_cat
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization))
+    (@comm_ring_psh_invertibility_value_diagram K O U s)
+    x y
+    (@comm_ring_psh_localization_factor_cone K O U s localization)
+    a
+  : τ (Hom
+      CommRing_cat
+      (@comm_ring_localization_target
+        (@comm_ring_psh_value K O U) s localization)
+      (@fapp0
+        (@CommRingPshInvertibilityElements_cat K O U s)
+        CommRing_cat
+        (@comm_ring_psh_invertibility_value_diagram K O U s)
+        y));
+
+// Following a factor by another restriction gives a competing direct factor.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  [W V : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @comm_ring_psh_localization_factor_after_restriction
+    K O U s localization W V f g member
+  : τ (@CommRingPshLocalizationFactorAlong
+      K O U s localization W (@comp_fapp0 K W V U f g));
+
+// Contractible-factor uniqueness supplies the objectwise cone equation.
+assert [K : Cat]
+  (O : τ (@CommRingPsh K))
+  (U : τ (Obj K))
+  (s : τ (@CommRingPshSection K O U))
+  (localization : τ (@CommRingLocalizationAt
+      (@comm_ring_psh_value K O U) s))
+  [W V : τ (Obj K)]
+  (f : τ (Hom K V U))
+  (g : τ (Hom K W V))
+  (member : τ (@SieveMembership
+      K U
+      (@comm_ring_psh_invertibility_sieve K O U s)
+      (Struct_sigma V f))) ⊢
+  @comm_ring_psh_localization_factor_restriction_path
+    K O U s localization W V f g member
+  : τ (@=
+      (@CommRingHom
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization)
+        (@comm_ring_psh_value K O W))
+      (@comm_ring_psh_localization_factor_map_at_member
+        K O U s localization W (@comp_fapp0 K W V U f g)
+        (@comm_ring_psh_invertible_along_restrict
+          K O W V U f g s member))
+      (@comm_ring_hom_comp_pointwise
+        (@comm_ring_localization_target
+          (@comm_ring_psh_value K O U) s localization)
+        (@comm_ring_psh_value K O V)
+        (@comm_ring_psh_value K O W)
+        (@comm_ring_psh_restriction_hom K O W V g)
+        (@comm_ring_psh_localization_factor_map_at_member
+          K O U s localization V f member)));
+/* End of the PSSS-08c0/PSSS-08c0C internal locality-cone diagnostics. */

@@ -34,6 +34,14 @@ invertibility-sieve membership to a universal localization factor; its focused
 and maintained source/reviewer/central checks, warning comparison, audit,
 catalog, 70-target health, and full integration CI are green, and it is locally
 checkpointed at `9db8307` under PSSS-D-069/PSSS-D-070.
+`PSSS-08c0C` now packages the memberwise factors as one internal ordinary
+transformation over the category of elements of `D(s)`. Its sole component
+rule exposes the selected universal factor; generic `tapp1` owns naturality,
+while the objectwise restriction equation remains a derived construction
+audit. Internal-cone research plus maintained source, reviewer, and central
+checks, exact warning comparison, strict audit, maintained aggregates, the
+fresh catalog, 70-target health, and full integration CI are green. The
+authorized local checkpoint remains pending under PSSS-D-071/PSSS-D-072.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2354,12 +2362,12 @@ This is only the pointwise front of the Cartier equation
 lim_{V in D(s)} O(V) = O(U)[1/s].
 ```
 
-The current factor depends on a literal support member. The next local gate is
-to derive coherence under further restriction from contractible-factor
-uniqueness and the existing presheaf composition path, then determine whether
-the coherent family can be assembled by active Catd/profunctor owners without
-the rejected PSSS-05a adapter. Only after that should the full localization
-cone be compared with a nonvacuous selected descent limit.
+The checkpointed factor depends on a literal support member. PSSS-08c0C below
+first derives coherence under further restriction from contractible-factor
+uniqueness and the existing presheaf composition path, then packages the
+family as an internal ordinary transformation over the full support-elements
+category. The limiting comparison with nonvacuous selected descent remains a
+separate gate.
 
 The candidate owner has 176 lines, seven symbols, zero rules, and zero
 unification rules. Its 145-line reviewer has eight assertions, including the
@@ -2379,13 +2387,118 @@ Full integration CI independently passes all 70 Lambdapi targets in 569.345
 summed check-seconds, followed by 39 Python tests, five document-registry
 tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
 assembly checks, strict kernel audit, and fresh strict catalog verification.
-This closes the PSSS-08c0 implementation gate without crossing the coherent-
-cone, sheaf, topology-generation, `Spec`, or scheme gates.
+This closes the historical PSSS-08c0 implementation gate without crossing the
+then-separate internal-cone, sheaf, topology-generation, `Spec`, or scheme
+gates. PSSS-08c0C closes only the internal-cone gate below.
+
+##### PSSS-08c0C — Internal localization-factor cone
+
+Status: internal-cone candidate green through focused and maintained checks,
+exact warning comparison, strict audit, maintained aggregates, fresh catalog,
+70-target health, and full integration CI. The authorized local checkpoint
+remains.
+
+The first half is a theorem-level construction audit. For `f:V->U`, `g:W->V`,
+and actual support membership `m:f in D_O(s)`, the PSSS-08b restriction theorem
+supplies `g^*m : f o g in D_O(s)`. The selected factor at `f` can be followed
+by the structured restriction `O[g]`. Its pointwise localization triangle is
+constructed by:
+
+1. applying `O[g]` to the PSSS-08c0 factor triangle; and
+2. composing with the symmetry of `comm_ring_psh_restrict_comp_path`.
+
+This packages `O[g] o factor(ell,f,m)` as another element of the same
+localization-factor space used to select the direct factor at `f o g`.
+Contractibility supplies a path between the full factor packages, and applying
+the factor-map projection yields
+
+```text
+factor_O(ell;f o g,g^*m)
+  = O[g] o factor_O(ell;f,m).
+```
+
+The second half packages the family internally. Define
+
+```text
+Elem(D_O(s)) = Sigma_cat(sieve_higher(D_O(s)))
+dom           = Sigma_proj1_func o Sigma_proj1_func
+values        = O o dom : Elem(D_O(s)) -> CommRing_cat.
+```
+
+A readable transparent constructor forms the literal total object
+`(V,f,m)`. The selected primitive owner is one ordinary transformation
+
+```text
+factorCone_O(ell)
+  : Const_{Elem(D_O(s))}(O(U)[1/s]_ell) => values
+```
+
+with the single computation
+
+```text
+factorCone_O(ell)[(V,f,m)] -> factor_O(ell;f,m).
+```
+
+This is the SOP boundary: the `Transf` classifier provides a full
+off-diagonal component on every arrow of `Elem(D_O(s))`, and the generic
+`tapp1` cut-elimination calculus owns naturality. The external restriction
+path above is retained as derivation/consistency evidence for the literal
+component rule, not propagated as an additional field in descent or sheaf
+packages. No bespoke naturality square, triangle, identity law, or composition
+law is added.
+
+The primitive transformation owner is semantically justified, rather than an
+unconstrained naturality postulate: localization contractibility supplies each
+component and D-071 supplies its restriction comparison; ordinary-sieve
+membership fibres are subterminal, while `CommRing_cat` homs are equality
+categories of a set of structured maps. Consequently the retained membership-
+proof and higher-arrow coherence is propositionally unique. Because the
+kernel's `Transf` classifier is primitive rather than a record with an external
+component-plus-square constructor, selecting one typed transformation and
+giving its component beta is the owner-aligned way to expose that theorem.
+
+The maintained module now has 537 lines: fifteen transparent symbols, one
+injective transformation owner, one `tapp0_fapp0` component rule, and zero
+unification rules. Its 341-line reviewer has fifteen assertions. It checks the
+two Sigma projections, value-diagram computation, cone classifier, literal
+component beta, generic off-diagonal typing, the derived restriction theorem,
+and a closed zero-ring cone component reducing to the actual presheaf
+restriction.
+
+The restriction-path research logs are
+`logs/probes/psss08c1_localization_factor_restriction_coherence-20260801-213111.log`
+and the warning-enabled `...-20260801-213201.log`, which inherits exactly
+`1179 = 1020 + 159`. The internal-cone research logs are
+`logs/probes/psss08c2_localization_factor_cone-20260801-215602.log` and the
+warning-enabled `...-20260801-215620.log`; the latter also inherits exactly
+`1179 = 1020 + 159`, so the candidate component rule adds no warning. Focused
+maintained owner, reviewer, and central quiet logs currently end in `220202`,
+`220227`, and `220335`. Warning-enabled maintained owner and reviewer logs end
+in `220948` and each inherits exactly `1179 = 1020 + 159`, with no warning at
+the changed owner or reviewer. Strict audit reports zero unreviewed locality
+clauses and the unchanged kernel total of 52 annotated slots across 32
+intentional clauses. Maintained `make check` and the complete reviewer suite
+pass. Five new central diagnostics raise the fresh strict catalog to 1,927
+checks across 79 mapped areas with zero unclassified entries. Health passes
+all 70 source/example targets in 653.252 summed check-seconds at source
+snapshot
+`sha256:28a8c142d1a0f469349b6af5204ae0270e55a3cb6343c116b3458e8727e1c2e5`.
+Full integration CI independently passes all 70 Lambdapi targets in 534.210
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+
+The next gate is no longer cone naturality. It is a genuine computational
+consumer: compare this internal localization cone with a nonvacuous selected
+descent/limit object, then use that comparison in basic-open restriction,
+affine `Spec`, or overlap evaluation. The phase does not authorize generated
+topology, truncation HIT, or general sheafification work unless that consumer
+demonstrates a concrete need.
 
 ##### PSSS-08c1 — Ringed sites, selected sheaves, and localization descent
 
-Status: proposed after PSSS-08c0 coherence and the independent PSSS-05b
-descent gate.
+Status: proposed after checkpointing PSSS-08c0C and closing the independent
+PSSS-05b descent gate.
 
 - package a CommRing-valued presheaf together with the selected sheaf datum;
 - retain the canonical semantic `D(s)` rather than introduce a second
@@ -3237,9 +3350,26 @@ consumer demonstrates that nontransitive unification requires it.
   localization factor at each literal member before the full descent/sheaf
   package. Membership must supply the actual unit evidence, the factor must
   retain its pointwise restriction triangle, and a closed model must compute.
-  Do not call the memberwise factors a natural cone or a limit until coherence
-  under restriction and the PSSS-05a descent boundary are independently
-  closed.
+  At that point do not call the memberwise factors a natural cone or a limit:
+  PSSS-D-071/PSSS-D-072 must first package their internal naturality, and a
+  later selected-descent comparison must independently establish any limiting
+  claim.
+- **PSSS-D-071:** use localization-factor contractibility, not a new runtime
+  rule, to derive the restriction equation between the factors at `f` and
+  `f o g`. Retain it as theorem-level construction evidence, not as a field
+  propagated through later descent or sheaf structures. This is a direct
+  Cartier computational prerequisite and does not authorize generated-
+  topology, truncation, or sheafification work.
+- **PSSS-D-072:** package the factors over the complete Sigma category of
+  invertibility-sieve elements as one ordinary `Transf` from the constant
+  localization target to `O` composed with the two domain projections. Add
+  exactly one literal `tapp0_fapp0` component beta; let the existing generic
+  off-diagonal `tapp1` calculus internalize naturality, proof-fibre transport,
+  identities, and composites. The D-071 path audits component compatibility
+  but is not the public naturality interface. The next promotion must consume
+  this cone computationally in selected descent, basic-open restriction,
+  `Spec`, overlap, or chart evaluation; it must not drift into general
+  sheafification infrastructure without such a consumer.
 
 ## 19. Side-Task Ledger
 
@@ -3263,7 +3393,8 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08a | CommRing-valued presheaves and arrowwise invertibility support | Green through full integration CI; locally checkpointed | PSSS-08b remains separately gated |
 | PSSS-08b | Whole ordinary invertibility-sieve assembly | Green through full integration CI; locally checkpointed | PSSS-08c and PSSS-09 remain separately gated |
 | PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 70-target health, and full CI; locally checkpointed at `9db8307` | PSSS-08b, PSSS-07a, and PSSS-04a |
-| PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | PSSS-08c0 coherence and PSSS-05b |
+| PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; authorized local checkpoint pending | PSSS-08c0 |
+| PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0C and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
 | PSSS-09b2 | Full transparent sieve-membership recursion specialization usability | Performance/research gate; rigid workaround rejected | PSSS-09b1 plus a real non-singleton consumer or bounded elaborator improvement |
