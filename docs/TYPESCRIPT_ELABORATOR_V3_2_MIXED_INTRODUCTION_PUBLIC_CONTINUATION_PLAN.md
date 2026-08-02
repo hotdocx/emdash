@@ -518,7 +518,7 @@ It deliberately avoids:
 | `HOM-CATD-ACTION-TRANSFER-0AE` | read-only transfer-boundary audit complete; three-owner/nine-rule runtime-only successor selected | final-green D-DTTLF-USABILITY-062/063 kernel normal form; current mixed-mode transfer; disposable generic compiler and contextual-consumer probes | Three opaque signatures plus nine runtime rules subject-check over the existing 95-declaration mixed-mode environment with no profunctor closure. A fixed `Transf_catd` target remains definitionally stable through contextual `lambda^nd`; its capped base action and consumed point reduce through the new stable heads, while an arbitrary base endomorphism does not collapse. The two constant-`Cat` specializations require an additional classifier-conversion closure and the deep `Unit_prof` comparison is proof-time, so neither belongs in the smallest useful profile. |
 | `HOM-CATD-ACTION-TRANSFER-1AF` | implemented and focused-green at `0787b6de98883a60992d2f4068131780fdd5478b` under D-DTTLF-USABILITY-064 | completed `HOM-CATD-ACTION-TRANSFER-0AE`; final-green kernel D-062/063; immutable proposal `7eed444db933dfccb9f880520c65f408c5916a55`; separate review; 6/6 focused and 8/8 nearest regressions; one qualified root aggregate | One separate generic transfer fragment installs exactly three opaque existing-authority signatures and nine runtime rules. Capped identity/composition, point composition, non-collapse, and the fixed-`Transf_catd` contextual consumer compute through generic engines. The 1,350-test aggregate has 1,285 pass/51 skip and fourteen whole-file digest-only failures after the approved kernel edit, for effective 1,299 pass/51 skip. No proof rule, profunctor closure, constant-`Cat` specialization, kernel/Core/checker/binder/parser/browser delta, or broader graduation claim was added. |
 | `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` | read-only graduation audit complete; zero semantic delta; no `Transf_catd_func` consumer found | final-green D-062 through D-064; direct recursive `:^nd` constructors; disposable alternating `Transf`/`Hom` classifier probe | A fixed `Transf -> Hom -> Transf -> Hom` target accepts contextual eta, generic identity, recursive composition, and both whiskering orientations. The transferred runtime specializes or generically reduces every classifier head and consumes its capped action at a fibre object. This coverage is target-generic and needs no new owner. A four-parameter-varying `Transf_catd` belongs to a broader dependent-classifier API for which the current surface has no concrete consumer; retain it as deferred rather than promoting by analogy. |
-| `CONTEXTUAL-ND-TEXT-PARITY-0AH` | dependency-ready read-only syntax audit; zero semantic delta authorized | completed `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG`; graduated historical syntax-parity plan; direct compact `displayedTransforContextLambda` | Inventory the exact deterministic adapter gap between the older base-component `^nd` route and compact fibre-object contextual `^nd`. Preserve the old route, infer no classifier by decomposition, and measure eta, `identityCell`, recursive `composeCells`, pre/postwhiskering, and fixed alternating classifiers. Freeze at most one bounded expected-contract/resolver proposal before behavior changes. Add no kernel/runtime owner, Core/checker case, second parser, external coherence evidence, curry, browser/public preset, or scale claim during the audit. |
+| `CONTEXTUAL-ND-TEXT-PARITY-0AH` | executable read-only audit complete; zero semantic delta; D-DTTLF-USABILITY-065 frozen in the dedicated plan | completed `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG`; graduated historical syntax-parity plan; direct compact `displayedTransforContextLambda`; disposable neutral-application/text probe | Neutral application already handles contextual eta and both whiskers; existing `composeCells` recurses; the direct factorer remains the sole coherence gate. Current text fails at exactly the base-category versus displayed-family expected-contract distinction and absent `identityCell` head. Preserve the historical route. The exact two-seam proposal awaits a separate immutable review; no behavior is authorized yet. |
 | `TRANSF-CATD-CONSTRUCTOR-ACTION-0AA` | deferred read-only architecture audit; not a D-058 dependency | future demand for a `Transf_catd(A[k],B[k],FF[k],GG[k])` classifier that itself varies over an outer context | Compare a possible `Transf_catd_func`/capped-action package with existing `Functor_catd_func`, Hom action, and direct nested contextual binders. Promote nothing merely by analogy: require a concrete varying-classifier consumer, internal object/arrow/higher semantics, owner-position evidence, and strict-LHS-clean rules. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
@@ -7914,17 +7914,17 @@ parameters vary in another context, and fixed or recursively nested targets
 do not need it.
 
 Continue from
-`docs/TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md` and make
-`CONTEXTUAL-ND-TEXT-PARITY-0AH` the sole dependency-ready slice. It is
-read-only first: inventory the deterministic distinction between the older
-base-component `^nd` route through `displayedTransforLambda` and the newer
-compact fibre-object route through `displayedTransforContextLambda`; measure
-eta, `identityCell`, recursive `composeCells`, pre/postwhiskering, and one
-fixed alternating classifier target. Preserve the old route and freeze and
-separately review at most one bounded expected-contract/resolver proposal
-before implementation. Add no kernel/runtime owner, Core/checker case,
-second parser, classifier decomposition heuristic, external coherence
-evidence, curry, browser/public preset, or scale behavior during the audit.
+`docs/TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md`. Treat
+`CONTEXTUAL-ND-TEXT-PARITY-0AH` as executable and read-only complete. Its
+neutral-application probe isolates exactly two text-adapter seams: an additive
+expected-contract route selecting `displayedTransforContextLambda` and one
+fixed `identityCell` head. Treat the exact
+`CONTEXTUAL-ND-TEXT-PARITY-1AI` / D-DTTLF-USABILITY-065 proposal as frozen but
+decision-pending. Create a separate immutable review before behavior changes;
+if approved under the standing unattended delegation, implement only that
+proposal. Add no kernel/runtime owner, Core/checker case, second parser,
+classifier decomposition heuristic, external coherence evidence, curry,
+browser/public preset, or scale behavior.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete

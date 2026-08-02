@@ -1748,6 +1748,14 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-08-02 — post-graduation compact `:^nd` continuation isolated.** The
+  semantic API subsequently added the fibre-object contextual
+  `displayedTransforContextLambda` route with eta, identity, recursive
+  composition, and fixed-head whiskering. The historical graduated `^nd`
+  base-component route remains unchanged. The additive adapter audit and
+  frozen two-seam proposal live in
+  [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md);
+  this completed plan's original graduation history is not reopened.
 - **2026-07-30 — D010 separately approved under unattended delegation.**
   After no immediate human objection to the checkpointed zero-behavior
   graduation proposal, recorded an immutable, human-supersedable review

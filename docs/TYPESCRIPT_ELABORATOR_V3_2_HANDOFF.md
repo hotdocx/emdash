@@ -85,12 +85,14 @@
 > classifier remains deferred until a concrete higher dependent-classifier
 > consumer exists. The active syntax continuation is now
 > [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TEXT_PARITY_PLAN.md).
-> Its sole dependency-ready `CONTEXTUAL-ND-TEXT-PARITY-0AH` row is read-only
-> first: preserve the historical base-component `^nd` route while auditing one
-> expected-contract-directed route to the compact fibre-object contextual
-> binder, including eta, `identityCell`, recursive `composeCells`, both
-> whiskers, and a fixed alternating classifier. No behavior is authorized
-> before a separately frozen and reviewed proposal.
+> `CONTEXTUAL-ND-TEXT-PARITY-0AH` is now executable and read-only complete.
+> Neutral application already supports compact eta and both whiskers; existing
+> `composeCells` recurses; and the direct factorer remains the sole coherence
+> gate. Current text fails at exactly the historical base-category versus
+> compact displayed-family expected-contract distinction and the absent
+> `identityCell` resolver head. The dedicated plan freezes the exact
+> `CONTEXTUAL-ND-TEXT-PARITY-1AI` / D-DTTLF-USABILITY-065 two-seam proposal.
+> It awaits a separate immutable review; no behavior is authorized yet.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

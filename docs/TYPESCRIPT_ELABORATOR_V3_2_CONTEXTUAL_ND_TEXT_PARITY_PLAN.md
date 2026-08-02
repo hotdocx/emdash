@@ -12,8 +12,11 @@ and
 
 Status: active living syntax successor;
 `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` is read-only complete with zero
-semantic delta; `CONTEXTUAL-ND-TEXT-PARITY-0AH` is dependency-ready and
-read-only first. No implementation proposal is authorized yet.
+semantic delta; `CONTEXTUAL-ND-TEXT-PARITY-0AH` is executable and read-only
+complete; the exact `CONTEXTUAL-ND-TEXT-PARITY-1AI` proposal is frozen below
+under H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
+D-DTTLF-USABILITY-065 and awaits a separate immutable review. No behavior is
+authorized yet.
 
 ## Objective
 
@@ -128,8 +131,8 @@ Core, checker, evaluator, or mathematical-construction gap.
 | Slice | Status | Dependency | Exact boundary |
 |---|---|---|---|
 | `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` | complete read-only; zero semantic delta | final-green D-062 through D-064 | Fixed alternating Hom/Transf targets and their generic action work; no `Transf_catd_func` consumer was found. |
-| `CONTEXTUAL-ND-TEXT-PARITY-0AH` | dependency-ready read-only audit; zero behavior delta authorized | completed 0AG; graduated historical syntax parity; direct D-055 through D-058 | Inventory one additive expected-contract route, optional family annotation, `identityCell`, neutral eta/pre/post application, recursive composition, exact negatives, and regression compatibility with historical base-component `^nd`. Freeze at most one bounded proposal. |
-| `CONTEXTUAL-ND-TEXT-PARITY-1AI` | conditional; not authorized | completed 0AH and separate immutable review | Implement only the exact frozen adapter delta with focused direct/text equivalence and fail-closed tests. No semantic or public-preset expansion. |
+| `CONTEXTUAL-ND-TEXT-PARITY-0AH` | executable read-only audit complete; zero behavior delta | completed 0AG; graduated historical syntax parity; direct D-055 through D-058; one disposable focused probe | Neutral application already handles compact eta and both whiskers, `composeCells` already recurses, and the direct factorer remains the coherence gate. Current text fails at exactly the expected-contract/family-annotation distinction (`EXPECTED_CATEGORY`) and absent `identityCell` resolver head (`UNKNOWN_IDENTIFIER`). The historical base-component route remains green. |
+| `CONTEXTUAL-ND-TEXT-PARITY-1AI` | exact proposal frozen under D-DTTLF-USABILITY-065; decision pending | completed 0AH; separate immutable review still required | Add one expected-contract kind selecting the existing compact program method and one fixed `identityCell` resolver head; preserve the old route and every semantic boundary. Add focused direct/text equivalence and negatives in the existing parity corpus. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | deferred read-only graduation | green conditional 1AI | Re-audit the exact direct/text envelope and select the next semantic or reader-facing continuation without claiming unrestricted `:^nd`. |
 
 ## `CONTEXTUAL-ND-TEXT-PARITY-0AH` Audit Contract
@@ -158,6 +161,120 @@ The audit must answer these questions from executable evidence:
 The audit may use disposable ignored probes and focused existing tests. It may
 edit documentation and freeze a proposal, but it may not change production or
 test behavior until a separate immutable review approves that proposal.
+
+## `CONTEXTUAL-ND-TEXT-PARITY-0AH` Audit Result
+
+The disposable executable audit is green for every direct compact body using
+ordinary neutral `program.apply` calls—no resolver-specific expected-shape
+hint was needed:
+
+```text
+eta[a]
+id(P[a])
+theta[a] o eta[a]
+M(eta[a])
+eta[L[a]].
+```
+
+The recovered abstraction rules are respectively eta, identity, composition,
+postwhiskering, and prewhiskering. Eta and identity compare with their closed
+owners, and composition compares with generic whole-`Transfd` composition.
+This proves that text resolution can reuse the ordinary application resolver,
+existing `composeCells`, and the direct contextual factorer; it needs no
+application-action table or coherence branch.
+
+The same probe measured the current text boundary exactly:
+
+```text
+lambda^nd k : K. eta k
+  -> categorical.displayed-transfor-eta
+
+lambda^nd a : E. eta a
+  -> EXPECTED_CATEGORY
+
+lambda^nd a. identityCell (P a)
+  -> UNKNOWN_IDENTIFIER
+```
+
+Here `lambda^nd` is the plan's ASCII rendering of the parser's accepted
+Unicode `λ^nd` or ASCII `\^nd` spelling. The first result confirms that the
+historical base-component route is healthy. The second fails because that
+route interprets the annotation as a category rather than a displayed family.
+The third isolates the only missing constructor spelling; neutral eta,
+composition, and whiskering require no new head.
+
+The probe was deleted after recording the result. No tracked behavior changed,
+and the unrelated temporary experiment directories were untouched.
+
+## Frozen `CONTEXTUAL-ND-TEXT-PARITY-1AI` Proposal
+
+### H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
+### D-DTTLF-USABILITY-065
+
+Approve exactly this TypeScript-only adapter slice:
+
+1. Extend `CoreCategoricalTextTermExpected` with one additive
+   `displayed-context-transfor` contract carrying the checked source displayed
+   family and the two existing displayed-functor endpoint terms.
+2. Keep the historical `displayed-transfor` contract and
+   `resolveDisplayedTransforLambda` unchanged. The expected-contract kind—not
+   the `^nd` token or an annotation heuristic—selects the compact route.
+3. Add one `resolveDisplayedContextTransforLambda` method. It validates an
+   optional annotation with the existing displayed-family comparison and
+   calls the existing
+   `CoreCategoricalProgram.displayedTransforContextLambda` exactly once.
+4. Resolve the callback body through the existing lexical environment and
+   ordinary recursive `resolveLambdaBody`; do not add another located syntax
+   node, parser production, scope engine, or callback evaluator.
+5. Add exactly one fixed-arity `identityCell` application route beside the
+   existing `composeCells` route. It resolves one ordinary term argument and
+   delegates to the existing `CoreCategoricalProgram.identityCell` method.
+6. Leave eta, prewhiskering, and postwhiskering on generic neutral
+   application. Leave recursive vertical composition on the existing
+   `composeCells` route. Add no contextual special case for any of them.
+7. Bump only the categorical-text revision to
+   `CONTEXTUAL-ND-TEXT-PARITY-1AI-CATEGORICAL-TEXT-1` and synchronize exact
+   revision assertions.
+8. Extend the existing categorical-text parity corpus rather than adding a
+   new root-runner entry. Check direct/text equality for eta, identity,
+   recursive composition, prewhiskering, and postwhiskering, with both omitted
+   and correct optional family annotation where meaningful.
+9. Include one fixed alternating `Transf_catd`/`Hom_catd` target to prove that
+   the resolver does not branch on classifier head. Reuse the 0AG semantic
+   envelope; do not add a `Transf_catd` text constructor or action case.
+10. Retain exact negative evidence for a wrong annotation kind, mismatched
+    family annotation, incompatible endpoints/orientation, unsupported
+    arbitrary point arrows, missing/wrong expected contract, and the existing
+    historical base-component `^nd` route.
+11. Change no Lambdapi source, transfer declaration/rule, Core node, generic
+    checker/conversion/evaluator/runtime, categorical-program method, browser
+    preset, public report, book, README, package, workspace, or root test
+    runner.
+12. Validate proportionally: the affected text-parity file, nearest direct
+    contextual eta/identity/composition/whiskering tests, root typecheck and
+    lint, whitespace, and exact diff. Carry forward the recent qualified
+    aggregate because none of its owning boundaries changes.
+
+The implementation file boundary is exactly:
+
+```text
+src/v3_2/categorical_text.ts
+tests/v3_2_categorical_text_parity_tests.ts
+```
+
+plus synchronized plan/handoff documentation. If implementation discovers a
+need for a program method, Core/checker/runtime case, classifier decomposition,
+or constructor-specific coherence logic, stop and return to a corrected
+proposal rather than broadening D-DTTLF-USABILITY-065.
+
+The decision question is:
+
+> Approve H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
+> D-DTTLF-USABILITY-065 as proposed: preserve the historical base-component
+> `^nd` route, add one expected-contract-selected compact contextual route and
+> one `identityCell` resolver head, reuse neutral application,
+> `composeCells`, and the existing direct factorer for all semantics, and add
+> only the exact focused parity/negative evidence above?
 
 ## Explicit Non-Goals
 
@@ -207,12 +324,15 @@ constructors, and their transferred action work without `Transf_catd_func`.
 Keep a genuinely four-parameter-varying classifier deferred until a concrete
 consumer exists.
 
-Make `CONTEXTUAL-ND-TEXT-PARITY-0AH` the sole dependency-ready slice. Audit the
-existing text adapter against the direct compact contextual `:^nd` API,
-preserve the historical base-component route, and freeze at most one bounded
-expected-contract/resolver proposal. Do not change behavior before a separate
-review. Preserve internal object-, arrow-, base-arrow-, and higher-action
-ownership and fail closed outside the direct semantic envelope.
+Treat `CONTEXTUAL-ND-TEXT-PARITY-0AH` as executable and read-only complete.
+Treat the exact `CONTEXTUAL-ND-TEXT-PARITY-1AI` /
+H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
+D-DTTLF-USABILITY-065 proposal as frozen but decision-pending. Create a
+separate immutable review before behavior changes. If that review approves the
+proposal under the standing unattended delegation with immediate human
+supersession, implement only its two adapter seams and exact focused evidence.
+Preserve internal object-, arrow-, base-arrow-, and higher-action ownership and
+fail closed outside the direct semantic envelope.
 
 Use proportional validation and rollback-safe local checkpoints according to
 `docs/PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`. Preserve unrelated work. Do not
@@ -221,6 +341,14 @@ unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — 0AH executable audit complete; D-065 frozen.** Direct compact
+  eta, identity, recursive composition, prewhiskering, and postwhiskering all
+  work through neutral application plus the existing factorer. Historical
+  text `λ^nd k : K. eta k` remains green. Compact family annotation currently
+  fails with `EXPECTED_CATEGORY`, and `identityCell` is the sole missing
+  constructor head. The frozen proposal adds one expected-contract route and
+  one resolver head, with no semantic or parser-grammar delta. It remains
+  decision-pending until a separate immutable review.
 - **2026-08-02 — plan opened after 0AG semantic graduation.** The alternating
   fixed-classifier probe demonstrates that current Hom/Transf nesting and
   action need no new owner. Inspection of `categorical_text.ts` isolates the
