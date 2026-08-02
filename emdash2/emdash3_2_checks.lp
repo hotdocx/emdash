@@ -15,7 +15,7 @@ flag "print_implicits" on;
 flag "print_contexts" on;
 flag "print_domains" on;
 flag "print_meta_args" on;
-require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology;
+require open emdash.emdash3_2 emdash.emdash3_2_nat_arithmetic emdash.emdash3_2_finite_families emdash.emdash3_2_presheaves emdash.emdash3_2_sieves emdash.emdash3_2_sites emdash.emdash3_2_commutative_algebra emdash.emdash3_2_commutative_algebra_category emdash.emdash3_2_commutative_algebra_product emdash.emdash3_2_commutative_algebra_f2 emdash.emdash3_2_commutative_algebra_finite emdash.emdash3_2_commutative_algebra_polynomial emdash.emdash3_2_commutative_algebra_localization emdash.emdash3_2_commutative_algebra_localization_unit emdash.emdash3_2_commutative_algebra_localization_zero emdash.emdash3_2_commutative_algebra_localization_idempotent emdash.emdash3_2_commutative_algebra_localization_comparison emdash.emdash3_2_commutative_algebra_localization_overlap emdash.emdash3_2_commutative_algebra_presheaves emdash.emdash3_2_commutative_algebra_locality emdash.emdash3_2_commutative_algebra_matching emdash.emdash3_2_commutative_algebra_glue emdash.emdash3_2_commutative_algebra_zariski emdash.emdash3_2_commutative_algebra_zariski_topology emdash.emdash3_2_commutative_algebra_localization_split;
 require open emdash.emdash3_2_walking_end_hit;
 require open emdash.emdash3_2_eq1_evidence_property;
 require open emdash.emdash3_2_eq1_hom_action;
@@ -20157,6 +20157,100 @@ assert (R : τ CommRing)
     (@comm_ring_idempotent_image_localization R e idempotent)
   ≡ @comm_ring_idempotent_image_localization_map R e idempotent;
 /* End of the PSSS-08c0G idempotent-localization diagnostics. */
+
+// catalog-area: Product rings and split-idempotent affine restriction
+// The public product carrier and its structured arrow action compute by pairs.
+assert (R S : τ CommRing) ⊢
+  @comm_ring_carrier (@comm_ring_product R S)
+  ≡ @Product_grpd (@comm_ring_carrier R) (@comm_ring_carrier S);
+
+assert (R R' S S' : τ CommRing)
+  (h : τ (@CommRingHom R R'))
+  (k : τ (@CommRingHom S S'))
+  (x : τ (@comm_ring_carrier (@comm_ring_product R S))) ⊢
+  @comm_ring_hom_apply
+    (@comm_ring_product R S)
+    (@comm_ring_product R' S')
+    (@comm_ring_product_map R R' S S' h k)
+    x
+  ≡ @Product_pair_grpd
+      (@comm_ring_carrier R')
+      (@comm_ring_carrier S')
+      (@comm_ring_hom_apply R R' h (sigma_Fst x))
+      (@comm_ring_hom_apply S S' k (sigma_Snd x));
+
+// Whole structured-map composition is derived without a product-specific rule.
+assert (R0 R1 R2 S0 S1 S2 : τ CommRing)
+  (gR : τ (@CommRingHom R1 R2))
+  (fR : τ (@CommRingHom R0 R1))
+  (gS : τ (@CommRingHom S1 S2))
+  (fS : τ (@CommRingHom S0 S1)) ⊢
+  @comm_ring_product_map_comp_path
+    R0 R1 R2 S0 S1 S2 gR fR gS fS
+  : τ (@=
+      (@CommRingHom
+        (@comm_ring_product R0 S0)
+        (@comm_ring_product R2 S2))
+      (@comm_ring_product_map
+        R0 R2 S0 S2
+        (@comm_ring_hom_comp_pointwise R0 R1 R2 gR fR)
+        (@comm_ring_hom_comp_pointwise S0 S1 S2 gS fS))
+      (@comm_ring_hom_comp_pointwise
+        (@comm_ring_product R0 S0)
+        (@comm_ring_product R1 S1)
+        (@comm_ring_product R2 S2)
+        (@comm_ring_product_map R1 R2 S1 S2 gR gS)
+        (@comm_ring_product_map R0 R1 S0 S1 fR fS)));
+
+// F2 is closed reusable algebraic input for the non-endpoint witness.
+assert ⊢ f2_comm_ring : τ CommRing;
+
+assert ⊢ f2_split_idempotent_path
+  : τ (@=
+      (@comm_ring_carrier f2_split_comm_ring)
+      (@comm_ring_mul
+        f2_split_comm_ring
+        f2_split_idempotent
+        f2_split_idempotent)
+      f2_split_idempotent);
+
+// The selected idempotent is constructively distinct from both endpoints.
+assert ⊢ f2_split_idempotent_not_zero
+  : τ (@Function_grpd
+      (@= (@comm_ring_carrier f2_split_comm_ring)
+        f2_split_idempotent
+        (@comm_ring_zero f2_split_comm_ring))
+      Empty_grpd);
+
+assert ⊢ f2_split_idempotent_not_one
+  : τ (@Function_grpd
+      (@= (@comm_ring_carrier f2_split_comm_ring)
+        f2_split_idempotent
+        (@comm_ring_one f2_split_comm_ring))
+      Empty_grpd);
+
+// The affine arrow exposes the fixed-image target selected by localization.
+assert ⊢ sigma_Fst f2_split_basic_open_arrow
+  ≡ @comm_ring_idempotent_image
+      f2_split_comm_ring
+      f2_split_idempotent
+      f2_split_idempotent_path;
+
+// Its carrier restriction executes as the nontrivial projection (x,y) |-> (x,0).
+assert (x y : τ Bool_grpd) ⊢
+  @comm_ring_idempotent_image_element
+    f2_split_comm_ring
+    f2_split_idempotent
+    (@comm_ring_hom_apply
+      f2_split_comm_ring
+      (@comm_ring_idempotent_image
+        f2_split_comm_ring
+        f2_split_idempotent
+        f2_split_idempotent_path)
+      (sigma_Snd f2_split_basic_open_arrow)
+      (@Product_pair_grpd Bool_grpd Bool_grpd x y))
+  ≡ @Product_pair_grpd Bool_grpd Bool_grpd x false;
+/* End of the PSSS-08c0H split-idempotent affine diagnostics. */
 
 // catalog-area: Iterated commutative-ring localization comparison
 // Stable structured composition exposes its selected carrier action.

@@ -97,7 +97,15 @@ comparison, strict audit, the fresh 1,959-check catalog, synchronized
 locally checkpointed at `1211e06`. A product-ring construction with the closed
 idempotent `(1,0)`, its affine-basic-open restriction consumer, and the
 matching/descent connection remain open, so the genuinely nondegenerate gate
-is not yet claimed closed.
+is not yet claimed closed at that checkpoint. `PSSS-08c0H` now promotes the
+rule-free product-ring action, a closed `F2` ring, and the split-idempotent
+affine consumer. Focused source/reviewer/central checks and exact warning
+comparisons are green: `(1,0)` is constructively neither zero nor one in
+`F2 x F2`, and its affine restriction computes as `(x,y) |-> (x,0)`. The
+maintained aggregates, strict audit, fresh 1,968-check catalog, synchronized
+86-target health, and full integration CI are green; only the local checkpoint
+remains pending for this active bounded tranche. Whole matching/descent remains
+the next semantic gate and is not implied by this closed algebraic computation.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -3101,6 +3109,96 @@ complete. A general fraction or quotient representation remains
 consumer-gated; the idempotent model is not asserted to represent arbitrary
 localization.
 
+##### PSSS-08c0H — Product rings and a closed split-idempotent basic open
+
+Status: active promotion candidate. The three rule-free sources, one reviewer,
+and nine central diagnostics are focused-green. Warning-enabled checks of each
+new source and the reviewer inherit exactly `1179 = 1020 + 159`, with no
+candidate-owned warning location. Maintained aggregates and the strict audit
+are green; the fresh catalog contains 1,968 checks across 86 mapped areas with
+zero unclassified entries. Health passes all 86 source/example targets in
+419.730 summed check-seconds at source snapshot
+`sha256:49e571bee9c63afac0e25120e5271816feece3eb969fb0ed17c0893772e4b024`.
+Full integration CI independently passes all 86 Lambdapi targets in 450.152
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. Only the local checkpoint remains before this status becomes
+checkpointed-green.
+
+The reusable product module constructs
+
+```text
+|R x S| = Product_grpd(|R|,|S|)
+(r,s) + (r',s') = (r+r',s+s')
+(r,s) * (r',s') = (r*r',s*s')
+(h x k)(r,s) = (h(r),k(s)).
+```
+
+The stable `Product_grpd` path owner is retained. Sethood is not assumed: it
+is transported from the equivalent constant-family Sigma using an explicit
+identity-on-elements `TypeEquiv`, then all commutative-ring laws are assembled
+componentwise. Product maps are whole `CommRingHom` objects. Pointwise pair
+paths plus `comm_ring_hom_ext` derive whole identity and composition paths, so
+the construction includes object data, arrow action, and internal structured
+functoriality evidence. It adds no product-specific rewrite/unification rule
+and no external functoriality or naturality square.
+
+No primitive binary-product `Functor` facade is selected yet. Current
+consumers need the semantic object function, structured arrow function, and
+whole identity/composition paths directly. A first-class facade would add a
+new rigid owner and projection surface without a demonstrated higher consumer;
+it remains a narrow later promotion if a presheaf or scheme construction needs
+to iterate the product action as a functor.
+
+The second module constructs the closed two-element ring on `Bool_grpd`:
+zero is `false`, one is `true`, addition is XOR, negation is the identity, and
+multiplication is conjunction. Boolean sethood and every ring law are proved
+by internal one-, two-, or three-variable Boolean elimination. No classical
+axiom, external equation family, primitive reduction, or field-only inverse
+API is introduced.
+
+The split-localization module then selects, for arbitrary rings `R,S`,
+
+```text
+e_(R,S) = (1_R,0_S) : |R x S|,
+e_(R,S)^2 = e_(R,S),
+splitLoc(R,S) = idemLoc_(R x S)(e_(R,S)),
+splitOpen(R,S) : Into_restr_cat((CommRing_cat)^op,R x S).
+```
+
+The structure map reduces through the fixed-image localization owner; on a
+pair its retained underlying carrier point is propositionally
+
+```text
+(x,y) |-> (x,0).
+```
+
+In the closed specialization `R=S=F2`, a hypothetical path from `(1,0)` to
+zero projects to `true=false` in the first component, while a hypothetical
+path to one projects to `false=true` in the second. Both contradictions land
+in `Empty_grpd`. Consequently this is a closed non-endpoint idempotent, its
+selected target and affine arrow compute through the existing localization
+and Zariski owners, and the restriction is observably neither the identity
+nor the constant map to the zero ring.
+
+This closes the concrete genuinely nondegenerate localization/basic-open
+representation portion of PSSS-08c0F. It does not close PSSS-08c0F as a
+whole: no matching category or Cartier glue has yet been instantiated for
+this affine model, and no whole
+`OmegaEquivAlong Cat_cat` descent witness has been constructed. It also does
+not provide the intended non-chaotic/generated Zariski topology,
+propositional reflection, a structure sheaf, `Spec`, or schemes. The next
+bounded semantic tranche should connect this closed algebraic consumer to the
+internal matching/restriction interface before topology or `Spec` expansion.
+
+The promoted source candidates have 506, 254, and 169 lines respectively,
+with 22, 18, and 12 symbols and no rewrite or unification rules. The 169-line
+reviewer has nineteen assertions. The fresh health report records the product,
+`F2`, split-localization, and reviewer targets at 6.662, 5.825, 4.810, and
+16.068 seconds respectively. These metrics establish a bounded implementation
+cost; they do not weaken the remaining semantic gate.
+
 Only after these audits should the plan decide whether PSSS-08c0E is:
 
 1. the right explicit classifier of a Cartier-local ring-valued presheaf;
@@ -4099,6 +4197,18 @@ consumer demonstrates that nontransitive unification requires it.
   but it neither chooses a fraction model nor identifies chosen localization
   packages judgmentally, and it does not close the nondegenerate-model or
   matching/sheaf-descent gates.
+- **PSSS-D-088:** promote product rings, the closed `F2` ring, and the
+  split-idempotent localization as three separate rule-free modules. Retain
+  componentwise object and structured-map action plus whole identity and
+  composition paths; do not add a primitive binary-product functor facade
+  until a higher consumer needs that owner. Use internal finite Boolean
+  elimination for `F2`, not external law assumptions.
+- **PSSS-D-089:** accept `(1,0)` in `F2 x F2` as closure of the concrete
+  nondegenerate localization/basic-open representation gate only. Require
+  constructive endpoint distinctions and actual `(x,y) |-> (x,0)` carrier
+  computation. Do not infer a Cartier matching equivalence, sheaf descent,
+  topology, `Spec`, or scheme from that algebraic result; the next consumer
+  must connect the closed model to whole `OmegaEquivAlong Cat_cat` evidence.
 
 ## 19. Side-Task Ledger
 
@@ -4125,8 +4235,9 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
-| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; zero-localization/empty-open tranche checkpointed at `7013915`; rule-free whole algebraic overlap equivalence green through the fresh 1,953-check catalog, 80-target health, and full CI and checkpointed at `362922d`; concrete nondegenerate model and matching/descent connection remain open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
-| PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; locally checkpointed at `1211e06`; product-ring `(1,0)` instance and affine restriction consumer remain required before calling the model genuinely nondegenerate | PSSS-07a localization API, zero-localization algebra lemmas, then product-ring consumer |
+| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; zero-localization/empty-open tranche checkpointed at `7013915`; whole algebraic overlap checkpointed at `362922d`; PSSS-08c0H now supplies the full-green closed nondegenerate model; whole matching/descent connection remains open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; locally checkpointed at `1211e06`; its requested product-ring consumer is now the downstream PSSS-08c0H candidate | PSSS-07a localization API and zero-localization algebra lemmas |
+| PSSS-08c0H | Product rings, closed `F2`, and split-idempotent affine restriction | Full-green rule-free candidate through focused and maintained checks, exact warning comparison, strict audit, fresh 1,968-check catalog, synchronized 86-target health, and full integration CI; local checkpoint pending | PSSS-08c0G, `CommRing_cat` structured-map extensionality, and PSSS-09a affine-arrow API |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

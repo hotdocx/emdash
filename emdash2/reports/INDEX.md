@@ -35,6 +35,13 @@ proves consumer-justified pointwise extensionality, then exposes
 rigid pointwise composition and identity comparisons; the whole-sieve consumer
 selects the full-action carrier functor and Path-valued carrier family without
 a direct capped-action beta. Generic whole arrows remain runtime owners.
+`emdash3_2_commutative_algebra_product.lp` is the rule-free componentwise
+product layer. It constructs the set-carrier ring `R x S`, applies structured
+maps componentwise, and proves whole identity and composition paths. A
+primitive binary product-functor facade remains consumer-gated.
+`emdash3_2_commutative_algebra_f2.lp` is the closed Boolean-carrier
+two-element commutative ring. XOR addition, conjunction multiplication,
+sethood, and all ring laws are constructed internally by finite elimination.
 `emdash3_2_commutative_algebra_finite.lp` is the rule-free finite algebraic
 cover-presentation layer: it supplies finite sums and dot products,
 coefficient-bearing unimodularity data, algebraic Zariski cover
@@ -71,9 +78,15 @@ PSSS-08c0G fixed-image layer. For `e^2=e`, it constructs the set-valued ring
 the full contractible-factorization proof that this map localizes `R` at
 `e`. Its selected factor applies the original map to the retained underlying
 element. The construction is quotient-free and can be nondegenerate for a
-nontrivial idempotent, but it does not itself construct a product ring or a
-closed nontrivial idempotent; that instantiation and its affine-basic-open
-consumer remain open.
+nontrivial idempotent; its downstream closed instance is provided by the
+split-localization module.
+`emdash3_2_commutative_algebra_localization_split.lp` is the rule-free
+PSSS-08c0H consumer. In every product it selects `e=(1,0)`, its fixed-image
+localization, and the corresponding affine-basic-open arrow. In `F2 x F2` it
+constructively proves `e` differs from both zero and one, while restriction on
+carrier points computes as `(x,y) |-> (x,0)`. This closes the concrete
+nondegenerate-model gate, not the whole matching/descent, topology, `Spec`, or
+scheme gates.
 `emdash3_2_commutative_algebra_localization_comparison.lp` is the following
 rule-free overlap layer: it packages localization first at `f` and then at the
 image of `g`, and constructs canonical forward/reverse factors against
@@ -136,12 +149,13 @@ than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section
 audit, a native `OmegaEquivAlong Cat_cat`/internal-comparison audit, and a
 concrete nontrivial localization model. The fixed-image construction now
-supplies a computing parametric representation for every idempotent, while a
-closed nontrivial product-ring instance remains required. The whole algebraic
-iterated-localization overlap equivalence is now implemented downstream of
+supplies a computing parametric representation for every idempotent, and the
+split-localization module supplies its closed nontrivial `F2 x F2` instance.
+The whole algebraic iterated-localization overlap equivalence is now
+implemented downstream of
 the comparison layer, but its connection to matching/sheaf descent and an
-actual affine consumer remains open; that evidence may retain, strengthen,
-derive, or replace the present glue interface.
+internal affine matching consumer remains open; that evidence may retain,
+strengthen, derive, or replace the present glue interface.
 `emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a/09b1
 layer:
 it combines an algebraic unimodular presentation with a dependent family of

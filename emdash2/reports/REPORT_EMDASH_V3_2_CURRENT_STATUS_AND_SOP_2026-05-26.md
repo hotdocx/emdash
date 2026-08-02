@@ -99,9 +99,19 @@ detailed probe evidence.
   compute through the subtype, and proves that `x |-> e*x` has the full
   localization universal property. The selected factor applies the original
   map to the retained underlying fixed point. This is quotient-free and may
-  be nondegenerate for a supplied nontrivial idempotent, but a closed product-
-  ring instance, affine restriction consumer, `Spec`, and schemes remain
-  downstream.
+  be nondegenerate for a supplied nontrivial idempotent.
+- `emdash3_2_commutative_algebra_product.lp`: one-way rule-free componentwise
+  product layer. It constructs product rings and componentwise structured maps
+  with whole identity/composition paths, while leaving a primitive product
+  functor facade consumer-gated.
+- `emdash3_2_commutative_algebra_f2.lp`: one-way rule-free closed
+  two-element-ring layer on `Bool_grpd`, with all laws proved by internal
+  Boolean elimination.
+- `emdash3_2_commutative_algebra_localization_split.lp`: one-way rule-free
+  split-idempotent consumer. It selects `(1,0)` in a product, builds its
+  fixed-image localization and affine arrow, and proves the closed `F2 x F2`
+  idempotent differs from zero and one while restriction computes as
+  `(x,y) |-> (x,0)`. Matching/descent, `Spec`, and schemes remain downstream.
 - `emdash3_2_commutative_algebra_localization_comparison.lp`: one-way rule-free
   overlap layer. It derives unit multiplication/factor extraction, packages
   localization first at `f` and then at the image of `g`, and constructs
@@ -2373,6 +2383,51 @@ for a nontrivial idempotent, but this tranche does not itself construct one. A
 product ring with the witnessed idempotent `(1,0)` and its affine-basic-open
 restriction consumer remain the next bounded gate; general fraction models,
 matching/sheaf descent, `Spec`, and schemes remain downstream.
+
+PSSS-08c0H closes that bounded concrete-model gate with three rule-free
+modules. `emdash3_2_commutative_algebra_product.lp` constructs the product
+carrier as the stable `Product_grpd`, transports sethood from the equivalent
+constant-family Sigma, builds all ring operations/laws componentwise, and
+maps structured morphisms componentwise. It derives equality of the whole
+structured maps for identity and composition using `comm_ring_hom_ext`; no
+product-specific identity/composition rule or external functoriality field is
+added. A first-class binary product functor remains consumer-gated because no
+current consumer needs another rigid runtime owner.
+
+`emdash3_2_commutative_algebra_f2.lp` constructs the two-element ring on
+`Bool_grpd`: addition is XOR, multiplication is conjunction, negation is the
+identity, and every ring law is proved by internal Boolean elimination.
+`emdash3_2_commutative_algebra_localization_split.lp` then takes
+`e=(1,0):R x S`, proves `e^2=e`, selects the checkpointed fixed-image
+localization, and exposes its existing affine-basic-open arrow. The closed
+specialization to `F2 x F2` constructs maps from `e=0` and `e=1` to `Empty` by
+projecting the contradictory Boolean component. Its carrier restriction
+computes transparently as `(x,y) |-> (x,0)`.
+
+This is the first closed localization/basic-open representation that is
+neither the identity endpoint nor the empty-open endpoint. It materially
+supports the feasibility of computational schemes, but it is not yet a
+sheaf/descent theorem: the next semantic gate must exercise the full internal
+Cartier matching comparison on this model, preferably as
+`OmegaEquivAlong Cat_cat`, before `Spec` consumes the provisional glue API.
+The intended non-chaotic Zariski topology, any required propositional
+reflection, structure sheaf, and concrete schemes remain separate later
+gates.
+
+The three source modules have 506, 254, and 169 lines, 22, 18, and 12 symbols,
+and no rewrite or unification rules. The 169-line reviewer has nineteen
+assertions, while nine central diagnostics bring the fresh strict catalog to
+1,968 checks across 86 mapped areas with zero unclassified entries. Focused
+and maintained checks, the exact inherited warning comparison
+`1179 = 1020 + 159`, and the strict inferred-slot audit are green. Health
+passes all 86 registered source/example targets in 419.730 summed
+check-seconds at source snapshot
+`sha256:49e571bee9c63afac0e25120e5271816feece3eb969fb0ed17c0893772e4b024`;
+full integration CI independently passes the same 86 targets in 450.152
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, the strict kernel audit, and fresh strict catalog
+verification. Only the local checkpoint remains pending.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover

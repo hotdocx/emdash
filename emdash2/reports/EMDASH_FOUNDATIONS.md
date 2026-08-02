@@ -1413,10 +1413,38 @@ element(map(...)(x)) = e*x.
 ```
 
 This is an explicit computing localization representation and is genuinely
-nondegenerate whenever `R` comes with a nontrivial idempotent. The current
-module does not itself exhibit such an `R`: a product-ring construction and
-its idempotent `(1,0)` are the next closed consumer. It also makes no claim
-that arbitrary localizations admit this fixed-image representation.
+nondegenerate whenever `R` comes with a nontrivial idempotent. The separate
+product layer now constructs `R x S` componentwise, including structured-map
+action and whole identity/composition paths. It does not introduce a new
+primitive functor head or duplicate generic functoriality. The closed Boolean
+ring `F2` supplies a concrete factor, with its complete ring laws established
+internally by finite elimination.
+
+In `F2 x F2`, take
+
+```text
+e = (1,0),
+e*e = e,
+e != 0,
+e != 1.
+```
+
+The last two statements are constructive maps from the corresponding path
+types to `Empty`, obtained by projecting a hypothetical product path to the
+Boolean component where `true=false`. The fixed-image localization therefore
+gives a closed non-endpoint model. Its affine-basic-open arrow has target
+`e(F2 x F2)`, and its carrier map executes as
+
+```text
+(x,y) |-> (x,0).
+```
+
+Thus the computation is observably neither the identity-localization example
+nor the zero-localization example. This closes the concrete nondegenerate
+localization/basic-open representation gate. It does not prove that arbitrary
+localizations admit a fixed-image representation, and it does not by itself
+identify Cartier matching sections with a whole internal descent equivalence,
+construct the intended Zariski topology, or define `Spec` and schemes.
 
 This is a representation-independent interface. Concrete fractions,
 finite/unimodular families, powers, concrete polynomial representations, and

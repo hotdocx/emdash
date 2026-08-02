@@ -50,6 +50,11 @@ mathematical reading is in
   pointwise structured-map extensionality, `CommRing_cat`, and the selected
   stable identity/composition comparisons. The invertibility-sieve consumer
   selects its full-action carrier functor without a competing capped rule.
+- `emdash3_2_commutative_algebra_product.lp` owns the rule-free componentwise
+  product ring and map action, including whole structured-map identity and
+  composition paths without installing a primitive product-functor facade.
+- `emdash3_2_commutative_algebra_f2.lp` owns the closed Boolean-carrier
+  two-element commutative ring, with all laws proved by internal elimination.
 - `emdash3_2_commutative_algebra_finite.lp` owns finite ring sums and dot
   products, their structured-map preservation theorems, retained unimodular
   coefficient data, and algebraic finite Zariski-cover presentations. It does
@@ -72,8 +77,11 @@ mathematical reading is in
 - `emdash3_2_commutative_algebra_localization_idempotent.lp` constructs the
   fixed-image ring `eR={x | e*x=x}` for `e^2=e` and proves that the computing
   scaling map `x |-> e*x` has the full localization universal property. It is
-  quotient-free and rule-free; a closed nontrivial idempotent remains a
-  separate product-ring consumer.
+  quotient-free and rule-free.
+- `emdash3_2_commutative_algebra_localization_split.lp` specializes that
+  construction to `(1,0)` in a product ring. Its closed `F2 x F2` instance
+  proves the idempotent differs from zero and one, and its affine-basic-open
+  restriction computes as `(x,y) |-> (x,0)`.
 - `emdash3_2_commutative_algebra_localization_comparison.lp` owns product-unit
   algebra and the universal-property comparison between localization at `f*g` and
   localization first at `f`, then at the image of `g`. It retains canonical
@@ -126,6 +134,10 @@ The active one-way library extensions are:
   morphism sethood/extensionality, the ordinary `CommRing_cat` facade, and
   stable pointwise identity/composition comparisons, without a carrier
   functor;
+- `emdash3_2_commutative_algebra_product.lp` — rule-free componentwise product
+  rings and structured maps, with whole identity/composition paths;
+- `emdash3_2_commutative_algebra_f2.lp` — the closed two-element
+  commutative-ring model on `Bool_grpd`;
 - `emdash3_2_commutative_algebra_finite.lp` — finite sums/dot products and
   base-change-stable unimodular/Zariski-cover presentation data, separate from
   topology and polynomial syntax;
@@ -143,6 +155,9 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_localization_idempotent.lp` — the rule-free
   fixed-image localization `R[1/e]=eR` for a supplied idempotent, with
   computing operations, structure map, and universal factors;
+- `emdash3_2_commutative_algebra_localization_split.lp` — the rule-free
+  `(1,0)` product localization and closed non-endpoint `F2 x F2` affine
+  restriction computation;
 - `emdash3_2_commutative_algebra_localization_comparison.lp` — stable
   pointwise ring-map composition plus universal-property iterated/product-
   localization comparison data, without fractions or package equality;

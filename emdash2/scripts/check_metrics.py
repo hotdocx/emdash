@@ -23,6 +23,8 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_finite_families.lp"),
     Path("emdash3_2_commutative_algebra.lp"),
     Path("emdash3_2_commutative_algebra_category.lp"),
+    Path("emdash3_2_commutative_algebra_product.lp"),
+    Path("emdash3_2_commutative_algebra_f2.lp"),
     Path("emdash3_2_commutative_algebra_finite.lp"),
     Path("emdash3_2_commutative_algebra_polynomial.lp"),
     Path("emdash3_2_commutative_algebra_localization.lp"),
@@ -42,6 +44,7 @@ CORE_CHECK_FILES = [
     Path("emdash3_2_commutative_algebra_glue.lp"),
     Path("emdash3_2_commutative_algebra_zariski.lp"),
     Path("emdash3_2_commutative_algebra_zariski_topology.lp"),
+    Path("emdash3_2_commutative_algebra_localization_split.lp"),
     Path("emdash3_2_checks.lp"),
 ]
 EXAMPLES_DIR = ROOT / "examples"
