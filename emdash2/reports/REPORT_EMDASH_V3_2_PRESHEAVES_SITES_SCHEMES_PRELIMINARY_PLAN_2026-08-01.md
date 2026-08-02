@@ -68,7 +68,10 @@ sheaf descent or a native `OmegaEquivAlong`/whole internal equivalence.
 `PSSS-08c0F` is now the active mandatory semantic/research gate: it must audit
 that whole native comparison, the matching/section semantics, a nontrivial
 localization model, and the first affine overlap before `Spec` may consume the
-selected architecture.
+selected architecture. Its first typed audit confirms that the existing
+`OmegaEquivAlong` owner has exactly the required fixed-restriction shape, but
+also confirms that the PSSS-08c0E component fields are not directly whole
+functor cancellation laws.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2801,6 +2804,44 @@ final internal comparison. Tabareau's internalized modality method is
 semantic inspiration for this audit, not an interface to transplant without
 checking the stronger functorial kernel.
 
+The first typed owner audit on 2026-08-02 is conclusive about the immediate
+interface distinction. The positive ignored probe
+`tmp/probes/psss08c0f_omega_equiv_shape.lp` constructs
+
+```text
+OmegaEquivAlong Cat_cat Path(|O(U)[1/s]|) Matching_O(s) restrict_ell
+```
+
+from one selected `glue_ell` used in both inverse slots and two equalities of
+whole composite functors. It passes in 8.5 seconds; the native left-inverse
+projection computes back to the selected glue. The expected-negative probe
+`tmp/probes/psss08c0f_component_laws_are_not_omega.lp` then feeds the
+PSSS-08c0E fields directly to the same constructor. It fails in 8.8 seconds
+at exactly the intended boundary: the first field has classifier
+
+```text
+Pi x, glue(restrict(x)) = x
+```
+
+while the constructor requires equality in
+`Hom_Cat(Path(|O(U)[1/s]|),Path(|O(U)[1/s]|))`; the nested matching-component
+Pi field likewise does not unify with equality of endofunctors on
+`Matching_O(s)`. The retained logs are
+`logs/probes/psss08c0f_omega_equiv_shape-20260802-013949.log` and
+`logs/probes/psss08c0f_component_laws_are_not_omega-20260802-014025.log`.
+
+This is not yet a proof that no theorem can assemble the component paths.
+It does establish that conversion and the existing record projections do not
+do so. The active `Pi_cat` interface has section evaluation and internal arrow
+action but no generic section-extensionality owner, and the kernel has no
+general functor-extensionality constructor from object components alone.
+The next bounded audit must therefore either derive the two whole paths using
+reusable internal Pi/Path and transformation structure, or strengthen the
+selected locality datum to carry native `OmegaEquivAlong` evidence. In the
+latter design, the computational glue is its selected inverse functor and
+component observations become derived projections/tests rather than the
+semantic definition. Neither route may add external naturality squares.
+
 The second audit requires more than the closed zero ring. A useful staged
 model is a parametric identity-localization/basic-open computation for an
 arbitrary commutative ring, followed by a genuinely nontrivial selected
@@ -3778,6 +3819,16 @@ consumer demonstrates that nontransitive unification requires it.
   supplies the intended higher propagation. Test whether the component paths
   assemble into those laws; do not assume the witness, and fall back to a
   different internal comparison only with typed consumer evidence.
+- **PSSS-D-083:** the typed owner-shape probe validates
+  `OmegaEquivAlong Cat_cat Path(localization-carrier) Matching R` without a
+  new kernel primitive, using one glue functor in both inverse slots. The
+  expected-negative direct-construction probe proves that PSSS-08c0E's two
+  Pi families of component paths are not definitionally whole functor paths.
+  Treat PSSS-08c0E as provisional computational observation data. Before
+  affine `Spec`, either derive the native whole cancellation through reusable
+  internal section/transformation extensionality or require the native whole
+  witness and derive its component observations; do not bridge the gap with
+  external naturality fields or an ad hoc rewrite.
 
 ## 19. Side-Task Ledger
 
@@ -3804,7 +3855,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
 | PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
-| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active mandatory semantic/research gate | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native owner-shape positive and direct component-to-whole expected-negative probes complete | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
