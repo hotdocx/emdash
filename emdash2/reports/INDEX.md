@@ -88,6 +88,24 @@ application computes; PathLift supplies equality-path action and the Pi/Catd
 owners retain coherence internally. The module supplies only this restriction
 direction, not a glue/inverse, descent equivalence, sheaf, limiting claim,
 generated topology, `Spec`, or scheme.
+`emdash3_2_commutative_algebra_glue.lp` is the rule-free PSSS-08c0E selected
+Cartier-locality layer. It packages glue as a genuine functor from coherent
+matching families to the Path category of the chosen localization carrier,
+so matching-arrow action stays with the generic functor owner. One retained
+law computes glue after canonical restriction back to the localization
+element; the other says at every support element that restriction after glue
+recovers the matching component. At a literal `(V,f,m)` this is exactly the
+selected localization factor applied to the glued element. `D(s)` need not be
+covering, so this is not ordinary sheaf descent. A whole categorical
+`OmegaEquivAlong`/internal equivalence, generated topology, `Spec`, and
+schemes remain separate gates.
+The historical Cartier file is experimental requirements evidence rather
+than semantic authority. Before this selected glue may determine the affine
+architecture, PSSS-08c0F requires an independent matching-versus-section
+audit, a native `OmegaEquivAlong Cat_cat`/internal-comparison audit, a
+nontrivial localization model, and the first iterated-localization overlap
+computation; that evidence may retain, strengthen, derive, or replace the
+present interface.
 `emdash3_2_commutative_algebra_zariski.lp` is the rule-free PSSS-09a/09b1
 layer:
 it combines an algebraic unimodular presentation with a dependent family of

@@ -42,7 +42,7 @@ audit. Internal-cone research plus maintained source, reviewer, and central
 checks, exact warning comparison, strict audit, maintained aggregates, the
 fresh catalog, 70-target health, and full integration CI are green. It is
 locally checkpointed at `a724638` under PSSS-D-071/PSSS-D-072.
-`PSSS-08c0D` is the current bounded tranche: it pulls the Path-valued
+`PSSS-08c0D` pulls the Path-valued
 carrier family over those support elements, forms the Pi category of coherent
 matching families, and sends a localization element and its equality paths to
 the matching section whose literal component applies the selected universal
@@ -52,16 +52,29 @@ strict audits, maintained aggregates, the 1,932-check catalog, synchronized
 synchronized and the tranche is locally checkpointed at `28cd0fc`. It
 supplies only the restriction direction, not an inverse/glue or descent
 equivalence.
+`PSSS-08c0E` is the current bounded candidate. It packages selected glue as a
+genuine functor from coherent matching families to the chosen localization's
+Path-valued carrier, so matching-arrow action is internal. It retains both
+`glue(restrict(x))=x` and componentwise `restrict(glue(m))=m`; at a literal
+support member the latter observes the selected localization factor applied
+to the glued element. The source is rule-free, its zero-ring model derives
+the data from a constant functor and Unit contractibility, and focused
+owner/reviewer/central checks, exact warning comparison, strict audits,
+maintained aggregates, the 1,937-check catalog, synchronized 74-target health,
+final authority prose, and full integration CI are green. The local checkpoint
+remains pending. This is selected
+Cartier/basic-open locality over `D(s)`, which need not cover, not ordinary
+sheaf descent or a native `OmegaEquivAlong`/whole internal equivalence.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
 nonempty semantic model; its later rigid-adapter promotion trial was rejected
 and removed. `PSSS-09b2` remains a measured Lambdapi elaboration-performance
 gate for the fully expanded sieve-membership specialization. Proposition-
-valued generated coverage,
-propositional truncation, sheafification, localization inverse laws, and
-positive-variable polynomial representation remain separately
-consumer-gated. The latest checkpointed integration evidence is recorded in
+valued generated coverage, propositional truncation, sheafification, whole
+categorical descent equivalence, and positive-variable polynomial
+representation remain separately consumer-gated. The latest checkpointed
+integration evidence is recorded in
 the PSSS-09cZ1 phase below; every subsequent metric remains provisional until
 its own bounded tranche is synchronized and checkpointed.
 
@@ -2615,19 +2628,213 @@ assembly checks, strict kernel audit, and fresh strict catalog verification.
 The tranche is included in the authorized local PSSS-08c0D checkpoint
 `28cd0fc`.
 
-This tranche deliberately stops before an inverse. A future `glue` direction
-must be justified by a concrete selected descent/basic-open/affine consumer,
-compute at a useful observation, and derive its laws without externalizing
-naturality or inserting an order-sensitive rigid alias. Only then may the two
-directions be called a descent equivalence or used to package sheafhood.
-Generated topology, propositional truncation, and general sheafification stay
-on their independent research gates unless that consumer shows they are
+This tranche deliberately stopped before an inverse at its checkpoint.
+PSSS-08c0E below closes a selected component-observation glue boundary without
+retroactively making PSSS-08c0D alone an equivalence. A whole categorical
+descent equivalence and sheafhood remain separate consumer gates. Generated
+topology, propositional truncation, and general sheafification stay on their
+independent research gates unless a downstream consumer shows they are
 actually required.
+
+##### PSSS-08c0E — Selected computational localization glue
+
+Status: rule-free implementation green through maintained source, reviewer, and
+central focused checks, exact warning comparison, strict audits, maintained
+aggregates, fresh catalog, synchronized 74-target health, and final authority
+prose plus full integration CI; the authorized local checkpoint remains
+pending.
+
+The historical Cartier `mod_loc_elim` behavior is not ordinary descent over a
+cover of `U`. The semantic sieve `D_O(s)` is the basic open on which `s`
+becomes invertible and need not cover `U`. The immediate computational
+consumer therefore selects locality data for a chosen localization rather
+than forcing the PSSS-05 sheaf classifier or the independent generated-
+topology gate.
+
+The principal datum is a complete ordinary functor
+
+```text
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|).
+```
+
+This is intentionally stronger than a raw function on matching objects.
+Every arrow between internally coherent matching sections is sent by generic
+functor action to an equality path between glued localization elements.
+Functoriality, identity, and composition remain at the ordinary functor owner;
+the glue package adds no external naturality square or specialized arrow rule.
+
+Two Path-valued component observations retain a provisional computational
+inverse boundary:
+
+```text
+glue_ell(restrict_ell(x)) = x
+restrict_ell(glue_ell(a))[e] = a[e].
+```
+
+The second law is quantified over objects of the complete support-elements
+category and observes the existing Pi section at `piapp0`. At a literal
+`e=(V,f,m)`, the checkpointed PSSS-08c0D component beta reduces its left
+endpoint further, yielding the direct Cartier equation
+
+```text
+factor_O(ell;f,m)(glue_ell(a)) = a[V,f,m].
+```
+
+Thus a consumer sees actual localization-factor application, not merely a
+formation package. Both observations are explicit paths stored beside the
+selected functor. They are not rewrite or unification rules, and the
+componentwise family is not an externally propagated naturality interface:
+the matching object and glue functor already carry those actions internally.
+This does **not** yet show that the two component families assemble into
+inverse transfors between composite functors. PSSS-08c0F must answer that
+whole-internal comparison question before a scheme interface consumes the
+package.
+
+The public `CommRingPshLocalizationGlue` classifier is a transparent Sigma of
+the glue functor and the product of these two laws. Its transparent
+constructor and projections expose the selected functor, object action, both
+laws, and the literal-member specialization. The module has 301 lines and
+eleven symbols, with zero rewrite rules and zero unification rules.
+
+The maintained reviewer contains eight assertions in 275 lines. In addition
+to the generic constructor projection, matching-arrow action, left law, and
+literal Cartier equation, it constructs a nonempty closed model. For the
+constant zero-ring presheaf, glue is the constant functor at `tt`; the
+contractibility of `Unit_grpd` derives both laws. Closed checks show arbitrary
+matching objects glue to `tt`, glue after restriction computes to `tt`, and
+the literal Cartier path reaches the actual zero-presheaf restriction. No
+descent certificate is postulated.
+
+Focused source, reviewer, and central checks pass. Warning-enabled source and
+reviewer logs at `20260802-003545` and `20260802-003557` each inherit exactly
+`1179 = 1020 + 159` from the PSSS-08c0D baseline, with no warning located in
+the new source or reviewer. The module-specific audit reports no clauses, and
+the full strict audit remains at zero unreviewed clauses and 52 annotated
+slots across 32 intentional kernel clauses. Maintained `make check` and the
+complete reviewer aggregate pass. Five central diagnostics raise the fresh
+strict catalog to 1,937 checks across 81 mapped areas with zero legacy or
+unclassified entries. Health passes all 74 source/example targets in 535.569
+summed check-seconds at source snapshot
+`sha256:88e8dca37f182b8df944a54739a2cc01fb1f499f6f8e4ed7066ea7457b057e19`;
+the new owner takes 11.377 seconds and its reviewer 4.982 seconds. Full
+integration CI independently passes
+all 74 Lambdapi targets in 575.487 summed check-seconds, followed by 39 Python
+tests, five document-registry tests, shell/source/header/reference checks,
+book evidence/typography/KaTeX/assembly checks, the strict kernel audit, and
+fresh strict catalog verification. The local checkpoint remains pending.
+
+This tranche deliberately does not package whole functor cancellation or a
+native `OmegaEquivAlong`; the stricter computational `DefIso` is absent too.
+The current candidate retains functorial glue and two computing component
+observations, while PSSS-08c0F must determine their whole internal assembly
+before an affine consumer relies on them. It also makes no ordinary
+sheafhood, limiting, generated-topology,
+`Spec`, overlap, or scheme claim. PSSS-08c0F below is now a mandatory
+independent semantic-validation gate before this selected locality may orient
+affine `Spec` or basic-open overlap evaluation; PSSS-08c1 remains the later
+ordinary sheaf/ringed-site boundary.
+
+##### PSSS-08c0F — Independent semantics and first nontrivial affine model
+
+Status: proposed mandatory semantic/research gate after PSSS-08c0E and before
+using the historical Cartier architecture to define `Spec` or schemes.
+
+The ignored `cartierSolution16.lp.txt` file was an experimental design and is
+not evidence that its `mod_loc_elim` classifier is mathematically complete or
+that the same interface is the correct foundation for computational schemes.
+PSSS-08c0E is deliberately safe as explicit selected data, but its typecheck
+and zero-ring model establish only internal consistency and executable shape.
+They do not establish that every intended structure sheaf carries this datum,
+that `Matching_O(s)` is exactly the desired section object on `D_O(s)`, or
+that the datum has all overlap compatibility required by schemes.
+
+The first audit compares, without assuming the answer, three presentations:
+
+```text
+Pi_(e in Elem(D_O(s))) Path_cat(|O(dom e)|)
+Nat(D_O(s), carrier(O))
+sections of O on the represented/basic-open subobject D_O(s).
+```
+
+It must check variance, the complete category-of-elements indexing, transport
+along subterminal membership proofs, and the distinction between componentwise
+paths and equality/arrows of whole coherent sections. A comparison may be a
+transparent definition, a selected `DefIso`, a theorem-level map, or a
+negative result; its form must follow the active owners and an actual affine
+consumer rather than the historical spelling.
+
+The same audit must test internalization of the inverse observations. Writing
+`R` for the checkpointed restriction functor and `G` for selected glue, the
+target is not another list of object equations. It must determine whether the
+current Pi/Path/funext owners canonically construct inverse transfors for
+
+```text
+G o R  versus  Id_(Path(|O(U)[1/s]|))
+R o G  versus  Id_(Matching_O(s)),
+```
+
+and then whether the appropriate package is ordinary `IsoEvidence` in the
+relevant functor categories, the kernel's stronger computational `DefIso`, a
+weighted descent comparison, or a different internal classifier. The primary
+native candidate to probe is more specifically
+
+```text
+OmegaEquivAlong Cat_cat
+  (Path_cat(|O(U)[1/s]|))
+  Matching_O(s)
+  R,
+```
+
+using `G` as both selected inverse functors; `OmegaEquiv Cat_cat` is the
+corresponding facade when the forward functor is packaged too. This candidate
+stores whole equality-valued cancellation in the functor hom-categories, and
+the existing omega-equivalence hom-action layer can propagate it internally
+to next homs. `DefIso` must not be selected merely for its name: it asserts
+strict computational cancellation and needs owner-aligned normal forms.
+Pointwise `PiFunext` is useful construction evidence but is not by itself the
+final internal comparison. Tabareau's internalized modality method is
+semantic inspiration for this audit, not an interface to transplant without
+checking the stronger functorial kernel.
+
+The second audit requires more than the closed zero ring. A useful staged
+model is a parametric identity-localization/basic-open computation for an
+arbitrary commutative ring, followed by a genuinely nontrivial selected
+localization example. The acceptance target is actual computation of the
+restriction/glue observations, not merely assuming an inhabitant of
+`CommRingPshLocalizationGlue`.
+
+The third audit is the first affine overlap calculation. It must compare the
+existing universal-property localizations
+
+```text
+R[1/f][1/g]  and  R[1/(f*g)]
+```
+
+through the checkpointed localization-comparison factors, and determine which
+inverse and cocycle laws a computational basic-open restriction consumer
+really needs. Functoriality and naturality must remain internal. Any external
+equation retained at construction time is evidence for the selected internal
+map, not a field to propagate through the kernel.
+
+Only after these audits should the plan decide whether PSSS-08c0E is:
+
+1. the right explicit classifier of a Cartier-local ring-valued presheaf;
+2. a theorem derivable for a constructed affine structure sheaf;
+3. a useful but insufficient observation requiring a whole comparison; or
+4. the wrong indexing/presentation and therefore to be replaced by a new
+   correcting checkpoint.
+
+This gate may expose a missing algebraic representation or extensionality
+owner. Such a finding is a named prerequisite, not permission to add an ad hoc
+rewrite, assume a nontrivial localization model, or drift into general
+generated-topology/sheafification work. Its output must be a checked
+nontrivial computation or a precise negative/design result synchronized into
+this ledger.
 
 ##### PSSS-08c1 — Ringed sites, selected sheaves, and localization descent
 
-Status: proposed after checkpointing PSSS-08c0D and closing the independent
-PSSS-05b descent gate.
+Status: proposed after checkpointing PSSS-08c0E, closing PSSS-08c0F, and
+closing the independent PSSS-05b descent gate.
 
 - package a CommRing-valued presheaf together with the selected sheaf datum;
 - retain the canonical semantic `D(s)` rather than introduce a second
@@ -3517,6 +3724,55 @@ consumer demonstrates that nontransitive unification requires it.
   descent, sheafhood, a limiting comparison, or a ringed-site package. Do not
   divert into generated topology, truncation, or general sheafification while
   that concrete computational gate remains open.
+- **PSSS-D-076:** distinguish selected Cartier/basic-open locality over
+  `D_O(s)` from ordinary sheaf descent. The invertibility sieve need not cover
+  `U`, so a computing glue inverse over that sieve may be promoted and used by
+  affine consumers without first constructing generated topology,
+  propositional truncation, or the PSSS-05 sheaf classifier. Do not label that
+  selected locality datum as sheafhood or a limiting theorem.
+- **PSSS-D-077:** represent selected glue by a genuine functor from the
+  coherent matching category to the Path category of the localization
+  carrier, together with `glue(restrict(x))=x` and componentwise
+  `restrict(glue(a))=a`. Let generic functor action own matching-arrow action;
+  retain the inverse observations as explicit paths, not rewrite/unification
+  rules or external naturality fields. At a literal support member, expose
+  the existing matching beta so the component law observes actual factor-map
+  application.
+- **PSSS-D-078:** require a derived nonempty glue model and postpone a whole
+  categorical `DefIso` until a consumer needs inverse transformations rather
+  than only functorial glue and its object observations. The zero-ring model
+  uses a constant functor and Unit contractibility; it must not rely on a
+  postulated descent witness. The next main-line consumer is affine `Spec` or
+  basic-open overlap computation, not abstract sheafification infrastructure.
+- **PSSS-D-079:** the historical Cartier sources remain experimental
+  requirements evidence, never semantic authority. A typechecking selected
+  glue package and the zero model do not establish that its matching category
+  is the intended section object or that the interface is complete for
+  schemes. Insert PSSS-08c0F as a mandatory independent semantic gate before
+  allowing PSSS-08c0E to determine the `Spec` architecture.
+- **PSSS-D-080:** PSSS-08c0F must audit the comparison with natural maps out
+  of `D_O(s)`, construct a nontrivial localization/basic-open model, and run
+  the first iterated-localization overlap calculation. Use the result to keep,
+  strengthen, derive, or replace the selected glue interface. Preserve
+  internal functoriality/naturality and treat any missing concrete algebraic
+  model as a prerequisite rather than an invitation to postulate one.
+- **PSSS-D-081:** refine PSSS-D-078 after the explicit SOP concern about
+  “object-level” laws. PSSS-08c0E is only a provisional functorial operation
+  with computing component paths; it is not the final internal descent
+  classifier. PSSS-08c0F must attempt to assemble those paths into inverse
+  transfors between the composite functors and identities, and select among
+  ordinary functor-category isomorphism evidence, strict computational
+  `DefIso`, or a weighted comparison by actual owner behavior. Tabareau's
+  internalization is guidance, not authority, and no scheme API may stop at
+  component equations when whole internal action is required.
+- **PSSS-D-082:** make
+  `OmegaEquivAlong Cat_cat (Path_cat(localization-carrier)) Matching R` the
+  first native whole-internal candidate in PSSS-08c0F, with selected glue used
+  for both inverse-functor slots. Its cancellation laws are equalities in the
+  functor hom-categories, and the existing equality-valued hom-action theorem
+  supplies the intended higher propagation. Test whether the component paths
+  assemble into those laws; do not assume the witness, and fall back to a
+  different internal comparison only with typed consumer evidence.
 
 ## 19. Side-Task Ledger
 
@@ -3542,7 +3798,9 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 70-target health, and full CI; locally checkpointed at `9db8307` | PSSS-08b, PSSS-07a, and PSSS-04a |
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
-| PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0D and PSSS-05b |
+| PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; checkpoint pending | PSSS-08c0D and historical Cartier/basic-open consumer |
+| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Proposed mandatory semantic/research gate | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |
 | PSSS-09b2 | Full transparent sieve-membership recursion specialization usability | Performance/research gate; rigid workaround rejected | PSSS-09b1 plus a real non-singleton consumer or bounded elaborator improvement |
@@ -3763,6 +4021,35 @@ PSSS-08c0D is successful when:
    topology, truncation, sheafification, `Spec`, or scheme is asserted; and
 8. focused owner/reviewer/central checks, exact warning comparison, strict
    audit, catalog/health synchronization, current-authority prose, and full
+   integration CI are green before the authorized local checkpoint.
+
+PSSS-08c0E is successful when:
+
+1. selected glue is a complete ordinary functor from
+   `CommRingPshLocalizationMatching_cat` to the Path category of the chosen
+   localization carrier, not only a function on matching objects;
+2. matching-arrow action, identity, and composition are supplied by the
+   generic functor owners, with no external naturality square or specialized
+   glue-action rule;
+3. the transparent glue package retains both
+   `glue(restrict(x))=x` and the componentwise
+   `restrict(glue(a))[e]=a[e]` as explicit Path-valued observations;
+4. at a literal support element `(V,f,m)`, the latter observation exposes the
+   checkpointed matching beta and therefore has left endpoint
+   `factor_O(ell;f,m)(glue(a))` without adding a glue rewrite or unifier;
+5. the zero-ring model derives a glue functor and both laws from the constant
+   functor at `tt` and Unit contractibility, and a closed check reaches the
+   actual zero-presheaf restriction rather than a postulated descent package;
+6. `D_O(s)` is documented as a basic-open sieve which need not cover `U`, so
+   the package is not called ordinary sheaf descent, a limiting comparison,
+   or a whole categorical `DefIso`;
+7. the absence of a native `OmegaEquivAlong` witness and its whole functor
+   cancellation paths is explicit, PSSS-08c0F makes their construction or
+   redesign mandatory before `Spec`, and generated topology, propositional
+   truncation, abstract sheafification, overlap, and scheme claims remain
+   absent; and
+8. focused owner/reviewer/central checks, exact warning comparison, strict
+   audits, catalog/health synchronization, current-authority prose, and full
    integration CI are green before the authorized local checkpoint.
 
 PSSS-09b1 is successful when:

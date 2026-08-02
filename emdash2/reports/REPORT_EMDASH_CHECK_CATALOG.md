@@ -12,8 +12,8 @@ stable mathematical-area scopes rather than source locations.
 
 ## Summary
 
-- Total checks: 1932
-- Mapped areas: 80
+- Total checks: 1937
+- Mapped areas: 81
 - Legacy source-line tags: 0
 - Unclassified checks: 0
 
@@ -99,6 +99,7 @@ stable mathematical-area scopes rather than source locations.
 | Supplied Zariski-compatible topology | 6 |
 | Invertibility-cover locality and localization factors | 10 |
 | Localization matching restriction | 5 |
+| Localization glue | 5 |
 
 ## Section Details
 
@@ -2433,3 +2434,13 @@ stable mathematical-area scopes rather than source locations.
 | 1930 | 21412 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
 | 1931 | 21433 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |
 | 1932 | 21468 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+
+### Localization glue
+
+| # | Check line | Statement |
+| ---: | ---: | --- |
+| 1933 | 21500 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1934 | 21512 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1935 | 21532 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1936 | 21554 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@Co ...` |
+| 1937 | 21573 | `assert [K : Cat] (O : τ (@CommRingPsh K)) [V U : τ (Obj K)] (s : τ (@CommRingPshSection K O U)) (localization : τ (@ ...` |

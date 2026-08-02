@@ -1,7 +1,7 @@
 # EMDASH v3.2 Current Status And SOP
 
 Date: 2026-05-26
-Last consolidated: 2026-08-01
+Last consolidated: 2026-08-02
 Status: living current-state and kernel-development authority
 
 This report describes the active `emdash3_2.lp` architecture and the procedure
@@ -116,6 +116,16 @@ detailed probe evidence.
   full fibre-covariance owner and adds no external naturality field. It
   supplies no inverse/glue, descent equivalence, sheafhood, limiting claim,
   generated topology, `Spec`, or scheme.
+- `emdash3_2_commutative_algebra_glue.lp`: one-way rule-free selected
+  Cartier-locality layer. It packages a genuine functor from internally
+  coherent matching families to the Path category of the chosen localization
+  carrier, together with a left-inverse path on localization elements and a
+  componentwise right-inverse path. At a literal support member, the latter
+  observes the selected localization factor applied to the glued element.
+  Generic functor action owns matching-arrow action; no external naturality
+  family is stored. The sieve `D(s)` need not cover, so this is not ordinary
+  sheaf descent or a native `OmegaEquivAlong`/whole internal equivalence;
+  generated topology, `Spec`, and schemes remain downstream.
 - `emdash3_2_commutative_algebra_zariski.lp`: one-way rule-free presented
   affine-Zariski layer. It retains a selected localization package for each
   generator of an algebraic cover presentation, exposes chosen basic-open
@@ -2142,6 +2152,59 @@ assembly checks, strict kernel audit, and fresh strict catalog verification.
 The tranche is included in the authorized local PSSS-08c0D checkpoint
 `28cd0fc`.
 
+PSSS-08c0E selects the converse needed by the computational Cartier
+interface without conflating it with ordinary sheaf descent. For a chosen
+localization, its public datum begins with a genuine functor
+
+```text
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|).
+```
+
+Consequently arrows between coherent matching families are mapped internally
+to equality paths between glued localization elements by ordinary functor
+action. The package retains two component observations:
+
+```text
+glue_ell(restrict_ell(x)) = x
+restrict_ell(glue_ell(m))[e] = m[e].
+```
+
+At a literal support element `e=(V,f,r)`, the second left endpoint computes
+through the checkpointed matching beta to
+`factor_O(ell;f,r)(glue_ell(m))`. These laws are Path-valued fields of a
+transparent Sigma package, not rewrite rules and not an external family of
+naturality squares. They do not yet constitute inverse transfors between the
+composite functors and identities; the mandatory PSSS-08c0F audit must
+internalize them or revise the interface before `Spec`. The zero-ring reviewer
+constructs the datum rather than
+postulating it: the functor is constant at `tt`, and Unit contractibility
+proves both observations, including a closed component path to the actual
+zero-presheaf restriction.
+
+This is selected basic-open locality over `D(s)`, and `D(s)` need not cover
+`U`. The candidate therefore does not claim a sheaf condition, a limiting
+comparison, or a native `OmegaEquivAlong`/whole internal equivalence. It is
+the direct computational
+successor to the historical Cartier `mod_loc_elim` behavior and is intended
+to feed a mandatory independent matching/section semantics audit, nontrivial
+localization model, and first affine overlap calculation before it is allowed
+to orient `Spec`. The historical source is experimental consumer evidence,
+not semantic authority. Abstract generated-topology or sheafification work
+remains off this critical path. The maintained source, reviewer, and
+central focused checks pass; warning-enabled source and reviewer checks
+inherit exactly `1179 = 1020 + 159`, with no warning located in either new
+file, and strict audits remain unchanged. Maintained `make check` and the
+complete reviewer suite pass. Five central diagnostics raise the strict
+catalog to 1,937 checks across 81 mapped areas with zero legacy or
+unclassified entries. Health passes all 74 source/example targets in 535.569
+summed check-seconds at source snapshot
+`sha256:88e8dca37f182b8df944a54739a2cc01fb1f499f6f8e4ed7066ea7457b057e19`.
+Full integration CI independently passes all 74 Lambdapi targets in 575.487
+summed check-seconds, followed by 39 Python tests, five document-registry
+tests, shell/source/header/reference checks, book evidence/typography/KaTeX/
+assembly checks, strict kernel audit, and fresh strict catalog verification.
+The authorized local checkpoint remains pending.
+
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
 retains its finite unimodular generators together with a dependent finite
@@ -2871,6 +2934,9 @@ Matching_O(s)
     -> Pi_(V,f,m in D_O(s)) Path_cat(|O(V)|).
 restrict_ell : Path_cat(|O(U)[1/s]_ell|) -> Matching_O(s).
 restrict_ell(x)[V,f,m] -> factor(ell,f,m)(x).
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|).
+glue_ell(restrict_ell(x)) = x.
+factor(ell,f,m)(glue_ell(a)) = a[V,f,m].
 ```
 
 The category heads do not runtime-collapse. Restriction's object action is
@@ -2896,7 +2962,10 @@ is a property and is closed under further restriction. The downstream carrier
 and unit-evidence families assemble it as a whole ordinary sieve, the locality
 module packages its selected localization factors as one internal cone, and
 the matching module applies those factors to localization elements as
-internally coherent Pi sections with equality-path action.
+internally coherent Pi sections with equality-path action. The selected glue
+module supplies the converse as a genuine functor plus both Path-valued
+component observations. It is computational basic-open locality over `D(s)`,
+not ordinary sheaf descent; no native whole equivalence is asserted.
 
 ### Section 19: PathOut, path induction, and Eckmann–Hilton
 

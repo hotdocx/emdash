@@ -569,6 +569,26 @@ not add external naturality squares to this notation, and do not call it a
 descent equivalence until a separately selected `glue_ell` and its laws have
 been constructed from a real consumer.
 
+The selected Cartier-locality glue may now be written
+
+```text
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|)
+glue_ell(restrict_ell(x)) = x
+factor_O(ell;f,m)(glue_ell(a)) = a[V,f,m].
+```
+
+The literal functor owner is
+`comm_ring_psh_localization_glue_func`; its object action is
+`comm_ring_psh_localization_glue`. The two observations are exposed by
+`comm_ring_psh_localization_glue_restrict_path` and
+`comm_ring_psh_localization_glue_at_member_path`. `glue_ell` is a complete
+ordinary functor, so its action on arrows between matching families remains
+with generic `fapp1`; the displayed equalities are retained paths, not new
+rewrite rules or external naturality fields. This notation expresses selected
+locality over the basic-open sieve `D_O(s)`, which need not cover `U`. It does
+not by itself name ordinary sheaf descent, a native `OmegaEquivAlong`/whole
+internal equivalence, a generated topology, `Spec`, or a scheme.
+
 For the separately promoted finite-family layer, comments and examples may
 write
 

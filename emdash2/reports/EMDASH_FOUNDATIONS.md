@@ -1534,6 +1534,61 @@ later computational gates. A general generated topology, truncation
 reflector, or sheafification construction is not a prerequisite for this
 direction and is not implied by it.
 
+The selected glue layer closes the next, specifically Cartier-locality,
+boundary. It is important not to confuse this with ordinary sheaf descent:
+the invertibility sieve `D(s)` describes the basic open where `s` is
+invertible and need not cover `U`. For a chosen localization, selected glue is
+a genuine functor
+
+```text
+glue_ell : Matching_O(s) -> Path_cat(|O(U)[1/s]_ell|).
+```
+
+Thus every arrow between coherent matching families is mapped internally to
+an equality path between their glued localization elements. The selected data
+also retains
+
+```text
+glue_ell(restrict_ell(x)) = x
+restrict_ell(glue_ell(m))[V,f,r] = m[V,f,r].
+```
+
+The second equation is stored as a component observation of already coherent
+Pi objects, not as an external naturality family. Its literal left endpoint
+computes further to
+
+```text
+factor_O(ell;f,r)(glue_ell(m)).
+```
+
+This is the computational content of the historical Cartier
+`mod_loc_elim` rule, now separated from the old global sheafification fold and
+expressed entirely through active functor, Pi, and localization owners. The
+package and all its observations are transparent and rule-free. The derived
+zero-ring model takes glue to the constant functor at `tt`; Unit
+contractibility proves both laws, while the closed component theorem reaches
+the actual zero-presheaf restriction.
+
+The interface does not yet assert whole functor cancellation or a native
+`OmegaEquivAlong`; the stricter computational `DefIso` is absent too. Such a
+strengthening requires a consumer that needs full
+categorical inverse data rather than the current functorial glue and
+computational component observations. Ordinary sheaf descent, `Spec`, basic-open
+overlap comparison, and schemes remain downstream constructions. In
+particular, the historical Cartier experiment does not prove that this
+matching category is the intended section object on a basic open. Before the
+selected glue interface is used to define `Spec`, the living plan requires an
+independent comparison with natural maps out of `D(s)`, an audit of whether
+the component paths assemble into inverse transfors between the two composite
+functors and identities—principally as an
+`OmegaEquivAlong Cat_cat` witness for restriction—a nontrivial localization
+model, and an iterated-localization overlap computation. The result may
+validate, strengthen, derive, or replace the present explicit classifier.
+Componentwise funext is construction evidence; it is not a substitute for a
+whole internal comparison when a scheme consumer needs one. `DefIso` is a
+separate strict-computation notion and is not the default category-equivalence
+target here.
+
 ### Finite Families And Unimodular Cover Presentations
 
 A finite homogeneous family uses only the existing natural-number and Sigma

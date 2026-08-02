@@ -77,8 +77,12 @@ mathematical reading is in
   factors over all elements of the invertibility sieve as one internal cone.
 - `emdash3_2_commutative_algebra_matching.lp` sends localization elements and
   equality paths to coherent carrier-valued matching sections, with literal
-  components computing by those selected factors. It does not yet supply an
-  inverse/glue or descent equivalence.
+  components computing by those selected factors.
+- `emdash3_2_commutative_algebra_glue.lp` packages selected glue as a genuine
+  functor on matching families and their arrows, together with two computing
+  component observations. It is the rule-free Cartier/basic-open
+  locality interface, not ordinary sheaf descent over a covering sieve or a
+  native `OmegaEquivAlong`/whole internal equivalence.
 - `emdash3_2_walking_end_hit.lp` owns the walking HIT, Code,
   encode/decode, Nat comparison, and directed negative results.
 - `emdash3_2_checks.lp` and `examples/` contain executable
@@ -124,8 +128,10 @@ The active one-way library extensions are:
 - `emdash3_2_commutative_algebra_locality.lp` — topology-visible support and
   the internal localization-factor cone over its category of elements;
 - `emdash3_2_commutative_algebra_matching.lp` — coherent Pi matching families
-  and computational restriction from localization elements, without a
-  glue/inverse or descent claim;
+  and computational restriction from localization elements;
+- `emdash3_2_commutative_algebra_glue.lp` — selected functorial glue plus
+  `glue(restrict(x))=x` and literal component recovery, without a whole
+  internal equivalence, sheafhood, `Spec`, or scheme;
 - `emdash3_2_eq1_hom_action.lp` — native equality-valued next-hom
   action and groupoidality;
 - `emdash3_2_eq1_evidence_property.lp` — evidence-property,
