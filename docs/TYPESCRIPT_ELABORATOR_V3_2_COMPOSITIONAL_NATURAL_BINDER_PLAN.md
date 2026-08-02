@@ -14,9 +14,11 @@ and
 Status: active semantic successor. The predecessor's canonical finite
 displayed-natural telescope, grouped text, and reviewer route are final-green
 at rollback-safe semantic/product checkpoint
-`607a026f88bc6d3b9f305ecb21f6630ce7c94950`. The first row below is a
-read-only architecture audit with zero behavior authority. No implementation
-proposal is approved or implied yet.
+`607a026f88bc6d3b9f305ecb21f6630ce7c94950`.
+`COMPOSITIONAL-NATURAL-BINDER-0A` is complete as a read-only architecture
+audit. The exact `COMPOSITIONAL-NATURAL-BINDER-1B` proposal below is frozen
+under gate `H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-01`; it still requires a
+separate review/decision checkpoint before behavior edits.
 
 ## Objective
 
@@ -180,6 +182,179 @@ candidate compositional reading:
 The audit must determine the exact Core/API representation of the outer layer
 rather than assuming it is literally the current `dependentLambda` call.
 
+## `COMPOSITIONAL-NATURAL-BINDER-0A` Audit Result
+
+The read-only audit selects **shared natural-component construction IR with
+distinct ordinary and displayed outer compilers**. It does not select a new
+kernel construction and does not yet refactor compact `:^nd`.
+
+### Existing semantic authority
+
+The active kernel already supplies the complete semantic ladder needed by the
+first ordinary binder slice:
+
+- `Transf_cat F G` and its object classifier;
+- `tapp0_fapp0` for a point component;
+- `tapp1_func`/`tapp1_fapp0` and the next Hom action;
+- generic category identity and vertical composition;
+- fixed precomposition through `comp_cat_con_func`; and
+- fixed postcomposition through the existing `hom_postcomp_func`
+  specialization used by `comp_cat_cov_func`.
+
+The required owners are already present in the maximal reviewed TypeScript
+runtime lineage. No Lambdapi declaration, rewrite rule, unification rule, or
+transfer declaration is missing for the selected slice.
+
+### Exact TypeScript seam
+
+The backend-neutral TypeScript Core already has a rich `transfor` type, maps it
+to `transfor-category`, checks closed ordinary components, and carries generic
+ordinary transformation action owners. The scoped categorical API lacks:
+
+1. a public rich ordinary-transformation assumption facade;
+2. a reusable ordinary-natural abstraction method; and
+3. a construction-only classifier for a component whose index is a locally
+   nameless open categorical slot.
+
+The existing code marks this seam precisely. A closed component succeeds, but
+the same component at an open ordinary slot raises
+`MISSING_STRUCTURAL_OWNER` with:
+
+```text
+Open ordinary transfor components require later contextual naturality lowering
+```
+
+This is a frontend introduction gap, not a kernel inconsistency and not a need
+for external naturality evidence.
+
+### Classifier result
+
+The active kernel explicitly documents sections of the mixed family as:
+
+```text
+Pi_cat (Transf_catd A B FF GG).
+```
+
+The existing TypeScript API can construct the corresponding family and a
+section assumption. This remains a legitimate mixed-section presentation,
+distinct from `Transfd_cat`. Existing tests already exercise fixed
+`Transf_catd` contextual object/arrow action. The audit therefore rejects both
+of these shortcuts:
+
+- equating `Pi_cat(Transf_catd ...)` with `Transfd_cat`; and
+- making the new ordinary bracket depend on that equation.
+
+### Disposable probe evidence
+
+A disposable builder probe established:
+
+- closed `eta[x]` synthesizes the expected rich `hom` classifier and explicit
+  `tapp0_fapp0` Core;
+- replacing closed `x` by the current ordinary contextual token reaches the
+  exact intentional `MISSING_STRUCTURAL_OWNER` seam above; and
+- an actual `Transf_catd` section is constructible through the existing mixed
+  API. Its full maximal-profile checker probe was stopped after two minutes to
+  respect the bounded-validation SOP; the already-checkpointed focused
+  `Transf_catd` action test remains the validation authority rather than
+  starting another long aggregate-like run.
+
+## Frozen `COMPOSITIONAL-NATURAL-BINDER-1B` Proposal
+
+Gate: `H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-01`
+
+Decision: `D-DTTLF-USABILITY-074`
+
+### Public typed API
+
+Add, under one explicit continuation profile:
+
+```text
+transfor(name, F, G)
+  : Transf_cat F G
+
+transforLambda(name, F, G, a => body(a))
+  : Transf_cat F G
+```
+
+The source and target categories are inferred from closed rich functor
+endpoints. Binder mode is intrinsically natural; options may check plicity,
+polarity, cell level, and dependency but cannot turn another binder mode into
+natural abstraction.
+
+### Construction-only natural component
+
+Add one locally nameless frontend classifier recording:
+
+```text
+ordinary-natural-component
+  source category X
+  target category B
+  whole source functor P : X -> B
+  whole target functor Q : X -> B
+  active natural index ordinal
+```
+
+It represents the open point Hom `P[a] -> Q[a]`. It is immutable inspection
+data only. It cannot reach explicit Core, cannot be supplied with a naturality
+equation, and must be eliminated by the enclosing `transforLambda`.
+
+### Recursive body algebra
+
+The first slice accepts exactly:
+
+1. `eta[a]`, recovering `eta` exactly;
+2. `eta[L[a]]`, recovering fixed prewhiskering through the existing
+   precomposition functor and generic Hom action;
+3. `H(component)`, recovering fixed postwhiskering through the existing
+   postcomposition functor and generic Hom action;
+4. `id(P[a])`, where the existing ordinary contextual compiler first recovers
+   `P : X -> B`; and
+5. typed recursive vertical composition of two accepted components.
+
+The ordinary contextual compiler remains the authority for functorially
+factoring object expressions. The natural factorer adds only the inverse
+component-to-transformation step. Arbitrary point arrows, unsupported open
+classifiers, captured outer slots, and mismatched endpoints fail closed.
+
+### Exact Core output
+
+The factorer emits only existing explicit Core:
+
+- the original coherent transformation for eta;
+- generic `id` at `Functor_cat X B`;
+- generic `comp_fapp0` at `Functor_cat X B`;
+- generic `fapp1_fapp0` of existing `comp_cat_con_func`; and
+- generic `fapp1_fapp0` of the existing `hom_postcomp_func` specialization.
+
+No new Core node, checker branch, runtime rule, declaration-refinement
+facility, kernel owner, cast, coercion, curry, or external coherence payload is
+authorized.
+
+### Files and tests
+
+Behavior edits are limited to:
+
+- `src/v3_2/categorical_surface.ts`;
+- `src/v3_2/categorical_program.ts`;
+- one focused `tests/v3_2_categorical_compositional_natural_binder_tests.ts`;
+- `tests/main_tests.ts` only if required by runner discovery; and
+- the owning plan/handoff ledgers.
+
+Focused evidence must cover eta exactness, identity, recursive composition,
+both whiskering orientations, arbitrary-arrow rejection, escaped/foreign
+scope rejection, callback single evaluation, deep freezing, generic checker
+acceptance, closed component elimination, and preservation of the existing
+compact `:^nd` eta route. Existing `Transf_catd` section/action and
+`Transfd_cat` higher-action tests are carried forward; this slice must not
+rewrite those classifiers or factorers.
+
+Validation is limited to the new focused test, the nearest existing
+ordinary/displayed surface tests, root typecheck, lint, exact diff hygiene,
+and—because this changes the shared scoped frontend and public program—a
+single root `check:ts` only after the bounded tranche is otherwise green.
+Recent kernel/browser/print/book evidence is carried forward. No kernel CI,
+browser, print, book, or repository aggregate is authorized.
+
 ## Read-Only `COMPOSITIONAL-NATURAL-BINDER-0A` Audit
 
 This row changes no behavior. It must:
@@ -256,8 +431,8 @@ Any later implementation proposal must include at least:
 | Slice | Status | Dependency | Exact boundary |
 |---|---|---|---|
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | final-green at `607a026f88bc6d3b9f305ecb21f6630ce7c94950` | D-070 through D-073 | Typed canonical finite `:^nd`, grouped text, lean chain-2A reviewer preset, production/browser evidence, and effective aggregate qualification. |
-| `COMPOSITIONAL-NATURAL-BINDER-0A` | dependency-ready read-only audit; zero behavior authority | final-green 1AP; user-approved architectural direction | Inventory ordinary/displayed natural abstraction and exact classifier/action relationships; run bounded disposable probes; select at most one implementation slice. |
-| `COMPOSITIONAL-NATURAL-BINDER-1B` | pending 0A result and separate frozen review | completed 0A | Implement only the smallest reusable ordinary-natural abstraction and exact compositional consumer selected by executable evidence. |
+| `COMPOSITIONAL-NATURAL-BINDER-0A` | complete; read-only | final-green 1AP; user-approved architectural direction | Existing semantic ladder and rich Core are sufficient; exact gap is open ordinary-component lowering. `Pi_cat(Transf_catd)` remains distinct from `Transfd_cat`. |
+| `COMPOSITIONAL-NATURAL-BINDER-1B` | exact proposal frozen under H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-01; separate D-074 review pending | completed 0A | Add rich `transfor` assumptions and one reusable ordinary `transforLambda` with recursive eta/identity/composition/pre/postwhiskering. Preserve compact `:^nd` unchanged. |
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | pending final-green 1B | completed 1B | Decide the exact introduction-recursion claim and remaining classifier/body/variance non-claims before text or browser promotion. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
 
@@ -304,19 +479,21 @@ current dependency-ready row on every continuation.
 
 Treat the predecessor canonical finite `:^nd` typed/text/reviewer envelope as
 final-green at `607a026f88bc6d3b9f305ecb21f6630ce7c94950`. Preserve its
-integrated factorers as sound rollback evidence. Run
-`COMPOSITIONAL-NATURAL-BINDER-0A` as a read-only owner/API/classifier/action
-audit with bounded disposable probes and zero behavior authority. Distinguish
-semantic expansion of compact `:^nd` from actual composition of reusable
-public `:^n` constructors. Do not assume `Transfd_cat` equals a section of
-`Transf_catd`; derive the exact relationship from active owners.
+integrated factorers as sound rollback evidence. Treat
+`COMPOSITIONAL-NATURAL-BINDER-0A` as complete: the kernel/rich Core action
+ladder exists and the exact missing seam is open ordinary-component
+introduction. Distinguish semantic expansion of compact `:^nd` from actual
+composition of reusable public `:^n` constructors. Do not assume
+`Transfd_cat` equals a section of `Transf_catd`.
 
-Select at most one bounded implementation proposal and freeze/review it before
-behavior edits. Natural transformation bodies must be recursively constructed
-from internal owners and fail closed without them. Preserve object, arrow,
-base-arrow, and higher action; add no curry, cast, total-context section,
-external coherence, new kernel owner, text/browser behavior, or scale work
-without a separate reviewed gate.
+Review frozen `COMPOSITIONAL-NATURAL-BINDER-1B` independently under D-074
+before behavior edits, then implement it only if approved. Natural
+transformation bodies must be recursively constructed from internal owners and
+fail closed without them. Keep the existing compact `:^nd` factorer unchanged
+until exact parity supports a later delegation decision. Preserve object,
+arrow, base-arrow, and higher action; add no curry, cast, total-context
+section, external coherence, new kernel owner, text/browser behavior, or scale
+work without a separate reviewed gate.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -324,6 +501,13 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-01 proposal frozen.**
+  The read-only audit finds no missing kernel semantics. D-074 proposes one
+  construction-only ordinary natural-component classifier and a reusable
+  `transforLambda` whose eta, identity, composition, prewhiskering, and
+  postwhiskering cases emit existing Core owners. Compact `:^nd`,
+  `Transf_catd`, and `Transfd_cat` remain unchanged pending an independent
+  review.
 - **2026-08-02 — compositional natural-binder direction selected.** The user
   confirms that the highest-yield usability gap is a reusable ordinary
   `lambda^n a` abstraction from which compact displayed-natural binding can be
