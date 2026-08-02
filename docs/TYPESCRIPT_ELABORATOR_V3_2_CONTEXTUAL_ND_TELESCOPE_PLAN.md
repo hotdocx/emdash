@@ -17,7 +17,10 @@ final-green at checkpoint `dabe9d9827462b76a493c1dd34cc658e137f22d5`;
 `CONTEXTUAL-ND-TELESCOPE-0AK` are read-only complete with zero behavior delta.
 The audit checkpoint is `7eacf68ded54424fdac36339833b0df50d978451`.
 The exact `CONTEXTUAL-ND-TELESCOPE-1AL` / D-DTTLF-USABILITY-067 proposal below
-is frozen pending separate review; no semantic change is authorized yet.
+is separately reviewed-approved from immutable proposal checkpoint
+`57c811fd9ab992abffa6b2388aed06dec3dae19d` under the user's standing
+unattended delegation, with immediate human supersession. Implementation is
+dependency-ready at exactly its thirteen numbered items.
 
 ## Objective
 
@@ -410,7 +413,7 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | final-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` | D-065/D-066 | Single-fibre compact text exactly matches eta, identity, recursive composition, and both whiskering orientations; historical base-component text remains unchanged. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero behavior delta | final-green 1AI | Graduates only the exact single-fibre direct/text envelope and identifies canonical multi-variable context abstraction—not parser or classifier-head behavior—as the first remaining usability gap. |
 | `CONTEXTUAL-ND-TELESCOPE-0AK` | read-only complete; zero behavior delta | completed 0AJ; generic displayed context fold; single-fibre point factorer | Select one shared normal form, coherent accessors applied to one terminal slot, and contextual endpoint reuse of the existing recursive object compiler. Independent siblings, genuine dependency, and finite mixed layers require no new owner or coherence algorithm. |
-| `CONTEXTUAL-ND-TELESCOPE-1AL` | D-DTTLF-USABILITY-067 frozen pending separate review; implementation withheld | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451` | Factor one reusable normal form, add one synthesis-capable direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
+| `CONTEXTUAL-ND-TELESCOPE-1AL` | D-DTTLF-USABILITY-067 separately reviewed-approved; implementation dependency-ready | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; immutable review | Factor one reusable normal form, add one synthesis-capable direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-0AK` Audit Contract
 
@@ -491,10 +494,12 @@ selected architecture is one shared canonical-context normal form,
 coherent accessors applied to one terminal contextual slot, recursive endpoint
 compilation through the existing displayed-context compiler, and the existing
 single-fibre factorer as sole coherence gate. Treat D-DTTLF-USABILITY-067 as
-frozen pending a separate immutable review. After review, implement only its
-thirteen numbered items. Preserve direct recursive binders and internal
-object/arrow/higher action; add no curry, total-context section, cast, external
-coherence, parser/browser behavior, or kernel owner.
+separately reviewed-approved from immutable proposal checkpoint
+`57c811fd9ab992abffa6b2388aed06dec3dae19d` under the standing unattended
+delegation, with immediate human supersession. Implement only its thirteen
+numbered items. Preserve direct recursive binders and internal
+object/arrow/higher action; add no curry, total-context section, cast,
+external coherence, parser/browser behavior, or kernel owner.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -502,6 +507,16 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-067 separately reviewed-approved.** The
+  immutable review of proposal checkpoint
+  `57c811fd9ab992abffa6b2388aed06dec3dae19d` confirms that the new method
+  connects the existing finite-generic accessor fold to the existing recursive
+  endpoint compiler and point factorer. It highlights scoped cleanup,
+  identity-versus-chain discrimination, prerequisite retention, exact recovered
+  endpoint checks, and the non-graduated performance stress as mandatory
+  implementation conditions. Under the standing unattended delegation, with
+  immediate human supersession, the thirteen-item implementation is
+  dependency-ready.
 - **2026-08-02 — D-DTTLF-USABILITY-067 frozen pending separate review.** The
   exact TypeScript-only gate extracts one shared canonical normal form, exposes
   its coherent accessors through one terminal slot, adds one synthesis-capable

@@ -7924,9 +7924,11 @@ one terminal contextual slot, reuses the existing recursive displayed-context
 compiler for composite endpoints, and leaves the unary point factorer as the
 sole `Transfd` gate. Its read-only checkpoint is
 `7eacf68ded54424fdac36339833b0df50d978451`. Treat the dedicated plan's exact
-`CONTEXTUAL-ND-TELESCOPE-1AL` / D-DTTLF-USABILITY-067 proposal as frozen
-pending separate immutable review; no behavior is authorized before that
-review. Add no kernel/runtime owner, Core/checker case, second parser,
+`CONTEXTUAL-ND-TELESCOPE-1AL` / D-DTTLF-USABILITY-067 proposal as separately
+reviewed-approved from immutable proposal checkpoint
+`57c811fd9ab992abffa6b2388aed06dec3dae19d` under the standing unattended
+delegation, with immediate human supersession. Implement only its thirteen
+numbered items. Add no kernel/runtime owner, Core/checker case, second parser,
 classifier decomposition heuristic, external coherence evidence, curry,
 browser/public preset, or scale behavior.
 
