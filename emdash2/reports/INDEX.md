@@ -155,10 +155,10 @@ proof-time companion of the existing Yoneda represented-family comparison.
 The closed split-idempotent localization inhabits the complete selected-glue
 package. Focused and maintained aggregates, exact warning comparison, strict
 audit, the fresh 1,975-check catalog, and synchronized 88-target health are
-green; full integration CI independently passes all 88 targets, and only the
-local checkpoint remains pending. Equality of whole functors,
-`OmegaEquivAlong Cat_cat`, covering-sieve descent, sheafhood, `Spec`, and
-schemes remain open gates.
+green; full integration CI independently passes all 88 targets, and the
+implementation is locally checkpointed at `4ed74b0`. Equality of whole
+functors, `OmegaEquivAlong Cat_cat`, covering-sieve descent, sheafhood, `Spec`,
+and schemes remain open gates.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

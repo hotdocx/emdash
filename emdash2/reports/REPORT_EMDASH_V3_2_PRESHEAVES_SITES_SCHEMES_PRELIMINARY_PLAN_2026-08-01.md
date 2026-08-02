@@ -117,8 +117,8 @@ typed-reflexivity positive, a runtime non-conversion negative, and an unchanged
 1,020-warning owning closure. The strict 1,975-check catalog across 87 mapped
 areas, zero-unreviewed-clause audit, and synchronized 88-target health are
 green. Full integration CI independently passes all 88 targets and the
-downstream repository gates. Only checkpoint evidence remains provisional
-until this active tranche completes. This materially closes the affine
+downstream repository gates, and the tranche is locally checkpointed at
+`4ed74b0`. This materially closes the affine
 componentwise-glue construction, but equality of whole composite functors and
 native `OmegaEquivAlong Cat_cat` remain the next PSSS-08c0F semantic gate.
 `PSSS-03b` remains the named `Omega`
@@ -3217,11 +3217,10 @@ cost; they do not weaken the remaining semantic gate.
 
 ##### PSSS-08c0I — Derived affine Cartier glue at the localization centre
 
-Status: implementation green through focused and maintained
+Status: checkpointed-green at `4ed74b0`. Focused and maintained
 source/reviewer/central checks, exact warning comparison, strict audit, the
-fresh 1,975-check catalog, and synchronized 88-target health on 2026-08-02;
-full integration CI is also green, and the authorized local checkpoint remains
-pending.
+fresh 1,975-check catalog, and synchronized 88-target health are green on
+2026-08-02; full integration CI is also green.
 
 The PSSS-08c0H algebraic consumer determines the first honest affine
 specialization. Put
@@ -3342,8 +3341,8 @@ bounded validation costs, not new runtime computation. Full integration CI
 independently passes all 88 Lambdapi targets in 546.923 summed check-seconds,
 followed by 39 Python tests, five document-registry tests, shell/source/header/
 reference checks, book evidence/typography/KaTeX/assembly checks, the strict
-kernel audit, and fresh strict catalog verification. The authorized local
-checkpoint remains pending at this synchronization.
+kernel audit, and fresh strict catalog verification. The implementation and
+synchronized authority prose are locally checkpointed at `4ed74b0`.
 
 ##### PSSS-08c1 — Ringed sites, selected sheaves, and localization descent
 
@@ -4388,7 +4387,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active; native whole-to-component implication and identity-localization tranche checkpointed at `4b93619`; zero-localization/empty-open tranche checkpointed at `7013915`; whole algebraic overlap checkpointed at `362922d`; PSSS-08c0H now supplies the checkpointed-green closed nondegenerate model; whole matching/descent connection remains open | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
 | PSSS-08c0G | Computing fixed-image localization at an idempotent | Rule-free implementation green through focused and maintained aggregates, exact warning comparison, strict audit, 1,959-check catalog, 82-target health, and full CI; locally checkpointed at `1211e06`; its requested product-ring consumer is the checkpointed downstream PSSS-08c0H tranche | PSSS-07a localization API and zero-localization algebra lemmas |
 | PSSS-08c0H | Product rings, closed `F2`, and split-idempotent affine restriction | Rule-free implementation green through focused and maintained checks, exact warning comparison, strict audit, fresh 1,968-check catalog, synchronized 86-target health, and full integration CI; locally checkpointed at `e68b6b9` | PSSS-08c0G, `CommRing_cat` structured-map extensionality, and PSSS-09a affine-arrow API |
-| PSSS-08c0I | Derived affine Cartier glue for the identity CommRing presheaf, including the closed split-idempotent consumer | Green through focused/aggregate/warning/audit/catalog, synchronized 88-target health, and full CI; checkpoint pending | PSSS-08c0E, PSSS-08c0H, internal Pi-section action, and the normalized Yoneda proof-time comparison |
+| PSSS-08c0I | Derived affine Cartier glue for the identity CommRing presheaf, including the closed split-idempotent consumer | Green through focused/aggregate/warning/audit/catalog, synchronized 88-target health, and full CI; locally checkpointed at `4ed74b0` | PSSS-08c0E, PSSS-08c0H, internal Pi-section action, and the normalized Yoneda proof-time comparison |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

@@ -2473,8 +2473,9 @@ the new source takes 46.527 seconds and its reviewer 25.946 seconds. Full
 integration CI independently passes all 88 Lambdapi targets in 546.923 summed
 check-seconds, followed by 39 Python tests, five document-registry tests,
 shell/source/header/reference checks, book evidence/typography/KaTeX/assembly
-checks, the strict kernel audit, and fresh strict catalog verification. Local
-checkpoint evidence remains pending until the active tranche closes.
+checks, the strict kernel audit, and fresh strict catalog verification. The
+implementation and synchronized authority prose are locally checkpointed at
+`4ed74b0`.
 
 This result establishes that the provisional componentwise glue interface is
 constructively meaningful and sufficient for the intended Cartier
