@@ -227,6 +227,23 @@ export interface CoreCategoricalIndexedHomClassifier {
 }
 
 /**
+ * One point component inside an ordinary natural-transformation bracket.
+ *
+ * The index is locally nameless construction metadata. `sourceFunctor` and
+ * `targetFunctor` are the recovered whole functors whose components meet at
+ * that index. The enclosing ordinary-natural abstraction must eliminate this
+ * classifier before explicit Core reaches the checker.
+ */
+export interface CoreCategoricalOrdinaryNaturalComponentClassifier {
+    readonly tag: 'ordinary-natural-component';
+    readonly sourceCategory: KernelExpression;
+    readonly targetCategory: KernelExpression;
+    readonly sourceFunctor: KernelExpression;
+    readonly targetFunctor: KernelExpression;
+    readonly index: number;
+}
+
+/**
  * One fibre object of a source or target family inside the canonical nested
  * `Hom_catd(Const_catd K (Catd_cat Z),Ebar,Dbar)` classifier.
  *
@@ -252,6 +269,7 @@ export type CoreCategoricalClassifier =
     | CoreCategoricalIndexedFunctorClassifier
     | CoreCategoricalIndexedTransforClassifier
     | CoreCategoricalIndexedHomClassifier
+    | CoreCategoricalOrdinaryNaturalComponentClassifier
     | CoreCategoricalNestedIndexedObjectClassifier;
 
 export interface CoreCategoricalDependentContinuationApplicationJudgment {
@@ -461,14 +479,17 @@ export type CoreCategoricalContextualIr =
         readonly inner: CoreCategoricalContextualIr;
         readonly type:
             | CoreCategoricalIndexedTransforClassifier
-            | CoreCategoricalIndexedHomClassifier;
+            | CoreCategoricalIndexedHomClassifier
+            | CoreCategoricalOrdinaryNaturalComponentClassifier;
         readonly provenance: Provenance;
     }
     | {
         readonly tag: 'typed-cell-identity';
         readonly endpoint: CoreCategoricalContextualIr;
         readonly chainLength: number;
-        readonly type: CoreCategoricalIndexedHomClassifier;
+        readonly type:
+            | CoreCategoricalIndexedHomClassifier
+            | CoreCategoricalOrdinaryNaturalComponentClassifier;
         readonly provenance: Provenance;
     }
     | {
@@ -545,6 +566,22 @@ export type CoreCategoricalAbstractionEvidence =
             readonly variation: 'functorial';
             readonly dependency: 'ordinary';
             readonly targetCategory: KernelExpression;
+        }
+    )
+    | (
+        CoreCategoricalAbstractionEvidenceBase & {
+            readonly rule:
+                | 'categorical.ordinary-transfor-eta'
+                | 'categorical.ordinary-transfor-identity'
+                | 'categorical.ordinary-transfor-composition'
+                | 'categorical.ordinary-transfor-whiskering';
+            readonly variation: 'natural';
+            readonly dependency: 'ordinary';
+            readonly targetCategory: KernelExpression;
+            readonly sourceFunctor: KernelExpression;
+            readonly targetFunctor: KernelExpression;
+            readonly bodyUsageCount: number;
+            readonly orientation?: 'pre' | 'post';
         }
     )
     | (
@@ -925,6 +962,19 @@ export interface CoreCategoricalScopedBuilderOptions {
      */
     readonly dependentSectionComposition?: boolean;
     /**
+     * Enable D-DTTLF-USABILITY-074's construction-only ordinary natural
+     * component IR and recursive `transforLambda` factorer.
+     */
+    readonly ordinaryNaturalAbstraction?: boolean;
+    /**
+     * Existing active-kernel classifier-exact whiskering owners imported by
+     * D-DTTLF-USABILITY-075. The frontend supplies no coherence payload.
+     */
+    readonly ordinaryNaturalActions?: {
+        readonly prewhiskeringCoreName: string;
+        readonly postwhiskeringCoreName: string;
+    };
+    /**
      * Enable only the FIBRED-BINDER-1 direct displayed-functor
      * identity/eta/composition contract.
      */
@@ -1166,6 +1216,15 @@ interface InternalCoreCategoricalIndexedHomClassifier {
     readonly fibreIndexOrdinal: number;
 }
 
+interface InternalCoreCategoricalOrdinaryNaturalComponentClassifier {
+    readonly tag: 'ordinary-natural-component';
+    readonly sourceCategory: KernelExpression;
+    readonly targetCategory: KernelExpression;
+    readonly sourceFunctor: KernelExpression;
+    readonly targetFunctor: KernelExpression;
+    readonly indexOrdinal: number;
+}
+
 interface InternalCoreCategoricalNestedIndexedObjectClassifier {
     readonly tag: 'nested-indexed-object';
     readonly outerBaseCategory: KernelExpression;
@@ -1185,6 +1244,11 @@ interface CoreCategoricalDirectDisplayedEndpointShape {
     readonly sourceFamily: KernelExpression;
     readonly targetFamily: KernelExpression;
     readonly chain: readonly InternalCoreCategoricalTerm[];
+}
+
+interface CoreCategoricalOrdinaryNaturalContext {
+    readonly ordinal: number;
+    readonly sourceCategory: KernelExpression;
 }
 
 interface CoreCategoricalDirectDisplayedEndpointCompilation
@@ -1207,6 +1271,7 @@ type InternalCoreCategoricalClassifier =
     | InternalCoreCategoricalIndexedFunctorClassifier
     | InternalCoreCategoricalIndexedTransforClassifier
     | InternalCoreCategoricalIndexedHomClassifier
+    | InternalCoreCategoricalOrdinaryNaturalComponentClassifier
     | InternalCoreCategoricalNestedIndexedObjectClassifier;
 
 interface CoreCategoricalMixedNestedFunctorShape {
@@ -1511,6 +1576,16 @@ const copyInternalClassifier = (
             targetFunctor: classifier.targetFunctor,
             baseIndexOrdinal: classifier.baseIndexOrdinal,
             fibreIndexOrdinal: classifier.fibreIndexOrdinal
+        };
+    }
+    if (classifier.tag === 'ordinary-natural-component') {
+        return {
+            tag: 'ordinary-natural-component',
+            sourceCategory: classifier.sourceCategory,
+            targetCategory: classifier.targetCategory,
+            sourceFunctor: classifier.sourceFunctor,
+            targetFunctor: classifier.targetFunctor,
+            indexOrdinal: classifier.indexOrdinal
         };
     }
     if (classifier.tag === 'nested-indexed-object') {
@@ -1871,6 +1946,8 @@ export class CoreCategoricalScopedBuilder {
         new Map<number, InternalCoreCategoricalTerm>();
     private readonly activeDisplayedEndpointContexts:
         CoreCategoricalActiveDisplayedEndpointContext[] = [];
+    private readonly activeOrdinaryNaturalContexts:
+        CoreCategoricalOrdinaryNaturalContext[] = [];
     private readonly options:
         Readonly<CoreCategoricalScopedBuilderOptions>;
 
@@ -2088,7 +2165,8 @@ export class CoreCategoricalScopedBuilder {
     ): KernelExpression {
         if (
             this.options.dependentSectionComposition !== true &&
-            this.options.displayedFunctorAbstraction !== true
+            this.options.displayedFunctorAbstraction !== true &&
+            this.options.ordinaryNaturalAbstraction !== true
         ) {
             this.fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
@@ -3062,6 +3140,25 @@ export class CoreCategoricalScopedBuilder {
         );
     }
 
+    private transforCategory(
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        sourceFunctor: KernelExpression,
+        targetFunctor: KernelExpression,
+        nodeProvenance: Provenance
+    ): KernelExpression {
+        return kernelApplication(
+            'transfor-category',
+            [
+                { value: sourceCategory },
+                { value: targetCategory },
+                { value: sourceFunctor },
+                { value: targetFunctor }
+            ],
+            nodeProvenance
+        );
+    }
+
     private productCategory(
         left: KernelExpression,
         right: KernelExpression,
@@ -3189,6 +3286,7 @@ export class CoreCategoricalScopedBuilder {
             type.tag === 'indexed-functor' ||
             type.tag === 'indexed-transfor' ||
             type.tag === 'indexed-hom' ||
+            type.tag === 'ordinary-natural-component' ||
             type.tag === 'nested-indexed-object'
         ) {
             return undefined;
@@ -3500,18 +3598,57 @@ export class CoreCategoricalScopedBuilder {
             'typed categorical cell identity',
             suppliedProvenance
         );
-        if (this.options.displayedTransforAbstraction !== true) {
+        if (
+            this.options.displayedTransforAbstraction !== true &&
+            this.options.ordinaryNaturalAbstraction !== true
+        ) {
             this.fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
                 nodeProvenance,
-                'Typed categorical cell identity requires the reviewed ' +
-                    'FIBRED-TRANSFD-1 capability'
+                'Typed categorical cell identity requires a reviewed ' +
+                    'ordinary-natural or displayed-transfor capability'
             );
         }
         const endpoint = this.requireTerm(
             endpointValue,
             nodeProvenance
         );
+        const ordinaryContext = this.activeOrdinaryNaturalContexts[0];
+        if (
+            this.options.ordinaryNaturalAbstraction === true &&
+            ordinaryContext !== undefined &&
+            endpoint.type.tag !== 'ordinary-natural-component' &&
+            endpoint.type.tag !== 'indexed-object' &&
+            endpoint.type.tag !== 'indexed-functor' &&
+            endpoint.type.tag !== 'indexed-transfor' &&
+            endpoint.type.tag !== 'indexed-hom' &&
+            endpoint.type.tag !== 'nested-indexed-object'
+        ) {
+            const compilation = this.compileOrdinaryNaturalObject(
+                endpoint,
+                ordinaryContext,
+                nodeProvenance
+            );
+            return this.makeTerm(
+                {
+                    tag: 'typed-cell-identity',
+                    endpoint,
+                    chainLength: 0,
+                    provenance: nodeProvenance
+                },
+                {
+                    tag: 'ordinary-natural-component',
+                    sourceCategory: ordinaryContext.sourceCategory,
+                    targetCategory: compilation.targetCategory,
+                    sourceFunctor: compilation.term,
+                    targetFunctor: compilation.term,
+                    indexOrdinal: ordinaryContext.ordinal
+                },
+                endpoint.usage,
+                undefined,
+                endpoint.abstractions
+            );
+        }
         if (
             endpoint.type.tag === 'displayed-functor' &&
             endpoint.closed !== undefined &&
@@ -3602,12 +3739,15 @@ export class CoreCategoricalScopedBuilder {
             'typed categorical cell composition',
             suppliedProvenance
         );
-        if (this.options.displayedTransforAbstraction !== true) {
+        if (
+            this.options.displayedTransforAbstraction !== true &&
+            this.options.ordinaryNaturalAbstraction !== true
+        ) {
             this.fail(
                 'UNAVAILABLE_DISPLAYED_ACTION',
                 nodeProvenance,
-                'Typed indexed cell composition requires the reviewed ' +
-                    'DISPLAYED-ND-1A capability'
+                'Typed cell composition requires a reviewed ordinary-natural ' +
+                    'or displayed-transfor capability'
             );
         }
         const outer = this.requireTerm(
@@ -3620,6 +3760,40 @@ export class CoreCategoricalScopedBuilder {
         );
         let resultType: InternalCoreCategoricalClassifier;
         if (
+            outer.type.tag === 'ordinary-natural-component' &&
+            inner.type.tag === 'ordinary-natural-component'
+        ) {
+            if (
+                outer.type.indexOrdinal !== inner.type.indexOrdinal ||
+                !kernelExpressionEquals(
+                    outer.type.sourceCategory,
+                    inner.type.sourceCategory
+                ) ||
+                !kernelExpressionEquals(
+                    outer.type.targetCategory,
+                    inner.type.targetCategory
+                ) ||
+                !kernelExpressionEquals(
+                    inner.type.targetFunctor,
+                    outer.type.sourceFunctor
+                )
+            ) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Typed ordinary natural composition requires one index ' +
+                        'and adjacent whole-functor endpoints'
+                );
+            }
+            resultType = {
+                tag: 'ordinary-natural-component',
+                sourceCategory: inner.type.sourceCategory,
+                targetCategory: inner.type.targetCategory,
+                sourceFunctor: inner.type.sourceFunctor,
+                targetFunctor: outer.type.targetFunctor,
+                indexOrdinal: inner.type.indexOrdinal
+            };
+        } else if (
             outer.type.tag === 'indexed-transfor' &&
             inner.type.tag === 'indexed-transfor'
         ) {
@@ -3744,6 +3918,7 @@ export class CoreCategoricalScopedBuilder {
                 endpoint.type.tag === 'indexed-functor' ||
                 endpoint.type.tag === 'indexed-transfor' ||
                 endpoint.type.tag === 'indexed-hom' ||
+                endpoint.type.tag === 'ordinary-natural-component' ||
                 endpoint.type.tag === 'nested-indexed-object'
             ) {
                 this.fail(
@@ -4823,6 +4998,103 @@ export class CoreCategoricalScopedBuilder {
         );
     }
 
+    /**
+     * Recover the whole ordinary functor represented by an object expression
+     * over one active natural index. This is the existing ordinary contextual
+     * bracket compiler, reused as an internal subroutine.
+     */
+    private compileOrdinaryNaturalObject(
+        term: InternalCoreCategoricalTerm,
+        context: CoreCategoricalOrdinaryNaturalContext,
+        nodeProvenance: Provenance
+    ): CoreCategoricalContextualCompilation {
+        if (removeUsage(term.usage, context.ordinal).length !== 0) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Ordinary natural component captures an unsupported outer ' +
+                    'categorical context'
+            );
+        }
+        const targetCategory = this.categoricalObjectCategory(
+            term.type,
+            nodeProvenance,
+            'ordinary natural component object expression'
+        );
+        if (targetCategory === undefined) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Ordinary natural component argument is not an ordinary ' +
+                'category object'
+            );
+        }
+        if (
+            term.node.tag === 'typed-application' &&
+            term.node.judgment.target === 'functor-object' &&
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] !== true
+        ) {
+            const argument = term.node.argument as
+                InternalCoreCategoricalTerm;
+            const subject = term.node.subject;
+            if (
+                argument.node.tag === 'slot-token' &&
+                argument.node.ordinal === context.ordinal &&
+                subject.type.tag === 'functor' &&
+                subject.closed !== undefined &&
+                subject.usage.length === 0 &&
+                kernelExpressionEquals(
+                    subject.type.sourceCategory,
+                    context.sourceCategory
+                ) &&
+                kernelExpressionEquals(
+                    subject.type.targetCategory,
+                    targetCategory
+                )
+            ) {
+                return {
+                    term: subject.closed.term,
+                    targetCategory,
+                    structuralPrerequisites: Object.freeze([])
+                };
+            }
+        }
+        const wiring = new Map<
+            number,
+            CoreCategoricalContextualCompilation
+        >([[
+                context.ordinal,
+                this.identityFunctor(
+                    context.sourceCategory,
+                    nodeProvenance
+                )
+            ]]);
+        const compilation = this.directDiagonal(
+            term,
+            context.ordinal,
+            context.sourceCategory,
+            targetCategory,
+            nodeProvenance
+        ) ?? this.compileContextual(
+            term,
+            context.sourceCategory,
+            wiring,
+            nodeProvenance
+        );
+        if (!kernelExpressionEquals(
+            compilation.targetCategory,
+            targetCategory
+        )) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Ordinary natural object expression factors to the wrong ' +
+                    'target category'
+            );
+        }
+        return compilation;
+    }
+
     private applyOrdinaryTransfor(
         subject: InternalCoreCategoricalTerm,
         argumentValue:
@@ -4886,6 +5158,94 @@ export class CoreCategoricalScopedBuilder {
                 'source category'
             );
         }
+        if (argument.closed === undefined) {
+            const context = this.activeOrdinaryNaturalContexts[0];
+            if (
+                this.options.ordinaryNaturalAbstraction !== true ||
+                context === undefined ||
+                subject.closed === undefined ||
+                removeUsage(argument.usage, context.ordinal).length !== 0
+            ) {
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Open ordinary transfor components require the active ' +
+                        'reviewed ordinary-natural abstraction'
+                );
+            }
+            const argumentCompilation =
+                this.compileOrdinaryNaturalObject(
+                    argument,
+                    context,
+                    nodeProvenance
+                );
+            if (!kernelExpressionEquals(
+                argumentCompilation.targetCategory,
+                subject.type.sourceCategory
+            )) {
+                this.fail(
+                    'CLASSIFIER_ARGUMENT_MISMATCH',
+                    nodeProvenance,
+                    'Open ordinary transfor component index factors to the ' +
+                        'wrong source category'
+                );
+            }
+            const directIndex =
+                argument.node.tag === 'slot-token' &&
+                argument.node.ordinal === context.ordinal &&
+                kernelExpressionEquals(
+                    context.sourceCategory,
+                    subject.type.sourceCategory
+                );
+            const sourceFunctor = directIndex
+                ? subject.type.sourceFunctor
+                : this.composeFunctors(
+                    context.sourceCategory,
+                    subject.type.sourceCategory,
+                    subject.type.targetCategory,
+                    subject.type.sourceFunctor,
+                    argumentCompilation.term,
+                    nodeProvenance
+                );
+            const targetFunctor = directIndex
+                ? subject.type.targetFunctor
+                : this.composeFunctors(
+                    context.sourceCategory,
+                    subject.type.sourceCategory,
+                    subject.type.targetCategory,
+                    subject.type.targetFunctor,
+                    argumentCompilation.term,
+                    nodeProvenance
+                );
+            const judgment = selectCoreCategoricalApplication({
+                layer: 'categorical',
+                subjectClassifier: 'ordinary-transfor',
+                subjectForm: 'term',
+                argumentDimension: 'object',
+                expectedShape: 'point-component',
+                dependency: 'ordinary'
+            });
+            return this.makeTerm(
+                {
+                    tag: 'typed-application',
+                    judgment,
+                    subject,
+                    argument,
+                    provenance: nodeProvenance
+                },
+                {
+                    tag: 'ordinary-natural-component',
+                    sourceCategory: context.sourceCategory,
+                    targetCategory: subject.type.targetCategory,
+                    sourceFunctor,
+                    targetFunctor,
+                    indexOrdinal: context.ordinal
+                },
+                mergeUsage(subject.usage, argument.usage),
+                undefined,
+                [...subject.abstractions, ...argument.abstractions]
+            );
+        }
         if (
             subject.closed === undefined ||
             argument.closed === undefined
@@ -4921,6 +5281,95 @@ export class CoreCategoricalScopedBuilder {
             closed.type,
             mergeUsage(subject.usage, argument.usage),
             closed,
+            [...subject.abstractions, ...argument.abstractions]
+        );
+    }
+
+    /** Fixed postwhiskering of one open natural component. */
+    private applyFunctorToOrdinaryNaturalComponent(
+        subject: InternalCoreCategoricalTerm,
+        argument: InternalCoreCategoricalTerm,
+        expectedShape: CoreCategoricalExpectedShape | undefined,
+        nodeProvenance: Provenance
+    ): CoreCategoricalTerm {
+        if (
+            subject.type.tag !== 'functor' ||
+            argument.type.tag !== 'ordinary-natural-component'
+        ) {
+            throw new Error(
+                'Internal ordinary natural postwhiskering classifier was lost'
+            );
+        }
+        const context = this.activeOrdinaryNaturalContexts[0];
+        if (
+            this.options.ordinaryNaturalAbstraction !== true ||
+            context === undefined ||
+            context.ordinal !== argument.type.indexOrdinal ||
+            subject.closed === undefined ||
+            removeUsage(subject.usage, context.ordinal).length !== 0 ||
+            !kernelExpressionEquals(
+                subject.type.sourceCategory,
+                argument.type.targetCategory
+            )
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                'Ordinary natural postwhiskering requires one closed functor ' +
+                    'with the component target as its source'
+            );
+        }
+        if (
+            expectedShape !== undefined &&
+            expectedShape !== 'arrow-value'
+        ) {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Ordinary natural postwhiskering cannot produce expected ` +
+                    `shape '${expectedShape}'`
+            );
+        }
+        const judgment = selectCoreCategoricalApplication({
+            layer: 'categorical',
+            subjectClassifier: 'ordinary-functor',
+            subjectForm: 'term',
+            argumentDimension: 'arrow',
+            expectedShape: 'arrow-value',
+            dependency: 'ordinary'
+        });
+        return this.makeTerm(
+            {
+                tag: 'typed-application',
+                judgment,
+                subject,
+                argument,
+                provenance: nodeProvenance
+            },
+            {
+                tag: 'ordinary-natural-component',
+                sourceCategory: argument.type.sourceCategory,
+                targetCategory: subject.type.targetCategory,
+                sourceFunctor: this.composeFunctors(
+                    argument.type.sourceCategory,
+                    subject.type.sourceCategory,
+                    subject.type.targetCategory,
+                    subject.closed.term,
+                    argument.type.sourceFunctor,
+                    nodeProvenance
+                ),
+                targetFunctor: this.composeFunctors(
+                    argument.type.sourceCategory,
+                    subject.type.sourceCategory,
+                    subject.type.targetCategory,
+                    subject.closed.term,
+                    argument.type.targetFunctor,
+                    nodeProvenance
+                ),
+                indexOrdinal: argument.type.indexOrdinal
+            },
+            mergeUsage(subject.usage, argument.usage),
+            undefined,
             [...subject.abstractions, ...argument.abstractions]
         );
     }
@@ -5633,6 +6082,27 @@ export class CoreCategoricalScopedBuilder {
             nodeProvenance
         );
         if (
+            subject.type.tag === 'functor' &&
+            typeof argumentValue === 'object' &&
+            argumentValue !== null &&
+            (argumentValue as InternalCoreCategoricalHomBoundary)[
+                CORE_CATEGORICAL_BOUNDARY
+            ] !== true
+        ) {
+            const argument = this.requireTerm(
+                argumentValue as CoreCategoricalTerm,
+                nodeProvenance
+            );
+            if (argument.type.tag === 'ordinary-natural-component') {
+                return this.applyFunctorToOrdinaryNaturalComponent(
+                    subject,
+                    argument,
+                    expectedShape,
+                    nodeProvenance
+                );
+            }
+        }
+        if (
             subject.type.tag === 'displayed-transfor' &&
             typeof argumentValue === 'object' &&
             argumentValue !== null &&
@@ -6133,6 +6603,7 @@ export class CoreCategoricalScopedBuilder {
             classifier.tag !== 'indexed-functor' &&
             classifier.tag !== 'indexed-transfor' &&
             classifier.tag !== 'indexed-hom' &&
+            classifier.tag !== 'ordinary-natural-component' &&
             classifier.tag !== 'nested-indexed-object'
         ) {
             return copyCoreType(classifier);
@@ -6161,6 +6632,24 @@ export class CoreCategoricalScopedBuilder {
                 targetFunctor: classifier.targetFunctor,
                 baseIndex,
                 fibreIndex
+            };
+        }
+        if (classifier.tag === 'ordinary-natural-component') {
+            const index = scope.indexOf(classifier.indexOrdinal);
+            if (index < 0) {
+                this.fail(
+                    'ESCAPED_SLOT',
+                    nodeProvenance,
+                    'Ordinary natural component refers to an escaped index'
+                );
+            }
+            return {
+                tag: 'ordinary-natural-component',
+                sourceCategory: classifier.sourceCategory,
+                targetCategory: classifier.targetCategory,
+                sourceFunctor: classifier.sourceFunctor,
+                targetFunctor: classifier.targetFunctor,
+                index
             };
         }
         if (classifier.tag === 'nested-indexed-object') {
@@ -6337,7 +6826,8 @@ export class CoreCategoricalScopedBuilder {
                 );
                 if (
                     type.tag !== 'indexed-transfor' &&
-                    type.tag !== 'indexed-hom'
+                    type.tag !== 'indexed-hom' &&
+                    type.tag !== 'ordinary-natural-component'
                 ) {
                     throw new Error(
                         'Typed cell composition lost its indexed cell ' +
@@ -6364,7 +6854,10 @@ export class CoreCategoricalScopedBuilder {
                     scope,
                     term.node.provenance
                 );
-                if (type.tag !== 'indexed-hom') {
+                if (
+                    type.tag !== 'indexed-hom' &&
+                    type.tag !== 'ordinary-natural-component'
+                ) {
                     throw new Error(
                         'Typed cell identity lost its indexed-Hom classifier'
                     );
@@ -14217,6 +14710,470 @@ export class CoreCategoricalScopedBuilder {
         }
     }
 
+    /** Reify one recovered ordinary transformation as rich checked Core. */
+    private recoveredOrdinaryTransfor(
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        sourceFunctor: KernelExpression,
+        targetFunctor: KernelExpression,
+        expression: KernelExpression,
+        recovered: ElaboratedSurfaceTerm['recovered'],
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalTerm {
+        const resultType: CoreType = {
+            tag: 'transfor',
+            sourceCategory,
+            targetCategory,
+            sourceFunctor,
+            targetFunctor
+        };
+        const closed = deepFreeze({
+            term: expression,
+            type: copyCoreType(resultType),
+            sourceSpan: this.spanFor(nodeProvenance),
+            recovered: [...recovered]
+        });
+        return this.makeTerm(
+            {
+                tag: 'explicit-core-term',
+                term: expression,
+                provenance: nodeProvenance
+            },
+            resultType,
+            [],
+            closed
+        );
+    }
+
+    /** Generic identity at one whole ordinary functor. */
+    private recoveredOrdinaryTransforIdentity(
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        functor: KernelExpression,
+        recovered: ElaboratedSurfaceTerm['recovered'],
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalTerm {
+        const category = this.functorCategory(
+            sourceCategory,
+            targetCategory,
+            nodeProvenance
+        );
+        const expression = kernelCall(
+            kernelFree(
+                coreCategoricalFibredTransfdCoreName('identity-arrow'),
+                nodeProvenance
+            ),
+            [
+                { plicity: 'explicit', value: category },
+                { plicity: 'explicit', value: functor }
+            ],
+            nodeProvenance
+        );
+        return this.recoveredOrdinaryTransfor(
+            sourceCategory,
+            targetCategory,
+            functor,
+            functor,
+            expression,
+            recovered,
+            nodeProvenance
+        );
+    }
+
+    /** Generic vertical composition of two recovered ordinary transfors. */
+    private composeRecoveredOrdinaryTransfors(
+        outer: InternalCoreCategoricalTerm,
+        inner: InternalCoreCategoricalTerm,
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalTerm | undefined {
+        if (
+            outer.type.tag !== 'transfor' ||
+            inner.type.tag !== 'transfor' ||
+            outer.closed === undefined ||
+            inner.closed === undefined ||
+            !kernelExpressionEquals(
+                outer.type.sourceCategory,
+                inner.type.sourceCategory
+            ) ||
+            !kernelExpressionEquals(
+                outer.type.targetCategory,
+                inner.type.targetCategory
+            ) ||
+            !kernelExpressionEquals(
+                inner.type.targetFunctor,
+                outer.type.sourceFunctor
+            )
+        ) {
+            return undefined;
+        }
+        const expression = this.dependentCompositionCall(
+            [
+                {
+                    plicity: 'implicit',
+                    value: this.functorCategory(
+                        inner.type.sourceCategory,
+                        inner.type.targetCategory,
+                        nodeProvenance
+                    )
+                },
+                {
+                    plicity: 'implicit',
+                    value: inner.type.sourceFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: inner.type.targetFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: outer.type.targetFunctor
+                },
+                { plicity: 'explicit', value: outer.closed.term },
+                { plicity: 'explicit', value: inner.closed.term }
+            ],
+            nodeProvenance
+        );
+        return this.recoveredOrdinaryTransfor(
+            inner.type.sourceCategory,
+            inner.type.targetCategory,
+            inner.type.sourceFunctor,
+            outer.type.targetFunctor,
+            expression,
+            [
+                ...outer.closed.recovered,
+                ...inner.closed.recovered
+            ],
+            nodeProvenance
+        );
+    }
+
+    /** Fixed prewhiskering through the existing precomposition functor. */
+    private prewhiskerRecoveredOrdinaryTransfor(
+        transformation: InternalCoreCategoricalTerm,
+        argumentFunctor: CoreCategoricalContextualCompilation,
+        sourceCategory: KernelExpression,
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalTerm | undefined {
+        if (
+            transformation.type.tag !== 'transfor' ||
+            transformation.closed === undefined ||
+            !kernelExpressionEquals(
+                argumentFunctor.targetCategory,
+                transformation.type.sourceCategory
+            )
+        ) {
+            return undefined;
+        }
+        const actions = this.options.ordinaryNaturalActions;
+        if (actions === undefined) return undefined;
+        const sourceFunctor = this.composeFunctors(
+            sourceCategory,
+            transformation.type.sourceCategory,
+            transformation.type.targetCategory,
+            transformation.type.sourceFunctor,
+            argumentFunctor.term,
+            nodeProvenance
+        );
+        const targetFunctor = this.composeFunctors(
+            sourceCategory,
+            transformation.type.sourceCategory,
+            transformation.type.targetCategory,
+            transformation.type.targetFunctor,
+            argumentFunctor.term,
+            nodeProvenance
+        );
+        const sourceTransfors = this.transforCategory(
+            transformation.type.sourceCategory,
+            transformation.type.targetCategory,
+            transformation.type.sourceFunctor,
+            transformation.type.targetFunctor,
+            nodeProvenance
+        );
+        const targetTransfors = this.transforCategory(
+            sourceCategory,
+            transformation.type.targetCategory,
+            sourceFunctor,
+            targetFunctor,
+            nodeProvenance
+        );
+        const action = kernelCall(
+            kernelFree(
+                actions.prewhiskeringCoreName,
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.type.sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.type.targetCategory
+                },
+                { plicity: 'explicit', value: argumentFunctor.term },
+                {
+                    plicity: 'implicit',
+                    value: transformation.type.sourceFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.type.targetFunctor
+                }
+            ],
+            nodeProvenance
+        );
+        const expression = this.functorObject(
+            sourceTransfors,
+            targetTransfors,
+            action,
+            transformation.closed.term,
+            nodeProvenance
+        );
+        return this.recoveredOrdinaryTransfor(
+            sourceCategory,
+            transformation.type.targetCategory,
+            sourceFunctor,
+            targetFunctor,
+            expression,
+            transformation.closed.recovered,
+            nodeProvenance
+        );
+    }
+
+    /** Fixed postwhiskering through the existing Cat postcomposition owner. */
+    private postwhiskerRecoveredOrdinaryTransfor(
+        transformation: InternalCoreCategoricalTerm,
+        mapper: InternalCoreCategoricalTerm,
+        nodeProvenance: Provenance
+    ): InternalCoreCategoricalTerm | undefined {
+        if (
+            transformation.type.tag !== 'transfor' ||
+            mapper.type.tag !== 'functor' ||
+            transformation.closed === undefined ||
+            mapper.closed === undefined ||
+            !kernelExpressionEquals(
+                transformation.type.targetCategory,
+                mapper.type.sourceCategory
+            )
+        ) {
+            return undefined;
+        }
+        const actions = this.options.ordinaryNaturalActions;
+        if (actions === undefined) return undefined;
+        const sourceFunctor = this.composeFunctors(
+            transformation.type.sourceCategory,
+            transformation.type.targetCategory,
+            mapper.type.targetCategory,
+            mapper.closed.term,
+            transformation.type.sourceFunctor,
+            nodeProvenance
+        );
+        const targetFunctor = this.composeFunctors(
+            transformation.type.sourceCategory,
+            transformation.type.targetCategory,
+            mapper.type.targetCategory,
+            mapper.closed.term,
+            transformation.type.targetFunctor,
+            nodeProvenance
+        );
+        const sourceTransfors = this.transforCategory(
+            transformation.type.sourceCategory,
+            transformation.type.targetCategory,
+            transformation.type.sourceFunctor,
+            transformation.type.targetFunctor,
+            nodeProvenance
+        );
+        const targetTransfors = this.transforCategory(
+            transformation.type.sourceCategory,
+            mapper.type.targetCategory,
+            sourceFunctor,
+            targetFunctor,
+            nodeProvenance
+        );
+        const action = kernelCall(
+            kernelFree(
+                actions.postwhiskeringCoreName,
+                nodeProvenance
+            ),
+            [
+                {
+                    plicity: 'implicit',
+                    value: transformation.type.sourceCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.type.targetCategory
+                },
+                {
+                    plicity: 'implicit',
+                    value: mapper.type.targetCategory
+                },
+                { plicity: 'explicit', value: mapper.closed.term },
+                {
+                    plicity: 'implicit',
+                    value: transformation.type.sourceFunctor
+                },
+                {
+                    plicity: 'implicit',
+                    value: transformation.type.targetFunctor
+                }
+            ],
+            nodeProvenance
+        );
+        const expression = this.functorObject(
+            sourceTransfors,
+            targetTransfors,
+            action,
+            transformation.closed.term,
+            nodeProvenance
+        );
+        return this.recoveredOrdinaryTransfor(
+            transformation.type.sourceCategory,
+            mapper.type.targetCategory,
+            sourceFunctor,
+            targetFunctor,
+            expression,
+            [
+                ...transformation.closed.recovered,
+                ...mapper.closed.recovered
+            ],
+            nodeProvenance
+        );
+    }
+
+    /**
+     * Recursively factor one open ordinary component into a coherent whole
+     * transformation. No branch consumes external naturality evidence.
+     */
+    private factorOrdinaryNaturalComponent(
+        term: InternalCoreCategoricalTerm,
+        context: CoreCategoricalOrdinaryNaturalContext
+    ): InternalCoreCategoricalTerm | undefined {
+        if (
+            term.type.tag !== 'ordinary-natural-component' ||
+            term.type.indexOrdinal !== context.ordinal ||
+            !kernelExpressionEquals(
+                term.type.sourceCategory,
+                context.sourceCategory
+            )
+        ) {
+            return undefined;
+        }
+        const nodeProvenance = term.node.provenance;
+        let result: InternalCoreCategoricalTerm | undefined;
+        if (
+            term.node.tag === 'typed-application' &&
+            term.node.judgment.target === 'transfor-component-capped' &&
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] !== true
+        ) {
+            const subject = term.node.subject;
+            const argument = term.node.argument as
+                InternalCoreCategoricalTerm;
+            if (
+                subject.type.tag !== 'transfor' ||
+                subject.closed === undefined ||
+                removeUsage(subject.usage, context.ordinal).length !== 0
+            ) {
+                return undefined;
+            }
+            if (
+                argument.node.tag === 'slot-token' &&
+                argument.node.ordinal === context.ordinal &&
+                kernelExpressionEquals(
+                    subject.type.sourceCategory,
+                    context.sourceCategory
+                )
+            ) {
+                result = subject;
+            } else {
+                result = this.prewhiskerRecoveredOrdinaryTransfor(
+                    subject,
+                    this.compileOrdinaryNaturalObject(
+                        argument,
+                        context,
+                        nodeProvenance
+                    ),
+                    context.sourceCategory,
+                    nodeProvenance
+                );
+            }
+        } else if (
+            term.node.tag === 'typed-application' &&
+            term.node.judgment.target === 'functor-hom-capped' &&
+            term.node.argument[CORE_CATEGORICAL_BOUNDARY] !== true
+        ) {
+            const argument = term.node.argument as
+                InternalCoreCategoricalTerm;
+            const child = this.factorOrdinaryNaturalComponent(
+                argument,
+                context
+            );
+            result = child === undefined
+                ? undefined
+                : this.postwhiskerRecoveredOrdinaryTransfor(
+                    child,
+                    term.node.subject,
+                    nodeProvenance
+                );
+        } else if (term.node.tag === 'typed-cell-identity') {
+            const endpoint = this.compileOrdinaryNaturalObject(
+                term.node.endpoint,
+                context,
+                nodeProvenance
+            );
+            result = this.recoveredOrdinaryTransforIdentity(
+                context.sourceCategory,
+                endpoint.targetCategory,
+                endpoint.term,
+                term.node.endpoint.closed?.recovered ?? [],
+                nodeProvenance
+            );
+        } else if (term.node.tag === 'typed-cell-composition') {
+            const outer = this.factorOrdinaryNaturalComponent(
+                term.node.outer,
+                context
+            );
+            const inner = this.factorOrdinaryNaturalComponent(
+                term.node.inner,
+                context
+            );
+            result = outer === undefined || inner === undefined
+                ? undefined
+                : this.composeRecoveredOrdinaryTransfors(
+                    outer,
+                    inner,
+                    nodeProvenance
+                );
+        }
+        if (
+            result?.type.tag !== 'transfor' ||
+            result.closed === undefined ||
+            !kernelExpressionEquals(
+                result.type.sourceCategory,
+                term.type.sourceCategory
+            ) ||
+            !kernelExpressionEquals(
+                result.type.targetCategory,
+                term.type.targetCategory
+            ) ||
+            !kernelExpressionEquals(
+                result.type.sourceFunctor,
+                term.type.sourceFunctor
+            ) ||
+            !kernelExpressionEquals(
+                result.type.targetFunctor,
+                term.type.targetFunctor
+            )
+        ) {
+            return undefined;
+        }
+        return result;
+    }
+
     /** Reify one factorable endpoint as its recovered whole functor. */
     private recoveredDisplayedFunctor(
         baseCategory: KernelExpression,
@@ -15827,6 +16784,242 @@ export class CoreCategoricalScopedBuilder {
     }
 
     /**
+     * Reusable ordinary natural-transformation bracket.
+     *
+     * The callback sees one object token varying naturally in the common
+     * source of `sourceFunctor` and `targetFunctor`. Its body must be a
+     * recursively factorable component; no external naturality evidence is
+     * accepted or retained.
+     */
+    transforLambda(
+        name: string,
+        sourceCategory: KernelExpression,
+        targetCategory: KernelExpression,
+        sourceFunctor: KernelExpression,
+        targetFunctor: KernelExpression,
+        bodyBuilder: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalBinderOptions = {}
+    ): CoreCategoricalTerm {
+        assertSafeIdentifier(name, 'Ordinary natural binder hint');
+        kernelAssertScoped(sourceCategory);
+        kernelAssertScoped(targetCategory);
+        kernelAssertScoped(sourceFunctor);
+        kernelAssertScoped(targetFunctor);
+        const nodeProvenance = this.nodeProvenance(
+            `ordinary natural abstraction ${name}`,
+            options.provenance
+        );
+        if (this.options.ordinaryNaturalAbstraction !== true) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'Ordinary natural abstraction requires the reviewed ' +
+                    'COMPOSITIONAL-NATURAL-BINDER-1B capability'
+            );
+        }
+        const plicity = options.plicity ?? 'explicit';
+        const variation = options.variation ?? 'natural';
+        const polarity = options.polarity ?? 'covariant';
+        const cellLevel = options.cellLevel ?? 'object';
+        const dependency = options.dependency ?? 'ordinary';
+        if (variation !== 'natural' || dependency !== 'ordinary') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Ordinary natural binder '${name}' requires natural ` +
+                    'variation and ordinary dependency'
+            );
+        }
+        if (polarity !== 'covariant') {
+            this.fail(
+                'POLARITY_MISMATCH',
+                nodeProvenance,
+                `Ordinary natural binder '${name}' is covariant; express ` +
+                    'contravariance through an opposite source classifier'
+            );
+        }
+        if (cellLevel !== 'object') {
+            this.fail(
+                'CLASSIFIER_ARGUMENT_MISMATCH',
+                nodeProvenance,
+                `Ordinary natural binder '${name}' abstracts one varying ` +
+                    'object index'
+            );
+        }
+        if (this.activeTokenOrdinals.length !== 0) {
+            this.fail(
+                'UNAVAILABLE_DISPLAYED_ACTION',
+                nodeProvenance,
+                'The first ordinary natural bracket does not capture an ' +
+                    'outer contextual slot'
+            );
+        }
+
+        const token = this.slot(name, sourceCategory, nodeProvenance);
+        const ordinal = token.node.tag === 'slot-token'
+            ? token.node.ordinal
+            : -1;
+        const context: CoreCategoricalOrdinaryNaturalContext = {
+            ordinal,
+            sourceCategory
+        };
+        this.activeTokenOrdinals.unshift(ordinal);
+        this.activeOrdinaryNaturalContexts.unshift(context);
+        try {
+            // Evaluate exactly once; no callback is retained.
+            const body = this.requireTerm(
+                bodyBuilder(token as CoreCategoricalSlotToken),
+                nodeProvenance
+            );
+            if (
+                body.type.tag !== 'ordinary-natural-component' ||
+                body.type.indexOrdinal !== ordinal ||
+                !kernelExpressionEquals(
+                    body.type.sourceCategory,
+                    sourceCategory
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.targetCategory,
+                    targetCategory
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.sourceFunctor,
+                    sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    body.type.targetFunctor,
+                    targetFunctor
+                )
+            ) {
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Ordinary natural abstraction body must be the requested ' +
+                        'recursively factorable point component'
+                );
+            }
+            const factored = this.factorOrdinaryNaturalComponent(
+                body,
+                context
+            );
+            if (
+                factored === undefined ||
+                factored.type.tag !== 'transfor' ||
+                factored.closed === undefined ||
+                factored.usage.length !== 0 ||
+                !kernelExpressionEquals(
+                    factored.type.sourceCategory,
+                    sourceCategory
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetCategory,
+                    targetCategory
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.sourceFunctor,
+                    sourceFunctor
+                ) ||
+                !kernelExpressionEquals(
+                    factored.type.targetFunctor,
+                    targetFunctor
+                )
+            ) {
+                this.fail(
+                    'MISSING_STRUCTURAL_OWNER',
+                    nodeProvenance,
+                    'Ordinary natural abstraction accepts eta, identity, ' +
+                        'typed recursive composition, and reviewed fixed ' +
+                        'pre/postwhiskering only'
+                );
+            }
+            const directEta =
+                body.node.tag === 'typed-application' &&
+                body.node.judgment.target ===
+                    'transfor-component-capped' &&
+                body.node.argument[CORE_CATEGORICAL_BOUNDARY] !== true &&
+                (body.node.argument as InternalCoreCategoricalTerm).node.tag ===
+                    'slot-token';
+            const orientation: 'pre' | 'post' | undefined =
+                body.node.tag === 'typed-application' &&
+                body.node.judgment.target === 'functor-hom-capped'
+                    ? 'post'
+                    : body.node.tag === 'typed-application' &&
+                        body.node.judgment.target ===
+                            'transfor-component-capped' &&
+                        !directEta
+                        ? 'pre'
+                        : undefined;
+            const rule:
+                | 'categorical.ordinary-transfor-eta'
+                | 'categorical.ordinary-transfor-identity'
+                | 'categorical.ordinary-transfor-composition'
+                | 'categorical.ordinary-transfor-whiskering' =
+                body.node.tag === 'typed-cell-identity'
+                    ? 'categorical.ordinary-transfor-identity'
+                    : body.node.tag === 'typed-cell-composition'
+                        ? 'categorical.ordinary-transfor-composition'
+                        : orientation === undefined
+                            ? 'categorical.ordinary-transfor-eta'
+                            : 'categorical.ordinary-transfor-whiskering';
+            const evidence = deepFreeze({
+                rule,
+                name,
+                plicity,
+                variation: 'natural' as const,
+                polarity: 'covariant' as const,
+                cellLevel: 'object' as const,
+                dependency: 'ordinary' as const,
+                sourceCategory,
+                targetCategory,
+                sourceFunctor,
+                targetFunctor,
+                bodyUsageCount: usageCount(body.usage, ordinal),
+                ...(orientation === undefined ? {} : { orientation }),
+                body: this.normalizeNode(body, [ordinal]),
+                result: this.normalizeNode(factored, []),
+                structuralPrerequisites: Object.freeze(
+                    orientation === undefined
+                        ? []
+                        : [
+                            'identity-functor' as const,
+                            'functor-composition' as const
+                        ]
+                ),
+                dependentPrerequisites: Object.freeze(
+                    rule === 'categorical.ordinary-transfor-composition'
+                        ? ['generic-category-composition' as const]
+                        : []
+                ),
+                provenance: nodeProvenance
+            });
+            const closed = deepFreeze({
+                term: factored.closed.term,
+                type: copyCoreType(factored.type),
+                sourceSpan: this.spanFor(nodeProvenance),
+                recovered: [...factored.closed.recovered]
+            });
+            return this.makeTerm(
+                factored.node,
+                factored.type,
+                factored.usage,
+                closed,
+                [...factored.abstractions, evidence]
+            );
+        } finally {
+            const activeContext =
+                this.activeOrdinaryNaturalContexts.shift();
+            if (activeContext !== context) {
+                throw new Error(
+                    'Ordinary natural context stack lost its owner'
+                );
+            }
+            this.activeTokenOrdinals.shift();
+        }
+    }
+
+    /**
      * Direct recursively factored displayed-transfor abstraction.
      *
      * The callback sees `k : Obj K`. A leaf `eta[k]` lowers back to the
@@ -16293,6 +17486,7 @@ export class CoreCategoricalScopedBuilder {
                 body.type.tag === 'indexed-functor' ||
                 body.type.tag === 'indexed-transfor' ||
                 body.type.tag === 'indexed-hom' ||
+                body.type.tag === 'ordinary-natural-component' ||
                 body.type.tag === 'nested-indexed-object' ||
                 !coreTypeEquals(body.type, expectedBodyType)
             ) {

@@ -108,6 +108,10 @@ import type {
 import type {
     CoreCategoricalDirectMixedConstantMiddleCompilation
 } from './categorical_direct_mixed_constant_middle_transfer';
+import type {
+    CoreCategoricalCompositionalNaturalCompilation,
+    CoreCategoricalCompositionalNaturalSymbolId
+} from './categorical_compositional_natural_transfer';
 import {
     validateCoreCategoricalFibredWeakenReindexContract
 } from './categorical_fibred_weaken_reindex_contract';
@@ -283,6 +287,21 @@ const directMixedConstantMiddleCompositionCoreName = (): string =>
         .coreCategoricalDirectMixedConstantMiddleCoreName(
             'displayedComposition'
         );
+
+const compositionalNaturalModule = () =>
+    optionalProfileModule<typeof import(
+        './categorical_compositional_natural_transfer'
+    )>('./categorical_compositional_natural_transfer');
+
+const compileCoreCategoricalCompositionalNatural = ():
+CoreCategoricalCompositionalNaturalCompilation =>
+    compositionalNaturalModule()
+        .compileCoreCategoricalCompositionalNaturalTransfer();
+
+const compositionalNaturalCoreName = (
+    id: CoreCategoricalCompositionalNaturalSymbolId
+): string => compositionalNaturalModule()
+    .coreCategoricalCompositionalNaturalCoreName(id);
 
 export const CORE_CATEGORICAL_DEPENDENT_COMPOSITION_PROGRAM_REVISION =
     'USABILITY-DEPENDENT-1A-CATEGORICAL-PROGRAM-1' as const;
@@ -530,7 +549,8 @@ export interface CoreCategoricalProgramOptions {
         | 'fibred-displayed-chain-2a'
         | 'fibred-displayed-nd-higher-1'
         | 'fibred-displayed-mixed-nest-1'
-        | 'fibred-direct-mixed-introduction-1';
+        | 'fibred-direct-mixed-introduction-1'
+        | 'compositional-natural-binder-1';
 }
 
 export interface CoreCategoricalApplyOptions {
@@ -571,6 +591,7 @@ export type CoreCategoricalProgramErrorCode =
     | 'UNAVAILABLE_DISPLAYED_ND_HIGHER'
     | 'UNAVAILABLE_MIXED_MODE'
     | 'UNAVAILABLE_DIRECT_MIXED_INTRODUCTION'
+    | 'UNAVAILABLE_ORDINARY_NATURAL_BINDER'
     | 'INVALID_DISPLAYED_CONTEXT'
     | 'INVALID_GROUPED_SEQUENTIAL_CONTEXT'
     | 'UNEXPECTED_KIND';
@@ -1062,7 +1083,8 @@ export class CoreCategoricalProgram {
         | CoreCategoricalDisplayedChain2aClosureCompilation
         | CoreCategoricalDisplayedNdHigherTargetCompilation
         | CoreCategoricalMixedActionCompilation
-        | CoreCategoricalDirectMixedConstantMiddleCompilation;
+        | CoreCategoricalDirectMixedConstantMiddleCompilation
+        | CoreCategoricalCompositionalNaturalCompilation;
     private readonly comprehensionEnabled: boolean;
     private readonly fibredProductEnabled: boolean;
     private readonly fibredStructureEnabled: boolean;
@@ -1078,6 +1100,7 @@ export class CoreCategoricalProgram {
     private readonly displayedNdHigherEnabled: boolean;
     private readonly mixedModeEnabled: boolean;
     private readonly directMixedIntroductionEnabled: boolean;
+    private readonly ordinaryNaturalEnabled: boolean;
     private readonly builder: CoreCategoricalScopedBuilder;
     private environment: CoreLfDeclarationEnvironment;
 
@@ -1086,8 +1109,11 @@ export class CoreCategoricalProgram {
             options.sourceFile ?? '<categorical-program>';
         const profile =
             options.profile ?? 'reviewed-usability-2a1';
+        const ordinaryNaturalProfile =
+            profile === 'compositional-natural-binder-1';
         const directMixedIntroductionProfile =
-            profile === 'fibred-direct-mixed-introduction-1';
+            profile === 'fibred-direct-mixed-introduction-1' ||
+            ordinaryNaturalProfile;
         const mixedModeProfile =
             profile === 'fibred-displayed-mixed-nest-1' ||
             directMixedIntroductionProfile;
@@ -1189,6 +1215,7 @@ export class CoreCategoricalProgram {
         this.mixedModeEnabled = mixedModeProfile;
         this.directMixedIntroductionEnabled =
             directMixedIntroductionProfile;
+        this.ordinaryNaturalEnabled = ordinaryNaturalProfile;
         if (this.groupedSequentialEnabled) {
             validateCoreCategoricalGroupedSequentialContract();
         }
@@ -1201,7 +1228,9 @@ export class CoreCategoricalProgram {
         if (this.displayedContextualEnabled) {
             validateCoreCategoricalDisplayedBracketContract();
         }
-        this.dependent = this.directMixedIntroductionEnabled
+        this.dependent = this.ordinaryNaturalEnabled
+            ? compileCoreCategoricalCompositionalNatural()
+            : this.directMixedIntroductionEnabled
             ? compileCoreCategoricalDirectMixedConstantMiddle()
             : this.mixedModeEnabled
             ? compileCoreCategoricalMixedAction()
@@ -1265,6 +1294,21 @@ export class CoreCategoricalProgram {
                 categoryObjectReifier: classifierReifier,
                 dependentSectionComposition:
                     profile !== 'reviewed-usability-2a1',
+                ordinaryNaturalAbstraction:
+                    this.ordinaryNaturalEnabled,
+                ordinaryNaturalActions:
+                    this.ordinaryNaturalEnabled
+                        ? Object.freeze({
+                            prewhiskeringCoreName:
+                                compositionalNaturalCoreName(
+                                    'prewhiskeringAction'
+                                ),
+                            postwhiskeringCoreName:
+                                compositionalNaturalCoreName(
+                                    'postwhiskeringAction'
+                                )
+                        })
+                        : undefined,
                 displayedFunctorAbstraction:
                     this.fibredBinderEnabled,
                 displayedTransforAbstraction:
@@ -1466,6 +1510,20 @@ export class CoreCategoricalProgram {
                 'Direct displayed-transfor abstraction and higher cells ' +
                 "are available only in the explicit 'fibred-transfd-1' " +
                 'root profile'
+            );
+        }
+    }
+
+    private requireOrdinaryNatural(
+        nodeProvenance: Provenance
+    ): void {
+        if (!this.ordinaryNaturalEnabled) {
+            throw new CoreCategoricalProgramError(
+                'UNAVAILABLE_ORDINARY_NATURAL_BINDER',
+                nodeProvenance,
+                'Ordinary natural-transformation abstraction is available ' +
+                    'only in the explicit ' +
+                    "'compositional-natural-binder-1' root profile"
             );
         }
     }
@@ -3773,6 +3831,7 @@ export class CoreCategoricalProgram {
             pointInspection.type.tag === 'indexed-functor' ||
             pointInspection.type.tag === 'indexed-transfor' ||
             pointInspection.type.tag === 'indexed-hom' ||
+            pointInspection.type.tag === 'ordinary-natural-component' ||
             pointInspection.type.tag === 'nested-indexed-object'
         ) {
             throw new CoreCategoricalProgramError(
@@ -6360,6 +6419,53 @@ export class CoreCategoricalProgram {
         }, nodeProvenance);
     }
 
+    /** Assume one rich ordinary natural transformation `F => G`. */
+    transfor(
+        name: string,
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        source?: CoreCategoricalSourceSite
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `ordinary transfor assumption ${name}`,
+            source
+        );
+        this.requireOrdinaryNatural(nodeProvenance);
+        const sourceFunctor = this.requireFunctorTerm(
+            sourceFunctorValue,
+            nodeProvenance,
+            `source of ordinary transfor '${name}'`
+        );
+        const targetFunctor = this.requireFunctorTerm(
+            targetFunctorValue,
+            nodeProvenance,
+            `target of ordinary transfor '${name}'`
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFunctor.sourceCategory,
+                targetFunctor.sourceCategory
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.targetCategory,
+                targetFunctor.targetCategory
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_FUNCTOR',
+                nodeProvenance,
+                `Ordinary transfor '${name}' requires parallel functors`
+            );
+        }
+        return this.assume(name, {
+            tag: 'transfor',
+            sourceCategory: sourceFunctor.sourceCategory,
+            targetCategory: sourceFunctor.targetCategory,
+            sourceFunctor: sourceFunctor.expression,
+            targetFunctor: targetFunctor.expression
+        }, nodeProvenance);
+    }
+
     private closedHomEndpointExpressions(
         category: InternalCoreCategoricalCategory,
         sourceObject: CoreCategoricalTerm,
@@ -6375,6 +6481,7 @@ export class CoreCategoricalProgram {
                 endpoint.type.tag === 'indexed-functor' ||
                 endpoint.type.tag === 'indexed-transfor' ||
                 endpoint.type.tag === 'indexed-hom' ||
+                endpoint.type.tag === 'ordinary-natural-component' ||
                 endpoint.type.tag === 'nested-indexed-object'
             ) {
                 throw new CoreCategoricalProgramError(
@@ -6564,6 +6671,69 @@ export class CoreCategoricalProgram {
             name,
             sourceCategory.expression,
             targetCategory.expression,
+            body,
+            {
+                plicity: options.plicity,
+                variation: options.variation,
+                polarity: options.polarity,
+                cellLevel: options.cellLevel,
+                dependency: options.dependency,
+                provenance: nodeProvenance
+            }
+        );
+    }
+
+    /**
+     * Construct one ordinary natural transformation by recursively factoring
+     * its internally natural point-component body.
+     */
+    transforLambda(
+        name: string,
+        sourceFunctorValue: CoreCategoricalTerm,
+        targetFunctorValue: CoreCategoricalTerm,
+        body: (
+            token: CoreCategoricalSlotToken
+        ) => CoreCategoricalTerm,
+        options: CoreCategoricalLambdaOptions = {}
+    ): CoreCategoricalTerm {
+        const nodeProvenance = this.at(
+            `ordinary natural abstraction ${name}`,
+            options.source
+        );
+        this.requireOrdinaryNatural(nodeProvenance);
+        const sourceFunctor = this.requireFunctorTerm(
+            sourceFunctorValue,
+            nodeProvenance,
+            `source of ordinary natural abstraction '${name}'`
+        );
+        const targetFunctor = this.requireFunctorTerm(
+            targetFunctorValue,
+            nodeProvenance,
+            `target of ordinary natural abstraction '${name}'`
+        );
+        if (
+            !kernelExpressionEquals(
+                sourceFunctor.sourceCategory,
+                targetFunctor.sourceCategory
+            ) ||
+            !kernelExpressionEquals(
+                sourceFunctor.targetCategory,
+                targetFunctor.targetCategory
+            )
+        ) {
+            throw new CoreCategoricalProgramError(
+                'EXPECTED_FUNCTOR',
+                nodeProvenance,
+                `Ordinary natural abstraction '${name}' requires parallel ` +
+                    'functor endpoints'
+            );
+        }
+        return this.builder.transforLambda(
+            name,
+            sourceFunctor.sourceCategory,
+            sourceFunctor.targetCategory,
+            sourceFunctor.expression,
+            targetFunctor.expression,
             body,
             {
                 plicity: options.plicity,

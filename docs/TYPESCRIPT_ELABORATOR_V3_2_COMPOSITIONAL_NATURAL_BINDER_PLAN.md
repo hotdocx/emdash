@@ -19,6 +19,15 @@ at rollback-safe semantic/product checkpoint
 audit. The exact `COMPOSITIONAL-NATURAL-BINDER-1B` proposal below was frozen at
 `7104ca8cc8c9c46187093ba2051dd80917cc31a3` and independently approved by
 [`D-DTTLF-USABILITY-074`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D074_REVIEW.md).
+The classifier-exact action correction was frozen at
+`de900588d9961f3bb73d56ef7b1f535459c89015` and separately approved under
+[`D-DTTLF-USABILITY-075`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D075_REVIEW.md)
+at `36668e00b722ece632353f9636fb8bb083b1db5c`. The combined implementation is
+focused-green: the reusable root ordinary-natural bracket reconstructs eta,
+identity, recursive vertical composition, and both fixed whiskers through
+existing active owners, rejects arbitrary point arrows, and leaves compact
+`:^nd` unchanged. Its rollback-safe semantic checkpoint is pending the local
+checkpoint operation recorded by this continuation.
 
 ## Objective
 
@@ -89,6 +98,75 @@ Thus all of the following are true at once:
 The predecessor therefore graduates arbitrary finite canonical telescope
 depth **within its reviewed factorer algebra**. It does not graduate arbitrary
 compositional natural-transformation introduction.
+
+## Expanded And Compact Classifier Presentations
+
+The implementation review after D-075 sharpens the phrase “compositional
+nesting.” Compact displayed binders and explicit nested binders should remain
+distinct typed surface forms even when the kernel compares their result
+classifiers.
+
+For covariant directed families `E,D : K -> Cat`, the intended first-hom
+presentations are:
+
+```text
+expanded:
+  lambda^n k. lambda^f a. body(k,a)
+    : Transf_cat K Cat_cat E D
+
+compact:
+  lambda^fd a. body(a)
+    : Functord_cat E D
+```
+
+The active kernel owns a proof-time comparison between these category heads
+and a runtime object projection from `Functord_cat` to `Transf_cat`. The inner
+functorial abstraction is mathematically exact: the outer component has type
+`Hom_cat Cat_cat E[k] D[k]`, which computes to
+`Functor_cat E[k] D[k]`. The expanded form exposes the base variable and
+retains the ordinary-transfor presentation; the compact form hides that base
+variable, declares displayed dependency intrinsically, and retains the stable
+displayed-functor head used by later displayed projections.
+
+At the second hom, the corresponding canonical presentations are:
+
+```text
+expanded:
+  lambda^n k. lambda^n a. body(k,a)
+    : Hom_cat (Transf_cat K Cat_cat E D) FF GG
+
+compact:
+  lambda^nd a. body(a)
+    : Transfd_cat E D FF GG
+```
+
+The active kernel again owns the direct proof-time second-hom comparison and
+runtime object projection. This makes a compositional canonical implementation
+semantically plausible without a new owner. It does **not** mean that the
+current TypeScript methods already compose literally: `categoricalLambda`
+accepts a fixed ordinary source category, `transforLambda` currently rejects
+outer-slot capture, and the rich frontend does not yet join an open
+`categorical-abstraction` with an `ordinary-natural-component` at target
+`Cat_cat`.
+
+`Functor_catd` and `Transf_catd` must not be conflated with those covariant
+first- and second-hom facades. They are mixed-variance Cat-valued families:
+their source family is over `Op K`, their target family is over `K`, and a
+section of `Transf_catd` is not silently equal to a general `Transfd_cat`.
+They remain separate classifier-specific consumers and stress tests.
+
+The next compositional audit must therefore compare both `:^fd` and `:^nd`.
+It may select literal public-method composition, a shared scoped contextual
+abstraction engine with thin presentation-specific wrappers, or a hybrid. The
+requirement is that explicit and compact syntax both recurse through
+internally owned object/arrow/higher action and fail closed without it; literal
+reuse of one public callback method by another is not itself a requirement.
+Some reusable representation of scoped fibre categories and open component
+classifiers is nevertheless necessary internally. Presentation-aware
+packaging is necessary but not sufficient: the joint body compiler must prove
+the inner functor or transfor's dependence on `k` by recursive construction.
+The existing integrated compact factorers are the positive implementation
+evidence for that joint compilation.
 
 ## Classifier Distinctions The Audit Must Preserve
 
@@ -472,9 +550,9 @@ Any later implementation proposal must include at least:
 |---|---|---|---|
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | final-green at `607a026f88bc6d3b9f305ecb21f6630ce7c94950` | D-070 through D-073 | Typed canonical finite `:^nd`, grouped text, lean chain-2A reviewer preset, production/browser evidence, and effective aggregate qualification. |
 | `COMPOSITIONAL-NATURAL-BINDER-0A` | complete; read-only | final-green 1AP; user-approved architectural direction | Existing semantic ladder and rich Core are sufficient; exact gap is open ordinary-component lowering. `Pi_cat(Transf_catd)` remains distinct from `Transfd_cat`. |
-| `COMPOSITIONAL-NATURAL-BINDER-1B` | implementation focused-green except classifier-exact whiskering correction | completed 0A; D-074 | Rich `transfor` assumptions and reusable `transforLambda` pass eta, identity, composition, rejection, hygiene, and compact-`:^nd` focused cases. Generic action through an opaque facade does not check at canonical whiskering endpoints. |
-| `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` | dependency-ready; frozen for D-DTTLF-USABILITY-075 | focused 1B failure; existing `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func` | Import exactly two existing classifier-exact action signatures and use them for pre/postwhiskering. Add no rules or kernel semantics. |
-| `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | pending final-green 1B | completed 1B | Decide the exact introduction-recursion claim and remaining classifier/body/variance non-claims before text or browser promotion. |
+| `COMPOSITIONAL-NATURAL-BINDER-1B` | implementation final-focused-green; semantic checkpoint pending | completed 0A; D-074 and D-075 | Rich `transfor` assumptions and reusable root `transforLambda` pass eta, identity, recursive composition, both whiskers, arbitrary-arrow rejection, scope/callback/immutability, closed elimination, generic checking, and compact-`:^nd` preservation. The first slice deliberately rejects an outer contextual capture. |
+| `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` | implemented final-focused-green; semantic checkpoint pending | focused 1B failure; D-075; existing `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func` | Imports exactly two existing classifier-exact action signatures and uses them for pre/postwhiskering. Adds zero rules, kernel owners, Core nodes, checker branches, or external coherence fields. |
+| `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | dependency-ready read-only successor after checkpoint | completed 1B/1B2 | Compare canonical expanded `Transf_cat`/iterated-Hom presentations with compact `Functord_cat`/`Transfd_cat` for both `:^fd` and `:^nd`; select one shared contextual architecture and freeze exact body/classifier/variance non-claims before text or browser promotion. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
 
 ## Explicit Non-Claims
@@ -507,6 +585,23 @@ matrix. Use focused tests and typecheck/lint first. Run a root aggregate only
 if the eventual shared-behavior delta independently requires it at a new
 checkpoint boundary; carry forward unchanged evidence whenever possible.
 
+The combined D-074/D-075 implementation has the following final proportional
+evidence:
+
+- root workspace check, typecheck, and the complete changed-file lint pass;
+- exact diff hygiene and the bounded active-kernel check pass;
+- the focused compositional-natural suite passes 6/6, covering the exact
+  two-signature/no-rule boundary, eta, identity, recursive composition, both
+  whiskers, arbitrary-arrow rejection, scope/callback/immutability, closed
+  component elimination, generic checker acceptance, and compact-`:^nd`
+  preservation; and
+- the single root `check:ts` was run once. Its shared behavior reached the
+  new suite without a semantic failure; the command remained non-green only
+  on pre-existing active-kernel source-digest pins and the public README's
+  line-wrapped `Hom-category recursion` assertion. Those unrelated historical
+  contracts are not repaired in this semantic tranche, and the aggregate must
+  not be repeated for this unchanged boundary.
+
 Use rollback-safe local checkpoints under
 [`PERSISTENT_GOAL_GIT_EXPERIMENTATION.md`](./PERSISTENT_GOAL_GIT_EXPERIMENTATION.md).
 Preserve unrelated work.
@@ -527,15 +622,18 @@ introduction. Distinguish semantic expansion of compact `:^nd` from actual
 composition of reusable public `:^n` constructors. Do not assume
 `Transfd_cat` equals a section of `Transf_catd`.
 
-Complete frozen `COMPOSITIONAL-NATURAL-BINDER-1B` as approved by
-D-DTTLF-USABILITY-074 together with the narrow classifier-exact action
-correction reviewed under D-DTTLF-USABILITY-075. Natural
-transformation bodies must be recursively constructed from internal owners and
-fail closed without them. Keep the existing compact `:^nd` factorer unchanged
-until exact parity supports a later delegation decision. Preserve object,
-arrow, base-arrow, and higher action; add no curry, cast, total-context
-section, external coherence, new kernel owner, text/browser behavior, or scale
-work without a separate reviewed gate.
+Treat `COMPOSITIONAL-NATURAL-BINDER-1B` and its classifier-exact D-075
+correction as final-focused-green after their rollback-safe semantic
+checkpoint. Continue with read-only
+`COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C`. Compare the canonical expanded
+`Transf_cat`/iterated-Hom route with compact `Functord_cat`/`Transfd_cat` for
+both `:^fd` and `:^nd`; do not conflate that route with mixed
+`Functor_catd`/`Transf_catd`. Natural transformation bodies must be recursively
+constructed from internal owners and fail closed without them. Keep the
+existing compact factorers unchanged until exact parity supports a later
+delegation decision. Preserve object, arrow, base-arrow, and higher action;
+add no curry, cast, total-context section, external coherence, new kernel
+owner, text/browser behavior, or scale work without a separate reviewed gate.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -543,6 +641,22 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-075 approved and implemented.** A separate
+  immutable review at `36668e00b722ece632353f9636fb8bb083b1db5c` approves
+  exactly the two existing classifier-exact action signatures. The final
+  focused suite passes 6/6; both whiskers are accepted by the generic checker,
+  and the transfer adds no rule or mathematical owner. The one shared root
+  aggregate was not repeated after reporting only existing source-digest and
+  README-wrap contracts outside this tranche.
+- **2026-08-02 — canonical expanded/compact distinction clarified.** Explicit
+  `lambda^n k. lambda^f a` and compact `lambda^fd a` retain respectively the
+  `Transf_cat` and `Functord_cat` facades; explicit
+  `lambda^n k. lambda^n a` and compact `lambda^nd a` retain the iterated-Hom
+  and `Transfd_cat` facades. The active kernel owns their canonical proof-time
+  comparisons. Mixed `Functor_catd`/`Transf_catd` remain distinct. The next
+  read-only graduation audit must compare both modes and may select a shared
+  internal contextual compiler without requiring literal public-method
+  nesting.
 - **2026-08-02 — H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-ACTION-CORRECTION-01
   proposal frozen.** The first focused checker run passes four of five test
   groups and isolates the remaining failure to generic Hom action through an

@@ -117,6 +117,7 @@ export * from './categorical_direct_mixed_source_action_transfer';
 export * from './categorical_direct_mixed_product_distribution_transfer';
 export * from './categorical_direct_mixed_weakening_transfer';
 export * from './categorical_direct_mixed_constant_middle_transfer';
+export * from './categorical_compositional_natural_transfer';
 export * from './product_review_demo';
 export * from './categorical_text_parity_audit';
 export * from './categorical_text_structural_audit';

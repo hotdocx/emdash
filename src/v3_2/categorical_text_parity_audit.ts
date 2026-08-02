@@ -70,6 +70,7 @@ export interface CoreCategoricalTextParityCapability {
         | 'SYNTAX-PARITY-1A'
         | 'SYNTAX-PARITY-1B'
         | 'SYNTAX-PARITY-1C'
+        | 'COMPOSITIONAL-NATURAL-TEXT-PARITY-1D'
         | 'not-textual'
         | 'semantic-boundary';
 }
@@ -86,6 +87,7 @@ const capabilities = [
             'displayedTransfor',
             'object',
             'functor',
+            'transfor',
             'hom',
             'homBoundary'
         ],
@@ -396,6 +398,41 @@ const capabilities = [
             requiredResult: 'Reject the annotation span.'
         },
         firstImplementationRow: 'already'
+    },
+    {
+        id: 'ordinary-natural-abstraction',
+        apiMethods: ['transforLambda'],
+        profile: 'compositional-natural-binder-1',
+        classifierContract:
+            'Parallel ordinary functors plus an intrinsically natural binder.',
+        scopedBindings:
+            'One hygienic object slot with construction-only natural ' +
+            'component metadata.',
+        dependencyAndVariance: 'ordinary covariant natural transformation',
+        actionOwnership:
+            'Existing Transf_cat, component, identity, composition, and fixed ' +
+            'pre/postcomposition owners.',
+        recursiveBodyGrammar:
+            'eta, identity, vertical composition, prewhiskering, and ' +
+            'postwhiskering',
+        proposedText: 'λ^n a [: A]. component-body',
+        locatedSyntax: 'requires-typed-expected-contract',
+        classification: 'typed-resolver-seam',
+        positive: {
+            sourceOrOperation: 'λ^n a. eta a',
+            directEvidence:
+                'COMPOSITIONAL-NATURAL-BINDER-1B direct tests',
+            requiredResult:
+                'Equal explicit eta Core with internal naturality retained.'
+        },
+        negative: {
+            sourceOrOperation: 'λ^n a. arbitraryPointArrow',
+            directEvidence:
+                'ordinary natural factorer fail-closed tests',
+            requiredResult:
+                'Reject without accepting a naturality equation or cast.'
+        },
+        firstImplementationRow: 'COMPOSITIONAL-NATURAL-TEXT-PARITY-1D'
     },
     {
         id: 'natural-indexed-abstraction',
@@ -720,12 +757,12 @@ const rawAudit = {
     },
     capabilities,
     measuredCoverage: {
-        publicProgramMethods: 84,
-        capabilityRows: 14,
+        publicProgramMethods: 86,
+        capabilityRows: 15,
         classificationRows: {
             alreadyTextComplete: 1,
             mechanicalSyntaxRoute: 1,
-            typedResolverSeam: 9,
+            typedResolverSeam: 10,
             semanticCapabilityAbsent: 1,
             deliberatelyNonTextualHostBehavior: 2
         }

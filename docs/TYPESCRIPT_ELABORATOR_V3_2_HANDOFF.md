@@ -4,6 +4,31 @@
 > [`TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_PLAN.md)
 > owns the next work. Its final-green semantic predecessor is
 > [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md).
+> `COMPOSITIONAL-NATURAL-BINDER-1B` and its D-075 classifier-exact action
+> correction are implemented and final-focused-green. The root-only reusable
+> `transforLambda` reconstructs eta, identity, recursive vertical composition,
+> and fixed pre/postwhiskering through existing active owners, rejects an
+> arbitrary point arrow, and leaves the integrated compact `:^nd` route
+> unchanged. Exactly two existing action signatures are imported; no runtime
+> rule, proof rule, kernel owner, Core node, checker branch, or external
+> coherence field is added. The focused suite passes 6/6, as do workspace,
+> typecheck, changed-file lint, diff hygiene, and the bounded active-kernel
+> check. The single shared root aggregate was not repeated after reporting
+> only pre-existing source-digest pins and a README line-wrap assertion.
+>
+> The next row is the read-only
+> `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` comparison. Preserve two
+> distinctions. First, explicit `lambda^n k. lambda^f a` and compact
+> `lambda^fd a` retain the proof-time-comparable `Transf_cat` and
+> `Functord_cat` facades; explicit `lambda^n k. lambda^n a` and compact
+> `lambda^nd a` similarly retain the iterated-Hom and `Transfd_cat` facades.
+> Second, those canonical covariant comparisons are not sections of the
+> mixed-variance `Functor_catd`/`Transf_catd` families. Audit both `:^fd` and
+> `:^nd` before selecting literal public-method composition, a shared scoped
+> contextual engine with thin facade-specific wrappers, or a hybrid. The
+> current public ordinary-natural bracket remains root-only, and the compact
+> factorers remain sound rollback evidence until exact object/arrow/higher
+> action parity supports a later refactor.
 > D-DTTLF-USABILITY-058 through D-DTTLF-USABILITY-061 are
 > implemented and final-green at coherent semantic checkpoint
 > `8f4042c6f9054f1c55739b9ef8bad23f9f9c119c`.

@@ -320,6 +320,16 @@ const copyClassifier = (
             fibreIndex: classifier.fibreIndex
         };
     }
+    if (classifier.tag === 'ordinary-natural-component') {
+        return {
+            tag: 'ordinary-natural-component',
+            sourceCategory: classifier.sourceCategory,
+            targetCategory: classifier.targetCategory,
+            sourceFunctor: classifier.sourceFunctor,
+            targetFunctor: classifier.targetFunctor,
+            index: classifier.index
+        };
+    }
     if (classifier.tag === 'nested-indexed-object') {
         return {
             tag: 'nested-indexed-object',
