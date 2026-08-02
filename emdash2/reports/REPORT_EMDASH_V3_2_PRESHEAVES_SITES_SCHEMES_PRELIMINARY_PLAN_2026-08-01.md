@@ -52,7 +52,7 @@ strict audits, maintained aggregates, the 1,932-check catalog, synchronized
 synchronized and the tranche is locally checkpointed at `28cd0fc`. It
 supplies only the restriction direction, not an inverse/glue or descent
 equivalence.
-`PSSS-08c0E` is the current bounded candidate. It packages selected glue as a
+`PSSS-08c0E` packages selected glue as a
 genuine functor from coherent matching families to the chosen localization's
 Path-valued carrier, so matching-arrow action is internal. It retains both
 `glue(restrict(x))=x` and componentwise `restrict(glue(m))=m`; at a literal
@@ -61,10 +61,14 @@ to the glued element. The source is rule-free, its zero-ring model derives
 the data from a constant functor and Unit contractibility, and focused
 owner/reviewer/central checks, exact warning comparison, strict audits,
 maintained aggregates, the 1,937-check catalog, synchronized 74-target health,
-final authority prose, and full integration CI are green. The local checkpoint
-remains pending. This is selected
+final authority prose, and full integration CI are green. It is locally
+checkpointed at `eb0c5b6`. This is selected
 Cartier/basic-open locality over `D(s)`, which need not cover, not ordinary
 sheaf descent or a native `OmegaEquivAlong`/whole internal equivalence.
+`PSSS-08c0F` is now the active mandatory semantic/research gate: it must audit
+that whole native comparison, the matching/section semantics, a nontrivial
+localization model, and the first affine overlap before `Spec` may consume the
+selected architecture.
 `PSSS-03b` remains the named `Omega`
 research gate. `PSSS-05a` retains a green anchored-descent research probe and
 nonempty assumption-explicit API consumer, but no promoted source or derived
@@ -2641,8 +2645,7 @@ actually required.
 Status: rule-free implementation green through maintained source, reviewer, and
 central focused checks, exact warning comparison, strict audits, maintained
 aggregates, fresh catalog, synchronized 74-target health, and final authority
-prose plus full integration CI; the authorized local checkpoint remains
-pending.
+prose plus full integration CI; locally checkpointed at `eb0c5b6`.
 
 The historical Cartier `mod_loc_elim` behavior is not ordinary descent over a
 cover of `U`. The semantic sieve `D_O(s)` is the basic open on which `s`
@@ -2721,7 +2724,8 @@ integration CI independently passes
 all 74 Lambdapi targets in 575.487 summed check-seconds, followed by 39 Python
 tests, five document-registry tests, shell/source/header/reference checks,
 book evidence/typography/KaTeX/assembly checks, the strict kernel audit, and
-fresh strict catalog verification. The local checkpoint remains pending.
+fresh strict catalog verification. The implementation and synchronized
+authority prose are locally checkpointed at `eb0c5b6`.
 
 This tranche deliberately does not package whole functor cancellation or a
 native `OmegaEquivAlong`; the stricter computational `DefIso` is absent too.
@@ -2736,8 +2740,9 @@ ordinary sheaf/ringed-site boundary.
 
 ##### PSSS-08c0F — Independent semantics and first nontrivial affine model
 
-Status: proposed mandatory semantic/research gate after PSSS-08c0E and before
-using the historical Cartier architecture to define `Spec` or schemes.
+Status: active mandatory semantic/research gate after checkpointed PSSS-08c0E
+and before using the historical Cartier architecture to define `Spec` or
+schemes.
 
 The ignored `cartierSolution16.lp.txt` file was an experimental design and is
 not evidence that its `mod_loc_elim` classifier is mathematically complete or
@@ -3798,8 +3803,8 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-08c0 | Invertibility-cover observation and memberwise localization factor | Rule-free implementation green through focused/aggregate/warning/audit/catalog, 70-target health, and full CI; locally checkpointed at `9db8307` | PSSS-08b, PSSS-07a, and PSSS-04a |
 | PSSS-08c0C | Internal localization-factor cone plus derived restriction audit | One component rule; focused/aggregate/warning/audit/catalog, 70-target health, and full CI green; locally checkpointed at `a724638` | PSSS-08c0 |
 | PSSS-08c0D | Localization elements to internally coherent matching families, including equality-path action | One component rule; focused/aggregate/warning/audit/catalog, 72-target health, and full CI green; locally checkpointed at `28cd0fc` | PSSS-08c0C |
-| PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; checkpoint pending | PSSS-08c0D and historical Cartier/basic-open consumer |
-| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Proposed mandatory semantic/research gate | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
+| PSSS-08c0E | Selected functorial glue with two computing component observations; whole internal comparison explicitly deferred | Rule-free implementation; focused/aggregate/warning/audit/catalog, 74-target health, authority prose, and full CI green; locally checkpointed at `eb0c5b6` | PSSS-08c0D and historical Cartier/basic-open consumer |
+| PSSS-08c0F | Independent matching/section semantics, native `OmegaEquivAlong` internalization, nontrivial localization model, and first affine overlap computation | Active mandatory semantic/research gate | Checkpointed PSSS-08c0E plus PSSS-07b/PSSS-09a consumers |
 | PSSS-08c1 | Ringed sites, selected sheaves, and localization descent | Proposed | Checkpointed PSSS-08c0E, closed PSSS-08c0F, and PSSS-05b |
 | PSSS-09a | Presented basic-open family and one-generator base change | Rule-free implementation green through full integration CI; locally checkpointed | PSSS-07c and PSSS-08b |
 | PSSS-09b1 | Generic finite containment, selected mapped family, pointwise assembly, and closed singleton | Implemented rule-free; focused/aggregate/warning/audit/catalog, 66-target health, and full CI green; locally checkpointed at `c8a81b9` | PSSS-09a |

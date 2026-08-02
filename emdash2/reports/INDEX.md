@@ -98,7 +98,8 @@ recovers the matching component. At a literal `(V,f,m)` this is exactly the
 selected localization factor applied to the glued element. `D(s)` need not be
 covering, so this is not ordinary sheaf descent. A whole categorical
 `OmegaEquivAlong`/internal equivalence, generated topology, `Spec`, and
-schemes remain separate gates.
+schemes remain separate gates. The implementation and synchronized authority
+prose are locally checkpointed at `eb0c5b6`.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section
