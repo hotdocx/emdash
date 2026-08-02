@@ -46,7 +46,9 @@
 > `tapp1_fapp0`, and `fdapp1_int_cell` ownership and passes a real proof-time
 > composition witness without changing the measured 1,097/159 warning
 > inventory. D-DTTLF-USABILITY-063 freezes the exact replace-one-rule,
-> replace-one-test correction; it adds no owner, rule, or scope.
+> replace-one-test correction and is separately reviewed-approved from
+> immutable checkpoint `11e38021d09a7663e044cdf169b85e1162614f6a`; it adds
+> no owner, rule, or scope.
 > TypeScript transfer follows only through a separate read-only boundary
 > audit. `Transf_catd_func`, curry, external coherence, and binder special
 > cases remain deferred.
