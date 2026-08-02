@@ -13,9 +13,12 @@ and
 
 Status: active semantic successor; compact single-fibre `:^nd` text parity is
 final-green at checkpoint `dabe9d9827462b76a493c1dd34cc658e137f22d5`;
-`CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` is read-only complete with zero
-behavior delta; `CONTEXTUAL-ND-TELESCOPE-0AK` is dependency-ready and
-read-only. No implementation proposal or semantic change is authorized yet.
+`CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` and
+`CONTEXTUAL-ND-TELESCOPE-0AK` are read-only complete with zero behavior delta.
+The audit selects one shared canonical-context normal form with coherent
+accessors and one terminal contextual slot. Freezing the exact
+`CONTEXTUAL-ND-TELESCOPE-1AL` proposal is dependency-ready; no semantic change
+is authorized yet.
 
 ## Objective
 
@@ -116,9 +119,9 @@ and whiskering. Those are presentation synchronizations, not semantic
 blockers. Promoting them before the multi-variable architecture is measured
 would create avoidable repeated reader-facing churn.
 
-## Candidate Contextual Normal Form
+## Selected Contextual Normal Form
 
-The preferred audit candidate is not a new mathematical owner. It factors the
+The selected audit result is not a new mathematical owner. It factors the
 existing canonical context compiler into an immutable internal bundle:
 
 ```text
@@ -142,26 +145,117 @@ The normalization follows the existing semantic constructions:
 - the final variable or sibling group is the terminal displayed source
   family.
 
-The callback may expose friendly variables individually, but each value must
-be obtained by applying one of these internally coherent accessors. It must
-not expose independent point data and later assert that it is natural.
+The callback exposes friendly variables individually, but every value is the
+application of one of these internally coherent accessors to one terminal
+contextual fibre slot. It does not expose independent point data and later
+assert that it is natural.
 
-If every accessor can be presented as a finite endpoint chain from one
-terminal contextual slot, the existing single-fibre point factorer can remain
-unchanged. This is already strongly suggested for independent siblings:
-product projections are closed displayed functors and therefore fit existing
-prewhiskering. Genuine dependency is the decisive case: an earlier prefix
-variable is recovered from the hidden accumulated base and weakened under the
-terminal family, so its construction may require a bounded extension of the
-endpoint compiler even though all semantic owners already exist.
+Each accessor is a closed displayed functor from the terminal context family.
+Simple occurrences therefore remain finite endpoint chains from one terminal
+slot. Composite occurrences such as `fibrePair(a,b)` are compiled by the
+already-recursive displayed-context compiler against identity wiring for that
+one terminal slot. The direct endpoint seam records the resulting whole
+functor and passes it to the existing single-fibre point factorer. The
+factorer, rather than a new contextual coherence algorithm, remains the sole
+authority that may recover a whole `Transfd`.
 
 This “packed semantic context, individually exposed variables” representation
 is not a total-context section and does not invoke curry. It is internal
 compiler evidence for the same direct telescope the user wrote.
 
-## Alternatives Retained For Audit
+## `CONTEXTUAL-ND-TELESCOPE-0AK` Audit Result
 
-The audit must compare, rather than assume, these implementation shapes:
+The read-only audit is complete with zero TypeScript, test, kernel, runtime,
+parser, or browser delta.
+
+### Independent siblings reuse the transparent product
+
+A disposable witness packed two sibling families with the existing
+fibrewise product and applied its two projection functors to one contextual
+slot. The unchanged unary factorer recovered left and right eta, generic
+identity, recursive composition, and both pre- and postwhiskering. The point
+and higher observations remained ordinary internally typed `hom` terms. This
+confirms that sibling variables require no multi-ordinal coherence rule.
+
+### Genuine dependency is an accessor problem, not a new introduction rule
+
+For
+
+```text
+k : K; a : A[k]; b : B[(k,a)]
+```
+
+the terminal source is `B` over `Sigma(A)`. The existing generic context
+compiler already constructs:
+
+- the prefix accessor from `B` to the pullback of `A` along the Sigma
+  projection, using `sigma_functord_sec` and section/pullback weakening; and
+- the pairing accessor from `B` to the fibrewise product of that lifted `A`
+  with `B`.
+
+A focused disposable consumer fed the pairing accessor to the unchanged
+single-fibre contextual transformation binder. Eta was recovered as
+prewhiskering, recursive composition produced a whole displayed
+transformation, and both its point component and higher naturality
+observation were internally typed. The emitted accessor Core contains the
+existing `section-pullback` and `displayed-product-pair` owners. No cast,
+external equation, curry, or new owner was used.
+
+### The existing fold is genuinely finite-generic
+
+Source inspection shows that the generic displayed telescope compiler loops
+over every canonical sibling layer, constructs product projection wiring for
+every binding, and lifts every accessor through every later Sigma layer. It
+contains no two-, four-, or six-variable arity table. The existing durable
+four-layer/six-binding corpus separately checks an early accessor, a middle
+accessor, the final sibling pair, an internal base-arrow cell, and the
+`homd_int` consumer. Its fail-closed corpus rejects wrong layer bases,
+wrong target bases, duplicates, a false one-layer telescope, and predecessor
+profile overreach.
+
+One deliberately stronger disposable stress attempted to materialize a
+single left-associated pair containing all six variables. It was stopped
+after approximately eleven and a half minutes without a phase-local result.
+Because that script did not emit phase markers, it does not establish whether
+profile construction or expression duplication dominated. It is diagnostic
+performance evidence only, not a semantic rejection. The selected
+implementation must compute the context normal form once and share its
+accessors; it must not rebuild one complete contextual functor independently
+for each variable. Performance graduation remains separate from semantic
+finite-genericity.
+
+### Architecture selection
+
+The audit selects the reusable contextual-normal-form candidate with these
+exact refinements:
+
+1. Extract the existing layer/product/Sigma/accessor fold into one immutable
+   internal helper used by both displayed-functor and displayed-transfor
+   contextual abstraction.
+2. Create one hidden final-base slot and one terminal-family fibre slot.
+3. Reify each normal-form accessor as a closed displayed functor and expose
+   its application to the terminal slot as the corresponding friendly
+   callback variable.
+4. Extend the direct endpoint compiler only while this context is active: a
+   simple accessor application keeps the existing chain fast path; a
+   supported composite object expression reuses `compileDisplayedContextual`
+   with identity wiring for the terminal slot.
+5. Feed that compiled endpoint into the existing eta/identity/composition/
+   whiskering point factorer. Do not add a second coherence synthesizer.
+6. Preserve expected classifier checks and the existing failure boundary for
+   incompatible bases, layer order, polarity, orientation, escaped values,
+   and arbitrary point arrows.
+
+The multi-ordinal factorer is not selected because coherent accessors already
+reduce every written variable to one terminal slot. Dedicated recursion over
+layer counts is not selected because it would duplicate the existing generic
+fold. Naive nested unary `lambda^nd` remains semantically mismatched: a
+completed inner binder is a whole transformation rather than the next outer
+point body.
+
+## Alternatives Assessed By The Audit
+
+The audit compared, rather than assumed, these implementation shapes:
 
 1. **Reusable contextual-normal-form bundle — preferred candidate.** Factor
    dependency planning, accumulated bases, terminal family, and accessors out
@@ -194,8 +288,8 @@ contrary executable evidence:
 |---|---|---|---|
 | `CONTEXTUAL-ND-TEXT-PARITY-1AI` | final-green at `dabe9d9827462b76a493c1dd34cc658e137f22d5` | D-065/D-066 | Single-fibre compact text exactly matches eta, identity, recursive composition, and both whiskering orientations; historical base-component text remains unchanged. |
 | `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | read-only complete; zero behavior delta | final-green 1AI | Graduates only the exact single-fibre direct/text envelope and identifies canonical multi-variable context abstraction—not parser or classifier-head behavior—as the first remaining usability gap. |
-| `CONTEXTUAL-ND-TELESCOPE-0AK` | dependency-ready read-only architecture audit | completed 0AJ; generic displayed context fold; single-fibre point factorer | Compare reusable context-normal-form, multi-ordinal factorer, and bounded layer-recursion candidates using one independent-sibling witness, one genuine dependency witness, and one finite mixed-layer witness. Freeze at most one smallest implementation proposal. |
-| `CONTEXTUAL-ND-TELESCOPE-1AL` | deferred conditional implementation | completed 0AK and separate reviewed proposal | Implement only the selected internally owned contextual abstraction seam, focused object/base-arrow/higher-cell evidence, and direct negatives. Text/browser promotion remains later. |
+| `CONTEXTUAL-ND-TELESCOPE-0AK` | read-only complete; zero behavior delta | completed 0AJ; generic displayed context fold; single-fibre point factorer | Select one shared normal form, coherent accessors applied to one terminal slot, and contextual endpoint reuse of the existing recursive object compiler. Independent siblings, genuine dependency, and finite mixed layers require no new owner or coherence algorithm. |
+| `CONTEXTUAL-ND-TELESCOPE-1AL` | exact proposal freeze dependency-ready; implementation withheld pending separate review | completed 0AK | Factor one reusable normal form, add one direct dependent-context transformation method, extend only the contextual endpoint seam, and cover recursive body/object/base-arrow/higher evidence plus fail-closed negatives. Text/browser promotion remains later. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-0AK` Audit Contract
 
@@ -269,14 +363,16 @@ goal worktree, active kernel/SOP, completed checkpoints, decision ledger, and
 current dependency-ready row on every continuation.
 
 Treat compact single-fibre direct/text `:^nd` parity as final-green at
-`dabe9d9827462b76a493c1dd34cc658e137f22d5` and 0AJ as read-only complete.
-Execute `CONTEXTUAL-ND-TELESCOPE-0AK` read-only first. Compare the reusable
-context-normal-form, multi-ordinal factorer, and bounded layer-recursion
-candidates from executable evidence. Preserve direct recursive binders and
-internal object/arrow/higher action; add no curry, total-context section, cast,
-external coherence, parser/browser behavior, or kernel owner during the
-audit. Freeze at most one smallest implementation proposal and obtain a
-separate review before behavior changes.
+`dabe9d9827462b76a493c1dd34cc658e137f22d5`, 0AJ as read-only complete, and
+`CONTEXTUAL-ND-TELESCOPE-0AK` as read-only complete with zero behavior delta.
+Its selected architecture is one shared canonical-context normal form,
+coherent accessors applied to one terminal contextual slot, recursive endpoint
+compilation through the existing displayed-context compiler, and the existing
+single-fibre factorer as sole coherence gate. Freeze and separately review
+the exact `CONTEXTUAL-ND-TELESCOPE-1AL` proposal before behavior changes.
+Preserve direct recursive binders and internal object/arrow/higher action; add
+no curry, total-context section, cast, external coherence, parser/browser
+behavior, or kernel owner.
 
 Use proportional validation and rollback-safe local checkpoints. Preserve
 unrelated work. Do not push, merge, rebase, amend, reset, publish, deploy,
@@ -284,6 +380,17 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — 0AK read-only architecture audit complete; shared normal
+  form selected.** Independent product projections, a genuine Sigma/pullback
+  prefix accessor, and the existing finite-generic layer fold all feed one
+  terminal contextual slot without external evidence. Composite variable
+  occurrences can reuse the existing recursive displayed-context compiler;
+  the current point factorer remains the sole `Transfd` gate. Multi-ordinal,
+  layer-count recursion, curry, and new-owner alternatives are not selected.
+  A non-phase-local all-six pairing stress was bounded after approximately
+  eleven and a half minutes and is recorded only as a reason to share the
+  normal form rather than recompute accessors. Freezing the exact 1AL proposal
+  is next; no behavior is authorized by this audit.
 - **2026-08-02 — 0AJ read-only graduation complete; 0AK selected.** Compact
   single-fibre direct/text parity is exact for eta, identity, recursive
   composition, and fixed-head pre/postwhiskering, including a fixed

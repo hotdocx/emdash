@@ -7917,10 +7917,15 @@ do not need it.
 
 Continue from
 `docs/TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`. Treat
-compact text parity as final-green and 0AJ as read-only complete. Execute the
-new plan's 0AK architecture audit read-only before any behavior proposal. Add no kernel/runtime owner, Core/checker case, second parser,
-classifier decomposition heuristic, external coherence evidence, curry,
-browser/public preset, or scale behavior.
+compact text parity as final-green, 0AJ as read-only complete, and 0AK as
+read-only complete with zero behavior delta. The selected successor factors
+one shared canonical-context normal form, applies its coherent accessors to
+one terminal contextual slot, reuses the existing recursive displayed-context
+compiler for composite endpoints, and leaves the unary point factorer as the
+sole `Transfd` gate. Freeze and separately review the exact 1AL proposal before
+behavior changes. Add no kernel/runtime owner, Core/checker case, second
+parser, classifier decomposition heuristic, external coherence evidence,
+curry, browser/public preset, or scale behavior.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete

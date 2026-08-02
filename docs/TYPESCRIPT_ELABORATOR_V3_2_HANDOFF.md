@@ -113,7 +113,15 @@
 > usability gap is multiple individually exposed variables over canonical
 > sibling/dependency telescopes. Continue from
 > [`TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md`](./TYPESCRIPT_ELABORATOR_V3_2_CONTEXTUAL_ND_TELESCOPE_PLAN.md),
-> whose 0AK architecture audit is dependency-ready and read-only.
+> whose 0AK architecture audit is now read-only complete with zero behavior
+> delta. It selects one shared canonical-context normal form, coherent
+> accessors applied to one terminal fibre slot, recursive endpoint compilation
+> through the existing displayed-context compiler, and the existing unary
+> factorer as the sole `Transfd` gate. Independent siblings and a genuine
+> Sigma/pullback chain are executable; the existing four-layer/six-binding
+> corpus establishes finite-generic accessor lifting and internal base/higher
+> action. Freezing the exact 1AL behavior proposal is dependency-ready; no
+> semantic change is yet authorized.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its
