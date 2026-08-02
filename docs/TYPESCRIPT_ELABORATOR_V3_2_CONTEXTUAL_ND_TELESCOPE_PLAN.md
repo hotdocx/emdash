@@ -30,7 +30,10 @@ implementation is final-green at rollback-safe semantic checkpoint
 `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` is read-only complete with zero
 behavior delta. It selects the exact
 `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` / D-DTTLF-USABILITY-069 proposal
-below, frozen pending separate review.
+below. D-069 is separately reviewed-approved from immutable proposal
+checkpoint `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` under the standing unattended
+delegation, with immediate human supersession; implementation is
+dependency-ready at exactly its twelve numbered items.
 
 ## Objective
 
@@ -460,7 +463,7 @@ contrary executable evidence:
 | `CONTEXTUAL-ND-TELESCOPE-1AL` | final-green at `01848adf70acbb49e2f6dbbe35b8fef90b517915` | completed 0AK at `7eacf68ded54424fdac36339833b0df50d978451`; D-067 proposal `57c811fd9ab992abffa6b2388aed06dec3dae19d`; D-068 correction `dc104610c3cb8bbaf665382afe23802c12db41a2`; immutable reviews | One shared normal form now feeds a synthesis-capable direct dependent-context transformation method and the existing contextual endpoint/factorer seam. Independent siblings, genuine dependency, four-layer/six-binding access, identity, composition, both whiskerings, point/higher action, frozen evidence, and the fail-closed matrix are executable. Text/browser promotion remains later. |
 | `CONTEXTUAL-ND-TELESCOPE-AUDIT-CORRECTION-1AL1` | final-green; implementation folded into 1AL | first D-067 typecheck; exhaustive public-method inventory | The new method occurs exactly once in the existing displayed-natural capability row; the inventory is 84 methods in 14 unchanged rows and adds no text behavior. |
 | `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` | read-only complete; zero behavior delta | final-green 1AL; prior alternating Hom/Transf and mixed-target evidence | The finite canonical semantic envelope is coherent and classifier-head-agnostic. Grouped text grammar already exists; the missing seam is one expected-contract/resolver route, not a mixed-variance construction. |
-| `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | D-DTTLF-USABILITY-069 frozen pending separate review; zero behavior authorized before approval | completed 0AM; final-green typed method | Add one grouped displayed-transformation expected contract and resolver route to the existing typed API, preserve the body algebra and fail-closed boundary, bump the text revision, and prove direct/text parity without a second parser or semantic factorer. |
+| `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` | D-DTTLF-USABILITY-069 separately reviewed-approved; implementation dependency-ready | completed 0AM; final-green typed method; proposal `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2`; immutable review | Add one grouped displayed-transformation expected contract and resolver route to the existing typed API, preserve the body algebra and fail-closed boundary, bump the text revision, and prove direct/text parity without a second parser or semantic factorer. |
 
 ## `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` Audit Result
 
@@ -715,9 +718,11 @@ Treat the combined implementation as final-green at
 `01848adf70acbb49e2f6dbbe35b8fef90b517915`. Run
 `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` as read-only complete with zero behavior
 delta. It finds no concrete mixed-variance blocker and freezes exactly
-`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` / D-DTTLF-USABILITY-069 pending a
-separate immutable review. Do not implement it before that review. Preserve
-direct recursive binders and internal
+`CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` / D-DTTLF-USABILITY-069. Treat it as
+separately reviewed-approved from immutable proposal checkpoint
+`8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` under the standing unattended
+delegation, with immediate human supersession. Implement only its twelve
+numbered items. Preserve direct recursive binders and internal
 object/arrow/higher action; add no curry, total-context section, cast,
 external coherence, parser/browser behavior, or kernel owner.
 
@@ -727,6 +732,15 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-069 separately reviewed-approved.** The
+  immutable review of proposal checkpoint
+  `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` confirms that grouped grammar,
+  annotation checks, recursive body resolution, and canonical layer
+  validation are reusable, while the final-green typed method alone owns
+  endpoint synthesis and coherence. The expected contract supplies source
+  groups only. Under the standing unattended delegation, with immediate human
+  supersession, the twelve-item resolver/revision/test slice is
+  dependency-ready.
 - **2026-08-02 — 0AM read-only graduation complete; D-069 text-parity
   proposal frozen.** The final-green typed method graduates finite canonical
   sibling/Sigma telescopes, coherent named accessors, the existing recursive

@@ -7938,8 +7938,10 @@ and adds no text behavior. The combined implementation is final-green at
 read-only `CONTEXTUAL-ND-TELESCOPE-GRADUATE-0AM` audit as complete with zero
 behavior delta. It finds no concrete mixed-variance blocker and freezes
 exactly `CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN` /
-D-DTTLF-USABILITY-069 pending separate immutable review. Do not implement it
-before that review. Add no kernel/runtime owner, Core/checker case, second
+D-DTTLF-USABILITY-069. Treat it as separately reviewed-approved from immutable
+proposal checkpoint `8012405ce3bc4d14a0bdd267ab70ee81cd5f02c2` under the
+standing unattended delegation, with immediate human supersession. Implement
+only its twelve numbered items. Add no kernel/runtime owner, Core/checker case, second
 parser, classifier decomposition heuristic, external coherence evidence,
 curry, browser/public preset, or scale behavior.
 
