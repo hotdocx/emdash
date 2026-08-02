@@ -16,9 +16,9 @@ displayed-natural telescope, grouped text, and reviewer route are final-green
 at rollback-safe semantic/product checkpoint
 `607a026f88bc6d3b9f305ecb21f6630ce7c94950`.
 `COMPOSITIONAL-NATURAL-BINDER-0A` is complete as a read-only architecture
-audit. The exact `COMPOSITIONAL-NATURAL-BINDER-1B` proposal below is frozen
-under gate `H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-01`; it still requires a
-separate review/decision checkpoint before behavior edits.
+audit. The exact `COMPOSITIONAL-NATURAL-BINDER-1B` proposal below was frozen at
+`7104ca8cc8c9c46187093ba2051dd80917cc31a3` and independently approved by
+[`D-DTTLF-USABILITY-074`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D074_REVIEW.md).
 
 ## Objective
 
@@ -432,7 +432,7 @@ Any later implementation proposal must include at least:
 |---|---|---|---|
 | `CONTEXTUAL-ND-TELESCOPE-REVIEWER-1AP` | final-green at `607a026f88bc6d3b9f305ecb21f6630ce7c94950` | D-070 through D-073 | Typed canonical finite `:^nd`, grouped text, lean chain-2A reviewer preset, production/browser evidence, and effective aggregate qualification. |
 | `COMPOSITIONAL-NATURAL-BINDER-0A` | complete; read-only | final-green 1AP; user-approved architectural direction | Existing semantic ladder and rich Core are sufficient; exact gap is open ordinary-component lowering. `Pi_cat(Transf_catd)` remains distinct from `Transfd_cat`. |
-| `COMPOSITIONAL-NATURAL-BINDER-1B` | exact proposal frozen under H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-01; separate D-074 review pending | completed 0A | Add rich `transfor` assumptions and one reusable ordinary `transforLambda` with recursive eta/identity/composition/pre/postwhiskering. Preserve compact `:^nd` unchanged. |
+| `COMPOSITIONAL-NATURAL-BINDER-1B` | dependency-ready; approved by D-DTTLF-USABILITY-074 | completed 0A; proposal `7104ca8cc8c9c46187093ba2051dd80917cc31a3` | Add rich `transfor` assumptions and one reusable ordinary `transforLambda` with recursive eta/identity/composition/pre/postwhiskering. Preserve compact `:^nd` unchanged. |
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | pending final-green 1B | completed 1B | Decide the exact introduction-recursion claim and remaining classifier/body/variance non-claims before text or browser promotion. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
 
@@ -486,8 +486,8 @@ introduction. Distinguish semantic expansion of compact `:^nd` from actual
 composition of reusable public `:^n` constructors. Do not assume
 `Transfd_cat` equals a section of `Transf_catd`.
 
-Review frozen `COMPOSITIONAL-NATURAL-BINDER-1B` independently under D-074
-before behavior edits, then implement it only if approved. Natural
+Implement frozen `COMPOSITIONAL-NATURAL-BINDER-1B` exactly as approved by
+D-DTTLF-USABILITY-074. Natural
 transformation bodies must be recursively constructed from internal owners and
 fail closed without them. Keep the existing compact `:^nd` factorer unchanged
 until exact parity supports a later delegation decision. Preserve object,
@@ -501,6 +501,12 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-DTTLF-USABILITY-074 approved.** A separate review of
+  proposal checkpoint `7104ca8cc8c9c46187093ba2051dd80917cc31a3` confirms
+  that the construction-only classifier adds no LF semantics and that all five
+  positive branches reconstruct existing internal owners. The standing
+  unattended-review delegation approves exact 1B implementation while
+  preserving compact `:^nd` and all classifier distinctions.
 - **2026-08-02 — H-DTTLF-USABILITY-COMPOSITIONAL-NATURAL-01 proposal frozen.**
   The read-only audit finds no missing kernel semantics. D-074 proposes one
   construction-only ordinary natural-component classifier and a reusable
