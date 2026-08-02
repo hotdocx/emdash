@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'TEXT-PARITY-RECURSIVE-MIXED-1-CATEGORICAL-TEXT-1' as const;
+    'CONTEXTUAL-ND-TEXT-PARITY-1AI-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -109,6 +109,12 @@ export type CoreCategoricalTextTermExpected =
     | {
         readonly kind: 'displayed-transfor';
         readonly base: CoreCategoricalCategory;
+        readonly source: CoreCategoricalTerm;
+        readonly target: CoreCategoricalTerm;
+    }
+    | {
+        readonly kind: 'displayed-context-transfor';
+        readonly sourceFamily: CoreCategoricalDisplayedFamily;
         readonly source: CoreCategoricalTerm;
         readonly target: CoreCategoricalTerm;
     };
@@ -981,6 +987,33 @@ class CoreCategoricalTextResolver {
                                 this.sourceFile,
                                 expression.range,
                                 'parsed categorical cell composition'
+                            )
+                        )
+                    );
+                }
+                const identity = this.fixedApplicationSpine(
+                    expression,
+                    'identityCell',
+                    1
+                );
+                if (identity !== undefined) {
+                    const [endpointExpression] = identity;
+                    const endpoint = this.resolveTerm(
+                        endpointExpression,
+                        environment,
+                        undefined,
+                        lambdaDepth
+                    );
+                    return invokeProgram(
+                        this.sourceFile,
+                        expression.range,
+                        'Categorical cell identity was rejected',
+                        () => this.program.identityCell(
+                            endpoint,
+                            sourceSiteFor(
+                                this.sourceFile,
+                                expression.range,
+                                'parsed categorical cell identity'
                             )
                         )
                     );
@@ -2035,6 +2068,13 @@ class CoreCategoricalTextResolver {
                     )
                 );
             case 'nd':
+                if (expected.kind === 'displayed-context-transfor') {
+                    return this.resolveDisplayedContextTransforLambda(
+                        expression,
+                        environment,
+                        expected
+                    );
+                }
                 return this.resolveDisplayedTransforLambda(
                     expression,
                     environment,
@@ -2294,6 +2334,42 @@ class CoreCategoricalTextResolver {
             expression.range,
             'Displayed-transfor abstraction was rejected',
             () => this.program.displayedTransforLambda(
+                binding.name,
+                expected.source,
+                expected.target,
+                token => this.resolveLambdaBody(
+                    expression,
+                    binding,
+                    token,
+                    environment
+                ),
+                {
+                    source: this.lambdaSource(expression)
+                }
+            )
+        );
+    }
+
+    private resolveDisplayedContextTransforLambda(
+        expression: LocatedLambda,
+        environment: InternalEnvironment,
+        expected: Extract<
+            CoreCategoricalTextExpected,
+            { readonly kind: 'displayed-context-transfor' }
+        >
+    ): CoreCategoricalTerm {
+        const binding = expression.bindingGroups[0][0];
+        this.requireDisplayedFamilyAnnotation(
+            binding,
+            environment,
+            expected.sourceFamily,
+            'displayed contextual transfor source'
+        );
+        return invokeProgram(
+            this.sourceFile,
+            expression.range,
+            'Displayed contextual transfor abstraction was rejected',
+            () => this.program.displayedTransforContextLambda(
                 binding.name,
                 expected.source,
                 expected.target,

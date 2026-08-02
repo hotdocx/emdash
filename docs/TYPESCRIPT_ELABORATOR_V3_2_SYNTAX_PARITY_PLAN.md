@@ -1748,6 +1748,15 @@ rewrite history, delete branches/worktrees, or perform unrelated cleanup.
 
 ## Change Log
 
+- **2026-08-02 — compact contextual `:^nd` parity implemented.** The additive
+  successor now routes a `displayed-context-transfor` expected contract to the
+  existing direct compact binder and adds only the fixed `identityCell` text
+  head. Eta, both whiskers, composition, the direct coherence factorer, and
+  historical base-component `^nd` remain on their existing paths. The
+  affected parity corpus is 14/14 and the nearest direct corpus is 24/24;
+  typecheck/lint and exact revision synchronization pass. Graduation and any
+  next semantic continuation remain in the dedicated successor plan; this
+  plan's original graduation history remains closed.
 - **2026-08-02 — post-graduation compact `:^nd` continuation isolated.** The
   semantic API subsequently added the fibre-object contextual
   `displayedTransforContextLambda` route with eta, identity, recursive

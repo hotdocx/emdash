@@ -25,7 +25,9 @@ them. The zero-behavior
 `CONTEXTUAL-ND-TEXT-REVISION-CORRECTION-1AI1` proposal below is separately
 reviewed-approved under D-DTTLF-USABILITY-066 from immutable proposal
 checkpoint `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a`; D-065 implementation is
-dependency-ready.
+implemented and focused-green. Its synchronized semantic checkpoint is
+pending in the current bounded commit; the read-only 0AJ graduation audit is
+the next dependency-ready row.
 
 ## Objective
 
@@ -141,9 +143,9 @@ Core, checker, evaluator, or mathematical-construction gap.
 |---|---|---|---|
 | `HOM-CATD-ACTION-TRANSFER-GRADUATE-0AG` | complete read-only; zero semantic delta | final-green D-062 through D-064 | Fixed alternating Hom/Transf targets and their generic action work; no `Transf_catd_func` consumer was found. |
 | `CONTEXTUAL-ND-TEXT-PARITY-0AH` | executable read-only audit complete; zero behavior delta | completed 0AG; graduated historical syntax parity; direct D-055 through D-058; one disposable focused probe | Neutral application already handles compact eta and both whiskers, `composeCells` already recurses, and the direct factorer remains the coherence gate. Current text fails at exactly the expected-contract/family-annotation distinction (`EXPECTED_CATEGORY`) and absent `identityCell` resolver head (`UNKNOWN_IDENTIFIER`). The historical base-component route remains green. |
-| `CONTEXTUAL-ND-TEXT-PARITY-1AI` | separately reviewed-approved under D-DTTLF-USABILITY-065; implementation dependency-ready after D-066 | completed 0AH; immutable proposal checkpoint `a4ee654d8e025df6962ea92f219819430852f51a`; separate D-065 review; approved D-066 correction | Add one expected-contract kind selecting the existing compact program method and one fixed `identityCell` resolver head; preserve the old route and every semantic boundary. Add focused direct/text equivalence and negatives in the existing parity corpus. |
-| `CONTEXTUAL-ND-TEXT-REVISION-CORRECTION-1AI1` | separately reviewed-approved under D-DTTLF-USABILITY-066; zero behavior delta | approved D-065 item 7; immutable proposal checkpoint `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a`; separate D-066 review; executable inventory of all `CORE_CATEGORICAL_TEXT_REVISION` assertions | Replace only the old revision literal in the nine already-existing pin assertions omitted from D-065's file list. Change no imports, test logic, behavior, runner, or validation boundary. |
-| `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | deferred read-only graduation | green conditional 1AI | Re-audit the exact direct/text envelope and select the next semantic or reader-facing continuation without claiming unrestricted `:^nd`. |
+| `CONTEXTUAL-ND-TEXT-PARITY-1AI` | implemented and focused-green under D-DTTLF-USABILITY-065; semantic checkpoint pending in the synchronized commit | completed 0AH; immutable proposal checkpoint `a4ee654d8e025df6962ea92f219819430852f51a`; separate D-065 review; approved D-066 correction; 14/14 affected parity and 24/24 nearest direct regressions | One expected-contract kind selects the existing compact program method and one fixed `identityCell` resolver head delegates to the existing program operation. Eta and both whiskers remain neutral applications, composition remains `composeCells`, and the direct factorer remains the sole coherence gate. Historical `^nd` is unchanged. |
+| `CONTEXTUAL-ND-TEXT-REVISION-CORRECTION-1AI1` | implemented with zero behavior delta under D-DTTLF-USABILITY-066; checkpoint shared with 1AI | approved D-065 item 7; immutable proposal checkpoint `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a`; separate D-066 review; exact revision search | Only the old revision literal changed in the nine already-existing pin assertions omitted from D-065's file list. No import, test logic, behavior, runner, or validation boundary changed. |
+| `CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` | dependency-ready read-only graduation | final-green conditional 1AI/1AI1 | Re-audit the exact direct/text envelope and select the next semantic or reader-facing continuation without claiming unrestricted `:^nd`. |
 
 ## `CONTEXTUAL-ND-TEXT-PARITY-0AH` Audit Contract
 
@@ -340,6 +342,40 @@ The decision question is:
 > authorizing only the nine mechanical revision-literal replacements above,
 > then resume the otherwise unchanged compact contextual text implementation?
 
+## `CONTEXTUAL-ND-TEXT-PARITY-1AI` Implementation Result
+
+The approved adapter slice is implemented without a new syntax tree, program
+method, Core/checker/runtime case, classifier decomposition, or coherence
+branch. The additive `displayed-context-transfor` expected contract carries
+the optional-annotation family plus the two endpoint terms. Only that contract
+selects `displayedTransforContextLambda`; the historical
+`displayed-transfor` contract and base-component callback remain unchanged.
+
+The resolver adds exactly one named term operation, `identityCell(endpoint)`,
+and delegates it to the existing program method. Compact eta and fixed-head
+pre/postwhiskering remain ordinary neutral applications, while recursive
+vertical composition remains on the existing `composeCells` route. The
+existing direct contextual factorer therefore continues to decide whether a
+parsed point body determines a coherent whole `Transfd`.
+
+Focused evidence is final-green:
+
+- the affected text-parity file is 14/14, covering annotated and omitted
+  family annotations, eta, identity, recursive composition, both whiskering
+  orientations, the fixed four-level `Transf -> Hom -> Transf -> Hom` target,
+  exact fail-closed negatives, and the historical base-component route;
+- the nearest direct eta/identity/composition/whiskering corpus is 24/24,
+  including fibre point, base-arrow, and higher-cell observations;
+- root TypeScript typecheck and lint pass;
+- exact search finds no superseded revision assertion, the nine D-066 files
+  contain only the approved literal replacement, and whitespace is clean; and
+- no kernel, browser, package, root runner, or public barrel changed, so no
+  kernel or long aggregate rerun was required.
+
+The implementation does not graduate unrestricted `:^nd`, arbitrary
+point-arrow synthesis, or a varying four-parameter `Transf_catd` classifier.
+Those remain semantic coverage questions rather than text-parser work.
+
 ## Explicit Non-Goals
 
 This plan does not authorize:
@@ -389,15 +425,13 @@ Keep a genuinely four-parameter-varying classifier deferred until a concrete
 consumer exists.
 
 Treat `CONTEXTUAL-ND-TEXT-PARITY-0AH` as executable and read-only complete.
-Treat the exact `CONTEXTUAL-ND-TEXT-PARITY-1AI` /
-H-DTTLF-USABILITY-CONTEXTUAL-ND-TEXT-PARITY-01 /
-D-DTTLF-USABILITY-065 proposal as separately reviewed-approved from immutable
-checkpoint `a4ee654d8e025df6962ea92f219819430852f51a` under the standing
-unattended delegation, with immediate human supersession. Treat the exact
-zero-behavior D-DTTLF-USABILITY-066 revision-pin file-list correction as
-separately reviewed-approved from immutable checkpoint
-`bb485375f6c843adc6c3b80755b1eb11e9cdbf0a` under the same delegation.
-Implement D-065 plus only those nine exact literal synchronizations.
+Treat D-DTTLF-USABILITY-065 and its zero-behavior D-DTTLF-USABILITY-066
+file-list correction as implemented and focused-green at their exact reviewed
+boundaries. Preserve their 14/14 affected parity, 24/24 nearest direct,
+typecheck/lint, exact revision-search, and whitespace evidence; do not repeat
+the unchanged long aggregate. Execute
+`CONTEXTUAL-ND-TEXT-PARITY-GRADUATE-0AJ` read-only first and select at most one
+next semantic or reader-facing continuation from current evidence.
 Preserve internal object-, arrow-, base-arrow-, and higher-action ownership and
 fail closed outside the direct semantic envelope.
 
@@ -408,6 +442,16 @@ unrelated cleanup without exact authorization.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-065/D-066 implementation final-green.** The text adapter
+  adds one compact expected-contract route and one fixed `identityCell` head,
+  while reusing neutral application, `composeCells`, and the existing direct
+  factorer. The affected parity corpus is 14/14 and the nearest direct corpus
+  is 24/24; typecheck, lint, exact revision search, and whitespace pass. The
+  fixed alternating target follows the same route, all nine correction files
+  contain only their approved literal replacement, and the historical route
+  remains green. No aggregate, kernel, browser, or public-product boundary
+  changed. The synchronized semantic checkpoint is pending in this bounded
+  commit; read-only 0AJ is next.
 - **2026-08-02 — D-DTTLF-USABILITY-066 approved exactly as proposed.** A
   separate immutable review of proposal checkpoint
   `bb485375f6c843adc6c3b80755b1eb11e9cdbf0a` confirms that the correction
