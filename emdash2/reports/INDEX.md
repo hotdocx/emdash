@@ -189,8 +189,8 @@ chart-family facade exceeded the bounded elaboration budget, so the existing
 observations are exposed directly.
 Its source/reviewer/central checks, exact inherited-warning comparison, strict
 1,987-check catalog, synchronized 92-target health, and nonduplicative
-integration remainder are green; the bounded tranche is ready for its
-authorized local checkpoint.
+integration remainder are green; the implementation and synchronized
+authority prose are locally checkpointed at `db91ddf`.
 The historical Cartier file is experimental requirements evidence rather
 than semantic authority. Before this selected glue may determine the affine
 architecture, PSSS-08c0F requires an independent matching-versus-section

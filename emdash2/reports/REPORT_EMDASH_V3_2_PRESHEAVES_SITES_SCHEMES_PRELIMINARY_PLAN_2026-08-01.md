@@ -178,8 +178,9 @@ chart-family facade and its split consumer both exceeded the bounded
 elaboration budget, so that convenience layer is rejected rather than
 supported by a rigid head or local rule. Focused source, reviewer, and central
 checks, exact inherited warnings, strict audit/catalog, synchronized 92-target
-health, and the nonduplicative integration remainder are green. The tranche is
-ready for its authorized local checkpoint.
+health, and the nonduplicative integration remainder are green. The
+implementation and synchronized authority prose are locally checkpointed at
+`db91ddf`.
 
 Branch: `goal/presheaves-sites-schemes-v3.2`
 
@@ -3880,8 +3881,8 @@ replacements for them.
 ### Phase PSSS-10 — Slice sites and affine charts
 
 Status: PSSS-10a computational big-slice implementation is green and locally
-checkpointed at `837cfeb`; PSSS-10b has a synchronized-green concrete
-two-chart atlas implementation ready for its authorized local checkpoint.
+checkpointed at `837cfeb`; PSSS-10b is synchronized-green and locally
+checkpointed at `db91ddf`.
 
 ##### PSSS-10a — Big affine slice and computing overlap
 
@@ -3953,8 +3954,8 @@ selected sheaf datum, or additional descent interface is immediately needed.
 
 ##### PSSS-10b — Minimal supplied cover and computational affine atlas
 
-Status: synchronized-green concrete complementary-idempotent atlas; local
-checkpoint pending.
+Status: synchronized-green concrete complementary-idempotent atlas, locally
+checkpointed at `db91ddf`.
 
 The source of truth is the existing `CommRingZariskiCoverFamily`, not a new
 atlas record. For every `R x S`, the generators
@@ -4030,7 +4031,7 @@ constraint, the fresh health traversal is followed by the nonduplicative CI
 remainder rather than a second traversal: the snapshot check, 39 Python tests,
 five registry tests, shell/source/report/reference checks, strict audit and
 catalog, and book evidence/typography/KaTeX/assembly checks are all green.
-The bounded tranche is ready for its authorized local checkpoint.
+The implementation checkpoint is `db91ddf`.
 
 Induced small-slice topology, `Spec(R)/D(f)` versus `Spec(R[1/f])` as an
 equivalence of ringed sites, subcanonicity, and general sheafification remain
@@ -4690,7 +4691,7 @@ consumer demonstrates that nontransitive unification requires it.
 | PSSS-09cZ2 | Intended non-chaotic supplied Zariski topology or first sheaf consumer | Consumer/research gate | PSSS-09cZ1 |
 | PSSS-09c | Proposition-valued Zariski topology and subcanonicity integration | Research gate | One of PSSS-09cG/PSSS-09cZ2; PSSS-05b for subcanonicity |
 | PSSS-10a | Computational big affine slice, coordinate presheaf, charts, and two-sided localization overlap | Rule-free source/reviewer and central diagnostics green; exact inherited warnings, strict audit, 1,981-check catalog, synchronized 90-target health, and nonduplicative integration remainder green; locally checkpointed at `837cfeb` | PSSS-08c0J, PSSS-09a, and the checkpointed localization-overlap owner |
-| PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Rule-free complementary-idempotent atlas source/reviewer/central checks, exact warnings, strict 1,987-check catalog, synchronized 92-target health, and nonduplicative integration remainder green; local checkpoint pending | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
+| PSSS-10b | Minimal supplied finite cover/atlas and concrete computational gluing | Rule-free complementary-idempotent atlas source/reviewer/central checks, exact warnings, strict 1,987-check catalog, synchronized 92-target health, and nonduplicative integration remainder green; locally checkpointed at `db91ddf` | Checkpointed PSSS-10a plus selected PSSS-09 presentation data |
 | PSSS-10c | Induced small-slice topology and ringed-site comparison | Proposed later, not an MVP prerequisite | PSSS-10b consumer plus selected PSSS-09c/PSSS-08c1 scope |
 | PSSS-11 | Scheme atlas | Proposed | PSSS-10 |
 | PSSS-12 | Functor-of-points/qcqs comparison | Research boundary | PSSS-11 and representability audit |

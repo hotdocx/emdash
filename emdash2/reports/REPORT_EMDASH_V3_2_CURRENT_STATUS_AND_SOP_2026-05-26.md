@@ -2573,7 +2573,8 @@ check-seconds at source snapshot
 the new source and reviewer take 9.006 and 9.287 seconds there. The fresh
 health traversal is followed by the nonduplicative CI remainder rather than
 another long traversal; snapshot/tooling/test/document/book/audit/catalog
-gates are green. The tranche is ready for its authorized local checkpoint.
+gates are green. The implementation and synchronized authority prose are
+locally checkpointed at `db91ddf`.
 
 PSSS-09a now adds the separate rule-free
 `emdash3_2_commutative_algebra_zariski.lp` layer.  A presented affine cover
