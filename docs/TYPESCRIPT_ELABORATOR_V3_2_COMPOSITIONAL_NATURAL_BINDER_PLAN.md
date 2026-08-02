@@ -31,8 +31,9 @@ existing active owners, rejects arbitrary point arrows, and leaves compact
 The expanded first-hom proposal was frozen at
 `5929b2962ea6fe3465047556f9992bab4a827971` and independently approved under
 [`D-DTTLF-USABILITY-076`](./TYPESCRIPT_ELABORATOR_V3_2_COMPOSITIONAL_NATURAL_BINDER_D076_REVIEW.md).
-Its implementation is final-focused-green and ready for a rollback-safe
-semantic checkpoint. Literal typed `lambda^n k. lambda^f a` now shares the
+Its implementation is final-focused-green at rollback-safe semantic checkpoint
+`9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1`. Literal typed
+`lambda^n k. lambda^f a` now shares the
 compact `:^fd` recursive factorer and emits byte-identical Core while retaining
 the ordinary `Transf_cat` facade.
 
@@ -827,7 +828,7 @@ Any later implementation proposal must include at least:
 | `COMPOSITIONAL-NATURAL-BINDER-1B` | final-focused-green at `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d` | completed 0A; D-074 and D-075 | Rich `transfor` assumptions and reusable root `transforLambda` pass eta, identity, recursive composition, both whiskers, arbitrary-arrow rejection, scope/callback/immutability, closed elimination, generic checking, and compact-`:^nd` preservation. The first slice deliberately rejects an outer contextual capture. |
 | `COMPOSITIONAL-NATURAL-ACTION-CORRECTION-1B2` | final-focused-green at `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d` | focused 1B failure; D-075; existing `comp_cat_con_fapp1_func` and `comp_cat_cov_fapp1_func` | Imports exactly two existing classifier-exact action signatures and uses them for pre/postwhiskering. Adds zero rules, kernel owners, Core nodes, checker branches, or external coherence fields. |
 | `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` | complete; read-only architecture audit | completed 1B/1B2 | Both compact terms recheck unchanged under their expanded facades. Select shared scoped contextual factorization with thin expanded/compact wrappers; literal current-method reuse is blocked only by the absent open-fibre representation. Keep mixed `Functor_catd`/`Transf_catd` distinct. |
-| `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green; semantic checkpoint pending | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
+| `COMPOSITIONAL-FD-EXPANDED-1C` | final-focused-green at `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1` | completed 0C; D-076; existing first-hom runtime bridge | Construction-only scoped fibres and literal typed `transforLambda(k,E,D,k => lambda(a,E[k],D[k],body))` share the compact `:^fd` factorer, preserve byte-identical Core, expose closed fibre object/arrow action, and retain the ordinary `Transf_cat` facade. |
 | `COMPOSITIONAL-ND-EXPANDED-1D` | dependency-ready read-only audit/proposal | green 1C | Reuse the architecture at the second hom for expanded `lambda^n k. lambda^n a` and compact `:^nd`; freeze and independently review an exact behavior slice before implementation. |
 | `COMPOSITIONAL-NATURAL-TEXT-PARITY-1D` | deferred | graduated direct typed API | Add text syntax only after the target mathematical AST/API is settled. |
 
@@ -906,7 +907,8 @@ recheck unchanged under the canonical expanded facades, and the selected
 architecture is one shared scoped contextual factorer with thin
 presentation-specific wrappers. Treat the independently approved
 `COMPOSITIONAL-FD-EXPANDED-1C` proposal as final-focused-green after its
-rollback-safe semantic checkpoint. Continue with only the read-only
+rollback-safe semantic checkpoint
+`9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1`. Continue with only the read-only
 `COMPOSITIONAL-ND-EXPANDED-1D` audit/proposal; do not implement the second-hom
 bridge before a separate review. Natural transformation bodies
 must be recursively constructed from internal owners and fail closed without
@@ -929,7 +931,8 @@ remove worktrees, or perform unrelated cleanup without exact authorization.
   internal base-arrow ownership, scope rejection, negative factorization, and
   predecessor preservation pass. Static gates pass. The sole root aggregate
   remains non-green only on unrelated stale kernel pins/counts and the known
-  README line-wrap assertion and must not be repeated.
+  README line-wrap assertion and must not be repeated. The exact semantic
+  checkpoint is `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1`.
 - **2026-08-02 — D-DTTLF-USABILITY-076 approved.** A separate review of exact
   proposal checkpoint `5929b2962ea6fe3465047556f9992bab4a827971` confirms
   that the scoped fibre descriptor adds no LF semantics and cannot escape as a

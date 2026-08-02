@@ -41,7 +41,9 @@
 > and workspace/typecheck/lint/diff hygiene pass. The single root aggregate
 > was run once and remains non-green only on unrelated stale kernel digest,
 > source-position/count pins, and the known README line-wrap assertion. Do not
-> repeat it for this boundary. This slice adds no Core/kernel owner, cast,
+> repeat it for this boundary. The exact rollback-safe semantic checkpoint is
+> `9a997edb6a34ddc3310f1a9db7e5db8bdd52c8e1`. This slice adds no Core/kernel
+> owner, cast,
 > curry, external coherence, text/browser behavior, or second-hom behavior.
 >
 > The exact next row is the read-only
