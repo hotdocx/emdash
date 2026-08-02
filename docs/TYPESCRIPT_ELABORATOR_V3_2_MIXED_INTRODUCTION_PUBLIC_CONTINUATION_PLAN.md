@@ -502,7 +502,7 @@ It deliberately avoids:
 | `DIRECT-MIXED-TOWER-GRADUATE-0Q` | read-only successor audit complete; zero semantic delta; arbitrary-level source action selected | implemented D-053 tower; arbitrary positive sibling-layer compiler; existing `Hom_catd`/`Transf_catd`, `homd_int`, and displayed-`:^nd` evidence; bounded current-kernel check | The tower is genuinely depth-recursive but presently supports only eta/identity and closed target maps. Independent positive sibling depth/width is already separately generic, and mixed classifier formation/elimination plus higher action are already internalized. The first missing operation that directly stress-tests variance at arbitrary depth is a finite contravariant source chain at any tower layer, lifted through its enclosing prefix by the existing target action. |
 | `DIRECT-MIXED-TOWER-SOURCE-ACTION-1R` | implemented and in-scope green at `390d9f4561576885d5d55588402479db877028ff` under D-DTTLF-USABILITY-054 | completed `DIRECT-MIXED-TOWER-GRADUATE-0Q`; immutable proposal `107798b09081212007d4d1db80213eecc1495517`; separate review under standing unattended delegation | The tower factorer now accepts `F[c](L1(a1))...(Ln(an))`, with a finite closed coherent source chain independently at every layer. It compiles deepest-outward by reusing the existing mixed source action and target lift through the current prefix. Depth-three positions, simultaneous chains, bound-outer identity, rich `Hom_catd`, and generated depth six are checked without a kernel/transfer owner, curry, total section, sibling integration, pair/weakening/constant-middle case, or new `:^nd` constructor. |
 | `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` | read-only architecture audit complete; zero semantic delta; direct point-eta successor selected | completed D-054 arbitrary-level source action; existing `displayedTransforLambda` eta/composition; active `Transfd_cat`, `Transf_catd`, `homd_int`, and `tdapp1_int_*` owners | `:^nd`, like `:^fd`, is fundamentally a direct nested contextual binder. Its compact callback should hide `k :^n K`, expose `a :^n E[k]`, and factor supported point-arrow syntax back to a genuine `Transfd` owner in two recursive stages. The present API factors only whole fibre transformations. `Transf_catd`/Pi and Sigma-total views remain semantic comparisons, not a required curry route. The first missing slice is TypeScript-only point eta. |
-| `DIRECT-CONTEXTUAL-ND-ETA-1T` | exact non-self-authorizing proposal frozen below as D-DTTLF-USABILITY-055; decision pending | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; green active kernel and 14/14 existing `:^nd` regression baseline | Add one opt-in compact `displayedTransforContextLambda` and one construction-only indexed point-Hom/application route. Recognize only `eta[a]` for an already-coherent closed displayed transformation, recover `eta`, and preserve its internal object/fibre-arrow/base-arrow/higher action. Add no kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim. |
+| `DIRECT-CONTEXTUAL-ND-ETA-1T` | separately reviewed-approved under D-DTTLF-USABILITY-055; implementation dependency-ready | completed `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S`; immutable proposal `36e1c8dba16a8a206ace58628ba47703a2b74374`; separate review under standing unattended delegation; green active kernel and 14/14 existing `:^nd` regression baseline | Add one opt-in compact `displayedTransforContextLambda` and one construction-only indexed point-Hom/application route. Recognize only `eta[a]` for an already-coherent closed displayed transformation, recover `eta`, and preserve its internal object/fibre-arrow/base-arrow/higher action. Add no kernel/transfer owner, external coherence evidence, curry/section route, pointwise identity/composition, parser/browser route, or unrestricted-`:^nd` claim. |
 | `PRODUCT-FACADE-0A` | conditional deferred audit | measured obstruction during mixed-introduction work | Compare repeated composite, consistent transparent alias, and stable head. No edit merely for naming symmetry. |
 | `CURRY-PACKAGE-0A` | complete as supporting evidence; no independent edit promoted | concrete mixed-curry consumer | Generic `fapp*`/`tapp*`, section action, and displayed internal cell owners provide the required higher route. The measured gap is the selected mixed owner, not a rewrite of ordinary curry/uncurry. |
 
@@ -5369,6 +5369,40 @@ must confirm that the new classifier is construction-only, the point leaf
 recovers a genuine closed `Transfd`, and no external coherence datum or
 hidden curry dependency is introduced.
 
+### Separate D-DTTLF-USABILITY-055 review result
+
+The immutable proposal at
+`36e1c8dba16a8a206ace58628ba47703a2b74374` is approved exactly as its eleven
+items state under the standing unattended delegation, with immediate human
+supersession.
+
+The review confirms:
+
+- the active `Transfd_cat` type and component projections justify the
+  two-natural-variable contextual telescope;
+- closed `eta[x][u]` already typechecks through existing runtime owners, so
+  the new point node is a construction view that disappears when eta is
+  recovered, not a new semantic operation;
+- `displayedFunctorLambda` already establishes the required hidden-base,
+  indexed-slot, callback-once, scope-normalization, and fail-closed pattern;
+- the current `displayedTransforLambda` already establishes the second-stage
+  recovery of a closed outer `Transfd` from a whole fibre component;
+- adding an internal/public normalized `indexed-hom` classifier extends only
+  the categorical construction IR. It does not extend `CoreType`, the LF
+  language, or the generic Core checker/evaluator;
+- `homd_int` and `tdapp1_int_*` consume the recovered outer owner, so
+  fibre-arrow, base-arrow, and higher action remain internal rather than
+  being attached as equations to the callback result; and
+- no existing owner, alias, or application case already provides the open
+  two-index construction view. The narrow new view is therefore a measured
+  frontend seam rather than duplicate kernel mathematics.
+
+The review also confirms that retaining the old whole-fibre method while
+adding a separately named compact contextual method avoids silently changing
+existing TypeScript or text callers. Surface notation consolidation remains
+a later parser-parity task. No immediate human correction superseded the
+proposal, so only D-055's TypeScript/test/document scope is authorized.
+
 ## Validation And Checkpoint Policy
 
 For plan/proposal checkpoints:
@@ -5681,18 +5715,17 @@ Sigma-total presentations are classifier/comparison views, not a required
 curry route. The existing `displayedTransforLambda` remains the sound
 whole-fibre stage-two factorer; preserve it unchanged.
 
-Proceed next by checkpointing and separately reviewing the exact
-`DIRECT-CONTEXTUAL-ND-ETA-1T` /
+Treat the exact `DIRECT-CONTEXTUAL-ND-ETA-1T` /
 H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-ETA-01 /
-D-DTTLF-USABILITY-055 proposal. If and only if that immutable proposal is
-approved under the standing unattended delegation without an immediate human
-correction, implement its TypeScript-only point-eta proof slice. Add one
-opt-in compact contextual method, one construction-only indexed point-Hom
-classifier/application route, and one eta factorization back to an
-already-coherent closed `Transfd`. Add no kernel/transfer owner, generic
-checker/evaluator case, external naturality data, curry/section route,
-pointwise identity/composition, parser/browser/publication change, or
-unrestricted-`:^nd` claim.
+D-DTTLF-USABILITY-055 proposal at
+`36e1c8dba16a8a206ace58628ba47703a2b74374` as separately reviewed-approved
+under the standing unattended delegation, with immediate human supersession.
+Implement only its TypeScript-only point-eta proof slice. Add one opt-in
+compact contextual method, one construction-only indexed point-Hom/
+application route, and one eta factorization back to an already-coherent
+closed `Transfd`. Add no kernel/transfer owner, generic checker/evaluator
+case, external naturality data, curry/section route, pointwise identity/
+composition, parser/browser/publication change, or unrestricted-`:^nd` claim.
 
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
@@ -5711,6 +5744,20 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-01 — D-DTTLF-USABILITY-055 approved exactly as proposed.** A
+  separate review of immutable proposal checkpoint
+  `36e1c8dba16a8a206ace58628ba47703a2b74374` confirms that the active
+  `Transfd_cat` component ladder validates the two-natural-variable
+  telescope; closed point and base-arrow observations already use internal
+  owners; the established hidden-base construction can create an open
+  two-index point view; and the existing component factorer can recover the
+  genuine outer owner. The new `indexed-hom` remains construction-only and
+  disappears before Core checking. There is no external naturality datum,
+  curry dependency, new kernel mathematics, or hidden generic-checker change.
+  No immediate human correction superseded the proposal. Under the standing
+  unattended delegation, only its eleven TypeScript/test/document items are
+  authorized; all pointwise identity/composition, parser/browser,
+  publication, remote, and unrelated work remains excluded.
 - **2026-08-01 — `DIRECT-CONTEXTUAL-ND-ARCHITECTURE-0S` completed read-only
   and D-DTTLF-USABILITY-055 frozen for separate review.** Active authority
   confirms that `Transfd_cat FF GG` owns the outer displayed transformation,
