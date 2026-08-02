@@ -14,7 +14,9 @@
 > coherence field is added. The focused suite passes 6/6, as do workspace,
 > typecheck, changed-file lint, diff hygiene, and the bounded active-kernel
 > check. The single shared root aggregate was not repeated after reporting
-> only pre-existing source-digest pins and a README line-wrap assertion.
+> only pre-existing source-digest pins and a README line-wrap assertion. The
+> exact rollback-safe semantic checkpoint is
+> `a0c8c7a77a310ded8c972d2308e47f27c3a8c25d`.
 >
 > The next row is the read-only
 > `COMPOSITIONAL-NATURAL-BINDER-GRADUATE-0C` comparison. Preserve two
