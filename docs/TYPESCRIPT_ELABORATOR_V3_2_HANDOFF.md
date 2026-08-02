@@ -174,6 +174,13 @@
 > transformation-telescope capability from mixed classifiers, reuse chain-2A
 > unchanged, then add one genuine-dependent reviewer preset and correct the
 > README boundary. Bulk scale remains deferred.
+> D-070 implementation is focused-green through root typecheck, lint, the 1/1
+> chain/mixed Core-parity test, and the 1/1 reviewer-preset test. The first
+> fixture production check found exactly one exhaustive UI label switch
+> mechanically affected. The dedicated plan freezes
+> `CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` /
+> D-DTTLF-USABILITY-071 pending separate review; implementation is paused
+> before editing `emdash-template/src/App.tsx`.
 > Recursive-Hom public synchronization is deployed at
 > `9c4ed3612e6b7888a2e05a9dfca4090aac04b575`; D-039 and the specialized D-040
 > mixed-curry witness are final-green. The user superseded D-041 before its

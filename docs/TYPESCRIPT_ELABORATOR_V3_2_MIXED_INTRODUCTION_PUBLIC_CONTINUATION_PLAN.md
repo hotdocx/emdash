@@ -7960,6 +7960,14 @@ second parser, classifier decomposition heuristic, external coherence
 evidence, curry, broader browser/public behavior, or scale behavior outside
 that proposal.
 
+D-070 implementation is root-typecheck/lint green; its chain/mixed explicit
+Core parity and focused reviewer preset each pass 1/1. The first fixture
+production check found only the existing exhaustive expected-mode label switch
+mechanically affected. The dedicated plan freezes
+`CONTEXTUAL-ND-TELESCOPE-REVIEWER-UI-CORRECTION-1AP1` /
+D-DTTLF-USABILITY-071 pending separate review and pauses before editing the
+additional UI file.
+
 Keep PRODUCT-FACADE-0A conditional on a measured obstruction. The earlier
 ordinary-curry audit remains supporting evidence, while the concrete
 contextual-curry gap is now an exact bounded proposal rather than authority
@@ -7977,6 +7985,12 @@ removal, or unrelated cleanup is authorized.
 
 ## Decision Ledger
 
+- **2026-08-02 — D-071 UI-label correction frozen.** D-070's first browser-
+  fixture typecheck reaches the existing generic preset UI and finds its
+  exhaustive expected-mode label switch missing the new contextual-`:^nd`
+  variant. The dedicated five-item correction permits only one label case in
+  `emdash-template/src/App.tsx`; no UI flow or semantics is authorized before
+  separate review.
 - **2026-08-02 — D-070 separately reviewed-approved.** The immutable review
   of proposal checkpoint `41ddef0bad65f5766634c61c994f06f581f79cd0`
   confirms that a distinct transformation-telescope capability preserves the
