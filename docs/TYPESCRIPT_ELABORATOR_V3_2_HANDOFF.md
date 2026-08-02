@@ -323,9 +323,13 @@
 > construction seam and whiskering needs a broader orientation audit, so the
 > exact TypeScript-only `DIRECT-CONTEXTUAL-ND-COMPOSITION-1V` /
 > H-DTTLF-USABILITY-DIRECT-CONTEXTUAL-ND-COMPOSITION-01 /
-> D-DTTLF-USABILITY-056 proposal is frozen for separate review. It adds no
+> D-DTTLF-USABILITY-056 proposal at
+> `ff170aa0ab8ec18e829a95689800032401c18f23` is separately reviewed-approved
+> under the standing unattended delegation. It adds no
 > public method, Core/LF case, kernel/transfer owner, parser/browser behavior,
-> or unrestricted-`:^nd` claim. Do not implement it before that review.
+> or unrestricted-`:^nd` claim. Its exact homogeneous point-composition,
+> recursive closed-owner recovery, evidence, focused tests, and proportional
+> gates are now the dependency-ready implementation.
 > The completed mixed-mode telescope plan
 > proved the bounded positive context envelope, its exact final mixed
 > classifier, and text parity; the recursive successor completed
