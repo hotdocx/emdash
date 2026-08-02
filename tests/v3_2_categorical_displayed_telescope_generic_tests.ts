@@ -317,6 +317,23 @@ const deepTextExpected = (
     ...(bodyExpected === undefined ? {} : { bodyExpected })
 });
 
+const contextualNdExpected = (
+    sourceGroups:
+        readonly (readonly CoreCategoricalDisplayedFamily[])[]
+): CoreCategoricalTextTermExpected => Object.freeze({
+    kind: 'displayed-dependent-context-transfor' as const,
+    sourceGroups
+});
+
+const contextualNdEnvironment = (
+    terms: readonly CoreCategoricalTextBinding[] = []
+): readonly CoreCategoricalTextBinding[] => Object.freeze([
+    familyBinding('A', contextualTransfor.A),
+    familyBinding('B', contextualTransfor.B),
+    familyBinding('C', contextualTransfor.C),
+    ...terms
+]);
+
 const elaborateDeepText = (
     data: ReturnType<typeof deepFixture>,
     source: string,
@@ -1243,6 +1260,347 @@ describe('DISPLAYED-TELESCOPE-GENERIC-1 canonical layer fold', () => {
             'displayed-transfor');
     });
 
+    it('parses grouped nd text with sibling and dependent direct parity',
+        () => {
+        const {
+            emdash,
+            A,
+            B,
+            C,
+            siblingEta,
+            eta,
+            bindings
+        } = contextualTransfor;
+        const siblingGroups = Object.freeze([
+            Object.freeze([A, C])
+        ]);
+        const siblingEnvironment = contextualNdEnvironment([
+            termBinding('siblingEta', siblingEta)
+        ]);
+        const siblingParsed = elaborateCoreCategoricalText(
+            emdash,
+            {
+                source:
+                    'λ^nd (a : A, c : C). ' +
+                    'siblingEta (fibrePair a c)',
+                sourceFile: textSourceFile,
+                environment: siblingEnvironment,
+                expected: contextualNdExpected(siblingGroups)
+            }
+        );
+        const siblingDirect =
+            emdash.displayedTransforDependentContextLambda(
+                [
+                    { name: 'a', family: A },
+                    { name: 'c', family: C }
+                ],
+                ([a, c]) => point(
+                    emdash,
+                    siblingEta,
+                    emdash.fibrePair(a, c)
+                )
+            );
+
+        const dependentGroups = Object.freeze([
+            Object.freeze([A]),
+            Object.freeze([B])
+        ]);
+        const dependentEnvironment = contextualNdEnvironment([
+            termBinding('eta', eta)
+        ]);
+        const annotated = elaborateCoreCategoricalText(
+            emdash,
+            {
+                source:
+                    'λ^nd (a : A; b : B). ' +
+                    'eta (fibrePair a b)',
+                sourceFile: textSourceFile,
+                environment: dependentEnvironment,
+                expected: contextualNdExpected(dependentGroups)
+            }
+        );
+        const omitted = elaborateCoreCategoricalText(
+            emdash,
+            {
+                source: 'λ^nd (a; b). eta (fibrePair a b)',
+                sourceFile: textSourceFile,
+                environment: dependentEnvironment,
+                expected: contextualNdExpected(dependentGroups)
+            }
+        );
+        const dependentDirect =
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => point(
+                    emdash,
+                    eta,
+                    emdash.fibrePair(a, b)
+                )
+            );
+        const compareDirectText = (
+            parsed: CoreCategoricalTerm,
+            direct: CoreCategoricalTerm
+        ) => {
+            const parsedCompilation = emdash.compile(parsed);
+            const directCompilation = emdash.compile(direct);
+            assert.equal(
+                parsedCompilation.explicitCore,
+                directCompilation.explicitCore
+            );
+            assert.equal(
+                parsedCompilation.explicitInferredType,
+                directCompilation.explicitInferredType
+            );
+        };
+
+        compareDirectText(siblingParsed, siblingDirect);
+        compareDirectText(annotated, dependentDirect);
+        compareDirectText(omitted, dependentDirect);
+        const evidence = emdash.inspect(annotated).abstractions.at(-1);
+        if (
+            evidence?.rule !==
+                'categorical.displayed-transfor-dependent-context'
+        ) {
+            assert.fail('Missing parsed contextual telescope evidence');
+        }
+        assert.deepEqual(
+            evidence.layers.map(layer => layer.bindingNames),
+            [['a'], ['b']]
+        );
+        assert.equal(Object.isFrozen(evidence), true);
+        assert.equal(Object.isFrozen(evidence.layers), true);
+        assert.equal(Object.isFrozen(evidence.layers[1]), true);
+        assert.equal(Object.isFrozen(evidence.body), true);
+    });
+
+    it('parses grouped nd text recursive cells and both whiskerings', () => {
+        const {
+            emdash,
+            A,
+            B,
+            eta,
+            theta,
+            postMapper,
+            bindings
+        } = contextualTransfor;
+        const expected = contextualNdExpected([
+            [A],
+            [B]
+        ]);
+        const environment = contextualNdEnvironment([
+            termBinding('eta', eta),
+            termBinding('theta', theta),
+            termBinding('postMapper', postMapper)
+        ]);
+        const parse = (body: string) => elaborateCoreCategoricalText(
+            emdash,
+            {
+                source: `λ^nd (a; b). ${body}`,
+                sourceFile: textSourceFile,
+                environment,
+                expected
+            }
+        );
+        const parsed = [
+            parse('identityCell (fibrePair a b)'),
+            parse(
+                'composeCells (theta (fibrePair a b)) ' +
+                    '(eta (fibrePair a b))'
+            ),
+            parse('eta (fibrePair a b)'),
+            parse('postMapper (eta (fibrePair a b))')
+        ];
+        const pair = (
+            a: CoreCategoricalTerm,
+            b: CoreCategoricalTerm
+        ) => emdash.fibrePair(a, b);
+        const direct = [
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => emdash.identityCell(pair(a, b))
+            ),
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => emdash.composeCells(
+                    point(emdash, theta, pair(a, b)),
+                    point(emdash, eta, pair(a, b))
+                )
+            ),
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => point(emdash, eta, pair(a, b))
+            ),
+            emdash.displayedTransforDependentContextLambda(
+                bindings,
+                ([a, b]) => point(
+                    emdash,
+                    postMapper,
+                    point(emdash, eta, pair(a, b))
+                )
+            )
+        ];
+
+        parsed.forEach((term, index) => {
+            assert.equal(
+                emdash.compile(term).explicitCore,
+                emdash.compile(direct[index]).explicitCore
+            );
+        });
+        const evidence = parsed.map(term => {
+            const value = emdash.inspect(term).abstractions.at(-1);
+            if (
+                value?.rule !==
+                    'categorical.displayed-transfor-dependent-context'
+            ) {
+                assert.fail('Missing parsed contextual telescope evidence');
+            }
+            return value;
+        });
+        assert.equal(
+            evidence[0]?.bodyRule,
+            'categorical.displayed-transfor-context-identity'
+        );
+        assert.equal(
+            evidence[1]?.bodyRule,
+            'categorical.displayed-transfor-context-composition'
+        );
+        assert.equal(evidence[2]?.orientation, 'pre');
+        assert.equal(evidence[3]?.orientation, 'post');
+    });
+
+    it('parses grouped nd text through four canonical layers', () => {
+        const data = mixedDeep;
+        const endpointFamily = data.emdash.displayedProduct(
+            data.liftedA,
+            data.Q
+        );
+        const target = data.emdash.displayedFamily(
+            'generic_text_deep_nd_target',
+            data.sigmaD
+        );
+        const sourceEndpoint = data.emdash.displayedFunctor(
+            'generic_text_deep_nd_source',
+            endpointFamily,
+            target
+        );
+        const targetEndpoint = data.emdash.displayedFunctor(
+            'generic_text_deep_nd_target_functor',
+            endpointFamily,
+            target
+        );
+        const eta = data.emdash.displayedTransfor(
+            'generic_text_deep_nd_eta',
+            sourceEndpoint,
+            targetEndpoint
+        );
+        const parsed = elaborateDeepText(
+            data,
+            'λ^nd (a : A; b : B, c : C; d : D; ' +
+                'e : E, f : F). ' +
+                'deepEta (fibrePair a (fibrePair e f))',
+            contextualNdExpected([
+                [data.A],
+                [data.B, data.C],
+                [data.D],
+                [data.E, data.F]
+            ]),
+            deepTextEnvironment(data, [termBinding('deepEta', eta)])
+        );
+        const inspection = data.emdash.inspect(parsed);
+        const evidence = inspection.abstractions.at(-1);
+
+        assert.equal(inspection.type.tag, 'displayed-transfor');
+        if (
+            evidence?.rule !==
+                'categorical.displayed-transfor-dependent-context'
+        ) {
+            assert.fail('Missing deep parsed contextual evidence');
+        }
+        assert.deepEqual(
+            evidence.layers.map(layer => layer.bindingNames),
+            [['a'], ['b', 'c'], ['d'], ['e', 'f']]
+        );
+        assert.equal(evidence.contextSize, 7);
+        assert.equal(Object.isFrozen(evidence.layers[3]), true);
+    });
+
+    it('fails closed for invalid grouped nd text contracts and bodies',
+        () => {
+        const {
+            emdash,
+            A,
+            B,
+            C,
+            D,
+            p
+        } = contextualTransfor;
+        const expected = contextualNdExpected([[A], [B]]);
+        const environment = contextualNdEnvironment([
+            termBinding('p', p)
+        ]);
+        const reject = (
+            source: string,
+            requested: CoreCategoricalTextTermExpected,
+            code: CoreCategoricalTextErrorCode,
+            bindings = environment,
+            program = emdash
+        ) => captureTextError(
+            () => elaborateCoreCategoricalText(
+                program,
+                {
+                    source,
+                    sourceFile: textSourceFile,
+                    environment: bindings,
+                    expected: requested
+                }
+            ),
+            code
+        );
+
+        reject(
+            'λ^nd (a; b). identityCell (fibrePair a b)',
+            {
+                kind: 'displayed-dependent-context-functor',
+                sourceGroups: [[A], [B]],
+                target: D
+            },
+            'INCOMPATIBLE_ABSTRACTION_EXPECTATION'
+        );
+        reject(
+            'λ^nd (a; b). identityCell (fibrePair a b)',
+            contextualNdExpected([[A, B]]),
+            'INCOMPATIBLE_ABSTRACTION_EXPECTATION'
+        );
+        reject(
+            'λ^nd (a : C; b : B). ' +
+                'identityCell (fibrePair a b)',
+            expected,
+            'INCOMPATIBLE_ABSTRACTION_EXPECTATION'
+        );
+        reject(
+            'λ^n (a; b). identityCell (fibrePair a b)',
+            expected,
+            'UNSUPPORTED_BINDER_MODE'
+        );
+        reject(
+            'λ^nd (a; b). p',
+            expected,
+            'CATEGORICAL_REJECTION'
+        );
+
+        const predecessorExpected = contextualNdExpected([
+            [predecessorDeep.A],
+            [predecessorDeep.B]
+        ]);
+        reject(
+            'λ^nd (a; b). identityCell (fibrePair a b)',
+            predecessorExpected,
+            'CATEGORICAL_REJECTION',
+            deepTextEnvironment(predecessorDeep),
+            predecessorProgram
+        );
+    });
+
     it('parses deep nested mixed eta and reaches the homd_int consumer',
     () => {
         const data = mixedDeep;
@@ -1334,7 +1692,7 @@ describe('DISPLAYED-TELESCOPE-GENERIC-1 canonical layer fold', () => {
         );
         assert.equal(
             CORE_CATEGORICAL_TEXT_REVISION,
-            'CONTEXTUAL-ND-TEXT-PARITY-1AI-CATEGORICAL-TEXT-1'
+            'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN-CATEGORICAL-TEXT-1'
         );
 
         const x = data.emdash.object(

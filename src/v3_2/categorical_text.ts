@@ -26,7 +26,7 @@ import {
 } from './kernel';
 
 export const CORE_CATEGORICAL_TEXT_REVISION =
-    'CONTEXTUAL-ND-TEXT-PARITY-1AI-CATEGORICAL-TEXT-1' as const;
+    'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN-CATEGORICAL-TEXT-1' as const;
 
 export type CoreCategoricalTextBinding =
     | {
@@ -117,6 +117,11 @@ export type CoreCategoricalTextTermExpected =
         readonly sourceFamily: CoreCategoricalDisplayedFamily;
         readonly source: CoreCategoricalTerm;
         readonly target: CoreCategoricalTerm;
+    }
+    | {
+        readonly kind: 'displayed-dependent-context-transfor';
+        readonly sourceGroups:
+            readonly (readonly CoreCategoricalDisplayedFamily[])[];
     };
 
 export type CoreCategoricalTextResultExpected =
@@ -1995,6 +2000,17 @@ class CoreCategoricalTextResolver {
         expected: CoreCategoricalTextTermExpected
     ): CoreCategoricalTerm {
         if (expression.bindingGroups.length > 1) {
+            if (expression.mode === 'nd') {
+                return this.resolveDisplayedDependentContextTransforLambda(
+                    expression,
+                    environment,
+                    this.requireExpected(
+                        expression,
+                        expected,
+                        'displayed-dependent-context-transfor'
+                    )
+                );
+            }
             if (expression.mode !== 'fd') {
                 throw resolutionError(
                     'UNSUPPORTED_BINDER_MODE',
@@ -2016,6 +2032,17 @@ class CoreCategoricalTextResolver {
         }
         const bindings = expression.bindingGroups[0];
         if (bindings.length > 1) {
+            if (expression.mode === 'nd') {
+                return this.resolveDisplayedDependentContextTransforLambda(
+                    expression,
+                    environment,
+                    this.requireExpected(
+                        expression,
+                        expected,
+                        'displayed-dependent-context-transfor'
+                    )
+                );
+            }
             if (expression.mode !== 'fd') {
                 throw resolutionError(
                     'UNSUPPORTED_BINDER_MODE',
@@ -2436,23 +2463,20 @@ class CoreCategoricalTextResolver {
         );
     }
 
-    private resolveDisplayedDependentContextLambda(
+    private requireDisplayedDependentContextBindings(
         expression: LocatedLambda,
         environment: InternalEnvironment,
-        expected: Extract<
-            CoreCategoricalTextExpected,
-            {
-                readonly kind:
-                    'displayed-dependent-context-functor';
-            }
-        >
-    ): CoreCategoricalTerm {
+        sourceGroups:
+            readonly (readonly CoreCategoricalDisplayedFamily[])[]
+    ): {
+        readonly bindings: readonly LocatedLambdaBinding[];
+        readonly sources: readonly CoreCategoricalDisplayedFamily[];
+    } {
         if (
-            expected.sourceGroups.length !==
-                expression.bindingGroups.length ||
+            sourceGroups.length !== expression.bindingGroups.length ||
             expression.bindingGroups.some((group, index) =>
-                expected.sourceGroups[index] === undefined ||
-                expected.sourceGroups[index].length !== group.length
+                sourceGroups[index] === undefined ||
+                sourceGroups[index].length !== group.length
             )
         ) {
             throw resolutionError(
@@ -2469,14 +2493,35 @@ class CoreCategoricalTextResolver {
                 this.requireDisplayedFamilyAnnotation(
                     binding,
                     environment,
-                    expected.sourceGroups[groupIndex][bindingIndex],
+                    sourceGroups[groupIndex][bindingIndex],
                     `displayed dependency source ` +
                         `${groupIndex + 1}.${bindingIndex + 1}`
                 )
             )
         );
-        const bindings = expression.bindingGroups.flat();
-        const sources = expected.sourceGroups.flat();
+        return Object.freeze({
+            bindings: Object.freeze(expression.bindingGroups.flat()),
+            sources: Object.freeze(sourceGroups.flat())
+        });
+    }
+
+    private resolveDisplayedDependentContextLambda(
+        expression: LocatedLambda,
+        environment: InternalEnvironment,
+        expected: Extract<
+            CoreCategoricalTextExpected,
+            {
+                readonly kind:
+                    'displayed-dependent-context-functor';
+            }
+        >
+    ): CoreCategoricalTerm {
+        const { bindings, sources } =
+            this.requireDisplayedDependentContextBindings(
+                expression,
+                environment,
+                expected.sourceGroups
+            );
         const result = invokeProgram(
             this.sourceFile,
             expression.range,
@@ -2506,6 +2551,50 @@ class CoreCategoricalTextResolver {
         return result;
     }
 
+    private resolveDisplayedDependentContextTransforLambda(
+        expression: LocatedLambda,
+        environment: InternalEnvironment,
+        expected: Extract<
+            CoreCategoricalTextExpected,
+            {
+                readonly kind:
+                    'displayed-dependent-context-transfor';
+            }
+        >
+    ): CoreCategoricalTerm {
+        const { bindings, sources } =
+            this.requireDisplayedDependentContextBindings(
+                expression,
+                environment,
+                expected.sourceGroups
+            );
+        const result = invokeProgram(
+            this.sourceFile,
+            expression.range,
+            'Displayed dependent contextual transformation was rejected',
+            () => this.program.displayedTransforDependentContextLambda(
+                bindings.map((binding, index) => Object.freeze({
+                    name: binding.name,
+                    family: sources[index]
+                })),
+                variables => this.resolveContextLambdaBody(
+                    expression,
+                    bindings,
+                    variables,
+                    environment
+                ),
+                {
+                    source: this.lambdaSource(expression)
+                }
+            )
+        );
+        this.requireGenericDisplayedLayerPresentation(
+            expression,
+            result
+        );
+        return result;
+    }
+
     private requireGenericDisplayedLayerPresentation(
         expression: LocatedLambda,
         term: CoreCategoricalTerm
@@ -2514,12 +2603,18 @@ class CoreCategoricalTextResolver {
             .reverse()
             .find(candidate =>
                 candidate.rule ===
-                    'categorical.displayed-generic-dependent-context-bracket'
+                    'categorical.displayed-generic-dependent-context-bracket' ||
+                candidate.rule ===
+                    'categorical.displayed-transfor-dependent-context'
             );
         if (
             evidence === undefined ||
-            evidence.rule !==
-                'categorical.displayed-generic-dependent-context-bracket'
+            (
+                evidence.rule !==
+                    'categorical.displayed-generic-dependent-context-bracket' &&
+                evidence.rule !==
+                    'categorical.displayed-transfor-dependent-context'
+            )
         ) {
             return;
         }
@@ -2614,7 +2709,7 @@ class CoreCategoricalTextResolver {
     private resolveContextLambdaBody(
         expression: LocatedLambda,
         bindings: readonly LocatedLambdaBinding[],
-        tokens: readonly CoreCategoricalSlotToken[],
+        tokens: readonly CoreCategoricalTerm[],
         environment: InternalEnvironment,
         bodyExpected?: CoreCategoricalTextMixedNestedEtaExpected
     ): CoreCategoricalTerm {

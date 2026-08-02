@@ -553,7 +553,9 @@ const capabilities = [
             'composeCells',
             'composeDisplayedTransfor'
         ],
-        profile: 'fibred-transfd-1 and descendants',
+        profile:
+            'fibred-transfd-1 for compact forms; ' +
+            'fibred-displayed-mixed-nest-1 for canonical telescopes',
         classifierContract:
             'Expected source/target displayed functors select ^nd; component ' +
             'composition requires adjacent indexed-transfor endpoints.',
@@ -562,7 +564,8 @@ const capabilities = [
             'exposes one natural fibre-object slot; the direct dependent-' +
             'context method exposes a finite canonical telescope over one ' +
             'hidden final-base slot; the retained component method exposes ' +
-            'the natural base slot directly.',
+            'the natural base slot directly. Text now routes comma/semicolon ' +
+            'groups to that same direct telescope method.',
         dependencyAndVariance: 'natural variation, displayed dependency',
         actionOwnership:
             'Existing displayed component owner and generic category ' +
@@ -571,24 +574,29 @@ const capabilities = [
             'compact point eta and finite factorable point identity, plus ' +
             'the same direct factorer over a finite canonical telescope, ' +
             'retained whole-fibre component eta and finite recursive ' +
-            'typed-cell composition',
+            'typed-cell composition; grouped text preserves eta, identity, ' +
+            'composition, and fixed-head pre/post application',
         proposedText:
             'λ^nd a [: E]. eta a; retained λ^nd k [: K]. eta k; ' +
-            'λ^nd k. ' +
+            'λ^nd (a : A; b : B). eta (fibrePair a b); λ^nd k. ' +
             'composeCells (theta k) (eta k)',
         locatedSyntax: 'requires-typed-expected-contract',
         classification: 'typed-resolver-seam',
         positive: {
             sourceOrOperation:
-                'λ^nd k. composeCells (theta k) (eta k)',
-            directEvidence: 'DISPLAYED-ND-1A recursive composition tests',
+                'λ^nd (a : A; b : B). ' +
+                'composeCells (theta (fibrePair a b)) ' +
+                '(eta (fibrePair a b))',
+            directEvidence:
+                'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN tests',
             requiredResult:
-                'Equal coherent outer Transfd composition and retained cell IR.'
+                'Equal direct/text coherent outer Transfd and retained layers.'
         },
         negative: {
             sourceOrOperation:
-                'λ^nd k. composeCells (rho k) (eta k) with bad endpoints',
-            directEvidence: 'DISPLAYED-ND-1A non-adjacent-endpoint test',
+                'λ^nd (a : A; b : Wrong). arbitraryPoint a b',
+            directEvidence:
+                'CONTEXTUAL-ND-TELESCOPE-TEXT-PARITY-1AN fail-closed matrix',
             requiredResult:
                 'Reject; never promote arbitrary pointwise components.'
         },
